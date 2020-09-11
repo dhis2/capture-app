@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { catchError, flatMap, map, startWith, tap } from 'rxjs/operators';
+import { catchError, flatMap, ignoreElements, map, startWith, tap } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { searchPageActionTypes } from '../SearchPage.container';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
@@ -25,11 +25,12 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
                 return from(getApi().get('system/info')).pipe(
                     map(({ instanceBaseUrl }) =>
                         `${instanceBaseUrl}/dhis-web-tracker-capture/#/dashboard?tei=${id}&ou=${orgUnitId}&${scopeSearchParam}`),
+                    tap((teiDashBoardUrl) => { window.location.href = teiDashBoardUrl; }),
+                    ignoreElements(),
                 );
             }
             return of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)());
         }),
-        tap((teiDashBoardUrl) => { window.location.href = teiDashBoardUrl; }),
         startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
         catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
