@@ -32,7 +32,6 @@ export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW]: state => ({
         ...state,
         searchStatus: searchPageStatus.ERROR,
-        generalPurposeErrorMessage: 'Your search returned too many results. Try changing the search terms or search with more attributes to narrow down the results.',
     }),
     [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
         ...state,

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { pipe } from 'capture-core-utils';
 import { programCollection } from '../../metaDataMemoryStores';
-import { Program } from '../../metaData';
+import type { Program } from '../../metaData';
 
 type Props = {
     orgUnitIds: ?Array<string>,

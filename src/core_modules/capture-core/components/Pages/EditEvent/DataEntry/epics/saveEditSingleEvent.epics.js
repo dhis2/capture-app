@@ -1,5 +1,7 @@
 // @flow
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import { moment } from 'capture-core-utils/moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import {
@@ -13,11 +15,10 @@ import { convertValue as convertToServerValue } from '../../../../../converters/
 import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
-        .map((action) => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
+        map((action) => {
+            const state = store.value;
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
             const eventId = state.dataEntries[payload.dataEntryId].eventId;
@@ -55,15 +56,14 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
             };
 
             return startSaveEditEventAfterReturnedToMainPage(eventId, serverData, state.currentSelections);
-        });
+        }));
 
 export const saveEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
-        .map(() => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
+        map(() => {
+            const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
-        });
+        }));

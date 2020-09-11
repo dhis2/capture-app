@@ -5,7 +5,7 @@ import { Pagination } from 'capture-ui';
 import { Button } from '@dhis2/ui-core';
 import { CardList } from '../../../CardList';
 import withNavigation from '../../../Pagination/withDefaultNavigation';
-import { searchScopes } from '../SearchPage.component';
+import { searchScopes } from '../SearchPage.constants';
 import type { Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 
@@ -38,7 +38,7 @@ export const SearchResultsComponent = ({
     searchViaAttributesOnScopeTrackedEntityType,
     classes,
     searchResults,
-    searchGroupForSelectedScope,
+    searchGroupsForSelectedScope,
     rowsCount,
     rowsPerPage,
     currentPage,
@@ -47,20 +47,20 @@ export const SearchResultsComponent = ({
     currentFormId,
     currentSearchTerms,
 }: Props) => {
-    const handlePaginationChange = (searchScopeType, searchScopeId, formId, newPage) => {
-        switch (searchScopeType) {
+    const handlePageChange = (newPage) => {
+        switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:
-            searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId, page: newPage });
+            searchViaAttributesOnScopeProgram({ programId: currentSearchScopeId, formId: currentFormId, page: newPage });
             break;
         case searchScopes.TRACKED_ENTITY_TYPE:
-            searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId, page: newPage });
+            searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: currentSearchScopeId, formId: currentFormId, page: newPage });
             break;
         default:
             break;
         }
     };
 
-    const viewTrackedEntityDashboard = ({ item: { id, tei: { orgUnit: orgUnitId } } }) => {
+    const GotoDashboardButton = ({ id, orgUnitId }) => {
         const scopeSearchParam = `${currentSearchScopeType.toLowerCase()}=${currentSearchScopeId}`;
         return (
             <div className={classes.openDashboardButton}>
@@ -98,13 +98,13 @@ export const SearchResultsComponent = ({
         <div data-test="dhis2-capture-search-results-list">
             <CardList
                 items={searchResults}
-                dataElements={collectFormDataElements(searchGroupForSelectedScope)}
-                getCustomItemBottomElements={item => viewTrackedEntityDashboard(item)}
+                dataElements={collectFormDataElements(searchGroupsForSelectedScope)}
+                getCustomItemBottomElements={({ item }) => <GotoDashboardButton id={item.id} orgUnitId={item.tei.orgUnit} />}
             />
         </div>
         <div data-test="dhis2-capture-search-results-pagination" className={classes.pagination}>
             <SearchPagination
-                onChangePage={newPage => handlePaginationChange(currentSearchScopeType, currentSearchScopeId, currentFormId, newPage)}
+                onChangePage={newPage => handlePageChange(newPage)}
                 rowsCount={rowsCount}
                 rowsPerPage={rowsPerPage}
                 currentPage={currentPage}

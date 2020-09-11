@@ -4,6 +4,8 @@ import { createSelector } from 'reselect';
 import {
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
+} from '../../../../../../metaData';
+import type {
     TrackedEntityType,
     TrackerProgram,
 } from '../../../../../../metaData';

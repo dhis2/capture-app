@@ -16,12 +16,13 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    value: ?User,
-    onSet: (user?: User) => void,
+    value: ?User | ?string,
+    onSet: (user?: User | string) => void,
     classes: Object,
     useUpwardSuggestions?: ?boolean,
     focusOnMount?: ?boolean,
     inputPlaceholderText?: ?string,
+    usernameOnlyMode?: boolean,
 };
 
 const UserField = (props: Props) => {
@@ -32,6 +33,7 @@ const UserField = (props: Props) => {
         useUpwardSuggestions,
         focusOnMount = false,
         inputPlaceholderText,
+        usernameOnlyMode,
     } = props;
     const focusSearchInput = React.useRef(focusOnMount);
     const focusSelectedInput = React.useRef(focusOnMount);
@@ -54,14 +56,15 @@ const UserField = (props: Props) => {
     };
 
     const handleSet = (user: User) => {
-        onSet(user);
+        onSet(usernameOnlyMode ? user.username : user);
         focusSelectedInput.current = true;
     };
 
     if (value) {
         return (
             <Selected
-                user={value}
+                // $FlowFixMe
+                text={usernameOnlyMode ? value : value.name}
                 onClear={handleClear}
                 // $FlowFixMe[incompatible-type] automated comment
                 focusInputOnMount={focusSelectedInput.current}

@@ -1,5 +1,6 @@
 // @flow
-import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
+// todo this function is never used :)
+import type { RenderFoundation } from '../../metaData';
 import { convertValue } from '../clientToServer';
 
 export function convertClientValuesToServer(clientValues: ?Object, renderFoundation: RenderFoundation) {

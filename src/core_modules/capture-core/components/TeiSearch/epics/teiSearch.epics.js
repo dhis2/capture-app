@@ -1,6 +1,8 @@
 // @flow
-import isArray from 'd2-utilizr/lib/isArray';
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import isArray from 'd2-utilizr/src/isArray';
+import { from } from 'rxjs';
+import { ofType } from 'redux-observable';
+import { map, takeUntil, switchMap, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { convertValue as convertToClient } from '../../../converters/formToClient';
 import { convertValue as convertToServer } from '../../../converters/clientToServer';
@@ -89,10 +91,10 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
 };
 
 export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE)
-        .switchMap((action) => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE),
+        switchMap((action) => {
+            const state = store.value;
             const { pageNumber, searchId } = action.payload;
             const currentTeiSearch = state.teiSearch[searchId];
             const searchTeiPromise = searchTei(
@@ -102,42 +104,43 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
                 currentTeiSearch.searchResults.searchGroupId,
                 pageNumber,
             );
-            return fromPromise(searchTeiPromise)
-                // $FlowFixMe[prop-missing] automated comment
-                .takeUntil(action$.ofType(
-                    actionTypes.REQUEST_SEARCH_TEI,
-                    actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE,
-                ))
-                .takeUntil(
-                    action$.filter(ab =>
-                        isArray(ab.payload) && ab.payload.some(a => a.type === actionTypes.INITIALIZE_TEI_SEARCH)));
-        });
+            return from(searchTeiPromise).pipe(
+                takeUntil(
+                    action$.pipe(ofType(
+                        actionTypes.REQUEST_SEARCH_TEI,
+                        actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE,
+                    ))),
+                takeUntil(
+                    action$.pipe(
+                        filter(ab =>
+                            isArray(ab.payload) && ab.payload.some(a => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))),
+            );
+        }));
 
 export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(actionTypes.REQUEST_SEARCH_TEI)
-        .switchMap((action) => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(actionTypes.REQUEST_SEARCH_TEI),
+        switchMap((action) => {
+            const state = store.value;
             const { formId, searchGroupId, searchId } = action.payload;
             const searchTeiPromise = searchTei(state, searchId, formId, searchGroupId);
-            return fromPromise(searchTeiPromise)
-                // $FlowFixMe[prop-missing] automated comment
-                .takeUntil(action$.ofType(
-                    actionTypes.REQUEST_SEARCH_TEI,
-                    actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE,
-                ))
-                .takeUntil(
-                    action$.filter(ab =>
-                        isArray(ab.payload) && ab.payload.some(a => a.type === actionTypes.INITIALIZE_TEI_SEARCH)));
-        });
+            return from(searchTeiPromise).pipe(
+                takeUntil(action$.pipe(
+                    ofType(
+                        actionTypes.REQUEST_SEARCH_TEI,
+                        actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE,
+                    ))),
+                takeUntil(
+                    action$.pipe(
+                        filter(ab =>
+                            isArray(ab.payload) && ab.payload.some(a => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))));
+        }));
 
 export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(programSelectorActionTypes.TEI_SEARCH_START_SET_PROGRAM)
-        .map((action) => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(programSelectorActionTypes.TEI_SEARCH_START_SET_PROGRAM),
+        map((action) => {
+            const state = store.value;
             const searchId = action.payload.searchId;
             const programId = action.payload.programId;
             let trackedEntityTypeId = state.teiSearch[searchId].selectedTrackedEntityTypeId;
@@ -160,14 +163,13 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
                 ...addFormDataActions,
                 setProgramAndTrackedEntityType(searchId, programId, trackedEntityTypeId),
             ], batchActionTypes.BATCH_SET_TEI_SEARCH_PROGRAM_AND_TET);
-        });
+        }));
 
 export const teiNewSearchEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(actionTypes.TEI_NEW_SEARCH)
-        .map((action) => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(actionTypes.TEI_NEW_SEARCH),
+        map((action) => {
+            const state = store.value;
             const searchId = action.payload.searchId;
             const currentTeiSearch = state.teiSearch[searchId];
 
@@ -183,4 +185,4 @@ export const teiNewSearchEpic = (action$: InputObservable, store: ReduxStore) =>
             return batchActions([
                 ...addFormDataActions,
             ], batchActionTypes.RESET_SEARCH_FORMS);
-        });
+        }));

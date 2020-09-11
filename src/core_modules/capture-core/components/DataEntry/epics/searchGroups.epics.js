@@ -2,11 +2,11 @@
 // epics for handling search group searches
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { pipe, errorCreator } from 'capture-core-utils';
-import { fromPromise } from 'rxjs/observable/fromPromise';
-import { of } from 'rxjs/observable/of';
-import { race } from 'rxjs/observable/race';
-import { ActionsObservable } from 'redux-observable';
+import { ofType } from 'redux-observable';
+import type { ActionsObservable } from 'redux-observable';
+import { map, filter, takeUntil, catchError, mergeMap, mergeAll } from 'rxjs/operators';
+import { race, of, from } from 'rxjs';
+import { pipe as pipeD2, errorCreator } from 'capture-core-utils';
 import { InputSearchGroup, RenderFoundation } from '../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../converters';
 import {
@@ -28,7 +28,7 @@ function getServerValues(
     updatedFormValues: Object,
     foundation: RenderFoundation,
 ) {
-    const convertFn = pipe(
+    const convertFn = pipeD2(
         convertFormToClient,
         convertClientToServer,
     );
@@ -103,9 +103,9 @@ function searchHasUpdatedValues(searchGroup: InputSearchGroup, values: Object, p
 export const getFilterSearchGroupForSearchEpic =
     (triggerBatches: Array<string>) =>
         (action$: ActionsObservable, store: ReduxStore) =>
-            action$
-                .ofType(...triggerBatches)
-                .map((actionBatch) => {
+            action$.pipe(
+                ofType(...triggerBatches),
+                map((actionBatch) => {
                     const potentialSearchActions =
                         actionBatch.payload.filter(
                             action => action.type === searchActionTypes.FILTER_SEARCH_GROUP_FOR_COUNT_SEARCH,
@@ -117,7 +117,7 @@ export const getFilterSearchGroupForSearchEpic =
                     const outputActions = potentialSearchActions
                         .map((sa) => {
                             const { dataEntryKey, searchGroup } = sa.payload;
-                            const state = store.getState();
+                            const state = store.value;
                             const formValues = state.formsValues[dataEntryKey] || {};
                             const previousValues = (state.dataEntriesSearchGroupsPreviousValues[dataEntryKey] &&
                                 state.dataEntriesSearchGroupsPreviousValues[dataEntryKey][searchGroup.id]) || {};
@@ -166,7 +166,7 @@ export const getFilterSearchGroupForSearchEpic =
                             }
 
                             const { dataEntryKey, searchGroup, uid, contextProps } = sa.payload;
-                            const state = store.getState();
+                            const state = store.value;
                             const values = state.formsValues[dataEntryKey];
                             return startSearchGroupCountSearch(
                                 searchGroup,
@@ -178,23 +178,23 @@ export const getFilterSearchGroupForSearchEpic =
                             );
                         });
                     return outputActions;
-                })
-                .filter(searchActions => searchActions && searchActions.length > 0)
-                .map(searchActions => filteredSearchActionsForSearchBatch(searchActions));
+                }),
+                filter(searchActions => searchActions && searchActions.length > 0),
+                map(searchActions => filteredSearchActionsForSearchBatch(searchActions)));
 
 export const getExecuteSearchForSearchGroupEpic =
     (cancelBatches: Array<string>) =>
         (action$: ActionsObservable, store: ReduxStore) =>
-            action$
-                .ofType(searchBatchActionTypes.FILTERED_SEARCH_ACTIONS_FOR_SEARCH_BATCH)
-                .map((actionBatch) => {
+            action$.pipe(
+                ofType(searchBatchActionTypes.FILTERED_SEARCH_ACTIONS_FOR_SEARCH_BATCH),
+                map((actionBatch) => {
                     const actions = actionBatch.payload;
                     return actions.filter(action => action.type === searchActionTypes.START_SEARCH_GROUP_COUNT_SEARCH);
-                })
-                .filter(actions => actions && actions.length > 0)
-                .mergeMap(searchActions => searchActions.map((searchAction) => {
+                }),
+                filter(actions => actions && actions.length > 0),
+                mergeMap(searchActions => searchActions.map((searchAction) => {
                     const { dataEntryKey, contextProps, searchGroup, uid } = searchAction.payload;
-                    const formValues = store.getState().formsValues[dataEntryKey];
+                    const formValues = store.value.formsValues[dataEntryKey];
                     if (!saveWaitUids[dataEntryKey]) {
                         saveWaitUids[dataEntryKey] = {};
                     }
@@ -204,50 +204,51 @@ export const getExecuteSearchForSearchGroupEpic =
                     saveWaitUids[dataEntryKey][searchGroup.id].push(uid);
 
                     return race(
-                        fromPromise(executeSearch(searchGroup, formValues, contextProps))
-                            .takeUntil(
-                                action$
-                                    .ofType(searchBatchActionTypes.FILTERED_SEARCH_ACTIONS_FOR_SEARCH_BATCH)
-                                    .filter(ab =>
-                                        ab.payload.find(a =>
-                                            [
-                                                searchActionTypes.START_SEARCH_GROUP_COUNT_SEARCH,
-                                                searchActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH,
-                                            ].includes(a.type) &&
+                        from(executeSearch(searchGroup, formValues, contextProps))
+                            .pipe(
+                                takeUntil(
+                                    action$.pipe(
+                                        ofType(searchBatchActionTypes.FILTERED_SEARCH_ACTIONS_FOR_SEARCH_BATCH),
+                                        filter(ab =>
+                                            ab.payload.find(a =>
+                                                [
+                                                    searchActionTypes.START_SEARCH_GROUP_COUNT_SEARCH,
+                                                    searchActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH,
+                                                ].includes(a.type) &&
                                             a.payload.searchGroup === searchGroup)),
-                            )
-                            .map((count) => {
-                                const currentlyActiveUids = saveWaitUids[dataEntryKey][searchGroup.id];
-                                cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
-                                return searchGroupResultCountRetrieved(
-                                    count, dataEntryKey, searchGroup.id, currentlyActiveUids,
-                                );
-                            })
-                            .catch((error) => {
-                                log.error(errorCreator(error)({ dataEntryKey, searchGroupId: searchGroup.id }));
-                                const currentlyActiveUids = saveWaitUids[dataEntryKey][searchGroup.id];
-                                cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
-                                return of(
-                                    searchGroupResultCountRetrievalFailed(
-                                        i18n.t('search group result could not be retrieved'),
-                                        dataEntryKey,
-                                        searchGroup.id,
-                                        currentlyActiveUids,
-                                    ),
-                                );
-                            }),
-                        action$
-                            .ofType(...cancelBatches)
-                            .filter(ab =>
+                                    )),
+                                map((count) => {
+                                    const currentlyActiveUids = saveWaitUids[dataEntryKey][searchGroup.id];
+                                    cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
+                                    return searchGroupResultCountRetrieved(
+                                        count, dataEntryKey, searchGroup.id, currentlyActiveUids,
+                                    );
+                                }),
+                                catchError((error) => {
+                                    log.error(errorCreator(error)({ dataEntryKey, searchGroupId: searchGroup.id }));
+                                    const currentlyActiveUids = saveWaitUids[dataEntryKey][searchGroup.id];
+                                    cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
+                                    return of(
+                                        searchGroupResultCountRetrievalFailed(
+                                            i18n.t('search group result could not be retrieved'),
+                                            dataEntryKey,
+                                            searchGroup.id,
+                                            currentlyActiveUids,
+                                        ),
+                                    );
+                                })),
+                        action$.pipe(
+                            ofType(...cancelBatches),
+                            filter(ab =>
                                 ab.payload.find(a =>
                                     a.type === (loadNewActionTypes.LOAD_NEW_DATA_ENTRY ||
                                         loadEditActionTypes.LOAD_EDIT_DATA_ENTRY) &&
-                                    a.payload.key === dataEntryKey))
-                            .map(() => {
+                                    a.payload.key === dataEntryKey)),
+                            map(() => {
                                 saveWaitUids[dataEntryKey] = null;
                                 return null;
-                            }),
+                            })),
                     );
-                }))
-                .mergeAll()
-                .filter(action => action);
+                })),
+                mergeAll(),
+                filter(action => action));
