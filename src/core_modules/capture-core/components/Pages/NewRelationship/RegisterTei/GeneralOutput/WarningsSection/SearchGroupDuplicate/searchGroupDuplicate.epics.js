@@ -1,9 +1,8 @@
 // @flow
 import { pipe as pipeD2 } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
-import { catchError, map } from 'rxjs/operators';
-import { from } from 'rxjs/observable/from';
-import { of } from 'rxjs/observable/of';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of, from } from 'rxjs';
 import {
     actionTypes,
     duplicatesForReviewRetrievalSuccess,
@@ -86,4 +85,5 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 catchError(() => of(duplicatesForReviewRetrievalFailed())),
 
             );
-        });
+        }),
+    );

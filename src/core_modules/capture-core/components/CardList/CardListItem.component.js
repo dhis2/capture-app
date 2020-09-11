@@ -126,7 +126,7 @@ const Index = (props: OwnProps & CssClasses) => {
                                 {
                                     item.tei && item.tei.lastUpdated &&
                                     <div className={classes.lastUpdated}>
-                                        { i18n.t('Last updated') } {moment(item.tei.lastUpdated).fromNow()}
+                                        { i18n.t('Last updated') } {item.tei && moment(item.tei.lastUpdated).fromNow()}
                                     </div>
                                 }
                                 <div className={classes.enrolled}>
@@ -168,6 +168,7 @@ const Index = (props: OwnProps & CssClasses) => {
 
 Index.defaultProps = {
     isEnrolled: true,
+    item: { tei: { lastUpdated: null } },
 };
 
 export const CardListItem: ComponentType<OwnProps> = withStyles(getStyles)(Index);
