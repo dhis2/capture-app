@@ -1,6 +1,7 @@
 // @flow
 import type { SearchGroups } from '../SearchPage.types';
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
+import { searchScopes } from '../SearchPage.constants';
 
 export type OwnProps = {|
   +searchGroupsForSelectedScope: SearchGroups,
@@ -43,7 +44,7 @@ export type PropsFromRedux ={|
   +rowsCount: number,
   +currentPage: number,
   +rowsPerPage: number,
-  +currentSearchScopeType: string,
+  +currentSearchScopeType: $Keys<typeof searchScopes>,
   +currentSearchScopeId: string,
   +currentFormId: string,
   +searchResults: Array<SearchResultItem>,
