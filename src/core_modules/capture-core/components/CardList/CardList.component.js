@@ -2,12 +2,12 @@
 import React from 'react';
 import type { ComponentType, Element } from 'react';
 import { withStyles } from '@material-ui/core';
+import compareAsc from 'date-fns/compare_asc';
 import { CardListItem } from './CardListItem.component';
 import makeDataElementsContainerSelector from './CardList.selectors';
 import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import type { CardDataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.component';
 import { enrollmentStatuses } from './CardList.constants';
-import compareAsc from 'date-fns/compare_asc';
 
 type OwnProps = $ReadOnly<{|
     dataElements: CardDataElementsInformation,
