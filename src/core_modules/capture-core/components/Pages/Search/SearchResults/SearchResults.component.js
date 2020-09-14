@@ -82,6 +82,7 @@ export const SearchResultsComponent = ({
                     .map(({ id, name }) => ({ id, name }));
             });
 
+    const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : undefined;
     return (<>
         <div data-test="dhis2-capture-search-results-top" className={classes.topSection} >
             <b>{rowsCount}</b>
@@ -95,7 +96,7 @@ export const SearchResultsComponent = ({
         </div>
         <div data-test="dhis2-capture-search-results-list">
             <CardList
-                currentProgramId={currentSearchScopeId}
+                currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={collectFormDataElements(searchGroupsForSelectedScope)}
                 getCustomItemBottomElements={({ item }) => <GotoDashboardButton id={item.id} orgUnitId={item.tei.orgUnit} />}
