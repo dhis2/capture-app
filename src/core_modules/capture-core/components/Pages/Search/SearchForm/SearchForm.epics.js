@@ -103,6 +103,7 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
                 page,
                 pageSize: 5,
                 ouMode: 'ACCESSIBLE',
+                fields: '*',
             };
             const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
 
@@ -122,6 +123,7 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputOb
                 page,
                 pageSize: 5,
                 ouMode: 'ACCESSIBLE',
+                fields: '*',
             };
 
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;

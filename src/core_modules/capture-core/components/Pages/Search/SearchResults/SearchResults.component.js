@@ -97,6 +97,7 @@ export const SearchResultsComponent = ({
         </div>
         <div data-test="dhis2-capture-search-results-list">
             <CardList
+                currentProgramId={currentSearchScopeId}
                 items={searchResults}
                 dataElements={collectFormDataElements(searchGroupsForSelectedScope)}
                 getCustomItemBottomElements={({ item }) => <GotoDashboardButton id={item.id} orgUnitId={item.tei.orgUnit} />}
