@@ -99,7 +99,12 @@ export const SearchResultsComponent = ({
                 currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={collectFormDataElements(searchGroupsForSelectedScope)}
-                getCustomItemBottomElements={({ item }) => <GotoDashboardButton id={item.id} orgUnitId={item.tei.orgUnit} />}
+                getCustomItemBottomElements={({ item }, isActivelyEnrolled, isEnrollmentAgainAvailable) => (<div>
+                    <GotoDashboardButton id={item.id} orgUnitId={item.tei.orgUnit} />
+                    {isActivelyEnrolled && <div>View Active enrollment</div>}
+                    {isEnrollmentAgainAvailable && <div>Re-enroll in $program</div>}
+                </div>)
+                }
             />
         </div>
         <div data-test="dhis2-capture-search-results-pagination" className={classes.pagination}>

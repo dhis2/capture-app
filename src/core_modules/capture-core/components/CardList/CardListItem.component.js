@@ -14,7 +14,7 @@ type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
     enrollmentStatus: $Keys<typeof enrollmentStatuses>,
     getCustomTopElements?: ?(props: Object) => Element<any>,
-    getCustomBottomElements?: ?(props: Object) => Element<any>,
+    getCustomBottomElements?: ?(props: Object, isActivelyEnrolled: boolean, isEnrollmentAgainAvailable: boolean) => Element<any>,
     imageDataElement: DataElement,
     dataElements: CardDataElementsInformation,
 |}>;
@@ -193,7 +193,14 @@ const CardListItemIndex = (props: OwnProps & CssClasses) => {
                 </div>
             </div>
 
-            {getCustomBottomElements && getCustomBottomElements(props)}
+            {
+                getCustomBottomElements &&
+                getCustomBottomElements(
+                    props,
+                    enrollmentStatus === enrollmentStatuses.ACTIVE,
+                    (enrollmentStatus === enrollmentStatuses.COMPLETED || enrollmentStatus === enrollmentStatuses.CANCELLED),
+                )
+            }
         </div>
     );
 };
