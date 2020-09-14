@@ -5,8 +5,7 @@ import { withStyles } from '@material-ui/core';
 import compareAsc from 'date-fns/compare_asc';
 import { CardListItem } from './CardListItem.component';
 import makeDataElementsContainerSelector from './CardList.selectors';
-import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
-import type { CardDataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.component';
+import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import { enrollmentStatuses } from './CardList.constants';
 
 type OwnProps = $ReadOnly<{|

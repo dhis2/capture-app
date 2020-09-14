@@ -6,8 +6,7 @@ import type { ComponentType, Element } from 'react';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
 import DoneIcon from '@material-ui/icons/Done';
 import { colors, Tag } from '@dhis2/ui-core';
-import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
-import type { CardDataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.component';
+import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import type { DataElement } from '../../metaData';
 import { enrollmentStatuses } from './CardList.constants';
 

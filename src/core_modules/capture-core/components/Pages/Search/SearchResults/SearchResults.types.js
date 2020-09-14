@@ -6,6 +6,7 @@ export type OwnProps = {|
   +searchGroupsForSelectedScope: SearchGroups,
 |}
 
+export type CardDataElementsInformation = Array<{| id: string, name: string |}>
 
 type Tei = $ReadOnly<{
   created: string,

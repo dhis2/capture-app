@@ -6,7 +6,7 @@ import { Button } from '@dhis2/ui-core';
 import { CardList } from '../../../CardList';
 import withNavigation from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
-import type { Props } from './SearchResults.types';
+import type { CardDataElementsInformation, Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 
 const SearchPagination = withNavigation()(Pagination);
@@ -30,8 +30,6 @@ export const getStyles = (theme: Theme) => ({
         marginTop: 8,
     },
 });
-
-export type CardDataElementsInformation = Array<{| id: string, name: string |}>
 
 export const SearchResultsComponent = ({
     searchViaAttributesOnScopeProgram,
