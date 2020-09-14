@@ -1,5 +1,7 @@
 // @flow
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../NewEnrollment';
@@ -33,22 +35,20 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
     return true;
 };
 
-// todo file not used!
 export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(
-        lockedSelectorActionTypes.PROGRAM_ID_SET,
-        lockedSelectorActionTypes.CATEGORY_OPTION_SET,
-        lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
-        newEnrollmentUrlActionTypes.VALID_SELECTIONS_FROM_URL,
-        crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
-        crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,
-    )
-        .map((action) => {
-            const isComplete = calculateCompleteStatus(store.getState().currentSelections);
+    action$.pipe(
+        ofType(
+            lockedSelectorActionTypes.PROGRAM_ID_SET,
+            lockedSelectorActionTypes.CATEGORY_OPTION_SET,
+            lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
+            newEnrollmentUrlActionTypes.VALID_SELECTIONS_FROM_URL,
+            crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
+            crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,
+        ),
+        map((action) => {
+            const isComplete = calculateCompleteStatus(store.value.currentSelections);
             return selectionsCompletenessCalculated(
                 isComplete,
                 (action.payload && action.payload.triggeringActionType) || action.type,
             );
-        });
+        }));

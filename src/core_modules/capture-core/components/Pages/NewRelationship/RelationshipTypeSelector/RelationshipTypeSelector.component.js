@@ -3,7 +3,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import ClearIcon from '@material-ui/icons/Clear';
 import withStyles from '@material-ui/core/styles/withStyles';
-import RelationshipType from '../../../../metaData/RelationshipType/RelationshipType';
+import type { RelationshipType } from '../../../../metaData';
 import type { SelectedRelationshipType } from '../newRelationship.types';
 
 type Props = {
@@ -59,7 +59,14 @@ class RelationshipTypeSelector extends React.Component<Props> {
     renderRelationshipTypes = () => {
         const { classes, relationshipTypes } = this.props;
         return relationshipTypes ? relationshipTypes.map(rt => (
-            <div className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)} key={rt.id} role="button" tabIndex="0" onClick={() => this.onSelectRelationshipType(rt)}>
+            <div
+                key={rt.id}
+                data-test={`dhis2-capture-relationship-type-selector-button-${rt.id}`}
+                className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)}
+                role="button"
+                tabIndex="0"
+                onClick={() => this.onSelectRelationshipType(rt)}
+            >
                 {rt.name}
             </div>
         )) : [];

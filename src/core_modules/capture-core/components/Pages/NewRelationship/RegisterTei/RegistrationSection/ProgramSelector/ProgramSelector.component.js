@@ -32,6 +32,7 @@ class ProgramSelector extends React.Component<Props> {
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <ComposedProgramSelector
+                dataTest="dhis2-capture-relationship-register-tei-program-selector"
                 styles={ProgramSelector.baseComponentStyles}
                 programLabelClass={classes.programLabel}
                 label={i18n.t('Program')}

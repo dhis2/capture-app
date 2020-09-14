@@ -11,7 +11,7 @@ import {
 } from '../../../../../metaData';
 import getStageFromEvent from '../../../../../metaData/helpers/getStageFromEvent';
 import { convertValue } from '../../../../../converters/clientToList';
-import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
+import type { RenderFoundation } from '../../../../../metaData';
 
 type EventContainer = {
     event: CaptureClientEvent,

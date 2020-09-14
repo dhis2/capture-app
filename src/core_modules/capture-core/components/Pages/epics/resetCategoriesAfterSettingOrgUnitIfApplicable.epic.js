@@ -1,4 +1,6 @@
 // @flow
+import { ofType } from 'redux-observable';
+import { switchMap } from 'rxjs/operators';
 import {
     resetCategoriesAfterSettingOrgUnit,
     skipCategoriesResetAfterSettingOrgUnit,
@@ -19,13 +21,11 @@ async function isOptionAssociatedWithOrganisationUnit(categoryOptionId: string, 
 }
 
 export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$
-
-        // $FlowFixMe[prop-missing] automated comment
-        .ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET)
-        .switchMap((action) => {
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
+        switchMap((action) => {
             const orgUnitId = action.payload.id;
-            const selectedCategories = store.getState().currentSelections.categories;
+            const selectedCategories = store.value.currentSelections.categories;
             if (!selectedCategories) {
                 return Promise.resolve(skipCategoriesResetAfterSettingOrgUnit(action.type));
             }
@@ -63,5 +63,5 @@ export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: Inpu
 
                     return resetCategoriesAfterSettingOrgUnit(notAssociated, action.type);
                 });
-        });
+        }));
 

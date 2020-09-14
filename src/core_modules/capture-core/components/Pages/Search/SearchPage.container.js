@@ -2,27 +2,17 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, useMemo } from 'react';
 import type { ComponentType } from 'react';
-import { isEqual } from 'lodash';
-import { SearchPageComponent, searchScopes } from './SearchPage.component';
+import { SearchPageComponent } from './SearchPage.component';
 import type { AvailableSearchOptions, TrackedEntityTypesWithCorrelatedPrograms } from './SearchPage.types';
 import { navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData';
+import { searchScopes } from './SearchPage.constants';
 
 const buildSearchOption = (id, name, searchGroups, searchScope) => ({
     searchOptionId: id,
     searchOptionName: name,
     searchGroups: [...searchGroups.values()]
-        // We use the sorted array to always have expanded the first search group section.
-        .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
-            if (xBoolean === yBoolean) {
-                return 0;
-            }
-            if (xBoolean) {
-                return -1;
-            }
-            return 1;
-        })
         .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
             unique,
             searchForm,
@@ -99,7 +89,7 @@ const useSearchOptions = (trackedEntityTypesWithCorrelatedPrograms): AvailableSe
 
 const usePreselectedProgram = (trackedEntityTypesWithCorrelatedPrograms) => {
     const currentSelectionsId =
-      useSelector(({ currentSelections }) => currentSelections.programId, isEqual);
+      useSelector(({ currentSelections }) => currentSelections.programId);
 
     return useMemo(() => {
         const preselection =
@@ -131,13 +121,11 @@ export const SearchPage: ComponentType<{||}> = () => {
     const preselectedProgram = usePreselectedProgram(trackedEntityTypesWithCorrelatedPrograms);
 
     const searchStatus: string =
-      useSelector(({ searchPage }) => searchPage.searchStatus, isEqual);
-    const generalPurposeErrorMessage: string =
-      useSelector(({ searchPage }) => searchPage.generalPurposeErrorMessage, isEqual);
+      useSelector(({ searchPage }) => searchPage.searchStatus);
     const error: boolean =
-      useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error, isEqual);
+      useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
     const ready: boolean =
-      useSelector(({ activePage }) => !activePage.isLoading, isEqual);
+      useSelector(({ activePage }) => !activePage.isLoading);
 
 
     return (
@@ -148,7 +136,6 @@ export const SearchPage: ComponentType<{||}> = () => {
             availableSearchOptions={availableSearchOptions}
             preselectedProgram={preselectedProgram}
             searchStatus={searchStatus}
-            generalPurposeErrorMessage={generalPurposeErrorMessage}
             error={error}
             ready={ready}
         />);

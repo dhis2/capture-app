@@ -1,11 +1,13 @@
 // @flow
-import type { SearchGroup } from '../SearchPage.types';
+import type { SearchGroups } from '../SearchPage.types';
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
+import { searchScopes } from '../SearchPage.constants';
 
 export type OwnProps = {|
-  +searchGroupForSelectedScope: SearchGroup,
+  +searchGroupsForSelectedScope: SearchGroups,
 |}
 
+export type CardDataElementsInformation = Array<{| id: string, name: string |}>
 
 type Tei = $ReadOnly<{
   created: string,
@@ -42,7 +44,7 @@ export type PropsFromRedux ={|
   +rowsCount: number,
   +currentPage: number,
   +rowsPerPage: number,
-  +currentSearchScopeType: string,
+  +currentSearchScopeType: $Keys<typeof searchScopes>,
   +currentSearchScopeId: string,
   +currentFormId: string,
   +searchResults: Array<SearchResultItem>,

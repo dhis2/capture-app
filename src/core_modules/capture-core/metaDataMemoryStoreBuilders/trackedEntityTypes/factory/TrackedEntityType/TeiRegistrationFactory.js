@@ -8,17 +8,16 @@ import {
     RenderFoundation,
     Section,
     TeiRegistration,
-    SearchGroup,
     InputSearchGroup,
     DataElement,
 } from '../../../../metaData';
+import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
 import type {
     CachedTrackedEntityType,
     CachedTrackedEntityAttribute,
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
 import DataElementFactory from './DataElementFactory';
-import { TrackedEntityType } from '../../../../metaData/TrackedEntityType';
 
 class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {

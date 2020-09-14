@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
@@ -29,21 +29,20 @@ const styles = () => ({
 
 type Props = $ReadOnly<{|
     selectedProgramId: string,
-    dispatchStartAgainClick: () => void,
-    dispatchNewClick: () => void,
-    dispatchFindClick: () => void,
+    onStartAgainClick: () => void,
+    onNewClick: () => void,
+    onFindClick: () => void,
     showResetButton: boolean,
-    ...CssClasses
 |}>;
 
 const Index = ({
-    dispatchStartAgainClick,
-    dispatchNewClick,
-    dispatchFindClick,
+    onStartAgainClick,
+    onNewClick,
+    onFindClick,
     selectedProgramId,
     classes,
     showResetButton,
-}: Props) => {
+}: Props & CssClasses) => {
     const typeName =
       selectedProgramId instanceof TrackerProgram
           ?
@@ -59,7 +58,7 @@ const Index = ({
                     <div className={classes.startAgainContainer}>
                         <Button
                             dataTest="dhis2-capture-start-again-button"
-                            onClick={dispatchStartAgainClick}
+                            onClick={onStartAgainClick}
                             small
                             secondary
                         >
@@ -71,7 +70,7 @@ const Index = ({
             }
             <Button
                 dataTest="dhis2-capture-new-button"
-                onClick={dispatchNewClick}
+                onClick={onNewClick}
             >
                 <AddIcon className={classes.icon} />
                 <span className={classes.buttonMargin}>
@@ -86,7 +85,7 @@ const Index = ({
             <Button
                 dataTest="dhis2-capture-find-button"
                 className={classes.rightButton}
-                onClick={dispatchFindClick}
+                onClick={onFindClick}
                 color="primary"
             >
                 <SearchIcon className={classes.icon} />
@@ -99,4 +98,4 @@ const Index = ({
     );
 };
 
-export const ActionButtons = withStyles(styles)(Index);
+export const ActionButtons: ComponentType<Props> = withStyles(styles)(Index);

@@ -1,2 +1,2 @@
 // @flow
-export { SearchDomainSelector } from './SearchDomainSelector';
+export { SearchDomainSelector } from './SearchDomainSelector.component';

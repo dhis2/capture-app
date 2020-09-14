@@ -7,7 +7,7 @@ import type {
 } from '../../../../rules/engine';
 import { getRulesActionsForTEI } from '../../../../rules/actionsCreator';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
-import { TrackerProgram, RenderFoundation } from '../../../../metaData';
+import type { TrackerProgram, RenderFoundation } from '../../../../metaData';
 import { startRunRulesPostUpdateField } from '../../../DataEntry';
 import { startRunRulesOnUpdateForNewEnrollment } from './enrollment.actions';
 
