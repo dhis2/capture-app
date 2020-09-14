@@ -32,7 +32,7 @@ msgstr ""
 msgid "Last updated"
 msgstr ""
 
-msgid "Not Enrolled"
+msgid "Not enrolled"
 msgstr ""
 
 msgid "Columns to show in table"

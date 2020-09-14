@@ -61,12 +61,14 @@ class RegisterTei extends React.Component<Props, State> {
 
     getSaveButton() {
         return (
-            <Button
-                onClick={this.handleSaveFromDialog}
-                primary
-            >
-                {i18n.t('Save as new {{tetName}}', { tetName: this.props.tetName })}
-            </Button>
+            <div style={{ marginLeft: 16 }}>
+                <Button
+                    onClick={this.handleSaveFromDialog}
+                    primary
+                >
+                    {i18n.t('Save as new {{tetName}}', { tetName: this.props.tetName })}
+                </Button>
+            </div>
         );
     }
 

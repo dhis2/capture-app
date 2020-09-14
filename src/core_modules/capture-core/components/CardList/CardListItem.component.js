@@ -6,14 +6,13 @@ import type { ComponentType, Element } from 'react';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
 import DoneIcon from '@material-ui/icons/Done';
 import { colors, Tag } from '@dhis2/ui-core';
-import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
-import type { CardDataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.component';
+import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import type { DataElement } from '../../metaData';
+import { enrollmentStatuses } from './CardList.constants';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
-    // todo there needs to be an indicator for this coming from the API.
-    isEnrolled?: boolean,
+    enrollmentStatus: $Keys<typeof enrollmentStatuses>,
     getCustomTopElements?: ?(props: Object) => Element<any>,
     getCustomBottomElements?: ?(props: Object) => Element<any>,
     imageDataElement: DataElement,
@@ -71,7 +70,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const Index = (props: OwnProps & CssClasses) => {
+const CardListItemIndex = (props: OwnProps & CssClasses) => {
     const renderImageDataElement = (imageDataElement: DataElement) => {
         const { item, classes } = props;
         const imageValue = item.values[imageDataElement.id];
@@ -88,7 +87,7 @@ const Index = (props: OwnProps & CssClasses) => {
         imageDataElement,
         getCustomTopElements,
         getCustomBottomElements,
-        isEnrolled,
+        enrollmentStatus,
         dataElements,
     } = props;
 
@@ -131,29 +130,62 @@ const Index = (props: OwnProps & CssClasses) => {
                                 }
                                 <div className={classes.enrolled}>
                                     {
-                                        isEnrolled ?
-                                            <Tag
-                                                dataTest="dhis2-uicore-tag"
-                                                positive
-                                                icon={
-                                                    <DoneIcon
-                                                        style={{
-                                                            transformBox: 'view-box',
-                                                            fontSize: 14,
-                                                            position: 'relative',
-                                                            top: '-1px',
-                                                        }}
-                                                    />
-                                                }
-                                            >
-                                                { i18n.t('Enrolled: Active') }
-                                            </Tag>
-                                            :
-                                            <Tag dataTest="dhis2-uicore-tag">
-                                                { i18n.t('Not Enrolled') }
-                                            </Tag>
-
+                                        (enrollmentStatus === enrollmentStatuses.ACTIVE) &&
+                                        <Tag
+                                            dataTest="dhis2-uicore-tag"
+                                            positive
+                                            icon={
+                                                <DoneIcon
+                                                    style={{
+                                                        transformBox: 'view-box',
+                                                        fontSize: 14,
+                                                        position: 'relative',
+                                                        top: '-1px',
+                                                    }}
+                                                />
+                                            }
+                                        >
+                                            {i18n.t('Enrolled: Active')}
+                                        </Tag>
                                     }
+
+                                    {
+                                        (enrollmentStatus === enrollmentStatuses.CANCELLED) &&
+                                        <Tag
+                                            dataTest="dhis2-uicore-tag"
+                                            neutral
+                                        >
+                                            {i18n.t('Enrolled: Canceled')}
+                                        </Tag>
+                                    }
+
+                                    {
+                                        (enrollmentStatus === enrollmentStatuses.COMPLETED) &&
+                                        <Tag
+                                            dataTest="dhis2-uicore-tag"
+                                            neutral
+                                            icon={
+                                                <DoneIcon
+                                                    style={{
+                                                        transformBox: 'view-box',
+                                                        fontSize: 14,
+                                                        position: 'relative',
+                                                        top: '-1px',
+                                                    }}
+                                                />
+                                            }
+                                        >
+                                            {i18n.t('Enrolled: Completed')}
+                                        </Tag>
+                                    }
+
+                                    {
+                                        (enrollmentStatus === enrollmentStatuses.NOT_ENROLLED) &&
+                                        <Tag dataTest="dhis2-uicore-tag">
+                                            {i18n.t('Not enrolled')}
+                                        </Tag>
+                                    }
+
                                 </div>
                             </Grid>
                         </Grid>
@@ -166,9 +198,4 @@ const Index = (props: OwnProps & CssClasses) => {
     );
 };
 
-Index.defaultProps = {
-    isEnrolled: true,
-    item: { tei: { lastUpdated: null } },
-};
-
-export const CardListItem: ComponentType<OwnProps> = withStyles(getStyles)(Index);
+export const CardListItem: ComponentType<OwnProps> = withStyles(getStyles)(CardListItemIndex);
