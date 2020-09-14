@@ -71,7 +71,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const Index = (props: OwnProps & CssClasses) => {
+const CardListItemIndex = (props: OwnProps & CssClasses) => {
     const renderImageDataElement = (imageDataElement: DataElement) => {
         const { item, classes } = props;
         const imageValue = item.values[imageDataElement.id];
@@ -199,4 +199,4 @@ const Index = (props: OwnProps & CssClasses) => {
     );
 };
 
-export const CardListItem: ComponentType<OwnProps> = withStyles(getStyles)(Index);
+export const CardListItem: ComponentType<OwnProps> = withStyles(getStyles)(CardListItemIndex);

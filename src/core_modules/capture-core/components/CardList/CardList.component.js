@@ -30,7 +30,7 @@ const takeLastUpdatedEntry = statuses => statuses
     .sort((a, b) => compareAsc(a.lastUpdated, b.lastUpdated))
     .reverse()[0];
 
-const Index = (props: OwnProps & CssClasses) => {
+const CardListIndex = (props: OwnProps & CssClasses) => {
     const {
         classes,
         noItemsText,
@@ -100,8 +100,4 @@ const Index = (props: OwnProps & CssClasses) => {
     );
 };
 
-Index.defaultProps = {
-    itemTypeName: 'item',
-};
-
-export const CardList: ComponentType<OwnProps> = withStyles(getStyles)(Index);
+export const CardList: ComponentType<OwnProps> = withStyles(getStyles)(CardListIndex);
