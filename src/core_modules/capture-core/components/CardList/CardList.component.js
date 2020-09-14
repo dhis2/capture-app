@@ -16,7 +16,7 @@ type OwnProps = $ReadOnly<{|
     itemsLoading?: ?boolean,
     getCustomItemTopElements?: ?(itemProps: Object) => Element<any>,
     getCustomItemBottomElements?: ?(itemProps: Object) => Element<any>,
-    currentProgramId: string,
+    currentProgramId?: string,
 |}>
 
 const getStyles = (theme: Theme) => ({
@@ -41,6 +41,8 @@ const Index = (props: OwnProps & CssClasses) => {
         currentProgramId,
     } = props;
 
+    const isShowingEnrollmentStatus = Boolean(currentProgramId);
+
     if (!items || items.length === 0) {
         return (
             <div className={classes.noItemsContainer}>
@@ -50,6 +52,9 @@ const Index = (props: OwnProps & CssClasses) => {
     }
 
     const deriveEnrollmentStatus = (enrollments = []) => {
+        if (!isShowingEnrollmentStatus) {
+            return enrollmentStatuses.DONT_SHOW_TAG;
+        }
         const statuses = enrollments
             .filter(({ program }) => program === currentProgramId)
             .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
