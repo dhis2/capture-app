@@ -7,6 +7,7 @@ import makeDataElementsContainerSelector from './CardList.selectors';
 import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import type { CardDataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.component';
 import { enrollmentStatuses } from './CardList.constants';
+import compareAsc from 'date-fns/compare_asc';
 
 type OwnProps = $ReadOnly<{|
     dataElements: CardDataElementsInformation,
@@ -24,6 +25,10 @@ const getStyles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(10),
     },
 });
+
+const takeLastUpdatedEntry = statuses => statuses
+    .sort((a, b) => compareAsc(a.lastUpdated, b.lastUpdated))
+    .reverse()[0];
 
 const Index = (props: OwnProps & CssClasses) => {
     const {
@@ -44,19 +49,29 @@ const Index = (props: OwnProps & CssClasses) => {
         );
     }
 
-    const enrollmentStatus = (enrollments = []) => {
-        const statuses = enrollments.filter(({ program }) => program === currentProgramId).map(({ status }) => status);
+    const deriveEnrollmentStatus = (enrollments = []) => {
+        const statuses = enrollments
+            .filter(({ program }) => program === currentProgramId)
+            .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
 
-        if (statuses.find(status => status === enrollmentStatuses.ACTIVE)) {
-            return enrollmentStatuses.ACTIVE;
+        const { ACTIVE, CANCELLED, COMPLETED, NOT_ENROLLED } = enrollmentStatuses;
+
+        if (statuses.find(({ status }) => status === ACTIVE)) {
+            return ACTIVE;
+        } else if (
+            // in case a TEI has at the same time a COMPLETED and a CANCELLED enrollment then
+            // we only want to show to the user the one that has been updated latest.
+            statuses.find(({ status: statusOne }) => statusOne === CANCELLED &&
+            statuses.find(({ status: statusTwo }) => statusTwo === COMPLETED))
+        ) {
+            const { status } = takeLastUpdatedEntry(statuses);
+            return status;
+        } else if (statuses.find(({ status }) => status === CANCELLED)) {
+            return CANCELLED;
+        } else if (statuses.find(({ status }) => status === COMPLETED)) {
+            return COMPLETED;
         }
-        if (statuses.find(status => status === enrollmentStatuses.CANCELLED)) {
-            return enrollmentStatuses.CANCELLED;
-        }
-        if (statuses.find(status => status === enrollmentStatuses.COMPLETED)) {
-            return enrollmentStatuses.COMPLETED;
-        }
-        return enrollmentStatuses.NOT_ENROLLED;
+        return NOT_ENROLLED;
     };
 
     const { imageDataElement } = makeDataElementsContainerSelector()(dataElements);
@@ -66,7 +81,7 @@ const Index = (props: OwnProps & CssClasses) => {
             {
                 items.map(item => (
                     <CardListItem
-                        enrollmentStatus={enrollmentStatus(item.tei && item.tei.enrollments)}
+                        enrollmentStatus={deriveEnrollmentStatus(item.tei && item.tei.enrollments)}
                         key={item.id}
                         item={item}
                         getCustomTopElements={getCustomItemTopElements}
