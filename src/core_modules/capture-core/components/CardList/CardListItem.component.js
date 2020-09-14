@@ -152,7 +152,10 @@ const Index = (props: OwnProps & CssClasses) => {
 
                                     {
                                         (enrollmentStatus === enrollmentStatuses.CANCELLED) &&
-                                        <Tag dataTest="dhis2-uicore-tag" negative>
+                                        <Tag
+                                            dataTest="dhis2-uicore-tag"
+                                            neutral
+                                        >
                                             {i18n.t('Enrolled: Canceled')}
                                         </Tag>
                                     }

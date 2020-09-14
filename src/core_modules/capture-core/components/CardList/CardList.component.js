@@ -56,7 +56,7 @@ const Index = (props: OwnProps & CssClasses) => {
         if (statuses.find(status => status === enrollmentStatuses.COMPLETED)) {
             return enrollmentStatuses.COMPLETED;
         }
-        return 'ass';
+        return enrollmentStatuses.NOT_ENROLLED;
     };
 
     const { imageDataElement } = makeDataElementsContainerSelector()(dataElements);
