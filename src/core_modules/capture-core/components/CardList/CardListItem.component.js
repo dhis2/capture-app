@@ -70,10 +70,17 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const CardListItemIndex = (props: OwnProps & CssClasses) => {
-    const renderImageDataElement = (imageDataElement: DataElement) => {
-        const { item, classes } = props;
-        const imageValue = item.values[imageDataElement.id];
+const CardListItemIndex = ({
+    item,
+    classes,
+    imageDataElement,
+    getCustomTopElements,
+    getCustomBottomElements,
+    dataElements,
+    enrollmentStatus,
+}: OwnProps & CssClasses) => {
+    const renderImageDataElement = (imageElement: DataElement) => {
+        const imageValue = item.values[imageElement.id];
         return (
             <div className={classes.imageContainer}>
                 {imageValue && <Avatar src={imageValue.url} alt={imageValue.name} className={classes.image} />}
@@ -81,19 +88,9 @@ const CardListItemIndex = (props: OwnProps & CssClasses) => {
         );
     };
 
-    const {
-        item,
-        classes,
-        imageDataElement,
-        getCustomTopElements,
-        getCustomBottomElements,
-        enrollmentStatus,
-        dataElements,
-    } = props;
-
     return (
         <div data-test="dhis2-capture-card-list-item" className={classes.itemContainer}>
-            {getCustomTopElements && getCustomTopElements(props)}
+            {getCustomTopElements && getCustomTopElements({ item })}
             <div className={classes.itemDataContainer}>
 
                 <div className={classes.itemValuesContainer}>
@@ -179,13 +176,16 @@ const CardListItemIndex = (props: OwnProps & CssClasses) => {
                                     }
 
                                 </div>
+                                <div className={classes.value}>
+                                    {'hello'}
+                                </div>
                             </Grid>
                         </Grid>
                     </Grid>
                 </div>
             </div>
 
-            {getCustomBottomElements && getCustomBottomElements(props)}
+            {getCustomBottomElements && getCustomBottomElements({ item })}
         </div>
     );
 };

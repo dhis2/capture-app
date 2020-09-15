@@ -24,63 +24,59 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const CardListIndex = (props: OwnProps & CssClasses) => {
-    const {
-        classes,
-        noItemsText,
-        items,
-        getCustomItemBottomElements,
-        getCustomItemTopElements,
-        dataElements,
-        currentProgramId,
-    } = props;
 
-    const isShowingEnrollmentStatus = Boolean(currentProgramId);
-
-    if (!items || items.length === 0) {
-        return (
-            <div className={classes.noItemsContainer}>
-                {noItemsText}
-            </div>
-        );
-    }
+const CardListIndex = ({
+    classes,
+    noItemsText,
+    items,
+    getCustomItemBottomElements,
+    getCustomItemTopElements,
+    dataElements,
+    currentProgramId,
+}: OwnProps & CssClasses) => {
+    const { imageDataElement } = makeElementsContainerSelector()(dataElements);
 
     const deriveEnrollmentStatus = (enrollments = []) => {
-        if (!isShowingEnrollmentStatus) {
+        if (!currentProgramId) {
             return enrollmentStatuses.DONT_SHOW_TAG;
         }
-        const statuses = enrollments
+
+        const enrollmentsInCurrentProgram = enrollments
             .filter(({ program }) => program === currentProgramId)
             .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
 
-        const { ACTIVE, CANCELLED, COMPLETED, NOT_ENROLLED } = enrollmentStatuses;
 
-        if (statuses.find(({ status }) => status === ACTIVE)) {
+        const { ACTIVE, CANCELLED, COMPLETED, NOT_ENROLLED } = enrollmentStatuses;
+        if (enrollmentsInCurrentProgram.find(({ status }) => status === ACTIVE)) {
             return ACTIVE;
-        } else if (statuses.find(({ status }) => status === CANCELLED)) {
+        } else if (enrollmentsInCurrentProgram.find(({ status }) => status === CANCELLED)) {
             return CANCELLED;
-        } else if (statuses.find(({ status }) => status === COMPLETED)) {
+        } else if (enrollmentsInCurrentProgram.find(({ status }) => status === COMPLETED)) {
             return COMPLETED;
         }
         return NOT_ENROLLED;
     };
 
-    const { imageDataElement } = makeElementsContainerSelector()(dataElements);
-
     return (
         <>
             {
-                items.map(item => (
-                    <CardListItem
-                        enrollmentStatus={deriveEnrollmentStatus(item.tei && item.tei.enrollments)}
-                        key={item.id}
-                        item={item}
-                        getCustomTopElements={getCustomItemTopElements}
-                        getCustomBottomElements={getCustomItemBottomElements}
-                        imageDataElement={imageDataElement}
-                        dataElements={dataElements}
-                    />
-                ))
+                (!items || items.length === 0)
+                    ?
+                    (<div className={classes.noItemsContainer}>
+                        {noItemsText}
+                    </div>)
+                    :
+                    items.map(item => (
+                        <CardListItem
+                            key={item.id}
+                            item={item}
+                            enrollmentStatus={deriveEnrollmentStatus(item.tei && item.tei.enrollments)}
+                            getCustomTopElements={getCustomItemTopElements}
+                            getCustomBottomElements={getCustomItemBottomElements}
+                            imageDataElement={imageDataElement}
+                            dataElements={dataElements}
+                        />
+                    ))
             }
         </>
     );
