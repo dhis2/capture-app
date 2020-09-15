@@ -14,10 +14,22 @@ type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
     enrollmentStatus: $Keys<typeof enrollmentStatuses>,
     getCustomTopElements?: ?(props: Object) => Element<any>,
-    getCustomBottomElements?: ?(props: Object, availableCardListButtonState: "ACTIVE" | "COMPLETED_OR_CANCELLED") => Element<any>,
+    getCustomBottomElements?: ?(props: Object, availableCardListButtonsState: $Keys<typeof availableCardListButtonState>) => Element<any>,
     imageDataElement: DataElement,
     dataElements: CardDataElementsInformation,
 |}>;
+
+const selectAvailableButtonState = (status) => {
+    switch (status) {
+    case enrollmentStatuses.ACTIVE:
+        return availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON;
+    case enrollmentStatuses.CANCELLED:
+    case enrollmentStatuses.COMPLETED:
+        return availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON;
+    default:
+        return availableCardListButtonState.DONT_SHOW_BUTTON;
+    }
+};
 
 const getStyles = (theme: Theme) => ({
     itemContainer: {
@@ -195,7 +207,7 @@ const CardListItemIndex = (props: OwnProps & CssClasses) => {
 
             {
                 getCustomBottomElements &&
-                getCustomBottomElements(props, availableCardListButtonState[enrollmentStatus])
+                getCustomBottomElements(props, selectAvailableButtonState(enrollmentStatus))
             }
         </div>
     );

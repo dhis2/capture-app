@@ -1,5 +1,6 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
+import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button } from '@dhis2/ui-core';
@@ -9,7 +10,6 @@ import { searchScopes } from '../SearchPage.constants';
 import type { CardDataElementsInformation, Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 import { availableCardListButtonState } from '../../../CardList/CardList.constants';
-import { withStyles } from '@material-ui/core';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -28,12 +28,6 @@ export const getStyles = (theme: Theme) => ({
         marginRight: theme.typography.pxToRem(10),
         marginBottom: theme.typography.pxToRem(10),
     },
-    margin: {
-        marginTop: 8,
-    },
-    buttonMargin: {
-        marginLeft: 8,
-    },
 });
 
 const buttonStyles = (theme: Theme) => ({
@@ -41,12 +35,12 @@ const buttonStyles = (theme: Theme) => ({
         marginTop: theme.typography.pxToRem(8),
     },
     buttonMargin: {
-        marginTop: theme.typography.pxToRem(8),
+        marginLeft: theme.typography.pxToRem(8),
     },
 });
 
 const CardListButtons = withStyles(buttonStyles)(
-    ({ currentSearchScopeId, currentSearchScopeType, id, orgUnitId, availableButtonState, classes }) => {
+    ({ currentSearchScopeId, currentSearchScopeType, id, orgUnitId, navigationButtonsState, classes }) => {
         const scopeSearchParam = `${currentSearchScopeType.toLowerCase()}=${currentSearchScopeId}`;
         return (
             <div className={classes.margin}>
@@ -57,9 +51,9 @@ const CardListButtons = withStyles(buttonStyles)(
                     {i18n.t('View dashboard')}
                 </Button>
                 {
-                    availableButtonState === availableCardListButtonState.ACTIVE &&
+                    navigationButtonsState === availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON &&
                     <Button
-                        classes={classes.buttonMargin}
+                        className={classes.buttonMargin}
                         dataTest="dhis2-capture-view-active-enrollment-button"
                         onClick={() => {}}
                     >
@@ -67,8 +61,7 @@ const CardListButtons = withStyles(buttonStyles)(
                     </Button>
                 }
                 {
-                    (availableButtonState === availableCardListButtonState.COMPLETED || availableButtonState === availableCardListButtonState.CANCELLED)
-                    &&
+                    navigationButtonsState === availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON &&
                     <Button
                         classes={classes.buttonMargin}
                         dataTest="dhis2-capture-re-enrollment-button"
@@ -82,7 +75,7 @@ const CardListButtons = withStyles(buttonStyles)(
     });
 
 
-export const SearchResultsComponent = ({
+export const SearchResultsIndex = ({
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
     classes,
@@ -95,7 +88,7 @@ export const SearchResultsComponent = ({
     currentSearchScopeId,
     currentFormId,
     currentSearchTerms,
-}: Props) => {
+}: Props & CssClasses) => {
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:
@@ -136,13 +129,13 @@ export const SearchResultsComponent = ({
                 currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={collectFormDataElements(searchGroupsForSelectedScope)}
-                getCustomItemBottomElements={({ item }, availableButtonState) => (
+                getCustomItemBottomElements={({ item }, navigationButtonsState) => (
                     <CardListButtons
                         currentSearchScopeId={currentSearchScopeId}
                         currentSearchScopeType={currentSearchScopeType}
                         id={item.id}
                         orgUnitId={item.tei.orgUnit}
-                        availableButtonState={availableButtonState}
+                        navigationButtonsState={navigationButtonsState}
                     />
                 )}
             />
@@ -157,3 +150,5 @@ export const SearchResultsComponent = ({
         </div>
     </>);
 };
+
+export const SearchResultsComponent: ComponentType<Props> = withStyles(getStyles)(SearchResultsIndex);
