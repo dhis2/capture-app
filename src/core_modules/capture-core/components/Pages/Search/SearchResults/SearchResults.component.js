@@ -8,6 +8,8 @@ import withNavigation from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
 import type { CardDataElementsInformation, Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
+import { availableCardListButtonState } from '../../../CardList/CardList.constants';
+import { withStyles } from '@material-ui/core';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -26,10 +28,59 @@ export const getStyles = (theme: Theme) => ({
         marginRight: theme.typography.pxToRem(10),
         marginBottom: theme.typography.pxToRem(10),
     },
-    openDashboardButton: {
+    margin: {
         marginTop: 8,
     },
+    buttonMargin: {
+        marginLeft: 8,
+    },
 });
+
+const buttonStyles = (theme: Theme) => ({
+    margin: {
+        marginTop: theme.typography.pxToRem(8),
+    },
+    buttonMargin: {
+        marginTop: theme.typography.pxToRem(8),
+    },
+});
+
+const CardListButtons = withStyles(buttonStyles)(
+    ({ currentSearchScopeId, currentSearchScopeType, id, orgUnitId, availableButtonState, classes }) => {
+        const scopeSearchParam = `${currentSearchScopeType.toLowerCase()}=${currentSearchScopeId}`;
+        return (
+            <div className={classes.margin}>
+                <Button
+                    dataTest="dhis2-capture-view-dashboard-button"
+                    onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
+                >
+                    {i18n.t('View dashboard')}
+                </Button>
+                {
+                    availableButtonState === availableCardListButtonState.ACTIVE &&
+                    <Button
+                        classes={classes.buttonMargin}
+                        dataTest="dhis2-capture-view-active-enrollment-button"
+                        onClick={() => {}}
+                    >
+                        {i18n.t('View active enrollment')}
+                    </Button>
+                }
+                {
+                    (availableButtonState === availableCardListButtonState.COMPLETED || availableButtonState === availableCardListButtonState.CANCELLED)
+                    &&
+                    <Button
+                        classes={classes.buttonMargin}
+                        dataTest="dhis2-capture-re-enrollment-button"
+                        onClick={() => {}}
+                    >
+                        {i18n.t('Re-enroll in $program')}
+                    </Button>
+                }
+            </div>
+        );
+    });
+
 
 export const SearchResultsComponent = ({
     searchViaAttributesOnScopeProgram,
@@ -56,20 +107,6 @@ export const SearchResultsComponent = ({
         default:
             break;
         }
-    };
-
-    const GotoDashboardButton = ({ id, orgUnitId }) => {
-        const scopeSearchParam = `${currentSearchScopeType.toLowerCase()}=${currentSearchScopeId}`;
-        return (
-            <div className={classes.openDashboardButton}>
-                <Button
-                    dataTest="dhis2-capture-view-dashboard-button"
-                    onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
-                >
-                    {i18n.t('View dashboard')}
-                </Button>
-            </div>
-        );
     };
 
     const collectFormDataElements = (searchGroups): CardDataElementsInformation =>
@@ -99,12 +136,15 @@ export const SearchResultsComponent = ({
                 currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={collectFormDataElements(searchGroupsForSelectedScope)}
-                getCustomItemBottomElements={({ item }, isActivelyEnrolled, isEnrollmentAgainAvailable) => (<div>
-                    <GotoDashboardButton id={item.id} orgUnitId={item.tei.orgUnit} />
-                    {isActivelyEnrolled && <div>View Active enrollment</div>}
-                    {isEnrollmentAgainAvailable && <div>Re-enroll in $program</div>}
-                </div>)
-                }
+                getCustomItemBottomElements={({ item }, availableButtonState) => (
+                    <CardListButtons
+                        currentSearchScopeId={currentSearchScopeId}
+                        currentSearchScopeType={currentSearchScopeType}
+                        id={item.id}
+                        orgUnitId={item.tei.orgUnit}
+                        availableButtonState={availableButtonState}
+                    />
+                )}
             />
         </div>
         <div data-test="dhis2-capture-search-results-pagination" className={classes.pagination}>

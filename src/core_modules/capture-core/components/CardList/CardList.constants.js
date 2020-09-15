@@ -6,3 +6,9 @@ export const enrollmentStatuses = {
     CANCELLED: 'CANCELLED',
     DONT_SHOW_TAG: 'DONT_SHOW_TAG',
 };
+
+export const availableCardListButtonState = {
+    ACTIVE: 'ACTIVE',
+    COMPLETED: 'COMPLETED_OR_CANCELLED',
+    CANCELLED: 'COMPLETED_OR_CANCELLED',
+};

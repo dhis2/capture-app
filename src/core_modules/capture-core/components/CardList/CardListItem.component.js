@@ -8,13 +8,13 @@ import DoneIcon from '@material-ui/icons/Done';
 import { colors, Tag } from '@dhis2/ui-core';
 import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import type { DataElement } from '../../metaData';
-import { enrollmentStatuses } from './CardList.constants';
+import { availableCardListButtonState, enrollmentStatuses } from './CardList.constants';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
     enrollmentStatus: $Keys<typeof enrollmentStatuses>,
     getCustomTopElements?: ?(props: Object) => Element<any>,
-    getCustomBottomElements?: ?(props: Object, isActivelyEnrolled: boolean, isEnrollmentAgainAvailable: boolean) => Element<any>,
+    getCustomBottomElements?: ?(props: Object, availableCardListButtonState: "ACTIVE" | "COMPLETED_OR_CANCELLED") => Element<any>,
     imageDataElement: DataElement,
     dataElements: CardDataElementsInformation,
 |}>;
@@ -195,11 +195,7 @@ const CardListItemIndex = (props: OwnProps & CssClasses) => {
 
             {
                 getCustomBottomElements &&
-                getCustomBottomElements(
-                    props,
-                    enrollmentStatus === enrollmentStatuses.ACTIVE,
-                    (enrollmentStatus === enrollmentStatuses.COMPLETED || enrollmentStatus === enrollmentStatuses.CANCELLED),
-                )
+                getCustomBottomElements(props, availableCardListButtonState[enrollmentStatus])
             }
         </div>
     );
