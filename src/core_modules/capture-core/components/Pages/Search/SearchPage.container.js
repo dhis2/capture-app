@@ -111,10 +111,10 @@ const usePreselectedProgram = (trackedEntityTypesWithCorrelatedPrograms) => {
 export const SearchPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
 
-    const showInitialSearchPage = useCallback(
+    const dispatchShowInitialSearchPage = useCallback(
         () => { dispatch(showInitialViewOnSearchPage()); },
         [dispatch]);
-    const navigateToMainPage = () => { dispatch(navigateToMainPage()); };
+    const dispatchNavigateToMainPage = () => { dispatch(navigateToMainPage()); };
 
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
     const availableSearchOptions = useSearchOptions(trackedEntityTypesWithCorrelatedPrograms);
@@ -132,8 +132,8 @@ export const SearchPage: ComponentType<{||}> = () => {
 
     return (
         <SearchPageComponent
-            navigateToMainPage={navigateToMainPage}
-            showInitialSearchPage={showInitialSearchPage}
+            navigateToMainPage={dispatchNavigateToMainPage}
+            showInitialSearchPage={dispatchShowInitialSearchPage}
             trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
             availableSearchOptions={availableSearchOptions}
             preselectedProgram={preselectedProgram}
