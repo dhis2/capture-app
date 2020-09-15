@@ -11,10 +11,11 @@ import type { DataElement } from '../../metaData';
 import { availableCardListButtonState, enrollmentStatuses } from './CardList.constants';
 
 type OwnProps = $ReadOnly<{|
+    programName: string,
     item: SearchResultItem,
     enrollmentStatus: $Keys<typeof enrollmentStatuses>,
     getCustomTopElements?: ?(props: Object) => Element<any>,
-    getCustomBottomElements?: ?(props: Object, availableCardListButtonsState: $Keys<typeof availableCardListButtonState>) => Element<any>,
+    getCustomBottomElements?: ?(props: Object, availableCardListButtonsState: $Keys<typeof availableCardListButtonState>, programName: string) => Element<any>,
     imageDataElement: DataElement,
     dataElements: CardDataElementsInformation,
 |}>;
@@ -101,6 +102,7 @@ const CardListItemIndex = (props: OwnProps & CssClasses) => {
         getCustomBottomElements,
         enrollmentStatus,
         dataElements,
+        programName,
     } = props;
 
     return (
@@ -207,7 +209,7 @@ const CardListItemIndex = (props: OwnProps & CssClasses) => {
 
             {
                 getCustomBottomElements &&
-                getCustomBottomElements(props, selectAvailableButtonState(enrollmentStatus))
+                getCustomBottomElements(props, selectAvailableButtonState(enrollmentStatus), programName)
             }
         </div>
     );

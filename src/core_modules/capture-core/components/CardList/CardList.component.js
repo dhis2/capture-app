@@ -7,6 +7,7 @@ import { CardListItem } from './CardListItem.component';
 import makeDataElementsContainerSelector from './CardList.selectors';
 import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import { enrollmentStatuses } from './CardList.constants';
+import { getProgramFromProgramIdThrowIfNotFound } from '../../metaData/helpers';
 
 type OwnProps = $ReadOnly<{|
     dataElements: CardDataElementsInformation,
@@ -28,6 +29,8 @@ const getStyles = (theme: Theme) => ({
 const takeLastUpdatedEntry = statuses => statuses
     .sort((a, b) => compareAsc(a.lastUpdated, b.lastUpdated))
     .reverse()[0];
+
+const getProgramName = programId => (programId ? getProgramFromProgramIdThrowIfNotFound(programId).name : '');
 
 const CardListIndex = (props: OwnProps & CssClasses) => {
     const {
@@ -85,6 +88,7 @@ const CardListIndex = (props: OwnProps & CssClasses) => {
             {
                 items.map(item => (
                     <CardListItem
+                        programName={getProgramName(currentProgramId)}
                         enrollmentStatus={deriveEnrollmentStatus(item.tei && item.tei.enrollments)}
                         key={item.id}
                         item={item}

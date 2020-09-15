@@ -40,7 +40,15 @@ const buttonStyles = (theme: Theme) => ({
 });
 
 const CardListButtons = withStyles(buttonStyles)(
-    ({ currentSearchScopeId, currentSearchScopeType, id, orgUnitId, navigationButtonsState, classes }) => {
+    ({
+        currentSearchScopeId,
+        currentSearchScopeType,
+        id,
+        orgUnitId,
+        navigationButtonsState,
+        programName,
+        classes,
+    }) => {
         const scopeSearchParam = `${currentSearchScopeType.toLowerCase()}=${currentSearchScopeId}`;
         return (
             <div className={classes.margin}>
@@ -67,7 +75,7 @@ const CardListButtons = withStyles(buttonStyles)(
                         dataTest="dhis2-capture-re-enrollment-button"
                         onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
                     >
-                        {i18n.t('Re-enroll in $program')}
+                        {i18n.t('Re-enroll')} {programName && i18n.t('in {{programName}}', { programName })}
                     </Button>
                 }
             </div>
@@ -129,8 +137,9 @@ export const SearchResultsIndex = ({
                 currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={collectFormDataElements(searchGroupsForSelectedScope)}
-                getCustomItemBottomElements={({ item }, navigationButtonsState) => (
+                getCustomItemBottomElements={({ item }, navigationButtonsState, programName) => (
                     <CardListButtons
+                        programName={programName}
                         currentSearchScopeId={currentSearchScopeId}
                         currentSearchScopeType={currentSearchScopeType}
                         id={item.id}
