@@ -55,7 +55,7 @@ const CardListButtons = withStyles(buttonStyles)(
                     <Button
                         className={classes.buttonMargin}
                         dataTest="dhis2-capture-view-active-enrollment-button"
-                        onClick={() => {}}
+                        onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
                     >
                         {i18n.t('View active enrollment')}
                     </Button>
@@ -63,9 +63,9 @@ const CardListButtons = withStyles(buttonStyles)(
                 {
                     navigationButtonsState === availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON &&
                     <Button
-                        classes={classes.buttonMargin}
+                        className={classes.buttonMargin}
                         dataTest="dhis2-capture-re-enrollment-button"
-                        onClick={() => {}}
+                        onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
                     >
                         {i18n.t('Re-enroll in $program')}
                     </Button>
