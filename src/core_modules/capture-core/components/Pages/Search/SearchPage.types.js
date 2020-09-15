@@ -33,8 +33,8 @@ export type TrackedEntityTypesWithCorrelatedPrograms = $ReadOnly<{
 }>
 
 export type ContainerProps = $ReadOnly<{|
-  dispatchNavigateToMainPage: ()=>void,
-  dispatchShowInitialSearchPage: ()=>void,
+  navigateToMainPage: ()=>void,
+  showInitialSearchPage: ()=>void,
   trackedEntityTypesWithCorrelatedPrograms: TrackedEntityTypesWithCorrelatedPrograms,
   availableSearchOptions: AvailableSearchOptions,
   preselectedProgram: SelectedSearchScope,
