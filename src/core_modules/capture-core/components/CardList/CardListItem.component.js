@@ -21,7 +21,7 @@ type OwnProps = $ReadOnly<{|
 
 const getStyles = (theme: Theme) => ({
     itemContainer: {
-        width: theme.typography.pxToRem(600),
+        maxWidth: theme.typography.pxToRem(600),
         display: 'flex',
         flexDirection: 'column',
         margin: theme.typography.pxToRem(8),
