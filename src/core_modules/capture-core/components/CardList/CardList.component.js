@@ -2,7 +2,6 @@
 import React from 'react';
 import type { ComponentType, Element } from 'react';
 import { withStyles } from '@material-ui/core';
-import compareAsc from 'date-fns/compare_asc';
 import { CardListItem } from './CardListItem.component';
 import { makeElementsContainerSelector } from './CardList.selectors';
 import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
@@ -24,10 +23,6 @@ const getStyles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(10),
     },
 });
-
-const takeLastUpdatedEntry = statuses => statuses
-    .sort((a, b) => compareAsc(a.lastUpdated, b.lastUpdated))
-    .reverse()[0];
 
 const CardListIndex = (props: OwnProps & CssClasses) => {
     const {
@@ -62,14 +57,6 @@ const CardListIndex = (props: OwnProps & CssClasses) => {
 
         if (statuses.find(({ status }) => status === ACTIVE)) {
             return ACTIVE;
-        } else if (
-            // in case a TEI has at the same time a COMPLETED and a CANCELLED enrollment then
-            // we only want to show to the user the one that has been updated latest.
-            statuses.find(({ status: statusOne }) => statusOne === CANCELLED &&
-            statuses.find(({ status: statusTwo }) => statusTwo === COMPLETED))
-        ) {
-            const { status } = takeLastUpdatedEntry(statuses);
-            return status;
         } else if (statuses.find(({ status }) => status === CANCELLED)) {
             return CANCELLED;
         } else if (statuses.find(({ status }) => status === COMPLETED)) {

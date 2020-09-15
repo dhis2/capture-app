@@ -128,6 +128,7 @@ const CardListItemIndex = (props: OwnProps & CssClasses) => {
                                         { i18n.t('Last updated') } {item.tei && moment(item.tei.lastUpdated).fromNow()}
                                     </div>
                                 }
+
                                 <div className={classes.enrolled}>
                                     {
                                         (enrollmentStatus === enrollmentStatuses.ACTIVE) &&
@@ -145,38 +146,29 @@ const CardListItemIndex = (props: OwnProps & CssClasses) => {
                                                 />
                                             }
                                         >
-                                            {i18n.t('Enrolled: Active')}
+                                            {i18n.t('Enrolled')}
                                         </Tag>
                                     }
 
                                     {
-                                        (enrollmentStatus === enrollmentStatuses.CANCELLED) &&
-                                        <Tag
-                                            dataTest="dhis2-uicore-tag"
-                                            neutral
-                                        >
-                                            {i18n.t('Enrolled: Canceled')}
-                                        </Tag>
-                                    }
-
-                                    {
-                                        (enrollmentStatus === enrollmentStatuses.COMPLETED) &&
-                                        <Tag
-                                            dataTest="dhis2-uicore-tag"
-                                            neutral
-                                            icon={
-                                                <DoneIcon
-                                                    style={{
-                                                        transformBox: 'view-box',
-                                                        fontSize: 14,
-                                                        position: 'relative',
-                                                        top: '-1px',
-                                                    }}
-                                                />
-                                            }
-                                        >
-                                            {i18n.t('Enrolled: Completed')}
-                                        </Tag>
+                                        (enrollmentStatus === enrollmentStatuses.CANCELLED ||
+                                          enrollmentStatus === enrollmentStatuses.COMPLETED) &&
+                                          <Tag
+                                              dataTest="dhis2-uicore-tag"
+                                              neutral
+                                              icon={
+                                                  <DoneIcon
+                                                      style={{
+                                                          transformBox: 'view-box',
+                                                          fontSize: 14,
+                                                          position: 'relative',
+                                                          top: '-1px',
+                                                      }}
+                                                  />
+                                              }
+                                          >
+                                              {i18n.t('Previously enrolled')}
+                                          </Tag>
                                     }
 
                                     {
