@@ -4,7 +4,7 @@ import type { ComponentType, Element } from 'react';
 import { withStyles } from '@material-ui/core';
 import compareAsc from 'date-fns/compare_asc';
 import { CardListItem } from './CardListItem.component';
-import makeDataElementsContainerSelector from './CardList.selectors';
+import { makeElementsContainerSelector } from './CardList.selectors';
 import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import { enrollmentStatuses } from './CardList.constants';
 
@@ -78,7 +78,7 @@ const CardListIndex = (props: OwnProps & CssClasses) => {
         return NOT_ENROLLED;
     };
 
-    const { imageDataElement } = makeDataElementsContainerSelector()(dataElements);
+    const { imageDataElement } = makeElementsContainerSelector()(dataElements);
 
     return (
         <>
