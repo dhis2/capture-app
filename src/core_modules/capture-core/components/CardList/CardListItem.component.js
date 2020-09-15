@@ -8,11 +8,11 @@ import DoneIcon from '@material-ui/icons/Done';
 import { colors, Tag } from '@dhis2/ui-core';
 import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import type { DataElement } from '../../metaData';
-import { enrollmentStatuses } from './CardList.constants';
+import { enrollmentTypes } from './CardList.constants';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
-    enrollmentStatus: $Keys<typeof enrollmentStatuses>,
+    currentProgramId?: string,
     getCustomTopElements?: ?(props: Object) => Element<any>,
     getCustomBottomElements?: ?(props: Object) => Element<any>,
     imageDataElement: DataElement,
@@ -33,7 +33,7 @@ const getStyles = (theme: Theme) => ({
     itemDataContainer: {
         display: 'flex',
     },
-    lastUpdated: {
+    smallerLetters: {
         fontSize: theme.typography.pxToRem(12),
         color: colors.grey700,
         paddingBottom: theme.typography.pxToRem(8),
@@ -70,6 +70,59 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
+const OrgUnitAndDateInfo =
+  withStyles(getStyles)(
+      ({ enrollments, enrollmentType, currentProgramId, classes }) => {
+          if (!currentProgramId) {
+              return null;
+          }
+
+          const { orgUnitName, enrollmentDate } = enrollments
+              .filter(({ program }) => program === currentProgramId)
+              .filter(({ status }) => status === enrollmentType)
+              .sort((a, b) => moment.utc(a.lastUpdated).diff(moment.utc(b.lastUpdated)))[0];
+
+          return (<div>
+              <div className={classes.value}>
+                  <span className={classes.elementName}>
+                      {i18n.t('Organisation unit: ')}:&nbsp;
+                  </span>
+                  <span className={classes.elementValue}>
+                      {orgUnitName}
+                  </span>
+              </div>
+              <div className={classes.value}>
+                  <span className={classes.elementName}>
+                      { i18n.t('Enrollment date') }:&nbsp;
+                  </span>
+                  <span className={classes.elementValue}>
+                      {moment(enrollmentDate).format('L')}
+                  </span>
+              </div>
+          </div>);
+      });
+
+const deriveEnrollmentType = (enrollments, currentProgramId): $Keys<typeof enrollmentTypes> => {
+    if (!currentProgramId) {
+        return enrollmentTypes.DONT_SHOW_TAG;
+    }
+
+    const enrollmentsInCurrentProgram = enrollments
+        .filter(({ program }) => program === currentProgramId)
+        .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
+
+
+    const { ACTIVE, CANCELLED, COMPLETED, NOT_ENROLLED } = enrollmentTypes;
+    if (enrollmentsInCurrentProgram.find(({ status }) => status === ACTIVE)) {
+        return ACTIVE;
+    } else if (enrollmentsInCurrentProgram.find(({ status }) => status === COMPLETED)) {
+        return COMPLETED;
+    } else if (enrollmentsInCurrentProgram.find(({ status }) => status === CANCELLED)) {
+        return CANCELLED;
+    }
+    return NOT_ENROLLED;
+};
+
 const CardListItemIndex = ({
     item,
     classes,
@@ -77,7 +130,7 @@ const CardListItemIndex = ({
     getCustomTopElements,
     getCustomBottomElements,
     dataElements,
-    enrollmentStatus,
+    currentProgramId,
 }: OwnProps & CssClasses) => {
     const renderImageDataElement = (imageElement: DataElement) => {
         const imageValue = item.values[imageElement.id];
@@ -87,6 +140,8 @@ const CardListItemIndex = ({
             </div>
         );
     };
+    const enrollments = item.tei ? item.tei.enrollments : [];
+    const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
 
     return (
         <div data-test="dhis2-capture-card-list-item" className={classes.itemContainer}>
@@ -101,34 +156,37 @@ const CardListItemIndex = ({
                                 {renderImageDataElement(imageDataElement)}
                             </Grid>
                         }
-                        <Grid item xs={12} sm container>
+                        <Grid item xs={16} sm container>
                             <Grid item xs container direction="column" spacing={2}>
+                                <OrgUnitAndDateInfo
+                                    enrollments={enrollments}
+                                    enrollmentType={enrollmentType}
+                                    currentProgramId={currentProgramId}
+                                />
                                 {
                                     dataElements.map(element => (
-                                        <Grid item xs>
-                                            <div key={element.id} className={classes.value}>
-                                                <span className={classes.elementName}>
-                                                    {element.name}:&nbsp;
-                                                </span>
-                                                <span className={classes.elementValue}>
-                                                    {item.values[element.id]}
-                                                </span>
-                                            </div>
-                                        </Grid>
+                                        <div key={element.id} className={classes.value}>
+                                            <span className={classes.elementName}>
+                                                {element.name}:&nbsp;
+                                            </span>
+                                            <span className={classes.elementValue}>
+                                                {item.values[element.id]}
+                                            </span>
+                                        </div>
                                     ))
                                 }
                             </Grid>
                             <Grid item>
                                 {
                                     item.tei && item.tei.lastUpdated &&
-                                    <div className={classes.lastUpdated}>
+                                    <div className={classes.smallerLetters}>
                                         { i18n.t('Last updated') } {item.tei && moment(item.tei.lastUpdated).fromNow()}
                                     </div>
                                 }
 
                                 <div className={classes.enrolled}>
                                     {
-                                        (enrollmentStatus === enrollmentStatuses.ACTIVE) &&
+                                        (enrollmentType === enrollmentTypes.ACTIVE) &&
                                         <Tag
                                             dataTest="dhis2-uicore-tag"
                                             positive
@@ -148,8 +206,8 @@ const CardListItemIndex = ({
                                     }
 
                                     {
-                                        (enrollmentStatus === enrollmentStatuses.CANCELLED ||
-                                          enrollmentStatus === enrollmentStatuses.COMPLETED) &&
+                                        (enrollmentType === enrollmentTypes.CANCELLED ||
+                                          enrollmentType === enrollmentTypes.COMPLETED) &&
                                           <Tag
                                               dataTest="dhis2-uicore-tag"
                                               neutral
@@ -169,15 +227,12 @@ const CardListItemIndex = ({
                                     }
 
                                     {
-                                        (enrollmentStatus === enrollmentStatuses.NOT_ENROLLED) &&
+                                        (enrollmentType === enrollmentTypes.NOT_ENROLLED) &&
                                         <Tag dataTest="dhis2-uicore-tag">
                                             {i18n.t('Not enrolled')}
                                         </Tag>
                                     }
 
-                                </div>
-                                <div className={classes.value}>
-                                    {'hello'}
                                 </div>
                             </Grid>
                         </Grid>
