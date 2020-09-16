@@ -29,9 +29,6 @@ msgid ""
 "this version again, but be aware that this will close other versions."
 msgstr ""
 
-msgid "Date"
-msgstr ""
-
 msgid "Last updated"
 msgstr ""
 
@@ -831,6 +828,9 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
+msgstr ""
+
+msgid "Date"
 msgstr ""
 
 msgid "Time"

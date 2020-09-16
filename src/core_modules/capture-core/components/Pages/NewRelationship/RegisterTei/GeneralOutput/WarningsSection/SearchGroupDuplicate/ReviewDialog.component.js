@@ -30,8 +30,8 @@ class ReviewDialog extends React.Component<Props > {
             <Dialog
                 open={open}
                 onClose={onCancel}
-                maxWidth={false}
-                style={{ width: 'auto' }}
+                maxWidth="sm"
+                fullWidth
                 PaperProps={ReviewDialog.paperProps}
             >
                 <ReviewDialogContents
