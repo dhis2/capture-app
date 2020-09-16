@@ -1,34 +1,37 @@
 // @flow
-import type { AvailableSearchOptions } from '../SearchPage.types';
+import type { SearchGroups } from '../SearchPage.types';
+
+export type CurrentSearchTerms = Array<{|
+  +name: string,
+  +value: string,
+  +id: string,
+|}>
+
+export type FormsValues = {
+    [formIdentifier: string]: {
+      [formElement: string]: Object
+    }
+  }
 
 export type OwnProps = {|
-  +availableSearchOptions: AvailableSearchOptions,
-  +selectedSearchScopeId?: string,
-  +classes: {|
-    +searchDomainSelectorSection: string,
-    +searchButtonContainer: string,
-    +searchRow: string,
-    +searchRowSelectElement: string,
-    +textInfo: string,
-    +textError: string,
-  |},
+  +searchGroupsForSelectedScope: SearchGroups,
+  +selectedSearchScopeId: ?string,
 |}
 
 export type PropsFromRedux ={|
-  +forms: {
-    [elementId: string]: {
-      loadNr: number
-    }
-  },
+  +formsValues: FormsValues,
   +searchStatus: string,
   +isSearchViaAttributesValid: (minAttributesRequiredToSearch: number, formId: string)=> boolean,
 |}
 
 export type DispatchersFromRedux = {|
-  onSearchViaUniqueIdOnScopeProgram: ({| programId: string, formId: string |}) => void,
-  onSearchViaUniqueIdOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
-  onSearchViaAttributesOnScopeProgram: ({| programId: string, formId: string |}) => void,
-  onSearchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
+  searchViaUniqueIdOnScopeProgram: ({| programId: string, formId: string |}) => void,
+  searchViaUniqueIdOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
+  searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page?: string |}) => void,
+  searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
+  saveCurrentFormData: (searchScopeType: string, searchScopeId: string, formId: string, formsValues: FormsValues) => void,
+  removeFormDataFromReduxStore: () => void,
+  addFormIdToReduxStore: (formId: string) => void,
 |}
 
 export type Props = {|

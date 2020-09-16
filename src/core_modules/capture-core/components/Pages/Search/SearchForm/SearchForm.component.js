@@ -1,18 +1,17 @@
 // @flow
-import React, { useEffect, useMemo, useState } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
+import React, { type ComponentType, useEffect, useMemo, useState } from 'react';
+import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui-core';
-import Form from '../../../D2Form/D2Form.component';
-import { searchScopes } from '../SearchPage.container';
+import { D2Form } from '../../../D2Form';
+import { searchScopes } from '../SearchPage.constants';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
 import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
 
 const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
-        maxWidth: theme.typography.pxToRem(900),
-        marginBottom: theme.typography.pxToRem(20),
+        margin: theme.typography.pxToRem(10),
     },
     searchRow: {
         display: 'flex',
@@ -40,18 +39,44 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const Index = ({
-    onSearchViaUniqueIdOnScopeTrackedEntityType,
-    onSearchViaUniqueIdOnScopeProgram,
-    onSearchViaAttributesOnScopeProgram,
-    onSearchViaAttributesOnScopeTrackedEntityType,
+const useFormDataLifecycle = (
+    searchGroupsForSelectedScope,
+    addFormIdToReduxStore,
+    removeFormDataFromReduxStore,
+) =>
+    useEffect(() => {
+        // in order for the Form component to render
+        // a formId under the `forms` reducer needs to be added.
+        searchGroupsForSelectedScope
+            .forEach(({ formId }) => {
+                addFormIdToReduxStore(formId);
+            });
+        // we remove the data on unmount to clean the store
+        return () => removeFormDataFromReduxStore();
+    },
+    [
+        searchGroupsForSelectedScope,
+        addFormIdToReduxStore,
+        removeFormDataFromReduxStore,
+    ]);
+
+const SearchFormIndex = ({
+    searchViaUniqueIdOnScopeTrackedEntityType,
+    searchViaUniqueIdOnScopeProgram,
+    searchViaAttributesOnScopeProgram,
+    searchViaAttributesOnScopeTrackedEntityType,
+    saveCurrentFormData,
+    addFormIdToReduxStore,
+    removeFormDataFromReduxStore,
     selectedSearchScopeId,
+    searchGroupsForSelectedScope,
     classes,
-    availableSearchOptions,
-    forms,
+    formsValues,
     searchStatus,
     isSearchViaAttributesValid,
-}: Props) => {
+}: Props & CssClasses) => {
+    useFormDataLifecycle(searchGroupsForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore);
+
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
 
@@ -62,42 +87,28 @@ const Index = ({
     [selectedSearchScopeId],
     );
 
-    const sortedSearchGroup =
-      selectedSearchScopeId ?
-          availableSearchOptions[selectedSearchScopeId].searchGroups
-              .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
-                  if (xBoolean === yBoolean) {
-                      return 0;
-                  }
-                  if (xBoolean) {
-                      return -1;
-                  }
-                  return 1;
-              })
-          :
-          [];
     useEffect(() => {
-        sortedSearchGroup
+        searchGroupsForSelectedScope
             .forEach(({ formId }, index) => {
                 if (!expandedFormId && index === 0) {
                     setExpandedFormId(formId);
                 }
             });
-    }, [sortedSearchGroup, expandedFormId]);
+    }, [searchGroupsForSelectedScope, expandedFormId]);
 
     return useMemo(() => {
         const formReference = {};
 
-        const handleSearchViaUniqueId = (selectedId, formId, searchScope) => {
+        const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId) => {
             const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
 
             if (isValid) {
-                switch (searchScope) {
+                switch (searchScopeType) {
                 case searchScopes.PROGRAM:
-                    onSearchViaUniqueIdOnScopeProgram({ programId: selectedId, formId });
+                    searchViaUniqueIdOnScopeProgram({ programId: searchScopeId, formId });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    onSearchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
+                    searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
                     break;
                 default:
                     break;
@@ -105,22 +116,18 @@ const Index = ({
             }
         };
 
-        const isSearchViaAttributesFormValid = (formId, minAttributesRequiredToSearch) => {
-            const isFormValid = formReference[formId].validateFormScrollToFirstFailedField({});
-            const isLengthValid = isSearchViaAttributesValid(minAttributesRequiredToSearch, formId);
-            return isFormValid && isLengthValid;
-        };
-        const handleSearchViaAttributes = (selectedId, formId, searchScope, minAttributesRequiredToSearch) => {
-            const isValid = isSearchViaAttributesFormValid(formId, minAttributesRequiredToSearch);
+        const handleSearchViaAttributes = (searchScopeType, searchScopeId, formId, minAttributesRequiredToSearch) => {
+            const isValid = isSearchViaAttributesValid(minAttributesRequiredToSearch, formId);
 
             if (isValid) {
                 setError(false);
-                switch (searchScope) {
+                saveCurrentFormData(searchScopeType, searchScopeId, formId, formsValues);
+                switch (searchScopeType) {
                 case searchScopes.PROGRAM:
-                    onSearchViaAttributesOnScopeProgram({ programId: selectedId, formId });
+                    searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    onSearchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
+                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
                     break;
                 default:
                     break;
@@ -132,11 +139,16 @@ const Index = ({
 
         const FormInformativeMessage = ({ minAttributesRequiredToSearch }) =>
             (<div className={error ? classes.textError : classes.textInfo}>
-                Fill in at least {minAttributesRequiredToSearch}  attributes to search
+                {
+                    i18n.t(
+                        'Fill in at least {{minAttributesRequiredToSearch}}  attributes to search',
+                        { minAttributesRequiredToSearch },
+                    )
+                }
             </div>);
         return (<>
             {
-                sortedSearchGroup
+                searchGroupsForSelectedScope
                     .filter(searchGroup => searchGroup.unique)
                     .map(({ searchForm, formId, searchScope }) => {
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
@@ -159,16 +171,13 @@ const Index = ({
                                 >
                                     <div className={classes.searchRow}>
                                         <div className={classes.searchRowSelectElement}>
-                                            {
-                                                forms[formId] &&
-                                                <Form
-                                                    formRef={
-                                                        (formInstance) => { formReference[formId] = formInstance; }
-                                                    }
-                                                    formFoundation={searchForm}
-                                                    id={formId}
-                                                />
-                                            }
+                                            <D2Form
+                                                formRef={
+                                                    (formInstance) => { formReference[formId] = formInstance; }
+                                                }
+                                                formFoundation={searchForm}
+                                                id={formId}
+                                            />
                                         </div>
                                     </div>
                                     <div className={classes.searchButtonContainer}>
@@ -177,12 +186,12 @@ const Index = ({
                                             onClick={() =>
                                                 selectedSearchScopeId &&
                                             handleSearchViaUniqueId(
+                                                searchScope,
                                                 selectedSearchScopeId,
                                                 formId,
-                                                searchScope,
                                             )}
                                         >
-                                            Find by {name}
+                                            {i18n.t('Find by {{name}}', { name })}
                                         </Button>
                                     </div>
                                 </Section>
@@ -192,7 +201,7 @@ const Index = ({
             }
 
             {
-                sortedSearchGroup
+                searchGroupsForSelectedScope
                     .filter(searchGroup => !searchGroup.unique)
                     .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
                         const searchByText = i18n.t('Search by attributes');
@@ -214,14 +223,11 @@ const Index = ({
                                 >
                                     <div className={classes.searchRow}>
                                         <div className={classes.searchRowSelectElement}>
-                                            {
-                                                forms[formId] &&
-                                                <Form
-                                                    formRef={(formInstance) => { formReference[formId] = formInstance; }}
-                                                    formFoundation={searchForm}
-                                                    id={formId}
-                                                />
-                                            }
+                                            <D2Form
+                                                formRef={(formInstance) => { formReference[formId] = formInstance; }}
+                                                formFoundation={searchForm}
+                                                id={formId}
+                                            />
                                         </div>
                                     </div>
                                     <div className={classes.searchButtonContainer}>
@@ -230,9 +236,9 @@ const Index = ({
                                             onClick={() =>
                                                 selectedSearchScopeId &&
                                             handleSearchViaAttributes(
+                                                searchScope,
                                                 selectedSearchScopeId,
                                                 formId,
-                                                searchScope,
                                                 minAttributesRequiredToSearch,
                                             )
                                             }
@@ -249,7 +255,6 @@ const Index = ({
                         );
                     })
             }
-
         </>);
     },
     [
@@ -259,18 +264,19 @@ const Index = ({
         classes.searchRow,
         classes.textInfo,
         classes.textError,
-        forms,
-        sortedSearchGroup,
         selectedSearchScopeId,
         searchStatus,
+        searchViaUniqueIdOnScopeTrackedEntityType,
+        searchViaUniqueIdOnScopeProgram,
+        searchViaAttributesOnScopeProgram,
+        searchViaAttributesOnScopeTrackedEntityType,
+        searchGroupsForSelectedScope,
         isSearchViaAttributesValid,
+        saveCurrentFormData,
+        formsValues,
         error,
         expandedFormId,
-        onSearchViaUniqueIdOnScopeTrackedEntityType,
-        onSearchViaUniqueIdOnScopeProgram,
-        onSearchViaAttributesOnScopeProgram,
-        onSearchViaAttributesOnScopeTrackedEntityType,
     ]);
 };
 
-export const SearchFormComponent = withStyles(getStyles)(Index);
+export const SearchFormComponent: ComponentType<Props> = withStyles(getStyles)(SearchFormIndex);
