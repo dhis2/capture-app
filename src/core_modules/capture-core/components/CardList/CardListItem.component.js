@@ -148,7 +148,11 @@ const CardListItemIndex = ({
                             <Grid item xs container direction="column" spacing={2}>
                                 {
                                     dataElements.map(element => (
-                                        <ListEntry key={element.id} name={element.name} value={item.values[element.id]} />
+                                        <ListEntry
+                                            key={element.id}
+                                            name={element.name}
+                                            value={item.values[element.id]}
+                                        />
                                     ))
                                 }
                                 {
