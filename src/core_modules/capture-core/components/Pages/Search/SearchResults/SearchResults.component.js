@@ -16,7 +16,7 @@ export const getStyles = (theme: Theme) => ({
         display: 'flex',
         justifyContent: 'flex-end',
         marginLeft: theme.typography.pxToRem(8),
-        width: theme.typography.pxToRem(600),
+        maxWidth: theme.typography.pxToRem(600),
     },
     topSection: {
         display: 'flex',
