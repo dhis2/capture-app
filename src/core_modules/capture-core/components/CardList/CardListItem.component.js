@@ -9,6 +9,7 @@ import { colors, Tag } from '@dhis2/ui-core';
 import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import type { DataElement } from '../../metaData';
 import { enrollmentTypes } from './CardList.constants';
+import { ListEntry } from './ListEntry.component';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
@@ -43,23 +44,10 @@ const getStyles = (theme: Theme) => ({
         justifyContent: 'flex-end',
         color: colors.grey700,
     },
-    elementName: {
-        fontSize: theme.typography.pxToRem(13),
-        color: colors.grey700,
-
-    },
-    elementValue: {
-        fontSize: theme.typography.pxToRem(14),
-        color: colors.grey900,
-        fontWeight: 500,
-    },
     itemValuesContainer: {
         display: 'flex',
         flexWrap: 'wrap',
         flexGrow: 1,
-    },
-    value: {
-        paddingBottom: theme.typography.pxToRem(4),
     },
     image: {
         width: theme.typography.pxToRem(44),
@@ -70,58 +58,43 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const OrgUnitAndDateInfo =
-  withStyles(getStyles)(
-      ({ enrollments, enrollmentType, currentProgramId, classes }) => {
-          if (!currentProgramId) {
-              return null;
-          }
 
-          const { orgUnitName, enrollmentDate } = enrollments
-              .filter(({ program }) => program === currentProgramId)
-              .filter(({ status }) => status === enrollmentType)
-              .sort((a, b) => moment.utc(a.lastUpdated).diff(moment.utc(b.lastUpdated)))[0];
+const deriveEnrollmentType =
+  (enrollments, currentProgramId): $Keys<typeof enrollmentTypes> => {
+      if (!currentProgramId) {
+          return enrollmentTypes.DONT_SHOW_TAG;
+      }
 
-          return (<div>
-              <div className={classes.value}>
-                  <span className={classes.elementName}>
-                      {i18n.t('Organisation unit: ')}:&nbsp;
-                  </span>
-                  <span className={classes.elementValue}>
-                      {orgUnitName}
-                  </span>
-              </div>
-              <div className={classes.value}>
-                  <span className={classes.elementName}>
-                      { i18n.t('Enrollment date') }:&nbsp;
-                  </span>
-                  <span className={classes.elementValue}>
-                      {moment(enrollmentDate).format('L')}
-                  </span>
-              </div>
-          </div>);
-      });
-
-const deriveEnrollmentType = (enrollments, currentProgramId): $Keys<typeof enrollmentTypes> => {
-    if (!currentProgramId) {
-        return enrollmentTypes.DONT_SHOW_TAG;
-    }
-
-    const enrollmentsInCurrentProgram = enrollments
-        .filter(({ program }) => program === currentProgramId)
-        .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
+      const enrollmentsInCurrentProgram = enrollments
+          .filter(({ program }) => program === currentProgramId)
+          .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
 
 
-    const { ACTIVE, CANCELLED, COMPLETED, NOT_ENROLLED } = enrollmentTypes;
-    if (enrollmentsInCurrentProgram.find(({ status }) => status === ACTIVE)) {
-        return ACTIVE;
-    } else if (enrollmentsInCurrentProgram.find(({ status }) => status === COMPLETED)) {
-        return COMPLETED;
-    } else if (enrollmentsInCurrentProgram.find(({ status }) => status === CANCELLED)) {
-        return CANCELLED;
-    }
-    return NOT_ENROLLED;
-};
+      const { ACTIVE, CANCELLED, COMPLETED, NOT_ENROLLED } = enrollmentTypes;
+      if (enrollmentsInCurrentProgram.find(({ status }) => status === ACTIVE)) {
+          return ACTIVE;
+      } else if (enrollmentsInCurrentProgram.find(({ status }) => status === COMPLETED)) {
+          return COMPLETED;
+      } else if (enrollmentsInCurrentProgram.find(({ status }) => status === CANCELLED)) {
+          return CANCELLED;
+      }
+      return NOT_ENROLLED;
+  };
+
+const deriveEnrollmentOrgUnitAndDate =
+  (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrollmentDate?: string} => {
+      if (!currentProgramId) {
+          return {};
+      }
+
+      const { orgUnitName, enrollmentDate } = enrollments
+          .filter(({ program }) => program === currentProgramId)
+          .filter(({ status }) => status === enrollmentType)
+          .sort((a, b) => moment.utc(a.lastUpdated).diff(moment.utc(b.lastUpdated)))[0];
+
+      return { orgUnitName, enrollmentDate };
+  };
+
 
 const CardListItemIndex = ({
     item,
@@ -142,6 +115,7 @@ const CardListItemIndex = ({
     };
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
+    const { orgUnitName, enrollmentDate } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
 
     return (
         <div data-test="dhis2-capture-card-list-item" className={classes.itemContainer}>
@@ -158,23 +132,21 @@ const CardListItemIndex = ({
                         }
                         <Grid item xs={16} sm container>
                             <Grid item xs container direction="column" spacing={2}>
-                                <OrgUnitAndDateInfo
-                                    enrollments={enrollments}
-                                    enrollmentType={enrollmentType}
-                                    currentProgramId={currentProgramId}
-                                />
                                 {
                                     dataElements.map(element => (
-                                        <div key={element.id} className={classes.value}>
-                                            <span className={classes.elementName}>
-                                                {element.name}:&nbsp;
-                                            </span>
-                                            <span className={classes.elementValue}>
-                                                {item.values[element.id]}
-                                            </span>
-                                        </div>
+                                        <ListEntry key={element.id} name={element.name} value={item.values[element.id]} />
                                     ))
                                 }
+                                {
+                                    orgUnitName &&
+                                    <ListEntry name={i18n.t('Organisation unit: ')} value={orgUnitName} />
+                                }
+
+                                {
+                                    enrollmentDate &&
+                                    <ListEntry name={i18n.t('Date')} value={moment(enrollmentDate).format('L')} />
+                                }
+
                             </Grid>
                             <Grid item>
                                 {
