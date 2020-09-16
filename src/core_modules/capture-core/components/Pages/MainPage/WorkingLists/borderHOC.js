@@ -27,7 +27,7 @@ export const withBorder = () => (InnerComponent: React.ComponentType<any>) =>
             return (
                 <div
                     className={classes.container}
-                    data-test={'workinglists-border'}
+                    data-test="workinglists-border"
                 >
                     <InnerComponent
                         {...passOnProps}

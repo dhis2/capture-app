@@ -66,6 +66,7 @@ class ProgramFactory {
         );
         this.searchGroupFactory = new SearchGroupFactory(
             cachedTrackedEntityAttributes,
+            cachedOptionSets,
             locale,
         );
         this.dataElementFactory = new DataElementFactory(
