@@ -1,5 +1,4 @@
 // @flow
-
 import * as React from 'react';
 import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
@@ -7,7 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { errorCreator } from 'capture-core-utils';
 import Button from '../../Buttons/Button.component';
-import Form from '../../D2Form/D2Form.component';
+import { D2Form } from '../../D2Form';
 import SearchOrgUnitSelector from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import { SearchGroup } from '../../../metaData';
 import { withGotoInterface } from '../../FormFields/New';
@@ -138,17 +137,7 @@ class SearchForm extends React.Component<Props> {
     }
 
     render() {
-        const {
-            searchGroup,
-            classes,
-            searchGroupId,
-            onSearch,
-            searchId,
-            onSearchValidationFailed,
-            searchAttempted,
-            attributesWithValuesCount,
-            id,
-            ...passOnProps } = this.props;
+        const { searchGroup, classes, id } = this.props;
 
         const searchForm = searchGroup && searchGroup.searchForm;
 
@@ -162,12 +151,10 @@ class SearchForm extends React.Component<Props> {
         const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
         return (
             <div className={classes.container}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <Form
+                <D2Form
                     formRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={searchGroup.searchForm}
                     id={id}
-                    {...passOnProps}
                 />
                 {!searchGroup.unique && this.renderOrgUnitSelector()}
                 <div

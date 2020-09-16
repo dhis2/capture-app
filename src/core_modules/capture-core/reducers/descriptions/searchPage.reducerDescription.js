@@ -32,7 +32,6 @@ export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW]: state => ({
         ...state,
         searchStatus: searchPageStatus.ERROR,
-        generalPurposeErrorMessage: 'This is a general purpose error. This text needs to be defined',
     }),
     [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
         ...state,
