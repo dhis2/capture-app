@@ -26,11 +26,11 @@ Then('there should be Person domain forms available to search with', () => {
         .should('have.length', 1);
 });
 
-Given('you are in the search page with the Child Programme being pre-selected from the url', () => {
+Given('you are in the search page with the Child Programme being preselected from the url', () => {
     cy.visit('/#/search/programId=IpHINAT79UW');
 });
 
-Then('there should be search domain Child Programme being pre-selected', () => {
+Then('there should be search domain Child Programme being preselected', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
         .find('[data-test="dhis2-uicore-select-input"]')
         .contains('Child Programme')
@@ -77,6 +77,8 @@ When('you can close the modal', () => {
     cy.get('[data-test="dhis2-uicore-modal"]')
         .find('[data-test="dhis2-uicore-button"]')
         .click();
+    cy.get('[data-test="dhis2-uicore-modal"]')
+        .should('not.exist');
 });
 
 When('you fill in the unique identifier field with values that will return a tracked entity instance', () => {
@@ -124,12 +126,6 @@ And('you click search', () => {
         .find('[data-test="dhis2-uicore-button"]')
         .first()
         .click();
-});
-
-Then('there should be a success message', () => {
-    cy.get('h3')
-        .contains('Your search has given results.')
-        .should('exist');
 });
 
 When('you fill in the first name with values that will return an error', () => {
@@ -210,3 +206,54 @@ Then('you should be taken to the main page with program and org unit preselected
         .should('eq', `${Cypress.config().baseUrl}/#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
 });
 
+Then('you can see the first page of the results', () => {
+    cy.get('[data-test="dhis2-capture-search-results-top"]')
+        .should('exist');
+    cy.get('[data-test="dhis2-capture-search-results-list"]')
+        .should('exist');
+    cy.get('[data-test="dhis2-capture-card-list-item"]')
+        .should('have.length', 5);
+    cy.get('[data-test="dhis2-capture-search-results-pagination"]')
+        .contains('1-')
+        .should('exist');
+});
+
+
+When('you click the next page button', () => {
+    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+        .click();
+});
+
+When('you click the view dashboard button', () => {
+    cy.get('[data-test="dhis2-capture-view-dashboard-button"]')
+        .first()
+        .click();
+});
+
+Then('you can see the second page of the results', () => {
+    cy.get('[data-test="dhis2-capture-search-results-top"]')
+        .should('exist');
+    cy.get('[data-test="dhis2-capture-search-results-list"]')
+        .should('exist');
+    cy.get('[data-test="dhis2-capture-card-list-item"]')
+        .should('have.length', 4);
+    cy.get('[data-test="dhis2-capture-search-results-pagination"]')
+        .contains('6-')
+        .should('exist');
+});
+
+When('you click the previous page button', () => {
+    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
+        .click();
+});
+
+When('you remove the Child Programme selection', () => {
+    cy.get('button')
+        .find('[class*=ProgramSelector]')
+        .click();
+});
+
+Then('you still can see the Malaria case diagnosis being selected', () => {
+    cy.get('[data-test="dhis2-capture-search-page-content"]')
+        .contains('Malaria case diagnosis');
+});

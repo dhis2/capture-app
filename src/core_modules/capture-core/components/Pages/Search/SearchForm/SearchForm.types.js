@@ -1,5 +1,5 @@
 // @flow
-import type { SearchGroup } from '../SearchPage.types';
+import type { SearchGroups } from '../SearchPage.types';
 
 export type CurrentSearchTerms = Array<{|
   +name: string,
@@ -14,24 +14,11 @@ export type FormsValues = {
   }
 
 export type OwnProps = {|
-  +searchGroupsForSelectedScope: SearchGroup,
-  +selectedSearchScopeId?: string,
-  +classes: {|
-    +searchDomainSelectorSection: string,
-    +searchButtonContainer: string,
-    +searchRow: string,
-    +searchRowSelectElement: string,
-    +textInfo: string,
-    +textError: string,
-  |},
+  +searchGroupsForSelectedScope: SearchGroups,
+  +selectedSearchScopeId: ?string,
 |}
 
 export type PropsFromRedux ={|
-  +forms: {
-    [elementId: string]: {
-      loadNr: number
-    }
-  },
   +formsValues: FormsValues,
   +searchStatus: string,
   +isSearchViaAttributesValid: (minAttributesRequiredToSearch: number, formId: string)=> boolean,
@@ -43,6 +30,8 @@ export type DispatchersFromRedux = {|
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page?: string |}) => void,
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
   saveCurrentFormData: (searchScopeType: string, searchScopeId: string, formId: string, formsValues: FormsValues) => void,
+  removeFormDataFromReduxStore: () => void,
+  addFormIdToReduxStore: (formId: string) => void,
 |}
 
 export type Props = {|
