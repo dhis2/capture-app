@@ -78,7 +78,7 @@ const Index = ({
       (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
     const handleSearchScopeSelection = ({ value, label }) => {
-        dispatchShowInitialSearchPage();
+        showInitialSearchPage();
         setSelectedSearchScope({ value, label });
     };
 
