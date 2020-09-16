@@ -15,6 +15,7 @@ import {
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
+import { isObject, isString } from 'd2-utilizr/src';
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
@@ -36,10 +37,28 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
         catchError(() => of(showErrorViewOnSearchPage())),
     );
 
-const getFiltersForAttributesSearchQuery = formValues =>
-    Object.keys(formValues)
+const getFiltersForAttributesSearchQuery = (formValues) => {
+    const stringFilters = Object.keys(formValues)
+        .filter(fieldId => isString(formValues[fieldId]))
         .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
         .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
+
+    const dateFilers = Object.keys(formValues)
+        .filter(fieldId => isObject(formValues[fieldId]))
+        .filter(fieldId => Object.values(formValues[fieldId]).some(formValue => formValue))
+        .map((fieldId) => {
+            let queryString = `${fieldId}`;
+            if (formValues[fieldId].from) {
+                queryString = `${queryString}:ge:${formValues[fieldId].from}`;
+            }
+            if (formValues[fieldId].to) {
+                queryString = `${queryString}:le:${formValues[fieldId].to}`;
+            }
+            return queryString;
+        });
+
+    return [...stringFilters, ...dateFilers];
+};
 
 
 const searchViaAttributesStream = (queryArgs, attributes) =>

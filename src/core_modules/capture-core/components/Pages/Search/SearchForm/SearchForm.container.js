@@ -1,6 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import type { ComponentType } from 'react';
+import { isObject, isString } from 'd2-utilizr/src';
 import { SearchFormComponent } from './SearchForm.component';
 import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
 import {
@@ -13,7 +14,23 @@ import {
 import { actionCreator } from '../../../../actions/actions.utils';
 import { addFormData, removeFormData } from '../../../D2Form/actions/form.actions';
 
-const isValueContainingCharacter = string => string.replace(/\s/g, '').length;
+
+const isValueContainingCharacter = (value: any) => {
+    if (!value) {
+        return false;
+    }
+    if (isString(value)) {
+        return Boolean(value.replace(/\s/g, '').length);
+    }
+    if (isObject(value)) {
+        return Object.values(value)
+            .filter(v => isString(v))
+            // $FlowFixMe
+            .filter(v => Boolean(v.replace(/\s/g, '').length))
+            .some(item => item === true);
+    }
+    return true;
+};
 
 const collectCurrentSearchTerms = (searchGroupsForSelectedScope, formsValues): CurrentSearchTerms => {
     const { searchForm: attributeSearchForm, formId } = searchGroupsForSelectedScope
@@ -54,7 +71,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
               Object.keys(formValues)
                   .filter((key) => {
                       const value = formValues[key];
-                      return value && isValueContainingCharacter(value);
+                      return isValueContainingCharacter(value);
                   })
                   .length;
 
