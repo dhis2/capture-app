@@ -29,7 +29,16 @@ msgid ""
 "this version again, but be aware that this will close other versions."
 msgstr ""
 
+msgid "Date"
+msgstr ""
+
 msgid "Last updated"
+msgstr ""
+
+msgid "Enrolled"
+msgstr ""
+
+msgid "Previously enrolled"
 msgstr ""
 
 msgid "Not enrolled"
@@ -822,9 +831,6 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
-
-msgid "Date"
 msgstr ""
 
 msgid "Time"

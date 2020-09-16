@@ -6,7 +6,7 @@ import { elementTypes } from '../../metaData/DataElement';
 const elementsSelector = dataElements => dataElements;
 
 // $FlowFixMe[missing-annot] automated comment
-const makeElementsContainerSelector = () => createSelector(
+export const makeElementsContainerSelector = () => createSelector(
     elementsSelector,
     (elements) => {
         // $FlowFixMe[prop-missing] automated comment
@@ -22,4 +22,3 @@ const makeElementsContainerSelector = () => createSelector(
         };
     });
 
-export default makeElementsContainerSelector;

@@ -9,11 +9,12 @@ import { colors, Tag } from '@dhis2/ui-core';
 import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import type { DataElement } from '../../metaData';
 import { availableCardListButtonState, enrollmentStatuses } from './CardList.constants';
+import { ListEntry } from './ListEntry.component';
 
 type OwnProps = $ReadOnly<{|
     programName: string,
     item: SearchResultItem,
-    enrollmentStatus: $Keys<typeof enrollmentStatuses>,
+    currentProgramId?: string,
     getCustomTopElements?: ?(props: Object) => Element<any>,
     getCustomBottomElements?: ?(props: Object, availableCardListButtonsState: $Keys<typeof availableCardListButtonState>, programName: string) => Element<any>,
     imageDataElement: DataElement,
@@ -34,7 +35,7 @@ const selectAvailableButtonState = (status) => {
 
 const getStyles = (theme: Theme) => ({
     itemContainer: {
-        width: theme.typography.pxToRem(600),
+        maxWidth: theme.typography.pxToRem(600),
         display: 'flex',
         flexDirection: 'column',
         margin: theme.typography.pxToRem(8),
@@ -46,7 +47,7 @@ const getStyles = (theme: Theme) => ({
     itemDataContainer: {
         display: 'flex',
     },
-    lastUpdated: {
+    smallerLetters: {
         fontSize: theme.typography.pxToRem(12),
         color: colors.grey700,
         paddingBottom: theme.typography.pxToRem(8),
@@ -56,23 +57,10 @@ const getStyles = (theme: Theme) => ({
         justifyContent: 'flex-end',
         color: colors.grey700,
     },
-    elementName: {
-        fontSize: theme.typography.pxToRem(13),
-        color: colors.grey700,
-
-    },
-    elementValue: {
-        fontSize: theme.typography.pxToRem(14),
-        color: colors.grey900,
-        fontWeight: 500,
-    },
     itemValuesContainer: {
         display: 'flex',
         flexWrap: 'wrap',
         flexGrow: 1,
-    },
-    value: {
-        paddingBottom: theme.typography.pxToRem(4),
     },
     image: {
         width: theme.typography.pxToRem(44),
@@ -83,31 +71,68 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const CardListItemIndex = (props: OwnProps & CssClasses) => {
-    const renderImageDataElement = (imageDataElement: DataElement) => {
-        const { item, classes } = props;
-        const imageValue = item.values[imageDataElement.id];
+
+const deriveEnrollmentType =
+  (enrollments, currentProgramId): $Keys<typeof enrollmentTypes> => {
+      if (!currentProgramId) {
+          return enrollmentTypes.DONT_SHOW_TAG;
+      }
+
+      const enrollmentsInCurrentProgram = enrollments
+          .filter(({ program }) => program === currentProgramId)
+          .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
+
+
+      const { ACTIVE, CANCELLED, COMPLETED, NOT_ENROLLED } = enrollmentTypes;
+      if (enrollmentsInCurrentProgram.find(({ status }) => status === ACTIVE)) {
+          return ACTIVE;
+      } else if (enrollmentsInCurrentProgram.find(({ status }) => status === COMPLETED)) {
+          return COMPLETED;
+      } else if (enrollmentsInCurrentProgram.find(({ status }) => status === CANCELLED)) {
+          return CANCELLED;
+      }
+      return NOT_ENROLLED;
+  };
+
+const deriveEnrollmentOrgUnitAndDate =
+  (enrollments, enrollmentType, currentProgramId): {orgUnitName?: string, enrollmentDate?: string} => {
+      if (!currentProgramId) {
+          return {};
+      }
+
+      const { orgUnitName, enrollmentDate } = enrollments
+          .filter(({ program }) => program === currentProgramId)
+          .filter(({ status }) => status === enrollmentType)
+          .sort((a, b) => moment.utc(a.lastUpdated).diff(moment.utc(b.lastUpdated)))[0];
+
+      return { orgUnitName, enrollmentDate };
+  };
+
+
+const CardListItemIndex = ({
+    item,
+    classes,
+    imageDataElement,
+    getCustomTopElements,
+    getCustomBottomElements,
+    dataElements,
+    currentProgramId,
+}: OwnProps & CssClasses) => {
+    const renderImageDataElement = (imageElement: DataElement) => {
+        const imageValue = item.values[imageElement.id];
         return (
             <div className={classes.imageContainer}>
                 {imageValue && <Avatar src={imageValue.url} alt={imageValue.name} className={classes.image} />}
             </div>
         );
     };
-
-    const {
-        item,
-        classes,
-        imageDataElement,
-        getCustomTopElements,
-        getCustomBottomElements,
-        enrollmentStatus,
-        dataElements,
-        programName,
-    } = props;
+    const enrollments = item.tei ? item.tei.enrollments : [];
+    const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
+    const { orgUnitName, enrollmentDate } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
 
     return (
         <div data-test="dhis2-capture-card-list-item" className={classes.itemContainer}>
-            {getCustomTopElements && getCustomTopElements(props)}
+            {getCustomTopElements && getCustomTopElements({ item })}
             <div className={classes.itemDataContainer}>
 
                 <div className={classes.itemValuesContainer}>
@@ -118,33 +143,35 @@ const CardListItemIndex = (props: OwnProps & CssClasses) => {
                                 {renderImageDataElement(imageDataElement)}
                             </Grid>
                         }
-                        <Grid item xs={12} sm container>
+                        <Grid item xs={16} sm container>
                             <Grid item xs container direction="column" spacing={2}>
                                 {
                                     dataElements.map(element => (
-                                        <Grid item xs>
-                                            <div key={element.id} className={classes.value}>
-                                                <span className={classes.elementName}>
-                                                    {element.name}:&nbsp;
-                                                </span>
-                                                <span className={classes.elementValue}>
-                                                    {item.values[element.id]}
-                                                </span>
-                                            </div>
-                                        </Grid>
+                                        <ListEntry key={element.id} name={element.name} value={item.values[element.id]} />
                                     ))
                                 }
+                                {
+                                    orgUnitName &&
+                                    <ListEntry name={i18n.t('Organisation unit: ')} value={orgUnitName} />
+                                }
+
+                                {
+                                    enrollmentDate &&
+                                    <ListEntry name={i18n.t('Date')} value={moment(enrollmentDate).format('L')} />
+                                }
+
                             </Grid>
                             <Grid item>
                                 {
                                     item.tei && item.tei.lastUpdated &&
-                                    <div className={classes.lastUpdated}>
+                                    <div className={classes.smallerLetters}>
                                         { i18n.t('Last updated') } {item.tei && moment(item.tei.lastUpdated).fromNow()}
                                     </div>
                                 }
+
                                 <div className={classes.enrolled}>
                                     {
-                                        (enrollmentStatus === enrollmentStatuses.ACTIVE) &&
+                                        (enrollmentType === enrollmentTypes.ACTIVE) &&
                                         <Tag
                                             dataTest="dhis2-uicore-tag"
                                             positive
@@ -159,42 +186,33 @@ const CardListItemIndex = (props: OwnProps & CssClasses) => {
                                                 />
                                             }
                                         >
-                                            {i18n.t('Enrolled: Active')}
+                                            {i18n.t('Enrolled')}
                                         </Tag>
                                     }
 
                                     {
-                                        (enrollmentStatus === enrollmentStatuses.CANCELLED) &&
-                                        <Tag
-                                            dataTest="dhis2-uicore-tag"
-                                            neutral
-                                        >
-                                            {i18n.t('Enrolled: Canceled')}
-                                        </Tag>
+                                        (enrollmentType === enrollmentTypes.CANCELLED ||
+                                          enrollmentType === enrollmentTypes.COMPLETED) &&
+                                          <Tag
+                                              dataTest="dhis2-uicore-tag"
+                                              neutral
+                                              icon={
+                                                  <DoneIcon
+                                                      style={{
+                                                          transformBox: 'view-box',
+                                                          fontSize: 14,
+                                                          position: 'relative',
+                                                          top: '-1px',
+                                                      }}
+                                                  />
+                                              }
+                                          >
+                                              {i18n.t('Previously enrolled')}
+                                          </Tag>
                                     }
 
                                     {
-                                        (enrollmentStatus === enrollmentStatuses.COMPLETED) &&
-                                        <Tag
-                                            dataTest="dhis2-uicore-tag"
-                                            neutral
-                                            icon={
-                                                <DoneIcon
-                                                    style={{
-                                                        transformBox: 'view-box',
-                                                        fontSize: 14,
-                                                        position: 'relative',
-                                                        top: '-1px',
-                                                    }}
-                                                />
-                                            }
-                                        >
-                                            {i18n.t('Enrolled: Completed')}
-                                        </Tag>
-                                    }
-
-                                    {
-                                        (enrollmentStatus === enrollmentStatuses.NOT_ENROLLED) &&
+                                        (enrollmentType === enrollmentTypes.NOT_ENROLLED) &&
                                         <Tag dataTest="dhis2-uicore-tag">
                                             {i18n.t('Not enrolled')}
                                         </Tag>
