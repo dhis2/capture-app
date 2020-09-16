@@ -14,6 +14,7 @@ import {
     convertFormToClient,
     convertClientToList,
 } from '../../../../../converters';
+import { displayFormTypeofValue } from '../../../../../utils/displayRangeTypeofValue';
 
 const formToListConverterFn = pipe(
     convertFormToClient,
@@ -123,10 +124,9 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
             .map((key) => {
                 const element = searchForm.getElement(key);
                 const value = searchValues[key];
-                const listValue = element.convertValue(value, formToListConverterFn);
                 return (
                     <span key={key}>
-                        {element.formName}: {listValue}
+                        <i>{element.formName}</i>: <b>{displayFormTypeofValue(value)}</b>
                     </span>
                 );
             }).reduce((accValues, value) => {
