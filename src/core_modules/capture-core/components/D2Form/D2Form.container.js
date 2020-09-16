@@ -15,6 +15,6 @@ const mapStateToProps = (state: ReduxState, ownProps: OwnProps): PropsFromRedux 
 
 export const D2Form: ComponentType<OwnProps> =
   compose(
-      connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(mapStateToProps, () => {}),
+      connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(mapStateToProps, () => ({})),
       withAsyncHandler(),
   )(D2FormComponent);
