@@ -54,8 +54,8 @@ const getStyles = (theme: Theme) => ({
 });
 
 const Index = ({
-    dispatchShowInitialSearchPage,
-    dispatchNavigateToMainPage,
+    showInitialSearchPage,
+    navigateToMainPage,
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
     availableSearchOptions,
@@ -66,12 +66,12 @@ const Index = ({
 
     useEffect(() => {
         if (!preselectedProgram.value) {
-            dispatchShowInitialSearchPage();
+            showInitialSearchPage();
         }
     },
     [
         preselectedProgram.value,
-        dispatchShowInitialSearchPage,
+        showInitialSearchPage,
     ]);
 
     const searchGroupsForSelectedScope =
@@ -88,7 +88,7 @@ const Index = ({
             <Button
                 dataTest="dhis2-capture-back-button"
                 className={classes.backButton}
-                onClick={dispatchNavigateToMainPage}
+                onClick={navigateToMainPage}
             >
                 <ChevronLeft />
                 {i18n.t('Back')}
@@ -123,7 +123,7 @@ const Index = ({
                                 <ButtonStrip end>
                                     <Button
                                         disabled={searchStatus === searchPageStatus.LOADING}
-                                        onClick={dispatchShowInitialSearchPage}
+                                        onClick={showInitialSearchPage}
                                         type="button"
                                     >
                                         {i18n.t('Back to search')}
