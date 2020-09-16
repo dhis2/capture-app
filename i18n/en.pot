@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-09-11T13:31:01.737Z\n"
-"PO-Revision-Date: 2020-09-11T13:31:01.737Z\n"
+"POT-Creation-Date: 2020-09-16T06:47:35.665Z\n"
+"PO-Revision-Date: 2020-09-16T06:47:35.665Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -29,7 +29,16 @@ msgid ""
 "this version again, but be aware that this will close other versions."
 msgstr ""
 
+msgid "Date"
+msgstr ""
+
 msgid "Last updated"
+msgstr ""
+
+msgid "Enrolled"
+msgstr ""
+
+msgid "Previously enrolled"
 msgstr ""
 
 msgid "Not enrolled"
@@ -813,9 +822,6 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
-
-msgid "Date"
 msgstr ""
 
 msgid "Time"
