@@ -12,4 +12,4 @@ const mapStateToProps = (state: Object) => ({
 
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, null)(QuickSelector);
+export default connect(mapStateToProps, () => ({}))(QuickSelector);

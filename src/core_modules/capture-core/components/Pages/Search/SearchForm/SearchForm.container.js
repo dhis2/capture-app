@@ -91,14 +91,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps): Dispat
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
     removeFormDataFromReduxStore: () => {
         ownProps.searchGroupsForSelectedScope
-            .forEach(({ formId, searchForm }) => {
+            .forEach(({ formId }) => {
                 dispatch(removeFormData(formId));
-
-                Array.from(searchForm.sections.entries())
-                    .map(entry => entry[1])
-                    .forEach(({ id }) => {
-                        dispatch(removeFormData(`${formId}-${id}`));
-                    });
             });
     },
 });
