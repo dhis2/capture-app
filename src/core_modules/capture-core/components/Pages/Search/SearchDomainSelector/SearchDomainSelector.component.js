@@ -1,5 +1,6 @@
 // @flow
 import React, { useMemo } from 'react';
+import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
@@ -7,7 +8,7 @@ import {
     SingleSelectOption,
 } from '@dhis2/ui-core';
 import { Section, SectionHeaderSimple } from '../../../Section';
-import type { Props } from './SearchDomainSelector.types';
+import type { OwnProps, Props } from './SearchDomainSelector.types';
 
 const styles = (theme: Theme) => ({
     searchDomainSelectorSection: {
@@ -41,12 +42,12 @@ export const Index =
           header={
               <SectionHeaderSimple
                   containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                  title={i18n.t('Search')}
+                  title={i18n.t('Search scope')}
               />
           }
       >
           <div className={classes.searchRow} style={{ padding: '8px 0' }}>
-              <div className={classes.searchRowTitle}>Search for</div>
+              <div className={classes.searchRowTitle}>{ i18n.t('Find results from') }</div>
               <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
                   <SingleSelect
                       onChange={({ selected }) => { onSelect(selected); }}
@@ -84,4 +85,4 @@ export const Index =
       </Section>
       );
 
-export const SearchDomainSelectorComponent = withStyles(styles)(Index);
+export const SearchDomainSelector: ComponentType<OwnProps> = withStyles(styles)(Index);

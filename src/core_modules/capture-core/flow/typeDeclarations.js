@@ -190,3 +190,7 @@ declare class process {
         REACT_APP_DHIS2_API_VERSION: string,
     }
 }
+
+declare type CssClasses = {|
+    +classes: Object,
+|};

@@ -20,7 +20,7 @@ import { searchPageStatus } from '../../../reducers/descriptions/searchPage.redu
 import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
-import { SearchDomainSelectorComponent } from './SearchDomainSelector';
+import { SearchDomainSelector } from './SearchDomainSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
 const getStyles = (theme: Theme) => ({
@@ -61,7 +61,6 @@ const Index = ({
     availableSearchOptions,
     preselectedProgram,
     searchStatus,
-    generalPurposeErrorMessage,
 }: Props) => {
     const [selectedSearchScope, setSelectedSearchScope] = useState(() => preselectedProgram);
 
@@ -78,9 +77,9 @@ const Index = ({
     const searchGroupsForSelectedScope =
       (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
-    const handleSearchScopeSelection = (program) => {
-        showInitialSearchPage();
-        setSelectedSearchScope(program);
+    const handleSearchScopeSelection = ({ value, label }) => {
+        dispatchShowInitialSearchPage();
+        setSelectedSearchScope({ value, label });
     };
 
     return (<>
@@ -97,7 +96,7 @@ const Index = ({
 
             <Paper className={classes.paper}>
                 <div className={classes.maxWidth}>
-                    <SearchDomainSelectorComponent
+                    <SearchDomainSelector
                         trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                         onSelect={handleSearchScopeSelection}
                         selectedSearchScope={selectedSearchScope}
@@ -116,8 +115,10 @@ const Index = ({
                     {
                         searchStatus === searchPageStatus.NO_RESULTS &&
                         <Modal position="middle">
-                            <ModalTitle>Empty results</ModalTitle>
-                            <ModalContent>There was no item found</ModalContent>
+                            <ModalTitle>{i18n.t('No results found')}</ModalTitle>
+                            <ModalContent>
+                                {i18n.t('You can change your search terms and search again to find what you are looking for.')}
+                            </ModalContent>
                             <ModalActions>
                                 <ButtonStrip end>
                                     <Button
@@ -125,7 +126,7 @@ const Index = ({
                                         onClick={showInitialSearchPage}
                                         type="button"
                                     >
-                                        Search Again
+                                        {i18n.t('Back to search')}
                                     </Button>
                                 </ButtonStrip>
                             </ModalActions>
@@ -145,7 +146,7 @@ const Index = ({
                             data-test="dhis2-capture-general-purpose-error-mesage"
                             className={classes.generalPurposeErrorMessage}
                         >
-                            {generalPurposeErrorMessage}
+                            {i18n.t('There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools')}
                         </div>
                     }
                 </div>

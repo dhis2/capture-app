@@ -1,5 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
+import type { ComponentType } from 'react';
 import { SearchFormComponent } from './SearchForm.component';
 import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
 import {
@@ -10,7 +11,7 @@ import {
     searchViaUniqueIdOnScopeTrackedEntityType,
 } from '../SearchPage.actions';
 import { actionCreator } from '../../../../actions/actions.utils';
-import { addFormData } from '../../../D2Form/actions/form.actions';
+import { addFormData, removeFormData } from '../../../D2Form/actions/form.actions';
 
 const isValueContainingCharacter = string => string.replace(/\s/g, '').length;
 
@@ -37,7 +38,6 @@ const collectCurrentSearchTerms = (searchGroupsForSelectedScope, formsValues): C
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const {
-        forms,
         formsValues,
         searchPage: {
             searchStatus,
@@ -46,7 +46,6 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
 
 
     return {
-        forms,
         formsValues,
         searchStatus,
         isSearchViaAttributesValid: (minAttributesRequiredToSearch, formId) => {
@@ -90,8 +89,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps): Dispat
             }));
     },
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
+    removeFormDataFromReduxStore: () => {
+        ownProps.searchGroupsForSelectedScope
+            .forEach(({ formId }) => {
+                dispatch(removeFormData(formId));
+            });
+    },
 });
 
 
-export const SearchForm =
+export const SearchForm: ComponentType<OwnProps> =
   connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(SearchFormComponent);

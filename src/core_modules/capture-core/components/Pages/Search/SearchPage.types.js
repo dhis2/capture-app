@@ -39,14 +39,13 @@ export type ContainerProps = $ReadOnly<{|
   availableSearchOptions: AvailableSearchOptions,
   preselectedProgram: SelectedSearchScope,
   searchStatus: string,
-  generalPurposeErrorMessage: string,
   error: boolean,
   ready: boolean,
 |}
 >
 
 export type Props = {|
-  +classes: Object,
+  ...CssClasses,
   ...ContainerProps
 |}
 
