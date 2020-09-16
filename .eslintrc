@@ -22,6 +22,7 @@
     },
     "globals": {
         "cy": true,
+        "before": true,
         "document": true,
         "window": true,
         "it": true,

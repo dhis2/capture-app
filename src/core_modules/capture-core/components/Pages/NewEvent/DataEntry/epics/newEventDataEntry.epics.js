@@ -83,7 +83,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            lockedSelectorActionTypes.NEW_EVENT_OPEN,
+            lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN,
             lockedSelectorActionTypes.PROGRAM_ID_SET,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
@@ -138,7 +138,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            lockedSelectorActionTypes.NEW_EVENT_OPEN,
+            lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             lockedSelectorActionTypes.PROGRAM_ID_SET,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
