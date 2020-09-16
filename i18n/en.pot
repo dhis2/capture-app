@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-09-16T06:47:35.665Z\n"
-"PO-Revision-Date: 2020-09-16T06:47:35.665Z\n"
+"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"PO-Revision-Date: 2020-09-16T10:01:51.572Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -27,9 +27,6 @@ msgid ""
 "Currently, the Capture App only supports running one version concurrently "
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
-msgstr ""
-
-msgid "Date"
 msgstr ""
 
 msgid "Last updated"
@@ -819,6 +816,9 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
+msgstr ""
+
+msgid "Date"
 msgstr ""
 
 msgid "Time"
