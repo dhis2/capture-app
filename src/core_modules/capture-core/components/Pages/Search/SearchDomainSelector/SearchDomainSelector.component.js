@@ -1,5 +1,6 @@
 // @flow
 import React, { useMemo } from 'react';
+import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
@@ -7,7 +8,7 @@ import {
     SingleSelectOption,
 } from '@dhis2/ui-core';
 import { Section, SectionHeaderSimple } from '../../../Section';
-import type { Props } from './SearchDomainSelector.types';
+import type { OwnProps, Props } from './SearchDomainSelector.types';
 
 const styles = (theme: Theme) => ({
     searchDomainSelectorSection: {
@@ -84,4 +85,4 @@ export const Index =
       </Section>
       );
 
-export const SearchDomainSelectorComponent = withStyles(styles)(Index);
+export const SearchDomainSelector: ComponentType<OwnProps> = withStyles(styles)(Index);

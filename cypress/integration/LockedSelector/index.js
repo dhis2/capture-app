@@ -19,19 +19,19 @@ Then('you should see informative text saying you should do finish your selection
         .should('exist');
 });
 
-Given('you are in the main page with organisation unit pre-selected', () => {
+Given('you are in the main page with organisation unit preselected', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
     cy.get('[data-test="dhis2-capture-new-button"]')
         .should('exist');
 });
 
-Given('you are in the main page with program unit pre-selected', () => {
+Given('you are in the main page with program unit preselected', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
     cy.get('[data-test="dhis2-capture-new-button"]')
         .should('exist');
 });
 
-Given('you select both org unit and program', () => {
+Given('you select both org unit and program Malaria case registration', () => {
     cy.get('[data-test="capture-ui-input"]')
         .type('Ngelehun C');
     cy.contains('Ngelehun CHC')
@@ -43,6 +43,20 @@ Given('you select both org unit and program', () => {
     cy.contains('Malaria case registration')
         .click();
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
+});
+
+Given('you select both org unit and program Child Programme', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .type('Ngelehun C');
+    cy.contains('Ngelehun CHC')
+        .click();
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/orgUnitId=DiszpKrYNg8`);
+
+    cy.get('.Select')
+        .type('Child Program');
+    cy.contains('Child Programme')
+        .click();
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
 });
 
 When('you click the "Start again" button', () => {
@@ -188,4 +202,37 @@ Then('you should be taken to the main page with only program selected', () => {
 
 Given('you land on a view event page with an invalid id', () => {
     cy.visit('/#/viewEvent/invalid');
+});
+
+When('you click the find button', () => {
+    cy.get('[data-test="dhis2-capture-find-button"]')
+        .click();
+});
+
+Then('you are navigated to the search page with the same org unit and program Malaria case registration', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/search/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
+});
+
+Then('you are navigated to the search page with the same org unit and program Child Programme', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/search/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
+});
+
+And('there should be search domain Child Programme being preselected', () => {
+    cy.get('[data-test="dhis2-capture-search-page-content"]')
+        .find('[data-test="dhis2-uicore-select-input"]')
+        .contains('Child Programme')
+        .should('exist');
+});
+
+And('there should be Child Programme domain forms visible to search with', () => {
+    cy.get('[data-test="dhis2-capture-search-page-content"]')
+        .find('[data-test="capture-ui-input"]')
+        .should('have.length', 1);
+});
+
+Then('there should be no search domain preselected', () => {
+    cy.get('[data-test="dhis2-uicore-select-input"]')
+        .should('exist');
+    cy.get('[data-test="dhis2-capture-informative-paper"]')
+        .should('exist');
 });

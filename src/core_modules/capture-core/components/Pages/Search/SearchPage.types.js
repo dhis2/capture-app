@@ -45,7 +45,7 @@ export type ContainerProps = $ReadOnly<{|
 >
 
 export type Props = {|
-  +classes: Object,
+  ...CssClasses,
   ...ContainerProps
 |}
 

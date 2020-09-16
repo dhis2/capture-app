@@ -8,24 +8,24 @@ Feature: In the main page, use the LockedSelector to navigate
     Then you should see informative text saying you should do finish your selections
 
   Scenario: Notifying that you need to select a program to get started
-    Given you are in the main page with organisation unit pre-selected
+    Given you are in the main page with organisation unit preselected
     When you click the "New" button to add a new event
     Then you should see informative text saying you should do finish your selections
 
   Scenario: Notifying that you need to select an org unit to get started
-    Given you are in the main page with program unit pre-selected
+    Given you are in the main page with program unit preselected
     When you click the "New" button to add a new event
     Then you should see informative text saying you should do finish your selections
 
   Scenario: Clicking start again takes you to the main page
     Given you are in the main page with no selections made
-    And you select both org unit and program
+    And you select both org unit and program Malaria case registration
     When you click the "Start again" button
     Then you should be taken to the main page
 
   Scenario: Selecting org unit and program and seeing table
     Given you are in the main page with no selections made
-    When you select both org unit and program
+    When you select both org unit and program Malaria case registration
     Then you should see the table
 
   Scenario: Landing on main page with with invalid program id
@@ -52,7 +52,7 @@ Feature: In the main page, use the LockedSelector to navigate
 
   Scenario: Landing on the new event page
     Given you are in the main page with no selections made
-    When you select both org unit and program
+    When you select both org unit and program Malaria case registration
     And you click the "New" button to add a new event
     Then you can see the new event page
 
@@ -89,27 +89,27 @@ Feature: In the main page, use the LockedSelector to navigate
 
   Scenario: Selecting the first entry of the events
     Given you are in the main page with no selections made
-    And you select both org unit and program
+    And you select both org unit and program Malaria case registration
     When you select the first entity from the table
     Then you can see the view event page
 
   Scenario: Clicking the start again button after you have been navigated to a vew event page
     Given you are in the main page with no selections made
-    And you select both org unit and program
+    And you select both org unit and program Malaria case registration
     When you select the first entity from the table
     And you click the "Start again" button
     Then you should be taken to the main page
 
   Scenario: Removing the program selection after you have been navigated to a vew event page
     Given you are in the main page with no selections made
-    And you select both org unit and program
+    And you select both org unit and program Malaria case registration
     And you select the first entity from the table
     When you remove the program selection
     Then you should be taken to the main page with only org unit selected
 
   Scenario: Removing the org unit selection after you have been navigated to a vew event page
     Given you are in the main page with no selections made
-    And you select both org unit and program
+    And you select both org unit and program Malaria case registration
     And you select the first entity from the table
     When you remove the org unit selection
     Then you should be taken to the main page with only program selected
@@ -117,3 +117,18 @@ Feature: In the main page, use the LockedSelector to navigate
   Scenario: Landing on view event page with invalid id
     Given you land on a view event page with an invalid id
     Then you should see error message
+
+  Scenario: Clicking the find button when the preselected program is not an available search domain
+    Given you are in the main page with no selections made
+    And you select both org unit and program Malaria case registration
+    When you click the find button
+    Then you are navigated to the search page with the same org unit and program Malaria case registration
+    And there should be no search domain preselected
+
+  Scenario: Clicking the find button when the preselected program can be a search domain
+    Given you are in the main page with no selections made
+    And you select both org unit and program Child Programme
+    When you click the find button
+    Then you are navigated to the search page with the same org unit and program Child Programme
+    And there should be search domain Child Programme being preselected
+    And there should be Child Programme domain forms visible to search with
