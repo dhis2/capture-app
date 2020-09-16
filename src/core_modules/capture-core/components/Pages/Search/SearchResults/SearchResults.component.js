@@ -1,18 +1,17 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { Pagination } from 'capture-ui';
 import { Button } from '@dhis2/ui-core';
 import CardList from '../../../CardList/CardList.component';
 import withNavigation from '../../../Pagination/withDefaultNavigation';
-import { searchScopes } from '../SearchPage.container';
+import { searchScopes } from '../SearchPage.constants';
 import type { Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 
 const SearchPagination = withNavigation()(Pagination);
 
-const getStyles = (theme: Theme) => ({
+export const getStyles = (theme: Theme) => ({
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
@@ -21,7 +20,10 @@ const getStyles = (theme: Theme) => ({
     topSection: {
         display: 'flex',
         flexDirection: 'row',
-        margin: theme.typography.pxToRem(10),
+        marginTop: theme.typography.pxToRem(20),
+        marginLeft: theme.typography.pxToRem(10),
+        marginRight: theme.typography.pxToRem(10),
+        marginBottom: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
         backgroundColor: theme.palette.grey.lighter,
     },
@@ -31,7 +33,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 
-export const Index = ({
+export const SearchResultsComponent = ({
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
     classes,
@@ -108,5 +110,3 @@ export const Index = ({
         </div>
     </>);
 };
-
-export const SearchResultsComponent = withStyles(getStyles)(Index);
