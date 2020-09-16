@@ -26,11 +26,11 @@ Then('there should be Person domain forms available to search with', () => {
         .should('have.length', 1);
 });
 
-Given('you are in the search page with the Child Programme being pre-selected from the url', () => {
+Given('you are in the search page with the Child Programme being preselected from the url', () => {
     cy.visit('/#/search/programId=IpHINAT79UW');
 });
 
-Then('there should be search domain Child Programme being pre-selected', () => {
+Then('there should be search domain Child Programme being preselected', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
         .find('[data-test="dhis2-uicore-select-input"]')
         .contains('Child Programme')
