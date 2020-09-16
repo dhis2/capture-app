@@ -17,9 +17,6 @@ type Props = {
 };
 
 class ListPagination extends React.Component<Props> {
-    getPaginationLabelDisplayedRows =
-        (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`;
-
     handleChangePage = (pageNumber: number) => {
         this.props.onChangePage(this.props.listId, pageNumber);
     }
@@ -37,7 +34,6 @@ class ListPagination extends React.Component<Props> {
                 onChangePage={this.handleChangePage}
                 onChangeRowsPerPage={this.handleChangeRowsPerPage}
                 rowsCountSelectorLabel={i18n.t('Rows per page')}
-                onGetLabelDisplayedRows={this.getPaginationLabelDisplayedRows}
             />
         );
     }

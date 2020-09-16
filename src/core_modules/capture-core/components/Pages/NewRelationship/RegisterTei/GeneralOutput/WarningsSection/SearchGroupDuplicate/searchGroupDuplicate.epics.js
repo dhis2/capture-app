@@ -71,7 +71,6 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 ouMode: 'ACCESSIBLE',
                 pageSize: 5,
                 page: requestPage,
-                totalPages: !isChangePage,
                 filter: filters,
                 ...contextParam,
             };

@@ -9,7 +9,7 @@ import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScope
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const {
         searchResults,
-        searchResultsPaginationInfo: { rowsCount, currentPage, rowsPerPage },
+        searchResultsPaginationInfo: { currentPage, rowsPerPage },
         currentSearchInfo: {
             searchScopeType: currentSearchScopeType,
             searchScopeId: currentSearchScopeId,
@@ -19,7 +19,6 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     } = state.searchPage;
 
     return {
-        rowsCount,
         currentPage,
         rowsPerPage,
         searchResults,

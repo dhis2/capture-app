@@ -40,7 +40,7 @@ const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) =>
 const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>
     (programId ? { program: programId } : { trackedEntityType: trackedEntityTypeId });
 
-const getPagingQueryArgs = (pageNumber: ?number) => (pageNumber ? { page: pageNumber, pageSize: 5 } : { pageSize: 5 });
+const getPagingQueryArgs = (pageNumber: ?number = 1) => ({ page: pageNumber, pageSize: 5 });
 
 
 const searchTei = (state: ReduxState, searchId: string, formId: string, searchGroupId: any, pageNumber?: ?number) => {
@@ -76,6 +76,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
 
     };
 
+    debugger;
     const attributes = selectedProgramId ?
         getTrackerProgram(selectedProgramId).attributes :
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;

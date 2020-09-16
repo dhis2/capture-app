@@ -89,7 +89,6 @@ export const SearchResultsIndex = ({
     classes,
     searchResults,
     searchGroupsForSelectedScope,
-    rowsCount,
     rowsPerPage,
     currentPage,
     currentSearchScopeType,
@@ -123,8 +122,7 @@ export const SearchResultsIndex = ({
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : undefined;
     return (<>
         <div data-test="dhis2-capture-search-results-top" className={classes.topSection} >
-            <b>{rowsCount}</b>
-            &nbsp;{i18n.t('result(s) found for term(s)')}
+            &nbsp;{i18n.t('Results found for term(s)')}
             &nbsp;{currentSearchTerms.map(({ name, value, id }, index, rest) => (
                 <div key={id}>
                     <i>{name}</i>: <b>{value}</b>
@@ -152,7 +150,6 @@ export const SearchResultsIndex = ({
         <div data-test="dhis2-capture-search-results-pagination" className={classes.pagination}>
             <SearchPagination
                 onChangePage={newPage => handlePageChange(newPage)}
-                rowsCount={rowsCount}
                 rowsPerPage={rowsPerPage}
                 currentPage={currentPage}
             />

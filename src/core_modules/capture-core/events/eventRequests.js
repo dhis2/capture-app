@@ -151,7 +151,6 @@ export async function getEvents(queryParams: ?Object) {
         url: 'events',
         queryParams: {
             ...queryParams,
-            totalPages: true,
         },
     };
     const apiRes = await api
