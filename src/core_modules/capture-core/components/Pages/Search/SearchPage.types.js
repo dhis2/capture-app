@@ -1,62 +1,51 @@
 // @flow
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+import type { RenderFoundation } from '../../../metaData';
 
+export type SearchGroups = Array<{|
+  +searchForm: RenderFoundation,
+  +unique: boolean,
+  +formId: string,
+  +searchScope: string,
+  +minAttributesRequiredToSearch: number
+|}>
 
-export type AvailableSearchOptions = {
-  [elementId: string]: {|
-    +searchOptionId: string,
-    +searchOptionName: string,
-    +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string, searchScope: string|}>
-  |}
-}
-export type OwnProps = {|
-  +classes: {|
-    +container: string,
-    +header: string,
-    +paper: string,
-    +customEmpty: string,
-    +groupTitle: string,
-    +searchDomainSelectorSection: string,
-    +searchRow: string,
-    +searchRowTitle: string,
-    +searchRowSelectElement: string,
-    +searchButtonContainer: string,
-    +emptySelectionPaperContainer: string,
-    +emptySelectionPaperContent: string,
-    +divider: string,
-  |},
-|}
+export type SelectedSearchScope = $ReadOnly<{|
+  value: ?string,
+  label: ?string
+|}>
 
-export type PropsFromRedux ={|
-  +preselectedProgram: {|
-    value: ?string,
-    label: ?string
-  |},
-  +trackedEntityTypesWithCorrelatedPrograms: {
+export type AvailableSearchOptions = $ReadOnly<{
     [elementId: string]: {|
-      +trackedEntityTypeId: string,
-      +trackedEntityTypeName: string,
-      +programs: Array<{|
-        +programName: string,
-        +programId: string,
-      |}>
-    |}
-  },
-  +availableSearchOptions: AvailableSearchOptions,
-  +error: boolean,
-  +ready: boolean,
-  +searchStatus: string,
-  +searchResultsErrorMessage: string
-|}
+      +searchOptionId: string,
+      +searchOptionName: string,
+      +searchGroups: SearchGroups |}
+  }>
 
-export type DispatchersFromRedux = {|
-  addFormIdToReduxStore: (formId: string) => void,
-  closeModal: () => void
+export type TrackedEntityTypesWithCorrelatedPrograms = $ReadOnly<{
+  [elementId: string]: {|
+    +trackedEntityTypeId: string,
+    +trackedEntityTypeName: string,
+    +programs: Array<{|
+      +programName: string,
+      +programId: string,
+    |}>
+  |}
+}>
+
+export type ContainerProps = $ReadOnly<{|
+  navigateToMainPage: ()=>void,
+  showInitialSearchPage: ()=>void,
+  trackedEntityTypesWithCorrelatedPrograms: TrackedEntityTypesWithCorrelatedPrograms,
+  availableSearchOptions: AvailableSearchOptions,
+  preselectedProgram: SelectedSearchScope,
+  searchStatus: string,
+  error: boolean,
+  ready: boolean,
 |}
+>
 
 export type Props = {|
-  ...OwnProps,
-  ...DispatchersFromRedux,
-  ...PropsFromRedux
+  ...CssClasses,
+  ...ContainerProps
 |}
 
