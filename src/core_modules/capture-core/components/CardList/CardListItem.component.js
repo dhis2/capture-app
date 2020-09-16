@@ -163,7 +163,7 @@ const CardListItemIndex = ({
 
                                 {
                                     enrollmentDate &&
-                                    <ListEntry name={i18n.t('Date')} value={moment(enrollmentDate).format('L')} />
+                                    <ListEntry name={i18n.t('Date of enrollment:')} value={moment(enrollmentDate).format('L')} />
                                 }
 
                             </Grid>
