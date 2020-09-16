@@ -60,7 +60,7 @@ export async function getTrackedEntityInstances(queryParams: Object, attributes:
         rowsPerPage: queryParams.pageSize,
         currentPage: queryParams.page,
     };
-    // debugger;
+
     return {
         trackedEntityInstanceContainers,
         pagingData,
