@@ -137,7 +137,7 @@ export const SearchResultsIndex = ({
                 currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={collectFormDataElements(searchGroupsForSelectedScope)}
-                getCustomItemBottomElements={({ item }, navigationButtonsState, programName) => (
+                getCustomItemBottomElements={({ item, navigationButtonsState, programName }) => (
                     <CardListButtons
                         programName={programName}
                         currentSearchScopeId={currentSearchScopeId}

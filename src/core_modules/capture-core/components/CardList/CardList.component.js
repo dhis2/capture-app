@@ -5,8 +5,6 @@ import { withStyles } from '@material-ui/core';
 import { CardListItem } from './CardListItem.component';
 import { makeElementsContainerSelector } from './CardList.selectors';
 import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
-import { enrollmentStatuses } from './CardList.constants';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../metaData/helpers';
 
 type OwnProps = $ReadOnly<{|
     dataElements: CardDataElementsInformation,
@@ -24,9 +22,6 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-
-const getProgramName = programId => (programId ? getProgramFromProgramIdThrowIfNotFound(programId).name : '');
-
 const CardListIndex = ({
     classes,
     items,
@@ -37,7 +32,6 @@ const CardListIndex = ({
     currentProgramId,
 }: OwnProps & CssClasses) => {
     const { imageDataElement } = makeElementsContainerSelector()(dataElements);
-
     return (
         <>
             {

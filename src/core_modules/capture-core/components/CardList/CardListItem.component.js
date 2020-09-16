@@ -8,30 +8,18 @@ import DoneIcon from '@material-ui/icons/Done';
 import { colors, Tag } from '@dhis2/ui-core';
 import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import type { DataElement } from '../../metaData';
-import { availableCardListButtonState, enrollmentStatuses } from './CardList.constants';
+import { availableCardListButtonState, enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
+import { getProgramFromProgramIdThrowIfNotFound } from '../../metaData';
 
 type OwnProps = $ReadOnly<{|
-    programName: string,
     item: SearchResultItem,
     currentProgramId?: string,
     getCustomTopElements?: ?(props: Object) => Element<any>,
-    getCustomBottomElements?: ?(props: Object, availableCardListButtonsState: $Keys<typeof availableCardListButtonState>, programName: string) => Element<any>,
+    getCustomBottomElements?: ?(props: Object) => Element<any>,
     imageDataElement: DataElement,
     dataElements: CardDataElementsInformation,
 |}>;
-
-const selectAvailableButtonState = (status) => {
-    switch (status) {
-    case enrollmentStatuses.ACTIVE:
-        return availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON;
-    case enrollmentStatuses.CANCELLED:
-    case enrollmentStatuses.COMPLETED:
-        return availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON;
-    default:
-        return availableCardListButtonState.DONT_SHOW_BUTTON;
-    }
-};
 
 const getStyles = (theme: Theme) => ({
     itemContainer: {
@@ -71,6 +59,18 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
+const deriveNavigationButtonState = (type) => {
+    switch (type) {
+    case enrollmentTypes.ACTIVE:
+        return availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON;
+    case enrollmentTypes.CANCELLED:
+    case enrollmentTypes.COMPLETED:
+        return availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON;
+    default:
+        return availableCardListButtonState.DONT_SHOW_BUTTON;
+    }
+};
+
 
 const deriveEnrollmentType =
   (enrollments, currentProgramId): $Keys<typeof enrollmentTypes> => {
@@ -108,6 +108,8 @@ const deriveEnrollmentOrgUnitAndDate =
       return { orgUnitName, enrollmentDate };
   };
 
+const programName = programId => (programId ? getProgramFromProgramIdThrowIfNotFound(programId).name : '');
+
 
 const CardListItemIndex = ({
     item,
@@ -129,7 +131,6 @@ const CardListItemIndex = ({
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitName, enrollmentDate } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
-
     return (
         <div data-test="dhis2-capture-card-list-item" className={classes.itemContainer}>
             {getCustomTopElements && getCustomTopElements({ item })}
@@ -227,7 +228,11 @@ const CardListItemIndex = ({
 
             {
                 getCustomBottomElements &&
-                getCustomBottomElements(props, selectAvailableButtonState(enrollmentStatus), programName)
+                getCustomBottomElements({
+                    item,
+                    navigationButtonsState: deriveNavigationButtonState(enrollmentType),
+                    programName: programName(currentProgramId),
+                })
             }
         </div>
     );
