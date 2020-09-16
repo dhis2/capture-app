@@ -1,18 +1,31 @@
 // @flow
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { compose } from 'redux';
+import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { SingleSelect, SingleSelectOption } from '@dhis2/ui-core';
+import Paper from '@material-ui/core/Paper/Paper';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import {
+    Modal,
+    ModalTitle,
+    ModalContent,
+    ModalActions,
+    ButtonStrip,
+    Button,
+} from '@dhis2/ui-core';
 import { LockedSelector } from '../../LockedSelector';
-import type { Props } from './SearchPage.types';
-import { Section, SectionHeaderSimple } from '../../Section';
-import Button from '../../Buttons/Button.component';
-import Form from '../../D2Form/D2Form.component';
+import type { ContainerProps, Props } from './SearchPage.types';
+import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
+import { SearchForm } from './SearchForm';
+import { LoadingMask } from '../../LoadingMasks';
+import { SearchResults } from './SearchResults/SearchResults.container';
+import { SearchDomainSelector } from './SearchDomainSelector';
+import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
 const getStyles = (theme: Theme) => ({
-    divider: {
-        padding: '8px',
+    maxWidth: {
+        maxWidth: theme.typography.pxToRem(950),
     },
     container: {
         padding: '10px 24px 24px 24px',
@@ -28,165 +41,132 @@ const getStyles = (theme: Theme) => ({
         paddingTop: 50,
         paddingBottom: 50,
     },
-    emptySelectionPaperContainer: {
-        padding: 24,
+    backButton: {
+        marginBottom: 10,
     },
-    customEmpty: {
-        textAlign: 'center',
-        padding: '8px 24px',
+    generalPurposeErrorMessage: {
+        color: theme.palette.error.main,
     },
-    searchDomainSelectorSection: {
-        maxWidth: theme.typography.pxToRem(900),
-        marginBottom: theme.typography.pxToRem(20),
-    },
-    searchRow: {
+    loadingMask: {
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
-    },
-    searchRowTitle: {
-        flexBasis: 200,
-        marginLeft: 8,
-    },
-    searchRowSelectElement: {
-        width: '100%',
-    },
-    searchButtonContainer: {
-        padding: theme.typography.pxToRem(10),
-        display: 'flex',
-        alignItems: 'center',
     },
 });
 
-
 const Index = ({
+    showInitialSearchPage,
+    navigateToMainPage,
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
-    preselectedProgram,
     availableSearchOptions,
-    addFormIdToReduxStore,
-    forms,
+    preselectedProgram,
+    searchStatus,
 }: Props) => {
-    const [selectedOption, setSelected] = useState(preselectedProgram);
+    const [selectedSearchScope, setSelectedSearchScope] = useState(() => preselectedProgram);
 
-    // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
-    // so that useEffect can do the comparison
-    const stringifyPrograms = JSON.stringify(availableSearchOptions);
     useEffect(() => {
-        // in order for the Form component to render
-        // need to add a formId under the `forms` reducer
-        selectedOption.value &&
-          JSON.parse(stringifyPrograms)[selectedOption.value].searchGroups
-              .forEach(({ formId }) => {
-                  addFormIdToReduxStore(formId);
-              });
+        if (!preselectedProgram.value) {
+            showInitialSearchPage();
+        }
     },
     [
-        stringifyPrograms,
-        selectedOption.value,
-        addFormIdToReduxStore,
+        preselectedProgram.value,
+        showInitialSearchPage,
     ]);
 
+    const searchGroupsForSelectedScope =
+      (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
+
+    const handleSearchScopeSelection = ({ value, label }) => {
+        dispatchShowInitialSearchPage();
+        setSelectedSearchScope({ value, label });
+    };
 
     return (<>
         <LockedSelector />
-        <div className={classes.container}>
-            <Paper className={classes.paper}>
-                <Section
-                    className={classes.searchDomainSelectorSection}
-                    header={
-                        <SectionHeaderSimple
-                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                            title={i18n.t('Search')}
-                        />
-                    }
-                >
-                    <div className={classes.searchRow} style={{ padding: '8px 0' }}>
-                        <div className={classes.searchRowTitle}>Search for</div>
-                        <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
-                            <SingleSelect
-                                onChange={({ selected }) => { setSelected(selected); }}
-                                selected={selectedOption}
-                                empty={<div className={classes.customEmpty}>Custom empty component</div>}
-                            >
-                                {
-                                    useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                                        // $FlowFixMe https://github.com/facebook/flow/issues/2221
-                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, programs: tePrograms }) =>
-                                            // SingleSelect component wont allow us to wrap the SingleSelectOption
-                                            // in any other element and still make use of the default behaviour.
-                                            // Therefore we are returning the group title and the
-                                            // SingleSelectOption in an array.
-                                            [
-                                                <SingleSelectOption
-                                                    value={trackedEntityTypeId}
-                                                    label={trackedEntityTypeName}
-                                                />,
-                                                tePrograms.map(({ programName, programId }) =>
-                                                    (<SingleSelectOption value={programId} label={programName} />)),
-                                                <div className={classes.divider} key={trackedEntityTypeId}>
-                                                    <hr />
-                                                </div>,
-                                            ],
-                                        ),
-                                    [
-                                        classes.divider,
-                                        trackedEntityTypesWithCorrelatedPrograms,
-                                    ])
-                                }
-                            </SingleSelect>
-                        </div>
-                    </div>
-                </Section>
+        <div data-test="dhis2-capture-search-page-content" className={classes.container} >
+            <Button
+                dataTest="dhis2-capture-back-button"
+                className={classes.backButton}
+                onClick={navigateToMainPage}
+            >
+                <ChevronLeft />
+                {i18n.t('Back')}
+            </Button>
 
-                {
-                    selectedOption.value && availableSearchOptions[selectedOption.value].searchGroups
-                        .filter(searchGroup => searchGroup.unique)
-                        .map(({ searchForm, formId }) => {
-                            const name = searchForm.getElements()[0].formName;
-                            return (
-                                <Section
-                                    className={classes.searchDomainSelectorSection}
-                                    header={
-                                        <SectionHeaderSimple
-                                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                            title={i18n.t('Search {{name}}', { name })}
-                                        />
-                                    }
-                                >
-                                    <div className={classes.searchRow}>
-                                        <div className={classes.searchRowSelectElement}>
-                                            {
-                                                forms[formId] &&
-                                                <Form
-                                                    formFoundation={searchForm}
-                                                    id={formId}
-                                                />
-                                            }
-                                        </div>
-                                    </div>
-                                    <div className={classes.searchButtonContainer}>
-                                        <Button onClick={() => {}}>
-                                            Find by {name}
-                                        </Button>
-                                    </div>
-                                </Section>
-                            );
-                        })
-                }
+            <Paper className={classes.paper}>
+                <div className={classes.maxWidth}>
+                    <SearchDomainSelector
+                        trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
+                        onSelect={handleSearchScopeSelection}
+                        selectedSearchScope={selectedSearchScope}
+                    />
+
+                    <SearchForm
+                        selectedSearchScopeId={selectedSearchScope.value}
+                        searchGroupsForSelectedScope={searchGroupsForSelectedScope}
+                    />
+
+                    {
+                        searchStatus === searchPageStatus.SHOW_RESULTS &&
+                        <SearchResults searchGroupsForSelectedScope={searchGroupsForSelectedScope} />
+                    }
+
+                    {
+                        searchStatus === searchPageStatus.NO_RESULTS &&
+                        <Modal position="middle">
+                            <ModalTitle>{i18n.t('No results found')}</ModalTitle>
+                            <ModalContent>
+                                {i18n.t('You can change your search terms and search again to find what you are looking for.')}
+                            </ModalContent>
+                            <ModalActions>
+                                <ButtonStrip end>
+                                    <Button
+                                        disabled={searchStatus === searchPageStatus.LOADING}
+                                        onClick={showInitialSearchPage}
+                                        type="button"
+                                    >
+                                        {i18n.t('Back to search')}
+                                    </Button>
+                                </ButtonStrip>
+                            </ModalActions>
+                        </Modal>
+                    }
+
+                    {
+                        searchStatus === searchPageStatus.LOADING &&
+                        <div className={classes.loadingMask}>
+                            <LoadingMask />
+                        </div>
+                    }
+
+                    {
+                        searchStatus === searchPageStatus.ERROR &&
+                        <div
+                            data-test="dhis2-capture-general-purpose-error-mesage"
+                            className={classes.generalPurposeErrorMessage}
+                        >
+                            {i18n.t('There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools')}
+                        </div>
+                    }
+                </div>
             </Paper>
 
             {
-                !selectedOption.value &&
-                    <Paper elevation={0}>
+                searchStatus === searchPageStatus.INITIAL && !selectedSearchScope.value &&
+                    <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
                         <div className={classes.emptySelectionPaperContent}>
                             {i18n.t('Make a selection to start searching')}
                         </div>
                     </Paper>
             }
-
         </div>
     </>);
 };
 
-export const SearchPage = withStyles(getStyles)(Index);
+export const SearchPageComponent: ComponentType<ContainerProps> =
+  compose(
+      withLoadingIndicator(),
+      withErrorMessageHandler(),
+      withStyles(getStyles),
+  )(Index);
