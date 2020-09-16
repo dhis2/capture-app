@@ -3,7 +3,7 @@ import type { SearchGroups } from '../SearchPage.types';
 
 export type CurrentSearchTerms = Array<{|
   +name: string,
-  +value: string,
+  +value: any, // is either `typeof string or { from: string, to: string}`
   +id: string,
 |}>
 

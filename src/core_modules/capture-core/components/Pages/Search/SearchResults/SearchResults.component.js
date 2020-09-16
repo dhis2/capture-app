@@ -10,6 +10,7 @@ import { searchScopes } from '../SearchPage.constants';
 import type { CardDataElementsInformation, Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 import { availableCardListButtonState } from '../../../CardList/CardList.constants';
+import { displayFormTypeofValue } from '../../../../utils/displayRangeTypeofValue';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -125,7 +126,7 @@ export const SearchResultsIndex = ({
             &nbsp;{i18n.t('Results found for term(s)')}
             &nbsp;{currentSearchTerms.map(({ name, value, id }, index, rest) => (
                 <div key={id}>
-                    <i>{name}</i>: <b>{value}</b>
+                    <i>{name}</i>: <b>{displayFormTypeofValue(value)}</b>
                     {index !== rest.length - 1 && <span>,</span>}
                     &nbsp;
                 </div>))}

@@ -23,11 +23,13 @@ const isValueContainingCharacter = (value: any) => {
         return Boolean(value.replace(/\s/g, '').length);
     }
     if (isObject(value)) {
-        return Object.values(value)
+        const numberOfValuesWithLength = Object.values(value)
             .filter(v => isString(v))
             // $FlowFixMe
             .filter(v => Boolean(v.replace(/\s/g, '').length))
-            .some(item => item === true);
+            .length;
+
+        return Boolean(numberOfValuesWithLength);
     }
     return true;
 };
