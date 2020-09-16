@@ -135,6 +135,7 @@ export type CachedTrackedEntityTypeAttribute = {
     displayInList: boolean,
     mandatory: boolean,
     searchable: boolean,
+    renderOptionsAsRadio: ?boolean,
 };
 
 export type CachedTrackedEntityTypeTranslation = {

@@ -2,13 +2,18 @@
 import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { of, from, empty } from 'rxjs';
-import { searchPageActionTypes } from '../SearchPage.container';
+import {
+    searchPageActionTypes,
+    showEmptyResultsViewOnSearchPage,
+    showErrorViewOnSearchPage,
+    showLoadingViewOnSearchPage,
+    showSuccessResultsViewOnSearchPage,
+} from '../SearchPage.actions';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
-import { actionCreator } from '../../../../actions/actions.utils';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
@@ -25,10 +30,10 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
                 navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam);
                 return empty();
             }
-            return of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)());
+            return of(showEmptyResultsViewOnSearchPage());
         }),
-        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
+        startWith(showLoadingViewOnSearchPage()),
+        catchError(() => of(showErrorViewOnSearchPage())),
     );
 
 const getFiltersForAttributesSearchQuery = formValues =>
@@ -39,15 +44,14 @@ const getFiltersForAttributesSearchQuery = formValues =>
 
 const searchViaAttributesStream = (queryArgs, attributes) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-        map(({ trackedEntityInstanceContainers }) => {
-            const searchResults = trackedEntityInstanceContainers;
+        map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
-                return actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS)({ searchResults });
+                return showSuccessResultsViewOnSearchPage(searchResults, pagingData);
             }
-            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
+            return showEmptyResultsViewOnSearchPage();
         }),
-        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
+        startWith(showLoadingViewOnSearchPage()),
+        catchError(() => of(showErrorViewOnSearchPage())),
     );
 
 export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -90,13 +94,14 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObse
 export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH),
-        flatMap(({ payload: { formId, programId } }) => {
+        flatMap(({ payload: { formId, programId, page } }) => {
             const { formsValues } = store.value;
 
             const queryArgs = {
                 filter: getFiltersForAttributesSearchQuery(formsValues[formId]),
                 program: programId,
-                pageNumber: 1,
+                page,
+                pageSize: 5,
                 ouMode: 'ACCESSIBLE',
             };
             const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
@@ -108,13 +113,14 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
 export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
-        flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
+        flatMap(({ payload: { formId, trackedEntityTypeId, page } }) => {
             const { formsValues } = store.value;
 
             const queryArgs = {
                 filter: getFiltersForAttributesSearchQuery(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
-                pageNumber: 1,
+                page,
+                pageSize: 5,
                 ouMode: 'ACCESSIBLE',
             };
 
