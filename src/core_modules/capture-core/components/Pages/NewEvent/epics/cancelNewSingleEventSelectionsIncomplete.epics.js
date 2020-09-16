@@ -5,18 +5,7 @@ import { map } from 'rxjs/operators';
 import {
     actionTypes as dataEntrySelectionsIncompleteActionTypes,
 } from '../SelectionsIncomplete/dataEntrySelectionsIncomplete.actions';
-
-const getArguments = (programId: string, orgUnitId: string) => {
-    const argArray = [];
-    if (programId) {
-        argArray.push(`programId=${programId}`);
-    }
-    if (orgUnitId) {
-        argArray.push(`orgUnitId=${orgUnitId}`);
-    }
-
-    return argArray.join('&');
-};
+import { urlArguments } from '../../../../utils/url';
 
 export const cancelNewEventIncompleteSelectionsLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -24,6 +13,5 @@ export const cancelNewEventIncompleteSelectionsLocationChangeEpic = (action$: In
         map(() => {
             const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
-            const args = getArguments(programId, orgUnitId);
-            return push(`/${args}`);
+            return push(`/${urlArguments(programId, orgUnitId)}`);
         }));

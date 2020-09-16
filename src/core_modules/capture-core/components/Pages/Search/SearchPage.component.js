@@ -1,101 +1,172 @@
 // @flow
-import React, { useMemo, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { compose } from 'redux';
+import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { SingleSelect, SingleSelectOption } from '@dhis2/ui-core';
+import Paper from '@material-ui/core/Paper/Paper';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import {
+    Modal,
+    ModalTitle,
+    ModalContent,
+    ModalActions,
+    ButtonStrip,
+    Button,
+} from '@dhis2/ui-core';
 import { LockedSelector } from '../../LockedSelector';
-import type { Props } from './SearchPage.types';
-import { Section, SectionHeaderSimple } from '../../Section';
+import type { ContainerProps, Props } from './SearchPage.types';
+import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
+import { SearchForm } from './SearchForm';
+import { LoadingMask } from '../../LoadingMasks';
+import { SearchResults } from './SearchResults/SearchResults.container';
+import { SearchDomainSelector } from './SearchDomainSelector';
+import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
 const getStyles = (theme: Theme) => ({
+    maxWidth: {
+        maxWidth: theme.typography.pxToRem(950),
+    },
     container: {
         padding: '10px 24px 24px 24px',
     },
     paper: {
-    // marginBottom: theme.typography.pxToRem(10),
+        marginBottom: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
-        marginBottom: 2000,
-
     },
-    customEmpty: {
-        textAlign: 'center',
-        padding: '8px 24px',
-    },
-    searchDomainSelectorSection: {
-        maxWidth: theme.typography.pxToRem(900),
-        marginBottom: theme.typography.pxToRem(20),
-    },
-    searchRow: {
+    emptySelectionPaperContent: {
         display: 'flex',
-        padding: '8px 0',
-        alignItems: 'center',
         justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 50,
+        paddingBottom: 50,
     },
-    searchRowTitle: {
-        flexBasis: 200,
-        marginLeft: 16,
+    backButton: {
+        marginBottom: 10,
     },
-    searchRowSelectElement: {
-        width: '100%',
-        marginRight: 8,
+    generalPurposeErrorMessage: {
+        color: theme.palette.error.main,
+    },
+    loadingMask: {
+        display: 'flex',
+        justifyContent: 'center',
     },
 });
 
+const Index = ({
+    showInitialSearchPage,
+    navigateToMainPage,
+    classes,
+    trackedEntityTypesWithCorrelatedPrograms,
+    availableSearchOptions,
+    preselectedProgram,
+    searchStatus,
+}: Props) => {
+    const [selectedSearchScope, setSelectedSearchScope] = useState(() => preselectedProgram);
 
-const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedProgram }: Props) => {
-    const [selectedOption, setSelected] = useState(preselectedProgram);
+    useEffect(() => {
+        if (!preselectedProgram.value) {
+            showInitialSearchPage();
+        }
+    },
+    [
+        preselectedProgram.value,
+        showInitialSearchPage,
+    ]);
+
+    const searchGroupsForSelectedScope =
+      (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
+
+    const handleSearchScopeSelection = ({ value, label }) => {
+        dispatchShowInitialSearchPage();
+        setSelectedSearchScope({ value, label });
+    };
 
     return (<>
         <LockedSelector />
-        <div className={classes.container}>
+        <div data-test="dhis2-capture-search-page-content" className={classes.container} >
+            <Button
+                dataTest="dhis2-capture-back-button"
+                className={classes.backButton}
+                onClick={navigateToMainPage}
+            >
+                <ChevronLeft />
+                {i18n.t('Back')}
+            </Button>
+
             <Paper className={classes.paper}>
-                <Section
-                    className={classes.searchDomainSelectorSection}
-                    header={
-                        <SectionHeaderSimple
-                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                            title={i18n.t('Search')}
-                        />
+                <div className={classes.maxWidth}>
+                    <SearchDomainSelector
+                        trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
+                        onSelect={handleSearchScopeSelection}
+                        selectedSearchScope={selectedSearchScope}
+                    />
+
+                    <SearchForm
+                        selectedSearchScopeId={selectedSearchScope.value}
+                        searchGroupsForSelectedScope={searchGroupsForSelectedScope}
+                    />
+
+                    {
+                        searchStatus === searchPageStatus.SHOW_RESULTS &&
+                        <SearchResults searchGroupsForSelectedScope={searchGroupsForSelectedScope} />
                     }
-                >
-                    <div className={classes.searchRow}>
-                        <div className={classes.searchRowTitle}>Search for</div>
-                        <div className={classes.searchRowSelectElement}>
-                            <SingleSelect
-                                onChange={({ selected }) => { setSelected(selected); }}
-                                selected={selectedOption}
-                                empty={<div className={classes.customEmpty}>Custom empty component</div>}
-                            >
-                                {
-                                    useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                                        // $FlowFixMe https://github.com/facebook/flow/issues/2221
-                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, programs }) =>
-                                            // SingleSelect component wont allow us to wrap the SingleSelectOption
-                                            // in any other element and still make use of the default behaviour.
-                                            // Therefore we are returning the group title and the
-                                            // SingleSelectOption in an array.
-                                            [
-                                                <SingleSelectOption
-                                                    value={trackedEntityTypeId}
-                                                    label={trackedEntityTypeName}
-                                                />,
-                                                programs.map(({ programName, programId }) =>
-                                                    (<SingleSelectOption value={programId} label={programName} />)),
-                                                <hr key={trackedEntityTypeId} />,
-                                            ],
-                                        ),
-                                    [
-                                        trackedEntityTypesWithCorrelatedPrograms,
-                                    ])
-                                }
-                            </SingleSelect>
+
+                    {
+                        searchStatus === searchPageStatus.NO_RESULTS &&
+                        <Modal position="middle">
+                            <ModalTitle>{i18n.t('No results found')}</ModalTitle>
+                            <ModalContent>
+                                {i18n.t('You can change your search terms and search again to find what you are looking for.')}
+                            </ModalContent>
+                            <ModalActions>
+                                <ButtonStrip end>
+                                    <Button
+                                        disabled={searchStatus === searchPageStatus.LOADING}
+                                        onClick={showInitialSearchPage}
+                                        type="button"
+                                    >
+                                        {i18n.t('Back to search')}
+                                    </Button>
+                                </ButtonStrip>
+                            </ModalActions>
+                        </Modal>
+                    }
+
+                    {
+                        searchStatus === searchPageStatus.LOADING &&
+                        <div className={classes.loadingMask}>
+                            <LoadingMask />
                         </div>
-                    </div>
-                </Section>
+                    }
+
+                    {
+                        searchStatus === searchPageStatus.ERROR &&
+                        <div
+                            data-test="dhis2-capture-general-purpose-error-mesage"
+                            className={classes.generalPurposeErrorMessage}
+                        >
+                            {i18n.t('There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools')}
+                        </div>
+                    }
+                </div>
             </Paper>
+
+            {
+                searchStatus === searchPageStatus.INITIAL && !selectedSearchScope.value &&
+                    <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
+                        <div className={classes.emptySelectionPaperContent}>
+                            {i18n.t('Make a selection to start searching')}
+                        </div>
+                    </Paper>
+            }
         </div>
     </>);
 };
 
-export const SearchPage = withStyles(getStyles)(Index);
+export const SearchPageComponent: ComponentType<ContainerProps> =
+  compose(
+      withLoadingIndicator(),
+      withErrorMessageHandler(),
+      withStyles(getStyles),
+  )(Index);

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Manager, Popper, Reference } from 'react-popper';
-import type { Placement } from '@popperjs/core/lib';
+import { Manager, Popper, Reference, type Placement } from 'react-popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 
