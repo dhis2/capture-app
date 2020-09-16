@@ -7,7 +7,7 @@ import Grow from '@material-ui/core/Grow';
 type Props = {
     getPopperAction: (togglePopper: () => void) => React.Node,
     getPopperContent: (togglePopper: Function) => React.Node,
-    placement?: Placement,
+    placement: Placement,
     classes?: ?Object,
 }
 
