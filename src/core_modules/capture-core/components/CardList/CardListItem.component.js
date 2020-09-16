@@ -59,17 +59,18 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const deriveNavigationButtonState = (type) => {
-    switch (type) {
-    case enrollmentTypes.ACTIVE:
-        return availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON;
-    case enrollmentTypes.CANCELLED:
-    case enrollmentTypes.COMPLETED:
-        return availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON;
-    default:
-        return availableCardListButtonState.DONT_SHOW_BUTTON;
-    }
-};
+const deriveNavigationButtonState =
+  (type): $Keys<typeof availableCardListButtonState> => {
+      switch (type) {
+      case enrollmentTypes.ACTIVE:
+          return availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON;
+      case enrollmentTypes.CANCELLED:
+      case enrollmentTypes.COMPLETED:
+          return availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON;
+      default:
+          return availableCardListButtonState.DONT_SHOW_BUTTON;
+      }
+  };
 
 
 const deriveEnrollmentType =
