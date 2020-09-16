@@ -29,14 +29,6 @@ type Props = {
     isUpdating: boolean,
 };
 
-const StyledDialogContent = withStyles({
-    root: {
-        margin: '0 24px 24px',
-        padding: 0,
-        width: '616px',
-    },
-})(DialogContent);
-
 class ReviewDialogContents extends React.Component<Props> {
     contentListInstance: any;
     height: ?number;
@@ -71,7 +63,7 @@ class ReviewDialogContents extends React.Component<Props> {
 
         return (
             <React.Fragment>
-                <StyledDialogContent>
+                <DialogContent>
                     <DialogTitle className={classes.title}>
                         {i18n.t('Possible duplicates found')}
                     </DialogTitle>
@@ -87,7 +79,7 @@ class ReviewDialogContents extends React.Component<Props> {
                         />
                     </div>
                     <ReviewDialogContentsPager />
-                </StyledDialogContent>
+                </DialogContent>
             </React.Fragment>
         );
     }
