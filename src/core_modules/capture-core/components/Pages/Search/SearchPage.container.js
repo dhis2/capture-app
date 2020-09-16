@@ -130,8 +130,8 @@ export const SearchPage: ComponentType<{||}> = () => {
 
     return (
         <SearchPageComponent
-            dispatchNavigateToMainPage={dispatchNavigateToMainPage}
-            dispatchShowInitialSearchPage={dispatchShowInitialSearchPage}
+            navigateToMainPage={dispatchNavigateToMainPage}
+            showInitialSearchPage={dispatchShowInitialSearchPage}
             trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
             availableSearchOptions={availableSearchOptions}
             preselectedProgram={preselectedProgram}

@@ -16,8 +16,8 @@ import {
 } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
 const removeFormData = (state, { payload: { formId } }) => {
-    const { [formId]: deleted, ...stateWithoutDeletedProp } = state;
-    return stateWithoutDeletedProp;
+    const remainingKeys = Object.keys(state).filter(key => !key.includes(formId));
+    return remainingKeys.reduce((acc, key) => ({ ...acc, [key]: state[key] }), {});
 };
 
 export const formsValuesDesc = createReducerDescription({
