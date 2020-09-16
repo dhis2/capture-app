@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { pipe } from 'capture-core-utils';
 import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
@@ -10,16 +9,7 @@ import Button from '../../../../Buttons/Button.component';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
 import { LoadingMask } from '../../../../LoadingMasks';
-import {
-    convertFormToClient,
-    convertClientToList,
-} from '../../../../../converters';
 import { displayFormTypeofValue } from '../../../../../utils/displayRangeTypeofValue';
-
-const formToListConverterFn = pipe(
-    convertFormToClient,
-    convertClientToList,
-);
 
 const SearchResultsPager = withNavigation()(Pagination);
 

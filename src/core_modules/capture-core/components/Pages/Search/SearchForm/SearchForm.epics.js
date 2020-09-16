@@ -2,6 +2,7 @@
 import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { of, from, empty } from 'rxjs';
+import { isObject, isString } from 'd2-utilizr/src';
 import {
     searchPageActionTypes,
     showEmptyResultsViewOnSearchPage,
@@ -15,7 +16,6 @@ import {
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
-import { isObject, isString } from 'd2-utilizr/src';
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
