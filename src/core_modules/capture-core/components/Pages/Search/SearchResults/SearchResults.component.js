@@ -75,7 +75,7 @@ const CardListButtons = withStyles(buttonStyles)(
                         dataTest="dhis2-capture-re-enrollment-button"
                         onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
                     >
-                        {i18n.t('Re-enroll')} {programName && i18n.t('in {{programName}}', { programName: unescape(programName) })}
+                        {i18n.t('Re-enroll')} {programName && `${i18n.t('in')} ${programName}`}
                     </Button>
                 }
             </div>
@@ -125,7 +125,7 @@ export const SearchResultsIndex = ({
     return (<>
         <div data-test="dhis2-capture-search-results-top" className={classes.topSection} >
             <b>{rowsCount}</b>
-            &nbsp;{i18n.t('result(s) found for term(s)')} {currentSearchScopeProgramName && i18n.t('in {{currentSearchScopeProgramName}}', { currentSearchScopeProgramName })}.
+            &nbsp;{i18n.t('result(s) found for term(s)')} {currentSearchScopeProgramName && `${i18n.t('in')} ${currentSearchScopeProgramName}`}.
             &nbsp;{currentSearchTerms.map(({ name, value, id }, index, rest) => (
                 <div key={id}>
                     <i>{name}</i>: <b>{value}</b>
