@@ -13,7 +13,7 @@ import { ListEntry } from './ListEntry.component';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
-    currentSearchScopeProgramName: string,
+    currentSearchScopeProgramName?: string,
     currentProgramId?: string,
     getCustomTopElements?: ?(props: Object) => Element<any>,
     getCustomBottomElements?: ?(props: Object) => Element<any>,

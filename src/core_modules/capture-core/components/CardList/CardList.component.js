@@ -9,7 +9,7 @@ import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Sea
 type OwnProps = $ReadOnly<{|
     dataElements: CardDataElementsInformation,
     items: Array<SearchResultItem>,
-    currentSearchScopeProgramName: string,
+    currentSearchScopeProgramName?: string,
     getCustomItemTopElements?: ?(itemProps: Object) => Element<any>,
     getCustomItemBottomElements?: ?(itemProps: Object) => Element<any>,
     currentProgramId?: string,
