@@ -14,7 +14,7 @@ class Pagination extends React.Component<Props> {
     static getFromToLabel(rowsPerPage: number, currentPage: number) {
         const fromCount = (rowsPerPage * (currentPage - 1)) + 1;
 
-        const toCount = Math.min(rowsPerPage * currentPage);
+        const toCount = rowsPerPage * currentPage;
         return `${fromCount}-${toCount}`;
     }
 

@@ -747,7 +747,10 @@ msgstr ""
 msgid "in {{programName}}"
 msgstr ""
 
-msgid "Results found for term(s)"
+msgid "Result(s) found for term(s)"
+msgstr ""
+
+msgid "in {{currentSearchScopeProgramName}}"
 msgstr ""
 
 msgid "You dont have access to edit this event"

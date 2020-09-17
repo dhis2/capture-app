@@ -76,7 +76,7 @@ const CardListButtons = withStyles(buttonStyles)(
                         dataTest="dhis2-capture-re-enrollment-button"
                         onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
                     >
-                        {i18n.t('Re-enroll')} {programName && i18n.t('in {{programName}}', { programName })}
+                        {i18n.t('Re-enroll')} {programName && i18n.t('in {{programName}}', { programName: unescape(programName) })}
                     </Button>
                 }
             </div>
@@ -94,6 +94,7 @@ export const SearchResultsIndex = ({
     currentPage,
     currentSearchScopeType,
     currentSearchScopeId,
+    currentSearchScopeProgramName,
     currentFormId,
     currentSearchTerms,
 }: Props & CssClasses) => {
@@ -123,7 +124,7 @@ export const SearchResultsIndex = ({
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : undefined;
     return (<>
         <div data-test="dhis2-capture-search-results-top" className={classes.topSection} >
-            &nbsp;{i18n.t('Results found for term(s)')}
+            &nbsp;{i18n.t('Result(s) found for term(s)')} {currentSearchScopeProgramName && i18n.t('in {{currentSearchScopeProgramName}}', { currentSearchScopeProgramName })}.
             &nbsp;{currentSearchTerms.map(({ name, value, id }, index, rest) => (
                 <div key={id}>
                     <i>{name}</i>: <b>{displayFormTypeofValue(value)}</b>
@@ -133,6 +134,7 @@ export const SearchResultsIndex = ({
         </div>
         <div data-test="dhis2-capture-search-results-list">
             <CardList
+                currentSearchScopeProgramName={currentSearchScopeProgramName}
                 currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={collectFormDataElements(searchGroupsForSelectedScope)}
