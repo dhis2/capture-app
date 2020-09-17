@@ -120,15 +120,15 @@ Feature: User interacts with Search page
 
   Scenario: Searching using zip code range values as attributes
     Given you are in the search page with the TB program being preselected from the url
-    And you expand the attributes search area
-    When you fill in the zip code range numbers
+    When you expand the attributes search area
+    And you fill in the zip code range numbers
     And you click search
     Then you can see the first page of the results
 
   Scenario: Searching using zip code range and name values as attributes
     Given you are in the search page with the TB program being preselected from the url
-    And you expand the attributes search area
-    When you fill in the zip code range numbers
+    When you expand the attributes search area
+    And you fill in the zip code range numbers
     And you fill in the first name
     And you click search
     Then you can see the first page of the results

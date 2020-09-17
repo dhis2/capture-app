@@ -213,7 +213,7 @@ Then('you can see the first page of the results', () => {
         .should('exist');
     cy.get('[data-test="dhis2-capture-card-list-item"]')
         .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-search-results-pagination"]')
+    cy.get('[data-test="dhis2-capture-pagination"]')
         .contains('1-')
         .should('exist');
 });
@@ -237,7 +237,7 @@ Then('you can see the second page of the results', () => {
         .should('exist');
     cy.get('[data-test="dhis2-capture-card-list-item"]')
         .should('have.length', 4);
-    cy.get('[data-test="dhis2-capture-search-results-pagination"]')
+    cy.get('[data-test="dhis2-capture-pagination"]')
         .contains('6-')
         .should('exist');
 });

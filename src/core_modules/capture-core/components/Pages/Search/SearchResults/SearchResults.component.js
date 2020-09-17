@@ -150,7 +150,7 @@ export const SearchResultsIndex = ({
                 )}
             />
         </div>
-        <div data-test="dhis2-capture-search-results-pagination" className={classes.pagination}>
+        <div className={classes.pagination}>
             <SearchPagination
                 onChangePage={newPage => handlePageChange(newPage)}
                 rowsPerPage={rowsPerPage}
