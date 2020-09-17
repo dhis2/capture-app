@@ -10,10 +10,10 @@ import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Sea
 import type { DataElement } from '../../metaData';
 import { availableCardListButtonState, enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../metaData';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
+    currentSearchScopeProgramName: string,
     currentProgramId?: string,
     getCustomTopElements?: ?(props: Object) => Element<any>,
     getCustomBottomElements?: ?(props: Object) => Element<any>,
@@ -109,8 +109,6 @@ const deriveEnrollmentOrgUnitAndDate =
       return { orgUnitName, enrollmentDate };
   };
 
-const programName = programId => (programId ? getProgramFromProgramIdThrowIfNotFound(programId).name : '');
-
 
 const CardListItemIndex = ({
     item,
@@ -120,6 +118,7 @@ const CardListItemIndex = ({
     getCustomBottomElements,
     dataElements,
     currentProgramId,
+    currentSearchScopeProgramName,
 }: OwnProps & CssClasses) => {
     const renderImageDataElement = (imageElement: DataElement) => {
         const imageValue = item.values[imageElement.id];
@@ -236,7 +235,7 @@ const CardListItemIndex = ({
                 getCustomBottomElements({
                     item,
                     navigationButtonsState: deriveNavigationButtonState(enrollmentType),
-                    programName: programName(currentProgramId),
+                    programName: currentSearchScopeProgramName,
                 })
             }
         </div>
