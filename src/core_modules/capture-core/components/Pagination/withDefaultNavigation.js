@@ -67,7 +67,6 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                     <IconButton
                         data-test={'dhis2-capture-search-pagination-next-page'}
                         onClick={this.handleNextButtonClick}
-                        disabled={currentPage >= Math.ceil(rowsPerPage)}
                         aria-label="Next Page"
                     >
                         {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
