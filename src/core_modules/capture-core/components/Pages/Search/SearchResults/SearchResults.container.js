@@ -7,7 +7,7 @@ import type { OwnProps, Props, PropsFromRedux, DispatchersFromRedux } from './Se
 import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram } from '../SearchPage.actions';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData/helpers';
 
-const programName = programId => (programId ? unescape(getProgramFromProgramIdThrowIfNotFound(programId).name) : '');
+const programName = programId => (programId ? getProgramFromProgramIdThrowIfNotFound(programId).name : '');
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const {
