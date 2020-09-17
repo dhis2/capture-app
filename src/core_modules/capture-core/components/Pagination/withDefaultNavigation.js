@@ -42,7 +42,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
         };
 
         renderNavigationElement() {
-            const { rowsPerPage, currentPage, classes, theme } = this.props;
+            const { currentPage, classes, theme } = this.props;
 
             return (
                 <div
