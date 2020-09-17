@@ -744,13 +744,7 @@ msgstr ""
 msgid "Re-enroll"
 msgstr ""
 
-msgid "in {{programName}}"
-msgstr ""
-
 msgid "Result(s) found for term(s)"
-msgstr ""
-
-msgid "in {{currentSearchScopeProgramName}}"
 msgstr ""
 
 msgid "You dont have access to edit this event"
