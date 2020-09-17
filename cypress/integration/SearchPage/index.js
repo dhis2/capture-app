@@ -212,7 +212,7 @@ Then('you can see the first page of the results', () => {
     cy.get('[data-test="dhis2-capture-search-results-list"]')
         .should('exist');
     cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length.greaterThan', 1);
+        .should('have.length.greaterThan', 0);
     cy.get('[data-test="dhis2-capture-search-results-pagination"]')
         .contains('1-')
         .should('exist');
