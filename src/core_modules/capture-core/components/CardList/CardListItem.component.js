@@ -147,13 +147,15 @@ const CardListItemIndex = ({
                         <Grid item xs={16} sm container>
                             <Grid item xs container direction="column" spacing={2}>
                                 {
-                                    dataElements.map(element => (
-                                        <ListEntry
-                                            key={element.id}
-                                            name={element.name}
-                                            value={item.values[element.id]}
-                                        />
-                                    ))
+                                    dataElements
+                                        .filter(({ type }) => type === 'TEXT')
+                                        .map(({ id, name, type }) => (
+                                            <ListEntry
+                                                key={id}
+                                                name={name}
+                                                value={item.values[id]}
+                                                type={type}
+                                            />))
                                 }
                                 {
                                     orgUnitName &&

@@ -118,7 +118,7 @@ export const SearchResultsIndex = ({
                 const elementsMap = [...sections.values()]
                     .map(section => section.elements)[0];
                 return [...elementsMap.values()]
-                    .map(({ id, name }) => ({ id, name }));
+                    .map(({ id, name, type }) => ({ id, name, type }));
             });
 
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : undefined;
