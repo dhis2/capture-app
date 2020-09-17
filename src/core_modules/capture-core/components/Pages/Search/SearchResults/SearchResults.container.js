@@ -5,6 +5,9 @@ import { compose } from 'redux';
 import { SearchResultsComponent } from './SearchResults.component';
 import type { OwnProps, Props, PropsFromRedux, DispatchersFromRedux } from './SearchResults.types';
 import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram } from '../SearchPage.actions';
+import { getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData/helpers';
+
+const programName = programId => (programId ? unescape(getProgramFromProgramIdThrowIfNotFound(programId).name) : '');
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const {
@@ -18,6 +21,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         },
     } = state.searchPage;
 
+    const currentSearchScopeProgramName = programName(currentSearchScopeId);
     return {
         rowsCount,
         currentPage,
@@ -25,6 +29,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         searchResults,
         currentSearchScopeType,
         currentSearchScopeId,
+        currentSearchScopeProgramName,
         currentFormId,
         currentSearchTerms,
     };
