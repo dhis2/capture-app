@@ -1,5 +1,4 @@
 import { config } from 'd2';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../../metaData/helpers';
 
 export const navigateToTrackedEntityDashboard = (teiId, orgUnitId, scopeSearchParam) => {
     const { baseUrl } = config;
