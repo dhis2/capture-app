@@ -16,14 +16,14 @@ const styles = (theme: Theme) => ({
 
 type SearchResultsHeaderType = $ReadOnly<{|
   currentSearchTerms: CurrentSearchTerms,
-  currentSearchScopeProgramName?: string,
+  currentSearchScopeName?: string,
   ...CssClasses
 |}>
 
 const SearchResultsHeaderPlain =
-  ({ currentSearchTerms, currentSearchScopeProgramName, classes }: SearchResultsHeaderType) =>
+  ({ currentSearchTerms, currentSearchScopeName, classes }: SearchResultsHeaderType) =>
       (<div data-test="dhis2-capture-search-results-top" className={classes.topSection} >
-          {i18n.t('Results found')} {currentSearchScopeProgramName && `${i18n.t('in')} ${currentSearchScopeProgramName}`}
+          {i18n.t('Results found')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}
           <div>
               {
                   currentSearchTerms.map(({ name, value, id, type }, index, rest) => (

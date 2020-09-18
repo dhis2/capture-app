@@ -85,7 +85,7 @@ export const SearchResultsIndex = ({
     currentPage,
     currentSearchScopeType,
     currentSearchScopeId,
-    currentSearchScopeProgramName,
+    currentSearchScopeName,
     currentFormId,
     currentSearchTerms,
 }: Props & CssClasses) => {
@@ -114,10 +114,10 @@ export const SearchResultsIndex = ({
 
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : undefined;
     return (<>
-        <SearchResultsHeader currentSearchTerms={currentSearchTerms} currentSearchScopeProgramName={currentSearchScopeProgramName} />
+        <SearchResultsHeader currentSearchTerms={currentSearchTerms} currentSearchScopeName={currentSearchScopeName} />
         <div data-test="dhis2-capture-search-results-list">
             <CardList
-                currentSearchScopeProgramName={currentSearchScopeProgramName}
+                currentSearchScopeName={currentSearchScopeName}
                 currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={collectFormDataElements(searchGroupsForSelectedScope)}

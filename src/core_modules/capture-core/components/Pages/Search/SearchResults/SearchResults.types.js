@@ -45,7 +45,7 @@ export type PropsFromRedux ={|
   +rowsPerPage: number,
   +currentSearchScopeType: $Keys<searchScopes>,
   +currentSearchScopeId: string,
-  +currentSearchScopeProgramName: string,
+  +currentSearchScopeName: string,
   +currentFormId: string,
   +searchResults: Array<SearchResultItem>,
   +currentSearchTerms: CurrentSearchTerms

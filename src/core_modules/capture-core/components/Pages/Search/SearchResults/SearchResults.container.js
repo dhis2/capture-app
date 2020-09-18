@@ -5,9 +5,22 @@ import { compose } from 'redux';
 import { SearchResultsComponent } from './SearchResults.component';
 import type { OwnProps, Props, PropsFromRedux, DispatchersFromRedux } from './SearchResults.types';
 import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram } from '../SearchPage.actions';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData/helpers';
+import { getProgramFromProgramIdThrowIfNotFound, getTrackedEntityTypeThrowIfNotFound } from '../../../../metaData/helpers';
+import { searchScopes } from '../SearchPage.constants';
 
-const programName = programId => (programId ? getProgramFromProgramIdThrowIfNotFound(programId).name : '');
+const scopeName = (scopeId, scopeType) => {
+    if (!scopeId) {
+        return '';
+    }
+    if (scopeType === searchScopes.PROGRAM) {
+        return getProgramFromProgramIdThrowIfNotFound(scopeId).name;
+    }
+    if (scopeType === searchScopes.TRACKED_ENTITY_TYPE) {
+        return getTrackedEntityTypeThrowIfNotFound(scopeId).name;
+    }
+
+    return '';
+};
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const {
@@ -21,14 +34,14 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         },
     } = state.searchPage;
 
-    const currentSearchScopeProgramName = programName(currentSearchScopeId);
+    const currentSearchScopeName = scopeName(currentSearchScopeId, currentSearchScopeType);
     return {
         currentPage,
         rowsPerPage,
         searchResults,
         currentSearchScopeType,
         currentSearchScopeId,
-        currentSearchScopeProgramName,
+        currentSearchScopeName,
         currentFormId,
         currentSearchTerms,
     };
