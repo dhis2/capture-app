@@ -93,7 +93,7 @@ export const SearchResultsIndex = ({
     currentPage,
     currentSearchScopeType,
     currentSearchScopeId,
-    currentSearchScopeProgramName,
+    currentSearchScopeName,
     currentFormId,
     currentSearchTerms,
 }: Props & CssClasses) => {
@@ -123,7 +123,7 @@ export const SearchResultsIndex = ({
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : undefined;
     return (<>
         <div data-test="dhis2-capture-search-results-top" className={classes.topSection} >
-            &nbsp;{i18n.t('Result(s) found for term(s)')} {currentSearchScopeProgramName && `${i18n.t('in')} ${currentSearchScopeProgramName}`}.
+            &nbsp;{i18n.t('Result(s) found for term(s)')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}.
             &nbsp;{currentSearchTerms.map(({ name, value, id }, index, rest) => (
                 <div key={id}>
                     <i>{name}</i>: <b>{value}</b>
@@ -133,7 +133,7 @@ export const SearchResultsIndex = ({
         </div>
         <div data-test="dhis2-capture-search-results-list">
             <CardList
-                currentSearchScopeProgramName={currentSearchScopeProgramName}
+                currentSearchScopeName={currentSearchScopeName}
                 currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={collectFormDataElements(searchGroupsForSelectedScope)}
