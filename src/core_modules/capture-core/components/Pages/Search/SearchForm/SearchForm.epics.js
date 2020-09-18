@@ -43,21 +43,11 @@ const getFiltersForAttributesSearchQuery = (formValues) => {
         .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
         .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
 
-    const dateFilers = Object.keys(formValues)
-        .filter(fieldId => isObject(formValues[fieldId]))
-        .filter(fieldId => Object.values(formValues[fieldId]).some(formValue => formValue))
-        .map((fieldId) => {
-            let queryString = `${fieldId}`;
-            if (formValues[fieldId].from) {
-                queryString = `${queryString}:ge:${formValues[fieldId].from}`;
-            }
-            if (formValues[fieldId].to) {
-                queryString = `${queryString}:le:${formValues[fieldId].to}`;
-            }
-            return queryString;
-        });
+    const rangeFilers = Object.keys(formValues)
+        .filter(fieldId => ('from' in formValues[fieldId] && 'to' in formValues[fieldId]))
+        .map(fieldId => `${fieldId}:ge:${formValues[fieldId].from}:le:${formValues[fieldId].to}`);
 
-    return [...stringFilters, ...dateFilers];
+    return [...stringFilters, ...rangeFilers];
 };
 
 
