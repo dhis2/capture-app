@@ -44,6 +44,7 @@ const getFiltersForAttributesSearchQuery = (formValues) => {
         .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
 
     const rangeFilers = Object.keys(formValues)
+        .filter(fieldId => isObject(formValues[fieldId]))
         .filter(fieldId => ('from' in formValues[fieldId] && 'to' in formValues[fieldId]))
         .map(fieldId => `${fieldId}:ge:${formValues[fieldId].from}:le:${formValues[fieldId].to}`);
 
