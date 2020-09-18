@@ -54,7 +54,6 @@ const getFiltersForAttributesSearchQuery = (formValues) => {
             if (formValues[fieldId].to) {
                 queryString = `${queryString}:le:${formValues[fieldId].to}`;
             }
-            debugger
             return queryString;
         });
 
