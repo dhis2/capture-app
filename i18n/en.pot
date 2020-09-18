@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-09-18T08:58:40.927Z\n"
-"PO-Revision-Date: 2020-09-18T08:58:40.927Z\n"
+"POT-Creation-Date: 2020-09-18T09:10:46.845Z\n"
+"PO-Revision-Date: 2020-09-18T09:10:46.845Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -825,12 +825,6 @@ msgid "Organisation unit search failed. See log for details"
 msgstr ""
 
 msgid "tracked entity instance"
-msgstr ""
-
-msgid "from"
-msgstr ""
-
-msgid "until"
 msgstr ""
 
 msgid "Set coordinate"
