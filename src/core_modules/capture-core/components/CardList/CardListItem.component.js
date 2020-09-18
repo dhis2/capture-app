@@ -148,7 +148,7 @@ const CardListItemIndex = ({
                             <Grid item xs container direction="column" spacing={2}>
                                 {
                                     dataElements
-                                        .filter(({ type }) => type === 'TEXT')
+                                        .filter(({ type }) => type !== 'IMAGE')
                                         .map(({ id, name, type }) => (
                                             <ListEntry
                                                 key={id}
@@ -164,7 +164,7 @@ const CardListItemIndex = ({
 
                                 {
                                     enrollmentDate &&
-                                    <ListEntry name={i18n.t('Date of enrollment')} value={moment(enrollmentDate).format('L')} />
+                                    <ListEntry name={i18n.t('Date of enrollment')} value={enrollmentDate} type={'DATE'} />
                                 }
 
                             </Grid>

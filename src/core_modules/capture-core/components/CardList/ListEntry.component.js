@@ -2,6 +2,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
 import { colors } from '@dhis2/ui-core';
+import { convertValue } from '../../converters/clientToView';
 
 type Props = {|
   name: string,
@@ -25,12 +26,12 @@ const getStyles = (theme: Theme) => ({
 });
 
 export const ListEntry =
-   withStyles(getStyles)(({ name, value, classes }: Props & CssClasses) => (
+   withStyles(getStyles)(({ name, value, classes, type = 'TEXT' }: Props & CssClasses) => (
        <div className={classes.entry}>
            <span className={classes.elementName}>
                {name}:&nbsp;
            </span>
            <span className={classes.elementValue}>
-               {value}
+               {convertValue(value, type)}
            </span>
        </div>));
