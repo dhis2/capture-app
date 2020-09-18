@@ -14,7 +14,6 @@ import {
 import { actionCreator } from '../../../../actions/actions.utils';
 import { addFormData, removeFormData } from '../../../D2Form/actions/form.actions';
 
-
 const isValueContainingCharacter = (value: any) => {
     if (!value) {
         return false;
@@ -22,14 +21,14 @@ const isValueContainingCharacter = (value: any) => {
     if (isString(value)) {
         return Boolean(value.replace(/\s/g, '').length);
     }
+
     if (isObject(value)) {
         const numberOfValuesWithLength = Object.values(value)
             .filter(v => isString(v))
-            // $FlowFixMe
-            .filter(v => Boolean(v.replace(/\s/g, '').length))
+            .filter((v: any) => Boolean(v.replace(/\s/g, '').length))
             .length;
 
-        return Boolean(numberOfValuesWithLength);
+        return Boolean(numberOfValuesWithLength === Object.keys(value).length);
     }
     return true;
 };
@@ -46,16 +45,16 @@ const collectCurrentSearchTerms = (searchGroupsForSelectedScope, formsValues): C
     const searchTerms = formsValues[formId] || {};
     return Object.keys(searchTerms)
         .reduce((accumulated, attributeValueKey) => {
-            const { name, id } = attributeSearchForm.getElement(attributeValueKey);
+            const { name, id, type } = attributeSearchForm.getElement(attributeValueKey);
             const value = searchTerms[attributeValueKey];
             if (isValueContainingCharacter(value)) {
-                return [...accumulated, { name, value, id }];
+                return [...accumulated, { name, value, id, type }];
             }
             return accumulated;
         }, []);
 };
 
-const mapStateToProps = (state: ReduxState): PropsFromRedux => {
+const mapStateToProps = (state: ReduxState, { searchGroupsForSelectedScope }: OwnProps): PropsFromRedux => {
     const {
         formsValues,
         searchPage: {
@@ -67,22 +66,15 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     return {
         formsValues,
         searchStatus,
-        isSearchViaAttributesValid: (minAttributesRequiredToSearch, formId) => {
-            const formValues = formsValues[formId] || {};
-            const currentNumberOfFilledInputValues =
-              Object.keys(formValues)
-                  .filter((key) => {
-                      const value = formValues[key];
-                      return isValueContainingCharacter(value);
-                  })
-                  .length;
+        isSearchViaAttributesValid: (minAttributesRequiredToSearch) => {
+            const currentSearchTerms = collectCurrentSearchTerms(searchGroupsForSelectedScope, formsValues);
 
-            return currentNumberOfFilledInputValues >= minAttributesRequiredToSearch;
+            return Object.values(currentSearchTerms).length >= minAttributesRequiredToSearch;
         },
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps): DispatchersFromRedux => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedScope }: OwnProps): DispatchersFromRedux => ({
     searchViaUniqueIdOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId }) => {
         dispatch(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId, formId }));
     },
@@ -98,7 +90,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps): Dispat
     },
     saveCurrentFormData: (searchScopeType, searchScopeId, formId, formsValues) => {
         const currentSearchTerms =
-          collectCurrentSearchTerms(ownProps.searchGroupsForSelectedScope, formsValues);
+          collectCurrentSearchTerms(searchGroupsForSelectedScope, formsValues);
 
         dispatch(actionCreator(searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE)(
             { searchScopeType,
@@ -109,7 +101,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps): Dispat
     },
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
     removeFormDataFromReduxStore: () => {
-        ownProps.searchGroupsForSelectedScope
+        searchGroupsForSelectedScope
             .forEach(({ formId }) => {
                 dispatch(removeFormData(formId));
             });

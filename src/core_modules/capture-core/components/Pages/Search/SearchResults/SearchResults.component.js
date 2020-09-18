@@ -10,7 +10,7 @@ import { searchScopes } from '../SearchPage.constants';
 import type { CardDataElementsInformation, Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 import { availableCardListButtonState } from '../../../CardList/CardList.constants';
-import { displayFormTypeofValue } from '../../../../utils/displayRangeTypeofValue';
+import { SearchResultsHeader } from '../../../SearchResultsHeader';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -20,14 +20,6 @@ export const getStyles = (theme: Theme) => ({
         justifyContent: 'flex-end',
         marginLeft: theme.typography.pxToRem(8),
         width: theme.typography.pxToRem(600),
-    },
-    topSection: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginTop: theme.typography.pxToRem(20),
-        marginLeft: theme.typography.pxToRem(10),
-        marginRight: theme.typography.pxToRem(10),
-        marginBottom: theme.typography.pxToRem(10),
     },
 });
 
@@ -83,7 +75,6 @@ const CardListButtons = withStyles(buttonStyles)(
         );
     });
 
-
 export const SearchResultsIndex = ({
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
@@ -94,7 +85,7 @@ export const SearchResultsIndex = ({
     currentPage,
     currentSearchScopeType,
     currentSearchScopeId,
-    currentSearchScopeProgramName,
+    currentSearchScopeName,
     currentFormId,
     currentSearchTerms,
 }: Props & CssClasses) => {
@@ -123,18 +114,10 @@ export const SearchResultsIndex = ({
 
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : undefined;
     return (<>
-        <div data-test="dhis2-capture-search-results-top" className={classes.topSection} >
-            &nbsp;{i18n.t('Result(s) found for term(s)')} {currentSearchScopeProgramName && `${i18n.t('in')} ${currentSearchScopeProgramName}`}.
-            &nbsp;{currentSearchTerms.map(({ name, value, id }, index, rest) => (
-                <div key={id}>
-                    <i>{name}</i>: <b>{displayFormTypeofValue(value)}</b>
-                    {index !== rest.length - 1 && <span>,</span>}
-                    &nbsp;
-                </div>))}
-        </div>
+        <SearchResultsHeader currentSearchTerms={currentSearchTerms} currentSearchScopeName={currentSearchScopeName} />
         <div data-test="dhis2-capture-search-results-list">
             <CardList
-                currentSearchScopeProgramName={currentSearchScopeProgramName}
+                currentSearchScopeName={currentSearchScopeName}
                 currentProgramId={currentProgramId}
                 items={searchResults}
                 dataElements={collectFormDataElements(searchGroupsForSelectedScope)}

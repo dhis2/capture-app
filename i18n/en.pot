@@ -674,9 +674,6 @@ msgstr ""
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
-msgid "{{teiCount}} results found for"
-msgstr ""
-
 msgid "New search"
 msgstr ""
 
@@ -744,9 +741,6 @@ msgstr ""
 msgid "Re-enroll"
 msgstr ""
 
-msgid "Result(s) found for term(s)"
-msgstr ""
-
 msgid "You dont have access to edit this event"
 msgstr ""
 
@@ -774,6 +768,9 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
+msgstr ""
+
+msgid "Results found"
 msgstr ""
 
 msgid "Selected program"

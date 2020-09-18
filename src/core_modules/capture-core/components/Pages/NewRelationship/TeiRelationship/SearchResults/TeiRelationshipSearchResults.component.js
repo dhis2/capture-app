@@ -9,7 +9,8 @@ import Button from '../../../../Buttons/Button.component';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
 import { LoadingMask } from '../../../../LoadingMasks';
-import { displayFormTypeofValue } from '../../../../../utils/displayRangeTypeofValue';
+import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';
+import { SearchResultsHeader } from '../../../../SearchResultsHeader';
 
 const SearchResultsPager = withNavigation()(Pagination);
 
@@ -106,41 +107,23 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         );
     }
 
-    getSearchValues = () => {
-        const { searchValues, searchGroup, teis, classes } = this.props;
+    getSearchValues = (): CurrentSearchTerms => {
+        const { searchValues, searchGroup } = this.props;
         const searchForm = searchGroup.searchForm;
-        const attributeValues = Object.keys(searchValues)
+        return Object.keys(searchValues)
             .filter(key => searchValues[key] !== null)
             .map((key) => {
                 const element = searchForm.getElement(key);
                 const value = searchValues[key];
-                return (
-                    <span key={key}>
-                        <i>{element.formName}</i>: <b>{displayFormTypeofValue(value)}</b>
-                    </span>
-                );
-            }).reduce((accValues, value) => {
-                if (accValues.length > 0) return [...accValues, ', ', value];
-                return [' ', value];
-            }, []);
-
-        const text = i18n.t('{{teiCount}} results found for', {
-            teiCount: teis.length,
-        });
-
-        return (
-            <div className={classes.topSectionValuesContainer}>
-                {text}
-                {attributeValues}
-            </div>
-        );
+                return { name: element.formName, value, id: element.id, type: element.type };
+            });
     }
 
     renderTopSection = () => {
         const { onNewSearch, onEditSearch, classes } = this.props;
         return (
             <div className={classes.topSection}>
-                {this.getSearchValues()}
+                <SearchResultsHeader currentSearchTerms={this.getSearchValues()} />
                 <div>
                     <Button className={classes.actionButton} onClick={onNewSearch}>
                         {i18n.t('New search')}
