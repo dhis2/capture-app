@@ -10,6 +10,7 @@ import { searchScopes } from '../SearchPage.constants';
 import type { CardDataElementsInformation, Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 import { availableCardListButtonState } from '../../../CardList/CardList.constants';
+import { convertValue } from '../../../../converters/clientToList';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -124,9 +125,9 @@ export const SearchResultsIndex = ({
     return (<>
         <div data-test="dhis2-capture-search-results-top" className={classes.topSection} >
             &nbsp;{i18n.t('Result(s) found for term(s)')} {currentSearchScopeProgramName && `${i18n.t('in')} ${currentSearchScopeProgramName}`}.
-            &nbsp;{currentSearchTerms.map(({ name, value, id }, index, rest) => (
+            &nbsp;{currentSearchTerms.map(({ name, value, id, type }, index, rest) => (
                 <div key={id}>
-                    <i>{name}</i>: <b>{value}</b>
+                    <i>{name}</i>: <b>{convertValue(value, type)}</b>
                     {index !== rest.length - 1 && <span>,</span>}
                     &nbsp;
                 </div>))}
@@ -149,7 +150,7 @@ export const SearchResultsIndex = ({
                 )}
             />
         </div>
-        <div data-test="dhis2-capture-search-results-pagination" className={classes.pagination}>
+        <div className={classes.pagination}>
             <SearchPagination
                 onChangePage={newPage => handlePageChange(newPage)}
                 rowsPerPage={rowsPerPage}

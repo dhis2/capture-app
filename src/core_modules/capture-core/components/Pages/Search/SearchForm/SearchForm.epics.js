@@ -2,6 +2,7 @@
 import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { of, from, empty } from 'rxjs';
+import { isObject, isString } from 'd2-utilizr/src';
 import {
     searchPageActionTypes,
     showEmptyResultsViewOnSearchPage,
@@ -36,10 +37,29 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
         catchError(() => of(showErrorViewOnSearchPage())),
     );
 
-const getFiltersForAttributesSearchQuery = formValues =>
-    Object.keys(formValues)
+const getFiltersForAttributesSearchQuery = (formValues) => {
+    const stringFilters = Object.keys(formValues)
+        .filter(fieldId => isString(formValues[fieldId]))
         .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
         .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
+
+    const dateFilers = Object.keys(formValues)
+        .filter(fieldId => isObject(formValues[fieldId]))
+        .filter(fieldId => Object.values(formValues[fieldId]).some(formValue => formValue))
+        .map((fieldId) => {
+            let queryString = `${fieldId}`;
+            if (formValues[fieldId].from) {
+                queryString = `${queryString}:ge:${formValues[fieldId].from}`;
+            }
+            if (formValues[fieldId].to) {
+                queryString = `${queryString}:le:${formValues[fieldId].to}`;
+            }
+            debugger
+            return queryString;
+        });
+
+    return [...stringFilters, ...dateFilers];
+};
 
 
 const searchViaAttributesStream = (queryArgs, attributes) =>

@@ -212,8 +212,8 @@ Then('you can see the first page of the results', () => {
     cy.get('[data-test="dhis2-capture-search-results-list"]')
         .should('exist');
     cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length', 5);
-    cy.get('[data-test="dhis2-capture-search-results-pagination"]')
+        .should('have.length.greaterThan', 0);
+    cy.get('[data-test="dhis2-capture-pagination"]')
         .contains('1-')
         .should('exist');
 });
@@ -237,7 +237,7 @@ Then('you can see the second page of the results', () => {
         .should('exist');
     cy.get('[data-test="dhis2-capture-card-list-item"]')
         .should('have.length', 4);
-    cy.get('[data-test="dhis2-capture-search-results-pagination"]')
+    cy.get('[data-test="dhis2-capture-pagination"]')
         .contains('6-')
         .should('exist');
 });
@@ -256,4 +256,46 @@ When('you remove the Child Programme selection', () => {
 Then('you still can see the Malaria case diagnosis being selected', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
         .contains('Malaria case diagnosis');
+});
+
+Given('you are in the search page with the Adult Woman being preselected from the url', () => {
+    cy.visit('/#/search/programId=uy2gU8kT1jF&orgUnitId=DiszpKrYNg8');
+});
+
+When('you fill in the date of birth', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(2)
+        .type('1999-09-01')
+        .blur();
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(3)
+        .type('2020-01-01')
+        .blur();
+});
+
+Given('you are in the search page with the TB program being preselected from the url', () => {
+    cy.visit('/#/search/programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8');
+});
+
+When('you fill in the zip code range numbers', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(5)
+        .type('7130')
+        .blur();
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(6)
+        .type('7135')
+        .blur();
+});
+
+When('you fill in the first name', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Lid')
+        .blur();
 });

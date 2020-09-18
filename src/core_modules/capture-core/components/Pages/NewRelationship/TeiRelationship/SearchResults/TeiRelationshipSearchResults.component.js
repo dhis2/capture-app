@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { pipe } from 'capture-core-utils';
 import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
@@ -10,15 +9,7 @@ import Button from '../../../../Buttons/Button.component';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
 import { LoadingMask } from '../../../../LoadingMasks';
-import {
-    convertFormToClient,
-    convertClientToList,
-} from '../../../../../converters';
-
-const formToListConverterFn = pipe(
-    convertFormToClient,
-    convertClientToList,
-);
+import { convertValue } from '../../../../../converters/clientToList';
 
 const SearchResultsPager = withNavigation()(Pagination);
 
@@ -123,10 +114,9 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
             .map((key) => {
                 const element = searchForm.getElement(key);
                 const value = searchValues[key];
-                const listValue = element.convertValue(value, formToListConverterFn);
                 return (
                     <span key={key}>
-                        {element.formName}: {listValue}
+                        <i>{element.formName}</i>: <b>{convertValue(value, element.type)}</b>
                     </span>
                 );
             }).reduce((accValues, value) => {

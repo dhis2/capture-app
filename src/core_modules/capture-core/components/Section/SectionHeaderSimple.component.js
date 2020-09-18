@@ -85,6 +85,7 @@ class SectionHeaderSimple extends Component<Props> {
                             if (onChangeCollapseState) {
                                 return (
                                     <IconButton
+                                        data-test="dhis2-capture-collapsible-button"
                                         disabled={!this.props.isCollapseButtonEnabled}
                                         title={this.props.isCollapsed ? 'Åpne' : 'Lukk'}
                                         onClick={this.handleChangeCollapse}

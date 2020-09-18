@@ -167,3 +167,45 @@ Then('the event and relationship should be sent to the server successfully', () 
             });
     });
 });
+
+When('you select search scope TB program', () => {
+    cy.get('[data-test="dhis2-capture-virtualized-select"]')
+        .click()
+        .contains('TB prog')
+        .click();
+});
+
+And('you expand the attributes search area', () => {
+    cy.get('[data-test="dhis2-capture-collapsible-button"]')
+        .eq(4)
+        .click();
+});
+
+And('you fill in the zip code range numbers', () => {
+    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(5)
+        .type('7130')
+        .blur();
+
+    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(6)
+        .type('7135')
+        .blur();
+});
+
+And('you click search', () => {
+    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+        .find('button')
+        .click();
+});
+
+Then('you can see the first page of the results', () => {
+    cy.get('[data-test="dhis2-capture-card-list-item"]')
+        .should('have.length.greaterThan', 0);
+    cy.get('[data-test="dhis2-capture-pagination"]')
+        .contains('1-')
+        .should('exist');
+});
+

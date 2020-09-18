@@ -50,6 +50,13 @@ function convertRangeForDisplay(parser: any, clientValue: any) {
         </span>
     );
 }
+function convertNumberRangeForDisplay(clientValue) {
+    return (
+        <span>
+            {clientValue.from} {'->'} {clientValue.to}
+        </span>
+    );
+}
 
 const valueConvertersForType = {
     // $FlowFixMe[prop-missing] automated comment
@@ -66,6 +73,8 @@ const valueConvertersForType = {
     [elementTypes.DATE]: convertDateForListDisplay,
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATETIME]: convertDateTimeForListDisplay,
     // $FlowFixMe[prop-missing] automated comment
