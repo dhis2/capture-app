@@ -149,6 +149,7 @@ const CardListItemIndex = ({
                                 {
                                     dataElements
                                         .filter(({ type }) => type !== 'IMAGE')
+                                        .filter(({ displayInReports }) => displayInReports)
                                         .map(({ id, name, type }) => (
                                             <ListEntry
                                                 key={id}
