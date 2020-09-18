@@ -2,7 +2,7 @@
 import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { of, from, empty } from 'rxjs';
-import { isString } from 'd2-utilizr/src';
+import { isObject, isString } from 'd2-utilizr/src';
 import {
     searchPageActionTypes,
     showEmptyResultsViewOnSearchPage,
