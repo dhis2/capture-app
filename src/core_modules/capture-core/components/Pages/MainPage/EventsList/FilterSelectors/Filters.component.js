@@ -179,7 +179,7 @@ const renderRestButton = (
 ) => (restElementsArray.length > 0 ? (
     <FilterRestMenu
         key={'restMenu'}
-        data-test={'filter-rest-menu'}
+        data-test="filter-rest-menu"
         listId={listId}
         columns={restElementsArray}
         onItemSelected={onRestMenuItemSelected}

@@ -11,13 +11,16 @@ import {
 } from '../../../../metaData';
 import type {
     CachedAttributeTranslation,
+    CachedOptionSet,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
+import { OptionSetFactory } from '../optionSet';
 
 type InputSearchAttribute = {
     trackedEntityAttributeId: ?string,
     searchable: boolean,
     displayInList: boolean,
+    renderOptionsAsRadio: ?boolean,
 }
 
 type SearchAttribute = InputSearchAttribute & {
@@ -53,12 +56,18 @@ class SearchGroupFactory {
 
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     locale: ?string;
+    optionSetFactory: OptionSetFactory;
     constructor(
         cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
+        cachedOptionSets: Map<string, CachedOptionSet>,
         locale: ?string,
     ) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.locale = locale;
+        this.optionSetFactory = new OptionSetFactory(
+            cachedOptionSets,
+            locale,
+        );
     }
 
     _getAttributeTranslation(
@@ -73,37 +82,52 @@ class SearchGroupFactory {
     }
 
     async _buildElement(searchAttribute: SearchAttribute) {
-        const trackedEntityAttribute = searchAttribute.trackedEntityAttribute;
         const element = new DataElement((o) => {
-            o.id = trackedEntityAttribute.id;
-            o.name = this._getAttributeTranslation(
-                trackedEntityAttribute.translations, translationPropertyNames.NAME) ||
-                trackedEntityAttribute.displayName;
-            o.shortName = this._getAttributeTranslation(
-                trackedEntityAttribute.translations, translationPropertyNames.SHORT_NAME) ||
-                trackedEntityAttribute.displayShortName;
-            o.formName = this._getAttributeTranslation(
-                trackedEntityAttribute.translations, translationPropertyNames.NAME) ||
-                trackedEntityAttribute.displayName;
-            o.description = this._getAttributeTranslation(
-                trackedEntityAttribute.translations, translationPropertyNames.DESCRIPTION) ||
-                trackedEntityAttribute.description;
+            const {
+                id,
+                translations,
+                displayName,
+                displayShortName,
+                description,
+                unique,
+                valueType,
+            } = searchAttribute.trackedEntityAttribute;
+
+            o.id = id;
+            o.name =
+              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
+              || displayName;
+
+            o.shortName =
+              this._getAttributeTranslation(translations, translationPropertyNames.SHORT_NAME)
+              || displayShortName;
+
+            o.formName =
+              this._getAttributeTranslation(translations, translationPropertyNames.NAME)
+              || displayName;
+
+            o.description =
+              this._getAttributeTranslation(translations, translationPropertyNames.DESCRIPTION)
+              || description;
+
             o.displayInForms = true;
             o.displayInReports = searchAttribute.displayInList;
-            o.compulsory = !!trackedEntityAttribute.unique;
+            o.compulsory = !!unique;
             o.disabled = false;
-            o.type = SearchGroupFactory._getSearchAttributeValueType(trackedEntityAttribute.valueType, trackedEntityAttribute.unique);
+            o.type = SearchGroupFactory._getSearchAttributeValueType(valueType, unique);
         });
 
-        /* if (attribute.optionSet && attribute.optionSet.id ) {
-            element.optionSet = await buildOptionSet(
-                attribute.optionSet.id,
-                element,
-                programAttribute.renderOptionsAsRadio,
-                programAttribute.renderType && programAttribute.renderType.DESKTOP && programAttribute.renderType.DESKTOP.type);
-        } */
+        const { optionSetValue, optionSet } = searchAttribute.trackedEntityAttribute;
 
-        await Promise.resolve();
+        if (optionSetValue && optionSet.id) {
+            element.optionSet = await this.optionSetFactory.build(
+                element,
+                optionSet.id,
+                searchAttribute.renderOptionsAsRadio,
+                null,
+                value => value,
+            );
+        }
 
         return element;
     }
@@ -160,7 +184,7 @@ class SearchGroupFactory {
         return trackedEntityAttribute;
     }
 
-    build(searchAttributes: $ReadOnlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number) {
+    build(searchAttributes: $ReadOnlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<Array<SearchGroup>> {
         const attributesBySearchGroup = searchAttributes
             .map(attribute => ({
                 ...attribute,
@@ -186,7 +210,18 @@ class SearchGroupFactory {
                     attributesBySearchGroup[attrByGroupKey],
                     minAttributesRequiredToSearch,
                 ));
-        return Promise.all(searchGroupPromises);
+        return Promise.all(searchGroupPromises).then(
+            searchGroups => searchGroups.sort(({ unique: xBoolean }, { unique: yBoolean }) => {
+                if (xBoolean === yBoolean) {
+                    return 0;
+                }
+                if (xBoolean) {
+                    return -1;
+                }
+                return 1;
+            },
+            ),
+        );
     }
 }
 

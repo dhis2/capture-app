@@ -8,7 +8,7 @@ Given('you open the the new event page in Ngelehun and malaria case context', ()
 });
 
 When('you add data to the form', () => {
-    cy.get('[data-test="dhis2-capture-dataentry-field-eventDate"]', { timeout: 30000 })
+    cy.get('[data-test="dhis2-capture-dataentry-field-eventDate"]')
         .find('input')
         .type('2020-01-01')
         .blur();

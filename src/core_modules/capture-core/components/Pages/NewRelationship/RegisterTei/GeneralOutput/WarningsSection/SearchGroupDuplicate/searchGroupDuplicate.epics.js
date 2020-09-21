@@ -1,8 +1,8 @@
 // @flow
 import { pipe as pipeD2 } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
-import { switchMap } from 'rxjs/operators';
-import { getApi } from '../../../../../../../d2/d2Instance';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of, from } from 'rxjs';
 import {
     actionTypes,
     duplicatesForReviewRetrievalSuccess,
@@ -11,10 +11,10 @@ import {
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
-    dataElementTypes,
 } from '../../../../../../../metaData';
 import getDataEntryKey from '../../../../../../DataEntry/common/getDataEntryKey';
-import { convertFormToClient, convertClientToServer, convertServerToClient } from '../../../../../../../converters';
+import { convertFormToClient, convertClientToServer } from '../../../../../../../converters';
+import { getTrackedEntityInstances } from '../../../../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 
 const getProgramSearchGroup = (programId: string) => {
     const program = getTrackerProgramThrowIfNotFound(programId);
@@ -30,19 +30,6 @@ const getTETSearchGroup = (tetId: string) => {
 
 const getSearchGroup = (programId: ?string, tetId: string) =>
     (programId ? getProgramSearchGroup(programId) : getTETSearchGroup(tetId));
-
-const getEnrollmentForm = (programId: string) => {
-    const program = getTrackerProgramThrowIfNotFound(programId);
-    return program.enrollment.enrollmentForm;
-};
-
-const getTETForm = (tetId: string) => {
-    const tet = getTrackedEntityTypeThrowIfNotFound(tetId);
-    return tet.teiRegistration.form;
-};
-
-const getFormMetadata = (programId: ?string, tetId: string) =>
-    (programId ? getEnrollmentForm(programId) : getTETForm(tetId));
 
 export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -79,7 +66,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 .filter(f => f);
 
             const contextParam = programId ? { program: programId } : { trackedEntityType: tetId };
-            const queryParams = {
+            const queryArgs = {
                 ou: orgUnit.id,
                 ouMode: 'ACCESSIBLE',
                 pageSize: 5,
@@ -88,47 +75,15 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 filter: filters,
                 ...contextParam,
             };
+            const attributes = contextParam.program ?
+                getTrackerProgramThrowIfNotFound(contextParam.program).attributes :
+                getTrackedEntityTypeThrowIfNotFound((contextParam.trackedEntityType)).attributes;
 
-            return getApi()
-                .get('trackedEntityInstances', queryParams)
-                .then((response) => {
-                    const formFoundation = getFormMetadata(programId, tetId);
-                    const pager = (response && response.pager) || {};
-                    const paginationData = !isChangePage ? {
-                        rowsCount: pager.total,
-                        rowsPerPage: pager.pageSize,
-                        currentPage: pager.page,
-                    } : null;
+            return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+                map(({ trackedEntityInstanceContainers: searchResults, pagingData }) =>
+                    duplicatesForReviewRetrievalSuccess(searchResults, pagingData)),
+                catchError(() => of(duplicatesForReviewRetrievalFailed())),
 
-                    const teInstances = (response && response.trackedEntityInstances) || [];
-                    const convertedInstances = teInstances
-                        .map((instance) => {
-                            const attributes = instance.attributes || [];
-
-                            const values = attributes
-                                .reduce((acc, container) => {
-                                    acc[container.attribute] = container.value;
-                                    return acc;
-                                }, {});
-
-                            const convertedValues = formFoundation.convertValues(values, convertServerToClient);
-
-                            return {
-                                id: instance.trackedEntityInstance,
-                                values: {
-                                    ...convertedValues,
-                                    registrationDate: convertServerToClient(instance.created, dataElementTypes.DATETIME),
-                                    registrationUnit: convertServerToClient(instance.orgUnit, dataElementTypes.TEXT),
-                                    inactive: convertServerToClient(instance.inactive, dataElementTypes.BOOLEAN),
-                                },
-                            };
-                        });
-
-                    return duplicatesForReviewRetrievalSuccess(
-                        convertedInstances,
-                        paginationData,
-                    );
-                })
-                .catch(() =>
-                    duplicatesForReviewRetrievalFailed());
-        }));
+            );
+        }),
+    );
