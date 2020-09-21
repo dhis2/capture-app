@@ -69,7 +69,6 @@ type State = {
     submitAttempted: boolean;
 };
 
-// $FlowSuppress
 // $FlowFixMe[incompatible-variance] automated comment
 class DateFilter extends Component<Props, State> implements UpdatableFilterContent<Value> {
     static validateField(value: ?string, type: $Values<typeof elementTypes>) {
@@ -80,11 +79,13 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
             };
         }
 
+        // $FlowFixMe elementTypes flow error
         const typeValidator = DateFilter.validatorForTypes[type];
         const isValid = typeValidator(value);
 
         return {
             isValid,
+            // $FlowFixMe elementTypes flow error
             error: isValid ? null : i18n.t(DateFilter.errorMessages[type]),
         };
     }
@@ -133,12 +134,10 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     static errorMessages = {
         CUSTOM_RANGE_WITHOUT_VALUES: 'Please specify a range',
         FROM_GREATER_THAN_TO: 'The From date can\'t be after the To date',
-        // $FlowFixMe[prop-missing] automated comment
         [elementTypes.DATE]: 'Please provide a valid date',
     };
 
     static validatorForTypes = {
-        // $FlowFixMe[prop-missing] automated comment
         [elementTypes.DATE]: isValidDate,
     };
 

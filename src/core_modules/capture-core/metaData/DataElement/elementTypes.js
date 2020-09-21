@@ -1,47 +1,38 @@
 // @flow
-const unknownTypeCode = 'UNKNOWN';
+const elementTypeCodes = {
+    TEXT: 'TEXT',
+    LONG_TEXT: 'LONG_TEXT',
+    NUMBER: 'NUMBER',
+    NUMBER_RANGE: 'NUMBER_RANGE',
+    INTEGER: 'INTEGER',
+    INTEGER_RANGE: 'INTEGER_RANGE',
+    INTEGER_POSITIVE: 'INTEGER_POSITIVE',
+    INTEGER_POSITIVE_RANGE: 'INTEGER_POSITIVE_RANGE',
+    INTEGER_NEGATIVE: 'INTEGER_NEGATIVE',
+    INTEGER_NEGATIVE_RANGE: 'INTEGER_NEGATIVE_RANGE',
+    INTEGER_ZERO_OR_POSITIVE: 'INTEGER_ZERO_OR_POSITIVE',
+    INTEGER_ZERO_OR_POSITIVE_RANGE: 'INTEGER_ZERO_OR_POSITIVE_RANGE',
+    PERCENTAGE: 'PERCENTAGE',
+    DATE: 'DATE',
+    DATE_RANGE: 'DATE_RANGE',
+    DATETIME: 'DATETIME',
+    DATETIME_RANGE: 'DATETIME_RANGE',
+    TIME: 'TIME',
+    TIME_RANGE: 'TIME_RANGE',
+    TRUE_ONLY: 'TRUE_ONLY',
+    BOOLEAN: 'BOOLEAN',
+    PHONE_NUMBER: 'PHONE_NUMBER',
+    EMAIL: 'EMAIL',
+    FILE_RESOURCE: 'FILE_RESOURCE',
+    URL: 'URL',
+    ORGANISATION_UNIT: 'ORGANISATION_UNIT',
+    IMAGE: 'IMAGE',
+    AGE: 'AGE',
+    COORDINATE: 'COORDINATE',
+    POLYGON: 'POLYGON',
+    USERNAME: 'USERNAME',
+    ASSIGNEE: 'ASSIGNEE',
+    UNKNOWN: 'UNKNOWN',
+};
 
-const elementTypeCodes: Array<string> = [
-    'TEXT',
-    'LONG_TEXT',
-    'NUMBER',
-    'NUMBER_RANGE',
-    'INTEGER',
-    'INTEGER_RANGE',
-    'INTEGER_POSITIVE',
-    'INTEGER_POSITIVE_RANGE',
-    'INTEGER_NEGATIVE',
-    'INTEGER_NEGATIVE_RANGE',
-    'INTEGER_ZERO_OR_POSITIVE',
-    'INTEGER_ZERO_OR_POSITIVE_RANGE',
-    'PERCENTAGE',
-    'DATE',
-    'DATE_RANGE',
-    'DATETIME',
-    'DATETIME_RANGE',
-    'TIME',
-    'TIME_RANGE',
-    'TRUE_ONLY',
-    'BOOLEAN',
-    'PHONE_NUMBER',
-    'EMAIL',
-    'FILE_RESOURCE',
-    'URL',
-    'ORGANISATION_UNIT',
-    'IMAGE',
-    'AGE',
-    'COORDINATE',
-    'POLYGON',
-    'USERNAME',
-    'ASSIGNEE',
-    unknownTypeCode,
-];
-
-const elementTypeKeys =
-    elementTypeCodes.reduce((accKeys, code) => {
-        accKeys[code] = code;
-        return accKeys;
-    }, {});
-
-export default elementTypeKeys;
-
+export default elementTypeCodes;

@@ -26,7 +26,7 @@ export default class DataElement {
     _disabled: boolean;
     _compulsory: boolean;
     _description: string;
-    _type: $Values<typeof elementTypes>;
+    _type: $Keys<typeof elementTypes>;
     _optionSet: ?OptionSet;
     _displayInForms: boolean;
     _displayInReports: boolean;
@@ -111,7 +111,7 @@ export default class DataElement {
             this._type = type;
         }
     }
-    get type(): $Values<typeof elementTypes> {
+    get type(): $Keys<typeof elementTypes> {
         return this._type;
     }
 
