@@ -22,10 +22,9 @@ const optionSetConvertersForType = {
     [dataElementTypes.TIME]: convertTime,
     [dataElementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [dataElementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
-    // [dataElementTypes.DURATION_MINUTES]: (d2Value: string) => parseDurationRepresentationtoMinutes(d2Value),
 };
 
-export function convertOptionSetValue(value: any, type: $Values<typeof dataElementTypes>) {
+export function convertOptionSetValue(value: any, type: $Keys<typeof dataElementTypes>) {
     if (value == null) {
         return null;
     }
@@ -51,7 +50,7 @@ const valueConvertersForType = {
     },
 };
 
-export function convertValue(value: any, type: $Values<typeof dataElementTypes>) {
+export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
     if (value == null) {
         return null;
     }

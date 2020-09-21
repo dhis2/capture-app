@@ -1,9 +1,9 @@
 // @flow
-import elementTypes from '../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../metaData';
 import { convertValue as convertToServerValue } from '../converters/clientToServer';
 import { convertValue as convertToClientValue } from '../converters/serverToClient';
 
-type ConverterFn = (type: $Keys<typeof elementTypes>, value: any) => any;
+type ConverterFn = (type: $Keys<typeof dataElementTypes>, value: any) => any;
 
 type InputCompareKeys = {
     enrollmentDate?: ?string,
@@ -18,7 +18,7 @@ type CompareKeys = {
 function getConvertedValue(valueToConvert: any, key: string, onConvertValue: ConverterFn, compareKeys: CompareKeys) {
     let convertedValue;
     if (key === compareKeys.enrollmentDate || key === compareKeys.incidentDate) {
-        convertedValue = onConvertValue(valueToConvert, elementTypes.DATE);
+        convertedValue = onConvertValue(valueToConvert, dataElementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
     }

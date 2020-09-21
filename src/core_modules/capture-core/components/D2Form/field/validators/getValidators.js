@@ -26,8 +26,7 @@ import {
     getDateTimeRangeValidator,
     getTimeRangeValidator,
 } from '../../../../utils/validators/form';
-import type { DataElement } from '../../../../metaData';
-import { dataElementTypes as elementTypes, DateDataElement } from "../../../../metaData";
+import { dataElementTypes, type DateDataElement, type DataElement } from '../../../../metaData';
 import { validatorTypes } from './constants';
 
 type Validator = (value: any) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any};
@@ -102,37 +101,37 @@ const validatorForNumber = () => ({
 
 // todo (report lgtm)
 const validatorsForTypes = {
-    [elementTypes.NUMBER]: [{
+    [dataElementTypes.NUMBER]: [{
         validator: isValidNumber,
         message: errorMessages.NUMBER,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.INTEGER]: [{
+    [dataElementTypes.INTEGER]: [{
         validator: isValidInteger,
         message: errorMessages.INTEGER,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.INTEGER_POSITIVE]: [{
+    [dataElementTypes.INTEGER_POSITIVE]: [{
         validator: isValidPositiveInteger,
         message: errorMessages.POSITIVE_INTEGER,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: [{
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: [{
         validator: isValidZeroOrPositiveInteger,
         message: errorMessages.ZERO_OR_POSITIVE_INTEGER,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.INTEGER_NEGATIVE]: [{
+    [dataElementTypes.INTEGER_NEGATIVE]: [{
         validator: isValidNegativeInteger,
         message: errorMessages.NEGATIVE_INTEGER,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.TIME]: [{
+    [dataElementTypes.TIME]: [{
         validator: isValidTime,
         message: errorMessages.TIME,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.DATE]: [
+    [dataElementTypes.DATE]: [
         {
             validator: isValidDate,
             message: errorMessages.DATE,
@@ -143,82 +142,82 @@ const validatorsForTypes = {
             type: validatorTypes.TYPE_EXTENDED,
             message: errorMessages.DATE_FUTURE_NOT_ALLOWED,
         }],
-    [elementTypes.DATETIME]: [{
+    [dataElementTypes.DATETIME]: [{
         validator: isValidDateTime,
         message: errorMessages.DATETIME,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.EMAIL]: [{
+    [dataElementTypes.EMAIL]: [{
         validator: isValidEmail,
         message: errorMessages.EMAIL,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.PERCENTAGE]: [{
+    [dataElementTypes.PERCENTAGE]: [{
         validator: isValidPercentage,
         message: errorMessages.PERCENTAGE,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.URL]: [{
+    [dataElementTypes.URL]: [{
         validator: isValidUrl,
         message: errorMessages.URL,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.AGE]: [{
+    [dataElementTypes.AGE]: [{
         validator: isValidAge,
         message: errorMessages.AGE,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.PHONE_NUMBER]: [{
+    [dataElementTypes.PHONE_NUMBER]: [{
         validator: isValidPhoneNumber,
         message: errorMessages.PHONE_NUMBER,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.ORGANISATION_UNIT]: [{
+    [dataElementTypes.ORGANISATION_UNIT]: [{
         validator: isValidOrgUnit,
         message: errorMessages.ORGANISATION_UNIT,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.COORDINATE]: [{
+    [dataElementTypes.COORDINATE]: [{
         validator: isValidCoordinate,
         message: errorMessages.COORDINATE,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.DATE_RANGE]: [{
+    [dataElementTypes.DATE_RANGE]: [{
         validator: getDateRangeValidator(errorMessages.DATE),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.DATETIME_RANGE]: [{
+    [dataElementTypes.DATETIME_RANGE]: [{
         validator: getDateTimeRangeValidator(errorMessages.DATETIME),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.TIME_RANGE]: [{
+    [dataElementTypes.TIME_RANGE]: [{
         validator: getTimeRangeValidator(errorMessages.TIME),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.NUMBER_RANGE]: [{
+    [dataElementTypes.NUMBER_RANGE]: [{
         validator: getNumberRangeValidator(validatorForNumber()),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.INTEGER_RANGE]: [{
+    [dataElementTypes.INTEGER_RANGE]: [{
         validator: getNumberRangeValidator(validatorForInteger()),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.INTEGER_POSITIVE_RANGE]: [{
+    [dataElementTypes.INTEGER_POSITIVE_RANGE]: [{
         validator: getNumberRangeValidator(validatorForPositiveInteger()),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: [{
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: [{
         validator: getNumberRangeValidator(validatorForZeroOrPositiveInteger()),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
     }],
-    [elementTypes.INTEGER_NEGATIVE_RANGE]: [{
+    [dataElementTypes.INTEGER_NEGATIVE_RANGE]: [{
         validator: getNumberRangeValidator(validatorForNegativeInteger()),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
@@ -227,7 +226,7 @@ const validatorsForTypes = {
 };
 
 function buildTypeValidators(metaData: DataElement | DateDataElement): Array<?ValidatorContainer> {
-    // $FlowFixMe elementTypes flow error
+    // $FlowFixMe dataElementTypes flow error
     let validatorContainersForType = validatorsForTypes[metaData.type] ? validatorsForTypes[metaData.type] : [];
 
 
@@ -239,7 +238,7 @@ function buildTypeValidators(metaData: DataElement | DateDataElement): Array<?Va
             }
 
             const toValidateValue = isString(value) ? value.trim() : value;
-            // $FlowFixMe
+            // $FlowFixMe dataElementTypes flow error
             return validatorContainer.validator(toValidateValue, metaData.allowFutureDate);
         },
     }));
