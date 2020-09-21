@@ -79,6 +79,6 @@ export function convertValue(value: any, type: DataElementTypes, dataElement?: ?
         return dataElement.optionSet.getOptionText(value);
     }
 
-    // $FlowFixMe elementTypes flow error
+    // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }

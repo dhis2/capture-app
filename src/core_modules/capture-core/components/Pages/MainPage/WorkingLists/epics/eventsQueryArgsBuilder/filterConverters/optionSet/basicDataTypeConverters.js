@@ -27,6 +27,6 @@ const valueConvertersForType = {
 };
 
 export function convertDataTypeValueToRequest(value: any, type: DataElementTypes) {
-    // $FlowFixMe elementTypes flow error
+    // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }

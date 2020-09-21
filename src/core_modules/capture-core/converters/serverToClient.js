@@ -29,7 +29,7 @@ export function convertOptionSetValue(value: any, type: DataElementTypes) {
         return null;
     }
 
-    // $FlowFixMe elementTypes flow error
+    // $FlowFixMe dataElementTypes flow error
     return optionSetConvertersForType[type] ? optionSetConvertersForType[type](value) : value;
 }
 

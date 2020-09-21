@@ -26,7 +26,7 @@ export function convertValue(value: any, type: DataElementTypes, metaElement: Da
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-    // $FlowFixMe elementTypes flow error
+    // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value, metaElement.id) : equals(value, metaElement.id);
 }
 

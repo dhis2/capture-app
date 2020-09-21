@@ -79,13 +79,13 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
             };
         }
 
-        // $FlowFixMe elementTypes flow error
+        // $FlowFixMe dataElementTypes flow error
         const typeValidator = DateFilter.validatorForTypes[type];
         const isValid = typeValidator(value);
 
         return {
             isValid,
-            // $FlowFixMe elementTypes flow error
+            // $FlowFixMe dataElementTypes flow error
             error: isValid ? null : i18n.t(DateFilter.errorMessages[type]),
         };
     }

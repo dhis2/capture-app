@@ -46,6 +46,6 @@ export function buildButtonText(
         return getOptionSetText(filter, optionSet);
     }
 
-    // $FlowFixMe elementTypes flow error
+    // $FlowFixMe dataElementTypes flow error
     return (convertersForTypes[type] ? convertersForTypes[type](filter) : filter);
 }

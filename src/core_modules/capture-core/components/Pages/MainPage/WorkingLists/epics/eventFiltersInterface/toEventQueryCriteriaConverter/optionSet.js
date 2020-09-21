@@ -32,6 +32,6 @@ export const getApiOptionSetFilter =
     (filter: OptionSetFilterData, type: DataElementTypes): ApiDataFilterOptionSet => ({
         in: filter
             .values
-            // $FlowFixMe elementTypes flow error
+            // $FlowFixMe dataElementTypes flow error
             .map(value => (converterByType[type] ? converterByType[type](value) : value.toString())),
     });

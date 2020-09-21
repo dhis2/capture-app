@@ -44,7 +44,7 @@ function convertFilter(
     if (sourceValue.usingOptionSet) {
         return convertOptionSet(sourceValue, type);
     }
-    // $FlowFixMe elementTypes flow error
+    // $FlowFixMe dataElementTypes flow error
     return mappersForTypes[type] ? mappersForTypes[type](sourceValue, meta.key, meta.listId, meta.isInit) : sourceValue;
 }
 

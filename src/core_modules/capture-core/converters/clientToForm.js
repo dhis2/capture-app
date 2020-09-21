@@ -75,6 +75,6 @@ export function convertValue(value: any, type: DataElementTypes) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-    // $FlowFixMe elementTypes flow error
+    // $FlowFixMe dataElementTypes flow error
     return (valueConvertersForType[type] ? valueConvertersForType[type](value) : value);
 }

@@ -106,7 +106,7 @@ export default class DataElement {
             log.warn(errorCreator(DataElement.errorMessages.TYPE_NOT_FOUND)({ dataElement: this, type }));
             this._type = dataElementTypes.UNKNOWN;
         } else {
-            // $FlowFixMe elementTypes flow error
+            // $FlowFixMe dataElementTypes flow error
             this._type = type;
         }
     }

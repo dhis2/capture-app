@@ -69,13 +69,13 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
             };
         }
 
-        // $FlowFixMe elementTypes flow error
+        // $FlowFixMe dataElementTypes flow error
         const typeValidator = NumericFilter.validatorForTypes[type];
         const isValid = typeValidator(value);
 
         return {
             isValid,
-            // $FlowFixMe elementTypes flow error
+            // $FlowFixMe dataElementTypes flow error
             error: isValid ? null : i18n.t(NumericFilter.errorMessages[type]),
         };
     }
