@@ -102,10 +102,11 @@ export default class DataElement {
     }
 
     set type(type: string) {
-        if (elementTypes[type]) {
+        if (!elementTypes[type]) {
             log.warn(errorCreator(DataElement.errorMessages.TYPE_NOT_FOUND)({ dataElement: this, type }));
             this._type = elementTypes.UNKNOWN;
         } else {
+            // $FlowFixMe elementTypes flow error
             this._type = type;
         }
     }

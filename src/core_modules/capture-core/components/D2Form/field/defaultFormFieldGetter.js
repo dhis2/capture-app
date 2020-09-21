@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { type DataElement, DateDataElement } from '../../../metaData';
+import { type DataElement } from '../../../metaData';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import {
     getTextFieldConfig,
@@ -51,7 +51,7 @@ const fieldForTypes: FieldForTypes = {
     [elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: getTextRangeFieldConfig,
     [elementTypes.BOOLEAN]: getBooleanFieldConfig,
     [elementTypes.TRUE_ONLY]: getTrueOnlyFieldConfig,
-    [elementTypes.DATE]: getDateFieldConfig,
+    [elementTypes.DATE]: (metaData: any, options: Object) => getDateFieldConfig(metaData, options),
     [elementTypes.DATE_RANGE]: getDateRangeFieldConfig,
     [elementTypes.DATETIME]: getDateTimeFieldConfig,
     [elementTypes.DATETIME_RANGE]: getDateTimeRangeFieldConfig,

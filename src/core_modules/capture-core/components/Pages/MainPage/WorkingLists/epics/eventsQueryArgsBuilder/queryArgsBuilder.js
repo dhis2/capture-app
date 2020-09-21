@@ -34,7 +34,7 @@ const mappersForTypes = {
 
 function convertFilter(
     sourceValue: Object,
-    type: string,
+    type: $Keys<typeof dataElementTypes>,
     meta: {
         key: string,
         listId: string,
@@ -44,9 +44,8 @@ function convertFilter(
     if (sourceValue.usingOptionSet) {
         return convertOptionSet(sourceValue, type);
     }
-    return mappersForTypes[type] ?
-        mappersForTypes[type](sourceValue, meta.key, meta.listId, meta.isInit) :
-        sourceValue;
+    // $FlowFixMe elementTypes flow error
+    return mappersForTypes[type] ? mappersForTypes[type](sourceValue, meta.key, meta.listId, meta.isInit) : sourceValue;
 }
 
 function convertFilters(
