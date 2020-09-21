@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -38,6 +38,18 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr "在同一个容器中你打开了其它版本的采集App。当前，该应用仅仅支持同时运行一个版本应用。请刷新页面，如果你想使用该版本。注意将关闭其它版本。"
+
+msgid "Last updated"
+msgstr ""
+
+msgid "Enrolled"
+msgstr ""
+
+msgid "Previously enrolled"
+msgstr ""
+
+msgid "Not enrolled"
+msgstr ""
 
 msgid "Columns to show in table"
 msgstr "表中显示的列"
@@ -321,14 +333,14 @@ msgstr "项目不存在"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "选择的项目对选择的机构无效"
 
+msgid "Start again"
+msgstr "再开始"
+
 msgid "New {{typeName}}"
 msgstr "新建 {{typeName}}"
 
 msgid "New"
 msgstr "新建"
-
-msgid "Start again"
-msgstr "再开始"
 
 msgid "Find"
 msgstr "查询"
@@ -690,6 +702,56 @@ msgstr "创建新的{{trackedEntityType}}"
 msgid "Register"
 msgstr "注册"
 
+msgid "Search scope"
+msgstr ""
+
+msgid "Find results from"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+
+msgid "Search {{name}}"
+msgstr ""
+
+msgid "Find by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr "按属性搜索"
+
+msgid "Back"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+
+msgid "Make a selection to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "result(s) found for term(s)"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
@@ -724,9 +786,6 @@ msgstr "选择的项目"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
-
-msgid "Search by attributes"
-msgstr "按属性搜索"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"

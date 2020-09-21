@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -43,6 +43,18 @@ msgstr ""
 " Capture App bare å kjøre en versjon samtidig (i samme domene). Oppdater "
 "denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
 "at dette vil lukke andre versjoner."
+
+msgid "Last updated"
+msgstr ""
+
+msgid "Enrolled"
+msgstr ""
+
+msgid "Previously enrolled"
+msgstr ""
+
+msgid "Not enrolled"
+msgstr ""
 
 msgid "Columns to show in table"
 msgstr "Kolonner som skal vises i tabellen"
@@ -328,14 +340,14 @@ msgstr "Programmet finnes ikke"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Valgt program er ugyldig for registreringsenhet"
 
+msgid "Start again"
+msgstr "Start på nytt"
+
 msgid "New {{typeName}}"
 msgstr "Ny {{typeName}}"
 
 msgid "New"
 msgstr "Ny"
-
-msgid "Start again"
-msgstr "Start på nytt"
 
 msgid "Find"
 msgstr "Finn"
@@ -708,6 +720,56 @@ msgstr "Opprett ny {{trackedEntityType}}"
 msgid "Register"
 msgstr "Registrere"
 
+msgid "Search scope"
+msgstr ""
+
+msgid "Find results from"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+
+msgid "Search {{name}}"
+msgstr ""
+
+msgid "Find by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr "Søk etter attributter"
+
+msgid "Back"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+
+msgid "Make a selection to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "result(s) found for term(s)"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
@@ -744,9 +806,6 @@ msgstr "Valgt program"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Søk {{uniqueAttrName}}"
-
-msgid "Search by attributes"
-msgstr "Søk etter attributter"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Fyll inn minst {{minAttributesRequired}} attributter for å søke"
