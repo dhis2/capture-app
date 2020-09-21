@@ -10,6 +10,7 @@
     "extends": [
         "airbnb",
         "plugin:flowtype/recommended",
+        "plugin:react-hooks/recommended",
         "react-app"
     ],
     "plugins": [
@@ -21,6 +22,7 @@
     },
     "globals": {
         "cy": true,
+        "before": true,
         "document": true,
         "window": true,
         "it": true,
@@ -29,6 +31,7 @@
         "Given": true,
         "When": true,
         "Then": true,
+        "And": true,
         "Cypress": true
     },
     "rules": {

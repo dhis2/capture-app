@@ -5,12 +5,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { Button } from '../../../../../Buttons';
-import CardList from '../../../../../CardList/CardList.component';
-import type { DataElement } from '../../../../../../metaData';
+import { CardList } from '../../../../../CardList';
+import type { CardDataElementsInformation } from '../../../../Search/SearchResults/SearchResults.types';
 
 type Props = {
     attributeValues: {[id: string]: any},
-    dataElements: Array<DataElement>,
+    dataElements: CardDataElementsInformation,
     onLink: (values: Object) => void,
     onCancel: Function,
 };

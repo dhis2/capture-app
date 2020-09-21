@@ -24,6 +24,7 @@ const withErrorMessageHandler = () =>
             if (error) {
                 return (
                     <div
+                        data-test="dhis2-capture-error-message-handler"
                         className={classes.errorContainer}
                     >
                         {error}
