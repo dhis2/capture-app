@@ -102,7 +102,7 @@
     "eslint-plugin-react-hooks": "4.1.2",
     "fake-indexeddb": "^2.1.1",
     "flow-bin": "^0.127.0",
-    "husky": "^4.2.5",
+    "husky": "^4.3.0",
     "jest-localstorage-mock": "^2.4.0",
     "jsdoc": "^3.6.4",
     "jsdoc-babel": "^0.5.0",
