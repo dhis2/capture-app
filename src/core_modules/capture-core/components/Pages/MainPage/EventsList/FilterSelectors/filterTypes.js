@@ -1,30 +1,24 @@
 // @flow
 import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 
-export const filterTypesArray = [
+export const filterTypesObject = {
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.TEXT,
+    [elementTypes.TEXT]: elementTypes.TEXT,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.NUMBER,
+    [elementTypes.NUMBER]: elementTypes.NUMBER,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.INTEGER,
+    [elementTypes.INTEGER]: elementTypes.INTEGER,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.INTEGER_POSITIVE,
+    [elementTypes.INTEGER_POSITIVE]: elementTypes.INTEGER_POSITIVE,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.INTEGER_NEGATIVE,
+    [elementTypes.INTEGER_NEGATIVE]: elementTypes.INTEGER_NEGATIVE,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.INTEGER_ZERO_OR_POSITIVE,
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: elementTypes.INTEGER_ZERO_OR_POSITIVE,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.DATE,
+    [elementTypes.DATE]: elementTypes.DATE,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.BOOLEAN,
-    // $FlowFixMe[prop-missing] automated comment
-    elementTypes.TRUE_ONLY,
-    'ASSIGNEE',
-];
-
-export const filterTypesObject = filterTypesArray.reduce((accFilterTypesObject, type) => {
-    accFilterTypesObject[type] = type;
-    return accFilterTypesObject;
-}, {});
+    [elementTypes.BOOLEAN]: elementTypes.BOOLEAN,
+    [elementTypes.TRUE_ONLY]: elementTypes.TRUE_ONLY,
+    [elementTypes.ASSIGNEE]: elementTypes.ASSIGNEE,
+};
 

@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
 import { moment } from 'capture-core-utils/moment';
-import elementTypes from '../metaData/DataElement/elementTypes';
-import DataElement from '../metaData/DataElement/DataElement';
+import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import stringifyNumber from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
@@ -43,41 +42,25 @@ function convertResourceForView(clientValue: FileClientValue) {
     );
 }
 
-// todo report (lgmt)
 const valueConvertersForType = {
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.NUMBER]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_POSITIVE]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.DATE]: convertDateForView,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.DATETIME]: convertDateTimeForView,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.TIME]: convertTimeForView,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.TRUE_ONLY]: () => 'Yes',
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.COORDINATE]: MinimalCoordinates,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.AGE]: convertDateForView,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.FILE_RESOURCE]: convertResourceForView,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.IMAGE]: convertResourceForView,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
+    [dataElementTypes.NUMBER]: stringifyNumber,
+    [dataElementTypes.INTEGER]: stringifyNumber,
+    [dataElementTypes.INTEGER_POSITIVE]: stringifyNumber,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
+    [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
+    [dataElementTypes.DATE]: convertDateForView,
+    [dataElementTypes.DATETIME]: convertDateTimeForView,
+    [dataElementTypes.TIME]: convertTimeForView,
+    [dataElementTypes.TRUE_ONLY]: () => 'Yes',
+    [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
+    [dataElementTypes.COORDINATE]: MinimalCoordinates,
+    [dataElementTypes.AGE]: convertDateForView,
+    [dataElementTypes.FILE_RESOURCE]: convertResourceForView,
+    [dataElementTypes.IMAGE]: convertResourceForView,
+    [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
 };
 
-export function convertValue(value: any, type: $Values<typeof elementTypes>, dataElement?: ?DataElement) {
+export function convertValue(value: any, type: $Values<typeof dataElementTypes>, dataElement?: ?DataElement) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
@@ -86,6 +69,6 @@ export function convertValue(value: any, type: $Values<typeof elementTypes>, dat
         return dataElement.optionSet.getOptionText(value);
     }
 
-
+    // $FlowFixMe elementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }

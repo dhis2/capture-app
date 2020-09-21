@@ -27,7 +27,7 @@ import {
     getTimeRangeValidator,
 } from '../../../../utils/validators/form';
 import type { DataElement } from '../../../../metaData';
-import { dataElementTypes as elementTypes } from '../../../../metaData';
+import { dataElementTypes as elementTypes, DateDataElement } from "../../../../metaData";
 import { validatorTypes } from './constants';
 
 type Validator = (value: any) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any};
@@ -226,7 +226,7 @@ const validatorsForTypes = {
     }],
 };
 
-function buildTypeValidators(metaData: DataElement): Array<?ValidatorContainer> {
+function buildTypeValidators(metaData: DataElement | DateDataElement): Array<?ValidatorContainer> {
     // $FlowFixMe elementTypes flow error
     let validatorContainersForType = validatorsForTypes[metaData.type] ? validatorsForTypes[metaData.type] : [];
 

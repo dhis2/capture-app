@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { errorCreator } from 'capture-core-utils';
 import FilterButton from './FilterButton/FilterButton.container';
 import FilterRestMenu from './FilterRestMenu/FilterRestMenu.component';
-import { filterTypesArray } from './filterTypes';
+import { filterTypesObject } from './filterTypes';
 import type { Column } from '../eventList.types';
 
 const getStyles = (theme: Theme) => ({
@@ -27,7 +27,7 @@ type Props = {
 const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
     new Map(
         columns
-            .filter(col => filterTypesArray.includes(col.type))
+            .filter(col => Object.values(filterTypesObject).includes(col.type))
             .map((element, index) => ({
                 element,
                 index,

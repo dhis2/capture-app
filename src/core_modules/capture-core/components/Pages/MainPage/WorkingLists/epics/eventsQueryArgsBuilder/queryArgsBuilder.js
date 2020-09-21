@@ -52,7 +52,6 @@ function convertFilter(
     },
 ) {
     if (sourceValue.usingOptionSet) {
-        // $FlowFixMe[incompatible-call] automated comment
         return convertOptionSet(sourceValue, type);
     }
     return mappersForTypes[type] ?
