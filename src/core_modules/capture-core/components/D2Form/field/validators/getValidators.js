@@ -69,63 +69,42 @@ const compulsoryValidatorWrapper = (value: any) => {
     return hasValue(trimmedValue);
 };
 
-const validatorForInteger = () => ({
+const validatorForInteger = {
     validator: isValidInteger,
     message: errorMessages.INTEGER,
     type: validatorTypes.TYPE_BASE,
-});
+};
 
-const validatorForPositiveInteger = () => ({
+const validatorForPositiveInteger = {
     validator: isValidPositiveInteger,
     message: errorMessages.POSITIVE_INTEGER,
     type: validatorTypes.TYPE_BASE,
-});
+};
 
-const validatorForZeroOrPositiveInteger = () => ({
+const validatorForZeroOrPositiveInteger = {
     validator: isValidZeroOrPositiveInteger,
     message: errorMessages.ZERO_OR_POSITIVE_INTEGER,
     type: validatorTypes.TYPE_BASE,
-});
+};
 
-const validatorForNegativeInteger = () => ({
+const validatorForNegativeInteger = {
     validator: isValidNegativeInteger,
     message: errorMessages.NEGATIVE_INTEGER,
     type: validatorTypes.TYPE_BASE,
-});
+};
 
-const validatorForNumber = () => ({
+const validatorForNumber = {
     validator: isValidNumber,
     message: errorMessages.NUMBER,
     type: validatorTypes.TYPE_BASE,
-});
+};
 
-// todo (report lgtm)
 const validatorsForTypes = {
-    [dataElementTypes.NUMBER]: [{
-        validator: isValidNumber,
-        message: errorMessages.NUMBER,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.INTEGER]: [{
-        validator: isValidInteger,
-        message: errorMessages.INTEGER,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.INTEGER_POSITIVE]: [{
-        validator: isValidPositiveInteger,
-        message: errorMessages.POSITIVE_INTEGER,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: [{
-        validator: isValidZeroOrPositiveInteger,
-        message: errorMessages.ZERO_OR_POSITIVE_INTEGER,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.INTEGER_NEGATIVE]: [{
-        validator: isValidNegativeInteger,
-        message: errorMessages.NEGATIVE_INTEGER,
-        type: validatorTypes.TYPE_BASE,
-    }],
+    [dataElementTypes.NUMBER]: [validatorForNumber],
+    [dataElementTypes.INTEGER]: [validatorForInteger],
+    [dataElementTypes.INTEGER_POSITIVE]: [validatorForPositiveInteger],
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: [validatorForZeroOrPositiveInteger],
+    [dataElementTypes.INTEGER_NEGATIVE]: [validatorForNegativeInteger],
     [dataElementTypes.TIME]: [{
         validator: isValidTime,
         message: errorMessages.TIME,
@@ -136,9 +115,9 @@ const validatorsForTypes = {
             validator: isValidDate,
             message: errorMessages.DATE,
             type: validatorTypes.TYPE_BASE,
-        }, {
-            validator: (value: string, allowFutureDate) =>
-                (allowFutureDate ? true : isValidNonFutureDate(value)),
+        },
+        {
+            validator: (value: string, allowFutureDate) => (allowFutureDate ? true : isValidNonFutureDate(value)),
             type: validatorTypes.TYPE_EXTENDED,
             message: errorMessages.DATE_FUTURE_NOT_ALLOWED,
         }],
@@ -198,27 +177,27 @@ const validatorsForTypes = {
         type: validatorTypes.TYPE_BASE,
     }],
     [dataElementTypes.NUMBER_RANGE]: [{
-        validator: getNumberRangeValidator(validatorForNumber()),
+        validator: getNumberRangeValidator(validatorForNumber),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
     }],
     [dataElementTypes.INTEGER_RANGE]: [{
-        validator: getNumberRangeValidator(validatorForInteger()),
+        validator: getNumberRangeValidator(validatorForInteger),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
     }],
     [dataElementTypes.INTEGER_POSITIVE_RANGE]: [{
-        validator: getNumberRangeValidator(validatorForPositiveInteger()),
+        validator: getNumberRangeValidator(validatorForPositiveInteger),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
     }],
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: [{
-        validator: getNumberRangeValidator(validatorForZeroOrPositiveInteger()),
+        validator: getNumberRangeValidator(validatorForZeroOrPositiveInteger),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
     }],
     [dataElementTypes.INTEGER_NEGATIVE_RANGE]: [{
-        validator: getNumberRangeValidator(validatorForNegativeInteger()),
+        validator: getNumberRangeValidator(validatorForNegativeInteger),
         message: errorMessages.RANGE,
         type: validatorTypes.TYPE_BASE,
 
