@@ -13,7 +13,6 @@ export function convertMainEventClientToList(event: Object) {
         case 'eventDate':
         case 'dueDate':
         case 'completedDate':
-            // $FlowFixMe[prop-missing] automated comment
             convertedValue = convertClientToList(value, elementTypeKeys.DATE);
             break;
         case 'assignee':

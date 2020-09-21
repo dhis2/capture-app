@@ -117,14 +117,8 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                                 id: instance.trackedEntityInstance,
                                 values: {
                                     ...convertedValues,
-                                    /* $FlowFixMe[prop-missing] automated
-                                     * comment */
                                     registrationDate: convertServerToClient(instance.created, dataElementTypes.DATETIME),
-                                    /* $FlowFixMe[prop-missing] automated
-                                     * comment */
                                     registrationUnit: convertServerToClient(instance.orgUnit, dataElementTypes.TEXT),
-                                    /* $FlowFixMe[prop-missing] automated
-                                     * comment */
                                     inactive: convertServerToClient(instance.inactive, dataElementTypes.BOOLEAN),
                                 },
                             };

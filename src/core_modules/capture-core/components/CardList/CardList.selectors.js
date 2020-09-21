@@ -11,7 +11,6 @@ const makeElementsContainerSelector = () => createSelector(
     elementsSelector,
     (elements) => {
         const newElements = [...elements];
-        // $FlowFixMe[prop-missing] automated comment
         const imageDataElement = elements.find(a => a.type === elementTypes.IMAGE);
         if (imageDataElement) {
             newElements.splice(newElements.indexOf(imageDataElement), 1);

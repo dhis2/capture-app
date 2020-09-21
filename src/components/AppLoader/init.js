@@ -23,7 +23,6 @@ function setLogLevel() {
         [environments.prod]: log.levels.ERROR,
     };
 
-    // $FlowFixMe[invalid-computed-prop] automated comment
     let level = levels[process.env.NODE_ENV];
     if (!level && level !== 0) {
         level = log.levels.ERROR;

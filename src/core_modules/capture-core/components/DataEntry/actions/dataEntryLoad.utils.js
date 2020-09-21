@@ -85,7 +85,6 @@ export function getDataEntryNotes(
     const notes = clientValuesForDataEntry.notes || [];
     return notes.map((note, index) => ({
         ...note,
-        // $FlowFixMe[prop-missing] automated comment
         storedDate: convertListValue(note.storedDate, elementTypes.DATETIME),
         key: index,
     }));

@@ -37,7 +37,6 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
             const notes = (eventContainer && eventContainer.event && eventContainer.event.notes) || [];
             const convertedNotes = notes.map(note => ({
                 ...note,
-                // $FlowFixMe[prop-missing] automated comment
                 storedDate: convertListValue(note.storedDate, elementTypes.DATETIME),
             }));
             // Load event relationships
@@ -67,7 +66,6 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
             const clientNote = {
                 value: payload.note,
                 storedBy: userName,
-                // $FlowFixMe[prop-missing] automated comment
                 storedDate: convertListValue(moment().toISOString(), elementTypes.DATETIME),
                 clientId: uuid(),
             };

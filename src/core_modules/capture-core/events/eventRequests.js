@@ -65,7 +65,6 @@ const mapEventInputKeyToOutputKey = {
 function getConvertedValue(valueToConvert: any, inputKey: string) {
     let convertedValue;
     if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
-        // $FlowFixMe[prop-missing] automated comment
         convertedValue = convertValue(valueToConvert, elementTypes.DATE);
     } else {
         convertedValue = valueToConvert;

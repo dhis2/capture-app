@@ -16,7 +16,6 @@ export const actionTypes = {
 };
 
 function getAssignee(clientAssignee: ?Object) {
-    // $FlowFixMe[prop-missing] automated comment
     return clientAssignee ? convertClientToForm(clientAssignee, elementTypeKeys.USERNAME) : clientAssignee;
 }
 

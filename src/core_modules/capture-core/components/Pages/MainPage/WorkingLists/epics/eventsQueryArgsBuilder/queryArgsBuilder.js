@@ -20,25 +20,15 @@ type QueryArgsSource = {
 };
 
 const mappersForTypes = {
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.TEXT]: convertText,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.NUMBER]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_POSITIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_NEGATIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.DATE]: convertDate,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.ASSIGNEE]: convertAssignee,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.BOOLEAN]: convertBoolean,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.TRUE_ONLY]: convertTrueOnly,
 };
 

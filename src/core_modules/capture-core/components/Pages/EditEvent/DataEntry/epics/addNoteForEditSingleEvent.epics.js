@@ -39,7 +39,6 @@ export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: R
             };
 
             const clientNote = { value: payload.note, storedBy: userName, storedDate: moment().toISOString(), clientId: uuid() };
-            // $FlowFixMe[prop-missing] automated comment
             const formNote = { ...clientNote, storedDate: convertListValue(clientNote.storedDate, elementTypes.DATETIME) };
             const saveContext = {
                 dataEntryId: payload.dataEntryId,

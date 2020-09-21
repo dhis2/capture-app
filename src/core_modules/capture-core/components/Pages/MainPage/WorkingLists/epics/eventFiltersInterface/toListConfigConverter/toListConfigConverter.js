@@ -105,29 +105,19 @@ const getAssigneeFilter = async (
 };
 
 const getFilterByType = {
-    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TEXT]: getTextFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.NUMBER]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_POSITIVE]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: getDateFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.BOOLEAN]: getBooleanFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
 const isOptionSetFilter = (type: $Keys<typeof elementTypes>, filter: any) => {
     if ([
-        // $FlowFixMe[prop-missing] automated comment
         elementTypes.BOOLEAN,
     ].includes(type)) {
         const validBooleanValues = ['true', 'false'];

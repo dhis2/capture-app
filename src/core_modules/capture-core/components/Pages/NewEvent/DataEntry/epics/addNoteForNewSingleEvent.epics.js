@@ -26,7 +26,6 @@ export const addNoteForNewSingleEventEpic = (action$: InputObservable) =>
             const note = {
                 value: payload.note,
                 storedBy: userName,
-                // $FlowFixMe[prop-missing] automated comment
                 storedDate: convertListValue(storedDate, elementTypes.DATETIME),
                 clientId: uuid(),
             };

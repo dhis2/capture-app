@@ -18,7 +18,6 @@ export default function getServerValuesToSaveFromMainEvent(event: CaptureClientE
             const valueToConvert = event[inputKey];
             let convertedValue;
             if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
-                // $FlowFixMe[prop-missing] automated comment
                 convertedValue = convertValue(valueToConvert, elementTypes.DATE);
             } else {
                 convertedValue = valueToConvert;
