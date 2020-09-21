@@ -2,10 +2,9 @@
 /* eslint-disable react/no-multi-comp */
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-
-import D2Form from '../D2Form/D2Form.component';
+import { D2Form } from '../D2Form';
 import placements from './constants/placements.const';
-import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
+import type { RenderFoundation } from '../../metaData';
 import getDataEntryKey from './common/getDataEntryKey';
 import StickyOnScroll from '../Sticky/StickyOnScroll.component';
 import Section from '../Section/Section.component';

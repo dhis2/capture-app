@@ -1,6 +1,7 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
+import type { ActionsObservable } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import uuid from 'd2-utilizr/lib/uuid';

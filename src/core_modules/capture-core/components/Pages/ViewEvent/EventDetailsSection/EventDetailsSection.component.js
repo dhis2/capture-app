@@ -8,7 +8,7 @@ import ViewEventSection from '../Section/ViewEventSection.component';
 import ViewEventSectionHeader from '../Section/ViewEventSectionHeader.component';
 import EditEventDataEntry from './EditEventDataEntry/EditEventDataEntry.container';
 import ViewEventDataEntry from './ViewEventDataEntry/ViewEventDataEntry.container';
-import { ProgramStage } from '../../../../metaData';
+import type { ProgramStage } from '../../../../metaData';
 
 const getStyles = (theme: Theme) => ({
     container: {

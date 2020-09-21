@@ -26,6 +26,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
 
             return (
                 <Button
+                    dataTest="dhis2-capture-create-and-link-button"
                     primary
                     onClick={onSave}
                 >

@@ -36,8 +36,11 @@ const AppLoader = (props: Props) => {
                 buildUrl(dataEngine.link.baseUrl, dataEngine.link.apiPath),
             );
             const history = createHistory();
-            // $FlowFixMe[prop-missing] automated comment
-            const store = getStore(history, () => onRunApp(store, history));
+            const store = getStore(
+                history,
+                dataEngine.mutate.bind(dataEngine),
+                // $FlowFixMe[prop-missing] automated comment
+                () => onRunApp(store, history));
         } catch (error) {
             let message = 'The application could not be loaded.';
             if (error && error instanceof DisplayException) {

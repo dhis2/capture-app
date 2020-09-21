@@ -6,10 +6,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Paper from '@material-ui/core/Paper/Paper';
 import Button from '../../../Buttons/Button.component';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import DataEntry from '../DataEntry/DataEntry.container';
 import EventsList from '../RecentlyAddedEventsList/RecentlyAddedEventsList.container';
-import { ProgramStage } from '../../../../metaData';
+import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 
 
 const getStyles = (theme: Theme) => ({
@@ -101,7 +100,7 @@ class NewEventDataEntryWrapper extends React.Component<Props> {
                     <ChevronLeft />
                     {i18n.t('Show all events')}
                 </Button>
-                <Paper className={classes.dataEntryPaper}>
+                <Paper className={classes.dataEntryPaper} data-test="dhis2-capture-new-event-page">
                     {this.renderHeader()}
                     <DataEntry
                         stage={stage}

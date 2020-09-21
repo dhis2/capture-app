@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
+"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -31,6 +31,13 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr "将 "
+
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
+msgstr "在同一个容器中你打开了其它版本的采集App。当前，该应用仅仅支持同时运行一个版本应用。请刷新页面，如果你想使用该版本。注意将关闭其它版本。"
 
 msgid "Columns to show in table"
 msgstr "表中显示的列"
@@ -295,6 +302,9 @@ msgstr "清除"
 
 msgid "No results"
 msgstr "无结果"
+
+msgid "start typing to search"
+msgstr "开始输入搜索内容"
 
 msgid "suggestions could not be retrieved"
 msgstr "建议不能提取"
@@ -792,13 +802,6 @@ msgstr "删除多边形"
 
 msgid "Set area"
 msgstr "设置区域"
-
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
-msgstr "在同一个容器中你打开了其它版本的采集App。当前，该应用仅仅支持同时运行一个版本应用。请刷新页面，如果你想使用该版本。注意将关闭其它版本。"
 
 msgid "Compatibility mode"
 msgstr "兼容性模式"

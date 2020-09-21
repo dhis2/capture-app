@@ -3,6 +3,7 @@
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
+import type { ActionsObservable } from 'redux-observable';
 import { map, filter, takeUntil, catchError, mergeMap, mergeAll } from 'rxjs/operators';
 import { race, of, from } from 'rxjs';
 import { pipe as pipeD2, errorCreator } from 'capture-core-utils';
