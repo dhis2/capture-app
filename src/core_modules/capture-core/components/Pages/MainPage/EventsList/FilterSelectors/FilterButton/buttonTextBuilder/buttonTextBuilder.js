@@ -39,7 +39,7 @@ function getOptionSetText(filter: OptionSetFilterData, optionSet: OptionSet) {
 
 export function buildButtonText(
     filter: any,
-    type: $Keys<typeof dataElementTypes>,
+    type: DataElementTypes,
     optionSet: OptionSet,
 ) {
     if (filter.usingOptionSet && optionSet) {

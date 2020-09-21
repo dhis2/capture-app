@@ -24,7 +24,7 @@ const optionSetConvertersForType = {
     [dataElementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
 };
 
-export function convertOptionSetValue(value: any, type: $Keys<typeof dataElementTypes>) {
+export function convertOptionSetValue(value: any, type: DataElementTypes) {
     if (value == null) {
         return null;
     }
@@ -50,7 +50,7 @@ const valueConvertersForType = {
     },
 };
 
-export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
+export function convertValue(value: any, type: DataElementTypes) {
     if (value == null) {
         return null;
     }

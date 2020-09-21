@@ -34,7 +34,7 @@ const mappersForTypes = {
 
 function convertFilter(
     sourceValue: Object,
-    type: $Keys<typeof dataElementTypes>,
+    type: DataElementTypes,
     meta: {
         key: string,
         listId: string,

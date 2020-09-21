@@ -16,7 +16,7 @@ import {
     sorLabelPlacements,
 } from 'capture-ui';
 import SortLabelWrapper from '../../DataTable/SortLabelWrapper.component';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../../../metaData';
 
 const styles = theme => ({
     loaderContainer: {
@@ -70,7 +70,7 @@ type Column = {
     id: string,
     header: string,
     visible: boolean,
-    type: $Keys<typeof elementTypes>,
+    type: DataElementTypes,
 };
 
 type Props = {
@@ -103,16 +103,16 @@ class OfflineList extends Component<Props> {
     };
     static typesWithAscendingInitialDirection = [
         // todo (report lgmt)
-        elementTypes.TEXT,
-        elementTypes.LONG_TEXT,
+        dataElementTypes.TEXT,
+        dataElementTypes.LONG_TEXT,
     ];
 
     static typesWithRightPlacement = [
-        elementTypes.NUMBER,
-        elementTypes.INTEGER,
-        elementTypes.INTEGER_POSITIVE,
-        elementTypes.INTEGER_NEGATIVE,
-        elementTypes.INTEGER_ZERO_OR_POSITIVE,
+        dataElementTypes.NUMBER,
+        dataElementTypes.INTEGER,
+        dataElementTypes.INTEGER_POSITIVE,
+        dataElementTypes.INTEGER_NEGATIVE,
+        dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
 
     renderHeaderRow(visibleColumns: Array<Column>) {

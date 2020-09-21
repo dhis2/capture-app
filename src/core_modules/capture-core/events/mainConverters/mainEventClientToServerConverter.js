@@ -1,7 +1,7 @@
 // @flow
 import { convertClientToServer } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
-import elementTypeKeys from '../../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../../metaData';
 
 export function convertMainEventClientToServer(event: Object) {
     const mapClientKeyToServerKey = {
@@ -22,7 +22,7 @@ export function convertMainEventClientToServer(event: Object) {
         case 'eventDate':
         case 'dueDate':
         case 'completedDate':
-            convertedValue = convertClientToServer(value, elementTypeKeys.DATE);
+            convertedValue = convertClientToServer(value, dataElementTypes.DATE);
             break;
         case 'assignee':
             convertedValue = value && value.id;

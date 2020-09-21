@@ -2,8 +2,6 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-import elementTypes from '../../../../../metaData/DataElement/elementTypes';
-
 import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
 import { ListPagination } from '../Pagination';
 
@@ -50,7 +48,7 @@ export type Column = {
     id: string,
     header: string,
     visible: boolean,
-    type: $Keys<typeof elementTypes>,
+    type: DataElementTypes,
     optionSet?: ?OptionSet,
 };
 

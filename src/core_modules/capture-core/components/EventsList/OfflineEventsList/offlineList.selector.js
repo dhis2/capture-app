@@ -23,7 +23,7 @@ type ColumnOrderFromState = {
     visible: boolean,
     isMainProperty?: ?boolean,
     header?: ?string,
-    type?: ?$Keys<typeof dataElementTypes>,
+    type?: ?DataElementTypes,
     options?: ?Array<{text: string, value: string}>,
 };
 

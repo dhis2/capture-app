@@ -1,6 +1,6 @@
 // @flow
 import { convertValue } from '../../../converters/clientToServer';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../../../metaData';
 
 const mapEventClientKeyToServerKey = {
     eventId: 'event',
@@ -18,7 +18,7 @@ export default function getServerValuesToSaveFromMainEvent(event: CaptureClientE
             const valueToConvert = event[inputKey];
             let convertedValue;
             if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
-                convertedValue = convertValue(valueToConvert, elementTypes.DATE);
+                convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
             } else {
                 convertedValue = valueToConvert;
             }

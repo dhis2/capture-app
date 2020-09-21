@@ -29,7 +29,7 @@ const converterByType = {
 };
 
 export const getApiOptionSetFilter =
-    (filter: OptionSetFilterData, type: $Keys<typeof dataElementTypes>): ApiDataFilterOptionSet => ({
+    (filter: OptionSetFilterData, type: DataElementTypes): ApiDataFilterOptionSet => ({
         in: filter
             .values
             // $FlowFixMe elementTypes flow error

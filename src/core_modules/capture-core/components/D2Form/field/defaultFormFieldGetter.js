@@ -27,7 +27,7 @@ const errorMessages = {
 };
 
 type FieldForTypes = {
-    [type: $Keys<typeof dataElementTypes>]: (metaData: DataElement, options: Object, context: Object) => any,
+    [type: DataElementTypes]: (metaData: DataElement, options: Object, context: Object) => any,
 }
 
 const fieldForTypes: FieldForTypes = {

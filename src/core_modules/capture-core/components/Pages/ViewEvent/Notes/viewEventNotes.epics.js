@@ -6,7 +6,7 @@ import { getCurrentUser } from 'capture-core/d2/d2Instance';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'capture-core-utils/moment/momentResolver';
 import { convertValue as convertListValue } from '../../../../converters/clientToList';
-import elementTypes from '../../../../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../../../../metaData';
 import {
     actionTypes as viewEventNotesActionTypes,
     batchActionTypes as viewEventNotesBatchActionTypes,
@@ -37,7 +37,7 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
             const notes = (eventContainer && eventContainer.event && eventContainer.event.notes) || [];
             const convertedNotes = notes.map(note => ({
                 ...note,
-                storedDate: convertListValue(note.storedDate, elementTypes.DATETIME),
+                storedDate: convertListValue(note.storedDate, dataElementTypes.DATETIME),
             }));
             // Load event relationships
 
@@ -66,7 +66,7 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
             const clientNote = {
                 value: payload.note,
                 storedBy: userName,
-                storedDate: convertListValue(moment().toISOString(), elementTypes.DATETIME),
+                storedDate: convertListValue(moment().toISOString(), dataElementTypes.DATETIME),
                 clientId: uuid(),
             };
             return batchActions([

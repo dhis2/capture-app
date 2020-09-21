@@ -69,7 +69,7 @@ export type Column = {
     id: string,
     header: string,
     visible: boolean,
-    type: $Keys<typeof elementTypes>,
+    type: DataElementTypes,
     optionSet?: ?OptionSet,
 };
 

@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../../../metaData';
 import {
     getAgeFieldConfigForCustomForm as getAgeFieldConfig,
     getBooleanFieldConfigForCustomForm as getBooleanFieldConfig,
@@ -25,33 +25,33 @@ const errorMessages = {
 };
 
 const fieldForTypes = {
-    [elementTypes.EMAIL]: getTextFieldConfig,
-    [elementTypes.TEXT]: getTextFieldConfig,
-    [elementTypes.PHONE_NUMBER]: getTextFieldConfig,
-    [elementTypes.LONG_TEXT]: (metaData: MetaDataElement) => {
+    [dataElementTypes.EMAIL]: getTextFieldConfig,
+    [dataElementTypes.TEXT]: getTextFieldConfig,
+    [dataElementTypes.PHONE_NUMBER]: getTextFieldConfig,
+    [dataElementTypes.LONG_TEXT]: (metaData: MetaDataElement) => {
         const fieldConfig = getTextFieldConfig(metaData, { multiLine: true });
         return fieldConfig;
     },
-    [elementTypes.NUMBER]: getTextFieldConfig,
-    [elementTypes.INTEGER]: getTextFieldConfig,
-    [elementTypes.INTEGER_POSITIVE]: getTextFieldConfig,
-    [elementTypes.INTEGER_NEGATIVE]: getTextFieldConfig,
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getTextFieldConfig,
-    [elementTypes.BOOLEAN]: getBooleanFieldConfig,
-    [elementTypes.TRUE_ONLY]: getTrueOnlyFieldConfig,
-    [elementTypes.DATE]: getDateFieldConfig,
-    [elementTypes.DATETIME]: getDateTimeFieldConfig,
-    [elementTypes.TIME]: getTextFieldConfig,
-    [elementTypes.PERCENTAGE]: getTextFieldConfig,
-    [elementTypes.URL]: getTextFieldConfig,
-    [elementTypes.AGE]: getAgeFieldConfig,
-    [elementTypes.ORGANISATION_UNIT]: getOrgUnitFieldConfig,
-    [elementTypes.COORDINATE]: getCoordinateFieldConfig,
-    [elementTypes.POLYGON]: getPolygonFieldConfig,
-    [elementTypes.USERNAME]: getUserNameFieldConfig,
-    [elementTypes.FILE_RESOURCE]: getFileResourceFieldConfig,
-    [elementTypes.IMAGE]: getImageFieldConfig,
-    [elementTypes.UNKNOWN]: () => null,
+    [dataElementTypes.NUMBER]: getTextFieldConfig,
+    [dataElementTypes.INTEGER]: getTextFieldConfig,
+    [dataElementTypes.INTEGER_POSITIVE]: getTextFieldConfig,
+    [dataElementTypes.INTEGER_NEGATIVE]: getTextFieldConfig,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: getTextFieldConfig,
+    [dataElementTypes.BOOLEAN]: getBooleanFieldConfig,
+    [dataElementTypes.TRUE_ONLY]: getTrueOnlyFieldConfig,
+    [dataElementTypes.DATE]: getDateFieldConfig,
+    [dataElementTypes.DATETIME]: getDateTimeFieldConfig,
+    [dataElementTypes.TIME]: getTextFieldConfig,
+    [dataElementTypes.PERCENTAGE]: getTextFieldConfig,
+    [dataElementTypes.URL]: getTextFieldConfig,
+    [dataElementTypes.AGE]: getAgeFieldConfig,
+    [dataElementTypes.ORGANISATION_UNIT]: getOrgUnitFieldConfig,
+    [dataElementTypes.COORDINATE]: getCoordinateFieldConfig,
+    [dataElementTypes.POLYGON]: getPolygonFieldConfig,
+    [dataElementTypes.USERNAME]: getUserNameFieldConfig,
+    [dataElementTypes.FILE_RESOURCE]: getFileResourceFieldConfig,
+    [dataElementTypes.IMAGE]: getImageFieldConfig,
+    [dataElementTypes.UNKNOWN]: () => null,
 };
 
 export default function getCustomFormField(metaData: MetaDataElement, options: Object) {
@@ -60,17 +60,17 @@ export default function getCustomFormField(metaData: MetaDataElement, options: O
     }
 
     const type = metaData.type;
-    // $FlowFixMe elementTypes flow error
+    // $FlowFixMe dataElementTypes flow error
     if (!fieldForTypes[type]) {
         log.warn(errorCreator(errorMessages.NO_FORMFIELD_FOR_TYPE)({ metaData }));
-        // $FlowFixMe elementTypes flow error
-        return fieldForTypes[elementTypes.UNKNOWN](metaData);
+        // $FlowFixMe dataElementTypes flow error
+        return fieldForTypes[dataElementTypes.UNKNOWN](metaData);
     }
 
     if (metaData.optionSet) {
         return getOptionSetFieldConfig(metaData, options);
     }
 
-    // $FlowFixMe elementTypes flow error
+    // $FlowFixMe dataElementTypes flow error
     return fieldForTypes[type](metaData);
 }

@@ -1,16 +1,16 @@
 // @flow
-import elementTypes from '../../../../../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../../../../../metaData';
 
 export const filterTypesObject = {
-    [elementTypes.TEXT]: elementTypes.TEXT,
-    [elementTypes.NUMBER]: elementTypes.NUMBER,
-    [elementTypes.INTEGER]: elementTypes.INTEGER,
-    [elementTypes.INTEGER_POSITIVE]: elementTypes.INTEGER_POSITIVE,
-    [elementTypes.INTEGER_NEGATIVE]: elementTypes.INTEGER_NEGATIVE,
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: elementTypes.INTEGER_ZERO_OR_POSITIVE,
-    [elementTypes.DATE]: elementTypes.DATE,
-    [elementTypes.BOOLEAN]: elementTypes.BOOLEAN,
-    [elementTypes.TRUE_ONLY]: elementTypes.TRUE_ONLY,
-    [elementTypes.ASSIGNEE]: elementTypes.ASSIGNEE,
+    [dataElementTypes.TEXT]: dataElementTypes.TEXT,
+    [dataElementTypes.NUMBER]: dataElementTypes.NUMBER,
+    [dataElementTypes.INTEGER]: dataElementTypes.INTEGER,
+    [dataElementTypes.INTEGER_POSITIVE]: dataElementTypes.INTEGER_POSITIVE,
+    [dataElementTypes.INTEGER_NEGATIVE]: dataElementTypes.INTEGER_NEGATIVE,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
+    [dataElementTypes.DATE]: dataElementTypes.DATE,
+    [dataElementTypes.BOOLEAN]: dataElementTypes.BOOLEAN,
+    [dataElementTypes.TRUE_ONLY]: dataElementTypes.TRUE_ONLY,
+    [dataElementTypes.ASSIGNEE]: dataElementTypes.ASSIGNEE,
 };
 

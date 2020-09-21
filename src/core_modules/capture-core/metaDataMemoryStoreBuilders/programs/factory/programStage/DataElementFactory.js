@@ -108,7 +108,7 @@ class DataElementFactory {
 
     async _buildBaseDataElement(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
-        dataElementType: $Keys<typeof dataElementTypes>,
+        dataElementType: DataElementTypes,
     ) {
         const dataElement = new DataElement();
         dataElement.type = dataElementType;

@@ -46,7 +46,7 @@ const valueConvertersForType = {
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.id,
 };
 
-export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
+export function convertValue(value: any, type: DataElementTypes) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }

@@ -1,4 +1,5 @@
 // @flow
+import { dataElementTypes } from '../metaData';
 
 declare type D2 = {
     models: Object,
@@ -190,3 +191,5 @@ declare class process {
         REACT_APP_DHIS2_API_VERSION: string,
     }
 }
+
+declare type DataElementTypes = $Keys<typeof dataElementTypes>

@@ -1,7 +1,7 @@
 // @flow
 import { createSelector } from 'reselect';
 import { chunk } from 'capture-core-utils';
-import { elementTypes } from '../../metaData/DataElement';
+import { dataElementTypes } from '../../metaData/DataElement';
 
 
 const elementsSelector = props => props.dataElements;
@@ -11,7 +11,7 @@ const makeElementsContainerSelector = () => createSelector(
     elementsSelector,
     (elements) => {
         const newElements = [...elements];
-        const imageDataElement = elements.find(a => a.type === elementTypes.IMAGE);
+        const imageDataElement = elements.find(a => a.type === dataElementTypes.IMAGE);
         if (imageDataElement) {
             newElements.splice(newElements.indexOf(imageDataElement), 1);
         }

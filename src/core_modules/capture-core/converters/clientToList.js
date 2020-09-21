@@ -70,7 +70,7 @@ const valueConvertersForType = {
     [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
 };
 
-export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, dataElement?: ?DataElement) {
+export function convertValue(value: any, type: DataElementTypes, dataElement?: ?DataElement) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }

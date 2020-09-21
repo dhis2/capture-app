@@ -4,7 +4,7 @@ import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../d2/d2Instance';
 import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
-import elementTypes from '../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../metaData';
 import { getSubValues } from './getSubValues';
 
 type ApiDataValue = {
@@ -65,7 +65,7 @@ const mapEventInputKeyToOutputKey = {
 function getConvertedValue(valueToConvert: any, inputKey: string) {
     let convertedValue;
     if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
-        convertedValue = convertValue(valueToConvert, elementTypes.DATE);
+        convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
     }

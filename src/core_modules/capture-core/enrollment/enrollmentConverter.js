@@ -3,7 +3,7 @@ import { dataElementTypes } from '../metaData';
 import { convertValue as convertToServerValue } from '../converters/clientToServer';
 import { convertValue as convertToClientValue } from '../converters/serverToClient';
 
-type ConverterFn = (type: $Keys<typeof dataElementTypes>, value: any) => any;
+type ConverterFn = (type: DataElementTypes, value: any) => any;
 
 type InputCompareKeys = {
     enrollmentDate?: ?string,

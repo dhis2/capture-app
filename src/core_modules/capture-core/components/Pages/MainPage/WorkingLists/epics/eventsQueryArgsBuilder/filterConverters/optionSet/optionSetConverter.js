@@ -6,7 +6,7 @@ import type { OptionSetFilterData } from '../../../../../EventsList/eventList.ty
 
 export function convertOptionSet(
     sourceValue: OptionSetFilterData,
-    type: $Keys<typeof elementTypes>,
+    type: DataElementTypes,
 ) {
     return pipe(
         values => values.map(filterValue => convertDataTypeValueToRequest(filterValue, type)),

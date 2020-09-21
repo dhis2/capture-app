@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import moment from 'capture-core-utils/moment/momentResolver';
 import { convertValue as convertListValue } from '../../../../../converters/clientToList';
-import elementTypes from '../../../../../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../../../../../metaData';
 import {
     actionTypes as newEventDataEntryActionTypes,
 } from '../actions/dataEntry.actions';
@@ -26,7 +26,7 @@ export const addNoteForNewSingleEventEpic = (action$: InputObservable) =>
             const note = {
                 value: payload.note,
                 storedBy: userName,
-                storedDate: convertListValue(storedDate, elementTypes.DATETIME),
+                storedDate: convertListValue(storedDate, dataElementTypes.DATETIME),
                 clientId: uuid(),
             };
 
