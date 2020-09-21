@@ -1,6 +1,4 @@
 // @flow
-import { dataElementTypes as elementTypes } from '../../../../metaData';
-
 export type {
     AssigneeFilterData,
     AbsoluteDateFilterData,

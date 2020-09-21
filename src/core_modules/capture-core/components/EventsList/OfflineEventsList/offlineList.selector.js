@@ -7,7 +7,6 @@ import {
     OptionSet,
     Option,
     DataElement,
-    dataElementTypes,
 } from '../../../metaData';
 import getStageFromEvent from '../../../metaData/helpers/getStageFromEvent';
 import { convertValue } from '../../../converters/clientToList';
