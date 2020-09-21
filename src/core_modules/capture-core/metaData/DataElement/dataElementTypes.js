@@ -1,5 +1,5 @@
 // @flow
-const elementTypeCodes = {
+export const dataElementTypes = {
     TEXT: 'TEXT',
     LONG_TEXT: 'LONG_TEXT',
     NUMBER: 'NUMBER',
@@ -35,4 +35,3 @@ const elementTypeCodes = {
     UNKNOWN: 'UNKNOWN',
 };
 
-export default elementTypeCodes;
