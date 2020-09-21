@@ -14,6 +14,7 @@ import { DialogLoadingMask } from '../../../../LoadingMasks';
 
 import List from '../../../../List/OnlineList/List.component';
 import ListWrapperMenu from './ListWrapperMenu.component';
+import { dataElementTypes } from '../../../../../metaData';
 
 const EventList = withCustomEndCell(eventContentMenuSettings)(List);
 
@@ -48,7 +49,7 @@ export type Column = {
     id: string,
     header: string,
     visible: boolean,
-    type: DataElementTypes,
+    type: $Keys<typeof dataElementTypes>,
     optionSet?: ?OptionSet,
 };
 

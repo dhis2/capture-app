@@ -114,7 +114,7 @@ const getFilterByType = {
     [dataElementTypes.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
-const isOptionSetFilter = (type: DataElementTypes, filter: any) => {
+const isOptionSetFilter = (type: $Keys<typeof dataElementTypes>, filter: any) => {
     if ([
         dataElementTypes.BOOLEAN,
     ].includes(type)) {

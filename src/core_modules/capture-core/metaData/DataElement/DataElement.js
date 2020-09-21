@@ -12,7 +12,7 @@ import type { Unique } from './Unique';
 import { dataElementTypes } from './dataElementTypes';
 
 // eslint-disable-next-line no-use-before-define
-export type ConvertFn = (value: any, type: DataElementTypes, element: DataElement) => any;
+export type ConvertFn = (value: any, type: $Keys<typeof dataElementTypes>, element: DataElement) => any;
 
 export default class DataElement {
     static errorMessages = {
@@ -26,7 +26,7 @@ export default class DataElement {
     _disabled: boolean;
     _compulsory: boolean;
     _description: string;
-    _type: DataElementTypes;
+    _type: $Keys<typeof dataElementTypes>;
     _optionSet: ?OptionSet;
     _displayInForms: boolean;
     _displayInReports: boolean;
@@ -110,7 +110,7 @@ export default class DataElement {
             this._type = type;
         }
     }
-    get type(): DataElementTypes {
+    get type(): $Keys<typeof dataElementTypes> {
         return this._type;
     }
 

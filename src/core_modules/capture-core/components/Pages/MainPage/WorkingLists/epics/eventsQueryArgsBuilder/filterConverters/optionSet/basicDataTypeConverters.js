@@ -26,7 +26,7 @@ const valueConvertersForType = {
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.id,
 };
 
-export function convertDataTypeValueToRequest(value: any, type: DataElementTypes) {
+export function convertDataTypeValueToRequest(value: any, type: $Keys<typeof dataElementTypes>) {
     // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }

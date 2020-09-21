@@ -54,7 +54,7 @@ type Props = {
     onCommitValue: (value: ?{ from?: ?string, to?: ?string }) => void,
     onUpdate: (commitValue?: any) => void,
     value: Value,
-    type: DataElementTypes,
+    type: $Keys<typeof dataElementTypes>,
     classes: {
         fromToContainer: string,
         inputContainer: string,
@@ -71,7 +71,7 @@ type State = {
 
 // $FlowFixMe[incompatible-variance] automated comment
 class DateFilter extends Component<Props, State> implements UpdatableFilterContent<Value> {
-    static validateField(value: ?string, type: DataElementTypes) {
+    static validateField(value: ?string, type: $Keys<typeof dataElementTypes>) {
         if (!value) {
             return {
                 isValid: true,

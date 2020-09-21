@@ -2,7 +2,7 @@
 import { dataElementTypes } from '../../metaData';
 import eventStatusElement from '../eventStatusElement';
 
-type ConverterFn = (type: DataElementTypes, value: any) => any;
+type ConverterFn = (type: $Keys<typeof dataElementTypes>, value: any) => any;
 
 type InputCompareKeys = {
     eventDate?: ?string,

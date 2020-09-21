@@ -22,7 +22,7 @@ const valueConvertersForType = {
     [dataElementTypes.TIME_RANGE]: convertRange,
 };
 
-export function convertValue(value: any, type: DataElementTypes, metaElement: DataElement) {
+export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, metaElement: DataElement) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
@@ -30,7 +30,7 @@ export function convertValue(value: any, type: DataElementTypes, metaElement: Da
     return valueConvertersForType[type] ? valueConvertersForType[type](value, metaElement.id) : equals(value, metaElement.id);
 }
 
-export function convertValueToEqual(value: any, type: DataElementTypes, metaElement: DataElement) {
+export function convertValueToEqual(value: any, type: $Keys<typeof dataElementTypes>, metaElement: DataElement) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }

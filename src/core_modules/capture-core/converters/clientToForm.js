@@ -71,7 +71,7 @@ const valueConvertersForType = {
     [dataElementTypes.AGE]: convertAgeForEdit,
 };
 
-export function convertValue(value: any, type: DataElementTypes) {
+export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }

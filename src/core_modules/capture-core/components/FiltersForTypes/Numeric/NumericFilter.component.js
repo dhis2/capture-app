@@ -49,7 +49,7 @@ type Props = {
     onCommitValue: (value: ?{ min?: ?string, max?: ?string }) => void,
     onUpdate: (commitValue?: any) => void,
     value: Value,
-    type: DataElementTypes,
+    type: $Keys<typeof dataElementTypes>,
     classes: {
         container: string,
         inputContainer: string,
@@ -61,7 +61,7 @@ type Props = {
 
 // $FlowFixMe[incompatible-variance] automated comment
 class NumericFilter extends Component<Props> implements UpdatableFilterContent<Value> {
-    static validateField(value: ?string, type: DataElementTypes) {
+    static validateField(value: ?string, type: $Keys<typeof dataElementTypes>) {
         if (!value) {
             return {
                 isValid: true,
@@ -80,7 +80,7 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
         };
     }
 
-    static isFilterValid(minValue?: ?string, maxValue?: ?string, type: DataElementTypes) {
+    static isFilterValid(minValue?: ?string, maxValue?: ?string, type: $Keys<typeof dataElementTypes>) {
         if (!NumericFilter.validateField(minValue, type).isValid || !NumericFilter.validateField(maxValue, type).isValid) {
             return false;
         }

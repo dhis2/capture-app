@@ -7,6 +7,7 @@ import {
     OptionSet,
     Option,
     DataElement,
+    dataElementTypes,
 } from '../../../../../metaData';
 import getStageFromEvent from '../../../../../metaData/helpers/getStageFromEvent';
 import { convertValue } from '../../../../../converters/clientToList';
@@ -22,7 +23,7 @@ type ColumnOrderFromState = {
     visible: boolean,
     isMainProperty?: ?boolean,
     header?: ?string,
-    type?: ?DataElementTypes,
+    type?: ?$Keys<typeof dataElementTypes>,
     options?: ?Array<{text: string, value: string}>,
 };
 
