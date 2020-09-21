@@ -1,11 +1,11 @@
 // @flow
-import type { StorageController } from 'capture-core-utils/storage/StorageController';
+import { typeof StorageController } from 'capture-core-utils/storage';
 import availableAdapters from 'capture-core-utils/storage/availableAdapters';
 import initUserControllerAsync from './userStorageController';
 import initMainControllerAsync from './mainStorageController';
 
 const adapterTypes = [availableAdapters.INDEXED_DB];
-const storageControllers: { [key: string]: typeof StorageController } = {};
+const storageControllers: { [key: string]: StorageController } = {};
 
 export async function initAsync(onCacheExpired: Function) {
     storageControllers.main = await initMainControllerAsync(adapterTypes, onCacheExpired);
