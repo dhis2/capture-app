@@ -1,8 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { type DataElement } from '../../../metaData';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
+import { type DataElement, dataElementTypes } from '../../../metaData';
 import {
     getTextFieldConfig,
     getOrgUnitFieldConfig,
@@ -28,45 +27,45 @@ const errorMessages = {
 };
 
 type FieldForTypes = {
-    [type: $Keys<typeof elementTypes>]: (metaData: DataElement, options: Object, context: Object) => any,
+    [type: $Keys<typeof dataElementTypes>]: (metaData: DataElement, options: Object, context: Object) => any,
 }
 
 const fieldForTypes: FieldForTypes = {
-    [elementTypes.EMAIL]: getTextFieldConfig,
-    [elementTypes.TEXT]: getTextFieldConfig,
-    [elementTypes.PHONE_NUMBER]: getTextFieldConfig,
-    [elementTypes.LONG_TEXT]: (metaData: DataElement, options: Object, context: Object) => {
+    [dataElementTypes.EMAIL]: getTextFieldConfig,
+    [dataElementTypes.TEXT]: getTextFieldConfig,
+    [dataElementTypes.PHONE_NUMBER]: getTextFieldConfig,
+    [dataElementTypes.LONG_TEXT]: (metaData: DataElement, options: Object, context: Object) => {
         const fieldConfig = getTextFieldConfig(metaData, options, context, { multiLine: true });
         return fieldConfig;
     },
-    [elementTypes.NUMBER]: getTextFieldConfig,
-    [elementTypes.NUMBER_RANGE]: getTextRangeFieldConfig,
-    [elementTypes.INTEGER]: getTextFieldConfig,
-    [elementTypes.INTEGER_RANGE]: getTextRangeFieldConfig,
-    [elementTypes.INTEGER_POSITIVE]: getTextFieldConfig,
-    [elementTypes.INTEGER_POSITIVE_RANGE]: getTextRangeFieldConfig,
-    [elementTypes.INTEGER_NEGATIVE]: getTextFieldConfig,
-    [elementTypes.INTEGER_NEGATIVE_RANGE]: getTextRangeFieldConfig,
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getTextFieldConfig,
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: getTextRangeFieldConfig,
-    [elementTypes.BOOLEAN]: getBooleanFieldConfig,
-    [elementTypes.TRUE_ONLY]: getTrueOnlyFieldConfig,
-    [elementTypes.DATE]: (metaData: any, options: Object) => getDateFieldConfig(metaData, options),
-    [elementTypes.DATE_RANGE]: getDateRangeFieldConfig,
-    [elementTypes.DATETIME]: getDateTimeFieldConfig,
-    [elementTypes.DATETIME_RANGE]: getDateTimeRangeFieldConfig,
-    [elementTypes.TIME]: getTextFieldConfig,
-    [elementTypes.TIME_RANGE]: getTextRangeFieldConfig,
-    [elementTypes.PERCENTAGE]: getTextFieldConfig,
-    [elementTypes.URL]: getTextFieldConfig,
-    [elementTypes.AGE]: getAgeFieldConfig,
-    [elementTypes.ORGANISATION_UNIT]: getOrgUnitFieldConfig,
-    [elementTypes.COORDINATE]: getCoordinateFieldConfig,
-    [elementTypes.POLYGON]: getPolygonFieldConfig,
-    [elementTypes.USERNAME]: getUserNameFieldConfig,
-    [elementTypes.FILE_RESOURCE]: getFileResourceFieldConfig,
-    [elementTypes.IMAGE]: getImageFieldConfig,
-    [elementTypes.UNKNOWN]: () => null,
+    [dataElementTypes.NUMBER]: getTextFieldConfig,
+    [dataElementTypes.NUMBER_RANGE]: getTextRangeFieldConfig,
+    [dataElementTypes.INTEGER]: getTextFieldConfig,
+    [dataElementTypes.INTEGER_RANGE]: getTextRangeFieldConfig,
+    [dataElementTypes.INTEGER_POSITIVE]: getTextFieldConfig,
+    [dataElementTypes.INTEGER_POSITIVE_RANGE]: getTextRangeFieldConfig,
+    [dataElementTypes.INTEGER_NEGATIVE]: getTextFieldConfig,
+    [dataElementTypes.INTEGER_NEGATIVE_RANGE]: getTextRangeFieldConfig,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: getTextFieldConfig,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: getTextRangeFieldConfig,
+    [dataElementTypes.BOOLEAN]: getBooleanFieldConfig,
+    [dataElementTypes.TRUE_ONLY]: getTrueOnlyFieldConfig,
+    [dataElementTypes.DATE]: (metaData: any, options: Object) => getDateFieldConfig(metaData, options),
+    [dataElementTypes.DATE_RANGE]: getDateRangeFieldConfig,
+    [dataElementTypes.DATETIME]: getDateTimeFieldConfig,
+    [dataElementTypes.DATETIME_RANGE]: getDateTimeRangeFieldConfig,
+    [dataElementTypes.TIME]: getTextFieldConfig,
+    [dataElementTypes.TIME_RANGE]: getTextRangeFieldConfig,
+    [dataElementTypes.PERCENTAGE]: getTextFieldConfig,
+    [dataElementTypes.URL]: getTextFieldConfig,
+    [dataElementTypes.AGE]: getAgeFieldConfig,
+    [dataElementTypes.ORGANISATION_UNIT]: getOrgUnitFieldConfig,
+    [dataElementTypes.COORDINATE]: getCoordinateFieldConfig,
+    [dataElementTypes.POLYGON]: getPolygonFieldConfig,
+    [dataElementTypes.USERNAME]: getUserNameFieldConfig,
+    [dataElementTypes.FILE_RESOURCE]: getFileResourceFieldConfig,
+    [dataElementTypes.IMAGE]: getImageFieldConfig,
+    [dataElementTypes.UNKNOWN]: () => null,
 };
 
 export default function getDefaultFormField(metaData: DataElement, options: Object, context: Object) {
@@ -77,7 +76,7 @@ export default function getDefaultFormField(metaData: DataElement, options: Obje
     const type = metaData.type;
     if (!fieldForTypes[type]) {
         log.warn(errorCreator(errorMessages.NO_FORMFIELD_FOR_TYPE)({ metaData }));
-        return fieldForTypes[elementTypes.UNKNOWN](metaData, options, context);
+        return fieldForTypes[dataElementTypes.UNKNOWN](metaData, options, context);
     }
 
     if (metaData.optionSet) {
