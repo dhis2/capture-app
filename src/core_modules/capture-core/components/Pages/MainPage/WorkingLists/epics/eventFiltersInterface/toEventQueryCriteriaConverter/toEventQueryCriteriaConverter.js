@@ -2,9 +2,7 @@
 import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
 import { moment } from 'capture-core-utils/moment';
-import {
-    dataElementTypes as elementTypes,
-} from '../../../../../../../metaData';
+import { dataElementTypes } from '../../../../../../../metaData';
 import { getApiOptionSetFilter } from './optionSet';
 
 import {
@@ -71,16 +69,16 @@ const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee =>
 });
 
 const getFilterByType = {
-    [elementTypes.TEXT]: getTextFilter,
-    [elementTypes.NUMBER]: getNumericFilter,
-    [elementTypes.INTEGER]: getNumericFilter,
-    [elementTypes.INTEGER_POSITIVE]: getNumericFilter,
-    [elementTypes.INTEGER_NEGATIVE]: getNumericFilter,
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
-    [elementTypes.DATE]: getDateFilter,
-    [elementTypes.BOOLEAN]: getBooleanFilter,
-    [elementTypes.TRUE_ONLY]: getTrueOnlyFilter,
-    [elementTypes.ASSIGNEE]: getAssigneeFilter,
+    [dataElementTypes.TEXT]: getTextFilter,
+    [dataElementTypes.NUMBER]: getNumericFilter,
+    [dataElementTypes.INTEGER]: getNumericFilter,
+    [dataElementTypes.INTEGER_POSITIVE]: getNumericFilter,
+    [dataElementTypes.INTEGER_NEGATIVE]: getNumericFilter,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    [dataElementTypes.DATE]: getDateFilter,
+    [dataElementTypes.BOOLEAN]: getBooleanFilter,
+    [dataElementTypes.TRUE_ONLY]: getTrueOnlyFilter,
+    [dataElementTypes.ASSIGNEE]: getAssigneeFilter,
 };
 
 const getFilters = (filters: Object, defaultSpecs: Map<string, Object>) => Object

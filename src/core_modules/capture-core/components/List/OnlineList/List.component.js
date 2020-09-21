@@ -16,7 +16,7 @@ import {
     sorLabelPlacements,
 } from 'capture-ui';
 import SortLabelWrapper from '../../DataTable/SortLabelWrapper.component';
-import { dataElementTypes as elementTypes } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData';
 import type { OptionSet } from '../../../metaData';
 import { LoadingMask } from '../../LoadingMasks';
 
@@ -110,18 +110,18 @@ class List extends React.Component<Props> {
         this.columnHeaderInstances = [];
     }
     static typesWithAscendingInitialDirection = [
-        elementTypes.TEXT,
-        elementTypes.LONG_TEXT,
-        elementTypes.USERNAME,
+        dataElementTypes.TEXT,
+        dataElementTypes.LONG_TEXT,
+        dataElementTypes.USERNAME,
         'ASSIGNEE',
     ];
 
     static typesWithRightPlacement = [
-        elementTypes.NUMBER,
-        elementTypes.INTEGER,
-        elementTypes.INTEGER_POSITIVE,
-        elementTypes.INTEGER_NEGATIVE,
-        elementTypes.INTEGER_ZERO_OR_POSITIVE,
+        dataElementTypes.NUMBER,
+        dataElementTypes.INTEGER,
+        dataElementTypes.INTEGER_POSITIVE,
+        dataElementTypes.INTEGER_NEGATIVE,
+        dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
     getSortHandler = (id: string) => (direction: string) => {
         this.props.onSort(this.props.listId, id, direction);

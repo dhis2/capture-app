@@ -12,7 +12,7 @@ import {
 } from 'capture-core-utils/validators/form';
 import Min from './Min.component';
 import Max from './Max.component';
-import { dataElementTypes as elementTypes } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData';
 import type D2TextField from '../../FormFields/Generic/D2TextField.component';
 import { getNumericFilterData } from './numericFilterDataGetter';
 import type { UpdatableFilterContent } from '../filters.types';
@@ -105,19 +105,19 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
 
     static errorMessages = {
         MIN_GREATER_THAN_MAX: 'Minimum value cannot be greater than maximum value',
-        [elementTypes.NUMBER]: 'Please provide a valid number',
-        [elementTypes.INTEGER]: 'Please provide a valid integer',
-        [elementTypes.INTEGER_POSITIVE]: 'Please provide a positive integer',
-        [elementTypes.INTEGER_NEGATIVE]: 'Please provide a negative integer',
-        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
+        [dataElementTypes.NUMBER]: 'Please provide a valid number',
+        [dataElementTypes.INTEGER]: 'Please provide a valid integer',
+        [dataElementTypes.INTEGER_POSITIVE]: 'Please provide a positive integer',
+        [dataElementTypes.INTEGER_NEGATIVE]: 'Please provide a negative integer',
+        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
     };
 
     static validatorForTypes = {
-        [elementTypes.NUMBER]: isValidNumber,
-        [elementTypes.INTEGER]: isValidInteger,
-        [elementTypes.INTEGER_POSITIVE]: isValidPositiveInteger,
-        [elementTypes.INTEGER_NEGATIVE]: isValidNegativeInteger,
-        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: isValidZeroOrPositiveInteger,
+        [dataElementTypes.NUMBER]: isValidNumber,
+        [dataElementTypes.INTEGER]: isValidInteger,
+        [dataElementTypes.INTEGER_POSITIVE]: isValidPositiveInteger,
+        [dataElementTypes.INTEGER_NEGATIVE]: isValidNegativeInteger,
+        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: isValidZeroOrPositiveInteger,
     };
 
     getUpdatedValue(valuePart: {[key: string]: string}) {

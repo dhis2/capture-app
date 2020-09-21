@@ -14,7 +14,7 @@ import {
     isValidDate,
 } from '../../../utils/validators/form';
 import { parseDate } from '../../../utils/converters/date';
-import { dataElementTypes as elementTypes } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData';
 import type { UpdatableFilterContent } from '../filters.types';
 import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './mainOptions';
@@ -134,11 +134,11 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     static errorMessages = {
         CUSTOM_RANGE_WITHOUT_VALUES: 'Please specify a range',
         FROM_GREATER_THAN_TO: 'The From date can\'t be after the To date',
-        [elementTypes.DATE]: 'Please provide a valid date',
+        [dataElementTypes.DATE]: 'Please provide a valid date',
     };
 
     static validatorForTypes = {
-        [elementTypes.DATE]: isValidDate,
+        [dataElementTypes.DATE]: isValidDate,
     };
 
     static mainOptionSet = new OptionSet('mainOptions', [

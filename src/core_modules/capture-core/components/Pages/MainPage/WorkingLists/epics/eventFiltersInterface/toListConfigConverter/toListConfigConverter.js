@@ -2,9 +2,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { moment } from 'capture-core-utils/moment';
-import {
-    dataElementTypes as elementTypes,
-} from '../../../../../../../metaData';
+import { dataElementTypes } from '../../../../../../../metaData';
 import { getColumnsConfiguration } from '../columnsConfigurationGetter';
 import { getApi } from '../../../../../../../d2/d2Instance';
 import { getOptionSetFilter } from './optionSet';
@@ -105,20 +103,20 @@ const getAssigneeFilter = async (
 };
 
 const getFilterByType = {
-    [elementTypes.TEXT]: getTextFilter,
-    [elementTypes.NUMBER]: getNumericFilter,
-    [elementTypes.INTEGER]: getNumericFilter,
-    [elementTypes.INTEGER_POSITIVE]: getNumericFilter,
-    [elementTypes.INTEGER_NEGATIVE]: getNumericFilter,
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
-    [elementTypes.DATE]: getDateFilter,
-    [elementTypes.BOOLEAN]: getBooleanFilter,
-    [elementTypes.TRUE_ONLY]: getTrueOnlyFilter,
+    [dataElementTypes.TEXT]: getTextFilter,
+    [dataElementTypes.NUMBER]: getNumericFilter,
+    [dataElementTypes.INTEGER]: getNumericFilter,
+    [dataElementTypes.INTEGER_POSITIVE]: getNumericFilter,
+    [dataElementTypes.INTEGER_NEGATIVE]: getNumericFilter,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    [dataElementTypes.DATE]: getDateFilter,
+    [dataElementTypes.BOOLEAN]: getBooleanFilter,
+    [dataElementTypes.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
 const isOptionSetFilter = (type: DataElementTypes, filter: any) => {
     if ([
-        elementTypes.BOOLEAN,
+        dataElementTypes.BOOLEAN,
     ].includes(type)) {
         const validBooleanValues = ['true', 'false'];
         return filter.in.some(value => !validBooleanValues.includes[value]);
