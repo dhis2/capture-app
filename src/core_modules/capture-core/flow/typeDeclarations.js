@@ -1,5 +1,5 @@
 // @flow
-import { dataElementTypes } from '../metaData';
+import { typeof dataElementTypes } from '../metaData';
 
 declare type D2 = {
     models: Object,
@@ -192,4 +192,4 @@ declare class process {
     }
 }
 
-declare type DataElementTypes = $Keys<typeof dataElementTypes>
+declare type DataElementTypes = $Keys<dataElementTypes>
