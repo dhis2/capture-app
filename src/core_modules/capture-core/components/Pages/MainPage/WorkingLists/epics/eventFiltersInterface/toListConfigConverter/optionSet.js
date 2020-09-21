@@ -27,6 +27,6 @@ export const getOptionSetFilter =
         usingOptionSet: true,
         values: filter
             .in
-            // $FlowFixMe
+            // $FlowFixMe elementTypes flow error
             .map(value => (converterByType[type] ? converterByType[type](value) : value)),
     });
