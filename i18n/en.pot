@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-05T07:43:59.153Z\n"
-"PO-Revision-Date: 2020-08-05T07:43:59.153Z\n"
+"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"PO-Revision-Date: 2020-09-16T10:01:51.572Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -27,6 +27,18 @@ msgid ""
 "Currently, the Capture App only supports running one version concurrently "
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
+msgstr ""
+
+msgid "Last updated"
+msgstr ""
+
+msgid "Enrolled"
+msgstr ""
+
+msgid "Previously enrolled"
+msgstr ""
+
+msgid "Not enrolled"
 msgstr ""
 
 msgid "Columns to show in table"
@@ -710,6 +722,9 @@ msgid ""
 msgstr ""
 
 msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
 msgstr ""
 
 msgid ""

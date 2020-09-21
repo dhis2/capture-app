@@ -1,25 +1,24 @@
 // @flow
 import { createSelector } from 'reselect';
-import { chunk } from 'capture-core-utils';
 import { elementTypes } from '../../metaData/DataElement';
 
 
-const elementsSelector = props => props.dataElements;
+const elementsSelector = dataElements => dataElements;
 
 // $FlowFixMe[missing-annot] automated comment
-const makeElementsContainerSelector = () => createSelector(
+export const makeElementsContainerSelector = () => createSelector(
     elementsSelector,
     (elements) => {
-        const newElements = [...elements];
         // $FlowFixMe[prop-missing] automated comment
         const imageDataElement = elements.find(a => a.type === elementTypes.IMAGE);
         if (imageDataElement) {
+            const newElements = [...elements];
             newElements.splice(newElements.indexOf(imageDataElement), 1);
         }
+
         return {
-            dataElementChunks: chunk(elements, 5),
+            dataElements: elements,
             imageDataElement,
         };
     });
 
-export default makeElementsContainerSelector;

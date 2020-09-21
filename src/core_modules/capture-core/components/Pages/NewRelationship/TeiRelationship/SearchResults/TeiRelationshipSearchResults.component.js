@@ -8,7 +8,7 @@ import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import Button from '../../../../Buttons/Button.component';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
-import CardList from '../../../../CardList/CardList.component';
+import { CardList } from '../../../../CardList';
 import { LoadingMask } from '../../../../LoadingMasks';
 import {
     convertFormToClient,
@@ -50,12 +50,16 @@ const getStyles = (theme: Theme) => ({
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
+        marginLeft: theme.typography.pxToRem(8),
+        maxWidth: theme.typography.pxToRem(600),
     },
     topSection: {
         display: 'flex',
         flexDirection: 'column',
-        margin: theme.typography.pxToRem(10),
+        margin: theme.typography.pxToRem(8),
+        marginRight: 0,
         backgroundColor: theme.palette.grey.lighter,
+        maxWidth: theme.typography.pxToRem(600),
     },
     topSectionValuesContainer: {
         padding: theme.typography.pxToRem(10),

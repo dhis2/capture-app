@@ -44,7 +44,15 @@ const getStyles = (theme: Theme) => ({
     backButton: {
         marginBottom: 10,
     },
+    errorTitle: {
+        fontSize: theme.typography.pxToRem(16),
+        fontWeight: 500,
+        padding: '12px 0',
+    },
     generalPurposeErrorMessage: {
+        marginLeft: theme.typography.pxToRem(12),
+        marginTop: theme.typography.pxToRem(10),
+        marginBottom: theme.typography.pxToRem(20),
         color: theme.palette.error.main,
     },
     loadingMask: {
@@ -146,6 +154,9 @@ const Index = ({
                             data-test="dhis2-capture-general-purpose-error-mesage"
                             className={classes.generalPurposeErrorMessage}
                         >
+                            <div className={classes.errorTitle}>
+                                {i18n.t('An error has occurred')}
+                            </div>
                             {i18n.t('There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools')}
                         </div>
                     }
