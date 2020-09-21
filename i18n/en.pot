@@ -724,6 +724,9 @@ msgstr ""
 msgid "Back to search"
 msgstr ""
 
+msgid "An error has occurred"
+msgstr ""
+
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later. For more details open the Console tab of the Developer tools"
