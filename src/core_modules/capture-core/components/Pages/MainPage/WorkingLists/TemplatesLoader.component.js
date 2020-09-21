@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { memo } from 'react';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
 import TemplatesManager from './TemplatesManager.component';
 
@@ -10,7 +10,6 @@ type Props = {
     loadTemplatesError: ?string,
     onLoadTemplates: Function,
     onCancelLoadTemplates: Function,
-    listId: string,
     programId: string,
     templatesForProgramId: ?string,
     dirtyTemplates: boolean,
@@ -18,12 +17,11 @@ type Props = {
 };
 
 // eslint-disable-next-line complexity
-const TemplatesLoader = (props: Props) => {
+const TemplatesLoader = memo<Props>((props: Props) => {
     const {
         loadTemplatesError,
         onLoadTemplates,
         onCancelLoadTemplates,
-        listId,
         programId,
         templatesForProgramId,
         dirtyTemplates,
@@ -31,32 +29,26 @@ const TemplatesLoader = (props: Props) => {
         ...passOnProps
     } = props;
 
-    const listIdRef = React.useRef(undefined);
     const firstRunRef = React.useRef(true);
     // eslint-disable-next-line complexity
     React.useEffect(() => {
         if (programId === templatesForProgramId &&
-            (listId === listIdRef.current || !listIdRef.current) &&
             (!dirtyTemplates || !firstRunRef.current)) {
-            listIdRef.current = listId;
             firstRunRef.current = false;
             return undefined;
         }
-        listIdRef.current = listId;
         firstRunRef.current = false;
-        onLoadTemplates(programId, listId);
-        return () => onCancelLoadTemplates(listId);
+        onLoadTemplates(programId);
+        return () => onCancelLoadTemplates();
     }, [
         onLoadTemplates,
         onCancelLoadTemplates,
         programId,
         templatesForProgramId,
-        listId,
         dirtyTemplates,
     ]);
 
     const ready = programId === templatesForProgramId &&
-        (listId === listIdRef.current || !listIdRef.current) &&
         (!dirtyTemplates || !firstRunRef.current) &&
         !templatesAreLoading;
 
@@ -65,10 +57,9 @@ const TemplatesLoader = (props: Props) => {
             {...passOnProps}
             ready={ready}
             error={loadTemplatesError}
-            listId={listId}
             programId={programId}
         />
     );
-};
+});
 
 export default TemplatesLoader;

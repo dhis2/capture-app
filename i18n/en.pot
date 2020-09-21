@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-20T14:17:59.235Z\n"
-"PO-Revision-Date: 2020-08-20T14:17:59.235Z\n"
+"POT-Creation-Date: 2020-09-27T22:21:32.538Z\n"
+"PO-Revision-Date: 2020-09-27T22:21:32.538Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -295,18 +295,6 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-msgid "Download as JSON"
-msgstr ""
-
-msgid "Download as XML"
-msgstr ""
-
-msgid "Download as CSV"
-msgstr ""
-
-msgid "Download with current filters"
-msgstr ""
-
 msgid "Update"
 msgstr ""
 
@@ -326,9 +314,6 @@ msgid "less than or equal to"
 msgstr ""
 
 msgid "More filters"
-msgstr ""
-
-msgid "Download data..."
 msgstr ""
 
 msgid "Rows per page"
@@ -449,6 +434,21 @@ msgid "Completed"
 msgstr ""
 
 msgid "Delete event"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr ""
+
+msgid "Download as XML"
+msgstr ""
+
+msgid "Download as CSV"
+msgstr ""
+
+msgid "Download with current filters"
+msgstr ""
+
+msgid "Download data..."
 msgstr ""
 
 msgid "Working list could not be loaded"

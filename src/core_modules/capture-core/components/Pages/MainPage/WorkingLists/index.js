@@ -1,5 +1,6 @@
 // @flow
-export { default as WorkingLists } from './WorkingListsContextBuilder.component';
+export { WorkingLists } from './WorkingLists.component';
+export { areFiltersEqual } from './utils';
 export {
     dateFilterTypes,
 } from '../../../ListView';
@@ -11,10 +12,15 @@ export type {
     TrueOnlyFilterData,
     OptionSetFilterData,
     AssigneeFilterData,
-    RowMenuContents,
+    CustomRowMenuContent,
+    CustomRowMenuContents,
+    CustomMenuContent,
+    CustomMenuContents,
+    FiltersData,
 } from '../../../ListView';
 export type {
-    GetMainColumnMetadataHeaderFn,
-    GetOrdinaryColumnMetadataFn,
+    MainColumnConfig,
+    MetadataColumnConfig,
     ColumnConfig,
+    ColumnConfigs,
 } from './workingLists.types';

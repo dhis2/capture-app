@@ -13,16 +13,14 @@ import { initEventWorkingListAsync } from './initEventWorkingList';
 import { updateEventWorkingListAsync } from './updateEventWorkingList';
 import { getApi } from '../../../../../d2';
 
-export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =>
+export const initEventListEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             actionTypes.EVENT_LIST_INIT,
         ),
         concatMap((action) => {
-            const state = store.value;
-            const { programId, orgUnitId, categories } = state.currentSelections;
-            const lastTransaction = state.offline.lastTransaction;
-            const { selectedTemplate, defaultConfig, listId } = action.payload;
+            const { selectedTemplate, columnsMetaForDataFetching, categoryCombinationMeta, listId } = action.payload;
+            const { programId, orgUnitId, categories, lastTransaction } = action.payload.context;
             const eventQueryCriteria = selectedTemplate.nextEventQueryCriteria || selectedTemplate.eventQueryCriteria;
             const initialPromise =
                 initEventWorkingListAsync(
@@ -32,7 +30,8 @@ export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =
                             orgUnitId,
                             categories,
                         },
-                        defaultSpecification: defaultConfig,
+                        columnsMetaForDataFetching,
+                        categoryCombinationMeta,
                         listId,
                         lastTransaction,
                     });
@@ -47,15 +46,14 @@ export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =
             );
         }));
 
-export const updateEventListEpic = (action$: InputObservable, store: ReduxStore) =>
+export const updateEventListEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             actionTypes.EVENT_LIST_UPDATE,
         ),
         concatMap((action) => {
-            const state = store.value;
-            const { listId, queryArgs } = action.payload;
-            const updatePromise = updateEventWorkingListAsync(listId, queryArgs, state);
+            const { queryArgs, columnsMetaForDataFetching, categoryCombinationMeta, listId } = action.payload;
+            const updatePromise = updateEventWorkingListAsync(queryArgs, { columnsMetaForDataFetching, categoryCombinationMeta, listId });
             return from(updatePromise).pipe(
                 takeUntil(
                     action$.pipe(

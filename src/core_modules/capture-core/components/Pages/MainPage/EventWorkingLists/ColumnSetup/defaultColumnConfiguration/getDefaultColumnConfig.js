@@ -1,70 +1,67 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { canViewOtherUsers } from '../../../../../../d2';
 import {
-    ProgramStage,
+    type ProgramStage,
     dataElementTypes as elementTypeKeys,
-    getEventProgramThrowIfNotFound,
+    type EventProgram,
 } from '../../../../../../metaData';
 import mainPropertyNames from '../../../../../../events/mainPropertyNames.const';
+import type { ColumnConfigs, MetadataColumnConfig, MainColumnConfig } from '../../../WorkingLists';
 
-const getDefaultMainConfig = (stage: ProgramStage) => {
-    const baseFields = [
-        [mainPropertyNames.EVENT_DATE, {
-            id: mainPropertyNames.EVENT_DATE,
-            visible: true,
-            isMainProperty: true,
-            // $FlowFixMe[prop-missing] automated comment
-            type: elementTypeKeys.DATE,
-        }],
-        [mainPropertyNames.EVENT_STATUS, {
-            id: mainPropertyNames.EVENT_STATUS,
-            header: 'Status',
-            visible: true,
-            isMainProperty: true,
-            // $FlowFixMe[prop-missing] automated comment
-            type: elementTypeKeys.TEXT,
-            singleSelect: true,
-            options: [
-                { text: i18n.t('Active'), value: 'ACTIVE' },
-                { text: i18n.t('Completed'), value: 'COMPLETED' },
-            ],
-        }],
-    ];
+const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
+    const baseFields = [{
+        id: mainPropertyNames.EVENT_DATE,
+        visible: true,
+        // $FlowFixMe[prop-missing] automated comment
+        type: elementTypeKeys.DATE,
+        header: stage.stageForm.getLabel(mainPropertyNames.EVENT_DATE),
+    }, {
+        id: mainPropertyNames.EVENT_STATUS,
+        visible: true,
+        // $FlowFixMe[prop-missing] automated comment
+        type: elementTypeKeys.TEXT,
+        header: 'Status',
+        singleSelect: true,
+        options: [
+            { text: i18n.t('Active'), value: 'ACTIVE' },
+            { text: i18n.t('Completed'), value: 'COMPLETED' },
+        ],
+    }];
 
-    const extraFields = [];
-    if (stage.enableUserAssignment && canViewOtherUsers()) {
-        const assigneeField = {
+    const optionalFields = [];
+    if (stage.enableUserAssignment) {
+        optionalFields.push({
             id: mainPropertyNames.ASSIGNEE,
-            type: 'ASSIGNEE',
-            apiName: 'assignedUser',
-            header: 'Assigned to',
             visible: true,
-            isMainProperty: true,
-        };
-        extraFields.push([mainPropertyNames.ASSIGNEE, assigneeField]);
+            type: 'ASSIGNEE',
+            header: 'Assigned to',
+            apiName: 'assignedUser',
+        });
     }
 
-    return [...baseFields, ...extraFields];
+    return [...baseFields, ...optionalFields]
+        .map(field => ({
+            ...field,
+            isMainProperty: true,
+        }));
 };
 
-const getMetaDataConfig = (stage: ProgramStage): Array<Array<string | {id: string, visible: boolean}>> =>
+const getMetaDataConfig = (stage: ProgramStage): Array<MetadataColumnConfig> =>
     stage
         .stageForm
         .getElements()
-        .map(element => ([
-            element.id, {
-                id: element.id,
-                visible: element.displayInReports,
-                type: element.type,
-            }]),
-        );
+        .map(element => ({
+            id: element.id,
+            visible: element.displayInReports,
+            type: element.type,
+            header: element.formName,
+            optionSet: element.optionSet,
+        }));
 
-export const getDefaultColumnConfig = (programId: string): Map<string, Object> => {
-    const stage = getEventProgramThrowIfNotFound(programId).stage;
-    // $FlowFixMe
-    return new Map([
+export const getDefaultColumnConfig = (program: EventProgram): ColumnConfigs => {
+    const stage = program.stage;
+    return [
         ...getDefaultMainConfig(stage),
         ...getMetaDataConfig(stage),
-    ]);
+    ];
 };

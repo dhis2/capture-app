@@ -76,10 +76,9 @@ type Props = {
     dataSource: Array<Object>,
     rowIdKey: string,
     columns: ?Array<Column>,
-    listId: string,
     sortById: string,
     sortByDirection: string,
-    onSort: (listId: string, id: string, direction: string) => void,
+    onSort: (id: string, direction: string) => void,
     isUpdating?: ?boolean,
     getCustomEndCellHeader: (props: Props) => React.Node,
     onRowClick: (rowData: Object) => void,
@@ -130,7 +129,7 @@ class Index extends React.Component<Props> {
         elementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
     getSortHandler = (id: string) => (direction: string) => {
-        this.props.onSort(this.props.listId, id, direction);
+        this.props.onSort(id, direction);
     }
 
     setColumnWidth(columnInstance: any, index: number) {

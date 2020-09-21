@@ -1,61 +1,67 @@
 // @flow
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { getDefaultColumnConfig } from './defaultColumnConfiguration';
 import { shouldSkipReload } from './skipReloadCalculator';
-import { EventWorkingListsDataSourceSetup } from '../DataSourceSetup';
-import {
-    getEventProgramThrowIfNotFound,
-} from '../../../../../metaData';
-import type { GetOrdinaryColumnMetadataFn, GetMainColumnMetadataHeaderFn } from '../../WorkingLists';
+import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
+import type { Props } from './eventWorkingListsColumnSetup.types';
+import type { ColumnsMetaForDataFetching } from '../types';
 
-type PassOnProps = {
-    listId: string,
-    eventsDataElementValues: Object,
-    eventsMainProperties: Object,
-};
-
-type Props = {
-    ...PassOnProps,
-    programId: string,
-};
-
-export const EventWorkingListsColumnSetup = (props: Props) => {
-    const {
-        programId,
-        ...passOnProps
-    } = props;
-
-    const defaultConfig = React.useMemo(() => getDefaultColumnConfig(programId), [
-        programId,
+export const EventWorkingListsColumnSetup = ({
+    program,
+    customColumnOrder,
+    onLoadEventList,
+    onUpdateEventList,
+    ...passOnProps
+}: Props) => {
+    const defaultColumns = useMemo(() => getDefaultColumnConfig(program), [
+        program,
     ]);
 
-    const { getOrdinaryColumnMetadata, getMainColumnMetadataHeader }: { getOrdinaryColumnMetadata: GetOrdinaryColumnMetadataFn, getMainColumnMetadataHeader: GetMainColumnMetadataHeaderFn } =
-        useMemo(() => {
-            const stageForm = getEventProgramThrowIfNotFound(programId).stage.stageForm;
+    const injectColumnMetaToLoadList = useCallback((selectedTemplate: Object, context: Object, meta: Object) => {
+        const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
+            defaultColumns
+                // $FlowFixMe
+                .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
+        );
+        onLoadEventList(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
+    }, [onLoadEventList, defaultColumns]);
 
-            return {
-                getOrdinaryColumnMetadata: (columnId: string) => {
-                    const { formName, optionSet } = stageForm.getElement(columnId);
-                    return {
-                        header: formName,
-                        optionSet,
-                    };
-                },
-                getMainColumnMetadataHeader: (columnId: string) => stageForm.getLabel(columnId) || '',
-            };
-        }, [
-            programId,
-        ]);
+    const injectColumnMetaToUpdateList = useCallback((queryArgs: Object) => {
+        const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
+            defaultColumns
+                // $FlowFixMe
+                .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
+        );
+        onUpdateEventList(queryArgs, columnsMetaForDataFetching);
+    }, [onUpdateEventList, defaultColumns]);
+
+
+    const defaultColumnsAsObject = useMemo(() =>
+        defaultColumns
+            .reduce((acc, column) => ({ ...acc, [column.id]: column }), {}),
+    [defaultColumns]);
+
+    const columns = useMemo(() => {
+        if (!customColumnOrder) {
+            return defaultColumns;
+        }
+
+        return customColumnOrder
+            .map(({ id, visible }) => ({
+                ...defaultColumnsAsObject[id],
+                visible,
+            }));
+    }, [customColumnOrder, defaultColumns, defaultColumnsAsObject]);
 
     return (
-        <EventWorkingListsDataSourceSetup
+        <CurrentViewChangesResolver
             {...passOnProps}
-            listId={props.listId}
-            programId={programId}
-            defaultConfig={defaultConfig}
+            program={program}
+            columns={columns}
+            defaultColumns={defaultColumns}
             onCheckSkipReload={shouldSkipReload}
-            getOrdinaryColumnMetadata={getOrdinaryColumnMetadata}
-            getMainColumnMetadataHeader={getMainColumnMetadataHeader}
+            onLoadEventList={injectColumnMetaToLoadList}
+            onUpdateEventList={injectColumnMetaToUpdateList}
         />
     );
 };

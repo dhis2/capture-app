@@ -5,18 +5,13 @@ import {
     Option,
     DataElement,
 } from '../../../../metaData';
-import { ListView } from '../../../ListView';
+import { ListView, type CustomMenuContents } from '../../../ListView';
 import { ListViewBuilderContext } from './workingLists.context';
-import type { ColumnConfig, GetOrdinaryColumnMetadataFn, GetMainColumnMetadataHeaderFn } from './workingLists.types';
-
-type PassOnProps = {
-    listId: string,
-};
+import type { ColumnConfigs, ColumnConfig } from './workingLists.types';
 
 type Props = {
-    ...PassOnProps,
-    getOrdinaryColumnMetadata: GetOrdinaryColumnMetadataFn,
-    getMainColumnMetadataHeader: GetMainColumnMetadataHeaderFn,
+    columns: ColumnConfigs,
+    customListViewMenuContents: CustomMenuContents,
 };
 
 type ColumnConfigWithOptions = {
@@ -24,18 +19,14 @@ type ColumnConfigWithOptions = {
     options: Array<{ text: string, value: any }>,
 };
 
-export const ListViewBuilder = (props: Props) => {
-    const { getOrdinaryColumnMetadata, getMainColumnMetadataHeader, ...passOnProps } = props;
-
+export const ListViewBuilder = ({ columns, customListViewMenuContents, ...passOnProps }: Props) => {
     const {
-        isUpdating,
-        columnOrder,
         dataSource,
         recordsOrder,
         onListRowSelect,
         onSortList,
         onSetListColumnOrder,
-        customRowMenuContents,
+        ...passOnContext
     } = useContext(ListViewBuilderContext);
 
     const listViewColumns = useMemo(() => {
@@ -57,27 +48,19 @@ export const ListViewBuilder = (props: Props) => {
             return optionSet;
         };
 
-        return columnOrder
+        return columns
             .map((column) => {
                 if (column.isMainProperty) {
                     return {
                         ...column,
-                        header: column.header || getMainColumnMetadataHeader(column.id),
                         optionSet: column.options && createMainPropertyOptionSet(column),
                     };
                 }
 
-                const { header, optionSet } = getOrdinaryColumnMetadata(column.id);
-                return {
-                    ...column,
-                    header,
-                    optionSet,
-                };
+                return column;
             });
     }, [
-        columnOrder,
-        getMainColumnMetadataHeader,
-        getOrdinaryColumnMetadata,
+        columns,
     ]);
 
     const listViewDataSource = useMemo(() =>
@@ -90,13 +73,13 @@ export const ListViewBuilder = (props: Props) => {
     return (
         <ListView
             {...passOnProps}
-            isUpdating={isUpdating}
+            {...passOnContext}
             columns={listViewColumns}
             dataSource={listViewDataSource}
             onRowClick={onListRowSelect}
             onSort={onSortList}
             onSetColumnOrder={onSetListColumnOrder}
-            customRowMenuContents={customRowMenuContents}
+            customMenuContents={customListViewMenuContents}
         />
     );
 };

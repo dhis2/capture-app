@@ -4,17 +4,18 @@ import { IconButton, Tooltip } from '@material-ui/core';
 import { Settings as SettingsIcon } from '@material-ui/icons';
 import i18n from '@dhis2/d2-i18n';
 import { ColumnSelectorDialog } from './ColumnSelectorDialog.component';
+import type { Columns } from '../types';
 
 type Props = {
     onSave: Function,
-    columns: Array<Object>,
+    columns: Columns,
 };
 
 type State = {
     dialogOpen: boolean,
 };
 
-export class ColumnSelector extends React.Component<Props, State> {
+export class ColumnSelector extends React.PureComponent<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -34,8 +35,8 @@ export class ColumnSelector extends React.Component<Props, State> {
         });
     }
 
-    handleSaveColumnOrder = (columnOrder: Array<Object>) => {
-        this.props.onSave(columnOrder);
+    handleSaveColumns = (columns: Columns) => {
+        this.props.onSave(columns);
         this.closeDialog();
     }
 
@@ -58,7 +59,7 @@ export class ColumnSelector extends React.Component<Props, State> {
                 <ColumnSelectorDialog
                     open={this.state.dialogOpen}
                     onClose={this.closeDialog}
-                    onSave={this.handleSaveColumnOrder}
+                    onSave={this.handleSaveColumns}
                     columns={columns}
                 />
             </React.Fragment>

@@ -9,18 +9,16 @@ import type {
 } from './workingLists.types';
 
 type PassOnProps = {
-    defaultConfig: Map<string, Object>,
     programId: string,
 };
 
 type Props = {
     ...PassOnProps,
     templates: Array<WorkingListTemplate>,
-    listId: string,
 };
 
 const TemplatesManager = (props: Props) => {
-    const { templates, listId, ...passOnProps } = props;
+    const { templates, ...passOnProps } = props;
     const {
         currentTemplate,
         onSelectTemplate,
@@ -30,21 +28,19 @@ const TemplatesManager = (props: Props) => {
         if (template.id === currentTemplate.id) {
             const defaultTemplate = templates.find(t => t.isDefault);
             // $FlowFixMe
-            onSelectTemplate(defaultTemplate.id, listId);
+            onSelectTemplate(defaultTemplate.id);
             return;
         }
-        onSelectTemplate(template.id, listId);
+        onSelectTemplate(template.id);
     }, [
         onSelectTemplate,
         currentTemplate.id,
-        listId,
         templates,
     ]);
 
     return (
         <ListViewConfig
             {...passOnProps}
-            listId={listId}
             currentTemplate={currentTemplate}
         >
             {

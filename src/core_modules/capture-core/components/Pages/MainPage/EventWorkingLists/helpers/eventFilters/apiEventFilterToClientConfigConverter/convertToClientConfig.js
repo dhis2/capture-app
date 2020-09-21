@@ -6,7 +6,7 @@ import { canViewOtherUsers } from '../../../../../../../d2';
 import {
     dataElementTypes as elementTypes,
 } from '../../../../../../../metaData';
-import { getColumnsConfiguration } from '../columnsConfigurationGetter';
+import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration';
 import { getApi } from '../../../../../../../d2/d2Instance';
 import { getOptionSetFilter } from './optionSet';
 import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
@@ -26,6 +26,8 @@ import type {
     ApiDataFilterBoolean,
     ApiDataFilterDate,
     ApiEventQueryCriteria,
+    ColumnsMetaForDataFetching,
+    ClientConfig,
 } from '../../../types';
 
 const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
@@ -154,13 +156,13 @@ const getSortOrder = (order: ?string) => {
 
 const getDataElementFilters = (
     filters: ?Array<ApiDataFilter>,
-    defaultSpecs: Map<string, Object>): Array<Object> => {
+    columnsMetaForDataFetching: ColumnsMetaForDataFetching): Array<Object> => {
     if (!filters) {
         return [];
     }
 
     return filters.map((serverFilter) => {
-        const element = defaultSpecs.get(serverFilter.dataItem);
+        const element = columnsMetaForDataFetching.get(serverFilter.dataItem);
         if (!element || !getFilterByType[element.type]) {
             return null;
         }
@@ -183,7 +185,7 @@ const getDataElementFilters = (
 // eslint-disable-next-line complexity
 const getMainDataFilters = async (
     eventQueryCriteria: ?ApiEventQueryCriteria,
-    defaultSpecs: Map<string, Object>,
+    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
 ) => {
     if (!eventQueryCriteria) {
         return [];
@@ -193,7 +195,7 @@ const getMainDataFilters = async (
     const filters = [];
     if (status) {
         // $FlowFixMe
-        filters.push({ ...getOptionSetFilter({ in: [status] }, defaultSpecs.get('status').type), id: 'status' });
+        filters.push({ ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status').type), id: 'status' });
     }
     if (eventDate) {
         filters.push({ ...getDateFilter(eventDate), id: 'eventDate' });
@@ -211,25 +213,25 @@ const listConfigDefaults = {
 
 export async function convertToClientConfig(
     eventQueryCriteria: ?ApiEventQueryCriteria,
-    defaultSpecs: Map<string, Object>,
-) {
+    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+): Promise<ClientConfig> {
     const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria && eventQueryCriteria.order);
     const filters = [
-        ...getDataElementFilters(eventQueryCriteria && eventQueryCriteria.dataFilters, defaultSpecs),
-        ...(await getMainDataFilters(eventQueryCriteria, defaultSpecs)),
+        ...getDataElementFilters(eventQueryCriteria && eventQueryCriteria.dataFilters, columnsMetaForDataFetching),
+        ...(await getMainDataFilters(eventQueryCriteria, columnsMetaForDataFetching)),
     ].reduce((acc, filter) => {
         const { id, ...filterData } = filter;
         acc[id] = filterData;
         return acc;
     }, {});
 
-    const columnOrder =
-        getColumnsConfiguration(eventQueryCriteria && eventQueryCriteria.displayColumnOrder, defaultSpecs);
+    const customColumnOrder =
+        getCustomColumnsConfiguration(eventQueryCriteria && eventQueryCriteria.displayColumnOrder, columnsMetaForDataFetching);
 
 
     return {
         filters,
-        columnOrder,
+        customColumnOrder,
         sortById,
         sortByDirection,
         ...listConfigDefaults,

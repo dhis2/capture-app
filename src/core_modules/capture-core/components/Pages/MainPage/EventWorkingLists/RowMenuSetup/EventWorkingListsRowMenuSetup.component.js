@@ -1,10 +1,11 @@
 // @flow
-import React, { useMemo } from 'react';
+import React, { useMemo, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import Delete from '@material-ui/icons/Delete';
-import { WorkingListsCommonRedux } from '../../WorkingListsCommonRedux';
+import { WorkingListsInterfaceBuilder } from '../WorkingListsInterfaceBuilder';
 import type { RowMenuContents } from '../../WorkingLists';
+import type { Props } from './eventWorkingListsRowMenuSetup.types';
 
 const getStyles = (theme: Theme) => ({
     deleteIcon: {
@@ -12,16 +13,10 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Props = {
-    onDeleteEvent: Function,
-    classes: Object,
-};
-
-export const Index = (props: Props) => {
-    const { onDeleteEvent, classes, ...passOnProps } = props;
+export const EventWorkingListsRowMenuSetupPlain = ({ onDeleteEvent, classes, ...passOnProps }: Props & CssClasses) => {
     const customRowMenuContents: RowMenuContents = useMemo(() => [{
         key: 'deleteEventItem',
-        clickHandler: rowData => onDeleteEvent(rowData.eventId),
+        clickHandler: ({ eventId }) => onDeleteEvent(eventId),
         element: (
             <React.Fragment>
                 <Delete className={classes.deleteIcon} />
@@ -31,12 +26,12 @@ export const Index = (props: Props) => {
     }], [onDeleteEvent, classes.deleteIcon]);
 
     return (
-        <WorkingListsCommonRedux
+        <WorkingListsInterfaceBuilder
             {...passOnProps}
             customRowMenuContents={customRowMenuContents}
         />
     );
 };
-Index.displayName = 'EventWorkingListsRowMenuSetup';
 
-export const EventWorkingListsRowMenuSetup = withStyles(getStyles)(Index);
+export const EventWorkingListsRowMenuSetup: ComponentType<Props> =
+    withStyles(getStyles)(EventWorkingListsRowMenuSetupPlain);

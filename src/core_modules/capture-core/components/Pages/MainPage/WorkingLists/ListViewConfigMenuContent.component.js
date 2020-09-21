@@ -5,6 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { ListViewLoader } from './ListViewLoader.component';
 import { TemplateMaintenance, dialogModes } from './TemplateMaintenance';
 import type { WorkingListTemplate } from './workingLists.types';
+import type { CustomMenuContents } from '../../../ListView';
 
 const getStyles = (theme: Theme) => ({
     delete: {
@@ -14,40 +15,28 @@ const getStyles = (theme: Theme) => ({
 
 type PassOnProps = {
     programId: string,
-    currentPage: ?number,
-    rowsPerPage: ?number,
 };
 
 type Props = {
     ...PassOnProps,
-    listId: string,
     currentTemplate: WorkingListTemplate,
-    filters: Object,
-    sortById: ?string,
-    sortByDirection: ?string,
-    columnOrder: ?Array<Object>,
     onAddTemplate: Function,
     onUpdateTemplate: Function,
     onDeleteTemplate: Function,
-    defaultConfig: Map<string, Object>,
-    currentListIsModified: boolean,
+    currentViewHasTemplateChanges: boolean,
+    customListViewMenuContents?: CustomMenuContents,
     classes: Object,
 };
 
 const Index = (props: Props) => {
     const {
-        listId,
         currentTemplate,
-        filters,
-        sortById,
-        sortByDirection,
-        columnOrder,
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
-        defaultConfig,
-        currentListIsModified,
+        currentViewHasTemplateChanges,
         classes,
+        customListViewMenuContents,
         ...passOnProps
     } = props;
     const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = React.useState(null);
@@ -81,8 +70,8 @@ const Index = (props: Props) => {
         element: i18n.t('Update view'),
     }), []);
 
-    const getSaveAsItem = React.useCallback((isDefaultView: boolean, isModified: boolean) => {
-        if (isDefaultView && !isModified) {
+    const getSaveAsItem = React.useCallback((viewIsDefault: boolean, modified: boolean) => {
+        if (viewIsDefault && !modified) {
             return {
                 key: 'saveAs',
                 element: i18n.t('Save current view...'),
@@ -94,7 +83,7 @@ const Index = (props: Props) => {
             clickHandler: () => {
                 setMaintenanceDialogOpenMode(dialogModes.NEW);
             },
-            element: isDefaultView ? i18n.t('Save current view...') : i18n.t('Save current view as...'),
+            element: viewIsDefault ? i18n.t('Save current view...') : i18n.t('Save current view as...'),
         };
     }, []);
 
@@ -126,15 +115,15 @@ const Index = (props: Props) => {
     }), []);
 
     // eslint-disable-next-line complexity
-    const customMenuContents = React.useMemo(() => {
+    const customListViewMenuContentsExtended = React.useMemo(() => {
         const currentViewContents = [];
         const savedViewContents = [];
 
         const { access, isDefault, notPreserved, displayName } = currentTemplate;
 
-        currentViewContents.push(getSaveAsItem(!!isDefault, currentListIsModified));
+        currentViewContents.push(getSaveAsItem(!!isDefault, currentViewHasTemplateChanges));
 
-        if (!isDefault && !notPreserved && access.write && access.update && currentListIsModified) {
+        if (!isDefault && !notPreserved && access.write && access.update && currentViewHasTemplateChanges) {
             savedViewContents.push(getSaveItem());
         }
 
@@ -151,6 +140,7 @@ const Index = (props: Props) => {
         }
 
         return [
+            ...(customListViewMenuContents || []),
             ...currentViewContents,
             ...savedViewContents,
         ];
@@ -160,37 +150,27 @@ const Index = (props: Props) => {
         getSaveAsItem,
         getDeleteItem,
         getShareItem,
-        currentListIsModified,
+        currentViewHasTemplateChanges,
         getSavedViewSubHeader,
+        customListViewMenuContents,
     ]);
 
     return (
         <React.Fragment>
             <ListViewLoader
                 {...passOnProps}
-                listId={listId}
-                defaultConfig={defaultConfig}
-                filters={filters}
-                sortById={sortById}
-                sortByDirection={sortByDirection}
                 currentTemplate={currentTemplate}
-                customMenuContents={customMenuContents}
+                customListViewMenuContents={customListViewMenuContentsExtended}
             />
             <TemplateMaintenance
                 // $FlowFixMe[incompatible-type] automated comment
                 ref={templateMaintenanceInstance}
-                listId={listId}
                 onClose={closeHandler}
                 mode={maintenanceDialogOpenMode}
                 currentTemplate={currentTemplate}
-                filters={filters}
-                sortById={sortById}
-                sortByDirection={sortByDirection}
-                columnOrder={columnOrder}
                 onAddTemplate={addTemplateHandler}
                 onUpdateTemplate={updateTemplateHandler}
                 onDeleteTemplate={deleteTemplateHandler}
-                defaultConfig={defaultConfig}
             />
         </React.Fragment>
     );

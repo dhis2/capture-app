@@ -1,2 +1,2 @@
 // @flow
-export { convertToEventFilterQueryCriteria } from './convertToEventFilterQueryCriteria';
+export { convertToEventFilterEventQueryCriteria } from './convertToEventFilterEventQueryCriteria';

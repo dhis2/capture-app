@@ -1,14 +1,15 @@
 // @flow
 import * as React from 'react';
+import { ListViewUpdaterContext } from './workingLists.context';
 import { ListViewBuilder } from './ListViewBuilder.component';
-import { filtersAreEqual } from './utils';
+import { areFiltersEqual } from './utils';
 
 function useUpdateListMemoize(value) {
     const [filters, ...rest] = value;
     const filtersRef = React.useRef(filters);
     const prevFilters = filtersRef.current;
 
-    if (!filtersAreEqual(prevFilters, filters)) {
+    if (!areFiltersEqual(prevFilters, filters)) {
         filtersRef.current = filters;
     }
 
@@ -36,52 +37,71 @@ type PassOnProps = {
 
 type Props = {
     ...PassOnProps,
-    listId: string,
     filters: Object,
     sortById: ?string,
     sortByDirection: ?string,
-    currentPage: ?number,
-    rowsPerPage: ?number,
     onUpdateEventList: Function,
     onCancelUpdateEventList: Function,
     customMenuContents: Array<Object>,
     lastEventIdDeleted: ?string,
+    programId: string,
+    orgUnitId: string,
+    categories?: Object,
 };
 
 export const ListViewUpdater = (props: Props) => {
     const {
-        listId,
         filters,
         sortById,
         sortByDirection,
-        currentPage,
-        rowsPerPage,
         onUpdateEventList,
         onCancelUpdateEventList,
         customMenuContents,
         lastEventIdDeleted,
+        programId,
+        orgUnitId,
+        categories,
         ...passOnProps
     } = props;
 
+    const {
+        currentPage,
+        rowsPerPage,
+    } = React.useContext(ListViewUpdaterContext);
+
     useUpdateListEffect(() => {
-        onUpdateEventList(listId, { filters, sortById, sortByDirection, currentPage, rowsPerPage, lastEventIdDeleted });
-        return () => onCancelUpdateEventList(listId);
+        onUpdateEventList({
+            filters,
+            sortById,
+            sortByDirection,
+            currentPage,
+            rowsPerPage,
+            programId,
+            orgUnitId,
+            categories,
+            lastEventIdDeleted,
+        });
+        return () => onCancelUpdateEventList();
     }, [
         filters,
         sortById,
         sortByDirection,
         currentPage,
         rowsPerPage,
+        programId,
+        orgUnitId,
+        categories,
         lastEventIdDeleted,
     ]);
 
     return (
         <ListViewBuilder
             {...passOnProps}
-            listId={listId}
             filters={filters}
             sortById={sortById}
             sortByDirection={sortByDirection}
+            currentPage={currentPage}
+            rowsPerPage={rowsPerPage}
             customMenuContents={customMenuContents}
         />
     );

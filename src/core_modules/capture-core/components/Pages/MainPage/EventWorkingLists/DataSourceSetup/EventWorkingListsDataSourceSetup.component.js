@@ -2,82 +2,67 @@
 import React, { useMemo } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import {
-    getEventProgramThrowIfNotFound,
-} from '../../../../../metaData';
 import { convertClientToList } from '../../../../../converters';
 import { EventWorkingListsTemplateSetup } from '../TemplateSetup';
-import type { ColumnConfig } from '../../WorkingLists';
+import type { Props } from './eventWorkingListsDataSourceSetup.types';
 import type { EventsMainProperties, EventsDataElementValues } from '../types';
 
-type Props = {
-    eventsMainProperties: EventsMainProperties,
-    eventsDataElementValues: EventsDataElementValues,
-    defaultConfig: Map<string, ColumnConfig>,
-};
-
-export const EventWorkingListsDataSourceSetup = (props: Props) => {
-    const { eventsMainProperties, eventsDataElementValues, defaultConfig, ...passOnProps } = props;
-
-    const dataSource = useMemo(() => {
-        if (!eventsMainProperties || Object.keys(eventsMainProperties).length <= 0) {
-            return {};
-        }
-
+export const EventWorkingListsDataSourceSetup = ({
+    eventsMainProperties,
+    eventsDataElementValues,
+    columns,
+    ...passOnProps
+}: Props) => {
+    const dataSource = useMemo(() => Object
+        .keys(eventsMainProperties || {})
+        .map(key => ({
+            ...(eventsMainProperties && eventsMainProperties[key]),
+            ...(eventsDataElementValues && eventsDataElementValues[key]),
+        }))
         // $FlowFixMe
-        const programId = Object.values(eventsMainProperties)[0].programId;
-        const stageForm = getEventProgramThrowIfNotFound(programId).stage.stageForm;
+        .reduce((accDataSource, clientRecord: EventsMainProperties & EventsDataElementValues) => {
+            const listRecord = columns
+                .filter(column => column.visible)
+                // Flow error handled in later PR
+                .reduce((acc, { id, options, optionSet, type }) => {
+                    const clientValue = clientRecord[id];
 
-        return Object
-            .keys(eventsMainProperties)
-            .map(key => ({
-                eventMainProperties: eventsMainProperties[key],
-                eventDataElementValues: eventsDataElementValues[key],
-            }))
-            .reduce((accDataSource, { eventMainProperties, eventDataElementValues }) => {
-                const convertedDataElementValues = stageForm.convertValues(eventDataElementValues, convertClientToList);
-                const convertedMainProperties = [...defaultConfig.values()]
-                    .filter(column => column.isMainProperty)
-                    .reduce((acc, mainColumn) => {
-                        const sourceValue = eventMainProperties[mainColumn.id];
-                        if (sourceValue != null) {
-                            if (mainColumn.options) {
-                                // TODO: Need is equal comparer for types
-                                const option = mainColumn.options.find(o => o.value === sourceValue);
-                                if (!option) {
-                                    log.error(
-                                        errorCreator(
-                                            'Missing value in options for main event property')(
-                                            { sourceValue, mainColumn }),
-                                    );
-                                } else {
-                                    acc[mainColumn.id] = option.text;
-                                }
-                            } else {
-                                acc[mainColumn.id] = convertClientToList(sourceValue, mainColumn.type);
-                            }
+                    // TODO: REFACTOR after fixing optionsets
+                    if (options || optionSet) {
+                        // TODO: Need is equal comparer for types
+                        // Flow error handled in later PR
+                        const option = options ? options.find(o => o.value === clientValue) : optionSet.getOption(clientValue);
+                        if (!option) {
+                            log.error(
+                                errorCreator(
+                                    'Missing value in options')(
+                                    { id, clientValue, options, optionSet }),
+                            );
+                        } else {
+                            acc[id] = option.text;
                         }
-                        return acc;
-                    }, {});
+                    } else {
+                        acc[id] = convertClientToList(clientValue, type);
+                    }
+                    return acc;
+                }, {});
 
-                accDataSource[eventMainProperties.eventId] = {
-                    ...convertedDataElementValues,
-                    ...convertedMainProperties,
-                    eventId: eventMainProperties.eventId, // used as rowkey
-                };
-                return accDataSource;
-            }, {});
-    }, [
+            accDataSource[clientRecord.eventId] = {
+                ...listRecord,
+                eventId: clientRecord.eventId, // used as rowkey
+            };
+            return accDataSource;
+        }, {}), [
         eventsMainProperties,
         eventsDataElementValues,
-        defaultConfig,
+        columns,
     ]);
 
     return (
         <EventWorkingListsTemplateSetup
             {...passOnProps}
-            defaultConfig={defaultConfig}
             dataSource={dataSource}
+            columns={columns}
             rowIdKey="eventId"
         />
     );

@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import IconButton from '@material-ui/core/IconButton';
 import withStyles from '@material-ui/core/styles/withStyles';
-import type { RowMenuContents } from '../types';
+import type { CustomRowMenuContents } from '../types';
 
 type Props = {
     classes: {
@@ -21,7 +21,7 @@ type Props = {
     onDelete: (eventId: string) => void,
     onView: (eventId: string) => void,
     row: Object,
-    customRowMenuContents?: RowMenuContents,
+    customRowMenuContents?: CustomRowMenuContents,
 }
 
 type State = {

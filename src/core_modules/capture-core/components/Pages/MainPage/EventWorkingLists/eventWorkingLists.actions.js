@@ -88,8 +88,8 @@ export const deleteTemplateError = (template: Object, listId: string) =>
     actionCreator(actionTypes.TEMPLATE_DELETE_ERROR)({ template, listId });
 
 export const initEventList =
-    (selectedTemplate: Object, context: Object, meta: {| listId: string, defaultConfig: Map<string, Object> |}) =>
-        actionCreator(actionTypes.EVENT_LIST_INIT)({ selectedTemplate, context, ...meta });
+    (selectedTemplate: Object, context: Object, meta: Object) =>
+        actionCreator(actionTypes.EVENT_LIST_INIT)({ ...meta, selectedTemplate, context });
 
 export const initEventListSuccess =
     (listId: string, data: Object) => actionCreator(actionTypes.EVENT_LIST_INIT_SUCCESS)({ ...data, listId });
@@ -102,7 +102,7 @@ export const initEventListCancel =
     (listId: string) => actionCreator(actionTypes.EVENT_LIST_INIT_CANCEL)({ listId });
 
 export const updateEventList =
-    (listId: string, queryArgs: Object) => actionCreator(actionTypes.EVENT_LIST_UPDATE)({ listId, queryArgs });
+    (queryArgs: Object, meta: Object) => actionCreator(actionTypes.EVENT_LIST_UPDATE)({ queryArgs, ...meta });
 
 export const updateEventListSuccess =
     (listId: string, data: Object) => actionCreator(actionTypes.EVENT_LIST_UPDATE_SUCCESS)({ ...data, listId });

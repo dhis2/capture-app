@@ -1,7 +1,6 @@
 // @flow
 import { getEvents } from '../../../../../events/eventRequests';
-import type { ColumnConfig } from '../../WorkingLists';
-import programCollection from '../../../../../metaDataMemoryStores/programCollection/programCollection';
+import type { ColumnsMetaForDataFetching } from '../types';
 
 type InputQueryArgs = {
     [key: string]: any,
@@ -14,13 +13,14 @@ const mapArgumentNameFromClientToServer = {
     currentPage: 'page',
 };
 
-const getMainColumns = (columnsOrder: Array<ColumnConfig>) => columnsOrder
-    .reduce((accMainColumns, column) => {
-        if (column.isMainProperty) {
-            accMainColumns[column.id] = column;
-        }
-        return accMainColumns;
-    }, {});
+const getMainColumns = (columnsMetaForDataFetching: ColumnsMetaForDataFetching) =>
+    [...columnsMetaForDataFetching.values()]
+        .reduce((accMainColumns, column) => {
+            if (column.isMainProperty) {
+                accMainColumns[column.id] = column;
+            }
+            return accMainColumns;
+        }, {});
 
 const getFilter = (filterContainer: any) => filterContainer;
 
@@ -102,23 +102,13 @@ const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainC
     return mainFilterQueryArgs;
 };
 
-const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, programId: string) => {
-    if (!categories) {
-        return null;
-    }
-
-    const program = programCollection.get(programId);
-    if (!program) {
-        return null;
-    }
-
-    const categoryCombination = program.categoryCombination;
-    if (!categoryCombination) {
+const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, categoryCombinationMeta: ?Object) => {
+    if (!categories || !categoryCombinationMeta) {
         return null;
     }
 
     return {
-        attributeCc: categoryCombination.id,
+        attributeCc: categoryCombinationMeta.id,
         attributeCos: Object
             .keys(categories)
 
@@ -143,14 +133,14 @@ const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, m
 };
 
 // eslint-disable-next-line complexity
-const createApiQueryArgs = (queryArgs: Object, mainColumns: Object) => {
+const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryCombinationMeta: ?Object) => {
     let apiQueryArgs = {
         ...queryArgs,
         order: getApiOrderByQueryArgument(queryArgs.sortById, queryArgs.sortByDirection, mainColumns),
         ...getApiFilterQueryArgument(queryArgs.filters, mainColumns),
         // $FlowFixMe[exponential-spread] automated comment
         ...getMainApiFilterQueryArguments(queryArgs.filters, mainColumns),
-        ...getApiCategoriesQueryArgument(queryArgs.categories, queryArgs.programId),
+        ...getApiCategoriesQueryArgument(queryArgs.categories, categoryCombinationMeta),
     };
     apiQueryArgs.hasOwnProperty('categories') && delete apiQueryArgs.categories;
     apiQueryArgs.hasOwnProperty('sortById') && delete apiQueryArgs.sortById;
@@ -184,9 +174,10 @@ const createApiQueryArgs = (queryArgs: Object, mainColumns: Object) => {
 
 export const getEventWorkingListDataAsync = async (
     queryArgs: InputQueryArgs,
-    workingListsColumnsOrder: Array<ColumnConfig>,
+    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+    categoryCombinationMeta: ?Object,
 ) => {
-    const mainColumns = getMainColumns(workingListsColumnsOrder);
-    const events = await getEvents(createApiQueryArgs(queryArgs, mainColumns));
+    const mainColumns = getMainColumns(columnsMetaForDataFetching);
+    const events = await getEvents(createApiQueryArgs(queryArgs, mainColumns, categoryCombinationMeta));
     return events;
 };

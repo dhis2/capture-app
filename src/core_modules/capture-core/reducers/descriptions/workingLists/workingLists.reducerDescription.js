@@ -1,14 +1,9 @@
 // @flow
 import { moment } from 'capture-core-utils/moment';
 import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
-import {
-    actionTypes as filterSelectorActionTypes,
-} from '../../../components/ListView/FilterSelectors/filterSelector.actions';
-import {
-    actionTypes as listActionTypes,
-} from '../../../components/List/list.actions';
-import { workingListsCommonActionTypes } from '../../../components/Pages/MainPage/WorkingListsCommonRedux';
+import { workingListsCommonActionTypes } from '../../../components/Pages/MainPage/WorkingListsCommon';
 import { eventWorkingListsActionTypes } from '../../../components/Pages/MainPage/EventWorkingLists';
+import { recentlyAddedEventsActionTypes } from '../../../components/Pages/NewEvent/RecentlyAddedEventsList';
 
 export const workingListsTemplatesDesc = createReducerDescription({
     [eventWorkingListsActionTypes.TEMPLATES_FETCH]: (state, action) => {
@@ -328,15 +323,7 @@ export const workingListsDesc = createReducerDescription({
 
         return newState;
     },
-    [listActionTypes.APPEND_LIST_ITEM]: (state, action) => {
-        const newState = { ...state };
-        const { listId, itemId } = action.payload;
-        newState[listId] = {
-            order: [...(state[listId] ? state[listId].order : []), itemId],
-        };
-        return newState;
-    },
-    [listActionTypes.PREPEND_LIST_ITEM]: (state, action) => {
+    [recentlyAddedEventsActionTypes.LIST_ITEM_PREPEND]: (state, action) => {
         const newState = { ...state };
         const { listId, itemId } = action.payload;
         newState[listId] = {
@@ -344,7 +331,7 @@ export const workingListsDesc = createReducerDescription({
         };
         return newState;
     },
-    [listActionTypes.REMOVE_LIST_ITEM]: (state, action) => {
+    [recentlyAddedEventsActionTypes.LIST_ITEM_REMOVE]: (state, action) => {
         const newState = { ...state };
         const { listId, itemId } = action.payload;
         newState[listId] = {
@@ -352,7 +339,7 @@ export const workingListsDesc = createReducerDescription({
         };
         return newState;
     },
-    [listActionTypes.RESET_LIST]: (state, action) => {
+    [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
         newState[action.payload.listId] = { order: [] };
         return newState;
@@ -444,35 +431,26 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
         };
     },
     [eventWorkingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
-        const { listId, config } = action.payload;
-        const columnOrder = config.columnOrder;
+        const { listId, config: { customColumnOrder } } = action.payload;
         return {
             ...state,
-            [listId]: columnOrder,
+            [listId]: customColumnOrder,
         };
     },
     [workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET]: (state, action) => {
-        const { columnOrder, listId } = action.payload;
-
-        const currentColumnOrder = state[listId];
-        const newColumnOrder = columnOrder
-            .map((co) => {
-                const stateElement = currentColumnOrder.find(cco => cco.id === co.id);
-                const newOrderELement = {
-                    ...stateElement,
-                    visible: co.visible,
-                };
-                return newOrderELement;
-            });
-
+        const { columns, listId } = action.payload;
         return {
             ...state,
-            [listId]: newColumnOrder,
+            [listId]: columns
+                .map(({ id, visible }) => ({
+                    id,
+                    visible,
+                })),
         };
     },
-    [listActionTypes.RESET_LIST]: (state, action) => {
+    [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
-        newState[action.payload.listId] = [...action.payload.columnOrder];
+        newState[action.payload.listId] = [...action.payload.customColumnOrder];
         return newState;
     },
 }, 'workingListsColumnsOrder');
@@ -493,7 +471,7 @@ export const workingListsContextDesc = createReducerDescription({
         return newState;
     },
     // TODO: WHAT IS THIS!??!?!?
-    [listActionTypes.RESET_LIST]: (state, action) => {
+    [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
         newState[action.payload.listId] = action.payload.selections;
         return newState;
@@ -524,7 +502,7 @@ export const workingListsStickyFiltersDesc = createReducerDescription({
             },
         };
     },
-    [filterSelectorActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
+    [workingListsCommonActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
         const { id, listId } = action.payload;
         const currentListState = {
             ...state[listId],
@@ -539,7 +517,7 @@ export const workingListsStickyFiltersDesc = createReducerDescription({
             [listId]: currentListState,
         };
     },
-    [filterSelectorActionTypes.UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING]: (state, action) => {
+    [workingListsCommonActionTypes.STICKY_FILTERS_AFTER_COLUMN_SORTING_SET]: (state, action) => {
         const { listId, includeFilters: filtersWithValueOnInit } = action.payload;
         return {
             ...state,

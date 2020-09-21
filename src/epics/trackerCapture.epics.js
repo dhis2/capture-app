@@ -100,7 +100,7 @@ import {
 } from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
-} from 'capture-core/components/ListView/FilterSelectors/filterSelector.epics';
+} from 'capture-core/components/Pages/MainPage/WorkingListsCommon';
 import {
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,

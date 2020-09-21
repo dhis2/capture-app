@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getEventProgramThrowIfNotFound, dataElementTypes } from '../../../../../../metaData';
+import { dataElementTypes } from '../../../../../../metaData';
 import {
     convertText,
     convertDate,
@@ -11,12 +11,10 @@ import {
     convertNumeric,
     convertTrueOnly,
 } from './filterConverters';
+import type { ColumnsMetaForDataFetching } from '../../types';
 
 type QueryArgsSource = {
-    programId: string,
     filters: Object,
-    sortById: string,
-    sortByDirection: string,
 };
 
 const mappersForTypes = {
@@ -63,31 +61,27 @@ function convertFilter(
 function convertFilters(
     filters: Object,
     {
-        mainPropTypes,
-        programId,
+        columnsMetaForDataFetching,
         listId,
         isInit,
     }: {
-        mainPropTypes: Object,
-        programId: string,
+        columnsMetaForDataFetching: ColumnsMetaForDataFetching,
         listId: string,
         isInit: boolean,
     },
 ) {
-    const elementsById = getEventProgramThrowIfNotFound(programId).stage.stageForm.getElementsById();
-
     return Object
         .keys(filters)
         .filter(key => filters[key])
         .reduce((acc, key) => {
-            const type = (elementsById[key] && elementsById[key].type) || mainPropTypes[key];
-            if (!type) {
-                log.error(errorCreator('Could not get type for key')({ key, listId, programId }));
+            const column = columnsMetaForDataFetching.get(key);
+            if (!column) {
+                log.error(errorCreator('Could not get type for key')({ key, listId }));
             } else {
                 const sourceValue = filters[key];
                 const queryArgValue = convertFilter(
                     sourceValue,
-                    type,
+                    column.type,
                     {
                         key,
                         listId,
@@ -103,23 +97,22 @@ function convertFilters(
 export function buildQueryArgs(
     queryArgsSource: QueryArgsSource,
     {
-        mainPropTypes,
+        columnsMetaForDataFetching,
         listId,
         isInit = false,
     }: {
-        mainPropTypes: Object,
+        columnsMetaForDataFetching: ColumnsMetaForDataFetching,
         listId: string,
         isInit: boolean,
     },
 ) {
-    const { programId, filters } = queryArgsSource;
+    const { filters } = queryArgsSource;
     const queryArgs = {
         ...queryArgsSource,
         filters: convertFilters(
             filters,
             {
-                mainPropTypes,
-                programId,
+                columnsMetaForDataFetching,
                 listId,
                 isInit,
             },

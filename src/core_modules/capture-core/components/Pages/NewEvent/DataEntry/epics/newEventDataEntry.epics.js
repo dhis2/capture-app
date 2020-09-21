@@ -28,7 +28,7 @@ import {
 } from './defaultColumnConfiguration';
 import {
     resetList,
-} from '../../../../List/list.actions';
+} from '../../RecentlyAddedEventsList';
 import type {
     FieldData,
 } from '../../../../../rules/actionsCreator';

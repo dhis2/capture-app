@@ -1,16 +1,8 @@
 // @flow
 import { createReducerDescription } from '../../../../trackerRedux/trackerReducer';
-import {
-    paginationActionTypes,
-} from '../../../../components/ListView';
-import {
-    actionTypes as filterSelectorActionTypes,
-} from '../../../../components/ListView/FilterSelectors/filterSelector.actions';
-import {
-    actionTypes as listActionTypes,
-} from '../../../../components/List/list.actions';
-import { workingListsCommonActionTypes } from '../../../../components/Pages/MainPage/WorkingListsCommonRedux';
+import { workingListsCommonActionTypes } from '../../../../components/Pages/MainPage/WorkingListsCommon';
 import { eventWorkingListsActionTypes } from '../../../../components/Pages/MainPage/EventWorkingLists';
+import { recentlyAddedEventsActionTypes } from '../../../../components/Pages/NewEvent/RecentlyAddedEventsList';
 
 export const workingListsMetaDesc = createReducerDescription({
     [eventWorkingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
@@ -29,14 +21,14 @@ export const workingListsMetaDesc = createReducerDescription({
             currentPage,
             sortById,
             sortByDirection,
-            columnOrder,
+            customColumnOrder,
         } = config;
 
         const initial = {
             filters,
             sortById,
             sortByDirection,
-            columnDisplayOrder: columnOrder
+            visibleCustomColumnIds: customColumnOrder && customColumnOrder
                 .map(spec => (spec.visible ? spec.id : null))
                 .filter(columnId => columnId),
         };
@@ -81,15 +73,13 @@ export const workingListsMetaDesc = createReducerDescription({
         return newState;
     },
     [eventWorkingListsActionTypes.TEMPLATE_UPDATE]: (state, action) => {
-        const { columnOrder, filters, sortById, sortByDirection, listId } = action.payload;
+        const { visibleColumnIds, filters, sortById, sortByDirection, listId } = action.payload;
 
         const nextInitial = {
             filters,
             sortById,
             sortByDirection,
-            columnDisplayOrder: columnOrder
-                .map(spec => (spec.visible ? spec.id : null))
-                .filter(columnId => columnId),
+            visibleColumnIds,
         };
 
         return {
@@ -132,15 +122,13 @@ export const workingListsMetaDesc = createReducerDescription({
         };
     },
     [eventWorkingListsActionTypes.TEMPLATE_ADD]: (state, action) => {
-        const { columnOrder, filters, sortById, sortByDirection, listId } = action.payload;
+        const { visibleColumnIds, filters, sortById, sortByDirection, listId } = action.payload;
 
         const nextInitial = {
             filters,
             sortById,
             sortByDirection,
-            columnDisplayOrder: columnOrder
-                .map(spec => (spec.visible ? spec.id : null))
-                .filter(columnId => columnId),
+            visibleColumnIds,
         };
 
         return {
@@ -182,7 +170,7 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
-    [paginationActionTypes.CHANGE_PAGE]: (state, action) => {
+    [workingListsCommonActionTypes.PAGE_CHANGE]: (state, action) => {
         const newState = { ...state };
         const { pageNumber, listId } = action.payload;
         newState[listId] = {
@@ -208,7 +196,7 @@ export const workingListsMetaDesc = createReducerDescription({
         };
         return newState;
     },
-    [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state, action) => {
+    [workingListsCommonActionTypes.ROWS_PER_PAGE_CHANGE]: (state, action) => {
         const newState = { ...state };
         const { rowsPerPage, listId } = action.payload;
         newState[listId] = {
@@ -221,42 +209,41 @@ export const workingListsMetaDesc = createReducerDescription({
         };
         return newState;
     },
-    [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        const { listId, itemId } = action.meta;
-        newState[listId] = {
-            ...newState[listId],
-            next: {
-                ...newState[listId].next,
-                filters: {
-                    ...(newState[listId].next ? newState[listId].next.filters : null),
-                    [itemId]: payload,
+    [workingListsCommonActionTypes.FILTER_SET]: (state, action) => {
+        const { filter, listId, itemId } = action.payload;
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                next: {
+                    ...state[listId].next,
+                    filters: {
+                        ...(state[listId].next && state[listId].next.filters),
+                        [itemId]: filter,
+                    },
+                    currentPage: 1,
                 },
             },
         };
-        return newState;
     },
-    [filterSelectorActionTypes.CLEAR_FILTER]: (state, action) => {
-        const newState = { ...state };
+    [workingListsCommonActionTypes.FILTER_CLEAR]: (state, action) => {
         const { itemId, listId } = action.payload;
-
-        const nextMainStateFilters = {
-            ...(newState[listId].next ? newState[listId].next.filters : null),
-            [itemId]: null,
-        };
-
-        newState[listId] = {
-            ...newState[listId],
-            next: {
-                ...newState[listId].next,
-                filters: nextMainStateFilters,
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                next: {
+                    ...state[listId].next,
+                    filters: {
+                        ...(state[listId].next && state[listId].next.filters),
+                        [itemId]: null,
+                    },
+                    currentPage: 1,
+                },
             },
         };
-
-        return newState;
     },
-    [listActionTypes.RESET_LIST]: (state, action) => {
+    [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
         newState[action.payload.listId] = action.payload.meta;
         return newState;
