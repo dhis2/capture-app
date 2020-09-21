@@ -125,7 +125,7 @@ const getFilterByType = {
     [elementTypes.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
-const isOptionSetFilter = (type: $Values<typeof elementTypes>, filter: any) => {
+const isOptionSetFilter = (type: $Keys<typeof elementTypes>, filter: any) => {
     if ([
         // $FlowFixMe[prop-missing] automated comment
         elementTypes.BOOLEAN,

@@ -28,7 +28,7 @@ const errorMessages = {
 };
 
 type FieldForTypes = {
-    [type: $Values<typeof elementTypes>]: (metaData: MetaDataElement, options: Object, context: Object) => any,
+    [type: $Keys<typeof elementTypes>]: (metaData: MetaDataElement, options: Object, context: Object) => any,
 }
 
 // todo report (lgmt)

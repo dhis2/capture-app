@@ -27,7 +27,7 @@ export type Column = {
     id: string,
     header: string,
     visible: boolean,
-    type: $Values<typeof elementTypes>,
+    type: $Keys<typeof elementTypes>,
     optionSet?: Object,
     options?: Object,
     singleSelect?: ?boolean,
