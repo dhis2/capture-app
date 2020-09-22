@@ -147,22 +147,24 @@ const CardListItemIndex = ({
                         <Grid item xs={16} sm container>
                             <Grid item xs container direction="column" spacing={2}>
                                 {
-                                    dataElements.map(element => (
-                                        <ListEntry
-                                            key={element.id}
-                                            name={element.name}
-                                            value={item.values[element.id]}
-                                        />
-                                    ))
+                                    dataElements
+                                        .filter(({ type }) => type !== 'IMAGE')
+                                        .map(({ id, name, type }) => (
+                                            <ListEntry
+                                                key={id}
+                                                name={name}
+                                                value={item.values[id]}
+                                                type={type}
+                                            />))
                                 }
                                 {
                                     orgUnitName &&
-                                    <ListEntry name={i18n.t('Organisation unit: ')} value={orgUnitName} />
+                                    <ListEntry name={i18n.t('Organisation unit')} value={orgUnitName} />
                                 }
 
                                 {
                                     enrollmentDate &&
-                                    <ListEntry name={i18n.t('Date of enrollment:')} value={moment(enrollmentDate).format('L')} />
+                                    <ListEntry name={i18n.t('Date of enrollment')} value={enrollmentDate} type={'DATE'} />
                                 }
 
                             </Grid>
