@@ -1,12 +1,12 @@
 // @flow
 import type { SearchGroups } from '../SearchPage.types';
-import elementTypes from '../../../../metaData/DataElement/elementTypes';
+import { typeof dataElementTypes } from '../../../../metaData';
 
 export type CurrentSearchTerms = Array<{|
   +name: string,
   +value: any,
   +id: string,
-  +type: $Values<typeof elementTypes>
+  +type: $Values<dataElementTypes>
 |}>
 
 export type FormsValues = {
