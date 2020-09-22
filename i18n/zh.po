@@ -304,7 +304,7 @@ msgid "No results"
 msgstr "无结果"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "开始输入搜索内容"
 
 msgid "suggestions could not be retrieved"
 msgstr "建议不能提取"

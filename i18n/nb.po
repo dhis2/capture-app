@@ -311,7 +311,7 @@ msgid "No results"
 msgstr "Ingen resultater"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "begynn å skrive for å søke"
 
 msgid "suggestions could not be retrieved"
 msgstr "forslag kunne ikke hentes"
