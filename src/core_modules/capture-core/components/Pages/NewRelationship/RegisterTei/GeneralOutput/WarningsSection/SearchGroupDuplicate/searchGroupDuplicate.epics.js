@@ -2,7 +2,7 @@
 import { pipe as pipeD2 } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { of, from } from 'rxjs';
+import { of, from, Observable } from 'rxjs';
 import {
     actionTypes,
     duplicatesForReviewRetrievalSuccess,
@@ -31,7 +31,7 @@ const getTETSearchGroup = (tetId: string) => {
 const getSearchGroup = (programId: ?string, tetId: string) =>
     (programId ? getProgramSearchGroup(programId) : getTETSearchGroup(tetId));
 
-export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable, store: ReduxStore) =>
+export const loadSearchGroupDuplicatesForReviewEpic: Epic = (action$, store) =>
     action$.pipe(
         ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE),
         switchMap((action) => {
@@ -79,9 +79,9 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 getTrackerProgramThrowIfNotFound(contextParam.program).attributes :
                 getTrackedEntityTypeThrowIfNotFound((contextParam.trackedEntityType)).attributes;
 
-            return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-                map(({ trackedEntityInstanceContainers: searchResults, pagingData }) =>
-                    duplicatesForReviewRetrievalSuccess(searchResults, pagingData)),
+            const stream$: Stream = from(getTrackedEntityInstances(queryArgs, attributes));
+            return stream$.pipe(
+                map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => duplicatesForReviewRetrievalSuccess(searchResults, pagingData)),
                 catchError(() => of(duplicatesForReviewRetrievalFailed())),
 
             );
