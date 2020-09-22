@@ -13,7 +13,7 @@ import { ListEntry } from './ListEntry.component';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
-    currentSearchScopeName?: string,
+    currentSearchScopeProgramName?: string,
     currentProgramId?: string,
     getCustomTopElements?: ?(props: Object) => Element<any>,
     getCustomBottomElements?: ?(props: Object) => Element<any>,
@@ -118,7 +118,7 @@ const CardListItemIndex = ({
     getCustomBottomElements,
     dataElements,
     currentProgramId,
-    currentSearchScopeName,
+    currentSearchScopeProgramName,
 }: OwnProps & CssClasses) => {
     const renderImageDataElement = (imageElement: DataElement) => {
         const imageValue = item.values[imageElement.id];
@@ -235,7 +235,7 @@ const CardListItemIndex = ({
                 getCustomBottomElements({
                     item,
                     navigationButtonsState: deriveNavigationButtonState(enrollmentType),
-                    programName: currentSearchScopeName,
+                    programName: currentSearchScopeProgramName,
                 })
             }
         </div>

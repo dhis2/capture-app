@@ -9,7 +9,7 @@ import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Sea
 type OwnProps = $ReadOnly<{|
     dataElements: CardDataElementsInformation,
     items: Array<SearchResultItem>,
-    currentSearchScopeName?: string,
+    currentSearchScopeProgramName?: string,
     getCustomItemTopElements?: ?(itemProps: Object) => Element<any>,
     getCustomItemBottomElements?: ?(itemProps: Object) => Element<any>,
     currentProgramId?: string,
@@ -31,7 +31,7 @@ const CardListIndex = ({
     dataElements,
     noItemsText,
     currentProgramId,
-    currentSearchScopeName,
+    currentSearchScopeProgramName,
 }: OwnProps & CssClasses) => {
     const { imageDataElement } = makeElementsContainerSelector()(dataElements);
     return (
@@ -47,7 +47,7 @@ const CardListIndex = ({
                         <CardListItem
                             key={item.id}
                             item={item}
-                            currentSearchScopeName={currentSearchScopeName}
+                            currentSearchScopeProgramName={currentSearchScopeProgramName}
                             currentProgramId={currentProgramId}
                             getCustomTopElements={getCustomItemTopElements}
                             getCustomBottomElements={getCustomItemBottomElements}
