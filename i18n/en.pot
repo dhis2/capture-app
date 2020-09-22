@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
-"PO-Revision-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-22T09:45:26.154Z\n"
+"PO-Revision-Date: 2020-09-22T09:45:26.154Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -736,6 +736,12 @@ msgid "Make a selection to start searching"
 msgstr ""
 
 msgid "View dashboard"
+msgstr ""
+
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
 msgstr ""
 
 msgid "result(s) found for term(s)"
