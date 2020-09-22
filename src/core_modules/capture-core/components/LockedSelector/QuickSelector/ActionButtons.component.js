@@ -69,7 +69,7 @@ const Index = ({
                     null
             }
             <Button
-                dataTest="dhis2-capture-new-button"
+                dataTest="dhis2-capture-new-event-button"
                 onClick={onNewClick}
             >
                 <AddIcon className={classes.icon} />
