@@ -10,6 +10,7 @@ import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Sea
 import type { DataElement } from '../../metaData';
 import { availableCardListButtonState, enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
+import { dataElementTypes } from '../../metaData';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
@@ -148,7 +149,8 @@ const CardListItemIndex = ({
                             <Grid item xs container direction="column" spacing={2}>
                                 {
                                     dataElements
-                                        .filter(({ type }) => type !== 'IMAGE')
+                                         // $FlowFixMe[prop-missing] automated comment
+                                        .filter(({ type }) => type !== dataElementTypes.IMAGE)
                                         .filter(({ displayInReports }) => displayInReports)
                                         .map(({ id, name, type }) => (
                                             <ListEntry
@@ -165,7 +167,8 @@ const CardListItemIndex = ({
 
                                 {
                                     enrollmentDate &&
-                                    <ListEntry name={i18n.t('Date of enrollment')} value={enrollmentDate} type={'DATE'} />
+                                    // $FlowFixMe[prop-missing] automated comment
+                                    <ListEntry name={i18n.t('Date of enrollment')} value={enrollmentDate} type={dataElementTypes.DATE} />
                                 }
 
                             </Grid>

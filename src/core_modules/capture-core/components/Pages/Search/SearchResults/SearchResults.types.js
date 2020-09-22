@@ -2,12 +2,13 @@
 import type { SearchGroups } from '../SearchPage.types';
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 import { typeof searchScopes } from '../SearchPage.constants';
+import { typeof dataElementTypes } from '../../../../metaData';
 
 export type OwnProps = {|
   +searchGroupsForSelectedScope: SearchGroups,
 |}
 
-export type CardDataElementsInformation = Array<{| id: string, name: string, type: string |}>
+export type CardDataElementsInformation = Array<{| id: string, name: string, type: $Values<dataElementTypes> |}>
 
 type Tei = $ReadOnly<{
   created: string,
