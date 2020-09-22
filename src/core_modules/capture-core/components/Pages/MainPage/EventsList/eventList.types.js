@@ -1,5 +1,5 @@
 // @flow
-import { dataElementTypes as elementTypes } from '../../../../metaData';
+import { dataElementTypes } from '../../../../metaData';
 
 export type {
     AssigneeFilterData,
@@ -27,7 +27,7 @@ export type Column = {
     id: string,
     header: string,
     visible: boolean,
-    type: $Values<typeof elementTypes>,
+    type: $Keys<typeof dataElementTypes>,
     optionSet?: Object,
     options?: Object,
     singleSelect?: ?boolean,

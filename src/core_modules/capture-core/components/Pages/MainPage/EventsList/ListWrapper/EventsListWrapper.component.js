@@ -2,8 +2,6 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-import elementTypes from '../../../../../metaData/DataElement/elementTypes';
-
 import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
 import { ListPagination } from '../Pagination';
 
@@ -16,6 +14,7 @@ import { DialogLoadingMask } from '../../../../LoadingMasks';
 
 import List from '../../../../List/OnlineList/List.component';
 import ListWrapperMenu from './ListWrapperMenu.component';
+import { typeof dataElementTypes } from '../../../../../metaData';
 
 const EventList = withCustomEndCell(eventContentMenuSettings)(List);
 
@@ -50,7 +49,7 @@ export type Column = {
     id: string,
     header: string,
     visible: boolean,
-    type: $Values<typeof elementTypes>,
+    type: $Keys<dataElementTypes>,
     optionSet?: ?OptionSet,
 };
 

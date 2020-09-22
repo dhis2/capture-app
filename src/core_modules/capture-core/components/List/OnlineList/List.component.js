@@ -16,7 +16,7 @@ import {
     sorLabelPlacements,
 } from 'capture-ui';
 import SortLabelWrapper from '../../DataTable/SortLabelWrapper.component';
-import { dataElementTypes as elementTypes } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData';
 import type { OptionSet } from '../../../metaData';
 import { LoadingMask } from '../../LoadingMasks';
 
@@ -69,7 +69,7 @@ export type Column = {
     id: string,
     header: string,
     visible: boolean,
-    type: $Values<typeof elementTypes>,
+    type: $Keys<typeof dataElementTypes>,
     optionSet?: ?OptionSet,
 };
 
@@ -110,26 +110,18 @@ class List extends React.Component<Props> {
         this.columnHeaderInstances = [];
     }
     static typesWithAscendingInitialDirection = [
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.TEXT,
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.LONG_TEXT,
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.USERNAME,
+        dataElementTypes.TEXT,
+        dataElementTypes.LONG_TEXT,
+        dataElementTypes.USERNAME,
         'ASSIGNEE',
     ];
 
     static typesWithRightPlacement = [
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.NUMBER,
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.INTEGER,
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.INTEGER_POSITIVE,
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.INTEGER_NEGATIVE,
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.INTEGER_ZERO_OR_POSITIVE,
+        dataElementTypes.NUMBER,
+        dataElementTypes.INTEGER,
+        dataElementTypes.INTEGER_POSITIVE,
+        dataElementTypes.INTEGER_NEGATIVE,
+        dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
     getSortHandler = (id: string) => (direction: string) => {
         this.props.onSort(this.props.listId, id, direction);

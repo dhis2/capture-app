@@ -34,21 +34,13 @@ const translationPropertyNames = {
 };
 
 const searchAttributeElementTypes = {
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.NUMBER]: dataElementTypes.NUMBER_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER]: dataElementTypes.INTEGER_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_POSITIVE]: dataElementTypes.INTEGER_POSITIVE_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_NEGATIVE]: dataElementTypes.INTEGER_NEGATIVE_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.DATE]: dataElementTypes.DATE_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.DATETIME]: dataElementTypes.DATETIME_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.TIME]: dataElementTypes.TIME_RANGE,
 };
 

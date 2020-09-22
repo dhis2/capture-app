@@ -1,5 +1,4 @@
 // @flow
-
 declare type D2 = {
     models: Object,
     system: {

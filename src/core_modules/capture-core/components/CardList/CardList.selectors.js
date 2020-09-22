@@ -1,6 +1,6 @@
 // @flow
 import { createSelector } from 'reselect';
-import { elementTypes } from '../../metaData/DataElement';
+import { dataElementTypes } from '../../metaData';
 
 
 const elementsSelector = dataElements => dataElements;
@@ -9,8 +9,7 @@ const elementsSelector = dataElements => dataElements;
 export const makeElementsContainerSelector = () => createSelector(
     elementsSelector,
     (elements) => {
-        // $FlowFixMe[prop-missing] automated comment
-        const imageDataElement = elements.find(a => a.type === elementTypes.IMAGE);
+        const imageDataElement = elements.find(a => a.type === dataElementTypes.IMAGE);
         if (imageDataElement) {
             const newElements = [...elements];
             newElements.splice(newElements.indexOf(imageDataElement), 1);
