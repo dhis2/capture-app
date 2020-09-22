@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 
 msgid "Last updated"
-msgstr ""
+msgstr "Последнее обновление"
 
 msgid "Enrolled"
 msgstr ""
@@ -702,7 +702,7 @@ msgid "Register"
 msgstr "Зарегистрировать"
 
 msgid "Search scope"
-msgstr ""
+msgstr "Область поиска"
 
 msgid "Find results from"
 msgstr ""
@@ -721,10 +721,10 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 msgid "No results found"
-msgstr ""
+msgstr "Результаты не найдены"
 
 msgid ""
 "You can change your search terms and search again to find what you are "

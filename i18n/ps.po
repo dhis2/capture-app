@@ -1,6 +1,6 @@
 # 
 # Translators:
-# phil_dhis2, 2019
+# phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
@@ -38,7 +38,7 @@ msgid ""
 msgstr ""
 
 msgid "Last updated"
-msgstr ""
+msgstr "د وروستي ځل لپاره تجدید شوې"
 
 msgid "Enrolled"
 msgstr ""
@@ -720,10 +720,10 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "شا ته کېدل"
 
 msgid "No results found"
-msgstr ""
+msgstr "هېڅ پایله ترلاسه نه شوه"
 
 msgid ""
 "You can change your search terms and search again to find what you are "

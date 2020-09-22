@@ -1,8 +1,8 @@
 # 
 # Translators:
-# phil_dhis2, 2019
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
+# phil_dhis2, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
 # Ge Joao <gsimango@saudigitus.org>, 2020
 # 
 msgid ""
@@ -40,7 +40,7 @@ msgid ""
 msgstr ""
 
 msgid "Last updated"
-msgstr ""
+msgstr "Última actualização"
 
 msgid "Enrolled"
 msgstr ""
@@ -703,7 +703,7 @@ msgid "Register"
 msgstr "Registo"
 
 msgid "Search scope"
-msgstr ""
+msgstr "Escopo de pesquisa"
 
 msgid "Find results from"
 msgstr ""
@@ -722,10 +722,10 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Voltar"
 
 msgid "No results found"
-msgstr ""
+msgstr "Nenhum resultado encontrado"
 
 msgid ""
 "You can change your search terms and search again to find what you are "

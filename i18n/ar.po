@@ -1,9 +1,9 @@
 # 
 # Translators:
-# phil_dhis2, 2019
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Antonia Bezenchek <antonia@informa.pro>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
+# phil_dhis2, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
 # Hamza Assada <7amza.it@gmail.com>, 2020
 # 
 msgid ""
@@ -47,7 +47,7 @@ msgstr ""
 "النسخ الأخرى."
 
 msgid "Last updated"
-msgstr ""
+msgstr "آخر تحديث"
 
 msgid "Enrolled"
 msgstr ""
@@ -717,7 +717,7 @@ msgid "Register"
 msgstr "تسجيل"
 
 msgid "Search scope"
-msgstr ""
+msgstr "نطاق البحث"
 
 msgid "Find results from"
 msgstr ""
@@ -736,10 +736,10 @@ msgid "Search by attributes"
 msgstr "البحث حسب السمة"
 
 msgid "Back"
-msgstr ""
+msgstr "للخلف"
 
 msgid "No results found"
-msgstr ""
+msgstr "لم يتم العثور على أي نتائج"
 
 msgid ""
 "You can change your search terms and search again to find what you are "

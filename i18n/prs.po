@@ -37,7 +37,7 @@ msgid ""
 msgstr ""
 
 msgid "Last updated"
-msgstr ""
+msgstr "تجدید آخیر"
 
 msgid "Enrolled"
 msgstr ""
@@ -700,7 +700,7 @@ msgid "Register"
 msgstr "ثبت نام"
 
 msgid "Search scope"
-msgstr ""
+msgstr "محدوده جستجو"
 
 msgid "Find results from"
 msgstr ""
@@ -719,10 +719,10 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "عقب"
 
 msgid "No results found"
-msgstr ""
+msgstr "هیج نتیجه ی یافت نشد"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
