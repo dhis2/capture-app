@@ -2,7 +2,7 @@
 import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { of, from, empty } from 'rxjs';
-import { isString } from 'd2-utilizr/src';
+import { isObject, isString } from 'd2-utilizr/src';
 import {
     searchPageActionTypes,
     showEmptyResultsViewOnSearchPage,
@@ -44,6 +44,7 @@ const getFiltersForAttributesSearchQuery = (formValues) => {
         .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
 
     const rangeFilers = Object.keys(formValues)
+        .filter(fieldId => isObject(formValues[fieldId]))
         .filter(fieldId => ('from' in formValues[fieldId] && 'to' in formValues[fieldId]))
         .map(fieldId => `${fieldId}:ge:${formValues[fieldId].from}:le:${formValues[fieldId].to}`);
 
