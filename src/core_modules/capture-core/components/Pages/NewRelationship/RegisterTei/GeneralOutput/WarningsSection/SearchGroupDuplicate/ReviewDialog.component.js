@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { withStyles } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import ReviewDialogContents from './ReviewDialogContents.container';
@@ -11,7 +12,11 @@ type Props = {
     extraActions?: ?React.Node,
 };
 
-class ReviewDialog extends React.Component<Props> {
+const StyledDialogActions = withStyles({
+    root: { margin: '0px 24px 24px' },
+})(DialogActions);
+
+class ReviewDialog extends React.Component<Props > {
     static paperProps = {
         style: {
             maxHeight: 'calc(100% - 100px)',
@@ -24,17 +29,17 @@ class ReviewDialog extends React.Component<Props> {
         return (
             <Dialog
                 open={open}
-                fullWidth
-                maxWidth={'md'}
                 onClose={onCancel}
+                maxWidth="sm"
+                fullWidth
                 PaperProps={ReviewDialog.paperProps}
             >
                 <ReviewDialogContents
                     onLink={onLink}
                 />
-                <DialogActions>
+                <StyledDialogActions>
                     {extraActions}
-                </DialogActions>
+                </StyledDialogActions>
             </Dialog>
         );
     }

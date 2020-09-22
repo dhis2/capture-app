@@ -35,10 +35,7 @@ class SearchGroupDuplicate extends React.Component<Props, State> {
 
     getHideButton() {
         return (
-            <Button
-                onClick={this.handleCloseReviewDialog}
-                primary
-            >
+            <Button onClick={this.handleCloseReviewDialog}>
                 {i18n.t('Hide')}
             </Button>
         );

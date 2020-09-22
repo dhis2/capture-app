@@ -6,7 +6,7 @@ import {
 import DataElementFactory from './DataElementFactory';
 import TeiRegistrationFactory from './TeiRegistrationFactory';
 import { SearchGroupFactory } from '../../../common/factory';
-import { DataElement } from '../../../../metaData/DataElement';
+import type { DataElement } from '../../../../metaData';
 import type
 {
     CachedTrackedEntityType,
@@ -41,6 +41,7 @@ class TrackedEntityTypeFactory {
         );
         this.searchGroupFactory = new SearchGroupFactory(
             cachedTrackedEntityAttributes,
+            cachedOptionSets,
             locale,
         );
 

@@ -1,6 +1,6 @@
 // @flow
 import { actionCreator } from '../../../../actions/actions.utils';
-import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
+import { effectMethods } from '../../../../trackerOffline';
 
 export const batchActionTypes = {
     LOAD_EVENT_RELATIONSHIPS_BATCH: 'LoadEventRelationshipsBatch',
@@ -42,7 +42,7 @@ export const saveEventRelationshipNewTei = (clientData: Object, selections: Obje
         offline: {
             effect: {
                 url: 'trackedEntityInstances',
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: clientData.to.data,
                 clientId,
             },
@@ -56,7 +56,7 @@ export const startSaveEventRelationship = (serverData: Object, selections: Objec
         offline: {
             effect: {
                 url: 'relationships',
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: serverData,
                 clientId,
             },
@@ -81,7 +81,7 @@ export const startDeleteEventRelationship = (relationshipId: ?string, clientId: 
         offline: {
             effect: {
                 url: relationshipId ? `relationships/${relationshipId}` : null,
-                method: methods.DELETE,
+                method: effectMethods.DELETE,
                 clientId,
                 updateOnDequeueCallback: handleDequeueUpdate.toString(),
             },

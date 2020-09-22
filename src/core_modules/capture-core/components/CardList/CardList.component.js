@@ -1,32 +1,19 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
+import type { ComponentType, Element } from 'react';
 import { withStyles } from '@material-ui/core';
-import { LoadingMaskElementCenter } from '../LoadingMasks';
-import { DataElement } from '../../metaData';
-import CardListItem from './CardListItem.component';
-import makeDataElementsContainerSelector from './CardList.selectors';
+import { CardListItem } from './CardListItem.component';
+import { makeElementsContainerSelector } from './CardList.selectors';
+import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 
-export type ItemValues = {
-    [elementId: string]: any,
-}
-
-export type Item = {
-    id: string,
-    values: ItemValues,
-}
-
-type Props = {
-    itemsLoading: ?boolean,
-    items: ?Array<Item>,
-    getCustomItemTopElements?: ?(itemProps: Object) => React.Element<any>,
-    getCustomItemBottomElements?: ?(itemProps: Object) => React.Element<any>,
-    classes: {
-        noItemsContainer: string,
-        loadingContainer: string,
-    },
-    noItemsText: string,
-    dataElements: Array<DataElement>,
-}
+type OwnProps = $ReadOnly<{|
+    dataElements: CardDataElementsInformation,
+    items: Array<SearchResultItem>,
+    getCustomItemTopElements?: ?(itemProps: Object) => Element<any>,
+    getCustomItemBottomElements?: ?(itemProps: Object) => Element<any>,
+    currentProgramId?: string,
+    noItemsText?: string,
+|}>
 
 const getStyles = (theme: Theme) => ({
     noItemsContainer: {
@@ -35,67 +22,41 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-class CardList extends React.Component<Props> {
-    getDataElementsContainer: Function;
-    static defaultProps = {
-        itemTypeName: 'item',
-    }
-    constructor(props: Props) {
-        super(props);
-        this.getDataElementsContainer = makeDataElementsContainerSelector();
-    }
 
-    renderLoading = () => (
-        <div className={this.props.classes.loadingContainer}>
-            <LoadingMaskElementCenter />
-        </div>
+const CardListIndex = ({
+    classes,
+    items,
+    getCustomItemBottomElements,
+    getCustomItemTopElements,
+    dataElements,
+    noItemsText,
+    currentProgramId,
+}: OwnProps & CssClasses) => {
+    const { imageDataElement } = makeElementsContainerSelector()(dataElements);
+
+    return (
+        <>
+            {
+                (!items || items.length === 0)
+                    ?
+                    (<div className={classes.noItemsContainer}>
+                        {noItemsText}
+                    </div>)
+                    :
+                    items.map(item => (
+                        <CardListItem
+                            key={item.id}
+                            item={item}
+                            currentProgramId={currentProgramId}
+                            getCustomTopElements={getCustomItemTopElements}
+                            getCustomBottomElements={getCustomItemBottomElements}
+                            imageDataElement={imageDataElement}
+                            dataElements={dataElements}
+                        />
+                    ))
+            }
+        </>
     );
+};
 
-    renderItems = () => {
-        const {
-            items,
-            getCustomItemBottomElements,
-            getCustomItemTopElements,
-        } = this.props;
-        if (!items || items.length === 0) {
-            return this.renderNoItems();
-        }
-
-        const dataElementsContainer = this.getDataElementsContainer(this.props);
-
-        return items.map((item, index) => (
-            <CardListItem
-                /* eslint-disable-next-line react/no-array-index-key */
-                key={index}
-                item={item}
-                getCustomTopElements={getCustomItemTopElements}
-                getCustomBottomElements={getCustomItemBottomElements}
-                {...dataElementsContainer}
-            />
-        ));
-    }
-
-
-    renderNoItems = () => {
-        const { classes, noItemsText } = this.props;
-        return (
-            <div className={classes.noItemsContainer}>
-                {noItemsText}
-            </div>
-        );
-    }
-
-    render() {
-        const { itemsLoading } = this.props;
-        return (
-            <div>
-                {itemsLoading ?
-                    this.renderLoading() :
-                    this.renderItems()
-                }
-            </div>
-        );
-    }
-}
-
-export default withStyles(getStyles)(CardList);
+export const CardList: ComponentType<OwnProps> = withStyles(getStyles)(CardListIndex);

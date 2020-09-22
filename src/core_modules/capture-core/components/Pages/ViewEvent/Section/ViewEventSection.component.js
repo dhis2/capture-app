@@ -45,7 +45,7 @@ class ViewEventSection extends React.Component<Props, State> {
         };
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    UNSAFE_componentWillReceiveProps(nextProps: Props) {
         if (nextProps.collapsed !== this.props.collapsed) {
             this.setState({
                 collapsed: nextProps.collapsed,

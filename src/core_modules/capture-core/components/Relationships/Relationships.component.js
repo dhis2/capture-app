@@ -6,7 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import { IconButton, withStyles, Tooltip } from '@material-ui/core';
 import { ArrowForward as ArrowIcon, Clear as ClearIcon } from '@material-ui/icons';
 import { Button } from '../Buttons';
-import { RelationshipType } from '../../metaData';
+import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 
 const getStyles = (theme: Theme) => ({
@@ -188,6 +188,7 @@ class Relationships extends React.Component<Props> {
                                 onClick={onOpenAddRelationship}
                                 disabled={!canCreate}
                                 small={smallMainButton}
+                                dataTest="dhis2-capture-add-relationship-button"
                             >
                                 {i18n.t('Add relationship')}
                             </Button>

@@ -8,7 +8,7 @@ import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import Button from '../../../../Buttons/Button.component';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
-import CardList from '../../../../CardList/CardList.component';
+import { CardList } from '../../../../CardList';
 import { LoadingMask } from '../../../../LoadingMasks';
 import {
     convertFormToClient,
@@ -36,7 +36,6 @@ type Props = {
         addRelationshipButton: string,
         pagination: string,
         topSection: string,
-        topSectionActionsContainer: string,
         actionButton: string,
         topSectionValuesContainer: string,
     },
@@ -46,22 +45,24 @@ type Props = {
 
 const getStyles = (theme: Theme) => ({
     itemActionsContainer: {
-        padding: theme.typography.pxToRem(10),
+        paddingTop: theme.typography.pxToRem(10),
     },
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
+        marginLeft: theme.typography.pxToRem(8),
+        maxWidth: theme.typography.pxToRem(600),
     },
     topSection: {
         display: 'flex',
         flexDirection: 'column',
-        margin: theme.typography.pxToRem(10),
+        margin: theme.typography.pxToRem(8),
+        marginRight: 0,
         backgroundColor: theme.palette.grey.lighter,
+        maxWidth: theme.typography.pxToRem(600),
     },
     topSectionValuesContainer: {
         padding: theme.typography.pxToRem(10),
-    },
-    topSectionActionsContainer: {
     },
     actionButton: {
         margin: theme.typography.pxToRem(10),
@@ -82,13 +83,14 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         this.props.onAddRelationship(item.id, item.values);
     }
 
-    getItemActions = (itemProps: Object) => {
+    getItemActions = ({ item }: Object) => {
         const classes = this.props.classes;
         return (
             <div className={classes.itemActionsContainer}>
                 <Button
+                    dataTest={`dhis2-capture-relationship-tei-link-${item.id}`}
                     color="primary"
-                    onClick={() => this.onAddRelationship(itemProps.item)}
+                    onClick={() => this.onAddRelationship(item)}
                 >
                     {i18n.t('Link')}
                 </Button>
@@ -149,7 +151,7 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         return (
             <div className={classes.topSection}>
                 {this.getSearchValues()}
-                <div className={classes.topSectionActionsContainer}>
+                <div>
                     <Button className={classes.actionButton} onClick={onNewSearch}>
                         {i18n.t('New search')}
                     </Button>

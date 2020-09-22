@@ -1,8 +1,10 @@
 // @flow
 import {
-    SearchGroup,
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
+} from '../../metaData';
+import type {
+    SearchGroup,
 } from '../../metaData';
 
 
