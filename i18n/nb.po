@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2020
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2020
+# Karoline Tufte Lien <karoline@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2020\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,13 +48,13 @@ msgid "Last updated"
 msgstr "Sist oppdatert"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "Registrert"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "Tidligere registrert"
 
 msgid "Not enrolled"
-msgstr ""
+msgstr "Ikke registrert"
 
 msgid "Columns to show in table"
 msgstr "Kolonner som skal vises i tabellen"
@@ -724,17 +724,18 @@ msgid "Search scope"
 msgstr "Søk omfang"
 
 msgid "Find results from"
-msgstr ""
+msgstr "Finn resultater fra"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
+"Fyll inn minst {{minAttributesRequiredToSearch}} attributter for å søke"
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Søk {{name}}"
 
 msgid "Find by {{name}}"
-msgstr ""
+msgstr "Finn etter {{name}}"
 
 msgid "Search by attributes"
 msgstr "Søk etter attributter"
@@ -748,27 +749,29 @@ msgstr "Ingen resultater funnet"
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
-msgstr ""
+msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
 
 msgid "Back to search"
-msgstr ""
+msgstr "Tilbake til søk"
 
 msgid "An error has occurred"
-msgstr ""
+msgstr "Det har oppstått en feil"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
+"Det er et problem med dette søket. Endre søkeordene eller prøv igjen senere."
+" For mer informasjon, åpne konsollfanen i Utviklerverktøy"
 
 msgid "Make a selection to start searching"
-msgstr ""
+msgstr "Gjør et valg for å begynne å søke"
 
 msgid "View dashboard"
-msgstr ""
+msgstr "Vis dashbord"
 
 msgid "result(s) found for term(s)"
-msgstr ""
+msgstr "resultat(er) funnet for uttrykk"
 
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
