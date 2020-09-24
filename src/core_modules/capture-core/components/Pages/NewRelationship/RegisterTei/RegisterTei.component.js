@@ -63,7 +63,7 @@ class RegisterTei extends React.Component<Props, State> {
         return (
             <div style={{ marginLeft: 16 }}>
                 <Button
-                    dataTest='dhis2-capture-create-as-new-person'
+                    dataTest="dhis2-capture-create-as-new-person"
                     onClick={this.handleSaveFromDialog}
                     primary
                 >
