@@ -66,11 +66,6 @@ function parseWithSeparator(dateString: string, localeFormat: string, separatorP
     return parseData;
 }
 
-function manipulateFormatAndParseWithoutSeparator() {
-    // rejecting this for now, didn't work as expected. Need to look into it more.
-    return getReturnObject(null);
-}
-
 function parseWithoutSeparator(dateString: string, localeFormat: string, separatorPattern: RegExp) {
     const dateStringWithoutSeparator = dateString.replace(separatorPattern, '');
     const localeFormatWithoutSeparator = localeFormat.replace(separatorPattern, '');
@@ -80,8 +75,7 @@ function parseWithoutSeparator(dateString: string, localeFormat: string, separat
         return getReturnObject(momentDate);
     }
 
-    // $FlowFixMe[extra-arg] automated comment
-    return manipulateFormatAndParseWithoutSeparator(dateStringWithoutSeparator, localeFormatWithoutSeparator);
+    return getReturnObject(null);
 }
 
 export default function parseDate(dateString: string, format: string) {
