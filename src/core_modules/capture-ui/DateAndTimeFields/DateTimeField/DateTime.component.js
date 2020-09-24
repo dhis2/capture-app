@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import defaultClasses from './dateTime.module.css';
 
-import typeof orientations from '../../constants/orientations.const';
+import orientations from '../../constants/orientations.const';
 import DateTimeDate from '../../internal/DateTimeInput/DateTimeDate.component';
 import DateTimeTime from '../../internal/DateTimeInput/DateTimeTime.component';
 
@@ -20,7 +20,7 @@ type Props = {
     dateMaxWidth: any,
     dateWidth: any,
     calendarWidth?: ?number,
-    orientation: $Values<orientations>,
+    orientation: $Values<typeof orientations>,
     calendarTheme: Object,
     calendarLocale: Object,
     calendarOnConvertValueIn: Function,
