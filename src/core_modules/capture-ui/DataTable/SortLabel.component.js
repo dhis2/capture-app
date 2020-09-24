@@ -50,7 +50,7 @@ class SortLabel extends React.Component<Props> {
     }
 
     render() {
-        const { children, isActive, direction, onSort, onGetIcons, placement } = this.props; // eslint-disable-line
+        const { isActive, direction, onSort, onGetIcons, placement } = this.props;
         const icons = onGetIcons && onGetIcons(isActive, direction, onSort);
         const containerClasses = classNames(
             defaultClasses.sortLabelContainer,

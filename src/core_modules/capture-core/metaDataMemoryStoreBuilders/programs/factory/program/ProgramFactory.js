@@ -2,12 +2,12 @@
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
 import {
-    TrackedEntityType,
     Icon,
     EventProgram,
     TrackerProgram,
     CategoryCombination,
-    Category,
+    type TrackedEntityType,
+    type Category,
 } from '../../../../metaData';
 
 import getProgramIconAsync from './getProgramIcon';

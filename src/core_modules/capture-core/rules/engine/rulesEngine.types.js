@@ -1,8 +1,8 @@
 // @flow
-import { effectActions } from './effectActions.const';
+import { typeof effectActions } from './effectActions.const';
 
 export type OutputEffect = {
-    type: $Values<typeof effectActions>,
+    type: $Values<effectActions>,
     id: string,
 };
 
@@ -44,8 +44,6 @@ export type ProgramRuleEffect = {
     optionId: ?string,
     content: string,
     data: ?string,
-    // todo this is never used in our codebase, we could possibly remove it
-    ineffect?: boolean,
 };
 
 export type ProgramRuleAction = {

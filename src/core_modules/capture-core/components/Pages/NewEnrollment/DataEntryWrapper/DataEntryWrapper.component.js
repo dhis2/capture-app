@@ -6,7 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import { Button } from 'capture-ui';
 import DataEntry from '../DataEntry/DataEntry.container';
-import { Enrollment } from '../../../../metaData';
+import { type Enrollment } from '../../../../metaData';
 
 const getStyles = (theme: Theme) => ({
     headerContainer: {

@@ -19,7 +19,7 @@ import {
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
-    TrackerProgram,
+    type TrackerProgram,
 } from '../../../../metaData';
 import { findModes } from '../findModes';
 import { DATA_ENTRY_ID } from './registerTei.const';

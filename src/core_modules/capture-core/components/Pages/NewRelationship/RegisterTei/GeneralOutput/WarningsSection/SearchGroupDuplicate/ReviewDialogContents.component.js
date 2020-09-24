@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../../../../Buttons';
 import { CardList } from '../../../../../../CardList';
-import { DataElement } from '../../../../../../../metaData';
+import type { DataElement } from '../../../../../../../metaData';
 import ReviewDialogContentsPager from './ReviewDialogContentsPager.container';
 import withLoadingIndicator from '../../../../../../../HOC/withLoadingIndicator';
 

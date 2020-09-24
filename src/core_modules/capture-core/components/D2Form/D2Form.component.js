@@ -5,7 +5,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import D2SectionContainer from './D2Section.container';
 import type { Props, PropsForPureComponent } from './D2Form.types';
-import Section from '../../metaData/RenderFoundation/Section';
+import { type Section } from '../../metaData';
 
 export const styles = () => ({
     containerCustomForm: {

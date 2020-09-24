@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
-import { InputSearchGroup } from '../../metaData';
+import { type InputSearchGroup } from '../../metaData';
 import getDataEntryKey from './common/getDataEntryKey';
 import {
     filterSearchGroupForCountSearch,
