@@ -7,10 +7,10 @@ import { TrackerProgram } from '../../../metaData';
 
 const styles = ({ typography }) => ({
     marginLeft: {
-        marginLeft: 12,
+        marginLeft: typography.pxToRem(12),
     },
     buttonAsLink: {
-        marginLeft: 12,
+        marginLeft: typography.pxToRem(12),
         fontSize: typography.pxToRem(13),
         background: 'none!important',
         border: 'none',
