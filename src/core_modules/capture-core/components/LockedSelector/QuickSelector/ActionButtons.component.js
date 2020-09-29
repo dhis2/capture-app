@@ -2,28 +2,22 @@
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import AddIcon from '@material-ui/icons/AddCircleOutline';
-import SearchIcon from '@material-ui/icons/Search';
-import { Button } from '@dhis2/ui-core';
+import { Button, colors } from '@dhis2/ui-core';
 import { TrackerProgram } from '../../../metaData';
 
-const styles = () => ({
-    container: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        flexGrow: 1,
-    },
-    startAgainContainer: {
-        flexGrow: 1,
-    },
-    icon: {
-        fontSize: 20,
-    },
-    buttonMargin: {
-        marginLeft: 8,
-    },
-    rightButton: {
+const styles = ({ typography }) => ({
+    marginLeft: {
         marginLeft: 12,
+    },
+    buttonAsLink: {
+        marginLeft: 12,
+        fontSize: typography.pxToRem(13),
+        background: 'none!important',
+        border: 'none',
+        padding: '0!important',
+        color: colors.grey700,
+        textDecoration: 'underline',
+        cursor: 'pointer',
     },
 });
 
@@ -52,49 +46,42 @@ const Index = ({
 
 
     return (
-        <div className={classes.container}>
-            {
-                showResetButton ?
-                    <div className={classes.startAgainContainer}>
-                        <Button
-                            dataTest="dhis2-capture-start-again-button"
-                            onClick={onStartAgainClick}
-                            small
-                            secondary
-                        >
-                            { i18n.t('Start again') }
-                        </Button>
-                    </div>
-                    :
-                    null
-            }
+        <>
             <Button
+                small
+                secondary
                 dataTest="dhis2-capture-new-event-button"
                 onClick={onNewClick}
             >
-                <AddIcon className={classes.icon} />
-                <span className={classes.buttonMargin}>
-                    {
-                        selectedProgramId ?
-                            i18n.t('New {{typeName}}', { typeName })
-                            :
-                            i18n.t('New')
-                    }
-                </span>
+                {
+                    selectedProgramId ?
+                        i18n.t('New {{typeName}}', { typeName })
+                        :
+                        i18n.t('New')
+                }
             </Button>
             <Button
+                small
+                secondary
                 dataTest="dhis2-capture-find-button"
-                className={classes.rightButton}
+                className={classes.marginLeft}
                 onClick={onFindClick}
-                color="primary"
             >
-                <SearchIcon className={classes.icon} />
-                <span className={classes.buttonMargin}>
-                    { i18n.t('Find') }
-                </span>
-
+                { i18n.t('Find') }
             </Button>
-        </div>
+            {
+                showResetButton ?
+                    <button
+                        className={classes.buttonAsLink}
+                        data-test="dhis2-capture-start-again-button"
+                        onClick={onStartAgainClick}
+                    >
+                        { i18n.t('Clear selections') }
+                    </button>
+                    :
+                    null
+            }
+        </>
     );
 };
 
