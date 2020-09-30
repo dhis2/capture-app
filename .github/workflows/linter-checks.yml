@@ -1,9 +1,9 @@
-name: 'dhis2: linter-checks'
+name: 'dhis2: checks'
 
 on: push
 
 jobs:
-    type-checks:
+    linter:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
