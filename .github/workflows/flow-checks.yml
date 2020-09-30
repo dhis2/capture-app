@@ -3,18 +3,18 @@ name: 'dhis2: checks'
 on: push
 
 jobs:
-    flow:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
-              with:
-                  node-version: 12.x
+  flow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+            node-version: 12.x
 
-            - name: Install
-              run: yarn install --frozen-lockfile
+      - name: Install
+        run: yarn install --frozen-lockfile
 
-            - name: Flow Checks
-              run: yarn flow:check
-        env:
-            CI: true
+      - name: Flow Checks
+        run: yarn flow:check
+    env:
+      CI: true
