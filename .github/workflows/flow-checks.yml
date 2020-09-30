@@ -1,4 +1,4 @@
-name: 'dhis2: checks'
+name: 'dhis2: flow-checks'
 
 on: push
 
@@ -14,9 +14,7 @@ jobs:
             - name: Install
               run: yarn install --frozen-lockfile
 
-            - name: Lint
-              run: |
-                  yarn flow:check
-                  yarn linter:check
+            - name: Flow Checks
+              run: yarn flow:check
         env:
             CI: true
