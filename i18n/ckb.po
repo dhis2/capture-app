@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -339,9 +339,6 @@ msgstr "پرۆگرامەکە بوونی نیە"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
 
-msgid "Start again"
-msgstr "دووبارە دەستپێبکەوە"
-
 msgid "New {{typeName}}"
 msgstr "{{typeName}} ی نوێ"
 
@@ -350,6 +347,9 @@ msgstr "نوێ"
 
 msgid "Find"
 msgstr "بدۆزەوە"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "یەکەی تۆمارکردن هەڵبژێرە"

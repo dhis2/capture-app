@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -333,9 +333,6 @@ msgstr "Le programme n'existe pas"
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
-msgid "Start again"
-msgstr "Recommencer"
-
 msgid "New {{typeName}}"
 msgstr "Nouveau {{typeName}}"
 
@@ -344,6 +341,9 @@ msgstr "Nouveau"
 
 msgid "Find"
 msgstr "Trouver"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr ""
