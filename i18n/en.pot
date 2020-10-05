@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
-"PO-Revision-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
+"PO-Revision-Date: 2020-09-29T14:08:42.361Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -323,9 +323,6 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
-msgid "Start again"
-msgstr ""
-
 msgid "New {{typeName}}"
 msgstr ""
 
@@ -333,6 +330,9 @@ msgid "New"
 msgstr ""
 
 msgid "Find"
+msgstr ""
+
+msgid "Clear selections"
 msgstr ""
 
 msgid "Selected registering unit"
