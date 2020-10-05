@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -332,9 +332,6 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
-msgid "Start again"
-msgstr ""
-
 msgid "New {{typeName}}"
 msgstr ""
 
@@ -343,6 +340,9 @@ msgstr "新建"
 
 msgid "Find"
 msgstr "发现"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr ""

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -340,9 +340,6 @@ msgstr "Programmet finnes ikke"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Valgt program er ugyldig for registreringsenhet"
 
-msgid "Start again"
-msgstr "Start på nytt"
-
 msgid "New {{typeName}}"
 msgstr "Ny {{typeName}}"
 
@@ -351,6 +348,9 @@ msgstr "Ny"
 
 msgid "Find"
 msgstr "Finn"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "Valgt registreringsenhet"

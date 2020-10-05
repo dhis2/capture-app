@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -341,9 +341,6 @@ msgstr "البرنامج غير موجود"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
 
-msgid "Start again"
-msgstr "البدء من جديد"
-
 msgid "New {{typeName}}"
 msgstr "{{typeName}} جديد"
 
@@ -352,6 +349,9 @@ msgstr "جديد"
 
 msgid "Find"
 msgstr "بحث"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "وحدة التسجيل المختارة"
