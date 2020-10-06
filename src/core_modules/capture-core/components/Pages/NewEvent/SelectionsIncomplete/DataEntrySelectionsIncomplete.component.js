@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 import { Button } from '@dhis2/ui-core';
+import { InefficientSelectionsMessage } from '../../../InefficientSelectionsMessage';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -86,17 +87,7 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
         return (
             <div className={classes.container}>
                 {this.renderHeader()}
-                <Paper
-                    elevation={0}
-                    data-test="dhis2-capture-paper"
-                >
-                    <div
-                        data-test="dhis2-capture-paper-text"
-                        className={classes.contents}
-                    >
-                        {this.getText()}
-                    </div>
-                </Paper>
+                <InefficientSelectionsMessage message={this.getText()} />
                 <div
                     className={classes.buttonRow}
                 >

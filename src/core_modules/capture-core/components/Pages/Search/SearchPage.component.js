@@ -22,13 +22,14 @@ import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
 import { SearchDomainSelector } from './SearchDomainSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
+import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
 
 const getStyles = (theme: Theme) => ({
     maxWidth: {
         maxWidth: theme.typography.pxToRem(950),
     },
     container: {
-        padding: '10px 24px 24px 24px',
+        padding: '10px 24px 16px 24px',
     },
     paper: {
         marginBottom: theme.typography.pxToRem(10),
@@ -163,15 +164,13 @@ const Index = ({
                 </div>
             </Paper>
 
-            {
-                searchStatus === searchPageStatus.INITIAL && !selectedSearchScope.value &&
-                    <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
-                        <div className={classes.emptySelectionPaperContent}>
-                            {i18n.t('Make a selection to start searching')}
-                        </div>
-                    </Paper>
-            }
         </div>
+        {
+            searchStatus === searchPageStatus.INITIAL && !selectedSearchScope.value &&
+                <InefficientSelectionsMessage
+                    message={i18n.t('Make a selection to start searching')}
+                />
+        }
     </>);
 };
 
