@@ -22,23 +22,17 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
     convertEmail(value: string): string {
         return value;
     }
-    convertBoolean(value: boolean): boolean {
-        return value;
+    convertBoolean(value: boolean): string {
+        return value ? 'true' : 'false';
     }
-    convertTrueOnly(value: boolean): boolean {
-        return value;
+    convertTrueOnly(): string {
+        return 'true';
     }
     convertDate(value: string): string {
-        if (!value) {
-            return value;
-        }
         const momentDate = moment(value, dateMomentFormat);
         return convertMomentToDateFormatString(momentDate);
     }
     convertDateTime(value: string): ?Object {
-        if (!value) {
-            return null;
-        }
         const momentDateTime = moment(value);
         return {
             date: convertMomentToDateFormatString(momentDateTime),
@@ -70,9 +64,6 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
         return value;
     }
     convertAge(value: string): ?Object {
-        if (!value) {
-            return null;
-        }
         const now = moment();
         const age = moment(value, dateMomentFormat);
 
