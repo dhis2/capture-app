@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react';
+import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
@@ -8,34 +8,24 @@ import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import Button from '../../../../Buttons/Button.component';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
-import { LoadingMask } from '../../../../LoadingMasks';
 import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';
 import { SearchResultsHeader } from '../../../../SearchResultsHeader';
+import { ResultsPageSizeContext } from '../../../shared-contexts';
 
 const SearchResultsPager = withNavigation()(Pagination);
 
-type Props = {
-    resultsLoading: ?boolean,
-    teis: Array<any>,
-    onNewSearch: () => void,
-    onEditSearch: () => void,
-    currentPage: number,
-    onChangePage: (page: number) => void,
+type Props = {|
     onAddRelationship: (id: string, values: Object) => void,
-    trackedEntityTypeName: string,
-    selectedProgramId: ?string,
-    classes: {
-        itemActionsContainer: string,
-        addRelationshipButton: string,
-        pagination: string,
-        topSection: string,
-        actionButton: string,
-        topSectionValuesContainer: string,
-    },
-    searchValues: any,
+    onChangePage: Function,
+    onEditSearch: Function,
+    onNewSearch: Function,
+    currentPage: number,
     searchGroup: any,
-}
-
+    searchValues: any,
+    selectedProgramId: string,
+    teis: any,
+    trackedEntityTypeName: any,
+|}
 const getStyles = (theme: Theme) => ({
     itemActionsContainer: {
         paddingTop: theme.typography.pxToRem(10),
@@ -65,9 +55,9 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-class TeiRelationshipSearchResults extends React.Component<Props> {
+class TeiRelationshipSearchResultsPlain extends React.Component<Props & CssClasses> {
     getAttributes: Function;
-    constructor(props: Props) {
+    constructor(props: Props & CssClasses) {
         super(props);
         this.getAttributes = makeAttributesSelector();
     }
@@ -94,7 +84,7 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     renderResults = () => {
         const attributes = this.getAttributes(this.props);
         const { teis, trackedEntityTypeName, selectedProgramId } = this.props;
-
+        debugger
         return (
             <React.Fragment>
                 {this.renderTopSection()}
@@ -141,24 +131,31 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     }
 
     renderPager = () => {
-        const { onChangePage, currentPage, classes } = this.props;
+        const { onChangePage, currentPage, classes, teis } = this.props;
         return (
-            <div className={classes.pagination}>
-                <SearchResultsPager
-                    onChangePage={page => onChangePage(page)}
-                    currentPage={currentPage}
-                />
-            </div>
+            <ResultsPageSizeContext.Consumer>
+                {
+                    ({ resultsPageSize }) => (
+                        <div className={classes.pagination}>
+                            <SearchResultsPager
+                                nextPageButtonDisabled={teis.length < resultsPageSize}
+                                onChangePage={page => onChangePage(page)}
+                                currentPage={currentPage}
+                            />
+                        </div>)
+                }
+            </ResultsPageSizeContext.Consumer>
         );
     }
 
     render() {
         return (
             <div>
-                { this.props.resultsLoading ? <LoadingMask /> : this.renderResults() }
+                {this.renderResults()}
             </div>
 
         );
     }
 }
-export default withStyles(getStyles)(TeiRelationshipSearchResults);
+export const TeiRelationshipSearchResults: ComponentType<Props> =
+  withStyles(getStyles)(TeiRelationshipSearchResultsPlain);

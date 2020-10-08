@@ -1,11 +1,28 @@
 // @flow
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
-import RegisterTei from './RegisterTei.component';
+import { RegisterTeiComponent } from './RegisterTei.component';
 import { makeTETNameSelector } from './registerTei.selectors';
 import { reviewDuplicates } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/searchGroupDuplicate.actions';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
+
+type PropsFromRedux = {|
+    tetName: ?string,
+    ready: boolean,
+    error: string,
+    possibleDuplicates: ?boolean,
+|};
+
+type OwnProps = {|
+    onLink: (teiId: string) => void,
+    onReviewDuplicates: (resultsPageSize: number) => void,
+    onGetUnsavedAttributeValues?: ?Function,
+    onSave: Function,
+|};
+
+export type Props = {|...PropsFromRedux, ...OwnProps, ...CssClasses|}
 
 const makeStateToProps = () => {
     const tetNameSelector = makeTETNameSelector();
@@ -31,12 +48,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onReviewDuplicates: (pageSize) => { dispatch(reviewDuplicates(pageSize)); },
 });
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
-export default connect(makeStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(
-        withErrorMessageHandler()(
-            RegisterTei,
-        ),
-    ),
-);
+export const RegisterTei = compose(
+    connect<PropsFromRedux & OwnProps, OwnProps, _, _, _, _>(makeStateToProps, mapDispatchToProps),
+    withLoadingIndicator(),
+    withErrorMessageHandler(),
+)(RegisterTeiComponent);

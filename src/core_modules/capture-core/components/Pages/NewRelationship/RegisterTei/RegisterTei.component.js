@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext, useState } from 'react';
+import React, { type ComponentType, useContext, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../Buttons';
@@ -8,6 +8,7 @@ import { RegistrationSection } from './RegistrationSection';
 import GeneralOutput from './GeneralOutput/GeneralOutput.container';
 import { ReviewDialog } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/ReviewDialog.component';
 import { ResultsPageSizeContext } from '../../shared-contexts';
+import type { Props } from './RegisterTei.container';
 
 const getStyles = () => ({
     container: {
@@ -21,17 +22,7 @@ const getStyles = () => ({
     },
 });
 
-type Props = {
-    onLink: (teiId: string) => void,
-    onReviewDuplicates: Function,
-    onGetUnsavedAttributeValues?: ?Function,
-    onSave: Function,
-    possibleDuplicates: ?boolean,
-    tetName: ?string,
-    ...CssClasses
-};
-
-const RegisterTei = ({
+const RegisterTeiPlain = ({
     onLink,
     onSave,
     onReviewDuplicates,
@@ -55,10 +46,6 @@ const RegisterTei = ({
         }
     }
 
-    const handleSaveFromDialog = () => {
-        onSave(...savedArguments);
-    };
-
     const getActions = () => (
         <React.Fragment>
             <Button
@@ -77,6 +64,10 @@ const RegisterTei = ({
             </div>
         </React.Fragment>
     );
+
+    const handleSaveFromDialog = () => {
+        onSave(...savedArguments);
+    };
 
     const handleDialogCancel = () => {
         toggleDuplicatesModal(false);
@@ -105,4 +96,4 @@ const RegisterTei = ({
     );
 };
 
-export default withStyles(getStyles)(RegisterTei);
+export const RegisterTeiComponent: ComponentType<Props> = withStyles(getStyles)(RegisterTeiPlain);

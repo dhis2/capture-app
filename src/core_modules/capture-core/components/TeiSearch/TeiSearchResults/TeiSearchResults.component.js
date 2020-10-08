@@ -1,32 +1,11 @@
 // @flow
+import React from 'react';
+import type { Props } from './TeiSearchResults.container';
 
-import * as React from 'react';
-import { LoadingMask } from '../../LoadingMasks';
 
-type Props = {
-    results: Array<any>,
-    resultsLoading: ?boolean,
-    getResultsView?: ?(props: Object) => React.Element<any>,
-}
+export const TeiSearchResultsComponent = ({ getResultsView, ...passOnProps }: Props) => (
+    <div>
+        { getResultsView && getResultsView(passOnProps)}
+    </div>
+);
 
-class TeiSearchResultsWrapper extends React.Component<Props> {
-    renderDefaultResultsView = () => (
-        <div>
-            {this.props.resultsLoading && <LoadingMask />}
-        </div>
-    );
-
-    render() {
-        const { getResultsView, ...passOnProps } = this.props;
-        return (
-            <div>
-                <div>
-                    { getResultsView ? getResultsView(passOnProps) : this.renderDefaultResultsView() }
-                </div>
-
-            </div>
-        );
-    }
-}
-
-export default TeiSearchResultsWrapper;

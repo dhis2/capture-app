@@ -18,7 +18,7 @@ import { dataElementTypes } from '../../metaData';
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
     currentSearchScopeName?: string,
-    currentProgramId: ?string,
+    currentProgramId?: string,
     getCustomBottomElements?: (props: Object) => Element<any>,
     profileImageDataElement: ?CardProfileImageElementInformation,
     dataElements: CardDataElementsInformation,

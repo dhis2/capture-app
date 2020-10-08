@@ -31,9 +31,6 @@ const buttonStyles = (theme: Theme) => ({
     buttonMargin: {
         marginLeft: theme.typography.pxToRem(8),
     },
-    buttonMargin: {
-        marginLeft: theme.typography.pxToRem(8),
-    },
 });
 
 const CardListButtons = withStyles(buttonStyles)(
