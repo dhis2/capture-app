@@ -23,6 +23,7 @@ type Props = {
     onChangePage: (page: number) => void,
     onAddRelationship: (id: string, values: Object) => void,
     trackedEntityTypeName: string,
+    selectedProgramId: ?string,
     classes: {
         itemActionsContainer: string,
         addRelationshipButton: string,
@@ -92,11 +93,13 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
 
     renderResults = () => {
         const attributes = this.getAttributes(this.props);
-        const { teis, trackedEntityTypeName } = this.props;
+        const { teis, trackedEntityTypeName, selectedProgramId } = this.props;
+
         return (
             <React.Fragment>
                 {this.renderTopSection()}
                 <CardList
+                    currentProgramId={selectedProgramId}
                     items={teis}
                     dataElements={attributes}
                     noItemsText={i18n.t('No {{trackedEntityTypeName}} found.', { trackedEntityTypeName })}

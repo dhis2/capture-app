@@ -29,7 +29,6 @@ const makeMapStateToProps = () => {
         };
     };
 
-
     // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };

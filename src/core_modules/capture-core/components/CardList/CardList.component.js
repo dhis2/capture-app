@@ -9,11 +9,10 @@ import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Sea
 type OwnProps = $ReadOnly<{|
     dataElements: CardDataElementsInformation,
     items: Array<SearchResultItem>,
+    currentProgramId: ?string,
     currentSearchScopeName?: string,
-    getCustomItemTopElements?: ?(itemProps: Object) => Element<any>,
-    getCustomItemBottomElements?: ?(itemProps: Object) => Element<any>,
-    currentProgramId?: string,
     noItemsText?: string,
+    getCustomItemBottomElements?: (itemProps: Object) => Element<any>,
 |}>
 
 const getStyles = (theme: Theme) => ({
@@ -27,13 +26,12 @@ const CardListIndex = ({
     classes,
     items,
     getCustomItemBottomElements,
-    getCustomItemTopElements,
     dataElements,
     noItemsText,
     currentProgramId,
     currentSearchScopeName,
 }: OwnProps & CssClasses) => {
-    const { imageDataElement } = makeElementsContainerSelector()(dataElements);
+    const { profileImageDataElement, dataElementsExceptProfileImage } = makeElementsContainerSelector()(dataElements);
     return (
         <>
             {
@@ -49,10 +47,9 @@ const CardListIndex = ({
                             item={item}
                             currentSearchScopeName={currentSearchScopeName}
                             currentProgramId={currentProgramId}
-                            getCustomTopElements={getCustomItemTopElements}
                             getCustomBottomElements={getCustomItemBottomElements}
-                            imageDataElement={imageDataElement}
-                            dataElements={dataElements}
+                            profileImageDataElement={profileImageDataElement}
+                            dataElements={dataElementsExceptProfileImage}
                         />
                     ))
             }
