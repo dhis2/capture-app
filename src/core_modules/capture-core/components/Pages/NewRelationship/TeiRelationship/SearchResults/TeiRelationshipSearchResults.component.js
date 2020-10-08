@@ -84,7 +84,6 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props & CssClass
     renderResults = () => {
         const attributes = this.getAttributes(this.props);
         const { teis, trackedEntityTypeName, selectedProgramId } = this.props;
-        debugger
         return (
             <React.Fragment>
                 {this.renderTopSection()}
