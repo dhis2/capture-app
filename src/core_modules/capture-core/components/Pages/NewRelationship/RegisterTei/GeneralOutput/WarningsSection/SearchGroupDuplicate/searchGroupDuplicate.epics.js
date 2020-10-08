@@ -72,6 +72,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 pageSize: 5,
                 page: requestPage,
                 filter: filters,
+                fields: '*',
                 ...contextParam,
             };
             const attributes = contextParam.program ?
