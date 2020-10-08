@@ -25,10 +25,10 @@ msgid "Column"
 msgstr "Устун"
 
 msgid "Errors"
-msgstr ""
+msgstr "Хатоликлар"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Қайта алоқа"
 
 msgid "Indicators"
 msgstr "Индикаторлар"
@@ -97,7 +97,7 @@ msgid "before or equal to"
 msgstr ""
 
 msgid "From"
-msgstr ""
+msgstr "Дан"
 
 msgid "To"
 msgstr "Кимга"
@@ -154,7 +154,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "Аниқ"
 
 msgid "No results"
 msgstr ""
@@ -279,7 +279,7 @@ msgid "New"
 msgstr "Янги"
 
 msgid "Find"
-msgstr ""
+msgstr "Топинг"
 
 msgid "Selected registering unit"
 msgstr ""
