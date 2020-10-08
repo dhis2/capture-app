@@ -158,3 +158,26 @@ Feature: User interacts with Search page
     When you click search
     Then you can see the first page of the results
     And the next page button is disabled
+
+  Scenario: Searching using only date range values as attributes
+    Given you are in the search page with the Adult Woman being preselected from the url
+    When you fill in the date of birth
+    And you click search
+    Then you can see the first page of the results
+    
+  Scenario: Searching using zip code range values as attributes
+    Given you are in the search page with the TB program being preselected from the url
+    When you expand the attributes search area
+    And you fill in the zip code range numbers
+    And you click search
+    Then you can see the first page of the results
+
+  Scenario: Searching using zip code range and name values as attributes
+    Given you are in the search page with the TB program being preselected from the url
+    When you expand the attributes search area
+    And you fill in the zip code range numbers
+    And you fill in the first name
+    And you click search
+    Then you can see the first page of the results
+
+
