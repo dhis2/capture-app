@@ -16,7 +16,7 @@ import {
     sorLabelPlacements,
 } from 'capture-ui';
 import SortLabelWrapper from '../../DataTable/SortLabelWrapper.component';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../../../metaData';
 
 const styles = theme => ({
     loaderContainer: {
@@ -70,7 +70,7 @@ type Column = {
     id: string,
     header: string,
     visible: boolean,
-    type: $Values<typeof elementTypes>,
+    type: $Keys<typeof dataElementTypes>,
 };
 
 type Props = {
@@ -103,23 +103,16 @@ class OfflineList extends Component<Props> {
     };
     static typesWithAscendingInitialDirection = [
         // todo (report lgmt)
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.TEXT,
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.LONG_TEXT,
+        dataElementTypes.TEXT,
+        dataElementTypes.LONG_TEXT,
     ];
 
     static typesWithRightPlacement = [
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.NUMBER,
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.INTEGER,
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.INTEGER_POSITIVE,
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.INTEGER_NEGATIVE,
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.INTEGER_ZERO_OR_POSITIVE,
+        dataElementTypes.NUMBER,
+        dataElementTypes.INTEGER,
+        dataElementTypes.INTEGER_POSITIVE,
+        dataElementTypes.INTEGER_NEGATIVE,
+        dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
 
     renderHeaderRow(visibleColumns: Array<Column>) {

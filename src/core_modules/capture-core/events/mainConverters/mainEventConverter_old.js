@@ -1,8 +1,8 @@
 // @flow
-import elementTypes from '../../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../../metaData';
 import eventStatusElement from '../eventStatusElement';
 
-type ConverterFn = (type: $Values<typeof elementTypes>, value: any) => any;
+type ConverterFn = (type: $Keys<typeof dataElementTypes>, value: any) => any;
 
 type InputCompareKeys = {
     eventDate?: ?string,
@@ -28,13 +28,11 @@ function getConvertedValue(valueToConvert: any, key: string, onConvertValue: Con
     case compareKeys.eventDate:
     case compareKeys.dueDate:
     case compareKeys.completedDate:
-        // $FlowFixMe[prop-missing] automated comment
-        convertedValue = onConvertValue(valueToConvert, elementTypes.DATE);
+        convertedValue = onConvertValue(valueToConvert, dataElementTypes.DATE);
         break;
     case compareKeys.status:
         // $FlowFixMe[extra-arg] automated comment
-        // $FlowFixMe[prop-missing] automated comment
-        convertedValue = onConvertValue(valueToConvert, elementTypes.TEXT, eventStatusElement);
+        convertedValue = onConvertValue(valueToConvert, dataElementTypes.TEXT, eventStatusElement);
         break;
     case compareKeys.assignee:
         convertedValue = valueToConvert.id;

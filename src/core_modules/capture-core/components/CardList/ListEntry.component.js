@@ -1,11 +1,14 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { colors } from '@dhis2/ui-core';
+import { convertValue } from '../../converters/clientToView';
+import { dataElementTypes } from '../../metaData';
 
 type Props = {|
   name: string,
-  value: string
+  value: string,
+  type?: $Values<typeof dataElementTypes>
 |}
 
 const getStyles = (theme: Theme) => ({
@@ -24,13 +27,20 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-export const ListEntry =
-   withStyles(getStyles)(({ name, value, classes }: Props & CssClasses) => (
-       <div className={classes.entry}>
-           <span className={classes.elementName}>
-               {name}:&nbsp;
-           </span>
-           <span className={classes.elementValue}>
-               {value}
-           </span>
-       </div>));
+const ListEntryPlain = ({
+    name,
+    value,
+    classes,
+    // $FlowFixMe[prop-missing] automated comment
+    type = dataElementTypes.TEXT,
+}: Props & CssClasses) => (
+    <div className={classes.entry}>
+        <span className={classes.elementName}>
+            {name}:&nbsp;
+        </span>
+        <span className={classes.elementValue}>
+            {convertValue(value, type)}
+        </span>
+    </div>);
+
+export const ListEntry: ComponentType<Props> = withStyles(getStyles)(ListEntryPlain);

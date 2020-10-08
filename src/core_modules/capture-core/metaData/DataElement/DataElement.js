@@ -8,11 +8,11 @@ import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
 import type Icon from '../Icon/Icon';
 import OptionSet from '../OptionSet/OptionSet';
-import elementTypes from './elementTypes';
 import type { Unique } from './Unique';
+import { dataElementTypes } from './dataElementTypes';
 
 // eslint-disable-next-line no-use-before-define
-export type ConvertFn = (value: any, type: $Values<typeof elementTypes>, element: DataElement) => any;
+export type ConvertFn = (value: any, type: $Keys<typeof dataElementTypes>, element: DataElement) => any;
 
 export default class DataElement {
     static errorMessages = {
@@ -26,7 +26,7 @@ export default class DataElement {
     _disabled: boolean;
     _compulsory: boolean;
     _description: string;
-    _type: $Values<typeof elementTypes>;
+    _type: $Keys<typeof dataElementTypes>;
     _optionSet: ?OptionSet;
     _displayInForms: boolean;
     _displayInReports: boolean;
@@ -102,16 +102,15 @@ export default class DataElement {
     }
 
     set type(type: string) {
-        if (!elementTypes[type]) {
+        if (!dataElementTypes[type]) {
             log.warn(errorCreator(DataElement.errorMessages.TYPE_NOT_FOUND)({ dataElement: this, type }));
-            // $FlowFixMe[prop-missing] automated comment
-            this._type = elementTypes.UNKNOWN;
+            this._type = dataElementTypes.UNKNOWN;
         } else {
-            // $FlowFixMe[incompatible-type] automated comment
+            // $FlowFixMe dataElementTypes flow error
             this._type = type;
         }
     }
-    get type(): $Values<typeof elementTypes> {
+    get type(): $Keys<typeof dataElementTypes> {
         return this._type;
     }
 

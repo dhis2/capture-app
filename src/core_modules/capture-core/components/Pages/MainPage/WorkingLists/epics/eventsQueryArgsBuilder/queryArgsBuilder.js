@@ -20,31 +20,21 @@ type QueryArgsSource = {
 };
 
 const mappersForTypes = {
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.TEXT]: convertText,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.NUMBER]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_POSITIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_NEGATIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.DATE]: convertDate,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.ASSIGNEE]: convertAssignee,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.BOOLEAN]: convertBoolean,
-    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.TRUE_ONLY]: convertTrueOnly,
 };
 
 function convertFilter(
     sourceValue: Object,
-    type: string,
+    type: $Keys<typeof dataElementTypes>,
     meta: {
         key: string,
         listId: string,
@@ -52,12 +42,10 @@ function convertFilter(
     },
 ) {
     if (sourceValue.usingOptionSet) {
-        // $FlowFixMe[incompatible-call] automated comment
         return convertOptionSet(sourceValue, type);
     }
-    return mappersForTypes[type] ?
-        mappersForTypes[type](sourceValue, meta.key, meta.listId, meta.isInit) :
-        sourceValue;
+    // $FlowFixMe dataElementTypes flow error
+    return mappersForTypes[type] ? mappersForTypes[type](sourceValue, meta.key, meta.listId, meta.isInit) : sourceValue;
 }
 
 function convertFilters(

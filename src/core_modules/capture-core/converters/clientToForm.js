@@ -1,7 +1,7 @@
 // @flow
 import { moment } from 'capture-core-utils/moment';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
-import elementTypes from '../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../metaData';
 
 import stringifyNumber from './common/stringifyNumber';
 
@@ -58,35 +58,23 @@ function convertAgeForEdit(rawValue: string): AgeFormValue {
 }
 
 const valueConvertersForType = {
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.NUMBER]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_POSITIVE]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.DATE]: convertDateForEdit,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.DATETIME]: convertDateTimeForEdit,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.TIME]: convertTimeForEdit,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.TRUE_ONLY]: () => 'true',
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.AGE]: convertAgeForEdit,
+    [dataElementTypes.NUMBER]: stringifyNumber,
+    [dataElementTypes.INTEGER]: stringifyNumber,
+    [dataElementTypes.INTEGER_POSITIVE]: stringifyNumber,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
+    [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
+    [dataElementTypes.DATE]: convertDateForEdit,
+    [dataElementTypes.DATETIME]: convertDateTimeForEdit,
+    [dataElementTypes.TIME]: convertTimeForEdit,
+    [dataElementTypes.TRUE_ONLY]: () => 'true',
+    [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
+    [dataElementTypes.AGE]: convertAgeForEdit,
 };
 
-export function convertValue(value: any, type: $Values<typeof elementTypes>) {
+export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-    return (valueConvertersForType[type] ?
-        valueConvertersForType[type](value) :
-        value);
+    // $FlowFixMe dataElementTypes flow error
+    return (valueConvertersForType[type] ? valueConvertersForType[type](value) : value);
 }

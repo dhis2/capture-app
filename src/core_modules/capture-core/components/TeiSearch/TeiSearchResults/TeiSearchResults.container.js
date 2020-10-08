@@ -1,5 +1,4 @@
 // @flow
-
 import { connect } from 'react-redux';
 import TeiSearchResults from './TeiSearchResults.component';
 
@@ -20,9 +19,7 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
     };
 };
 
-const mapDispatchToProps = () => ({
-});
+const mapDispatchToProps = () => ({});
 
-// $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(TeiSearchResults);

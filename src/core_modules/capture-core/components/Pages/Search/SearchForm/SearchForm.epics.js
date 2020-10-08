@@ -144,7 +144,6 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputOb
                 page,
                 pageSize: 5,
                 ouMode: 'ACCESSIBLE',
-                fields: '*',
             };
 
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;

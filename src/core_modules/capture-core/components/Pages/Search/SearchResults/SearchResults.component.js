@@ -7,7 +7,7 @@ import { Button } from '@dhis2/ui-core';
 import { CardList } from '../../../CardList';
 import withNavigation from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
-import type { CardDataElementsInformation, Props } from './SearchResults.types';
+import type { Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 import { availableCardListButtonState } from '../../../CardList/CardList.constants';
 import { SearchResultsHeader } from '../../../SearchResultsHeader';
@@ -80,7 +80,7 @@ export const SearchResultsIndex = ({
     searchViaAttributesOnScopeTrackedEntityType,
     classes,
     searchResults,
-    searchGroupsForSelectedScope,
+    dataElements,
     currentPage,
     currentSearchScopeType,
     currentSearchScopeId,
@@ -102,17 +102,7 @@ export const SearchResultsIndex = ({
         }
     };
 
-    const collectFormDataElements = (searchGroups): CardDataElementsInformation =>
-        searchGroups
-            .filter(searchGroup => !searchGroup.unique)
-            .flatMap(({ searchForm: { sections } }) => {
-                const elementsMap = [...sections.values()]
-                    .map(section => section.elements)[0];
-                return [...elementsMap.values()]
-                    .map(({ id, name }) => ({ id, name }));
-            });
-
-    const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : undefined;
+    const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : null;
     return (<>
         <SearchResultsHeader currentSearchTerms={currentSearchTerms} currentSearchScopeName={currentSearchScopeName} />
         <div data-test="dhis2-capture-search-results-list">
@@ -121,7 +111,7 @@ export const SearchResultsIndex = ({
                 currentSearchScopeName={currentSearchScopeName}
                 currentProgramId={currentProgramId}
                 items={searchResults}
-                dataElements={collectFormDataElements(searchGroupsForSelectedScope)}
+                dataElements={dataElements}
                 getCustomItemBottomElements={({ item, navigationButtonsState, programName }) => (
                     <CardListButtons
                         programName={programName}
