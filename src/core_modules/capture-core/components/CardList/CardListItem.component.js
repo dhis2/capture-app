@@ -8,11 +8,12 @@ import DoneIcon from '@material-ui/icons/Done';
 import { colors, Tag } from '@dhis2/ui-core';
 import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import type { DataElement } from '../../metaData';
-import { enrollmentTypes } from './CardList.constants';
+import { availableCardListButtonState, enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
+    currentSearchScopeName?: string,
     currentProgramId?: string,
     getCustomTopElements?: ?(props: Object) => Element<any>,
     getCustomBottomElements?: ?(props: Object) => Element<any>,
@@ -57,6 +58,19 @@ const getStyles = (theme: Theme) => ({
         marginRight: theme.typography.pxToRem(8),
     },
 });
+
+const deriveNavigationButtonState =
+  (type): $Keys<typeof availableCardListButtonState> => {
+      switch (type) {
+      case enrollmentTypes.ACTIVE:
+          return availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON;
+      case enrollmentTypes.CANCELLED:
+      case enrollmentTypes.COMPLETED:
+          return availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON;
+      default:
+          return availableCardListButtonState.DONT_SHOW_BUTTON;
+      }
+  };
 
 
 const deriveEnrollmentType =
@@ -104,6 +118,7 @@ const CardListItemIndex = ({
     getCustomBottomElements,
     dataElements,
     currentProgramId,
+    currentSearchScopeName,
 }: OwnProps & CssClasses) => {
     const renderImageDataElement = (imageElement: DataElement) => {
         const imageValue = item.values[imageElement.id];
@@ -116,7 +131,6 @@ const CardListItemIndex = ({
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitName, enrollmentDate } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
-
     return (
         <div data-test="dhis2-capture-card-list-item" className={classes.itemContainer}>
             {getCustomTopElements && getCustomTopElements({ item })}
@@ -134,7 +148,11 @@ const CardListItemIndex = ({
                             <Grid item xs container direction="column" spacing={2}>
                                 {
                                     dataElements.map(element => (
-                                        <ListEntry key={element.id} name={element.name} value={item.values[element.id]} />
+                                        <ListEntry
+                                            key={element.id}
+                                            name={element.name}
+                                            value={item.values[element.id]}
+                                        />
                                     ))
                                 }
                                 {
@@ -212,7 +230,14 @@ const CardListItemIndex = ({
                 </div>
             </div>
 
-            {getCustomBottomElements && getCustomBottomElements({ item })}
+            {
+                getCustomBottomElements &&
+                getCustomBottomElements({
+                    item,
+                    navigationButtonsState: deriveNavigationButtonState(enrollmentType),
+                    programName: currentSearchScopeName,
+                })
+            }
         </div>
     );
 };

@@ -2,10 +2,25 @@
 import type { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { withStyles } from '@material-ui/core';
-import { getStyles, SearchResultsComponent } from './SearchResults.component';
+import { SearchResultsComponent } from './SearchResults.component';
 import type { OwnProps, Props, PropsFromRedux, DispatchersFromRedux } from './SearchResults.types';
 import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram } from '../SearchPage.actions';
+import { getProgramFromProgramIdThrowIfNotFound, getTrackedEntityTypeThrowIfNotFound } from '../../../../metaData/helpers';
+import { searchScopes } from '../SearchPage.constants';
+
+const scopeName = (scopeId: string, scopeType: string) => {
+    if (!scopeId) {
+        return '';
+    }
+    if (scopeType === searchScopes.PROGRAM) {
+        return getProgramFromProgramIdThrowIfNotFound(scopeId).name;
+    }
+    if (scopeType === searchScopes.TRACKED_ENTITY_TYPE) {
+        return getTrackedEntityTypeThrowIfNotFound(scopeId).name;
+    }
+
+    return '';
+};
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const {
@@ -19,6 +34,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         },
     } = state.searchPage;
 
+    const currentSearchScopeName = scopeName(currentSearchScopeId, currentSearchScopeType);
     return {
         rowsCount,
         currentPage,
@@ -26,6 +42,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         searchResults,
         currentSearchScopeType,
         currentSearchScopeId,
+        currentSearchScopeName,
         currentFormId,
         currentSearchTerms,
     };
@@ -44,6 +61,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
 
 export const SearchResults: ComponentType<OwnProps> =
   compose(
-      connect<Props, OwnProps & CssClasses, _, _, _, _>(mapStateToProps, mapDispatchToProps),
-      withStyles(getStyles),
+      connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps),
   )(SearchResultsComponent);

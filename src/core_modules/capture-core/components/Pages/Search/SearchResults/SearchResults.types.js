@@ -46,6 +46,7 @@ export type PropsFromRedux ={|
   +rowsPerPage: number,
   +currentSearchScopeType: $Keys<searchScopes>,
   +currentSearchScopeId: string,
+  +currentSearchScopeName: string,
   +currentFormId: string,
   +searchResults: Array<SearchResultItem>,
   +currentSearchTerms: CurrentSearchTerms
@@ -58,7 +59,6 @@ export type DispatchersFromRedux = {|
 
 export type Props = {|
   ...OwnProps,
-  ...CssClasses,
   ...DispatchersFromRedux,
   ...PropsFromRedux,
 |}
