@@ -1,31 +1,28 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2020
-# Bram Piot <bram.piot@gmail.com>, 2020
-# phil_dhis2, 2020
+# Ibatov <ibatovk@who.int>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2020\n"
-"Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
+"Last-Translator: Ibatov <ibatovk@who.int>, 2020\n"
+"Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: uz@Cyrl\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
-msgstr "Choisir une ou plusieurs dates..."
+msgstr ""
 
 msgid "Choose a date..."
-msgstr "Choisir une date..."
+msgstr ""
 
 msgid "Today"
-msgstr "Aujourd'hui"
+msgstr "бугун"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -40,13 +37,13 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Ташкилий бўлим"
 
 msgid "Date of enrollment"
 msgstr ""
 
 msgid "Last updated"
-msgstr "Dernière mise à jour"
+msgstr "Охирги янгиланган"
 
 msgid "Enrolled"
 msgstr ""
@@ -58,97 +55,97 @@ msgid "Not enrolled"
 msgstr ""
 
 msgid "Columns to show in table"
-msgstr "Colonnes à afficher dans ce tableau"
+msgstr ""
 
 msgid "Column"
-msgstr "Colonne"
+msgstr "Устун"
 
 msgid "This value is validating"
-msgstr "Valeur en cours de validation"
+msgstr ""
 
 msgid "Async field update failed"
 msgstr ""
 
 msgid "A value is required"
-msgstr "Une valeur est requise"
+msgstr ""
 
 msgid "Please provide a valid number"
-msgstr "Veuillez saisir un chiffre valide"
+msgstr ""
 
 msgid "Please provide a valid integer"
-msgstr "Veuillez saisir un nombre entier valide"
+msgstr ""
 
 msgid "Please provide a positive integer"
-msgstr "Veuillez saisir un nombre entier positif valide"
+msgstr ""
 
 msgid "Please provide zero or a positive integer"
-msgstr "Veuillez saisir un zéro ou nombre entier positif valide"
+msgstr ""
 
 msgid "Please provide a negative integer"
-msgstr "Veuillez saisir un nombre entier négatif valide"
+msgstr ""
 
 msgid "Please provide a valid date"
-msgstr "Veuillez spécifier une date valide"
+msgstr ""
 
 msgid "A date in the future is not allowed"
 msgstr ""
 
 msgid "Please provide a valid date and time"
-msgstr "Veuillez saisir une date et heure valide"
+msgstr ""
 
 msgid "Please provide a valid time"
-msgstr "Veuillez saisir une heure valide"
+msgstr ""
 
 msgid "Please provide a valid percentage"
-msgstr "Veuillez saisir un pourcentage valide"
+msgstr ""
 
 msgid "Please provide a valid url"
-msgstr "Veuillez saisir un lien URL valide"
+msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr "Veuillez saisir une adresse email valide"
+msgstr ""
 
 msgid "Please provide a valid age"
-msgstr "Veuillez saisir un âge valide"
+msgstr ""
 
 msgid "Please provide a valid phone number"
-msgstr "Veuillez saisir un numéro de téléphone valide"
+msgstr ""
 
 msgid "Please provide a valid organisation unit"
-msgstr "Veuillez saisir une unité d'organisation valide"
+msgstr ""
 
 msgid "Please provide valid coordinates"
-msgstr "Veuillez saisir des coordonnées valides"
+msgstr ""
 
 msgid "This value already exists"
-msgstr "Cette valeur existe déjà"
+msgstr ""
 
 msgid "\"From\" cannot be greater than \"To\""
 msgstr ""
 
 msgid "Checking..."
-msgstr "Vérification..."
+msgstr ""
 
 msgid "Area"
-msgstr "Aire"
+msgstr ""
 
 msgid "Coordinate"
-msgstr "Coordonnée"
+msgstr "Мувофиқлаштириш"
 
 msgid "Enrollment"
-msgstr "Enrôlement"
+msgstr "Рўйхатга олиш"
 
 msgid "A future date is not allowed"
-msgstr "Une date future n'est pas permise"
+msgstr ""
 
 msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Бекор қилиш"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Сақланмаган ўзгартиришлар"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -160,64 +157,64 @@ msgid "No, stay here"
 msgstr ""
 
 msgid "validation failed"
-msgstr "validation échouée"
+msgstr ""
 
 msgid "Errors"
-msgstr "Erreurs"
+msgstr "Хатоликлар"
 
 msgid "Feedback"
-msgstr "Réaction"
+msgstr "Қайта алоқа"
 
 msgid "Indicators"
-msgstr "Indicateurs"
+msgstr "Индикаторлар"
 
 msgid "Warnings"
-msgstr "Avertissements"
+msgstr ""
 
 msgid "search group result could not be retrieved"
 msgstr ""
 
 msgid "Complete"
-msgstr "Terminer"
+msgstr "Бажарилди"
 
 msgid "Warnings found"
-msgstr "Avertissements trouvés"
+msgstr ""
 
 msgid "Abort"
-msgstr "Annuler"
+msgstr ""
 
 msgid "Back to form"
-msgstr "Retour au formulaire"
+msgstr ""
 
 msgid "Save anyway"
 msgstr ""
 
 msgid "Validation errors and warnings"
-msgstr "Erreurs et avertissements de validation"
+msgstr ""
 
 msgid "Validation errors"
-msgstr "Erreurs de validation"
+msgstr ""
 
 msgid "Validation warnings"
-msgstr "Avertissements de validation"
+msgstr ""
 
 msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
-msgstr "Opérations en cours"
+msgstr ""
 
 msgid "Sort"
-msgstr "Trier"
+msgstr ""
 
 msgid "No events to display"
-msgstr "Aucun évènement à afficher"
+msgstr ""
 
 msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr "Fermer"
+msgstr "Ёпиқ"
 
 msgid "Please select the user"
 msgstr ""
@@ -232,94 +229,94 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr "Aucun"
+msgstr "Йўқ"
 
 msgid "Select user"
 msgstr ""
 
 msgid "to"
-msgstr "à"
+msgstr ""
 
 msgid "From"
-msgstr "A partir de"
+msgstr "Дан"
 
 msgid "To"
-msgstr "A"
+msgstr "Кимга"
 
 msgid "This week"
-msgstr "Cette semaine"
+msgstr "Ушбу ҳафта"
 
 msgid "This month"
-msgstr "Ce mois-ci"
+msgstr "Ушбу ой"
 
 msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr "Semaine passée"
+msgstr "Охирги ҳафта"
 
 msgid "Last month"
-msgstr "Le mois dernier"
+msgstr "Охирги ой"
 
 msgid "Last 3 months"
-msgstr "3 derniers mois"
+msgstr "Охирги 3 ой"
 
 msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr "Max"
+msgstr "Максимум"
 
 msgid "Min"
-msgstr "Min"
+msgstr "Минимум"
 
 msgid "Contains text"
-msgstr "Contient le texte"
+msgstr ""
 
 msgid "Yes"
-msgstr "Oui"
+msgstr "Ҳа"
 
 msgid "mm/dd/yyyy"
-msgstr "mm/jj/aaaa"
+msgstr ""
 
 msgid "Years"
-msgstr "Années"
+msgstr "Йиллар"
 
 msgid "Months"
-msgstr "Mois"
+msgstr "Ойлар"
 
 msgid "Days"
-msgstr "Jours"
+msgstr "Кунлар"
 
 msgid "Uploading file"
-msgstr "Téléchargement du fichier"
+msgstr ""
 
 msgid "selected"
-msgstr "Sélectionné"
+msgstr "танланган"
 
 msgid "Delete"
-msgstr "Supprimer"
+msgstr "Ўчириш"
 
 msgid "Select file"
-msgstr "Sélectionner le fichier"
+msgstr "Файлни танлаш"
 
 msgid "No"
-msgstr "Non"
+msgstr "Йўқ"
 
 msgid "Uploading image"
-msgstr "Téléchargement de l'image"
+msgstr ""
 
 msgid "Select image"
-msgstr "Sélectionner l'image"
+msgstr ""
 
 msgid "Search"
-msgstr "Chercher"
+msgstr "Излаш"
 
 msgid "Clear"
-msgstr "Effacer"
+msgstr "Аниқ"
 
 msgid "No results"
-msgstr "Aucun résultat"
+msgstr ""
 
 msgid "start typing to search"
 msgstr ""
@@ -328,13 +325,13 @@ msgid "suggestions could not be retrieved"
 msgstr ""
 
 msgid "No items to display"
-msgstr "Aucun élément à afficher"
+msgstr ""
 
 msgid "Could not get organisation unit"
 msgstr ""
 
 msgid "Program doesn't exist"
-msgstr "Le programme n'existe pas"
+msgstr ""
 
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
@@ -343,31 +340,31 @@ msgid "Start again"
 msgstr ""
 
 msgid "New {{typeName}}"
-msgstr "Nouveau {{typeName}}"
+msgstr ""
 
 msgid "New"
-msgstr "Nouveau"
+msgstr "Янги"
 
 msgid "Find"
-msgstr "Trouver"
+msgstr "Топинг"
 
 msgid "Selected registering unit"
 msgstr ""
 
 msgid "Start Again"
-msgstr "Recommencer"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr "Accepter"
+msgstr "Қабул қилинг"
 
 msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Select"
-msgstr "Sélectionner"
+msgstr "Танланг"
 
 msgid "Selected Program"
 msgstr ""
@@ -376,43 +373,43 @@ msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Show all"
-msgstr "Tout afficher"
+msgstr "Барчага кўрсатиш"
 
 msgid "Program"
-msgstr "Programme"
+msgstr "Программа"
 
 msgid "Select program"
-msgstr "Sélectionner le programme"
+msgstr "Дастурни танлаш"
 
 msgid "No programs available."
-msgstr "Aucun programme disponible"
+msgstr ""
 
 msgid "Online"
-msgstr "En ligne"
+msgstr ""
 
 msgid "Offline"
-msgstr "Hors ligne"
+msgstr ""
 
 msgid "Syncing"
-msgstr "Synchronisation"
+msgstr ""
 
 msgid "Add comment"
-msgstr "Ajouter commentaire"
+msgstr ""
 
 msgid "You dont have access to write comments"
 msgstr ""
 
 msgid "Write comment"
-msgstr "Ecrire commentaire"
+msgstr ""
 
 msgid "Basic info"
-msgstr "Infos de base"
+msgstr ""
 
 msgid "Status"
-msgstr "Statut"
+msgstr "Статус"
 
 msgid "Comments"
-msgstr "Commentaires"
+msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -421,7 +418,7 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr "Enregistrer"
+msgstr "Сақлаш"
 
 msgid "Show all events"
 msgstr ""
@@ -442,10 +439,10 @@ msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr "Effacer l´événement"
+msgstr "Тадбирни ўчиринг"
 
 msgid "Update"
-msgstr "Mettre à jour"
+msgstr "Янгилаш"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -457,25 +454,25 @@ msgid "before or equal to {{date}}"
 msgstr ""
 
 msgid "greater than or equal to"
-msgstr "supérieur ou egal à"
+msgstr ""
 
 msgid "less than or equal to"
-msgstr "inférieur ou egal à"
+msgstr ""
 
 msgid "More filters"
-msgstr "Filtres supplémentaires"
+msgstr ""
 
 msgid "Select columns"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr "Télécharger en JSON"
+msgstr ""
 
 msgid "Download as XML"
-msgstr "Download as XML"
+msgstr ""
 
 msgid "Download as CSV"
-msgstr "Télécharger en CSV"
+msgstr ""
 
 msgid "Download with current filters"
 msgstr ""
@@ -484,7 +481,7 @@ msgid "Download data..."
 msgstr ""
 
 msgid "Rows per page"
-msgstr "Lignes par page"
+msgstr ""
 
 msgid "Update view"
 msgstr ""
@@ -505,13 +502,13 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr "Confirmer"
+msgstr "Тасдиқланг"
 
 msgid "Save As view"
 msgstr ""
 
 msgid "View name"
-msgstr "Visualiser le nom"
+msgstr ""
 
 msgid "Show Less"
 msgstr ""
@@ -526,25 +523,25 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Registered events"
-msgstr "Événements enregistrés"
+msgstr ""
 
 msgid "Active"
-msgstr "Actif"
+msgstr "Фаол"
 
 msgid "Completed"
-msgstr "Terminé"
+msgstr "бажарилди"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
 msgid "Save and add another"
-msgstr "Sauvegarder et ajouter nouveau"
+msgstr ""
 
 msgid "Save and exit"
-msgstr "Sauvegarder et quitter"
+msgstr ""
 
 msgid "Finish"
-msgstr "Terminer"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr ""
@@ -564,19 +561,19 @@ msgid ""
 msgstr ""
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Тавсия этилган фойдаланувчи"
 
 msgid "Relationships"
-msgstr "Relations"
+msgstr "Ўзаро алоқалар"
 
 msgid "Assignee"
-msgstr ""
+msgstr "Ваколат берилган шахс"
 
 msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr "dans"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -592,7 +589,7 @@ msgid ""
 msgstr ""
 
 msgid "New event"
-msgstr "Nouvel événement"
+msgstr "Янги ҳодиса"
 
 msgid "New event relationship"
 msgstr ""
@@ -652,7 +649,7 @@ msgid "Registered person"
 msgstr ""
 
 msgid "Link"
-msgstr "Lien"
+msgstr ""
 
 msgid "Metadata error. see log for details"
 msgstr ""
@@ -667,37 +664,37 @@ msgid "Possible duplicates found"
 msgstr ""
 
 msgid "No results found"
-msgstr ""
+msgstr "Ҳеч қандай натижа топилмади"
 
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
 msgid "Hide"
-msgstr "Masquer"
+msgstr "Яшириш"
 
 msgid "Save as new {{tetName}}"
-msgstr "Enregister sous {{tetName}}"
+msgstr ""
 
 msgid "Organisation Unit"
-msgstr "Unité d'organisation"
+msgstr "Ташкилий Бўлим"
 
 msgid "Registration"
-msgstr "Enregistrement"
+msgstr "Рўйхатдан ўтиш"
 
 msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"
-msgstr "Résultats de la recherche"
+msgstr ""
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
 msgid "New search"
-msgstr "Nouvelle recherche"
+msgstr ""
 
 msgid "Edit search"
-msgstr "Modifier la recherche"
+msgstr ""
 
 msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
@@ -706,7 +703,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr "Enregistrer"
+msgstr "Рўйхат"
 
 msgid "Search scope"
 msgstr ""
@@ -725,10 +722,10 @@ msgid "Find by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
-msgstr "Chercher par attributs"
+msgstr ""
 
 msgid "Back"
-msgstr "Précédent"
+msgstr "Орқага"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -770,13 +767,13 @@ msgid "No one is assigned to this event"
 msgstr ""
 
 msgid "Assign"
-msgstr "Assigner"
+msgstr ""
 
 msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
-msgstr "Feedbacks"
+msgstr ""
 
 msgid "You dont have access to delete this relationship"
 msgstr ""
@@ -785,16 +782,16 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr "Ajouetr relation"
+msgstr "Ўзаро алоқа киритиш"
 
 msgid "Results found"
 msgstr ""
 
 msgid "Selected program"
-msgstr "Programme choisi"
+msgstr "Танланган дастур"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr "Chercher {{uniqueAttrName}}"
+msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
@@ -812,7 +809,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr "Profil"
+msgstr "Профил"
 
 msgid "Error saving event"
 msgstr ""
@@ -839,25 +836,25 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "Définir les coordonnées"
+msgstr ""
 
 msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr "Date"
+msgstr "Сана"
 
 msgid "Time"
-msgstr "Heure"
+msgstr "Вақт"
 
 msgid "From date"
-msgstr "Date de début"
+msgstr ""
 
 msgid "From time"
 msgstr ""
 
 msgid "To date"
-msgstr "Date de fin"
+msgstr ""
 
 msgid "To time"
 msgstr ""
@@ -866,13 +863,13 @@ msgid "error encountered during field validation"
 msgstr ""
 
 msgid "error"
-msgstr "erreur"
+msgstr ""
 
 msgid "Delete polygon"
-msgstr "Supprimer polygone"
+msgstr ""
 
 msgid "Set area"
-msgstr "Définir l'aire"
+msgstr ""
 
 msgid "Compatibility mode"
-msgstr "Mode compatibilité"
+msgstr ""
