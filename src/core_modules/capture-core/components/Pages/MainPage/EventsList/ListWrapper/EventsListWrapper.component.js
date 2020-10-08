@@ -104,6 +104,7 @@ class EventListWrapper extends React.Component<Props> {
                 className={classes.paginationContainer}
             >
                 <ListPagination
+                    currentRowsPerPage={this.props.dataSource.length}
                     listId={this.props.listId}
                 />
             </div>

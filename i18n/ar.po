@@ -1,15 +1,15 @@
 # 
 # Translators:
+# phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2020
 # Antonia Bezenchek <antonia@informa.pro>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
-# phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Hamza Assada <7amza.it@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
+"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -45,18 +45,6 @@ msgstr ""
 "حالياً تشغيل نسخة واحدة فقط بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
 "الصفحة إذا كنت ترغب في استخدام هذه النسخة، ولكن اعلم أن هذا سيؤدي إلى إغلاق "
 "النسخ الأخرى."
-
-msgid "Last updated"
-msgstr "آخر تحديث"
-
-msgid "Enrolled"
-msgstr ""
-
-msgid "Previously enrolled"
-msgstr ""
-
-msgid "Not enrolled"
-msgstr ""
 
 msgid "Columns to show in table"
 msgstr "الأعمدة التي سيتم عرضها في الجدول"
@@ -347,11 +335,11 @@ msgstr "{{typeName}} جديد"
 msgid "New"
 msgstr "جديد"
 
+msgid "Start again"
+msgstr "البدء من جديد"
+
 msgid "Find"
 msgstr "بحث"
-
-msgid "Clear selections"
-msgstr ""
 
 msgid "Selected registering unit"
 msgstr "وحدة التسجيل المختارة"
@@ -716,56 +704,6 @@ msgstr "إنشاء {{trackedEntityType}} جديد"
 msgid "Register"
 msgstr "تسجيل"
 
-msgid "Search scope"
-msgstr "نطاق البحث"
-
-msgid "Find results from"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-
-msgid "Search {{name}}"
-msgstr ""
-
-msgid "Find by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
-msgstr "البحث حسب السمة"
-
-msgid "Back"
-msgstr "للخلف"
-
-msgid "No results found"
-msgstr "لم يتم العثور على أي نتائج"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-
-msgid "Back to search"
-msgstr ""
-
-msgid "An error has occurred"
-msgstr ""
-
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-
-msgid "Make a selection to start searching"
-msgstr ""
-
-msgid "View dashboard"
-msgstr ""
-
-msgid "result(s) found for term(s)"
-msgstr ""
-
 msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
 
@@ -800,6 +738,9 @@ msgstr "البرنامج المحدد"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "بحث {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "البحث حسب السمة"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "املأ {{minAttributesRequired}} سمات على الأقل للبحث"

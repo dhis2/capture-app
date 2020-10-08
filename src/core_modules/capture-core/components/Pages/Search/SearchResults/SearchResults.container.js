@@ -2,15 +2,33 @@
 import type { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { withStyles } from '@material-ui/core';
-import { getStyles, SearchResultsComponent } from './SearchResults.component';
-import type { OwnProps, Props, PropsFromRedux, DispatchersFromRedux } from './SearchResults.types';
+import { SearchResultsComponent } from './SearchResults.component';
+import type { Props, PropsFromRedux, DispatchersFromRedux } from './SearchResults.types';
 import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram } from '../SearchPage.actions';
+import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
+import { searchScopes, PAGINATION } from '../SearchPage.constants';
+
+const getCurrentScope = (scopeId: string, scopeType: $Keys<typeof searchScopes>) => {
+    if (!scopeId) {
+        return null;
+    }
+    if (scopeType === searchScopes.PROGRAM) {
+        return getTrackerProgramThrowIfNotFound(scopeId);
+    }
+    if (scopeType === searchScopes.TRACKED_ENTITY_TYPE) {
+        return getTrackedEntityTypeThrowIfNotFound(scopeId);
+    }
+
+    return null;
+};
+
+const getName = scopeEntity => (scopeEntity ? scopeEntity.name : '');
+const getDataElements = scopeEntity => (scopeEntity ? [...scopeEntity.attributes.values()] : []);
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const {
         searchResults,
-        searchResultsPaginationInfo: { rowsCount, currentPage, rowsPerPage },
+        searchResultsPaginationInfo: { currentPage, nextPageButtonDisabled },
         currentSearchInfo: {
             searchScopeType: currentSearchScopeType,
             searchScopeId: currentSearchScopeId,
@@ -19,31 +37,40 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         },
     } = state.searchPage;
 
+    const scopeEntity = getCurrentScope(currentSearchScopeId, currentSearchScopeType);
+
+    const currentSearchScopeName = getName(scopeEntity);
+    const currentSearchScopeDataElements = getDataElements(scopeEntity);
+
+    const dataElements = currentSearchScopeDataElements
+        .filter(({ displayInReports }) => displayInReports)
+        .map(({ id, name, type }) => ({ id, name, type }));
+
     return {
-        rowsCount,
         currentPage,
-        rowsPerPage,
         searchResults,
         currentSearchScopeType,
         currentSearchScopeId,
+        currentSearchScopeName,
         currentFormId,
         currentSearchTerms,
+        nextPageButtonDisabled,
+        dataElements,
     };
 };
 
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId, page }) => {
-        dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId, page }));
+        dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId, page, triggeredFrom: PAGINATION }));
     },
     searchViaAttributesOnScopeProgram: ({ programId, formId, page }) => {
-        dispatch(searchViaAttributesOnScopeProgram({ programId, formId, page }));
+        dispatch(searchViaAttributesOnScopeProgram({ programId, formId, page, triggeredFrom: PAGINATION }));
     },
 });
 
 
-export const SearchResults: ComponentType<OwnProps> =
+export const SearchResults: ComponentType<{||}> =
   compose(
-      connect<Props, OwnProps & CssClasses, _, _, _, _>(mapStateToProps, mapDispatchToProps),
-      withStyles(getStyles),
+      connect<Props, _, _, _, _, _>(mapStateToProps, mapDispatchToProps),
   )(SearchResultsComponent);

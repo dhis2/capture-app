@@ -118,6 +118,27 @@ When('you fill in the last name with values that will return results', () => {
         .blur();
 });
 
+When('for Malaria case you fill in values that will return less than 5 results', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(2)
+        .type('Sara')
+        .blur();
+});
+
+When('for Person you fill in values that will return less than 5 results', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Sara')
+        .blur();
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('Gonzales')
+        .blur();
+});
+
 And('you click search', () => {
     // click outside of the input for the values to be updated
     cy.get('[data-test="dhis2-capture-form-attributes"]').click();
@@ -212,9 +233,9 @@ Then('you can see the first page of the results', () => {
     cy.get('[data-test="dhis2-capture-search-results-list"]')
         .should('exist');
     cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length', 5);
-    cy.get('[data-test="dhis2-capture-search-results-pagination"]')
-        .contains('1-')
+        .should('have.length.greaterThan', 0);
+    cy.get('[data-test="dhis2-capture-pagination"]')
+        .contains('Page 1')
         .should('exist');
 });
 
@@ -222,6 +243,12 @@ Then('you can see the first page of the results', () => {
 When('you click the next page button', () => {
     cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
         .click();
+});
+
+And('the next page button is disabled', () => {
+    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+        .should('exist')
+        .should('be.disabled');
 });
 
 When('you click the view dashboard button', () => {
@@ -236,9 +263,9 @@ Then('you can see the second page of the results', () => {
     cy.get('[data-test="dhis2-capture-search-results-list"]')
         .should('exist');
     cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length', 4);
-    cy.get('[data-test="dhis2-capture-search-results-pagination"]')
-        .contains('6-')
+        .should('have.length.greaterThan', 0);
+    cy.get('[data-test="dhis2-capture-pagination"]')
+        .contains('Page 2')
         .should('exist');
 });
 
@@ -256,4 +283,46 @@ When('you remove the Child Programme selection', () => {
 Then('you still can see the Malaria case diagnosis being selected', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
         .contains('Malaria case diagnosis');
+});
+
+Given('you are in the search page with the Adult Woman being preselected from the url', () => {
+    cy.visit('/#/search/programId=uy2gU8kT1jF&orgUnitId=DiszpKrYNg8');
+});
+
+When('you fill in the date of birth', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(2)
+        .type('1999-09-01')
+        .blur();
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(3)
+        .type('2020-01-01')
+        .blur();
+});
+
+Given('you are in the search page with the TB program being preselected from the url', () => {
+    cy.visit('/#/search/programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8');
+});
+
+When('you fill in the zip code range numbers', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(5)
+        .type('7130')
+        .blur();
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(6)
+        .type('7135')
+        .blur();
+});
+
+When('you fill in the first name', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Lid')
+        .blur();
 });

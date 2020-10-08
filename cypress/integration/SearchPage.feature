@@ -112,3 +112,72 @@ Feature: User interacts with Search page
     When you remove the Child Programme selection
     Then you still can see the Malaria case diagnosis being selected
 
+  Scenario: Searching using attributes in TET domain is invalid after clearing all search terms
+    Given you are on the default search page
+    And you select the search domain Person
+    And you expand the attributes search area
+    When you fill in the the form with values
+    When you clear the values
+    And you click search
+    Then there should be a validation error message
+
+  Scenario: Searching using attributes in TET domain is invalid because terms typed contain nothing but spaces
+    Given you are on the default search page
+    And you select the search domain Person
+    And you expand the attributes search area
+    When you fill the values with nothing but spaces
+    And you click search
+    Then there should be a validation error message
+
+  Scenario: Searching using attributes in TET domain has a working pagination
+    Given you are on the default search page
+    And you select the search domain Person
+    And you expand the attributes search area
+    And you fill in the last name with values that will return results
+    When you click search
+    Then you can see the first page of the results
+    When you click the next page button
+    Then you can see the second page of the results
+    When you click the previous page button
+    Then you can see the first page of the results
+
+  Scenario: Searching using attributes in TET domain has disabled pagination
+    Given you are on the default search page
+    And you select the search domain Person
+    And you expand the attributes search area
+    And for Person you fill in values that will return less than 5 results
+    When you click search
+    Then you can see the first page of the results
+    And the next page button is disabled
+
+  Scenario: Searching using attributes in Program domain has disabled pagination
+    Given you are on the default search page
+    And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
+    And for Malaria case you fill in values that will return less than 5 results
+    When you click search
+    Then you can see the first page of the results
+    And the next page button is disabled
+
+  Scenario: Searching using only date range values as attributes
+    Given you are in the search page with the Adult Woman being preselected from the url
+    When you fill in the date of birth
+    And you click search
+    Then you can see the first page of the results
+    
+  Scenario: Searching using zip code range values as attributes
+    Given you are in the search page with the TB program being preselected from the url
+    When you expand the attributes search area
+    And you fill in the zip code range numbers
+    And you click search
+    Then you can see the first page of the results
+
+  Scenario: Searching using zip code range and name values as attributes
+    Given you are in the search page with the TB program being preselected from the url
+    When you expand the attributes search area
+    And you fill in the zip code range numbers
+    And you fill in the first name
+    And you click search
+    Then you can see the first page of the results
+
+

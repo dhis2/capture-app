@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
-"PO-Revision-Date: 2020-09-29T14:08:42.361Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
+"PO-Revision-Date: 2020-09-22T10:30:44.432Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -27,6 +27,12 @@ msgid ""
 "Currently, the Capture App only supports running one version concurrently "
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
+msgstr ""
+
+msgid "Organisation unit"
+msgstr ""
+
+msgid "Date of enrollment"
 msgstr ""
 
 msgid "Last updated"
@@ -323,6 +329,9 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
+msgid "Start again"
+msgstr ""
+
 msgid "New {{typeName}}"
 msgstr ""
 
@@ -330,9 +339,6 @@ msgid "New"
 msgstr ""
 
 msgid "Find"
-msgstr ""
-
-msgid "Clear selections"
 msgstr ""
 
 msgid "Selected registering unit"
@@ -650,6 +656,9 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
+msgid "No results found"
+msgstr ""
+
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
@@ -672,9 +681,6 @@ msgid "Search results"
 msgstr ""
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
-
-msgid "{{teiCount}} results found for"
 msgstr ""
 
 msgid "New search"
@@ -713,9 +719,6 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-msgid "No results found"
-msgstr ""
-
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
@@ -738,7 +741,10 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
-msgid "result(s) found for term(s)"
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
 msgstr ""
 
 msgid "You dont have access to edit this event"
@@ -768,6 +774,9 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
+msgstr ""
+
+msgid "Results found"
 msgstr ""
 
 msgid "Selected program"
@@ -819,6 +828,9 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
+msgstr ""
+
+msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"

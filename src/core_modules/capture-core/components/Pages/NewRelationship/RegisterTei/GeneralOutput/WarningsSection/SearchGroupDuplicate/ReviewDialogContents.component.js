@@ -22,6 +22,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
+    currentProgramId: ?string,
     dataElements: Array<DataElement>,
     teis: Array<{id: string, values: Object}>,
     onLink: Function,
@@ -29,15 +30,7 @@ type Props = {
     isUpdating: boolean,
 };
 
-class ReviewDialogContents extends React.Component<Props> {
-    contentListInstance: any;
-    height: ?number;
-    componentDidMount() {
-        if (!this.props.isUpdating && this.contentListInstance) {
-            this.height = this.contentListInstance.clientHeight;
-        }
-    }
-
+class ReviewDialogContentsPlain extends React.Component<Props> {
     getLinkButton = (itemProps: Object) => {
         const { onLink, classes } = this.props;
         const { id, values } = itemProps.item;
@@ -55,11 +48,7 @@ class ReviewDialogContents extends React.Component<Props> {
     }
 
     render() {
-        const { dataElements, teis, isUpdating, classes } = this.props;
-
-        const divStyle = this.height ? {
-            height: this.height,
-        } : null;
+        const { dataElements, teis, isUpdating, classes, currentProgramId } = this.props;
 
         return (
             <React.Fragment>
@@ -67,17 +56,14 @@ class ReviewDialogContents extends React.Component<Props> {
                     <DialogTitle className={classes.title}>
                         {i18n.t('Possible duplicates found')}
                     </DialogTitle>
-                    <div
-                        ref={(instance) => { this.contentListInstance = instance; }}
-                        style={divStyle}
-                    >
-                        <CardListWithLoadingIndicator
-                            isUpdating={isUpdating}
-                            items={teis}
-                            dataElements={dataElements}
-                            getCustomItemBottomElements={this.getLinkButton}
-                        />
-                    </div>
+                    <CardListWithLoadingIndicator
+                        noItemsText={i18n.t('No results found')}
+                        currentProgramId={currentProgramId}
+                        isUpdating={isUpdating}
+                        items={teis}
+                        dataElements={dataElements}
+                        getCustomItemBottomElements={this.getLinkButton}
+                    />
                     <ReviewDialogContentsPager />
                 </DialogContent>
             </React.Fragment>
@@ -85,4 +71,4 @@ class ReviewDialogContents extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(ReviewDialogContents);
+export const ReviewDialogContentsComponent = withStyles(getStyles)(ReviewDialogContentsPlain);

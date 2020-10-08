@@ -2,6 +2,7 @@
 import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { of, from, empty } from 'rxjs';
+import { isObject, isString } from 'd2-utilizr/src';
 import {
     searchPageActionTypes,
     showEmptyResultsViewOnSearchPage,
@@ -15,6 +16,7 @@ import {
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
+import { PAGINATION } from '../SearchPage.constants';
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
@@ -36,18 +38,37 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
         catchError(() => of(showErrorViewOnSearchPage())),
     );
 
-const getFiltersForAttributesSearchQuery = formValues =>
-    Object.keys(formValues)
+const getFiltersForAttributesSearchQuery = (formValues) => {
+    const stringFilters = Object.keys(formValues)
+        .filter(fieldId => isString(formValues[fieldId]))
         .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
         .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
 
+    const rangeFilers = Object.keys(formValues)
+        .filter(fieldId => isObject(formValues[fieldId]))
+        .filter(fieldId => ('from' in formValues[fieldId] && 'to' in formValues[fieldId]))
+        .map(fieldId => `${fieldId}:ge:${formValues[fieldId].from}:le:${formValues[fieldId].to}`);
 
-const searchViaAttributesStream = (queryArgs, attributes) =>
+    return [...stringFilters, ...rangeFilers];
+};
+const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
-                return showSuccessResultsViewOnSearchPage(searchResults, pagingData);
+                const nextPageButtonDisabled = Boolean(searchResults.length < pagingData.rowsPerPage);
+                return showSuccessResultsViewOnSearchPage(
+                    searchResults,
+                    { currentPage: pagingData.currentPage, nextPageButtonDisabled },
+                );
             }
+
+            if (searchResults.length === 0 && triggeredFrom === PAGINATION) {
+                return showSuccessResultsViewOnSearchPage(
+                    [],
+                    { currentPage: pagingData.currentPage, nextPageButtonDisabled: true },
+                );
+            }
+
             return showEmptyResultsViewOnSearchPage();
         }),
         startWith(showLoadingViewOnSearchPage()),
@@ -94,7 +115,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObse
 export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH),
-        flatMap(({ payload: { formId, programId, page } }) => {
+        flatMap(({ payload: { formId, programId, page, triggeredFrom } }) => {
             const { formsValues } = store.value;
 
             const queryArgs = {
@@ -107,14 +128,14 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
             };
             const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
 
-            return searchViaAttributesStream(queryArgs, attributes);
+            return searchViaAttributesStream(queryArgs, attributes, triggeredFrom);
         }),
     );
 
 export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
-        flatMap(({ payload: { formId, trackedEntityTypeId, page } }) => {
+        flatMap(({ payload: { formId, trackedEntityTypeId, page, triggeredFrom } }) => {
             const { formsValues } = store.value;
 
             const queryArgs = {
@@ -123,11 +144,10 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputOb
                 page,
                 pageSize: 5,
                 ouMode: 'ACCESSIBLE',
-                fields: '*',
             };
 
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
 
-            return searchViaAttributesStream(queryArgs, attributes);
+            return searchViaAttributesStream(queryArgs, attributes, triggeredFrom);
         }),
     );

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
+"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -36,18 +36,6 @@ msgid ""
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
-msgstr ""
-
-msgid "Last updated"
-msgstr "Последнее обновление"
-
-msgid "Enrolled"
-msgstr ""
-
-msgid "Previously enrolled"
-msgstr ""
-
-msgid "Not enrolled"
 msgstr ""
 
 msgid "Columns to show in table"
@@ -338,11 +326,11 @@ msgstr ""
 msgid "New"
 msgstr "Новый"
 
+msgid "Start again"
+msgstr ""
+
 msgid "Find"
 msgstr "Найти"
-
-msgid "Clear selections"
-msgstr ""
 
 msgid "Selected registering unit"
 msgstr ""
@@ -701,56 +689,6 @@ msgstr ""
 msgid "Register"
 msgstr "Зарегистрировать"
 
-msgid "Search scope"
-msgstr "Область поиска"
-
-msgid "Find results from"
-msgstr ""
-
-msgid ""
-"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
-
-msgid "Search {{name}}"
-msgstr ""
-
-msgid "Find by {{name}}"
-msgstr ""
-
-msgid "Search by attributes"
-msgstr ""
-
-msgid "Back"
-msgstr "Назад"
-
-msgid "No results found"
-msgstr "Результаты не найдены"
-
-msgid ""
-"You can change your search terms and search again to find what you are "
-"looking for."
-msgstr ""
-
-msgid "Back to search"
-msgstr ""
-
-msgid "An error has occurred"
-msgstr ""
-
-msgid ""
-"There is a problem with this search, please change the search terms or try "
-"again later. For more details open the Console tab of the Developer tools"
-msgstr ""
-
-msgid "Make a selection to start searching"
-msgstr ""
-
-msgid "View dashboard"
-msgstr ""
-
-msgid "result(s) found for term(s)"
-msgstr ""
-
 msgid "You dont have access to edit this event"
 msgstr ""
 
@@ -784,6 +722,9 @@ msgid "Selected program"
 msgstr "Выбранная программа"
 
 msgid "Search {{uniqueAttrName}}"
+msgstr ""
+
+msgid "Search by attributes"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"

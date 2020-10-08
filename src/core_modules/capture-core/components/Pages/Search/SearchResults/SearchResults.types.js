@@ -1,13 +1,11 @@
 // @flow
-import type { SearchGroups } from '../SearchPage.types';
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 import { typeof searchScopes } from '../SearchPage.constants';
+import { typeof dataElementTypes } from '../../../../metaData';
 
-export type OwnProps = {|
-  +searchGroupsForSelectedScope: SearchGroups,
-|}
+export type CardDataElementsInformation = Array<{| id: string, name: string, type: $Values<dataElementTypes> |}>
 
-export type CardDataElementsInformation = Array<{| id: string, name: string |}>
+export type CardProfileImageElementInformation = $ReadOnly<{| id: string, name: string, type: "IMAGE" |}>
 
 type Tei = $ReadOnly<{
   created: string,
@@ -41,14 +39,15 @@ export type SearchResultItem = {|
 
 
 export type PropsFromRedux ={|
-  +rowsCount: number,
   +currentPage: number,
-  +rowsPerPage: number,
   +currentSearchScopeType: $Keys<searchScopes>,
   +currentSearchScopeId: string,
+  +currentSearchScopeName: string,
   +currentFormId: string,
   +searchResults: Array<SearchResultItem>,
-  +currentSearchTerms: CurrentSearchTerms
+  +currentSearchTerms: CurrentSearchTerms,
+  +nextPageButtonDisabled: boolean,
+  +dataElements: CardDataElementsInformation
 |}
 
 export type DispatchersFromRedux = {|
@@ -57,8 +56,6 @@ export type DispatchersFromRedux = {|
 |}
 
 export type Props = {|
-  ...OwnProps,
-  ...CssClasses,
   ...DispatchersFromRedux,
   ...PropsFromRedux,
 |}

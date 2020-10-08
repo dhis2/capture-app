@@ -29,7 +29,6 @@ const ReviewDialogContentsPager = (props: Props) => {
         >
             <Pager
                 onChangePage={onChangePage}
-                onGetLabelDisplayedRows={(a, b) => `${a} of ${b}`}
                 {...paginationData}
             />
         </div>

@@ -76,6 +76,8 @@ const Index = ({
         if (!preselectedProgram.value) {
             showInitialSearchPage();
         }
+
+        return () => showInitialSearchPage();
     },
     [
         preselectedProgram.value,
@@ -117,7 +119,7 @@ const Index = ({
 
                     {
                         searchStatus === searchPageStatus.SHOW_RESULTS &&
-                        <SearchResults searchGroupsForSelectedScope={searchGroupsForSelectedScope} />
+                        <SearchResults />
                     }
 
                     {

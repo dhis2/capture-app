@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import ReviewDialogContents from './ReviewDialogContents.container';
+import { ReviewDialogContents } from './ReviewDialogContents.container';
 
 type Props = {
     open: boolean,
@@ -13,7 +13,7 @@ type Props = {
 };
 
 const StyledDialogActions = withStyles({
-    root: { margin: '0px 24px 24px' },
+    root: { margin: 24 },
 })(DialogActions);
 
 class ReviewDialog extends React.Component<Props > {

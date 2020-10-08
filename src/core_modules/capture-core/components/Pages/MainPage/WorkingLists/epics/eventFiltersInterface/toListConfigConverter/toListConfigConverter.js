@@ -62,11 +62,11 @@ const getDateFilter = (filter: ApiDataFilterDate): DateFilterData => {
 };
 
 const getUser = (userId: string) => getApi()
-    .get(`userLookup/${userId}`)
-    .then(({ id, displayName: name, username }) => ({
-        id,
-        name,
-        username,
+    .get(`users/${userId}`, { fields: 'id,name,userCredentials[username]' })
+    .then((user: Object) => ({
+        id: user.id,
+        name: user.name,
+        username: user.userCredentials.username,
     }))
     .catch((error) => {
         log.error(
