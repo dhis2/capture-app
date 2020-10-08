@@ -40,7 +40,7 @@ export const searchPageDesc = createReducerDescription({
 }, 'searchPage', {
     searchStatus: searchPageStatus.INITIAL,
     searchResults: [],
-    currentSearchInfo: [],
+    currentSearchInfo: {},
     searchResultsPaginationInfo: {
         nextPageButtonDisabled: false,
         currentPage: 0,

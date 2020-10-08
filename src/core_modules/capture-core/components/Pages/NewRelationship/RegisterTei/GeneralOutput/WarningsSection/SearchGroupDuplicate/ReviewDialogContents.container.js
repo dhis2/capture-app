@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import ReviewDialogContents from './ReviewDialogContents.component';
+import { ReviewDialogContentsComponent } from './ReviewDialogContents.component';
 import withLoadingIndicator from '../../../../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../../../../HOC/withErrorMessageHandler';
 import { makeDataElementsSelector } from './reviewDialogContents.selectors';
@@ -9,6 +9,7 @@ import { makeDataElementsSelector } from './reviewDialogContents.selectors';
 const makeMapStateToProps = () => {
     const dataElementsSelector = makeDataElementsSelector();
     const mapStateToProps = (state: ReduxState, props: Object) => ({
+        currentProgramId: state.newRelationshipRegisterTei.programId,
         ready: !state.newRelationshipRegisterTeiDuplicatesReview.isLoading,
         isUpdating: state.newRelationshipRegisterTeiDuplicatesReview.isUpdating,
         error: state.newRelationshipRegisterTeiDuplicatesReview.loadError ?
@@ -24,10 +25,10 @@ const mapDispatchToProps = () => ({
 });
 
 // $FlowFixMe
-export default connect(makeMapStateToProps, mapDispatchToProps)(
+export const ReviewDialogContents = connect(makeMapStateToProps, mapDispatchToProps)(
     withLoadingIndicator(() => ({ padding: 5, width: 640, height: 500 }))(
         withErrorMessageHandler()(
-            ReviewDialogContents,
+            ReviewDialogContentsComponent,
         ),
     ),
 );

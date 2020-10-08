@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import ReviewDialogContents from './ReviewDialogContents.container';
+import { ReviewDialogContents } from './ReviewDialogContents.container';
 
 type Props = {
     open: boolean,

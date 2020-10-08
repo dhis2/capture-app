@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { pipe } from 'capture-core-utils';
 import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
@@ -10,15 +9,8 @@ import Button from '../../../../Buttons/Button.component';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
 import { LoadingMask } from '../../../../LoadingMasks';
-import {
-    convertFormToClient,
-    convertClientToList,
-} from '../../../../../converters';
-
-const formToListConverterFn = pipe(
-    convertFormToClient,
-    convertClientToList,
-);
+import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';
+import { SearchResultsHeader } from '../../../../SearchResultsHeader';
 
 const SearchResultsPager = withNavigation()(Pagination);
 
@@ -31,6 +23,7 @@ type Props = {
     onChangePage: (page: number) => void,
     onAddRelationship: (id: string, values: Object) => void,
     trackedEntityTypeName: string,
+    selectedProgramId: ?string,
     classes: {
         itemActionsContainer: string,
         addRelationshipButton: string,
@@ -100,11 +93,13 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
 
     renderResults = () => {
         const attributes = this.getAttributes(this.props);
-        const { teis, trackedEntityTypeName } = this.props;
+        const { teis, trackedEntityTypeName, selectedProgramId } = this.props;
+
         return (
             <React.Fragment>
                 {this.renderTopSection()}
                 <CardList
+                    currentProgramId={selectedProgramId}
                     items={teis}
                     dataElements={attributes}
                     noItemsText={i18n.t('No {{trackedEntityTypeName}} found.', { trackedEntityTypeName })}
@@ -115,42 +110,23 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         );
     }
 
-    getSearchValues = () => {
-        const { searchValues, searchGroup, teis, classes } = this.props;
+    getSearchValues = (): CurrentSearchTerms => {
+        const { searchValues, searchGroup } = this.props;
         const searchForm = searchGroup.searchForm;
-        const attributeValues = Object.keys(searchValues)
+        return Object.keys(searchValues)
             .filter(key => searchValues[key] !== null)
             .map((key) => {
                 const element = searchForm.getElement(key);
                 const value = searchValues[key];
-                const listValue = element.convertValue(value, formToListConverterFn);
-                return (
-                    <span key={key}>
-                        {element.formName}: {listValue}
-                    </span>
-                );
-            }).reduce((accValues, value) => {
-                if (accValues.length > 0) return [...accValues, ', ', value];
-                return [' ', value];
-            }, []);
-
-        const text = i18n.t('{{teiCount}} results found for', {
-            teiCount: teis.length,
-        });
-
-        return (
-            <div className={classes.topSectionValuesContainer}>
-                {text}
-                {attributeValues}
-            </div>
-        );
+                return { name: element.formName, value, id: element.id, type: element.type };
+            });
     }
 
     renderTopSection = () => {
         const { onNewSearch, onEditSearch, classes } = this.props;
         return (
             <div className={classes.topSection}>
-                {this.getSearchValues()}
+                <SearchResultsHeader currentSearchTerms={this.getSearchValues()} />
                 <div>
                     <Button className={classes.actionButton} onClick={onNewSearch}>
                         {i18n.t('New search')}
