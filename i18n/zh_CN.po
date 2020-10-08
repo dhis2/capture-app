@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Aung Kyi Min <AungKyi.Min@savethechildren.org>, 2019
-# 晓东 林 <13981924470@126.com>, 2020
 # easylin <lin_xd@126.com>, 2020
+# 晓东 林 <13981924470@126.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2020\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,6 +36,24 @@ msgid ""
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
+msgstr ""
+
+msgid "Organisation unit"
+msgstr ""
+
+msgid "Date of enrollment"
+msgstr ""
+
+msgid "Last updated"
+msgstr "Last updated"
+
+msgid "Enrolled"
+msgstr ""
+
+msgid "Previously enrolled"
+msgstr ""
+
+msgid "Not enrolled"
 msgstr ""
 
 msgid "Columns to show in table"
@@ -320,14 +338,14 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
+msgid "Start again"
+msgstr ""
+
 msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
 msgstr "新建"
-
-msgid "Start again"
-msgstr ""
 
 msgid "Find"
 msgstr "发现"
@@ -647,6 +665,9 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
+msgid "No results found"
+msgstr "没有发现"
+
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
@@ -671,9 +692,6 @@ msgstr "搜索结果"
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
-msgid "{{teiCount}} results found for"
-msgstr ""
-
 msgid "New search"
 msgstr ""
 
@@ -688,6 +706,56 @@ msgstr ""
 
 msgid "Register"
 msgstr "登记"
+
+msgid "Search scope"
+msgstr "搜索范围"
+
+msgid "Find results from"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+
+msgid "Search {{name}}"
+msgstr ""
+
+msgid "Find by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Back"
+msgstr "后退"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+
+msgid "Make a selection to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr ""
@@ -718,13 +786,13 @@ msgstr ""
 msgid "Add relationship"
 msgstr "添加关系"
 
+msgid "Results found"
+msgstr ""
+
 msgid "Selected program"
 msgstr "选择的项目"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
-
-msgid "Search by attributes"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
@@ -771,6 +839,9 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "设置坐标"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "日期"

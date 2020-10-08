@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -43,6 +43,24 @@ msgstr ""
 " Capture App bare å kjøre en versjon samtidig (i samme domene). Oppdater "
 "denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
 "at dette vil lukke andre versjoner."
+
+msgid "Organisation unit"
+msgstr ""
+
+msgid "Date of enrollment"
+msgstr ""
+
+msgid "Last updated"
+msgstr "Sist oppdatert"
+
+msgid "Enrolled"
+msgstr "Registrert"
+
+msgid "Previously enrolled"
+msgstr "Tidligere registrert"
+
+msgid "Not enrolled"
+msgstr "Ikke registrert"
 
 msgid "Columns to show in table"
 msgstr "Kolonner som skal vises i tabellen"
@@ -328,14 +346,14 @@ msgstr "Programmet finnes ikke"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Valgt program er ugyldig for registreringsenhet"
 
+msgid "Start again"
+msgstr ""
+
 msgid "New {{typeName}}"
 msgstr "Ny {{typeName}}"
 
 msgid "New"
 msgstr "Ny"
-
-msgid "Start again"
-msgstr "Start på nytt"
 
 msgid "Find"
 msgstr "Finn"
@@ -666,6 +684,9 @@ msgstr "Opprett {{trackedEntityTypeName}} og link"
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
 
+msgid "No results found"
+msgstr "Ingen resultater funnet"
+
 msgid "An error occured loading possible duplicates"
 msgstr "En feil oppsto ved lasting av mulige duplikater"
 
@@ -690,9 +711,6 @@ msgstr "Søkeresultater"
 msgid "No {{trackedEntityTypeName}} found."
 msgstr "Ingen {{trackedEntityTypeName}} funnet."
 
-msgid "{{teiCount}} results found for"
-msgstr "{{teiCount}} resultater funnet for"
-
 msgid "New search"
 msgstr "Nytt søk"
 
@@ -707,6 +725,59 @@ msgstr "Opprett ny {{trackedEntityType}}"
 
 msgid "Register"
 msgstr "Registrere"
+
+msgid "Search scope"
+msgstr "Søk omfang"
+
+msgid "Find results from"
+msgstr "Finn resultater fra"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+"Fyll inn minst {{minAttributesRequiredToSearch}} attributter for å søke"
+
+msgid "Search {{name}}"
+msgstr "Søk {{name}}"
+
+msgid "Find by {{name}}"
+msgstr "Finn etter {{name}}"
+
+msgid "Search by attributes"
+msgstr "Søk etter attributter"
+
+msgid "Back"
+msgstr "Tilbake"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
+
+msgid "Back to search"
+msgstr "Tilbake til søk"
+
+msgid "An error has occurred"
+msgstr "Det har oppstått en feil"
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+"Det er et problem med dette søket. Endre søkeordene eller prøv igjen senere."
+" For mer informasjon, åpne konsollfanen i Utviklerverktøy"
+
+msgid "Make a selection to start searching"
+msgstr "Gjør et valg for å begynne å søke"
+
+msgid "View dashboard"
+msgstr "Vis dashbord"
+
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
@@ -739,14 +810,14 @@ msgstr "Du har ikke tilgang til å opprette noen relasjoner"
 msgid "Add relationship"
 msgstr "Legg til relasjon"
 
+msgid "Results found"
+msgstr ""
+
 msgid "Selected program"
 msgstr "Valgt program"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Søk {{uniqueAttrName}}"
-
-msgid "Search by attributes"
-msgstr "Søk etter attributter"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Fyll inn minst {{minAttributesRequired}} attributter for å søke"
@@ -792,6 +863,9 @@ msgstr "Sporet enhetforekomst"
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "Dato"
