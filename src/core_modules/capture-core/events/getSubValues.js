@@ -4,13 +4,15 @@ import { config } from 'd2';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import { errorCreator } from 'capture-core-utils';
 import getD2, { getApi } from '../d2/d2Instance';
-import { type RenderFoundation, dataElementTypes } from '../metaData';
+import type { RenderFoundation } from '../metaData';
+import elementTypeKeys from '../metaData/DataElement/elementTypes';
 
 const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 
 const subValueGetterByElementType = {
     // todo (report lgmt)
-    [dataElementTypes.FILE_RESOURCE]: (value: any, eventId: string, metaElementId: string) => {
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypeKeys.FILE_RESOURCE]: (value: any, eventId: string, metaElementId: string) => {
         const baseUrl = config.baseUrl;
         return getApi().get(`fileResources/${value}`)
             .then(res =>
@@ -24,7 +26,8 @@ const subValueGetterByElementType = {
                 return null;
             });
     },
-    [dataElementTypes.IMAGE]: (value: any, eventId: string, metaElementId: string) => {
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypeKeys.IMAGE]: (value: any, eventId: string, metaElementId: string) => {
         const baseUrl = config.baseUrl;
         return getApi().get(`fileResources/${value}`)
             .then(res =>
@@ -38,7 +41,8 @@ const subValueGetterByElementType = {
                 return null;
             });
     },
-    [dataElementTypes.ORGANISATION_UNIT]: (value: any, eventId: string, metaElementId: string) => {
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypeKeys.ORGANISATION_UNIT]: (value: any, eventId: string, metaElementId: string) => {
         const ouIds = value.split('/');
         const id = ouIds[ouIds.length - 1];
         return getD2()
@@ -72,7 +76,6 @@ export async function getSubValues(eventId: string, programStage: RenderFoundati
         const value = values[metaElementId];
         const metaElement = elementsById[metaElementId];
         if (isDefined(value) && value !== null && metaElement) {
-            // $FlowFixMe dataElementTypes flow error
             const subValueGetter = subValueGetterByElementType[metaElement.type];
             if (subValueGetter) {
                 const subValue = await subValueGetter(value, eventId, metaElementId);

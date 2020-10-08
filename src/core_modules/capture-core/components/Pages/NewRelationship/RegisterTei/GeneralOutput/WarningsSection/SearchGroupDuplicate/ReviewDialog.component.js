@@ -13,7 +13,7 @@ type Props = {
 };
 
 const StyledDialogActions = withStyles({
-    root: { margin: '0px 24px 24px' },
+    root: { margin: 24 },
 })(DialogActions);
 
 class ReviewDialog extends React.Component<Props > {

@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'capture-core-utils/moment/momentResolver';
 import { convertValue as convertListValue } from '../../../../../converters/clientToList';
-import { dataElementTypes } from '../../../../../metaData';
+import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 import {
     actionTypes as editEventDataEntryActionTypes,
     batchActionTypes as editEventDataEntryBatchActionTypes,
@@ -39,7 +39,8 @@ export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: R
             };
 
             const clientNote = { value: payload.note, storedBy: userName, storedDate: moment().toISOString(), clientId: uuid() };
-            const formNote = { ...clientNote, storedDate: convertListValue(clientNote.storedDate, dataElementTypes.DATETIME) };
+            // $FlowFixMe[prop-missing] automated comment
+            const formNote = { ...clientNote, storedDate: convertListValue(clientNote.storedDate, elementTypes.DATETIME) };
             const saveContext = {
                 dataEntryId: payload.dataEntryId,
                 itemId: payload.itemId,

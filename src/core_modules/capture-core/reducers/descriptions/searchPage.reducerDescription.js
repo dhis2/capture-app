@@ -42,8 +42,7 @@ export const searchPageDesc = createReducerDescription({
     searchResults: [],
     currentSearchInfo: [],
     searchResultsPaginationInfo: {
-        rowsCount: 0,
-        rowsPerPage: 0,
+        nextPageButtonDisabled: false,
         currentPage: 0,
     },
 });

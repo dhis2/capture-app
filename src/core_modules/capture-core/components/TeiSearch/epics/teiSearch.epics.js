@@ -1,8 +1,8 @@
 // @flow
 import isArray from 'd2-utilizr/src/isArray';
-import { from } from 'rxjs';
+import { from, of } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { map, takeUntil, switchMap, filter } from 'rxjs/operators';
+import { map, takeUntil, switchMap, filter, catchError } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { convertValue as convertToClient } from '../../../converters/formToClient';
 import { convertValue as convertToServer } from '../../../converters/clientToServer';
@@ -40,7 +40,7 @@ const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) =>
 const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>
     (programId ? { program: programId } : { trackedEntityType: trackedEntityTypeId });
 
-const getPagingQueryArgs = (pageNumber: ?number) => (pageNumber ? { page: pageNumber, pageSize: 5 } : { pageSize: 5 });
+const getPagingQueryArgs = (pageNumber: ?number = 1) => ({ page: pageNumber, pageSize: 5 });
 
 
 const searchTei = (state: ReduxState, searchId: string, formId: string, searchGroupId: any, pageNumber?: ?number) => {
@@ -79,15 +79,19 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
     const attributes = selectedProgramId ?
         getTrackerProgram(selectedProgramId).attributes :
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
-    return getTrackedEntityInstances(queryArgs, attributes).then(data =>
-        searchTeiResultRetrieved(
-            data,
-            formId,
-            searchGroupId,
-            searchId,
-        ),
-    )
-        .catch(() => searchTeiFailed(formId, searchGroupId, searchId));
+
+    return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+        map(({ trackedEntityInstanceContainers, pagingData }) => {
+            const nextPageButtonDisabled = Boolean(trackedEntityInstanceContainers.length < pagingData.rowsPerPage);
+            return searchTeiResultRetrieved(
+                { trackedEntityInstanceContainers, pagingData: { currentPage: pagingData.currentPage, nextPageButtonDisabled } },
+                formId,
+                searchGroupId,
+                searchId,
+            );
+        }),
+        catchError(() => of(searchTeiFailed(formId, searchGroupId, searchId))),
+    );
 };
 
 export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -97,14 +101,14 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
             const state = store.value;
             const { pageNumber, searchId } = action.payload;
             const currentTeiSearch = state.teiSearch[searchId];
-            const searchTeiPromise = searchTei(
+            const searchTeiStream = searchTei(
                 state,
                 searchId,
                 currentTeiSearch.searchResults.formId,
                 currentTeiSearch.searchResults.searchGroupId,
                 pageNumber,
             );
-            return from(searchTeiPromise).pipe(
+            return from(searchTeiStream).pipe(
                 takeUntil(
                     action$.pipe(ofType(
                         actionTypes.REQUEST_SEARCH_TEI,
@@ -123,8 +127,8 @@ export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
         switchMap((action) => {
             const state = store.value;
             const { formId, searchGroupId, searchId } = action.payload;
-            const searchTeiPromise = searchTei(state, searchId, formId, searchGroupId);
-            return from(searchTeiPromise).pipe(
+            const searchTeiStream = searchTei(state, searchId, formId, searchGroupId);
+            return from(searchTeiStream).pipe(
                 takeUntil(action$.pipe(
                     ofType(
                         actionTypes.REQUEST_SEARCH_TEI,

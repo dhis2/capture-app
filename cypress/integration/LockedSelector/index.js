@@ -4,12 +4,12 @@ beforeEach(() => {
 
 Given('you are in the main page with no selections made', () => {
     cy.visit('/#/');
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
+    cy.get('[data-test="dhis2-capture-new-button"]')
         .should('exist');
 });
 
 When('you click the "New" button to add a new event', () => {
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
+    cy.get('[data-test="dhis2-capture-new-button"]')
         .click();
 });
 
@@ -21,13 +21,13 @@ Then('you should see informative text saying you should do finish your selection
 
 Given('you are in the main page with organisation unit preselected', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
+    cy.get('[data-test="dhis2-capture-new-button"]')
         .should('exist');
 });
 
 Given('you are in the main page with program unit preselected', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
+    cy.get('[data-test="dhis2-capture-new-button"]')
         .should('exist');
 });
 

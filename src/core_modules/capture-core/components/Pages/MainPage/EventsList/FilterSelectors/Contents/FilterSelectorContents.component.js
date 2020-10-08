@@ -41,26 +41,44 @@ class FilterSelectorContents extends React.PureComponent<Props> {
     }
 
     static selectorContentsForTypes = {
+        // $FlowFixMe[prop-missing] automated comment
         [filterTypesObject.TEXT]: TextFilter,
+        // $FlowFixMe[prop-missing] automated comment
         [filterTypesObject.NUMBER]: NumericFilter,
+        // $FlowFixMe[prop-missing] automated comment
         [filterTypesObject.INTEGER]: NumericFilter,
+        // $FlowFixMe[prop-missing] automated comment
         [filterTypesObject.INTEGER_POSITIVE]: NumericFilter,
+        // $FlowFixMe[prop-missing] automated comment
         [filterTypesObject.INTEGER_NEGATIVE]: NumericFilter,
+        // $FlowFixMe[prop-missing] automated comment
         [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: NumericFilter,
+        // $FlowFixMe[prop-missing] automated comment
         [filterTypesObject.DATE]: DateFilter,
+        // $FlowFixMe[prop-missing] automated comment
         [filterTypesObject.BOOLEAN]: BooleanFilter,
+        // $FlowFixMe[prop-missing] automated comment
         [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
+        // $FlowFixMe[invalid-computed-prop] automated comment
         [filterTypesObject.ASSIGNEE]: AssigneeFilter,
     };
 
     static hasStylesHOC = [
+        // $FlowFixMe[prop-missing] automated comment
         filterTypesObject.NUMBER,
+        // $FlowFixMe[prop-missing] automated comment
         filterTypesObject.INTEGER,
+        // $FlowFixMe[prop-missing] automated comment
         filterTypesObject.INTEGER_POSITIVE,
+        // $FlowFixMe[prop-missing] automated comment
         filterTypesObject.INTEGER_NEGATIVE,
+        // $FlowFixMe[prop-missing] automated comment
         filterTypesObject.INTEGER_ZERO_OR_POSITIVE,
+        // $FlowFixMe[prop-missing] automated comment
         filterTypesObject.DATE,
+        // $FlowFixMe[prop-missing] automated comment
         filterTypesObject.BOOLEAN,
+        // $FlowFixMe[prop-missing] automated comment
         filterTypesObject.TRUE_ONLY,
         filterTypesObject.ASSIGNEE,
     ];

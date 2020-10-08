@@ -2,7 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { convertClientToList } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
-import { dataElementTypes } from '../../metaData';
+import elementTypeKeys from '../../metaData/DataElement/elementTypes';
 
 export function convertMainEventClientToList(event: Object) {
     // eslint-disable-next-line complexity
@@ -13,7 +13,8 @@ export function convertMainEventClientToList(event: Object) {
         case 'eventDate':
         case 'dueDate':
         case 'completedDate':
-            convertedValue = convertClientToList(value, dataElementTypes.DATE);
+            // $FlowFixMe[prop-missing] automated comment
+            convertedValue = convertClientToList(value, elementTypeKeys.DATE);
             break;
         case 'assignee':
             convertedValue = `${value.name} (${value.username})`;

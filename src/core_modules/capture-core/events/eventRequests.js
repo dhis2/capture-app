@@ -4,7 +4,7 @@ import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../d2/d2Instance';
 import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
-import { dataElementTypes } from '../metaData';
+import elementTypes from '../metaData/DataElement/elementTypes';
 import { getSubValues } from './getSubValues';
 
 type ApiDataValue = {
@@ -65,7 +65,8 @@ const mapEventInputKeyToOutputKey = {
 function getConvertedValue(valueToConvert: any, inputKey: string) {
     let convertedValue;
     if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
-        convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
+        // $FlowFixMe[prop-missing] automated comment
+        convertedValue = convertValue(valueToConvert, elementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
     }
@@ -144,14 +145,11 @@ export async function getEvent(eventId: string): Promise<?ClientEventContainer> 
     return eventContainer;
 }
 
-export async function getEvents(queryParams: ?Object) {
+export async function getEvents(queryParams: Object) {
     const api = getApi();
     const req = {
         url: 'events',
-        queryParams: {
-            ...queryParams,
-            totalPages: true,
-        },
+        queryParams,
     };
     const apiRes = await api
         .get(req.url, { ...req.queryParams });
@@ -166,9 +164,8 @@ export async function getEvents(queryParams: ?Object) {
     }, Promise.resolve([])) : null;
 
     const pagingData = {
-        rowsCount: apiRes.pager.total,
-        rowsPerPage: apiRes.pager.pageSize,
-        currentPage: apiRes.pager.page,
+        rowsPerPage: queryParams.pageSize,
+        currentPage: queryParams.page,
     };
 
     return {

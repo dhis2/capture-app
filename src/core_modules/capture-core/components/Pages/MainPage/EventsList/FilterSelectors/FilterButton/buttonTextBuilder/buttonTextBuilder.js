@@ -11,16 +11,27 @@ import {
 import { isEqual } from '../../../../../../../utils/valueEqualityChecker';
 import type { OptionSetFilterData } from '../../../eventList.types';
 
+// todo (report lgmt)
 const convertersForTypes = {
+    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.TEXT]: convertText,
+    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.NUMBER]: convertNumeric,
+    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER]: convertNumeric,
+    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_POSITIVE]: convertNumeric,
+    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_NEGATIVE]: convertNumeric,
+    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
+    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.DATE]: convertDate,
+    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.ASSIGNEE]: convertAssignee,
+    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.BOOLEAN]: convertBoolean,
+    // $FlowFixMe[prop-missing] automated comment
     [dataElementTypes.TRUE_ONLY]: convertTrueOnly,
 };
 
@@ -39,13 +50,12 @@ function getOptionSetText(filter: OptionSetFilterData, optionSet: OptionSet) {
 
 export function buildButtonText(
     filter: any,
-    type: $Keys<typeof dataElementTypes>,
+    type: $Values<typeof dataElementTypes>,
     optionSet: OptionSet,
 ) {
     if (filter.usingOptionSet && optionSet) {
         return getOptionSetText(filter, optionSet);
     }
 
-    // $FlowFixMe dataElementTypes flow error
     return (convertersForTypes[type] ? convertersForTypes[type](filter) : filter);
 }

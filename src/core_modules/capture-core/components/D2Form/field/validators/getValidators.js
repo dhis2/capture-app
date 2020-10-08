@@ -1,4 +1,5 @@
 // @flow
+import isArray from 'd2-utilizr/lib/isArray';
 import isString from 'd2-utilizr/lib/isString';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -26,10 +27,11 @@ import {
     getDateTimeRangeValidator,
     getTimeRangeValidator,
 } from '../../../../utils/validators/form';
-import { dataElementTypes, type DateDataElement, type DataElement } from '../../../../metaData';
+import type { DataElement, DateDataElement } from '../../../../metaData';
+import { dataElementTypes as elementTypes } from '../../../../metaData';
 import { validatorTypes } from './constants';
 
-type Validator = (value: any) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any};
+type Validator = (value: any) => Promise<boolean> | boolean;
 
 type ValidatorContainer = {
     validator: Validator,
@@ -69,144 +71,158 @@ const compulsoryValidatorWrapper = (value: any) => {
     return hasValue(trimmedValue);
 };
 
-const validatorForInteger = {
+const validatorForInteger = () => ({
     validator: isValidInteger,
     message: errorMessages.INTEGER,
-    type: validatorTypes.TYPE_BASE,
-};
+});
 
-const validatorForPositiveInteger = {
+const validatorForPositiveInteger = () => ({
     validator: isValidPositiveInteger,
     message: errorMessages.POSITIVE_INTEGER,
-    type: validatorTypes.TYPE_BASE,
-};
+});
 
-const validatorForZeroOrPositiveInteger = {
+const validatorForZeroOrPositiveInteger = () => ({
     validator: isValidZeroOrPositiveInteger,
     message: errorMessages.ZERO_OR_POSITIVE_INTEGER,
-    type: validatorTypes.TYPE_BASE,
-};
+});
 
-const validatorForNegativeInteger = {
+const validatorForNegativeInteger = () => ({
     validator: isValidNegativeInteger,
     message: errorMessages.NEGATIVE_INTEGER,
-    type: validatorTypes.TYPE_BASE,
-};
+});
 
-const validatorForNumber = {
+const validatorForNumber = () => ({
     validator: isValidNumber,
     message: errorMessages.NUMBER,
-    type: validatorTypes.TYPE_BASE,
-};
+});
 
+// todo (report lgtm)
 const validatorsForTypes = {
-    [dataElementTypes.NUMBER]: [validatorForNumber],
-    [dataElementTypes.INTEGER]: [validatorForInteger],
-    [dataElementTypes.INTEGER_POSITIVE]: [validatorForPositiveInteger],
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: [validatorForZeroOrPositiveInteger],
-    [dataElementTypes.INTEGER_NEGATIVE]: [validatorForNegativeInteger],
-    [dataElementTypes.TIME]: [{
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.NUMBER]: validatorForNumber,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER]: validatorForInteger,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER_POSITIVE]: validatorForPositiveInteger,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: validatorForZeroOrPositiveInteger,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER_NEGATIVE]: validatorForNegativeInteger,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.TIME]: () => ({
         validator: isValidTime,
         message: errorMessages.TIME,
-        type: validatorTypes.TYPE_BASE,
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.DATE]: (dateDataElement: DateDataElement) => [{
+        validator: isValidDate,
+        message: errorMessages.DATE,
+    }, {
+        validator: (value: string) =>
+            (dateDataElement.allowFutureDate ? true : isValidNonFutureDate(value)),
+        type: validatorTypes.TYPE_EXTENDED,
+        message: errorMessages.DATE_FUTURE_NOT_ALLOWED,
     }],
-    [dataElementTypes.DATE]: [
-        {
-            validator: isValidDate,
-            message: errorMessages.DATE,
-            type: validatorTypes.TYPE_BASE,
-        },
-        {
-            validator: (value: string, allowFutureDate) => (allowFutureDate ? true : isValidNonFutureDate(value)),
-            type: validatorTypes.TYPE_EXTENDED,
-            message: errorMessages.DATE_FUTURE_NOT_ALLOWED,
-        }],
-    [dataElementTypes.DATETIME]: [{
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.DATETIME]: () => ({
         validator: isValidDateTime,
         message: errorMessages.DATETIME,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.EMAIL]: [{
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.EMAIL]: () => ({
         validator: isValidEmail,
         message: errorMessages.EMAIL,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.PERCENTAGE]: [{
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.PERCENTAGE]: () => ({
         validator: isValidPercentage,
         message: errorMessages.PERCENTAGE,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.URL]: [{
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.URL]: () => ({
         validator: isValidUrl,
         message: errorMessages.URL,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.AGE]: [{
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.AGE]: () => ({
         validator: isValidAge,
         message: errorMessages.AGE,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.PHONE_NUMBER]: [{
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.PHONE_NUMBER]: () => ({
         validator: isValidPhoneNumber,
         message: errorMessages.PHONE_NUMBER,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.ORGANISATION_UNIT]: [{
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.ORGANISATION_UNIT]: () => ({
         validator: isValidOrgUnit,
         message: errorMessages.ORGANISATION_UNIT,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.COORDINATE]: [{
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.COORDINATE]: () => ({
         validator: isValidCoordinate,
         message: errorMessages.COORDINATE,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.DATE_RANGE]: [{
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.DATE_RANGE]: () => ({
         validator: getDateRangeValidator(errorMessages.DATE),
         message: errorMessages.RANGE,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.DATETIME_RANGE]: [{
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.DATETIME_RANGE]: () => ({
         validator: getDateTimeRangeValidator(errorMessages.DATETIME),
         message: errorMessages.RANGE,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.TIME_RANGE]: [{
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.TIME_RANGE]: () => ({
         validator: getTimeRangeValidator(errorMessages.TIME),
         message: errorMessages.RANGE,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.NUMBER_RANGE]: [{
-        validator: getNumberRangeValidator(validatorForNumber),
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.NUMBER_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForNumber()),
         message: errorMessages.RANGE,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.INTEGER_RANGE]: [{
-        validator: getNumberRangeValidator(validatorForInteger),
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForInteger()),
         message: errorMessages.RANGE,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.INTEGER_POSITIVE_RANGE]: [{
-        validator: getNumberRangeValidator(validatorForPositiveInteger),
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER_POSITIVE_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForPositiveInteger()),
         message: errorMessages.RANGE,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: [{
-        validator: getNumberRangeValidator(validatorForZeroOrPositiveInteger),
+    }),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForZeroOrPositiveInteger()),
         message: errorMessages.RANGE,
-        type: validatorTypes.TYPE_BASE,
-    }],
-    [dataElementTypes.INTEGER_NEGATIVE_RANGE]: [{
-        validator: getNumberRangeValidator(validatorForNegativeInteger),
-        message: errorMessages.RANGE,
-        type: validatorTypes.TYPE_BASE,
+    }),
 
-    }],
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER_NEGATIVE_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForNegativeInteger()),
+        message: errorMessages.RANGE,
+    }),
 };
 
-function buildTypeValidators(metaData: DataElement | DateDataElement): Array<?ValidatorContainer> {
-    // $FlowFixMe dataElementTypes flow error
-    let validatorContainersForType = validatorsForTypes[metaData.type] ? validatorsForTypes[metaData.type] : [];
+function buildTypeValidators(metaData: DataElement): Array<ValidatorContainer> {
+    let validatorContainersForType = validatorsForTypes[metaData.type] && validatorsForTypes[metaData.type](metaData);
+
+    if (!validatorContainersForType) {
+        return [];
+    }
+
+    validatorContainersForType = isArray(validatorContainersForType) ?
+        validatorContainersForType :
+        [validatorContainersForType]
+    ;
+
+    validatorContainersForType = validatorContainersForType
+        .map(validatorContainer => ({
+            type: validatorTypes.TYPE_BASE,
+            ...validatorContainer,
+        }));
 
 
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
@@ -217,50 +233,42 @@ function buildTypeValidators(metaData: DataElement | DateDataElement): Array<?Va
             }
 
             const toValidateValue = isString(value) ? value.trim() : value;
-            // $FlowFixMe dataElementTypes flow error
-            return validatorContainer.validator(toValidateValue, metaData.allowFutureDate);
+            return validatorContainer.validator(toValidateValue);
         },
     }));
 
     return validatorContainersForType;
 }
 
-function buildCompulsoryValidator(metaData: DataElement): Array<?ValidatorContainer> {
-    return metaData.compulsory
-        ?
-        [
-            {
-                validator: compulsoryValidatorWrapper,
-                message:
+function buildCompulsoryValidator(metaData: DataElement): Array<ValidatorContainer> {
+    return metaData.compulsory ? [
+        {
+            validator: compulsoryValidatorWrapper,
+            message:
                 errorMessages.COMPULSORY,
-            },
-        ]
-        :
+        },
+    ] :
         [];
 }
 
-function buildUniqueValidator(metaData: DataElement): Array<?ValidatorContainer> {
-    return metaData.unique
-        ?
-        [
-            {
-                validator: (value: any, contextProps: ?Object) => {
-                    if (!value && value !== 0 && value !== false) {
-                        return true;
-                    }
-                    // $FlowFixMe
-                    return metaData.unique.onValidate(value, contextProps);
-                },
-                message: errorMessages.UNIQUENESS,
-                validatingMessage: validationMessages.UNIQUENESS,
-                type: validatorTypes.UNIQUE,
+function buildUniqueValidator(metaData: DataElement): Array<ValidatorContainer> {
+    return metaData.unique ? [
+        {
+            validator: (value: any, contextProps: ?Object) => {
+                if (!value && value !== 0 && value !== false) {
+                    return true;
+                }
+                // $FlowFixMe
+                return metaData.unique.onValidate(value, contextProps);
             },
-        ]
-        :
-        [];
+            message: errorMessages.UNIQUENESS,
+            validatingMessage: validationMessages.UNIQUENESS,
+            type: validatorTypes.UNIQUE,
+        },
+    ] : [];
 }
 
-export const getValidators = (metaData: DataElement): Array<?ValidatorContainer> => [
+export const getValidators = (metaData: DataElement): Array<ValidatorContainer> => [
     buildCompulsoryValidator,
     buildTypeValidators,
     buildUniqueValidator,

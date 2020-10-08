@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import moment from 'capture-core-utils/moment/momentResolver';
 import { convertValue as convertListValue } from '../../../../../converters/clientToList';
-import { dataElementTypes } from '../../../../../metaData';
+import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 import {
     actionTypes as newEventDataEntryActionTypes,
 } from '../actions/dataEntry.actions';
@@ -26,7 +26,8 @@ export const addNoteForNewSingleEventEpic = (action$: InputObservable) =>
             const note = {
                 value: payload.note,
                 storedBy: userName,
-                storedDate: convertListValue(storedDate, dataElementTypes.DATETIME),
+                // $FlowFixMe[prop-missing] automated comment
+                storedDate: convertListValue(storedDate, elementTypes.DATETIME),
                 clientId: uuid(),
             };
 

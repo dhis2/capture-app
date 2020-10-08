@@ -170,7 +170,6 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
             <div className={classes.pagination}>
                 <SearchResultsPager
                     onChangePage={onChangePage}
-                    onGetLabelDisplayedRows={(a, b) => `${a} of ${b}`}
                     {...paging}
                 />
             </div>

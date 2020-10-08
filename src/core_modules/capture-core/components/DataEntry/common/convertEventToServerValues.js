@@ -1,6 +1,6 @@
 // @flow
 import { convertValue } from '../../../converters/clientToServer';
-import { dataElementTypes } from '../../../metaData';
+import elementTypes from '../../../metaData/DataElement/elementTypes';
 
 const mapEventClientKeyToServerKey = {
     eventId: 'event',
@@ -18,7 +18,8 @@ export default function getServerValuesToSaveFromMainEvent(event: CaptureClientE
             const valueToConvert = event[inputKey];
             let convertedValue;
             if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
-                convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
+                // $FlowFixMe[prop-missing] automated comment
+                convertedValue = convertValue(valueToConvert, elementTypes.DATE);
             } else {
                 convertedValue = valueToConvert;
             }

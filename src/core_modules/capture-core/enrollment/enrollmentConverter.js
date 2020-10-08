@@ -1,9 +1,9 @@
 // @flow
-import { dataElementTypes } from '../metaData';
+import elementTypes from '../metaData/DataElement/elementTypes';
 import { convertValue as convertToServerValue } from '../converters/clientToServer';
 import { convertValue as convertToClientValue } from '../converters/serverToClient';
 
-type ConverterFn = (type: $Keys<typeof dataElementTypes>, value: any) => any;
+type ConverterFn = (type: $Values<typeof elementTypes>, value: any) => any;
 
 type InputCompareKeys = {
     enrollmentDate?: ?string,
@@ -18,7 +18,8 @@ type CompareKeys = {
 function getConvertedValue(valueToConvert: any, key: string, onConvertValue: ConverterFn, compareKeys: CompareKeys) {
     let convertedValue;
     if (key === compareKeys.enrollmentDate || key === compareKeys.incidentDate) {
-        convertedValue = onConvertValue(valueToConvert, dataElementTypes.DATE);
+        // $FlowFixMe[prop-missing] automated comment
+        convertedValue = onConvertValue(valueToConvert, elementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
     }

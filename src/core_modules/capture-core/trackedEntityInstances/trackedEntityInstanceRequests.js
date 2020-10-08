@@ -42,10 +42,10 @@ async function convertToClientTei(apiTei: ApiTrackedEntityInstance, attributes: 
     };
 }
 
-export async function getTrackedEntityInstances(queryParams: ?Object, attributes: Array<DataElments>) {
+export async function getTrackedEntityInstances(queryParams: Object, attributes: Array<DataElments>) {
     const api = getApi();
     const apiRes = await api
-        .get('trackedEntityInstances', { ...queryParams, totalPages: true });
+        .get('trackedEntityInstances', queryParams);
 
     const trackedEntityInstanceContainers = apiRes && apiRes.trackedEntityInstances ? await apiRes.trackedEntityInstances.reduce(async (accTeiPromise, apiTei) => {
         const accTeis = await accTeiPromise;
@@ -57,9 +57,8 @@ export async function getTrackedEntityInstances(queryParams: ?Object, attributes
     }, Promise.resolve([])) : null;
 
     const pagingData = {
-        rowsCount: apiRes.pager.total,
-        rowsPerPage: apiRes.pager.pageSize,
-        currentPage: apiRes.pager.page,
+        rowsPerPage: queryParams.pageSize,
+        currentPage: queryParams.page,
     };
     return {
         trackedEntityInstanceContainers,

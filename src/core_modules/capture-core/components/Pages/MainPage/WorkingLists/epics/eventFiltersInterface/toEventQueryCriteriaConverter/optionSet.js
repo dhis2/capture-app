@@ -1,6 +1,8 @@
 // @flow
 import { moment } from 'capture-core-utils/moment';
-import { dataElementTypes } from '../../../../../../../metaData';
+import {
+    dataElementTypes as elementTypes,
+} from '../../../../../../../metaData';
 
 import type {
     ApiDataFilterOptionSet,
@@ -9,7 +11,9 @@ import type {
     OptionSetFilterData,
 } from '../../../../EventsList/eventList.types';
 
-const stringifyNumber = (rawValue: number) => rawValue.toString();
+const stringifyNumber = (rawValue: number) => {
+    rawValue.toString();
+};
 
 const convertDate = (rawValue: string): string => {
     const momentDate = moment(rawValue);
@@ -18,20 +22,27 @@ const convertDate = (rawValue: string): string => {
 };
 
 const converterByType = {
-    [dataElementTypes.NUMBER]: stringifyNumber,
-    [dataElementTypes.INTEGER]: stringifyNumber,
-    [dataElementTypes.INTEGER_POSITIVE]: stringifyNumber,
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
-    [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
-    [dataElementTypes.DATE]: convertDate,
-    [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
-    [dataElementTypes.TRUE_ONLY]: () => 'true',
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.NUMBER]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER_POSITIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.DATE]: convertDate,
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypes.TRUE_ONLY]: () => 'true',
 };
 
 export const getApiOptionSetFilter =
-    (filter: OptionSetFilterData, type: $Keys<typeof dataElementTypes>): ApiDataFilterOptionSet => ({
+    (filter: OptionSetFilterData, type: $Values<typeof elementTypes>): ApiDataFilterOptionSet => ({
         in: filter
             .values
-            // $FlowFixMe dataElementTypes flow error
             .map(value => (converterByType[type] ? converterByType[type](value) : value.toString())),
     });

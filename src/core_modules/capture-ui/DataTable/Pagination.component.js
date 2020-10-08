@@ -1,29 +1,16 @@
 // @flow
 import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import defaultClasses from './table.module.css';
 
 type Props = {
-    rowsCount: number,
-    rowsPerPage: number,
     currentPage: number,
     rowsCountSelector?: ?React.Node,
     rowsCountSelectorLabel?: ?string,
     navigationElements: React.Node,
-    onGetLabelDisplayedRows?: ?(fromToLabel: string, totalLabel: string) => string,
 };
 
 class Pagination extends React.Component<Props> {
-    static getFromToLabel(rowsCount: number, rowsPerPage: number, currentPage: number) {
-        const fromCount = (rowsPerPage * (currentPage - 1)) + 1;
-
-        if (fromCount > rowsCount) {
-            return '-';
-        }
-
-        const toCount = Math.min(rowsPerPage * currentPage, rowsCount);
-        return `${fromCount}-${toCount}`;
-    }
-
     static getRowsCountElement(rowsCountSelectorLabel?: ?string, rowsCountSelector?: ?React.Node) {
         if (!rowsCountSelector) {
             return null;
@@ -43,42 +30,27 @@ class Pagination extends React.Component<Props> {
         ) : rowsCountSelector;
     }
 
-    static wrapDisplayedRowsElement(displayedRows: React.Node) {
-        return (
-            <div
-                className={defaultClasses.paginationDisplayRowsContainer}
-            >
-                {displayedRows}
-            </div>
-        );
-    }
-
-    static defaultProps = {
-        onGetLabelDisplayedRows: (a: number, b: number) => `${a} of ${b}`,
-    };
 
     render() {
         const {
-            rowsCount,
-            rowsPerPage,
             currentPage,
             rowsCountSelector,
             rowsCountSelectorLabel,
             navigationElements,
-            onGetLabelDisplayedRows } = this.props;
+        } = this.props;
 
         const rowsCountElement = Pagination.getRowsCountElement(rowsCountSelectorLabel, rowsCountSelector);
-        const displayedRows = onGetLabelDisplayedRows &&
-        Pagination.wrapDisplayedRowsElement(
-            onGetLabelDisplayedRows(
-                Pagination.getFromToLabel(rowsCount, rowsPerPage, currentPage), rowsCount.toString()),
-        );
         return (
             <div
                 className={defaultClasses.pagination}
             >
                 {rowsCountElement}
-                {displayedRows}
+                {
+                    currentPage &&
+                    <div className={defaultClasses.paginationDisplayRowsContainer}>
+                        {i18n.t('Page {{currentPage}}', { currentPage })}
+                    </div>
+                }
                 {navigationElements}
             </div>
         );

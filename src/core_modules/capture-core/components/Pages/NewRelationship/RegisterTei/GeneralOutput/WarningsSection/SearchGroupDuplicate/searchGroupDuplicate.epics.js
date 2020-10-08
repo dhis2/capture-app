@@ -71,7 +71,6 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 ouMode: 'ACCESSIBLE',
                 pageSize: 5,
                 page: requestPage,
-                totalPages: !isChangePage,
                 filter: filters,
                 ...contextParam,
             };
@@ -80,8 +79,16 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 getTrackedEntityTypeThrowIfNotFound((contextParam.trackedEntityType)).attributes;
 
             return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-                map(({ trackedEntityInstanceContainers: searchResults, pagingData }) =>
-                    duplicatesForReviewRetrievalSuccess(searchResults, pagingData)),
+                map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
+                    const nextPageButtonDisabled = Boolean(searchResults.length < pagingData.rowsPerPage);
+                    return duplicatesForReviewRetrievalSuccess(
+                        searchResults,
+                        {
+                            currentPage: pagingData.currentPage,
+                            nextPageButtonDisabled,
+                        },
+                    );
+                }),
                 catchError(() => of(duplicatesForReviewRetrievalFailed())),
 
             );

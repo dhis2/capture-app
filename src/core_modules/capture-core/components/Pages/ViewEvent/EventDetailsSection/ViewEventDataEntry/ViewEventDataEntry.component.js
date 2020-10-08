@@ -112,6 +112,7 @@ const viewModeComponent = withDefaultFieldContainer()(
 const buildReportDateSettingsFn = () => {
     const dataElement = new DataElement((o) => {
         o.id = 'eventDate';
+        // $FlowFixMe[prop-missing] automated comment
         o.type = dataElementTypes.DATE;
     });
 
@@ -147,6 +148,7 @@ const buildGeometrySettingsFn = () => ({
         }
         const pointDataElement = new DataElement((o) => {
             o.id = 'geometry';
+            // $FlowFixMe[prop-missing] automated comment
             o.type = dataElementTypes.COORDINATE;
         });
 
@@ -166,6 +168,7 @@ const buildGeometrySettingsFn = () => ({
 const buildCompleteFieldSettingsFn = () => {
     const dataElement = new DataElement((o) => {
         o.id = 'complete';
+        // $FlowFixMe[prop-missing] automated comment
         o.type = dataElementTypes.BOOLEAN;
     });
 

@@ -6,7 +6,7 @@ import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../.
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { loadEditDataEntryAsync } from '../../../../DataEntry/templates/dataEntryLoadEdit.template';
 import { getRulesActionsForEvent } from '../../../../../rules/actionsCreator';
-import { dataElementTypes } from '../../../../../metaData';
+import elementTypeKeys from '../../../../../metaData/DataElement/elementTypes';
 import { convertClientToForm } from '../../../../../converters';
 import type { ClientEventContainer } from '../../../../../events/eventRequests';
 
@@ -16,7 +16,8 @@ export const actionTypes = {
 };
 
 function getAssignee(clientAssignee: ?Object) {
-    return clientAssignee ? convertClientToForm(clientAssignee, dataElementTypes.USERNAME) : clientAssignee;
+    // $FlowFixMe[prop-missing] automated comment
+    return clientAssignee ? convertClientToForm(clientAssignee, elementTypeKeys.USERNAME) : clientAssignee;
 }
 
 export const loadViewEventDataEntry =

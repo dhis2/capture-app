@@ -4,7 +4,7 @@ export { Category, CategoryCombination } from './CategoryCombinations';
 export {
     DataElement,
     DateDataElement,
-    dataElementTypes,
+    elementTypes as dataElementTypes,
     Unique as DataElementUnique,
     uniqueScope as dataElementUniqueScope,
 } from './DataElement';

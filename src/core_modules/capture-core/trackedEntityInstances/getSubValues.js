@@ -4,12 +4,14 @@ import { config } from 'd2';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../d2/d2Instance';
-import { type DataElement, dataElementTypes } from '../metaData';
+import elementTypeKeys from '../metaData/DataElement/elementTypes';
+import type { DataElement } from '../metaData';
 
 const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 
 const subValueGetterByElementType = {
-    [dataElementTypes.IMAGE]: (value: any, teiId: string, attributeId: string) => {
+    // $FlowFixMe[prop-missing] automated comment
+    [elementTypeKeys.IMAGE]: (value: any, teiId: string, attributeId: string) => {
         const baseUrl = config.baseUrl;
         return getApi().get(`fileResources/${value}`)
             .then(res =>

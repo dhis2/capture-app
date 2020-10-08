@@ -118,6 +118,27 @@ When('you fill in the last name with values that will return results', () => {
         .blur();
 });
 
+When('for Malaria case you fill in values that will return less than 5 results', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(2)
+        .type('Sara')
+        .blur();
+});
+
+When('for Person you fill in values that will return less than 5 results', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Sara')
+        .blur();
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('Gonzales')
+        .blur();
+});
+
 And('you click search', () => {
     // click outside of the input for the values to be updated
     cy.get('[data-test="dhis2-capture-form-attributes"]').click();
@@ -212,9 +233,9 @@ Then('you can see the first page of the results', () => {
     cy.get('[data-test="dhis2-capture-search-results-list"]')
         .should('exist');
     cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length', 5);
+        .should('have.length.greaterThan', 0);
     cy.get('[data-test="dhis2-capture-search-results-pagination"]')
-        .contains('1-')
+        .contains('Page 1')
         .should('exist');
 });
 
@@ -222,6 +243,12 @@ Then('you can see the first page of the results', () => {
 When('you click the next page button', () => {
     cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
         .click();
+});
+
+And('the next page button is disabled', () => {
+    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+        .should('exist')
+        .should('be.disabled');
 });
 
 When('you click the view dashboard button', () => {
@@ -238,7 +265,7 @@ Then('you can see the second page of the results', () => {
     cy.get('[data-test="dhis2-capture-card-list-item"]')
         .should('have.length.greaterThan', 0);
     cy.get('[data-test="dhis2-capture-search-results-pagination"]')
-        .contains('6-')
+        .contains('Page 2')
         .should('exist');
 });
 

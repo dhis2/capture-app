@@ -41,15 +41,14 @@ export type SearchResultItem = {|
 
 
 export type PropsFromRedux ={|
-  +rowsCount: number,
   +currentPage: number,
-  +rowsPerPage: number,
   +currentSearchScopeType: $Keys<searchScopes>,
   +currentSearchScopeId: string,
   +currentSearchScopeName: string,
   +currentFormId: string,
   +searchResults: Array<SearchResultItem>,
-  +currentSearchTerms: CurrentSearchTerms
+  +currentSearchTerms: CurrentSearchTerms,
+  +nextPageButtonDisabled: boolean,
 |}
 
 export type DispatchersFromRedux = {|

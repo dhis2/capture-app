@@ -6,7 +6,7 @@ import { SearchResultsComponent } from './SearchResults.component';
 import type { OwnProps, Props, PropsFromRedux, DispatchersFromRedux } from './SearchResults.types';
 import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram } from '../SearchPage.actions';
 import { getProgramFromProgramIdThrowIfNotFound, getTrackedEntityTypeThrowIfNotFound } from '../../../../metaData/helpers';
-import { searchScopes } from '../SearchPage.constants';
+import { searchScopes, PAGINATION } from '../SearchPage.constants';
 
 const scopeName = (scopeId: string, scopeType: string) => {
     if (!scopeId) {
@@ -25,7 +25,7 @@ const scopeName = (scopeId: string, scopeType: string) => {
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const {
         searchResults,
-        searchResultsPaginationInfo: { rowsCount, currentPage, rowsPerPage },
+        searchResultsPaginationInfo: { currentPage, nextPageButtonDisabled },
         currentSearchInfo: {
             searchScopeType: currentSearchScopeType,
             searchScopeId: currentSearchScopeId,
@@ -36,25 +36,24 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
 
     const currentSearchScopeName = scopeName(currentSearchScopeId, currentSearchScopeType);
     return {
-        rowsCount,
         currentPage,
-        rowsPerPage,
         searchResults,
         currentSearchScopeType,
         currentSearchScopeId,
         currentSearchScopeName,
         currentFormId,
         currentSearchTerms,
+        nextPageButtonDisabled,
     };
 };
 
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId, page }) => {
-        dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId, page }));
+        dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId, page, triggeredFrom: PAGINATION }));
     },
     searchViaAttributesOnScopeProgram: ({ programId, formId, page }) => {
-        dispatch(searchViaAttributesOnScopeProgram({ programId, formId, page }));
+        dispatch(searchViaAttributesOnScopeProgram({ programId, formId, page, triggeredFrom: PAGINATION }));
     },
 });
 

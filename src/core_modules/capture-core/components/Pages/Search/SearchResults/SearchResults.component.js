@@ -89,14 +89,13 @@ export const SearchResultsIndex = ({
     classes,
     searchResults,
     searchGroupsForSelectedScope,
-    rowsCount,
-    rowsPerPage,
     currentPage,
     currentSearchScopeType,
     currentSearchScopeId,
     currentSearchScopeName,
     currentFormId,
     currentSearchTerms,
+    nextPageButtonDisabled,
 }: Props & CssClasses) => {
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
@@ -124,8 +123,7 @@ export const SearchResultsIndex = ({
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : undefined;
     return (<>
         <div data-test="dhis2-capture-search-results-top" className={classes.topSection} >
-            <b>{rowsCount}</b>
-            &nbsp;{i18n.t('result(s) found for term(s)')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}.
+            &nbsp;{i18n.t('Result(s) found for term(s)')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}.
             &nbsp;{currentSearchTerms.map(({ name, value, id }, index, rest) => (
                 <div key={id}>
                     <i>{name}</i>: <b>{value}</b>
@@ -135,6 +133,7 @@ export const SearchResultsIndex = ({
         </div>
         <div data-test="dhis2-capture-search-results-list">
             <CardList
+                noItemsText={i18n.t('No results found')}
                 currentSearchScopeName={currentSearchScopeName}
                 currentProgramId={currentProgramId}
                 items={searchResults}
@@ -153,9 +152,8 @@ export const SearchResultsIndex = ({
         </div>
         <div data-test="dhis2-capture-search-results-pagination" className={classes.pagination}>
             <SearchPagination
+                nextPageButtonDisabled={nextPageButtonDisabled}
                 onChangePage={newPage => handlePageChange(newPage)}
-                rowsCount={rowsCount}
-                rowsPerPage={rowsPerPage}
                 currentPage={currentPage}
             />
         </div>

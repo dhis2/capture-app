@@ -141,3 +141,20 @@ Feature: User interacts with Search page
     When you click the previous page button
     Then you can see the first page of the results
 
+  Scenario: Searching using attributes in TET domain has disabled pagination
+    Given you are on the default search page
+    And you select the search domain Person
+    And you expand the attributes search area
+    And for Person you fill in values that will return less than 5 results
+    When you click search
+    Then you can see the first page of the results
+    And the next page button is disabled
+
+  Scenario: Searching using attributes in Program domain has disabled pagination
+    Given you are on the default search page
+    And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
+    And for Malaria case you fill in values that will return less than 5 results
+    When you click search
+    Then you can see the first page of the results
+    And the next page button is disabled
