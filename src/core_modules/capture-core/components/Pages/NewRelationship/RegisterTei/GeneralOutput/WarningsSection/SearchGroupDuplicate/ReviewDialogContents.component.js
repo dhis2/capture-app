@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useContext } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,6 +9,7 @@ import { CardList } from '../../../../../../CardList';
 import { DataElement } from '../../../../../../../metaData';
 import ReviewDialogContentsPager from './ReviewDialogContentsPager.container';
 import withLoadingIndicator from '../../../../../../../HOC/withLoadingIndicator';
+import { ResultsPageSizeContext } from '../../../../../shared-contexts';
 
 const CardListWithLoadingIndicator = withLoadingIndicator(null, null, props => !props.isUpdating)(CardList);
 
@@ -26,13 +27,14 @@ type Props = {
     dataElements: Array<DataElement>,
     teis: Array<{id: string, values: Object}>,
     onLink: Function,
-    classes: Object,
     isUpdating: boolean,
+
+    ...CssClasses
 };
 
-class ReviewDialogContentsPlain extends React.Component<Props> {
-    getLinkButton = (itemProps: Object) => {
-        const { onLink, classes } = this.props;
+const ReviewDialogContentsPlain = ({ onLink, classes, dataElements, teis, isUpdating }: Props) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+    const getLinkButton = (itemProps: Object) => {
         const { id, values } = itemProps.item;
         return (
             <div
@@ -45,30 +47,26 @@ class ReviewDialogContentsPlain extends React.Component<Props> {
                 </Button>
             </div>
         );
-    }
+    };
 
-    render() {
-        const { dataElements, teis, isUpdating, classes, currentProgramId } = this.props;
+    return (
+        <React.Fragment>
+            <DialogContent>
+                <DialogTitle className={classes.title}>
+                    {i18n.t('Possible duplicates found')}
+                </DialogTitle>
+                <CardListWithLoadingIndicator
+                    noItemsText={i18n.t('No results found')}
+                    isUpdating={isUpdating}
+                    items={teis}
+                    dataElements={dataElements}
+                    getCustomItemBottomElements={getLinkButton}
+                />
 
-        return (
-            <React.Fragment>
-                <DialogContent>
-                    <DialogTitle className={classes.title}>
-                        {i18n.t('Possible duplicates found')}
-                    </DialogTitle>
-                    <CardListWithLoadingIndicator
-                        noItemsText={i18n.t('No results found')}
-                        currentProgramId={currentProgramId}
-                        isUpdating={isUpdating}
-                        items={teis}
-                        dataElements={dataElements}
-                        getCustomItemBottomElements={this.getLinkButton}
-                    />
-                    <ReviewDialogContentsPager />
-                </DialogContent>
-            </React.Fragment>
-        );
-    }
-}
+                <ReviewDialogContentsPager nextPageButtonDisabled={teis.length < resultsPageSize} />
+            </DialogContent>
+        </React.Fragment>
+    );
+};
 
 export const ReviewDialogContentsComponent = withStyles(getStyles)(ReviewDialogContentsPlain);

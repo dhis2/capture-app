@@ -19,7 +19,7 @@ type Props = {
     teis: Array<any>,
     onNewSearch: () => void,
     onEditSearch: () => void,
-    paging: Object,
+    currentPage: number,
     onChangePage: (page: number) => void,
     onAddRelationship: (id: string, values: Object) => void,
     trackedEntityTypeName: string,
@@ -141,12 +141,12 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     }
 
     renderPager = () => {
-        const { onChangePage, paging, classes } = this.props;
+        const { onChangePage, currentPage, classes } = this.props;
         return (
             <div className={classes.pagination}>
                 <SearchResultsPager
-                    onChangePage={onChangePage}
-                    {...paging}
+                    onChangePage={page => onChangePage(page)}
+                    currentPage={currentPage}
                 />
             </div>
         );

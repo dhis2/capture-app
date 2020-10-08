@@ -1,8 +1,9 @@
 // @flow
-import React from 'react';
+import React, { useContext } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../../../Pagination/withDefaultNavigation';
+import { ResultsPageSizeContext } from '../../../../../shared-contexts';
 
 const Pager = withNavigation()(Pagination);
 
@@ -16,20 +17,23 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    paginationData: Object,
+    currentPage: number,
+    nextPageButtonDisabled: boolean,
     onChangePage: Function,
-    classes: Object,
+    ...CssClasses
 };
 
-const ReviewDialogContentsPager = (props: Props) => {
-    const { onChangePage, paginationData, classes } = props;
+const ReviewDialogContentsPager = ({ onChangePage, currentPage, nextPageButtonDisabled, classes }: Props) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+
     return (
         <div
             className={classes.container}
         >
             <Pager
-                onChangePage={onChangePage}
-                {...paginationData}
+                currentPage={currentPage}
+                onChangePage={page => onChangePage(page, resultsPageSize)}
+                nextPageButtonDisabled={nextPageButtonDisabled}
             />
         </div>
     );

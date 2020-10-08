@@ -82,11 +82,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedSc
         dispatch(searchViaUniqueIdOnScopeProgram({ programId, formId }));
     },
 
-    searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId }) => {
-        dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId }));
+    searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId, resultsPageSize }) => {
+        dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId, pageSize: resultsPageSize }));
     },
-    searchViaAttributesOnScopeProgram: ({ programId, formId, page }) => {
-        dispatch(searchViaAttributesOnScopeProgram({ programId, formId, page }));
+    searchViaAttributesOnScopeProgram: ({ programId, formId, resultsPageSize }) => {
+        dispatch(searchViaAttributesOnScopeProgram({ programId, formId, pageSize: resultsPageSize }));
     },
     saveCurrentFormData: (searchScopeType, searchScopeId, formId, formsValues) => {
         const currentSearchTerms =

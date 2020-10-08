@@ -28,10 +28,7 @@ const makeStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onReviewDuplicates: (onOpenReviewDialog: Function) => {
-        dispatch(reviewDuplicates());
-        onOpenReviewDialog();
-    },
+    onReviewDuplicates: (pageSize) => { dispatch(reviewDuplicates(pageSize)); },
 });
 
 // $FlowSuppress

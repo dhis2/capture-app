@@ -12,7 +12,7 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
     return {
         resultsLoading: searchResults.resultsLoading,
         teis: searchResults.teis || [],
-        paging: searchResults.paging,
+        currentPage: searchResults.currentPage,
         searchValues,
         searchProgramId: currentTeiSearch.selectedProgramId,
         searchGroup,

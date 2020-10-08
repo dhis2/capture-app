@@ -1,12 +1,13 @@
 // @flow
-import * as React from 'react';
+import React, { useContext, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../Buttons';
 import DataEntry from './DataEntry/DataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
 import GeneralOutput from './GeneralOutput/GeneralOutput.container';
-import ReviewDialog from './GeneralOutput/WarningsSection/SearchGroupDuplicate/ReviewDialog.component';
+import { ReviewDialog } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/ReviewDialog.component';
+import { ResultsPageSizeContext } from '../../shared-contexts';
 
 const getStyles = () => ({
     container: {
@@ -21,113 +22,87 @@ const getStyles = () => ({
 });
 
 type Props = {
-    classes: Object,
     onLink: (teiId: string) => void,
+    onReviewDuplicates: Function,
+    onGetUnsavedAttributeValues?: ?Function,
     onSave: Function,
     possibleDuplicates: ?boolean,
     tetName: ?string,
-    onReviewDuplicates: Function,
-    onGetUnsavedAttributeValues?: ?Function,
+    ...CssClasses
 };
 
-type State = {
-    duplicatesOpen: boolean,
-};
+const RegisterTei = ({
+    onLink,
+    onSave,
+    onReviewDuplicates,
+    onGetUnsavedAttributeValues,
+    possibleDuplicates,
+    tetName,
+    classes,
+}: Props) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext);
 
-class RegisterTei extends React.Component<Props, State> {
-    args: Array<any>;
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            duplicatesOpen: false,
-        };
-    }
-    handleSaveAttempt = (...args) => {
-        if (this.props.possibleDuplicates) {
-            this.args = args;
-            this.props.onReviewDuplicates(() => {
-                this.setState({
-                    duplicatesOpen: true,
-                });
-            });
+    const [duplicatesOpen, toggleDuplicatesModal] = useState(false);
+    const [savedArguments, setArguments] = useState([]);
+
+    function handleSaveAttempt(...args) {
+        if (possibleDuplicates) {
+            setArguments(args);
+            onReviewDuplicates(resultsPageSize);
+            toggleDuplicatesModal(true);
         } else {
-            this.props.onSave(...args);
+            onSave(...args);
         }
     }
 
-    handleSaveFromDialog = () => {
-        this.props.onSave(...this.args);
-    }
+    const handleSaveFromDialog = () => {
+        onSave(...savedArguments);
+    };
 
-    getSaveButton() {
-        return (
-            <div style={{ marginLeft: 16 }}>
-                <Button
-                    onClick={this.handleSaveFromDialog}
-                    primary
-                >
-                    {i18n.t('Save as new {{tetName}}', { tetName: this.props.tetName })}
-                </Button>
-            </div>
-        );
-    }
-
-    getCancelButton() {
-        return (
+    const getActions = () => (
+        <React.Fragment>
             <Button
-                onClick={this.handleDialogCancel}
+                onClick={handleDialogCancel}
                 secondary
             >
                 {i18n.t('Cancel')}
             </Button>
-        );
-    }
-
-    getActions() {
-        return (
-            <React.Fragment>
-                {this.getCancelButton()}
-                {this.getSaveButton()}
-            </React.Fragment>
-        );
-    }
-
-    handleDialogCancel = () => {
-        this.setState({
-            duplicatesOpen: false,
-        });
-    }
-
-    render() {
-        const { onLink, classes, onGetUnsavedAttributeValues } = this.props;
-        const { duplicatesOpen } = this.state;
-
-        return (
-            <div
-                className={classes.container}
-            >
-                <div
-                    className={classes.leftContainer}
+            <div style={{ marginLeft: 16 }}>
+                <Button
+                    onClick={handleSaveFromDialog}
+                    primary
                 >
-                    <RegistrationSection />
-                    <DataEntry
-                        onLink={onLink}
-                        onSave={this.handleSaveAttempt}
-                        onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
-                    />
-                </div>
-                <GeneralOutput
+                    {i18n.t('Save as new {{tetName}}', { tetName })}
+                </Button>
+            </div>
+        </React.Fragment>
+    );
+
+    const handleDialogCancel = () => {
+        toggleDuplicatesModal(false);
+    };
+
+    return (
+        <div className={classes.container}>
+            <div className={classes.leftContainer}>
+                <RegistrationSection />
+                <DataEntry
                     onLink={onLink}
-                />
-                <ReviewDialog
-                    open={duplicatesOpen}
-                    onLink={onLink}
-                    onCancel={this.handleDialogCancel}
-                    extraActions={this.getActions()}
+                    onSave={handleSaveAttempt}
+                    onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
                 />
             </div>
-        );
-    }
-}
+            <GeneralOutput
+                onLink={onLink}
+            />
+            <ReviewDialog
+                open={duplicatesOpen}
+                onLink={onLink}
+                onCancel={handleDialogCancel}
+                extraActions={getActions()}
+            />
+        </div>
+    );
+};
 
 export default withStyles(getStyles)(RegisterTei);

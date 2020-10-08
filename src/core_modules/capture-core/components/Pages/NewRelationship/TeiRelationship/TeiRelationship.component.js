@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
@@ -16,6 +16,7 @@ import withDefaultNavigation from '../../../Pagination/withDefaultNavigation';
 import withPaginationData from './SearchResults/withPaginationData';
 import getTeiDisplayName from '../../../../trackedEntityInstances/getDisplayName';
 import { RegisterTei } from '../RegisterTei';
+import { ResultsPageSizeContext } from '../../shared-contexts';
 
 
 const SearchResultsWithPager = withPaginationData()(withDefaultNavigation()(TeiRelationshipSearchResults));
@@ -128,6 +129,7 @@ class TeiRelationship extends React.Component<Props> {
         const trackedEntityTypeName = this.getTrackedEntityTypeName();
         return (
             <TeiSearch
+                resultsPageSize={5}
                 id="relationshipTeiSearch"
                 getResultsView={viewProps => (
                     <SearchResultsWithPager
@@ -142,11 +144,13 @@ class TeiRelationship extends React.Component<Props> {
     }
 
     renderRegister = () => (
-        <RegisterTei
-            onLink={this.handleAddRelationship}
-            onSave={this.handleAddRelationshipWithNewTei}
-            onGetUnsavedAttributeValues={this.props.onGetUnsavedAttributeValues}
-        />
+        <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
+            <RegisterTei
+                onLink={this.handleAddRelationship}
+                onSave={this.handleAddRelationshipWithNewTei}
+                onGetUnsavedAttributeValues={this.props.onGetUnsavedAttributeValues}
+            />
+        </ResultsPageSizeContext.Provider>
     );
 
     renderByMode = (findMode, props) => {

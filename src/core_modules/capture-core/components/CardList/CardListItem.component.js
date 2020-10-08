@@ -132,7 +132,6 @@ const CardListItemIndex = ({
     const enrollments = item.tei ? item.tei.enrollments : [];
     const enrollmentType = deriveEnrollmentType(enrollments, currentProgramId);
     const { orgUnitName, enrollmentDate } = deriveEnrollmentOrgUnitAndDate(enrollments, enrollmentType, currentProgramId);
-
     return (
         <div data-test="dhis2-capture-card-list-item" className={classes.itemContainer}>
             <div className={classes.itemDataContainer}>

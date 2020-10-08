@@ -7,6 +7,7 @@ import TeiSearchForm from './TeiSearchForm/TeiSearchForm.container';
 import TeiSearchResults from './TeiSearchResults/TeiSearchResults.container';
 import SearchProgramSelector from './SearchProgramSelector/SearchProgramSelector.container';
 import { Section, SectionHeaderSimple } from '../Section';
+import { ResultsPageSizeContext } from '../Pages/shared-contexts';
 
 type Props = {
     id: string,
@@ -150,13 +151,15 @@ class TeiSearch extends React.Component<Props, State> {
     renderSearchResult = () => {
         const { onSearch, showResults, onNewSearch, onEditSearch, onSearchResultsChangePage, classes, ...passOnProps } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <TeiSearchResults
-                onChangePage={this.handleSearchResultsChangePage}
-                onNewSearch={this.handleNewSearch}
-                onEditSearch={this.handleEditSearch}
-                {...passOnProps}
-            />
+            <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
+                {/*  $FlowFixMe[cannot-spread-inexact] automated comment */}
+                <TeiSearchResults
+                    onChangePage={this.handleSearchResultsChangePage}
+                    onNewSearch={this.handleNewSearch}
+                    onEditSearch={this.handleEditSearch}
+                    {...passOnProps}
+                />
+            </ResultsPageSizeContext.Provider>
         );
     }
 
