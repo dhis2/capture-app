@@ -178,6 +178,19 @@ And('you fill in the the form with values that will return less than 5 results',
         .blur();
 });
 
+And('you fill in the the form with values that will return exactly 5 results', () => {
+    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Tesmi')
+        .blur();
+    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('Abel')
+        .blur();
+});
+
 And('you fill in the zip code range numbers', () => {
     cy.get('[data-test="dhis2-capture-d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
