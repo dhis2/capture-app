@@ -63,6 +63,14 @@ Feature: User searches for existing TEInstance in the context of adding a relati
     Then you can see an empty page
     And all pagination is disabled
 
+  Scenario: Searching using ip code range values as attributes
+    Given you open the the new event page in Ngelehun and malaria case context
+    When you navigate to find a person relationship
+    And you select search scope TB program
+    And you expand the fifth search area
+    And you fill in the zip code range numbers
+    And you click search
+    Then you can see the first page of the results
 
   #  Search domain Tracked Entity Type
 
@@ -121,6 +129,7 @@ Feature: User searches for existing TEInstance in the context of adding a relati
     And you click search
     Then you can see the first page of the results
     And all pagination is disabled
+
 
 
 #  todo scenarios which are not working
