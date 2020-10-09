@@ -39,10 +39,10 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Đơn vị"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "Ngày đăng ký"
 
 msgid "Last updated"
 msgstr "Lần cập nhật cuối"
@@ -340,7 +340,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Start again"
-msgstr ""
+msgstr "Khởi đầu lại"
 
 msgid "New {{typeName}}"
 msgstr ""

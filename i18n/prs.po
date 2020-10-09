@@ -37,10 +37,10 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "واحد سازمان"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "تاریخ ثبت"
 
 msgid "Last updated"
 msgstr "تجدید آخیر"
