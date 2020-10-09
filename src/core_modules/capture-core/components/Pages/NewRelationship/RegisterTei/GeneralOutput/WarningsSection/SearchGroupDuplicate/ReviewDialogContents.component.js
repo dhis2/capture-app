@@ -52,7 +52,7 @@ class ReviewDialogContentsPlain extends React.Component<Props> {
 
         return (
             <React.Fragment>
-                <DialogContent>
+                <DialogContent data-test="dhis2-capture-duplicates-modal">
                     <DialogTitle className={classes.title}>
                         {i18n.t('Possible duplicates found')}
                     </DialogTitle>

@@ -31,7 +31,7 @@ class WarningMessageCreator extends React.Component<Props> {
     render() {
         const { classes } = this.props;
         return (
-            <div>
+            <div data-test="dhis2-capture-possible-duplicates-found-button">
                 <LinkButton
                     onClick={this.handleDuplicatesClick}
                     className={classes.linkButton}
