@@ -19,7 +19,7 @@ type Props = {
     },
 };
 
-const Index = ({ classes }: Props) => (
+const AppContentsPlain = ({ classes }: Props) => (
     <div
         className={classes.app}
         dir={systemSettingsStore.get().dir}
@@ -28,6 +28,5 @@ const Index = ({ classes }: Props) => (
         <FeedbackBar />
     </div>
 );
-Index.displayName = 'AppContents';
 
-export const AppContents = withStyles(getStyles)(Index);
+export const AppContents = withStyles(getStyles)(AppContentsPlain);

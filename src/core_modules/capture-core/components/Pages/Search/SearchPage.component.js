@@ -61,7 +61,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const Index = ({
+const SearchPageComponentPlain = ({
     showInitialSearchPage,
     navigateToMainPage,
     classes,
@@ -182,4 +182,4 @@ export const SearchPageComponent: ComponentType<ContainerProps> =
       withLoadingIndicator(),
       withErrorMessageHandler(),
       withStyles(getStyles),
-  )(Index);
+  )(SearchPageComponentPlain);

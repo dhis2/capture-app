@@ -35,7 +35,7 @@ type Props = $ReadOnly<{|
     showResetButton: boolean,
 |}>;
 
-const Index = ({
+const ActionButtonsPlain = ({
     onStartAgainClick,
     onNewClick,
     onFindClick,
@@ -98,4 +98,4 @@ const Index = ({
     );
 };
 
-export const ActionButtons: ComponentType<Props> = withStyles(styles)(Index);
+export const ActionButtons: ComponentType<Props> = withStyles(styles)(ActionButtonsPlain);

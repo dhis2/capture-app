@@ -35,7 +35,7 @@ const styles = (theme: Theme) => ({
     },
 });
 
-export const Index =
+export const SearchDomainSelectorPlain =
   ({ trackedEntityTypesWithCorrelatedPrograms, classes, onSelect, selectedSearchScope }: Props) =>
       (<Section
           className={classes.searchDomainSelectorSection}
@@ -85,4 +85,4 @@ export const Index =
       </Section>
       );
 
-export const SearchDomainSelector: ComponentType<OwnProps> = withStyles(styles)(Index);
+export const SearchDomainSelector: ComponentType<OwnProps> = withStyles(styles)(SearchDomainSelectorPlain);

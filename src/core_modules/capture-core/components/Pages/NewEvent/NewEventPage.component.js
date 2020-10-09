@@ -15,7 +15,7 @@ type Props = {
     isUserInteractionInProgress: boolean,
 };
 
-class Index extends React.Component<Props> {
+class NewEventPageComponentPlain extends React.Component<Props> {
     renderContents() {
         const { isSelectionsComplete } = this.props;
         if (!isSelectionsComplete) {
@@ -41,4 +41,4 @@ class Index extends React.Component<Props> {
     }
 }
 
-export const NewEventPageComponent = withStyles(getStyles)(Index);
+export const NewEventPageComponent = withStyles(getStyles)(NewEventPageComponentPlain);

@@ -21,7 +21,7 @@ type Props = {
     },
 };
 
-class Index extends Component<Props> {
+class MainPageComponentPlain extends Component<Props> {
     render() {
         const { currentSelectionsComplete, classes } = this.props;
 
@@ -53,4 +53,4 @@ class Index extends Component<Props> {
     }
 }
 
-export const MainPageComponent = withStyles(getStyles)(Index);
+export const MainPageComponent = withStyles(getStyles)(MainPageComponentPlain);
