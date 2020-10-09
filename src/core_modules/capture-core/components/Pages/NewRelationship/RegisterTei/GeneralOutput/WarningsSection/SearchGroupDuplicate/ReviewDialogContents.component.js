@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useContext } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
@@ -7,6 +7,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../../../../Buttons';
 import { CardList } from '../../../../../../CardList';
 import { ReviewDialogContentsPager } from './ReviewDialogContentsPager.container';
+import { ResultsPageSizeContext } from '../../../../../shared-contexts';
 import type { Props } from './ReviewDialogContents.container';
 
 const getStyles = (theme: Theme) => ({
@@ -19,6 +20,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 const ReviewDialogContentsPlain = ({ onLink, classes, dataElements, teis }: Props) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext);
     const getLinkButton = (itemProps: Object) => {
         const { id, values } = itemProps.item;
         return (
@@ -47,7 +49,7 @@ const ReviewDialogContentsPlain = ({ onLink, classes, dataElements, teis }: Prop
                     getCustomItemBottomElements={getLinkButton}
                 />
 
-                <ReviewDialogContentsPager />
+                <ReviewDialogContentsPager nextPageButtonDisabled={teis.length < resultsPageSize} />
             </DialogContent>
         </React.Fragment>
     );

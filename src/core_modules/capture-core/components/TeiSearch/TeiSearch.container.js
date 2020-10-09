@@ -60,10 +60,10 @@ const makeMapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps) => ({
     onSearch: (formId: string, searchGroupId: string, searchId: string) => {
-        dispatch(requestSearchTei(formId, searchGroupId, searchId));
+        dispatch(requestSearchTei(formId, searchGroupId, searchId, ownProps.resultsPageSize));
     },
     onSearchResultsChangePage: (searchId: string, pageNumber: number) => {
-        dispatch(teiSearchResultsChangePage(searchId, pageNumber));
+        dispatch(teiSearchResultsChangePage(searchId, pageNumber, ownProps.resultsPageSize));
     },
     onSearchValidationFailed: (formId: string, searchGroupId: string, searchId: string) => {
         dispatch(searchFormValidationFailed(formId, searchGroupId, searchId));

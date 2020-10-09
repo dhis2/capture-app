@@ -16,7 +16,7 @@ type PropsFromRedux = {|
     possibleDuplicates: ?boolean,
 |};
 type DispatchersFromRedux = {|
-    onReviewDuplicates: () => void,
+    onReviewDuplicates: (pageSize: number) => void,
 |};
 
 type OwnProps = {|
@@ -48,7 +48,7 @@ const makeStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onReviewDuplicates: () => { dispatch(reviewDuplicates()); },
+    onReviewDuplicates: (pageSize) => { dispatch(reviewDuplicates(pageSize)); },
 });
 
 export const RegisterTei: ComponentType<OwnProps> = compose(

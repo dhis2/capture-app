@@ -14,7 +14,7 @@ type DispatchersFromRedux = {|
 export type Props = {| ...DispatchersFromRedux, ...OwnProps, ...CssClasses |}
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onReviewDuplicates: () => { dispatch(reviewDuplicates()); },
+    onReviewDuplicates: (pageSize) => { dispatch(reviewDuplicates(pageSize)); },
 });
 
 export const WarningMessageCreator: ComponentType<OwnProps> =

@@ -28,7 +28,7 @@ const getDataElements = scopeEntity => (scopeEntity ? [...scopeEntity.attributes
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const {
         searchResults,
-        searchResultsPaginationInfo: { currentPage, nextPageButtonDisabled },
+        currentPage,
         currentSearchInfo: {
             searchScopeType: currentSearchScopeType,
             searchScopeId: currentSearchScopeId,
@@ -54,18 +54,29 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         currentSearchScopeName,
         currentFormId,
         currentSearchTerms,
-        nextPageButtonDisabled,
         dataElements,
     };
 };
 
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
-    searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId, page }) => {
-        dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId, page, triggeredFrom: PAGINATION }));
+    searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId, page, resultsPageSize }) => {
+        dispatch(searchViaAttributesOnScopeTrackedEntityType({
+            trackedEntityTypeId,
+            formId,
+            page,
+            pageSize: resultsPageSize,
+            triggeredFrom: PAGINATION,
+        }));
     },
-    searchViaAttributesOnScopeProgram: ({ programId, formId, page }) => {
-        dispatch(searchViaAttributesOnScopeProgram({ programId, formId, page, triggeredFrom: PAGINATION }));
+    searchViaAttributesOnScopeProgram: ({ programId, formId, page, resultsPageSize }) => {
+        dispatch(searchViaAttributesOnScopeProgram({
+            programId,
+            formId,
+            page,
+            pageSize: resultsPageSize,
+            triggeredFrom: PAGINATION,
+        }));
     },
 });
 

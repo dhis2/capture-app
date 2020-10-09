@@ -22,6 +22,7 @@ import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
 import { SearchDomainSelector } from './SearchDomainSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
+import { ResultsPageSizeContext } from '../shared-contexts';
 
 const getStyles = (theme: Theme) => ({
     maxWidth: {
@@ -93,87 +94,89 @@ const Index = ({
     };
 
     return (<>
-        <LockedSelector />
-        <div data-test="dhis2-capture-search-page-content" className={classes.container} >
-            <Button
-                dataTest="dhis2-capture-back-button"
-                className={classes.backButton}
-                onClick={navigateToMainPage}
-            >
-                <ChevronLeft />
-                {i18n.t('Back')}
-            </Button>
+        <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
+            <LockedSelector />
+            <div data-test="dhis2-capture-search-page-content" className={classes.container} >
+                <Button
+                    dataTest="dhis2-capture-back-button"
+                    className={classes.backButton}
+                    onClick={navigateToMainPage}
+                >
+                    <ChevronLeft />
+                    {i18n.t('Back')}
+                </Button>
 
-            <Paper className={classes.paper}>
-                <div className={classes.maxWidth}>
-                    <SearchDomainSelector
-                        trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
-                        onSelect={handleSearchScopeSelection}
-                        selectedSearchScope={selectedSearchScope}
-                    />
+                <Paper className={classes.paper}>
+                    <div className={classes.maxWidth}>
+                        <SearchDomainSelector
+                            trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
+                            onSelect={handleSearchScopeSelection}
+                            selectedSearchScope={selectedSearchScope}
+                        />
 
-                    <SearchForm
-                        selectedSearchScopeId={selectedSearchScope.value}
-                        searchGroupsForSelectedScope={searchGroupsForSelectedScope}
-                    />
+                        <SearchForm
+                            selectedSearchScopeId={selectedSearchScope.value}
+                            searchGroupsForSelectedScope={searchGroupsForSelectedScope}
+                        />
 
-                    {
-                        searchStatus === searchPageStatus.SHOW_RESULTS &&
-                        <SearchResults />
-                    }
+                        {
+                            searchStatus === searchPageStatus.SHOW_RESULTS &&
+                            <SearchResults />
+                        }
 
-                    {
-                        searchStatus === searchPageStatus.NO_RESULTS &&
-                        <Modal position="middle">
-                            <ModalTitle>{i18n.t('No results found')}</ModalTitle>
-                            <ModalContent>
-                                {i18n.t('You can change your search terms and search again to find what you are looking for.')}
-                            </ModalContent>
-                            <ModalActions>
-                                <ButtonStrip end>
-                                    <Button
-                                        disabled={searchStatus === searchPageStatus.LOADING}
-                                        onClick={showInitialSearchPage}
-                                        type="button"
-                                    >
-                                        {i18n.t('Back to search')}
-                                    </Button>
-                                </ButtonStrip>
-                            </ModalActions>
-                        </Modal>
-                    }
+                        {
+                            searchStatus === searchPageStatus.NO_RESULTS &&
+                            <Modal position="middle">
+                                <ModalTitle>{i18n.t('No results found')}</ModalTitle>
+                                <ModalContent>
+                                    {i18n.t('You can change your search terms and search again to find what you are looking for.')}
+                                </ModalContent>
+                                <ModalActions>
+                                    <ButtonStrip end>
+                                        <Button
+                                            disabled={searchStatus === searchPageStatus.LOADING}
+                                            onClick={showInitialSearchPage}
+                                            type="button"
+                                        >
+                                            {i18n.t('Back to search')}
+                                        </Button>
+                                    </ButtonStrip>
+                                </ModalActions>
+                            </Modal>
+                        }
 
-                    {
-                        searchStatus === searchPageStatus.LOADING &&
-                        <div className={classes.loadingMask}>
-                            <LoadingMask />
-                        </div>
-                    }
-
-                    {
-                        searchStatus === searchPageStatus.ERROR &&
-                        <div
-                            data-test="dhis2-capture-general-purpose-error-mesage"
-                            className={classes.generalPurposeErrorMessage}
-                        >
-                            <div className={classes.errorTitle}>
-                                {i18n.t('An error has occurred')}
+                        {
+                            searchStatus === searchPageStatus.LOADING &&
+                            <div className={classes.loadingMask}>
+                                <LoadingMask />
                             </div>
-                            {i18n.t('There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools')}
-                        </div>
-                    }
-                </div>
-            </Paper>
+                        }
 
-            {
-                searchStatus === searchPageStatus.INITIAL && !selectedSearchScope.value &&
+                        {
+                            searchStatus === searchPageStatus.ERROR &&
+                            <div
+                                data-test="dhis2-capture-general-purpose-error-mesage"
+                                className={classes.generalPurposeErrorMessage}
+                            >
+                                <div className={classes.errorTitle}>
+                                    {i18n.t('An error has occurred')}
+                                </div>
+                                {i18n.t('There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools')}
+                            </div>
+                        }
+                    </div>
+                </Paper>
+
+                {
+                    searchStatus === searchPageStatus.INITIAL && !selectedSearchScope.value &&
                     <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
                         <div className={classes.emptySelectionPaperContent}>
                             {i18n.t('Make a selection to start searching')}
                         </div>
                     </Paper>
-            }
-        </div>
+                }
+            </div>
+        </ResultsPageSizeContext.Provider>
     </>);
 };
 

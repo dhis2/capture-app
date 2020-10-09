@@ -14,6 +14,7 @@ import { makeTrackedEntityTypeSelector } from './teiRelationship.selectors';
 import type { TrackedEntityType } from '../../../../metaData';
 import { findModes } from '../findModes';
 import getTeiDisplayName from '../../../../trackedEntityInstances/getDisplayName';
+import { ResultsPageSizeContext } from '../../shared-contexts';
 
 
 type Props = {
@@ -124,6 +125,7 @@ class TeiRelationship extends React.Component<Props> {
         const trackedEntityTypeName = this.getTrackedEntityTypeName();
         return (
             <TeiSearch
+                resultsPageSize={5}
                 id="relationshipTeiSearch"
                 getResultsView={viewProps => (
                     <TeiRelationshipSearchResults
@@ -138,11 +140,13 @@ class TeiRelationship extends React.Component<Props> {
     }
 
     renderRegister = () => (
-        <RegisterTei
-            onLink={this.handleAddRelationship}
-            onSave={this.handleAddRelationshipWithNewTei}
-            onGetUnsavedAttributeValues={this.props.onGetUnsavedAttributeValues}
-        />
+        <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
+            <RegisterTei
+                onLink={this.handleAddRelationship}
+                onSave={this.handleAddRelationshipWithNewTei}
+                onGetUnsavedAttributeValues={this.props.onGetUnsavedAttributeValues}
+            />
+        </ResultsPageSizeContext.Provider>
     );
 
     renderByMode = (findMode, props) => {

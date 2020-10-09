@@ -16,12 +16,11 @@ type PropsFromRedux = {|
 export type Props ={| ...DispatchersFromFromRedux, ...PropsFromRedux, ...CssClasses |}
 
 const mapStateToProps = (state: ReduxState) => ({
-    currentPage: state.newRelationshipRegisterTeiDuplicatesReview.paginationData.currentPage,
-    nextPageButtonDisabled: state.newRelationshipRegisterTeiDuplicatesReview.paginationData.nextPageButtonDisabled,
+    currentPage: state.newRelationshipRegisterTeiDuplicatesReview.currentPage,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onChangePage: (page: number) => { dispatch(changePage(page)); },
+    onChangePage: (page: number, pageSize: number) => { dispatch(changePage(page, pageSize)); },
 });
 
 export const ReviewDialogContentsPager: ComponentType<{||}> =

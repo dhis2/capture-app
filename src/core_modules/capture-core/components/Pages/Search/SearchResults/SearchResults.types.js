@@ -46,13 +46,12 @@ export type PropsFromRedux ={|
   +currentFormId: string,
   +searchResults: Array<SearchResultItem>,
   +currentSearchTerms: CurrentSearchTerms,
-  +nextPageButtonDisabled: boolean,
   +dataElements: CardDataElementsInformation
 |}
 
 export type DispatchersFromRedux = {|
-  searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string, page?: string |}) => void,
-  searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page?: string |}) => void,
+  searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string, page: string, resultsPageSize: number |}) => void,
+  searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page: string, resultsPageSize: number |}) => void,
 |}
 
 export type Props = {|
