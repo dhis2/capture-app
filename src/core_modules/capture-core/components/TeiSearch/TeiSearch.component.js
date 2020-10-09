@@ -21,7 +21,6 @@ type Props = {
     onSearchResultsChangePage: (searchId: string, pageNumber: number) => void,
     onNewSearch: (searchId: string) => void,
     onEditSearch: (searchId: string) => void,
-    onAddRelationship: (id: string, values: Object) => void,
     getResultsView: Function,
     classes: {
         container: string,
