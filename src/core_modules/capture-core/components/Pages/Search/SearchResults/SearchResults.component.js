@@ -90,7 +90,7 @@ export const SearchResultsIndex = ({
     currentSearchTerms,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
-    
+
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:

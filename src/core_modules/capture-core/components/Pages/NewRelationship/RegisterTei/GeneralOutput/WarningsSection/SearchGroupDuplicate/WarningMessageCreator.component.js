@@ -19,7 +19,6 @@ const getStyles = () => ({
 });
 
 
-
 const WarningMessageCreatorPlain = ({ classes, onOpenReviewDialog, onReviewDuplicates }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
 
@@ -39,4 +38,5 @@ const WarningMessageCreatorPlain = ({ classes, onOpenReviewDialog, onReviewDupli
     );
 };
 
-export const WarningMessageCreatorComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(WarningMessageCreatorPlain);
+export const WarningMessageCreatorComponent: ComponentType<$Diff<Props, CssClasses>> =
+  withStyles(getStyles)(WarningMessageCreatorPlain);
