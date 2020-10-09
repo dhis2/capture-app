@@ -12,7 +12,7 @@ export type DispatchersFromFromRedux = {|
     onChangePage: Function,
 |};
 type PropsFromRedux = {|
-    nextPageButtonDisabled: boolean,
+    currentPage: number,
 |};
 
 export type Props ={| ...OwnProps, ...DispatchersFromFromRedux, ...PropsFromRedux, ...CssClasses |}
@@ -25,5 +25,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onChangePage: (page: number, pageSize: number) => { dispatch(changePage(page, pageSize)); },
 });
 
-export const ReviewDialogContentsPager: ComponentType<{||}> =
+export const ReviewDialogContentsPager: ComponentType<OwnProps> =
   connect<$Diff<Props, CssClasses>, _, _, _, _, _>(mapStateToProps, mapDispatchToProps)(ReviewDialogContentsPagerComponent);
