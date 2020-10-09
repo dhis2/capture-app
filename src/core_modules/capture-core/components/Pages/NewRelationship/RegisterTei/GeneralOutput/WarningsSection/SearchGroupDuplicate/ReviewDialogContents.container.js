@@ -1,4 +1,5 @@
 // @flow
+import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import i18n from '@dhis2/d2-i18n';
@@ -18,7 +19,6 @@ type PropsFromRedux = {|
     error: string,
     teis: Array<SearchResultItem>,
     dataElements: CardDataElementsInformation,
-
 |}
 
 export type Props = {| ...OwnProps, ...PropsFromRedux, ...CssClasses |}
@@ -41,9 +41,9 @@ const makeMapStateToProps = () => {
 const mapDispatchToProps = () => ({
 });
 
-export const ReviewDialogContents =
+export const ReviewDialogContents: ComponentType<OwnProps> =
   compose(
-      connect<Props, OwnProps, _, _, _, _>(makeMapStateToProps, mapDispatchToProps),
+      connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(makeMapStateToProps, mapDispatchToProps),
       withLoadingIndicator(() => ({ padding: '100px 0' }), null, props => (!props.isUpdating && props.ready)),
       withErrorMessageHandler(),
   )(ReviewDialogContentsComponent);

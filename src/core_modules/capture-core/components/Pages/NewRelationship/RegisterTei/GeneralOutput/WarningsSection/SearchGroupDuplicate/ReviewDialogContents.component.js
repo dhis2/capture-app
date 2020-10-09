@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
@@ -53,4 +53,4 @@ const ReviewDialogContentsPlain = ({ onLink, classes, dataElements, teis }: Prop
     );
 };
 
-export const ReviewDialogContentsComponent = withStyles(getStyles)(ReviewDialogContentsPlain);
+export const ReviewDialogContentsComponent: ComponentType<Props> = withStyles(getStyles)(ReviewDialogContentsPlain);
