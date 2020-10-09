@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { TeiSearchResultsComponent } from './TeiSearchResults.component';
 import { withLoadingIndicator } from '../../../HOC';
+import { type SearchGroup } from '../../../metaData';
 
 export type OwnProps = {|
     id: string,
@@ -22,7 +23,7 @@ export type PropsFromRedux = {|
     searchValues: any,
     selectedProgramId: string,
     selectedTrackedEntityTypeId: string,
-    searchGroup: any
+    searchGroup: SearchGroup
 |}
 
 export type Props = {|...OwnProps, ...PropsFromRedux |}
