@@ -64,7 +64,6 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props & CssClass
     }
 
     onAddRelationship = (item) => {
-        debugger;
         this.props.onAddRelationship(item.id, item.values);
     }
 

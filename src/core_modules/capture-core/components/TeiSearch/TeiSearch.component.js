@@ -22,7 +22,6 @@ type Props = {
     onNewSearch: (searchId: string) => void,
     onEditSearch: (searchId: string) => void,
     onAddRelationship: (id: string, values: Object) => void,
-    trackedEntityTypeName: string,
     getResultsView: Function,
     classes: {
         container: string,
