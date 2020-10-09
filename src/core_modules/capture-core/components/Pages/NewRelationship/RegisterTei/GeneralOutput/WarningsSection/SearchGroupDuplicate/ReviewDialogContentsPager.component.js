@@ -1,8 +1,9 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../../../Pagination/withDefaultNavigation';
+import type { Props } from './ReviewDialogContentsPager.container';
 
 const Pager = withNavigation()(Pagination);
 
@@ -15,14 +16,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Props = {
-    currentPage: number,
-    nextPageButtonDisabled: boolean,
-    onChangePage: Function,
-    ...CssClasses
-};
-
-const ReviewDialogContentsPager = ({ onChangePage, currentPage, nextPageButtonDisabled, classes }: Props) => (
+const ReviewDialogContentsPagerPlain = ({ onChangePage, currentPage, nextPageButtonDisabled, classes }: Props) => (
     <div
         className={classes.container}
     >
@@ -34,4 +28,5 @@ const ReviewDialogContentsPager = ({ onChangePage, currentPage, nextPageButtonDi
     </div>
 );
 
-export default withStyles(getStyles)(ReviewDialogContentsPager);
+export const ReviewDialogContentsPagerComponent: ComponentType<$Diff<Props, CssClasses>> =
+  withStyles(getStyles)(ReviewDialogContentsPagerPlain);

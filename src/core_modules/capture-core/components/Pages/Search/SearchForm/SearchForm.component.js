@@ -74,7 +74,7 @@ const SearchFormIndex = ({
     formsValues,
     searchStatus,
     isSearchViaAttributesValid,
-}: Props & CssClasses) => {
+}: Props) => {
     useFormDataLifecycle(searchGroupsForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore);
 
     const [error, setError] = useState(false);
@@ -279,4 +279,4 @@ const SearchFormIndex = ({
     ]);
 };
 
-export const SearchFormComponent: ComponentType<Props> = withStyles(getStyles)(SearchFormIndex);
+export const SearchFormComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(SearchFormIndex);

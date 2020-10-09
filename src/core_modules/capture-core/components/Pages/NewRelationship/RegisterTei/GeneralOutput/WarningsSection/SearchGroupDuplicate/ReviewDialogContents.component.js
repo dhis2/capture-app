@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../../../../Buttons';
 import { CardList } from '../../../../../../CardList';
-import ReviewDialogContentsPager from './ReviewDialogContentsPager.container';
+import { ReviewDialogContentsPager } from './ReviewDialogContentsPager.container';
 import type { Props } from './ReviewDialogContents.container';
 
 const getStyles = (theme: Theme) => ({

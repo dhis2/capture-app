@@ -88,7 +88,7 @@ export const SearchResultsIndex = ({
     currentFormId,
     currentSearchTerms,
     nextPageButtonDisabled,
-}: Props & CssClasses) => {
+}: Props) => {
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:

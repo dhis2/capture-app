@@ -93,4 +93,4 @@ const RegisterTeiPlain = ({
     );
 };
 
-export const RegisterTeiComponent: ComponentType<Props> = withStyles(getStyles)(RegisterTeiPlain);
+export const RegisterTeiComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(RegisterTeiPlain);

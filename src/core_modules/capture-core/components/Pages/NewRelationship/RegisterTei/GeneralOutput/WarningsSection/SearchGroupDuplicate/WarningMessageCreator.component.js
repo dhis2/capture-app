@@ -1,8 +1,9 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import LinkButton from '../../../../../../Buttons/LinkButton.component';
+import type { Props } from './WarningMessageCreator.container';
 
 const getStyles = () => ({
     linkButton: {
@@ -16,11 +17,6 @@ const getStyles = () => ({
     },
 });
 
-type Props = {
-    onReviewDuplicates: (onOpenReviewDialog: Function) => void,
-    onOpenReviewDialog: () => void,
-    classes: Object,
-};
 
 const WarningMessageCreatorPlain = ({ classes, onOpenReviewDialog, onReviewDuplicates }: Props) => {
     const handleDuplicatesClick = () => {
@@ -39,4 +35,4 @@ const WarningMessageCreatorPlain = ({ classes, onOpenReviewDialog, onReviewDupli
     );
 };
 
-export const WarningMessageCreatorComponent = withStyles(getStyles)(WarningMessageCreatorPlain);
+export const WarningMessageCreatorComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(WarningMessageCreatorPlain);

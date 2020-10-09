@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { SearchGroup } from '../../metaData';
@@ -7,28 +7,7 @@ import TeiSearchForm from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
 import SearchProgramSelector from './SearchProgramSelector/SearchProgramSelector.container';
 import { Section, SectionHeaderSimple } from '../Section';
-
-type Props = {
-    id: string,
-    selectedTrackedEntityTypeId: ?string,
-    selectedProgramId: ?string,
-    searchGroups: ?Array<SearchGroup>,
-    onSearch: Function,
-    onSearchValidationFailed: Function,
-    onSetOpenSearchGroupSection: (searchId: string, searchGroupId: ?string) => void,
-    openSearchGroupSection: ?string,
-    showResults?: ?boolean,
-    onSearchResultsChangePage: (searchId: string, pageNumber: number) => void,
-    onNewSearch: (searchId: string) => void,
-    onEditSearch: (searchId: string) => void,
-    getResultsView: Function,
-    classes: {
-        container: string,
-        section: string,
-        formContainerSection: string,
-        programSection: string,
-    },
-}
+import type { Props } from './TeiSearch.container';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -49,7 +28,7 @@ type State = {
     programSectionOpen: boolean,
 }
 
-class TeiSearch extends React.Component<Props, State> {
+class TeiSearchPlain extends React.Component<Props, State> {
     constructor(props) {
         super(props);
         this.state = { programSectionOpen: true };
@@ -177,4 +156,4 @@ class TeiSearch extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(getStyles)(TeiSearch);
+export const TeiSearchComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(TeiSearchPlain);

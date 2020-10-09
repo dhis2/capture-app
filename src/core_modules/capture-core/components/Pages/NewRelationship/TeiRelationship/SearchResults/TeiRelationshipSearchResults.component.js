@@ -10,6 +10,8 @@ import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
 import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';
 import { SearchResultsHeader } from '../../../../SearchResultsHeader';
+import { type SearchResultItem } from '../../../Search/SearchResults/SearchResults.types';
+import { type SearchGroup } from '../../../../../metaData';
 
 const SearchResultsPager = withNavigation()(Pagination);
 
@@ -20,11 +22,12 @@ type Props = {|
     onNewSearch: Function,
     currentPage: number,
     nextPageButtonDisabled: boolean,
-    searchGroup: any,
+    searchGroup: SearchGroup,
     searchValues: any,
     selectedProgramId: string,
-    teis: any,
-    trackedEntityTypeName: any,
+    teis: Array<SearchResultItem>,
+    trackedEntityTypeName: string,
+    ...CssClasses
 |}
 
 const getStyles = (theme: Theme) => ({
@@ -56,9 +59,9 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-class TeiRelationshipSearchResultsPlain extends React.Component<Props & CssClasses> {
+class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
     getAttributes: Function;
-    constructor(props: Props & CssClasses) {
+    constructor(props: Props) {
         super(props);
         this.getAttributes = makeAttributesSelector();
     }
@@ -152,5 +155,6 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props & CssClass
         );
     }
 }
-export const TeiRelationshipSearchResults: ComponentType<Props> =
+
+export const TeiRelationshipSearchResults: ComponentType<$Diff<Props, CssClasses>> =
   withStyles(getStyles)(TeiRelationshipSearchResultsPlain);

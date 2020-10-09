@@ -58,5 +58,6 @@ export type DispatchersFromRedux = {|
 export type Props = {|
   ...DispatchersFromRedux,
   ...PropsFromRedux,
+  ...CssClasses
 |}
 

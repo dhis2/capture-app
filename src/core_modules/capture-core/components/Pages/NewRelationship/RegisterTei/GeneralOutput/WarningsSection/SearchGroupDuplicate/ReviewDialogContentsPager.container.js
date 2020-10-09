@@ -1,7 +1,19 @@
 // @flow
+import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
-import ReviewDialogContentsPager from './ReviewDialogContentsPager.component';
+import { ReviewDialogContentsPagerComponent } from './ReviewDialogContentsPager.component';
 import { changePage } from './searchGroupDuplicate.actions';
+
+
+export type DispatchersFromFromRedux = {|
+    onChangePage: Function,
+|};
+type PropsFromRedux = {|
+    currentPage: number,
+    nextPageButtonDisabled: boolean,
+|};
+
+export type Props ={| ...DispatchersFromFromRedux, ...PropsFromRedux, ...CssClasses |}
 
 const mapStateToProps = (state: ReduxState) => ({
     currentPage: state.newRelationshipRegisterTeiDuplicatesReview.paginationData.currentPage,
@@ -12,5 +24,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onChangePage: (page: number) => { dispatch(changePage(page)); },
 });
 
-// $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewDialogContentsPager);
+export const ReviewDialogContentsPager: ComponentType<{||}> =
+  connect<$Diff<Props, CssClasses>, _, _, _, _, _>(mapStateToProps, mapDispatchToProps)(ReviewDialogContentsPagerComponent);

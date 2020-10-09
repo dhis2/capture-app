@@ -6,6 +6,7 @@ import { ReviewDialogContentsComponent } from './ReviewDialogContents.component'
 import withLoadingIndicator from '../../../../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../../../../HOC/withErrorMessageHandler';
 import { makeDataElementsSelector } from './reviewDialogContents.selectors';
+import type { CardDataElementsInformation, SearchResultItem } from '../../../../../Search/SearchResults/SearchResults.types';
 
 type OwnProps = {|
     onLink: (id: string, values: any)=>void
@@ -15,8 +16,8 @@ type PropsFromRedux = {|
     ready: boolean,
     isUpdating: boolean,
     error: string,
-    teis: any,
-    dataElements: any,
+    teis: Array<SearchResultItem>,
+    dataElements: CardDataElementsInformation,
 
 |}
 

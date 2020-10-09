@@ -25,7 +25,7 @@ type OwnProps = {|
     onSave: Function,
 |};
 
-export type Props = {|...PropsFromRedux, ...OwnProps, ...DispatchersFromRedux, ...CssClasses|}
+export type Props = {|...PropsFromRedux, ...OwnProps, ...DispatchersFromRedux, ...CssClasses |}
 
 const makeStateToProps = () => {
     const tetNameSelector = makeTETNameSelector();
