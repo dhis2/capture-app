@@ -105,25 +105,23 @@ export const SearchResultsIndex = ({
     const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : null;
     return (<>
         <SearchResultsHeader currentSearchTerms={currentSearchTerms} currentSearchScopeName={currentSearchScopeName} />
-        <div data-test="dhis2-capture-search-results-list">
-            <CardList
-                noItemsText={i18n.t('No results found')}
-                currentSearchScopeName={currentSearchScopeName}
-                currentProgramId={currentProgramId}
-                items={searchResults}
-                dataElements={dataElements}
-                getCustomItemBottomElements={({ item, navigationButtonsState, programName }) => (
-                    <CardListButtons
-                        programName={programName}
-                        currentSearchScopeId={currentSearchScopeId}
-                        currentSearchScopeType={currentSearchScopeType}
-                        id={item.id}
-                        orgUnitId={item.tei.orgUnit}
-                        navigationButtonsState={navigationButtonsState}
-                    />
-                )}
-            />
-        </div>
+        <CardList
+            noItemsText={i18n.t('No results found')}
+            currentSearchScopeName={currentSearchScopeName}
+            currentProgramId={currentProgramId}
+            items={searchResults}
+            dataElements={dataElements}
+            getCustomItemBottomElements={({ item, navigationButtonsState, programName }) => (
+                <CardListButtons
+                    programName={programName}
+                    currentSearchScopeId={currentSearchScopeId}
+                    currentSearchScopeType={currentSearchScopeType}
+                    id={item.id}
+                    orgUnitId={item.tei.orgUnit}
+                    navigationButtonsState={navigationButtonsState}
+                />
+            )}
+        />
         <div className={classes.pagination}>
             <SearchPagination
                 nextPageButtonDisabled={nextPageButtonDisabled}

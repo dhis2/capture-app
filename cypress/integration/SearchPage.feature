@@ -29,7 +29,7 @@ Feature: User interacts with Search page
     And you click find
     Then you are navigated to the Tracker Capture
 
-  Scenario: Searching using attributes returns no results
+  Scenario: Searching using attributes in Tracker Program returns no results
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
     And you expand the attributes search area
@@ -38,7 +38,7 @@ Feature: User interacts with Search page
     Then there should be a modal popping up
     And you can close the modal
 
-  Scenario: Searching using attributes throws error
+  Scenario: Searching using attributes in Tracker Program throws error
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
     And you expand the attributes search area
@@ -46,7 +46,7 @@ Feature: User interacts with Search page
     And you click search
     Then there should be an generic error message
 
-  Scenario: Searching using attributes is invalid because no terms typed
+  Scenario: Searching using attributes in Tracker Program is invalid because no terms typed
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
     And you expand the attributes search area
@@ -54,7 +54,7 @@ Feature: User interacts with Search page
     And you click search
     Then there should be a validation error message
 
-  Scenario: Searching using attributes is invalid because terms typed contain nothing but spaces
+  Scenario: Searching using attributes in Tracker Program is invalid because terms typed contain nothing but spaces
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
     And you expand the attributes search area
@@ -62,7 +62,7 @@ Feature: User interacts with Search page
     And you click search
     Then there should be a validation error message
 
-  Scenario: Searching using attributes is invalid after clearing all search terms
+  Scenario: Searching using attributes in Tracker Program is invalid after clearing all search terms
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
     And you expand the attributes search area
@@ -76,7 +76,7 @@ Feature: User interacts with Search page
     When when you click the back button
     Then you should be taken to the main page with program and org unit preselected
 
-  Scenario: Searching using attributes returns results
+  Scenario: Searching using attributes in Tracker Program returns results
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
     And you expand the attributes search area
@@ -84,7 +84,7 @@ Feature: User interacts with Search page
     And you click search
     Then you can see the first page of the results
 
-  Scenario: Searching using attributes has a working pagination
+  Scenario: Searching using attributes in Tracker Program has a working pagination
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
     And you expand the attributes search area
@@ -96,7 +96,7 @@ Feature: User interacts with Search page
     When you click the previous page button
     Then you can see the first page of the results
 
-  Scenario: Searching using attributes navigates user to the dashboard view
+  Scenario: Searching using attributes in Tracker Program navigates user to the dashboard view
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
     And you expand the attributes search area
@@ -105,6 +105,16 @@ Feature: User interacts with Search page
     And you can see the first page of the results
     When you click the view dashboard button
     Then you are navigated to the Tracker Capture
+    
+  Scenario: Searching using attributes in Tracker Program domain has disabled pagination
+    Given you are on the default search page
+    And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
+    And for Malaria case you fill in values that will return less than 5 results
+    When you click search
+    Then you can see the first page of the results
+    And the next page button is disabled
+
 
   Scenario: Changing the program from the LockedSelector wont change the search scope
     Given you are in the search page with the Child Programme being preselected from the url
@@ -112,7 +122,8 @@ Feature: User interacts with Search page
     When you remove the Child Programme selection
     Then you still can see the Malaria case diagnosis being selected
 
-  Scenario: Searching using attributes in TET domain is invalid after clearing all search terms
+  # Tracked entity type
+  Scenario: Searching using attributes in TEType domain is invalid after clearing all search terms
     Given you are on the default search page
     And you select the search domain Person
     And you expand the attributes search area
@@ -121,7 +132,7 @@ Feature: User interacts with Search page
     And you click search
     Then there should be a validation error message
 
-  Scenario: Searching using attributes in TET domain is invalid because terms typed contain nothing but spaces
+  Scenario: Searching using attributes in TEType domain is invalid because terms typed contain nothing but spaces
     Given you are on the default search page
     And you select the search domain Person
     And you expand the attributes search area
@@ -129,7 +140,7 @@ Feature: User interacts with Search page
     And you click search
     Then there should be a validation error message
 
-  Scenario: Searching using attributes in TET domain has a working pagination
+  Scenario: Searching using attributes in TEType domain has a working pagination
     Given you are on the default search page
     And you select the search domain Person
     And you expand the attributes search area
@@ -141,20 +152,11 @@ Feature: User interacts with Search page
     When you click the previous page button
     Then you can see the first page of the results
 
-  Scenario: Searching using attributes in TET domain has disabled pagination
+  Scenario: Searching using attributes in TEType domain has disabled pagination
     Given you are on the default search page
     And you select the search domain Person
     And you expand the attributes search area
     And for Person you fill in values that will return less than 5 results
-    When you click search
-    Then you can see the first page of the results
-    And the next page button is disabled
-
-  Scenario: Searching using attributes in Program domain has disabled pagination
-    Given you are on the default search page
-    And you select the search domain Malaria Case diagnosis
-    And you expand the attributes search area
-    And for Malaria case you fill in values that will return less than 5 results
     When you click search
     Then you can see the first page of the results
     And the next page button is disabled
