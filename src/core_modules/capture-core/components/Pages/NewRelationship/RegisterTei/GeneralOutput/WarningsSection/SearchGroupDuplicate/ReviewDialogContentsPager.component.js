@@ -16,23 +16,22 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    paginationData: Object,
+    currentPage: number,
+    nextPageButtonDisabled: boolean,
     onChangePage: Function,
-    classes: Object,
+    ...CssClasses
 };
 
-const ReviewDialogContentsPager = (props: Props) => {
-    const { onChangePage, paginationData, classes } = props;
-    return (
-        <div
-            className={classes.container}
-        >
-            <Pager
-                onChangePage={onChangePage}
-                {...paginationData}
-            />
-        </div>
-    );
-};
+const ReviewDialogContentsPager = ({ onChangePage, currentPage, nextPageButtonDisabled, classes }: Props) => (
+    <div
+        className={classes.container}
+    >
+        <Pager
+            currentPage={currentPage}
+            onChangePage={page => onChangePage(page)}
+            nextPageButtonDisabled={nextPageButtonDisabled}
+        />
+    </div>
+);
 
 export default withStyles(getStyles)(ReviewDialogContentsPager);

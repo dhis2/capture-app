@@ -1,7 +1,7 @@
 // @flow
-
+import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
-import TeiSearch from './TeiSearch.component';
+import TeiSearchComponent from './TeiSearch.component';
 
 import {
     requestSearchTei,
@@ -54,5 +54,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowFixMe[missing-annot] automated comment
-export default connect(makeMapStateToProps, mapDispatchToProps)(TeiSearch);
+export const TeiSearch: ComponentType<any> =
+  connect<any, any, _, _, _, _>(makeMapStateToProps, mapDispatchToProps)(TeiSearchComponent);

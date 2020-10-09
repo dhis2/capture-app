@@ -13,10 +13,10 @@ type Props = {
 };
 
 const StyledDialogActions = withStyles({
-    root: { margin: 24 },
+    root: { margin: '0 24px 24px 24px' },
 })(DialogActions);
 
-class ReviewDialog extends React.Component<Props > {
+class ReviewDialogClass extends React.Component<Props > {
     static paperProps = {
         style: {
             maxHeight: 'calc(100% - 100px)',
@@ -45,4 +45,4 @@ class ReviewDialog extends React.Component<Props > {
     }
 }
 
-export default ReviewDialog;
+export const ReviewDialog = ReviewDialogClass;

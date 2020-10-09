@@ -31,13 +31,6 @@ export const requestSearchTei = (
 ) =>
     actionCreator(actionTypes.REQUEST_SEARCH_TEI)({ formId, searchGroupId, searchId });
 
-export const searchTeiFinished = (
-    formId: string,
-    searchGroupId: string,
-    searchId: string,
-) =>
-    actionCreator(actionTypes.REQUEST_SEARCH_TEI)({ formId, searchGroupId, searchId });
-
 export const searchTeiFailed = (
     formId: string,
     searchGroupId: string,

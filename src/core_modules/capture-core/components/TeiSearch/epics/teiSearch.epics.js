@@ -74,7 +74,6 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
         // $FlowFixMe[exponential-spread] automated comment
         ...getContextQueryArgs(selectedProgramId, selectedTrackedEntityTypeId),
         ...getPagingQueryArgs(pageNumber),
-
     };
 
     const attributes = selectedProgramId ?

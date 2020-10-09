@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { SearchGroup } from '../../metaData';
 import TeiSearchForm from './TeiSearchForm/TeiSearchForm.container';
-import TeiSearchResults from './TeiSearchResults/TeiSearchResults.container';
+import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
 import SearchProgramSelector from './SearchProgramSelector/SearchProgramSelector.container';
 import { Section, SectionHeaderSimple } from '../Section';
 
@@ -21,6 +21,9 @@ type Props = {
     onSearchResultsChangePage: (searchId: string, pageNumber: number) => void,
     onNewSearch: (searchId: string) => void,
     onEditSearch: (searchId: string) => void,
+    onAddRelationship: (id: string, values: Object) => void,
+    trackedEntityTypeName: string,
+    getResultsView: Function,
     classes: {
         container: string,
         section: string,
@@ -148,14 +151,19 @@ class TeiSearch extends React.Component<Props, State> {
         );
     })
     renderSearchResult = () => {
-        const { onSearch, showResults, onNewSearch, onEditSearch, onSearchResultsChangePage, classes, ...passOnProps } = this.props;
+        const {
+            id,
+            searchGroups,
+            getResultsView,
+        } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TeiSearchResults
+                id={id}
                 onChangePage={this.handleSearchResultsChangePage}
                 onNewSearch={this.handleNewSearch}
                 onEditSearch={this.handleEditSearch}
-                {...passOnProps}
+                getResultsView={getResultsView}
+                searchGroups={searchGroups}
             />
         );
     }

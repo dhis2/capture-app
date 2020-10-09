@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react';
+import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
@@ -8,33 +8,24 @@ import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import Button from '../../../../Buttons/Button.component';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
-import { LoadingMask } from '../../../../LoadingMasks';
 import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';
 import { SearchResultsHeader } from '../../../../SearchResultsHeader';
 
 const SearchResultsPager = withNavigation()(Pagination);
 
-type Props = {
-    resultsLoading: ?boolean,
-    teis: Array<any>,
-    onNewSearch: () => void,
-    onEditSearch: () => void,
-    paging: Object,
-    onChangePage: (page: number) => void,
+type Props = {|
     onAddRelationship: (id: string, values: Object) => void,
-    trackedEntityTypeName: string,
-    selectedProgramId: ?string,
-    classes: {
-        itemActionsContainer: string,
-        addRelationshipButton: string,
-        pagination: string,
-        topSection: string,
-        actionButton: string,
-        topSectionValuesContainer: string,
-    },
-    searchValues: any,
+    onChangePage: Function,
+    onEditSearch: Function,
+    onNewSearch: Function,
+    currentPage: number,
+    nextPageButtonDisabled: boolean,
     searchGroup: any,
-}
+    searchValues: any,
+    selectedProgramId: string,
+    teis: any,
+    trackedEntityTypeName: any,
+|}
 
 const getStyles = (theme: Theme) => ({
     itemActionsContainer: {
@@ -65,14 +56,15 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-class TeiRelationshipSearchResults extends React.Component<Props> {
+class TeiRelationshipSearchResultsPlain extends React.Component<Props & CssClasses> {
     getAttributes: Function;
-    constructor(props: Props) {
+    constructor(props: Props & CssClasses) {
         super(props);
         this.getAttributes = makeAttributesSelector();
     }
 
     onAddRelationship = (item) => {
+        debugger;
         this.props.onAddRelationship(item.id, item.values);
     }
 
@@ -141,24 +133,25 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     }
 
     renderPager = () => {
-        const { onChangePage, paging, classes } = this.props;
+        const { onChangePage, nextPageButtonDisabled, currentPage, classes } = this.props;
         return (
             <div className={classes.pagination}>
                 <SearchResultsPager
-                    onChangePage={onChangePage}
-                    {...paging}
+                    onChangePage={page => onChangePage(page)}
+                    currentPage={currentPage}
+                    nextPageButtonDisabled={nextPageButtonDisabled}
                 />
-            </div>
-        );
+            </div>);
     }
 
     render() {
         return (
             <div>
-                { this.props.resultsLoading ? <LoadingMask /> : this.renderResults() }
+                {this.renderResults()}
             </div>
 
         );
     }
 }
-export default withStyles(getStyles)(TeiRelationshipSearchResults);
+export const TeiRelationshipSearchResults: ComponentType<Props> =
+  withStyles(getStyles)(TeiRelationshipSearchResultsPlain);

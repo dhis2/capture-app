@@ -7,18 +7,14 @@ import AddIcon from '@material-ui/icons/AddCircleOutline';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { SelectedRelationshipType } from '../newRelationship.types';
 import Button from '../../../Buttons/Button.component';
-import TeiSearch from '../../../TeiSearch/TeiSearch.container';
-import TeiRelationshipSearchResults from './SearchResults/TeiRelationshipSearchResults.component';
+import { RegisterTei } from '../RegisterTei';
+import { TeiSearch } from '../../../TeiSearch/TeiSearch.container';
+import { TeiRelationshipSearchResults } from './SearchResults/TeiRelationshipSearchResults.component';
 import { makeTrackedEntityTypeSelector } from './teiRelationship.selectors';
 import type { TrackedEntityType } from '../../../../metaData';
 import { findModes } from '../findModes';
-import withDefaultNavigation from '../../../Pagination/withDefaultNavigation';
-import withPaginationData from './SearchResults/withPaginationData';
 import getTeiDisplayName from '../../../../trackedEntityInstances/getDisplayName';
-import { RegisterTei } from '../RegisterTei';
 
-
-const SearchResultsWithPager = withPaginationData()(withDefaultNavigation()(TeiRelationshipSearchResults));
 
 type Props = {
     findMode?: ?$Values<typeof findModes>,
@@ -130,9 +126,9 @@ class TeiRelationship extends React.Component<Props> {
             <TeiSearch
                 id="relationshipTeiSearch"
                 getResultsView={viewProps => (
-                    <SearchResultsWithPager
-                        onAddRelationship={this.handleAddRelationship}
+                    <TeiRelationshipSearchResults
                         trackedEntityTypeName={trackedEntityTypeName}
+                        onAddRelationship={this.handleAddRelationship}
                         {...viewProps}
                     />
                 )}

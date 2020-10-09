@@ -1,11 +1,31 @@
 // @flow
+import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
-import RegisterTei from './RegisterTei.component';
+import { RegisterTeiComponent } from './RegisterTei.component';
 import { makeTETNameSelector } from './registerTei.selectors';
 import { reviewDuplicates } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/searchGroupDuplicate.actions';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
+
+type PropsFromRedux = {|
+    tetName: ?string,
+    ready: boolean,
+    error: string,
+    possibleDuplicates: ?boolean,
+|};
+type DispatchersFromRedux = {|
+    onReviewDuplicates: () => void,
+|};
+
+type OwnProps = {|
+    onLink: (teiId: string) => void,
+    onGetUnsavedAttributeValues?: ?Function,
+    onSave: Function,
+|};
+
+export type Props = {|...PropsFromRedux, ...OwnProps, ...DispatchersFromRedux, ...CssClasses|}
 
 const makeStateToProps = () => {
     const tetNameSelector = makeTETNameSelector();
@@ -28,18 +48,11 @@ const makeStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onReviewDuplicates: (onOpenReviewDialog: Function) => {
-        dispatch(reviewDuplicates());
-        onOpenReviewDialog();
-    },
+    onReviewDuplicates: () => { dispatch(reviewDuplicates()); },
 });
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
-export default connect(makeStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(
-        withErrorMessageHandler()(
-            RegisterTei,
-        ),
-    ),
-);
+export const RegisterTei: ComponentType<OwnProps> = compose(
+    connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(makeStateToProps, mapDispatchToProps),
+    withLoadingIndicator(),
+    withErrorMessageHandler(),
+)(RegisterTeiComponent);

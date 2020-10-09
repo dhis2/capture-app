@@ -22,25 +22,21 @@ type Props = {
     classes: Object,
 };
 
-class WarningMessageCreator extends React.Component<Props> {
-    handleDuplicatesClick = () => {
-        const { onReviewDuplicates, onOpenReviewDialog } = this.props;
-        onReviewDuplicates(onOpenReviewDialog);
-    }
+const WarningMessageCreatorPlain = ({ classes, onOpenReviewDialog, onReviewDuplicates }: Props) => {
+    const handleDuplicatesClick = () => {
+        onOpenReviewDialog();
+        onReviewDuplicates();
+    };
 
-    render() {
-        const { classes } = this.props;
-        return (
-            <div data-test="dhis2-capture-possible-duplicates-found-button">
-                <LinkButton
-                    onClick={this.handleDuplicatesClick}
-                    className={classes.linkButton}
-                >
-                    {i18n.t('Possible duplicates found')}
-                </LinkButton>
-            </div>
-        );
-    }
-}
+    return (
+        <LinkButton
+            data-test="dhis2-capture-possible-duplicates-found-button"
+            onClick={handleDuplicatesClick}
+            className={classes.linkButton}
+        >
+            {i18n.t('Possible duplicates found')}
+        </LinkButton>
+    );
+};
 
-export default withStyles(getStyles)(WarningMessageCreator);
+export const WarningMessageCreatorComponent = withStyles(getStyles)(WarningMessageCreatorPlain);

@@ -6,11 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../../../../Buttons';
 import { CardList } from '../../../../../../CardList';
-import { DataElement } from '../../../../../../../metaData';
 import ReviewDialogContentsPager from './ReviewDialogContentsPager.container';
-import withLoadingIndicator from '../../../../../../../HOC/withLoadingIndicator';
-
-const CardListWithLoadingIndicator = withLoadingIndicator(null, null, props => !props.isUpdating)(CardList);
+import type { Props } from './ReviewDialogContents.container';
 
 const getStyles = (theme: Theme) => ({
     linkButtonContainer: {
@@ -21,18 +18,8 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Props = {
-    currentProgramId: ?string,
-    dataElements: Array<DataElement>,
-    teis: Array<{id: string, values: Object}>,
-    onLink: Function,
-    classes: Object,
-    isUpdating: boolean,
-};
-
-class ReviewDialogContentsPlain extends React.Component<Props> {
-    getLinkButton = (itemProps: Object) => {
-        const { onLink, classes } = this.props;
+const ReviewDialogContentsPlain = ({ onLink, classes, dataElements, teis }: Props) => {
+    const getLinkButton = (itemProps: Object) => {
         const { id, values } = itemProps.item;
         return (
             <div
@@ -45,30 +32,25 @@ class ReviewDialogContentsPlain extends React.Component<Props> {
                 </Button>
             </div>
         );
-    }
+    };
 
-    render() {
-        const { dataElements, teis, isUpdating, classes, currentProgramId } = this.props;
+    return (
+        <React.Fragment>
+            <DialogContent data-test="dhis2-capture-duplicates-modal">
+                <DialogTitle className={classes.title}>
+                    {i18n.t('Possible duplicates found')}
+                </DialogTitle>
+                <CardList
+                    noItemsText={i18n.t('No results found')}
+                    items={teis}
+                    dataElements={dataElements}
+                    getCustomItemBottomElements={getLinkButton}
+                />
 
-        return (
-            <React.Fragment>
-                <DialogContent data-test="dhis2-capture-duplicates-modal">
-                    <DialogTitle className={classes.title}>
-                        {i18n.t('Possible duplicates found')}
-                    </DialogTitle>
-                    <CardListWithLoadingIndicator
-                        noItemsText={i18n.t('No results found')}
-                        currentProgramId={currentProgramId}
-                        isUpdating={isUpdating}
-                        items={teis}
-                        dataElements={dataElements}
-                        getCustomItemBottomElements={this.getLinkButton}
-                    />
-                    <ReviewDialogContentsPager />
-                </DialogContent>
-            </React.Fragment>
-        );
-    }
-}
+                <ReviewDialogContentsPager />
+            </DialogContent>
+        </React.Fragment>
+    );
+};
 
 export const ReviewDialogContentsComponent = withStyles(getStyles)(ReviewDialogContentsPlain);

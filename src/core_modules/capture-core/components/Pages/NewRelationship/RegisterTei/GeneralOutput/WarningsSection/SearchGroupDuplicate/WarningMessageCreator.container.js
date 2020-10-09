@@ -1,16 +1,12 @@
 // @flow
 import { connect } from 'react-redux';
-import WarningMessageCreator from './WarningMessageCreator.component';
+import { WarningMessageCreatorComponent } from './WarningMessageCreator.component';
 import { reviewDuplicates } from './searchGroupDuplicate.actions';
 
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onReviewDuplicates: (onOpenReviewDialog: Function) => {
-        dispatch(reviewDuplicates());
-        onOpenReviewDialog();
-    },
+    onReviewDuplicates: () => { dispatch(reviewDuplicates()); },
 });
 
-// $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(null, mapDispatchToProps)(WarningMessageCreator);
+export const WarningMessageCreator = connect(null, mapDispatchToProps)(WarningMessageCreatorComponent);
