@@ -113,7 +113,7 @@ export const SearchResultsIndex = ({
         }
     };
 
-    const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : null;
+    const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : '';
     return (<>
         <SearchResultsHeader currentSearchTerms={currentSearchTerms} currentSearchScopeName={currentSearchScopeName} />
         <div data-test="dhis2-capture-search-results-list">

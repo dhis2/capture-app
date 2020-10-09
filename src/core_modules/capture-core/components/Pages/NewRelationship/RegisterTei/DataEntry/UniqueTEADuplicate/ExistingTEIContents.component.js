@@ -13,7 +13,7 @@ type Props = {
     dataElements: CardDataElementsInformation,
     onLink: (values: Object) => void,
     onCancel: Function,
-    programId: ?string,
+    programId?: string,
 };
 
 class ExistingTEIContents extends React.Component<Props> {
