@@ -20,6 +20,7 @@
     "@material-ui/icons": "3",
     "@popperjs/core": "^2.4.4",
     "@redux-offline/redux-offline": "^2.6.0",
+    "@reduxjs/toolkit": "^1.4.0",
     "autosuggest-highlight": "^3.1.1",
     "classnames": "^2.2.5",
     "connected-react-router": "^6.6.1",

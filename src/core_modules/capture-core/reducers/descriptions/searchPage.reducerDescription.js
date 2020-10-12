@@ -1,6 +1,13 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import { createReducer } from '@reduxjs/toolkit';
+import {
+    saveCurrentSearchInfo,
+    showEmptyResultsViewOnSearchPage,
+    showErrorViewOnSearchPage,
+    showInitialViewOnSearchPage,
+    showLoadingViewOnSearchPage,
+    showSuccessResultsViewOnSearchPage,
+} from '../../components/Pages/Search/SearchPage.actions';
 
 export const searchPageStatus = {
     INITIAL: 'INITIAL',
@@ -10,34 +17,8 @@ export const searchPageStatus = {
     ERROR: 'ERROR',
 };
 
-export const searchPageDesc = createReducerDescription({
-    [searchPageActionTypes.SEARCH_RESULTS_INITIAL_VIEW]: state => ({
-        ...state,
-        searchStatus: searchPageStatus.INITIAL,
-    }),
-    [searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW]: (state, { payload: { searchResults, searchResultsPaginationInfo } }) => ({
-        ...state,
-        searchStatus: searchPageStatus.SHOW_RESULTS,
-        searchResults,
-        searchResultsPaginationInfo,
-    }),
-    [searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW]: state => ({
-        ...state,
-        searchStatus: searchPageStatus.LOADING,
-    }),
-    [searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW]: state => ({
-        ...state,
-        searchStatus: searchPageStatus.NO_RESULTS,
-    }),
-    [searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW]: state => ({
-        ...state,
-        searchStatus: searchPageStatus.ERROR,
-    }),
-    [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
-        ...state,
-        currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
-    }),
-}, 'searchPage', {
+
+export const searchPage = createReducer({
     searchStatus: searchPageStatus.INITIAL,
     searchResults: [],
     currentSearchInfo: {},
@@ -45,4 +26,45 @@ export const searchPageDesc = createReducerDescription({
         nextPageButtonDisabled: false,
         currentPage: 0,
     },
+}, (builder) => {
+    builder
+        .addCase(
+            showInitialViewOnSearchPage,
+            (state) => {
+                state.searchStatus = searchPageStatus.INITIAL;
+            })
+        .addCase(
+            showSuccessResultsViewOnSearchPage,
+            (
+                state,
+                { payload: { searchResults, searchResultsPaginationInfo } },
+            ) => {
+                state.searchStatus = searchPageStatus.SHOW_RESULTS;
+                state.searchResults = searchResults;
+                state.searchResultsPaginationInfo = searchResultsPaginationInfo;
+            })
+        .addCase(
+            showLoadingViewOnSearchPage,
+            (state) => {
+                state.searchStatus = searchPageStatus.LOADING;
+            })
+        .addCase(
+            showEmptyResultsViewOnSearchPage,
+            (state) => {
+                state.searchStatus = searchPageStatus.NO_RESULTS;
+            })
+        .addCase(
+            showErrorViewOnSearchPage,
+            (state) => {
+                state.searchStatus = searchPageStatus.ERROR;
+            })
+        .addCase(
+            saveCurrentSearchInfo,
+            (
+                state,
+                { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } },
+            ) => {
+                state.currentSearchInfo = { searchScopeType, searchScopeId, formId, currentSearchTerms };
+            });
 });
+

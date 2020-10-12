@@ -1,8 +1,6 @@
 // @flow
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { configureStore as toolkitConfigureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { createEpicMiddleware } from 'redux-observable';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { enableBatching } from 'redux-batched-actions';
 import { createLogger } from 'redux-logger';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
@@ -16,16 +14,15 @@ import { getEffectReconciler, shouldDiscard, queueConfig } from 'capture-core/tr
 import getPersistOptions from './persist/persistOptionsGetter';
 import reducerDescriptions from '../reducers/descriptions/trackerCapture.reducerDescriptions';
 import epics from '../epics/trackerCapture.epics';
-
+import { searchPage } from '../core_modules/capture-core/reducers/descriptions/searchPage.reducerDescription';
 
 export function getStore(
     history: BrowserHistory | HashHistory,
     onApiMutate: Function,
     onRehydrated: () => void) {
-    const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptions);
-
     const rootReducer = combineReducers({
-        ...reducersFromDescriptions,
+        ...buildReducersFromDescriptions(reducerDescriptions),
+        searchPage,
         router: connectRouter(history),
     });
 
@@ -43,24 +40,24 @@ export function getStore(
         persistOptions: getPersistOptions(),
     });
 
-    const epicMiddleware = createEpicMiddleware({
-        dependencies: {},
-    });
-
-    const middleware = [epicMiddleware, routerMiddleware(history), offlineMiddleware];
+    const [, immutableStateInvariant, serializableStateInvariant] = getDefaultMiddleware();
+    const router = routerMiddleware(history);
+    const epicMiddleware = createEpicMiddleware();
+    const middleware = [immutableStateInvariant, serializableStateInvariant, epicMiddleware, router, offlineMiddleware];
 
     if (process.env.NODE_ENV !== environments.prod) {
         middleware.push(createLogger({}));
     }
 
-    // $FlowFixMe[missing-annot] automated comment
-    const store = createStore(
-        enableBatching(offlineEnhanceReducer(rootReducer)),
-        composeWithDevTools(
-            compose(offlineEnhanceStore, applyMiddleware(...middleware)),
-        ),
-    );
 
+    const store = toolkitConfigureStore({
+        reducer: enableBatching(offlineEnhanceReducer(rootReducer)),
+        middleware,
+        devTools: true,
+        enhancers: defaultEnhancers => [offlineEnhanceStore, ...defaultEnhancers],
+    });
+
+    // this line needs to be executed after the configuration of the store.
     epicMiddleware.run(epics);
 
     return store;

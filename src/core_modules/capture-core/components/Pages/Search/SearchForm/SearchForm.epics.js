@@ -4,11 +4,14 @@ import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { of, from, empty } from 'rxjs';
 import { isObject, isString } from 'd2-utilizr/src';
 import {
-    searchPageActionTypes,
     showEmptyResultsViewOnSearchPage,
     showErrorViewOnSearchPage,
     showLoadingViewOnSearchPage,
     showSuccessResultsViewOnSearchPage,
+    searchViaAttributesOnScopeProgram,
+    searchViaAttributesOnScopeTrackedEntityType,
+    searchViaUniqueIdOnScopeProgram,
+    searchViaUniqueIdOnScopeTrackedEntityType,
 } from '../SearchPage.actions';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
@@ -77,7 +80,7 @@ const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
 
 export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH),
+        ofType(searchViaUniqueIdOnScopeProgram.type),
         flatMap(({ payload: { formId, programId } }) => {
             const { formsValues } = store.value;
             const queryArgs = {
@@ -96,7 +99,7 @@ export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, st
 
 export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
+        ofType(searchViaUniqueIdOnScopeTrackedEntityType.type),
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
             const { formsValues } = store.value;
             const queryArgs = {
@@ -114,8 +117,8 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObse
 
 export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH),
-        flatMap(({ payload: { formId, programId, page, triggeredFrom } }) => {
+        ofType(searchViaAttributesOnScopeProgram.type),
+        flatMap(({ payload: { formId, programId, page = 1, triggeredFrom } }) => {
             const { formsValues } = store.value;
 
             const queryArgs = {
@@ -134,8 +137,8 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
 
 export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
-        flatMap(({ payload: { formId, trackedEntityTypeId, page, triggeredFrom } }) => {
+        ofType(searchViaAttributesOnScopeTrackedEntityType.type),
+        flatMap(({ payload: { formId, trackedEntityTypeId, page = 1, triggeredFrom } }) => {
             const { formsValues } = store.value;
 
             const queryArgs = {

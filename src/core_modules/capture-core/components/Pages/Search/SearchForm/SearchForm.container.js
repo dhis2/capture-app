@@ -5,13 +5,12 @@ import { isObject, isString } from 'd2-utilizr/src';
 import { SearchFormComponent } from './SearchForm.component';
 import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
 import {
-    searchPageActionTypes,
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
     searchViaUniqueIdOnScopeTrackedEntityType,
+    saveCurrentSearchInfo,
 } from '../SearchPage.actions';
-import { actionCreator } from '../../../../actions/actions.utils';
 import { addFormData, removeFormData } from '../../../D2Form/actions/form.actions';
 
 const isValueContainingCharacter = (value: any) => {
@@ -92,12 +91,12 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedSc
         const currentSearchTerms =
           collectCurrentSearchTerms(searchGroupsForSelectedScope, formsValues);
 
-        dispatch(actionCreator(searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE)(
-            { searchScopeType,
-                searchScopeId,
-                formId,
-                currentSearchTerms,
-            }));
+        dispatch(saveCurrentSearchInfo({
+            searchScopeType,
+            searchScopeId,
+            formId,
+            currentSearchTerms,
+        }));
     },
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
     removeFormDataFromReduxStore: () => {
