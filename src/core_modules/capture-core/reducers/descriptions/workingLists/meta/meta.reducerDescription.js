@@ -5,14 +5,14 @@ import { eventWorkingListsActionTypes } from '../../../../components/Pages/MainP
 import { recentlyAddedEventsActionTypes } from '../../../../components/Pages/NewEvent/RecentlyAddedEventsList';
 
 export const workingListsMetaDesc = createReducerDescription({
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT]: (state, action) => {
         const { listId } = action.payload;
         return {
             ...state,
             [listId]: undefined,
         };
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, config, pagingData } = action.payload;
         const {
@@ -47,7 +47,7 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, pagingData } = action.payload;
         const next = newState[listId].next;
@@ -63,7 +63,7 @@ export const workingListsMetaDesc = createReducerDescription({
         };
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_ERROR]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_UPDATE_ERROR]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = {

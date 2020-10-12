@@ -20,10 +20,10 @@ import {
     deleteTemplate,
     fetchTemplates,
     fetchTemplatesCancel,
-    initEventList,
-    initEventListCancel,
-    updateEventList,
-    updateEventListCancel,
+    initListView,
+    initListViewCancel,
+    updateList,
+    updateListCancel,
     cleanSkipInitAddingTemplate,
     unloadingContext,
 } from '../../EventWorkingLists/eventWorkingLists.actions'; // TODO: Move these actions
@@ -37,9 +37,7 @@ const useTemplates = (listId: string, workingListDispatch: Function) => {
             workingListsTemplates[listId].templates.find(template => template.id === workingListsTemplates[listId].selectedTemplateId),
         templates: workingListsTemplates[listId] &&
             workingListsTemplates[listId].templates,
-        templatesForProgramId: workingListsTemplates[listId] &&
-            workingListsTemplates[listId].programId,
-        templatesAreLoading: !!workingListsTemplates[listId] &&
+        templatesLoading: !!workingListsTemplates[listId] &&
             !!workingListsTemplates[listId].loading,
         loadTemplatesError: workingListsTemplates[listId] && workingListsTemplates[listId].loadError,
     }), shallowEqual);
@@ -75,10 +73,10 @@ const useTemplates = (listId: string, workingListDispatch: Function) => {
 const useView = (listId: string, workingListDispatch: Function, categoryCombinationMeta: Object) => {
     const listState = useSelector(({ workingLists, workingListsUI, workingListsMeta, workingListsColumnsOrder, workingListsStickyFilters }) => ({
         recordsOrder: workingLists[listId] && workingLists[listId].order,
-        isUpdating: !!workingListsUI[listId] && !!workingListsUI[listId].isUpdating,
-        isLoading: !!workingListsUI[listId] && !!workingListsUI[listId].isLoading,
-        isUpdatingWithDialog: !!workingListsUI[listId] && !!workingListsUI[listId].isUpdatingWithDialog,
-        loadEventListError: workingListsUI[listId] && workingListsUI[listId].dataLoadingError,
+        updating: !!workingListsUI[listId] && !!workingListsUI[listId].isUpdating,
+        loading: !!workingListsUI[listId] && !!workingListsUI[listId].isLoading,
+        updatingWithDialog: !!workingListsUI[listId] && !!workingListsUI[listId].isUpdatingWithDialog,
+        loadViewError: workingListsUI[listId] && workingListsUI[listId].dataLoadingError,
         customColumnOrder: workingListsColumnsOrder[listId],
         stickyFilters: workingListsStickyFilters[listId],
         rowsPerPage: (workingListsMeta[listId] && workingListsMeta[listId].next && workingListsMeta[listId].next.rowsPerPage) || (workingListsMeta[listId] && workingListsMeta[listId].rowsPerPage),
@@ -100,7 +98,7 @@ const useView = (listId: string, workingListDispatch: Function, categoryCombinat
     ]);
 
     const listDispatch = useMemo(() => ({
-        onLoadEventList: workingListDispatch(initEventList,
+        onLoadView: workingListDispatch(initListView,
             (selectedTemplate: Object, context: Object, meta: Object) => [
                 selectedTemplate,
                 context, {
@@ -109,7 +107,7 @@ const useView = (listId: string, workingListDispatch: Function, categoryCombinat
                     listId,
                 },
             ]),
-        onUpdateEventList: workingListDispatch(updateEventList,
+        onUpdateList: workingListDispatch(updateList,
             (queryArgs: Object, columnsMetaForDataFetching: Object) => [
                 queryArgs, {
                     columnsMetaForDataFetching,
@@ -117,13 +115,13 @@ const useView = (listId: string, workingListDispatch: Function, categoryCombinat
                     listId,
                 },
             ]),
-        onCancelLoadEventList: workingListDispatch(initEventListCancel),
-        onCancelUpdateEventList: workingListDispatch(updateEventListCancel),
+        onCancelLoadView: workingListDispatch(initListViewCancel),
+        onCancelUpdateList: workingListDispatch(updateListCancel),
         onSortList: workingListDispatch(sortList),
         onSetListColumnOrder: workingListDispatch(setListColumnOrder),
-        onFilterUpdate: workingListDispatch(setFilter),
+        onUpdateFilter: workingListDispatch(setFilter),
         onClearFilter: workingListDispatch(clearFilter),
-        onRestMenuItemSelected: workingListDispatch(restMenuItemSelected),
+        onSelectRestMenuItem: workingListDispatch(restMenuItemSelected),
         onChangePage: workingListDispatch(changePage),
         onChangeRowsPerPage: workingListDispatch(changeRowsPerPage),
     }), [listId, workingListDispatch, categoryCombinationMeta]);
@@ -144,7 +142,7 @@ const useWorkingListsContext = (listId: string, workingListDispatch: Function) =
         lastTransaction,
     }), shallowEqual);
 
-    const listContext = useSelector(({ workingListsContext }) => workingListsContext[listId]);
+    const loadedContext = useSelector(({ workingListsContext }) => workingListsContext[listId]);
 
     const onUnloadingContext = useCallback(() => workingListDispatch(unloadingContext), [workingListDispatch]);
 
@@ -154,7 +152,7 @@ const useWorkingListsContext = (listId: string, workingListDispatch: Function) =
 
     return {
         ...currentContextState,
-        listContext,
+        loadedContext,
         onUnloadingContext,
         program,
     };

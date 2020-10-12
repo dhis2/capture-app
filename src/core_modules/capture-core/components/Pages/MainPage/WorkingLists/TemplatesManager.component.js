@@ -5,6 +5,7 @@ import TemplateSelector from './TemplateSelector.component';
 import { ManagerContext } from './workingLists.context';
 import { withBorder } from './borderHOC';
 import type {
+    WorkingListTemplates,
     WorkingListTemplate,
 } from './workingLists.types';
 
@@ -14,7 +15,7 @@ type PassOnProps = {
 
 type Props = {
     ...PassOnProps,
-    templates: Array<WorkingListTemplate>,
+    templates: WorkingListTemplates,
 };
 
 const TemplatesManager = (props: Props) => {

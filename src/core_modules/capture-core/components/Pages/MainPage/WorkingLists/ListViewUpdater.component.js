@@ -40,10 +40,8 @@ type Props = {
     filters: Object,
     sortById: ?string,
     sortByDirection: ?string,
-    onUpdateEventList: Function,
-    onCancelUpdateEventList: Function,
+    onUpdateList: Function,
     customMenuContents: Array<Object>,
-    lastEventIdDeleted: ?string,
     programId: string,
     orgUnitId: string,
     categories?: Object,
@@ -54,10 +52,8 @@ export const ListViewUpdater = (props: Props) => {
         filters,
         sortById,
         sortByDirection,
-        onUpdateEventList,
-        onCancelUpdateEventList,
+        onUpdateList,
         customMenuContents,
-        lastEventIdDeleted,
         programId,
         orgUnitId,
         categories,
@@ -67,10 +63,12 @@ export const ListViewUpdater = (props: Props) => {
     const {
         currentPage,
         rowsPerPage,
+        onCancelUpdateList,
+        lastIdDeleted,
     } = React.useContext(ListViewUpdaterContext);
 
     useUpdateListEffect(() => {
-        onUpdateEventList({
+        onUpdateList({
             filters,
             sortById,
             sortByDirection,
@@ -79,9 +77,9 @@ export const ListViewUpdater = (props: Props) => {
             programId,
             orgUnitId,
             categories,
-            lastEventIdDeleted,
+            lastIdDeleted,
         });
-        return () => onCancelUpdateEventList();
+        return () => onCancelUpdateList && onCancelUpdateList();
     }, [
         filters,
         sortById,
@@ -91,7 +89,7 @@ export const ListViewUpdater = (props: Props) => {
         programId,
         orgUnitId,
         categories,
-        lastEventIdDeleted,
+        lastIdDeleted,
     ]);
 
     return (

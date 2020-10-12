@@ -53,7 +53,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, action.payload.error, action.payload.action),
     [enrollmentActionTypes.ENROLLMENT_LOAD_FAILED]: (state, action) =>
         addErrorFeedback(state, action.payload),
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT_ERROR]: (state, action) =>
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT_ERROR]: (state, action) =>
         addErrorFeedback(state, action.payload.errorMessage),
     [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE]: (state, action) => {
         const error = action.payload;
@@ -77,7 +77,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         ];
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_ERROR]: (state, action) => [
+    [eventWorkingListsActionTypes.LIST_UPDATE_ERROR]: (state, action) => [
         ...state,
         getErrorFeedback(action.payload.errorMessage),
     ],

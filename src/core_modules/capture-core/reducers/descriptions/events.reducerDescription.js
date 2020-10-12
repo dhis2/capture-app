@@ -21,13 +21,13 @@ const getFromWorkingListRetrieval = (eventContainers, containerProperty) => {
 };
 
 export const eventsDesc = createReducerDescription({
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const eventContainers = action.payload.eventContainers;
         const newEventsById = getFromWorkingListRetrieval(eventContainers, 'event');
         const newState = { ...newEventsById };
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const eventContainers = action.payload.eventContainers;
         const newEventsById = getFromWorkingListRetrieval(eventContainers, 'event');
         const newState = { ...newEventsById };
@@ -95,13 +95,13 @@ export const eventsDesc = createReducerDescription({
 }, 'events', {});
 
 export const eventsValuesDesc = createReducerDescription({
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const eventContainers = action.payload.eventContainers;
         const newEventsValuesById = getFromWorkingListRetrieval(eventContainers, 'values');
         const newState = { ...newEventsValuesById };
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const eventContainers = action.payload.eventContainers;
         const newEventsValuesById = getFromWorkingListRetrieval(eventContainers, 'values');
         const newState = { ...newEventsValuesById };

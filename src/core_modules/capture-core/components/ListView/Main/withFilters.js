@@ -5,23 +5,23 @@ import type { Columns } from '../types';
 
 type Props = {
     columns: Columns,
-    onFilterUpdate: Function,
+    onUpdateFilter: Function,
     onClearFilter: Function,
-    onRestMenuItemSelected: Function,
+    onSelectRestMenuItem: Function,
     stickyFilters: Object,
 };
 
 export const withFilters = () => (InnerComponent: React.ComponentType<any>) =>
-    ({ columns, onFilterUpdate, onClearFilter, onRestMenuItemSelected, stickyFilters, ...passOnProps }: Props) => (
+    ({ columns, onUpdateFilter, onClearFilter, onSelectRestMenuItem, stickyFilters, ...passOnProps }: Props) => (
         <InnerComponent
             {...passOnProps}
             columns={columns}
             filters={
                 <Filters
                     columns={columns}
-                    onFilterUpdate={onFilterUpdate}
+                    onUpdateFilter={onUpdateFilter}
                     onClearFilter={onClearFilter}
-                    onRestMenuItemSelected={onRestMenuItemSelected}
+                    onSelectRestMenuItem={onSelectRestMenuItem}
                     stickyFilters={stickyFilters}
                 />
             }

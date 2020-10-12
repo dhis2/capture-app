@@ -16,7 +16,7 @@ import { getApi } from '../../../../../d2';
 export const initEventListEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
-            actionTypes.EVENT_LIST_INIT,
+            actionTypes.LIST_VIEW_INIT,
         ),
         concatMap((action) => {
             const { selectedTemplate, columnsMetaForDataFetching, categoryCombinationMeta, listId } = action.payload;
@@ -39,7 +39,7 @@ export const initEventListEpic = (action$: InputObservable) =>
 
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.EVENT_LIST_INIT_CANCEL),
+                        ofType(actionTypes.LIST_VIEW_INIT_CANCEL),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
                 ),
@@ -49,7 +49,7 @@ export const initEventListEpic = (action$: InputObservable) =>
 export const updateEventListEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
-            actionTypes.EVENT_LIST_UPDATE,
+            actionTypes.LIST_UPDATE,
         ),
         concatMap((action) => {
             const { queryArgs, columnsMetaForDataFetching, categoryCombinationMeta, listId } = action.payload;
@@ -57,13 +57,13 @@ export const updateEventListEpic = (action$: InputObservable) =>
             return from(updatePromise).pipe(
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.EVENT_LIST_UPDATE_CANCEL),
+                        ofType(actionTypes.LIST_UPDATE_CANCEL),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
                 ),
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.EVENT_LIST_INIT_CANCEL),
+                        ofType(actionTypes.LIST_VIEW_INIT_CANCEL),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
                 ));

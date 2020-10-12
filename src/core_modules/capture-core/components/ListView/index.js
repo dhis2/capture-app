@@ -7,6 +7,14 @@ export type {
     CustomMenuContent,
     FiltersData,
     StickyFilters,
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
+    UpdateFilter,
+    SelectRestMenuItem,
+    SetColumnOrder,
+    SelectRow,
+    Sort,
 } from './types';
 
 export { dateFilterTypes, assigneeFilterModes } from '../FiltersForTypes';

@@ -8,6 +8,7 @@ import { Button } from '../../../Buttons';
 import ActiveFilterButton from './ActiveFilterButton.component';
 import FilterSelectorContents from '../Contents/FilterSelectorContents.component';
 import OptionSet from '../../../../metaData/OptionSet/OptionSet';
+import type { UpdateFilter, ClearFilter } from '../../types';
 import type { FilterData } from '../../../FiltersForTypes';
 
 const getStyles = (theme: Theme) => ({
@@ -43,8 +44,8 @@ type Props = {
         inactiveFilterButton: string,
         inactiveFilterButtonLabel: string,
     },
-    onFilterUpdate: (data: ?Object, itemId: string, commitValue?: any) => void,
-    onClearFilter: (itemId: string) => void,
+    onUpdateFilter: UpdateFilter,
+    onClearFilter: ClearFilter,
     onSetVisibleSelector: Function,
     isSelectorVisible: boolean,
     filterValue?: FilterData,
@@ -88,11 +89,11 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     handleFilterUpdate = (data: ?Object) => {
-        const { itemId, onFilterUpdate, onClearFilter } = this.props;
+        const { itemId, onUpdateFilter, onClearFilter } = this.props;
         if (data == null) {
             onClearFilter(itemId);
         } else {
-            onFilterUpdate(data, itemId);
+            onUpdateFilter(data, itemId);
         }
         this.closeFilterSelector();
     }

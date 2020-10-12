@@ -18,14 +18,14 @@ export const actionTypes = {
     TEMPLATE_UPDATE: 'EventWorkingListsTemplateUpdate',
     TEMPLATE_UPDATE_SUCCESS: 'EventWorkingListsTemplateUpdateSuccess',
     TEMPLATE_UPDATE_ERROR: 'EventWorkingListsTemplateUpdateError',
-    EVENT_LIST_INIT: 'EventWorkingListsEventListInit',
-    EVENT_LIST_INIT_SUCCESS: 'EventWorkingListsEventListInitSuccess',
-    EVENT_LIST_INIT_ERROR: 'EventWorkingListsEventListInitError',
-    EVENT_LIST_INIT_CANCEL: 'EventWorkingListsEventListInitCancel',
-    EVENT_LIST_UPDATE: 'EventWorkingListsEventListUpdate',
-    EVENT_LIST_UPDATE_SUCCESS: 'EventWorkingListsEventListUpdateSuccess',
-    EVENT_LIST_UPDATE_ERROR: 'EventWorkingListsEventListUpdateError',
-    EVENT_LIST_UPDATE_CANCEL: 'EventWorkingListsEventListUpdateCancel',
+    LIST_VIEW_INIT: 'WorkingListsListViewInit',
+    LIST_VIEW_INIT_SUCCESS: 'WorkingListsListViewInitSuccess',
+    LIST_VIEW_INIT_ERROR: 'WorkingListsListViewInitError',
+    LIST_VIEW_INIT_CANCEL: 'WorkingListsListViewInitCancel',
+    LIST_UPDATE: 'WorkingListsListUpdate',
+    LIST_UPDATE_SUCCESS: 'WorkingListsListUpdateSuccess',
+    LIST_UPDATE_ERROR: 'WorkingListsListUpdateError',
+    LIST_UPDATE_CANCEL: 'WorkingListsListUpdateCancel',
     EVENT_DELETE: 'EventWorkingListsEventListEventDelete',
     EVENT_DELETE_SUCCESS: 'EventWorkingListsEventListEventDeleteSuccess',
     EVENT_DELETE_ERROR: 'EventWorkingListsEventListEventDeleteError',
@@ -87,32 +87,32 @@ export const deleteTemplateSuccess = (template: Object, listId: string) =>
 export const deleteTemplateError = (template: Object, listId: string) =>
     actionCreator(actionTypes.TEMPLATE_DELETE_ERROR)({ template, listId });
 
-export const initEventList =
+export const initListView =
     (selectedTemplate: Object, context: Object, meta: Object) =>
-        actionCreator(actionTypes.EVENT_LIST_INIT)({ ...meta, selectedTemplate, context });
+        actionCreator(actionTypes.LIST_VIEW_INIT)({ ...meta, selectedTemplate, context });
 
-export const initEventListSuccess =
-    (listId: string, data: Object) => actionCreator(actionTypes.EVENT_LIST_INIT_SUCCESS)({ ...data, listId });
+export const initListViewSuccess =
+    (listId: string, data: Object) => actionCreator(actionTypes.LIST_VIEW_INIT_SUCCESS)({ ...data, listId });
 
-export const initEventListError =
+export const initListViewError =
     (listId: string, errorMessage: string) =>
-        actionCreator(actionTypes.EVENT_LIST_INIT_ERROR)({ listId, errorMessage });
+        actionCreator(actionTypes.LIST_VIEW_INIT_ERROR)({ listId, errorMessage });
 
-export const initEventListCancel =
-    (listId: string) => actionCreator(actionTypes.EVENT_LIST_INIT_CANCEL)({ listId });
+export const initListViewCancel =
+    (listId: string) => actionCreator(actionTypes.LIST_VIEW_INIT_CANCEL)({ listId });
 
-export const updateEventList =
-    (queryArgs: Object, meta: Object) => actionCreator(actionTypes.EVENT_LIST_UPDATE)({ queryArgs, ...meta });
+export const updateList =
+    (queryArgs: Object, meta: Object) => actionCreator(actionTypes.LIST_UPDATE)({ queryArgs, ...meta });
 
-export const updateEventListSuccess =
-    (listId: string, data: Object) => actionCreator(actionTypes.EVENT_LIST_UPDATE_SUCCESS)({ ...data, listId });
+export const updateListSuccess =
+    (listId: string, data: Object) => actionCreator(actionTypes.LIST_UPDATE_SUCCESS)({ ...data, listId });
 
-export const updateEventListError =
+export const updateListError =
     (listId: string, errorMessage: string) =>
-        actionCreator(actionTypes.EVENT_LIST_UPDATE_ERROR)({ listId, errorMessage });
+        actionCreator(actionTypes.LIST_UPDATE_ERROR)({ listId, errorMessage });
 
-export const updateEventListCancel =
-    (listId: string) => actionCreator(actionTypes.EVENT_LIST_UPDATE_CANCEL)({ listId });
+export const updateListCancel =
+    (listId: string) => actionCreator(actionTypes.LIST_UPDATE_CANCEL)({ listId });
 
 export const deleteEventSuccess =
     (eventId: string, listId: string) => actionCreator(actionTypes.EVENT_DELETE_SUCCESS)({ eventId, listId });

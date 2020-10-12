@@ -25,7 +25,7 @@ export const EventWorkingListsRedux = ({ listId, ...passOnProps }: Props) => {
     const downloadRequest = useSelector(({ workingLists }) =>
         workingLists[listId] && workingLists[listId].currentRequest); // TODO: Remove when DownloadDialog is rewritten
 
-    const onListRowSelect = useCallback(() => ({ eventId }) => {
+    const onSelectListRow = useCallback(() => ({ eventId }) => {
         window.scrollTo(0, 0);
         dispatch(openViewEventPage(eventId));
     }, [dispatch]);
@@ -39,8 +39,8 @@ export const EventWorkingListsRedux = ({ listId, ...passOnProps }: Props) => {
             {...passOnProps}
             {...commonStateManagementProps}
             {...eventsValues}
-            lastEventIdDeleted={lastEventIdDeleted}
-            onListRowSelect={onListRowSelect}
+            lastIdDeleted={lastEventIdDeleted} // TODO: New logic
+            onSelectListRow={onSelectListRow}
             onDeleteEvent={onDeleteEvent}
             downloadRequest={downloadRequest}
         />

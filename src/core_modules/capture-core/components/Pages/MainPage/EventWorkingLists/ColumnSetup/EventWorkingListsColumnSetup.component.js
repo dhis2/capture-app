@@ -9,8 +9,8 @@ import type { ColumnsMetaForDataFetching } from '../types';
 export const EventWorkingListsColumnSetup = ({
     program,
     customColumnOrder,
-    onLoadEventList,
-    onUpdateEventList,
+    onLoadView,
+    onUpdateList,
     ...passOnProps
 }: Props) => {
     const defaultColumns = useMemo(() => getDefaultColumnConfig(program), [
@@ -23,8 +23,8 @@ export const EventWorkingListsColumnSetup = ({
                 // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
-        onLoadEventList(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
-    }, [onLoadEventList, defaultColumns]);
+        onLoadView(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
+    }, [onLoadView, defaultColumns]);
 
     const injectColumnMetaToUpdateList = useCallback((queryArgs: Object) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
@@ -32,8 +32,8 @@ export const EventWorkingListsColumnSetup = ({
                 // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
-        onUpdateEventList(queryArgs, columnsMetaForDataFetching);
-    }, [onUpdateEventList, defaultColumns]);
+        onUpdateList(queryArgs, columnsMetaForDataFetching);
+    }, [onUpdateList, defaultColumns]);
 
 
     const defaultColumnsAsObject = useMemo(() =>
@@ -60,8 +60,8 @@ export const EventWorkingListsColumnSetup = ({
             columns={columns}
             defaultColumns={defaultColumns}
             onCheckSkipReload={shouldSkipReload}
-            onLoadEventList={injectColumnMetaToLoadList}
-            onUpdateEventList={injectColumnMetaToUpdateList}
+            onLoadView={injectColumnMetaToLoadList}
+            onUpdateList={injectColumnMetaToUpdateList}
         />
     );
 };

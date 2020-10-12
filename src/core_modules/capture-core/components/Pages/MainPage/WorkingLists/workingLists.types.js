@@ -1,6 +1,19 @@
 // @flow
 import { type OptionSet, dataElementTypes } from '../../../../metaData';
-import type { CustomMenuContents, CustomRowMenuContents, FiltersData, StickyFilters } from '../../../ListView';
+import type {
+    CustomMenuContents,
+    CustomRowMenuContents,
+    FiltersData,
+    StickyFilters,
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
+    UpdateFilter,
+    SelectRestMenuItem,
+    SetColumnOrder,
+    SelectRow,
+    Sort,
+} from '../../../ListView';
 
 export type WorkingListTemplate = {|
     id: string,
@@ -16,7 +29,11 @@ export type WorkingListTemplate = {|
         manage: boolean,
     },
     notPreserved?: ?boolean,
+    nextEventQueryCriteria?: Object,
+    deleted?: boolean,
 |};
+
+export type WorkingListTemplates = Array<WorkingListTemplate>;
 
 type ColumnConfigBase = {|
     id: string,
@@ -48,56 +65,89 @@ export type ColumnOrder = Array<{ id: string, visible: boolean }>;
 export type ListViewUpdaterContextData = {
     currentPage?: number,
     rowsPerPage?: number,
+    onCancelUpdateList?: Function,
+    lastIdDeleted?: string,
 };
 
-export type InterfaceProps = $ReadOnly<{|
+export type LoadedContext = {
+    programIdTemplates?: string,
+    programIdView?: string,
+    orgUnitId?: string,
     categories?: Object,
+};
+
+export type Categories = { [id: string]: string };
+
+export type AddTemplate = (name: string, template: WorkingListTemplate) => void;
+export type CancelLoadView = () => void;
+export type CancelLoadTemplates = () => void;
+export type CancelUpdateList = () => void;
+export type DeleteTemplate = (template: WorkingListTemplate) => void;
+export type LoadView = (template: WorkingListTemplate, meta: { programId: string, orgUnitId: string, categories: Categories, lastTransaction: number }) => void;
+export type LoadTemplates = (programId: string) => void;
+export type SelectTemplate = (templateId: string) => void;
+export type UnloadingContext = () => void;
+export type UpdateTemplate = (template: WorkingListTemplate) => void;
+export type UpdateList = (data: {
+    filters?: FiltersData,
+    sortById?: string,
+    sortByDirection?: string,
+    currentPage: number,
+    rowsPerPage: number,
+    programId: string,
+    orgUnitId: string,
+    categories?: Categories,
+    lastIdDeleted?: string,
+}) => void;
+
+export type InterfaceProps<InputDataSource> = $ReadOnly<{|
+    categories?: Categories,
     columns: ColumnConfigs,
     currentPage?: number,
     currentTemplate?: WorkingListTemplate,
     currentViewHasTemplateChanges?: boolean,
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
-    dataSource: DataSource,
+    dataSource?: DataSource,
     filters?: FiltersData,
-    isLoading: boolean,
-    isUpdating: boolean,
-    isUpdatingWithDialog: boolean,
-    lastEventIdDeleted?: string,
-    lastTransaction: number,
-    listContext: Object,
-    loadEventListError?: string,
+    loading: boolean,
+    updating: boolean,
+    updatingWithDialog: boolean,
+    lastIdDeleted?: string, // TODO: Dealing with this in next PR
+    lastTransaction: number, // TODO: Dealing with this in next PR
+    loadedContext?: LoadedContext,
+    loadViewError?: string,
     loadTemplatesError?: string,
-    onAddTemplate: Function,
-    onCancelLoadEventList: Function,
-    onCancelLoadTemplates: Function,
-    onCancelUpdateEventList: Function,
-    onChangePage: Function,
-    onChangeRowsPerPage: Function,
-    onCheckSkipReload: Function, // TODO: Break this down
-    onCleanSkipInitAddingTemplate: Function, // TODO: Break this down
-    onClearFilter: Function,
-    onDeleteTemplate: Function,
-    onFilterUpdate: Function,
-    onListRowSelect: Function,
-    onLoadEventList: Function,
-    onLoadTemplates: Function,
-    onRestMenuItemSelected: Function,
-    onSelectTemplate: Function,
-    onSetListColumnOrder: Function,
-    onSortList: Function,
-    onUnloadingContext: Function,
-    onUpdateTemplate: Function,
+    onAddTemplate: AddTemplate,
+    onCancelLoadView?: CancelLoadView,
+    onCancelLoadTemplates?: CancelLoadTemplates,
+    onCancelUpdateList?: CancelUpdateList,
+    onChangePage: ChangePage,
+    onChangeRowsPerPage: ChangeRowsPerPage,
+    onCheckSkipReload: Function, // TODO: Dealing with this in next PR
+    onCleanSkipInitAddingTemplate: Function, // TODO: Dealing with this in next PR
+    onClearFilter: ClearFilter,
+    onDeleteTemplate: DeleteTemplate,
+    onUpdateFilter: UpdateFilter,
+    onSelectListRow: SelectRow<InputDataSource>,
+    onLoadView: LoadView,
+    onLoadTemplates: LoadTemplates,
+    onSelectRestMenuItem: SelectRestMenuItem,
+    onSelectTemplate: SelectTemplate,
+    onSetListColumnOrder: SetColumnOrder,
+    onSortList: Sort,
+    onUnloadingContext?: UnloadingContext,
+    onUpdateTemplate: UpdateTemplate,
+    onUpdateList: UpdateList,
     orgUnitId: string,
     programId: string,
-    recordsOrder?: Array<string>,
+    recordsOrder?: Array<string>, // TODO: Dealing with this in later PR
     rowIdKey: string,
     rowsCount?: number,
     rowsPerPage?: number,
     sortByDirection?: string,
     sortById?: string,
     stickyFilters?: StickyFilters,
-    templates?: Array<WorkingListTemplate>,
-    templatesAreLoading: boolean,
-    templatesForPogramId: string, // TODO: Break this down
+    templates?: WorkingListTemplates,
+    templatesLoading: boolean,
 |}>;

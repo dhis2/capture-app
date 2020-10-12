@@ -23,7 +23,7 @@ export const ListViewBuilder = ({ columns, customListViewMenuContents, ...passOn
     const {
         dataSource,
         recordsOrder,
-        onListRowSelect,
+        onSelectListRow,
         onSortList,
         onSetListColumnOrder,
         ...passOnContext
@@ -76,7 +76,7 @@ export const ListViewBuilder = ({ columns, customListViewMenuContents, ...passOn
             {...passOnContext}
             columns={listViewColumns}
             dataSource={listViewDataSource}
-            onRowClick={onListRowSelect}
+            onSelectRow={onSelectListRow}
             onSort={onSortList}
             onSetColumnOrder={onSetListColumnOrder}
             customMenuContents={customListViewMenuContents}

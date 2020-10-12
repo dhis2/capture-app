@@ -19,8 +19,8 @@ const getStyles = (theme: Theme) => ({
 type Props = {
     columns: ?Array<Column>,
     stickyFilters: StickyFilters,
-    onRestMenuItemSelected: Function,
-    onFilterUpdate: Function,
+    onSelectRestMenuItem: Function,
+    onUpdateFilter: Function,
     onClearFilter: Function,
     classes: Object,
 };
@@ -148,14 +148,14 @@ const renderIndividualFilterButtons = ({
     individualElementsArray,
     visibleSelectorId,
     onSetVisibleSelector,
-    onFilterUpdate,
+    onUpdateFilter,
     onClearFilter,
     classes,
 }: {
     individualElementsArray: Array<Column>,
     visibleSelectorId: ?string,
     onSetVisibleSelector: Function,
-    onFilterUpdate: Function,
+    onUpdateFilter: Function,
     onClearFilter: Function,
     classes: Object,
 }) => individualElementsArray
@@ -175,7 +175,7 @@ const renderIndividualFilterButtons = ({
                     singleSelect={element.singleSelect}
                     onSetVisibleSelector={onSetVisibleSelector}
                     isSelectorVisible={element.id === visibleSelectorId}
-                    onFilterUpdate={onFilterUpdate}
+                    onUpdateFilter={onUpdateFilter}
                     onClearFilter={onClearFilter}
                 />
             </div>
@@ -184,13 +184,13 @@ const renderIndividualFilterButtons = ({
 
 const renderRestButton = (
     restElementsArray: Array<Column>,
-    onRestMenuItemSelected: Function,
+    onSelectRestMenuItem: Function,
 ) => (restElementsArray.length > 0 ? (
     <FilterRestMenu
         key={'restMenu'}
         data-test={'filter-rest-menu'}
         columns={restElementsArray}
-        onItemSelected={onRestMenuItemSelected}
+        onItemSelected={onSelectRestMenuItem}
     />
 ) : null);
 
@@ -199,8 +199,8 @@ const FiltersPlain = memo<Props>((props: Props) => {
     const {
         columns,
         stickyFilters,
-        onRestMenuItemSelected,
-        onFilterUpdate,
+        onSelectRestMenuItem,
+        onUpdateFilter,
         onClearFilter,
         classes,
     } = props;
@@ -244,10 +244,10 @@ const FiltersPlain = memo<Props>((props: Props) => {
 
     const handleRestMenuItemSelected = React.useCallback((id: string) => {
         setVisibleSelector(id);
-        onRestMenuItemSelected(id);
+        onSelectRestMenuItem(id);
     }, [
         setVisibleSelector,
-        onRestMenuItemSelected,
+        onSelectRestMenuItem,
     ]);
 
     const filterButtons = React.useMemo(() => {
@@ -256,7 +256,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
             individualElementsArray,
             visibleSelectorId,
             onSetVisibleSelector: setVisibleSelector,
-            onFilterUpdate,
+            onUpdateFilter,
             onClearFilter,
             classes,
         });
@@ -275,7 +275,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         setVisibleSelector,
         classes,
         handleRestMenuItemSelected,
-        onFilterUpdate,
+        onUpdateFilter,
         onClearFilter,
     ]);
 

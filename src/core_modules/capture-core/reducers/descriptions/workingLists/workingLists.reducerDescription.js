@@ -17,13 +17,12 @@ export const workingListsTemplatesDesc = createReducerDescription({
         };
     },
     [eventWorkingListsActionTypes.TEMPLATES_FETCH_SUCCESS]: (state, action) => {
-        const { programId, templates, listId } = action.payload;
+        const { templates, listId } = action.payload;
         return {
             ...state,
             [listId]: {
                 ...state[listId],
                 templates,
-                programId,
                 loading: false,
             },
         };
@@ -291,14 +290,14 @@ export const workingListsTemplatesDesc = createReducerDescription({
 }, 'workingListsTemplates');
 
 export const workingListsDesc = createReducerDescription({
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT]: (state, action) => {
         const { listId } = action.payload;
         return {
             ...state,
             [listId]: undefined,
         };
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, eventContainers, request } = action.payload;
         newState[listId] = {
@@ -310,7 +309,7 @@ export const workingListsDesc = createReducerDescription({
         };
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, eventContainers, request } = action.payload;
         newState[listId] = {
@@ -355,13 +354,13 @@ const getReadyState = (oldState, more) => ({
 });
 
 export const workingListsUIDesc = createReducerDescription({
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = { ...newState[listId], isLoading: true };
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = getReadyState(newState[listId], {
@@ -370,7 +369,7 @@ export const workingListsUIDesc = createReducerDescription({
         });
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT_ERROR]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT_ERROR]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         newState[payload.listId] = getReadyState({}, {
@@ -378,13 +377,13 @@ export const workingListsUIDesc = createReducerDescription({
         });
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_UPDATE]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = { ...newState[listId], isUpdating: true };
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = getReadyState(newState[listId], {
@@ -392,7 +391,7 @@ export const workingListsUIDesc = createReducerDescription({
         });
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_ERROR]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_UPDATE_ERROR]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = getReadyState({}, {
@@ -423,14 +422,14 @@ export const workingListsUIDesc = createReducerDescription({
 }, 'workingListsUI');
 
 export const workingListsColumnsOrderDesc = createReducerDescription({
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT]: (state, action) => {
         const { listId } = action.payload;
         return {
             ...state,
             [listId]: undefined,
         };
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const { listId, config: { customColumnOrder } } = action.payload;
         return {
             ...state,
@@ -461,16 +460,27 @@ export const workingListsContextDesc = createReducerDescription({
     The meaning is slightly changed though, having a context now implies that a request for events was done for this context,
     not that events was successfully retrieved for this context.
     */
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+    [eventWorkingListsActionTypes.TEMPLATES_FETCH]: (state, action) => {
+        const { programId, listId } = action.payload;
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                programIdTemplates: programId,
+            },
+        };
+    },
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT]: (state, action) => {
         const newState = { ...state };
-        const { listId, context } = action.payload;
+        const { listId, context: { programId, ...restContext } } = action.payload;
         newState[listId] = {
-            ...context,
+            ...newState[listId],
+            ...restContext,
+            programIdView: programId,
             timestamp: moment().toISOString(),
         };
         return newState;
     },
-    // TODO: WHAT IS THIS!??!?!?
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
         newState[action.payload.listId] = action.payload.selections;
@@ -479,14 +489,14 @@ export const workingListsContextDesc = createReducerDescription({
 }, 'workingListsContext');
 
 export const workingListsStickyFiltersDesc = createReducerDescription({
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT]: (state, action) => {
         const { listId } = action.payload;
         return {
             ...state,
             [listId]: undefined,
         };
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const { listId, config } = action.payload;
         const filters = config.filters;
         const filtersWithValueOnInit = filters ? Object.keys(filters).reduce((acc, key) => ({

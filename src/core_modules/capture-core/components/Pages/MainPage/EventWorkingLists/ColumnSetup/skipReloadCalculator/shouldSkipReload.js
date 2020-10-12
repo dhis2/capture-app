@@ -19,13 +19,16 @@ export function shouldSkipReload(
         categories,
     };
 
+    // TODO: THIS FILE WILL BE REMOVED IN NEXT PR
     const {
         lastTransaction: contextLastTransaction,
         timestamp: contextTimestamp,
-        ...listSelections
+        programIdView: contextProgramId,
+        orgUnitId: contextOrgUnitId,
+        categories: contextCategories,
     } = listContext;
 
-    if (!isSelectionsEqual(currentSelections, listSelections)) {
+    if (!isSelectionsEqual(currentSelections, { programId: contextProgramId, orgUnitId: contextOrgUnitId, categories: contextCategories })) {
         return false;
     }
 

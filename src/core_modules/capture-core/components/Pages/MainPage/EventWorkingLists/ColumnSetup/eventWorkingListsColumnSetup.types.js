@@ -11,6 +11,6 @@ export type Props = $ReadOnly<{
     ...PassOnProps,
     program: EventProgram,
     customColumnOrder?: Array<{ id: string, visible: boolean }>,
-    onLoadEventList: Function,
-    onUpdateEventList: Function,
+    onLoadView: Function,
+    onUpdateList: Function,
 }>;

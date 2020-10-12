@@ -5,8 +5,8 @@ import { errorCreator } from 'capture-core-utils';
 import { convertToClientConfig } from '../helpers/eventFilters';
 import { getEventWorkingListDataAsync } from './eventsRetriever';
 import {
-    initEventListSuccess,
-    initEventListError,
+    initListViewSuccess,
+    initListViewError,
 } from '../eventWorkingLists.actions';
 import { buildQueryArgs } from '../helpers/eventsQueryArgsBuilder';
 import type { ApiEventQueryCriteria, CommonQueryData, ClientConfig, ColumnsMetaForDataFetching } from '../types';
@@ -46,7 +46,7 @@ export const initEventWorkingListAsync = async (
             },
         ), columnsMetaForDataFetching, categoryCombinationMeta)
         .then(data =>
-            initEventListSuccess(listId, {
+            initListViewSuccess(listId, {
                 ...data,
                 config: {
                     ...clientConfig,
@@ -59,6 +59,6 @@ export const initEventWorkingListAsync = async (
         )
         .catch((error) => {
             log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));
-            return initEventListError(listId, i18n.t('Working list could not be loaded'));
+            return initListViewError(listId, i18n.t('Working list could not be loaded'));
         });
 };

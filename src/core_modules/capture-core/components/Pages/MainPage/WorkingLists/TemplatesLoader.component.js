@@ -2,6 +2,7 @@
 import React, { memo } from 'react';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
 import TemplatesManager from './TemplatesManager.component';
+import type { LoadedContext } from './workingLists.types';
 
 const TemplatesManangerWithLoadingIndicator = withErrorMessageHandler()(
     withLoadingIndicator()(TemplatesManager));
@@ -9,48 +10,49 @@ const TemplatesManangerWithLoadingIndicator = withErrorMessageHandler()(
 type Props = {
     loadTemplatesError: ?string,
     onLoadTemplates: Function,
-    onCancelLoadTemplates: Function,
+    onCancelLoadTemplates?: Function,
     programId: string,
-    templatesForProgramId: ?string,
+    loadedContext: LoadedContext,
     dirtyTemplates: boolean,
-    templatesAreLoading: boolean,
+    templatesLoading: boolean,
 };
 
-// eslint-disable-next-line complexity
 const TemplatesLoader = memo<Props>((props: Props) => {
     const {
         loadTemplatesError,
         onLoadTemplates,
         onCancelLoadTemplates,
         programId,
-        templatesForProgramId,
+        loadedContext,
         dirtyTemplates,
-        templatesAreLoading,
+        templatesLoading,
         ...passOnProps
     } = props;
 
     const firstRunRef = React.useRef(true);
-    // eslint-disable-next-line complexity
+
     React.useEffect(() => {
-        if (programId === templatesForProgramId &&
+        if (programId === loadedContext.programIdTemplates &&
             (!dirtyTemplates || !firstRunRef.current)) {
             firstRunRef.current = false;
             return undefined;
         }
         firstRunRef.current = false;
         onLoadTemplates(programId);
-        return () => onCancelLoadTemplates();
+        return undefined;
     }, [
         onLoadTemplates,
         onCancelLoadTemplates,
         programId,
-        templatesForProgramId,
+        loadedContext.programIdTemplates,
         dirtyTemplates,
     ]);
 
-    const ready = programId === templatesForProgramId &&
+    React.useEffect(() => () => onCancelLoadTemplates && onCancelLoadTemplates(), [onCancelLoadTemplates]);
+
+    const ready = programId === loadedContext.programIdTemplates &&
         (!dirtyTemplates || !firstRunRef.current) &&
-        !templatesAreLoading;
+        !templatesLoading;
 
     return (
         <TemplatesManangerWithLoadingIndicator
@@ -58,6 +60,7 @@ const TemplatesLoader = memo<Props>((props: Props) => {
             ready={ready}
             error={loadTemplatesError}
             programId={programId}
+            loadedContext={loadedContext}
         />
     );
 });

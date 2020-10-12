@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
 import { ListViewUpdater } from './ListViewUpdater.component';
 import { ListViewLoaderContext } from './workingLists.context';
+import type { LoadedContext } from './workingLists.types';
 
 const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
     withLoadingIndicator(() => ({ margin: 10 }))(ListViewUpdater));
@@ -10,6 +11,7 @@ const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
 type Props = {
     currentTemplate: Object,
     programId: string,
+    loadedContext: LoadedContext,
 };
 
 // eslint-disable-next-line complexity
@@ -17,6 +19,7 @@ export const ListViewLoader = memo<Props>((props: Props) => {
     const {
         currentTemplate,
         programId,
+        loadedContext,
         ...passOnProps
     } = props;
 
@@ -25,36 +28,33 @@ export const ListViewLoader = memo<Props>((props: Props) => {
         sortByDirection,
         filters,
         columns,
-        isLoading,
-        onLoadEventList,
-        loadEventListError: loadError,
-        onCancelLoadEventList,
-        onUpdateEventList,
-        onCancelUpdateEventList,
+        loading,
+        onLoadView,
+        loadViewError,
+        onCancelLoadView,
+        onUpdateList,
         onCleanSkipInitAddingTemplate,
         orgUnitId,
         categories,
         lastTransaction,
-        listContext,
         onCheckSkipReload,
-        lastEventIdDeleted,
         dirtyEventList,
     } = React.useContext(ListViewLoaderContext);
 
-    const hasContextChanged = React.useMemo(() => !onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, listContext), [
+    const hasContextChanged = React.useMemo(() => !onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, loadedContext), [
         onCheckSkipReload,
         programId,
         orgUnitId,
         categories,
         lastTransaction,
-        listContext,
+        loadedContext,
     ]);
 
     const prevTemplateRef = React.useRef(undefined);
     const firstRunRef = React.useRef(true);
     // eslint-disable-next-line complexity
     React.useEffect(() => {
-        if (onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, listContext) &&
+        if (onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, loadedContext) &&
             (!prevTemplateRef.current || currentTemplate.id === prevTemplateRef.current.id) &&
             (!dirtyEventList || !firstRunRef.current)) {
             prevTemplateRef.current = currentTemplate;
@@ -69,13 +69,12 @@ export const ListViewLoader = memo<Props>((props: Props) => {
             return () => onCleanSkipInitAddingTemplate(currentTemplate);
         }
 
-        onLoadEventList(currentTemplate,
+        onLoadView(currentTemplate,
             { programId, orgUnitId, categories, lastTransaction },
         );
         return undefined;
     }, [
-        onLoadEventList,
-        onCancelLoadEventList,
+        onLoadView,
         currentTemplate,
         onCheckSkipReload,
         onCleanSkipInitAddingTemplate,
@@ -83,16 +82,16 @@ export const ListViewLoader = memo<Props>((props: Props) => {
         orgUnitId,
         categories,
         lastTransaction,
-        listContext,
+        loadedContext,
         dirtyEventList,
     ]);
 
-    React.useEffect(() => () => onCancelLoadEventList(), [onCancelLoadEventList]);
+    React.useEffect(() => () => onCancelLoadView && onCancelLoadView(), [onCancelLoadView]);
 
     const ready = !hasContextChanged &&
         (!prevTemplateRef.current || currentTemplate.id === prevTemplateRef.current.id || !!currentTemplate.skipInitDuringAddProcedure) &&
         (!dirtyEventList || !firstRunRef.current) &&
-        !isLoading;
+        !loading;
 
     return (
         <EventListUpdaterWithLoadingIndicator
@@ -105,10 +104,8 @@ export const ListViewLoader = memo<Props>((props: Props) => {
             orgUnitId={orgUnitId}
             categories={categories}
             ready={ready}
-            error={loadError}
-            onUpdateEventList={onUpdateEventList}
-            onCancelUpdateEventList={onCancelUpdateEventList}
-            lastEventIdDeleted={lastEventIdDeleted}
+            error={loadViewError}
+            onUpdateList={onUpdateList}
         />
     );
 });

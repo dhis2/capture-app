@@ -55,23 +55,33 @@ export type PaginationContextData = {
 export type StickyFilters =
     { userSelectedFilters: ?{ [id: string]: boolean }, filtersWithValueOnInit: ?{ [id: string]: boolean } };
 
+export type ChangePage = (pageNumber: number) => void;
+export type ChangeRowsPerPage = (rowsPerPage: number) => void;
+export type UpdateFilter = (data: ?Object, id: string) => void;
+export type ClearFilter = (id: string) => void;
+export type SelectRestMenuItem = (id: string) => void;
+export type SetColumnOrder = (columns: Columns) => void;
+export type SelectRow = (rowData: DataSourceItem) => void;
+export type Sort = (id: string, direction: string) => void;
 export type InterfaceProps = $ReadOnly<{
-    onChangePage: Function,
-    onChangeRowsPerPage: Function,
-    rowsPerPage: number,
-    currentPage: number,
-    rowsCount: number,
-    onFilterUpdate: Function,
-    onClearFilter: Function,
-    filters?: FiltersData,
-    onRestMenuItemSelected: Function,
-    stickyFilters: StickyFilters,
     columns?: Columns,
-    dataSource: DataSource,
-    onSetColumnOrder: Function,
-    rowIdKey: string,
+    currentPage: number,
     customMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
+    dataSource: DataSource,
+    filters: FiltersData,
+    onChangePage: ChangePage,
+    onChangeRowsPerPage: ChangeRowsPerPage,
+    onClearFilter: ClearFilter,
+    onSelectRestMenuItem: SelectRestMenuItem,
+    onSelectRow: SelectRow,
+    onSetColumnOrder: SetColumnOrder,
+    onSort: Sort,
+    onUpdateFilter: UpdateFilter,
+    rowIdKey: string,
+    rowsCount: number,
+    rowsPerPage: number,
     sortById: string,
     sortByDirection: string,
+    stickyFilters: StickyFilters,
 }>;

@@ -3,8 +3,8 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { getEventWorkingListDataAsync } from './eventsRetriever';
 import {
-    updateEventListSuccess,
-    updateEventListError,
+    updateListSuccess,
+    updateListError,
 } from '../eventWorkingLists.actions';
 import { buildQueryArgs } from '../helpers/eventsQueryArgsBuilder';
 import type { ColumnsMetaForDataFetching } from '../types';
@@ -32,9 +32,9 @@ export const updateEventWorkingListAsync = (
         }),
     columnsMetaForDataFetching, categoryCombinationMeta)
     .then(data =>
-        updateEventListSuccess(listId, data),
+        updateListSuccess(listId, data),
     )
     .catch((error) => {
         log.error(errorCreator(errorMessages.WORKING_LIST_UPDATE_ERROR)({ error }));
-        return updateEventListError(listId, errorMessages.WORKING_LIST_UPDATE_ERROR);
+        return updateListError(listId, errorMessages.WORKING_LIST_UPDATE_ERROR);
     });

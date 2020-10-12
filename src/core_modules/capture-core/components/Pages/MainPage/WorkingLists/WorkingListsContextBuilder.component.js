@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import {
     ManagerContext,
     ListViewConfigContext,
@@ -8,78 +8,75 @@ import {
     ListViewBuilderContext,
 } from './workingLists.context';
 import TemplatesLoader from './TemplatesLoader.component';
-import type { DataSource, ColumnConfigs } from './workingLists.types';
-import type { FiltersData } from '../../../ListView';
+import type {
+    DataSource,
+    ColumnConfigs,
+    LoadedContext,
+    WorkingListTemplates,
+    WorkingListTemplate,
+    Categories,
+} from './workingLists.types';
+import type { FiltersData, CustomRowMenuContents, StickyFilters } from '../../../ListView';
 
-type PassOnProps = {|
-    onLoadTemplates: Function,
-    onCancelLoadTemplates: Function,
-    programId: string,
-    loadTemplatesError: Function,
-    templatesForProgramId: ?string,
-    templatesAreLoading: boolean,
-|};
-
-type Props = {
-    templates: ?Object,
-    currentTemplate: ?Object,
+type Props<InputDataSource> = {
+    templates?: WorkingListTemplates,
+    currentTemplate?: WorkingListTemplate,
     onSelectTemplate: Function,
-    onLoadEventList: Function,
-    loadEventListError: ?string,
-    onUpdateEventList: Function,
-    onCancelLoadEventList: Function,
-    onCancelUpdateEventList: Function,
+    onLoadView: Function,
+    loadViewError?: string,
+    onUpdateList: Function,
+    onCancelLoadView?: Function,
+    onCancelUpdateList?: Function,
     columns: ColumnConfigs,
-    isLoading: boolean,
-    isUpdating: boolean,
-    isUpdatingWithDialog: boolean,
+    loading: boolean,
+    updating: boolean,
+    updatingWithDialog: boolean,
     onAddTemplate: Function,
     onUpdateTemplate: Function,
     onDeleteTemplate: Function,
     onCleanSkipInitAddingTemplate: Function,
-    onUnloadingContext: Function,
+    onUnloadingContext?: Function,
     orgUnitId: string,
-    categories?: Object,
+    categories?: Categories,
     lastTransaction: number,
-    listContext: ?Object,
+    loadedContext?: LoadedContext,
     onCheckSkipReload: Function,
-    lastEventIdDeleted: ?string,
-    dataSource: DataSource,
-    recordsOrder: Array<string>,
-    onListRowSelect: Function,
+    lastIdDeleted?: string,
+    dataSource?: DataSource,
+    recordsOrder?: Array<string>,
+    onSelectListRow: Function,
     sortById?: string,
     sortByDirection?: string,
     onSortList: Function,
     onSetListColumnOrder: Function,
-    customRowMenuContents: Object,
+    customRowMenuContents?: CustomRowMenuContents<InputDataSource>,
     filters?: FiltersData,
-    onFilterUpdate: Function,
+    onUpdateFilter: Function,
     onClearFilter: Function,
-    onRestMenuItemSelected: Function,
+    onSelectRestMenuItem: Function,
     onChangePage: Function,
     onChangeRowsPerPage: Function,
-    stickyFilters: Object,
+    stickyFilters?: StickyFilters,
     rowsPerPage?: number,
     currentPage?: number,
     rowsCount?: number,
     currentViewHasTemplateChanges?: boolean,
-    ...PassOnProps,
 };
 
-const WorkingListsContextBuilder = (props: Props) => {
+const WorkingListsContextBuilder = <InputDataSource>(props: Props<InputDataSource>) => { // eslint-disable-line
     const {
         templates: allTemplates,
         currentTemplate,
         onSelectTemplate,
-        onLoadEventList,
-        loadEventListError,
-        onUpdateEventList,
-        onCancelLoadEventList,
-        onCancelUpdateEventList,
+        onLoadView,
+        loadViewError,
+        onUpdateList,
+        onCancelLoadView,
+        onCancelUpdateList,
         columns,
-        isLoading,
-        isUpdating,
-        isUpdatingWithDialog,
+        loading,
+        updating,
+        updatingWithDialog,
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
@@ -88,21 +85,21 @@ const WorkingListsContextBuilder = (props: Props) => {
         orgUnitId,
         categories,
         lastTransaction,
-        listContext,
+        loadedContext,
         onCheckSkipReload,
-        lastEventIdDeleted,
+        lastIdDeleted,
         dataSource,
         recordsOrder,
-        onListRowSelect,
+        onSelectListRow,
         sortById,
         sortByDirection,
         onSortList,
         customRowMenuContents,
         onSetListColumnOrder,
         filters,
-        onFilterUpdate,
+        onUpdateFilter,
         onClearFilter,
-        onRestMenuItemSelected,
+        onSelectRestMenuItem,
         onChangePage,
         onChangeRowsPerPage,
         stickyFilters,
@@ -113,8 +110,8 @@ const WorkingListsContextBuilder = (props: Props) => {
         ...passOnProps
     } = props;
 
-    const dirtyTemplatesStateFirstRunRef = React.useRef(undefined);
-    React.useMemo(() => {
+    const dirtyTemplatesStateFirstRunRef = useRef(undefined);
+    useMemo(() => {
         if (dirtyTemplatesStateFirstRunRef.current !== undefined) {
             return;
         }
@@ -128,30 +125,30 @@ const WorkingListsContextBuilder = (props: Props) => {
             .some(template => template.nextEventQueryCriteria || template.notPreserved || template.deleted);
     }, [allTemplates]);
 
-    const dirtyEventListStateFirstRunRef = React.useRef(undefined);
-    React.useMemo(() => {
+    const dirtyEventListStateFirstRunRef = useRef(undefined);
+    useMemo(() => {
         if (dirtyEventListStateFirstRunRef.current !== undefined) {
             return;
         }
 
-        if (isLoading || isUpdating || isUpdatingWithDialog) {
+        if (loading || updating || updatingWithDialog) {
             dirtyEventListStateFirstRunRef.current = true;
             return;
         }
 
         dirtyEventListStateFirstRunRef.current = false;
     }, [
-        isLoading,
-        isUpdating,
-        isUpdatingWithDialog,
+        loading,
+        updating,
+        updatingWithDialog,
     ]);
 
-    const managerData = React.useMemo(() => ({
+    const managerData = useMemo(() => ({
         currentTemplate,
         onSelectTemplate,
     }), [currentTemplate, onSelectTemplate]);
 
-    const listViewConfigContextData = React.useMemo(() => ({
+    const listViewConfigContextData = useMemo(() => ({
         currentViewHasTemplateChanges,
         onAddTemplate,
         onUpdateTemplate,
@@ -163,89 +160,89 @@ const WorkingListsContextBuilder = (props: Props) => {
         onDeleteTemplate,
     ]);
 
-    const listViewLoaderContextData = React.useMemo(() => ({
+    const listViewLoaderContextData = useMemo(() => ({
         sortById,
         sortByDirection,
         filters,
         columns,
-        isLoading,
-        onLoadEventList,
-        loadEventListError,
-        onUpdateEventList,
-        onCancelLoadEventList,
-        onCancelUpdateEventList,
+        loading,
+        onLoadView,
+        loadViewError,
+        onUpdateList,
+        onCancelLoadView,
         onCleanSkipInitAddingTemplate,
         orgUnitId,
         categories,
         lastTransaction,
-        listContext,
         onCheckSkipReload,
-        lastEventIdDeleted,
         dirtyEventList: dirtyTemplatesStateFirstRunRef.current || dirtyEventListStateFirstRunRef.current,
     }), [
         sortById,
         sortByDirection,
         filters,
         columns,
-        isLoading,
-        onLoadEventList,
-        loadEventListError,
-        onUpdateEventList,
-        onCancelLoadEventList,
-        onCancelUpdateEventList,
+        loading,
+        onLoadView,
+        loadViewError,
+        onUpdateList,
+        onCancelLoadView,
         onCleanSkipInitAddingTemplate,
         orgUnitId,
         categories,
         lastTransaction,
-        listContext,
         onCheckSkipReload,
-        lastEventIdDeleted,
     ]);
 
-    const listViewUpdaterContextData = React.useMemo(() => ({
+    const listViewUpdaterContextData = useMemo(() => ({
         rowsPerPage,
         currentPage,
-    }), [rowsPerPage, currentPage]);
+        onCancelUpdateList,
+        lastIdDeleted,
+    }), [rowsPerPage, currentPage, onCancelUpdateList, lastIdDeleted]);
 
-    const listViewBuilderContextData = React.useMemo(() => ({
-        isUpdating,
+    const listViewBuilderContextData = useMemo(() => ({
+        updating,
         dataSource,
         recordsOrder,
-        onListRowSelect,
+        onSelectListRow,
         onSortList,
         onSetListColumnOrder,
         customRowMenuContents,
-        onFilterUpdate,
+        onUpdateFilter,
         onClearFilter,
-        onRestMenuItemSelected,
+        onSelectRestMenuItem,
         onChangePage,
         onChangeRowsPerPage,
         stickyFilters,
         rowsCount,
     }), [
-        isUpdating,
+        updating,
         dataSource,
         recordsOrder,
-        onListRowSelect,
+        onSelectListRow,
         onSortList,
         onSetListColumnOrder,
         customRowMenuContents,
-        onFilterUpdate,
+        onUpdateFilter,
         onClearFilter,
-        onRestMenuItemSelected,
+        onSelectRestMenuItem,
         onChangePage,
         onChangeRowsPerPage,
         stickyFilters,
         rowsCount,
     ]);
 
-    const templates = React.useMemo(() =>
+    const templates = useMemo(() =>
         allTemplates && allTemplates.filter(t => !t.deleted), [
         allTemplates,
     ]);
 
-    React.useEffect(() => () => onUnloadingContext(), [
+    useEffect(() => () => onUnloadingContext && onUnloadingContext(), [
         onUnloadingContext,
+    ]);
+
+    const loadedContextDefined = useMemo(() => loadedContext || {}, [
+        loadedContext,
     ]);
 
     return (
@@ -268,6 +265,7 @@ const WorkingListsContextBuilder = (props: Props) => {
                                 {...passOnProps}
                                 templates={templates}
                                 dirtyTemplates={!!dirtyTemplatesStateFirstRunRef.current}
+                                loadedContext={loadedContextDefined}
                             />
                         </ListViewBuilderContext.Provider>
                     </ListViewUpdaterContext.Provider>
