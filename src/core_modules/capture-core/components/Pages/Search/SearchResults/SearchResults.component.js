@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useContext } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
@@ -11,6 +11,7 @@ import type { Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 import { availableCardListButtonState } from '../../../CardList/CardList.constants';
 import { SearchResultsHeader } from '../../../SearchResultsHeader';
+import { ResultsPageSizeContext } from '../../shared-contexts';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -87,15 +88,26 @@ export const SearchResultsIndex = ({
     currentSearchScopeName,
     currentFormId,
     currentSearchTerms,
-    nextPageButtonDisabled,
 }: Props) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:
-            searchViaAttributesOnScopeProgram({ programId: currentSearchScopeId, formId: currentFormId, page: newPage });
+            searchViaAttributesOnScopeProgram({
+                programId: currentSearchScopeId,
+                formId: currentFormId,
+                page: newPage,
+                resultsPageSize,
+            });
             break;
         case searchScopes.TRACKED_ENTITY_TYPE:
-            searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: currentSearchScopeId, formId: currentFormId, page: newPage });
+            searchViaAttributesOnScopeTrackedEntityType({
+                trackedEntityTypeId: currentSearchScopeId,
+                formId: currentFormId,
+                page: newPage,
+                resultsPageSize,
+            });
             break;
         default:
             break;
@@ -124,7 +136,7 @@ export const SearchResultsIndex = ({
         />
         <div className={classes.pagination}>
             <SearchPagination
-                nextPageButtonDisabled={nextPageButtonDisabled}
+                nextPageButtonDisabled={searchResults.length < resultsPageSize}
                 onChangePage={newPage => handlePageChange(newPage)}
                 currentPage={currentPage}
             />

@@ -43,7 +43,7 @@ const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>
 const getPagingQueryArgs = (pageNumber: ?number = 1) => ({ page: pageNumber, pageSize: 5 });
 
 
-const searchTei = (state: ReduxState, searchId: string, formId: string, searchGroupId: any, pageNumber?: ?number) => {
+const searchTei = (state: ReduxState, searchId: string, formId: string, searchGroupId: any, pageNumber?: ?number, resultsPageSize: number) => {
     const currentTeiSearch = state.teiSearch[searchId];
     const formValues = state.formsValues[formId];
 
@@ -74,6 +74,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
         // $FlowFixMe[exponential-spread] automated comment
         ...getContextQueryArgs(selectedProgramId, selectedTrackedEntityTypeId),
         ...getPagingQueryArgs(pageNumber),
+        pageSize: resultsPageSize,
     };
 
     const attributes = selectedProgramId ?
@@ -81,15 +82,13 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
 
     return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-        map(({ trackedEntityInstanceContainers, pagingData }) => {
-            const nextPageButtonDisabled = Boolean(trackedEntityInstanceContainers.length < pagingData.rowsPerPage);
-            return searchTeiResultRetrieved(
-                { trackedEntityInstanceContainers, pagingData: { currentPage: pagingData.currentPage, nextPageButtonDisabled } },
+        map(({ trackedEntityInstanceContainers, pagingData }) =>
+            searchTeiResultRetrieved(
+                { trackedEntityInstanceContainers, currentPage: pagingData.currentPage },
                 formId,
                 searchGroupId,
                 searchId,
-            );
-        }),
+            )),
         catchError(() => of(searchTeiFailed(formId, searchGroupId, searchId))),
     );
 };
@@ -99,7 +98,7 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
         ofType(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE),
         switchMap((action) => {
             const state = store.value;
-            const { pageNumber, searchId } = action.payload;
+            const { pageNumber, searchId, resultsPageSize } = action.payload;
             const currentTeiSearch = state.teiSearch[searchId];
             const searchTeiStream = searchTei(
                 state,
@@ -107,6 +106,7 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
                 currentTeiSearch.searchResults.formId,
                 currentTeiSearch.searchResults.searchGroupId,
                 pageNumber,
+                resultsPageSize,
             );
             return from(searchTeiStream).pipe(
                 takeUntil(
@@ -126,8 +126,8 @@ export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
         ofType(actionTypes.REQUEST_SEARCH_TEI),
         switchMap((action) => {
             const state = store.value;
-            const { formId, searchGroupId, searchId } = action.payload;
-            const searchTeiStream = searchTei(state, searchId, formId, searchGroupId);
+            const { formId, searchGroupId, searchId, resultsPageSize } = action.payload;
+            const searchTeiStream = searchTei(state, searchId, formId, searchGroupId, 1, resultsPageSize);
             return from(searchTeiStream).pipe(
                 takeUntil(action$.pipe(
                     ofType(

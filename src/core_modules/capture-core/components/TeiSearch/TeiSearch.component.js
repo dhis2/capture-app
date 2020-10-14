@@ -7,6 +7,7 @@ import TeiSearchForm from './TeiSearchForm/TeiSearchForm.container';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
 import SearchProgramSelector from './SearchProgramSelector/SearchProgramSelector.container';
 import { Section, SectionHeaderSimple } from '../Section';
+import { ResultsPageSizeContext } from '../Pages/shared-contexts';
 import type { Props } from './TeiSearch.container';
 
 const getStyles = (theme: Theme) => ({
@@ -134,14 +135,16 @@ class TeiSearchPlain extends React.Component<Props, State> {
             getResultsView,
         } = this.props;
         return (
-            <TeiSearchResults
-                id={id}
-                onChangePage={this.handleSearchResultsChangePage}
-                onNewSearch={this.handleNewSearch}
-                onEditSearch={this.handleEditSearch}
-                getResultsView={getResultsView}
-                searchGroups={searchGroups}
-            />
+            <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
+                <TeiSearchResults
+                    id={id}
+                    onChangePage={this.handleSearchResultsChangePage}
+                    onNewSearch={this.handleNewSearch}
+                    onEditSearch={this.handleEditSearch}
+                    getResultsView={getResultsView}
+                    searchGroups={searchGroups}
+                />
+            </ResultsPageSizeContext.Provider>
         );
     }
 

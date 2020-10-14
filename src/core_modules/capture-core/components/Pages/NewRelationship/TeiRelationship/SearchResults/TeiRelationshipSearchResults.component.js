@@ -12,6 +12,7 @@ import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.t
 import { SearchResultsHeader } from '../../../../SearchResultsHeader';
 import { type SearchResultItem } from '../../../Search/SearchResults/SearchResults.types';
 import { type SearchGroup } from '../../../../../metaData';
+import { ResultsPageSizeContext } from '../../../shared-contexts';
 
 const SearchResultsPager = withNavigation()(Pagination);
 
@@ -21,7 +22,6 @@ type Props = {|
     onEditSearch: Function,
     onNewSearch: Function,
     currentPage: number,
-    nextPageButtonDisabled: boolean,
     searchGroup: SearchGroup,
     searchValues: any,
     selectedProgramId: string,
@@ -135,15 +135,21 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
     }
 
     renderPager = () => {
-        const { onChangePage, nextPageButtonDisabled, currentPage, classes } = this.props;
+        const { onChangePage, currentPage, classes, teis } = this.props;
         return (
-            <div className={classes.pagination}>
-                <SearchResultsPager
-                    onChangePage={page => onChangePage(page)}
-                    currentPage={currentPage}
-                    nextPageButtonDisabled={nextPageButtonDisabled}
-                />
-            </div>);
+            <ResultsPageSizeContext.Consumer>
+                {
+                    ({ resultsPageSize }) => (
+                        <div className={classes.pagination}>
+                            <SearchResultsPager
+                                nextPageButtonDisabled={teis.length < resultsPageSize}
+                                onChangePage={page => onChangePage(page)}
+                                currentPage={currentPage}
+                            />
+                        </div>)
+                }
+            </ResultsPageSizeContext.Consumer>
+        );
     }
 
     render() {

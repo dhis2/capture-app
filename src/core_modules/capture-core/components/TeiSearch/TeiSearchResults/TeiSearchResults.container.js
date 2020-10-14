@@ -19,7 +19,6 @@ export type PropsFromRedux = {|
     resultsLoading: boolean,
     teis: any,
     currentPage: number,
-    nextPageButtonDisabled: boolean,
     searchValues: any,
     selectedProgramId: string,
     selectedTrackedEntityTypeId: string,
@@ -36,8 +35,7 @@ const mapStateToProps = (state: ReduxState, props: OwnProps) => {
     return {
         resultsLoading: searchResults.resultsLoading,
         teis: searchResults.teis || [],
-        currentPage: searchResults.paging ? searchResults.paging.currentPage : 0,
-        nextPageButtonDisabled: searchResults.paging ? searchResults.paging.nextPageButtonDisabled : true,
+        currentPage: searchResults.currentPage,
         searchValues,
         selectedProgramId: currentTeiSearch.selectedProgramId,
         selectedTrackedEntityTypeId: currentTeiSearch.selectedTrackedEntityTypeId,

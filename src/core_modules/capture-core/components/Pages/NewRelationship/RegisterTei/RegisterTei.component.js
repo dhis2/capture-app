@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useContext, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../Buttons';
@@ -7,6 +7,7 @@ import DataEntry from './DataEntry/DataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
 import GeneralOutput from './GeneralOutput/GeneralOutput.container';
 import { ReviewDialog } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/ReviewDialog.component';
+import { ResultsPageSizeContext } from '../../shared-contexts';
 import type { Props } from './RegisterTei.container';
 
 const getStyles = () => ({
@@ -30,13 +31,15 @@ const RegisterTeiPlain = ({
     tetName,
     classes,
 }: Props) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+
     const [duplicatesOpen, toggleDuplicatesModal] = useState(false);
     const [savedArguments, setArguments] = useState([]);
 
     function handleSaveAttempt(...args) {
         if (possibleDuplicates) {
             setArguments(args);
-            onReviewDuplicates();
+            onReviewDuplicates(resultsPageSize);
             toggleDuplicatesModal(true);
         } else {
             onSave(...args);

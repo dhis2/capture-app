@@ -55,17 +55,16 @@ const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
-                const nextPageButtonDisabled = Boolean(searchResults.length < pagingData.rowsPerPage);
                 return showSuccessResultsViewOnSearchPage(
                     searchResults,
-                    { currentPage: pagingData.currentPage, nextPageButtonDisabled },
+                    pagingData.currentPage,
                 );
             }
 
             if (searchResults.length === 0 && triggeredFrom === PAGINATION) {
                 return showSuccessResultsViewOnSearchPage(
                     [],
-                    { currentPage: pagingData.currentPage, nextPageButtonDisabled: true },
+                    pagingData.currentPage,
                 );
             }
 

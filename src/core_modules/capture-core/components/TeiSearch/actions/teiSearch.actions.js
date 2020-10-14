@@ -28,8 +28,9 @@ export const requestSearchTei = (
     formId: string,
     searchGroupId: string,
     searchId: string,
+    resultsPageSize: number,
 ) =>
-    actionCreator(actionTypes.REQUEST_SEARCH_TEI)({ formId, searchGroupId, searchId });
+    actionCreator(actionTypes.REQUEST_SEARCH_TEI)({ formId, searchGroupId, searchId, resultsPageSize });
 
 export const searchTeiFailed = (
     formId: string,
@@ -62,8 +63,8 @@ export const teiNewSearch = (searchId: string) =>
 export const teiEditSearch = (searchId: string) =>
     actionCreator(actionTypes.TEI_EDIT_SEARCH)({ searchId });
 
-export const teiSearchResultsChangePage = (searchId: string, pageNumber: number) =>
-    actionCreator(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE)({ searchId, pageNumber });
+export const teiSearchResultsChangePage = (searchId: string, pageNumber: number, resultsPageSize: number) =>
+    actionCreator(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE)({ searchId, pageNumber, resultsPageSize });
 
 export const setOpenSearchGroupSection = (searchId: string, searchGroupId: ?string) =>
     actionCreator(actionTypes.TEI_SEARCH_SET_OPEN_SEARCH_GROUP_SECTION)({ searchId, searchGroupId });

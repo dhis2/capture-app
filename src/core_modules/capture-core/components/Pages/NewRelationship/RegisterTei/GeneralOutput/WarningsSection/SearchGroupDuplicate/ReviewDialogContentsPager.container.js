@@ -5,24 +5,25 @@ import { ReviewDialogContentsPagerComponent } from './ReviewDialogContentsPager.
 import { changePage } from './searchGroupDuplicate.actions';
 
 
+type OwnProps = {|
+    nextPageButtonDisabled: boolean,
+|};
 export type DispatchersFromFromRedux = {|
     onChangePage: Function,
 |};
 type PropsFromRedux = {|
     currentPage: number,
-    nextPageButtonDisabled: boolean,
 |};
 
-export type Props ={| ...DispatchersFromFromRedux, ...PropsFromRedux, ...CssClasses |}
+export type Props ={| ...OwnProps, ...DispatchersFromFromRedux, ...PropsFromRedux, ...CssClasses |}
 
 const mapStateToProps = (state: ReduxState) => ({
-    currentPage: state.newRelationshipRegisterTeiDuplicatesReview.paginationData.currentPage,
-    nextPageButtonDisabled: state.newRelationshipRegisterTeiDuplicatesReview.paginationData.nextPageButtonDisabled,
+    currentPage: state.newRelationshipRegisterTeiDuplicatesReview.currentPage,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onChangePage: (page: number) => { dispatch(changePage(page)); },
+    onChangePage: (page: number, pageSize: number) => { dispatch(changePage(page, pageSize)); },
 });
 
-export const ReviewDialogContentsPager: ComponentType<{||}> =
+export const ReviewDialogContentsPager: ComponentType<OwnProps> =
   connect<$Diff<Props, CssClasses>, _, _, _, _, _>(mapStateToProps, mapDispatchToProps)(ReviewDialogContentsPagerComponent);
