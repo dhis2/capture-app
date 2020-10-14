@@ -47,7 +47,7 @@ type Props = {
     onUpdateFilter: UpdateFilter,
     onClearFilter: ClearFilter,
     onSetVisibleSelector: Function,
-    isSelectorVisible: boolean,
+    selectorVisible: boolean,
     filterValue?: FilterData,
     buttonText?: string,
 };
@@ -124,9 +124,9 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderWithAppliedFilter() {
-        const { isSelectorVisible, classes, title, buttonText } = this.props;
+        const { selectorVisible, classes, title, buttonText } = this.props;
 
-        const arrowIconElement = isSelectorVisible ?
+        const arrowIconElement = selectorVisible ?
             <ArrowUpwardIcon className={classes.icon} /> :
             <ArrowDownwardIcon className={classes.icon} />;
 
@@ -144,14 +144,14 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderWithoutAppliedFilter() {
-        const { isSelectorVisible, classes, title } = this.props;
+        const { selectorVisible, classes, title } = this.props;
 
         return (
             <Button
                 onClick={this.openFilterSelector}
             >
                 {title}
-                {isSelectorVisible ?
+                {selectorVisible ?
                     <ArrowUpwardIcon className={classes.icon} /> :
                     <ArrowDownwardIcon className={classes.icon} />
                 }
@@ -160,7 +160,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     render() {
-        const { filterValue, isSelectorVisible } = this.props;
+        const { filterValue, selectorVisible } = this.props;
         const { isMounted } = this.state;
 
         const button = filterValue ? this.renderWithAppliedFilter() : this.renderWithoutAppliedFilter();
@@ -174,7 +174,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                     {button}
                 </div>
                 <Popover
-                    open={isSelectorVisible && isMounted}
+                    open={selectorVisible && isMounted}
                     anchorEl={this.anchorRef.current}
                     onClose={this.closeFilterSelector}
                     anchorOrigin={POPOVER_ANCHOR_ORIGIN}
@@ -182,7 +182,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 >
                     {
                         (() => {
-                            if (isSelectorVisible) {
+                            if (selectorVisible) {
                                 return this.renderSelectorContents();
                             }
                             return null;

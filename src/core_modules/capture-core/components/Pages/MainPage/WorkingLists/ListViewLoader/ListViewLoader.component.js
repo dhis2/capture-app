@@ -1,18 +1,12 @@
 // @flow
 import React, { memo } from 'react';
-import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
-import { ListViewUpdater } from './ListViewUpdater.component';
-import { ListViewLoaderContext } from './workingLists.context';
-import type { LoadedContext } from './workingLists.types';
+import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
+import { ListViewUpdater } from '../ListViewUpdater';
+import { ListViewLoaderContext } from '../workingLists.context';
+import type { Props } from './listViewLoader.types';
 
 const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
     withLoadingIndicator(() => ({ margin: 10 }))(ListViewUpdater));
-
-type Props = {
-    currentTemplate: Object,
-    programId: string,
-    loadedContext: LoadedContext,
-};
 
 // eslint-disable-next-line complexity
 export const ListViewLoader = memo<Props>((props: Props) => {

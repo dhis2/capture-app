@@ -1,23 +1,13 @@
 // @flow
 import React, { memo } from 'react';
-import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
-import TemplatesManager from './TemplatesManager.component';
-import type { LoadedContext } from './workingLists.types';
+import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
+import { TemplatesManager } from '../TemplatesManager';
+import type { Props } from './templatesLoader.types';
 
 const TemplatesManangerWithLoadingIndicator = withErrorMessageHandler()(
     withLoadingIndicator()(TemplatesManager));
 
-type Props = {
-    loadTemplatesError: ?string,
-    onLoadTemplates: Function,
-    onCancelLoadTemplates?: Function,
-    programId: string,
-    loadedContext: LoadedContext,
-    dirtyTemplates: boolean,
-    templatesLoading: boolean,
-};
-
-const TemplatesLoader = memo<Props>((props: Props) => {
+export const TemplatesLoader = memo<Props>((props: Props) => {
     const {
         loadTemplatesError,
         onLoadTemplates,
@@ -64,5 +54,3 @@ const TemplatesLoader = memo<Props>((props: Props) => {
         />
     );
 });
-
-export default TemplatesLoader;

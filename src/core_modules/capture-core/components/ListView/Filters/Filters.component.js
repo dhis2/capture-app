@@ -174,7 +174,7 @@ const renderIndividualFilterButtons = ({
                     optionSet={element.optionSet}
                     singleSelect={element.singleSelect}
                     onSetVisibleSelector={onSetVisibleSelector}
-                    isSelectorVisible={element.id === visibleSelectorId}
+                    selectorVisible={element.id === visibleSelectorId}
                     onUpdateFilter={onUpdateFilter}
                     onClearFilter={onClearFilter}
                 />

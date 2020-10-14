@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 // $FlowFixMe
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {
@@ -8,12 +8,17 @@ import {
 } from '../eventWorkingLists.actions';
 import { EventWorkingListsColumnSetup } from '../ColumnSetup';
 import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
+import { getEventProgramThrowIfNotFound } from '../../../../../metaData';
 import type { Props } from './eventWorkingListsRedux.types';
 
 export const EventWorkingListsRedux = ({ listId, ...passOnProps }: Props) => {
     const dispatch = useDispatch();
 
-    const commonStateManagementProps = useWorkingListsCommonStateManagement(listId);
+    const programId = useSelector(({ currentSelections }) => currentSelections.programId);
+    const program = useMemo(() => getEventProgramThrowIfNotFound(programId),
+        [programId]);
+
+    const commonStateManagementProps = useWorkingListsCommonStateManagement(listId, program);
 
     const eventsValues = useSelector(({
         events: eventsMainProperties, eventsValues: eventsDataElementValues }) => ({
@@ -25,7 +30,7 @@ export const EventWorkingListsRedux = ({ listId, ...passOnProps }: Props) => {
     const downloadRequest = useSelector(({ workingLists }) =>
         workingLists[listId] && workingLists[listId].currentRequest); // TODO: Remove when DownloadDialog is rewritten
 
-    const onSelectListRow = useCallback(() => ({ eventId }) => {
+    const onSelectListRow = useCallback(({ eventId }) => {
         window.scrollTo(0, 0);
         dispatch(openViewEventPage(eventId));
     }, [dispatch]);
@@ -38,6 +43,7 @@ export const EventWorkingListsRedux = ({ listId, ...passOnProps }: Props) => {
         <EventWorkingListsColumnSetup
             {...passOnProps}
             {...commonStateManagementProps}
+            program={program}
             {...eventsValues}
             lastIdDeleted={lastEventIdDeleted} // TODO: New logic
             onSelectListRow={onSelectListRow}

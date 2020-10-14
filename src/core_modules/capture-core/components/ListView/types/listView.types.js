@@ -63,7 +63,7 @@ export type SelectRestMenuItem = (id: string) => void;
 export type SetColumnOrder = (columns: Columns) => void;
 export type SelectRow = (rowData: DataSourceItem) => void;
 export type Sort = (id: string, direction: string) => void;
-export type InterfaceProps = $ReadOnly<{
+export type InterfaceProps = $ReadOnly<{|
     columns?: Columns,
     currentPage: number,
     customMenuContents?: CustomMenuContents,
@@ -84,4 +84,9 @@ export type InterfaceProps = $ReadOnly<{
     sortById: string,
     sortByDirection: string,
     stickyFilters: StickyFilters,
-}>;
+|}>;
+
+export type ListViewPassOnProps = $ReadOnly<{|
+    ...InterfaceProps,
+    columns: Columns,
+|}>;

@@ -8,7 +8,7 @@ import { withEndColumnMenu } from '../withEndColumnMenu';
 import DialogLoadingMask from '../../LoadingMasks/DialogLoadingMask.component';
 import { OnlineList } from '../../List';
 import { ListViewMenu } from '../Menu';
-import type { Columns } from '../types';
+import type { Props } from './listViewMain.types';
 
 const ListWithEndColumnMenu = withEndColumnMenu()(OnlineList);
 
@@ -38,17 +38,6 @@ const getStyles = (theme: Theme) => ({
         justifyContent: 'flex-end',
     },
 });
-
-type Props = {
-    columns: Columns,
-    classes: Object,
-    filters: React.Node,
-    updatingWithDialog?: ?boolean,
-    onSetColumnOrder: Function,
-    rowIdKey: string,
-    customMenuContents?: Array<Object>,
-    onSelectRow: Function,
-};
 
 class ListViewMainPlain extends React.PureComponent<Props> {
     renderTopBar = () => {

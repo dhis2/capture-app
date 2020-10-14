@@ -1,5 +1,5 @@
 // @flow
-import { dataElementTypes, OptionSet } from '../../../../../metaData';
+import { OptionSet } from '../../../../../metaData';
 import {
     convertText,
     convertDate,
@@ -10,29 +10,30 @@ import {
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
 import type { OptionSetFilterData } from '../../../../FiltersForTypes';
+import { filterTypesObject } from '../../filterTypes';
 
 // todo (report lgmt)
 const convertersForTypes = {
     // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.TEXT]: convertText,
+    [filterTypesObject.TEXT]: convertText,
     // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.NUMBER]: convertNumeric,
+    [filterTypesObject.NUMBER]: convertNumeric,
     // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER]: convertNumeric,
+    [filterTypesObject.INTEGER]: convertNumeric,
     // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER_POSITIVE]: convertNumeric,
+    [filterTypesObject.INTEGER_POSITIVE]: convertNumeric,
     // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER_NEGATIVE]: convertNumeric,
+    [filterTypesObject.INTEGER_NEGATIVE]: convertNumeric,
     // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
     // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.DATE]: convertDate,
+    [filterTypesObject.DATE]: convertDate,
+    // $FlowFixMe
+    [filterTypesObject.ASSIGNEE]: convertAssignee,
     // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.ASSIGNEE]: convertAssignee,
+    [filterTypesObject.BOOLEAN]: convertBoolean,
     // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.BOOLEAN]: convertBoolean,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.TRUE_ONLY]: convertTrueOnly,
+    [filterTypesObject.TRUE_ONLY]: convertTrueOnly,
 };
 
 function getOptionSetText(filter: OptionSetFilterData, optionSet: OptionSet) {
@@ -50,8 +51,8 @@ function getOptionSetText(filter: OptionSetFilterData, optionSet: OptionSet) {
 
 export function buildButtonText(
     filter: any,
-    type: $Values<typeof dataElementTypes>,
-    optionSet: OptionSet,
+    type: $Values<typeof filterTypesObject>,
+    optionSet?: OptionSet,
 ) {
     if (filter.usingOptionSet && optionSet) {
         return getOptionSetText(filter, optionSet);

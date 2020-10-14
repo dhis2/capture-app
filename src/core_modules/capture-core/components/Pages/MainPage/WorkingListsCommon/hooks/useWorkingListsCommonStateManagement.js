@@ -27,7 +27,7 @@ import {
     cleanSkipInitAddingTemplate,
     unloadingContext,
 } from '../../EventWorkingLists/eventWorkingLists.actions'; // TODO: Move these actions
-import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../metaData';
+import type { Program } from '../../../../../metaData';
 
 const useTemplates = (listId: string, workingListDispatch: Function) => {
     const templateState = useSelector(({ workingListsTemplates }) => ({
@@ -71,7 +71,7 @@ const useTemplates = (listId: string, workingListDispatch: Function) => {
 };
 
 const useView = (listId: string, workingListDispatch: Function, categoryCombinationMeta: Object) => {
-    const listState = useSelector(({ workingLists, workingListsUI, workingListsMeta, workingListsColumnsOrder, workingListsStickyFilters }) => ({
+    const viewState = useSelector(({ workingLists, workingListsUI, workingListsMeta, workingListsColumnsOrder, workingListsStickyFilters }) => ({
         recordsOrder: workingLists[listId] && workingLists[listId].order,
         updating: !!workingListsUI[listId] && !!workingListsUI[listId].isUpdating,
         loading: !!workingListsUI[listId] && !!workingListsUI[listId].isLoading,
@@ -97,7 +97,7 @@ const useView = (listId: string, workingListDispatch: Function, categoryCombinat
         nextFilters,
     ]);
 
-    const listDispatch = useMemo(() => ({
+    const viewDispatch = useMemo(() => ({
         onLoadView: workingListDispatch(initListView,
             (selectedTemplate: Object, context: Object, meta: Object) => [
                 selectedTemplate,
@@ -127,9 +127,9 @@ const useView = (listId: string, workingListDispatch: Function, categoryCombinat
     }), [listId, workingListDispatch, categoryCombinationMeta]);
 
     return {
-        ...listState,
+        ...viewState,
         filters: filtersState,
-        ...listDispatch,
+        ...viewDispatch,
     };
 };
 
@@ -146,19 +146,14 @@ const useWorkingListsContext = (listId: string, workingListDispatch: Function) =
 
     const onUnloadingContext = useCallback(() => workingListDispatch(unloadingContext), [workingListDispatch]);
 
-    const programId = useSelector(({ currentSelections }) => currentSelections.programId);
-    const program = useMemo(() => getProgramFromProgramIdThrowIfNotFound(programId),
-        [programId]);
-
     return {
         ...currentContextState,
         loadedContext,
         onUnloadingContext,
-        program,
     };
 };
 
-export const useWorkingListsCommonStateManagement = ((listId: string) => {
+export const useWorkingListsCommonStateManagement = ((listId: string, program: Program) => {
     const dispatch = useDispatch();
     const workingListDispatch = useCallback(
         (actionCreator, argsCreator) =>
@@ -169,7 +164,7 @@ export const useWorkingListsCommonStateManagement = ((listId: string) => {
 
     const context = useWorkingListsContext(listId, workingListDispatch);
     const templates = useTemplates(listId, workingListDispatch);
-    const view = useView(listId, workingListDispatch, context.program.categoryCombination);
+    const view = useView(listId, workingListDispatch, program.categoryCombination);
 
     return {
         ...templates,

@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import Delete from '@material-ui/icons/Delete';
 import { WorkingListsInterfaceBuilder } from '../WorkingListsInterfaceBuilder';
-import type { RowMenuContents } from '../../WorkingLists';
+import type { CustomRowMenuContents } from '../../WorkingLists';
 import type { Props } from './eventWorkingListsRowMenuSetup.types';
 
 const getStyles = (theme: Theme) => ({
@@ -13,8 +13,8 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-export const EventWorkingListsRowMenuSetupPlain = ({ onDeleteEvent, classes, ...passOnProps }: Props & CssClasses) => {
-    const customRowMenuContents: RowMenuContents = useMemo(() => [{
+export const EventWorkingListsRowMenuSetupPlain = ({ onDeleteEvent, classes, ...passOnProps }: Props) => {
+    const customRowMenuContents: CustomRowMenuContents = useMemo(() => [{
         key: 'deleteEventItem',
         clickHandler: ({ eventId }) => onDeleteEvent(eventId),
         element: (
@@ -33,5 +33,5 @@ export const EventWorkingListsRowMenuSetupPlain = ({ onDeleteEvent, classes, ...
     );
 };
 
-export const EventWorkingListsRowMenuSetup: ComponentType<Props> =
+export const EventWorkingListsRowMenuSetup: ComponentType<$Diff<Props, CssClasses>> =
     withStyles(getStyles)(EventWorkingListsRowMenuSetupPlain);

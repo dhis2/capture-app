@@ -23,7 +23,7 @@ export const EventWorkingListsDataSourceSetup = ({
         .reduce((accDataSource, clientRecord: EventsMainProperties & EventsDataElementValues) => {
             const listRecord = columns
                 .filter(column => column.visible)
-                // Flow error handled in later PR
+                // $FlowFixMe Flow error handled in later PR
                 .reduce((acc, { id, options, optionSet, type }) => {
                     const clientValue = clientRecord[id];
 
@@ -31,7 +31,10 @@ export const EventWorkingListsDataSourceSetup = ({
                     if (options || optionSet) {
                         // TODO: Need is equal comparer for types
                         // Flow error handled in later PR
-                        const option = options ? options.find(o => o.value === clientValue) : optionSet.getOption(clientValue);
+                        const option = options ?
+                            options.find(o => o.value === clientValue) :
+                            // $FlowFixMe Flow error handled in later PR
+                            optionSet.getOption(clientValue);
                         if (!option) {
                             log.error(
                                 errorCreator(

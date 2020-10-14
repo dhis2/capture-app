@@ -4,15 +4,11 @@ import {
     OptionSet,
     Option,
     DataElement,
-} from '../../../../metaData';
-import { ListView, type CustomMenuContents } from '../../../ListView';
-import { ListViewBuilderContext } from './workingLists.context';
-import type { ColumnConfigs, ColumnConfig } from './workingLists.types';
-
-type Props = {
-    columns: ColumnConfigs,
-    customListViewMenuContents: CustomMenuContents,
-};
+} from '../../../../../metaData';
+import { ListView } from '../../../../ListView';
+import { ListViewBuilderContext } from '../workingLists.context';
+import type { ColumnConfig } from '../workingLists.types';
+import type { Props } from './listViewBuilder.types';
 
 type ColumnConfigWithOptions = {
     ...ColumnConfig,
@@ -53,6 +49,7 @@ export const ListViewBuilder = ({ columns, customListViewMenuContents, ...passOn
                 if (column.isMainProperty) {
                     return {
                         ...column,
+                        // $FlowFixMe handled in later PR
                         optionSet: column.options && createMainPropertyOptionSet(column),
                     };
                 }

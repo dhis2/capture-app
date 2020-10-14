@@ -1,8 +1,11 @@
 // @flow
-import * as React from 'react';
-import { ListViewUpdaterContext } from './workingLists.context';
-import { ListViewBuilder } from './ListViewBuilder.component';
-import { areFiltersEqual } from './utils';
+import React from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import { ListViewUpdaterContext } from '../workingLists.context';
+import { ListViewBuilder } from '../ListViewBuilder';
+import { areFiltersEqual } from '../utils';
+import type { Props } from './listViewUpdater.types';
 
 function useUpdateListMemoize(value) {
     const [filters, ...rest] = value;
@@ -29,24 +32,6 @@ function useUpdateListEffect(callback, dependencies) {
     // eslint-disable-next-line
     }, useUpdateListMemoize(dependencies));
 }
-
-type PassOnProps = {
-    getMainColumnMetadataHeader: any,
-    getOrdinaryColumnMetadata: any,
-};
-
-type Props = {
-    ...PassOnProps,
-    filters: Object,
-    sortById: ?string,
-    sortByDirection: ?string,
-    onUpdateList: Function,
-    customMenuContents: Array<Object>,
-    programId: string,
-    orgUnitId: string,
-    categories?: Object,
-};
-
 export const ListViewUpdater = (props: Props) => {
     const {
         filters,
@@ -66,6 +51,13 @@ export const ListViewUpdater = (props: Props) => {
         onCancelUpdateList,
         lastIdDeleted,
     } = React.useContext(ListViewUpdaterContext);
+
+    if (!currentPage || !rowsPerPage) {
+        log.error(
+            errorCreator('currentPage and rowsPerPage needs to be set during list view loading')(
+                { currentPage, rowsPerPage }));
+        throw Error('currentPage and rowsPerPage needs to be set during list view loading. See console for details');
+    }
 
     useUpdateListEffect(() => {
         onUpdateList({

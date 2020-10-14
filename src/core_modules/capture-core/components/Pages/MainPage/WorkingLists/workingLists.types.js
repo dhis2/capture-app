@@ -31,6 +31,7 @@ export type WorkingListTemplate = {|
     notPreserved?: ?boolean,
     nextEventQueryCriteria?: Object,
     deleted?: boolean,
+    skipInitDuringAddProcedure?: boolean,
 |};
 
 export type WorkingListTemplates = Array<WorkingListTemplate>;
@@ -83,7 +84,9 @@ export type CancelLoadView = () => void;
 export type CancelLoadTemplates = () => void;
 export type CancelUpdateList = () => void;
 export type DeleteTemplate = (template: WorkingListTemplate) => void;
-export type LoadView = (template: WorkingListTemplate, meta: { programId: string, orgUnitId: string, categories: Categories, lastTransaction: number }) => void;
+export type LoadView = (
+    template: WorkingListTemplate,
+    meta: { programId: string, orgUnitId: string, categories: Categories, lastTransaction: number }) => void;
 export type LoadTemplates = (programId: string) => void;
 export type SelectTemplate = (templateId: string) => void;
 export type UnloadingContext = () => void;
@@ -100,7 +103,7 @@ export type UpdateList = (data: {
     lastIdDeleted?: string,
 }) => void;
 
-export type InterfaceProps<InputDataSource> = $ReadOnly<{|
+export type InterfaceProps = $ReadOnly<{|
     categories?: Categories,
     columns: ColumnConfigs,
     currentPage?: number,
@@ -110,14 +113,12 @@ export type InterfaceProps<InputDataSource> = $ReadOnly<{|
     customRowMenuContents?: CustomRowMenuContents,
     dataSource?: DataSource,
     filters?: FiltersData,
-    loading: boolean,
-    updating: boolean,
-    updatingWithDialog: boolean,
     lastIdDeleted?: string, // TODO: Dealing with this in next PR
     lastTransaction: number, // TODO: Dealing with this in next PR
     loadedContext?: LoadedContext,
+    loading: boolean,
     loadViewError?: string,
-    loadTemplatesError?: string,
+    loadTemplatesError?: string, // TODO: Check
     onAddTemplate: AddTemplate,
     onCancelLoadView?: CancelLoadView,
     onCancelLoadTemplates?: CancelLoadTemplates,
@@ -128,17 +129,17 @@ export type InterfaceProps<InputDataSource> = $ReadOnly<{|
     onCleanSkipInitAddingTemplate: Function, // TODO: Dealing with this in next PR
     onClearFilter: ClearFilter,
     onDeleteTemplate: DeleteTemplate,
-    onUpdateFilter: UpdateFilter,
-    onSelectListRow: SelectRow<InputDataSource>,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
+    onUpdateFilter: UpdateFilter,
+    onSelectListRow: SelectRow,
     onSelectRestMenuItem: SelectRestMenuItem,
     onSelectTemplate: SelectTemplate,
     onSetListColumnOrder: SetColumnOrder,
     onSortList: Sort,
     onUnloadingContext?: UnloadingContext,
-    onUpdateTemplate: UpdateTemplate,
     onUpdateList: UpdateList,
+    onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     programId: string,
     recordsOrder?: Array<string>, // TODO: Dealing with this in later PR
@@ -150,4 +151,10 @@ export type InterfaceProps<InputDataSource> = $ReadOnly<{|
     stickyFilters?: StickyFilters,
     templates?: WorkingListTemplates,
     templatesLoading: boolean,
+    updating: boolean,
+    updatingWithDialog: boolean,
+|}>;
+
+export type WorkingListsOutputProps = $ReadOnly<{|
+    ...InterfaceProps,
 |}>;

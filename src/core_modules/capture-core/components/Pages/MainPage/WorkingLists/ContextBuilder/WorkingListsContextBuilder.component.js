@@ -6,64 +6,12 @@ import {
     ListViewLoaderContext,
     ListViewUpdaterContext,
     ListViewBuilderContext,
-} from './workingLists.context';
-import TemplatesLoader from './TemplatesLoader.component';
-import type {
-    DataSource,
-    ColumnConfigs,
-    LoadedContext,
-    WorkingListTemplates,
-    WorkingListTemplate,
-    Categories,
-} from './workingLists.types';
-import type { FiltersData, CustomRowMenuContents, StickyFilters } from '../../../ListView';
+} from '../workingLists.context';
+import { TemplatesLoader } from '../TemplatesLoader';
+import type { Props } from './workingListsContextBuilder.types';
 
-type Props<InputDataSource> = {
-    templates?: WorkingListTemplates,
-    currentTemplate?: WorkingListTemplate,
-    onSelectTemplate: Function,
-    onLoadView: Function,
-    loadViewError?: string,
-    onUpdateList: Function,
-    onCancelLoadView?: Function,
-    onCancelUpdateList?: Function,
-    columns: ColumnConfigs,
-    loading: boolean,
-    updating: boolean,
-    updatingWithDialog: boolean,
-    onAddTemplate: Function,
-    onUpdateTemplate: Function,
-    onDeleteTemplate: Function,
-    onCleanSkipInitAddingTemplate: Function,
-    onUnloadingContext?: Function,
-    orgUnitId: string,
-    categories?: Categories,
-    lastTransaction: number,
-    loadedContext?: LoadedContext,
-    onCheckSkipReload: Function,
-    lastIdDeleted?: string,
-    dataSource?: DataSource,
-    recordsOrder?: Array<string>,
-    onSelectListRow: Function,
-    sortById?: string,
-    sortByDirection?: string,
-    onSortList: Function,
-    onSetListColumnOrder: Function,
-    customRowMenuContents?: CustomRowMenuContents<InputDataSource>,
-    filters?: FiltersData,
-    onUpdateFilter: Function,
-    onClearFilter: Function,
-    onSelectRestMenuItem: Function,
-    onChangePage: Function,
-    onChangeRowsPerPage: Function,
-    stickyFilters?: StickyFilters,
-    rowsPerPage?: number,
-    currentPage?: number,
-    rowsCount?: number,
-    currentViewHasTemplateChanges?: boolean,
-};
 
-const WorkingListsContextBuilder = <InputDataSource>(props: Props<InputDataSource>) => { // eslint-disable-line
+export const WorkingListsContextBuilder = (props: Props) => {
     const {
         templates: allTemplates,
         currentTemplate,
@@ -274,5 +222,3 @@ const WorkingListsContextBuilder = <InputDataSource>(props: Props<InputDataSourc
         </ManagerContext.Provider>
     );
 };
-
-export default WorkingListsContextBuilder;

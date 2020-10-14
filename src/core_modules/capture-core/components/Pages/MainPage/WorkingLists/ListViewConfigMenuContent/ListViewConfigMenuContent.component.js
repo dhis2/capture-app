@@ -2,31 +2,15 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { ListViewLoader } from './ListViewLoader.component';
-import { TemplateMaintenance, dialogModes } from './TemplateMaintenance';
-import type { WorkingListTemplate } from './workingLists.types';
-import type { CustomMenuContents } from '../../../ListView';
+import { ListViewLoader } from '../ListViewLoader';
+import { TemplateMaintenance, dialogModes } from '../TemplateMaintenance';
+import type { Props } from './listViewConfigMenuContent.types';
 
 const getStyles = (theme: Theme) => ({
     delete: {
         color: theme.palette.error.dark,
     },
 });
-
-type PassOnProps = {
-    programId: string,
-};
-
-type Props = {
-    ...PassOnProps,
-    currentTemplate: WorkingListTemplate,
-    onAddTemplate: Function,
-    onUpdateTemplate: Function,
-    onDeleteTemplate: Function,
-    currentViewHasTemplateChanges: boolean,
-    customListViewMenuContents?: CustomMenuContents,
-    classes: Object,
-};
 
 const Index = (props: Props) => {
     const {
