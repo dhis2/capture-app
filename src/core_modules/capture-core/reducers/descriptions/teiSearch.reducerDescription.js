@@ -44,7 +44,7 @@ export const teiSearchDesc = createReducerDescription({
                     ...state[searchId].searchResults,
                     resultsLoading: false,
                     teis,
-                    paging: data.pagingData,
+                    currentPage: data.currentPage,
                 },
             },
         };
@@ -59,7 +59,7 @@ export const teiSearchDesc = createReducerDescription({
                     ...state[searchId].searchResults,
                     resultsLoading: false,
                     teis: [],
-                    paging: null,
+                    currentPage: null,
                 },
             },
         };

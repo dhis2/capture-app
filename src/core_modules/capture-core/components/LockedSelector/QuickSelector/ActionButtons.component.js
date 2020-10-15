@@ -33,6 +33,7 @@ type Props = $ReadOnly<{|
     onNewClick: () => void,
     onFindClick: () => void,
     showResetButton: boolean,
+    ...CssClasses
 |}>;
 
 const Index = ({
@@ -42,7 +43,7 @@ const Index = ({
     selectedProgramId,
     classes,
     showResetButton,
-}: Props & CssClasses) => {
+}: Props) => {
     const typeName =
       selectedProgramId instanceof TrackerProgram
           ?
@@ -98,4 +99,4 @@ const Index = ({
     );
 };
 
-export const ActionButtons: ComponentType<Props> = withStyles(styles)(Index);
+export const ActionButtons: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(Index);

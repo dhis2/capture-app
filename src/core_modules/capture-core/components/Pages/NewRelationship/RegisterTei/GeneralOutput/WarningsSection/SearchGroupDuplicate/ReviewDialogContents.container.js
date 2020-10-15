@@ -1,10 +1,13 @@
 // @flow
+import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import i18n from '@dhis2/d2-i18n';
 import { ReviewDialogContentsComponent } from './ReviewDialogContents.component';
 import withLoadingIndicator from '../../../../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../../../../HOC/withErrorMessageHandler';
 import { makeDataElementsSelector } from './reviewDialogContents.selectors';
+import type { Props, OwnProps } from './ReviewDialogContents.types';
 
 const makeMapStateToProps = () => {
     const dataElementsSelector = makeDataElementsSelector();
@@ -24,11 +27,9 @@ const makeMapStateToProps = () => {
 const mapDispatchToProps = () => ({
 });
 
-// $FlowFixMe
-export const ReviewDialogContents = connect(makeMapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator(() => ({ padding: 5, width: 640, height: 500 }))(
-        withErrorMessageHandler()(
-            ReviewDialogContentsComponent,
-        ),
-    ),
-);
+export const ReviewDialogContents: ComponentType<OwnProps> =
+  compose(
+      connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(makeMapStateToProps, mapDispatchToProps),
+      withLoadingIndicator(() => ({ padding: '100px 0' }), null, props => (!props.isUpdating && props.ready)),
+      withErrorMessageHandler(),
+  )(ReviewDialogContentsComponent);
