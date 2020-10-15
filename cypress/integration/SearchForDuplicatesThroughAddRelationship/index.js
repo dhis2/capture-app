@@ -1,8 +1,4 @@
 
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you open the the new event page in Ngelehun and malaria case context', () => {
     cy.visit('/#/newEvent/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });

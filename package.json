@@ -73,7 +73,7 @@
     "flow:check": "./node_modules/.bin/flow check ./src",
     "flow:addTypes": "flow-typed install",
     "lint": "npm run flow:check && npm run linter:check",
-    "cy:open": "d2-utils-cypress open --appStart 'yarn start:forCypress'",
+    "cy:open": "d2-utils-cypress open",
     "cy:run": "d2-utils-cypress run --appStart 'yarn start:forCypress'",
     "verifyCacheVersion": "node scripts/verifyCacheVersion.js"
   },

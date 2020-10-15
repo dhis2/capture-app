@@ -1,7 +1,3 @@
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you are in the main page with no selections made', () => {
     cy.visit('/#/');
     cy.get('[data-test="dhis2-capture-new-button"]')
