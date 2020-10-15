@@ -31,8 +31,7 @@ const NewTemplateContents = (props: Props) => {
     const [name, setName] = React.useState('');
     const [error, setError] = React.useState();
 
-    const nameBlurHandler = React.useCallback((event) => {
-        const value = event.currentTarget.value;
+    const nameBlurHandler = React.useCallback(({ value }) => {
         value && setError(undefined);
         setName(value);
     }, []);

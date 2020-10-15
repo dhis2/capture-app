@@ -39,10 +39,10 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Организационная единица"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "Дата включения"
 
 msgid "Last updated"
 msgstr "Последнее обновление"

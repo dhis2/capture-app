@@ -9,12 +9,12 @@ msgstr ""
 "POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
-"Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
+"Language-Team: Tajik (https://www.transifex.com/hisp-uio/teams/100509/tg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: lo\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: tg\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -23,7 +23,7 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr "ມື້ນີ້"
+msgstr "Имрӯз"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -38,13 +38,13 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr "​ຫົວ​ໜ່ວຍ​ການ​ຈັດ​ຕັ້ງ"
+msgstr "Воҳиди сохторӣ"
 
 msgid "Date of enrollment"
-msgstr "Date of enrollment"
+msgstr "Санаи номнавис"
 
 msgid "Last updated"
-msgstr "ປັບປຸງ​ຄັ້ງຫລ້າສຸດ"
+msgstr "Навсозии охирин"
 
 msgid "Enrolled"
 msgstr ""
@@ -59,7 +59,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr "ຖັນ"
+msgstr "Сутун"
 
 msgid "This value is validating"
 msgstr ""
@@ -131,10 +131,10 @@ msgid "Area"
 msgstr ""
 
 msgid "Coordinate"
-msgstr "ເສັ້ນສະແດງ"
+msgstr ""
 
 msgid "Enrollment"
-msgstr "ການລົງທະບຽນ"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -143,7 +143,7 @@ msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Cancel"
-msgstr "ຍົກເລີກ"
+msgstr "Бекор кардан"
 
 msgid "Unsaved changes"
 msgstr ""
@@ -161,13 +161,13 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr "ຜິດພາດ"
+msgstr ""
 
 msgid "Feedback"
-msgstr "ຜົນຕອບຮັບ"
+msgstr "Изҳори назар"
 
 msgid "Indicators"
-msgstr "ຕົວຊີ້ວັດ"
+msgstr "Индикаторҳо"
 
 msgid "Warnings"
 msgstr ""
@@ -176,7 +176,7 @@ msgid "search group result could not be retrieved"
 msgstr ""
 
 msgid "Complete"
-msgstr "ສຳເລັດແລ້ວ"
+msgstr "Анҷом ёфт"
 
 msgid "Warnings found"
 msgstr ""
@@ -197,7 +197,7 @@ msgid "Validation errors"
 msgstr ""
 
 msgid "Validation warnings"
-msgstr "ຄ່າເຕືອນ"
+msgstr ""
 
 msgid "Some operations are still runnning. Please wait.."
 msgstr ""
@@ -206,7 +206,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr "Sort"
+msgstr "Ҷудокунӣ"
 
 msgid "No events to display"
 msgstr ""
@@ -215,7 +215,7 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr "ປິດ"
+msgstr "Пӯшидан"
 
 msgid "Please select the user"
 msgstr ""
@@ -230,79 +230,79 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr "ບໍ່ມີ"
+msgstr "Ягонто"
 
 msgid "Select user"
 msgstr ""
 
 msgid "to"
-msgstr "ຫາ"
+msgstr "Ба"
 
 msgid "From"
-msgstr "ຈາກ"
+msgstr ""
 
 msgid "To"
-msgstr "ຖຶງ"
+msgstr ""
 
 msgid "This week"
-msgstr "ທິດນີ້"
+msgstr ""
 
 msgid "This month"
-msgstr "ເດືອນນີ້"
+msgstr ""
 
 msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr "ອາທິດທີ່ຜ່ານມາ"
+msgstr "Ҳафтаи гузашта"
 
 msgid "Last month"
-msgstr "ເດືອນຜ່ານມາ"
+msgstr "Моҳи гузашта"
 
 msgid "Last 3 months"
-msgstr "3 ເດືອນຍ້ອນຫຼັງ"
+msgstr "3 моҳи охир"
 
 msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr "ຄ່າໃຫ່ຍສຸດ"
+msgstr "Макс"
 
 msgid "Min"
-msgstr "ຄ່າຕໍ່າສຸດ"
+msgstr "Мин"
 
 msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "ແມ່ນ"
+msgstr "Ҳа"
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "ປີ"
+msgstr "Солҳо"
 
 msgid "Months"
-msgstr "ເດືອນ"
+msgstr "Моҳҳо"
 
 msgid "Days"
-msgstr "ມື້"
+msgstr ""
 
 msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr "ເລືອກແລ້ວ"
+msgstr ""
 
 msgid "Delete"
-msgstr "ລົບ"
+msgstr "Нест кардан"
 
 msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "ບໍ່"
+msgstr "Не"
 
 msgid "Uploading image"
 msgstr ""
@@ -311,10 +311,10 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr "ຄົນຫາ"
+msgstr "Ҷустуҷӯ"
 
 msgid "Clear"
-msgstr "ລຶບ"
+msgstr "Пок кардан"
 
 msgid "No results"
 msgstr ""
@@ -344,10 +344,10 @@ msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
-msgstr "ສ້າງໃຫມ່"
+msgstr "Нав"
 
 msgid "Find"
-msgstr "ຊອກ"
+msgstr "Ёфтан"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -359,13 +359,13 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr "​ການ​ຮັບ​ຮອງ"
+msgstr ""
 
 msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Select"
-msgstr "ເລືອກ"
+msgstr "Интихоб кунед"
 
 msgid "Selected Program"
 msgstr ""
@@ -374,22 +374,22 @@ msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Show all"
-msgstr "ສະແດງທັງໝົດ"
+msgstr ""
 
 msgid "Program"
-msgstr "ສາຍງານ"
+msgstr "Барнома"
 
 msgid "Select program"
-msgstr "ຂະແໜງທີ່ຖືກເລືອກ"
+msgstr "Интихоби барнома"
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Online"
-msgstr "ມີການເຊື່ອມຕໍ່"
+msgstr "Онлайн"
 
 msgid "Offline"
-msgstr "ບໍ່ມີການເຊື່ອມຕໍ່"
+msgstr "Офлайн"
 
 msgid "Syncing"
 msgstr ""
@@ -407,10 +407,10 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr "ສະຖານະ"
+msgstr "Ҳолат"
 
 msgid "Comments"
-msgstr "ຄຳເຫັນ"
+msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -419,7 +419,7 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr "ບັນທຶກ"
+msgstr "Захира кардан"
 
 msgid "Show all events"
 msgstr ""
@@ -440,10 +440,10 @@ msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr "ລືບກໍລະນີອອກ"
+msgstr ""
 
 msgid "Update"
-msgstr "ປັບປຸງ"
+msgstr "Навсозӣ"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -467,13 +467,13 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr "Download as JSON"
+msgstr ""
 
 msgid "Download as XML"
-msgstr "Download as XML"
+msgstr ""
 
 msgid "Download as CSV"
-msgstr "ດາວໂຫຼດເປັນ CSV"
+msgstr "Боргирӣ ҳамчун файли CSV"
 
 msgid "Download with current filters"
 msgstr ""
@@ -503,7 +503,7 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr "Confirm"
+msgstr "Тасдиқ"
 
 msgid "Save As view"
 msgstr ""
@@ -524,13 +524,13 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Registered events"
-msgstr "ເຫດການທີ່ໄດ້ລົງທະບຽນ"
+msgstr ""
 
 msgid "Active"
-msgstr "ທີ່ຍັງນໍາໃຊ້ຢູ່"
+msgstr "Фаъол"
 
 msgid "Completed"
-msgstr "ສໍາເລັດແລ້ວ"
+msgstr "Анҷомёфта"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
@@ -565,7 +565,7 @@ msgid "Assigned user"
 msgstr ""
 
 msgid "Relationships"
-msgstr "ສາຍພົວພັນ"
+msgstr ""
 
 msgid "Assignee"
 msgstr ""
@@ -574,7 +574,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr "in"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -590,7 +590,7 @@ msgid ""
 msgstr ""
 
 msgid "New event"
-msgstr "ກໍລະນີໃໝ່"
+msgstr ""
 
 msgid "New event relationship"
 msgstr ""
@@ -671,16 +671,16 @@ msgid "An error occured loading possible duplicates"
 msgstr ""
 
 msgid "Hide"
-msgstr "ເຊື່ອງ"
+msgstr "Пинҳон кардан"
 
 msgid "Save as new {{tetName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr "ຫົວໜ່ວຍ ການຈັດຕັ້ງ"
+msgstr "Воҳиди сохторӣ"
 
 msgid "Registration"
-msgstr "ລົງທະບຽນ"
+msgstr ""
 
 msgid "Review Duplicates"
 msgstr ""
@@ -704,7 +704,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr "ລົົງທະບຽນ"
+msgstr ""
 
 msgid "Search scope"
 msgstr ""
@@ -726,7 +726,7 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr "​ກັບ​ຄືນ"
+msgstr "Ба қафо"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -768,7 +768,7 @@ msgid "No one is assigned to this event"
 msgstr ""
 
 msgid "Assign"
-msgstr "Assign"
+msgstr "Таъин"
 
 msgid "Event assigned to {{name}}"
 msgstr ""
@@ -783,13 +783,13 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr "ເພີ່ມຄວາມສໍາພັນ"
+msgstr ""
 
 msgid "Results found"
 msgstr ""
 
 msgid "Selected program"
-msgstr "ເລືອກສາຍງານ"
+msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -810,7 +810,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr "ລາຍລະອຽດສ່ວນຕົົວ"
+msgstr "Профил"
 
 msgid "Error saving event"
 msgstr ""
@@ -837,25 +837,25 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
+msgstr ""
 
 msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr "ວັນທີ່"
+msgstr "Сана"
 
 msgid "Time"
 msgstr ""
 
 msgid "From date"
-msgstr "From date"
+msgstr "Аз санаи"
 
 msgid "From time"
 msgstr ""
 
 msgid "To date"
-msgstr "ເຖີງວັນທີ່"
+msgstr "То санаи"
 
 msgid "To time"
 msgstr ""

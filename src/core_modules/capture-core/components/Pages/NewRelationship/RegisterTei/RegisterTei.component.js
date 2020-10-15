@@ -56,7 +56,8 @@ const RegisterTeiPlain = ({
             </Button>
             <div style={{ marginLeft: 16 }}>
                 <Button
-                    onClick={handleSaveFromDialog}
+                    dataTest="dhis2-capture-create-as-new-person"
+                    onClick={this.handleSaveFromDialog}
                     primary
                 >
                     {i18n.t('Save as new {{tetName}}', { tetName })}
