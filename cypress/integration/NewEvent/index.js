@@ -181,19 +181,6 @@ And('you expand the attributes search area', () => {
         .click();
 });
 
-And('you fill in the zip code range numbers', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
-        .eq(5)
-        .type('7130')
-        .blur();
-
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
-        .eq(6)
-        .type('7135')
-        .blur();
-});
 
 And('you click search', () => {
     cy.get('[data-test="dhis2-capture-d2-form-area"]')

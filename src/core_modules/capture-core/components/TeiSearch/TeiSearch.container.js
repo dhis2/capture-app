@@ -1,8 +1,7 @@
 // @flow
-
+import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
-import TeiSearch from './TeiSearch.component';
-
+import { TeiSearchComponent } from './TeiSearch.component';
 import {
     requestSearchTei,
     searchFormValidationFailed,
@@ -12,12 +11,12 @@ import {
     setOpenSearchGroupSection,
 } from './actions/teiSearch.actions';
 import { makeSearchGroupsSelector } from './teiSearch.selectors';
-
+import type { Props, OwnProps } from './TeiSearch.types';
 
 const makeMapStateToProps = () => {
     const searchGroupsSelector = makeSearchGroupsSelector();
 
-    const mapStateToProps = (state: ReduxState, props: Object) => {
+    const mapStateToProps = (state: ReduxState, props: OwnProps) => {
         const searchGroups = searchGroupsSelector(state, props);
         const currentTeiSearch = state.teiSearch[props.id];
         return {
@@ -33,12 +32,12 @@ const makeMapStateToProps = () => {
     return mapStateToProps;
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps) => ({
     onSearch: (formId: string, searchGroupId: string, searchId: string) => {
-        dispatch(requestSearchTei(formId, searchGroupId, searchId));
+        dispatch(requestSearchTei(formId, searchGroupId, searchId, ownProps.resultsPageSize));
     },
     onSearchResultsChangePage: (searchId: string, pageNumber: number) => {
-        dispatch(teiSearchResultsChangePage(searchId, pageNumber));
+        dispatch(teiSearchResultsChangePage(searchId, pageNumber, ownProps.resultsPageSize));
     },
     onSearchValidationFailed: (formId: string, searchGroupId: string, searchId: string) => {
         dispatch(searchFormValidationFailed(formId, searchGroupId, searchId));
@@ -54,5 +53,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowFixMe[missing-annot] automated comment
-export default connect(makeMapStateToProps, mapDispatchToProps)(TeiSearch);
+export const TeiSearch: ComponentType<OwnProps> =
+  connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(makeMapStateToProps, mapDispatchToProps)(TeiSearchComponent);

@@ -8,7 +8,8 @@ import { dataElementTypes } from '../../metaData';
 type Props = {|
   name: string,
   value: string,
-  type?: $Values<typeof dataElementTypes>
+  type?: $Values<typeof dataElementTypes>,
+  ...CssClasses
 |}
 
 const getStyles = (theme: Theme) => ({
@@ -31,9 +32,8 @@ const ListEntryPlain = ({
     name,
     value,
     classes,
-    // $FlowFixMe[prop-missing] automated comment
     type = dataElementTypes.TEXT,
-}: Props & CssClasses) => (
+}: Props) => (
     <div className={classes.entry}>
         <span className={classes.elementName}>
             {name}:&nbsp;
@@ -43,4 +43,4 @@ const ListEntryPlain = ({
         </span>
     </div>);
 
-export const ListEntry: ComponentType<Props> = withStyles(getStyles)(ListEntryPlain);
+export const ListEntry: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(ListEntryPlain);
