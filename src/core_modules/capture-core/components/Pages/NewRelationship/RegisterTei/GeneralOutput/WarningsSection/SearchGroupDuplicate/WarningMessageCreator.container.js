@@ -3,15 +3,7 @@ import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { WarningMessageCreatorComponent } from './WarningMessageCreator.component';
 import { reviewDuplicates } from './searchGroupDuplicate.actions';
-
-
-type OwnProps = {|
-    onOpenReviewDialog: () => void,
-|}
-type DispatchersFromRedux = {|
-    onReviewDuplicates: (onOpenReviewDialog: Function) => void,
-|}
-export type Props = {| ...DispatchersFromRedux, ...OwnProps, ...CssClasses |}
+import type { OwnProps, Props } from './WarningMessageCreator.types';
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onReviewDuplicates: (pageSize) => { dispatch(reviewDuplicates(pageSize)); },

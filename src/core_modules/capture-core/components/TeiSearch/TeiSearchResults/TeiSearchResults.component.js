@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Props } from './TeiSearchResults.container';
+import type { Props } from './TeiSearchResults.types';
 
 
 export const TeiSearchResultsComponent = ({ getResultsView, ...passOnProps }: Props) => (

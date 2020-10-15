@@ -8,24 +8,7 @@ import { RegisterTeiComponent } from './RegisterTei.component';
 import { makeTETNameSelector } from './registerTei.selectors';
 import { reviewDuplicates } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/searchGroupDuplicate.actions';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
-
-type PropsFromRedux = {|
-    tetName: ?string,
-    ready: boolean,
-    error: string,
-    possibleDuplicates: ?boolean,
-|};
-type DispatchersFromRedux = {|
-    onReviewDuplicates: (pageSize: number) => void,
-|};
-
-type OwnProps = {|
-    onLink: (teiId: string) => void,
-    onGetUnsavedAttributeValues?: ?Function,
-    onSave: Function,
-|};
-
-export type Props = {|...PropsFromRedux, ...OwnProps, ...DispatchersFromRedux, ...CssClasses |}
+import type { Props, OwnProps } from './RegisterTei.types';
 
 const makeStateToProps = () => {
     const tetNameSelector = makeTETNameSelector();

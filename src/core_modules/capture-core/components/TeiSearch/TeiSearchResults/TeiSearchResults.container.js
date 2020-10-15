@@ -4,28 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { TeiSearchResultsComponent } from './TeiSearchResults.component';
 import { withLoadingIndicator } from '../../../HOC';
-import { type SearchGroup } from '../../../metaData';
-
-export type OwnProps = {|
-    id: string,
-    searchGroups: any,
-    onChangePage: Function,
-    onNewSearch: Function,
-    onEditSearch: Function,
-    getResultsView: Function,
-|}
-
-export type PropsFromRedux = {|
-    resultsLoading: boolean,
-    teis: any,
-    currentPage: number,
-    searchValues: any,
-    selectedProgramId: string,
-    selectedTrackedEntityTypeId: string,
-    searchGroup: SearchGroup
-|}
-
-export type Props = {|...OwnProps, ...PropsFromRedux |}
+import type { OwnProps, Props } from './TeiSearchResults.types';
 
 const mapStateToProps = (state: ReduxState, props: OwnProps) => {
     const currentTeiSearch = state.teiSearch[props.id] || {};

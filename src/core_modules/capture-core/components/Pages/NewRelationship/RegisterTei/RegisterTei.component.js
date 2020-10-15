@@ -8,7 +8,7 @@ import { RegistrationSection } from './RegistrationSection';
 import GeneralOutput from './GeneralOutput/GeneralOutput.container';
 import { ReviewDialog } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/ReviewDialog.component';
 import { ResultsPageSizeContext } from '../../shared-contexts';
-import type { Props } from './RegisterTei.container';
+import type { Props } from './RegisterTei.types';
 
 const getStyles = () => ({
     container: {

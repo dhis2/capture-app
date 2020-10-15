@@ -3,19 +3,7 @@ import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { ReviewDialogContentsPagerComponent } from './ReviewDialogContentsPager.component';
 import { changePage } from './searchGroupDuplicate.actions';
-
-
-type OwnProps = {|
-    nextPageButtonDisabled: boolean,
-|};
-export type DispatchersFromFromRedux = {|
-    onChangePage: Function,
-|};
-type PropsFromRedux = {|
-    currentPage: number,
-|};
-
-export type Props ={| ...OwnProps, ...DispatchersFromFromRedux, ...PropsFromRedux, ...CssClasses |}
+import type { Props, OwnProps } from './ReviewDialogContentsPager.types';
 
 const mapStateToProps = (state: ReduxState) => ({
     currentPage: state.newRelationshipRegisterTeiDuplicatesReview.currentPage,

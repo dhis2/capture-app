@@ -8,7 +8,7 @@ import { Button } from '../../../../../../Buttons';
 import { CardList } from '../../../../../../CardList';
 import { ReviewDialogContentsPager } from './ReviewDialogContentsPager.container';
 import { ResultsPageSizeContext } from '../../../../../shared-contexts';
-import type { Props } from './ReviewDialogContents.container';
+import type { Props } from './ReviewDialogContents.types';
 
 const getStyles = (theme: Theme) => ({
     linkButtonContainer: {

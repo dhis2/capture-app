@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../../../Pagination/withDefaultNavigation';
 import { ResultsPageSizeContext } from '../../../../../shared-contexts';
-import type { Props } from './ReviewDialogContentsPager.container';
+import type { Props } from './ReviewDialogContentsPager.types';
 
 const Pager = withNavigation()(Pagination);
 
