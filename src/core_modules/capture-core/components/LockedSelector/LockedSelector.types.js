@@ -13,7 +13,8 @@ export type PropsFromRedux = $ReadOnly<{|
 
 export type DispatchersFromRedux = $ReadOnly<{|
   onOpenNewEventPage: (selectedProgramId: string, selectedOrgUnitId: string) => void,
-  onOpenSearchPage: (selectedProgramId: string, selectedOrgUnitId: string) => void,
+  onOpenSearchPage: () => void,
+  onOpenSearchPageWithoutProgramId: () => void,
   onSetOrgUnit: (id: string, orgUnit: Object) => void,
   onResetOrgUnitId: () => void,
   onSetProgramId: (id: string) => void,

@@ -722,6 +722,9 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
+msgid "Back"
+msgstr ""
+
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
