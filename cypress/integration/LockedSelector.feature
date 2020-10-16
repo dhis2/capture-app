@@ -126,7 +126,7 @@ Feature: Use the LockedSelector to navigate
   Scenario: Clicking the find button when the preselected program can be a search domain
     Given you are in the main page with no selections made
     And you select both org unit and program Child Programme
-    When you click the find button
+    When you click the find button from the dropdown menu
     Then you are navigated to the search page with the same org unit and program Child Programme
     And there should be visible a title with Child Program
     And there should be Child Programme domain forms visible to search with

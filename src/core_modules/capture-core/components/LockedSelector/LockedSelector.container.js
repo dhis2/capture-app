@@ -51,8 +51,16 @@ const mapDispatchToProps = (
     onOpenNewEventPage: (selectedProgramId, selectedOrgUnitId) => {
         dispatch(openNewEventPageFromLockedSelector(selectedProgramId, selectedOrgUnitId));
     },
-    onOpenSearchPage: (selectedProgramId, selectedOrgUnitId) => {
-        dispatch(openSearchPageFromLockedSelector(selectedProgramId, selectedOrgUnitId));
+    onOpenSearchPage: () => {
+        dispatch(openSearchPageFromLockedSelector());
+    },
+    onOpenSearchPageWithoutProgramId: () => {
+        dispatch(batchActions([
+            resetProgramIdFromLockedSelector(),
+            resetAllCategoryOptionsFromLockedSelector(),
+            resetProgramIdBase(),
+            openSearchPageFromLockedSelector(),
+        ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH));
     },
     onStartAgain: () => {
         dispatch(batchActions([

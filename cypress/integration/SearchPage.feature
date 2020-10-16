@@ -115,7 +115,6 @@ Feature: User interacts with Search page
     Then you can see the first page of the results
     And the next page button is disabled
 
-
   Scenario: Changing the program from the LockedSelector will change the search scope
     Given you are on the default search page
     And you select the search domain Child Programme

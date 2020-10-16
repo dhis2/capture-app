@@ -213,6 +213,17 @@ Then('you stay in the events page since you cant search for events', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
 });
 
+When('you click the find button from the dropdown menu', () => {
+    cy.get('[data-test="dhis2-capture-find-button"]')
+        .click();
+    cy.get('[data-test="dhis2-capture-find-menuitem-one"]')
+        .click();
+});
+
+Then('you stay in the events page since you cant search for events', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/search/orgUnitId=DiszpKrYNg8`);
+});
+
 Then('you are navigated to the search page with the same org unit and program Child Programme', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/search/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
 });
