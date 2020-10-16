@@ -2,7 +2,7 @@
 import React, { type ComponentType, useContext, useEffect, useMemo, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui-core';
+import { Button } from '@dhis2/ui';
 import { D2Form } from '../../../D2Form';
 import { searchScopes } from '../SearchPage.constants';
 import { Section, SectionHeaderSimple } from '../../../Section';

@@ -38,7 +38,7 @@ export const resetCategoryOptionFromLockedSelector = (categoryId: string) => act
 export const resetAllCategoryOptionsFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET)();
 
 export const openNewEventPageFromLockedSelector = (programId: string, orgUnitId: string) => actionCreator(lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN)({ programId, orgUnitId });
-export const openSearchPageFromLockedSelector = (programId: string, orgUnitId: string) => actionCreator(lockedSelectorActionTypes.SEARCH_PAGE_OPEN)({ programId, orgUnitId });
+export const openSearchPageFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.SEARCH_PAGE_OPEN)();
 
 
 // these actions are being triggered only when the user updates the url from the url bar.

@@ -19,7 +19,6 @@ export const openSearchPageLocationChangeEpic = (action$: InputObservable, store
     action$.pipe(
         ofType(lockedSelectorActionTypes.SEARCH_PAGE_OPEN),
         map(() => {
-            const state = store.value;
-            const { programId, orgUnitId } = state.currentSelections;
+            const { orgUnitId, programId } = store.value.currentSelections;
             return push(`/search/${urlArguments(programId, orgUnitId)}`);
         }));

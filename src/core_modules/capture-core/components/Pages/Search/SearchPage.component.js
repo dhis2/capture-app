@@ -13,7 +13,7 @@ import {
     ModalActions,
     ButtonStrip,
     Button,
-} from '@dhis2/ui-core';
+} from '@dhis2/ui';
 import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
@@ -22,11 +22,17 @@ import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
 import { SearchDomainSelector } from './SearchDomainSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
+import { searchScopes } from './SearchPage.constants';
 import { ResultsPageSizeContext } from '../shared-contexts';
 
 const getStyles = (theme: Theme) => ({
     maxWidth: {
         maxWidth: theme.typography.pxToRem(950),
+    },
+    title: {
+        padding: '10px 0 0px 10px',
+        fontWeight: 500,
+        marginBottom: theme.typography.pxToRem(16),
     },
     container: {
         padding: '10px 24px 24px 24px',
@@ -68,29 +74,52 @@ const Index = ({
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
     availableSearchOptions,
-    preselectedProgram,
+    preselectedProgramId,
     searchStatus,
 }: Props) => {
-    const [selectedSearchScope, setSelectedSearchScope] = useState(() => preselectedProgram);
+    const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
+    const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
 
     useEffect(() => {
-        if (!preselectedProgram.value) {
+        showInitialSearchPage();
+        setSearchScopeId(preselectedProgramId);
+
+        const type = preselectedProgramId ? searchScopes.PROGRAM : null;
+        setSearchScopeType(type);
+    }, [showInitialSearchPage, preselectedProgramId]);
+
+    useEffect(() => {
+        if (!preselectedProgramId) {
             showInitialSearchPage();
         }
 
         return () => showInitialSearchPage();
     },
     [
-        preselectedProgram.value,
+        preselectedProgramId,
         showInitialSearchPage,
     ]);
 
     const searchGroupsForSelectedScope =
-      (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
+      (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchGroups : []);
 
-    const handleSearchScopeSelection = ({ value, label }) => {
+    const deriveTitleText = () => {
+        const TETypeName = (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].TETypeName : null);
+        const searchOptionName = (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchOptionName : null);
+
+        if (TETypeName && searchOptionName) {
+            return `${i18n.t('Find a {{TETypeName}} in program: ', { TETypeName })} ${searchOptionName}`;
+        }
+        if (!TETypeName && searchOptionName) {
+            return `${i18n.t('Find a')} ${searchOptionName}`;
+        }
+        return i18n.t('Find');
+    };
+
+    const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
-        setSelectedSearchScope({ value, label });
+        setSearchScopeId(searchScopeId);
+        setSearchScopeType(searchType);
     };
 
     return (<>
@@ -108,14 +137,20 @@ const Index = ({
 
                 <Paper className={classes.paper}>
                     <div className={classes.maxWidth}>
-                        <SearchDomainSelector
-                            trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
-                            onSelect={handleSearchScopeSelection}
-                            selectedSearchScope={selectedSearchScope}
-                        />
+                        <div className={classes.title} >
+                            {deriveTitleText()}
+                        </div>
+                        {
+                            (selectedSearchScopeType !== searchScopes.PROGRAM) &&
+                            <SearchDomainSelector
+                                trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
+                                onSelect={handleSearchScopeSelection}
+                                selectedSearchScopeId={selectedSearchScopeId}
+                            />
+                        }
 
                         <SearchForm
-                            selectedSearchScopeId={selectedSearchScope.value}
+                            selectedSearchScopeId={selectedSearchScopeId}
                             searchGroupsForSelectedScope={searchGroupsForSelectedScope}
                         />
 
@@ -168,7 +203,7 @@ const Index = ({
                 </Paper>
 
                 {
-                    searchStatus === searchPageStatus.INITIAL && !selectedSearchScope.value &&
+                    searchStatus === searchPageStatus.INITIAL && !selectedSearchScopeId &&
                     <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
                         <div className={classes.emptySelectionPaperContent}>
                             {i18n.t('Make a selection to start searching')}

@@ -9,15 +9,13 @@ export type SearchGroups = Array<{|
   +minAttributesRequiredToSearch: number
 |}>
 
-export type SelectedSearchScope = $ReadOnly<{|
-  value: ?string,
-  label: ?string
-|}>
+export type SelectedSearchScopeId = ?string
 
 export type AvailableSearchOptions = $ReadOnly<{
     [elementId: string]: {|
       +searchOptionId: string,
       +searchOptionName: string,
+      +TETypeName: ?string,
       +searchGroups: SearchGroups |}
   }>
 
@@ -37,7 +35,7 @@ export type ContainerProps = $ReadOnly<{|
   showInitialSearchPage: ()=>void,
   trackedEntityTypesWithCorrelatedPrograms: TrackedEntityTypesWithCorrelatedPrograms,
   availableSearchOptions: AvailableSearchOptions,
-  preselectedProgram: SelectedSearchScope,
+  preselectedProgramId: SelectedSearchScopeId,
   searchStatus: string,
   error: boolean,
   ready: boolean,

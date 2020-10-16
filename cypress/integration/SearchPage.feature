@@ -11,7 +11,7 @@ Feature: User interacts with Search page
 
   Scenario: Search domain is preselected. User lands on the search page with search domain Child Programme preselected
     Given you are in the search page with the Child Programme being preselected from the url
-    Then there should be search domain Child Programme being preselected
+    Then there should be visible a title with Child Program
     And there should be Child Programme domain forms visible to search with
 
   Scenario: Searching using unique identifier returns no results
@@ -115,12 +115,12 @@ Feature: User interacts with Search page
     Then you can see the first page of the results
     And the next page button is disabled
 
-
-  Scenario: Changing the program from the LockedSelector wont change the search scope
-    Given you are in the search page with the Child Programme being preselected from the url
-    And you select the search domain Malaria Case diagnosis
+  Scenario: Changing the program from the LockedSelector will change the search scope
+    Given you are on the default search page
+    And you select the search domain Child Programme
     When you remove the Child Programme selection
-    Then you still can see the Malaria case diagnosis being selected
+    And you select the search domain Malaria Case diagnosis
+    Then there should be visible a title with Malaria case diagnosis
 
   # Tracked entity type
   Scenario: Searching using attributes in TEType domain is invalid after clearing all search terms

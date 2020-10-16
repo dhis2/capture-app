@@ -30,10 +30,9 @@ Given('you are in the search page with the Child Programme being preselected fro
     cy.visit('/#/search/programId=IpHINAT79UW');
 });
 
-Then('there should be search domain Child Programme being preselected', () => {
+Then('there should be visible a title with Child Program', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .find('[data-test="dhis2-uicore-select-input"]')
-        .contains('Child Programme')
+        .contains('a Person in program: Child Programme')
         .should('exist');
 });
 
@@ -43,8 +42,15 @@ And('there should be Child Programme domain forms visible to search with', () =>
         .should('have.length', 1);
 });
 
+And('you select the search domain Child Programme', () => {
+    cy.get('.Select')
+        .type('Child Program');
+    cy.contains('Child Programme')
+        .click();
+});
+
 And('you select the search domain Malaria Case diagnosis', () => {
-    cy.get('[data-test="dhis2-uicore-select-input"]')
+    cy.get('.Select')
         .type('Malaria case diagn');
     cy.contains('Malaria case diagnosis')
         .click();
@@ -214,7 +220,7 @@ Then('there should be a validation error message', () => {
 });
 
 Given('you are on the search page with preselected program and org unit', () => {
-    cy.visit('/#/search/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/search/programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
 
 When('when you click the back button', () => {
@@ -224,7 +230,7 @@ When('when you click the back button', () => {
 
 Then('you should be taken to the main page with program and org unit preselected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
+        .should('eq', `${Cypress.config().baseUrl}/#/programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8`);
 });
 
 Then('you can see the first page of the results', () => {
@@ -280,9 +286,16 @@ When('you remove the Child Programme selection', () => {
         .click();
 });
 
-Then('you still can see the Malaria case diagnosis being selected', () => {
+Then('there should be visible a title with Malaria case diagnosis', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .contains('Malaria case diagnosis');
+        .contains('Find a Malaria Entity in program: Malaria case diagnosis, treatment and investigation')
+        .should('exist');
+});
+
+And('there should be Malaria case diagnosis forms visible to search with', () => {
+    cy.get('[data-test="dhis2-capture-search-page-content"]')
+        .find('[data-test="capture-ui-input"]')
+        .should('have.length', 1);
 });
 
 Given('you are in the search page with the Adult Woman being preselected from the url', () => {
