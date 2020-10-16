@@ -1,5 +1,4 @@
-Feature: In the main page, use the LockedSelector to navigate
-
+Feature: Use the LockedSelector to navigate
   # Main page
 
   Scenario: Notifying that you need to select org unit and program to get started
@@ -122,13 +121,12 @@ Feature: In the main page, use the LockedSelector to navigate
     Given you are in the main page with no selections made
     And you select both org unit and program Malaria case registration
     When you click the find button
-    Then you are navigated to the search page with the same org unit and program Malaria case registration
-    And there should be no search domain preselected
+    Then you stay in the events page since you cant search for events
 
   Scenario: Clicking the find button when the preselected program can be a search domain
     Given you are in the main page with no selections made
     And you select both org unit and program Child Programme
     When you click the find button
     Then you are navigated to the search page with the same org unit and program Child Programme
-    And there should be search domain Child Programme being preselected
+    And there should be visible a title with Child Program
     And there should be Child Programme domain forms visible to search with

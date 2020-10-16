@@ -22,11 +22,17 @@ import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
 import { SearchDomainSelector } from './SearchDomainSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
+import { searchScopes } from './SearchPage.constants';
 import { ResultsPageSizeContext } from '../shared-contexts';
 
 const getStyles = (theme: Theme) => ({
     maxWidth: {
         maxWidth: theme.typography.pxToRem(950),
+    },
+    title: {
+        padding: '10px 0 0px 10px',
+        fontWeight: 500,
+        marginBottom: theme.typography.pxToRem(16),
     },
     container: {
         padding: '10px 24px 24px 24px',
@@ -71,7 +77,16 @@ const Index = ({
     preselectedProgramId,
     searchStatus,
 }: Props) => {
-    const [selectedSearchScopeId, setSelectedSearchScopeId] = useState(() => preselectedProgramId);
+    const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
+    const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
+
+    useEffect(() => {
+        showInitialSearchPage();
+        setSearchScopeId(preselectedProgramId);
+
+        const type = preselectedProgramId ? searchScopes.PROGRAM : null;
+        setSearchScopeType(type);
+    }, [showInitialSearchPage, preselectedProgramId]);
 
     useEffect(() => {
         if (!preselectedProgramId) {
@@ -88,9 +103,23 @@ const Index = ({
     const searchGroupsForSelectedScope =
       (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchGroups : []);
 
-    const handleSearchScopeSelection = ({ selected }) => {
+    const deriveTitleText = () => {
+        const TETypeName = (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].TETypeName : null);
+        const searchOptionName = (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchOptionName : null);
+
+        if (TETypeName && searchOptionName) {
+            return `${i18n.t('Find a {{TETypeName}} in program: ', { TETypeName })} ${searchOptionName}`;
+        }
+        if (!TETypeName && searchOptionName) {
+            return `${i18n.t('Find a')} ${searchOptionName}`;
+        }
+        return i18n.t('Find');
+    };
+
+    const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
-        setSelectedSearchScopeId(selected);
+        setSearchScopeId(searchScopeId);
+        setSearchScopeType(searchType);
     };
 
     return (<>
@@ -108,11 +137,17 @@ const Index = ({
 
                 <Paper className={classes.paper}>
                     <div className={classes.maxWidth}>
-                        <SearchDomainSelector
-                            trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
-                            onSelect={handleSearchScopeSelection}
-                            selectedSearchScopeId={selectedSearchScopeId}
-                        />
+                        <div className={classes.title} >
+                            {deriveTitleText()}
+                        </div>
+                        {
+                            (selectedSearchScopeType !== searchScopes.PROGRAM) &&
+                            <SearchDomainSelector
+                                trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
+                                onSelect={handleSearchScopeSelection}
+                                selectedSearchScopeId={selectedSearchScopeId}
+                            />
+                        }
 
                         <SearchForm
                             selectedSearchScopeId={selectedSearchScopeId}

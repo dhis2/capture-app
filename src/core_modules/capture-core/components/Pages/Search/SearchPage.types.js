@@ -15,6 +15,7 @@ export type AvailableSearchOptions = $ReadOnly<{
     [elementId: string]: {|
       +searchOptionId: string,
       +searchOptionName: string,
+      +TETypeName: ?string,
       +searchGroups: SearchGroups |}
   }>
 
