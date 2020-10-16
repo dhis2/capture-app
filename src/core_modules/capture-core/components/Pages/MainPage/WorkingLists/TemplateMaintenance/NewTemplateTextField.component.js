@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { InputField } from '@dhis2/ui-core';
+import { InputField } from '@dhis2/ui';
 
 type PassOnProps = {
     onBlur: (event: { value: string }) => void,

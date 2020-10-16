@@ -2,28 +2,22 @@
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import AddIcon from '@material-ui/icons/AddCircleOutline';
-import SearchIcon from '@material-ui/icons/Search';
-import { Button } from '@dhis2/ui-core';
+import { Button, colors } from '@dhis2/ui';
 import { TrackerProgram } from '../../../metaData';
 
-const styles = () => ({
-    container: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        flexGrow: 1,
+const styles = ({ typography }) => ({
+    marginLeft: {
+        marginLeft: typography.pxToRem(12),
     },
-    startAgainContainer: {
-        flexGrow: 1,
-    },
-    icon: {
-        fontSize: 20,
-    },
-    buttonMargin: {
-        marginLeft: 8,
-    },
-    rightButton: {
-        marginLeft: 12,
+    buttonAsLink: {
+        marginLeft: typography.pxToRem(12),
+        fontSize: typography.pxToRem(13),
+        background: 'none!important',
+        border: 'none',
+        padding: '0!important',
+        color: colors.grey700,
+        textDecoration: 'underline',
+        cursor: 'pointer',
     },
 });
 
@@ -33,7 +27,6 @@ type Props = $ReadOnly<{|
     onNewClick: () => void,
     onFindClick: () => void,
     showResetButton: boolean,
-    ...CssClasses
 |}>;
 
 const Index = ({
@@ -43,7 +36,7 @@ const Index = ({
     selectedProgramId,
     classes,
     showResetButton,
-}: Props) => {
+}: Props & CssClasses) => {
     const typeName =
       selectedProgramId instanceof TrackerProgram
           ?
@@ -53,50 +46,43 @@ const Index = ({
 
 
     return (
-        <div className={classes.container}>
+        <>
+            <Button
+                small
+                secondary
+                dataTest="dhis2-capture-new-event-button"
+                onClick={onNewClick}
+            >
+                {
+                    selectedProgramId ?
+                        i18n.t('New {{typeName}}', { typeName })
+                        :
+                        i18n.t('New')
+                }
+            </Button>
+            <Button
+                small
+                secondary
+                dataTest="dhis2-capture-find-button"
+                className={classes.marginLeft}
+                onClick={onFindClick}
+            >
+                { i18n.t('Find') }
+            </Button>
             {
                 showResetButton ?
-                    <div className={classes.startAgainContainer}>
-                        <Button
-                            dataTest="dhis2-capture-start-again-button"
-                            onClick={onStartAgainClick}
-                            small
-                            secondary
-                        >
-                            { i18n.t('Start again') }
-                        </Button>
-                    </div>
+                    <button
+                        className={classes.buttonAsLink}
+                        data-test="dhis2-capture-start-again-button"
+                        onClick={onStartAgainClick}
+                    >
+                        { i18n.t('Clear selections') }
+                    </button>
                     :
                     null
             }
-            <Button
-                dataTest="dhis2-capture-new-button"
-                onClick={onNewClick}
-            >
-                <AddIcon className={classes.icon} />
-                <span className={classes.buttonMargin}>
-                    {
-                        selectedProgramId ?
-                            i18n.t('New {{typeName}}', { typeName })
-                            :
-                            i18n.t('New')
-                    }
-                </span>
-            </Button>
-            <Button
-                dataTest="dhis2-capture-find-button"
-                className={classes.rightButton}
-                onClick={onFindClick}
-                color="primary"
-            >
-                <SearchIcon className={classes.icon} />
-                <span className={classes.buttonMargin}>
-                    { i18n.t('Find') }
-                </span>
-
-            </Button>
-        </div>
+        </>
     );
 };
 
-export const ActionButtons: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(Index);
+export const ActionButtons: ComponentType<Props> = withStyles(styles)(Index);

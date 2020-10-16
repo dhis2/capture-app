@@ -87,22 +87,20 @@ const useSearchOptions = (trackedEntityTypesWithCorrelatedPrograms): AvailableSe
     [trackedEntityTypesWithCorrelatedPrograms],
     );
 
-const usePreselectedProgram = (trackedEntityTypesWithCorrelatedPrograms) => {
+const usePreselectedProgram = (trackedEntityTypesWithCorrelatedPrograms): ?string => {
     const currentSelectionsId =
       useSelector(({ currentSelections }) => currentSelections.programId);
 
     return useMemo(() => {
-        const preselection =
+        const { programId } =
           Object.values(trackedEntityTypesWithCorrelatedPrograms)
               // $FlowFixMe https://github.com/facebook/flow/issues/2221
               .map(({ programs }) =>
-                  programs.find(({ programId }) => programId === currentSelectionsId))
-              .filter(program => program)[0];
+                  programs.find(({ programId: currentProgramId }) => currentProgramId === currentSelectionsId))
+              .filter(program => program)[0]
+            || {};
 
-        return {
-            value: preselection && preselection.programId,
-            label: preselection && preselection.programName,
-        };
+        return programId;
     }, [currentSelectionsId, trackedEntityTypesWithCorrelatedPrograms],
     );
 };
@@ -118,7 +116,7 @@ export const SearchPage: ComponentType<{||}> = () => {
 
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
     const availableSearchOptions = useSearchOptions(trackedEntityTypesWithCorrelatedPrograms);
-    const preselectedProgram = usePreselectedProgram(trackedEntityTypesWithCorrelatedPrograms);
+    const preselectedProgramId = usePreselectedProgram(trackedEntityTypesWithCorrelatedPrograms);
 
     const searchStatus: string =
       useSelector(({ searchPage }) => searchPage.searchStatus);
@@ -134,7 +132,7 @@ export const SearchPage: ComponentType<{||}> = () => {
             showInitialSearchPage={dispatchShowInitialSearchPage}
             trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
             availableSearchOptions={availableSearchOptions}
-            preselectedProgram={preselectedProgram}
+            preselectedProgramId={preselectedProgramId}
             searchStatus={searchStatus}
             error={error}
             ready={ready}

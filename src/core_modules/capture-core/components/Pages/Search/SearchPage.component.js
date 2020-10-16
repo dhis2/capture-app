@@ -13,7 +13,7 @@ import {
     ModalActions,
     ButtonStrip,
     Button,
-} from '@dhis2/ui-core';
+} from '@dhis2/ui';
 import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
@@ -68,29 +68,29 @@ const Index = ({
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
     availableSearchOptions,
-    preselectedProgram,
+    preselectedProgramId,
     searchStatus,
 }: Props) => {
-    const [selectedSearchScope, setSelectedSearchScope] = useState(() => preselectedProgram);
+    const [selectedSearchScopeId, setSelectedSearchScopeId] = useState(() => preselectedProgramId);
 
     useEffect(() => {
-        if (!preselectedProgram.value) {
+        if (!preselectedProgramId) {
             showInitialSearchPage();
         }
 
         return () => showInitialSearchPage();
     },
     [
-        preselectedProgram.value,
+        preselectedProgramId,
         showInitialSearchPage,
     ]);
 
     const searchGroupsForSelectedScope =
-      (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
+      (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchGroups : []);
 
-    const handleSearchScopeSelection = ({ value, label }) => {
+    const handleSearchScopeSelection = ({ selected }) => {
         showInitialSearchPage();
-        setSelectedSearchScope({ value, label });
+        setSelectedSearchScopeId(selected);
     };
 
     return (<>
@@ -111,11 +111,11 @@ const Index = ({
                         <SearchDomainSelector
                             trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                             onSelect={handleSearchScopeSelection}
-                            selectedSearchScope={selectedSearchScope}
+                            selectedSearchScopeId={selectedSearchScopeId}
                         />
 
                         <SearchForm
-                            selectedSearchScopeId={selectedSearchScope.value}
+                            selectedSearchScopeId={selectedSearchScopeId}
                             searchGroupsForSelectedScope={searchGroupsForSelectedScope}
                         />
 
@@ -168,7 +168,7 @@ const Index = ({
                 </Paper>
 
                 {
-                    searchStatus === searchPageStatus.INITIAL && !selectedSearchScope.value &&
+                    searchStatus === searchPageStatus.INITIAL && !selectedSearchScopeId &&
                     <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
                         <div className={classes.emptySelectionPaperContent}>
                             {i18n.t('Make a selection to start searching')}

@@ -6,7 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import {
     SingleSelect,
     SingleSelectOption,
-} from '@dhis2/ui-core';
+} from '@dhis2/ui';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { OwnProps, Props } from './SearchDomainSelector.types';
 
@@ -36,7 +36,7 @@ const styles = (theme: Theme) => ({
 });
 
 export const Index =
-  ({ trackedEntityTypesWithCorrelatedPrograms, classes, onSelect, selectedSearchScope }: Props) =>
+  ({ trackedEntityTypesWithCorrelatedPrograms, classes, onSelect, selectedSearchScopeId }: Props) =>
       (<Section
           className={classes.searchDomainSelectorSection}
           header={
@@ -50,8 +50,8 @@ export const Index =
               <div className={classes.searchRowTitle}>{ i18n.t('Find results from') }</div>
               <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
                   <SingleSelect
-                      onChange={({ selected }) => { onSelect(selected); }}
-                      selected={selectedSearchScope}
+                      onChange={(selected) => { onSelect(selected); }}
+                      selected={selectedSearchScopeId}
                       empty={<div className={classes.customEmpty}>Custom empty component</div>}
                   >
                       {
