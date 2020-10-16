@@ -33,8 +33,9 @@ type Props = {
     onResetCategoryOption: (categoryId: string) => void,
     onResetAllCategoryOptions: () => void,
     onStartAgain: () => void,
-    onClickNew: () => void,
-    onClickFind: () => void,
+    onNewClick: () => void,
+    onFindClick: () => void,
+    onFindClickWithoutProgramId: () => void,
 };
 
 class QuickSelector extends Component<Props> {
@@ -119,8 +120,9 @@ class QuickSelector extends Component<Props> {
                         <ActionButtons
                             selectedProgramId={this.props.selectedProgramId}
                             onStartAgainClick={this.props.onStartAgain}
-                            onFindClick={this.props.onClickFind}
-                            onNewClick={this.props.onClickNew}
+                            onFindClick={this.props.onFindClick}
+                            onFindClickWithoutProgramId={this.props.onFindClickWithoutProgramId}
+                            onNewClick={this.props.onNewClick}
                             showResetButton={!!(this.props.selectedProgramId || this.props.selectedOrgUnitId)}
                         />
                     </Grid>
