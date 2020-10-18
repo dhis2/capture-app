@@ -25,41 +25,72 @@ import {
     changeRowsPerPage,
 } from '../actions';
 import type { Program } from '../../../../../metaData';
+import type {
+    CancelLoadTemplates,
+    CancelLoadView,
+    CancelUpdateList,
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
+    LoadTemplates,
+    LoadView,
+    SelectRestMenuItem,
+    SelectTemplate,
+    SetColumnOrder,
+    Sort,
+    UpdateFilter,
+    UpdateList,
+} from '../../WorkingLists';
+import type { AddTemplate, DeleteTemplate, UpdateTemplate } from '../../WorkingListsCommon';
 
-const useTemplates = (listId: string, workingListDispatch: Function) => {
+const useTemplates = (
+    dispatch: ReduxDispatch,
+    { storeId, workingListsType }: { storeId: string, workingListsType: string }) => {
     const templateState = useSelector(({ workingListsTemplates }) => ({
-        currentTemplate: workingListsTemplates[listId] &&
-            workingListsTemplates[listId].selectedTemplateId &&
-            workingListsTemplates[listId].templates &&
-            workingListsTemplates[listId].templates.find(template => template.id === workingListsTemplates[listId].selectedTemplateId),
-        templates: workingListsTemplates[listId] &&
-            workingListsTemplates[listId].templates,
-        templatesLoading: !!workingListsTemplates[listId] &&
-            !!workingListsTemplates[listId].loading,
-        loadTemplatesError: workingListsTemplates[listId] && workingListsTemplates[listId].loadError,
+        currentTemplate: workingListsTemplates[storeId] &&
+            workingListsTemplates[storeId].selectedTemplateId &&
+            workingListsTemplates[storeId].templates &&
+            workingListsTemplates[storeId].templates.find(template => template.id === workingListsTemplates[storeId].selectedTemplateId),
+        templates: workingListsTemplates[storeId] &&
+            workingListsTemplates[storeId].templates,
+        templatesLoading: !!workingListsTemplates[storeId] &&
+            !!workingListsTemplates[storeId].loading,
+        loadTemplatesError: workingListsTemplates[storeId] && workingListsTemplates[storeId].loadError,
     }), shallowEqual);
 
     const templateDispatch = useMemo(() => ({
-        onSelectTemplate: workingListDispatch(selectTemplate),
-        onLoadTemplates: workingListDispatch(fetchTemplates),
-        onCancelLoadTemplates: workingListDispatch(fetchTemplatesCancel),
-        onAddTemplate: workingListDispatch(addTemplate, (name: string, criteria: Object, data: Object) => [
-            name,
-            criteria, {
-                ...data,
-                listId,
-            },
-        ]),
-        onUpdateTemplate: workingListDispatch(updateTemplate, (template: Object, criteria: Object, data: Object) => [
-            template,
-            criteria, {
-                ...data,
-                listId,
-            },
-        ]),
-        onDeleteTemplate: workingListDispatch(deleteTemplate),
-        onCleanSkipInitAddingTemplate: workingListDispatch(cleanSkipInitAddingTemplate),
-    }), [listId, workingListDispatch]);
+        onSelectTemplate: (...args) => dispatch(selectTemplate(...args, storeId)),
+        onLoadTemplates: (...args) => dispatch(fetchTemplates(...args, storeId, workingListsType)),
+        onCancelLoadTemplates: (...args) => dispatch(fetchTemplatesCancel(...args, storeId)),
+        onAddTemplate: (name: string, criteria: Object, data: Object) =>
+            dispatch(addTemplate(
+                name,
+                criteria, {
+                    ...data,
+                    storeId,
+                    workingListsType,
+                },
+            )),
+        onUpdateTemplate: (template: Object, criteria: Object, data: Object) =>
+            dispatch(updateTemplate(
+                template,
+                criteria, {
+                    ...data,
+                    storeId,
+                    workingListsType,
+                },
+            )),
+        onDeleteTemplate: (...args) => dispatch(deleteTemplate(...args, { storeId, workingListsType })),
+        onCleanSkipInitAddingTemplate: (...args) => dispatch(cleanSkipInitAddingTemplate(...args, storeId)),
+    }: {|
+        onSelectTemplate: SelectTemplate,
+        onLoadTemplates: LoadTemplates,
+        onCancelLoadTemplates: CancelLoadTemplates,
+        onAddTemplate: AddTemplate,
+        onUpdateTemplate: UpdateTemplate,
+        onDeleteTemplate: DeleteTemplate,
+        onCleanSkipInitAddingTemplate: Function,
+    |}), [storeId, dispatch, workingListsType]);
 
     return {
         ...templateState,
@@ -67,61 +98,78 @@ const useTemplates = (listId: string, workingListDispatch: Function) => {
     };
 };
 
-const useView = (listId: string, workingListDispatch: Function, categoryCombinationMeta: Object) => {
+const useView = (
+    dispatch: ReduxDispatch,
+    categoryCombinationMeta: Object,
+    { storeId, workingListsType }: { storeId: string, workingListsType: string }) => {
     const viewState = useSelector(({ workingLists, workingListsUI, workingListsMeta, workingListsColumnsOrder, workingListsStickyFilters }) => ({
-        recordsOrder: workingLists[listId] && workingLists[listId].order,
-        updating: !!workingListsUI[listId] && !!workingListsUI[listId].isUpdating,
-        loading: !!workingListsUI[listId] && !!workingListsUI[listId].isLoading,
-        updatingWithDialog: !!workingListsUI[listId] && !!workingListsUI[listId].isUpdatingWithDialog,
-        loadViewError: workingListsUI[listId] && workingListsUI[listId].dataLoadingError,
-        customColumnOrder: workingListsColumnsOrder[listId],
-        stickyFilters: workingListsStickyFilters[listId],
-        rowsPerPage: (workingListsMeta[listId] && workingListsMeta[listId].next && workingListsMeta[listId].next.rowsPerPage) || (workingListsMeta[listId] && workingListsMeta[listId].rowsPerPage),
-        currentPage: (workingListsMeta[listId] && workingListsMeta[listId].next && workingListsMeta[listId].next.currentPage) || (workingListsMeta[listId] && workingListsMeta[listId].currentPage),
-        rowsCount: workingListsMeta[listId] && workingListsMeta[listId].rowsCount,
-        sortById: (workingListsMeta[listId] && workingListsMeta[listId].next && workingListsMeta[listId].next.sortById) || (workingListsMeta[listId] && workingListsMeta[listId].sortById),
-        sortByDirection: (workingListsMeta[listId] && workingListsMeta[listId].next && workingListsMeta[listId].next.sortByDirection) || (workingListsMeta[listId] && workingListsMeta[listId].sortByDirection),
-        initialViewConfig: (workingListsMeta[listId] && workingListsMeta[listId].nextInitial) || (workingListsMeta[listId] && workingListsMeta[listId].initial),
+        recordsOrder: workingLists[storeId] && workingLists[storeId].order,
+        updating: !!workingListsUI[storeId] && !!workingListsUI[storeId].isUpdating,
+        loading: !!workingListsUI[storeId] && !!workingListsUI[storeId].isLoading,
+        updatingWithDialog: !!workingListsUI[storeId] && !!workingListsUI[storeId].isUpdatingWithDialog,
+        loadViewError: workingListsUI[storeId] && workingListsUI[storeId].dataLoadingError,
+        customColumnOrder: workingListsColumnsOrder[storeId],
+        stickyFilters: workingListsStickyFilters[storeId],
+        rowsPerPage: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.rowsPerPage) || (workingListsMeta[storeId] && workingListsMeta[storeId].rowsPerPage),
+        currentPage: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.currentPage) || (workingListsMeta[storeId] && workingListsMeta[storeId].currentPage),
+        rowsCount: workingListsMeta[storeId] && workingListsMeta[storeId].rowsCount,
+        sortById: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.sortById) || (workingListsMeta[storeId] && workingListsMeta[storeId].sortById),
+        sortByDirection: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.sortByDirection) || (workingListsMeta[storeId] && workingListsMeta[storeId].sortByDirection),
+        initialViewConfig: (workingListsMeta[storeId] && workingListsMeta[storeId].nextInitial) || (workingListsMeta[storeId] && workingListsMeta[storeId].initial),
     }), shallowEqual);
 
     const appliedFilters = useSelector(({ workingListsMeta }) =>
-        workingListsMeta[listId] && workingListsMeta[listId].filters);
+        workingListsMeta[storeId] && workingListsMeta[storeId].filters);
 
     const nextFilters = useSelector(({ workingListsMeta }) =>
-        workingListsMeta[listId] && workingListsMeta[listId].next && workingListsMeta[listId].next.filters);
+        workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.filters);
     const filtersState = useMemo(() => ({ ...appliedFilters, ...nextFilters }), [
         appliedFilters,
         nextFilters,
     ]);
 
     const viewDispatch = useMemo(() => ({
-        onLoadView: workingListDispatch(initListView,
-            (selectedTemplate: Object, context: Object, meta: Object) => [
+        onLoadView: (selectedTemplate: Object, context: Object, meta: Object) =>
+            dispatch(initListView(
                 selectedTemplate,
                 context, {
                     ...meta,
                     categoryCombinationMeta,
-                    listId,
+                    storeId,
+                    workingListsType,
                 },
-            ]),
-        onUpdateList: workingListDispatch(updateList,
-            (queryArgs: Object, columnsMetaForDataFetching: Object) => [
+            )),
+        onUpdateList: (queryArgs: Object, columnsMetaForDataFetching: Object) =>
+            dispatch(updateList(
                 queryArgs, {
                     columnsMetaForDataFetching,
                     categoryCombinationMeta,
-                    listId,
+                    storeId,
+                    workingListsType,
                 },
-            ]),
-        onCancelLoadView: workingListDispatch(initListViewCancel),
-        onCancelUpdateList: workingListDispatch(updateListCancel),
-        onSortList: workingListDispatch(sortList),
-        onSetListColumnOrder: workingListDispatch(setListColumnOrder),
-        onUpdateFilter: workingListDispatch(setFilter),
-        onClearFilter: workingListDispatch(clearFilter),
-        onSelectRestMenuItem: workingListDispatch(restMenuItemSelected),
-        onChangePage: workingListDispatch(changePage),
-        onChangeRowsPerPage: workingListDispatch(changeRowsPerPage),
-    }), [listId, workingListDispatch, categoryCombinationMeta]);
+            )),
+        onCancelLoadView: (...args) => dispatch(initListViewCancel(...args, storeId)),
+        onCancelUpdateList: (...args) => dispatch(updateListCancel(...args, storeId)),
+        onSortList: (...args) => dispatch(sortList(...args, storeId)),
+        onSetListColumnOrder: (...args) => dispatch(setListColumnOrder(...args, storeId)),
+        onUpdateFilter: (...args) => dispatch(setFilter(...args, storeId)),
+        onClearFilter: (...args) => dispatch(clearFilter(...args, storeId)),
+        onSelectRestMenuItem: (...args) => dispatch(restMenuItemSelected(...args, storeId)),
+        onChangePage: (...args) => dispatch(changePage(...args, storeId)),
+        onChangeRowsPerPage: (...args) => dispatch(changeRowsPerPage(...args, storeId)),
+    }: {|
+        onLoadView: LoadView,
+        onUpdateList: UpdateList,
+        onCancelLoadView: CancelLoadView,
+        onCancelUpdateList: CancelUpdateList,
+        onSortList: Sort,
+        onSetListColumnOrder: SetColumnOrder,
+        onUpdateFilter: UpdateFilter,
+        onClearFilter: ClearFilter,
+        onSelectRestMenuItem: SelectRestMenuItem,
+        onChangePage: ChangePage,
+        onChangeRowsPerPage: ChangeRowsPerPage,
+    |}), [storeId, dispatch, categoryCombinationMeta, workingListsType]);
 
     return {
         ...viewState,
@@ -130,7 +178,7 @@ const useView = (listId: string, workingListDispatch: Function, categoryCombinat
     };
 };
 
-const useWorkingListsContext = (listId: string, workingListDispatch: Function) => {
+const useWorkingListsContext = (dispatch: ReduxDispatch, { storeId }: { storeId: string }) => {
     const currentContextState = useSelector(({
         currentSelections: { orgUnitId, categories },
         offline: { lastTransaction } }) => ({
@@ -139,9 +187,8 @@ const useWorkingListsContext = (listId: string, workingListDispatch: Function) =
         lastTransaction,
     }), shallowEqual);
 
-    const loadedContext = useSelector(({ workingListsContext }) => workingListsContext[listId]);
-
-    const onUnloadingContext = useCallback(() => workingListDispatch(unloadingContext), [workingListDispatch]);
+    const loadedContext = useSelector(({ workingListsContext }) => workingListsContext[storeId]);
+    const onUnloadingContext = useCallback(() => dispatch(unloadingContext(storeId)), [dispatch, storeId]);
 
     return {
         ...currentContextState,
@@ -150,18 +197,11 @@ const useWorkingListsContext = (listId: string, workingListDispatch: Function) =
     };
 };
 
-export const useWorkingListsCommonStateManagement = ((listId: string, program: Program) => {
+export const useWorkingListsCommonStateManagement = ((storeId: string, workingListsType: string, program: Program) => {
     const dispatch = useDispatch();
-    const workingListDispatch = useCallback(
-        (actionCreator, argsCreator) =>
-            (...args) =>
-                (argsCreator ?
-                    dispatch(actionCreator(...argsCreator(...args))) :
-                    dispatch(actionCreator(...args, listId))), [dispatch, listId]);
-
-    const context = useWorkingListsContext(listId, workingListDispatch);
-    const templates = useTemplates(listId, workingListDispatch);
-    const view = useView(listId, workingListDispatch, program.categoryCombination);
+    const context = useWorkingListsContext(dispatch, { storeId, workingListsType });
+    const templates = useTemplates(dispatch, { storeId, workingListsType });
+    const view = useView(dispatch, program.categoryCombination, { storeId, workingListsType });
 
     return {
         ...templates,

@@ -4,6 +4,6 @@ import { EventWorkingListsRedux } from './Redux';
 
 export const EventWorkingLists = () => (
     <EventWorkingListsRedux
-        listId="eventList"
+        storeId="eventList"
     />
 );

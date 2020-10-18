@@ -23,9 +23,9 @@ import type {
     UnloadingContext,
     UpdateFilter,
     UpdateList,
-    UpdateTemplate,
     WorkingListTemplate,
 } from '../../WorkingLists';
+import type { AddTemplate, DeleteTemplate, UpdateTemplate } from '../../WorkingListsCommon';
 import type {
     CustomColumnOrder,
     EventsMainProperties,
@@ -34,7 +34,7 @@ import type {
 } from '../types';
 
 export type Props = $ReadOnly<{|
-    listId: string,
+    storeId: string,
 |}>;
 
 export type EventWorkingListsReduxOutputProps = {|
@@ -56,7 +56,7 @@ export type EventWorkingListsReduxOutputProps = {|
     loading: boolean,
     loadViewError?: string,
     loadTemplatesError?: string, // TODO: Check
-    onAddTemplate: Function,
+    onAddTemplate: AddTemplate,
     onCancelLoadView: CancelLoadView,
     onCancelLoadTemplates: CancelLoadTemplates,
     onCancelUpdateList: CancelUpdateList,
@@ -65,7 +65,7 @@ export type EventWorkingListsReduxOutputProps = {|
     onCleanSkipInitAddingTemplate: Function, // TODO: Dealing with this in next PR
     onClearFilter: ClearFilter,
     onDeleteEvent: Function,
-    onDeleteTemplate: Function,
+    onDeleteTemplate: DeleteTemplate,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
     onSelectListRow: SelectRow,

@@ -150,6 +150,7 @@ export const WorkingListsContextBuilder = (props: Props) => {
 
     const listViewBuilderContextData = useMemo(() => ({
         updating,
+        updatingWithDialog,
         dataSource,
         recordsOrder,
         onSelectListRow,
@@ -165,6 +166,7 @@ export const WorkingListsContextBuilder = (props: Props) => {
         rowsCount,
     }), [
         updating,
+        updatingWithDialog,
         dataSource,
         recordsOrder,
         onSelectListRow,

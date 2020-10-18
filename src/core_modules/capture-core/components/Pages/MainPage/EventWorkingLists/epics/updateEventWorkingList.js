@@ -18,23 +18,23 @@ export const updateEventWorkingListAsync = (
     queryArgsSource: Object, {
         columnsMetaForDataFetching,
         categoryCombinationMeta,
-        listId,
+        storeId,
     }: {
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     categoryCombinationMeta: Object,
-    listId: string,
+    storeId: string,
 }): Promise<ReduxAction<any, any>> => getEventWorkingListDataAsync(
     buildQueryArgs(
         queryArgsSource, {
             columnsMetaForDataFetching,
-            listId,
+            storeId,
             isInit: false,
         }),
     columnsMetaForDataFetching, categoryCombinationMeta)
     .then(data =>
-        updateListSuccess(listId, data),
+        updateListSuccess(storeId, data),
     )
     .catch((error) => {
         log.error(errorCreator(errorMessages.WORKING_LIST_UPDATE_ERROR)({ error }));
-        return updateListError(listId, errorMessages.WORKING_LIST_UPDATE_ERROR);
+        return updateListError(storeId, errorMessages.WORKING_LIST_UPDATE_ERROR);
     });

@@ -21,11 +21,11 @@ export const initEventWorkingListAsync = async (
         commonQueryData: CommonQueryData,
         columnsMetaForDataFetching: ColumnsMetaForDataFetching,
         categoryCombinationMeta: ?Object,
-        listId: string,
+        storeId: string,
         lastTransaction: number,
     },
 ): Promise<ReduxAction<any, any>> => {
-    const { commonQueryData, columnsMetaForDataFetching, categoryCombinationMeta, listId, lastTransaction } = meta;
+    const { commonQueryData, columnsMetaForDataFetching, categoryCombinationMeta, storeId, lastTransaction } = meta;
     const clientConfig: ClientConfig = await convertToClientConfig(config, columnsMetaForDataFetching);
     const { currentPage, rowsPerPage, sortById, sortByDirection, filters } = clientConfig;
     const queryArgsSource = {
@@ -41,12 +41,12 @@ export const initEventWorkingListAsync = async (
         buildQueryArgs(
             queryArgsSource, {
                 columnsMetaForDataFetching,
-                listId,
+                storeId,
                 isInit: true,
             },
         ), columnsMetaForDataFetching, categoryCombinationMeta)
         .then(data =>
-            initListViewSuccess(listId, {
+            initListViewSuccess(storeId, {
                 ...data,
                 config: {
                     ...clientConfig,
@@ -59,6 +59,6 @@ export const initEventWorkingListAsync = async (
         )
         .catch((error) => {
             log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));
-            return initListViewError(listId, i18n.t('Working list could not be loaded'));
+            return initListViewError(storeId, i18n.t('Working list could not be loaded'));
         });
 };

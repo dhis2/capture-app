@@ -9,26 +9,27 @@ import {
 import { EventWorkingListsColumnSetup } from '../ColumnSetup';
 import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
 import { getEventProgramThrowIfNotFound } from '../../../../../metaData';
+import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './eventWorkingListsRedux.types';
 
-export const EventWorkingListsRedux = ({ listId, ...passOnProps }: Props) => {
+export const EventWorkingListsRedux = ({ storeId, ...passOnProps }: Props) => {
     const dispatch = useDispatch();
 
     const programId = useSelector(({ currentSelections }) => currentSelections.programId);
     const program = useMemo(() => getEventProgramThrowIfNotFound(programId),
         [programId]);
 
-    const commonStateManagementProps = useWorkingListsCommonStateManagement(listId, program);
+    const commonStateManagementProps = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
 
     const eventsValues = useSelector(({
         events: eventsMainProperties, eventsValues: eventsDataElementValues }) => ({
         eventsMainProperties, eventsDataElementValues }), shallowEqual);
 
     const lastEventIdDeleted = useSelector(({ workingListsUI }) =>
-        workingListsUI[listId] && workingListsUI[listId].lastEventIdDeleted);
+        workingListsUI[storeId] && workingListsUI[storeId].lastEventIdDeleted);
 
     const downloadRequest = useSelector(({ workingLists }) =>
-        workingLists[listId] && workingLists[listId].currentRequest); // TODO: Remove when DownloadDialog is rewritten
+        workingLists[storeId] && workingLists[storeId].currentRequest); // TODO: Remove when DownloadDialog is rewritten
 
     const onSelectListRow = useCallback(({ eventId }) => {
         window.scrollTo(0, 0);
@@ -36,8 +37,8 @@ export const EventWorkingListsRedux = ({ listId, ...passOnProps }: Props) => {
     }, [dispatch]);
 
     const onDeleteEvent = useCallback((eventId: string) => {
-        dispatch(requestDeleteEvent(eventId));
-    }, [dispatch]);
+        dispatch(requestDeleteEvent(eventId, storeId));
+    }, [dispatch, storeId]);
 
     return (
         <EventWorkingListsColumnSetup
