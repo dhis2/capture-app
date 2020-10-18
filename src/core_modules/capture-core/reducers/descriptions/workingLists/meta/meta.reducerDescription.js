@@ -27,7 +27,7 @@ export const workingListsMetaDesc = createReducerDescription({
             filters,
             sortById,
             sortByDirection,
-            visibleCustomColumnIds: customColumnOrder && customColumnOrder
+            customVisibleColumnIds: customColumnOrder && customColumnOrder
                 .map(spec => (spec.visible ? spec.id : null))
                 .filter(columnId => columnId),
         };
@@ -78,7 +78,7 @@ export const workingListsMetaDesc = createReducerDescription({
             filters,
             sortById,
             sortByDirection,
-            visibleCustomColumnIds: visibleColumnIds,
+            customVisibleColumnIds: visibleColumnIds,
         };
 
         return {
@@ -127,7 +127,7 @@ export const workingListsMetaDesc = createReducerDescription({
             filters,
             sortById,
             sortByDirection,
-            visibleCustomColumnIds: visibleColumnIds,
+            customVisibleColumnIds: visibleColumnIds,
         };
 
         return {

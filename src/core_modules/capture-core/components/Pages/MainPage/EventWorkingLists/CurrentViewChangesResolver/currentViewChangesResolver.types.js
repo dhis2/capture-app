@@ -9,7 +9,7 @@ type ExtractedProps = {|
     sortByDirection?: string,
     initialViewConfig?: {
         filters?: FiltersData,
-        visibleCustomColumnIds?: Array<string>,
+        customVisibleColumnIds?: Array<string>,
         sortById?: string,
         sortByDirection?: string,
     },

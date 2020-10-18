@@ -49,13 +49,13 @@ export const CurrentViewChangesResolver = ({
             return initialViewConfig;
         }
 
-        const visibleColumnIds = initialViewConfig.visibleCustomColumnIds || defaultColumns
+        const visibleColumnIds = initialViewConfig.customVisibleColumnIds || defaultColumns
             .filter(defaultColumn => defaultColumn.visible)
             .map(defaultColumn => defaultColumn.id);
 
         return {
             ...initialViewConfig,
-            visibleCustomColumnIds: undefined,
+            customVisibleColumnIds: undefined,
             visibleColumnIds,
         };
     }, [initialViewConfig, defaultColumns]);
