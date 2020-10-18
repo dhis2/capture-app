@@ -9,6 +9,7 @@ import {
     deleteEventError,
     deleteEventSuccess,
 } from '../eventWorkingLists.actions';
+import { workingListsCommonActionTypes } from '../../WorkingListsCommon';
 import { initEventWorkingListAsync } from './initEventWorkingList';
 import { updateEventWorkingListAsync } from './updateEventWorkingList';
 import { getApi } from '../../../../../d2';
@@ -16,7 +17,7 @@ import { getApi } from '../../../../../d2';
 export const initEventListEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
-            actionTypes.LIST_VIEW_INIT,
+            workingListsCommonActionTypes.LIST_VIEW_INIT,
         ),
         concatMap((action) => {
             const { selectedTemplate, columnsMetaForDataFetching, categoryCombinationMeta, listId } = action.payload;
@@ -39,7 +40,7 @@ export const initEventListEpic = (action$: InputObservable) =>
 
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.LIST_VIEW_INIT_CANCEL),
+                        ofType(workingListsCommonActionTypes.LIST_VIEW_INIT_CANCEL),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
                 ),
@@ -49,7 +50,7 @@ export const initEventListEpic = (action$: InputObservable) =>
 export const updateEventListEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
-            actionTypes.LIST_UPDATE,
+            workingListsCommonActionTypes.LIST_UPDATE,
         ),
         concatMap((action) => {
             const { queryArgs, columnsMetaForDataFetching, categoryCombinationMeta, listId } = action.payload;
@@ -57,13 +58,13 @@ export const updateEventListEpic = (action$: InputObservable) =>
             return from(updatePromise).pipe(
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.LIST_UPDATE_CANCEL),
+                        ofType(workingListsCommonActionTypes.LIST_UPDATE_CANCEL),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
                 ),
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.LIST_VIEW_INIT_CANCEL),
+                        ofType(workingListsCommonActionTypes.LIST_VIEW_INIT_CANCEL),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
                 ));
@@ -87,7 +88,7 @@ export const requestDeleteEventEpic = (action$: InputObservable) =>
             return from(deletePromise).pipe(
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.CONTEXT_UNLOADING),
+                        ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
                 ));

@@ -4,16 +4,6 @@ import { useMemo, useCallback } from 'react';
 // $FlowFixMe
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {
-    sortList,
-    setListColumnOrder,
-    setFilter,
-    clearFilter,
-    restMenuItemSelected,
-    changePage,
-    changeRowsPerPage,
-} from '../actions';
-
-import {
     selectTemplate,
     addTemplate,
     updateTemplate,
@@ -26,7 +16,14 @@ import {
     updateListCancel,
     cleanSkipInitAddingTemplate,
     unloadingContext,
-} from '../../EventWorkingLists/eventWorkingLists.actions'; // TODO: Move these actions
+    sortList,
+    setListColumnOrder,
+    setFilter,
+    clearFilter,
+    restMenuItemSelected,
+    changePage,
+    changeRowsPerPage,
+} from '../actions';
 import type { Program } from '../../../../../metaData';
 
 const useTemplates = (listId: string, workingListDispatch: Function) => {

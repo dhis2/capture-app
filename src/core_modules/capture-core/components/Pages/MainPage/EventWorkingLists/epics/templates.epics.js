@@ -7,7 +7,7 @@ import { ofType } from 'redux-observable';
 import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import { from } from 'rxjs';
 import {
-    actionTypes,
+    workingListsCommonActionTypes,
     batchActionTypes,
     fetchTemplatesSuccess,
     fetchTemplatesError,
@@ -18,13 +18,13 @@ import {
     addTemplateError,
     deleteTemplateSuccess,
     deleteTemplateError,
-} from '../eventWorkingLists.actions';
+} from '../../WorkingListsCommon';
 import { getTemplatesAsync } from './templatesFetcher';
 import { getApi } from '../../../../../d2';
 
 export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(actionTypes.TEMPLATES_FETCH),
+        ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
         concatMap((action) => {
             const listId = action.payload.listId;
             const programId = store.value.currentSelections.programId;
@@ -43,7 +43,7 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
             return from(promise).pipe(
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.TEMPLATES_FETCH_CANCEL),
+                        ofType(workingListsCommonActionTypes.TEMPLATES_FETCH_CANCEL),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
                 ),
@@ -52,7 +52,7 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
 
 export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(actionTypes.TEMPLATE_UPDATE),
+        ofType(workingListsCommonActionTypes.TEMPLATE_UPDATE),
         concatMap((action) => {
             const {
                 template,
@@ -117,13 +117,13 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
             return from(requestPromise).pipe(
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.TEMPLATE_UPDATE),
+                        ofType(workingListsCommonActionTypes.TEMPLATE_UPDATE),
                         filter(cancelAction => cancelAction.payload.template.id === template.id),
                     ),
                 ),
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.CONTEXT_UNLOADING),
+                        ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
                 ),
@@ -132,7 +132,7 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
 
 export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(ofType(
-        actionTypes.TEMPLATE_ADD,
+        workingListsCommonActionTypes.TEMPLATE_ADD,
     ),
     concatMap((action) => {
         const {
@@ -192,7 +192,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
         return from(requestPromise).pipe(
             takeUntil(
                 action$.pipe(
-                    ofType(actionTypes.CONTEXT_UNLOADING),
+                    ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
                     filter(cancelAction => cancelAction.payload.listId === listId),
                 ),
             ),
@@ -201,7 +201,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
 
 export const deleteTemplateEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(actionTypes.TEMPLATE_DELETE),
+        ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
         concatMap((action) => {
             const {
                 template,
@@ -224,13 +224,13 @@ export const deleteTemplateEpic = (action$: InputObservable) =>
             return from(requestPromise).pipe(
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.TEMPLATE_DELETE),
+                        ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
                         filter(cancelAction => cancelAction.payload.template.id === template.id),
                     ),
                 ),
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.CONTEXT_UNLOADING),
+                        ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
                 ),

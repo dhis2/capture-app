@@ -5,7 +5,7 @@ import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/
 import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
+import { workingListsCommonActionTypes } from '../../components/Pages/MainPage/WorkingListsCommon';
 
 const getFromWorkingListRetrieval = (eventContainers, containerProperty) => {
     if (!eventContainers || eventContainers.length === 0) {
@@ -21,13 +21,13 @@ const getFromWorkingListRetrieval = (eventContainers, containerProperty) => {
 };
 
 export const eventsDesc = createReducerDescription({
-    [eventWorkingListsActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {  // TODO: Move to common state container in later PR
         const eventContainers = action.payload.eventContainers;
         const newEventsById = getFromWorkingListRetrieval(eventContainers, 'event');
         const newState = { ...newEventsById };
         return newState;
     },
-    [eventWorkingListsActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => { // TODO: Move to common state container in later PR
         const eventContainers = action.payload.eventContainers;
         const newEventsById = getFromWorkingListRetrieval(eventContainers, 'event');
         const newState = { ...newEventsById };
@@ -95,13 +95,13 @@ export const eventsDesc = createReducerDescription({
 }, 'events', {});
 
 export const eventsValuesDesc = createReducerDescription({
-    [eventWorkingListsActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => { // TODO: Move to common state container in later PR
         const eventContainers = action.payload.eventContainers;
         const newEventsValuesById = getFromWorkingListRetrieval(eventContainers, 'values');
         const newState = { ...newEventsValuesById };
         return newState;
     },
-    [eventWorkingListsActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => { // TODO: Move to common state container in later PR
         const eventContainers = action.payload.eventContainers;
         const newEventsValuesById = getFromWorkingListRetrieval(eventContainers, 'values');
         const newState = { ...newEventsValuesById };

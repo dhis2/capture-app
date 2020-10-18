@@ -1,18 +1,17 @@
 // @flow
 import { createReducerDescription } from '../../../../trackerRedux/trackerReducer';
 import { workingListsCommonActionTypes } from '../../../../components/Pages/MainPage/WorkingListsCommon';
-import { eventWorkingListsActionTypes } from '../../../../components/Pages/MainPage/EventWorkingLists';
 import { recentlyAddedEventsActionTypes } from '../../../../components/Pages/NewEvent/RecentlyAddedEventsList';
 
 export const workingListsMetaDesc = createReducerDescription({
-    [eventWorkingListsActionTypes.LIST_VIEW_INIT]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
         const { listId } = action.payload;
         return {
             ...state,
             [listId]: undefined,
         };
     },
-    [eventWorkingListsActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, config, pagingData } = action.payload;
         const {
@@ -47,7 +46,7 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return newState;
     },
-    [eventWorkingListsActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, pagingData } = action.payload;
         const next = newState[listId].next;
@@ -63,7 +62,7 @@ export const workingListsMetaDesc = createReducerDescription({
         };
         return newState;
     },
-    [eventWorkingListsActionTypes.LIST_UPDATE_ERROR]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_UPDATE_ERROR]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = {
@@ -72,7 +71,7 @@ export const workingListsMetaDesc = createReducerDescription({
         };
         return newState;
     },
-    [eventWorkingListsActionTypes.TEMPLATE_UPDATE]: (state, action) => {
+    [workingListsCommonActionTypes.TEMPLATE_UPDATE]: (state, action) => {
         const { visibleColumnIds, filters, sortById, sortByDirection, listId } = action.payload;
 
         const nextInitial = {
@@ -90,7 +89,7 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
-    [eventWorkingListsActionTypes.TEMPLATE_UPDATE_SUCCESS]: (state, action) => {
+    [workingListsCommonActionTypes.TEMPLATE_UPDATE_SUCCESS]: (state, action) => {
         const { isActiveTemplate, listId } = action.payload;
 
         if (!isActiveTemplate) {
@@ -106,7 +105,7 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
-    [eventWorkingListsActionTypes.TEMPLATE_UPDATE_ERROR]: (state, action) => {
+    [workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR]: (state, action) => {
         const { isActiveTemplate, listId } = action.payload;
 
         if (!isActiveTemplate) {
@@ -121,7 +120,7 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
-    [eventWorkingListsActionTypes.TEMPLATE_ADD]: (state, action) => {
+    [workingListsCommonActionTypes.TEMPLATE_ADD]: (state, action) => {
         const { visibleColumnIds, filters, sortById, sortByDirection, listId } = action.payload;
 
         const nextInitial = {
@@ -139,7 +138,7 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
-    [eventWorkingListsActionTypes.TEMPLATE_ADD_SUCCESS]: (state, action) => {
+    [workingListsCommonActionTypes.TEMPLATE_ADD_SUCCESS]: (state, action) => {
         const { isActiveTemplate, listId } = action.payload;
 
         if (!isActiveTemplate) {
@@ -155,7 +154,7 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
-    [eventWorkingListsActionTypes.TEMPLATE_ADD_ERROR]: (state, action) => {
+    [workingListsCommonActionTypes.TEMPLATE_ADD_ERROR]: (state, action) => {
         const { isActiveTemplate, listId } = action.payload;
 
         if (!isActiveTemplate) {

@@ -5,7 +5,7 @@ import { getEventWorkingListDataAsync } from './eventsRetriever';
 import {
     updateListSuccess,
     updateListError,
-} from '../eventWorkingLists.actions';
+} from '../../WorkingListsCommon';
 import { buildQueryArgs } from '../helpers/eventsQueryArgsBuilder';
 import type { ColumnsMetaForDataFetching } from '../types';
 

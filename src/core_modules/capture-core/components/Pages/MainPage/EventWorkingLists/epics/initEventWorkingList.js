@@ -7,7 +7,7 @@ import { getEventWorkingListDataAsync } from './eventsRetriever';
 import {
     initListViewSuccess,
     initListViewError,
-} from '../eventWorkingLists.actions';
+} from '../../WorkingListsCommon';
 import { buildQueryArgs } from '../helpers/eventsQueryArgsBuilder';
 import type { ApiEventQueryCriteria, CommonQueryData, ClientConfig, ColumnsMetaForDataFetching } from '../types';
 
