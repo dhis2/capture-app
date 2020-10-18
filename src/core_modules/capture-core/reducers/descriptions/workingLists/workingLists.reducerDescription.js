@@ -17,12 +17,13 @@ export const workingListsTemplatesDesc = createReducerDescription({
         };
     },
     [workingListsCommonActionTypes.TEMPLATES_FETCH_SUCCESS]: (state, action) => {
-        const { templates, listId } = action.payload;
+        const { templates, listId, defaultTemplateId } = action.payload;
         return {
             ...state,
             [listId]: {
                 ...state[listId],
                 templates,
+                selectedTemplateId: defaultTemplateId,
                 loading: false,
             },
         };
@@ -50,12 +51,12 @@ export const workingListsTemplatesDesc = createReducerDescription({
         };
     },
     [workingListsCommonActionTypes.TEMPLATE_UPDATE]: (state, action) => {
-        const { eventQueryCriteria, template, listId } = action.payload;
+        const { criteria, template, listId } = action.payload;
 
         const otherTemplates = state[listId].templates.filter(t => t.id !== template.id);
         const updatedTemplate = {
             ...template,
-            nextEventQueryCriteria: eventQueryCriteria,
+            nextCriteria: criteria,
         };
 
         return {
@@ -70,7 +71,7 @@ export const workingListsTemplatesDesc = createReducerDescription({
         };
     },
     [workingListsCommonActionTypes.TEMPLATE_UPDATE_SUCCESS]: (state, action) => {
-        const { eventQueryCriteria, templateId, listId } = action.payload;
+        const { criteria, templateId, listId } = action.payload;
         const templates = state[listId].templates;
         const targetTemplate = templates.find(t => t.id === templateId);
 
@@ -78,8 +79,8 @@ export const workingListsTemplatesDesc = createReducerDescription({
             const otherTemplates = templates.filter(t => t.id !== templateId);
             const updatedTemplate = {
                 ...targetTemplate,
-                eventQueryCriteria,
-                nextEventQueryCriteria: undefined,
+                criteria,
+                nextCriteria: undefined,
             };
 
             return {
@@ -105,7 +106,7 @@ export const workingListsTemplatesDesc = createReducerDescription({
             const otherTemplates = templates.filter(t => t.id !== templateId);
             const updatedTemplate = {
                 ...targetTemplate,
-                nextEventQueryCriteria: undefined,
+                nextCriteria: undefined,
             };
 
             return {
@@ -122,19 +123,18 @@ export const workingListsTemplatesDesc = createReducerDescription({
         return state;
     },
     [workingListsCommonActionTypes.TEMPLATE_ADD]: (state, action) => {
-        const { name, eventQueryCriteria, template, clientId, listId } = action.payload;
+        const { name, criteria, template, clientId, listId } = action.payload;
 
         const newTemplate = {
             ...template,
             name,
             displayName: name,
             id: clientId,
-            eventQueryCriteria,
+            criteria,
             isDefault: undefined,
             notPreserved: true,
             skipInitDuringAddProcedure: true,
             access: {
-                read: true,
                 update: true,
                 delete: true,
                 write: true,

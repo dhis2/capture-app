@@ -1,5 +1,4 @@
 // @flow
-import { batchActions } from 'redux-batched-actions';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -8,10 +7,8 @@ import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import { from } from 'rxjs';
 import {
     workingListsCommonActionTypes,
-    batchActionTypes,
     fetchTemplatesSuccess,
     fetchTemplatesError,
-    selectTemplate,
     updateTemplateSuccess,
     updateTemplateError,
     addTemplateSuccess,
@@ -19,20 +16,16 @@ import {
     deleteTemplateSuccess,
     deleteTemplateError,
 } from '../../WorkingListsCommon';
-import { getTemplatesAsync } from './templatesFetcher';
+import { getTemplates } from './getTemplates';
 import { getApi } from '../../../../../d2';
 
-export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStore) =>
+export const retrieveTemplatesEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
-        concatMap((action) => {
-            const listId = action.payload.listId;
-            const programId = store.value.currentSelections.programId;
-            const promise = getTemplatesAsync(store.value)
-                .then(container => batchActions([
-                    selectTemplate(container.default.id, listId),
-                    fetchTemplatesSuccess(container.workingListConfigs, programId, listId),
-                ], batchActionTypes.TEMPLATES_FETCH_SUCCESS_BATCH))
+        concatMap(({ payload: { listId, programId } }) => {
+            const promise = getTemplates(programId)
+                .then(({ templates, defaultTemplateId }) =>
+                    fetchTemplatesSuccess(templates, defaultTemplateId, listId))
                 .catch((error) => {
                     log.error(
                         errorCreator(error)({ epic: 'retrieveTemplatesEpic' }),
@@ -56,7 +49,7 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
         concatMap((action) => {
             const {
                 template,
-                eventQueryCriteria,
+                criteria: eventQueryCriteria,
                 programId,
                 listId,
             } = action.payload;
@@ -137,7 +130,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
     concatMap((action) => {
         const {
             name,
-            eventQueryCriteria,
+            criteria: eventQueryCriteria,
             clientId,
             programId,
             listId,

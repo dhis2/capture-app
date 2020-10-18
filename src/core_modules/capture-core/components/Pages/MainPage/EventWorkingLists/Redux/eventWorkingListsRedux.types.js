@@ -25,12 +25,12 @@ import type {
     UpdateList,
     UpdateTemplate,
     WorkingListTemplate,
-    WorkingListTemplates,
 } from '../../WorkingLists';
 import type {
     CustomColumnOrder,
     EventsMainProperties,
     EventsDataElementValues,
+    EventWorkingListsTemplates,
 } from '../types';
 
 export type Props = $ReadOnly<{|
@@ -85,7 +85,7 @@ export type EventWorkingListsReduxOutputProps = {|
     sortByDirection?: string,
     sortById?: string,
     stickyFilters?: StickyFilters,
-    templates?: WorkingListTemplates,
+    templates?: EventWorkingListsTemplates,
     templatesLoading: boolean,
     updating: boolean,
     updatingWithDialog: boolean,

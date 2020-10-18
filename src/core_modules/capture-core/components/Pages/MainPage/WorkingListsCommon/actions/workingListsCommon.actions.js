@@ -45,8 +45,8 @@ export const fetchTemplates =
     (programId: string, listId: string) =>
         actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH)({ programId, listId });
 
-export const fetchTemplatesSuccess = (templates: Array<any>, programId: string, listId: string) =>
-    actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH_SUCCESS)({ templates, programId, listId });
+export const fetchTemplatesSuccess = (templates: Array<any>, defaultTemplateId: string, listId: string) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH_SUCCESS)({ templates, defaultTemplateId, listId });
 
 export const fetchTemplatesError = (error: string, listId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATES_FETCH_ERROR)({ error, listId });
@@ -57,17 +57,17 @@ export const fetchTemplatesCancel = (listId: string) =>
 export const selectTemplate = (templateId: string, listId: string) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_SELECT)({ templateId, listId });
 
-export const updateTemplate = (template: Object, eventQueryCriteria: Object, data: Object) =>
-    actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE)({ template, eventQueryCriteria, ...data });
+export const updateTemplate = (template: Object, criteria: Object, data: Object) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE)({ template, criteria, ...data });
 
-export const updateTemplateSuccess = (templateId: string, eventQueryCriteria: Object, data: Object) =>
-    actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE_SUCCESS)({ templateId, eventQueryCriteria, ...data });
+export const updateTemplateSuccess = (templateId: string, criteria: Object, data: Object) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE_SUCCESS)({ templateId, criteria, ...data });
 
-export const updateTemplateError = (templateId: string, eventQueryCriteria: Object, data: Object) =>
-    actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR)({ templateId, eventQueryCriteria, ...data });
+export const updateTemplateError = (templateId: string, criteria: Object, data: Object) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR)({ templateId, criteria, ...data });
 
-export const addTemplate = (name: string, eventQueryCriteria: Object, data: Object) =>
-    actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD)({ name, eventQueryCriteria, ...data });
+export const addTemplate = (name: string, criteria: Object, data: Object) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD)({ name, criteria, ...data });
 
 export const addTemplateSuccess = (templateId: string, clientId: Object, data: Object) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD_SUCCESS)({ templateId, clientId, ...data });

@@ -103,7 +103,7 @@ const Index = (props: Props) => {
         const currentViewContents = [];
         const savedViewContents = [];
 
-        const { access, isDefault, notPreserved, displayName } = currentTemplate;
+        const { access, isDefault, notPreserved, name } = currentTemplate;
 
         currentViewContents.push(getSaveAsItem(!!isDefault, currentViewHasTemplateChanges));
 
@@ -120,7 +120,7 @@ const Index = (props: Props) => {
         }
 
         if (savedViewContents.length > 0) {
-            savedViewContents.splice(0, 0, getSavedViewSubHeader(displayName));
+            savedViewContents.splice(0, 0, getSavedViewSubHeader(name));
         }
 
         return [

@@ -43,16 +43,16 @@ const useTemplates = (listId: string, workingListDispatch: Function) => {
         onSelectTemplate: workingListDispatch(selectTemplate),
         onLoadTemplates: workingListDispatch(fetchTemplates),
         onCancelLoadTemplates: workingListDispatch(fetchTemplatesCancel),
-        onAddTemplate: workingListDispatch(addTemplate, (name: string, eventQueryCriteria: Object, data: Object) => [
+        onAddTemplate: workingListDispatch(addTemplate, (name: string, criteria: Object, data: Object) => [
             name,
-            eventQueryCriteria, {
+            criteria, {
                 ...data,
                 listId,
             },
         ]),
-        onUpdateTemplate: workingListDispatch(updateTemplate, (template: Object, eventQueryCriteria: Object, data: Object) => [
+        onUpdateTemplate: workingListDispatch(updateTemplate, (template: Object, criteria: Object, data: Object) => [
             template,
-            eventQueryCriteria, {
+            criteria, {
                 ...data,
                 listId,
             },

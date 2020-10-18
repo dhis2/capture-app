@@ -70,7 +70,7 @@ export const WorkingListsContextBuilder = (props: Props) => {
         }
 
         dirtyTemplatesStateFirstRunRef.current = allTemplates
-            .some(template => template.nextEventQueryCriteria || template.notPreserved || template.deleted);
+            .some(template => template.updating || template.notPreserved || template.deleted);
     }, [allTemplates]);
 
     const dirtyEventListStateFirstRunRef = useRef(undefined);

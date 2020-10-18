@@ -22,7 +22,7 @@ export const initEventListEpic = (action$: InputObservable) =>
         concatMap((action) => {
             const { selectedTemplate, columnsMetaForDataFetching, categoryCombinationMeta, listId } = action.payload;
             const { programId, orgUnitId, categories, lastTransaction } = action.payload.context;
-            const eventQueryCriteria = selectedTemplate.nextEventQueryCriteria || selectedTemplate.eventQueryCriteria;
+            const eventQueryCriteria = selectedTemplate.nextCriteria || selectedTemplate.criteria;
             const initialPromise =
                 initEventWorkingListAsync(
                     eventQueryCriteria, {

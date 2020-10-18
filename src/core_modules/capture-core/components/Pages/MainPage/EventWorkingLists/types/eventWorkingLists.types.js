@@ -23,3 +23,22 @@ export type ClientConfig = {
     rowsPerPage: number,
     customColumnOrder?: CustomColumnOrder,
 };
+
+export type EventWorkingListsTemplate = {
+    id: string,
+    isDefault?: ?boolean,
+    name: string,
+    access: {
+        update: boolean,
+        delete: boolean,
+        write: boolean,
+        manage: boolean,
+    },
+    criteria?: Object,
+    nextCriteria?: Object,
+    notPreserved?: boolean,
+    deleted?: boolean,
+    skipInitDuringAddProcedure?: boolean,
+};
+
+export type EventWorkingListsTemplates = Array<EventWorkingListsTemplate>;

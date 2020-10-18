@@ -1,10 +1,11 @@
 // @flow
-import * as React from 'react';
+import React, { useCallback, useImperativeHandle, forwardRef } from 'react';
 import ExistingTemplateDialog from './ExistingTemplateDialog.component';
 import NewTemplateDialog from './NewTemplateDialog.component';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog.component';
 import SharingDialog from './SharingDialog.component';
 import { dialogModes } from './dialogModes';
+import type { WorkingListTemplate } from '../workingLists.types';
 
 type PassOnProps = {
     onClose: Function,
@@ -13,7 +14,7 @@ type PassOnProps = {
 type Props = {
     ...PassOnProps,
     mode: ?$Values<typeof dialogModes>,
-    currentTemplate: Object,
+    currentTemplate: WorkingListTemplate,
     onAddTemplate: Function,
     onUpdateTemplate: Function,
     onDeleteTemplate: Function,
@@ -29,33 +30,33 @@ const TemplateMaintenance = (props: Props, ref) => {
         ...passOnProps
     } = props;
 
-    const addTemplateHandler = React.useCallback((name: string) => {
+    const addTemplateHandler = useCallback((name: string) => {
         onAddTemplate(name, currentTemplate);
     }, [
         onAddTemplate,
         currentTemplate,
     ]);
 
-    const updateTemplateHandler = React.useCallback(() => {
+    const updateTemplateHandler = useCallback(() => {
         onUpdateTemplate(currentTemplate);
     }, [
         onUpdateTemplate,
         currentTemplate,
     ]);
 
-    const deleteTemplateHandler = React.useCallback(() => {
+    const deleteTemplateHandler = useCallback(() => {
         onDeleteTemplate(currentTemplate);
     }, [
         onDeleteTemplate,
         currentTemplate,
     ]);
 
-    React.useImperativeHandle(ref, () => ({
+    useImperativeHandle(ref, () => ({
         updateTemplateHandler,
     }));
 
     return (
-        <React.Fragment>
+        <>
             <ExistingTemplateDialog
                 {...passOnProps}
                 open={mode === dialogModes.REPLACE}
@@ -70,16 +71,15 @@ const TemplateMaintenance = (props: Props, ref) => {
                 {...passOnProps}
                 open={mode === dialogModes.DELETE}
                 onDeleteTemplate={deleteTemplateHandler}
-                templateName={currentTemplate.displayName}
+                templateName={currentTemplate.name}
             />
             <SharingDialog
                 {...passOnProps}
                 open={mode === dialogModes.SHARING}
                 templateId={currentTemplate.id}
             />
-        </React.Fragment>
+        </>
     );
 };
 
-// $FlowFixMe[missing-annot] automated comment
-export default React.forwardRef(TemplateMaintenance);
+export default forwardRef<Props, { updateTemplateHandler: Function }>(TemplateMaintenance);

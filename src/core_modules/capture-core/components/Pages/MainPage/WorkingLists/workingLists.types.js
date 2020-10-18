@@ -15,24 +15,21 @@ import type {
     Sort,
 } from '../../../ListView';
 
-export type WorkingListTemplate = {|
+export type WorkingListTemplate = {
     id: string,
     isDefault?: ?boolean,
     name: string,
-    displayName: string,
-    filters: Object,
     access: {
-        read: boolean,
         update: boolean,
         delete: boolean,
         write: boolean,
         manage: boolean,
     },
-    notPreserved?: ?boolean,
-    nextEventQueryCriteria?: Object,
+    notPreserved?: boolean,
+    updating?: boolean,
     deleted?: boolean,
     skipInitDuringAddProcedure?: boolean,
-|};
+};
 
 export type WorkingListTemplates = Array<WorkingListTemplate>;
 
