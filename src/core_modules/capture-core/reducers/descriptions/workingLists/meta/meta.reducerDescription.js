@@ -78,7 +78,7 @@ export const workingListsMetaDesc = createReducerDescription({
             filters,
             sortById,
             sortByDirection,
-            visibleColumnIds,
+            visibleCustomColumnIds: visibleColumnIds,
         };
 
         return {
@@ -127,7 +127,7 @@ export const workingListsMetaDesc = createReducerDescription({
             filters,
             sortById,
             sortByDirection,
-            visibleColumnIds,
+            visibleCustomColumnIds: visibleColumnIds,
         };
 
         return {
