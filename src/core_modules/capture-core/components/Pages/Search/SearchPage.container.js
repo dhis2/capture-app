@@ -35,28 +35,32 @@ const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityTypesWithCo
             .reduce((acc, {
                 id: programId,
                 name: programName,
-                trackedEntityType: {
-                    id: trackedEntityTypeId,
-                    name: trackedEntityTypeName,
-                    searchGroups: trackedEntityTypeSearchGroups,
-                },
+                trackedEntityType,
                 searchGroups,
             }: TrackerProgram) => {
-                const accumulatedProgramsOfTrackedEntityType =
-            acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
-                return {
-                    ...acc,
-                    [trackedEntityTypeId]: {
-                        trackedEntityTypeId,
-                        trackedEntityTypeName,
-                        trackedEntityTypeSearchGroups,
-                        programs: [
-                            ...accumulatedProgramsOfTrackedEntityType,
-                            { programId, programName, searchGroups },
-                        ],
+                if (trackedEntityType) {
+                    const {
+                        id: trackedEntityTypeId,
+                        name: trackedEntityTypeName,
+                        searchGroups: trackedEntityTypeSearchGroups,
+                    } = trackedEntityType;
 
-                    },
-                };
+                    const accumulatedProgramsOfTrackedEntityType = acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
+                    return {
+                        ...acc,
+                        [trackedEntityTypeId]: {
+                            trackedEntityTypeId,
+                            trackedEntityTypeName,
+                            trackedEntityTypeSearchGroups,
+                            programs: [
+                                ...accumulatedProgramsOfTrackedEntityType,
+                                { programId, programName, searchGroups },
+                            ],
+
+                        },
+                    };
+                }
+                return acc;
             }, {}),
     [],
     );
