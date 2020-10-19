@@ -49,7 +49,7 @@ msgid "Abort"
 msgstr ""
 
 msgid "Save comment"
-msgstr ""
+msgstr "Фикр/изоҳни сақланг"
 
 msgid "Write comment"
 msgstr ""
@@ -88,7 +88,7 @@ msgid "Custom range"
 msgstr ""
 
 msgid "to"
-msgstr ""
+msgstr "га"
 
 msgid "after or equal to"
 msgstr ""
