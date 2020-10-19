@@ -153,8 +153,9 @@ class ProgramFactory {
                 o.name = cachedProgram.displayName;
                 o.shortName = cachedProgram.displayShortName;
                 o.organisationUnits = cachedProgram.organisationUnits;
-                // $FlowFixMe
-                o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId);
+                if (cachedProgram.trackedEntityTypeId) {
+                    o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId);
+                }
             });
 
             if (cachedProgram.programTrackedEntityAttributes) {

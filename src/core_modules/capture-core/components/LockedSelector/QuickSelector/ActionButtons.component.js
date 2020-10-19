@@ -50,7 +50,7 @@ function useProgramInfo(programId) {
     if (program) {
         programName = program.name;
     }
-    if (program instanceof TrackerProgram) {
+    if (program instanceof TrackerProgram && program.trackedEntityType) {
         trackedEntityName = program.trackedEntityType.name.toLowerCase();
     }
 
@@ -115,7 +115,7 @@ const Index = ({
                             >
                                 <MenuItem
                                     dataTest="dhis2-capture-find-menuitem-one"
-                                    label={`Find a ${trackedEntityName} in ${programName}`}
+                                    label={`Find ${trackedEntityName && `a ${trackedEntityName}`} in ${programName}`}
                                     onClick={onFindClick}
                                 />
                                 <MenuItem

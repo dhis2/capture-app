@@ -9,7 +9,7 @@ import type { DataElement } from '../DataElement';
 
 export default class TrackerProgram extends Program {
     _searchGroups: Array<SearchGroup>;
-    _trackedEntityType: TrackedEntityType;
+    _trackedEntityType: ?TrackedEntityType;
     _attributes: Array<DataElement>;
     _enrollment: Enrollment;
 
@@ -26,10 +26,10 @@ export default class TrackerProgram extends Program {
         this._searchGroups = searchGroups;
     }
 
-    get trackedEntityType(): TrackedEntityType {
+    get trackedEntityType(): ?TrackedEntityType {
         return this._trackedEntityType;
     }
-    set trackedEntityType(trackedEntityType: TrackedEntityType) {
+    set trackedEntityType(trackedEntityType: ?TrackedEntityType) {
         this._trackedEntityType = trackedEntityType;
     }
 
