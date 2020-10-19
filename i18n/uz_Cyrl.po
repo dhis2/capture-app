@@ -193,7 +193,7 @@ msgid "Custom range"
 msgstr ""
 
 msgid "to"
-msgstr ""
+msgstr "га"
 
 msgid "after or equal to"
 msgstr ""
