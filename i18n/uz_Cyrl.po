@@ -196,7 +196,7 @@ msgid "Select user"
 msgstr ""
 
 msgid "to"
-msgstr ""
+msgstr "га"
 
 msgid "From"
 msgstr "Дан"
@@ -601,7 +601,7 @@ msgid "Program"
 msgstr "Программа"
 
 msgid "Organisation Unit"
-msgstr "Ташкилий бирлик"
+msgstr "Ташкилий Бўлим"
 
 msgid "Registration"
 msgstr "Рўйхатдан ўтиш"
