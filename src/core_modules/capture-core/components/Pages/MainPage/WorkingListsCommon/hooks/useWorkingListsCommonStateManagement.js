@@ -14,7 +14,6 @@ import {
     initListViewCancel,
     updateList,
     updateListCancel,
-    cleanSkipInitAddingTemplate,
     unloadingContext,
     sortList,
     setListColumnOrder,
@@ -39,9 +38,8 @@ import type {
     SetColumnOrder,
     Sort,
     UpdateFilter,
-    UpdateList,
 } from '../../WorkingLists';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate } from '../../WorkingListsCommon';
+import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '../../WorkingListsCommon';
 
 const useTemplates = (
     dispatch: ReduxDispatch,
@@ -81,7 +79,6 @@ const useTemplates = (
                 },
             )),
         onDeleteTemplate: (...args) => dispatch(deleteTemplate(...args, { storeId, workingListsType })),
-        onCleanSkipInitAddingTemplate: (...args) => dispatch(cleanSkipInitAddingTemplate(...args, storeId)),
     }: {|
         onSelectTemplate: SelectTemplate,
         onLoadTemplates: LoadTemplates,
@@ -89,7 +86,6 @@ const useTemplates = (
         onAddTemplate: AddTemplate,
         onUpdateTemplate: UpdateTemplate,
         onDeleteTemplate: DeleteTemplate,
-        onCleanSkipInitAddingTemplate: Function,
     |}), [storeId, dispatch, workingListsType]);
 
     return {
@@ -116,6 +112,7 @@ const useView = (
         sortById: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.sortById) || (workingListsMeta[storeId] && workingListsMeta[storeId].sortById),
         sortByDirection: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.sortByDirection) || (workingListsMeta[storeId] && workingListsMeta[storeId].sortByDirection),
         initialViewConfig: (workingListsMeta[storeId] && workingListsMeta[storeId].nextInitial) || (workingListsMeta[storeId] && workingListsMeta[storeId].initial),
+        viewPreloaded: (workingListsMeta[storeId] && workingListsMeta[storeId].viewPreloaded),
     }), shallowEqual);
 
     const appliedFilters = useSelector(({ workingListsMeta }) =>
@@ -139,10 +136,11 @@ const useView = (
                     workingListsType,
                 },
             )),
-        onUpdateList: (queryArgs: Object, columnsMetaForDataFetching: Object) =>
+        onUpdateList: (queryArgs: Object, lastTransaction: number, columnsMetaForDataFetching: Object) =>
             dispatch(updateList(
                 queryArgs, {
                     columnsMetaForDataFetching,
+                    lastTransaction,
                     categoryCombinationMeta,
                     storeId,
                     workingListsType,
@@ -187,13 +185,16 @@ const useWorkingListsContext = (dispatch: ReduxDispatch, { storeId }: { storeId:
         lastTransaction,
     }), shallowEqual);
 
-    const loadedContext = useSelector(({ workingListsContext }) => workingListsContext[storeId]);
+    const { listDataRefreshTimestamp, lastTransactionOnListDataRefresh, ...loadedContext } =
+        useSelector(({ workingListsContext }) => workingListsContext[storeId]) || {};
     const onUnloadingContext = useCallback(() => dispatch(unloadingContext(storeId)), [dispatch, storeId]);
 
     return {
         ...currentContextState,
         loadedContext,
         onUnloadingContext,
+        listDataRefreshTimestamp,
+        lastTransactionOnListDataRefresh,
     };
 };
 

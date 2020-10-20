@@ -1,7 +1,6 @@
 // @flow
 import React, { useMemo, useCallback } from 'react';
 import { getDefaultColumnConfig } from './defaultColumnConfiguration';
-import { shouldSkipReload } from './skipReloadCalculator';
 import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
 import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
@@ -26,13 +25,13 @@ export const EventWorkingListsColumnSetup = ({
         onLoadView(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
     }, [onLoadView, defaultColumns]);
 
-    const injectColumnMetaToUpdateList = useCallback((queryArgs: Object) => {
+    const injectColumnMetaToUpdateList = useCallback((queryArgs: Object, lastTransaction: number) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
-        onUpdateList(queryArgs, columnsMetaForDataFetching);
+        onUpdateList(queryArgs, lastTransaction, columnsMetaForDataFetching);
     }, [onUpdateList, defaultColumns]);
 
 
@@ -59,7 +58,6 @@ export const EventWorkingListsColumnSetup = ({
             program={program}
             columns={columns}
             defaultColumns={defaultColumns}
-            onCheckSkipReload={shouldSkipReload}
             onLoadView={injectColumnMetaToLoadList}
             onUpdateList={injectColumnMetaToUpdateList}
         />

@@ -37,10 +37,10 @@ type ExtractedProps = $ReadOnly<{|
     currentTemplate?: WorkingListTemplate,
     currentViewHasTemplateChanges?: boolean,
     customRowMenuContents?: CustomRowMenuContents,
+    customUpdateTrigger?: any,
     dataSource?: DataSource,
     filters?: FiltersData,
-    lastIdDeleted?: string,
-    lastTransaction: number,
+    forceUpdateOnMount?: boolean,
     loadedContext?: LoadedContext,
     loading: boolean,
     loadViewError?: string,
@@ -49,8 +49,6 @@ type ExtractedProps = $ReadOnly<{|
     onCancelUpdateList?: Function,
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
-    onCheckSkipReload: Function,
-    onCleanSkipInitAddingTemplate: Function,
     onClearFilter: ClearFilter,
     onDeleteTemplate: DeleteTemplate,
     onLoadView: LoadView,
@@ -73,9 +71,36 @@ type ExtractedProps = $ReadOnly<{|
     updating: boolean,
     updatingWithDialog: boolean,
     templates?: WorkingListTemplates,
+    viewPreloaded?: boolean,
 |}>;
 
-type RestProps = $Rest<WorkingListsOutputProps, ExtractedProps>;
+type OptionalExtractedProps = {|
+    categories: Categories,
+    currentPage: number,
+    currentTemplate: WorkingListTemplate,
+    currentViewHasTemplateChanges: boolean,
+    customRowMenuContents: CustomRowMenuContents,
+    customUpdateTrigger: any,
+    dataSource: DataSource,
+    filters: FiltersData,
+    forceUpdateOnMount: boolean,
+    loadedContext: LoadedContext,
+    loadViewError: string,
+    onCancelLoadView: CancelLoadView,
+    onCancelUpdateList: Function,
+    onUnloadingContext: UnloadingContext,
+    recordsOrder: Array<string>,
+    rowsCount: number,
+    rowsPerPage: number,
+    sortByDirection: string,
+    sortById: string,
+    stickyFilters: StickyFilters,
+    templates: WorkingListTemplates,
+    viewPreloaded: boolean,
+|};
+
+type RestProps = $Rest<WorkingListsOutputProps & OptionalExtractedProps,
+    ExtractedProps & OptionalExtractedProps>;
 
 export type Props = $ReadOnly<{|
     ...WorkingListsOutputProps,
@@ -84,6 +109,6 @@ export type Props = $ReadOnly<{|
 export type ContextBuilderOutputProps = $ReadOnly<{|
     ...RestProps,
     dirtyTemplates: boolean,
-    loadedContext: LoadedContext,
+    loadedProgramIdForTemplates?: string,
     templates?: WorkingListTemplates,
 |}>;

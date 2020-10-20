@@ -28,14 +28,10 @@ export const WorkingListsContextBuilder = (props: Props) => {
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
-        onCleanSkipInitAddingTemplate,
         onUnloadingContext,
         orgUnitId,
         categories,
-        lastTransaction,
         loadedContext,
-        onCheckSkipReload,
-        lastIdDeleted,
         dataSource,
         recordsOrder,
         onSelectListRow,
@@ -55,43 +51,37 @@ export const WorkingListsContextBuilder = (props: Props) => {
         currentPage,
         rowsCount,
         currentViewHasTemplateChanges,
+        viewPreloaded,
+        customUpdateTrigger,
+        forceUpdateOnMount,
         ...passOnProps
     } = props;
 
-    const dirtyTemplatesStateFirstRunRef = useRef(undefined);
-    useMemo(() => {
-        if (dirtyTemplatesStateFirstRunRef.current !== undefined) {
-            return;
-        }
+    const dirtyTemplates = useMemo(() => (allTemplates ? allTemplates
+        .some(template => template.updating || template.notPreserved || template.deleted) : false), [allTemplates]);
+    const dirtyTemplatesStateFirstRunRef = useRef(dirtyTemplates);
+    const dirtyViewStateFirstRunRef = useRef(loading);
+    const dirtyListStateFirstRunRef = useRef(updating || updatingWithDialog);
 
-        if (!allTemplates) {
-            dirtyTemplatesStateFirstRunRef.current = false;
-            return;
-        }
-
-        dirtyTemplatesStateFirstRunRef.current = allTemplates
-            .some(template => template.updating || template.notPreserved || template.deleted);
-    }, [allTemplates]);
-
-    const dirtyEventListStateFirstRunRef = useRef(undefined);
-    useMemo(() => {
-        if (dirtyEventListStateFirstRunRef.current !== undefined) {
-            return;
-        }
-
-        if (loading || updating || updatingWithDialog) {
-            dirtyEventListStateFirstRunRef.current = true;
-            return;
-        }
-
-        dirtyEventListStateFirstRunRef.current = false;
-    }, [
-        loading,
-        updating,
-        updatingWithDialog,
+    const loadedContextDefined = useMemo(() => loadedContext || {}, [
+        loadedContext,
     ]);
 
-    const managerData = useMemo(() => ({
+    const loadedProgramIdForTemplates = useMemo(() => loadedContextDefined.programIdTemplates, [
+        loadedContextDefined.programIdTemplates,
+    ]);
+
+    const loadedViewContext = useMemo(() => ({
+        programId: loadedContextDefined.programIdView,
+        orgUnitId: loadedContextDefined.orgUnitId,
+        categories: loadedContextDefined.categories,
+    }), [
+        loadedContextDefined.programIdView,
+        loadedContextDefined.orgUnitId,
+        loadedContextDefined.categories,
+    ]);
+
+    const managerContextData = useMemo(() => ({
         currentTemplate,
         onSelectTemplate,
     }), [currentTemplate, onSelectTemplate]);
@@ -118,12 +108,11 @@ export const WorkingListsContextBuilder = (props: Props) => {
         loadViewError,
         onUpdateList,
         onCancelLoadView,
-        onCleanSkipInitAddingTemplate,
         orgUnitId,
         categories,
-        lastTransaction,
-        onCheckSkipReload,
-        dirtyEventList: dirtyTemplatesStateFirstRunRef.current || dirtyEventListStateFirstRunRef.current,
+        dirtyView: dirtyTemplatesStateFirstRunRef.current || dirtyViewStateFirstRunRef.current,
+        loadedViewContext,
+        viewPreloaded,
     }), [
         sortById,
         sortByDirection,
@@ -134,19 +123,20 @@ export const WorkingListsContextBuilder = (props: Props) => {
         loadViewError,
         onUpdateList,
         onCancelLoadView,
-        onCleanSkipInitAddingTemplate,
         orgUnitId,
         categories,
-        lastTransaction,
-        onCheckSkipReload,
+        loadedViewContext,
+        viewPreloaded,
     ]);
 
     const listViewUpdaterContextData = useMemo(() => ({
         rowsPerPage,
         currentPage,
         onCancelUpdateList,
-        lastIdDeleted,
-    }), [rowsPerPage, currentPage, onCancelUpdateList, lastIdDeleted]);
+        customUpdateTrigger,
+        forceUpdateOnMount,
+        dirtyList: dirtyListStateFirstRunRef.current,
+    }), [rowsPerPage, currentPage, onCancelUpdateList, customUpdateTrigger, forceUpdateOnMount]);
 
     const listViewBuilderContextData = useMemo(() => ({
         updating,
@@ -191,13 +181,9 @@ export const WorkingListsContextBuilder = (props: Props) => {
         onUnloadingContext,
     ]);
 
-    const loadedContextDefined = useMemo(() => loadedContext || {}, [
-        loadedContext,
-    ]);
-
     return (
         <ManagerContext.Provider
-            value={managerData}
+            value={managerContextData}
         >
             <ListViewConfigContext.Provider
                 value={listViewConfigContextData}
@@ -215,7 +201,7 @@ export const WorkingListsContextBuilder = (props: Props) => {
                                 {...passOnProps}
                                 templates={templates}
                                 dirtyTemplates={!!dirtyTemplatesStateFirstRunRef.current}
-                                loadedContext={loadedContextDefined}
+                                loadedProgramIdForTemplates={loadedProgramIdForTemplates}
                             />
                         </ListViewBuilderContext.Provider>
                     </ListViewUpdaterContext.Provider>

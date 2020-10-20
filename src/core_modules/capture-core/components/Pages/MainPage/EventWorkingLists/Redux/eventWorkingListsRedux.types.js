@@ -22,10 +22,9 @@ import type {
     StickyFilters,
     UnloadingContext,
     UpdateFilter,
-    UpdateList,
     WorkingListTemplate,
 } from '../../WorkingLists';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate } from '../../WorkingListsCommon';
+import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '../../WorkingListsCommon';
 import type {
     CustomColumnOrder,
     EventsMainProperties,
@@ -50,8 +49,10 @@ export type EventWorkingListsReduxOutputProps = {|
     eventsDataElementValues: ?EventsDataElementValues,
     filters?: FiltersData,
     initialViewConfig?: Object,
-    lastIdDeleted?: string, // TODO: Dealing with this in next PR
-    lastTransaction: number, // TODO: Dealing with this in next PR
+    lastIdDeleted?: string,
+    lastTransaction: number,
+    lastTransactionOnListDataRefresh?: number,
+    listDataRefreshTimestamp?: number,
     loadedContext?: LoadedContext,
     loading: boolean,
     loadViewError?: string,
@@ -62,7 +63,6 @@ export type EventWorkingListsReduxOutputProps = {|
     onCancelUpdateList: CancelUpdateList,
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
-    onCleanSkipInitAddingTemplate: Function, // TODO: Dealing with this in next PR
     onClearFilter: ClearFilter,
     onDeleteEvent: Function,
     onDeleteTemplate: DeleteTemplate,
@@ -89,4 +89,5 @@ export type EventWorkingListsReduxOutputProps = {|
     templatesLoading: boolean,
     updating: boolean,
     updatingWithDialog: boolean,
+    viewPreloaded?: boolean,
 |};

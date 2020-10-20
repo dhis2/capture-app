@@ -156,32 +156,6 @@ export const workingListsTemplatesDesc = createReducerDescription({
             },
         };
     },
-    [workingListsCommonActionTypes.TEMPLATE_ADD_SKIP_INIT_CLEAN]: (state, action) => {
-        const { template, storeId } = action.payload;
-        const templates = state[storeId].templates;
-        const targetTemplate = templates.find(t => t.id === template.id);
-
-        if (targetTemplate) {
-            const otherTemplates = templates.filter(t => t.id !== template.id);
-
-            const updatedTemplate = {
-                ...targetTemplate,
-                skipInitDuringAddProcedure: undefined,
-            };
-
-            return {
-                ...state,
-                [storeId]: {
-                    ...state[storeId],
-                    templates: [
-                        ...otherTemplates,
-                        updatedTemplate,
-                    ],
-                },
-            };
-        }
-        return state;
-    },
     [workingListsCommonActionTypes.TEMPLATE_ADD_SUCCESS]: (state, action) => {
         const { templateId, clientId, storeId } = action.payload;
         const templates = state[storeId].templates;
@@ -460,7 +434,7 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
     },
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
-        newState[action.payload.listId] = [...action.payload.customColumnOrder];
+        newState[action.payload.listId] = [...action.payload.columnOrder];
         return newState;
     },
 }, 'workingListsColumnsOrder');
@@ -482,15 +456,28 @@ export const workingListsContextDesc = createReducerDescription({
         };
     },
     [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
-        const newState = { ...state };
-        const { storeId, context: { programId, ...restContext } } = action.payload;
-        newState[storeId] = {
-            ...newState[storeId],
-            ...restContext,
-            programIdView: programId,
-            timestamp: moment().toISOString(),
+        const { storeId, context: { programId, lastTransaction, ...restContext } } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                ...restContext,
+                programIdView: programId,
+                listDataRefreshTimestamp: moment().toISOString(),
+                lastTransactionOnListDataRefresh: lastTransaction,
+            },
         };
-        return newState;
+    },
+    [workingListsCommonActionTypes.LIST_UPDATE]: (state, action) => {
+        const { storeId, lastTransaction } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                listDataRefreshTimestamp: moment().toISOString(),
+                lastTransactionOnListDataRefresh: lastTransaction,
+            },
+        };
     },
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };

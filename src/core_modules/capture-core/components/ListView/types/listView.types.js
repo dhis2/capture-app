@@ -10,7 +10,7 @@ export type Column = {
     header: string,
     visible: boolean,
     type: $Values<typeof dataElementTypes>,
-    optionSet?: OptionSet,
+    optionSet?: ?OptionSet,
     singleSelect?: ?boolean,
 };
 
@@ -84,6 +84,8 @@ export type InterfaceProps = $ReadOnly<{|
     sortById: string,
     sortByDirection: string,
     stickyFilters: StickyFilters,
+    updating: boolean,
+    updatingWithDialog: boolean,
 |}>;
 
 export type ListViewPassOnProps = $ReadOnly<{|

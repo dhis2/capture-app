@@ -46,7 +46,7 @@ export const EventWorkingListsRedux = ({ storeId, ...passOnProps }: Props) => {
             {...commonStateManagementProps}
             program={program}
             {...eventsValues}
-            lastIdDeleted={lastEventIdDeleted} // TODO: New logic
+            lastIdDeleted={lastEventIdDeleted}
             onSelectListRow={onSelectListRow}
             onDeleteEvent={onDeleteEvent}
             downloadRequest={downloadRequest}

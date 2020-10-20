@@ -10,7 +10,6 @@ export const workingListsCommonActionTypes = {
     TEMPLATE_ADD: 'WorkingListsTemplateAdd',
     TEMPLATE_ADD_SUCCESS: 'WorkingListsTemplateAddSuccess',
     TEMPLATE_ADD_ERROR: 'WorkingListsTemplateAddError',
-    TEMPLATE_ADD_SKIP_INIT_CLEAN: 'WorkingListsTemplateAddSkipInitClean',
     TEMPLATE_DELETE: 'WorkingListsTemplateDelete',
     TEMPLATE_DELETE_SUCCESS: 'WorkingListsTemplateDeleteSuccess',
     TEMPLATE_DELETE_ERROR: 'WorkingListsTemplateDeleteError',
@@ -69,9 +68,6 @@ export const addTemplateSuccess = (templateId: string, clientId: Object, data: O
 
 export const addTemplateError = (clientId: Object, data: Object) =>
     actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD_ERROR)({ clientId, ...data });
-
-export const cleanSkipInitAddingTemplate = (template: Object, storeId: string) =>
-    actionCreator(workingListsCommonActionTypes.TEMPLATE_ADD_SKIP_INIT_CLEAN)({ template, storeId });
 
 export const deleteTemplate = (
     template: Object,
