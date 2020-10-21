@@ -250,7 +250,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "ичида"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
