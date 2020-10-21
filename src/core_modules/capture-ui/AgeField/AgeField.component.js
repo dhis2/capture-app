@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { isValidPositiveInteger } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import AgeNumberInput from '../internal/AgeInput/AgeNumberInput.component';
@@ -192,7 +191,7 @@ class D2AgeField extends Component<Props> {
             </div>
         );
     }
-    renderDateInput = (currentValues: AgeValues, isVertical: boolean) => {
+    renderDateInput = (currentValues: AgeValues) => {
         const {
             onChange,
             innerMessage,
@@ -211,11 +210,8 @@ class D2AgeField extends Component<Props> {
             onParseDate,
             ...passOnProps
         } = this.props;
-        const dateInputContainerClass = classNames(
-            { [defaultClasses.ageDateInputContainerHorizontal]: !isVertical },
-        );
         return (
-            <div className={dateInputContainerClass}>
+            <>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <AgeDateInput
                     onBlur={this.handleDateBlur}
@@ -231,7 +227,7 @@ class D2AgeField extends Component<Props> {
                     {...passOnProps}
                 />
                 {innerMessage && this.renderMessage('date')}
-            </div>
+            </>
 
         );
     }
@@ -244,7 +240,7 @@ class D2AgeField extends Component<Props> {
         const ageClearClass = !isVertical ? defaultClasses.ageClearHorizontal : null;
         return (
             <div className={containerClass}>
-                {this.renderDateInput(currentValues, isVertical)}
+                {this.renderDateInput(currentValues)}
                 {this.renderNumberInput(currentValues, 'years', 'Years')}
                 {this.renderNumberInput(currentValues, 'months', 'Months')}
                 {this.renderNumberInput(currentValues, 'days', 'Days')}
