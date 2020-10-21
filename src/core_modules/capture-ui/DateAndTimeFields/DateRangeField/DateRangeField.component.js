@@ -100,29 +100,24 @@ class DateRangeField extends React.Component<Props> {
         const toValue = value && value.to ? value.to : '';
         return (
             <div className={defaultClasses.container}>
-                <div className={defaultClasses.inputContainer}>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                    <RangeInputField
-                        label={i18n.t('From')}
-                        value={fromValue}
-                        onBlur={this.handleFromBlur}
-                        onChange={this.handleFromChange}
-                        {...passOnProps}
-                    />
-                    {this.getInnerMessage(inputKeys.FROM)}
-                </div>
-                <div className={defaultClasses.inputContainer}>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                    <RangeInputField
-                        label={i18n.t('To')}
-                        value={toValue}
-                        onBlur={this.handleToBlur}
-                        onChange={this.handleToChange}
-                        {...passOnProps}
-                    />
-                    {this.getInnerMessage(inputKeys.TO)}
-                </div>
-
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                <RangeInputField
+                    label={i18n.t('From')}
+                    value={fromValue}
+                    onBlur={this.handleFromBlur}
+                    onChange={this.handleFromChange}
+                    {...passOnProps}
+                />
+                {this.getInnerMessage(inputKeys.FROM)}
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                <RangeInputField
+                    label={i18n.t('To')}
+                    value={toValue}
+                    onBlur={this.handleToBlur}
+                    onChange={this.handleToChange}
+                    {...passOnProps}
+                />
+                {this.getInnerMessage(inputKeys.TO)}
             </div>
         );
     }
