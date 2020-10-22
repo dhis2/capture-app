@@ -24,23 +24,17 @@ export const EventWorkingListsDataSourceSetup = ({
         .reduce((accDataSource, clientRecord: EventsMainProperties & EventsDataElementValues) => {
             const listRecord = columns
                 .filter(column => column.visible)
-                // $FlowFixMe Flow error handled in later PR
-                .reduce((acc, { id, options, optionSet, type }) => {
+                .reduce((acc, { id, options, type }) => {
                     const clientValue = clientRecord[id];
 
-                    // TODO: REFACTOR after fixing optionsets
-                    if (options || optionSet) {
+                    if (options) {
                         // TODO: Need is equal comparer for types
-                        // Flow error handled in later PR
-                        const option = options ?
-                            options.find(o => o.value === clientValue) :
-                            // $FlowFixMe Flow error handled in later PR
-                            optionSet.getOption(clientValue);
+                        const option = options.find(o => o.value === clientValue);
                         if (!option) {
                             log.error(
                                 errorCreator(
                                     'Missing value in options')(
-                                    { id, clientValue, options, optionSet }),
+                                    { id, clientValue, options }),
                             );
                         } else {
                             acc[id] = option.text;
