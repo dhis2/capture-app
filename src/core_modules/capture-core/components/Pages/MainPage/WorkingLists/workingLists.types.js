@@ -1,5 +1,5 @@
 // @flow
-import { type OptionSet, dataElementTypes } from '../../../../metaData';
+import { dataElementTypes } from '../../../../metaData';
 import type {
     CustomMenuContents,
     CustomRowMenuContents,
@@ -33,26 +33,14 @@ export type WorkingListTemplate = {
 
 export type WorkingListTemplates = Array<WorkingListTemplate>;
 
-type ColumnConfigBase = {|
+export type ColumnConfig = {
     id: string,
     visible: boolean,
     type: $Values<typeof dataElementTypes>,
     header: string,
-|};
-export type MetadataColumnConfig = {|
-    ...ColumnConfigBase,
-    optionSet?: ?OptionSet,
-|};
-
-export type MainColumnConfig = {|
-    ...ColumnConfigBase,
-    isMainProperty: true,
     options?: ?Array<{text: string, value: any}>,
-    singleSelect?: boolean,
-    apiName?: string,
-|};
-
-export type ColumnConfig = MetadataColumnConfig | MainColumnConfig;
+    multiValueFilter?: boolean,
+};
 
 export type ColumnConfigs = Array<ColumnConfig>;
 

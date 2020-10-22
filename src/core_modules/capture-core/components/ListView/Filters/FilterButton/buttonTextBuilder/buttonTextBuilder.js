@@ -1,5 +1,4 @@
 // @flow
-import { OptionSet } from '../../../../../metaData';
 import {
     convertText,
     convertDate,
@@ -11,6 +10,7 @@ import {
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
 import type { OptionSetFilterData } from '../../../../FiltersForTypes';
 import { filterTypesObject } from '../../filterTypes';
+import type { Options } from '../../../types';
 
 // todo (report lgmt)
 const convertersForTypes = {
@@ -36,11 +36,11 @@ const convertersForTypes = {
     [filterTypesObject.TRUE_ONLY]: convertTrueOnly,
 };
 
-function getOptionSetText(filter: OptionSetFilterData, optionSet: OptionSet) {
+function getOptionSetText(filter: OptionSetFilterData, options: Options) {
     const optionText = filter
         .values
         .map((value) => {
-            const option = optionSet.options.find(o => isEqual(o.value, value));
+            const option = options.find(o => isEqual(o.value, value));
             return option && option.text;
         })
         .filter(text => text)
@@ -52,10 +52,10 @@ function getOptionSetText(filter: OptionSetFilterData, optionSet: OptionSet) {
 export function buildButtonText(
     filter: any,
     type: $Values<typeof filterTypesObject>,
-    optionSet?: OptionSet,
+    options?: ?Options,
 ) {
-    if (filter.usingOptionSet && optionSet) {
-        return getOptionSetText(filter, optionSet);
+    if (filter.usingOptionSet && options) {
+        return getOptionSetText(filter, options);
     }
 
     return (convertersForTypes[type] ? convertersForTypes[type](filter) : filter);

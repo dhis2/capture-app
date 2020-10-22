@@ -42,3 +42,25 @@ export type EventWorkingListsTemplate = {
 };
 
 export type EventWorkingListsTemplates = Array<EventWorkingListsTemplate>;
+
+export type ColumnConfigBase = {
+    id: string,
+    visible: boolean,
+    type: $Values<typeof dataElementTypes>,
+    header: string,
+    options?: ?Array<{text: string, value: any}>,
+    multiValueFilter?: boolean,
+};
+export type MetadataColumnConfig = {
+    ...ColumnConfigBase,
+};
+
+export type MainColumnConfig = {
+    ...ColumnConfigBase,
+    isMainProperty: true,
+    apiName?: string,
+};
+
+export type EventWorkingListsColumnConfig = MetadataColumnConfig | MainColumnConfig;
+
+export type EventWorkingListsColumnConfigs = Array<EventWorkingListsColumnConfig>;

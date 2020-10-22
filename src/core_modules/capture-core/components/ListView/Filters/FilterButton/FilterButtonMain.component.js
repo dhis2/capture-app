@@ -6,9 +6,8 @@ import ArrowDownwardIcon from '@material-ui/icons/KeyboardArrowDown';
 import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Button } from '../../../Buttons';
 import ActiveFilterButton from './ActiveFilterButton.component';
-import FilterSelectorContents from '../Contents/FilterSelectorContents.component';
-import OptionSet from '../../../../metaData/OptionSet/OptionSet';
-import type { UpdateFilter, ClearFilter } from '../../types';
+import { FilterSelectorContents } from '../Contents';
+import type { UpdateFilter, ClearFilter, Options } from '../../types';
 import type { FilterData } from '../../../FiltersForTypes';
 
 const getStyles = (theme: Theme) => ({
@@ -36,8 +35,8 @@ const POPOVER_TRANSFORM_ORIGIN = {
 type Props = {
     itemId: string,
     type: string,
-    optionSet?: ?OptionSet,
-    singleSelect?: ?boolean,
+    options?: ?Options,
+    multiValueFilter?: boolean,
     title: string,
     classes: {
         icon: string,
@@ -104,13 +103,13 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderSelectorContents() {
-        const { itemId: id, type, optionSet, singleSelect, filterValue } = this.props;
+        const { itemId: id, type, options, multiValueFilter, filterValue } = this.props;
 
         return (
             <FilterSelectorContents
                 type={type}
-                optionSet={optionSet}
-                singleSelect={singleSelect}
+                options={options}
+                multiValueFilter={multiValueFilter}
                 id={id}
                 onUpdate={this.handleFilterUpdate}
                 onClose={this.closeFilterSelector}

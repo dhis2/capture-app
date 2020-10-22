@@ -6,7 +6,7 @@ import {
     type EventProgram,
 } from '../../../../../../metaData';
 import mainPropertyNames from '../../../../../../events/mainPropertyNames.const';
-import type { ColumnConfigs, MetadataColumnConfig, MainColumnConfig } from '../../../WorkingLists';
+import type { MainColumnConfig, MetadataColumnConfig, EventWorkingListsColumnConfigs } from '../../types';
 
 const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
     const baseFields = [{
@@ -21,7 +21,6 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
         // $FlowFixMe[prop-missing] automated comment
         type: elementTypeKeys.TEXT,
         header: 'Status',
-        singleSelect: true,
         options: [
             { text: i18n.t('Active'), value: 'ACTIVE' },
             { text: i18n.t('Completed'), value: 'COMPLETED' },
@@ -50,15 +49,16 @@ const getMetaDataConfig = (stage: ProgramStage): Array<MetadataColumnConfig> =>
     stage
         .stageForm
         .getElements()
-        .map(element => ({
-            id: element.id,
-            visible: element.displayInReports,
-            type: element.type,
-            header: element.formName,
-            optionSet: element.optionSet,
+        .map(({ id, displayInReports, type, formName, optionSet }) => ({
+            id,
+            visible: displayInReports,
+            type,
+            header: formName,
+            options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
+            multiValueFilter: !!optionSet,
         }));
 
-export const getDefaultColumnConfig = (program: EventProgram): ColumnConfigs => {
+export const getDefaultColumnConfig = (program: EventProgram): EventWorkingListsColumnConfigs => {
     const stage = program.stage;
     return [
         ...getDefaultMainConfig(stage),

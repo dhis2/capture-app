@@ -40,8 +40,6 @@ export type {
     LoadedContext,
     LoadTemplates,
     LoadView,
-    MainColumnConfig,
-    MetadataColumnConfig,
     SelectTemplate,
     UnloadingContext,
     UpdateList,
