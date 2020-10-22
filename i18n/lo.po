@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2020
 # phil_dhis2, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,6 +36,12 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+
+msgid "Organisation unit"
+msgstr "​ຫົວ​ໜ່ວຍ​ການ​ຈັດ​ຕັ້ງ"
+
+msgid "Date of enrollment"
+msgstr "Date of enrollment"
 
 msgid "Last updated"
 msgstr "ປັບປຸງ​ຄັ້ງຫລ້າສຸດ"
@@ -331,6 +337,9 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
+msgid "Start again"
+msgstr ""
+
 msgid "New {{typeName}}"
 msgstr ""
 
@@ -339,9 +348,6 @@ msgstr "ສ້າງໃຫມ່"
 
 msgid "Find"
 msgstr "ຊອກ"
-
-msgid "Clear selections"
-msgstr ""
 
 msgid "Selected registering unit"
 msgstr ""
@@ -658,6 +664,9 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
+msgid "No results found"
+msgstr ""
+
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
@@ -680,9 +689,6 @@ msgid "Search results"
 msgstr ""
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
-
-msgid "{{teiCount}} results found for"
 msgstr ""
 
 msgid "New search"
@@ -722,9 +728,6 @@ msgstr ""
 msgid "Back"
 msgstr "​ກັບ​ຄືນ"
 
-msgid "No results found"
-msgstr ""
-
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
@@ -747,7 +750,10 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
-msgid "result(s) found for term(s)"
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
 msgstr ""
 
 msgid "You dont have access to edit this event"
@@ -778,6 +784,9 @@ msgstr ""
 
 msgid "Add relationship"
 msgstr "ເພີ່ມຄວາມສໍາພັນ"
+
+msgid "Results found"
+msgstr ""
 
 msgid "Selected program"
 msgstr "ເລືອກສາຍງານ"
@@ -829,6 +838,9 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "ວັນທີ່"

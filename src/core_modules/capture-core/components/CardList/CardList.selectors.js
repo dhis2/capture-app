@@ -9,15 +9,16 @@ const elementsSelector = dataElements => dataElements;
 export const makeElementsContainerSelector = () => createSelector(
     elementsSelector,
     (elements) => {
-        const imageDataElement = elements.find(a => a.type === dataElementTypes.IMAGE);
-        if (imageDataElement) {
-            const newElements = [...elements];
-            newElements.splice(newElements.indexOf(imageDataElement), 1);
+        // $FlowFixMe[prop-missing] automated comment
+        const profileImageDataElement = elements.find(a => a.type === dataElementTypes.IMAGE);
+        const newElements = [...elements];
+        if (profileImageDataElement) {
+            newElements.splice(newElements.indexOf(profileImageDataElement), 1);
         }
 
         return {
-            dataElements: elements,
-            imageDataElement,
+            dataElementsExceptProfileImage: newElements,
+            profileImageDataElement,
         };
     });
 

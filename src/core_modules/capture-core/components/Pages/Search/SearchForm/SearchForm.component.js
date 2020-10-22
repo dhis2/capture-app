@@ -1,13 +1,14 @@
 // @flow
-import React, { type ComponentType, useEffect, useMemo, useState } from 'react';
+import React, { type ComponentType, useContext, useEffect, useMemo, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui-core';
+import { Button } from '@dhis2/ui';
 import { D2Form } from '../../../D2Form';
 import { searchScopes } from '../SearchPage.constants';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
 import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
+import { ResultsPageSizeContext } from '../../shared-contexts';
 
 const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
@@ -74,7 +75,9 @@ const SearchFormIndex = ({
     formsValues,
     searchStatus,
     isSearchViaAttributesValid,
-}: Props & CssClasses) => {
+}: Props) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+
     useFormDataLifecycle(searchGroupsForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore);
 
     const [error, setError] = useState(false);
@@ -124,10 +127,10 @@ const SearchFormIndex = ({
                 saveCurrentFormData(searchScopeType, searchScopeId, formId, formsValues);
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
-                    searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId });
+                    searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId, resultsPageSize });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
+                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId, resultsPageSize });
                     break;
                 default:
                     break;
@@ -274,9 +277,10 @@ const SearchFormIndex = ({
         isSearchViaAttributesValid,
         saveCurrentFormData,
         formsValues,
+        resultsPageSize,
         error,
         expandedFormId,
     ]);
 };
 
-export const SearchFormComponent: ComponentType<Props> = withStyles(getStyles)(SearchFormIndex);
+export const SearchFormComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(SearchFormIndex);

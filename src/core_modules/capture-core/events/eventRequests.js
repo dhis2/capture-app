@@ -144,14 +144,11 @@ export async function getEvent(eventId: string): Promise<?ClientEventContainer> 
     return eventContainer;
 }
 
-export async function getEvents(queryParams: ?Object) {
+export async function getEvents(queryParams: Object) {
     const api = getApi();
     const req = {
         url: 'events',
-        queryParams: {
-            ...queryParams,
-            totalPages: true,
-        },
+        queryParams,
     };
     const apiRes = await api
         .get(req.url, { ...req.queryParams });
@@ -166,9 +163,8 @@ export async function getEvents(queryParams: ?Object) {
     }, Promise.resolve([])) : null;
 
     const pagingData = {
-        rowsCount: apiRes.pager.total,
-        rowsPerPage: apiRes.pager.pageSize,
-        currentPage: apiRes.pager.page,
+        rowsPerPage: queryParams.pageSize,
+        currentPage: queryParams.page,
     };
 
     return {

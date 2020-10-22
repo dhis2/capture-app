@@ -107,7 +107,11 @@ export class LockedSelectorComponent extends Component<Props, State> {
     }
 
     handleOpenSearchPage = () => {
-        this.props.onOpenSearchPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
+        this.props.onOpenSearchPage();
+    }
+
+    handleOpenSearchPageWithoutProgramId = () => {
+        this.props.onOpenSearchPageWithoutProgramId();
     }
 
 
@@ -124,8 +128,9 @@ export class LockedSelectorComponent extends Component<Props, State> {
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
                     onStartAgain={this.handleOpenStartAgainWarning}
-                    onClickNew={this.handleClickNew}
-                    onClickFind={this.handleOpenSearchPage}
+                    onNewClick={this.handleClickNew}
+                    onFindClickWithoutProgramId={this.handleOpenSearchPageWithoutProgramId}
+                    onFindClick={this.handleOpenSearchPage}
                 />
                 <ConfirmDialog
                     onConfirm={this.handleAcceptStartAgain}

@@ -52,7 +52,7 @@ class DownloadDialog extends React.Component<Props> {
     renderButtons() {
         const { request, programStageId, classes } = this.props;
         const url = DownloadDialog.getUrl();
-        const { pageSize, page, totalPages, ...paramsFromRequest } = request.queryParams || {};
+        const { pageSize, page, ...paramsFromRequest } = request.queryParams || {};
         const paramsObject = {
             ...paramsFromRequest,
             programStage: programStageId,

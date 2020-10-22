@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -37,6 +37,12 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+
+msgid "Organisation unit"
+msgstr "Đơn vị"
+
+msgid "Date of enrollment"
+msgstr "Ngày đăng ký"
 
 msgid "Last updated"
 msgstr "Lần cập nhật cuối"
@@ -333,6 +339,9 @@ msgstr "Chương trình không tồn tại"
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
+msgid "Start again"
+msgstr "Khởi đầu lại"
+
 msgid "New {{typeName}}"
 msgstr ""
 
@@ -341,9 +350,6 @@ msgstr "Mới"
 
 msgid "Find"
 msgstr "Tìm kiếm"
-
-msgid "Clear selections"
-msgstr ""
 
 msgid "Selected registering unit"
 msgstr "Đơn vị đăng ký đã chọn"
@@ -662,6 +668,9 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
+msgid "No results found"
+msgstr "Không tìm thấy kết quả nào"
+
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
@@ -684,9 +693,6 @@ msgid "Search results"
 msgstr "Kết quả tìm kiếm"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
-
-msgid "{{teiCount}} results found for"
 msgstr ""
 
 msgid "New search"
@@ -726,9 +732,6 @@ msgstr ""
 msgid "Back"
 msgstr "Trở lại"
 
-msgid "No results found"
-msgstr "Không tìm thấy kết quả nào"
-
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
@@ -751,7 +754,10 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
-msgid "result(s) found for term(s)"
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
 msgstr ""
 
 msgid "You dont have access to edit this event"
@@ -782,6 +788,9 @@ msgstr ""
 
 msgid "Add relationship"
 msgstr "Thêm Quan Hệ"
+
+msgid "Results found"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Chương trình đã chọn"
@@ -833,6 +842,9 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Đặt tọa độ"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "Ngày"

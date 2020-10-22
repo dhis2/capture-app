@@ -1,9 +1,9 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useMemo } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { Button, colors } from '@dhis2/ui-core';
-import { TrackerProgram } from '../../../metaData';
+import { Button, colors, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
+import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../metaData';
 
 const styles = ({ typography }) => ({
     marginLeft: {
@@ -26,13 +26,43 @@ type Props = $ReadOnly<{|
     onStartAgainClick: () => void,
     onNewClick: () => void,
     onFindClick: () => void,
+    onFindClickWithoutProgramId: () => void,
     showResetButton: boolean,
 |}>;
+
+const programTypes = {
+    TRACKER_PROGRAM: 'TRACKER_PROGRAM',
+    EVENT_PROGRAM: 'EVENT_PROGRAM',
+};
+
+function useProgramInfo(programId) {
+    let programName = '';
+    let trackedEntityName = '';
+
+    const program = useMemo(() => (
+        programId ? getProgramFromProgramIdThrowIfNotFound(programId) : null),
+    [programId]);
+
+    const programType = program instanceof TrackerProgram
+        ? programTypes.TRACKER_PROGRAM
+        : programTypes.EVENT_PROGRAM;
+
+    if (program) {
+        programName = program.name;
+    }
+    if (program instanceof TrackerProgram) {
+        trackedEntityName = program.trackedEntityType.name.toLowerCase();
+    }
+
+    return { trackedEntityName, programType, programName };
+}
+
 
 const Index = ({
     onStartAgainClick,
     onNewClick,
     onFindClick,
+    onFindClickWithoutProgramId,
     selectedProgramId,
     classes,
     showResetButton,
@@ -44,6 +74,7 @@ const Index = ({
           :
           'Event';
 
+    const { trackedEntityName, programType, programName } = useProgramInfo(selectedProgramId);
 
     return (
         <>
@@ -60,15 +91,46 @@ const Index = ({
                         i18n.t('New')
                 }
             </Button>
-            <Button
-                small
-                secondary
-                dataTest="dhis2-capture-find-button"
-                className={classes.marginLeft}
-                onClick={onFindClick}
-            >
-                { i18n.t('Find') }
-            </Button>
+            {
+                programType !== programTypes.TRACKER_PROGRAM ?
+                    <Button
+                        small
+                        secondary
+                        dataTest="dhis2-capture-find-button"
+                        className={classes.marginLeft}
+                        onClick={onFindClickWithoutProgramId}
+                    >
+                        { i18n.t('Find') }
+                    </Button>
+                    :
+                    <DropdownButton
+                        small
+                        secondary
+                        dataTest="dhis2-capture-find-button"
+                        className={classes.marginLeft}
+                        component={
+                            <FlyoutMenu
+                                dense
+                                maxWidth="250px"
+                            >
+                                <MenuItem
+                                    dataTest="dhis2-capture-find-menuitem-one"
+                                    label={`Find a ${trackedEntityName} in ${programName}`}
+                                    onClick={onFindClick}
+                                />
+                                <MenuItem
+                                    dataTest="dhis2-capture-find-menuitem-two"
+                                    label="Find..."
+                                    onClick={onFindClickWithoutProgramId}
+                                />
+                            </FlyoutMenu>
+                        }
+                    >
+                        { i18n.t('Find') }
+                    </DropdownButton>
+            }
+
+
             {
                 showResetButton ?
                     <button

@@ -69,10 +69,10 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
             const queryArgs = {
                 ou: orgUnit.id,
                 ouMode: 'ACCESSIBLE',
-                pageSize: 5,
+                pageSize: action.payload.pageSize,
                 page: requestPage,
-                totalPages: !isChangePage,
                 filter: filters,
+                fields: '*',
                 ...contextParam,
             };
             const attributes = contextParam.program ?
@@ -81,7 +81,10 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
 
             return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
                 map(({ trackedEntityInstanceContainers: searchResults, pagingData }) =>
-                    duplicatesForReviewRetrievalSuccess(searchResults, pagingData)),
+                    duplicatesForReviewRetrievalSuccess(
+                        searchResults,
+                        pagingData.currentPage,
+                    )),
                 catchError(() => of(duplicatesForReviewRetrievalFailed())),
 
             );
