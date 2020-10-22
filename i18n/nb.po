@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Caroline Hesthagen Holen <caroline@devotta.no>, 2020
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
+# Caroline Hesthagen Holen <caroline@devotta.no>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-29T14:08:42.361Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
+"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,6 +43,12 @@ msgstr ""
 " Capture App bare å kjøre en versjon samtidig (i samme domene). Oppdater "
 "denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
 "at dette vil lukke andre versjoner."
+
+msgid "Organisation unit"
+msgstr "Organisasjonsenhet"
+
+msgid "Date of enrollment"
+msgstr "Dato for registrering"
 
 msgid "Last updated"
 msgstr "Sist oppdatert"
@@ -340,6 +346,9 @@ msgstr "Programmet finnes ikke"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Valgt program er ugyldig for registreringsenhet"
 
+msgid "Start again"
+msgstr "Start på nytt"
+
 msgid "New {{typeName}}"
 msgstr "Ny {{typeName}}"
 
@@ -348,9 +357,6 @@ msgstr "Ny"
 
 msgid "Find"
 msgstr "Finn"
-
-msgid "Clear selections"
-msgstr ""
 
 msgid "Selected registering unit"
 msgstr "Valgt registreringsenhet"
@@ -678,6 +684,9 @@ msgstr "Opprett {{trackedEntityTypeName}} og link"
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
 
+msgid "No results found"
+msgstr "Ingen resultater funnet"
+
 msgid "An error occured loading possible duplicates"
 msgstr "En feil oppsto ved lasting av mulige duplikater"
 
@@ -701,9 +710,6 @@ msgstr "Søkeresultater"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr "Ingen {{trackedEntityTypeName}} funnet."
-
-msgid "{{teiCount}} results found for"
-msgstr "{{teiCount}} resultater funnet for"
 
 msgid "New search"
 msgstr "Nytt søk"
@@ -743,9 +749,6 @@ msgstr "Søk etter attributter"
 msgid "Back"
 msgstr "Tilbake"
 
-msgid "No results found"
-msgstr "Ingen resultater funnet"
-
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
@@ -770,8 +773,11 @@ msgstr "Gjør et valg for å begynne å søke"
 msgid "View dashboard"
 msgstr "Vis dashbord"
 
-msgid "result(s) found for term(s)"
-msgstr "resultat(er) funnet for uttrykk"
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
@@ -803,6 +809,9 @@ msgstr "Du har ikke tilgang til å opprette noen relasjoner"
 
 msgid "Add relationship"
 msgstr "Legg til relasjon"
+
+msgid "Results found"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Valgt program"
@@ -854,6 +863,9 @@ msgstr "Sporet enhetforekomst"
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "Dato"

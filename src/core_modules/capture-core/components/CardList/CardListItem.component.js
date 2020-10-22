@@ -5,18 +5,22 @@ import moment from 'moment';
 import type { ComponentType, Element } from 'react';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
 import DoneIcon from '@material-ui/icons/Done';
-import { colors, Tag } from '@dhis2/ui-core';
-import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
-import type { DataElement } from '../../metaData';
-import { enrollmentTypes } from './CardList.constants';
+import { colors, Tag } from '@dhis2/ui';
+import type {
+    CardDataElementsInformation,
+    CardProfileImageElementInformation,
+    SearchResultItem,
+} from '../Pages/Search/SearchResults/SearchResults.types';
+import { availableCardListButtonState, enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
+import { dataElementTypes } from '../../metaData';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
+    currentSearchScopeName?: string,
     currentProgramId?: string,
-    getCustomTopElements?: ?(props: Object) => Element<any>,
-    getCustomBottomElements?: ?(props: Object) => Element<any>,
-    imageDataElement: DataElement,
+    getCustomBottomElements?: (props: Object) => Element<any>,
+    profileImageDataElement: ?CardProfileImageElementInformation,
     dataElements: CardDataElementsInformation,
 |}>;
 
@@ -52,11 +56,22 @@ const getStyles = (theme: Theme) => ({
     image: {
         width: theme.typography.pxToRem(44),
         height: theme.typography.pxToRem(44),
-    },
-    imageContainer: {
         marginRight: theme.typography.pxToRem(8),
     },
 });
+
+const deriveNavigationButtonState =
+  (type): $Keys<typeof availableCardListButtonState> => {
+      switch (type) {
+      case enrollmentTypes.ACTIVE:
+          return availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON;
+      case enrollmentTypes.CANCELLED:
+      case enrollmentTypes.COMPLETED:
+          return availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON;
+      default:
+          return availableCardListButtonState.DONT_SHOW_BUTTON;
+      }
+  };
 
 
 const deriveEnrollmentType =
@@ -86,11 +101,12 @@ const deriveEnrollmentOrgUnitAndDate =
       if (!currentProgramId) {
           return {};
       }
-
-      const { orgUnitName, enrollmentDate } = enrollments
-          .filter(({ program }) => program === currentProgramId)
-          .filter(({ status }) => status === enrollmentType)
-          .sort((a, b) => moment.utc(a.lastUpdated).diff(moment.utc(b.lastUpdated)))[0];
+      const { orgUnitName, enrollmentDate } =
+        enrollments
+            .filter(({ program }) => program === currentProgramId)
+            .filter(({ status }) => status === enrollmentType)
+            .sort((a, b) => moment.utc(a.lastUpdated).diff(moment.utc(b.lastUpdated)))[0]
+        || {};
 
       return { orgUnitName, enrollmentDate };
   };
@@ -99,16 +115,16 @@ const deriveEnrollmentOrgUnitAndDate =
 const CardListItemIndex = ({
     item,
     classes,
-    imageDataElement,
-    getCustomTopElements,
+    profileImageDataElement,
     getCustomBottomElements,
     dataElements,
     currentProgramId,
+    currentSearchScopeName,
 }: OwnProps & CssClasses) => {
-    const renderImageDataElement = (imageElement: DataElement) => {
+    const renderImageDataElement = (imageElement: CardProfileImageElementInformation) => {
         const imageValue = item.values[imageElement.id];
         return (
-            <div className={classes.imageContainer}>
+            <div>
                 {imageValue && <Avatar src={imageValue.url} alt={imageValue.name} className={classes.image} />}
             </div>
         );
@@ -119,32 +135,37 @@ const CardListItemIndex = ({
 
     return (
         <div data-test="dhis2-capture-card-list-item" className={classes.itemContainer}>
-            {getCustomTopElements && getCustomTopElements({ item })}
             <div className={classes.itemDataContainer}>
 
                 <div className={classes.itemValuesContainer}>
-                    <Grid container spacing={2}>
+                    <Grid container >
                         {
-                            imageDataElement &&
+                            profileImageDataElement &&
                             <Grid item>
-                                {renderImageDataElement(imageDataElement)}
+                                {renderImageDataElement(profileImageDataElement)}
                             </Grid>
                         }
-                        <Grid item xs={16} sm container>
-                            <Grid item xs container direction="column" spacing={2}>
+                        <Grid item sm container>
+                            <Grid item xs container direction="column" >
                                 {
-                                    dataElements.map(element => (
-                                        <ListEntry key={element.id} name={element.name} value={item.values[element.id]} />
-                                    ))
+                                    dataElements
+                                        .map(({ id, name, type }) => (
+                                            <ListEntry
+                                                key={id}
+                                                name={name}
+                                                value={item.values[id]}
+                                                type={type}
+                                            />))
                                 }
                                 {
                                     orgUnitName &&
-                                    <ListEntry name={i18n.t('Organisation unit: ')} value={orgUnitName} />
+                                    <ListEntry name={i18n.t('Organisation unit')} value={orgUnitName} />
                                 }
 
                                 {
                                     enrollmentDate &&
-                                    <ListEntry name={i18n.t('Date of enrollment:')} value={moment(enrollmentDate).format('L')} />
+                                    // $FlowFixMe[prop-missing] automated comment
+                                    <ListEntry name={i18n.t('Date of enrollment')} value={enrollmentDate} type={dataElementTypes.DATE} />
                                 }
 
                             </Grid>
@@ -212,7 +233,14 @@ const CardListItemIndex = ({
                 </div>
             </div>
 
-            {getCustomBottomElements && getCustomBottomElements({ item })}
+            {
+                getCustomBottomElements &&
+                getCustomBottomElements({
+                    item,
+                    navigationButtonsState: deriveNavigationButtonState(enrollmentType),
+                    programName: currentSearchScopeName,
+                })
+            }
         </div>
     );
 };

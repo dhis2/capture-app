@@ -1,11 +1,14 @@
 // @flow
+import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
-import RegisterTei from './RegisterTei.component';
+import { RegisterTeiComponent } from './RegisterTei.component';
 import { makeTETNameSelector } from './registerTei.selectors';
 import { reviewDuplicates } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/searchGroupDuplicate.actions';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
+import type { Props, OwnProps } from './RegisterTei.types';
 
 const makeStateToProps = () => {
     const tetNameSelector = makeTETNameSelector();
@@ -28,18 +31,11 @@ const makeStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onReviewDuplicates: (onOpenReviewDialog: Function) => {
-        dispatch(reviewDuplicates());
-        onOpenReviewDialog();
-    },
+    onReviewDuplicates: (pageSize) => { dispatch(reviewDuplicates(pageSize)); },
 });
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
-export default connect(makeStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(
-        withErrorMessageHandler()(
-            RegisterTei,
-        ),
-    ),
-);
+export const RegisterTei: ComponentType<OwnProps> = compose(
+    connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(makeStateToProps, mapDispatchToProps),
+    withLoadingIndicator(),
+    withErrorMessageHandler(),
+)(RegisterTeiComponent);

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
-import { Button } from '@dhis2/ui-core';
+import { Button } from '@dhis2/ui';
 
 const getStyles = (theme: Theme) => ({
     container: {

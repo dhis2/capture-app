@@ -49,6 +49,13 @@ function convertRangeForDisplay(parser: any, clientValue: any) {
         </span>
     );
 }
+function convertNumberRangeForDisplay(clientValue) {
+    return (
+        <span>
+            {clientValue.from} {'->'} {clientValue.to}
+        </span>
+    );
+}
 
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
@@ -68,6 +75,7 @@ const valueConvertersForType = {
     [dataElementTypes.IMAGE]: convertResourceForDisplay,
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
     [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
+    [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, dataElement?: ?DataElement) {
