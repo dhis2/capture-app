@@ -3,6 +3,7 @@ import { dataElementTypes } from '../../../../metaData';
 import type {
     CustomMenuContents,
     CustomRowMenuContents,
+    DataSource,
     FiltersData,
     StickyFilters,
     ChangePage,
@@ -43,8 +44,6 @@ export type ColumnConfig = {
 };
 
 export type ColumnConfigs = Array<ColumnConfig>;
-
-export type DataSource = { [id: string]: Object };
 
 export type ColumnOrder = Array<{ id: string, visible: boolean }>;
 
@@ -129,7 +128,6 @@ export type ListViewBuilderContextData = {|
     updating: boolean,
     updatingWithDialog: boolean,
     dataSource?: DataSource,
-    recordsOrder?: Array<string>, // TODO: Dealing with this in later PR
     onSelectListRow: SelectRow,
     onSortList: Sort,
     onSetListColumnOrder: SetColumnOrder,
@@ -180,7 +178,6 @@ export type InterfaceProps = $ReadOnly<{|
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     programId: string,
-    recordsOrder?: Array<string>, // TODO: Dealing with this in later PR
     rowIdKey: string,
     rowsCount?: number,
     rowsPerPage?: number,

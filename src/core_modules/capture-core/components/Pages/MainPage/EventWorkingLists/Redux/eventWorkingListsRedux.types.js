@@ -79,7 +79,7 @@ export type EventWorkingListsReduxOutputProps = {|
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     program: EventProgram,
-    recordsOrder?: Array<string>, // TODO: Dealing with this in later PR
+    recordsOrder?: Array<string>,
     rowsCount?: number,
     rowsPerPage?: number,
     sortByDirection?: string,

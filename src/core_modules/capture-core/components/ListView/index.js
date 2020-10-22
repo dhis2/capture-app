@@ -6,6 +6,7 @@ export type {
     CustomRowMenuContent,
     CustomMenuContents,
     CustomMenuContent,
+    DataSource,
     FiltersData,
     StickyFilters,
     ChangePage,

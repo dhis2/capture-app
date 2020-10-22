@@ -11,6 +11,7 @@ export const EventWorkingListsDataSourceSetup = ({
     eventsMainProperties,
     eventsDataElementValues,
     columns,
+    recordsOrder,
     ...passOnProps
 }: Props) => {
     const dataSource = useMemo(() => Object
@@ -61,10 +62,17 @@ export const EventWorkingListsDataSourceSetup = ({
         columns,
     ]);
 
+    const dataSourceArray = useMemo(() =>
+        recordsOrder && recordsOrder
+            .map(id => dataSource[id]), [
+        dataSource,
+        recordsOrder,
+    ]);
+
     return (
         <EventWorkingListsTemplateSetup
             {...passOnProps}
-            dataSource={dataSource}
+            dataSource={dataSourceArray}
             columns={columns}
             rowIdKey="eventId"
         />

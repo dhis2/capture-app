@@ -7,9 +7,14 @@ type ExtractedProps = $ReadOnly<{|
     eventsMainProperties: ?EventsMainProperties,
     eventsDataElementValues: ?EventsDataElementValues,
     columns: EventWorkingListsColumnConfigs,
+    recordsOrder?: Array<string>,
 |}>;
 
-type RestProps = $Rest<CurrentViewChangesResolverOutputProps, ExtractedProps>;
+type OptionalExtractedProps = {
+    recordsOrder: Array<string>,
+};
+type RestProps = $Rest<CurrentViewChangesResolverOutputProps & OptionalExtractedProps,
+ExtractedProps & OptionalExtractedProps>;
 
 export type Props = {|
     ...RestProps,
@@ -19,6 +24,6 @@ export type Props = {|
 export type EventWorkingListsDataSourceSetupOutputProps = {|
     ...RestProps,
     columns: EventWorkingListsColumnConfigs,
-    dataSource: DataSource,
+    dataSource?: DataSource,
     rowIdKey: string,
 |};
