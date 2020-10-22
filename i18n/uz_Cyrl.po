@@ -376,7 +376,7 @@ msgid "Download as XML"
 msgstr ""
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "CSV сифатида юкланг"
 
 msgid "Download with current filters"
 msgstr ""
