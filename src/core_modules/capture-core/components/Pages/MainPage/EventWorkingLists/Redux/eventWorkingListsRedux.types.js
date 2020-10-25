@@ -27,9 +27,8 @@ import type {
 import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '../../WorkingListsCommon';
 import type {
     CustomColumnOrder,
-    EventsMainProperties,
-    EventsDataElementValues,
     EventWorkingListsTemplates,
+    EventRecords,
 } from '../types';
 
 export type Props = $ReadOnly<{|
@@ -45,8 +44,7 @@ export type EventWorkingListsReduxOutputProps = {|
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
     downloadRequest: Object,
-    eventsMainProperties: ?EventsMainProperties,
-    eventsDataElementValues: ?EventsDataElementValues,
+    eventRecords?: EventRecords,
     filters?: FiltersData,
     initialViewConfig?: Object,
     lastIdDeleted?: string,

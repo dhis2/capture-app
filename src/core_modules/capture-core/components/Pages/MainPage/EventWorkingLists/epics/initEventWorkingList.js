@@ -3,7 +3,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { convertToClientConfig } from '../helpers/eventFilters';
-import { getEventWorkingListDataAsync } from './eventsRetriever';
+import { getEventListData } from './getEventListData';
 import {
     initListViewSuccess,
     initListViewError,
@@ -37,7 +37,7 @@ export const initEventWorkingListAsync = async (
         ...commonQueryData,
     };
 
-    return getEventWorkingListDataAsync(
+    return getEventListData(
         buildQueryArgs(
             queryArgsSource, {
                 columnsMetaForDataFetching,
@@ -45,9 +45,11 @@ export const initEventWorkingListAsync = async (
                 isInit: true,
             },
         ), columnsMetaForDataFetching, categoryCombinationMeta)
-        .then(data =>
+        .then(({ eventContainers, pagingData, request }) =>
             initListViewSuccess(storeId, {
-                ...data,
+                recordContainers: eventContainers,
+                pagingData,
+                request,
                 config: {
                     ...clientConfig,
                     selections: {

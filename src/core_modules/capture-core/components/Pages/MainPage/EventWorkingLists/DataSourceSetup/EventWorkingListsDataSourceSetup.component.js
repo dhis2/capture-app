@@ -5,27 +5,29 @@ import { errorCreator } from 'capture-core-utils';
 import { convertClientToList } from '../../../../../converters';
 import { EventWorkingListsTemplateSetup } from '../TemplateSetup';
 import type { Props } from './eventWorkingListsDataSourceSetup.types';
-import type { EventsMainProperties, EventsDataElementValues } from '../types';
 
 export const EventWorkingListsDataSourceSetup = ({
-    eventsMainProperties,
-    eventsDataElementValues,
+    eventRecords,
     columns,
     recordsOrder,
     ...passOnProps
 }: Props) => {
-    const dataSource = useMemo(() => Object
-        .keys(eventsMainProperties || {})
-        .map(key => ({
-            ...(eventsMainProperties && eventsMainProperties[key]),
-            ...(eventsDataElementValues && eventsDataElementValues[key]),
-        }))
-        // $FlowFixMe
-        .reduce((accDataSource, clientRecord: EventsMainProperties & EventsDataElementValues) => {
+    const eventRecordsArray = useMemo(() =>
+        recordsOrder && eventRecords && recordsOrder
+            .map(eventId => ({
+                ...eventRecords[eventId],
+                eventId,
+            })), [
+        eventRecords,
+        recordsOrder,
+    ]);
+
+    const dataSource = useMemo(() => eventRecordsArray && eventRecordsArray
+        .map((eventRecord) => {
             const listRecord = columns
                 .filter(column => column.visible)
                 .reduce((acc, { id, options, type }) => {
-                    const clientValue = clientRecord[id];
+                    const clientValue = eventRecord[id];
 
                     if (options) {
                         // TODO: Need is equal comparer for types
@@ -45,28 +47,19 @@ export const EventWorkingListsDataSourceSetup = ({
                     return acc;
                 }, {});
 
-            accDataSource[clientRecord.eventId] = {
+            return {
                 ...listRecord,
-                eventId: clientRecord.eventId, // used as rowkey
+                eventId: eventRecord.eventId, // used as rowkey
             };
-            return accDataSource;
-        }, {}), [
-        eventsMainProperties,
-        eventsDataElementValues,
+        }), [
+        eventRecordsArray,
         columns,
-    ]);
-
-    const dataSourceArray = useMemo(() =>
-        recordsOrder && recordsOrder
-            .map(id => dataSource[id]), [
-        dataSource,
-        recordsOrder,
     ]);
 
     return (
         <EventWorkingListsTemplateSetup
             {...passOnProps}
-            dataSource={dataSourceArray}
+            dataSource={dataSource}
             columns={columns}
             rowIdKey="eventId"
         />

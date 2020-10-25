@@ -172,12 +172,26 @@ const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryComb
     return apiQueryArgsWithServerPropName;
 };
 
-export const getEventWorkingListDataAsync = async (
+export const getEventListData = async (
     queryArgs: InputQueryArgs,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
     categoryCombinationMeta: ?Object,
 ) => {
     const mainColumns = getMainColumns(columnsMetaForDataFetching);
-    const events = await getEvents(createApiQueryArgs(queryArgs, mainColumns, categoryCombinationMeta));
-    return events;
+    const { eventContainers, pagingData, request } =
+        await getEvents(createApiQueryArgs(queryArgs, mainColumns, categoryCombinationMeta));
+
+    const columnKeys = [...columnsMetaForDataFetching.keys()];
+    const columnFilteredEventContainers: Array<{ id: string, record: Object }> = eventContainers
+        .map(({ id, event, values }) => ({ id, record: { ...event, ...values } }))
+        .map(({ id, record }) => ({
+            id,
+            record: columnKeys.reduce((acc, columnId) => { acc[columnId] = record[columnId]; return acc; }, {}),
+        }));
+
+    return {
+        eventContainers: columnFilteredEventContainers,
+        pagingData,
+        request,
+    };
 };

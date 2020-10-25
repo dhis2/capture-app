@@ -98,7 +98,8 @@ const useView = (
     dispatch: ReduxDispatch,
     categoryCombinationMeta: Object,
     { storeId, workingListsType }: { storeId: string, workingListsType: string }) => {
-    const viewState = useSelector(({ workingLists, workingListsUI, workingListsMeta, workingListsColumnsOrder, workingListsStickyFilters }) => ({
+    const viewState = useSelector(({ workingLists, workingListsUI, workingListsMeta, workingListsColumnsOrder, workingListsStickyFilters, workingListsListRecords }) => ({
+        eventRecords: workingListsListRecords[storeId],
         recordsOrder: workingLists[storeId] && workingLists[storeId].order,
         updating: !!workingListsUI[storeId] && !!workingListsUI[storeId].isUpdating,
         loading: !!workingListsUI[storeId] && !!workingListsUI[storeId].isLoading,

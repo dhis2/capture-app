@@ -5,6 +5,25 @@ import { workingListsCommonActionTypes } from '../../../components/Pages/MainPag
 import { eventWorkingListsActionTypes } from '../../../components/Pages/MainPage/EventWorkingLists';
 import { recentlyAddedEventsActionTypes } from '../../../components/Pages/NewEvent/RecentlyAddedEventsList';
 
+export const workingListsListRecordsDesc = createReducerDescription({
+    [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, { payload: { storeId, recordContainers } }) => ({
+        ...state,
+        [storeId]: recordContainers
+            .reduce((acc, { record, id }) => {
+                acc[id] = record;
+                return acc;
+            }, {}),
+    }),
+    [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, { payload: { storeId, recordContainers } }) => ({
+        ...state,
+        [storeId]: recordContainers
+            .reduce((acc, { record, id }) => {
+                acc[id] = record;
+                return acc;
+            }, {}),
+    }),
+}, 'workingListsListRecords');
+
 export const workingListsTemplatesDesc = createReducerDescription({
     [workingListsCommonActionTypes.TEMPLATES_FETCH]: (state, action) => {
         const { storeId } = action.payload;
@@ -273,24 +292,20 @@ export const workingListsDesc = createReducerDescription({
     },
     [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const { storeId, eventContainers, request } = action.payload;
+        const { storeId, recordContainers, request } = action.payload;
         newState[storeId] = {
-            order: eventContainers ?
-                eventContainers
-                    .map(container => container.event.eventId) : [],
-            type: 'event',
+            order: recordContainers
+                .map(({ id }) => id),
             currentRequest: request,
         };
         return newState;
     },
     [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const { storeId, eventContainers, request } = action.payload;
+        const { storeId, recordContainers, request } = action.payload;
         newState[storeId] = {
-            order: eventContainers ?
-                eventContainers
-                    .map(container => container.event.eventId) : [],
-            type: 'event',
+            order: recordContainers
+                .map(({ id }) => id),
             currentRequest: request,
         };
 

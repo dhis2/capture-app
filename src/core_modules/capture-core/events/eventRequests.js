@@ -146,9 +146,10 @@ export async function getEvents(queryParams: ?Object) {
             accEvents.push(eventContainer);
         }
         return accEvents;
-    }, Promise.resolve([])) : null;
+    }, Promise.resolve([])) : [];
 
-    const eventContainersWithSubValues = eventContainers ? (await addPostSubValues(eventContainers)) : null;
+    // TODO: Move this logic. We don't always need the subvalues. Common methods for getting subvalues by type might make sense.
+    const eventContainersWithSubValues = await addPostSubValues(eventContainers);
 
     const pagingData = {
         rowsCount: apiRes.pager.total,

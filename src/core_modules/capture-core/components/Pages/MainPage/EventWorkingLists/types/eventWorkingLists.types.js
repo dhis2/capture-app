@@ -1,8 +1,9 @@
 // @flow
 import { dataElementTypes } from '../../../../../metaData';
 
-export type EventsMainProperties = { [eventId: string]: Object, eventId: string };
-export type EventsDataElementValues = { [eventId: string]: Object};
+type EventRecord = { [id: string]: any };
+
+export type EventRecords = { [eventId: string]: EventRecord };
 
 export type ColumnMetaForDataFetching = {
     id: string,
