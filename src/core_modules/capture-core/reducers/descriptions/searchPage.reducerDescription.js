@@ -34,12 +34,10 @@ export const searchPageDesc = createReducerDescription({
         ...state,
         searchStatus: searchPageStatus.ERROR,
     }),
-    [searchPageActionTypes.SEARCH_RESULTS_TOO_MANY_VIEW]: (state) => {
-        return {
-            ...state,
-            searchStatus: searchPageStatus.TOO_MANY_RESULTS,
-        };
-    },
+    [searchPageActionTypes.SEARCH_RESULTS_TOO_MANY_VIEW]: state => ({
+        ...state,
+        searchStatus: searchPageStatus.TOO_MANY_RESULTS,
+    }),
     [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
         ...state,
         currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
