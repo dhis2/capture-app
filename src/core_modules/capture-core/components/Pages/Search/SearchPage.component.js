@@ -13,6 +13,7 @@ import {
     ModalActions,
     ButtonStrip,
     Button,
+    NoticeBox,
 } from '@dhis2/ui';
 import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './SearchPage.types';
@@ -51,16 +52,11 @@ const getStyles = (theme: Theme) => ({
     backButton: {
         marginBottom: 10,
     },
-    errorTitle: {
-        fontSize: theme.typography.pxToRem(16),
-        fontWeight: 500,
-        padding: '12px 0',
-    },
-    generalPurposeErrorMessage: {
-        marginLeft: theme.typography.pxToRem(12),
-        marginTop: theme.typography.pxToRem(10),
-        marginBottom: theme.typography.pxToRem(20),
-        color: theme.palette.error.main,
+    informativeMessage: {
+        marginLeft: theme.typography.pxToRem(10),
+        marginTop: theme.typography.pxToRem(20),
+        marginBottom: theme.typography.pxToRem(28),
+        marginRight: theme.typography.pxToRem(10),
     },
     loadingMask: {
         display: 'flex',
@@ -191,13 +187,31 @@ const Index = ({
                             searchStatus === searchPageStatus.ERROR &&
                             <div
                                 data-test="dhis2-capture-general-purpose-error-mesage"
-                                className={classes.generalPurposeErrorMessage}
+                                className={classes.informativeMessage}
                             >
-                                <div className={classes.errorTitle}>
-                                    {i18n.t('An error has occurred')}
-                                </div>
-                                {i18n.t('There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools')}
+                                <NoticeBox
+                                    title={i18n.t('An error has occurred')}
+                                    error
+                                >
+                                    {i18n.t('There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools')}
+                                </NoticeBox>
                             </div>
+                        }
+
+                        {
+                            searchStatus === searchPageStatus.TOO_MANY_RESULTS &&
+                            <div
+                                data-test="dhis2-capture-general-purpose-too-many-results-mesage"
+                                className={classes.informativeMessage}
+                            >
+                                <NoticeBox
+                                    title={i18n.t('Too many results')}
+                                    warning
+                                >
+                                    {i18n.t('This search returned too many results to show. Try changing search terms or searching by more attributes to narrow down the results.')}
+                                </NoticeBox>
+                            </div>
+
                         }
                     </div>
                 </Paper>

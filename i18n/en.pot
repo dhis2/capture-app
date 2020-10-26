@@ -741,6 +741,14 @@ msgid ""
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
 
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
 msgid "Make a selection to start searching"
 msgstr ""
 
