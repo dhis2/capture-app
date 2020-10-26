@@ -836,7 +836,7 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Координатани ўрнатинг"
 
 msgid "Page {{currentPage}}"
 msgstr ""
