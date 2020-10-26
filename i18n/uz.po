@@ -699,7 +699,7 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Координатани ўрнатинг"
 
 msgid "Date"
 msgstr "Сана"
