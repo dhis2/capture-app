@@ -25,6 +25,7 @@ const pageKeys = {
     VIEW_EVENT: 'viewEvent',
     NEW_ENROLLMENT: 'newEnrollment',
     SEARCH: 'search',
+    NEW: 'new',
 };
 
 const specificationForPages = {
@@ -74,12 +75,23 @@ const specificationForPages = {
             propKey: 'orgUnitId',
         },
     ],
+    [pageKeys.NEW]: [
+        {
+            urlKey: 'programId',
+            propKey: 'programId',
+        },
+        {
+            urlKey: 'orgUnitId',
+            propKey: 'orgUnitId',
+        },
+    ],
 };
 
 const updaterForPages = {
     [pageKeys.MAIN]: updateSelectionsFromUrl,
     [pageKeys.NEW_EVENT]: updateSelectionsFromUrl,
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
+    [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
     [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,
 };
