@@ -499,7 +499,7 @@ msgid "Program"
 msgstr "Программа"
 
 msgid "Organisation Unit"
-msgstr "Ташкилий бирлик"
+msgstr "Ташкилий бўлим"
 
 msgid "Registration"
 msgstr "Рўйхатдан ўтиш"
@@ -615,7 +615,7 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Координатани ўрнатинг"
 
 msgid "Date"
 msgstr "Сана"
