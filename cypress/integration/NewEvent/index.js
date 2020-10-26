@@ -58,7 +58,7 @@ When('you fill in the registration details', () => {
         .type('Sarah');
     cy.get('[data-test="dhis2-capture-form-field-zDhUuAYrxNC"]')
         .find('input')
-        .type('Wheeler');
+        .type('Gonz');
     cy.get('[data-test="dhis2-capture-form-field-cejWyOfXge6"]')
         .find('input')
         .type('Female{enter}', { force: true });
