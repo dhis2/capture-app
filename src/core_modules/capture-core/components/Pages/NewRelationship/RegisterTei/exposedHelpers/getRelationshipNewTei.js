@@ -15,10 +15,18 @@ import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 
 function getTrackerProgramMetadata(programId: string) {
     const program = getTrackerProgramThrowIfNotFound(programId);
+    const trackedEntityTypeRelatedInfo = program.trackedEntityType ?
+        {
+            attributes: program.trackedEntityType.attributes,
+            tetName: program.trackedEntityType.name,
+        } :
+        {
+            attributes: [],
+            tetName: '',
+        };
     return {
         form: program.enrollment.enrollmentForm,
-        attributes: program.trackedEntityType.attributes,
-        tetName: program.trackedEntityType.name,
+        ...trackedEntityTypeRelatedInfo,
     };
 }
 

@@ -151,7 +151,7 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
             const contextId = programId || trackedEntityTypeId;
             if (programId) {
                 const program = getTrackerProgram(programId);
-                trackedEntityTypeId = program.trackedEntityType.id;
+                trackedEntityTypeId = program.trackedEntityType ? program.trackedEntityType.id : null;
             }
             let searchGroups = [];
             if (trackedEntityTypeId) {

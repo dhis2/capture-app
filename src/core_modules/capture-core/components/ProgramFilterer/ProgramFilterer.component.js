@@ -6,7 +6,7 @@ import type { Program } from '../../metaData';
 
 type Props = {
     orgUnitIds: ?Array<string>,
-    baselineFilter: (program: Program) => boolean,
+    baselineFilter: (program: Program) => ?boolean,
     children: (programs: Array<Program>, isFiltered: boolean, passOnProps: Object) => React.Node,
 };
 
