@@ -345,7 +345,7 @@ msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Координатани ўрнатинг"
 
 msgid "Delete polygon"
 msgstr ""
