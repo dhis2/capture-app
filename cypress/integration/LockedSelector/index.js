@@ -209,10 +209,6 @@ When('you click the find button', () => {
         .click();
 });
 
-Then('you stay in the events page since you cant search for events', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
-});
-
 When('you click the find button from the dropdown menu', () => {
     cy.get('[data-test="dhis2-capture-find-button"]')
         .click();
@@ -220,7 +216,7 @@ When('you click the find button from the dropdown menu', () => {
         .click();
 });
 
-Then('you stay in the events page since you cant search for events', () => {
+Then('you navigated to the search page without a program being selected', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/search/orgUnitId=DiszpKrYNg8`);
 });
 
