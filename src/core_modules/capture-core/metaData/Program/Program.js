@@ -18,7 +18,6 @@ export default class Program {
     _access: Access;
     _name: string;
     _shortName: string;
-    // $FlowFixMe[cannot-resolve-name] automated comment
     _stages: Map<string, ProgramStage>;
     _organisationUnits: Object;
     _categoryCombination: ?CategoryCombination;

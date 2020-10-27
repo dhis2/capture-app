@@ -4,12 +4,12 @@ beforeEach(() => {
 
 Given('you are in the main page with no selections made', () => {
     cy.visit('/#/');
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="dhis2-capture-new-event-button"]')
         .should('exist');
 });
 
 When('you click the "New" button to add a new event', () => {
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="dhis2-capture-new-event-button"]')
         .click();
 });
 
@@ -21,13 +21,13 @@ Then('you should see informative text saying you should do finish your selection
 
 Given('you are in the main page with organisation unit preselected', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="dhis2-capture-new-event-button"]')
         .should('exist');
 });
 
 Given('you are in the main page with program unit preselected', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="dhis2-capture-new-event-button"]')
         .should('exist');
 });
 
@@ -209,10 +209,6 @@ When('you click the find button', () => {
         .click();
 });
 
-Then('you stay in the events page since you cant search for events', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
-});
-
 When('you click the find button from the dropdown menu', () => {
     cy.get('[data-test="dhis2-capture-find-button"]')
         .click();
@@ -220,7 +216,7 @@ When('you click the find button from the dropdown menu', () => {
         .click();
 });
 
-Then('you stay in the events page since you cant search for events', () => {
+Then('you navigated to the search page without a program being selected', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/search/orgUnitId=DiszpKrYNg8`);
 });
 
