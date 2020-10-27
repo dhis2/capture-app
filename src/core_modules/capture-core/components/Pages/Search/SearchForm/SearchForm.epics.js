@@ -53,7 +53,7 @@ const getFiltersForAttributesSearchQuery = (formValues) => {
 
     return [...stringFilters, ...rangeFilers];
 };
-const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
+const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) => {
     const stream: Stream = from(getTrackedEntityInstances(queryArgs, attributes));
     return stream.pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
