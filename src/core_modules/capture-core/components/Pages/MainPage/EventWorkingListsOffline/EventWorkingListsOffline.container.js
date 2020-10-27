@@ -7,5 +7,6 @@ const mapStateToProps = (state: ReduxState) => ({
     eventsValues: state.eventsValues,
 });
 
-// $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, () => ({}))(OfflineEventsList);
+const mapDispatchToProps = () => ({});
+
+export const EventWorkingListsOffline = connect(mapStateToProps, mapDispatchToProps)(OfflineEventsList);
