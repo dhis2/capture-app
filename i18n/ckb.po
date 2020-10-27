@@ -1,12 +1,12 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
+# Viktor Varland <viktor@dhis2.org>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -42,6 +42,24 @@ msgstr ""
 "پرۆگرامی کاپچەر دەتواندرێت تەنها لەسەری یەک وەشان و یەک دۆمەین کار بکات. "
 "تکایە پەیجەکەت ریفرێش بکەوە بۆ ئەوەی ئەم وەشانە بکەیتەوە بەڵام ئاگاداربکە "
 "ئەم کردارە وەشانەکانیتر دادەخات"
+
+msgid "Organisation unit"
+msgstr "يةكةي ريكخراو"
+
+msgid "Date of enrollment"
+msgstr ""
+
+msgid "Last updated"
+msgstr ""
+
+msgid "Enrolled"
+msgstr ""
+
+msgid "Previously enrolled"
+msgstr ""
+
+msgid "Not enrolled"
+msgstr ""
 
 msgid "Columns to show in table"
 msgstr "ستونەکانی دەتەوێ دەربکەوێ لە خشتەکە"
@@ -327,14 +345,14 @@ msgstr "پرۆگرامەکە بوونی نیە"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
 
+msgid "Start again"
+msgstr "دووبارە دەستپێبکەوە"
+
 msgid "New {{typeName}}"
 msgstr "{{typeName}} ی نوێ"
 
 msgid "New"
 msgstr "نوێ"
-
-msgid "Start again"
-msgstr "دووبارە دەستپێبکەوە"
 
 msgid "Find"
 msgstr "بدۆزەوە"
@@ -664,6 +682,9 @@ msgstr "{{trackedEntityTypeName}} و لینک دروست بکە"
 msgid "Possible duplicates found"
 msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
 
+msgid "No results found"
+msgstr ""
+
 msgid "An error occured loading possible duplicates"
 msgstr "هەڵەیەک ڕوویدا لە کاتی هێنانی دووبارەبوەکان"
 
@@ -688,9 +709,6 @@ msgstr "بۆ ئەنجامەکان بگەڕێ"
 msgid "No {{trackedEntityTypeName}} found."
 msgstr "هیچ نەدۆزرایوە {{trackedEntityTypeName}} ."
 
-msgid "{{teiCount}} results found for"
-msgstr "{{teiCount}} دۆزرایەوە بۆ"
-
 msgid "New search"
 msgstr "گەڕانی نۆێ"
 
@@ -705,6 +723,56 @@ msgstr " {{trackedEntityType}}ی نوێ دروست بکە"
 
 msgid "Register"
 msgstr "تۆمار بکە"
+
+msgid "Search scope"
+msgstr ""
+
+msgid "Find results from"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+
+msgid "Search {{name}}"
+msgstr ""
+
+msgid "Find by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr "بە پێ ئاتریبیوت بگەڕێ"
+
+msgid "Back"
+msgstr "كةرانةوة"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+
+msgid "Make a selection to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
@@ -737,14 +805,14 @@ msgstr "مافی دروستکردنی ئەم پەیوەندیەت نیە"
 msgid "Add relationship"
 msgstr "پەوەندی درووستبکە"
 
+msgid "Results found"
+msgstr ""
+
 msgid "Selected program"
 msgstr "پرۆگرامە هەڵبژێردراوەکە"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
-
-msgid "Search by attributes"
-msgstr "بە پێ ئاتریبیوت بگەڕێ"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "بەلانی کەم ئەتریبیوتی{{minAttributesRequired}} پڕبەکەرەوەبۆ گەڕان"
@@ -792,6 +860,9 @@ msgstr "نمونەی یەکەی بەدواداچوون"
 
 msgid "Set coordinate"
 msgstr "هێڵی درێژی و پانی دیاریبکە"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "بەروار"

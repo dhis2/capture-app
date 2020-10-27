@@ -4,7 +4,7 @@ import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../d2/d2Instance';
 import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
-import elementTypes from '../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../metaData';
 
 type ApiDataValue = {
     dataElement: string,
@@ -56,8 +56,7 @@ function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
                 const valueToConvert = apiEvent[inputKey];
                 let convertedValue;
                 if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
-                    // $FlowFixMe[prop-missing] automated comment
-                    convertedValue = convertValue(valueToConvert, elementTypes.DATE);
+                    convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
                 } else {
                     convertedValue = valueToConvert;
                 }

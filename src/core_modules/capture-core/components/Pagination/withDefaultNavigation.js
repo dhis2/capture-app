@@ -19,9 +19,8 @@ const styles = (theme: Theme) => ({
 });
 
 type Props = {
-    rowsPerPage: number,
+    nextPageButtonDisabled: boolean,
     currentPage: number,
-    rowsCount: number,
     onChangePage: (pageNumber: number) => void,
     classes: {
         root: string,
@@ -42,13 +41,8 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
             this.props.onChangePage(this.props.currentPage + 1);
         };
 
-        handleLastPageButtonClick = () => {
-            this.props.onChangePage(
-                Math.max(1, Math.ceil(this.props.rowsCount / this.props.rowsPerPage)));
-        };
-
         renderNavigationElement() {
-            const { rowsPerPage, currentPage, rowsCount, classes, theme } = this.props;
+            const { currentPage, classes, theme, nextPageButtonDisabled } = this.props;
 
             return (
                 <div
@@ -73,18 +67,10 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                     <IconButton
                         data-test={'dhis2-capture-search-pagination-next-page'}
                         onClick={this.handleNextButtonClick}
-                        disabled={currentPage >= Math.ceil(rowsCount / rowsPerPage)}
+                        disabled={nextPageButtonDisabled}
                         aria-label="Next Page"
                     >
                         {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-                    </IconButton>
-                    <IconButton
-                        data-test={'dhis2-capture-search-pagination-last-page'}
-                        onClick={this.handleLastPageButtonClick}
-                        disabled={currentPage >= Math.ceil(rowsCount / rowsPerPage)}
-                        aria-label="Last Page"
-                    >
-                        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
                     </IconButton>
                 </div>
             );

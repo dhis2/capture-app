@@ -10,6 +10,7 @@ const makeMapStateToProps = () => {
         const dataElements = dataElementsSelector(props);
         const attributeValues = clientValuesSelector(props, dataElements);
         return {
+            programId: state.newRelationshipRegisterTei.programId,
             dataElements,
             attributeValues,
         };

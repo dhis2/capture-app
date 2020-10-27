@@ -8,9 +8,14 @@ export const actionTypes = {
     DUPLICATES_REVIEW_CHANGE_PAGE: 'RelationshipTeiRegistrationDuplicatesChangePage',
 };
 
-export const reviewDuplicates = () => actionCreator(actionTypes.DUPLICATES_REVIEW)();
-export const duplicatesForReviewRetrievalSuccess =
-    (teis: Array<Object>, paginationData: ?Object) =>
-        actionCreator(actionTypes.DUPLICATES_REVIEW_RETRIEVAL_SUCCESS)({ teis, paginationData });
-export const duplicatesForReviewRetrievalFailed = () => actionCreator(actionTypes.DUPLICATES_REVIEW_RETRIEVAL_FAILED)();
-export const changePage = (page: number) => actionCreator(actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE)({ page });
+export const reviewDuplicates = (pageSize: number) =>
+    actionCreator(actionTypes.DUPLICATES_REVIEW)({ pageSize });
+
+export const duplicatesForReviewRetrievalSuccess = (teis: Array<Object>, currentPage: number) =>
+    actionCreator(actionTypes.DUPLICATES_REVIEW_RETRIEVAL_SUCCESS)({ teis, currentPage });
+
+export const duplicatesForReviewRetrievalFailed = () =>
+    actionCreator(actionTypes.DUPLICATES_REVIEW_RETRIEVAL_FAILED)();
+
+export const changePage = (page: number, pageSize: number) =>
+    actionCreator(actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE)({ page, pageSize });

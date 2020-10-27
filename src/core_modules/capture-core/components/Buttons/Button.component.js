@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Button as D2Button } from '@dhis2/ui-core';
+import { Button as D2Button } from '@dhis2/ui';
 
 type Props = {};
 

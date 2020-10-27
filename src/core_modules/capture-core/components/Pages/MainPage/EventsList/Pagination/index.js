@@ -1,3 +1,3 @@
 // @flow
-export { default as ListPagination } from './ListPagination';
+export { ListPagination } from './ListPagination.container';
 export { actionTypes } from './pagination.actions';

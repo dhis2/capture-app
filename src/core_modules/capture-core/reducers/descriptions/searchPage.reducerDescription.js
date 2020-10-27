@@ -15,11 +15,11 @@ export const searchPageDesc = createReducerDescription({
         ...state,
         searchStatus: searchPageStatus.INITIAL,
     }),
-    [searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW]: (state, { payload: { searchResults, searchResultsPaginationInfo } }) => ({
+    [searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW]: (state, { payload: { searchResults, currentPage } }) => ({
         ...state,
         searchStatus: searchPageStatus.SHOW_RESULTS,
         searchResults,
-        searchResultsPaginationInfo,
+        currentPage,
     }),
     [searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW]: state => ({
         ...state,
@@ -41,9 +41,5 @@ export const searchPageDesc = createReducerDescription({
     searchStatus: searchPageStatus.INITIAL,
     searchResults: [],
     currentSearchInfo: [],
-    searchResultsPaginationInfo: {
-        rowsCount: 0,
-        rowsPerPage: 0,
-        currentPage: 0,
-    },
+    currentPage: 0,
 });

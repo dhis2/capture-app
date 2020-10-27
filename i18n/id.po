@@ -1,17 +1,17 @@
 # 
 # Translators:
 # phil_dhis2, 2019
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2020
 # Carwoto Sa'an <carwoto@gmail.com>, 2020
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Carwoto Sa'an <carwoto@gmail.com>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,6 +38,24 @@ msgid ""
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
+msgstr ""
+
+msgid "Organisation unit"
+msgstr "Unit organisasi"
+
+msgid "Date of enrollment"
+msgstr "Tanggal pendaftaran"
+
+msgid "Last updated"
+msgstr "Terakhir diperbarui"
+
+msgid "Enrolled"
+msgstr ""
+
+msgid "Previously enrolled"
+msgstr ""
+
+msgid "Not enrolled"
 msgstr ""
 
 msgid "Columns to show in table"
@@ -322,14 +340,14 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
+msgid "Start again"
+msgstr ""
+
 msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
 msgstr "Baru"
-
-msgid "Start again"
-msgstr ""
 
 msgid "Find"
 msgstr "Cari"
@@ -649,6 +667,9 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
+msgid "No results found"
+msgstr "Tidak ada hasil ditemukan"
+
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
@@ -673,9 +694,6 @@ msgstr ""
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
-msgid "{{teiCount}} results found for"
-msgstr ""
-
 msgid "New search"
 msgstr ""
 
@@ -690,6 +708,56 @@ msgstr ""
 
 msgid "Register"
 msgstr "Daftar"
+
+msgid "Search scope"
+msgstr ""
+
+msgid "Find results from"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+
+msgid "Search {{name}}"
+msgstr ""
+
+msgid "Find by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Back"
+msgstr "Kembali"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+
+msgid "Make a selection to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr ""
@@ -720,13 +788,13 @@ msgstr ""
 msgid "Add relationship"
 msgstr "Tambahkan hubungan"
 
+msgid "Results found"
+msgstr ""
+
 msgid "Selected program"
 msgstr "Program yang dipilih"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
-
-msgid "Search by attributes"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
@@ -773,6 +841,9 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Tentukan koordinat"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "Tanggal"

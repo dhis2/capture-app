@@ -1,16 +1,16 @@
 # 
 # Translators:
-# phil_dhis2, 2019
+# phil_dhis2, 2020
+# easylin <lin_xd@126.com>, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 晓东 林 <13981924470@126.com>, 2020
-# easylin <lin_xd@126.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2020\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,6 +38,24 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr "在同一个容器中你打开了其它版本的采集App。当前，该应用仅仅支持同时运行一个版本应用。请刷新页面，如果你想使用该版本。注意将关闭其它版本。"
+
+msgid "Organisation unit"
+msgstr "机构"
+
+msgid "Date of enrollment"
+msgstr "注册日期"
+
+msgid "Last updated"
+msgstr "上次更新"
+
+msgid "Enrolled"
+msgstr "已注册"
+
+msgid "Previously enrolled"
+msgstr "以前报名的"
+
+msgid "Not enrolled"
+msgstr "未注册"
 
 msgid "Columns to show in table"
 msgstr "表中显示的列"
@@ -321,14 +339,14 @@ msgstr "项目不存在"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "选择的项目对选择的机构无效"
 
+msgid "Start again"
+msgstr "再开始"
+
 msgid "New {{typeName}}"
 msgstr "新建 {{typeName}}"
 
 msgid "New"
 msgstr "新建"
-
-msgid "Start again"
-msgstr "再开始"
 
 msgid "Find"
 msgstr "查询"
@@ -648,6 +666,9 @@ msgstr "创建 {{trackedEntityTypeName}}  和链接"
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
 
+msgid "No results found"
+msgstr "没有结果"
+
 msgid "An error occured loading possible duplicates"
 msgstr "载入可能的重复发生错误"
 
@@ -672,9 +693,6 @@ msgstr "搜索结果"
 msgid "No {{trackedEntityTypeName}} found."
 msgstr "没有发现  {{trackedEntityTypeName}} "
 
-msgid "{{teiCount}} results found for"
-msgstr "发现 {{teiCount}} 条结果"
-
 msgid "New search"
 msgstr "新搜索"
 
@@ -689,6 +707,56 @@ msgstr "创建新的{{trackedEntityType}}"
 
 msgid "Register"
 msgstr "注册"
+
+msgid "Search scope"
+msgstr "搜索范围"
+
+msgid "Find results from"
+msgstr "查找结果来自"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
+
+msgid "Search {{name}}"
+msgstr "搜索{{name}}"
+
+msgid "Find by {{name}}"
+msgstr "按{{name}}查找"
+
+msgid "Search by attributes"
+msgstr "按属性搜索"
+
+msgid "Back"
+msgstr "后退"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
+
+msgid "Back to search"
+msgstr "返回搜寻"
+
+msgid "An error has occurred"
+msgstr "发生了错误"
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr "该搜索存在问题，请更改搜索词或稍后再试。有关更多详细信息，请打开开发人员工具的控制台选项卡。"
+
+msgid "Make a selection to start searching"
+msgstr "先选择后开始搜索"
+
+msgid "View dashboard"
+msgstr "查看仪表盘"
+
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
@@ -719,14 +787,14 @@ msgstr "你没有权限创建任何关系"
 msgid "Add relationship"
 msgstr "添加关系"
 
+msgid "Results found"
+msgstr ""
+
 msgid "Selected program"
 msgstr "选择的项目"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
-
-msgid "Search by attributes"
-msgstr "按属性搜索"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
@@ -772,6 +840,9 @@ msgstr "跟踪的实体实例"
 
 msgid "Set coordinate"
 msgstr "设置坐标"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "日期"

@@ -1,14 +1,14 @@
 # 
 # Translators:
-# phil_dhis2, 2019
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
+# phil_dhis2, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
 # Bram Piot <bram.piot@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Bram Piot <bram.piot@gmail.com>, 2020\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -37,6 +37,24 @@ msgid ""
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
+msgstr ""
+
+msgid "Organisation unit"
+msgstr "Unité d'organisation"
+
+msgid "Date of enrollment"
+msgstr "Date d'inscription"
+
+msgid "Last updated"
+msgstr "Dernière mise à jour"
+
+msgid "Enrolled"
+msgstr ""
+
+msgid "Previously enrolled"
+msgstr ""
+
+msgid "Not enrolled"
 msgstr ""
 
 msgid "Columns to show in table"
@@ -321,14 +339,14 @@ msgstr "Le programme n'existe pas"
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
+msgid "Start again"
+msgstr "Recommencer"
+
 msgid "New {{typeName}}"
 msgstr "Nouveau {{typeName}}"
 
 msgid "New"
 msgstr "Nouveau"
-
-msgid "Start again"
-msgstr "Recommencer"
 
 msgid "Find"
 msgstr "Trouver"
@@ -648,6 +666,9 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
+msgid "No results found"
+msgstr ""
+
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
@@ -672,9 +693,6 @@ msgstr "Résultats de la recherche"
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
-msgid "{{teiCount}} results found for"
-msgstr "{{teiCount}} résultats trouvés pour"
-
 msgid "New search"
 msgstr "Nouvelle recherche"
 
@@ -689,6 +707,56 @@ msgstr ""
 
 msgid "Register"
 msgstr "Enregistrer"
+
+msgid "Search scope"
+msgstr ""
+
+msgid "Find results from"
+msgstr ""
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+
+msgid "Search {{name}}"
+msgstr ""
+
+msgid "Find by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr "Chercher par attributs"
+
+msgid "Back"
+msgstr "Précédent"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+
+msgid "Make a selection to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr ""
@@ -719,14 +787,14 @@ msgstr ""
 msgid "Add relationship"
 msgstr "Ajouetr relation"
 
+msgid "Results found"
+msgstr ""
+
 msgid "Selected program"
 msgstr "Programme choisi"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Chercher {{uniqueAttrName}}"
-
-msgid "Search by attributes"
-msgstr "Chercher par attributs"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
@@ -772,6 +840,9 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Définir les coordonnées"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "Date"

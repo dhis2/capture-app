@@ -21,11 +21,11 @@ export const searchViaUniqueIdOnScopeTrackedEntityType = ({ trackedEntityTypeId,
 export const searchViaUniqueIdOnScopeProgram = ({ programId, formId }) =>
     actionCreator(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId });
 
-export const searchViaAttributesOnScopeTrackedEntityType = ({ trackedEntityTypeId, formId, page = 1 }) =>
-    actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId, page });
+export const searchViaAttributesOnScopeTrackedEntityType = ({ trackedEntityTypeId, formId, page = 1, pageSize, triggeredFrom }) =>
+    actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId, page, pageSize, triggeredFrom });
 
-export const searchViaAttributesOnScopeProgram = ({ programId, formId, page = 1 }) =>
-    actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId, page });
+export const searchViaAttributesOnScopeProgram = ({ programId, formId, page = 1, pageSize, triggeredFrom }) =>
+    actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId, page, pageSize, triggeredFrom });
 
 export const navigateToMainPage = () => actionCreator(searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE)();
 
@@ -42,7 +42,7 @@ export const showLoadingViewOnSearchPage = () =>
 export const showEmptyResultsViewOnSearchPage = () =>
     actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW)();
 
-export const showSuccessResultsViewOnSearchPage = (searchResults, pagingData) =>
+export const showSuccessResultsViewOnSearchPage = (searchResults, currentPage) =>
     actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW)(
-        { searchResults, searchResultsPaginationInfo: pagingData },
+        { searchResults, currentPage },
     );

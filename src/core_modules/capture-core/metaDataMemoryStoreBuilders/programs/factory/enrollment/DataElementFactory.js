@@ -41,7 +41,6 @@ class DataElementFactory {
             o.compulsory = false;
             o.displayInForms = true;
             o.disabled = false;
-            // $FlowFixMe[prop-missing] automated comment
             o.type = featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
         });
         return dataElement;
@@ -211,7 +210,6 @@ class DataElementFactory {
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
     ) {
         const dateDataElement = new DateDataElement();
-        // $FlowFixMe[prop-missing] automated comment
         dateDataElement.type = dataElementTypes.DATE;
         dateDataElement.allowFutureDate = cachedProgramTrackedEntityAttribute.allowFutureDate;
         await this._setBaseProperties(
@@ -238,7 +236,6 @@ class DataElementFactory {
             return null;
         }
 
-        // $FlowFixMe[prop-missing] automated comment
         return cachedTrackedEntityAttribute.valueType === dataElementTypes.DATE ?
             this._buildDateDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute) :
             this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute);
