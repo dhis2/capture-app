@@ -102,7 +102,7 @@
     "fake-indexeddb": "^2.1.1",
     "flow-bin": "^0.132.0",
     "husky": "^4.3.0",
-    "jest-localstorage-mock": "^2.4.0",
+    "jest-localstorage-mock": "^2.4.3",
     "jsdoc": "^3.6.6",
     "jsdoc-babel": "^0.5.0",
     "jsdoc-export-default-interop": "^0.3.1",
