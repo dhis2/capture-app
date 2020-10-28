@@ -150,7 +150,10 @@ class SearchForm extends React.Component<Props> {
         }
         const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
         return (
-            <div className={classes.container}>
+            <div
+                data-test="dhis2-capture-d2-form-area"
+                className={classes.container}
+            >
                 <D2Form
                     formRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={searchGroup.searchForm}

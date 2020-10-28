@@ -2,6 +2,7 @@
 import log from 'loglevel';
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { errorCreator } from 'capture-core-utils';
 import { actionTypes as urlActionTypes } from '../../actions/url.actions';
 import {
@@ -27,7 +28,7 @@ export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store
             const state = store.value;
             const selectionsComplete = state.currentSelections.complete;
             if (!selectionsComplete) {
-                return selectionsNotCompleteOpeningNewEnrollment();
+                return of(selectionsNotCompleteOpeningNewEnrollment());
             }
 
             const programId = state.currentSelections.programId;

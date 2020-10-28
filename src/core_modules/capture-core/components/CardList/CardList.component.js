@@ -9,10 +9,10 @@ import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Sea
 type OwnProps = $ReadOnly<{|
     dataElements: CardDataElementsInformation,
     items: Array<SearchResultItem>,
-    getCustomItemTopElements?: ?(itemProps: Object) => Element<any>,
-    getCustomItemBottomElements?: ?(itemProps: Object) => Element<any>,
     currentProgramId?: string,
+    currentSearchScopeName?: string,
     noItemsText?: string,
+    getCustomItemBottomElements?: (itemProps: Object) => Element<any>,
 |}>
 
 const getStyles = (theme: Theme) => ({
@@ -22,20 +22,18 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-
 const CardListIndex = ({
     classes,
     items,
     getCustomItemBottomElements,
-    getCustomItemTopElements,
     dataElements,
     noItemsText,
     currentProgramId,
+    currentSearchScopeName,
 }: OwnProps & CssClasses) => {
-    const { imageDataElement } = makeElementsContainerSelector()(dataElements);
-
+    const { profileImageDataElement, dataElementsExceptProfileImage } = makeElementsContainerSelector()(dataElements);
     return (
-        <>
+        <div data-test="dhis2-capture-search-results-list">
             {
                 (!items || items.length === 0)
                     ?
@@ -47,15 +45,15 @@ const CardListIndex = ({
                         <CardListItem
                             key={item.id}
                             item={item}
+                            currentSearchScopeName={currentSearchScopeName}
                             currentProgramId={currentProgramId}
-                            getCustomTopElements={getCustomItemTopElements}
                             getCustomBottomElements={getCustomItemBottomElements}
-                            imageDataElement={imageDataElement}
-                            dataElements={dataElements}
+                            profileImageDataElement={profileImageDataElement}
+                            dataElements={dataElementsExceptProfileImage}
                         />
                     ))
             }
-        </>
+        </div>
     );
 };
 

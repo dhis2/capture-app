@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Chip } from '@dhis2/ui-core';
+import { Chip } from '@dhis2/ui';
 import { TextFieldPlain } from 'capture-ui';
 import defaultClasses from './selected.module.css';
 

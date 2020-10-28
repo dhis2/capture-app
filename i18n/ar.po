@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -45,6 +45,12 @@ msgstr ""
 "حالياً تشغيل نسخة واحدة فقط بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
 "الصفحة إذا كنت ترغب في استخدام هذه النسخة، ولكن اعلم أن هذا سيؤدي إلى إغلاق "
 "النسخ الأخرى."
+
+msgid "Organisation unit"
+msgstr "الوحدة التنظيمية"
+
+msgid "Date of enrollment"
+msgstr "تاريخ التسجيل"
 
 msgid "Last updated"
 msgstr "آخر تحديث"
@@ -674,6 +680,9 @@ msgstr "إنشاء {{trackedEntityTypeName}} وربط"
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
 
+msgid "No results found"
+msgstr "لم يتم العثور على أي نتائج"
+
 msgid "An error occured loading possible duplicates"
 msgstr "حدث خطأ أثناء تحميل التكرارات المحتملة"
 
@@ -697,9 +706,6 @@ msgstr "نتائج البحث"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr "لم يتم إيجاد {{trackedEntityTypeName}}"
-
-msgid "{{teiCount}} results found for"
-msgstr "تم العثور على هذه نتائج لـ {{teiCount}} "
 
 msgid "New search"
 msgstr "بحث جديد"
@@ -738,9 +744,6 @@ msgstr "البحث حسب السمة"
 msgid "Back"
 msgstr "للخلف"
 
-msgid "No results found"
-msgstr "لم يتم العثور على أي نتائج"
-
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
@@ -763,7 +766,10 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
-msgid "result(s) found for term(s)"
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
 msgstr ""
 
 msgid "You dont have access to edit this event"
@@ -794,6 +800,9 @@ msgstr "ليس لديك حق الوصول لإنشاء علاقات"
 
 msgid "Add relationship"
 msgstr "اضف علاقة"
+
+msgid "Results found"
+msgstr ""
 
 msgid "Selected program"
 msgstr "البرنامج المحدد"
@@ -845,6 +854,9 @@ msgstr "نموذج الكيان المتتبع"
 
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "التاريخ"

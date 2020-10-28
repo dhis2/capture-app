@@ -1,17 +1,17 @@
 # 
 # Translators:
 # Marta Vila <marta@dhis2.org>, 2019
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
 # phil_dhis2, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,6 +39,12 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+
+msgid "Organisation unit"
+msgstr "Unidad organizativa"
+
+msgid "Date of enrollment"
+msgstr "Fecha de inscripción"
 
 msgid "Last updated"
 msgstr "Última actualización"
@@ -661,6 +667,9 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
+msgid "No results found"
+msgstr "No results found"
+
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
@@ -683,9 +692,6 @@ msgid "Search results"
 msgstr "Resultados de la búsqueda"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
-
-msgid "{{teiCount}} results found for"
 msgstr ""
 
 msgid "New search"
@@ -725,9 +731,6 @@ msgstr ""
 msgid "Back"
 msgstr "Atrás"
 
-msgid "No results found"
-msgstr "No results found"
-
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
@@ -750,7 +753,10 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
-msgid "result(s) found for term(s)"
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
 msgstr ""
 
 msgid "You dont have access to edit this event"
@@ -781,6 +787,9 @@ msgstr ""
 
 msgid "Add relationship"
 msgstr "Añadir relación"
+
+msgid "Results found"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Programa seleccionado"
@@ -832,6 +841,9 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Establecer coordenadas"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "Fecha"

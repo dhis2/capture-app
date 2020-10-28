@@ -1,16 +1,16 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
-# Bram Piot <bram.piot@gmail.com>, 2020
 # phil_dhis2, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
+# Bram Piot <bram.piot@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2020\n"
+"Last-Translator: Bram Piot <bram.piot@gmail.com>, 2020\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,6 +38,12 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+
+msgid "Organisation unit"
+msgstr "Unité d'organisation"
+
+msgid "Date of enrollment"
+msgstr "Date d'inscription"
 
 msgid "Last updated"
 msgstr "Dernière mise à jour"
@@ -660,6 +666,9 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
+msgid "No results found"
+msgstr ""
+
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
@@ -683,9 +692,6 @@ msgstr "Résultats de la recherche"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
-
-msgid "{{teiCount}} results found for"
-msgstr "{{teiCount}} résultats trouvés pour"
 
 msgid "New search"
 msgstr "Nouvelle recherche"
@@ -724,9 +730,6 @@ msgstr "Chercher par attributs"
 msgid "Back"
 msgstr "Précédent"
 
-msgid "No results found"
-msgstr ""
-
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
@@ -749,7 +752,10 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
-msgid "result(s) found for term(s)"
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
 msgstr ""
 
 msgid "You dont have access to edit this event"
@@ -780,6 +786,9 @@ msgstr ""
 
 msgid "Add relationship"
 msgstr "Ajouetr relation"
+
+msgid "Results found"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Programme choisi"
@@ -831,6 +840,9 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "Définir les coordonnées"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "Date"

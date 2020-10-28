@@ -1,14 +1,14 @@
 # 
 # Translators:
-# KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
+# KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,6 +42,12 @@ msgstr ""
 "پرۆگرامی کاپچەر دەتواندرێت تەنها لەسەری یەک وەشان و یەک دۆمەین کار بکات. "
 "تکایە پەیجەکەت ریفرێش بکەوە بۆ ئەوەی ئەم وەشانە بکەیتەوە بەڵام ئاگاداربکە "
 "ئەم کردارە وەشانەکانیتر دادەخات"
+
+msgid "Organisation unit"
+msgstr "يةكةي ريكخراو"
+
+msgid "Date of enrollment"
+msgstr ""
 
 msgid "Last updated"
 msgstr ""
@@ -676,6 +682,9 @@ msgstr "{{trackedEntityTypeName}} و لینک دروست بکە"
 msgid "Possible duplicates found"
 msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
 
+msgid "No results found"
+msgstr ""
+
 msgid "An error occured loading possible duplicates"
 msgstr "هەڵەیەک ڕوویدا لە کاتی هێنانی دووبارەبوەکان"
 
@@ -699,9 +708,6 @@ msgstr "بۆ ئەنجامەکان بگەڕێ"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr "هیچ نەدۆزرایوە {{trackedEntityTypeName}} ."
-
-msgid "{{teiCount}} results found for"
-msgstr "{{teiCount}} دۆزرایەوە بۆ"
 
 msgid "New search"
 msgstr "گەڕانی نۆێ"
@@ -740,9 +746,6 @@ msgstr "بە پێ ئاتریبیوت بگەڕێ"
 msgid "Back"
 msgstr "كةرانةوة"
 
-msgid "No results found"
-msgstr ""
-
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
@@ -765,7 +768,10 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
-msgid "result(s) found for term(s)"
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
 msgstr ""
 
 msgid "You dont have access to edit this event"
@@ -798,6 +804,9 @@ msgstr "مافی دروستکردنی ئەم پەیوەندیەت نیە"
 
 msgid "Add relationship"
 msgstr "پەوەندی درووستبکە"
+
+msgid "Results found"
+msgstr ""
 
 msgid "Selected program"
 msgstr "پرۆگرامە هەڵبژێردراوەکە"
@@ -851,6 +860,9 @@ msgstr "نمونەی یەکەی بەدواداچوون"
 
 msgid "Set coordinate"
 msgstr "هێڵی درێژی و پانی دیاریبکە"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "بەروار"

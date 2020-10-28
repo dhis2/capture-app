@@ -1,9 +1,9 @@
-name: "dhis2: cypress tests"
+name: "dhis2: tests"
 
 on: [push]
 
 jobs:
-  cypress-run:
+  cypress:
     runs-on: ubuntu-latest
     container: cypress/browsers:node14.7.0-chrome84
     strategy:
@@ -34,4 +34,4 @@ jobs:
     env:
       CI: true
       CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
-      REACT_APP_DHIS2_BASE_URL: 'https://debug.dhis2.org/ca-test-2.35'
+      REACT_APP_DHIS2_BASE_URL: 'https://debug.dhis2.org/ca-test-2.36'

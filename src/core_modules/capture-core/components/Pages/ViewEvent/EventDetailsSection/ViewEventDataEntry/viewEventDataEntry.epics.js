@@ -1,6 +1,7 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
+import { from, of } from 'rxjs';
 import { map, filter, switchMap } from 'rxjs/operators';
 import {
     filterByInnerAction,
@@ -20,7 +21,7 @@ import {
 } from '../../ViewEventComponent/viewEvent.actions';
 import { getProgramAndStageFromEvent } from '../../../../../metaData';
 
-export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
     action$.pipe(
         ofType(
             viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -50,15 +51,17 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
             const viewEventPage = state.viewEventPage || {};
             return viewEventPage.eventId === eventId && !viewEventPage.showEditEvent;
         }),
-        switchMap(async (action) => {
+        switchMap((action) => {
             const eventContainer = action.payload.eventContainer;
             const orgUnit = action.payload.orgUnit;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
-                return prerequisitesErrorLoadingViewEventDataEntry(metadataContainer.error);
+                return of(prerequisitesErrorLoadingViewEventDataEntry(metadataContainer.error));
             }
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
-
-            return batchActions((await loadViewEventDataEntry(eventContainer, orgUnit, foundation, program)));
+            return from(loadViewEventDataEntry(eventContainer, orgUnit, foundation, program))
+                .pipe(
+                    map(item => batchActions(item)),
+                );
         }));

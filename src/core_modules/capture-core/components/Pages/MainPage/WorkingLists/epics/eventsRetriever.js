@@ -156,7 +156,6 @@ const createApiQueryArgs = (queryArgs: Object, mainColumns: Object) => {
     apiQueryArgs.hasOwnProperty('sortById') && delete apiQueryArgs.sortById;
     apiQueryArgs.hasOwnProperty('sortByDirection') && delete apiQueryArgs.sortByDirection;
     apiQueryArgs.hasOwnProperty('filters') && delete apiQueryArgs.filters;
-    apiQueryArgs.hasOwnProperty('rowsCount') && delete apiQueryArgs.rowsCount;
 
     apiQueryArgs = Object
         .keys(apiQueryArgs)

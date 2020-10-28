@@ -13,6 +13,7 @@ type Props = {
     dataElements: CardDataElementsInformation,
     onLink: (values: Object) => void,
     onCancel: Function,
+    programId?: string,
 };
 
 class ExistingTEIContents extends React.Component<Props> {
@@ -20,7 +21,7 @@ class ExistingTEIContents extends React.Component<Props> {
         this.props.onLink(this.props.attributeValues);
     }
     render() {
-        const { attributeValues, dataElements, onCancel } = this.props;
+        const { attributeValues, dataElements, onCancel, programId } = this.props;
 
         const items = [
             {
@@ -36,6 +37,7 @@ class ExistingTEIContents extends React.Component<Props> {
                         {i18n.t('Registered person')}
                     </DialogTitle>
                     <CardList
+                        currentProgramId={programId}
                         items={items}
                         dataElements={dataElements}
                     />

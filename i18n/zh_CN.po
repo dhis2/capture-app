@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Aung Kyi Min <AungKyi.Min@savethechildren.org>, 2019
-# easylin <lin_xd@126.com>, 2020
 # 晓东 林 <13981924470@126.com>, 2020
+# easylin <lin_xd@126.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-16T10:01:51.572Z\n"
+"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: 晓东 林 <13981924470@126.com>, 2020\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,6 +37,12 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+
+msgid "Organisation unit"
+msgstr "组织机构"
+
+msgid "Date of enrollment"
+msgstr "注册日期"
 
 msgid "Last updated"
 msgstr "Last updated"
@@ -659,6 +665,9 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
+msgid "No results found"
+msgstr "没有发现"
+
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
@@ -681,9 +690,6 @@ msgid "Search results"
 msgstr "搜索结果"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
-
-msgid "{{teiCount}} results found for"
 msgstr ""
 
 msgid "New search"
@@ -723,9 +729,6 @@ msgstr ""
 msgid "Back"
 msgstr "后退"
 
-msgid "No results found"
-msgstr "没有发现"
-
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
@@ -748,7 +751,10 @@ msgstr ""
 msgid "View dashboard"
 msgstr ""
 
-msgid "result(s) found for term(s)"
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
 msgstr ""
 
 msgid "You dont have access to edit this event"
@@ -779,6 +785,9 @@ msgstr ""
 
 msgid "Add relationship"
 msgstr "添加关系"
+
+msgid "Results found"
+msgstr ""
 
 msgid "Selected program"
 msgstr "选择的项目"
@@ -830,6 +839,9 @@ msgstr ""
 
 msgid "Set coordinate"
 msgstr "设置坐标"
+
+msgid "Page {{currentPage}}"
+msgstr ""
 
 msgid "Date"
 msgstr "日期"
