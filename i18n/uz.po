@@ -160,7 +160,7 @@ msgid "Validation errors"
 msgstr ""
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "Тасдиқлаш тўғрисида огоҳлантиришлар"
 
 msgid "Some operations are still runnning. Please wait.."
 msgstr ""
@@ -274,7 +274,7 @@ msgid "Online"
 msgstr ""
 
 msgid "Offline"
-msgstr ""
+msgstr "Оффлайн"
 
 msgid "Syncing"
 msgstr ""
@@ -295,7 +295,7 @@ msgid "Status"
 msgstr "Статус"
 
 msgid "Comments"
-msgstr ""
+msgstr "Изоҳлар"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
