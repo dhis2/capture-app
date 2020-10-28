@@ -121,7 +121,7 @@ Feature: Use the LockedSelector to navigate
     Given you are in the main page with no selections made
     And you select both org unit and program Malaria case registration
     When you click the find button
-    Then you stay in the events page since you cant search for events
+    Then you navigated to the search page without a program being selected
 
   Scenario: Clicking the find button when the preselected program can be a search domain
     Given you are in the main page with no selections made

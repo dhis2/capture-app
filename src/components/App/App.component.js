@@ -5,12 +5,12 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import D2UIApp from '@dhis2/d2-ui-app';
-import type { HashHistory } from 'history/createHashHistory';
+import type { HashHistory } from 'history';
 import { AppContents } from './AppContents.component';
 
 type Props = {
     store: ReduxStore,
-    history: HashHistory,
+    history: ?HashHistory,
 };
 
 export const App = ({ store, history }: Props) => (
