@@ -56,9 +56,12 @@ class ProgramSelector extends React.Component<Props> {
     baseLineFilter = (program: Program) => {
         const { trackedEntityTypeId } = this.props;
 
-        return program instanceof TrackerProgram && program.trackedEntityType &&
-        program.trackedEntityType.id === trackedEntityTypeId &&
-        program.access.data.write;
+        return Boolean(
+            program instanceof TrackerProgram &&
+                  program.trackedEntityType &&
+                  program.trackedEntityType.id === trackedEntityTypeId &&
+                  program.access.data.write,
+        );
     }
 
     getOptionsFromPrograms = (programs: Array<Program>): Array<Option> =>
