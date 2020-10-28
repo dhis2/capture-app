@@ -58,9 +58,9 @@ class ProgramSelector extends React.Component<Props> {
 
         return Boolean(
             program instanceof TrackerProgram &&
-              program.trackedEntityType &&
-              program.trackedEntityType.id === trackedEntityTypeId &&
-              program.access.data.write,
+            program.trackedEntityType &&
+            program.trackedEntityType.id === trackedEntityTypeId &&
+            program.access.data.write,
         );
     }
 
