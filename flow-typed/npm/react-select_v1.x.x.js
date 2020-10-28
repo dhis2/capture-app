@@ -1,5 +1,5 @@
-// flow-typed signature: 6545f991d7ceb49d48f582098a080884
-// flow-typed version: c6154227d1/react-select_v1.x.x/flow_>=v0.104.x
+// flow-typed signature: 772d894f79d4917664ddc31fed4cec56
+// flow-typed version: f41d94d535/react-select_v1.x.x/flow_>=v0.104.x
 
 declare module 'react-select' {
   declare type OptionType = { [string]: any, ... };
@@ -171,7 +171,9 @@ declare module 'react-select' {
     valueRenderer?: (option: OptionType, idx?: number) => React$Node,
     // optional style to apply to the component wrapper
     wrapperStyle?: {...},
-    isSearchable?: boolean
+    isSearchable?: boolean,
+    // whether to cache the search results
+    cache?: {...} | false
   |};
 
   declare type AsyncProps = {|

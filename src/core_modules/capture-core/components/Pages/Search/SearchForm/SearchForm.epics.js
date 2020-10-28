@@ -24,8 +24,9 @@ const getFiltersForUniqueIdSearchQuery = (formValues) => {
     return [`${fieldId}:eq:${formValues[fieldId]}`];
 };
 
-const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
-    from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) => {
+    const stream$: Stream = from(getTrackedEntityInstances(queryArgs, attributes));
+    return stream$.pipe(
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length > 0) {
@@ -38,6 +39,7 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
         startWith(showLoadingViewOnSearchPage()),
         catchError(() => of(showErrorViewOnSearchPage())),
     );
+};
 
 const getFiltersForAttributesSearchQuery = (formValues) => {
     const stringFilters = Object.keys(formValues)
@@ -52,8 +54,9 @@ const getFiltersForAttributesSearchQuery = (formValues) => {
 
     return [...stringFilters, ...rangeFilers];
 };
-const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
-    from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) => {
+    const stream: Stream = from(getTrackedEntityInstances(queryArgs, attributes));
+    return stream.pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
                 return showSuccessResultsViewOnSearchPage(
@@ -79,8 +82,9 @@ const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
             return of(showErrorViewOnSearchPage());
         }),
     );
+};
 
-export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
+export const searchViaUniqueIdOnScopeProgramEpic: Epic = (action$, store) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId } }) => {
@@ -99,7 +103,7 @@ export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, st
     );
 
 
-export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic: Epic = (action$, store) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
@@ -117,7 +121,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObse
         }),
     );
 
-export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
+export const searchViaAttributesOnScopeProgramEpic: Epic = (action$, store) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId, page, triggeredFrom } }) => {
@@ -137,7 +141,7 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
         }),
     );
 
-export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const searchViaAttributesOnScopeTrackedEntityTypeEpic: Epic = (action$, store) =>
     action$.pipe(
         ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId, page, triggeredFrom } }) => {

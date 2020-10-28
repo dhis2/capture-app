@@ -1,878 +1,875 @@
 # 
 # Translators:
-# phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
-# 晓东 林 <13981924470@126.com>, 2020
-# easylin <lin_xd@126.com>, 2020
+# Ibatov <ibatovk@who.int>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2020\n"
-"Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
+"Last-Translator: Ibatov <ibatovk@who.int>, 2020\n"
+"Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh\n"
+"Language: uz@Cyrl\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
-msgstr "选择一个或多个日期"
+msgstr ""
 
 msgid "Choose a date..."
-msgstr "选择日期"
+msgstr ""
 
 msgid "Today"
-msgstr "今天"
+msgstr "бугун"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
-msgstr "将 "
+msgstr ""
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
-msgstr "在同一个容器中你打开了其它版本的采集App。当前，该应用仅仅支持同时运行一个版本应用。请刷新页面，如果你想使用该版本。注意将关闭其它版本。"
+msgstr ""
 
 msgid "Organisation unit"
-msgstr "机构"
+msgstr "Ташкилий бўлим"
 
 msgid "Date of enrollment"
-msgstr "注册日期"
+msgstr ""
 
 msgid "Last updated"
-msgstr "上次更新"
+msgstr "Охирги янгиланган"
 
 msgid "Enrolled"
-msgstr "已注册"
+msgstr ""
 
 msgid "Previously enrolled"
-msgstr "以前报名的"
+msgstr ""
 
 msgid "Not enrolled"
-msgstr "未注册"
+msgstr ""
 
 msgid "Columns to show in table"
-msgstr "表中显示的列"
+msgstr ""
 
 msgid "Column"
-msgstr "列"
+msgstr "Устун"
 
 msgid "This value is validating"
-msgstr "值正在被验证"
+msgstr ""
 
 msgid "Async field update failed"
-msgstr "异步字段更新失败"
+msgstr ""
 
 msgid "A value is required"
-msgstr "需要一个值"
+msgstr ""
 
 msgid "Please provide a valid number"
-msgstr "请提供一个有效的数字"
+msgstr ""
 
 msgid "Please provide a valid integer"
-msgstr "请提供一个整数"
+msgstr ""
 
 msgid "Please provide a positive integer"
-msgstr "提供一个正整数"
+msgstr ""
 
 msgid "Please provide zero or a positive integer"
-msgstr "0或负整数"
+msgstr ""
 
 msgid "Please provide a negative integer"
-msgstr "负整数"
+msgstr ""
 
 msgid "Please provide a valid date"
-msgstr "请提供有效的日期"
+msgstr ""
 
 msgid "A date in the future is not allowed"
-msgstr "不允许将来的日期"
+msgstr ""
 
 msgid "Please provide a valid date and time"
-msgstr "日期和时间"
+msgstr ""
 
 msgid "Please provide a valid time"
-msgstr "有效的时间"
+msgstr ""
 
 msgid "Please provide a valid percentage"
-msgstr "有效的百分比"
+msgstr ""
 
 msgid "Please provide a valid url"
-msgstr "有效的URL"
+msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr "有效的邮箱"
+msgstr ""
 
 msgid "Please provide a valid age"
-msgstr "有效的年龄"
+msgstr ""
 
 msgid "Please provide a valid phone number"
-msgstr "有效的电话号码"
+msgstr ""
 
 msgid "Please provide a valid organisation unit"
-msgstr "有效的机构"
+msgstr ""
 
 msgid "Please provide valid coordinates"
-msgstr "有效的坐标"
+msgstr ""
 
 msgid "This value already exists"
-msgstr "值已经存在"
+msgstr ""
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr "自不能大于至"
+msgstr ""
 
 msgid "Checking..."
-msgstr "检查"
+msgstr ""
 
 msgid "Area"
-msgstr "面积"
+msgstr "Майдон"
 
 msgid "Coordinate"
-msgstr "坐标"
+msgstr "Мувофиқлаштириш"
 
 msgid "Enrollment"
-msgstr "注册"
+msgstr "Рўйхатга олиш"
 
 msgid "A future date is not allowed"
-msgstr "将来的日期不允许"
+msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr "发生一个错误,看日志"
+msgstr ""
 
 msgid "Cancel"
-msgstr "取消"
+msgstr "Бекор қилиш"
 
 msgid "Unsaved changes"
-msgstr "没有保存的修改"
+msgstr "Сақланмаган ўзгартиришлар"
 
 msgid "Leaving this page will discard the changes you made to this event."
-msgstr "离开将丢失对事件的修改"
+msgstr ""
 
 msgid "Yes, discard"
-msgstr "是,忽略"
+msgstr ""
 
 msgid "No, stay here"
-msgstr "不,继续呆着"
+msgstr ""
 
 msgid "validation failed"
-msgstr "验证失败"
+msgstr ""
 
 msgid "Errors"
-msgstr "错误"
+msgstr "Хатоликлар"
 
 msgid "Feedback"
-msgstr "反馈"
+msgstr "Қайта алоқа"
 
 msgid "Indicators"
-msgstr "指标"
+msgstr "Индикаторлар"
 
 msgid "Warnings"
-msgstr "错误"
+msgstr ""
 
 msgid "search group result could not be retrieved"
-msgstr "搜索组结果不能提取"
+msgstr ""
 
 msgid "Complete"
-msgstr "完成"
+msgstr "Бажарилди"
 
 msgid "Warnings found"
-msgstr "发现警告"
+msgstr ""
 
 msgid "Abort"
-msgstr "关于"
+msgstr ""
 
 msgid "Back to form"
-msgstr "回到表单"
+msgstr ""
 
 msgid "Save anyway"
-msgstr "总是保存"
+msgstr ""
 
 msgid "Validation errors and warnings"
-msgstr "验证错误和警告"
+msgstr ""
 
 msgid "Validation errors"
-msgstr "验证错误"
+msgstr ""
 
 msgid "Validation warnings"
-msgstr "有效性警告"
+msgstr "Тасдиқлаш тўғрисида огоҳлантиришлар"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr "有些操作一直在运行,请等待"
+msgstr ""
 
 msgid "Operations running"
-msgstr "操作在运行"
+msgstr ""
 
 msgid "Sort"
-msgstr "排序"
+msgstr ""
 
 msgid "No events to display"
-msgstr "无事件可显示"
+msgstr ""
 
 msgid "Data for offline list not present"
-msgstr "离线列表数据不在"
+msgstr ""
 
 msgid "Close"
-msgstr "关闭"
+msgstr "Ёпиқ"
 
 msgid "Please select the user"
-msgstr "请选择用户"
+msgstr ""
 
 msgid "Search for user"
-msgstr "搜索用户 "
+msgstr ""
 
 msgid "Me"
-msgstr "我"
+msgstr ""
 
 msgid "Anyone"
-msgstr "任何人"
+msgstr ""
 
 msgid "None"
-msgstr "无"
+msgstr "Йўқ"
 
 msgid "Select user"
-msgstr "选择用户"
+msgstr ""
 
 msgid "to"
-msgstr "到"
+msgstr "га"
 
 msgid "From"
-msgstr "从"
+msgstr "Дан"
 
 msgid "To"
-msgstr "至"
+msgstr "Кимга"
 
 msgid "This week"
-msgstr "本周"
+msgstr "Ушбу ҳафта"
 
 msgid "This month"
-msgstr "本月"
+msgstr "Ушбу ой"
 
 msgid "This Year"
-msgstr "今年"
+msgstr ""
 
 msgid "Last week"
-msgstr "上周"
+msgstr "Охирги ҳафта"
 
 msgid "Last month"
-msgstr "上月"
+msgstr "Охирги ой"
 
 msgid "Last 3 months"
-msgstr "最近3个月"
+msgstr "Охирги 3 ой"
 
 msgid "Custom range"
-msgstr "定制范围"
+msgstr ""
 
 msgid "Max"
-msgstr "最大"
+msgstr "Максимум"
 
 msgid "Min"
-msgstr "最小"
+msgstr "Минимум"
 
 msgid "Contains text"
-msgstr "包含文本"
+msgstr ""
 
 msgid "Yes"
-msgstr "是"
+msgstr "Ҳа"
 
 msgid "mm/dd/yyyy"
-msgstr "mm/dd/yyyy"
+msgstr ""
 
 msgid "Years"
-msgstr "年"
+msgstr "Йиллар"
 
 msgid "Months"
-msgstr "月"
+msgstr "Ойлар"
 
 msgid "Days"
-msgstr "天"
+msgstr "Кунлар"
 
 msgid "Uploading file"
-msgstr "上传文件"
+msgstr ""
 
 msgid "selected"
-msgstr "选择的"
+msgstr "танланган"
 
 msgid "Delete"
-msgstr "删除"
+msgstr "Ўчириш"
 
 msgid "Select file"
-msgstr "选择文件"
+msgstr "Файлни танлаш"
 
 msgid "No"
-msgstr "否"
+msgstr "Йўқ"
 
 msgid "Uploading image"
-msgstr "上传图像"
+msgstr ""
 
 msgid "Select image"
-msgstr "选择图像"
+msgstr ""
 
 msgid "Search"
-msgstr "搜索"
+msgstr "Излаш"
 
 msgid "Clear"
-msgstr "清除"
+msgstr "Аниқ"
 
 msgid "No results"
-msgstr "无结果"
+msgstr ""
 
 msgid "start typing to search"
-msgstr "开始输入搜索内容"
+msgstr ""
 
 msgid "suggestions could not be retrieved"
-msgstr "建议不能提取"
+msgstr ""
 
 msgid "No items to display"
-msgstr "无条目可显示"
+msgstr ""
 
 msgid "Could not get organisation unit"
-msgstr "不能获取机构"
+msgstr ""
 
 msgid "Program doesn't exist"
-msgstr "项目不存在"
+msgstr ""
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr "选择的项目对选择的机构无效"
+msgstr ""
 
 msgid "Start again"
-msgstr "再开始"
+msgstr ""
 
 msgid "New {{typeName}}"
-msgstr "新建 {{typeName}}"
+msgstr ""
 
 msgid "New"
-msgstr "新建"
+msgstr "Янги"
 
 msgid "Find"
-msgstr "查询"
+msgstr "Топинг"
 
 msgid "Selected registering unit"
-msgstr "选择注册的机构"
+msgstr ""
 
 msgid "Start Again"
-msgstr "再开始"
+msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr "你确信？所以未保存的数据将丢失"
+msgstr ""
 
 msgid "Accept"
-msgstr "接受<br>"
+msgstr "Қабул қилинг"
 
 msgid "Registering Organisation Unit"
-msgstr "在注册的机构"
+msgstr ""
 
 msgid "Select"
-msgstr "选择"
+msgstr "Танланг"
 
 msgid "Selected Program"
-msgstr "选择的项目"
+msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr "有些项目已经被过滤了"
+msgstr ""
 
 msgid "Show all"
-msgstr "显示全部"
+msgstr "Барчага кўрсатиш"
 
 msgid "Program"
-msgstr "项目"
+msgstr "Программа"
 
 msgid "Select program"
-msgstr "选择项目"
+msgstr "Дастурни танлаш"
 
 msgid "No programs available."
-msgstr "无可用项目"
+msgstr ""
 
 msgid "Online"
-msgstr "在线"
+msgstr ""
 
 msgid "Offline"
-msgstr "离线"
+msgstr "Оффлайн"
 
 msgid "Syncing"
-msgstr "同步"
+msgstr ""
 
 msgid "Add comment"
-msgstr "添加备注"
+msgstr ""
 
 msgid "You dont have access to write comments"
-msgstr "你没有权限写备注"
+msgstr ""
 
 msgid "Write comment"
-msgstr "写备注"
+msgstr ""
 
 msgid "Basic info"
-msgstr "基本信息"
+msgstr ""
 
 msgid "Status"
-msgstr "状态"
+msgstr "Статус"
 
 msgid "Comments"
-msgstr "评论"
+msgstr "Изоҳлар"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr "保存事件前请添加或取消被或许"
+msgstr ""
 
 msgid "No write access"
-msgstr "无写权限"
+msgstr ""
 
 msgid "Save"
-msgstr "保存"
+msgstr "Сақлаш"
 
 msgid "Show all events"
-msgstr "显示所有事件"
+msgstr ""
 
 msgid "Edit event"
-msgstr "编辑事件"
+msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "事件不能载入"
+msgstr ""
 
 msgid "Event could not be loaded"
-msgstr "事件不能载入"
+msgstr ""
 
 msgid "Organisation unit could not be loaded"
-msgstr "机构不能载入"
+msgstr ""
 
 msgid "View event info"
-msgstr "查看事件信息"
+msgstr ""
 
 msgid "Delete event"
-msgstr "删除事件"
+msgstr "Тадбирни ўчиринг"
 
 msgid "Update"
-msgstr "更新"
+msgstr "Янгилаш"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} 到 {{toDate}}"
+msgstr ""
 
 msgid "after or equal to {{date}}"
-msgstr "晚于或等于 {{date}}"
+msgstr ""
 
 msgid "before or equal to {{date}}"
-msgstr "早于或等于 {{date}}"
+msgstr ""
 
 msgid "greater than or equal to"
-msgstr "大于等于"
+msgstr ""
 
 msgid "less than or equal to"
-msgstr "小于等于"
+msgstr ""
 
 msgid "More filters"
-msgstr "更多过滤器"
+msgstr ""
 
 msgid "Select columns"
-msgstr "选择列"
+msgstr ""
 
 msgid "Download as JSON"
-msgstr "下载为JSON"
+msgstr ""
 
 msgid "Download as XML"
-msgstr "下载为xml"
+msgstr ""
 
 msgid "Download as CSV"
-msgstr "获取CSV格式报表"
+msgstr "CSV сифатида юкланг"
 
 msgid "Download with current filters"
-msgstr "随着过滤器下载"
+msgstr ""
 
 msgid "Download data..."
-msgstr "下载数据"
+msgstr ""
 
 msgid "Rows per page"
-msgstr "行每页"
+msgstr ""
 
 msgid "Update view"
-msgstr "更新视图"
+msgstr ""
 
 msgid "Save current view..."
-msgstr "保存当前视图"
+msgstr ""
 
 msgid "Save current view as..."
-msgstr "另存当前视图为"
+msgstr ""
 
 msgid "Delete view"
-msgstr "删除视图"
+msgstr ""
 
 msgid "Share view..."
-msgstr "分享视图"
+msgstr ""
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "你真想删除  '{{templateName}}'  视图"
+msgstr ""
 
 msgid "Confirm"
-msgstr "确认"
+msgstr "Тасдиқланг"
 
 msgid "Save As view"
-msgstr "另存视图为"
+msgstr ""
 
 msgid "View name"
-msgstr "视图名称"
+msgstr ""
 
 msgid "Show Less"
-msgstr "显示较少<br>"
+msgstr ""
 
 msgid "Show All"
-msgstr "显示全部"
+msgstr ""
 
 msgid "Working list could not be loaded"
-msgstr "工作列表不能载入"
+msgstr ""
 
 msgid "an error occurred loading working lists"
-msgstr "载入工作列表发生错误"
+msgstr ""
 
 msgid "Registered events"
-msgstr "登记的事件"
+msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
 
 msgid "Active"
-msgstr "活动的"
+msgstr "Фаол"
 
 msgid "Completed"
-msgstr "已完成"
+msgstr "бажарилди"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
+msgstr ""
 
 msgid "Save and add another"
-msgstr "保存并另外添加"
+msgstr ""
 
 msgid "Save and exit"
-msgstr "保存后退出"
+msgstr ""
 
 msgid "Finish"
-msgstr "结束"
+msgstr ""
 
 msgid "Switch to form view"
-msgstr "切换到表单视图"
+msgstr ""
 
 msgid "Switch to row view"
-msgstr "切换到行视图"
+msgstr ""
 
 msgid "New {{TET}}"
-msgstr "新建 {{TET}}"
+msgstr ""
 
 msgid "Working Lists"
-msgstr "工作列表"
+msgstr ""
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
-msgstr "项目标识为 {{programId}}的项目不是跟踪随访项目，注册仅仅可能在跟踪随访项目里进行"
+msgstr ""
 
 msgid "Assigned user"
-msgstr "分配的用户"
+msgstr "Тавсия этилган фойдаланувчи"
 
 msgid "Relationships"
-msgstr "关系"
+msgstr "Ўзаро алоқалар"
 
 msgid "Assignee"
-msgstr "分配者"
+msgstr "Ваколат берилган шахс"
 
 msgid "Saving to"
-msgstr "保存到"
+msgstr ""
 
 msgid "in"
-msgstr " 在"
+msgstr "ичида"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
-msgstr "这不是事件项目或者元数据坏了，查看日志详情"
+msgstr ""
 
 msgid "This event"
-msgstr "该事件"
+msgstr ""
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
-msgstr "{{entityName}} 的 {{relationshipTypeName}}  关系类型已经存在"
+msgstr ""
 
 msgid "New event"
-msgstr "新事件"
+msgstr "Янги ҳодиса"
 
 msgid "New event relationship"
-msgstr "新建事件关系"
+msgstr ""
 
 msgid "Adding relationship to event."
-msgstr "添加关系到事件"
+msgstr ""
 
 msgid "Go back to event without saving relationship"
-msgstr "后退到事件不保存关系"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
-msgstr "离开本页将丢掉你的新关系的选择"
+msgstr ""
 
 msgid "events added"
-msgstr "事件已经被添加"
+msgstr ""
 
 msgid "No events added"
-msgstr "没有事件被添加"
+msgstr ""
 
 msgid "Select a registering unit and program above to get started"
-msgstr "选择一个注册机构和上面的项目开始"
+msgstr ""
 
 msgid "Select a program to start reporting"
-msgstr "选择一个项目开始上报"
+msgstr ""
 
 msgid "Select a registering unit to start reporting"
-msgstr "选择一个机构开始上报"
+msgstr ""
 
 msgid "Select a category option to start reporting"
-msgstr "选择一个分类选项开始上报"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
-msgstr "你没有在当前选择创建事件的权限"
+msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr "存在重复，但是有错误，查看日志详情。"
+msgstr ""
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
-msgstr " 具有 {{attributeName}}  属性的条目已经注册 ，但是你不能访问 "
+msgstr ""
 
 msgid "You have already registered this {{attributeName}}"
-msgstr "你已经登记了该属性"
+msgstr ""
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
-msgstr "一个 {{trackedEntityTypeName}} 且具有 {{attributeName}} 已经注册"
+msgstr ""
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "显示登记的 {{attributeName}} "
+msgstr ""
 
 msgid "Registered person"
-msgstr "注册的人"
+msgstr ""
 
 msgid "Link"
-msgstr "链接"
+msgstr ""
 
 msgid "Metadata error. see log for details"
-msgstr "元数据错误"
+msgstr ""
 
 msgid "Review duplicates"
-msgstr "复查重复"
+msgstr ""
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "创建 {{trackedEntityTypeName}}  和链接"
+msgstr ""
 
 msgid "Possible duplicates found"
-msgstr "发现可能的重复"
+msgstr ""
 
 msgid "No results found"
-msgstr "没有结果"
+msgstr "Ҳеч қандай натижа топилмади"
 
 msgid "An error occured loading possible duplicates"
-msgstr "载入可能的重复发生错误"
+msgstr ""
 
 msgid "Hide"
-msgstr "隐藏"
+msgstr "Яшириш"
 
 msgid "Save as new {{tetName}}"
-msgstr "保存为新的  {{tetName}}"
+msgstr ""
 
 msgid "Organisation Unit"
-msgstr "组织机构"
+msgstr "Ташкилий Бўлим"
 
 msgid "Registration"
-msgstr "注册"
+msgstr "Рўйхатдан ўтиш"
 
 msgid "Review Duplicates"
-msgstr "复查重复"
+msgstr ""
 
 msgid "Search results"
-msgstr "搜索结果"
+msgstr ""
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr "没有发现  {{trackedEntityTypeName}} "
+msgstr ""
 
 msgid "New search"
-msgstr "新搜索"
+msgstr ""
 
 msgid "Edit search"
-msgstr "编辑搜索"
+msgstr ""
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr "链接到存在的 {{trackedEntityType}}"
+msgstr ""
 
 msgid "Create new {{trackedEntityType}}"
-msgstr "创建新的{{trackedEntityType}}"
+msgstr ""
 
 msgid "Register"
-msgstr "注册"
+msgstr "Рўйхат"
 
 msgid "Search scope"
-msgstr "搜索范围"
+msgstr ""
 
 msgid "Find results from"
-msgstr "查找结果来自"
+msgstr ""
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
+msgstr ""
 
 msgid "Search {{name}}"
-msgstr "搜索{{name}}"
+msgstr ""
 
 msgid "Find by {{name}}"
-msgstr "按{{name}}查找"
+msgstr ""
 
 msgid "Search by attributes"
-msgstr "按属性搜索"
+msgstr ""
 
 msgid "Back"
-msgstr "后退"
+msgstr "Орқага"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
-msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
+msgstr ""
 
 msgid "Back to search"
-msgstr "返回搜寻"
+msgstr ""
 
 msgid "An error has occurred"
-msgstr "发生了错误"
+msgstr ""
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later. For more details open the Console tab of the Developer tools"
-msgstr "该搜索存在问题，请更改搜索词或稍后再试。有关更多详细信息，请打开开发人员工具的控制台选项卡。"
+msgstr ""
 
 msgid "Make a selection to start searching"
-msgstr "先选择后开始搜索"
+msgstr ""
 
 msgid "View dashboard"
-msgstr "查看仪表盘"
+msgstr ""
 
 msgid "View active enrollment"
-msgstr "查看有效的注册"
+msgstr ""
 
 msgid "Re-enroll"
-msgstr "重新注册"
+msgstr ""
 
 msgid "You dont have access to edit this event"
-msgstr "你没有访问该事件的权限"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
-msgstr "离开该页将丢失你创建新关系的所有选择"
+msgstr ""
 
 msgid "No one is assigned to this event"
-msgstr "没有人被分配到的该事件"
+msgstr ""
 
 msgid "Assign"
-msgstr "分配"
+msgstr ""
 
 msgid "Event assigned to {{name}}"
-msgstr "事件被分配到  {{name}}"
+msgstr ""
 
 msgid "Feedbacks"
-msgstr "反馈"
+msgstr ""
 
 msgid "You dont have access to delete this relationship"
-msgstr "你v不能访问删除的关系"
+msgstr ""
 
 msgid "You dont have access to create any relationships"
-msgstr "你没有权限创建任何关系"
+msgstr ""
 
 msgid "Add relationship"
-msgstr "添加关系"
+msgstr "Ўзаро алоқа киритиш"
 
 msgid "Results found"
-msgstr "找到的结果"
+msgstr ""
 
 msgid "Selected program"
-msgstr "选择的项目"
+msgstr "Танланган дастур"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr "搜索 {{uniqueAttrName}}"
+msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
+msgstr ""
 
 msgid "To work with the selected program,"
-msgstr "基于选择的项目工作"
+msgstr ""
 
 msgid "open the Tracker Capture app"
-msgstr "打开跟踪随访APP"
+msgstr ""
 
 msgid "Program not found"
-msgstr "没有发现项目"
+msgstr ""
 
 msgid "Program is not a tracker program"
-msgstr "项目不是跟踪随访项目"
+msgstr ""
 
 msgid "Profile"
-msgstr "简历"
+msgstr "Профил"
 
 msgid "Error saving event"
-msgstr "保存时间错误"
+msgstr ""
 
 msgid "Could not save event. See log for details"
-msgstr "不能保存事件，看日志"
+msgstr ""
 
 msgid "Could not delete event"
-msgstr "不能删除事件"
+msgstr ""
 
 msgid "Could not save working list"
-msgstr "不能保存工作列表"
+msgstr ""
 
 msgid "Could not add working list"
-msgstr "不能添加工作列表"
+msgstr ""
 
 msgid "Could not delete working list"
-msgstr "不能删除工作列表"
+msgstr ""
 
 msgid "Organisation unit search failed. See log for details"
-msgstr "机构搜索失败，查看日志"
+msgstr ""
 
 msgid "tracked entity instance"
-msgstr "跟踪的实体实例"
+msgstr ""
 
 msgid "Set coordinate"
-msgstr "设置坐标"
+msgstr "Координатани ўрнатинг"
 
 msgid "Page {{currentPage}}"
-msgstr "第{{currentPage}}页"
+msgstr ""
 
 msgid "Date"
-msgstr "日期"
+msgstr "Сана"
 
 msgid "Time"
-msgstr "时间"
+msgstr "Вақт"
 
 msgid "From date"
-msgstr "起始日期"
+msgstr ""
 
 msgid "From time"
-msgstr "从时间"
+msgstr ""
 
 msgid "To date"
-msgstr "到目前为止"
+msgstr ""
 
 msgid "To time"
-msgstr "到时间"
+msgstr ""
 
 msgid "error encountered during field validation"
-msgstr "字段验证发生错误。"
+msgstr ""
 
 msgid "error"
-msgstr "错误"
+msgstr ""
 
 msgid "Delete polygon"
-msgstr "删除多边形"
+msgstr ""
 
 msgid "Set area"
-msgstr "设置区域"
+msgstr ""
 
 msgid "Compatibility mode"
-msgstr "兼容性模式"
+msgstr ""

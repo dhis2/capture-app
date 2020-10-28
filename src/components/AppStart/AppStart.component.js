@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 // eslint-disable-next-line import/extensions
 import 'typeface-roboto';
-import type { HashHistory } from 'history/createHashHistory';
+import { type HashHistory } from 'history';
 import { AppLoader } from '../AppLoader';
 import { App } from '../App';
 import { loadApp } from './appStart.actions';

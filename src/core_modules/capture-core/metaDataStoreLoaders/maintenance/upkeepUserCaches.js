@@ -1,8 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils/errorCreator';
-import StorageController from 'capture-core-utils/storage/StorageController';
-import LocalStorageAdapter from 'capture-core-utils/storage/DomLocalStorageAdapter';
+import { StorageController, DomLocalStorageAdapter } from 'capture-core-utils/storage';
 import { getMainStorageController, getUserStorageController } from '../../storageControllers';
 import { mainStores } from '../../storageControllers/stores';
 
@@ -16,7 +15,7 @@ const errorMessages = {
 };
 
 async function addUserCacheToHistory(
-    mainStorageController: StorageController,
+    mainStorageController: typeof StorageController,
 ) {
     const { name: currentStorageName } = getUserStorageController();
     const historyContainer = await mainStorageController.get(mainStores.USER_CACHES, ACCESS_HISTORY_KEY);
@@ -38,10 +37,10 @@ async function addUserCacheToHistory(
 
 async function removeCaches(
     history: Array<string>,
-    mainStorageController: StorageController,
+    mainStorageController: typeof StorageController,
 ) {
     const currentAdapterType = mainStorageController.adapterType;
-    const keepCount = currentAdapterType === LocalStorageAdapter
+    const keepCount = currentAdapterType === DomLocalStorageAdapter
         ? cacheKeepCount.LOCAL_STORAGE
         : cacheKeepCount.INDEXED_DB;
 
