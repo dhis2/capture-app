@@ -17,7 +17,7 @@ import {
     batchActionTypes,
 } from './editEventDataEntry.actions';
 import { startRunRulesPostUpdateField } from '../../../DataEntry';
-import { RenderFoundation } from '../../../../metaData';
+import { type RenderFoundation } from '../../../../metaData';
 
 const getFormFoundation = (state: ReduxState) => {
     const programId = state.currentSelections.programId;

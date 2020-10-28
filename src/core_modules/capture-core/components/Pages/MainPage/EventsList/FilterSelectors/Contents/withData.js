@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
 
 // eslint-disable-next-line complexity
@@ -25,4 +25,4 @@ const dispatchToProps = () => ({
 });
 
 // $FlowFixMe[missing-annot] automated comment
-export default () => (InnerComponent: React.ComponentType<any>) => connect(mapStateToProps, dispatchToProps)(InnerComponent);
+export default () => (InnerComponent: ComponentType<any>) => connect(mapStateToProps, dispatchToProps)(InnerComponent);

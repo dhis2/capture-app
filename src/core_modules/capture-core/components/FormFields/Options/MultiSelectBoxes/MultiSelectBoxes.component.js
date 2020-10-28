@@ -10,8 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import { orientations } from './multiSelectBoxes.const';
 
-import OptionSet from '../../../../metaData/OptionSet/OptionSet';
-import Option from '../../../../metaData/OptionSet/Option';
+import type { OptionSet, Option } from '../../../../metaData';
 
 const styles = theme => ({
     label: theme.typography.formFieldTitle,

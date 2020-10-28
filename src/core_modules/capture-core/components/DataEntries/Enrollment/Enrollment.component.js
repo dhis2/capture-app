@@ -33,7 +33,7 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import dataEntrySectionKeys from './constants/sectionKeys.const';
-import { Enrollment } from '../../../metaData';
+import { type Enrollment } from '../../../metaData';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',

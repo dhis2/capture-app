@@ -10,7 +10,7 @@ import {
     requestAddNoteForEditSingleEvent,
     batchActionTypes,
 } from '../../../EditEvent/DataEntry/editEventDataEntry.actions';
-import { RenderFoundation } from '../../../../../metaData';
+import { type RenderFoundation } from '../../../../../metaData';
 
 import {
     setCurrentDataEntry, startRunRulesPostUpdateField,

@@ -25,10 +25,6 @@ export const saveNewEnrollmentEpic = (action$: InputObservable, store: ReduxStor
                 selections,
                 trackerProgram.enrollment,
                 state.formsValues[dataEntryKey],
-                // $FlowFixMe[extra-arg] automated comment
-                state.dataEntriesFieldsValue[dataEntryKey],
-                state.dataEntriesFieldsMeta[dataEntryKey],
-                {},
             );
             return startSaveNewEnrollmentAfterReturnedToMainPage(serverData, state.currentSelections);
         }));
