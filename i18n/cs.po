@@ -31,7 +31,7 @@ msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 
 msgid "Discard"
-msgstr ""
+msgstr "Vyřadit"
 
 msgid "Back to event"
 msgstr ""
@@ -55,7 +55,7 @@ msgid "Warnings"
 msgstr ""
 
 msgid "Complete"
-msgstr ""
+msgstr "Dokončit"
 
 msgid "Warnings found"
 msgstr ""
@@ -97,7 +97,7 @@ msgid "Custom range"
 msgstr ""
 
 msgid "to"
-msgstr ""
+msgstr "do"
 
 msgid "after or equal to"
 msgstr ""
@@ -115,7 +115,7 @@ msgid "Max"
 msgstr "Max"
 
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 msgid "greater than or equal to"
 msgstr ""
@@ -148,7 +148,7 @@ msgid "selected"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
+msgstr "Smazat"
 
 msgid "Select file"
 msgstr ""
@@ -226,7 +226,7 @@ msgid "Delete event"
 msgstr ""
 
 msgid "Update"
-msgstr ""
+msgstr "Aktualizovat"
 
 msgid "Close"
 msgstr ""
@@ -315,7 +315,7 @@ msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Select"
-msgstr ""
+msgstr "Vybrat"
 
 msgid "Selected Program"
 msgstr ""
