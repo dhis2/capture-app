@@ -74,7 +74,6 @@ export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable
         map(() => setEmptyOrgUnitBasedOnUrl()));
 
 export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
-
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET,
