@@ -27,7 +27,7 @@
     "d2-utilizr": "^0.2.15",
     "date-fns": "^1.29.0",
     "history": "^4.10.1",
-    "leaflet": "^1.6.0",
+    "leaflet": "^1.7.1",
     "leaflet-draw": "^1.0.4",
     "lodash": "^4.17.20",
     "loglevel": "^1.6.8",
