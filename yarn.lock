@@ -2406,10 +2406,10 @@
     update-notifier "^3.0.0"
     yargs "^13.1.0"
 
-"@dhis2/cli-utils-cypress@^2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@dhis2/cli-utils-cypress/-/cli-utils-cypress-2.2.1.tgz#2126f5813ca321bede239f48843fcc5bfbf255ba"
-  integrity sha512-n8TRjYIgaHRw4cMG3MbNaXTz68JltekrQrblK1zm5iH0IBGQA2zLmgBU8Uk0DfOLOsp+2I8eh4qkKHkx4Wy/iQ==
+"@dhis2/cli-utils-cypress@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@dhis2/cli-utils-cypress/-/cli-utils-cypress-2.2.2.tgz#d7ee4f0b9f03dff86dbff5b310f06e014629ce21"
+  integrity sha512-vG1aVv7d265AMkldRwqhMZYLOMRvaa2jcm1JToDhMAIhyu741Y5zGCZ7YDKF3HsVoYk7c/N4od+XVfBPgyAvPw==
   dependencies:
     "@dhis2/cli-helpers-engine" "^1.5.0"
     concurrently "^5.2.0"
@@ -9117,26 +9117,7 @@ inquirer@7.0.4:
     strip-ansi "^5.1.0"
     through "^2.3.6"
 
-inquirer@^7.0.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-7.1.0.tgz#1298a01859883e17c7264b82870ae1034f92dd29"
-  integrity sha512-5fJMWEmikSYu0nv/flMc475MhGbB7TSPd/2IpFV4I4rMklboCH2rQjYY5kKiYGHqUF9gvaambupcJFFG9dvReg==
-  dependencies:
-    ansi-escapes "^4.2.1"
-    chalk "^3.0.0"
-    cli-cursor "^3.1.0"
-    cli-width "^2.0.0"
-    external-editor "^3.0.3"
-    figures "^3.0.0"
-    lodash "^4.17.15"
-    mute-stream "0.0.8"
-    run-async "^2.4.0"
-    rxjs "^6.5.3"
-    string-width "^4.1.0"
-    strip-ansi "^6.0.0"
-    through "^2.3.6"
-
-inquirer@^7.0.4:
+inquirer@^7.0.0, inquirer@^7.0.4:
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-7.3.0.tgz#aa3e7cb0c18a410c3c16cdd2bc9dcbe83c4d333e"
   integrity sha512-K+LZp6L/6eE5swqIcVXrxl21aGDU4S50gKH0/d96OMQnSBCyGyZl/oZhbkVmdp5sBoINHd4xZvFSARh2dk6DWA==
