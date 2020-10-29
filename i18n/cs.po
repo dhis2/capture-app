@@ -106,7 +106,7 @@ msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 msgid "Unsaved changes"
 msgstr ""
@@ -181,10 +181,10 @@ msgid "Close"
 msgstr ""
 
 msgid "Last week"
-msgstr ""
+msgstr "Minulý týden"
 
 msgid "Last month"
-msgstr ""
+msgstr "Minulý měsíc"
 
 msgid "Last 3 months"
 msgstr ""
@@ -223,7 +223,7 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr ""
+msgstr "Ano"
 
 msgid "mm/dd/yyyy"
 msgstr ""
@@ -235,7 +235,7 @@ msgid "Months"
 msgstr ""
 
 msgid "Days"
-msgstr ""
+msgstr "Dnů"
 
 msgid "Uploading file"
 msgstr ""
@@ -262,7 +262,7 @@ msgid "Search"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "Vyčistit"
 
 msgid "No results"
 msgstr ""
@@ -271,7 +271,7 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
 msgstr ""
@@ -295,7 +295,7 @@ msgid "Status"
 msgstr ""
 
 msgid "Comments"
-msgstr ""
+msgstr "Komentáře"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -390,7 +390,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "v"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -543,7 +543,7 @@ msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Nový"
 
 msgid "Start again"
 msgstr ""
