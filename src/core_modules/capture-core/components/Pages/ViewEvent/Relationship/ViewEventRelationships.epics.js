@@ -1,7 +1,6 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
-import type { ActionsObservable } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import uuid from 'd2-utilizr/lib/uuid';
@@ -32,7 +31,7 @@ import { getRelationshipNewTei } from '../../NewRelationship/RegisterTei';
 
 const relationshipKey = 'viewEvent';
 
-export const loadRelationshipsForViewEventEpic = (action$: ActionsObservable) =>
+export const loadRelationshipsForViewEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -49,7 +48,7 @@ export const loadRelationshipsForViewEventEpic = (action$: ActionsObservable) =>
                 ], viewEventRelationshipsBatchActionTypes.LOAD_EVENT_RELATIONSHIPS_BATCH));
         }));
 
-export const deleteRelationshipForViewEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
+export const deleteRelationshipForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
             viewEventRelationshipsActionTypes.REQUEST_DELETE_EVENT_RELATIONSHIP,
@@ -66,7 +65,7 @@ export const deleteRelationshipForViewEventEpic = (action$: ActionsObservable, s
         }));
 
 
-export const addRelationshipForViewEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
+export const addRelationshipForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.REQUEST_ADD_EVENT_RELATIONSHIP),
         map((action) => {
@@ -125,7 +124,7 @@ export const addRelationshipForViewEventEpic = (action$: ActionsObservable, stor
             ], viewEventRelationshipsBatchActionTypes.SAVE_EVENT_RELATIONSHIP_BATCH);
         }));
 
-export const saveRelationshipAfterSavingTeiForViewEventEpic = (action$: ActionsObservable) =>
+export const saveRelationshipAfterSavingTeiForViewEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_SUCCESS),
         map((action) => {
@@ -141,17 +140,17 @@ export const saveRelationshipAfterSavingTeiForViewEventEpic = (action$: ActionsO
             return startSaveEventRelationship(serverRelationshipData, selections, clientId);
         }));
 
-export const handleViewEventRelationshipSaveTeiFailedEpic = (action$: ActionsObservable) =>
+export const handleViewEventRelationshipSaveTeiFailedEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_FAILED),
         map(action => removeRelationship(relationshipKey, action.meta.clientId)));
 
-export const saveRelationshipFailedForViewEventEpic = (action$: ActionsObservable) =>
+export const saveRelationshipFailedForViewEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.SAVE_FAILED_FOR_EVENT_RELATIONSHIP),
         map(action => removeRelationship(relationshipKey, action.meta.clientId)));
 
-export const relationshipSavedForViewEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
+export const relationshipSavedForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_SAVED),
         map((action) => {

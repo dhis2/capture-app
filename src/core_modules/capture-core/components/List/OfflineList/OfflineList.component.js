@@ -207,7 +207,7 @@ class OfflineList extends Component<Props> {
     }
 
     render() {
-        const { dataSource, columns, classes } = this.props; //eslint-disable-line
+        const { columns, classes } = this.props;
 
         const visibleColumns = columns ?
             columns

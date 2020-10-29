@@ -31,7 +31,7 @@ const getTETSearchGroup = (tetId: string) => {
 const getSearchGroup = (programId: ?string, tetId: string) =>
     (programId ? getProgramSearchGroup(programId) : getTETSearchGroup(tetId));
 
-export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable, store: ReduxStore) =>
+export const loadSearchGroupDuplicatesForReviewEpic: Epic = (action$, store) =>
     action$.pipe(
         ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE),
         switchMap((action) => {
@@ -79,12 +79,10 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 getTrackerProgramThrowIfNotFound(contextParam.program).attributes :
                 getTrackedEntityTypeThrowIfNotFound((contextParam.trackedEntityType)).attributes;
 
-            return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+            const stream$: Stream = from(getTrackedEntityInstances(queryArgs, attributes));
+            return stream$.pipe(
                 map(({ trackedEntityInstanceContainers: searchResults, pagingData }) =>
-                    duplicatesForReviewRetrievalSuccess(
-                        searchResults,
-                        pagingData.currentPage,
-                    )),
+                    duplicatesForReviewRetrievalSuccess(searchResults, pagingData.currentPage)),
                 catchError(() => of(duplicatesForReviewRetrievalFailed())),
 
             );

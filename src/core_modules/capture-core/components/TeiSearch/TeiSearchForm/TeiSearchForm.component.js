@@ -8,7 +8,7 @@ import { errorCreator } from 'capture-core-utils';
 import Button from '../../Buttons/Button.component';
 import { D2Form } from '../../D2Form';
 import SearchOrgUnitSelector from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
-import { SearchGroup } from '../../../metaData';
+import { type SearchGroup } from '../../../metaData';
 import { withGotoInterface } from '../../FormFields/New';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);

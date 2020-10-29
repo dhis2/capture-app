@@ -2,7 +2,7 @@
 import * as React from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import OptionSet from '../../../../metaData/OptionSet/OptionSet';
+import { type OptionSet } from '../../../../metaData';
 import { convertValue } from '../../../../converters/clientToForm';
 
 type Props = {

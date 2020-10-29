@@ -7,7 +7,7 @@ import ViewEventSection from '../../Section/ViewEventSection.component';
 import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
 import Contents from './Contents.component';
 import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
-import { ProgramStage } from '../../../../../metaData';
+import { type ProgramStage } from '../../../../../metaData';
 
 const LoadingContents = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Contents);
 

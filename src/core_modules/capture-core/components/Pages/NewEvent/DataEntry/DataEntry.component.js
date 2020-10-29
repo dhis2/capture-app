@@ -11,7 +11,7 @@ import Notes from '../../../Notes/Notes.component';
 import withDataEntryRelationshipsHandler from '../../../../components/DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
 import Relationships from '../../../Relationships/Relationships.component';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
-import { RenderFoundation } from '../../../../metaData';
+import { type RenderFoundation } from '../../../../metaData';
 import withMainButton from './withMainButton';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import {

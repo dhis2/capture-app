@@ -1,8 +1,7 @@
 // @flow
 import { convertValue } from '../../../converters/clientToForm';
 import { convertValue as convertListValue } from '../../../converters/clientToList';
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
-import { dataElementTypes, DataElement } from '../../../metaData';
+import { type RenderFoundation, dataElementTypes, DataElement } from '../../../metaData';
 
 import { getValidationError } from '../dataEntryField/internal/dataEntryField.utils';
 import type { ValidatorContainer } from '../dataEntryField/internal/dataEntryField.utils';

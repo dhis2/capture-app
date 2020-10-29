@@ -3,7 +3,7 @@ import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { PolygonField as UIPolygonField } from 'capture-ui';
 import { Dialog, DialogTitle } from '@material-ui/core';
-import { orientations } from '../../../New';
+import { typeof orientations } from '../../../New';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -27,7 +27,7 @@ type Props = {
         inputWrapperFocused: string,
         inputWrapperUnfocused: string,
     },
-    orientation: $Values<typeof orientations>,
+    orientation: $Values<orientations>,
     dialogLabel: string,
 }
 

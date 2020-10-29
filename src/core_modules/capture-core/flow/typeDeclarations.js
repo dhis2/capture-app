@@ -178,7 +178,9 @@ declare type Theme = {
     },
 };
 
-declare type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
+declare type Epic = (action$: rxjs$Observable<any>, store: ReduxStore)=>rxjs$Observable<any>;
+declare type InputObservable = any;
+declare type Stream = rxjs$Observable<any>;
 
 declare class process {
     static env: {

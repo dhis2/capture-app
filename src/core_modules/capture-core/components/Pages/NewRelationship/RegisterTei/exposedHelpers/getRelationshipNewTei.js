@@ -6,7 +6,7 @@ import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLett
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
-    RenderFoundation,
+    type RenderFoundation,
 } from '../../../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../../../converters';
 import getDisplayName from '../../../../../trackedEntityInstances/getDisplayName';

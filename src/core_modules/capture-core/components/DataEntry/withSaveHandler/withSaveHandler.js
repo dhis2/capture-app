@@ -11,7 +11,7 @@ import { errorCreator } from 'capture-core-utils';
 import { validationStrategies } from '../../../metaData/RenderFoundation/renderFoundation.const';
 import { saveValidationFailed, saveAbort } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+import { type RenderFoundation } from '../../../metaData';
 import { MessagesDialogContents } from './MessagesDialogContents';
 import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
 

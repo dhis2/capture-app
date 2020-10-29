@@ -1,8 +1,8 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import MetaDataElement from '../../../metaData/DataElement/DataElement';
-import { dataElementTypes } from '../../../metaData';
+import { type DataElement, dataElementTypes } from '../../../metaData';
+
 import {
     getAgeFieldConfigForCustomForm as getAgeFieldConfig,
     getBooleanFieldConfigForCustomForm as getBooleanFieldConfig,
@@ -28,7 +28,7 @@ const fieldForTypes = {
     [dataElementTypes.EMAIL]: getTextFieldConfig,
     [dataElementTypes.TEXT]: getTextFieldConfig,
     [dataElementTypes.PHONE_NUMBER]: getTextFieldConfig,
-    [dataElementTypes.LONG_TEXT]: (metaData: MetaDataElement) => {
+    [dataElementTypes.LONG_TEXT]: (metaData: DataElement) => {
         const fieldConfig = getTextFieldConfig(metaData, { multiLine: true });
         return fieldConfig;
     },
@@ -54,7 +54,7 @@ const fieldForTypes = {
     [dataElementTypes.UNKNOWN]: () => null,
 };
 
-export default function getCustomFormField(metaData: MetaDataElement, options: Object) {
+export default function getCustomFormField(metaData: DataElement, options: Object) {
     if (options.viewMode) {
         return getViewModeFieldConfig(metaData, options);
     }
