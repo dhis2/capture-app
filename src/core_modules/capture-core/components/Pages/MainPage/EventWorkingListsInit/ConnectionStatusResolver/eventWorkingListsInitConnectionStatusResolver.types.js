@@ -6,5 +6,5 @@ type PassOnProps = $ReadOnly<{
 export type Props = $ReadOnly<{
     ...PassOnProps,
     isOnline: boolean,
-    listId: string,
+    storeId: string,
 }>;

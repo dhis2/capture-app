@@ -1,6 +1,6 @@
 // @flow
 import React, { useMemo, useCallback } from 'react';
-import { getDefaultColumnConfig } from './defaultColumnConfiguration';
+import { getDefaultColumnConfig } from '../../EventWorkingListsCommon';
 import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
 import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';

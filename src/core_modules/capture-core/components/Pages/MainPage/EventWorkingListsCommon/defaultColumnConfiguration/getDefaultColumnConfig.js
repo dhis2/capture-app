@@ -4,9 +4,13 @@ import {
     type ProgramStage,
     dataElementTypes as elementTypeKeys,
     type EventProgram,
-} from '../../../../../../metaData';
-import mainPropertyNames from '../../../../../../events/mainPropertyNames.const';
-import type { MainColumnConfig, MetadataColumnConfig, EventWorkingListsColumnConfigs } from '../../types';
+} from '../../../../../metaData';
+import mainPropertyNames from '../../../../../events/mainPropertyNames.const';
+import type {
+    MainColumnConfig,
+    MetadataColumnConfig,
+    EventWorkingListsColumnConfigs,
+} from '../../EventWorkingListsCommon';
 
 const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
     const baseFields = [{

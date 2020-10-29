@@ -24,11 +24,17 @@ import type {
     UpdateFilter,
     WorkingListTemplate,
 } from '../../WorkingLists';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '../../WorkingListsCommon';
 import type {
+    AddTemplate,
+    DeleteTemplate,
+    UpdateTemplate,
+    UpdateList,
+    RecordsOrder,
     CustomColumnOrder,
+} from '../../WorkingListsCommon';
+import type { EventRecords } from '../../EventWorkingListsCommon';
+import type {
     EventWorkingListsTemplates,
-    EventRecords,
 } from '../types';
 
 export type Props = $ReadOnly<{|
@@ -77,7 +83,7 @@ export type EventWorkingListsReduxOutputProps = {|
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     program: EventProgram,
-    recordsOrder?: Array<string>,
+    recordsOrder?: RecordsOrder,
     rowsCount?: number,
     rowsPerPage?: number,
     sortByDirection?: string,

@@ -1,2 +1,2 @@
 // @flow
-export { WorkingListsInitHeader } from './WorkingListsInitHeader';
+export { EventWorkingListsInitHeader } from './EventWorkingListsInitHeader';

@@ -4,8 +4,7 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import Paper from '@material-ui/core/Paper';
-import { EventWorkingLists } from '../../EventWorkingLists';
-import type { Props } from './workingListsInitHeader.types';
+import type { Props } from './eventWorkingListsInitHeader.types';
 
 const getStyles = (theme: Theme) => ({
     headerContainer: {
@@ -24,8 +23,8 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const WorkingListsInitHeaderPlain =
-    ({ classes: { headerContainer, listContainer, title }, ...passOnProps }: Props & CssClasses) => (
+const EventWorkingListsInitHeaderPlain =
+    ({ children, classes: { headerContainer, listContainer, title } }: Props) => (
         <Paper>
             <div
                 className={headerContainer}
@@ -39,11 +38,10 @@ const WorkingListsInitHeaderPlain =
             <div
                 className={listContainer}
             >
-                <EventWorkingLists
-                    {...passOnProps}
-                />
+                {children}
             </div>
         </Paper>
     );
 
-export const WorkingListsInitHeader: ComponentType<Props> = withStyles(getStyles)(WorkingListsInitHeaderPlain);
+export const EventWorkingListsInitHeader: ComponentType<$Diff<Props, CssClasses>> =
+    withStyles(getStyles)(EventWorkingListsInitHeaderPlain);

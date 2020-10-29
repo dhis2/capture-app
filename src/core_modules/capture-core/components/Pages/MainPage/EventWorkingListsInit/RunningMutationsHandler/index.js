@@ -1,2 +1,2 @@
 // @flow
-export { WorkingListsInitRunningMutationsHandler } from './WorkingListsInitRunningMutationsHandler.component';
+export { EventWorkingListsInitRunningMutationsHandler } from './EventWorkingListsInitRunningMutationsHandler.component';
