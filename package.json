@@ -82,7 +82,7 @@
     }
   },
   "devDependencies": {
-    "@babel/plugin-transform-flow-strip-types": "^7.10.4",
+    "@babel/plugin-transform-flow-strip-types": "^7.12.1",
     "@dhis2/cli-app-scripts": "^4.0.9",
     "@dhis2/cli-helpers-engine": "^1.5.0",
     "docdash": "^1.2.0",
