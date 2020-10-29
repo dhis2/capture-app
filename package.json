@@ -30,7 +30,7 @@
     "leaflet": "^1.7.1",
     "leaflet-draw": "^1.0.4",
     "lodash": "^4.17.20",
-    "loglevel": "^1.6.8",
+    "loglevel": "^1.7.0",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
