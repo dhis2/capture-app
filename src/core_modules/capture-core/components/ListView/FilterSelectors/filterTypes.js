@@ -1,5 +1,5 @@
 // @flow
-import elementTypes from '../../../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../../../metaData';
 
 export const filterTypesArray = [
     // $FlowFixMe[prop-missing] automated comment
@@ -27,4 +27,3 @@ export const filterTypesObject = filterTypesArray.reduce((accFilterTypesObject, 
     accFilterTypesObject[type] = type;
     return accFilterTypesObject;
 }, {});
-
