@@ -40,7 +40,7 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Complete"
-msgstr ""
+msgstr "Dokončit"
 
 msgid "Warnings found"
 msgstr ""
@@ -88,7 +88,7 @@ msgid "Custom range"
 msgstr ""
 
 msgid "to"
-msgstr ""
+msgstr "do"
 
 msgid "after or equal to"
 msgstr ""
@@ -106,7 +106,7 @@ msgid "Max"
 msgstr "Max"
 
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 msgid "greater than or equal to"
 msgstr ""
@@ -139,7 +139,7 @@ msgid "selected"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
+msgstr "Smazat"
 
 msgid "Select file"
 msgstr ""
@@ -205,7 +205,7 @@ msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "Update"
-msgstr ""
+msgstr "Aktualizovat"
 
 msgid "Close"
 msgstr ""
@@ -294,7 +294,7 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Select"
-msgstr ""
+msgstr "Vybrat"
 
 msgid "Program"
 msgstr ""
