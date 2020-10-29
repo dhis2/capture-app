@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
-import OptionSet from '../../../metaData/OptionSet/OptionSet';
+import { type OptionSet } from '../../../metaData';
 import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './optionSetFilterDataGetter';
 import type { UpdatableFilterContent } from '../filters.types';
 

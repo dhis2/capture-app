@@ -2,14 +2,14 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import UIDate from '../../DateAndTimeFields/DateField/Date.component';
-import orientations from '../../constants/orientations.const';
+import typeof orientations from '../../constants/orientations.const';
 import withFocusSaver from '../../HOC/withFocusSaver';
 
 type Props = {
     value: ?string,
     onBlur: (value: string) => void,
     onChange?: ?(value: string) => void,
-    orientation: $Values<typeof orientations>,
+    orientation: $Values<orientations>,
 }
 
 class AgeDateInput extends Component<Props> {

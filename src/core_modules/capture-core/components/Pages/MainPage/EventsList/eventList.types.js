@@ -1,5 +1,5 @@
 // @flow
-import { dataElementTypes } from '../../../../metaData';
+import { typeof dataElementTypes } from '../../../../metaData';
 
 export type {
     AssigneeFilterData,
@@ -17,17 +17,11 @@ export {
     dateFilterTypes,
 } from '../../../FiltersForTypes/filters.types';
 
-export type CommonQueryData = {
-    programId: string,
-    orgUnitId: string,
-    categories: ?Object,
-}
-
 export type Column = {
     id: string,
     header: string,
     visible: boolean,
-    type: $Keys<typeof dataElementTypes>,
+    type: $Keys<dataElementTypes>,
     optionSet?: Object,
     options?: Object,
     singleSelect?: ?boolean,

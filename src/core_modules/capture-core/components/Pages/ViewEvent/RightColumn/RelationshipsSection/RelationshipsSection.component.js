@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ViewEventSection from '../../Section/ViewEventSection.component';
 import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
 import Relationships from '../../../../Relationships/Relationships.component';
-import { ProgramStage } from '../../../../../metaData';
+import { type ProgramStage } from '../../../../../metaData';
 import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';

@@ -12,6 +12,7 @@ export { Icon } from './Icon';
 export {
     Option,
     OptionSet,
+    OptionGroup,
     inputTypes as optionSetInputTypes,
 } from './OptionSet';
 export { Program, ProgramStage, EventProgram, TrackerProgram, Enrollment } from './Program';

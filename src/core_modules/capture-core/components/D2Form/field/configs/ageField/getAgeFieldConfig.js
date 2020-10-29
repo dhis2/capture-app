@@ -2,11 +2,11 @@
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { AgeFieldForForm } from '../../Components';
-import { DataElement as MetaDataElement } from '../../../../../metaData';
+import { type DataElement } from '../../../../../metaData';
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
 
-const getAgeField = (metaData: MetaDataElement, options: Object) => {
+const getAgeField = (metaData: DataElement, options: Object) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
