@@ -59,7 +59,7 @@
     "reselect": "^3.0.1",
     "rxjs": "^6.6.3",
     "typeface-roboto": "^0.0.75",
-    "uuid": "^3.3.2"
+    "uuid": "^8.3.1"
   },
   "scripts": {
     "start": "yarn verifyCacheVersion && d2-app-scripts start",
