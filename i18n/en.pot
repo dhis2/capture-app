@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-10-01T14:44:39.931Z\n"
-"PO-Revision-Date: 2020-10-01T14:44:39.931Z\n"
+"POT-Creation-Date: 2020-10-22T14:57:00.074Z\n"
+"PO-Revision-Date: 2020-10-22T14:57:00.074Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -701,12 +701,6 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-msgid "Search for"
-msgstr ""
-
-msgid "You can also choose a program from the top bar and search in that program"
-msgstr ""
-
 msgid "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
 
@@ -717,12 +711,6 @@ msgid "Find by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
-msgstr ""
-
-msgid "Find a"
-msgstr ""
-
-msgid "Back"
 msgstr ""
 
 msgid "Back"
@@ -795,6 +783,12 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "Search for"
+msgstr ""
+
+msgid "You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "To work with the selected program,"
