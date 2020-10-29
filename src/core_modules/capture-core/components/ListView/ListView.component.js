@@ -6,7 +6,7 @@ import { withFilterSelectors } from './FilterSelectors/withFilterSelectors';
 import { ListPagination } from './Pagination';
 import { ColumnSelector } from './ColumnSelector';
 import { withEndColumnMenu } from './withEndColumnMenu';
-import DialogLoadingMask from '../LoadingMasks/DialogLoadingMask.component';
+import { DialogLoadingMask } from '../LoadingMasks';
 import { OnlineList } from '../List';
 import { MoreMenu } from './MoreMenu';
 
