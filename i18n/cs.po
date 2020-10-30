@@ -178,7 +178,7 @@ msgid "Online"
 msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 msgid "Syncing"
 msgstr ""
@@ -190,7 +190,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 msgid "Comments"
 msgstr "Komentáře"
