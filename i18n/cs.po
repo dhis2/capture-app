@@ -22,7 +22,7 @@ msgid "Column"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 msgid "Discard event?"
 msgstr ""
@@ -85,10 +85,10 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
-msgstr ""
+msgstr "Minulý týden"
 
 msgid "Last month"
-msgstr ""
+msgstr "Minulý měsíc"
 
 msgid "Last 3 months"
 msgstr ""
@@ -127,7 +127,7 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr ""
+msgstr "Ano"
 
 msgid "mm/dd/yyyy"
 msgstr ""
@@ -139,7 +139,7 @@ msgid "Months"
 msgstr ""
 
 msgid "Days"
-msgstr ""
+msgstr "Dnů"
 
 msgid "Uploading file"
 msgstr ""
@@ -166,7 +166,7 @@ msgid "Search"
 msgstr ""
 
 msgid "Clear"
-msgstr ""
+msgstr "Vyčistit"
 
 msgid "No results"
 msgstr ""
@@ -175,7 +175,7 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
 msgstr ""
@@ -193,7 +193,7 @@ msgid "Status"
 msgstr ""
 
 msgid "Comments"
-msgstr ""
+msgstr "Komentáře"
 
 msgid "Field"
 msgstr ""
@@ -250,7 +250,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "v"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -300,7 +300,7 @@ msgid "Start again"
 msgstr ""
 
 msgid "New"
-msgstr ""
+msgstr "Nový"
 
 msgid "Find"
 msgstr ""
