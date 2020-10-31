@@ -19,7 +19,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "Sloupec"
 
 msgid "This value is validating"
 msgstr ""
@@ -130,7 +130,7 @@ msgid "Feedback"
 msgstr ""
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikátory"
 
 msgid "Warnings"
 msgstr ""
@@ -259,7 +259,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "Hledat"
 
 msgid "Clear"
 msgstr "Vyčistit"
@@ -496,7 +496,7 @@ msgid "Show all"
 msgstr ""
 
 msgid "Program"
-msgstr ""
+msgstr "Program"
 
 msgid "Organisation Unit"
 msgstr "Organizační jednotka"
