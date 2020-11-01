@@ -22,7 +22,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "Sloupec"
 
 msgid "Errors"
 msgstr ""
@@ -31,7 +31,7 @@ msgid "Feedback"
 msgstr ""
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikátory"
 
 msgid "Warnings"
 msgstr ""
@@ -297,7 +297,7 @@ msgid "Select"
 msgstr "Vybrat"
 
 msgid "Program"
-msgstr ""
+msgstr "Program"
 
 msgid "No programs available."
 msgstr ""
