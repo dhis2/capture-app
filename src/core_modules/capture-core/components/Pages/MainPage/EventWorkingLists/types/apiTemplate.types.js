@@ -54,7 +54,7 @@ export type ApiDataFilterOptionSet = {|
     in: Array<string>,
 |};
 
-export type ApiEventQueryCriteria = {
+export type ApiEventQueryCriteria = {|
     dataFilters?: ?Array<ApiDataFilter>,
     order?: ?string,
     eventDate?: ?Object,
@@ -62,7 +62,7 @@ export type ApiEventQueryCriteria = {
     displayColumnOrder?: ?Array<string>,
     assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
     assignedUsers?: Array<string>,
-};
+|};
 
 export type CommonQueryData = {|
     programId: string,
