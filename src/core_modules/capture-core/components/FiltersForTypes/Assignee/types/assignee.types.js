@@ -1,8 +1,8 @@
 // @flow
-import { assigneeFilterModes } from '../constants';
+import { typeof assigneeFilterModes } from '../constants';
 
 export type AssigneeFilterData = {
-    assignedUserMode: $Values<typeof assigneeFilterModes>,
+    assignedUserMode: $Values<assigneeFilterModes>,
     assignedUser?: ?{
         id: string,
         username: string,
