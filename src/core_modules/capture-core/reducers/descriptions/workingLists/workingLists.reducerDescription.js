@@ -502,7 +502,7 @@ export const workingListsStickyFiltersDesc = createReducerDescription({
             },
         };
     },
-    [workingListsCommonActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
+    [workingListsCommonActionTypes.REST_MENU_ITEM_SELECT]: (state, action) => {
         const { id, listId } = action.payload;
         const currentListState = {
             ...state[listId],

@@ -8,7 +8,7 @@ import {
     setListColumnOrder,
     setFilter,
     clearFilter,
-    restMenuItemSelected,
+    selectRestMenuItem,
     changePage,
     changeRowsPerPage,
 } from '../actions';
@@ -123,7 +123,7 @@ const useView = (listId: string, workingListDispatch: Function, categoryCombinat
         onSetListColumnOrder: workingListDispatch(setListColumnOrder),
         onFilterUpdate: workingListDispatch(setFilter),
         onClearFilter: workingListDispatch(clearFilter),
-        onRestMenuItemSelected: workingListDispatch(restMenuItemSelected),
+        onRestMenuItemSelected: workingListDispatch(selectRestMenuItem),
         onChangePage: workingListDispatch(changePage),
         onChangeRowsPerPage: workingListDispatch(changeRowsPerPage),
     }), [listId, workingListDispatch, categoryCombinationMeta]);

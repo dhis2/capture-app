@@ -6,7 +6,7 @@ export const workingListsCommonActionTypes = {
     LIST_COLUMN_ORDER_SET: 'WorkingListsListColumnOrderSet',
     FILTER_SET: 'WorkingListsFilterSet',
     FILTER_CLEAR: 'WorkingListsFilterClear',
-    REST_MENU_ITEM_SELECTED: 'RestMenuItemSelected',
+    REST_MENU_ITEM_SELECT: 'RestMenuItemSelect',
     STICKY_FILTERS_AFTER_COLUMN_SORTING_SET: 'StickyFiltersAfterColumnSortingSet',
     PAGE_CHANGE: 'PageChange',
     ROWS_PER_PAGE_CHANGE: 'RowsPerPageChange',
@@ -25,8 +25,8 @@ export const setFilter = (filter: Object, itemId: string, listId: string) =>
 export const clearFilter = (itemId: string, listId: string) =>
     actionCreator(workingListsCommonActionTypes.FILTER_CLEAR)({ itemId, listId });
 
-export const restMenuItemSelected = (id: string, listId: string) =>
-    actionCreator(workingListsCommonActionTypes.REST_MENU_ITEM_SELECTED)({ id, listId });
+export const selectRestMenuItem = (id: string, listId: string) =>
+    actionCreator(workingListsCommonActionTypes.REST_MENU_ITEM_SELECT)({ id, listId });
 
 export const setStickyFiltersAfterColumnSorting = (includeFilters: Object, listId: string) =>
     actionCreator(workingListsCommonActionTypes.STICKY_FILTERS_AFTER_COLUMN_SORTING_SET)({ includeFilters, listId });
