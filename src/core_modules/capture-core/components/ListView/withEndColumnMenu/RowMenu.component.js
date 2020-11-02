@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import IconButton from '@material-ui/core/IconButton';
 import withStyles from '@material-ui/core/styles/withStyles';
-import type { CustomRowMenuContents } from '../types';
+import type { CustomRowMenuContents, DataSourceItem } from '../types';
 
 type Props = {
     classes: {
@@ -20,7 +20,7 @@ type Props = {
     },
     onDelete: (eventId: string) => void,
     onView: (eventId: string) => void,
-    row: Object,
+    row: DataSourceItem,
     customRowMenuContents?: CustomRowMenuContents,
 }
 
