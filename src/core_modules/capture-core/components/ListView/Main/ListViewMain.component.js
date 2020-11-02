@@ -13,8 +13,6 @@ import type { Columns, DataSource } from '../types';
 const ListWithEndColumnMenu = withEndColumnMenu()(OnlineList);
 
 const getStyles = (theme: Theme) => ({
-    container: {
-    },
     topBarContainer: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -103,12 +101,8 @@ class ListViewMainPlain extends React.PureComponent<Props> {
     }
 
     render() {
-        const { classes } = this.props;
-
         return (
-            <div
-                className={classes.container}
-            >
+            <div>
                 {this.renderTopBar()}
                 {this.renderList()}
                 {this.renderPager()}
