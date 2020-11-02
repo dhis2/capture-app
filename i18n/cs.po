@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Jiří Podhorecký, 2020
+# trendspotter, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Jiří Podhorecký, 2020\n"
+"Last-Translator: trendspotter, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Uveďte prosím platné datum"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Sloupce k zobrazení v tabulce"
 
 msgid "Column"
 msgstr "Sloupec"
@@ -88,7 +88,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Oblast"
 
 msgid "Coordinate"
 msgstr ""
@@ -100,13 +100,13 @@ msgid "A future date is not allowed"
 msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
 
 msgid "Cancel"
 msgstr "Zrušit"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Neuložené změny"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -130,7 +130,7 @@ msgid "Indicators"
 msgstr "Indikátory"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Varování"
 
 msgid "search group result could not be retrieved"
 msgstr ""
@@ -139,7 +139,7 @@ msgid "Complete"
 msgstr "Dokončit"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Nalezena varování"
 
 msgid "Abort"
 msgstr ""
@@ -166,7 +166,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "Třídit"
 
 msgid "No events to display"
 msgstr ""
@@ -175,7 +175,7 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 msgid "Please select the user"
 msgstr ""
@@ -199,19 +199,19 @@ msgid "to"
 msgstr "do"
 
 msgid "From"
-msgstr ""
+msgstr "Od"
 
 msgid "To"
 msgstr ""
 
 msgid "Today"
-msgstr ""
+msgstr "Dnes"
 
 msgid "This week"
-msgstr ""
+msgstr "Tento týden"
 
 msgid "This month"
-msgstr ""
+msgstr "Tento měsíc"
 
 msgid "This Year"
 msgstr ""
@@ -223,7 +223,7 @@ msgid "Last month"
 msgstr "Minulý měsíc"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "Poslední 3 měsíce"
 
 msgid "Custom range"
 msgstr ""
@@ -235,7 +235,7 @@ msgid "Min"
 msgstr "Min"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Obsahuje text"
 
 msgid "Yes"
 msgstr "Ano"
@@ -244,10 +244,10 @@ msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr ""
+msgstr "Let"
 
 msgid "Months"
-msgstr ""
+msgstr "Měsíce"
 
 msgid "Days"
 msgstr "Dnů"
@@ -262,13 +262,13 @@ msgid "Delete"
 msgstr "Smazat"
 
 msgid "Select file"
-msgstr ""
+msgstr "Vybrat soubor"
 
 msgid "No"
 msgstr ""
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Nahrávání obrázku"
 
 msgid "Select image"
 msgstr ""
@@ -280,7 +280,7 @@ msgid "Clear"
 msgstr "Vyčistit"
 
 msgid "No results"
-msgstr ""
+msgstr "Žádné výsledky"
 
 msgid "suggestions could not be retrieved"
 msgstr ""
@@ -289,7 +289,7 @@ msgid "search for username"
 msgstr ""
 
 msgid "No items to display"
-msgstr ""
+msgstr "Žádné položky k zobrazení"
 
 msgid "Online"
 msgstr "Online"
@@ -310,7 +310,7 @@ msgid "Write comment"
 msgstr ""
 
 msgid "Basic info"
-msgstr ""
+msgstr "Základní informace"
 
 msgid "Status"
 msgstr "Stav"
@@ -322,13 +322,13 @@ msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
 msgid "No write access"
-msgstr ""
+msgstr "Žádný přístup pro zápis"
 
 msgid "Save"
 msgstr "Uložit"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Zobrazit všechny události"
 
 msgid "Edit event"
 msgstr ""
@@ -337,16 +337,16 @@ msgid "Event could not be loaded. Are you sure it exists?"
 msgstr ""
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Událost se nepodařilo načíst"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Organizační jednotku se nepodařilo načíst"
 
 msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "Smazat událost"
 
 msgid "Update"
 msgstr "Aktualizovat"
@@ -367,7 +367,7 @@ msgid "less than or equal to"
 msgstr ""
 
 msgid "More filters"
-msgstr ""
+msgstr "Více filtrů"
 
 msgid "Select columns"
 msgstr ""
@@ -439,10 +439,10 @@ msgid "Completed"
 msgstr ""
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Nelze získat organizační jednotku"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Program neexistuje"
 
 msgid "Selected program is invalid for registering unit"
 msgstr ""
@@ -451,7 +451,7 @@ msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Uložit a přidat další"
 
 msgid "Save and exit"
 msgstr ""
@@ -463,7 +463,7 @@ msgid "Switch to form view"
 msgstr ""
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Přepnout do zobrazení řádků"
 
 msgid "New {{TET}}"
 msgstr ""
@@ -498,6 +498,8 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Nejedná se o program událostí, nebo jsou poškozena metadata. Podrobnosti "
+"najdete v protokolu."
 
 msgid "This event"
 msgstr ""
@@ -528,7 +530,7 @@ msgid "events added"
 msgstr ""
 
 msgid "No events added"
-msgstr ""
+msgstr "Nebyly přidány žádné události"
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
@@ -687,10 +689,10 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Select program"
-msgstr ""
+msgstr "Vybrat program"
 
 msgid "No programs available."
-msgstr ""
+msgstr "Nejsou k dispozici žádné programy."
 
 msgid "You dont have access to delete this relationship"
 msgstr ""
@@ -726,7 +728,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 msgid "Error saving event"
 msgstr ""
@@ -780,7 +782,7 @@ msgid "error"
 msgstr ""
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Smazat polygon"
 
 msgid "Set area"
 msgstr ""
@@ -796,7 +798,7 @@ msgid "Choose one or more dates..."
 msgstr ""
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Vyberte datum ..."
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
