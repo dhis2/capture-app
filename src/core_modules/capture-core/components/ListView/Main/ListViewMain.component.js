@@ -30,7 +30,6 @@ const getStyles = (theme: Theme) => ({
     paginationContainer: {
         fontSize: theme.typography.pxToRem(12),
         color: theme.palette.text.secondary,
-        // $FlowFixMe
         fontWeight: theme.typography.fontWeightMedium,
         display: 'flex',
         justifyContent: 'flex-end',
