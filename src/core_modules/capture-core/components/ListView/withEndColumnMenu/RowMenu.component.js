@@ -18,8 +18,6 @@ type Props = {
         popperContainerHidden: string,
         popperContainer: string,
     },
-    onDelete: (eventId: string) => void,
-    onView: (eventId: string) => void,
     row: Object,
     customRowMenuContents?: RowMenuContents,
 }
@@ -47,18 +45,6 @@ class Index extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = { menuOpen: false };
-    }
-
-    handleDelete = (event: SyntheticEvent<any>) => {
-        this.closeMenu();
-        this.props.onDelete(this.props.row.eventId);
-        event.stopPropagation();
-    }
-
-    handleView = (event: SyntheticEvent<any>) => {
-        this.closeMenu();
-        this.props.onView(this.props.row);
-        event.stopPropagation();
     }
 
     handleReferenceInstanceRetrieved = (instance) => {
