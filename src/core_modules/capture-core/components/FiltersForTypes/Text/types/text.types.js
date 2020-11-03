@@ -1,4 +1,4 @@
 // @flow
-export type TextFilterData = {
+export type TextFilterData = {|
     value: string,
-};
+|};
