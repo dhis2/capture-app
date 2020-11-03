@@ -1,12 +1,12 @@
 // @flow
-import { dataElementTypes } from '../../../../../metaData';
+import { typeof dataElementTypes } from '../../../../../metaData';
 
 export type EventsMainProperties = { [eventId: string]: Object, eventId: string };
 export type EventsDataElementValues = { [eventId: string]: Object};
 
 export type ColumnMetaForDataFetching = {
     id: string,
-    type: $Values<typeof dataElementTypes>,
+    type: $Values<dataElementTypes>,
     apiName?: string,
     isMainProperty?: boolean,
 };
