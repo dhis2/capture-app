@@ -36,10 +36,8 @@ const getStyles = (theme: Theme) => ({
         marginBottom: theme.typography.pxToRem(16),
     },
     container: {
-        padding: '10px 24px 16px 24px',
-    },
+        padding: '10px 24px 24px 24px' },
     paper: {
-        marginBottom: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
     },
     emptySelectionPaperContent: {
@@ -203,14 +201,13 @@ const Index = ({
                     </div>
                 </Paper>
 
-                {
-                    searchStatus === searchPageStatus.INITIAL && !selectedSearchScopeId &&
+            </div>
+            {
+                searchStatus === searchPageStatus.INITIAL && !selectedSearchScopeId &&
                     <InefficientSelectionsMessage
                         message={i18n.t('Make a selection to start searching')}
                     />
-                }
-
-            </div>
+            }
         </ResultsPageSizeContext.Provider>
     </>);
 };
