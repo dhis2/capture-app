@@ -2,7 +2,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import DataEntrySelectionsComplete from './SelectionsComplete/SelectionsComplete.container';
-import DataEntrySelectionsIncomplete from './SelectionsIncomplete/DataEntrySelectionsIncomplete.container';
+import { DataEntrySelectionsIncomplete } from './SelectionsIncomplete/DataEntrySelectionsIncomplete.container';
 import { TrackerProgramHandler } from '../../TrackerProgramHandler';
 import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
 

@@ -524,6 +524,9 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
+msgid "Choose in which organisation unit you want to start creating"
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
