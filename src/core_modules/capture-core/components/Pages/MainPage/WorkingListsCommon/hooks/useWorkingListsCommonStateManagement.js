@@ -96,7 +96,7 @@ const useTemplates = (
 
 const useView = (
     dispatch: ReduxDispatch,
-    categoryCombinationMeta: Object,
+    categoryCombinationId?: ?string,
     { storeId, workingListsType }: { storeId: string, workingListsType: string }) => {
     const viewState = useSelector(({ workingLists, workingListsUI, workingListsMeta, workingListsColumnsOrder, workingListsStickyFilters, workingListsListRecords }) => ({
         eventRecords: workingListsListRecords[storeId],
@@ -132,7 +132,7 @@ const useView = (
                 selectedTemplate,
                 context, {
                     ...meta,
-                    categoryCombinationMeta,
+                    categoryCombinationId,
                     storeId,
                     workingListsType,
                 },
@@ -142,7 +142,7 @@ const useView = (
                 queryArgs, {
                     columnsMetaForDataFetching,
                     lastTransaction,
-                    categoryCombinationMeta,
+                    categoryCombinationId,
                     storeId,
                     workingListsType,
                 },
@@ -168,7 +168,7 @@ const useView = (
         onSelectRestMenuItem: SelectRestMenuItem,
         onChangePage: ChangePage,
         onChangeRowsPerPage: ChangeRowsPerPage,
-    |}), [storeId, dispatch, categoryCombinationMeta, workingListsType]);
+    |}), [storeId, dispatch, categoryCombinationId, workingListsType]);
 
     return {
         ...viewState,
@@ -203,7 +203,7 @@ export const useWorkingListsCommonStateManagement = ((storeId: string, workingLi
     const dispatch = useDispatch();
     const context = useWorkingListsContext(dispatch, { storeId, workingListsType });
     const templates = useTemplates(dispatch, { storeId, workingListsType });
-    const view = useView(dispatch, program.categoryCombination, { storeId, workingListsType });
+    const view = useView(dispatch, program.categoryCombination && program.categoryCombination.id, { storeId, workingListsType });
 
     return {
         ...templates,

@@ -102,13 +102,13 @@ const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainC
     return mainFilterQueryArgs;
 };
 
-const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, categoryCombinationMeta: ?Object) => {
-    if (!categories || !categoryCombinationMeta) {
+const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, categoryCombinationId?: ?string) => {
+    if (!categories || !categoryCombinationId) {
         return null;
     }
 
     return {
-        attributeCc: categoryCombinationMeta.id,
+        attributeCc: categoryCombinationId,
         attributeCos: Object
             .keys(categories)
 
@@ -133,14 +133,14 @@ const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, m
 };
 
 // eslint-disable-next-line complexity
-const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryCombinationMeta: ?Object) => {
+const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryCombinationId?: ?string) => {
     let apiQueryArgs = {
         ...queryArgs,
         order: getApiOrderByQueryArgument(queryArgs.sortById, queryArgs.sortByDirection, mainColumns),
         ...getApiFilterQueryArgument(queryArgs.filters, mainColumns),
         // $FlowFixMe[exponential-spread] automated comment
         ...getMainApiFilterQueryArguments(queryArgs.filters, mainColumns),
-        ...getApiCategoriesQueryArgument(queryArgs.categories, categoryCombinationMeta),
+        ...getApiCategoriesQueryArgument(queryArgs.categories, categoryCombinationId),
     };
     apiQueryArgs.hasOwnProperty('categories') && delete apiQueryArgs.categories;
     apiQueryArgs.hasOwnProperty('sortById') && delete apiQueryArgs.sortById;
@@ -175,11 +175,11 @@ const createApiQueryArgs = (queryArgs: Object, mainColumns: Object, categoryComb
 export const getEventListData = async (
     queryArgs: InputQueryArgs,
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-    categoryCombinationMeta: ?Object,
+    categoryCombinationId?: ?string,
 ) => {
     const mainColumns = getMainColumns(columnsMetaForDataFetching);
     const { eventContainers, pagingData, request } =
-        await getEvents(createApiQueryArgs(queryArgs, mainColumns, categoryCombinationMeta));
+        await getEvents(createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId));
 
     const columnKeys = [...columnsMetaForDataFetching.keys()];
     const columnFilteredEventContainers: Array<{ id: string, record: Object }> = eventContainers
