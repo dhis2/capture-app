@@ -3,23 +3,23 @@ import { dataElementTypes } from '../../../metaData';
 
 export const filterTypesArray = [
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.TEXT,
+    dataElementTypes.TEXT,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.NUMBER,
+    dataElementTypes.NUMBER,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.INTEGER,
+    dataElementTypes.INTEGER,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.INTEGER_POSITIVE,
+    dataElementTypes.INTEGER_POSITIVE,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.INTEGER_NEGATIVE,
+    dataElementTypes.INTEGER_NEGATIVE,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.INTEGER_ZERO_OR_POSITIVE,
+    dataElementTypes.INTEGER_ZERO_OR_POSITIVE,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.DATE,
+    dataElementTypes.DATE,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.BOOLEAN,
+    dataElementTypes.BOOLEAN,
     // $FlowFixMe[prop-missing] automated comment
-    elementTypes.TRUE_ONLY,
+    dataElementTypes.TRUE_ONLY,
     'ASSIGNEE',
 ];
 
