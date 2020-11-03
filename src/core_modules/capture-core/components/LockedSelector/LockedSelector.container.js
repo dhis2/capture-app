@@ -89,6 +89,6 @@ const mapDispatchToProps = (
 export const LockedSelector: ComponentType<OwnProps> =
   compose(
       connect<Props, OwnProps & CssClasses, _, _, _, _>(mapStateToProps, mapDispatchToProps),
-      withLoadingIndicator(),
+      withLoadingIndicator(() => ({ height: '100px' })),
   )(LockedSelectorComponent);
 
