@@ -42,7 +42,7 @@ export const EventWorkingListsDataSourceSetup = (props: Props) => {
                         const sourceValue = eventMainProperties[mainColumn.id];
                         if (sourceValue != null) {
                             if (mainColumn.options) {
-                                // TODO: Need is equal comparer for types
+                                // TODO: Need is equal comparer for types because `sourceValue` and `option` can be an object for example (for some data element types) and we can't do strict comparison.
                                 const option = mainColumn.options.find(o => o.value === sourceValue);
                                 if (!option) {
                                     log.error(
