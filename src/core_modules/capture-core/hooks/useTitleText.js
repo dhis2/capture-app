@@ -2,8 +2,8 @@
 import { scopeTypes } from '../metaData';
 import { useScopeInfo } from './useScopeInfo';
 
-export const useTitleText = (selectedSearchScopeId: ?string) => {
-    const { trackedEntityName, programName, scopeType } = useScopeInfo(selectedSearchScopeId);
+export const useTitleText = (scopeId: ?string) => {
+    const { trackedEntityName, programName, scopeType } = useScopeInfo(scopeId);
 
     const text = {
         [scopeTypes.EVENT_PROGRAM]: `${programName}`,

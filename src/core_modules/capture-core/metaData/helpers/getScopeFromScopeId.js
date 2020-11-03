@@ -7,7 +7,6 @@ export const scopeTypes = {
     TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
 };
 
-// todo anottate
 export function getScopeFromScopeId(scopeId: ?string): any {
     if (!scopeId) {
         return null;

@@ -1,3 +1,4 @@
+// @flow
 import { useMemo } from 'react';
 import { getScopeFromScopeId } from '../metaData/helpers';
 import { EventProgram, TrackerProgram } from '../metaData/Program';
