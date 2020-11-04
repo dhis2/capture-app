@@ -32,7 +32,7 @@ Given('you are in the search page with the Child Programme being preselected fro
 
 Then('there should be visible a title with Child Program', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .contains('a Person in program: Child Programme')
+        .contains('person in program: Child Programme')
         .should('exist');
 });
 
@@ -288,7 +288,7 @@ When('you remove the Child Programme selection', () => {
 
 Then('there should be visible a title with Malaria case diagnosis', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .contains('Find a Malaria Entity in program: Malaria case diagnosis, treatment and investigation')
+        .contains('Find malaria entity in program: Malaria case diagnosis, treatment and investigation')
         .should('exist');
 });
 
