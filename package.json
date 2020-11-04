@@ -35,7 +35,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-addons-update": "^15.6.2",
-    "react-autosuggest": "^10.0.2",
+    "react-autosuggest": "^10.0.3",
     "react-dnd": "^8.0.2",
     "react-dnd-html5-backend": "^8.0.2",
     "react-dom": "^16.13.1",
