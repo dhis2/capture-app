@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import Tooltip from '@material-ui/core/Tooltip';
 import newEventSaveTypes from './newEventSaveTypes';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
-import { RenderFoundation } from '../../../../metaData';
+import { type RenderFoundation } from '../../../../metaData';
 import { SimpleSplitButton } from '../../../Buttons';
 import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
 

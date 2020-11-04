@@ -53,6 +53,15 @@ When('you fill in the registration details', () => {
     cy.get('[data-test="dhis2-capture-relationship-register-tei-program-selector"]')
         .find('input')
         .type('Child{enter}', { force: true });
+    cy.get('[data-test="dhis2-capture-form-field-w75KJ2mc4zz"]')
+        .find('input')
+        .type('Sarah');
+    cy.get('[data-test="dhis2-capture-form-field-zDhUuAYrxNC"]')
+        .find('input')
+        .type('Gonz');
+    cy.get('[data-test="dhis2-capture-form-field-cejWyOfXge6"]')
+        .find('input')
+        .type('Female{enter}', { force: true });
     cy.get('[data-test="dhis2-capture-dataentry-field-enrollmentDate"]')
         .find('input')
         .type('2020-01-01')
@@ -61,19 +70,12 @@ When('you fill in the registration details', () => {
         .find('input')
         .type('2020-01-01')
         .blur();
-    cy.get('[data-test="dhis2-capture-form-field-w75KJ2mc4zz"]')
-        .find('input')
-        .type('Marcus');
-    cy.get('[data-test="dhis2-capture-form-field-zDhUuAYrxNC"]')
-        .find('input')
-        .type('Barnes');
-    cy.get('[data-test="dhis2-capture-form-field-cejWyOfXge6"]')
-        .find('input')
-        .type('Male{enter}', { force: true });
 });
 
 When('you submit the registration form', () => {
     cy.get('[data-test="dhis2-capture-create-and-link-button"]')
+        .click();
+    cy.get('[data-test="dhis2-capture-create-as-new-person"]')
         .click();
 });
 
@@ -181,19 +183,6 @@ And('you expand the attributes search area', () => {
         .click();
 });
 
-And('you fill in the zip code range numbers', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
-        .eq(5)
-        .type('7130')
-        .blur();
-
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
-        .find('[data-test="capture-ui-input"]')
-        .eq(6)
-        .type('7135')
-        .blur();
-});
 
 And('you click search', () => {
     cy.get('[data-test="dhis2-capture-d2-form-area"]')

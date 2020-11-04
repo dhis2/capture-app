@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { SplitButton, Menu, MenuItem } from '@dhis2/ui-core';
+import { SplitButton, Menu, MenuItem } from '@dhis2/ui';
 
 type Item = {
     key: string,

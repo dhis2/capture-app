@@ -45,10 +45,10 @@ msgstr ""
 "at dette vil lukke andre versjoner."
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Organisasjonsenhet"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "Dato for registrering"
 
 msgid "Last updated"
 msgstr "Sist oppdatert"
@@ -347,7 +347,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr "Valgt program er ugyldig for registreringsenhet"
 
 msgid "Start again"
-msgstr ""
+msgstr "Start på nytt"
 
 msgid "New {{typeName}}"
 msgstr "Ny {{typeName}}"
@@ -774,10 +774,10 @@ msgid "View dashboard"
 msgstr "Vis dashbord"
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "Vis aktiv registrering"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "Registrer på nytt"
 
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
@@ -811,7 +811,7 @@ msgid "Add relationship"
 msgstr "Legg til relasjon"
 
 msgid "Results found"
-msgstr ""
+msgstr "Resultater funnet"
 
 msgid "Selected program"
 msgstr "Valgt program"
@@ -865,7 +865,7 @@ msgid "Set coordinate"
 msgstr "Sett koordinater"
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "Side {{currentPage}}"
 
 msgid "Date"
 msgstr "Dato"

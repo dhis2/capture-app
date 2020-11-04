@@ -4,13 +4,13 @@ import * as React from 'react';
 import I18n from '@dhis2/d2-i18n';
 import type { SelectedRelationshipType } from '../newRelationship.types';
 import LinkButton from '../../../Buttons/LinkButton.component';
-import { findModes, findModeDisplayNames } from '../findModes';
+import { typeof findModes, findModeDisplayNames } from '../findModes';
 
 
 type Props = {
     selectedRelationshipType?: ?SelectedRelationshipType,
     onInitializeNewRelationship: () => void,
-    findMode?: ?$Values<typeof findModes>,
+    findMode?: ?$Values<findModes>,
     searching?: ?boolean,
     onSelectRelationshipType: Function,
     onSelectFindMode: Function,
@@ -37,7 +37,7 @@ class RelationshipNavigation extends React.Component<Props> {
 
     renderSlash = () => (<span style={{ padding: 5 }}>/</span>)
 
-    renderForFindMode = (findMode: $Values<typeof findModes>) => {
+    renderForFindMode = (findMode: $Values<findModes>) => {
         const { onSelectFindMode, searching } = this.props;
         const displayName = findModeDisplayNames[findMode];
         return (

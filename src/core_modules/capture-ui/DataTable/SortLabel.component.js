@@ -38,7 +38,6 @@ class SortLabel extends React.Component<Props> {
         return (
             <div
 
-                // $FlowFixMe[incompatible-call] automated comment
                 className={classNames(childrenDefaultClasses, this.props.childrenClass, classes)}
                 onClick={this.handleSort}
                 role="button"
@@ -50,7 +49,7 @@ class SortLabel extends React.Component<Props> {
     }
 
     render() {
-        const { children, isActive, direction, onSort, onGetIcons, placement } = this.props; // eslint-disable-line
+        const { isActive, direction, onSort, onGetIcons, placement } = this.props;
         const icons = onGetIcons && onGetIcons(isActive, direction, onSort);
         const containerClasses = classNames(
             defaultClasses.sortLabelContainer,

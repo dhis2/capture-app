@@ -2,17 +2,14 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import FormBuilder from 'capture-ui/FormBuilder/FormBuilder.component';
-import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
+import type FormBuilder, { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
 import FormBuilderContainer from './FormBuilder.container';
 import withDivider from './FieldDivider/withDivider';
 import withAlternateBackgroundColors from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
 import withCustomForm from './D2CustomForm/withCustomForm';
 import buildField from './field/buildField';
-
 import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
-import MetaDataElement from '../../metaData/DataElement/DataElement';
-import MetadataCustomForm from '../../metaData/RenderFoundation/CustomForm';
+import type { DataElement, CustomForm } from '../../metaData';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 import { validatorTypes } from './field/validators/constants';
 
@@ -40,7 +37,7 @@ type RulesMessages = {
 };
 
 type Props = {
-    fieldsMetaData: Map<string, MetaDataElement>,
+    fieldsMetaData: Map<string, DataElement>,
     values: FormsValues,
     rulesMessages: RulesMessages,
     rulesHiddenFields: RulesHiddenFields,
@@ -52,7 +49,7 @@ type Props = {
     formBuilderId: string,
     formHorizontal: boolean,
     fieldOptions?: ?Object,
-    customForm: MetadataCustomForm,
+    customForm: CustomForm,
     validationStrategy: $Values<typeof validationStrategies>,
     loadNr: number,
     viewMode?: ?boolean,

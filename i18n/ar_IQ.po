@@ -43,7 +43,7 @@ msgstr ""
 "النسخ الأخرى."
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "الوحدة التنظيمية"
 
 msgid "Date of enrollment"
 msgstr ""
@@ -344,7 +344,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
 
 msgid "Start again"
-msgstr ""
+msgstr "البدء من جديد"
 
 msgid "New {{typeName}}"
 msgstr "{{typeName}} جديد"

@@ -41,10 +41,10 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Unit organisasi"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "Tanggal pendaftaran"
 
 msgid "Last updated"
 msgstr "Terakhir diperbarui"

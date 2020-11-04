@@ -4,12 +4,12 @@ beforeEach(() => {
 
 Given('you are in the main page with no selections made', () => {
     cy.visit('/#/');
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="dhis2-capture-new-event-button"]')
         .should('exist');
 });
 
 When('you click the "New" button to add a new event', () => {
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="dhis2-capture-new-event-button"]')
         .click();
 });
 
@@ -21,13 +21,13 @@ Then('you should see informative text saying you should do finish your selection
 
 Given('you are in the main page with organisation unit preselected', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="dhis2-capture-new-event-button"]')
         .should('exist');
 });
 
 Given('you are in the main page with program unit preselected', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="dhis2-capture-new-event-button"]')
         .should('exist');
 });
 
@@ -209,18 +209,24 @@ When('you click the find button', () => {
         .click();
 });
 
-Then('you are navigated to the search page with the same org unit and program Malaria case registration', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/search/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
+When('you click the find button from the dropdown menu', () => {
+    cy.get('[data-test="dhis2-capture-find-button"]')
+        .click();
+    cy.get('[data-test="dhis2-capture-find-menuitem-one"]')
+        .click();
+});
+
+Then('you navigated to the search page without a program being selected', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/search/orgUnitId=DiszpKrYNg8`);
 });
 
 Then('you are navigated to the search page with the same org unit and program Child Programme', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/search/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
 });
 
-And('there should be search domain Child Programme being preselected', () => {
+Then('there should be visible a title with Child Program', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .find('[data-test="dhis2-uicore-select-input"]')
-        .contains('Child Programme')
+        .contains('a Person in program: Child Programme')
         .should('exist');
 });
 
@@ -228,11 +234,4 @@ And('there should be Child Programme domain forms visible to search with', () =>
     cy.get('[data-test="dhis2-capture-search-page-content"]')
         .find('[data-test="capture-ui-input"]')
         .should('have.length', 1);
-});
-
-Then('there should be no search domain preselected', () => {
-    cy.get('[data-test="dhis2-uicore-select-input"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-informative-paper"]')
-        .should('exist');
 });

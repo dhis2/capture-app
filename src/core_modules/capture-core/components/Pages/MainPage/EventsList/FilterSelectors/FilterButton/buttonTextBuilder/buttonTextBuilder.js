@@ -1,5 +1,5 @@
 // @flow
-import { dataElementTypes, OptionSet } from '../../../../../../../metaData';
+import { dataElementTypes, type OptionSet } from '../../../../../../../metaData';
 import {
     convertText,
     convertDate,

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Chip } from '@dhis2/ui-core';
+import { Chip } from '@dhis2/ui';
 import TemplateSelectorChipContent from './TemplateSelectorChipContent.component';
 import type { WorkingListTemplate } from './workingLists.types';
 

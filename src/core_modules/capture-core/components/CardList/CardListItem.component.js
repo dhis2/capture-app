@@ -5,7 +5,7 @@ import moment from 'moment';
 import type { ComponentType, Element } from 'react';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
 import DoneIcon from '@material-ui/icons/Done';
-import { colors, Tag } from '@dhis2/ui-core';
+import { colors, Tag } from '@dhis2/ui';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
@@ -18,7 +18,7 @@ import { dataElementTypes } from '../../metaData';
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
     currentSearchScopeName?: string,
-    currentProgramId: ?string,
+    currentProgramId?: string,
     getCustomBottomElements?: (props: Object) => Element<any>,
     profileImageDataElement: ?CardProfileImageElementInformation,
     dataElements: CardDataElementsInformation,

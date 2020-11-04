@@ -8,6 +8,7 @@ export const searchPageStatus = {
     NO_RESULTS: 'NO_RESULTS',
     SHOW_RESULTS: 'SHOW_RESULTS',
     ERROR: 'ERROR',
+    TOO_MANY_RESULTS: 'TOO_MANY_RESULTS',
 };
 
 export const searchPageDesc = createReducerDescription({
@@ -15,11 +16,11 @@ export const searchPageDesc = createReducerDescription({
         ...state,
         searchStatus: searchPageStatus.INITIAL,
     }),
-    [searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW]: (state, { payload: { searchResults, searchResultsPaginationInfo } }) => ({
+    [searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW]: (state, { payload: { searchResults, currentPage } }) => ({
         ...state,
         searchStatus: searchPageStatus.SHOW_RESULTS,
         searchResults,
-        searchResultsPaginationInfo,
+        currentPage,
     }),
     [searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW]: state => ({
         ...state,
@@ -33,6 +34,10 @@ export const searchPageDesc = createReducerDescription({
         ...state,
         searchStatus: searchPageStatus.ERROR,
     }),
+    [searchPageActionTypes.SEARCH_RESULTS_TOO_MANY_VIEW]: state => ({
+        ...state,
+        searchStatus: searchPageStatus.TOO_MANY_RESULTS,
+    }),
     [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
         ...state,
         currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
@@ -40,9 +45,6 @@ export const searchPageDesc = createReducerDescription({
 }, 'searchPage', {
     searchStatus: searchPageStatus.INITIAL,
     searchResults: [],
-    currentSearchInfo: {},
-    searchResultsPaginationInfo: {
-        nextPageButtonDisabled: false,
-        currentPage: 0,
-    },
+    currentSearchInfo: [],
+    currentPage: 0,
 });

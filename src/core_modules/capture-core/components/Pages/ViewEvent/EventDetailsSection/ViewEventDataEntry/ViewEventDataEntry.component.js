@@ -12,7 +12,7 @@ import {
     withBrowserBackWarning,
 } from '../../../../../components/DataEntry';
 
-import { RenderFoundation, DataElement, dataElementTypes } from '../../../../../metaData';
+import { type RenderFoundation, DataElement, dataElementTypes } from '../../../../../metaData';
 import { convertFormToClient, convertClientToView } from '../../../../../converters';
 
 import {

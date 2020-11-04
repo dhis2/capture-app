@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import OptionGroup from '../../../../../metaData/OptionSet/OptionGroup';
+import { type OptionGroup } from '../../../../../metaData';
 import { makeGetOptionsVisibility } from './rulesOptionsVisibility.selectors';
 
 const effectKeys = {

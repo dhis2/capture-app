@@ -14,7 +14,7 @@ function getStores() {
 }
 
 function createStorageController(
-    mainStorageController: StorageController,
+    mainStorageController: typeof StorageController,
 ) {
     const storageName = getStorageName(mainStorageController.name);
     const appCacheVersion = mainStorageController.version;
@@ -46,7 +46,7 @@ const storeSpecificCreateActions = {
     },
 };
 
-async function initUserControllerAsync(mainStorageController: StorageController) {
+async function initUserControllerAsync(mainStorageController: typeof StorageController) {
     const userStorageController =
         createStorageController(mainStorageController);
 

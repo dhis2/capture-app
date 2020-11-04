@@ -38,10 +38,10 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "تنظیم یونٹ"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "اندراج کی تاریخ"
 
 msgid "Last updated"
 msgstr "آخری اپ ڈیٹ"

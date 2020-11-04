@@ -1,7 +1,7 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2020
 # phil_dhis2, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
 # 晓东 林 <13981924470@126.com>, 2020
 # easylin <lin_xd@126.com>, 2020
 # 
@@ -40,10 +40,10 @@ msgid ""
 msgstr "在同一个容器中你打开了其它版本的采集App。当前，该应用仅仅支持同时运行一个版本应用。请刷新页面，如果你想使用该版本。注意将关闭其它版本。"
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "机构"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "注册日期"
 
 msgid "Last updated"
 msgstr "上次更新"
@@ -340,7 +340,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr "选择的项目对选择的机构无效"
 
 msgid "Start again"
-msgstr ""
+msgstr "再开始"
 
 msgid "New {{typeName}}"
 msgstr "新建 {{typeName}}"
@@ -753,10 +753,10 @@ msgid "View dashboard"
 msgstr "查看仪表盘"
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "查看有效的注册"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "重新注册"
 
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
@@ -788,7 +788,7 @@ msgid "Add relationship"
 msgstr "添加关系"
 
 msgid "Results found"
-msgstr ""
+msgstr "找到的结果"
 
 msgid "Selected program"
 msgstr "选择的项目"
@@ -842,7 +842,7 @@ msgid "Set coordinate"
 msgstr "设置坐标"
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "第{{currentPage}}页"
 
 msgid "Date"
 msgstr "日期"

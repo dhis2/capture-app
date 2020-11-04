@@ -1,9 +1,9 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useContext } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
-import { Button } from '@dhis2/ui-core';
+import { Button } from '@dhis2/ui';
 import { CardList } from '../../../CardList';
 import withNavigation from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
@@ -11,6 +11,7 @@ import type { Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 import { availableCardListButtonState } from '../../../CardList/CardList.constants';
 import { SearchResultsHeader } from '../../../SearchResultsHeader';
+import { ResultsPageSizeContext } from '../../shared-contexts';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -87,46 +88,55 @@ export const SearchResultsIndex = ({
     currentSearchScopeName,
     currentFormId,
     currentSearchTerms,
-    nextPageButtonDisabled,
-}: Props & CssClasses) => {
+}: Props) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+
     const handlePageChange = (newPage) => {
         switch (currentSearchScopeType) {
         case searchScopes.PROGRAM:
-            searchViaAttributesOnScopeProgram({ programId: currentSearchScopeId, formId: currentFormId, page: newPage });
+            searchViaAttributesOnScopeProgram({
+                programId: currentSearchScopeId,
+                formId: currentFormId,
+                page: newPage,
+                resultsPageSize,
+            });
             break;
         case searchScopes.TRACKED_ENTITY_TYPE:
-            searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: currentSearchScopeId, formId: currentFormId, page: newPage });
+            searchViaAttributesOnScopeTrackedEntityType({
+                trackedEntityTypeId: currentSearchScopeId,
+                formId: currentFormId,
+                page: newPage,
+                resultsPageSize,
+            });
             break;
         default:
             break;
         }
     };
 
-    const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : null;
+    const currentProgramId = (currentSearchScopeType === searchScopes.PROGRAM) ? currentSearchScopeId : '';
     return (<>
         <SearchResultsHeader currentSearchTerms={currentSearchTerms} currentSearchScopeName={currentSearchScopeName} />
-        <div data-test="dhis2-capture-search-results-list">
-            <CardList
-                noItemsText={i18n.t('No results found')}
-                currentSearchScopeName={currentSearchScopeName}
-                currentProgramId={currentProgramId}
-                items={searchResults}
-                dataElements={dataElements}
-                getCustomItemBottomElements={({ item, navigationButtonsState, programName }) => (
-                    <CardListButtons
-                        programName={programName}
-                        currentSearchScopeId={currentSearchScopeId}
-                        currentSearchScopeType={currentSearchScopeType}
-                        id={item.id}
-                        orgUnitId={item.tei.orgUnit}
-                        navigationButtonsState={navigationButtonsState}
-                    />
-                )}
-            />
-        </div>
+        <CardList
+            noItemsText={i18n.t('No results found')}
+            currentSearchScopeName={currentSearchScopeName}
+            currentProgramId={currentProgramId}
+            items={searchResults}
+            dataElements={dataElements}
+            getCustomItemBottomElements={({ item, navigationButtonsState, programName }) => (
+                <CardListButtons
+                    programName={programName}
+                    currentSearchScopeId={currentSearchScopeId}
+                    currentSearchScopeType={currentSearchScopeType}
+                    id={item.id}
+                    orgUnitId={item.tei.orgUnit}
+                    navigationButtonsState={navigationButtonsState}
+                />
+            )}
+        />
         <div className={classes.pagination}>
             <SearchPagination
-                nextPageButtonDisabled={nextPageButtonDisabled}
+                nextPageButtonDisabled={searchResults.length < resultsPageSize}
                 onChangePage={newPage => handlePageChange(newPage)}
                 currentPage={currentPage}
             />

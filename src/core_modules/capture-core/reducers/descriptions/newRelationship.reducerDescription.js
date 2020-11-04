@@ -101,7 +101,7 @@ export const newRelationshipRegisterTeiDuplicatesReviewDesc = createReducerDescr
         isUpdating: false,
         teis: action.payload.teis,
         loadError: false,
-        paginationData: { ...state.paginationData, ...action.payload.paginationData },
+        currentPage: action.payload.currentPage,
     }),
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_RETRIEVAL_FAILED]: state => ({
         ...state,
@@ -112,6 +112,6 @@ export const newRelationshipRegisterTeiDuplicatesReviewDesc = createReducerDescr
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_CHANGE_PAGE]: (state, action) => ({
         ...state,
         isUpdating: true,
-        paginationData: { ...state.paginationData, currentPage: action.payload.page },
+        currentPage: action.payload.page,
     }),
 }, 'newRelationshipRegisterTeiDuplicatesReview');

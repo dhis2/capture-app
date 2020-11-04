@@ -1,5 +1,5 @@
 // @flow
-import { ActionsObservable, ofType } from 'redux-observable';
+import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { moment } from 'capture-core-utils/moment';
@@ -28,7 +28,7 @@ import {
 } from '../../ViewEventComponent/viewEvent.actions';
 
 
-export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: ReduxStore) =>
+export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
         map(() => {

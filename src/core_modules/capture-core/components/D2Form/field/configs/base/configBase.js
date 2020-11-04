@@ -1,11 +1,11 @@
 // @flow
-import * as React from 'react';
+import { type ComponentType } from 'react';
 import type { ValidatorContainer } from 'capture-ui/FormBuilder/FormBuilder.component';
 import { getValidators } from '../../validators';
-import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import type { DataElement } from '../../../../../metaData';
 
 export type FieldConfigForType = {
-    component: React.ComponentType<any>,
+    component: ComponentType<any>,
     props?: ?Object,
     id?: string,
     validators?: Array<ValidatorContainer>,
@@ -22,7 +22,7 @@ export const commitEvents = {
     ON_BLUR: 'onBlur',
 };
 
-export const getBaseConfigForField = (metaData: MetaDataElement) => ({
+export const getBaseConfigForField = (metaData: DataElement) => ({
     id: metaData.id,
     validators: getValidators(metaData),
     commitEvent: commitEvents.ON_BLUR,

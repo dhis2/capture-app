@@ -4,11 +4,10 @@ import { OptionSetSelectFieldForForm, OptionSetBoxesFieldForForm } from '../../C
 import { getOptionsForRadioButtons, getOptionsForSelect } from './optionSetHelpers';
 import { orientations } from '../../../../FormFields/New';
 import { inputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
-import type { DataElement as MetaDataElement } from '../../../../../metaData';
-import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
+import type { DataElement, OptionSet } from '../../../../../metaData';
 
 const mapInputTypeToPropsGetterFn = {
-    [inputTypes.DROPDOWN]: (metaData: MetaDataElement) => ({
+    [inputTypes.DROPDOWN]: (metaData: DataElement) => ({
 
         // $FlowFixMe[incompatible-call] automated comment
         options: getOptionsForSelect(metaData.optionSet),
@@ -17,12 +16,12 @@ const mapInputTypeToPropsGetterFn = {
             width: '100%',
         },
     }),
-    [inputTypes.HORIZONTAL_RADIOBUTTONS]: (metaData: MetaDataElement) => ({
+    [inputTypes.HORIZONTAL_RADIOBUTTONS]: (metaData: DataElement) => ({
 
         // $FlowFixMe[incompatible-call] automated comment
         options: getOptionsForRadioButtons(metaData.optionSet),
     }),
-    [inputTypes.VERTICAL_RADIOBUTTONS]: (metaData: MetaDataElement) => ({
+    [inputTypes.VERTICAL_RADIOBUTTONS]: (metaData: DataElement) => ({
         orientation: orientations.VERTICAL,
 
         // $FlowFixMe[incompatible-call] automated comment
@@ -37,7 +36,7 @@ const mapInputTypeToComponent = {
 };
 
 
-const getOptionSetFieldConfig = (metaData: MetaDataElement, options: Object) => {
+const getOptionSetFieldConfig = (metaData: DataElement, options: Object) => {
     // $FlowFixMe[incompatible-type] automated comment
     const optionSet: OptionSet = metaData.optionSet;
     const inputType = optionSet.inputType;
