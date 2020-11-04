@@ -55,7 +55,7 @@ const NewPagePlain = ({
         {
             newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
                 <InefficientSelectionsMessage
-                    message={i18n.t('Choose in which organisation unit you want to start creating')}
+                    message={i18n.t('"Choose a registering unit to start reporting')}
                 />
         }
     </>);

@@ -195,7 +195,7 @@ const Index = ({
             {
                 searchStatus === searchPageStatus.INITIAL && !selectedSearchScopeId &&
                     <InefficientSelectionsMessage
-                        message={i18n.t('Make a selection to start searching')}
+                        message={i18n.t('Choose a type to start searching')}
                     />
             }
         </ResultsPageSizeContext.Provider>
