@@ -15,7 +15,7 @@ const StyledPaper = withStyles({
     },
 })(Paper);
 
-export const InefficientSelectionsMessage = ({ message, dataTest }) => (
+export const InefficientSelectionsMessage = ({ message, dataTest = 'dhis2-capture-informative-paper' }) => (
     <Grid container justify="center">
         <Grid item>
             <StyledPaper
