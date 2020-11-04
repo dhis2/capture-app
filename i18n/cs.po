@@ -31,7 +31,7 @@ msgid "Async field update failed"
 msgstr ""
 
 msgid "A value is required"
-msgstr ""
+msgstr "hodnota je vyžadována"
 
 msgid "Please provide a valid number"
 msgstr ""
@@ -271,7 +271,7 @@ msgid "Uploading image"
 msgstr "Nahrávání obrázku"
 
 msgid "Select image"
-msgstr ""
+msgstr "Vybrat obrázek"
 
 msgid "Search"
 msgstr "Hledat"
@@ -445,7 +445,7 @@ msgid "Program doesn't exist"
 msgstr "Program neexistuje"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "Vybraný program je pro registraci jednotky neplatný"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
@@ -460,7 +460,7 @@ msgid "Finish"
 msgstr ""
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Přepnout do formulářového zobrazení"
 
 msgid "Switch to row view"
 msgstr "Přepnout do zobrazení řádků"
@@ -527,7 +527,7 @@ msgid ""
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "přidány události"
 
 msgid "No events added"
 msgstr "Nebyly přidány žádné události"
@@ -536,13 +536,13 @@ msgid "Select a registering unit and program above to get started"
 msgstr ""
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "Vybrat program, o kterém chcete začít podávat zprávy"
 
 msgid "Select a registering unit to start reporting"
 msgstr ""
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "Chcete-li začít podávat zprávy, vyberte možnost kategorie"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
@@ -734,7 +734,7 @@ msgid "Error saving event"
 msgstr ""
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "Událost se nepodařilo uložit. Podrobnosti najdete v protokolu"
 
 msgid "Could not delete event"
 msgstr ""
