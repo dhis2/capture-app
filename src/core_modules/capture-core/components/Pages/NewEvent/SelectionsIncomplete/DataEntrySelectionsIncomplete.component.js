@@ -21,13 +21,13 @@ const getStyles = () => ({
 const DataEntrySelectionsIncompletePlain = ({ classes, onCancel, isProgramSelected, isOrgUnitSelected }) => {
     const getText = () => {
         if (!isProgramSelected && !isOrgUnitSelected) {
-            return i18n.t('Select a registering unit and program above to get started');
+            return i18n.t('Choose a registering unit and program to get started');
         } else if (!isProgramSelected) {
-            return i18n.t('Select a program to start reporting');
+            return i18n.t('Choose a program to start reporting');
         } else if (!isOrgUnitSelected) {
-            return i18n.t('Select a registering unit to start reporting');
+            return i18n.t('Choose a registering unit to start reporting');
         }
-        return i18n.t('Select a category option to start reporting');
+        return i18n.t('Choose a category option to start reporting');
     };
     return (
         <div className={classes.container}>
