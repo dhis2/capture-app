@@ -127,12 +127,11 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
             id,
             classes,
             isFormInReduxStore,
-            formHorizontal,
             ...passOnProps
         } = this.props;
         const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries()).map(entry => entry[1]);
 
-        const sections = metaDataSectionsAsArray.map(section => (formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps, classes)));
+        const sections = metaDataSectionsAsArray.map(section => (passOnProps.formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps, classes)));
 
         return (
             <div data-test="dhis2-capture-d2-form-component">
