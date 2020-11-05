@@ -113,7 +113,6 @@ const Index = ({
         };
     },
     [
-        searchStatus,
         cleanSearchRelatedInfo,
         fallbackTriggered,
         preselectedProgramId,
