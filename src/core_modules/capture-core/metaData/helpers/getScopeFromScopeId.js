@@ -1,7 +1,7 @@
 // @flow
-import { getProgramFromProgramIdThrowIfNotFound, getTrackedEntityTypeThrowIfNotFound } from './index';
-import { Program } from '../Program';
+import { EventProgram, TrackerProgram } from '../Program';
 import { TrackedEntityType } from '../TrackedEntityType';
+import { programCollection, trackedEntityTypesCollection } from '../../metaDataMemoryStores';
 
 export const scopeTypes = {
     TRACKER_PROGRAM: 'TRACKER_PROGRAM',
@@ -9,23 +9,15 @@ export const scopeTypes = {
     TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
 };
 
-//todo EVENTPROGRAM | TRACKER PROGRAM
-type Scope = Program | TrackedEntityType
+type Scope = (EventProgram | TrackerProgram | TrackedEntityType)
+
 export function getScopeFromScopeId(scopeId: ?string): ?Scope {
     if (!scopeId) {
         return null;
     }
-
-    let scope;
-    try {
-        scope = getProgramFromProgramIdThrowIfNotFound(scopeId);
-    } catch {
-        try {
-            scope = getTrackedEntityTypeThrowIfNotFound(scopeId);
-        } catch {
-            return null;
-        }
+    const scope = programCollection.get(scopeId) || trackedEntityTypesCollection.get(scopeId);
+    if (scope instanceof EventProgram || scope instanceof TrackerProgram || scope instanceof TrackedEntityType) {
+        return scope;
     }
-
-    return scope;
+    return null;
 }
