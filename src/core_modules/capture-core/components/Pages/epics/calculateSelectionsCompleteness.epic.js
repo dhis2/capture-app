@@ -9,7 +9,7 @@ import {
     selectionsCompletenessCalculated,
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
-import { lockedSelectorActionTypes } from '../../LockedSelector';
+import { lockedSelectorActionTypes, lockedSelectorBatchActionTypes } from '../../LockedSelector';
 
 type CurrentSelectionsState = {
     programId?: ?string,
@@ -38,7 +38,7 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
 export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            lockedSelectorActionTypes.PROGRAM_ID_SET,
+            lockedSelectorBatchActionTypes.PROGRAM_ID_SET_BATCH,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
             newEnrollmentUrlActionTypes.VALID_SELECTIONS_FROM_URL,
