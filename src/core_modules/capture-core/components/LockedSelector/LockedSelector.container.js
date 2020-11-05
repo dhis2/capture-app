@@ -29,6 +29,7 @@ const mapStateToProps = (state: ReduxState) => ({
 const mapDispatchToProps = (
     dispatch: ReduxDispatch,
     {
+        customActionsOnProgramIdSet = [],
         customActionsOnProgramIdReset = [],
         customActionsOnOrgUnitIdReset = [],
     }: OwnProps,
@@ -37,7 +38,11 @@ const mapDispatchToProps = (
         dispatch(setOrgUnitFromLockedSelector(id, orgUnit));
     },
     onSetProgramId: (id: string) => {
-        dispatch(setProgramIdFromLockedSelector(id));
+        dispatch(
+            batchActions([
+                setProgramIdFromLockedSelector(id),
+                ...customActionsOnProgramIdSet,
+            ], lockedSelectorBatchActionTypes.PROGRAM_ID_SET_BATCH));
     },
     onSetCategoryOption: (categoryId: string, categoryOption: Object) => {
         dispatch(setCategoryOptionFromLockedSelector(categoryId, categoryOption));

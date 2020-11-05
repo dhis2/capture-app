@@ -4,7 +4,7 @@ import React, { useCallback, useMemo, useEffect } from 'react';
 import type { ComponentType } from 'react';
 import { SearchPageComponent } from './SearchPage.component';
 import type { AvailableSearchOptions, TrackedEntityTypesWithCorrelatedPrograms } from './SearchPage.types';
-import { navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
+import { cleanSearchRelatedData, navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData';
 import { searchScopes } from './SearchPage.constants';
@@ -107,6 +107,9 @@ export const SearchPage: ComponentType<{||}> = () => {
     const dispatchNavigateToMainPage = useCallback(
         () => { dispatch(navigateToMainPage()); },
         [dispatch]);
+    const dispatchCleanSearchRelatedData = useCallback(
+        () => { dispatch(cleanSearchRelatedData()); },
+        [dispatch]);
 
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
     const availableSearchOptions = useSearchOptions(trackedEntityTypesWithCorrelatedPrograms);
@@ -118,8 +121,12 @@ export const SearchPage: ComponentType<{||}> = () => {
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
     const ready: boolean =
       useSelector(({ activePage }) => !activePage.isLoading);
+    const fallbackTriggered: boolean =
+      useSelector(({ searchPage }) => searchPage.fallbackTriggered);
     const currentProgramId: string =
       useSelector(({ currentSelections }) => currentSelections.programId);
+    const trackedEntityTypeId: string =
+      useSelector(({ currentSelections }) => currentSelections.trackedEntityTypeId);
 
     useEffect(() => {
         if (currentProgramId && (currentProgramId !== preselectedProgramId)) {
@@ -133,9 +140,12 @@ export const SearchPage: ComponentType<{||}> = () => {
         <SearchPageComponent
             navigateToMainPage={dispatchNavigateToMainPage}
             showInitialSearchPage={dispatchShowInitialSearchPage}
+            cleanSearchRelatedInfo={dispatchCleanSearchRelatedData}
             trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
             availableSearchOptions={availableSearchOptions}
             preselectedProgramId={preselectedProgramId}
+            trackedEntityTypeId={trackedEntityTypeId}
+            fallbackTriggered={fallbackTriggered}
             searchStatus={searchStatus}
             error={error}
             ready={ready}

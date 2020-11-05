@@ -1,5 +1,7 @@
 // @flow
 import { getProgramFromProgramIdThrowIfNotFound, getTrackedEntityTypeThrowIfNotFound } from './index';
+import { Program } from '../Program';
+import { TrackedEntityType } from '../TrackedEntityType';
 
 export const scopeTypes = {
     TRACKER_PROGRAM: 'TRACKER_PROGRAM',
@@ -7,7 +9,9 @@ export const scopeTypes = {
     TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
 };
 
-export function getScopeFromScopeId(scopeId: ?string): any {
+//todo EVENTPROGRAM | TRACKER PROGRAM
+type Scope = Program | TrackedEntityType
+export function getScopeFromScopeId(scopeId: ?string): ?Scope {
     if (!scopeId) {
         return null;
     }

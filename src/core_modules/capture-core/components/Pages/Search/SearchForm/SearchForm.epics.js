@@ -1,10 +1,14 @@
 // @flow
 import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
-import { of, from, empty } from 'rxjs';
+import { of, from, empty, concat } from 'rxjs';
 import { isObject, isString } from 'd2-utilizr/src';
+import { push } from 'connected-react-router';
 import {
     searchPageActionTypes,
+    fallbackPushPage,
+    fallbackSearch,
+    saveCurrentSearchInfo,
     showEmptyResultsViewOnSearchPage,
     showErrorViewOnSearchPage,
     showLoadingViewOnSearchPage,
@@ -12,11 +16,13 @@ import {
 } from '../SearchPage.actions';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
+    scopeTypes,
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 import { PAGINATION } from '../SearchPage.constants';
+import { urlThreeArguments } from '../../../../utils/url';
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
@@ -153,4 +159,91 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic: Epic = (action$, s
 
             return searchViaAttributesStream(queryArgs, attributes, triggeredFrom);
         }),
+    );
+
+const deriveSearchFormInfo = searchGroups => (searchGroups.filter(searchGroup => !searchGroup.unique)[0] || {});
+
+const deriveFormValues = (searchForm, values) => {
+    if (!searchForm) {
+        return {};
+    }
+    const elements = searchForm.getElements();
+
+    return ([...elements.values()].reduce((acc, { id: fieldId }) => {
+        if (Object.keys(values).includes(fieldId)) {
+            const fieldValue = values[fieldId];
+            return { ...acc, [fieldId]: fieldValue };
+        }
+        return acc;
+    }, {}));
+};
+
+const deriveCurrentFallbackSearchTerms = (searchTermsFromOriginalSearch, fallbackFormValues) =>
+    searchTermsFromOriginalSearch.filter(({ id }) => Object.keys(fallbackFormValues).includes(id));
+
+export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(searchPageActionTypes.FALLBACK_SEARCH_START),
+        flatMap(({ payload: { formId, programId, pageSize, availableSearchOptions } }) => {
+            const trackerProgram = getTrackerProgramThrowIfNotFound(programId);
+            if (trackerProgram.trackedEntityType) {
+                const { orgUnitId } = store.value.currentSelections;
+
+                const { id: trackedEntityTypeId } = trackerProgram.trackedEntityType;
+                const { formsValues, searchPage: { currentSearchInfo: { currentSearchTerms: searchTermsFromOriginalSearch } } } = store.value;
+
+                const { searchForm, formId: fallbackFormId } = deriveSearchFormInfo(availableSearchOptions[trackedEntityTypeId].searchGroups);
+                const fallbackFormValues = deriveFormValues(searchForm, formsValues[formId]);
+                const fallbackSearchTerms = deriveCurrentFallbackSearchTerms(searchTermsFromOriginalSearch, fallbackFormValues);
+
+                return concat(
+                    of(fallbackPushPage({ orgUnitId, trackedEntityTypeId })),
+                    of(fallbackSearch({ trackedEntityTypeId, fallbackFormValues, pageSize })),
+                    of(saveCurrentSearchInfo({
+                        formId: fallbackFormId,
+                        currentSearchTerms: fallbackSearchTerms,
+                        searchScopeType: scopeTypes.TRACKED_ENTITY_TYPE,
+                        searchScopeId: trackedEntityTypeId,
+                    })),
+                );
+            }
+
+            return empty();
+        }),
+    );
+
+export const fallbackSearchEpic = (action$: InputObservable) =>
+    action$.pipe(
+        ofType(searchPageActionTypes.FALLBACK_SEARCH),
+        flatMap(({ payload: { fallbackFormValues, trackedEntityTypeId, pageSize, page } }) => {
+            const filter = getFiltersForAttributesSearchQuery(fallbackFormValues);
+            const queryArgs = {
+                filter,
+                trackedEntityType: trackedEntityTypeId,
+                page,
+                pageSize,
+                ouMode: 'ACCESSIBLE',
+            };
+
+            const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
+
+            return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+                map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
+                    if (searchResults.length > 0) {
+                        return showSuccessResultsViewOnSearchPage(searchResults, pagingData.currentPage);
+                    }
+
+                    return of(showEmptyResultsViewOnSearchPage());
+                }),
+                startWith(showLoadingViewOnSearchPage()),
+                catchError(() => of(showErrorViewOnSearchPage())),
+            );
+        }),
+    );
+
+export const fallbackPushPageEpic = (action$: InputObservable) =>
+    action$.pipe(
+        ofType(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED),
+        map(({ payload: { orgUnitId, trackedEntityTypeId } }) =>
+            push(urlThreeArguments({ orgUnitId, trackedEntityTypeId }))),
     );

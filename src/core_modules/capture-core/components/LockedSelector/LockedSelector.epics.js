@@ -34,7 +34,7 @@ export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: 
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.ORG_UNIT_ID_SET,
-            lockedSelectorActionTypes.PROGRAM_ID_SET,
+            lockedSelectorBatchActionTypes.PROGRAM_ID_SET_BATCH,
             lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH,
             lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH,
         ),

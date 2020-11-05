@@ -44,22 +44,53 @@ const useFormDataLifecycle = (
     searchGroupsForSelectedScope,
     addFormIdToReduxStore,
     removeFormDataFromReduxStore,
+    keptFallbackSearchFormValues,
 ) =>
     useEffect(() => {
         // in order for the Form component to render
         // a formId under the `forms` reducer needs to be added.
         searchGroupsForSelectedScope
-            .forEach(({ formId }) => {
-                addFormIdToReduxStore(formId);
+            .forEach(({ formId, searchForm }) => {
+                const elements = searchForm.getElements();
+                const formValuesThatExistInTETypeSearchScope =
+                  ([...elements.values()].reduce((acc, { id: fieldId }) => {
+                      if (Object.keys(keptFallbackSearchFormValues).includes(fieldId)) {
+                          const fieldValue = keptFallbackSearchFormValues[fieldId];
+                          return { ...acc, [fieldId]: fieldValue };
+                      }
+                      return acc;
+                  }, {}));
+                addFormIdToReduxStore(formId, formValuesThatExistInTETypeSearchScope);
             });
         // we remove the data on unmount to clean the store
         return () => removeFormDataFromReduxStore();
     },
     [
+        keptFallbackSearchFormValues,
         searchGroupsForSelectedScope,
         addFormIdToReduxStore,
         removeFormDataFromReduxStore,
     ]);
+
+
+const expandTheAttributesForm = (searchGroupsForSelectedScope, expandedFormId, setExpandedFormId) => {
+    searchGroupsForSelectedScope
+        .filter(searchGroup => !searchGroup.unique)
+        .forEach(({ formId }, index) => {
+            if (!expandedFormId && index === 0) {
+                setExpandedFormId(formId);
+            }
+        });
+};
+
+const expandTheFirstForm = (searchGroupsForSelectedScope, expandedFormId, setExpandedFormId) => {
+    searchGroupsForSelectedScope
+        .forEach(({ formId }, index) => {
+            if (!expandedFormId && index === 0) {
+                setExpandedFormId(formId);
+            }
+        });
+};
 
 const SearchFormIndex = ({
     searchViaUniqueIdOnScopeTrackedEntityType,
@@ -75,10 +106,12 @@ const SearchFormIndex = ({
     formsValues,
     searchStatus,
     isSearchViaAttributesValid,
+    keptFallbackSearchFormValues,
+    fallbackTriggered,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
 
-    useFormDataLifecycle(searchGroupsForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore);
+    useFormDataLifecycle(searchGroupsForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore, keptFallbackSearchFormValues);
 
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
@@ -91,13 +124,16 @@ const SearchFormIndex = ({
     );
 
     useEffect(() => {
-        searchGroupsForSelectedScope
-            .forEach(({ formId }, index) => {
-                if (!expandedFormId && index === 0) {
-                    setExpandedFormId(formId);
-                }
-            });
-    }, [searchGroupsForSelectedScope, expandedFormId]);
+        if (fallbackTriggered) {
+            expandTheAttributesForm(searchGroupsForSelectedScope, expandedFormId, setExpandedFormId);
+        } else {
+            expandTheFirstForm(searchGroupsForSelectedScope, expandedFormId, setExpandedFormId);
+        }
+    }, [
+        fallbackTriggered,
+        searchGroupsForSelectedScope,
+        expandedFormId,
+    ]);
 
     return useMemo(() => {
         const formReference = {};
@@ -124,7 +160,7 @@ const SearchFormIndex = ({
 
             if (isValid) {
                 setError(false);
-                saveCurrentFormData(searchScopeType, searchScopeId, formId, formsValues);
+                saveCurrentFormData({ searchScopeType, searchScopeId, formId, formsValues, searchGroupsForSelectedScope });
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
                     searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId, resultsPageSize });

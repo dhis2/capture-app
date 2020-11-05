@@ -9,7 +9,14 @@ export const searchPageStatus = {
     SHOW_RESULTS: 'SHOW_RESULTS',
     ERROR: 'ERROR',
 };
-
+const initialReducerValue = {
+    searchStatus: searchPageStatus.INITIAL,
+    searchResults: [],
+    currentPage: 0,
+    currentSearchInfo: {},
+    fallbackTriggered: false,
+    keptFallbackSearchFormValues: {},
+};
 export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.SEARCH_RESULTS_INITIAL_VIEW]: state => ({
         ...state,
@@ -37,9 +44,18 @@ export const searchPageDesc = createReducerDescription({
         ...state,
         currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
     }),
-}, 'searchPage', {
-    searchStatus: searchPageStatus.INITIAL,
-    searchResults: [],
-    currentSearchInfo: [],
-    currentPage: 0,
-});
+
+    [searchPageActionTypes.FALLBACK_SEARCH]: (state, { payload: { fallbackFormValues } }) => ({
+        ...state,
+        fallbackTriggered: true,
+        keptFallbackSearchFormValues: fallbackFormValues,
+    }),
+
+    [searchPageActionTypes.ALL_RESULTS_RELATED_DATA_CLEAN]: () => (initialReducerValue),
+    [searchPageActionTypes.FALLBACK_SEARCH_RELATED_DATA_CLEAN]: state => ({
+        ...state,
+        fallbackTriggered: false,
+        keptFallbackSearchFormValues: {},
+    }),
+
+}, 'searchPage', initialReducerValue);

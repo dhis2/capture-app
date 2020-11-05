@@ -26,6 +26,7 @@ import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage
 import { searchScopes } from './SearchPage.constants';
 import { ResultsPageSizeContext } from '../shared-contexts';
 import { useTitleText } from '../../../hooks/useTitleText';
+import { cleanFallbackRelatedData } from './SearchPage.actions';
 
 const getStyles = (theme: Theme) => ({
     maxWidth: {
@@ -71,32 +72,50 @@ const getStyles = (theme: Theme) => ({
 const Index = ({
     showInitialSearchPage,
     navigateToMainPage,
+    cleanSearchRelatedInfo,
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
     availableSearchOptions,
     preselectedProgramId,
     searchStatus,
+    trackedEntityTypeId,
+    fallbackTriggered,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
     const titleText = useTitleText(selectedSearchScopeId);
 
     useEffect(() => {
-        showInitialSearchPage();
-        setSearchScopeId(preselectedProgramId);
+        const scopeId = preselectedProgramId || trackedEntityTypeId;
+        setSearchScopeId(scopeId);
 
         const type = preselectedProgramId ? searchScopes.PROGRAM : null;
         setSearchScopeType(type);
-    }, [showInitialSearchPage, preselectedProgramId]);
-
-    useEffect(() => {
-        if (!preselectedProgramId) {
-            showInitialSearchPage();
-        }
-
-        return () => showInitialSearchPage();
     },
     [
+        trackedEntityTypeId,
+        preselectedProgramId,
+    ]);
+
+    useEffect(() => {
+        // This statement is here because when we trigger the fallback search,
+        // we rerender the page without a preselectedProgramId.
+        // This is triggering this hook. However the fallback search view needs
+        // to start with a loading spinner and not with the initial view.
+        if (!fallbackTriggered) {
+            showInitialSearchPage();
+        }
+        return () => {
+            if (fallbackTriggered) {
+                return cleanSearchRelatedInfo();
+            }
+            return undefined;
+        };
+    },
+    [
+        searchStatus,
+        cleanSearchRelatedInfo,
+        fallbackTriggered,
         preselectedProgramId,
         showInitialSearchPage,
     ]);
@@ -107,13 +126,15 @@ const Index = ({
 
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
+        cleanSearchRelatedInfo();
         setSearchScopeId(searchScopeId);
         setSearchScopeType(searchType);
     };
-
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-            <LockedSelector />
+            <LockedSelector
+                customActionsOnProgramIdSet={[cleanFallbackRelatedData()]}
+            />
             <div data-test="dhis2-capture-search-page-content" className={classes.container} >
                 <Button
                     dataTest="dhis2-capture-back-button"
@@ -139,13 +160,17 @@ const Index = ({
                         }
 
                         <SearchForm
+                            fallbackTriggered={fallbackTriggered}
                             selectedSearchScopeId={selectedSearchScopeId}
                             searchGroupsForSelectedScope={searchGroupsForSelectedScope}
                         />
 
                         {
                             searchStatus === searchPageStatus.SHOW_RESULTS &&
-                            <SearchResults />
+                            <SearchResults
+                                availableSearchOptions={availableSearchOptions}
+                                fallbackTriggered={fallbackTriggered}
+                            />
                         }
 
                         {
