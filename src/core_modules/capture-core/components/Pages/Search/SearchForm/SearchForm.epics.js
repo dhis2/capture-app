@@ -163,6 +163,10 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic: Epic = (action$, s
 
 const deriveSearchFormInfo = searchGroups => (searchGroups.filter(searchGroup => !searchGroup.unique)[0] || {});
 
+// falling back from a search into a Program to a search into TEType means that
+// sometimes there wil be less attributes to search with. For instance a program
+// can have attributes last name, first name and gender but a TETYpe will have
+// only first name. Here we derive the form values that are revelant.
 const deriveFormValues = (searchForm, values) => {
     if (!searchForm) {
         return {};
