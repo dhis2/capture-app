@@ -1,6 +1,6 @@
 // @flow
 import React, { useMemo, useCallback } from 'react';
-import { getDefaultColumnConfig } from './defaultColumnConfiguration';
+import { useDefaultColumnConfig } from './defaultColumnConfiguration';
 import { shouldSkipReload } from './skipReloadCalculator';
 import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
 import type { Props } from './eventWorkingListsColumnSetup.types';
@@ -13,9 +13,7 @@ export const EventWorkingListsColumnSetup = ({
     onUpdateEventList,
     ...passOnProps
 }: Props) => {
-    const defaultColumns = useMemo(() => getDefaultColumnConfig(program), [
-        program,
-    ]);
+    const defaultColumns = useDefaultColumnConfig(program);
 
     const injectColumnMetaToLoadList = useCallback((selectedTemplate: Object, context: Object, meta: Object) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(

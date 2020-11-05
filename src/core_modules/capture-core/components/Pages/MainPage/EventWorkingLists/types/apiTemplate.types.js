@@ -18,13 +18,13 @@ export type ApiDataFilterTrueOnly = {|
     eq: string,
 |};
 
-export type ApiDataFilterDateAbsolute = {|
+type ApiDataFilterDateAbsolute = {|
     type: 'ABSOLUTE',
     startDate?: ?string,
     endDate?: ?string,
 |};
 
-export type ApiDataFilterDateRelative = {|
+type ApiDataFilterDateRelative = {|
     type: 'RELATIVE',
     period: string,
 |};
@@ -40,7 +40,7 @@ export type ApiDataFilterOptionSet = {|
     in: Array<string>,
 |};
 
-export type ApiDataFilterCommon = {|
+type ApiDataFilterCommon = {|
     dataItem: string,
 |};
 
