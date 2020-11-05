@@ -1,6 +1,6 @@
 // @flow
 import React, { useMemo } from 'react';
-import { getDefaultColumnConfig } from './defaultColumnConfiguration';
+import { useDefaultColumnConfig } from './defaultColumnConfiguration';
 import { shouldSkipReload } from './skipReloadCalculator';
 import { EventWorkingListsDataSourceSetup } from '../DataSourceSetup';
 import {
@@ -25,9 +25,7 @@ export const EventWorkingListsColumnSetup = (props: Props) => {
         ...passOnProps
     } = props;
 
-    const defaultConfig = React.useMemo(() => getDefaultColumnConfig(programId), [
-        programId,
-    ]);
+    const defaultConfig = useDefaultColumnConfig(programId);
 
     const { getOrdinaryColumnMetadata, getMainColumnMetadataHeader }: { getOrdinaryColumnMetadata: GetOrdinaryColumnMetadataFn, getMainColumnMetadataHeader: GetMainColumnMetadataHeaderFn } =
         useMemo(() => {

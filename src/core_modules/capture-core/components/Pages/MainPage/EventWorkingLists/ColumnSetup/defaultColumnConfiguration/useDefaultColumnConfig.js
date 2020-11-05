@@ -1,4 +1,5 @@
 // @flow
+import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { canViewOtherUsers } from '../../../../../../d2';
 import {
@@ -60,11 +61,12 @@ const getMetaDataConfig = (stage: ProgramStage): Array<Array<string | {id: strin
             }]),
         );
 
-export const getDefaultColumnConfig = (programId: string): Map<string, Object> => {
-    const stage = getEventProgramThrowIfNotFound(programId).stage;
-    // $FlowFixMe
-    return new Map([
-        ...getDefaultMainConfig(stage),
-        ...getMetaDataConfig(stage),
-    ]);
-};
+export const useDefaultColumnConfig = (programId: string): Map<string, Object> =>
+    useMemo(() => {
+        const stage = getEventProgramThrowIfNotFound(programId).stage;
+        // $FlowFixMe
+        return new Map([
+            ...getDefaultMainConfig(stage),
+            ...getMetaDataConfig(stage),
+        ]);
+    }, [programId]);
