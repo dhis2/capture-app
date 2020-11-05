@@ -29,9 +29,8 @@ const getFiltersForUniqueIdSearchQuery = (formValues) => {
     return [`${fieldId}:eq:${formValues[fieldId]}`];
 };
 
-const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) => {
-    const stream$: Stream = from(getTrackedEntityInstances(queryArgs, attributes));
-    return stream$.pipe(
+const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
+    from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length > 0) {
@@ -44,7 +43,6 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) => {
         startWith(showLoadingViewOnSearchPage()),
         catchError(() => of(showErrorViewOnSearchPage())),
     );
-};
 
 const getFiltersForAttributesSearchQuery = (formValues) => {
     const stringFilters = Object.keys(formValues)
@@ -59,9 +57,8 @@ const getFiltersForAttributesSearchQuery = (formValues) => {
 
     return [...stringFilters, ...rangeFilers];
 };
-const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) => {
-    const stream: Stream = from(getTrackedEntityInstances(queryArgs, attributes));
-    return stream.pipe(
+const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
+    from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
                 return showSuccessResultsViewOnSearchPage(
@@ -82,7 +79,6 @@ const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) => {
         startWith(showLoadingViewOnSearchPage()),
         catchError(() => of(showErrorViewOnSearchPage())),
     );
-};
 
 export const searchViaUniqueIdOnScopeProgramEpic: Epic = (action$, store) =>
     action$.pipe(
@@ -216,7 +212,7 @@ export const startFallbackSearchEpic = (action$: InputObservable, store: ReduxSt
         }),
     );
 
-export const fallbackSearchEpic = (action$: InputObservable) =>
+export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH),
         flatMap(({ payload: { fallbackFormValues, trackedEntityTypeId, pageSize, page } }) => {
