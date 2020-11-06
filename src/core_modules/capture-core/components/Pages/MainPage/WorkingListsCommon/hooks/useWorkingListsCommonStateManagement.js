@@ -44,17 +44,22 @@ import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '..
 const useTemplates = (
     dispatch: ReduxDispatch,
     { storeId, workingListsType }: { storeId: string, workingListsType: string }) => {
-    const templateState = useSelector(({ workingListsTemplates }) => ({
-        currentTemplate: workingListsTemplates[storeId] &&
-            workingListsTemplates[storeId].selectedTemplateId &&
-            workingListsTemplates[storeId].templates &&
-            workingListsTemplates[storeId].templates.find(template => template.id === workingListsTemplates[storeId].selectedTemplateId),
-        templates: workingListsTemplates[storeId] &&
-            workingListsTemplates[storeId].templates,
-        templatesLoading: !!workingListsTemplates[storeId] &&
-            !!workingListsTemplates[storeId].loading,
-        loadTemplatesError: workingListsTemplates[storeId] && workingListsTemplates[storeId].loadError,
-    }), shallowEqual);
+    const templateState = useSelector(({ workingListsTemplates }) => {
+        const {
+            selectedTemplateId,
+            templates,
+            loading: templatesLoading,
+            loadError: loadTemplatesError,
+        } = workingListsTemplates[storeId] || {};
+
+        return {
+            currentTemplate: selectedTemplateId && templates &&
+                templates.find(template => template.id === selectedTemplateId),
+            templates,
+            templatesLoading: !!templatesLoading,
+            loadTemplatesError,
+        };
+    }, shallowEqual);
 
     const templateDispatch = useMemo(() => ({
         onSelectTemplate: (...args) => dispatch(selectTemplate(...args, storeId)),
@@ -98,23 +103,62 @@ const useView = (
     dispatch: ReduxDispatch,
     categoryCombinationId?: ?string,
     { storeId, workingListsType }: { storeId: string, workingListsType: string }) => {
-    const viewState = useSelector(({ workingLists, workingListsUI, workingListsMeta, workingListsColumnsOrder, workingListsStickyFilters, workingListsListRecords }) => ({
-        eventRecords: workingListsListRecords[storeId],
-        recordsOrder: workingLists[storeId] && workingLists[storeId].order,
-        updating: !!workingListsUI[storeId] && !!workingListsUI[storeId].isUpdating,
-        loading: !!workingListsUI[storeId] && !!workingListsUI[storeId].isLoading,
-        updatingWithDialog: !!workingListsUI[storeId] && !!workingListsUI[storeId].isUpdatingWithDialog,
-        loadViewError: workingListsUI[storeId] && workingListsUI[storeId].dataLoadingError,
-        customColumnOrder: workingListsColumnsOrder[storeId],
-        stickyFilters: workingListsStickyFilters[storeId],
-        rowsPerPage: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.rowsPerPage) || (workingListsMeta[storeId] && workingListsMeta[storeId].rowsPerPage),
-        currentPage: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.currentPage) || (workingListsMeta[storeId] && workingListsMeta[storeId].currentPage),
-        rowsCount: workingListsMeta[storeId] && workingListsMeta[storeId].rowsCount,
-        sortById: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.sortById) || (workingListsMeta[storeId] && workingListsMeta[storeId].sortById),
-        sortByDirection: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.sortByDirection) || (workingListsMeta[storeId] && workingListsMeta[storeId].sortByDirection),
-        initialViewConfig: (workingListsMeta[storeId] && workingListsMeta[storeId].nextInitial) || (workingListsMeta[storeId] && workingListsMeta[storeId].initial),
-        viewPreloaded: (workingListsMeta[storeId] && workingListsMeta[storeId].viewPreloaded),
-    }), shallowEqual);
+    const viewState = useSelector(({
+        workingLists,
+        workingListsUI,
+        workingListsMeta,
+        workingListsColumnsOrder,
+        workingListsStickyFilters,
+        workingListsListRecords,
+    }) => {
+        const {
+            order: recordsOrder,
+        } = workingLists[storeId] || {};
+
+        const {
+            isUpdating: updating,
+            isLoading: loading,
+            isUpdatingWithDialog: updatingWithDialog,
+            dataLoadingError: loadViewError,
+        } = workingListsUI[storeId] || {};
+
+        const {
+            rowsPerPage,
+            currentPage,
+            rowsCount,
+            sortById,
+            sortByDirection,
+            initial,
+            nextInitial,
+            viewPreloaded,
+            next: workingListsMetaNextStore,
+        } = workingListsMeta[storeId] || {};
+
+        const {
+            rowsPerPage: nextRowsPerPage,
+            currentPage: nextCurrentPage,
+            sortById: nextSortById,
+            sortByDirection: nextSortByDirection,
+        } = workingListsMetaNextStore || {};
+
+        return {
+            eventRecords: workingListsListRecords[storeId],
+            recordsOrder,
+            updating: !!updating,
+            loading: !!loading,
+            updatingWithDialog: !!updatingWithDialog,
+            loadViewError,
+            customColumnOrder: workingListsColumnsOrder[storeId],
+            stickyFilters: workingListsStickyFilters[storeId],
+            rowsPerPage: nextRowsPerPage || rowsPerPage,
+            currentPage: nextCurrentPage || currentPage,
+            rowsCount,
+            sortById: nextSortById || sortById,
+            sortByDirection: nextSortByDirection || sortByDirection,
+            initialViewConfig: nextInitial || initial,
+            viewPreloaded,
+        };
+    }, shallowEqual);
 
     const appliedFilters = useSelector(({ workingListsMeta }) =>
         workingListsMeta[storeId] && workingListsMeta[storeId].filters);
