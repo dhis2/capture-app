@@ -130,7 +130,7 @@ msgid "Area"
 msgstr "Oblast"
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Souřadnice"
 
 msgid "Enrollment"
 msgstr "Zápis"
@@ -229,7 +229,7 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Žádný"
 
 msgid "Select user"
 msgstr ""
@@ -849,7 +849,7 @@ msgid "Date"
 msgstr "datum"
 
 msgid "Time"
-msgstr ""
+msgstr "Čas"
 
 msgid "From date"
 msgstr "Od data"
