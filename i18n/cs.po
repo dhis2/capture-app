@@ -49,7 +49,7 @@ msgid "Please provide a negative integer"
 msgstr "Uveďte záporné celé číslo"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Datum v budoucnosti není povoleno"
 
 msgid "Please provide a valid date and time"
 msgstr "Uveďte prosím platné datum a čas"
@@ -385,13 +385,13 @@ msgid "Download with current filters"
 msgstr "Stáhnout s aktuálními filtry"
 
 msgid "Download data..."
-msgstr ""
+msgstr "Stáhnout data ..."
 
 msgid "Rows per page"
 msgstr "Řádků na stránku"
 
 msgid "Update view"
-msgstr ""
+msgstr "Aktualizovat zobrazení"
 
 msgid "Save current view..."
 msgstr "Uložit aktuální zobrazení ..."
@@ -403,10 +403,10 @@ msgid "Delete view"
 msgstr "Odstranit zobrazení"
 
 msgid "Share view..."
-msgstr ""
+msgstr "Sdílet zobrazení..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
+msgstr "Opravdu chcete smazat zobrazení  '{{templateName}}'?"
 
 msgid "Confirm"
 msgstr "Potvrdit"
@@ -415,7 +415,7 @@ msgid "Save As view"
 msgstr "Uložit jako zobrazení"
 
 msgid "View name"
-msgstr ""
+msgstr "Název zobrazení"
 
 msgid "Show Less"
 msgstr "Ukázat méně"
