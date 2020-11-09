@@ -46,19 +46,19 @@ msgid "Organisation unit"
 msgstr "Organizační jednotka"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "Datum zápisu"
 
 msgid "Last updated"
 msgstr "Naposledy aktualizováno"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "Zapsáno"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "Dříve zapsáno"
 
 msgid "Not enrolled"
-msgstr ""
+msgstr "Není zapsáno"
 
 msgid "Columns to show in table"
 msgstr "Sloupce k zobrazení v tabulce"
@@ -94,7 +94,7 @@ msgid "Please provide a valid date"
 msgstr "Uveďte prosím platné datum"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Datum v budoucnosti není povoleno"
 
 msgid "Please provide a valid date and time"
 msgstr "Uveďte prosím platné datum a čas"
@@ -325,7 +325,7 @@ msgid "No results"
 msgstr "Žádné výsledky"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "začněte psát pro vyhledávání"
 
 msgid "suggestions could not be retrieved"
 msgstr "návrhy nelze načíst"
@@ -484,13 +484,13 @@ msgid "Download with current filters"
 msgstr "Stáhnout s aktuálními filtry"
 
 msgid "Download data..."
-msgstr ""
+msgstr "Stáhnout data ..."
 
 msgid "Rows per page"
 msgstr "Řádků na stránku"
 
 msgid "Update view"
-msgstr ""
+msgstr "Aktualizovat zobrazení"
 
 msgid "Save current view..."
 msgstr "Uložit aktuální zobrazení ..."
@@ -502,10 +502,10 @@ msgid "Delete view"
 msgstr "Odstranit zobrazení"
 
 msgid "Share view..."
-msgstr ""
+msgstr "Sdílet zobrazení..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
+msgstr "Opravdu chcete smazat zobrazení  '{{templateName}}'?"
 
 msgid "Confirm"
 msgstr "Potvrdit"
@@ -514,7 +514,7 @@ msgid "Save As view"
 msgstr "Uložit jako zobrazení"
 
 msgid "View name"
-msgstr ""
+msgstr "Název zobrazení"
 
 msgid "Show Less"
 msgstr "Ukázat méně"
@@ -722,54 +722,59 @@ msgid "Register"
 msgstr "Registrovat"
 
 msgid "Search scope"
-msgstr ""
+msgstr "Rozsah hledání"
 
 msgid "Find results from"
-msgstr ""
+msgstr "Najít výsledky z"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
+"Chcete-li hledat, vyplňte alespoň {{minAttributesRequiredToSearch}} atributy"
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Hledat {{name}}"
 
 msgid "Find by {{name}}"
-msgstr ""
+msgstr "Najít podle {{name}}"
 
 msgid "Search by attributes"
 msgstr "Hledání podle atributů"
 
 msgid "Back"
-msgstr ""
+msgstr "Zpět"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 msgstr ""
+"Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
 
 msgid "Back to search"
 msgstr "Zpět na vyhledávání"
 
 msgid "An error has occurred"
-msgstr ""
+msgstr "Došlo k chybě"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
+"Došlo k problému s tímto vyhledáváním, změňte prosím hledané výrazy nebo to "
+"zkuste později. Další informace najdete na kartě Konzola v nástrojích pro "
+"vývojáře"
 
 msgid "Make a selection to start searching"
-msgstr ""
+msgstr "Proveďte výběr a začněte hledat"
 
 msgid "View dashboard"
-msgstr ""
+msgstr "Zobrazit ovládací panel"
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "Zobrazit aktivní zápisy"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "Znovu zapsat"
 
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
@@ -803,7 +808,7 @@ msgid "Add relationship"
 msgstr "Přidat vztah"
 
 msgid "Results found"
-msgstr ""
+msgstr "Nalezeny výsledky"
 
 msgid "Selected program"
 msgstr "Vybraný program"
@@ -858,7 +863,7 @@ msgid "Set coordinate"
 msgstr "Nastavit souřadnice"
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "Stránka {{currentPage}}"
 
 msgid "Date"
 msgstr "datum"
