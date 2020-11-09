@@ -1,5 +1,5 @@
 // @flow
-import { OptionSet } from '../../../../../metaData';
+import type { OptionSet } from '../../../../../metaData';
 import {
     convertText,
     convertDate,
@@ -9,7 +9,7 @@ import {
     convertTrueOnly,
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
-import type { OptionSetFilterData } from '../../../../FiltersForTypes';
+import type { OptionSetFilterData, FilterData } from '../../../../FiltersForTypes';
 import { filterTypesObject } from '../../filterTypes';
 
 // todo (report lgmt)
@@ -50,13 +50,13 @@ function getOptionSetText(filter: OptionSetFilterData, optionSet: OptionSet) {
 }
 
 export function buildButtonText(
-    filter: any,
+    filter: FilterData,
     type: $Values<typeof filterTypesObject>,
     optionSet?: OptionSet,
-) {
+): string | void {
     if (filter.usingOptionSet && optionSet) {
         return getOptionSetText(filter, optionSet);
     }
 
-    return (convertersForTypes[type] ? convertersForTypes[type](filter) : filter);
+    return convertersForTypes[type] && convertersForTypes[type](filter);
 }
