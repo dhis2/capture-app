@@ -20,7 +20,7 @@ import {
     setListColumnOrder,
     setFilter,
     clearFilter,
-    restMenuItemSelected,
+    selectRestMenuItem,
     changePage,
     changeRowsPerPage,
 } from '../actions';
@@ -154,7 +154,7 @@ const useView = (
         onSetListColumnOrder: (...args) => dispatch(setListColumnOrder(...args, storeId)),
         onUpdateFilter: (...args) => dispatch(setFilter(...args, storeId)),
         onClearFilter: (...args) => dispatch(clearFilter(...args, storeId)),
-        onSelectRestMenuItem: (...args) => dispatch(restMenuItemSelected(...args, storeId)),
+        onSelectRestMenuItem: (...args) => dispatch(selectRestMenuItem(...args, storeId)),
         onChangePage: (...args) => dispatch(changePage(...args, storeId)),
         onChangeRowsPerPage: (...args) => dispatch(changeRowsPerPage(...args, storeId)),
     }: {|
