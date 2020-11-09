@@ -1,5 +1,5 @@
 // @flow
-export type OptionSetFilterData = {
+export type OptionSetFilterData = {|
     usingOptionSet: boolean,
     values: Array<any>,
-};
+|};

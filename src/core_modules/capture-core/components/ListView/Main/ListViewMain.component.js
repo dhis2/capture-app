@@ -13,8 +13,6 @@ import type { Props } from './listViewMain.types';
 const ListWithEndColumnMenu = withEndColumnMenu()(OnlineList);
 
 const getStyles = (theme: Theme) => ({
-    container: {
-    },
     topBarContainer: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -32,7 +30,6 @@ const getStyles = (theme: Theme) => ({
     paginationContainer: {
         fontSize: theme.typography.pxToRem(12),
         color: theme.palette.text.secondary,
-        // $FlowFixMe
         fontWeight: theme.typography.fontWeightMedium,
         display: 'flex',
         justifyContent: 'flex-end',
@@ -94,12 +91,8 @@ class ListViewMainPlain extends React.PureComponent<Props> {
     }
 
     render() {
-        const { classes } = this.props;
-
         return (
-            <div
-                className={classes.container}
-            >
+            <div>
                 {this.renderTopBar()}
                 {this.renderList()}
                 {this.renderPager()}

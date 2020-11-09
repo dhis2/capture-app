@@ -26,12 +26,11 @@ export const workingListsCommonActionTypes = {
     LIST_UPDATE_ERROR: 'WorkingListsListUpdateError',
     LIST_UPDATE_CANCEL: 'WorkingListsListUpdateCancel',
     CONTEXT_UNLOADING: 'WorkingListsContextUnloading',
-
     LIST_SORT: 'WorkingListsListSort',
     LIST_COLUMN_ORDER_SET: 'WorkingListsListColumnOrderSet',
     FILTER_SET: 'WorkingListsFilterSet',
     FILTER_CLEAR: 'WorkingListsFilterClear',
-    REST_MENU_ITEM_SELECTED: 'WorkingListsRestMenuItemSelected',
+    REST_MENU_ITEM_SELECT: 'WorkingListsRestMenuItemSelect',
     STICKY_FILTERS_AFTER_COLUMN_SORTING_SET: 'WorkingListsStickyFiltersAfterColumnSortingSet',
     PAGE_CHANGE: 'WorkingListsPageChange',
     ROWS_PER_PAGE_CHANGE: 'WorkingListsRowsPerPageChange',
@@ -126,8 +125,8 @@ export const setFilter = (filter: Object, itemId: string, listId: string) =>
 export const clearFilter = (itemId: string, listId: string) =>
     actionCreator(workingListsCommonActionTypes.FILTER_CLEAR)({ itemId, listId });
 
-export const restMenuItemSelected = (id: string, listId: string) =>
-    actionCreator(workingListsCommonActionTypes.REST_MENU_ITEM_SELECTED)({ id, listId });
+export const selectRestMenuItem = (id: string, listId: string) =>
+    actionCreator(workingListsCommonActionTypes.REST_MENU_ITEM_SELECT)({ id, listId });
 
 export const setStickyFiltersAfterColumnSorting = (includeFilters: Object, listId: string) =>
     actionCreator(workingListsCommonActionTypes.STICKY_FILTERS_AFTER_COLUMN_SORTING_SET)({ includeFilters, listId });
