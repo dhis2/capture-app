@@ -1,4 +1,5 @@
 // @flow
+import { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
     type ProgramStage,
@@ -58,10 +59,11 @@ const getMetaDataConfig = (stage: ProgramStage): Array<MetadataColumnConfig> =>
             optionSet: element.optionSet,
         }));
 
-export const getDefaultColumnConfig = (program: EventProgram): ColumnConfigs => {
-    const stage = program.stage;
-    return [
-        ...getDefaultMainConfig(stage),
-        ...getMetaDataConfig(stage),
-    ];
-};
+export const useDefaultColumnConfig = (program: EventProgram): ColumnConfigs =>
+    useMemo(() => {
+        const { stage } = program;
+        return [
+            ...getDefaultMainConfig(stage),
+            ...getMetaDataConfig(stage),
+        ];
+    }, [program]);
