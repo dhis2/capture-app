@@ -24,7 +24,7 @@ export type ClientConfig = {|
     customColumnOrder?: CustomColumnOrder,
 |};
 
-export type EventWorkingListsTemplate = {
+export type EventWorkingListsTemplate = {|
     id: string,
     isDefault?: ?boolean,
     name: string,
@@ -39,6 +39,6 @@ export type EventWorkingListsTemplate = {
     notPreserved?: boolean,
     deleted?: boolean,
     skipInitDuringAddProcedure?: boolean,
-};
+|};
 
 export type EventWorkingListsTemplates = Array<EventWorkingListsTemplate>;
