@@ -6,16 +6,8 @@ import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
 import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
 
-export const EventWorkingListsColumnSetup = ({
-    program,
-    customColumnOrder,
-    onLoadEventList,
-    onUpdateEventList,
-    ...passOnProps
-}: Props) => {
-    const defaultColumns = useDefaultColumnConfig(program);
-
-    const injectColumnMetaToLoadList = useCallback((selectedTemplate: Object, context: Object, meta: Object) => {
+const useInjectColumnMetaToLoadList = (defaultColumns, onLoadEventList) =>
+    useCallback((selectedTemplate: Object, context: Object, meta: Object) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
@@ -24,7 +16,8 @@ export const EventWorkingListsColumnSetup = ({
         onLoadEventList(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
     }, [onLoadEventList, defaultColumns]);
 
-    const injectColumnMetaToUpdateList = useCallback((queryArgs: Object) => {
+const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateEventList) =>
+    useCallback((queryArgs: Object) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
@@ -33,13 +26,13 @@ export const EventWorkingListsColumnSetup = ({
         onUpdateEventList(queryArgs, columnsMetaForDataFetching);
     }, [onUpdateEventList, defaultColumns]);
 
-
+const useColumns = (customColumnOrder, defaultColumns) => {
     const defaultColumnsAsObject = useMemo(() =>
         defaultColumns
             .reduce((acc, column) => ({ ...acc, [column.id]: column }), {}),
     [defaultColumns]);
 
-    const columns = useMemo(() => {
+    return useMemo(() => {
         if (!customColumnOrder) {
             return defaultColumns;
         }
@@ -50,6 +43,21 @@ export const EventWorkingListsColumnSetup = ({
                 visible,
             }));
     }, [customColumnOrder, defaultColumns, defaultColumnsAsObject]);
+};
+
+export const EventWorkingListsColumnSetup = ({
+    program,
+    customColumnOrder,
+    onLoadEventList,
+    onUpdateEventList,
+    ...passOnProps
+}: Props) => {
+    const defaultColumns = useDefaultColumnConfig(program);
+
+    const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadEventList);
+    const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateEventList);
+
+    const columns = useColumns(customColumnOrder, defaultColumns);
 
     return (
         <CurrentViewChangesResolver
