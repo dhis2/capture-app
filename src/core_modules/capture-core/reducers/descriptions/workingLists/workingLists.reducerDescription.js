@@ -456,9 +456,9 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
 
 export const workingListsContextDesc = createReducerDescription({
     /*
-    Setting context on init (not on success anymore) because it makes sense for the loading effect.
-    The meaning is slightly changed though, having a context now implies that a request for events was done for this context,
-    not that events was successfully retrieved for this context.
+    Setting context on fetch/init (not on success anymore) because it makes sense for the loading effect.
+    The meaning is slightly changed though, having a context now implies that a request was done for this context,
+    not that data was successfully retrieved for this context.
     */
     [workingListsCommonActionTypes.TEMPLATES_FETCH]: (state, action) => {
         const { programId, listId } = action.payload;
@@ -512,7 +512,7 @@ export const workingListsStickyFiltersDesc = createReducerDescription({
             },
         };
     },
-    [workingListsCommonActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
+    [workingListsCommonActionTypes.REST_MENU_ITEM_SELECT]: (state, action) => {
         const { id, listId } = action.payload;
         const currentListState = {
             ...state[listId],
