@@ -8,7 +8,7 @@ import {
     convertTrueOnly,
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
-import type { OptionSetFilterData, FilterData } from '../../../../FiltersForTypes';
+import type { OptionSetFilterData, FilterData, Options } from '../../../../FiltersForTypes';
 import { filterTypesObject } from '../../filterTypes';
 
 // todo (report lgmt)

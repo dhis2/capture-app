@@ -46,7 +46,7 @@ export type EventWorkingListsTemplates = Array<EventWorkingListsTemplate>;
 export type ColumnConfigBase = {
     id: string,
     visible: boolean,
-    type: $Values<typeof dataElementTypes>,
+    type: $Values<dataElementTypes>,
     header: string,
     options?: ?Array<{text: string, value: any}>,
     multiValueFilter?: boolean,
