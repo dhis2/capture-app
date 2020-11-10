@@ -3,9 +3,8 @@
 import { dataElementTypes } from '../../../metaData';
 import type {
     FilterData,
+    Options,
 } from '../../FiltersForTypes';
-
-export type Options = Array<{text: string, value: any}>;
 
 export type Column = {
     id: string,

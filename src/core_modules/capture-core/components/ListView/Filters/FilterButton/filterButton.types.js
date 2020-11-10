@@ -1,6 +1,6 @@
 // @flow
 import { filterTypesObject } from '../filterTypes';
-import type { Options } from '../../types';
+import type { Options } from '../../../FiltersForTypes';
 
 export type Props = {|
     'data-test': string,

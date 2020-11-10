@@ -8,9 +8,8 @@ import {
     convertTrueOnly,
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
-import type { OptionSetFilterData } from '../../../../FiltersForTypes';
+import type { OptionSetFilterData, Options } from '../../../../FiltersForTypes';
 import { filterTypesObject } from '../../filterTypes';
-import type { Options } from '../../../types';
 
 // todo (report lgmt)
 const convertersForTypes = {
