@@ -7,8 +7,8 @@ import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Button } from '../../../Buttons';
 import ActiveFilterButton from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
-import type { UpdateFilter, ClearFilter, Options } from '../../types';
-import type { FilterData } from '../../../FiltersForTypes';
+import type { UpdateFilter, ClearFilter } from '../../types';
+import type { FilterData, Options } from '../../../FiltersForTypes';
 
 const getStyles = (theme: Theme) => ({
     icon: {
@@ -87,7 +87,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
         onSetVisibleSelector(undefined);
     }
 
-    handleFilterUpdate = (data: ?Object) => {
+    handleFilterUpdate = (data: ?FilterData) => {
         const { itemId, onUpdateFilter, onClearFilter } = this.props;
         if (data == null) {
             onClearFilter(itemId);
