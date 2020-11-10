@@ -49,7 +49,7 @@ msgid "Please provide a negative integer"
 msgstr "Uveďte záporné celé číslo"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Datum v budoucnosti není povoleno"
 
 msgid "Please provide a valid date and time"
 msgstr "Uveďte prosím platné datum a čas"
