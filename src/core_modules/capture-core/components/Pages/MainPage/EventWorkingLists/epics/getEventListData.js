@@ -189,7 +189,7 @@ export const getEventListData = async (
             record: columnKeys.reduce((acc, columnId) => {
                 acc[columnId] = record[columnId];
                 return acc;
-            }, {})
+            }, {}),
         }));
 
     return {
