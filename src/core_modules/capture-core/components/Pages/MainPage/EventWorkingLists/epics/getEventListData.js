@@ -186,7 +186,10 @@ export const getEventListData = async (
         .map(({ id, event, values }) => ({ id, record: { ...event, ...values } }))
         .map(({ id, record }) => ({
             id,
-            record: columnKeys.reduce((acc, columnId) => { acc[columnId] = record[columnId]; return acc; }, {}),
+            record: columnKeys.reduce((acc, columnId) => {
+                acc[columnId] = record[columnId];
+                return acc;
+            }, {})
         }));
 
     return {
