@@ -1,22 +1,12 @@
 // @flow
 import React, { useMemo, useCallback } from 'react';
-import { getDefaultColumnConfig } from './defaultColumnConfiguration';
+import { useDefaultColumnConfig } from './defaultColumnConfiguration';
 import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
 import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
 
-export const EventWorkingListsColumnSetup = ({
-    program,
-    customColumnOrder,
-    onLoadView,
-    onUpdateList,
-    ...passOnProps
-}: Props) => {
-    const defaultColumns = useMemo(() => getDefaultColumnConfig(program), [
-        program,
-    ]);
-
-    const injectColumnMetaToLoadList = useCallback((selectedTemplate: Object, context: Object, meta: Object) => {
+const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView) =>
+    useCallback((selectedTemplate: Object, context: Object, meta: Object) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
@@ -25,7 +15,8 @@ export const EventWorkingListsColumnSetup = ({
         onLoadView(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
     }, [onLoadView, defaultColumns]);
 
-    const injectColumnMetaToUpdateList = useCallback((queryArgs: Object, lastTransaction: number) => {
+const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
+    useCallback((queryArgs: Object, lastTransaction: number) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
@@ -34,13 +25,13 @@ export const EventWorkingListsColumnSetup = ({
         onUpdateList(queryArgs, lastTransaction, columnsMetaForDataFetching);
     }, [onUpdateList, defaultColumns]);
 
-
+const useColumns = (customColumnOrder, defaultColumns) => {
     const defaultColumnsAsObject = useMemo(() =>
         defaultColumns
             .reduce((acc, column) => ({ ...acc, [column.id]: column }), {}),
     [defaultColumns]);
 
-    const columns = useMemo(() => {
+    return useMemo(() => {
         if (!customColumnOrder) {
             return defaultColumns;
         }
@@ -51,6 +42,21 @@ export const EventWorkingListsColumnSetup = ({
                 visible,
             }));
     }, [customColumnOrder, defaultColumns, defaultColumnsAsObject]);
+};
+
+export const EventWorkingListsColumnSetup = ({
+    program,
+    customColumnOrder,
+    onLoadView,
+    onUpdateList,
+    ...passOnProps
+}: Props) => {
+    const defaultColumns = useDefaultColumnConfig(program);
+
+    const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView);
+    const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateList);
+
+    const columns = useColumns(customColumnOrder, defaultColumns);
 
     return (
         <CurrentViewChangesResolver

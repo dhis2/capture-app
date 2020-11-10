@@ -201,12 +201,12 @@ export const convertToEventFilterEventQueryCriteria = ({
     sortById,
     sortByDirection,
     columns,
-}: {
+}: {|
     filters: Object,
     sortById: string,
     sortByDirection: string,
     columns: ColumnsForConverter,
-}): ApiEventQueryCriteria => {
+|}): ApiEventQueryCriteria => {
     const sortOrderCriteria = getSortOrder(sortById, sortByDirection);
     const filtersCriteria = pipe(
         () => typeConvertFilters(filters, columns),

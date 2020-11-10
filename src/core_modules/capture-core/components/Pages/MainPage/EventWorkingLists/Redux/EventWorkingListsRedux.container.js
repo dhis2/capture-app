@@ -12,7 +12,7 @@ import { getEventProgramThrowIfNotFound } from '../../../../../metaData';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './eventWorkingListsRedux.types';
 
-export const EventWorkingListsRedux = ({ storeId, ...passOnProps }: Props) => {
+export const EventWorkingListsRedux = ({ storeId }: Props) => {
     const dispatch = useDispatch();
 
     const programId = useSelector(({ currentSelections }) => currentSelections.programId);
@@ -42,7 +42,6 @@ export const EventWorkingListsRedux = ({ storeId, ...passOnProps }: Props) => {
 
     return (
         <EventWorkingListsColumnSetup
-            {...passOnProps}
             {...commonStateManagementProps}
             program={program}
             {...eventsValues}

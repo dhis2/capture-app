@@ -1,11 +1,11 @@
 // @flow
-import { filterTypesObject } from '../filterTypes';
+import { typeof filterTypesObject } from '../filterTypes';
 import type { Options } from '../../../FiltersForTypes';
 
 export type Props = {|
     'data-test': string,
     itemId: string,
-    type: $Values<typeof filterTypesObject>,
+    type: $Values<filterTypesObject>,
     title: string,
     options?: ?Options,
     multiValueFilter?: boolean,

@@ -87,7 +87,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
         onSetVisibleSelector(undefined);
     }
 
-    handleFilterUpdate = (data: ?Object) => {
+    handleFilterUpdate = (data: ?FilterData) => {
         const { itemId, onUpdateFilter, onClearFilter } = this.props;
         if (data == null) {
             onClearFilter(itemId);

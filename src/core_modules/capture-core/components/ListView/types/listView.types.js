@@ -17,7 +17,7 @@ export type Column = {
 
 export type Columns = Array<Column>;
 
-type DataSourceItem = { [id: string]: string };
+export type DataSourceItem = { [id: string]: string };
 
 export type DataSource = Array<DataSourceItem>;
 

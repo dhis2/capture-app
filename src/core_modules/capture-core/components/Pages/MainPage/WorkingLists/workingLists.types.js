@@ -70,7 +70,7 @@ export type CancelUpdateList = () => void;
 export type DeleteTemplate = (template: WorkingListTemplate) => void;
 export type LoadView = (
     template: WorkingListTemplate,
-    meta: { programId: string, orgUnitId: string, categories?: Categories }) => void;
+    meta: {| programId: string, orgUnitId: string, categories?: Categories |}) => void;
 export type LoadTemplates = (programId: string) => void;
 export type SelectTemplate = (templateId: string) => void;
 export type UnloadingContext = () => void;
