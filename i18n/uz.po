@@ -385,7 +385,7 @@ msgid "No programs available."
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Онлайн"
 
 msgid "Offline"
 msgstr "Оффлайн"
