@@ -1,44 +1,30 @@
 // @flow
-import { apiAssigneeFilterModes } from '../constants';
+import { typeof apiAssigneeFilterModes } from '../constants';
 
-export type ApiDataFilter = {
-    dataItem: string,
-    ge?: any,
-    le?: any,
-    in?: any,
-    like?: any,
-    eq?: any,
-    period?: any,
-};
-
-export type ApiDataFilterCommon = {|
-    dataItem: string,
+export type ApiDataFilterText = {|
+    like: string,
 |};
 
-export type ApiDataFilterText = {
-    like: string,
-};
-
-export type ApiDataFilterNumeric = {
+export type ApiDataFilterNumeric = {|
     ge?: ?string,
     le?: ?string,
-};
+|};
 
-export type ApiDataFilterBoolean = {
+export type ApiDataFilterBoolean = {|
     in: Array<string>,
-};
+|};
 
-export type ApiDataFilterTrueOnly = {
+export type ApiDataFilterTrueOnly = {|
     eq: string,
-};
+|};
 
-export type ApiDataFilterDateAbsolute = {|
+type ApiDataFilterDateAbsolute = {|
     type: 'ABSOLUTE',
     startDate?: ?string,
     endDate?: ?string,
 |};
 
-export type ApiDataFilterDateRelative = {|
+type ApiDataFilterDateRelative = {|
     type: 'RELATIVE',
     period: string,
 |};
@@ -46,7 +32,7 @@ export type ApiDataFilterDateRelative = {|
 export type ApiDataFilterDate = ApiDataFilterDateAbsolute | ApiDataFilterDateRelative;
 
 export type ApiDataFilterAssignee = {|
-    assignedUserMode: $Values<typeof apiAssigneeFilterModes>,
+    assignedUserMode: $Values<apiAssigneeFilterModes>,
     assignedUsers: ?Array<string>,
 |};
 
@@ -54,7 +40,21 @@ export type ApiDataFilterOptionSet = {|
     in: Array<string>,
 |};
 
-export type ApiEventQueryCriteria = {
+type ApiDataFilterCommon = {|
+    dataItem: string,
+|};
+
+export type ApiDataFilter = (
+    ApiDataFilterText |
+    ApiDataFilterNumeric |
+    ApiDataFilterBoolean |
+    ApiDataFilterTrueOnly |
+    ApiDataFilterDate |
+    ApiDataFilterAssignee |
+    ApiDataFilterOptionSet
+) & ApiDataFilterCommon;
+
+export type ApiEventQueryCriteria = {|
     dataFilters?: ?Array<ApiDataFilter>,
     order?: ?string,
     eventDate?: ?Object,
@@ -62,7 +62,7 @@ export type ApiEventQueryCriteria = {
     displayColumnOrder?: ?Array<string>,
     assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
     assignedUsers?: Array<string>,
-};
+|};
 
 export type CommonQueryData = {|
     programId: string,

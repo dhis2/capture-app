@@ -1,6 +1,6 @@
 // @flow
 import React, { useMemo } from 'react';
-import { getDefaultColumnConfig } from '../../EventWorkingListsCommon';
+import { useDefaultColumnConfig } from '../../EventWorkingListsCommon';
 import { EventWorkingListsOfflineDataSourceSetup } from '../DataSourceSetup';
 import type { Props } from './eventWorkingListsOfflineColumnSetup.types';
 
@@ -9,9 +9,7 @@ export const EventWorkingListsOfflineColumnSetup = ({
     customColumnOrder,
     ...passOnProps
 }: Props) => {
-    const defaultColumns = useMemo(() => getDefaultColumnConfig(program), [
-        program,
-    ]);
+    const defaultColumns = useDefaultColumnConfig(program);
 
     const defaultColumnsAsObject = useMemo(() =>
         defaultColumns

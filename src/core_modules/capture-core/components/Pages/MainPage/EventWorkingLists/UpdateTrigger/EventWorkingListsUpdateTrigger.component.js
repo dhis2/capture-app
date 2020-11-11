@@ -16,6 +16,7 @@ export const EventWorkingListsUpdateTrigger = ({
     const forceUpdateOnMount = moment().diff(moment(listDataRefreshTimestamp || 0), 'minutes') > 5 ||
         lastTransaction !== lastTransactionOnListDataRefresh;
 
+    // Creating a string that will force an update of the list when it changes.
     const customUpdateTrigger = [
         lastTransaction,
         lastIdDeleted,

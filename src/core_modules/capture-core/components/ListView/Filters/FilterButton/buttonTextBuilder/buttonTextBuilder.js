@@ -8,9 +8,8 @@ import {
     convertTrueOnly,
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
-import type { OptionSetFilterData } from '../../../../FiltersForTypes';
+import type { OptionSetFilterData, FilterData, Options } from '../../../../FiltersForTypes';
 import { filterTypesObject } from '../../filterTypes';
-import type { Options } from '../../../types';
 
 // todo (report lgmt)
 const convertersForTypes = {
@@ -50,13 +49,13 @@ function getOptionSetText(filter: OptionSetFilterData, options: Options) {
 }
 
 export function buildButtonText(
-    filter: any,
+    filter: FilterData,
     type: $Values<typeof filterTypesObject>,
     options?: ?Options,
-) {
+): string | void {
     if (filter.usingOptionSet && options) {
         return getOptionSetText(filter, options);
     }
 
-    return (convertersForTypes[type] ? convertersForTypes[type](filter) : filter);
+    return convertersForTypes[type] && convertersForTypes[type](filter);
 }
