@@ -3,7 +3,7 @@ import React, { useMemo, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import Delete from '@material-ui/icons/Delete';
-import { WorkingListsInterfaceBuilder } from '../WorkingListsInterfaceBuilder';
+import { WorkingLists } from '../../WorkingLists';
 import type { RowMenuContents } from '../../WorkingLists';
 import type { Props } from './eventWorkingListsRowMenuSetup.types';
 
@@ -26,7 +26,7 @@ export const EventWorkingListsRowMenuSetupPlain = ({ onDeleteEvent, classes, ...
     }], [onDeleteEvent, classes.deleteIcon]);
 
     return (
-        <WorkingListsInterfaceBuilder
+        <WorkingLists
             {...passOnProps}
             customRowMenuContents={customRowMenuContents}
         />
