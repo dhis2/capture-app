@@ -1,2 +1,2 @@
 // @flow
-export { getDefaultColumnConfig } from './getDefaultColumnConfig';
+export { useDefaultColumnConfig } from './useDefaultColumnConfig';

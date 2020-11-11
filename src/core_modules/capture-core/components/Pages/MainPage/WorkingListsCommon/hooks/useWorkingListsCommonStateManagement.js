@@ -19,7 +19,7 @@ import {
     setListColumnOrder,
     setFilter,
     clearFilter,
-    restMenuItemSelected,
+    selectRestMenuItem,
     changePage,
     changeRowsPerPage,
 } from '../actions';
@@ -64,7 +64,7 @@ const useTemplates = (
     const templateDispatch = useMemo(() => ({
         onSelectTemplate: (...args) => dispatch(selectTemplate(...args, storeId)),
         onLoadTemplates: (...args) => dispatch(fetchTemplates(...args, storeId, workingListsType)),
-        onCancelLoadTemplates: (...args) => dispatch(fetchTemplatesCancel(...args, storeId)),
+        onCancelLoadTemplates: () => dispatch(fetchTemplatesCancel(storeId)),
         onAddTemplate: (name: string, criteria: Object, data: Object) =>
             dispatch(addTemplate(
                 name,
@@ -191,13 +191,13 @@ const useView = (
                     workingListsType,
                 },
             )),
-        onCancelLoadView: (...args) => dispatch(initListViewCancel(...args, storeId)),
-        onCancelUpdateList: (...args) => dispatch(updateListCancel(...args, storeId)),
+        onCancelLoadView: () => dispatch(initListViewCancel(storeId)),
+        onCancelUpdateList: () => dispatch(updateListCancel(storeId)),
         onSortList: (...args) => dispatch(sortList(...args, storeId)),
         onSetListColumnOrder: (...args) => dispatch(setListColumnOrder(...args, storeId)),
         onUpdateFilter: (...args) => dispatch(setFilter(...args, storeId)),
         onClearFilter: (...args) => dispatch(clearFilter(...args, storeId)),
-        onSelectRestMenuItem: (...args) => dispatch(restMenuItemSelected(...args, storeId)),
+        onSelectRestMenuItem: (...args) => dispatch(selectRestMenuItem(...args, storeId)),
         onChangePage: (...args) => dispatch(changePage(...args, storeId)),
         onChangeRowsPerPage: (...args) => dispatch(changeRowsPerPage(...args, storeId)),
     }: {|
