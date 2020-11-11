@@ -65,7 +65,7 @@ export const CurrentViewChangesResolver = ({
             return undefined;
         }
 
-        // $FlowFixMe State logic
+        // $FlowFixMe If calculatedInitialViewConfig is set, the Redux State logic ensures filters, columns, sortById and sortByDirection are all defined.
         return isCurrentViewModified({ filters, columns, sortById, sortByDirection }, calculatedInitialViewConfig);
     }, [
         filters,
