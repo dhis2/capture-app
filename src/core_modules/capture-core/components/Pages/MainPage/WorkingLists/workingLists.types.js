@@ -155,6 +155,4 @@ export type InterfaceProps = $ReadOnly<{|
     updatingWithDialog: boolean,
 |}>;
 
-export type WorkingListsOutputProps = $ReadOnly<{|
-    ...InterfaceProps,
-|}>;
+export type WorkingListsOutputProps = InterfaceProps;
