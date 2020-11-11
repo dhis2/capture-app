@@ -304,7 +304,7 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Онлайн"
 
 msgid "Offline"
 msgstr "Оффлайн"
