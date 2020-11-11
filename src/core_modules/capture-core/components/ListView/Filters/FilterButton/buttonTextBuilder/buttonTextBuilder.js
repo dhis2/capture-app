@@ -53,10 +53,10 @@ export function buildButtonText(
     filter: FilterData,
     type: $Values<typeof filterTypesObject>,
     optionSet?: OptionSet,
-): string | void {
+): string {
     if (filter.usingOptionSet && optionSet) {
         return getOptionSetText(filter, optionSet);
     }
 
-    return convertersForTypes[type] && convertersForTypes[type](filter);
+    return convertersForTypes[type](filter);
 }
