@@ -1,6 +1,6 @@
 // @flow
 import type { EventProgram } from '../../../../../metaData';
-import type { EventWorkingListsReduxOutputProps } from '../Redux';
+import type { EventWorkingListsReduxOutputProps } from '../ReduxProvider';
 import type { ColumnConfigs, LoadView, UpdateList } from '../../WorkingLists';
 import type { CustomColumnOrder } from '../types';
 
