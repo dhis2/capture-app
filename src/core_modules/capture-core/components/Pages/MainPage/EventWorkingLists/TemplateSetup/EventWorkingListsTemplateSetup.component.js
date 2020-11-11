@@ -1,9 +1,17 @@
 // @flow
-import React from 'react';
+import React, { useMemo } from 'react';
 import uuid from 'uuid/v4';
 import { convertToEventFilterEventQueryCriteria } from '../helpers/eventFilters';
 import { EventWorkingListsViewMenuSetup } from '../ViewMenuSetup';
 import type { Props } from './eventWorkingListsTemplateSetup.types';
+
+const useWorkingListsTemplates = templates => useMemo(() =>
+    (templates || [])
+        .map(template => ({
+            ...template,
+            updating: !!template.nextCriteria,
+        })),
+[templates]);
 
 export const EventWorkingListsTemplateSetup = ({
     filters,
@@ -14,6 +22,7 @@ export const EventWorkingListsTemplateSetup = ({
     onAddTemplate,
     onUpdateTemplate,
     onDeleteTemplate,
+    templates,
     ...passOnProps
 }: Props) => {
     const injectArgumentsForUpdateTemplate = React.useCallback((template) => {
@@ -60,6 +69,7 @@ export const EventWorkingListsTemplateSetup = ({
             onAddTemplate={injectArgumentsForAddTemplate}
             onUpdateTemplate={injectArgumentsForUpdateTemplate}
             onDeleteTemplate={injectArgumentsForDeleteTemplate}
+            templates={useWorkingListsTemplates(templates)}
         />
     );
 };

@@ -1,6 +1,14 @@
 // @flow
 import type { EventProgram } from '../../../../../metaData';
-import type { FiltersData, ColumnConfigs, AddTemplate, UpdateTemplate, DeleteTemplate } from '../../WorkingLists';
+import type {
+    FiltersData,
+    ColumnConfigs,
+    AddTemplate,
+    UpdateTemplate,
+    DeleteTemplate,
+    WorkingListTemplates,
+} from '../../WorkingLists';
+import type { EventWorkingListsTemplates } from '../types';
 import type { EventWorkingListsDataSourceSetupOutputProps } from '../DataSourceSetup';
 
 type ExtractedProps = $ReadOnly<{|
@@ -12,6 +20,7 @@ type ExtractedProps = $ReadOnly<{|
     onAddTemplate: Function,
     onUpdateTemplate: Function,
     onDeleteTemplate: Function,
+    templates?: EventWorkingListsTemplates,
 |}>;
 
 type RestProps = $Rest<EventWorkingListsDataSourceSetupOutputProps, ExtractedProps>;
@@ -31,4 +40,5 @@ export type EventWorkingListsTemplateSetupOutputProps = {|
     onAddTemplate: AddTemplate,
     onUpdateTemplate: UpdateTemplate,
     onDeleteTemplate: DeleteTemplate,
+    templates?: WorkingListTemplates,
 |};
