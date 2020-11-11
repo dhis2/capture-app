@@ -8,9 +8,9 @@ import {
 } from '../eventWorkingLists.actions';
 import { EventWorkingListsColumnSetup } from '../ColumnSetup';
 import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
-import type { Props } from './eventWorkingListsRedux.types';
+import type { Props } from './eventWorkingListsReduxProvider.types';
 
-export const EventWorkingListsRedux = ({ listId, ...passOnProps }: Props) => {
+export const EventWorkingListsReduxProvider = ({ listId, ...passOnProps }: Props) => {
     const dispatch = useDispatch();
 
     const commonStateManagementProps = useWorkingListsCommonStateManagement(listId);
