@@ -8,5 +8,5 @@ const mapStateToProps = (state: ReduxState) => ({
 });
 
 const mapDispatchToProps = () => ({});
-
+// $FlowFixMe file deleted in next PR
 export const EventWorkingListsOffline = connect(mapStateToProps, mapDispatchToProps)(OfflineEventsList);
