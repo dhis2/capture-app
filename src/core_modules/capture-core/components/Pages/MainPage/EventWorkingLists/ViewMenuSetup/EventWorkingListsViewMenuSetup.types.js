@@ -17,6 +17,6 @@ export type Props = {|
 
 export type EventWorkingListsViewMenuSetupOutputProps = {|
     ...RestProps,
-    program: EventProgram,
+    programId: string,
     customListViewMenuContents: CustomMenuContents,
 |};

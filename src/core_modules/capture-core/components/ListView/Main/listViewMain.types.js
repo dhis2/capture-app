@@ -1,9 +1,9 @@
 // @flow
 import type { Columns } from '../types';
-import type { ListViewContextProviderPassOnProps } from '../ContextProvider';
+import type { ListViewContextBuilderPassOnProps } from '../ContextBuilder';
 
 type WithFilterPassOnProps = {|
-    ...ListViewContextProviderPassOnProps,
+    ...ListViewContextBuilderPassOnProps,
     filters: React$Node,
 |};
 type ComponentProps = {|
