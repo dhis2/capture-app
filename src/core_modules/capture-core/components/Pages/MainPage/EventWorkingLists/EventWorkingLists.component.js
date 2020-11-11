@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import { EventWorkingListsRedux } from './Redux';
+import { EventWorkingListsReduxProvider } from './ReduxProvider';
 
 export const EventWorkingLists = () => (
-    <EventWorkingListsRedux
+    <EventWorkingListsReduxProvider
         listId="eventList"
     />
 );
