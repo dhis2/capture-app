@@ -39,20 +39,22 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
         customMenuContents
             .map((content) => {
                 if (content.subHeader) {
-                    return [
-                        <Divider
-                            key={`${content.key}divider`}
-                            data-test={`subheader-divider-${content.key}`}
-                            className={classes.subHeaderDivider}
-                        />,
-                        <div
-                            key={content.key}
-                            data-test={`subheader-${content.key}`}
-                            className={classes.subHeader}
-                        >
-                            {content.subHeader}
-                        </div>,
-                    ];
+                    return (
+                        <>
+                            <Divider
+                                key={`${content.key}divider`}
+                                data-test={`subheader-divider-${content.key}`}
+                                className={classes.subHeaderDivider}
+                            />,
+                            <div
+                                key={content.key}
+                                data-test={`subheader-${content.key}`}
+                                className={classes.subHeader}
+                            >
+                                {content.subHeader}
+                            </div>,
+                        </>
+                    );
                 }
 
                 return (

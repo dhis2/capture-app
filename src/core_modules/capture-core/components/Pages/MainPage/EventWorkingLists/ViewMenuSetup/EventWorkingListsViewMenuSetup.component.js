@@ -22,7 +22,7 @@ export const EventWorkingListsViewMenuSetup = ({ downloadRequest, program, ...pa
         <React.Fragment>
             <EventWorkingListsRowMenuSetup
                 {...passOnProps}
-                program={program}
+                programId={program.id}
                 customListViewMenuContents={customListViewMenuContents}
             />
             <DownloadDialog

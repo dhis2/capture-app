@@ -5,9 +5,9 @@ import {
     PaginationContext,
 } from '../listView.context';
 import { ListViewMain } from '../Main';
-import type { Props } from './listViewContextProvider.types';
+import type { Props } from './listViewContextBuilder.types';
 
-export const ListViewContextProvider = ({
+export const ListViewContextBuilder = ({
     filters,
     onChangePage,
     onChangeRowsPerPage,

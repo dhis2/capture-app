@@ -1,10 +1,10 @@
 // @flow
 import React, { memo } from 'react';
-import { ListViewContextProvider } from './ContextProvider';
+import { ListViewContextBuilder } from './ContextBuilder';
 import type { InterfaceProps } from './types';
 
 export const ListView = memo<InterfaceProps>(({ columns = [], ...passOnProps }: InterfaceProps) => (
-    <ListViewContextProvider
+    <ListViewContextBuilder
         {...passOnProps}
         columns={columns}
     />
