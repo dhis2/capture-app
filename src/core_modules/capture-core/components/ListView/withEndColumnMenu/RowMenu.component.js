@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import IconButton from '@material-ui/core/IconButton';
 import withStyles from '@material-ui/core/styles/withStyles';
-import type { CustomRowMenuContents } from '../types';
+import type { CustomRowMenuContents, DataSourceItem } from '../types';
 
 type Props = {
     classes: {
@@ -18,9 +18,7 @@ type Props = {
         popperContainerHidden: string,
         popperContainer: string,
     },
-    onDelete: (eventId: string) => void,
-    onView: (eventId: string) => void,
-    row: Object,
+    row: DataSourceItem,
     customRowMenuContents?: CustomRowMenuContents,
 }
 
@@ -47,18 +45,6 @@ class Index extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = { menuOpen: false };
-    }
-
-    handleDelete = (event: SyntheticEvent<any>) => {
-        this.closeMenu();
-        this.props.onDelete(this.props.row.eventId);
-        event.stopPropagation();
-    }
-
-    handleView = (event: SyntheticEvent<any>) => {
-        this.closeMenu();
-        this.props.onView(this.props.row);
-        event.stopPropagation();
     }
 
     handleReferenceInstanceRetrieved = (instance) => {

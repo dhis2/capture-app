@@ -2,9 +2,11 @@
 import React, { useMemo } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { createOfflineListWrapper } from '../../../../List'; // TODO: Refactor list
 import { convertClientToList } from '../../../../../converters';
-import { EventWorkingListsOfflineListInterfaceBuilder } from '../ListInterfaceBuilder';
 import type { Props } from './eventWorkingListsOfflineDataSourceSetup.types';
+
+const OfflineListWrapper = createOfflineListWrapper();
 
 export const EventWorkingListsOfflineDataSourceSetup = ({
     eventRecords,
@@ -57,7 +59,7 @@ export const EventWorkingListsOfflineDataSourceSetup = ({
     ]);
 
     return (
-        <EventWorkingListsOfflineListInterfaceBuilder
+        <OfflineListWrapper
             {...passOnProps}
             hasData={hasData}
             dataSource={dataSource}

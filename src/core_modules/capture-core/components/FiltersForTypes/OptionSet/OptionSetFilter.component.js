@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes';
+import { SelectBoxes, orientations, type Options } from '../../FormFields/Options/SelectBoxes';
 import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './optionSetFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
@@ -14,7 +14,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    options: Array<{text: string, value: any}>,
+    options: Options,
     value: any,
     onCommitValue: (value: any) => void,
     classes: {

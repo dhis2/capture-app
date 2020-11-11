@@ -1,5 +1,5 @@
 // @flow
-export { getDefaultColumnConfig } from './defaultColumnConfiguration';
+export { useDefaultColumnConfig } from './defaultColumnConfiguration';
 export type {
     EventRecords,
     MainColumnConfig,
