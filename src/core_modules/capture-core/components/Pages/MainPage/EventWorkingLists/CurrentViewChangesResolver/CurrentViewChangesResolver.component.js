@@ -65,7 +65,7 @@ export const CurrentViewChangesResolver = ({
             return undefined;
         }
 
-        // $FlowFixMe State logic
+        // $FlowFixMe If calculatedInitialViewConfig is set, filters, columns, sortById and sortByDirection should all be defined.
         return isCurrentViewModified({ filters, columns, sortById, sortByDirection }, calculatedInitialViewConfig);
     }, [
         filters,
