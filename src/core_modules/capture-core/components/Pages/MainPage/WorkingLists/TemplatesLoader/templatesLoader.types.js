@@ -2,7 +2,7 @@
 import type { LoadedContext } from '../workingLists.types';
 import type { ContextBuilderOutputProps } from '../ContextBuilder';
 
-type ExtractedProps = {
+type ExtractedProps = {|
     loadTemplatesError?: string,
     onLoadTemplates: Function,
     onCancelLoadTemplates?: Function,
@@ -10,7 +10,7 @@ type ExtractedProps = {
     loadedContext: LoadedContext,
     dirtyTemplates: boolean,
     templatesLoading: boolean,
-};
+|};
 
 type RestProps = $Rest<ContextBuilderOutputProps, ExtractedProps>;
 
