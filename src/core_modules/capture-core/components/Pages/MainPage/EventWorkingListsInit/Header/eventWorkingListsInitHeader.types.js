@@ -1,5 +1,5 @@
 // @flow
-export type Props = $ReadOnly<{
+export type Props = $ReadOnly<{|
     children: React$Node,
-    classes: Object,
-}>;
+    ...CssClasses,
+|}>;
