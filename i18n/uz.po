@@ -178,7 +178,7 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr "Ёпиқ"
+msgstr "Ёпиш"
 
 msgid "Last week"
 msgstr "Охирги ҳафта"
