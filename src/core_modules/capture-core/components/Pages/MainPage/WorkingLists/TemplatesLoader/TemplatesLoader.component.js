@@ -60,7 +60,7 @@ export const TemplatesLoader = memo<Props>((props: Props) => {
         ...passOnProps
     } = props;
 
-    const triggerLoad = useLoadTemplates({
+    const triggerLoading = useLoadTemplates({
         programId,
         loadedProgramIdForTemplates,
         dirtyTemplates,
@@ -71,7 +71,7 @@ export const TemplatesLoader = memo<Props>((props: Props) => {
     return (
         <TemplatesManangerWithLoadingIndicator
             {...passOnProps}
-            ready={!triggerLoad && !templatesLoading}
+            ready={!triggerLoading && !templatesLoading}
             error={loadTemplatesError}
             programId={programId}
         />
