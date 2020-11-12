@@ -170,7 +170,7 @@ export const SearchResultsIndex = ({
                     {i18n.t('Not finding the results you were looking for? Try to search all programs that use type ')}&quot;{trackedEntityName}&quot;.
                 </div>
 
-                <Button onClick={handleFallbackSearch}>
+                <Button onClick={handleFallbackSearch} dataTest="fallback-search-button">
                     {i18n.t('Search in all programs')}
                 </Button>
             </div>

@@ -339,3 +339,76 @@ When('you fill in the first name', () => {
         .type('Lid')
         .blur();
 });
+
+When('you click the fallback search button', () => {
+    cy.get('[data-test="fallback-search-button"]')
+        .click();
+});
+
+When('you fill in the first and last name with values that will return results', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('Go')
+        .blur();
+
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Sarah')
+        .blur();
+});
+
+When('you navigated to a search page with tracked entity id on the url', () => {
+    cy.url().should('include', 'search/trackedEntityTypeId=nEenWmSyUEp');
+});
+
+When('you have no program selection', () => {
+    cy.get('[data-test="dhis2-capture-program-selector-container"]')
+        .contains('Select program');
+});
+
+When('you can see the domain selector with the tetype person selected', () => {
+    cy.get('[data-test="dhis2-uicore-select-input"]')
+        .contains('Person');
+});
+
+When('there is not enrollment tag', () => {
+    cy.get('[data-test="dhis2-capture-search-results-list"]')
+        .find('[data-test="dhis2-uicore-tag"]')
+        .should('not.exist');
+});
+
+When('you select gender', () => {
+    cy.get('[data-test="dhis2-capture-form-field-cejWyOfXge6"]')
+        .find('input')
+        .type('Female{enter}', { force: true });
+});
+
+When('you see that in the search terms there is no gender displayed', () => {
+    cy.get('[data-test="dhis2-capture-search-results-top"]')
+        .should('not.have.value', 'Gender');
+    cy.get('[data-test="dhis2-capture-search-results-top"]')
+        .contains('First name');
+    cy.get('[data-test="dhis2-capture-search-results-top"]')
+        .contains('Last name');
+});
+
+When('you see the attributes search area being expanded', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .contains('First name');
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .contains('Last name');
+});
+
+When('that first and last name are prefilled', () => {
+    cy.get('[data-test="dhis2-capture-search-results-list"]')
+        .find('[data-test="dhis2-uicore-tag"]')
+        .should('not.exist');
+});
+
+When('and you can see the unique identifier input', () => {
+    cy.get('[data-test="dhis2-capture-form-unique"]')
+        .find('[data-test="capture-ui-input"]')
+        .should('exist');
+});
