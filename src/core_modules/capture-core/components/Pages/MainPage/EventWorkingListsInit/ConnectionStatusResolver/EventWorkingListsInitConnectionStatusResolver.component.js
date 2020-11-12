@@ -6,7 +6,7 @@ import type { Props } from './eventWorkingListsInitConnectionStatusResolver.type
 
 export const EventWorkingListsInitConnectionStatusResolver = ({ isOnline, ...passOnProps }: Props) => (
     <div>
-       {
+        {
             !isOnline ?
                 <EventWorkingListsOffline
                     {...passOnProps}
