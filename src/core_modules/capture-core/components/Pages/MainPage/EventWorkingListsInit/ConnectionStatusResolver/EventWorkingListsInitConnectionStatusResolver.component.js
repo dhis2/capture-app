@@ -8,21 +8,16 @@ import type { Props } from './eventWorkingListsInitConnectionStatusResolver.type
 export const EventWorkingListsInitConnectionStatusResolver = ({ isOnline, storeId, ...passOnProps }: Props) => (
     <EventWorkingListsInitHeader>
         {
-            (() => {
-                if (!isOnline) {
-                    return (
-                        <EventWorkingListsOffline
-                            storeId={storeId}
-                        />
-                    );
-                }
-                return (
-                    <EventWorkingListsInitRunningMutationsHandler
-                        {...passOnProps}
-                        storeId={storeId}
-                    />
-                );
-            })()
+            !isOnline ?
+                <EventWorkingListsOffline
+                    storeId={storeId}
+                />
+                :
+                <EventWorkingListsInitRunningMutationsHandler
+                    {...passOnProps}
+                    storeId={storeId}
+                />
         }
+
     </EventWorkingListsInitHeader>
 );

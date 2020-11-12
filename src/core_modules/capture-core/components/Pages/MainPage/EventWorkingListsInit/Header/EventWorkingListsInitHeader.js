@@ -6,20 +6,20 @@ import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator
 import Paper from '@material-ui/core/Paper';
 import type { Props } from './eventWorkingListsInitHeader.types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = ({ typography, palette }) => ({
     headerContainer: {
-        padding: theme.typography.pxToRem(24),
-        borderColor: theme.palette.type === 'light'
-            ? lighten(fade(theme.palette.divider, 1), 0.88)
-            : darken(fade(theme.palette.divider, 1), 0.8),
+        padding: typography.pxToRem(24),
+        borderColor: palette.type === 'light'
+            ? lighten(fade(palette.divider, 1), 0.88)
+            : darken(fade(palette.divider, 1), 0.8),
         borderWidth: '0 0 1px 0',
         borderStyle: 'solid',
     },
     listContainer: {
-        padding: theme.typography.pxToRem(24),
+        padding: typography.pxToRem(24),
     },
     title: {
-        ...theme.typography.title,
+        ...typography.title,
     },
 });
 
