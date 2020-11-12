@@ -2,13 +2,14 @@
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2019
 # phil_dhis2, 2019
+# Ulanbek Abakirov <ulans@mail.ru>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T12:27:04.744Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: phil_dhis2, 2019\n"
+"Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Столбы, для показа в таблице"
 
 msgid "Column"
 msgstr "Столбец"
@@ -30,6 +31,8 @@ msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
+"Произведенные изменения в данных не будут сохранены, если вы покинете данную"
+" страницу."
 
 msgid "Discard"
 msgstr "Отмена"
@@ -38,10 +41,10 @@ msgid "Back to event"
 msgstr ""
 
 msgid "Add comment"
-msgstr ""
+msgstr "Добавить примечание"
 
 msgid "Write comment"
-msgstr ""
+msgstr "Написать комментарий"
 
 msgid "Errors"
 msgstr "Ошибки"
@@ -53,22 +56,22 @@ msgid "Indicators"
 msgstr "Индикаторы"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Предупреждения"
 
 msgid "Complete"
 msgstr "Завершенный"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Имеются предупреждения"
 
 msgid "Abort"
-msgstr ""
+msgstr "Отменить"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
 
 msgid "No write access"
-msgstr ""
+msgstr "Отсутствует право на запись "
 
 msgid "Save"
 msgstr "Сохранить"
@@ -80,10 +83,10 @@ msgid "Sort"
 msgstr "Сортировать"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Нет событий для отображения"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Данные отсутствуют для офлайн списка "
 
 msgid "Last week"
 msgstr "Последняя неделя"
@@ -95,7 +98,7 @@ msgid "Last 3 months"
 msgstr "Последние 3 месяца"
 
 msgid "Custom range"
-msgstr ""
+msgstr "Пользовательский интервал"
 
 msgid "to"
 msgstr "По"
@@ -119,19 +122,19 @@ msgid "Min"
 msgstr "Минимум"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "больше или равно"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "меньше или равно"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Содержит текст"
 
 msgid "Yes"
 msgstr "Да"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "мм/дд/гггг"
 
 msgid "Years"
 msgstr "Годы"
@@ -143,7 +146,7 @@ msgid "Days"
 msgstr "Дни"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Передача файла"
 
 msgid "selected"
 msgstr "выбранный"
@@ -152,16 +155,16 @@ msgid "Delete"
 msgstr "Удалить"
 
 msgid "Select file"
-msgstr ""
+msgstr "Выберите файл"
 
 msgid "No"
 msgstr "Нет"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Передача изображения"
 
 msgid "Select image"
-msgstr ""
+msgstr "Выберите изображение"
 
 msgid "Search"
 msgstr "Поиск"
@@ -170,10 +173,10 @@ msgid "Clear"
 msgstr "Очистить"
 
 msgid "No results"
-msgstr ""
+msgstr "Результатов нет"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Нет элементов для отображения"
 
 msgid "Online"
 msgstr "Онлайн"
@@ -182,13 +185,13 @@ msgid "Offline"
 msgstr "Оффлайн"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Синхронизирую..."
 
 msgid "Area"
 msgstr "Диаграмма-области"
 
 msgid "Basic info"
-msgstr ""
+msgstr "Базовая информация"
 
 msgid "Status"
 msgstr "Статус"
@@ -203,28 +206,30 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Пожалуйста введите правильную дату"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
+"Пожалуйста добавьте или удалите комментарии, перед сохранением Записи-"
+"события"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Показать все события"
 
 msgid "Edit event"
-msgstr ""
+msgstr "Редактировать событие"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Событие не может быть загружена. Вы уверены что событие существует?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Событие не может быть загружено"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Не могу загрузить Организационную единицу"
 
 msgid "Delete event"
-msgstr ""
+msgstr "Удалить событие"
 
 msgid "Update"
 msgstr "Обновить"
@@ -233,22 +238,22 @@ msgid "Close"
 msgstr "Закрыть"
 
 msgid "More filters"
-msgstr ""
+msgstr "Еще фильтры"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Строк в странице"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Не возможно получить Орг.единицу"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Программа не существует"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "Выбранная программа не действительна для выбранной Орг.единицы"
 
 msgid "Saving to"
-msgstr ""
+msgstr "Сохраняю в"
 
 msgid "in"
 msgstr "в"
@@ -257,48 +262,50 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Это не программа Событие или метаданные испорчены. Смотрите детали в лог-"
+"файле"
 
 msgid "A value is required"
-msgstr ""
+msgstr "Требуется значение"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Сохранить и создать другую"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Сохранить и выйти"
 
 msgid "Finish"
-msgstr ""
+msgstr "Завершить"
 
 msgid "events added"
-msgstr ""
+msgstr "Добавлены события"
 
 msgid "No events added"
-msgstr ""
+msgstr "Нет событий для добавления"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Переключиь вид на Формы"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Переключиться на строчный просмотр "
 
 msgid "New event"
 msgstr "Новое событие"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "Для начала, выберите регистрирующую организацию и программу"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "Выберите программу для отчетов"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "Выберите регистрирующую организацию для отчетов"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "Выберите Категорию опций для отчетов"
 
 msgid "Start again"
-msgstr ""
+msgstr "Начать заново"
 
 msgid "New"
 msgstr "Новый"
@@ -307,22 +314,22 @@ msgid "Find"
 msgstr "Найти"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "Выберите организацию-регистратор"
 
 msgid "Start Again"
-msgstr ""
+msgstr "Начать заново"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Регистрация Организационной единицы"
 
 msgid "Select"
 msgstr "Выбрать"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "Выбранная программа"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Фильтруются некоторые программы "
 
 msgid "Show all"
 msgstr "Показать все"
@@ -334,25 +341,25 @@ msgid "Select program"
 msgstr "Выбрать программу"
 
 msgid "No programs available."
-msgstr ""
+msgstr "Нет доступных программ"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Произошла ошибка. Смотрите подробности в лог-файле"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Ошибка сохранения события"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "Не удалось сохранить событие. Смотрите детали в лог-файле"
 
 msgid "Set coordinate"
 msgstr "Выставить координату"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Удалить полигон"
 
 msgid "Set area"
-msgstr ""
+msgstr "Установить площадь"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -360,12 +367,17 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"Вы открыли другую версию приложения Регистрации(Capture) в том же домене. В "
+"настоящее время приложение Регистрации(Capture) поддерживает одновременное "
+"выполнение только одной версии, в том же домене. Обновите эту страницу, если"
+" вы хотите снова использовать эту версию, но имейте в виду, что это закроет "
+"другие версии."
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Выберите 1 или более дат..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Выберите дату..."
 
 msgid "Today"
 msgstr "Сегодня"
