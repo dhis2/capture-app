@@ -6,21 +6,16 @@ import type { Props } from './eventWorkingListsInitConnectionStatusResolver.type
 
 export const EventWorkingListsInitConnectionStatusResolver = ({ isOnline, ...passOnProps }: Props) => (
     <div>
-        {
-            (() => {
-                if (!isOnline) {
-                    return (
-                        <EventWorkingListsOffline
-                            {...passOnProps}
-                        />
-                    );
-                }
-                return (
-                    <WorkingListsInitRunningMutationsHandler
-                        {...passOnProps}
-                    />
-                );
-            })()
+       {
+            !isOnline ?
+                <EventWorkingListsOffline
+                    {...passOnProps}
+                />
+                :
+                <WorkingListsInitRunningMutationsHandler
+                    {...passOnProps}
+                />
         }
+
     </div>
 );
