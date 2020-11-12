@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import { EventWorkingLists } from '../../EventWorkingLists';
 import type { Props } from './workingListsInitHeader.types';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = ({typography, palette }) => ({
     headerContainer: {
         padding: theme.typography.pxToRem(24),
         borderColor: theme.palette.type === 'light'
