@@ -25,7 +25,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 const WorkingListsInitHeaderPlain =
-    ({ classes: { headerContainer, listContainer, title }, ...passOnProps }: Props & CssClasses) => (
+    ({ classes: { headerContainer, listContainer, title }, ...passOnProps }: Props) => (
         <Paper>
             <div
                 className={headerContainer}
@@ -46,4 +46,4 @@ const WorkingListsInitHeaderPlain =
         </Paper>
     );
 
-export const WorkingListsInitHeader: ComponentType<Props> = withStyles(getStyles)(WorkingListsInitHeaderPlain);
+export const WorkingListsInitHeader: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(WorkingListsInitHeaderPlain);

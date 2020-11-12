@@ -1,2 +1,4 @@
 // @flow
-export type Props = $ReadOnly<{}>;
+export type Props = $ReadOnly<{|
+    ...CssClasses,
+|}>;
