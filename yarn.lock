@@ -2296,23 +2296,23 @@
     "@dhis2/ui-widgets" "^2.1.1"
     moment "^2.24.0"
 
-"@dhis2/app-runtime@^2.0.4", "@dhis2/app-runtime@^2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-2.5.0.tgz#85b4faf1f63124a2f7a0a04ecbd117cca0e07c61"
-  integrity sha512-T4s77Fkwvn7GvEQPEvFQiE5vGCRwa+N+7hB/l969Ssf28vLy/eFcv6q6NcsZHIvORDU7Oqiz7Bi4x7MYc67+oQ==
+"@dhis2/app-runtime@^2.0.4", "@dhis2/app-runtime@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-2.5.1.tgz#9e1475c8b8e24bea575fd4ce2ec6e2af6ede52aa"
+  integrity sha512-iiorzGulsHS8ut3Ri19diQgDYn1yH7bAffEu4fznLQ65nWI+bWkvyuaJvewgsRmKFhtm819Iw4nnGxd35Ma+Zw==
   dependencies:
-    "@dhis2/app-service-config" "2.5.0"
-    "@dhis2/app-service-data" "2.5.0"
+    "@dhis2/app-service-config" "2.5.1"
+    "@dhis2/app-service-data" "2.5.1"
 
-"@dhis2/app-service-config@2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-service-config/-/app-service-config-2.5.0.tgz#fd137fe8052e8fe49596ed883f155d024d64dbf6"
-  integrity sha512-NFpD951Q3eGpsD3CYp+WwKX6vrByB3Hz/7dhLQV2D5TTuUvHbQ8ksJsEpC8efwXtSDs+kZPwkhLkI2FlLJP5FA==
+"@dhis2/app-service-config@2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-config/-/app-service-config-2.5.1.tgz#d4b5ce9edbab6634eab8b18554adb38e9678145f"
+  integrity sha512-HIw0B3HdeP+gXVWF2WeKNrH9haewf+xttQXCP8PKDsyvj1xt0RIubvIBzhdeRiMTYwE1+cMpk5DBaxcCjw7KFg==
 
-"@dhis2/app-service-data@2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-service-data/-/app-service-data-2.5.0.tgz#95d37b172aee8c0285876df6aafeac4c9fb04dd9"
-  integrity sha512-nv/zyyeADoks5ilDNp8VbWNuzuSZ/VG/yQaKbuwvuMw/KOALWtxhHgi6ZMv8cQ/HmClof9Z4d88786mgvHZ5bA==
+"@dhis2/app-service-data@2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-data/-/app-service-data-2.5.1.tgz#16cf48b2ae5125b9b450cb387bee439658ec5cf2"
+  integrity sha512-Q2T5REBdc026UMkgfz9kizoYB9w+OITwqDhIHsh69+D4EiT4Lcw2ljYD1f1Hc4zHjM9hDL1hWNnJeagZR8mYcg==
 
 "@dhis2/app-shell@4.0.9":
   version "4.0.9"
