@@ -154,7 +154,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Clear"
-msgstr "Аниқ"
+msgstr "Тозалаш"
 
 msgid "No results"
 msgstr ""
@@ -208,7 +208,7 @@ msgid "Update"
 msgstr "Янгилаш"
 
 msgid "Close"
-msgstr "Ёпиқ"
+msgstr "Ёпиш"
 
 msgid "More filters"
 msgstr ""
