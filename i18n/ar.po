@@ -53,7 +53,7 @@ msgid "Please provide a negative integer"
 msgstr "من فضلك ادخل عدداً صحيحاً سالباً"
 
 msgid "A date in the future is not allowed"
-msgstr "تاريخ في المستقبل غير مسموح به"
+msgstr "استخدام تاريخ مستقبلي غير مسموح."
 
 msgid "Please provide a valid date and time"
 msgstr "من فضلك ادخل صيغة تاريخ ووقت سليمة"
