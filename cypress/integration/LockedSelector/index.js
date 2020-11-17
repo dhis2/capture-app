@@ -224,7 +224,7 @@ Then('you are navigated to the search page with the same org unit and program Ch
 
 Then('there should be visible a title with Child Program', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .contains('a Person in program: Child Programme')
+        .contains('person in program: Child Programme')
         .should('exist');
 });
 

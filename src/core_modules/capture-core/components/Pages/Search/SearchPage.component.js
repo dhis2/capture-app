@@ -20,11 +20,12 @@ import { searchPageStatus } from '../../../reducers/descriptions/searchPage.redu
 import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
-import { SearchDomainSelector } from './SearchDomainSelector';
+import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
 import { searchScopes } from './SearchPage.constants';
 import { ResultsPageSizeContext } from '../shared-contexts';
+import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
 
 const getStyles = (theme: Theme) => ({
     maxWidth: {
@@ -78,6 +79,7 @@ const Index = ({
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
+    const titleText = useScopeTitleText(selectedSearchScopeId);
 
     useEffect(() => {
         showInitialSearchPage();
@@ -102,18 +104,6 @@ const Index = ({
     const searchGroupsForSelectedScope =
       (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchGroups : []);
 
-    const deriveTitleText = () => {
-        const TETypeName = (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].TETypeName : null);
-        const searchOptionName = (selectedSearchScopeId ? availableSearchOptions[selectedSearchScopeId].searchOptionName : null);
-
-        if (TETypeName && searchOptionName) {
-            return `${i18n.t('Find a {{TETypeName}} in program: ', { TETypeName })} ${searchOptionName}`;
-        }
-        if (!TETypeName && searchOptionName) {
-            return `${i18n.t('Find a')} ${searchOptionName}`;
-        }
-        return i18n.t('Find');
-    };
 
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
@@ -137,11 +127,11 @@ const Index = ({
                 <Paper className={classes.paper}>
                     <div className={classes.maxWidth}>
                         <div className={classes.title} >
-                            {deriveTitleText()}
+                            Find {titleText}
                         </div>
                         {
                             (selectedSearchScopeType !== searchScopes.PROGRAM) &&
-                            <SearchDomainSelector
+                            <TrackedEntityTypeSelector
                                 trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                                 onSelect={handleSearchScopeSelection}
                                 selectedSearchScopeId={selectedSearchScopeId}
