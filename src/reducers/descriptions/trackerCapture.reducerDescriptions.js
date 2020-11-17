@@ -74,6 +74,7 @@ import { currentSelectionsReducerDesc } from './currentSelections.reducerDescrip
 import { feedbackDesc } from './feedback.reducerDescription';
 import { activePageDesc } from '../../core_modules/capture-core/reducers/descriptions/activePage.reducerDescription';
 import { searchPageDesc } from '../../core_modules/capture-core/reducers/descriptions/searchPage.reducerDescription';
+import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
 
 export default [
     activePageDesc,
@@ -117,6 +118,7 @@ export default [
     newEventPageDesc,
     editEventPageDesc,
     viewEventPageDesc,
+    newPageDesc,
     newEnrollmentPageDesc,
     newRelationshipDesc,
     newRelationshipRegisterTeiDesc,

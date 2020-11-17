@@ -1,9 +1,11 @@
 // @flow
-import React, { type ComponentType, useMemo } from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
-import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../metaData';
+import { scopeTypes, TrackerProgram } from '../../../metaData';
+import { useScopeInfo } from '../../../hooks/useScopeInfo';
+
 
 const styles = ({ typography }) => ({
     marginLeft: {
@@ -30,33 +32,6 @@ type Props = $ReadOnly<{|
     showResetButton: boolean,
 |}>;
 
-const programTypes = {
-    TRACKER_PROGRAM: 'TRACKER_PROGRAM',
-    EVENT_PROGRAM: 'EVENT_PROGRAM',
-};
-
-function useProgramInfo(programId) {
-    let programName = '';
-    let trackedEntityName = '';
-
-    const program = useMemo(() => (
-        programId ? getProgramFromProgramIdThrowIfNotFound(programId) : null),
-    [programId]);
-
-    const programType = program instanceof TrackerProgram
-        ? programTypes.TRACKER_PROGRAM
-        : programTypes.EVENT_PROGRAM;
-
-    if (program) {
-        programName = program.name;
-    }
-    if (program instanceof TrackerProgram) {
-        trackedEntityName = program.trackedEntityType.name.toLowerCase();
-    }
-
-    return { trackedEntityName, programType, programName };
-}
-
 
 const Index = ({
     onStartAgainClick,
@@ -74,7 +49,7 @@ const Index = ({
           :
           'Event';
 
-    const { trackedEntityName, programType, programName } = useProgramInfo(selectedProgramId);
+    const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
 
     return (
         <>
@@ -92,7 +67,7 @@ const Index = ({
                 }
             </Button>
             {
-                programType !== programTypes.TRACKER_PROGRAM ?
+                scopeType !== scopeTypes.TRACKER_PROGRAM ?
                     <Button
                         small
                         secondary

@@ -14,8 +14,7 @@ When('you click the "New" button to add a new event', () => {
 });
 
 Then('you should see informative text saying you should do finish your selections', () => {
-    cy.get('[data-test="dhis2-capture-paper"]')
-        .find('[data-test="dhis2-capture-paper-text"]')
+    cy.get('[data-test="dhis2-capture-informative-paper"]')
         .should('exist');
 });
 
@@ -111,8 +110,7 @@ Given('you land on a view event page from the url', () => {
 
 Given('you are in the new event page with no selections made', () => {
     cy.visit('/#/newEvent');
-    cy.get('[data-test="dhis2-capture-paper"]')
-        .find('[data-test="dhis2-capture-paper-text"]')
+    cy.get('[data-test="dhis2-capture-informative-paper"]')
         .should('exist');
 });
 
@@ -226,7 +224,7 @@ Then('you are navigated to the search page with the same org unit and program Ch
 
 Then('there should be visible a title with Child Program', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .contains('a Person in program: Child Programme')
+        .contains('person in program: Child Programme')
         .should('exist');
 });
 
