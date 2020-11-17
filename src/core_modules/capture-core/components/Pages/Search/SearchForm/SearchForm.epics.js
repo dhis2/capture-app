@@ -13,6 +13,7 @@ import {
     showErrorViewOnSearchPage,
     showLoadingViewOnSearchPage,
     showSuccessResultsViewOnSearchPage,
+    showTooManyResultsViewOnSearchPage,
 } from '../SearchPage.actions';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
@@ -77,7 +78,12 @@ const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
             return showEmptyResultsViewOnSearchPage();
         }),
         startWith(showLoadingViewOnSearchPage()),
-        catchError(() => of(showErrorViewOnSearchPage())),
+        catchError(({ httpStatusCode, message }) => {
+            if (httpStatusCode === 409 && message === 'maxteicountreached') {
+                return of(showTooManyResultsViewOnSearchPage());
+            }
+            return of(showErrorViewOnSearchPage());
+        }),
     );
 
 export const searchViaUniqueIdOnScopeProgramEpic: Epic = (action$, store) =>
