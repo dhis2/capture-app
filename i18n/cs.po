@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Jiří Podhorecký, 2020
+# trendspotter, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Jiří Podhorecký, 2020\n"
+"Last-Translator: trendspotter, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,18 +16,20 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Vyberte jedno nebo více dat ..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Vyberte datum ..."
 
 msgid "Today"
-msgstr ""
+msgstr "Dnes"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"Možným důvodem je to, že prohlížeč nebo režim (např. Režim ochrany osobních "
+"údajů) není podporován. Podrobnosti najdete v protokolu."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -35,234 +37,238 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"Otevřeli jste jinou verzi aplikace Capture ve stejné doméně. V současné době"
+" aplikace Capture podporuje pouze běh jedné verze současně (ve stejné "
+"doméně). Chcete-li tuto verzi znovu použít, obnovte prosím tuto stránku, "
+"mějte však na paměti, že se tím zavřou další verze."
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Organizační jednotka"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "Datum zápisu"
 
 msgid "Last updated"
-msgstr ""
+msgstr "Naposledy aktualizováno"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "Zapsáno"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "Dříve zapsáno"
 
 msgid "Not enrolled"
-msgstr ""
+msgstr "Není zapsáno"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Sloupce k zobrazení v tabulce"
 
 msgid "Column"
-msgstr ""
+msgstr "Sloupec"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "Tato hodnota se ověřuje"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "Asynchronní aktualizace pole selhala"
 
 msgid "A value is required"
-msgstr ""
+msgstr "hodnota je vyžadována"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Uveďte prosím platné číslo"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Uveďte platné celé číslo"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "Zadejte kladné celé číslo"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Uveďte nulové nebo kladné celé číslo"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Uveďte záporné celé číslo"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Uveďte prosím platné datum"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Datum v budoucnosti není povoleno"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "Uveďte prosím platné datum a čas"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "Uveďte platný čas"
 
 msgid "Please provide a valid percentage"
-msgstr ""
+msgstr "Uveďte platné procento"
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Uveďte platnou adresu URL"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "Uveďte platnou e-mailovou adresu"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "Uveďte platný věk"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "Uveďte prosím platné telefonní číslo"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "Uveďte platnou organizační jednotku"
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "Uveďte platné souřadnice"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "„Od“ nemůže být větší než „do“..."
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "„Od“ nemůže být větší než „Do“"
 
 msgid "Checking..."
-msgstr ""
+msgstr "Probíhá kontrola ..."
 
 msgid "Area"
-msgstr ""
+msgstr "Oblast"
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Souřadnice"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "Zápis"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "Budoucí datum není povoleno"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Neuložené změny"
 
 msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
+msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "Ano, zahodit"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Ne, zůstat zde"
 
 msgid "validation failed"
-msgstr ""
+msgstr "ověření selhalo"
 
 msgid "Errors"
-msgstr ""
+msgstr "Chyby"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Zpětná vazba"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikátory"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Varování"
 
 msgid "search group result could not be retrieved"
-msgstr ""
+msgstr "výsledek vyhledávací skupiny nelze načíst"
 
 msgid "Complete"
 msgstr "Dokončit"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Nalezena varování"
 
 msgid "Abort"
-msgstr ""
+msgstr "Přerušit"
 
 msgid "Back to form"
-msgstr ""
+msgstr "Zpět do formuláře"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "Přesto uložit"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "Ověření chyby a varování"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "Chyby ověření"
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "Varování ověření"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "Některé operace stále běží. Prosím, čekejte.."
 
 msgid "Operations running"
-msgstr ""
+msgstr "Provoz běží"
 
 msgid "Sort"
-msgstr ""
+msgstr "Třídit"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Žádné události k zobrazení"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Data pro offline seznam nejsou k dispozici"
 
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "Vyberte uživatele"
 
 msgid "Search for user"
-msgstr ""
+msgstr "Hledat uživatele"
 
 msgid "Me"
-msgstr ""
+msgstr "Mě"
 
 msgid "Anyone"
-msgstr ""
+msgstr "Kdokoliv"
 
 msgid "None"
-msgstr ""
+msgstr "Žádný"
 
 msgid "Select user"
-msgstr ""
+msgstr "Vybrat uživatele"
 
 msgid "to"
 msgstr "do"
 
 msgid "From"
-msgstr ""
+msgstr "Od"
 
 msgid "To"
-msgstr ""
+msgstr "Do"
 
 msgid "This week"
-msgstr ""
+msgstr "Tento týden"
 
 msgid "This month"
-msgstr ""
+msgstr "Tento měsíc"
 
 msgid "This Year"
-msgstr ""
+msgstr "Tento rok"
 
 msgid "Last week"
-msgstr ""
+msgstr "Minulý týden"
 
 msgid "Last month"
-msgstr ""
+msgstr "Minulý měsíc"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "Poslední 3 měsíce"
 
 msgid "Custom range"
-msgstr ""
+msgstr "Vlastní rozsah"
 
 msgid "Max"
 msgstr "Max"
@@ -271,605 +277,623 @@ msgid "Min"
 msgstr "Min"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Obsahuje text"
 
 msgid "Yes"
-msgstr ""
+msgstr "Ano"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/yyyy"
 
 msgid "Years"
-msgstr ""
+msgstr "Let"
 
 msgid "Months"
-msgstr ""
+msgstr "Měsíce"
 
 msgid "Days"
-msgstr ""
+msgstr "Dnů"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Nahrávání souboru"
 
 msgid "selected"
-msgstr ""
+msgstr "vybráno"
 
 msgid "Delete"
 msgstr "Smazat"
 
 msgid "Select file"
-msgstr ""
+msgstr "Vybrat soubor"
 
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Nahrávání obrázku"
 
 msgid "Select image"
-msgstr ""
+msgstr "Vybrat obrázek"
 
 msgid "Search"
-msgstr ""
+msgstr "Hledat"
 
 msgid "Clear"
-msgstr ""
+msgstr "Vyčistit"
 
 msgid "No results"
-msgstr ""
+msgstr "Žádné výsledky"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "začněte psát pro vyhledávání"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "návrhy nelze načíst"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Žádné položky k zobrazení"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Nelze získat organizační jednotku"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Program neexistuje"
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
+msgstr "Vybraný program je pro vybranou registrační jednotku neplatný"
 
 msgid "Start again"
-msgstr ""
+msgstr "Začít znovu"
 
 msgid "New {{typeName}}"
-msgstr ""
+msgstr "Nový {{typeName}}"
 
 msgid "New"
-msgstr ""
+msgstr "Nový"
 
 msgid "Find"
-msgstr ""
+msgstr "Hledat"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "Vybraná registrační jednotka"
 
 msgid "Start Again"
-msgstr ""
+msgstr "Začít znovu"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "Jste si jist? Všechna neuložená data budou ztracena."
 
 msgid "Accept"
-msgstr ""
+msgstr "Přijmout"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Registrování organizační jednotky"
 
 msgid "Select"
 msgstr "Vybrat"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "Vybraný program"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Některé programy jsou filtrovány."
 
 msgid "Show all"
-msgstr ""
+msgstr "Ukázat vše"
 
 msgid "Program"
-msgstr ""
+msgstr "Program"
 
 msgid "Select program"
-msgstr ""
+msgstr "Vybrat program"
 
 msgid "No programs available."
-msgstr ""
+msgstr "Nejsou k dispozici žádné programy."
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Probíhá synchronizace"
 
 msgid "Add comment"
-msgstr ""
+msgstr "Přidat komentář"
 
 msgid "You dont have access to write comments"
-msgstr ""
+msgstr "Nemáte přístup k psaní komentářů"
 
 msgid "Write comment"
-msgstr ""
+msgstr "Napsat komentář"
 
 msgid "Basic info"
-msgstr ""
+msgstr "Základní informace"
 
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 msgid "Comments"
-msgstr ""
+msgstr "Komentáře"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr ""
+msgstr "Před uložením události prosím přidejte nebo zrušte komentář"
 
 msgid "No write access"
-msgstr ""
+msgstr "Žádný přístup pro zápis"
 
 msgid "Save"
 msgstr "Uložit"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Zobrazit všechny události"
 
 msgid "Edit event"
-msgstr ""
+msgstr "Upravit událost"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Událost se nepodařilo načíst. Jste si jisti, že existuje?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Událost se nepodařilo načíst"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Organizační jednotku se nepodařilo načíst"
 
 msgid "View event info"
-msgstr ""
+msgstr "Zobrazit informace o události"
 
 msgid "Delete event"
-msgstr ""
+msgstr "Smazat událost"
 
 msgid "Update"
 msgstr "Aktualizovat"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
+msgstr "{{fromDate}} do {{toDate}}"
 
 msgid "after or equal to {{date}}"
-msgstr ""
+msgstr "po, nebo rovno {{date}}"
 
 msgid "before or equal to {{date}}"
-msgstr ""
+msgstr "před, nebo rovno {{date}}"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "větší nebo rovno"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "menší nebo rovno"
 
 msgid "More filters"
-msgstr ""
+msgstr "Více filtrů"
 
 msgid "Select columns"
-msgstr ""
+msgstr "Vybrat sloupce"
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Stáhnout jako JSON"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "Stáhnout jako XML"
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "Stáhnout jako CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "Stáhnout s aktuálními filtry"
 
 msgid "Download data..."
-msgstr ""
+msgstr "Stáhnout data ..."
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Řádků na stránku"
 
 msgid "Update view"
-msgstr ""
+msgstr "Aktualizovat zobrazení"
 
 msgid "Save current view..."
-msgstr ""
+msgstr "Uložit aktuální zobrazení ..."
 
 msgid "Save current view as..."
-msgstr ""
+msgstr "Uložit aktuální zobrazení jako ..."
 
 msgid "Delete view"
-msgstr ""
+msgstr "Odstranit zobrazení"
 
 msgid "Share view..."
-msgstr ""
+msgstr "Sdílet zobrazení..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
+msgstr "Opravdu chcete smazat zobrazení  '{{templateName}}'?"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Potvrdit"
 
 msgid "Save As view"
-msgstr ""
+msgstr "Uložit jako zobrazení"
 
 msgid "View name"
-msgstr ""
+msgstr "Název zobrazení"
 
 msgid "Show Less"
-msgstr ""
+msgstr "Ukázat méně"
 
 msgid "Show All"
-msgstr ""
+msgstr "Ukázat vše"
 
 msgid "Working list could not be loaded"
-msgstr ""
+msgstr "Pracovní seznam nelze načíst"
 
 msgid "an error occurred loading working lists"
-msgstr ""
+msgstr "při načítání pracovních seznamů došlo k chybě"
 
 msgid "Registered events"
-msgstr ""
+msgstr "Registrované události"
 
 msgid "Active"
-msgstr ""
+msgstr "Aktivní"
 
 msgid "Completed"
-msgstr ""
+msgstr "Dokončeno"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
+msgstr "Vytváření nového {{TET}} v {{program}} v {{orgUnit}}"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Uložit a přidat další"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Uložit a odejít"
 
 msgid "Finish"
-msgstr ""
+msgstr "Dokončit"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Přepnout do formulářového zobrazení"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Přepnout do zobrazení řádků"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "Nové {{TET}}"
 
 msgid "Working Lists"
-msgstr ""
+msgstr "Pracovní seznamy"
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
 msgstr ""
+"Program s programid {{programId}} není trasovací program. Registrace lze "
+"provádět pouze v trasovacích programech."
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Přiřazený uživatel"
 
 msgid "Relationships"
-msgstr ""
+msgstr "Vztahy"
 
 msgid "Assignee"
-msgstr ""
+msgstr "Přiřazený"
 
 msgid "Saving to"
-msgstr ""
+msgstr "Ukládání do"
 
 msgid "in"
-msgstr ""
+msgstr "v"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Nejedná se o program událostí, nebo jsou poškozena metadata. Podrobnosti "
+"najdete v protokolu."
 
 msgid "This event"
-msgstr ""
+msgstr "Tato událost"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
-msgstr ""
+msgstr "Vztah typu {{relationshipTypeName}} k {{entityName}} již existuje"
 
 msgid "New event"
-msgstr ""
+msgstr "Nová událost"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "Nový vztah události"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "Přidání vztahu k události."
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "Vraťte se k události bez uložení vztahu"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
+"Opuštěním této stránky zrušíte výběr, který jste provedli pro nový vztah"
 
 msgid "events added"
-msgstr ""
+msgstr "přidány události"
 
 msgid "No events added"
-msgstr ""
+msgstr "Nebyly přidány žádné události"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "Začněte výběrem registrační jednotky a programu výše"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "Vybrat program, o kterém chcete začít podávat zprávy"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "Vyberte registrační jednotku pro zahájení hlášení"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "Chcete-li začít podávat zprávy, vyberte možnost kategorie"
 
 msgid "You dont have access to create an event in the current selections"
-msgstr ""
+msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
+"Existuje duplikát (ale došlo k některým chybám, podrobnosti najdete v "
+"protokolu"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
+"Položka s názvem {{attributeName}} je již zaregistrována, ale nemáte k ní "
+"přístup"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "Tento {{attributeName}} jste již zaregistrovali"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
+"{{TrackedEntityTypeName}} s tímto {{attributeName}} je již zaregistrován"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Zobrazit registrovaného {{trackedEntityTypeName}}"
 
 msgid "Registered person"
-msgstr ""
+msgstr "Registrovaná osoba"
 
 msgid "Link"
-msgstr ""
+msgstr "Odkaz"
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "Chyba metadat. viz log pro podrobnosti"
 
 msgid "Review duplicates"
-msgstr ""
+msgstr "Zkontrolujte duplikáty"
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "Vytvořit {{trackedEntityTypeName}} a odkaz"
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "Byly nalezeny možné duplikáty"
 
 msgid "No results found"
-msgstr ""
+msgstr "Nenalezeny žádné výsledky"
 
 msgid "An error occured loading possible duplicates"
-msgstr ""
+msgstr "Při načítání možných duplikátů došlo k chybě"
 
 msgid "Hide"
-msgstr ""
+msgstr "Skrýt"
 
 msgid "Save as new {{tetName}}"
-msgstr ""
+msgstr "Uložit jako nový {{tetName}}"
 
 msgid "Organisation Unit"
 msgstr "Organizační jednotka"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registrace"
 
 msgid "Review Duplicates"
-msgstr ""
+msgstr "Zkontrolovat duplikáty"
 
 msgid "Search results"
-msgstr ""
+msgstr "Výsledky vyhledávání"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr " {{trackedEntityTypeName}} nenalezeno."
 
 msgid "New search"
-msgstr ""
+msgstr "Nové hledání"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Upravit vyhledávání"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "Odkaz na existující {{trackedEntityType}}"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Vytvořit nový {{trackedEntityType}}"
 
 msgid "Register"
-msgstr ""
+msgstr "Registrovat"
 
 msgid "Search scope"
-msgstr ""
+msgstr "Rozsah hledání"
 
 msgid "Find results from"
-msgstr ""
+msgstr "Najít výsledky z"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
+"Chcete-li hledat, vyplňte alespoň {{minAttributesRequiredToSearch}} atributy"
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Hledat {{name}}"
 
 msgid "Find by {{name}}"
-msgstr ""
+msgstr "Najít podle {{name}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Hledání podle atributů"
 
 msgid "Back"
-msgstr ""
+msgstr "Zpět"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 msgstr ""
+"Můžete změnit hledané výrazy a vyhledat znovu, abyste našli to, co hledáte."
 
 msgid "Back to search"
-msgstr ""
+msgstr "Zpět na vyhledávání"
 
 msgid "An error has occurred"
-msgstr ""
+msgstr "Došlo k chybě"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
+"Došlo k problému s tímto vyhledáváním, změňte prosím hledané výrazy nebo to "
+"zkuste později. Další informace najdete na kartě Konzola v nástrojích pro "
+"vývojáře"
 
 msgid "Make a selection to start searching"
-msgstr ""
+msgstr "Proveďte výběr a začněte hledat"
 
 msgid "View dashboard"
-msgstr ""
+msgstr "Zobrazit ovládací panel"
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "Zobrazit aktivní zápisy"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "Znovu zapsat"
 
 msgid "You dont have access to edit this event"
-msgstr ""
+msgstr "K úpravě této události nemáte přístup"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
+"Opuštěním této stránky zrušíte všechny výběry, které jste provedli pro nový "
+"vztah"
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "K této události není nikdo přiřazen"
 
 msgid "Assign"
-msgstr ""
+msgstr "Přiřadit"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "Událost přiřazená uživateli {{name}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "Zpětná vazba"
 
 msgid "You dont have access to delete this relationship"
-msgstr ""
+msgstr "K odstranění tohoto vztahu nemáte přístup"
 
 msgid "You dont have access to create any relationships"
-msgstr ""
+msgstr "Nemáte přístup k vytváření jakýchkoli vztahů"
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Přidat vztah"
 
 msgid "Results found"
-msgstr ""
+msgstr "Nalezeny výsledky"
 
 msgid "Selected program"
-msgstr ""
+msgstr "Vybraný program"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Hledat {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "Chcete-li hledat, vyplňte alespoň {{minAttributesRequired}} atributy"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "Chcete-li pracovat s vybraným programem,"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "otevřít aplikaci Tracker Capture"
 
 msgid "Program not found"
-msgstr ""
+msgstr "Program nebyl nalezen"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "Program není trasovací program"
 
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Při ukládání události došlo k chybě"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "Událost se nepodařilo uložit. Podrobnosti najdete v protokolu"
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "Událost se nepodařilo smazat"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "Pracovní seznam se nepodařilo uložit"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "Nelze přidat pracovní seznam"
 
 msgid "Could not delete working list"
-msgstr ""
+msgstr "Pracovní seznam se nepodařilo smazat"
 
 msgid "Organisation unit search failed. See log for details"
 msgstr ""
+"Hledání organizační jednotky se nezdařilo. Podrobnosti najdete v protokolu"
 
 msgid "tracked entity instance"
-msgstr ""
+msgstr "sledovaná instance entity"
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Nastavit souřadnice"
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "Stránka {{currentPage}}"
 
 msgid "Date"
 msgstr "datum"
 
 msgid "Time"
-msgstr ""
+msgstr "Čas"
 
 msgid "From date"
-msgstr ""
+msgstr "Od data"
 
 msgid "From time"
-msgstr ""
+msgstr "Od času"
 
 msgid "To date"
-msgstr ""
+msgstr "K datu"
 
 msgid "To time"
-msgstr ""
+msgstr "Na čas"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "během ověřování pole došlo k chybě"
 
 msgid "error"
-msgstr ""
+msgstr "chyba"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Smazat polygon"
 
 msgid "Set area"
-msgstr ""
+msgstr "Nastavit oblast"
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "Režim kompatibility"

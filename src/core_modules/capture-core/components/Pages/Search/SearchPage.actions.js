@@ -9,6 +9,7 @@ export const searchPageActionTypes = {
     SEARCH_RESULTS_EMPTY_VIEW: 'SearchResultsEmptyView',
     SEARCH_RESULTS_SUCCESS_VIEW: 'SearchResultsSuccessView',
     SEARCH_RESULTS_ERROR_VIEW: 'SearchResultsErrorView',
+    SEARCH_RESULTS_TOO_MANY_VIEW: 'SearchResultsTooManyView',
     SEARCH_RESULTS_INITIAL_VIEW: 'SearchResultsInitialView',
     TO_MAIN_PAGE_NAVIGATE: 'NavigateToMainPage',
     CURRENT_SEARCH_INFO_SAVE: 'SaveCurrentSearchInfo',
@@ -35,6 +36,9 @@ export const showInitialViewOnSearchPage = () =>
 
 export const showErrorViewOnSearchPage = () =>
     actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW)();
+
+export const showTooManyResultsViewOnSearchPage = () =>
+    actionCreator(searchPageActionTypes.SEARCH_RESULTS_TOO_MANY_VIEW)();
 
 export const showLoadingViewOnSearchPage = () =>
     actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW)();

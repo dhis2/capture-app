@@ -15,9 +15,10 @@
 .ageNumberInputContainer {
     width: 150px;
 }
+
 .ageDateInputContainerHorizontal {
-    padding-top: 16px;
 }
+
 .ageClearHorizontal {
-    margin-top: 19px;
+    margin-top: 2px;
 }
