@@ -137,7 +137,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         const sections = metaDataSectionsAsArray.map(section => (passOnProps.formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps, classes)));
 
         return (
-            <div className={classes.displayFlex} data-test="dhis2-capture-d2-form-component">
+            <div className={passOnProps.formHorizontal ? classes.displayFlex : ''} data-test="dhis2-capture-d2-form-component">
                 {
                     isFormInReduxStore
                         ?
