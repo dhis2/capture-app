@@ -56,7 +56,7 @@ export const searchPageDesc = createReducerDescription({
         keptFallbackSearchFormValues: fallbackFormValues,
     }),
 
-    [searchPageActionTypes.ALL_RESULTS_RELATED_DATA_CLEAN]: () => (initialReducerValue),
+    [searchPageActionTypes.ALL_SEARCH_RELATED_DATA_CLEAN]: () => (initialReducerValue),
     [searchPageActionTypes.FALLBACK_SEARCH_RELATED_DATA_CLEAN]: state => ({
         ...state,
         fallbackTriggered: false,

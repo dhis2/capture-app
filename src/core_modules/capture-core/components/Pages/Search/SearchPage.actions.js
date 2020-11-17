@@ -17,7 +17,7 @@ export const searchPageActionTypes = {
     FALLBACK_SEARCH_START: 'StartFallbackSearch',
     FALLBACK_SEARCH: 'FallbackSearchTakesPlace',
     FALLBACK_SEARCH_COMPLETED: 'FallbackWillPushToSearchPageWithoutProgramSelected',
-    ALL_RESULTS_RELATED_DATA_CLEAN: 'CleanSearchRelatedData',
+    ALL_SEARCH_RELATED_DATA_CLEAN: 'CleanSearchRelatedData',
     FALLBACK_SEARCH_RELATED_DATA_CLEAN: 'CleanFallbackSearchRelatedData',
 };
 
@@ -75,7 +75,7 @@ export const fallbackPushPage = ({ orgUnitId, trackedEntityTypeId, values }) =>
 
 
 export const cleanSearchRelatedData = () =>
-    actionCreator(searchPageActionTypes.ALL_RESULTS_RELATED_DATA_CLEAN)();
+    actionCreator(searchPageActionTypes.ALL_SEARCH_RELATED_DATA_CLEAN)();
 
 export const cleanFallbackRelatedData = () =>
     actionCreator(searchPageActionTypes.FALLBACK_SEARCH_RELATED_DATA_CLEAN)();
