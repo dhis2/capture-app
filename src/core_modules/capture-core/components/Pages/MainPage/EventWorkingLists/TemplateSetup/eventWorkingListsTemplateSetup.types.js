@@ -1,7 +1,7 @@
 // @flow
 import type { EventProgram } from '../../../../../metaData';
 import type { FiltersData, AddTemplate, UpdateTemplate, DeleteTemplate } from '../../WorkingLists';
-import type { EventWorkingListsColumnConfigs } from '../types';
+import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { EventWorkingListsDataSourceSetupOutputProps } from '../DataSourceSetup';
 
 type ExtractedProps = $ReadOnly<{|

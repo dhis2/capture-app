@@ -1,6 +1,6 @@
 // @flow
 import type { DataSource } from '../../WorkingLists';
-import type { EventRecords, EventWorkingListsColumnConfigs } from '../types';
+import type { EventRecords, EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { CurrentViewChangesResolverOutputProps } from '../CurrentViewChangesResolver';
 
 type ExtractedProps = $ReadOnly<{|
