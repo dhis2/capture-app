@@ -8,6 +8,9 @@ import type { Props, PropsForPureComponent } from './D2Form.types';
 import Section from '../../metaData/RenderFoundation/Section';
 
 export const styles = () => ({
+    displayFlex: {
+        display: 'flex',
+    },
     containerCustomForm: {
         paddingTop: 10,
         paddingBottom: 10,
@@ -134,7 +137,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         const sections = metaDataSectionsAsArray.map(section => (passOnProps.formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps, classes)));
 
         return (
-            <div data-test="dhis2-capture-d2-form-component">
+            <div className={classes.displayFlex} data-test="dhis2-capture-d2-form-component">
                 {
                     isFormInReduxStore
                         ?
