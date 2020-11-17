@@ -8,6 +8,7 @@ export const searchPageStatus = {
     NO_RESULTS: 'NO_RESULTS',
     SHOW_RESULTS: 'SHOW_RESULTS',
     ERROR: 'ERROR',
+    TOO_MANY_RESULTS: 'TOO_MANY_RESULTS',
 };
 const initialReducerValue = {
     searchStatus: searchPageStatus.INITIAL,
@@ -39,6 +40,10 @@ export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW]: state => ({
         ...state,
         searchStatus: searchPageStatus.ERROR,
+    }),
+    [searchPageActionTypes.SEARCH_RESULTS_TOO_MANY_VIEW]: state => ({
+        ...state,
+        searchStatus: searchPageStatus.TOO_MANY_RESULTS,
     }),
     [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
         ...state,

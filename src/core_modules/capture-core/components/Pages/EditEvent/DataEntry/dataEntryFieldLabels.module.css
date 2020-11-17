@@ -1,5 +1,5 @@
 .booleanLabel {
-    padding-top: 6px;
+    padding-top: 13px;
 }
 
 .trueOnlyLabel {
@@ -14,11 +14,11 @@
 }
 
 .ageLabel {
-    padding-top: 27px;
+    padding-top: 13px;
 }
 
 .coordinateLabel {
-    padding-top: 27px;
+    padding-top: 13px;
 }
 
 .polygonLabel {
@@ -31,7 +31,7 @@
 }
 
 .dateTimeLabel {
-    padding-top: 27px;
+    padding-top: 13px;
 }
 
 .imageLabel {
