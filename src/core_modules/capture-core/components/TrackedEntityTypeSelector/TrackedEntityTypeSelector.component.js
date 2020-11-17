@@ -10,8 +10,8 @@ import {
     SingleSelectOption,
     colors,
 } from '@dhis2/ui';
-import type { OwnProps, Props } from './SearchDomainSelector.types';
-import { searchScopes } from '../SearchPage.constants';
+import type { OwnProps, Props } from './TrackedEntityTypeSelector.types';
+import { scopeTypes } from '../../metaData';
 
 const styles = ({ typography }) => ({
     searchDomainSelectorSection: {
@@ -69,7 +69,7 @@ export const Index =
           <div className={classes.searchRow}>
               <div className={classes.searchRowSelectElement}>
                   <SingleSelect
-                      onChange={({ selected }) => { onSelect(selected, searchScopes.TRACKED_ENTITY_TYPE); }}
+                      onChange={({ selected }) => { onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE); }}
                       selected={selectedSearchScopeId}
                       empty={<div className={classes.customEmpty}>Custom empty component</div>}
                   >
@@ -101,4 +101,4 @@ export const Index =
       </>
       );
 
-export const SearchDomainSelector: ComponentType<OwnProps> = withStyles(styles)(Index);
+export const TrackedEntityTypeSelector: ComponentType<OwnProps> = withStyles(styles)(Index);
