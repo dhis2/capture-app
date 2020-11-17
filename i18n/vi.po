@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
+"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -339,9 +339,6 @@ msgstr "Chương trình không tồn tại"
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
-msgid "Start again"
-msgstr "Khởi đầu lại"
-
 msgid "New {{typeName}}"
 msgstr ""
 
@@ -350,6 +347,9 @@ msgstr "Mới"
 
 msgid "Find"
 msgstr "Tìm kiếm"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "Đơn vị đăng ký đã chọn"
@@ -534,6 +534,9 @@ msgstr "Hoạt động"
 msgid "Completed"
 msgstr "Hoàn tất"
 
+msgid "\"Choose a registering unit to start reporting"
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -616,17 +619,17 @@ msgstr "sự kiện đã được thêm"
 msgid "No events added"
 msgstr "Không có sự kiện được thêm"
 
-msgid "Select a registering unit and program above to get started"
-msgstr "Chọn một đơn vị đăng ký và chương trình trên để bắt đầu"
+msgid "Choose a registering unit and program to get started"
+msgstr ""
 
-msgid "Select a program to start reporting"
-msgstr "Chọn chương trình để bắt đầu báo cáo"
+msgid "Choose a program to start reporting"
+msgstr ""
 
-msgid "Select a registering unit to start reporting"
-msgstr "Chọn đơn vị đăng ký để bắt đầu báo cáo"
+msgid "Choose a registering unit to start reporting"
+msgstr ""
 
-msgid "Select a category option to start reporting"
-msgstr "Chọn Tùy Chọn Phân Loại để bắt đầu báo cáo"
+msgid "Choose a category option to start reporting"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
@@ -710,12 +713,6 @@ msgstr ""
 msgid "Register"
 msgstr "Đăng ký"
 
-msgid "Search scope"
-msgstr "Phạm vi tìm kiếm"
-
-msgid "Find results from"
-msgstr ""
-
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
@@ -748,7 +745,15 @@ msgid ""
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
 
-msgid "Make a selection to start searching"
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
 msgstr ""
 
 msgid "View dashboard"
@@ -799,6 +804,13 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "Search for"
+msgstr "Tìm"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "To work with the selected program,"

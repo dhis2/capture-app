@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
+# Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
+"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Bengali (https://www.transifex.com/hisp-uio/teams/100509/bn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -336,9 +336,6 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
-msgid "Start again"
-msgstr ""
-
 msgid "New {{typeName}}"
 msgstr ""
 
@@ -346,6 +343,9 @@ msgid "New"
 msgstr ""
 
 msgid "Find"
+msgstr ""
+
+msgid "Clear selections"
 msgstr ""
 
 msgid "Selected registering unit"
@@ -531,6 +531,9 @@ msgstr ""
 msgid "Completed"
 msgstr "সম্পন্ন"
 
+msgid "\"Choose a registering unit to start reporting"
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -611,16 +614,16 @@ msgstr ""
 msgid "No events added"
 msgstr ""
 
-msgid "Select a registering unit and program above to get started"
+msgid "Choose a registering unit and program to get started"
 msgstr ""
 
-msgid "Select a program to start reporting"
+msgid "Choose a program to start reporting"
 msgstr ""
 
-msgid "Select a registering unit to start reporting"
+msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Select a category option to start reporting"
+msgid "Choose a category option to start reporting"
 msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
@@ -705,12 +708,6 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-msgid "Search scope"
-msgstr ""
-
-msgid "Find results from"
-msgstr ""
-
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
@@ -743,7 +740,15 @@ msgid ""
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
 
-msgid "Make a selection to start searching"
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
 msgstr ""
 
 msgid "View dashboard"
@@ -794,6 +799,13 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "Search for"
+msgstr "অনুসন্ধান"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "To work with the selected program,"

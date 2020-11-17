@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
+"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -342,9 +342,6 @@ msgstr "Program neexistuje"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Vybraný program je pro vybranou registrační jednotku neplatný"
 
-msgid "Start again"
-msgstr "Začít znovu"
-
 msgid "New {{typeName}}"
 msgstr "Nový {{typeName}}"
 
@@ -353,6 +350,9 @@ msgstr "Nový"
 
 msgid "Find"
 msgstr "Hledat"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "Vybraná registrační jednotka"
@@ -537,6 +537,9 @@ msgstr "Aktivní"
 msgid "Completed"
 msgstr "Dokončeno"
 
+msgid "\"Choose a registering unit to start reporting"
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "Vytváření nového {{TET}} v {{program}} v {{orgUnit}}"
 
@@ -622,17 +625,17 @@ msgstr "přidány události"
 msgid "No events added"
 msgstr "Nebyly přidány žádné události"
 
-msgid "Select a registering unit and program above to get started"
-msgstr "Začněte výběrem registrační jednotky a programu výše"
+msgid "Choose a registering unit and program to get started"
+msgstr ""
 
-msgid "Select a program to start reporting"
-msgstr "Vybrat program, o kterém chcete začít podávat zprávy"
+msgid "Choose a program to start reporting"
+msgstr ""
 
-msgid "Select a registering unit to start reporting"
-msgstr "Vyberte registrační jednotku pro zahájení hlášení"
+msgid "Choose a registering unit to start reporting"
+msgstr ""
 
-msgid "Select a category option to start reporting"
-msgstr "Chcete-li začít podávat zprávy, vyberte možnost kategorie"
+msgid "Choose a category option to start reporting"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
@@ -721,12 +724,6 @@ msgstr "Vytvořit nový {{trackedEntityType}}"
 msgid "Register"
 msgstr "Registrovat"
 
-msgid "Search scope"
-msgstr "Rozsah hledání"
-
-msgid "Find results from"
-msgstr "Najít výsledky z"
-
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
@@ -764,8 +761,16 @@ msgstr ""
 "zkuste později. Další informace najdete na kartě Konzola v nástrojích pro "
 "vývojáře"
 
-msgid "Make a selection to start searching"
-msgstr "Proveďte výběr a začněte hledat"
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
 
 msgid "View dashboard"
 msgstr "Zobrazit ovládací panel"
@@ -818,6 +823,13 @@ msgstr "Hledat {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Chcete-li hledat, vyplňte alespoň {{minAttributesRequired}} atributy"
+
+msgid "Search for"
+msgstr "Hledat"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "Chcete-li pracovat s vybraným programem,"

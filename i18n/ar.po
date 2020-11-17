@@ -3,15 +3,15 @@
 # Antonia Bezenchek <antonia@informa.pro>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Hamza Assada <7amza.it@gmail.com>, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
+"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -347,9 +347,6 @@ msgstr "البرنامج غير موجود"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
 
-msgid "Start again"
-msgstr "البدء من جديد"
-
 msgid "New {{typeName}}"
 msgstr "{{typeName}} جديد"
 
@@ -358,6 +355,9 @@ msgstr "جديد"
 
 msgid "Find"
 msgstr "بحث"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "وحدة التسجيل المختارة"
@@ -542,6 +542,9 @@ msgstr "فعال"
 msgid "Completed"
 msgstr "مكتمل"
 
+msgid "\"Choose a registering unit to start reporting"
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
 
@@ -627,17 +630,17 @@ msgstr "تمت إضافة الأحداث"
 msgid "No events added"
 msgstr "لم تتم إضافة أحداث"
 
-msgid "Select a registering unit and program above to get started"
-msgstr "حدد وحدة التسجيل والبرنامج أعلاه للبدء"
+msgid "Choose a registering unit and program to get started"
+msgstr ""
 
-msgid "Select a program to start reporting"
-msgstr "حدد برنامجاً لبدء إعداد التقارير"
+msgid "Choose a program to start reporting"
+msgstr ""
 
-msgid "Select a registering unit to start reporting"
-msgstr "حدد وحدة التسجيل لبدء الإبلاغ"
+msgid "Choose a registering unit to start reporting"
+msgstr ""
 
-msgid "Select a category option to start reporting"
-msgstr "حدد فئة لبدء إعداد التقارير"
+msgid "Choose a category option to start reporting"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
@@ -722,12 +725,6 @@ msgstr "إنشاء {{trackedEntityType}} جديد"
 msgid "Register"
 msgstr "تسجيل"
 
-msgid "Search scope"
-msgstr "نطاق البحث"
-
-msgid "Find results from"
-msgstr "العثور على نتائج من"
-
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr "املأ ما لا يقل عن {{minAttributesRequiredToSearch}} سمة للبحث"
@@ -762,8 +759,16 @@ msgstr ""
 "توجد مشكلة في هذا البحث، يرجى تغيير مصطلحات البحث أو المحاولة مرة أخرى "
 "لاحقًا. لمزيد من التفاصيل، افتح تبويب Console الخاصة بـ Developer tools"
 
-msgid "Make a selection to start searching"
-msgstr "قم بالاختيار لبدء البحث"
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
 
 msgid "View dashboard"
 msgstr "عرض لوحة المعلومات"
@@ -814,6 +819,13 @@ msgstr "بحث {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "املأ {{minAttributesRequired}} سمات على الأقل للبحث"
+
+msgid "Search for"
+msgstr "ابحث عن"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "للعمل مع البرنامج المحدد"

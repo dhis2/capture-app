@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
+"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -339,9 +339,6 @@ msgstr "项目不存在"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "选择的项目对选择的机构无效"
 
-msgid "Start again"
-msgstr "再开始"
-
 msgid "New {{typeName}}"
 msgstr "新建 {{typeName}}"
 
@@ -350,6 +347,9 @@ msgstr "新建"
 
 msgid "Find"
 msgstr "查询"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "选择注册的机构"
@@ -534,6 +534,9 @@ msgstr "活动的"
 msgid "Completed"
 msgstr "已完成"
 
+msgid "\"Choose a registering unit to start reporting"
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
 
@@ -614,17 +617,17 @@ msgstr "事件已经被添加"
 msgid "No events added"
 msgstr "没有事件被添加"
 
-msgid "Select a registering unit and program above to get started"
-msgstr "选择一个注册机构和上面的项目开始"
+msgid "Choose a registering unit and program to get started"
+msgstr ""
 
-msgid "Select a program to start reporting"
-msgstr "选择一个项目开始上报"
+msgid "Choose a program to start reporting"
+msgstr ""
 
-msgid "Select a registering unit to start reporting"
-msgstr "选择一个机构开始上报"
+msgid "Choose a registering unit to start reporting"
+msgstr ""
 
-msgid "Select a category option to start reporting"
-msgstr "选择一个分类选项开始上报"
+msgid "Choose a category option to start reporting"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "你没有在当前选择创建事件的权限"
@@ -708,12 +711,6 @@ msgstr "创建新的{{trackedEntityType}}"
 msgid "Register"
 msgstr "注册"
 
-msgid "Search scope"
-msgstr "搜索范围"
-
-msgid "Find results from"
-msgstr "查找结果来自"
-
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
@@ -746,8 +743,16 @@ msgid ""
 "again later. For more details open the Console tab of the Developer tools"
 msgstr "该搜索存在问题，请更改搜索词或稍后再试。有关更多详细信息，请打开开发人员工具的控制台选项卡。"
 
-msgid "Make a selection to start searching"
-msgstr "先选择后开始搜索"
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
 
 msgid "View dashboard"
 msgstr "查看仪表盘"
@@ -798,6 +803,13 @@ msgstr "搜索 {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
+
+msgid "Search for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"
