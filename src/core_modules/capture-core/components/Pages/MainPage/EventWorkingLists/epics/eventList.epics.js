@@ -20,7 +20,7 @@ export const initEventListEpic = (action$: InputObservable) =>
         ofType(workingListsCommonActionTypes.LIST_VIEW_INIT),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
-            const { selectedTemplate, columnsMetaForDataFetching, categoryCombinationMeta, storeId } = action.payload;
+            const { selectedTemplate, columnsMetaForDataFetching, categoryCombinationId, storeId } = action.payload;
             const { programId, orgUnitId, categories, lastTransaction } = action.payload.context;
             const eventQueryCriteria = selectedTemplate.nextCriteria || selectedTemplate.criteria;
             const initialPromise =
@@ -32,7 +32,7 @@ export const initEventListEpic = (action$: InputObservable) =>
                             categories,
                         },
                         columnsMetaForDataFetching,
-                        categoryCombinationMeta,
+                        categoryCombinationId,
                         storeId,
                         lastTransaction,
                     });
@@ -52,8 +52,8 @@ export const updateEventListEpic = (action$: InputObservable) =>
         ofType(workingListsCommonActionTypes.LIST_UPDATE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
-            const { queryArgs, columnsMetaForDataFetching, categoryCombinationMeta, storeId } = action.payload;
-            const updatePromise = updateEventWorkingListAsync(queryArgs, { columnsMetaForDataFetching, categoryCombinationMeta, storeId });
+            const { queryArgs, columnsMetaForDataFetching, categoryCombinationId, storeId } = action.payload;
+            const updatePromise = updateEventWorkingListAsync(queryArgs, { columnsMetaForDataFetching, categoryCombinationId, storeId });
             return from(updatePromise).pipe(
                 takeUntil(
                     action$.pipe(

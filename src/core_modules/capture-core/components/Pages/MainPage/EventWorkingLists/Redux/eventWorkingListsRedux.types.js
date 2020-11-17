@@ -24,11 +24,16 @@ import type {
     UpdateFilter,
     WorkingListTemplate,
 } from '../../WorkingLists';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '../../WorkingListsCommon';
 import type {
+    AddTemplate,
+    DeleteTemplate,
+    UpdateTemplate,
+    UpdateList,
+    RecordsOrder,
     CustomColumnOrder,
-    EventsMainProperties,
-    EventsDataElementValues,
+} from '../../WorkingListsCommon';
+import type { EventRecords } from '../../EventWorkingListsCommon';
+import type {
     EventWorkingListsTemplates,
 } from '../types';
 
@@ -45,8 +50,7 @@ export type EventWorkingListsReduxOutputProps = {|
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
     downloadRequest: Object,
-    eventsMainProperties: ?EventsMainProperties,
-    eventsDataElementValues: ?EventsDataElementValues,
+    eventRecords?: EventRecords,
     filters?: FiltersData,
     initialViewConfig?: Object,
     lastIdDeleted?: string,
@@ -79,7 +83,7 @@ export type EventWorkingListsReduxOutputProps = {|
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     program: EventProgram,
-    recordsOrder?: Array<string>, // TODO: Dealing with this in later PR
+    recordsOrder?: RecordsOrder,
     rowsCount?: number,
     rowsPerPage?: number,
     sortByDirection?: string,

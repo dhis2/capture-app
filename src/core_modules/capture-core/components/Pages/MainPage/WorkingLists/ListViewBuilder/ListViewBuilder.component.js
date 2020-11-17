@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext, useMemo } from 'react';
+import React, { useContext } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { ListView } from '../../../../ListView';
@@ -16,7 +16,6 @@ export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: 
 
     const {
         dataSource,
-        recordsOrder,
         onSelectListRow,
         onSortList,
         onSetListColumnOrder,
@@ -25,26 +24,19 @@ export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: 
         ...passOnContext
     } = context;
 
-    if (!dataSource || !recordsOrder || rowsCount == null || !stickyFilters) {
-        const baseErrorMessage = 'dataSource, recordsOrder, rowsCount, stickyFilters needs to be set in ListViewBuilder';
+    if (!dataSource || rowsCount == null || !stickyFilters) {
+        const baseErrorMessage = 'dataSource, rowsCount, stickyFilters needs to be set in ListViewBuilder';
         log.error(
             errorCreator(baseErrorMessage)(
-                { dataSource, recordsOrder, rowsCount, stickyFilters }));
+                { dataSource, rowsCount, stickyFilters }));
         throw Error(`${baseErrorMessage}. See console for details`);
     }
-
-    const listViewDataSource = useMemo(() =>
-        recordsOrder
-            .map(id => dataSource[id]), [
-        dataSource,
-        recordsOrder,
-    ]);
 
     return (
         <ListView
             {...passOnProps}
             {...passOnContext}
-            dataSource={listViewDataSource}
+            dataSource={dataSource}
             onSelectRow={onSelectListRow}
             onSort={onSortList}
             onSetColumnOrder={onSetListColumnOrder}
