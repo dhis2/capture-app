@@ -1,21 +1,23 @@
 // @flow
 import React from 'react';
+import { EventWorkingListsInitHeader } from '../Header';
 import { EventWorkingListsOffline } from '../../EventWorkingListsOffline';
-import { WorkingListsInitRunningMutationsHandler } from '../RunningMutationsHandler';
+import { EventWorkingListsInitRunningMutationsHandler } from '../RunningMutationsHandler';
 import type { Props } from './eventWorkingListsInitConnectionStatusResolver.types';
 
-export const EventWorkingListsInitConnectionStatusResolver = ({ isOnline, ...passOnProps }: Props) => (
-    <div>
+export const EventWorkingListsInitConnectionStatusResolver = ({ isOnline, storeId, ...passOnProps }: Props) => (
+    <EventWorkingListsInitHeader>
         {
             !isOnline ?
                 <EventWorkingListsOffline
-                    {...passOnProps}
+                    storeId={storeId}
                 />
                 :
-                <WorkingListsInitRunningMutationsHandler
+                <EventWorkingListsInitRunningMutationsHandler
                     {...passOnProps}
+                    storeId={storeId}
                 />
         }
 
-    </div>
+    </EventWorkingListsInitHeader>
 );

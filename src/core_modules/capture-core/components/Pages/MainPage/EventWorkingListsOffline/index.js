@@ -1,2 +1,2 @@
 // @flow
-export { EventWorkingListsOffline } from './EventWorkingListsOffline.container';
+export { EventWorkingListsOffline } from './EventWorkingListsOffline.component';

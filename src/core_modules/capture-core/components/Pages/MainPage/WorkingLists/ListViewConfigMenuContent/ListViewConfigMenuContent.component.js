@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { ListViewLoader } from '../ListViewLoader';
@@ -12,7 +12,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const Index = (props: Props) => {
+const ListViewConfigMenuContentPlain = (props: Props) => {
     const {
         currentTemplate,
         onAddTemplate,
@@ -160,4 +160,5 @@ const Index = (props: Props) => {
     );
 };
 
-export const ListViewConfigMenuContent = withStyles(getStyles)(Index);
+export const ListViewConfigMenuContent: ComponentType<$Diff<Props, CssClasses>> =
+    withStyles(getStyles)(ListViewConfigMenuContentPlain);

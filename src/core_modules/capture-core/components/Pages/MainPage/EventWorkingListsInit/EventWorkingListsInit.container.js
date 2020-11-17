@@ -10,7 +10,7 @@ export const EventWorkingListsInit = () => {
 
     return (
         <EventWorkingListsInitConnectionStatusResolver
-            listId="eventList"
+            storeId="eventList"
             isOnline={isOnline}
             mutationInProgress={mutationInProgress}
         />

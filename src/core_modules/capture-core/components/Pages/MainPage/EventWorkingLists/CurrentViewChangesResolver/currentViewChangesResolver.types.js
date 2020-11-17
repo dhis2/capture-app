@@ -1,6 +1,6 @@
 // @flow
 import type { FiltersData } from '../../WorkingLists';
-import type { EventWorkingListsColumnConfigs } from '../types';
+import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { EventWorkingListsColumnSetupOutputProps } from '../ColumnSetup';
 
 type ExtractedProps = {|

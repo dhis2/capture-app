@@ -1,4 +1,4 @@
 // @flow
 export type Props = $ReadOnly<{|
-    ...CssClasses,
+    storeId: string,
 |}>;

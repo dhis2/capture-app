@@ -191,6 +191,4 @@ export type InterfaceProps = $ReadOnly<{|
     viewPreloaded?: boolean,
 |}>;
 
-export type WorkingListsOutputProps = $ReadOnly<{|
-    ...InterfaceProps,
-|}>;
+export type WorkingListsOutputProps = InterfaceProps;

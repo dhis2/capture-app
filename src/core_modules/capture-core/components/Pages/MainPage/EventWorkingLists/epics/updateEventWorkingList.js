@@ -17,11 +17,11 @@ const errorMessages = {
 export const updateEventWorkingListAsync = (
     queryArgsSource: Object, {
         columnsMetaForDataFetching,
-        categoryCombinationMeta,
+        categoryCombinationId,
         storeId,
     }: {
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-    categoryCombinationMeta: Object,
+    categoryCombinationId?: ?string,
     storeId: string,
 }): Promise<ReduxAction<any, any>> => getEventListData(
     buildQueryArgs(
@@ -30,7 +30,7 @@ export const updateEventWorkingListAsync = (
             storeId,
             isInit: false,
         }),
-    columnsMetaForDataFetching, categoryCombinationMeta)
+    columnsMetaForDataFetching, categoryCombinationId)
     .then(({ eventContainers, pagingData, request }) =>
         updateListSuccess(storeId, {
             recordContainers: eventContainers,
