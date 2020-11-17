@@ -25,7 +25,7 @@ import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
 import { searchScopes } from './SearchPage.constants';
 import { ResultsPageSizeContext } from '../shared-contexts';
-import { useTitleText } from '../../../hooks/useTitleText';
+import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
 
 const getStyles = (theme: Theme) => ({
     maxWidth: {
@@ -79,7 +79,7 @@ const Index = ({
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
-    const titleText = useTitleText(selectedSearchScopeId);
+    const titleText = useScopeTitleText(selectedSearchScopeId);
 
     useEffect(() => {
         showInitialSearchPage();

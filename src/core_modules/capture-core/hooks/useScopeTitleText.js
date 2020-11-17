@@ -2,7 +2,7 @@
 import { scopeTypes } from '../metaData';
 import { useScopeInfo } from './useScopeInfo';
 
-export const useTitleText = (scopeId: ?string) => {
+export const useScopeTitleText = (scopeId: ?string) => {
     const { trackedEntityName, programName, scopeType } = useScopeInfo(scopeId);
 
     const text = {
