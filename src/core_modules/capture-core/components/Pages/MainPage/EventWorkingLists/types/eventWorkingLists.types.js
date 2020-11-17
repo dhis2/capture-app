@@ -1,8 +1,6 @@
 // @flow
 import { typeof dataElementTypes } from '../../../../../metaData';
-
-export type EventsMainProperties = { [eventId: string]: Object, eventId: string };
-export type EventsDataElementValues = { [eventId: string]: Object};
+import type { CustomColumnOrder } from '../../WorkingListsCommon';
 
 export type ColumnMetaForDataFetching = {|
     id: string,
@@ -12,8 +10,6 @@ export type ColumnMetaForDataFetching = {|
 |};
 
 export type ColumnsMetaForDataFetching = Map<string, ColumnMetaForDataFetching>;
-
-export type CustomColumnOrder = Array<{| id: string, visible: string |}>;
 
 export type ClientConfig = {|
     filters: { [id: string]: any },
@@ -42,25 +38,3 @@ export type EventWorkingListsTemplate = {|
 |};
 
 export type EventWorkingListsTemplates = Array<EventWorkingListsTemplate>;
-
-export type ColumnConfigBase = {
-    id: string,
-    visible: boolean,
-    type: $Values<dataElementTypes>,
-    header: string,
-    options?: ?Array<{text: string, value: any}>,
-    multiValueFilter?: boolean,
-};
-export type MetadataColumnConfig = {
-    ...ColumnConfigBase,
-};
-
-export type MainColumnConfig = {
-    ...ColumnConfigBase,
-    isMainProperty: true,
-    apiName?: string,
-};
-
-export type EventWorkingListsColumnConfig = MetadataColumnConfig | MainColumnConfig;
-
-export type EventWorkingListsColumnConfigs = Array<EventWorkingListsColumnConfig>;

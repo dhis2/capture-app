@@ -1,6 +1,6 @@
 // @flow
-import React, { useMemo, useCallback } from 'react';
-import { useDefaultColumnConfig } from './defaultColumnConfiguration';
+import React, { useCallback } from 'react';
+import { useDefaultColumnConfig, useColumns } from '../../EventWorkingListsCommon';
 import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
 import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
@@ -24,25 +24,6 @@ const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
         );
         onUpdateList(queryArgs, lastTransaction, columnsMetaForDataFetching);
     }, [onUpdateList, defaultColumns]);
-
-const useColumns = (customColumnOrder, defaultColumns) => {
-    const defaultColumnsAsObject = useMemo(() =>
-        defaultColumns
-            .reduce((acc, column) => ({ ...acc, [column.id]: column }), {}),
-    [defaultColumns]);
-
-    return useMemo(() => {
-        if (!customColumnOrder) {
-            return defaultColumns;
-        }
-
-        return customColumnOrder
-            .map(({ id, visible }) => ({
-                ...defaultColumnsAsObject[id],
-                visible,
-            }));
-    }, [customColumnOrder, defaultColumns, defaultColumnsAsObject]);
-};
 
 export const EventWorkingListsColumnSetup = ({
     program,

@@ -1,16 +1,16 @@
 // @flow
 import type { DataSource } from '../../WorkingLists';
-import type { EventsMainProperties, EventsDataElementValues, EventWorkingListsColumnConfigs } from '../types';
+import type { EventRecords, EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { CurrentViewChangesResolverOutputProps } from '../CurrentViewChangesResolver';
 
 type ExtractedProps = $ReadOnly<{|
-    eventsMainProperties: ?EventsMainProperties,
-    eventsDataElementValues: ?EventsDataElementValues,
+    eventRecords?: EventRecords,
     columns: EventWorkingListsColumnConfigs,
     recordsOrder?: Array<string>,
 |}>;
 
 type OptionalExtractedProps = {
+    eventRecords: EventRecords,
     recordsOrder: Array<string>,
 };
 type RestProps = $Rest<CurrentViewChangesResolverOutputProps & OptionalExtractedProps,

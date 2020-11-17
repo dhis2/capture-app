@@ -1,12 +1,9 @@
 // @flow
-/**
- * @namespace MainPage
-*/
-import React, { Component } from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import EventsListConnectivityWrapper from './EventsListConnectivityWrapper/EventsListConnectivityWrapper.container';
-import { TrackerProgramHandler } from '../../TrackerProgramHandler';
+import { WorkingListsType } from './WorkingListsType';
 import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
+import type { Props } from './mainPage.types';
 
 const getStyles = () => ({
     listContainer: {
@@ -14,43 +11,21 @@ const getStyles = () => ({
     },
 });
 
-type Props = {
-    currentSelectionsComplete: boolean,
-    classes: {
-        listContainer: string,
-    },
-};
+const MainPagePlain = ({ currentSelectionsComplete, classes, ...passOnProps }: Props) => (
+    <>
+        <LockedSelector />
+        {
+            !currentSelectionsComplete ? null : (
+                <div
+                    className={classes.listContainer}
+                >
+                    <WorkingListsType
+                        {...passOnProps}
+                    />
+                </div>
+            )
+        }
+    </>
+);
 
-class Index extends Component<Props> {
-    render() {
-        const { currentSelectionsComplete, classes } = this.props;
-
-        return (
-            <div>
-                <LockedSelector />
-                {
-                    (() => {
-                        if (!currentSelectionsComplete) {
-                            return null;
-                        }
-
-                        return (
-                            <TrackerProgramHandler>
-                                <div
-                                    className={classes.listContainer}
-                                    data-test="dhis2-capture-event-list-container"
-                                >
-                                    <EventsListConnectivityWrapper
-                                        listId={'eventList'}
-                                    />
-                                </div>
-                            </TrackerProgramHandler>
-                        );
-                    })()
-                }
-            </div>
-        );
-    }
-}
-
-export const MainPageComponent = withStyles(getStyles)(Index);
+export const MainPageComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(MainPagePlain);

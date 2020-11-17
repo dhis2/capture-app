@@ -22,7 +22,7 @@ export const ListViewConfig = (props: Props) => {
             <ListViewConfigMenuContent
                 {...passOnProps}
                 {...passOnContext}
-                currentViewHasTemplateChanges={currentViewHasTemplateChanges}
+                currentViewHasTemplateChanges={!!currentViewHasTemplateChanges}
             />
         </React.Fragment>
     );
