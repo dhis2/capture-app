@@ -245,6 +245,15 @@ Then('you can see the first page of the results', () => {
         .should('exist');
 });
 
+Then('there is not results displayed in a list', () => {
+    cy.get('[data-test="dhis2-capture-search-results-list"]')
+        .should('not.exist');
+    cy.get('[data-test="dhis2-capture-card-list-item"]')
+        .should('not.exist');
+    cy.get('[data-test="dhis2-capture-pagination"]')
+        .contains('Page 1')
+        .should('not.exist');
+});
 
 When('you click the next page button', () => {
     cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')

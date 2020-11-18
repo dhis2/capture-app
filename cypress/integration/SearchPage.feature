@@ -228,5 +228,6 @@ Feature: User interacts with Search page
     When you select the search domain Child Programme
     And you are in the search page with the Child Programme being preselected from the url
     And and you can see the unique identifier input
+    And there is not results displayed in a list
 
 
