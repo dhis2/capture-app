@@ -14,25 +14,14 @@ type Props = {
     classes?: ?any,
 }
 
-type State = {
-    focus?: ?boolean,
-}
-
-class AgeNumberInput extends Component<Props, State> {
-    constructor(props) {
-        super(props);
-        this.state = { focus: false };
-    }
+class AgeNumberInput extends Component<Props> {
     handleBlur = (event) => {
         this.props.onBlur(event.currentTarget.value);
-        this.setState({ focus: false });
     }
     handleChange = (event) => {
         this.props.onChange && this.props.onChange(event.currentTarget.value);
     }
-    handleFocus = () => {
-        this.setState({ focus: true });
-    }
+    handleFocus = () => {}
     render() {
         const { onBlur, onChange, value, classes, ...passOnProps } = this.props;
         return (

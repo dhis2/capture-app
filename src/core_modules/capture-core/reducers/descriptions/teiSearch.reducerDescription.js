@@ -35,7 +35,7 @@ export const teiSearchDesc = createReducerDescription({
     [teiSearchActionTypes.SEARCH_TEI_RESULT_RETRIEVED]: (state, action) => {
         const data = action.payload.data;
         const searchId = action.payload.searchId;
-        const teis = data.trackedEntityInstanceContainers ? data.trackedEntityInstanceContainers.map(t => ({ id: t.id, values: t.values })) : [];
+        const teis = data.trackedEntityInstanceContainers ? data.trackedEntityInstanceContainers : [];
         return {
             ...state,
             [searchId]: {
@@ -44,7 +44,7 @@ export const teiSearchDesc = createReducerDescription({
                     ...state[searchId].searchResults,
                     resultsLoading: false,
                     teis,
-                    paging: data.pagingData,
+                    currentPage: data.currentPage,
                 },
             },
         };
@@ -59,7 +59,7 @@ export const teiSearchDesc = createReducerDescription({
                     ...state[searchId].searchResults,
                     resultsLoading: false,
                     teis: [],
-                    paging: null,
+                    currentPage: null,
                 },
             },
         };

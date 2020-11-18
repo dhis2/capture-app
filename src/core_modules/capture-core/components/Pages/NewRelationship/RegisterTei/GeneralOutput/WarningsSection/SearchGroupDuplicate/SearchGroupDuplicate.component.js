@@ -2,8 +2,8 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../../../../Buttons';
-import WarningMessageCreator from './WarningMessageCreator.container';
-import ReviewDialog from './ReviewDialog.component';
+import { WarningMessageCreator } from './WarningMessageCreator.container';
+import { ReviewDialog } from './ReviewDialog.component';
 
 type Props = {
     onLink: Function,
@@ -35,10 +35,7 @@ class SearchGroupDuplicate extends React.Component<Props, State> {
 
     getHideButton() {
         return (
-            <Button
-                onClick={this.handleCloseReviewDialog}
-                primary
-            >
+            <Button onClick={this.handleCloseReviewDialog}>
                 {i18n.t('Hide')}
             </Button>
         );

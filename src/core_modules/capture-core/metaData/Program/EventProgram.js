@@ -3,7 +3,7 @@
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/lib/isFunction';
 import Program from './Program';
-import ProgramStage from './ProgramStage';
+import type ProgramStage from './ProgramStage';
 
 export default class EventProgram extends Program {
     static EVENT_PROGRAM_STAGE_KEY = 'EventProgramStage';

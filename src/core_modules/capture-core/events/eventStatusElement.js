@@ -4,7 +4,6 @@ import { DataElement, OptionSet, Option, dataElementTypes } from '../metaData';
 
 const eventStatusElement = new DataElement((o) => {
     o.id = 'status';
-    // $FlowFixMe[prop-missing] automated comment
     o.type = dataElementTypes.TEXT;
 });
 

@@ -52,7 +52,7 @@ export const eventsDesc = createReducerDescription({
     [viewEventActionTypes.ADD_EVENT_NOTE]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        if (newState && newState[payload.eventId]) {
+        if (newState[payload.eventId]) {
             newState[payload.eventId].notes = [...state[payload.eventId].notes, payload.note];
         }
         return newState;
@@ -60,7 +60,7 @@ export const eventsDesc = createReducerDescription({
     [viewEventActionTypes.REMOVE_EVENT_NOTE]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        if (newState && newState[payload.eventId]) {
+        if (newState[payload.eventId]) {
             newState[payload.eventId].notes = state[payload.eventId].notes.filter(n => n.clientId !== payload.noteClientId);
         }
         return newState;

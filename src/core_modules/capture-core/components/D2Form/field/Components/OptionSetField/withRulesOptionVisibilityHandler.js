@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import OptionGroup from '../../../../../metaData/OptionSet/OptionGroup';
+import { type OptionGroup } from '../../../../../metaData';
 import { makeGetOptionsVisibility } from './rulesOptionsVisibility.selectors';
 
 const effectKeys = {
@@ -41,7 +41,7 @@ type Props = {
 
 const getCreateRulesOptionsVisibilityHandlerHOC =
     (InnerComponent: React.ComponentType<any>) =>
-        class CreateRulesOptionsVisibilityHandlerHOC extends React.Component<Props> {
+        (class CreateRulesOptionsVisibilityHandlerHOC extends React.Component<Props> {
             static getFilteredOptions = (props: Props) => {
                 const { options, rulesOptionsVisibility, optionGroups } = props;
 
@@ -63,7 +63,7 @@ const getCreateRulesOptionsVisibilityHandlerHOC =
             }
 
 
-            componentWillReceiveProps(newProps: Props) {
+            UNSAFE_componentWillReceiveProps(newProps: Props) {
                 if (newProps.rulesOptionsVisibility !== this.props.rulesOptionsVisibility) {
                     this.filteredOptions = CreateRulesOptionsVisibilityHandlerHOC.getFilteredOptions(newProps);
                 }
@@ -80,7 +80,7 @@ const getCreateRulesOptionsVisibilityHandlerHOC =
                     />
                 );
             }
-        };
+        });
 
 const makeMapStateToProps = () => {
     const getOptionsVisibility = makeGetOptionsVisibility();

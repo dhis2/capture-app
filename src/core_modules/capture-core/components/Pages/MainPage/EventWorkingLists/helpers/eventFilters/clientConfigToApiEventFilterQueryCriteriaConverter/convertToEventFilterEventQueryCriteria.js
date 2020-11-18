@@ -2,12 +2,11 @@
 import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
 import { moment } from 'capture-core-utils/moment';
-import {
-    dataElementTypes as elementTypes,
-} from '../../../../../../../metaData';
+import { dataElementTypes } from '../../../../../../../metaData';
 import { getApiOptionSetFilter } from './optionSet';
 
 import {
+    filterTypesObject,
     dateFilterTypes,
     type AssigneeFilterData,
     type DateFilterData,
@@ -27,7 +26,7 @@ import type {
 
 type ColumnForConverterBase = {|
     id: string,
-    type: $Values<typeof elementTypes>,
+    type: $Values<typeof dataElementTypes>,
     visible: boolean,
 |};
 type MetadataColumnForConverter = {|
@@ -89,26 +88,16 @@ const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee =>
 });
 
 const getFilterByType = {
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.TEXT]: getTextFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.NUMBER]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_POSITIVE]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_NEGATIVE]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.DATE]: getDateFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.BOOLEAN]: getBooleanFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.TRUE_ONLY]: getTrueOnlyFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.ASSIGNEE]: getAssigneeFilter,
+    [filterTypesObject.TEXT]: getTextFilter,
+    [filterTypesObject.NUMBER]: getNumericFilter,
+    [filterTypesObject.INTEGER]: getNumericFilter,
+    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.BOOLEAN]: getBooleanFilter,
+    [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
+    [filterTypesObject.ASSIGNEE]: getAssigneeFilter,
 };
 
 const typeConvertFilters = (filters: Object, columns: ColumnsForConverter) => Object
@@ -119,7 +108,7 @@ const typeConvertFilters = (filters: Object, columns: ColumnsForConverter) => Ob
             return null;
         }
         const element = columns.get(key);
-
+        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
         if (!element || !getFilterByType[element.type]) {
             log.error(
                 errorCreator(
@@ -139,6 +128,7 @@ const typeConvertFilters = (filters: Object, columns: ColumnsForConverter) => Ob
         }
 
         return {
+            // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
             ...getFilterByType[element.type](filter),
             dataItem: key,
         };

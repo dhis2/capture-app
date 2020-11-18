@@ -1,34 +1,19 @@
 // @flow
-import * as React from 'react';
+import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
-import SearchGroup from '../../metaData/SearchGroup/SearchGroup';
+import { SearchGroup } from '../../metaData';
 import TeiSearchForm from './TeiSearchForm/TeiSearchForm.container';
-import TeiSearchResults from './TeiSearchResults/TeiSearchResults.container';
+import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
 import SearchProgramSelector from './SearchProgramSelector/SearchProgramSelector.container';
 import { Section, SectionHeaderSimple } from '../Section';
-
-type Props = {
-    id: string,
-    selectedTrackedEntityTypeId: ?string,
-    selectedProgramId: ?string,
-    searchGroups: ?Array<SearchGroup>,
-    onSearch: Function,
-    onSearchValidationFailed: Function,
-    onSetOpenSearchGroupSection: (searchId: string, searchGroupId: ?string) => void,
-    openSearchGroupSection: ?string,
-    showResults?: ?boolean,
-    onSearchResultsChangePage: (searchId: string, pageNumber: number) => void,
-    onNewSearch: (searchId: string) => void,
-    onEditSearch: (searchId: string) => void,
-    classes: {
-        section: string,
-        formContainerSection: string,
-        programSection: string,
-    },
-}
+import { ResultsPageSizeContext } from '../Pages/shared-contexts';
+import type { Props } from './TeiSearch.types';
 
 const getStyles = (theme: Theme) => ({
+    container: {
+        margin: theme.typography.pxToRem(10),
+    },
     programSection: {
         backgroundColor: 'white',
         maxWidth: theme.typography.pxToRem(900),
@@ -44,7 +29,7 @@ type State = {
     programSectionOpen: boolean,
 }
 
-class TeiSearch extends React.Component<Props, State> {
+class TeiSearchPlain extends React.Component<Props, State> {
     constructor(props) {
         super(props);
         this.state = { programSectionOpen: true };
@@ -79,7 +64,7 @@ class TeiSearch extends React.Component<Props, State> {
     }
 
     renderSearchForms = (searchGroups: Array<SearchGroup>) => (
-        <div>
+        <div className={this.props.classes.container}>
             {this.renderProgramSection()}
             {this.renderSearchGroups(searchGroups)}
         </div>
@@ -120,6 +105,7 @@ class TeiSearch extends React.Component<Props, State> {
         const collapsed = this.props.openSearchGroupSection !== searchGroupId;
         return (
             <Section
+                data-test="dhis2-capture-search-by-attributes-forms"
                 key={formId}
                 isCollapsed={collapsed}
                 className={this.props.classes.formContainerSection}
@@ -143,15 +129,22 @@ class TeiSearch extends React.Component<Props, State> {
         );
     })
     renderSearchResult = () => {
-        const { onSearch, showResults, onNewSearch, onEditSearch, onSearchResultsChangePage, classes, ...passOnProps } = this.props;
+        const {
+            id,
+            searchGroups,
+            getResultsView,
+        } = this.props;
         return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <TeiSearchResults
-                onChangePage={this.handleSearchResultsChangePage}
-                onNewSearch={this.handleNewSearch}
-                onEditSearch={this.handleEditSearch}
-                {...passOnProps}
-            />
+            <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
+                <TeiSearchResults
+                    id={id}
+                    onChangePage={this.handleSearchResultsChangePage}
+                    onNewSearch={this.handleNewSearch}
+                    onEditSearch={this.handleEditSearch}
+                    getResultsView={getResultsView}
+                    searchGroups={searchGroups}
+                />
+            </ResultsPageSizeContext.Provider>
         );
     }
 
@@ -166,4 +159,4 @@ class TeiSearch extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(getStyles)(TeiSearch);
+export const TeiSearchComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(TeiSearchPlain);

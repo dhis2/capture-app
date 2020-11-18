@@ -1,7 +1,7 @@
 // @flow
 import { actionCreator, actionPayloadAppender } from '../../../../../actions/actions.utils';
-import { methods } from '../../../../../trackerOffline/trackerOfflineConfig.const';
-import saveTypes from '../newEventSaveTypes';
+import { effectMethods } from '../../../../../trackerOffline';
+import typeof saveTypes from '../newEventSaveTypes';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForNewSingleEventActionsBatch',
@@ -60,7 +60,7 @@ export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object, rel
         offline: {
             effect: {
                 url: 'events',
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: serverData,
             },
             commit: { type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS, meta: { selections, relationshipData, triggerAction: actionType } },
@@ -75,7 +75,7 @@ export const startSaveNewEventRelationships = (serverData: Object, selections: O
         offline: {
             effect: {
                 url: 'relationships',
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: serverData,
             },
             commit: { type: actionTypes.NEW_EVENT_RELATIONSHIPS_SAVED, meta: { selections, triggerAction } },
@@ -88,7 +88,7 @@ export const startSaveTeiForNewEventRelationship = (teiPayload: Object, selectio
         offline: {
             effect: {
                 url: 'trackedEntityInstances',
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: teiPayload,
             },
             commit: { type: actionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED, meta: { selections, triggerAction, relationshipData, relationshipClientId } },
@@ -112,7 +112,7 @@ export const cancelNewEventInitializeWorkingLists = () =>
 export const cancelOpenNewEventInDataEntry = () =>
     actionCreator(actionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL)();
 
-export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<typeof saveTypes>>) =>
+export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<saveTypes>>) =>
     actionCreator(actionTypes.SET_NEW_EVENT_SAVE_TYPES)({ saveTypes: newSaveTypes });
 
 export const addNewEventNote = (itemId: string, dataEntryId: string, note: string) =>
@@ -137,7 +137,7 @@ export const startSaveNewEventAddAnother =
         offline: {
             effect: {
                 url: 'events',
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: serverData,
                 clientId,
             },

@@ -12,8 +12,8 @@ import {
 } from 'capture-core-utils/validators/form';
 import Min from './Min.component';
 import Max from './Max.component';
-import { dataElementTypes as elementTypes } from '../../../metaData';
-import D2TextField from '../../FormFields/Generic/D2TextField.component';
+import { dataElementTypes } from '../../../metaData';
+import type D2TextField from '../../FormFields/Generic/D2TextField.component';
 import { getNumericFilterData } from './numericFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
@@ -49,7 +49,7 @@ type Props = {
     onCommitValue: (value: ?{ min?: ?string, max?: ?string }) => void,
     onUpdate: (commitValue?: any) => void,
     value: Value,
-    type: $Values<typeof elementTypes>,
+    type: $Keys<typeof dataElementTypes>,
     classes: {
         container: string,
         inputContainer: string,
@@ -59,10 +59,9 @@ type Props = {
     },
 };
 
-// $FlowSuppress
 // $FlowFixMe[incompatible-variance] automated comment
 class NumericFilter extends Component<Props> implements UpdatableFilterContent<Value> {
-    static validateField(value: ?string, type: $Values<typeof elementTypes>) {
+    static validateField(value: ?string, type: $Keys<typeof dataElementTypes>) {
         if (!value) {
             return {
                 isValid: true,
@@ -70,16 +69,18 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
             };
         }
 
+        // $FlowFixMe dataElementTypes flow error
         const typeValidator = NumericFilter.validatorForTypes[type];
         const isValid = typeValidator(value);
 
         return {
             isValid,
+            // $FlowFixMe dataElementTypes flow error
             error: isValid ? null : i18n.t(NumericFilter.errorMessages[type]),
         };
     }
 
-    static isFilterValid(minValue?: ?string, maxValue?: ?string, type: $Values<typeof elementTypes>) {
+    static isFilterValid(minValue?: ?string, maxValue?: ?string, type: $Keys<typeof dataElementTypes>) {
         if (!NumericFilter.validateField(minValue, type).isValid || !NumericFilter.validateField(maxValue, type).isValid) {
             return false;
         }
@@ -104,29 +105,19 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
 
     static errorMessages = {
         MIN_GREATER_THAN_MAX: 'Minimum value cannot be greater than maximum value',
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.NUMBER]: 'Please provide a valid number',
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.INTEGER]: 'Please provide a valid integer',
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.INTEGER_POSITIVE]: 'Please provide a positive integer',
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.INTEGER_NEGATIVE]: 'Please provide a negative integer',
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
+        [dataElementTypes.NUMBER]: 'Please provide a valid number',
+        [dataElementTypes.INTEGER]: 'Please provide a valid integer',
+        [dataElementTypes.INTEGER_POSITIVE]: 'Please provide a positive integer',
+        [dataElementTypes.INTEGER_NEGATIVE]: 'Please provide a negative integer',
+        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
     };
 
     static validatorForTypes = {
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.NUMBER]: isValidNumber,
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.INTEGER]: isValidInteger,
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.INTEGER_POSITIVE]: isValidPositiveInteger,
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.INTEGER_NEGATIVE]: isValidNegativeInteger,
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: isValidZeroOrPositiveInteger,
+        [dataElementTypes.NUMBER]: isValidNumber,
+        [dataElementTypes.INTEGER]: isValidInteger,
+        [dataElementTypes.INTEGER_POSITIVE]: isValidPositiveInteger,
+        [dataElementTypes.INTEGER_NEGATIVE]: isValidNegativeInteger,
+        [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: isValidZeroOrPositiveInteger,
     };
 
     getUpdatedValue(valuePart: {[key: string]: string}) {

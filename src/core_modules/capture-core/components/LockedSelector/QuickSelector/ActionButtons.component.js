@@ -1,105 +1,125 @@
 // @flow
-import React, { Component } from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import AddIcon from '@material-ui/icons/AddCircleOutline';
-import { Button } from '../../Buttons';
-import { TrackerProgram } from '../../../metaData';
+import { Button, colors, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
+import { scopeTypes, TrackerProgram } from '../../../metaData';
+import { useScopeInfo } from '../../../hooks/useScopeInfo';
 
-const styles = () => ({
-    container: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        flexGrow: 1,
+
+const styles = ({ typography }) => ({
+    marginLeft: {
+        marginLeft: typography.pxToRem(12),
     },
-    startAgainContainer: {
-        flexGrow: 1,
-    },
-    icon: {
-        paddingRight: 5,
+    buttonAsLink: {
+        marginLeft: typography.pxToRem(12),
+        fontSize: typography.pxToRem(13),
+        background: 'none!important',
+        border: 'none',
+        padding: '0!important',
+        color: colors.grey700,
+        textDecoration: 'underline',
+        cursor: 'pointer',
     },
 });
 
-type Props = {
-    classes: Object,
-    selectedProgram: string,
-    onStartAgain: () => void,
-    onClickNew: () => void,
+type Props = $ReadOnly<{|
+    selectedProgramId: string,
+    onStartAgainClick: () => void,
+    onNewClick: () => void,
+    onFindClick: () => void,
+    onFindClickWithoutProgramId: () => void,
     showResetButton: boolean,
+|}>;
+
+
+const Index = ({
+    onStartAgainClick,
+    onNewClick,
+    onFindClick,
+    onFindClickWithoutProgramId,
+    selectedProgramId,
+    classes,
+    showResetButton,
+}: Props & CssClasses) => {
+    const typeName =
+      selectedProgramId instanceof TrackerProgram
+          ?
+          selectedProgramId.trackedEntityType.name
+          :
+          'Event';
+
+    const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
+
+    return (
+        <>
+            <Button
+                small
+                secondary
+                dataTest="dhis2-capture-new-event-button"
+                onClick={onNewClick}
+            >
+                {
+                    selectedProgramId ?
+                        i18n.t('New {{typeName}}', { typeName })
+                        :
+                        i18n.t('New')
+                }
+            </Button>
+            {
+                scopeType !== scopeTypes.TRACKER_PROGRAM ?
+                    <Button
+                        small
+                        secondary
+                        dataTest="dhis2-capture-find-button"
+                        className={classes.marginLeft}
+                        onClick={onFindClickWithoutProgramId}
+                    >
+                        { i18n.t('Find') }
+                    </Button>
+                    :
+                    <DropdownButton
+                        small
+                        secondary
+                        dataTest="dhis2-capture-find-button"
+                        className={classes.marginLeft}
+                        component={
+                            <FlyoutMenu
+                                dense
+                                maxWidth="250px"
+                            >
+                                <MenuItem
+                                    dataTest="dhis2-capture-find-menuitem-one"
+                                    label={`Find a ${trackedEntityName} in ${programName}`}
+                                    onClick={onFindClick}
+                                />
+                                <MenuItem
+                                    dataTest="dhis2-capture-find-menuitem-two"
+                                    label="Find..."
+                                    onClick={onFindClickWithoutProgramId}
+                                />
+                            </FlyoutMenu>
+                        }
+                    >
+                        { i18n.t('Find') }
+                    </DropdownButton>
+            }
+
+
+            {
+                showResetButton ?
+                    <button
+                        className={classes.buttonAsLink}
+                        data-test="dhis2-capture-start-again-button"
+                        onClick={onStartAgainClick}
+                    >
+                        { i18n.t('Clear selections') }
+                    </button>
+                    :
+                    null
+            }
+        </>
+    );
 };
 
-class ActionButtons extends Component<Props> {
-    handleClick: () => void;
-    handleNewClick: () => void;
-    constructor(props) {
-        super(props);
-        this.handleStartAgainClick = this.handleStartAgainClick.bind(this);
-        this.handleNewClick = this.handleNewClick.bind(this);
-    }
-
-    handleStartAgainClick = () => {
-        this.props.onStartAgain();
-    }
-
-    handleNewClick = () => {
-        this.props.onClickNew();
-    }
-
-    handleFindClick = () => {
-        alert('Not implemented yet.');
-    }
-
-    getButtonText = () => {
-        if (this.props.selectedProgram) {
-            const typeName = this.props.selectedProgram instanceof TrackerProgram ?
-                this.props.selectedProgram.trackedEntityType.name :
-                'Event';
-
-            return i18n.t('New {{typeName}}', { typeName });
-        }
-        return i18n.t('New');
-    }
-
-    render() {
-        const { classes, showResetButton } = this.props;
-
-        return (
-            <div className={classes.container}>
-                {
-                    showResetButton ?
-                        <div className={classes.startAgainContainer}>
-                            <Button
-                                onClick={this.handleStartAgainClick}
-                                small
-                                secondary
-                            >
-                                { i18n.t('Start again') }
-                            </Button>
-                        </div>
-                        :
-                        null
-                }
-                <Button
-                    onClick={this.handleNewClick}
-                >
-                    <AddIcon
-                        data-test="dhis2-capture-new-event-button"
-                        className={classes.icon}
-                    />
-                    {this.getButtonText()}
-                </Button>
-                {/* Find button to be included when find(tracked entity instance)
-                is supported:
-                <Button
-                    onClick={this.handleFindClick}
-                    color="primary"
-                >
-                    <SearchIcon className={classes.rightButton} />
-                    { i18n.t('Find') }
-                </Button> */}
-            </div>
-        );
-    }
-}
-
-export default withStyles(styles)(ActionButtons);
+export const ActionButtons: ComponentType<Props> = withStyles(styles)(Index);

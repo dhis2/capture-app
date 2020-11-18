@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import QuickSelector from './QuickSelector/QuickSelector.container';
 import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
+import type { Props, State } from './LockedSelector.types';
 
 const defaultDialogProps = {
     header: i18n.t('Unsaved changes'),
@@ -11,34 +12,6 @@ const defaultDialogProps = {
     cancelText: i18n.t('No, stay here'),
 };
 
-type Props = {
-    customActionsOnOrgUnitIdReset: Array<()=>void>,
-    customActionOnProgramIdReset: Array<()=>void>,
-    onOpenNewEventPage: (selectedProgramId: string, selectedOrgUnitId: string) => void,
-    onSetOrgUnit: (id: string, orgUnit: Object) => void,
-    onResetOrgUnitId: () => void,
-    onSetProgramId: (id: string) => void,
-    onSetCategoryOption: (categoryId: string, categoryOptionId: string) => void,
-    onResetCategoryOption: (categoryId: string) => void,
-    onResetAllCategoryOptions: () => void,
-    onStartAgain: () => void,
-    onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
-    isUserInteractionInProgress: boolean,
-    onResetDataEntry: () => void,
-    inAddRelationship: boolean,
-    selectedOrgUnitId: string,
-    selectedProgramId: string,
-    render: (one: Object) => void
-};
-
-type State = {
-    openStartAgainWarning: boolean;
-    openOrgUnitWarning: boolean;
-    openProgramWarning: ?Object;
-    openCatComboWarning: boolean;
-    categoryIdToReset: string;
-    openNewEventWarning: boolean;
-};
 
 export class LockedSelectorComponent extends Component<Props, State> {
     constructor(props: Props) {
@@ -133,6 +106,14 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.handleClose();
     }
 
+    handleOpenSearchPage = () => {
+        this.props.onOpenSearchPage();
+    }
+
+    handleOpenSearchPageWithoutProgramId = () => {
+        this.props.onOpenSearchPageWithoutProgramId();
+    }
+
 
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
@@ -147,7 +128,9 @@ export class LockedSelectorComponent extends Component<Props, State> {
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
                     onStartAgain={this.handleOpenStartAgainWarning}
-                    onClickNew={this.handleClickNew}
+                    onNewClick={this.handleClickNew}
+                    onFindClickWithoutProgramId={this.handleOpenSearchPageWithoutProgramId}
+                    onFindClick={this.handleOpenSearchPage}
                 />
                 <ConfirmDialog
                     onConfirm={this.handleAcceptStartAgain}

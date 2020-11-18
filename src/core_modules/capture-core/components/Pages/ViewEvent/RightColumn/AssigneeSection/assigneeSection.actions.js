@@ -1,7 +1,7 @@
 // @flow
 
 import { actionCreator } from '../../../../../actions/actions.utils';
-import { methods } from '../../../../../trackerOffline/trackerOfflineConfig.const';
+import { effectMethods } from '../../../../../trackerOffline';
 
 export const actionTypes = {
     VIEW_EVENT_ASSIGNEE_SET: 'ViewEventAssigneeSet',
@@ -18,7 +18,7 @@ export const saveAssignee = (eventId: string, serverData: Object, selections: Ob
         offline: {
             effect: {
                 url: `events/${eventId}`,
-                method: methods.UPDATE,
+                method: effectMethods.UPDATE,
                 data: serverData,
             },
             commit: { type: actionTypes.VIEW_EVENT_ASSIGNEE_SAVE_COMPLETED, meta: { eventId, selections } },

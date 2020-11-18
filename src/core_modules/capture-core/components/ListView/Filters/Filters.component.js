@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';
 import FilterRestMenu from './FilterRestMenu/FilterRestMenu.component';
-import { filterTypesArray } from './filterTypes';
+import { filterTypesObject } from './filters.const';
 import type { Column, StickyFilters } from '../types';
 
 const getStyles = (theme: Theme) => ({
@@ -28,7 +28,7 @@ type Props = {
 const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
     new Map(
         columns
-            .filter(col => filterTypesArray.includes(col.type))
+            .filter(col => Object.values(filterTypesObject).includes(col.type))
             .map((element, index) => ({
                 element,
                 index,
@@ -187,7 +187,7 @@ const renderRestButton = (
 ) => (restElementsArray.length > 0 ? (
     <FilterRestMenu
         key={'restMenu'}
-        data-test={'filter-rest-menu'}
+        data-test="filter-rest-menu"
         columns={restElementsArray}
         onItemSelected={onSelectRestMenuItem}
     />

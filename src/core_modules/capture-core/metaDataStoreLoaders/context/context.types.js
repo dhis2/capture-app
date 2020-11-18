@@ -1,5 +1,5 @@
 // @flow
-import { StorageController } from 'capture-core-utils/storage';
+import { typeof StorageController } from 'capture-core-utils/storage';
 import type { QueryApiFn } from '../loader.types';
 
 type StoreNames = {

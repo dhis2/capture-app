@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
+"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -32,6 +32,35 @@ msgid ""
 msgstr ""
 "En mulig årsak til dette er at nettleseren eller modusen (f.eks. "
 "Personvernmodus) ikke støttes. Se logg for detaljer."
+
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
+msgstr ""
+"Du åpnet en annen versjon av Capture-appen i samme domene. Foreløpig støtter"
+" Capture App bare å kjøre en versjon samtidig (i samme domene). Oppdater "
+"denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
+"at dette vil lukke andre versjoner."
+
+msgid "Organisation unit"
+msgstr "Organisasjonsenhet"
+
+msgid "Date of enrollment"
+msgstr "Dato for registrering"
+
+msgid "Last updated"
+msgstr "Sist oppdatert"
+
+msgid "Enrolled"
+msgstr "Registrert"
+
+msgid "Previously enrolled"
+msgstr "Tidligere registrert"
+
+msgid "Not enrolled"
+msgstr "Ikke registrert"
 
 msgid "Columns to show in table"
 msgstr "Kolonner som skal vises i tabellen"
@@ -299,6 +328,9 @@ msgstr "Fjern"
 msgid "No results"
 msgstr "Ingen resultater"
 
+msgid "start typing to search"
+msgstr "begynn å skrive for å søke"
+
 msgid "suggestions could not be retrieved"
 msgstr "forslag kunne ikke hentes"
 
@@ -320,11 +352,11 @@ msgstr "Ny {{typeName}}"
 msgid "New"
 msgstr "Ny"
 
-msgid "Start again"
-msgstr "Start på nytt"
-
 msgid "Find"
 msgstr "Finn"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "Valgt registreringsenhet"
@@ -509,6 +541,9 @@ msgstr "Aktiv"
 msgid "Completed"
 msgstr "Fullført"
 
+msgid "\"Choose a registering unit to start reporting"
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "Oppretter en ny {{TET}} i {{program}} i {{orgUnit}}"
 
@@ -596,17 +631,17 @@ msgstr "Hendelser lagt til"
 msgid "No events added"
 msgstr "Ingen hendelser lagt til"
 
-msgid "Select a registering unit and program above to get started"
-msgstr "Velg en registreringsenhet og program over for å komme i gang"
+msgid "Choose a registering unit and program to get started"
+msgstr ""
 
-msgid "Select a program to start reporting"
-msgstr "Velg et program for å starte rapportering"
+msgid "Choose a program to start reporting"
+msgstr ""
 
-msgid "Select a registering unit to start reporting"
-msgstr "Velg en registreringsenhet for å starte rapportering"
+msgid "Choose a registering unit to start reporting"
+msgstr ""
 
-msgid "Select a category option to start reporting"
-msgstr "Velg et kategorialternativ for å starte rapportering"
+msgid "Choose a category option to start reporting"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "Du har ikke tilgang til å opprette en hendelse i gjeldende valg"
@@ -652,6 +687,9 @@ msgstr "Opprett {{trackedEntityTypeName}} og link"
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
 
+msgid "No results found"
+msgstr "Ingen resultater funnet"
+
 msgid "An error occured loading possible duplicates"
 msgstr "En feil oppsto ved lasting av mulige duplikater"
 
@@ -676,9 +714,6 @@ msgstr "Søkeresultater"
 msgid "No {{trackedEntityTypeName}} found."
 msgstr "Ingen {{trackedEntityTypeName}} funnet."
 
-msgid "{{teiCount}} results found for"
-msgstr "{{teiCount}} resultater funnet for"
-
 msgid "New search"
 msgstr "Nytt søk"
 
@@ -693,6 +728,61 @@ msgstr "Opprett ny {{trackedEntityType}}"
 
 msgid "Register"
 msgstr "Registrere"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+"Fyll inn minst {{minAttributesRequiredToSearch}} attributter for å søke"
+
+msgid "Search {{name}}"
+msgstr "Søk {{name}}"
+
+msgid "Find by {{name}}"
+msgstr "Finn etter {{name}}"
+
+msgid "Search by attributes"
+msgstr "Søk etter attributter"
+
+msgid "Back"
+msgstr "Tilbake"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "Du kan endre søkeordene og søke igjen for å finne det du leter etter."
+
+msgid "Back to search"
+msgstr "Tilbake til søk"
+
+msgid "An error has occurred"
+msgstr "Det har oppstått en feil"
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+"Det er et problem med dette søket. Endre søkeordene eller prøv igjen senere."
+" For mer informasjon, åpne konsollfanen i Utviklerverktøy"
+
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr "Vis dashbord"
+
+msgid "View active enrollment"
+msgstr "Vis aktiv registrering"
+
+msgid "Re-enroll"
+msgstr "Registrer på nytt"
 
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
@@ -725,17 +815,24 @@ msgstr "Du har ikke tilgang til å opprette noen relasjoner"
 msgid "Add relationship"
 msgstr "Legg til relasjon"
 
+msgid "Results found"
+msgstr "Resultater funnet"
+
 msgid "Selected program"
 msgstr "Valgt program"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Søk {{uniqueAttrName}}"
 
-msgid "Search by attributes"
-msgstr "Søk etter attributter"
-
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Fyll inn minst {{minAttributesRequired}} attributter for å søke"
+
+msgid "Search for"
+msgstr "Søk etter"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "For å jobbe med det valgte programmet,"
@@ -779,6 +876,9 @@ msgstr "Sporet enhetforekomst"
 msgid "Set coordinate"
 msgstr "Sett koordinater"
 
+msgid "Page {{currentPage}}"
+msgstr "Side {{currentPage}}"
+
 msgid "Date"
 msgstr "Dato"
 
@@ -808,17 +908,6 @@ msgstr "Slett polygon"
 
 msgid "Set area"
 msgstr "Sett område"
-
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
-msgstr ""
-"Du åpnet en annen versjon av Capture-appen i samme domene. Foreløpig støtter"
-" Capture App bare å kjøre en versjon samtidig (i samme domene). Oppdater "
-"denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
-"at dette vil lukke andre versjoner."
 
 msgid "Compatibility mode"
 msgstr "Kompabilitetsmodus"

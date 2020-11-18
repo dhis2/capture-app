@@ -1,5 +1,5 @@
 // @flow
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+import type { RenderFoundation } from '../../../metaData';
 
 export function convertGeometryOut(dataEntryValue: any, foundation: RenderFoundation) {
     if (!dataEntryValue || !['Polygon', 'Point'].includes(foundation.featureType)) return null;

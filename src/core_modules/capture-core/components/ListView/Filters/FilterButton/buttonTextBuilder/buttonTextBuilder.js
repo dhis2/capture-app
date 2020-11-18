@@ -9,29 +9,18 @@ import {
 } from './converters';
 import { isEqual } from '../../../../../utils/valueEqualityChecker';
 import type { OptionSetFilterData, FilterData, Options } from '../../../../FiltersForTypes';
-import { filterTypesObject } from '../../filterTypes';
+import { filterTypesObject } from '../../filters.const';
 
-// todo (report lgmt)
 const convertersForTypes = {
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.TEXT]: convertText,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.NUMBER]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.INTEGER]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.INTEGER_POSITIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.INTEGER_NEGATIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.DATE]: convertDate,
-    // $FlowFixMe
     [filterTypesObject.ASSIGNEE]: convertAssignee,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.BOOLEAN]: convertBoolean,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.TRUE_ONLY]: convertTrueOnly,
 };
 
@@ -57,5 +46,6 @@ export function buildButtonText(
         return getOptionSetText(filter, options);
     }
 
+    // $FlowFixMe
     return convertersForTypes[type](filter);
 }

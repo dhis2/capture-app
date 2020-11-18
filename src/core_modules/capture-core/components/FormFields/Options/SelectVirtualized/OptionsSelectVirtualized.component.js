@@ -10,8 +10,7 @@ import 'react-select/dist/react-select.css';
 import 'react-virtualized/styles.css';
 import 'react-virtualized-select/styles.css';
 import VirtualizedOption from './OptionsSelectVirtualizedOption.component';
-import OptionSet from '../../../../metaData/OptionSet/OptionSet';
-import Option from '../../../../metaData/OptionSet/Option';
+import type{ OptionSet, Option } from '../../../../metaData';
 
 const styles = theme => ({
     inkBar: {
@@ -152,7 +151,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
         };
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    UNSAFE_componentWillReceiveProps(nextProps: Props) {
         if (nextProps.optionSet !== this.props.optionSet) {
             this.options = this.buildOptions(nextProps.optionSet);
         }

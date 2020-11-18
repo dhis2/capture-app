@@ -167,7 +167,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
         return (
             <React.Fragment>
                 <div
-                    data-test={'filter-button-popover-anchor'}
+                    data-test="filter-button-popover-anchor"
                     ref={this.anchorRef}
                 >
                     {button}

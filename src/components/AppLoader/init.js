@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
-import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2/lib/d2';
+import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2';
 import environments from 'capture-core/constants/environments';
 // import moment from 'capture-core/utils/moment/momentResolver';
 import moment from 'moment';
@@ -10,7 +10,7 @@ import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 
-import { loadMetaData, loadSystemSettings } from 'capture-core/metaDataStoreLoaders';
+import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
@@ -23,7 +23,6 @@ function setLogLevel() {
         [environments.prod]: log.levels.ERROR,
     };
 
-    // $FlowFixMe[invalid-computed-prop] automated comment
     let level = levels[process.env.NODE_ENV];
     if (!level && level !== 0) {
         level = log.levels.ERROR;
@@ -32,26 +31,18 @@ function setLogLevel() {
     log.setLevel(level);
 }
 
-function setConfig() {
-    const { REACT_APP_DHIS2_BASE_URL, REACT_APP_DHIS2_AUTHORIZATION, NODE_ENV } = process.env;
-    const baseUrl = REACT_APP_DHIS2_BASE_URL || '';
-    config.baseUrl = `${baseUrl}/api`;
+function setConfig(apiPath: string) {
+    const { NODE_ENV } = process.env;
+    config.baseUrl = apiPath;
 
     if (NODE_ENV !== environments.prod) {
         config.headers = {
             'X-Requested-With': 'XMLHttpRequest',
-            Authorization: REACT_APP_DHIS2_AUTHORIZATION,
         };
     }
 
     // Temporary setting some old d2 translations for the d2 ui sharing dialog
     config.i18n.sources.add('i18n/i18n_module_en.properties');
-}
-
-function isLangRTL(code) {
-    const langs = ['ar', 'fa', 'ur'];
-    const prefixed = langs.map(c => `${c}-`);
-    return langs.includes(code) || prefixed.filter(c => code.startsWith(c)).length > 0;
 }
 
 function setMomentLocaleAsync(locale: string) {
@@ -129,9 +120,6 @@ function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any,
 
 function changeI18nLocale(locale) {
     i18n.changeLanguage(locale);
-
-    // $FlowFixMe[incompatible-use] automated comment
-    document.body.setAttribute('dir', isLangRTL(locale) ? 'rtl' : 'ltr');
 }
 
 function initI18n(locale) {
@@ -157,8 +145,8 @@ async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function) {
     await buildMetaDataAsync(dbLocale);
 }
 
-async function initializeSystemSettingsAsync() {
-    const systemSettingsCacheData = await loadSystemSettings();
+async function initializeSystemSettingsAsync(uiLocale: string) {
+    const systemSettingsCacheData = await cacheSystemSettings(uiLocale);
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
@@ -169,11 +157,12 @@ function setHeaderBarStrings(d2) {
 export async function initializeAsync(
     onCacheExpired: Function,
     onQueryApi: Function,
+    apiPath: string,
 ) {
     setLogLevel();
 
     // initialize d2
-    setConfig();
+    setConfig(apiPath);
     const d2 = await initAsync({ schemas: ['organisationUnit'] });
     const userSettings = await getUserSettingsAsync();
     setD2(d2);
@@ -193,7 +182,7 @@ export async function initializeAsync(
     await setLocaleDataAsync(uiLocale);
 
     // initialize system settings
-    await initializeSystemSettingsAsync();
+    await initializeSystemSettingsAsync(uiLocale);
 
     // initialize metadata
     await initializeMetaDataAsync(dbLocale, onQueryApi);

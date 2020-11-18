@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { SplitButton, Menu, MenuItem } from '@dhis2/ui-core';
+import { SplitButton, Menu, MenuItem } from '@dhis2/ui';
 
 type Item = {
     key: string,
@@ -17,23 +17,16 @@ const SimpleSplitButton = (props: Props) => {
     return (
         // $FlowFixMe[cannot-spread-inexact] automated comment
         <SplitButton
-            component={SimpleSplitButton.getComponent(dropDownItems)}
+            component={
+                <Menu>
+                    {
+                        dropDownItems.map(i => (
+                            <MenuItem label={i.text} value={i.text} onClick={i.onClick} />
+                        ))}
+                </Menu>
+            }
             {...passOnProps}
         />
     );
 };
-
-SimpleSplitButton.getItems = (items: Array<Item>) =>
-    items
-        .map(i => (
-            <Menu key={i.key}>
-                <MenuItem label={i.text} value={i.text} onClick={i.onClick} />
-            </Menu>),
-        );
-
-SimpleSplitButton.getComponent = (items: Array<Item>) => (
-    <React.Fragment>
-        {SimpleSplitButton.getItems(items)}
-    </React.Fragment>
-);
 export default SimpleSplitButton;

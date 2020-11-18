@@ -1,6 +1,9 @@
+// @flow
+import React from 'react';
 import 'capture-core-utils/extensions/asyncForEachArray';
 import 'capture-core-utils/extensions/arrayToHashMap';
-import './locales';
-import { initApp } from './entry';
+// $FlowFixMe
+import './locales'; //eslint-disable-line
+import { AppStart } from './components/AppStart';
 
-initApp();
+export default () => <AppStart />;

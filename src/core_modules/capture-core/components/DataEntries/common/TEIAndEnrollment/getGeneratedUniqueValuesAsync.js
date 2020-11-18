@@ -4,7 +4,7 @@ import { errorCreator, pipe } from 'capture-core-utils';
 import moment from 'capture-core-utils/moment/momentResolver';
 import { convertServerToClient, convertClientToForm } from '../../../../converters';
 import { getApi } from '../../../../d2/d2Instance';
-import { RenderFoundation } from '../../../../metaData';
+import type { RenderFoundation } from '../../../../metaData';
 
 type StaticPatternValues = {
     orgUnitCode: string,

@@ -2,7 +2,7 @@
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { ImageFieldForCustomForm } from '../../Components';
-import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
+import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
 const getImageFieldConfig = (metaData: MetaDataElement) => {
     const props = createProps({

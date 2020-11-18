@@ -4,7 +4,7 @@ export { Category, CategoryCombination } from './CategoryCombinations';
 export {
     DataElement,
     DateDataElement,
-    elementTypes as dataElementTypes,
+    dataElementTypes,
     Unique as DataElementUnique,
     uniqueScope as dataElementUniqueScope,
 } from './DataElement';
@@ -12,6 +12,7 @@ export { Icon } from './Icon';
 export {
     Option,
     OptionSet,
+    OptionGroup,
     inputTypes as optionSetInputTypes,
 } from './OptionSet';
 export { Program, ProgramStage, EventProgram, TrackerProgram, Enrollment } from './Program';
@@ -21,9 +22,10 @@ export { SearchGroup } from './SearchGroup';
 export { InputSearchGroup } from './InputSearchGroup';
 export { TrackedEntityType, TeiRegistration } from './TrackedEntityType';
 export { SystemSettings } from './SystemSettings';
-
+export { scopeTypes } from './helpers/getScopeFromScopeId';
 // helpers
 export {
+    getScopeFromScopeId,
     getProgramAndStageFromEvent,
     getStageFromEvent,
     getProgramAndStageFromProgramIdForEventProgram,

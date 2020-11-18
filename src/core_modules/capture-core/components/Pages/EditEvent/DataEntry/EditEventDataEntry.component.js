@@ -7,7 +7,7 @@ import withCancelButton from '../../../../components/DataEntry/withCancelButton'
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
+import { type RenderFoundation } from '../../../../metaData';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import withMainButton from './withMainButton';
 import withFilterProps from '../../../FormFields/New/HOC/withFilterProps';

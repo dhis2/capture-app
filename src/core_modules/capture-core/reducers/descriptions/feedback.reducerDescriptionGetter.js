@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import type { Node } from 'react';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import isString from 'd2-utilizr/lib/isString';
@@ -25,7 +25,7 @@ import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/Ev
 import { workingListsCommonActionTypes } from '../../components/Pages/MainPage/WorkingListsCommon';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 
-function addErrorFeedback(state: ReduxState, message: string, action?: ?React.Node) {
+function addErrorFeedback(state: ReduxState, message: string, action?: ?Node) {
     const newState = [...state];
     newState.push({
         message,
@@ -35,7 +35,7 @@ function addErrorFeedback(state: ReduxState, message: string, action?: ?React.No
     return newState;
 }
 
-function getErrorFeedback(message: string, action?: ?React.Node) {
+function getErrorFeedback(message: string, action?: ?Node) {
     return {
         message,
         action,

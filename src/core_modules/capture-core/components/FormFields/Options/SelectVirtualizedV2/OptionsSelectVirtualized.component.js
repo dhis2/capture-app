@@ -53,6 +53,7 @@ type Props = {
         selectedIconLeftContainer: string,
         selectedIconRightContainer: string,
     },
+    dataTest?: string,
 };
 
 type State = {
@@ -100,7 +101,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
         this.isUnmounted = false;
     }
 
-    componentWillReceiveProps(newProps: Props) {
+    UNSAFE_componentWillReceiveProps(newProps: Props) {
         if (newProps.options !== this.props.options) {
             this.prevFilterValue = null;
         }
@@ -220,15 +221,19 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
             translations,
             withoutUnderline,
             classes,
+            dataTest,
             ...toSelect } = this.props;
         const calculatedValue = toSelect.multi ? value : this.getValue();
         const selectStyle = { ...OptionsSelectVirtualized.defaultSelectStyle, ...style };
         const menuContainerStyle = { ...OptionsSelectVirtualized.defaultMenuContainerStyle, ...menuStyle };
         return (
             <div
+                data-test="dhis2-capture-virtualized-select"
                 ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
             >
-                <div>
+                <div
+                    data-test={dataTest}
+                >
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <VirtualizedSelect
                         disabled={disabled}
@@ -249,9 +254,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
                         onInputChange={this.handleInputChange}
                         {...toSelect}
                     />
-
                     <div />
-
                 </div>
             </div>
         );

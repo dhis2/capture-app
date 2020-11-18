@@ -20,10 +20,10 @@ import {
 import {
     makeProgramNameSelector,
 } from './dataEntry.selectors';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
+import { type RenderFoundation } from '../../../../metaData';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
-import saveTypes from './newEventSaveTypes';
+import typeof saveTypes from './newEventSaveTypes';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -88,7 +88,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onAddNote: (itemId: string, dataEntryId: string, note: string) => {
         dispatch(addNewEventNote(itemId, dataEntryId, note));
     },
-    onSetSaveTypes: (newSaveTypes: ?Array<$Values<typeof saveTypes>>) => {
+    onSetSaveTypes: (newSaveTypes: ?Array<$Values<saveTypes>>) => {
         dispatch(setNewEventSaveTypes(newSaveTypes));
     },
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {

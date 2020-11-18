@@ -1,8 +1,7 @@
 // @flow
-import { canViewOtherUsers } from '../../d2';
 import { convertClientToServer } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
-import elementTypeKeys from '../../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../../metaData';
 
 export function convertMainEventClientToServer(event: Object) {
     const mapClientKeyToServerKey = {
@@ -23,11 +22,10 @@ export function convertMainEventClientToServer(event: Object) {
         case 'eventDate':
         case 'dueDate':
         case 'completedDate':
-            // $FlowFixMe[prop-missing] automated comment
-            convertedValue = convertClientToServer(value, elementTypeKeys.DATE);
+            convertedValue = convertClientToServer(value, dataElementTypes.DATE);
             break;
         case 'assignee':
-            convertedValue = canViewOtherUsers() ? value && value.id : value;
+            convertedValue = value && value.id;
             break;
         default:
             convertedValue = value;

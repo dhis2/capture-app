@@ -1,12 +1,12 @@
 # 
 # Translators:
-# phil_dhis2, 2019
+# phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
+"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -28,6 +28,31 @@ msgstr "ມື້ນີ້"
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
+msgstr ""
+
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
+msgstr ""
+
+msgid "Organisation unit"
+msgstr "​ຫົວ​ໜ່ວຍ​ການ​ຈັດ​ຕັ້ງ"
+
+msgid "Date of enrollment"
+msgstr "Date of enrollment"
+
+msgid "Last updated"
+msgstr "ປັບປຸງ​ຄັ້ງຫລ້າສຸດ"
+
+msgid "Enrolled"
+msgstr ""
+
+msgid "Previously enrolled"
+msgstr ""
+
+msgid "Not enrolled"
 msgstr ""
 
 msgid "Columns to show in table"
@@ -294,6 +319,9 @@ msgstr "ລຶບ"
 msgid "No results"
 msgstr ""
 
+msgid "start typing to search"
+msgstr ""
+
 msgid "suggestions could not be retrieved"
 msgstr ""
 
@@ -315,11 +343,11 @@ msgstr ""
 msgid "New"
 msgstr "ສ້າງໃຫມ່"
 
-msgid "Start again"
-msgstr ""
-
 msgid "Find"
 msgstr "ຊອກ"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr ""
@@ -504,6 +532,9 @@ msgstr "ທີ່ຍັງນໍາໃຊ້ຢູ່"
 msgid "Completed"
 msgstr "ສໍາເລັດແລ້ວ"
 
+msgid "\"Choose a registering unit to start reporting"
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -584,16 +615,16 @@ msgstr ""
 msgid "No events added"
 msgstr ""
 
-msgid "Select a registering unit and program above to get started"
+msgid "Choose a registering unit and program to get started"
 msgstr ""
 
-msgid "Select a program to start reporting"
+msgid "Choose a program to start reporting"
 msgstr ""
 
-msgid "Select a registering unit to start reporting"
+msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Select a category option to start reporting"
+msgid "Choose a category option to start reporting"
 msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
@@ -636,6 +667,9 @@ msgstr ""
 msgid "Possible duplicates found"
 msgstr ""
 
+msgid "No results found"
+msgstr ""
+
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
@@ -660,9 +694,6 @@ msgstr ""
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
-msgid "{{teiCount}} results found for"
-msgstr ""
-
 msgid "New search"
 msgstr ""
 
@@ -677,6 +708,58 @@ msgstr ""
 
 msgid "Register"
 msgstr "ລົົງທະບຽນ"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+
+msgid "Search {{name}}"
+msgstr ""
+
+msgid "Find by {{name}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Back"
+msgstr "​ກັບ​ຄືນ"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "View active enrollment"
+msgstr ""
+
+msgid "Re-enroll"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr ""
@@ -707,16 +790,23 @@ msgstr ""
 msgid "Add relationship"
 msgstr "ເພີ່ມຄວາມສໍາພັນ"
 
+msgid "Results found"
+msgstr ""
+
 msgid "Selected program"
 msgstr "ເລືອກສາຍງານ"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
-msgid "Search by attributes"
+msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Search for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "To work with the selected program,"
@@ -761,6 +851,9 @@ msgstr ""
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
 
+msgid "Page {{currentPage}}"
+msgstr ""
+
 msgid "Date"
 msgstr "ວັນທີ່"
 
@@ -789,13 +882,6 @@ msgid "Delete polygon"
 msgstr ""
 
 msgid "Set area"
-msgstr ""
-
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
 msgstr ""
 
 msgid "Compatibility mode"

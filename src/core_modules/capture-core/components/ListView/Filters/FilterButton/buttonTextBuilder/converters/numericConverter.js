@@ -3,14 +3,15 @@ import i18n from '@dhis2/d2-i18n';
 import type { NumericFilterData } from '../../../../../FiltersForTypes';
 
 // eslint-disable-next-line complexity
-export function convertNumeric(filter: NumericFilterData) {
+export function convertNumeric(filter: NumericFilterData): string {
     let appliedText = '';
     const geHasValue = !!filter.ge || filter.ge === 0;
     const leHasValue = !!filter.le || filter.le === 0;
 
     if (geHasValue && leHasValue) {
         if (filter.ge === filter.le) {
-            appliedText = filter.ge;
+            // $FlowFixMe[incompatible-use] automated comment
+            appliedText = filter.ge.toString();
         } else {
             // $FlowFixMe[incompatible-use] automated comment
             appliedText = `${filter.ge.toString()} ${i18n.t('to')} ${filter.le.toString()}`;

@@ -1,10 +1,11 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { canViewOtherUsers } from '../../../../../../d2';
 import {
+    dataElementTypes as elementTypeKeys,
+} from '../../../../../../metaData';
+import type {
     RenderFoundation,
     ProgramStage,
-    dataElementTypes as elementTypeKeys,
 } from '../../../../../../metaData';
 import mainPropertyNames from '../../../../../../events/mainPropertyNames.const';
 
@@ -14,7 +15,6 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
             id: mainPropertyNames.EVENT_DATE,
             visible: true,
             isMainProperty: true,
-            // $FlowFixMe[prop-missing] automated comment
             type: elementTypeKeys.DATE,
         },
         {
@@ -22,7 +22,6 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
             header: 'Status',
             visible: true,
             isMainProperty: true,
-            // $FlowFixMe[prop-missing] automated comment
             type: elementTypeKeys.TEXT,
             singleSelect: true,
             options: [
@@ -33,7 +32,7 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
     ];
 
     const extraFields = [];
-    if (stage.enableUserAssignment && canViewOtherUsers()) {
+    if (stage.enableUserAssignment) {
         const assigneeField = {
             id: mainPropertyNames.ASSIGNEE,
             type: 'ASSIGNEE',

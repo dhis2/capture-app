@@ -5,14 +5,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { Button } from '../../../../../Buttons';
-import CardList from '../../../../../CardList/CardList.component';
-import { DataElement } from '../../../../../../metaData';
+import { CardList } from '../../../../../CardList';
+import type { CardDataElementsInformation } from '../../../../Search/SearchResults/SearchResults.types';
 
 type Props = {
     attributeValues: {[id: string]: any},
-    dataElements: Array<DataElement>,
+    dataElements: CardDataElementsInformation,
     onLink: (values: Object) => void,
     onCancel: Function,
+    programId?: string,
 };
 
 class ExistingTEIContents extends React.Component<Props> {
@@ -20,7 +21,7 @@ class ExistingTEIContents extends React.Component<Props> {
         this.props.onLink(this.props.attributeValues);
     }
     render() {
-        const { attributeValues, dataElements, onCancel } = this.props;
+        const { attributeValues, dataElements, onCancel, programId } = this.props;
 
         const items = [
             {
@@ -36,6 +37,7 @@ class ExistingTEIContents extends React.Component<Props> {
                         {i18n.t('Registered person')}
                     </DialogTitle>
                     <CardList
+                        currentProgramId={programId}
                         items={items}
                         dataElements={dataElements}
                     />

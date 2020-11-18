@@ -31,8 +31,7 @@ const NewTemplateContents = (props: Props) => {
     const [name, setName] = React.useState('');
     const [error, setError] = React.useState();
 
-    const nameBlurHandler = React.useCallback((event) => {
-        const value = event.currentTarget.value;
+    const nameBlurHandler = React.useCallback(({ value }) => {
         value && setError(undefined);
         setName(value);
     }, []);
@@ -54,7 +53,7 @@ const NewTemplateContents = (props: Props) => {
                     className={classes.input}
                     label={i18n.t('View name')}
                     error={!!error}
-                    dataTest={'view-name'}
+                    dataTest="view-name"
                     initialFocus
                     required
                     name="viewName"

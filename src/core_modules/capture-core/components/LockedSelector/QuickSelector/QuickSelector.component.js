@@ -10,7 +10,7 @@ import programs from 'capture-core/metaDataMemoryStores/programCollection/progra
 
 import ProgramSelector from './Program/ProgramSelector.component';
 import OrgUnitSelector from './OrgUnitSelector.component';
-import ActionButtons from './ActionButtons.component';
+import { ActionButtons } from './ActionButtons.component';
 
 const styles = () => ({
     paper: {
@@ -23,7 +23,6 @@ type Props = {
     selectedOrgUnitId: string,
     selectedProgramId: string,
     selectedCategories: Object,
-    selectionComplete: boolean,
     selectedOrgUnit: Object,
     classes: Object,
     onSetOrgUnit: (orgUnitId: string, orgUnitObject: Object) => void,
@@ -34,7 +33,9 @@ type Props = {
     onResetCategoryOption: (categoryId: string) => void,
     onResetAllCategoryOptions: () => void,
     onStartAgain: () => void,
-    onClickNew: () => void,
+    onNewClick: () => void,
+    onFindClick: () => void,
+    onFindClickWithoutProgramId: () => void,
 };
 
 class QuickSelector extends Component<Props> {
@@ -117,10 +118,11 @@ class QuickSelector extends Component<Props> {
                     </Grid>
                     <Grid item xs={12} sm={actionButtonsWidth}>
                         <ActionButtons
-                            selectedProgram={this.props.selectedProgramId}
-                            onStartAgain={this.props.onStartAgain}
-                            onClickNew={this.props.onClickNew}
-                            selectionComplete={this.props.selectionComplete}
+                            selectedProgramId={this.props.selectedProgramId}
+                            onStartAgainClick={this.props.onStartAgain}
+                            onFindClick={this.props.onFindClick}
+                            onFindClickWithoutProgramId={this.props.onFindClickWithoutProgramId}
+                            onNewClick={this.props.onNewClick}
                             showResetButton={!!(this.props.selectedProgramId || this.props.selectedOrgUnitId)}
                         />
                     </Grid>

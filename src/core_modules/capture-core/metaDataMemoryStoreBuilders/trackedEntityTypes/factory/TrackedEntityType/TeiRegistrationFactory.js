@@ -8,17 +8,16 @@ import {
     RenderFoundation,
     Section,
     TeiRegistration,
-    SearchGroup,
     InputSearchGroup,
     DataElement,
 } from '../../../../metaData';
+import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
 import type {
     CachedTrackedEntityType,
     CachedTrackedEntityAttribute,
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
 import DataElementFactory from './DataElementFactory';
-import { TrackedEntityType } from '../../../../metaData/TrackedEntityType';
 
 class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
@@ -175,7 +174,6 @@ class TeiRegistrationFactory {
                                     .map(key => `${key}:LIKE:${values[key]}`),
                             },
                         );
-                    // trackedEntityInstances/count.json?ou=DiszpKrYNg8&ouMode=ACCESSIBLE&trackedEntityType=nEenWmSyUEp&filter=w75KJ2mc4zz:LIKE:kjell&filter=zDhUuAYrxNC:LIKE:haugen&pageSize=1&page=1&totalPages=true
                 };
             }));
         return inputSearchGroups;

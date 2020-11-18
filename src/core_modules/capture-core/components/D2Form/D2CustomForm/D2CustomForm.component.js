@@ -4,12 +4,12 @@ import log from 'loglevel';
 import { walk, kinds } from 'react-transform-tree';
 import { errorCreator } from 'capture-core-utils';
 import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
-import MetadataCustomForm from '../../../metaData/RenderFoundation/CustomForm';
+import { CustomForm } from '../../../metaData';
 
 type Props = {
     fields: Array<FieldConfig>,
     onRenderField: (field: FieldConfig) => React.Element<any>,
-    specs: MetadataCustomForm,
+    specs: CustomForm,
 };
 
 type EventListenerSpec = {

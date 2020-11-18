@@ -45,7 +45,7 @@ class DownloadDialogPlain extends PureComponent<Props & CssClasses> {
     renderButtons() {
         const { request = {}, programStageId, classes } = this.props;
         const url = DownloadDialogPlain.getUrl();
-        const { pageSize, page, totalPages, ...paramsFromRequest } = request.queryParams || {};
+        const { pageSize, page, ...paramsFromRequest } = request.queryParams || {};
         const paramsObject = {
             ...paramsFromRequest,
             programStage: programStageId,

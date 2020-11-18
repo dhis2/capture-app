@@ -1,10 +1,8 @@
 // @flow
 import isArray from 'd2-utilizr/lib/isArray';
 import { getApi } from '../d2/d2Instance';
-import {
-    RelationshipType,
-    getEventProgramThrowIfNotFound,
-} from '../metaData';
+import { getEventProgramThrowIfNotFound } from '../metaData';
+import type { RelationshipType } from '../metaData';
 import convertServerToClient from './convertServerToClient';
 
 async function getRelationships(queryParams: Object, relationshipTypes: Array<RelationshipType>) {

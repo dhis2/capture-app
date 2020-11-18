@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../../Buttons';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
-import { TeiRegistration } from '../../../../../metaData';
+import { type TeiRegistration } from '../../../../../metaData';
 
 type Props = {
     onSave: () => void,
@@ -26,6 +26,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
 
             return (
                 <Button
+                    dataTest="dhis2-capture-create-and-link-button"
                     primary
                     onClick={onSave}
                 >

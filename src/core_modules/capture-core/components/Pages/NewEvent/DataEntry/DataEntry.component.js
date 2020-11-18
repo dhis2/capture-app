@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/Info';
 import i18n from '@dhis2/d2-i18n';
-import { canViewOtherUsers } from '../../../../d2';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
@@ -12,7 +11,7 @@ import Notes from '../../../Notes/Notes.component';
 import withDataEntryRelationshipsHandler from '../../../../components/DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
 import Relationships from '../../../Relationships/Relationships.component';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
+import { type RenderFoundation } from '../../../../metaData';
 import withMainButton from './withMainButton';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import {
@@ -344,10 +343,11 @@ const buildAssigneeSettingsFn = () => {
     return {
         isApplicable: (props: Object) => {
             const enableUserAssignment = props.stage && props.stage.enableUserAssignment;
-            return !!enableUserAssignment && canViewOtherUsers();
+            return !!enableUserAssignment;
         },
         getComponent: () => assigneeComponent,
-        getComponentProps: () => ({
+        getComponentProps: (props: Object) => createComponentProps({}, {
+            orientation: getOrientation(props.formHorizontal),
         }),
         getPropName: () => 'assignee',
         getValidatorContainers: () => [],
@@ -489,7 +489,7 @@ class NewEventDataEntry extends Component<Props> {
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.props.onSetSaveTypes(null);
     }
 

@@ -13,7 +13,7 @@ const getText = (key) => {
     return keyToText[key];
 };
 
-export function convertAssignee(filter: AssigneeFilterData) {
+export function convertAssignee(filter: AssigneeFilterData): string {
     return (
         filter.assignedUserMode !== assigneeFilterModes.PROVIDED ?
             getText(filter.assignedUserMode) :

@@ -3,10 +3,8 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Section from '../Section/Section.component';
 import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
-
 import D2SectionFields from './D2SectionFields.container';
-
-import MetaDataSection from '../../metaData/RenderFoundation/Section';
+import { Section as MetaDataSection } from '../../metaData';
 
 const getStyles = theme => ({
     sectionFieldsInSection: {

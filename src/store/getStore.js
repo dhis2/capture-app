@@ -8,17 +8,19 @@ import { createLogger } from 'redux-logger';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { buildReducersFromDescriptions } from 'capture-core/trackerRedux/trackerReducer';
 import environments from 'capture-core/constants/environments';
-import type { BrowserHistory } from 'history/createBrowserHistory';
-import type { HashHistory } from 'history/createHashHistory';
+import type { BrowserHistory, HashHistory } from 'history';
 import { createOffline } from '@redux-offline/redux-offline';
 import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
-import { effectConfig, discardConfig, queueConfig } from 'capture-core/trackerOffline/trackerOfflineConfig';
+import { getEffectReconciler, shouldDiscard, queueConfig } from 'capture-core/trackerOffline';
 import getPersistOptions from './persist/persistOptionsGetter';
 import reducerDescriptions from '../reducers/descriptions/trackerCapture.reducerDescriptions';
 import epics from '../epics/trackerCapture.epics';
 
 
-export function getStore(history: BrowserHistory | HashHistory, onRehydrated: () => void) {
+export function getStore(
+    history: BrowserHistory | HashHistory,
+    onApiMutate: Function,
+    onRehydrated: () => void) {
     const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptions);
 
     const rootReducer = combineReducers({
@@ -33,8 +35,8 @@ export function getStore(history: BrowserHistory | HashHistory, onRehydrated: ()
         enhanceStore: offlineEnhanceStore,
     } = createOffline({
         ...offlineConfig,
-        discard: discardConfig,
-        effect: effectConfig,
+        discard: shouldDiscard,
+        effect: getEffectReconciler(onApiMutate),
         persistCallback: onRehydrated,
         queue: queueConfig,
         persistOptions: getPersistOptions(),

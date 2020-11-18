@@ -2,16 +2,13 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { moment } from 'capture-core-utils/moment';
-import { canViewOtherUsers } from '../../../../../../../d2';
-import {
-    dataElementTypes as elementTypes,
-} from '../../../../../../../metaData';
 import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration';
 import { getApi } from '../../../../../../../d2/d2Instance';
 import { getOptionSetFilter } from './optionSet';
 import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
 
 import {
+    filterTypesObject,
     type AssigneeFilterData,
     type DateFilterData,
     type BooleanFilterData,
@@ -66,11 +63,11 @@ const getDateFilter = (filter: ApiDataFilterDate): DateFilterData => {
 };
 
 const getUser = (userId: string) => getApi()
-    .get(`users/${userId}`, { fields: 'id,name,userCredentials[username]' })
-    .then((user: Object) => ({
-        id: user.id,
-        name: user.name,
-        username: user.userCredentials.username,
+    .get(`userLookup/${userId}`)
+    .then(({ id, displayName: name, username }) => ({
+        id,
+        name,
+        username,
     }))
     .catch((error) => {
         log.error(
@@ -107,30 +104,20 @@ const getAssigneeFilter = async (
 };
 
 const getFilterByType = {
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.TEXT]: getTextFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.NUMBER]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_POSITIVE]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_NEGATIVE]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.DATE]: getDateFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.BOOLEAN]: getBooleanFilter,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.TRUE_ONLY]: getTrueOnlyFilter,
+    [filterTypesObject.TEXT]: getTextFilter,
+    [filterTypesObject.NUMBER]: getNumericFilter,
+    [filterTypesObject.INTEGER]: getNumericFilter,
+    [filterTypesObject.INTEGER_POSITIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_NEGATIVE]: getNumericFilter,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    [filterTypesObject.DATE]: getDateFilter,
+    [filterTypesObject.BOOLEAN]: getBooleanFilter,
+    [filterTypesObject.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
-const isOptionSetFilter = (type: $Values<typeof elementTypes>, filter: any) => {
+const isOptionSetFilter = (type: $Keys<typeof filterTypesObject>, filter: any) => {
     if ([
-        // $FlowFixMe[prop-missing] automated comment
-        elementTypes.BOOLEAN,
+        filterTypesObject.BOOLEAN,
     ].includes(type)) {
         const validBooleanValues = ['true', 'false'];
         return filter.in.some(value => !validBooleanValues.includes[value]);
@@ -163,10 +150,12 @@ const getDataElementFilters = (
 
     return filters.map((serverFilter) => {
         const element = columnsMetaForDataFetching.get(serverFilter.dataItem);
+        // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
         if (!element || !getFilterByType[element.type]) {
             return null;
         }
 
+        // $FlowFixMe If previous test doesn't return, element.type is a key in filterTypesObject
         if (isOptionSetFilter(element.type, serverFilter)) {
             return {
                 // $FlowFixMe
@@ -177,6 +166,7 @@ const getDataElementFilters = (
 
         return {
             id: serverFilter.dataItem,
+            // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
             ...(getFilterByType[element.type] ? getFilterByType[element.type](serverFilter, element) : null),
         };
     }).filter(clientFilter => clientFilter);
@@ -200,7 +190,7 @@ const getMainDataFilters = async (
     if (eventDate) {
         filters.push({ ...getDateFilter(eventDate), id: 'eventDate' });
     }
-    if (assignedUserMode && canViewOtherUsers()) {
+    if (assignedUserMode) {
         filters.push({ ...(await getAssigneeFilter(assignedUserMode, assignedUsers)), id: 'assignee' });
     }
     return filters;

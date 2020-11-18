@@ -1,0 +1,37 @@
+name: "dhis2: tests"
+
+on: [push]
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node14.7.0-chrome84
+    strategy:
+      matrix:
+        containers: [1, 2, 3]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          record: true
+          parallel: true
+          group: e2e-chrome-parallel
+          browser: chrome
+          start: 'yarn start'
+          wait-on: 'http://localhost:3000'
+          # wait for 200 secs for the server to respond
+          wait-on-timeout: 200
+
+      - name: Upload artifacts
+        if: failure()
+        uses: actions/upload-artifact@v1
+        with:
+          name: failed-screenshots
+          path: cypress/screenshots
+    env:
+      CI: true
+      CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
+      REACT_APP_DHIS2_BASE_URL: 'https://debug.dhis2.org/ca-test-2.36'

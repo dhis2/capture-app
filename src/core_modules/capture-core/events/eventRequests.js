@@ -4,9 +4,8 @@ import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../d2/d2Instance';
 import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
-import elementTypes from '../metaData/DataElement/elementTypes';
+import { dataElementTypes } from '../metaData';
 import { getSubValues } from './getSubValues';
-import { addPostSubValues } from './postSubValues';
 
 type ApiDataValue = {
     dataElement: string,
@@ -28,6 +27,8 @@ type ApiTEIEvent = {
     completedDate: string,
     dataValues: Array<ApiDataValue>,
     assignedUser?: ?string,
+    assignedUserUsername?: ?string,
+    assignedUserDisplayName?: ?string,
 };
 
 export type ClientEventContainer = {
@@ -59,24 +60,41 @@ const mapEventInputKeyToOutputKey = {
     orgUnit: 'orgUnitId',
     trackedEntityInstance: 'trackedEntityInstanceId',
     enrollment: 'enrollmentId',
-    assignedUser: 'assignee',
 };
 
 function getConvertedValue(valueToConvert: any, inputKey: string) {
     let convertedValue;
     if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
-        // $FlowFixMe[prop-missing] automated comment
-        convertedValue = convertValue(valueToConvert, elementTypes.DATE);
+        convertedValue = convertValue(valueToConvert, dataElementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
     }
     return convertedValue;
 }
+
+function getAssignee(apiEvent: ApiTEIEvent) {
+    if (!(apiEvent.assignedUserUsername && apiEvent.assignedUser)) {
+        return undefined;
+    }
+
+    return {
+        id: apiEvent.assignedUser,
+        username: apiEvent.assignedUserUsername,
+        name: apiEvent.assignedUserDisplayName,
+    };
+}
 function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
+    const skipProps = ['dataValues', 'assignedUserUsername', 'assignedUser', 'assignedUserDisplayName'];
+
     return Object
         .keys(apiEvent)
         .reduce((accEvent, inputKey) => {
-            if (inputKey !== 'dataValues' && inputKey !== 'assignedUserUsername') {
+            if (inputKey === 'assignedUser') {
+                const assignee = getAssignee(apiEvent);
+                if (assignee) {
+                    accEvent.assignee = assignee;
+                }
+            } else if (!skipProps.includes(inputKey)) {
                 const valueToConvert = apiEvent[inputKey];
                 const convertedValue = getConvertedValue(valueToConvert, inputKey);
 
@@ -123,18 +141,14 @@ export async function getEvent(eventId: string): Promise<?ClientEventContainer> 
         .get(`events/${eventId}`);
 
     const eventContainer = await convertToClientEvent(apiRes);
-    const eventContainerWithSubValues = eventContainer ? (await addPostSubValues([eventContainer]))[0] : eventContainer;
-    return eventContainerWithSubValues;
+    return eventContainer;
 }
 
-export async function getEvents(queryParams: ?Object) {
+export async function getEvents(queryParams: Object) {
     const api = getApi();
     const req = {
         url: 'events',
-        queryParams: {
-            ...queryParams,
-            totalPages: true,
-        },
+        queryParams,
     };
     const apiRes = await api
         .get(req.url, { ...req.queryParams });
@@ -148,17 +162,13 @@ export async function getEvents(queryParams: ?Object) {
         return accEvents;
     }, Promise.resolve([])) : [];
 
-    // TODO: Move this logic. We don't always need the subvalues. Common methods for getting subvalues by type might make sense.
-    const eventContainersWithSubValues = await addPostSubValues(eventContainers);
-
     const pagingData = {
-        rowsCount: apiRes.pager.total,
-        rowsPerPage: apiRes.pager.pageSize,
-        currentPage: apiRes.pager.page,
+        rowsPerPage: queryParams.pageSize,
+        currentPage: queryParams.page,
     };
 
     return {
-        eventContainers: eventContainersWithSubValues,
+        eventContainers,
         pagingData,
         request: req,
     };

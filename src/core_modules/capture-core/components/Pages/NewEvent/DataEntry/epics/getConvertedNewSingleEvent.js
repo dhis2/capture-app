@@ -4,7 +4,7 @@ import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-ut
 import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
-import { RenderFoundation } from '../../../../../metaData';
+import { type RenderFoundation } from '../../../../../metaData';
 
 const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
     if (!categories) {

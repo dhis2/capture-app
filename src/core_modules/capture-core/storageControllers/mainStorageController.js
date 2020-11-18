@@ -6,7 +6,6 @@ const MAIN_STORAGE_KEY = 'dhis2ca';
 
 function getMajorCacheVersion() {
     const appVersion = process.env.REACT_APP_VERSION;
-    // $FlowFixMe[incompatible-use] automated comment
     const appMajorVersion = Number(appVersion.split('.')[0]);
     return (appMajorVersion - 30) * 1000;
 }

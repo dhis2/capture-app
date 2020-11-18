@@ -19,9 +19,8 @@ const styles = (theme: Theme) => ({
 });
 
 type Props = {
-    rowsPerPage: number,
+    nextPageButtonDisabled: boolean,
     currentPage: number,
-    rowsCount: number,
     onChangePage: (pageNumber: number) => void,
     classes: {
         root: string,
@@ -42,19 +41,15 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
             this.props.onChangePage(this.props.currentPage + 1);
         };
 
-        handleLastPageButtonClick = () => {
-            this.props.onChangePage(
-                Math.max(1, Math.ceil(this.props.rowsCount / this.props.rowsPerPage)));
-        };
-
         renderNavigationElement() {
-            const { rowsPerPage, currentPage, rowsCount, classes, theme } = this.props;
+            const { currentPage, classes, theme, nextPageButtonDisabled } = this.props;
 
             return (
                 <div
                     className={classes.root}
                 >
                     <IconButton
+                        data-test={'dhis2-capture-search-pagination-first-page'}
                         onClick={this.handleFirstPageButtonClick}
                         disabled={currentPage <= 1}
                         aria-label="First Page"
@@ -62,6 +57,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
                     </IconButton>
                     <IconButton
+                        data-test={'dhis2-capture-search-pagination-previous-page'}
                         onClick={this.handleBackButtonClick}
                         disabled={currentPage <= 1}
                         aria-label="Previous Page"
@@ -69,18 +65,12 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
                     </IconButton>
                     <IconButton
+                        data-test={'dhis2-capture-search-pagination-next-page'}
                         onClick={this.handleNextButtonClick}
-                        disabled={currentPage >= Math.ceil(rowsCount / rowsPerPage)}
+                        disabled={nextPageButtonDisabled}
                         aria-label="Next Page"
                     >
                         {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-                    </IconButton>
-                    <IconButton
-                        onClick={this.handleLastPageButtonClick}
-                        disabled={currentPage >= Math.ceil(rowsCount / rowsPerPage)}
-                        aria-label="Last Page"
-                    >
-                        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
                     </IconButton>
                 </div>
             );

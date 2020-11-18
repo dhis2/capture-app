@@ -3,6 +3,7 @@ export { WorkingLists } from './WorkingLists.component';
 export { areFiltersEqual } from './utils';
 export {
     dateFilterTypes,
+    filterTypesObject,
 } from '../../../ListView';
 export type {
     DateFilterData,

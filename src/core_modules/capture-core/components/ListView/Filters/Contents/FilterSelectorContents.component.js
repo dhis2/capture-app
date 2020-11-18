@@ -1,8 +1,7 @@
 // @flow
 import React, { useMemo, type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { filterTypesObject } from '../filterTypes';
-import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS } from '../filters.const';
+import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
 import withButtons from './withButtons';
 import {
     TextFilter,

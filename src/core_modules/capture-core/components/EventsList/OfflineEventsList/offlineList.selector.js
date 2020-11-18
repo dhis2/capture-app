@@ -7,11 +7,11 @@ import {
     OptionSet,
     Option,
     DataElement,
-    dataElementTypes,
+    typeof dataElementTypes,
 } from '../../../metaData';
 import getStageFromEvent from '../../../metaData/helpers/getStageFromEvent';
 import { convertValue } from '../../../converters/clientToList';
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+import type { RenderFoundation } from '../../../metaData';
 
 type EventContainer = {
     event: CaptureClientEvent,
@@ -23,7 +23,7 @@ type ColumnOrderFromState = {
     visible: boolean,
     isMainProperty?: ?boolean,
     header?: ?string,
-    type?: ?$Values<typeof dataElementTypes>,
+    type?: ?$Keys<dataElementTypes>,
     options?: ?Array<{text: string, value: string}>,
 };
 

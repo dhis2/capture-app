@@ -1,17 +1,17 @@
 # 
 # Translators:
-# phil_dhis2, 2019
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Antonia Bezenchek <antonia@informa.pro>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
+# phil_dhis2, 2020
 # Hamza Assada <7amza.it@gmail.com>, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
+"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,6 +34,35 @@ msgid ""
 msgstr ""
 "أحد الأسباب المحتملة لذلك هو أن المتصفح أو الوضع (مثل وضع الخصوصية) غير "
 "مدعوم. انظر السجل للحصول على التفاصيل."
+
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
+msgstr ""
+"لقد فتحت نسخة آخرى من تطبيق الإلتقاط في نفس المجال. يدعم تطبيق الإلتقاط "
+"حالياً تشغيل نسخة واحدة فقط بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
+"الصفحة إذا كنت ترغب في استخدام هذه النسخة، ولكن اعلم أن هذا سيؤدي إلى إغلاق "
+"النسخ الأخرى."
+
+msgid "Organisation unit"
+msgstr "الوحدة التنظيمية"
+
+msgid "Date of enrollment"
+msgstr "تاريخ التسجيل"
+
+msgid "Last updated"
+msgstr "آخر تحديث"
+
+msgid "Enrolled"
+msgstr "مسجل"
+
+msgid "Previously enrolled"
+msgstr "مسجل سابقًا"
+
+msgid "Not enrolled"
+msgstr "غير مسجل"
 
 msgid "Columns to show in table"
 msgstr "الأعمدة التي سيتم عرضها في الجدول"
@@ -69,7 +98,7 @@ msgid "Please provide a valid date"
 msgstr "يرجى ادخال صيغة سليمة للتاريخ"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "تاريخ في المستقبل غير مسموح به"
 
 msgid "Please provide a valid date and time"
 msgstr "من فضلك ادخل صيغة سليمة للتاريخ والوقت"
@@ -300,6 +329,9 @@ msgstr "مسح"
 msgid "No results"
 msgstr "لا توجد نتائج"
 
+msgid "start typing to search"
+msgstr "ابدأ الكتابة للبحث"
+
 msgid "suggestions could not be retrieved"
 msgstr "تعذر استرداد الاقتراحات"
 
@@ -321,11 +353,11 @@ msgstr "{{typeName}} جديد"
 msgid "New"
 msgstr "جديد"
 
-msgid "Start again"
-msgstr "البدء من جديد"
-
 msgid "Find"
 msgstr "بحث"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "وحدة التسجيل المختارة"
@@ -510,6 +542,9 @@ msgstr "فعال"
 msgid "Completed"
 msgstr "مكتمل"
 
+msgid "\"Choose a registering unit to start reporting"
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
 
@@ -595,17 +630,17 @@ msgstr "تمت إضافة الأحداث"
 msgid "No events added"
 msgstr "لم تتم إضافة أحداث"
 
-msgid "Select a registering unit and program above to get started"
-msgstr "حدد وحدة التسجيل والبرنامج أعلاه للبدء"
+msgid "Choose a registering unit and program to get started"
+msgstr ""
 
-msgid "Select a program to start reporting"
-msgstr "حدد برنامجاً لبدء إعداد التقارير"
+msgid "Choose a program to start reporting"
+msgstr ""
 
-msgid "Select a registering unit to start reporting"
-msgstr "حدد وحدة التسجيل لبدء الإبلاغ"
+msgid "Choose a registering unit to start reporting"
+msgstr ""
 
-msgid "Select a category option to start reporting"
-msgstr "حدد فئة لبدء إعداد التقارير"
+msgid "Choose a category option to start reporting"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
@@ -648,6 +683,9 @@ msgstr "إنشاء {{trackedEntityTypeName}} وربط"
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
 
+msgid "No results found"
+msgstr "لم يتم العثور على أي نتائج"
+
 msgid "An error occured loading possible duplicates"
 msgstr "حدث خطأ أثناء تحميل التكرارات المحتملة"
 
@@ -672,9 +710,6 @@ msgstr "نتائج البحث"
 msgid "No {{trackedEntityTypeName}} found."
 msgstr "لم يتم إيجاد {{trackedEntityTypeName}}"
 
-msgid "{{teiCount}} results found for"
-msgstr "تم العثور على هذه نتائج لـ {{teiCount}} "
-
 msgid "New search"
 msgstr "بحث جديد"
 
@@ -689,6 +724,60 @@ msgstr "إنشاء {{trackedEntityType}} جديد"
 
 msgid "Register"
 msgstr "تسجيل"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr "املأ ما لا يقل عن {{minAttributesRequiredToSearch}} سمة للبحث"
+
+msgid "Search {{name}}"
+msgstr "البحث عن {{name}}"
+
+msgid "Find by {{name}}"
+msgstr "البحث عن طريق {{name}}"
+
+msgid "Search by attributes"
+msgstr "البحث حسب السمة"
+
+msgid "Back"
+msgstr "الخلف"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "يمكنك تغيير مصطلحات البحث والبحث مرة أخرى للعثور على ما تبحث عنه."
+
+msgid "Back to search"
+msgstr "العودة للبحث"
+
+msgid "An error has occurred"
+msgstr "حدث خطأ"
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+"توجد مشكلة في هذا البحث، يرجى تغيير مصطلحات البحث أو المحاولة مرة أخرى "
+"لاحقًا. لمزيد من التفاصيل، افتح تبويب Console الخاصة بـ Developer tools"
+
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr "عرض لوحة المعلومات"
+
+msgid "View active enrollment"
+msgstr "عرض التسجيل النشط"
+
+msgid "Re-enroll"
+msgstr "إعادة التسجيل"
 
 msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
@@ -719,17 +808,24 @@ msgstr "ليس لديك حق الوصول لإنشاء علاقات"
 msgid "Add relationship"
 msgstr "اضف علاقة"
 
+msgid "Results found"
+msgstr "العثور على نتائج"
+
 msgid "Selected program"
 msgstr "البرنامج المحدد"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "بحث {{uniqueAttrName}}"
 
-msgid "Search by attributes"
-msgstr "البحث حسب السمة"
-
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "املأ {{minAttributesRequired}} سمات على الأقل للبحث"
+
+msgid "Search for"
+msgstr "ابحث عن"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "للعمل مع البرنامج المحدد"
@@ -773,6 +869,9 @@ msgstr "نموذج الكيان المتتبع"
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"
 
+msgid "Page {{currentPage}}"
+msgstr "صفحة {{currentPage}}"
+
 msgid "Date"
 msgstr "التاريخ"
 
@@ -802,17 +901,6 @@ msgstr "حذف المضلع"
 
 msgid "Set area"
 msgstr "عين المساحة"
-
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
-msgstr ""
-"لقد فتحت نسخة آخرى من تطبيق الإلتقاط في نفس المجال. يدعم تطبيق الإلتقاط "
-"حالياً تشغيل نسخة واحدة فقط بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
-"الصفحة إذا كنت ترغب في استخدام هذه النسخة، ولكن اعلم أن هذا سيؤدي إلى إغلاق "
-"النسخ الأخرى."
 
 msgid "Compatibility mode"
 msgstr "وضع التوافق"

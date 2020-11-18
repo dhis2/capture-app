@@ -1,6 +1,6 @@
 # 
 # Translators:
-# phil_dhis2, 2019
+# phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 晓东 林 <13981924470@126.com>, 2020
 # easylin <lin_xd@126.com>, 2020
@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
+"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -31,6 +31,31 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr "将 "
+
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
+msgstr "在同一个容器中你打开了其它版本的采集App。当前，该应用仅仅支持同时运行一个版本应用。请刷新页面，如果你想使用该版本。注意将关闭其它版本。"
+
+msgid "Organisation unit"
+msgstr "机构"
+
+msgid "Date of enrollment"
+msgstr "注册日期"
+
+msgid "Last updated"
+msgstr "上次更新"
+
+msgid "Enrolled"
+msgstr "已注册"
+
+msgid "Previously enrolled"
+msgstr "以前报名的"
+
+msgid "Not enrolled"
+msgstr "未注册"
 
 msgid "Columns to show in table"
 msgstr "表中显示的列"
@@ -296,6 +321,9 @@ msgstr "清除"
 msgid "No results"
 msgstr "无结果"
 
+msgid "start typing to search"
+msgstr "开始输入搜索内容"
+
 msgid "suggestions could not be retrieved"
 msgstr "建议不能提取"
 
@@ -317,11 +345,11 @@ msgstr "新建 {{typeName}}"
 msgid "New"
 msgstr "新建"
 
-msgid "Start again"
-msgstr "再开始"
-
 msgid "Find"
 msgstr "查询"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "选择注册的机构"
@@ -506,6 +534,9 @@ msgstr "活动的"
 msgid "Completed"
 msgstr "已完成"
 
+msgid "\"Choose a registering unit to start reporting"
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
 
@@ -586,17 +617,17 @@ msgstr "事件已经被添加"
 msgid "No events added"
 msgstr "没有事件被添加"
 
-msgid "Select a registering unit and program above to get started"
-msgstr "选择一个注册机构和上面的项目开始"
+msgid "Choose a registering unit and program to get started"
+msgstr ""
 
-msgid "Select a program to start reporting"
-msgstr "选择一个项目开始上报"
+msgid "Choose a program to start reporting"
+msgstr ""
 
-msgid "Select a registering unit to start reporting"
-msgstr "选择一个机构开始上报"
+msgid "Choose a registering unit to start reporting"
+msgstr ""
 
-msgid "Select a category option to start reporting"
-msgstr "选择一个分类选项开始上报"
+msgid "Choose a category option to start reporting"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "你没有在当前选择创建事件的权限"
@@ -638,6 +669,9 @@ msgstr "创建 {{trackedEntityTypeName}}  和链接"
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
 
+msgid "No results found"
+msgstr "没有结果"
+
 msgid "An error occured loading possible duplicates"
 msgstr "载入可能的重复发生错误"
 
@@ -662,9 +696,6 @@ msgstr "搜索结果"
 msgid "No {{trackedEntityTypeName}} found."
 msgstr "没有发现  {{trackedEntityTypeName}} "
 
-msgid "{{teiCount}} results found for"
-msgstr "发现 {{teiCount}} 条结果"
-
 msgid "New search"
 msgstr "新搜索"
 
@@ -679,6 +710,58 @@ msgstr "创建新的{{trackedEntityType}}"
 
 msgid "Register"
 msgstr "注册"
+
+msgid ""
+"Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
+
+msgid "Search {{name}}"
+msgstr "搜索{{name}}"
+
+msgid "Find by {{name}}"
+msgstr "按{{name}}查找"
+
+msgid "Search by attributes"
+msgstr "按属性搜索"
+
+msgid "Back"
+msgstr "后退"
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
+
+msgid "Back to search"
+msgstr "返回搜寻"
+
+msgid "An error has occurred"
+msgstr "发生了错误"
+
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr "该搜索存在问题，请更改搜索词或稍后再试。有关更多详细信息，请打开开发人员工具的控制台选项卡。"
+
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr "查看仪表盘"
+
+msgid "View active enrollment"
+msgstr "查看有效的注册"
+
+msgid "Re-enroll"
+msgstr "重新注册"
 
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
@@ -709,17 +792,24 @@ msgstr "你没有权限创建任何关系"
 msgid "Add relationship"
 msgstr "添加关系"
 
+msgid "Results found"
+msgstr "找到的结果"
+
 msgid "Selected program"
 msgstr "选择的项目"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
 
-msgid "Search by attributes"
-msgstr "按属性搜索"
-
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
+
+msgid "Search for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"
@@ -763,6 +853,9 @@ msgstr "跟踪的实体实例"
 msgid "Set coordinate"
 msgstr "设置坐标"
 
+msgid "Page {{currentPage}}"
+msgstr "第{{currentPage}}页"
+
 msgid "Date"
 msgstr "日期"
 
@@ -792,13 +885,6 @@ msgstr "删除多边形"
 
 msgid "Set area"
 msgstr "设置区域"
-
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
-msgstr "在同一个容器中你打开了其它版本的采集App。当前，该应用仅仅支持同时运行一个版本应用。请刷新页面，如果你想使用该版本。注意将关闭其它版本。"
 
 msgid "Compatibility mode"
 msgstr "兼容性模式"

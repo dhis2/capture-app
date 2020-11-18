@@ -87,6 +87,7 @@ class ExistingTEILoader extends React.Component<Props, State> {
                     `trackedEntityInstances/${id}`,
                     {
                         program: programId,
+                        fields: '*',
                     },
                 ),
         );

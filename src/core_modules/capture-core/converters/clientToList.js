@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { moment } from 'capture-core-utils/moment';
-import elementTypes from '../metaData/DataElement/elementTypes';
-import DataElement from '../metaData/DataElement/DataElement';
+import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import stringifyNumber from './common/stringifyNumber';
+import { MinimalCoordinates } from '../components/MinimalCoordinates';
 
 function convertDateForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue);
@@ -21,15 +21,6 @@ function convertDateTimeForListDisplay(rawValue: string): string {
 function convertTimeForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue, 'HH:mm', true);
     return momentDate.format('HH:mm');
-}
-
-type CoordinateClientValue = {
-    latitude: number,
-    longitude: number,
-};
-
-function convertCoordinateForDisplay(clientValue: CoordinateClientValue) {
-    return `[ ${clientValue.longitude}, ${clientValue.latitude} ]`;
 }
 
 type FileClientValue = {
@@ -58,45 +49,36 @@ function convertRangeForDisplay(parser: any, clientValue: any) {
         </span>
     );
 }
+function convertNumberRangeForDisplay(clientValue) {
+    return (
+        <span>
+            {clientValue.from} {'->'} {clientValue.to}
+        </span>
+    );
+}
 
 const valueConvertersForType = {
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.NUMBER]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_POSITIVE]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.DATE]: convertDateForListDisplay,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.DATETIME]: convertDateTimeForListDisplay,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.TIME]: convertTimeForListDisplay,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.TRUE_ONLY]: () => 'Yes',
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.COORDINATE]: convertCoordinateForDisplay,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.AGE]: convertDateForListDisplay,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.FILE_RESOURCE]: convertResourceForDisplay,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.IMAGE]: convertResourceForDisplay,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
+    [dataElementTypes.NUMBER]: stringifyNumber,
+    [dataElementTypes.INTEGER]: stringifyNumber,
+    [dataElementTypes.INTEGER_POSITIVE]: stringifyNumber,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
+    [dataElementTypes.INTEGER_NEGATIVE]: stringifyNumber,
+    [dataElementTypes.DATE]: convertDateForListDisplay,
+    [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
+    [dataElementTypes.DATETIME]: convertDateTimeForListDisplay,
+    [dataElementTypes.TIME]: convertTimeForListDisplay,
+    [dataElementTypes.TRUE_ONLY]: () => 'Yes',
+    [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
+    [dataElementTypes.COORDINATE]: MinimalCoordinates,
+    [dataElementTypes.AGE]: convertDateForListDisplay,
+    [dataElementTypes.FILE_RESOURCE]: convertResourceForDisplay,
+    [dataElementTypes.IMAGE]: convertResourceForDisplay,
+    [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
+    [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
+    [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
 };
 
-export function convertValue(value: any, type: $Values<typeof elementTypes>, dataElement?: ?DataElement) {
+export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, dataElement?: ?DataElement) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
@@ -105,6 +87,6 @@ export function convertValue(value: any, type: $Values<typeof elementTypes>, dat
         return dataElement.optionSet.getOptionText(value);
     }
 
-
+    // $FlowFixMe dataElementTypes flow error
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }

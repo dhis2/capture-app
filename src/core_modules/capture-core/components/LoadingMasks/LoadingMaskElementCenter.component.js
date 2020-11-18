@@ -8,6 +8,7 @@ const styles = () => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        height: 'calc(100vh - 48px)',
     },
 });
 

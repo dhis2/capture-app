@@ -13,7 +13,7 @@ import {
     isValidDate,
 } from '../../../utils/validators/form';
 import { parseDate } from '../../../utils/converters/date';
-import { dataElementTypes as elementTypes } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData';
 import type { UpdatableFilterContent } from '../types';
 import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './mainOptions';
@@ -53,7 +53,7 @@ type Props = {
     onCommitValue: (value: ?{ from?: ?string, to?: ?string }) => void,
     onUpdate: (commitValue?: any) => void,
     value: Value,
-    type: $Values<typeof elementTypes>,
+    type: $Keys<typeof dataElementTypes>,
     classes: {
         fromToContainer: string,
         inputContainer: string,
@@ -68,10 +68,9 @@ type State = {
     submitAttempted: boolean;
 };
 
-// $FlowSuppress
 // $FlowFixMe[incompatible-variance] automated comment
 class DateFilter extends Component<Props, State> implements UpdatableFilterContent<Value> {
-    static validateField(value: ?string, type: $Values<typeof elementTypes>) {
+    static validateField(value: ?string, type: $Keys<typeof dataElementTypes>) {
         if (!value) {
             return {
                 isValid: true,
@@ -79,11 +78,13 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
             };
         }
 
+        // $FlowFixMe dataElementTypes flow error
         const typeValidator = DateFilter.validatorForTypes[type];
         const isValid = typeValidator(value);
 
         return {
             isValid,
+            // $FlowFixMe dataElementTypes flow error
             error: isValid ? null : i18n.t(DateFilter.errorMessages[type]),
         };
     }
@@ -132,13 +133,11 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     static errorMessages = {
         CUSTOM_RANGE_WITHOUT_VALUES: 'Please specify a range',
         FROM_GREATER_THAN_TO: 'The From date can\'t be after the To date',
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.DATE]: 'Please provide a valid date',
+        [dataElementTypes.DATE]: 'Please provide a valid date',
     };
 
     static validatorForTypes = {
-        // $FlowFixMe[prop-missing] automated comment
-        [elementTypes.DATE]: isValidDate,
+        [dataElementTypes.DATE]: isValidDate,
     };
 
     static mainOptionSet = new OptionSet('mainOptions', [

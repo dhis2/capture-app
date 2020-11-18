@@ -5,9 +5,8 @@ import i18n from '@dhis2/d2-i18n';
 import Tooltip from '@material-ui/core/Tooltip';
 import newEnrollmentSaveTypes from './newEnrollmentSaveTypes';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
-import { Enrollment } from '../../../../metaData';
+import { type Enrollment } from '../../../../metaData';
 import MultiButton from '../../../Buttons/MultiButton.component';
-// import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
 
 type Props = {
     onSave: (saveType: $Values<typeof newEnrollmentSaveTypes>) => void,

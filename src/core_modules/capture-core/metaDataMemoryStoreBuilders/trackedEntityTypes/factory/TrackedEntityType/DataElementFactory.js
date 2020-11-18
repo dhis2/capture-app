@@ -38,7 +38,6 @@ class DataElementFactory {
             o.compulsory = false;
             o.displayInForms = true;
             o.disabled = false;
-            // $FlowFixMe[prop-missing] automated comment
             o.type = featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
         });
         return dataElement;

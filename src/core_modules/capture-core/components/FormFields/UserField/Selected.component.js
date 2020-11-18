@@ -1,18 +1,17 @@
 // @flow
 import * as React from 'react';
-import { Chip } from '@dhis2/ui-core';
+import { Chip } from '@dhis2/ui';
 import { TextFieldPlain } from 'capture-ui';
 import defaultClasses from './selected.module.css';
-import type { User } from './types';
 
 type Props = {
-    user: User,
+    text: string,
     onClear: () => void,
     focusInputOnMount: boolean,
 };
 
 const Selected = (props: Props) => {
-    const { user, onClear, focusInputOnMount } = props;
+    const { text, onClear, focusInputOnMount } = props;
     const inputDomElement = React.useRef();
 
     React.useEffect(() => {
@@ -51,7 +50,7 @@ const Selected = (props: Props) => {
                     onRemove={() => { onClear(); }}
                     onClick={() => { onClear(); }}
                 >
-                    {user.name}
+                    {text}
                 </Chip>
             </div>
         </div>

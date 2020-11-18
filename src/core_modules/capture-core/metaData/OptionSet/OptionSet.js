@@ -3,13 +3,11 @@
 import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
-import Option from './Option';
-import OptionGroup from './OptionGroup';
+import type OptionGroup from './OptionGroup';
 import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
-import DataElement from '../DataElement/DataElement';
-
+import type { DataElement } from '../DataElement';
 import type { ConvertFn } from '../DataElement/DataElement';
-import type { Value } from './Option';
+import type Option, { Value } from './Option';
 
 export default class OptionSet {
     static errorMessages = {

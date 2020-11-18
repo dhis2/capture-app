@@ -1,9 +1,7 @@
 // @flow
-import DataElement from '../../../metaData/DataElement/DataElement';
 import { convertValue } from '../../../converters/clientToForm';
 import { convertValue as convertListValue } from '../../../converters/clientToList';
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
+import { type RenderFoundation, dataElementTypes, DataElement } from '../../../metaData';
 
 import { getValidationError } from '../dataEntryField/internal/dataEntryField.utils';
 import type { ValidatorContainer } from '../dataEntryField/internal/dataEntryField.utils';
@@ -85,8 +83,7 @@ export function getDataEntryNotes(
     const notes = clientValuesForDataEntry.notes || [];
     return notes.map((note, index) => ({
         ...note,
-        // $FlowFixMe[prop-missing] automated comment
-        storedDate: convertListValue(note.storedDate, elementTypes.DATETIME),
+        storedDate: convertListValue(note.storedDate, dataElementTypes.DATETIME),
         key: index,
     }));
 }

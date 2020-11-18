@@ -2,6 +2,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../../../metaData';
+import { filterTypesObject } from '../../../WorkingLists';
 import {
     convertText,
     convertDate,
@@ -18,31 +19,21 @@ type QueryArgsSource = {
 };
 
 const mappersForTypes = {
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.TEXT]: convertText,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.NUMBER]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER_POSITIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER_NEGATIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.DATE]: convertDate,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.ASSIGNEE]: convertAssignee,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.BOOLEAN]: convertBoolean,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.TRUE_ONLY]: convertTrueOnly,
+    [filterTypesObject.TEXT]: convertText,
+    [filterTypesObject.NUMBER]: convertNumeric,
+    [filterTypesObject.INTEGER]: convertNumeric,
+    [filterTypesObject.INTEGER_POSITIVE]: convertNumeric,
+    [filterTypesObject.INTEGER_NEGATIVE]: convertNumeric,
+    [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
+    [filterTypesObject.DATE]: convertDate,
+    [filterTypesObject.ASSIGNEE]: convertAssignee,
+    [filterTypesObject.BOOLEAN]: convertBoolean,
+    [filterTypesObject.TRUE_ONLY]: convertTrueOnly,
 };
 
 function convertFilter(
     sourceValue: Object,
-    type: string,
+    type: $Keys<typeof dataElementTypes>,
     meta: {
         key: string,
         storeId: string,
@@ -50,12 +41,10 @@ function convertFilter(
     },
 ) {
     if (sourceValue.usingOptionSet) {
-        // $FlowFixMe[incompatible-call] automated comment
         return convertOptionSet(sourceValue, type);
     }
-    return mappersForTypes[type] ?
-        mappersForTypes[type](sourceValue, meta.key, meta.storeId, meta.isInit) :
-        sourceValue;
+    // $FlowFixMe I accept that not every type is listed, thats why I'm doing this test
+    return mappersForTypes[type] ? mappersForTypes[type](sourceValue, meta.key, meta.storeId, meta.isInit) : sourceValue;
 }
 
 function convertFilters(

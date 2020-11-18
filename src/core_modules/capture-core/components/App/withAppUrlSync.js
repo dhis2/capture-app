@@ -25,6 +25,7 @@ const pageKeys = {
     VIEW_EVENT: 'viewEvent',
     NEW_ENROLLMENT: 'newEnrollment',
     SEARCH: 'search',
+    NEW: 'new',
 };
 
 const specificationForPages = {
@@ -74,12 +75,23 @@ const specificationForPages = {
             propKey: 'orgUnitId',
         },
     ],
+    [pageKeys.NEW]: [
+        {
+            urlKey: 'programId',
+            propKey: 'programId',
+        },
+        {
+            urlKey: 'orgUnitId',
+            propKey: 'orgUnitId',
+        },
+    ],
 };
 
 const updaterForPages = {
     [pageKeys.MAIN]: updateSelectionsFromUrl,
     [pageKeys.NEW_EVENT]: updateSelectionsFromUrl,
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
+    [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
     [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,
 };
@@ -95,7 +107,13 @@ const getUrlParts = (pathName: string) => {
         .map(part => part.substring(1));
 };
 
-const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
+/**
+ * Provides data for withUrlSync and calls an update action if not in sync (based on the page)
+ * @alias withAppUrlSync
+ * @memberof UrlSync
+ * @function
+ */
+export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     class AppUrlSyncer extends React.Component<Props> {
         params: ?string;
         page: string;
@@ -186,12 +204,3 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     // $FlowFixMe[missing-annot] automated comment
     return connect(mapStateToProps, mapDispatchToProps)(AppUrlSyncer);
 };
-
-/**
- * Provides data for withUrlSync and calls an update action if not in sync (based on the page)
- * @alias withAppUrlSync
- * @memberof UrlSync
- * @function
- */
-
-export default withAppUrlSync;

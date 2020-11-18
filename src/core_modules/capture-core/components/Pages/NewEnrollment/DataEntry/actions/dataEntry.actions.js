@@ -1,6 +1,6 @@
 // @flow
 import { actionCreator } from '../../../../../actions/actions.utils';
-import { methods } from '../../../../../trackerOffline/trackerOfflineConfig.const';
+import { effectMethods } from '../../../../../trackerOffline';
 
 export const actionTypes = {
     START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE: 'StartSaveAfterReturnedToMainPageForNewEnrollment',
@@ -21,7 +21,7 @@ export const startSaveNewEnrollmentAfterReturnedToMainPage =
             offline: {
                 effect: {
                     url: 'trackedEntityInstances',
-                    method: methods.POST,
+                    method: effectMethods.POST,
                     data: serverData,
                 },
                 commit: { type: actionTypes.ENROLLMENT_SAVED, meta: { selections } },
