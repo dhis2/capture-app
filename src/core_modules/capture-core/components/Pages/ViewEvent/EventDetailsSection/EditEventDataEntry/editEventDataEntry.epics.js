@@ -69,7 +69,6 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                 formValues,
                 dataEntryValues,
                 dataEntryValuesMeta,
-                prevEventMainData,
             );
 
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };

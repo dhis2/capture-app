@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import SelectBoxes from '../../FormFields/Options/SingleSelectBoxes/SingleSelectBoxes.component';
-import { orientations } from '../../FormFields/Options/SingleSelectBoxes/singleSelectBoxes.const';
+import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import Option from '../../../metaData/OptionSet/Option';
 
@@ -284,6 +283,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         return (
             <div id="dateFilter">
                 <div>
+                    { /* $FlowFixMe */ }
                     <SelectBoxes
                         optionSet={DateFilter.mainOptionSet}
                         orientation={orientations.VERTICAL}

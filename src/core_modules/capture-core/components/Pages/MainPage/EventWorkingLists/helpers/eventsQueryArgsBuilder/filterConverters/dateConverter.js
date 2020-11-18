@@ -87,12 +87,12 @@ const relativeConvertersForPeriods = {
     },
 };
 
-function getSelector(key: string, listId: string, isInit: boolean) {
-    if (!selectors[listId] || isInit) {
-        selectors[listId] = {};
+function getSelector(key: string, storeId: string, isInit: boolean) {
+    if (!selectors[storeId] || isInit) {
+        selectors[storeId] = {};
     }
 
-    const listSelectors = selectors[listId];
+    const listSelectors = selectors[storeId];
 
     if (!listSelectors[key]) {
         listSelectors[key] = createSelector(
@@ -109,10 +109,10 @@ function getSelector(key: string, listId: string, isInit: boolean) {
 function convertRelativeDate(
     sourceValue: RelativeDateFilterData,
     key: string,
-    listId: string,
+    storeId: string,
     isInit: boolean,
 ) {
-    return getSelector(key, listId, isInit)(sourceValue);
+    return getSelector(key, storeId, isInit)(sourceValue);
 }
 
 function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
@@ -132,16 +132,16 @@ function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
 export function convertDate(
     sourceValue: DateFilterData,
     key: string,
-    listId: string,
+    storeId: string,
     isInit: boolean,
 ) {
     if (sourceValue.type === 'ABSOLUTE') {
         return convertAbsoluteDate(sourceValue);
     }
 
-    return convertRelativeDate(sourceValue, key, listId, isInit);
+    return convertRelativeDate(sourceValue, key, storeId, isInit);
 }
 
-export function clearMemoization(listId: string) {
-    selectors[listId] = {};
+export function clearMemoization(storeId: string) {
+    selectors[storeId] = {};
 }

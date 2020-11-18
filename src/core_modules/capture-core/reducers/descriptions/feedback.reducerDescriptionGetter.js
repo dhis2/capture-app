@@ -22,6 +22,7 @@ import {
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
+import { workingListsCommonActionTypes } from '../../components/Pages/MainPage/WorkingListsCommon';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?React.Node) {
@@ -53,7 +54,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, action.payload.error, action.payload.action),
     [enrollmentActionTypes.ENROLLMENT_LOAD_FAILED]: (state, action) =>
         addErrorFeedback(state, action.payload),
-    [eventWorkingListsActionTypes.LIST_VIEW_INIT_ERROR]: (state, action) =>
+    [workingListsCommonActionTypes.LIST_VIEW_INIT_ERROR]: (state, action) =>
         addErrorFeedback(state, action.payload.errorMessage),
     [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE]: (state, action) => {
         const error = action.payload;
@@ -77,7 +78,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         ];
         return newState;
     },
-    [eventWorkingListsActionTypes.LIST_UPDATE_ERROR]: (state, action) => [
+    [workingListsCommonActionTypes.LIST_UPDATE_ERROR]: (state, action) => [
         ...state,
         getErrorFeedback(action.payload.errorMessage),
     ],
@@ -85,15 +86,15 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         ...state,
         getErrorFeedback(i18n.t('Could not delete event')),
     ],
-    [eventWorkingListsActionTypes.TEMPLATE_UPDATE_ERROR]: state => [
+    [workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR]: state => [
         ...state,
         getErrorFeedback(i18n.t('Could not save working list')),
     ],
-    [eventWorkingListsActionTypes.TEMPLATE_ADD_ERROR]: state => [
+    [workingListsCommonActionTypes.TEMPLATE_ADD_ERROR]: state => [
         ...state,
         getErrorFeedback(i18n.t('Could not add working list')),
     ],
-    [eventWorkingListsActionTypes.TEMPLATE_DELETE_ERROR]: state => [
+    [workingListsCommonActionTypes.TEMPLATE_DELETE_ERROR]: state => [
         ...state,
         getErrorFeedback(i18n.t('Could not delete working list')),
     ],

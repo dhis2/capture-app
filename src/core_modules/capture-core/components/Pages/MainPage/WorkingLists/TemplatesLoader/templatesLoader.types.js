@@ -1,5 +1,4 @@
 // @flow
-import type { LoadedContext } from '../workingLists.types';
 import type { ContextBuilderOutputProps } from '../ContextBuilder';
 
 type ExtractedProps = {|
@@ -7,19 +6,25 @@ type ExtractedProps = {|
     onLoadTemplates: Function,
     onCancelLoadTemplates?: Function,
     programId: string,
-    loadedContext: LoadedContext,
+    loadedProgramIdForTemplates?: string,
     dirtyTemplates: boolean,
     templatesLoading: boolean,
 |};
 
-type RestProps = $Rest<ContextBuilderOutputProps, ExtractedProps>;
+type OptionalExtractedProps = {
+    loadTemplatesError: string,
+    onCancelLoadTemplates: Function,
+    loadedProgramIdForTemplates: string,
+};
+
+type RestProps = $Rest<ContextBuilderOutputProps & OptionalExtractedProps, ExtractedProps & OptionalExtractedProps>;
 
 export type Props = $ReadOnly<{|
-    ...ContextBuilderOutputProps,
+    ...RestProps,
+    ...ExtractedProps,
 |}>;
 
 export type TemplatesLoaderOutputProps = $ReadOnly<{|
     ...RestProps,
     programId: string,
-    loadedContext: LoadedContext,
 |}>;
