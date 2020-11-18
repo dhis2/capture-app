@@ -13,6 +13,9 @@ import {
 import type { OwnProps, Props } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
+import { useHistory } from 'react-router';
+import { urlThreeArguments } from '../../utils/url';
+import { useSelector } from 'react-redux';
 
 const styles = ({ typography }) => ({
     searchDomainSelectorSection: {
@@ -62,8 +65,14 @@ const InfoOutlinedIconWithStyles = withStyles({
 
 export const Index =
   ({ classes, onSelect, selectedSearchScopeId }: Props) => {
+      const { push } = useHistory();
+      const orgUnitId: string = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
       const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
 
+      const handleSelect = ({ selected }) => {
+          onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE);
+          push(urlThreeArguments({ orgUnitId, trackedEntityTypeId: selected }));
+      };
       return (<>
           <div className={classes.header}>
               { i18n.t('Search for')}
@@ -72,7 +81,7 @@ export const Index =
           <div className={classes.searchRow}>
               <div className={classes.searchRowSelectElement}>
                   <SingleSelect
-                      onChange={({ selected }) => { onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE); }}
+                      onChange={handleSelect}
                       selected={selectedSearchScopeId}
                       empty={<div className={classes.customEmpty}>Custom empty component</div>}
                   >

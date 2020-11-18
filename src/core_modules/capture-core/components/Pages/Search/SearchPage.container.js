@@ -7,6 +7,7 @@ import type { AvailableSearchOptions } from './SearchPage.types';
 import { cleanSearchRelatedData, navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
 
 import { searchScopes } from './SearchPage.constants';
+import { useTrackedEntityTypesWithCorrelatedPrograms } from "../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms";
 
 const buildSearchOption = (id, name, searchGroups, searchScope, type) => ({
     searchOptionId: id,
