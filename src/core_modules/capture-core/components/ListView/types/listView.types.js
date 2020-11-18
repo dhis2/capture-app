@@ -1,6 +1,6 @@
 // @flow
 
-import { dataElementTypes } from '../../../metaData';
+import { typeof dataElementTypes } from '../../../metaData';
 import type {
     FilterData,
     Options,
@@ -9,7 +9,7 @@ import type {
 export type Column = {
     id: string,
     visible: boolean,
-    type: $Values<typeof dataElementTypes>,
+    type: $Values<dataElementTypes>,
     header: string,
     options?: ?Options,
     multiValueFilter?: boolean,
