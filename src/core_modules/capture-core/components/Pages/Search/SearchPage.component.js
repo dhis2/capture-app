@@ -6,7 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import { useParams, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 import {
     Modal,
     ModalTitle,
@@ -106,7 +106,8 @@ const Index = ({
         // we rerender the page without a preselectedProgramId.
         // This is triggering this hook. However the fallback search view needs
         // to start with a loading spinner and not with the initial view.
-        if (fallbackTriggered) {
+        if (!fallbackTriggered) {
+            cleanFallbackRelatedData();
             showInitialSearchPage();
         }
         return () => {
