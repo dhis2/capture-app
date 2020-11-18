@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { useContext, type ComponentType } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { ListViewConfig } from '../ListViewConfig';
@@ -13,10 +13,11 @@ import type { Props } from './templatesManager.types';
 
 const TemplatesManagerPlain = (props: Props) => {
     const { templates, ...passOnProps } = props;
+
     const {
         currentTemplate,
         onSelectTemplate,
-    } = React.useContext(ManagerContext);
+    } = useContext(ManagerContext) || {};
 
     if (!templates || !currentTemplate) {
         log.error(

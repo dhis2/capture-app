@@ -22,14 +22,18 @@ import type {
     StickyFilters,
     UnloadingContext,
     UpdateFilter,
-    UpdateList,
     WorkingListTemplate,
 } from '../../WorkingLists';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate } from '../../WorkingListsCommon';
 import type {
+    AddTemplate,
+    DeleteTemplate,
+    UpdateTemplate,
+    UpdateList,
+    RecordsOrder,
     CustomColumnOrder,
-    EventsMainProperties,
-    EventsDataElementValues,
+} from '../../WorkingListsCommon';
+import type { EventRecords } from '../../EventWorkingListsCommon';
+import type {
     EventWorkingListsTemplates,
 } from '../types';
 
@@ -46,12 +50,13 @@ export type EventWorkingListsReduxOutputProps = {|
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
     downloadRequest: Object,
-    eventsMainProperties: ?EventsMainProperties,
-    eventsDataElementValues: ?EventsDataElementValues,
+    eventRecords?: EventRecords,
     filters?: FiltersData,
     initialViewConfig?: Object,
-    lastIdDeleted?: string, // TODO: Dealing with this in next PR
-    lastTransaction: number, // TODO: Dealing with this in next PR
+    lastIdDeleted?: string,
+    lastTransaction: number,
+    lastTransactionOnListDataRefresh?: number,
+    listDataRefreshTimestamp?: number,
     loadedContext?: LoadedContext,
     loading: boolean,
     loadViewError?: string,
@@ -62,7 +67,6 @@ export type EventWorkingListsReduxOutputProps = {|
     onCancelUpdateList: CancelUpdateList,
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
-    onCleanSkipInitAddingTemplate: Function, // TODO: Dealing with this in next PR
     onClearFilter: ClearFilter,
     onDeleteEvent: Function,
     onDeleteTemplate: DeleteTemplate,
@@ -79,7 +83,7 @@ export type EventWorkingListsReduxOutputProps = {|
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     program: EventProgram,
-    recordsOrder?: Array<string>, // TODO: Dealing with this in later PR
+    recordsOrder?: RecordsOrder,
     rowsCount?: number,
     rowsPerPage?: number,
     sortByDirection?: string,
@@ -89,4 +93,5 @@ export type EventWorkingListsReduxOutputProps = {|
     templatesLoading: boolean,
     updating: boolean,
     updatingWithDialog: boolean,
+    viewPreloaded?: boolean,
 |};

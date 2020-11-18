@@ -135,6 +135,7 @@ export const workingListsMetaDesc = createReducerDescription({
             [storeId]: {
                 ...state[storeId],
                 nextInitial,
+                viewPreloaded: true,
             },
         };
     },
@@ -166,6 +167,16 @@ export const workingListsMetaDesc = createReducerDescription({
             [storeId]: {
                 ...state[storeId],
                 nextInitial: undefined,
+            },
+        };
+    },
+    [workingListsCommonActionTypes.TEMPLATE_SELECT]: (state, action) => {
+        const { storeId } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                viewPreloaded: false,
             },
         };
     },

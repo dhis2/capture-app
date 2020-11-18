@@ -5,6 +5,25 @@ import { workingListsCommonActionTypes } from '../../../components/Pages/MainPag
 import { eventWorkingListsActionTypes } from '../../../components/Pages/MainPage/EventWorkingLists';
 import { recentlyAddedEventsActionTypes } from '../../../components/Pages/NewEvent/RecentlyAddedEventsList';
 
+export const workingListsListRecordsDesc = createReducerDescription({
+    [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, { payload: { storeId, recordContainers } }) => ({
+        ...state,
+        [storeId]: recordContainers
+            .reduce((acc, { record, id }) => {
+                acc[id] = record;
+                return acc;
+            }, {}),
+    }),
+    [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, { payload: { storeId, recordContainers } }) => ({
+        ...state,
+        [storeId]: recordContainers
+            .reduce((acc, { record, id }) => {
+                acc[id] = record;
+                return acc;
+            }, {}),
+    }),
+}, 'workingListsListRecords');
+
 export const workingListsTemplatesDesc = createReducerDescription({
     [workingListsCommonActionTypes.TEMPLATES_FETCH]: (state, action) => {
         const { storeId } = action.payload;
@@ -156,32 +175,6 @@ export const workingListsTemplatesDesc = createReducerDescription({
             },
         };
     },
-    [workingListsCommonActionTypes.TEMPLATE_ADD_SKIP_INIT_CLEAN]: (state, action) => {
-        const { template, storeId } = action.payload;
-        const templates = state[storeId].templates;
-        const targetTemplate = templates.find(t => t.id === template.id);
-
-        if (targetTemplate) {
-            const otherTemplates = templates.filter(t => t.id !== template.id);
-
-            const updatedTemplate = {
-                ...targetTemplate,
-                skipInitDuringAddProcedure: undefined,
-            };
-
-            return {
-                ...state,
-                [storeId]: {
-                    ...state[storeId],
-                    templates: [
-                        ...otherTemplates,
-                        updatedTemplate,
-                    ],
-                },
-            };
-        }
-        return state;
-    },
     [workingListsCommonActionTypes.TEMPLATE_ADD_SUCCESS]: (state, action) => {
         const { templateId, clientId, storeId } = action.payload;
         const templates = state[storeId].templates;
@@ -299,24 +292,20 @@ export const workingListsDesc = createReducerDescription({
     },
     [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const { storeId, eventContainers, request } = action.payload;
+        const { storeId, recordContainers, request } = action.payload;
         newState[storeId] = {
-            order: eventContainers ?
-                eventContainers
-                    .map(container => container.event.eventId) : [],
-            type: 'event',
+            order: recordContainers
+                .map(({ id }) => id),
             currentRequest: request,
         };
         return newState;
     },
     [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const { storeId, eventContainers, request } = action.payload;
+        const { storeId, recordContainers, request } = action.payload;
         newState[storeId] = {
-            order: eventContainers ?
-                eventContainers
-                    .map(container => container.event.eventId) : [],
-            type: 'event',
+            order: recordContainers
+                .map(({ id }) => id),
             currentRequest: request,
         };
 
@@ -460,7 +449,7 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
     },
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
-        newState[action.payload.listId] = [...action.payload.customColumnOrder];
+        newState[action.payload.listId] = [...action.payload.columnOrder];
         return newState;
     },
 }, 'workingListsColumnsOrder');
@@ -482,15 +471,28 @@ export const workingListsContextDesc = createReducerDescription({
         };
     },
     [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
-        const newState = { ...state };
-        const { storeId, context: { programId, ...restContext } } = action.payload;
-        newState[storeId] = {
-            ...newState[storeId],
-            ...restContext,
-            programIdView: programId,
-            timestamp: moment().toISOString(),
+        const { storeId, context: { programId, lastTransaction, ...restContext } } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                ...restContext,
+                programIdView: programId,
+                listDataRefreshTimestamp: moment().toISOString(),
+                lastTransactionOnListDataRefresh: lastTransaction,
+            },
         };
-        return newState;
+    },
+    [workingListsCommonActionTypes.LIST_UPDATE]: (state, action) => {
+        const { storeId, lastTransaction } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                listDataRefreshTimestamp: moment().toISOString(),
+                lastTransactionOnListDataRefresh: lastTransaction,
+            },
+        };
     },
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };

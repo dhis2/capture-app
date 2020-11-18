@@ -14,7 +14,6 @@ import {
     initListViewCancel,
     updateList,
     updateListCancel,
-    cleanSkipInitAddingTemplate,
     unloadingContext,
     sortList,
     setListColumnOrder,
@@ -39,24 +38,28 @@ import type {
     SetColumnOrder,
     Sort,
     UpdateFilter,
-    UpdateList,
 } from '../../WorkingLists';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate } from '../../WorkingListsCommon';
+import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '../../WorkingListsCommon';
 
 const useTemplates = (
     dispatch: ReduxDispatch,
     { storeId, workingListsType }: { storeId: string, workingListsType: string }) => {
-    const templateState = useSelector(({ workingListsTemplates }) => ({
-        currentTemplate: workingListsTemplates[storeId] &&
-            workingListsTemplates[storeId].selectedTemplateId &&
-            workingListsTemplates[storeId].templates &&
-            workingListsTemplates[storeId].templates.find(template => template.id === workingListsTemplates[storeId].selectedTemplateId),
-        templates: workingListsTemplates[storeId] &&
-            workingListsTemplates[storeId].templates,
-        templatesLoading: !!workingListsTemplates[storeId] &&
-            !!workingListsTemplates[storeId].loading,
-        loadTemplatesError: workingListsTemplates[storeId] && workingListsTemplates[storeId].loadError,
-    }), shallowEqual);
+    const templateState = useSelector(({ workingListsTemplates }) => {
+        const {
+            selectedTemplateId,
+            templates,
+            loading: templatesLoading,
+            loadError: loadTemplatesError,
+        } = workingListsTemplates[storeId] || {};
+
+        return {
+            currentTemplate: selectedTemplateId && templates &&
+                templates.find(template => template.id === selectedTemplateId),
+            templates,
+            templatesLoading: !!templatesLoading,
+            loadTemplatesError,
+        };
+    }, shallowEqual);
 
     const templateDispatch = useMemo(() => ({
         onSelectTemplate: (...args) => dispatch(selectTemplate(...args, storeId)),
@@ -81,7 +84,6 @@ const useTemplates = (
                 },
             )),
         onDeleteTemplate: (...args) => dispatch(deleteTemplate(...args, { storeId, workingListsType })),
-        onCleanSkipInitAddingTemplate: (...args) => dispatch(cleanSkipInitAddingTemplate(...args, storeId)),
     }: {|
         onSelectTemplate: SelectTemplate,
         onLoadTemplates: LoadTemplates,
@@ -89,7 +91,6 @@ const useTemplates = (
         onAddTemplate: AddTemplate,
         onUpdateTemplate: UpdateTemplate,
         onDeleteTemplate: DeleteTemplate,
-        onCleanSkipInitAddingTemplate: Function,
     |}), [storeId, dispatch, workingListsType]);
 
     return {
@@ -100,23 +101,64 @@ const useTemplates = (
 
 const useView = (
     dispatch: ReduxDispatch,
-    categoryCombinationMeta: Object,
+    categoryCombinationId?: ?string,
     { storeId, workingListsType }: { storeId: string, workingListsType: string }) => {
-    const viewState = useSelector(({ workingLists, workingListsUI, workingListsMeta, workingListsColumnsOrder, workingListsStickyFilters }) => ({
-        recordsOrder: workingLists[storeId] && workingLists[storeId].order,
-        updating: !!workingListsUI[storeId] && !!workingListsUI[storeId].isUpdating,
-        loading: !!workingListsUI[storeId] && !!workingListsUI[storeId].isLoading,
-        updatingWithDialog: !!workingListsUI[storeId] && !!workingListsUI[storeId].isUpdatingWithDialog,
-        loadViewError: workingListsUI[storeId] && workingListsUI[storeId].dataLoadingError,
-        customColumnOrder: workingListsColumnsOrder[storeId],
-        stickyFilters: workingListsStickyFilters[storeId],
-        rowsPerPage: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.rowsPerPage) || (workingListsMeta[storeId] && workingListsMeta[storeId].rowsPerPage),
-        currentPage: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.currentPage) || (workingListsMeta[storeId] && workingListsMeta[storeId].currentPage),
-        rowsCount: workingListsMeta[storeId] && workingListsMeta[storeId].rowsCount,
-        sortById: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.sortById) || (workingListsMeta[storeId] && workingListsMeta[storeId].sortById),
-        sortByDirection: (workingListsMeta[storeId] && workingListsMeta[storeId].next && workingListsMeta[storeId].next.sortByDirection) || (workingListsMeta[storeId] && workingListsMeta[storeId].sortByDirection),
-        initialViewConfig: (workingListsMeta[storeId] && workingListsMeta[storeId].nextInitial) || (workingListsMeta[storeId] && workingListsMeta[storeId].initial),
-    }), shallowEqual);
+    const viewState = useSelector(({
+        workingLists,
+        workingListsUI,
+        workingListsMeta,
+        workingListsColumnsOrder,
+        workingListsStickyFilters,
+        workingListsListRecords,
+    }) => {
+        const {
+            order: recordsOrder,
+        } = workingLists[storeId] || {};
+
+        const {
+            isUpdating: updating,
+            isLoading: loading,
+            isUpdatingWithDialog: updatingWithDialog,
+            dataLoadingError: loadViewError,
+        } = workingListsUI[storeId] || {};
+
+        const {
+            rowsPerPage,
+            currentPage,
+            rowsCount,
+            sortById,
+            sortByDirection,
+            initial,
+            nextInitial,
+            viewPreloaded,
+            next: workingListsMetaNextStore,
+        } = workingListsMeta[storeId] || {};
+
+        const {
+            rowsPerPage: nextRowsPerPage,
+            currentPage: nextCurrentPage,
+            sortById: nextSortById,
+            sortByDirection: nextSortByDirection,
+        } = workingListsMetaNextStore || {};
+
+        return {
+            eventRecords: workingListsListRecords[storeId],
+            recordsOrder,
+            updating: !!updating,
+            loading: !!loading,
+            updatingWithDialog: !!updatingWithDialog,
+            loadViewError,
+            customColumnOrder: workingListsColumnsOrder[storeId],
+            stickyFilters: workingListsStickyFilters[storeId],
+            rowsPerPage: nextRowsPerPage || rowsPerPage,
+            currentPage: nextCurrentPage || currentPage,
+            rowsCount,
+            sortById: nextSortById || sortById,
+            sortByDirection: nextSortByDirection || sortByDirection,
+            initialViewConfig: nextInitial || initial,
+            viewPreloaded,
+        };
+    }, shallowEqual);
 
     const appliedFilters = useSelector(({ workingListsMeta }) =>
         workingListsMeta[storeId] && workingListsMeta[storeId].filters);
@@ -134,16 +176,17 @@ const useView = (
                 selectedTemplate,
                 context, {
                     ...meta,
-                    categoryCombinationMeta,
+                    categoryCombinationId,
                     storeId,
                     workingListsType,
                 },
             )),
-        onUpdateList: (queryArgs: Object, columnsMetaForDataFetching: Object) =>
+        onUpdateList: (queryArgs: Object, lastTransaction: number, columnsMetaForDataFetching: Object) =>
             dispatch(updateList(
                 queryArgs, {
                     columnsMetaForDataFetching,
-                    categoryCombinationMeta,
+                    lastTransaction,
+                    categoryCombinationId,
                     storeId,
                     workingListsType,
                 },
@@ -169,7 +212,7 @@ const useView = (
         onSelectRestMenuItem: SelectRestMenuItem,
         onChangePage: ChangePage,
         onChangeRowsPerPage: ChangeRowsPerPage,
-    |}), [storeId, dispatch, categoryCombinationMeta, workingListsType]);
+    |}), [storeId, dispatch, categoryCombinationId, workingListsType]);
 
     return {
         ...viewState,
@@ -187,13 +230,16 @@ const useWorkingListsContext = (dispatch: ReduxDispatch, { storeId }: { storeId:
         lastTransaction,
     }), shallowEqual);
 
-    const loadedContext = useSelector(({ workingListsContext }) => workingListsContext[storeId]);
+    const { listDataRefreshTimestamp, lastTransactionOnListDataRefresh, ...loadedContext } =
+        useSelector(({ workingListsContext }) => workingListsContext[storeId]) || {};
     const onUnloadingContext = useCallback(() => dispatch(unloadingContext(storeId)), [dispatch, storeId]);
 
     return {
         ...currentContextState,
         loadedContext,
         onUnloadingContext,
+        listDataRefreshTimestamp,
+        lastTransactionOnListDataRefresh,
     };
 };
 
@@ -201,7 +247,7 @@ export const useWorkingListsCommonStateManagement = ((storeId: string, workingLi
     const dispatch = useDispatch();
     const context = useWorkingListsContext(dispatch, { storeId, workingListsType });
     const templates = useTemplates(dispatch, { storeId, workingListsType });
-    const view = useView(dispatch, program.categoryCombination, { storeId, workingListsType });
+    const view = useView(dispatch, program.categoryCombination && program.categoryCombination.id, { storeId, workingListsType });
 
     return {
         ...templates,

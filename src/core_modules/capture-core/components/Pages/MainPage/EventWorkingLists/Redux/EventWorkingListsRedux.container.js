@@ -1,7 +1,6 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
-// $FlowFixMe
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     openViewEventPage,
     requestDeleteEvent,
@@ -20,10 +19,6 @@ export const EventWorkingListsRedux = ({ storeId }: Props) => {
         [programId]);
 
     const commonStateManagementProps = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
-
-    const eventsValues = useSelector(({
-        events: eventsMainProperties, eventsValues: eventsDataElementValues }) => ({
-        eventsMainProperties, eventsDataElementValues }), shallowEqual);
 
     const lastEventIdDeleted = useSelector(({ workingListsUI }) =>
         workingListsUI[storeId] && workingListsUI[storeId].lastEventIdDeleted);
@@ -44,8 +39,7 @@ export const EventWorkingListsRedux = ({ storeId }: Props) => {
         <EventWorkingListsColumnSetup
             {...commonStateManagementProps}
             program={program}
-            {...eventsValues}
-            lastIdDeleted={lastEventIdDeleted} // TODO: New logic
+            lastIdDeleted={lastEventIdDeleted}
             onSelectListRow={onSelectListRow}
             onDeleteEvent={onDeleteEvent}
             downloadRequest={downloadRequest}
