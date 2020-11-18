@@ -39,7 +39,7 @@ import getStageForEventProgram from '../../../../../metaData/helpers/EventProgra
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../actions/crossPage.actions';
-import { lockedSelectorActionTypes, lockedSelectorBatchActionTypes } from '../../../../LockedSelector/LockedSelector.actions';
+import { lockedSelectorActionTypes } from '../../../../LockedSelector/LockedSelector.actions';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',

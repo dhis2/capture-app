@@ -9,7 +9,7 @@ import {
     selectionsCompletenessCalculated,
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
-import { lockedSelectorActionTypes, lockedSelectorBatchActionTypes } from '../../LockedSelector';
+import { lockedSelectorActionTypes } from '../../LockedSelector';
 
 type CurrentSelectionsState = {
     programId?: ?string,
