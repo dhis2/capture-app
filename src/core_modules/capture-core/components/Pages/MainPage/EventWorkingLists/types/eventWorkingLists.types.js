@@ -1,7 +1,15 @@
 // @flow
+import { typeof dataElementTypes } from '../../../../../metaData';
+import type { CustomColumnOrder } from '../../WorkingListsCommon';
 
-export type EventsMainProperties = { [eventId: string]: Object};
-export type EventsDataElementValues = { [eventId: string]: Object};
+export type ColumnMetaForDataFetching = {|
+    id: string,
+    type: $Values<dataElementTypes>,
+    apiName?: string,
+    isMainProperty?: boolean,
+|};
+
+export type ColumnsMetaForDataFetching = Map<string, ColumnMetaForDataFetching>;
 
 export type ClientConfig = {|
     filters: { [id: string]: any },
@@ -9,5 +17,24 @@ export type ClientConfig = {|
     sortByDirection: string,
     currentPage: number,
     rowsPerPage: number,
-    columnOrder: Array<Object>,
+    customColumnOrder?: CustomColumnOrder,
 |};
+
+export type EventWorkingListsTemplate = {|
+    id: string,
+    isDefault?: ?boolean,
+    name: string,
+    access: {
+        update: boolean,
+        delete: boolean,
+        write: boolean,
+        manage: boolean,
+    },
+    criteria?: Object,
+    nextCriteria?: Object,
+    notPreserved?: boolean,
+    deleted?: boolean,
+    skipInitDuringAddProcedure?: boolean,
+|};
+
+export type EventWorkingListsTemplates = Array<EventWorkingListsTemplate>;

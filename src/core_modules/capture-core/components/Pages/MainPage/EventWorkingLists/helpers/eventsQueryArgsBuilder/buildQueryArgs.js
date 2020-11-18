@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getEventProgramThrowIfNotFound, dataElementTypes } from '../../../../../../metaData';
+import { dataElementTypes } from '../../../../../../metaData';
 import {
     convertText,
     convertDate,
@@ -11,12 +11,10 @@ import {
     convertNumeric,
     convertTrueOnly,
 } from './filterConverters';
+import type { ColumnsMetaForDataFetching } from '../../types';
 
 type QueryArgsSource = {
-    programId: string,
     filters: Object,
-    sortById: string,
-    sortByDirection: string,
 };
 
 const mappersForTypes = {
@@ -47,7 +45,7 @@ function convertFilter(
     type: string,
     meta: {
         key: string,
-        listId: string,
+        storeId: string,
         isInit: boolean,
     },
 ) {
@@ -56,41 +54,37 @@ function convertFilter(
         return convertOptionSet(sourceValue, type);
     }
     return mappersForTypes[type] ?
-        mappersForTypes[type](sourceValue, meta.key, meta.listId, meta.isInit) :
+        mappersForTypes[type](sourceValue, meta.key, meta.storeId, meta.isInit) :
         sourceValue;
 }
 
 function convertFilters(
     filters: Object,
     {
-        mainPropTypes,
-        programId,
-        listId,
+        columnsMetaForDataFetching,
+        storeId,
         isInit,
     }: {
-        mainPropTypes: Object,
-        programId: string,
-        listId: string,
+        columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+        storeId: string,
         isInit: boolean,
     },
 ) {
-    const elementsById = getEventProgramThrowIfNotFound(programId).stage.stageForm.getElementsById();
-
     return Object
         .keys(filters)
         .filter(key => filters[key])
         .reduce((acc, key) => {
-            const type = (elementsById[key] && elementsById[key].type) || mainPropTypes[key];
-            if (!type) {
-                log.error(errorCreator('Could not get type for key')({ key, listId, programId }));
+            const column = columnsMetaForDataFetching.get(key);
+            if (!column) {
+                log.error(errorCreator('Could not get type for key')({ key, storeId }));
             } else {
                 const sourceValue = filters[key];
                 const queryArgValue = convertFilter(
                     sourceValue,
-                    type,
+                    column.type,
                     {
                         key,
-                        listId,
+                        storeId,
                         isInit,
                     });
                 acc[key] = queryArgValue;
@@ -103,24 +97,23 @@ function convertFilters(
 export function buildQueryArgs(
     queryArgsSource: QueryArgsSource,
     {
-        mainPropTypes,
-        listId,
+        columnsMetaForDataFetching,
+        storeId,
         isInit = false,
     }: {
-        mainPropTypes: Object,
-        listId: string,
+        columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+        storeId: string,
         isInit: boolean,
     },
 ) {
-    const { programId, filters } = queryArgsSource;
+    const { filters } = queryArgsSource;
     const queryArgs = {
         ...queryArgsSource,
         filters: convertFilters(
             filters,
             {
-                mainPropTypes,
-                programId,
-                listId,
+                columnsMetaForDataFetching,
+                storeId,
                 isInit,
             },
         ),

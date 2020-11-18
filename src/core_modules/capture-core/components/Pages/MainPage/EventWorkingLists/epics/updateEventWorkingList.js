@@ -1,62 +1,44 @@
 // @flow
 import log from 'loglevel';
-import { errorCreator, pipe } from 'capture-core-utils';
-import { getEventWorkingListDataAsync } from './eventsRetriever';
+import { errorCreator } from 'capture-core-utils';
+import { getEventListData } from './getEventListData';
 import {
-    updateEventListSuccess,
-    updateEventListError,
-} from '../eventWorkingLists.actions';
+    updateListSuccess,
+    updateListError,
+} from '../../WorkingListsCommon';
 import { buildQueryArgs } from '../helpers/eventsQueryArgsBuilder';
+import type { ColumnsMetaForDataFetching } from '../types';
 
 
 const errorMessages = {
     WORKING_LIST_UPDATE_ERROR: 'Working list could not be updated',
 };
 
-const getSourceQueryArgsForUpdateWorkingList = (
-    state: ReduxState,
-    listId: string,
-    sourceQueryArgsPart: Object,
-) => {
-    const { programId, orgUnitId, categories } = state.workingListsContext[listId];
-
-    return {
-        programId,
-        orgUnitId,
-        categories,
-        ...sourceQueryArgsPart,
-    };
-};
-
 export const updateEventWorkingListAsync = (
-    listId: string,
-    sourceQueryArgsPart: Object,
-    state: ReduxState,
-): Promise<ReduxAction<any, any>> => {
-    const sourceQueryData = getSourceQueryArgsForUpdateWorkingList(state, listId, sourceQueryArgsPart);
-    const columnOrder = state.workingListsColumnsOrder[listId];
-    const mainColumnTypes = pipe(
-        columns => columns.filter(column => column.isMainProperty),
-        columOrderMainOnly => columOrderMainOnly.reduce((acc, column) => ({
-            ...acc,
-            [column.id]: column.type,
-        }), {}),
-    )(columnOrder);
-
-    return getEventWorkingListDataAsync(
-        buildQueryArgs(
-            sourceQueryData,
-            {
-                listId,
-                mainPropTypes: mainColumnTypes,
-                isInit: false,
-            }),
-        columnOrder)
-        .then(data =>
-            updateEventListSuccess(listId, data),
-        )
-        .catch((error) => {
-            log.error(errorCreator(errorMessages.WORKING_LIST_UPDATE_ERROR)({ error }));
-            return updateEventListError(listId, errorMessages.WORKING_LIST_UPDATE_ERROR);
-        });
-};
+    queryArgsSource: Object, {
+        columnsMetaForDataFetching,
+        categoryCombinationId,
+        storeId,
+    }: {
+    columnsMetaForDataFetching: ColumnsMetaForDataFetching,
+    categoryCombinationId?: ?string,
+    storeId: string,
+}): Promise<ReduxAction<any, any>> => getEventListData(
+    buildQueryArgs(
+        queryArgsSource, {
+            columnsMetaForDataFetching,
+            storeId,
+            isInit: false,
+        }),
+    columnsMetaForDataFetching, categoryCombinationId)
+    .then(({ eventContainers, pagingData, request }) =>
+        updateListSuccess(storeId, {
+            recordContainers: eventContainers,
+            pagingData,
+            request,
+        }),
+    )
+    .catch((error) => {
+        log.error(errorCreator(errorMessages.WORKING_LIST_UPDATE_ERROR)({ error }));
+        return updateListError(storeId, errorMessages.WORKING_LIST_UPDATE_ERROR);
+    });

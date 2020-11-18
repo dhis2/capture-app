@@ -42,9 +42,6 @@ const styles = theme => ({
     },
     table: {},
     row: {},
-    dataRow: {
-        cursor: 'pointer',
-    },
     cell: {
         padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 7}px ${theme.spacing.unit /
             2}px ${theme.spacing.unit * 3}px`,
@@ -88,12 +85,10 @@ type Props = {
         bodyCell: string,
         footerCell: string,
         row: string,
-        dataRow: string,
     },
     rowIdKey: string,
     sortById: string,
     sortByDirection: string,
-    onRowClick: (rowData: {id: string}) => void,
     noItemsText: ?string,
 };
 
@@ -162,8 +157,7 @@ class Index extends Component<Props> {
     }
 
     renderRows(visibleColumns: Array<Column>) {
-        const dataSource = this.props.dataSource;
-        const classes = this.props.classes;
+        const { dataSource, classes, noItemsText, rowIdKey } = this.props;
 
         if (!dataSource || dataSource.length === 0) {
             const columnsCount = visibleColumns.length;
@@ -175,7 +169,7 @@ class Index extends Component<Props> {
                         colSpan={columnsCount}
                         className={classNames(classes.cell, classes.bodyCell)}
                     >
-                        {this.props.noItemsText || i18n.t('No items to display')}
+                        {noItemsText || i18n.t('No items to display')}
                     </Cell>
                 </Row>
             );
@@ -203,9 +197,8 @@ class Index extends Component<Props> {
 
                 return (
                     <Row
-                        key={row[this.props.rowIdKey]}
-                        className={classNames(classes.row, classes.dataRow)}
-                        onClick={() => this.props.onRowClick(row)}
+                        key={row[rowIdKey]}
+                        className={classes.row}
                     >
                         {cells}
                     </Row>
@@ -214,7 +207,7 @@ class Index extends Component<Props> {
     }
 
     render() {
-        const { dataSource, columns, classes } = this.props; //eslint-disable-line
+        const { columns, classes } = this.props;
 
         const visibleColumns = columns ?
             columns
@@ -245,9 +238,4 @@ class Index extends Component<Props> {
         );
     }
 }
-
-/**
- * Create the offline list
- * @namespace OfflineList
- */
 export const OfflineList = withStyles(styles)(Index);

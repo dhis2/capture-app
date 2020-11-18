@@ -9,21 +9,20 @@ import {
     deleteEventError,
     deleteEventSuccess,
 } from '../eventWorkingLists.actions';
+import { workingListsCommonActionTypes } from '../../WorkingListsCommon';
 import { initEventWorkingListAsync } from './initEventWorkingList';
 import { updateEventWorkingListAsync } from './updateEventWorkingList';
 import { getApi } from '../../../../../d2';
+import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 
-export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =>
+export const initEventListEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(
-            actionTypes.EVENT_LIST_INIT,
-        ),
+        ofType(workingListsCommonActionTypes.LIST_VIEW_INIT),
+        filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
-            const state = store.value;
-            const { programId, orgUnitId, categories } = state.currentSelections;
-            const lastTransaction = state.offline.lastTransaction;
-            const { selectedTemplate, defaultConfig, listId } = action.payload;
-            const eventQueryCriteria = selectedTemplate.nextEventQueryCriteria || selectedTemplate.eventQueryCriteria;
+            const { selectedTemplate, columnsMetaForDataFetching, categoryCombinationId, storeId } = action.payload;
+            const { programId, orgUnitId, categories, lastTransaction } = action.payload.context;
+            const eventQueryCriteria = selectedTemplate.nextCriteria || selectedTemplate.criteria;
             const initialPromise =
                 initEventWorkingListAsync(
                     eventQueryCriteria, {
@@ -32,41 +31,40 @@ export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =
                             orgUnitId,
                             categories,
                         },
-                        defaultSpecification: defaultConfig,
-                        listId,
+                        columnsMetaForDataFetching,
+                        categoryCombinationId,
+                        storeId,
                         lastTransaction,
                     });
             return from(initialPromise).pipe(
 
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.EVENT_LIST_INIT_CANCEL),
-                        filter(cancelAction => cancelAction.payload.listId === listId),
+                        ofType(workingListsCommonActionTypes.LIST_VIEW_INIT_CANCEL),
+                        filter(cancelAction => cancelAction.payload.storeId === storeId),
                     ),
                 ),
             );
         }));
 
-export const updateEventListEpic = (action$: InputObservable, store: ReduxStore) =>
+export const updateEventListEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(
-            actionTypes.EVENT_LIST_UPDATE,
-        ),
+        ofType(workingListsCommonActionTypes.LIST_UPDATE),
+        filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
-            const state = store.value;
-            const { listId, queryArgs } = action.payload;
-            const updatePromise = updateEventWorkingListAsync(listId, queryArgs, state);
+            const { queryArgs, columnsMetaForDataFetching, categoryCombinationId, storeId } = action.payload;
+            const updatePromise = updateEventWorkingListAsync(queryArgs, { columnsMetaForDataFetching, categoryCombinationId, storeId });
             return from(updatePromise).pipe(
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.EVENT_LIST_UPDATE_CANCEL),
-                        filter(cancelAction => cancelAction.payload.listId === listId),
+                        ofType(workingListsCommonActionTypes.LIST_UPDATE_CANCEL),
+                        filter(cancelAction => cancelAction.payload.storeId === storeId),
                     ),
                 ),
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.EVENT_LIST_INIT_CANCEL),
-                        filter(cancelAction => cancelAction.payload.listId === listId),
+                        ofType(workingListsCommonActionTypes.LIST_VIEW_INIT_CANCEL),
+                        filter(cancelAction => cancelAction.payload.storeId === storeId),
                     ),
                 ));
         }));
@@ -76,11 +74,10 @@ export const requestDeleteEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(actionTypes.EVENT_REQUEST_DELETE),
         concatMap((action) => {
-            const eventId = action.payload.eventId;
-            const listId = 'eventList';
+            const { eventId, storeId } = action.payload;
             const deletePromise = getApi()
                 .delete(`events/${eventId}`)
-                .then(() => deleteEventSuccess(eventId, listId))
+                .then(() => deleteEventSuccess(eventId, storeId))
                 .catch((error) => {
                     log.error(errorCreator('Could not delete event')({ error, eventId }));
                     return deleteEventError();
@@ -89,8 +86,8 @@ export const requestDeleteEventEpic = (action$: InputObservable) =>
             return from(deletePromise).pipe(
                 takeUntil(
                     action$.pipe(
-                        ofType(actionTypes.CONTEXT_UNLOADING),
-                        filter(cancelAction => cancelAction.payload.listId === listId),
+                        ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
+                        filter(cancelAction => cancelAction.payload.storeId === storeId),
                     ),
                 ));
         }),

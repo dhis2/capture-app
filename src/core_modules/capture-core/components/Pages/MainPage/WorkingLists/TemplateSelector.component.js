@@ -6,7 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import TemplateSelectorChip from './TemplateSelectorChip.component';
 import CaptureScrollHeight from './CaptureScrollHeight.component';
 import LinkButton from '../../../Buttons/LinkButton.component';
-import type { WorkingListTemplate } from './workingLists.types';
+import type { WorkingListTemplates } from './workingLists.types';
 
 const getBorder = (theme: Theme) => {
     const color = lighten(fade(theme.palette.divider, 1), 0.88);
@@ -50,7 +50,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    templates: Array<WorkingListTemplate>,
+    templates: WorkingListTemplates,
     currentTemplateId: string,
     currentListIsModified: boolean,
     onSelectTemplate: Function,

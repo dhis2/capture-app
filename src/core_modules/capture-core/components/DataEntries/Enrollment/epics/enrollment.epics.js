@@ -66,7 +66,7 @@ const runRulesOnEnrollmentUpdate =
 
         const currentTEIValues = getCurrentClientValues(state, foundation, formId, fieldData);
         const currentEnrollmentValues =
-            getCurrentClientMainData(state, itemId, dataEntryId, {}, foundation);
+            getCurrentClientMainData(state, itemId, dataEntryId, foundation);
 
         return runRulesOnUpdateFieldBatch(
             trackerProgram,
