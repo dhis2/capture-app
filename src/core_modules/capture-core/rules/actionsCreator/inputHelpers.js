@@ -81,7 +81,6 @@ export function getCurrentClientMainData(
     state: ReduxState,
     itemId: string,
     dataEntryId: string,
-    previousClientData: {[key: string]: any},
     foundation: RenderFoundation) {
     const dataEntryReduxKey = `${dataEntryId}-${itemId}`;
 
@@ -94,7 +93,6 @@ export function getCurrentClientMainData(
         convertDataEntryValuesToClientValues(
             validDataEntryValues,
             state.dataEntriesFieldsMeta[dataEntryReduxKey],
-            previousClientData,
             foundation,
         );
 

@@ -1,20 +1,19 @@
 // @flow
 import { createReducerDescription } from '../../../../trackerRedux/trackerReducer';
 import { workingListsCommonActionTypes } from '../../../../components/Pages/MainPage/WorkingListsCommon';
-import { eventWorkingListsActionTypes } from '../../../../components/Pages/MainPage/EventWorkingLists';
 import { recentlyAddedEventsActionTypes } from '../../../../components/Pages/NewEvent/RecentlyAddedEventsList';
 
 export const workingListsMetaDesc = createReducerDescription({
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
-        const { listId } = action.payload;
+    [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
+        const { storeId } = action.payload;
         return {
             ...state,
-            [listId]: undefined,
+            [storeId]: undefined,
         };
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const { listId, config, pagingData } = action.payload;
+        const { storeId, config, pagingData } = action.payload;
         const {
             filters,
             rowsPerPage,
@@ -28,7 +27,7 @@ export const workingListsMetaDesc = createReducerDescription({
             filters,
             sortById,
             sortByDirection,
-            visibleCustomColumnIds: customColumnOrder && customColumnOrder
+            customVisibleColumnIds: customColumnOrder && customColumnOrder
                 .map(spec => (spec.visible ? spec.id : null))
                 .filter(columnId => columnId),
         };
@@ -43,55 +42,55 @@ export const workingListsMetaDesc = createReducerDescription({
             initial,
             next: {},
         };
-        newState[listId] = listState;
+        newState[storeId] = listState;
 
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const { listId, pagingData } = action.payload;
-        const next = newState[listId].next;
-        newState[listId] = {
-            ...newState[listId],
+        const { storeId, pagingData } = action.payload;
+        const next = newState[storeId].next;
+        newState[storeId] = {
+            ...newState[storeId],
             ...next,
             ...pagingData,
             filters: {
-                ...newState[listId].filters,
-                ...newState[listId].next.filters,
+                ...newState[storeId].filters,
+                ...newState[storeId].next.filters,
             },
             next: {},
         };
         return newState;
     },
-    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_ERROR]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_UPDATE_ERROR]: (state, action) => {
         const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = {
-            ...newState[listId],
+        const storeId = action.payload.storeId;
+        newState[storeId] = {
+            ...newState[storeId],
             next: {},
         };
         return newState;
     },
-    [eventWorkingListsActionTypes.TEMPLATE_UPDATE]: (state, action) => {
-        const { visibleColumnIds, filters, sortById, sortByDirection, listId } = action.payload;
+    [workingListsCommonActionTypes.TEMPLATE_UPDATE]: (state, action) => {
+        const { visibleColumnIds, filters, sortById, sortByDirection, storeId } = action.payload;
 
         const nextInitial = {
             filters,
             sortById,
             sortByDirection,
-            visibleColumnIds,
+            customVisibleColumnIds: visibleColumnIds,
         };
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 nextInitial,
             },
         };
     },
-    [eventWorkingListsActionTypes.TEMPLATE_UPDATE_SUCCESS]: (state, action) => {
-        const { isActiveTemplate, listId } = action.payload;
+    [workingListsCommonActionTypes.TEMPLATE_UPDATE_SUCCESS]: (state, action) => {
+        const { isActiveTemplate, storeId } = action.payload;
 
         if (!isActiveTemplate) {
             return state;
@@ -99,15 +98,15 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
-                initial: state[listId].nextInitial,
+            [storeId]: {
+                ...state[storeId],
+                initial: state[storeId].nextInitial,
                 nextInitial: undefined,
             },
         };
     },
-    [eventWorkingListsActionTypes.TEMPLATE_UPDATE_ERROR]: (state, action) => {
-        const { isActiveTemplate, listId } = action.payload;
+    [workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR]: (state, action) => {
+        const { isActiveTemplate, storeId } = action.payload;
 
         if (!isActiveTemplate) {
             return state;
@@ -115,32 +114,33 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 nextInitial: undefined,
             },
         };
     },
-    [eventWorkingListsActionTypes.TEMPLATE_ADD]: (state, action) => {
-        const { visibleColumnIds, filters, sortById, sortByDirection, listId } = action.payload;
+    [workingListsCommonActionTypes.TEMPLATE_ADD]: (state, action) => {
+        const { visibleColumnIds, filters, sortById, sortByDirection, storeId } = action.payload;
 
         const nextInitial = {
             filters,
             sortById,
             sortByDirection,
-            visibleColumnIds,
+            customVisibleColumnIds: visibleColumnIds,
         };
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 nextInitial,
+                viewPreloaded: true,
             },
         };
     },
-    [eventWorkingListsActionTypes.TEMPLATE_ADD_SUCCESS]: (state, action) => {
-        const { isActiveTemplate, listId } = action.payload;
+    [workingListsCommonActionTypes.TEMPLATE_ADD_SUCCESS]: (state, action) => {
+        const { isActiveTemplate, storeId } = action.payload;
 
         if (!isActiveTemplate) {
             return state;
@@ -148,15 +148,15 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
-                initial: state[listId].nextInitial,
+            [storeId]: {
+                ...state[storeId],
+                initial: state[storeId].nextInitial,
                 nextInitial: undefined,
             },
         };
     },
-    [eventWorkingListsActionTypes.TEMPLATE_ADD_ERROR]: (state, action) => {
-        const { isActiveTemplate, listId } = action.payload;
+    [workingListsCommonActionTypes.TEMPLATE_ADD_ERROR]: (state, action) => {
+        const { isActiveTemplate, storeId } = action.payload;
 
         if (!isActiveTemplate) {
             return state;
@@ -164,19 +164,29 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 nextInitial: undefined,
+            },
+        };
+    },
+    [workingListsCommonActionTypes.TEMPLATE_SELECT]: (state, action) => {
+        const { storeId } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                viewPreloaded: false,
             },
         };
     },
     [workingListsCommonActionTypes.PAGE_CHANGE]: (state, action) => {
         const newState = { ...state };
-        const { pageNumber, listId } = action.payload;
-        newState[listId] = {
-            ...newState[listId],
+        const { pageNumber, storeId } = action.payload;
+        newState[storeId] = {
+            ...newState[storeId],
             next: {
-                ...newState[listId].next,
+                ...newState[storeId].next,
                 currentPage: pageNumber,
             },
         };
@@ -184,11 +194,11 @@ export const workingListsMetaDesc = createReducerDescription({
     },
     [workingListsCommonActionTypes.LIST_SORT]: (state, action) => {
         const newState = { ...state };
-        const { listId, id, direction } = action.payload;
-        newState[listId] = {
-            ...newState[listId],
+        const { storeId, id, direction } = action.payload;
+        newState[storeId] = {
+            ...newState[storeId],
             next: {
-                ...newState[listId].next,
+                ...newState[storeId].next,
                 sortById: id,
                 sortByDirection: direction,
                 currentPage: 1,
@@ -198,11 +208,11 @@ export const workingListsMetaDesc = createReducerDescription({
     },
     [workingListsCommonActionTypes.ROWS_PER_PAGE_CHANGE]: (state, action) => {
         const newState = { ...state };
-        const { rowsPerPage, listId } = action.payload;
-        newState[listId] = {
-            ...newState[listId],
+        const { rowsPerPage, storeId } = action.payload;
+        newState[storeId] = {
+            ...newState[storeId],
             next: {
-                ...newState[listId].next,
+                ...newState[storeId].next,
                 rowsPerPage,
                 currentPage: 1,
             },
@@ -210,15 +220,15 @@ export const workingListsMetaDesc = createReducerDescription({
         return newState;
     },
     [workingListsCommonActionTypes.FILTER_SET]: (state, action) => {
-        const { filter, listId, itemId } = action.payload;
+        const { filter, storeId, itemId } = action.payload;
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 next: {
-                    ...state[listId].next,
+                    ...state[storeId].next,
                     filters: {
-                        ...(state[listId].next && state[listId].next.filters),
+                        ...(state[storeId].next && state[storeId].next.filters),
                         [itemId]: filter,
                     },
                     currentPage: 1,
@@ -227,15 +237,15 @@ export const workingListsMetaDesc = createReducerDescription({
         };
     },
     [workingListsCommonActionTypes.FILTER_CLEAR]: (state, action) => {
-        const { itemId, listId } = action.payload;
+        const { itemId, storeId } = action.payload;
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 next: {
-                    ...state[listId].next,
+                    ...state[storeId].next,
                     filters: {
-                        ...(state[listId].next && state[listId].next.filters),
+                        ...(state[storeId].next && state[storeId].next.filters),
                         [itemId]: null,
                     },
                     currentPage: 1,

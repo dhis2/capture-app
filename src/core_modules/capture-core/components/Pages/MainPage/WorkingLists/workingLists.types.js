@@ -1,103 +1,194 @@
 // @flow
-import { type OptionSet, dataElementTypes } from '../../../../metaData';
-import type { CustomMenuContents, CustomRowMenuContents, FiltersData, StickyFilters } from '../../../ListView';
+import { dataElementTypes } from '../../../../metaData';
+import type {
+    CustomMenuContents,
+    CustomRowMenuContents,
+    DataSource,
+    FiltersData,
+    StickyFilters,
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
+    UpdateFilter,
+    SelectRestMenuItem,
+    SetColumnOrder,
+    SelectRow,
+    Sort,
+} from '../../../ListView';
 
-export type WorkingListTemplate = {|
+export type WorkingListTemplate = {
     id: string,
     isDefault?: ?boolean,
     name: string,
-    displayName: string,
-    filters: Object,
     access: {
-        read: boolean,
         update: boolean,
         delete: boolean,
         write: boolean,
         manage: boolean,
     },
-    notPreserved?: ?boolean,
-|};
+    notPreserved?: boolean,
+    updating?: boolean,
+    deleted?: boolean,
+    skipInitDuringAddProcedure?: boolean,
+};
 
-type ColumnConfigBase = {|
+export type WorkingListTemplates = Array<WorkingListTemplate>;
+
+export type ColumnConfig = {
     id: string,
     visible: boolean,
     type: $Values<typeof dataElementTypes>,
     header: string,
-|};
-export type MetadataColumnConfig = {|
-    ...ColumnConfigBase,
-    optionSet?: ?OptionSet,
-|};
-
-export type MainColumnConfig = {|
-    ...ColumnConfigBase,
-    isMainProperty: true,
     options?: ?Array<{text: string, value: any}>,
-    singleSelect?: boolean,
-    apiName?: string,
-|};
-
-export type ColumnConfig = MetadataColumnConfig | MainColumnConfig;
+    multiValueFilter?: boolean,
+};
 
 export type ColumnConfigs = Array<ColumnConfig>;
 
-export type DataSource = { [id: string]: Object };
-
 export type ColumnOrder = Array<{ id: string, visible: boolean }>;
 
-export type ListViewUpdaterContextData = {
+export type LoadedContext = {|
+    programIdTemplates?: string,
+    programIdView?: string,
+    orgUnitId?: string,
+    categories?: Object,
+|};
+
+export type LoadedViewContext = {|
+    programId?: string,
+    orgUnitId?: string,
+    categories?: Object,
+|};
+
+export type Categories = { [id: string]: string };
+
+export type AddTemplate = (name: string, template: WorkingListTemplate) => void;
+export type CancelLoadView = () => void;
+export type CancelLoadTemplates = () => void;
+export type CancelUpdateList = () => void;
+export type DeleteTemplate = (template: WorkingListTemplate) => void;
+export type LoadView = (
+    template: WorkingListTemplate,
+    meta: {| programId: string, orgUnitId: string, categories?: Categories |}) => void;
+export type LoadTemplates = (programId: string) => void;
+export type SelectTemplate = (templateId: string) => void;
+export type UnloadingContext = () => void;
+export type UpdateTemplate = (template: WorkingListTemplate) => void;
+export type UpdateList = (data: {
+    filters?: FiltersData,
+    sortById?: string,
+    sortByDirection?: string,
+    currentPage: number,
+    rowsPerPage: number,
+    programId: string,
+    orgUnitId: string,
+    categories?: Categories,
+    lastIdDeleted?: string,
+}) => void;
+
+export type ManagerContextData = {|
+    currentTemplate?: WorkingListTemplate,
+    onSelectTemplate: SelectTemplate,
+|};
+
+export type ListViewConfigContextData = {|
+    currentViewHasTemplateChanges?: boolean,
+    onAddTemplate: AddTemplate,
+    onUpdateTemplate: UpdateTemplate,
+    onDeleteTemplate: DeleteTemplate,
+|};
+
+export type ListViewLoaderContextData = {|
+    sortById?: string,
+    sortByDirection?: string,
+    filters?: FiltersData,
+    columns: ColumnConfigs,
+    loading: boolean,
+    onLoadView: LoadView,
+    loadViewError?: string,
+    onUpdateList: UpdateList,
+    onCancelLoadView?: CancelLoadView,
+    orgUnitId: string,
+    categories?: Categories,
+    dirtyView: boolean,
+    loadedViewContext: LoadedViewContext,
+    viewPreloaded?: boolean,
+|};
+
+export type ListViewUpdaterContextData = {|
     currentPage?: number,
     rowsPerPage?: number,
-};
+    onCancelUpdateList?: Function,
+    customUpdateTrigger?: any,
+    forceUpdateOnMount?: boolean,
+    dirtyList: boolean,
+|};
+
+export type ListViewBuilderContextData = {|
+    updating: boolean,
+    updatingWithDialog: boolean,
+    dataSource?: DataSource,
+    onSelectListRow: SelectRow,
+    onSortList: Sort,
+    onSetListColumnOrder: SetColumnOrder,
+    customRowMenuContents?: CustomRowMenuContents,
+    onUpdateFilter: UpdateFilter,
+    onClearFilter: ClearFilter,
+    onSelectRestMenuItem: SelectRestMenuItem,
+    onChangePage: ChangePage,
+    onChangeRowsPerPage: ChangeRowsPerPage,
+    stickyFilters?: StickyFilters,
+    rowsCount?: number,
+|};
 
 export type InterfaceProps = $ReadOnly<{|
-    categories?: Object,
+    categories?: Categories,
     columns: ColumnConfigs,
     currentPage?: number,
     currentTemplate?: WorkingListTemplate,
     currentViewHasTemplateChanges?: boolean,
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
-    dataSource: DataSource,
+    customUpdateTrigger?: any,
+    dataSource?: DataSource,
     filters?: FiltersData,
-    isLoading: boolean,
-    isUpdating: boolean,
-    isUpdatingWithDialog: boolean,
-    lastEventIdDeleted?: string,
-    lastTransaction: number,
-    listContext: Object,
-    loadEventListError?: string,
+    forceUpdateOnMount?: boolean,
+    loadedContext?: LoadedContext,
+    loading: boolean,
+    loadViewError?: string,
     loadTemplatesError?: string,
-    onAddTemplate: Function,
-    onCancelLoadEventList: Function,
-    onCancelLoadTemplates: Function,
-    onCancelUpdateEventList: Function,
-    onChangePage: Function,
-    onChangeRowsPerPage: Function,
-    onCheckSkipReload: Function, // TODO: Break this down
-    onCleanSkipInitAddingTemplate: Function, // TODO: Break this down
-    onClearFilter: Function,
-    onDeleteTemplate: Function,
-    onFilterUpdate: Function,
-    onListRowSelect: Function,
-    onLoadEventList: Function,
-    onLoadTemplates: Function,
-    onRestMenuItemSelected: Function,
-    onSelectTemplate: Function,
-    onSetListColumnOrder: Function,
-    onSortList: Function,
-    onUnloadingContext: Function,
-    onUpdateTemplate: Function,
+    onAddTemplate: AddTemplate,
+    onCancelLoadView?: CancelLoadView,
+    onCancelLoadTemplates?: CancelLoadTemplates,
+    onCancelUpdateList?: CancelUpdateList,
+    onChangePage: ChangePage,
+    onChangeRowsPerPage: ChangeRowsPerPage,
+    onClearFilter: ClearFilter,
+    onDeleteTemplate: DeleteTemplate,
+    onLoadView: LoadView,
+    onLoadTemplates: LoadTemplates,
+    onSelectListRow: SelectRow,
+    onSelectRestMenuItem: SelectRestMenuItem,
+    onSelectTemplate: SelectTemplate,
+    onSetListColumnOrder: SetColumnOrder,
+    onSortList: Sort,
+    onUnloadingContext?: UnloadingContext,
+    onUpdateFilter: UpdateFilter,
+    onUpdateList: UpdateList,
+    onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     programId: string,
-    recordsOrder?: Array<string>,
     rowIdKey: string,
     rowsCount?: number,
     rowsPerPage?: number,
     sortByDirection?: string,
     sortById?: string,
     stickyFilters?: StickyFilters,
-    templates?: Array<WorkingListTemplate>,
-    templatesAreLoading: boolean,
-    templatesForPogramId: string, // TODO: Break this down
+    templates?: WorkingListTemplates,
+    templatesLoading: boolean,
+    updating: boolean,
+    updatingWithDialog: boolean,
+    viewPreloaded?: boolean,
 |}>;
+
+export type WorkingListsOutputProps = InterfaceProps;

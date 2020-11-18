@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import D2TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
-import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
+import { orientations } from '../../FormFields/Options/SelectBoxes';  // TODO: Refactor
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 

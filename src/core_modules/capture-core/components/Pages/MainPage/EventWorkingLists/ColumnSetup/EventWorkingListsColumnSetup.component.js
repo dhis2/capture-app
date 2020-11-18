@@ -1,61 +1,41 @@
 // @flow
-import React, { useMemo, useCallback } from 'react';
-import { useDefaultColumnConfig } from './defaultColumnConfiguration';
-import { shouldSkipReload } from './skipReloadCalculator';
+import React, { useCallback } from 'react';
+import { useDefaultColumnConfig, useColumns } from '../../EventWorkingListsCommon';
 import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
 import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
 
-const useInjectColumnMetaToLoadList = (defaultColumns, onLoadEventList) =>
+const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView) =>
     useCallback((selectedTemplate: Object, context: Object, meta: Object) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
-        onLoadEventList(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
-    }, [onLoadEventList, defaultColumns]);
+        onLoadView(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
+    }, [onLoadView, defaultColumns]);
 
-const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateEventList) =>
-    useCallback((queryArgs: Object) => {
+const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
+    useCallback((queryArgs: Object, lastTransaction: number) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
-        onUpdateEventList(queryArgs, columnsMetaForDataFetching);
-    }, [onUpdateEventList, defaultColumns]);
-
-const useColumns = (customColumnOrder, defaultColumns) => {
-    const defaultColumnsAsObject = useMemo(() =>
-        defaultColumns
-            .reduce((acc, column) => ({ ...acc, [column.id]: column }), {}),
-    [defaultColumns]);
-
-    return useMemo(() => {
-        if (!customColumnOrder) {
-            return defaultColumns;
-        }
-
-        return customColumnOrder
-            .map(({ id, visible }) => ({
-                ...defaultColumnsAsObject[id],
-                visible,
-            }));
-    }, [customColumnOrder, defaultColumns, defaultColumnsAsObject]);
-};
+        onUpdateList(queryArgs, lastTransaction, columnsMetaForDataFetching);
+    }, [onUpdateList, defaultColumns]);
 
 export const EventWorkingListsColumnSetup = ({
     program,
     customColumnOrder,
-    onLoadEventList,
-    onUpdateEventList,
+    onLoadView,
+    onUpdateList,
     ...passOnProps
 }: Props) => {
     const defaultColumns = useDefaultColumnConfig(program);
 
-    const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadEventList);
-    const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateEventList);
+    const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView);
+    const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateList);
 
     const columns = useColumns(customColumnOrder, defaultColumns);
 
@@ -65,9 +45,8 @@ export const EventWorkingListsColumnSetup = ({
             program={program}
             columns={columns}
             defaultColumns={defaultColumns}
-            onCheckSkipReload={shouldSkipReload}
-            onLoadEventList={injectColumnMetaToLoadList}
-            onUpdateEventList={injectColumnMetaToUpdateList}
+            onLoadView={injectColumnMetaToLoadList}
+            onUpdateList={injectColumnMetaToUpdateList}
         />
     );
 };

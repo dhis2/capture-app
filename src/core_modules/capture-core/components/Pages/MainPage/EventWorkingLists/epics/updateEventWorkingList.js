@@ -1,11 +1,11 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getEventWorkingListDataAsync } from './eventsRetriever';
+import { getEventListData } from './getEventListData';
 import {
-    updateEventListSuccess,
-    updateEventListError,
-} from '../eventWorkingLists.actions';
+    updateListSuccess,
+    updateListError,
+} from '../../WorkingListsCommon';
 import { buildQueryArgs } from '../helpers/eventsQueryArgsBuilder';
 import type { ColumnsMetaForDataFetching } from '../types';
 
@@ -17,24 +17,28 @@ const errorMessages = {
 export const updateEventWorkingListAsync = (
     queryArgsSource: Object, {
         columnsMetaForDataFetching,
-        categoryCombinationMeta,
-        listId,
+        categoryCombinationId,
+        storeId,
     }: {
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-    categoryCombinationMeta: Object,
-    listId: string,
-}): Promise<ReduxAction<any, any>> => getEventWorkingListDataAsync(
+    categoryCombinationId?: ?string,
+    storeId: string,
+}): Promise<ReduxAction<any, any>> => getEventListData(
     buildQueryArgs(
         queryArgsSource, {
             columnsMetaForDataFetching,
-            listId,
+            storeId,
             isInit: false,
         }),
-    columnsMetaForDataFetching, categoryCombinationMeta)
-    .then(data =>
-        updateEventListSuccess(listId, data),
+    columnsMetaForDataFetching, categoryCombinationId)
+    .then(({ eventContainers, pagingData, request }) =>
+        updateListSuccess(storeId, {
+            recordContainers: eventContainers,
+            pagingData,
+            request,
+        }),
     )
     .catch((error) => {
         log.error(errorCreator(errorMessages.WORKING_LIST_UPDATE_ERROR)({ error }));
-        return updateEventListError(listId, errorMessages.WORKING_LIST_UPDATE_ERROR);
+        return updateListError(storeId, errorMessages.WORKING_LIST_UPDATE_ERROR);
     });

@@ -45,7 +45,7 @@ function convertFilter(
     type: string,
     meta: {
         key: string,
-        listId: string,
+        storeId: string,
         isInit: boolean,
     },
 ) {
@@ -54,7 +54,7 @@ function convertFilter(
         return convertOptionSet(sourceValue, type);
     }
     return mappersForTypes[type] ?
-        mappersForTypes[type](sourceValue, meta.key, meta.listId, meta.isInit) :
+        mappersForTypes[type](sourceValue, meta.key, meta.storeId, meta.isInit) :
         sourceValue;
 }
 
@@ -62,11 +62,11 @@ function convertFilters(
     filters: Object,
     {
         columnsMetaForDataFetching,
-        listId,
+        storeId,
         isInit,
     }: {
         columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-        listId: string,
+        storeId: string,
         isInit: boolean,
     },
 ) {
@@ -76,7 +76,7 @@ function convertFilters(
         .reduce((acc, key) => {
             const column = columnsMetaForDataFetching.get(key);
             if (!column) {
-                log.error(errorCreator('Could not get type for key')({ key, listId }));
+                log.error(errorCreator('Could not get type for key')({ key, storeId }));
             } else {
                 const sourceValue = filters[key];
                 const queryArgValue = convertFilter(
@@ -84,7 +84,7 @@ function convertFilters(
                     column.type,
                     {
                         key,
-                        listId,
+                        storeId,
                         isInit,
                     });
                 acc[key] = queryArgValue;
@@ -98,11 +98,11 @@ export function buildQueryArgs(
     queryArgsSource: QueryArgsSource,
     {
         columnsMetaForDataFetching,
-        listId,
+        storeId,
         isInit = false,
     }: {
         columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-        listId: string,
+        storeId: string,
         isInit: boolean,
     },
 ) {
@@ -113,7 +113,7 @@ export function buildQueryArgs(
             filters,
             {
                 columnsMetaForDataFetching,
-                listId,
+                storeId,
                 isInit,
             },
         ),

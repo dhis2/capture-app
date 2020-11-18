@@ -6,9 +6,9 @@ import ArrowDownwardIcon from '@material-ui/icons/KeyboardArrowDown';
 import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Button } from '../../../Buttons';
 import ActiveFilterButton from './ActiveFilterButton.component';
-import FilterSelectorContents from '../Contents/FilterSelectorContents.component';
-import type { OptionSet } from '../../../../metaData';
-import type { FilterData } from '../../../FiltersForTypes';
+import { FilterSelectorContents } from '../Contents';
+import type { UpdateFilter, ClearFilter } from '../../types';
+import type { FilterData, Options } from '../../../FiltersForTypes';
 
 const getStyles = (theme: Theme) => ({
     icon: {
@@ -35,18 +35,18 @@ const POPOVER_TRANSFORM_ORIGIN = {
 type Props = {
     itemId: string,
     type: string,
-    optionSet?: ?OptionSet,
-    singleSelect?: ?boolean,
+    options?: ?Options,
+    multiValueFilter?: boolean,
     title: string,
     classes: {
         icon: string,
         inactiveFilterButton: string,
         inactiveFilterButtonLabel: string,
     },
-    onFilterUpdate: (data: ?Object, itemId: string, commitValue?: any) => void,
-    onClearFilter: (itemId: string) => void,
+    onUpdateFilter: UpdateFilter,
+    onClearFilter: ClearFilter,
     onSetVisibleSelector: Function,
-    isSelectorVisible: boolean,
+    selectorVisible: boolean,
     filterValue?: FilterData,
     buttonText?: string,
 };
@@ -88,11 +88,11 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     handleFilterUpdate = (data: ?FilterData) => {
-        const { itemId, onFilterUpdate, onClearFilter } = this.props;
+        const { itemId, onUpdateFilter, onClearFilter } = this.props;
         if (data == null) {
             onClearFilter(itemId);
         } else {
-            onFilterUpdate(data, itemId);
+            onUpdateFilter(data, itemId);
         }
         this.closeFilterSelector();
     }
@@ -103,13 +103,13 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderSelectorContents() {
-        const { itemId: id, type, optionSet, singleSelect, filterValue } = this.props;
+        const { itemId: id, type, options, multiValueFilter, filterValue } = this.props;
 
         return (
             <FilterSelectorContents
                 type={type}
-                optionSet={optionSet}
-                singleSelect={singleSelect}
+                options={options}
+                multiValueFilter={multiValueFilter}
                 id={id}
                 onUpdate={this.handleFilterUpdate}
                 onClose={this.closeFilterSelector}
@@ -123,9 +123,9 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderWithAppliedFilter() {
-        const { isSelectorVisible, classes, title, buttonText } = this.props;
+        const { selectorVisible, classes, title, buttonText } = this.props;
 
-        const arrowIconElement = isSelectorVisible ?
+        const arrowIconElement = selectorVisible ?
             <ArrowUpwardIcon className={classes.icon} /> :
             <ArrowDownwardIcon className={classes.icon} />;
 
@@ -143,14 +143,14 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     renderWithoutAppliedFilter() {
-        const { isSelectorVisible, classes, title } = this.props;
+        const { selectorVisible, classes, title } = this.props;
 
         return (
             <Button
                 onClick={this.openFilterSelector}
             >
                 {title}
-                {isSelectorVisible ?
+                {selectorVisible ?
                     <ArrowUpwardIcon className={classes.icon} /> :
                     <ArrowDownwardIcon className={classes.icon} />
                 }
@@ -159,7 +159,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
     }
 
     render() {
-        const { filterValue, isSelectorVisible } = this.props;
+        const { filterValue, selectorVisible } = this.props;
         const { isMounted } = this.state;
 
         const button = filterValue ? this.renderWithAppliedFilter() : this.renderWithoutAppliedFilter();
@@ -173,7 +173,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                     {button}
                 </div>
                 <Popover
-                    open={isSelectorVisible && isMounted}
+                    open={selectorVisible && isMounted}
                     anchorEl={this.anchorRef.current}
                     onClose={this.closeFilterSelector}
                     anchorOrigin={POPOVER_ANCHOR_ORIGIN}
@@ -181,7 +181,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 >
                     {
                         (() => {
-                            if (isSelectorVisible) {
+                            if (selectorVisible) {
                                 return this.renderSelectorContents();
                             }
                             return null;

@@ -1,17 +1,13 @@
 // @flow
 /* eslint-disable react/no-array-index-key */
-import React, { Component } from 'react';
+import React, { Component, type ComponentType } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
-
-import { orientations } from './multiSelectBoxes.const';
-
-import OptionSet from '../../../../metaData/OptionSet/OptionSet';
-import Option from '../../../../metaData/OptionSet/Option';
+import { multiOrientations } from './multiSelectBoxes.const';
 
 const styles = theme => ({
     label: theme.typography.formFieldTitle,
@@ -19,10 +15,10 @@ const styles = theme => ({
 
 type Props = {
     onBlur: (value: any) => void,
-    optionSet?: ?OptionSet,
+    options: Array<{text: string, value: any}>,
     label?: string,
     value?: any,
-    orientation?: ?$Values<typeof orientations>,
+    orientation?: ?$Values<typeof multiOrientations>,
     required?: ?boolean,
     classes: {
         label: string,
@@ -31,7 +27,7 @@ type Props = {
     passOnClasses?: ?Object,
 };
 
-class MultiSelectBoxes extends Component<Props> {
+class MultiSelectBoxesPlain extends Component<Props> {
     handleOptionChange: (e: Object, isChecked: boolean, value: any) => void;
     materialUIContainerInstance: any;
     checkedValues: ?Set<any>;
@@ -51,25 +47,22 @@ class MultiSelectBoxes extends Component<Props> {
     }
 
     getBoxes(passOnProps: Object) {
-        const optionSet = this.props.optionSet;
-        if (optionSet) {
-            return optionSet.options.map((o: Option, index: number) => (
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            onChange={
-                                (e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, o.value); }
-                            }
-                            checked={this.isChecked(o.value)}
-                            {...passOnProps}
-                        />
-                    }
-                    label={o.text}
-                    key={index}
-                />
-            ));
-        }
-        return null;
+        const { options } = this.props;
+        return options.map(({ text, value }, index: number) => (
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        onChange={
+                            (e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, value); }
+                        }
+                        checked={this.isChecked(value)}
+                        {...passOnProps}
+                    />
+                }
+                label={text}
+                key={index}
+            />
+        ));
     }
 
     handleOptionChange(e: Object, isChecked: boolean, value: any) {
@@ -135,11 +128,11 @@ class MultiSelectBoxes extends Component<Props> {
 
     renderCheckboxes(passOnProps: Object) {
         const orientation = this.props.orientation;
-        return orientation === orientations.VERTICAL ? this.renderVertical(passOnProps) : this.renderHorizontal(passOnProps);
+        return orientation === multiOrientations.VERTICAL ? this.renderVertical(passOnProps) : this.renderHorizontal(passOnProps);
     }
 
     render() {
-        const { onBlur, optionSet, label, value, orientation, required, classes, style, passOnClasses, ...passOnProps } = this.props;  // eslint-disable-line no-unused-vars
+        const { onBlur, options, label, value, orientation, required, classes, style, passOnClasses, ...passOnProps } = this.props;  // eslint-disable-line no-unused-vars
 
         this.setCheckedStatusForBoxes();
 
@@ -171,4 +164,4 @@ class MultiSelectBoxes extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(MultiSelectBoxes);
+export const MultiSelectBoxes: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(MultiSelectBoxesPlain);

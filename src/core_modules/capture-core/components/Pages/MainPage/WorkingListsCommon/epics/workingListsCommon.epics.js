@@ -9,17 +9,17 @@ export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObse
         // eslint-disable-next-line complexity
         map((action) => {
             const state = store.value;
-            const { listId } = action.payload;
+            const { storeId } = action.payload;
 
             const appliedFilters = (
                 state.workingListsMeta &&
-                state.workingListsMeta[listId] &&
-                state.workingListsMeta[listId].filters) || {};
+                state.workingListsMeta[storeId] &&
+                state.workingListsMeta[storeId].filters) || {};
             const nextAppliedFilters = (
                 state.workingListsMeta &&
-                state.workingListsMeta[listId] &&
-                state.workingListsMeta[listId].next &&
-                state.workingListsMeta[listId].next.filters) || {};
+                state.workingListsMeta[storeId] &&
+                state.workingListsMeta[storeId].next &&
+                state.workingListsMeta[storeId].next.filters) || {};
 
             const nextAppliedFiltersNoUndefined =
                 Object
@@ -46,5 +46,5 @@ export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObse
                         return acc;
                     }, {});
 
-            return setStickyFiltersAfterColumnSorting(filtersToInclude, listId);
+            return setStickyFiltersAfterColumnSorting(filtersToInclude, storeId);
         }));

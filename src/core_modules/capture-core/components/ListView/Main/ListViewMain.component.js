@@ -8,7 +8,7 @@ import { withEndColumnMenu } from '../withEndColumnMenu';
 import DialogLoadingMask from '../../LoadingMasks/DialogLoadingMask.component';
 import { OnlineList } from '../../List';
 import { ListViewMenu } from '../Menu';
-import type { Columns, DataSource } from '../types';
+import type { Props } from './listViewMain.types';
 
 const ListWithEndColumnMenu = withEndColumnMenu()(OnlineList);
 
@@ -35,17 +35,6 @@ const getStyles = (theme: Theme) => ({
         justifyContent: 'flex-end',
     },
 });
-
-type Props = {
-    dataSource: DataSource,
-    columns: Columns,
-    classes: Object,
-    filters: React.Node,
-    isUpdatingWithDialog?: ?boolean,
-    onSetColumnOrder: Function,
-    rowIdKey: string,
-    customMenuContents?: Array<Object>,
-};
 
 class ListViewMainPlain extends React.PureComponent<Props> {
     renderTopBar = () => {
@@ -89,12 +78,14 @@ class ListViewMainPlain extends React.PureComponent<Props> {
         const {
             classes,
             filters,
-            isUpdatingWithDialog,
+            updatingWithDialog,
+            onSelectRow,
             ...passOnProps
         } = this.props;
         return (
             <ListWithEndColumnMenu
                 {...passOnProps}
+                onRowClick={onSelectRow}  // TODO: Fix row click naming for the online and offline list
             />
         );
     }
@@ -105,7 +96,7 @@ class ListViewMainPlain extends React.PureComponent<Props> {
                 {this.renderTopBar()}
                 {this.renderList()}
                 {this.renderPager()}
-                {this.props.isUpdatingWithDialog && <DialogLoadingMask />}
+                {this.props.updatingWithDialog && <DialogLoadingMask />}
             </div>
         );
     }
