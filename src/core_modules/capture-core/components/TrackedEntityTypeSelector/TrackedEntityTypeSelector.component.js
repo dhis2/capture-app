@@ -1,7 +1,5 @@
 // @flow
 import React, { useMemo, type ComponentType } from 'react';
-import { useHistory } from 'react-router';
-import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
@@ -14,7 +12,6 @@ import {
 import type { OwnProps, Props } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
-import { urlThreeArguments } from '../../utils/url';
 
 const styles = ({ typography }) => ({
     searchDomainSelectorSection: {
@@ -64,13 +61,10 @@ const InfoOutlinedIconWithStyles = withStyles({
 
 export const Index =
   ({ classes, onSelect, selectedSearchScopeId }: Props) => {
-      const { push } = useHistory();
-      const orgUnitId: string = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
       const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
 
       const handleSelectionChange = ({ selected }) => {
           onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE);
-          push(urlThreeArguments({ orgUnitId, trackedEntityTypeId: selected }));
       };
 
       return (<>
