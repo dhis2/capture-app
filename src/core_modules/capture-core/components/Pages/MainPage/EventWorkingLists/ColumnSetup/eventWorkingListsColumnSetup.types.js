@@ -1,8 +1,8 @@
 // @flow
 import type { EventProgram } from '../../../../../metaData';
+import type { CustomColumnOrder } from '../../WorkingListsCommon';
+import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { EventWorkingListsReduxOutputProps } from '../Redux';
-import type { ColumnConfigs } from '../../WorkingLists';
-import type { CustomColumnOrder } from '../types';
 
 type ExtractedProps = {|
     program: EventProgram,
@@ -25,8 +25,8 @@ export type Props = {|
 export type EventWorkingListsColumnSetupOutputProps = {|
     ...RestProps,
     program: EventProgram,
-    columns: ColumnConfigs,
-    defaultColumns: ColumnConfigs,
+    columns: EventWorkingListsColumnConfigs,
+    defaultColumns: EventWorkingListsColumnConfigs,
     onLoadView: Function,
     onUpdateList: Function,
 |};

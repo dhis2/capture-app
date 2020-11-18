@@ -5,34 +5,8 @@ import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/
 import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { workingListsCommonActionTypes } from '../../components/Pages/MainPage/WorkingListsCommon';
-
-const getFromWorkingListRetrieval = (eventContainers, containerProperty) => {
-    if (!eventContainers || eventContainers.length === 0) {
-        return {};
-    }
-
-    const byId = eventContainers.reduce((accById, eventContainer) => {
-        accById[eventContainer.id] = eventContainer[containerProperty];
-        return accById;
-    }, {});
-
-    return byId;
-};
 
 export const eventsDesc = createReducerDescription({
-    [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {  // TODO: Move to common state container in later PR
-        const eventContainers = action.payload.eventContainers;
-        const newEventsById = getFromWorkingListRetrieval(eventContainers, 'event');
-        const newState = { ...newEventsById };
-        return newState;
-    },
-    [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => { // TODO: Move to common state container in later PR
-        const eventContainers = action.payload.eventContainers;
-        const newEventsById = getFromWorkingListRetrieval(eventContainers, 'event');
-        const newState = { ...newEventsById };
-        return newState;
-    },
     [enrollmentActionTypes.ENROLLMENT_LOADED]: (state, action) => {
         const eventContainers = action.payload;
         if (!eventContainers || eventContainers.length === 0) {
@@ -91,22 +65,9 @@ export const eventsDesc = createReducerDescription({
         }
         return newState;
     },
-
 }, 'events', {});
 
 export const eventsValuesDesc = createReducerDescription({
-    [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => { // TODO: Move to common state container in later PR
-        const eventContainers = action.payload.eventContainers;
-        const newEventsValuesById = getFromWorkingListRetrieval(eventContainers, 'values');
-        const newState = { ...newEventsValuesById };
-        return newState;
-    },
-    [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => { // TODO: Move to common state container in later PR
-        const eventContainers = action.payload.eventContainers;
-        const newEventsValuesById = getFromWorkingListRetrieval(eventContainers, 'values');
-        const newState = { ...newEventsValuesById };
-        return newState;
-    },
     [enrollmentActionTypes.ENROLLMENT_LOADED]: (state, action) => {
         const eventContainers = action.payload;
         if (!eventContainers || eventContainers.length === 0) {

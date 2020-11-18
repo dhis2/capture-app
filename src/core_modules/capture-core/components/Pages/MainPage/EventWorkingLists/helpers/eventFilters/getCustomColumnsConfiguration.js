@@ -1,7 +1,8 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import type { ColumnsMetaForDataFetching, CustomColumnOrder } from '../../types';
+import type { CustomColumnOrder } from '../../../WorkingListsCommon';
+import type { ColumnsMetaForDataFetching } from '../../types';
 
 const buildCustomColumnsConfiguration = (
     customApiOrder: Array<string>,

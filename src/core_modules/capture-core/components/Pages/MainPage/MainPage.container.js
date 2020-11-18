@@ -5,8 +5,9 @@ import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
 const mapStateToProps = (state: ReduxState) => ({
     currentSelectionsComplete: !!state.currentSelections.complete,
-    error: state.activePage.selectionsError && state.activePage.selectionsError.error,
-    ready: !state.activePage.isPageLoading,
+    programId: state.currentSelections.programId,
+    error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
+    ready: !state.activePage.isPageLoading,  // TODO: Should probably remove this
 });
 
 // $FlowFixMe[missing-annot] automated comment

@@ -1,8 +1,6 @@
 // @flow
 import { typeof dataElementTypes } from '../../../../../metaData';
-
-export type EventsMainProperties = { [eventId: string]: Object, eventId: string };
-export type EventsDataElementValues = { [eventId: string]: Object};
+import type { CustomColumnOrder } from '../../WorkingListsCommon';
 
 export type ColumnMetaForDataFetching = {|
     id: string,
@@ -12,8 +10,6 @@ export type ColumnMetaForDataFetching = {|
 |};
 
 export type ColumnsMetaForDataFetching = Map<string, ColumnMetaForDataFetching>;
-
-export type CustomColumnOrder = Array<{| id: string, visible: string |}>;
 
 export type ClientConfig = {|
     filters: { [id: string]: any },

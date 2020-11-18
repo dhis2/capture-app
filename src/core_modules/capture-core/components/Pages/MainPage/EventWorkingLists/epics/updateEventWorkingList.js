@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getEventWorkingListDataAsync } from './eventsRetriever';
+import { getEventListData } from './getEventListData';
 import {
     updateListSuccess,
     updateListError,
@@ -17,22 +17,26 @@ const errorMessages = {
 export const updateEventWorkingListAsync = (
     queryArgsSource: Object, {
         columnsMetaForDataFetching,
-        categoryCombinationMeta,
+        categoryCombinationId,
         storeId,
     }: {
     columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-    categoryCombinationMeta: Object,
+    categoryCombinationId?: ?string,
     storeId: string,
-}): Promise<ReduxAction<any, any>> => getEventWorkingListDataAsync(
+}): Promise<ReduxAction<any, any>> => getEventListData(
     buildQueryArgs(
         queryArgsSource, {
             columnsMetaForDataFetching,
             storeId,
             isInit: false,
         }),
-    columnsMetaForDataFetching, categoryCombinationMeta)
-    .then(data =>
-        updateListSuccess(storeId, data),
+    columnsMetaForDataFetching, categoryCombinationId)
+    .then(({ eventContainers, pagingData, request }) =>
+        updateListSuccess(storeId, {
+            recordContainers: eventContainers,
+            pagingData,
+            request,
+        }),
     )
     .catch((error) => {
         log.error(errorCreator(errorMessages.WORKING_LIST_UPDATE_ERROR)({ error }));
