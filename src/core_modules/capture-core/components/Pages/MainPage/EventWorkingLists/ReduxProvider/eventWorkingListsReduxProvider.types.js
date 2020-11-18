@@ -22,19 +22,23 @@ import type {
     StickyFilters,
     UnloadingContext,
     UpdateFilter,
-    UpdateList,
-    UpdateTemplate,
     WorkingListTemplate,
-    WorkingListTemplates,
 } from '../../WorkingLists';
 import type {
+    AddTemplate,
+    DeleteTemplate,
+    UpdateTemplate,
+    UpdateList,
+    RecordsOrder,
     CustomColumnOrder,
-    EventsMainProperties,
-    EventsDataElementValues,
+} from '../../WorkingListsCommon';
+import type { EventRecords } from '../../EventWorkingListsCommon';
+import type {
+    EventWorkingListsTemplates,
 } from '../types';
 
 export type Props = $ReadOnly<{|
-    listId: string,
+    storeId: string,
 |}>;
 
 export type EventWorkingListsReduxOutputProps = {|
@@ -46,26 +50,26 @@ export type EventWorkingListsReduxOutputProps = {|
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
     downloadRequest: Object,
-    eventsMainProperties: ?EventsMainProperties,
-    eventsDataElementValues: ?EventsDataElementValues,
+    eventRecords?: EventRecords,
     filters?: FiltersData,
     initialViewConfig?: Object,
-    lastIdDeleted?: string, // TODO: Dealing with this in next PR
-    lastTransaction: number, // TODO: Dealing with this in next PR
+    lastIdDeleted?: string,
+    lastTransaction: number,
+    lastTransactionOnListDataRefresh?: number,
+    listDataRefreshTimestamp?: number,
     loadedContext?: LoadedContext,
     loading: boolean,
     loadViewError?: string,
     loadTemplatesError?: string, // TODO: Check
-    onAddTemplate: Function,
+    onAddTemplate: AddTemplate,
     onCancelLoadView: CancelLoadView,
     onCancelLoadTemplates: CancelLoadTemplates,
     onCancelUpdateList: CancelUpdateList,
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
-    onCleanSkipInitAddingTemplate: Function, // TODO: Dealing with this in next PR
     onClearFilter: ClearFilter,
     onDeleteEvent: Function,
-    onDeleteTemplate: Function,
+    onDeleteTemplate: DeleteTemplate,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
     onSelectListRow: SelectRow,
@@ -79,14 +83,15 @@ export type EventWorkingListsReduxOutputProps = {|
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     program: EventProgram,
-    recordsOrder?: Array<string>, // TODO: Dealing with this in later PR
+    recordsOrder?: RecordsOrder,
     rowsCount?: number,
     rowsPerPage?: number,
     sortByDirection?: string,
     sortById?: string,
     stickyFilters?: StickyFilters,
-    templates?: WorkingListTemplates,
+    templates?: EventWorkingListsTemplates,
     templatesLoading: boolean,
     updating: boolean,
     updatingWithDialog: boolean,
+    viewPreloaded?: boolean,
 |};

@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable react/no-array-index-key */
-import React, { Component } from 'react';
+import React, { Component, type ComponentType } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';  // using custom checkboxes because RadioButton can not be deselected
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -11,10 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import RadioOffIcon from '@material-ui/icons/PanoramaFishEye';
 import RadioOnIcon from '@material-ui/icons/CheckCircle';
 
-import { orientations } from './singleSelectBoxes.const';
-
-import OptionSet from '../../../../metaData/OptionSet/OptionSet';
-import Option from '../../../../metaData/OptionSet/Option';
+import { singleOrientations } from './singleSelectBoxes.const';
 
 const styles = theme => ({
     label: theme.typography.formFieldTitle,
@@ -22,11 +19,11 @@ const styles = theme => ({
 
 type Props = {
     onBlur: (value: any) => void,
-    optionSet?: ?OptionSet,
+    options: Array<{text: string, value: any}>,
     label?: string,
     nullable?: boolean,
     value?: any,
-    orientation?: ?$Values<typeof orientations>,
+    orientation?: ?$Values<typeof singleOrientations>,
     required?: ?boolean,
     classes: {
         label: string,
@@ -34,7 +31,7 @@ type Props = {
     style?: ?Object,
 };
 
-class SingleSelectBoxes extends Component<Props> {
+class SingleSelectBoxesPlain extends Component<Props> {
     handleOptionChange: (e: Object, isChecked: boolean, value: any) => void;
     materialUIContainerInstance: any;
     checkedValues: ?Set<any>;
@@ -54,31 +51,28 @@ class SingleSelectBoxes extends Component<Props> {
     }
 
     getBoxes(passOnProps: ?Object) {
-        const optionSet = this.props.optionSet;
-        if (optionSet) {
-            return optionSet.options.map((o: Option, index: number) => (
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            onChange={
-                                (e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, o.value); }
-                            }
-                            checked={this.isChecked(o.value)}
-                            icon={
-                                <RadioOffIcon />
-                            }
-                            checkedIcon={
-                                <RadioOnIcon />
-                            }
-                            {...passOnProps}
-                        />
-                    }
-                    label={o.text}
-                    key={index}
-                />
-            ));
-        }
-        return null;
+        const { options } = this.props;
+        return options.map(({ text, value }, index: number) => (
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        onChange={
+                            (e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, value); }
+                        }
+                        checked={this.isChecked(value)}
+                        icon={
+                            <RadioOffIcon />
+                        }
+                        checkedIcon={
+                            <RadioOnIcon />
+                        }
+                        {...passOnProps}
+                    />
+                }
+                label={text}
+                key={index}
+            />
+        ));
     }
 
     handleOptionChange(e: Object, isChecked: boolean, value: any) {
@@ -123,7 +117,7 @@ class SingleSelectBoxes extends Component<Props> {
 
     renderBoxes(passOnProps: ?Object) {
         const orientation = this.props.orientation;
-        return orientation === orientations.VERTICAL ?
+        return orientation === singleOrientations.VERTICAL ?
             this.renderVertical(passOnProps) :
             this.renderHorizontal(passOnProps);
     }
@@ -131,7 +125,7 @@ class SingleSelectBoxes extends Component<Props> {
     render() {
         const {
             onBlur,
-            optionSet,
+            options,
             label,
             nullable,
             value,
@@ -172,4 +166,4 @@ class SingleSelectBoxes extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(SingleSelectBoxes);
+export const SingleSelectBoxes: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(SingleSelectBoxesPlain);

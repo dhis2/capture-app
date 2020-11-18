@@ -6,7 +6,11 @@ type ExtractedProps = {|
     templates?: WorkingListTemplates,
 |};
 
-type RestProps = $Rest<TemplatesLoaderOutputProps, ExtractedProps>;
+type OptionalExtractedProps = {|
+    templates: WorkingListTemplates,
+|};
+
+type RestProps = $Rest<TemplatesLoaderOutputProps & OptionalExtractedProps, ExtractedProps & OptionalExtractedProps>;
 
 export type Props = $ReadOnly<{|
     ...RestProps,

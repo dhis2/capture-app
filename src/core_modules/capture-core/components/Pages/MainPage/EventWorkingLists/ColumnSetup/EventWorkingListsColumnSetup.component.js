@@ -1,7 +1,6 @@
 // @flow
-import React, { useMemo, useCallback } from 'react';
-import { useDefaultColumnConfig } from './defaultColumnConfiguration';
-import { shouldSkipReload } from './skipReloadCalculator';
+import React, { useCallback } from 'react';
+import { useDefaultColumnConfig, useColumns } from '../../EventWorkingListsCommon';
 import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
 import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
@@ -17,33 +16,14 @@ const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView) =>
     }, [onLoadView, defaultColumns]);
 
 const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
-    useCallback((queryArgs: Object) => {
+    useCallback((queryArgs: Object, lastTransaction: number) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
-        onUpdateList(queryArgs, columnsMetaForDataFetching);
+        onUpdateList(queryArgs, lastTransaction, columnsMetaForDataFetching);
     }, [onUpdateList, defaultColumns]);
-
-const useColumns = (customColumnOrder, defaultColumns) => {
-    const defaultColumnsAsObject = useMemo(() =>
-        defaultColumns
-            .reduce((acc, column) => ({ ...acc, [column.id]: column }), {}),
-    [defaultColumns]);
-
-    return useMemo(() => {
-        if (!customColumnOrder) {
-            return defaultColumns;
-        }
-
-        return customColumnOrder
-            .map(({ id, visible }) => ({
-                ...defaultColumnsAsObject[id],
-                visible,
-            }));
-    }, [customColumnOrder, defaultColumns, defaultColumnsAsObject]);
-};
 
 export const EventWorkingListsColumnSetup = ({
     program,
@@ -65,7 +45,6 @@ export const EventWorkingListsColumnSetup = ({
             program={program}
             columns={columns}
             defaultColumns={defaultColumns}
-            onCheckSkipReload={shouldSkipReload}
             onLoadView={injectColumnMetaToLoadList}
             onUpdateList={injectColumnMetaToUpdateList}
         />

@@ -1,15 +1,20 @@
 // @flow
-import type { ColumnConfigs, DataSource } from '../../WorkingLists';
-import type { EventsMainProperties, EventsDataElementValues } from '../types';
+import type { DataSource } from '../../WorkingLists';
+import type { EventRecords, EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { CurrentViewChangesResolverOutputProps } from '../CurrentViewChangesResolver';
 
 type ExtractedProps = $ReadOnly<{|
-    eventsMainProperties: ?EventsMainProperties,
-    eventsDataElementValues: ?EventsDataElementValues,
-    columns: ColumnConfigs,
+    eventRecords?: EventRecords,
+    columns: EventWorkingListsColumnConfigs,
+    recordsOrder?: Array<string>,
 |}>;
 
-type RestProps = $Rest<CurrentViewChangesResolverOutputProps, ExtractedProps>;
+type OptionalExtractedProps = {
+    eventRecords: EventRecords,
+    recordsOrder: Array<string>,
+};
+type RestProps = $Rest<CurrentViewChangesResolverOutputProps & OptionalExtractedProps,
+ExtractedProps & OptionalExtractedProps>;
 
 export type Props = {|
     ...RestProps,
@@ -18,7 +23,7 @@ export type Props = {|
 
 export type EventWorkingListsDataSourceSetupOutputProps = {|
     ...RestProps,
-    columns: ColumnConfigs,
-    dataSource: DataSource,
+    columns: EventWorkingListsColumnConfigs,
+    dataSource?: DataSource,
     rowIdKey: string,
 |};

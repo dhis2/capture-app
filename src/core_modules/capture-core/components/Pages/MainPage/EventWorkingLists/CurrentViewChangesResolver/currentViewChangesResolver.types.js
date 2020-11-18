@@ -1,19 +1,20 @@
 // @flow
-import type { FiltersData, ColumnConfigs } from '../../WorkingLists';
+import type { FiltersData } from '../../WorkingLists';
+import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { EventWorkingListsColumnSetupOutputProps } from '../ColumnSetup';
 
 type ExtractedProps = {|
     filters?: FiltersData,
-    columns: ColumnConfigs,
+    columns: EventWorkingListsColumnConfigs,
     sortById?: string,
     sortByDirection?: string,
     initialViewConfig?: {
         filters?: FiltersData,
-        visibleCustomColumnIds?: Array<string>,
+        customVisibleColumnIds?: Array<string>,
         sortById?: string,
         sortByDirection?: string,
     },
-    defaultColumns: ColumnConfigs,
+    defaultColumns: EventWorkingListsColumnConfigs,
 |};
 
 // had to add initialViewConfig as a non optional type or else it would not be removed. Also, if initialViewConfig is
@@ -30,7 +31,7 @@ export type Props = {|
 export type CurrentViewChangesResolverOutputProps = {|
     ...RestProps,
     filters?: FiltersData,
-    columns: ColumnConfigs,
+    columns: EventWorkingListsColumnConfigs,
     sortById?: string,
     sortByDirection?: string,
     currentViewHasTemplateChanges?: boolean,
@@ -38,7 +39,7 @@ export type CurrentViewChangesResolverOutputProps = {|
 
 export type CurrentViewConfig = {
     filters: FiltersData,
-    columns: ColumnConfigs,
+    columns: EventWorkingListsColumnConfigs,
     sortById: string,
     sortByDirection: string,
 };

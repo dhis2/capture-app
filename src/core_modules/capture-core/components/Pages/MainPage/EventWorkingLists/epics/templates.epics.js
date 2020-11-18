@@ -1,5 +1,4 @@
 // @flow
-import { batchActions } from 'redux-batched-actions';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -8,10 +7,8 @@ import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import { from } from 'rxjs';
 import {
     workingListsCommonActionTypes,
-    batchActionTypes,
     fetchTemplatesSuccess,
     fetchTemplatesError,
-    selectTemplate,
     updateTemplateSuccess,
     updateTemplateError,
     addTemplateSuccess,
@@ -19,32 +16,30 @@ import {
     deleteTemplateSuccess,
     deleteTemplateError,
 } from '../../WorkingListsCommon';
-import { getTemplatesAsync } from './templatesFetcher';
+import { getTemplates } from './getTemplates';
 import { getApi } from '../../../../../d2';
+import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 
-export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStore) =>
+export const retrieveTemplatesEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
-        concatMap((action) => {
-            const listId = action.payload.listId;
-            const programId = store.value.currentSelections.programId;
-            const promise = getTemplatesAsync(store.value)
-                .then(container => batchActions([
-                    selectTemplate(container.default.id, listId),
-                    fetchTemplatesSuccess(container.workingListConfigs, programId, listId),
-                ], batchActionTypes.TEMPLATES_FETCH_SUCCESS_BATCH))
+        filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
+        concatMap(({ payload: { storeId, programId } }) => {
+            const promise = getTemplates(programId)
+                .then(({ templates, defaultTemplateId }) =>
+                    fetchTemplatesSuccess(templates, defaultTemplateId, storeId))
                 .catch((error) => {
                     log.error(
                         errorCreator(error)({ epic: 'retrieveTemplatesEpic' }),
                     );
-                    return fetchTemplatesError(i18n.t('an error occurred loading working lists'), listId);
+                    return fetchTemplatesError(i18n.t('an error occurred loading working lists'), storeId);
                 });
 
             return from(promise).pipe(
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH_CANCEL),
-                        filter(cancelAction => cancelAction.payload.listId === listId),
+                        filter(cancelAction => cancelAction.payload.storeId === storeId),
                     ),
                 ),
             );
@@ -53,12 +48,13 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
 export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_UPDATE),
+        filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
             const {
                 template,
-                eventQueryCriteria,
+                criteria: eventQueryCriteria,
                 programId,
-                listId,
+                storeId,
             } = action.payload;
 
             const eventFilterData = {
@@ -89,11 +85,11 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                     }))
                 .then(() => {
                     const isActiveTemplate =
-            store.value.workingListsTemplates[listId].selectedTemplateId === template.id;
+            store.value.workingListsTemplates[storeId].selectedTemplateId === template.id;
                     return updateTemplateSuccess(
                         template.id,
                         eventQueryCriteria, {
-                            listId,
+                            storeId,
                             isActiveTemplate,
                         });
                 })
@@ -105,11 +101,11 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                         }),
                     );
                     const isActiveTemplate =
-            store.value.workingListsTemplates[listId].selectedTemplateId === template.id;
+            store.value.workingListsTemplates[storeId].selectedTemplateId === template.id;
                     return updateTemplateError(
                         template.id,
                         eventQueryCriteria, {
-                            listId,
+                            storeId,
                             isActiveTemplate,
                         });
                 });
@@ -124,93 +120,94 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
-                        filter(cancelAction => cancelAction.payload.listId === listId),
+                        filter(cancelAction => cancelAction.payload.storeId === storeId),
                     ),
                 ),
             );
         }));
 
 export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(ofType(
-        workingListsCommonActionTypes.TEMPLATE_ADD,
-    ),
-    concatMap((action) => {
-        const {
-            name,
-            eventQueryCriteria,
-            clientId,
-            programId,
-            listId,
-        } = action.payload;
+    action$.pipe(
+        ofType(workingListsCommonActionTypes.TEMPLATE_ADD),
+        filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
+        concatMap((action) => {
+            const {
+                name,
+                criteria: eventQueryCriteria,
+                clientId,
+                programId,
+                storeId,
+            } = action.payload;
 
-        const eventFilterData = {
-            name,
-            program: programId,
-            eventQueryCriteria,
-        };
+            const eventFilterData = {
+                name,
+                program: programId,
+                eventQueryCriteria,
+            };
 
-        const api = getApi();
+            const api = getApi();
 
-        const requestPromise = api
-            .post('eventFilters', eventFilterData)
-            .then((result) => {
-                const templateId = result.response.uid;
-                return api
-                    .post(`sharing?type=eventFilter&id=${templateId}`, {
-                        object: {
-                            publicAccess: '--------',
-                            externalAccess: false,
-                        },
-                    })
-                    .catch((error) => {
-                        log.error(
-                            errorCreator('could not set sharing settings for template')({
-                                error,
-                                eventFilterData,
-                                templateId,
-                            }),
-                        );
-                    })
-                    .then(() => {
-                        const isActiveTemplate =
-                store.value.workingListsTemplates[listId].selectedTemplateId === clientId;
-                        return addTemplateSuccess(result.response.uid, clientId, { listId, isActiveTemplate });
-                    });
-            })
-            .catch((error) => {
-                log.error(
-                    errorCreator('could not add template')({
-                        error,
-                        eventFilterData,
-                    }),
-                );
-                const isActiveTemplate =
-            store.value.workingListsTemplates[listId].selectedTemplateId === clientId;
-                return addTemplateError(clientId, { listId, isActiveTemplate });
-            });
+            const requestPromise = api
+                .post('eventFilters', eventFilterData)
+                .then((result) => {
+                    const templateId = result.response.uid;
+                    return api
+                        .post(`sharing?type=eventFilter&id=${templateId}`, {
+                            object: {
+                                publicAccess: '--------',
+                                externalAccess: false,
+                            },
+                        })
+                        .catch((error) => {
+                            log.error(
+                                errorCreator('could not set sharing settings for template')({
+                                    error,
+                                    eventFilterData,
+                                    templateId,
+                                }),
+                            );
+                        })
+                        .then(() => {
+                            const isActiveTemplate =
+                    store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
+                            return addTemplateSuccess(result.response.uid, clientId, { storeId, isActiveTemplate });
+                        });
+                })
+                .catch((error) => {
+                    log.error(
+                        errorCreator('could not add template')({
+                            error,
+                            eventFilterData,
+                        }),
+                    );
+                    const isActiveTemplate =
+                store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
+                    return addTemplateError(clientId, { storeId, isActiveTemplate });
+                });
 
-        return from(requestPromise).pipe(
-            takeUntil(
-                action$.pipe(
-                    ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
-                    filter(cancelAction => cancelAction.payload.listId === listId),
+            return from(requestPromise).pipe(
+                takeUntil(
+                    action$.pipe(
+                        ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
+                        filter(cancelAction => cancelAction.payload.storeId === storeId),
+                    ),
                 ),
-            ),
-        );
-    }));
+            );
+        }));
 
 export const deleteTemplateEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
+        filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
             const {
                 template,
-                listId,
+                storeId,
             } = action.payload;
 
             const requestPromise = getApi()
                 .delete(`eventFilters/${template.id}`)
-                .then(() => deleteTemplateSuccess(template, listId))
+                .then(() => deleteTemplateSuccess(template, storeId))
                 .catch((error) => {
                     log.error(
                         errorCreator('could not delete template')({
@@ -218,7 +215,7 @@ export const deleteTemplateEpic = (action$: InputObservable) =>
                             template,
                         }),
                     );
-                    return deleteTemplateError(template, listId);
+                    return deleteTemplateError(template, storeId);
                 });
 
             return from(requestPromise).pipe(
@@ -231,7 +228,7 @@ export const deleteTemplateEpic = (action$: InputObservable) =>
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.CONTEXT_UNLOADING),
-                        filter(cancelAction => cancelAction.payload.listId === listId),
+                        filter(cancelAction => cancelAction.payload.storeId === storeId),
                     ),
                 ),
             );

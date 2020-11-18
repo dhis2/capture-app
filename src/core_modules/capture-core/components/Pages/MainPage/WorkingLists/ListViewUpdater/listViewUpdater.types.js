@@ -1,6 +1,6 @@
 // @flow
 import type { Categories, UpdateList } from '../workingLists.types';
-import type { FiltersData, CustomMenuContents } from '../../../../ListView';
+import type { FiltersData } from '../../../../ListView';
 import type { ListViewLoaderOutputProps } from '../ListViewLoader';
 
 type ExtractedProps = {|
@@ -8,13 +8,17 @@ type ExtractedProps = {|
     sortById: string,
     sortByDirection: string,
     onUpdateList: UpdateList,
-    customMenuContents?: CustomMenuContents,
     programId: string,
     orgUnitId: string,
     categories?: Categories,
+    viewLoadedOnFirstRun: boolean,
 |};
 
-type RestProps = $Rest<ListViewLoaderOutputProps, ExtractedProps>;
+type OptionalExtractedProps = {
+    categories: Categories,
+};
+
+type RestProps = $Rest<ListViewLoaderOutputProps & OptionalExtractedProps, ExtractedProps & OptionalExtractedProps>;
 
 export type Props = {|
     ...RestProps,
@@ -23,4 +27,9 @@ export type Props = {|
 
 export type ListViewUpdaterOutputProps = {|
     ...RestProps,
+    filters: FiltersData,
+    sortById: string,
+    sortByDirection: string,
+    currentPage: number,
+    rowsPerPage: number,
 |};

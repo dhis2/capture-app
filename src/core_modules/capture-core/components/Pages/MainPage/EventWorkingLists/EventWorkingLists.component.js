@@ -1,9 +1,10 @@
 // @flow
 import * as React from 'react';
 import { EventWorkingListsReduxProvider } from './ReduxProvider';
+import type { Props } from './EventWorkingLists.types';
 
-export const EventWorkingLists = () => (
+export const EventWorkingLists = ({ storeId }: Props) => (
     <EventWorkingListsReduxProvider
-        listId="eventList"
+        storeId={storeId}
     />
 );

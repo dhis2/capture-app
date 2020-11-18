@@ -5,63 +5,83 @@ import { workingListsCommonActionTypes } from '../../../components/Pages/MainPag
 import { eventWorkingListsActionTypes } from '../../../components/Pages/MainPage/EventWorkingLists';
 import { recentlyAddedEventsActionTypes } from '../../../components/Pages/NewEvent/RecentlyAddedEventsList';
 
+export const workingListsListRecordsDesc = createReducerDescription({
+    [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, { payload: { storeId, recordContainers } }) => ({
+        ...state,
+        [storeId]: recordContainers
+            .reduce((acc, { record, id }) => {
+                acc[id] = record;
+                return acc;
+            }, {}),
+    }),
+    [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, { payload: { storeId, recordContainers } }) => ({
+        ...state,
+        [storeId]: recordContainers
+            .reduce((acc, { record, id }) => {
+                acc[id] = record;
+                return acc;
+            }, {}),
+    }),
+}, 'workingListsListRecords');
+
 export const workingListsTemplatesDesc = createReducerDescription({
     [workingListsCommonActionTypes.TEMPLATES_FETCH]: (state, action) => {
-        const { listId } = action.payload;
+        const { storeId } = action.payload;
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 loading: true,
             },
         };
     },
     [workingListsCommonActionTypes.TEMPLATES_FETCH_SUCCESS]: (state, action) => {
-        const { templates, listId } = action.payload;
+        const { templates, storeId, defaultTemplateId } = action.payload;
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 templates,
+                selectedTemplateId: defaultTemplateId,
                 loading: false,
             },
         };
     },
     [workingListsCommonActionTypes.TEMPLATES_FETCH_ERROR]: (state, action) => {
-        const { listId, error } = action.payload;
+        const { storeId, error } = action.payload;
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 loadError: error,
                 loading: false,
             },
         };
     },
     [workingListsCommonActionTypes.TEMPLATE_SELECT]: (state, action) => {
-        const { listId, templateId } = action.payload;
+        const { storeId, templateId } = action.payload;
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 selectedTemplateId: templateId,
-                currentListId: listId,
+                currentListId: storeId,
             },
         };
     },
     [workingListsCommonActionTypes.TEMPLATE_UPDATE]: (state, action) => {
-        const { eventQueryCriteria, template, listId } = action.payload;
+        const { criteria, template, storeId } = action.payload;
 
-        const otherTemplates = state[listId].templates.filter(t => t.id !== template.id);
+        const otherTemplates = state[storeId].templates.filter(t => t.id !== template.id);
         const updatedTemplate = {
             ...template,
-            nextEventQueryCriteria: eventQueryCriteria,
+            nextCriteria: criteria,
         };
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 templates: [
                     ...otherTemplates,
                     updatedTemplate,
@@ -70,22 +90,22 @@ export const workingListsTemplatesDesc = createReducerDescription({
         };
     },
     [workingListsCommonActionTypes.TEMPLATE_UPDATE_SUCCESS]: (state, action) => {
-        const { eventQueryCriteria, templateId, listId } = action.payload;
-        const templates = state[listId].templates;
+        const { criteria, templateId, storeId } = action.payload;
+        const templates = state[storeId].templates;
         const targetTemplate = templates.find(t => t.id === templateId);
 
         if (targetTemplate) {  // the template could be deleted
             const otherTemplates = templates.filter(t => t.id !== templateId);
             const updatedTemplate = {
                 ...targetTemplate,
-                eventQueryCriteria,
-                nextEventQueryCriteria: undefined,
+                criteria,
+                nextCriteria: undefined,
             };
 
             return {
                 ...state,
-                [listId]: {
-                    ...state[listId],
+                [storeId]: {
+                    ...state[storeId],
                     templates: [
                         ...otherTemplates,
                         updatedTemplate,
@@ -96,22 +116,22 @@ export const workingListsTemplatesDesc = createReducerDescription({
         return state;
     },
     [workingListsCommonActionTypes.TEMPLATE_UPDATE_ERROR]: (state, action) => {
-        const { templateId, listId } = action.payload;
+        const { templateId, storeId } = action.payload;
 
-        const templates = state[listId].templates;
+        const templates = state[storeId].templates;
         const targetTemplate = templates.find(t => t.id === templateId);
 
         if (targetTemplate) {
             const otherTemplates = templates.filter(t => t.id !== templateId);
             const updatedTemplate = {
                 ...targetTemplate,
-                nextEventQueryCriteria: undefined,
+                nextCriteria: undefined,
             };
 
             return {
                 ...state,
-                [listId]: {
-                    ...state[listId],
+                [storeId]: {
+                    ...state[storeId],
                     templates: [
                         ...otherTemplates,
                         updatedTemplate,
@@ -122,19 +142,18 @@ export const workingListsTemplatesDesc = createReducerDescription({
         return state;
     },
     [workingListsCommonActionTypes.TEMPLATE_ADD]: (state, action) => {
-        const { name, eventQueryCriteria, template, clientId, listId } = action.payload;
+        const { name, criteria, template, clientId, storeId } = action.payload;
 
         const newTemplate = {
             ...template,
             name,
             displayName: name,
             id: clientId,
-            eventQueryCriteria,
+            criteria,
             isDefault: undefined,
             notPreserved: true,
             skipInitDuringAddProcedure: true,
             access: {
-                read: true,
                 update: true,
                 delete: true,
                 write: true,
@@ -142,12 +161,12 @@ export const workingListsTemplatesDesc = createReducerDescription({
             },
         };
 
-        const templates = state[listId].templates;
+        const templates = state[storeId].templates;
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 selectedTemplateId: clientId,
                 templates: [
                     ...templates,
@@ -156,39 +175,13 @@ export const workingListsTemplatesDesc = createReducerDescription({
             },
         };
     },
-    [workingListsCommonActionTypes.TEMPLATE_ADD_SKIP_INIT_CLEAN]: (state, action) => {
-        const { template, listId } = action.payload;
-        const templates = state[listId].templates;
-        const targetTemplate = templates.find(t => t.id === template.id);
-
-        if (targetTemplate) {
-            const otherTemplates = templates.filter(t => t.id !== template.id);
-
-            const updatedTemplate = {
-                ...targetTemplate,
-                skipInitDuringAddProcedure: undefined,
-            };
-
-            return {
-                ...state,
-                [listId]: {
-                    ...state[listId],
-                    templates: [
-                        ...otherTemplates,
-                        updatedTemplate,
-                    ],
-                },
-            };
-        }
-        return state;
-    },
     [workingListsCommonActionTypes.TEMPLATE_ADD_SUCCESS]: (state, action) => {
-        const { templateId, clientId, listId } = action.payload;
-        const templates = state[listId].templates;
+        const { templateId, clientId, storeId } = action.payload;
+        const templates = state[storeId].templates;
         const targetTemplate = templates.find(t => t.id === clientId);
         const otherTemplates = templates.filter(t => t.id !== clientId);
 
-        const currentlySelectedTemplateId = state[listId].selectedTemplateId;
+        const currentlySelectedTemplateId = state[storeId].selectedTemplateId;
 
         let selectedTemplateId = currentlySelectedTemplateId;
         let skipInitDuringAddProcedure;
@@ -206,8 +199,8 @@ export const workingListsTemplatesDesc = createReducerDescription({
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 selectedTemplateId,
                 templates: [
                     ...otherTemplates,
@@ -217,26 +210,26 @@ export const workingListsTemplatesDesc = createReducerDescription({
         };
     },
     [workingListsCommonActionTypes.TEMPLATE_ADD_ERROR]: (state, action) => {
-        const { clientId, listId } = action.payload;
-        const templates = state[listId].templates.filter(t => t.id !== clientId);
-        const currentlySelectedTemplateId = state[listId].selectedTemplateId;
+        const { clientId, storeId } = action.payload;
+        const templates = state[storeId].templates.filter(t => t.id !== clientId);
+        const currentlySelectedTemplateId = state[storeId].selectedTemplateId;
         const selectedTemplateId = currentlySelectedTemplateId === clientId ?
             templates.find(t => t.isDefault).id :
             currentlySelectedTemplateId;
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 selectedTemplateId,
                 templates,
             },
         };
     },
     [workingListsCommonActionTypes.TEMPLATE_DELETE]: (state, action) => {
-        const { template, listId } = action.payload;
+        const { template, storeId } = action.payload;
 
-        const otherTemplates = state[listId].templates.filter(t => t.id !== template.id);
+        const otherTemplates = state[storeId].templates.filter(t => t.id !== template.id);
         const deletedTemplate = {
             ...template,
             deleted: true,
@@ -244,8 +237,8 @@ export const workingListsTemplatesDesc = createReducerDescription({
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 selectedTemplateId: otherTemplates.find(t => t.isDefault).id,
                 templates: [
                     ...otherTemplates,
@@ -255,13 +248,13 @@ export const workingListsTemplatesDesc = createReducerDescription({
         };
     },
     [workingListsCommonActionTypes.TEMPLATE_DELETE_SUCCESS]: (state, action) => {
-        const { template, listId } = action.payload;
-        const otherTemplates = state[listId].templates.filter(t => t.id !== template.id);
+        const { template, storeId } = action.payload;
+        const otherTemplates = state[storeId].templates.filter(t => t.id !== template.id);
 
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 templates: [
                     ...otherTemplates,
                 ],
@@ -269,17 +262,17 @@ export const workingListsTemplatesDesc = createReducerDescription({
         };
     },
     [workingListsCommonActionTypes.TEMPLATE_DELETE_ERROR]: (state, action) => {
-        const { template, listId } = action.payload;
+        const { template, storeId } = action.payload;
 
-        const otherTemplates = state[listId].templates.filter(t => t.id !== template.id);
+        const otherTemplates = state[storeId].templates.filter(t => t.id !== template.id);
         const failedToDeleteTemplate = {
             ...template,
             deleted: undefined,
         };
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 templates: [
                     ...otherTemplates,
                     failedToDeleteTemplate,
@@ -291,32 +284,28 @@ export const workingListsTemplatesDesc = createReducerDescription({
 
 export const workingListsDesc = createReducerDescription({
     [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
-        const { listId } = action.payload;
+        const { storeId } = action.payload;
         return {
             ...state,
-            [listId]: undefined,
+            [storeId]: undefined,
         };
     },
     [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const { listId, eventContainers, request } = action.payload;
-        newState[listId] = {
-            order: eventContainers ?
-                eventContainers
-                    .map(container => container.event.eventId) : [],
-            type: 'event',
+        const { storeId, recordContainers, request } = action.payload;
+        newState[storeId] = {
+            order: recordContainers
+                .map(({ id }) => id),
             currentRequest: request,
         };
         return newState;
     },
     [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const { listId, eventContainers, request } = action.payload;
-        newState[listId] = {
-            order: eventContainers ?
-                eventContainers
-                    .map(container => container.event.eventId) : [],
-            type: 'event',
+        const { storeId, recordContainers, request } = action.payload;
+        newState[storeId] = {
+            order: recordContainers
+                .map(({ id }) => id),
             currentRequest: request,
         };
 
@@ -356,14 +345,14 @@ const getReadyState = (oldState, more) => ({
 export const workingListsUIDesc = createReducerDescription({
     [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
         const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = { ...newState[listId], isLoading: true };
+        const storeId = action.payload.storeId;
+        newState[storeId] = { ...newState[storeId], isLoading: true };
         return newState;
     },
     [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = getReadyState(newState[listId], {
+        const storeId = action.payload.storeId;
+        newState[storeId] = getReadyState(newState[storeId], {
             hasBeenLoaded: true,
             dataLoadingError: null,
         });
@@ -372,50 +361,61 @@ export const workingListsUIDesc = createReducerDescription({
     [workingListsCommonActionTypes.LIST_VIEW_INIT_ERROR]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        newState[payload.listId] = getReadyState({}, {
+        newState[payload.storeId] = getReadyState({}, {
             dataLoadingError: payload.errorMessage,
         });
         return newState;
     },
     [workingListsCommonActionTypes.LIST_UPDATE]: (state, action) => {
         const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = { ...newState[listId], isUpdating: true };
+        const storeId = action.payload.storeId;
+        newState[storeId] = { ...newState[storeId], isUpdating: true };
         return newState;
     },
     [workingListsCommonActionTypes.LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = getReadyState(newState[listId], {
+        const storeId = action.payload.storeId;
+        newState[storeId] = getReadyState(newState[storeId], {
             dataLoadingError: null,
         });
         return newState;
     },
     [workingListsCommonActionTypes.LIST_UPDATE_ERROR]: (state, action) => {
         const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = getReadyState({}, {
+        const storeId = action.payload.storeId;
+        newState[storeId] = getReadyState({}, {
             dataLoadingError: null,
         });
         return newState;
     },
     [eventWorkingListsActionTypes.EVENT_REQUEST_DELETE]: (state, action) => {
-        const listId = action.payload.listId;
+        const storeId = action.payload.storeId;
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 isUpdatingWithDialog: true,
             },
         };
     },
     [eventWorkingListsActionTypes.EVENT_DELETE_SUCCESS]: (state, action) => {
-        const { listId, eventId } = action.payload;
+        const { storeId, eventId } = action.payload;
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 lastEventIdDeleted: eventId,
+                isUpdatingWithDialog: false,
+            },
+        };
+    },
+    [eventWorkingListsActionTypes.EVENT_DELETE_ERROR]: (state, action) => {
+        const { storeId } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                isUpdatingWithDialog: false,
             },
         };
     },
@@ -423,24 +423,24 @@ export const workingListsUIDesc = createReducerDescription({
 
 export const workingListsColumnsOrderDesc = createReducerDescription({
     [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
-        const { listId } = action.payload;
+        const { storeId } = action.payload;
         return {
             ...state,
-            [listId]: undefined,
+            [storeId]: undefined,
         };
     },
     [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
-        const { listId, config: { customColumnOrder } } = action.payload;
+        const { storeId, config: { customColumnOrder } } = action.payload;
         return {
             ...state,
-            [listId]: customColumnOrder,
+            [storeId]: customColumnOrder,
         };
     },
     [workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET]: (state, action) => {
-        const { columns, listId } = action.payload;
+        const { columns, storeId } = action.payload;
         return {
             ...state,
-            [listId]: columns
+            [storeId]: columns
                 .map(({ id, visible }) => ({
                     id,
                     visible,
@@ -449,7 +449,7 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
     },
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
-        newState[action.payload.listId] = [...action.payload.customColumnOrder];
+        newState[action.payload.listId] = [...action.payload.columnOrder];
         return newState;
     },
 }, 'workingListsColumnsOrder');
@@ -461,25 +461,38 @@ export const workingListsContextDesc = createReducerDescription({
     not that data was successfully retrieved for this context.
     */
     [workingListsCommonActionTypes.TEMPLATES_FETCH]: (state, action) => {
-        const { programId, listId } = action.payload;
+        const { programId, storeId } = action.payload;
         return {
             ...state,
-            [listId]: {
-                ...state[listId],
+            [storeId]: {
+                ...state[storeId],
                 programIdTemplates: programId,
             },
         };
     },
     [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
-        const newState = { ...state };
-        const { listId, context: { programId, ...restContext } } = action.payload;
-        newState[listId] = {
-            ...newState[listId],
-            ...restContext,
-            programIdView: programId,
-            timestamp: moment().toISOString(),
+        const { storeId, context: { programId, lastTransaction, ...restContext } } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                ...restContext,
+                programIdView: programId,
+                listDataRefreshTimestamp: moment().toISOString(),
+                lastTransactionOnListDataRefresh: lastTransaction,
+            },
         };
-        return newState;
+    },
+    [workingListsCommonActionTypes.LIST_UPDATE]: (state, action) => {
+        const { storeId, lastTransaction } = action.payload;
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                listDataRefreshTimestamp: moment().toISOString(),
+                lastTransactionOnListDataRefresh: lastTransaction,
+            },
+        };
     },
     [recentlyAddedEventsActionTypes.LIST_RESET]: (state, action) => {
         const newState = { ...state };
@@ -490,14 +503,14 @@ export const workingListsContextDesc = createReducerDescription({
 
 export const workingListsStickyFiltersDesc = createReducerDescription({
     [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
-        const { listId } = action.payload;
+        const { storeId } = action.payload;
         return {
             ...state,
-            [listId]: undefined,
+            [storeId]: undefined,
         };
     },
     [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, action) => {
-        const { listId, config } = action.payload;
+        const { storeId, config } = action.payload;
         const filters = config.filters;
         const filtersWithValueOnInit = filters ? Object.keys(filters).reduce((acc, key) => ({
             ...acc,
@@ -506,32 +519,32 @@ export const workingListsStickyFiltersDesc = createReducerDescription({
 
         return {
             ...state,
-            [listId]: {
+            [storeId]: {
                 filtersWithValueOnInit,
                 userSelectedFilters: undefined,
             },
         };
     },
     [workingListsCommonActionTypes.REST_MENU_ITEM_SELECT]: (state, action) => {
-        const { id, listId } = action.payload;
+        const { id, storeId } = action.payload;
         const currentListState = {
-            ...state[listId],
+            ...state[storeId],
             userSelectedFilters: {
-                ...state[listId].userSelectedFilters,
+                ...state[storeId].userSelectedFilters,
                 [id]: true,
             },
         };
 
         return {
             ...state,
-            [listId]: currentListState,
+            [storeId]: currentListState,
         };
     },
     [workingListsCommonActionTypes.STICKY_FILTERS_AFTER_COLUMN_SORTING_SET]: (state, action) => {
-        const { listId, includeFilters: filtersWithValueOnInit } = action.payload;
+        const { storeId, includeFilters: filtersWithValueOnInit } = action.payload;
         return {
             ...state,
-            [listId]: {
+            [storeId]: {
                 filtersWithValueOnInit,
                 userSelectedFilters: undefined,
             },
