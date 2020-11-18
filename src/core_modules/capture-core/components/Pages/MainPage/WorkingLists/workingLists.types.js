@@ -1,8 +1,9 @@
 // @flow
-import { type OptionSet, dataElementTypes } from '../../../../metaData';
+import { dataElementTypes } from '../../../../metaData';
 import type {
     CustomMenuContents,
     CustomRowMenuContents,
+    DataSource,
     FiltersData,
     StickyFilters,
     ChangePage,
@@ -15,66 +16,49 @@ import type {
     Sort,
 } from '../../../ListView';
 
-export type WorkingListTemplate = {|
+export type WorkingListTemplate = {
     id: string,
     isDefault?: ?boolean,
     name: string,
-    displayName: string,
-    filters: Object,
     access: {
-        read: boolean,
         update: boolean,
         delete: boolean,
         write: boolean,
         manage: boolean,
     },
-    notPreserved?: ?boolean,
-    nextEventQueryCriteria?: Object,
+    notPreserved?: boolean,
+    updating?: boolean,
     deleted?: boolean,
-|};
+    skipInitDuringAddProcedure?: boolean,
+};
 
 export type WorkingListTemplates = Array<WorkingListTemplate>;
 
-type ColumnConfigBase = {|
+export type ColumnConfig = {
     id: string,
     visible: boolean,
     type: $Values<typeof dataElementTypes>,
     header: string,
-|};
-export type MetadataColumnConfig = {|
-    ...ColumnConfigBase,
-    optionSet?: ?OptionSet,
-|};
-
-export type MainColumnConfig = {|
-    ...ColumnConfigBase,
-    isMainProperty: true,
     options?: ?Array<{text: string, value: any}>,
-    singleSelect?: boolean,
-    apiName?: string,
-|};
-
-export type ColumnConfig = MetadataColumnConfig | MainColumnConfig;
+    multiValueFilter?: boolean,
+};
 
 export type ColumnConfigs = Array<ColumnConfig>;
 
-export type DataSource = { [id: string]: Object };
-
 export type ColumnOrder = Array<{ id: string, visible: boolean }>;
 
-export type ListViewUpdaterContextData = {
-    currentPage?: number,
-    rowsPerPage?: number,
-    onCancelUpdateList?: Function,
-    lastIdDeleted?: string,
-};
-
-export type LoadedContext = {
+export type LoadedContext = {|
     programIdTemplates?: string,
     programIdView?: string,
     orgUnitId?: string,
     categories?: Object,
-};
+|};
+
+export type LoadedViewContext = {|
+    programId?: string,
+    orgUnitId?: string,
+    categories?: Object,
+|};
 
 export type Categories = { [id: string]: string };
 
@@ -83,7 +67,9 @@ export type CancelLoadView = () => void;
 export type CancelLoadTemplates = () => void;
 export type CancelUpdateList = () => void;
 export type DeleteTemplate = (template: WorkingListTemplate) => void;
-export type LoadView = (template: WorkingListTemplate, meta: { programId: string, orgUnitId: string, categories: Categories, lastTransaction: number }) => void;
+export type LoadView = (
+    template: WorkingListTemplate,
+    meta: {| programId: string, orgUnitId: string, categories?: Categories |}) => void;
 export type LoadTemplates = (programId: string) => void;
 export type SelectTemplate = (templateId: string) => void;
 export type UnloadingContext = () => void;
@@ -100,7 +86,62 @@ export type UpdateList = (data: {
     lastIdDeleted?: string,
 }) => void;
 
-export type InterfaceProps<InputDataSource> = $ReadOnly<{|
+export type ManagerContextData = {|
+    currentTemplate?: WorkingListTemplate,
+    onSelectTemplate: SelectTemplate,
+|};
+
+export type ListViewConfigContextData = {|
+    currentViewHasTemplateChanges?: boolean,
+    onAddTemplate: AddTemplate,
+    onUpdateTemplate: UpdateTemplate,
+    onDeleteTemplate: DeleteTemplate,
+|};
+
+export type ListViewLoaderContextData = {|
+    sortById?: string,
+    sortByDirection?: string,
+    filters?: FiltersData,
+    columns: ColumnConfigs,
+    loading: boolean,
+    onLoadView: LoadView,
+    loadViewError?: string,
+    onUpdateList: UpdateList,
+    onCancelLoadView?: CancelLoadView,
+    orgUnitId: string,
+    categories?: Categories,
+    dirtyView: boolean,
+    loadedViewContext: LoadedViewContext,
+    viewPreloaded?: boolean,
+|};
+
+export type ListViewUpdaterContextData = {|
+    currentPage?: number,
+    rowsPerPage?: number,
+    onCancelUpdateList?: Function,
+    customUpdateTrigger?: any,
+    forceUpdateOnMount?: boolean,
+    dirtyList: boolean,
+|};
+
+export type ListViewBuilderContextData = {|
+    updating: boolean,
+    updatingWithDialog: boolean,
+    dataSource?: DataSource,
+    onSelectListRow: SelectRow,
+    onSortList: Sort,
+    onSetListColumnOrder: SetColumnOrder,
+    customRowMenuContents?: CustomRowMenuContents,
+    onUpdateFilter: UpdateFilter,
+    onClearFilter: ClearFilter,
+    onSelectRestMenuItem: SelectRestMenuItem,
+    onChangePage: ChangePage,
+    onChangeRowsPerPage: ChangeRowsPerPage,
+    stickyFilters?: StickyFilters,
+    rowsCount?: number,
+|};
+
+export type InterfaceProps = $ReadOnly<{|
     categories?: Categories,
     columns: ColumnConfigs,
     currentPage?: number,
@@ -108,14 +149,12 @@ export type InterfaceProps<InputDataSource> = $ReadOnly<{|
     currentViewHasTemplateChanges?: boolean,
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
+    customUpdateTrigger?: any,
     dataSource?: DataSource,
     filters?: FiltersData,
-    loading: boolean,
-    updating: boolean,
-    updatingWithDialog: boolean,
-    lastIdDeleted?: string, // TODO: Dealing with this in next PR
-    lastTransaction: number, // TODO: Dealing with this in next PR
+    forceUpdateOnMount?: boolean,
     loadedContext?: LoadedContext,
+    loading: boolean,
     loadViewError?: string,
     loadTemplatesError?: string,
     onAddTemplate: AddTemplate,
@@ -124,24 +163,21 @@ export type InterfaceProps<InputDataSource> = $ReadOnly<{|
     onCancelUpdateList?: CancelUpdateList,
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
-    onCheckSkipReload: Function, // TODO: Dealing with this in next PR
-    onCleanSkipInitAddingTemplate: Function, // TODO: Dealing with this in next PR
     onClearFilter: ClearFilter,
     onDeleteTemplate: DeleteTemplate,
-    onUpdateFilter: UpdateFilter,
-    onSelectListRow: SelectRow<InputDataSource>,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
+    onSelectListRow: SelectRow,
     onSelectRestMenuItem: SelectRestMenuItem,
     onSelectTemplate: SelectTemplate,
     onSetListColumnOrder: SetColumnOrder,
     onSortList: Sort,
     onUnloadingContext?: UnloadingContext,
-    onUpdateTemplate: UpdateTemplate,
+    onUpdateFilter: UpdateFilter,
     onUpdateList: UpdateList,
+    onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     programId: string,
-    recordsOrder?: Array<string>, // TODO: Dealing with this in later PR
     rowIdKey: string,
     rowsCount?: number,
     rowsPerPage?: number,
@@ -150,4 +186,9 @@ export type InterfaceProps<InputDataSource> = $ReadOnly<{|
     stickyFilters?: StickyFilters,
     templates?: WorkingListTemplates,
     templatesLoading: boolean,
+    updating: boolean,
+    updatingWithDialog: boolean,
+    viewPreloaded?: boolean,
 |}>;
+
+export type WorkingListsOutputProps = InterfaceProps;

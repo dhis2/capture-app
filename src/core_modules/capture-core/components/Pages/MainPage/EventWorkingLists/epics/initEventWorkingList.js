@@ -3,11 +3,11 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { convertToClientConfig } from '../helpers/eventFilters';
-import { getEventWorkingListDataAsync } from './eventsRetriever';
+import { getEventListData } from './getEventListData';
 import {
     initListViewSuccess,
     initListViewError,
-} from '../eventWorkingLists.actions';
+} from '../../WorkingListsCommon';
 import { buildQueryArgs } from '../helpers/eventsQueryArgsBuilder';
 import type { ApiEventQueryCriteria, CommonQueryData, ClientConfig, ColumnsMetaForDataFetching } from '../types';
 
@@ -20,12 +20,12 @@ export const initEventWorkingListAsync = async (
     meta: {
         commonQueryData: CommonQueryData,
         columnsMetaForDataFetching: ColumnsMetaForDataFetching,
-        categoryCombinationMeta: ?Object,
-        listId: string,
+        categoryCombinationId?: ?string,
+        storeId: string,
         lastTransaction: number,
     },
 ): Promise<ReduxAction<any, any>> => {
-    const { commonQueryData, columnsMetaForDataFetching, categoryCombinationMeta, listId, lastTransaction } = meta;
+    const { commonQueryData, columnsMetaForDataFetching, categoryCombinationId, storeId, lastTransaction } = meta;
     const clientConfig: ClientConfig = await convertToClientConfig(config, columnsMetaForDataFetching);
     const { currentPage, rowsPerPage, sortById, sortByDirection, filters } = clientConfig;
     const queryArgsSource = {
@@ -37,17 +37,19 @@ export const initEventWorkingListAsync = async (
         ...commonQueryData,
     };
 
-    return getEventWorkingListDataAsync(
+    return getEventListData(
         buildQueryArgs(
             queryArgsSource, {
                 columnsMetaForDataFetching,
-                listId,
+                storeId,
                 isInit: true,
             },
-        ), columnsMetaForDataFetching, categoryCombinationMeta)
-        .then(data =>
-            initListViewSuccess(listId, {
-                ...data,
+        ), columnsMetaForDataFetching, categoryCombinationId)
+        .then(({ eventContainers, pagingData, request }) =>
+            initListViewSuccess(storeId, {
+                recordContainers: eventContainers,
+                pagingData,
+                request,
                 config: {
                     ...clientConfig,
                     selections: {
@@ -59,6 +61,6 @@ export const initEventWorkingListAsync = async (
         )
         .catch((error) => {
             log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));
-            return initListViewError(listId, i18n.t('Working list could not be loaded'));
+            return initListViewError(storeId, i18n.t('Working list could not be loaded'));
         });
 };

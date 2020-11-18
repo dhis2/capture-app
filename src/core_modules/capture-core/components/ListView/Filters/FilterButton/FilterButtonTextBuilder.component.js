@@ -4,16 +4,16 @@ import type { Props } from './filterButtonTextBuilder.types';
 import { FilterButtonMain } from './FilterButtonMain.component';
 import { buildButtonText } from './buttonTextBuilder';
 
-export const FilterButtonTextBuilder = memo<Props>(({ filterValue, type, optionSet, ...passOnProps }: Props) => {
+export const FilterButtonTextBuilder = memo<Props>(({ filterValue, type, options, ...passOnProps }: Props) => {
     const buttonText = useMemo(() => {
         if (!filterValue) {
             return filterValue;
         }
-        return buildButtonText(filterValue, type, optionSet);
+        return buildButtonText(filterValue, type, options);
     }, [
         filterValue,
         type,
-        optionSet,
+        options,
     ]);
 
     return (
@@ -21,7 +21,7 @@ export const FilterButtonTextBuilder = memo<Props>(({ filterValue, type, optionS
             {...passOnProps}
             filterValue={filterValue}
             type={type}
-            optionSet={optionSet}
+            options={options}
             buttonText={buttonText}
         />
     );

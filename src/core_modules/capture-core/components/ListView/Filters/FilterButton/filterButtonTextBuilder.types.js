@@ -1,9 +1,21 @@
 // @flow
-import type { FilterData } from '../../../FiltersForTypes';
-import { typeof dataElementTypes, type OptionSet } from '../../../../metaData';
+import type { FilterData, Options } from '../../../FiltersForTypes';
+import { typeof filterTypesObject } from '../filterTypes';
+import type { FilterButtonContextConsumerOutputProps } from './filterButtonContextConsumer.types';
 
-export type Props = $ReadOnly<{
+type ExtractedProps = $ReadOnly<{|
     filterValue?: FilterData,
-    type: $Values<dataElementTypes>,
-    optionSet: OptionSet,
-}>;
+    type: $Values<filterTypesObject>,
+    options?: ?Options,
+|}>;
+
+type RestProps = $Rest<FilterButtonContextConsumerOutputProps, ExtractedProps>;
+
+export type Props = {|
+    ...RestProps,
+    ...ExtractedProps,
+    filterValue?: FilterData,
+    type: $Values<filterTypesObject>,
+    options?: ?Options,
+    buttonText?: string,
+|};

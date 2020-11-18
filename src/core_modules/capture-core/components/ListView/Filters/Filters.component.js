@@ -159,27 +159,26 @@ const renderIndividualFilterButtons = ({
     onClearFilter: Function,
     classes: Object,
 }) => individualElementsArray
-    .map(
-        element => (
-            <div
-                key={element.id}
-                data-test={`filter-button-container-${element.id}`}
-                className={classes.filterButtonContainer}
-            >
-                <FilterButton
-                    data-test={`filter-button-${element.id}`}
-                    itemId={element.id}
-                    type={element.type}
-                    title={element.header}
-                    optionSet={element.optionSet}
-                    singleSelect={element.singleSelect}
-                    onSetVisibleSelector={onSetVisibleSelector}
-                    isSelectorVisible={element.id === visibleSelectorId}
-                    onUpdateFilter={onUpdateFilter}
-                    onClearFilter={onClearFilter}
-                />
-            </div>
-        ),
+    .map(({ id, type, header, options, multiValueFilter }) => (
+        <div
+            key={id}
+            data-test={`filter-button-container-${id}`}
+            className={classes.filterButtonContainer}
+        >
+            <FilterButton
+                data-test={`filter-button-${id}`}
+                itemId={id}
+                type={type}
+                title={header}
+                options={options}
+                multiValueFilter={multiValueFilter}
+                onSetVisibleSelector={onSetVisibleSelector}
+                selectorVisible={id === visibleSelectorId}
+                onUpdateFilter={onUpdateFilter}
+                onClearFilter={onClearFilter}
+            />
+        </div>
+    ),
     );
 
 const renderRestButton = (
