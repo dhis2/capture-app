@@ -1,17 +1,18 @@
 // @flow
 
-import { dataElementTypes, OptionSet } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData';
 import type {
     FilterData,
+    Options,
 } from '../../FiltersForTypes';
 
 export type Column = {
     id: string,
-    header: string,
     visible: boolean,
     type: $Values<typeof dataElementTypes>,
-    optionSet?: OptionSet,
-    singleSelect?: ?boolean,
+    header: string,
+    options?: ?Options,
+    multiValueFilter?: boolean,
 };
 
 export type Columns = Array<Column>;
@@ -84,6 +85,8 @@ export type InterfaceProps = $ReadOnly<{|
     sortById: string,
     sortByDirection: string,
     stickyFilters: StickyFilters,
+    updating: boolean,
+    updatingWithDialog: boolean,
 |}>;
 
 export type ListViewPassOnProps = $ReadOnly<{|

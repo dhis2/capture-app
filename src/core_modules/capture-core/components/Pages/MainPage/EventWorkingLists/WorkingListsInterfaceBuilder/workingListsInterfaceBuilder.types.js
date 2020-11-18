@@ -1,6 +1,6 @@
 // @flow
 import type { EventProgram } from '../../../../../metaData';
-import type { EventWorkingListsRowMenuSetupOutputProps } from '../RowMenuSetup';
+import type { EventWorkingListsUpdateTriggerOutputProps } from '../UpdateTrigger';
 import type { EventWorkingListsTemplates } from '../types';
 
 type ExtractedProps = $ReadOnly<{|
@@ -8,9 +8,9 @@ type ExtractedProps = $ReadOnly<{|
     templates?: EventWorkingListsTemplates,
 |}>;
 
-type RestProps = $Rest<EventWorkingListsRowMenuSetupOutputProps, ExtractedProps>;
+type RestProps = $Rest<EventWorkingListsUpdateTriggerOutputProps, ExtractedProps>;
 
-export type Props = {|
+export type Props = $ReadOnly<{|
     ...RestProps,
     ...ExtractedProps,
-|};
+|}>;

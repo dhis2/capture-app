@@ -1,40 +1,33 @@
 // @flow
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import MultiSelectBoxes from '../MultiSelectBoxes/MultiSelectBoxes.component';
-import { orientations as multiSelectOrientations } from '../MultiSelectBoxes/multiSelectBoxes.const';
+import { MultiSelectBoxes, multiOrientations } from '../MultiSelectBoxes';
+import { SingleSelectBoxes, singleOrientations } from '../SingleSelectBoxes';
+import { orientations } from './selectBoxes.const';
+import type { Props, Options } from './selectBoxes.types';
 
-import SingleSelectBoxes from '../SingleSelectBoxes/SingleSelectBoxes.component';
-import { orientations as singleSelectOrientatins } from '../SingleSelectBoxes/singleSelectBoxes.const';
 
-type Props = {
-    multiSelect?: ?boolean,
-};
+export const SelectBoxes = (props: Props) => {
+    const { multiSelect, options, optionSet, orientation, ...passOnProps } = props;
 
-const SelectBoxes = (props: Props) => {
-    const { multiSelect, ...passOnProps } = props;
+    // $FlowFixMe even with a cheat flow could not figure out this one
+    const outputOptions: Options = useMemo(() => {
+        if (optionSet) {
+            return optionSet.options
+                .map(({ text, value }) => ({ text, value }));
+        }
+        return options;
+    }, [optionSet, options]);
 
-    if (multiSelect) {
-        return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <MultiSelectBoxes
-                orientation={multiSelectOrientations.HORIZONTAL}
-                {...passOnProps}
-            />
-        );
-    }
+    const [SelectBoxesTypeComponent, typeOrientation] = multiSelect ?
+        [MultiSelectBoxes, orientations.VERTICAL ? multiOrientations.VERTICAL : multiOrientations.HORIZONTAL] :
+        [SingleSelectBoxes, orientations.VERTICAL ? singleOrientations.VERTICAL : singleOrientations.HORIZONTAL];
 
     return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
-        <SingleSelectBoxes
-            orientation={singleSelectOrientatins.HORIZONTAL}
+        <SelectBoxesTypeComponent
             {...passOnProps}
+            orientation={typeOrientation}
+            options={outputOptions}
         />
     );
 };
-
-SelectBoxes.defaultProps = {
-    multiSelect: false,
-};
-
-export default SelectBoxes;

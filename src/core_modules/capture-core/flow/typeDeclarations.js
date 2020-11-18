@@ -191,8 +191,6 @@ declare type OfflineEffect = {
     method: $Values<typeof methods>,
 };
 
-declare type CssClasses = {
-    classes: {
-        [id: string]: string 
-    }
-};
+declare type CssClasses = {|
+    classes: Object,
+|};

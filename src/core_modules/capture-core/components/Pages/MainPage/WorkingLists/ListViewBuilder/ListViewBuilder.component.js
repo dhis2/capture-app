@@ -1,82 +1,48 @@
 // @flow
-import React, { useContext, useMemo } from 'react';
-import {
-    OptionSet,
-    Option,
-    DataElement,
-} from '../../../../../metaData';
+import React, { useContext } from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { ListView } from '../../../../ListView';
 import { ListViewBuilderContext } from '../workingLists.context';
-import type { ColumnConfig } from '../workingLists.types';
 import type { Props } from './listViewBuilder.types';
 
-type ColumnConfigWithOptions = {
-    ...ColumnConfig,
-    options: Array<{ text: string, value: any }>,
-};
 
-export const ListViewBuilder = ({ columns, customListViewMenuContents, ...passOnProps }: Props) => {
+// eslint-disable-next-line complexity
+export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: Props) => {
+    const context = useContext(ListViewBuilderContext);
+    if (!context) {
+        throw Error('missing ListViewBuilderContext');
+    }
+
     const {
         dataSource,
-        recordsOrder,
         onSelectListRow,
         onSortList,
         onSetListColumnOrder,
+        rowsCount,
+        stickyFilters,
         ...passOnContext
-    } = useContext(ListViewBuilderContext);
+    } = context;
 
-    const listViewColumns = useMemo(() => {
-        const createMainPropertyOptionSet = (column: ColumnConfigWithOptions) => {
-            const dataElement = new DataElement((o) => {
-                o.id = column.id;
-                o.type = column.type;
-            });
-
-            const options = column.options.map(option =>
-                new Option((o) => {
-                    o.text = option.text;
-                    o.value = option.value;
-                }),
-            );
-
-            const optionSet = new OptionSet(column.id, options, null, dataElement);
-            dataElement.optionSet = optionSet;
-            return optionSet;
-        };
-
-        return columns
-            .map((column) => {
-                if (column.isMainProperty) {
-                    return {
-                        ...column,
-                        // $FlowFixMe handled in later PR
-                        optionSet: column.options && createMainPropertyOptionSet(column),
-                    };
-                }
-
-                return column;
-            });
-    }, [
-        columns,
-    ]);
-
-    const listViewDataSource = useMemo(() =>
-        recordsOrder
-            .map(id => dataSource[id]), [
-        dataSource,
-        recordsOrder,
-    ]);
+    if (!dataSource || rowsCount == null || !stickyFilters) {
+        const baseErrorMessage = 'dataSource, rowsCount, stickyFilters needs to be set in ListViewBuilder';
+        log.error(
+            errorCreator(baseErrorMessage)(
+                { dataSource, rowsCount, stickyFilters }));
+        throw Error(`${baseErrorMessage}. See console for details`);
+    }
 
     return (
         <ListView
             {...passOnProps}
             {...passOnContext}
-            columns={listViewColumns}
-            dataSource={listViewDataSource}
+            dataSource={dataSource}
             onSelectRow={onSelectListRow}
             onSort={onSortList}
             onSetColumnOrder={onSetListColumnOrder}
             customMenuContents={customListViewMenuContents}
+            rowsCount={rowsCount}
+            stickyFilters={stickyFilters}
         />
     );
 };

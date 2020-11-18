@@ -1,12 +1,12 @@
 // @flow
 import React, { useMemo, useRef, useEffect } from 'react';
 import {
-    ManagerContext,
-    ListViewConfigContext,
-    ListViewLoaderContext,
-    ListViewUpdaterContext,
-    ListViewBuilderContext,
-} from '../workingLists.context';
+    WorkingListsManagerContextProvider,
+    WorkingListsListViewConfigContextProvider,
+    WorkingListsListViewLoaderContextProvider,
+    WorkingListsListViewUpdaterContextProvider,
+    WorkingListsListViewBuilderContextProvider,
+} from './ContextProviders';
 import { TemplatesLoader } from '../TemplatesLoader';
 import type { Props } from './workingListsContextBuilder.types';
 
@@ -28,16 +28,11 @@ export const WorkingListsContextBuilder = (props: Props) => {
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
-        onCleanSkipInitAddingTemplate,
         onUnloadingContext,
         orgUnitId,
         categories,
-        lastTransaction,
         loadedContext,
-        onCheckSkipReload,
-        lastIdDeleted,
         dataSource,
-        recordsOrder,
         onSelectListRow,
         sortById,
         sortByDirection,
@@ -55,129 +50,34 @@ export const WorkingListsContextBuilder = (props: Props) => {
         currentPage,
         rowsCount,
         currentViewHasTemplateChanges,
+        viewPreloaded,
+        customUpdateTrigger,
+        forceUpdateOnMount,
         ...passOnProps
     } = props;
 
-    const dirtyTemplatesStateFirstRunRef = useRef(undefined);
-    useMemo(() => {
-        if (dirtyTemplatesStateFirstRunRef.current !== undefined) {
-            return;
-        }
+    const dirtyTemplates = useMemo(() => (allTemplates ? allTemplates
+        .some(template => template.updating || template.notPreserved || template.deleted) : false), [allTemplates]);
+    const dirtyTemplatesStateFirstRunRef = useRef(dirtyTemplates);
+    const dirtyViewStateFirstRunRef = useRef(loading);
+    const dirtyListStateFirstRunRef = useRef(updating || updatingWithDialog);
 
-        if (!allTemplates) {
-            dirtyTemplatesStateFirstRunRef.current = false;
-            return;
-        }
-
-        dirtyTemplatesStateFirstRunRef.current = allTemplates
-            .some(template => template.updating || template.notPreserved || template.deleted);
-    }, [allTemplates]);
-
-    const dirtyEventListStateFirstRunRef = useRef(undefined);
-    useMemo(() => {
-        if (dirtyEventListStateFirstRunRef.current !== undefined) {
-            return;
-        }
-
-        if (loading || updating || updatingWithDialog) {
-            dirtyEventListStateFirstRunRef.current = true;
-            return;
-        }
-
-        dirtyEventListStateFirstRunRef.current = false;
-    }, [
-        loading,
-        updating,
-        updatingWithDialog,
+    const loadedContextDefined = useMemo(() => loadedContext || {}, [
+        loadedContext,
     ]);
 
-    const managerData = useMemo(() => ({
-        currentTemplate,
-        onSelectTemplate,
-    }), [currentTemplate, onSelectTemplate]);
-
-    const listViewConfigContextData = useMemo(() => ({
-        currentViewHasTemplateChanges,
-        onAddTemplate,
-        onUpdateTemplate,
-        onDeleteTemplate,
-    }), [
-        currentViewHasTemplateChanges,
-        onAddTemplate,
-        onUpdateTemplate,
-        onDeleteTemplate,
+    const loadedProgramIdForTemplates = useMemo(() => loadedContextDefined.programIdTemplates, [
+        loadedContextDefined.programIdTemplates,
     ]);
 
-    const listViewLoaderContextData = useMemo(() => ({
-        sortById,
-        sortByDirection,
-        filters,
-        columns,
-        loading,
-        onLoadView,
-        loadViewError,
-        onUpdateList,
-        onCancelLoadView,
-        onCleanSkipInitAddingTemplate,
-        orgUnitId,
-        categories,
-        lastTransaction,
-        onCheckSkipReload,
-        dirtyEventList: dirtyTemplatesStateFirstRunRef.current || dirtyEventListStateFirstRunRef.current,
+    const loadedViewContext = useMemo(() => ({
+        programId: loadedContextDefined.programIdView,
+        orgUnitId: loadedContextDefined.orgUnitId,
+        categories: loadedContextDefined.categories,
     }), [
-        sortById,
-        sortByDirection,
-        filters,
-        columns,
-        loading,
-        onLoadView,
-        loadViewError,
-        onUpdateList,
-        onCancelLoadView,
-        onCleanSkipInitAddingTemplate,
-        orgUnitId,
-        categories,
-        lastTransaction,
-        onCheckSkipReload,
-    ]);
-
-    const listViewUpdaterContextData = useMemo(() => ({
-        rowsPerPage,
-        currentPage,
-        onCancelUpdateList,
-        lastIdDeleted,
-    }), [rowsPerPage, currentPage, onCancelUpdateList, lastIdDeleted]);
-
-    const listViewBuilderContextData = useMemo(() => ({
-        updating,
-        dataSource,
-        recordsOrder,
-        onSelectListRow,
-        onSortList,
-        onSetListColumnOrder,
-        customRowMenuContents,
-        onUpdateFilter,
-        onClearFilter,
-        onSelectRestMenuItem,
-        onChangePage,
-        onChangeRowsPerPage,
-        stickyFilters,
-        rowsCount,
-    }), [
-        updating,
-        dataSource,
-        recordsOrder,
-        onSelectListRow,
-        onSortList,
-        onSetListColumnOrder,
-        customRowMenuContents,
-        onUpdateFilter,
-        onClearFilter,
-        onSelectRestMenuItem,
-        onChangePage,
-        onChangeRowsPerPage,
-        stickyFilters,
-        rowsCount,
+        loadedContextDefined.programIdView,
+        loadedContextDefined.orgUnitId,
+        loadedContextDefined.categories,
     ]);
 
     const templates = useMemo(() =>
@@ -189,36 +89,67 @@ export const WorkingListsContextBuilder = (props: Props) => {
         onUnloadingContext,
     ]);
 
-    const loadedContextDefined = useMemo(() => loadedContext || {}, [
-        loadedContext,
-    ]);
-
     return (
-        <ManagerContext.Provider
-            value={managerData}
+        <WorkingListsManagerContextProvider
+            currentTemplate={currentTemplate}
+            onSelectTemplate={onSelectTemplate}
         >
-            <ListViewConfigContext.Provider
-                value={listViewConfigContextData}
+            <WorkingListsListViewConfigContextProvider
+                currentViewHasTemplateChanges={currentViewHasTemplateChanges}
+                onAddTemplate={onAddTemplate}
+                onUpdateTemplate={onUpdateTemplate}
+                onDeleteTemplate={onDeleteTemplate}
             >
-                <ListViewLoaderContext.Provider
-                    value={listViewLoaderContextData}
+                <WorkingListsListViewLoaderContextProvider
+                    sortById={sortById}
+                    sortByDirection={sortByDirection}
+                    filters={filters}
+                    columns={columns}
+                    loading={loading}
+                    onLoadView={onLoadView}
+                    loadViewError={loadViewError}
+                    onUpdateList={onUpdateList}
+                    onCancelLoadView={onCancelLoadView}
+                    orgUnitId={orgUnitId}
+                    categories={categories}
+                    dirtyView={dirtyTemplatesStateFirstRunRef.current || dirtyViewStateFirstRunRef.current}
+                    loadedViewContext={loadedViewContext}
+                    viewPreloaded={viewPreloaded}
                 >
-                    <ListViewUpdaterContext.Provider
-                        value={listViewUpdaterContextData}
+                    <WorkingListsListViewUpdaterContextProvider
+                        rowsPerPage={rowsPerPage}
+                        currentPage={currentPage}
+                        onCancelUpdateList={onCancelUpdateList}
+                        customUpdateTrigger={customUpdateTrigger}
+                        forceUpdateOnMount={forceUpdateOnMount}
+                        dirtyList={dirtyListStateFirstRunRef.current}
                     >
-                        <ListViewBuilderContext.Provider
-                            value={listViewBuilderContextData}
+                        <WorkingListsListViewBuilderContextProvider
+                            updating={updating}
+                            updatingWithDialog={updatingWithDialog}
+                            dataSource={dataSource}
+                            onSelectListRow={onSelectListRow}
+                            onSortList={onSortList}
+                            onSetListColumnOrder={onSetListColumnOrder}
+                            customRowMenuContents={customRowMenuContents}
+                            onUpdateFilter={onUpdateFilter}
+                            onClearFilter={onClearFilter}
+                            onSelectRestMenuItem={onSelectRestMenuItem}
+                            onChangePage={onChangePage}
+                            onChangeRowsPerPage={onChangeRowsPerPage}
+                            stickyFilters={stickyFilters}
+                            rowsCount={rowsCount}
                         >
                             <TemplatesLoader
                                 {...passOnProps}
                                 templates={templates}
                                 dirtyTemplates={!!dirtyTemplatesStateFirstRunRef.current}
-                                loadedContext={loadedContextDefined}
+                                loadedProgramIdForTemplates={loadedProgramIdForTemplates}
                             />
-                        </ListViewBuilderContext.Provider>
-                    </ListViewUpdaterContext.Provider>
-                </ListViewLoaderContext.Provider>
-            </ListViewConfigContext.Provider>
-        </ManagerContext.Provider>
+                        </WorkingListsListViewBuilderContextProvider>
+                    </WorkingListsListViewUpdaterContextProvider>
+                </WorkingListsListViewLoaderContextProvider>
+            </WorkingListsListViewConfigContextProvider>
+        </WorkingListsManagerContextProvider>
     );
 };
