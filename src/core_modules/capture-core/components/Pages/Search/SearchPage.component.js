@@ -6,6 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import { useParams, useLocation } from 'react-router';
 import {
     Modal,
     ModalTitle,
@@ -65,6 +66,13 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
+const useFallbackTriggered = (): boolean => {
+    const defaultValue = { fallback: false };
+    const { state: { fallback } = defaultValue } = useLocation();
+
+    return fallback;
+};
+
 const Index = ({
     showInitialSearchPage,
     navigateToMainPage,
@@ -75,11 +83,11 @@ const Index = ({
     preselectedProgramId,
     searchStatus,
     trackedEntityTypeId,
-    fallbackTriggered,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
     const titleText = useScopeTitleText(selectedSearchScopeId);
+    const fallbackTriggered = useFallbackTriggered();
 
     useEffect(() => {
         const scopeId = preselectedProgramId || trackedEntityTypeId;
@@ -98,7 +106,7 @@ const Index = ({
         // we rerender the page without a preselectedProgramId.
         // This is triggering this hook. However the fallback search view needs
         // to start with a loading spinner and not with the initial view.
-        if (!fallbackTriggered) {
+        if (fallbackTriggered) {
             showInitialSearchPage();
         }
         return () => {
@@ -109,8 +117,8 @@ const Index = ({
         };
     },
     [
-        cleanSearchRelatedInfo,
         fallbackTriggered,
+        cleanSearchRelatedInfo,
         preselectedProgramId,
         showInitialSearchPage,
     ]);
@@ -127,9 +135,7 @@ const Index = ({
     };
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-            <LockedSelector
-                customActionsOnProgramIdSet={[cleanFallbackRelatedData()]}
-            />
+            <LockedSelector />
             <div data-test="dhis2-capture-search-page-content" className={classes.container} >
                 <Button
                     dataTest="dhis2-capture-back-button"

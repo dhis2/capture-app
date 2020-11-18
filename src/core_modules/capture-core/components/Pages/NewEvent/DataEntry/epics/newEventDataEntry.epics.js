@@ -39,7 +39,7 @@ import getStageForEventProgram from '../../../../../metaData/helpers/EventProgra
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../actions/crossPage.actions';
-import { lockedSelectorActionTypes, lockedSelectorBatchActionTypes } from '../../../../LockedSelector/LockedSelector.actions';
+import { lockedSelectorActionTypes } from '../../../../LockedSelector/LockedSelector.actions';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
@@ -84,7 +84,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN,
-            lockedSelectorBatchActionTypes.PROGRAM_ID_SET_BATCH,
+            lockedSelectorActionTypes.PROGRAM_ID_SET,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
         ),
@@ -140,7 +140,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         ofType(
             lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
-            lockedSelectorBatchActionTypes.PROGRAM_ID_SET_BATCH,
+            lockedSelectorActionTypes.PROGRAM_ID_SET,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
         ),
         filter(() => {

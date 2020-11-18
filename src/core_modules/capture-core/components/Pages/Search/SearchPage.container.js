@@ -121,8 +121,6 @@ export const SearchPage: ComponentType<{||}> = () => {
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
     const ready: boolean =
       useSelector(({ activePage }) => !activePage.isLoading);
-    const fallbackTriggered: boolean =
-      useSelector(({ searchPage }) => searchPage.fallbackTriggered);
     const currentProgramId: string =
       useSelector(({ currentSelections }) => currentSelections.programId);
     const trackedEntityTypeId: string =
@@ -145,7 +143,6 @@ export const SearchPage: ComponentType<{||}> = () => {
             availableSearchOptions={availableSearchOptions}
             preselectedProgramId={preselectedProgramId}
             trackedEntityTypeId={trackedEntityTypeId}
-            fallbackTriggered={fallbackTriggered}
             searchStatus={searchStatus}
             error={error}
             ready={ready}
