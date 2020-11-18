@@ -1,13 +1,14 @@
 // @flow
 import { typeof filterTypesObject } from '../filterTypes';
+import type { Options } from '../../../FiltersForTypes';
 
 export type Props = {|
     'data-test': string,
     itemId: string,
     type: $Values<filterTypesObject>,
     title: string,
-    optionSet?: Object,
-    singleSelect?: ?boolean,
+    options?: ?Options,
+    multiValueFilter?: boolean,
     onSetVisibleSelector: Function,
     selectorVisible: boolean,
     onUpdateFilter: Function,

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import D2TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
-import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
+import { orientations } from '../../FormFields/Options/SelectBoxes'; // TODO: Refactor
 import { getBooleanFilterData } from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 

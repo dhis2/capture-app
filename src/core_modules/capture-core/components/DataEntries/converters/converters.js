@@ -1,7 +1,7 @@
 // @flow
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
-export function convertGeometryOut(dataEntryValue: any, prevValue: string, foundation: RenderFoundation) {
+export function convertGeometryOut(dataEntryValue: any, foundation: RenderFoundation) {
     if (!dataEntryValue || !['Polygon', 'Point'].includes(foundation.featureType)) return null;
     let coordinates = dataEntryValue;
     if (foundation.featureType === 'Point') {
@@ -32,15 +32,8 @@ export function convertStatusIn(value: string) {
     return null;
 }
 
-export function convertStatusOut(dataEntryValue: string, prevValue: string) {
-    if (dataEntryValue === 'true' && prevValue !== 'COMPLETED') {
-        return 'COMPLETED';
-    }
-
-    if (!dataEntryValue && prevValue === 'COMPLETED') {
-        return 'ACTIVE';
-    }
-    return prevValue;
+export function convertStatusOut(dataEntryValue: string) {
+    return dataEntryValue === 'true' ? 'COMPLETED' : 'ACTIVE';
 }
 
 export function convertNoteOut(dataEntryValue: string) {

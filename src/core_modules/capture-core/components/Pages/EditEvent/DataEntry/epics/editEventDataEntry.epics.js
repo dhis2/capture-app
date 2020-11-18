@@ -1,9 +1,7 @@
 // @flow
-import log from 'loglevel';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { errorCreator } from 'capture-core-utils';
 import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as editEventActionTypes,
@@ -14,7 +12,7 @@ import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import { getProgramAndStageFromEvent } from '../../../../../metaData';
+import { getProgramAndStageFromEvent, getEventProgramThrowIfNotFound } from '../../../../../metaData';
 import {
     getRulesActionsForEvent,
     getCurrentClientValues,
@@ -23,11 +21,6 @@ import {
 } from '../../../../../rules/actionsCreator';
 import type { FieldData } from '../../../../../rules/actionsCreator';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
-
-
-const errorMessages = {
-    COULD_NOT_GET_EVENT_FROM_STATE: 'Could not get event from state',
-};
 
 export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
     action$.pipe(
@@ -56,43 +49,28 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const eventId = state.dataEntries[dataEntryId].eventId;
-    const event = state.events[eventId];
-    const metadataContainer = getProgramAndStageFromEvent(event);
+    const { programId } = state.currentSelections;
+    const eventProgram = getEventProgramThrowIfNotFound(programId);
 
     const orgUnitId = state.currentSelections.orgUnitId;
     const orgUnit = state.organisationUnits[orgUnitId];
 
-    let rulesActions;
-    if (metadataContainer.error) {
-        const foundation = metadataContainer.stage ? metadataContainer.stage.stageForm : null;
-        log.error(
-            errorCreator(
-                errorMessages.COULD_NOT_GET_EVENT_FROM_STATE)(
-                { method: 'runRulesForEditSingleEventEpic' }));
-        rulesActions = getRulesActionsForEvent(
-            metadataContainer.program,
-            foundation,
-            formId,
-            orgUnit,
-        );
-    } else {
-        const foundation = metadataContainer.stage.stageForm;
+    const foundation = eventProgram.stage.stageForm;
 
-        const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
+    const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
 
-        let currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, event, foundation);
-        currentEventMainData = { ...state.events[eventId], ...currentEventMainData };
-        const currentEventData = { ...currentEventValues, ...currentEventMainData };
+    let currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
+    currentEventMainData = { ...state.events[eventId], ...currentEventMainData };
+    const currentEventData = { ...currentEventValues, ...currentEventMainData };
 
-        rulesActions = getRulesActionsForEvent(
-            metadataContainer.program,
-            foundation,
-            formId,
-            orgUnit,
-            currentEventData,
-            [currentEventData],
-        );
-    }
+    const rulesActions = getRulesActionsForEvent(
+        eventProgram,
+        foundation,
+        formId,
+        orgUnit,
+        currentEventData,
+        [currentEventData],
+    );
 
     return batchActions([
         ...rulesActions,

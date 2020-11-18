@@ -1,5 +1,5 @@
 // @flow
-import React, { memo } from 'react';
+import React, { memo, useCallback, useEffect, useRef } from 'react';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
 import { TemplatesManager } from '../TemplatesManager';
 import type { Props } from './templatesLoader.types';
@@ -7,50 +7,73 @@ import type { Props } from './templatesLoader.types';
 const TemplatesManangerWithLoadingIndicator = withErrorMessageHandler()(
     withLoadingIndicator()(TemplatesManager));
 
+const useLoadTemplates = ({
+    programId,
+    loadedProgramIdForTemplates,
+    dirtyTemplates,
+    onLoadTemplates,
+    onCancelLoadTemplates,
+}) => {
+    const firstRunRef = useRef(true);
+    const triggerLoadRef = useRef(true);
+
+    let triggerLoad = false;
+    if (programId !== loadedProgramIdForTemplates ||
+        (dirtyTemplates && firstRunRef.current)) {
+        triggerLoad = true;
+    }
+    triggerLoadRef.current = triggerLoad;
+
+    const cancelLoadTemplatesIfApplicable = useCallback(() => {
+        triggerLoadRef.current && onCancelLoadTemplates && onCancelLoadTemplates();
+    }, [onCancelLoadTemplates]);
+
+    useEffect(() => {
+        firstRunRef.current = false;
+
+        if (triggerLoad) {
+            onLoadTemplates(programId);
+        }
+
+        return () => cancelLoadTemplatesIfApplicable();
+    }, [
+        triggerLoad,
+        onLoadTemplates,
+        programId,
+        cancelLoadTemplatesIfApplicable,
+    ]);
+
+    useEffect(() => () => onCancelLoadTemplates && onCancelLoadTemplates(), [onCancelLoadTemplates]);
+
+    return triggerLoad;
+};
+
 export const TemplatesLoader = memo<Props>((props: Props) => {
     const {
         loadTemplatesError,
         onLoadTemplates,
         onCancelLoadTemplates,
         programId,
-        loadedContext,
+        loadedProgramIdForTemplates,
         dirtyTemplates,
         templatesLoading,
         ...passOnProps
     } = props;
 
-    const firstRunRef = React.useRef(true);
-
-    React.useEffect(() => {
-        if (programId === loadedContext.programIdTemplates &&
-            (!dirtyTemplates || !firstRunRef.current)) {
-            firstRunRef.current = false;
-            return undefined;
-        }
-        firstRunRef.current = false;
-        onLoadTemplates(programId);
-        return undefined;
-    }, [
+    const triggerLoading = useLoadTemplates({
+        programId,
+        loadedProgramIdForTemplates,
+        dirtyTemplates,
         onLoadTemplates,
         onCancelLoadTemplates,
-        programId,
-        loadedContext.programIdTemplates,
-        dirtyTemplates,
-    ]);
-
-    React.useEffect(() => () => onCancelLoadTemplates && onCancelLoadTemplates(), [onCancelLoadTemplates]);
-
-    const ready = programId === loadedContext.programIdTemplates &&
-        (!dirtyTemplates || !firstRunRef.current) &&
-        !templatesLoading;
+    });
 
     return (
         <TemplatesManangerWithLoadingIndicator
             {...passOnProps}
-            ready={ready}
+            ready={!triggerLoading && !templatesLoading}
             error={loadTemplatesError}
             programId={programId}
-            loadedContext={loadedContext}
         />
     );
 });

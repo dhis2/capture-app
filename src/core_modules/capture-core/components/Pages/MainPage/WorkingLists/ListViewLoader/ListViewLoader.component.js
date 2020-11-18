@@ -1,21 +1,113 @@
 // @flow
-import React, { memo } from 'react';
+import React, { memo, useCallback, useContext, useEffect, useRef } from 'react';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../../HOC';
 import { ListViewUpdater } from '../ListViewUpdater';
 import { ListViewLoaderContext } from '../workingLists.context';
+import { useIsContextInSync } from './useIsContextInSync';
 import type { Props } from './listViewLoader.types';
 
 const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
     withLoadingIndicator(() => ({ margin: 10 }))(ListViewUpdater));
 
-// eslint-disable-next-line complexity
+const hasTemplateChange = (currentTemplate, prevTemplate, viewPreloaded) =>
+    (prevTemplate && currentTemplate.id !== prevTemplate.id && !viewPreloaded);
+
+const useCalculateTriggerLoad = ({
+    programId,
+    orgUnitId,
+    categories,
+    loadedViewContext,
+    currentTemplate,
+    viewPreloaded,
+    dirtyView,
+    firstRun,
+    prevTemplate,
+}) => {
+    const contextInSync = useIsContextInSync(programId, orgUnitId, categories, loadedViewContext);
+    let triggerLoad = false;
+    if (!contextInSync || hasTemplateChange(currentTemplate, prevTemplate, viewPreloaded) || (dirtyView && firstRun)) {
+        triggerLoad = true;
+    }
+    return triggerLoad;
+};
+
+const useLoadView = ({
+    programId,
+    orgUnitId,
+    categories,
+    loadedViewContext,
+    currentTemplate,
+    dirtyView,
+    onLoadView,
+    onCancelLoadView,
+    viewPreloaded,
+}) => {
+    const firstRunRef = useRef(true);
+    const prevTemplateRef = useRef(undefined);
+    const triggerLoadRef = useRef(true);
+    const viewLoadedOnFirstRunRef = useRef(false);
+
+    const triggerLoad = useCalculateTriggerLoad({
+        programId,
+        orgUnitId,
+        categories,
+        loadedViewContext,
+        currentTemplate,
+        viewPreloaded,
+        dirtyView,
+        firstRun: firstRunRef.current,
+        prevTemplate: prevTemplateRef.current,
+    });
+    triggerLoadRef.current = triggerLoad;
+
+    const cancelLoadViewIfApplicable = useCallback(() => {
+        triggerLoadRef.current && onCancelLoadView && onCancelLoadView();
+    }, [onCancelLoadView]);
+
+    useEffect(() => {
+        prevTemplateRef.current = currentTemplate;
+        firstRunRef.current = false;
+
+        if (triggerLoad) {
+            onLoadView(currentTemplate,
+                { programId, orgUnitId, categories },
+            );
+        }
+        return () => cancelLoadViewIfApplicable();
+    }, [
+        triggerLoad,
+        onLoadView,
+        currentTemplate,
+        programId,
+        orgUnitId,
+        categories,
+        cancelLoadViewIfApplicable,
+    ]);
+
+    useEffect(() => () => onCancelLoadView && onCancelLoadView(), [onCancelLoadView]);
+
+    if (firstRunRef.current && triggerLoad) {
+        viewLoadedOnFirstRunRef.current = true;
+    }
+
+    return {
+        triggerLoad,
+        viewLoadedOnFirstRun: viewLoadedOnFirstRunRef.current,
+    };
+};
+
+
 export const ListViewLoader = memo<Props>((props: Props) => {
     const {
         currentTemplate,
         programId,
-        loadedContext,
         ...passOnProps
     } = props;
+
+    const context = useContext(ListViewLoaderContext);
+    if (!context) {
+        throw Error('missing ListViewLoaderContext');
+    }
 
     const {
         sortById,
@@ -27,65 +119,24 @@ export const ListViewLoader = memo<Props>((props: Props) => {
         loadViewError,
         onCancelLoadView,
         onUpdateList,
-        onCleanSkipInitAddingTemplate,
         orgUnitId,
         categories,
-        lastTransaction,
-        onCheckSkipReload,
-        dirtyEventList,
-    } = React.useContext(ListViewLoaderContext);
+        dirtyView,
+        loadedViewContext,
+        viewPreloaded,
+    } = context;
 
-    const hasContextChanged = React.useMemo(() => !onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, loadedContext), [
-        onCheckSkipReload,
+    const { triggerLoad, viewLoadedOnFirstRun } = useLoadView({
         programId,
         orgUnitId,
         categories,
-        lastTransaction,
-        loadedContext,
-    ]);
-
-    const prevTemplateRef = React.useRef(undefined);
-    const firstRunRef = React.useRef(true);
-    // eslint-disable-next-line complexity
-    React.useEffect(() => {
-        if (onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, loadedContext) &&
-            (!prevTemplateRef.current || currentTemplate.id === prevTemplateRef.current.id) &&
-            (!dirtyEventList || !firstRunRef.current)) {
-            prevTemplateRef.current = currentTemplate;
-            firstRunRef.current = false;
-            return undefined;
-        }
-
-        prevTemplateRef.current = currentTemplate;
-        firstRunRef.current = false;
-
-        if (currentTemplate.skipInitDuringAddProcedure) {
-            return () => onCleanSkipInitAddingTemplate(currentTemplate);
-        }
-
-        onLoadView(currentTemplate,
-            { programId, orgUnitId, categories, lastTransaction },
-        );
-        return undefined;
-    }, [
-        onLoadView,
+        loadedViewContext,
         currentTemplate,
-        onCheckSkipReload,
-        onCleanSkipInitAddingTemplate,
-        programId,
-        orgUnitId,
-        categories,
-        lastTransaction,
-        loadedContext,
-        dirtyEventList,
-    ]);
-
-    React.useEffect(() => () => onCancelLoadView && onCancelLoadView(), [onCancelLoadView]);
-
-    const ready = !hasContextChanged &&
-        (!prevTemplateRef.current || currentTemplate.id === prevTemplateRef.current.id || !!currentTemplate.skipInitDuringAddProcedure) &&
-        (!dirtyEventList || !firstRunRef.current) &&
-        !loading;
+        dirtyView,
+        onLoadView,
+        onCancelLoadView,
+        viewPreloaded,
+    });
 
     return (
         <EventListUpdaterWithLoadingIndicator
@@ -97,9 +148,10 @@ export const ListViewLoader = memo<Props>((props: Props) => {
             programId={programId}
             orgUnitId={orgUnitId}
             categories={categories}
-            ready={ready}
+            ready={!triggerLoad && !loading}
             error={loadViewError}
             onUpdateList={onUpdateList}
+            viewLoadedOnFirstRun={viewLoadedOnFirstRun}
         />
     );
 });

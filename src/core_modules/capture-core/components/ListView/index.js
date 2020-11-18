@@ -1,10 +1,12 @@
 // @flow
 export { ListView } from './ListView.component';
 export type {
+    Columns,
     CustomRowMenuContents,
     CustomRowMenuContent,
     CustomMenuContents,
     CustomMenuContent,
+    DataSource,
     FiltersData,
     StickyFilters,
     ChangePage,
