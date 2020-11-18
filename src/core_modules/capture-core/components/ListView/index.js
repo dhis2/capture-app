@@ -1,10 +1,25 @@
 // @flow
-export { default as EventList } from './ListWrapper/EventsListWrapper.container';
-export { actionTypes as paginationActionTypes } from './Pagination';
-export { listViewActionTypes } from './listView.actions';
+export { ListView } from './ListView.component';
+export type {
+    Columns,
+    CustomRowMenuContents,
+    CustomRowMenuContent,
+    CustomMenuContents,
+    CustomMenuContent,
+    DataSource,
+    FiltersData,
+    StickyFilters,
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
+    UpdateFilter,
+    SelectRestMenuItem,
+    SetColumnOrder,
+    SelectRow,
+    Sort,
+} from './types';
 
 export { dateFilterTypes, assigneeFilterModes } from '../FiltersForTypes';
-
 export type {
     AssigneeFilterData,
     DateFilterData,

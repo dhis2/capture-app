@@ -17,4 +17,6 @@ export type { NumericFilterData } from './Numeric/types';
 export type { OptionSetFilterData } from './OptionSet/types';
 export type { TextFilterData } from './Text/types';
 export type { TrueOnlyFilterData } from './TrueOnly/types';
-export type { UpdatableFilterContent } from './types';
+export type { UpdatableFilterContent, FilterData } from './types';
+
+export type { Options } from '../FormFields/Options/SelectBoxes';

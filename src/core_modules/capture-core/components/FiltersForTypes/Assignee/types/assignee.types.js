@@ -1,11 +1,11 @@
 // @flow
 import { typeof assigneeFilterModes } from '../constants';
 
-export type AssigneeFilterData = {
+export type AssigneeFilterData = {|
     assignedUserMode: $Values<assigneeFilterModes>,
-    assignedUser?: ?{
+    assignedUser?: ?{|
         id: string,
         username: string,
         name: string,
-    },
-};
+    |},
+|};

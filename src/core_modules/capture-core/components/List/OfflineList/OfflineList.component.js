@@ -42,9 +42,6 @@ const styles = theme => ({
     },
     table: {},
     row: {},
-    dataRow: {
-        cursor: 'pointer',
-    },
     cell: {
         padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 7}px ${theme.spacing.unit /
             2}px ${theme.spacing.unit * 3}px`,
@@ -88,16 +85,14 @@ type Props = {
         bodyCell: string,
         footerCell: string,
         row: string,
-        dataRow: string,
     },
     rowIdKey: string,
     sortById: string,
     sortByDirection: string,
-    onRowClick: (rowData: {id: string}) => void,
     noItemsText: ?string,
 };
 
-class OfflineList extends Component<Props> {
+class Index extends Component<Props> {
     static defaultProps = {
         rowIdKey: 'id',
     };
@@ -135,12 +130,12 @@ class OfflineList extends Component<Props> {
                     <SortLabelWrapper
                         isActive={column.id === sortById}
                         initialDirection={
-                            OfflineList.typesWithAscendingInitialDirection.includes(column.type)
+                            Index.typesWithAscendingInitialDirection.includes(column.type)
                                 ? sortLabelDirections.ASC
                                 : sortLabelDirections.DESC
                         }
                         placement={
-                            OfflineList.typesWithRightPlacement.includes(column.type)
+                            Index.typesWithRightPlacement.includes(column.type)
                                 ? sorLabelPlacements.RIGHT
                                 : sorLabelPlacements.LEFT
                         }
@@ -162,8 +157,7 @@ class OfflineList extends Component<Props> {
     }
 
     renderRows(visibleColumns: Array<Column>) {
-        const dataSource = this.props.dataSource;
-        const classes = this.props.classes;
+        const { dataSource, classes, noItemsText, rowIdKey } = this.props;
 
         if (!dataSource || dataSource.length === 0) {
             const columnsCount = visibleColumns.length;
@@ -175,7 +169,7 @@ class OfflineList extends Component<Props> {
                         colSpan={columnsCount}
                         className={classNames(classes.cell, classes.bodyCell)}
                     >
-                        {this.props.noItemsText || i18n.t('No items to display')}
+                        {noItemsText || i18n.t('No items to display')}
                     </Cell>
                 </Row>
             );
@@ -191,7 +185,7 @@ class OfflineList extends Component<Props> {
                         >
                             <div
                                 style={
-                                    OfflineList.typesWithRightPlacement.includes(column.type) ?
+                                    Index.typesWithRightPlacement.includes(column.type) ?
                                         { textAlign: 'right' } :
                                         null
                                 }
@@ -203,9 +197,8 @@ class OfflineList extends Component<Props> {
 
                 return (
                     <Row
-                        key={row[this.props.rowIdKey]}
-                        className={classNames(classes.row, classes.dataRow)}
-                        onClick={() => this.props.onRowClick(row)}
+                        key={row[rowIdKey]}
+                        className={classes.row}
                     >
                         {cells}
                     </Row>
@@ -214,7 +207,7 @@ class OfflineList extends Component<Props> {
     }
 
     render() {
-        const { dataSource, columns, classes } = this.props; //eslint-disable-line
+        const { columns, classes } = this.props;
 
         const visibleColumns = columns ?
             columns
@@ -245,9 +238,4 @@ class OfflineList extends Component<Props> {
         );
     }
 }
-
-/**
- * Create the offline list
- * @namespace OfflineList
- */
-export default withStyles(styles)(OfflineList);
+export const OfflineList = withStyles(styles)(Index);

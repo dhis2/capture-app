@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
-import OfflineList from './OfflineList.component';
-import OfflineEmptyList from './OfflineEmptyList.component';
+import { OfflineList } from './OfflineList.component';
+import { OfflineEmptyList } from './OfflineEmptyList.component';
 
 type Props = {
     hasData: boolean,
 };
 
 
-export default (OfflineListContainerCreator: any) => {
+export const createOfflineListWrapper = (OfflineListContainerCreator: any) => {
     const OfflineListContainer = OfflineListContainerCreator ?
         OfflineListContainerCreator(OfflineList) :
         OfflineList;

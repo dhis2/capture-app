@@ -1,12 +1,49 @@
 // @flow
-export { default as WorkingLists } from './WorkingLists.container';
-export { actionTypes } from './workingLists.actions';
+export { WorkingLists } from './WorkingLists.component';
+export { areFiltersEqual } from './utils';
 export {
-    initEventListEpic,
-    updateEventListEpic,
-    retrieveTemplatesEpic,
-    requestDeleteEventEpic,
-    updateTemplateEpic,
-    addTemplateEpic,
-    deleteTemplateEpic,
-} from './epics';
+    dateFilterTypes,
+} from '../../../ListView';
+export type {
+    DateFilterData,
+    BooleanFilterData,
+    TextFilterData,
+    NumericFilterData,
+    TrueOnlyFilterData,
+    OptionSetFilterData,
+    AssigneeFilterData,
+    CustomRowMenuContent,
+    CustomRowMenuContents,
+    CustomMenuContent,
+    CustomMenuContents,
+    ChangePage,
+    ChangeRowsPerPage,
+    DataSource,
+    ClearFilter,
+    FiltersData,
+    SelectRestMenuItem,
+    SelectRow,
+    SetColumnOrder,
+    Sort,
+    StickyFilters,
+    UpdateFilter,
+} from '../../../ListView';
+export type {
+    AddTemplate,
+    CancelLoadTemplates,
+    CancelLoadView,
+    CancelUpdateList,
+    Categories,
+    ColumnConfig,
+    ColumnConfigs,
+    DeleteTemplate,
+    LoadedContext,
+    LoadTemplates,
+    LoadView,
+    SelectTemplate,
+    UnloadingContext,
+    UpdateList,
+    UpdateTemplate,
+    WorkingListTemplate,
+    WorkingListTemplates,
+} from './workingLists.types';

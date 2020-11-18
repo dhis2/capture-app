@@ -5,12 +5,12 @@ import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
     selectionsIncompleteActionTypes as newEventPageSelectionsIncompleteActionTypes,
 } from '../../components/Pages/NewEvent';
+import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
-import { listViewActionTypes as eventListActionTypes } from '../../components/ListView';
 import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as setCurrentSelectionsActionTypes,
@@ -76,15 +76,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.locationSwitchInProgress = true;
         return newState;
     },
-    [eventListActionTypes.OPEN_EDIT_EVENT_PAGE]: (state) => {
-        const newState = {
-            ...state,
-            page: 'editEvent',
-            locationSwitchInProgress: true,
-        };
-        return newState;
-    },
-    [eventListActionTypes.OPEN_VIEW_EVENT_PAGE]: (state) => {
+    [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: (state) => {
         const newState = {
             ...state,
             page: 'viewEvent',

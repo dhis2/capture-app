@@ -11,11 +11,9 @@ import {
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/editEventDataEntry.actions';
-
-import { listViewActionTypes as eventListActionTypes } from '../../components/ListView';
 import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
 import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
-
+import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 
 export const viewEventPageDesc = createReducerDescription({
     [viewEventActionTypes.VIEW_EVENT_FROM_URL]: (state, action) => {
@@ -40,7 +38,13 @@ export const viewEventPageDesc = createReducerDescription({
         };
         return newState;
     },
-    [eventListActionTypes.OPEN_VIEW_EVENT_PAGE]: (state, action) => {
+    [viewEventDataEntryActionTypes.PREREQUISITES_ERROR_LOADING_VIEW_EVENT_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        newState.dataEntryIsLoading = false;
+        newState.dataEntryLoadError = action.payload;
+        return newState;
+    },
+    [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: (state, action) => {
         const newState = {
             eventDetailsSection: {},
             notesSection: { isLoading: true },
