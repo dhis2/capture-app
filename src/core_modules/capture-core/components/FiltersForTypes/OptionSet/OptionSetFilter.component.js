@@ -1,11 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
-import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
-import OptionSet from '../../../metaData/OptionSet/OptionSet';
+import { SelectBoxes, orientations, type Options } from '../../FormFields/Options/SelectBoxes';
 import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './optionSetFilterDataGetter';
-import type { UpdatableFilterContent } from '../filters.types';
+import type { UpdatableFilterContent } from '../types';
 
 const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {
@@ -16,7 +14,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    optionSet: OptionSet,
+    options: Options,
     value: any,
     onCommitValue: (value: any) => void,
     classes: {
@@ -24,7 +22,7 @@ type Props = {
     },
     singleSelect?: ?boolean,
 };
-// $FlowSuppress
+
 // $FlowFixMe[incompatible-variance] automated comment
 // $FlowFixMe[cannot-resolve-name] automated comment
 class OptionSetFilter extends Component<Props> implements UpdatableFilterContent<Value> {
@@ -47,14 +45,15 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
     }
 
     render() {
-        const { onCommitValue, optionSet, value, classes, singleSelect } = this.props;
+        const { onCommitValue, options, value, classes, singleSelect } = this.props;
 
         return (
             <div
                 className={classes.selectBoxesContainer}
             >
+                { /* $FlowFixMe */ }
                 <SelectBoxes
-                    optionSet={optionSet}
+                    options={options}
                     value={value}
                     onBlur={onCommitValue}
                     orientation={orientations.VERTICAL}

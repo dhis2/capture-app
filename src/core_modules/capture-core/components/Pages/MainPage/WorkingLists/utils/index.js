@@ -1,3 +1,3 @@
 // @flow
 
-export { filtersAreEqual } from './filtersComparer';
+export { areFiltersEqual } from './areFiltersEqual';

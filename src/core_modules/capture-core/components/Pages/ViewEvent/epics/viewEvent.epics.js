@@ -22,17 +22,16 @@ import {
     openViewEventPageFailed,
     initializeWorkingListsOnBackToMainPage,
 } from '../ViewEventComponent/viewEvent.actions';
-import { actionTypes as eventListActionTypes } from '../../MainPage/EventsList/eventsList.actions';
 import { getEvent } from '../../../../events/eventRequests';
 import {
     initializeNewRelationship,
 } from '../../NewRelationship/newRelationship.actions';
 import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
-
+import { eventWorkingListsActionTypes } from '../../../Pages/MainPage/EventWorkingLists';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE),
+        ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
         switchMap((action) => {
             const state = store.value;
             const eventId = action.payload;
@@ -102,7 +101,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
 
 export const openViewPageLocationChangeEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE),
+        ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
         map(action => push(`/viewEvent/${action.payload}`)));
 
 export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
