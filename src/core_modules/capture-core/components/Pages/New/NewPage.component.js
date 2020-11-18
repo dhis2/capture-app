@@ -82,29 +82,28 @@ const NewPagePlain = ({
         <LockedSelector />
 
         <div data-test="dhis2-capture-registration-page-content" className={classes.container} >
-            <Paper className={classes.paper}>
-                <div className={classes.maxWidth}>
-                    <div className={classes.title} >
-                        New {titleText}
-                    </div>
+            {
+                newPageStatus === newPageStatuses.DEFAULT &&
 
-                    {
-                        newPageStatus === newPageStatuses.DEFAULT &&
-                        <>
-                            {
-                                (!selectedScopeType || selectedScopeType === scopeTypes.TRACKED_ENTITY_TYPE) &&
+                <Paper className={classes.paper}>
+                    <div className={classes.maxWidth}>
+                        <div className={classes.title} >
+                            New {titleText}
+                        </div>
+                        {
+                            (!selectedScopeType || selectedScopeType === scopeTypes.TRACKED_ENTITY_TYPE) &&
                                 <TrackedEntityTypeSelector
                                     onSelect={handleRegistrationScopeSelection}
                                     selectedSearchScopeId={selectedScopeId}
                                 />
-                            }
+                        }
+                    </div>
+                </Paper>
+            }
 
-                        </>
-                    }
-                </div>
-            </Paper>
             {
                 newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
+
                 <InefficientSelectionsMessage
                     message={i18n.t('Choose a registering unit to start reporting')}
                 />

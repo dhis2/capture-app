@@ -1,6 +1,7 @@
 // @flow
-import React, { useMemo } from 'react';
-import type { ComponentType } from 'react';
+import React, { useMemo, type ComponentType } from 'react';
+import { useHistory } from 'react-router';
+import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
@@ -13,9 +14,7 @@ import {
 import type { OwnProps, Props } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
-import { useHistory } from 'react-router';
 import { urlThreeArguments } from '../../utils/url';
-import { useSelector } from 'react-redux';
 
 const styles = ({ typography }) => ({
     searchDomainSelectorSection: {
@@ -69,10 +68,11 @@ export const Index =
       const orgUnitId: string = useSelector(({ currentSelections }) => currentSelections.orgUnitId);
       const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
 
-      const handleSelect = ({ selected }) => {
+      const handleSelectionChange = ({ selected }) => {
           onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE);
           push(urlThreeArguments({ orgUnitId, trackedEntityTypeId: selected }));
       };
+
       return (<>
           <div className={classes.header}>
               { i18n.t('Search for')}
@@ -81,7 +81,7 @@ export const Index =
           <div className={classes.searchRow}>
               <div className={classes.searchRowSelectElement}>
                   <SingleSelect
-                      onChange={handleSelect}
+                      onChange={handleSelectionChange}
                       selected={selectedSearchScopeId}
                       empty={<div className={classes.customEmpty}>Custom empty component</div>}
                   >
