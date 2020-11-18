@@ -59,7 +59,7 @@ const InfoOutlinedIconWithStyles = withStyles({
     },
 })(InfoOutlinedIcon);
 
-export const Index =
+export const TrackedEntityTypeSelectorPlain =
   ({ classes, onSelect, selectedSearchScopeId }: Props) => {
       const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
 
@@ -108,4 +108,4 @@ export const Index =
       );
   };
 
-export const TrackedEntityTypeSelector: ComponentType<OwnProps> = withStyles(styles)(Index);
+export const TrackedEntityTypeSelector: ComponentType<OwnProps> = withStyles(styles)(TrackedEntityTypeSelectorPlain);
