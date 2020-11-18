@@ -78,7 +78,6 @@ const Index = ({
     navigateToMainPage,
     cleanSearchRelatedInfo,
     classes,
-    trackedEntityTypesWithCorrelatedPrograms,
     availableSearchOptions,
     preselectedProgramId,
     searchStatus,

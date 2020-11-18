@@ -1,8 +1,18 @@
 // @flow
 import { useMemo } from 'react';
-import type { TrackedEntityTypesWithCorrelatedPrograms } from '../components/Pages/Search/SearchPage.types';
 import { programCollection } from '../metaDataMemoryStores';
 import { TrackerProgram } from '../metaData/Program';
+
+type TrackedEntityTypesWithCorrelatedPrograms = $ReadOnly<{
+    [elementId: string]: {|
+        +trackedEntityTypeId: string,
+        +trackedEntityTypeName: string,
+        +programs: Array<{|
+            +programName: string,
+            +programId: string,
+        |}>
+    |}
+}>
 
 export const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityTypesWithCorrelatedPrograms =>
     useMemo(() =>

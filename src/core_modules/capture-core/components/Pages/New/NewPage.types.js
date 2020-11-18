@@ -1,6 +1,5 @@
 // @flow
 import { typeof newPageStatuses } from './NewPage.constants';
-import type { TrackedEntityTypesWithCorrelatedPrograms } from '../Search/SearchPage.types';
 
 export type ContainerProps = $ReadOnly<{|
   showMessageToSelectOrgUnitOnNewPage: ()=>void,
