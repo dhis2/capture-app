@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-20T09:38:04.039Z\n"
-"PO-Revision-Date: 2020-08-20T09:38:04.039Z\n"
+"POT-Creation-Date: 2020-10-27T13:49:55.455Z\n"
+"PO-Revision-Date: 2020-10-27T13:49:55.455Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -295,18 +295,6 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-msgid "Download as JSON"
-msgstr ""
-
-msgid "Download as XML"
-msgstr ""
-
-msgid "Download as CSV"
-msgstr ""
-
-msgid "Download with current filters"
-msgstr ""
-
 msgid "Update"
 msgstr ""
 
@@ -328,16 +316,7 @@ msgstr ""
 msgid "More filters"
 msgstr ""
 
-msgid "Download data..."
-msgstr ""
-
 msgid "Rows per page"
-msgstr ""
-
-msgid "View event info"
-msgstr ""
-
-msgid "Delete event"
 msgstr ""
 
 msgid "Could not get organisation unit"
@@ -448,6 +427,39 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
+msgid "Delete event"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr ""
+
+msgid "Download as XML"
+msgstr ""
+
+msgid "Download as CSV"
+msgstr ""
+
+msgid "Download with current filters"
+msgstr ""
+
+msgid "Download data..."
+msgstr ""
+
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
+msgid "Registered events"
+msgstr ""
+
 msgid "Update view"
 msgstr ""
 
@@ -479,21 +491,6 @@ msgid "Show Less"
 msgstr ""
 
 msgid "Show All"
-msgstr ""
-
-msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "an error occurred loading working lists"
-msgstr ""
-
-msgid "Registered events"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Completed"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"

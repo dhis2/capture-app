@@ -168,6 +168,7 @@ declare type Theme = {
             lineHeight: string,
             color: string,
         },
+        fontWeightMedium: number,
     },
     spacing: {
         unit: number,
@@ -189,3 +190,7 @@ declare type OfflineEffect = {
     data: any,
     method: $Values<typeof methods>,
 };
+
+declare type CssClasses = {|
+    classes: Object,
+|};

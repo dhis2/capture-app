@@ -8,9 +8,8 @@ import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import IconButton from '@material-ui/core/IconButton';
-import Delete from '@material-ui/icons/Delete';
-import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
+import type { CustomRowMenuContents, DataSourceItem } from '../types';
 
 type Props = {
     classes: {
@@ -19,9 +18,8 @@ type Props = {
         popperContainerHidden: string,
         popperContainer: string,
     },
-    onDelete: (eventId: string) => void,
-    onView: (eventId: string) => void,
-    row: Object,
+    row: DataSourceItem,
+    customRowMenuContents?: CustomRowMenuContents,
 }
 
 type State = {
@@ -47,18 +45,6 @@ class Index extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = { menuOpen: false };
-    }
-
-    handleDelete = (event: SyntheticEvent<any>) => {
-        this.closeMenu();
-        this.props.onDelete(this.props.row.eventId);
-        event.stopPropagation();
-    }
-
-    handleView = (event: SyntheticEvent<any>) => {
-        this.closeMenu();
-        this.props.onView(this.props.row.eventId);
-        event.stopPropagation();
     }
 
     handleReferenceInstanceRetrieved = (instance) => {
@@ -87,16 +73,31 @@ class Index extends React.Component<Props, State> {
     }
 
     renderMenuItems = () => {
-        const { classes } = this.props;
+        const { customRowMenuContents = [], row, classes } = this.props;
+
+        const menuItems = customRowMenuContents
+            .map(content => (
+                <MenuItem
+                    key={content.key}
+                    data-test={`menu-item-${content.key}`}
+                    onClick={(event: SyntheticEvent<any>) => {
+                        if (!content.clickHandler) {
+                            return;
+                        }
+                        this.closeMenu();
+                        // $FlowFixMe common flow, I checked this 4 lines up
+                        content.clickHandler(row);
+                        event.stopPropagation();
+                    }}
+                    disabled={!content.clickHandler}
+                >
+                    {content.element}
+                </MenuItem>
+            ));
+
         return (
-            <MenuList role="menu" className={classes.menuList} data-test="dhis2-capture-view-event-button">
-                <MenuItem onClick={this.handleView}>
-                    {i18n.t('View event info')}
-                </MenuItem>
-                <MenuItem onClick={this.handleDelete} data-test="dhis2-capture-delete-event-button">
-                    <Delete className={classes.deleteIcon} />
-                    {i18n.t('Delete event')}
-                </MenuItem>
+            <MenuList role="menu" className={classes.menuList}>
+                {menuItems}
             </MenuList>
         );
     }

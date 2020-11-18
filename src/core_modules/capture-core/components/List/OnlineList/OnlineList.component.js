@@ -76,12 +76,10 @@ type Props = {
     dataSource: Array<Object>,
     rowIdKey: string,
     columns: ?Array<Column>,
-    listId: string,
     sortById: string,
     sortByDirection: string,
-    onSort: (listId: string, id: string, direction: string) => void,
-    isUpdating?: ?boolean,
-    isUpdatingWithDialog?: ?boolean,
+    onSort: (id: string, direction: string) => void,
+    updating?: ?boolean,
     getCustomEndCellHeader: (props: Props) => React.Node,
     onRowClick: (rowData: Object) => void,
     getCustomEndCellBody: (row: Object, props: Props) => React.Node,
@@ -131,11 +129,11 @@ class Index extends React.Component<Props> {
         elementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
     getSortHandler = (id: string) => (direction: string) => {
-        this.props.onSort(this.props.listId, id, direction);
+        this.props.onSort(id, direction);
     }
 
     setColumnWidth(columnInstance: any, index: number) {
-        if (columnInstance && !this.props.isUpdating) {
+        if (columnInstance && !this.props.updating) {
             this.columnHeaderInstances[index] = columnInstance;
         }
     }
@@ -180,7 +178,7 @@ class Index extends React.Component<Props> {
                     innerRef={(instance) => { this.setColumnWidth(instance, index); }}
                     key={column.id}
                     className={classNames(this.props.classes.cell, this.props.classes.headerCell)}
-                    style={{ width: this.props.isUpdating && this.columnHeaderInstances.length - 1 >= index ? this.columnHeaderInstances[index].clientWidth : 'auto' }}
+                    style={{ width: this.props.updating && this.columnHeaderInstances.length - 1 >= index ? this.columnHeaderInstances[index].clientWidth : 'auto' }}
                 >
                     <SortLabelWrapper
                         isActive={column.id === sortById}
@@ -214,10 +212,10 @@ class Index extends React.Component<Props> {
     }
 
     renderBody(visibleColumns: Array<Column>) {
-        const { classes, getCustomEndCellBody, isUpdating } = this.props;
+        const { classes, getCustomEndCellBody, updating } = this.props;
         const columnsCount = visibleColumns.length + (getCustomEndCellBody ? 1 : 0);
 
-        return isUpdating ?
+        return updating ?
             (
                 <Row
                     className={classes.loadingRow}
