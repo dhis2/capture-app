@@ -805,7 +805,7 @@ msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
 
 msgid "Search for"
-msgstr ""
+msgstr "搜索"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
