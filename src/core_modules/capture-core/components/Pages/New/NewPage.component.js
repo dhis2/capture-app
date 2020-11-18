@@ -13,6 +13,7 @@ import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage
 import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { scopeTypes } from '../../../metaData';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
 
 const getStyles = ({ typography }) => ({
     container: {
@@ -39,18 +40,6 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-export const useTitleText = (selectedSearchScopeId: ?string) => {
-    const { trackedEntityName, programName, scopeType } = useScopeInfo(selectedSearchScopeId);
-
-    const text = {
-        [scopeTypes.EVENT_PROGRAM]: `${programName}`,
-        [scopeTypes.TRACKER_PROGRAM]: `${trackedEntityName} in program: ${programName}`,
-        [scopeTypes.TRACKED_ENTITY_TYPE]: `${trackedEntityName}`,
-    };
-
-    return scopeType ? text[scopeType] : '';
-};
-
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
@@ -62,7 +51,7 @@ const NewPagePlain = ({
     const { scopeType } = useScopeInfo(currentProgramId);
     const [selectedScopeType, setScopeType] = useState(scopeType);
     const [selectedScopeId, setScopeId] = useState(currentProgramId);
-    const titleText = useTitleText(selectedScopeId);
+    const titleText = useScopeTitleText(selectedScopeId);
 
     useEffect(() => {
         setScopeId(currentProgramId);
