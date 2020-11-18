@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { programCollection } from '../metaDataMemoryStores';
 import { TrackerProgram } from '../metaData/Program';
 
-type TrackedEntityTypesWithCorrelatedPrograms = $ReadOnly<{
+type TrackedEntityTypesWithCorrelatedPrograms = $Exact<$ReadOnly<{
     [elementId: string]: {|
         +trackedEntityTypeId: string,
         +trackedEntityTypeName: string,
@@ -13,12 +13,12 @@ type TrackedEntityTypesWithCorrelatedPrograms = $ReadOnly<{
         |}>
     |}
 }>
-
+>
 export const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityTypesWithCorrelatedPrograms =>
     useMemo(() =>
         [...programCollection.values()]
             .filter(program => program instanceof TrackerProgram)
-        // $FlowFixMe
+            // $FlowFixMe
             .reduce((acc, {
                 id: programId,
                 name: programName,

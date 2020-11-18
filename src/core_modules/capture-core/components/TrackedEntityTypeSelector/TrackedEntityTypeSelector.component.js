@@ -87,7 +87,7 @@ export const Index =
                   >
                       {
                           useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                          // $FlowFixMe https://github.com/facebook/flow/issues/2221
+                              // $FlowFixMe https://github.com/facebook/flow/issues/2221
                               .map(({ trackedEntityTypeName, trackedEntityTypeId }) =>
                                   (<SingleSelectOption
                                       key={trackedEntityTypeId}
