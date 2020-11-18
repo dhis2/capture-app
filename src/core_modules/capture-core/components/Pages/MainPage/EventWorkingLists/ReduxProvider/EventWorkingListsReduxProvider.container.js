@@ -9,9 +9,9 @@ import { EventWorkingListsColumnSetup } from '../ColumnSetup';
 import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
 import { getEventProgramThrowIfNotFound } from '../../../../../metaData';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
-import type { Props } from './eventWorkingListsRedux.types';
+import type { Props } from './eventWorkingListsReduxProvider.types';
 
-export const EventWorkingListsRedux = ({ storeId }: Props) => {
+export const EventWorkingListsReduxProvider = ({ storeId }: Props) => {
     const dispatch = useDispatch();
 
     const programId = useSelector(({ currentSelections }) => currentSelections.programId);

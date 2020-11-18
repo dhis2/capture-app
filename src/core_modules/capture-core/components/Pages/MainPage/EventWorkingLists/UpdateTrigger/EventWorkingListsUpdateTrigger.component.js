@@ -1,7 +1,7 @@
 // @flow
 import moment from 'moment';
 import React, { useCallback } from 'react';
-import { WorkingListsInterfaceBuilder } from '../WorkingListsInterfaceBuilder';
+import { WorkingLists } from '../../WorkingLists';
 import type { Props } from './eventWorkingListsUpdateTrigger.types';
 
 export const EventWorkingListsUpdateTrigger = ({
@@ -31,7 +31,7 @@ export const EventWorkingListsUpdateTrigger = ({
     [onUpdateList, lastTransaction]);
 
     return (
-        <WorkingListsInterfaceBuilder
+        <WorkingLists
             {...passOnProps}
             customUpdateTrigger={customUpdateTrigger}
             forceUpdateOnMount={forceUpdateOnMount}

@@ -2,7 +2,7 @@
 import type { EventProgram } from '../../../../../metaData';
 import type { CustomColumnOrder } from '../../WorkingListsCommon';
 import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
-import type { EventWorkingListsReduxOutputProps } from '../Redux';
+import type { EventWorkingListsReduxOutputProps } from '../ReduxProvider';
 
 type ExtractedProps = {|
     program: EventProgram,
