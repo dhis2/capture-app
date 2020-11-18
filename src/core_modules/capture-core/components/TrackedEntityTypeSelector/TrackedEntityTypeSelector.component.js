@@ -12,6 +12,7 @@ import {
 } from '@dhis2/ui';
 import type { OwnProps, Props } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
+import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
 
 const styles = ({ typography }) => ({
     searchDomainSelectorSection: {
@@ -60,8 +61,10 @@ const InfoOutlinedIconWithStyles = withStyles({
 })(InfoOutlinedIcon);
 
 export const Index =
-  ({ trackedEntityTypesWithCorrelatedPrograms, classes, onSelect, selectedSearchScopeId }: Props) =>
-      (<>
+  ({ classes, onSelect, selectedSearchScopeId }: Props) => {
+      const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
+
+      return (<>
           <div className={classes.header}>
               { i18n.t('Search for')}
           </div>
@@ -75,7 +78,7 @@ export const Index =
                   >
                       {
                           useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                              // $FlowFixMe https://github.com/facebook/flow/issues/2221
+                          // $FlowFixMe https://github.com/facebook/flow/issues/2221
                               .map(({ trackedEntityTypeName, trackedEntityTypeId }) =>
                                   (<SingleSelectOption
                                       key={trackedEntityTypeId}
@@ -89,16 +92,16 @@ export const Index =
           </div>
           {
               !selectedSearchScopeId &&
-                  <Grid container direction="row" alignItems="center" className={classes.gridContainerInformativeText}>
-                      <Grid item>
-                          <InfoOutlinedIconWithStyles />
-                      </Grid>
-                      <Grid item className={classes.gridItemInformativeText}>
-                          {i18n.t('You can also choose a program from the top bar and search in that program')}
-                      </Grid>
+              <Grid container direction="row" alignItems="center" className={classes.gridContainerInformativeText}>
+                  <Grid item>
+                      <InfoOutlinedIconWithStyles />
                   </Grid>
+                  <Grid item className={classes.gridItemInformativeText}>
+                      {i18n.t('You can also choose a program from the top bar and search in that program')}
+                  </Grid>
+              </Grid>
           }
-      </>
-      );
+      </>);
+  };
 
 export const TrackedEntityTypeSelector: ComponentType<OwnProps> = withStyles(styles)(Index);

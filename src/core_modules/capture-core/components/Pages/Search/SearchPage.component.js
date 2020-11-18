@@ -155,7 +155,6 @@ const Index = ({
                         {
                             (selectedSearchScopeType !== searchScopes.PROGRAM) &&
                             <TrackedEntityTypeSelector
-                                trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                                 onSelect={handleSearchScopeSelection}
                                 selectedSearchScopeId={selectedSearchScopeId}
                             />
