@@ -17,4 +17,4 @@ export type Props = {|
     ...ComponentProps,
 |};
 
-export type ListViewContextProviderPassOnProps = RestProps;
+export type ListViewContextBuilderPassOnProps = RestProps;

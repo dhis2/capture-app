@@ -52,10 +52,10 @@ export function buildButtonText(
     filter: FilterData,
     type: $Values<typeof filterTypesObject>,
     options?: ?Options,
-): string | void {
+): string {
     if (filter.usingOptionSet && options) {
         return getOptionSetText(filter, options);
     }
 
-    return convertersForTypes[type] && convertersForTypes[type](filter);
+    return convertersForTypes[type](filter);
 }

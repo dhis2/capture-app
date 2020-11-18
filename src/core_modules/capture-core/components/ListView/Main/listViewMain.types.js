@@ -8,13 +8,13 @@ type WithFilterPassOnProps = {|
 |};
 type ComponentProps = {|
     columns: Columns,
-    classes: Object,
     filters: React$Node,
     updatingWithDialog?: boolean,
     onSetColumnOrder: Function,
     rowIdKey: string,
     customMenuContents?: Array<Object>,
     onSelectRow: Function,
+    ...CssClasses,
 |};
 
 type RestProps = $Rest<WithFilterPassOnProps, ComponentProps>;
