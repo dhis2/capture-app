@@ -58,7 +58,6 @@ const NewPagePlain = ({
         setScopeType(scopeType);
     }, [scopeType, currentProgramId]);
 
-
     useEffect(() => {
         if (!currentOrgUnitId) {
             showMessageToSelectOrgUnitOnNewPage();
@@ -77,14 +76,12 @@ const NewPagePlain = ({
         setScopeType(type);
     };
 
-
     return (<>
         <LockedSelector />
 
         <div data-test="dhis2-capture-registration-page-content" className={classes.container} >
             {
                 newPageStatus === newPageStatuses.DEFAULT &&
-
                 <Paper className={classes.paper}>
                     <div className={classes.maxWidth}>
                         <div className={classes.title} >
@@ -103,7 +100,6 @@ const NewPagePlain = ({
 
             {
                 newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
-
                 <InefficientSelectionsMessage
                     message={i18n.t('Choose a registering unit to start reporting')}
                 />
