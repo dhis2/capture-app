@@ -34,7 +34,6 @@ export type ContainerProps = $ReadOnly<{|
   cleanSearchRelatedInfo: ()=>void,
   navigateToMainPage: ()=>void,
   showInitialSearchPage: ()=>void,
-  fallbackTriggered: boolean,
   trackedEntityTypeId: string,
   trackedEntityTypesWithCorrelatedPrograms: TrackedEntityTypesWithCorrelatedPrograms,
   availableSearchOptions: AvailableSearchOptions,

@@ -24,7 +24,6 @@ export const lockedSelectorActionTypes = {
 
 export const lockedSelectorBatchActionTypes = {
     AGAIN_START: 'BatchAgainStart',
-    PROGRAM_ID_SET_BATCH: 'BatchProgramIdSet',
     PROGRAM_ID_RESET_BATCH: 'BatchProgramIdReset',
     ORG_UNIT_ID_RESET_BATCH: 'BatchOrgUnitIdReset',
 };
