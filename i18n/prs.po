@@ -802,7 +802,7 @@ msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
 msgid "Search for"
-msgstr ""
+msgstr "جستجو برای"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
