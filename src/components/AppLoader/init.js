@@ -176,13 +176,13 @@ export async function initializeAsync(
     }
 
     // set locale data
-        const uiLocale = userSettings.keyUiLocale;
-        const dbLocale = userSettings.keyDbLocale;
-        await setLocaleDataAsync(uiLocale);
+    const uiLocale = userSettings.keyUiLocale;
+    const dbLocale = userSettings.keyDbLocale;
+    await setLocaleDataAsync(uiLocale);
 
-        // initialize system settings
-        await initializeSystemSettingsAsync(uiLocale);
+    // initialize system settings
+    await initializeSystemSettingsAsync(uiLocale);
 
-        // initialize metadata
-        await initializeMetaDataAsync(dbLocale, onQueryApi);
+    // initialize metadata
+    await initializeMetaDataAsync(dbLocale, onQueryApi);
 }
