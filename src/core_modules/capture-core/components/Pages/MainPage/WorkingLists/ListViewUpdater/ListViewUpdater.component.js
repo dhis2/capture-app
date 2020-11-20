@@ -81,7 +81,6 @@ export const ListViewUpdater = (props: Props) => {
             programId,
             orgUnitId,
             categories,
-            customUpdateTrigger,
         });
         return () => onCancelUpdateList && onCancelUpdateList();
     }, {
