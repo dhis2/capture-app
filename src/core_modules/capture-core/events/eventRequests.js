@@ -160,7 +160,7 @@ export async function getEvents(queryParams: Object) {
             accEvents.push(eventContainer);
         }
         return accEvents;
-    }, Promise.resolve([])) : null;
+    }, Promise.resolve([])) : [];
 
     const pagingData = {
         rowsPerPage: queryParams.pageSize,

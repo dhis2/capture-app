@@ -10,7 +10,6 @@ const getFunctionFromString = (functionAsString: string) => Function(`return ${f
 export default function convertDataEntryValuesToClientValues(
     dataEntryValues: Object,
     dataEntryValuesMeta: Object,
-    previousData: Object,
     foundation: RenderFoundation,
 ) {
     if (!dataEntryValues) {
@@ -19,6 +18,7 @@ export default function convertDataEntryValuesToClientValues(
 
     const eventValues = Object
         .keys(dataEntryValues)
+        // eslint-disable-next-line complexity
         .reduce((accEventValues, key) => {
             const type = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].type;
             const onConvertOut = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].onConvertOut;
@@ -32,9 +32,8 @@ export default function convertDataEntryValuesToClientValues(
             } else if (onConvertOut) {
                 const clientId = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].clientId;
                 const dataEntryValue = dataEntryValues[key];
-                const prevEventValue = previousData[clientId];
                 const onConvertOutFn = getFunctionFromString(onConvertOut);
-                accEventValues[clientId] = onConvertOutFn(dataEntryValue, prevEventValue, foundation);
+                accEventValues[clientId] = onConvertOutFn(dataEntryValue, foundation);
             } else {
                 accEventValues[key] = dataEntryValues[key];
             }

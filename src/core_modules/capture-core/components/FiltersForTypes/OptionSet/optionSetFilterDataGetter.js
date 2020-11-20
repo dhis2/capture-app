@@ -1,5 +1,5 @@
 // @flow
-import type { OptionSetFilterData } from '../filters.types';
+import type { OptionSetFilterData } from './types';
 
 function getSelectOptionSetFilterData(
     values: Array<any>,

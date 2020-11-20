@@ -38,6 +38,7 @@ import {
     workingListsContextDesc,
     workingListsStickyFiltersDesc,
     workingListsTemplatesDesc,
+    workingListsListRecordsDesc,
 } from 'capture-core/reducers/descriptions/workingLists';
 import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reducerDescription';
 import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
@@ -113,6 +114,7 @@ export default [
     workingListsColumnsOrderDesc,
     workingListsContextDesc,
     workingListsStickyFiltersDesc,
+    workingListsListRecordsDesc,
     workingListsTemplatesDesc,
     mainPageDesc,
     newEventPageDesc,

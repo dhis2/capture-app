@@ -1,6 +1,6 @@
 // @flow
 import { parseNumber } from 'capture-core-utils/parsers';
-import type { NumericFilterData } from '../filters.types';
+import type { NumericFilterData } from './types';
 
 type Value = {
     min?: ?string,
