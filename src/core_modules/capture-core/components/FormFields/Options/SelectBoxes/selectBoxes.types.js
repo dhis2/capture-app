@@ -1,10 +1,10 @@
 // @flow
 import type { OptionSet } from '../../../../metaData';
-import { orientations } from './selectBoxes.const';
+import { typeof orientations } from './selectBoxes.const';
 
 type BaseProps = {|
     multiSelect?: ?boolean,
-    orientation?: ?$Values<typeof orientations>,
+    orientation?: ?$Values<orientations>,
     onBlur: (value: any) => void,
     label?: string,
     value?: any,

@@ -1,5 +1,5 @@
 // @flow
-import { dataElementTypes } from '../../../../metaData';
+import { typeof dataElementTypes } from '../../../../metaData';
 import type {
     CustomMenuContents,
     CustomRowMenuContents,
@@ -37,7 +37,7 @@ export type WorkingListTemplates = Array<WorkingListTemplate>;
 export type ColumnConfig = {
     id: string,
     visible: boolean,
-    type: $Values<typeof dataElementTypes>,
+    type: $Values<dataElementTypes>,
     header: string,
     options?: ?Array<{text: string, value: any}>,
     multiValueFilter?: boolean,

@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
 import { moment } from 'capture-core-utils/moment';
-import { dataElementTypes } from '../../../../../../../metaData';
+import { typeof dataElementTypes } from '../../../../../../../metaData';
 import { getApiOptionSetFilter } from './optionSet';
 
 import {
@@ -26,7 +26,7 @@ import type {
 
 type ColumnForConverterBase = {|
     id: string,
-    type: $Values<typeof dataElementTypes>,
+    type: $Values<dataElementTypes>,
     visible: boolean,
 |};
 type MetadataColumnForConverter = {|

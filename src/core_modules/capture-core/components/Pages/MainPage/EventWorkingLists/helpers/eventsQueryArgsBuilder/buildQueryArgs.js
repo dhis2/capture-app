@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { dataElementTypes } from '../../../../../../metaData';
+import { typeof dataElementTypes } from '../../../../../../metaData';
 import { filterTypesObject } from '../../../WorkingLists';
 import {
     convertText,
@@ -33,7 +33,7 @@ const mappersForTypes = {
 
 function convertFilter(
     sourceValue: Object,
-    type: $Keys<typeof dataElementTypes>,
+    type: $Keys<dataElementTypes>,
     meta: {
         key: string,
         storeId: string,

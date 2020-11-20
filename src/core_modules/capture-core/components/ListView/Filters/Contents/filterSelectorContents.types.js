@@ -1,5 +1,5 @@
 // @flow
-import { filterTypesObject } from '../filters.const';
+import { typeof filterTypesObject } from '../filters.const';
 import type { FilterData, Options } from '../../../FiltersForTypes';
 
 type PassOnProps = $ReadOnly<{|
@@ -9,7 +9,7 @@ type PassOnProps = $ReadOnly<{|
 |}>;
 export type Props = $ReadOnly<{|
     ...PassOnProps,
-    type: $Values<typeof filterTypesObject>,
+    type: $Values<filterTypesObject>,
     options?: ?Options,
     classes: {
         container: string,
