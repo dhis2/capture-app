@@ -13,7 +13,7 @@ export const ListViewContextBuilder = ({
     onChangeRowsPerPage,
     rowsPerPage,
     currentPage,
-    rowsCount,
+    dataSource,
     ...passOnProps
 }: Props) => {
     const paginationContextData = useMemo(() => ({
@@ -21,13 +21,13 @@ export const ListViewContextBuilder = ({
         onChangeRowsPerPage,
         rowsPerPage,
         currentPage,
-        rowsCount,
+        rowCountPage: dataSource.length,
     }), [
         onChangePage,
         onChangeRowsPerPage,
         rowsPerPage,
         currentPage,
-        rowsCount,
+        dataSource.length,
     ]);
 
     return (
@@ -39,6 +39,7 @@ export const ListViewContextBuilder = ({
             >
                 <ListViewMain
                     {...passOnProps}
+                    dataSource={dataSource}
                 />
             </PaginationContext.Provider>
         </FilterValuesContext.Provider>

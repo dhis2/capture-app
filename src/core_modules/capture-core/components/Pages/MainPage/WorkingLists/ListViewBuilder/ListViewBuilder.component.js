@@ -19,16 +19,15 @@ export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: 
         onSelectListRow,
         onSortList,
         onSetListColumnOrder,
-        rowsCount,
         stickyFilters,
         ...passOnContext
     } = context;
 
-    if (!dataSource || rowsCount == null || !stickyFilters) {
-        const baseErrorMessage = 'dataSource, rowsCount, stickyFilters needs to be set in ListViewBuilder';
+    if (!dataSource || !stickyFilters) {
+        const baseErrorMessage = 'dataSource and stickyFilters needs to be set in ListViewBuilder';
         log.error(
             errorCreator(baseErrorMessage)(
-                { dataSource, rowsCount, stickyFilters }));
+                { dataSource, stickyFilters }));
         throw Error(`${baseErrorMessage}. See console for details`);
     }
 
@@ -41,7 +40,6 @@ export const ListViewBuilder = ({ customListViewMenuContents, ...passOnProps }: 
             onSort={onSortList}
             onSetColumnOrder={onSetListColumnOrder}
             customMenuContents={customListViewMenuContents}
-            rowsCount={rowsCount}
             stickyFilters={stickyFilters}
         />
     );

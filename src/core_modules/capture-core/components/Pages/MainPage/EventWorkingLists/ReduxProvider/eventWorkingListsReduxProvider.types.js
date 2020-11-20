@@ -84,7 +84,6 @@ export type EventWorkingListsReduxOutputProps = {|
     orgUnitId: string,
     program: EventProgram,
     recordsOrder?: RecordsOrder,
-    rowsCount?: number,
     rowsPerPage?: number,
     sortByDirection?: string,
     sortById?: string,

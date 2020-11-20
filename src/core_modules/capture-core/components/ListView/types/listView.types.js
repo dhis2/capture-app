@@ -50,7 +50,7 @@ export type PaginationContextData = {
     onChangeRowsPerPage: Function,
     rowsPerPage: number,
     currentPage: number,
-    rowsCount: number,
+    rowCountPage: number,
 };
 
 export type StickyFilters =
@@ -80,7 +80,6 @@ export type InterfaceProps = $ReadOnly<{|
     onSort: Sort,
     onUpdateFilter: UpdateFilter,
     rowIdKey: string,
-    rowsCount: number,
     rowsPerPage: number,
     sortById: string,
     sortByDirection: string,

@@ -138,7 +138,6 @@ export type ListViewBuilderContextData = {|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     stickyFilters?: StickyFilters,
-    rowsCount?: number,
 |};
 
 export type InterfaceProps = $ReadOnly<{|
@@ -179,7 +178,6 @@ export type InterfaceProps = $ReadOnly<{|
     orgUnitId: string,
     programId: string,
     rowIdKey: string,
-    rowsCount?: number,
     rowsPerPage?: number,
     sortByDirection?: string,
     sortById?: string,

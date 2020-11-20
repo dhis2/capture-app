@@ -48,7 +48,6 @@ export const WorkingListsContextBuilder = (props: Props) => {
         stickyFilters,
         rowsPerPage,
         currentPage,
-        rowsCount,
         currentViewHasTemplateChanges,
         viewPreloaded,
         customUpdateTrigger,
@@ -138,7 +137,6 @@ export const WorkingListsContextBuilder = (props: Props) => {
                             onChangePage={onChangePage}
                             onChangeRowsPerPage={onChangeRowsPerPage}
                             stickyFilters={stickyFilters}
-                            rowsCount={rowsCount}
                         >
                             <TemplatesLoader
                                 {...passOnProps}

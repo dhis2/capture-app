@@ -6,37 +6,15 @@ import {
 } from 'capture-ui';
 import withNavigation from '../../Pagination/withDefaultNavigation';
 import withRowsPerPageSelector from '../../Pagination/withRowsPerPageSelector';
+import type { Props } from './listPaginationMain.types';
 
 const PaginationWrapped = withRowsPerPageSelector()(withNavigation()(Pagination));
 
-type Props = {
-    onChangePage: Function,
-    onChangeRowsPerPage: Function,
-};
-
-export class ListPaginationMain extends React.Component<Props> {
-    getPaginationLabelDisplayedRows =
-        (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`;
-
-    handleChangePage = (pageNumber: number) => {
-        this.props.onChangePage(pageNumber);
-    }
-
-    handleChangeRowsPerPage = (rowsPerPage: number) => {
-        this.props.onChangeRowsPerPage(rowsPerPage);
-    }
-
-    render() {
-        const { ...passOnProps } = this.props;
-        return (
-            // $FlowFixMe[prop-missing] automated comment
-            <PaginationWrapped
-                {...passOnProps}
-                onChangePage={this.handleChangePage}
-                onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                rowsCountSelectorLabel={i18n.t('Rows per page')}
-                onGetLabelDisplayedRows={this.getPaginationLabelDisplayedRows}
-            />
-        );
-    }
-}
+export const ListPaginationMain = ({ rowCountPage, rowsPerPage, ...passOnProps }: Props) => (
+    <PaginationWrapped
+        {...passOnProps}
+        rowsPerPage={rowsPerPage}
+        rowsCountSelectorLabel={i18n.t('Rows per page')}
+        nextPageButtonDisabled={!!(rowsPerPage > rowCountPage)}
+    />
+);

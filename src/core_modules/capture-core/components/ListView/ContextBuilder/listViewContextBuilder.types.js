@@ -1,5 +1,5 @@
 // @flow
-import type { FiltersData, ListViewPassOnProps } from '../types';
+import type { FiltersData, ListViewPassOnProps, DataSource } from '../types';
 
 type ComponentProps = $ReadOnly<{|
     filters: FiltersData,
@@ -7,7 +7,7 @@ type ComponentProps = $ReadOnly<{|
     onChangeRowsPerPage: Function,
     rowsPerPage: number,
     currentPage: number,
-    rowsCount: number,
+    dataSource: DataSource,
 |}>;
 
 type RestProps = $Rest<ListViewPassOnProps, ComponentProps>;
@@ -17,4 +17,7 @@ export type Props = {|
     ...ComponentProps,
 |};
 
-export type ListViewContextBuilderPassOnProps = RestProps;
+export type ListViewContextBuilderPassOnProps = {|
+    ...RestProps,
+    dataSource: DataSource,
+|};

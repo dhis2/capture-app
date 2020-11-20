@@ -27,6 +27,5 @@ export type Props = $ReadOnly<{|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     stickyFilters?: StickyFilters,
-    rowsCount?: number,
     children: React$Node,
 |}>;

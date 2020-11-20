@@ -6,12 +6,10 @@ import type { ListViewUpdaterOutputProps } from '../ListViewUpdater';
 type ExtractedProps = {|
     columns: ColumnConfigs,
     customListViewMenuContents?: CustomMenuContents,
-    rowsCount?: boolean,
     stickyFilters?: StickyFilters,
 |};
 
 type OptionalExtractedProps = {|
-    rowsCount: boolean,
     stickyFilters: StickyFilters,
 |};
 
