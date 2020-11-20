@@ -25,25 +25,15 @@ const OptionSetFilterWithButtons = withButtons()(
 );
 
 const selectorContentsForTypes = {
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.TEXT]: TextFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.NUMBER]: NumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.INTEGER]: NumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.INTEGER_POSITIVE]: NumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.INTEGER_NEGATIVE]: NumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: NumericFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.DATE]: DateFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.BOOLEAN]: BooleanFilter,
-    // $FlowFixMe[prop-missing] automated comment
     [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
-    // $FlowFixMe[invalid-computed-prop] automated comment
     [filterTypesObject.ASSIGNEE]: AssigneeFilter,
 };
 
@@ -71,7 +61,7 @@ const useContents = ({ filterValue, classes, type, options, multiValueFilter, ..
     return (
         <FilterContents
             {...passOnProps}
-            filterValue={filterValue}
+            filter={filterValue}
             type={type}
         />
     );
