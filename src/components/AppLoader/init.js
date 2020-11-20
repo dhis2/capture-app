@@ -3,7 +3,6 @@
 import log from 'loglevel';
 import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2';
 import environments from 'capture-core/constants/environments';
-// import moment from 'capture-core/utils/moment/momentResolver';
 import moment from 'moment';
 import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
 import { setD2 } from 'capture-core/d2/d2Instance';
@@ -177,13 +176,13 @@ export async function initializeAsync(
     }
 
     // set locale data
-    const uiLocale = userSettings.keyUiLocale;
-    const dbLocale = userSettings.keyDbLocale;
-    await setLocaleDataAsync(uiLocale);
+        const uiLocale = userSettings.keyUiLocale;
+        const dbLocale = userSettings.keyDbLocale;
+        await setLocaleDataAsync(uiLocale);
 
-    // initialize system settings
-    await initializeSystemSettingsAsync(uiLocale);
+        // initialize system settings
+        await initializeSystemSettingsAsync(uiLocale);
 
-    // initialize metadata
-    await initializeMetaDataAsync(dbLocale, onQueryApi);
+        // initialize metadata
+        await initializeMetaDataAsync(dbLocale, onQueryApi);
 }
