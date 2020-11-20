@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
+"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: Khmer (https://www.transifex.com/hisp-uio/teams/100509/km/)\n"
@@ -53,12 +53,6 @@ msgid "Previously enrolled"
 msgstr ""
 
 msgid "Not enrolled"
-msgstr ""
-
-msgid "Columns to show in table"
-msgstr ""
-
-msgid "Column"
 msgstr ""
 
 msgid "This value is validating"
@@ -328,6 +322,39 @@ msgstr ""
 msgid "No items to display"
 msgstr ""
 
+msgid "Select columns"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+msgid "Update"
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr ""
+
+msgid "after or equal to {{date}}"
+msgstr ""
+
+msgid "before or equal to {{date}}"
+msgstr ""
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "More filters"
+msgstr ""
+
+msgid "Rows per page"
+msgstr ""
+
 msgid "Could not get organisation unit"
 msgstr ""
 
@@ -436,35 +463,8 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
-msgid "View event info"
-msgstr ""
-
 msgid "Delete event"
 msgstr "លុបចោលព្រឹត្តិការណ៏"
-
-msgid "Update"
-msgstr "ធ្វើ​បច្ចុប្បន្នភាព"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
-
-msgid "after or equal to {{date}}"
-msgstr ""
-
-msgid "before or equal to {{date}}"
-msgstr ""
-
-msgid "greater than or equal to"
-msgstr ""
-
-msgid "less than or equal to"
-msgstr ""
-
-msgid "More filters"
-msgstr ""
-
-msgid "Select columns"
-msgstr ""
 
 msgid "Download as JSON"
 msgstr ""
@@ -481,7 +481,19 @@ msgstr ""
 msgid "Download data..."
 msgstr ""
 
-msgid "Rows per page"
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Completed"
+msgstr "បានបញ្ចប់"
+
+msgid "Registered events"
 msgstr ""
 
 msgid "Update view"
@@ -516,21 +528,6 @@ msgstr ""
 
 msgid "Show All"
 msgstr ""
-
-msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "an error occurred loading working lists"
-msgstr ""
-
-msgid "Registered events"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Completed"
-msgstr "បានបញ្ចប់"
 
 msgid "\"Choose a registering unit to start reporting"
 msgstr ""
