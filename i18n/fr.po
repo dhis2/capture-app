@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
+"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -56,12 +56,6 @@ msgstr ""
 
 msgid "Not enrolled"
 msgstr ""
-
-msgid "Columns to show in table"
-msgstr "Colonnes à afficher dans ce tableau"
-
-msgid "Column"
-msgstr "Colonne"
 
 msgid "This value is validating"
 msgstr "Valeur en cours de validation"
@@ -330,6 +324,39 @@ msgstr ""
 msgid "No items to display"
 msgstr "Aucun élément à afficher"
 
+msgid "Select columns"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr "Colonnes à afficher dans ce tableau"
+
+msgid "Column"
+msgstr "Colonne"
+
+msgid "Update"
+msgstr "Mettre à jour"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr ""
+
+msgid "after or equal to {{date}}"
+msgstr ""
+
+msgid "before or equal to {{date}}"
+msgstr ""
+
+msgid "greater than or equal to"
+msgstr "supérieur ou egal à"
+
+msgid "less than or equal to"
+msgstr "inférieur ou egal à"
+
+msgid "More filters"
+msgstr "Filtres supplémentaires"
+
+msgid "Rows per page"
+msgstr "Lignes par page"
+
 msgid "Could not get organisation unit"
 msgstr ""
 
@@ -438,35 +465,8 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
-msgid "View event info"
-msgstr ""
-
 msgid "Delete event"
 msgstr "Effacer l´événement"
-
-msgid "Update"
-msgstr "Mettre à jour"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
-
-msgid "after or equal to {{date}}"
-msgstr ""
-
-msgid "before or equal to {{date}}"
-msgstr ""
-
-msgid "greater than or equal to"
-msgstr "supérieur ou egal à"
-
-msgid "less than or equal to"
-msgstr "inférieur ou egal à"
-
-msgid "More filters"
-msgstr "Filtres supplémentaires"
-
-msgid "Select columns"
-msgstr ""
 
 msgid "Download as JSON"
 msgstr "Télécharger en JSON"
@@ -483,8 +483,20 @@ msgstr ""
 msgid "Download data..."
 msgstr ""
 
-msgid "Rows per page"
-msgstr "Lignes par page"
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Active"
+msgstr "Actif"
+
+msgid "Completed"
+msgstr "Terminé"
+
+msgid "Registered events"
+msgstr "Événements enregistrés"
 
 msgid "Update view"
 msgstr ""
@@ -518,21 +530,6 @@ msgstr ""
 
 msgid "Show All"
 msgstr ""
-
-msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "an error occurred loading working lists"
-msgstr ""
-
-msgid "Registered events"
-msgstr "Événements enregistrés"
-
-msgid "Active"
-msgstr "Actif"
-
-msgid "Completed"
-msgstr "Terminé"
 
 msgid "\"Choose a registering unit to start reporting"
 msgstr ""

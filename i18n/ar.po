@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
+"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -63,12 +63,6 @@ msgstr "مسجل سابقًا"
 
 msgid "Not enrolled"
 msgstr "غير مسجل"
-
-msgid "Columns to show in table"
-msgstr "الأعمدة التي سيتم عرضها في الجدول"
-
-msgid "Column"
-msgstr "العمود"
 
 msgid "This value is validating"
 msgstr "يتم التحقق من القيمة"
@@ -338,6 +332,39 @@ msgstr "تعذر استرداد الاقتراحات"
 msgid "No items to display"
 msgstr "لا توجد عناصر للعرض"
 
+msgid "Select columns"
+msgstr "حدد الأعمدة"
+
+msgid "Columns to show in table"
+msgstr "الأعمدة التي سيتم عرضها في الجدول"
+
+msgid "Column"
+msgstr "العمود"
+
+msgid "Update"
+msgstr "تحديث"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} إلى {{toDate}}"
+
+msgid "after or equal to {{date}}"
+msgstr "من بعد أو مساوٍ لـ {{date}}"
+
+msgid "before or equal to {{date}}"
+msgstr "من قبل أو مساوٍ لـ {{date}}"
+
+msgid "greater than or equal to"
+msgstr "أكبر من أو يساوي"
+
+msgid "less than or equal to"
+msgstr "أقل من أو يساوي"
+
+msgid "More filters"
+msgstr "عوامل تصفية أكثر"
+
+msgid "Rows per page"
+msgstr "عدد الصفوف لكل صفحة"
+
 msgid "Could not get organisation unit"
 msgstr "تعذر جلب الوحدة التنظيمية"
 
@@ -446,35 +473,8 @@ msgstr "تعذر تحميل الحدث"
 msgid "Organisation unit could not be loaded"
 msgstr "تعذر تحميل الوحدة التنظيمية"
 
-msgid "View event info"
-msgstr "عرض معلومات عن الحدث"
-
 msgid "Delete event"
 msgstr "حذف الحدث"
-
-msgid "Update"
-msgstr "تحديث"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} إلى {{toDate}}"
-
-msgid "after or equal to {{date}}"
-msgstr "من بعد أو مساوٍ لـ {{date}}"
-
-msgid "before or equal to {{date}}"
-msgstr "من قبل أو مساوٍ لـ {{date}}"
-
-msgid "greater than or equal to"
-msgstr "أكبر من أو يساوي"
-
-msgid "less than or equal to"
-msgstr "أقل من أو يساوي"
-
-msgid "More filters"
-msgstr "عوامل تصفية أكثر"
-
-msgid "Select columns"
-msgstr "حدد الأعمدة"
 
 msgid "Download as JSON"
 msgstr "تنزيل كملف JSON"
@@ -491,8 +491,20 @@ msgstr "تنزيل مع اعتماد عوامل التصفية الحالية"
 msgid "Download data..."
 msgstr "تنزيل البيانات"
 
-msgid "Rows per page"
-msgstr "عدد الصفوف لكل صفحة"
+msgid "Working list could not be loaded"
+msgstr "تعذر تحميل قائمة العمل"
+
+msgid "an error occurred loading working lists"
+msgstr "حدث خطأ اثناء تحميل قوائم العمل"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Completed"
+msgstr "مكتمل"
+
+msgid "Registered events"
+msgstr "الأحداث المسجلة"
 
 msgid "Update view"
 msgstr "تحديث العرض"
@@ -526,21 +538,6 @@ msgstr "إظهار أقل"
 
 msgid "Show All"
 msgstr "إظهار الكل"
-
-msgid "Working list could not be loaded"
-msgstr "تعذر تحميل قائمة العمل"
-
-msgid "an error occurred loading working lists"
-msgstr "حدث خطأ اثناء تحميل قوائم العمل"
-
-msgid "Registered events"
-msgstr "الأحداث المسجلة"
-
-msgid "Active"
-msgstr "فعال"
-
-msgid "Completed"
-msgstr "مكتمل"
 
 msgid "\"Choose a registering unit to start reporting"
 msgstr ""
