@@ -379,7 +379,7 @@ msgid "Find"
 msgstr "Hledat"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "Vymazat výběry"
 
 msgid "Selected registering unit"
 msgstr "Vybraná registrační jednotka"
@@ -535,7 +535,7 @@ msgid "Show All"
 msgstr "Ukázat vše"
 
 msgid "\"Choose a registering unit to start reporting"
-msgstr ""
+msgstr "\"Vyberte registraci jednotky pro zahájení hlášení"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "Vytváření nového {{TET}} v {{program}} v {{orgUnit}}"
@@ -623,16 +623,16 @@ msgid "No events added"
 msgstr "Nebyly přidány žádné události"
 
 msgid "Choose a registering unit and program to get started"
-msgstr ""
+msgstr "Začněte registrací jednotky a výběrem programu"
 
 msgid "Choose a program to start reporting"
-msgstr ""
+msgstr "Vyberte program k zahájení hlášení zpráv"
 
 msgid "Choose a registering unit to start reporting"
-msgstr ""
+msgstr "Vyberte registraci jednotky a začněte hlásit"
 
 msgid "Choose a category option to start reporting"
-msgstr ""
+msgstr "Chcete-li začít hlášení zpráv, vyberte možnost kategorie"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
@@ -759,15 +759,18 @@ msgstr ""
 "vývojáře"
 
 msgid "Too many results"
-msgstr ""
+msgstr "Příliš mnoho výsledků"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
 msgstr ""
+"Toto vyhledávání vrátilo příliš mnoho výsledků, než aby se zobrazilo. "
+"Chcete-li zúžit výsledky, zkuste změnit hledané výrazy nebo hledat podle "
+"více atributů."
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
 
 msgid "View dashboard"
 msgstr "Zobrazit ovládací panel"
@@ -826,7 +829,7 @@ msgstr "Hledat"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
-msgstr ""
+msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
 
 msgid "To work with the selected program,"
 msgstr "Chcete-li pracovat s vybraným programem,"
