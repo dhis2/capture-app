@@ -141,7 +141,7 @@ const useView = (
         } = workingListsMetaNextStore || {};
 
         return {
-            eventRecords: workingListsListRecords[storeId],
+            records: workingListsListRecords[storeId],
             recordsOrder,
             updating: !!updating,
             loading: !!loading,

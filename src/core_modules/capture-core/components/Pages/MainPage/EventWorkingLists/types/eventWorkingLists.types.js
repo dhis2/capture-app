@@ -34,7 +34,6 @@ export type EventWorkingListsTemplate = {|
     nextCriteria?: Object,
     notPreserved?: boolean,
     deleted?: boolean,
-    skipInitDuringAddProcedure?: boolean,
 |};
 
 export type EventWorkingListsTemplates = Array<EventWorkingListsTemplate>;

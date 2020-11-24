@@ -29,7 +29,6 @@ export type WorkingListTemplate = {
     notPreserved?: boolean,
     updating?: boolean,
     deleted?: boolean,
-    skipInitDuringAddProcedure?: boolean,
 };
 
 export type WorkingListTemplates = Array<WorkingListTemplate>;

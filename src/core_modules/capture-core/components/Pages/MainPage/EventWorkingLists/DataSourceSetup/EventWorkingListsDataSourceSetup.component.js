@@ -5,14 +5,14 @@ import { EventWorkingListsTemplateSetup } from '../TemplateSetup';
 import type { Props } from './eventWorkingListsDataSourceSetup.types';
 
 export const EventWorkingListsDataSourceSetup = ({
-    eventRecords,
+    records,
     columns,
     recordsOrder,
     ...passOnProps
 }: Props) => (
     <EventWorkingListsTemplateSetup
         {...passOnProps}
-        dataSource={useDataSource(eventRecords, recordsOrder, columns)}
+        dataSource={useDataSource(records, recordsOrder, columns)}
         columns={columns}
         rowIdKey="eventId"
     />

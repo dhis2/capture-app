@@ -4,13 +4,13 @@ import type { EventRecords, EventWorkingListsColumnConfigs } from '../../EventWo
 import type { CurrentViewChangesResolverOutputProps } from '../CurrentViewChangesResolver';
 
 type ExtractedProps = $ReadOnly<{|
-    eventRecords?: EventRecords,
+    records?: EventRecords,
     columns: EventWorkingListsColumnConfigs,
     recordsOrder?: Array<string>,
 |}>;
 
 type OptionalExtractedProps = {
-    eventRecords: EventRecords,
+    records: EventRecords,
     recordsOrder: Array<string>,
 };
 type RestProps = $Rest<CurrentViewChangesResolverOutputProps & OptionalExtractedProps,

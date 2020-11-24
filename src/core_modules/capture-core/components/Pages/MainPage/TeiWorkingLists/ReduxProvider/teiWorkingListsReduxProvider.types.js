@@ -1,5 +1,4 @@
 // @flow
-import type { EventProgram } from '../../../../../metaData';
 import type {
     CancelLoadTemplates,
     CancelLoadView,
@@ -22,45 +21,31 @@ import type {
     StickyFilters,
     UnloadingContext,
     UpdateFilter,
-    WorkingListTemplate,
 } from '../../WorkingLists';
 import type {
     AddTemplate,
     DeleteTemplate,
     UpdateTemplate,
     UpdateList,
-    RecordsOrder,
-    CustomColumnOrder,
 } from '../../WorkingListsCommon';
-import type { EventRecords } from '../../EventWorkingListsCommon';
-import type {
-    EventWorkingListsTemplates,
-} from '../types';
+import type { TeiWorkingListsTemplate, TeiWorkingListsTemplates } from '../types';
 
 export type Props = $ReadOnly<{|
     storeId: string,
 |}>;
 
-export type EventWorkingListsReduxOutputProps = {|
+export type TeiWorkingListsReduxOutputProps = {|
     categories?: Categories,
     currentPage?: number,
-    currentTemplate?: WorkingListTemplate,
+    currentTemplate?: TeiWorkingListsTemplate,
     currentViewHasTemplateChanges?: boolean,
-    customColumnOrder?: CustomColumnOrder,
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
-    downloadRequest: Object,
-    records?: EventRecords,
     filters?: FiltersData,
-    initialViewConfig?: Object,
-    lastIdDeleted?: string,
-    lastTransaction: number,
-    lastTransactionOnListDataRefresh?: number,
-    listDataRefreshTimestamp?: number,
     loadedContext?: LoadedContext,
     loading: boolean,
     loadViewError?: string,
-    loadTemplatesError?: string, // TODO: Check
+    loadTemplatesError?: string,
     onAddTemplate: AddTemplate,
     onCancelLoadView: CancelLoadView,
     onCancelLoadTemplates: CancelLoadTemplates,
@@ -68,7 +53,6 @@ export type EventWorkingListsReduxOutputProps = {|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
-    onDeleteEvent: Function,
     onDeleteTemplate: DeleteTemplate,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
@@ -82,13 +66,12 @@ export type EventWorkingListsReduxOutputProps = {|
     onUpdateList: UpdateList,
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
-    program: EventProgram,
-    recordsOrder?: RecordsOrder,
+    programId: string,
     rowsPerPage?: number,
     sortByDirection?: string,
     sortById?: string,
     stickyFilters?: StickyFilters,
-    templates?: EventWorkingListsTemplates,
+    templates?: TeiWorkingListsTemplates,
     templatesLoading: boolean,
     updating: boolean,
     updatingWithDialog: boolean,
