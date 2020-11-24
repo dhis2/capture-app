@@ -11,9 +11,7 @@ type ExtractedProps = $ReadOnly<{|
     onUpdateList: UpdateList,
 |}>;
 
-type RestProps = $Rest<TeiWorkingListsReduxOutputProps, ExtractedProps>;
-
-export type Props = {|
-    ...RestProps,
+export type Props = $ReadOnly<{|
+    ...TeiWorkingListsReduxOutputProps,
     ...ExtractedProps,
-|};
+|}>;
