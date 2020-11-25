@@ -376,7 +376,7 @@ msgid "Find"
 msgstr "查询"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "清除选择"
 
 msgid "Selected registering unit"
 msgstr "选择注册的机构"
@@ -532,7 +532,7 @@ msgid "Show All"
 msgstr "显示全部"
 
 msgid "\"Choose a registering unit to start reporting"
-msgstr ""
+msgstr "“选择一个注册机构开始报告"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
@@ -615,16 +615,16 @@ msgid "No events added"
 msgstr "没有事件被添加"
 
 msgid "Choose a registering unit and program to get started"
-msgstr ""
+msgstr "选择注册机构和项目后开始"
 
 msgid "Choose a program to start reporting"
-msgstr ""
+msgstr "选择一个项目开始报告"
 
 msgid "Choose a registering unit to start reporting"
-msgstr ""
+msgstr "选择一个注册机构开始填报"
 
 msgid "Choose a category option to start reporting"
-msgstr ""
+msgstr "选择一个分类选项以开始填报"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "你没有在当前选择创建事件的权限"
@@ -741,15 +741,15 @@ msgid ""
 msgstr "该搜索存在问题，请更改搜索词或稍后再试。有关更多详细信息，请打开开发人员工具的控制台选项卡。"
 
 msgid "Too many results"
-msgstr ""
+msgstr "结果太多"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
-msgstr ""
+msgstr "该搜索返回了太多结果，无法显示。尝试更改搜索词或按更多属性搜索以缩小搜索范围。"
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "选择一种类型以开始搜索"
 
 msgid "View dashboard"
 msgstr "查看仪表盘"
@@ -806,7 +806,7 @@ msgstr "搜索"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
-msgstr ""
+msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
 
 msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"
