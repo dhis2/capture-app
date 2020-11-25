@@ -47,6 +47,7 @@ const CardListButtons = withStyles(buttonStyles)(
         return (
             <div className={classes.margin}>
                 <Button
+                    small
                     dataTest="dhis2-capture-view-dashboard-button"
                     onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
                 >
@@ -55,6 +56,7 @@ const CardListButtons = withStyles(buttonStyles)(
                 {
                     navigationButtonsState === availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON &&
                     <Button
+                        small
                         className={classes.buttonMargin}
                         dataTest="dhis2-capture-view-active-enrollment-button"
                         onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
@@ -65,6 +67,7 @@ const CardListButtons = withStyles(buttonStyles)(
                 {
                     navigationButtonsState === availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON &&
                     <Button
+                        small
                         className={classes.buttonMargin}
                         dataTest="dhis2-capture-re-enrollment-button"
                         onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
