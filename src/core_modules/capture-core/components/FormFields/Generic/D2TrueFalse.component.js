@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 
-import SingleSelectBoxes from '../Options/SingleSelectBoxes/SingleSelectBoxes.component';
-import MultiSelectBoxes from '../Options/MultiSelectBoxes/MultiSelectBoxes.component';
+import { SelectBoxes } from '../Options/SelectBoxes';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import Option from '../../../metaData/OptionSet/Option';
 
@@ -31,12 +30,13 @@ class D2TrueFalse extends Component<Props> {
 
     render() {
         const { allowMultiple, ...passOnProps } = this.props;
-        const SelectBoxes = allowMultiple ? MultiSelectBoxes : SingleSelectBoxes;
         return (
             <div>
+                { /* $FlowFixMe */ }
                 <SelectBoxes
                     {...passOnProps}
                     optionSet={this.optionSet}
+                    multiSelect={allowMultiple}
                 />
             </div>
         );

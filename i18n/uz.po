@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
+"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2020\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -54,12 +54,6 @@ msgstr ""
 msgid "Not enrolled"
 msgstr ""
 
-msgid "Columns to show in table"
-msgstr ""
-
-msgid "Column"
-msgstr "Устун"
-
 msgid "This value is validating"
 msgstr ""
 
@@ -103,7 +97,7 @@ msgid "Please provide a valid url"
 msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "Илтимос, амалдаги е-почта манзилини кўрсатинг"
 
 msgid "Please provide a valid age"
 msgstr ""
@@ -327,6 +321,39 @@ msgstr ""
 msgid "No items to display"
 msgstr ""
 
+msgid "Select columns"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
+msgstr "Устун"
+
+msgid "Update"
+msgstr "Янгилаш"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr ""
+
+msgid "after or equal to {{date}}"
+msgstr ""
+
+msgid "before or equal to {{date}}"
+msgstr ""
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "More filters"
+msgstr ""
+
+msgid "Rows per page"
+msgstr ""
+
 msgid "Could not get organisation unit"
 msgstr ""
 
@@ -334,9 +361,6 @@ msgid "Program doesn't exist"
 msgstr ""
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
-
-msgid "Start again"
 msgstr ""
 
 msgid "New {{typeName}}"
@@ -347,6 +371,9 @@ msgstr "Янги"
 
 msgid "Find"
 msgstr "Топинг"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr ""
@@ -435,35 +462,8 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
-msgid "View event info"
-msgstr ""
-
 msgid "Delete event"
 msgstr "Тадбирни ўчиринг"
-
-msgid "Update"
-msgstr "Янгилаш"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
-
-msgid "after or equal to {{date}}"
-msgstr ""
-
-msgid "before or equal to {{date}}"
-msgstr ""
-
-msgid "greater than or equal to"
-msgstr ""
-
-msgid "less than or equal to"
-msgstr ""
-
-msgid "More filters"
-msgstr ""
-
-msgid "Select columns"
-msgstr ""
 
 msgid "Download as JSON"
 msgstr ""
@@ -480,8 +480,20 @@ msgstr ""
 msgid "Download data..."
 msgstr ""
 
-msgid "Rows per page"
+msgid "Working list could not be loaded"
 msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Active"
+msgstr "Фаол"
+
+msgid "Completed"
+msgstr "бажарилди"
+
+msgid "Registered events"
+msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
 
 msgid "Update view"
 msgstr ""
@@ -516,20 +528,8 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
-msgid "Working list could not be loaded"
+msgid "\"Choose a registering unit to start reporting"
 msgstr ""
-
-msgid "an error occurred loading working lists"
-msgstr ""
-
-msgid "Registered events"
-msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
-
-msgid "Active"
-msgstr "Фаол"
-
-msgid "Completed"
-msgstr "бажарилди"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
@@ -611,16 +611,16 @@ msgstr ""
 msgid "No events added"
 msgstr ""
 
-msgid "Select a registering unit and program above to get started"
+msgid "Choose a registering unit and program to get started"
 msgstr ""
 
-msgid "Select a program to start reporting"
+msgid "Choose a program to start reporting"
 msgstr ""
 
-msgid "Select a registering unit to start reporting"
+msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Select a category option to start reporting"
+msgid "Choose a category option to start reporting"
 msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
@@ -705,12 +705,6 @@ msgstr ""
 msgid "Register"
 msgstr "Рўйхат"
 
-msgid "Search scope"
-msgstr ""
-
-msgid "Find results from"
-msgstr ""
-
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
@@ -743,7 +737,15 @@ msgid ""
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
 
-msgid "Make a selection to start searching"
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
 msgstr ""
 
 msgid "View dashboard"
@@ -794,6 +796,13 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "Search for"
+msgstr "Қидириш"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "To work with the selected program,"

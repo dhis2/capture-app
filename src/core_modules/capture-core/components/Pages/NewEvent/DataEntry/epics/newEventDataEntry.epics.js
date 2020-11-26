@@ -28,7 +28,7 @@ import {
 } from './defaultColumnConfiguration';
 import {
     resetList,
-} from '../../../../List/list.actions';
+} from '../../RecentlyAddedEventsList';
 import type {
     FieldData,
 } from '../../../../../rules/actionsCreator';
@@ -203,7 +203,7 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
         const foundation: RenderFoundation = metadataContainer.stage.stageForm;
         const programStageId = foundation.id;
         const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
-        const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, {}, foundation);
+        const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
         const currentEventData = { ...currentEventValues, ...currentEventMainData, programStageId };
 
         rulesActions = getRulesActionsForEvent(

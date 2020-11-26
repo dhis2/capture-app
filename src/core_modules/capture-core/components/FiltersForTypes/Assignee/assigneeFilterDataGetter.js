@@ -1,5 +1,5 @@
 // @flow
-import type { AssigneeFilterData } from '../filters.types';
+import type { AssigneeFilterData } from './types';
 
 export function getAssigneeFilterData(value: Object): AssigneeFilterData {
     return {

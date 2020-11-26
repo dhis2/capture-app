@@ -32,13 +32,11 @@ import {
     updateTemplateEpic,
     addTemplateEpic,
     deleteTemplateEpic,
-} from 'capture-core/components/Pages/MainPage/WorkingLists';
+} from 'capture-core/components/Pages/MainPage/EventWorkingLists';
 
 import {
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
-    openEditPageLocationChangeEpic,
-    getEventOpeningFromEventListEpic,
 } from 'capture-core/components/Pages/EditEvent/editEvent.epics';
 import {
     openEditEventInDataEntryEpic,
@@ -55,7 +53,7 @@ import {
     loadViewEventDataEntryEpic,
 } from 'capture-core/components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.epics';
 import {
-    getEventOpeningFromEventListEpic as getViewEventOpeningFromEventListEpic,
+    getEventOpeningFromEventListEpic,
     getEventFromUrlEpic as getViewEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic as getViewEventOrgUnitOnUrlUpdateEpic,
     openViewPageLocationChangeEpic,
@@ -102,7 +100,7 @@ import {
 } from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
-} from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
+} from 'capture-core/components/Pages/MainPage/WorkingListsCommon';
 import {
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,
@@ -224,7 +222,6 @@ export default combineEpics(
     addNoteForEditSingleEventEpic,
     addNoteForNewSingleEventEpic,
     removeNoteForEditSingleEventEpic,
-    openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
     goingOnlineEpic,
@@ -257,7 +254,6 @@ export default combineEpics(
     filterFormFieldOrgUnitsEpic,
     asyncUpdateFieldEpic,
     teiSearchFilterOrgUnitsEpic,
-    getViewEventOpeningFromEventListEpic,
     getViewEventFromUrlEpic,
     getViewEventOrgUnitOnUrlUpdateEpic,
     openViewPageLocationChangeEpic,

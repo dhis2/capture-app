@@ -59,7 +59,6 @@ export const getNewEventClientValues = (state: ReduxState, dataEntryKey: string,
         formValues,
         dataEntryValues,
         dataEntryValuesMeta,
-        prevEventMainData,
     );
     const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: getDataEntriesNotes(state, dataEntryKey) };
 
