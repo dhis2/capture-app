@@ -84,20 +84,17 @@ const NewPagePlain = ({
                 newPageStatus === newPageStatuses.DEFAULT &&
                 <Paper className={classes.paper}>
                     <div className={classes.maxWidth}>
-                        <>
-                            <div className={classes.title} >
-                                New {titleText}
-                            </div>
-                            {
-                                (!scopeType || scopeType === scopeTypes.TRACKED_ENTITY_TYPE) &&
+                        <div className={classes.title} >
+                            New {titleText}
+                        </div>
+                        {
+                            (!scopeType || scopeType === scopeTypes.TRACKED_ENTITY_TYPE) &&
                                 <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
-                            }
-                            <RegistrationDataEntry
-                                dataEntryId={NEW_TEI_DATA_ENTRY_ID}
-                                selectedScopeId={selectedScopeId}
-                            />
-
-                        </>
+                        }
+                        <RegistrationDataEntry
+                            dataEntryId={NEW_TEI_DATA_ENTRY_ID}
+                            selectedScopeId={selectedScopeId}
+                        />
                     </div>
                 </Paper>
             }
