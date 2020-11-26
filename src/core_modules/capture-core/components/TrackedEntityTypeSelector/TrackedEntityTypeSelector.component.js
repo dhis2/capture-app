@@ -17,9 +17,6 @@ import { setTrackedEntityTypeIdOnUrl } from './TrackedEntityTypeSelector.actions
 import { useCurrentTrackedEntityTypeId } from '../../hooks/useCurrentTrackedEntityTypeId';
 
 const styles = ({ typography }) => ({
-    searchDomainSelectorSection: {
-        margin: typography.pxToRem(10),
-    },
     header: {
         paddingLeft: 8,
     },
@@ -28,21 +25,21 @@ const styles = ({ typography }) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'start',
-        padding: '8px 0',
+        paddingTop: '8px',
     },
     searchRowSelectElement: {
         marginLeft: 8,
         marginRight: 8,
-        marginBottom: 8,
         width: '100%',
     },
     gridContainerInformativeText: {
         marginLeft: 8,
-        marginTop: 4,
+        marginTop: 12,
         marginBottom: 12,
     },
     gridItemInformativeText: {
         fontSize: 14,
+        fontWeight: 'normal',
         marginLeft: 8,
         color: colors.grey800,
     },
@@ -87,7 +84,7 @@ export const TrackedEntityTypeSelectorPlain =
                   >
                       {
                           useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                              // $FlowFixMe https://github.com/facebook/flow/issues/2221
+                          // $FlowFixMe https://github.com/facebook/flow/issues/2221
                               .map(({ trackedEntityTypeName, trackedEntityTypeId }) =>
                                   (<SingleSelectOption
                                       key={trackedEntityTypeId}
@@ -101,14 +98,14 @@ export const TrackedEntityTypeSelectorPlain =
           </div>
           {
               !selectedSearchScopeId &&
-                  <Grid container direction="row" alignItems="center" className={classes.gridContainerInformativeText}>
-                      <Grid item>
-                          <InfoOutlinedIconWithStyles />
-                      </Grid>
-                      <Grid item className={classes.gridItemInformativeText}>
-                          {i18n.t('You can also choose a program from the top bar and search in that program')}
-                      </Grid>
+              <Grid container direction="row" alignItems="center" className={classes.gridContainerInformativeText}>
+                  <Grid item>
+                      <InfoOutlinedIconWithStyles />
                   </Grid>
+                  <Grid item className={classes.gridItemInformativeText}>
+                      {i18n.t('You can also choose a program from the top bar and search in that program')}
+                  </Grid>
+              </Grid>
           }
       </>
       );

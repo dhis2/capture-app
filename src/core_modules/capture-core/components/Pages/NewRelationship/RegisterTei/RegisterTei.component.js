@@ -18,7 +18,7 @@ const getStyles = () => ({
     leftContainer: {
         flexGrow: 10,
         flexBasis: 0,
-        marginTop: 10,
+        margin: 8,
     },
 });
 
