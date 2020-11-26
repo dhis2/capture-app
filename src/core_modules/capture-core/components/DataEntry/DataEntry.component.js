@@ -36,7 +36,6 @@ const styles = theme => ({
         paddingTop: theme.typography.pxToRem(10),
     },
     verticalFormInnerContainer: {
-        // overflow: 'auto',
         maxWidth: theme.typography.pxToRem(892),
     },
     verticalDataEntryContainer: {
@@ -62,9 +61,6 @@ const styles = theme => ({
     dataEntryFieldSectionContainer: {
         paddingTop: theme.typography.pxToRem(10),
         paddingBottom: theme.typography.pxToRem(10),
-    },
-    dataEntryFieldSection: {
-        maxWidth: theme.typography.pxToRem(892),
     },
 });
 
