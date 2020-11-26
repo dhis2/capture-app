@@ -6,7 +6,7 @@ import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 
 const mapStateToProps = (state: ReduxState) => {
     const registerTeiContainer = state.newRelationshipRegisterTei;
-    const ready = !registerTeiContainer.loading && !registerTeiContainer.dataEntryIsLoading;
+    const ready = !registerTeiContainer.loading;
 
     const dataEntryId = 'relationship';
     const dataEntryKey = ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;

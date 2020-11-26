@@ -260,6 +260,7 @@ class DataEntry extends React.Component<Props> {
             dataEntryOutputs,
             dataEntryExists,
         } = this.props;
+        if (!dataEntryExists) { return <div className={classes.loadingContainer}>loading</div>; }
 
         if (!dataEntryExists) { return <div className={classes.loadingContainer}>loading</div>; }
 

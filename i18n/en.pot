@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-11-26T12:45:52.906Z\n"
-"PO-Revision-Date: 2020-11-26T12:45:52.906Z\n"
+"POT-Creation-Date: 2020-11-26T14:01:11.938Z\n"
+"PO-Revision-Date: 2020-11-26T14:01:11.938Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -120,6 +120,9 @@ msgid "Enrollment"
 msgstr ""
 
 msgid "A future date is not allowed"
+msgstr ""
+
+msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "An error has occurred. See log for details"
@@ -617,9 +620,6 @@ msgid "Review duplicates"
 msgstr ""
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
-
-msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "Review Duplicates"

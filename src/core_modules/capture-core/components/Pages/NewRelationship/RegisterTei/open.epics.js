@@ -106,14 +106,16 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                 return Promise.resolve(initializeRegisterTeiFailed(i18n.t('Metadata error. see log for details')));
             }
 
+            const unique = state.generatedUniqueValuesCache;
             const openTeiPromise = openDataEntryForNewTeiBatchAsync(
                 TETType.teiRegistration.form,
                 orgUnit,
                 DATA_ENTRY_ID,
                 [initializeRegisterTei(null, orgUnit)],
-                state.generatedUniqueValuesCache[DATA_ENTRY_ID],
+                unique[DATA_ENTRY_ID],
             );
 
+            // @@@@@ the real thing is here
             return from(openTeiPromise).pipe(
                 takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
             );

@@ -9,7 +9,10 @@ import teiClasses from './trackedEntityInstance.module.css';
 type Props = {
     teiRegistrationMetadata: ?TeiRegistration,
     onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
+    onGetUnsavedAttributeValues: Function,
+    onPostProcessErrorMessage: Function,
     onCancel: () => void,
+    teiRegistrationMetadata: Object,
     classes: {
         fieldLabelMediaBased: string,
     },
@@ -34,16 +37,24 @@ class RelationshipTrackedEntityInstance extends Component<Props> {
     render() {
         const {
             classes,
-            onSave,
             theme,
+            onSave,
+            onGetUnsavedAttributeValues,
+            onPostProcessErrorMessage,
+            teiRegistrationMetadata,
             ...passOnProps
         } = this.props;
+
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <ConfiguredTei
                 id={DATA_ENTRY_ID}
+                selectedScopeId={teiRegistrationMetadata.form.id}
                 onSave={this.handleSave}
                 fieldOptions={this.fieldOptions}
+                onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
+                onPostProcessErrorMessage={onPostProcessErrorMessage}
+                teiRegistrationMetadata={teiRegistrationMetadata}
                 {...passOnProps}
             />
         );
