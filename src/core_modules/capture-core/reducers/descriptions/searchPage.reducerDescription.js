@@ -10,7 +10,13 @@ export const searchPageStatus = {
     ERROR: 'ERROR',
     TOO_MANY_RESULTS: 'TOO_MANY_RESULTS',
 };
-
+const initialReducerValue = {
+    searchStatus: searchPageStatus.INITIAL,
+    searchResults: [],
+    currentPage: 0,
+    currentSearchInfo: {},
+    keptFallbackSearchFormValues: {},
+};
 export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.SEARCH_RESULTS_INITIAL_VIEW]: state => ({
         ...state,
@@ -42,9 +48,16 @@ export const searchPageDesc = createReducerDescription({
         ...state,
         currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
     }),
-}, 'searchPage', {
-    searchStatus: searchPageStatus.INITIAL,
-    searchResults: [],
-    currentSearchInfo: [],
-    currentPage: 0,
-});
+
+    [searchPageActionTypes.FALLBACK_SEARCH]: (state, { payload: { fallbackFormValues } }) => ({
+        ...state,
+        keptFallbackSearchFormValues: fallbackFormValues,
+    }),
+
+    [searchPageActionTypes.ALL_SEARCH_RELATED_DATA_CLEAN]: () => (initialReducerValue),
+    [searchPageActionTypes.FALLBACK_SEARCH_RELATED_DATA_CLEAN]: state => ({
+        ...state,
+        keptFallbackSearchFormValues: {},
+    }),
+
+}, 'searchPage', initialReducerValue);

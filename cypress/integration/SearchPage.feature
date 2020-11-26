@@ -105,7 +105,7 @@ Feature: User interacts with Search page
     And you can see the first page of the results
     When you click the view dashboard button
     Then you are navigated to the Tracker Capture
-    
+
   Scenario: Searching using attributes in Tracker Program domain has disabled pagination
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
@@ -166,7 +166,7 @@ Feature: User interacts with Search page
     When you fill in the date of birth
     And you click search
     Then you can see the first page of the results
-    
+
   Scenario: Searching using zip code range values as attributes
     Given you are in the search page with the TB program being preselected from the url
     When you expand the attributes search area
@@ -182,4 +182,49 @@ Feature: User interacts with Search page
     And you click search
     Then you can see the first page of the results
 
+  Scenario: Fallback search with results
+    Given you are in the search page with the Child Programme being preselected from the url
+    And you expand the attributes search area
+    When you fill in the first and last name with values that will return results
+    And you click search
+    And you can see the first page of the results
+    When you click the fallback search button
+    Then you navigated to a search page with tracked entity id on the url
+    And you have no program selection
+    And you can see the domain selector with the tetype person selected
+    And you can see the first page of the results
+    And there is not enrollment tag
 
+  Scenario: Fallback search keeps the form values and the attributes search area is being expanded
+    Given you are in the search page with the Child Programme being preselected from the url
+    And you expand the attributes search area
+    When you fill in the first and last name with values that will return results
+    And you click search
+    And you can see the first page of the results
+    When you click the fallback search button
+    Then you see the attributes search area being expanded
+    And that first and last name are prefilled
+
+  Scenario: Fallback search excludes attributes that are not relevant in the tetype scope
+    Given you are in the search page with the Child Programme being preselected from the url
+    And you expand the attributes search area
+    When you fill in the first and last name with values that will return results
+    And you select gender
+    And you click search
+    And you can see the first page of the results
+    When you click the fallback search button
+    Then you see that in the search terms there is no gender displayed
+
+  Scenario: Fallback search with results and navigation back to the program show
+    Given you are in the search page with the Child Programme being preselected from the url
+    And you expand the attributes search area
+    When you fill in the first and last name with values that will return results
+    And you click search
+    And you can see the first page of the results
+    And you click the fallback search button
+    And you navigated to a search page with tracked entity id on the url
+    And you have no program selection
+    And you can see the first page of the results
+    When you select the search domain Child Programme
+    And you are in the search page with the Child Programme being preselected from the url
+    And and you can see the unique identifier input

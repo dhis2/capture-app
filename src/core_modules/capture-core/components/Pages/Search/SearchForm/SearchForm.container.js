@@ -5,13 +5,12 @@ import { isObject, isString } from 'd2-utilizr/src';
 import { SearchFormComponent } from './SearchForm.component';
 import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
 import {
-    searchPageActionTypes,
+    saveCurrentSearchInfo,
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
     searchViaUniqueIdOnScopeTrackedEntityType,
 } from '../SearchPage.actions';
-import { actionCreator } from '../../../../actions/actions.utils';
 import { addFormData, removeFormData } from '../../../D2Form/actions/form.actions';
 
 const isValueContainingCharacter = (value: any) => {
@@ -59,11 +58,13 @@ const mapStateToProps = (state: ReduxState, { searchGroupsForSelectedScope }: Ow
         formsValues,
         searchPage: {
             searchStatus,
+            keptFallbackSearchFormValues,
         },
     } = state;
 
 
     return {
+        keptFallbackSearchFormValues,
         formsValues,
         searchStatus,
         isSearchViaAttributesValid: (minAttributesRequiredToSearch) => {
@@ -88,18 +89,19 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { searchGroupsForSelectedSc
     searchViaAttributesOnScopeProgram: ({ programId, formId, resultsPageSize }) => {
         dispatch(searchViaAttributesOnScopeProgram({ programId, formId, pageSize: resultsPageSize }));
     },
-    saveCurrentFormData: (searchScopeType, searchScopeId, formId, formsValues) => {
-        const currentSearchTerms =
-          collectCurrentSearchTerms(searchGroupsForSelectedScope, formsValues);
+    saveCurrentFormData: ({ searchScopeType, searchScopeId, formId, formsValues }) => {
+        const currentSearchTerms = collectCurrentSearchTerms(searchGroupsForSelectedScope, formsValues);
 
-        dispatch(actionCreator(searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE)(
-            { searchScopeType,
-                searchScopeId,
-                formId,
-                currentSearchTerms,
-            }));
+        dispatch(saveCurrentSearchInfo({
+            searchScopeType,
+            searchScopeId,
+            formId,
+            currentSearchTerms,
+        }));
     },
-    addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
+    addFormIdToReduxStore: (formId, keptFallbackSearchFormValues) => {
+        dispatch(addFormData(formId, keptFallbackSearchFormValues));
+    },
     removeFormDataFromReduxStore: () => {
         searchGroupsForSelectedScope
             .forEach(({ formId }) => {
