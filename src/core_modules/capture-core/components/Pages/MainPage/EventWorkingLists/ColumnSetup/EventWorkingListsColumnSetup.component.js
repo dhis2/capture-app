@@ -1,6 +1,7 @@
 // @flow
 import React, { useCallback } from 'react';
-import { useDefaultColumnConfig, useColumns } from '../../EventWorkingListsCommon';
+import { useColumns } from '../../WorkingListsCommon';
+import { useDefaultColumnConfig, type EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
 import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
@@ -37,7 +38,8 @@ export const EventWorkingListsColumnSetup = ({
     const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView);
     const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateList);
 
-    const columns = useColumns(customColumnOrder, defaultColumns);
+    // $FlowFixMe Any suggestions for how to fix this?
+    const columns = useColumns<EventWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
 
     return (
         <CurrentViewChangesResolver

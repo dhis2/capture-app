@@ -44,7 +44,6 @@ export const TeiWorkingListsReduxProvider = ({ storeId }: Props) => {
             filtersWithValueOnInit: {},
             userSelectedFilters: {},
         },
-        customColumnOrder: undefined,
         lastTransaction: undefined,
         lastTransactionOnListDataRefresh: undefined,
         listDataRefreshTimestamp: undefined,
@@ -59,7 +58,7 @@ export const TeiWorkingListsReduxProvider = ({ storeId }: Props) => {
         <TeiWorkingListsSetup
             {...commonStateManagementProps}
             {...dummyData}
-            programId={program.id}
+            program={program}
         />
     );
 };

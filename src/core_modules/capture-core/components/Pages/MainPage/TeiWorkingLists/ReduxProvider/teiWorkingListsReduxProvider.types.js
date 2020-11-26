@@ -1,4 +1,5 @@
 // @flow
+import type { TrackerProgram } from '../../../../../metaData';
 import type {
     CancelLoadTemplates,
     CancelLoadView,
@@ -24,6 +25,7 @@ import type {
 } from '../../WorkingLists';
 import type {
     AddTemplate,
+    CustomColumnOrder,
     DeleteTemplate,
     UpdateTemplate,
     UpdateList,
@@ -39,6 +41,7 @@ export type TeiWorkingListsReduxOutputProps = {|
     currentPage?: number,
     currentTemplate?: TeiWorkingListsTemplate,
     currentViewHasTemplateChanges?: boolean,
+    customColumnOrder?: CustomColumnOrder,
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
     filters?: FiltersData,
@@ -66,7 +69,7 @@ export type TeiWorkingListsReduxOutputProps = {|
     onUpdateList: UpdateList,
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
-    programId: string,
+    program: TrackerProgram,
     rowsPerPage?: number,
     sortByDirection?: string,
     sortById?: string,

@@ -1,17 +1,17 @@
 // @flow
 import { useMemo } from 'react';
 import type { CustomColumnOrder } from '../../WorkingListsCommon';
-import type { EventWorkingListsColumnConfigs } from '../types';
 
-export const useColumns = (
-    customColumnOrder?: CustomColumnOrder,
-    defaultColumns: EventWorkingListsColumnConfigs,
-): EventWorkingListsColumnConfigs => {
+export const useColumns = <TColumnConfigs: Array<{ id: string, visible: boolean, ... }>>(
+    customColumnOrder?: CustomColumnOrder, // eslint-disable-line
+    defaultColumns: TColumnConfigs,
+): TColumnConfigs => {
     const defaultColumnsAsObject = useMemo(() =>
         defaultColumns
             .reduce((acc, column) => ({ ...acc, [column.id]: column }), {}),
     [defaultColumns]);
 
+    // $FlowFixMe Based on the business logic the customColumOrder id should exists as a key in defaultColumnsAsObject
     return useMemo(() => {
         if (!customColumnOrder) {
             return defaultColumns;
