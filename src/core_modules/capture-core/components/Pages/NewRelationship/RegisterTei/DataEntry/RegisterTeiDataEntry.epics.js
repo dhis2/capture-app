@@ -6,7 +6,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { actionTypes as registrationSectionActionTypes } from '../RegistrationSection';
-import { openDataEntry, openDataEntryCancelled, openDataEntryFailed } from './dataEntry.actions';
+import { openDataEntry, openDataEntryCancelled, openDataEntryFailed } from './RegisterTeiDataEntry.actions';
 import { actionTypes as newRelationshipActionTypes } from '../../newRelationship.actions';
 import { DATA_ENTRY_ID } from '../registerTei.const';
 import {

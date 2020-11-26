@@ -1,10 +1,6 @@
 // @flow
-import {
-    withSaveHandler,
-} from '../../../../DataEntry';
-import {
-    EnrollmentDataEntry,
-} from '../../../../DataEntries';
+import { withSaveHandler } from '../../../../../DataEntry';
+import { EnrollmentDataEntry } from '../../../../../DataEntries';
 import withMainButton from './withMainButton';
 
 const SaveHandlerHOC =

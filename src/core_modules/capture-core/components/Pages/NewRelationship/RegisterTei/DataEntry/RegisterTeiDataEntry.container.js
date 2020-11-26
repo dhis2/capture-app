@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import DataEntry from './DataEntry.component';
+import DataEntry from './RegisterTeiDataEntry.component';
 import withErrorMessageHandler from '../../../../../HOC/withErrorMessageHandler';
 import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 
@@ -13,9 +13,8 @@ const mapStateToProps = (state: ReduxState) => ({
 
 const mapDispatchToProps = () => ({});
 
-// $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(
+export const RegisterTeiDataEntry = connect(mapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(
         withErrorMessageHandler()(
             DataEntry,

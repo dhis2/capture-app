@@ -1,6 +1,6 @@
 // @flow
 export {
-    Enrollment as EnrollmentDataEntry,
+    EnrollmentDataEntry,
     sectionKeys as sectionKeysForEnrollmentDataEntry,
     openDataEntryForNewEnrollmentBatchAsync,
     runRulesOnUpdateFieldBatch,
@@ -11,7 +11,7 @@ export {
     runRulesOnEnrollmentDataEntryFieldUpdateEpic,
 } from './Enrollment';
 export {
-    TrackedEntityInstance as TrackedEntityInstanceDataEntry,
+    TrackedEntityInstanceDataEntry,
     openDataEntryForNewTeiBatchAsync,
     batchActionTypes as teiBatchActionTypes,
     openBatchActionTypes as teiOpenBatchActionTypes,

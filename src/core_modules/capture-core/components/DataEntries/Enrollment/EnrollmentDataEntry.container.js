@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
-import Enrollment from './Enrollment.component';
+import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
 
 const mapStateToProps = () => ({});
 
@@ -46,5 +46,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps)(Enrollment);
+export const EnrollmentDataEntry = connect(mapStateToProps, mapDispatchToProps)(EnrollmentDataEntryComponent);
 

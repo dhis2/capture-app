@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { withTheme } from '@material-ui/core/styles';
-import type { Enrollment, RenderFoundation } from '../../../../../metaData';
+import type { Enrollment, RenderFoundation } from '../../../../../../metaData';
 import ConfiguredEnrollment from './ConfiguredEnrollment.component';
-import { DATA_ENTRY_ID } from '../registerTei.const';
+import { DATA_ENTRY_ID } from '../../registerTei.const';
 import enrollmentClasses from './enrollment.module.css';
 
 type Props = {
@@ -11,7 +11,6 @@ type Props = {
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: Object,
     onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
-    // onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     onCancel: () => void,
     classes: {
         fieldLabelMediaBased: string,
@@ -43,16 +42,14 @@ class NewEnrollmentRelationship extends Component<Props> {
             ...passOnProps
         } = this.props;
         return (
-            <div>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <ConfiguredEnrollment
-                    id={DATA_ENTRY_ID}
-                    onSave={this.handleSave}
-                    fieldOptions={this.fieldOptions}
-                    enrollmentMetadata={enrollmentMetadata}
-                    {...passOnProps}
-                />
-            </div>
+            // $FlowFixMe[cannot-spread-inexact] automated comment
+            <ConfiguredEnrollment
+                id={DATA_ENTRY_ID}
+                onSave={this.handleSave}
+                fieldOptions={this.fieldOptions}
+                enrollmentMetadata={enrollmentMetadata}
+                {...passOnProps}
+            />
         );
     }
 }

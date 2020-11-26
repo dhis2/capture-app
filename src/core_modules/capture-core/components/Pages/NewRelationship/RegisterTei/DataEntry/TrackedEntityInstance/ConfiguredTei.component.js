@@ -1,10 +1,10 @@
 // @flow
 import {
     withSaveHandler,
-} from '../../../../DataEntry';
+} from '../../../../../DataEntry';
 import {
     TrackedEntityInstanceDataEntry,
-} from '../../../../DataEntries';
+} from '../../../../../DataEntries';
 import withMainButton from './withMainButton';
 
 const SaveHandlerHOC =
