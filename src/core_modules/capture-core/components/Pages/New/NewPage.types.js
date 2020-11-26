@@ -5,7 +5,7 @@ export type ContainerProps = $ReadOnly<{|
   showMessageToSelectOrgUnitOnNewPage: ()=>void,
   showDefaultViewOnNewPage: ()=>void,
   currentOrgUnitId: string,
-  currentProgramId: string,
+  currentScopeId: string,
   newPageStatus: $Keys<newPageStatuses>,
   error: boolean,
   ready: boolean,

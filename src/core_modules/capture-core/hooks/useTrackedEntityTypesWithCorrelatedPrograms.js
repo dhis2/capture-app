@@ -18,7 +18,7 @@ export const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityType
     useMemo(() =>
         [...programCollection.values()]
             .filter(program => program instanceof TrackerProgram)
-            // $FlowFixMe
+        // $FlowFixMe
             .reduce((acc, {
                 id: programId,
                 name: programName,
@@ -26,20 +26,23 @@ export const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityType
                     id: trackedEntityTypeId,
                     name: trackedEntityTypeName,
                     searchGroups: trackedEntityTypeSearchGroups,
+                    teiRegistration: { form, inputSearchGroups },
                 },
                 searchGroups,
+                enrollment,
             }: TrackerProgram) => {
                 const accumulatedProgramsOfTrackedEntityType =
-          acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
+            acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
                 return {
                     ...acc,
                     [trackedEntityTypeId]: {
                         trackedEntityTypeId,
                         trackedEntityTypeName,
                         trackedEntityTypeSearchGroups,
+                        trackedEntityTypeTeiRegistration: { form, inputSearchGroups },
                         programs: [
                             ...accumulatedProgramsOfTrackedEntityType,
-                            { programId, programName, searchGroups },
+                            { programId, programName, searchGroups, enrollment },
                         ],
 
                     },

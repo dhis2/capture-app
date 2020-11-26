@@ -87,7 +87,7 @@ export const TrackedEntityTypeSelectorPlain =
                   >
                       {
                           useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                              // $FlowFixMe https://github.com/facebook/flow/issues/2221
+                          // $FlowFixMe https://github.com/facebook/flow/issues/2221
                               .map(({ trackedEntityTypeName, trackedEntityTypeId }) =>
                                   (<SingleSelectOption
                                       key={trackedEntityTypeId}
@@ -101,14 +101,14 @@ export const TrackedEntityTypeSelectorPlain =
           </div>
           {
               !selectedSearchScopeId &&
-                  <Grid container direction="row" alignItems="center" className={classes.gridContainerInformativeText}>
-                      <Grid item>
-                          <InfoOutlinedIconWithStyles />
-                      </Grid>
-                      <Grid item className={classes.gridItemInformativeText}>
-                          {i18n.t('You can also choose a program from the top bar and search in that program')}
-                      </Grid>
+              <Grid container direction="row" alignItems="center" className={classes.gridContainerInformativeText}>
+                  <Grid item>
+                      <InfoOutlinedIconWithStyles />
                   </Grid>
+                  <Grid item className={classes.gridItemInformativeText}>
+                      {i18n.t('You can also choose a program from the top bar and search in that program')}
+                  </Grid>
+              </Grid>
           }
       </>
       );

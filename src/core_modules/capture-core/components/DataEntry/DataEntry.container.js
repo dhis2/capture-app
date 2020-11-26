@@ -4,8 +4,8 @@ import DataEntry from './DataEntry.component';
 import { updateFormField } from './actions/dataEntry.actions';
 
 const mapStateToProps = (state: Object, props: { id: string }) => ({
-    itemId: state.dataEntries[props.id] &&
-        state.dataEntries[props.id].itemId,
+    itemId: state.dataEntries[props.id] && state.dataEntries[props.id].itemId,
+    dataEntryExists: !!state.dataEntries[props.id],
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
