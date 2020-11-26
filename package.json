@@ -6,7 +6,7 @@
   "private": false,
   "dependencies": {
     "@dhis2/app-runtime": "^2.6.1",
-    "@dhis2/cli-utils-cypress": "^2.2.2",
+    "@dhis2/cli-utils-cypress": "^3.2.0",
     "@dhis2/d2-i18n": "^1.0.6",
     "@dhis2/d2-icons": "^1.0.1",
     "@dhis2/d2-ui-app": "^2.0.0",
