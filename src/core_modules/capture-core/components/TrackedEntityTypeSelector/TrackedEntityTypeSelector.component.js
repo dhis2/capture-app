@@ -101,14 +101,14 @@ export const TrackedEntityTypeSelectorPlain =
           </div>
           {
               !selectedSearchScopeId &&
-              <Grid container direction="row" alignItems="center" className={classes.gridContainerInformativeText}>
-                  <Grid item>
-                      <InfoOutlinedIconWithStyles />
+                  <Grid container direction="row" alignItems="center" className={classes.gridContainerInformativeText}>
+                      <Grid item>
+                          <InfoOutlinedIconWithStyles />
+                      </Grid>
+                      <Grid item className={classes.gridItemInformativeText}>
+                          {i18n.t('You can also choose a program from the top bar and search in that program')}
+                      </Grid>
                   </Grid>
-                  <Grid item className={classes.gridItemInformativeText}>
-                      {i18n.t('You can also choose a program from the top bar and search in that program')}
-                  </Grid>
-              </Grid>
           }
       </>
       );
