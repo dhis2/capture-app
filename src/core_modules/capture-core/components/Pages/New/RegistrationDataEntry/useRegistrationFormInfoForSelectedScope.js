@@ -36,8 +36,7 @@ const useRegistrationOptions = (): RegistrationOptions => {
                     },
                 }), {}),
             }), {}),
-    [trackedEntityTypesWithCorrelatedPrograms],
-    );
+    [trackedEntityTypesWithCorrelatedPrograms]);
 };
 
 export const useRegistrationFormInfoForSelectedScope = (selectedScopeId: string) => {

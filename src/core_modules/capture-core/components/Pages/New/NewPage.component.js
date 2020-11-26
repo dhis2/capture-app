@@ -72,7 +72,7 @@ const NewPagePlain = ({
         currentOrgUnitId,
     ]);
 
-    const handleRegistrationScopeSelection = (id, type) => {
+    const handleRegistrationScopeSelection = (id) => {
         setScopeId(id);
     };
 
