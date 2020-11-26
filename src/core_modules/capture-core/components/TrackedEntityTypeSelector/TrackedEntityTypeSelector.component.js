@@ -1,6 +1,5 @@
 // @flow
-import React, { useMemo } from 'react';
-import type { ComponentType } from 'react';
+import React, { useMemo, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
@@ -12,6 +11,7 @@ import {
 } from '@dhis2/ui';
 import type { OwnProps, Props } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
+import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
 
 const styles = ({ typography }) => ({
     searchDomainSelectorSection: {
@@ -59,9 +59,15 @@ const InfoOutlinedIconWithStyles = withStyles({
     },
 })(InfoOutlinedIcon);
 
-export const Index =
-  ({ trackedEntityTypesWithCorrelatedPrograms, classes, onSelect, selectedSearchScopeId }: Props) =>
-      (<>
+export const TrackedEntityTypeSelectorPlain =
+  ({ classes, onSelect, selectedSearchScopeId }: Props) => {
+      const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
+
+      const handleSelectionChange = ({ selected }) => {
+          onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE);
+      };
+
+      return (<>
           <div className={classes.header}>
               { i18n.t('Search for')}
           </div>
@@ -69,7 +75,7 @@ export const Index =
           <div className={classes.searchRow}>
               <div className={classes.searchRowSelectElement}>
                   <SingleSelect
-                      onChange={({ selected }) => { onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE); }}
+                      onChange={handleSelectionChange}
                       selected={selectedSearchScopeId}
                       empty={<div className={classes.customEmpty}>Custom empty component</div>}
                   >
@@ -100,5 +106,6 @@ export const Index =
           }
       </>
       );
+  };
 
-export const TrackedEntityTypeSelector: ComponentType<OwnProps> = withStyles(styles)(Index);
+export const TrackedEntityTypeSelector: ComponentType<OwnProps> = withStyles(styles)(TrackedEntityTypeSelectorPlain);

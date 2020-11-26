@@ -33,7 +33,6 @@ export const NewPage: ComponentType<{||}> = () => {
     const newPageStatus: $Keys<newPageStatuses> =
         useSelector(({ newPage }) => newPage.newPageStatus);
 
-
     return (
         <NewPageComponent
             showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
