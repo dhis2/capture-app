@@ -97,7 +97,7 @@ msgid "Please provide a valid url"
 msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "Илтимос, амалдаги е-почта манзилини кўрсатинг"
 
 msgid "Please provide a valid age"
 msgstr ""
