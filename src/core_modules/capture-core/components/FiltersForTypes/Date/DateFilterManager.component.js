@@ -4,7 +4,8 @@ import { moment } from 'capture-core-utils/moment';
 import { convertMomentToDateFormatString } from '../../../utils/converters/date';
 import DateFilter from './DateFilter.component';
 import { mainOptionKeys } from './mainOptions';
-import { type DateFilterData, dateFilterTypes } from '../filters.types';
+import { dateFilterTypes } from './constants';
+import type { DateFilterData } from './types';
 import type { Value } from './DateFilter.component';
 
 type Props = {

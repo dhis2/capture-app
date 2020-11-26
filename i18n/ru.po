@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
+"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -63,12 +63,6 @@ msgstr "Зарегистрирован ранее"
 
 msgid "Not enrolled"
 msgstr "Не зарегистрирован"
-
-msgid "Columns to show in table"
-msgstr "Столбы, для показа в таблице"
-
-msgid "Column"
-msgstr "Столбец"
 
 msgid "This value is validating"
 msgstr "Идет валидация значения"
@@ -339,6 +333,39 @@ msgstr "Подсказка не может быть найдена"
 msgid "No items to display"
 msgstr "Нет элементов для отображения"
 
+msgid "Select columns"
+msgstr "Выберите столбцы"
+
+msgid "Columns to show in table"
+msgstr "Столбы, для показа в таблице"
+
+msgid "Column"
+msgstr "Столбец"
+
+msgid "Update"
+msgstr "Обновить"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} по {{toDate}}"
+
+msgid "after or equal to {{date}}"
+msgstr "после или равно  {{date}}"
+
+msgid "before or equal to {{date}}"
+msgstr "до или равно  {{date}}"
+
+msgid "greater than or equal to"
+msgstr "больше или равно"
+
+msgid "less than or equal to"
+msgstr "меньше или равно"
+
+msgid "More filters"
+msgstr "Еще фильтры"
+
+msgid "Rows per page"
+msgstr "Строк в странице"
+
 msgid "Could not get organisation unit"
 msgstr "Не возможно получить Орг.единицу"
 
@@ -450,35 +477,8 @@ msgstr "Событие не может быть загружено"
 msgid "Organisation unit could not be loaded"
 msgstr "Не могу загрузить Организационную единицу"
 
-msgid "View event info"
-msgstr "Просмотр информации о событии"
-
 msgid "Delete event"
 msgstr "Удалить событие"
-
-msgid "Update"
-msgstr "Обновить"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} по {{toDate}}"
-
-msgid "after or equal to {{date}}"
-msgstr "после или равно  {{date}}"
-
-msgid "before or equal to {{date}}"
-msgstr "до или равно  {{date}}"
-
-msgid "greater than or equal to"
-msgstr "больше или равно"
-
-msgid "less than or equal to"
-msgstr "меньше или равно"
-
-msgid "More filters"
-msgstr "Еще фильтры"
-
-msgid "Select columns"
-msgstr "Выберите столбцы"
 
 msgid "Download as JSON"
 msgstr "Скачать как JSON"
@@ -495,8 +495,20 @@ msgstr "Загрузить с текущими фильрами"
 msgid "Download data..."
 msgstr "Загрузка данных..."
 
-msgid "Rows per page"
-msgstr "Строк в странице"
+msgid "Working list could not be loaded"
+msgstr "Не могу загрузить Рабочий список "
+
+msgid "an error occurred loading working lists"
+msgstr "Произошла ошибка во время загрузки Рабочих списков"
+
+msgid "Active"
+msgstr "Действующий"
+
+msgid "Completed"
+msgstr "Завершенный"
+
+msgid "Registered events"
+msgstr "Зарегистрированные события"
 
 msgid "Update view"
 msgstr "Обновить вид"
@@ -530,21 +542,6 @@ msgstr "Покажи поменьше"
 
 msgid "Show All"
 msgstr "Показать все"
-
-msgid "Working list could not be loaded"
-msgstr "Не могу загрузить Рабочий список "
-
-msgid "an error occurred loading working lists"
-msgstr "Произошла ошибка во время загрузки Рабочих списков"
-
-msgid "Registered events"
-msgstr "Зарегистрированные события"
-
-msgid "Active"
-msgstr "Действующий"
-
-msgid "Completed"
-msgstr "Завершенный"
 
 msgid "\"Choose a registering unit to start reporting"
 msgstr ""

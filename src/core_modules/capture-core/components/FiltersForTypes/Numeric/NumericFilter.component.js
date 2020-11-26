@@ -15,7 +15,7 @@ import Max from './Max.component';
 import { dataElementTypes } from '../../../metaData';
 import type D2TextField from '../../FormFields/Generic/D2TextField.component';
 import { getNumericFilterData } from './numericFilterDataGetter';
-import type { UpdatableFilterContent } from '../filters.types';
+import type { UpdatableFilterContent } from '../types';
 
 const getStyles = (theme: Theme) => ({
     container: {

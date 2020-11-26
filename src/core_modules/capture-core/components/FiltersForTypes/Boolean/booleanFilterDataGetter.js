@@ -1,5 +1,5 @@
 // @flow
-import type { BooleanFilterData } from '../filters.types';
+import type { BooleanFilterData } from './types';
 
 export function getBooleanFilterData(
     values: Array<string>,

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
+"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -56,12 +56,6 @@ msgstr "以前报名的"
 
 msgid "Not enrolled"
 msgstr "未注册"
-
-msgid "Columns to show in table"
-msgstr "表中显示的列"
-
-msgid "Column"
-msgstr "列"
 
 msgid "This value is validating"
 msgstr "值正在被验证"
@@ -330,6 +324,39 @@ msgstr "建议不能提取"
 msgid "No items to display"
 msgstr "无条目可显示"
 
+msgid "Select columns"
+msgstr "选择列"
+
+msgid "Columns to show in table"
+msgstr "表中显示的列"
+
+msgid "Column"
+msgstr "列"
+
+msgid "Update"
+msgstr "更新"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} 到 {{toDate}}"
+
+msgid "after or equal to {{date}}"
+msgstr "晚于或等于 {{date}}"
+
+msgid "before or equal to {{date}}"
+msgstr "早于或等于 {{date}}"
+
+msgid "greater than or equal to"
+msgstr "大于等于"
+
+msgid "less than or equal to"
+msgstr "小于等于"
+
+msgid "More filters"
+msgstr "更多过滤器"
+
+msgid "Rows per page"
+msgstr "行每页"
+
 msgid "Could not get organisation unit"
 msgstr "不能获取机构"
 
@@ -349,7 +376,7 @@ msgid "Find"
 msgstr "查询"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "清除选择"
 
 msgid "Selected registering unit"
 msgstr "选择注册的机构"
@@ -438,35 +465,8 @@ msgstr "事件不能载入"
 msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
 
-msgid "View event info"
-msgstr "查看事件信息"
-
 msgid "Delete event"
 msgstr "删除事件"
-
-msgid "Update"
-msgstr "更新"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} 到 {{toDate}}"
-
-msgid "after or equal to {{date}}"
-msgstr "晚于或等于 {{date}}"
-
-msgid "before or equal to {{date}}"
-msgstr "早于或等于 {{date}}"
-
-msgid "greater than or equal to"
-msgstr "大于等于"
-
-msgid "less than or equal to"
-msgstr "小于等于"
-
-msgid "More filters"
-msgstr "更多过滤器"
-
-msgid "Select columns"
-msgstr "选择列"
 
 msgid "Download as JSON"
 msgstr "下载为JSON"
@@ -483,8 +483,20 @@ msgstr "随着过滤器下载"
 msgid "Download data..."
 msgstr "下载数据"
 
-msgid "Rows per page"
-msgstr "行每页"
+msgid "Working list could not be loaded"
+msgstr "工作列表不能载入"
+
+msgid "an error occurred loading working lists"
+msgstr "载入工作列表发生错误"
+
+msgid "Active"
+msgstr "活动的"
+
+msgid "Completed"
+msgstr "已完成"
+
+msgid "Registered events"
+msgstr "登记的事件"
 
 msgid "Update view"
 msgstr "更新视图"
@@ -519,23 +531,8 @@ msgstr "显示较少<br>"
 msgid "Show All"
 msgstr "显示全部"
 
-msgid "Working list could not be loaded"
-msgstr "工作列表不能载入"
-
-msgid "an error occurred loading working lists"
-msgstr "载入工作列表发生错误"
-
-msgid "Registered events"
-msgstr "登记的事件"
-
-msgid "Active"
-msgstr "活动的"
-
-msgid "Completed"
-msgstr "已完成"
-
 msgid "\"Choose a registering unit to start reporting"
-msgstr ""
+msgstr "“选择一个注册机构开始报告"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
@@ -618,16 +615,16 @@ msgid "No events added"
 msgstr "没有事件被添加"
 
 msgid "Choose a registering unit and program to get started"
-msgstr ""
+msgstr "选择注册机构和项目后开始"
 
 msgid "Choose a program to start reporting"
-msgstr ""
+msgstr "选择一个项目开始报告"
 
 msgid "Choose a registering unit to start reporting"
-msgstr ""
+msgstr "选择一个注册机构开始填报"
 
 msgid "Choose a category option to start reporting"
-msgstr ""
+msgstr "选择一个分类选项以开始填报"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "你没有在当前选择创建事件的权限"
@@ -744,15 +741,15 @@ msgid ""
 msgstr "该搜索存在问题，请更改搜索词或稍后再试。有关更多详细信息，请打开开发人员工具的控制台选项卡。"
 
 msgid "Too many results"
-msgstr ""
+msgstr "结果太多"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
-msgstr ""
+msgstr "该搜索返回了太多结果，无法显示。尝试更改搜索词或按更多属性搜索以缩小搜索范围。"
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "选择一种类型以开始搜索"
 
 msgid "View dashboard"
 msgstr "查看仪表盘"
@@ -809,7 +806,7 @@ msgstr "搜索"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
-msgstr ""
+msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
 
 msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"

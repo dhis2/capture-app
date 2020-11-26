@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
+"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -60,12 +60,6 @@ msgstr ""
 
 msgid "Not enrolled"
 msgstr ""
-
-msgid "Columns to show in table"
-msgstr "ستونەکانی دەتەوێ دەربکەوێ لە خشتەکە"
-
-msgid "Column"
-msgstr "ستوون"
 
 msgid "This value is validating"
 msgstr "ئەم نرخە دەسەلمێندرێت"
@@ -336,6 +330,39 @@ msgstr "پێشنیارەکان نەتواندرا بهێندرێت"
 msgid "No items to display"
 msgstr "هیچ شتێک بەردەست نیە بۆ پیشاندان"
 
+msgid "Select columns"
+msgstr "ستوونەکان هەڵبژێرە"
+
+msgid "Columns to show in table"
+msgstr "ستونەکانی دەتەوێ دەربکەوێ لە خشتەکە"
+
+msgid "Column"
+msgstr "ستوون"
+
+msgid "Update"
+msgstr "نوێ کردنەوە"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} to {{toDate}}"
+
+msgid "after or equal to {{date}}"
+msgstr " {{date}}دواتر یاخود یەکسانە بە"
+
+msgid "before or equal to {{date}}"
+msgstr " {{date}}پێشووتر یاخود یەکسانە بە"
+
+msgid "greater than or equal to"
+msgstr "گەورەتر لە یاخود یەکسان بە"
+
+msgid "less than or equal to"
+msgstr "بچووکتر لە یاخود یەکسان بە"
+
+msgid "More filters"
+msgstr "فلتەری زیاتر"
+
+msgid "Rows per page"
+msgstr "زانیارەکان بۆ هەر ڵاپەڕەیەک"
+
 msgid "Could not get organisation unit"
 msgstr "نەتواندرا ئۆرگانیزەیشن یونیتەکە بهێندرێت"
 
@@ -444,35 +471,8 @@ msgstr "حاڵەتەکە نەتواندرا بهێندرێت"
 msgid "Organisation unit could not be loaded"
 msgstr "ئۆرگانیزەیشن یونتەکە نەتواندرا بهێندرێت"
 
-msgid "View event info"
-msgstr "زانیاری حاڵەتەکە پیشان بدە"
-
 msgid "Delete event"
 msgstr "حاڵەتەکە بسڕەوە"
-
-msgid "Update"
-msgstr "نوێ کردنەوە"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} to {{toDate}}"
-
-msgid "after or equal to {{date}}"
-msgstr " {{date}}دواتر یاخود یەکسانە بە"
-
-msgid "before or equal to {{date}}"
-msgstr " {{date}}پێشووتر یاخود یەکسانە بە"
-
-msgid "greater than or equal to"
-msgstr "گەورەتر لە یاخود یەکسان بە"
-
-msgid "less than or equal to"
-msgstr "بچووکتر لە یاخود یەکسان بە"
-
-msgid "More filters"
-msgstr "فلتەری زیاتر"
-
-msgid "Select columns"
-msgstr "ستوونەکان هەڵبژێرە"
 
 msgid "Download as JSON"
 msgstr "دایبەزێنە وەکو JSON"
@@ -489,8 +489,20 @@ msgstr "دایبەزێنە لەگەڵ فیلتەرەکان"
 msgid "Download data..."
 msgstr "زانیاریەکان دابەزێنە"
 
-msgid "Rows per page"
-msgstr "زانیارەکان بۆ هەر ڵاپەڕەیەک"
+msgid "Working list could not be loaded"
+msgstr "لیستی کارکردن نەتواندرا بهێندرێت"
+
+msgid "an error occurred loading working lists"
+msgstr "هەڵەیەک ڕوویدا لە هێنانی  لیستی کارکردن"
+
+msgid "Active"
+msgstr "چاڵاک"
+
+msgid "Completed"
+msgstr "تەواوبوو"
+
+msgid "Registered events"
+msgstr "حالەتە تۆمارکراوەکان"
 
 msgid "Update view"
 msgstr "پیشاندان نوێبکەوە"
@@ -524,21 +536,6 @@ msgstr "کەمتر پیشان بدە"
 
 msgid "Show All"
 msgstr "هەموو پیشان بدە"
-
-msgid "Working list could not be loaded"
-msgstr "لیستی کارکردن نەتواندرا بهێندرێت"
-
-msgid "an error occurred loading working lists"
-msgstr "هەڵەیەک ڕوویدا لە هێنانی  لیستی کارکردن"
-
-msgid "Registered events"
-msgstr "حالەتە تۆمارکراوەکان"
-
-msgid "Active"
-msgstr "چاڵاک"
-
-msgid "Completed"
-msgstr "تەواوبوو"
 
 msgid "\"Choose a registering unit to start reporting"
 msgstr ""
