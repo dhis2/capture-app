@@ -20,6 +20,7 @@ import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
 
 const setCategoryOption = (
     state: Object,
@@ -216,9 +217,20 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         categories: undefined,
         categoriesMeta: undefined,
     }),
-    [searchPageActionTypes.FALLBACK_SEARCH_COMPLETED]: (state, { payload: { trackedEntityTypeId } }) => ({
+    [searchPageActionTypes.FALLBACK_SEARCH_COMPLETED]:
+      (state, { payload: { trackedEntityTypeId } }) => ({
+          ...state,
+          programId: undefined,
+          categories: undefined,
+          categoriesMeta: undefined,
+          trackedEntityTypeId,
+      }),
+    [trackedEntityTypeSelectorActionTypes.TRACKED_ENTITY_TYPE_ID_ON_URL_SET]: (
+        state, { payload: { trackedEntityTypeId } }) => ({
         ...state,
+        programId: undefined,
+        categories: undefined,
+        categoriesMeta: undefined,
         trackedEntityTypeId,
     }),
-
 }, 'currentSelections');

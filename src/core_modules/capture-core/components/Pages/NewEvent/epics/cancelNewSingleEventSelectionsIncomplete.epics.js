@@ -13,5 +13,5 @@ export const cancelNewEventIncompleteSelectionsLocationChangeEpic = (action$: In
         map(() => {
             const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
-            return push(`/${urlArguments(programId, orgUnitId)}`);
+            return push(`/${urlArguments({ programId, orgUnitId })}`);
         }));

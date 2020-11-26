@@ -1,6 +1,7 @@
 // @flow
 import React, { useMemo, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { useDispatch } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Grid from '@material-ui/core/Grid';
@@ -12,6 +13,8 @@ import {
 import type { OwnProps, Props } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
+import { setTrackedEntityTypeIdOnUrl } from './TrackedEntityTypeSelector.actions';
+import { useCurrentTrackedEntityTypeId } from '../../hooks/useCurrentTrackedEntityTypeId';
 
 const styles = ({ typography }) => ({
     searchDomainSelectorSection: {
@@ -60,11 +63,14 @@ const InfoOutlinedIconWithStyles = withStyles({
 })(InfoOutlinedIcon);
 
 export const TrackedEntityTypeSelectorPlain =
-  ({ classes, onSelect, selectedSearchScopeId }: Props) => {
+  ({ classes, onSelect }: Props) => {
       const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
+      const dispatch = useDispatch();
+      const selectedSearchScopeId = useCurrentTrackedEntityTypeId();
 
       const handleSelectionChange = ({ selected }) => {
           onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE);
+          dispatch(setTrackedEntityTypeIdOnUrl({ trackedEntityTypeId: selected }));
       };
 
       return (<>

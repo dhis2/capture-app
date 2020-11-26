@@ -153,10 +153,7 @@ const Index = ({
                         </div>
                         {
                             (selectedSearchScopeType !== searchScopes.PROGRAM) &&
-                            <TrackedEntityTypeSelector
-                                onSelect={handleSearchScopeSelection}
-                                selectedSearchScopeId={selectedSearchScopeId}
-                            />
+                            <TrackedEntityTypeSelector onSelect={handleSearchScopeSelection} />
                         }
 
                         <SearchForm

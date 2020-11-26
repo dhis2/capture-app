@@ -74,6 +74,10 @@ const specificationForPages = {
             urlKey: 'orgUnitId',
             propKey: 'orgUnitId',
         },
+        {
+            urlKey: 'trackedEntityTypeId',
+            propKey: 'trackedEntityTypeId',
+        },
     ],
     [pageKeys.NEW]: [
         {
@@ -83,6 +87,10 @@ const specificationForPages = {
         {
             urlKey: 'orgUnitId',
             propKey: 'orgUnitId',
+        },
+        {
+            urlKey: 'trackedEntityTypeId',
+            propKey: 'trackedEntityTypeId',
         },
     ],
 };

@@ -7,6 +7,7 @@ import type { AvailableSearchOptions } from './SearchPage.types';
 import { cleanSearchRelatedData, navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
 import { searchScopes } from './SearchPage.constants';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
+import { useCurrentTrackedEntityTypeId } from '../../../hooks/useCurrentTrackedEntityTypeId';
 
 const buildSearchOption = (id, name, searchGroups, searchScope, type) => ({
     searchOptionId: id,
@@ -92,6 +93,8 @@ export const SearchPage: ComponentType<{||}> = () => {
       useSelector(({ currentSelections }) => currentSelections.programId);
     const trackedEntityTypeId: string =
       useSelector(({ currentSelections }) => currentSelections.trackedEntityTypeId);
+
+    const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
     useEffect(() => {
         if (currentProgramId && (currentProgramId !== preselectedProgramId)) {

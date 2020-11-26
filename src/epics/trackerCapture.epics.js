@@ -171,6 +171,9 @@ import {
     startAgainEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 import {
+    setTrackedEntityTypeIdOnUrlEpic,
+} from '../core_modules/capture-core/components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.epics';
+import {
     searchViaUniqueIdOnScopeProgramEpic,
     searchViaUniqueIdOnScopeTrackedEntityTypeEpic,
     searchViaAttributesOnScopeProgramEpic,
@@ -293,5 +296,6 @@ export default combineEpics(
     startFallbackSearchEpic,
     fallbackSearchEpic,
     fallbackPushPageEpic,
+    setTrackedEntityTypeIdOnUrlEpic,
     ...getDataEntryEpics(),
 );

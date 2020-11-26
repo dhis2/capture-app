@@ -89,10 +89,7 @@ const NewPagePlain = ({
                         </div>
                         {
                             (!selectedScopeType || selectedScopeType === scopeTypes.TRACKED_ENTITY_TYPE) &&
-                                <TrackedEntityTypeSelector
-                                    onSelect={handleRegistrationScopeSelection}
-                                    selectedSearchScopeId={selectedScopeId}
-                                />
+                                <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
                         }
                     </div>
                 </Paper>
