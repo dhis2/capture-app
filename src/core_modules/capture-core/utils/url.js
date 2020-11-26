@@ -3,7 +3,6 @@ type Url = {programId?: string, orgUnitId?: string, trackedEntityTypeId?: string
 
 export const urlArguments = ({ programId, orgUnitId, trackedEntityTypeId }: Url): string => {
     const argArray = [];
-    debugger;
     if (programId) {
         argArray.push(`programId=${programId}`);
     } else if (trackedEntityTypeId) {
