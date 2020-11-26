@@ -91,8 +91,6 @@ export const SearchPage: ComponentType<{||}> = () => {
       useSelector(({ activePage }) => !activePage.isLoading);
     const currentProgramId: string =
       useSelector(({ currentSelections }) => currentSelections.programId);
-    const trackedEntityTypeId: string =
-      useSelector(({ currentSelections }) => currentSelections.trackedEntityTypeId);
 
     const trackedEntityTypeId = useCurrentTrackedEntityTypeId();
 
