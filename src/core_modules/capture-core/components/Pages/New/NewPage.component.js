@@ -41,7 +41,7 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-export const NEW_TEI_DATA_ENTRY_ID = 'newTeiDataEntryId';
+export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
