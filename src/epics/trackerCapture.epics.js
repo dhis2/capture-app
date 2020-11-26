@@ -175,6 +175,9 @@ import {
     searchViaUniqueIdOnScopeTrackedEntityTypeEpic,
     searchViaAttributesOnScopeProgramEpic,
     searchViaAttributesOnScopeTrackedEntityTypeEpic,
+    startFallbackSearchEpic,
+    fallbackSearchEpic,
+    fallbackPushPageEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchForm/SearchForm.epics';
 import {
     navigateBackToMainPageEpic,
@@ -287,5 +290,8 @@ export default combineEpics(
     searchViaAttributesOnScopeTrackedEntityTypeEpic,
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
+    startFallbackSearchEpic,
+    fallbackSearchEpic,
+    fallbackPushPageEpic,
     ...getDataEntryEpics(),
 );

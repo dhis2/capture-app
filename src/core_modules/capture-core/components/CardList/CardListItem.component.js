@@ -85,7 +85,7 @@ const deriveEnrollmentType =
           .map(({ status, lastUpdated }) => ({ status, lastUpdated }));
 
 
-      const { ACTIVE, CANCELLED, COMPLETED, NOT_ENROLLED } = enrollmentTypes;
+      const { ACTIVE, CANCELLED, COMPLETED } = enrollmentTypes;
       if (enrollmentsInCurrentProgram.find(({ status }) => status === ACTIVE)) {
           return ACTIVE;
       } else if (enrollmentsInCurrentProgram.find(({ status }) => status === COMPLETED)) {
@@ -93,7 +93,7 @@ const deriveEnrollmentType =
       } else if (enrollmentsInCurrentProgram.find(({ status }) => status === CANCELLED)) {
           return CANCELLED;
       }
-      return NOT_ENROLLED;
+      return enrollmentTypes.DONT_SHOW_TAG;
   };
 
 const deriveEnrollmentOrgUnitAndDate =
@@ -217,13 +217,6 @@ const CardListItemIndex = ({
                                           >
                                               {i18n.t('Previously enrolled')}
                                           </Tag>
-                                    }
-
-                                    {
-                                        (enrollmentType === enrollmentTypes.NOT_ENROLLED) &&
-                                        <Tag dataTest="dhis2-uicore-tag">
-                                            {i18n.t('Not enrolled')}
-                                        </Tag>
                                     }
 
                                 </div>

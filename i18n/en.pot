@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-11-26T10:04:00.765Z\n"
-"PO-Revision-Date: 2020-11-26T10:04:00.765Z\n"
+"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"PO-Revision-Date: 2020-11-26T09:58:16.261Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -42,9 +42,6 @@ msgid "Enrolled"
 msgstr ""
 
 msgid "Previously enrolled"
-msgstr ""
-
-msgid "Not enrolled"
 msgstr ""
 
 msgid "This value is validating"
@@ -744,6 +741,14 @@ msgid "View active enrollment"
 msgstr ""
 
 msgid "Re-enroll"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
 msgstr ""
 
 msgid "You dont have access to edit this event"
