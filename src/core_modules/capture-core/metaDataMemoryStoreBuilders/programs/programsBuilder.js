@@ -2,15 +2,11 @@
 import { typeof StorageController } from 'capture-core-utils/storage';
 import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import { ProgramFactory } from './factory';
-import type {
-    Program,
-    TrackedEntityType,
-} from '../../metaData';
+import type { TrackedEntityType, EventProgram, TrackerProgram } from '../../metaData';
 import { programCollection } from '../../metaDataMemoryStores';
 import getRulesAndVariablesFromProgramIndicators from './getRulesAndVariablesFromIndicators';
 import { getUserStorageController } from '../../storageControllers';
 import { userStores as stores } from '../../storageControllers/stores';
-
 import type {
     CachedProgram,
     CachedOptionSet,
@@ -63,16 +59,14 @@ async function getBuilderPrerequisites() {
     const cachedRelationshipTypesPromise = getRelationshipTypes(storageController, stores.RELATIONSHIP_TYPES);
     const cachedCategoriesPromise = getCategories(storageController, stores.CATEGORIES);
 
-    const values =
-        await Promise.all([
-            cachedProgramsPromise,
-            cachedProgramRulesVariables,
-            cachedProgramRules,
-            cachedProgramIndicatorsPromise,
-            cachedRelationshipTypesPromise,
-            cachedCategoriesPromise,
-        ]);
-    return values;
+    return Promise.all([
+        cachedProgramsPromise,
+        cachedProgramRulesVariables,
+        cachedProgramRules,
+        cachedProgramIndicatorsPromise,
+        cachedRelationshipTypesPromise,
+        cachedCategoriesPromise,
+    ]);
 }
 
 function addProgramVariables(d2ProgramRulesVariables: Array<ProgramRuleVariable>) {
@@ -149,7 +143,7 @@ function addRulesAndVariablesFromProgramIndicators(cachedProgramIndicators: Arra
     });
 }
 
-function sortPrograms(programs: Array<Program>) {
+function sortPrograms(programs: Array<EventProgram | TrackerProgram>) {
     programs.sort((a, b) => {
         if (a.name === b.name) {
             return 0;
@@ -161,7 +155,7 @@ function sortPrograms(programs: Array<Program>) {
     return programs;
 }
 
-async function getBuiltPrograms(
+function getBuiltPrograms(
     cachedPrograms: Array<CachedProgram>,
     cachedOptionSets: Map<string, CachedOptionSet>,
     cachedRelationshipTypes: Array<CachedRelationshipType>,
@@ -171,10 +165,6 @@ async function getBuiltPrograms(
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
     locale: ?string,
 ) {
-    if (cachedPrograms.length <= 0) {
-        return [];
-    }
-
     const programFactory = new ProgramFactory(
         cachedOptionSets,
         cachedRelationshipTypes,
@@ -185,21 +175,24 @@ async function getBuiltPrograms(
         locale,
     );
 
-    const promisePrograms = cachedPrograms.map(async (cachedProgram) => {
-        // $FlowFixMe[incompatible-call] automated comment
-        const program = await programFactory.build(cachedProgram);
-        return program;
-    });
-    const programs = await Promise.all(promisePrograms);
-    return programs;
+    const promisePrograms = cachedPrograms
+        .filter(cachedProgram => (
+            cachedProgram.trackedEntityTypeId &&
+            trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId)
+        ))
+        .map(cachedProgram => programFactory.build(cachedProgram));
+
+    return Promise.all(promisePrograms);
 }
 
 function postProcessPrograms(
-    programs: Array<Program>,
+    programs: ?Array<EventProgram | TrackerProgram>,
     cachedProgramRulesVariables: ?Array<ProgramRuleVariable>,
     cachedProgramRules: ?Array<ProgramRule>,
     cachedProgramIndicators: ?Array<CachedProgramIndicator>,
 ) {
+    if (programs == null) return;
+
     sortPrograms(programs)
         .forEach((program) => {
             programCollection.set(program.id, program);
@@ -232,8 +225,7 @@ export default async function buildPrograms(
         cachedProgramIndicators,
         cachedRelationshipTypes,
         cachedCategories,
-    ] =
-        await getBuilderPrerequisites();
+    ] = await getBuilderPrerequisites();
 
     const programs = await getBuiltPrograms(
         cachedPrograms,
