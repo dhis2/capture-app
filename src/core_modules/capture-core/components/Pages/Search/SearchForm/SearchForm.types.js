@@ -9,7 +9,6 @@ export type CurrentSearchTerms = Array<{|
   +type: $Values<dataElementTypes>
 |}>
 
-// todo export this to d2forms
 export type FormsValues = {
     [formIdentifier: string]: {
       [formElement: string]: Object

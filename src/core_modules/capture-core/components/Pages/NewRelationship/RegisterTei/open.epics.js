@@ -115,7 +115,6 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                 unique[DATA_ENTRY_ID],
             );
 
-            // @@@@@ the real thing is here
             return from(openTeiPromise).pipe(
                 takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
             );

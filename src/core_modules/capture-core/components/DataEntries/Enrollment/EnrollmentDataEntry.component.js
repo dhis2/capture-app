@@ -272,7 +272,6 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
         },
     };
 
-
     render() {
         const { enrollmentMetadata, programId, ...passOnProps } = this.props;
         return (
