@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
+"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -59,12 +59,6 @@ msgstr "Dříve zapsáno"
 
 msgid "Not enrolled"
 msgstr "Není zapsáno"
-
-msgid "Columns to show in table"
-msgstr "Sloupce k zobrazení v tabulce"
-
-msgid "Column"
-msgstr "Sloupec"
 
 msgid "This value is validating"
 msgstr "Tato hodnota se ověřuje"
@@ -333,6 +327,39 @@ msgstr "návrhy nelze načíst"
 msgid "No items to display"
 msgstr "Žádné položky k zobrazení"
 
+msgid "Select columns"
+msgstr "Vybrat sloupce"
+
+msgid "Columns to show in table"
+msgstr "Sloupce k zobrazení v tabulce"
+
+msgid "Column"
+msgstr "Sloupec"
+
+msgid "Update"
+msgstr "Aktualizovat"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} do {{toDate}}"
+
+msgid "after or equal to {{date}}"
+msgstr "po, nebo rovno {{date}}"
+
+msgid "before or equal to {{date}}"
+msgstr "před, nebo rovno {{date}}"
+
+msgid "greater than or equal to"
+msgstr "větší nebo rovno"
+
+msgid "less than or equal to"
+msgstr "menší nebo rovno"
+
+msgid "More filters"
+msgstr "Více filtrů"
+
+msgid "Rows per page"
+msgstr "Řádků na stránku"
+
 msgid "Could not get organisation unit"
 msgstr "Nelze získat organizační jednotku"
 
@@ -342,9 +369,6 @@ msgstr "Program neexistuje"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Vybraný program je pro vybranou registrační jednotku neplatný"
 
-msgid "Start again"
-msgstr "Začít znovu"
-
 msgid "New {{typeName}}"
 msgstr "Nový {{typeName}}"
 
@@ -353,6 +377,9 @@ msgstr "Nový"
 
 msgid "Find"
 msgstr "Hledat"
+
+msgid "Clear selections"
+msgstr "Vymazat výběry"
 
 msgid "Selected registering unit"
 msgstr "Vybraná registrační jednotka"
@@ -441,35 +468,8 @@ msgstr "Událost se nepodařilo načíst"
 msgid "Organisation unit could not be loaded"
 msgstr "Organizační jednotku se nepodařilo načíst"
 
-msgid "View event info"
-msgstr "Zobrazit informace o události"
-
 msgid "Delete event"
 msgstr "Smazat událost"
-
-msgid "Update"
-msgstr "Aktualizovat"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} do {{toDate}}"
-
-msgid "after or equal to {{date}}"
-msgstr "po, nebo rovno {{date}}"
-
-msgid "before or equal to {{date}}"
-msgstr "před, nebo rovno {{date}}"
-
-msgid "greater than or equal to"
-msgstr "větší nebo rovno"
-
-msgid "less than or equal to"
-msgstr "menší nebo rovno"
-
-msgid "More filters"
-msgstr "Více filtrů"
-
-msgid "Select columns"
-msgstr "Vybrat sloupce"
 
 msgid "Download as JSON"
 msgstr "Stáhnout jako JSON"
@@ -486,8 +486,20 @@ msgstr "Stáhnout s aktuálními filtry"
 msgid "Download data..."
 msgstr "Stáhnout data ..."
 
-msgid "Rows per page"
-msgstr "Řádků na stránku"
+msgid "Working list could not be loaded"
+msgstr "Pracovní seznam nelze načíst"
+
+msgid "an error occurred loading working lists"
+msgstr "při načítání pracovních seznamů došlo k chybě"
+
+msgid "Active"
+msgstr "Aktivní"
+
+msgid "Completed"
+msgstr "Dokončeno"
+
+msgid "Registered events"
+msgstr "Registrované události"
 
 msgid "Update view"
 msgstr "Aktualizovat zobrazení"
@@ -522,20 +534,8 @@ msgstr "Ukázat méně"
 msgid "Show All"
 msgstr "Ukázat vše"
 
-msgid "Working list could not be loaded"
-msgstr "Pracovní seznam nelze načíst"
-
-msgid "an error occurred loading working lists"
-msgstr "při načítání pracovních seznamů došlo k chybě"
-
-msgid "Registered events"
-msgstr "Registrované události"
-
-msgid "Active"
-msgstr "Aktivní"
-
-msgid "Completed"
-msgstr "Dokončeno"
+msgid "\"Choose a registering unit to start reporting"
+msgstr "\"Vyberte registraci jednotky pro zahájení hlášení"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "Vytváření nového {{TET}} v {{program}} v {{orgUnit}}"
@@ -622,17 +622,17 @@ msgstr "přidány události"
 msgid "No events added"
 msgstr "Nebyly přidány žádné události"
 
-msgid "Select a registering unit and program above to get started"
-msgstr "Začněte výběrem registrační jednotky a programu výše"
+msgid "Choose a registering unit and program to get started"
+msgstr "Začněte registrací jednotky a výběrem programu"
 
-msgid "Select a program to start reporting"
-msgstr "Vybrat program, o kterém chcete začít podávat zprávy"
+msgid "Choose a program to start reporting"
+msgstr "Vyberte program k zahájení hlášení zpráv"
 
-msgid "Select a registering unit to start reporting"
-msgstr "Vyberte registrační jednotku pro zahájení hlášení"
+msgid "Choose a registering unit to start reporting"
+msgstr "Vyberte registraci jednotky a začněte hlásit"
 
-msgid "Select a category option to start reporting"
-msgstr "Chcete-li začít podávat zprávy, vyberte možnost kategorie"
+msgid "Choose a category option to start reporting"
+msgstr "Chcete-li začít hlášení zpráv, vyberte možnost kategorie"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
@@ -721,12 +721,6 @@ msgstr "Vytvořit nový {{trackedEntityType}}"
 msgid "Register"
 msgstr "Registrovat"
 
-msgid "Search scope"
-msgstr "Rozsah hledání"
-
-msgid "Find results from"
-msgstr "Najít výsledky z"
-
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
@@ -764,8 +758,19 @@ msgstr ""
 "zkuste později. Další informace najdete na kartě Konzola v nástrojích pro "
 "vývojáře"
 
-msgid "Make a selection to start searching"
-msgstr "Proveďte výběr a začněte hledat"
+msgid "Too many results"
+msgstr "Příliš mnoho výsledků"
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+"Toto vyhledávání vrátilo příliš mnoho výsledků, než aby se zobrazilo. "
+"Chcete-li zúžit výsledky, zkuste změnit hledané výrazy nebo hledat podle "
+"více atributů."
+
+msgid "Choose a type to start searching"
+msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
 
 msgid "View dashboard"
 msgstr "Zobrazit ovládací panel"
@@ -818,6 +823,13 @@ msgstr "Hledat {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Chcete-li hledat, vyplňte alespoň {{minAttributesRequired}} atributy"
+
+msgid "Search for"
+msgstr "Hledat"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
 
 msgid "To work with the selected program,"
 msgstr "Chcete-li pracovat s vybraným programem,"

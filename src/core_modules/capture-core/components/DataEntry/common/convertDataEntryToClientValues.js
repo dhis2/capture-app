@@ -8,13 +8,11 @@ export default function convertDataEntryToClientValues(
     formValues: Object,
     dataEntryValues: Object,
     dataEntryValuesMeta: Object,
-    previousData: Object,
 ) {
     const formClientValues = formFoundation.convertValues(formValues, convertValue);
     const dataEntryClientValues = convertDataEntryValuesToClientValues(
         dataEntryValues,
         dataEntryValuesMeta,
-        previousData,
         formFoundation,
     );
 

@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
+"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -63,12 +63,6 @@ msgstr "مسجل سابقًا"
 
 msgid "Not enrolled"
 msgstr "غير مسجل"
-
-msgid "Columns to show in table"
-msgstr "الأعمدة التي سيتم عرضها في الجدول"
-
-msgid "Column"
-msgstr "العمود"
 
 msgid "This value is validating"
 msgstr "يتم التحقق من القيمة"
@@ -338,6 +332,39 @@ msgstr "تعذر استرداد الاقتراحات"
 msgid "No items to display"
 msgstr "لا توجد عناصر للعرض"
 
+msgid "Select columns"
+msgstr "حدد الأعمدة"
+
+msgid "Columns to show in table"
+msgstr "الأعمدة التي سيتم عرضها في الجدول"
+
+msgid "Column"
+msgstr "العمود"
+
+msgid "Update"
+msgstr "تحديث"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} إلى {{toDate}}"
+
+msgid "after or equal to {{date}}"
+msgstr "من بعد أو مساوٍ لـ {{date}}"
+
+msgid "before or equal to {{date}}"
+msgstr "من قبل أو مساوٍ لـ {{date}}"
+
+msgid "greater than or equal to"
+msgstr "أكبر من أو يساوي"
+
+msgid "less than or equal to"
+msgstr "أقل من أو يساوي"
+
+msgid "More filters"
+msgstr "عوامل تصفية أكثر"
+
+msgid "Rows per page"
+msgstr "عدد الصفوف لكل صفحة"
+
 msgid "Could not get organisation unit"
 msgstr "تعذر جلب الوحدة التنظيمية"
 
@@ -347,9 +374,6 @@ msgstr "البرنامج غير موجود"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
 
-msgid "Start again"
-msgstr "البدء من جديد"
-
 msgid "New {{typeName}}"
 msgstr "{{typeName}} جديد"
 
@@ -358,6 +382,9 @@ msgstr "جديد"
 
 msgid "Find"
 msgstr "بحث"
+
+msgid "Clear selections"
+msgstr "إلغاء تحديد ماتم تحديده"
 
 msgid "Selected registering unit"
 msgstr "وحدة التسجيل المختارة"
@@ -446,35 +473,8 @@ msgstr "تعذر تحميل الحدث"
 msgid "Organisation unit could not be loaded"
 msgstr "تعذر تحميل الوحدة التنظيمية"
 
-msgid "View event info"
-msgstr "عرض معلومات عن الحدث"
-
 msgid "Delete event"
 msgstr "حذف الحدث"
-
-msgid "Update"
-msgstr "تحديث"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} إلى {{toDate}}"
-
-msgid "after or equal to {{date}}"
-msgstr "من بعد أو مساوٍ لـ {{date}}"
-
-msgid "before or equal to {{date}}"
-msgstr "من قبل أو مساوٍ لـ {{date}}"
-
-msgid "greater than or equal to"
-msgstr "أكبر من أو يساوي"
-
-msgid "less than or equal to"
-msgstr "أقل من أو يساوي"
-
-msgid "More filters"
-msgstr "عوامل تصفية أكثر"
-
-msgid "Select columns"
-msgstr "حدد الأعمدة"
 
 msgid "Download as JSON"
 msgstr "تنزيل كملف JSON"
@@ -491,8 +491,20 @@ msgstr "تنزيل مع اعتماد عوامل التصفية الحالية"
 msgid "Download data..."
 msgstr "تنزيل البيانات"
 
-msgid "Rows per page"
-msgstr "عدد الصفوف لكل صفحة"
+msgid "Working list could not be loaded"
+msgstr "تعذر تحميل قائمة العمل"
+
+msgid "an error occurred loading working lists"
+msgstr "حدث خطأ اثناء تحميل قوائم العمل"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Completed"
+msgstr "مكتمل"
+
+msgid "Registered events"
+msgstr "الأحداث المسجلة"
 
 msgid "Update view"
 msgstr "تحديث العرض"
@@ -527,20 +539,8 @@ msgstr "إظهار أقل"
 msgid "Show All"
 msgstr "إظهار الكل"
 
-msgid "Working list could not be loaded"
-msgstr "تعذر تحميل قائمة العمل"
-
-msgid "an error occurred loading working lists"
-msgstr "حدث خطأ اثناء تحميل قوائم العمل"
-
-msgid "Registered events"
-msgstr "الأحداث المسجلة"
-
-msgid "Active"
-msgstr "فعال"
-
-msgid "Completed"
-msgstr "مكتمل"
+msgid "\"Choose a registering unit to start reporting"
+msgstr "\"اختر وحدة تسجيل لبدء الإبلاغ"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
@@ -627,17 +627,17 @@ msgstr "تمت إضافة الأحداث"
 msgid "No events added"
 msgstr "لم تتم إضافة أحداث"
 
-msgid "Select a registering unit and program above to get started"
-msgstr "حدد وحدة التسجيل والبرنامج أعلاه للبدء"
+msgid "Choose a registering unit and program to get started"
+msgstr "اختر وحدة تسجيل وبرنامج للبدء"
 
-msgid "Select a program to start reporting"
-msgstr "حدد برنامجاً لبدء إعداد التقارير"
+msgid "Choose a program to start reporting"
+msgstr "اختر برنامجًا لبدء الإبلاغ"
 
-msgid "Select a registering unit to start reporting"
-msgstr "حدد وحدة التسجيل لبدء الإبلاغ"
+msgid "Choose a registering unit to start reporting"
+msgstr "اختر وحدة تسجيل لبدء الإبلاغ"
 
-msgid "Select a category option to start reporting"
-msgstr "حدد فئة لبدء إعداد التقارير"
+msgid "Choose a category option to start reporting"
+msgstr "حدد خيار فئة لبدء الإبلاغ"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
@@ -722,12 +722,6 @@ msgstr "إنشاء {{trackedEntityType}} جديد"
 msgid "Register"
 msgstr "تسجيل"
 
-msgid "Search scope"
-msgstr "نطاق البحث"
-
-msgid "Find results from"
-msgstr "العثور على نتائج من"
-
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr "املأ ما لا يقل عن {{minAttributesRequiredToSearch}} سمة للبحث"
@@ -762,8 +756,18 @@ msgstr ""
 "توجد مشكلة في هذا البحث، يرجى تغيير مصطلحات البحث أو المحاولة مرة أخرى "
 "لاحقًا. لمزيد من التفاصيل، افتح تبويب Console الخاصة بـ Developer tools"
 
-msgid "Make a selection to start searching"
-msgstr "قم بالاختيار لبدء البحث"
+msgid "Too many results"
+msgstr "نتائج كثيرة جدًا"
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+"نتج من هذا البحث نتائج كثيرة جدًا للعرض. حاول تغيير مصطلحات البحث أو البحث "
+"بمزيد من السمات لتضييق نطاق النتائج."
+
+msgid "Choose a type to start searching"
+msgstr "اختر نوعًا لبدء البحث"
 
 msgid "View dashboard"
 msgstr "عرض لوحة المعلومات"
@@ -814,6 +818,13 @@ msgstr "بحث {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "املأ {{minAttributesRequired}} سمات على الأقل للبحث"
+
+msgid "Search for"
+msgstr "ابحث عن"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "يمكنك أيضًا اختيار برنامج من الشريط العلوي والبحث فيه"
 
 msgid "To work with the selected program,"
 msgstr "للعمل مع البرنامج المحدد"

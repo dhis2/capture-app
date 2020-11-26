@@ -1,10 +1,9 @@
 // @flow
 import log from 'loglevel';
-import { push } from 'connected-react-router';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
-import { map, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import getErrorMessageAndDetails from '../../../utils/errors/getErrorMessageAndDetails';
 import { getApi } from '../../../d2';
 import {
@@ -13,27 +12,8 @@ import {
     eventFromUrlRetrieved,
     orgUnitRetrievedOnUrlUpdate,
     orgUnitCouldNotBeRetrievedOnUrlUpdate,
-    startOpenEventForEditInDataEntry,
 } from './editEvent.actions';
-import { actionTypes as eventListActionTypes } from '../MainPage/EventsList/eventsList.actions';
 import { getEvent } from '../../../events/eventRequests';
-
-export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(eventListActionTypes.OPEN_EDIT_EVENT_PAGE),
-        map((action) => {
-            const eventId = action.payload;
-            const state = store.value;
-            const event = state.events[eventId];
-            const values = state.eventsValues[eventId];
-            const eventContainer = {
-                event,
-                values,
-                id: event.eventId,
-            };
-            const orgUnit = state.organisationUnits[event.orgUnitId];
-            return startOpenEventForEditInDataEntry(eventContainer, orgUnit);
-        }));
 
 export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -75,10 +55,3 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
                     return orgUnitCouldNotBeRetrievedOnUrlUpdate(eventContainer);
                 });
         }));
-
-export const openEditPageLocationChangeEpic = (action$: InputObservable) =>
-    action$.pipe(
-        ofType(eventListActionTypes.OPEN_EDIT_EVENT_PAGE),
-        map(action =>
-            push(`/editEvent/${action.payload}`),
-        ));

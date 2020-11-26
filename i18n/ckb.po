@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
+"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,12 +60,6 @@ msgstr ""
 
 msgid "Not enrolled"
 msgstr ""
-
-msgid "Columns to show in table"
-msgstr "ستونەکانی دەتەوێ دەربکەوێ لە خشتەکە"
-
-msgid "Column"
-msgstr "ستوون"
 
 msgid "This value is validating"
 msgstr "ئەم نرخە دەسەلمێندرێت"
@@ -336,6 +330,39 @@ msgstr "پێشنیارەکان نەتواندرا بهێندرێت"
 msgid "No items to display"
 msgstr "هیچ شتێک بەردەست نیە بۆ پیشاندان"
 
+msgid "Select columns"
+msgstr "ستوونەکان هەڵبژێرە"
+
+msgid "Columns to show in table"
+msgstr "ستونەکانی دەتەوێ دەربکەوێ لە خشتەکە"
+
+msgid "Column"
+msgstr "ستوون"
+
+msgid "Update"
+msgstr "نوێ کردنەوە"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} to {{toDate}}"
+
+msgid "after or equal to {{date}}"
+msgstr " {{date}}دواتر یاخود یەکسانە بە"
+
+msgid "before or equal to {{date}}"
+msgstr " {{date}}پێشووتر یاخود یەکسانە بە"
+
+msgid "greater than or equal to"
+msgstr "گەورەتر لە یاخود یەکسان بە"
+
+msgid "less than or equal to"
+msgstr "بچووکتر لە یاخود یەکسان بە"
+
+msgid "More filters"
+msgstr "فلتەری زیاتر"
+
+msgid "Rows per page"
+msgstr "زانیارەکان بۆ هەر ڵاپەڕەیەک"
+
 msgid "Could not get organisation unit"
 msgstr "نەتواندرا ئۆرگانیزەیشن یونیتەکە بهێندرێت"
 
@@ -345,9 +372,6 @@ msgstr "پرۆگرامەکە بوونی نیە"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
 
-msgid "Start again"
-msgstr "دووبارە دەستپێبکەوە"
-
 msgid "New {{typeName}}"
 msgstr "{{typeName}} ی نوێ"
 
@@ -356,6 +380,9 @@ msgstr "نوێ"
 
 msgid "Find"
 msgstr "بدۆزەوە"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "یەکەی تۆمارکردن هەڵبژێرە"
@@ -444,35 +471,8 @@ msgstr "حاڵەتەکە نەتواندرا بهێندرێت"
 msgid "Organisation unit could not be loaded"
 msgstr "ئۆرگانیزەیشن یونتەکە نەتواندرا بهێندرێت"
 
-msgid "View event info"
-msgstr "زانیاری حاڵەتەکە پیشان بدە"
-
 msgid "Delete event"
 msgstr "حاڵەتەکە بسڕەوە"
-
-msgid "Update"
-msgstr "نوێ کردنەوە"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} to {{toDate}}"
-
-msgid "after or equal to {{date}}"
-msgstr " {{date}}دواتر یاخود یەکسانە بە"
-
-msgid "before or equal to {{date}}"
-msgstr " {{date}}پێشووتر یاخود یەکسانە بە"
-
-msgid "greater than or equal to"
-msgstr "گەورەتر لە یاخود یەکسان بە"
-
-msgid "less than or equal to"
-msgstr "بچووکتر لە یاخود یەکسان بە"
-
-msgid "More filters"
-msgstr "فلتەری زیاتر"
-
-msgid "Select columns"
-msgstr "ستوونەکان هەڵبژێرە"
 
 msgid "Download as JSON"
 msgstr "دایبەزێنە وەکو JSON"
@@ -489,8 +489,20 @@ msgstr "دایبەزێنە لەگەڵ فیلتەرەکان"
 msgid "Download data..."
 msgstr "زانیاریەکان دابەزێنە"
 
-msgid "Rows per page"
-msgstr "زانیارەکان بۆ هەر ڵاپەڕەیەک"
+msgid "Working list could not be loaded"
+msgstr "لیستی کارکردن نەتواندرا بهێندرێت"
+
+msgid "an error occurred loading working lists"
+msgstr "هەڵەیەک ڕوویدا لە هێنانی  لیستی کارکردن"
+
+msgid "Active"
+msgstr "چاڵاک"
+
+msgid "Completed"
+msgstr "تەواوبوو"
+
+msgid "Registered events"
+msgstr "حالەتە تۆمارکراوەکان"
 
 msgid "Update view"
 msgstr "پیشاندان نوێبکەوە"
@@ -525,20 +537,8 @@ msgstr "کەمتر پیشان بدە"
 msgid "Show All"
 msgstr "هەموو پیشان بدە"
 
-msgid "Working list could not be loaded"
-msgstr "لیستی کارکردن نەتواندرا بهێندرێت"
-
-msgid "an error occurred loading working lists"
-msgstr "هەڵەیەک ڕوویدا لە هێنانی  لیستی کارکردن"
-
-msgid "Registered events"
-msgstr "حالەتە تۆمارکراوەکان"
-
-msgid "Active"
-msgstr "چاڵاک"
-
-msgid "Completed"
-msgstr "تەواوبوو"
+msgid "\"Choose a registering unit to start reporting"
+msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr " {{TET}} نوێ دروستبکە لە {{program}} لە {{orgUnit}}"
@@ -626,17 +626,17 @@ msgstr "حاڵەتەکان زیادکران"
 msgid "No events added"
 msgstr "هیچ حاڵەتێک زیادنەکرا"
 
-msgid "Select a registering unit and program above to get started"
-msgstr "یەکەی تۆمارکردن و پرۆگرامێك هەڵبژێرە لە سەرەوە بۆ دەستپێکردن"
+msgid "Choose a registering unit and program to get started"
+msgstr ""
 
-msgid "Select a program to start reporting"
-msgstr " پرۆگرامێك هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
+msgid "Choose a program to start reporting"
+msgstr ""
 
-msgid "Select a registering unit to start reporting"
-msgstr " یەکەی تۆمارکردن هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
+msgid "Choose a registering unit to start reporting"
+msgstr ""
 
-msgid "Select a category option to start reporting"
-msgstr " دەستەیەک هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
+msgid "Choose a category option to start reporting"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "مافی دروستکردنی حاڵەتت نیە لە هەڵژێردراوەکانی ئێستات"
@@ -724,12 +724,6 @@ msgstr " {{trackedEntityType}}ی نوێ دروست بکە"
 msgid "Register"
 msgstr "تۆمار بکە"
 
-msgid "Search scope"
-msgstr ""
-
-msgid "Find results from"
-msgstr ""
-
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
@@ -762,7 +756,15 @@ msgid ""
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
 
-msgid "Make a selection to start searching"
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
 msgstr ""
 
 msgid "View dashboard"
@@ -816,6 +818,13 @@ msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "بەلانی کەم ئەتریبیوتی{{minAttributesRequired}} پڕبەکەرەوەبۆ گەڕان"
+
+msgid "Search for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "بۆ کارکردن لەگەڵ پرۆگرامە هەڵبژێردراوەکان"

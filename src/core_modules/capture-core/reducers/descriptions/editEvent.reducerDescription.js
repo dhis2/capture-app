@@ -2,7 +2,6 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as editEventDataEntryActionTypes } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
-import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 
 export const editEventPageDesc = createReducerDescription({
     [editEventActionTypes.EDIT_EVENT_FROM_URL]: (state, action) => {
@@ -39,16 +38,6 @@ export const editEventPageDesc = createReducerDescription({
         const newState = { ...state };
         newState.dataEntryIsLoading = false;
         newState.dataEntryLoadError = action.payload;
-        return newState;
-    },
-    [eventListActionTypes.OPEN_EDIT_EVENT_PAGE]: (state, action) => {
-        const newState = {
-            ...state,
-            eventId: action.payload,
-            isLoading: false,
-            dataEntryIsLoading: true,
-            loadError: null,
-        };
         return newState;
     },
 }, 'editEventPage');

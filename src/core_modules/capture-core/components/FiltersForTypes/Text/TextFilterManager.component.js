@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import TextFilter from './TextFilter.component';
-import type { TextFilterData } from '../filters.types';
+import type { TextFilterData } from './types';
 
 type Props = {
     filter: ?TextFilterData,

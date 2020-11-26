@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import createOfflineListWrapper from '../../List/OfflineList/createOfflineListWrapper';
+import { createOfflineListWrapper } from '../../List';
 import OfflineListContainerCreator from './OfflineList.containerCreator';
 import isSelectionsEqual from '../../App/isSelectionsEqual';
 

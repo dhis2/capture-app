@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-09-22T10:30:44.432Z\n"
+"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -61,12 +61,6 @@ msgstr "Tidligere registrert"
 
 msgid "Not enrolled"
 msgstr "Ikke registrert"
-
-msgid "Columns to show in table"
-msgstr "Kolonner som skal vises i tabellen"
-
-msgid "Column"
-msgstr "Kolonne"
 
 msgid "This value is validating"
 msgstr "Denne verdien validerer"
@@ -337,6 +331,39 @@ msgstr "forslag kunne ikke hentes"
 msgid "No items to display"
 msgstr "Ingen elementer å vise"
 
+msgid "Select columns"
+msgstr "Velg kolonner"
+
+msgid "Columns to show in table"
+msgstr "Kolonner som skal vises i tabellen"
+
+msgid "Column"
+msgstr "Kolonne"
+
+msgid "Update"
+msgstr "Oppdater"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} til {{toDate}}"
+
+msgid "after or equal to {{date}}"
+msgstr "etter eller lik {{date}}"
+
+msgid "before or equal to {{date}}"
+msgstr "før eller lik {{date}}"
+
+msgid "greater than or equal to"
+msgstr "større enn eller lik"
+
+msgid "less than or equal to"
+msgstr "mindre enn eller lik"
+
+msgid "More filters"
+msgstr "Flere filtre"
+
+msgid "Rows per page"
+msgstr "Rader per side"
+
 msgid "Could not get organisation unit"
 msgstr "Kunne ikke få tak i organisasjonsenhet"
 
@@ -346,9 +373,6 @@ msgstr "Programmet finnes ikke"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Valgt program er ugyldig for registreringsenhet"
 
-msgid "Start again"
-msgstr "Start på nytt"
-
 msgid "New {{typeName}}"
 msgstr "Ny {{typeName}}"
 
@@ -357,6 +381,9 @@ msgstr "Ny"
 
 msgid "Find"
 msgstr "Finn"
+
+msgid "Clear selections"
+msgstr ""
 
 msgid "Selected registering unit"
 msgstr "Valgt registreringsenhet"
@@ -445,35 +472,8 @@ msgstr "Hendelse kunne ikke lastes inn"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisasjonsenhet kunne ikke lastes inn"
 
-msgid "View event info"
-msgstr "Se hendelsesinfo"
-
 msgid "Delete event"
 msgstr "Slett hendelse"
-
-msgid "Update"
-msgstr "Oppdater"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} til {{toDate}}"
-
-msgid "after or equal to {{date}}"
-msgstr "etter eller lik {{date}}"
-
-msgid "before or equal to {{date}}"
-msgstr "før eller lik {{date}}"
-
-msgid "greater than or equal to"
-msgstr "større enn eller lik"
-
-msgid "less than or equal to"
-msgstr "mindre enn eller lik"
-
-msgid "More filters"
-msgstr "Flere filtre"
-
-msgid "Select columns"
-msgstr "Velg kolonner"
 
 msgid "Download as JSON"
 msgstr "Last ned i JSON format"
@@ -490,8 +490,20 @@ msgstr "Last ned med gjeldende filtre"
 msgid "Download data..."
 msgstr "Last ned data..."
 
-msgid "Rows per page"
-msgstr "Rader per side"
+msgid "Working list could not be loaded"
+msgstr "Arbeidslisten kunne ikke lastes inn"
+
+msgid "an error occurred loading working lists"
+msgstr "en feil oppstod ved lasting av arbeidslister"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Completed"
+msgstr "Fullført"
+
+msgid "Registered events"
+msgstr "Registrerte hendelser"
 
 msgid "Update view"
 msgstr "Oppdater visning"
@@ -526,20 +538,8 @@ msgstr "Vis mindre"
 msgid "Show All"
 msgstr "Vis alle"
 
-msgid "Working list could not be loaded"
-msgstr "Arbeidslisten kunne ikke lastes inn"
-
-msgid "an error occurred loading working lists"
-msgstr "en feil oppstod ved lasting av arbeidslister"
-
-msgid "Registered events"
-msgstr "Registrerte hendelser"
-
-msgid "Active"
-msgstr "Aktiv"
-
-msgid "Completed"
-msgstr "Fullført"
+msgid "\"Choose a registering unit to start reporting"
+msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "Oppretter en ny {{TET}} i {{program}} i {{orgUnit}}"
@@ -628,17 +628,17 @@ msgstr "Hendelser lagt til"
 msgid "No events added"
 msgstr "Ingen hendelser lagt til"
 
-msgid "Select a registering unit and program above to get started"
-msgstr "Velg en registreringsenhet og program over for å komme i gang"
+msgid "Choose a registering unit and program to get started"
+msgstr ""
 
-msgid "Select a program to start reporting"
-msgstr "Velg et program for å starte rapportering"
+msgid "Choose a program to start reporting"
+msgstr ""
 
-msgid "Select a registering unit to start reporting"
-msgstr "Velg en registreringsenhet for å starte rapportering"
+msgid "Choose a registering unit to start reporting"
+msgstr ""
 
-msgid "Select a category option to start reporting"
-msgstr "Velg et kategorialternativ for å starte rapportering"
+msgid "Choose a category option to start reporting"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "Du har ikke tilgang til å opprette en hendelse i gjeldende valg"
@@ -726,12 +726,6 @@ msgstr "Opprett ny {{trackedEntityType}}"
 msgid "Register"
 msgstr "Registrere"
 
-msgid "Search scope"
-msgstr "Søk omfang"
-
-msgid "Find results from"
-msgstr "Finn resultater fra"
-
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
@@ -767,8 +761,16 @@ msgstr ""
 "Det er et problem med dette søket. Endre søkeordene eller prøv igjen senere."
 " For mer informasjon, åpne konsollfanen i Utviklerverktøy"
 
-msgid "Make a selection to start searching"
-msgstr "Gjør et valg for å begynne å søke"
+msgid "Too many results"
+msgstr ""
+
+msgid ""
+"This search returned too many results to show. Try changing search terms or "
+"searching by more attributes to narrow down the results."
+msgstr ""
+
+msgid "Choose a type to start searching"
+msgstr ""
 
 msgid "View dashboard"
 msgstr "Vis dashbord"
@@ -821,6 +823,13 @@ msgstr "Søk {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Fyll inn minst {{minAttributesRequired}} attributter for å søke"
+
+msgid "Search for"
+msgstr "Søk etter"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "For å jobbe med det valgte programmet,"

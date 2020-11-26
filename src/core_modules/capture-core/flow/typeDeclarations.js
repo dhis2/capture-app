@@ -165,6 +165,7 @@ declare type Theme = {
             lineHeight: string,
             color: string,
         },
+        fontWeightMedium: number,
     },
     spacing: {
         unit: number,

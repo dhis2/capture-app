@@ -49,7 +49,6 @@ function getServerValuesForMainValues(
     const clientValues = convertDataEntryValuesToClientValues(
         values,
         meta,
-        {},
         formFoundation,
     ) || {};
 

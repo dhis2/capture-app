@@ -17,7 +17,7 @@ import {
 import {
     prependListItem,
     removeListItem,
-} from '../../../../List/list.actions';
+} from '../../RecentlyAddedEventsList';
 
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';

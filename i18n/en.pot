@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-11-18T13:22:41.673Z\n"
-"PO-Revision-Date: 2020-11-18T13:22:41.673Z\n"
+"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"PO-Revision-Date: 2020-11-26T09:58:16.261Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -42,12 +42,6 @@ msgid "Enrolled"
 msgstr ""
 
 msgid "Previously enrolled"
-msgstr ""
-
-msgid "Columns to show in table"
-msgstr ""
-
-msgid "Column"
 msgstr ""
 
 msgid "This value is validating"
@@ -317,6 +311,39 @@ msgstr ""
 msgid "No items to display"
 msgstr ""
 
+msgid "Select columns"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr ""
+
+msgid "after or equal to {{date}}"
+msgstr ""
+
+msgid "before or equal to {{date}}"
+msgstr ""
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "More filters"
+msgstr ""
+
+msgid "Rows per page"
+msgstr ""
+
 msgid "Could not get organisation unit"
 msgstr ""
 
@@ -425,34 +452,7 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
-msgid "View event info"
-msgstr ""
-
 msgid "Delete event"
-msgstr ""
-
-msgid "Update"
-msgstr ""
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
-
-msgid "after or equal to {{date}}"
-msgstr ""
-
-msgid "before or equal to {{date}}"
-msgstr ""
-
-msgid "greater than or equal to"
-msgstr ""
-
-msgid "less than or equal to"
-msgstr ""
-
-msgid "More filters"
-msgstr ""
-
-msgid "Select columns"
 msgstr ""
 
 msgid "Download as JSON"
@@ -470,7 +470,19 @@ msgstr ""
 msgid "Download data..."
 msgstr ""
 
-msgid "Rows per page"
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
+msgid "Registered events"
 msgstr ""
 
 msgid "Update view"
@@ -504,21 +516,6 @@ msgid "Show Less"
 msgstr ""
 
 msgid "Show All"
-msgstr ""
-
-msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "an error occurred loading working lists"
-msgstr ""
-
-msgid "Registered events"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Completed"
 msgstr ""
 
 msgid "Choose a registering unit to start reporting"
