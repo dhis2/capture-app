@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
+"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -60,9 +60,6 @@ msgstr "مسجل"
 
 msgid "Previously enrolled"
 msgstr "مسجل سابقًا"
-
-msgid "Not enrolled"
-msgstr "غير مسجل"
 
 msgid "This value is validating"
 msgstr "يتم التحقق من القيمة"
@@ -539,8 +536,8 @@ msgstr "إظهار أقل"
 msgid "Show All"
 msgstr "إظهار الكل"
 
-msgid "\"Choose a registering unit to start reporting"
-msgstr "\"اختر وحدة تسجيل لبدء الإبلاغ"
+msgid "Choose a registering unit to start reporting"
+msgstr "اختر وحدة تسجيل لبدء الإبلاغ"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
@@ -632,9 +629,6 @@ msgstr "اختر وحدة تسجيل وبرنامج للبدء"
 
 msgid "Choose a program to start reporting"
 msgstr "اختر برنامجًا لبدء الإبلاغ"
-
-msgid "Choose a registering unit to start reporting"
-msgstr "اختر وحدة تسجيل لبدء الإبلاغ"
 
 msgid "Choose a category option to start reporting"
 msgstr "حدد خيار فئة لبدء الإبلاغ"
@@ -777,6 +771,14 @@ msgstr "عرض التسجيل النشط"
 
 msgid "Re-enroll"
 msgstr "إعادة التسجيل"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"

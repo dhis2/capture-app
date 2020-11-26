@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
+"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -53,9 +53,6 @@ msgstr "已注册"
 
 msgid "Previously enrolled"
 msgstr "以前报名的"
-
-msgid "Not enrolled"
-msgstr "未注册"
 
 msgid "This value is validating"
 msgstr "值正在被验证"
@@ -531,8 +528,8 @@ msgstr "显示较少<br>"
 msgid "Show All"
 msgstr "显示全部"
 
-msgid "\"Choose a registering unit to start reporting"
-msgstr "“选择一个注册机构开始报告"
+msgid "Choose a registering unit to start reporting"
+msgstr "选择一个注册机构开始填报"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
@@ -619,9 +616,6 @@ msgstr "选择注册机构和项目后开始"
 
 msgid "Choose a program to start reporting"
 msgstr "选择一个项目开始报告"
-
-msgid "Choose a registering unit to start reporting"
-msgstr "选择一个注册机构开始填报"
 
 msgid "Choose a category option to start reporting"
 msgstr "选择一个分类选项以开始填报"
@@ -759,6 +753,14 @@ msgstr "查看有效的注册"
 
 msgid "Re-enroll"
 msgstr "重新注册"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"

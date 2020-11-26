@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
+"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2020\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Бир ёки бир неча саналарни танланг..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Санани танланг ..."
 
 msgid "Today"
 msgstr "бугун"
@@ -28,6 +28,8 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"Бунинг мумкин бўлган сабаблари қуйидагилар; браузер ёки режим (масалан, "
+"махфийлик режими) қўллаб қувватланмаслиги. Тафсилотлар учун журналга қаранг."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -35,90 +37,91 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"Сиз айни шу доменда Назорат Иловасининг бошқа версиясини очдингиз. Ҳозирда "
+"Назорат Иловаси фақат битта версияни бир вақтда (бир хил ддомендаги) "
+"ишлашини қўллаб қувватлайди. Ушбу версияни қайта ишлатмоқчи бўлсангиз, "
+"Илтимос, саҳифани янгиланг, аммо бошқа версиялар ёпилишини унутманг."
 
 msgid "Organisation unit"
 msgstr "Ташкилий бўлим"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "Рўйхатга киритилган сана"
 
 msgid "Last updated"
 msgstr "Охирги янгиланган"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "Рўйхатга киритилган"
 
 msgid "Previously enrolled"
-msgstr ""
-
-msgid "Not enrolled"
-msgstr ""
+msgstr "Илгари рўйхатга киритилган"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "Ушбу қиймат тасдиқланмоқда"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "Асинхрон майдон янгиланиши амалга ошмади"
 
 msgid "A value is required"
-msgstr ""
+msgstr "Қиймат талаб қилинади"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Илтимос, тўғри рақамни кўрсатинг"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Илтимос, тўғри бутун сонни кўрсатинг"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "Илтимос, бутун мусбат сонни кўрсатинг"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Илтимос, ноль ёки бутун мусбат сонни кўрсатинг"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Илтимос, бутун манфий сонни кўрсатинг"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Илтимос, тўғри санани кўрсатинг"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Келажакдаги сана қабул қилинмайди"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "Илтимос, тегишли сана ва вақтни кўрсатинг"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "Илтимос, тўғри вақтни кўрсатинг"
 
 msgid "Please provide a valid percentage"
-msgstr ""
+msgstr "Илтимос, тегишли фоизни тақдим этинг"
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Илтимос, ҳақиқий URL манзилни кўрсатинг"
 
 msgid "Please provide a valid email address"
 msgstr "Илтимос, амалдаги е-почта манзилини кўрсатинг"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "Илтимос, тўғри ёшни кўрсатинг"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "Илтимос, тўғри телефон рақамини кўрсатинг"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "Илтимос, тўғри ташкилий бўлимни кўрсатинг"
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "Илтимос, тўғри координаталарни кўрсатинг"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "Бу қиймат аллақачон мавжуд"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "Сана \"гача\" катта бўлиши мумкин эмас сана \"дан\" "
 
 msgid "Checking..."
-msgstr ""
+msgstr "Текширилмоқда..."
 
 msgid "Area"
 msgstr "Майдон"
@@ -130,10 +133,10 @@ msgid "Enrollment"
 msgstr "Рўйхатга олиш"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "Келажакдаги сана танловига рухсат берилмайди"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Хатолик юз берди. Тафсилотларни журналдан кўринг."
 
 msgid "Cancel"
 msgstr "Бекор қилиш"
@@ -143,15 +146,17 @@ msgstr "Сақланмаган ўзгартиришлар"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
+"Агарда ушбу саҳифани тарк этсангиз, ҳодиса/тадбир бўйича киритган барча "
+"ўзгартиришлар сақланмайди."
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "Ҳа, рад этилсин"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Йўқ, саҳифада қолиш"
 
 msgid "validation failed"
-msgstr ""
+msgstr "Тасдиқлаш амалга ошмади"
 
 msgid "Errors"
 msgstr "Хатоликлар"
@@ -163,70 +168,70 @@ msgid "Indicators"
 msgstr "Индикаторлар"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Огоҳлантиришлар"
 
 msgid "search group result could not be retrieved"
-msgstr ""
+msgstr "Гуруҳ қидируви натижасини олиш имкони йўқ"
 
 msgid "Complete"
 msgstr "Бажарилди"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Огоҳлантиришлар топилди"
 
 msgid "Abort"
-msgstr ""
+msgstr "Аборт"
 
 msgid "Back to form"
-msgstr ""
+msgstr "Шаклга қайтиш"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "Нима бўлганда ҳам сақлаш"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "Тасдиқлаш хатоликлари ва огоҳлантиришлари"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "Тасдиқлашда хатоликлар"
 
 msgid "Validation warnings"
 msgstr "Тасдиқлаш тўғрисида огоҳлантиришлар"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "Баъзи операциялар ҳали ҳам бажарилмоқда. Илтимос, кутинг ..."
 
 msgid "Operations running"
-msgstr ""
+msgstr "Амалиётлар бажарилмоқда"
 
 msgid "Sort"
-msgstr ""
+msgstr "Саралаш"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Кўрсатиладиган ҳеч қандай ҳодиса/тадбир йўқ"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Оффлайн рўйхат учун маълумотлар мавжуд эмас"
 
 msgid "Close"
 msgstr "Ёпиш"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "Илтимос, фойдаланувчини танланг"
 
 msgid "Search for user"
-msgstr ""
+msgstr "Фойдаланувчини излаш"
 
 msgid "Me"
-msgstr ""
+msgstr "Мен"
 
 msgid "Anyone"
-msgstr ""
+msgstr "Кимдир"
 
 msgid "None"
 msgstr "Йўқ"
 
 msgid "Select user"
-msgstr ""
+msgstr "Фойдаланувчини танланг"
 
 msgid "to"
 msgstr "га"
@@ -244,7 +249,7 @@ msgid "This month"
 msgstr "Ушбу ой"
 
 msgid "This Year"
-msgstr ""
+msgstr "Ушбу йил"
 
 msgid "Last week"
 msgstr "Охирги ҳафта"
@@ -256,7 +261,7 @@ msgid "Last 3 months"
 msgstr "Охирги 3 ой"
 
 msgid "Custom range"
-msgstr ""
+msgstr "Махсус диапазон"
 
 msgid "Max"
 msgstr "Максимум"
@@ -265,13 +270,13 @@ msgid "Min"
 msgstr "Минимум"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Матнни ўз ичига олади"
 
 msgid "Yes"
 msgstr "Ҳа"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "кун/ой/йил"
 
 msgid "Years"
 msgstr "Йиллар"
@@ -283,7 +288,7 @@ msgid "Days"
 msgstr "Кунлар"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Файл юкланмоқда"
 
 msgid "selected"
 msgstr "танланган"
@@ -298,10 +303,10 @@ msgid "No"
 msgstr "Йўқ"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Расм юкланмоқда"
 
 msgid "Select image"
-msgstr ""
+msgstr "Расмни танланг"
 
 msgid "Search"
 msgstr "Излаш"
@@ -310,22 +315,22 @@ msgid "Clear"
 msgstr "Тозалаш"
 
 msgid "No results"
-msgstr ""
+msgstr "Натижа йўқ"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "қидириш учун ёзишни бошланг"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "таклифлар қабул қилинмади"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Кўрсатиладиган ахборот йўқ"
 
 msgid "Select columns"
-msgstr ""
+msgstr "Устунларни танланг"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Жадвалда кўрсатиладиган устунлар"
 
 msgid "Column"
 msgstr "Устун"
@@ -334,37 +339,37 @@ msgid "Update"
 msgstr "Янгилаш"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
+msgstr "{{fromDate}} дан {{toDate}} га"
 
 msgid "after or equal to {{date}}"
-msgstr ""
+msgstr "{{date}} дан кейин ёки унга тенг"
 
 msgid "before or equal to {{date}}"
-msgstr ""
+msgstr "{{date}} дан олдин ёки унга тенг"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "дан катта ёки тенг"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "дан кам ёки тенг"
 
 msgid "More filters"
-msgstr ""
+msgstr "Кўпроқ фильтр"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Саҳифада қаторлар"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Ташкилий бўлимни олиб бўлмади"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Дастур мавжуд эмас"
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
+msgstr "Танланган дастур танланган рўйхатдан олинадиган бўлим учун яроқсиз"
 
 msgid "New {{typeName}}"
-msgstr ""
+msgstr "Янги  {{typeName}}"
 
 msgid "New"
 msgstr "Янги"
@@ -373,31 +378,31 @@ msgid "Find"
 msgstr "Топинг"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "Танловларни тозалаш"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "Бўлимни танланган рўйхатга олиш"
 
 msgid "Start Again"
-msgstr ""
+msgstr "Қайта бошланг"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "Ишончингиз комилми? Барча сақланмаган маълумотлар йўқолади."
 
 msgid "Accept"
 msgstr "Қабул қилинг"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Танланган бўлим рўйхатдан ўтказилмоқда"
 
 msgid "Select"
 msgstr "Танланг"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "Танланган дастур"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Баъзи дастурлар фильтрланмоқда."
 
 msgid "Show all"
 msgstr "Барчага кўрсатиш"
@@ -409,7 +414,7 @@ msgid "Select program"
 msgstr "Дастурни танлаш"
 
 msgid "No programs available."
-msgstr ""
+msgstr "Ҳеч қандай дастур мавжуд эмас."
 
 msgid "Online"
 msgstr "Онлайн"
@@ -418,19 +423,19 @@ msgid "Offline"
 msgstr "Оффлайн"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Синхронлашмоқда"
 
 msgid "Add comment"
-msgstr ""
+msgstr "Изоҳ қўшиш"
 
 msgid "You dont have access to write comments"
-msgstr ""
+msgstr "Фикр ёзиш ҳуқуқига эга эмассиз"
 
 msgid "Write comment"
-msgstr ""
+msgstr "Фикр ёзинг"
 
 msgid "Basic info"
-msgstr ""
+msgstr "Асосий маълумот"
 
 msgid "Status"
 msgstr "Статус"
@@ -439,52 +444,52 @@ msgid "Comments"
 msgstr "Изоҳлар"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr ""
+msgstr "Илтимос, ҳодиса/тадбирни сақлашдан олдин шарҳ ёзинг ёки бекор қилинг"
 
 msgid "No write access"
-msgstr ""
+msgstr "Ёзув киритиш учун рухсат йўқ"
 
 msgid "Save"
 msgstr "Сақлаш"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Барча ҳодиса/тадбирларни кўрсатиш"
 
 msgid "Edit event"
-msgstr ""
+msgstr "Ҳодиса/тадбирни таҳрирланг"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Ҳодиса/тадбирни юклаб бўлмади. Унинг мавжудлигига ишончингиз комилми?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Ҳодиса/тадбирни юклаб бўлмади"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Ташкилий бўлимни юклаб бўлмади"
 
 msgid "Delete event"
 msgstr "Тадбирни ўчиринг"
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "JSON сифатида юклаш"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "XML сифатида юклаш"
 
 msgid "Download as CSV"
 msgstr "CSV сифатида юкланг"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "Жорий фильтрлар асосида юклаш"
 
 msgid "Download data..."
-msgstr ""
+msgstr "Маълумотларни юклаб олиш ..."
 
 msgid "Working list could not be loaded"
-msgstr ""
+msgstr "Ишчи рўйхатни юклаб бўлмади"
 
 msgid "an error occurred loading working lists"
-msgstr ""
+msgstr "ишчи рўйхатни юклашда хатолик юз берди"
 
 msgid "Active"
 msgstr "Фаол"
@@ -496,49 +501,49 @@ msgid "Registered events"
 msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
 
 msgid "Update view"
-msgstr ""
+msgstr "Янгиланган кўриниш"
 
 msgid "Save current view..."
-msgstr ""
+msgstr "Жорий кўринишни сақлаш ..."
 
 msgid "Save current view as..."
-msgstr ""
+msgstr "Ушбу жорий кўриниш сифатида сақлаш"
 
 msgid "Delete view"
-msgstr ""
+msgstr "Исмини кўриш"
 
 msgid "Share view..."
-msgstr ""
+msgstr "Кўриниш билан бўлишиш ..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
+msgstr "Ҳақиқатдан ҳам '{{templateName}}' кўринишини очмоқчимисиз?"
 
 msgid "Confirm"
 msgstr "Тасдиқланг"
 
 msgid "Save As view"
-msgstr ""
+msgstr "Ушбу кўриниш сифатида сақлаш"
 
 msgid "View name"
-msgstr ""
+msgstr "Исмини кўриш"
 
 msgid "Show Less"
-msgstr ""
+msgstr "Камроқ кўрсатиш"
 
 msgid "Show All"
-msgstr ""
+msgstr "Барчасини кўрсатиш"
 
-msgid "\"Choose a registering unit to start reporting"
+msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
+msgstr "{{OrgUnit}} да {{program}} да янги {{TET}} яратилмоқда"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Сақлаш ва бошқасини қўшиш"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Сақлаш ва чиқиш"
 
 msgid "Finish"
 msgstr ""
@@ -615,9 +620,6 @@ msgid "Choose a registering unit and program to get started"
 msgstr ""
 
 msgid "Choose a program to start reporting"
-msgstr ""
-
-msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Choose a category option to start reporting"
@@ -755,6 +757,14 @@ msgid "View active enrollment"
 msgstr ""
 
 msgid "Re-enroll"
+msgstr ""
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
 msgstr ""
 
 msgid "You dont have access to edit this event"
