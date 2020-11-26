@@ -155,7 +155,7 @@ function sortPrograms(programs: Array<EventProgram | TrackerProgram>) {
     return programs;
 }
 
-async function getBuiltPrograms(
+function getBuiltPrograms(
     cachedPrograms: Array<CachedProgram>,
     cachedOptionSets: Map<string, CachedOptionSet>,
     cachedRelationshipTypes: Array<CachedRelationshipType>,
@@ -165,10 +165,6 @@ async function getBuiltPrograms(
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
     locale: ?string,
 ) {
-    if (cachedPrograms.length <= 0) {
-        return null;
-    }
-
     const programFactory = new ProgramFactory(
         cachedOptionSets,
         cachedRelationshipTypes,
