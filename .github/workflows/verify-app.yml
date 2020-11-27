@@ -72,7 +72,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: install
+    needs: [lint, flow]
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - uses: actions/checkout@v2
