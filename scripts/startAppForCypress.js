@@ -18,7 +18,7 @@ const dotenvFiles = [
 const envFromCypressFiles = dotenvFiles
     .reduce((acc, file) => {
         const absolutePath = path.resolve('.', file);
-            if (fs.existsSync(absolutePath)) {
+        if (fs.existsSync(absolutePath)) {
             const parsed = dotenv.parse(fs.readFileSync(absolutePath, { encoding: 'utf8' }));
             return {
                 ...parsed,
