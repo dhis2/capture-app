@@ -223,31 +223,32 @@ msgid "Program doesn't exist"
 msgstr "Дастур мавжуд эмас"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "танланган дастур рўйхатдан ўтказиш учун яроқсиз"
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
+"Ишни бошлашдан олдин юқоридаги рўйхатдан ўтиш бўлими ва дастурини танланг"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "Ҳосибот беришни бошлаш учун дастурни танланг"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "Ҳосибот беришни бошлаш учун рўйхатдан ўтишни танланг"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "Ҳосибот беришни бошлаш учун категория вариантини танланг"
 
 msgid "New event"
 msgstr "Янги ҳодиса"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Шакл кўринишига ўтиш"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Жадвал кўринишига ўтиш"
 
 msgid "Saving to"
-msgstr ""
+msgstr "...да сақлаш"
 
 msgid "in"
 msgstr "ичида"
@@ -256,6 +257,8 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Бу ҳодиса/тадбир дастури эмас ёки метамаълумотлар бузилган. Тафсилотлар учун"
+" журналга қаранг."
 
 msgid "Save and add another"
 msgstr "Сақлаш ва бошқасини қўшиш"
@@ -267,10 +270,10 @@ msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "ҳодиса/тадбирлар қўшилди"
 
 msgid "No events added"
-msgstr ""
+msgstr "Ҳеч қандай ҳодиса/тадбир қўшилмаган"
 
 msgid "Reset"
 msgstr ""
@@ -315,10 +318,10 @@ msgid "An error has occured. See log for details"
 msgstr "Хатолик юз берди. Тафсилотларни журналдан кўринг."
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Ҳодиса/тадбирни сақлашда хато"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "Ҳодиса/тадбир сақланмади. Тафсилотлар учун журналга қаранг"
 
 msgid "Choose one or more dates..."
 msgstr "Бир ёки бир неча саналарни танланг..."
