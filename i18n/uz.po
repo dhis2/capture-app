@@ -300,7 +300,7 @@ msgid "suggestions could not be retrieved"
 msgstr "таклифлар қабул қилинмади"
 
 msgid "search for username"
-msgstr ""
+msgstr "фойдаланувчи номи орқали қидириш"
 
 msgid "No items to display"
 msgstr "Кўрсатиладиган ахборот йўқ"
@@ -357,7 +357,7 @@ msgid "Organisation unit could not be loaded"
 msgstr "Ташкилий бўлимни юклаб бўлмади"
 
 msgid "View event info"
-msgstr ""
+msgstr "Ҳодиса/тадбир маълумотларини кўриш"
 
 msgid "Delete event"
 msgstr "Тадбирни ўчиринг"
@@ -405,7 +405,7 @@ msgid "Program doesn't exist"
 msgstr "Дастур мавжуд эмас"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "танланган дастур рўйхатдан ўтказиш учун яроқсиз"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "{{OrgUnit}} да {{program}} да янги {{TET}} яратилмоқда"
@@ -417,24 +417,26 @@ msgid "Save and exit"
 msgstr "Сақлаш ва чиқиш"
 
 msgid "Finish"
-msgstr ""
+msgstr "Тугатиш"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Шакл кўринишига ўтиш"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Жадвал кўринишига ўтиш"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "Янги {{TET}}"
 
 msgid "Working Lists"
-msgstr ""
+msgstr "Ишчи рўйхатлар"
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
 msgstr ""
+"{{programId}} ДастурID Кузатув-Назорат дастури эмас. Рўйхатдан ўтиш фақат "
+"Кузатув-назорат дастурида амалга оширилиши мумкин."
 
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Танланган дастур танланган рўйхатдан олинадиган бўлим учун яроқсиз"
@@ -449,7 +451,7 @@ msgid "Assignee"
 msgstr "Ваколат берилган шахс"
 
 msgid "Saving to"
-msgstr ""
+msgstr "...да сақлаш"
 
 msgid "in"
 msgstr "ичида"
@@ -458,98 +460,109 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Бу ҳодиса/тадбир дастури эмас ёки метамаълумотлар бузилган. Тафсилотлар учун"
+" журналга қаранг."
 
 msgid "This event"
-msgstr ""
+msgstr "Ушбу ҳодиса/тадбир"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
-msgstr ""
+msgstr " {{relationshipTypeName}} турининг {{entityName}} "
 
 msgid "New event"
 msgstr "Янги ҳодиса"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "Янги ҳодиса/тадбир муносабатлари"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "Ҳодиса/тадбирга алоқа-муносабатлар қўшиш"
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "Алоқа-муносабатларни сақламасдан ҳодиса/тадбирга қайтиш"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
+"Ушбу саҳифани тарк этсангиз, янги муносабатлар учун қилган танловингиз бекор"
+" қилинади."
 
 msgid "events added"
-msgstr ""
+msgstr "ҳодиса/тадбирлар қўшилди"
 
 msgid "No events added"
-msgstr ""
+msgstr "Ҳеч қандай ҳодиса/тадбир қўшилмаган"
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
+"Ишни бошлашдан олдин юқоридаги рўйхатдан ўтиш бўлими ва дастурини танланг"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "Ҳосибот беришни бошлаш учун дастурни танланг"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "Ҳосибот беришни бошлаш учун рўйхатдан ўтишни танланг"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "Ҳосибот беришни бошлаш учун категория вариантини танланг"
 
 msgid "You dont have access to create an event in the current selections"
-msgstr ""
+msgstr "Ҳозирги танловларда ҳодиса/тадбир яратиш ҳуқуқига эга эмассиз"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
+"Икки нусхаси мавжуд (лекин хатолар бўлган, батафсил маълумот учун журналга "
+"қаранг"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
+"Ушбу {{attributeName}} элемент аллақачон рўйхатдан ўтган, аммо сиз унга "
+"кириш ҳуқуқига эга эмассиз"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "Сиз аллақачон {{attributeName}} да рўйхатдан ўтгансиз"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
+"{{trackedEntityTypeName}} ушбу {{attributeName}} билан аллақачон рўйхатдан "
+"ўтган"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Рўйхатдан ўтган {{trackedEntityTypeName}} ни кўрсатиш"
 
 msgid "Registered person"
-msgstr ""
+msgstr "Рўйхатдан ўтган шахс"
 
 msgid "Link"
-msgstr ""
+msgstr "Ҳавола"
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "МетаМаълумотда хатолик. Тафсилотлар учун журналга қаранг."
 
 msgid "Review duplicates"
-msgstr ""
+msgstr "Иккинчи нусхани кўриб чиқиш"
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr " {{trackedEntityTypeName}} яратинг ва уланг"
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "Бўлиши мумкин бўлган нусхалар топилди"
 
 msgid "An error occured loading possible duplicates"
-msgstr ""
+msgstr "Бўлиши мумкин бўлган нусхаларни юклашда хатолик юз берди"
 
 msgid "Hide"
 msgstr "Яшириш"
 
 msgid "Save as new {{tetName}}"
-msgstr ""
+msgstr "Янги {{tetName}} сифатида сақлаш"
 
 msgid "Some programs are being filtered."
 msgstr "Баъзи дастурлар фильтрланмоқда."
@@ -567,51 +580,53 @@ msgid "Registration"
 msgstr "Рўйхатдан ўтиш"
 
 msgid "Review Duplicates"
-msgstr ""
+msgstr "Нусхаларни кўриб чиқиш"
 
 msgid "Search results"
-msgstr ""
+msgstr "Қидирув натижалари"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "Ҳеч қандай {{trackedEntityTypeName}} топилмади"
 
 msgid "{{teiCount}} results found for"
-msgstr ""
+msgstr "{{teiCount}} натижалари топилди"
 
 msgid "New search"
-msgstr ""
+msgstr "Янги қидирув"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Қидирувни таҳрирлаш"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "Мавжуд  {{trackedEntityType}} га ҳавола"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Янги {{trackedEntityType}} яратиш"
 
 msgid "Register"
 msgstr "Рўйхат"
 
 msgid "You dont have access to edit this event"
-msgstr ""
+msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
+"Ушбу саҳифани тарк этсангиз, янги алоқа-муносабатлар учун қилинган барча "
+"танловлар бекор қилинади "
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "Ушбу ҳодиса/тадбирга ҳеч ким бириктирилмаган"
 
 msgid "Assign"
-msgstr ""
+msgstr "Тайинланган"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "Ҳодиса/тадбир {{name}} га бириктирилди"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "Қайта алоқалар"
 
 msgid "New {{typeName}}"
 msgstr "Янги  {{typeName}}"
@@ -620,7 +635,7 @@ msgid "New"
 msgstr "Янги"
 
 msgid "Start again"
-msgstr ""
+msgstr "Қайта бошлаш"
 
 msgid "Find"
 msgstr "Топинг"
@@ -653,10 +668,10 @@ msgid "No programs available."
 msgstr "Ҳеч қандай дастур мавжуд эмас"
 
 msgid "You dont have access to delete this relationship"
-msgstr ""
+msgstr "Ушбу ҳодиса/тадбирни ўчириш ҳуқуқига эга эмассиз"
 
 msgid "You dont have access to create any relationships"
-msgstr ""
+msgstr "Ушбу ўзаро алоқаларни яратиш ҳуқуқига эга эмассиз"
 
 msgid "Add relationship"
 msgstr "Ўзаро алоқа киритиш"
@@ -665,40 +680,40 @@ msgid "Selected program"
 msgstr "Танланган дастур"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "{{uniqueAttrName}} орқали қидириш"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Атрибут орқали қидириш"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "Қидириш учун камида {{minAttributesRequired}} атрибутларини тўлдиринг"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "Танланган дастур билан ишлаш учун,"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "Кузатув-Назорат дастурини очинг"
 
 msgid "Program not found"
-msgstr ""
+msgstr "Дастур топилмади"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "Дастур кузатув дастури эмас"
 
 msgid "Profile"
 msgstr "Профил"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Ҳодиса/тадбирни сақлашда хато"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "Ҳодиса/тадбир сақланмади. Тафсилотлар учун журналга қаранг"
 
 msgid "Organisation unit search failed. See log for details"
-msgstr ""
+msgstr "кузатувдаги шах"
 
 msgid "tracked entity instance"
-msgstr ""
+msgstr "кузатилаётган объект намунаси"
 
 msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"
@@ -710,28 +725,28 @@ msgid "Time"
 msgstr "Вақт"
 
 msgid "From date"
-msgstr ""
+msgstr "Санадан бошлаб"
 
 msgid "From time"
-msgstr ""
+msgstr "Вақтдан бошлаб"
 
 msgid "To date"
-msgstr ""
+msgstr "Шу кунгача"
 
 msgid "To time"
-msgstr ""
+msgstr "Шу вақтгача"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "майдонни текшириш вақтида хатолик юз берди"
 
 msgid "error"
-msgstr ""
+msgstr "хато"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Полигон (кўпбурчак) ни ўчириш"
 
 msgid "Set area"
-msgstr ""
+msgstr "Ҳудудни белгиланг"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -758,4 +773,4 @@ msgstr ""
 "махфийлик режими) қўллаб қувватланмаслиги. Тафсилотлар учун журналга қаранг."
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "Мувофиқлик режими"
