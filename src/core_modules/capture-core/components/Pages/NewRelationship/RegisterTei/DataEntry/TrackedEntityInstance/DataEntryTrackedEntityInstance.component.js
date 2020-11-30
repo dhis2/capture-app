@@ -12,7 +12,7 @@ type Props = {|
     onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
     onGetUnsavedAttributeValues: Function,
     onPostProcessErrorMessage: Function,
-    teiRegistrationMetadata: ?TeiRegistration,
+    teiRegistrationMetadata?: TeiRegistration,
 |};
 
 const RelationshipTrackedEntityInstance =
@@ -23,15 +23,15 @@ const RelationshipTrackedEntityInstance =
       onPostProcessErrorMessage,
       teiRegistrationMetadata = {},
   }: Props) => {
+      const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
       const { trackedEntityType } = teiRegistrationMetadata || {};
       const saveButtonText = useSaveButtonText(trackedEntityType.name);
 
-      const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
       return (
           <TeiRegistrationEntry
               id={DATA_ENTRY_ID}
               teiRegistrationMetadata={teiRegistrationMetadata}
-              selectedScopeId={teiRegistrationMetadata && teiRegistrationMetadata.form.id}
+              selectedScopeId={teiRegistrationMetadata.form.id}
               saveButtonText={saveButtonText}
               fieldOptions={fieldOptions}
               onSave={onSave}

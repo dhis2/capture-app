@@ -50,51 +50,60 @@ const styles = ({ typography }) => ({
     },
 });
 
-const EnrollmentRegistrationEntryPlain = ({ selectedScopeId, id, onSave, classes, enrollmentMetadata, saveButtonText, ...rest }: {...OwnProps, ...CssClasses}) => {
-    const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
-    useDataEntryLifecycle(selectedScopeId, id, scopeType);
-    const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-    const orgUnit = useCurrentOrgUnitInfo();
+const EnrollmentRegistrationEntryPlain =
+  ({
+      id,
+      selectedScopeId,
+      enrollmentMetadata,
+      saveButtonText,
+      classes,
+      onSave,
+      ...rest
+  }: {...OwnProps, ...CssClasses}) => {
+      const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
+      useDataEntryLifecycle(selectedScopeId, id, scopeType);
+      const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+      const orgUnit = useCurrentOrgUnitInfo();
 
-    return (
-        <>
-            {
-                scopeType === scopeTypes.TRACKER_PROGRAM && formId &&
-                <>
-                    {/* $FlowFixMe */}
-                    <EnrollmentDataEntry
-                        orgUnit={orgUnit}
-                        programId={selectedScopeId}
-                        formFoundation={formFoundation}
-                        enrollmentMetadata={enrollmentMetadata}
-                        id={id}
-                        {...rest}
-                    />
-                    {
-                        onSave &&
-                        <>
-                            <Button
-                                dataTest="dhis2-capture-create-and-link-button"
-                                primary
-                                onClick={onSave}
-                                className={classes.marginTop}
-                            >
-                                {saveButtonText}
-                            </Button>
-                            <InfoIconText
-                                text={translatedTextWithStyles(trackedEntityName, programName, orgUnit.name)}
-                            />
-                        </>
-                    }
+      return (
+          <>
+              {
+                  scopeType === scopeTypes.TRACKER_PROGRAM && formId &&
+                  <>
+                      {/* $FlowFixMe */}
+                      <EnrollmentDataEntry
+                          orgUnit={orgUnit}
+                          programId={selectedScopeId}
+                          formFoundation={formFoundation}
+                          enrollmentMetadata={enrollmentMetadata}
+                          id={id}
+                          {...rest}
+                      />
+                      {
+                          onSave &&
+                          <>
+                              <Button
+                                  dataTest="dhis2-capture-create-and-link-button"
+                                  primary
+                                  onClick={onSave}
+                                  className={classes.marginTop}
+                              >
+                                  {saveButtonText}
+                              </Button>
+                              <InfoIconText
+                                  text={translatedTextWithStyles(trackedEntityName, programName, orgUnit.name)}
+                              />
+                          </>
+                      }
 
-                </>
-            }
-        </>
-    );
-};
+                  </>
+              }
+          </>
+      );
+  };
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> =
   compose(
-      withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }: OwnProps) => enrollmentMetadata.enrollmentForm }),
+      withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm }),
       withStyles(styles),
   )(EnrollmentRegistrationEntryPlain);

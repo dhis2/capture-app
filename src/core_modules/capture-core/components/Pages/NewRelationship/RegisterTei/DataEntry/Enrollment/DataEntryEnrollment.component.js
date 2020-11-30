@@ -10,7 +10,7 @@ import { useSaveButtonText } from '../useSaveButtonText';
 type Props = {
     theme: Theme,
     programId: string,
-    enrollmentMetadata: Enrollment,
+    enrollmentMetadata?: Enrollment,
     onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
     onPostProcessErrorMessage: Function,
     onGetUnsavedAttributeValues: Function,
@@ -29,16 +29,11 @@ const NewEnrollmentRelationship =
       onUpdateField,
       onStartAsyncUpdateField,
   }: Props) => {
+      const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased, };
       const { trackedEntityType } = enrollmentMetadata || {};
       const saveButtonText = useSaveButtonText(trackedEntityType.name);
 
-      const fieldOptions = {
-          theme,
-          fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased,
-      };
-
       return (
-          // $FlowFixMe[cannot-spread-inexact] automated comment
           <EnrollmentRegistrationEntry
               id={DATA_ENTRY_ID}
               enrollmentMetadata={enrollmentMetadata}

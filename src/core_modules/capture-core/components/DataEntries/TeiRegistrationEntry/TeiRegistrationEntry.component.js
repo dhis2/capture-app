@@ -41,13 +41,15 @@ const styles = ({ typography }) => ({
 
 const TeiRegistrationEntryPlain =
   ({
-      selectedScopeId,
       id,
+      selectedScopeId,
       onSave,
-      classes,
       saveButtonText,
       teiRegistrationMetadata,
-      ...rest
+      fieldOptions,
+      classes,
+      onPostProcessErrorMessage,
+      onGetUnsavedAttributeValues,
   }: { ...OwnProps, ...CssClasses }) => {
       const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
       const { name: orgUnitName } = useCurrentOrgUnitInfo();
@@ -61,14 +63,15 @@ const TeiRegistrationEntryPlain =
               {
                   scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
                   <>
-                      {/* $FlowFixMe */}
                       <TrackedEntityInstanceDataEntry
                           orgUnit={orgUnit}
                           formFoundation={formFoundation}
                           programId={selectedScopeId}
                           teiRegistrationMetadata={teiRegistrationMetadata}
                           id={id}
-                          {...rest}
+                          fieldOptions={fieldOptions}
+                          onPostProcessErrorMessage={onPostProcessErrorMessage}
+                          onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
                       />
                       {
                           onSave &&
@@ -94,6 +97,6 @@ const TeiRegistrationEntryPlain =
 
 export const TeiRegistrationEntry: ComponentType<OwnProps> =
   compose(
-      withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }: OwnProps) => teiRegistrationMetadata.form }),
+      withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }) => teiRegistrationMetadata && teiRegistrationMetadata.form }),
       withStyles(styles),
   )(TeiRegistrationEntryPlain);

@@ -16,5 +16,5 @@ export const useSaveButtonText = trackedEntityTypeName =>
         const trackedEntityTypeNameLC = trackedEntityTypeName.toLocaleLowerCase();
         return duplicatesFound ?
             i18n.t('Review Duplicates') :
-            i18n.t('Create {{trackedEntityTypeName}} and link', { trackedEntityTypeName: trackedEntityTypeNameLC });
+            i18n.t('Save new {{trackedEntityTypeName}} and link', { trackedEntityTypeName: trackedEntityTypeNameLC });
     });
