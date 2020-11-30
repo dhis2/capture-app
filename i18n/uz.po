@@ -207,10 +207,10 @@ msgid "To"
 msgstr "Кимга"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "... дан кейин ёки унга тенг"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "... дан олдин ёки унга тенг"
 
 msgid "Today"
 msgstr "бугун"
@@ -384,10 +384,10 @@ msgid "Download with current filters"
 msgstr "Жорий фильтрлар асосида юклаш"
 
 msgid "Save filter as..."
-msgstr ""
+msgstr "Фильтрни сифатида сақлаш"
 
 msgid "Download as..."
-msgstr ""
+msgstr "Сифатда юклаш"
 
 msgid "Rows per page"
 msgstr "Саҳифада қаторлар"
