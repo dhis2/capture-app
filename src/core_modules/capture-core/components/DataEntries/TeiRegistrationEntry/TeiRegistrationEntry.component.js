@@ -2,7 +2,6 @@
 import React, { useEffect, type ComponentType } from 'react';
 import { useDispatch } from 'react-redux';
 import { compose } from 'redux';
-import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
@@ -12,7 +11,6 @@ import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import type { OwnProps } from './TeiRegistrationEntry.types';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
-import { InfoIconText } from '../../InfoIconText';
 import { withSaveHandler } from '../../DataEntry';
 
 const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
@@ -26,12 +24,6 @@ const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
         }
     }, [scopeType, dataEntryId, selectedScopeId, selectedOrgUnitId, registrationFormReady, formFoundation, dispatch]);
 };
-
-const translatedTextWithStyles = (trackedEntityName, orgUnitName) =>
-    (<>
-        {i18n.t('Saving a {{trackedEntityName}}', { trackedEntityName })} <b>{i18n.t('without')}</b> {i18n.t('enrollment in')} <b>{orgUnitName}</b>. {i18n.t('Enroll in a program by selecting a program from the top bar.')}
-    </>);
-
 
 const styles = ({ typography }) => ({
     marginTop: {
@@ -51,8 +43,7 @@ const TeiRegistrationEntryPlain =
       onPostProcessErrorMessage,
       onGetUnsavedAttributeValues,
   }: { ...OwnProps, ...CssClasses }) => {
-      const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
-      const { name: orgUnitName } = useCurrentOrgUnitInfo();
+      const { scopeType } = useScopeInfo(selectedScopeId);
 
       useDataEntryLifecycle(selectedScopeId, id, scopeType);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
@@ -75,19 +66,14 @@ const TeiRegistrationEntryPlain =
                       />
                       {
                           onSave &&
-                          <>
-                              <Button
-                                  dataTest="dhis2-capture-create-and-link-button"
-                                  primary
-                                  onClick={onSave}
-                                  className={classes.marginTop}
-                              >
-                                  {saveButtonText}
-                              </Button>
-                              <InfoIconText
-                                  text={translatedTextWithStyles(trackedEntityName.toLowerCase(), orgUnitName)}
-                              />
-                          </>
+                          <Button
+                              dataTest="dhis2-capture-create-and-link-button"
+                              primary
+                              onClick={onSave}
+                              className={classes.marginTop}
+                          >
+                              {saveButtonText}
+                          </Button>
                       }
                   </>
               }

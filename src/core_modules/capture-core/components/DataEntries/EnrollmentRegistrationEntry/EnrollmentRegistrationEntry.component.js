@@ -3,7 +3,6 @@ import React, { type ComponentType, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { Button } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
@@ -12,7 +11,6 @@ import { EnrollmentDataEntry } from '../Enrollment';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
-import { InfoIconText } from '../../InfoIconText';
 import { withSaveHandler } from '../../DataEntry';
 
 const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
@@ -39,11 +37,6 @@ const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
     ]);
 };
 
-const translatedTextWithStyles = (trackedEntityName, programName, orgUnitName) =>
-    (<>
-        {i18n.t('Saving a {{trackedEntityName}} in', { trackedEntityName })} <b>{programName}</b> {i18n.t('in')} <b>{orgUnitName}</b>.
-    </>);
-
 const styles = ({ typography }) => ({
     marginTop: {
         marginTop: typography.pxToRem(2),
@@ -60,7 +53,7 @@ const EnrollmentRegistrationEntryPlain =
       onSave,
       ...rest
   }: {...OwnProps, ...CssClasses}) => {
-      const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
+      const { scopeType } = useScopeInfo(selectedScopeId);
       useDataEntryLifecycle(selectedScopeId, id, scopeType);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
       const orgUnit = useCurrentOrgUnitInfo();
@@ -81,19 +74,14 @@ const EnrollmentRegistrationEntryPlain =
                       />
                       {
                           onSave &&
-                          <>
-                              <Button
-                                  dataTest="dhis2-capture-create-and-link-button"
-                                  primary
-                                  onClick={onSave}
-                                  className={classes.marginTop}
-                              >
-                                  {saveButtonText}
-                              </Button>
-                              <InfoIconText
-                                  text={translatedTextWithStyles(trackedEntityName, programName, orgUnit.name)}
-                              />
-                          </>
+                          <Button
+                              dataTest="dhis2-capture-create-and-link-button"
+                              primary
+                              onClick={onSave}
+                              className={classes.marginTop}
+                          >
+                              {saveButtonText}
+                          </Button>
                       }
 
                   </>
