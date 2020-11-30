@@ -29,7 +29,7 @@ const NewEnrollmentRelationship =
       onUpdateField,
       onStartAsyncUpdateField,
   }: Props) => {
-      const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased, };
+      const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
       const { trackedEntityType } = enrollmentMetadata || {};
       const saveButtonText = useSaveButtonText(trackedEntityType.name);
 

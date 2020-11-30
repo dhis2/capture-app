@@ -1,12 +1,12 @@
 // @flow
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import type { OwnProps } from './RegistrationDataEntry.types';
 import { EnrollmentRegistrationEntry } from '../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.component';
 import { TeiRegistrationEntry } from '../../../DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.component';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
-import i18n from '@dhis2/d2-i18n';
 import { InfoIconText } from '../../../InfoIconText';
 import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
 
