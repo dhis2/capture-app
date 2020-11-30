@@ -13,7 +13,7 @@ export const TeiWorkingListsSetup = ({
     customColumnOrder,
     ...passOnProps
 }: Props) => {
-    const defaultColumns = useDefaultColumnConfig(program);
+    const defaultColumns: TeiWorkingListsColumnConfigs = useDefaultColumnConfig(program);
     // $FlowFixMe Any suggestions for how to fix this?
     // const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const b = [{
