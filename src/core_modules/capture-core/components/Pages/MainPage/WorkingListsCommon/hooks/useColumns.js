@@ -2,10 +2,11 @@
 import { useMemo } from 'react';
 import type { CustomColumnOrder } from '../../WorkingListsCommon';
 
-export const useColumns = <TColumnConfigs: Array<{ id: string, visible: boolean, ... }>>(
-    customColumnOrder?: CustomColumnOrder, // eslint-disable-line
-    defaultColumns: TColumnConfigs,
-): TColumnConfigs => {
+type AA = { id: string, visible: boolean };
+export const useColumns = (
+    customColumnOrder?: CustomColumnOrder,
+    defaultColumns: Array<AA>,
+): Array<AA> => {
     const defaultColumnsAsObject = useMemo(() =>
         defaultColumns
             .reduce((acc, column) => ({ ...acc, [column.id]: column }), {}),
@@ -24,3 +25,5 @@ export const useColumns = <TColumnConfigs: Array<{ id: string, visible: boolean,
             }));
     }, [customColumnOrder, defaultColumns, defaultColumnsAsObject]);
 };
+
+export const useColumns2 = (defaultColumns: Array<AA>) => defaultColumns;
