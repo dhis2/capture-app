@@ -4,7 +4,6 @@ import type { Props } from './teiWorkingListsSetup.types';
 import { WorkingLists } from '../../WorkingLists';
 import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 import { useColumns2 } from '../../WorkingListsCommon/hooks/useColumns';
-import type { TeiWorkingListsColumnConfigs } from '../types';
 
 export const TeiWorkingListsSetup = ({
     program,
@@ -13,7 +12,7 @@ export const TeiWorkingListsSetup = ({
     customColumnOrder,
     ...passOnProps
 }: Props) => {
-    const defaultColumns: TeiWorkingListsColumnConfigs = useDefaultColumnConfig(program);
+    const defaultColumns = useDefaultColumnConfig(program);
     // $FlowFixMe Any suggestions for how to fix this?
     // const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const b = [{

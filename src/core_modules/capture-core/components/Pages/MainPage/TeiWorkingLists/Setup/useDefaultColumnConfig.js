@@ -6,13 +6,17 @@ import {
     type TrackerProgram,
     type DataElement,
 } from '../../../../../metaData';
-import type {
-    MainColumnConfig,
-    MetadataColumnConfig,
-    TeiWorkingListsColumnConfigs,
-} from '../types';
 
-const getDefaultMainConfig = (): Array<MainColumnConfig> => [{
+
+export type AnotherDefaultConfig = {
+    id: string,
+    visible: boolean,
+    type: $Values<typeof dataElementTypes>,
+    header: string,
+    isMainProperty: boolean
+}
+
+const getDefaultMainConfig = (): Array<AnotherDefaultConfig> => [{
     id: 'regUnit',
     visible: false,
     type: dataElementTypes.TEXT,
@@ -33,22 +37,33 @@ const getDefaultMainConfig = (): Array<MainColumnConfig> => [{
         isMainProperty: true,
     }));
 
-const getMetaDataConfig = (attributes: Array<DataElement>): Array<MetadataColumnConfig> =>
-    attributes
-        .map(({ id, displayInReports, type, formName, optionSet }) => ({
-            id,
-            visible: displayInReports,
-            type,
-            header: formName,
-            options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
-            multiValueFilter: !!optionSet,
-        }));
+export type AnotherColumnConfigurationBase = {
+    id: string,
+    visible: boolean,
+    type: $Values<typeof dataElementTypes>,
+    header: string,
+    options?: any,
+    multiValueFilter: boolean,
+};
 
-export const useDefaultColumnConfig = (program: TrackerProgram): TeiWorkingListsColumnConfigs =>
-    useMemo(() => {
-        const { attributes } = program;
-        return [
-            ...getDefaultMainConfig(),
-            ...getMetaDataConfig(attributes),
-        ];
-    }, [program]);
+const getMetaDataConfig =
+  (attributes: Array<DataElement>): Array<AnotherColumnConfigurationBase> =>
+      attributes
+          .map(({ id, displayInReports, type, formName, optionSet }) => ({
+              id,
+              visible: displayInReports,
+              type,
+              header: formName,
+              options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
+              multiValueFilter: !!optionSet,
+          }));
+
+export const useDefaultColumnConfig =
+  (program: TrackerProgram): Array<AnotherColumnConfigurationBase | AnotherDefaultConfig | {}> =>
+      useMemo(() => {
+          const { attributes } = program;
+          return [
+              ...getDefaultMainConfig(),
+              ...getMetaDataConfig(attributes),
+          ];
+      }, [program]);

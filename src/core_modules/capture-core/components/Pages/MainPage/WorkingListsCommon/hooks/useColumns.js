@@ -1,12 +1,13 @@
 // @flow
 import { useMemo } from 'react';
 import type { CustomColumnOrder } from '../../WorkingListsCommon';
+import type { AnotherColumnConfigurationBase, AnotherDefaultConfig } from '../../TeiWorkingLists/Setup/useDefaultColumnConfig';
 
-type AA = { id: string, visible: boolean };
+type NewColumnConfigBase = { id: string, visible: boolean };
 export const useColumns = (
     customColumnOrder?: CustomColumnOrder,
-    defaultColumns: Array<AA>,
-): Array<AA> => {
+    defaultColumns: Array<NewColumnConfigBase>,
+): Array<NewColumnConfigBase> => {
     const defaultColumnsAsObject = useMemo(() =>
         defaultColumns
             .reduce((acc, column) => ({ ...acc, [column.id]: column }), {}),
@@ -26,4 +27,4 @@ export const useColumns = (
     }, [customColumnOrder, defaultColumns, defaultColumnsAsObject]);
 };
 
-export const useColumns2 = (defaultColumns: Array<AA>) => defaultColumns;
+export const useColumns2 = (defaultColumns: Array<{}>) => defaultColumns;
