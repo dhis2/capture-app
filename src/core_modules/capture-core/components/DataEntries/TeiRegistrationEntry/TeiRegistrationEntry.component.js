@@ -1,6 +1,9 @@
 // @flow
-import React, { useEffect } from 'react';
+import React, { useEffect, type ComponentType } from 'react';
 import { useDispatch } from 'react-redux';
+import i18n from '@dhis2/d2-i18n';
+import { Button } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { startNewTeiDataEntryInitialisation } from './TeiRegistrationEntry.actions';
@@ -8,6 +11,7 @@ import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import type { OwnProps } from './TeiRegistrationEntry.types';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
+import { InfoIconText } from '../../InfoIconText';
 
 const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
     const dispatch = useDispatch();
@@ -21,8 +25,22 @@ const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
     }, [scopeType, dataEntryId, selectedScopeId, selectedOrgUnitId, registrationFormReady, formFoundation, dispatch]);
 };
 
-export const TeiRegistrationEntry = ({ selectedScopeId, id, ...rest }: OwnProps) => {
-    const { scopeType } = useScopeInfo(selectedScopeId);
+const translatedTextWithStyles = (trackedEntityName, orgUnitName) =>
+    (<>
+        {i18n.t('Saving a {{trackedEntityName}}', { trackedEntityName })} <b>{i18n.t('without')}</b> {i18n.t('enrollment in')} <b>{orgUnitName}</b>. {i18n.t('Enroll in a program by selecting a program from the top bar.')}
+    </>);
+
+
+const styles = ({ typography }) => ({
+    marginTop: {
+        marginTop: typography.pxToRem(2),
+    },
+});
+
+const TeiRegistrationEntryPlain = ({ selectedScopeId, id, onSave, classes, ...rest }: { ...OwnProps, ...CssClasses }) => {
+    const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
+    const { name: orgUnitName } = useCurrentOrgUnitInfo();
+
     useDataEntryLifecycle(selectedScopeId, id, scopeType);
     const { formId, registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const orgUnit = useCurrentOrgUnitInfo();
@@ -31,15 +49,41 @@ export const TeiRegistrationEntry = ({ selectedScopeId, id, ...rest }: OwnProps)
         <>
             {
                 scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
-                <TrackedEntityInstanceDataEntry
-                    orgUnit={orgUnit}
-                    formFoundation={formFoundation}
-                    programId={selectedScopeId}
-                    teiRegistrationMetadata={registrationMetaData}
-                    id={id}
-                    {...rest}
-                />
+                <>
+                    {/* $FlowFixMe */}
+                    <TrackedEntityInstanceDataEntry
+                        orgUnit={orgUnit}
+                        formFoundation={formFoundation}
+                        programId={selectedScopeId}
+                        teiRegistrationMetadata={registrationMetaData}
+                        id={id}
+                        {...rest}
+                    />
+                    {
+                        onSave &&
+                        <>
+                            <Button
+                                dataTest="dhis2-capture-create-and-link-button"
+                                primary
+                                onClick={onSave}
+                                className={classes.marginTop}
+                            >
+                                {
+                                    i18n.t(
+                                        'Save {{trackedEntityName}}',
+                                        { trackedEntityName: trackedEntityName.toLowerCase() },
+                                    )
+                                }
+                            </Button>
+                            <InfoIconText
+                                text={translatedTextWithStyles(trackedEntityName.toLowerCase(), orgUnitName)}
+                            />
+                        </>
+                    }
+                </>
             }
         </>
     );
 };
+
+export const TeiRegistrationEntry: ComponentType<OwnProps> = withStyles(styles)(TeiRegistrationEntryPlain);

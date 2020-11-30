@@ -17,6 +17,7 @@ export const RegistrationDataEntry = ({ selectedScopeId, dataEntryId }: OwnProps
                 <EnrollmentRegistrationEntry
                     selectedScopeId={selectedScopeId}
                     id={dataEntryId}
+                    onSave={() => alert('this is save in the future')}
                 />
             }
 
@@ -25,6 +26,7 @@ export const RegistrationDataEntry = ({ selectedScopeId, dataEntryId }: OwnProps
                 <TeiRegistrationEntry
                     selectedScopeId={selectedScopeId}
                     id={dataEntryId}
+                    onSave={() => alert('this is save in the future')}
                 />
             }
 

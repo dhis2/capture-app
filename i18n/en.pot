@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-11-26T14:01:11.938Z\n"
-"PO-Revision-Date: 2020-11-26T14:01:11.938Z\n"
+"POT-Creation-Date: 2020-11-30T13:09:53.763Z\n"
+"PO-Revision-Date: 2020-11-30T13:09:53.763Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -122,7 +122,28 @@ msgstr ""
 msgid "A future date is not allowed"
 msgstr ""
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
+msgid "Save {{trackedEntityName}}"
+msgstr ""
+
 msgid "Metadata error. see log for details"
+msgstr ""
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment in"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "An error has occurred. See log for details"
@@ -563,9 +584,6 @@ msgid "Assignee"
 msgstr ""
 
 msgid "Saving to"
-msgstr ""
-
-msgid "in"
 msgstr ""
 
 msgid ""
