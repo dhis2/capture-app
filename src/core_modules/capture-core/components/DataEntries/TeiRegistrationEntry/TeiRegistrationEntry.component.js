@@ -11,14 +11,14 @@ import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrati
 
 const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
     const dispatch = useDispatch();
-    const selectedOrgUnitInfo = useCurrentOrgUnitInfo();
+    const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
     const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const registrationFormReady = !!formId;
     useEffect(() => {
         if (registrationFormReady && scopeType === scopeTypes.TRACKED_ENTITY_TYPE) {
-            dispatch(startNewTeiDataEntryInitialisation({ selectedOrgUnitInfo, selectedScopeId, dataEntryId, formFoundation }));
+            dispatch(startNewTeiDataEntryInitialisation({ selectedOrgUnitId, selectedScopeId, dataEntryId, formFoundation }));
         }
-    }, [scopeType, dataEntryId, selectedScopeId, selectedOrgUnitInfo, registrationFormReady, formFoundation, dispatch]);
+    }, [scopeType, dataEntryId, selectedScopeId, selectedOrgUnitId, registrationFormReady, formFoundation, dispatch]);
 };
 
 export const TeiRegistrationEntry = ({ selectedScopeId, id, ...rest }: OwnProps) => {
