@@ -59,7 +59,7 @@ const getMetaDataConfig =
           }));
 
 export const useDefaultColumnConfig =
-  (program: TrackerProgram): Array<AnotherColumnConfigurationBase | AnotherDefaultConfig | {}> =>
+  (program: TrackerProgram): Array<AnotherColumnConfigurationBase | AnotherDefaultConfig> =>
       useMemo(() => {
           const { attributes } = program;
           return [
