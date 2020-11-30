@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-11-30T13:09:53.763Z\n"
-"PO-Revision-Date: 2020-11-30T13:09:53.763Z\n"
+"POT-Creation-Date: 2020-11-30T14:48:50.230Z\n"
+"PO-Revision-Date: 2020-11-30T14:48:50.230Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -126,9 +126,6 @@ msgid "Saving a {{trackedEntityName}} in"
 msgstr ""
 
 msgid "in"
-msgstr ""
-
-msgid "Save {{trackedEntityName}}"
 msgstr ""
 
 msgid "Metadata error. see log for details"

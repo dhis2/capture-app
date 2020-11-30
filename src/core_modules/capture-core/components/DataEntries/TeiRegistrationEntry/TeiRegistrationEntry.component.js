@@ -1,6 +1,7 @@
 // @flow
 import React, { useEffect, type ComponentType } from 'react';
 import { useDispatch } from 'react-redux';
+import { compose } from 'redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -12,6 +13,7 @@ import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import type { OwnProps } from './TeiRegistrationEntry.types';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import { InfoIconText } from '../../InfoIconText';
+import { withSaveHandler } from '../../DataEntry';
 
 const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
     const dispatch = useDispatch();
@@ -37,53 +39,65 @@ const styles = ({ typography }) => ({
     },
 });
 
-const TeiRegistrationEntryPlain = ({ selectedScopeId, id, onSave, classes, ...rest }: { ...OwnProps, ...CssClasses }) => {
-    const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
-    const { name: orgUnitName } = useCurrentOrgUnitInfo();
+const TeiRegistrationEntryPlain =
+  ({
+      selectedScopeId,
+      id,
+      onSave,
+      classes,
+      saveButtonText,
+      teiRegistrationMetadata,
+      ...rest
+  }: { ...OwnProps, ...CssClasses }) => {
+      const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
+      const { name: orgUnitName } = useCurrentOrgUnitInfo();
 
-    useDataEntryLifecycle(selectedScopeId, id, scopeType);
-    const { formId, registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-    const orgUnit = useCurrentOrgUnitInfo();
+      useDataEntryLifecycle(selectedScopeId, id, scopeType);
+      const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+      const orgUnit = useCurrentOrgUnitInfo();
 
-    return (
-        <>
-            {
-                scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
-                <>
-                    {/* $FlowFixMe */}
-                    <TrackedEntityInstanceDataEntry
-                        orgUnit={orgUnit}
-                        formFoundation={formFoundation}
-                        programId={selectedScopeId}
-                        teiRegistrationMetadata={registrationMetaData}
-                        id={id}
-                        {...rest}
-                    />
-                    {
-                        onSave &&
-                        <>
-                            <Button
-                                dataTest="dhis2-capture-create-and-link-button"
-                                primary
-                                onClick={onSave}
-                                className={classes.marginTop}
-                            >
-                                {
-                                    i18n.t(
-                                        'Save {{trackedEntityName}}',
-                                        { trackedEntityName: trackedEntityName.toLowerCase() },
-                                    )
-                                }
-                            </Button>
-                            <InfoIconText
-                                text={translatedTextWithStyles(trackedEntityName.toLowerCase(), orgUnitName)}
-                            />
-                        </>
-                    }
-                </>
-            }
-        </>
-    );
-};
+      return (
+          <>
+              {
+                  scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
+                  <>
+                      {/* $FlowFixMe */}
+                      <TrackedEntityInstanceDataEntry
+                          orgUnit={orgUnit}
+                          formFoundation={formFoundation}
+                          programId={selectedScopeId}
+                          teiRegistrationMetadata={teiRegistrationMetadata}
+                          id={id}
+                          {...rest}
+                      />
+                      {
+                          onSave &&
+                          <>
+                              <Button
+                                  dataTest="dhis2-capture-create-and-link-button"
+                                  primary
+                                  onClick={onSave}
+                                  className={classes.marginTop}
+                              >
+                                  {saveButtonText}
+                              </Button>
+                              <InfoIconText
+                                  text={translatedTextWithStyles(trackedEntityName.toLowerCase(), orgUnitName)}
+                              />
+                          </>
+                      }
+                  </>
+              }
+          </>
+      );
+  };
 
-export const TeiRegistrationEntry: ComponentType<OwnProps> = withStyles(styles)(TeiRegistrationEntryPlain);
+export const TeiRegistrationEntry: ComponentType<OwnProps> =
+  compose(
+      withSaveHandler(
+          {
+              onGetFormFoundation: ({ teiRegistrationMetadata }: OwnProps) => teiRegistrationMetadata.form,
+          },
+      ),
+      withStyles(styles),
+  )(TeiRegistrationEntryPlain);

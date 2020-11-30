@@ -1,64 +1,64 @@
 // @flow
-import React, { Component } from 'react';
-import { withTheme } from '@material-ui/core/styles';
+import React from 'react';
+import { withTheme } from '@material-ui/core';
+import i18n from '@dhis2/d2-i18n';
+import { useSelector } from 'react-redux';
 import type { RenderFoundation, TeiRegistration } from '../../../../../../metaData';
-import ConfiguredTei from './ConfiguredTei.component';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import teiClasses from './trackedEntityInstance.module.css';
+import getDataEntryKey from '../../../../../DataEntry/common/getDataEntryKey';
+import { TeiRegistrationEntry } from '../../../../../DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.component';
 
-type Props = {
-    teiRegistrationMetadata: ?TeiRegistration,
+type Props = {|
+    theme: Theme,
     onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
     onGetUnsavedAttributeValues: Function,
     onPostProcessErrorMessage: Function,
-    onCancel: () => void,
-    teiRegistrationMetadata: Object,
-    classes: {
-        fieldLabelMediaBased: string,
-    },
-    theme: Theme,
+    teiRegistrationMetadata: ?TeiRegistration,
+|};
+const usePossibleDuplicatesFound = () =>
+    useSelector(({ dataEntriesSearchGroupsResults, dataEntries }) => {
+        const dataEntryKey = getDataEntryKey(DATA_ENTRY_ID, dataEntries[DATA_ENTRY_ID].itemId);
+
+        return Boolean(
+            dataEntriesSearchGroupsResults[dataEntryKey] &&
+    dataEntriesSearchGroupsResults[dataEntryKey].main &&
+    dataEntriesSearchGroupsResults[dataEntryKey].main.count,
+        );
+    });
+
+const getButtonText = (duplicatesFound: boolean, trackedEntityTypeName: string) => {
+    const trackedEntityTypeNameLC = trackedEntityTypeName.toLocaleLowerCase();
+    return duplicatesFound ?
+        i18n.t('Review Duplicates') :
+        i18n.t('Create {{trackedEntityTypeName}} and link', { trackedEntityTypeName: trackedEntityTypeNameLC });
 };
 
-class RelationshipTrackedEntityInstance extends Component<Props> {
-    fieldOptions: { theme: Theme };
+const RelationshipTrackedEntityInstance =
+  ({
+      theme,
+      onSave,
+      onGetUnsavedAttributeValues,
+      onPostProcessErrorMessage,
+      teiRegistrationMetadata = {},
+  }: Props) => {
+      const possibleDuplicatesFound = usePossibleDuplicatesFound();
 
-    constructor(props: Props) {
-        super(props);
-        this.fieldOptions = {
-            theme: props.theme,
-            fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased,
-        };
-    }
-
-    handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
-        this.props.onSave(itemId, dataEntryId, formFoundation);
-    }
-
-    render() {
-        const {
-            classes,
-            theme,
-            onSave,
-            onGetUnsavedAttributeValues,
-            onPostProcessErrorMessage,
-            teiRegistrationMetadata,
-            ...passOnProps
-        } = this.props;
-
-        return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <ConfiguredTei
-                id={DATA_ENTRY_ID}
-                selectedScopeId={teiRegistrationMetadata.form.id}
-                onSave={this.handleSave}
-                fieldOptions={this.fieldOptions}
-                onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
-                onPostProcessErrorMessage={onPostProcessErrorMessage}
-                teiRegistrationMetadata={teiRegistrationMetadata}
-                {...passOnProps}
-            />
-        );
-    }
-}
+      const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
+      const { trackedEntityType } = teiRegistrationMetadata || {};
+      const saveButtonText = getButtonText(possibleDuplicatesFound, trackedEntityType.name);
+      return (
+          <TeiRegistrationEntry
+              id={DATA_ENTRY_ID}
+              teiRegistrationMetadata={teiRegistrationMetadata}
+              selectedScopeId={teiRegistrationMetadata && teiRegistrationMetadata.form.id}
+              saveButtonText={saveButtonText}
+              fieldOptions={fieldOptions}
+              onSave={onSave}
+              onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
+              onPostProcessErrorMessage={onPostProcessErrorMessage}
+          />
+      );
+  };
 
 export default withTheme()(RelationshipTrackedEntityInstance);
