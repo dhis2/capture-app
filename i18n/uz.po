@@ -56,6 +56,7 @@ msgstr "Фикр ёзинг"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
+"Сизнинг маълумотларингиз юкланмоқда. Илтимос, ушбу хабарни йўқолишини кутинг"
 
 msgid "No write access"
 msgstr "Ёзув киритиш учун рухсат йўқ"
@@ -64,7 +65,7 @@ msgid "Save"
 msgstr "Сақлаш"
 
 msgid "Uploading data"
-msgstr ""
+msgstr "Маълумотлар юкланмоқда"
 
 msgid "Sort"
 msgstr "Саралаш"
@@ -91,10 +92,10 @@ msgid "to"
 msgstr "га"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "... дан кейин ёки унга тенг"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "... дан олдин ёки унга тенг"
 
 msgid "From"
 msgstr "Дан"
@@ -172,10 +173,10 @@ msgid "Syncing"
 msgstr "Синхронлашмоқда"
 
 msgid "Field"
-msgstr ""
+msgstr "Қатор"
 
 msgid "could not be updated"
-msgstr ""
+msgstr "юклаб бўлмади"
 
 msgid "Start Again"
 msgstr "Қайта бошланг"
@@ -184,16 +185,16 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr "Ишончингиз комилми? Барча сақланмаган маълумотлар йўқолади."
 
 msgid "Reset Organisation Unit"
-msgstr ""
+msgstr "Ташкилий бирликни қайта кўриб чиқиб янгилаш"
 
 msgid "Reset Program"
-msgstr ""
+msgstr "Дастурни қайта кўриб чиқиб янгилаш"
 
 msgid "Reset Category Option"
-msgstr ""
+msgstr "Категория вариантларини қайта кўриб чиқиб янгилаш"
 
 msgid "Create New Event"
-msgstr ""
+msgstr "Янги Тадбир Яратиш"
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Ҳодиса/тадбирни юклаб бўлмади. Унинг мавжудлигига ишончингиз комилми?"
@@ -267,7 +268,7 @@ msgid "Save and exit"
 msgstr "Сақлаш ва чиқиш"
 
 msgid "Are you sure? All unsaved data will be lost"
-msgstr ""
+msgstr "Ишончингиз комилми? Барча сақланмаган маълумотлар йўқолади"
 
 msgid "events added"
 msgstr "ҳодиса/тадбирлар қўшилди"
@@ -276,7 +277,7 @@ msgid "No events added"
 msgstr "Ҳеч қандай ҳодиса/тадбир қўшилмаган"
 
 msgid "Reset"
-msgstr ""
+msgstr "Қайта кўриб чиқиб янгилаш"
 
 msgid "New"
 msgstr "Янги"
@@ -288,7 +289,7 @@ msgid "Selected registering unit"
 msgstr "Бўлимни танланган рўйхатга олиш"
 
 msgid "Registering Oraginastion Unit"
-msgstr ""
+msgstr "Танланган Бўлим Рўйхатдан Ўтказилмоқда"
 
 msgid "Registering Organisation Unit"
 msgstr "Танланган бўлим рўйхатдан ўтказилмоқда"
