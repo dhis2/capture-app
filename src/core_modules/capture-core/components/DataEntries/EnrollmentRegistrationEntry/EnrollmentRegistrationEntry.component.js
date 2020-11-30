@@ -11,14 +11,14 @@ import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 
 const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
     const dispatch = useDispatch();
-    const selectedOrgUnitInfo = useCurrentOrgUnitInfo();
+    const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
     const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const registrationFormReady = !!formId;
     useEffect(() => {
         if (registrationFormReady && scopeType === scopeTypes.TRACKER_PROGRAM) {
             dispatch(
                 startNewEnrollmentDataEntryInitialisation(
-                    { selectedOrgUnitInfo, selectedScopeId, dataEntryId, formFoundation },
+                    { selectedOrgUnitId, selectedScopeId, dataEntryId, formFoundation },
                 ),
             );
         }
@@ -26,7 +26,7 @@ const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
         scopeType,
         dataEntryId,
         selectedScopeId,
-        selectedOrgUnitInfo,
+        selectedOrgUnitId,
         registrationFormReady,
         formFoundation,
         dispatch,
