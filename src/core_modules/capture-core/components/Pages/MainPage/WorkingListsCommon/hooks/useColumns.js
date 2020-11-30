@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import type { CustomColumnOrder } from '../../WorkingListsCommon';
 
-export const useColumns = <TColumnConfigs: Array<{ id: string, visible: boolean, ... }>>(
+export const useColumns = <TColumnConfigs: Array<{ id: string, visible: boolean, [string]: any }>>(
     customColumnOrder?: CustomColumnOrder, // eslint-disable-line
     defaultColumns: TColumnConfigs,
 ): TColumnConfigs => {

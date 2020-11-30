@@ -37,8 +37,6 @@ export const EventWorkingListsColumnSetup = ({
 
     const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView);
     const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateList);
-
-    // $FlowFixMe Any suggestions for how to fix this?
     const columns = useColumns<EventWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
 
     return (

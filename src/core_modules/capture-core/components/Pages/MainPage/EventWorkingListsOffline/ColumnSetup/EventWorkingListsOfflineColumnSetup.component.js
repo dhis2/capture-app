@@ -11,7 +11,6 @@ export const EventWorkingListsOfflineColumnSetup = ({
     ...passOnProps
 }: Props) => {
     const defaultColumns = useDefaultColumnConfig(program);
-    // $FlowFixMe Any suggestions for how to fix this?
     const columns = useColumns<EventWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const visibleColumns = useMemo(() => columns.filter(column => column.visible), [columns]);
 
