@@ -2,59 +2,56 @@
 import React from 'react';
 import { withTheme } from '@material-ui/core/styles';
 import type { Enrollment, RenderFoundation } from '../../../../../../metaData';
-import ConfiguredEnrollment from './ConfiguredEnrollment.component';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import enrollmentClasses from './enrollment.module.css';
+import { EnrollmentRegistrationEntry } from '../../../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.component';
+import { useSaveButtonText } from '../useSaveButtonText';
 
 type Props = {
-    enrollmentMetadata: Enrollment,
-    onUpdateField: (innerAction: ReduxAction<any, any>) => void,
-    onStartAsyncUpdateField: Object,
+    theme: Theme,
     programId: string,
+    enrollmentMetadata: Enrollment,
     onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
     onPostProcessErrorMessage: Function,
-    onGetUnsavedAttributeValues: Function => void,
-    onCancel: () => void,
-    classes: {
-        fieldLabelMediaBased: string,
-    },
-    theme: Theme,
+    onGetUnsavedAttributeValues: Function,
+    onUpdateField: (innerAction: ReduxAction<any, any>) => void,
+    onStartAsyncUpdateField: Function,
 };
 
-const NewEnrollmentRelationship = (props: Props) => {
-    const fieldOptions = {
-        theme: props.theme,
-        fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased,
-    };
+const NewEnrollmentRelationship =
+  ({
+      theme,
+      onSave,
+      onPostProcessErrorMessage,
+      onGetUnsavedAttributeValues,
+      enrollmentMetadata,
+      programId,
+      onUpdateField,
+      onStartAsyncUpdateField,
+  }: Props) => {
+      const { trackedEntityType } = enrollmentMetadata || {};
+      const saveButtonText = useSaveButtonText(trackedEntityType.name);
 
-    const handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
-        props.onSave(itemId, dataEntryId, formFoundation);
-    };
+      const fieldOptions = {
+          theme,
+          fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased,
+      };
 
-    const {
-        classes,
-        theme,
-        onSave,
-        onPostProcessErrorMessage,
-        onGetUnsavedAttributeValues,
-        enrollmentMetadata,
-        ...passOnProps
-    } = props;
-    const selectedProgramId = passOnProps.programId;
-
-    return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
-        <ConfiguredEnrollment
-            id={DATA_ENTRY_ID}
-            enrollmentMetadata={enrollmentMetadata}
-            selectedScopeId={selectedProgramId}
-            fieldOptions={fieldOptions}
-            onSave={handleSave}
-            onPostProcessErrorMessage={onPostProcessErrorMessage}
-            onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
-            {...passOnProps}
-        />
-    );
-};
+      return (
+          // $FlowFixMe[cannot-spread-inexact] automated comment
+          <EnrollmentRegistrationEntry
+              id={DATA_ENTRY_ID}
+              enrollmentMetadata={enrollmentMetadata}
+              selectedScopeId={programId}
+              saveButtonText={saveButtonText}
+              fieldOptions={fieldOptions}
+              onSave={onSave}
+              onPostProcessErrorMessage={onPostProcessErrorMessage}
+              onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
+              onUpdateField={onUpdateField}
+              onStartAsyncUpdateField={onStartAsyncUpdateField}
+          />
+      );
+  };
 
 export default withTheme()(NewEnrollmentRelationship);

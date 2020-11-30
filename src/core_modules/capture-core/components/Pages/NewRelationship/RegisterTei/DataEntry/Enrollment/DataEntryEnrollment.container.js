@@ -12,7 +12,6 @@ const makeMapStateToProps = () => {
         return {
             enrollmentMetadata,
             programId: state.newRelationshipRegisterTei.programId,
-            orgUnit: state.newRelationshipRegisterTei.orgUnit,
         };
     };
     // $FlowFixMe[not-an-object] automated comment

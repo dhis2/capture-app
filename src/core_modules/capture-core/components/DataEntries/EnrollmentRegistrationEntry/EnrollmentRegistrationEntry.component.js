@@ -1,6 +1,7 @@
 // @flow
 import React, { type ComponentType, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { compose } from 'redux';
 import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
@@ -12,6 +13,7 @@ import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { InfoIconText } from '../../InfoIconText';
+import { withSaveHandler } from '../../DataEntry';
 
 const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
     const dispatch = useDispatch();
@@ -48,10 +50,10 @@ const styles = ({ typography }) => ({
     },
 });
 
-const EnrollmentRegistrationEntryPlain = ({ selectedScopeId, id, onSave, classes, ...rest }: {...OwnProps, ...CssClasses}) => {
+const EnrollmentRegistrationEntryPlain = ({ selectedScopeId, id, onSave, classes, enrollmentMetadata, saveButtonText, ...rest }: {...OwnProps, ...CssClasses}) => {
     const { scopeType, programName, trackedEntityName } = useScopeInfo(selectedScopeId);
     useDataEntryLifecycle(selectedScopeId, id, scopeType);
-    const { formId, registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+    const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const orgUnit = useCurrentOrgUnitInfo();
 
     return (
@@ -64,7 +66,7 @@ const EnrollmentRegistrationEntryPlain = ({ selectedScopeId, id, onSave, classes
                         orgUnit={orgUnit}
                         programId={selectedScopeId}
                         formFoundation={formFoundation}
-                        enrollmentMetadata={registrationMetaData}
+                        enrollmentMetadata={enrollmentMetadata}
                         id={id}
                         {...rest}
                     />
@@ -77,12 +79,7 @@ const EnrollmentRegistrationEntryPlain = ({ selectedScopeId, id, onSave, classes
                                 onClick={onSave}
                                 className={classes.marginTop}
                             >
-                                {
-                                    i18n.t(
-                                        'Save {{trackedEntityName}}',
-                                        { trackedEntityName: trackedEntityName.toLowerCase() },
-                                    )
-                                }
+                                {saveButtonText}
                             </Button>
                             <InfoIconText
                                 text={translatedTextWithStyles(trackedEntityName, programName, orgUnit.name)}
@@ -96,4 +93,8 @@ const EnrollmentRegistrationEntryPlain = ({ selectedScopeId, id, onSave, classes
     );
 };
 
-export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = withStyles(styles)(EnrollmentRegistrationEntryPlain);
+export const EnrollmentRegistrationEntry: ComponentType<OwnProps> =
+  compose(
+      withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }: OwnProps) => enrollmentMetadata.enrollmentForm }),
+      withStyles(styles),
+  )(EnrollmentRegistrationEntryPlain);

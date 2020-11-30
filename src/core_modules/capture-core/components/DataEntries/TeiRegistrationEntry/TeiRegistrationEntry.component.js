@@ -94,10 +94,6 @@ const TeiRegistrationEntryPlain =
 
 export const TeiRegistrationEntry: ComponentType<OwnProps> =
   compose(
-      withSaveHandler(
-          {
-              onGetFormFoundation: ({ teiRegistrationMetadata }: OwnProps) => teiRegistrationMetadata.form,
-          },
-      ),
+      withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }: OwnProps) => teiRegistrationMetadata.form }),
       withStyles(styles),
   )(TeiRegistrationEntryPlain);

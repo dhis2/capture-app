@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-11-30T14:48:50.230Z\n"
-"PO-Revision-Date: 2020-11-30T14:48:50.230Z\n"
+"POT-Creation-Date: 2020-11-30T15:06:14.580Z\n"
+"PO-Revision-Date: 2020-11-30T15:06:14.580Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -631,15 +631,6 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
 
-msgid "Review duplicates"
-msgstr ""
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
-
-msgid "Review Duplicates"
-msgstr ""
-
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 
@@ -663,6 +654,12 @@ msgid "Registered person"
 msgstr ""
 
 msgid "Link"
+msgstr ""
+
+msgid "Review Duplicates"
+msgstr ""
+
+msgid "Create {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
