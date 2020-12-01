@@ -25,7 +25,7 @@ msgid "Cancel"
 msgstr "Бекор қилиш"
 
 msgid "Discard event?"
-msgstr ""
+msgstr "Ҳодиса/тадбир бекор қилинсинми?"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -36,7 +36,7 @@ msgid "Discard"
 msgstr "Бекор қилиш"
 
 msgid "Back to event"
-msgstr ""
+msgstr "Ҳодиса/тадбирга қайтиш"
 
 msgid "Add comment"
 msgstr "Изоҳ қўшиш"
@@ -67,6 +67,7 @@ msgstr "Аборт"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
+"Сизнинг маълумотларингиз юкланмоқда. Илтимос, ушбу хабарни йўқолишини кутинг"
 
 msgid "No write access"
 msgstr "Ёзув киритиш учун рухсат йўқ"
@@ -75,7 +76,7 @@ msgid "Save"
 msgstr "Сақлаш"
 
 msgid "Uploading data"
-msgstr ""
+msgstr "Маълумотлар юкланмоқда"
 
 msgid "Sort"
 msgstr "Саралаш"
@@ -102,10 +103,10 @@ msgid "to"
 msgstr "га"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "... дан кейин ёки унга тенг"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "... дан олдин ёки унга тенг"
 
 msgid "From"
 msgstr "Дан"
@@ -198,10 +199,10 @@ msgid "Comments"
 msgstr "Изоҳлар"
 
 msgid "Field"
-msgstr ""
+msgstr "Қатор"
 
 msgid "could not be updated"
-msgstr ""
+msgstr "юклаб бўлмади"
 
 msgid "Please provide a valid date"
 msgstr "Илтимос, тўғри санани кўрсатинг"
