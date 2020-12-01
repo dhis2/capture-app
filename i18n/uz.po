@@ -79,7 +79,7 @@ msgid "Please provide valid coordinates"
 msgstr "Илтимос, тўғри координаталарни кўрсатинг"
 
 msgid "Please provide a valid username"
-msgstr ""
+msgstr "Илтимос, ҳақиқий фойдаланувчини кўрсатинг"
 
 msgid "This value already exists"
 msgstr "Бу қиймат аалқачон мавжуд"
@@ -198,10 +198,10 @@ msgid "to"
 msgstr "га"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "... дан кейин ёки унга тенг"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "... дан олдин ёки унга тенг"
 
 msgid "From"
 msgstr "Дан"
