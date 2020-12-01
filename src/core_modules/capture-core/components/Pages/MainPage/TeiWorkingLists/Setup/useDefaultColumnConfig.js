@@ -15,8 +15,9 @@ import type {
 const getDefaultMainConfig = (): Array<MainColumnConfig> => [{
     id: 'regUnit',
     visible: false,
-    type: dataElementTypes.TEXT,
+    type: dataElementTypes.ORGANISATION_UNIT,
     header: i18n.t('Registering unit'),
+    apiName: 'orgUnit',
 }, {
     id: 'regDate',
     visible: false,
@@ -30,7 +31,7 @@ const getDefaultMainConfig = (): Array<MainColumnConfig> => [{
 }]
     .map(field => ({
         ...field,
-        isMainProperty: true,
+        mainProperty: true,
     }));
 
 const getMetaDataConfig = (attributes: Array<DataElement>): Array<MetadataColumnConfig> =>

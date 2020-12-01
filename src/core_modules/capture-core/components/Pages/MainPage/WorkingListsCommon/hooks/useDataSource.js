@@ -2,22 +2,22 @@
 import { useMemo } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { typeof dataElementTypes } from '../../../../../metaData';
 import { convertClientToList } from '../../../../../converters';
-import type { EventRecords, EventWorkingListsColumnConfigs } from '../types';
 import type { DataSource } from '../../WorkingLists';
 
 export const useDataSource = (
-    eventRecords?: EventRecords,
+    records?: { [string]: any },
     recordsOrder?: Array<string>,
-    columns: EventWorkingListsColumnConfigs,
+    columns: Array<{ id: string, options?: ?Array<{text: string, value: any}>, type: $Values<dataElementTypes>, visible: boolean, [string]: any }>,
 ): DataSource | void => {
     const eventRecordsArray = useMemo(() =>
-        recordsOrder && eventRecords && recordsOrder
-            .map(eventId => ({
-                ...eventRecords[eventId],
-                eventId,
+        recordsOrder && records && recordsOrder
+            .map(id => ({
+                ...records[id],
+                id,
             })), [
-        eventRecords,
+        records,
         recordsOrder,
     ]);
 
@@ -48,7 +48,7 @@ export const useDataSource = (
 
             return {
                 ...listRecord,
-                eventId: eventRecord.eventId, // used as rowkey
+                id: eventRecord.id, // used as rowkey
             };
         }), [
         eventRecordsArray,

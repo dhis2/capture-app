@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { TeiWorkingListsSetup } from '../Setup';
 import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
@@ -15,13 +15,11 @@ export const TeiWorkingListsReduxProvider = ({ storeId }: Props) => {
 
     // ------ TEMPORARY DUMMY DATA TO BYPASS LOADING IN THIS PR!!! ------
     const loadedContext = {
+        ...commonStateManagementProps.loadedContext,
         programIdTemplates: programId,
-        programIdView: programId,
-        orgUnitId: commonStateManagementProps.orgUnitId,
-        categories: commonStateManagementProps.categories,
     };
 
-    const currentTemplate = {
+    const currentTemplate = useMemo(() => ({
         id: 'default',
         isDefault: true,
         name: 'default',
@@ -31,25 +29,16 @@ export const TeiWorkingListsReduxProvider = ({ storeId }: Props) => {
             write: false,
             manage: false,
         },
-    };
+    }), []);
 
     const dummyData = {
-        currentPage: 1,
         currentTemplate,
-        rowsPerPage: 15,
         templates: [currentTemplate],
         loadedContext,
         onSelectListRow: () => {},
-        stickyFilters: {
-            filtersWithValueOnInit: {},
-            userSelectedFilters: {},
-        },
         lastTransaction: undefined,
         lastTransactionOnListDataRefresh: undefined,
         listDataRefreshTimestamp: undefined,
-        initialViewConfig: undefined,
-        records: undefined,
-        recordsOrder: undefined,
     };
     // ---------------------------------------------------------------
 

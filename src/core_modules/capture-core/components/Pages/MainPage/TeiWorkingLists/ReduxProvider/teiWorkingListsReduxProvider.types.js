@@ -27,10 +27,11 @@ import type {
     AddTemplate,
     CustomColumnOrder,
     DeleteTemplate,
+    RecordsOrder,
     UpdateTemplate,
     UpdateList,
 } from '../../WorkingListsCommon';
-import type { TeiWorkingListsTemplate, TeiWorkingListsTemplates } from '../types';
+import type { TeiWorkingListsTemplate, TeiWorkingListsTemplates, TeiRecords } from '../types';
 
 export type Props = $ReadOnly<{|
     storeId: string,
@@ -70,6 +71,8 @@ export type TeiWorkingListsReduxOutputProps = {|
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     program: TrackerProgram,
+    records?: TeiRecords,
+    recordsOrder?: RecordsOrder,
     rowsPerPage?: number,
     sortByDirection?: string,
     sortById?: string,

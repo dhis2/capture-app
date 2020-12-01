@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { useDataSource } from '../../EventWorkingListsCommon';
+import { useDataSource } from '../../WorkingListsCommon';
 import { EventWorkingListsTemplateSetup } from '../TemplateSetup';
 import type { Props } from './eventWorkingListsDataSourceSetup.types';
 
@@ -14,6 +14,6 @@ export const EventWorkingListsDataSourceSetup = ({
         {...passOnProps}
         dataSource={useDataSource(records, recordsOrder, columns)}
         columns={columns}
-        rowIdKey="eventId"
+        rowIdKey="id"
     />
 );

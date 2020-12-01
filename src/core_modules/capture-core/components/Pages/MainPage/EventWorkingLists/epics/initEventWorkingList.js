@@ -57,8 +57,7 @@ export const initEventWorkingListAsync = async (
                         lastTransaction,
                     },
                 },
-            }),
-        )
+            }))
         .catch((error) => {
             log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));
             return initListViewError(storeId, i18n.t('Working list could not be loaded'));

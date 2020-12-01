@@ -1,5 +1,6 @@
 // @flow
 import { typeof dataElementTypes } from '../../../../../metaData';
+import type { Categories } from '../../WorkingLists';
 
 type TeiRecord = {| [id: string]: any |};
 
@@ -36,10 +37,31 @@ export type MetadataColumnConfig = {
 
 export type MainColumnConfig = {
     ...ColumnConfigBase,
-    isMainProperty: true,
+    mainProperty: true,
     apiName?: string,
 };
 
 export type TeiWorkingListsColumnConfig = MetadataColumnConfig | MainColumnConfig;
 
 export type TeiWorkingListsColumnConfigs = Array<TeiWorkingListsColumnConfig>;
+
+export type TeiColumnMetaForDataFetching = {|
+    id: string,
+    type: $Values<dataElementTypes>,
+    mainProperty?: boolean,
+    apiName?: string,
+|};
+
+export type TeiColumnsMetaForDataFetching = Map<string, TeiColumnMetaForDataFetching>;
+
+export type LoadTeiView = (
+    template: TeiWorkingListsTemplate,
+    context: {|
+        programId: string,
+        orgUnitId: string,
+        categories?: Categories,
+    |},
+    meta: {|
+        columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
+    |},
+) => void;
