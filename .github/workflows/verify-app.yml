@@ -79,7 +79,7 @@ jobs:
 
       - uses: dhis2/deploy-build@master
         with:
-          build-dir: build/app
+          build-dir: build
           github-token: ${{ env.GH_TOKEN }}
 
   release:
