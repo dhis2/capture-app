@@ -9,9 +9,10 @@ import {
     SingleSelectOption,
     colors,
 } from '@dhis2/ui';
-import type { OwnProps, Props } from './TrackedEntityTypeSelector.types';
+import type { Props } from './TrackedEntityTypeSelector.types';
 import { scopeTypes } from '../../metaData';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
+import { useCurrentTrackedEntityTypeId } from '../../hooks/useCurrentTrackedEntityTypeId';
 
 const styles = ({ typography }) => ({
     searchDomainSelectorSection: {
@@ -60,11 +61,13 @@ const InfoOutlinedIconWithStyles = withStyles({
 })(InfoOutlinedIcon);
 
 export const TrackedEntityTypeSelectorPlain =
-  ({ classes, onSelect, selectedSearchScopeId }: Props) => {
+  ({ classes, onSelect, onSetTrackedEntityTypeIdOnUrl }: Props) => {
       const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
+      const selectedSearchScopeId = useCurrentTrackedEntityTypeId();
 
       const handleSelectionChange = ({ selected }) => {
           onSelect(selected, scopeTypes.TRACKED_ENTITY_TYPE);
+          onSetTrackedEntityTypeIdOnUrl({ trackedEntityTypeId: selected });
       };
 
       return (<>
@@ -108,4 +111,4 @@ export const TrackedEntityTypeSelectorPlain =
       );
   };
 
-export const TrackedEntityTypeSelector: ComponentType<OwnProps> = withStyles(styles)(TrackedEntityTypeSelectorPlain);
+export const TrackedEntityTypeSelectorComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(TrackedEntityTypeSelectorPlain);

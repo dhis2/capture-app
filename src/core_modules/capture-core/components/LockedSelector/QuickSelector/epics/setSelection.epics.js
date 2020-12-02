@@ -13,7 +13,7 @@ export const setOrgUnit = (action$: InputObservable, store: ReduxStore) =>
         map(() => {
             const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
-            return push(`/${urlArguments(programId, orgUnitId)}`);
+            return push(`/${urlArguments({ programId, orgUnitId })}`);
         }));
 
 export const setProgram = (action$: InputObservable, store: ReduxStore) =>
@@ -22,7 +22,7 @@ export const setProgram = (action$: InputObservable, store: ReduxStore) =>
         map(() => {
             const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
-            return push(`/${urlArguments(programId, orgUnitId)}`);
+            return push(`/${urlArguments({ programId, orgUnitId })}`);
         }));
 
 export const goBackToListContext = (action$: InputObservable, store: ReduxStore) =>
@@ -31,5 +31,5 @@ export const goBackToListContext = (action$: InputObservable, store: ReduxStore)
         map(() => {
             const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
-            return push(`/${urlArguments(programId, orgUnitId)}`);
+            return push(`/${urlArguments({ programId, orgUnitId })}`);
         }));

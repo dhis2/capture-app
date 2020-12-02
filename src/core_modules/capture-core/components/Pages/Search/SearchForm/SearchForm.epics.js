@@ -23,7 +23,7 @@ import {
 } from '../../../../metaData';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 import { PAGINATION } from '../SearchPage.constants';
-import { urlThreeArguments } from '../../../../utils/url';
+import { urlArguments } from '../../../../utils/url';
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
@@ -252,7 +252,7 @@ export const fallbackPushPageEpic = (action$: InputObservable) =>
         ofType(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED),
         map(({ payload: { orgUnitId, trackedEntityTypeId } }) =>
             push({
-                pathname: urlThreeArguments({ orgUnitId, trackedEntityTypeId }),
+                pathname: urlArguments({ orgUnitId, trackedEntityTypeId }),
                 state: { fallback: true },
             })),
     );
