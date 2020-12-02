@@ -8,7 +8,7 @@ import { CardList } from '../../../CardList';
 import withNavigation from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
 import type { Props } from './SearchResults.types';
-import { navigateToTrackedEntityDashboard } from '../sharedUtils';
+import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
 import { availableCardListButtonState } from '../../../CardList/CardList.constants';
 import { SearchResultsHeader } from '../../../SearchResultsHeader';
 import { ResultsPageSizeContext } from '../../shared-contexts';

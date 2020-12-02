@@ -87,7 +87,6 @@ export const TeiRegistrationEntry: ComponentType<OwnProps> =
   compose(
       withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }) => {
           const form = teiRegistrationMetadata && teiRegistrationMetadata.form;
-          debugger;
           return form;
       } }),
       withStyles(styles),

@@ -14,7 +14,7 @@ import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { scopeTypes } from '../../../metaData';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
-import { RegistrationDataEntry } from './RegistrationDataEntry/RegistrationDataEntry.component';
+import { RegistrationDataEntry } from './RegistrationDataEntry';
 
 const getStyles = ({ typography }) => ({
     container: {

@@ -191,6 +191,10 @@ import {
 import {
     startNewTeiDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.epics';
+import {
+    completeSavingNewTrackedEntityTypeEpic,
+    startSavingNewTrackedEntityTypeEpic,
+} from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -303,5 +307,7 @@ export default combineEpics(
     setTrackedEntityTypeIdOnUrlEpic,
     startNewTeiDataEntrySelfInitialisationEpic,
     startNewEnrollmentDataEntrySelfInitialisationEpic,
+    startSavingNewTrackedEntityTypeEpic,
+    completeSavingNewTrackedEntityTypeEpic,
     ...getDataEntryEpics(),
 );
