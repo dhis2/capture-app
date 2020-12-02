@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/dhis2/capture-app/compare/v1.2.0...v1.3.0) (2020-12-02)
+
+
+### Features
+
+* DHIS2-9650 Display Profile section according to TETSelector value ([#1229](https://github.com/dhis2/capture-app/issues/1229)) ([46cc6fb](https://github.com/dhis2/capture-app/commit/46cc6fb5e01ca98cfb1bd66eee22f561e331703a))
+
 # [1.2.0](https://github.com/dhis2/capture-app/compare/v1.1.0...v1.2.0) (2020-12-02)
 
 
