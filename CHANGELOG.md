@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/dhis2/capture-app/compare/v1.0.1...v1.1.0) (2020-12-02)
+
+
+### Features
+
+* adds tetselector on the new page ([#1227](https://github.com/dhis2/capture-app/issues/1227)) ([d244e6d](https://github.com/dhis2/capture-app/commit/d244e6df121bf46a881ced5cf906d4c95fdb7e38))
+
 ## [1.0.1](https://github.com/dhis2/capture-app/compare/v1.0.0...v1.0.1) (2020-12-01)
 
 
