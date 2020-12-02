@@ -42,6 +42,7 @@ const TeiRegistrationEntryPlain =
       classes,
       onPostProcessErrorMessage,
       onGetUnsavedAttributeValues,
+      ...rest
   }: { ...OwnProps, ...CssClasses }) => {
       const { scopeType } = useScopeInfo(selectedScopeId);
 
@@ -63,6 +64,7 @@ const TeiRegistrationEntryPlain =
                           fieldOptions={fieldOptions}
                           onPostProcessErrorMessage={onPostProcessErrorMessage}
                           onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
+                          {...rest}
                       />
                       {
                           onSave &&
@@ -83,6 +85,10 @@ const TeiRegistrationEntryPlain =
 
 export const TeiRegistrationEntry: ComponentType<OwnProps> =
   compose(
-      withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }) => teiRegistrationMetadata && teiRegistrationMetadata.form }),
+      withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }) => {
+          const form = teiRegistrationMetadata && teiRegistrationMetadata.form;
+          debugger;
+          return form;
+      } }),
       withStyles(styles),
   )(TeiRegistrationEntryPlain);
