@@ -63,7 +63,6 @@ const EnrollmentRegistrationEntryPlain =
               {
                   scopeType === scopeTypes.TRACKER_PROGRAM && formId &&
                   <>
-                      {/* $FlowFixMe */}
                       <EnrollmentDataEntry
                           orgUnit={orgUnit}
                           programId={selectedScopeId}
