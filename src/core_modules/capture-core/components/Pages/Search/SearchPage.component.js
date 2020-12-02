@@ -78,7 +78,6 @@ const Index = ({
     navigateToMainPage,
     cleanSearchRelatedInfo,
     classes,
-    trackedEntityTypesWithCorrelatedPrograms,
     availableSearchOptions,
     preselectedProgramId,
     searchStatus,
@@ -155,7 +154,6 @@ const Index = ({
                         {
                             (selectedSearchScopeType !== searchScopes.PROGRAM) &&
                             <TrackedEntityTypeSelector
-                                trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                                 onSelect={handleSearchScopeSelection}
                                 selectedSearchScopeId={selectedSearchScopeId}
                             />
