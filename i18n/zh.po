@@ -134,8 +134,8 @@ msgstr "注册"
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
 
-msgid "An error has occured. See log for details"
-msgstr "发生错误。查看日志以获取详细信息"
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "Cancel"
 msgstr "取消"
@@ -817,6 +817,9 @@ msgstr "基于选择的项目工作"
 
 msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访APP"
+
+msgid "An error has occured. See log for details"
+msgstr "发生错误。查看日志以获取详细信息"
 
 msgid "Program not found"
 msgstr "没有发现项目"

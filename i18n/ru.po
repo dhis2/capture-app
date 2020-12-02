@@ -139,8 +139,8 @@ msgstr "Регистрация"
 msgid "A future date is not allowed"
 msgstr "Ввод даты будущего периода запрещена"
 
-msgid "An error has occured. See log for details"
-msgstr "Произошла ошибка. Смотрите подробности в лог-файле"
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Отмена"
@@ -846,6 +846,9 @@ msgstr "Работать с выбранной программой"
 
 msgid "open the Tracker Capture app"
 msgstr "Открыть приложение \"Отслеживание объектов\""
+
+msgid "An error has occured. See log for details"
+msgstr "Произошла ошибка. Смотрите подробности в лог-файле"
 
 msgid "Program not found"
 msgstr "Программа не найдена"

@@ -137,8 +137,8 @@ msgstr "Registrering"
 msgid "A future date is not allowed"
 msgstr "En fremtidig dato er ikke tillatt"
 
-msgid "An error has occured. See log for details"
-msgstr "Det har oppstått en feil. Se logg for detaljer"
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -841,6 +841,9 @@ msgstr "For å jobbe med det valgte programmet,"
 
 msgid "open the Tracker Capture app"
 msgstr "åpne Tracker Capture app"
+
+msgid "An error has occured. See log for details"
+msgstr "Det har oppstått en feil. Se logg for detaljer"
 
 msgid "Program not found"
 msgstr "Program ble ikke funnet"

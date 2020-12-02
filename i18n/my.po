@@ -131,7 +131,7 @@ msgstr ""
 msgid "A future date is not allowed"
 msgstr ""
 
-msgid "An error has occured. See log for details"
+msgid "An error has occurred. See log for details"
 msgstr ""
 
 msgid "Cancel"
@@ -813,6 +813,9 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Program not found"

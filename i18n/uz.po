@@ -135,8 +135,8 @@ msgstr "Рўйхатга олиш"
 msgid "A future date is not allowed"
 msgstr "Келажакдаги сана танловига рухсат берилмайди"
 
-msgid "An error has occured. See log for details"
-msgstr "Хатолик юз берди. Тафсилотларни журналдан кўринг."
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Бекор қилиш"
@@ -850,6 +850,9 @@ msgstr "Танланган дастур билан ишлаш учун,"
 
 msgid "open the Tracker Capture app"
 msgstr "Кузатув-Назорат дастурини очинг"
+
+msgid "An error has occured. See log for details"
+msgstr "Хатолик юз берди. Тафсилотларни журналдан кўринг."
 
 msgid "Program not found"
 msgstr "Дастур топилмади"

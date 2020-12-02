@@ -135,8 +135,8 @@ msgstr "Zápis"
 msgid "A future date is not allowed"
 msgstr "Budoucí datum není povoleno"
 
-msgid "An error has occured. See log for details"
-msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Zrušit"
@@ -779,9 +779,11 @@ msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
 msgstr ""
+"Nenašli jste hledané výsledky? Zkuste vyhledat všechny programy, které "
+"používají typ"
 
 msgid "Search in all programs"
-msgstr ""
+msgstr "Hledat ve všech programech"
 
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
@@ -838,6 +840,9 @@ msgstr "Chcete-li pracovat s vybraným programem,"
 
 msgid "open the Tracker Capture app"
 msgstr "otevřít aplikaci Tracker Capture"
+
+msgid "An error has occured. See log for details"
+msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
 
 msgid "Program not found"
 msgstr "Program nebyl nalezen"
