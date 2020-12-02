@@ -78,7 +78,7 @@ class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
         if (!teiRegistrationMetadata) {
             return (
                 <div>
-                    {i18n.t('An error has occured. See log for details')}
+                    {i18n.t('An error has occurred. See log for details')}
                 </div>
             );
         }

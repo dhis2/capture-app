@@ -11,6 +11,10 @@ import Section from '../Section/Section.component';
 import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 
 const styles = theme => ({
+    loadingContainer: {
+        marginLeft: 12,
+        marginTop: 12,
+    },
     d2FormContainer: {
         paddingTop: 10,
         paddingBottom: 10,
@@ -83,6 +87,7 @@ type DirectionClasses = {
 type Props = {
     id: string,
     itemId: string,
+    dataEntryExists: boolean,
     formFoundation: ?RenderFoundation,
     completeButton?: ?React.Element<any>,
     mainButton?: ?React.Element<any>,
@@ -260,7 +265,10 @@ class DataEntry extends React.Component<Props> {
             cancelButton,
             notes,
             dataEntryOutputs,
+            dataEntryExists,
         } = this.props;
+
+        if (!dataEntryExists) { return <div className={classes.loadingContainer}>loading</div>; }
 
         if (!itemId) {
             return (

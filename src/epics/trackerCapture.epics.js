@@ -186,6 +186,9 @@ import {
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
+import {
+    startDataEntryInitialisationEpic,
+} from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -297,5 +300,6 @@ export default combineEpics(
     fallbackSearchEpic,
     fallbackPushPageEpic,
     setTrackedEntityTypeIdOnUrlEpic,
+    startDataEntryInitialisationEpic,
     ...getDataEntryEpics(),
 );

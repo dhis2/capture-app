@@ -14,6 +14,7 @@ import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { scopeTypes } from '../../../metaData';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
+import { RegistrationDataEntry } from './RegistrationDataEntry/RegistrationDataEntry.component';
 
 const getStyles = ({ typography }) => ({
     container: {
@@ -40,23 +41,23 @@ const getStyles = ({ typography }) => ({
     },
 });
 
+export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
+
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
     classes,
     currentOrgUnitId,
-    currentProgramId,
+    currentScopeId,
     newPageStatus,
 }: Props) => {
-    const { scopeType } = useScopeInfo(currentProgramId);
-    const [selectedScopeType, setScopeType] = useState(scopeType);
-    const [selectedScopeId, setScopeId] = useState(currentProgramId);
+    const { scopeType } = useScopeInfo(currentScopeId);
+    const [selectedScopeId, setScopeId] = useState(currentScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
 
     useEffect(() => {
-        setScopeId(currentProgramId);
-        setScopeType(scopeType);
-    }, [scopeType, currentProgramId]);
+        setScopeId(currentScopeId);
+    }, [scopeType, currentScopeId]);
 
     useEffect(() => {
         if (!currentOrgUnitId) {
@@ -71,9 +72,8 @@ const NewPagePlain = ({
         currentOrgUnitId,
     ]);
 
-    const handleRegistrationScopeSelection = (id, type) => {
+    const handleRegistrationScopeSelection = (id) => {
         setScopeId(id);
-        setScopeType(type);
     };
 
     return (<>
@@ -88,9 +88,13 @@ const NewPagePlain = ({
                             New {titleText}
                         </div>
                         {
-                            (!selectedScopeType || selectedScopeType === scopeTypes.TRACKED_ENTITY_TYPE) &&
+                            (!scopeType || scopeType === scopeTypes.TRACKED_ENTITY_TYPE) &&
                                 <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
                         }
+                        <RegistrationDataEntry
+                            dataEntryId={NEW_TEI_DATA_ENTRY_ID}
+                            selectedScopeId={selectedScopeId}
+                        />
                     </div>
                 </Paper>
             }
