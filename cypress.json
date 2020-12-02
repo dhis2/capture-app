@@ -7,5 +7,9 @@
   "chromeWebSecurity": false,
   "defaultCommandTimeout": 60000,
   "projectId": "322xnh",
-  "experimentalFetchPolyfill": true
+  "experimentalFetchPolyfill": true,
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
+  }
 }
