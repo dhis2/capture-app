@@ -9,10 +9,7 @@ const makeMapStateToProps = () => {
     const mapStateToProps = (state: ReduxState) => {
         const teiRegistrationMetadata = teiRegistrationMetadataSelector(state);
 
-        return {
-            teiRegistrationMetadata,
-            orgUnit: state.newRelationshipRegisterTei.orgUnit,
-        };
+        return { teiRegistrationMetadata };
     };
     // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;

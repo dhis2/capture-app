@@ -20,9 +20,9 @@ const styles = theme => ({
     },
     footerBar: {
         display: 'flex',
-        paddingTop: theme.typography.pxToRem(10),
     },
     button: {
+        marginTop: theme.typography.pxToRem(10),
         paddingRight: theme.spacing.unit * 2,
     },
     horizontalFormInnerContainer: {
@@ -308,9 +308,7 @@ class DataEntry extends React.Component<Props> {
                         </div>
                     }
                 </div>
-                <div
-                    className={classes.footerBar}
-                >
+                <div className={classes.footerBar}>
                     {
                         (() => {
                             if (completeButton) {

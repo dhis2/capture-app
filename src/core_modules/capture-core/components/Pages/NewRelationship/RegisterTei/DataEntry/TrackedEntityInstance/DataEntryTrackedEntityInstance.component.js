@@ -1,64 +1,44 @@
 // @flow
-import React, { Component } from 'react';
-import { withTheme } from '@material-ui/core/styles';
+import React from 'react';
+import { withTheme } from '@material-ui/core';
 import type { RenderFoundation, TeiRegistration } from '../../../../../../metaData';
-import ConfiguredTei from './ConfiguredTei.component';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import teiClasses from './trackedEntityInstance.module.css';
+import { TeiRegistrationEntry } from '../../../../../DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.component';
+import { useSaveButtonText } from '../useSaveButtonText';
 
-type Props = {
-    teiRegistrationMetadata: ?TeiRegistration,
+type Props = {|
+    theme: Theme,
     onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
     onGetUnsavedAttributeValues: Function,
     onPostProcessErrorMessage: Function,
-    onCancel: () => void,
-    teiRegistrationMetadata: Object,
-    classes: {
-        fieldLabelMediaBased: string,
-    },
-    theme: Theme,
-};
+    teiRegistrationMetadata?: TeiRegistration,
+|};
 
-class RelationshipTrackedEntityInstance extends Component<Props> {
-    fieldOptions: { theme: Theme };
+const RelationshipTrackedEntityInstance =
+  ({
+      theme,
+      onSave,
+      onGetUnsavedAttributeValues,
+      onPostProcessErrorMessage,
+      teiRegistrationMetadata = {},
+  }: Props) => {
+      const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
+      const { trackedEntityType } = teiRegistrationMetadata || {};
+      const saveButtonText = useSaveButtonText(trackedEntityType.name);
 
-    constructor(props: Props) {
-        super(props);
-        this.fieldOptions = {
-            theme: props.theme,
-            fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased,
-        };
-    }
-
-    handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
-        this.props.onSave(itemId, dataEntryId, formFoundation);
-    }
-
-    render() {
-        const {
-            classes,
-            theme,
-            onSave,
-            onGetUnsavedAttributeValues,
-            onPostProcessErrorMessage,
-            teiRegistrationMetadata,
-            ...passOnProps
-        } = this.props;
-
-        return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <ConfiguredTei
-                id={DATA_ENTRY_ID}
-                selectedScopeId={teiRegistrationMetadata.form.id}
-                onSave={this.handleSave}
-                fieldOptions={this.fieldOptions}
-                onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
-                onPostProcessErrorMessage={onPostProcessErrorMessage}
-                teiRegistrationMetadata={teiRegistrationMetadata}
-                {...passOnProps}
-            />
-        );
-    }
-}
+      return (
+          <TeiRegistrationEntry
+              id={DATA_ENTRY_ID}
+              teiRegistrationMetadata={teiRegistrationMetadata}
+              selectedScopeId={teiRegistrationMetadata.form.id}
+              saveButtonText={saveButtonText}
+              fieldOptions={fieldOptions}
+              onSave={onSave}
+              onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
+              onPostProcessErrorMessage={onPostProcessErrorMessage}
+          />
+      );
+  };
 
 export default withTheme()(RelationshipTrackedEntityInstance);
