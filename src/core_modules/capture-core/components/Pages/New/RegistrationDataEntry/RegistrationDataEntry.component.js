@@ -12,13 +12,16 @@ import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
 
 const translatedTextWithStylesForProgram = (trackedEntityName, programName, orgUnitName) =>
     (<>
-        {i18n.t('Saving a {{trackedEntityName}} in', { trackedEntityName })} <b>{programName}</b> {i18n.t('in')} <b>{orgUnitName}</b>.
+        {i18n.t('Saving a {{trackedEntityName}} in', { trackedEntityName })} <b>{programName}</b>
+        {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.
     </>);
 
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>
-        {i18n.t('Saving a {{trackedEntityName}}', { trackedEntityName })} <b>{i18n.t('without')}</b> {i18n.t('enrollment in')} <b>{orgUnitName}</b>. {i18n.t('Enroll in a program by selecting a program from the top bar.')}
+        {i18n.t('Saving a {{trackedEntityName}}', { trackedEntityName })} <b>{i18n.t('without')}</b> {i18n.t('enrollment')}
+        {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.{' '}
+        {i18n.t('Enroll in a program by selecting a program from the top bar.')}
     </>);
 
 
