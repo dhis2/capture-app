@@ -12,7 +12,6 @@ import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 
 const styles = theme => ({
     loadingContainer: {
-        marginLeft: 12,
         marginTop: 12,
     },
     d2FormContainer: {
@@ -37,7 +36,6 @@ const styles = theme => ({
         paddingTop: theme.typography.pxToRem(10),
     },
     verticalFormInnerContainer: {
-        // overflow: 'auto',
         maxWidth: theme.typography.pxToRem(892),
     },
     verticalDataEntryContainer: {
@@ -63,10 +61,6 @@ const styles = theme => ({
     dataEntryFieldSectionContainer: {
         paddingTop: theme.typography.pxToRem(10),
         paddingBottom: theme.typography.pxToRem(10),
-    },
-    dataEntryFieldSection: {
-        padding: theme.typography.pxToRem(8),
-        maxWidth: theme.typography.pxToRem(892),
     },
 });
 
@@ -185,7 +179,6 @@ class DataEntry extends React.Component<Props> {
                                 className={this.props.classes.dataEntryFieldSectionContainer}
                             >
                                 <Section
-                                    className={this.props.classes.dataEntryFieldSection}
                                     header={
                                         <SectionHeaderSimple
                                             title={section.name}

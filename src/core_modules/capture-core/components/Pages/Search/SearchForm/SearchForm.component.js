@@ -12,7 +12,7 @@ import { ResultsPageSizeContext } from '../../shared-contexts';
 
 const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
-        margin: theme.typography.pxToRem(10),
+        margin: '16px 8px 8px 8px',
     },
     searchRow: {
         display: 'flex',
@@ -200,7 +200,7 @@ const SearchFormIndex = ({
                                     className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
-                                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                                            containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
                                             title={i18n.t('Search {{name}}', { name })}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
@@ -252,7 +252,7 @@ const SearchFormIndex = ({
                                     className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
-                                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                                            containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
                                             title={searchByText}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}

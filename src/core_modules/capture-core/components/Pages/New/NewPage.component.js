@@ -18,7 +18,7 @@ import { RegistrationDataEntry } from './RegistrationDataEntry/RegistrationDataE
 
 const getStyles = ({ typography }) => ({
     container: {
-        padding: '10px 24px 16px 24px',
+        padding: '8px 24px 16px 24px',
     },
     paper: {
         marginBottom: typography.pxToRem(10),
@@ -28,9 +28,18 @@ const getStyles = ({ typography }) => ({
         maxWidth: typography.pxToRem(950),
     },
     title: {
-        padding: '10px 0 0px 10px',
+        padding: '8px 0 0px 8px',
         fontWeight: 500,
-        marginBottom: typography.pxToRem(16),
+    },
+    tetypeContainer: {
+        marginTop: typography.pxToRem(16),
+    },
+    registrationContainer: {
+        marginLeft: typography.pxToRem(8),
+        marginRight: typography.pxToRem(8),
+    },
+    selectorTopMargin: {
+        margin: typography.pxToRem(16),
     },
     emptySelectionPaperContent: {
         display: 'flex',
@@ -89,12 +98,16 @@ const NewPagePlain = ({
                         </div>
                         {
                             (!scopeType || scopeType === scopeTypes.TRACKED_ENTITY_TYPE) &&
-                                <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
+                                <div className={classes.tetypeContainer}>
+                                    <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
+                                </div>
                         }
-                        <RegistrationDataEntry
-                            dataEntryId={NEW_TEI_DATA_ENTRY_ID}
-                            selectedScopeId={selectedScopeId}
-                        />
+                        <div className={classes.registrationContainer}>
+                            <RegistrationDataEntry
+                                dataEntryId={NEW_TEI_DATA_ENTRY_ID}
+                                selectedScopeId={selectedScopeId}
+                            />
+                        </div>
                     </div>
                 </Paper>
             }
