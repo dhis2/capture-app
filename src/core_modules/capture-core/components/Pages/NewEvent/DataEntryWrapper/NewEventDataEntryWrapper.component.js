@@ -3,8 +3,6 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import Paper from '@material-ui/core/Paper/Paper';
 import Button from '../../../Buttons/Button.component';
 import DataEntry from '../DataEntry/DataEntry.container';
 import EventsList from '../RecentlyAddedEventsList/RecentlyAddedEventsList.container';
@@ -51,29 +49,8 @@ type Props = {
 class NewEventDataEntryWrapper extends React.Component<Props> {
     cancelButtonInstance: ?any;
 
-    handleGoBackToAllEvents = () => {
-        this.cancelButtonInstance && this.cancelButtonInstance.handleCancel();
-    }
-
     setCancelButtonInstance = (cancelButtonInstance: ?any) => {
         this.cancelButtonInstance = cancelButtonInstance;
-    }
-
-    renderHeader() {
-        return (
-            <div
-                className={this.props.classes.headerContainer}
-            >
-                <div
-                    className={this.props.classes.header}
-                >
-                    {i18n.t('New event')}
-                </div>
-                <div>
-                    {this.renderHeaderButtons()}
-                </div>
-            </div>
-        );
     }
 
     renderHeaderButtons() {
@@ -93,22 +70,16 @@ class NewEventDataEntryWrapper extends React.Component<Props> {
     }
 
     render() {
-        const { classes, formFoundation, formHorizontal, stage } = this.props;
+        const { formFoundation, formHorizontal, stage } = this.props;
         return (
             <div>
-                <Button className={classes.showAllEvents} onClick={this.handleGoBackToAllEvents}>
-                    <ChevronLeft />
-                    {i18n.t('Show all events')}
-                </Button>
-                <Paper className={classes.dataEntryPaper} data-test="dhis2-capture-new-event-page">
-                    {this.renderHeader()}
-                    <DataEntry
-                        stage={stage}
-                        cancelButtonRef={this.setCancelButtonInstance}
-                        formFoundation={formFoundation}
-                        formHorizontal={formHorizontal}
-                    />
-                </Paper>
+                {this.renderHeaderButtons()}
+                <DataEntry
+                    stage={stage}
+                    cancelButtonRef={this.setCancelButtonInstance}
+                    formFoundation={formFoundation}
+                    formHorizontal={formHorizontal}
+                />
                 <EventsList />
             </div>
         );

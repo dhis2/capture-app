@@ -75,9 +75,6 @@ const getStyles = theme => ({
             paddingTop: '0px !important',
         },
     },
-    dataEntryVerticalContainer: {
-        padding: theme.typography.pxToRem(8),
-    },
 });
 
 const dataEntrySectionNames = {
@@ -440,7 +437,6 @@ type Props = {
         savingContextNames: string,
         topButtonsContainer: string,
         horizontalPaper: string,
-        dataEntryVerticalContainer: string,
         fieldLabelMediaBased: string,
         horizontal: string,
     },
@@ -553,7 +549,7 @@ class NewEventDataEntry extends Component<Props> {
         );
     }
 
-    renderVertical = () => (<div className={this.props.classes.dataEntryVerticalContainer}>{this.renderContent()}</div>);
+    renderVertical = () => (<div>{this.renderContent()}</div>);
 
     renderContent = () => {
         const {

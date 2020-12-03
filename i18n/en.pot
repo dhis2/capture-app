@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-12-03T16:02:03.194Z\n"
-"PO-Revision-Date: 2020-12-03T16:02:03.194Z\n"
+"POT-Creation-Date: 2020-12-03T17:20:09.882Z\n"
+"PO-Revision-Date: 2020-12-03T17:20:09.882Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -593,9 +593,6 @@ msgid ""
 "exists"
 msgstr ""
 
-msgid "New event"
-msgstr ""
-
 msgid "New event relationship"
 msgstr ""
 
@@ -623,6 +620,9 @@ msgid "Choose a program to start reporting"
 msgstr ""
 
 msgid "Choose a category option to start reporting"
+msgstr ""
+
+msgid "New event"
 msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
