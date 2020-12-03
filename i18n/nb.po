@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
+"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -58,9 +58,6 @@ msgstr "Registrert"
 
 msgid "Previously enrolled"
 msgstr "Tidligere registrert"
-
-msgid "Not enrolled"
-msgstr "Ikke registrert"
 
 msgid "This value is validating"
 msgstr "Denne verdien validerer"
@@ -140,8 +137,8 @@ msgstr "Registrering"
 msgid "A future date is not allowed"
 msgstr "En fremtidig dato er ikke tillatt"
 
-msgid "An error has occured. See log for details"
-msgstr "Det har oppstått en feil. Se logg for detaljer"
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -383,7 +380,7 @@ msgid "Find"
 msgstr "Finn"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "Tøm valg"
 
 msgid "Selected registering unit"
 msgstr "Valgt registreringsenhet"
@@ -538,8 +535,8 @@ msgstr "Vis mindre"
 msgid "Show All"
 msgstr "Vis alle"
 
-msgid "\"Choose a registering unit to start reporting"
-msgstr ""
+msgid "Choose a registering unit to start reporting"
+msgstr "Velg en registreringsenhet for å starte rapportering"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "Oppretter en ny {{TET}} i {{program}} i {{orgUnit}}"
@@ -629,16 +626,13 @@ msgid "No events added"
 msgstr "Ingen hendelser lagt til"
 
 msgid "Choose a registering unit and program to get started"
-msgstr ""
+msgstr "Velg en registreringsenhet og program over for å komme i gang"
 
 msgid "Choose a program to start reporting"
-msgstr ""
-
-msgid "Choose a registering unit to start reporting"
-msgstr ""
+msgstr "Velg et program for å starte rapporteringen"
 
 msgid "Choose a category option to start reporting"
-msgstr ""
+msgstr "Velg et kategorialternativ for å starte rapportering"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "Du har ikke tilgang til å opprette en hendelse i gjeldende valg"
@@ -762,15 +756,17 @@ msgstr ""
 " For mer informasjon, åpne konsollfanen i Utviklerverktøy"
 
 msgid "Too many results"
-msgstr ""
+msgstr "For mange resultat"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
 msgstr ""
+"Dette søket returnerte for mange resultater til å vises. Prøv å endre "
+"søkeord eller søke etter flere attributter for å begrense resultatene."
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "Velg en type for å begynne å søke"
 
 msgid "View dashboard"
 msgstr "Vis dashbord"
@@ -780,6 +776,14 @@ msgstr "Vis aktiv registrering"
 
 msgid "Re-enroll"
 msgstr "Registrer på nytt"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
@@ -830,12 +834,16 @@ msgstr "Søk etter"
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
+"Du kan også velge et program fra den øverste linjen og søke i det programmet"
 
 msgid "To work with the selected program,"
 msgstr "For å jobbe med det valgte programmet,"
 
 msgid "open the Tracker Capture app"
 msgstr "åpne Tracker Capture app"
+
+msgid "An error has occured. See log for details"
+msgstr "Det har oppstått en feil. Se logg for detaljer"
 
 msgid "Program not found"
 msgstr "Program ble ikke funnet"

@@ -9,9 +9,9 @@ export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store:
     action$.pipe(
         ofType(trackedEntityTypeSelectorActionTypes.TRACKED_ENTITY_TYPE_ID_ON_URL_SET),
         map(({ payload: { trackedEntityTypeId } }) => {
-            const { currentSelections: { orgUnitId } } = store.value;
+            const { currentSelections: { orgUnitId }, app: { page: currentPage } } = store.value;
 
-            return push(urlArguments({ trackedEntityTypeId, orgUnitId }));
+            return push(`/${currentPage}/${urlArguments({ trackedEntityTypeId, orgUnitId })}`);
         }),
     );
 

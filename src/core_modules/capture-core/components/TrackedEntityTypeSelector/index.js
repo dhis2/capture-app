@@ -1,2 +1,2 @@
 // @flow
-export { TrackedEntityTypeSelector } from './TrackedEntityTypeSelector.component';
+export { TrackedEntityTypeSelector } from './TrackedEntityTypeSelector.container';
