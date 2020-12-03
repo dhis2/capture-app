@@ -1,6 +1,7 @@
 // @flow
+import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
-import NewEventDataEntryWrapper from './NewEventDataEntryWrapper.component';
+import { NewEventDataEntryWrapperComponent } from './NewEventDataEntryWrapper.component';
 import {
     setNewEventFormLayoutDirection,
 } from './newEventDataEntryWrapper.actions';
@@ -35,6 +36,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
-export default connect(makeMapStateToProps, mapDispatchToProps)(NewEventDataEntryWrapper);
+export const NewEventDataEntryWrapper: ComponentType<{||}> =
+  connect(makeMapStateToProps, mapDispatchToProps)(NewEventDataEntryWrapperComponent);

@@ -86,7 +86,6 @@ const specificationForPages = {
 
 const updaterForPages = {
     [pageKeys.MAIN]: updateSelectionsFromUrl,
-    [pageKeys.NEW_EVENT]: updateSelectionsFromUrl,
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,

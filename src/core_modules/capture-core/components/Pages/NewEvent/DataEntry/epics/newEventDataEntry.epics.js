@@ -90,7 +90,6 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         ),
         filter(() => {
             const { app: { page } } = store.value;
-            debugger;
             return page === 'new';
         }),
         filter((action) => {

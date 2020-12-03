@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import DataEntryWrapper from '../DataEntryWrapper/NewEventDataEntryWrapper.container';
+import { NewEventDataEntryWrapper } from '../DataEntryWrapper/NewEventDataEntryWrapper.container';
 import NewRelationshipWrapper from '../NewRelationshipWrapper/NewEventNewRelationshipWrapper.container';
 import SelectionsNoAccess from '../SelectionsNoAccess/dataEntrySelectionsNoAccess.container';
 
@@ -28,7 +28,7 @@ class SelectionsComplete extends Component<Props> {
             <>
                 {showAddRelationship ?
                     <NewRelationshipWrapper /> :
-                    <DataEntryWrapper />
+                    <NewEventDataEntryWrapper />
                 }
             </>
         );

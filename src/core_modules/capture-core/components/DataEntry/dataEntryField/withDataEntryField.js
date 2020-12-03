@@ -125,7 +125,6 @@ const getMapStateToProps = (settings: Settings) => (state: ReduxState, props: Ob
     const { getPassOnFieldData, getPropName } = settings;
     if (getPassOnFieldData && getPassOnFieldData(props)) {
         const propName = getPropName(props);
-        debugger;
         const itemId = state.dataEntries[props.id].itemId;
         const key = getDataEntryKey(props.id, itemId);
         const value = state.dataEntriesFieldsValue[key][propName];
