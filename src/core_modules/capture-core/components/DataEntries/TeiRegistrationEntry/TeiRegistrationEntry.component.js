@@ -39,6 +39,7 @@ const TeiRegistrationEntryPlain =
               {
                   scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
                   <>
+                      {/* $FlowFixMe */}
                       <TrackedEntityInstanceDataEntry
                           orgUnit={orgUnit}
                           formFoundation={formFoundation}
