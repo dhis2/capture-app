@@ -195,6 +195,7 @@ import {
     completeSavingNewTrackedEntityTypeEpic,
     startSavingNewTrackedEntityTypeEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
+import { openNewRegistrationPageWithoutProgramIdEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -309,5 +310,6 @@ export default combineEpics(
     startNewEnrollmentDataEntrySelfInitialisationEpic,
     startSavingNewTrackedEntityTypeEpic,
     completeSavingNewTrackedEntityTypeEpic,
+    openNewRegistrationPageWithoutProgramIdEpic,
     ...getDataEntryEpics(),
 );

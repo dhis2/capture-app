@@ -17,6 +17,7 @@ import { getApi } from '../../d2';
 import { urlArguments } from '../../utils/url';
 
 const exactUrl = (page: string, url: string) => {
+    // todo when page === new and program is Event program then we want to have the page going to another URL?!
     if (page && page !== 'viewEvent') {
         return `/${page}/${url}`;
     }

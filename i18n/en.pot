@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-12-03T15:12:11.470Z\n"
-"PO-Revision-Date: 2020-12-03T15:12:11.470Z\n"
+"POT-Creation-Date: 2020-12-03T16:02:03.194Z\n"
+"PO-Revision-Date: 2020-12-03T16:02:03.194Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -354,9 +354,6 @@ msgid "Program doesn't exist"
 msgstr ""
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
-
-msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
