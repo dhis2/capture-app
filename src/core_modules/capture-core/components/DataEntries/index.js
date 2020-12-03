@@ -9,13 +9,11 @@ export {
     runRulesOnEnrollmentFieldUpdateEpic,
     runRulesOnEnrollmentDataEntryFieldUpdateEpic,
 } from './Enrollment';
-
 export {
     openDataEntryForNewTeiBatchAsync,
     batchActionTypes as teiBatchActionTypes,
     openBatchActionTypes as teiOpenBatchActionTypes,
 } from './TrackedEntityInstance';
-
 export {
     convertGeometryOut,
     convertNoteIn,
@@ -24,7 +22,5 @@ export {
     convertStatusOut,
     getConvertGeometryIn,
 } from './converters/converters';
-
-
 export { EnrollmentRegistrationEntry } from './EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.container';
 export { TeiRegistrationEntry } from './TeiRegistrationEntry/TeiRegistrationEntry.container';
