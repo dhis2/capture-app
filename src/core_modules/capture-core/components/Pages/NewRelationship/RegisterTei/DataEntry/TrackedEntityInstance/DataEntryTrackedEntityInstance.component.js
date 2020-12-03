@@ -4,7 +4,7 @@ import { withTheme } from '@material-ui/core';
 import type { RenderFoundation, TeiRegistration } from '../../../../../../metaData';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import teiClasses from './trackedEntityInstance.module.css';
-import { TeiRegistrationEntry } from '../../../../../DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.component';
+import { TeiRegistrationEntry } from '../../../../../DataEntries';
 import { useSaveButtonText } from '../useSaveButtonText';
 
 type Props = {|

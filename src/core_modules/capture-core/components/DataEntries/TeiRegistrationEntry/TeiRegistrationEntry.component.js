@@ -1,5 +1,8 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
+import { compose } from 'redux';
+import { Button } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
@@ -14,11 +17,6 @@ const styles = ({ typography }) => ({
         marginTop: typography.pxToRem(2),
     },
 });
-export const TeiRegistrationEntryComponent = ({ selectedScopeId, id, ...rest }: OwnProps) => {
-    const { scopeType } = useScopeInfo(selectedScopeId);
-    const { formId, registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-    const orgUnit = useCurrentOrgUnitInfo();
-
 const TeiRegistrationEntryPlain =
   ({
       id,
@@ -33,8 +31,6 @@ const TeiRegistrationEntryPlain =
       ...rest
   }: { ...OwnProps, ...CssClasses }) => {
       const { scopeType } = useScopeInfo(selectedScopeId);
-
-      useDataEntryLifecycle(selectedScopeId, id, scopeType);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
       const orgUnit = useCurrentOrgUnitInfo();
 
@@ -71,11 +67,10 @@ const TeiRegistrationEntryPlain =
       );
   };
 
-export const TeiRegistrationEntry: ComponentType<OwnProps> =
+export const TeiRegistrationEntryComponent: ComponentType<OwnProps> =
   compose(
       withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }) => {
           const form = teiRegistrationMetadata && teiRegistrationMetadata.form;
-          debugger;
           return form;
       } }),
       withStyles(styles),

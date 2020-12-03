@@ -4,7 +4,7 @@ import { withTheme } from '@material-ui/core/styles';
 import type { Enrollment, RenderFoundation } from '../../../../../../metaData';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import enrollmentClasses from './enrollment.module.css';
-import { EnrollmentRegistrationEntry } from '../../../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.component';
+import { EnrollmentRegistrationEntry } from '../../../../../DataEntries';
 import { useSaveButtonText } from '../useSaveButtonText';
 
 type Props = {

@@ -1,5 +1,8 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
+import { Button } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import { compose } from 'redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';
@@ -13,10 +16,6 @@ const styles = ({ typography }) => ({
         marginTop: typography.pxToRem(2),
     },
 });
-export const EnrollmentRegistrationEntryComponent = ({ selectedScopeId, id, ...rest }: OwnProps) => {
-    const { scopeType } = useScopeInfo(selectedScopeId);
-    const { formId, registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-    const orgUnit = useCurrentOrgUnitInfo();
 
 const EnrollmentRegistrationEntryPlain =
   ({
@@ -29,7 +28,6 @@ const EnrollmentRegistrationEntryPlain =
       ...rest
   }: {...OwnProps, ...CssClasses}) => {
       const { scopeType } = useScopeInfo(selectedScopeId);
-      useDataEntryLifecycle(selectedScopeId, id, scopeType);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
       const orgUnit = useCurrentOrgUnitInfo();
 
@@ -64,7 +62,7 @@ const EnrollmentRegistrationEntryPlain =
       );
   };
 
-export const EnrollmentRegistrationEntry: ComponentType<OwnProps> =
+export const EnrollmentRegistrationEntryComponent: ComponentType<OwnProps> =
   compose(
       withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm }),
       withStyles(styles),
