@@ -136,8 +136,8 @@ msgstr "تۆمارکردن"
 msgid "A future date is not allowed"
 msgstr "بەرواری داهاتوو ناکرێت تۆماربکرێت"
 
-msgid "An error has occured. See log for details"
-msgstr "هەڵەیک ڕوویدا، تکایە سەیری لۆگ فایل بکە بۆ وردەکاری زیاتر"
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "Cancel"
 msgstr "لابردن"
@@ -833,6 +833,9 @@ msgstr "بۆ کارکردن لەگەڵ پرۆگرامە هەڵبژێردراوە
 
 msgid "open the Tracker Capture app"
 msgstr "پرۆگرامی بەدواداچوونی کاپچەر/ کاپچەر تراکەر بکەرەوە"
+
+msgid "An error has occured. See log for details"
+msgstr "هەڵەیک ڕوویدا، تکایە سەیری لۆگ فایل بکە بۆ وردەکاری زیاتر"
 
 msgid "Program not found"
 msgstr "پرۆگرام نەدۆزرایەوە"
