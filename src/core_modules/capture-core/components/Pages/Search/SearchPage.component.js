@@ -35,7 +35,7 @@ const getStyles = (theme: Theme) => ({
         maxWidth: theme.typography.pxToRem(950),
     },
     title: {
-        padding: '10px 0 0px 10px',
+        padding: '8px 0 0px 8px',
         fontWeight: 500,
         marginBottom: theme.typography.pxToRem(16),
     },

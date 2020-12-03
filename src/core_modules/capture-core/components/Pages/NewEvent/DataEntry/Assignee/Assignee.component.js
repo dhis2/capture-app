@@ -8,7 +8,7 @@ const getStyles = () => ({
     container: {
         display: 'flex',
         alignItems: 'center',
-        padding: 8,
+        padding: '8px 8px 8px 12px',
     },
     containerVertical: {
         display: 'flex',

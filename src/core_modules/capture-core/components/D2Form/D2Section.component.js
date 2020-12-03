@@ -7,9 +7,6 @@ import D2SectionFields from './D2SectionFields.container';
 import { Section as MetaDataSection } from '../../metaData';
 
 const getStyles = theme => ({
-    sectionFieldsInSection: {
-        margin: theme.spacing.unit,
-    },
     section: {
         backgroundColor: 'white',
         maxWidth: theme.typography.pxToRem(892),
@@ -20,7 +17,6 @@ type Props = {
     sectionMetaData: MetaDataSection,
     isHidden?: ?boolean,
     classes: {
-        sectionFieldsInSection: string,
         section: string,
     },
     formHorizontal: ?boolean,
@@ -70,19 +66,15 @@ class D2Section extends React.PureComponent<Props> {
                     elevation={2}
                     className={classes.section}
                 >
-                    <div
-                        className={classes.sectionFieldsInSection}
-                    >
-                        {/* $FlowFixMe[cannot-spread-inexact] automated comment
-                          */}
-                        <D2SectionFields
-                            ref={(instance) => {
-                                this.sectionFieldsInstance = instance;
-                            }}
-                            fieldsMetaData={sectionMetaData.elements}
-                            {...passOnProps}
-                        />
-                    </div>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                    <D2SectionFields
+                        ref={(instance) => {
+                            this.sectionFieldsInstance = instance;
+                        }}
+                        fieldsMetaData={sectionMetaData.elements}
+                        {...passOnProps}
+                    />
+
                 </Section>
             </div>
         );
