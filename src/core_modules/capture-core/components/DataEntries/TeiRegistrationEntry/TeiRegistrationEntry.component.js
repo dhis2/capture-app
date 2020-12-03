@@ -1,6 +1,5 @@
 // @flow
-import React, { useEffect, type ComponentType } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { type ComponentType } from 'react';
 import { compose } from 'redux';
 import { Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
@@ -33,8 +32,6 @@ const TeiRegistrationEntryPlain =
       ...rest
   }: { ...OwnProps, ...CssClasses }) => {
       const { scopeType } = useScopeInfo(selectedScopeId);
-
-      useDataEntryLifecycle(selectedScopeId, id, scopeType);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
       const orgUnit = useCurrentOrgUnitInfo();
 
@@ -43,6 +40,7 @@ const TeiRegistrationEntryPlain =
               {
                   scopeType === scopeTypes.TRACKED_ENTITY_TYPE && formId &&
                   <>
+                      {/* $FlowFixMe */}
                       <TrackedEntityInstanceDataEntry
                           orgUnit={orgUnit}
                           formFoundation={formFoundation}
@@ -71,7 +69,7 @@ const TeiRegistrationEntryPlain =
       );
   };
 
-export const TeiRegistrationEntry: ComponentType<OwnProps> =
+export const TeiRegistrationEntryComponent: ComponentType<OwnProps> =
   compose(
       withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }) => {
           const form = teiRegistrationMetadata && teiRegistrationMetadata.form;
