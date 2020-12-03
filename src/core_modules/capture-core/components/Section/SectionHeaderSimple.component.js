@@ -16,7 +16,7 @@ const styles = theme => ({
         ...theme.typography.title,
         fontSize: 16,
         fontWeight: 500,
-        padding: '16px 8px 16px 8px',
+        padding: '16px 8px 16px 12px',
     },
     children: {
         flexGrow: 1,

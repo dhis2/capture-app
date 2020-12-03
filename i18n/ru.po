@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
+"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -60,9 +60,6 @@ msgstr "Зарегистрирован"
 
 msgid "Previously enrolled"
 msgstr "Зарегистрирован ранее"
-
-msgid "Not enrolled"
-msgstr "Не зарегистрирован"
 
 msgid "This value is validating"
 msgstr "Идет валидация значения"
@@ -142,8 +139,8 @@ msgstr "Регистрация"
 msgid "A future date is not allowed"
 msgstr "Ввод даты будущего периода запрещена"
 
-msgid "An error has occured. See log for details"
-msgstr "Произошла ошибка. Смотрите подробности в лог-файле"
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Отмена"
@@ -543,7 +540,7 @@ msgstr "Покажи поменьше"
 msgid "Show All"
 msgstr "Показать все"
 
-msgid "\"Choose a registering unit to start reporting"
+msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
@@ -636,9 +633,6 @@ msgid "Choose a registering unit and program to get started"
 msgstr ""
 
 msgid "Choose a program to start reporting"
-msgstr ""
-
-msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Choose a category option to start reporting"
@@ -788,6 +782,14 @@ msgstr "Смотреть действующие регистрации"
 msgid "Re-enroll"
 msgstr "Перерегистрация"
 
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr "У вас нет прав на исправление данного события"
 
@@ -844,6 +846,9 @@ msgstr "Работать с выбранной программой"
 
 msgid "open the Tracker Capture app"
 msgstr "Открыть приложение \"Отслеживание объектов\""
+
+msgid "An error has occured. See log for details"
+msgstr "Произошла ошибка. Смотрите подробности в лог-файле"
 
 msgid "Program not found"
 msgstr "Программа не найдена"

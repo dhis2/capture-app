@@ -6,7 +6,7 @@ import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { teiRegistrationEntryActionTypes } from './TeiRegistrationEntry.actions';
-import { openDataEntryForNewTeiBatchAsync } from '../index';
+import { openDataEntryForNewTeiBatchAsync } from '../TrackedEntityInstance';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
 

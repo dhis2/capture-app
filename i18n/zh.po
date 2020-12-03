@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
+"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -30,14 +30,16 @@ msgstr "今天"
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
-msgstr "将 "
+msgstr "造成这种情况的可能原因是不支持浏览器或模式（例如隐私模式）。有关详细信息，请参见日志。"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
-msgstr "在同一个容器中你打开了其它版本的采集App。当前，该应用仅仅支持同时运行一个版本应用。请刷新页面，如果你想使用该版本。注意将关闭其它版本。"
+msgstr ""
+"您在同一域中打开了另一个版本的Capture App。当前，Capture "
+"App仅支持同时运行一个版本（在同一域中）。如果您想再次使用此版本，请刷新此页面，但是请注意，它将关闭其他版本。"
 
 msgid "Organisation unit"
 msgstr "机构"
@@ -53,9 +55,6 @@ msgstr "已注册"
 
 msgid "Previously enrolled"
 msgstr "以前报名的"
-
-msgid "Not enrolled"
-msgstr "未注册"
 
 msgid "This value is validating"
 msgstr "值正在被验证"
@@ -135,23 +134,23 @@ msgstr "注册"
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
 
-msgid "An error has occured. See log for details"
-msgstr "发生一个错误,看日志"
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "Cancel"
 msgstr "取消"
 
 msgid "Unsaved changes"
-msgstr "没有保存的修改"
+msgstr "未保存的更改"
 
 msgid "Leaving this page will discard the changes you made to this event."
-msgstr "离开将丢失对事件的修改"
+msgstr "离开此页面将放弃您对此事件所做的更改。"
 
 msgid "Yes, discard"
-msgstr "是,忽略"
+msgstr "是的，丢弃"
 
 msgid "No, stay here"
-msgstr "不,继续呆着"
+msgstr "不，待在这里"
 
 msgid "validation failed"
 msgstr "验证失败"
@@ -184,7 +183,7 @@ msgid "Back to form"
 msgstr "回到表单"
 
 msgid "Save anyway"
-msgstr "总是保存"
+msgstr "仍然保存"
 
 msgid "Validation errors and warnings"
 msgstr "验证错误和警告"
@@ -199,7 +198,7 @@ msgid "Some operations are still runnning. Please wait.."
 msgstr "有些操作一直在运行,请等待"
 
 msgid "Operations running"
-msgstr "操作在运行"
+msgstr "运作中"
 
 msgid "Sort"
 msgstr "排序"
@@ -208,7 +207,7 @@ msgid "No events to display"
 msgstr "无事件可显示"
 
 msgid "Data for offline list not present"
-msgstr "离线列表数据不在"
+msgstr "离线列表的数据不存在"
 
 msgid "Close"
 msgstr "关闭"
@@ -259,7 +258,7 @@ msgid "Last 3 months"
 msgstr "最近3个月"
 
 msgid "Custom range"
-msgstr "定制范围"
+msgstr "自订范围"
 
 msgid "Max"
 msgstr "最大"
@@ -531,8 +530,8 @@ msgstr "显示较少<br>"
 msgid "Show All"
 msgstr "显示全部"
 
-msgid "\"Choose a registering unit to start reporting"
-msgstr "“选择一个注册机构开始报告"
+msgid "Choose a registering unit to start reporting"
+msgstr "选择一个注册机构开始填报"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
@@ -619,9 +618,6 @@ msgstr "选择注册机构和项目后开始"
 
 msgid "Choose a program to start reporting"
 msgstr "选择一个项目开始报告"
-
-msgid "Choose a registering unit to start reporting"
-msgstr "选择一个注册机构开始填报"
 
 msgid "Choose a category option to start reporting"
 msgstr "选择一个分类选项以开始填报"
@@ -760,6 +756,14 @@ msgstr "查看有效的注册"
 msgid "Re-enroll"
 msgstr "重新注册"
 
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
+
+msgid "Search in all programs"
+msgstr "搜索所有项目"
+
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
@@ -813,6 +817,9 @@ msgstr "基于选择的项目工作"
 
 msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访APP"
+
+msgid "An error has occured. See log for details"
+msgstr "发生错误。查看日志以获取详细信息"
 
 msgid "Program not found"
 msgstr "没有发现项目"

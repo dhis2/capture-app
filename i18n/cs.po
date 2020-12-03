@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
+"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -56,9 +56,6 @@ msgstr "Zapsáno"
 
 msgid "Previously enrolled"
 msgstr "Dříve zapsáno"
-
-msgid "Not enrolled"
-msgstr "Není zapsáno"
 
 msgid "This value is validating"
 msgstr "Tato hodnota se ověřuje"
@@ -138,8 +135,8 @@ msgstr "Zápis"
 msgid "A future date is not allowed"
 msgstr "Budoucí datum není povoleno"
 
-msgid "An error has occured. See log for details"
-msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Zrušit"
@@ -534,8 +531,8 @@ msgstr "Ukázat méně"
 msgid "Show All"
 msgstr "Ukázat vše"
 
-msgid "\"Choose a registering unit to start reporting"
-msgstr "\"Vyberte registraci jednotky pro zahájení hlášení"
+msgid "Choose a registering unit to start reporting"
+msgstr "Vyberte registraci jednotky a začněte hlásit"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "Vytváření nového {{TET}} v {{program}} v {{orgUnit}}"
@@ -627,9 +624,6 @@ msgstr "Začněte registrací jednotky a výběrem programu"
 
 msgid "Choose a program to start reporting"
 msgstr "Vyberte program k zahájení hlášení zpráv"
-
-msgid "Choose a registering unit to start reporting"
-msgstr "Vyberte registraci jednotky a začněte hlásit"
 
 msgid "Choose a category option to start reporting"
 msgstr "Chcete-li začít hlášení zpráv, vyberte možnost kategorie"
@@ -781,6 +775,16 @@ msgstr "Zobrazit aktivní zápisy"
 msgid "Re-enroll"
 msgstr "Znovu zapsat"
 
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Nenašli jste hledané výsledky? Zkuste vyhledat všechny programy, které "
+"používají typ"
+
+msgid "Search in all programs"
+msgstr "Hledat ve všech programech"
+
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
 
@@ -836,6 +840,9 @@ msgstr "Chcete-li pracovat s vybraným programem,"
 
 msgid "open the Tracker Capture app"
 msgstr "otevřít aplikaci Tracker Capture"
+
+msgid "An error has occured. See log for details"
+msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
 
 msgid "Program not found"
 msgstr "Program nebyl nalezen"

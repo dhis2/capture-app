@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-11-30T16:36:43.340Z\n"
-"PO-Revision-Date: 2020-11-30T16:36:43.340Z\n"
+"POT-Creation-Date: 2020-12-03T15:06:55.065Z\n"
+"PO-Revision-Date: 2020-12-03T15:06:55.065Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -536,10 +536,13 @@ msgstr ""
 msgid "without"
 msgstr ""
 
-msgid "enrollment in"
+msgid "enrollment"
 msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
+msgid "enrollment in"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"

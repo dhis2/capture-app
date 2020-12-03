@@ -6,24 +6,12 @@ import { Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
-import { startNewTeiDataEntryInitialisation } from './TeiRegistrationEntry.actions';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import type { OwnProps } from './TeiRegistrationEntry.types';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import { withSaveHandler } from '../../DataEntry';
 
-const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
-    const dispatch = useDispatch();
-    const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
-    const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-    const registrationFormReady = !!formId;
-    useEffect(() => {
-        if (registrationFormReady && scopeType === scopeTypes.TRACKED_ENTITY_TYPE) {
-            dispatch(startNewTeiDataEntryInitialisation({ selectedOrgUnitId, selectedScopeId, dataEntryId, formFoundation }));
-        }
-    }, [scopeType, dataEntryId, selectedScopeId, selectedOrgUnitId, registrationFormReady, formFoundation, dispatch]);
-};
 
 const styles = ({ typography }) => ({
     marginTop: {

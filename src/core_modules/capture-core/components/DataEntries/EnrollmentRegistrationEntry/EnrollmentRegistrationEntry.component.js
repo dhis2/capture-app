@@ -6,36 +6,17 @@ import { Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
-import { startNewEnrollmentDataEntryInitialisation } from './EnrollmentRegistrationEntry.actions';
 import { EnrollmentDataEntry } from '../Enrollment';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
 
-const useDataEntryLifecycle = (selectedScopeId, dataEntryId, scopeType) => {
-    const dispatch = useDispatch();
-    const { id: selectedOrgUnitId } = useCurrentOrgUnitInfo();
-    const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-    const registrationFormReady = !!formId;
-    useEffect(() => {
-        if (registrationFormReady && scopeType === scopeTypes.TRACKER_PROGRAM) {
-            dispatch(
-                startNewEnrollmentDataEntryInitialisation(
-                    { selectedOrgUnitId, selectedScopeId, dataEntryId, formFoundation },
-                ),
-            );
-        }
-    }, [
-        scopeType,
-        dataEntryId,
-        selectedScopeId,
-        selectedOrgUnitId,
-        registrationFormReady,
-        formFoundation,
-        dispatch,
-    ]);
-};
+const styles = ({ typography }) => ({
+    marginTop: {
+        marginTop: typography.pxToRem(2),
+    },
+});
 
 const styles = ({ typography }) => ({
     marginTop: {
