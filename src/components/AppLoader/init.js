@@ -3,7 +3,6 @@
 import log from 'loglevel';
 import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2';
 import environments from 'capture-core/constants/environments';
-// import moment from 'capture-core/utils/moment/momentResolver';
 import moment from 'moment';
 import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
 import { setD2 } from 'capture-core/d2/d2Instance';

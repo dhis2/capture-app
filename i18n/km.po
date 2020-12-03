@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-18T14:27:41.082Z\n"
+"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: Khmer (https://www.transifex.com/hisp-uio/teams/100509/km/)\n"
@@ -50,9 +50,6 @@ msgid "Enrolled"
 msgstr ""
 
 msgid "Previously enrolled"
-msgstr ""
-
-msgid "Not enrolled"
 msgstr ""
 
 msgid "This value is validating"
@@ -133,7 +130,7 @@ msgstr ""
 msgid "A future date is not allowed"
 msgstr ""
 
-msgid "An error has occured. See log for details"
+msgid "An error has occurred. See log for details"
 msgstr ""
 
 msgid "Cancel"
@@ -529,7 +526,7 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
-msgid "\"Choose a registering unit to start reporting"
+msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
@@ -616,9 +613,6 @@ msgid "Choose a registering unit and program to get started"
 msgstr ""
 
 msgid "Choose a program to start reporting"
-msgstr ""
-
-msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Choose a category option to start reporting"
@@ -758,6 +752,14 @@ msgstr ""
 msgid "Re-enroll"
 msgstr ""
 
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr ""
 
@@ -810,6 +812,9 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Program not found"

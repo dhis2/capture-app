@@ -12,6 +12,7 @@ import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 
 const styles = theme => ({
     loadingContainer: {
+        marginLeft: 12,
         marginTop: 12,
     },
     d2FormContainer: {
