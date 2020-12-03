@@ -3,8 +3,7 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
-    selectionsIncompleteActionTypes as newEventPageSelectionsIncompleteActionTypes,
-} from '../../components/Pages/NewEvent';
+} from '../../components/DataEntries/SingleEventRegistrationEntry';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
@@ -48,12 +47,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.page = null;
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [newEventPageSelectionsIncompleteActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;

@@ -3,7 +3,6 @@ import { combineEpics } from 'redux-observable';
 import {
     cancelNewEventEpic,
     cancelNewEventLocationChangeEpic,
-    cancelNewEventIncompleteSelectionsLocationChangeEpic,
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
@@ -19,10 +18,10 @@ import {
     saveNewEventRelationshipsIfExistsEpic,
     saveNewEventRelationshipFinishedEpic,
     teiForNewEventRelationshipSavedEpic,
-} from 'capture-core/components/Pages/NewEvent';
+} from '../core_modules/capture-core/components/DataEntries/SingleEventRegistrationEntry';
 import {
     openNewEventPageLocationChangeEpic,
-} from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
+} from '../core_modules/capture-core/components/DataEntries/SingleEventRegistrationEntry/SingleEventRegistrationEntry.epics';
 
 import {
     initEventListEpic,
@@ -32,26 +31,26 @@ import {
     updateTemplateEpic,
     addTemplateEpic,
     deleteTemplateEpic,
-} from 'capture-core/components/Pages/MainPage/EventWorkingLists';
+} from '../core_modules/capture-core/components/Pages/MainPage/EventWorkingLists';
 
 import {
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
-} from 'capture-core/components/Pages/EditEvent/editEvent.epics';
+} from '../core_modules/capture-core/components/Pages/EditEvent/editEvent.epics';
 import {
     openEditEventInDataEntryEpic,
     runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
     runRulesOnUpdateFieldForEditSingleEventEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventDataEntry.epics';
+} from '../core_modules/capture-core/components/Pages/EditEvent/DataEntry/epics/editEventDataEntry.epics';
 import {
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
-} from 'capture-core/components/Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/editEventDataEntry.epics';
+} from '../core_modules/capture-core/components/Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/editEventDataEntry.epics';
 
 import {
     loadViewEventDataEntryEpic,
-} from 'capture-core/components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.epics';
+} from '../core_modules/capture-core/components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.epics';
 import {
     getEventOpeningFromEventListEpic,
     getEventFromUrlEpic as getViewEventFromUrlEpic,
@@ -60,75 +59,75 @@ import {
     backToMainPageEpic,
     backToMainPageLocationChangeEpic,
     openAddRelationshipForViewEventEpic,
-} from 'capture-core/components/Pages/ViewEvent/epics/viewEvent.epics';
+} from '../core_modules/capture-core/components/Pages/ViewEvent/epics/viewEvent.epics';
 
 import {
     saveEditEventEpic,
     saveEditEventLocationChangeEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/saveEditSingleEvent.epics';
+} from '../core_modules/capture-core/components/Pages/EditEvent/DataEntry/epics/saveEditSingleEvent.epics';
 import {
     cancelEditEventEpic,
     cancelEditEventLocationChangeEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/cancelEditSingleEvent.epics';
+} from '../core_modules/capture-core/components/Pages/EditEvent/DataEntry/epics/cancelEditSingleEvent.epics';
 import {
     addNoteForEditSingleEventEpic,
     removeNoteForEditSingleEventEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/addNoteForEditSingleEvent.epics';
+} from '../core_modules/capture-core/components/Pages/EditEvent/DataEntry/epics/addNoteForEditSingleEvent.epics';
 import {
     goingOnlineEpic,
-} from 'capture-core/components/Connectivity/connectivity.epics';
+} from '../core_modules/capture-core/components/Connectivity/connectivity.epics';
 import {
     networkMonitorStatusEpic,
-} from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
+} from '../core_modules/capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
 import {
     setOrgUnit,
     setProgram,
     goBackToListContext,
-} from 'capture-core/components/LockedSelector/QuickSelector/epics/setSelection.epics';
+} from '../core_modules/capture-core/components/LockedSelector/QuickSelector/epics/setSelection.epics';
 import {
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
-} from 'capture-core/components/LockedSelector/QuickSelector';
+} from '../core_modules/capture-core/components/LockedSelector/QuickSelector';
 import {
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
-} from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
+} from '../core_modules/capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
 import {
     resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
-} from 'capture-core/components/Pages/epics/resetCategoriesAfterSettingOrgUnitIfApplicable.epic';
+} from '../core_modules/capture-core/components/Pages/epics/resetCategoriesAfterSettingOrgUnitIfApplicable.epic';
 import {
     calculateSelectionsCompletenessEpic,
-} from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
+} from '../core_modules/capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
-} from 'capture-core/components/Pages/MainPage/WorkingListsCommon';
+} from '../core_modules/capture-core/components/Pages/MainPage/WorkingListsCommon';
 import {
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,
     TeiRelationshipNewOrEditSearchEpic,
-} from 'capture-core/components/Pages/NewRelationship/TeiRelationship/teiRelationship.epics';
+} from '../core_modules/capture-core/components/Pages/NewRelationship/TeiRelationship/teiRelationship.epics';
 import {
     teiSearchEpic,
     teiSearchSetProgramEpic,
     teiNewSearchEpic,
     teiSearchChangePageEpic,
-} from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
+} from '../core_modules/capture-core/components/TeiSearch/epics/teiSearch.epics';
 import {
     getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
     emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
     validationForNewEnrollmentUrlUpdateEpic,
     openNewEnrollmentInDataEntryEpic,
     saveNewEnrollmentEpic,
-} from 'capture-core/components/Pages/NewEnrollment';
+} from '../core_modules/capture-core/components/Pages/NewEnrollment';
 import {
     asyncUpdateFieldEpic,
-} from 'capture-core/components/D2Form';
+} from '../core_modules/capture-core/components/D2Form';
 import {
     filterFormFieldOrgUnitsEpic,
-} from 'capture-core/components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.epics';
+} from '../core_modules/capture-core/components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.epics';
 
 import {
     teiSearchFilterOrgUnitsEpic,
-} from 'capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
+} from '../core_modules/capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
 
 import {
     loadRelationshipsForViewEventEpic,
@@ -138,26 +137,26 @@ import {
     deleteRelationshipForViewEventEpic,
     saveRelationshipAfterSavingTeiForViewEventEpic,
     handleViewEventRelationshipSaveTeiFailedEpic,
-} from 'capture-core/components/Pages/ViewEvent/Relationship/ViewEventRelationships.epics';
+} from '../core_modules/capture-core/components/Pages/ViewEvent/Relationship/ViewEventRelationships.epics';
 
 import {
     loadNotesForViewEventEpic,
     addNoteForViewEventEpic,
     saveNoteForViewEventFailedEpic,
-} from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
+} from '../core_modules/capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
 
 import {
     openNewRelationshipRegisterTeiEpic,
     loadSearchGroupDuplicatesForReviewEpic,
-} from 'capture-core/components/Pages/NewRelationship/RegisterTei';
+} from '../core_modules/capture-core/components/Pages/NewRelationship/RegisterTei';
 
 import {
     runRulesOnEnrollmentFieldUpdateEpic,
     runRulesOnEnrollmentDataEntryFieldUpdateEpic,
-} from 'capture-core/components/DataEntries';
-import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
+} from '../core_modules/capture-core/components/DataEntries';
+import { saveAssigneeEpic } from '../core_modules/capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
 
-import { loadCoreEpic } from 'capture-core/init';
+import { loadCoreEpic } from '../core_modules/capture-core/init';
 import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../components/AppStart';
 
 import getDataEntryEpics from './getDataEntryEpics';
@@ -222,7 +221,6 @@ export default combineEpics(
     saveNewEventEpic,
     cancelNewEventLocationChangeEpic,
     cancelNewEventEpic,
-    cancelNewEventIncompleteSelectionsLocationChangeEpic,
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
     openEditEventInDataEntryEpic,

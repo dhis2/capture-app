@@ -3,10 +3,10 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import {
     recentlyAddedEventsActionTypes,
-} from '../../components/Pages/NewEvent/RecentlyAddedEventsList';
+} from '../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList';
 import {
     listId,
-} from '../../components/Pages/NewEvent/RecentlyAddedEventsList/RecentlyAddedEventsList.const';
+} from '../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 
 
 export const recentlyAddedEventsDesc = createReducerDescription({

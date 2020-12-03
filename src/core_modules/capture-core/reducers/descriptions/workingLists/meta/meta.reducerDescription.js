@@ -1,7 +1,7 @@
 // @flow
 import { createReducerDescription } from '../../../../trackerRedux/trackerReducer';
 import { workingListsCommonActionTypes } from '../../../../components/Pages/MainPage/WorkingListsCommon';
-import { recentlyAddedEventsActionTypes } from '../../../../components/Pages/NewEvent/RecentlyAddedEventsList';
+import { recentlyAddedEventsActionTypes } from '../../../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList';
 
 export const workingListsMetaDesc = createReducerDescription({
     [workingListsCommonActionTypes.LIST_VIEW_INIT]: (state, action) => {
