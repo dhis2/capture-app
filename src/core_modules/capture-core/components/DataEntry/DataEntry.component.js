@@ -22,7 +22,7 @@ const styles = theme => ({
         display: 'flex',
     },
     button: {
-        marginTop: theme.typography.pxToRem(10),
+        marginTop: theme.typography.pxToRem(2),
         paddingRight: theme.spacing.unit * 2,
     },
     horizontalFormInnerContainer: {
