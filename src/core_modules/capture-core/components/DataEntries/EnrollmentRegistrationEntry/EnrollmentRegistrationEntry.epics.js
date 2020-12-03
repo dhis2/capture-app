@@ -9,7 +9,7 @@ import { enrollmentRegistrationEntryActionTypes } from './EnrollmentRegistration
 import { openDataEntryForNewEnrollmentBatchAsync } from '../index';
 import { getTrackerProgramThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
-import { TrackerProgram } from '../../../metaData/Program';
+import { type TrackerProgram } from '../../../metaData/Program';
 
 export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: InputObservable) =>
     action$.pipe(

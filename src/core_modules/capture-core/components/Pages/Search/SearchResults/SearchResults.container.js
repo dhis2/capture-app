@@ -8,7 +8,6 @@ import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScope
 import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
 import { searchScopes, PAGINATION } from '../SearchPage.constants';
 
-
 const getCurrentScope = (scopeId: string, scopeType: $Keys<typeof searchScopes>) => {
     if (!scopeId) {
         return null;
