@@ -5,10 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-11-18T13:22:41.673Z\n"
-"PO-Revision-Date: 2020-11-18T13:22:41.673Z\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
-"PO-Revision-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2020-12-03T16:03:19.413Z\n"
+"PO-Revision-Date: 2020-12-03T16:03:19.413Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -523,35 +521,6 @@ msgstr ""
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
-
-msgid "Save and add another"
-msgstr ""
-
-msgid "Save and exit"
-msgstr ""
-
-msgid "Finish"
-msgstr ""
-
-msgid "Switch to form view"
-msgstr ""
-
-msgid "Switch to row view"
-msgstr ""
-
-msgid "New {{TET}}"
-msgstr ""
-
-msgid "Working Lists"
-msgstr ""
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr ""
-
 msgid "Assigned user"
 msgstr ""
 
@@ -580,7 +549,22 @@ msgid ""
 "exists"
 msgstr ""
 
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Finish"
+msgstr ""
+
 msgid "New event"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
 msgstr ""
 
 msgid "New event relationship"

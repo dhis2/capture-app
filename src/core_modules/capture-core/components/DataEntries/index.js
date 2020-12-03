@@ -1,10 +1,8 @@
 // @flow
 export {
     Enrollment as EnrollmentDataEntry,
-    sectionKeys as sectionKeysForEnrollmentDataEntry,
     openDataEntryForNewEnrollmentBatchAsync,
     runRulesOnUpdateFieldBatch,
-    buildServerData as buildServerDataForEnrollmentDataEntry,
     openBatchActionTypes as enrollmentOpenBatchActionTypes,
     enrollmentBatchActionTypes,
     runRulesOnEnrollmentFieldUpdateEpic,

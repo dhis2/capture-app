@@ -16,9 +16,6 @@ import {
     actionTypes as setCurrentSelectionsActionTypes,
 } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import {
-    urlActionTypes as newEnrollmentUrlActionTypes,
-} from '../../components/Pages/NewEnrollment';
-import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
@@ -37,10 +34,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         const newState = { ...state, page: action.payload.page };
         return newState;
     },
-    [newEnrollmentUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => ({
-        ...state,
-        page: action.payload.nextPage,
-    }),
     [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;

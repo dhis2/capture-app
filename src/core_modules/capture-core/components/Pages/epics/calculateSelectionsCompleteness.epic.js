@@ -3,9 +3,6 @@ import programs from 'capture-core/metaDataMemoryStores/programCollection/progra
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import {
-    urlActionTypes as newEnrollmentUrlActionTypes,
-} from '../NewEnrollment';
-import {
     selectionsCompletenessCalculated,
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
@@ -41,7 +38,6 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
             lockedSelectorActionTypes.PROGRAM_ID_SET,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
-            newEnrollmentUrlActionTypes.VALID_SELECTIONS_FROM_URL,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,
         ),
