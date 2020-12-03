@@ -140,7 +140,7 @@ msgid "A future date is not allowed"
 msgstr "لا يسمح بإدخال تاريخ في المستقبل"
 
 msgid "An error has occurred. See log for details"
-msgstr ""
+msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
 
 msgid "Cancel"
 msgstr "إلغاء"
@@ -776,9 +776,11 @@ msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
 msgstr ""
+"لم يتم إيجاد النتائج التي كنت تبحث عنها؟ حاول البحث في جميع البرامج التي "
+"تستخدم النوع"
 
 msgid "Search in all programs"
-msgstr ""
+msgstr "البحث في جميع البرامج"
 
 msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
