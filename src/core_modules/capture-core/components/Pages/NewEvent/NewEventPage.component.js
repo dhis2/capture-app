@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import DataEntrySelectionsComplete from './SelectionsComplete/SelectionsComplete.container';
+import { EventProgramRegistrationEntry } from './SelectionsComplete/SelectionsComplete.container';
 import { DataEntrySelectionsIncomplete } from './SelectionsIncomplete/DataEntrySelectionsIncomplete.container';
 import { TrackerProgramHandler } from '../../TrackerProgramHandler';
 import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
@@ -26,7 +26,7 @@ class Index extends React.Component<Props> {
 
         return (
             <TrackerProgramHandler>
-                <DataEntrySelectionsComplete />
+                <EventProgramRegistrationEntry />
             </TrackerProgramHandler>
         );
     }

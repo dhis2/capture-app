@@ -138,7 +138,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     }),
     [lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN]: state => ({
         ...state,
-        page: 'newEvent',
+        page: 'new',
         locationSwitchInProgress: true,
     }),
     [lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_WITHOUT_PROGRAM_ID_OPEN]: state => ({

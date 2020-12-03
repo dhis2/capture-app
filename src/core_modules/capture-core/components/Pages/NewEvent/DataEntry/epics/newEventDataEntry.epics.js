@@ -90,7 +90,8 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         ),
         filter(() => {
             const { app: { page } } = store.value;
-            return page === 'newEvent';
+            debugger;
+            return page === 'new';
         }),
         filter((action) => {
             const type = action.type;
@@ -145,7 +146,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         ),
         filter(() => {
             const { app: { page } } = store.value;
-            return page === 'newEvent';
+            return page === 'new';
         }),
         filter((action) => {
             // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATED and the underlying action is not SET_ORG_UNIT or SELECTIONS_FROM_URL_VALID

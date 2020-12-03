@@ -1,10 +1,12 @@
 // @flow
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
+import { compose } from 'redux';
 import SelectionsComplete from './SelectionsComplete.component';
 import withBrowserBackWarning from '../../../../HOC/withBrowserBackWarning';
 import dataEntryHasChanges from '../../../DataEntry/common/dataEntryHasChanges';
 import { makeEventAccessSelector } from './selectionsComplete.selectors';
+import { withLoadingIndicator } from '../../../../HOC';
 
 const dialogConfig = {
     header: i18n.t('Unsaved changes'),
@@ -18,7 +20,8 @@ const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-
 const makeMapStateToProps = () => {
     const eventAccessSelector = makeEventAccessSelector();
     // $FlowFixMe[not-an-object] automated comment
-    return (state: ReduxState) => ({
+    return (state: ReduxState, { id }) => ({
+        ready: state.dataEntries[id],
         showAddRelationship: !!state.newEventPage.showAddRelationship,
         eventAccess: eventAccessSelector(state),
     });
@@ -27,6 +30,9 @@ const makeMapStateToProps = () => {
 const mapDispatchToProps = () => ({
 });
 
-// $FlowSuppress
-// $FlowFixMe[missing-annot] automated comment
-export default connect(makeMapStateToProps, mapDispatchToProps)(withBrowserBackWarning(dialogConfig, inEffect)(SelectionsComplete));
+export const EventProgramRegistrationEntry = compose(
+    // $FlowFixMe[missing-annot] automated comment
+    connect(makeMapStateToProps, mapDispatchToProps),
+    withLoadingIndicator(),
+    withBrowserBackWarning(dialogConfig, inEffect),
+)(SelectionsComplete);

@@ -28,15 +28,17 @@ import typeof saveTypes from './newEventSaveTypes';
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
 
-    const mapStateToProps = (state: ReduxState, props: Object) => ({
-        recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
-        ready: !state.activePage.isDataEntryLoading,
-        error: !props.formFoundation ?
-            i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
-        programName: programNameSelector(state),
-        orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] &&
-            state.organisationUnits[state.currentSelections.orgUnitId].name,
-    });
+    const mapStateToProps = (state: ReduxState, props: Object) => {
+        return {
+            recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
+            ready: !state.activePage.isDataEntryLoading,
+            error: !props.formFoundation ?
+                i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
+            programName: programNameSelector(state),
+            orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] &&
+              state.organisationUnits[state.currentSelections.orgUnitId].name,
+        };
+    };
 
 
     // $FlowFixMe[not-an-object] automated comment

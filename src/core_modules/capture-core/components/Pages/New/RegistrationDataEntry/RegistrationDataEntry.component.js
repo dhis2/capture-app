@@ -8,6 +8,7 @@ import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
 import { InfoIconText } from '../../../InfoIconText';
 import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
+import { EventProgramRegistrationEntry } from '../../NewEvent/SelectionsComplete/SelectionsComplete.container';
 
 
 const translatedTextWithStylesForProgram = (trackedEntityName, programName, orgUnitName) =>
@@ -69,6 +70,12 @@ export const RegistrationDataEntryComponent = ({ selectedScopeId, dataEntryId, o
                         text={translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
                     />
                 </>
+            }
+            {
+                scopeType === scopeTypes.EVENT_PROGRAM &&
+                <EventProgramRegistrationEntry
+                    id="singleEvent"
+                />
             }
 
         </>
