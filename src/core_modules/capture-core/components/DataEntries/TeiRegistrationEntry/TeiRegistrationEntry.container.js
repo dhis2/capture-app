@@ -35,12 +35,13 @@ const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
 };
 
 
-export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id }) => {
+export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, ...rest }) => {
     useInitialiseTeiRegistration(selectedScopeId, id);
 
     return (
         <TeiRegistrationEntryComponent
             selectedScopeId={selectedScopeId}
             id={id}
+            {...rest}
         />);
 };

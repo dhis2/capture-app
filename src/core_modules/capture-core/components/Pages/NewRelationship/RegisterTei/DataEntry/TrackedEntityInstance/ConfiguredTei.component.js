@@ -2,7 +2,7 @@
 import { compose } from 'redux';
 import { withSaveHandler } from '../../../../../DataEntry';
 import withMainButton from './withMainButton';
-import { TeiRegistrationEntry } from '../../../../../DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.component';
+import { TeiRegistrationEntry } from '../../../../../DataEntries';
 
 const SaveHandlerHOC =
   compose(

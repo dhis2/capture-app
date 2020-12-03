@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { flatMap, pluck } from 'rxjs/operators';
 import { empty, from } from 'rxjs';
 import { registrationFormActionTypes } from './RegistrationDataEntry.actions';
-import { openDataEntryForNewTeiBatchAsync } from '../../../DataEntries/TrackedEntityInstance';
+import { openDataEntryForNewTeiBatchAsync } from '../../../DataEntries';
 
 
 export const startDataEntryInitialisationEpic: Epic = action$ =>

@@ -2,7 +2,7 @@
 import { compose } from 'redux';
 import { withSaveHandler } from '../../../../../DataEntry';
 import withMainButton from './withMainButton';
-import { EnrollmentRegistrationEntry } from '../../../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.component';
+import { EnrollmentRegistrationEntry } from '../../../../../DataEntries';
 
 const SaveHandlerHOC =
   compose(

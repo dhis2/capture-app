@@ -6,7 +6,7 @@ import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { enrollmentRegistrationEntryActionTypes } from './EnrollmentRegistrationEntry.actions';
-import { openDataEntryForNewEnrollmentBatchAsync } from '../index';
+import { openDataEntryForNewEnrollmentBatchAsync } from '../Enrollment';
 import { getTrackerProgramThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
 import { type TrackerProgram } from '../../../metaData/Program';

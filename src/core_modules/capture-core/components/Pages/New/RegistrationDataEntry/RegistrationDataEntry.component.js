@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
 import type { OwnProps } from './RegistrationDataEntry.types';
-import { EnrollmentRegistrationEntry } from '../../../DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.component';
-import { TeiRegistrationEntry } from '../../../DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.component';
+import { EnrollmentRegistrationEntry, TeiRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 
