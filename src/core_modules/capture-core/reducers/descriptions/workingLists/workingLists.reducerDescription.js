@@ -3,7 +3,7 @@ import { moment } from 'capture-core-utils/moment';
 import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
 import { workingListsCommonActionTypes } from '../../../components/Pages/MainPage/WorkingListsCommon';
 import { eventWorkingListsActionTypes } from '../../../components/Pages/MainPage/EventWorkingLists';
-import { recentlyAddedEventsActionTypes } from '../../../components/Pages/NewEvent/RecentlyAddedEventsList';
+import { recentlyAddedEventsActionTypes } from '../../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList';
 
 export const workingListsListRecordsDesc = createReducerDescription({
     [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, { payload: { storeId, recordContainers } }) => ({

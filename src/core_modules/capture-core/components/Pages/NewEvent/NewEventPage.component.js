@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import DataEntrySelectionsComplete from './SelectionsComplete/SelectionsComplete.container';
 import { DataEntrySelectionsIncomplete } from './SelectionsIncomplete/DataEntrySelectionsIncomplete.container';
 import { TrackerProgramHandler } from '../../TrackerProgramHandler';
 import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
+import { SingleEventRegistrationEntry } from '../../DataEntries/SingleEventRegistrationEntry/SingleEventRegistrationEntry.container';
 
 const getStyles = () => ({
 
@@ -26,7 +26,7 @@ class Index extends React.Component<Props> {
 
         return (
             <TrackerProgramHandler>
-                <DataEntrySelectionsComplete />
+                <SingleEventRegistrationEntry id="singleEvent" />
             </TrackerProgramHandler>
         );
     }

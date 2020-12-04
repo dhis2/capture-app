@@ -11,7 +11,7 @@ import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/
 import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
-} from '../../components/Pages/NewEvent';
+} from '../../components/DataEntries/SingleEventRegistrationEntry';
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
