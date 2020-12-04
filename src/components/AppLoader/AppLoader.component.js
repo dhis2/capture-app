@@ -1,10 +1,11 @@
 // @flow
-import * as React from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import log from 'loglevel';
 import { createHashHistory as createHistory, type HashHistory } from 'history';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
 import { DisplayException } from 'capture-core/utils/exceptions';
+import { getSingleResourceQuery } from 'capture-core/utils/api';
 import { environments } from 'capture-core/constants';
 import { buildUrl } from 'capture-core-utils';
 import { initializeAsync } from './init';
@@ -15,12 +16,21 @@ type Props = {
     onCacheExpired: Function,
 };
 
+const useApiUtils = () => {
+    const dataEngine = useDataEngine();
+    return useMemo(() => ({
+        query: getSingleResourceQuery(dataEngine.query.bind(dataEngine)),
+        mutate: dataEngine.mutate.bind(dataEngine),
+        absoluteApiPath: buildUrl(dataEngine.link.baseUrl, dataEngine.link.apiPath),
+    }), [dataEngine]);
+};
+
 const AppLoader = (props: Props) => {
     const { onRunApp, onCacheExpired } = props;
     const [loadError, setLoadError] = React.useState(null);
-    const dataEngine = useDataEngine();
+    const apiUtils = useApiUtils();
 
-    const logError = React.useCallback((error) => {
+    const logError = useCallback((error) => {
         if (error instanceof Error) {
             log.error(error.toString());
         } else if (error) {
@@ -28,17 +38,17 @@ const AppLoader = (props: Props) => {
         }
     }, []);
 
-    const load = React.useCallback(async () => {
+    const load = useCallback(async () => {
         try {
             await initializeAsync(
                 onCacheExpired,
-                dataEngine.query.bind(dataEngine),
-                buildUrl(dataEngine.link.baseUrl, dataEngine.link.apiPath),
+                apiUtils.query,
+                apiUtils.absoluteApiPath,
             );
             const history = createHistory();
             const store = getStore(
                 history,
-                dataEngine.mutate.bind(dataEngine),
+                apiUtils,
                 // $FlowFixMe[prop-missing] automated comment
                 () => onRunApp(store, history));
         } catch (error) {
@@ -60,10 +70,10 @@ const AppLoader = (props: Props) => {
         logError,
         onCacheExpired,
         onRunApp,
-        dataEngine,
+        apiUtils,
     ]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         load();
     }, [
         load,
