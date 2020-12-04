@@ -20,6 +20,10 @@ export const newPageDesc = createReducerDescription(
             ...state,
             newPageStatus: newPageStatuses.WITHOUT_ORG_UNIT_SELECTED,
         }),
+        [newPageActionTypes.NEW_PAGE_WITHOUT_PROGRAM_PARTNER_SELECTED_VIEW]: state => ({
+            ...state,
+            newPageStatus: newPageStatuses.WITHOUT_PROGRAM_PARTNER_SELECTED,
+        }),
     },
     'newPage',
     initialNewPageState,

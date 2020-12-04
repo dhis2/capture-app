@@ -20,9 +20,6 @@ import {
     teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry';
 import {
-    cancelNewEventIncompleteSelectionsLocationChangeEpic,
-} from 'capture-core/components/Pages/NewEvent';
-import {
     openNewEventPageLocationChangeEpic,
 } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry/SingleEventRegistrationEntry.epics';
 

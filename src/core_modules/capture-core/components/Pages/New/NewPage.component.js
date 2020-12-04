@@ -18,7 +18,7 @@ import { RegistrationDataEntry } from './RegistrationDataEntry';
 
 const getStyles = ({ typography }) => ({
     container: {
-        padding: '8px 24px 16px 24px',
+        padding: '24px 24px 16px 24px',
     },
     paper: {
         marginBottom: typography.pxToRem(10),
@@ -51,11 +51,13 @@ export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
+    showMessageToSelectProgramPartnerOnNewPage,
     showDefaultViewOnNewPage,
     classes,
     currentScopeId,
     newPageStatus,
-    selectionsIncomplete,
+    partnerSelectionIncomplete,
+    orgUnitSelectionIncomplete,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
@@ -66,15 +68,19 @@ const NewPagePlain = ({
     }, [scopeType, currentScopeId]);
 
     useEffect(() => {
-        if (selectionsIncomplete) {
+        if (orgUnitSelectionIncomplete) {
             showMessageToSelectOrgUnitOnNewPage();
+        } else if (partnerSelectionIncomplete) {
+            showMessageToSelectProgramPartnerOnNewPage();
         } else {
             showDefaultViewOnNewPage();
         }
     },
     [
-        selectionsIncomplete,
+        partnerSelectionIncomplete,
+        orgUnitSelectionIncomplete,
         showMessageToSelectOrgUnitOnNewPage,
+        showMessageToSelectProgramPartnerOnNewPage,
         showDefaultViewOnNewPage,
     ]);
 
@@ -110,7 +116,14 @@ const NewPagePlain = ({
             {
                 newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
                 <InefficientSelectionsMessage
-                    message={i18n.t('Choose a registering unit or finish your selection to start reporting')}
+                    message={i18n.t('Choose a registering unit to start reporting')}
+                />
+            }
+
+            {
+                newPageStatus === newPageStatuses.WITHOUT_PROGRAM_PARTNER_SELECTED &&
+                <InefficientSelectionsMessage
+                    message={i18n.t('Choose a partner to start reporting')}
                 />
             }
         </div>

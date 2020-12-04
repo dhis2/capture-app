@@ -2,13 +2,12 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { OwnProps } from './RegistrationDataEntry.types';
-import { EnrollmentRegistrationEntry, TeiRegistrationEntry } from '../../../DataEntries';
+import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
 import { InfoIconText } from '../../../InfoIconText';
 import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
-import { EventProgramRegistrationEntry } from '../../../DataEntries/SingleEventRegistrationEntry/SingleEventRegistrationEntry.container';
 
 
 const translatedTextWithStylesForProgram = (trackedEntityName, programName, orgUnitName) =>
@@ -73,7 +72,7 @@ export const RegistrationDataEntryComponent = ({ selectedScopeId, dataEntryId, o
             }
             {
                 scopeType === scopeTypes.EVENT_PROGRAM &&
-                <EventProgramRegistrationEntry
+                <SingleEventRegistrationEntry
                     id="singleEvent"
                 />
             }

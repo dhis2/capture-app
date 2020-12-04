@@ -11,5 +11,5 @@ export const openNewEventPageLocationChangeEpic = (action$: InputObservable, sto
         map(() => {
             const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
-            return push(`/newEvent/${urlArguments({ programId, orgUnitId })}`);
+            return push(`/new/${urlArguments({ programId, orgUnitId })}`);
         }));
