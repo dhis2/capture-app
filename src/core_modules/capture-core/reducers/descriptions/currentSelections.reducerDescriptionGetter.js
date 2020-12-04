@@ -39,6 +39,7 @@ const setCategoryOption = (
         },
     };
 
+    // todo i think those could simple be undefined.
     return {
         ...state,
         categories,
@@ -47,21 +48,24 @@ const setCategoryOption = (
     };
 };
 
-const resetCategoryOption = (state: Object, categoryId: string) => {
-    const categories = {
-        ...state.categories,
-        [categoryId]: undefined,
-    };
+const deleteKeyFromObject = (key, object) =>
+    Object.keys(object).reduce((acc, objectKey) => {
+        if (objectKey !== key) {
+            return { ...acc, [objectKey]: object };
+        }
+        return acc;
+    }, {});
 
-    const categoriesMeta = {
-        ...state.categoriesMeta,
-        [categoryId]: undefined,
-    };
+const resetCategoryOption = (state: Object, categoryId: string) => {
+    const { categoriesMeta, categories } = state;
+
+    const newCategories = deleteKeyFromObject(categoryId, categories);
+    const newCategoriesMeta = deleteKeyFromObject(categoryId, categoriesMeta);
 
     return {
         ...state,
-        categories,
-        categoriesMeta,
+        categories: newCategories,
+        categoriesMeta: newCategoriesMeta,
         complete: false,
     };
 };

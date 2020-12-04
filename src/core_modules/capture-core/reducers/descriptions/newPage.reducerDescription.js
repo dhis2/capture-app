@@ -7,7 +7,7 @@ type NewPageState = {
     newPageStatus: $Keys<typeof newPageStatuses>
 }
 const initialNewPageState: NewPageState = {
-    newPageStatus: newPageStatuses.DEFAULT,
+    newPageStatus: newPageStatuses.WITHOUT_ORG_UNIT_SELECTED,
 };
 
 export const newPageDesc = createReducerDescription(
