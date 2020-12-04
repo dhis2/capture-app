@@ -93,12 +93,16 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.handleClose();
     }
 
-    handleClickNew=() => {
+    openNewRegistrationPage=() => {
         if (this.props.isUserInteractionInProgress) {
             this.setState({ openNewEventWarning: true });
             return;
         }
         this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
+    }
+
+    handleOpenNewRegistrationPageWithoutProgramId=() => {
+        this.props.onOpenNewRegistrationPageWithoutProgramId();
     }
 
     handleAcceptNew =() => {
@@ -128,9 +132,10 @@ export class LockedSelectorComponent extends Component<Props, State> {
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
                     onStartAgain={this.handleOpenStartAgainWarning}
-                    onNewClick={this.handleClickNew}
-                    onFindClickWithoutProgramId={this.handleOpenSearchPageWithoutProgramId}
+                    onNewClick={this.openNewRegistrationPage}
+                    onNewClickWithoutProgramId={this.handleOpenNewRegistrationPageWithoutProgramId}
                     onFindClick={this.handleOpenSearchPage}
+                    onFindClickWithoutProgramId={this.handleOpenSearchPageWithoutProgramId}
                 />
                 <ConfirmDialog
                     onConfirm={this.handleAcceptStartAgain}
