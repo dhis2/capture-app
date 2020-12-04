@@ -4,9 +4,8 @@ import { getUserStorageController } from '../../storageControllers';
 import { provideContext } from '../context';
 import { loadMetaDataInternal } from './loadMetaDataInternal';
 import { upkeepUserCaches } from '../maintenance';
-import type { QueryApiFn } from '../loader.types';
 
-export const loadMetaData = async (onQueryApi: QueryApiFn) => {
+export const loadMetaData = async (onQueryApi: SingleResourceQuery) => {
     await upkeepUserCaches();
     await provideContext({
         onQueryApi,
