@@ -1,4 +1,5 @@
 // @flow
+
 declare type D2 = {
     models: Object,
     system: {
@@ -195,4 +196,62 @@ declare class process {
 
 declare type CssClasses = {|
     +classes: Object,
+|};
+
+declare type ResourceQuery = {|
+    resource: string,
+    id?: string,
+    data?: any | (variables: QueryVariables) => any,
+    params?: any | (variables: QueryVariables) => any,
+|};
+
+declare type ResourceQueries = {|
+    [resourceId: string]: ResourceQuery,
+|};
+
+declare type QueryVariables = {| [string]: any |};
+
+declare type QueryOptions = {|
+    variables?: QueryVariables,
+|};
+
+declare type DataEngineQuery = (resourceQueries: ResourceQueries, options?: QueryOptions) => Promise<{| [resourceId: string]: any |}>;
+
+type MutationData = {|
+    [key: string]: any,
+|};
+
+declare type CreateMutation = {|
+    ...ResourceQuery,
+    type: 'create',
+    data: MutationData,
+|};
+
+declare type UpdateMutation = {|
+    ...ResourceQuery,
+    type: 'update' | 'replace',
+    id: string,
+    partial?: boolean,
+    data: MutationData,
+|};
+
+declare type DeleteMutation = {|
+    ...ResourceQuery,
+    type: 'delete',
+    id: string,
+|};
+
+declare type Mutation = CreateMutation | UpdateMutation | DeleteMutation;
+
+declare type MutationOptions = {|
+    variables?: QueryVariables,
+|};
+
+declare type DataEngineMutate = (mutation: Mutation, options?: MutationOptions) => Promise<any>;
+
+declare type SingleResourceQuery = (resourceQuery: ResourceQuery, variables?: QueryVariables) => Promise<any>;
+declare type ApiUtils = {|
+    query: SingleResourceQuery,
+    mutate: DataEngineMutate,
+    absoluteApiPath: string,
 |};
