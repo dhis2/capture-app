@@ -24,9 +24,6 @@ const getStyles = ({ typography }) => ({
         marginBottom: typography.pxToRem(10),
         padding: typography.pxToRem(10),
     },
-    maxWidth: {
-        maxWidth: typography.pxToRem(950),
-    },
     title: {
         padding: '8px 0 0px 8px',
         fontWeight: 500,
@@ -56,9 +53,9 @@ const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
     classes,
-    currentOrgUnitId,
     currentScopeId,
     newPageStatus,
+    selectionsIncomplete,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
@@ -69,45 +66,43 @@ const NewPagePlain = ({
     }, [scopeType, currentScopeId]);
 
     useEffect(() => {
-        if (!currentOrgUnitId) {
+        if (selectionsIncomplete) {
             showMessageToSelectOrgUnitOnNewPage();
         } else {
             showDefaultViewOnNewPage();
         }
     },
     [
+        selectionsIncomplete,
         showMessageToSelectOrgUnitOnNewPage,
         showDefaultViewOnNewPage,
-        currentOrgUnitId,
     ]);
 
     const handleRegistrationScopeSelection = (id) => {
         setScopeId(id);
     };
 
+
     return (<>
         <LockedSelector />
-
         <div data-test="dhis2-capture-registration-page-content" className={classes.container} >
             {
                 newPageStatus === newPageStatuses.DEFAULT &&
                 <Paper className={classes.paper}>
-                    <div className={classes.maxWidth}>
-                        <div className={classes.title} >
-                            New {titleText}
+                    <div className={classes.title} >
+                        New {titleText}
+                    </div>
+                    {
+                        (!scopeType || scopeType === scopeTypes.TRACKED_ENTITY_TYPE) &&
+                        <div className={classes.tetypeContainer}>
+                            <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
                         </div>
-                        {
-                            (!scopeType || scopeType === scopeTypes.TRACKED_ENTITY_TYPE) &&
-                                <div className={classes.tetypeContainer}>
-                                    <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
-                                </div>
-                        }
-                        <div className={classes.registrationContainer}>
-                            <RegistrationDataEntry
-                                dataEntryId={NEW_TEI_DATA_ENTRY_ID}
-                                selectedScopeId={selectedScopeId}
-                            />
-                        </div>
+                    }
+                    <div className={classes.registrationContainer}>
+                        <RegistrationDataEntry
+                            dataEntryId={NEW_TEI_DATA_ENTRY_ID}
+                            selectedScopeId={selectedScopeId}
+                        />
                     </div>
                 </Paper>
             }
@@ -115,7 +110,7 @@ const NewPagePlain = ({
             {
                 newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
                 <InefficientSelectionsMessage
-                    message={i18n.t('Choose a registering unit to start reporting')}
+                    message={i18n.t('Choose a registering unit or finish your selection to start reporting')}
                 />
             }
         </div>

@@ -21,7 +21,6 @@ type Props = {
 
 const pageKeys = {
     MAIN: '',
-    NEW_EVENT: 'newEvent',
     VIEW_EVENT: 'viewEvent',
     NEW_ENROLLMENT: 'newEnrollment',
     SEARCH: 'search',
@@ -30,16 +29,6 @@ const pageKeys = {
 
 const specificationForPages = {
     [pageKeys.MAIN]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
-    ],
-    [pageKeys.NEW_EVENT]: [
         {
             urlKey: 'programId',
             propKey: 'programId',
@@ -97,7 +86,6 @@ const specificationForPages = {
 
 const updaterForPages = {
     [pageKeys.MAIN]: updateSelectionsFromUrl,
-    [pageKeys.NEW_EVENT]: updateSelectionsFromUrl,
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,

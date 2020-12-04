@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { SplitButton, Menu, MenuItem } from '@dhis2/ui';
+import { uuid } from 'd2-utilizr/src';
 
 type Item = {
     key: string,
@@ -21,7 +22,7 @@ const SimpleSplitButton = (props: Props) => {
                 <Menu>
                     {
                         dropDownItems.map(i => (
-                            <MenuItem label={i.text} value={i.text} onClick={i.onClick} />
+                            <MenuItem key={uuid} label={i.text} value={i.text} onClick={i.onClick} />
                         ))}
                 </Menu>
             }

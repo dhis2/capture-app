@@ -55,12 +55,15 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.locationSwitchInProgress = true;
         return newState;
     },
+<<<<<<< Updated upstream
     [dataEntrySelectionsIncompleteActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;
         return newState;
     },
+=======
+>>>>>>> Stashed changes
     [editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
@@ -140,7 +143,12 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     }),
     [lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN]: state => ({
         ...state,
-        page: 'newEvent',
+        page: 'new',
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_WITHOUT_PROGRAM_ID_OPEN]: state => ({
+        ...state,
+        page: 'new',
         locationSwitchInProgress: true,
     }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({

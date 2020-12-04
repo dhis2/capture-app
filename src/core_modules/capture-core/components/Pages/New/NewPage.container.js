@@ -26,8 +26,8 @@ export const NewPage: ComponentType<{||}> = () => {
     const currentScopeId: string =
         useSelector(({ currentSelections }) => currentSelections.programId || currentSelections.trackedEntityTypeId);
 
-    const currentOrgUnitId: string =
-        useSelector(({ currentSelections }) => currentSelections.orgUnitId);
+    const selectionsIncomplete: boolean =
+      useSelector(({ currentSelections }) => !currentSelections.complete);
 
     const newPageStatus: $Keys<newPageStatuses> =
         useSelector(({ newPage }) => newPage.newPageStatus);
@@ -37,7 +37,7 @@ export const NewPage: ComponentType<{||}> = () => {
             showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
             showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
             currentScopeId={currentScopeId}
-            currentOrgUnitId={currentOrgUnitId}
+            selectionsIncomplete={selectionsIncomplete}
             newPageStatus={newPageStatus}
             error={error}
             ready={ready}
