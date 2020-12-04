@@ -3,7 +3,6 @@ import getEventProgramThrowIfNotFound from './getEventProgramThrowIfNotFound';
 
 
 export default function (programId: string, categoriesMeta: ?{ [categoryId: string]: { writeAccess: boolean } }) {
-    debugger;
     const program = getEventProgramThrowIfNotFound(programId);
     const stage = program.stage;
     const access = {
