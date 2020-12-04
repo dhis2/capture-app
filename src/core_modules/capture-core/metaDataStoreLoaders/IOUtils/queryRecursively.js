@@ -10,10 +10,10 @@ type Variables = {
     page: number,
 };
 
-type RecursiveQuery = {
+type RecursiveQuery = {|
     ...ApiQuery,
     params?: (variables: Variables) => Object,
-};
+|};
 
 const executeRecursiveQuery = (
     recursiveQuery: RecursiveQuery,
