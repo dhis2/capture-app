@@ -8,9 +8,6 @@ import type { Props, PropsForPureComponent } from './D2Form.types';
 import { type Section } from '../../metaData';
 
 export const styles = () => ({
-    displayFlex: {
-        display: 'flex',
-    },
     containerCustomForm: {
         paddingTop: 10,
         paddingBottom: 10,
@@ -108,6 +105,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
     )
     renderVertical = (section: Section, passOnProps: any, classes: Object) => (
         <div
+            data-test="dhis2-capture-d2-form-component"
             className={this.props.formFoundation.customForm ? classes.containerCustomForm : ''}
             key={section.id}
         >
@@ -137,7 +135,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
         const sections = metaDataSectionsAsArray.map(section => (passOnProps.formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps, classes)));
 
         return (
-            <div className={passOnProps.formHorizontal ? classes.displayFlex : ''} data-test="dhis2-capture-d2-form-component">
+            <>
                 {
                     isFormInReduxStore
                         ?
@@ -153,7 +151,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
                             ),
                         )
                 }
-            </div>
+            </>
         );
     }
 }
