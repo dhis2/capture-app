@@ -12,5 +12,5 @@ const categoriesMetaSelector = state => state.currentSelections.categoriesMeta;
 export const makeEventAccessSelector = () => createSelector(
     programIdSelector,
     categoriesMetaSelector,
-    (programId: string, categoriesMeta: ?Object) => getEventProgramEventAccess(programId, categoriesMeta));
+    (programId: string, categoriesMeta: ?Object) => programId && getEventProgramEventAccess(programId, categoriesMeta));
 
