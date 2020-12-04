@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 import { paramsSelector } from './appSync.selectors';
 import { LoadingMaskForPage } from '../LoadingMasks';
 import { updateSelectionsFromUrl as updateSelectionsFromUrlForNewEnrollment } from '../Pages/NewEnrollment';
@@ -204,9 +205,14 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) =>
+        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) => {
+            // redirect to main page in case the url is not defined
             // $FlowFixMe[invalid-computed-prop] automated comment
-            dispatch(updaterForPages[page](updateData)),
+            updaterForPages[page]
+                // $FlowFixMe[invalid-computed-prop] automated comment
+                ? dispatch(updaterForPages[page](updateData))
+                : dispatch(push('/'));
+        },
     });
 
     // $FlowFixMe[missing-annot] automated comment
