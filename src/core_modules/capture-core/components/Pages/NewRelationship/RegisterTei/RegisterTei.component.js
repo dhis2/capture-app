@@ -3,7 +3,7 @@ import React, { type ComponentType, useContext, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../Buttons';
-import DataEntry from './DataEntry/DataEntry.container';
+import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
 import GeneralOutput from './GeneralOutput/GeneralOutput.container';
 import { ReviewDialog } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/ReviewDialog.component';
@@ -78,7 +78,7 @@ const RegisterTeiPlain = ({
         <div className={classes.container}>
             <div className={classes.leftContainer}>
                 <RegistrationSection />
-                <DataEntry
+                <RegisterTeiDataEntry
                     onLink={onLink}
                     onSave={handleSaveAttempt}
                     onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}

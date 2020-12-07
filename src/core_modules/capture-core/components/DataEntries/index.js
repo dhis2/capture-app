@@ -1,8 +1,7 @@
 // @flow
 export {
-    Enrollment as EnrollmentDataEntry,
-    sectionKeys as sectionKeysForEnrollmentDataEntry,
     openDataEntryForNewEnrollmentBatchAsync,
+    sectionKeys as sectionKeysForEnrollmentDataEntry,
     runRulesOnUpdateFieldBatch,
     buildServerData as buildServerDataForEnrollmentDataEntry,
     openBatchActionTypes as enrollmentOpenBatchActionTypes,
@@ -11,7 +10,6 @@ export {
     runRulesOnEnrollmentDataEntryFieldUpdateEpic,
 } from './Enrollment';
 export {
-    TrackedEntityInstance as TrackedEntityInstanceDataEntry,
     openDataEntryForNewTeiBatchAsync,
     batchActionTypes as teiBatchActionTypes,
     openBatchActionTypes as teiOpenBatchActionTypes,
@@ -24,3 +22,5 @@ export {
     convertStatusOut,
     getConvertGeometryIn,
 } from './converters/converters';
+export { EnrollmentRegistrationEntry } from './EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.container';
+export { TeiRegistrationEntry } from './TeiRegistrationEntry/TeiRegistrationEntry.container';

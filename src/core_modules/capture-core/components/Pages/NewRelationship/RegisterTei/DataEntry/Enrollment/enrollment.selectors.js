@@ -1,7 +1,7 @@
 // @flow
 import { createSelector } from 'reselect';
-import type { TrackerProgram } from '../../../../../metaData';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../metaData';
+import type { TrackerProgram } from '../../../../../../metaData';
+import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../metaData';
 
 const programIdSelector = state => state.newRelationshipRegisterTei.programId;
 

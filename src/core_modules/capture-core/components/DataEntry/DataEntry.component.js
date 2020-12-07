@@ -258,10 +258,7 @@ class DataEntry extends React.Component<Props> {
             cancelButton,
             notes,
             dataEntryOutputs,
-            dataEntryExists,
         } = this.props;
-
-        if (!dataEntryExists) { return <div className={classes.loadingContainer}>loading</div>; }
 
         if (!itemId) {
             return (
