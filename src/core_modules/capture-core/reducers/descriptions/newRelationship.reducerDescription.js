@@ -42,7 +42,6 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
             ...state,
             programId,
             orgUnit,
-            dataEntryIsLoading: false,
             loading: false,
         };
     },
@@ -56,7 +55,6 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
         return {
             ...state,
             programId,
-            dataEntryIsLoading: true,
         };
     },
     [registrationSectionActionTypes.ORG_UNIT_CHANGE]: (state, action) => {
@@ -65,27 +63,22 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
             ...state,
             orgUnit,
             programId: resetProgramSelection ? null : state.programId,
-            dataEntryIsLoading: true,
         };
     },
     [registrationSectionActionTypes.PROGRAM_FILTER_CLEAR]: state => ({
         ...state,
         orgUnit: null,
-        dataEntryIsLoading: true,
     }),
     [dataEntryActionTypes.DATA_ENTRY_OPEN]: state => ({
         ...state,
-        dataEntryIsLoading: false,
         dataEntryError: null,
     }),
     [dataEntryActionTypes.DATA_ENTRY_OPEN_FAILED]: (state, action) => ({
         ...state,
-        dataEntryIsLoading: false,
         dataEntryError: action.payload.errorMessage,
     }),
     [dataEntryActionTypes.DATA_ENTRY_OPEN_CANCELLED]: state => ({
         ...state,
-        dataEntryIsLoading: false,
         dataEntryError: null,
     }),
 }, 'newRelationshipRegisterTei');

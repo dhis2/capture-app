@@ -3,9 +3,7 @@ import {
     withSaveHandler,
     withCancelButton,
 } from '../../../DataEntry';
-import {
-    EnrollmentDataEntry,
-} from '../../../DataEntries';
+import { EnrollmentDataEntry } from '../../../DataEntries/Enrollment';
 import withMainButton from './withMainButton';
 
 const getCancelOptions = () => ({

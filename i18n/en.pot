@@ -124,6 +124,9 @@ msgstr ""
 msgid "A future date is not allowed"
 msgstr ""
 
+msgid "Metadata error. see log for details"
+msgstr ""
+
 msgid "An error has occurred. See log for details"
 msgstr ""
 
@@ -619,9 +622,6 @@ msgid "Review duplicates"
 msgstr ""
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
-
-msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "Review Duplicates"
