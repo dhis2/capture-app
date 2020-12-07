@@ -180,7 +180,7 @@ import {
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
-import { initTeiViewEpic } from '../core_modules/capture-core/components/Pages/MainPage/TeiWorkingLists';
+import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/Pages/MainPage/TeiWorkingLists';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -192,6 +192,7 @@ export default combineEpics(
     loadCoreFailedEpic,
     initEventListEpic,
     initTeiViewEpic,
+    updateTeiListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
     updateTemplateEpic,

@@ -7,8 +7,8 @@ import { getEventListData } from './getEventListData';
 import {
     initListViewSuccess,
     initListViewError,
+    buildFilterQueryArgs,
 } from '../../WorkingListsCommon';
-import { buildQueryArgs } from '../helpers/eventsQueryArgsBuilder';
 import type { ApiEventQueryCriteria, CommonQueryData, ClientConfig, ColumnsMetaForDataFetching } from '../types';
 
 const errorMessages = {
@@ -28,23 +28,16 @@ export const initEventWorkingListAsync = async (
     const { commonQueryData, columnsMetaForDataFetching, categoryCombinationId, storeId, lastTransaction } = meta;
     const clientConfig: ClientConfig = await convertToClientConfig(config, columnsMetaForDataFetching);
     const { currentPage, rowsPerPage, sortById, sortByDirection, filters } = clientConfig;
-    const queryArgsSource = {
+    const rawQueryArgs = {
         currentPage,
         rowsPerPage,
         sortById,
         sortByDirection,
-        filters,
+        filters: buildFilterQueryArgs(filters, { columns: columnsMetaForDataFetching, storeId, isInit: true }),
         ...commonQueryData,
     };
 
-    return getEventListData(
-        buildQueryArgs(
-            queryArgsSource, {
-                columnsMetaForDataFetching,
-                storeId,
-                isInit: true,
-            },
-        ), columnsMetaForDataFetching, categoryCombinationId)
+    return getEventListData(rawQueryArgs, columnsMetaForDataFetching, categoryCombinationId)
         .then(({ eventContainers, pagingData, request }) =>
             initListViewSuccess(storeId, {
                 recordContainers: eventContainers,

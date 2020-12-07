@@ -1,8 +1,8 @@
 // @flow
-import type { TeiColumnsMetaForDataFetchingArray } from './types';
+import type { TeiColumnsMetaForDataFetching } from '../../../../types';
 
 export type InputMeta = {|
-    columnsMetaForDataFetching: TeiColumnsMetaForDataFetchingArray,
+    columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
     singleResourceQuery: SingleResourceQuery,
     absoluteApiPath: string,
 |};

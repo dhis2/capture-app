@@ -30,6 +30,7 @@ export type ColumnConfigBase = {|
     header: string,
     options?: ?Array<{text: string, value: any}>,
     multiValueFilter?: boolean,
+    disableFilter?: boolean,
 |};
 export type MetadataColumnConfig = {
     ...ColumnConfigBase,
@@ -45,12 +46,13 @@ export type TeiWorkingListsColumnConfig = MetadataColumnConfig | MainColumnConfi
 
 export type TeiWorkingListsColumnConfigs = Array<TeiWorkingListsColumnConfig>;
 
-export type TeiColumnMetaForDataFetching = {|
+export type TeiColumnMetaForDataFetching = {
     id: string,
     type: $Values<dataElementTypes>,
     mainProperty?: boolean,
     apiName?: string,
-|};
+    visible: boolean,
+};
 
 export type TeiColumnsMetaForDataFetching = Map<string, TeiColumnMetaForDataFetching>;
 

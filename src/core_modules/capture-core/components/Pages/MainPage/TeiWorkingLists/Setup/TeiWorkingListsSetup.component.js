@@ -11,10 +11,20 @@ const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView) =>
         const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
-                .map(({ id, type, mainProperty, apiName }) => [id, { id, type, mainProperty, apiName }]),
+                .map(({ id, type, mainProperty, apiName, visible }) => [id, { id, type, mainProperty, apiName, visible }]),
         );
         onLoadView(selectedTemplate, context, { columnsMetaForDataFetching });
     }, [onLoadView, defaultColumns]);
+
+const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
+    useCallback((queryArgs: Object) => {
+        const columnsMetaForDataFetching: TeiColumnsMetaForDataFetching = new Map(
+            defaultColumns
+                // $FlowFixMe
+                .map(({ id, type, apiName, mainProperty }) => [id, { id, type, apiName, mainProperty }]),
+        );
+        onUpdateList(queryArgs, columnsMetaForDataFetching, 0);
+    }, [onUpdateList, defaultColumns]);
 
 export const TeiWorkingListsSetup = ({
     program,
@@ -32,7 +42,6 @@ export const TeiWorkingListsSetup = ({
     // ------- DUMMY DATA!!! --------
     const dummyData = {
         onDeleteTemplate: template => onDeleteTemplate(template, program.id),
-        onUpdateList: useCallback(queryArgs => onUpdateList(queryArgs, 1, {}), [onUpdateList]),
     };
     // ------------------------------
 
@@ -43,6 +52,7 @@ export const TeiWorkingListsSetup = ({
             columns={columns}
             dataSource={useDataSource(records, recordsOrder, columns)}
             onLoadView={useInjectColumnMetaToLoadList(defaultColumns, onLoadView)}
+            onUpdateList={useInjectColumnMetaToUpdateList(defaultColumns, onUpdateList)}
             programId={program.id}
             rowIdKey="id"
         />

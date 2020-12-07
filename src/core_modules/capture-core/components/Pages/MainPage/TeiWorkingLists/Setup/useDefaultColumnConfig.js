@@ -23,11 +23,14 @@ const getDefaultMainConfig = (): Array<MainColumnConfig> => [{
     visible: false,
     type: dataElementTypes.DATE,
     header: i18n.t('Registration Date'),
+    apiName: 'created',
+    disableFilter: true,
 }, {
     id: 'inactive',
     visible: false,
     type: dataElementTypes.BOOLEAN,
     header: i18n.t('Inactive'),
+    disableFilter: true,
 }]
     .map(field => ({
         ...field,

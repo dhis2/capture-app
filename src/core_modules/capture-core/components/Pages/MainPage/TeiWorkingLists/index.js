@@ -1,3 +1,3 @@
 // @flow
 export { TeiWorkingLists } from './TeiWorkingLists.component';
-export { initTeiViewEpic } from './epics';
+export { initTeiViewEpic, updateTeiListEpic } from './epics';

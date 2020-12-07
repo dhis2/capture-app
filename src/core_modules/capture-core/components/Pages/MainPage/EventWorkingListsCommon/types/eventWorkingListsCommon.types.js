@@ -12,6 +12,7 @@ export type ColumnConfigBase = {|
     header: string,
     options?: ?Array<{text: string, value: any}>,
     multiValueFilter?: boolean,
+    disableFilter?: boolean,
 |};
 export type MetadataColumnConfig = {
     ...ColumnConfigBase,

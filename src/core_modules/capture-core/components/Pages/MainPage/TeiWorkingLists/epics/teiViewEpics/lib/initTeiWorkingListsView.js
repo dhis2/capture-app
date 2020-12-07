@@ -7,19 +7,18 @@ import {
     initListViewSuccess,
     initListViewError,
 } from '../../../../WorkingListsCommon';
-import type { TeiColumnsMetaForDataFetching } from '../../../types';
+import type { Input } from './initTeiWorkingListsView.types';
 
-const errorMessages = {
-    WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
-};
+const getSortByConfig = (columnsMetaForDataFetching) => {
+    let column = columnsMetaForDataFetching.find(col => col.visible);
+    if (!column) {
+        column = columnsMetaForDataFetching[0];
+    }
 
-type Input = {
-    programId: string,
-    orgUnitId: string,
-    storeId: string,
-    columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
-    singleResourceQuery: SingleResourceQuery,
-    absoluteApiPath: string,
+    return {
+        sortById: column.id,
+        sortByDirection: 'desc',
+    };
 };
 
 export const initTeiWorkingListsView = ({
@@ -30,11 +29,12 @@ export const initTeiWorkingListsView = ({
     singleResourceQuery,
     absoluteApiPath,
 }: Input) => {
+    const { sortById, sortByDirection } = getSortByConfig([...columnsMetaForDataFetching.values()]);
     const pageSize = 15;
     const page = 1;
 
-    return getTeiListData({ programId, orgUnitId, pageSize, page }, {
-        columnsMetaForDataFetching: [...columnsMetaForDataFetching.values()],
+    return getTeiListData({ programId, orgUnitId, pageSize, page, sortById, sortByDirection }, {
+        columnsMetaForDataFetching,
         singleResourceQuery,
         absoluteApiPath })
         .then(({ teis, request }) =>
@@ -46,6 +46,8 @@ export const initTeiWorkingListsView = ({
                 },
                 request,
                 config: {
+                    sortById,
+                    sortByDirection,
                     selections: {
                         programId,
                         orgUnitId,
@@ -53,7 +55,7 @@ export const initTeiWorkingListsView = ({
                 },
             }),
         ).catch((error) => {
-            log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));
+            log.error(errorCreator('An error occurred when initializing the working list view')({ error }));
             return initListViewError(storeId, i18n.t('Working list could not be loaded'));
         });
 };

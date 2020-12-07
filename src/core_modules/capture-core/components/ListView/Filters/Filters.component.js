@@ -28,7 +28,7 @@ type Props = {
 const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
     new Map(
         columns
-            .filter(col => Object.values(filterTypesObject).includes(col.type))
+            .filter(col => Object.values(filterTypesObject).includes(col.type) && !col.disableFilter)
             .map((element, index) => ({
                 element,
                 index,

@@ -1,2 +1,3 @@
 // @flow
-export { initTeiWorkingListsView } from './initTeiWorkingLists';
+export { initTeiWorkingListsView } from './initTeiWorkingListsView';
+export { updateTeiWorkingListsRecords } from './updateTeiWorkingListsRecords';

@@ -18,11 +18,15 @@ export type ApiTeiResponse = {|
 
 export type TeiColumnsMetaForDataFetchingArray = Array<TeiColumnMetaForDataFetching>;
 
+export type RawFilterQueryArgs = {| [id: string]: string |};
 export type RawQueryArgs = {|
     page: number,
     pageSize: number,
     programId: string,
     orgUnitId: string,
+    filters?: RawFilterQueryArgs,
+    sortById: string,
+    sortByDirection: string,
 |};
 
 export type ApiQueryArgs = {|

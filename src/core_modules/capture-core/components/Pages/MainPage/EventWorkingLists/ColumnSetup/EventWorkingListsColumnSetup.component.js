@@ -23,7 +23,7 @@ const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
                 // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
-        onUpdateList(queryArgs, lastTransaction, columnsMetaForDataFetching);
+        onUpdateList(queryArgs, columnsMetaForDataFetching, lastTransaction);
     }, [onUpdateList, defaultColumns]);
 
 export const EventWorkingListsColumnSetup = ({

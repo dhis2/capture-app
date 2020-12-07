@@ -9,4 +9,4 @@ export type UpdateTemplate = (template: Object, criteria: Object, data: Object) 
 
 export type DeleteTemplate = (template: Object, programId: string) => void;
 
-export type UpdateList = (queryArgs: Object, lastTransaction: number, columnsMetaForDataFetching: Object) => void;
+export type UpdateList = (queryArgs: Object, columnsMetaForDataFetching: Object, lastTransaction: number) => void;
