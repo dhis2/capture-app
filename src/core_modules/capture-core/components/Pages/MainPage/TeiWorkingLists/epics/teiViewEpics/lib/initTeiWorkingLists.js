@@ -18,6 +18,8 @@ type Input = {
     orgUnitId: string,
     storeId: string,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
+    singleResourceQuery: SingleResourceQuery,
+    absoluteApiPath: string,
 };
 
 export const initTeiWorkingListsView = ({
@@ -25,11 +27,16 @@ export const initTeiWorkingListsView = ({
     orgUnitId,
     storeId,
     columnsMetaForDataFetching,
+    singleResourceQuery,
+    absoluteApiPath,
 }: Input) => {
     const pageSize = 15;
     const page = 1;
 
-    return getTeiListData({ programId, orgUnitId, pageSize, page }, [...columnsMetaForDataFetching.values()])
+    return getTeiListData({ programId, orgUnitId, pageSize, page }, {
+        columnsMetaForDataFetching: [...columnsMetaForDataFetching.values()],
+        singleResourceQuery,
+        absoluteApiPath })
         .then(({ teis, request }) =>
             initListViewSuccess(storeId, {
                 recordContainers: teis,
@@ -45,8 +52,7 @@ export const initTeiWorkingListsView = ({
                     },
                 },
             }),
-        )
-        .catch((error) => {
+        ).catch((error) => {
             log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));
             return initListViewError(storeId, i18n.t('Working list could not be loaded'));
         });
