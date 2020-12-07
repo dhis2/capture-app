@@ -4,13 +4,14 @@
 # Bram Piot <bram.piot@gmail.com>, 2019
 # phil_dhis2, 2019
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
+# Yao Selom SAKA <saka.yao@yahoo.fr>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
+"Last-Translator: Yao Selom SAKA <saka.yao@yahoo.fr>, 2020\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,7 +77,7 @@ msgid "No events to display"
 msgstr "Aucun évènement à afficher"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Données pour la liste hors ligne non disponibles"
 
 msgid "Last week"
 msgstr "Semaine passée"
@@ -88,7 +89,7 @@ msgid "Last 3 months"
 msgstr "3 derniers mois"
 
 msgid "Custom range"
-msgstr ""
+msgstr "Plage personnalisée"
 
 msgid "to"
 msgstr "à"
@@ -315,7 +316,7 @@ msgid "Select program"
 msgstr "Sélectionner le programme"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Une erreur s'est produite. Voir le log pour plus de détails"
 
 msgid "Error saving event"
 msgstr ""
