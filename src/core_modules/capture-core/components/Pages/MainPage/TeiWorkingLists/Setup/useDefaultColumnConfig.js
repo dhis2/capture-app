@@ -52,7 +52,7 @@ export const useDefaultColumnConfig = (program: TrackerProgram): TeiWorkingLists
     useMemo(() => {
         const { attributes } = program;
         return [
-            ...getDefaultMainConfig(),
             ...getMetaDataConfig(attributes),
+            ...getDefaultMainConfig(),
         ];
     }, [program]);
