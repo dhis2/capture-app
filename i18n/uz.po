@@ -136,7 +136,7 @@ msgid "A future date is not allowed"
 msgstr "Келажакдаги сана танловига рухсат берилмайди"
 
 msgid "An error has occurred. See log for details"
-msgstr ""
+msgstr "Хатолик юз берди. Тафсилотлар учун журналга қаранг"
 
 msgid "Cancel"
 msgstr "Бекор қилиш"

@@ -136,7 +136,7 @@ msgid "A future date is not allowed"
 msgstr "Budoucí datum není povoleno"
 
 msgid "An error has occurred. See log for details"
-msgstr ""
+msgstr "Došlo k chybě. Podrobnosti najdete v protokolu"
 
 msgid "Cancel"
 msgstr "Zrušit"
