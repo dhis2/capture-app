@@ -3,15 +3,17 @@ import { convertToClientTeis } from './convertToClientTeis';
 import { getTeisWithSubvalues } from './getTeisWithSubvalues';
 import type { RawQueryArgs, RawFilterQueryArgs } from './types';
 import type { InputMeta } from './getTeiListData.types';
-import type { TeiColumnsMetaForDataFetching } from '../../../../types';
+import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
 
-const getApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}): ?{ filter: Array<string> } => {
+const getApiFilterQueryArgs = (
+    filters?: RawFilterQueryArgs = {},
+    filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching): ?{ filter: Array<string> } => {
     const apiFilterQueryArgs =
             Object
                 .keys(filters)
+                .filter(filterKey => !filtersOnlyMetaForDataFetching.get(filterKey))
                 .flatMap((filterKey) => {
                     const filter = filters[filterKey];
-                    // not handling any main columns yet so this is pretty straight forward
                     if (Array.isArray(filter)) {
                         return filter
                             .map(filterPart => `${filterKey}:${filterPart}`);
@@ -21,6 +23,19 @@ const getApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}): ?{ filter: Ar
 
     return apiFilterQueryArgs.length > 0 ? { filter: apiFilterQueryArgs } : null;
 };
+
+const getMainApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}, filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching) =>
+    Object
+        .keys(filters)
+        .filter(filterKey => filtersOnlyMetaForDataFetching.get(filterKey))
+        .reduce((acc, filterKey) => {
+            const filter = filters[filterKey];
+            const { transformRecordsFilter } = filtersOnlyMetaForDataFetching.get(filterKey) || {};
+            return {
+                ...acc,
+                ...transformRecordsFilter(filter),
+            };
+        }, {});
 
 const getApiOrderById = (sortById: string, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => {
     const { id, apiName } = columnsMetaForDataFetching.get(sortById) || {};
@@ -42,9 +57,12 @@ const createApiQueryArgs = ({
     sortById,
     sortByDirection,
 }: RawQueryArgs,
-columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => ({
-    ...getApiFilterQueryArgs(filters),
-    orderBy: getApiOrderByQueryArgument(sortById, sortByDirection, columnsMetaForDataFetching),
+columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
+filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
+) => ({
+    ...getApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
+    ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
+    order: getApiOrderByQueryArgument(sortById, sortByDirection, columnsMetaForDataFetching),
     page,
     pageSize,
     ou,
@@ -55,13 +73,14 @@ columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => ({
 export const getTeiListData = async (
     rawQueryArgs: RawQueryArgs, {
         columnsMetaForDataFetching,
+        filtersOnlyMetaForDataFetching,
         singleResourceQuery,
         absoluteApiPath,
     }: InputMeta,
 ) => {
     const { resource, queryArgs } = {
         resource: 'trackedEntityInstances',
-        queryArgs: createApiQueryArgs(rawQueryArgs, columnsMetaForDataFetching),
+        queryArgs: createApiQueryArgs(rawQueryArgs, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching),
     };
 
     const { trackedEntityInstances: apiTeis = [] } = await singleResourceQuery({

@@ -6,7 +6,7 @@ import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';
 import FilterRestMenu from './FilterRestMenu/FilterRestMenu.component';
 import { filterTypesObject } from './filters.const';
-import type { Column, StickyFilters } from '../types';
+import type { Column, StickyFilters, FiltersOnly } from '../types';
 
 const getStyles = (theme: Theme) => ({
     filterButtonContainer: {
@@ -18,6 +18,7 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     columns: ?Array<Column>,
+    filtersOnly?: FiltersOnly,
     stickyFilters: StickyFilters,
     onSelectRestMenuItem: Function,
     onUpdateFilter: Function,
@@ -146,6 +147,7 @@ const getIndividualElementsArray = (
 
 const renderIndividualFilterButtons = ({
     individualElementsArray,
+    filtersOnly,
     visibleSelectorId,
     onSetVisibleSelector,
     onUpdateFilter,
@@ -153,12 +155,13 @@ const renderIndividualFilterButtons = ({
     classes,
 }: {
     individualElementsArray: Array<Column>,
+    filtersOnly?: FiltersOnly,
     visibleSelectorId: ?string,
     onSetVisibleSelector: Function,
     onUpdateFilter: Function,
     onClearFilter: Function,
     classes: Object,
-}) => individualElementsArray
+}) => [...(filtersOnly || []), ...individualElementsArray]
     .map(({ id, type, header, options, multiValueFilter }) => (
         <div
             key={id}
@@ -201,10 +204,12 @@ const FiltersPlain = memo<Props>((props: Props) => {
         onSelectRestMenuItem,
         onUpdateFilter,
         onClearFilter,
+        filtersOnly,
         classes,
     } = props;
 
     const [visibleSelectorId, setVisibleSelector] = React.useState(undefined);
+    const filtersOnlyCount = filtersOnly ? filtersOnly.length : 0;
 
     const elementsContainer = React.useMemo(() => {
         const notEmptyColumns = columns || [];
@@ -216,7 +221,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         const { fillUpElements, remainingElements: remainingElementsAfterFillUp } =
         fillUpIndividualElements(
             remainingElementsAfterInitSplit,
-            initValueElements.size,
+            initValueElements.size + filtersOnlyCount,
         );
 
         const { userSelectedElements, remainingElements } =
@@ -239,6 +244,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
     }, [
         columns,
         stickyFilters,
+        filtersOnlyCount,
     ]);
 
     const handleRestMenuItemSelected = React.useCallback((id: string) => {
@@ -257,6 +263,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
             onSetVisibleSelector: setVisibleSelector,
             onUpdateFilter,
             onClearFilter,
+            filtersOnly,
             classes,
         });
         const restButton = renderRestButton(
@@ -276,6 +283,7 @@ const FiltersPlain = memo<Props>((props: Props) => {
         handleRestMenuItemSelected,
         onUpdateFilter,
         onClearFilter,
+        filtersOnly,
     ]);
 
     return (

@@ -18,6 +18,15 @@ export type Column = {
 
 export type Columns = Array<Column>;
 
+export type FilterOnly = {
+    id: string,
+    type: $Values<dataElementTypes>,
+    header: string,
+    options?: ?Options,
+    multiValueFilter?: boolean,
+};
+
+export type FiltersOnly = Array<FilterOnly>;
 export type DataSourceItem = { [id: string]: string };
 
 export type DataSource = Array<DataSourceItem>;
@@ -67,6 +76,7 @@ export type SelectRow = (rowData: DataSourceItem) => void;
 export type Sort = (id: string, direction: string) => void;
 export type InterfaceProps = $ReadOnly<{|
     columns?: Columns,
+    filtersOnly?: FiltersOnly,
     currentPage: number,
     customMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,

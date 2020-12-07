@@ -16,13 +16,14 @@ export const initTeiViewEpic = (
         ofType(workingListsCommonActionTypes.LIST_VIEW_INIT),
         filter(({ payload: { workingListsType } }) => workingListsType === TEI_WORKING_LISTS_TYPE),
         concatMap((action) => {
-            const { storeId, columnsMetaForDataFetching } = action.payload;
+            const { storeId, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching } = action.payload;
             const { programId, orgUnitId } = action.payload.context;
             return from(initTeiWorkingListsView({
                 programId,
                 orgUnitId,
                 storeId,
                 columnsMetaForDataFetching,
+                filtersOnlyMetaForDataFetching,
                 singleResourceQuery,
                 absoluteApiPath,
             })).pipe(takeUntil(action$.pipe(
@@ -40,7 +41,8 @@ export const updateTeiListEpic = (
         ofType(workingListsCommonActionTypes.LIST_UPDATE),
         filter(({ payload: { workingListsType } }) => workingListsType === TEI_WORKING_LISTS_TYPE),
         concatMap((action) => {
-            const { storeId, columnsMetaForDataFetching, queryArgs } = action.payload;
+            const { storeId, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching, queryArgs } = action.payload;
+
             const {
                 currentPage: page,
                 rowsPerPage: pageSize,
@@ -61,6 +63,7 @@ export const updateTeiListEpic = (
                 sortByDirection,
                 storeId,
                 columnsMetaForDataFetching,
+                filtersOnlyMetaForDataFetching,
                 singleResourceQuery,
                 absoluteApiPath,
             })).pipe(takeUntil(action$.pipe(

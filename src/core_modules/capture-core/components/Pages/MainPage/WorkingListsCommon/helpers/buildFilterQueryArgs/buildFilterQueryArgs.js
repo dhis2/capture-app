@@ -44,6 +44,7 @@ function convertFilter(
 export const buildFilterQueryArgs = (
     filters: FiltersData, {
         columns,
+        filtersOnly,
         storeId,
         isInit = false,
     }: BuildFilterQueryArgsMeta,
@@ -51,14 +52,14 @@ export const buildFilterQueryArgs = (
     .keys(filters)
     .filter(key => filters[key])
     .reduce((acc, key) => {
-        const column = columns.get(key);
-        if (!column) {
+        const { type } = columns.get(key) || (filtersOnly && filtersOnly.get(key)) || {};
+        if (!type) {
             log.error(errorCreator('Could not get type for key')({ key, storeId }));
         } else {
             const sourceValue = filters[key];
             const queryArgValue = convertFilter(
                 sourceValue,
-                column.type, {
+                type, {
                     key,
                     storeId,
                     isInit,

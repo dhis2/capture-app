@@ -20,13 +20,15 @@ export const updateTeiWorkingListsRecords = ({
     storeId,
     filters: filterSource,
     columnsMetaForDataFetching,
+    filtersOnlyMetaForDataFetching,
     singleResourceQuery,
     absoluteApiPath,
 }: Input) => {
-    const filters = buildFilterQueryArgs(filterSource, { columns: columnsMetaForDataFetching, storeId });
+    const filters = buildFilterQueryArgs(filterSource, { columns: columnsMetaForDataFetching, filtersOnly: filtersOnlyMetaForDataFetching, storeId });
 
     return getTeiListData({ programId, orgUnitId, pageSize, page, filters, sortById, sortByDirection }, {
         columnsMetaForDataFetching,
+        filtersOnlyMetaForDataFetching,
         singleResourceQuery,
         absoluteApiPath })
         .then(({ teis, request }) => updateListSuccess(storeId, {

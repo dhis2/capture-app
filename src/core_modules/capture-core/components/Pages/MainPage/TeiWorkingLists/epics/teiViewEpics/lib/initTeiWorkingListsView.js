@@ -26,6 +26,7 @@ export const initTeiWorkingListsView = ({
     orgUnitId,
     storeId,
     columnsMetaForDataFetching,
+    filtersOnlyMetaForDataFetching,
     singleResourceQuery,
     absoluteApiPath,
 }: Input) => {
@@ -35,6 +36,7 @@ export const initTeiWorkingListsView = ({
 
     return getTeiListData({ programId, orgUnitId, pageSize, page, sortById, sortByDirection }, {
         columnsMetaForDataFetching,
+        filtersOnlyMetaForDataFetching,
         singleResourceQuery,
         absoluteApiPath })
         .then(({ teis, request }) =>

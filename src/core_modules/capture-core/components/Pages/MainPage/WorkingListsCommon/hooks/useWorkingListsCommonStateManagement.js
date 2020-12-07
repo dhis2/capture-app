@@ -179,11 +179,10 @@ const useView = (
                     workingListsType,
                 },
             )),
-        onUpdateList: (queryArgs: Object, columnsMetaForDataFetching: Object, lastTransaction: number) =>
+        onUpdateList: (queryArgs: Object, meta: Object) =>
             dispatch(updateList(
                 queryArgs, {
-                    columnsMetaForDataFetching,
-                    lastTransaction,
+                    ...meta,
                     categoryCombinationId,
                     storeId,
                     workingListsType,
