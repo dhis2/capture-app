@@ -11,7 +11,8 @@ export const TeiWorkingListsReduxProvider = ({ storeId }: Props) => {
     const programId = useSelector(({ currentSelections }) => currentSelections.programId);
     const program = useTrackerProgram(programId);
 
-    const commonStateManagementProps = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
+    // Being pragmatic here, disabling behavior we will implement later
+    const commonStateManagementProps: Object = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
 
     const currentTemplateId = useSelector(({ workingListsTemplates }) =>
         workingListsTemplates[storeId] && workingListsTemplates[storeId].selectedTemplateId);
@@ -27,9 +28,10 @@ export const TeiWorkingListsReduxProvider = ({ storeId }: Props) => {
     delete commonStateManagementProps.lastTransaction;
     delete commonStateManagementProps.lastTransactionOnListDataRefresh;
     delete commonStateManagementProps.listDataRefreshTimestamp;
+    delete commonStateManagementProps.onAddTemplate;
+    // ----------------------------------------------------------------
 
     return (
-        // $FlowFixMe lastTransaction, lastTransactionOnListDataRefresh and listDataRefreshTimestamp is deleted but flow doesn't recognize this
         <TeiWorkingListsSetup
             {...commonStateManagementProps}
             onSelectListRow={onSelectListRow}

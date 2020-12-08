@@ -5,15 +5,21 @@ import type { ListViewConfigOutputProps } from '../ListViewConfig';
 
 type ExtractedProps = {|
     currentTemplate: WorkingListTemplate,
-    onAddTemplate: Function,
-    onUpdateTemplate: Function,
-    onDeleteTemplate: Function,
+    onAddTemplate?: Function,
+    onUpdateTemplate?: Function,
+    onDeleteTemplate?: Function,
     currentViewHasTemplateChanges: boolean,
     customListViewMenuContents?: CustomMenuContents,
     classes: Object,
 |};
 
-type RestProps = $Rest<ListViewConfigOutputProps, ExtractedProps>;
+type OptionalExtractedProps = {|
+    onAddTemplate: Function,
+    onUpdateTemplate: Function,
+    onDeleteTemplate: Function,
+|};
+
+type RestProps = $Rest<ListViewConfigOutputProps & OptionalExtractedProps, ExtractedProps & OptionalExtractedProps>;
 
 export type Props = {|
     ...RestProps,

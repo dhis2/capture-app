@@ -95,9 +95,9 @@ export type ManagerContextData = {|
 
 export type ListViewConfigContextData = {|
     currentViewHasTemplateChanges?: boolean,
-    onAddTemplate: AddTemplate,
-    onUpdateTemplate: UpdateTemplate,
-    onDeleteTemplate: DeleteTemplate,
+    onAddTemplate?: AddTemplate,
+    onUpdateTemplate?: UpdateTemplate,
+    onDeleteTemplate?: DeleteTemplate,
 |};
 
 export type ListViewLoaderContextData = {|
@@ -159,14 +159,14 @@ export type InterfaceProps = $ReadOnly<{|
     loading: boolean,
     loadViewError?: string,
     loadTemplatesError?: string,
-    onAddTemplate: AddTemplate,
+    onAddTemplate?: AddTemplate,
     onCancelLoadView?: CancelLoadView,
     onCancelLoadTemplates?: CancelLoadTemplates,
     onCancelUpdateList?: CancelUpdateList,
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
-    onDeleteTemplate: DeleteTemplate,
+    onDeleteTemplate?: DeleteTemplate,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
     onSelectListRow: SelectRow,
@@ -177,7 +177,7 @@ export type InterfaceProps = $ReadOnly<{|
     onUnloadingContext?: UnloadingContext,
     onUpdateFilter: UpdateFilter,
     onUpdateList: UpdateList,
-    onUpdateTemplate: UpdateTemplate,
+    onUpdateTemplate?: UpdateTemplate,
     orgUnitId: string,
     programId: string,
     rowIdKey: string,

@@ -24,7 +24,6 @@ import type {
     UpdateFilter,
 } from '../../WorkingLists';
 import type {
-    AddTemplate,
     CustomColumnOrder,
     RecordsOrder,
     UpdateTemplate,
@@ -51,7 +50,6 @@ export type TeiWorkingListsReduxOutputProps = {|
     loading: boolean,
     loadViewError?: string,
     loadTemplatesError?: string,
-    onAddTemplate: AddTemplate,
     onCancelLoadView: CancelLoadView,
     onCancelLoadTemplates: CancelLoadTemplates,
     onCancelUpdateList: CancelUpdateList,

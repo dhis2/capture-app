@@ -7,8 +7,8 @@ import type {
 
 export type Props = $ReadOnly<{|
     currentViewHasTemplateChanges?: boolean,
-    onAddTemplate: AddTemplate,
-    onUpdateTemplate: UpdateTemplate,
-    onDeleteTemplate: DeleteTemplate,
+    onAddTemplate?: AddTemplate,
+    onUpdateTemplate?: UpdateTemplate,
+    onDeleteTemplate?: DeleteTemplate,
     children: React$Node,
 |}>;
