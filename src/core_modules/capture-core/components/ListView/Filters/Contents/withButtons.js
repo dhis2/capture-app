@@ -89,7 +89,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                                 primary
                                 onClick={this.handleUpdateClick}
                             >
-                                {i18n.t('Update')}
+                                {i18n.t('Apply')}
                             </Button>
                         </div>
                         <Button
@@ -97,7 +97,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                             secondary
                             onClick={onClose}
                         >
-                            {i18n.t('Close')}
+                            {i18n.t('Cancel')}
                         </Button>
                     </div>
                 </React.Fragment>
