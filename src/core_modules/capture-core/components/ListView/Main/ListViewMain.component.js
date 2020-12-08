@@ -91,6 +91,7 @@ class ListViewMainPlain extends React.PureComponent<Props> {
         return (
             <ListComponent
                 {...passOnProps}
+                customRowMenuContents={customRowMenuContents}
                 onRowClick={onSelectRow}  // TODO: Fix row click naming for the online and offline list
             />
         );
