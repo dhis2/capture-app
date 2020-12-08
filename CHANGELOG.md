@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/dhis2/capture-app/compare/v1.3.3...v1.3.4) (2020-12-08)
+
+
+### Bug Fixes
+
+* improves perf ([3b45739](https://github.com/dhis2/capture-app/commit/3b45739d0c0933884220b6731291bb9a85fd8956))
+
 ## [1.3.3](https://github.com/dhis2/capture-app/compare/v1.3.2...v1.3.3) (2020-12-08)
 
 
