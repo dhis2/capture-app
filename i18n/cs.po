@@ -135,6 +135,9 @@ msgstr "Zápis"
 msgid "A future date is not allowed"
 msgstr "Budoucí datum není povoleno"
 
+msgid "Metadata error. see log for details"
+msgstr "Chyba metadat. viz log pro podrobnosti"
+
 msgid "An error has occurred. See log for details"
 msgstr "Došlo k chybě. Podrobnosti najdete v protokolu"
 
@@ -631,6 +634,15 @@ msgstr "Chcete-li začít hlášení zpráv, vyberte možnost kategorie"
 msgid "You dont have access to create an event in the current selections"
 msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
 
+msgid "Review duplicates"
+msgstr "Zkontrolujte duplikáty"
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr "Vytvořit {{trackedEntityTypeName}} a odkaz"
+
+msgid "Review Duplicates"
+msgstr "Zkontrolovat duplikáty"
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "Existuje duplikát (ale došlo k některým chybám, podrobnosti najdete v "
@@ -661,15 +673,6 @@ msgstr "Registrovaná osoba"
 msgid "Link"
 msgstr "Odkaz"
 
-msgid "Metadata error. see log for details"
-msgstr "Chyba metadat. viz log pro podrobnosti"
-
-msgid "Review duplicates"
-msgstr "Zkontrolujte duplikáty"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "Vytvořit {{trackedEntityTypeName}} a odkaz"
-
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
 
@@ -690,9 +693,6 @@ msgstr "Organizační jednotka"
 
 msgid "Registration"
 msgstr "Registrace"
-
-msgid "Review Duplicates"
-msgstr "Zkontrolovat duplikáty"
 
 msgid "Search results"
 msgstr "Výsledky vyhledávání"
