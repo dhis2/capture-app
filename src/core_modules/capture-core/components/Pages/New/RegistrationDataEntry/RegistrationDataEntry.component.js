@@ -25,34 +25,19 @@ const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     </>);
 
 
-export const RegistrationDataEntryComponent = ({ selectedScopeId, dataEntryId, onSave }: OwnProps) => {
+export const RegistrationDataEntryComponent = (
+    {
+        selectedScopeId,
+        dataEntryId,
+        onSave,
+        onSaveWithEnrollment,
+    }: OwnProps) => {
     const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
     const { registrationMetaData } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const orgUnit = useCurrentOrgUnitInfo();
 
     return (
         <>
-            {
-                scopeType === scopeTypes.TRACKER_PROGRAM &&
-                <>
-                    <EnrollmentRegistrationEntry
-                        id={dataEntryId}
-                        selectedScopeId={selectedScopeId}
-                        enrollmentMetadata={registrationMetaData}
-                        saveButtonText={'Save new'}
-                        onSave={() => alert('onSave will save in the future')}
-                        onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
-                        onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
-                        onUpdateField={() => console.log('onUpdateField will be here in the future in the future')}
-                        onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future in the future')}
-                    />
-                    <InfoIconText
-                        text={translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name)}
-                    />
-
-                </>
-            }
-
             {
                 scopeType === scopeTypes.TRACKED_ENTITY_TYPE &&
                 <>
@@ -67,6 +52,26 @@ export const RegistrationDataEntryComponent = ({ selectedScopeId, dataEntryId, o
                     />
                     <InfoIconText
                         text={translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
+                    />
+                </>
+            }
+
+            {
+                scopeType === scopeTypes.TRACKER_PROGRAM &&
+                <>
+                    <EnrollmentRegistrationEntry
+                        id={dataEntryId}
+                        selectedScopeId={selectedScopeId}
+                        enrollmentMetadata={registrationMetaData}
+                        saveButtonText={'Save new'}
+                        onSave={onSaveWithEnrollment}
+                        onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
+                        onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
+                        onUpdateField={() => console.log('onUpdateField will be here in the future in the future')}
+                        onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future in the future')}
+                    />
+                    <InfoIconText
+                        text={translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name)}
                     />
                 </>
             }

@@ -192,7 +192,9 @@ import {
 } from '../core_modules/capture-core/components/DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.epics';
 import {
     completeSavingNewTrackedEntityTypeEpic,
+    completeSavingNewTrackedEntityTypeWithEnrollmentEpic,
     startSavingNewTrackedEntityTypeEpic,
+    startSavingNewTrackedEntityTypeWithEnrollmentEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 import { openNewRegistrationPageWithoutProgramIdEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
 
@@ -307,7 +309,9 @@ export default combineEpics(
     startNewTeiDataEntrySelfInitialisationEpic,
     startNewEnrollmentDataEntrySelfInitialisationEpic,
     startSavingNewTrackedEntityTypeEpic,
+    startSavingNewTrackedEntityTypeWithEnrollmentEpic,
     completeSavingNewTrackedEntityTypeEpic,
+    completeSavingNewTrackedEntityTypeWithEnrollmentEpic,
     openNewRegistrationPageWithoutProgramIdEpic,
     ...getDataEntryEpics(),
 );

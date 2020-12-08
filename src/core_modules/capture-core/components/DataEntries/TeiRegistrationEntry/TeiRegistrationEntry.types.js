@@ -1,5 +1,4 @@
 // @flow
-import type { RenderFoundation } from '../../../metaData/RenderFoundation';
 import type { RegistrationFormMetadata } from '../common/types';
 
 export type OwnProps = $ReadOnly<{|
@@ -8,7 +7,7 @@ export type OwnProps = $ReadOnly<{|
   selectedScopeId: string,
   saveButtonText: string,
   fieldOptions?: Object,
-  onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
+  onSave: () => void,
   onGetUnsavedAttributeValues: Function,
   onPostProcessErrorMessage: Function,
 |}>
