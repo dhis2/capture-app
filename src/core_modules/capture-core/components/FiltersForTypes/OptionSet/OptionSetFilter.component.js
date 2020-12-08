@@ -11,6 +11,9 @@ const getStyles = (theme: Theme) => ({
         overflowY: 'auto',
         marginRight: theme.typography.pxToRem(-24),
     },
+    inner: {
+        marginLeft: 12,
+    },
 });
 
 type Props = {
@@ -51,6 +54,7 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
             <div
                 className={classes.selectBoxesContainer}
             >
+                <div className={classes.inner}>
                 { /* $FlowFixMe */ }
                 <SelectBoxes
                     options={options}
@@ -58,7 +62,9 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
                     onBlur={onCommitValue}
                     orientation={orientations.VERTICAL}
                     multiSelect={!singleSelect}
+                    nullable
                 />
+                </div>
             </div>
         );
     }

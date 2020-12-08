@@ -36,6 +36,10 @@ const styles = theme => ({
     popperContainer: {
         zIndex: 100,
     },
+    iconContainer: {
+        position: 'absolute',
+        marginTop: '-24px',
+    },
 });
 
 class Index extends React.Component<Props, State> {
@@ -113,6 +117,7 @@ class Index extends React.Component<Props, State> {
                             return (
                                 <div
                                     ref={this.handleReferenceInstanceRetrieved}
+                                    className={classes.iconContainer}
                                 >
                                     <IconButton
                                         data-test="dhis2-capture-event-content-menu"

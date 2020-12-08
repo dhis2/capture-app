@@ -57,6 +57,7 @@ class MultiSelectBoxesPlain extends Component<Props> {
                         }
                         checked={this.isChecked(value)}
                         {...passOnProps}
+                        disableRipple
                     />
                 }
                 label={text}

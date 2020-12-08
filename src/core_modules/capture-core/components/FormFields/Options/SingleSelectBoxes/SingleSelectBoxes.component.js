@@ -8,13 +8,19 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
 
-import RadioOffIcon from '@material-ui/icons/PanoramaFishEye';
-import RadioOnIcon from '@material-ui/icons/CheckCircle';
+import CheckedIcon from 'capture-ui/Icons/SingleSelectionCheckedIcon.component';
+import UncheckedIcon from 'capture-ui/Icons/SingleSelectionUncheckedIcon.component';
 
 import { singleOrientations } from './singleSelectBoxes.const';
 
 const styles = theme => ({
     label: theme.typography.formFieldTitle,
+    iconSelected: {
+        fill: theme.palette.secondary.main,
+    },
+    iconDeselected: {
+        fill: theme.palette.grey[700],
+    },
 });
 
 type Props = {
@@ -27,6 +33,8 @@ type Props = {
     required?: ?boolean,
     classes: {
         label: string,
+        iconSelected: string,
+        iconDeselected: string,
     },
     style?: ?Object,
 };
@@ -51,7 +59,7 @@ class SingleSelectBoxesPlain extends Component<Props> {
     }
 
     getBoxes(passOnProps: ?Object) {
-        const { options } = this.props;
+        const { options, classes } = this.props;
         return options.map(({ text, value }, index: number) => (
             <FormControlLabel
                 control={
@@ -61,11 +69,12 @@ class SingleSelectBoxesPlain extends Component<Props> {
                         }
                         checked={this.isChecked(value)}
                         icon={
-                            <RadioOffIcon />
+                            <UncheckedIcon className={classes.iconDeselected} />
                         }
                         checkedIcon={
-                            <RadioOnIcon />
+                            <CheckedIcon className={classes.iconSelected} />
                         }
+                        disableRipple
                         {...passOnProps}
                     />
                 }
