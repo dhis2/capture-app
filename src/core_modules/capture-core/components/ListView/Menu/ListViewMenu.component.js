@@ -88,6 +88,10 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
         </Paper>
     ), [renderMenuItems]);
 
+    if (customMenuContents.length <= 0) {
+        return null;
+    }
+
     return (
         <Popper
             getPopperAction={renderPopperAction}

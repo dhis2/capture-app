@@ -1,6 +1,6 @@
 // @flow
-import type { Columns } from '../types';
 import type { ListViewContextBuilderPassOnProps } from '../ContextBuilder';
+import type { CustomRowMenuContents, CustomMenuContents, Columns } from '../types';
 
 type WithFilterPassOnProps = {|
     ...ListViewContextBuilderPassOnProps,
@@ -12,7 +12,8 @@ type ComponentProps = {|
     updatingWithDialog?: boolean,
     onSetColumnOrder: Function,
     rowIdKey: string,
-    customMenuContents?: Array<Object>,
+    customMenuContents?: CustomMenuContents,
+    customRowMenuContents?: CustomRowMenuContents,
     onSelectRow: Function,
     ...CssClasses,
 |};

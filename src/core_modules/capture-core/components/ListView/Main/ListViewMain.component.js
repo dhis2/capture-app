@@ -80,10 +80,16 @@ class ListViewMainPlain extends React.PureComponent<Props> {
             filters,
             updatingWithDialog,
             onSelectRow,
+            customRowMenuContents,
             ...passOnProps
         } = this.props;
+
+        const ListComponent = (!customRowMenuContents || customRowMenuContents.length <= 0) ?
+            OnlineList :
+            ListWithEndColumnMenu;
+
         return (
-            <ListWithEndColumnMenu
+            <ListComponent
                 {...passOnProps}
                 onRowClick={onSelectRow}  // TODO: Fix row click naming for the online and offline list
             />
