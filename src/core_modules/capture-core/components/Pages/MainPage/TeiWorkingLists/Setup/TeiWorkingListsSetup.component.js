@@ -28,6 +28,7 @@ const useStaticTemplates = () => useMemo(() => ([{
 }, {
     id: 'active',
     name: 'Active enrollments',
+    order: 1,
     access: {
         update: false,
         delete: false,
@@ -40,6 +41,7 @@ const useStaticTemplates = () => useMemo(() => ([{
 }, {
     id: 'complete',
     name: 'Completed enrollments',
+    order: 2,
     access: {
         update: false,
         delete: false,
@@ -52,6 +54,7 @@ const useStaticTemplates = () => useMemo(() => ([{
 }, {
     id: 'cancelled',
     name: 'Cancelled enrollments',
+    order: 3,
     access: {
         update: false,
         delete: false,

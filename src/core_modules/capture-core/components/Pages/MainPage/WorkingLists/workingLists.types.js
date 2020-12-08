@@ -30,6 +30,7 @@ export type WorkingListTemplate = {
     notPreserved?: boolean,
     updating?: boolean,
     deleted?: boolean,
+    order?: number,
 };
 
 export type WorkingListTemplates = Array<WorkingListTemplate>;
