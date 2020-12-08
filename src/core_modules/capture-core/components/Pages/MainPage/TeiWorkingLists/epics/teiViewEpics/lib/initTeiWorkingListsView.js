@@ -6,6 +6,7 @@ import { getTeiListData } from './getTeiListData';
 import {
     initListViewSuccess,
     initListViewError,
+    buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
 import type { Input } from './initTeiWorkingListsView.types';
 
@@ -21,10 +22,23 @@ const getSortByConfig = (columnsMetaForDataFetching) => {
     };
 };
 
+const getClientFilters = (criteria = {}) => {
+    // Build logic later when we actually have some non static templates
+    const { programStatus } = criteria;
+
+    return programStatus ? {
+        programStatus: {
+            usingOptionSet: true,
+            values: [programStatus],
+        },
+    } : {};
+};
+
 export const initTeiWorkingListsView = ({
     programId,
     orgUnitId,
     storeId,
+    selectedTemplate,
     columnsMetaForDataFetching,
     filtersOnlyMetaForDataFetching,
     singleResourceQuery,
@@ -33,8 +47,9 @@ export const initTeiWorkingListsView = ({
     const { sortById, sortByDirection } = getSortByConfig([...columnsMetaForDataFetching.values()]);
     const pageSize = 15;
     const page = 1;
-
-    return getTeiListData({ programId, orgUnitId, pageSize, page, sortById, sortByDirection }, {
+    const filters = getClientFilters(selectedTemplate.criteria);
+    const apiFilters = buildFilterQueryArgs(filters, { columns: columnsMetaForDataFetching, filtersOnly: filtersOnlyMetaForDataFetching, storeId, isInit: true });
+    return getTeiListData({ programId, orgUnitId, pageSize, page, sortById, sortByDirection, filters: apiFilters }, {
         columnsMetaForDataFetching,
         filtersOnlyMetaForDataFetching,
         singleResourceQuery,
@@ -50,6 +65,7 @@ export const initTeiWorkingListsView = ({
                 config: {
                     sortById,
                     sortByDirection,
+                    filters,
                     selections: {
                         programId,
                         orgUnitId,

@@ -16,12 +16,14 @@ export const initTeiViewEpic = (
         ofType(workingListsCommonActionTypes.LIST_VIEW_INIT),
         filter(({ payload: { workingListsType } }) => workingListsType === TEI_WORKING_LISTS_TYPE),
         concatMap((action) => {
-            const { storeId, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching } = action.payload;
+            const { storeId, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching, selectedTemplate } = action.payload;
             const { programId, orgUnitId } = action.payload.context;
+
             return from(initTeiWorkingListsView({
                 programId,
                 orgUnitId,
                 storeId,
+                selectedTemplate,
                 columnsMetaForDataFetching,
                 filtersOnlyMetaForDataFetching,
                 singleResourceQuery,

@@ -1,8 +1,8 @@
 // @flow
-import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { TeiWorkingListsSetup } from '../Setup';
-import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
+import { useWorkingListsCommonStateManagement, fetchTemplatesSuccess, fetchTemplates } from '../../WorkingListsCommon';
 import { useTrackerProgram } from '../../../../../hooks/useTrackerProgram';
 import { TEI_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './teiWorkingListsReduxProvider.types';
@@ -13,41 +13,29 @@ export const TeiWorkingListsReduxProvider = ({ storeId }: Props) => {
 
     const commonStateManagementProps = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
 
-    // ------ TEMPORARY DUMMY DATA TO BYPASS LOADING IN THIS PR!!! ------
-    const loadedContext = {
-        ...commonStateManagementProps.loadedContext,
-        programIdTemplates: programId,
-    };
+    const currentTemplateId = useSelector(({ workingListsTemplates }) =>
+        workingListsTemplates[storeId] && workingListsTemplates[storeId].selectedTemplateId);
 
-    const currentTemplate = useMemo(() => ({
-        id: 'default',
-        isDefault: true,
-        name: 'default',
-        access: {
-            update: false,
-            delete: false,
-            write: false,
-            manage: false,
-        },
-    }), []);
+    const dispatch = useDispatch();
 
-    const dummyData = {
-        currentTemplate,
-        templates: [currentTemplate],
-        loadedContext,
-        onSelectListRow: () => {},
-        lastTransaction: undefined,
-        lastTransactionOnListDataRefresh: undefined,
-        listDataRefreshTimestamp: undefined,
-    };
-    // ---------------------------------------------------------------
+    const onLoadTemplates = useCallback(() => {
+        dispatch(fetchTemplates(programId, storeId, TEI_WORKING_LISTS_TYPE));
+        dispatch(fetchTemplatesSuccess([], 'default', storeId));
+    }, [dispatch, programId, storeId]);
+    const onSelectListRow = useCallback(() => {}, []);
+
+    delete commonStateManagementProps.lastTransaction;
+    delete commonStateManagementProps.lastTransactionOnListDataRefresh;
+    delete commonStateManagementProps.listDataRefreshTimestamp;
 
     return (
-        // $FlowFixMe Yep, dealing with this later
+        // $FlowFixMe lastTransaction, lastTransactionOnListDataRefresh and listDataRefreshTimestamp is deleted but flow doesn't recognize this
         <TeiWorkingListsSetup
             {...commonStateManagementProps}
-            {...dummyData}
+            onSelectListRow={onSelectListRow}
+            onLoadTemplates={onLoadTemplates}
             program={program}
+            currentTemplateId={currentTemplateId}
         />
     );
 };

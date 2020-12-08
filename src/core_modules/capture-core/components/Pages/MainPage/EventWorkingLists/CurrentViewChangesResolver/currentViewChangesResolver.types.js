@@ -36,17 +36,3 @@ export type CurrentViewChangesResolverOutputProps = {|
     sortByDirection?: string,
     currentViewHasTemplateChanges?: boolean,
 |};
-
-export type CurrentViewConfig = {
-    filters: FiltersData,
-    columns: EventWorkingListsColumnConfigs,
-    sortById: string,
-    sortByDirection: string,
-};
-
-export type InitialViewConfig = {
-    filters: FiltersData,
-    visibleColumnIds: Array<string>,
-    sortById: string,
-    sortByDirection: string,
-};

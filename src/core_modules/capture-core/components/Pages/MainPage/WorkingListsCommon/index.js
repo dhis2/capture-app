@@ -4,6 +4,7 @@ export {
     useWorkingListsCommonStateManagementOffline,
     useColumns,
     useDataSource,
+    useViewHasTemplateChanges,
 } from './hooks';
 export * from './actions';
 export { includeFiltersWithValueAfterColumnSortingEpic } from './epics';

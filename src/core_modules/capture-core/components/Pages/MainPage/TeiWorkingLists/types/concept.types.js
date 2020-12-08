@@ -16,6 +16,7 @@ export type TeiWorkingListsTemplate = {
         write: boolean,
         manage: boolean,
     },
+    criteria?: { [string]: any },
     notPreserved?: boolean,
     deleted?: boolean,
     updating?: boolean,
@@ -76,3 +77,4 @@ export type LoadTeiView = (
         filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
     |},
 ) => void;
+

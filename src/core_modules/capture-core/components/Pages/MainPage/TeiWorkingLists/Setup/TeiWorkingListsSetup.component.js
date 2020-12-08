@@ -8,8 +8,60 @@ import {
 import type { Props } from './teiWorkingListsSetup.types';
 import { WorkingLists } from '../../WorkingLists';
 import { useDefaultColumnConfig } from './useDefaultColumnConfig';
-import { useColumns, useDataSource } from '../../WorkingListsCommon';
+import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
+
+const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
+    (currentTemplateId && templates.find(template => template.id === currentTemplateId)) || templates[0],
+[templates, currentTemplateId]);
+
+const useStaticTemplates = () => useMemo(() => ([{
+    id: 'default',
+    isDefault: true,
+    name: 'default',
+    access: {
+        update: false,
+        delete: false,
+        write: false,
+        manage: false,
+    },
+}, {
+    id: 'active',
+    name: 'Active enrollments',
+    access: {
+        update: false,
+        delete: false,
+        write: false,
+        manage: false,
+    },
+    criteria: {
+        programStatus: 'ACTIVE',
+    },
+}, {
+    id: 'complete',
+    name: 'Completed enrollments',
+    access: {
+        update: false,
+        delete: false,
+        write: false,
+        manage: false,
+    },
+    criteria: {
+        programStatus: 'COMPLETED',
+    },
+}, {
+    id: 'cancelled',
+    name: 'Cancelled enrollments',
+    access: {
+        update: false,
+        delete: false,
+        write: false,
+        manage: false,
+    },
+    criteria: {
+        programStatus: 'CANCELLED',
+    },
+}]), []);
 
 const useFiltersOnly = ({ enrollment: { enrollmentDateLabel, incidentDateLabel } }: TrackerProgram) => useMemo(() => [{
     id: 'programStatus',
@@ -106,28 +158,36 @@ const useInjectDataFetchingMetaToUpdateList = (defaultColumns, filtersOnly, onUp
 
 export const TeiWorkingListsSetup = ({
     program,
-    onDeleteTemplate,
     onUpdateList,
     onLoadView,
     customColumnOrder,
     records,
     recordsOrder,
+    currentTemplateId,
+    initialViewConfig,
+    filters,
+    sortById,
+    sortByDirection,
     ...passOnProps
 }: Props) => {
     const defaultColumns = useDefaultColumnConfig(program);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
-
-    // ------- DUMMY DATA!!! --------
-    const dummyData = {
-        onDeleteTemplate: template => onDeleteTemplate(template, program.id),
-    };
-    // ------------------------------
+    const templates = useStaticTemplates();
+    const viewHasChanges = useViewHasTemplateChanges({
+        initialViewConfig,
+        defaultColumns,
+        filters,
+        columns,
+        sortById,
+        sortByDirection,
+    });
 
     return (
         <WorkingLists
             {...passOnProps}
-            {...dummyData}
+            currentTemplate={useCurrentTemplate(templates, currentTemplateId)}
+            templates={templates}
             columns={columns}
             filtersOnly={filtersOnly}
             dataSource={useDataSource(records, recordsOrder, columns)}
@@ -135,6 +195,10 @@ export const TeiWorkingListsSetup = ({
             onUpdateList={useInjectDataFetchingMetaToUpdateList(defaultColumns, filtersOnly, onUpdateList)}
             programId={program.id}
             rowIdKey="id"
+            currentViewHasTemplateChanges={viewHasChanges}
+            filters={filters}
+            sortById={sortById}
+            sortByDirection={sortByDirection}
         />
     );
 };
