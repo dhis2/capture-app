@@ -568,7 +568,7 @@ msgid "Switch to row view"
 msgstr "Passer à la vue des lignes"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "Nouveau {{TET}}"
 
 msgid "Working Lists"
 msgstr "Listes de tâches"
@@ -635,16 +635,17 @@ msgid "No events added"
 msgstr "Aucun événement n'a été ajouté"
 
 msgid "Choose a registering unit and program to get started"
-msgstr ""
+msgstr "Choisissez une unité d'enregistrement et un programme pour commencer"
 
 msgid "Choose a program to start reporting"
-msgstr ""
+msgstr "Choisissez un programme pour commencer un rapport"
 
 msgid "Choose a category option to start reporting"
-msgstr ""
+msgstr "Choisissez une option de catégorie pour commencer un rapport"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
+"Vous n'êtes pas autorisé à créer un événement dans les sélections actuelles"
 
 msgid "Review duplicates"
 msgstr "Vérifier les doublons"
@@ -657,11 +658,15 @@ msgstr "Vérifier les doublons"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
+"Un doublon existe (mais des erreurs ont été commises. Voir le journal pour "
+"plus de détails"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
+"Un élément est déjà enregistré avec ce {{nom d'attribut}}, mais vous n'y "
+"avez pas accès"
 
 msgid "You have already registered this {{attributeName}}"
 msgstr "Vous avez déjà enregistré ce {{nom d'attribut}}"
@@ -684,10 +689,10 @@ msgid "Possible duplicates found"
 msgstr "Doublons éventuellement détectés"
 
 msgid "No results found"
-msgstr ""
+msgstr "Aucun résultat trouvé"
 
 msgid "An error occured loading possible duplicates"
-msgstr ""
+msgstr "Une erreur est survenue lors du chargement d'éventuels doublons"
 
 msgid "Hide"
 msgstr "Masquer"
@@ -727,10 +732,10 @@ msgid ""
 msgstr ""
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Rechercher {{nom}}"
 
 msgid "Find by {{name}}"
-msgstr ""
+msgstr "Chercher par {{nom}}"
 
 msgid "Search by attributes"
 msgstr "Chercher par attributs"
@@ -742,9 +747,11 @@ msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 msgstr ""
+"Vous pouvez modifier vos termes de recherche et effectuer une nouvelle "
+"recherche pour trouver les éléments que vous recherchez."
 
 msgid "Back to search"
-msgstr ""
+msgstr " Retour à l'écran de recherche"
 
 msgid "An error has occurred"
 msgstr "Une erreur s'est produite."
@@ -753,17 +760,23 @@ msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
+"Cette recherche rencontre un problème, veuillez modifier les termes de "
+"recherche ou réessayer plus tard. Pour plus de détails, ouvrez l'onglet "
+"Console des outils de développement"
 
 msgid "Too many results"
-msgstr ""
+msgstr "Résultats trop nombreux"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
 msgstr ""
+"Cette recherche a donné trop de résultats. Essayez de changer les termes de "
+"recherche ou de rechercher par plus d'attributs pour réduire le nombre de "
+"résultats."
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "Choisir un type pour commencer la recherche"
 
 msgid "View dashboard"
 msgstr "Voir le tableau de bord"
@@ -778,6 +791,8 @@ msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
 msgstr ""
+"Vous ne trouvez pas les résultats désirés ? Essayez de rechercher tous les "
+"programmes utilisant le type "
 
 msgid "Search in all programs"
 msgstr "Rechercher dans tous les programmes"
@@ -813,7 +828,7 @@ msgid "Add relationship"
 msgstr "Ajouetr relation"
 
 msgid "Results found"
-msgstr ""
+msgstr "Résultats trouvés"
 
 msgid "Selected program"
 msgstr "Programme choisi"
@@ -830,21 +845,23 @@ msgstr "Rechercher"
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
+"Vous pouvez également choisir un programme dans la barre supérieure et y "
+"effectuer une recherche"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "Pour utiliser le programme sélectionné,"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "ouvrez l'application Saisie Tracker"
 
 msgid "An error has occured. See log for details"
 msgstr "Une erreur s'est produite. Voir le journal pour plus de détails"
 
 msgid "Program not found"
-msgstr ""
+msgstr "Programme introuvable"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "Il ne s'agit pas d'un programme de suivi"
 
 msgid "Profile"
 msgstr "Profil"
@@ -857,19 +874,21 @@ msgstr ""
 "Impossible de sauvegarder l'événement. Voir le journal pour plus de détails"
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "Impossible de supprimer l'événement"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "Impossible de sauvegarder la liste des tâches"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "Impossible d'ajouter la liste des tâches"
 
 msgid "Could not delete working list"
 msgstr "Impossible de supprimer la liste des tâches"
 
 msgid "Organisation unit search failed. See log for details"
 msgstr ""
+"Échec de la recherche de l'unité d'organisation. Voir le journal pour plus "
+"de détails"
 
 msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
@@ -878,7 +897,7 @@ msgid "Set coordinate"
 msgstr "Définir les coordonnées"
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "Page {{page en cours}}"
 
 msgid "Date"
 msgstr "Date"
@@ -899,7 +918,7 @@ msgid "To time"
 msgstr "À"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "erreur survenue lors de la validation du champ"
 
 msgid "error"
 msgstr "erreur"
