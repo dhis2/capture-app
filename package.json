@@ -11,7 +11,7 @@
     "@dhis2/d2-icons": "^1.0.1",
     "@dhis2/d2-ui-app": "^2.0.0",
     "@dhis2/d2-ui-org-unit-tree": "^6.1.0",
-    "@dhis2/d2-ui-rich-text": "^6.1.0",
+    "@dhis2/d2-ui-rich-text": "^7.1.0",
     "@dhis2/d2-ui-sharing-dialog": "^6.5.10",
     "@dhis2/ui": "^5.7",
     "@joakim_sm/react-infinite-calendar": "^2.4.2",
