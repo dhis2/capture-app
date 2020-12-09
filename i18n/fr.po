@@ -432,7 +432,7 @@ msgid "Switch to row view"
 msgstr "Passer à la vue des lignes"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "Nouveau {{TET}}"
 
 msgid "Working Lists"
 msgstr "Listes de tâches"
@@ -519,14 +519,19 @@ msgstr "Sélectionnez une option de catégorie pour commencer un rapport"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
+"Vous n'êtes pas autorisé à créer un événement dans les sélections actuelles"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
+"Un doublon existe (mais des erreurs ont été commises. Voir le journal pour "
+"plus de détails"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
+"Un élément est déjà enregistré avec ce {{nom d'attribut}}, mais vous n'y "
+"avez pas accès"
 
 msgid "You have already registered this {{attributeName}}"
 msgstr "Vous avez déjà enregistré ce {{nom d'attribut}}"
@@ -558,7 +563,7 @@ msgid "Possible duplicates found"
 msgstr "Doublons éventuellement détectés"
 
 msgid "An error occured loading possible duplicates"
-msgstr ""
+msgstr "Une erreur est survenue lors du chargement d'éventuels doublons"
 
 msgid "Hide"
 msgstr "Masquer"
@@ -690,16 +695,16 @@ msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "Pour utiliser le programme sélectionné,"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "ouvrez l'application Saisie Tracker"
 
 msgid "Program not found"
-msgstr ""
+msgstr "Programme introuvable"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "Il ne s'agit pas d'un programme de suivi"
 
 msgid "Profile"
 msgstr "Profil"
@@ -713,6 +718,8 @@ msgstr ""
 
 msgid "Organisation unit search failed. See log for details"
 msgstr ""
+"Échec de la recherche de l'unité d'organisation. Voir le journal pour plus "
+"de détails"
 
 msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
@@ -739,7 +746,7 @@ msgid "To time"
 msgstr "À"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "erreur survenue lors de la validation du champ"
 
 msgid "error"
 msgstr "erreur"
