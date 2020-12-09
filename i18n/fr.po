@@ -60,15 +60,17 @@ msgstr "Ecrire commentaire"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
+"Vos données sont en cours de chargement. Veuillez patienter jusqu'à ce que "
+"ce message disparaisse"
 
 msgid "No write access"
-msgstr ""
+msgstr "Aucun accès en écriture"
 
 msgid "Save"
 msgstr "Enregistrer"
 
 msgid "Uploading data"
-msgstr ""
+msgstr "Téléchargement des données"
 
 msgid "Sort"
 msgstr "Trier"
@@ -176,37 +178,37 @@ msgid "Syncing"
 msgstr "Synchronisation"
 
 msgid "Field"
-msgstr ""
+msgstr "Champ"
 
 msgid "could not be updated"
-msgstr ""
+msgstr "mise à jour impossible"
 
 msgid "Start Again"
 msgstr "Recommencer"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "Êtes-vous sûr ? Toutes les données non sauvegardées seront perdues."
 
 msgid "Reset Organisation Unit"
-msgstr ""
+msgstr "Réinitialiser une unité d'organisation"
 
 msgid "Reset Program"
-msgstr ""
+msgstr "Réinitialiser un programme"
 
 msgid "Reset Category Option"
-msgstr ""
+msgstr "Réinitialiser l'option de catégorie"
 
 msgid "Create New Event"
-msgstr ""
+msgstr "Créer un nouvel événement"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "L'événement n'a pas pu être chargé. Etes-vous sûr qu'il existe ?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "L'événement n'a pas pu être chargé"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "L'unité d'organisation n'a pas pu être chargée"
 
 msgid "Update"
 msgstr "Mettre à jour"
@@ -221,37 +223,39 @@ msgid "Rows per page"
 msgstr "Lignes par page"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Impossible de trouver l'unité d'organisation"
 
 msgid "Program doesn't exist"
 msgstr "Le programme n'existe pas"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "Le programme sélectionné est invalide pour l'unité d'enregistrement"
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
+"Sélectionnez une unité d'enregistrement et un programme dans la liste ci-"
+"dessus pour commencer"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "Sélectionnez un programme pour commencer un rapport"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "Sélectionnez une unité d'enregistrement pour commencer un rapport"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "Sélectionnez une option de catégorie pour commencer un rapport"
 
 msgid "New event"
 msgstr "Nouvel événement"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Passer à la vue du formulaire"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Passer à la vue des lignes"
 
 msgid "Saving to"
-msgstr ""
+msgstr "Enregistrement à"
 
 msgid "in"
 msgstr "dans"
@@ -260,6 +264,8 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Il ne s'agit pas d'un programme d'événement ou les métadonnées sont "
+"corrompues. Voir le journal pour plus de détails."
 
 msgid "Save and add another"
 msgstr "Sauvegarder et ajouter nouveau"
@@ -268,13 +274,13 @@ msgid "Save and exit"
 msgstr "Sauvegarder et quitter"
 
 msgid "Are you sure? All unsaved data will be lost"
-msgstr ""
+msgstr "Êtes-vous sûr ? Toutes les données non sauvegardées seront perdues"
 
 msgid "events added"
-msgstr ""
+msgstr "événements ajoutés"
 
 msgid "No events added"
-msgstr ""
+msgstr "Aucun événement n'a été ajouté"
 
 msgid "Reset"
 msgstr "Réinitialiser"
@@ -286,16 +292,16 @@ msgid "Find"
 msgstr "Trouver"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "Unité d'enregistrement sélectionnée"
 
 msgid "Registering Oraginastion Unit"
-msgstr ""
+msgstr "Unité d'organisation d'enregistrement"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Unité d'organisation d'enregistrement"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "Programme choisi"
 
 msgid "Select"
 msgstr "Sélectionner"
@@ -310,7 +316,7 @@ msgid "Show all"
 msgstr "Tout afficher"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Certains programmes sont en cours de filtrage."
 
 msgid "Select program"
 msgstr "Sélectionner le programme"
@@ -319,10 +325,11 @@ msgid "An error has occured. See log for details"
 msgstr "Une erreur s'est produite. Voir le log pour plus de détails"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Erreur lors de la sauvegarde de l'événement"
 
 msgid "Could not save event. See log for details"
 msgstr ""
+"Impossible de sauvegarder l'événement. Voir le journal pour plus de détails"
 
 msgid "Choose one or more dates..."
 msgstr "Choisir une ou plusieurs dates..."
