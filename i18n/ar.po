@@ -139,6 +139,9 @@ msgstr "التسجيل"
 msgid "A future date is not allowed"
 msgstr "لا يسمح بإدخال تاريخ في المستقبل"
 
+msgid "Metadata error. see log for details"
+msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
+
 msgid "An error has occurred. See log for details"
 msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
 
@@ -636,6 +639,15 @@ msgstr "حدد خيار فئة لبدء الإبلاغ"
 msgid "You dont have access to create an event in the current selections"
 msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
 
+msgid "Review duplicates"
+msgstr "مراجعة التكرار"
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr "إنشاء {{trackedEntityTypeName}} وربط"
+
+msgid "Review Duplicates"
+msgstr "مراجعة التكرارات"
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "يوجد نسخة مكررة (ولكن كانت هناك بعض الأخطاء ، راجع السجل للحصول على التفاصيل"
@@ -662,15 +674,6 @@ msgstr "الشخص المسجل"
 msgid "Link"
 msgstr "ربط"
 
-msgid "Metadata error. see log for details"
-msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
-
-msgid "Review duplicates"
-msgstr "مراجعة التكرار"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "إنشاء {{trackedEntityTypeName}} وربط"
-
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
 
@@ -691,9 +694,6 @@ msgstr "الوحدة التنظيمية"
 
 msgid "Registration"
 msgstr "التسجيل"
-
-msgid "Review Duplicates"
-msgstr "مراجعة التكرارات"
 
 msgid "Search results"
 msgstr "نتائج البحث"
