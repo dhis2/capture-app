@@ -131,6 +131,7 @@ export default new ApiSpecification((o) => {
     o.modelName = 'programs';
     o.modelGetterType = getterTypes.LIST;
     o.queryParams = {
+        restrictToCaptureScope: true,
         fields:
             '*,' +
             'dataEntryForm[*],' +
