@@ -141,7 +141,7 @@ msgid "Metadata error. see log for details"
 msgstr "Metadata feil, se logg for detaljer"
 
 msgid "An error has occurred. See log for details"
-msgstr ""
+msgstr "Det har oppstått en feil. Se logg for detaljer"
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -781,9 +781,11 @@ msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
 msgstr ""
+"Finner du ikke resultatene du leter etter? Prøv å søke i alle programmer som"
+" bruker type"
 
 msgid "Search in all programs"
-msgstr ""
+msgstr "Søk i alle programmer"
 
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
