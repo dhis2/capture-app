@@ -137,6 +137,9 @@ msgstr "Registrering"
 msgid "A future date is not allowed"
 msgstr "En fremtidig dato er ikke tillatt"
 
+msgid "Metadata error. see log for details"
+msgstr "Metadata feil, se logg for detaljer"
+
 msgid "An error has occurred. See log for details"
 msgstr ""
 
@@ -637,6 +640,15 @@ msgstr "Velg et kategorialternativ for å starte rapportering"
 msgid "You dont have access to create an event in the current selections"
 msgstr "Du har ikke tilgang til å opprette en hendelse i gjeldende valg"
 
+msgid "Review duplicates"
+msgstr "Gjennomgå duplikater"
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr "Opprett {{trackedEntityTypeName}} og link"
+
+msgid "Review Duplicates"
+msgstr "Gjennomgå duplikater"
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
 
@@ -666,15 +678,6 @@ msgstr "Registrert person"
 msgid "Link"
 msgstr "Link"
 
-msgid "Metadata error. see log for details"
-msgstr "Metadata feil, se logg for detaljer"
-
-msgid "Review duplicates"
-msgstr "Gjennomgå duplikater"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "Opprett {{trackedEntityTypeName}} og link"
-
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
 
@@ -695,9 +698,6 @@ msgstr "Organisasjonsenhet"
 
 msgid "Registration"
 msgstr "Registrering"
-
-msgid "Review Duplicates"
-msgstr "Gjennomgå duplikater"
 
 msgid "Search results"
 msgstr "Søkeresultater"
