@@ -360,7 +360,7 @@ msgid "Selected program is invalid for registering unit"
 msgstr "Le programme sélectionné est invalide pour l'unité d'enregistrement"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
+msgstr "Créer un nouveau {{TET}} dans {{programme}} dans {{orgunit}}"
 
 msgid "Save and add another"
 msgstr "Sauvegarder et ajouter nouveau"
@@ -419,6 +419,7 @@ msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
+"La relation entre le type {{relationTypeNom}} et {{entitéNom}} existe déjà"
 
 msgid "New event"
 msgstr "Nouvel événement"
@@ -436,6 +437,8 @@ msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
+"En quittant cette page, les choix effectués dans le cadre d'une nouvelle "
+"relation seront rejetés"
 
 msgid "events added"
 msgstr "événements ajoutés"
@@ -480,9 +483,11 @@ msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
+"Un {{Nom du type d'entité suivie}} ayant ce {{Nom d'attribut}} est déjà "
+"enregistré"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Afficher le {{Nom du type d'entité suivie}} enregistrés"
 
 msgid "Registered person"
 msgstr "Personne inscrite"
@@ -497,7 +502,7 @@ msgid "Review Duplicates"
 msgstr "Vérifier les doublons"
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "Créer un {{Nom du type d'entité suivie}} et lier"
 
 msgid "Possible duplicates found"
 msgstr "Doublons éventuellement détectés"
@@ -530,7 +535,7 @@ msgid "Search results"
 msgstr "Résultats de la recherche"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "Aucun {{Nom de type d'entité suivie}} trouvé."
 
 msgid "{{teiCount}} results found for"
 msgstr "{{teiCount}} résultats trouvés pour"
@@ -542,10 +547,10 @@ msgid "Edit search"
 msgstr "Modifier la recherche"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "Lier à un {{Type d'entité suivie}} existant"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Créer un nouveau {{Type d'entité suivie}}"
 
 msgid "Register"
 msgstr "Enregistrer"
@@ -615,6 +620,8 @@ msgstr "Chercher par attributs"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
+"Renseigner au moins les attributs {{Nombre minimal d'attributs requis}} pour"
+" la recherche"
 
 msgid "Program not found"
 msgstr "Programme introuvable"
