@@ -9,9 +9,7 @@ export { default as withSelectTranslations } from './Fields/VirtualizedSelectFie
 export { default as SelectionBoxes } from './Fields/SelectionBoxes/SelectionBoxes.component';
 export { default as DateField } from './Fields/DateAndTimeFields/DateField/DateField.component';
 export { default as DateTimeField } from './Fields/DateAndTimeFields/DateTimeField/DateTimeField.component';
-// eslint-disable-next-line import/no-cycle
 export { default as CoordinateField } from './Fields/CoordinateField/CoordinateField.component';
-// eslint-disable-next-line import/no-cycle
 export { default as PolygonField } from './Fields/PolygonField/PolygonField.component';
 export { default as OrgUnitField } from './Fields/OrgUnitField/OrgUnitField.component';
 export { default as SingleOrgUnitSelectField } from './Fields/OrgUnitField/SingleOrgUnitSelectField.component';
