@@ -83,7 +83,9 @@ export default class D2Coordinate extends React.Component<Props, State> {
       value &&
       value.latitude &&
       value.longitude &&
+      // eslint-disable-next-line no-restricted-globals
       !isNaN(parseFloat(value.latitude)) &&
+      // eslint-disable-next-line no-restricted-globals
       !isNaN(parseFloat(value.longitude))
     ) {
       convertedValue = [parseFloat(value.latitude), parseFloat(value.longitude)];

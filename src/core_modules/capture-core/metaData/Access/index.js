@@ -1,2 +1,2 @@
 // @flow
-export { default as Access } from './Access';
+export { Access } from './Access';

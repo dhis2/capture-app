@@ -8,7 +8,6 @@ import { getOptionsForRadioButtons, getOptionsForSelect } from './optionSetHelpe
 import { orientations } from '../../../../FormFields/New';
 import { inputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
 import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
-import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 
 const mapInputTypeToPropsGetterFn = {
   [inputTypes.DROPDOWN]: (metaData: MetaDataElement) => ({

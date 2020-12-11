@@ -10,7 +10,9 @@ const makeCancelable = (promise: Promise<any>) => {
 
   const wrappedPromise: Promise<any> = new Promise((resolve, reject) => {
     promise.then(
+      // eslint-disable-next-line prefer-promise-reject-errors
       (val) => (hasCanceled ? reject({ isCanceled: true }) : resolve(val)),
+      // eslint-disable-next-line prefer-promise-reject-errors
       (error) => (hasCanceled ? reject({ isCanceled: true }) : reject(error)),
     );
   });

@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import AddWorkingListConfigDialog from './AddWorkingListConfigDialog.component';
 // $FlowFixMe[missing-export] automated comment
-import { addWorkingListConfig } from '../eventsList.actions';
+import { addWorkingListConfig } from '../eventsList.actions'; // eslint-disable-line import/named
 
 const mapStateToProps = () => ({});
 

@@ -135,6 +135,7 @@ class IndexedDBAdapter {
     this.onCacheExpired = options.onCacheExpired;
   }
 
+  // eslint-disable-next-line no-underscore-dangle
   _upgrade(onCreateObjectStore) {
     if (this.db.objectStoreNames) {
       const dbStoreNames = Array.from(this.db.objectStoreNames);
@@ -423,7 +424,7 @@ class IndexedDBAdapter {
     return IndexedDBAdapter.get(store, key, this.db, this.keyPath);
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  // eslint-disable-next-line class-methods-use-this,no-underscore-dangle
   async _getAllInBatches(objectStore, options, records) {
     const { predicate, project, onIDBGetRequest, batchSize } = options || {};
 
@@ -461,6 +462,7 @@ class IndexedDBAdapter {
     } while (!done);
   }
 
+  // eslint-disable-next-line no-underscore-dangle
   _getAllWithCursor(objectStore, options, records, abortTx) {
     const { predicate, project, onIsAborted, onIDBGetRequest } = options || {};
     const request = onIDBGetRequest
@@ -484,7 +486,7 @@ class IndexedDBAdapter {
     };
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  // eslint-disable-next-line class-methods-use-this,no-underscore-dangle
   _processGetAllItem(dbValue, predicate, project, records) {
     if (!predicate || predicate(dbValue)) {
       const value = project ? project(dbValue) : dbValue;

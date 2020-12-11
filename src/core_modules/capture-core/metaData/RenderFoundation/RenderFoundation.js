@@ -178,6 +178,7 @@ export default class RenderFoundation {
       .reduce((accElements, section) => {
         const elementsInSection = Array.from(section.elements.entries()).reduce(
           (accElementsInSection, elementEntry) => {
+            // eslint-disable-next-line prefer-destructuring
             accElementsInSection[elementEntry[0]] = elementEntry[1];
             return accElementsInSection;
           },

@@ -3,7 +3,7 @@ import uuid from 'uuid/v4';
 import { batchActions } from 'redux-batched-actions';
 import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 // $FlowFixMe[missing-export] automated comment
-import { startRunRulesOnUpdateForNewEnrollment } from './dataEntry.actions';
+import { startRunRulesOnUpdateForNewEnrollment } from './dataEntry.actions'; // eslint-disable-line import/named
 
 export const batchActionTypes = {
   UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH: 'UpdateFieldNewEnrollmentActionBatch',

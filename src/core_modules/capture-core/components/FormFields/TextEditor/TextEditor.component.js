@@ -10,7 +10,7 @@ type Props = {
   disabled?: ?boolean,
   onChange?: ?(value: string) => void,
   onBlur?: ?(value: ?string) => void,
-  format: string,
+  format?: string,
   containerClassName?: ?string,
   classes: {
     textEditor: string,

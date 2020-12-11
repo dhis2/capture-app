@@ -8,6 +8,7 @@ import D2Date from '../DateAndTime/D2Date/D2Date.component';
 
 type Props = {
   onBlur: (value: string, event: UiEventData) => void,
+  value?: string,
 };
 
 const containerStyle = {

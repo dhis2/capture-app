@@ -1,3 +1,4 @@
+// eslint-disable-next-line max-classes-per-file
 import { errorCreator } from '../errorCreator';
 
 class Indexer {
@@ -120,6 +121,7 @@ class DomLocalStorageAdapter {
     return Promise.resolve();
   }
 
+  // eslint-disable-next-line no-underscore-dangle
   _executeSet(store, dataObject) {
     const storeObject = JSON.parse(JSON.stringify(dataObject));
     const key = storeObject[this.keyPath];
@@ -193,6 +195,7 @@ class DomLocalStorageAdapter {
     return Promise.resolve(responseObjects);
   }
 
+  // eslint-disable-next-line no-underscore-dangle
   _executeGetKeys(store) {
     const keys = this.indexer[store].all();
     return keys.map((key) => this.mainKeyFromStoreKey(key, store));
@@ -203,6 +206,7 @@ class DomLocalStorageAdapter {
     return Promise.resolve(this._executeGetKeys(store));
   }
 
+  // eslint-disable-next-line no-underscore-dangle
   _executeRemove(store, key) {
     const storeKey = this.getStoreKey(store, key);
     this.indexer[store].remove(storeKey);
@@ -215,6 +219,7 @@ class DomLocalStorageAdapter {
     return Promise.resolve();
   }
 
+  // eslint-disable-next-line no-underscore-dangle
   _executeRemoveAll(store) {
     // eslint-disable-next-line no-underscore-dangle
     const keys = this._executeGetKeys(store);
@@ -251,6 +256,7 @@ class DomLocalStorageAdapter {
     return Promise.resolve();
   }
 
+  // eslint-disable-next-line no-underscore-dangle
   _executeDestroy() {
     this.objectStoreNames.forEach((store) => {
       // eslint-disable-next-line no-underscore-dangle

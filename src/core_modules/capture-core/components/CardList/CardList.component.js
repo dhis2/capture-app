@@ -24,6 +24,7 @@ type Props = {
     noItemsContainer: string,
     loadingContainer: string,
   },
+  itemTypeName?: string,
   noItemsText: string,
   dataElements: Array<DataElement>,
 };

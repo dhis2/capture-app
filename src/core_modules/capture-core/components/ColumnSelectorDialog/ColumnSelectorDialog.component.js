@@ -38,6 +38,7 @@ class ColumnSelectorDialog extends Component<Props, State> {
 
   handleToggle = (id: string) => () => {
     const index = this.state.columnList.findIndex((column) => column.id === id);
+    // eslint-disable-next-line react/no-access-state-in-setstate
     const toggleList = this.state.columnList;
 
     toggleList[index] = { ...toggleList[index], visible: !toggleList[index].visible };

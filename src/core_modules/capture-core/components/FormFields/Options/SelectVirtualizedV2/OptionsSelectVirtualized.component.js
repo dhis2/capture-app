@@ -98,6 +98,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
   isUnmounted: boolean;
 
   static defaultProps = {
+    // eslint-disable-next-line react/default-props-match-prop-types
     translations: {
       clearText: '',
       noResults: '',

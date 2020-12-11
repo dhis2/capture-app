@@ -48,7 +48,7 @@ class OptionsSelectVirtualizedOption extends Component<Props> {
         classes={{ popper: classes.popper }}
         enterDelay={800}
       >
-        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */}
         <div
           className="virtualized-select-option"
           style={renderStyle}

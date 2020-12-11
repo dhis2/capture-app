@@ -1,7 +1,6 @@
+// eslint-disable-next-line max-classes-per-file
 import { connect } from 'react-redux';
-
 import React, { PureComponent } from 'react';
-
 import Sync from '@material-ui/icons/Sync';
 import Grow from '@material-ui/core/Grow';
 import { withStyles } from '@material-ui/core/styles';

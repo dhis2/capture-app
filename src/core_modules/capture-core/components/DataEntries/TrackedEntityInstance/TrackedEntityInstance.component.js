@@ -1,5 +1,6 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
+// eslint-disable-next-line max-classes-per-file
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {

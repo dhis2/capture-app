@@ -137,6 +137,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
   yourSelect: any;
 
   static defaultProps = {
+    // eslint-disable-next-line react/default-props-match-prop-types
     translations: {
       clearText: '',
       noResults: '',

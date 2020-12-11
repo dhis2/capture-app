@@ -83,7 +83,7 @@ type Props = {
   relationships: Array<Relationship>,
   highlightRelationshipId?: ?string,
   writableRelationshipTypes: Array<RelationshipType>,
-  entityAccess: { read: boolean, write: boolean },
+  entityAccess?: { read: boolean, write: boolean },
   onRemoveRelationship: (relationshipClientId: string) => void,
   onOpenAddRelationship: () => void,
   onRenderConnectedEntity: (entity: Entity) => React.Node,
@@ -169,6 +169,7 @@ class Relationships extends React.Component<Props> {
     const { entityAccess, writableRelationshipTypes } = this.props;
     return (
       relationship.from.id === this.props.currentEntityId &&
+      entityAccess &&
       entityAccess.write &&
       writableRelationshipTypes.some(
         (rt) => rt.id === relationship.relationshipType.id && rt.access.data.write,

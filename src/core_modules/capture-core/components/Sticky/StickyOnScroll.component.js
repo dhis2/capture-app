@@ -39,7 +39,9 @@ class StickyOnScroll extends React.Component<Props> {
   resizeTimer: any;
 
   static defaultProps = {
+    // eslint-disable-next-line react/default-props-match-prop-types
     offsetTop: 0,
+    // eslint-disable-next-line react/default-props-match-prop-types
     minViewpointWidth: 0,
   };
 

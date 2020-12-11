@@ -11,6 +11,7 @@ function Node({ label, value, open, depth, isSelected, children, onClick, onIcon
 
   return (
     <div>
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
       <div
         role="button"
         tabIndex={-1}
@@ -21,6 +22,7 @@ function Node({ label, value, open, depth, isSelected, children, onClick, onIcon
       >
         <div style={{ minWidth }} />
         {hasChildren ? (
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events
           <div
             role="button"
             tabIndex={-1}

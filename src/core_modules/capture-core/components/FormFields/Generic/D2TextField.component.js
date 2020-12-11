@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 type Props = {
   onChange?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
   onBlur?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
-  value: ?string,
+  value?: ?string,
 };
 
 class D2TextField extends Component<Props> {

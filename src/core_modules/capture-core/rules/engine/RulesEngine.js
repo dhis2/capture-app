@@ -33,6 +33,7 @@ import trimQuotes from './commonUtils/trimQuotes';
 const convertRuleEffectDataToOutputBaseValue = (data: any, valueType: string) => {
   const convertNumber = (numberRepresentation) => {
     if (isString(numberRepresentation)) {
+      // eslint-disable-next-line no-restricted-globals
       if (isNaN(numberRepresentation)) {
         log.warn(`rule execution service could not convert ${numberRepresentation} to number`);
         return null;

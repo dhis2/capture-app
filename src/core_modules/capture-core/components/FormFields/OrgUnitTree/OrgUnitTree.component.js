@@ -3,10 +3,13 @@ import { getInstance } from 'd2/lib/d2';
 import Tree from './Tree';
 
 export default class OrgUnitTree extends React.Component {
-  state = {
-    list: [],
-    selected: this.props.value,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: [],
+      selected: this.props.value,
+    };
+  }
 
   async UNSAFE_componentWillMount() {
     await this.fetchRoot();

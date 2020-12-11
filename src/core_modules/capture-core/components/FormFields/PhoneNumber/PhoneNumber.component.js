@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 type Props = {
   onChange: (value: string, event: UiEventData) => void,
   onBlur: (value: string, event: UiEventData) => void,
+  value?: string,
 };
 
 class D2PhoneNumber extends Component<Props> {

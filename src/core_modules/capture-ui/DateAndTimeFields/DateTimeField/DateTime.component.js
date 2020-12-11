@@ -27,8 +27,8 @@ type Props = {
   calendarOnConvertValueOut: Function,
   popupAnchorPosition?: ?any,
   classes: Object,
-  dateLabel: string,
-  timeLabel: string,
+  dateLabel?: string,
+  timeLabel?: string,
 };
 
 class D2DateTime extends Component<Props> {

@@ -93,7 +93,7 @@ type Props = {
     row: string,
     dataRow: string,
   },
-  rowIdKey: string,
+  rowIdKey?: string,
   sortById: string,
   sortByDirection: string,
   onRowClick: (rowData: { id: string }) => void,
@@ -190,7 +190,7 @@ class OfflineList extends Component<Props> {
 
       return (
         <Row
-          key={row[this.props.rowIdKey]}
+          key={this.props.rowIdKey && row[this.props.rowIdKey]}
           className={classNames(classes.row, classes.dataRow)}
           onClick={() => this.props.onRowClick(row)}
         >

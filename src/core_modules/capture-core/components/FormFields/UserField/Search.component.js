@@ -68,6 +68,7 @@ class UserSearch extends React.Component<Props, State> {
   }
 
   clearInput() {
+    // eslint-disable-next-line react/no-access-state-in-setstate
     const currentKey = this.state.inputKey;
     this.setState({
       inputKey: (currentKey + 1) % 2,

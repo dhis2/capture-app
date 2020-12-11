@@ -1,5 +1,6 @@
 // @flow
 // HOC for adding search group actions to field updates (async and sync)
+// eslint-disable-next-line max-classes-per-file
 import * as React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';

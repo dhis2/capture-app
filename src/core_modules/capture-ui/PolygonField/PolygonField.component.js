@@ -17,7 +17,7 @@ const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 type Props = {
   onBlur: (value: any) => void,
   value?: ?any,
-  mapCenter: Array<number>,
+  mapCenter?: Array<number>,
   mapDialog?: ?React.Element<any>,
 };
 

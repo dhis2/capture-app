@@ -21,7 +21,6 @@ const getFocusHandler = () => (InnerComponent: React.ComponentType<any>) =>
       super(props);
       this.state = {
         inFocus: false,
-        isMouseClick: false,
       };
     }
 

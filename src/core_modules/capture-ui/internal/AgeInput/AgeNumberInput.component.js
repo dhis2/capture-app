@@ -20,11 +20,13 @@ type State = {
 class AgeNumberInput extends Component<Props, State> {
   constructor(props) {
     super(props);
+    // eslint-disable-next-line react/no-unused-state
     this.state = { focus: false };
   }
 
   handleBlur = (event) => {
     this.props.onBlur(event.currentTarget.value);
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ focus: false });
   };
 
@@ -33,6 +35,7 @@ class AgeNumberInput extends Component<Props, State> {
   };
 
   handleFocus = () => {
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ focus: true });
   };
 

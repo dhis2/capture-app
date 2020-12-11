@@ -33,7 +33,7 @@ const getStyles = () => ({
 });
 
 type Props = {
-  roots: Array<Object>,
+  roots?: Array<Object>,
   treeKey: string,
   onSelectClick: (selectedOrgUnit: Object) => void,
   onSearch: (searchText: string) => void,

@@ -34,7 +34,7 @@ const LinkButton = (props: Props) => {
   const { classes, children, muiClasses, muiButtonRef, className, ...passOnProps } = props;
   return (
     // $FlowFixMe[cannot-spread-inexact] automated comment
-    <button className={classNames(classes.button, className)} {...passOnProps}>
+    <button type="button" className={classNames(classes.button, className)} {...passOnProps}>
       {children}
     </button>
   );

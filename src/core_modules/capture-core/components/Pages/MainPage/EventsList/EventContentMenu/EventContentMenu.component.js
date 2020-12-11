@@ -69,6 +69,7 @@ class EventContentMenu extends React.Component<Props, State> {
 
   toggleMenu = (event: any) => {
     this.setState({
+      // eslint-disable-next-line react/no-access-state-in-setstate
       menuOpen: !this.state.menuOpen,
     });
     event.stopPropagation();

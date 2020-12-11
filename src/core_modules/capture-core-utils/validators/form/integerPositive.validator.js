@@ -6,6 +6,7 @@
  * @returns
  */
 const isValidPositiveInteger = (value: string) => {
+  // eslint-disable-next-line no-restricted-globals
   if (isNaN(value)) {
     return false;
   }

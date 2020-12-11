@@ -96,6 +96,7 @@ class FilterRestMenu extends React.Component<Props, State> {
 
   toggleMenu() {
     this.setState({
+      // eslint-disable-next-line react/no-access-state-in-setstate
       filterSelectorOpen: !this.state.filterSelectorOpen,
     });
   }

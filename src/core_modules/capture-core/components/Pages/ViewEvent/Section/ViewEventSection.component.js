@@ -54,6 +54,7 @@ class ViewEventSection extends React.Component<Props, State> {
 
   toggleCollapse = () => {
     this.setState({
+      // eslint-disable-next-line react/no-access-state-in-setstate
       collapsed: !this.state.collapsed,
     });
   };

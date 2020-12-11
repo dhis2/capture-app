@@ -59,6 +59,7 @@ class RelationshipTypeSelector extends React.Component<Props> {
     const { classes, relationshipTypes } = this.props;
     return relationshipTypes
       ? relationshipTypes.map((rt) => (
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events
           <div
             className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)}
             key={rt.id}

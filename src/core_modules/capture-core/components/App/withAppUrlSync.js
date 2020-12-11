@@ -138,7 +138,9 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
           this.page = pageKeys.MAIN;
         }
       } else {
+        // eslint-disable-next-line prefer-destructuring
         this.page = urlParts[0];
+        // eslint-disable-next-line prefer-destructuring
         this.params = urlParts[1];
       }
     }

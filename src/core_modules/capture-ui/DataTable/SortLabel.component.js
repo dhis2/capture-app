@@ -38,6 +38,7 @@ class SortLabel extends React.Component<Props> {
       ? defaultClasses.sortLabelChildren
       : classNames(defaultClasses.sortLabelChildren, defaultClasses.sortLabelChildrenEnabled);
     return (
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events
       <div
         // $FlowFixMe[incompatible-call] automated comment
         className={classNames(childrenDefaultClasses, this.props.childrenClass, classes)}

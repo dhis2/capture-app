@@ -43,7 +43,7 @@ type RulesMessages = {
 
 type Props = {
   fieldsMetaData: Map<string, MetaDataElement>,
-  values: FormsValues,
+  values?: FormsValues,
   rulesMessages: RulesMessages,
   rulesHiddenFields: RulesHiddenFields,
   rulesCompulsoryFields: RulesCompulsoryFields,
