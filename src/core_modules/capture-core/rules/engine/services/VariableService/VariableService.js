@@ -362,8 +362,7 @@ export default class VariableService {
       return null;
     }
 
-    // $FlowFixMe[incompatible-type] automated comment
-    const dataElementValue = executingEvent && executingEvent[dataElementId];
+    const dataElementValue = dataElementId && executingEvent[dataElementId];
     if (!dataElementValue && dataElementValue !== 0 && dataElementValue !== false) {
       return null;
     }
