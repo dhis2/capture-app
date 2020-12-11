@@ -3,18 +3,18 @@ import { quickStoreRecursively } from '../../IOUtils';
 import { getContext } from '../../context';
 
 export const storeRelationshipTypes = () => {
-    const query = {
-        resource: 'relationshipTypes',
-        params: {
-            fields: 'id,displayName,fromConstraint[*],toConstraint[*],access[*]',
-        },
-    };
+  const query = {
+    resource: 'relationshipTypes',
+    params: {
+      fields: 'id,displayName,fromConstraint[*],toConstraint[*],access[*]',
+    },
+  };
 
-    const convert = response => response && response.relationshipTypes;
+  const convert = (response) => response && response.relationshipTypes;
 
-    return quickStoreRecursively({
-        query,
-        storeName: getContext().storeNames.RELATIONSHIP_TYPES,
-        convertQueryResponse: convert,
-    });
+  return quickStoreRecursively({
+    query,
+    storeName: getContext().storeNames.RELATIONSHIP_TYPES,
+    convertQueryResponse: convert,
+  });
 };

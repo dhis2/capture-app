@@ -1,8 +1,8 @@
 // @flow
 
 export type Note = {
-    clientId: string,
-    storedBy: string,
-    storedDate: string,
-    value: string,
+  clientId: string,
+  storedBy: string,
+  storedDate: string,
+  value: string,
 };

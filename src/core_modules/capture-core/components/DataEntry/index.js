@@ -25,15 +25,15 @@ export { default as placements } from './constants/placements.const';
 // actions
 export { actionTypes as searchGroupActionTypes } from './actions/searchGroup.actions';
 export {
-    actionTypes as mainActionTypes,
-    startRunRulesPostUpdateField,
-    rulesExecutedPostUpdateField,
+  actionTypes as mainActionTypes,
+  startRunRulesPostUpdateField,
+  rulesExecutedPostUpdateField,
 } from './actions/dataEntry.actions';
 export { actionTypes as loadNewActionTypes } from './actions/dataEntryLoadNew.actions';
 export { actionTypes as loadEditActionTypes } from './actions/dataEntry.actions';
 
 // epics
 export {
-    getFilterSearchGroupForSearchEpic,
-    getExecuteSearchForSearchGroupEpic,
+  getFilterSearchGroupForSearchEpic,
+  getExecuteSearchForSearchGroupEpic,
 } from './epics/searchGroups.epics';

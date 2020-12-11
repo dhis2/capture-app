@@ -5,15 +5,15 @@ import { errorCreator } from 'capture-core-utils';
 import { programCollection } from '../../metaDataMemoryStores';
 
 const errorMessages = {
-    PROGRAM_NOT_FOUND: 'Program not found',
-    GENERIC_ERROR: 'An error has occured. See log for details',
+  PROGRAM_NOT_FOUND: 'Program not found',
+  GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
 export default function getProgramFromProgramIdThrowIfNotFound(programId: string) {
-    const program = programCollection.get(programId);
-    if (!program) {
-        log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));
-        throw Error(i18n.t(errorMessages.GENERIC_ERROR));
-    }
-    return program;
+  const program = programCollection.get(programId);
+  if (!program) {
+    log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));
+    throw Error(i18n.t(errorMessages.GENERIC_ERROR));
+  }
+  return program;
 }

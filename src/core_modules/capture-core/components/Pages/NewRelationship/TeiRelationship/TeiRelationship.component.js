@@ -17,161 +17,152 @@ import withPaginationData from './SearchResults/withPaginationData';
 import getTeiDisplayName from '../../../../trackedEntityInstances/getDisplayName';
 import { RegisterTei } from '../RegisterTei';
 
-
-const SearchResultsWithPager = withPaginationData()(withDefaultNavigation()(TeiRelationshipSearchResults));
+const SearchResultsWithPager = withPaginationData()(
+  withDefaultNavigation()(TeiRelationshipSearchResults),
+);
 
 type Props = {
-    findMode?: ?$Values<typeof findModes>,
-    onOpenSearch: (trackedEntityTypeId: string, programId: ?string) => void,
-    onSelectFindMode: (findMode: $Values<typeof findModes>) => void,
-    onAddRelationship: (entity: Object) => void,
-    selectedRelationshipType: SelectedRelationshipType,
-    classes: {
-        container: string,
-        button: string,
-        buttonIcon: string,
-        modeSelectionsContainer: string,
-    },
-    onGetUnsavedAttributeValues?: ?Function,
-}
+  findMode?: ?$Values<typeof findModes>,
+  onOpenSearch: (trackedEntityTypeId: string, programId: ?string) => void,
+  onSelectFindMode: (findMode: $Values<typeof findModes>) => void,
+  onAddRelationship: (entity: Object) => void,
+  selectedRelationshipType: SelectedRelationshipType,
+  classes: {
+    container: string,
+    button: string,
+    buttonIcon: string,
+    modeSelectionsContainer: string,
+  },
+  onGetUnsavedAttributeValues?: ?Function,
+};
 
-const getStyles = theme => ({
-    modeSelectionsContainer: {
-        display: 'flex',
-    },
-    button: {
-        height: theme.typography.pxToRem(150),
-        width: theme.typography.pxToRem(250),
-        margin: theme.typography.pxToRem(10),
-        padding: theme.typography.pxToRem(10),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
-        backgroundColor: theme.palette.grey.lighter,
-    },
-    buttonIcon: {
-        flexGrow: 1,
-        fontSize: theme.typography.pxToRem(80),
-    },
+const getStyles = (theme) => ({
+  modeSelectionsContainer: {
+    display: 'flex',
+  },
+  button: {
+    height: theme.typography.pxToRem(150),
+    width: theme.typography.pxToRem(250),
+    margin: theme.typography.pxToRem(10),
+    padding: theme.typography.pxToRem(10),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    backgroundColor: theme.palette.grey.lighter,
+  },
+  buttonIcon: {
+    flexGrow: 1,
+    fontSize: theme.typography.pxToRem(80),
+  },
 });
 
 const defaultTrackedEntityTypeName = 'Tracked entity instance';
 
 class TeiRelationship extends React.Component<Props> {
-    trackedEntityTypeSelector: (props: Props) => TrackedEntityType;
+  trackedEntityTypeSelector: (props: Props) => TrackedEntityType;
 
-    constructor(props: Props) {
-        super(props);
-        this.trackedEntityTypeSelector = makeTrackedEntityTypeSelector();
+  constructor(props: Props) {
+    super(props);
+    this.trackedEntityTypeSelector = makeTrackedEntityTypeSelector();
+  }
+
+  getTrackedEntityTypeName = () => {
+    const trackedEntityType = this.trackedEntityTypeSelector(this.props);
+    if (!trackedEntityType) {
+      return defaultTrackedEntityTypeName;
     }
+    return trackedEntityType.name;
+  };
 
-    getTrackedEntityTypeName = () => {
-        const trackedEntityType = this.trackedEntityTypeSelector(this.props);
-        if (!trackedEntityType) {
-            return defaultTrackedEntityTypeName;
-        }
-        return trackedEntityType.name;
-    }
+  handleAddRelationship = (teiId: string, values: Object) => {
+    const trackedEntityType = this.trackedEntityTypeSelector(this.props);
+    this.props.onAddRelationship({
+      id: teiId,
+      name: getTeiDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
+    });
+  };
 
+  handleAddRelationshipWithNewTei = (itemId: string, dataEntryId: string) => {
+    this.props.onAddRelationship({
+      itemId,
+      dataEntryId,
+    });
+  };
 
-    handleAddRelationship = (teiId: string, values: Object) => {
-        const trackedEntityType = this.trackedEntityTypeSelector(this.props);
-        this.props.onAddRelationship({
-            id: teiId,
-            name: getTeiDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
-        });
-    }
-
-    handleAddRelationshipWithNewTei = (itemId: string, dataEntryId: string) => {
-        this.props.onAddRelationship({
-            itemId,
-            dataEntryId,
-        });
-    }
-
-    renderModeSelections = () => {
-        const { classes } = this.props;
-        const trackedEntityTypeName = this.getTrackedEntityTypeName();
-        return (
-            <div
-                className={classes.modeSelectionsContainer}
-            >
-                <div className={classes.button}>
-                    <SearchIcon fontSize="large" className={classes.buttonIcon} />
-                    <Button
-                        color="primary"
-                        onClick={() => this.props.onSelectFindMode(findModes.TEI_SEARCH)}
-                    >
-                        {i18n.t(
-                            'Link to an existing {{trackedEntityType}}',
-                            { trackedEntityType: trackedEntityTypeName },
-                        )}
-                    </Button>
-                </div>
-                <div className={classes.button}>
-                    <AddIcon className={classes.buttonIcon} />
-                    <Button
-                        color="primary"
-                        onClick={() => this.props.onSelectFindMode(findModes.TEI_REGISTER)}
-                    >
-                        {i18n.t('Create new {{trackedEntityType}}', { trackedEntityType: trackedEntityTypeName })}
-                    </Button>
-                </div>
-            </div>
-
-        );
-    }
-
-    renderSearch = (props: Object) => {
-        const { selectedRelationshipType, onAddRelationship, ...passOnProps } = props;
-        const trackedEntityTypeName = this.getTrackedEntityTypeName();
-        return (
-            <TeiSearch
-                id="relationshipTeiSearch"
-                getResultsView={viewProps => (
-                    <SearchResultsWithPager
-                        onAddRelationship={this.handleAddRelationship}
-                        trackedEntityTypeName={trackedEntityTypeName}
-                        {...viewProps}
-                    />
-                )}
-                {...passOnProps}
-            />
-        );
-    }
-
-    renderRegister = () => (
-        <RegisterTei
-            onLink={this.handleAddRelationship}
-            onSave={this.handleAddRelationshipWithNewTei}
-            onGetUnsavedAttributeValues={this.props.onGetUnsavedAttributeValues}
-        />
+  renderModeSelections = () => {
+    const { classes } = this.props;
+    const trackedEntityTypeName = this.getTrackedEntityTypeName();
+    return (
+      <div className={classes.modeSelectionsContainer}>
+        <div className={classes.button}>
+          <SearchIcon fontSize="large" className={classes.buttonIcon} />
+          <Button color="primary" onClick={() => this.props.onSelectFindMode(findModes.TEI_SEARCH)}>
+            {i18n.t('Link to an existing {{trackedEntityType}}', {
+              trackedEntityType: trackedEntityTypeName,
+            })}
+          </Button>
+        </div>
+        <div className={classes.button}>
+          <AddIcon className={classes.buttonIcon} />
+          <Button
+            color="primary"
+            onClick={() => this.props.onSelectFindMode(findModes.TEI_REGISTER)}
+          >
+            {i18n.t('Create new {{trackedEntityType}}', {
+              trackedEntityType: trackedEntityTypeName,
+            })}
+          </Button>
+        </div>
+      </div>
     );
+  };
 
-    renderByMode = (findMode, props) => {
-        if (findMode === findModes.TEI_SEARCH) {
-            return this.renderSearch(props);
-        }
-        if (findMode === findModes.TEI_REGISTER) {
-            return this.renderRegister();
-        }
-        return null;
+  renderSearch = (props: Object) => {
+    const { selectedRelationshipType, onAddRelationship, ...passOnProps } = props;
+    const trackedEntityTypeName = this.getTrackedEntityTypeName();
+    return (
+      <TeiSearch
+        id="relationshipTeiSearch"
+        getResultsView={(viewProps) => (
+          <SearchResultsWithPager
+            onAddRelationship={this.handleAddRelationship}
+            trackedEntityTypeName={trackedEntityTypeName}
+            {...viewProps}
+          />
+        )}
+        {...passOnProps}
+      />
+    );
+  };
+
+  renderRegister = () => (
+    <RegisterTei
+      onLink={this.handleAddRelationship}
+      onSave={this.handleAddRelationshipWithNewTei}
+      onGetUnsavedAttributeValues={this.props.onGetUnsavedAttributeValues}
+    />
+  );
+
+  renderByMode = (findMode, props) => {
+    if (findMode === findModes.TEI_SEARCH) {
+      return this.renderSearch(props);
     }
-
-    render() {
-        const { classes, findMode, onOpenSearch, onSelectFindMode, ...passOnProps } = this.props;
-
-        return (
-            <div className={classes.container}>
-                {findMode ?
-                    this.renderByMode(findMode, passOnProps) :
-                    this.renderModeSelections()
-                }
-            </div>
-        );
+    if (findMode === findModes.TEI_REGISTER) {
+      return this.renderRegister();
     }
+    return null;
+  };
+
+  render() {
+    const { classes, findMode, onOpenSearch, onSelectFindMode, ...passOnProps } = this.props;
+
+    return (
+      <div className={classes.container}>
+        {findMode ? this.renderByMode(findMode, passOnProps) : this.renderModeSelections()}
+      </div>
+    );
+  }
 }
 
 export default withStyles(getStyles)(TeiRelationship);
-

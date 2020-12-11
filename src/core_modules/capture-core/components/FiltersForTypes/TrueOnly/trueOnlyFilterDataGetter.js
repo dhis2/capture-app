@@ -1,7 +1,7 @@
 // @flow
 
 export function getTrueOnlyFilterData() {
-    return {
-        value: true,
-    };
+  return {
+    value: true,
+  };
 }

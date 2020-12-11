@@ -2,16 +2,14 @@
 import { actionCreator } from '../../../../../actions/actions.utils';
 
 export const actionTypes = {
-    DATA_ENTRY_OPEN: 'NewRelationshipRegisterTeiDataEntryOpen',
-    DATA_ENTRY_OPEN_CANCELLED: 'NewRelationshopRegisterTeiDataEntryOpenCancelled',
-    DATA_ENTRY_OPEN_FAILED: 'NewRelationshopRegisterTeiDataEntryOpenFailed',
+  DATA_ENTRY_OPEN: 'NewRelationshipRegisterTeiDataEntryOpen',
+  DATA_ENTRY_OPEN_CANCELLED: 'NewRelationshopRegisterTeiDataEntryOpenCancelled',
+  DATA_ENTRY_OPEN_FAILED: 'NewRelationshopRegisterTeiDataEntryOpenFailed',
 };
 
-export const openDataEntry = () =>
-    actionCreator(actionTypes.DATA_ENTRY_OPEN)();
+export const openDataEntry = () => actionCreator(actionTypes.DATA_ENTRY_OPEN)();
 
-export const openDataEntryCancelled = () =>
-    actionCreator(actionTypes.DATA_ENTRY_OPEN_CANCELLED)();
+export const openDataEntryCancelled = () => actionCreator(actionTypes.DATA_ENTRY_OPEN_CANCELLED)();
 
 export const openDataEntryFailed = (errorMessage: string) =>
-    actionCreator(actionTypes.DATA_ENTRY_OPEN_FAILED)({ errorMessage });
+  actionCreator(actionTypes.DATA_ENTRY_OPEN_FAILED)({ errorMessage });

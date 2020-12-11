@@ -1,16 +1,16 @@
 .container {
-    position: relative;
+  position: relative;
 }
 
 .list {
-    position: absolute;
-    max-height: 200px;
-    width: calc(100% - 6px);
-    z-index: 500;
-    background-color: white;
-    overflow-y: auto;
-    border: 1px solid rgb(204,204,204);
-    border-top: none;
-    box-sizing: content-box;
-    margin-left: 2px;
+  position: absolute;
+  max-height: 200px;
+  width: calc(100% - 6px);
+  z-index: 500;
+  background-color: white;
+  overflow-y: auto;
+  border: 1px solid rgb(204, 204, 204);
+  border-top: none;
+  box-sizing: content-box;
+  margin-left: 2px;
 }

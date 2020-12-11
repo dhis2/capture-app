@@ -3,18 +3,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import React from 'react';
 
-type Props = {
-
-};
+type Props = {};
 
 const LoadingMask = (props: Props) => {
-    const { ...passOnProps } = props;
+  const { ...passOnProps } = props;
 
-    return (
-        <CircularProgress
-            {...passOnProps}
-        />
-    );
+  return <CircularProgress {...passOnProps} />;
 };
 
 export default LoadingMask;

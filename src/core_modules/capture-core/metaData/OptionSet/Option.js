@@ -7,74 +7,72 @@ import Icon from '../Icon/Icon';
 export type Value = string | number | boolean | {};
 
 export default class Option {
-    _id: string;
+  _id: string;
 
-    _value: Value;
+  _value: Value;
 
-    _text: string;
+  _text: string;
 
-    _description: ?string;
+  _description: ?string;
 
-    _icon: ?Icon;
+  _icon: ?Icon;
 
-    constructor(initFn?: (_this: Option) => void) {
-        initFn && isFunction(initFn) && initFn(this);
-    }
+  constructor(initFn?: (_this: Option) => void) {
+    initFn && isFunction(initFn) && initFn(this);
+  }
 
-    set id(id: string) {
-        this._id = id;
-    }
+  set id(id: string) {
+    this._id = id;
+  }
 
-    get id(): string {
-        return this._id;
-    }
+  get id(): string {
+    return this._id;
+  }
 
-    set value(value: Value) {
-        this._value = value;
-    }
+  set value(value: Value) {
+    this._value = value;
+  }
 
-    get value(): Value {
-        return this._value;
-    }
+  get value(): Value {
+    return this._value;
+  }
 
-    set text(text: string) {
-        this._text = text;
-    }
+  set text(text: string) {
+    this._text = text;
+  }
 
-    get text(): string {
-        return this._text;
-    }
+  get text(): string {
+    return this._text;
+  }
 
-    set description(description: ?string) {
-        this._description = description;
-    }
+  set description(description: ?string) {
+    this._description = description;
+  }
 
-    get description(): ?string {
-        return this._description;
-    }
+  get description(): ?string {
+    return this._description;
+  }
 
-    set icon(icon: ?Icon) {
-        this._icon = icon;
-    }
+  set icon(icon: ?Icon) {
+    this._icon = icon;
+  }
 
-    get icon(): ?Icon {
-        return this._icon;
-    }
+  get icon(): ?Icon {
+    return this._icon;
+  }
 
-    clone() {
-        return new Option((cloneObject) => {
-            Object
-                .getOwnPropertyNames(this)
-                .forEach((propName) => {
-                    // $FlowFixMe
-                    if (propName === '_icon' && this[propName]) {
-                        // $FlowFixMe
-                        cloneObject.icon = this.icon.clone();
-                    } else {
-                        // $FlowFixMe
-                        cloneObject[propName] = this[propName];
-                    }
-                });
-        });
-    }
+  clone() {
+    return new Option((cloneObject) => {
+      Object.getOwnPropertyNames(this).forEach((propName) => {
+        // $FlowFixMe
+        if (propName === '_icon' && this[propName]) {
+          // $FlowFixMe
+          cloneObject.icon = this.icon.clone();
+        } else {
+          // $FlowFixMe
+          cloneObject[propName] = this[propName];
+        }
+      });
+    });
+  }
 }

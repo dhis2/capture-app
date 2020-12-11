@@ -1,35 +1,31 @@
 // @flow
 import OrgUnitTree from '../../../../FormFields/OrgUnitTree/OrgUnitTree.component';
 import {
-    withGotoInterface,
-    withHideCompatibility,
-    withDefaultShouldUpdateInterface,
-    withCalculateMessages,
-    withDisplayMessages,
-    withInternalChangeHandler,
+  withGotoInterface,
+  withHideCompatibility,
+  withDefaultShouldUpdateInterface,
+  withCalculateMessages,
+  withDisplayMessages,
+  withInternalChangeHandler,
 } from '../../../../FormFields/New';
 import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-    withCustomElementContainer,
+  withRequiredFieldCalculation,
+  withDisabledFieldCalculation,
+  withCustomElementContainer,
 } from '../internal';
 
 export default withGotoInterface()(
-    withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withDisplayMessages()(
-                            withCustomElementContainer()(
-                                withInternalChangeHandler()(
-                                    OrgUnitTree,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
+  withHideCompatibility()(
+    withDefaultShouldUpdateInterface()(
+      withDisabledFieldCalculation()(
+        withRequiredFieldCalculation()(
+          withCalculateMessages()(
+            withDisplayMessages()(
+              withCustomElementContainer()(withInternalChangeHandler()(OrgUnitTree)),
             ),
+          ),
         ),
+      ),
     ),
+  ),
 );

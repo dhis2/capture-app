@@ -1,5 +1,5 @@
 // @flow
 export default {
-    TOP: 'top',
-    BOTTOM: 'bottom',
+  TOP: 'top',
+  BOTTOM: 'bottom',
 };

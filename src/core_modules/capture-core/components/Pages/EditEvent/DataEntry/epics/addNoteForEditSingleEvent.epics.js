@@ -7,61 +7,71 @@ import moment from 'capture-core-utils/moment/momentResolver';
 import { convertValue as convertListValue } from '../../../../../converters/clientToList';
 import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 import {
-    actionTypes as editEventDataEntryActionTypes,
-    batchActionTypes as editEventDataEntryBatchActionTypes,
-    startAddNoteForEditSingleEvent,
+  actionTypes as editEventDataEntryActionTypes,
+  batchActionTypes as editEventDataEntryBatchActionTypes,
+  startAddNoteForEditSingleEvent,
 } from '../editEventDataEntry.actions';
 
-import {
-    addEventNote,
-    removeEventNote,
-} from '../../editEvent.actions';
+import { addEventNote, removeEventNote } from '../../editEvent.actions';
 
-import {
-    addNote,
-    removeNote,
-} from '../../../../DataEntry/actions/dataEntry.actions';
+import { addNote, removeNote } from '../../../../DataEntry/actions/dataEntry.actions';
 import { getCurrentUser } from '../../../../../d2/d2Instance';
 
 export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(editEventDataEntryActionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT),
-        map((action) => {
-            const state = store.value;
-            const {payload} = action;
-            const {eventId} = state.dataEntries[payload.dataEntryId];
-            // $FlowFixMe[prop-missing] automated comment
-            const userName = getCurrentUser().username;
+  action$.pipe(
+    ofType(editEventDataEntryActionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT),
+    map((action) => {
+      const state = store.value;
+      const { payload } = action;
+      const { eventId } = state.dataEntries[payload.dataEntryId];
+      // $FlowFixMe[prop-missing] automated comment
+      const userName = getCurrentUser().username;
 
-            const serverData = {
-                event: eventId,
-                notes: [{ value: payload.note }],
-            };
+      const serverData = {
+        event: eventId,
+        notes: [{ value: payload.note }],
+      };
 
-            const clientNote = { value: payload.note, storedBy: userName, storedDate: moment().toISOString(), clientId: uuid() };
-            // $FlowFixMe[prop-missing] automated comment
-            const formNote = { ...clientNote, storedDate: convertListValue(clientNote.storedDate, elementTypes.DATETIME) };
-            const saveContext = {
-                dataEntryId: payload.dataEntryId,
-                itemId: payload.itemId,
-                eventId,
-                noteClientId: clientNote.clientId,
-            };
+      const clientNote = {
+        value: payload.note,
+        storedBy: userName,
+        storedDate: moment().toISOString(),
+        clientId: uuid(),
+      };
+      const formNote = {
+        ...clientNote,
+        // $FlowFixMe[prop-missing] automated comment
+        storedDate: convertListValue(clientNote.storedDate, elementTypes.DATETIME),
+      };
+      const saveContext = {
+        dataEntryId: payload.dataEntryId,
+        itemId: payload.itemId,
+        eventId,
+        noteClientId: clientNote.clientId,
+      };
 
-            return batchActions([
-                startAddNoteForEditSingleEvent(eventId, serverData, state.currentSelections, saveContext),
-                addNote(payload.dataEntryId, payload.itemId, formNote),
-                addEventNote(eventId, clientNote),
-            ], editEventDataEntryBatchActionTypes.ADD_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH);
-        }));
+      return batchActions(
+        [
+          startAddNoteForEditSingleEvent(eventId, serverData, state.currentSelections, saveContext),
+          addNote(payload.dataEntryId, payload.itemId, formNote),
+          addEventNote(eventId, clientNote),
+        ],
+        editEventDataEntryBatchActionTypes.ADD_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH,
+      );
+    }),
+  );
 
 export const removeNoteForEditSingleEventEpic = (action$: InputObservable) =>
-    action$.pipe(
-        ofType(editEventDataEntryActionTypes.ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT),
-        map((action) => {
-            const {context} = action.meta;
-            return batchActions([
-                removeNote(context.dataEntryId, context.itemId, context.noteClientId),
-                removeEventNote(context.eventId, context.noteClientId),
-            ], editEventDataEntryBatchActionTypes.REMOVE_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH);
-        }));
+  action$.pipe(
+    ofType(editEventDataEntryActionTypes.ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT),
+    map((action) => {
+      const { context } = action.meta;
+      return batchActions(
+        [
+          removeNote(context.dataEntryId, context.itemId, context.noteClientId),
+          removeEventNote(context.eventId, context.noteClientId),
+        ],
+        editEventDataEntryBatchActionTypes.REMOVE_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH,
+      );
+    }),
+  );

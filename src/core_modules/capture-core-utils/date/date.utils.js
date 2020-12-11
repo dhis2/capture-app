@@ -7,9 +7,9 @@
  * @returns {string} A formatted string with european glyphs
  */
 export function getFormattedStringFromMomentUsingEuropeanGlyphs(
-    momentDate: moment$Moment,
-    format: string = 'YYYY-MM-DD',
+  momentDate: moment$Moment,
+  format: string = 'YYYY-MM-DD',
 ) {
-    const europeanMoment = momentDate.clone().locale('en');
-    return europeanMoment.format(format);
+  const europeanMoment = momentDate.clone().locale('en');
+  return europeanMoment.format(format);
 }

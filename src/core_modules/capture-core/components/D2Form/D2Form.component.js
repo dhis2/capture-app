@@ -9,163 +9,162 @@ import Section from '../../metaData/RenderFoundation/Section';
 import { withAsyncHandler } from './asyncHandlerHOC';
 
 const styles = () => ({
-    container: {
-    },
-    containerCustomForm: {
-        paddingTop: 10,
-        paddingBottom: 10,
-    },
+  container: {},
+  containerCustomForm: {
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
 });
 
 type Props = {
-    formFoundation: RenderFoundation,
-    id: string,
-    classes: {
-        container: string,
-        containerCustomForm: string,
-    },
-    formHorizontal: boolean,
+  formFoundation: RenderFoundation,
+  id: string,
+  classes: {
+    container: string,
+    containerCustomForm: string,
+  },
+  formHorizontal: boolean,
 };
 
 class D2Form extends React.PureComponent<Props> {
-    name: string;
+  name: string;
 
-    sectionInstances: Map<string, Object>;
+  sectionInstances: Map<string, Object>;
 
-    constructor(props: Props) {
-        super(props);
-        this.name = 'D2Form';
-        this.sectionInstances = new Map();
-    }
+  constructor(props: Props) {
+    super(props);
+    this.name = 'D2Form';
+    this.sectionInstances = new Map();
+  }
 
-    validateFormIncludeSectionFailedFields(options: Object) {
-        let failedFormFields = [];
-        const isValid = Array.from(this.sectionInstances.entries())
-            .map(entry => entry[1])
-            .every((sectionInstance) => {
-                const {isHidden} = sectionInstance.props;
-                if (isHidden) {
-                    return true;
-                }
-                const {sectionFieldsInstance} = sectionInstance;
-                if (!sectionFieldsInstance) {
-                    log.error(
-                        errorCreator(
-                            'could not get section fields instance')(
-                            {
-                                method: 'validateFormReturningFailedFields',
-                                object: this,
-                                sectionInstance,
-                            },
-                        ),
-                    );
-                    return false;
-                }
-
-                const sectionIsValid = sectionFieldsInstance.isValid(options);
-                if (!sectionIsValid) {
-                    failedFormFields = [...failedFormFields, ...sectionFieldsInstance.getInvalidFields()];
-                }
-                return sectionIsValid;
-            });
-
-        return {
-            isValid,
-            failedFields: failedFormFields,
-        };
-    }
-
-    validateFormScrollToFirstFailedField(options: Object) {
-        const { isValid, failedFields } = this.validateFormIncludeSectionFailedFields(options);
-        if (isValid) {
-            return true;
+  validateFormIncludeSectionFailedFields(options: Object) {
+    let failedFormFields = [];
+    const isValid = Array.from(this.sectionInstances.entries())
+      .map((entry) => entry[1])
+      .every((sectionInstance) => {
+        const { isHidden } = sectionInstance.props;
+        if (isHidden) {
+          return true;
+        }
+        const { sectionFieldsInstance } = sectionInstance;
+        if (!sectionFieldsInstance) {
+          log.error(
+            errorCreator('could not get section fields instance')({
+              method: 'validateFormReturningFailedFields',
+              object: this,
+              sectionInstance,
+            }),
+          );
+          return false;
         }
 
-        const firstFailureInstance = failedFields.length > 0 ? failedFields[0].instance : null;
-        firstFailureInstance && firstFailureInstance.goto && firstFailureInstance.goto();
-        return false;
-    }
-
-    setSectionInstance(instance: ?Object, id: string) {
-        if (!instance) {
-            if (this.sectionInstances.has(id)) {
-                this.sectionInstances.delete(id);
-            }
-        } else {
-            this.sectionInstances.set(id, instance);
+        const sectionIsValid = sectionFieldsInstance.isValid(options);
+        if (!sectionIsValid) {
+          failedFormFields = [...failedFormFields, ...sectionFieldsInstance.getInvalidFields()];
         }
+        return sectionIsValid;
+      });
+
+    return {
+      isValid,
+      failedFields: failedFormFields,
+    };
+  }
+
+  validateFormScrollToFirstFailedField(options: Object) {
+    const { isValid, failedFields } = this.validateFormIncludeSectionFailedFields(options);
+    if (isValid) {
+      return true;
     }
 
-    getFormId() {
-        return this.props.id;
+    const firstFailureInstance = failedFields.length > 0 ? failedFields[0].instance : null;
+    firstFailureInstance && firstFailureInstance.goto && firstFailureInstance.goto();
+    return false;
+  }
+
+  setSectionInstance(instance: ?Object, id: string) {
+    if (!instance) {
+      if (this.sectionInstances.has(id)) {
+        this.sectionInstances.delete(id);
+      }
+    } else {
+      this.sectionInstances.set(id, instance);
     }
+  }
 
-    getFormBuilderId(sectionId: string) {
-        return `${this.props.id}-${sectionId}`;
-    }
+  getFormId() {
+    return this.props.id;
+  }
 
-    renderHorizontal = (section: Section, passOnProps: any) => (
-        <D2SectionContainer
-            key={section.id}
-            innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
-            sectionMetaData={section}
-            customForm={this.props.formFoundation.customForm}
-            validationStrategy={this.props.formFoundation.validationStrategy}
-            formId={this.getFormId()}
-            formBuilderId={this.getFormBuilderId(section.id)}
-            sectionId={section.id}
-            {...passOnProps}
-        />
-    )
+  getFormBuilderId(sectionId: string) {
+    return `${this.props.id}-${sectionId}`;
+  }
 
-    renderVertical = (section: Section, passOnProps: any, classes: Object) => (
-        <div
-            className={this.props.formFoundation.customForm ? classes.containerCustomForm : classes.container}
-            key={section.id}
-        >
-            <D2SectionContainer
-                innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
-                sectionMetaData={section}
-                customForm={this.props.formFoundation.customForm}
-                validationStrategy={this.props.formFoundation.validationStrategy}
-                formId={this.getFormId()}
-                formBuilderId={this.getFormBuilderId(section.id)}
-                sectionId={section.id}
-                {...passOnProps}
-            />
-        </div>
-    )
+  renderHorizontal = (section: Section, passOnProps: any) => (
+    <D2SectionContainer
+      key={section.id}
+      innerRef={(sectionInstance) => {
+        this.setSectionInstance(sectionInstance, section.id);
+      }}
+      sectionMetaData={section}
+      customForm={this.props.formFoundation.customForm}
+      validationStrategy={this.props.formFoundation.validationStrategy}
+      formId={this.getFormId()}
+      formBuilderId={this.getFormBuilderId(section.id)}
+      sectionId={section.id}
+      {...passOnProps}
+    />
+  );
 
-    render() {
-        const { formFoundation, id, classes, ...passOnProps } = this.props;
-        const {formHorizontal} = this.props;
-        const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries()).map(entry => entry[1]);
+  renderVertical = (section: Section, passOnProps: any, classes: Object) => (
+    <div
+      className={
+        this.props.formFoundation.customForm ? classes.containerCustomForm : classes.container
+      }
+      key={section.id}
+    >
+      <D2SectionContainer
+        innerRef={(sectionInstance) => {
+          this.setSectionInstance(sectionInstance, section.id);
+        }}
+        sectionMetaData={section}
+        customForm={this.props.formFoundation.customForm}
+        validationStrategy={this.props.formFoundation.validationStrategy}
+        formId={this.getFormId()}
+        formBuilderId={this.getFormBuilderId(section.id)}
+        sectionId={section.id}
+        {...passOnProps}
+      />
+    </div>
+  );
 
-        const sections = metaDataSectionsAsArray.map(section => (formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps, classes)));
+  render() {
+    const { formFoundation, id, classes, ...passOnProps } = this.props;
+    const { formHorizontal } = this.props;
+    const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries()).map(
+      (entry) => entry[1],
+    );
 
-        return (
-            <>
-                {sections}
-            </>
-        );
-    }
+    const sections = metaDataSectionsAsArray.map((section) =>
+      formHorizontal
+        ? this.renderHorizontal(section, passOnProps)
+        : this.renderVertical(section, passOnProps, classes),
+    );
+
+    return <>{sections}</>;
+  }
 }
 
 const D2FormWithRef = (props: Object) => {
-    const { formRef, ...passOnProps } = props;
+  const { formRef, ...passOnProps } = props;
 
-    const handleRef = (instance) => {
-        if (formRef) {
-            formRef(instance);
-        }
-    };
+  const handleRef = (instance) => {
+    if (formRef) {
+      formRef(instance);
+    }
+  };
 
-    return (
-        <D2Form
-            ref={handleRef}
-            {...passOnProps}
-        />
-    );
+  return <D2Form ref={handleRef} {...passOnProps} />;
 };
 
 export default withAsyncHandler()(withStyles(styles)(D2FormWithRef));

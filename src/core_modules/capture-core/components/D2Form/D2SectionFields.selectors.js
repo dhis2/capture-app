@@ -3,106 +3,108 @@ import { createSelectorCreator, defaultMemoize } from 'reselect';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
 const onIsEqual = (prevValues, currentValues) =>
-    Object.keys(currentValues).every(key => currentValues[key] === prevValues[key]);
+  Object.keys(currentValues).every((key) => currentValues[key] === prevValues[key]);
 
-
-const createDeepEqualSelector = createSelectorCreator(
-    defaultMemoize,
-    onIsEqual,
-);
+const createDeepEqualSelector = createSelectorCreator(defaultMemoize, onIsEqual);
 
 const sectionValuesSelector = (state, props) => {
-    const metaData = props.fieldsMetaData;
-    const values = state.formsValues[props.formId] || {};
-    const sectionValues = Array.from(metaData.entries())
-        .map(entry => entry[1])
-        .reduce((accValues, metaDataElement) => {
-            accValues[metaDataElement.id] = values[metaDataElement.id];
-            return accValues;
-        }, {});
-    return sectionValues;
+  const metaData = props.fieldsMetaData;
+  const values = state.formsValues[props.formId] || {};
+  const sectionValues = Array.from(metaData.entries())
+    .map((entry) => entry[1])
+    .reduce((accValues, metaDataElement) => {
+      accValues[metaDataElement.id] = values[metaDataElement.id];
+      return accValues;
+    }, {});
+  return sectionValues;
 };
-// $FlowFixMe[missing-annot] automated comment
-export const makeGetSectionValues = () => createDeepEqualSelector(
-    sectionValuesSelector,
-    sectionValues => sectionValues,
-);
+export const makeGetSectionValues = () =>
+  // $FlowFixMe[missing-annot] automated comment
+  createDeepEqualSelector(sectionValuesSelector, (sectionValues) => sectionValues);
 
 const sectionIsCompulsorySelector = (state, props) => {
-    const metaData = props.fieldsMetaData;
-    const compulsoryFields = state.rulesEffectsCompulsoryFields[props.formId] || {};
-    const sectionCompulsoryFields = Array.from(metaData.entries())
-        .map(entry => entry[1])
-        .reduce((accCompulsoryFields, metaDataElement) => {
-            accCompulsoryFields[metaDataElement.id] = compulsoryFields[metaDataElement.id];
-            return accCompulsoryFields;
-        }, {});
-    return sectionCompulsoryFields;
+  const metaData = props.fieldsMetaData;
+  const compulsoryFields = state.rulesEffectsCompulsoryFields[props.formId] || {};
+  const sectionCompulsoryFields = Array.from(metaData.entries())
+    .map((entry) => entry[1])
+    .reduce((accCompulsoryFields, metaDataElement) => {
+      accCompulsoryFields[metaDataElement.id] = compulsoryFields[metaDataElement.id];
+      return accCompulsoryFields;
+    }, {});
+  return sectionCompulsoryFields;
 };
-// $FlowFixMe[missing-annot] automated comment
-export const makeGetCompulsory = () => createDeepEqualSelector(
+export const makeGetCompulsory = () =>
+  // $FlowFixMe[missing-annot] automated comment
+  createDeepEqualSelector(
     sectionIsCompulsorySelector,
-    sectionCompulsoryFields => sectionCompulsoryFields,
-);
+    (sectionCompulsoryFields) => sectionCompulsoryFields,
+  );
 
 const sectionIsDisabledSelector = (state, props) => {
-    const metaData = props.fieldsMetaData;
-    const disabledFields = state.rulesEffectsDisabledFields[props.formId] || {};
-    const sectionDisabledFields = Array.from(metaData.entries())
-        .map(entry => entry[1])
-        .reduce((accDisabledFields, metaDataElement) => {
-            accDisabledFields[metaDataElement.id] = disabledFields[metaDataElement.id];
-            return accDisabledFields;
-        }, {});
-    return sectionDisabledFields;
+  const metaData = props.fieldsMetaData;
+  const disabledFields = state.rulesEffectsDisabledFields[props.formId] || {};
+  const sectionDisabledFields = Array.from(metaData.entries())
+    .map((entry) => entry[1])
+    .reduce((accDisabledFields, metaDataElement) => {
+      accDisabledFields[metaDataElement.id] = disabledFields[metaDataElement.id];
+      return accDisabledFields;
+    }, {});
+  return sectionDisabledFields;
 };
-// $FlowFixMe[missing-annot] automated comment
-export const makeGetDisabled = () => createDeepEqualSelector(
+export const makeGetDisabled = () =>
+  // $FlowFixMe[missing-annot] automated comment
+  createDeepEqualSelector(
     sectionIsDisabledSelector,
-    sectionDisabledFields => sectionDisabledFields,
-);
+    (sectionDisabledFields) => sectionDisabledFields,
+  );
 
 const sectionHiddenFieldsSelector = (state, props) => {
-    const metaData = props.fieldsMetaData;
-    const hiddenFields = state.rulesEffectsHiddenFields[props.formId] || {};
-    const sectionHiddenFields = Array.from(metaData.entries())
-        .map(entry => entry[1])
-        .reduce((accHiddenFields, metaDataElement) => {
-            accHiddenFields[metaDataElement.id] = hiddenFields[metaDataElement.id];
-            return accHiddenFields;
-        }, {});
-    return sectionHiddenFields;
+  const metaData = props.fieldsMetaData;
+  const hiddenFields = state.rulesEffectsHiddenFields[props.formId] || {};
+  const sectionHiddenFields = Array.from(metaData.entries())
+    .map((entry) => entry[1])
+    .reduce((accHiddenFields, metaDataElement) => {
+      accHiddenFields[metaDataElement.id] = hiddenFields[metaDataElement.id];
+      return accHiddenFields;
+    }, {});
+  return sectionHiddenFields;
 };
-// $FlowFixMe[missing-annot] automated comment
-export const makeGetHiddenFieldsValues = () => createDeepEqualSelector(
+export const makeGetHiddenFieldsValues = () =>
+  // $FlowFixMe[missing-annot] automated comment
+  createDeepEqualSelector(
     sectionHiddenFieldsSelector,
-    sectionHiddenFields => sectionHiddenFields,
-);
+    (sectionHiddenFields) => sectionHiddenFields,
+  );
 
 const createMessagesDeepEqualSelector = createSelectorCreator(
-    defaultMemoize,
-    (prevValues, currentValues) =>
-        Object.keys(currentValues).every((key) => {
-            const currentMessagesForId = currentValues[key] || {};
-            const prevMessagesForId = prevValues[key] || {};
-            return [messageStateKeys.ERROR, messageStateKeys.WARNING, messageStateKeys.ERROR_ON_COMPLETE, messageStateKeys.WARNING_ON_COMPLETE].every(messageKey => currentMessagesForId[messageKey] === prevMessagesForId[messageKey]);
-        }),
+  defaultMemoize,
+  (prevValues, currentValues) =>
+    Object.keys(currentValues).every((key) => {
+      const currentMessagesForId = currentValues[key] || {};
+      const prevMessagesForId = prevValues[key] || {};
+      return [
+        messageStateKeys.ERROR,
+        messageStateKeys.WARNING,
+        messageStateKeys.ERROR_ON_COMPLETE,
+        messageStateKeys.WARNING_ON_COMPLETE,
+      ].every((messageKey) => currentMessagesForId[messageKey] === prevMessagesForId[messageKey]);
+    }),
 );
 
 const sectionRulesMessagesSelector = (state, props) => {
-    const metaData = props.fieldsMetaData;
-    const messages = state.rulesEffectsMessages[props.formId] || {};
-    const sectionErrorMessages = Array.from(metaData.entries())
-        .map(entry => entry[1])
-        .reduce((accErrorFields, metaDataElement) => {
-            accErrorFields[metaDataElement.id] = messages[metaDataElement.id];
-            return accErrorFields;
-        }, {});
-    return sectionErrorMessages;
+  const metaData = props.fieldsMetaData;
+  const messages = state.rulesEffectsMessages[props.formId] || {};
+  const sectionErrorMessages = Array.from(metaData.entries())
+    .map((entry) => entry[1])
+    .reduce((accErrorFields, metaDataElement) => {
+      accErrorFields[metaDataElement.id] = messages[metaDataElement.id];
+      return accErrorFields;
+    }, {});
+  return sectionErrorMessages;
 };
-// $FlowFixMe[missing-annot] automated comment
-export const makeGetMessages = () => createMessagesDeepEqualSelector(
+export const makeGetMessages = () =>
+  // $FlowFixMe[missing-annot] automated comment
+  createMessagesDeepEqualSelector(
     sectionRulesMessagesSelector,
-    sectionMessages => sectionMessages,
-);
-
+    (sectionMessages) => sectionMessages,
+  );

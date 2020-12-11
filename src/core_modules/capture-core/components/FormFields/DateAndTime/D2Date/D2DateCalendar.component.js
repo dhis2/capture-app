@@ -11,151 +11,149 @@ import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
 import getTheme from './getTheme';
 
 type Props = {
-    onDateSelected: (value: any) => void,
-    value?: ?string,
-    minMoment?: ?Object,
-    maxMoment?: ?Object,
-    currentWidth: number,
-    height?: ?number,
-    classes: Object,
-    displayOptions?: ?Object,
-    theme: Object,
+  onDateSelected: (value: any) => void,
+  value?: ?string,
+  minMoment?: ?Object,
+  maxMoment?: ?Object,
+  currentWidth: number,
+  height?: ?number,
+  classes: Object,
+  displayOptions?: ?Object,
+  theme: Object,
 };
 
 const styles = () => ({
-    container: {},
+  container: {},
 });
 
 class D2DateCalendar extends Component<Props> {
-    handleChange: (e: any, dates: ?Array<Date>) => void;
+  handleChange: (e: any, dates: ?Array<Date>) => void;
 
-    calendarLocaleData: Object;
+  calendarLocaleData: Object;
 
-    theme: Object;
+  theme: Object;
 
-    displayOptions: Object;
+  displayOptions: Object;
 
-    constructor(props: Props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
+  constructor(props: Props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
 
-        const projectLocaleData = CurrentLocaleData.get();
-        const {currentWidth} = this.props;
+    const projectLocaleData = CurrentLocaleData.get();
+    const { currentWidth } = this.props;
 
-        this.calendarLocaleData = {
-            locale: projectLocaleData.dateFnsLocale,
-            headerFormat: currentWidth >= 400 ?
-                projectLocaleData.calendarFormatHeaderLong :
-                projectLocaleData.calendarFormatHeaderShort,
-            weekdays: projectLocaleData.weekDaysShort.map(day => capitalizeFirstLetter(day)),
-            blank: projectLocaleData.selectDatesText,
-            todayLabel: {
-                long: projectLocaleData.todayLabelLong,
-                short: projectLocaleData.todayLabelShort,
-            },
-            weekStartsOn: projectLocaleData.weekStartsOn,
-        };
-
-        this.theme = getTheme(this.props.theme);
-
-
-        this.displayOptions = {
-            ...D2DateCalendar.displayOptions,
-            ...this.props.displayOptions,
-        };
-    }
-
-    shouldComponentUpdate(nextProps: Props) {
-        // Selecting multiple dates, then updating the props to the infiniteCalendar makes the Component "jump" back to the first selected date
-        if (nextProps.currentWidth !== this.props.currentWidth) {
-            const projectLocaleData = CurrentLocaleData.get();
-            if (nextProps.currentWidth < 400) {
-                this.calendarLocaleData.headerFormat = projectLocaleData.calendarFormatHeaderShort;
-            } else {
-                this.calendarLocaleData.headerFormat = projectLocaleData.calendarFormatHeaderLong;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    static displayOptions = {
-        showHeader: false,
+    this.calendarLocaleData = {
+      locale: projectLocaleData.dateFnsLocale,
+      headerFormat:
+        currentWidth >= 400
+          ? projectLocaleData.calendarFormatHeaderLong
+          : projectLocaleData.calendarFormatHeaderShort,
+      weekdays: projectLocaleData.weekDaysShort.map((day) => capitalizeFirstLetter(day)),
+      blank: projectLocaleData.selectDatesText,
+      todayLabel: {
+        long: projectLocaleData.todayLabelLong,
+        short: projectLocaleData.todayLabelShort,
+      },
+      weekStartsOn: projectLocaleData.weekStartsOn,
     };
 
-    handleChange(changeDate: Date) {
-        const dateFormatString = convertDateObjectToDateFormatString(changeDate);
-        this.props.onDateSelected(dateFormatString);
+    this.theme = getTheme(this.props.theme);
+
+    this.displayOptions = {
+      ...D2DateCalendar.displayOptions,
+      ...this.props.displayOptions,
+    };
+  }
+
+  shouldComponentUpdate(nextProps: Props) {
+    // Selecting multiple dates, then updating the props to the infiniteCalendar makes the Component "jump" back to the first selected date
+    if (nextProps.currentWidth !== this.props.currentWidth) {
+      const projectLocaleData = CurrentLocaleData.get();
+      if (nextProps.currentWidth < 400) {
+        this.calendarLocaleData.headerFormat = projectLocaleData.calendarFormatHeaderShort;
+      } else {
+        this.calendarLocaleData.headerFormat = projectLocaleData.calendarFormatHeaderLong;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  static displayOptions = {
+    showHeader: false,
+  };
+
+  handleChange(changeDate: Date) {
+    const dateFormatString = convertDateObjectToDateFormatString(changeDate);
+    this.props.onDateSelected(dateFormatString);
+  }
+
+  getValue(inputValue: ?string) {
+    if (!inputValue) {
+      return null;
     }
 
-    getValue(inputValue: ?string) {
-        if (!inputValue) {
-            return null;
-        }
-
-        const parseData = parseDate(inputValue);
-        if (!parseData.isValid) {
-            return null;
-        }
-
-        // $FlowFixMe[incompatible-use] automated comment
-        return parseData.momentDate.toDate();
+    const parseData = parseDate(inputValue);
+    if (!parseData.isValid) {
+      return null;
     }
 
-    getMinMaxProps() {
-        const minMaxProps: {min?: Date, minDate?: Date, max?: Date, maxDate?: Date} = {};
+    // $FlowFixMe[incompatible-use] automated comment
+    return parseData.momentDate.toDate();
+  }
 
-        const {minMoment} = this.props;
-        const {maxMoment} = this.props;
+  getMinMaxProps() {
+    const minMaxProps: { min?: Date, minDate?: Date, max?: Date, maxDate?: Date } = {};
 
-        if (minMoment) {
-            const minDate = minMoment.toDate();
-            minMaxProps.min = minDate;
-            minMaxProps.minDate = minDate;
-        }
+    const { minMoment } = this.props;
+    const { maxMoment } = this.props;
 
-        if (maxMoment) {
-            const maxDate = maxMoment.toDate();
-            minMaxProps.max = maxDate;
-            minMaxProps.maxDate = maxDate;
-        }
-        return minMaxProps;
+    if (minMoment) {
+      const minDate = minMoment.toDate();
+      minMaxProps.min = minDate;
+      minMaxProps.minDate = minDate;
     }
 
-    render() {
-        const {
-            value,
-            classes,
-            currentWidth,
-            height,
-            minMoment,
-            maxMoment,
-            onDateSelected,
-            theme,
-            displayOptions,
-            ...passOnProps
-        } = this.props;
-
-        return (
-            <div
-                className={classes.container}
-            >
-                { /* $FlowFixMe */ }
-                <InfiniteCalendar
-                    {...this.getMinMaxProps()}
-                    selected={this.getValue((value))}
-                    onSelect={this.handleChange}
-                    locale={this.calendarLocaleData}
-                    width={currentWidth}
-                    height={height}
-                    autoFocus={false}
-                    theme={this.theme}
-                    displayOptions={this.displayOptions}
-                    {...passOnProps}
-                />
-            </div>
-        );
+    if (maxMoment) {
+      const maxDate = maxMoment.toDate();
+      minMaxProps.max = maxDate;
+      minMaxProps.maxDate = maxDate;
     }
+    return minMaxProps;
+  }
+
+  render() {
+    const {
+      value,
+      classes,
+      currentWidth,
+      height,
+      minMoment,
+      maxMoment,
+      onDateSelected,
+      theme,
+      displayOptions,
+      ...passOnProps
+    } = this.props;
+
+    return (
+      <div className={classes.container}>
+        {/* $FlowFixMe */}
+        <InfiniteCalendar
+          {...this.getMinMaxProps()}
+          selected={this.getValue(value)}
+          onSelect={this.handleChange}
+          locale={this.calendarLocaleData}
+          width={currentWidth}
+          height={height}
+          autoFocus={false}
+          theme={this.theme}
+          displayOptions={this.displayOptions}
+          {...passOnProps}
+        />
+      </div>
+    );
+  }
 }
 
 export default withTheme()(withStyles(styles)(D2DateCalendar));

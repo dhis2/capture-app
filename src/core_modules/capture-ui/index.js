@@ -35,8 +35,8 @@ export { default as Row } from './DataTable/Row.component';
 export { default as SortLabel } from './DataTable/SortLabel.component';
 export { default as Table } from './DataTable/Table.component';
 export {
-    directions as sortLabelDirections,
-    placements as sorLabelPlacements,
+  directions as sortLabelDirections,
+  placements as sorLabelPlacements,
 } from './DataTable/sortLabel.const';
 
 // UI-Elements

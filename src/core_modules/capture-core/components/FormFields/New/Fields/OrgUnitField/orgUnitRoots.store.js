@@ -3,9 +3,9 @@
 const rootsContainer = {};
 
 export function set(id: string, roots: ?Array<any>) {
-    rootsContainer[id] = roots;
+  rootsContainer[id] = roots;
 }
 
 export function get(id: string): ?Array<any> {
-    return rootsContainer[id];
+  return rootsContainer[id];
 }

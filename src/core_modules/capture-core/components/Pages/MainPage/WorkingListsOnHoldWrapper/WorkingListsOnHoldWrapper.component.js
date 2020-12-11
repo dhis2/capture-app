@@ -6,16 +6,12 @@ import { WorkingListsSetup } from '../WorkingListsSetup';
 const WorkingListsSetupWithLoadingIndicator = withLoadingIndicator()(WorkingListsSetup);
 
 type Props = {
-    onHold: boolean,
+  onHold: boolean,
 };
 
 const WorkingListsOnHoldWrapper = (props: Props) => {
-    const { onHold } = props;
-    return (
-        <WorkingListsSetupWithLoadingIndicator
-            ready={!onHold}
-        />
-    );
+  const { onHold } = props;
+  return <WorkingListsSetupWithLoadingIndicator ready={!onHold} />;
 };
 
 export default WorkingListsOnHoldWrapper;

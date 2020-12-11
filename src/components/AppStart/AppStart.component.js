@@ -14,54 +14,43 @@ import { JSSProviderShell } from './JSSProviderShell.component';
 import theme from '../../styles/uiTheme';
 
 export const AppStart = () => {
-    const [ready, setReadyStatus] = useState(false);
-    const [cacheExpired, setCacheExpired] = useState(false);
+  const [ready, setReadyStatus] = useState(false);
+  const [cacheExpired, setCacheExpired] = useState(false);
 
-    const store: {current: Object} = useRef();
-    const history = useRef();
+  const store: { current: Object } = useRef();
+  const history = useRef();
 
-    const handleRunApp = useCallback((storeArg: ReduxStore, historyArg: HashHistory) => {
-        store.current = storeArg;
-        history.current = historyArg;
-        setReadyStatus(true);
-        storeArg.dispatch(loadApp());
-        addBeforeUnloadEventListener(storeArg);
-    }, [
-        setReadyStatus,
-        store,
-        history,
-    ]);
+  const handleRunApp = useCallback(
+    (storeArg: ReduxStore, historyArg: HashHistory) => {
+      store.current = storeArg;
+      history.current = historyArg;
+      setReadyStatus(true);
+      storeArg.dispatch(loadApp());
+      addBeforeUnloadEventListener(storeArg);
+    },
+    [setReadyStatus, store, history],
+  );
 
-    const handleCacheExpired = useCallback(() => {
-        setCacheExpired(true);
-    }, [setCacheExpired]);
+  const handleCacheExpired = useCallback(() => {
+    setCacheExpired(true);
+  }, [setCacheExpired]);
 
-    if (cacheExpired) {
-        return (
-            <CacheExpired />
-        );
-    }
+  if (cacheExpired) {
+    return <CacheExpired />;
+  }
 
-    return (
-        <>
-            <CssBaseline />
-            <JSSProviderShell>
-                <MuiThemeProvider
-                    theme={theme}
-                >
-                    {
-                        ready ?
-                            <App
-                                store={store.current}
-                                history={history.current}
-                            /> :
-                            <AppLoader
-                                onRunApp={handleRunApp}
-                                onCacheExpired={handleCacheExpired}
-                            />
-                    }
-                </MuiThemeProvider>
-            </JSSProviderShell>
-        </>
-    );
+  return (
+    <>
+      <CssBaseline />
+      <JSSProviderShell>
+        <MuiThemeProvider theme={theme}>
+          {ready ? (
+            <App store={store.current} history={history.current} />
+          ) : (
+            <AppLoader onRunApp={handleRunApp} onCacheExpired={handleCacheExpired} />
+          )}
+        </MuiThemeProvider>
+      </JSSProviderShell>
+    </>
+  );
 };

@@ -8,39 +8,46 @@ import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import Option from '../../../metaData/OptionSet/Option';
 
 type Props = {
-    allowMultiple?: boolean,
+  allowMultiple?: boolean,
 };
 
 class D2TrueFalse extends Component<Props> {
-    static getOptions() {
-        const trueText = i18n.t('Yes');
-        const falseText = i18n.t('No');
+  static getOptions() {
+    const trueText = i18n.t('Yes');
+    const falseText = i18n.t('No');
 
-        const optionSet = new OptionSet();
-        optionSet.addOption(new Option((o) => { o.text = trueText; o.value = 'true'; }));
-        optionSet.addOption(new Option((o) => { o.text = falseText; o.value = 'false'; }));
-        return optionSet;
-    }
+    const optionSet = new OptionSet();
+    optionSet.addOption(
+      new Option((o) => {
+        o.text = trueText;
+        o.value = 'true';
+      }),
+    );
+    optionSet.addOption(
+      new Option((o) => {
+        o.text = falseText;
+        o.value = 'false';
+      }),
+    );
+    return optionSet;
+  }
 
-    optionSet: OptionSet;
+  optionSet: OptionSet;
 
-    constructor(props: Props) {
-        super(props);
-        this.optionSet = D2TrueFalse.getOptions();
-    }
+  constructor(props: Props) {
+    super(props);
+    this.optionSet = D2TrueFalse.getOptions();
+  }
 
-    render() {
-        const { allowMultiple, ...passOnProps } = this.props;
-        const SelectBoxes = allowMultiple ? MultiSelectBoxes : SingleSelectBoxes;
-        return (
-            <div>
-                <SelectBoxes
-                    {...passOnProps}
-                    optionSet={this.optionSet}
-                />
-            </div>
-        );
-    }
+  render() {
+    const { allowMultiple, ...passOnProps } = this.props;
+    const SelectBoxes = allowMultiple ? MultiSelectBoxes : SingleSelectBoxes;
+    return (
+      <div>
+        <SelectBoxes {...passOnProps} optionSet={this.optionSet} />
+      </div>
+    );
+  }
 }
 
 export default D2TrueFalse;

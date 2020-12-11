@@ -6,64 +6,62 @@ import i18n from '@dhis2/d2-i18n';
 import ColumnSelectorDialog from '../../../../ColumnSelectorDialog/ColumnSelectorDialog.component';
 
 type Props = {
-    onSave: Function,
-    columns: Array<Object>,
+  onSave: Function,
+  columns: Array<Object>,
 };
 
 type State = {
-    dialogOpen: boolean,
+  dialogOpen: boolean,
 };
 
 class ColumnSelector extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            dialogOpen: false,
-        };
-    }
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      dialogOpen: false,
+    };
+  }
 
-    openDialog = () => {
-        this.setState({
-            dialogOpen: true,
-        });
-    }
+  openDialog = () => {
+    this.setState({
+      dialogOpen: true,
+    });
+  };
 
-    closeDialog = () => {
-        this.setState({
-            dialogOpen: false,
-        });
-    }
+  closeDialog = () => {
+    this.setState({
+      dialogOpen: false,
+    });
+  };
 
-    handleSaveColumnOrder = (columnOrder: Array<Object>) => {
-        this.props.onSave(columnOrder);
-        this.closeDialog();
-    }
+  handleSaveColumnOrder = (columnOrder: Array<Object>) => {
+    this.props.onSave(columnOrder);
+    this.closeDialog();
+  };
 
-    render() {
-        const { columns } = this.props;
-        return (
-            <>
-                <Tooltip
-                    disableFocusListener
-                    disableTouchListener
-                    enterDelay={500}
-                    title={i18n.t('Select columns')}
-                >
-                    <IconButton
-                        onClick={this.openDialog}
-                    >
-                        <SettingsIcon />
-                    </IconButton>
-                </Tooltip>
-                <ColumnSelectorDialog
-                    open={this.state.dialogOpen}
-                    onClose={this.closeDialog}
-                    onSave={this.handleSaveColumnOrder}
-                    columns={columns}
-                />
-            </>
-        );
-    }
+  render() {
+    const { columns } = this.props;
+    return (
+      <>
+        <Tooltip
+          disableFocusListener
+          disableTouchListener
+          enterDelay={500}
+          title={i18n.t('Select columns')}
+        >
+          <IconButton onClick={this.openDialog}>
+            <SettingsIcon />
+          </IconButton>
+        </Tooltip>
+        <ColumnSelectorDialog
+          open={this.state.dialogOpen}
+          onClose={this.closeDialog}
+          onSave={this.handleSaveColumnOrder}
+          columns={columns}
+        />
+      </>
+    );
+  }
 }
 
 export default ColumnSelector;

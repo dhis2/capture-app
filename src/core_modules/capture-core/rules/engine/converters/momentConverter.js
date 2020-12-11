@@ -6,15 +6,15 @@ import type { IMomentConverter } from '../rulesEngine.types';
 const momentFormat = 'YYYY-MM-DD';
 
 class RulesMomentConverter implements IMomentConverter {
-    // eslint-disable-next-line class-methods-use-this
-    rulesDateToMoment(rulesEngineValue: string): moment$Moment {
-        return moment(rulesEngineValue, momentFormat);
-    }
+  // eslint-disable-next-line class-methods-use-this
+  rulesDateToMoment(rulesEngineValue: string): moment$Moment {
+    return moment(rulesEngineValue, momentFormat);
+  }
 
-    // eslint-disable-next-line class-methods-use-this
-    momentToRulesDate(momentObject: moment$Moment): string {
-        return getFormattedStringFromMomentUsingEuropeanGlyphs(momentObject);
-    }
+  // eslint-disable-next-line class-methods-use-this
+  momentToRulesDate(momentObject: moment$Moment): string {
+    return getFormattedStringFromMomentUsingEuropeanGlyphs(momentObject);
+  }
 }
 
 export default new RulesMomentConverter();

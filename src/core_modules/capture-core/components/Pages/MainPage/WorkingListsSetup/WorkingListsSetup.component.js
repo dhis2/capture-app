@@ -5,33 +5,24 @@ import { shouldSkipReload } from './skipReloadCalculator';
 import { WorkingLists } from '../WorkingLists';
 
 type PassOnProps = {|
-    listId: string,
+  listId: string,
 |};
 
 type Props = {|
-    programId: string,
-    orgUnitId: string,
-    categories: Object,
-    lastTransaction: number,
-    listContext: ?Object,
-    ...PassOnProps,
+  programId: string,
+  orgUnitId: string,
+  categories: Object,
+  lastTransaction: number,
+  listContext: ?Object,
+  ...PassOnProps,
 |};
 
 const WorkingListsSetup = (props: Props) => {
-    const {
-        programId,
-        orgUnitId,
-        categories,
-        lastTransaction,
-        listContext,
-        ...passOnProps
-    } = props;
+  const { programId, orgUnitId, categories, lastTransaction, listContext, ...passOnProps } = props;
 
-    const defaultConfig = React.useMemo(() => getDefaultConfig(programId), [
-        programId,
-    ]);
+  const defaultConfig = React.useMemo(() => getDefaultConfig(programId), [programId]);
 
-    /*
+  /*
     const {
         skipReloadTemplates,
         skipReloadData,
@@ -44,26 +35,26 @@ const WorkingListsSetup = (props: Props) => {
     ]);
     */
 
-    /*
+  /*
     const workingListsKey = React.useMemo(() => {
         const categoriesString = categories ? Object.keys(categories).map(key => categories[key]).join('_') : '';
         return `${programId}_${orgUnitId}_${categoriesString}`;
     }, [programId, orgUnitId, categories]);
     */
 
-    return (
-        <WorkingLists
-            {...passOnProps}
-            listId="eventList"
-            programId={programId}
-            orgUnitId={orgUnitId}
-            categories={categories}
-            lastTransaction={lastTransaction}
-            listContext={listContext}
-            defaultConfig={defaultConfig}
-            onCheckSkipReload={shouldSkipReload}
-        />
-    );
+  return (
+    <WorkingLists
+      {...passOnProps}
+      listId="eventList"
+      programId={programId}
+      orgUnitId={orgUnitId}
+      categories={categories}
+      lastTransaction={lastTransaction}
+      listContext={listContext}
+      defaultConfig={defaultConfig}
+      onCheckSkipReload={shouldSkipReload}
+    />
+  );
 };
 
 export default WorkingListsSetup;

@@ -5,20 +5,20 @@ import { restMenuItemSelected } from './filterSelector.actions';
 import { makeOnItemSelectedSelector } from './filters.selectors';
 
 const mapStateToProps = (state: ReduxState, props: Object) => ({
-    stickyFilters: state.workingListsStickyFilters[props.listId],
+  stickyFilters: state.workingListsStickyFilters[props.listId],
 });
 
 const mapDispatchToProps = () => {
-    const onItemSelectedMemoized = makeOnItemSelectedSelector();
+  const onItemSelectedMemoized = makeOnItemSelectedSelector();
 
-    // $FlowFixMe[not-an-object] automated comment
-    return (dispatch: ReduxDispatch, props: Object) => ({
-        onRestMenuItemSelected: onItemSelectedMemoized({
-            dispatch,
-            listId: props.listId,
-            onItemSelected: restMenuItemSelected,
-        }),
-    });
+  // $FlowFixMe[not-an-object] automated comment
+  return (dispatch: ReduxDispatch, props: Object) => ({
+    onRestMenuItemSelected: onItemSelectedMemoized({
+      dispatch,
+      listId: props.listId,
+      onItemSelected: restMenuItemSelected,
+    }),
+  });
 };
 
 // $FlowFixMe[missing-annot] automated comment

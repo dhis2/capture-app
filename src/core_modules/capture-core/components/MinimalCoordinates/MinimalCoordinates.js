@@ -6,11 +6,11 @@ type Props = $ReadOnly<{|
   longitude: number | string,
 |}>;
 
-const toSixDecimal = value => (parseFloat(value) ? parseFloat(value).toFixed(6) : null);
+const toSixDecimal = (value) => (parseFloat(value) ? parseFloat(value).toFixed(6) : null);
 
-export const MinimalCoordinates = ({ latitude, longitude }: Props) =>
-    (<div>
-        lat: {toSixDecimal(latitude)} <br />
-        long: {toSixDecimal(longitude)}
-    </div>);
-
+export const MinimalCoordinates = ({ latitude, longitude }: Props) => (
+  <div>
+    lat: {toSixDecimal(latitude)} <br />
+    long: {toSixDecimal(longitude)}
+  </div>
+);

@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import WarningMessageCreator from './WarningMessageCreator.component';
 import { reviewDuplicates } from './searchGroupDuplicate.actions';
 
-
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onReviewDuplicates: (onOpenReviewDialog: Function) => {
-        dispatch(reviewDuplicates());
-        onOpenReviewDialog();
-    },
+  onReviewDuplicates: (onOpenReviewDialog: Function) => {
+    dispatch(reviewDuplicates());
+    onOpenReviewDialog();
+  },
 });
 
 // $FlowSuppress

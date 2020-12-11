@@ -1,5 +1,5 @@
 // @flow
 export const orientations = {
-    HORIZONTAL: 'horizontal',
-    VERTICAL: 'vertical',
+  HORIZONTAL: 'horizontal',
+  VERTICAL: 'vertical',
 };

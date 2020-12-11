@@ -6,126 +6,100 @@ import Paper from '@material-ui/core/Paper';
 import Button from '../../../Buttons/Button.component';
 
 const getStyles = (theme: Theme) => ({
-    container: {
-        padding: 24,
-    },
-    contents: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: 50,
-        paddingBottom: 50,
-    },
-    buttonRow: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        paddingTop: 10,
-        marginLeft: '-8px',
-    },
-    buttonContainer: {
-        paddingRight: theme.spacing.unit * 2,
-    },
-    headerContainer: {
-        paddingTop: 9,
-        paddingBottom: 20,
-    },
-    // $FlowFixMe[cannot-spread-inexact] automated comment
-    header: {
-        flexGrow: 1,
-        ...theme.typography.title,
-        fontSize: 16,
-        fontWeight: 500,
-    },
+  container: {
+    padding: 24,
+  },
+  contents: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 50,
+    paddingBottom: 50,
+  },
+  buttonRow: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    paddingTop: 10,
+    marginLeft: '-8px',
+  },
+  buttonContainer: {
+    paddingRight: theme.spacing.unit * 2,
+  },
+  headerContainer: {
+    paddingTop: 9,
+    paddingBottom: 20,
+  },
+  // $FlowFixMe[cannot-spread-inexact] automated comment
+  header: {
+    flexGrow: 1,
+    ...theme.typography.title,
+    fontSize: 16,
+    fontWeight: 500,
+  },
 });
 type Props = {
-    isProgramSelected: boolean,
-    isOrgUnitSelected: boolean,
-    classes: {
-        container: string,
-        contents: string,
-        buttonRow: string,
-        buttonContainer: string,
-        headerContainer: string,
-        header: string,
-    },
-    onCancel: () => void,
+  isProgramSelected: boolean,
+  isOrgUnitSelected: boolean,
+  classes: {
+    container: string,
+    contents: string,
+    buttonRow: string,
+    buttonContainer: string,
+    headerContainer: string,
+    header: string,
+  },
+  onCancel: () => void,
 };
 
 class DataEntrySelectionsIncomplete extends Component<Props> {
-    renderHeader() {
-        return (
-            <div
-                className={this.props.classes.headerContainer}
-            >
-                <div
-                    className={this.props.classes.header}
-                >
-                    {i18n.t('New event')}
-                </div>
-            </div>
-        );
+  renderHeader() {
+    return (
+      <div className={this.props.classes.headerContainer}>
+        <div className={this.props.classes.header}>{i18n.t('New event')}</div>
+      </div>
+    );
+  }
+
+  getText() {
+    let text;
+    const { isProgramSelected, isOrgUnitSelected } = this.props;
+
+    if (!isProgramSelected && !isOrgUnitSelected) {
+      text = i18n.t('Select a registering unit and program above to get started');
+    } else if (!isProgramSelected) {
+      text = i18n.t('Select a program to start reporting');
+    } else if (!isOrgUnitSelected) {
+      text = i18n.t('Select a registering unit to start reporting');
+    } else {
+      text = i18n.t('Select a category option to start reporting');
     }
 
-    getText() {
-        let text;
-        const { isProgramSelected, isOrgUnitSelected } = this.props;
+    return text;
+  }
 
-        if (!isProgramSelected && !isOrgUnitSelected) {
-            text = i18n.t('Select a registering unit and program above to get started');
-        } else if (!isProgramSelected) {
-            text = i18n.t('Select a program to start reporting');
-        } else if (!isOrgUnitSelected) {
-            text = i18n.t('Select a registering unit to start reporting');
-        } else {
-            text = i18n.t('Select a category option to start reporting');
-        }
-
-        return text;
-    }
-
-    render() {
-        const { classes, onCancel } = this.props;
-        return (
-            <div className={classes.container}>
-                {this.renderHeader()}
-                <Paper
-                    elevation={0}
-                >
-                    <div
-                        className={classes.contents}
-                    >
-                        {this.getText()}
-                    </div>
-                </Paper>
-                <div
-                    className={classes.buttonRow}
-                >
-                    <div
-                        className={classes.buttonContainer}
-                    >
-                        <Button
-                            variant="raised"
-                            color="primary"
-                            disabled
-                        >
-                            {i18n.t('Save')}
-                        </Button>
-                    </div>
-                    <div
-                        className={classes.buttonContainer}
-                    >
-                        <Button
-                            variant="text"
-                            color="primary"
-                            onClick={onCancel}
-                        >
-                            {i18n.t('Cancel')}
-                        </Button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+  render() {
+    const { classes, onCancel } = this.props;
+    return (
+      <div className={classes.container}>
+        {this.renderHeader()}
+        <Paper elevation={0}>
+          <div className={classes.contents}>{this.getText()}</div>
+        </Paper>
+        <div className={classes.buttonRow}>
+          <div className={classes.buttonContainer}>
+            <Button variant="raised" color="primary" disabled>
+              {i18n.t('Save')}
+            </Button>
+          </div>
+          <div className={classes.buttonContainer}>
+            <Button variant="text" color="primary" onClick={onCancel}>
+              {i18n.t('Cancel')}
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default withStyles(getStyles)(DataEntrySelectionsIncomplete);

@@ -3,110 +3,122 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import {
-    RenderFoundation,
-    Section,
-    SearchGroup,
-    DataElement,
-    dataElementTypes,
+  RenderFoundation,
+  Section,
+  SearchGroup,
+  DataElement,
+  dataElementTypes,
 } from '../../../../metaData';
 import type {
-    CachedAttributeTranslation,
-    CachedTrackedEntityAttribute,
+  CachedAttributeTranslation,
+  CachedTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
 
 type InputSearchAttribute = {
-    trackedEntityAttributeId: ?string,
-    searchable: boolean,
-    displayInList: boolean,
-}
+  trackedEntityAttributeId: ?string,
+  searchable: boolean,
+  displayInList: boolean,
+};
 
 type SearchAttribute = InputSearchAttribute & {
-    trackedEntityAttribute: CachedTrackedEntityAttribute
-}
+  trackedEntityAttribute: CachedTrackedEntityAttribute,
+};
 
 const translationPropertyNames = {
-    NAME: 'NAME',
-    DESCRIPTION: 'DESCRIPTION',
-    SHORT_NAME: 'SHORT_NAME',
+  NAME: 'NAME',
+  DESCRIPTION: 'DESCRIPTION',
+  SHORT_NAME: 'SHORT_NAME',
 };
 
 const searchAttributeElementTypes = {
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.NUMBER]: dataElementTypes.NUMBER_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER]: dataElementTypes.INTEGER_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER_POSITIVE]: dataElementTypes.INTEGER_POSITIVE_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.INTEGER_NEGATIVE]: dataElementTypes.INTEGER_NEGATIVE_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.DATE]: dataElementTypes.DATE_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.DATETIME]: dataElementTypes.DATETIME_RANGE,
-    // $FlowFixMe[prop-missing] automated comment
-    [dataElementTypes.TIME]: dataElementTypes.TIME_RANGE,
+  // $FlowFixMe[prop-missing] automated comment
+  [dataElementTypes.NUMBER]: dataElementTypes.NUMBER_RANGE,
+  // $FlowFixMe[prop-missing] automated comment
+  [dataElementTypes.INTEGER]: dataElementTypes.INTEGER_RANGE,
+  // $FlowFixMe[prop-missing] automated comment
+  [dataElementTypes.INTEGER_POSITIVE]: dataElementTypes.INTEGER_POSITIVE_RANGE,
+  // $FlowFixMe[prop-missing] automated comment
+  [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE,
+  // $FlowFixMe[prop-missing] automated comment
+  [dataElementTypes.INTEGER_NEGATIVE]: dataElementTypes.INTEGER_NEGATIVE_RANGE,
+  // $FlowFixMe[prop-missing] automated comment
+  [dataElementTypes.DATE]: dataElementTypes.DATE_RANGE,
+  // $FlowFixMe[prop-missing] automated comment
+  [dataElementTypes.DATETIME]: dataElementTypes.DATETIME_RANGE,
+  // $FlowFixMe[prop-missing] automated comment
+  [dataElementTypes.TIME]: dataElementTypes.TIME_RANGE,
 };
 
-
 class SearchGroupFactory {
-    static errorMessages = {
-        TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
-    };
+  static errorMessages = {
+    TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
+  };
 
-    static _getSearchAttributeValueType(valueType: string, isUnique: ?boolean) {
-        const searchAttributeValueType = searchAttributeElementTypes[valueType];
-        return !isUnique && searchAttributeValueType ? searchAttributeValueType : valueType;
+  static _getSearchAttributeValueType(valueType: string, isUnique: ?boolean) {
+    const searchAttributeValueType = searchAttributeElementTypes[valueType];
+    return !isUnique && searchAttributeValueType ? searchAttributeValueType : valueType;
+  }
+
+  cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
+
+  locale: ?string;
+
+  constructor(
+    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
+    locale: ?string,
+  ) {
+    this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
+    this.locale = locale;
+  }
+
+  _getAttributeTranslation(
+    translations: Array<CachedAttributeTranslation>,
+    property: $Values<typeof translationPropertyNames>,
+  ) {
+    if (this.locale) {
+      const translation = translations.find(
+        (t) => t.property === property && t.locale === this.locale,
+      );
+      return translation && translation.value;
     }
+    return null;
+  }
 
-    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
+  async _buildElement(searchAttribute: SearchAttribute) {
+    const { trackedEntityAttribute } = searchAttribute;
+    const element = new DataElement((o) => {
+      o.id = trackedEntityAttribute.id;
+      o.name =
+        this._getAttributeTranslation(
+          trackedEntityAttribute.translations,
+          translationPropertyNames.NAME,
+        ) || trackedEntityAttribute.displayName;
+      o.shortName =
+        this._getAttributeTranslation(
+          trackedEntityAttribute.translations,
+          translationPropertyNames.SHORT_NAME,
+        ) || trackedEntityAttribute.displayShortName;
+      o.formName =
+        this._getAttributeTranslation(
+          trackedEntityAttribute.translations,
+          translationPropertyNames.NAME,
+        ) || trackedEntityAttribute.displayName;
+      o.description =
+        this._getAttributeTranslation(
+          trackedEntityAttribute.translations,
+          translationPropertyNames.DESCRIPTION,
+        ) || trackedEntityAttribute.description;
+      o.displayInForms = true;
+      o.displayInReports = searchAttribute.displayInList;
+      o.compulsory = !!trackedEntityAttribute.unique;
+      o.disabled = false;
+      o.type = SearchGroupFactory._getSearchAttributeValueType(
+        trackedEntityAttribute.valueType,
+        trackedEntityAttribute.unique,
+      );
+    });
 
-    locale: ?string;
-
-    constructor(
-        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-        locale: ?string,
-    ) {
-        this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
-        this.locale = locale;
-    }
-
-    _getAttributeTranslation(
-        translations: Array<CachedAttributeTranslation>,
-        property: $Values<typeof translationPropertyNames>,
-    ) {
-        if (this.locale) {
-            const translation = translations.find(t => t.property === property && t.locale === this.locale);
-            return translation && translation.value;
-        }
-        return null;
-    }
-
-    async _buildElement(searchAttribute: SearchAttribute) {
-        const {trackedEntityAttribute} = searchAttribute;
-        const element = new DataElement((o) => {
-            o.id = trackedEntityAttribute.id;
-            o.name = this._getAttributeTranslation(
-                trackedEntityAttribute.translations, translationPropertyNames.NAME) ||
-                trackedEntityAttribute.displayName;
-            o.shortName = this._getAttributeTranslation(
-                trackedEntityAttribute.translations, translationPropertyNames.SHORT_NAME) ||
-                trackedEntityAttribute.displayShortName;
-            o.formName = this._getAttributeTranslation(
-                trackedEntityAttribute.translations, translationPropertyNames.NAME) ||
-                trackedEntityAttribute.displayName;
-            o.description = this._getAttributeTranslation(
-                trackedEntityAttribute.translations, translationPropertyNames.DESCRIPTION) ||
-                trackedEntityAttribute.description;
-            o.displayInForms = true;
-            o.displayInReports = searchAttribute.displayInList;
-            o.compulsory = !!trackedEntityAttribute.unique;
-            o.disabled = false;
-            o.type = SearchGroupFactory._getSearchAttributeValueType(trackedEntityAttribute.valueType, trackedEntityAttribute.unique);
-        });
-
-        /* if (attribute.optionSet && attribute.optionSet.id ) {
+    /* if (attribute.optionSet && attribute.optionSet.id ) {
             element.optionSet = await buildOptionSet(
                 attribute.optionSet.id,
                 element,
@@ -114,91 +126,96 @@ class SearchGroupFactory {
                 programAttribute.renderType && programAttribute.renderType.DESKTOP && programAttribute.renderType.DESKTOP.type);
         } */
 
-        await Promise.resolve();
+    await Promise.resolve();
 
-        return element;
+    return element;
+  }
+
+  async _buildSection(searchGroupAttributes: Array<SearchAttribute>) {
+    const section = new Section((o) => {
+      o.id = Section.MAIN_SECTION_ID;
+      o.showContainer = false;
+    });
+
+    // $FlowFixMe
+    await searchGroupAttributes.asyncForEach(async (programAttribute) => {
+      const element = await this._buildElement(programAttribute);
+      element && section.addElement(element);
+    });
+    return section;
+  }
+
+  async _buildRenderFoundation(searchGroupAttributes: Array<SearchAttribute>) {
+    const renderFoundation = new RenderFoundation();
+    renderFoundation.addSection(await this._buildSection(searchGroupAttributes));
+    return renderFoundation;
+  }
+
+  async _buildSearchGroup(
+    key: string,
+    searchGroupAttributes: Array<SearchAttribute>,
+    minAttributesRequiredToSearch: number,
+  ) {
+    const searchGroup = new SearchGroup();
+    searchGroup.searchForm = await this._buildRenderFoundation(searchGroupAttributes);
+    if (key === 'main') {
+      searchGroup.minAttributesRequiredToSearch = minAttributesRequiredToSearch;
+      searchGroup.id = 'main';
+    } else {
+      searchGroup.unique = true;
+      searchGroup.id = 'unique';
     }
 
-    async _buildSection(searchGroupAttributes: Array<SearchAttribute>) {
-        const section = new Section((o) => {
-            o.id = Section.MAIN_SECTION_ID;
-            o.showContainer = false;
-        });
+    return searchGroup;
+  }
 
+  getTrackedEntityAttribute(attribute: InputSearchAttribute): ?CachedTrackedEntityAttribute {
+    const id = attribute.trackedEntityAttributeId;
+    const trackedEntityAttribute = id ? this.cachedTrackedEntityAttributes.get(id) : null;
+    if (!trackedEntityAttribute) {
+      log.error(
+        errorCreator(
+          'Tried to create a searchAttribute where trackedEntityAttributeId was not specified or the trackedEntityAttribute could not be retrieved from the cache',
+        )({ attribute }),
+      );
+    }
+    return trackedEntityAttribute;
+  }
+
+  build(
+    searchAttributes: $ReadOnlyArray<InputSearchAttribute>,
+    minAttributesRequiredToSearch: number,
+  ) {
+    const attributesBySearchGroup = searchAttributes
+      .map((attribute) => ({
+        ...attribute,
+        trackedEntityAttribute: this.getTrackedEntityAttribute(attribute),
+      }))
+      .filter(
+        (attribute) =>
+          attribute.trackedEntityAttribute &&
+          (attribute.searchable || attribute.trackedEntityAttribute.unique),
+      )
+      .reduce((accGroups, attribute) => {
         // $FlowFixMe
-        await searchGroupAttributes.asyncForEach(async (programAttribute) => {
-            const element = await this._buildElement(programAttribute);
-            element && section.addElement(element);
-        });
-        return section;
-    }
-
-
-    async _buildRenderFoundation(searchGroupAttributes: Array<SearchAttribute>) {
-        const renderFoundation = new RenderFoundation();
-        renderFoundation.addSection(await this._buildSection(searchGroupAttributes));
-        return renderFoundation;
-    }
-
-    async _buildSearchGroup(
-        key: string,
-        searchGroupAttributes: Array<SearchAttribute>,
-        minAttributesRequiredToSearch: number,
-    ) {
-        const searchGroup = new SearchGroup();
-        searchGroup.searchForm = await this._buildRenderFoundation(searchGroupAttributes);
-        if (key === 'main') {
-            searchGroup.minAttributesRequiredToSearch = minAttributesRequiredToSearch;
-            searchGroup.id = 'main';
+        if (attribute.trackedEntityAttribute.unique) {
+          // $FlowFixMe
+          accGroups[attribute.trackedEntityAttribute.id] = [attribute];
         } else {
-            searchGroup.unique = true;
-            searchGroup.id = 'unique';
+          accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
         }
+        return accGroups;
+      }, {});
 
-        return searchGroup;
-    }
-
-    getTrackedEntityAttribute(attribute: InputSearchAttribute): ?CachedTrackedEntityAttribute {
-        const id = attribute.trackedEntityAttributeId;
-        const trackedEntityAttribute = id ? this.cachedTrackedEntityAttributes.get(id) : null;
-        if (!trackedEntityAttribute) {
-            log.error(
-                errorCreator(
-                    'Tried to create a searchAttribute where trackedEntityAttributeId was not specified or the trackedEntityAttribute could not be retrieved from the cache')(
-                    { attribute }),
-            );
-        }
-        return trackedEntityAttribute;
-    }
-
-    build(searchAttributes: $ReadOnlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number) {
-        const attributesBySearchGroup = searchAttributes
-            .map(attribute => ({
-                ...attribute,
-                trackedEntityAttribute: this.getTrackedEntityAttribute(attribute),
-            }))
-            .filter(attribute =>
-                attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique))
-            .reduce((accGroups, attribute) => {
-                // $FlowFixMe
-                if (attribute.trackedEntityAttribute.unique) {
-                    // $FlowFixMe
-                    accGroups[attribute.trackedEntityAttribute.id] = [attribute];
-                } else {
-                    accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
-                }
-                return accGroups;
-            }, {});
-
-        const searchGroupPromises = Object.keys(attributesBySearchGroup)
-            .map(attrByGroupKey =>
-                this._buildSearchGroup(
-                    attrByGroupKey,
-                    attributesBySearchGroup[attrByGroupKey],
-                    minAttributesRequiredToSearch,
-                ));
-        return Promise.all(searchGroupPromises);
-    }
+    const searchGroupPromises = Object.keys(attributesBySearchGroup).map((attrByGroupKey) =>
+      this._buildSearchGroup(
+        attrByGroupKey,
+        attributesBySearchGroup[attrByGroupKey],
+        minAttributesRequiredToSearch,
+      ),
+    );
+    return Promise.all(searchGroupPromises);
+  }
 }
 
 export default SearchGroupFactory;

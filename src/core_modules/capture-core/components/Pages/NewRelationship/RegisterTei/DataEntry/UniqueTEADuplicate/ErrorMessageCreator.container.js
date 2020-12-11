@@ -4,19 +4,19 @@ import UniqueTEADuplicate from './ErrorMessageCreator.component';
 import { makeTETSelector, makeAttributeNameSelector } from './ErrorMessageCreator.selectors';
 
 const makeMapStateToProps = () => {
-    const TETSelector = makeTETSelector();
-    const attributeNameSelector = makeAttributeNameSelector();
-    const mapStateToProps = (state: ReduxState, props: Object) => {
-        const trackedEntityType = TETSelector(state, props);
-        const attributeName = attributeNameSelector(state, props, trackedEntityType);
+  const TETSelector = makeTETSelector();
+  const attributeNameSelector = makeAttributeNameSelector();
+  const mapStateToProps = (state: ReduxState, props: Object) => {
+    const trackedEntityType = TETSelector(state, props);
+    const attributeName = attributeNameSelector(state, props, trackedEntityType);
 
-        return {
-            trackedEntityType,
-            attributeName,
-        };
+    return {
+      trackedEntityType,
+      attributeName,
     };
-    // $FlowFixMe
-    return mapStateToProps;
+  };
+  // $FlowFixMe
+  return mapStateToProps;
 };
 
 // $FlowFixMe

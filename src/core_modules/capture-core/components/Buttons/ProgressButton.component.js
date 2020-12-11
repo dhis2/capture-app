@@ -7,56 +7,43 @@ import Button from './ButtonOld.component';
 import { LoadingMaskForButton } from '../LoadingMasks';
 
 const styles = () => ({
-    wrapper: {
-        position: 'relative',
-    },
-    progress: {
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50% ,-50%)',
-        color: green[600],
-    },
+  wrapper: {
+    position: 'relative',
+  },
+  progress: {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50% ,-50%)',
+    color: green[600],
+  },
 });
 
 type Props = {
-    inProgress: boolean,
-    children: React.Node,
-    classes: {
-        wrapper: string,
-        progress: string,
-    }
+  inProgress: boolean,
+  children: React.Node,
+  classes: {
+    wrapper: string,
+    progress: string,
+  },
 };
 
 const ProgressButton = (props: Props) => {
-    const { inProgress, children, classes, ...buttonProps } = props;
+  const { inProgress, children, classes, ...buttonProps } = props;
 
-    if (inProgress) {
-        return (
-            <div
-                className={classes.wrapper}
-            >
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <Button
-                    disabled
-                    {...buttonProps}
-                >
-                    {children}
-                </Button>
-                <LoadingMaskForButton
-                    className={classes.progress}
-                />
-            </div>
-        );
-    }
-
+  if (inProgress) {
     return (
-        <Button
-            {...buttonProps}
-        >
-            {children}
+      <div className={classes.wrapper}>
+        {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+        <Button disabled {...buttonProps}>
+          {children}
         </Button>
+        <LoadingMaskForButton className={classes.progress} />
+      </div>
     );
+  }
+
+  return <Button {...buttonProps}>{children}</Button>;
 };
 
 export default withStyles(styles)(ProgressButton);

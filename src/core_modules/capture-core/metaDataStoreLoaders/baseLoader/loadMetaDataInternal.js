@@ -1,9 +1,9 @@
 // @flow
 import {
-    storeConstants,
-    storeOrgUnitLevels,
-    storeRelationshipTypes,
-    storeOrgUnitGroups,
+  storeConstants,
+  storeOrgUnitLevels,
+  storeRelationshipTypes,
+  storeOrgUnitGroups,
 } from './quickStoreOperations';
 import { loadPrograms } from '../programs';
 import { loadTrackedEntityTypes } from '../trackedEntityTypes';
@@ -12,14 +12,14 @@ import { loadCategories } from '../categories';
 import { loadOptionSets } from '../optionSets';
 
 const loadCoreMetaData = () =>
-    Promise.all(
-        [
-            storeConstants,
-            storeOrgUnitLevels,
-            storeRelationshipTypes,
-            storeOrgUnitGroups,
-        ].map(operation => operation()),
-    );
+  Promise.all(
+    [
+      storeConstants,
+      storeOrgUnitLevels,
+      storeRelationshipTypes,
+      storeOrgUnitGroups,
+    ].map((operation) => operation()),
+  );
 
 /**
  * Retrieves metadata from the api and stores it in IndexedDB.
@@ -28,29 +28,29 @@ const loadCoreMetaData = () =>
  * The option sets have their own version and are redonloaded based on that.
  */
 export const loadMetaDataInternal = async () => {
-    const {
-        optionSetsOutline: optionSetsOutlineFromPrograms,
-        trackedEntityAttributeIds: trackedEntityAttributeIdsFromPrograms,
-        categories,
-        trackedEntityTypeIds,
-        changesDetected,
-    } = await loadPrograms();
+  const {
+    optionSetsOutline: optionSetsOutlineFromPrograms,
+    trackedEntityAttributeIds: trackedEntityAttributeIdsFromPrograms,
+    categories,
+    trackedEntityTypeIds,
+    changesDetected,
+  } = await loadPrograms();
 
-    changesDetected && await loadCoreMetaData();
+  changesDetected && (await loadCoreMetaData());
 
-    const {
-        trackedEntityAttributeIds: trackedEntityAttributeIdsFromTrackedEntityTypes,
-        optionSetsOutline: optionSetsOutlineFromTrackedEntityTypes,
-    } = await loadTrackedEntityTypes(trackedEntityTypeIds);
+  const {
+    trackedEntityAttributeIds: trackedEntityAttributeIdsFromTrackedEntityTypes,
+    optionSetsOutline: optionSetsOutlineFromTrackedEntityTypes,
+  } = await loadTrackedEntityTypes(trackedEntityTypeIds);
 
-    await loadTrackedEntityAttributes([
-        ...trackedEntityAttributeIdsFromPrograms,
-        ...trackedEntityAttributeIdsFromTrackedEntityTypes,
-    ]);
+  await loadTrackedEntityAttributes([
+    ...trackedEntityAttributeIdsFromPrograms,
+    ...trackedEntityAttributeIdsFromTrackedEntityTypes,
+  ]);
 
-    await loadCategories(categories);
-    await loadOptionSets([
-        ...optionSetsOutlineFromPrograms,
-        ...optionSetsOutlineFromTrackedEntityTypes,
-    ]);
+  await loadCategories(categories);
+  await loadOptionSets([
+    ...optionSetsOutlineFromPrograms,
+    ...optionSetsOutlineFromTrackedEntityTypes,
+  ]);
 };

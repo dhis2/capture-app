@@ -7,29 +7,23 @@ import SingleSelectBoxes from '../internal/SelectionBoxes/SingleSelectionBoxes/S
 import orientations from '../constants/orientations.const';
 
 type Props = {
-    multiSelect?: ?boolean,
+  multiSelect?: ?boolean,
 };
 
 const SelectBoxes = (props: Props) => {
-    const { multiSelect, ...passOnProps } = props;
+  const { multiSelect, ...passOnProps } = props;
 
-    if (multiSelect) {
-        return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <MultiSelectBoxes
-                orientation={orientations.HORIZONTAL}
-                {...passOnProps}
-            />
-        );
-    }
-
+  if (multiSelect) {
     return (
-        // $FlowFixMe[cannot-spread-inexact] automated comment
-        <SingleSelectBoxes
-            orientation={orientations.HORIZONTAL}
-            {...passOnProps}
-        />
+      // $FlowFixMe[cannot-spread-inexact] automated comment
+      <MultiSelectBoxes orientation={orientations.HORIZONTAL} {...passOnProps} />
     );
+  }
+
+  return (
+    // $FlowFixMe[cannot-spread-inexact] automated comment
+    <SingleSelectBoxes orientation={orientations.HORIZONTAL} {...passOnProps} />
+  );
 };
 
 export default SelectBoxes;

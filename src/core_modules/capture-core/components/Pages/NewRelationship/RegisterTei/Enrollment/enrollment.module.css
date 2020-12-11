@@ -1,11 +1,11 @@
 @media screen and (max-width: 811px) and (min-width: 564px) {
-    .fieldLabelMediaBased {
-        padding-top: 0px !important;
-    }
+  .fieldLabelMediaBased {
+    padding-top: 0px !important;
+  }
 }
 
 @media screen and (max-width: 451px) {
-    .fieldLabelMediaBased {
-        padding-top: 0px !important;
-    }
+  .fieldLabelMediaBased {
+    padding-top: 0px !important;
+  }
 }

@@ -1,17 +1,14 @@
 // @flow
 import { connect } from 'react-redux';
 import DataEntrySelectionsNoAccess from './dataEntrySelectionsNoAccess.component';
-import {
-    cancelNewEventAndReturnToMainPage,
-} from '../DataEntry/actions/dataEntry.actions';
+import { cancelNewEventAndReturnToMainPage } from '../DataEntry/actions/dataEntry.actions';
 
-const mapStateToProps = () => ({
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onCancel: () => {
-        dispatch(cancelNewEventAndReturnToMainPage());
-    },
+  onCancel: () => {
+    dispatch(cancelNewEventAndReturnToMainPage());
+  },
 });
 
 // $FlowSuppress

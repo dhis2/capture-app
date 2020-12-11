@@ -8,38 +8,39 @@ import { reviewDuplicates } from './GeneralOutput/WarningsSection/SearchGroupDup
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 
 const makeStateToProps = () => {
-    const tetNameSelector = makeTETNameSelector();
-    const mapStateToProps = (state: ReduxState) => {
-        const ready = !state.newRelationshipRegisterTei.loading;
-        const dataEntryId = 'relationship';
-        const dataEntryKey = ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;
+  const tetNameSelector = makeTETNameSelector();
+  const mapStateToProps = (state: ReduxState) => {
+    const ready = !state.newRelationshipRegisterTei.loading;
+    const dataEntryId = 'relationship';
+    const dataEntryKey = ready
+      ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId)
+      : null;
 
-        return {
-            tetName: tetNameSelector(state),
-            ready,
-            error: state.newRelationshipRegisterTei.error,
-            possibleDuplicates: !!(state.dataEntriesSearchGroupsResults[dataEntryKey] &&
-                state.dataEntriesSearchGroupsResults[dataEntryKey].main &&
-                state.dataEntriesSearchGroupsResults[dataEntryKey].main.count),
-        };
+    return {
+      tetName: tetNameSelector(state),
+      ready,
+      error: state.newRelationshipRegisterTei.error,
+      possibleDuplicates: !!(
+        state.dataEntriesSearchGroupsResults[dataEntryKey] &&
+        state.dataEntriesSearchGroupsResults[dataEntryKey].main &&
+        state.dataEntriesSearchGroupsResults[dataEntryKey].main.count
+      ),
     };
-    // $FlowFixMe
-    return mapStateToProps;
+  };
+  // $FlowFixMe
+  return mapStateToProps;
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onReviewDuplicates: (onOpenReviewDialog: Function) => {
-        dispatch(reviewDuplicates());
-        onOpenReviewDialog();
-    },
+  onReviewDuplicates: (onOpenReviewDialog: Function) => {
+    dispatch(reviewDuplicates());
+    onOpenReviewDialog();
+  },
 });
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(
-        withErrorMessageHandler()(
-            RegisterTei,
-        ),
-    ),
-);
+export default connect(
+  makeStateToProps,
+  mapDispatchToProps,
+)(withLoadingIndicator()(withErrorMessageHandler()(RegisterTei)));

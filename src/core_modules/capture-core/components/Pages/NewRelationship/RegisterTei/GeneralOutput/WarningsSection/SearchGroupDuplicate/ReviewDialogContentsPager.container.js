@@ -4,13 +4,13 @@ import ReviewDialogContentsPager from './ReviewDialogContentsPager.component';
 import { changePage } from './searchGroupDuplicate.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
-    paginationData: state.newRelationshipRegisterTeiDuplicatesReview.paginationData,
+  paginationData: state.newRelationshipRegisterTeiDuplicatesReview.paginationData,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onChangePage: (page: number) => {
-        dispatch(changePage(page));
-    },
+  onChangePage: (page: number) => {
+    dispatch(changePage(page));
+  },
 });
 
 // $FlowFixMe

@@ -5,16 +5,13 @@ import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import DataEntryWrapper from '../DataEntryWrapper/DataEntryWrapper.container';
 
 const mapStateToProps = (state: ReduxState) => ({
-    error: state.newEnrollmentPage.selectionsError,
-    ready: !state.newEnrollmentPage.isLoading,
+  error: state.newEnrollmentPage.selectionsError,
+  ready: !state.newEnrollmentPage.isLoading,
 });
 
-const mapDispatchToProps = () => ({
-
-});
+const mapDispatchToProps = () => ({});
 // $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator(() => ({ margin: 4 }))(
-        withErrorMessageHandler()(DataEntryWrapper),
-    ),
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withLoadingIndicator(() => ({ margin: 4 }))(withErrorMessageHandler()(DataEntryWrapper)));

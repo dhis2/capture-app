@@ -5,38 +5,37 @@ import moment from 'capture-core-utils/moment/momentResolver';
 import { parseDate } from '../../../../utils/converters/date';
 
 const isValidEnrollmentDate = (value: string, isFutureDateAllowed: boolean) => {
-    const dateContainer = parseDate(value);
-    if (!dateContainer.isValid) {
-        return false;
-    }
+  const dateContainer = parseDate(value);
+  if (!dateContainer.isValid) {
+    return false;
+  }
 
-    if (isFutureDateAllowed) {
-        return true;
-    }
+  if (isFutureDateAllowed) {
+    return true;
+  }
 
-    const {momentDate} = dateContainer;
-    const momentToday = moment();
-    // $FlowFixMe -> if parseDate returns isValid true, there should always be a momentDate
-    const isNotFutureDate = momentDate.isSameOrBefore(momentToday);
-    return {
-        valid: isNotFutureDate,
-        message: i18n.t('A future date is not allowed'),
-    };
+  const { momentDate } = dateContainer;
+  const momentToday = moment();
+  // $FlowFixMe -> if parseDate returns isValid true, there should always be a momentDate
+  const isNotFutureDate = momentDate.isSameOrBefore(momentToday);
+  return {
+    valid: isNotFutureDate,
+    message: i18n.t('A future date is not allowed'),
+  };
 };
 
 const getValidatorContainers = (isFutureEnrollmentDateAllowed: boolean) => {
-    const validatorContainers = [
-        {
-            validator: hasValue,
-            message:
-                i18n.t('A value is required'),
-        },
-        {
-            validator: (value: string) => isValidEnrollmentDate(value, isFutureEnrollmentDateAllowed),
-            message: i18n.t('Please provide a valid date'),
-        },
-    ];
-    return validatorContainers;
+  const validatorContainers = [
+    {
+      validator: hasValue,
+      message: i18n.t('A value is required'),
+    },
+    {
+      validator: (value: string) => isValidEnrollmentDate(value, isFutureEnrollmentDateAllowed),
+      message: i18n.t('Please provide a valid date'),
+    },
+  ];
+  return validatorContainers;
 };
 
 export default getValidatorContainers;

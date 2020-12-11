@@ -3,15 +3,15 @@
 import { SystemSettings } from '../../metaData';
 
 class SystemSettingsStore {
-    _systemSettings: SystemSettings;
+  _systemSettings: SystemSettings;
 
-    set(settings: SystemSettings) {
-        this._systemSettings = settings;
-    }
+  set(settings: SystemSettings) {
+    this._systemSettings = settings;
+  }
 
-    get() {
-        return this._systemSettings;
-    }
+  get() {
+    return this._systemSettings;
+  }
 }
 
 export default new SystemSettingsStore();

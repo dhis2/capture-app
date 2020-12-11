@@ -8,14 +8,14 @@ export { actionTypes as urlActionTypes } from './actions/url.actions';
 
 // epics
 export {
-    getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
-    emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
-    validationForNewEnrollmentUrlUpdateEpic,
+  getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
+  emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
+  validationForNewEnrollmentUrlUpdateEpic,
 } from './epics/urlSelections.epics';
 
 // data entry
 export {
-    openDataEntryActionTypes,
-    openNewEnrollmentInDataEntryEpic,
-    saveNewEnrollmentEpic,
+  openDataEntryActionTypes,
+  openNewEnrollmentInDataEntryEpic,
+  saveNewEnrollmentEpic,
 } from './DataEntry';

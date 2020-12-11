@@ -1,5 +1,5 @@
 // @flow
 export {
-    convertEnrollmentClientToServerWithKeysMap,
-    convertEnrollmentServerToClientWithKeysMap,
+  convertEnrollmentClientToServerWithKeysMap,
+  convertEnrollmentServerToClientWithKeysMap,
 } from './enrollmentConverter';

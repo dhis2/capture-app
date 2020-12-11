@@ -1,16 +1,16 @@
 // @flow
 
 export const anchorPositions = {
-    LEFT: 'left',
-    RIGHT: 'right',
+  LEFT: 'left',
+  RIGHT: 'right',
 };
 
 export const absoluteDirections = {
-    UP: 'up',
-    DOWN: 'down',
+  UP: 'up',
+  DOWN: 'down',
 };
 
 export const modes = {
-    ABSOLUTE: 'absolute',
-    INLINE: 'inline',
+  ABSOLUTE: 'absolute',
+  INLINE: 'inline',
 };

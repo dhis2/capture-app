@@ -10,77 +10,81 @@ import { openDataEntry, openDataEntryCancelled, openDataEntryFailed } from './da
 import { actionTypes as newRelationshipActionTypes } from '../../newRelationship.actions';
 import { DATA_ENTRY_ID } from '../registerTei.const';
 import {
-    openDataEntryForNewEnrollmentBatchAsync,
-    openDataEntryForNewTeiBatchAsync,
+  openDataEntryForNewEnrollmentBatchAsync,
+  openDataEntryForNewTeiBatchAsync,
 } from '../../../../DataEntries';
 import {
-    getTrackerProgramThrowIfNotFound,
-    getTrackedEntityTypeThrowIfNotFound,
-    TrackerProgram,
-    TrackedEntityType,
+  getTrackerProgramThrowIfNotFound,
+  getTrackedEntityTypeThrowIfNotFound,
+  TrackerProgram,
+  TrackedEntityType,
 } from '../../../../../metaData';
 
-export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(
-            registrationSectionActionTypes.PROGRAM_CHANGE,
-            registrationSectionActionTypes.ORG_UNIT_CHANGE,
-            registrationSectionActionTypes.PROGRAM_FILTER_CLEAR,
-        ),
-        switchMap(() => {
-            const state = store.value;
-            const { programId, orgUnit } = state.newRelationshipRegisterTei;
-            const TETTypeId = state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
+export const openNewRelationshipRegisterTeiDataEntryEpic = (
+  action$: InputObservable,
+  store: ReduxStore,
+) =>
+  action$.pipe(
+    ofType(
+      registrationSectionActionTypes.PROGRAM_CHANGE,
+      registrationSectionActionTypes.ORG_UNIT_CHANGE,
+      registrationSectionActionTypes.PROGRAM_FILTER_CLEAR,
+    ),
+    switchMap(() => {
+      const state = store.value;
+      const { programId, orgUnit } = state.newRelationshipRegisterTei;
+      const TETTypeId = state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
 
-            if (programId && orgUnit) {
-                let trackerProgram: ?TrackerProgram;
-                try {
-                    trackerProgram = getTrackerProgramThrowIfNotFound(programId);
-                } catch (error) {
-                    log.error(
-                        errorCreator('tracker program for id not found')({ programId, error }),
-                    );
-                    return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
-                }
+      if (programId && orgUnit) {
+        let trackerProgram: ?TrackerProgram;
+        try {
+          trackerProgram = getTrackerProgramThrowIfNotFound(programId);
+        } catch (error) {
+          log.error(errorCreator('tracker program for id not found')({ programId, error }));
+          return Promise.resolve(
+            openDataEntryFailed(i18n.t('Metadata error. see log for details')),
+          );
+        }
 
-                const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
-                    trackerProgram,
-                    trackerProgram.enrollment.enrollmentForm,
-                    orgUnit,
-                    DATA_ENTRY_ID,
-                    [openDataEntry()],
-                    [],
-                    state.generatedUniqueValuesCache[DATA_ENTRY_ID],
-                );
+        const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
+          trackerProgram,
+          trackerProgram.enrollment.enrollmentForm,
+          orgUnit,
+          DATA_ENTRY_ID,
+          [openDataEntry()],
+          [],
+          state.generatedUniqueValuesCache[DATA_ENTRY_ID],
+        );
 
-                return from(openEnrollmentPromise).pipe(
-                    takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
-                );
-            }
+        return from(openEnrollmentPromise).pipe(
+          takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
+        );
+      }
 
-            if (orgUnit) {
-                let TETType: ?TrackedEntityType;
-                try {
-                    TETType = getTrackedEntityTypeThrowIfNotFound(TETTypeId);
-                } catch (error) {
-                    log.error(
-                        errorCreator('TET for id not found')({ TETTypeId, error }),
-                    );
-                    return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
-                }
+      if (orgUnit) {
+        let TETType: ?TrackedEntityType;
+        try {
+          TETType = getTrackedEntityTypeThrowIfNotFound(TETTypeId);
+        } catch (error) {
+          log.error(errorCreator('TET for id not found')({ TETTypeId, error }));
+          return Promise.resolve(
+            openDataEntryFailed(i18n.t('Metadata error. see log for details')),
+          );
+        }
 
-                const openTeiPromise = openDataEntryForNewTeiBatchAsync(
-                    TETType.teiRegistration.form,
-                    orgUnit,
-                    DATA_ENTRY_ID,
-                    [openDataEntry()],
-                    state.generatedUniqueValuesCache[DATA_ENTRY_ID],
-                );
+        const openTeiPromise = openDataEntryForNewTeiBatchAsync(
+          TETType.teiRegistration.form,
+          orgUnit,
+          DATA_ENTRY_ID,
+          [openDataEntry()],
+          state.generatedUniqueValuesCache[DATA_ENTRY_ID],
+        );
 
-                return from(openTeiPromise).pipe(
-                    takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
-                );
-            }
+        return from(openTeiPromise).pipe(
+          takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
+        );
+      }
 
-            return Promise.resolve(openDataEntryCancelled());
-        }));
+      return Promise.resolve(openDataEntryCancelled());
+    }),
+  );

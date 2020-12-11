@@ -8,64 +8,64 @@ import { type DateFilterData, dateFilterTypes } from '../filters.types';
 import type { Value } from './DateFilter.component';
 
 type Props = {
-    filter: ?DateFilterData,
-    filterTypeRef: Function,
+  filter: ?DateFilterData,
+  filterTypeRef: Function,
 };
 
 type State = {
-    value?: Value,
+  value?: Value,
 };
 
 class DateFilterManager extends React.Component<Props, State> {
-    static convertDateForEdit(rawValue: string) {
-        const momentInstance = moment(rawValue);
-        return convertMomentToDateFormatString(momentInstance);
+  static convertDateForEdit(rawValue: string) {
+    const momentInstance = moment(rawValue);
+    return convertMomentToDateFormatString(momentInstance);
+  }
+
+  static calculateDefaultValueState(filter: ?DateFilterData) {
+    if (!filter) {
+      return undefined;
     }
 
-    static calculateDefaultValueState(filter: ?DateFilterData) {
-        if (!filter) {
-            return undefined;
-        }
-
-        if (filter.type === dateFilterTypes.RELATIVE) {
-            return {
-                main: filter.period,
-            };
-        }
-
-        return {
-            main: mainOptionKeys.CUSTOM_RANGE,
-            from: filter.ge && DateFilterManager.convertDateForEdit(filter.ge),
-            to: filter.le && DateFilterManager.convertDateForEdit(filter.le),
-        };
+    if (filter.type === dateFilterTypes.RELATIVE) {
+      return {
+        main: filter.period,
+      };
     }
 
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            value: DateFilterManager.calculateDefaultValueState(this.props.filter),
-        };
-    }
+    return {
+      main: mainOptionKeys.CUSTOM_RANGE,
+      from: filter.ge && DateFilterManager.convertDateForEdit(filter.ge),
+      to: filter.le && DateFilterManager.convertDateForEdit(filter.le),
+    };
+  }
 
-    handleCommitValue = (value: ?Object) => {
-        this.setState({
-            value,
-        });
-    }
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      value: DateFilterManager.calculateDefaultValueState(this.props.filter),
+    };
+  }
 
-    render() {
-        const { filter, filterTypeRef, ...passOnProps } = this.props;
+  handleCommitValue = (value: ?Object) => {
+    this.setState({
+      value,
+    });
+  };
 
-        return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <DateFilter
-                value={this.state.value}
-                innerRef={filterTypeRef}
-                onCommitValue={this.handleCommitValue}
-                {...passOnProps}
-            />
-        );
-    }
+  render() {
+    const { filter, filterTypeRef, ...passOnProps } = this.props;
+
+    return (
+      // $FlowFixMe[cannot-spread-inexact] automated comment
+      <DateFilter
+        value={this.state.value}
+        innerRef={filterTypeRef}
+        onCommitValue={this.handleCommitValue}
+        {...passOnProps}
+      />
+    );
+  }
 }
 
 export default DateFilterManager;

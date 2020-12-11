@@ -4,14 +4,14 @@ import DataEntrySelectionsIncomplete from './DataEntrySelectionsIncomplete.compo
 import { cancelNewEventFromIncompleteSelectionAndReturnToMainPage } from './dataEntrySelectionsIncomplete.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
-    isProgramSelected: !!state.currentSelections.programId,
-    isOrgUnitSelected: !!state.currentSelections.orgUnitId,
+  isProgramSelected: !!state.currentSelections.programId,
+  isOrgUnitSelected: !!state.currentSelections.orgUnitId,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onCancel: () => {
-        dispatch(cancelNewEventFromIncompleteSelectionAndReturnToMainPage());
-    },
+  onCancel: () => {
+    dispatch(cancelNewEventFromIncompleteSelectionAndReturnToMainPage());
+  },
 });
 
 // $FlowSuppress

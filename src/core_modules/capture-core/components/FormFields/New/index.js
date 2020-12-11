@@ -16,9 +16,7 @@ export { default as SingleOrgUnitSelectField } from './Fields/OrgUnitField/Singl
 export { default as TextRangeField } from './Fields/TextField/TextRangeField.component';
 export { default as DateRangeField } from './Fields/DateAndTimeFields/DateRangeField/DateRangeField.component';
 export { default as ViewModeField } from './Fields/ViewModeField/ViewModeField.component';
-export {
-    default as DateTimeRangeField,
-} from './Fields/DateAndTimeFields/DateTimeRangeField/DateTimeRangeField.component';
+export { default as DateTimeRangeField } from './Fields/DateAndTimeFields/DateTimeRangeField/DateTimeRangeField.component';
 
 // Generic HOCs
 export { default as withCalculateMessages } from './HOC/messages/withCalculateMessages';
@@ -34,9 +32,7 @@ export { default as withStyledContainer } from './HOC/withStyledContainer';
 export { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
 
 // OrgUnit HOCs
-export {
-    default as withOrgUnitFieldImplicitRootsFilterHandler,
-} from './Fields/OrgUnitField/withInternalFilterHandler/withImplicitRootsInternalFilterHandler';
+export { default as withOrgUnitFieldImplicitRootsFilterHandler } from './Fields/OrgUnitField/withInternalFilterHandler/withImplicitRootsInternalFilterHandler';
 export { default as orgUnitFieldScopes } from './Fields/OrgUnitField/withInternalFilterHandler/scopes.const';
 
 // Constants

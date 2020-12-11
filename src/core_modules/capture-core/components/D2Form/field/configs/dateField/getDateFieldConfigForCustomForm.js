@@ -5,17 +5,23 @@ import { DateFieldForCustomForm } from '../../Components';
 import { DateDataElement } from '../../../../../metaData';
 
 const getDateFieldConfig = (metaData: DateDataElement) => {
-    const props = createProps({
-        width: 350,
-        maxWidth: 350,
-        calendarWidth: 350,
-        calendarMaxMoment: !metaData.allowFutureDate ? moment() : undefined,
-    }, metaData);
+  const props = createProps(
+    {
+      width: 350,
+      maxWidth: 350,
+      calendarWidth: 350,
+      calendarMaxMoment: !metaData.allowFutureDate ? moment() : undefined,
+    },
+    metaData,
+  );
 
-    return createFieldConfig({
-        component: DateFieldForCustomForm,
-        props,
-    }, metaData);
+  return createFieldConfig(
+    {
+      component: DateFieldForCustomForm,
+      props,
+    },
+    metaData,
+  );
 };
 
 export default getDateFieldConfig;

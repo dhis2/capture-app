@@ -1,53 +1,47 @@
 // @flow
 import {
-    DateTimeField,
-    withGotoInterface,
-    withHideCompatibility,
-    withDefaultShouldUpdateInterface,
-    withFocusSaver,
-    withCalculateMessages,
-    withDefaultFieldContainer,
-    withLabel,
-    withDisplayMessages,
-    withFilterProps,
-    withInternalChangeHandler,
+  DateTimeField,
+  withGotoInterface,
+  withHideCompatibility,
+  withDefaultShouldUpdateInterface,
+  withFocusSaver,
+  withCalculateMessages,
+  withDefaultFieldContainer,
+  withLabel,
+  withDisplayMessages,
+  withFilterProps,
+  withInternalChangeHandler,
 } from '../../../../FormFields/New';
-import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-} from '../internal';
+import { withRequiredFieldCalculation, withDisabledFieldCalculation } from '../internal';
 import labelTypeClasses from '../../buildField.module.css';
 
 const getFilteredProps = (props: Object) => {
-    const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;
-    return passOnProps;
+  const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;
+  return passOnProps;
 };
 
 export default withGotoInterface()(
-    withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDefaultFieldContainer()(
-                                withLabel({
-                                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                                    onGetCustomFieldLabeClass: (props: Object) =>
-                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.dateTimeLabel}`,
-                                })(
-                                    withDisplayMessages()(
-                                        withFilterProps(getFilteredProps)(
-                                            withInternalChangeHandler()(DateTimeField),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-
-                    ),
+  withHideCompatibility()(
+    withDefaultShouldUpdateInterface()(
+      withDisabledFieldCalculation()(
+        withRequiredFieldCalculation()(
+          withCalculateMessages()(
+            withFocusSaver()(
+              withDefaultFieldContainer()(
+                withLabel({
+                  onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                  onGetCustomFieldLabeClass: (props: Object) =>
+                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.dateTimeLabel}`,
+                })(
+                  withDisplayMessages()(
+                    withFilterProps(getFilteredProps)(withInternalChangeHandler()(DateTimeField)),
+                  ),
                 ),
+              ),
             ),
+          ),
         ),
+      ),
     ),
+  ),
 );

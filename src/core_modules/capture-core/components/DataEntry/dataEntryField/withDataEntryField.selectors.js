@@ -2,31 +2,25 @@
 import { createSelectorCreator, defaultMemoize } from 'reselect';
 
 const onIsEqual = (prevValues, currentValues) => {
-    const currentValuesIsEqual = Object
-        .keys(currentValues)
-        .every(key => currentValues[key] === prevValues[key]);
+  const currentValuesIsEqual = Object.keys(currentValues).every(
+    (key) => currentValues[key] === prevValues[key],
+  );
 
-    if (!currentValuesIsEqual) {
-        return false;
-    }
+  if (!currentValuesIsEqual) {
+    return false;
+  }
 
-    const previousValuesIsEqual = Object
-        .keys(prevValues)
-        .every(key => prevValues[key] === currentValues[key]);
+  const previousValuesIsEqual = Object.keys(prevValues).every(
+    (key) => prevValues[key] === currentValues[key],
+  );
 
-    return previousValuesIsEqual;
+  return previousValuesIsEqual;
 };
 
-
-const createDeepEqualSelector = createSelectorCreator(
-    defaultMemoize,
-    onIsEqual,
-);
+const createDeepEqualSelector = createSelectorCreator(defaultMemoize, onIsEqual);
 
 const componentPropsSelector = (componentProps: ?Object) => componentProps || {};
 
-// $FlowFixMe[missing-annot] automated comment
-export const makeReselectComponentProps = () => createDeepEqualSelector(
-    componentPropsSelector,
-    componentProps => componentProps,
-);
+export const makeReselectComponentProps = () =>
+  // $FlowFixMe[missing-annot] automated comment
+  createDeepEqualSelector(componentPropsSelector, (componentProps) => componentProps);

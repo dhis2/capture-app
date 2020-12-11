@@ -5,10 +5,6 @@ export { openNewRelationshipRegisterTeiDataEntryEpic } from './DataEntry/dataEnt
 export { actionTypes } from './registerTei.actions';
 export { actionTypes as registrationSectionActionTypes } from './RegistrationSection';
 export { actionTypes as dataEntryActionTypes } from './DataEntry/dataEntry.actions';
-export {
-    actionTypes as searchGroupDuplicateActionTypes,
-} from './GeneralOutput/WarningsSection/SearchGroupDuplicate/searchGroupDuplicate.actions';
-export {
-    loadSearchGroupDuplicatesForReviewEpic,
-} from './GeneralOutput/WarningsSection/SearchGroupDuplicate/searchGroupDuplicate.epics';
+export { actionTypes as searchGroupDuplicateActionTypes } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/searchGroupDuplicate.actions';
+export { loadSearchGroupDuplicatesForReviewEpic } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/searchGroupDuplicate.epics';
 export { default as getRelationshipNewTei } from './exposedHelpers/getRelationshipNewTei';

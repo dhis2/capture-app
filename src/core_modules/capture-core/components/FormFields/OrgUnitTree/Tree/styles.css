@@ -1,5 +1,5 @@
 .ou-tree-container {
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 .ou-tree-label {
   color: rgba(0, 0, 0, 0.54);
@@ -7,7 +7,6 @@
 }
 
 .ou-tree {
-
 }
 
 .ou-tree .label {
@@ -17,7 +16,7 @@
   position: relative;
   line-height: 26px;
 }
-.ou-tree [role="button"] {
+.ou-tree [role='button'] {
   outline: none;
 }
 
@@ -47,5 +46,5 @@
 }
 
 .tree-view {
-    font-weight: 300;
+  font-weight: 300;
 }

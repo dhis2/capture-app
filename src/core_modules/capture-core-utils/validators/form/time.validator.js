@@ -8,8 +8,8 @@ import { parseTime } from '../../parsers';
  * @returns
  */
 function isValidTime(value: string) {
-    const momentTime = parseTime(value);
-    return momentTime.isValid;
+  const momentTime = parseTime(value);
+  return momentTime.isValid;
 }
 
 export default isValidTime;

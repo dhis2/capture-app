@@ -1,4 +1,3 @@
-
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,53 +8,48 @@ import FeedbacksSection from '../../../ViewEvent/RightColumn/FeedbacksSection/Fe
 import IndicatorsSection from '../../../ViewEvent/RightColumn/IndicatorsSection/IndicatorsSection.container';
 
 type Props = {
-    onLink: (teiId: string) => void,
-    classes: {
-        stickyOnScroll: string,
-    }
+  onLink: (teiId: string) => void,
+  classes: {
+    stickyOnScroll: string,
+  },
 };
 
 const getStyles = (theme: Theme) => ({
-    stickyOnScroll: {
-        position: 'relative',
-        flexGrow: 1,
-        width: theme.typography.pxToRem(300),
-        margin: theme.typography.pxToRem(10),
-        marginTop: 0,
-    },
+  stickyOnScroll: {
+    position: 'relative',
+    flexGrow: 1,
+    width: theme.typography.pxToRem(300),
+    margin: theme.typography.pxToRem(10),
+    marginTop: 0,
+  },
 });
 
 const componentContainers = [
-    { id: 'ErrorsSection', Component: ErrorsSection },
-    { id: 'WarningsSection', Component: WarningsSection },
-    { id: 'FeedbacksSection', Component: FeedbacksSection },
-    { id: 'IndicatorsSection', Component: IndicatorsSection },
+  { id: 'ErrorsSection', Component: ErrorsSection },
+  { id: 'WarningsSection', Component: WarningsSection },
+  { id: 'FeedbacksSection', Component: FeedbacksSection },
+  { id: 'IndicatorsSection', Component: IndicatorsSection },
 ];
 
 class GeneralOutput extends React.Component<Props> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => {
-        const { onLink, ...otherProps } = props;
-        const passOnProps = container.id === 'WarningsSection' ? props : otherProps;
+  renderComponent = (
+    container: { id: string, Component: React.ComponentType<any> },
+    props: Object,
+  ) => {
+    const { onLink, ...otherProps } = props;
+    const passOnProps = container.id === 'WarningsSection' ? props : otherProps;
 
-        return (
-            <container.Component key={container.id} {...passOnProps} />
-        );
-    }
+    return <container.Component key={container.id} {...passOnProps} />;
+  };
 
-    render() {
-        const { classes, ...passOnProps } = this.props;
-        return (
-            <StickyOnScroll
-                offsetTop={50}
-                containerClass={classes.stickyOnScroll}
-            >
-                <div>
-                    {componentContainers.map(c => this.renderComponent(c, passOnProps))}
-                </div>
-            </StickyOnScroll>
-        );
-    }
+  render() {
+    const { classes, ...passOnProps } = this.props;
+    return (
+      <StickyOnScroll offsetTop={50} containerClass={classes.stickyOnScroll}>
+        <div>{componentContainers.map((c) => this.renderComponent(c, passOnProps))}</div>
+      </StickyOnScroll>
+    );
+  }
 }
 
 export default withStyles(getStyles)(GeneralOutput);
-

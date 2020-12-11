@@ -2,16 +2,15 @@
 import { actionCreator } from '../../actions/actions.utils';
 
 export const batchActionTypes = {
-    GOING_ONLINE_EXECUTED_BATCH: 'GoingOnlineExecutedBatch',
+  GOING_ONLINE_EXECUTED_BATCH: 'GoingOnlineExecutedBatch',
 };
 
 export const actionTypes = {
-    GOING_ONLINE_EXECUTED: 'GoingOnlineExecuted',
-    GET_EVENT_LIST_ON_RECONNECT: 'GetEventListOnReconnect',
+  GOING_ONLINE_EXECUTED: 'GoingOnlineExecuted',
+  GET_EVENT_LIST_ON_RECONNECT: 'GetEventListOnReconnect',
 };
 
-export const goingOnlineExecuted = () =>
-    actionCreator(actionTypes.GOING_ONLINE_EXECUTED)();
+export const goingOnlineExecuted = () => actionCreator(actionTypes.GOING_ONLINE_EXECUTED)();
 
 export const getEventListOnReconnect = () =>
-    actionCreator(actionTypes.GET_EVENT_LIST_ON_RECONNECT)();
+  actionCreator(actionTypes.GET_EVENT_LIST_ON_RECONNECT)();

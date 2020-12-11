@@ -4,48 +4,42 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 
-const programIdSelector = state => state.currentSelections.programId;
+const programIdSelector = (state) => state.currentSelections.programId;
 
-// $FlowFixMe[missing-annot] automated comment
-export const makeFormFoundationSelector = () => createSelector(
-    programIdSelector,
-    (programId: string) => {
-        const program = programCollection.get(programId);
-        if (!program) {
-            log.error(errorCreator('programId not found')({ method: 'getFormFoundation' }));
-            return null;
-        }
+export const makeFormFoundationSelector = () =>
+  // $FlowFixMe[missing-annot] automated comment
+  createSelector(programIdSelector, (programId: string) => {
+    const program = programCollection.get(programId);
+    if (!program) {
+      log.error(errorCreator('programId not found')({ method: 'getFormFoundation' }));
+      return null;
+    }
 
+    // $FlowFixMe[prop-missing] automated comment
+    const { stage } = program;
+    if (!stage) {
+      log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
+      return null;
+    }
 
-        // $FlowFixMe[prop-missing] automated comment
-        const {stage} = program;
-        if (!stage) {
-            log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
-            return null;
-        }
+    return stage.stageForm;
+  });
 
-        return stage.stageForm;
-    },
-);
+export const makeStageSelector = () =>
+  // $FlowFixMe[missing-annot] automated comment
+  createSelector(programIdSelector, (programId: string) => {
+    const program = programCollection.get(programId);
+    if (!program) {
+      log.error(errorCreator('programId not found')({ method: 'getFormFoundation' }));
+      return null;
+    }
 
-// $FlowFixMe[missing-annot] automated comment
-export const makeStageSelector = () => createSelector(
-    programIdSelector,
-    (programId: string) => {
-        const program = programCollection.get(programId);
-        if (!program) {
-            log.error(errorCreator('programId not found')({ method: 'getFormFoundation' }));
-            return null;
-        }
+    // $FlowFixMe[prop-missing] automated comment
+    const { stage } = program;
+    if (!stage) {
+      log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
+      return null;
+    }
 
-
-        // $FlowFixMe[prop-missing] automated comment
-        const {stage} = program;
-        if (!stage) {
-            log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
-            return null;
-        }
-
-        return stage;
-    },
-);
+    return stage;
+  });

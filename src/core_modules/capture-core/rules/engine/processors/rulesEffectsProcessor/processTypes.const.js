@@ -1,6 +1,6 @@
 // @flow
 
 export default {
-    EVENT: 'event',
-    TEI: 'tei',
+  EVENT: 'event',
+  TEI: 'tei',
 };

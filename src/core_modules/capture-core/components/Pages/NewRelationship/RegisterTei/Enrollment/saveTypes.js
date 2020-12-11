@@ -1,5 +1,5 @@
 // @flow
 
 export default {
-    LINK: 'LINK',
+  LINK: 'LINK',
 };

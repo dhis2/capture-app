@@ -12,192 +12,207 @@ import elementTypes from './elementTypes';
 import { Unique } from './Unique';
 
 // eslint-disable-next-line no-use-before-define
-export type ConvertFn = (value: any, type: $Values<typeof elementTypes>, element: DataElement) => any;
+export type ConvertFn = (
+  value: any,
+  type: $Values<typeof elementTypes>,
+  element: DataElement,
+) => any;
 
 export default class DataElement {
-    static errorMessages = {
-        TYPE_NOT_FOUND: 'type not supported',
-    };
+  static errorMessages = {
+    TYPE_NOT_FOUND: 'type not supported',
+  };
 
-    _id: string;
+  _id: string;
 
-    _name: string;
+  _name: string;
 
-    _shortName: string;
+  _shortName: string;
 
-    _formName: string;
+  _formName: string;
 
-    _disabled: boolean;
+  _disabled: boolean;
 
-    _compulsory: boolean;
+  _compulsory: boolean;
 
-    _description: string;
+  _description: string;
 
-    _type: $Values<typeof elementTypes>;
+  _type: $Values<typeof elementTypes>;
 
-    _optionSet: ?OptionSet;
+  _optionSet: ?OptionSet;
 
-    _displayInForms: boolean;
+  _displayInForms: boolean;
 
-    _displayInReports: boolean;
+  _displayInReports: boolean;
 
-    _icon: ?Icon;
+  _icon: ?Icon;
 
-    _unique: ?Unique;
+  _unique: ?Unique;
 
-    constructor(initFn: ?(_this: DataElement) => void) {
-        this._displayInReports = true;
-        this._displayInForms = true;
-        this.disabled = false;
-        this.compulsory = false;
-        initFn && isFunction(initFn) && initFn(this);
+  constructor(initFn: ?(_this: DataElement) => void) {
+    this._displayInReports = true;
+    this._displayInForms = true;
+    this.disabled = false;
+    this.compulsory = false;
+    initFn && isFunction(initFn) && initFn(this);
+  }
+
+  set id(id: string) {
+    this._id = id;
+  }
+
+  get id(): string {
+    return this._id;
+  }
+
+  set name(name: string) {
+    this._name = name;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
+  set shortName(shortName: string) {
+    this._shortName = shortName;
+  }
+
+  get shortName(): string {
+    return this._shortName;
+  }
+
+  set formName(formName: string) {
+    this._formName = formName;
+  }
+
+  get formName(): string {
+    return this._formName;
+  }
+
+  set displayInForms(display?: ?boolean) {
+    this._displayInForms = display != null ? display : true;
+  }
+
+  set displayInReports(display?: ?boolean) {
+    this._displayInReports = display != null ? display : true;
+  }
+
+  get displayInReports(): boolean {
+    return this._displayInReports;
+  }
+
+  set disabled(disabled: ?boolean) {
+    this._disabled = !!disabled;
+  }
+
+  get disabled(): boolean {
+    return this._disabled;
+  }
+
+  set compulsory(compulsory: ?boolean) {
+    this._compulsory = !!compulsory;
+  }
+
+  get compulsory(): boolean {
+    return this._compulsory;
+  }
+
+  set description(description: string) {
+    this._description = description;
+  }
+
+  get description(): string {
+    return this._description;
+  }
+
+  set type(type: string) {
+    if (!elementTypes[type]) {
+      log.warn(errorCreator(DataElement.errorMessages.TYPE_NOT_FOUND)({ dataElement: this, type }));
+      // $FlowFixMe[prop-missing] automated comment
+      this._type = elementTypes.UNKNOWN;
+    } else {
+      // $FlowFixMe[incompatible-type] automated comment
+      this._type = type;
     }
+  }
 
-    set id(id: string) {
-        this._id = id;
+  get type(): $Values<typeof elementTypes> {
+    return this._type;
+  }
+
+  set optionSet(optionSet: ?OptionSet) {
+    this._optionSet = optionSet;
+  }
+
+  get optionSet(): ?OptionSet {
+    return this._optionSet;
+  }
+
+  set icon(icon: ?Icon) {
+    this._icon = icon;
+  }
+
+  get icon(): ?Icon {
+    return this._icon;
+  }
+
+  set unique(unique: Unique) {
+    this._unique = unique;
+  }
+
+  get unique(): ?Unique {
+    return this._unique;
+  }
+
+  *getPropertyNames(): Generator<string, void, void> {
+    const excluded = [
+      'getPropertyNames',
+      'constructor',
+      'copyPropertiesTo',
+      'getConvertedOptionSet',
+      'convertValue',
+    ];
+    for (const name of Object.getOwnPropertyNames(Object.getPrototypeOf(this))) {
+      if (!excluded.includes(name)) {
+        yield name;
+      }
     }
+  }
 
-    get id(): string {
-        return this._id;
+  copyPropertiesTo(object: {}) {
+    for (const propName of this.getPropertyNames()) {
+      // $FlowFixMe[prop-missing] automated comment
+      object[propName] = this[propName];
     }
+    return object;
+  }
 
-    set name(name: string) {
-        this._name = name;
+  getConvertedOptionSet(onConvert: ?ConvertFn): ?OptionSet {
+    if (this.optionSet) {
+      const currentOptions = this.optionSet.options.map((option) => option.clone());
+      const convertedOptionSet = new OptionSet(
+        // $FlowFixMe[incompatible-use] automated comment
+        this.optionSet.id,
+        currentOptions,
+        null,
+        this,
+        onConvert,
+      );
+      // $FlowFixMe[incompatible-use] automated comment
+      convertedOptionSet.inputType = this.optionSet.inputType;
+      // $FlowFixMe[incompatible-use] automated comment
+      convertedOptionSet.viewType = this.optionSet.viewType;
+      // $FlowFixMe[incompatible-use] automated comment
+      convertedOptionSet.emptyText = this.optionSet.emptyText;
+
+      return convertedOptionSet;
     }
+    return null;
+  }
 
-    get name(): string {
-        return this._name;
-    }
-
-    set shortName(shortName: string) {
-        this._shortName = shortName;
-    }
-
-    get shortName(): string {
-        return this._shortName;
-    }
-
-    set formName(formName: string) {
-        this._formName = formName;
-    }
-
-    get formName(): string {
-        return this._formName;
-    }
-
-    set displayInForms(display?: ?boolean) {
-        this._displayInForms = display != null ? display : true;
-    }
-
-    set displayInReports(display?: ?boolean) {
-        this._displayInReports = display != null ? display : true;
-    }
-
-    get displayInReports(): boolean {
-        return this._displayInReports;
-    }
-
-    set disabled(disabled: ?boolean) {
-        this._disabled = !!disabled;
-    }
-
-    get disabled(): boolean {
-        return this._disabled;
-    }
-
-    set compulsory(compulsory: ?boolean) {
-        this._compulsory = !!compulsory;
-    }
-
-    get compulsory(): boolean {
-        return this._compulsory;
-    }
-
-    set description(description: string) {
-        this._description = description;
-    }
-
-    get description(): string {
-        return this._description;
-    }
-
-    set type(type: string) {
-        if (!elementTypes[type]) {
-            log.warn(errorCreator(DataElement.errorMessages.TYPE_NOT_FOUND)({ dataElement: this, type }));
-            // $FlowFixMe[prop-missing] automated comment
-            this._type = elementTypes.UNKNOWN;
-        } else {
-            // $FlowFixMe[incompatible-type] automated comment
-            this._type = type;
-        }
-    }
-
-    get type(): $Values<typeof elementTypes> {
-        return this._type;
-    }
-
-    set optionSet(optionSet: ?OptionSet) {
-        this._optionSet = optionSet;
-    }
-
-    get optionSet(): ?OptionSet {
-        return this._optionSet;
-    }
-
-    set icon(icon: ?Icon) {
-        this._icon = icon;
-    }
-
-    get icon(): ?Icon {
-        return this._icon;
-    }
-
-    set unique(unique: Unique) {
-        this._unique = unique;
-    }
-
-    get unique(): ?Unique {
-        return this._unique;
-    }
-
-    * getPropertyNames(): Generator<string, void, void> {
-        const excluded = ['getPropertyNames', 'constructor', 'copyPropertiesTo', 'getConvertedOptionSet', 'convertValue'];
-        for (const name of Object.getOwnPropertyNames(Object.getPrototypeOf(this))) {
-            if (!excluded.includes(name)) {
-                yield name;
-            }
-        }
-    }
-
-    copyPropertiesTo(object: {}) {
-        for (const propName of this.getPropertyNames()) {
-            // $FlowFixMe[prop-missing] automated comment
-            object[propName] = this[propName];
-        }
-        return object;
-    }
-
-    getConvertedOptionSet(onConvert: ?ConvertFn): ?OptionSet {
-        if (this.optionSet) {
-            const currentOptions = this.optionSet.options.map(option => option.clone());
-            // $FlowFixMe[incompatible-use] automated comment
-            const convertedOptionSet = new OptionSet(this.optionSet.id, currentOptions, null, this, onConvert);
-            // $FlowFixMe[incompatible-use] automated comment
-            convertedOptionSet.inputType = this.optionSet.inputType;
-            // $FlowFixMe[incompatible-use] automated comment
-            convertedOptionSet.viewType = this.optionSet.viewType;
-            // $FlowFixMe[incompatible-use] automated comment
-            convertedOptionSet.emptyText = this.optionSet.emptyText;
-
-            return convertedOptionSet;
-        }
-        return null;
-    }
-
-    convertValue(rawValue: any, onConvert: ConvertFn) {
-        return isArray(rawValue)
-            ? rawValue.map(valuePart => onConvert(valuePart, this.type, this))
-            : onConvert(rawValue, this.type, this);
-    }
+  convertValue(rawValue: any, onConvert: ConvertFn) {
+    return isArray(rawValue)
+      ? rawValue.map((valuePart) => onConvert(valuePart, this.type, this))
+      : onConvert(rawValue, this.type, this);
+  }
 }
-

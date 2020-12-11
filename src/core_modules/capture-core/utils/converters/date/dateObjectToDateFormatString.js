@@ -9,7 +9,7 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
  * @returns
  */
 export function convertDateObjectToDateFormatString(dateValue: Date) {
-    const {dateFormat} = systemSettingsStore.get();
-    const formattedDateString = moment(dateValue).format(dateFormat);
-    return formattedDateString;
+  const { dateFormat } = systemSettingsStore.get();
+  const formattedDateString = moment(dateValue).format(dateFormat);
+  return formattedDateString;
 }

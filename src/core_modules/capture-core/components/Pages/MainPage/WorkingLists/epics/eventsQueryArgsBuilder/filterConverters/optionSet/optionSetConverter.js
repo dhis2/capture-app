@@ -5,12 +5,12 @@ import { dataElementTypes as elementTypes } from '../../../../../../../../metaDa
 import type { OptionSetFilterData } from '../../../../../EventsList/eventList.types';
 
 export function convertOptionSet(
-    sourceValue: OptionSetFilterData,
-    type: $Values<typeof elementTypes>,
+  sourceValue: OptionSetFilterData,
+  type: $Values<typeof elementTypes>,
 ) {
-    return pipe(
-        values => values.map(filterValue => convertDataTypeValueToRequest(filterValue, type)),
-        values => values.join(';'),
-        valueString => `in:${valueString}`,
-    )(sourceValue.values);
+  return pipe(
+    (values) => values.map((filterValue) => convertDataTypeValueToRequest(filterValue, type)),
+    (values) => values.join(';'),
+    (valueString) => `in:${valueString}`,
+  )(sourceValue.values);
 }

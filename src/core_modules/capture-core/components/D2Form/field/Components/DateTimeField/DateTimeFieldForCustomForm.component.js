@@ -1,38 +1,34 @@
 // @flow
 import {
-    DateTimeField,
-    withGotoInterface,
-    withHideCompatibility,
-    withDefaultShouldUpdateInterface,
-    withFocusSaver,
-    withCalculateMessages,
-    withDisplayMessages,
-    withInternalChangeHandler,
+  DateTimeField,
+  withGotoInterface,
+  withHideCompatibility,
+  withDefaultShouldUpdateInterface,
+  withFocusSaver,
+  withCalculateMessages,
+  withDisplayMessages,
+  withInternalChangeHandler,
 } from '../../../../FormFields/New';
 import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-    withCustomElementContainer,
+  withRequiredFieldCalculation,
+  withDisabledFieldCalculation,
+  withCustomElementContainer,
 } from '../internal';
 
 export default withGotoInterface()(
-    withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDisplayMessages()(
-                                withCustomElementContainer()(
-                                    withInternalChangeHandler()(
-                                        DateTimeField,
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
+  withHideCompatibility()(
+    withDefaultShouldUpdateInterface()(
+      withDisabledFieldCalculation()(
+        withRequiredFieldCalculation()(
+          withCalculateMessages()(
+            withFocusSaver()(
+              withDisplayMessages()(
+                withCustomElementContainer()(withInternalChangeHandler()(DateTimeField)),
+              ),
             ),
+          ),
         ),
+      ),
     ),
+  ),
 );

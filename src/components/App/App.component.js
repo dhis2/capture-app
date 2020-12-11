@@ -9,22 +9,18 @@ import type { HashHistory } from 'history/createHashHistory';
 import { AppContents } from './AppContents.component';
 
 type Props = {
-    store: ReduxStore,
-    history: HashHistory,
+  store: ReduxStore,
+  history: HashHistory,
 };
 
 export const App = ({ store, history }: Props) => (
-    <>
-        <Provider
-            store={store}
-        >
-            <ConnectedRouter
-                history={history}
-            >
-                <D2UIApp>
-                    <AppContents />
-                </D2UIApp>
-            </ConnectedRouter>
-        </Provider>
-    </>
+  <>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <D2UIApp>
+          <AppContents />
+        </D2UIApp>
+      </ConnectedRouter>
+    </Provider>
+  </>
 );

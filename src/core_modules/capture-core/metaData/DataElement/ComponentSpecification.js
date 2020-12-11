@@ -1,7 +1,7 @@
 // @flow
 
 export default class ComponentSpecification {
-    _inputOption: string;
+  _inputOption: string;
 
-    _viewOption: string;
+  _viewOption: string;
 }

@@ -9,46 +9,37 @@ import Contents from './Contents.component';
 import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 import { ProgramStage } from '../../../../../metaData';
 
-const LoadingContents = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Contents);
+const LoadingContents = withLoadingIndicator(null, (props) => ({
+  style: props.loadingIndicatorStyle,
+}))(Contents);
 
 type Props = {
-    programStage: ProgramStage,
-    classes: Object,
-}
+  programStage: ProgramStage,
+  classes: Object,
+};
 
 const loadingIndicatorStyle = {
-    height: 36,
-    width: 36,
+  height: 36,
+  width: 36,
 };
 
 class AssigneeSection extends React.Component<Props> {
-    renderHeader = () => (
-        <ViewEventSectionHeader
-            icon={AssignmentIcon}
-            text={i18n.t('Assignee')}
-        />
-    )
+  renderHeader = () => <ViewEventSectionHeader icon={AssignmentIcon} text={i18n.t('Assignee')} />;
 
-    render() {
-        const { programStage, ...passOnProps } = this.props;
+  render() {
+    const { programStage, ...passOnProps } = this.props;
 
-        if (!programStage.enableUserAssignment) {
-            return null;
-        }
-
-        return (
-            <ViewEventSection
-                collapsable
-                header={this.renderHeader()}
-            >
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <LoadingContents
-                    loadingIndicatorStyle={loadingIndicatorStyle}
-                    {...passOnProps}
-                />
-            </ViewEventSection>
-        );
+    if (!programStage.enableUserAssignment) {
+      return null;
     }
+
+    return (
+      <ViewEventSection collapsable header={this.renderHeader()}>
+        {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+        <LoadingContents loadingIndicatorStyle={loadingIndicatorStyle} {...passOnProps} />
+      </ViewEventSection>
+    );
+  }
 }
 
 export default AssigneeSection;

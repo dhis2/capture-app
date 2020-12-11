@@ -6,35 +6,27 @@ import { Section, SectionHeaderSimple } from '../../../../Section';
 import SectionContents from './SectionContents.component';
 
 const getStyles = (theme: Theme) => ({
-    section: {
-        backgroundColor: 'white',
-        maxWidth: theme.typography.pxToRem(892),
-    },
+  section: {
+    backgroundColor: 'white',
+    maxWidth: theme.typography.pxToRem(892),
+  },
 });
 
 type Props = {
-    classes: Object,
+  classes: Object,
 };
 
 const renderSectionHeader = () => {
-    const title = i18n.t('Registration');
-    return (
-        <SectionHeaderSimple
-            title={title}
-        />
-    );
+  const title = i18n.t('Registration');
+  return <SectionHeaderSimple title={title} />;
 };
 
 const RegistrationSection = (props: Props) => {
-    const { classes } = props;
-    return (
-        <Section
-            header={renderSectionHeader()}
-            elevation={2}
-            className={classes.section}
-        >
-            <SectionContents />
-        </Section>
-    );
+  const { classes } = props;
+  return (
+    <Section header={renderSectionHeader()} elevation={2} className={classes.section}>
+      <SectionContents />
+    </Section>
+  );
 };
 export default withStyles(getStyles)(RegistrationSection);

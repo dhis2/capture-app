@@ -3,40 +3,40 @@
 import isFunction from 'd2-utilizr/lib/isFunction';
 import { RenderFoundation } from '../../RenderFoundation';
 import { InputSearchGroup } from '../../InputSearchGroup';
-import { TrackedEntityType } from "..";
+import { TrackedEntityType } from '..';
 
 export default class TeiRegistration {
-    _form: RenderFoundation;
+  _form: RenderFoundation;
 
-    _inputSearchGroups: ?Array<InputSearchGroup>;
+  _inputSearchGroups: ?Array<InputSearchGroup>;
 
-    _trackedEntityType: TrackedEntityType;
+  _trackedEntityType: TrackedEntityType;
 
-    constructor(initFn: ?(_this: TeiRegistration) => void) {
-        initFn && isFunction(initFn) && initFn(this);
-    }
+  constructor(initFn: ?(_this: TeiRegistration) => void) {
+    initFn && isFunction(initFn) && initFn(this);
+  }
 
-    set form(formFoundation: RenderFoundation) {
-        this._form = formFoundation;
-    }
+  set form(formFoundation: RenderFoundation) {
+    this._form = formFoundation;
+  }
 
-    get form(): RenderFoundation {
-        return this._form;
-    }
+  get form(): RenderFoundation {
+    return this._form;
+  }
 
-    set inputSearchGroups(searchGroups: Array<InputSearchGroup>) {
-        this._inputSearchGroups = searchGroups;
-    }
+  set inputSearchGroups(searchGroups: Array<InputSearchGroup>) {
+    this._inputSearchGroups = searchGroups;
+  }
 
-    get inputSearchGroups(): ?Array<InputSearchGroup> {
-        return this._inputSearchGroups;
-    }
+  get inputSearchGroups(): ?Array<InputSearchGroup> {
+    return this._inputSearchGroups;
+  }
 
-    set trackedEntityType(type: TrackedEntityType) {
-        this._trackedEntityType = type;
-    }
+  set trackedEntityType(type: TrackedEntityType) {
+    this._trackedEntityType = type;
+  }
 
-    get trackedEntityType(): TrackedEntityType {
-        return this._trackedEntityType;
-    }
+  get trackedEntityType(): TrackedEntityType {
+    return this._trackedEntityType;
+  }
 }

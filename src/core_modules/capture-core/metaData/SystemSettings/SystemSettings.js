@@ -1,9 +1,9 @@
 // @flow
 
 export default class SystemSettings {
-    dateFormat: string;
+  dateFormat: string;
 
-    dir: string;
+  dir: string;
 
-    trackerAppRelativePath: string;
+  trackerAppRelativePath: string;
 }

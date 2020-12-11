@@ -1,7 +1,7 @@
 .suggestion:focus {
-    outline: none;
+  outline: none;
 }
 
 .suggestionInUpList {
-    transform: scaleY(-1);
+  transform: scaleY(-1);
 }

@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
-import Checkbox from '@material-ui/core/Checkbox';  // using custom checkboxes because RadioButton can not be deselected
+import Checkbox from '@material-ui/core/Checkbox'; // using custom checkboxes because RadioButton can not be deselected
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -16,164 +16,154 @@ import { orientations } from './singleSelectBoxes.const';
 import OptionSet from '../../../../metaData/OptionSet/OptionSet';
 import Option from '../../../../metaData/OptionSet/Option';
 
-const styles = theme => ({
-    label: theme.typography.formFieldTitle,
+const styles = (theme) => ({
+  label: theme.typography.formFieldTitle,
 });
 
 type Props = {
-    onBlur: (value: any) => void,
-    optionSet?: ?OptionSet,
-    label?: string,
-    nullable?: boolean,
-    value?: any,
-    orientation?: ?$Values<typeof orientations>,
-    required?: ?boolean,
-    classes: {
-        label: string,
-    },
-    style?: ?Object,
+  onBlur: (value: any) => void,
+  optionSet?: ?OptionSet,
+  label?: string,
+  nullable?: boolean,
+  value?: any,
+  orientation?: ?$Values<typeof orientations>,
+  required?: ?boolean,
+  classes: {
+    label: string,
+  },
+  style?: ?Object,
 };
 
 class SingleSelectBoxes extends Component<Props> {
-    handleOptionChange: (e: Object, isChecked: boolean, value: any) => void;
+  handleOptionChange: (e: Object, isChecked: boolean, value: any) => void;
 
-    materialUIContainerInstance: any;
+  materialUIContainerInstance: any;
 
-    checkedValues: ?Set<any>;
+  checkedValues: ?Set<any>;
 
-    goto: () => void;
+  goto: () => void;
 
-    labelClasses: Object;
+  labelClasses: Object;
 
-    constructor(props: Props) {
-        super(props);
-        this.handleOptionChange = this.handleOptionChange.bind(this);
-        this.labelClasses = this.buildLabelClasses();
+  constructor(props: Props) {
+    super(props);
+    this.handleOptionChange = this.handleOptionChange.bind(this);
+    this.labelClasses = this.buildLabelClasses();
+  }
+
+  buildLabelClasses() {
+    return {
+      root: this.props.classes.label,
+    };
+  }
+
+  getBoxes(passOnProps: ?Object) {
+    const { optionSet } = this.props;
+    if (optionSet) {
+      return optionSet.options.map((o: Option, index: number) => (
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={(e: Object, isChecked: boolean) => {
+                this.handleOptionChange(e, isChecked, o.value);
+              }}
+              checked={this.isChecked(o.value)}
+              icon={<RadioOffIcon />}
+              checkedIcon={<RadioOnIcon />}
+              {...passOnProps}
+            />
+          }
+          label={o.text}
+          key={index}
+        />
+      ));
     }
+    return null;
+  }
 
-    buildLabelClasses() {
-        return {
-            root: this.props.classes.label,
-        };
+  handleOptionChange(e: Object, isChecked: boolean, value: any) {
+    this.handleSingleSelectUpdate(isChecked, value);
+  }
+
+  handleSingleSelectUpdate(isChecked: boolean, value: any) {
+    if (isChecked === false && !this.props.nullable) {
+      return;
     }
+    this.props.onBlur(isChecked ? value : null);
+  }
 
-    getBoxes(passOnProps: ?Object) {
-        const {optionSet} = this.props;
-        if (optionSet) {
-            return optionSet.options.map((o: Option, index: number) => (
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            onChange={
-                                (e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, o.value); }
-                            }
-                            checked={this.isChecked(o.value)}
-                            icon={
-                                <RadioOffIcon />
-                            }
-                            checkedIcon={
-                                <RadioOnIcon />
-                            }
-                            {...passOnProps}
-                        />
-                    }
-                    label={o.text}
-                    key={index}
-                />
-            ));
-        }
-        return null;
+  setCheckedStatusForBoxes() {
+    const { value } = this.props;
+    if (value || value === false || value === 0) {
+      this.checkedValues = new Set().add(value);
+    } else {
+      this.checkedValues = null;
     }
+  }
 
-    handleOptionChange(e: Object, isChecked: boolean, value: any) {
-        this.handleSingleSelectUpdate(isChecked, value);
-    }
+  isChecked(value: any) {
+    return !!(this.checkedValues && this.checkedValues.has(value));
+  }
 
-    handleSingleSelectUpdate(isChecked: boolean, value: any) {
-        if (isChecked === false && !this.props.nullable) {
-            return;
-        }
-        this.props.onBlur(isChecked ? value : null);
-    }
+  renderHorizontal(passOnProps: ?Object) {
+    return <FormGroup row>{this.getBoxes(passOnProps)}</FormGroup>;
+  }
 
-    setCheckedStatusForBoxes() {
-        const {value} = this.props;
-        if (value || value === false || value === 0) {
-            this.checkedValues = new Set().add(value);
-        } else {
-            this.checkedValues = null;
-        }
-    }
+  renderVertical(passOnProps: ?Object) {
+    return <FormGroup>{this.getBoxes(passOnProps)}</FormGroup>;
+  }
 
-    isChecked(value: any) {
-        return !!(this.checkedValues && this.checkedValues.has(value));
-    }
+  renderBoxes(passOnProps: ?Object) {
+    const { orientation } = this.props;
+    return orientation === orientations.VERTICAL
+      ? this.renderVertical(passOnProps)
+      : this.renderHorizontal(passOnProps);
+  }
 
-    renderHorizontal(passOnProps: ?Object) {
-        return (
-            <FormGroup row>
-                {this.getBoxes(passOnProps)}
-            </FormGroup>
-        );
-    }
+  render() {
+    const {
+      onBlur,
+      optionSet,
+      label,
+      nullable,
+      value,
+      orientation,
+      required,
+      classes,
+      style,
+      ...passOnProps
+    } = this.props; // eslint-disable-line no-unused-vars
 
-    renderVertical(passOnProps: ?Object) {
-        return (
-            <FormGroup>
-                {this.getBoxes(passOnProps)}
-            </FormGroup>
-        );
-    }
+    this.setCheckedStatusForBoxes();
 
-    renderBoxes(passOnProps: ?Object) {
-        const {orientation} = this.props;
-        return orientation === orientations.VERTICAL ?
-            this.renderVertical(passOnProps) :
-            this.renderHorizontal(passOnProps);
-    }
+    return (
+      <div
+        ref={(containerInstance) => {
+          this.materialUIContainerInstance = containerInstance;
+        }}
+      >
+        <FormControl component="fieldset">
+          {(() => {
+            if (!label) {
+              return null;
+            }
 
-    render() {
-        const {
-            onBlur,
-            optionSet,
-            label,
-            nullable,
-            value,
-            orientation,
-            required,
-            classes,
-            style,
-            ...passOnProps
-        } = this.props;  // eslint-disable-line no-unused-vars
-
-        this.setCheckedStatusForBoxes();
-
-        return (
-            <div ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}>
-                <FormControl component="fieldset">
-                    {
-                        (() => {
-                            if (!label) {
-                                return null;
-                            }
-
-                            return (
-                                <FormLabel
-                                    component="label"
-                                    required={!!required}
-                                    classes={this.labelClasses}
-                                    focused={false}
-                                >
-                                    {label}
-                                </FormLabel>
-                            );
-                        })()
-                    }
-                    {this.renderBoxes(passOnProps)}
-                </FormControl>
-            </div>
-        );
-    }
+            return (
+              <FormLabel
+                component="label"
+                required={!!required}
+                classes={this.labelClasses}
+                focused={false}
+              >
+                {label}
+              </FormLabel>
+            );
+          })()}
+          {this.renderBoxes(passOnProps)}
+        </FormControl>
+      </div>
+    );
+  }
 }
 
 export default withStyles(styles)(SingleSelectBoxes);
