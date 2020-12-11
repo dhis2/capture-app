@@ -168,7 +168,9 @@ class Relationships extends React.Component<Props> {
   canDelete = (relationship: Relationship) => {
     const { entityAccess, writableRelationshipTypes } = this.props;
     return (
-      relationship.from.id === this.props.currentEntityId &&
+      relationship.from.id ===
+      this.props.currentEntityId &&
+      entityAccess &&
       entityAccess.write &&
       writableRelationshipTypes.some(
         (rt) => rt.id === relationship.relationshipType.id && rt.access.data.write,
@@ -186,7 +188,7 @@ class Relationships extends React.Component<Props> {
       relationshipsRef,
       smallMainButton,
     } = this.props;
-    const canCreate = entityAccess.write && writableRelationshipTypes.length > 0;
+    const canCreate = entityAccess && entityAccess.write && writableRelationshipTypes.length > 0;
     return (
       <div className={classes.container} ref={relationshipsRef}>
         <div className={classes.relationshipsContainer}>{this.renderRelationships()}</div>

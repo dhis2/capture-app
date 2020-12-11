@@ -3,8 +3,8 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 type Props = {
-  offsetTop?: number,
-  minViewpointWidth?: number,
+  offsetTop: number,
+  minViewpointWidth: number,
   children: React.Node,
   containerClass?: ?string,
   classes: {
@@ -39,7 +39,9 @@ class StickyOnScroll extends React.Component<Props> {
   resizeTimer: any;
 
   static defaultProps = {
+    // eslint-disable-next-line react/default-props-match-prop-types
     offsetTop: 0,
+    // eslint-disable-next-line react/default-props-match-prop-types
     minViewpointWidth: 0,
   };
 

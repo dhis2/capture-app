@@ -254,8 +254,8 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
             placeholder={useHintLabel ? label : ''}
             maxHeight={maxHeight || 200}
             optionRenderer={this.renderOption}
-            clearValueText={translations.clearText}
-            noResultsText={translations.noResults}
+            clearValueText={translations && translations.clearText}
+            noResultsText={translations && translations.noResults}
             filterOptions={this.filterOptions}
             onInputChange={this.handleInputChange}
             {...toSelect}

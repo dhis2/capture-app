@@ -8,8 +8,8 @@ import D2Date from '../D2Date/D2Date.component';
 import D2TextField from '../../Generic/D2TextField.component';
 
 type Value = {
-  date?: ?string,
-  time?: ?string,
+  date: ?string,
+  time: string,
 };
 
 type Props = {

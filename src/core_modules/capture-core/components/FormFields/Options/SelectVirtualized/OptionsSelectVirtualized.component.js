@@ -305,10 +305,10 @@ class OptionsSelectVirtualized extends Component<Props, State> {
             placeholder={useHintLabel ? label : ''}
             maxHeight={maxHeight || 200}
             optionRenderer={this.renderOption}
-            clearValueText={translations.clearText}
+            clearValueText={translations && translations.clearText}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
-            noResultsText={translations.noResults}
+            noResultsText={translations && translations.noResults}
             {...toSelect}
           />
 

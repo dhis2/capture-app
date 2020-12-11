@@ -174,7 +174,7 @@ class Index extends Component<Props> {
       ));
 
       return (
-        <Row key={row[rowIdKey]} className={classes.row}>
+        <Row key={rowIdKey && row[rowIdKey]} className={classes.row}>
           {cells}
         </Row>
       );

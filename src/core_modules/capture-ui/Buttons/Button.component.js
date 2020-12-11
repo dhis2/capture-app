@@ -60,8 +60,8 @@ class Button extends React.Component<Props> {
         size={size}
         onClick={onClick}
         disabled={disabled}
-        color={buttonKindDefinitions[kind].color}
-        variant={buttonKindDefinitions[kind].variant}
+        color={kind && buttonKindDefinitions[kind].color}
+        variant={kind && buttonKindDefinitions[kind].variant}
       >
         {children}
       </MuiButton>

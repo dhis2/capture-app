@@ -29,13 +29,14 @@ type Feedback = {
 };
 
 type Props = {
-  feedback?: Feedback,
+  feedback: Feedback,
   onClose: () => void,
   classes: Object,
 };
 
 class Index extends React.Component<Props> {
   static defaultProps = {
+    // eslint-disable-next-line react/default-props-match-prop-types
     feedback: {},
   };
 

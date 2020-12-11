@@ -204,7 +204,9 @@ class Notes extends React.Component<Props, State> {
           ))}
         </List>
         <div className={classes.newNoteContainer} data-test="dhis2-capture-new-comment-container">
-          {this.state.addIsOpen ? this.renderInput() : this.renderButton(entityAccess.write)}
+          {this.state.addIsOpen
+            ? this.renderInput()
+            : this.renderButton(!!(entityAccess && entityAccess.write))}
         </div>
       </div>
     );

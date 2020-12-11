@@ -74,24 +74,22 @@ class D2SectionFields extends Component<Props> {
   static buildFormFields(props: Props): Array<FieldConfig> {
     const { fieldsMetaData, customForm, fieldOptions } = props;
 
-    return (
-      Array.from(fieldsMetaData.entries())
-        .map((entry) => entry[1])
-        .map((metaDataElement) =>
-          // $FlowFixMe[incompatible-return] automated comment
-          buildField(
-            metaDataElement,
-            {
-              formHorizontal: props.formHorizontal,
-              formId: props.formId,
-              viewMode: props.viewMode,
-              ...fieldOptions,
-            },
-            !!customForm,
-          ),
-        )
-        .filter((field) => field)
-    );
+    return Array.from(fieldsMetaData.entries())
+      .map((entry) => entry[1])
+      .map((metaDataElement) =>
+        // $FlowFixMe[incompatible-return] automated comment
+        buildField(
+          metaDataElement,
+          {
+            formHorizontal: props.formHorizontal,
+            formId: props.formId,
+            viewMode: props.viewMode,
+            ...fieldOptions,
+          },
+          !!customForm,
+        ),
+      )
+      .filter((field) => field);
   }
 
   static validateBaseOnly(formBuilderInstance: FormBuilder) {
@@ -237,6 +235,7 @@ class D2SectionFields extends Component<Props> {
     this.rulesCompulsoryErrors = Object.keys(rulesCompulsory).reduce((accCompulsoryErrors, key) => {
       const isCompulsory = rulesCompulsory[key];
       if (isCompulsory) {
+        // $FlowFixMe
         const value = values[key];
         if (!value && value !== 0 && value !== false) {
           accCompulsoryErrors[key] = 'This field is required';
