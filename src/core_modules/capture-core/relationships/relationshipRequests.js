@@ -14,8 +14,7 @@ async function getRelationships(queryParams: Object, relationshipTypes: Array<Re
 }
 
 export function getRelationshipsForEvent(eventId: string, programId: string) {
-    const relationshipTypes = getEventProgramThrowIfNotFound(programId)
-        .stage
-        .relationshipTypes;
+    const {relationshipTypes} = getEventProgramThrowIfNotFound(programId)
+        .stage;
     return getRelationships({ event: eventId }, relationshipTypes);
 }

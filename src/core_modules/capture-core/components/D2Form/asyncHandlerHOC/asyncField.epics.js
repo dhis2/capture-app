@@ -17,7 +17,7 @@ export const asyncUpdateFieldEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(actionTypes.START_UPDATE_FIELD_ASYNC),
         concatMap((action) => {
-            const payload = action.payload;
+            const {payload} = action;
             const { elementId, formBuilderId, formId, callback, uid, onSuccess, onError } = payload;
 
             const uiState = {

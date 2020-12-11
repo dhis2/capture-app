@@ -37,15 +37,15 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
             editEventActionTypes.START_OPEN_EVENT_FOR_EDIT,
         ),
         map((action) => {
-            const eventContainer = action.payload.eventContainer;
-            const orgUnit = action.payload.orgUnit;
+            const {eventContainer} = action.payload;
+            const {orgUnit} = action.payload;
 
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
                 return prerequisitesErrorOpeningEventForEditInDataEntry(metadataContainer.error);
             }
             const foundation = metadataContainer.stage.stageForm;
-            const program = metadataContainer.program;
+            const {program} = metadataContainer;
 
 
             return batchActions(openEventForEditInDataEntry(eventContainer, orgUnit, foundation, program));
@@ -55,11 +55,11 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
 const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
-    const eventId = state.dataEntries[dataEntryId].eventId;
+    const {eventId} = state.dataEntries[dataEntryId];
     const event = state.events[eventId];
     const metadataContainer = getProgramAndStageFromEvent(event);
 
-    const orgUnitId = state.currentSelections.orgUnitId;
+    const {orgUnitId} = state.currentSelections;
     const orgUnit = state.organisationUnits[orgUnitId];
 
     let rulesActions;

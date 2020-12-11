@@ -24,7 +24,7 @@ function getProgramRulesContainer(program: TrackerProgram): ProgramRulesContaine
             .programRuleVariables
             .filter(variable => variable.programRuleVariableSourceType === 'TEI_ATTRIBUTE');
 
-    const programRules = program.programRules;
+    const {programRules} = program;
 
     const constants = constantsStore.get();
     return {
@@ -49,7 +49,7 @@ function getRulesEngineTrackedEntityAttributesAsObject(
 function getTrackedEntityAttributes(
     program: TrackerProgram,
 ): { [elementId: string]: TrackedEntityAttributeForRulesEngine } {
-    const enrollmentForm = program.enrollment.enrollmentForm;
+    const {enrollmentForm} = program.enrollment;
     const teaAsArray = enrollmentForm ?
         Array.from(enrollmentForm.sections.values()).reduce((accElements, section) =>
             [...accElements, ...Array.from(section.elements.values())], []) :

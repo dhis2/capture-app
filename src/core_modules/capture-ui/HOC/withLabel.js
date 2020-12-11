@@ -41,7 +41,9 @@ export default (hocParams: ?HOCParamsContainer) =>
     (InnerComponent: React.ComponentType<any>) =>
         (class LabelHOC extends React.Component<Props> {
             labelContainerClass: ?string;
+
             labelClasses: ?LabelClasses;
+
             passOnClasses: ?Object;
 
             constructor(props: Props) {

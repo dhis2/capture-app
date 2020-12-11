@@ -83,7 +83,7 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
         const trackedEntityTypeNameLC = trackedEntityTypeName.toLowerCase();
         const attributeNameLC = attributeName.toLowerCase();
         return (
-            <React.Fragment>
+            <>
                 <div>
                     {i18n.t(
                         'A {{trackedEntityTypeName}} with this {{attributeName}} is already registered',
@@ -101,7 +101,7 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
                         )}
                     </LinkButton>
                 </div>
-            </React.Fragment>
+            </>
         );
     }
 

@@ -43,7 +43,7 @@ class SortLabelWrapper extends React.Component<Props> {
         onSort: (direction: $Values<typeof sortLabelDirections>) => void,
     ) => {
         const isDisabled = this.props.disabled;
-        const classes = this.props.classes;
+        const {classes} = this.props;
         const IconComponent = direction === sortLabelDirections.ASC ? ArrowUpwardIcon : ArrowDownwardIcon;
         const icon = (
             <IconComponent
@@ -66,7 +66,7 @@ class SortLabelWrapper extends React.Component<Props> {
         return (
             <Tooltip
                 title={i18n.t('Sort')}
-                placement={'bottom'}
+                placement="bottom"
                 enterDelay={500}
             >
                 <span>
@@ -110,7 +110,7 @@ class SortLabelWrapper extends React.Component<Props> {
                         return (
                             <Tooltip
                                 title={i18n.t('Sort')}
-                                placement={'bottom'}
+                                placement="bottom"
                                 enterDelay={500}
                             >
                                 <span>

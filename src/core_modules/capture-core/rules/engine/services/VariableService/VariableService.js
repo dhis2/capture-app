@@ -66,10 +66,13 @@ export default class VariableService {
             OptionSetHelper.getName(optionSets[trackedEntityAttributes[trackedEntityAttributeId].optionSetId].options, value)
             : value;
     }
+
     static dateUtils = getDateUtils(momentConverter);
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
+
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
+
     constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any) {
         this.onProcessValue = onProcessValue;
 
@@ -200,7 +203,7 @@ export default class VariableService {
     }
 
     preCheckDataElementSpecificSourceType(programVariable: ProgramRuleVariable, dataElements: ?DataElements) {
-        const dataElementId = programVariable.dataElementId;
+        const {dataElementId} = programVariable;
         const dataElement = dataElementId && dataElements && dataElements[dataElementId];
         if (!dataElement) {
             log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains an invalid dataelement id (id: ${dataElementId || ''})`);
@@ -232,7 +235,7 @@ export default class VariableService {
     }
 
     postGetVariableForDataElementSpecificSourceType(programVariable: ProgramRuleVariable, dataElements: DataElements) {
-        const dataElementId = programVariable.dataElementId;
+        const {dataElementId} = programVariable;
         // $FlowFixMe[incompatible-type] automated comment
         const dataElement: DataElement = dataElements[dataElementId];
         return this.buildVariable(
@@ -269,7 +272,7 @@ export default class VariableService {
         }
 
         // $FlowFixMe[incompatible-type] automated comment
-        const trackedEntityAttributeId: string = programVariable.trackedEntityAttributeId;
+        const {trackedEntityAttributeId} = programVariable;
         // $FlowFixMe[incompatible-use] automated comment
         const attribute: TrackedEntityAttribute = sourceData.trackedEntityAttributes[trackedEntityAttributeId];
         const attributeValue = sourceData.selectedEntity[trackedEntityAttributeId];
@@ -297,10 +300,10 @@ export default class VariableService {
 
     getVariableForCurrentEvent(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
         // $FlowFixMe[incompatible-type] automated comment
-        const dataElementId: string = programVariable.dataElementId;
+        const {dataElementId} = programVariable;
         // $FlowFixMe[incompatible-use] automated comment
         const dataElement: DataElement = sourceData.dataElements[dataElementId];
-        const executingEvent = sourceData.executingEvent;
+        const {executingEvent} = sourceData;
         if (!executingEvent) {
             return null;
         }
@@ -322,7 +325,7 @@ export default class VariableService {
     }
 
     getVariableForNewestEventProgramStage(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
-        const programStageId = programVariable.programStageId;
+        const {programStageId} = programVariable;
         if (!programStageId) {
             log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} does not have a programstage defined, despite that the variable has sourcetype${programVariable.programRuleVariableSourceType}`);
             return null;
@@ -334,7 +337,7 @@ export default class VariableService {
         }
 
         // $FlowFixMe[incompatible-type] automated comment
-        const dataElementId: string = programVariable.dataElementId;
+        const {dataElementId} = programVariable;
         // $FlowFixMe[incompatible-use] automated comment
         const dataElement: DataElement = sourceData.dataElements[dataElementId];
 
@@ -376,7 +379,7 @@ export default class VariableService {
         }
 
         // $FlowFixMe[incompatible-type] automated comment
-        const dataElementId: string = programVariable.dataElementId;
+        const {dataElementId} = programVariable;
         // $FlowFixMe[incompatible-use] automated comment
         const dataElement: DataElement = sourceData.dataElements[dataElementId];
 
@@ -429,7 +432,7 @@ export default class VariableService {
         }
 
         // $FlowFixMe[incompatible-type] automated comment
-        const dataElementId: string = programVariable.dataElementId;
+        const {dataElementId} = programVariable;
         // $FlowFixMe[incompatible-use] automated comment
         const dataElement: DataElement = sourceData.dataElements[dataElementId];
 

@@ -18,6 +18,7 @@ export default class CancelButton extends React.Component<Props, State> {
         super(props);
         this.state = { dialogOpen: false };
     }
+
     handleCancel = () => {
         if (!this.props.dataEntryHasChanges) {
             this.props.onCancel();

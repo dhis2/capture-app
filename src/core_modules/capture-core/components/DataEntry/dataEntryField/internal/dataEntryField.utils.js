@@ -15,7 +15,7 @@ export function getValidationError(value: any, validatorContainers: ?Array<Valid
 
     let message;
     const errorEncountered = validatorContainers.some((validatorContainer) => {
-        const validator = validatorContainer.validator;
+        const {validator} = validatorContainer;
         const result = validator(value);
 
         if (result === true || (result && result.valid)) {

@@ -14,7 +14,7 @@ type Props = {
 };
 
 export const App = ({ store, history }: Props) => (
-    <React.Fragment>
+    <>
         <Provider
             store={store}
         >
@@ -26,5 +26,5 @@ export const App = ({ store, history }: Props) => (
                 </D2UIApp>
             </ConnectedRouter>
         </Provider>
-    </React.Fragment>
+    </>
 );

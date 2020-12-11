@@ -53,9 +53,11 @@ type Props = {
 
 class OrgUnitField extends React.Component<Props> {
     classes: Object;
+
     static defaultProps = {
         roots: [],
     }
+
     constructor(props: Props) {
         super(props);
         this.classes = {
@@ -66,6 +68,7 @@ class OrgUnitField extends React.Component<Props> {
     handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
         this.props.onSearch(event.currentTarget.value);
     }
+
     render() {
         const {
             roots,

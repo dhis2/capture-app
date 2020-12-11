@@ -36,19 +36,20 @@ type Props = {
 class ErrorAndWarningDialog extends React.Component<Props> {
     static getItemWithName(name: string, message: string) {
         return (
-            <React.Fragment>
+            <>
                 {name}: {message}
-            </React.Fragment>
+            </>
         );
     }
 
     static getItemWithoutName(message: string) {
         return (
-            <React.Fragment>
+            <>
                 {message}
-            </React.Fragment>
+            </>
         );
     }
+
     getContents(): React.Node {
         const { warnings, errors, classes } = this.props;
 
@@ -110,7 +111,7 @@ class ErrorAndWarningDialog extends React.Component<Props> {
         const { onAbort, onSave, saveEnabled } = this.props;
 
         return (
-            <React.Fragment>
+            <>
                 <Button onClick={onAbort} color="primary">
                     {i18n.t('Back to form')}
                 </Button>
@@ -119,13 +120,13 @@ class ErrorAndWarningDialog extends React.Component<Props> {
                         {i18n.t('Save anyway')}
                     </Button>) : null
                 }
-            </React.Fragment>
+            </>
         );
     }
 
     render() {
         return (
-            <React.Fragment>
+            <>
                 <DialogTitle id="save-dialog-errors-and-warnings-title">
                     {i18n.t('Validation errors and warnings')}
                 </DialogTitle>
@@ -137,7 +138,7 @@ class ErrorAndWarningDialog extends React.Component<Props> {
                 <DialogActions>
                     {this.getButtons()}
                 </DialogActions>
-            </React.Fragment>
+            </>
         );
     }
 }

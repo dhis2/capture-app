@@ -43,7 +43,7 @@ export const AppStart = () => {
     }
 
     return (
-        <React.Fragment>
+        <>
             <CssBaseline />
             <JSSProviderShell>
                 <MuiThemeProvider
@@ -62,6 +62,6 @@ export const AppStart = () => {
                     }
                 </MuiThemeProvider>
             </JSSProviderShell>
-        </React.Fragment>
+        </>
     );
 };

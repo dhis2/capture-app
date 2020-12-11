@@ -52,10 +52,15 @@ class EnrollmentFactory {
     }
 
     locale: ?string;
+
     dataElementFactory: DataElementFactory;
+
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
+
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
+
     cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>;
+
     constructor(
         cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
         cachedOptionSets: Map<string, CachedOptionSet>,
@@ -80,7 +85,7 @@ class EnrollmentFactory {
             return null;
         }
 
-        const featureType = teType.featureType;
+        const {featureType} = teType;
         if (!featureType || !['POINT', 'POLYGON'].includes(featureType)) {
             return null;
         }
@@ -136,7 +141,7 @@ class EnrollmentFactory {
                 });
             }
             section.showContainer = false;
-            const dataEntryForm = cachedProgram.dataEntryForm;
+            const {dataEntryForm} = cachedProgram;
             try {
                 enrollmentForm.customForm = new CustomForm((o) => {
                     o.id = dataEntryForm.id;

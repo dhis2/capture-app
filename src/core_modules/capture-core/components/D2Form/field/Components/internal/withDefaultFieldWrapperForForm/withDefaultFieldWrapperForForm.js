@@ -15,7 +15,7 @@ import {
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
-} from '../../internal';
+} from "..";
 import labelTypeClasses from '../../../buildField.module.css';
 
 const getFilteredProps = (props: Object) => {

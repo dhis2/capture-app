@@ -128,6 +128,7 @@ class SingleSelectionBoxes extends React.Component<Props> {
                 return OptionElement;
             });
     }
+
     render() {
         const { orientation } = this.props;
         const containerClass = orientation === orientations.HORIZONTAL ?

@@ -38,6 +38,7 @@ const inputKeys = {
 
 class DateTimeRangeField extends React.Component<Props> {
     touchedFields: Set<string>;
+
     constructor(props: Props) {
         super(props);
         this.touchedFields = new Set();
@@ -65,6 +66,7 @@ class DateTimeRangeField extends React.Component<Props> {
             to: this.getValue().to,
         });
     }
+
     handleToChange = (value: ?DateTimeValue) => {
         this.props.onChange({
             from: this.getValue().from,

@@ -69,9 +69,11 @@ class SearchOrgUnitSelector extends React.Component<Props> {
             this.props.onSelectOrgUnitScope(this.props.searchId, value);
         }
     }
+
     onSetOrgUnit = (orgUnit: ?Object) => {
         this.props.onSetOrgUnit(this.props.searchId, orgUnit);
     }
+
     renderOrgUnitScopeSelector = () => {
         const { selectedOrgUnitScope } = this.props;
         return (

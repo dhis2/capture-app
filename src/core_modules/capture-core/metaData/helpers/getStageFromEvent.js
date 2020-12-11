@@ -12,7 +12,7 @@ const errorMessages = {
 };
 
 export default function getStageFromEvent(event: CaptureClientEvent) {
-    const eventId = event.eventId;
+    const {eventId} = event;
     const program = programCollection.get(event.programId);
     if (!program) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ eventId, event }));

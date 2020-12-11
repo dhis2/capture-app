@@ -63,7 +63,7 @@ export const makeColumnsSelector = () => createSelector(
         }
 
 
-        const stageForm: RenderFoundation = stageContainer.stage.stageForm;
+        const {stageForm} = stageContainer.stage;
 
         return columnsOrderFromState
             .map((column) => {

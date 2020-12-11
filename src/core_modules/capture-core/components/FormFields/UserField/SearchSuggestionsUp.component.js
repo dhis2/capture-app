@@ -35,7 +35,7 @@ const SearchSuggestionsUp = (props: Props) => {
             name={suggestionName}
             tabIndex={-1}
             onKeyDown={handleKeyDown}
-            role={'none'}
+            role="none"
         >
             <div
                 ref={listUpEl}

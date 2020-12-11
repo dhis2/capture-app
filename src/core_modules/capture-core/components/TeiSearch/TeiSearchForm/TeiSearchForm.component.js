@@ -55,6 +55,7 @@ type Props = {
 
 class SearchForm extends React.Component<Props> {
     formInstance: any;
+
     orgUnitSelectorInstance: SearchOrgUnitSelector;
 
     static errorMessages = {
@@ -63,8 +64,8 @@ class SearchForm extends React.Component<Props> {
     };
 
     validNumberOfAttributes = () => {
-        const attributesWithValuesCount = this.props.attributesWithValuesCount;
-        const minAttributesRequiredToSearch = this.props.searchGroup.minAttributesRequiredToSearch;
+        const {attributesWithValuesCount} = this.props;
+        const {minAttributesRequiredToSearch} = this.props.searchGroup;
         return attributesWithValuesCount >= minAttributesRequiredToSearch;
     }
 

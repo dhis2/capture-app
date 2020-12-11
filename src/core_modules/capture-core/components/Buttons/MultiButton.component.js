@@ -57,7 +57,9 @@ type State = {
 
 class MultiButton extends React.Component<Props, State> {
     buttonInstance: ?Object;
+
     arrowInstance: ?Object;
+
     constructor(props) {
         super(props);
         this.state = {

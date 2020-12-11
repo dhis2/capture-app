@@ -82,6 +82,7 @@ const dataEntrySectionDefinitions = {
 
 class NewEnrollmentDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
+
     dataEntrySections: { [$Values<typeof dataEntrySectionKeys>]: DataEntrySection };
 
     constructor(props: Props) {
@@ -123,7 +124,7 @@ class NewEnrollmentDataEntry extends Component<Props> {
     }
 
     renderHorizontal = () => {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         return (
             <div
                 className={classes.horizontal}
@@ -154,7 +155,7 @@ class NewEnrollmentDataEntry extends Component<Props> {
                 <div>
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <ConfiguredDataEntry
-                        id={'enrollment'}
+                        id="enrollment"
                         onUpdateFormField={onUpdateField}
                         onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onSave={this.handleSave}

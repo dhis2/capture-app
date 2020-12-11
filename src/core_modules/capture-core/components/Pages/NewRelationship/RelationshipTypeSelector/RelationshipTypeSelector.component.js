@@ -56,6 +56,7 @@ class RelationshipTypeSelector extends React.Component<Props> {
             to: { ...rt.to },
         });
     }
+
     renderRelationshipTypes = () => {
         const { classes, relationshipTypes } = this.props;
         return relationshipTypes ? relationshipTypes.map(rt => (

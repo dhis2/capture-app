@@ -81,7 +81,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                             >
                                 <LoadingMask
                                     size={14}
-                                    color={'inherit'}
+                                    color="inherit"
                                 />
                             </div>
                             <div

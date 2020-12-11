@@ -31,6 +31,7 @@ type Props = {
 }
 class TextRangeField extends React.Component<Props> {
     touchedFields: Set<string>;
+
     constructor(props: Props) {
         super(props);
         this.touchedFields = new Set();

@@ -33,7 +33,7 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
             viewEventActionTypes.START_OPEN_EVENT_FOR_VIEW,
         ),
         map((action) => {
-            const eventContainer = action.payload.eventContainer;
+            const {eventContainer} = action.payload;
             const notes = (eventContainer && eventContainer.event && eventContainer.event.notes) || [];
             const convertedNotes = notes.map(note => ({
                 ...note,
@@ -53,9 +53,9 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
         ofType(viewEventNotesActionTypes.REQUEST_SAVE_EVENT_NOTE),
         map((action) => {
             const state = store.value;
-            const payload = action.payload;
+            const {payload} = action;
 
-            const eventId = state.viewEventPage.eventId;
+            const {eventId} = state.viewEventPage;
             // $FlowFixMe[prop-missing] automated comment
             const userName = getCurrentUser().username;
 

@@ -39,8 +39,8 @@ const mapInputTypeToComponent = {
 
 const getOptionSetFieldConfig = (metaData: MetaDataElement, options: Object) => {
     // $FlowFixMe[incompatible-type] automated comment
-    const optionSet: OptionSet = metaData.optionSet;
-    const inputType = optionSet.inputType;
+    const {optionSet} = metaData;
+    const {inputType} = optionSet;
     const inputTypeProps = mapInputTypeToPropsGetterFn[inputType](metaData);
 
     const props = createProps({

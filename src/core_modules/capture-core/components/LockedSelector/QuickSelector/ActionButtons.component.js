@@ -30,7 +30,9 @@ type Props = {
 
 class ActionButtons extends Component<Props> {
     handleClick: () => void;
+
     handleNewClick: () => void;
+
     constructor(props) {
         super(props);
         this.handleStartAgainClick = this.handleStartAgainClick.bind(this);

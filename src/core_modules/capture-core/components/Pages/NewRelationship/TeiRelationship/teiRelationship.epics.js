@@ -34,7 +34,7 @@ export const openRelationshipTeiSearchEpic = (action$: InputObservable, store: R
         filter(action => action.payload.findMode && action.payload.findMode === 'TEI_SEARCH'),
         map(() => {
             const state = store.value;
-            const selectedRelationshipType = state.newRelationship.selectedRelationshipType;
+            const {selectedRelationshipType} = state.newRelationship;
 
             const { programId, trackedEntityTypeId } = selectedRelationshipType.to;
             const contextId = programId || trackedEntityTypeId;

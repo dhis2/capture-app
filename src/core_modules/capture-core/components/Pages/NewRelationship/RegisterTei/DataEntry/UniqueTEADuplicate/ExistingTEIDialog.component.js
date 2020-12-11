@@ -13,7 +13,7 @@ const ExistingTEIDialog = (props: Props) => {
     return (
         <Dialog
             fullWidth
-            maxWidth={'md'}
+            maxWidth="md"
             open={open}
             onClose={props.onCancel}
         >

@@ -49,7 +49,7 @@ class SearchGroupDuplicate extends React.Component<Props, State> {
         const { duplicatesReviewDialogOpen } = this.state;
 
         return (
-            <React.Fragment>
+            <>
                 <WarningMessageCreator
                     onOpenReviewDialog={this.handleOpenReviewDialog}
                 />
@@ -59,7 +59,7 @@ class SearchGroupDuplicate extends React.Component<Props, State> {
                     onLink={onLink}
                     extraActions={this.getHideButton()}
                 />
-            </React.Fragment>
+            </>
         );
     }
 }

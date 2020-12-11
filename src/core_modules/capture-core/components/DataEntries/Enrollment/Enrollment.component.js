@@ -140,7 +140,7 @@ const getIncidentDateSettings = () => {
         );
     const incidentDateSettings = {
         isApplicable: (props: Object) => {
-            const showIncidentDate = props.enrollmentMetadata.showIncidentDate;
+            const {showIncidentDate} = props.enrollmentMetadata;
             return showIncidentDate;
         },
         getComponent: () => reportDateComponent,
@@ -208,11 +208,11 @@ const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientati
 
 const getGeometrySettings = () => ({
     isApplicable: (props: Object) => {
-        const featureType = props.enrollmentMetadata.enrollmentForm.featureType;
+        const {featureType} = props.enrollmentMetadata.enrollmentForm;
         return ['Polygon', 'Point'].includes(featureType);
     },
     getComponent: (props: Object) => {
-        const featureType = props.enrollmentMetadata.enrollmentForm.featureType;
+        const {featureType} = props.enrollmentMetadata.enrollmentForm;
         if (featureType === 'Polygon') {
             return polygonComponent;
         }
@@ -220,7 +220,7 @@ const getGeometrySettings = () => ({
         return pointComponent;
     },
     getComponentProps: (props: Object) => {
-        const featureType = props.enrollmentMetadata.enrollmentForm.featureType;
+        const {featureType} = props.enrollmentMetadata.enrollmentForm;
         if (featureType === 'Polygon') {
             return createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,

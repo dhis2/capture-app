@@ -101,6 +101,7 @@ class OfflineList extends Component<Props> {
     static defaultProps = {
         rowIdKey: 'id',
     };
+
     static typesWithAscendingInitialDirection = [
         // todo (report lgmt)
         // $FlowFixMe[prop-missing] automated comment
@@ -123,8 +124,8 @@ class OfflineList extends Component<Props> {
     ];
 
     renderHeaderRow(visibleColumns: Array<Column>) {
-        const sortById = this.props.sortById;
-        const sortByDirection = this.props.sortByDirection;
+        const {sortById} = this.props;
+        const {sortByDirection} = this.props;
 
         const headerCells = visibleColumns
             .map(column => (
@@ -162,8 +163,8 @@ class OfflineList extends Component<Props> {
     }
 
     renderRows(visibleColumns: Array<Column>) {
-        const dataSource = this.props.dataSource;
-        const classes = this.props.classes;
+        const {dataSource} = this.props;
+        const {classes} = this.props;
 
         if (!dataSource || dataSource.length === 0) {
             const columnsCount = visibleColumns.length;

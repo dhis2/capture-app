@@ -18,6 +18,7 @@ const getDataEntryRelationshipsHandler = (InnerComponent: React.ComponentType<an
         handleOpenAddRelationship = () => {
             this.props.onOpenAddRelationship(this.props.itemId, this.props.dataEntryId);
         }
+
         handleRemoveRelationship = (relClientId: string) => {
             this.props.onRemoveRelationship(this.props.itemId, this.props.dataEntryId, relClientId);
         }

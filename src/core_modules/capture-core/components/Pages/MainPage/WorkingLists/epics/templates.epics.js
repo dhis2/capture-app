@@ -26,8 +26,8 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
     action$.pipe(
         ofType(actionTypes.TEMPLATES_FETCH),
         concatMap((action) => {
-            const listId = action.payload.listId;
-            const programId = store.value.currentSelections.programId;
+            const {listId} = action.payload;
+            const {programId} = store.value.currentSelections;
             const promise = getTemplatesAsync(store.value)
                 .then(container => batchActions([
                     selectTemplate(container.default.id, listId),

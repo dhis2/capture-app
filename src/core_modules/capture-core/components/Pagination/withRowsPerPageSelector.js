@@ -27,6 +27,7 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
         }
 
         options: Array<VirtualizedOptionConfig>;
+
         constructor(props: Props) {
             super(props);
             this.options = RowsPerPageSelector.getOptions();
@@ -37,7 +38,7 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
         }
 
         renderSelectorElement = () => {
-            const rowsPerPage = this.props.rowsPerPage;
+            const {rowsPerPage} = this.props;
 
             return (
                 <div id="rows-per-page-selector">

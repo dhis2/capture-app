@@ -16,6 +16,7 @@ type Data = {
  */
 export default class CustomForm {
     _id: string;
+
     _data: Data;
 
     constructor(initFn: ?(_this: CustomForm) => void) {
@@ -26,9 +27,11 @@ export default class CustomForm {
     set id(id: string) {
         this._id = id;
     }
+
     get id() {
         return this._id;
     }
+
     /**
      * parses html to react elements
      *
@@ -41,6 +44,7 @@ export default class CustomForm {
         });
         this._data = data;
     }
+
     get data(): Data {
         return this._data;
     }

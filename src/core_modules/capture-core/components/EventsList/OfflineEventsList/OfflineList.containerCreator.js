@@ -14,8 +14,8 @@ const makeMapStateToProps = () => {
     const mapStateToProps = (state: ReduxState, props: Object) => {
         const columns = columnsSelector(state, props);
         const eventsContainer = createEventsContainer(state, props);
-        const sortById = state.workingListsMeta[props.listId].sortById;
-        const sortByDirection = state.workingListsMeta[props.listId].sortByDirection;
+        const {sortById} = state.workingListsMeta[props.listId];
+        const {sortByDirection} = state.workingListsMeta[props.listId];
         const rowIdKey = 'eventId';
         return {
             columns,

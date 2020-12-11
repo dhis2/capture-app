@@ -8,7 +8,7 @@ const getAttributesWithValuesCount = (state: ReduxState, formId: string) => {
 };
 
 const mapStateToProps = (state: ReduxState, props: Object) => {
-    const searchId = props.searchId;
+    const {searchId} = props;
     const formId = props.id;
     const formState = state.teiSearch[searchId] && state.teiSearch[searchId][formId] ? state.teiSearch[searchId][formId] : {};
 

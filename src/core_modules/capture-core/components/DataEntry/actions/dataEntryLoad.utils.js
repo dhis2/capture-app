@@ -108,7 +108,7 @@ export function validateDataEntryValues(
             // $FlowFixMe[prop-missing] automated comment
             const id = propToInclude.dataEntryId || propToInclude.id;
             const value = values[id];
-            const validatorContainers = propToInclude.validatorContainers;
+            const {validatorContainers} = propToInclude;
             const validationError = getValidationError(value, validatorContainers);
 
             accValidations[id] = {

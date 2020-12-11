@@ -39,7 +39,7 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
     action$.pipe(
         ofType(editEventActionTypes.EDIT_EVENT_FROM_URL),
         switchMap((action) => {
-            const eventId = action.payload.eventId;
+            const {eventId} = action.payload;
             const prevProgramId = store.value.currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
             return getEvent(eventId)
                 .then((eventContainer) => {
@@ -64,7 +64,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(editEventActionTypes.EVENT_FROM_URL_RETRIEVED),
         switchMap((action) => {
-            const eventContainer = action.payload.eventContainer;
+            const {eventContainer} = action.payload;
             return getApi().get(`organisationUnits/${eventContainer.event.orgUnitId}`)
                 .then(orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer))
                 .catch((error) => {

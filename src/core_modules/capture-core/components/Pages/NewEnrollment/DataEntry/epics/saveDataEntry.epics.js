@@ -11,9 +11,9 @@ export const saveNewEnrollmentEpic = (action$: InputObservable, store: ReduxStor
         ofType(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map((action) => {
             const state = store.value;
-            const payload = action.payload;
+            const {payload} = action;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
-            const programId = state.currentSelections.programId;
+            const {programId} = state.currentSelections;
             const selections = {
                 programId,
                 orgUnitId: state.currentSelections.orgUnitId,

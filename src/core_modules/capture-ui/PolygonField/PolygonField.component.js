@@ -119,14 +119,15 @@ export default class D2Polygon extends React.Component<Props, State> {
     }
 
     onMapPolygonCreated = (e: any) => {
-        const coordinates = e.layer.toGeoJSON().geometry.coordinates;
+        const {coordinates} = e.layer.toGeoJSON().geometry;
         this.setState({ mapCoordinates: coordinates, zoom: e.target.getZoom() });
     };
 
     onMapPolygonEdited = (e: any) => {
-        const coordinates = e.layers.getLayers()[0].toGeoJSON().geometry.coordinates;
+        const {coordinates} = e.layers.getLayers()[0].toGeoJSON().geometry;
         this.setState({ mapCoordinates: coordinates, zoom: e.target.getZoom() });
     };
+
     onMapPolygonDelete = () => {
         this.setState({ mapCoordinates: null });
     };

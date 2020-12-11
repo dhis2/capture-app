@@ -115,7 +115,7 @@ const TemplateSelector = (props: Props) => {
                 extraTriggers={[templates]}
             >
                 {height => (
-                    <React.Fragment>
+                    <>
                         <div
                             data-test="workinglists-template-selector-chips-container"
                             ref={containerEl}
@@ -128,7 +128,7 @@ const TemplateSelector = (props: Props) => {
                         >
                             {height > maxHeight ? getHeightModifierButton() : null}
                         </div>
-                    </React.Fragment>
+                    </>
                 )}
             </CaptureScrollHeight>
         </div>

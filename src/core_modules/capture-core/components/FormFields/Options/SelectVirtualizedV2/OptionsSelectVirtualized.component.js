@@ -75,11 +75,17 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
     }
 
     handleChange: (selectedItem: VirtualizedOptionConfig) => void;
+
     materialUIContainerInstance: any;
+
     filterOptions: any;
+
     renderOption: () => React$Element<any>;
+
     prevFilterValue: ?string;
+
     prevFilteredOptions: Array<VirtualizedOptionConfig>;
+
     isUnmounted: boolean;
 
     static defaultProps = {
@@ -112,6 +118,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
 
     static defaultSelectStyle = {
     };
+
     static defaultMenuContainerStyle = {
     }
 
@@ -149,7 +156,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
     }
 
     getValue() {
-        const options = this.props.options;
+        const {options} = this.props;
         const selectedValue = this.props.value;
         if (options && selectedValue) {
             return options.find(option => option.value === selectedValue);
@@ -239,7 +246,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
                         clearable={nullable}
                         style={selectStyle}
                         menuContainerStyle={menuContainerStyle}
-                        className={'virtualized-select'}
+                        className="virtualized-select"
                         placeholder={useHintLabel ? label : ''}
                         maxHeight={maxHeight || 200}
                         optionRenderer={this.renderOption}

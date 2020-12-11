@@ -4,6 +4,7 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 
 export default class Category {
     _name: string;
+
     _id: string;
 
     static errorMessages = {

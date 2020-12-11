@@ -22,16 +22,16 @@ class RelationshipNavigation extends React.Component<Props> {
         const { onSelectRelationshipType, findMode } = this.props;
         const relationshipTypeName = selectedRelationshipType.name;
         return (
-            <React.Fragment>
+            <>
                 {this.renderSlash()}
                 { findMode ?
-                    <React.Fragment>
+                    <>
                         <LinkButton onClick={() => onSelectRelationshipType(selectedRelationshipType)}>{relationshipTypeName}</LinkButton>
                         {this.renderForFindMode(findMode)}
-                    </React.Fragment> :
+                    </> :
                     relationshipTypeName
                 }
-            </React.Fragment>
+            </>
         );
     }
 
@@ -41,24 +41,24 @@ class RelationshipNavigation extends React.Component<Props> {
         const { onSelectFindMode, searching } = this.props;
         const displayName = findModeDisplayNames[findMode];
         return (
-            <React.Fragment>
+            <>
                 {this.renderSlash()}
                 {searching ?
-                    <React.Fragment>
+                    <>
                         <LinkButton onClick={() => onSelectFindMode(findMode)}>{displayName}</LinkButton>
                         {this.renderForSearching()}
-                    </React.Fragment> :
+                    </> :
                     displayName
                 }
-            </React.Fragment>
+            </>
         );
     }
 
     renderForSearching = () => (
-        <React.Fragment>
+        <>
             {this.renderSlash()}
             {I18n.t('Search results')}
-        </React.Fragment>
+        </>
     )
 
     render() {
@@ -66,10 +66,10 @@ class RelationshipNavigation extends React.Component<Props> {
         return (
             <div style={{ padding: 10 }}>
                 {selectedRelationshipType ?
-                    <React.Fragment>
+                    <>
                         <LinkButton onClick={onInitializeNewRelationship}>{header}</LinkButton>
                         {this.renderForRelationshipType(selectedRelationshipType)}
-                    </React.Fragment> :
+                    </> :
                     header
                 }
             </div>

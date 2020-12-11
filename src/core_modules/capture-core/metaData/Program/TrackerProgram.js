@@ -9,8 +9,11 @@ import { DataElement } from '../DataElement';
 
 export default class TrackerProgram extends Program {
     _searchGroups: Array<SearchGroup>;
+
     _trackedEntityType: TrackedEntityType;
+
     _attributes: Array<DataElement>;
+
     _enrollment: Enrollment;
 
     constructor(initFn: ?(_this: TrackerProgram) => void) {
@@ -22,6 +25,7 @@ export default class TrackerProgram extends Program {
     get searchGroups(): Array<SearchGroup> {
         return this._searchGroups;
     }
+
     set searchGroups(searchGroups: Array<SearchGroup>) {
         this._searchGroups = searchGroups;
     }
@@ -29,6 +33,7 @@ export default class TrackerProgram extends Program {
     get trackedEntityType(): TrackedEntityType {
         return this._trackedEntityType;
     }
+
     set trackedEntityType(trackedEntityType: TrackedEntityType) {
         this._trackedEntityType = trackedEntityType;
     }
@@ -36,6 +41,7 @@ export default class TrackerProgram extends Program {
     get enrollment(): Enrollment {
         return this._enrollment;
     }
+
     set enrollment(enrollment: Enrollment) {
         this._enrollment = enrollment;
     }
@@ -43,6 +49,7 @@ export default class TrackerProgram extends Program {
     get attributes(): Array<DataElement> {
         return this._attributes;
     }
+
     set attributes(attributes: Array<DataElement>) {
         this._attributes = attributes;
     }

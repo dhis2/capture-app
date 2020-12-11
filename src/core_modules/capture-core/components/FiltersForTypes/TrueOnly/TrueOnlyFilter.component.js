@@ -26,7 +26,7 @@ type Props = {
 // $FlowFixMe[incompatible-variance] automated comment
 class TrueOnlyFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
-        const value = this.props.value;
+        const {value} = this.props;
 
         if (!value) {
             return null;

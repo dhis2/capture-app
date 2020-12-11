@@ -11,8 +11,8 @@ export const notesDesc = createReducerDescription({
         [action.payload.key]: action.payload.notes,
     }),
     [notesActionTypes.ADD_NOTE]: (state, action) => {
-        const key = action.payload.key;
-        const note = action.payload.note;
+        const {key} = action.payload;
+        const {note} = action.payload;
 
         return {
             ...state,
@@ -20,7 +20,7 @@ export const notesDesc = createReducerDescription({
         };
     },
     [notesActionTypes.REMOVE_NOTE]: (state, action) => {
-        const key = action.payload.key;
+        const {key} = action.payload;
         const clientId = action.payload.noteClientId;
 
         return {

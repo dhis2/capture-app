@@ -12,9 +12,13 @@ type RelationshipConstraint = {
 
 export default class RelationshipType {
     _id: string;
+
     _name: string;
+
     _access: Access;
+
     _from: RelationshipConstraint;
+
     _to: RelationshipConstraint;
 
     constructor(initFn: ?(_this: RelationshipType) => void) {

@@ -20,6 +20,7 @@ type State = {
 const getEventListener = (InnerComponent: React.ComponentType<any>) =>
     class BrowserBackWarningForDataEntryHOC extends React.Component<Props, State> {
         unblock: () => void;
+
         constructor(props: Props) {
             super(props);
             this.state = {
@@ -63,7 +64,7 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
             // $FlowFixMe[prop-missing] automated comment
             const { dataEntryHasChanges, history, location, match, staticContext, ...passOnProps } = this.props;
             return (
-                <React.Fragment>
+                <>
                     <InnerComponent
                         {...passOnProps}
                     />
@@ -76,7 +77,7 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
                         open={this.state.dialogOpen}
                         onCancel={this.handleDialogCancel}
                     />
-                </React.Fragment>
+                </>
             );
         }
     };

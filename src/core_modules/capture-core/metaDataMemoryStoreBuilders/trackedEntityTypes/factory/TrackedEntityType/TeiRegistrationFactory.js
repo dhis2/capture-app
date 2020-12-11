@@ -41,7 +41,7 @@ class TeiRegistrationFactory {
     static _buildTetFeatureTypeField(
         cachedType: CachedTrackedEntityType,
     ) {
-        const featureType = cachedType.featureType;
+        const {featureType} = cachedType;
         if (!featureType || !['POINT', 'POLYGON'].includes(featureType)) {
             return null;
         }
@@ -51,6 +51,7 @@ class TeiRegistrationFactory {
     }
 
     dataElementFactory: DataElementFactory;
+
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
 
     constructor(

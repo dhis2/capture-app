@@ -8,7 +8,7 @@ const convert = (() => {
         arr.sort((a, b) => {
             if (a[sortBy] == null) {
                 return 1;
-            } else if ((b[sortBy] == null)) {
+            } if ((b[sortBy] == null)) {
                 return -1;
             }
 

@@ -6,8 +6,11 @@ import RenderFoundation from '../RenderFoundation/RenderFoundation';
 
 export default class SearchGroup {
     _id: string;
+
     _minAttributesRequiredToSearch: number;
+
     _searchForm: RenderFoundation;
+
     _unique: boolean;
 
     constructor(initFn: ?(_this: SearchGroup) => void) {
@@ -19,6 +22,7 @@ export default class SearchGroup {
     set id(id: string) {
         this._id = id;
     }
+
     get id(): string {
         return this._id;
     }
@@ -26,6 +30,7 @@ export default class SearchGroup {
     set minAttributesRequiredToSearch(minAttributesRequiredToSearch: number) {
         this._minAttributesRequiredToSearch = minAttributesRequiredToSearch;
     }
+
     get minAttributesRequiredToSearch(): number {
         return this._minAttributesRequiredToSearch;
     }
@@ -33,6 +38,7 @@ export default class SearchGroup {
     set searchForm(searchForm: RenderFoundation) {
         this._searchForm = searchForm;
     }
+
     get searchForm(): RenderFoundation {
         return this._searchForm;
     }
@@ -40,6 +46,7 @@ export default class SearchGroup {
     set unique(unique: boolean) {
         this._unique = unique;
     }
+
     get unique(): boolean {
         return this._unique;
     }

@@ -99,7 +99,7 @@ class EventListWrapper extends React.Component<Props> {
     }
 
     renderPager = () => {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         return (
             <div
                 className={classes.paginationContainer}

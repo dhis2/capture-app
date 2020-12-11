@@ -33,7 +33,9 @@ const styles = () => ({
 
 class StickyOnScroll extends React.Component<Props> {
     stickyContainer: any;
+
     scrollTimer: any;
+
     resizeTimer: any;
 
     static defaultProps = {
@@ -73,14 +75,14 @@ class StickyOnScroll extends React.Component<Props> {
     }
 
     getRightMargin = () => {
-        const parentElement = this.stickyContainer.parentElement;
+        const {parentElement} = this.stickyContainer;
         const width = document.documentElement ? document.documentElement.clientWidth : 0;
         const rightParent = this.stickyContainer.parentElement.offsetLeft + parentElement.offsetWidth;
         return width - rightParent;
     }
 
     setSticky = () => {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         if (this.stickyContainer && (this.stickyDisabled() || !this.isNearTop())) {
             this.stickyContainer.className = classes.stickyContainerAbsolute;
             this.stickyContainer.style.top = 'initial';

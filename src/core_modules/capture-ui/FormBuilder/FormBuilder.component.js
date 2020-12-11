@@ -239,9 +239,13 @@ class FormBuilder extends React.Component<Props> {
     }
 
     fieldInstances: Map<string, any>;
+
     asyncUIState: { [id: string]: FieldUI };
+
     fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer;
+
     validateAllCancelablePromise: ?CancelablePromise<any>;
+
     commitUpdateTriggeredForFields: { [fieldId: string]: boolean };
 
     constructor(props: Props) {
@@ -260,7 +264,7 @@ class FormBuilder extends React.Component<Props> {
         if (newProps.id !== this.props.id || newProps.loadNr !== this.props.loadNr) {
             this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
             this.commitUpdateTriggeredForFields = {};
-            const onCleanUp = newProps.onCleanUp;
+            const {onCleanUp} = newProps;
             onCleanUp && onCleanUp(this.getCleanUpData());
             if (this.props.validateIfNoUIData) {
                 this.validateAllFields(newProps);
@@ -272,7 +276,7 @@ class FormBuilder extends React.Component<Props> {
     }
 
     componentWillUnmount() {
-        const onCleanUp = this.props.onCleanUp;
+        const {onCleanUp} = this.props;
         onCleanUp && onCleanUp(this.getCleanUpData());
     }
 
@@ -603,9 +607,9 @@ class FormBuilder extends React.Component<Props> {
 
     render() {
         return (
-            <React.Fragment>
+            <>
                 {this.renderFields()}
-            </React.Fragment>
+            </>
         );
     }
 }

@@ -7,9 +7,13 @@ import { TeiRegistration } from './TeiRegistration';
 /* eslint-disable no-underscore-dangle */
 class TrackedEntityType {
     _id: string;
+
     _name: string;
+
     _teiRegistration: TeiRegistration;
+
     _attributes: Array<DataElement>;
+
     _searchGroups: Array<SearchGroup>;
 
     constructor(initFn: ?(_this: TrackedEntityType) => void) {
@@ -20,6 +24,7 @@ class TrackedEntityType {
     set id(id: string) {
         this._id = id;
     }
+
     get id(): string {
         return this._id;
     }
@@ -27,6 +32,7 @@ class TrackedEntityType {
     set name(name: string) {
         this._name = name;
     }
+
     get name(): string {
         return this._name;
     }
@@ -34,6 +40,7 @@ class TrackedEntityType {
     set teiRegistration(teiRegistration: TeiRegistration) {
         this._teiRegistration = teiRegistration;
     }
+
     get teiRegistration(): TeiRegistration {
         return this._teiRegistration;
     }
@@ -41,6 +48,7 @@ class TrackedEntityType {
     set searchGroups(searchGroups: Array<SearchGroup>) {
         this._searchGroups = searchGroups;
     }
+
     get searchGroups(): Array<SearchGroup> {
         return this._searchGroups;
     }
@@ -48,6 +56,7 @@ class TrackedEntityType {
     set attributes(attributes: Array<DataElement>) {
         this._attributes = attributes;
     }
+
     get attributes(): Array<DataElement> {
         return this._attributes;
     }

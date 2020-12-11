@@ -22,6 +22,7 @@ type Props = {
 
 class DateCalendar extends Component<Props> {
     handleChange: (e: any, dates: ?Array<Date>) => void;
+
     displayOptions: Object;
 
     constructor(props: Props) {

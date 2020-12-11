@@ -28,8 +28,8 @@ export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: Redu
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER),
         map((action) => {
             const state = store.value;
-            const payload = action.payload;
-            const formFoundation = payload.formFoundation;
+            const {payload} = action;
+            const {formFoundation} = payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.eventId);
 
             const { formClientValues, mainDataClientValues } = getNewEventClientValues(state, dataEntryKey, formFoundation);
@@ -55,6 +55,6 @@ export const saveNewEventAddAnotherFailedEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER),
         map((action) => {
-            const clientId = action.meta.clientId;
+            const {clientId} = action.meta;
             return removeListItem(listId, clientId);
         }));

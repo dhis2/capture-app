@@ -15,6 +15,7 @@ type CacheItem = {
 export default () => (InnerComponent: React.ComponentType<any>) =>
     class ErrorMessagePostProcessorHOC extends React.Component<Props> {
         cache: CacheItem;
+
         constructor(props: Props) {
             super(props);
             this.cache = {};

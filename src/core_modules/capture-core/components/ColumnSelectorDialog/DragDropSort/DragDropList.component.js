@@ -23,6 +23,7 @@ type Props = {
 
 class Container extends Component<Props> {
     moveListItem: (dragIndex: any, hoverIndex: any) => void;
+
     constructor(props) {
         super(props);
         this.moveListItem = this.moveListItem.bind(this);

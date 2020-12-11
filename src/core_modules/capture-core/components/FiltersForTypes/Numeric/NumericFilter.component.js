@@ -88,6 +88,7 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
     }
 
     maxD2TextFieldInstance: D2TextField;
+
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
 
@@ -170,7 +171,7 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
         const values = this.props.value;
         const minValue = values && values.min;
         const maxValue = values && values.max;
-        const type = this.props.type;
+        const {type} = this.props;
 
         const { isValid: isMinValueValid, error: minValueError } = NumericFilter.validateField(minValue, type);
         const { isValid: isMaxValueValid, error: maxValueError } = NumericFilter.validateField(maxValue, type);

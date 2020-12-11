@@ -100,6 +100,7 @@ class Notes extends React.Component<Props, State> {
     static defaultProps = {
         entityAccess: { read: true, write: true },
     }
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -215,11 +216,9 @@ class Notes extends React.Component<Props, State> {
                         </ListItem>
                     ))}
                 </List>
-                {
-                    <div className={classes.newNoteContainer} data-test="dhis2-capture-new-comment-container">
-                        { this.state.addIsOpen ? this.renderInput() : this.renderButton(entityAccess.write) }
-                    </div>
-                }
+                <div className={classes.newNoteContainer} data-test="dhis2-capture-new-comment-container">
+                    { this.state.addIsOpen ? this.renderInput() : this.renderButton(entityAccess.write) }
+                </div>
 
             </div>
         );

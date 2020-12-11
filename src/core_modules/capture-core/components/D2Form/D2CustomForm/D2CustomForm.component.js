@@ -66,7 +66,9 @@ class D2CustomForm extends React.Component<Props> {
     }
 
     eventListenerSpecs: Array<EventListenerSpec>;
+
     preProcessedSourceTree: Array<React.Node>;
+
     constructor(props: Props) {
         super(props);
         this.preProcessSourceTree();
@@ -160,7 +162,7 @@ class D2CustomForm extends React.Component<Props> {
      * @memberof D2CustomForm
      */
     addScripts() {
-        const scripts = this.props.specs.data.scripts;
+        const {scripts} = this.props.specs.data;
         scripts
             .forEach((scriptData) => {
                 const domScriptElement = document.createElement('script');
@@ -180,7 +182,7 @@ class D2CustomForm extends React.Component<Props> {
      * @memberof D2CustomForm
      */
     addEventListeners() {
-        const eventListenerSpecs = this.eventListenerSpecs;
+        const {eventListenerSpecs} = this;
         const specsWithHandlerRef = eventListenerSpecs
             .map((spec) => {
                 const handlerRef = () => { eval(spec.handler); } //eslint-disable-line
@@ -197,6 +199,7 @@ class D2CustomForm extends React.Component<Props> {
             });
         this.eventListenerSpecs = specsWithHandlerRef;
     }
+
     /**
      * Remove event listeners
      *

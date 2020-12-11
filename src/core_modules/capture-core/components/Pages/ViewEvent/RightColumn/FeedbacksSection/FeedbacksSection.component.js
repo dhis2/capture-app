@@ -40,7 +40,7 @@ const getStyles = (theme: Theme) => ({
 
 class FeedbacksSection extends React.Component<Props> {
     renderHeader = (count: number) => {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         return (
             <ViewEventSectionHeader
                 icon={AdjustIcon}
@@ -70,7 +70,7 @@ class FeedbacksSection extends React.Component<Props> {
     getFeedbacks = () => this.props.feedbacks || {};
 
     render() {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         const feedbacks = this.getFeedbacks();
         const displayTexts = feedbacks.displayTexts || [];
         const displayKeyValuePairs = feedbacks.displayKeyValuePairs || [];

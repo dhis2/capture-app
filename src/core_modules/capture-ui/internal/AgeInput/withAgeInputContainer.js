@@ -16,7 +16,7 @@ export default () =>
         class AgeInputContainer extends React.Component<Props, State> {
             render() {
                 const { message, ...passOnProps } = this.props;
-                const classes = this.props.classes;
+                const {classes} = this.props;
                 const ageInputContainerClass =
                     (classes && classes.ageInputContainer)
                     || defaultClasses.ageInputContainer;

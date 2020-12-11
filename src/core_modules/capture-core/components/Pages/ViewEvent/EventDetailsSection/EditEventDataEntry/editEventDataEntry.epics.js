@@ -33,15 +33,15 @@ export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: Re
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
         map(() => {
             const state = store.value;
-            const loadedValues = state.viewEventPage.loadedValues;
-            const eventContainer = loadedValues.eventContainer;
+            const {loadedValues} = state.viewEventPage;
+            const {eventContainer} = loadedValues;
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
                 return prerequisitesErrorLoadingEditEventDataEntry(metadataContainer.error);
             }
 
-            const program = metadataContainer.program;
+            const {program} = metadataContainer;
             const foundation = metadataContainer.stage.stageForm;
 
             return batchActions([
@@ -55,15 +55,15 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
         ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY),
         map((action) => {
             const state = store.value;
-            const payload = action.payload;
+            const {payload} = action;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
-            const eventId = state.dataEntries[payload.dataEntryId].eventId;
+            const {eventId} = state.dataEntries[payload.dataEntryId];
 
             const formValues = state.formsValues[dataEntryKey];
             const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
             const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
             const prevEventMainData = state.viewEventPage.loadedValues.eventContainer.event;
-            const formFoundation = payload.formFoundation;
+            const {formFoundation} = payload;
             const { formClientValues, dataEntryClientValues } = convertDataEntryToClientValues(
                 formFoundation,
                 formValues,
@@ -122,8 +122,8 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
         map(() => {
             // Revert event container if previous exists
             const state = store.value;
-            const viewEventPage = state.viewEventPage;
-            const eventContainer = viewEventPage.loadedValues.eventContainer;
+            const {viewEventPage} = state;
+            const {eventContainer} = viewEventPage.loadedValues;
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
             return updateEventContainer(eventContainer, orgUnit);
         }));

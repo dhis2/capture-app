@@ -24,8 +24,11 @@ class TrackedEntityTypeFactory {
     };
 
     locale: ?string;
+
     dataElementFactory: DataElementFactory;
+
     searchGroupFactory: SearchGroupFactory;
+
     teiRegistrationFactory: TeiRegistrationFactory;
 
     constructor(

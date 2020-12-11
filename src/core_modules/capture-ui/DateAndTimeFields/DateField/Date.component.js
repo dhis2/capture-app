@@ -52,11 +52,17 @@ class UIDate extends React.Component<Props, State> {
     }
 
     containerInstance: ?HTMLElement;
+
     handleTextFieldFocus: () => void;
+
     handleDateSelected: (value: string) => void;
+
     handleTextFieldBlur: (event: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+
     hidePopover: () => void;
+
     handleDocumentClick: (event: MouseEvent) => void;
+
     calendarWrapperDOMElementRef: { current: ?HTMLDivElement };
 
     constructor(props: Props) {

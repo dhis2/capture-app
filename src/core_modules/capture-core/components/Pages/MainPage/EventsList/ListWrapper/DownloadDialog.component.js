@@ -45,7 +45,7 @@ class DownloadDialog extends React.Component<Props> {
     }
 
     static getUrl() {
-        const baseUrl = getApi().baseUrl;
+        const {baseUrl} = getApi();
         return `${baseUrl}/events/query`;
     }
 
@@ -104,6 +104,7 @@ class DownloadDialog extends React.Component<Props> {
             </div>
         );
     }
+
     render() {
         const { open, onClose } = this.props;
         return (

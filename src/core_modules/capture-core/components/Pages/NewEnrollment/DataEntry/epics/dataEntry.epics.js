@@ -30,8 +30,8 @@ export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store
                 return selectionsNotCompleteOpeningNewEnrollment();
             }
 
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
+            const {programId} = state.currentSelections;
+            const {orgUnitId} = state.currentSelections;
             const orgUnit = state.organisationUnits[orgUnitId];
             let trackerProgram: TrackerProgram;
             try {

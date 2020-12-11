@@ -65,7 +65,7 @@ class DragDropListItem extends Component<Props> {
             <tr key={this.props.id} tabIndex={-1} style={{ ...style, opacity }}>
                 <TableCell component="th" scope="row">
                     <Checkbox
-                        color={'primary'}
+                        color="primary"
                         checked={this.props.visible}
                         tabIndex={-1}
                         disableRipple

@@ -41,7 +41,7 @@ class Index extends Component<Props> {
                                     data-test="dhis2-capture-event-list-container"
                                 >
                                     <EventsListConnectivityWrapper
-                                        listId={'eventList'}
+                                        listId="eventList"
                                     />
                                 </div>
                             </TrackerProgramHandler>

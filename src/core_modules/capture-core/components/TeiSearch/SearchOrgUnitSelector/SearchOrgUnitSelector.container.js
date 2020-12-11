@@ -10,7 +10,7 @@ import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField
 import SearchOrgUnitSelectorRefHandler from './SearchOrgUnitSelectorRefHandler.component';
 
 const mapStateToProps = (state: ReduxState, props: Object) => {
-    const searchId = props.searchId;
+    const {searchId} = props;
 
     const filteredRoots = getOrgUnitRoots(searchId);
     const roots = filteredRoots || getOrgUnitRoots('searchRoots');

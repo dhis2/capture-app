@@ -47,7 +47,7 @@ class NewRelationship extends React.Component<Props> {
 
     render() {
         const { classes, onAddRelationship, ...passOnProps } = this.props;
-        const selectedRelationshipType = this.props.selectedRelationshipType;
+        const {selectedRelationshipType} = this.props;
         return (
             <div className={this.props.classes.container}>
                 <RelationshipNavigation

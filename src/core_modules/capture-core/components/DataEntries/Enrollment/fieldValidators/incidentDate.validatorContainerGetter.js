@@ -14,7 +14,7 @@ const isValidIncidentDate = (value: string, isFutureDateAllowed: boolean) => {
         return true;
     }
 
-    const momentDate = dateContainer.momentDate;
+    const {momentDate} = dateContainer;
     const momentToday = moment();
     // $FlowFixMe -> if parseDate returns isValid true, there should always be a momentDate
     const isNotFutureDate = momentDate.isSameOrBefore(momentToday);

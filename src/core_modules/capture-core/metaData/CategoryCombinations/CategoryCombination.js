@@ -6,7 +6,9 @@ import Category from './Category';
 
 export default class CategoryCombination {
     _name: string;
+
     _id: string;
+
     _categories: Map<string, Category>;
 
     static errorMessages = {

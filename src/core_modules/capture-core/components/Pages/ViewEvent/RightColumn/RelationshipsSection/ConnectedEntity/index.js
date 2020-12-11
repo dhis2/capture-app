@@ -20,9 +20,9 @@ export const ConnectedEntity = (props: Props) => {
 
     if (type !== types.TRACKED_ENTITY_INSTANCE) {
         return (
-            <React.Fragment>
+            <>
                 {props.name}
-            </React.Fragment>
+            </>
         );
     }
     return (

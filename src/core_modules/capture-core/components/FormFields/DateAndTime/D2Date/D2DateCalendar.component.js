@@ -28,8 +28,11 @@ const styles = () => ({
 
 class D2DateCalendar extends Component<Props> {
     handleChange: (e: any, dates: ?Array<Date>) => void;
+
     calendarLocaleData: Object;
+
     theme: Object;
+
     displayOptions: Object;
 
     constructor(props: Props) {
@@ -37,7 +40,7 @@ class D2DateCalendar extends Component<Props> {
         this.handleChange = this.handleChange.bind(this);
 
         const projectLocaleData = CurrentLocaleData.get();
-        const currentWidth = this.props.currentWidth;
+        const {currentWidth} = this.props;
 
         this.calendarLocaleData = {
             locale: projectLocaleData.dateFnsLocale,
@@ -102,8 +105,8 @@ class D2DateCalendar extends Component<Props> {
     getMinMaxProps() {
         const minMaxProps: {min?: Date, minDate?: Date, max?: Date, maxDate?: Date} = {};
 
-        const minMoment = this.props.minMoment;
-        const maxMoment = this.props.maxMoment;
+        const {minMoment} = this.props;
+        const {maxMoment} = this.props;
 
         if (minMoment) {
             const minDate = minMoment.toDate();

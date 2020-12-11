@@ -87,7 +87,7 @@ export default function getGeneratedUniqueValuesAsync(
         .getElements()
         .filter(dataElement => dataElement.unique && dataElement.unique.generatable)
         .map(async (dataElement) => {
-            const id = dataElement.id;
+            const {id} = dataElement;
             const cacheItem = getActiveUniqueItemFromCache(id, generatedUniqueValuesCache);
             if (cacheItem) {
                 return {

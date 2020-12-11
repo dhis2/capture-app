@@ -83,8 +83,11 @@ class D2SectionFields extends Component<Props> {
     }
 
     handleUpdateField: (elementId: string, value: any) => void;
+
     formBuilderInstance: ?FormBuilder;
+
     formFields: Array<FieldConfig>;
+
     rulesCompulsoryErrors: { [elementId: string]: boolean };
 
     static defaultProps = {
@@ -105,7 +108,7 @@ class D2SectionFields extends Component<Props> {
     }
 
     rulesIsValid() {
-        const rulesMessages = this.props.rulesMessages;
+        const {rulesMessages} = this.props;
         const errorMessages = Object.keys(rulesMessages)
             .map(id => rulesMessages[id] &&
                 (rulesMessages[id][messageStateKeys.ERROR]))
@@ -124,7 +127,7 @@ class D2SectionFields extends Component<Props> {
     }
 
     isValid(options?: ?{ isCompleting: boolean }) {
-        const formBuilderInstance = this.formBuilderInstance;
+        const {formBuilderInstance} = this;
         if (!formBuilderInstance) {
             log.error(
                 errorCreator(
@@ -141,10 +144,10 @@ class D2SectionFields extends Component<Props> {
     }
 
     validateBasedOnStrategy(options?: ?{ isCompleting: boolean }, formBuilderInstance: FormBuilder) {
-        const validationStrategy = this.props.validationStrategy;
+        const {validationStrategy} = this.props;
         if (validationStrategy === validationStrategies.NONE) {
             return D2SectionFields.validateBaseOnly(formBuilderInstance);
-        } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
+        } if (validationStrategy === validationStrategies.ON_COMPLETE) {
             const isCompleting = options && options.isCompleting;
             if (isCompleting) {
                 return this.validateFull(formBuilderInstance);
@@ -193,7 +196,7 @@ class D2SectionFields extends Component<Props> {
 
     buildRulesCompulsoryErrors() {
         const rulesCompulsory = this.props.rulesCompulsoryFields;
-        const values = this.props.values;
+        const {values} = this.props;
 
         this.rulesCompulsoryErrors = Object.keys(rulesCompulsory)
             .reduce((accCompulsoryErrors, key) => {

@@ -18,7 +18,7 @@ export const addNoteForNewSingleEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.ADD_NEW_EVENT_NOTE),
         map((action) => {
-            const payload = action.payload;
+            const {payload} = action;
             // $FlowFixMe[prop-missing] automated comment
             const userName = getCurrentUser().username;
 

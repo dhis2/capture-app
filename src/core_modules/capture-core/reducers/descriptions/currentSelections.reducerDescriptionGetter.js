@@ -97,7 +97,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [editEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
         const { eventContainer, categoriesData } = action.payload;
-        const event = eventContainer.event;
+        const {event} = eventContainer;
 
         const categories = categoriesData ? categoriesData.reduce((acc, data) => {
             acc[data.categoryId] = data.categoryOption.id;
@@ -126,7 +126,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
         const { eventContainer, categoriesData } = action.payload;
-        const event = eventContainer.event;
+        const {event} = eventContainer;
 
         const categories = categoriesData ? categoriesData.reduce((acc, data) => {
             acc[data.categoryId] = data.categoryOption.id;

@@ -25,9 +25,9 @@ const EventsListConnectivityWrapper = (props: Props) => {
                         );
                     }
                     return (
-                        <React.Fragment>
+                        <>
                             <WorkingListsWithHeader />
-                        </React.Fragment>
+                        </>
                     );
                 })()
             }

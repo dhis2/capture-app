@@ -21,7 +21,7 @@ export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(orgUnitListActions.SEARCH_ORG_UNITS),
         switchMap((action) => {
-            const searchText = action.payload.searchText;
+            const {searchText} = action.payload;
             return getD2()
                 .models
                 .organisationUnits
@@ -46,7 +46,7 @@ export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
                 return setSearchRootsFailed(RETRIEVE_ERROR);
             }
 
-            const regUnitArray = resultContainer.regUnitArray;
+            const {regUnitArray} = resultContainer;
             setStoreRoots('regUnit', regUnitArray);
             const regUnits = resultContainer.regUnitArray
                 .map(unit => ({

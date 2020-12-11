@@ -30,6 +30,7 @@ class Index extends React.Component<Props> {
             </TrackerProgramHandler>
         );
     }
+
     render() {
         const { isUserInteractionInProgress } = this.props;
         return (

@@ -36,12 +36,14 @@ type State = {
 
 class RegisterTei extends React.Component<Props, State> {
     args: Array<any>;
+
     constructor(props: Props) {
         super(props);
         this.state = {
             duplicatesOpen: false,
         };
     }
+
     handleSaveAttempt = (...args) => {
         if (this.props.possibleDuplicates) {
             this.args = args;
@@ -83,10 +85,10 @@ class RegisterTei extends React.Component<Props, State> {
 
     getActions() {
         return (
-            <React.Fragment>
+            <>
                 {this.getCancelButton()}
                 {this.getSaveButton()}
-            </React.Fragment>
+            </>
         );
     }
 

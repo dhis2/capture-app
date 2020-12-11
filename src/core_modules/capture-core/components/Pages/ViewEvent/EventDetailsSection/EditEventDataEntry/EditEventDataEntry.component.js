@@ -16,7 +16,7 @@ import {
     placements,
     withCleanUpHOC,
     withBrowserBackWarning,
-} from '../../../../../components/DataEntry';
+} from "../../../../DataEntry";
 import {
     withInternalChangeHandler,
     withLabel,
@@ -167,18 +167,18 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
 
 const buildGeometrySettingsFn = () => ({
     isApplicable: (props: Object) => {
-        const featureType = props.formFoundation.featureType;
+        const {featureType} = props.formFoundation;
         return ['Polygon', 'Point'].includes(featureType);
     },
     getComponent: (props: Object) => {
-        const featureType = props.formFoundation.featureType;
+        const {featureType} = props.formFoundation;
         if (featureType === 'Polygon') {
             return polygonComponent;
         }
         return pointComponent;
     },
     getComponentProps: (props: Object) => {
-        const featureType = props.formFoundation.featureType;
+        const {featureType} = props.formFoundation;
         if (featureType === 'Polygon') {
             return createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
@@ -287,7 +287,9 @@ const dataEntrySectionDefinitions = {
 
 class EditEventDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
+
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
+
     constructor(props: Props) {
         super(props);
         this.fieldOptions = {
@@ -296,9 +298,11 @@ class EditEventDataEntry extends Component<Props> {
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
+
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
+
     render() {
         const {
             onUpdateField,
@@ -309,7 +313,7 @@ class EditEventDataEntry extends Component<Props> {
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
-                id={'singleEvent'}
+                id="singleEvent"
                 onUpdateFormField={onUpdateField}
                 onUpdateFormFieldAsync={onStartAsyncUpdateField}
                 fieldOptions={this.fieldOptions}

@@ -149,7 +149,7 @@ class Relationships extends React.Component<Props> {
     }
 
     shouldHighlightRelationship = (relationship: Relationship) => {
-        const highlightRelationshipId = this.props.highlightRelationshipId;
+        const {highlightRelationshipId} = this.props;
         return highlightRelationshipId && highlightRelationshipId === relationship.clientId;
     }
 

@@ -32,6 +32,6 @@ function verifyMinorCacheVersion(appCacheVersionAsString) {
 }
 
 const appVersion = packageDesc.version;
-const cacheVersion = packageDesc.cacheVersion;
+const {cacheVersion} = packageDesc;
 verifyMajorCacheVersion(appVersion);
 verifyMinorCacheVersion(cacheVersion);

@@ -62,10 +62,15 @@ class D2Date extends React.Component<Props, State> {
     }
 
     containerInstance: ?HTMLElement;
+
     handleTextFieldFocus: () => void;
+
     handleDateSelected: (value: string) => void;
+
     handleTextFieldBlur: (value: string) => void;
+
     hidePopover: () => void;
+
     handleDocumentClick: (event: SyntheticEvent<any>) => void;
 
     constructor(props: Props) {

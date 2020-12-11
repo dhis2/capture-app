@@ -69,7 +69,7 @@ class ProgramSelector extends React.Component<Props> {
             }));
 
     getProgramIcon(program: Program) {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         return program.icon.data
             ? (
                 <div

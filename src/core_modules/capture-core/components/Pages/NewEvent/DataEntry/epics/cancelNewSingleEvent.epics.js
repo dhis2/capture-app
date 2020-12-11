@@ -25,7 +25,7 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
             if (!listSelections) {
                 return cancelNewEventInitializeWorkingLists();
             }
-            const currentSelections = state.currentSelections;
+            const {currentSelections} = state;
             if (currentSelections.complete && !isSelectionsEqual(listSelections, currentSelections)) {
                 return cancelNewEventInitializeWorkingLists();
             }
@@ -44,7 +44,7 @@ export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store
         ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
             const state = store.value;
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
+            const {programId} = state.currentSelections;
+            const {orgUnitId} = state.currentSelections;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
         }));

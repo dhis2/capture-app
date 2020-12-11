@@ -95,7 +95,7 @@ const TemplateMaintenance = (props: Props, ref) => {
     }));
 
     return (
-        <React.Fragment>
+        <>
             <ExistingTemplateDialog
                 {...passOnProps}
                 open={mode === dialogModes.REPLACE}
@@ -117,7 +117,7 @@ const TemplateMaintenance = (props: Props, ref) => {
                 open={mode === dialogModes.SHARING}
                 templateId={currentTemplate.id}
             />
-        </React.Fragment>
+        </>
     );
 };
 

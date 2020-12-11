@@ -102,6 +102,7 @@ class D2File extends Component<Props> {
             });
         }
     }
+
     handleButtonClick = () => {
         this.hiddenFileSelectorRef.click();
     }
@@ -111,7 +112,7 @@ class D2File extends Component<Props> {
     }
 
     getFileUrl = () => {
-        const value = this.props.value;
+        const {value} = this.props;
         if (value) {
             return value.url || inMemoryFileStore.get(value.value);
         }
@@ -145,7 +146,7 @@ class D2File extends Component<Props> {
                                     </div>
                                     <div className={classes.innerContainer}>{i18n.t('Uploading file')}</div>
                                 </div>);
-                        } else if (value) {
+                        } if (value) {
                             return (
                                 <div className={containerClass}>
                                     <div className={selectedFileTextContainerClass}>

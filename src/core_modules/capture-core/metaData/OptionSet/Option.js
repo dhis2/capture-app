@@ -8,9 +8,13 @@ export type Value = string | number | boolean | {};
 
 export default class Option {
     _id: string;
+
     _value: Value;
+
     _text: string;
+
     _description: ?string;
+
     _icon: ?Icon;
 
     constructor(initFn?: (_this: Option) => void) {
@@ -28,6 +32,7 @@ export default class Option {
     set value(value: Value) {
         this._value = value;
     }
+
     get value(): Value {
         return this._value;
     }
@@ -35,6 +40,7 @@ export default class Option {
     set text(text: string) {
         this._text = text;
     }
+
     get text(): string {
         return this._text;
     }
@@ -42,6 +48,7 @@ export default class Option {
     set description(description: ?string) {
         this._description = description;
     }
+
     get description(): ?string {
         return this._description;
     }
@@ -49,6 +56,7 @@ export default class Option {
     set icon(icon: ?Icon) {
         this._icon = icon;
     }
+
     get icon(): ?Icon {
         return this._icon;
     }

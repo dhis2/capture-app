@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import {
     Pagination,
 } from 'capture-ui';
-import withData from '../Pagination/withData';
+import withData from "./withData";
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import withRowsPerPageSelector from '../../../../Pagination/withRowsPerPageSelector';
 

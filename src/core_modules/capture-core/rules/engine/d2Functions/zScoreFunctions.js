@@ -600,8 +600,8 @@ const getZScoreFromMap = (key, value, map) => {
     if (value > sdArray[6]) { return 3.5; }
 
     const deviationLimits = findDeviationLimits(value, sdArray);
-    const higherLimitIn = deviationLimits.higherLimitIn;
-    const lowerLimitIn = deviationLimits.lowerLimitIn;
+    const {higherLimitIn} = deviationLimits;
+    const {lowerLimitIn} = deviationLimits;
 
     // Find the distance between the two SDs in the common unit.
     const distance = sdArray[higherLimitIn] - sdArray[lowerLimitIn];

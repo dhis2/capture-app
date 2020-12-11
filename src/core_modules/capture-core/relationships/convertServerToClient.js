@@ -19,7 +19,7 @@ const getClientConstraintByType = {
         };
     },
     PROGRAM_STAGE_INSTANCE: (constraint) => {
-        const event = constraint.event;
+        const {event} = constraint;
         const program = programCollection.get(event.program);
         if (!program) {
             return null;

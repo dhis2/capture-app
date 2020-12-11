@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { CoordinateField as UICoordinateField } from 'capture-ui';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { orientations } from '../../../New';
+import { orientations } from "../..";
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -66,6 +66,7 @@ type Props = {
 
 class CoordinateField extends React.Component<Props> {
     dialogClasses: Object;
+
     passOnClasses: Object;
 
     constructor(props) {

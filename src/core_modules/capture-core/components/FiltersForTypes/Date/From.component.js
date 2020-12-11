@@ -17,7 +17,9 @@ class FromDateFilter extends Component<Props> {
     static getValueObject(value: string) {
         return { from: value.trim() };
     }
+
     displayOptions: Object;
+
     constructor(props: Props) {
         super(props);
         this.displayOptions = {

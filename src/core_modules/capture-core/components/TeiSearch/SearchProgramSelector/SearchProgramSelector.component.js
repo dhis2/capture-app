@@ -29,6 +29,7 @@ class SearchProgramSelector extends React.Component<Props> {
     onSelectProgram = (programId: ?string) => {
         this.props.onSetProgram(this.props.searchId, programId);
     }
+
     render() {
         return (
             <SearchProgramField

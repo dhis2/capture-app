@@ -3,7 +3,7 @@ import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { PolygonField as UIPolygonField } from 'capture-ui';
 import { Dialog, DialogTitle } from '@material-ui/core';
-import { orientations } from '../../../New';
+import { orientations } from "../..";
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -33,6 +33,7 @@ type Props = {
 
 class PolygonField extends React.Component<Props> {
     dialogClasses: Object;
+
     passOnClasses: Object;
 
     constructor(props) {

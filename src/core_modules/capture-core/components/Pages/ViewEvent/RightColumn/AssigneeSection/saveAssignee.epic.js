@@ -11,8 +11,8 @@ export const saveAssigneeEpic = (action$: InputObservable, store: ReduxStore) =>
         ofType(actionTypes.VIEW_EVENT_ASSIGNEE_SET),
         map(() => {
             const state = store.value;
-            const eventId = state.viewEventPage.eventId;
-            const eventContainer = state.viewEventPage.loadedValues.eventContainer;
+            const {eventId} = state.viewEventPage;
+            const {eventContainer} = state.viewEventPage.loadedValues;
             const { event: clientMainValues, values: clientValues } = eventContainer;
             const program = getEventProgramThrowIfNotFound(clientMainValues.programId);
             const formFoundation = program.stage.stageForm;

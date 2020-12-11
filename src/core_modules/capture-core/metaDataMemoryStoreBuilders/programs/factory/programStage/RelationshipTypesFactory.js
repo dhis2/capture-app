@@ -9,9 +9,11 @@ import { RelationshipType } from '../../../../metaData';
 
 class RelationshipTypesFactory {
     static RELATIONSHIP_ENTITY_NAME = 'PROGRAM_STAGE_INSTANCE';
+
     cachedRelationshipTypes: Array<CachedRelationshipType>;
 
     currentProgramId: string;
+
     currentProgramStageId: string;
 
     constructor(

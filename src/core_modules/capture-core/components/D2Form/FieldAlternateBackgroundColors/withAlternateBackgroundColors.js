@@ -25,6 +25,7 @@ type Field = {
 export default () => (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
     class AlternateBackgroundColorsHOC extends React.Component<Props> {
         hiddenFieldsCount: number;
+
         getContainerProps = (index: number, total: number, field: Field) => {
             if (index === 0) {
                 this.hiddenFieldsCount = 0;

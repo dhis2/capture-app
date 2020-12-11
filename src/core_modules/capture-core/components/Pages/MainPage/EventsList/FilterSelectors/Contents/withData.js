@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // eslint-disable-next-line complexity
 const mapStateToProps = (state: ReduxState, props: { listId: string, id: string }) => {
-    const listId = props.listId;
+    const {listId} = props;
 
     const nextValue = state.workingListsMeta[listId] &&
         state.workingListsMeta[listId].next &&

@@ -56,6 +56,7 @@ const getUrlSyncer = (
         }
 
         queuedUpdate: ?Object;
+
         componentDidMount() {
             this.triggerSyncCallback();
         }
@@ -87,7 +88,7 @@ const getUrlSyncer = (
         }
 
         getLocationParams(syncSpecifications: Array<SyncSpecification>) {
-            const urlParams = this.props.urlParams;
+            const {urlParams} = this.props;
             return syncSpecifications
                 .map((spec) => {
                     const key = spec.urlKey;

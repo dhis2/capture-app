@@ -73,6 +73,7 @@ const getStyles = (theme: Theme) => ({
 
 class TeiRelationshipSearchResults extends React.Component<Props> {
     getAttributes: Function;
+
     constructor(props: Props) {
         super(props);
         this.getAttributes = makeAttributesSelector();
@@ -83,7 +84,7 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     }
 
     getItemActions = (itemProps: Object) => {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         return (
             <div className={classes.itemActionsContainer}>
                 <Button
@@ -100,7 +101,7 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         const attributes = this.getAttributes(this.props);
         const { teis, trackedEntityTypeName } = this.props;
         return (
-            <React.Fragment>
+            <>
                 {this.renderTopSection()}
                 <CardList
                     items={teis}
@@ -109,13 +110,13 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
                     getCustomItemBottomElements={itemProps => this.getItemActions(itemProps)}
                 />
                 {this.renderPager()}
-            </React.Fragment>
+            </>
         );
     }
 
     getSearchValues = () => {
         const { searchValues, searchGroup, teis, classes } = this.props;
-        const searchForm = searchGroup.searchForm;
+        const {searchForm} = searchGroup;
         const attributeValues = Object.keys(searchValues)
             .filter(key => searchValues[key] !== null)
             .map((key) => {

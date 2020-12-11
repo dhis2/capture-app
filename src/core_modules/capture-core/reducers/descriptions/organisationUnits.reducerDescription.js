@@ -12,13 +12,13 @@ import { actionTypes as initActionTypes } from '../../init/init.actions';
 export const organisationUnitDesc = createReducerDescription({
     [editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state, action) => {
         const newState = { ...state };
-        const orgUnit = action.payload.orgUnit;
+        const {orgUnit} = action.payload;
         newState[orgUnit.id] = orgUnit;
         return newState;
     },
     [viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state, action) => {
         const newState = { ...state };
-        const orgUnit = action.payload.orgUnit;
+        const {orgUnit} = action.payload;
         newState[orgUnit.id] = orgUnit;
         return newState;
     },

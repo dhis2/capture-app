@@ -101,6 +101,7 @@ class D2Image extends Component<Props> {
             });
         }
     }
+
     handleButtonClick = () => {
         this.hiddenimageSelectorRef.click();
     }
@@ -110,7 +111,7 @@ class D2Image extends Component<Props> {
     }
 
     getimageUrl = () => {
-        const value = this.props.value;
+        const {value} = this.props;
         if (value) {
             return value.url || inMemoryFileStore.get(value.value);
         }
@@ -147,7 +148,7 @@ class D2Image extends Component<Props> {
                                     </div>
                                     <div className={classes.innerContainer}>{i18n.t('Uploading image')}</div>
                                 </div>);
-                        } else if (value) {
+                        } if (value) {
                             return (
                                 <div className={containerClass}>
                                     {!isVertical &&

@@ -201,7 +201,7 @@ export const rulesEffectsDisabledFieldsDesc = createReducerDescription({
 export const ruleEffectsOptionsVisibilityDesc = createReducerDescription({
     [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
-        const rulesEffects = action.payload.rulesEffects;
+        const {rulesEffects} = action.payload;
         if (action.payload.rulesEffects) {
             newState[action.payload.formId] = {
                 hideOptions: rulesEffects[effectActions.HIDE_OPTION],

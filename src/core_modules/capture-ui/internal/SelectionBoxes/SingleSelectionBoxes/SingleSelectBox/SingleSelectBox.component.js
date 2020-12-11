@@ -24,6 +24,7 @@ const keyboardKeys = {
 
 class SingleSelectBox extends React.Component<Props> {
     isSpaceClickWhenSelected: ?boolean; // Pressing space when the radio is already selected, triggers both onKeyPress and onClick. This variable is used to prevent the onClick event in these circumstances.
+
     handleSelect = () => {
         if (this.isSpaceClickWhenSelected) {
             this.isSpaceClickWhenSelected = false;

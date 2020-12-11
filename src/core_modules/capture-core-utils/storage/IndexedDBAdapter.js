@@ -194,6 +194,7 @@ class IndexedDBAdapter {
             };
         });
     }
+
     /*
         onBeforeUpgrade: a callback method, getting an object with a "get" property as argument. The "get" property can be used to retrieve something from IndexedDB
         onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument. The "set" property can be used to set something in IndexedDB
@@ -715,7 +716,7 @@ class IndexedDBAdapter {
                 return;
             }
             try {
-                const db = this.db;
+                const {db} = this;
                 IndexedDBAdapter.closeDB(db);
                 this.db = null;
                 resolve();

@@ -47,6 +47,7 @@ type ContainerProps = {
 
 class DataEntryField extends React.Component<Props> {
     gotoInstance: ?HTMLDivElement;
+
     validateAndScrollToIfFailed() {
         const isValid = this.props.valueMeta && this.props.valueMeta.isValid;
 
@@ -114,8 +115,8 @@ class DataEntryField extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: ReduxState, props: ContainerProps) => {
-    const propName = props.propName;
-    const itemId = state.dataEntries[props.dataEntryId].itemId;
+    const {propName} = props;
+    const {itemId} = state.dataEntries[props.dataEntryId];
     const key = getDataEntryKey(props.dataEntryId, itemId);
 
     return {

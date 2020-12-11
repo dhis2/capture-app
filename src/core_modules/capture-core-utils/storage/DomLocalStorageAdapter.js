@@ -55,7 +55,9 @@ class Indexer {
 
 class DomLocalStorageAdapter {
     static storage = window.localStorage;
+
     static adapterName = 'DomLocalStorageAdapter';
+
     static CACHEVERSIONKEY = '__VERSION__';
 
     static isSupported() {
@@ -247,6 +249,7 @@ class DomLocalStorageAdapter {
             this.indexer[store].destroy();
         });
     }
+
     destroy() {
         this.opened = false;
         // eslint-disable-next-line no-underscore-dangle

@@ -21,7 +21,7 @@ type Props = {
 const ExistingTemplateContents = (props: Props) => {
     const { onSaveTemplate, onClose, classes } = props;
     return (
-        <React.Fragment>
+        <>
             <DialogTitle>{i18n.t('Save')}</DialogTitle>
             <DialogContent />
             <DialogActions
@@ -34,7 +34,7 @@ const ExistingTemplateContents = (props: Props) => {
                     {i18n.t('Save')}
                 </Button>
             </DialogActions>
-        </React.Fragment>
+        </>
     );
 };
 

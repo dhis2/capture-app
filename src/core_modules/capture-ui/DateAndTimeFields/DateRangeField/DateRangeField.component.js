@@ -31,6 +31,7 @@ const inputKeys = {
 
 class DateRangeField extends React.Component<Props> {
     touchedFields: Set<string>;
+
     constructor(props: Props) {
         super(props);
         this.touchedFields = new Set();

@@ -45,7 +45,7 @@ const NewTemplateContents = (props: Props) => {
     }, [name, onSaveTemplate]);
 
     return (
-        <React.Fragment>
+        <>
             <DialogTitle>{i18n.t('Save As view')}</DialogTitle>
             <DialogContent>
                 <NewTemplateTextField
@@ -53,7 +53,7 @@ const NewTemplateContents = (props: Props) => {
                     className={classes.input}
                     label={i18n.t('View name')}
                     error={!!error}
-                    dataTest={'view-name'}
+                    dataTest="view-name"
                     initialFocus
                     required
                     name="viewName"
@@ -75,7 +75,7 @@ const NewTemplateContents = (props: Props) => {
                     {i18n.t('Save')}
                 </Button>
             </DialogActions>
-        </React.Fragment>
+        </>
     );
 };
 

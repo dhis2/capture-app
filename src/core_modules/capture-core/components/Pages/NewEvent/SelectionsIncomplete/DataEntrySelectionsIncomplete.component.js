@@ -65,6 +65,7 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
             </div>
         );
     }
+
     getText() {
         let text;
         const { isProgramSelected, isOrgUnitSelected } = this.props;
@@ -81,6 +82,7 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
 
         return text;
     }
+
     render() {
         const { classes, onCancel } = this.props;
         return (

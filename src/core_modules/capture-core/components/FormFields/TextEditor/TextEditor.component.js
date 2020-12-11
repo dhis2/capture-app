@@ -40,6 +40,7 @@ class TextEditor extends React.Component<Props, State> {
     static defaultProps = {
         format: 'html',
     }
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -60,7 +61,7 @@ class TextEditor extends React.Component<Props, State> {
         // $FlowFixMe[prop-missing] automated comment
         const { value, format } = props;
         const formattedValue = value || '';
-        const editorValue = this.state.editorValue;
+        const {editorValue} = this.state;
         if (editorStringValue !== formattedValue) {
             this.setState({
                 editorValue: editorValue.setContentFromString(formattedValue, format),
@@ -70,7 +71,7 @@ class TextEditor extends React.Component<Props, State> {
 
     onChange = (editorValue: any) => {
         this.setState({ editorValue });
-        const onChange = this.props.onChange;
+        const {onChange} = this.props;
         if (onChange) {
             onChange(this.getStringValue());
         }
@@ -90,8 +91,9 @@ class TextEditor extends React.Component<Props, State> {
         };
         return toolbarConfig;
     }
+
     onBlur = () => {
-        const onBlur = this.props.onBlur;
+        const {onBlur} = this.props;
         if (onBlur) {
             const value = this.getStringValue();
             const convertedValue = value === editorDefaultValue ? null : value;

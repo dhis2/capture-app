@@ -18,7 +18,7 @@ const TextInput = (props: Props) => {
     const { multiLine, classes, inputRef, style, ...passOnProps } = props;
 
     return (
-        <React.Fragment>
+        <>
             {
                 multiLine ?
                     // $FlowFixMe[cannot-spread-inexact] automated comment
@@ -36,7 +36,7 @@ const TextInput = (props: Props) => {
                         {...passOnProps}
                     />
             }
-        </React.Fragment>
+        </>
     );
 };
 

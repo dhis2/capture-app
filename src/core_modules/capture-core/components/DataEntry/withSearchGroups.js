@@ -44,6 +44,7 @@ const getSearchGroupsHOC = (
     // eslint-disable-next-line react/no-multi-comp
     class SearchGroupsHOC extends React.Component<Props> {
         searchGroups: Array<InputSearchGroup>;
+
         constructor(props: Props) {
             super(props);
             this.searchGroups = onGetSearchGroups(this.props);
@@ -52,7 +53,7 @@ const getSearchGroupsHOC = (
         getFilterActions(
         ) {
             const { dataEntryKey } = this.props;
-            const searchGroups = this.searchGroups;
+            const {searchGroups} = this;
             const searchContext = (onGetSearchContext && onGetSearchContext(this.props)) || {};
 
             const searchUids = searchGroups

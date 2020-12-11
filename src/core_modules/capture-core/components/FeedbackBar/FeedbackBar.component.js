@@ -43,6 +43,7 @@ class Index extends React.Component<Props> {
         super(props);
         this.handleClose = this.handleClose.bind(this);
     }
+
     static CLICKAWAY_KEY = 'clickaway';
 
     static ANCHOR_ORIGIN = {
@@ -95,7 +96,7 @@ class Index extends React.Component<Props> {
         const isSnackBarOpen = isDefined(message) && !displayType;
         const isDialogOpen = isDefined(message) && displayType === 'dialog';
         return (
-            <React.Fragment>
+            <>
                 <SnackBar
                     open={isSnackBarOpen}
                     anchorOrigin={Index.ANCHOR_ORIGIN}
@@ -124,7 +125,7 @@ class Index extends React.Component<Props> {
                         </Button>
                     </DialogActions>
                 </Dialog>
-            </React.Fragment>
+            </>
         );
     }
 }

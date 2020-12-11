@@ -44,9 +44,13 @@ type State = {
 const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?OptionFn) =>
     class CompleteButtonBuilder extends React.Component<Props, State> {
         innerInstance: any;
+
         handleCompletionAttempt: () => void;
+
         handleCloseDialog: () => void;
+
         handleCompleteDialog: () => void;
+
         constructor(props: Props) {
             super(props);
             this.handleCompletionAttempt = this.handleCompletionAttempt.bind(this);
@@ -166,7 +170,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
                 }
 
                 const foundation = stageContainer.stage.stageForm;
-                const warnings = this.props.warnings;
+                const {warnings} = this.props;
 
                 return warnings ?
                     // $FlowFixMe[missing-annot] automated comment

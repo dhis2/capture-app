@@ -63,6 +63,7 @@ class ListWrapperMenu extends React.Component<Props, State> {
             dialogOpen: undefined,
         };
     }
+
     renderPopperAction = (togglePopper: Function) => (
         <IconButton onClick={togglePopper}>
             <MoreHoriz />
@@ -152,7 +153,7 @@ class ListWrapperMenu extends React.Component<Props, State> {
 
     render() {
         return (
-            <React.Fragment>
+            <>
                 <Popper
                     getPopperAction={this.renderPopperAction}
                     getPopperContent={this.renderPopperContent}
@@ -162,7 +163,7 @@ class ListWrapperMenu extends React.Component<Props, State> {
                     onClose={() => { this.closeDialog(); }}
                     listId={this.props.listId}
                 />
-            </React.Fragment>
+            </>
         );
     }
 }

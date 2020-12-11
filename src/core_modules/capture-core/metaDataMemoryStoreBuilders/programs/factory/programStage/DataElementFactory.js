@@ -48,6 +48,7 @@ class DataElementFactory {
     }
 
     locale: ?string;
+
     optionSetFactory: OptionSetFactory;
 
     constructor(

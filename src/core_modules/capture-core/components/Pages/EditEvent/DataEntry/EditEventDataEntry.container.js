@@ -20,7 +20,7 @@ import { startRunRulesPostUpdateField } from '../../../DataEntry';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
 const getFormFoundation = (state: ReduxState) => {
-    const programId = state.currentSelections.programId;
+    const {programId} = state.currentSelections;
     const program = programCollection.get(programId);
     if (!program) {
         log.error(errorCreator('programId not found')({ method: 'getFormFoundation' }));
@@ -29,7 +29,7 @@ const getFormFoundation = (state: ReduxState) => {
 
 
     // $FlowFixMe[prop-missing] automated comment
-    const stage = program.stage;
+    const {stage} = program;
     if (!stage) {
         log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
         return null;

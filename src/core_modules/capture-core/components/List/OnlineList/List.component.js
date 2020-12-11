@@ -104,10 +104,12 @@ type Props = {
 
 class List extends React.Component<Props> {
     columnHeaderInstances: Array<HTMLElement>;
+
     constructor(props: Props) {
         super(props);
         this.columnHeaderInstances = [];
     }
+
     static typesWithAscendingInitialDirection = [
         // $FlowFixMe[prop-missing] automated comment
         elementTypes.TEXT,
@@ -130,6 +132,7 @@ class List extends React.Component<Props> {
         // $FlowFixMe[prop-missing] automated comment
         elementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
+
     getSortHandler = (id: string) => (direction: string) => {
         this.props.onSort(this.props.listId, id, direction);
     }
@@ -171,8 +174,8 @@ class List extends React.Component<Props> {
     }
 
     renderHeaderRow(visibleColumns: Array<Column>) {
-        const sortById = this.props.sortById;
-        const sortByDirection = this.props.sortByDirection;
+        const {sortById} = this.props;
+        const {sortByDirection} = this.props;
 
         const headerCells = visibleColumns
             .map((column, index) => (
@@ -251,7 +254,7 @@ class List extends React.Component<Props> {
         }
 
         return (
-            <React.Fragment>
+            <>
                 {
                     dataSource
                         .map((row) => {
@@ -280,7 +283,7 @@ class List extends React.Component<Props> {
                             );
                         })
                 }
-            </React.Fragment>
+            </>
         );
     }
 

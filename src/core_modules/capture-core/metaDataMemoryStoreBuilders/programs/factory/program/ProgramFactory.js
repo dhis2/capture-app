@@ -36,10 +36,15 @@ import type
 
 class ProgramFactory {
     programStageFactory: ProgramStageFactory;
+
     enrollmentFactory: EnrollmentFactory;
+
     searchGroupFactory: SearchGroupFactory;
+
     dataElementFactory: DataElementFactory;
+
     categoryFactory: CategoryFactory;
+
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
 
     constructor(

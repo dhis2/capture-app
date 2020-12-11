@@ -37,6 +37,7 @@ export default () =>
     (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
         class CreateOptionsIconElementHOC extends React.Component<Props> {
             options: Array<{icon: React.Node}>;
+
             constructor(props: Props) {
                 super(props);
                 // $FlowFixMe

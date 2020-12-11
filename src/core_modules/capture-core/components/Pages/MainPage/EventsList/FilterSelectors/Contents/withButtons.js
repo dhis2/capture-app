@@ -27,7 +27,9 @@ type Props = {
 export default () => (InnerComponent: React.ComponentType<any>) =>
     withStyles(getStyles)(class FilterContentsButtons extends React.Component<Props> {
         filterTypeInstance: UpdatableFilterContent<any>;
+
         updateButtonInstance: HTMLButtonElement;
+
         closeButtonInstance: HTMLButtonElement;
 
         update = (commitValue?: any) => {
@@ -69,7 +71,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
             const { onUpdate, onClose, classes, ...passOnProps } = this.props; //eslint-disable-line
 
             return (
-                <React.Fragment>
+                <>
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         filterTypeRef={this.setFilterTypeInstance}
@@ -100,7 +102,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                             {i18n.t('Close')}
                         </Button>
                     </div>
-                </React.Fragment>
+                </>
             );
         }
     });

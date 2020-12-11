@@ -8,9 +8,13 @@ import RelationshipType from '../RelationshipType/RelationshipType';
 
 export default class ProgramStage {
     _id: string;
+
     _name: string;
+
     _stageForm: RenderFoundation;
+
     _relationshipTypes: Array<RelationshipType>;
+
     _enableUserAssignment: boolean;
 
     constructor(initFn: ?(_this: ProgramStage) => void) {

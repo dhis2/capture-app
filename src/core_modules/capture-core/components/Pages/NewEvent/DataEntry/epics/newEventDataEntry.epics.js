@@ -51,7 +51,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
         ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH),
         map(() => {
             const state = store.value;
-            const programId = state.currentSelections.programId;
+            const {programId} = state.currentSelections;
 
             // cancel if tracker program
             const program = getProgramFromProgramIdThrowIfNotFound(programId);
@@ -59,7 +59,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
                 return cancelOpenNewEventInDataEntry();
             }
 
-            const orgUnitId = state.currentSelections.orgUnitId;
+            const {orgUnitId} = state.currentSelections;
             const orgUnit = state.organisationUnits[orgUnitId];
             const metadataContainer = getProgramAndStageFromProgramId(programId);
             if (metadataContainer.error) {
@@ -93,7 +93,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             return page === 'newEvent';
         }),
         filter((action) => {
-            const type = action.type;
+            const {type} = action;
             const triggeringActionType = action.payload && action.payload.triggeringActionType;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
                 return (!!triggeringActionType) && [
@@ -109,14 +109,14 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             if (!selectionsComplete) {
                 return cancelOpenNewEventInDataEntry();
             }
-            const programId = state.currentSelections.programId;
+            const {programId} = state.currentSelections;
             // cancel if tracker program
             const program = getProgramFromProgramIdThrowIfNotFound(programId);
             if (program instanceof TrackerProgram) {
                 return cancelOpenNewEventInDataEntry();
             }
 
-            const orgUnitId = state.currentSelections.orgUnitId;
+            const {orgUnitId} = state.currentSelections;
             const orgUnit = state.organisationUnits[orgUnitId];
             const metadataContainer = getProgramAndStageFromProgramId(programId);
             if (metadataContainer.error) {
@@ -149,7 +149,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         }),
         filter((action) => {
             // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATED and the underlying action is not SET_ORG_UNIT or SELECTIONS_FROM_URL_VALID
-            const type = action.type;
+            const {type} = action;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
                 const triggeringActionType = action.payload && action.payload.triggeringActionType;
                 if (![lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID, lockedSelectorActionTypes.ORG_UNIT_ID_SET]
@@ -165,7 +165,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             }
 
             // cancel if tracker program
-            const programId = state.currentSelections.programId;
+            const {programId} = state.currentSelections;
             const program = getProgramFromProgramIdThrowIfNotFound(programId);
             return !(program instanceof TrackerProgram);
         }),
@@ -183,10 +183,10 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
 const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
-    const programId = state.currentSelections.programId;
+    const {programId} = state.currentSelections;
     const metadataContainer = getProgramAndStageFromProgramId(programId);
 
-    const orgUnitId = state.currentSelections.orgUnitId;
+    const {orgUnitId} = state.currentSelections;
     const orgUnit = state.organisationUnits[orgUnitId];
 
     let rulesActions;

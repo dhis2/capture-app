@@ -12,7 +12,7 @@ const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 const subValueGetterByElementType = {
     // $FlowFixMe[prop-missing] automated comment
     [elementTypeKeys.IMAGE]: (value: any, teiId: string, attributeId: string) => {
-        const baseUrl = config.baseUrl;
+        const {baseUrl} = config;
         return getApi().get(`fileResources/${value}`)
             .then(res =>
                 ({

@@ -103,7 +103,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
     }
 
     onSetCoordinate = () => {
-        const position = this.state.position;
+        const {position} = this.state;
         const value = position && position.length === 2 ? {
             latitude: position[0],
             longitude: position[1],

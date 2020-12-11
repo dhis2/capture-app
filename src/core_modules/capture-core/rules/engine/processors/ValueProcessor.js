@@ -19,6 +19,7 @@ export default class ValueProcessor {
     }
 
     converterObject: IConvertInputRulesValue;
+
     processValue: (value: any, type: $Values<typeof typeKeys>) => any;
 
     constructor(converterObject: IConvertInputRulesValue) {

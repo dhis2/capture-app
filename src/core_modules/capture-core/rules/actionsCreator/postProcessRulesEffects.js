@@ -95,7 +95,7 @@ function buildEffectsHierarchy(effects: Array<OutputEffect>) {
         const actionType = effect.type;
         accEffectsObject[actionType] = accEffectsObject[actionType] || {};
 
-        const id = effect.id;
+        const {id} = effect;
 
         // $FlowFixMe[incompatible-use] automated comment
         accEffectsObject[actionType][id] = accEffectsObject[actionType][id] || [];

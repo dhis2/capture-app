@@ -19,15 +19,15 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map((action) => {
             const state = store.value;
-            const payload = action.payload;
+            const {payload} = action;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
-            const eventId = state.dataEntries[payload.dataEntryId].eventId;
+            const {eventId} = state.dataEntries[payload.dataEntryId];
 
             const formValues = state.formsValues[dataEntryKey];
             const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
             const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
             const prevEventMainData = state.events[eventId];
-            const formFoundation = payload.formFoundation;
+            const {formFoundation} = payload;
 
             const { formClientValues, dataEntryClientValues } = convertDataEntryToClientValues(
                 formFoundation,
@@ -63,7 +63,7 @@ export const saveEditEventLocationChangeEpic = (action$: InputObservable, store:
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
             const state = store.value;
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
+            const {programId} = state.currentSelections;
+            const {orgUnitId} = state.currentSelections;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
         }));

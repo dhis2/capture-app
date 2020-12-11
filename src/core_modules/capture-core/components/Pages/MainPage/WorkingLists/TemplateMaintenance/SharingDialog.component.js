@@ -25,7 +25,7 @@ const SharingDialog = (props: Props) => {
             open={open}
             id={templateId}
             onRequestClose={onClose}
-            type={'eventFilter'}
+            type="eventFilter"
             d2={getD2()}
             className={classes.dialog}
         />

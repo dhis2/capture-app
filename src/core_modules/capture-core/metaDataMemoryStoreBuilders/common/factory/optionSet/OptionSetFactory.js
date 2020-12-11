@@ -49,8 +49,11 @@ class OptionSetFactory {
     }
 
     cachedOptionSets: Map<string, CachedOptionSet>;
+
     cachedOptionGroups: Array<CachedOptionGroup>;
+
     locale: ?string;
+
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
         locale: ?string,

@@ -22,8 +22,8 @@ function getAssignee(clientAssignee: ?Object) {
 
 export const loadViewEventDataEntry =
     async (eventContainer: ClientEventContainer, orgUnit: Object, foundation: RenderFoundation, program: Program) => {
-        const dataEntryId = viewEventIds.dataEntryId;
-        const itemId = viewEventIds.itemId;
+        const {dataEntryId} = viewEventIds;
+        const {itemId} = viewEventIds;
         const dataEntryPropsToInclude = [
             {
                 id: 'eventDate',

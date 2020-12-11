@@ -85,9 +85,13 @@ type State = {
 
 class OrgUnitSelector extends Component<Props, State> {
     handleShowWarning: () => void;
+
     handleClose: () => void;
+
     handleClick: (orgUnit: Object) => void;
+
     handleReset: () => void;
+
     constructor(props) {
         super(props);
 

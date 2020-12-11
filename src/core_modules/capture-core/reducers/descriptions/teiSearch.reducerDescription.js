@@ -33,8 +33,8 @@ export const teiSearchDesc = createReducerDescription({
         },
     }),
     [teiSearchActionTypes.SEARCH_TEI_RESULT_RETRIEVED]: (state, action) => {
-        const data = action.payload.data;
-        const searchId = action.payload.searchId;
+        const {data} = action.payload;
+        const {searchId} = action.payload;
         const teis = data.trackedEntityInstanceContainers ? data.trackedEntityInstanceContainers.map(t => ({ id: t.id, values: t.values })) : [];
         return {
             ...state,
@@ -50,7 +50,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchActionTypes.SEARCH_TEI_FAILED]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         return {
             ...state,
             [searchId]: {
@@ -65,7 +65,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         return {
             ...state,
             [searchId]: {
@@ -76,7 +76,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchOrgUnitActionTypes.TEI_SEARCH_CLEAR_ORG_UNITS_FILTER]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         setOrgUnitRoots(searchId, null);
         return {
             ...state,
@@ -89,7 +89,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchOrgUnitActionTypes.TEI_SEARCH_FILTERED_ORG_UNITS_RETRIEVED]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         return {
             ...state,
             [searchId]: {
@@ -101,7 +101,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchOrgUnitActionTypes.TEI_SEARCH_FILTER_ORG_UNITS_FAILED]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         setOrgUnitRoots(searchId, null);
         return {
             ...state,
@@ -114,7 +114,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchOrgUnitActionTypes.TEI_SEARCH_SET_ORG_UNIT_SCOPE]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         return {
             ...state,
             [searchId]: {
@@ -124,7 +124,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchOrgUnitActionTypes.TEI_SEARCH_SET_ORG_UNIT]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         return {
             ...state,
             [searchId]: {
@@ -134,7 +134,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchActionTypes.SET_TEI_SEARCH_PROGRAM_AND_TET]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         return {
             ...state,
             [searchId]: {
@@ -146,8 +146,8 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchActionTypes.SEARCH_FORM_VALIDATION_FAILED]: (state, action) => {
-        const searchId = action.payload.searchId;
-        const formId = action.payload.formId;
+        const {searchId} = action.payload;
+        const {formId} = action.payload;
         return {
             ...state,
             [searchId]: {
@@ -160,7 +160,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchActionTypes.TEI_NEW_SEARCH]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         return {
             ...state,
             [searchId]: {
@@ -170,7 +170,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchActionTypes.TEI_EDIT_SEARCH]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         return {
             ...state,
             [searchId]: {
@@ -180,7 +180,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchActionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         return {
             ...state,
             [searchId]: {
@@ -193,7 +193,7 @@ export const teiSearchDesc = createReducerDescription({
         };
     },
     [teiSearchActionTypes.TEI_SEARCH_SET_OPEN_SEARCH_GROUP_SECTION]: (state, action) => {
-        const searchId = action.payload.searchId;
+        const {searchId} = action.payload;
         return {
             ...state,
             [searchId]: {

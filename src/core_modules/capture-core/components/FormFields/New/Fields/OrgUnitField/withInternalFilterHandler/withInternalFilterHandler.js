@@ -25,6 +25,7 @@ export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         class OrgUnitInternalFilterHandlerHOC extends React.Component<Props, State> {
             cancelablePromise: ?CancelablePromise<any>;
+
             constructor(props: Props) {
                 super(props);
                 this.state = {

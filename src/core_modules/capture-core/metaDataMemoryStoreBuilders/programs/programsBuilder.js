@@ -131,7 +131,7 @@ function addProgramRules(d2ProgramRules: Array<ProgramRule>) {
 
 function addRulesAndVariablesFromProgramIndicators(cachedProgramIndicators: Array<CachedProgramIndicator>) {
     const indicatorsByProgram = cachedProgramIndicators.reduce((accIndicatorsByProgram, indicator) => {
-        const programId = indicator.programId;
+        const {programId} = indicator;
         accIndicatorsByProgram[programId] = accIndicatorsByProgram[programId] || [];
         accIndicatorsByProgram[programId].push(indicator);
         return accIndicatorsByProgram;
@@ -152,7 +152,7 @@ function sortPrograms(programs: Array<Program>) {
     programs.sort((a, b) => {
         if (a.name === b.name) {
             return 0;
-        } else if (a.name > b.name) {
+        } if (a.name > b.name) {
             return 1;
         }
         return -1;

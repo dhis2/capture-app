@@ -123,8 +123,11 @@ type Props = {
 
 class ProgramSelector extends Component<Props> {
     handleClick: (program: Object) => void;
+
     handleClickCategoryOption: (value: string, value: string) => void;
+
     programsArray: Array<Program>;
+
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
@@ -137,7 +140,7 @@ class ProgramSelector extends Component<Props> {
     }
 
     getProgramIcon(program: Program) {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         return program.icon.data
             ? (
                 <div
@@ -206,7 +209,7 @@ class ProgramSelector extends Component<Props> {
 
     renderSelectedProgram(selectedProgram) {
         return (
-            <React.Fragment>
+            <>
                 <h4 className={this.props.classes.title}>{ i18n.t('Selected Program') }</h4>
                 <div className={this.props.classes.selectedText}>
                     <div
@@ -223,7 +226,7 @@ class ProgramSelector extends Component<Props> {
                         <ClearIcon className={this.props.classes.selectedButtonIcon} />
                     </IconButton>
                 </div>
-            </React.Fragment>
+            </>
         );
     }
 
@@ -322,7 +325,7 @@ class ProgramSelector extends Component<Props> {
                                         options={programOptions}
                                         onSelect={handleClickProgram}
                                         placeholder={i18n.t('Select program')}
-                                        value={''}
+                                        value=""
                                     />
                                 </div>
                             </div>

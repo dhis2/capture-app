@@ -57,7 +57,9 @@ type State = {
 
 class FilterButton extends Component<Props, State> {
     activeFilterButtonInstance: ?any;
+
     anchorRef: { current: null | HTMLDivElement };
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -162,9 +164,9 @@ class FilterButton extends Component<Props, State> {
         const button = filterValue ? this.renderWithAppliedFilter() : this.renderWithoutAppliedFilter();
 
         return (
-            <React.Fragment>
+            <>
                 <div
-                    data-test={'filter-button-popover-anchor'}
+                    data-test="filter-button-popover-anchor"
                     ref={this.anchorRef}
                 >
                     {button}
@@ -185,7 +187,7 @@ class FilterButton extends Component<Props, State> {
                         })()
                     }
                 </Popover>
-            </React.Fragment>
+            </>
         );
     }
 }

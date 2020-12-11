@@ -60,7 +60,7 @@ const getMetaDataConfig = (stage: ProgramStage): Array<Array<string | {id: strin
         );
 
 export const getDefaultConfig = (programId: string): Map<string, Object> => {
-    const stage = getEventProgramThrowIfNotFound(programId).stage;
+    const {stage} = getEventProgramThrowIfNotFound(programId);
     // $FlowFixMe
     return new Map([
         ...getDefaultMainConfig(stage),

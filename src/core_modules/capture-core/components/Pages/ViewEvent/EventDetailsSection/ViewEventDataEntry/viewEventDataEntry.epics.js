@@ -51,14 +51,14 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
             return viewEventPage.eventId === eventId && !viewEventPage.showEditEvent;
         }),
         switchMap(async (action) => {
-            const eventContainer = action.payload.eventContainer;
-            const orgUnit = action.payload.orgUnit;
+            const {eventContainer} = action.payload;
+            const {orgUnit} = action.payload;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
             if (metadataContainer.error) {
                 return prerequisitesErrorLoadingViewEventDataEntry(metadataContainer.error);
             }
             const foundation = metadataContainer.stage.stageForm;
-            const program = metadataContainer.program;
+            const {program} = metadataContainer;
 
             return batchActions((await loadViewEventDataEntry(eventContainer, orgUnit, foundation, program)));
         }));

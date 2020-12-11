@@ -16,17 +16,20 @@ type Props = {
 
 class DatePopup extends React.Component<Props> {
     getAbsoluteBottom() {
-        const inputUsesFloatingLabel = this.props.inputUsesFloatingLabel;
+        const {inputUsesFloatingLabel} = this.props;
         return inputUsesFloatingLabel ? 60 : 40;
     }
+
     getAbsoluteVerticalPosition() {
-        const absoluteDirection = this.props.absoluteDirection;
+        const {absoluteDirection} = this.props;
         return absoluteDirection === absoluteDirections.UP ? { bottom: this.getAbsoluteBottom() } : { top: 0 };
     }
+
     calculateMarginLeftInline() {
         const { inputWidth, calendarWidth } = this.props;
         return calendarWidth - inputWidth;
     }
+
     getPopupStyle() {
         const { anchorPosition, mode } = this.props;
 

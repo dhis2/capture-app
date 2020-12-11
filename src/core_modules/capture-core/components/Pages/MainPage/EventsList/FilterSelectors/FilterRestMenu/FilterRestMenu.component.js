@@ -62,9 +62,13 @@ type State = {
 
 class FilterRestMenu extends React.Component<Props, State> {
     menuClasses: Object;
+
     menuItemClasses: Object;
+
     managerRef: (instance: any) => void;
+
     menuReferenceInstance: ?HTMLDivElement;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -74,7 +78,7 @@ class FilterRestMenu extends React.Component<Props, State> {
     }
 
     setClassesOnMount() {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         this.menuClasses = {
             paper: classes.menuPaper,
         };
@@ -83,6 +87,7 @@ class FilterRestMenu extends React.Component<Props, State> {
             root: classes.menuItemRoot,
         };
     }
+
     closeMenu() {
         this.setState({
             filterSelectorOpen: false,
@@ -112,7 +117,7 @@ class FilterRestMenu extends React.Component<Props, State> {
     }
 
     renderMenuItems() {
-        const columns = this.props.columns;
+        const {columns} = this.props;
         return columns
             .map(column => (
                 <MenuItem

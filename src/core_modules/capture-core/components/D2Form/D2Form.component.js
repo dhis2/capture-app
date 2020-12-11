@@ -29,6 +29,7 @@ type Props = {
 
 class D2Form extends React.PureComponent<Props> {
     name: string;
+
     sectionInstances: Map<string, Object>;
 
     constructor(props: Props) {
@@ -42,11 +43,11 @@ class D2Form extends React.PureComponent<Props> {
         const isValid = Array.from(this.sectionInstances.entries())
             .map(entry => entry[1])
             .every((sectionInstance) => {
-                const isHidden = sectionInstance.props.isHidden;
+                const {isHidden} = sectionInstance.props;
                 if (isHidden) {
                     return true;
                 }
-                const sectionFieldsInstance = sectionInstance.sectionFieldsInstance;
+                const {sectionFieldsInstance} = sectionInstance;
                 if (!sectionFieldsInstance) {
                     log.error(
                         errorCreator(
@@ -116,6 +117,7 @@ class D2Form extends React.PureComponent<Props> {
             {...passOnProps}
         />
     )
+
     renderVertical = (section: Section, passOnProps: any, classes: Object) => (
         <div
             className={this.props.formFoundation.customForm ? classes.containerCustomForm : classes.container}
@@ -136,15 +138,15 @@ class D2Form extends React.PureComponent<Props> {
 
     render() {
         const { formFoundation, id, classes, ...passOnProps } = this.props;
-        const formHorizontal = this.props.formHorizontal;
+        const {formHorizontal} = this.props;
         const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries()).map(entry => entry[1]);
 
         const sections = metaDataSectionsAsArray.map(section => (formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps, classes)));
 
         return (
-            <React.Fragment>
+            <>
                 {sections}
-            </React.Fragment>
+            </>
         );
     }
 }

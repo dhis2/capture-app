@@ -16,19 +16,20 @@ type Props = {
 class WarningDialog extends React.Component<Props> {
     static getItemWithName(name: string, message: string) {
         return (
-            <React.Fragment>
+            <>
                 {name}: {message}
-            </React.Fragment>
+            </>
         );
     }
 
     static getItemWithoutName(message: string) {
         return (
-            <React.Fragment>
+            <>
                 {message}
-            </React.Fragment>
+            </>
         );
     }
+
     getContents(): Array<React.Node> {
         const { warnings } = this.props;
 
@@ -48,7 +49,7 @@ class WarningDialog extends React.Component<Props> {
     render() {
         const { onAbort, onSave } = this.props;
         return (
-            <React.Fragment>
+            <>
                 <DialogTitle id="save-dialog-errors-and-warnings-title">
                     {i18n.t('Validation warnings')}
                 </DialogTitle>
@@ -65,7 +66,7 @@ class WarningDialog extends React.Component<Props> {
                         {i18n.t('Save anyway')}
                     </Button>
                 </DialogActions>
-            </React.Fragment>
+            </>
         );
     }
 }

@@ -50,6 +50,7 @@ class WarningsSection extends React.Component<Props> {
             {warning.message}
         </div>
     ))
+
     render() {
         const { warnings } = this.props;
         return warnings && warnings.length > 0 ? (

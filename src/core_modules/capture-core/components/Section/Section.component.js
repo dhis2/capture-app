@@ -49,7 +49,7 @@ class Section extends Component<Props> {
     renderContents() {
         const { isCollapsed, contentStyle, mainActionButton, classes } = this.props;
         const showChildren = !isCollapsed;
-        const accContentStyle = Object.assign({}, contentStyle, isCollapsed ? { display: 'none' } : null);
+        const accContentStyle = { ...contentStyle, ...(isCollapsed ? { display: 'none' } : null)};
         const mainActionButtonElement = mainActionButton ?
             (
                 <div className={classes.mainActionButton}>

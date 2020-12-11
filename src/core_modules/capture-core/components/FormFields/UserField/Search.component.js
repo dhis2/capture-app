@@ -34,9 +34,13 @@ const exitBehaviours = {
 
 class UserSearch extends React.Component<Props, State> {
     cancelablePromise: ?{cancel: () => void, promise: Promise<any>};
+
     suggestionElements: Map<string, HTMLElement>;
+
     inputDomElement: ?HTMLInputElement;
+
     domNames: Object;
+
     constructor(props: Props) {
         super(props);
         this.suggestionElements = new Map();

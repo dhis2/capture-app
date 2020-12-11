@@ -22,13 +22,13 @@ const getFromWorkingListRetrieval = (eventContainers, containerProperty) => {
 
 export const eventsDesc = createReducerDescription({
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
-        const eventContainers = action.payload.eventContainers;
+        const {eventContainers} = action.payload;
         const newEventsById = getFromWorkingListRetrieval(eventContainers, 'event');
         const newState = { ...newEventsById };
         return newState;
     },
     [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
-        const eventContainers = action.payload.eventContainers;
+        const {eventContainers} = action.payload;
         const newEventsById = getFromWorkingListRetrieval(eventContainers, 'event');
         const newState = { ...newEventsById };
         return newState;
@@ -49,18 +49,18 @@ export const eventsDesc = createReducerDescription({
     },
     [dataEntryActionTypes.SAVE_EVENT]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         newState[payload.eventId] = payload.event;
         return newState;
     },
     [dataEntryActionTypes.COMPLETE_EVENT]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         newState[payload.eventId] = payload.event;
         return newState;
     },
     [editEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const event = action.payload.eventContainer.event;
+        const {event} = action.payload.eventContainer;
         const newState = {
             ...state,
             [event.eventId]: event,
@@ -68,7 +68,7 @@ export const eventsDesc = createReducerDescription({
         return newState;
     },
     [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const event = action.payload.eventContainer.event;
+        const {event} = action.payload.eventContainer;
         const newState = {
             ...state,
             [event.eventId]: event,
@@ -77,7 +77,7 @@ export const eventsDesc = createReducerDescription({
     },
     [viewEventActionTypes.ADD_EVENT_NOTE]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         if (newState && newState[payload.eventId]) {
             newState[payload.eventId].notes = [...state[payload.eventId].notes, payload.note];
         }
@@ -85,7 +85,7 @@ export const eventsDesc = createReducerDescription({
     },
     [viewEventActionTypes.REMOVE_EVENT_NOTE]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         if (newState && newState[payload.eventId]) {
             newState[payload.eventId].notes = state[payload.eventId].notes.filter(n => n.clientId !== payload.noteClientId);
         }
@@ -96,13 +96,13 @@ export const eventsDesc = createReducerDescription({
 
 export const eventsValuesDesc = createReducerDescription({
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
-        const eventContainers = action.payload.eventContainers;
+        const {eventContainers} = action.payload;
         const newEventsValuesById = getFromWorkingListRetrieval(eventContainers, 'values');
         const newState = { ...newEventsValuesById };
         return newState;
     },
     [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
-        const eventContainers = action.payload.eventContainers;
+        const {eventContainers} = action.payload;
         const newEventsValuesById = getFromWorkingListRetrieval(eventContainers, 'values');
         const newState = { ...newEventsValuesById };
         return newState;
@@ -123,13 +123,13 @@ export const eventsValuesDesc = createReducerDescription({
     },
     [dataEntryActionTypes.COMPLETE_EVENT]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         newState[payload.eventId] = action.payload.clientValues;
         return newState;
     },
     [dataEntryActionTypes.SAVE_EVENT]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         newState[payload.eventId] = action.payload.clientValues;
         return newState;
     },

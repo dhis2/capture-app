@@ -17,6 +17,7 @@ export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         class TranslationBuilder extends React.Component<Props> {
             translations: Object;
+
             constructor(props: Props) {
                 super(props);
                 this.translations = buildTranslations();

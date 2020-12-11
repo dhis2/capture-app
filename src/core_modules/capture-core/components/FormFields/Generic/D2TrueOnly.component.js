@@ -27,7 +27,9 @@ type Props = {
 
 class D2TrueOnly extends Component<Props> {
     handleChange: (e: Object, checked: boolean) => void;
+
     materialUIContainerInstance: ?HTMLDivElement;
+
     labelClasses: Object;
 
     constructor(props: Props) {

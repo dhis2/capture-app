@@ -58,7 +58,7 @@ function getServerValuesForMainValues(
         .keys(clientValues)
         .reduce((acc, key) => {
             const value = clientValues[key];
-            const type = meta[key].type;
+            const {type} = meta[key];
             acc[key] = convertClientToServer(value, type);
             return acc;
         }, {});

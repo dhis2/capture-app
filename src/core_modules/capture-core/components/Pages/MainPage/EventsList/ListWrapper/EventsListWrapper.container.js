@@ -11,7 +11,7 @@ const makeMapStateToProps = () => {
     const createWorkingListData = makeCreateWorkingListData();
 
     const mapStateToProps = (state: ReduxState, props: { listId: string }) => {
-        const listId = props.listId;
+        const {listId} = props;
         const isLoading = !!state.workingListsUI[listId].isLoading;
         const columns = !isLoading ? columnsSelector(state, props) : null;
         const eventsContainer = !isLoading ? createEventsContainer(state, props) : [];

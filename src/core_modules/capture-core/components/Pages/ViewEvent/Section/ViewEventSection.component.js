@@ -60,7 +60,7 @@ class ViewEventSection extends React.Component<Props, State> {
     }
 
     renderCollapsable = () => {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         return (
             <IconButton className={classes.toggleCollapseButton} onClick={this.toggleCollapse}>
                 {this.state.collapsed ?

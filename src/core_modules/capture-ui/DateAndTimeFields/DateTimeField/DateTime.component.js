@@ -33,9 +33,13 @@ type Props = {
 
 class D2DateTime extends Component<Props> {
     handleTimeChange: (timeValue: string) => void;
+
     handleDateChange: (dateValue: string) => void;
+
     handleTimeBlur: (timeValue: string) => void;
+
     handleDateBlur: (dateValue: string) => void;
+
     touchedFields: Set<string>;
 
     static defaultProps = {
@@ -85,7 +89,7 @@ class D2DateTime extends Component<Props> {
     }
 
     handleBlur(value: Value, otherFieldHasValue: boolean) {
-        const onBlur = this.props.onBlur;
+        const {onBlur} = this.props;
         const touched = this.touchedFields.size === 2;
         if (!value.date && !value.time) {
             onBlur(undefined, {

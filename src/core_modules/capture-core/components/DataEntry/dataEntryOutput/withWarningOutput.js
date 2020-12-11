@@ -104,7 +104,7 @@ const getWarningOutput = () =>
 
 
 const mapStateToProps = (state: ReduxState, props: any) => {
-    const itemId = state.dataEntries[props.id].itemId;
+    const {itemId} = state.dataEntries[props.id];
     const key = getDataEntryKey(props.id, itemId);
     return {
         warningItems: state.rulesEffectsGeneralWarnings[key] ?

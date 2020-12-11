@@ -54,13 +54,16 @@ class SearchGroupFactory {
     static errorMessages = {
         TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
     };
+
     static _getSearchAttributeValueType(valueType: string, isUnique: ?boolean) {
         const searchAttributeValueType = searchAttributeElementTypes[valueType];
         return !isUnique && searchAttributeValueType ? searchAttributeValueType : valueType;
     }
 
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
+
     locale: ?string;
+
     constructor(
         cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
         locale: ?string,
@@ -81,7 +84,7 @@ class SearchGroupFactory {
     }
 
     async _buildElement(searchAttribute: SearchAttribute) {
-        const trackedEntityAttribute = searchAttribute.trackedEntityAttribute;
+        const {trackedEntityAttribute} = searchAttribute;
         const element = new DataElement((o) => {
             o.id = trackedEntityAttribute.id;
             o.name = this._getAttributeTranslation(

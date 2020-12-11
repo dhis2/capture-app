@@ -121,7 +121,7 @@ async function convertToClientEvent(event: ApiTEIEvent) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ fn: 'convertToClientEvent', event }));
         return null;
     }
-    const stageForm = stageMetaData.stageForm;
+    const {stageForm} = stageMetaData;
 
     const dataValuesById = getValuesById(event.dataValues);
     const convertedDataValues = stageForm.convertValues(dataValuesById, convertValue);

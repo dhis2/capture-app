@@ -33,8 +33,11 @@ class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
 
     cachedOptionSets: Map<string, CachedOptionSet>;
+
     locale: ?string;
+
     dataElementFactory: DataElementFactory;
+
     relationshipTypesFactory: RelationshipTypesFactory;
 
     constructor(
@@ -64,7 +67,7 @@ class ProgramStageFactory {
         if (sectionSpecs.dataElements) {
             // $FlowFixMe
             await sectionSpecs.dataElements.asyncForEach(async (sectionDataElement: CachedSectionDataElements) => {
-                const id = sectionDataElement.id;
+                const {id} = sectionDataElement;
                 const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
                 if (!cachedProgramStageDataElement) {
                     log.error(
@@ -140,13 +143,13 @@ class ProgramStageFactory {
             });
         });
 
-        const stageForm = stage.stageForm;
+        const {stageForm} = stage;
 
         if (cachedProgramStage.formType === 'CUSTOM' && cachedProgramStage.dataEntryForm) {
             const section = await this._buildMainSection(cachedProgramStage.programStageDataElements);
             section.showContainer = false;
             stageForm.addSection(section);
-            const dataEntryForm = cachedProgramStage.dataEntryForm;
+            const {dataEntryForm} = cachedProgramStage;
             try {
                 stageForm.customForm = new CustomForm((o) => {
                     // $FlowFixMe

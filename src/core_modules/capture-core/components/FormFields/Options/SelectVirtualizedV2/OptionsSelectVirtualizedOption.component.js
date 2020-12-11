@@ -55,22 +55,22 @@ class OptionsSelectVirtualizedOption extends Component<Props> {
         const { option, style, onSelect, currentlySelectedValues, classes, inFocus, onFocusOption } = this.props;
         const { label, iconLeft, iconRight } = option;
         const isSelected = !!currentlySelectedValues && currentlySelectedValues.includes(option);
-        const renderStyle = Object.assign(
-            {},
-            OptionsSelectVirtualizedOption.defaultContainerStyle,
-            style,
-            currentlySelectedValues && currentlySelectedValues.includes(option) ? OptionsSelectVirtualizedOption.selectedStyle : null,
-            inFocus ? OptionsSelectVirtualizedOption.inFocusStyle : null,
-        );
+        const renderStyle = {
+            
+            ...OptionsSelectVirtualizedOption.defaultContainerStyle,
+            ...style,
+            ...(currentlySelectedValues && currentlySelectedValues.includes(option) ? OptionsSelectVirtualizedOption.selectedStyle : null),
+            ...(inFocus ? OptionsSelectVirtualizedOption.inFocusStyle : null),
+        };
         return (
             <Tooltip
                 title={option.label}
-                placement={'bottom'}
+                placement="bottom"
                 classes={{ popper: classes.popper }}
                 enterDelay={800}
             >
                 <div
-                    className={'virtualized-select-option'}
+                    className="virtualized-select-option"
                     style={renderStyle}
                     onClick={() => {
                         onSelect(option);

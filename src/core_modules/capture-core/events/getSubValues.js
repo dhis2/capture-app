@@ -13,7 +13,7 @@ const subValueGetterByElementType = {
     // todo (report lgmt)
     // $FlowFixMe[prop-missing] automated comment
     [elementTypeKeys.FILE_RESOURCE]: (value: any, eventId: string, metaElementId: string) => {
-        const baseUrl = config.baseUrl;
+        const {baseUrl} = config;
         return getApi().get(`fileResources/${value}`)
             .then(res =>
                 ({
@@ -28,7 +28,7 @@ const subValueGetterByElementType = {
     },
     // $FlowFixMe[prop-missing] automated comment
     [elementTypeKeys.IMAGE]: (value: any, eventId: string, metaElementId: string) => {
-        const baseUrl = config.baseUrl;
+        const {baseUrl} = config;
         return getApi().get(`fileResources/${value}`)
             .then(res =>
                 ({

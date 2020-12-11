@@ -46,7 +46,7 @@ export default function convertValues<T: ?ValuesType | Array<ValuesType>>(
             // $FlowFixMe[incompatible-return] automated comment
             // $FlowFixMe[incompatible-call] automated comment
             return convertArrayValues(values, elementsById, onConvert);
-        } else if (isObject(values)) {
+        } if (isObject(values)) {
             // $FlowFixMe[incompatible-return] automated comment
             // $FlowFixMe[incompatible-call] automated comment
             return convertObjectValues(values, elementsById, onConvert);

@@ -67,7 +67,7 @@ type Props = {
 type MapStateToPropsFactory = (ReduxState, OwnProps) => StateProps;
 // eslint-disable-next-line complexity
 const mapStateToProps: MapStateToPropsFactory = (state: ReduxState, props: { listId: string }) => {
-    const listId = props.listId;
+    const {listId} = props;
     return {
         currentTemplate: state.workingListsTemplates[listId] &&
             state.workingListsTemplates[listId].selectedTemplateId &&

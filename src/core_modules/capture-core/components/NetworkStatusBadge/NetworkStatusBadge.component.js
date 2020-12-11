@@ -96,7 +96,7 @@ class LeftSection extends PureComponent {
     }
 
     render() {
-        const props = this.props;
+        const {props} = this;
         let content;
 
         if (props.status && props.syncList.length === 0) {
@@ -134,7 +134,7 @@ const OnlineIcon = props => <span className={props.status} />;
 class NetworkStatusBadge extends PureComponent {
     render() {
         const status = this.props.offline || {};
-        const classes = this.props.classes;
+        const {classes} = this.props;
 
         const itemsToSync = status.outbox;
 

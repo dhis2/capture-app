@@ -73,6 +73,7 @@ class CategorySelector extends React.Component<Props, State> {
     }
 
     onSelectSelector: Function;
+
     cancelablePromise: Object;
 
     constructor(props: Props) {
@@ -160,7 +161,7 @@ class CategorySelector extends React.Component<Props, State> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <VirtualizedSelectLoadingIndicatorHOC
                 options={options}
-                value={''}
+                value=""
                 placeholder={i18n.t('Select')}
                 {...passOnProps}
                 onSelect={handleSelect}

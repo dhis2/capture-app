@@ -37,9 +37,11 @@ const getStyles = (theme: Theme) => ({
 
 class CardList extends React.Component<Props> {
     getDataElementsContainer: Function;
+
     static defaultProps = {
         itemTypeName: 'item',
     }
+
     constructor(props: Props) {
         super(props);
         this.getDataElementsContainer = makeDataElementsContainerSelector();

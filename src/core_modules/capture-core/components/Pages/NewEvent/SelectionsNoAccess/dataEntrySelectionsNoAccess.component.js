@@ -63,6 +63,7 @@ class DataEntrySelectionsNoAccess extends Component<Props> {
             </div>
         );
     }
+
     render() {
         const { classes, onCancel } = this.props;
         return (

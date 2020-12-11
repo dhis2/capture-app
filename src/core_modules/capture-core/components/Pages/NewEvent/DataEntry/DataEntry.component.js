@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/Info';
 import i18n from '@dhis2/d2-i18n';
-import DataEntry from '../../../../components/DataEntry/DataEntry.container';
-import withCancelButton from '../../../../components/DataEntry/withCancelButton';
-import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
-import withDataEntryNotesHandler from '../../../../components/DataEntry/dataEntryNotes/withDataEntryNotesHandler';
+import DataEntry from "../../../DataEntry/DataEntry.container";
+import withCancelButton from "../../../DataEntry/withCancelButton";
+import withDataEntryField from "../../../DataEntry/dataEntryField/withDataEntryField";
+import withDataEntryNotesHandler from "../../../DataEntry/dataEntryNotes/withDataEntryNotesHandler";
 import Notes from '../../../Notes/Notes.component';
-import withDataEntryRelationshipsHandler from '../../../../components/DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
+import withDataEntryRelationshipsHandler from "../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler";
 import Relationships from '../../../Relationships/Relationships.component';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
@@ -36,7 +36,7 @@ import {
 } from '../../../FormFields/New';
 import { Assignee } from './Assignee';
 
-import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
+import withFeedbackOutput from "../../../DataEntry/dataEntryOutput/withFeedbackOutput";
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
 import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';
@@ -215,18 +215,18 @@ const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientati
 
 const buildGeometrySettingsFn = () => ({
     isApplicable: (props: Object) => {
-        const featureType = props.formFoundation.featureType;
+        const {featureType} = props.formFoundation;
         return ['Polygon', 'Point'].includes(featureType);
     },
     getComponent: (props: Object) => {
-        const featureType = props.formFoundation.featureType;
+        const {featureType} = props.formFoundation;
         if (featureType === 'Polygon') {
             return polygonComponent;
         }
         return pointComponent;
     },
     getComponentProps: (props: Object) => {
-        const featureType = props.formFoundation.featureType;
+        const {featureType} = props.formFoundation;
         if (featureType === 'Polygon') {
             return createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
@@ -477,7 +477,9 @@ const dataEntrySectionDefinitions = {
 };
 class NewEventDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
+
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
+
     relationshipsInstance: ?HTMLDivElement;
 
     constructor(props: Props) {
@@ -542,8 +544,9 @@ class NewEventDataEntry extends Component<Props> {
             </span>
         );
     }
+
     renderHorizontal = () => {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         return (
             <div
                 className={classes.horizontal}
@@ -573,7 +576,7 @@ class NewEventDataEntry extends Component<Props> {
                 <div data-test="dhis2-capture-data-entry-container">
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <WrappedDataEntry
-                        id={'singleEvent'}
+                        id="singleEvent"
                         onUpdateFormField={onUpdateField}
                         onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onSave={this.handleSave}

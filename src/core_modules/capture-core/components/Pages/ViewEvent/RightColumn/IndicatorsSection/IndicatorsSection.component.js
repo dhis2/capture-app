@@ -39,7 +39,7 @@ const getStyles = (theme: Theme) => ({
 
 class IndicatorsSection extends React.Component<Props> {
     renderHeader = (count: number) => {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         return (
             <ViewEventSectionHeader
                 icon={InfoIcon}
@@ -69,7 +69,7 @@ class IndicatorsSection extends React.Component<Props> {
     getIndicators = () => this.props.indicators || {};
 
     render() {
-        const classes = this.props.classes;
+        const {classes} = this.props;
         const indicators = this.getIndicators();
         const displayTexts = indicators.displayTexts || [];
         const displayKeyValuePairs = indicators.displayKeyValuePairs || [];

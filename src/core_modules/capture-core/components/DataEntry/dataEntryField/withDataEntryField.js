@@ -40,10 +40,12 @@ type Settings = {
 const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentType<any>) => {
     class DataEntryFieldBuilder extends React.Component<Props> {
         reselectComponentProps: (?Object) => Object;
+
         constructor(props: Props) {
             super(props);
             this.reselectComponentProps = makeReselectComponentProps();
         }
+
         // $FlowFixMe[speculation-ambiguous] automated comment
         handleRef = (instance: DataEntryField) => {
             if (this.props.dataEntryFieldRef) {
@@ -85,7 +87,7 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
         }
 
         getFields() {
-            const fields = this.props.fields;
+            const {fields} = this.props;
             const { getMeta, getIsHidden } = settings;
             const meta = getMeta && getMeta(this.props);
 
@@ -125,7 +127,7 @@ const getMapStateToProps = (settings: Settings) => (state: ReduxState, props: Ob
     const { getPassOnFieldData, getPropName } = settings;
     if (getPassOnFieldData && getPassOnFieldData(props)) {
         const propName = getPropName(props);
-        const itemId = state.dataEntries[props.id].itemId;
+        const {itemId} = state.dataEntries[props.id];
         const key = getDataEntryKey(props.id, itemId);
         const value = state.dataEntriesFieldsValue[key][propName];
         passOnFieldDataProp = {

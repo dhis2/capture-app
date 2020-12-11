@@ -67,7 +67,7 @@ class SortLabel extends React.Component<Props> {
                     (() => {
                         if (placement === placements.RIGHT) {
                             return (
-                                <React.Fragment>
+                                <>
                                     <div
                                         className={defaultClasses.sortLabelIcon}
                                     >
@@ -76,12 +76,12 @@ class SortLabel extends React.Component<Props> {
                                     {
                                         this.renderChildrenContainer([defaultClasses.sortLabelChildrenLast])
                                     }
-                                </React.Fragment>
+                                </>
                             );
                         }
 
                         return (
-                            <React.Fragment>
+                            <>
                                 {
                                     this.renderChildrenContainer([defaultClasses.sortLabelChildrenFirst])
                                 }
@@ -90,7 +90,7 @@ class SortLabel extends React.Component<Props> {
                                 >
                                     {icons}
                                 </div>
-                            </React.Fragment>
+                            </>
                         );
                     })()
                 }

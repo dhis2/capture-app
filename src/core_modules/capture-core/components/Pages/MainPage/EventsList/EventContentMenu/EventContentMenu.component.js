@@ -42,6 +42,7 @@ const styles = theme => ({
 
 class EventContentMenu extends React.Component<Props, State> {
     managerRef: (instance: any) => void;
+
     menuReferenceInstance: ?HTMLDivElement;
 
     constructor(props: Props) {

@@ -28,8 +28,8 @@ export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: R
         ofType(editEventDataEntryActionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT),
         map((action) => {
             const state = store.value;
-            const payload = action.payload;
-            const eventId = state.dataEntries[payload.dataEntryId].eventId;
+            const {payload} = action;
+            const {eventId} = state.dataEntries[payload.dataEntryId];
             // $FlowFixMe[prop-missing] automated comment
             const userName = getCurrentUser().username;
 
@@ -59,7 +59,7 @@ export const removeNoteForEditSingleEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(editEventDataEntryActionTypes.ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT),
         map((action) => {
-            const context = action.meta.context;
+            const {context} = action.meta;
             return batchActions([
                 removeNote(context.dataEntryId, context.itemId, context.noteClientId),
                 removeEventNote(context.eventId, context.noteClientId),

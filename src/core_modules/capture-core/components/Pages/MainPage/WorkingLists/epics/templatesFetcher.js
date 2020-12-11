@@ -2,7 +2,7 @@
 import { getEventFilters } from './eventFiltersInterface';
 
 export const getTemplatesAsync = (state: ReduxState) => {
-    const programId = state.currentSelections.programId;
+    const {programId} = state.currentSelections;
     return getEventFilters(programId).then((workingListConfigs) => {
         const defaultWorkingListConfig = {
             id: `${programId}-default`,

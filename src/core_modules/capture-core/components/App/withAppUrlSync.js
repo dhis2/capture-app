@@ -104,6 +104,7 @@ const getUrlParts = (pathName: string) => {
 export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     class AppUrlSyncer extends React.Component<Props> {
         params: ?string;
+
         page: string;
 
         handleUpdate = (updateData: UpdateDataContainer) => {

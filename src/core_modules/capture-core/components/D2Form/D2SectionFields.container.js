@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const defaultMergedProps = Object.assign({}, ownProps, stateProps, dispatchProps);
+    const defaultMergedProps = { ...ownProps, ...stateProps, ...dispatchProps};
 
     const mergedProps = ownProps.onUpdateField ? { ...defaultMergedProps, onUpdateField: ownProps.onUpdateField } : defaultMergedProps;
     return mergedProps;

@@ -60,10 +60,12 @@ const defaultTrackedEntityTypeName = 'Tracked entity instance';
 
 class TeiRelationship extends React.Component<Props> {
     trackedEntityTypeSelector: (props: Props) => TrackedEntityType;
+
     constructor(props: Props) {
         super(props);
         this.trackedEntityTypeSelector = makeTrackedEntityTypeSelector();
     }
+
     getTrackedEntityTypeName = () => {
         const trackedEntityType = this.trackedEntityTypeSelector(this.props);
         if (!trackedEntityType) {

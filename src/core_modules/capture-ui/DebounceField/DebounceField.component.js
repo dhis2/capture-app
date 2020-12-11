@@ -18,6 +18,7 @@ type State = {
  */
 class DebounceField extends React.Component<Props, State> {
     debouncer: Function;
+
     constructor(props: Props) {
         super(props);
         this.state = {

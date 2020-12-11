@@ -10,8 +10,8 @@ export const relationshipsDesc = createReducerDescription({
         [action.payload.key]: action.payload.relationships,
     }),
     [relationshipActionTypes.ADD_RELATIONSHIP]: (state, action) => {
-        const key = action.payload.key;
-        const relationship = action.payload.relationship;
+        const {key} = action.payload;
+        const {relationship} = action.payload;
 
         return {
             ...state,
@@ -19,8 +19,8 @@ export const relationshipsDesc = createReducerDescription({
         };
     },
     [relationshipActionTypes.UPDATE_RELATIONSHIP]: (state, action) => {
-        const key = action.payload.key;
-        const updatedRelationship = action.payload.updatedRelationship;
+        const {key} = action.payload;
+        const {updatedRelationship} = action.payload;
         const index = state[key].findIndex(r => r.clientId === updatedRelationship.clientId);
         const newList = [...state[key]];
         newList[index] = updatedRelationship;
@@ -31,7 +31,7 @@ export const relationshipsDesc = createReducerDescription({
         };
     },
     [relationshipActionTypes.REMOVE_RELATIONSHIP]: (state, action) => {
-        const key = action.payload.key;
+        const {key} = action.payload;
         const clientId = action.payload.relationshipClientId;
 
         return {

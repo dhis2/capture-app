@@ -43,8 +43,11 @@ class QuickSelector extends Component<Props> {
     }
 
     handleClickProgram: (programId: string) => void;
+
     handleSetCatergoryCombo: (selectedCategoryOption: string, categoryId: string) => void;
+
     handleClickOrgUnit: (orgUnit: Object) => void;
+
     constructor(props) {
         super(props);
 
@@ -67,7 +70,7 @@ class QuickSelector extends Component<Props> {
 
     calculateColumnWidths() {
         // The grid has a total width of 12 columns, we need to calculate how much width each selector should have.
-        const selectedProgramId = this.props.selectedProgramId;
+        const {selectedProgramId} = this.props;
         const selectedProgram = QuickSelector.getSelectedProgram(selectedProgramId);
 
         let orgUnitSelectorWidth = 3;

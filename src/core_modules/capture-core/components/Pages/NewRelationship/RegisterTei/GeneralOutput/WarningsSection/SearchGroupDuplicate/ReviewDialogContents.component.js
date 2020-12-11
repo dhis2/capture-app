@@ -28,7 +28,9 @@ type Props = {
 
 class ReviewDialogContents extends React.Component<Props> {
     contentListInstance: any;
+
     height: ?number;
+
     componentDidMount() {
         if (!this.props.isUpdating && this.contentListInstance) {
             this.height = this.contentListInstance.clientHeight;
@@ -60,7 +62,7 @@ class ReviewDialogContents extends React.Component<Props> {
         } : null;
 
         return (
-            <React.Fragment>
+            <>
                 <DialogContent>
                     <DialogTitle>
                         {i18n.t('Possible duplicates found')}
@@ -78,7 +80,7 @@ class ReviewDialogContents extends React.Component<Props> {
                     </div>
                 </DialogContent>
                 <ReviewDialogContentsPager />
-            </React.Fragment>
+            </>
         );
     }
 }

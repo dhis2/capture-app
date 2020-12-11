@@ -33,18 +33,18 @@ class OptionsSelectVirtualizedOption extends Component<Props> {
     render() {
         const { option, style, onSelect, currentlySelectedValues, classes } = this.props;
         const { label } = option;
-        const renderStyle = Object.assign({}, OptionsSelectVirtualizedOption.defaultContainerStyle, style, currentlySelectedValues && currentlySelectedValues.includes(option) ? OptionsSelectVirtualizedOption.selectedStyle : null);
+        const renderStyle = { ...OptionsSelectVirtualizedOption.defaultContainerStyle, ...style, ...(currentlySelectedValues && currentlySelectedValues.includes(option) ? OptionsSelectVirtualizedOption.selectedStyle : null)};
 
         return (
             <Tooltip
                 title={option.label}
-                placement={'bottom'}
+                placement="bottom"
                 classes={{ popper: classes.popper }}
                 enterDelay={800}
             >
                 {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
                 <div
-                    className={'virtualized-select-option'}
+                    className="virtualized-select-option"
                     style={renderStyle}
                     onClick={() => {
                         onSelect(option);

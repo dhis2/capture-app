@@ -96,9 +96,11 @@ class D2AgeField extends Component<Props> {
     static isEmptyNumbers(values: AgeValues) {
         return !values.years && !values.months && !values.days;
     }
+
     static isPositiveOrZeroNumber(value: any) {
         return isValidPositiveInteger(value) || Number(value) === 0;
     }
+
     // eslint-disable-next-line complexity
     static isValidNumbers(values: AgeValues) {
         return D2AgeField.isPositiveOrZeroNumber(values.years || '0') &&
@@ -192,6 +194,7 @@ class D2AgeField extends Component<Props> {
             </div>
         );
     }
+
     renderDateInput = (currentValues: AgeValues, isVertical: boolean) => {
         const {
             onChange,

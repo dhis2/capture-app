@@ -16,6 +16,7 @@ export default (onGetContainerClass?: OnGetContainerClass) =>
     (InnerComponent: React.ComponentType<any>) =>
         class CustomElementContainerHOC extends React.Component<Props> {
             defaultClass: ?string;
+
             constructor(props: Props) {
                 super(props);
                 this.defaultClass = onGetContainerClass && onGetContainerClass(this.props);

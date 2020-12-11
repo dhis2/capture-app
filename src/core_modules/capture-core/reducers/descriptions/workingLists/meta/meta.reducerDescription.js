@@ -60,7 +60,7 @@ export const workingListsMetaDesc = createReducerDescription({
     [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, pagingData } = action.payload;
-        const next = newState[listId].next;
+        const {next} = newState[listId];
         newState[listId] = {
             ...newState[listId],
             ...next,
@@ -75,7 +75,7 @@ export const workingListsMetaDesc = createReducerDescription({
     },
     [workingListsActionTypes.EVENT_LIST_UPDATE_ERROR]: (state, action) => {
         const newState = { ...state };
-        const listId = action.payload.listId;
+        const {listId} = action.payload;
         newState[listId] = {
             ...newState[listId],
             next: {},
@@ -225,7 +225,7 @@ export const workingListsMetaDesc = createReducerDescription({
     },
     [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         const { listId, itemId } = action.meta;
         newState[listId] = {
             ...newState[listId],

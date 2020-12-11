@@ -9,17 +9,20 @@ type Props = {
 const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: React.ComponentType<any>) =>
     class DataEntryOutputBuilder extends React.Component<Props> {
         name: string;
+
         innerInstance: ?any;
+
         constructor(props: Props) {
             super(props);
             this.name = 'DataEntryOutputBuilder';
         }
 
         getDataEntryOutputs = () => {
-            const dataEntryOutputs = this.props.dataEntryOutputs;
+            const {dataEntryOutputs} = this.props;
             const output = this.getOutput(dataEntryOutputs ? dataEntryOutputs.length : 0);
             return dataEntryOutputs ? [...dataEntryOutputs, output] : [output];
         };
+
         getOutput = (key: any) => (
             <div style={{ marginTop: 10 }} key={key}>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}

@@ -22,7 +22,7 @@ export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =
         concatMap((action) => {
             const state = store.value;
             const { programId, orgUnitId, categories } = state.currentSelections;
-            const lastTransaction = state.offline.lastTransaction;
+            const {lastTransaction} = state.offline;
             const { selectedTemplate, defaultConfig, listId } = action.payload;
             const eventQueryCriteria = selectedTemplate.nextEventQueryCriteria || selectedTemplate.eventQueryCriteria;
             const initialPromise =
@@ -77,7 +77,7 @@ export const requestDeleteEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(eventListActionTypes.REQUEST_DELETE_EVENT),
         concatMap((action) => {
-            const eventId = action.payload.eventId;
+            const {eventId} = action.payload;
             const listId = 'eventList';
             const deletePromise = getApi()
                 .delete(`events/${eventId}`)

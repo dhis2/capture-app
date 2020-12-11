@@ -10,7 +10,7 @@ import {
     withDataEntryField,
     withDataEntryFieldIfApplicable,
     withBrowserBackWarning,
-} from '../../../../../components/DataEntry';
+} from "../../../../DataEntry";
 
 import { RenderFoundation, DataElement, dataElementTypes } from '../../../../../metaData';
 import { convertFormToClient, convertClientToView } from '../../../../../converters';
@@ -134,12 +134,12 @@ const buildReportDateSettingsFn = () => {
 
 const buildGeometrySettingsFn = () => ({
     isApplicable: (props: Object) => {
-        const featureType = props.formFoundation.featureType;
+        const {featureType} = props.formFoundation;
         return ['Polygon', 'Point'].includes(featureType);
     },
     getComponent: () => viewModeComponent,
     getComponentProps: (props: Object) => {
-        const featureType = props.formFoundation.featureType;
+        const {featureType} = props.formFoundation;
         if (featureType === 'Polygon') {
             return createComponentProps(props, {
                 label: i18n.t('Area'),
@@ -229,7 +229,9 @@ const dataEntrySectionDefinitions = {
 
 class ViewEventDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
+
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
+
     constructor(props: Props) {
         super(props);
         this.fieldOptions = {
@@ -238,6 +240,7 @@ class ViewEventDataEntry extends Component<Props> {
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
+
     render() {
         const {
             classes,
@@ -246,7 +249,7 @@ class ViewEventDataEntry extends Component<Props> {
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
-                id={'singleEvent'}
+                id="singleEvent"
                 viewMode
                 fieldOptions={this.fieldOptions}
                 dataEntrySections={this.dataEntrySections}

@@ -65,7 +65,7 @@ function cleanUpUidsAfterSearch(dataEntryKey: string, searchGroupId: string) {
 }
 
 function searchHasValidAndRequiredValues(searchGroup: InputSearchGroup, values: Object, fieldsUI: Object) {
-    const searchFoundation = searchGroup.searchFoundation;
+    const {searchFoundation} = searchGroup;
     const elements = searchFoundation.getElements();
     if (
         elements
@@ -81,7 +81,7 @@ function searchHasValidAndRequiredValues(searchGroup: InputSearchGroup, values: 
 }
 
 function searchHasUpdatedValues(searchGroup: InputSearchGroup, values: Object, previousValues: Object) {
-    const searchFoundation = searchGroup.searchFoundation;
+    const {searchFoundation} = searchGroup;
     const elements = searchFoundation.getElements();
     return !!elements.find((element) => {
         const previousRawValue = previousValues[element.id];

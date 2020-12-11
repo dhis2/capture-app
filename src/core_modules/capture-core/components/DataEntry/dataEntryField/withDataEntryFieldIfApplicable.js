@@ -13,6 +13,7 @@ type Settings = {
 const getDataEntryFieldIfApplicable = (settings: Settings, InnerComponent: React.ComponentType<any>) =>
     class DataEntryFieldIfApplicableHOC extends React.Component<Props> {
         Component: React.ComponentType<any>;
+
         constructor(props: Props) {
             super(props);
             const applicable = settings.isApplicable(this.props);
@@ -25,7 +26,7 @@ const getDataEntryFieldIfApplicable = (settings: Settings, InnerComponent: React
         }
 
         render() {
-            const Component = this.Component;
+            const {Component} = this;
             return (
                 <Component
                     {...this.props}

@@ -42,7 +42,7 @@ class ColumnSelector extends React.Component<Props, State> {
     render() {
         const { columns } = this.props;
         return (
-            <React.Fragment>
+            <>
                 <Tooltip
                     disableFocusListener
                     disableTouchListener
@@ -61,7 +61,7 @@ class ColumnSelector extends React.Component<Props, State> {
                     onSave={this.handleSaveColumnOrder}
                     columns={columns}
                 />
-            </React.Fragment>
+            </>
         );
     }
 }

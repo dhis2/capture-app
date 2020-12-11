@@ -10,6 +10,7 @@ class RulesMomentConverter implements IMomentConverter {
     rulesDateToMoment(rulesEngineValue: string): moment$Moment {
         return moment(rulesEngineValue, momentFormat);
     }
+
     // eslint-disable-next-line class-methods-use-this
     momentToRulesDate(momentObject: moment$Moment): string {
         return getFormattedStringFromMomentUsingEuropeanGlyphs(momentObject);

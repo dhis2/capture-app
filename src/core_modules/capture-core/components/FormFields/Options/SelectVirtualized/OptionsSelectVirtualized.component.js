@@ -123,12 +123,19 @@ type State = {
 class OptionsSelectVirtualized extends Component<Props, State> {
     // $FlowFixMe[incompatible-type] automated comment
     handleChange: (e: Object, index: number, value: any) => void;
+
     handleFocus: () => void;
+
     handleBlur: () => void;
+
     materialUIContainerInstance: any;
+
     options: ?Array<{label: string, value: any}>;
+
     renderOption: () => React$Element<any>;
+
     inFocusLabelClasses: Object;
+
     yourSelect: any;
 
     static defaultProps = {
@@ -137,6 +144,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
             noResults: '',
         },
     };
+
     constructor(props: Props) {
         super(props);
         this.state = { inFocus: false };
@@ -163,6 +171,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
         outline: 'none',
         borderRadius: 0,
     };
+
     static defaultMenuContainerStyle = {
     }
 
@@ -192,7 +201,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     }
 
     getValue() {
-        const options = this.options;
+        const {options} = this;
         const selectedValue = this.props.value;
         if (options && selectedValue) {
             return options.find(option => option.value === selectedValue);
@@ -264,7 +273,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
                         clearable={nullable}
                         style={selectStyle}
                         menuContainerStyle={menuContainerStyle}
-                        className={'virtualized-select'}
+                        className="virtualized-select"
                         placeholder={useHintLabel ? label : ''}
                         maxHeight={maxHeight || 200}
                         optionRenderer={this.renderOption}

@@ -141,8 +141,8 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
         ofType(programSelectorActionTypes.TEI_SEARCH_START_SET_PROGRAM),
         map((action) => {
             const state = store.value;
-            const searchId = action.payload.searchId;
-            const programId = action.payload.programId;
+            const {searchId} = action.payload;
+            const {programId} = action.payload;
             let trackedEntityTypeId = state.teiSearch[searchId].selectedTrackedEntityTypeId;
             const contextId = programId || trackedEntityTypeId;
             if (programId) {
@@ -170,7 +170,7 @@ export const teiNewSearchEpic = (action$: InputObservable, store: ReduxStore) =>
         ofType(actionTypes.TEI_NEW_SEARCH),
         map((action) => {
             const state = store.value;
-            const searchId = action.payload.searchId;
+            const {searchId} = action.payload;
             const currentTeiSearch = state.teiSearch[searchId];
 
             const contextId = currentTeiSearch.selectedProgramId || currentTeiSearch.selectedTrackedEntityTypeId;

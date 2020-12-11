@@ -17,6 +17,7 @@ class ProgramFilterer extends React.Component<Props> {
     }
 
     programs: Array<Program>;
+
     constructor(props: Props) {
         super(props);
         this.programs = Array.from(programCollection.values());

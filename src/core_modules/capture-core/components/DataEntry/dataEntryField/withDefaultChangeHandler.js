@@ -18,7 +18,7 @@ export default () =>
             constructor(props: Props) {
                 super(props);
                 this.handleChange = this.handleChange.bind(this);
-                const value = this.props.value;
+                const {value} = this.props;
                 this.state = { value };
             }
 

@@ -84,7 +84,7 @@ export default function getCustomFormField(metaData: MetaDataElement, options: O
         return getViewModeFieldConfig(metaData, options);
     }
 
-    const type = metaData.type;
+    const {type} = metaData;
     if (!fieldForTypes[type]) {
         log.warn(errorCreator(errorMessages.NO_FORMFIELD_FOR_TYPE)({ metaData }));
         // $FlowFixMe[prop-missing] automated comment

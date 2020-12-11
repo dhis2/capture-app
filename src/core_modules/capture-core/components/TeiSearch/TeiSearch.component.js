@@ -142,6 +142,7 @@ class TeiSearch extends React.Component<Props, State> {
             </Section>
         );
     })
+
     renderSearchResult = () => {
         const { onSearch, showResults, onNewSearch, onEditSearch, onSearchResultsChangePage, classes, ...passOnProps } = this.props;
         return (
@@ -156,7 +157,7 @@ class TeiSearch extends React.Component<Props, State> {
     }
 
     render() {
-        const searchGroups = this.props.searchGroups;
+        const {searchGroups} = this.props;
 
         if (this.props.showResults) {
             return this.renderSearchResult();

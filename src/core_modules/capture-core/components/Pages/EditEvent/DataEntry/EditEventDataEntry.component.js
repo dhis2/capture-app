@@ -2,23 +2,23 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import DataEntry from '../../../../components/DataEntry/DataEntry.container';
-import withCancelButton from '../../../../components/DataEntry/withCancelButton';
-import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
+import DataEntry from "../../../DataEntry/DataEntry.container";
+import withCancelButton from "../../../DataEntry/withCancelButton";
+import withDataEntryField from "../../../DataEntry/dataEntryField/withDataEntryField";
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import withMainButton from './withMainButton';
 import withFilterProps from '../../../FormFields/New/HOC/withFilterProps';
-import withDataEntryNotesHandler from '../../../../components/DataEntry/dataEntryNotes/withDataEntryNotesHandler';
+import withDataEntryNotesHandler from "../../../DataEntry/dataEntryNotes/withDataEntryNotesHandler";
 import Notes from '../../../Notes/Notes.component';
 
 import {
     withSaveHandler,
     placements,
     withCleanUpHOC,
-} from '../../../../components/DataEntry';
+} from "../../../DataEntry";
 import {
     withInternalChangeHandler,
     withLabel,
@@ -176,18 +176,18 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
 
 const buildGeometrySettingsFn = () => ({
     isApplicable: (props: Object) => {
-        const featureType = props.formFoundation.featureType;
+        const {featureType} = props.formFoundation;
         return ['Polygon', 'Point'].includes(featureType);
     },
     getComponent: (props: Object) => {
-        const featureType = props.formFoundation.featureType;
+        const {featureType} = props.formFoundation;
         if (featureType === 'Polygon') {
             return polygonComponent;
         }
         return pointComponent;
     },
     getComponentProps: (props: Object) => {
-        const featureType = props.formFoundation.featureType;
+        const {featureType} = props.formFoundation;
         if (featureType === 'Polygon') {
             return createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
@@ -336,7 +336,9 @@ const dataEntrySectionDefinitions = {
 
 class EditEventDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
+
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
+
     constructor(props: Props) {
         super(props);
         this.fieldOptions = {
@@ -345,9 +347,11 @@ class EditEventDataEntry extends Component<Props> {
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
+
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
+
     render() {
         const {
             onUpdateField,
@@ -359,7 +363,7 @@ class EditEventDataEntry extends Component<Props> {
             <div className={classes.dataEntryContainer}>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <DataEntryWrapper
-                    id={'singleEvent'}
+                    id="singleEvent"
                     onUpdateFormField={onUpdateField}
                     onUpdateFormFieldAsync={onStartAsyncUpdateField}
                     fieldOptions={this.fieldOptions}

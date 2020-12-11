@@ -8,7 +8,7 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
  * @returns
  */
 export function convertMomentToDateFormatString(moment: any) {
-    const dateFormat = systemSettingsStore.get().dateFormat;
+    const {dateFormat} = systemSettingsStore.get();
     const formattedDateString = moment.format(dateFormat);
     return formattedDateString;
 }

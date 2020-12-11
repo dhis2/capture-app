@@ -7,6 +7,7 @@ export type Value = string | number | boolean | {};
 
 export default class OptionGroup {
     _id: string;
+
     _optionIds: Map<string, string>;
 
     constructor(initFn?: (_this: OptionGroup) => void) {
@@ -24,6 +25,7 @@ export default class OptionGroup {
     set optionIds(optionIds: Map<string, string>) {
         this._optionIds = optionIds;
     }
+
     get optionIds(): Map<string, string> {
         return this._optionIds;
     }

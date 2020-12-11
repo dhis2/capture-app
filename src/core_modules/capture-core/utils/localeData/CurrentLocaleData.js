@@ -19,6 +19,7 @@ export default class CurrentLocaleData {
     static set(data: LocaleDataType) {
         CurrentLocaleData.currentData = data;
     }
+
     static get() {
         return CurrentLocaleData.currentData;
     }

@@ -4,6 +4,7 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 
 export default class Icon {
     _color: string;
+
     _data: string;
 
     constructor(initFn: ?(_this: Icon) => void) {
@@ -14,6 +15,7 @@ export default class Icon {
     set color(color: string) {
         this._color = color;
     }
+
     get color(): string {
         return this._color;
     }
@@ -21,6 +23,7 @@ export default class Icon {
     set data(data: string) {
         this._data = data;
     }
+
     get data(): string {
         return this._data;
     }

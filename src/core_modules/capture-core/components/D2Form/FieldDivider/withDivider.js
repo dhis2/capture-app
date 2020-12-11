@@ -32,7 +32,7 @@ export default () => (InnerComponent: React.ComponentType<any>) => withStyles(ge
                 return null;
             }
 
-            const classes = this.props.classes;
+            const {classes} = this.props;
 
             return (
                 <div
@@ -47,7 +47,7 @@ export default () => (InnerComponent: React.ComponentType<any>) => withStyles(ge
 
         render() {
             const { classes, ...passOnProps } = this.props;
-            const formHorizontal = this.props.formHorizontal;
+            const {formHorizontal} = this.props;
             const calculatedProps = !formHorizontal ? { onRenderDivider: this.renderDivider } : null;
 
             return (

@@ -8,7 +8,7 @@ type Location = {
 function isNumValid(num) {
     if (typeof num === 'number') {
         return true;
-    } else if (typeof num === 'string') {
+    } if (typeof num === 'string') {
         return num.match(/[^0-9.,-]+/) === null;
     }
 

@@ -80,7 +80,7 @@ class DataElementFactory {
 
                 let requestPromise;
                 if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
-                    const orgUnitId = contextProps.orgUnitId;
+                    const {orgUnitId} = contextProps;
                     requestPromise = getApi()
                         .get(
                             'trackedEntityInstances',
@@ -122,8 +122,11 @@ class DataElementFactory {
     }
 
     locale: ?string;
+
     optionSetFactory: OptionSetFactory;
+
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
+
     constructor(
         cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
         cachedOptionSets: Map<string, CachedOptionSet>,

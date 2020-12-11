@@ -19,7 +19,7 @@ const makeMapStateToProps = () => {
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const { programId, tetAttributesOnly, errorData, ...passOnOwnProps } = ownProps;
-    return Object.assign({}, passOnOwnProps, stateProps, dispatchProps);
+    return { ...passOnOwnProps, ...stateProps, ...dispatchProps};
 };
 
 // $FlowFixMe

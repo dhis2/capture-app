@@ -6,8 +6,8 @@ function isValidDateTimeWithEmptyCheck(value: ?Object) {
     return value && isValidDateTime(value);
 }
 const convertDateTimeToMoment = (value: Object) => {
-    const date = value.date;
-    const time = value.time;
+    const {date} = value;
+    const {time} = value;
     let hour;
     let minutes;
     if (/[:.]/.test(time)) {

@@ -112,7 +112,7 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, pro
         return null;
     }
 
-    const categoryCombination = program.categoryCombination;
+    const {categoryCombination} = program;
     if (!categoryCombination) {
         return null;
     }

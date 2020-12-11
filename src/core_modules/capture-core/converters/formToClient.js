@@ -18,7 +18,7 @@ function convertDateTime(formValue: DateTimeValue): string {
     const editedDate = formValue.date;
     const editedTime = formValue.time;
 
-    const momentTime = parseTime(editedTime).momentTime;
+    const {momentTime} = parseTime(editedTime);
     const hours = momentTime.hour();
     const minutes = momentTime.minute();
 
@@ -35,7 +35,7 @@ function convertDate(dateValue: string) {
 }
 
 function convertTime(timeValue: string) {
-    const momentTime = parseTime(timeValue).momentTime;
+    const {momentTime} = parseTime(timeValue);
     momentTime.locale('en');
     return momentTime.format('HH:mm');
 }

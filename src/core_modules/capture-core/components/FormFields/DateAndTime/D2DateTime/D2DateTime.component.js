@@ -53,11 +53,17 @@ const styles = theme => ({
 
 class D2DateTime extends Component<Props, State> {
     handleTimeChange: (timeValue: string) => void;
+
     handleDateChange: (dateValue: string) => void;
+
     handleTimeBlur: (timeValue: string) => void;
+
     handleDateBlur: (dateValue: string) => void;
+
     handleFocus: () => void;
+
     touchedFields: Set<string>;
+
     inFocusLabelClasses: Object;
 
     constructor(props: Props) {
@@ -110,7 +116,7 @@ class D2DateTime extends Component<Props, State> {
     handleBlur(value: Value) {
         this.setState({ inFocus: false });
 
-        const onBlur = this.props.onBlur;
+        const {onBlur} = this.props;
         const touched = this.touchedFields.size === 2;
         if (!value.date && !value.time) {
             onBlur(undefined, {

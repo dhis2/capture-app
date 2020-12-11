@@ -20,7 +20,7 @@ import {
     newEventSavedAddAnother,
     startSaveTeiForNewEventRelationship,
     actionTypes as newEventDataEntryActionTypes,
-} from '../../DataEntry/actions/dataEntry.actions';
+} from "../actions/dataEntry.actions";
 
 import {
     addRelationship,
@@ -45,8 +45,8 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
         map((action) => {
             const state = store.value;
             const existingRelationships = state.dataEntriesRelationships[dataEntryKey] || [];
-            const payload = action.payload;
-            const entity = payload.entity;
+            const {payload} = action;
+            const {entity} = payload;
 
             const toEntity = entity.id ? entity : getRelationshipNewTei(entity.dataEntryId, entity.itemId, state);
             const toEntityIsNew = !entity.id;
@@ -108,7 +108,7 @@ export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable) 
     action$.pipe(
         ofType(newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS),
         map((action) => {
-            const meta = action.meta;
+            const {meta} = action;
             if (meta.relationshipData) {
                 const eventId = action.payload.response.importSummaries[0].reference;
                 const relationshipData = action.meta.relationshipData.map((r) => {
@@ -141,7 +141,7 @@ export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable) =
             newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS_TEI,
         ),
         map((action) => {
-            const meta = action.meta;
+            const {meta} = action;
             if (meta.triggerAction === newEventDataEntryActionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE) {
                 return newEventSavedAfterReturnedToMainPage(meta.selections);
             }

@@ -15,12 +15,14 @@ export default () =>
 
         class OrgUnitImplicitInternalFilterHandlerHOC extends React.Component<Props> {
             defaultRoots: Array<any>;
+
             constructor(props: Props) {
                 super(props);
                 const { scope } = this.props;
                 this.defaultRoots =
                     getOrgUnitRoots(OrgUnitImplicitInternalFilterHandlerHOC.DEFAULT_ROOTS_DATA[scope]) || [];
             }
+
             static DEFAULT_ROOTS_DATA = {
                 [scopes.USER_CAPTURE]: 'captureRoots',
                 [scopes.USER_SEARCH]: 'search',

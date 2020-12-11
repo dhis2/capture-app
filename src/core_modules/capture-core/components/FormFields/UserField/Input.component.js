@@ -23,7 +23,7 @@ const isSuggestionBlurTarget = (target, suggestionName) => {
         return true;
     }
 
-    const parentElement = target.parentElement;
+    const {parentElement} = target;
     if (!parentElement) {
         return false;
     }

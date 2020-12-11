@@ -14,9 +14,13 @@ type OptionFlags = {
 
 export default class Enrollment {
     _labels: { [key: $Values<typeof labelKeys>]: string };
+
     _optionFlags: OptionFlags;
+
     _enrollmentForm: RenderFoundation;
+
     _inputSearchGroups: ?Array<InputSearchGroup>;
+
     _trackedEntityType: TrackedEntityType;
 
     constructor(initFn: ?(_this: Enrollment) => void) {
@@ -37,6 +41,7 @@ export default class Enrollment {
     set enrollmentForm(formFoundation: RenderFoundation) {
         this._enrollmentForm = formFoundation;
     }
+
     get enrollmentForm(): RenderFoundation {
         return this._enrollmentForm;
     }
@@ -44,6 +49,7 @@ export default class Enrollment {
     set incidentDateLabel(label: string) {
         this._labels[labelKeys.INCIDENT_DATE] = label;
     }
+
     get incidentDateLabel(): string {
         return this._labels[labelKeys.INCIDENT_DATE];
     }
@@ -51,6 +57,7 @@ export default class Enrollment {
     set enrollmentDateLabel(label: string) {
         this._labels[labelKeys.ENROLLMENT_DATE] = label;
     }
+
     get enrollmentDateLabel(): string {
         return this._labels[labelKeys.ENROLLMENT_DATE];
     }
@@ -58,6 +65,7 @@ export default class Enrollment {
     set allowFutureEnrollmentDate(isAllowed: boolean) {
         this._optionFlags.allowFutureEnrollmentDate = isAllowed;
     }
+
     get allowFutureEnrollmentDate(): boolean {
         return this._optionFlags.allowFutureEnrollmentDate;
     }
@@ -65,6 +73,7 @@ export default class Enrollment {
     set allowFutureIncidentDate(isAllowed: boolean) {
         this._optionFlags.allowFutureIncidentDate = isAllowed;
     }
+
     get allowFutureIncidentDate(): boolean {
         return this._optionFlags.allowFutureIncidentDate;
     }
@@ -72,6 +81,7 @@ export default class Enrollment {
     set showIncidentDate(show: boolean) {
         this._optionFlags.showIncidentDate = show;
     }
+
     get showIncidentDate(): boolean {
         return this._optionFlags.showIncidentDate;
     }
@@ -79,6 +89,7 @@ export default class Enrollment {
     set inputSearchGroups(searchGroups: Array<InputSearchGroup>) {
         this._inputSearchGroups = searchGroups;
     }
+
     get inputSearchGroups(): ?Array<InputSearchGroup> {
         return this._inputSearchGroups;
     }
@@ -86,6 +97,7 @@ export default class Enrollment {
     set trackedEntityType(type: TrackedEntityType) {
         this._trackedEntityType = type;
     }
+
     get trackedEntityType(): TrackedEntityType {
         return this._trackedEntityType;
     }

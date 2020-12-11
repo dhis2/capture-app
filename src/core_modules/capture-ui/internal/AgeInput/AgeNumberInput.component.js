@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import TextInput from '../TextInput/TextInput.component';
 import withShrinkLabel from '../../HOC/withShrinkLabel';
 import withFocusSaver from '../../HOC/withFocusSaver';
-import withFocusHandler from '../../internal/TextInput/withFocusHandler';
+import withFocusHandler from "../TextInput/withFocusHandler";
 
 
 type Props = {
@@ -23,16 +23,20 @@ class AgeNumberInput extends Component<Props, State> {
         super(props);
         this.state = { focus: false };
     }
+
     handleBlur = (event) => {
         this.props.onBlur(event.currentTarget.value);
         this.setState({ focus: false });
     }
+
     handleChange = (event) => {
         this.props.onChange && this.props.onChange(event.currentTarget.value);
     }
+
     handleFocus = () => {
         this.setState({ focus: true });
     }
+
     render() {
         const { onBlur, onChange, value, classes, ...passOnProps } = this.props;
         return (

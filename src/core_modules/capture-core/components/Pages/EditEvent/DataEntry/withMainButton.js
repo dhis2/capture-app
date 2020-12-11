@@ -19,6 +19,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
         getWrappedInstance() {
             return this.innerInstance;
         }
+
         renderMainButton = () => (
             <Tooltip title={!this.props.formFoundation.access.data.write ? i18n.t('No write access') : ''}>
                 <Button

@@ -34,6 +34,7 @@ type Props = {
 class D2Section extends React.PureComponent<Props> {
     // $FlowFixMe[speculation-ambiguous] automated comment
     sectionFieldsInstance: ?D2SectionFields;
+
     renderSectionHeader() {
         const title = this.props.sectionMetaData.name;
 

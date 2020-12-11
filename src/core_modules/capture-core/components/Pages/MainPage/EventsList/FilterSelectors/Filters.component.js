@@ -178,8 +178,8 @@ const renderRestButton = (
     onRestMenuItemSelected: Function,
 ) => (restElementsArray.length > 0 ? (
     <FilterRestMenu
-        key={'restMenu'}
-        data-test={'filter-rest-menu'}
+        key="restMenu"
+        data-test="filter-rest-menu"
         listId={listId}
         columns={restElementsArray}
         onItemSelected={onRestMenuItemSelected}
@@ -270,9 +270,9 @@ const Filters = (props: Props) => {
     ]);
 
     return (
-        <React.Fragment>
+        <>
             {filterButtons}
-        </React.Fragment>
+        </>
     );
 };
 

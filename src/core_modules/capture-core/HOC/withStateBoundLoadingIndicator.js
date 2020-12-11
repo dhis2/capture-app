@@ -45,9 +45,7 @@ export const withStateBoundLoadingIndicator = (
         });
 
         const mergeProps = (stateProps, dispatchProps, ownProps) =>
-            Object.assign({}, ownProps, stateProps, dispatchProps, {
-                InnerComponent,
-            });
+            ({ ...ownProps, ...stateProps, ...dispatchProps, InnerComponent});
 
 
         // $FlowFixMe[speculation-ambiguous] automated comment

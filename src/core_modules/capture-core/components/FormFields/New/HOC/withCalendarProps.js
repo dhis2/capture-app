@@ -32,7 +32,9 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
         }
 
         calendarTheme: Object;
+
         calendarLocaleData: Object;
+
         constructor(props: Props) {
             super(props);
             this.calendarTheme = getCalendarTheme(this.props.theme);

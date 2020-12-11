@@ -84,7 +84,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 <Tooltip title={!hasWriteAccess ? i18n.t('No write access') : ''}>
                     <MultiButton
                         variant="raised"
-                        color={'primary'}
+                        color="primary"
                         buttonType="progress"
                         buttonText={primary.text}
                         disabled={!hasWriteAccess}

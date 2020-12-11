@@ -140,7 +140,7 @@ const EventListConfig = (props: Props) => {
         onDeleteTemplate(template, programId, listId), [onDeleteTemplate, programId]);
 
     return (
-        <React.Fragment>
+        <>
             {children(currentListIsModified)}
             <EventListConfigMenuContent
                 {...passOnProps}
@@ -156,7 +156,7 @@ const EventListConfig = (props: Props) => {
                 onDeleteTemplate={deleteTemplateHandler}
                 currentListIsModified={currentListIsModified}
             />
-        </React.Fragment>
+        </>
     );
 };
 

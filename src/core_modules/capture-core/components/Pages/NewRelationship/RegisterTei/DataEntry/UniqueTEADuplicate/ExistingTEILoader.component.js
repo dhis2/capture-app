@@ -21,6 +21,7 @@ type State = {
 
 class ExistingTEILoader extends React.Component<Props, State> {
     cancelablePromise: any;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -118,8 +119,9 @@ class ExistingTEILoader extends React.Component<Props, State> {
 
         this.cancelablePromise = cancelablePromise;
     }
+
     requestTei() {
-        const programId = this.props.programId;
+        const {programId} = this.props;
         if (programId) {
             this.requestTeiInProgramContext();
         } else {

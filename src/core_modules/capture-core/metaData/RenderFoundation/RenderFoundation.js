@@ -19,15 +19,25 @@ export default class RenderFoundation {
     };
 
     _id: string;
+
     _access: Access;
+
     _name: string;
+
     _description: ?string;
+
     _programId: string;
+
     _sections: Map<string, Section>;
+
     _labels: { [key: string]: string };
+
     _programRules: Array<ProgramRule>;
+
     _customForm: ?CustomForm;
+
     _featureType: string;
+
     _validationStrategy: $Values<typeof validationStrategies>;
 
     constructor(initFn: ?(_this: RenderFoundation) => void) {
@@ -41,6 +51,7 @@ export default class RenderFoundation {
     set id(id: string) {
         this._id = id;
     }
+
     get id(): string {
         return this._id;
     }
@@ -48,6 +59,7 @@ export default class RenderFoundation {
     set access(access: Access) {
         this._access = access;
     }
+
     get access(): Access {
         return this._access;
     }
@@ -55,6 +67,7 @@ export default class RenderFoundation {
     set name(name: string) {
         this._name = name;
     }
+
     get name(): string {
         return this._name;
     }
@@ -62,6 +75,7 @@ export default class RenderFoundation {
     set description(description: ?string) {
         this._description = description;
     }
+
     get description(): ?string {
         return this._description;
     }
@@ -69,6 +83,7 @@ export default class RenderFoundation {
     set programId(programId: string) {
         this._programId = programId;
     }
+
     get programId(): string | number {
         return this._programId;
     }
@@ -76,6 +91,7 @@ export default class RenderFoundation {
     set programRules(programRules: Array<ProgramRule>) {
         this._programRules = programRules;
     }
+
     get programRules(): Array<ProgramRule> {
         return this._programRules;
     }
@@ -87,6 +103,7 @@ export default class RenderFoundation {
     set customForm(customForm: CustomForm) {
         this._customForm = customForm;
     }
+
     get customForm() {
         return this._customForm;
     }
@@ -94,6 +111,7 @@ export default class RenderFoundation {
     set featureType(featureType: string) {
         this._featureType = featureType;
     }
+
     get featureType(): string {
         return this._featureType;
     }
@@ -112,6 +130,7 @@ export default class RenderFoundation {
 
         this._validationStrategy = strategy;
     }
+
     get validationStrategy(): $Values<typeof validationStrategies> {
         return this._validationStrategy;
     }

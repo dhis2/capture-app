@@ -126,10 +126,12 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     }
 
     toD2DateTextFieldInstance: any;
+
     constructor(props: Props) {
         super(props);
         this.state = { submitAttempted: false };
     }
+
     static errorMessages = {
         CUSTOM_RANGE_WITHOUT_VALUES: 'Please specify a range',
         FROM_GREATER_THAN_TO: 'The From date can\'t be after the To date',
@@ -176,6 +178,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
             _this.value = mainOptionKeys.CUSTOM_RANGE;
         }),
     ]);
+
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
 
@@ -248,11 +251,11 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     // eslint-disable-next-line complexity
     getErrors() {
         const values = this.props.value;
-        const submitAttempted = this.state.submitAttempted;
+        const {submitAttempted} = this.state;
         const mainValue = values && values.main;
         const fromValue = values && values.from;
         const toValue = values && values.to;
-        const type = this.props.type;
+        const {type} = this.props;
 
         if (mainValue === mainOptionKeys.CUSTOM_RANGE && !fromValue && !toValue) {
             return {

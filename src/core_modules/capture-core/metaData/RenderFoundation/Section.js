@@ -15,11 +15,17 @@ export default class Section {
     };
 
     _id: string;
+
     _name: string;
+
     _open: boolean;
+
     _visible: boolean;
+
     _collapsible: boolean;
+
     _elements: Map<string, DataElement>;
+
     _showContainer: boolean;
 
     constructor(initFn: (_this: Section) => void) {
@@ -34,6 +40,7 @@ export default class Section {
     set id(id: string) {
         this._id = id;
     }
+
     get id(): string {
         return this._id;
     }
@@ -41,6 +48,7 @@ export default class Section {
     set name(name: string) {
         this._name = name;
     }
+
     get name(): string {
         return this._name;
     }
@@ -49,6 +57,7 @@ export default class Section {
         // $FlowFixMe[incompatible-type] automated comment
         this._open = isDefined(open) ? open : true;
     }
+
     get open(): boolean {
         return this._open;
     }
@@ -57,6 +66,7 @@ export default class Section {
         // $FlowFixMe[incompatible-type] automated comment
         this._visible = isDefined(visible) ? visible : true;
     }
+
     get visible(): boolean {
         return this._visible;
     }
@@ -65,6 +75,7 @@ export default class Section {
         // $FlowFixMe[incompatible-type] automated comment
         this._showContainer = isDefined(showContainer) ? showContainer : true;
     }
+
     get showContainer(): boolean {
         return this._showContainer;
     }

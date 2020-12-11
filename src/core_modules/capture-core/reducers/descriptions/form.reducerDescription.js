@@ -18,13 +18,13 @@ import {
 export const formsValuesDesc = createReducerDescription({
     [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         newState[payload.formId] = payload.formValues;
         return newState;
     },
     [fieldActionTypes.UPDATE_FIELD]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         // todo (eslint)
         // eslint-disable-next-line no-multi-assign
         const formValues = newState[payload.formId] = { ...newState[payload.formId] };
@@ -43,7 +43,7 @@ export const formsValuesDesc = createReducerDescription({
     },
     [dataEntryActionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         // todo (eslint)
         // eslint-disable-next-line no-multi-assign
         const formValues = newState[payload.formId] = { ...newState[payload.formId] };
@@ -52,7 +52,7 @@ export const formsValuesDesc = createReducerDescription({
     },
     [rulesEffectsActionTypes.UPDATE_FIELD_FROM_RULE_EFFECT]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         // todo (eslint)
         // eslint-disable-next-line no-multi-assign
         const formValues = newState[payload.formId] = { ...newState[payload.formId] };
@@ -65,7 +65,7 @@ export const formsValuesDesc = createReducerDescription({
         if (!assignEffects) {
             return state;
         }
-        const payload = action.payload;
+        const {payload} = action;
         const newState = {
             ...state,
             [payload.formId]: {
@@ -81,7 +81,7 @@ export const formsValuesDesc = createReducerDescription({
 export const formsSectionsFieldsUIDesc = createReducerDescription({
     [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
         const newState = { ...state };
-        const formId = action.payload.formId;
+        const {formId} = action.payload;
 
         Object
             .keys(newState)
@@ -94,7 +94,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     },
     [formAsyncActionTypes.FIELDS_VALIDATED]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
 
         newState[payload.formBuilderId] = Object.keys(payload.fieldsUI).reduce((accSectionFieldsUI, key) => {
             accSectionFieldsUI[key] = { ...accSectionFieldsUI[key], ...payload.fieldsUI[key], validatingMessage: null };
@@ -104,7 +104,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     },
     [fieldActionTypes.UPDATE_FIELD]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         newState[payload.sectionId] = { ...newState[payload.sectionId] };
         const sectionFieldsUI = newState[payload.sectionId];
         sectionFieldsUI[payload.elementId] = {
@@ -163,7 +163,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     },
     [dataEntryActionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         newState[payload.formBuilderId] = { ...newState[payload.formBuilderId] };
         const formBuilderFieldsUI = newState[payload.formBuilderId];
         formBuilderFieldsUI[payload.elementId] = {
@@ -176,7 +176,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
     },
     [formBuilderActionTypes.UPDATE_FIELD_UI_ONLY]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
+        const {payload} = action;
         newState[payload.sectionId] = { ...newState[payload.sectionId] };
         const sectionFieldsUI = newState[payload.sectionId];
         sectionFieldsUI[payload.elementId] = { ...sectionFieldsUI[payload.elementId], ...payload.uiState };
@@ -200,7 +200,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
 
 export const formsDesc = createReducerDescription({
     [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
-        const payload = action.payload;
+        const {payload} = action;
 
         const prevLoadNr = state[payload.formId] && state[payload.formId].loadNr;
         let nextLoadNr;

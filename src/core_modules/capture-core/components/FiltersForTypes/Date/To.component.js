@@ -21,6 +21,7 @@ class ToDateFilter extends Component<Props> {
     }
 
     displayOptions: Object;
+
     constructor(props: Props) {
         super(props);
         this.displayOptions = {

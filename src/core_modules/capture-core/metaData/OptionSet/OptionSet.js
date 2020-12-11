@@ -19,11 +19,17 @@ export default class OptionSet {
     };
 
     _id: ?string;
+
     _emptyText: ?string;
+
     _options: Array<Option>;
+
     _optionGroups: Map<string, OptionGroup>;
+
     _viewType: $Values<typeof viewTypes>;
+
     _inputType: $Values<typeof inputTypes>;
+
     _dataElement: ?DataElement;
 
     constructor(
@@ -54,6 +60,7 @@ export default class OptionSet {
     set id(id: string) {
         this._id = id;
     }
+
     get id(): ?string {
         return this._id;
     }
@@ -69,6 +76,7 @@ export default class OptionSet {
             log.warn(errorCreator(OptionSet.errorMessages.UNSUPPORTED_INPUTTYPE)({ optionSet: this, inputType }));
         }
     }
+
     get inputType(): $Values<typeof inputTypes> {
         return this._inputType;
     }
@@ -84,6 +92,7 @@ export default class OptionSet {
             log.warn(errorCreator(OptionSet.errorMessages.UNSUPPORTED_VIEWTYPE)({ optionSet: this, viewType }));
         }
     }
+
     get viewType(): ?string {
         return this._viewType;
     }
@@ -91,6 +100,7 @@ export default class OptionSet {
     get emptyText(): ?string {
         return this._emptyText;
     }
+
     set emptyText(emptyText?: ?string): ?string {
         this._emptyText = emptyText;
     }

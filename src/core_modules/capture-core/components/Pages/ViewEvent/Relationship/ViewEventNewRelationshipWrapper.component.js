@@ -67,6 +67,7 @@ class ViewEventNewRelationshipWrapper extends React.Component<Props, State> {
             discardDialogOpen: false,
         };
     }
+
     handleDiscard = () => {
         this.setState({ discardDialogOpen: true });
     }

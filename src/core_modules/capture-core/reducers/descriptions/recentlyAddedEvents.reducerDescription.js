@@ -18,7 +18,7 @@ import {
 export const recentlyAddedEventsDesc = createReducerDescription({
     [recentlyAddedEventsListActions.NEW_RECENTLY_ADDED_EVENT]: (state, action) => {
         const newState = { ...state };
-        const event = action.payload.event;
+        const {event} = action.payload;
         newState[event.eventId] = event;
         return newState;
     },

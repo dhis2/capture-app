@@ -19,6 +19,7 @@ class ExistingTEIContents extends React.Component<Props> {
     handleLink = () => {
         this.props.onLink(this.props.attributeValues);
     }
+
     render() {
         const { attributeValues, dataElements, onCancel } = this.props;
 
@@ -30,7 +31,7 @@ class ExistingTEIContents extends React.Component<Props> {
         ];
 
         return (
-            <React.Fragment>
+            <>
                 <DialogContent>
                     <DialogTitle>
                         {i18n.t('Registered person')}
@@ -54,7 +55,7 @@ class ExistingTEIContents extends React.Component<Props> {
                         {i18n.t('Link')}
                     </Button>
                 </DialogActions>
-            </React.Fragment>
+            </>
         );
     }
 }

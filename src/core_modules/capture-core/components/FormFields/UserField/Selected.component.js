@@ -32,14 +32,14 @@ const Selected = (props: Props) => {
         >
             <div
                 ref={(instance) => { inputDomElement.current = instance; }}
-                role={'button'}
+                role="button"
                 className={defaultClasses.inputContainer}
                 tabIndex={0}
                 onKeyDown={handleKeyDown}
             >
                 <TextFieldPlain
                     classes={defaultClasses}
-                    value={''}
+                    value=""
                     disabled
                 />
             </div>

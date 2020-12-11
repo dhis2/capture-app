@@ -5,7 +5,7 @@ import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 
 const mapStateToProps = (state: ReduxState, props: {listId: ?string}) => {
-    const listId = props.listId;
+    const {listId} = props;
     return {
         ready: listId && state.workingListsUI[listId] && !state.workingListsUI[listId].isLoading,
         error: listId && state.workingListsUI[listId] && state.workingListsUI[listId].dataLoadingError,

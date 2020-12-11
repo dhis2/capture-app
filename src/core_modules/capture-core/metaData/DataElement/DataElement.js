@@ -20,17 +20,29 @@ export default class DataElement {
     };
 
     _id: string;
+
     _name: string;
+
     _shortName: string;
+
     _formName: string;
+
     _disabled: boolean;
+
     _compulsory: boolean;
+
     _description: string;
+
     _type: $Values<typeof elementTypes>;
+
     _optionSet: ?OptionSet;
+
     _displayInForms: boolean;
+
     _displayInReports: boolean;
+
     _icon: ?Icon;
+
     _unique: ?Unique;
 
     constructor(initFn: ?(_this: DataElement) => void) {
@@ -44,6 +56,7 @@ export default class DataElement {
     set id(id: string) {
         this._id = id;
     }
+
     get id(): string {
         return this._id;
     }
@@ -51,6 +64,7 @@ export default class DataElement {
     set name(name: string) {
         this._name = name;
     }
+
     get name(): string {
         return this._name;
     }
@@ -58,6 +72,7 @@ export default class DataElement {
     set shortName(shortName: string) {
         this._shortName = shortName;
     }
+
     get shortName(): string {
         return this._shortName;
     }
@@ -65,6 +80,7 @@ export default class DataElement {
     set formName(formName: string) {
         this._formName = formName;
     }
+
     get formName(): string {
         return this._formName;
     }
@@ -76,6 +92,7 @@ export default class DataElement {
     set displayInReports(display?: ?boolean) {
         this._displayInReports = display != null ? display : true;
     }
+
     get displayInReports(): boolean {
         return this._displayInReports;
     }
@@ -83,6 +100,7 @@ export default class DataElement {
     set disabled(disabled: ?boolean) {
         this._disabled = !!disabled;
     }
+
     get disabled(): boolean {
         return this._disabled;
     }
@@ -90,6 +108,7 @@ export default class DataElement {
     set compulsory(compulsory: ?boolean) {
         this._compulsory = !!compulsory;
     }
+
     get compulsory(): boolean {
         return this._compulsory;
     }
@@ -97,6 +116,7 @@ export default class DataElement {
     set description(description: string) {
         this._description = description;
     }
+
     get description(): string {
         return this._description;
     }
@@ -111,6 +131,7 @@ export default class DataElement {
             this._type = type;
         }
     }
+
     get type(): $Values<typeof elementTypes> {
         return this._type;
     }
@@ -118,6 +139,7 @@ export default class DataElement {
     set optionSet(optionSet: ?OptionSet) {
         this._optionSet = optionSet;
     }
+
     get optionSet(): ?OptionSet {
         return this._optionSet;
     }
@@ -125,6 +147,7 @@ export default class DataElement {
     set icon(icon: ?Icon) {
         this._icon = icon;
     }
+
     get icon(): ?Icon {
         return this._icon;
     }
@@ -132,6 +155,7 @@ export default class DataElement {
     set unique(unique: Unique) {
         this._unique = unique;
     }
+
     get unique(): ?Unique {
         return this._unique;
     }

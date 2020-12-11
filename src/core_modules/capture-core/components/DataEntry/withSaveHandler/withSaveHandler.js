@@ -48,7 +48,9 @@ const getSaveHandler = (
     onGetFormFoundation?: GetFormFoundationFn) => {
     class SaveHandlerHOC extends React.Component<Props, State> {
         formInstance: any;
+
         dataEntryFieldInstances: Map<string, any>;
+
         isCompleting: boolean;
 
         constructor(props: Props) {
@@ -99,10 +101,10 @@ const getSaveHandler = (
         }
 
         validateGeneralErrorsFromRules(isCompleting: boolean) {
-            const validationStrategy = this.props.calculatedFoundation.validationStrategy;
+            const {validationStrategy} = this.props.calculatedFoundation;
             if (validationStrategy === validationStrategies.NONE) {
                 return true;
-            } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
+            } if (validationStrategy === validationStrategies.ON_COMPLETE) {
                 return (isCompleting ? !this.props.hasGeneralErrors : true);
             }
 
@@ -110,7 +112,7 @@ const getSaveHandler = (
         }
 
         validateForm() {
-            const formInstance = this.formInstance;
+            const {formInstance} = this;
             if (!formInstance) {
                 log.error(
                     errorCreator(

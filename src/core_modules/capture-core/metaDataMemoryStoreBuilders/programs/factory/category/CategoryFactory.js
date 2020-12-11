@@ -13,6 +13,7 @@ import type
 
 class CategoryFactory {
     cachedCategories: {[categoryId: string]: CachedCategory};
+
     constructor(cachedCategories: {[categoryId: string]: CachedCategory}) {
         this.cachedCategories = cachedCategories;
     }
@@ -21,7 +22,7 @@ class CategoryFactory {
         cachedProgramCategory: ProgramCachedCategory,
     ) {
         return new Category((category: Category) => {
-            const id = cachedProgramCategory.id;
+            const {id} = cachedProgramCategory;
             category.id = id;
             const cachedCategory = this.cachedCategories[id];
             if (!cachedCategory) {

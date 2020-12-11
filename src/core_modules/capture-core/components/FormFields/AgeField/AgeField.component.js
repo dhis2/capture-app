@@ -146,9 +146,11 @@ class D2AgeField extends Component<Props> {
   // $FlowFixMe[missing-annot] automated comment
   // $FlowFixMe[incompatible-call] automated comment
   onYearsChange = evt => this.setState({ years: evt.target.value })
+
   // $FlowFixMe[missing-annot] automated comment
   // $FlowFixMe[incompatible-call] automated comment
   onMonthsChange = evt => this.setState({ months: evt.target.value })
+
   // $FlowFixMe[missing-annot] automated comment
   // $FlowFixMe[incompatible-call] automated comment
   onDaysChange = evt => this.setState({ days: evt.target.value })

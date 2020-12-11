@@ -83,8 +83,8 @@ export const openEventForEditInDataEntry = (
     foundation: RenderFoundation,
     program: Program,
 ) => {
-    const dataEntryId = editEventIds.dataEntryId;
-    const itemId = editEventIds.itemId;
+    const {dataEntryId} = editEventIds;
+    const {itemId} = editEventIds;
     const dataEntryPropsToInclude = [
         {
             id: 'eventDate',

@@ -33,9 +33,13 @@ type Props = {
 
 class MultiSelectBoxes extends Component<Props> {
     handleOptionChange: (e: Object, isChecked: boolean, value: any) => void;
+
     materialUIContainerInstance: any;
+
     checkedValues: ?Set<any>;
+
     goto: () => void;
+
     labelClasses: Object;
 
     constructor(props: Props) {
@@ -51,7 +55,7 @@ class MultiSelectBoxes extends Component<Props> {
     }
 
     getBoxes(passOnProps: Object) {
-        const optionSet = this.props.optionSet;
+        const {optionSet} = this.props;
         if (optionSet) {
             return optionSet.options.map((o: Option, index: number) => (
                 <FormControlLabel
@@ -104,7 +108,7 @@ class MultiSelectBoxes extends Component<Props> {
     }
 
     setCheckedStatusForBoxes() {
-        const value = this.props.value;
+        const {value} = this.props;
         if (value || value === false || value === 0) {
             // $FlowFixMe[prop-missing] automated comment
             this.checkedValues = new Set(value);
@@ -134,7 +138,7 @@ class MultiSelectBoxes extends Component<Props> {
     }
 
     renderCheckboxes(passOnProps: Object) {
-        const orientation = this.props.orientation;
+        const {orientation} = this.props;
         return orientation === orientations.VERTICAL ? this.renderVertical(passOnProps) : this.renderHorizontal(passOnProps);
     }
 

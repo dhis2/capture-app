@@ -72,7 +72,7 @@ export default function getRulesEffectsProcessor(
             // $FlowFixMe[incompatible-use] automated comment
             trackedEntityAttributes[effect[processIdName]];
 
-        const valueType = element.valueType;
+        const {valueType} = element;
         const baseValue = onConvertDataToBaseOutputValue(effect.data, valueType);
         const outputValue = convertBaseValueToOutputValue(baseValue, valueType);
 

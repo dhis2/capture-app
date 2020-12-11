@@ -13,17 +13,19 @@ export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         class OptionSetConverter extends React.Component<Props> {
             formOptionSet: OptionSet;
+
             constructor(props: Props) {
                 super(props);
                 // $FlowFixMe[incompatible-type] automated comment
                 this.formOptionSet = this.buildFormOptionSet();
             }
+
             static errorMessages = {
                 DATAELEMENT_MISSING: 'DataElement missing',
             };
 
             buildFormOptionSet() {
-                const optionSet = this.props.optionSet;
+                const {optionSet} = this.props;
                 if (!optionSet.dataElement) {
                     log.error(errorCreator(OptionSetConverter.errorMessages.DATAELEMENT_MISSING)({ OptionSetConverter: this }));
                     return null;

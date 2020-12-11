@@ -41,7 +41,7 @@ function isInternalTarget(target, suggestionName, inputName) {
         return true;
     }
 
-    const parentElement = target.parentElement;
+    const {parentElement} = target;
     if (!parentElement) {
         return false;
     }

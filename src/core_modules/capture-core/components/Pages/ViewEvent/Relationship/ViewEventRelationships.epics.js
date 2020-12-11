@@ -40,7 +40,7 @@ export const loadRelationshipsForViewEventEpic = (action$: ActionsObservable) =>
         ),
         switchMap((action) => {
             // Load event relationships
-            const event = action.payload.eventContainer.event;
+            const {event} = action.payload.eventContainer;
             return getRelationshipsForEvent(event.eventId, event.programId)
                 .then(relationships => batchActions([
                     eventRelationshipsLoaded(),
@@ -54,7 +54,7 @@ export const deleteRelationshipForViewEventEpic = (action$: ActionsObservable, s
             viewEventRelationshipsActionTypes.REQUEST_DELETE_EVENT_RELATIONSHIP,
         ),
         map((action) => {
-            const clientId = action.payload.clientId;
+            const {clientId} = action.payload;
             const state = store.value;
             const relationship = state.relationships.viewEvent.find(r => r.clientId === clientId);
 
@@ -70,10 +70,10 @@ export const addRelationshipForViewEventEpic = (action$: ActionsObservable, stor
         ofType(viewEventRelationshipsActionTypes.REQUEST_ADD_EVENT_RELATIONSHIP),
         map((action) => {
             const state = store.value;
-            const eventId = state.viewEventPage.eventId;
+            const {eventId} = state.viewEventPage;
             const existingRelationships = state.dataEntriesRelationships[relationshipKey] || [];
-            const payload = action.payload;
-            const entity = payload.entity;
+            const {payload} = action;
+            const {entity} = payload;
 
             const toEntity = entity.id ? entity : getRelationshipNewTei(entity.dataEntryId, entity.itemId, state);
 
@@ -130,7 +130,7 @@ export const saveRelationshipAfterSavingTeiForViewEventEpic = (action$: ActionsO
         map((action) => {
             const teiId = action.payload.response.importSummaries[0].reference;
             const { clientData, selections, clientId } = action.meta;
-            const to = clientData.to;
+            const {to} = clientData;
             to.data = null;
             to.id = teiId;
 

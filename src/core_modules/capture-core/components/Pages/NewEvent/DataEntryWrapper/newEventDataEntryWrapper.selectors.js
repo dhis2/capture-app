@@ -18,7 +18,7 @@ export const makeFormFoundationSelector = () => createSelector(
 
 
         // $FlowFixMe[prop-missing] automated comment
-        const stage = program.stage;
+        const {stage} = program;
         if (!stage) {
             log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
             return null;
@@ -40,7 +40,7 @@ export const makeStageSelector = () => createSelector(
 
 
         // $FlowFixMe[prop-missing] automated comment
-        const stage = program.stage;
+        const {stage} = program;
         if (!stage) {
             log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
             return null;

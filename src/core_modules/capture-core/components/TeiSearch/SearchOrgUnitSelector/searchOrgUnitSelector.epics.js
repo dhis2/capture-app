@@ -42,8 +42,8 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(searchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS),
         concatMap((action) => {
-            const searchText = action.payload.searchText;
-            const searchId = action.payload.searchId;
+            const {searchText} = action.payload;
+            const {searchId} = action.payload;
 
             return from(getD2()
                 .models
@@ -70,7 +70,7 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
                 return filterOrgUnitsFailed(resultContainer.searchId, RETRIEVE_ERROR);
             }
 
-            const regUnitArray = resultContainer.regUnitArray;
+            const {regUnitArray} = resultContainer;
             setStoreRoots(resultContainer.searchId, regUnitArray);
             const regUnits = resultContainer.regUnitArray
                 .map(unit => ({

@@ -27,7 +27,7 @@ class BooleanFilter extends Component<Props> implements UpdatableFilterContent<V
     booleanFieldInstance: ?D2TrueFalse;
 
     onGetUpdateData() {
-        const value = this.props.value;
+        const {value} = this.props;
 
         if (!value) {
             return null;

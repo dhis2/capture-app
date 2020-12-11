@@ -9,8 +9,11 @@ type Props = {
 
 class D2EmailField extends Component<Props> {
   materialUIInstance: any;
+
   materialUIContainerInstance: any;
+
   handleChange: (event: UiEventData) => void;
+
   handleBlur: (event: UiEventData) => void;
 
   static defaultProps = {

@@ -166,7 +166,7 @@ const EventListConfigMenuContent = (props: Props) => {
     ]);
 
     return (
-        <React.Fragment>
+        <>
             <EventListLoader
                 {...passOnProps}
                 listId={listId}
@@ -193,7 +193,7 @@ const EventListConfigMenuContent = (props: Props) => {
                 onDeleteTemplate={deleteTemplateHandler}
                 defaultConfig={defaultConfig}
             />
-        </React.Fragment>
+        </>
     );
 };
 

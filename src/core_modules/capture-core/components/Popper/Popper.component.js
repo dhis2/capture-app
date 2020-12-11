@@ -17,6 +17,7 @@ type State = {
 
 class MenuPopper extends React.Component<Props, State> {
     managerRef: (instance: any) => void;
+
     menuReferenceInstance: ?HTMLDivElement;
 
     static defaultProps = {
@@ -91,9 +92,9 @@ class MenuPopper extends React.Component<Props, State> {
                                         style={{ transformOrigin: '0 0 0' }}
                                         timeout={{ exit: 0, enter: 200 }}
                                     >
-                                        <React.Fragment>
+                                        <>
                                             {getPopperContent(this.toggleMenu)}
-                                        </React.Fragment>
+                                        </>
                                     </Grow>
                                 </ClickAwayListener>
                             </div>

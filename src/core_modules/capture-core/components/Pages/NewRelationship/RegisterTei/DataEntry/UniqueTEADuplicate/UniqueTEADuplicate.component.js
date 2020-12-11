@@ -48,7 +48,7 @@ class UniqueTEADuplicate extends React.Component<Props, State> {
         const { existingTeiDialogOpen } = this.state;
 
         return (
-            <React.Fragment>
+            <>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <ErrorMessageCreator
                     onShowExisting={this.handleShowExisting}
@@ -62,7 +62,7 @@ class UniqueTEADuplicate extends React.Component<Props, State> {
                     onLink={this.handleLink}
                     {...passOnProps}
                 />
-            </React.Fragment>
+            </>
         );
     }
 }

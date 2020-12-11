@@ -60,7 +60,7 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
     action$.pipe(
         ofType(viewEventActionTypes.VIEW_EVENT_FROM_URL),
         switchMap((action) => {
-            const eventId = action.payload.eventId;
+            const {eventId} = action.payload;
             const prevProgramId = store.value.currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
             return getEvent(eventId)
                 .then((eventContainer) => {
@@ -87,7 +87,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED),
         switchMap((action) => {
-            const eventContainer = action.payload.eventContainer;
+            const {eventContainer} = action.payload;
             return getApi()
                 .get(`organisationUnits/${eventContainer.event.orgUnitId}`)
                 .then(orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer))
@@ -120,7 +120,7 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
             if (!listSelections) {
                 return initializeWorkingListsOnBackToMainPage();
             }
-            const currentSelections = state.currentSelections;
+            const {currentSelections} = state;
             if (currentSelections.complete && !isSelectionsEqual(listSelections, currentSelections)) {
                 return initializeWorkingListsOnBackToMainPage();
             }
@@ -141,8 +141,8 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
         map(() => {
             const state = store.value;
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
+            const {programId} = state.currentSelections;
+            const {orgUnitId} = state.currentSelections;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
         }));
 
