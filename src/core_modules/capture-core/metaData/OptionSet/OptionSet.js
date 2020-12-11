@@ -6,11 +6,9 @@ import { errorCreator } from 'capture-core-utils';
 import Option from './Option';
 import OptionGroup from './OptionGroup';
 import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
-// eslint-disable-next-line import/no-cycle
-import DataElement from '../DataElement/DataElement';
-
 import type { ConvertFn } from '../DataElement/DataElement';
 import type { Value } from './Option';
+import { DataElement } from '../DataElement';
 
 export default class OptionSet {
   static errorMessages = {

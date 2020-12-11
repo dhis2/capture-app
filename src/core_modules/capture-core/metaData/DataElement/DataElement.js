@@ -7,7 +7,6 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
 import Icon from '../Icon/Icon';
-// eslint-disable-next-line import/no-cycle
 import OptionSet from '../OptionSet/OptionSet';
 import elementTypes from './elementTypes';
 import { Unique } from './Unique';

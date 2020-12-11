@@ -12,7 +12,8 @@ import {
   withFilterProps,
   withInternalChangeHandler,
 } from '../../../../../FormFields/New';
-import { withRequiredFieldCalculation, withDisabledFieldCalculation } from '..';
+import withDisabledFieldCalculation from '../withDisabledFieldCalculation/withDisabledFieldCalculation';
+import withRequiredFieldCalculation from '../withRequiredFieldCalculation/withRequiredFieldCalculation';
 import labelTypeClasses from '../../../buildField.module.css';
 
 const getFilteredProps = (props: Object) => {
