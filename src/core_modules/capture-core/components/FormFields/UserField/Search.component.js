@@ -99,6 +99,7 @@ class UserSearch extends React.Component<Props, State> {
   // suggestionsError is never been used (report lgmt)
   setSuggestionsError(message: string) {
     this.setState({
+      // eslint-disable-next-line react/no-unused-state
       suggestionsError: message,
     });
   }

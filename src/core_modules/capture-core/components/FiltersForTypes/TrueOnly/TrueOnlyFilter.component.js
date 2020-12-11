@@ -35,8 +35,8 @@ class TrueOnlyFilter extends Component<Props> implements UpdatableFilterContent<
     return getTrueOnlyFilterData();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   onIsValid() {
-    //eslint-disable-line
     return true;
   }
 

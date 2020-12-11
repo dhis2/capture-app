@@ -50,8 +50,7 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
     filter(
       (action) => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER,
     ),
-    switchMap((action) => {
-      // eslint-disable-line
+    switchMap(() => {
       const state = store.value;
       const { selectedRelationshipType } = state.newRelationship;
       const { programId: suggestedProgramId, trackedEntityTypeId } = selectedRelationshipType.to;

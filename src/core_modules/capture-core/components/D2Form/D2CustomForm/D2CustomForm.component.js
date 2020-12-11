@@ -183,8 +183,8 @@ class D2CustomForm extends React.Component<Props> {
     const { eventListenerSpecs } = this;
     const specsWithHandlerRef = eventListenerSpecs.map((spec) => {
       const handlerRef = () => {
+        // eslint-disable-next-line no-eval
         eval(spec.handler);
-      }; //eslint-disable-line
       document
         .querySelector(`[data-custom-form-id="${spec.id}"]`)
 

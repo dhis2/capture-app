@@ -36,8 +36,8 @@ class BooleanFilter extends Component<Props> implements UpdatableFilterContent<V
     return getBooleanFilterData(value);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   onIsValid() {
-    //eslint-disable-line
     return true;
   }
 

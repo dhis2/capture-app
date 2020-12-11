@@ -22,7 +22,7 @@ type Coordinate = {
 type Props = {
   onBlur: (value: any) => void,
   orientation: $Values<typeof orientations>,
-  mapCenter: Array<number>,
+  mapCenter?: Array<number>,
   onChange?: ?(value: any) => void,
   value?: ?Coordinate,
   shrinkDisabled?: ?boolean,
