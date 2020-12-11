@@ -8,10 +8,10 @@ import isPositiveInteger from './integerPositive.validator';
  * @returns
  */
 const isZeroOrPositiveInteger = (value: string) => {
-    if (value === '0') {
-        return true;
-    }
-    return isPositiveInteger(value);
+  if (value === '0') {
+    return true;
+  }
+  return isPositiveInteger(value);
 };
 
 export default isZeroOrPositiveInteger;

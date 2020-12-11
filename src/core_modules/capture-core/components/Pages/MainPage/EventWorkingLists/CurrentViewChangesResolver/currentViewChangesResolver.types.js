@@ -4,49 +4,51 @@ import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsComm
 import type { EventWorkingListsColumnSetupOutputProps } from '../ColumnSetup';
 
 type ExtractedProps = {|
+  filters?: FiltersData,
+  columns: EventWorkingListsColumnConfigs,
+  sortById?: string,
+  sortByDirection?: string,
+  initialViewConfig?: {
     filters?: FiltersData,
-    columns: EventWorkingListsColumnConfigs,
+    customVisibleColumnIds?: Array<string>,
     sortById?: string,
     sortByDirection?: string,
-    initialViewConfig?: {
-        filters?: FiltersData,
-        customVisibleColumnIds?: Array<string>,
-        sortById?: string,
-        sortByDirection?: string,
-    },
-    defaultColumns: EventWorkingListsColumnConfigs,
+  },
+  defaultColumns: EventWorkingListsColumnConfigs,
 |};
 
 // had to add initialViewConfig as a non optional type or else it would not be removed. Also, if initialViewConfig is
 // added as non optional to the ExtractedProps only (and not to EventWorkingListsReduxOutputProps),
 // flow complaints about one them being optional.
-type RestProps = $Rest<EventWorkingListsColumnSetupOutputProps & {| initialViewConfig: Object |},
-    ExtractedProps & {| initialViewConfig: Object |}>;
+type RestProps = $Rest<
+  EventWorkingListsColumnSetupOutputProps & {| initialViewConfig: Object |},
+  ExtractedProps & {| initialViewConfig: Object |},
+>;
 
 export type Props = {|
-    ...RestProps,
-    ...ExtractedProps,
+  ...RestProps,
+  ...ExtractedProps,
 |};
 
 export type CurrentViewChangesResolverOutputProps = {|
-    ...RestProps,
-    filters?: FiltersData,
-    columns: EventWorkingListsColumnConfigs,
-    sortById?: string,
-    sortByDirection?: string,
-    currentViewHasTemplateChanges?: boolean,
+  ...RestProps,
+  filters?: FiltersData,
+  columns: EventWorkingListsColumnConfigs,
+  sortById?: string,
+  sortByDirection?: string,
+  currentViewHasTemplateChanges?: boolean,
 |};
 
 export type CurrentViewConfig = {
-    filters: FiltersData,
-    columns: EventWorkingListsColumnConfigs,
-    sortById: string,
-    sortByDirection: string,
+  filters: FiltersData,
+  columns: EventWorkingListsColumnConfigs,
+  sortById: string,
+  sortByDirection: string,
 };
 
 export type InitialViewConfig = {
-    filters: FiltersData,
-    visibleColumnIds: Array<string>,
-    sortById: string,
-    sortByDirection: string,
+  filters: FiltersData,
+  visibleColumnIds: Array<string>,
+  sortById: string,
+  sortByDirection: string,
 };

@@ -1,19 +1,15 @@
 // @flow
-import {
-    withSaveHandler,
-    withCancelButton,
-} from '../../../DataEntry';
+import { withSaveHandler, withCancelButton } from '../../../DataEntry';
 import { EnrollmentDataEntry } from '../../../DataEntries/Enrollment';
 import withMainButton from './withMainButton';
 
 const getCancelOptions = () => ({
-    color: 'primary',
+  color: 'primary',
 });
 const CancelButtonHOC = withCancelButton(getCancelOptions)(EnrollmentDataEntry);
 
-const SaveHandlerHOC =
-    withSaveHandler(
-        { onGetFormFoundation: (props: Object) => props.enrollmentMetadata.enrollmentForm })(
-        withMainButton()(CancelButtonHOC));
+const SaveHandlerHOC = withSaveHandler({
+  onGetFormFoundation: (props: Object) => props.enrollmentMetadata.enrollmentForm,
+})(withMainButton()(CancelButtonHOC));
 
 export default SaveHandlerHOC;

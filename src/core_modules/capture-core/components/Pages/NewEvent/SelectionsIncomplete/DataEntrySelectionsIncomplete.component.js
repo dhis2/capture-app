@@ -7,46 +7,52 @@ import { InefficientSelectionsMessage } from '../../../InefficientSelectionsMess
 import type { Props } from './DataEntrySelectionsIncomplete.types';
 
 const getStyles = () => ({
-    container: {
-        padding: 24,
-    },
-    buttonRow: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        paddingTop: 10,
-        marginLeft: '-8px',
-    },
+  container: {
+    padding: 24,
+  },
+  buttonRow: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    paddingTop: 10,
+    marginLeft: '-8px',
+  },
 });
 
-const DataEntrySelectionsIncompletePlain = ({ classes, onCancel, isProgramSelected, isOrgUnitSelected }) => {
-    const getText = () => {
-        if (!isProgramSelected && !isOrgUnitSelected) {
-            return i18n.t('Choose a registering unit and program to get started');
-        } else if (!isProgramSelected) {
-            return i18n.t('Choose a program to start reporting');
-        } else if (!isOrgUnitSelected) {
-            return i18n.t('Choose a registering unit to start reporting');
-        }
-        return i18n.t('Choose a category option to start reporting');
-    };
-    return (
-        <div className={classes.container}>
-            <InefficientSelectionsMessage message={getText()} />
-            <div
-                className={classes.buttonRow}
-            >
-                <Button
-                    dataTest="dhis2-capture-new-page-cancel-button"
-                    variant="text"
-                    color="primary"
-                    onClick={onCancel}
-                >
-                    {i18n.t('Cancel')}
-                </Button>
-            </div>
-        </div>
-    );
+const DataEntrySelectionsIncompletePlain = ({
+  classes,
+  onCancel,
+  isProgramSelected,
+  isOrgUnitSelected,
+}) => {
+  const getText = () => {
+    if (!isProgramSelected && !isOrgUnitSelected) {
+      return i18n.t('Choose a registering unit and program to get started');
+    }
+    if (!isProgramSelected) {
+      return i18n.t('Choose a program to start reporting');
+    }
+    if (!isOrgUnitSelected) {
+      return i18n.t('Choose a registering unit to start reporting');
+    }
+    return i18n.t('Choose a category option to start reporting');
+  };
+  return (
+    <div className={classes.container}>
+      <InefficientSelectionsMessage message={getText()} />
+      <div className={classes.buttonRow}>
+        <Button
+          dataTest="dhis2-capture-new-page-cancel-button"
+          variant="text"
+          color="primary"
+          onClick={onCancel}
+        >
+          {i18n.t('Cancel')}
+        </Button>
+      </div>
+    </div>
+  );
 };
 
-export const DataEntrySelectionsIncompleteComponent: ComponentType<$Diff<Props, CssClasses>> =
-  withStyles(getStyles)(DataEntrySelectionsIncompletePlain);
+export const DataEntrySelectionsIncompleteComponent: ComponentType<
+  $Diff<Props, CssClasses>,
+> = withStyles(getStyles)(DataEntrySelectionsIncompletePlain);

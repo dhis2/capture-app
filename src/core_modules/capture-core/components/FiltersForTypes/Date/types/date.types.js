@@ -1,14 +1,14 @@
 // @flow
 
 export type AbsoluteDateFilterData = {|
-    type: 'ABSOLUTE',
-    ge?: string,
-    le?: string,
+  type: 'ABSOLUTE',
+  ge?: string,
+  le?: string,
 |};
 
 export type RelativeDateFilterData = {|
-    type: 'RELATIVE',
-    period: string,
+  type: 'RELATIVE',
+  period: string,
 |};
 
 export type DateFilterData = AbsoluteDateFilterData | RelativeDateFilterData;

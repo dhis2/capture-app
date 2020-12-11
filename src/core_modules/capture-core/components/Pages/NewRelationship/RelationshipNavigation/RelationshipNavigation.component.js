@@ -6,75 +6,79 @@ import type { SelectedRelationshipType } from '../newRelationship.types';
 import LinkButton from '../../../Buttons/LinkButton.component';
 import { typeof findModes, findModeDisplayNames } from '../findModes';
 
-
 type Props = {
-    selectedRelationshipType?: ?SelectedRelationshipType,
-    onInitializeNewRelationship: () => void,
-    findMode?: ?$Values<findModes>,
-    searching?: ?boolean,
-    onSelectRelationshipType: Function,
-    onSelectFindMode: Function,
-    header: any,
-}
+  selectedRelationshipType?: ?SelectedRelationshipType,
+  onInitializeNewRelationship: () => void,
+  findMode?: ?$Values<findModes>,
+  searching?: ?boolean,
+  onSelectRelationshipType: Function,
+  onSelectFindMode: Function,
+  header: any,
+};
 
 class RelationshipNavigation extends React.Component<Props> {
-    renderForRelationshipType = (selectedRelationshipType: SelectedRelationshipType) => {
-        const { onSelectRelationshipType, findMode } = this.props;
-        const relationshipTypeName = selectedRelationshipType.name;
-        return (
-            <React.Fragment>
-                {this.renderSlash()}
-                { findMode ?
-                    <React.Fragment>
-                        <LinkButton onClick={() => onSelectRelationshipType(selectedRelationshipType)}>{relationshipTypeName}</LinkButton>
-                        {this.renderForFindMode(findMode)}
-                    </React.Fragment> :
-                    relationshipTypeName
-                }
-            </React.Fragment>
-        );
-    }
+  renderForRelationshipType = (selectedRelationshipType: SelectedRelationshipType) => {
+    const { onSelectRelationshipType, findMode } = this.props;
+    const relationshipTypeName = selectedRelationshipType.name;
+    return (
+      <>
+        {this.renderSlash()}
+        {findMode ? (
+          <>
+            <LinkButton onClick={() => onSelectRelationshipType(selectedRelationshipType)}>
+              {relationshipTypeName}
+            </LinkButton>
+            {this.renderForFindMode(findMode)}
+          </>
+        ) : (
+          relationshipTypeName
+        )}
+      </>
+    );
+  };
 
-    renderSlash = () => (<span style={{ padding: 5 }}>/</span>)
+  renderSlash = () => <span style={{ padding: 5 }}>/</span>;
 
-    renderForFindMode = (findMode: $Values<findModes>) => {
-        const { onSelectFindMode, searching } = this.props;
-        const displayName = findModeDisplayNames[findMode];
-        return (
-            <React.Fragment>
-                {this.renderSlash()}
-                {searching ?
-                    <React.Fragment>
-                        <LinkButton onClick={() => onSelectFindMode(findMode)}>{displayName}</LinkButton>
-                        {this.renderForSearching()}
-                    </React.Fragment> :
-                    displayName
-                }
-            </React.Fragment>
-        );
-    }
+  renderForFindMode = (findMode: $Values<findModes>) => {
+    const { onSelectFindMode, searching } = this.props;
+    const displayName = findModeDisplayNames[findMode];
+    return (
+      <>
+        {this.renderSlash()}
+        {searching ? (
+          <>
+            <LinkButton onClick={() => onSelectFindMode(findMode)}>{displayName}</LinkButton>
+            {this.renderForSearching()}
+          </>
+        ) : (
+          displayName
+        )}
+      </>
+    );
+  };
 
-    renderForSearching = () => (
-        <React.Fragment>
-            {this.renderSlash()}
-            {I18n.t('Search results')}
-        </React.Fragment>
-    )
+  renderForSearching = () => (
+    <>
+      {this.renderSlash()}
+      {I18n.t('Search results')}
+    </>
+  );
 
-    render() {
-        const { selectedRelationshipType, onInitializeNewRelationship, header } = this.props;
-        return (
-            <div style={{ padding: 10 }}>
-                {selectedRelationshipType ?
-                    <React.Fragment>
-                        <LinkButton onClick={onInitializeNewRelationship}>{header}</LinkButton>
-                        {this.renderForRelationshipType(selectedRelationshipType)}
-                    </React.Fragment> :
-                    header
-                }
-            </div>
-        );
-    }
+  render() {
+    const { selectedRelationshipType, onInitializeNewRelationship, header } = this.props;
+    return (
+      <div style={{ padding: 10 }}>
+        {selectedRelationshipType ? (
+          <>
+            <LinkButton onClick={onInitializeNewRelationship}>{header}</LinkButton>
+            {this.renderForRelationshipType(selectedRelationshipType)}
+          </>
+        ) : (
+          header
+        )}
+      </div>
+    );
+  }
 }
 
 export default RelationshipNavigation;

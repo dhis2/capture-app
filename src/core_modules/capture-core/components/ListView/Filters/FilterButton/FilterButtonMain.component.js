@@ -11,186 +11,185 @@ import type { UpdateFilter, ClearFilter } from '../../types';
 import type { FilterData, Options } from '../../../FiltersForTypes';
 
 const getStyles = (theme: Theme) => ({
-    icon: {
-        fontSize: theme.typography.pxToRem(20),
-        paddingLeft: theme.typography.pxToRem(5),
-    },
-    inactiveFilterButton: {
-        backgroundColor: theme.palette.grey[100],
-    },
-    inactiveFilterButtonLabel: {
-        textTransform: 'none',
-    },
+  icon: {
+    fontSize: theme.typography.pxToRem(20),
+    paddingLeft: theme.typography.pxToRem(5),
+  },
+  inactiveFilterButton: {
+    backgroundColor: theme.palette.grey[100],
+  },
+  inactiveFilterButtonLabel: {
+    textTransform: 'none',
+  },
 });
 
 const POPOVER_ANCHOR_ORIGIN = {
-    vertical: 'bottom',
-    horizontal: 'left',
+  vertical: 'bottom',
+  horizontal: 'left',
 };
 const POPOVER_TRANSFORM_ORIGIN = {
-    vertical: 'top',
-    horizontal: 'left',
+  vertical: 'top',
+  horizontal: 'left',
 };
 
 type Props = {
-    itemId: string,
-    type: string,
-    options?: ?Options,
-    multiValueFilter?: boolean,
-    title: string,
-    classes: {
-        icon: string,
-        inactiveFilterButton: string,
-        inactiveFilterButtonLabel: string,
-    },
-    onUpdateFilter: UpdateFilter,
-    onClearFilter: ClearFilter,
-    onSetVisibleSelector: Function,
-    selectorVisible: boolean,
-    filterValue?: FilterData,
-    buttonText?: string,
+  itemId: string,
+  type: string,
+  options?: ?Options,
+  multiValueFilter?: boolean,
+  title: string,
+  classes: {
+    icon: string,
+    inactiveFilterButton: string,
+    inactiveFilterButtonLabel: string,
+  },
+  onUpdateFilter: UpdateFilter,
+  onClearFilter: ClearFilter,
+  onSetVisibleSelector: Function,
+  selectorVisible: boolean,
+  filterValue?: FilterData,
+  buttonText?: string,
 };
 
 type State = {
-    isMounted: boolean,
+  isMounted: boolean,
 };
 
 class FilterButtonMainPlain extends Component<Props, State> {
-    activeFilterButtonInstance: ?any;
-    anchorRef: { current: null | HTMLDivElement };
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            isMounted: false,
-        };
-        this.anchorRef = React.createRef();
+  activeFilterButtonInstance: ?any;
+
+  anchorRef: { current: null | HTMLDivElement };
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      isMounted: false,
+    };
+    this.anchorRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.setState({
+      // eslint-disable-line
+      isMounted: true,
+    });
+  }
+
+  openFilterSelector = () => {
+    const { itemId, onSetVisibleSelector } = this.props;
+    onSetVisibleSelector(itemId);
+
+    // onmouseleave is sometimes triggered when the popover opens, and sometimes not triggered at all (not even when the mouse actually leaves the button). Clears the hover here to avoid it remaining hovered.
+    if (this.props.filterValue) {
+      this.activeFilterButtonInstance && this.activeFilterButtonInstance.clearIsHovered();
     }
+  };
 
-    componentDidMount() {
-        this.setState({  // eslint-disable-line
-            isMounted: true,
-        });
+  closeFilterSelector = () => {
+    const { onSetVisibleSelector } = this.props;
+    onSetVisibleSelector(undefined);
+  };
+
+  handleFilterUpdate = (data: ?FilterData) => {
+    const { itemId, onUpdateFilter, onClearFilter } = this.props;
+    if (data == null) {
+      onClearFilter(itemId);
+    } else {
+      onUpdateFilter(data, itemId);
     }
+    this.closeFilterSelector();
+  };
 
-    openFilterSelector = () => {
-        const { itemId, onSetVisibleSelector } = this.props;
-        onSetVisibleSelector(itemId);
+  handleClearFilter = () => {
+    const { itemId, onClearFilter } = this.props;
+    onClearFilter(itemId);
+  };
 
-        // onmouseleave is sometimes triggered when the popover opens, and sometimes not triggered at all (not even when the mouse actually leaves the button). Clears the hover here to avoid it remaining hovered.
-        if (this.props.filterValue) {
-            this.activeFilterButtonInstance && this.activeFilterButtonInstance.clearIsHovered();
-        }
-    }
+  renderSelectorContents() {
+    const { itemId: id, type, options, multiValueFilter, filterValue } = this.props;
 
-    closeFilterSelector = () => {
-        const { onSetVisibleSelector } = this.props;
-        onSetVisibleSelector(undefined);
-    }
+    return (
+      <FilterSelectorContents
+        type={type}
+        options={options}
+        multiValueFilter={multiValueFilter}
+        id={id}
+        onUpdate={this.handleFilterUpdate}
+        onClose={this.closeFilterSelector}
+        filterValue={filterValue}
+      />
+    );
+  }
 
-    handleFilterUpdate = (data: ?FilterData) => {
-        const { itemId, onUpdateFilter, onClearFilter } = this.props;
-        if (data == null) {
-            onClearFilter(itemId);
-        } else {
-            onUpdateFilter(data, itemId);
-        }
-        this.closeFilterSelector();
-    }
+  refActiveFilterInstance = (activeFilterButtonInstance) => {
+    this.activeFilterButtonInstance = activeFilterButtonInstance;
+  };
 
-    handleClearFilter = () => {
-        const { itemId, onClearFilter } = this.props;
-        onClearFilter(itemId);
-    }
+  renderWithAppliedFilter() {
+    const { selectorVisible, classes, title, buttonText } = this.props;
 
-    renderSelectorContents() {
-        const { itemId: id, type, options, multiValueFilter, filterValue } = this.props;
+    const arrowIconElement = selectorVisible ? (
+      <ArrowUpwardIcon className={classes.icon} />
+    ) : (
+      <ArrowDownwardIcon className={classes.icon} />
+    );
 
-        return (
-            <FilterSelectorContents
-                type={type}
-                options={options}
-                multiValueFilter={multiValueFilter}
-                id={id}
-                onUpdate={this.handleFilterUpdate}
-                onClose={this.closeFilterSelector}
-                filterValue={filterValue}
-            />
-        );
-    }
+    return (
+      <ActiveFilterButton
+        innerRef={this.refActiveFilterInstance}
+        onChange={this.openFilterSelector}
+        onClear={this.handleClearFilter}
+        iconClass={classes.icon}
+        title={title}
+        arrowIconElement={arrowIconElement}
+        buttonText={buttonText}
+      />
+    );
+  }
 
-    refActiveFilterInstance = (activeFilterButtonInstance) => {
-        this.activeFilterButtonInstance = activeFilterButtonInstance;
-    }
+  renderWithoutAppliedFilter() {
+    const { selectorVisible, classes, title } = this.props;
 
-    renderWithAppliedFilter() {
-        const { selectorVisible, classes, title, buttonText } = this.props;
+    return (
+      <Button onClick={this.openFilterSelector}>
+        {title}
+        {selectorVisible ? (
+          <ArrowUpwardIcon className={classes.icon} />
+        ) : (
+          <ArrowDownwardIcon className={classes.icon} />
+        )}
+      </Button>
+    );
+  }
 
-        const arrowIconElement = selectorVisible ?
-            <ArrowUpwardIcon className={classes.icon} /> :
-            <ArrowDownwardIcon className={classes.icon} />;
+  render() {
+    const { filterValue, selectorVisible } = this.props;
+    const { isMounted } = this.state;
 
-        return (
-            <ActiveFilterButton
-                innerRef={this.refActiveFilterInstance}
-                onChange={this.openFilterSelector}
-                onClear={this.handleClearFilter}
-                iconClass={classes.icon}
-                title={title}
-                arrowIconElement={arrowIconElement}
-                buttonText={buttonText}
-            />
-        );
-    }
+    const button = filterValue ? this.renderWithAppliedFilter() : this.renderWithoutAppliedFilter();
 
-    renderWithoutAppliedFilter() {
-        const { selectorVisible, classes, title } = this.props;
-
-        return (
-            <Button
-                onClick={this.openFilterSelector}
-            >
-                {title}
-                {selectorVisible ?
-                    <ArrowUpwardIcon className={classes.icon} /> :
-                    <ArrowDownwardIcon className={classes.icon} />
-                }
-            </Button>
-        );
-    }
-
-    render() {
-        const { filterValue, selectorVisible } = this.props;
-        const { isMounted } = this.state;
-
-        const button = filterValue ? this.renderWithAppliedFilter() : this.renderWithoutAppliedFilter();
-
-        return (
-            <React.Fragment>
-                <div
-                    data-test="filter-button-popover-anchor"
-                    ref={this.anchorRef}
-                >
-                    {button}
-                </div>
-                <Popover
-                    open={selectorVisible && isMounted}
-                    anchorEl={this.anchorRef.current}
-                    onClose={this.closeFilterSelector}
-                    anchorOrigin={POPOVER_ANCHOR_ORIGIN}
-                    transformOrigin={POPOVER_TRANSFORM_ORIGIN}
-                >
-                    {
-                        (() => {
-                            if (selectorVisible) {
-                                return this.renderSelectorContents();
-                            }
-                            return null;
-                        })()
-                    }
-                </Popover>
-            </React.Fragment>
-        );
-    }
+    return (
+      <>
+        <div data-test="filter-button-popover-anchor" ref={this.anchorRef}>
+          {button}
+        </div>
+        <Popover
+          open={selectorVisible && isMounted}
+          anchorEl={this.anchorRef.current}
+          onClose={this.closeFilterSelector}
+          anchorOrigin={POPOVER_ANCHOR_ORIGIN}
+          transformOrigin={POPOVER_TRANSFORM_ORIGIN}
+        >
+          {(() => {
+            if (selectorVisible) {
+              return this.renderSelectorContents();
+            }
+            return null;
+          })()}
+        </Popover>
+      </>
+    );
+  }
 }
 
 export const FilterButtonMain = withStyles(getStyles)(FilterButtonMainPlain);

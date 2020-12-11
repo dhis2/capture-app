@@ -11,28 +11,34 @@ import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
 
 export const startNewTeiDataEntrySelfInitialisationEpic = (action$: InputObservable) =>
-    action$.pipe(
-        ofType(teiRegistrationEntryActionTypes.TEI_REGISTRATION_ENTRY_INITIALISATION_START),
-        pluck('payload'),
-        switchMap(({ selectedOrgUnitId, selectedScopeId: TETypeId, dataEntryId, formFoundation }) => {
-            if (selectedOrgUnitId) {
-                try {
-                    getTrackedEntityTypeThrowIfNotFound(TETypeId);
-                } catch (error) {
-                    log.error(errorCreator('TET for id not found')({ TETypeId, error }));
-                    return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
-                }
+  action$.pipe(
+    ofType(teiRegistrationEntryActionTypes.TEI_REGISTRATION_ENTRY_INITIALISATION_START),
+    pluck('payload'),
+    switchMap(({ selectedOrgUnitId, selectedScopeId: TETypeId, dataEntryId, formFoundation }) => {
+      if (selectedOrgUnitId) {
+        try {
+          getTrackedEntityTypeThrowIfNotFound(TETypeId);
+        } catch (error) {
+          log.error(
+            errorCreator('TET for id not found')({
+              TETypeId,
+              error,
+            }),
+          );
+          return Promise.resolve(
+            openDataEntryFailed(i18n.t('Metadata error. see log for details')),
+          );
+        }
 
-                const openTeiPromise = openDataEntryForNewTeiBatchAsync(
-                    formFoundation,
-                    { id: selectedOrgUnitId },
-                    dataEntryId,
-                );
+        const openTeiPromise = openDataEntryForNewTeiBatchAsync(
+          formFoundation,
+          { id: selectedOrgUnitId },
+          dataEntryId,
+        );
 
-                return from(openTeiPromise);
-            }
+        return from(openTeiPromise);
+      }
 
-            return empty();
-        }),
-    );
-
+      return empty();
+    }),
+  );

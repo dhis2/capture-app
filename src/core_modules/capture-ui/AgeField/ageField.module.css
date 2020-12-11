@@ -1,24 +1,24 @@
 .container {
-    display: flex;
+  display: flex;
 }
 .containerVertical {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .containerHorizontal {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .ageNumberInputContainer {
-    width: 150px;
+  width: 150px;
 }
 
 .ageDateInputContainerHorizontal {
 }
 
 .ageClearHorizontal {
-    margin-top: 2px;
+  margin-top: 2px;
 }

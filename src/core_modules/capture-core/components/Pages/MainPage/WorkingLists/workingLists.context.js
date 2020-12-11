@@ -1,11 +1,11 @@
 // @flow
 import { createContext } from 'react';
 import type {
-    ManagerContextData,
-    ListViewConfigContextData,
-    ListViewLoaderContextData,
-    ListViewUpdaterContextData,
-    ListViewBuilderContextData,
+  ManagerContextData,
+  ListViewConfigContextData,
+  ListViewLoaderContextData,
+  ListViewUpdaterContextData,
+  ListViewBuilderContextData,
 } from './workingLists.types';
 
 export const ManagerContext = createContext<?ManagerContextData>();

@@ -10,18 +10,17 @@ type Props = {
   showAddRelationship: boolean,
 };
 
-export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship }: Props) => (
-    <div>
-        <LockedSelector
-            isUserInteractionInProgress={isUserInteractionInProgress}
-            customActionsOnProgramIdReset={[customOrgUnitIdIdReset()]}
-            customActionsOnOrgUnitIdReset={[customProgramIdReset()]}
-        />
+export const ViewEventPageComponent = ({
+  isUserInteractionInProgress,
+  showAddRelationship,
+}: Props) => (
+  <div>
+    <LockedSelector
+      isUserInteractionInProgress={isUserInteractionInProgress}
+      customActionsOnProgramIdReset={[customOrgUnitIdIdReset()]}
+      customActionsOnOrgUnitIdReset={[customProgramIdReset()]}
+    />
 
-        {
-            showAddRelationship ?
-                <ViewEventNewRelationshipWrapper /> :
-                <ViewEvent />
-        }
-    </div>);
-
+    {showAddRelationship ? <ViewEventNewRelationshipWrapper /> : <ViewEvent />}
+  </div>
+);

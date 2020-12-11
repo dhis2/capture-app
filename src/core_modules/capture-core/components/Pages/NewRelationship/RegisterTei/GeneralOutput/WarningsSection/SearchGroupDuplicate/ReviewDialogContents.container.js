@@ -10,26 +10,29 @@ import { makeDataElementsSelector } from './reviewDialogContents.selectors';
 import type { Props, OwnProps } from './ReviewDialogContents.types';
 
 const makeMapStateToProps = () => {
-    const dataElementsSelector = makeDataElementsSelector();
-    const mapStateToProps = (state: ReduxState, props: Object) => ({
-        currentProgramId: state.newRelationshipRegisterTei.programId,
-        ready: !state.newRelationshipRegisterTeiDuplicatesReview.isLoading,
-        isUpdating: state.newRelationshipRegisterTeiDuplicatesReview.isUpdating,
-        error: state.newRelationshipRegisterTeiDuplicatesReview.loadError ?
-            i18n.t('An error occured loading possible duplicates') : null,
-        teis: state.newRelationshipRegisterTeiDuplicatesReview.teis,
-        dataElements: dataElementsSelector(state, props),
-    });
-    // $FlowFixMe
-    return mapStateToProps;
+  const dataElementsSelector = makeDataElementsSelector();
+  const mapStateToProps = (state: ReduxState, props: Object) => ({
+    currentProgramId: state.newRelationshipRegisterTei.programId,
+    ready: !state.newRelationshipRegisterTeiDuplicatesReview.isLoading,
+    isUpdating: state.newRelationshipRegisterTeiDuplicatesReview.isUpdating,
+    error: state.newRelationshipRegisterTeiDuplicatesReview.loadError
+      ? i18n.t('An error occured loading possible duplicates')
+      : null,
+    teis: state.newRelationshipRegisterTeiDuplicatesReview.teis,
+    dataElements: dataElementsSelector(state, props),
+  });
+  // $FlowFixMe
+  return mapStateToProps;
 };
 
-const mapDispatchToProps = () => ({
-});
+const mapDispatchToProps = () => ({});
 
-export const ReviewDialogContents: ComponentType<OwnProps> =
-  compose(
-      connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(makeMapStateToProps, mapDispatchToProps),
-      withLoadingIndicator(() => ({ padding: '100px 0' }), null, props => (!props.isUpdating && props.ready)),
-      withErrorMessageHandler(),
-  )(ReviewDialogContentsComponent);
+export const ReviewDialogContents: ComponentType<OwnProps> = compose(
+  connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(makeMapStateToProps, mapDispatchToProps),
+  withLoadingIndicator(
+    () => ({ padding: '100px 0' }),
+    null,
+    (props) => !props.isUpdating && props.ready,
+  ),
+  withErrorMessageHandler(),
+)(ReviewDialogContentsComponent);

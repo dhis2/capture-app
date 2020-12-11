@@ -7,34 +7,39 @@ import scopes from './scopes.const';
 type Validator = (value: any, contextProps: any) => Promise<any> | any;
 
 export default class Unique {
-    _generatable: boolean;
-    _scope: $Values<typeof scopes>;
-    _onValidate: Validator;
+  _generatable: boolean;
 
-    constructor(initFn: ?(_this: Unique) => void) {
-        this._scope = scopes.ENTIRE_SYSTEM;
-        this._generatable = false;
-        initFn && initFn(this);
-    }
+  _scope: $Values<typeof scopes>;
 
-    set generatable(generatable: boolean) {
-        this._generatable = generatable;
-    }
-    get generatable(): boolean {
-        return this._generatable;
-    }
+  _onValidate: Validator;
 
-    set scope(scope: $Values<typeof scopes>) {
-        this._scope = scope;
-    }
-    get scope(): $Values<typeof scopes> {
-        return this._scope;
-    }
+  constructor(initFn: ?(_this: Unique) => void) {
+    this._scope = scopes.ENTIRE_SYSTEM;
+    this._generatable = false;
+    initFn && initFn(this);
+  }
 
-    set onValidate(validator: Validator) {
-        this._onValidate = validator;
-    }
-    get onValidate(): Validator {
-        return this._onValidate;
-    }
+  set generatable(generatable: boolean) {
+    this._generatable = generatable;
+  }
+
+  get generatable(): boolean {
+    return this._generatable;
+  }
+
+  set scope(scope: $Values<typeof scopes>) {
+    this._scope = scope;
+  }
+
+  get scope(): $Values<typeof scopes> {
+    return this._scope;
+  }
+
+  set onValidate(validator: Validator) {
+    this._onValidate = validator;
+  }
+
+  get onValidate(): Validator {
+    return this._onValidate;
+  }
 }

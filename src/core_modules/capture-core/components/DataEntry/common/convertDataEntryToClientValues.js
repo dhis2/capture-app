@@ -4,20 +4,20 @@ import convertDataEntryValuesToClientValues from './convertDataEntryValuesToClie
 import type { RenderFoundation } from '../../../metaData';
 
 export default function convertDataEntryToClientValues(
-    formFoundation: RenderFoundation,
-    formValues: Object,
-    dataEntryValues: Object,
-    dataEntryValuesMeta: Object,
+  formFoundation: RenderFoundation,
+  formValues: Object,
+  dataEntryValues: Object,
+  dataEntryValuesMeta: Object,
 ) {
-    const formClientValues = formFoundation.convertValues(formValues, convertValue);
-    const dataEntryClientValues = convertDataEntryValuesToClientValues(
-        dataEntryValues,
-        dataEntryValuesMeta,
-        formFoundation,
-    );
+  const formClientValues = formFoundation.convertValues(formValues, convertValue);
+  const dataEntryClientValues = convertDataEntryValuesToClientValues(
+    dataEntryValues,
+    dataEntryValuesMeta,
+    formFoundation,
+  );
 
-    return {
-        formClientValues,
-        dataEntryClientValues,
-    };
+  return {
+    formClientValues,
+    dataEntryClientValues,
+  };
 }

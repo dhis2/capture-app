@@ -1,10 +1,10 @@
 // @flow
 type PassOnProps = $ReadOnly<{|
-    mutationInProgress: boolean,
+  mutationInProgress: boolean,
 |}>;
 
 export type Props = $ReadOnly<{|
-    ...PassOnProps,
-    isOnline: boolean,
-    storeId: string,
+  ...PassOnProps,
+  isOnline: boolean,
+  storeId: string,
 |}>;

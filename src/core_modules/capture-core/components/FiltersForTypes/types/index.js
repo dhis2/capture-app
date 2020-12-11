@@ -9,10 +9,10 @@ import type { TrueOnlyFilterData } from '../TrueOnly/types';
 
 export { UpdatableFilterContent } from './filters.types';
 export type FilterData =
-    AssigneeFilterData |
-    BooleanFilterData |
-    DateFilterData |
-    NumericFilterData |
-    OptionSetFilterData |
-    TextFilterData |
-    TrueOnlyFilterData;
+  | AssigneeFilterData
+  | BooleanFilterData
+  | DateFilterData
+  | NumericFilterData
+  | OptionSetFilterData
+  | TextFilterData
+  | TrueOnlyFilterData;

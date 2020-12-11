@@ -4,50 +4,53 @@ import OptionSetFilter from './OptionSetFilter.component';
 import type { OptionSetFilterData } from './types';
 
 type Props = {
-    filter: ?OptionSetFilterData,
-    filterTypeRef: Function,
-    singleSelect?: ?boolean,
+  filter: ?OptionSetFilterData,
+  filterTypeRef: Function,
+  singleSelect?: ?boolean,
 };
 
 type State = {
-    value?: ?Array<any>,
+  value?: ?Array<any>,
 };
 
 class OptionSetFilterManager extends React.Component<Props, State> {
-    static calculateDefaultValueState(filter: ?OptionSetFilterData, singleSelect: boolean) {
-        if (!filter) {
-            return undefined;
-        }
-
-        return singleSelect ? filter.values[0] : filter.values;
+  static calculateDefaultValueState(filter: ?OptionSetFilterData, singleSelect: boolean) {
+    if (!filter) {
+      return undefined;
     }
 
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            value: OptionSetFilterManager.calculateDefaultValueState(this.props.filter, !!this.props.singleSelect),
-        };
-    }
+    return singleSelect ? filter.values[0] : filter.values;
+  }
 
-    handleCommitValue = (value: ?Array<any>) => {
-        this.setState({
-            value,
-        });
-    }
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      value: OptionSetFilterManager.calculateDefaultValueState(
+        this.props.filter,
+        !!this.props.singleSelect,
+      ),
+    };
+  }
 
-    render() {
-        const { filter, filterTypeRef, ...passOnProps } = this.props;
+  handleCommitValue = (value: ?Array<any>) => {
+    this.setState({
+      value,
+    });
+  };
 
-        return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <OptionSetFilter
-                value={this.state.value}
-                innerRef={filterTypeRef}
-                onCommitValue={this.handleCommitValue}
-                {...passOnProps}
-            />
-        );
-    }
+  render() {
+    const { filter, filterTypeRef, ...passOnProps } = this.props;
+
+    return (
+      // $FlowFixMe[cannot-spread-inexact] automated comment
+      <OptionSetFilter
+        value={this.state.value}
+        innerRef={filterTypeRef}
+        onCommitValue={this.handleCommitValue}
+        {...passOnProps}
+      />
+    );
+  }
 }
 
 export default OptionSetFilterManager;

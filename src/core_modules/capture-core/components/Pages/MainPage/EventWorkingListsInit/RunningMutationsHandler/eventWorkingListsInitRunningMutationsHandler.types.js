@@ -1,5 +1,5 @@
 // @flow
 export type Props = $ReadOnly<{|
-    mutationInProgress: boolean,
-    storeId: string,
+  mutationInProgress: boolean,
+  storeId: string,
 |}>;

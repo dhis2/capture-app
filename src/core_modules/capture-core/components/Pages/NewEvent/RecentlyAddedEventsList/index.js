@@ -1,9 +1,9 @@
 // @flow
 
 export {
-    recentlyAddedEventsActionTypes,
-    prependListItem,
-    resetList,
-    removeListItem,
-    newRecentlyAddedEvent,
+  recentlyAddedEventsActionTypes,
+  prependListItem,
+  resetList,
+  removeListItem,
+  newRecentlyAddedEvent,
 } from './recentlyAddedEventsList.actions';

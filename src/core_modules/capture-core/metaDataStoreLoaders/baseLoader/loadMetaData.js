@@ -7,10 +7,13 @@ import { upkeepUserCaches } from '../maintenance';
 import type { QueryApiFn } from '../loader.types';
 
 export const loadMetaData = async (onQueryApi: QueryApiFn) => {
-    await upkeepUserCaches();
-    await provideContext({
-        onQueryApi,
-        storageController: getUserStorageController(),
-        storeNames: userStores,
-    }, loadMetaDataInternal);
+  await upkeepUserCaches();
+  await provideContext(
+    {
+      onQueryApi,
+      storageController: getUserStorageController(),
+      storeNames: userStores,
+    },
+    loadMetaDataInternal,
+  );
 };

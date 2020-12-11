@@ -1,13 +1,18 @@
 // @flow
 
 export type OwnProps = {|
-    nextPageButtonDisabled: boolean,
+  nextPageButtonDisabled: boolean,
 |};
 type DispatchersFromFromRedux = {|
-    onChangePage: Function,
+  onChangePage: Function,
 |};
 type PropsFromRedux = {|
-    currentPage: number,
+  currentPage: number,
 |};
 
-export type Props ={| ...OwnProps, ...DispatchersFromFromRedux, ...PropsFromRedux, ...CssClasses |}
+export type Props = {|
+  ...OwnProps,
+  ...DispatchersFromFromRedux,
+  ...PropsFromRedux,
+  ...CssClasses,
+|};

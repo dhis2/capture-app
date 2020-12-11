@@ -4,7 +4,5 @@ import { EventWorkingListsReduxProvider } from './ReduxProvider';
 import type { Props } from './EventWorkingLists.types';
 
 export const EventWorkingLists = ({ storeId }: Props) => (
-    <EventWorkingListsReduxProvider
-        storeId={storeId}
-    />
+  <EventWorkingListsReduxProvider storeId={storeId} />
 );

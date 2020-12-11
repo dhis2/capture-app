@@ -9,68 +9,63 @@ import isValidDate from './date.validator';
  */
 
 type AgeValues = {
-    date?: ?string,
-    years?: ?string,
-    months?: ?string,
-    days?: ?string,
-}
+  date?: ?string,
+  years?: ?string,
+  months?: ?string,
+  days?: ?string,
+};
 
 const errorMessages = {
-    date: 'Please provide a valid date',
-    years: 'Please provide a valid positive integer',
-    months: 'Please provide a valid positive integer',
-    days: 'Please provide a valid positive integer',
-
+  date: 'Please provide a valid date',
+  years: 'Please provide a valid positive integer',
+  months: 'Please provide a valid positive integer',
+  days: 'Please provide a valid positive integer',
 };
 
 function isValidNumberPart(value: ?string) {
-    return !value || isValidZeroOrPositiveInteger(value);
+  return !value || isValidZeroOrPositiveInteger(value);
 }
 
 function validateNumbers(years: ?string, months: ?string, days: ?string) {
-    const errorResult = [];
+  const errorResult = [];
 
-    if (!isValidNumberPart(years)) {
-        errorResult.push({ years: errorMessages.years });
-    }
-    if (!isValidNumberPart(months)) {
-        errorResult.push({ months: errorMessages.months });
-    }
-    if (!isValidNumberPart(days)) {
-        errorResult.push({ days: errorMessages.days });
-    }
+  if (!isValidNumberPart(years)) {
+    errorResult.push({ years: errorMessages.years });
+  }
+  if (!isValidNumberPart(months)) {
+    errorResult.push({ months: errorMessages.months });
+  }
+  if (!isValidNumberPart(days)) {
+    errorResult.push({ days: errorMessages.days });
+  }
 
-    if (errorResult.length > 0) {
-        return {
-            valid: false,
-            // $FlowFixMe[exponential-spread] automated comment
-            errorMessage: errorResult.reduce((map, error) => ({ ...map, ...error }), {}),
-        };
-    }
-    return { valid: true };
+  if (errorResult.length > 0) {
+    return {
+      valid: false,
+      // $FlowFixMe[exponential-spread] automated comment
+      errorMessage: errorResult.reduce((map, error) => ({ ...map, ...error }), {}),
+    };
+  }
+  return { valid: true };
 }
 
 function validateDate(date: ?string, dateFormat: string) {
-    return (!date || isValidDate(date, dateFormat)) ?
-        { valid: true } :
-        { valid: false, errorMessage: { date: errorMessages.date } };
+  return !date || isValidDate(date, dateFormat)
+    ? { valid: true }
+    : { valid: false, errorMessage: { date: errorMessages.date } };
 }
 
 function isAllEmpty(value: AgeValues) {
-    return (!value.date && !value.years && !value.months && !value.days);
+  return !value.date && !value.years && !value.months && !value.days;
 }
 
 export default function isValidAge(value: AgeValues, dateFormat: string) {
-    if (isAllEmpty(value)) {
-        return false;
-    }
+  if (isAllEmpty(value)) {
+    return false;
+  }
 
-    const numberResult = validateNumbers(
-        value.years,
-        value.months,
-        value.days,
-    );
+  const numberResult = validateNumbers(value.years, value.months, value.days);
 
-    if (!numberResult.valid) return numberResult;
-    return validateDate(value.date, dateFormat);
+  if (!numberResult.valid) return numberResult;
+  return validateDate(value.date, dateFormat);
 }

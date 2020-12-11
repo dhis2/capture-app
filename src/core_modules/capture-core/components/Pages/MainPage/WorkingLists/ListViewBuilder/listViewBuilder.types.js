@@ -4,18 +4,21 @@ import type { CustomMenuContents, StickyFilters } from '../../../../ListView';
 import type { ListViewUpdaterOutputProps } from '../ListViewUpdater';
 
 type ExtractedProps = {|
-    columns: ColumnConfigs,
-    customListViewMenuContents?: CustomMenuContents,
-    stickyFilters?: StickyFilters,
+  columns: ColumnConfigs,
+  customListViewMenuContents?: CustomMenuContents,
+  stickyFilters?: StickyFilters,
 |};
 
 type OptionalExtractedProps = {|
-    stickyFilters: StickyFilters,
+  stickyFilters: StickyFilters,
 |};
 
-type RestProps = $Rest<ListViewUpdaterOutputProps & OptionalExtractedProps, ExtractedProps & OptionalExtractedProps>;
+type RestProps = $Rest<
+  ListViewUpdaterOutputProps & OptionalExtractedProps,
+  ExtractedProps & OptionalExtractedProps,
+>;
 
 export type Props = {|
-    ...RestProps,
-    ...ExtractedProps,
+  ...RestProps,
+  ...ExtractedProps,
 |};

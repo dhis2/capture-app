@@ -1,35 +1,29 @@
 // @flow
 import {
-    TrueOnlyField,
-    withGotoInterface,
-    withHideCompatibility,
-    withDefaultShouldUpdateInterface,
-    withFocusSaver,
-    withCalculateMessages,
-    withDisplayMessages,
+  TrueOnlyField,
+  withGotoInterface,
+  withHideCompatibility,
+  withDefaultShouldUpdateInterface,
+  withFocusSaver,
+  withCalculateMessages,
+  withDisplayMessages,
 } from '../../../../FormFields/New';
 import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-    withCustomElementContainer,
+  withRequiredFieldCalculation,
+  withDisabledFieldCalculation,
+  withCustomElementContainer,
 } from '../internal';
 
 export default withGotoInterface()(
-    withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withCalculateMessages()(
-                        withFocusSaver()(
-                            withDisplayMessages()(
-                                withCustomElementContainer()(
-                                    TrueOnlyField,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
+  withHideCompatibility()(
+    withDefaultShouldUpdateInterface()(
+      withDisabledFieldCalculation()(
+        withRequiredFieldCalculation()(
+          withCalculateMessages()(
+            withFocusSaver()(withDisplayMessages()(withCustomElementContainer()(TrueOnlyField))),
+          ),
         ),
+      ),
     ),
+  ),
 );

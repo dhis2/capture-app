@@ -5,19 +5,23 @@ import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsComm
 import type { EventWorkingListsReduxOfflineOutputProps } from '../Redux';
 
 type ExtractedProps = {|
-    program: EventProgram,
-    customColumnOrder?: CustomColumnOrder,
+  program: EventProgram,
+  customColumnOrder?: CustomColumnOrder,
 |};
 
-type RestProps =$Rest<EventWorkingListsReduxOfflineOutputProps & { customColumnOrder: CustomColumnOrder },
-    ExtractedProps & { customColumnOrder: CustomColumnOrder }>;
+type RestProps = $Rest<
+  EventWorkingListsReduxOfflineOutputProps & {
+    customColumnOrder: CustomColumnOrder,
+  },
+  ExtractedProps & { customColumnOrder: CustomColumnOrder },
+>;
 
 export type Props = {|
-    ...RestProps,
-    ...ExtractedProps,
+  ...RestProps,
+  ...ExtractedProps,
 |};
 
 export type EventWorkingListsOfflineColumnSetupOutputProps = {|
-    ...RestProps,
-    columns: EventWorkingListsColumnConfigs,
+  ...RestProps,
+  columns: EventWorkingListsColumnConfigs,
 |};

@@ -4,12 +4,12 @@ import type { RecordsOrder, CustomColumnOrder } from '../../WorkingListsCommon';
 import type { EventRecords } from '../../EventWorkingListsCommon';
 
 export type Props = $ReadOnly<{|
-    storeId: string,
+  storeId: string,
 |}>;
 
 export type EventWorkingListsReduxOfflineOutputProps = $ReadOnly<{|
-    eventRecords?: EventRecords,
-    recordsOrder?: RecordsOrder,
-    customColumnOrder?: CustomColumnOrder,
-    program: EventProgram,
+  eventRecords?: EventRecords,
+  recordsOrder?: RecordsOrder,
+  customColumnOrder?: CustomColumnOrder,
+  program: EventProgram,
 |}>;

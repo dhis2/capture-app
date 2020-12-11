@@ -5,18 +5,25 @@ import { CoordinateFieldForForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
 const getCoordinateField = (metaData: MetaDataElement, options: Object) => {
-    const props = createProps({
-        formHorizontal: options.formHorizontal,
-        fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
-        orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
-        shrinkDisabled: options.formHorizontal,
-        dialogLabel: metaData.formName,
-    }, options, metaData);
+  const props = createProps(
+    {
+      formHorizontal: options.formHorizontal,
+      fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
+      orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
+      shrinkDisabled: options.formHorizontal,
+      dialogLabel: metaData.formName,
+    },
+    options,
+    metaData,
+  );
 
-    return createFieldConfig({
-        component: CoordinateFieldForForm,
-        props,
-    }, metaData);
+  return createFieldConfig(
+    {
+      component: CoordinateFieldForForm,
+      props,
+    },
+    metaData,
+  );
 };
 
 export default getCoordinateField;

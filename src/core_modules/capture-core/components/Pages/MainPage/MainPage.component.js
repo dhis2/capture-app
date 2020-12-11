@@ -6,26 +6,22 @@ import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
 import type { Props } from './mainPage.types';
 
 const getStyles = () => ({
-    listContainer: {
-        padding: 24,
-    },
+  listContainer: {
+    padding: 24,
+  },
 });
 
 const MainPagePlain = ({ currentSelectionsComplete, classes, ...passOnProps }: Props) => (
-    <>
-        <LockedSelector />
-        {
-            !currentSelectionsComplete ? null : (
-                <div
-                    className={classes.listContainer}
-                >
-                    <WorkingListsType
-                        {...passOnProps}
-                    />
-                </div>
-            )
-        }
-    </>
+  <>
+    <LockedSelector />
+    {!currentSelectionsComplete ? null : (
+      <div className={classes.listContainer}>
+        <WorkingListsType {...passOnProps} />
+      </div>
+    )}
+  </>
 );
 
-export const MainPageComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(MainPagePlain);
+export const MainPageComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(
+  MainPagePlain,
+);

@@ -8,42 +8,49 @@ import type { Enrollment } from './Enrollment';
 import type { DataElement } from '../DataElement';
 
 export default class TrackerProgram extends Program {
-    _searchGroups: Array<SearchGroup>;
-    _trackedEntityType: TrackedEntityType;
-    _attributes: Array<DataElement>;
-    _enrollment: Enrollment;
+  _searchGroups: Array<SearchGroup>;
 
-    constructor(initFn: ?(_this: TrackerProgram) => void) {
-        super();
-        this._attributes = [];
-        initFn && isFunction(initFn) && initFn(this);
-    }
+  _trackedEntityType: TrackedEntityType;
 
-    get searchGroups(): Array<SearchGroup> {
-        return this._searchGroups;
-    }
-    set searchGroups(searchGroups: Array<SearchGroup>) {
-        this._searchGroups = searchGroups;
-    }
+  _attributes: Array<DataElement>;
 
-    get trackedEntityType(): TrackedEntityType {
-        return this._trackedEntityType;
-    }
-    set trackedEntityType(trackedEntityType: TrackedEntityType) {
-        this._trackedEntityType = trackedEntityType;
-    }
+  _enrollment: Enrollment;
 
-    get enrollment(): Enrollment {
-        return this._enrollment;
-    }
-    set enrollment(enrollment: Enrollment) {
-        this._enrollment = enrollment;
-    }
+  constructor(initFn: ?(_this: TrackerProgram) => void) {
+    super();
+    this._attributes = [];
+    initFn && isFunction(initFn) && initFn(this);
+  }
 
-    get attributes(): Array<DataElement> {
-        return this._attributes;
-    }
-    set attributes(attributes: Array<DataElement>) {
-        this._attributes = attributes;
-    }
+  get searchGroups(): Array<SearchGroup> {
+    return this._searchGroups;
+  }
+
+  set searchGroups(searchGroups: Array<SearchGroup>) {
+    this._searchGroups = searchGroups;
+  }
+
+  get trackedEntityType(): TrackedEntityType {
+    return this._trackedEntityType;
+  }
+
+  set trackedEntityType(trackedEntityType: TrackedEntityType) {
+    this._trackedEntityType = trackedEntityType;
+  }
+
+  get enrollment(): Enrollment {
+    return this._enrollment;
+  }
+
+  set enrollment(enrollment: Enrollment) {
+    this._enrollment = enrollment;
+  }
+
+  get attributes(): Array<DataElement> {
+    return this._attributes;
+  }
+
+  set attributes(attributes: Array<DataElement>) {
+    this._attributes = attributes;
+  }
 }

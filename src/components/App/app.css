@@ -1,12 +1,14 @@
 body {
-    overflow-x: hidden;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
-textarea, input, button {
-    font-family: Roboto, Helvetica, Arial, sans-serif;
+textarea,
+input,
+button {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 ::placeholder {
-    color: #aaa;
+  color: #aaa;
 }

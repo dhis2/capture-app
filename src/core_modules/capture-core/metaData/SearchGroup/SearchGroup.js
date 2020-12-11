@@ -3,44 +3,50 @@
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { RenderFoundation } from '../RenderFoundation';
 
-
 export default class SearchGroup {
-    _id: string;
-    _minAttributesRequiredToSearch: number;
-    _searchForm: RenderFoundation;
-    _unique: boolean;
+  _id: string;
 
-    constructor(initFn: ?(_this: SearchGroup) => void) {
-        this._minAttributesRequiredToSearch = 0;
-        this._unique = false;
-        initFn && isFunction(initFn) && initFn(this);
-    }
+  _minAttributesRequiredToSearch: number;
 
-    set id(id: string) {
-        this._id = id;
-    }
-    get id(): string {
-        return this._id;
-    }
+  _searchForm: RenderFoundation;
 
-    set minAttributesRequiredToSearch(minAttributesRequiredToSearch: number) {
-        this._minAttributesRequiredToSearch = minAttributesRequiredToSearch;
-    }
-    get minAttributesRequiredToSearch(): number {
-        return this._minAttributesRequiredToSearch;
-    }
+  _unique: boolean;
 
-    set searchForm(searchForm: RenderFoundation) {
-        this._searchForm = searchForm;
-    }
-    get searchForm(): RenderFoundation {
-        return this._searchForm;
-    }
+  constructor(initFn: ?(_this: SearchGroup) => void) {
+    this._minAttributesRequiredToSearch = 0;
+    this._unique = false;
+    initFn && isFunction(initFn) && initFn(this);
+  }
 
-    set unique(unique: boolean) {
-        this._unique = unique;
-    }
-    get unique(): boolean {
-        return this._unique;
-    }
+  set id(id: string) {
+    this._id = id;
+  }
+
+  get id(): string {
+    return this._id;
+  }
+
+  set minAttributesRequiredToSearch(minAttributesRequiredToSearch: number) {
+    this._minAttributesRequiredToSearch = minAttributesRequiredToSearch;
+  }
+
+  get minAttributesRequiredToSearch(): number {
+    return this._minAttributesRequiredToSearch;
+  }
+
+  set searchForm(searchForm: RenderFoundation) {
+    this._searchForm = searchForm;
+  }
+
+  get searchForm(): RenderFoundation {
+    return this._searchForm;
+  }
+
+  set unique(unique: boolean) {
+    this._unique = unique;
+  }
+
+  get unique(): boolean {
+    return this._unique;
+  }
 }

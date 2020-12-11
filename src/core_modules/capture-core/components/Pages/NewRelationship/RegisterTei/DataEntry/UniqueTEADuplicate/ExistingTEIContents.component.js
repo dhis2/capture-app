@@ -9,56 +9,45 @@ import { CardList } from '../../../../../CardList';
 import type { CardDataElementsInformation } from '../../../../Search/SearchResults/SearchResults.types';
 
 type Props = {
-    attributeValues: {[id: string]: any},
-    dataElements: CardDataElementsInformation,
-    onLink: (values: Object) => void,
-    onCancel: Function,
-    programId?: string,
+  attributeValues: { [id: string]: any },
+  dataElements: CardDataElementsInformation,
+  onLink: (values: Object) => void,
+  onCancel: Function,
+  programId?: string,
 };
 
 class ExistingTEIContents extends React.Component<Props> {
-    handleLink = () => {
-        this.props.onLink(this.props.attributeValues);
-    }
-    render() {
-        const { attributeValues, dataElements, onCancel, programId } = this.props;
+  handleLink = () => {
+    this.props.onLink(this.props.attributeValues);
+  };
 
-        const items = [
-            {
-                id: 'foundTEI',
-                values: attributeValues,
-            },
-        ];
+  render() {
+    const { attributeValues, dataElements, onCancel, programId } = this.props;
 
-        return (
-            <React.Fragment>
-                <DialogContent>
-                    <DialogTitle>
-                        {i18n.t('Registered person')}
-                    </DialogTitle>
-                    <CardList
-                        currentProgramId={programId}
-                        items={items}
-                        dataElements={dataElements}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button
-                        onClick={onCancel}
-                        secondary
-                    >
-                        {i18n.t('Cancel')}
-                    </Button>
-                    <Button
-                        onClick={this.handleLink}
-                        primary
-                    >
-                        {i18n.t('Link')}
-                    </Button>
-                </DialogActions>
-            </React.Fragment>
-        );
-    }
+    const items = [
+      {
+        id: 'foundTEI',
+        values: attributeValues,
+      },
+    ];
+
+    return (
+      <>
+        <DialogContent>
+          <DialogTitle>{i18n.t('Registered person')}</DialogTitle>
+          <CardList currentProgramId={programId} items={items} dataElements={dataElements} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onCancel} secondary>
+            {i18n.t('Cancel')}
+          </Button>
+          <Button onClick={this.handleLink} primary>
+            {i18n.t('Link')}
+          </Button>
+        </DialogActions>
+      </>
+    );
+  }
 }
 
 export default ExistingTEIContents;

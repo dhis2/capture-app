@@ -4,27 +4,29 @@ import type { EventRecords, EventWorkingListsColumnConfigs } from '../../EventWo
 import type { EventWorkingListsOfflineColumnSetupOutputProps } from '../ColumnSetup';
 
 type ExtractedProps = $ReadOnly<{|
-    eventRecords?: EventRecords,
-    columns: EventWorkingListsColumnConfigs,
-    recordsOrder?: Array<string>,
+  eventRecords?: EventRecords,
+  columns: EventWorkingListsColumnConfigs,
+  recordsOrder?: Array<string>,
 |}>;
 
 type OptionalExtractedProps = {
-    eventRecords: EventRecords,
-    recordsOrder: Array<string>,
+  eventRecords: EventRecords,
+  recordsOrder: Array<string>,
 };
-type RestProps = $Rest<EventWorkingListsOfflineColumnSetupOutputProps & OptionalExtractedProps,
-ExtractedProps & OptionalExtractedProps>;
+type RestProps = $Rest<
+  EventWorkingListsOfflineColumnSetupOutputProps & OptionalExtractedProps,
+  ExtractedProps & OptionalExtractedProps,
+>;
 
 export type Props = {|
-    ...RestProps,
-    ...ExtractedProps,
+  ...RestProps,
+  ...ExtractedProps,
 |};
 
 export type EventWorkingListsOfflineDataSourceSetupOutputProps = $ReadOnly<{|
-    ...RestProps,
-    dataSource?: DataSource,
-    columns: EventWorkingListsColumnConfigs,
-    rowIdKey: string,
-    hasData: boolean,
+  ...RestProps,
+  dataSource?: DataSource,
+  columns: EventWorkingListsColumnConfigs,
+  rowIdKey: string,
+  hasData: boolean,
 |}>;

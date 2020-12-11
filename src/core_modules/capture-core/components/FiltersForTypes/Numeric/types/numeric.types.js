@@ -1,6 +1,6 @@
 // @flow
 
 export type NumericFilterData = {|
-    ge: ?number,
-    le: ?number,
+  ge: ?number,
+  le: ?number,
 |};

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ExistingTEILoader from './ExistingTEILoader.component';
 
 const mapStateToProps = (state: ReduxState) => ({
-    programId: state.newRelationshipRegisterTei.programId,
+  programId: state.newRelationshipRegisterTei.programId,
 });
 
 // $FlowFixMe

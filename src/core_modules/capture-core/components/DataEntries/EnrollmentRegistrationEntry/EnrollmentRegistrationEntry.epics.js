@@ -12,31 +12,38 @@ import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/Dat
 import { type TrackerProgram } from '../../../metaData/Program';
 
 export const startNewEnrollmentDataEntrySelfInitialisationEpic = (action$: InputObservable) =>
-    action$.pipe(
-        ofType(enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START),
-        pluck('payload'),
-        switchMap(({ selectedOrgUnitId, selectedScopeId: programId, dataEntryId, formFoundation }) => {
-            if (selectedOrgUnitId) {
-                let trackerProgram: ?TrackerProgram;
-                try {
-                    trackerProgram = getTrackerProgramThrowIfNotFound(programId);
-                } catch (error) {
-                    log.error(
-                        errorCreator('tracker program for id not found')({ programId, error }),
-                    );
-                    return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
-                }
+  action$.pipe(
+    ofType(
+      enrollmentRegistrationEntryActionTypes.TRACKER_PROGRAM_REGISTRATION_ENTRY_INITIALISATION_START,
+    ),
+    pluck('payload'),
+    switchMap(({ selectedOrgUnitId, selectedScopeId: programId, dataEntryId, formFoundation }) => {
+      if (selectedOrgUnitId) {
+        let trackerProgram: ?TrackerProgram;
+        try {
+          trackerProgram = getTrackerProgramThrowIfNotFound(programId);
+        } catch (error) {
+          log.error(
+            errorCreator('tracker program for id not found')({
+              programId,
+              error,
+            }),
+          );
+          return Promise.resolve(
+            openDataEntryFailed(i18n.t('Metadata error. see log for details')),
+          );
+        }
 
-                const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
-                    trackerProgram,
-                    formFoundation,
-                    { id: selectedOrgUnitId },
-                    dataEntryId,
-                );
+        const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
+          trackerProgram,
+          formFoundation,
+          { id: selectedOrgUnitId },
+          dataEntryId,
+        );
 
-                return from(openEnrollmentPromise);
-            }
+        return from(openEnrollmentPromise);
+      }
 
-            return empty();
-        }),
-    );
+      return empty();
+    }),
+  );

@@ -1,101 +1,100 @@
 .table {
-    display: table;
-    width: 100%;
-    border-spacing: 0;
+  display: table;
+  width: 100%;
+  border-spacing: 0;
 }
 
 .tableRow {
-    color: inherit;
-    display: table-row;
-    vertical-align: middle;    
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
 }
 
 .tableRow:focus {
-    outline: none;
+  outline: none;
 }
 
 .tableRowBody {
-    height: 48px;
+  height: 48px;
 }
 
-.tableRowHeader {    
-    height: 56px;
+.tableRowHeader {
+  height: 56px;
 }
 
-.tableRowFooter {    
-    height: 56px;
+.tableRowFooter {
+  height: 56px;
 }
 
 .tableCell {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 2px 30px 2px 20px;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 2px 30px 2px 20px;
 }
 
 .tableCellBody {
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    text-align: left;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  text-align: left;
 }
 
 .tableCellHeader {
-    font-weight: bold;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    text-align: left;
+  font-weight: bold;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  text-align: left;
 }
 
 .tableCellFooter {
-   
 }
 
 .pagination {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .paginationRowsPerPageElementContainer {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }
 
 .paginationRowsPerPageElement {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 .paginationDisplayRowsContainer {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .sortLabelContainer {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-.sortLabelChildren {   
-    outline: none;
-    user-select: none;
+.sortLabelChildren {
+  outline: none;
+  user-select: none;
 }
 
 .sortLabelChildrenEnabled {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .sortLabelChildrenFirst {
-    padding-right: 10px;
+  padding-right: 10px;
 }
 
 .sortLabelChildrenLast {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
 .sortLabelRight {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .sortLabelIcon {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }

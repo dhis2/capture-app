@@ -8,14 +8,14 @@
  */
 
 type OrgUnitValue = {
-    id: string,
-    name: string,
-    path: string,
-}
+  id: string,
+  name: string,
+  path: string,
+};
 
 const isValidOrgUnit = (value: OrgUnitValue) => {
-    const valid = !!(value && value.id && value.name);
-    return valid;
+  const valid = !!(value && value.id && value.name);
+  return valid;
 };
 
 export default isValidOrgUnit;

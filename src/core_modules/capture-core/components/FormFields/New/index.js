@@ -9,16 +9,16 @@ export { default as withSelectTranslations } from './Fields/VirtualizedSelectFie
 export { default as SelectionBoxes } from './Fields/SelectionBoxes/SelectionBoxes.component';
 export { default as DateField } from './Fields/DateAndTimeFields/DateField/DateField.component';
 export { default as DateTimeField } from './Fields/DateAndTimeFields/DateTimeField/DateTimeField.component';
+// eslint-disable-next-line import/no-cycle
 export { default as CoordinateField } from './Fields/CoordinateField/CoordinateField.component';
+// eslint-disable-next-line import/no-cycle
 export { default as PolygonField } from './Fields/PolygonField/PolygonField.component';
 export { default as OrgUnitField } from './Fields/OrgUnitField/OrgUnitField.component';
 export { default as SingleOrgUnitSelectField } from './Fields/OrgUnitField/SingleOrgUnitSelectField.component';
 export { default as TextRangeField } from './Fields/TextField/TextRangeField.component';
 export { default as DateRangeField } from './Fields/DateAndTimeFields/DateRangeField/DateRangeField.component';
 export { default as ViewModeField } from './Fields/ViewModeField/ViewModeField.component';
-export {
-    default as DateTimeRangeField,
-} from './Fields/DateAndTimeFields/DateTimeRangeField/DateTimeRangeField.component';
+export { default as DateTimeRangeField } from './Fields/DateAndTimeFields/DateTimeRangeField/DateTimeRangeField.component';
 
 // Generic HOCs
 export { default as withCalculateMessages } from './HOC/messages/withCalculateMessages';
@@ -34,9 +34,7 @@ export { default as withStyledContainer } from './HOC/withStyledContainer';
 export { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
 
 // OrgUnit HOCs
-export {
-    default as withOrgUnitFieldImplicitRootsFilterHandler,
-} from './Fields/OrgUnitField/withInternalFilterHandler/withImplicitRootsInternalFilterHandler';
+export { default as withOrgUnitFieldImplicitRootsFilterHandler } from './Fields/OrgUnitField/withInternalFilterHandler/withImplicitRootsInternalFilterHandler';
 export { default as orgUnitFieldScopes } from './Fields/OrgUnitField/withInternalFilterHandler/scopes.const';
 
 // Constants

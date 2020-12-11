@@ -6,23 +6,24 @@ import Program from './Program';
 import type ProgramStage from './ProgramStage';
 
 export default class EventProgram extends Program {
-    static EVENT_PROGRAM_STAGE_KEY = 'EventProgramStage';
+  static EVENT_PROGRAM_STAGE_KEY = 'EventProgramStage';
 
-    constructor(initFn: ?(_this: EventProgram) => void) {
-        super();
-        initFn && isFunction(initFn) && initFn(this);
-    }
+  constructor(initFn: ?(_this: EventProgram) => void) {
+    super();
+    initFn && isFunction(initFn) && initFn(this);
+  }
 
-    set stage(stage: ProgramStage) {
-        this._stages.set(EventProgram.EVENT_PROGRAM_STAGE_KEY, stage);
-    }
-    get stage(): ProgramStage {
-        // $FlowFixMe[incompatible-return] automated comment
-        return this._stages.get(EventProgram.EVENT_PROGRAM_STAGE_KEY);
-    }
+  set stage(stage: ProgramStage) {
+    this._stages.set(EventProgram.EVENT_PROGRAM_STAGE_KEY, stage);
+  }
 
-    getStage(): ProgramStage {
-        // $FlowFixMe[incompatible-return] automated comment
-        return this._stages.get(EventProgram.EVENT_PROGRAM_STAGE_KEY);
-    }
+  get stage(): ProgramStage {
+    // $FlowFixMe[incompatible-return] automated comment
+    return this._stages.get(EventProgram.EVENT_PROGRAM_STAGE_KEY);
+  }
+
+  getStage(): ProgramStage {
+    // $FlowFixMe[incompatible-return] automated comment
+    return this._stages.get(EventProgram.EVENT_PROGRAM_STAGE_KEY);
+  }
 }

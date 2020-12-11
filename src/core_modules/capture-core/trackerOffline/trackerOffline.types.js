@@ -1,8 +1,8 @@
 // @flow
-import { typeof effectMethods } from '../../capture-core/trackerOffline';
+import { typeof effectMethods } from '.';
 
 export type OfflineEffect = {
-    url: string,
-    data: any,
-    method: $Values<effectMethods>,
+  url: string,
+  data: any,
+  method: $Values<effectMethods>,
 };

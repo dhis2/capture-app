@@ -1,2 +1,2 @@
 // @flow
-export { convertToClientConfig } from '././convertToClientConfig';
+export { convertToClientConfig } from './convertToClientConfig';

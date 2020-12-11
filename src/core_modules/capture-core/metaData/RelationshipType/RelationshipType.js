@@ -4,60 +4,64 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 import type { Access } from '../Access/Access';
 
 type RelationshipConstraint = {
-    entity: string,
-    programId?: ?string,
-    programStageId?: ?string,
-    trackedEntityTypeId: string,
-}
+  entity: string,
+  programId?: ?string,
+  programStageId?: ?string,
+  trackedEntityTypeId: string,
+};
 
 export default class RelationshipType {
-    _id: string;
-    _name: string;
-    _access: Access;
-    _from: RelationshipConstraint;
-    _to: RelationshipConstraint;
+  _id: string;
 
-    constructor(initFn: ?(_this: RelationshipType) => void) {
-        initFn && isFunction(initFn) && initFn(this);
-    }
+  _name: string;
 
-    set id(id: string) {
-        this._id = id;
-    }
+  _access: Access;
 
-    get id(): string {
-        return this._id;
-    }
+  _from: RelationshipConstraint;
 
-    set name(name: string) {
-        this._name = name;
-    }
+  _to: RelationshipConstraint;
 
-    get name(): string {
-        return this._name;
-    }
+  constructor(initFn: ?(_this: RelationshipType) => void) {
+    initFn && isFunction(initFn) && initFn(this);
+  }
 
-    set access(access: Access) {
-        this._access = access;
-    }
+  set id(id: string) {
+    this._id = id;
+  }
 
-    get access(): Access {
-        return this._access;
-    }
+  get id(): string {
+    return this._id;
+  }
 
-    set from(from: RelationshipConstraint) {
-        this._from = from;
-    }
+  set name(name: string) {
+    this._name = name;
+  }
 
-    get from(): RelationshipConstraint {
-        return this._from;
-    }
+  get name(): string {
+    return this._name;
+  }
 
-    set to(to: RelationshipConstraint) {
-        this._to = to;
-    }
+  set access(access: Access) {
+    this._access = access;
+  }
 
-    get to(): RelationshipConstraint {
-        return this._to;
-    }
+  get access(): Access {
+    return this._access;
+  }
+
+  set from(from: RelationshipConstraint) {
+    this._from = from;
+  }
+
+  get from(): RelationshipConstraint {
+    return this._from;
+  }
+
+  set to(to: RelationshipConstraint) {
+    this._to = to;
+  }
+
+  get to(): RelationshipConstraint {
+    return this._to;
+  }
 }

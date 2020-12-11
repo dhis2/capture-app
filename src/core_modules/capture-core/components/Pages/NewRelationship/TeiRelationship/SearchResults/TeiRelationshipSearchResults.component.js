@@ -17,150 +17,152 @@ import { ResultsPageSizeContext } from '../../../shared-contexts';
 const SearchResultsPager = withNavigation()(Pagination);
 
 type Props = {|
-    onAddRelationship: (id: string, values: Object) => void,
-    onChangePage: Function,
-    onEditSearch: Function,
-    onNewSearch: Function,
-    currentPage: number,
-    searchGroup: SearchGroup,
-    searchValues: any,
-    selectedProgramId: string,
-    teis: Array<SearchResultItem>,
-    trackedEntityTypeName: string,
-    ...CssClasses
-|}
+  onAddRelationship: (id: string, values: Object) => void,
+  onChangePage: Function,
+  onEditSearch: Function,
+  onNewSearch: Function,
+  currentPage: number,
+  searchGroup: SearchGroup,
+  searchValues: any,
+  selectedProgramId: string,
+  teis: Array<SearchResultItem>,
+  trackedEntityTypeName: string,
+  ...CssClasses,
+|};
 
 const getStyles = (theme: Theme) => ({
-    itemActionsContainer: {
-        paddingTop: theme.typography.pxToRem(10),
-    },
-    pagination: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        marginLeft: theme.typography.pxToRem(8),
-        maxWidth: theme.typography.pxToRem(600),
-    },
-    topSection: {
-        display: 'flex',
-        flexDirection: 'column',
-        margin: theme.typography.pxToRem(8),
-        marginRight: 0,
-        backgroundColor: theme.palette.grey.lighter,
-        maxWidth: theme.typography.pxToRem(600),
-    },
-    topSectionValuesContainer: {
-        padding: theme.typography.pxToRem(10),
-    },
-    actionButton: {
-        margin: theme.typography.pxToRem(10),
-        color: theme.palette.primary.dark,
-        borderRadius: 0,
-        border: `1px solid ${theme.palette.primary.dark}`,
-    },
+  itemActionsContainer: {
+    paddingTop: theme.typography.pxToRem(10),
+  },
+  pagination: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginLeft: theme.typography.pxToRem(8),
+    maxWidth: theme.typography.pxToRem(600),
+  },
+  topSection: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: theme.typography.pxToRem(8),
+    marginRight: 0,
+    backgroundColor: theme.palette.grey.lighter,
+    maxWidth: theme.typography.pxToRem(600),
+  },
+  topSectionValuesContainer: {
+    padding: theme.typography.pxToRem(10),
+  },
+  actionButton: {
+    margin: theme.typography.pxToRem(10),
+    color: theme.palette.primary.dark,
+    borderRadius: 0,
+    border: `1px solid ${theme.palette.primary.dark}`,
+  },
 });
 
 class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
-    getAttributes: Function;
-    constructor(props: Props) {
-        super(props);
-        this.getAttributes = makeAttributesSelector();
-    }
+  getAttributes: Function;
 
-    onAddRelationship = (item) => {
-        this.props.onAddRelationship(item.id, item.values);
-    }
+  constructor(props: Props) {
+    super(props);
+    this.getAttributes = makeAttributesSelector();
+  }
 
-    getItemActions = ({ item }: Object) => {
-        const classes = this.props.classes;
-        return (
-            <div className={classes.itemActionsContainer}>
-                <Button
-                    dataTest={`dhis2-capture-relationship-tei-link-${item.id}`}
-                    color="primary"
-                    onClick={() => this.onAddRelationship(item)}
-                >
-                    {i18n.t('Link')}
-                </Button>
-            </div>
-        );
-    }
+  onAddRelationship = (item) => {
+    this.props.onAddRelationship(item.id, item.values);
+  };
 
-    renderResults = () => {
-        const attributes = this.getAttributes(this.props);
-        const { teis, trackedEntityTypeName, selectedProgramId } = this.props;
+  getItemActions = ({ item }: Object) => {
+    const { classes } = this.props;
+    return (
+      <div className={classes.itemActionsContainer}>
+        <Button
+          dataTest={`dhis2-capture-relationship-tei-link-${item.id}`}
+          color="primary"
+          onClick={() => this.onAddRelationship(item)}
+        >
+          {i18n.t('Link')}
+        </Button>
+      </div>
+    );
+  };
 
-        return (
-            <React.Fragment>
-                {this.renderTopSection()}
-                <CardList
-                    currentProgramId={selectedProgramId}
-                    items={teis}
-                    dataElements={attributes}
-                    noItemsText={i18n.t('No {{trackedEntityTypeName}} found.', { trackedEntityTypeName })}
-                    getCustomItemBottomElements={itemProps => this.getItemActions(itemProps)}
-                />
-                {this.renderPager()}
-            </React.Fragment>
-        );
-    }
+  renderResults = () => {
+    const attributes = this.getAttributes(this.props);
+    const { teis, trackedEntityTypeName, selectedProgramId } = this.props;
 
-    getSearchValues = (): CurrentSearchTerms => {
-        const { searchValues, searchGroup } = this.props;
-        const searchForm = searchGroup.searchForm;
-        return Object.keys(searchValues)
-            .filter(key => searchValues[key] !== null)
-            .map((key) => {
-                const element = searchForm.getElement(key);
-                const value = searchValues[key];
-                return { name: element.formName, value, id: element.id, type: element.type };
-            });
-    }
+    return (
+      <>
+        {this.renderTopSection()}
+        <CardList
+          currentProgramId={selectedProgramId}
+          items={teis}
+          dataElements={attributes}
+          noItemsText={i18n.t('No {{trackedEntityTypeName}} found.', {
+            trackedEntityTypeName,
+          })}
+          getCustomItemBottomElements={(itemProps) => this.getItemActions(itemProps)}
+        />
+        {this.renderPager()}
+      </>
+    );
+  };
 
-    renderTopSection = () => {
-        const { onNewSearch, onEditSearch, classes } = this.props;
-        return (
-            <div className={classes.topSection}>
-                <SearchResultsHeader currentSearchTerms={this.getSearchValues()} />
-                <div>
-                    <Button className={classes.actionButton} onClick={onNewSearch}>
-                        {i18n.t('New search')}
-                    </Button>
-                    <Button className={classes.actionButton} onClick={onEditSearch}>
-                        {i18n.t('Edit search')}
-                    </Button>
-                </div>
+  getSearchValues = (): CurrentSearchTerms => {
+    const { searchValues, searchGroup } = this.props;
+    const { searchForm } = searchGroup;
+    return Object.keys(searchValues)
+      .filter((key) => searchValues[key] !== null)
+      .map((key) => {
+        const element = searchForm.getElement(key);
+        const value = searchValues[key];
+        return {
+          name: element.formName,
+          value,
+          id: element.id,
+          type: element.type,
+        };
+      });
+  };
 
-            </div>
-        );
-    }
+  renderTopSection = () => {
+    const { onNewSearch, onEditSearch, classes } = this.props;
+    return (
+      <div className={classes.topSection}>
+        <SearchResultsHeader currentSearchTerms={this.getSearchValues()} />
+        <div>
+          <Button className={classes.actionButton} onClick={onNewSearch}>
+            {i18n.t('New search')}
+          </Button>
+          <Button className={classes.actionButton} onClick={onEditSearch}>
+            {i18n.t('Edit search')}
+          </Button>
+        </div>
+      </div>
+    );
+  };
 
-    renderPager = () => {
-        const { onChangePage, currentPage, classes, teis } = this.props;
-        return (
-            <ResultsPageSizeContext.Consumer>
-                {
-                    ({ resultsPageSize }) => (
-                        <div className={classes.pagination}>
-                            <SearchResultsPager
-                                nextPageButtonDisabled={teis.length < resultsPageSize}
-                                onChangePage={page => onChangePage(page)}
-                                currentPage={currentPage}
-                            />
-                        </div>)
-                }
-            </ResultsPageSizeContext.Consumer>
-        );
-    }
+  renderPager = () => {
+    const { onChangePage, currentPage, classes, teis } = this.props;
+    return (
+      <ResultsPageSizeContext.Consumer>
+        {({ resultsPageSize }) => (
+          <div className={classes.pagination}>
+            <SearchResultsPager
+              nextPageButtonDisabled={teis.length < resultsPageSize}
+              onChangePage={(page) => onChangePage(page)}
+              currentPage={currentPage}
+            />
+          </div>
+        )}
+      </ResultsPageSizeContext.Consumer>
+    );
+  };
 
-    render() {
-        return (
-            <div>
-                {this.renderResults()}
-            </div>
-
-        );
-    }
+  render() {
+    return <div>{this.renderResults()}</div>;
+  }
 }
 
-export const TeiRelationshipSearchResults: ComponentType<$Diff<Props, CssClasses>> =
-  withStyles(getStyles)(TeiRelationshipSearchResultsPlain);
+export const TeiRelationshipSearchResults: ComponentType<$Diff<Props, CssClasses>> = withStyles(
+  getStyles,
+)(TeiRelationshipSearchResultsPlain);

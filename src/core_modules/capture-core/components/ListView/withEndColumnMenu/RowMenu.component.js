@@ -12,150 +12,139 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import type { CustomRowMenuContents, DataSourceItem } from '../types';
 
 type Props = {
-    classes: {
-        deleteIcon: string,
-        menuList: string,
-        popperContainerHidden: string,
-        popperContainer: string,
-    },
-    row: DataSourceItem,
-    customRowMenuContents?: CustomRowMenuContents,
-}
+  classes: {
+    deleteIcon: string,
+    menuList: string,
+    popperContainerHidden: string,
+    popperContainer: string,
+  },
+  row: DataSourceItem,
+  customRowMenuContents?: CustomRowMenuContents,
+};
 
 type State = {
-    menuOpen: ?boolean,
-}
+  menuOpen: ?boolean,
+};
 
-const styles = theme => ({
-    deleteIcon: {
-        fill: theme.palette.error.main,
-    },
-    menuList: {
-        padding: 0,
-    },
-    popperContainer: {
-        zIndex: 100,
-    },
+const styles = (theme) => ({
+  deleteIcon: {
+    fill: theme.palette.error.main,
+  },
+  menuList: {
+    padding: 0,
+  },
+  popperContainer: {
+    zIndex: 100,
+  },
 });
 
 class Index extends React.Component<Props, State> {
-    managerRef: (instance: any) => void;
-    menuReferenceInstance: ?HTMLDivElement;
+  managerRef: (instance: any) => void;
 
-    constructor(props: Props) {
-        super(props);
-        this.state = { menuOpen: false };
+  menuReferenceInstance: ?HTMLDivElement;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = { menuOpen: false };
+  }
+
+  handleReferenceInstanceRetrieved = (instance) => {
+    this.managerRef(instance);
+    this.menuReferenceInstance = instance;
+  };
+
+  toggleMenu = (event: any) => {
+    this.setState({
+      // eslint-disable-next-line react/no-access-state-in-setstate
+      menuOpen: !this.state.menuOpen,
+    });
+    event.stopPropagation();
+  };
+
+  closeMenu = () => {
+    this.setState({
+      menuOpen: false,
+    });
+  };
+
+  handleClickAway = (event: any) => {
+    if (this.menuReferenceInstance && this.menuReferenceInstance.contains(event.target)) {
+      return;
     }
+    this.closeMenu();
+  };
 
-    handleReferenceInstanceRetrieved = (instance) => {
-        this.managerRef(instance);
-        this.menuReferenceInstance = instance;
-    }
+  renderMenuItems = () => {
+    const { customRowMenuContents = [], row, classes } = this.props;
 
-    toggleMenu = (event: any) => {
-        this.setState({
-            menuOpen: !this.state.menuOpen,
-        });
-        event.stopPropagation();
-    }
-
-    closeMenu = () => {
-        this.setState({
-            menuOpen: false,
-        });
-    }
-
-    handleClickAway = (event: any) => {
-        if (this.menuReferenceInstance && this.menuReferenceInstance.contains(event.target)) {
+    const menuItems = customRowMenuContents.map((content) => (
+      <MenuItem
+        key={content.key}
+        data-test={`menu-item-${content.key}`}
+        onClick={(event: SyntheticEvent<any>) => {
+          if (!content.clickHandler) {
             return;
-        }
-        this.closeMenu();
-    }
+          }
+          this.closeMenu();
+          // $FlowFixMe common flow, I checked this 4 lines up
+          content.clickHandler(row);
+          event.stopPropagation();
+        }}
+        disabled={!content.clickHandler}
+      >
+        {content.element}
+      </MenuItem>
+    ));
 
-    renderMenuItems = () => {
-        const { customRowMenuContents = [], row, classes } = this.props;
+    return (
+      <MenuList role="menu" className={classes.menuList}>
+        {menuItems}
+      </MenuList>
+    );
+  };
 
-        const menuItems = customRowMenuContents
-            .map(content => (
-                <MenuItem
-                    key={content.key}
-                    data-test={`menu-item-${content.key}`}
-                    onClick={(event: SyntheticEvent<any>) => {
-                        if (!content.clickHandler) {
-                            return;
-                        }
-                        this.closeMenu();
-                        // $FlowFixMe common flow, I checked this 4 lines up
-                        content.clickHandler(row);
-                        event.stopPropagation();
-                    }}
-                    disabled={!content.clickHandler}
-                >
-                    {content.element}
-                </MenuItem>
-            ));
-
-        return (
-            <MenuList role="menu" className={classes.menuList}>
-                {menuItems}
-            </MenuList>
-        );
-    }
-
-    render() {
-        const { classes } = this.props;
-        return (
-            <Manager>
-                <Reference>
-                    {
-                        ({ ref }) => {
-                            this.managerRef = ref;
-                            return (
-                                <div
-                                    ref={this.handleReferenceInstanceRetrieved}
-                                >
-                                    <IconButton
-                                        data-test="dhis2-capture-event-content-menu"
-                                        onClick={this.toggleMenu}
-                                    >
-                                        <MoreHoriz />
-                                    </IconButton>
-                                </div>
-                            );
-                        }
-                    }
-                </Reference>
-                {this.state.menuOpen &&
-                <Popper
-                    placement="bottom-end"
-                >
-                    {
-                        ({ ref, style, placement }) => (
-                            <div
-                                ref={ref}
-                                style={style}
-                                className={classes.popperContainer}
-                                data-placement={placement}
-                            >
-                                <ClickAwayListener onClickAway={this.handleClickAway}>
-                                    <Grow
-                                        in={!!this.state.menuOpen}
-                                        id="menu-list-grow"
-                                        style={{ transformOrigin: '0 0 0' }}
-                                        timeout={{ exit: 0, enter: 200 }}
-                                    >
-                                        <Paper>
-                                            {this.renderMenuItems()}
-                                        </Paper>
-                                    </Grow>
-                                </ClickAwayListener>
-                            </div>
-                        )
-                    }
-                </Popper>}
-            </Manager>
-        );
-    }
+  render() {
+    const { classes } = this.props;
+    return (
+      <Manager>
+        <Reference>
+          {({ ref }) => {
+            this.managerRef = ref;
+            return (
+              <div ref={this.handleReferenceInstanceRetrieved}>
+                <IconButton data-test="dhis2-capture-event-content-menu" onClick={this.toggleMenu}>
+                  <MoreHoriz />
+                </IconButton>
+              </div>
+            );
+          }}
+        </Reference>
+        {this.state.menuOpen && (
+          <Popper placement="bottom-end">
+            {({ ref, style, placement }) => (
+              <div
+                ref={ref}
+                style={style}
+                className={classes.popperContainer}
+                data-placement={placement}
+              >
+                <ClickAwayListener onClickAway={this.handleClickAway}>
+                  <Grow
+                    in={!!this.state.menuOpen}
+                    id="menu-list-grow"
+                    style={{ transformOrigin: '0 0 0' }}
+                    timeout={{ exit: 0, enter: 200 }}
+                  >
+                    <Paper>{this.renderMenuItems()}</Paper>
+                  </Grow>
+                </ClickAwayListener>
+              </div>
+            )}
+          </Popper>
+        )}
+      </Manager>
+    );
+  }
 }
 
 export const RowMenu = withStyles(styles)(Index);

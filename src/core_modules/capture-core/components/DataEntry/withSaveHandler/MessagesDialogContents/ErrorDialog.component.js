@@ -8,78 +8,65 @@ import i18n from '@dhis2/d2-i18n';
 import Button from '../../../Buttons/Button.component';
 
 type Props = {
-    errors: Array<{key: string, name: ?string, error: string }>,
-    onSave: () => void,
-    onAbort: () => void,
-    saveEnabled: boolean,
+  errors: Array<{ key: string, name: ?string, error: string }>,
+  onSave: () => void,
+  onAbort: () => void,
+  saveEnabled: boolean,
 };
 
 class ErrorDialog extends React.Component<Props> {
-    static getItemWithName(name: string, message: string) {
-        return (
-            <React.Fragment>
-                {name}: {message}
-            </React.Fragment>
-        );
-    }
+  static getItemWithName(name: string, message: string) {
+    return (
+      <>
+        {name}: {message}
+      </>
+    );
+  }
 
-    static getItemWithoutName(message: string) {
-        return (
-            <React.Fragment>
-                {message}
-            </React.Fragment>
-        );
-    }
-    getContents(): Array<React.Node> {
-        const { errors } = this.props;
+  static getItemWithoutName(message: string) {
+    return <>{message}</>;
+  }
 
-        return errors
-            .map(errorData => (
-                <li
-                    key={errorData.key}
-                >
-                    {errorData.name ?
-                        ErrorDialog.getItemWithName(errorData.name, errorData.error) :
-                        ErrorDialog.getItemWithoutName(errorData.error)
-                    }
-                </li>
-            ));
-    }
+  getContents(): Array<React.Node> {
+    const { errors } = this.props;
 
-    getButtons() {
-        const { onAbort, onSave, saveEnabled } = this.props;
+    return errors.map((errorData) => (
+      <li key={errorData.key}>
+        {errorData.name
+          ? ErrorDialog.getItemWithName(errorData.name, errorData.error)
+          : ErrorDialog.getItemWithoutName(errorData.error)}
+      </li>
+    ));
+  }
 
-        return (
-            <React.Fragment>
-                <Button onClick={onAbort} color="primary">
-                    {i18n.t('Back to form')}
-                </Button>
-                {saveEnabled ? (
-                    <Button onClick={onSave} color="primary" autoFocus>
-                        {i18n.t('Save anyway')}
-                    </Button>) : null
-                }
-            </React.Fragment>
-        );
-    }
+  getButtons() {
+    const { onAbort, onSave, saveEnabled } = this.props;
 
-    render() {
-        return (
-            <React.Fragment>
-                <DialogTitle id="save-dialog-errors-title">
-                    {i18n.t('Validation errors')}
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        {this.getContents()}
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    {this.getButtons()}
-                </DialogActions>
-            </React.Fragment>
-        );
-    }
+    return (
+      <>
+        <Button onClick={onAbort} color="primary">
+          {i18n.t('Back to form')}
+        </Button>
+        {saveEnabled ? (
+          <Button onClick={onSave} color="primary" autoFocus>
+            {i18n.t('Save anyway')}
+          </Button>
+        ) : null}
+      </>
+    );
+  }
+
+  render() {
+    return (
+      <>
+        <DialogTitle id="save-dialog-errors-title">{i18n.t('Validation errors')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>{this.getContents()}</DialogContentText>
+        </DialogContent>
+        <DialogActions>{this.getButtons()}</DialogActions>
+      </>
+    );
+  }
 }
 
 export default ErrorDialog;

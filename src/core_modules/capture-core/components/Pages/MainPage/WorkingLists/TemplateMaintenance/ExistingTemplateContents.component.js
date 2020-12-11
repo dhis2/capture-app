@@ -6,36 +6,32 @@ import { DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import Button from '../../../../Buttons/Button.component';
 
 const getStyles = () => ({
-    buttonContainer: {
-        display: 'flex',
-        justifyContent: 'space-between',
-    },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
 });
 
 type Props = {
-    onSaveTemplate: () => void,
-    onClose: () => void,
-    classes: Object,
+  onSaveTemplate: () => void,
+  onClose: () => void,
+  classes: Object,
 };
 
 const ExistingTemplateContents = (props: Props) => {
-    const { onSaveTemplate, onClose, classes } = props;
-    return (
-        <React.Fragment>
-            <DialogTitle>{i18n.t('Save')}</DialogTitle>
-            <DialogContent />
-            <DialogActions
-                className={classes.buttonContainer}
-            >
-                <Button onClick={onClose}>
-                    {i18n.t('Cancel')}
-                </Button>
-                <Button onClick={onSaveTemplate} primary>
-                    {i18n.t('Save')}
-                </Button>
-            </DialogActions>
-        </React.Fragment>
-    );
+  const { onSaveTemplate, onClose, classes } = props;
+  return (
+    <>
+      <DialogTitle>{i18n.t('Save')}</DialogTitle>
+      <DialogContent />
+      <DialogActions className={classes.buttonContainer}>
+        <Button onClick={onClose}>{i18n.t('Cancel')}</Button>
+        <Button onClick={onSaveTemplate} primary>
+          {i18n.t('Save')}
+        </Button>
+      </DialogActions>
+    </>
+  );
 };
 
 export default withStyles(getStyles)(ExistingTemplateContents);

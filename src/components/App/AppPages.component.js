@@ -10,13 +10,13 @@ import { SearchPage } from 'capture-core/components/Pages/Search';
 import { NewPage } from 'capture-core/components/Pages/New';
 
 export const AppPages = () => (
-    <Switch>
-        <Route path="/newEvent" component={NewEventPage} />
-        <Route path="/viewEvent" component={ViewEventPage} />
-        <Route path="/newEnrollment" component={NewEnrollmentPage} />
-        <Route path="/search" component={SearchPage} />
-        <Route path="/new" component={NewPage} />
-        <Route path="/:keys" component={MainPage} />
-        <Route path="/" component={MainPage} />
-    </Switch>
+  <Switch>
+    <Route path="/newEvent" component={NewEventPage} />
+    <Route path="/viewEvent" component={ViewEventPage} />
+    <Route path="/newEnrollment" component={NewEnrollmentPage} />
+    <Route path="/search" component={SearchPage} />
+    <Route path="/new" component={NewPage} />
+    <Route path="/:keys" component={MainPage} />
+    <Route path="/" component={MainPage} />
+  </Switch>
 );

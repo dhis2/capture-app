@@ -4,55 +4,55 @@ import AssigneeFilter from './AssigneeFilter.component';
 import type { AssigneeFilterData } from './types';
 
 type Props = {
-    filter: ?AssigneeFilterData,
-    filterTypeRef: ?Function,
+  filter: ?AssigneeFilterData,
+  filterTypeRef: ?Function,
 };
 
 type State = {
-    value?: ?{
-        mode?: ?string,
-        provided?: ?Object,
-    },
+  value?: ?{
+    mode?: ?string,
+    provided?: ?Object,
+  },
 };
 
 class AssigneeFilterManager extends React.Component<Props, State> {
-    static calculateDefaultValueState(filter: ?AssigneeFilterData) {
-        if (!filter) {
-            return undefined;
-        }
-
-        return {
-            mode: filter.assignedUserMode,
-            provided: filter.assignedUser,
-        };
+  static calculateDefaultValueState(filter: ?AssigneeFilterData) {
+    if (!filter) {
+      return undefined;
     }
 
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            value: AssigneeFilterManager.calculateDefaultValueState(this.props.filter),
-        };
-    }
+    return {
+      mode: filter.assignedUserMode,
+      provided: filter.assignedUser,
+    };
+  }
 
-    handleCommitValue = (value: ?Object) => {
-        this.setState({
-            value,
-        });
-    }
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      value: AssigneeFilterManager.calculateDefaultValueState(this.props.filter),
+    };
+  }
 
-    render() {
-        const { filter, filterTypeRef, ...passOnProps } = this.props;
+  handleCommitValue = (value: ?Object) => {
+    this.setState({
+      value,
+    });
+  };
 
-        return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <AssigneeFilter
-                value={this.state.value}
-                innerRef={filterTypeRef}
-                onCommitValue={this.handleCommitValue}
-                {...passOnProps}
-            />
-        );
-    }
+  render() {
+    const { filter, filterTypeRef, ...passOnProps } = this.props;
+
+    return (
+      // $FlowFixMe[cannot-spread-inexact] automated comment
+      <AssigneeFilter
+        value={this.state.value}
+        innerRef={filterTypeRef}
+        onCommitValue={this.handleCommitValue}
+        {...passOnProps}
+      />
+    );
+  }
 }
 
 export default AssigneeFilterManager;

@@ -5,17 +5,20 @@ import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import type { FieldConfigForType } from './configBase';
 
 const getBaseProps = (metaData: MetaDataElement) => ({
-    metaCompulsory: metaData.compulsory,
+  metaCompulsory: metaData.compulsory,
 });
 
 export const createProps = (props?: ?Object, metaData: MetaDataElement) => ({
-    ...getBaseProps(metaData),
-    ...props,
+  ...getBaseProps(metaData),
+  ...props,
 });
 
+export const createFieldConfig = (
+  fieldSpecifications: FieldConfigForType,
+  metaData: MetaDataElement,
 // $FlowFixMe[prop-missing] automated comment
 // $FlowFixMe[incompatible-return] automated comment
-export const createFieldConfig = (fieldSpecifications: FieldConfigForType, metaData: MetaDataElement): FieldConfig => ({
-    ...getBaseConfigForField(metaData),
-    ...fieldSpecifications,
+): FieldConfig => ({
+  ...getBaseConfigForField(metaData),
+  ...fieldSpecifications,
 });

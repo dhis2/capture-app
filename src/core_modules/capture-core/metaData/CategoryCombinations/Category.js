@@ -3,32 +3,33 @@
 import isFunction from 'd2-utilizr/lib/isFunction';
 
 export default class Category {
-    _name: string;
-    _id: string;
+  _name: string;
 
-    static errorMessages = {
-        CATEGORY_OPTION_NOT_FOUND: 'Category option was not found',
-    };
+  _id: string;
 
-    constructor(initFn: ?(_this: Category) => void) {
-        this.name = '';
-        this.id = '';
-        initFn && isFunction(initFn) && initFn(this);
-    }
+  static errorMessages = {
+    CATEGORY_OPTION_NOT_FOUND: 'Category option was not found',
+  };
 
-    get name(): string {
-        return this._name;
-    }
+  constructor(initFn: ?(_this: Category) => void) {
+    this.name = '';
+    this.id = '';
+    initFn && isFunction(initFn) && initFn(this);
+  }
 
-    set name(name: string) {
-        this._name = name;
-    }
+  get name(): string {
+    return this._name;
+  }
 
-    get id(): string {
-        return this._id;
-    }
+  set name(name: string) {
+    this._name = name;
+  }
 
-    set id(id: string) {
-        this._id = id;
-    }
+  get id(): string {
+    return this._id;
+  }
+
+  set id(id: string) {
+    this._id = id;
+  }
 }

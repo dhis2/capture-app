@@ -16,11 +16,11 @@ const jss = create(jssPreset());
 jss.options.insertionPoint = insertionPoint;
 
 type Props = {
-    children: React$Node,
+  children: React$Node,
 };
 
 export const JSSProviderShell = ({ children }: Props) => (
-    <JssProvider jss={jss} generateClassName={generateClassName}>
-        {children}
-    </JssProvider>
+  <JssProvider jss={jss} generateClassName={generateClassName}>
+    {children}
+  </JssProvider>
 );

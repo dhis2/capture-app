@@ -12,7 +12,11 @@ function verifyMajorCacheVersion(appVersion) {
     }
 
     const appMajorVersion = Number(appVersion.split('.')[0]);
-    if (Number.isNaN(appMajorVersion) || !Number.isSafeInteger(appMajorVersion) || appMajorVersion <= 30) {
+    if (
+        Number.isNaN(appMajorVersion) ||
+        !Number.isSafeInteger(appMajorVersion) ||
+        appMajorVersion <= 30
+    ) {
         console.log('Invalid app version');
         process.exit(1);
     }
@@ -25,13 +29,17 @@ function verifyMinorCacheVersion(appCacheVersionAsString) {
     }
 
     const appCacheVersion = Number(appCacheVersionAsString);
-    if (Number.isNaN(appCacheVersion) || !Number.isSafeInteger(appCacheVersion) || appCacheVersion >= 1000) {
+    if (
+        Number.isNaN(appCacheVersion) ||
+        !Number.isSafeInteger(appCacheVersion) ||
+        appCacheVersion >= 1000
+    ) {
         console.log('Invalid cache version');
         process.exit(1);
     }
 }
 
 const appVersion = packageDesc.version;
-const cacheVersion = packageDesc.cacheVersion;
+const { cacheVersion } = packageDesc;
 verifyMajorCacheVersion(appVersion);
 verifyMinorCacheVersion(cacheVersion);

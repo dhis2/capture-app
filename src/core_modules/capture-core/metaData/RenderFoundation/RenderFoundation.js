@@ -13,155 +13,182 @@ import { convertDataElementsValues } from '../helpers';
 import type { ValuesType } from '../helpers/DataElements/convertValues';
 
 export default class RenderFoundation {
-    static errorMessages = {
-        UNSUPPORTED_VALIDATION_STRATEGY: 'Tried to set an unsupported validation strategy',
-    };
+  static errorMessages = {
+    UNSUPPORTED_VALIDATION_STRATEGY: 'Tried to set an unsupported validation strategy',
+  };
 
-    _id: string;
-    _access: Access;
-    _name: string;
-    _description: ?string;
-    _programId: string;
-    _sections: Map<string, Section>;
-    _labels: { [key: string]: string };
-    _programRules: Array<ProgramRule>;
-    _customForm: ?CustomForm;
-    _featureType: string;
-    _validationStrategy: $Values<typeof validationStrategies>;
+  _id: string;
 
-    constructor(initFn: ?(_this: RenderFoundation) => void) {
-        this._sections = new Map();
-        this._labels = {};
-        this.programRules = [];
-        this._validationStrategy = validationStrategies.ON_UPDATE_AND_INSERT;
-        initFn && isFunction(initFn) && initFn(this);
-    }
+  _access: Access;
 
-    set id(id: string) {
-        this._id = id;
-    }
-    get id(): string {
-        return this._id;
-    }
+  _name: string;
 
-    set access(access: Access) {
-        this._access = access;
-    }
-    get access(): Access {
-        return this._access;
-    }
+  _description: ?string;
 
-    set name(name: string) {
-        this._name = name;
-    }
-    get name(): string {
-        return this._name;
-    }
+  _programId: string;
 
-    set description(description: ?string) {
-        this._description = description;
-    }
-    get description(): ?string {
-        return this._description;
-    }
+  _sections: Map<string, Section>;
 
-    set programId(programId: string) {
-        this._programId = programId;
-    }
-    get programId(): string | number {
-        return this._programId;
-    }
+  _labels: { [key: string]: string };
 
-    set programRules(programRules: Array<ProgramRule>) {
-        this._programRules = programRules;
-    }
-    get programRules(): Array<ProgramRule> {
-        return this._programRules;
-    }
+  _programRules: Array<ProgramRule>;
 
-    get sections(): Map<string, Section> {
-        return this._sections;
-    }
+  _customForm: ?CustomForm;
 
-    set customForm(customForm: CustomForm) {
-        this._customForm = customForm;
-    }
-    get customForm() {
-        return this._customForm;
-    }
+  _featureType: string;
 
-    set featureType(featureType: string) {
-        this._featureType = featureType;
-    }
-    get featureType(): string {
-        return this._featureType;
-    }
+  _validationStrategy: $Values<typeof validationStrategies>;
 
-    set validationStrategy(strategy: string) {
-        if (!strategy) {
-            return;
-        }
+  constructor(initFn: ?(_this: RenderFoundation) => void) {
+    this._sections = new Map();
+    this._labels = {};
+    this.programRules = [];
+    this._validationStrategy = validationStrategies.ON_UPDATE_AND_INSERT;
+    initFn && isFunction(initFn) && initFn(this);
+  }
 
-        if (!validationStrategiesAsArray.includes(strategy)) {
-            log.warn(errorCreator(
-                RenderFoundation.errorMessages.UNSUPPORTED_VALIDATION_STRATEGY)({ renderFoundation: this, strategy }),
-            );
-            return;
-        }
+  set id(id: string) {
+    this._id = id;
+  }
 
-        this._validationStrategy = strategy;
-    }
-    get validationStrategy(): $Values<typeof validationStrategies> {
-        return this._validationStrategy;
-    }
+  get id(): string {
+    return this._id;
+  }
 
-    addLabel({ id, label }: { id: string, label: string }) {
-        this._labels[id] = label;
-    }
+  set access(access: Access) {
+    this._access = access;
+  }
 
-    getLabel(id: string) {
-        return this._labels[id];
+  get access(): Access {
+    return this._access;
+  }
+
+  set name(name: string) {
+    this._name = name;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
+  set description(description: ?string) {
+    this._description = description;
+  }
+
+  get description(): ?string {
+    return this._description;
+  }
+
+  set programId(programId: string) {
+    this._programId = programId;
+  }
+
+  get programId(): string | number {
+    return this._programId;
+  }
+
+  set programRules(programRules: Array<ProgramRule>) {
+    this._programRules = programRules;
+  }
+
+  get programRules(): Array<ProgramRule> {
+    return this._programRules;
+  }
+
+  get sections(): Map<string, Section> {
+    return this._sections;
+  }
+
+  set customForm(customForm: CustomForm) {
+    this._customForm = customForm;
+  }
+
+  get customForm() {
+    return this._customForm;
+  }
+
+  set featureType(featureType: string) {
+    this._featureType = featureType;
+  }
+
+  get featureType(): string {
+    return this._featureType;
+  }
+
+  set validationStrategy(strategy: string) {
+    if (!strategy) {
+      return;
     }
 
-    addSection(newSection: Section) {
-        this._sections.set(newSection.id, newSection);
+    if (!validationStrategiesAsArray.includes(strategy)) {
+      log.warn(
+        errorCreator(RenderFoundation.errorMessages.UNSUPPORTED_VALIDATION_STRATEGY)({
+          renderFoundation: this,
+          strategy,
+        }),
+      );
+      return;
     }
 
-    getSection(id: string) {
-        return this._sections.get(id);
-    }
+    this._validationStrategy = strategy;
+  }
 
-    getElement(id: string) {
-        const elements = this.getElementsById();
-        return elements[id];
-    }
+  get validationStrategy(): $Values<typeof validationStrategies> {
+    return this._validationStrategy;
+  }
 
-    addProgramRules(programRules: Array<ProgramRule>) {
-        this.programRules = [...this.programRules, ...programRules];
-    }
+  addLabel({ id, label }: { id: string, label: string }) {
+    this._labels[id] = label;
+  }
 
-    getElements(): Array<DataElement> {
-        return Array.from(this.sections.entries()).map(entry => entry[1])
-            .reduce((accElements, section) => {
-                const elementsInSection = Array.from(section.elements.entries()).map(entry => entry[1]);
-                return [...accElements, ...elementsInSection];
-            }, []);
-    }
+  getLabel(id: string) {
+    return this._labels[id];
+  }
 
-    getElementsById(): {[id: string]: DataElement} {
-        return Array.from(this.sections.entries()).map(entry => entry[1])
-            .reduce((accElements, section) => {
-                const elementsInSection =
-                    Array.from(section.elements.entries()).reduce((accElementsInSection, elementEntry) => {
-                        accElementsInSection[elementEntry[0]] = elementEntry[1];
-                        return accElementsInSection;
-                    }, {});
-                return { ...accElements, ...elementsInSection };
-            }, {});
-    }
+  addSection(newSection: Section) {
+    this._sections.set(newSection.id, newSection);
+  }
 
-    convertValues<T: ?ValuesType | Array<ValuesType>>(values: T, onConvert: ConvertFn): T {
-        const dataElements = this.getElements();
-        return convertDataElementsValues(values, dataElements, onConvert);
-    }
+  getSection(id: string) {
+    return this._sections.get(id);
+  }
+
+  getElement(id: string) {
+    const elements = this.getElementsById();
+    return elements[id];
+  }
+
+  addProgramRules(programRules: Array<ProgramRule>) {
+    this.programRules = [...this.programRules, ...programRules];
+  }
+
+  getElements(): Array<DataElement> {
+    return Array.from(this.sections.entries())
+      .map((entry) => entry[1])
+      .reduce((accElements, section) => {
+        const elementsInSection = Array.from(section.elements.entries()).map((entry) => entry[1]);
+        return [...accElements, ...elementsInSection];
+      }, []);
+  }
+
+  getElementsById(): { [id: string]: DataElement } {
+    return Array.from(this.sections.entries())
+      .map((entry) => entry[1])
+      .reduce((accElements, section) => {
+        const elementsInSection = Array.from(section.elements.entries()).reduce(
+          (accElementsInSection, elementEntry) => {
+            // eslint-disable-next-line prefer-destructuring
+            accElementsInSection[elementEntry[0]] = elementEntry[1];
+            return accElementsInSection;
+          },
+          {},
+        );
+        return { ...accElements, ...elementsInSection };
+      }, {});
+  }
+
+  convertValues<T: ?ValuesType | Array<ValuesType>>(values: T, onConvert: ConvertFn): T {
+    const dataElements = this.getElements();
+    return convertDataElementsValues(values, dataElements, onConvert);
+  }
 }

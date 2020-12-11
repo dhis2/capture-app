@@ -3,36 +3,37 @@
 import isFunction from 'd2-utilizr/lib/isFunction';
 
 export default class Icon {
-    _color: string;
-    _data: string;
+  _color: string;
 
-    constructor(initFn: ?(_this: Icon) => void) {
-        this.color = 'white';
-        initFn && isFunction(initFn) && initFn(this);
-    }
+  _data: string;
 
-    set color(color: string) {
-        this._color = color;
-    }
-    get color(): string {
-        return this._color;
-    }
+  constructor(initFn: ?(_this: Icon) => void) {
+    this.color = 'white';
+    initFn && isFunction(initFn) && initFn(this);
+  }
 
-    set data(data: string) {
-        this._data = data;
-    }
-    get data(): string {
-        return this._data;
-    }
+  set color(color: string) {
+    this._color = color;
+  }
 
-    clone() {
-        return new Icon((cloneObject) => {
-            Object
-                .getOwnPropertyNames(this)
-                .forEach((propName) => {
-                    // $FlowFixMe
-                    cloneObject[propName] = this[propName];
-                });
-        });
-    }
+  get color(): string {
+    return this._color;
+  }
+
+  set data(data: string) {
+    this._data = data;
+  }
+
+  get data(): string {
+    return this._data;
+  }
+
+  clone() {
+    return new Icon((cloneObject) => {
+      Object.getOwnPropertyNames(this).forEach((propName) => {
+        // $FlowFixMe
+        cloneObject[propName] = this[propName];
+      });
+    });
+  }
 }

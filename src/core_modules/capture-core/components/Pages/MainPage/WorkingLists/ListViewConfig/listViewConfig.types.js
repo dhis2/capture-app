@@ -2,16 +2,16 @@
 import type { TemplatesManagerOutputProps } from '../TemplatesManager';
 
 type ExtractedProps = {|
-    children: (currentListIsModified: boolean) => React$Node,
+  children: (currentListIsModified: boolean) => React$Node,
 |};
 
 type RestProps = $Rest<TemplatesManagerOutputProps, ExtractedProps>;
 
 export type Props = {|
-    ...RestProps,
-    ...ExtractedProps,
+  ...RestProps,
+  ...ExtractedProps,
 |};
 export type ListViewConfigOutputProps = {|
-    ...RestProps,
-    currentViewHasTemplateChanges: boolean,
+  ...RestProps,
+  currentViewHasTemplateChanges: boolean,
 |};

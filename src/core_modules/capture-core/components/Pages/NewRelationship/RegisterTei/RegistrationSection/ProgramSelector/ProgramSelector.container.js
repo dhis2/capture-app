@@ -4,18 +4,20 @@ import ProgramSelector from './ProgramSelector.component';
 import { changeProgram, clearProgramFilter } from '../registrationSection.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
-    orgUnitIds: state.newRelationshipRegisterTei.orgUnit ? [state.newRelationshipRegisterTei.orgUnit.id] : null,
-    trackedEntityTypeId: state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId,
-    value: state.newRelationshipRegisterTei.programId,
+  orgUnitIds: state.newRelationshipRegisterTei.orgUnit
+    ? [state.newRelationshipRegisterTei.orgUnit.id]
+    : null,
+  trackedEntityTypeId: state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId,
+  value: state.newRelationshipRegisterTei.programId,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateSelectedProgram: (programId: string) => {
-        dispatch(changeProgram(programId));
-    },
-    onClearFilter: () => {
-        dispatch(clearProgramFilter());
-    },
+  onUpdateSelectedProgram: (programId: string) => {
+    dispatch(changeProgram(programId));
+  },
+  onClearFilter: () => {
+    dispatch(clearProgramFilter());
+  },
 });
 
 // $FlowSuppress

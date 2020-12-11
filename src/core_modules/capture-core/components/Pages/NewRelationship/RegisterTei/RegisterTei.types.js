@@ -1,18 +1,23 @@
 // @flow
 type PropsFromRedux = {|
-    tetName: ?string,
-    ready: boolean,
-    error: string,
-    possibleDuplicates: ?boolean,
+  tetName: ?string,
+  ready: boolean,
+  error: string,
+  possibleDuplicates: ?boolean,
 |};
 type DispatchersFromRedux = {|
-    onReviewDuplicates: (pageSize: number) => void,
+  onReviewDuplicates: (pageSize: number) => void,
 |};
 
 export type OwnProps = {|
-    onLink: (teiId: string) => void,
-    onGetUnsavedAttributeValues?: ?Function,
-    onSave: Function,
+  onLink: (teiId: string) => void,
+  onGetUnsavedAttributeValues?: ?Function,
+  onSave: Function,
 |};
 
-export type Props = {|...PropsFromRedux, ...OwnProps, ...DispatchersFromRedux, ...CssClasses |}
+export type Props = {|
+  ...PropsFromRedux,
+  ...OwnProps,
+  ...DispatchersFromRedux,
+  ...CssClasses,
+|};

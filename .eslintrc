@@ -34,14 +34,13 @@
         "Cypress": true
     },
     "rules": {
-        "indent": [2, 4],
         "max-len": [
-            2,
+            1,
             {
-                "tabWidth": 4,
                 "code": 120,
                 "ignoreComments": true,
                 "ignoreUrls": true,
+                "ignoreTemplateLiterals": true,
                 "ignoreStrings": true,
                 "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("
             }
@@ -64,8 +63,6 @@
         "react/destructuring-assignment": 1,
         "react/static-property-placement": 1,
         "react/jsx-props-no-spreading": 1,
-        "react/jsx-indent": [2, 4],
-        "react/jsx-indent-props": [2, 4],
         "react/prefer-es6-class": [1, "always"],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/no-unused-prop-types": [2, { "skipShapeProps": true }],

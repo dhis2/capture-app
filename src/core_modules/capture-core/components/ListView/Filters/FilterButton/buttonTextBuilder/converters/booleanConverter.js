@@ -6,8 +6,8 @@ import type { BooleanFilterData } from '../../../../../FiltersForTypes';
 const getText = (key: boolean) => (key ? i18n.t('Yes') : i18n.t('No'));
 
 export function convertBoolean(filter: BooleanFilterData): string {
-    return pipe(
-        values => values.map(value => getText(value)),
-        values => values.join(', '),
-    )(filter.values);
+  return pipe(
+    (values) => values.map((value) => getText(value)),
+    (values) => values.join(', '),
+  )(filter.values);
 }

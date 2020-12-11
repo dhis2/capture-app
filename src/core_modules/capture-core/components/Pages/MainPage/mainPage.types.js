@@ -1,11 +1,11 @@
 // @flow
 
 type PassOnProps = $ReadOnly<{|
-    programId: string,
+  programId: string,
 |}>;
 
 export type Props = $ReadOnly<{|
-    ...PassOnProps,
-    currentSelectionsComplete: boolean,
-    classes: Object,
+  ...PassOnProps,
+  currentSelectionsComplete: boolean,
+  classes: Object,
 |}>;

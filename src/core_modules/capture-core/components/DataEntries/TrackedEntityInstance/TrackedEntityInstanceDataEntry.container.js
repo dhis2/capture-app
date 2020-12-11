@@ -7,30 +7,32 @@ import TrackedEntityInstance from './TrackedEntityInstanceDataEntry.component';
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateField: (
-        innerAction: ReduxAction<any, any>,
-        extraActions: {
-            filterActions: Array<ReduxAction<any, any>>,
-            filterActionsToBeExecuted: Array<ReduxAction<any, any>>,
-        },
-    ) => {
-        dispatch(updateFieldBatch(innerAction, extraActions));
+  onUpdateField: (
+    innerAction: ReduxAction<any, any>,
+    extraActions: {
+      filterActions: Array<ReduxAction<any, any>>,
+      filterActionsToBeExecuted: Array<ReduxAction<any, any>>,
     },
-    onStartAsyncUpdateField: (
-        innerAction: ReduxAction<any, any>,
-        extraActions: {
-            filterActions: Array<ReduxAction<any, any>>,
-            filterActionsToBeExecuted: Array<ReduxAction<any, any>>
-        },
-    ) => {
-        const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
-            asyncUpdateSuccessBatch(successInnerAction, extraActions);
-        const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
+  ) => {
+    dispatch(updateFieldBatch(innerAction, extraActions));
+  },
+  onStartAsyncUpdateField: (
+    innerAction: ReduxAction<any, any>,
+    extraActions: {
+      filterActions: Array<ReduxAction<any, any>>,
+      filterActionsToBeExecuted: Array<ReduxAction<any, any>>,
+    },
+  ) => {
+    const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
+      asyncUpdateSuccessBatch(successInnerAction, extraActions);
+    const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
-        dispatch(startAsyncUpdateFieldForNewTei(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
-    },
+    dispatch(startAsyncUpdateFieldForNewTei(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
+  },
 });
 
 // $FlowFixMe
-export const TrackedEntityInstanceDataEntry = connect(mapStateToProps, mapDispatchToProps)(TrackedEntityInstance);
-
+export const TrackedEntityInstanceDataEntry = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(TrackedEntityInstance);

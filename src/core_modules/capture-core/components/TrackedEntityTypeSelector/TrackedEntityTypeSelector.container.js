@@ -6,16 +6,19 @@ import { setTrackedEntityTypeIdOnUrl } from './TrackedEntityTypeSelector.actions
 import { TrackedEntityTypeSelectorComponent } from './TrackedEntityTypeSelector.component';
 
 export const TrackedEntityTypeSelector = ({ onSelect }: OwnProps) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const dispatchSetTrackedEntityTypeIdOnUrl = useCallback(
-        ({ trackedEntityTypeId }) => { dispatch(setTrackedEntityTypeIdOnUrl({ trackedEntityTypeId })); },
-        [dispatch]);
+  const dispatchSetTrackedEntityTypeIdOnUrl = useCallback(
+    ({ trackedEntityTypeId }) => {
+      dispatch(setTrackedEntityTypeIdOnUrl({ trackedEntityTypeId }));
+    },
+    [dispatch],
+  );
 
-    return (
-        <TrackedEntityTypeSelectorComponent
-            onSelect={onSelect}
-            onSetTrackedEntityTypeIdOnUrl={dispatchSetTrackedEntityTypeIdOnUrl}
-        />
-    );
+  return (
+    <TrackedEntityTypeSelectorComponent
+      onSelect={onSelect}
+      onSetTrackedEntityTypeIdOnUrl={dispatchSetTrackedEntityTypeIdOnUrl}
+    />
+  );
 };

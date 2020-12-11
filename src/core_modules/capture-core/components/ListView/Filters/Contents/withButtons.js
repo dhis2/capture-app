@@ -6,101 +6,97 @@ import { Button } from '../../../Buttons';
 import type { UpdatableFilterContent } from '../../../FiltersForTypes';
 
 const getStyles = (theme: Theme) => ({
-    buttonsContainer: {
-        paddingTop: theme.typography.pxToRem(8),
-    },
-    firstButtonContainer: {
-        paddingRight: theme.typography.pxToRem(8),
-        display: 'inline-block',
-    },
+  buttonsContainer: {
+    paddingTop: theme.typography.pxToRem(8),
+  },
+  firstButtonContainer: {
+    paddingRight: theme.typography.pxToRem(8),
+    display: 'inline-block',
+  },
 });
 
 type Props = {
-    onUpdate: (data: ?Object, commitValue?: any) => void,
-    onClose: () => void,
-    classes: {
-        buttonsContainer: string,
-        firstButtonContainer: string,
-    },
+  onUpdate: (data: ?Object, commitValue?: any) => void,
+  onClose: () => void,
+  classes: {
+    buttonsContainer: string,
+    firstButtonContainer: string,
+  },
 };
 
 export default () => (InnerComponent: React.ComponentType<any>) =>
-    withStyles(getStyles)(class FilterContentsButtons extends React.Component<Props> {
-        filterTypeInstance: UpdatableFilterContent<any>;
-        updateButtonInstance: HTMLButtonElement;
-        closeButtonInstance: HTMLButtonElement;
+  withStyles(getStyles)(
+    class FilterContentsButtons extends React.Component<Props> {
+      filterTypeInstance: UpdatableFilterContent<any>;
 
-        update = (commitValue?: any) => {
-            const updateData = this.filterTypeInstance.onGetUpdateData(commitValue);
-            this.props.onUpdate(updateData);
+      updateButtonInstance: HTMLButtonElement;
+
+      closeButtonInstance: HTMLButtonElement;
+
+      update = (commitValue?: any) => {
+        const updateData = this.filterTypeInstance.onGetUpdateData(commitValue);
+        this.props.onUpdate(updateData);
+      };
+
+      isValid() {
+        return this.filterTypeInstance.onIsValid ? this.filterTypeInstance.onIsValid() : true;
+      }
+
+      handleUpdateClick = () => {
+        if (this.isValid()) {
+          this.update();
         }
+      };
 
-        isValid() {
-            return this.filterTypeInstance.onIsValid ? this.filterTypeInstance.onIsValid() : true;
-        }
+      focusUpdateButton = () => {
+        this.updateButtonInstance && this.updateButtonInstance.focus();
+      };
 
-        handleUpdateClick = () => {
-            if (this.isValid()) {
-                this.update();
-            }
-        }
+      focusCloseButton = () => {
+        this.closeButtonInstance && this.closeButtonInstance.focus();
+      };
 
-        focusUpdateButton = () => {
-            this.updateButtonInstance && this.updateButtonInstance.focus();
-        }
+      setFilterTypeInstance = (filterTypeInstance: UpdatableFilterContent<any>) => {
+        this.filterTypeInstance = filterTypeInstance;
+      };
 
-        focusCloseButton = () => {
-            this.closeButtonInstance && this.closeButtonInstance.focus();
-        }
+      setUpdateButtonInstance = (buttonInstance: HTMLButtonElement) => {
+        this.updateButtonInstance = buttonInstance;
+      };
 
-        setFilterTypeInstance = (filterTypeInstance: UpdatableFilterContent<any>) => {
-            this.filterTypeInstance = filterTypeInstance;
-        }
+      setCloseButtonInstance = (buttonInstance: HTMLButtonElement) => {
+        this.closeButtonInstance = buttonInstance;
+      };
 
-        setUpdateButtonInstance = (buttonInstance: HTMLButtonElement) => {
-            this.updateButtonInstance = buttonInstance;
-        }
+      render() {
+        const { onUpdate, onClose, classes, ...passOnProps } = this.props; //eslint-disable-line
 
-        setCloseButtonInstance = (buttonInstance: HTMLButtonElement) => {
-            this.closeButtonInstance = buttonInstance;
-        }
-
-        render() {
-            const { onUpdate, onClose, classes, ...passOnProps } = this.props; //eslint-disable-line
-
-            return (
-                <React.Fragment>
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                    <InnerComponent
-                        filterTypeRef={this.setFilterTypeInstance}
-                        onUpdate={this.update}
-                        onFocusUpdateButton={this.focusUpdateButton}
-                        onFocusCloseButton={this.focusCloseButton}
-                        {...passOnProps}
-                    />
-                    <div
-                        className={classes.buttonsContainer}
-                    >
-                        <div
-                            className={classes.firstButtonContainer}
-                        >
-                            <Button
-                                muiButtonRef={this.setUpdateButtonInstance}
-                                primary
-                                onClick={this.handleUpdateClick}
-                            >
-                                {i18n.t('Update')}
-                            </Button>
-                        </div>
-                        <Button
-                            muiButtonRef={this.setCloseButtonInstance}
-                            secondary
-                            onClick={onClose}
-                        >
-                            {i18n.t('Close')}
-                        </Button>
-                    </div>
-                </React.Fragment>
-            );
-        }
-    });
+        return (
+          <>
+            {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+            <InnerComponent
+              filterTypeRef={this.setFilterTypeInstance}
+              onUpdate={this.update}
+              onFocusUpdateButton={this.focusUpdateButton}
+              onFocusCloseButton={this.focusCloseButton}
+              {...passOnProps}
+            />
+            <div className={classes.buttonsContainer}>
+              <div className={classes.firstButtonContainer}>
+                <Button
+                  muiButtonRef={this.setUpdateButtonInstance}
+                  primary
+                  onClick={this.handleUpdateClick}
+                >
+                  {i18n.t('Update')}
+                </Button>
+              </div>
+              <Button muiButtonRef={this.setCloseButtonInstance} secondary onClick={onClose}>
+                {i18n.t('Close')}
+              </Button>
+            </div>
+          </>
+        );
+      }
+    },
+  );

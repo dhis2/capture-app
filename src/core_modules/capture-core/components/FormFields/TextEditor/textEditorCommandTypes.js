@@ -1,4 +1,4 @@
 export default {
-    BOLD: 'BOLD',
-    ITALIC: 'ITALIC',
+  BOLD: 'BOLD',
+  ITALIC: 'ITALIC',
 };

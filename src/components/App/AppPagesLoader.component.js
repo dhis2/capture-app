@@ -7,13 +7,17 @@ import { withD2InContext, withStateBoundLoadingIndicator } from 'capture-core/HO
 import { AppPages } from './AppPages.component';
 
 export const AppPagesLoader = compose(
-    // $FlowFixMe
-    withRouter,
-    withStateBoundLoadingIndicator((state: ReduxState) => state.app.initDone, null, true),
-    withD2InContext(),
-    withAppUrlSync(),
-    withUrlSync((props: Object) => props.syncSpecification),
-    withStateBoundLoadingIndicator((state: ReduxState, props: Object) => !props.urlOutOfSync, null, true),
-    withStateBoundLoadingIndicator((state: ReduxState) => !state.app.goingOnline, null, true),
+  // $FlowFixMe
+  withRouter,
+  withStateBoundLoadingIndicator((state: ReduxState) => state.app.initDone, null, true),
+  withD2InContext(),
+  withAppUrlSync(),
+  withUrlSync((props: Object) => props.syncSpecification),
+  withStateBoundLoadingIndicator(
+    (state: ReduxState, props: Object) => !props.urlOutOfSync,
+    null,
+    true,
+  ),
+  withStateBoundLoadingIndicator((state: ReduxState) => !state.app.goingOnline, null, true),
 )(AppPages);
 AppPagesLoader.displayName = 'AppPagesLoader';

@@ -1,10 +1,9 @@
 // @flow
 
 export default function getSearchFormId(
-    searchId: string,
-    contextId: string,
-    searchGroupId: string,
+  searchId: string,
+  contextId: string,
+  searchGroupId: string,
 ) {
-    return `${searchId}-${contextId}-${searchGroupId}`;
+  return `${searchId}-${contextId}-${searchGroupId}`;
 }
-

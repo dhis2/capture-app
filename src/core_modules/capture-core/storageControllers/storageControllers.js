@@ -8,20 +8,20 @@ const adapterTypes = [availableAdapters.INDEXED_DB];
 const storageControllers: { [key: string]: StorageController } = {};
 
 export async function initAsync(onCacheExpired: Function) {
-    storageControllers.main = await initMainControllerAsync(adapterTypes, onCacheExpired);
-    storageControllers.user = await initUserControllerAsync(storageControllers.main);
+  storageControllers.main = await initMainControllerAsync(adapterTypes, onCacheExpired);
+  storageControllers.user = await initUserControllerAsync(storageControllers.main);
 }
 
 export function closeAsync() {
-    const mainPromise = storageControllers.main.close();
-    const userPromise = storageControllers.user.close();
-    return Promise.all([mainPromise, userPromise]);
+  const mainPromise = storageControllers.main.close();
+  const userPromise = storageControllers.user.close();
+  return Promise.all([mainPromise, userPromise]);
 }
 
 export function getMainController() {
-    return storageControllers.main;
+  return storageControllers.main;
 }
 
 export function getUserController() {
-    return storageControllers.user;
+  return storageControllers.user;
 }

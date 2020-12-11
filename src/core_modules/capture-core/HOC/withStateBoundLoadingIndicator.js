@@ -5,52 +5,49 @@ import { connect } from 'react-redux';
 import { LoadingMaskForPage, LoadingMaskElementCenter } from '../components/LoadingMasks';
 
 type Props = {
-    ready: boolean,
-    InnerComponent: React.ComponentType<any>
+  ready: boolean,
+  InnerComponent: React.ComponentType<any>,
 };
 
-const getLoadingIndicator = (getContainerStylesFn?: ?(props: any) => Object, fullPage?: ?boolean) => (props: Props) => {
-    const { ready, InnerComponent, ...other } = props;
+const getLoadingIndicator = (
+  getContainerStylesFn?: ?(props: any) => Object,
+  fullPage?: ?boolean,
+) => (props: Props) => {
+  const { ready, InnerComponent, ...other } = props;
 
-    if (!ready) {
-        if (fullPage) {
-            return (
-                <LoadingMaskForPage />
-            );
-        }
-
-        const containerStyles = getContainerStylesFn ? getContainerStylesFn(props) : null;
-        return (
-            <LoadingMaskElementCenter
-                containerStyle={containerStyles}
-            />
-        );
+  if (!ready) {
+    if (fullPage) {
+      return <LoadingMaskForPage />;
     }
 
-    return (
-        <InnerComponent
-            {...other}
-        />
-    );
+    const containerStyles = getContainerStylesFn ? getContainerStylesFn(props) : null;
+    return <LoadingMaskElementCenter containerStyle={containerStyles} />;
+  }
+
+  return <InnerComponent {...other} />;
 };
 
 export const withStateBoundLoadingIndicator = (
-    isReadyFn: (state: ReduxState, props: any) => boolean,
-    getContainerStylesFn?: ?(props: any) => Object,
-    fullPage?: ?boolean,
-) =>
-    (InnerComponent: React.ComponentType<any>) => {
-        const mapStateToProps = (state: ReduxState, props: any) => ({
-            ready: isReadyFn(state, props),
-        });
+  isReadyFn: (state: ReduxState, props: any) => boolean,
+  getContainerStylesFn?: ?(props: any) => Object,
+  fullPage?: ?boolean,
+) => (InnerComponent: React.ComponentType<any>) => {
+  const mapStateToProps = (state: ReduxState, props: any) => ({
+    ready: isReadyFn(state, props),
+  });
 
-        const mergeProps = (stateProps, dispatchProps, ownProps) =>
-            Object.assign({}, ownProps, stateProps, dispatchProps, {
-                InnerComponent,
-            });
+  const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+    ...ownProps,
+    ...stateProps,
+    ...dispatchProps,
+    InnerComponent,
+  });
 
-
-        // $FlowFixMe[speculation-ambiguous] automated comment
-        const LoadingIndicatorContainer = connect(mapStateToProps, null, mergeProps)(getLoadingIndicator(getContainerStylesFn, fullPage));
-        return LoadingIndicatorContainer;
-    };
+  // $FlowFixMe[speculation-ambiguous] automated comment
+  const LoadingIndicatorContainer = connect(
+    mapStateToProps,
+    null,
+    mergeProps,
+  )(getLoadingIndicator(getContainerStylesFn, fullPage));
+  return LoadingIndicatorContainer;
+};

@@ -1,4 +1,4 @@
 // @flow
 export type TextFilterData = {|
-    value: string,
+  value: string,
 |};

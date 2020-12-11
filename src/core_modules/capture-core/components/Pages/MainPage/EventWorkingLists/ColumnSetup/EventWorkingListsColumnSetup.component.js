@@ -6,47 +6,65 @@ import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
 
 const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView) =>
-    useCallback((selectedTemplate: Object, context: Object, meta: Object) => {
-        const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
-            defaultColumns
-                // $FlowFixMe
-                .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
-        );
-        onLoadView(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
-    }, [onLoadView, defaultColumns]);
+  useCallback(
+    (selectedTemplate: Object, context: Object, meta: Object) => {
+      const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
+        defaultColumns
+          // $FlowFixMe
+          .map(({ id, type, apiName, isMainProperty }) => [
+            id,
+            { id, type, apiName, isMainProperty },
+          ]),
+      );
+      onLoadView(selectedTemplate, context, {
+        ...meta,
+        columnsMetaForDataFetching,
+      });
+    },
+    [onLoadView, defaultColumns],
+  );
 
 const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
-    useCallback((queryArgs: Object, lastTransaction: number) => {
-        const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
-            defaultColumns
-                // $FlowFixMe
-                .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
-        );
-        onUpdateList(queryArgs, lastTransaction, columnsMetaForDataFetching);
-    }, [onUpdateList, defaultColumns]);
+  useCallback(
+    (queryArgs: Object, lastTransaction: number) => {
+      const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
+        defaultColumns
+          // $FlowFixMe
+          .map(({ id, type, apiName, isMainProperty }) => [
+            id,
+            { id, type, apiName, isMainProperty },
+          ]),
+      );
+      onUpdateList(queryArgs, lastTransaction, columnsMetaForDataFetching);
+    },
+    [onUpdateList, defaultColumns],
+  );
 
 export const EventWorkingListsColumnSetup = ({
-    program,
-    customColumnOrder,
-    onLoadView,
-    onUpdateList,
-    ...passOnProps
+  program,
+  customColumnOrder,
+  onLoadView,
+  onUpdateList,
+  ...passOnProps
 }: Props) => {
-    const defaultColumns = useDefaultColumnConfig(program);
+  const defaultColumns = useDefaultColumnConfig(program);
 
-    const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView);
-    const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateList);
+  const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView);
+  const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(
+    defaultColumns,
+    onUpdateList,
+  );
 
-    const columns = useColumns(customColumnOrder, defaultColumns);
+  const columns = useColumns(customColumnOrder, defaultColumns);
 
-    return (
-        <CurrentViewChangesResolver
-            {...passOnProps}
-            program={program}
-            columns={columns}
-            defaultColumns={defaultColumns}
-            onLoadView={injectColumnMetaToLoadList}
-            onUpdateList={injectColumnMetaToUpdateList}
-        />
-    );
+  return (
+    <CurrentViewChangesResolver
+      {...passOnProps}
+      program={program}
+      columns={columns}
+      defaultColumns={defaultColumns}
+      onLoadView={injectColumnMetaToLoadList}
+      onUpdateList={injectColumnMetaToUpdateList}
+    />
+  );
 };

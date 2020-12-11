@@ -4,26 +4,28 @@ import type { EventRecords, EventWorkingListsColumnConfigs } from '../../EventWo
 import type { CurrentViewChangesResolverOutputProps } from '../CurrentViewChangesResolver';
 
 type ExtractedProps = $ReadOnly<{|
-    eventRecords?: EventRecords,
-    columns: EventWorkingListsColumnConfigs,
-    recordsOrder?: Array<string>,
+  eventRecords?: EventRecords,
+  columns: EventWorkingListsColumnConfigs,
+  recordsOrder?: Array<string>,
 |}>;
 
 type OptionalExtractedProps = {
-    eventRecords: EventRecords,
-    recordsOrder: Array<string>,
+  eventRecords: EventRecords,
+  recordsOrder: Array<string>,
 };
-type RestProps = $Rest<CurrentViewChangesResolverOutputProps & OptionalExtractedProps,
-ExtractedProps & OptionalExtractedProps>;
+type RestProps = $Rest<
+  CurrentViewChangesResolverOutputProps & OptionalExtractedProps,
+  ExtractedProps & OptionalExtractedProps,
+>;
 
 export type Props = {|
-    ...RestProps,
-    ...ExtractedProps,
+  ...RestProps,
+  ...ExtractedProps,
 |};
 
 export type EventWorkingListsDataSourceSetupOutputProps = {|
-    ...RestProps,
-    columns: EventWorkingListsColumnConfigs,
-    dataSource?: DataSource,
-    rowIdKey: string,
+  ...RestProps,
+  columns: EventWorkingListsColumnConfigs,
+  dataSource?: DataSource,
+  rowIdKey: string,
 |};

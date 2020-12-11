@@ -1,16 +1,16 @@
 // @flow
 
 export type DispatchersFromRedux = {|
-    onCancel: ()=>void
-|}
+  onCancel: () => void,
+|};
 
 export type PropsFromRedux = $ReadOnly<{|
-    isProgramSelected: boolean,
-    isOrgUnitSelected: boolean
-|}>
+  isProgramSelected: boolean,
+  isOrgUnitSelected: boolean,
+|}>;
 
 export type Props = {|
-    ...DispatchersFromRedux,
-    ...PropsFromRedux,
-    ...CssClasses
-|}
+  ...DispatchersFromRedux,
+  ...PropsFromRedux,
+  ...CssClasses,
+|};

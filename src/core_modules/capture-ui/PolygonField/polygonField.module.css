@@ -1,46 +1,45 @@
 .container {
-    position: relative;
+  position: relative;
 }
 .statusContainer {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .mapIcon {
-    cursor: pointer;
-    padding: 2px;
+  cursor: pointer;
+  padding: 2px;
 }
 .statusText {
-    padding: 2px;
+  padding: 2px;
 }
 .checkIcon {
-    padding: 2px;
+  padding: 2px;
 }
 
 .dialogActionOuterContainer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 .dialogActionInnerContainer {
-    padding: 24px 0px 0px 5px;
+  padding: 24px 0px 0px 5px;
 }
 
 .mapContainer {
-    flex-grow: 1;
-    position: relative;
+  flex-grow: 1;
+  position: relative;
 }
 
 .map {
-    position: absolute;
-    height: 100%;
-    width: 100%;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .dialogContent {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 0px 24px 24px 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 24px 24px 24px;
 }
-

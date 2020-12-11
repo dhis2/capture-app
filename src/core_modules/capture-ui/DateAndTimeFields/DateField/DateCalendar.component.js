@@ -7,94 +7,95 @@ import '@joakim_sm/react-infinite-calendar/styles.css';
 import './customStyles.css';
 
 type Props = {
-    onDateSelected: (value: any) => void,
-    value?: ?string,
-    minMoment?: Object,
-    maxMoment?: Object,
-    currentWidth: number,
-    height?: ?number,
-    classes: Object,
-    displayOptions?: ?Object,
-    calendarTheme: Object,
-    onConvertValueIn: (inputValue: ?string) => Date,
-    onConvertValueOut: (date: Date) => string,
+  onDateSelected: (value: any) => void,
+  value?: ?string,
+  minMoment?: Object,
+  maxMoment?: Object,
+  currentWidth: number,
+  height?: ?number,
+  classes: Object,
+  displayOptions?: ?Object,
+  calendarTheme: Object,
+  onConvertValueIn: (inputValue: ?string) => Date,
+  onConvertValueOut: (date: Date) => string,
 };
 
 class DateCalendar extends Component<Props> {
-    handleChange: (e: any, dates: ?Array<Date>) => void;
-    displayOptions: Object;
+  handleChange: (e: any, dates: ?Array<Date>) => void;
 
-    constructor(props: Props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
+  displayOptions: Object;
 
-        this.displayOptions = {
-            ...DateCalendar.displayOptions,
-            ...this.props.displayOptions,
-        };
-    }
+  constructor(props: Props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    static displayOptions = {
-        showHeader: true,
-        showMonthsForYears: false,
+    this.displayOptions = {
+      ...DateCalendar.displayOptions,
+      ...this.props.displayOptions,
     };
+  }
 
-    handleChange(changeDate: Date) {
-        const changeDateInLocalFormat = this.props.onConvertValueOut(changeDate);
-        this.props.onDateSelected(changeDateInLocalFormat);
-    }
+  shouldComponentUpdate() {
+    return false;
+  }
 
-    getValue(inputValue: ?string) {
-        return this.props.onConvertValueIn(inputValue);
-    }
+  static displayOptions = {
+    showHeader: true,
+    showMonthsForYears: false,
+  };
 
-    getMinMaxProps() {
-        const { minMoment = moment('1900-01-01'), maxMoment = moment('2099-12-31') } = this.props;
+  handleChange(changeDate: Date) {
+    const changeDateInLocalFormat = this.props.onConvertValueOut(changeDate);
+    this.props.onDateSelected(changeDateInLocalFormat);
+  }
 
-        const minDate = minMoment.toDate();
-        const maxDate = maxMoment.toDate();
+  getValue(inputValue: ?string) {
+    return this.props.onConvertValueIn(inputValue);
+  }
 
-        return {
-            min: minDate,
-            minDate,
-            max: maxDate,
-            maxDate,
-        };
-    }
+  getMinMaxProps() {
+    const { minMoment = moment('1900-01-01'), maxMoment = moment('2099-12-31') } = this.props;
 
-    render() {
-        const {
-            value,
-            classes,
-            currentWidth,
-            height,
-            minMoment,
-            maxMoment,
-            onDateSelected,
-            displayOptions,
-            ...passOnProps
-        } = this.props;
+    const minDate = minMoment.toDate();
+    const maxDate = maxMoment.toDate();
 
-        return (
-            <div>
-                { /* $FlowFixMe */}
-                <InfiniteCalendar
-                    {...this.getMinMaxProps()}
-                    selected={this.getValue((value))}
-                    onSelect={this.handleChange}
-                    width={currentWidth}
-                    height={height}
-                    autoFocus={false}
-                    displayOptions={this.displayOptions}
-                    {...passOnProps}
-                />
-            </div>
-        );
-    }
+    return {
+      min: minDate,
+      minDate,
+      max: maxDate,
+      maxDate,
+    };
+  }
+
+  render() {
+    const {
+      value,
+      classes,
+      currentWidth,
+      height,
+      minMoment,
+      maxMoment,
+      onDateSelected,
+      displayOptions,
+      ...passOnProps
+    } = this.props;
+
+    return (
+      <div>
+        {/* $FlowFixMe */}
+        <InfiniteCalendar
+          {...this.getMinMaxProps()}
+          selected={this.getValue(value)}
+          onSelect={this.handleChange}
+          width={currentWidth}
+          height={height}
+          autoFocus={false}
+          displayOptions={this.displayOptions}
+          {...passOnProps}
+        />
+      </div>
+    );
+  }
 }
 
 export default DateCalendar;

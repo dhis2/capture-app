@@ -1,7 +1,7 @@
 // @flow
 export type Access = {
-    data: {
-        read: boolean,
-        write: boolean,
-    },
+  data: {
+    read: boolean,
+    write: boolean,
+  },
 };

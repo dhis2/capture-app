@@ -2,19 +2,14 @@
 export { Access } from './Access';
 export { Category, CategoryCombination } from './CategoryCombinations';
 export {
-    DataElement,
-    DateDataElement,
-    dataElementTypes,
-    Unique as DataElementUnique,
-    uniqueScope as dataElementUniqueScope,
+  DataElement,
+  DateDataElement,
+  dataElementTypes,
+  Unique as DataElementUnique,
+  uniqueScope as dataElementUniqueScope,
 } from './DataElement';
 export { Icon } from './Icon';
-export {
-    Option,
-    OptionSet,
-    OptionGroup,
-    inputTypes as optionSetInputTypes,
-} from './OptionSet';
+export { Option, OptionSet, OptionGroup, inputTypes as optionSetInputTypes } from './OptionSet';
 export { Program, ProgramStage, EventProgram, TrackerProgram, Enrollment } from './Program';
 export { RelationshipType } from './RelationshipType';
 export { RenderFoundation, Section, CustomForm } from './RenderFoundation';
@@ -25,15 +20,15 @@ export { SystemSettings } from './SystemSettings';
 export { scopeTypes } from './helpers/getScopeFromScopeId';
 // helpers
 export {
-    getScopeFromScopeId,
-    getProgramAndStageFromEvent,
-    getStageFromEvent,
-    getProgramAndStageFromProgramIdForEventProgram,
-    getStageFromProgramIdForEventProgram,
-    getProgramFromProgramIdThrowIfNotFound,
-    getTrackerProgramThrowIfNotFound,
-    getTrackedEntityTypeThrowIfNotFound,
-    convertDataElementsValues,
-    getEventProgramThrowIfNotFound,
-    getEventProgramEventAccess,
+  getScopeFromScopeId,
+  getProgramAndStageFromEvent,
+  getStageFromEvent,
+  getProgramAndStageFromProgramIdForEventProgram,
+  getStageFromProgramIdForEventProgram,
+  getProgramFromProgramIdThrowIfNotFound,
+  getTrackerProgramThrowIfNotFound,
+  getTrackedEntityTypeThrowIfNotFound,
+  convertDataElementsValues,
+  getEventProgramThrowIfNotFound,
+  getEventProgramEventAccess,
 } from './helpers';

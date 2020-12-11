@@ -4,66 +4,61 @@ import './rowsPerPage.css';
 
 import OptionsSelect from '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import withTranslations from '../FormFields/Options/SelectVirtualized/withTranslations';
-import type { VirtualizedOptionConfig } from
-    '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import type { VirtualizedOptionConfig } from '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 
 const OptionsSelectWithTranslations = withTranslations()(OptionsSelect);
 
 type Props = {
-    rowsPerPage: number,
-    onChangeRowsPerPage: (rowsPerPage: number) => void,
+  rowsPerPage: number,
+  onChangeRowsPerPage: (rowsPerPage: number) => void,
 };
 
 const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
-    class RowsPerPageSelector extends React.Component<Props> {
-        static getOptions(): Array<VirtualizedOptionConfig> {
-            const options =
-                [10, 15, 25, 50, 100]
-                    .map(optionCount => ({
-                        label: optionCount.toString(),
-                        value: optionCount,
-                    }));
-            return options;
-        }
+  class RowsPerPageSelector extends React.Component<Props> {
+    static getOptions(): Array<VirtualizedOptionConfig> {
+      const options = [10, 15, 25, 50, 100].map((optionCount) => ({
+        label: optionCount.toString(),
+        value: optionCount,
+      }));
+      return options;
+    }
 
-        options: Array<VirtualizedOptionConfig>;
-        constructor(props: Props) {
-            super(props);
-            this.options = RowsPerPageSelector.getOptions();
-        }
+    options: Array<VirtualizedOptionConfig>;
 
-        handleRowsSelect = (rowsPerPage: number) => {
-            this.props.onChangeRowsPerPage(rowsPerPage);
-        }
+    constructor(props: Props) {
+      super(props);
+      this.options = RowsPerPageSelector.getOptions();
+    }
 
-        renderSelectorElement = () => {
-            const rowsPerPage = this.props.rowsPerPage;
-
-            return (
-                <div id="rows-per-page-selector">
-                    <OptionsSelectWithTranslations
-                        onSelect={this.handleRowsSelect}
-                        options={this.options}
-                        value={rowsPerPage}
-                        nullable={false}
-                        withoutUnderline
-                        searchable={false}
-                    />
-                </div>
-            );
-        }
-
-        render = () => {
-            const { ...passOnProps } = this.props;
-            return (
-                // $FlowFixMe[cannot-spread-inexact] automated comment
-                <InnerComponent
-                    rowsCountSelector={this.renderSelectorElement()}
-                    {...passOnProps}
-                />
-            );
-        }
+    handleRowsSelect = (rowsPerPage: number) => {
+      this.props.onChangeRowsPerPage(rowsPerPage);
     };
+
+    renderSelectorElement = () => {
+      const { rowsPerPage } = this.props;
+
+      return (
+        <div id="rows-per-page-selector">
+          <OptionsSelectWithTranslations
+            onSelect={this.handleRowsSelect}
+            options={this.options}
+            value={rowsPerPage}
+            nullable={false}
+            withoutUnderline
+            searchable={false}
+          />
+        </div>
+      );
+    };
+
+    render = () => {
+      const { ...passOnProps } = this.props;
+      return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
+        <InnerComponent rowsCountSelector={this.renderSelectorElement()} {...passOnProps} />
+      );
+    };
+  };
 
 /**
  * Add rows per page selector to the inner component
@@ -71,7 +66,6 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
  * @alias withRowsPerPageSelector
  * @memberof Pagination
  * @example withRowsPerPageSelector()([InnerComponent])
-*/
-export default () =>
-    (InnerComponent: React.ComponentType<any>) =>
-        getRowsPerPageSelector(InnerComponent);
+ */
+export default () => (InnerComponent: React.ComponentType<any>) =>
+  getRowsPerPageSelector(InnerComponent);

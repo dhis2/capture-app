@@ -9,76 +9,98 @@ import { type RenderFoundation, dataElementTypes } from '../metaData';
 const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 
 const subValueGetterByElementType = {
-    // todo (report lgmt)
-    [dataElementTypes.FILE_RESOURCE]: (value: any, eventId: string, metaElementId: string) => {
-        const baseUrl = config.baseUrl;
-        return getApi().get(`fileResources/${value}`)
-            .then(res =>
-                ({
-                    name: res.name,
-                    value: res.id,
-                    url: `${baseUrl}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
-                }))
-            .catch((error) => {
-                log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
-                return null;
-            });
-    },
-    [dataElementTypes.IMAGE]: (value: any, eventId: string, metaElementId: string) => {
-        const baseUrl = config.baseUrl;
-        return getApi().get(`fileResources/${value}`)
-            .then(res =>
-                ({
-                    name: res.name,
-                    value: res.id,
-                    url: `${baseUrl}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
-                }))
-            .catch((error) => {
-                log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
-                return null;
-            });
-    },
-    [dataElementTypes.ORGANISATION_UNIT]: (value: any, eventId: string, metaElementId: string) => {
-        const ouIds = value.split('/');
-        const id = ouIds[ouIds.length - 1];
-        return getD2()
-            .models
-            .organisationUnits
-            .get(id)
-            .then(res => ({
-                id: res.id,
-                code: res.code,
-                name: res.displayName,
-                path: res.path,
-            }))
-            .catch((error) => {
-                log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
-                return null;
-            });
-    },
+  // todo (report lgmt)
+  [dataElementTypes.FILE_RESOURCE]: (value: any, eventId: string, metaElementId: string) => {
+    const { baseUrl } = config;
+    return getApi()
+      .get(`fileResources/${value}`)
+      .then((res) => ({
+        name: res.name,
+        value: res.id,
+        url: `${baseUrl}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+      }))
+      .catch((error) => {
+        log.warn(
+          errorCreator(GET_SUBVALUE_ERROR)({
+            value,
+            eventId,
+            metaElementId,
+            error,
+          }),
+        );
+        return null;
+      });
+  },
+  [dataElementTypes.IMAGE]: (value: any, eventId: string, metaElementId: string) => {
+    const { baseUrl } = config;
+    return getApi()
+      .get(`fileResources/${value}`)
+      .then((res) => ({
+        name: res.name,
+        value: res.id,
+        url: `${baseUrl}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
+      }))
+      .catch((error) => {
+        log.warn(
+          errorCreator(GET_SUBVALUE_ERROR)({
+            value,
+            eventId,
+            metaElementId,
+            error,
+          }),
+        );
+        return null;
+      });
+  },
+  [dataElementTypes.ORGANISATION_UNIT]: (value: any, eventId: string, metaElementId: string) => {
+    const ouIds = value.split('/');
+    const id = ouIds[ouIds.length - 1];
+    return getD2()
+      .models.organisationUnits.get(id)
+      .then((res) => ({
+        id: res.id,
+        code: res.code,
+        name: res.displayName,
+        path: res.path,
+      }))
+      .catch((error) => {
+        log.warn(
+          errorCreator(GET_SUBVALUE_ERROR)({
+            value,
+            eventId,
+            metaElementId,
+            error,
+          }),
+        );
+        return null;
+      });
+  },
 };
 
+export async function getSubValues(
+  eventId: string,
+  programStage: RenderFoundation,
+  values?: ?Object,
+) {
+  if (!values) {
+    return null;
+  }
 
-export async function getSubValues(eventId: string, programStage: RenderFoundation, values?: ?Object) {
-    if (!values) {
-        return null;
+  const elementsById = programStage.getElementsById();
+
+  return Object.keys(values).reduce(async (accValuesPromise, metaElementId) => {
+    const accValues = await accValuesPromise;
+
+    const value = values[metaElementId];
+    const metaElement = elementsById[metaElementId];
+    if (isDefined(value) && value !== null && metaElement) {
+      // $FlowFixMe dataElementTypes flow error
+      const subValueGetter = subValueGetterByElementType[metaElement.type];
+      if (subValueGetter) {
+        const subValue = await subValueGetter(value, eventId, metaElementId);
+        accValues[metaElementId] = subValue;
+      }
     }
-
-    const elementsById = programStage.getElementsById();
-
-    return Object.keys(values).reduce(async (accValuesPromise, metaElementId) => {
-        const accValues = await accValuesPromise;
-
-        const value = values[metaElementId];
-        const metaElement = elementsById[metaElementId];
-        if (isDefined(value) && value !== null && metaElement) {
-            // $FlowFixMe dataElementTypes flow error
-            const subValueGetter = subValueGetterByElementType[metaElement.type];
-            if (subValueGetter) {
-                const subValue = await subValueGetter(value, eventId, metaElementId);
-                accValues[metaElementId] = subValue;
-            }
-        }
-        return accValues;
-    }, Promise.resolve(values));
+    return accValues;
+  }, Promise.resolve(values));
 }

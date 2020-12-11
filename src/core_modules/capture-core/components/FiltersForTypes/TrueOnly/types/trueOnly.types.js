@@ -1,5 +1,5 @@
 // @flow
 
 export type TrueOnlyFilterData = {|
-    value: true,
+  value: true,
 |};

@@ -5,15 +5,21 @@ import { CoordinateFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
 const getCoordinateField = (metaData: MetaDataElement) => {
-    const props = createProps({
-        orientation: orientations.HORIZONTAL,
-        shrinkDisabled: false,
-    }, metaData);
+  const props = createProps(
+    {
+      orientation: orientations.HORIZONTAL,
+      shrinkDisabled: false,
+    },
+    metaData,
+  );
 
-    return createFieldConfig({
-        component: CoordinateFieldForCustomForm,
-        props,
-    }, metaData);
+  return createFieldConfig(
+    {
+      component: CoordinateFieldForCustomForm,
+      props,
+    },
+    metaData,
+  );
 };
 
 export default getCoordinateField;

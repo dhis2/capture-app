@@ -1,12 +1,14 @@
 // @flow
 import { createSelector } from 'reselect';
 
-const relationshipTypeIdSelector = state => state.newRelationship.selectedRelationshipTypeId;
+const relationshipTypeIdSelector = (state) => state.newRelationship.selectedRelationshipTypeId;
 const relationshipTypesSelector = (state, props) => props.relationshipTypes;
 
-// $FlowFixMe[missing-annot] automated comment
-export const makeSelectedRelationshipTypeSelector = () => createSelector(
+export const makeSelectedRelationshipTypeSelector = () =>
+  // $FlowFixMe[missing-annot] automated comment
+  createSelector(
     relationshipTypeIdSelector,
     relationshipTypesSelector,
-    (relationshipTypeId: string, relationshipTypes: Array<Object>) => relationshipTypes.find(rt => rt.id === relationshipTypeId),
-);
+    (relationshipTypeId: string, relationshipTypes: Array<Object>) =>
+      relationshipTypes.find((rt) => rt.id === relationshipTypeId),
+  );

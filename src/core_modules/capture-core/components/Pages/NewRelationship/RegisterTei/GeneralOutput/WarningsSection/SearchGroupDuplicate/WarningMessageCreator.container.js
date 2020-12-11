@@ -6,8 +6,19 @@ import { reviewDuplicates } from './searchGroupDuplicate.actions';
 import type { OwnProps, Props } from './WarningMessageCreator.types';
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onReviewDuplicates: (pageSize) => { dispatch(reviewDuplicates(pageSize)); },
+  onReviewDuplicates: (pageSize) => {
+    dispatch(reviewDuplicates(pageSize));
+  },
 });
 
-export const WarningMessageCreator: ComponentType<OwnProps> =
-  connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(null, mapDispatchToProps)(WarningMessageCreatorComponent);
+export const WarningMessageCreator: ComponentType<OwnProps> = connect<
+  $Diff<Props, CssClasses>,
+  OwnProps,
+  _,
+  _,
+  _,
+  _,
+>(
+  null,
+  mapDispatchToProps,
+)(WarningMessageCreatorComponent);

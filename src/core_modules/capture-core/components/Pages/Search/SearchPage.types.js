@@ -6,34 +6,33 @@ export type SearchGroups = Array<{|
   +unique: boolean,
   +formId: string,
   +searchScope: string,
-  +minAttributesRequiredToSearch: number
-|}>
+  +minAttributesRequiredToSearch: number,
+|}>;
 
-export type SelectedSearchScopeId = ?string
+export type SelectedSearchScopeId = ?string;
 
 export type AvailableSearchOptions = $ReadOnly<{
-    [elementId: string]: {|
-      +searchOptionId: string,
-      +searchOptionName: string,
-      +TETypeName: ?string,
-      +searchGroups: SearchGroups |}
-  }>
+  [elementId: string]: {|
+    +searchOptionId: string,
+    +searchOptionName: string,
+    +TETypeName: ?string,
+    +searchGroups: SearchGroups,
+  |},
+}>;
 
 export type ContainerProps = $ReadOnly<{|
-  cleanSearchRelatedInfo: ()=>void,
-  navigateToMainPage: ()=>void,
-  showInitialSearchPage: ()=>void,
+  cleanSearchRelatedInfo: () => void,
+  navigateToMainPage: () => void,
+  showInitialSearchPage: () => void,
   trackedEntityTypeId: string,
   availableSearchOptions: AvailableSearchOptions,
   preselectedProgramId: SelectedSearchScopeId,
   searchStatus: string,
   error: boolean,
   ready: boolean,
-|}
->
+|}>;
 
 export type Props = {|
   ...CssClasses,
-  ...ContainerProps
-|}
-
+  ...ContainerProps,
+|};

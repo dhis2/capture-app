@@ -5,7 +5,5 @@ import { ListPaginationContextConsumer } from './ListPaginationContextConsumer.c
 type Props = $ReadOnly<{}>;
 
 export const ListPagination = memo<Props>((props: Props) => (
-    <ListPaginationContextConsumer
-        {...props}
-    />
+  <ListPaginationContextConsumer {...props} />
 ));

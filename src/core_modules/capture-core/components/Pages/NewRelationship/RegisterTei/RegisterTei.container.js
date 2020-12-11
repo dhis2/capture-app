@@ -11,31 +11,37 @@ import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 import type { Props, OwnProps } from './RegisterTei.types';
 
 const makeStateToProps = () => {
-    const tetNameSelector = makeTETNameSelector();
-    const mapStateToProps = (state: ReduxState) => {
-        const ready = !state.newRelationshipRegisterTei.loading;
-        const dataEntryId = 'relationship';
-        const dataEntryKey = ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;
+  const tetNameSelector = makeTETNameSelector();
+  const mapStateToProps = (state: ReduxState) => {
+    const ready = !state.newRelationshipRegisterTei.loading;
+    const dataEntryId = 'relationship';
+    const dataEntryKey = ready
+      ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId)
+      : null;
 
-        return {
-            tetName: tetNameSelector(state),
-            ready,
-            error: state.newRelationshipRegisterTei.error,
-            possibleDuplicates: !!(state.dataEntriesSearchGroupsResults[dataEntryKey] &&
-                state.dataEntriesSearchGroupsResults[dataEntryKey].main &&
-                state.dataEntriesSearchGroupsResults[dataEntryKey].main.count),
-        };
+    return {
+      tetName: tetNameSelector(state),
+      ready,
+      error: state.newRelationshipRegisterTei.error,
+      possibleDuplicates: !!(
+        state.dataEntriesSearchGroupsResults[dataEntryKey] &&
+        state.dataEntriesSearchGroupsResults[dataEntryKey].main &&
+        state.dataEntriesSearchGroupsResults[dataEntryKey].main.count
+      ),
     };
-    // $FlowFixMe
-    return mapStateToProps;
+  };
+  // $FlowFixMe
+  return mapStateToProps;
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onReviewDuplicates: (pageSize) => { dispatch(reviewDuplicates(pageSize)); },
+  onReviewDuplicates: (pageSize) => {
+    dispatch(reviewDuplicates(pageSize));
+  },
 });
 
 export const RegisterTei: ComponentType<OwnProps> = compose(
-    connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(makeStateToProps, mapDispatchToProps),
-    withLoadingIndicator(),
-    withErrorMessageHandler(),
+  connect<$Diff<Props, CssClasses>, OwnProps, _, _, _, _>(makeStateToProps, mapDispatchToProps),
+  withLoadingIndicator(),
+  withErrorMessageHandler(),
 )(RegisterTeiComponent);

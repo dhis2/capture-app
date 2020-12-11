@@ -6,12 +6,19 @@ import { trackedEntityTypeSelectorActionTypes } from './TrackedEntityTypeSelecto
 import { urlArguments } from '../../utils/url';
 
 export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(trackedEntityTypeSelectorActionTypes.TRACKED_ENTITY_TYPE_ID_ON_URL_SET),
-        map(({ payload: { trackedEntityTypeId } }) => {
-            const { currentSelections: { orgUnitId }, app: { page: currentPage } } = store.value;
+  action$.pipe(
+    ofType(trackedEntityTypeSelectorActionTypes.TRACKED_ENTITY_TYPE_ID_ON_URL_SET),
+    map(({ payload: { trackedEntityTypeId } }) => {
+      const {
+        currentSelections: { orgUnitId },
+        app: { page: currentPage },
+      } = store.value;
 
-            return push(`/${currentPage}/${urlArguments({ trackedEntityTypeId, orgUnitId })}`);
-        }),
-    );
-
+      return push(
+        `/${currentPage}/${urlArguments({
+          trackedEntityTypeId,
+          orgUnitId,
+        })}`,
+      );
+    }),
+  );

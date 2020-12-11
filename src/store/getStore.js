@@ -16,51 +16,49 @@ import getPersistOptions from './persist/persistOptionsGetter';
 import reducerDescriptions from '../reducers/descriptions/trackerCapture.reducerDescriptions';
 import epics from '../epics/trackerCapture.epics';
 
-
 export function getStore(
-    history: BrowserHistory | HashHistory,
-    onApiMutate: Function,
-    onRehydrated: () => void) {
-    const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptions);
+  history: BrowserHistory | HashHistory,
+  onApiMutate: Function,
+  onRehydrated: () => void,
+) {
+  const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptions);
 
-    const rootReducer = combineReducers({
-        ...reducersFromDescriptions,
-        router: connectRouter(history),
-    });
+  const rootReducer = combineReducers({
+    ...reducersFromDescriptions,
+    router: connectRouter(history),
+  });
 
-    // https://github.com/redux-offline/redux-offline/blob/32e4c98ec782672347b42a7936631df5c6340b77/docs/api/config.md
-    const {
-        middleware: offlineMiddleware,
-        enhanceReducer: offlineEnhanceReducer,
-        enhanceStore: offlineEnhanceStore,
-    } = createOffline({
-        ...offlineConfig,
-        discard: shouldDiscard,
-        effect: getEffectReconciler(onApiMutate),
-        persistCallback: onRehydrated,
-        queue: queueConfig,
-        persistOptions: getPersistOptions(),
-    });
+  // https://github.com/redux-offline/redux-offline/blob/32e4c98ec782672347b42a7936631df5c6340b77/docs/api/config.md
+  const {
+    middleware: offlineMiddleware,
+    enhanceReducer: offlineEnhanceReducer,
+    enhanceStore: offlineEnhanceStore,
+  } = createOffline({
+    ...offlineConfig,
+    discard: shouldDiscard,
+    effect: getEffectReconciler(onApiMutate),
+    persistCallback: onRehydrated,
+    queue: queueConfig,
+    persistOptions: getPersistOptions(),
+  });
 
-    const epicMiddleware = createEpicMiddleware({
-        dependencies: {},
-    });
+  const epicMiddleware = createEpicMiddleware({
+    dependencies: {},
+  });
 
-    const middleware = [epicMiddleware, routerMiddleware(history), offlineMiddleware];
+  const middleware = [epicMiddleware, routerMiddleware(history), offlineMiddleware];
 
-    if (process.env.NODE_ENV !== environments.prod) {
-        middleware.push(createLogger({}));
-    }
+  if (process.env.NODE_ENV !== environments.prod) {
+    middleware.push(createLogger({}));
+  }
 
-    // $FlowFixMe[missing-annot] automated comment
-    const store = createStore(
-        enableBatching(offlineEnhanceReducer(rootReducer)),
-        composeWithDevTools(
-            compose(offlineEnhanceStore, applyMiddleware(...middleware)),
-        ),
-    );
+  // $FlowFixMe[missing-annot] automated comment
+  const store = createStore(
+    enableBatching(offlineEnhanceReducer(rootReducer)),
+    composeWithDevTools(compose(offlineEnhanceStore, applyMiddleware(...middleware))),
+  );
 
-    epicMiddleware.run(epics);
+  epicMiddleware.run(epics);
 
-    return store;
+  return store;
 }

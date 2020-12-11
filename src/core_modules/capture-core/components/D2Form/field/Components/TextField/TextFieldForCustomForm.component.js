@@ -1,41 +1,39 @@
 // @flow
 import {
-    TextField,
-    withGotoInterface,
-    withHideCompatibility,
-    withDefaultShouldUpdateInterface,
-    withFocusSaver,
-    withCalculateMessages,
-    withDisplayMessages,
-    withInternalChangeHandler,
+  TextField,
+  withGotoInterface,
+  withHideCompatibility,
+  withDefaultShouldUpdateInterface,
+  withFocusSaver,
+  withCalculateMessages,
+  withDisplayMessages,
+  withInternalChangeHandler,
 } from '../../../../FormFields/New';
 import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-    withCustomElementContainer,
+  withRequiredFieldCalculation,
+  withDisabledFieldCalculation,
+  withCustomElementContainer,
 } from '../internal';
 import customFormStyles from './textFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
 export default withGotoInterface()(
-    withHideCompatibility()(
-        withDefaultShouldUpdateInterface()(
-            withDisabledFieldCalculation()(
-                withRequiredFieldCalculation()(
-                    withFocusSaver()(
-                        withCalculateMessages()(
-                            withDisplayMessages()(
-                                withCustomElementContainer(getContainerClass)(
-                                    withInternalChangeHandler()(
-                                        TextField,
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
+  withHideCompatibility()(
+    withDefaultShouldUpdateInterface()(
+      withDisabledFieldCalculation()(
+        withRequiredFieldCalculation()(
+          withFocusSaver()(
+            withCalculateMessages()(
+              withDisplayMessages()(
+                withCustomElementContainer(getContainerClass)(
+                  withInternalChangeHandler()(TextField),
                 ),
+              ),
             ),
+          ),
         ),
+      ),
     ),
+  ),
 );

@@ -9,6 +9,6 @@ import { systemSettingsStore } from '../../../metaDataMemoryStores';
  * @returns
  */
 export function parseDate(value: string) {
-    const format = systemSettingsStore.get().dateFormat;
-    return parseDateCore(value, format);
+  const format = systemSettingsStore.get().dateFormat;
+  return parseDateCore(value, format);
 }

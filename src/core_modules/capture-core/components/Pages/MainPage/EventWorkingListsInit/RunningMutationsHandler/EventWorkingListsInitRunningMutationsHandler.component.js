@@ -6,9 +6,7 @@ import type { Props } from './eventWorkingListsInitRunningMutationsHandler.types
 
 const EventWorkingListsWithLoadingIndicator = withLoadingIndicator()(EventWorkingLists);
 
-export const EventWorkingListsInitRunningMutationsHandler = ({ mutationInProgress, ...passOnProps }: Props) => (
-    <EventWorkingListsWithLoadingIndicator
-        {...passOnProps}
-        ready={!mutationInProgress}
-    />
-);
+export const EventWorkingListsInitRunningMutationsHandler = ({
+  mutationInProgress,
+  ...passOnProps
+}: Props) => <EventWorkingListsWithLoadingIndicator {...passOnProps} ready={!mutationInProgress} />;

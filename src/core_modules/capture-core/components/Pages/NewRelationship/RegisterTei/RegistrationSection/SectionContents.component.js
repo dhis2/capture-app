@@ -4,9 +4,9 @@ import { ProgramSelector } from './ProgramSelector';
 import { RegUnitSelector } from './RegUnitSelector';
 
 const SectionContents = () => (
-    <>
-        <RegUnitSelector />
-        <ProgramSelector />
-    </>
+  <>
+    <RegUnitSelector />
+    <ProgramSelector />
+  </>
 );
 export default SectionContents;

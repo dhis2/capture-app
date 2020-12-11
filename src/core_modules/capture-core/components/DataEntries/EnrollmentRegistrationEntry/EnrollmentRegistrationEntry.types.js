@@ -1,5 +1,5 @@
 // @flow
 export type OwnProps = $ReadOnly<{|
   selectedScopeId: string,
-  id: string
-|}>
+  id: string,
+|}>;

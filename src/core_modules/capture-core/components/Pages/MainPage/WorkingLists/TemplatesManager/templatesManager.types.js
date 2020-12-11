@@ -3,22 +3,25 @@ import type { WorkingListTemplates, WorkingListTemplate } from '../workingLists.
 import type { TemplatesLoaderOutputProps } from '../TemplatesLoader';
 
 type ExtractedProps = {|
-    templates?: WorkingListTemplates,
+  templates?: WorkingListTemplates,
 |};
 
 type OptionalExtractedProps = {|
-    templates: WorkingListTemplates,
+  templates: WorkingListTemplates,
 |};
 
-type RestProps = $Rest<TemplatesLoaderOutputProps & OptionalExtractedProps, ExtractedProps & OptionalExtractedProps>;
+type RestProps = $Rest<
+  TemplatesLoaderOutputProps & OptionalExtractedProps,
+  ExtractedProps & OptionalExtractedProps,
+>;
 
 export type Props = $ReadOnly<{|
-    ...RestProps,
-    ...ExtractedProps,
+  ...RestProps,
+  ...ExtractedProps,
 |}>;
 
 export type TemplatesManagerOutputProps = $ReadOnly<{|
-    ...RestProps,
-    currentTemplate: WorkingListTemplate,
-    children: (currentListIsModified: boolean) => React$Node,
+  ...RestProps,
+  currentTemplate: WorkingListTemplate,
+  children: (currentListIsModified: boolean) => React$Node,
 |}>;

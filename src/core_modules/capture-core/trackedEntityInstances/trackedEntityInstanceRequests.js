@@ -6,68 +6,80 @@ import { convertValue } from '../converters/serverToClient';
 import { getSubValues } from './getSubValues';
 
 type ApiTeiAttribute = {
-    attribute: any,
-    value: any
+  attribute: any,
+  value: any,
 };
 
 type ApiTrackedEntityInstance = {
-    trackedEntityInstance: string,
-    trackedEntityType: string,
-    orgUnit: string,
-    attributes: Array<ApiTeiAttribute>
+  trackedEntityInstance: string,
+  trackedEntityType: string,
+  orgUnit: string,
+  attributes: Array<ApiTeiAttribute>,
 };
 
 function getValuesById(apiAttributeValues: Array<ApiTeiAttribute>) {
-    if (!apiAttributeValues) {
-        return apiAttributeValues;
-    }
+  if (!apiAttributeValues) {
+    return apiAttributeValues;
+  }
 
-    return apiAttributeValues.reduce((accValues, attrValue) => {
-        accValues[attrValue.attribute] = attrValue.value;
-        return accValues;
-    }, {});
+  return apiAttributeValues.reduce((accValues, attrValue) => {
+    accValues[attrValue.attribute] = attrValue.value;
+    return accValues;
+  }, {});
 }
 
-// $FlowFixMe[cannot-resolve-name] automated comment
-async function convertToClientTei(apiTei: ApiTrackedEntityInstance, attributes: Array<DataElments>) {
-    const attributeValuesById = getValuesById(apiTei.attributes);
-    const convertedAttributeValues = convertDataElementsValues(attributeValuesById, attributes, convertValue);
+async function convertToClientTei(
+  apiTei: ApiTrackedEntityInstance,
+  // $FlowFixMe[cannot-resolve-name] automated comment
+  attributes: Array<DataElments>,
+) {
+  const attributeValuesById = getValuesById(apiTei.attributes);
+  const convertedAttributeValues = convertDataElementsValues(
+    attributeValuesById,
+    attributes,
+    convertValue,
+  );
 
-    await getSubValues(apiTei.trackedEntityInstance, attributes, convertedAttributeValues);
+  await getSubValues(apiTei.trackedEntityInstance, attributes, convertedAttributeValues);
 
-    return {
-        id: apiTei.trackedEntityInstance,
-        tei: apiTei,
-        values: convertedAttributeValues,
-    };
+  return {
+    id: apiTei.trackedEntityInstance,
+    tei: apiTei,
+    values: convertedAttributeValues,
+  };
 }
 
 type TrackedEntityInstancesPromise = Promise<{|
-    trackedEntityInstanceContainers: any,
-    pagingData: any
-|}>
+  trackedEntityInstanceContainers: any,
+  pagingData: any,
+|}>;
 
-export async function getTrackedEntityInstances(queryParams: Object, attributes: Array<DataElments>): TrackedEntityInstancesPromise {
-    const api = getApi();
-    const apiRes = await api
-        .get('trackedEntityInstances', queryParams);
+export async function getTrackedEntityInstances(
+  queryParams: Object,
+  attributes: Array<DataElments>,
+): TrackedEntityInstancesPromise {
+  const api = getApi();
+  const apiRes = await api.get('trackedEntityInstances', queryParams);
 
-    const trackedEntityInstanceContainers = apiRes && apiRes.trackedEntityInstances ? await apiRes.trackedEntityInstances.reduce(async (accTeiPromise, apiTei) => {
-        const accTeis = await accTeiPromise;
-        const teiContainer = await convertToClientTei(apiTei, attributes);
-        if (teiContainer) {
+  const trackedEntityInstanceContainers =
+    apiRes && apiRes.trackedEntityInstances
+      ? await apiRes.trackedEntityInstances.reduce(async (accTeiPromise, apiTei) => {
+          const accTeis = await accTeiPromise;
+          const teiContainer = await convertToClientTei(apiTei, attributes);
+          if (teiContainer) {
             accTeis.push(teiContainer);
-        }
-        return accTeis;
-    }, Promise.resolve([])) : null;
+          }
+          return accTeis;
+        }, Promise.resolve([]))
+      : null;
 
-    const pagingData = {
-        rowsPerPage: queryParams.pageSize,
-        currentPage: queryParams.page,
-    };
+  const pagingData = {
+    rowsPerPage: queryParams.pageSize,
+    currentPage: queryParams.page,
+  };
 
-    return {
-        trackedEntityInstanceContainers,
-        pagingData,
-    };
+  return {
+    trackedEntityInstanceContainers,
+    pagingData,
+  };
 }

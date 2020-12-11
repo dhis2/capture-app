@@ -10,34 +10,33 @@ const { exec } = require('@dhis2/cli-helpers-engine');
 
 const CONFIG_NAME_BASE = '.env.cypress';
 
-const dotenvFiles = [
-    `${CONFIG_NAME_BASE}.local`,
-    CONFIG_NAME_BASE,
-];
+const dotenvFiles = [`${CONFIG_NAME_BASE}.local`, CONFIG_NAME_BASE];
 
-const envFromCypressFiles = dotenvFiles
-    .reduce((acc, file) => {
-        const absolutePath = path.resolve('.', file);
-        if (fs.existsSync(absolutePath)) {
-            const parsed = dotenv.parse(fs.readFileSync(absolutePath, { encoding: 'utf8' }));
-            return {
-                ...parsed,
-                ...acc,
-            };
-        }
-        return acc;
-    }, {});
+const envFromCypressFiles = dotenvFiles.reduce((acc, file) => {
+    const absolutePath = path.resolve('.', file);
+    if (fs.existsSync(absolutePath)) {
+        const parsed = dotenv.parse(
+            fs.readFileSync(absolutePath, { encoding: 'utf8' }),
+        );
+        return {
+            ...parsed,
+            ...acc,
+        };
+    }
+    return acc;
+}, {});
 
-const env = Object
-    .keys(envFromCypressFiles)
-    .reduce((acc, key) => {
+const env = Object.keys(envFromCypressFiles).reduce(
+    (acc, key) => {
         if (key.startsWith('REACT')) {
             acc[key] = envFromCypressFiles[key];
         } else if (key === 'DHIS2_BASE_URL') {
             acc.REACT_APP_DHIS2_BASE_URL = envFromCypressFiles[key];
         }
         return acc;
-    }, { BROWSER: 'none' });
+    },
+    { BROWSER: 'none' },
+);
 
 exec({
     cmd: 'yarn',

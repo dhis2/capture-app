@@ -1,5 +1,5 @@
 // @flow
 export const singleOrientations = {
-    HORIZONTAL: 'horizontal',
-    VERTICAL: 'vertical',
+  HORIZONTAL: 'horizontal',
+  VERTICAL: 'vertical',
 };

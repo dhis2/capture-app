@@ -3,6 +3,6 @@ import { isValidDateTime as isValidDateTimeCore } from 'capture-core-utils/valid
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 
 export function isValidDateTime(value: Object) {
-    const dateFormat = systemSettingsStore.get().dateFormat;
-    return isValidDateTimeCore(value, dateFormat);
+  const { dateFormat } = systemSettingsStore.get();
+  return isValidDateTimeCore(value, dateFormat);
 }

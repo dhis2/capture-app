@@ -11,90 +11,87 @@ import { ResultsPageSizeContext } from '../../shared-contexts';
 import type { Props } from './RegisterTei.types';
 
 const getStyles = () => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    leftContainer: {
-        flexGrow: 10,
-        flexBasis: 0,
-        margin: 8,
-    },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  leftContainer: {
+    flexGrow: 10,
+    flexBasis: 0,
+    margin: 8,
+  },
 });
 
 const RegisterTeiPlain = ({
-    onLink,
-    onSave,
-    onReviewDuplicates,
-    onGetUnsavedAttributeValues,
-    possibleDuplicates,
-    tetName,
-    classes,
+  onLink,
+  onSave,
+  onReviewDuplicates,
+  onGetUnsavedAttributeValues,
+  possibleDuplicates,
+  tetName,
+  classes,
 }: Props) => {
-    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+  const { resultsPageSize } = useContext(ResultsPageSizeContext);
 
-    const [duplicatesOpen, toggleDuplicatesModal] = useState(false);
-    const [savedArguments, setArguments] = useState([]);
+  const [duplicatesOpen, toggleDuplicatesModal] = useState(false);
+  const [savedArguments, setArguments] = useState([]);
 
-    function handleSaveAttempt(...args) {
-        if (possibleDuplicates) {
-            setArguments(args);
-            onReviewDuplicates(resultsPageSize);
-            toggleDuplicatesModal(true);
-        } else {
-            onSave(...args);
-        }
+  function handleSaveAttempt(...args) {
+    if (possibleDuplicates) {
+      setArguments(args);
+      onReviewDuplicates(resultsPageSize);
+      toggleDuplicatesModal(true);
+    } else {
+      onSave(...args);
     }
+  }
 
-    const getActions = () => (
-        <React.Fragment>
-            <Button
-                onClick={handleDialogCancel}
-                secondary
-            >
-                {i18n.t('Cancel')}
-            </Button>
-            <div style={{ marginLeft: 16 }}>
-                <Button
-                    dataTest="dhis2-capture-create-as-new-person"
-                    onClick={handleSaveFromDialog}
-                    primary
-                >
-                    {i18n.t('Save as new {{tetName}}', { tetName })}
-                </Button>
-            </div>
-        </React.Fragment>
-    );
+  const handleSaveFromDialog = () => {
+    onSave(...savedArguments);
+  };
 
-    const handleSaveFromDialog = () => {
-        onSave(...savedArguments);
-    };
+  const handleDialogCancel = () => {
+    toggleDuplicatesModal(false);
+  };
 
-    const handleDialogCancel = () => {
-        toggleDuplicatesModal(false);
-    };
+  const getActions = () => (
+    <>
+      <Button onClick={handleDialogCancel} secondary>
+        {i18n.t('Cancel')}
+      </Button>
+      <div style={{ marginLeft: 16 }}>
+        <Button
+          dataTest="dhis2-capture-create-as-new-person"
+          onClick={handleSaveFromDialog}
+          primary
+        >
+          {i18n.t('Save as new {{tetName}}', { tetName })}
+        </Button>
+      </div>
+    </>
+  );
 
-    return (
-        <div className={classes.container}>
-            <div className={classes.leftContainer}>
-                <RegistrationSection />
-                <RegisterTeiDataEntry
-                    onLink={onLink}
-                    onSave={handleSaveAttempt}
-                    onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
-                />
-            </div>
-            <GeneralOutput
-                onLink={onLink}
-            />
-            <ReviewDialog
-                open={duplicatesOpen}
-                onLink={onLink}
-                onCancel={handleDialogCancel}
-                extraActions={getActions()}
-            />
-        </div>
-    );
+  return (
+    <div className={classes.container}>
+      <div className={classes.leftContainer}>
+        <RegistrationSection />
+        <RegisterTeiDataEntry
+          onLink={onLink}
+          onSave={handleSaveAttempt}
+          onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
+        />
+      </div>
+      <GeneralOutput onLink={onLink} />
+      <ReviewDialog
+        open={duplicatesOpen}
+        onLink={onLink}
+        onCancel={handleDialogCancel}
+        extraActions={getActions()}
+      />
+    </div>
+  );
 };
 
-export const RegisterTeiComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(RegisterTeiPlain);
+export const RegisterTeiComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(
+  RegisterTeiPlain,
+);

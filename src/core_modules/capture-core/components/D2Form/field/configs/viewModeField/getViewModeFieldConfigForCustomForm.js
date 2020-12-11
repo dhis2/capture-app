@@ -7,18 +7,18 @@ import { convertFormToClient, convertClientToView } from '../../../../../convert
 const convertFn = pipe(convertFormToClient, convertClientToView);
 
 const getViewModeConfig = (dataElement: MetaDataElement, options: Object) => {
-    const props = {
-        valueConverter: (value: any) => dataElement.convertValue(value, convertFn),
-        label: dataElement.formName,
-        dataElement,
-        fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
-    };
+  const props = {
+    valueConverter: (value: any) => dataElement.convertValue(value, convertFn),
+    label: dataElement.formName,
+    dataElement,
+    fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
+  };
 
-    return {
-        id: dataElement.id,
-        component: ViewModeFieldForCustomForm,
-        props,
-    };
+  return {
+    id: dataElement.id,
+    component: ViewModeFieldForCustomForm,
+    props,
+  };
 };
 
 export default getViewModeConfig;

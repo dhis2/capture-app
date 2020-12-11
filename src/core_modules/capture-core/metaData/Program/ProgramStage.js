@@ -1,4 +1,3 @@
-
 // @flow
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
@@ -8,57 +7,65 @@ import type { RenderFoundation } from '../RenderFoundation';
 import type { RelationshipType } from '../RelationshipType';
 
 export default class ProgramStage {
-    _id: string;
-    _name: string;
-    _stageForm: RenderFoundation;
-    _relationshipTypes: Array<RelationshipType>;
-    _enableUserAssignment: boolean;
+  _id: string;
 
-    constructor(initFn: ?(_this: ProgramStage) => void) {
-        initFn && isFunction(initFn) && initFn(this);
-    }
+  _name: string;
 
-    get stageForm(): RenderFoundation {
-        return this._stageForm;
-    }
+  _stageForm: RenderFoundation;
 
-    set stageForm(stageForm: RenderFoundation) {
-        this._stageForm = stageForm;
-    }
+  _relationshipTypes: Array<RelationshipType>;
 
-    get id(): string {
-        return this._id;
-    }
+  _enableUserAssignment: boolean;
 
-    set id(id: string) {
-        this._id = id;
-    }
+  constructor(initFn: ?(_this: ProgramStage) => void) {
+    initFn && isFunction(initFn) && initFn(this);
+  }
 
-    get name(): string {
-        return this._name;
-    }
+  get stageForm(): RenderFoundation {
+    return this._stageForm;
+  }
 
-    set name(name: string) {
-        this._name = name;
-    }
+  set stageForm(stageForm: RenderFoundation) {
+    this._stageForm = stageForm;
+  }
 
-    get relationshipTypes(): Array<RelationshipType> {
-        return this._relationshipTypes;
-    }
+  get id(): string {
+    return this._id;
+  }
 
-    get relationshipTypesWhereStageIsFrom(): Array<RelationshipType> {
-        return this._relationshipTypes ? this._relationshipTypes.filter(r => r.from.programStageId && r.from.programStageId === this.id) : [];
-    }
+  set id(id: string) {
+    this._id = id;
+  }
 
-    set relationshipTypes(relationshipTypes: Array<RelationshipType>) {
-        this._relationshipTypes = relationshipTypes;
-    }
+  get name(): string {
+    return this._name;
+  }
 
-    get enableUserAssignment(): boolean {
-        return this._enableUserAssignment;
-    }
+  set name(name: string) {
+    this._name = name;
+  }
 
-    set enableUserAssignment(enable: boolean) {
-        this._enableUserAssignment = enable;
-    }
+  get relationshipTypes(): Array<RelationshipType> {
+    return this._relationshipTypes;
+  }
+
+  get relationshipTypesWhereStageIsFrom(): Array<RelationshipType> {
+    return this._relationshipTypes
+      ? this._relationshipTypes.filter(
+          (r) => r.from.programStageId && r.from.programStageId === this.id,
+        )
+      : [];
+  }
+
+  set relationshipTypes(relationshipTypes: Array<RelationshipType>) {
+    this._relationshipTypes = relationshipTypes;
+  }
+
+  get enableUserAssignment(): boolean {
+    return this._enableUserAssignment;
+  }
+
+  set enableUserAssignment(enable: boolean) {
+    this._enableUserAssignment = enable;
+  }
 }

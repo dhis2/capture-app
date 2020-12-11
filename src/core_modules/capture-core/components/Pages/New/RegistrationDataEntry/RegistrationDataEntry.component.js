@@ -5,28 +5,18 @@ import { EnrollmentRegistrationEntry, TeiRegistrationEntry } from '../../../Data
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 
-
 export const RegistrationDataEntry = ({ selectedScopeId, dataEntryId }: OwnProps) => {
-    const { scopeType } = useScopeInfo(selectedScopeId);
+  const { scopeType } = useScopeInfo(selectedScopeId);
 
-    return (
-        <>
-            {
-                scopeType === scopeTypes.TRACKER_PROGRAM &&
-                <EnrollmentRegistrationEntry
-                    selectedScopeId={selectedScopeId}
-                    id={dataEntryId}
-                />
-            }
+  return (
+    <>
+      {scopeType === scopeTypes.TRACKER_PROGRAM && (
+        <EnrollmentRegistrationEntry selectedScopeId={selectedScopeId} id={dataEntryId} />
+      )}
 
-            {
-                scopeType === scopeTypes.TRACKED_ENTITY_TYPE &&
-                <TeiRegistrationEntry
-                    selectedScopeId={selectedScopeId}
-                    id={dataEntryId}
-                />
-            }
-
-        </>
-    );
+      {scopeType === scopeTypes.TRACKED_ENTITY_TYPE && (
+        <TeiRegistrationEntry selectedScopeId={selectedScopeId} id={dataEntryId} />
+      )}
+    </>
+  );
 };

@@ -3,8 +3,8 @@ import { chunk } from 'capture-core-utils';
 import { storeTrackedEntityAttributes } from './quickStoreOperations';
 
 function deduplicateArray(array: Array<string>): Array<string> {
-    const uniqueSet = new Set(array);
-    return [...uniqueSet.values()];
+  const uniqueSet = new Set(array);
+  return [...uniqueSet.values()];
 }
 
 /**
@@ -14,12 +14,7 @@ function deduplicateArray(array: Array<string>): Array<string> {
  * We chunk the tracked entity type attribute ids in chunks of smaller sizes in order to comply with a potential url path limit and
  * to improve performance, mainly by reducing memory consumption on both the client and the server.
  */
-export async function loadTrackedEntityAttributes(
-    trackedEntityAttributeIds: Array<string>) {
-    const attributeIdBatches = chunk(deduplicateArray(trackedEntityAttributeIds), 100);
-    await Promise.all(
-        attributeIdBatches.map(
-            ids => storeTrackedEntityAttributes(ids),
-        ),
-    );
+export async function loadTrackedEntityAttributes(trackedEntityAttributeIds: Array<string>) {
+  const attributeIdBatches = chunk(deduplicateArray(trackedEntityAttributeIds), 100);
+  await Promise.all(attributeIdBatches.map((ids) => storeTrackedEntityAttributes(ids)));
 }

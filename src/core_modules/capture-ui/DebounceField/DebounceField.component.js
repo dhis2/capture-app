@@ -4,12 +4,12 @@ import { debounce } from 'lodash';
 import TextInput from '../internal/TextInput/TextInput.component';
 
 type Props = {
-    onDebounced: (event: SyntheticEvent<HTMLInputElement>) => void,
-    value: ?string,
+  onDebounced: (event: SyntheticEvent<HTMLInputElement>) => void,
+  value: ?string,
 };
 
 type State = {
-    value: string,
+  value: string,
 };
 
 /**
@@ -17,51 +17,48 @@ type State = {
  * @class DebounceField
  */
 class DebounceField extends React.Component<Props, State> {
-    debouncer: Function;
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            value: this.props.value || '',
-        };
+  debouncer: Function;
 
-        this.debouncer = debounce(this.handleDebounced, 500);
-    }
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      value: this.props.value || '',
+    };
 
-    UNSAFE_componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.value !== this.props.value) {
-            this.setState({
-                value: nextProps.value || '',
-            });
-        }
-    }
+    this.debouncer = debounce(this.handleDebounced, 500);
+  }
 
-    componentWillUnmount() {
-        this.debouncer.cancel();
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.value !== this.props.value) {
+      this.setState({
+        value: nextProps.value || '',
+      });
     }
+  }
 
-    handleDebounced = (event: SyntheticEvent<HTMLInputElement>) => {
-        this.props.onDebounced(event);
-    }
+  componentWillUnmount() {
+    this.debouncer.cancel();
+  }
 
-    handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
-        this.setState({
-            value: event.currentTarget.value,
-        });
-        this.debouncer({ ...event });
-    }
+  handleDebounced = (event: SyntheticEvent<HTMLInputElement>) => {
+    this.props.onDebounced(event);
+  };
 
-    render() {
-        const { onDebounced, value, ...passOnProps } = this.props;
-        const { value: stateValue } = this.state;
-        return (
-            // $FlowFixMe[cannot-spread-inexact] automated comment
-            <TextInput
-                onChange={this.handleChange}
-                value={stateValue}
-                {...passOnProps}
-            />
-        );
-    }
+  handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
+    this.setState({
+      value: event.currentTarget.value,
+    });
+    this.debouncer({ ...event });
+  };
+
+  render() {
+    const { onDebounced, value, ...passOnProps } = this.props;
+    const { value: stateValue } = this.state;
+    return (
+      // $FlowFixMe[cannot-spread-inexact] automated comment
+      <TextInput onChange={this.handleChange} value={stateValue} {...passOnProps} />
+    );
+  }
 }
 
 export default DebounceField;

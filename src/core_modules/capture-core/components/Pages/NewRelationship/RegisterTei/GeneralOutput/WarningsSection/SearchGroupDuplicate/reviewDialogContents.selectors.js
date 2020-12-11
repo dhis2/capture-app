@@ -2,41 +2,35 @@
 
 import { createSelector } from 'reselect';
 import {
-    getTrackedEntityTypeThrowIfNotFound,
-    getTrackerProgramThrowIfNotFound,
+  getTrackedEntityTypeThrowIfNotFound,
+  getTrackerProgramThrowIfNotFound,
 } from '../../../../../../../metaData';
-import type {
-    TrackerProgram,
-} from '../../../../../../../metaData';
+import type { TrackerProgram } from '../../../../../../../metaData';
 
-const programIdSelector = state => state.newRelationshipRegisterTei.programId;
-const tetIdSelector = state => state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
+const programIdSelector = (state) => state.newRelationshipRegisterTei.programId;
+const tetIdSelector = (state) =>
+  state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
 
-// $FlowFixMe
-export const makeDataElementsSelector = () => createSelector(
-    programIdSelector,
-    tetIdSelector,
-    (programId: ?string, tetId: string) => {
-        if (!programId) {
-            let teType;
-            try {
-                teType = getTrackedEntityTypeThrowIfNotFound(tetId);
-            } catch (error) {
-                return [];
-            }
+export const makeDataElementsSelector = () =>
+  // $FlowFixMe[missing-annot] automated comment
+  createSelector(programIdSelector, tetIdSelector, (programId: ?string, tetId: string) => {
+    if (!programId) {
+      let teType;
+      try {
+        teType = getTrackedEntityTypeThrowIfNotFound(tetId);
+      } catch (error) {
+        return [];
+      }
 
-            return teType.attributes
-                .filter(attribute => attribute.displayInReports);
-        }
+      return teType.attributes.filter((attribute) => attribute.displayInReports);
+    }
 
-        let program: TrackerProgram;
-        try {
-            program = getTrackerProgramThrowIfNotFound(programId);
-        } catch (error) {
-            return [];
-        }
+    let program: TrackerProgram;
+    try {
+      program = getTrackerProgramThrowIfNotFound(programId);
+    } catch (error) {
+      return [];
+    }
 
-        return program.attributes
-            .filter(attribute => attribute.displayInReports);
-    },
-);
+    return program.attributes.filter((attribute) => attribute.displayInReports);
+  });

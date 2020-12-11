@@ -5,42 +5,44 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 import type Category from './Category';
 
 export default class CategoryCombination {
-    _name: string;
-    _id: string;
-    _categories: Map<string, Category>;
+  _name: string;
 
-    static errorMessages = {
-        CATEGORY_NOT_FOUND: 'Category was not found',
-    };
+  _id: string;
 
-    constructor(initFn: ?(_this: CategoryCombination) => void) {
-        this.name = '';
-        this.id = '';
-        this.categories = new Map();
-        initFn && isFunction(initFn) && initFn(this);
-    }
+  _categories: Map<string, Category>;
 
-    get name(): string {
-        return this._name;
-    }
+  static errorMessages = {
+    CATEGORY_NOT_FOUND: 'Category was not found',
+  };
 
-    set name(name: string) {
-        this._name = name;
-    }
+  constructor(initFn: ?(_this: CategoryCombination) => void) {
+    this.name = '';
+    this.id = '';
+    this.categories = new Map();
+    initFn && isFunction(initFn) && initFn(this);
+  }
 
-    get id(): string {
-        return this._id;
-    }
+  get name(): string {
+    return this._name;
+  }
 
-    set id(id: string) {
-        this._id = id;
-    }
+  set name(name: string) {
+    this._name = name;
+  }
 
-    get categories(): Map<string, Category> {
-        return this._categories;
-    }
+  get id(): string {
+    return this._id;
+  }
 
-    set categories(categories: Map<string, Category>) {
-        this._categories = categories;
-    }
+  set id(id: string) {
+    this._id = id;
+  }
+
+  get categories(): Map<string, Category> {
+    return this._categories;
+  }
+
+  set categories(categories: Map<string, Category>) {
+    this._categories = categories;
+  }
 }
