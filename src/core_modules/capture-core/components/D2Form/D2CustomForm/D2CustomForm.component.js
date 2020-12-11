@@ -185,6 +185,7 @@ class D2CustomForm extends React.Component<Props> {
       const handlerRef = () => {
         // eslint-disable-next-line no-eval
         eval(spec.handler);
+      };
       document
         .querySelector(`[data-custom-form-id="${spec.id}"]`)
 
