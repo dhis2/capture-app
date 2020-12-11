@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { PolygonField as UIPolygonField, typeof orientations } from 'capture-ui';
+import { PolygonField as UIPolygonField, orientations } from 'capture-ui';
 import { Dialog, DialogTitle } from '@material-ui/core';
 
 const getStyles = (theme: Theme) => ({
@@ -26,7 +26,7 @@ type Props = {
     inputWrapperFocused: string,
     inputWrapperUnfocused: string,
   },
-  orientation: $Values<orientations>,
+  orientation: $Values<typeof orientations>,
   dialogLabel: string,
 };
 
