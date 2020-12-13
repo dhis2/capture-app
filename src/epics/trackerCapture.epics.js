@@ -3,7 +3,6 @@ import { combineEpics } from 'redux-observable';
 import {
     cancelNewEventEpic,
     cancelNewEventLocationChangeEpic,
-    cancelNewEventIncompleteSelectionsLocationChangeEpic,
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
@@ -19,10 +18,13 @@ import {
     saveNewEventRelationshipsIfExistsEpic,
     saveNewEventRelationshipFinishedEpic,
     teiForNewEventRelationshipSavedEpic,
+} from 'capture-core/components/DataEntries/SingleEventRegistrationEntry';
+import {
+    cancelNewEventIncompleteSelectionsLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent';
 import {
     openNewEventPageLocationChangeEpic,
-} from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
+} from 'capture-core/components/DataEntries/SingleEventRegistrationEntry/SingleEventRegistrationEntry.epics';
 
 import {
     initEventListEpic,

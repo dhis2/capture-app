@@ -3,11 +3,13 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
-    selectionsIncompleteActionTypes as newEventPageSelectionsIncompleteActionTypes,
-} from '../../components/Pages/NewEvent';
+} from '../../components/DataEntries/SingleEventRegistrationEntry';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import {
+    actionTypes as dataEntrySelectionsIncompleteActionTypes,
+} from '../../components/Pages/NewEvent/SelectionsIncomplete/dataEntrySelectionsIncomplete.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
@@ -53,7 +55,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.locationSwitchInProgress = true;
         return newState;
     },
-    [newEventPageSelectionsIncompleteActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE]: (state) => {
+    [dataEntrySelectionsIncompleteActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;

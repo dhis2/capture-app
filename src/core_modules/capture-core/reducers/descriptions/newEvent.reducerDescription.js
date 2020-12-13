@@ -4,7 +4,7 @@ import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
     dataEntryWrapperActionTypes as newEventDataEntryWrapperActionTypes,
     newRelationshipActionTypes as newEventNewRelationshipActionTypes,
-} from '../../components/Pages/NewEvent';
+} from '../../components/DataEntries/SingleEventRegistrationEntry';
 
 export const newEventPageDesc = createReducerDescription({
     [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: (state) => {

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-12-13T22:46:34.253Z\n"
-"PO-Revision-Date: 2020-12-13T22:46:34.253Z\n"
+"POT-Creation-Date: 2020-12-13T23:20:43.426Z\n"
+"PO-Revision-Date: 2020-12-13T23:20:43.426Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -125,22 +125,118 @@ msgstr ""
 msgid "Metadata error. see log for details"
 msgstr ""
 
-msgid "An error has occurred. See log for details"
+msgid "Assigned user"
 msgstr ""
 
-msgid "Cancel"
+msgid "Search for user"
+msgstr ""
+
+msgid "Basic info"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+msgid "Relationships"
+msgstr ""
+
+msgid "Assignee"
+msgstr ""
+
+msgid "Saving to"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid "This event"
+msgstr ""
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
+msgid "Please add or cancel comment before saving the event"
+msgstr ""
+
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Finish"
+msgstr ""
+
+msgid "No write access"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
+msgstr ""
+
+msgid "New event relationship"
+msgstr ""
+
+msgid "Adding relationship to event."
+msgstr ""
+
+msgid "Go back to event without saving relationship"
 msgstr ""
 
 msgid "Unsaved changes"
 msgstr ""
 
-msgid "Leaving this page will discard the changes you made to this event."
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
 msgstr ""
 
 msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
+msgstr ""
+
+msgid "New event"
+msgstr ""
+
+msgid "You dont have access to create an event in the current selections"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
+msgid "An error has occurred. See log for details"
 msgstr ""
 
 msgid "validation failed"
@@ -204,9 +300,6 @@ msgid "Close"
 msgstr ""
 
 msgid "Please select the user"
-msgstr ""
-
-msgid "Search for user"
 msgstr ""
 
 msgid "Me"
@@ -419,24 +512,6 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
-msgid "Basic info"
-msgstr ""
-
-msgid "Status"
-msgstr ""
-
-msgid "Comments"
-msgstr ""
-
-msgid "Please add or cancel comment before saving the event"
-msgstr ""
-
-msgid "No write access"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
 msgid "Show all events"
 msgstr ""
 
@@ -474,12 +549,6 @@ msgid "Working list could not be loaded"
 msgstr ""
 
 msgid "an error occurred loading working lists"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Completed"
 msgstr ""
 
 msgid "Registered events"
@@ -524,9 +593,6 @@ msgstr ""
 msgid "Saving a {{trackedEntityName}} in"
 msgstr ""
 
-msgid "in"
-msgstr ""
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
 
@@ -542,21 +608,6 @@ msgstr ""
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
-msgid "Save and add another"
-msgstr ""
-
-msgid "Save and exit"
-msgstr ""
-
-msgid "Finish"
-msgstr ""
-
-msgid "Switch to form view"
-msgstr ""
-
-msgid "Switch to row view"
-msgstr ""
-
 msgid "New {{TET}}"
 msgstr ""
 
@@ -568,54 +619,6 @@ msgid ""
 "can only be done in tracker programs."
 msgstr ""
 
-msgid "Assigned user"
-msgstr ""
-
-msgid "Relationships"
-msgstr ""
-
-msgid "Assignee"
-msgstr ""
-
-msgid "Saving to"
-msgstr ""
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-
-msgid "This event"
-msgstr ""
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr ""
-
-msgid "New event"
-msgstr ""
-
-msgid "New event relationship"
-msgstr ""
-
-msgid "Adding relationship to event."
-msgstr ""
-
-msgid "Go back to event without saving relationship"
-msgstr ""
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr ""
-
-msgid "events added"
-msgstr ""
-
-msgid "No events added"
-msgstr ""
-
 msgid "Choose a registering unit and program to get started"
 msgstr ""
 
@@ -623,9 +626,6 @@ msgid "Choose a program to start reporting"
 msgstr ""
 
 msgid "Choose a category option to start reporting"
-msgstr ""
-
-msgid "You dont have access to create an event in the current selections"
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
