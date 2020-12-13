@@ -116,12 +116,15 @@ function filterFieldsHideEffects(
     }
 
     const elementIds = Object.keys(hideEffects);
+    const compulsoryElements = foundation.getElements().filter(({ compulsory }) => compulsory);
+
     return elementIds
         .filter((elementId) => {
-            const element = foundation.getElement(elementId);
-            const dataCompulsory = element && element.compulsory;
+            const { compulsory: elementIsCompulsory } =
+                compulsoryElements.find(({ id }) => id === elementId) || {};
+
             const compulsoryEffect = makeCompulsoryEffects[elementId];
-            return !(dataCompulsory || compulsoryEffect);
+            return !(elementIsCompulsory || compulsoryEffect);
         })
         .reduce((accFilteredEffects, elementId) => {
             accFilteredEffects[elementId] = hideEffects[elementId];
