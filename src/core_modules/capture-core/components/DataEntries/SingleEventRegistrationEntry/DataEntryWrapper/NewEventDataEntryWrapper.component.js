@@ -4,8 +4,8 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Button } from '@dhis2/ui';
-import DataEntry from '../../../DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/DataEntry.container';
-import EventsList from '../../../DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList/RecentlyAddedEventsList.container';
+import DataEntry from './DataEntry/DataEntry.container';
+import EventsList from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 
 const getStyles = () => ({

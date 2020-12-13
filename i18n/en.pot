@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-12-13T23:38:19.376Z\n"
-"PO-Revision-Date: 2020-12-13T23:38:19.376Z\n"
+"POT-Creation-Date: 2020-12-13T23:38:50.849Z\n"
+"PO-Revision-Date: 2020-12-13T23:38:50.849Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -184,6 +184,12 @@ msgid "Finish"
 msgstr ""
 
 msgid "No write access"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
 msgstr ""
 
 msgid "events added"
@@ -600,12 +606,6 @@ msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
-
-msgid "Switch to form view"
-msgstr ""
-
-msgid "Switch to row view"
 msgstr ""
 
 msgid "New {{TET}}"
