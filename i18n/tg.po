@@ -130,6 +130,9 @@ msgstr ""
 msgid "A future date is not allowed"
 msgstr ""
 
+msgid "Metadata error. see log for details"
+msgstr ""
+
 msgid "An error has occurred. See log for details"
 msgstr ""
 
@@ -621,6 +624,15 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
 
+msgid "Review duplicates"
+msgstr ""
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Review Duplicates"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 
@@ -646,15 +658,6 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-msgid "Metadata error. see log for details"
-msgstr ""
-
-msgid "Review duplicates"
-msgstr ""
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
-
 msgid "Possible duplicates found"
 msgstr ""
 
@@ -674,9 +677,6 @@ msgid "Organisation Unit"
 msgstr "Воҳиди сохторӣ"
 
 msgid "Registration"
-msgstr ""
-
-msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"

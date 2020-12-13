@@ -1,8 +1,8 @@
 // @flow
 import React, { type ComponentType } from 'react';
-import { compose } from 'redux';
 import { Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
+import { compose } from 'redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';

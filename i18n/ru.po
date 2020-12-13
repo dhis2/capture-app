@@ -139,6 +139,9 @@ msgstr "Регистрация"
 msgid "A future date is not allowed"
 msgstr "Ввод даты будущего периода запрещена"
 
+msgid "Metadata error. see log for details"
+msgstr "Ошибка в метаданных. Смотрите детали в лог-файле."
+
 msgid "An error has occurred. See log for details"
 msgstr ""
 
@@ -641,6 +644,15 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr "Не достаточно прав для создания Событий с текущим выбором"
 
+msgid "Review duplicates"
+msgstr "Пересмотр дубликатов"
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr "Создать {{trackedEntityTypeName}} и ссылку"
+
+msgid "Review Duplicates"
+msgstr "Пересмотр дубликатов"
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "Существует дубликат(имеются дополнительные ошибки, смотрите детали в лог-"
@@ -672,15 +684,6 @@ msgstr "Зарегистрированное лицо"
 msgid "Link"
 msgstr "Ссылка"
 
-msgid "Metadata error. see log for details"
-msgstr "Ошибка в метаданных. Смотрите детали в лог-файле."
-
-msgid "Review duplicates"
-msgstr "Пересмотр дубликатов"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "Создать {{trackedEntityTypeName}} и ссылку"
-
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты"
 
@@ -701,9 +704,6 @@ msgstr "Организация"
 
 msgid "Registration"
 msgstr "Регистрация"
-
-msgid "Review Duplicates"
-msgstr "Пересмотр дубликатов"
 
 msgid "Search results"
 msgstr "Результаты поиска"
