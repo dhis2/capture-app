@@ -134,6 +134,9 @@ msgstr "注册"
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
 
+msgid "Metadata error. see log for details"
+msgstr "元数据错误"
+
 msgid "An error has occurred. See log for details"
 msgstr ""
 
@@ -625,6 +628,15 @@ msgstr "选择一个分类选项以开始填报"
 msgid "You dont have access to create an event in the current selections"
 msgstr "你没有在当前选择创建事件的权限"
 
+msgid "Review duplicates"
+msgstr "复查重复"
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr "创建 {{trackedEntityTypeName}}  和链接"
+
+msgid "Review Duplicates"
+msgstr "复查重复"
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "存在重复，但是有错误，查看日志详情。"
 
@@ -650,15 +662,6 @@ msgstr "注册的人"
 msgid "Link"
 msgstr "链接"
 
-msgid "Metadata error. see log for details"
-msgstr "元数据错误"
-
-msgid "Review duplicates"
-msgstr "复查重复"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "创建 {{trackedEntityTypeName}}  和链接"
-
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
 
@@ -679,9 +682,6 @@ msgstr "组织机构"
 
 msgid "Registration"
 msgstr "注册"
-
-msgid "Review Duplicates"
-msgstr "复查重复"
 
 msgid "Search results"
 msgstr "搜索结果"
