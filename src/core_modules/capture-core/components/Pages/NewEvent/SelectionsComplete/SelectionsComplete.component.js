@@ -1,48 +1,32 @@
 // @flow
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import DataEntryWrapper from '../DataEntryWrapper/NewEventDataEntryWrapper.container';
-import NewRelationshipWrapper from '../NewRelationshipWrapper/NewEventNewRelationshipWrapper.container';
-import SelectionsNoAccess from '../SelectionsNoAccess/dataEntrySelectionsNoAccess.container';
+import React from 'react';
+import { NewEventDataEntryWrapper } from '../../../DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/NewEventDataEntryWrapper.container';
+import { NewRelationshipWrapper } from '../../../DataEntries/SingleEventRegistrationEntry/NewRelationshipWrapper/NewEventNewRelationshipWrapper.container';
+import SelectionsNoAccess from '../../../DataEntries/SingleEventRegistrationEntry/SelectionsNoAccess/dataEntrySelectionsNoAccess.container';
 
-
-const getStyles = () => ({
-    container: {
-        padding: '10px 24px 24px 24px',
-    },
-});
-
-type Props = {
+type Props = {|
     showAddRelationship: boolean,
-    classes: {
-        container: string,
-    },
-    eventAccess: {
+    eventAccess: {|
         read: boolean,
         write: boolean,
-    },
-};
+    |},
+|};
 
-class SelectionsComplete extends Component<Props> {
-    render() {
-        const { classes, showAddRelationship, eventAccess } = this.props;
-        if (!eventAccess.write) {
-            return (
-                <SelectionsNoAccess />
-            );
-        }
-
+export const SelectionsCompleteComponent = ({ showAddRelationship, eventAccess }: Props) => {
+    if (!eventAccess.write) {
         return (
-            <div
-                className={classes.container}
-            >
-                {showAddRelationship ?
-                    <NewRelationshipWrapper /> :
-                    <DataEntryWrapper />
-                }
-            </div>
+            <SelectionsNoAccess />
         );
     }
-}
 
-export default withStyles(getStyles)(SelectionsComplete);
+    return (
+        <>
+            {
+                showAddRelationship ?
+                    <NewRelationshipWrapper /> :
+                    <NewEventDataEntryWrapper />
+            }
+        </>
+    );
+};
+
