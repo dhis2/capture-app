@@ -53,6 +53,7 @@ const mapDispatchToProps = (
         dispatch(openNewEventPageFromLockedSelector());
     },
     onOpenNewRegistrationPageWithoutProgramId: () => {
+        // todo this needs work here
         dispatch(openNewRegistrationPageWithoutProgramIdFromLockedSelector());
     },
     onOpenSearchPage: () => {
