@@ -5,6 +5,7 @@ import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../../../../../metaData';
 import type { TeiColumnsMetaForDataFetchingArray, ClientTeis } from './types';
 import type { SubvalueKeysByType, SubvaluesByType, GetTeisWithSubvaluesPlainInner } from './getTeisWithSubvalues.types';
+import type { SingleResourceQuery } from '../../../../../../../../utils/api';
 
 const getTeisWithSubvaluesPlain = (singleResourceQuery: SingleResourceQuery, absoluteApiPath: string) => {
     const getImageOrFileResourceSubvalue = async (keys: Array<string>) => {
