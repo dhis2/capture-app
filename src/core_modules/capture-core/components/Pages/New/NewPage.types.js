@@ -3,9 +3,11 @@ import { typeof newPageStatuses } from './NewPage.constants';
 
 export type ContainerProps = $ReadOnly<{|
   showMessageToSelectOrgUnitOnNewPage: ()=>void,
+  showMessageToSelectProgramPartnerOnNewPage: ()=>void,
   showDefaultViewOnNewPage: ()=>void,
-  selectionsIncomplete: boolean,
   currentScopeId: string,
+  orgUnitSelectionIncomplete: boolean,
+  partnerSelectionIncomplete: boolean,
   newPageStatus: $Keys<newPageStatuses>,
   error: boolean,
   ready: boolean,

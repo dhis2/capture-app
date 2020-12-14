@@ -7,7 +7,7 @@ import { withLoadingIndicator } from '../../HOC';
 
 const mapStateToProps = (state: Object, props: { id: string }) => ({
     itemId: state.dataEntries[props.id] && state.dataEntries[props.id].itemId,
-    dataEntryExists: !!state.dataEntries[props.id],
+    ready: !!state.dataEntries[props.id],
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
@@ -43,5 +43,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 export default compose(
     // $FlowFixMe
     connect(mapStateToProps, mapDispatchToProps, null),
-    withLoadingIndicator(() => ({ height: '350px' }), null, ({ dataEntryExists }) => (dataEntryExists)),
+    withLoadingIndicator(() => ({ height: '350px' }), null),
 )(DataEntry);

@@ -9,7 +9,6 @@ import {
     showMessageToSelectProgramPartnerOnNewPage,
 } from './NewPage.actions';
 import { typeof newPageStatuses } from './NewPage.constants';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 
 export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
@@ -30,15 +29,16 @@ export const NewPage: ComponentType<{||}> = () => {
         useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
 
     const ready: boolean =
-        useSelector(({ activePage }) => !activePage.isLoading);
+        useSelector(({ activePage }) => !activePage.isPageLoading);
 
     const currentScopeId: string =
         useSelector(({ currentSelections }) => currentSelections.programId || currentSelections.trackedEntityTypeId);
 
     const partnerSelectionIncomplete: boolean =
-      useSelector(({ currentSelections: { programId, complete } }) => programId && !complete);
+      useSelector(({ currentSelections: { programId, complete } }) => !(programId && complete));
 
-    const { id: currentOrgUnitId } = useCurrentOrgUnitInfo();
+    const orgUnitSelectionIncomplete: boolean =
+      useSelector(({ currentSelections: { orgUnitId, complete } }) => !(orgUnitId && complete));
 
     const newPageStatus: $Keys<newPageStatuses> =
         useSelector(({ newPage }) => newPage.newPageStatus);
@@ -49,7 +49,7 @@ export const NewPage: ComponentType<{||}> = () => {
             showMessageToSelectProgramPartnerOnNewPage={dispatchShowMessageToSelectProgramPartnerOnNewPage}
             showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
             currentScopeId={currentScopeId}
-            orgUnitSelectionIncomplete={!currentOrgUnitId}
+            orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
             partnerSelectionIncomplete={partnerSelectionIncomplete}
             newPageStatus={newPageStatus}
             error={error}

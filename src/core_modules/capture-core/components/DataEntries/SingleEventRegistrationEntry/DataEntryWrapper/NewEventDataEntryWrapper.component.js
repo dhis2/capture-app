@@ -49,12 +49,6 @@ const NewEventDataEntryWrapperPlain = ({
     stage,
     onFormLayoutDirectionChange,
 }: Props) => {
-    let cancelButtonInstance;
-
-    const setCancelButtonInstance = (cancelButton: ?any) => {
-        cancelButtonInstance = cancelButton;
-    };
-
     const programId = useCurrentTrackedProgramId();
     const titleText = useScopeTitleText(programId);
 
@@ -89,7 +83,6 @@ const NewEventDataEntryWrapperPlain = ({
             <div className={classes.marginLeft}>
                 <DataEntry
                     stage={stage}
-                    cancelButtonRef={setCancelButtonInstance}
                     formFoundation={formFoundation}
                     formHorizontal={formHorizontal}
                 />

@@ -81,7 +81,7 @@ type DirectionClasses = {
 type Props = {
     id: string,
     itemId: string,
-    dataEntryExists: boolean,
+    ready: boolean,
     formFoundation: ?RenderFoundation,
     completeButton?: ?React.Element<any>,
     mainButton?: ?React.Element<any>,
