@@ -1,5 +1,6 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import React, { useCallback } from 'react';
 import type { ComponentType } from 'react';
 import { NewPageComponent } from './NewPage.component';
@@ -9,9 +10,13 @@ import {
     showMessageToSelectProgramPartnerOnNewPage,
 } from './NewPage.actions';
 import { typeof newPageStatuses } from './NewPage.constants';
+import { urlArguments } from '../../../utils/url';
+import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
+import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
 
 export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
@@ -45,11 +50,18 @@ export const NewPage: ComponentType<{||}> = () => {
     const newPageStatus: $Keys<newPageStatuses> =
         useSelector(({ newPage }) => newPage.newPageStatus);
 
+    const { id: orgUnitId } = useCurrentOrgUnitInfo();
+    const { id: programId } = useCurrentProgramInfo();
+    const handleMainPageNavigation = () => {
+        history.push(`/${urlArguments({ orgUnitId, programId })}`);
+    };
+
     return (
         <NewPageComponent
             showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
             showMessageToSelectProgramPartnerOnNewPage={dispatchShowMessageToSelectProgramPartnerOnNewPage}
             showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
+            handleMainPageNavigation={handleMainPageNavigation}
             currentScopeId={currentScopeId}
             orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
             partnerSelectionIncomplete={partnerSelectionIncomplete}

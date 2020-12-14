@@ -9,7 +9,7 @@ import DataEntry from './DataEntry/DataEntry.container';
 import EventsList from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
-import { useCurrentTrackedProgramId } from '../../../../hooks/useCurrentProgramId';
+import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
 
 const getStyles = ({ typography }) => ({
     flexContainer: {
@@ -49,7 +49,7 @@ const NewEventDataEntryWrapperPlain = ({
     stage,
     onFormLayoutDirectionChange,
 }: Props) => {
-    const programId = useCurrentTrackedProgramId();
+    const { id: programId } = useCurrentProgramInfo();
     const titleText = useScopeTitleText(programId);
 
     return (

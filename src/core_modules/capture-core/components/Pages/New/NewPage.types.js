@@ -5,6 +5,7 @@ export type ContainerProps = $ReadOnly<{|
   showMessageToSelectOrgUnitOnNewPage: ()=>void,
   showMessageToSelectProgramPartnerOnNewPage: ()=>void,
   showDefaultViewOnNewPage: ()=>void,
+  handleMainPageNavigation: ()=>void,
   currentScopeId: string,
   orgUnitSelectionIncomplete: boolean,
   partnerSelectionIncomplete: boolean,

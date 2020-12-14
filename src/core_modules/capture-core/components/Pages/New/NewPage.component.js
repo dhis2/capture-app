@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { compose } from 'redux';
 import type { ComponentType } from 'react';
-import { useHistory } from 'react-router';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
@@ -13,7 +12,6 @@ import { newPageStatuses } from './NewPage.constants';
 import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
-import { urlArguments } from '../../../utils/url';
 
 const getStyles = () => ({
     container: {
@@ -27,6 +25,7 @@ const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
     showMessageToSelectProgramPartnerOnNewPage,
     showDefaultViewOnNewPage,
+    handleMainPageNavigation,
     classes,
     currentScopeId,
     newPageStatus,
@@ -35,8 +34,6 @@ const NewPagePlain = ({
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
-    const titleText = useScopeTitleText(selectedScopeId);
-    const history = useHistory();
 
     useEffect(() => {
         setScopeId(currentScopeId);
@@ -58,11 +55,6 @@ const NewPagePlain = ({
         showMessageToSelectProgramPartnerOnNewPage,
         showDefaultViewOnNewPage,
     ]);
-
-    const handleMainPageNavigation = () => {
-        history.push(`/${urlArguments({ orgUnitId: currentOrgUnitId, programId: currentScopeId })}`);
-    };
-
 
     return (<>
         <LockedSelector />
