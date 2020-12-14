@@ -13,6 +13,18 @@ When('you click the "New" button to add a new event', () => {
         .click();
 });
 
+When('you click the "New" button to add a new event', () => {
+    cy.get('[data-test="dhis2-capture-new-event-button"]')
+        .click();
+});
+
+When('you click the first option from the "New" button to add a new event', () => {
+    cy.get('[data-test="dhis2-capture-new-button"]')
+        .click();
+    cy.get('[data-test="dhis2-capture-new-menuitem-one"]')
+        .click();
+});
+
 Then('you should see informative text saying you should do finish your selections', () => {
     cy.get('[data-test="dhis2-capture-informative-paper"]')
         .should('exist');
@@ -24,9 +36,24 @@ Given('you are in the main page with organisation unit preselected', () => {
         .should('exist');
 });
 
-Given('you are in the main page with program unit preselected', () => {
-    cy.visit('/#/orgUnitId=DiszpKrYNg8');
+Then('you should be taken to the new page', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/new/orgUnitId=DiszpKrYNg8`);
+});
+
+And('you see the dropdown menu', () => {
+    cy.contains('You can also choose a program from the top bar and search in that program')
+        .should('exist');
+});
+
+And('the informative text', () => {
     cy.get('[data-test="dhis2-capture-new-event-button"]')
+        .should('exist');
+});
+
+
+Given('you are in the main page with program preselected', () => {
+    cy.visit('/#/programId=VBqh0ynB2wv');
+    cy.get('[data-test="dhis2-capture-new-button"]')
         .should('exist');
 });
 
