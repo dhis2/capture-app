@@ -49,8 +49,8 @@ const mapDispatchToProps = (
     onResetAllCategoryOptions: () => {
         dispatch(resetAllCategoryOptionsFromLockedSelector());
     },
-    onOpenNewEventPage: (selectedProgramId, selectedOrgUnitId) => {
-        dispatch(openNewEventPageFromLockedSelector(selectedProgramId, selectedOrgUnitId));
+    onOpenNewEventPage: () => {
+        dispatch(openNewEventPageFromLockedSelector());
     },
     onOpenNewRegistrationPageWithoutProgramId: () => {
         dispatch(openNewRegistrationPageWithoutProgramIdFromLockedSelector());
