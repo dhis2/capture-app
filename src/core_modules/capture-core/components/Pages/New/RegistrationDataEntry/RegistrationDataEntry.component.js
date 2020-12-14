@@ -78,10 +78,6 @@ const RegistrationDataEntryPlain = ({ setScopeId, classes, selectedScopeId, data
                         New {titleText}
                     </div>
 
-                    <div className={classes.tetypeContainer}>
-                        <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
-                    </div>
-
                     <div className={classes.registrationContainer}>
                         <EnrollmentRegistrationEntry
                             id={dataEntryId}
@@ -108,18 +104,24 @@ const RegistrationDataEntryPlain = ({ setScopeId, classes, selectedScopeId, data
                         New {titleText}
                     </div>
 
-                    <TeiRegistrationEntry
-                        id={dataEntryId}
-                        selectedScopeId={selectedScopeId}
-                        teiRegistrationMetadata={registrationMetaData}
-                        saveButtonText={'Save new'}
-                        onSave={onSave}
-                        onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
-                        onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
-                    />
-                    <InfoIconText
-                        text={translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
-                    />
+                    <div className={classes.tetypeContainer}>
+                        <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
+                    </div>
+                    <div className={classes.registrationContainer}>
+
+                        <TeiRegistrationEntry
+                            id={dataEntryId}
+                            selectedScopeId={selectedScopeId}
+                            teiRegistrationMetadata={registrationMetaData}
+                            saveButtonText={'Save new'}
+                            onSave={onSave}
+                            onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
+                            onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
+                        />
+                        <InfoIconText
+                            text={translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
+                        />
+                    </div>
                 </Paper>
             }
 

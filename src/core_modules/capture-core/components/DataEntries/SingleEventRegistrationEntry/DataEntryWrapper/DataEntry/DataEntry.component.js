@@ -46,6 +46,7 @@ import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import withDataEntryFieldIfApplicable from '../../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
 import { withTransformPropName } from '../../../../../HOC';
+import { InfoIconText } from '../../../../InfoIconText';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -579,16 +580,9 @@ class NewEventDataEntry extends Component<Props> {
                         {...passOnProps}
                     />
                 </div>
-                <div
-                    className={classes.savingContextContainer}
-                >
-                    <InfoIcon />
-                    <div
-                        className={classes.savingContextText}
-                    >
-                        {this.getSavingText()}
-                    </div>
-                </div>
+                <InfoIconText
+                    text={this.getSavingText()}
+                />
             </div>
         );
     }
