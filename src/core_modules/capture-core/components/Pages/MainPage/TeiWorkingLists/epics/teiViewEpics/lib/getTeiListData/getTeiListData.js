@@ -5,7 +5,7 @@ import type { RawQueryArgs, RawFilterQueryArgs } from './types';
 import type { InputMeta } from './getTeiListData.types';
 import type { TeiColumnsMetaForDataFetching } from '../../../../types';
 
-const getApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}): ?{ filter: Array<string> } => {
+const getApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}): ?{| filter: Array<string> |} => {
     const apiFilterQueryArgs =
             Object
                 .keys(filters)
@@ -19,7 +19,7 @@ const getApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}): ?{ filter: Ar
                     return `${filterKey}:${filter}`;
                 });
 
-    return apiFilterQueryArgs.length > 0 ? { filter: apiFilterQueryArgs } : null;
+    return (apiFilterQueryArgs.length > 0 ? { filter: apiFilterQueryArgs } : null);
 };
 
 const getApiOrderById = (sortById: string, columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => {
@@ -42,7 +42,7 @@ const createApiQueryArgs = ({
     sortById,
     sortByDirection,
 }: RawQueryArgs,
-columnsMetaForDataFetching: TeiColumnsMetaForDataFetching) => ({
+columnsMetaForDataFetching: TeiColumnsMetaForDataFetching): { [string]: any } => ({
     ...getApiFilterQueryArgs(filters),
     orderBy: getApiOrderByQueryArgument(sortById, sortByDirection, columnsMetaForDataFetching),
     page,
