@@ -4,7 +4,7 @@ beforeEach(() => {
 });
 
 Given('you open the the new event page in Ngelehun and malaria case context', () => {
-    cy.visit('/#/newEvent/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/new/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
 
 When('you add data to the form', () => {
