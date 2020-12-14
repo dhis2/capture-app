@@ -1,6 +1,7 @@
 // @flow
 import type { FiltersData } from '../../../../WorkingLists';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../types';
+import type { SingleResourceQuery } from '../../../../../../../utils/api';
 
 export type Input = {|
     page: number,
