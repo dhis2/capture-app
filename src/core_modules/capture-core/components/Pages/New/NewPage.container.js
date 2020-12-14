@@ -29,16 +29,18 @@ export const NewPage: ComponentType<{||}> = () => {
         useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
 
     const ready: boolean =
-        useSelector(({ activePage }) => !activePage.isPageLoading);
+        useSelector(({ activePage }) => !activePage.isPageLoading && !activePage.isDataEntryLoading);
 
     const currentScopeId: string =
         useSelector(({ currentSelections }) => currentSelections.programId || currentSelections.trackedEntityTypeId);
 
+    // This is partner selection. When you have selected a program but
+    // the selection is incomplete we want the user to see a specific message
     const partnerSelectionIncomplete: boolean =
-      useSelector(({ currentSelections: { programId, complete } }) => !(programId && complete));
+      useSelector(({ currentSelections: { programId, complete } }) => programId && !complete);
 
     const orgUnitSelectionIncomplete: boolean =
-      useSelector(({ currentSelections: { orgUnitId, complete } }) => !(orgUnitId && complete));
+      useSelector(({ currentSelections: { orgUnitId, complete } }) => !orgUnitId && !complete);
 
     const newPageStatus: $Keys<newPageStatuses> =
         useSelector(({ newPage }) => newPage.newPageStatus);
