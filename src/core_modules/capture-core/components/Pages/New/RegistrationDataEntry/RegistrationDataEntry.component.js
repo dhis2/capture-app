@@ -3,7 +3,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
 import { withStyles } from '@material-ui/core';
-import type { OwnProps } from './RegistrationDataEntry.types';
+import type { Props } from './RegistrationDataEntry.types';
 import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
@@ -47,7 +47,7 @@ const getStyles = ({ typography }) => ({
 });
 
 
-const RegistrationDataEntryPlain = ({ setScopeId, classes, selectedScopeId, dataEntryId, onSave }: OwnProps) => {
+const RegistrationDataEntryPlain = ({ setScopeId, classes, selectedScopeId, dataEntryId, onSave }: Props) => {
     const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
     const { registrationMetaData } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const orgUnit = useCurrentOrgUnitInfo();
