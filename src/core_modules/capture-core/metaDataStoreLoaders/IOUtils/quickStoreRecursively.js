@@ -22,6 +22,7 @@ const quickStoreIteration = async (
     }: QuickStoreIterationOptions,
 ) => {
     const { rawResponse } = await quickStore({
+        // $FlowFixMe union type problem
         query: recursiveQuery,
         storeName,
         convertQueryResponse,

@@ -1,2 +1,3 @@
 // @flow
-export { getSingleResourceQuery } from './getSingleResourceQuery';
+export { makeQuerySingleResource } from './makeQuerySingleResource';
+export type * from './api.types';
