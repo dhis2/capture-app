@@ -122,7 +122,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
         return (
-            <div>
+            <div data-test={'dhis2-capture-locked-selector'}>
                 <QuickSelector
                     onSetOrgUnit={onSetOrgUnit}
                     onSetProgramId={onSetProgramId}

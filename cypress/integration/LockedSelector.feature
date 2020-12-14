@@ -10,8 +10,7 @@ Feature: Use the LockedSelector to navigate
     Given you are in the main page with organisation unit preselected
     When you click the "New" button to add a new event
     Then you should be taken to the new page
-    And you see the dropdown menu
-    And the informative text
+    And you see the dropdown menu for selecting tracked entity type
 
   Scenario: Notifying that you need to select an org unit to get started
     Given you are in the main page with program preselected

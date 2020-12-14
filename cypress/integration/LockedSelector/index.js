@@ -40,16 +40,12 @@ Then('you should be taken to the new page', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/new/orgUnitId=DiszpKrYNg8`);
 });
 
-And('you see the dropdown menu', () => {
+And('you see the dropdown menu for selecting tracked entity type', () => {
+    cy.get('[data-test="dhis2-uicore-singleselect]')
+        .should('exist');
     cy.contains('You can also choose a program from the top bar and search in that program')
         .should('exist');
 });
-
-And('the informative text', () => {
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
-        .should('exist');
-});
-
 
 Given('you are in the main page with program preselected', () => {
     cy.visit('/#/programId=VBqh0ynB2wv');
