@@ -1,4 +1,6 @@
 // @flow
+import type { ResourceQuery } from '@dhis2/app-runtime';
+
 export type ApiQuery = {|
     resource: string,
     id?: string,

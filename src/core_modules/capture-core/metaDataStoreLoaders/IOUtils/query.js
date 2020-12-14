@@ -1,10 +1,11 @@
 // @flow
+import type { ResourceQuery, QueryVariables } from '@dhis2/app-runtime';
 import { getContext } from '../context';
 
 export const query = (
-    querySpecification: ResourceQuery,
+    resourceQuery: ResourceQuery,
     variables?: QueryVariables,
 ) => {
     const { onQueryApi } = getContext();
-    return onQueryApi(querySpecification, variables);
+    return onQueryApi(resourceQuery, variables);
 };

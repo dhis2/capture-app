@@ -1,5 +1,6 @@
 // @flow
 import { typeof StorageController } from 'capture-core-utils/storage';
+import type { SingleResourceQuery } from '../../utils/api';
 
 type StoreNames = {
     CONSTANTS: string,
