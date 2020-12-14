@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { compose } from 'redux';
 import type { ComponentType } from 'react';
+import { useHistory } from 'react-router';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
+import { Button } from '@dhis2/ui';
 import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
@@ -11,6 +13,7 @@ import { newPageStatuses } from './NewPage.constants';
 import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
+import { urlArguments } from '../../../utils/url';
 
 const getStyles = () => ({
     container: {
@@ -32,6 +35,8 @@ const NewPagePlain = ({
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
+    const titleText = useScopeTitleText(selectedScopeId);
+    const history = useHistory();
 
     useEffect(() => {
         setScopeId(currentScopeId);
@@ -54,6 +59,11 @@ const NewPagePlain = ({
         showDefaultViewOnNewPage,
     ]);
 
+    const handleMainPageNavigation = () => {
+        history.push(`/${urlArguments({ orgUnitId: currentOrgUnitId, programId: currentScopeId })}`);
+    };
+
+
     return (<>
         <LockedSelector />
         <div data-test="dhis2-capture-registration-page-content" className={classes.container} >
@@ -68,9 +78,17 @@ const NewPagePlain = ({
 
             {
                 newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
-                <InefficientSelectionsMessage
-                    message={i18n.t('Choose a registering unit to start reporting')}
-                />
+                <>
+                    <InefficientSelectionsMessage
+                        message={i18n.t('Choose a registering unit to start reporting')}
+                    />
+                    <Button
+                        dataTest="dhis2-capture-new-page-cancel-button"
+                        onClick={handleMainPageNavigation}
+                    >
+                        {i18n.t('Cancel')}
+                    </Button>
+                </>
             }
 
             {
