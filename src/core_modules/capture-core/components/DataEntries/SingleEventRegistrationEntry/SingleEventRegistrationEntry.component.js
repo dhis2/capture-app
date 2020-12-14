@@ -12,7 +12,7 @@ type Props = {|
     |},
 |};
 
-export const SelectionsComplete = ({ showAddRelationship, eventAccess }: Props) => {
+export const SingleEventRegistrationEntryComponent = ({ showAddRelationship, eventAccess }: Props) => {
     if (!eventAccess.write) {
         return (
             <SelectionsNoAccess />

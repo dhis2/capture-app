@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { compose } from 'redux';
-import { SelectionsComplete } from './SingleEventRegistrationEntry.component';
+import { SingleEventRegistrationEntryComponent } from './SingleEventRegistrationEntry.component';
 import withBrowserBackWarning from '../../../HOC/withBrowserBackWarning';
 import dataEntryHasChanges from '../../DataEntry/common/dataEntryHasChanges';
 import { makeEventAccessSelector } from './SingleEventRegistrationEntry.selectors';
@@ -36,4 +36,4 @@ export const SingleEventRegistrationEntry: ComponentType<{| id: string |}> =
       connect(makeMapStateToProps, mapDispatchToProps),
       withLoadingIndicator(),
       withBrowserBackWarning(dialogConfig, inEffect),
-  )(SelectionsComplete);
+  )(SingleEventRegistrationEntryComponent);

@@ -6,7 +6,7 @@ import type { OwnProps } from './RegistrationDataEntry.types';
 import { startSavingNewTrackedEntityType } from './RegistrationDataEntry.actions';
 
 export const RegistrationDataEntry: ComponentType<OwnProps>
-  = ({ selectedScopeId, dataEntryId }) => {
+  = ({ selectedScopeId, dataEntryId, setScopeId }) => {
       const dispatch = useDispatch();
 
       const dispatchOnSave = useCallback(
@@ -19,5 +19,6 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
               dataEntryId={dataEntryId}
               selectedScopeId={selectedScopeId}
               onSave={dispatchOnSave}
+              setScopeId={setScopeId}
           />);
   };
