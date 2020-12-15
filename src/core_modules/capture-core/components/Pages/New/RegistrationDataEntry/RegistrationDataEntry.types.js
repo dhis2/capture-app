@@ -3,7 +3,7 @@ export type OwnProps = $ReadOnly<{|
   setScopeId: Function,
   selectedScopeId: string,
   dataEntryId: string,
-  onSave: Function,
+  onSaveWithoutEnrollment: Function,
   onSaveWithEnrollment: Function,
 |}>
 

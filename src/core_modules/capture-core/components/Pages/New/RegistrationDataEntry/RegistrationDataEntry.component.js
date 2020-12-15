@@ -46,13 +46,15 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-export const RegistrationDataEntryComponent = (
+const RegistrationDataEntryPlain = (
     {
+        classes,
+        setScopeId,
         selectedScopeId,
         dataEntryId,
-        onSave,
+        onSaveWithoutEnrollment,
         onSaveWithEnrollment,
-    }: OwnProps) => {
+    }: Props) => {
     const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
     const { registrationMetaData } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const orgUnit = useCurrentOrgUnitInfo();
@@ -89,7 +91,7 @@ export const RegistrationDataEntryComponent = (
                             selectedScopeId={selectedScopeId}
                             enrollmentMetadata={registrationMetaData}
                             saveButtonText={'Save new'}
-                            onSave={() => alert('onSave will save in the future')}
+                            onSave={onSaveWithEnrollment}
                             onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
                             onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
                             onUpdateField={() => console.log('onUpdateField will be here in the future in the future')}
@@ -119,7 +121,7 @@ export const RegistrationDataEntryComponent = (
                             selectedScopeId={selectedScopeId}
                             teiRegistrationMetadata={registrationMetaData}
                             saveButtonText={'Save new'}
-                            onSave={onSave}
+                            onSave={onSaveWithoutEnrollment}
                             onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
                             onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
                         />

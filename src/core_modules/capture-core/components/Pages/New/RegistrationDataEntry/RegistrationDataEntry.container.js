@@ -12,7 +12,7 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
   = ({ selectedScopeId, dataEntryId, setScopeId }) => {
       const dispatch = useDispatch();
 
-      const dispatchOnSave = useCallback(
+      const dispatchOnSaveWithoutEnrollment = useCallback(
           () => { dispatch(startSavingNewTrackedEntityType()); },
           [dispatch]);
 
@@ -25,7 +25,7 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
           <RegistrationDataEntryComponent
               dataEntryId={dataEntryId}
               selectedScopeId={selectedScopeId}
-              onSave={dispatchOnSave}
+              onSaveWithoutEnrollment={dispatchOnSaveWithoutEnrollment}
               onSaveWithEnrollment={dispatchOnSaveWithEnrollment}
               setScopeId={setScopeId}
           />);
