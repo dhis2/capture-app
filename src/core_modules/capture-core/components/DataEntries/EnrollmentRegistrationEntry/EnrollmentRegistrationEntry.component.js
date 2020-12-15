@@ -9,7 +9,7 @@ import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
-import type { OwnProps, Props } from './EnrollmentRegistrationEntry.types';
+import type { Props } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
@@ -46,7 +46,6 @@ const EnrollmentRegistrationEntryPlain =
               {
                   scopeType === scopeTypes.TRACKER_PROGRAM && formId &&
                   <>
-                      {/* $FlowFixMe */}
                       <EnrollmentDataEntry
                           orgUnit={orgUnit}
                           programId={selectedScopeId}

@@ -1,5 +1,5 @@
 // @flow
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, type ComponentType } from 'react';
 import { RegistrationDataEntryComponent } from './RegistrationDataEntry.component';
 import type { OwnProps } from './RegistrationDataEntry.types';
@@ -21,12 +21,15 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
           [dispatch]);
 
 
+      const dataEntryIsReady = useSelector(({ dataEntries }) => (!!dataEntries[dataEntryId]));
+
       return (
           <RegistrationDataEntryComponent
               dataEntryId={dataEntryId}
               selectedScopeId={selectedScopeId}
+              setScopeId={setScopeId}
               onSaveWithoutEnrollment={dispatchOnSaveWithoutEnrollment}
               onSaveWithEnrollment={dispatchOnSaveWithEnrollment}
-              setScopeId={setScopeId}
+              dataEntryIsReady={dataEntryIsReady}
           />);
   };
