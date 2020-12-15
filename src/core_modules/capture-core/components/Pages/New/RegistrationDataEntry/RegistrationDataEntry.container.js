@@ -9,7 +9,7 @@ import {
 } from './RegistrationDataEntry.actions';
 
 export const RegistrationDataEntry: ComponentType<OwnProps>
-  = ({ selectedScopeId, dataEntryId }) => {
+  = ({ selectedScopeId, dataEntryId, setScopeId }) => {
       const dispatch = useDispatch();
 
       const dispatchOnSave = useCallback(
@@ -27,5 +27,6 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
               selectedScopeId={selectedScopeId}
               onSave={dispatchOnSave}
               onSaveWithEnrollment={dispatchOnSaveWithEnrollment}
+              setScopeId={setScopeId}
           />);
   };

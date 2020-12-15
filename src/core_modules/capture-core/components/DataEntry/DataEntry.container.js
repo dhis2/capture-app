@@ -43,5 +43,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 export default compose(
     // $FlowFixMe
     connect(mapStateToProps, mapDispatchToProps, null),
-    withLoadingIndicator(() => ({ height: '350px' })),
+    withLoadingIndicator(() => ({ height: '350px' }), null),
 )(DataEntry);

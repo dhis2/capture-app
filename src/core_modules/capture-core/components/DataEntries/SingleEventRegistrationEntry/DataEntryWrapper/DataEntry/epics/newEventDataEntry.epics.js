@@ -84,6 +84,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN,
+            lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_WITHOUT_PROGRAM_ID_OPEN,
             lockedSelectorActionTypes.PROGRAM_ID_SET,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
@@ -139,6 +140,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN,
+            lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_WITHOUT_PROGRAM_ID_OPEN,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             lockedSelectorActionTypes.PROGRAM_ID_SET,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,

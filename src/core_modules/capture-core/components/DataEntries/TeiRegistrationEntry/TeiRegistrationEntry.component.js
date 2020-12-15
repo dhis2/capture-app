@@ -17,7 +17,6 @@ const styles = ({ typography }) => ({
         marginTop: typography.pxToRem(2),
     },
 });
-
 const TeiRegistrationEntryPlain =
   ({
       id,

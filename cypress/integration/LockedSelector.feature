@@ -9,11 +9,12 @@ Feature: Use the LockedSelector to navigate
   Scenario: Notifying that you need to select a program to get started
     Given you are in the main page with organisation unit preselected
     When you click the "New" button to add a new event
-    Then you should see informative text saying you should do finish your selections
+    Then you should be taken to the new page
+    And you see the dropdown menu for selecting tracked entity type
 
   Scenario: Notifying that you need to select an org unit to get started
-    Given you are in the main page with program unit preselected
-    When you click the "New" button to add a new event
+    Given you are in the main page with program preselected
+    When you click the first option from the "New" button to add a new event
     Then you should see informative text saying you should do finish your selections
 
   Scenario: Clicking start again takes you to the main page
@@ -52,7 +53,7 @@ Feature: Use the LockedSelector to navigate
   Scenario: Landing on the new event page
     Given you are in the main page with no selections made
     When you select both org unit and program Malaria case registration
-    And you click the "New" button to add a new event
+    And you click the first option from the "New" button to add a new event
     Then you can see the new event page
 
   Scenario: Clicking cancel from the new event page

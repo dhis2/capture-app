@@ -16,7 +16,8 @@ export const startSavingNewTrackedEntityType = () =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_SAVE_START)();
 
 export const saveNewTrackedEntityType = candidateForRegistration =>
-    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_SAVE)({ ...candidateForRegistration },
+    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_SAVE)(
+        { ...candidateForRegistration },
         {
             offline: {
                 effect: {
@@ -27,8 +28,13 @@ export const saveNewTrackedEntityType = candidateForRegistration =>
                 commit: {
                     type: registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_SAVE_COMPLETED,
                 },
+                rollback: {
+                    type: registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_SAVE_FAILED,
+                },
+
             },
-        });
+        },
+    );
 
 // with enrollment
 export const startSavingNewTrackedEntityTypeWithEnrollment = () =>
