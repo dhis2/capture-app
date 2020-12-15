@@ -139,7 +139,7 @@ Given('you are in the new event page with no selections made', () => {
 
 When('you click the cancel button', () => {
     cy.get('[data-test="dhis2-capture-new-page-cancel-button"]')
-        .click('');
+        .click();
 });
 
 Given('you land on a new event page with an invalid program id', () => {

@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import type { ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
+import { Button } from '@dhis2/ui';
 import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
@@ -24,6 +25,7 @@ const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
     showMessageToSelectProgramPartnerOnNewPage,
     showDefaultViewOnNewPage,
+    handleMainPageNavigation,
     classes,
     currentScopeId,
     newPageStatus,
@@ -68,9 +70,17 @@ const NewPagePlain = ({
 
             {
                 newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
-                <InefficientSelectionsMessage
-                    message={i18n.t('Choose a registering unit to start reporting')}
-                />
+                <>
+                    <InefficientSelectionsMessage
+                        message={i18n.t('Choose a registering unit to start reporting')}
+                    />
+                    <Button
+                        dataTest="dhis2-capture-new-page-cancel-button"
+                        onClick={handleMainPageNavigation}
+                    >
+                        {i18n.t('Cancel')}
+                    </Button>
+                </>
             }
 
             {
