@@ -53,7 +53,6 @@ export const startSavingNewTrackedEntityTypeWithEnrollmentEpic: Epic = (action$:
             const { orgUnitId, programId } = store.value.currentSelections;
             const enrollmentFormValues = store.value.dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
             const scope = getScopeFromScopeId(programId);
-            debugger;
             return saveNewTrackedEntityTypeWithEnrollment(
                 {
                     attributes: deriveAttributesFromFormValues(store.value.formsValues['newPageDataEntryId-newEnrollment']),

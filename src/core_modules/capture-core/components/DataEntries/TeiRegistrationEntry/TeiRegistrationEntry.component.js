@@ -2,21 +2,30 @@
 import React, { type ComponentType } from 'react';
 import { compose } from 'redux';
 import { Button } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import type { OwnProps } from './TeiRegistrationEntry.types';
+import type { OwnProps, Props } from './TeiRegistrationEntry.types';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import { withSaveHandler } from '../../DataEntry';
+import { InfoIconText } from '../../InfoIconText';
 
+const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
+    (<>
+        {i18n.t('Saving a {{trackedEntityName}}', { trackedEntityName })} <b>{i18n.t('without')}</b> {i18n.t('enrollment')}
+        {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.{' '}
+        {i18n.t('Enroll in a program by selecting a program from the top bar.')}
+    </>);
 
 const styles = ({ typography }) => ({
     marginTop: {
         marginTop: typography.pxToRem(2),
     },
 });
+
 const TeiRegistrationEntryPlain =
   ({
       id,
@@ -29,8 +38,8 @@ const TeiRegistrationEntryPlain =
       onPostProcessErrorMessage,
       onGetUnsavedAttributeValues,
       ...rest
-  }: { ...OwnProps, ...CssClasses }) => {
-      const { scopeType } = useScopeInfo(selectedScopeId);
+  }: Props) => {
+      const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
       const orgUnit = useCurrentOrgUnitInfo();
 
@@ -62,13 +71,18 @@ const TeiRegistrationEntryPlain =
                               {saveButtonText}
                           </Button>
                       }
+
+                      <InfoIconText
+                          text={translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
+                      />
+
                   </>
               }
           </>
       );
   };
 
-export const TeiRegistrationEntryComponent: ComponentType<OwnProps> =
+export const TeiRegistrationEntryComponent: ComponentType<$Diff<Props, CssClasses>> =
   compose(
       withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }) => {
           const form = teiRegistrationMetadata && teiRegistrationMetadata.form;

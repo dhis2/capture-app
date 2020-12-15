@@ -15,7 +15,7 @@ export default () => [
         teiBatchActionTypes.NEW_TEI_FIELD_UPDATE_BATCH,
     ]),
     getExecuteSearchForSearchGroupEpic([
-        enrollmentOpenBatchActionTypes.OPEN_DATA_ENYRY_FOR_NEW_ENROLLMENT_BATCH,
+        enrollmentOpenBatchActionTypes.OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH,
         teiOpenBatchActionTypes.NEW_TEI_DATA_ENTRY_OPEN_BATCH,
     ]),
 ];

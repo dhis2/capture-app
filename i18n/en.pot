@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-12-13T22:47:19.786Z\n"
-"PO-Revision-Date: 2020-12-13T22:47:19.786Z\n"
+"POT-Creation-Date: 2020-12-15T05:54:37.519Z\n"
+"PO-Revision-Date: 2020-12-15T05:54:37.519Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -122,6 +122,12 @@ msgstr ""
 msgid "A future date is not allowed"
 msgstr ""
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
 msgid "Metadata error. see log for details"
 msgstr ""
 
@@ -147,9 +153,6 @@ msgid "Assignee"
 msgstr ""
 
 msgid "Saving to"
-msgstr ""
-
-msgid "in"
 msgstr ""
 
 msgid ""
@@ -234,6 +237,18 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "An error has occurred. See log for details"
@@ -591,21 +606,6 @@ msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Choose a partner to start reporting"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}}"
-msgstr ""
-
-msgid "without"
-msgstr ""
-
-msgid "enrollment"
-msgstr ""
-
-msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"

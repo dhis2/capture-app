@@ -1,5 +1,5 @@
 // @flow
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 import type { ComponentType } from 'react';
 import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
@@ -38,11 +38,13 @@ const useInitialiseEnrollmentRegistration = (selectedScopeId, dataEntryId) => {
 
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, ...rest }) => {
     useInitialiseEnrollmentRegistration(selectedScopeId, id);
+    const ready = useSelector(({ dataEntries }) => (!!dataEntries[id]));
 
     return (
         <EnrollmentRegistrationEntryComponent
             selectedScopeId={selectedScopeId}
             id={id}
+            ready={ready}
             {...rest}
         />);
 };

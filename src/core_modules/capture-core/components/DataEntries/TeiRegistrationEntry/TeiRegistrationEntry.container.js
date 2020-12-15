@@ -1,5 +1,5 @@
 // @flow
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 import type { ComponentType } from 'react';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
@@ -37,11 +37,13 @@ const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
 
 export const TeiRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, ...rest }) => {
     useInitialiseTeiRegistration(selectedScopeId, id);
+    const ready = useSelector(({ dataEntries }) => (!!dataEntries[id]));
 
     return (
         <TeiRegistrationEntryComponent
             selectedScopeId={selectedScopeId}
             id={id}
+            ready={ready}
             {...rest}
         />);
 };
