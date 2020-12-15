@@ -55,7 +55,7 @@ columnsMetaForDataFetching: TeiColumnsMetaForDataFetching): { [string]: any } =>
 export const getTeiListData = async (
     rawQueryArgs: RawQueryArgs, {
         columnsMetaForDataFetching,
-        singleResourceQuery,
+        querySingleResource,
         absoluteApiPath,
     }: InputMeta,
 ) => {
@@ -64,13 +64,13 @@ export const getTeiListData = async (
         queryArgs: createApiQueryArgs(rawQueryArgs, columnsMetaForDataFetching),
     };
 
-    const { trackedEntityInstances: apiTeis = [] } = await singleResourceQuery({
+    const { trackedEntityInstances: apiTeis = [] } = await querySingleResource({
         resource,
         params: queryArgs,
     });
     const columnsMetaForDataFetchingArray = [...columnsMetaForDataFetching.values()];
     const clientTeis = convertToClientTeis(apiTeis, columnsMetaForDataFetchingArray);
-    const clientTeisWithSubvalues = await getTeisWithSubvalues(singleResourceQuery, absoluteApiPath)(clientTeis, columnsMetaForDataFetchingArray);
+    const clientTeisWithSubvalues = await getTeisWithSubvalues(querySingleResource, absoluteApiPath)(clientTeis, columnsMetaForDataFetchingArray);
 
     return {
         teis: clientTeisWithSubvalues,

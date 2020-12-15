@@ -26,7 +26,7 @@ export const initTeiWorkingListsView = ({
     orgUnitId,
     storeId,
     columnsMetaForDataFetching,
-    singleResourceQuery,
+    querySingleResource,
     absoluteApiPath,
 }: Input) => {
     const { sortById, sortByDirection } = getSortByConfig([...columnsMetaForDataFetching.values()]);
@@ -35,7 +35,7 @@ export const initTeiWorkingListsView = ({
 
     return getTeiListData({ programId, orgUnitId, pageSize, page, sortById, sortByDirection }, {
         columnsMetaForDataFetching,
-        singleResourceQuery,
+        querySingleResource,
         absoluteApiPath })
         .then(({ teis, request }) =>
             initListViewSuccess(storeId, {
