@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import i18n from '@dhis2/d2-i18n';
-import Button from '../../../Buttons/Button.component';
+import { Button } from '@dhis2/ui';
 
 const getStyles = (theme: Theme) => ({
     errors: {
@@ -21,6 +21,9 @@ const getStyles = (theme: Theme) => ({
         border: `1px solid ${theme.palette.grey.light}`,
         borderRadius: theme.typography.pxToRem(4),
         padding: 5,
+    },
+    marginLeft: {
+        marginLeft: 8,
     },
 });
 
@@ -107,19 +110,24 @@ class ErrorAndWarningDialog extends React.Component<Props> {
     }
 
     getButtons() {
-        const { onAbort, onSave, saveEnabled } = this.props;
+        const { onAbort, onSave, saveEnabled, classes } = this.props;
 
         return (
-            <React.Fragment>
+            <div style={{ margin: '0 20px 12px 20px' }}>
                 <Button onClick={onAbort} color="primary">
                     {i18n.t('Back to form')}
                 </Button>
                 {saveEnabled ? (
-                    <Button onClick={onSave} color="primary" autoFocus>
-                        {i18n.t('Save anyway')}
+                    <Button
+                        onClick={onSave}
+                        primary
+                        initialFocus
+                        className={classes.marginLeft}
+                    >
+                        {i18n.t('Save anyway!')}
                     </Button>) : null
                 }
-            </React.Fragment>
+            </div>
         );
     }
 

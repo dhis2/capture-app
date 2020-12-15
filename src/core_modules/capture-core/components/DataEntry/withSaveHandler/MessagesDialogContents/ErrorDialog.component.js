@@ -5,13 +5,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import i18n from '@dhis2/d2-i18n';
-import Button from '../../../Buttons/Button.component';
+import { Button } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
 
 type Props = {
     errors: Array<{key: string, name: ?string, error: string }>,
     onSave: () => void,
     onAbort: () => void,
     saveEnabled: boolean,
+    ...CssClasses
 };
 
 class ErrorDialog extends React.Component<Props> {
@@ -47,19 +49,24 @@ class ErrorDialog extends React.Component<Props> {
     }
 
     getButtons() {
-        const { onAbort, onSave, saveEnabled } = this.props;
+        const { onAbort, onSave, saveEnabled, classes } = this.props;
 
         return (
-            <React.Fragment>
+            <div style={{ margin: '0 20px 12px 20px' }}>
                 <Button onClick={onAbort} color="primary">
                     {i18n.t('Back to form')}
                 </Button>
                 {saveEnabled ? (
-                    <Button onClick={onSave} color="primary" autoFocus>
-                        {i18n.t('Save anyway')}
+                    <Button
+                        onClick={onSave}
+                        primary
+                        initialFocus
+                        className={classes.marginLeft}
+                    >
+                        {i18n.t('Save anyway!!')}
                     </Button>) : null
                 }
-            </React.Fragment>
+            </div>
         );
     }
 
@@ -82,4 +89,10 @@ class ErrorDialog extends React.Component<Props> {
     }
 }
 
-export default ErrorDialog;
+const styles = () => ({
+    marginLeft: {
+        marginLeft: 8,
+    },
+});
+
+export default withStyles(styles)(ErrorDialog);
