@@ -5,10 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-11-18T13:22:41.673Z\n"
-"PO-Revision-Date: 2020-11-18T13:22:41.673Z\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
-"PO-Revision-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2020-12-15T10:45:06.991Z\n"
+"PO-Revision-Date: 2020-12-15T10:45:06.991Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -664,9 +662,6 @@ msgstr ""
 msgid "Hide"
 msgstr ""
 
-msgid "Save as new {{tetName}}"
-msgstr ""
-
 msgid "Organisation Unit"
 msgstr ""
 
@@ -771,6 +766,9 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
+msgstr ""
+
+msgid "Save as new"
 msgstr ""
 
 msgid "You dont have access to delete this relationship"
