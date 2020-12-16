@@ -29,6 +29,7 @@ import type {
     RecordsOrder,
     UpdateTemplate,
     UpdateList,
+    InitialViewConfig,
 } from '../../WorkingListsCommon';
 import type { TeiWorkingListsTemplates, TeiRecords } from '../types';
 
@@ -45,7 +46,7 @@ export type TeiWorkingListsReduxOutputProps = {|
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
     filters?: FiltersData,
-    initialViewConfig?: Object,
+    initialViewConfig?: InitialViewConfig,
     loadedContext?: LoadedContext,
     loading: boolean,
     loadViewError?: string,
