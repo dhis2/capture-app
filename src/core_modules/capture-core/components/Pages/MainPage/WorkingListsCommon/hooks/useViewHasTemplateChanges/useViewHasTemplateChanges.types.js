@@ -1,29 +1,29 @@
 // @flow
 import type { FiltersData } from '../../../WorkingLists';
 
-type Column = {
+type Column = {|
     id: string,
     visible: boolean,
     [string]: any,
-};
+|};
 
 type Columns = Array<Column>;
 
-export type InitialViewConfig = {
+export type InitialViewConfig = {|
     filters: FiltersData,
     visibleColumnIds: Array<string>,
     sortById: string,
     sortByDirection: string,
-};
+|};
 
-export type CurrentViewConfig = {
+export type CurrentViewConfig = {|
     filters: FiltersData,
     columns: Columns,
     sortById: string,
     sortByDirection: string,
-};
+|};
 
-export type Input = {
+export type Input = {|
     initialViewConfig?: {
         filters?: FiltersData,
         customVisibleColumnIds?: Array<string>,
@@ -35,4 +35,4 @@ export type Input = {
     columns: Columns,
     sortById?: string,
     sortByDirection?: string,
-};
+|};
