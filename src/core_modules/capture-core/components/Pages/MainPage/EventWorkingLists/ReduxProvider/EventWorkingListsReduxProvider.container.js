@@ -18,7 +18,10 @@ export const EventWorkingListsReduxProvider = ({ storeId }: Props) => {
     const program = useMemo(() => getEventProgramThrowIfNotFound(programId),
         [programId]);
 
-    const commonStateManagementProps = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
+    const { currentTemplateId, templates, ...commonStateManagementRestProps } = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
+
+    const currentTemplate = currentTemplateId && templates &&
+    templates.find(template => template.id === currentTemplateId);
 
     const lastEventIdDeleted = useSelector(({ workingListsUI }) =>
         workingListsUI[storeId] && workingListsUI[storeId].lastEventIdDeleted);
@@ -26,9 +29,9 @@ export const EventWorkingListsReduxProvider = ({ storeId }: Props) => {
     const downloadRequest = useSelector(({ workingLists }) =>
         workingLists[storeId] && workingLists[storeId].currentRequest); // TODO: Remove when DownloadDialog is rewritten
 
-    const onSelectListRow = useCallback(({ eventId }) => {
+    const onSelectListRow = useCallback(({ id }) => {
         window.scrollTo(0, 0);
-        dispatch(openViewEventPage(eventId));
+        dispatch(openViewEventPage(id));
     }, [dispatch]);
 
     const onDeleteEvent = useCallback((eventId: string) => {
@@ -37,8 +40,10 @@ export const EventWorkingListsReduxProvider = ({ storeId }: Props) => {
 
     return (
         <EventWorkingListsColumnSetup
-            {...commonStateManagementProps}
+            {...commonStateManagementRestProps}
             program={program}
+            currentTemplate={currentTemplate}
+            templates={templates}
             lastIdDeleted={lastEventIdDeleted}
             onSelectListRow={onSelectListRow}
             onDeleteEvent={onDeleteEvent}
