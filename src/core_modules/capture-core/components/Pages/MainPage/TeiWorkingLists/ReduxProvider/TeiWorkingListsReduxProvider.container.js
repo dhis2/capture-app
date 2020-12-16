@@ -27,6 +27,8 @@ export const TeiWorkingListsReduxProvider = ({ storeId }: Props) => {
     delete commonStateManagementProps.lastTransactionOnListDataRefresh;
     delete commonStateManagementProps.listDataRefreshTimestamp;
     delete commonStateManagementProps.onAddTemplate;
+    delete commonStateManagementProps.onUpdateTemplate;
+    delete commonStateManagementProps.onDeleteTemplate;
     // ----------------------------------------------------------------
 
     return (

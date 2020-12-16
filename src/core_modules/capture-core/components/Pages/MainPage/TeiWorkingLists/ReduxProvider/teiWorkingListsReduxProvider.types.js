@@ -26,7 +26,6 @@ import type {
 import type {
     CustomColumnOrder,
     RecordsOrder,
-    UpdateTemplate,
     UpdateList,
     InitialViewConfig,
 } from '../../WorkingListsCommon';
@@ -56,7 +55,6 @@ export type TeiWorkingListsReduxOutputProps = {|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
-    onDeleteTemplate: Function,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
     onSelectListRow: SelectRow,
@@ -67,7 +65,6 @@ export type TeiWorkingListsReduxOutputProps = {|
     onUnloadingContext?: UnloadingContext,
     onUpdateFilter: UpdateFilter,
     onUpdateList: UpdateList,
-    onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     program: TrackerProgram,
     records?: TeiRecords,
