@@ -194,7 +194,7 @@ import {
     completeSavingNewTrackedEntityTypeEpic,
     startSavingNewTrackedEntityTypeEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
-import { openNewRegistrationPageWithoutProgramIdEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
+import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -300,6 +300,7 @@ export default combineEpics(
     searchViaAttributesOnScopeTrackedEntityTypeEpic,
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
+    openNewRegistrationPageFromLockedSelectorEpic,
     startFallbackSearchEpic,
     fallbackSearchEpic,
     fallbackPushPageEpic,

@@ -22,7 +22,7 @@ export const activePageDesc = createReducerDescription({
         ...state,
         selectionsError: null,
         isPageLoading: false,
-        isDataEntryLoading: true,
+        isDataEntryLoading: false,
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID]: (state, action) => ({
         ...state,

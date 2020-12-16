@@ -12,9 +12,8 @@ import {
     setCategoryOptionFromLockedSelector,
     resetCategoryOptionFromLockedSelector,
     resetAllCategoryOptionsFromLockedSelector,
-    openNewEventPageFromLockedSelector,
+    openNewRegistrationPageFromLockedSelector,
     openSearchPageFromLockedSelector,
-    openNewRegistrationPageWithoutProgramIdFromLockedSelector,
     lockedSelectorBatchActionTypes,
 } from './LockedSelector.actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
@@ -50,11 +49,15 @@ const mapDispatchToProps = (
         dispatch(resetAllCategoryOptionsFromLockedSelector());
     },
     onOpenNewEventPage: () => {
-        dispatch(openNewEventPageFromLockedSelector());
+        dispatch(openNewRegistrationPageFromLockedSelector());
     },
     onOpenNewRegistrationPageWithoutProgramId: () => {
-        // todo this needs work here
-        dispatch(openNewRegistrationPageWithoutProgramIdFromLockedSelector());
+        dispatch(batchActions([
+            resetProgramIdFromLockedSelector(),
+            resetAllCategoryOptionsFromLockedSelector(),
+            resetProgramIdBase(),
+            openNewRegistrationPageFromLockedSelector(),
+        ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH));
     },
     onOpenSearchPage: () => {
         dispatch(openSearchPageFromLockedSelector());
