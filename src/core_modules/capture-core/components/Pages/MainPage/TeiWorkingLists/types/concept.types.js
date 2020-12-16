@@ -16,7 +16,7 @@ export type TeiWorkingListsTemplate = {
         write: boolean,
         manage: boolean,
     },
-    criteria?: { [string]: any },
+    criteria?: {| [string]: any |},
     notPreserved?: boolean,
     deleted?: boolean,
     updating?: boolean,

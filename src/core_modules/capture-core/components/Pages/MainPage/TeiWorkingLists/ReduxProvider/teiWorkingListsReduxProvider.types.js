@@ -29,8 +29,9 @@ import type {
     RecordsOrder,
     UpdateTemplate,
     UpdateList,
+    InitialViewConfig,
 } from '../../WorkingListsCommon';
-import type { TeiWorkingListsTemplate, TeiWorkingListsTemplates, TeiRecords } from '../types';
+import type { TeiWorkingListsTemplates, TeiRecords } from '../types';
 
 export type Props = $ReadOnly<{|
     storeId: string,
@@ -39,14 +40,13 @@ export type Props = $ReadOnly<{|
 export type TeiWorkingListsReduxOutputProps = {|
     categories?: Categories,
     currentPage?: number,
-    currentTemplate?: TeiWorkingListsTemplate,
     currentTemplateId?: string,
     currentViewHasTemplateChanges?: boolean,
     customColumnOrder?: CustomColumnOrder,
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
     filters?: FiltersData,
-    initialViewConfig?: Object,
+    initialViewConfig?: InitialViewConfig,
     loadedContext?: LoadedContext,
     loading: boolean,
     loadViewError?: string,

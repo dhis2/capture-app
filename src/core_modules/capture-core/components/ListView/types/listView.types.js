@@ -27,7 +27,7 @@ export type FilterOnly = {
 };
 
 export type FiltersOnly = Array<FilterOnly>;
-export type DataSourceItem = { [id: string]: string };
+export type DataSourceItem = {| [id: string]: string |};
 
 export type DataSource = Array<DataSourceItem>;
 
