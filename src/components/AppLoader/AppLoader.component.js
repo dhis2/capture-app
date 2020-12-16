@@ -5,7 +5,7 @@ import { createHashHistory as createHistory, type HashHistory } from 'history';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
 import { DisplayException } from 'capture-core/utils/exceptions';
-import { getSingleResourceQuery } from 'capture-core/utils/api';
+import { makeQuerySingleResource } from 'capture-core/utils/api';
 import { environments } from 'capture-core/constants';
 import { buildUrl } from 'capture-core-utils';
 import { initializeAsync } from './init';
@@ -19,7 +19,7 @@ type Props = {
 const useApiUtils = () => {
     const dataEngine = useDataEngine();
     return useMemo(() => ({
-        query: getSingleResourceQuery(dataEngine.query.bind(dataEngine)),
+        querySingleResource: makeQuerySingleResource(dataEngine.query.bind(dataEngine)),
         mutate: dataEngine.mutate.bind(dataEngine),
         absoluteApiPath: buildUrl(dataEngine.link.baseUrl, dataEngine.link.apiPath),
     }), [dataEngine]);
@@ -42,7 +42,7 @@ const AppLoader = (props: Props) => {
         try {
             await initializeAsync(
                 onCacheExpired,
-                apiUtils.query,
+                apiUtils.querySingleResource,
                 apiUtils.absoluteApiPath,
             );
             const history = createHistory();

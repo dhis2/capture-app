@@ -1,6 +1,7 @@
 // @flow
 import type { FiltersData } from '../../../../WorkingLists';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../types';
+import type { QuerySingleResource } from '../../../../../../../utils/api';
 
 export type Input = {|
     page: number,
@@ -13,6 +14,6 @@ export type Input = {|
     storeId: string,
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
     filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
-    singleResourceQuery: SingleResourceQuery,
+    querySingleResource: QuerySingleResource,
     absoluteApiPath: string,
 |};

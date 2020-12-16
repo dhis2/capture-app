@@ -41,7 +41,7 @@ export const initTeiWorkingListsView = ({
     selectedTemplate,
     columnsMetaForDataFetching,
     filtersOnlyMetaForDataFetching,
-    singleResourceQuery,
+    querySingleResource,
     absoluteApiPath,
 }: Input) => {
     const { sortById, sortByDirection } = getSortByConfig([...columnsMetaForDataFetching.values()]);
@@ -52,7 +52,7 @@ export const initTeiWorkingListsView = ({
     return getTeiListData({ programId, orgUnitId, pageSize, page, sortById, sortByDirection, filters: apiFilters }, {
         columnsMetaForDataFetching,
         filtersOnlyMetaForDataFetching,
-        singleResourceQuery,
+        querySingleResource,
         absoluteApiPath })
         .then(({ teis, request }) =>
             initListViewSuccess(storeId, {

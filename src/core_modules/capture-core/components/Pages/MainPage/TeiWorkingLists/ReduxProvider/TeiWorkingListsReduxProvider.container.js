@@ -14,9 +14,6 @@ export const TeiWorkingListsReduxProvider = ({ storeId }: Props) => {
     // Being pragmatic here, disabling behavior we will implement later
     const commonStateManagementProps: Object = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
 
-    const currentTemplateId = useSelector(({ workingListsTemplates }) =>
-        workingListsTemplates[storeId] && workingListsTemplates[storeId].selectedTemplateId);
-
     const dispatch = useDispatch();
 
     const onLoadTemplates = useCallback(() => {
@@ -25,10 +22,13 @@ export const TeiWorkingListsReduxProvider = ({ storeId }: Props) => {
     }, [dispatch, programId, storeId]);
     const onSelectListRow = useCallback(() => {}, []);
 
+    // will be implemented later
     delete commonStateManagementProps.lastTransaction;
     delete commonStateManagementProps.lastTransactionOnListDataRefresh;
     delete commonStateManagementProps.listDataRefreshTimestamp;
     delete commonStateManagementProps.onAddTemplate;
+    delete commonStateManagementProps.onUpdateTemplate;
+    delete commonStateManagementProps.onDeleteTemplate;
     // ----------------------------------------------------------------
 
     return (
@@ -37,7 +37,6 @@ export const TeiWorkingListsReduxProvider = ({ storeId }: Props) => {
             onSelectListRow={onSelectListRow}
             onLoadTemplates={onLoadTemplates}
             program={program}
-            currentTemplateId={currentTemplateId}
         />
     );
 };

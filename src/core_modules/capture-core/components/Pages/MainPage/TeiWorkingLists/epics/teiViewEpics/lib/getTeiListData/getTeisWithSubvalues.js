@@ -5,12 +5,13 @@ import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../../../../../metaData';
 import type { TeiColumnsMetaForDataFetchingArray, ClientTeis } from './types';
 import type { SubvalueKeysByType, SubvaluesByType, GetTeisWithSubvaluesPlainInner } from './getTeisWithSubvalues.types';
+import type { QuerySingleResource } from '../../../../../../../../utils/api';
 
-const getTeisWithSubvaluesPlain = (singleResourceQuery: SingleResourceQuery, absoluteApiPath: string) => {
+const getTeisWithSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApiPath: string) => {
     const getImageOrFileResourceSubvalue = async (keys: Array<string>) => {
         const promises = keys
             .map(async (key) => {
-                const { id, displayName: name } = await singleResourceQuery({ resource: 'fileResources', id: key });
+                const { id, displayName: name } = await querySingleResource({ resource: 'fileResources', id: key });
                 return {
                     id,
                     name,
@@ -29,7 +30,7 @@ const getTeisWithSubvaluesPlain = (singleResourceQuery: SingleResourceQuery, abs
             const ids = keys
                 .join(',');
 
-            const { organisationUnits = [] } = await singleResourceQuery({ resource: 'organisationUnits', params: { filter: `id:in:[${ids}]` } });
+            const { organisationUnits = [] } = await querySingleResource({ resource: 'organisationUnits', params: { filter: `id:in:[${ids}]` } });
 
             return organisationUnits
                 .reduce((acc, { id, displayName: name }) => {
@@ -152,5 +153,7 @@ const getTeisWithSubvaluesPlain = (singleResourceQuery: SingleResourceQuery, abs
 };
 
 export const getTeisWithSubvalues =
-    createSelector<SingleResourceQuery, string, GetTeisWithSubvaluesPlainInner, SingleResourceQuery, string>(
-        query => query, (query, path) => path, (query, path) => getTeisWithSubvaluesPlain(query, path));
+    createSelector<QuerySingleResource, string, GetTeisWithSubvaluesPlainInner, QuerySingleResource, string>(
+        query => query,
+        (query, path) => path,
+        (query, path) => getTeisWithSubvaluesPlain(query, path));

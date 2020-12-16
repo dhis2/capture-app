@@ -7,7 +7,7 @@ import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching }
 
 const getApiFilterQueryArgs = (
     filters?: RawFilterQueryArgs = {},
-    filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching): ?{ filter: Array<string> } => {
+    filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching): ?{| filter: Array<string> |} => {
     const apiFilterQueryArgs =
             Object
                 .keys(filters)
@@ -21,7 +21,7 @@ const getApiFilterQueryArgs = (
                     return `${filterKey}:${filter}`;
                 });
 
-    return apiFilterQueryArgs.length > 0 ? { filter: apiFilterQueryArgs } : null;
+    return (apiFilterQueryArgs.length > 0 ? { filter: apiFilterQueryArgs } : null);
 };
 
 const getMainApiFilterQueryArgs = (filters?: RawFilterQueryArgs = {}, filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching) =>
@@ -59,7 +59,7 @@ const createApiQueryArgs = ({
 }: RawQueryArgs,
 columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
 filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
-) => ({
+): { [string]: any } => ({
     ...getApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
     ...getMainApiFilterQueryArgs(filters, filtersOnlyMetaForDataFetching),
     order: getApiOrderByQueryArgument(sortById, sortByDirection, columnsMetaForDataFetching),
@@ -74,7 +74,7 @@ export const getTeiListData = async (
     rawQueryArgs: RawQueryArgs, {
         columnsMetaForDataFetching,
         filtersOnlyMetaForDataFetching,
-        singleResourceQuery,
+        querySingleResource,
         absoluteApiPath,
     }: InputMeta,
 ) => {
@@ -83,13 +83,13 @@ export const getTeiListData = async (
         queryArgs: createApiQueryArgs(rawQueryArgs, columnsMetaForDataFetching, filtersOnlyMetaForDataFetching),
     };
 
-    const { trackedEntityInstances: apiTeis = [] } = await singleResourceQuery({
+    const { trackedEntityInstances: apiTeis = [] } = await querySingleResource({
         resource,
         params: queryArgs,
     });
     const columnsMetaForDataFetchingArray = [...columnsMetaForDataFetching.values()];
     const clientTeis = convertToClientTeis(apiTeis, columnsMetaForDataFetchingArray);
-    const clientTeisWithSubvalues = await getTeisWithSubvalues(singleResourceQuery, absoluteApiPath)(clientTeis, columnsMetaForDataFetchingArray);
+    const clientTeisWithSubvalues = await getTeisWithSubvalues(querySingleResource, absoluteApiPath)(clientTeis, columnsMetaForDataFetchingArray);
 
     return {
         teis: clientTeisWithSubvalues,
