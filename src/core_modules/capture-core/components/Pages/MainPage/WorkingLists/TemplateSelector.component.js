@@ -71,16 +71,16 @@ const TemplateSelector = (props: Props) => {
 
     const customTemplates = React.useMemo(() => templates
         .filter(c => !c.isDefault)
-        .sort((a, b) => {
+        .sort(({ order: orderA, name: nameA }, { order: orderB, name: nameB }) => {
             let sortResult;
-            if (a.order && b.order) {
-                sortResult = a.order - b.order;
-            } else if (a.order) {
+            if (orderA && orderB) {
+                sortResult = orderA - orderB;
+            } else if (orderA) {
                 sortResult = 1;
-            } else if (b.order) {
+            } else if (orderB) {
                 sortResult = -1;
             } else {
-                sortResult = a.name.localeCompare(b.name);
+                sortResult = nameA.localeCompare(nameB);
             }
             return sortResult;
         }), [templates]);
