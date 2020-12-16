@@ -10,10 +10,6 @@ import { actionTypes as viewEventDataEntryActionTypes } from '../../components/P
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 
 export const activePageDesc = createReducerDescription({
-    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
-        ...state,
-        isDataEntryLoading: true,
-    }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: state => ({
         ...state,
         isPageLoading: true,
@@ -49,6 +45,7 @@ export const activePageDesc = createReducerDescription({
         ...state,
         isDataEntryLoading: false,
     }),
+
     [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: state => ({
         ...state,
         isDataEntryLoading: true,
@@ -81,4 +78,9 @@ export const activePageDesc = createReducerDescription({
         ...state,
         isDataEntryLoading: false,
     }),
-}, 'activePage');
+}, 'activePage', {
+    selectionsError: null,
+    isPageLoading: false,
+    isDataEntryLoading: false,
+    viewEventLoadError: false,
+});
