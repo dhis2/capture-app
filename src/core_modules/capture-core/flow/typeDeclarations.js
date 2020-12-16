@@ -1,5 +1,5 @@
 // @flow
-import type { SingleResourceQuery } from '../utils/api/api.types';
+import type { QuerySingleResource } from '../utils/api/api.types';
 
 declare type D2 = {
     models: Object,
@@ -200,7 +200,7 @@ declare type CssClasses = {|
 |};
 
 declare type ApiUtils = {|
-    query: SingleResourceQuery,
+    querySingleResource: QuerySingleResource,
     mutate: DataEngineMutate,
     absoluteApiPath: string,
 |};

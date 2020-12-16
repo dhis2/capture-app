@@ -26,10 +26,10 @@ import type {
 import type {
     CustomColumnOrder,
     RecordsOrder,
-    UpdateTemplate,
     UpdateList,
+    InitialViewConfig,
 } from '../../WorkingListsCommon';
-import type { TeiWorkingListsTemplate, TeiWorkingListsTemplates, TeiRecords } from '../types';
+import type { TeiWorkingListsTemplates, TeiRecords } from '../types';
 
 export type Props = $ReadOnly<{|
     storeId: string,
@@ -38,14 +38,13 @@ export type Props = $ReadOnly<{|
 export type TeiWorkingListsReduxOutputProps = {|
     categories?: Categories,
     currentPage?: number,
-    currentTemplate?: TeiWorkingListsTemplate,
     currentTemplateId?: string,
     currentViewHasTemplateChanges?: boolean,
     customColumnOrder?: CustomColumnOrder,
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
     filters?: FiltersData,
-    initialViewConfig?: Object,
+    initialViewConfig?: InitialViewConfig,
     loadedContext?: LoadedContext,
     loading: boolean,
     loadViewError?: string,
@@ -56,7 +55,6 @@ export type TeiWorkingListsReduxOutputProps = {|
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
-    onDeleteTemplate: Function,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
     onSelectListRow: SelectRow,
@@ -67,7 +65,6 @@ export type TeiWorkingListsReduxOutputProps = {|
     onUnloadingContext?: UnloadingContext,
     onUpdateFilter: UpdateFilter,
     onUpdateList: UpdateList,
-    onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     program: TrackerProgram,
     records?: TeiRecords,
