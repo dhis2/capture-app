@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
 import { areFiltersEqual } from '../../../WorkingLists';
-import type { Input, InitialViewConfig, CurrentViewConfig } from './useViewHasTemplateChanges.types';
+import type { Input, InitialViewConfigComputed, CurrentViewConfig } from './useViewHasTemplateChanges.types';
 
 const isCurrentViewModified = ({
     filters,
@@ -13,7 +13,7 @@ const isCurrentViewModified = ({
     visibleColumnIds: initialVisibleColumnIds,
     sortById: initialSortById,
     sortByDirection: initialSortByDirection,
-}: InitialViewConfig,
+}: InitialViewConfigComputed,
 ) => {
     if (sortById !== initialSortById || sortByDirection !== initialSortByDirection) {
         return true;

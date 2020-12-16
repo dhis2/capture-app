@@ -9,7 +9,7 @@ import { initTeiWorkingListsView, updateTeiWorkingListsRecords } from './lib';
 export const initTeiViewEpic = (
     action$: InputObservable,
     store: ReduxStore, {
-        query: singleResourceQuery,
+        querySingleResource,
         absoluteApiPath,
     }: ApiUtils) =>
     action$.pipe(
@@ -26,7 +26,7 @@ export const initTeiViewEpic = (
                 selectedTemplate,
                 columnsMetaForDataFetching,
                 filtersOnlyMetaForDataFetching,
-                singleResourceQuery,
+                querySingleResource,
                 absoluteApiPath,
             })).pipe(takeUntil(action$.pipe(
                 ofType(workingListsCommonActionTypes.LIST_VIEW_INIT_CANCEL),
@@ -36,7 +36,7 @@ export const initTeiViewEpic = (
 export const updateTeiListEpic = (
     action$: InputObservable,
     store: ReduxStore, {
-        query: singleResourceQuery,
+        querySingleResource,
         absoluteApiPath,
     }: ApiUtils) =>
     action$.pipe(
@@ -66,7 +66,7 @@ export const updateTeiListEpic = (
                 storeId,
                 columnsMetaForDataFetching,
                 filtersOnlyMetaForDataFetching,
-                singleResourceQuery,
+                querySingleResource,
                 absoluteApiPath,
             })).pipe(takeUntil(action$.pipe(
                 ofType(workingListsCommonActionTypes.LIST_UPDATE_CANCEL),

@@ -5,6 +5,7 @@ import type {
     CustomColumnOrder,
     RecordsOrder,
     UpdateList,
+    InitialViewConfig,
 } from '../../WorkingListsCommon';
 import type { FiltersData } from '../../WorkingLists';
 import type { LoadTeiView, TeiRecords } from '../types';
@@ -17,7 +18,7 @@ type ExtractedProps = $ReadOnly<{|
     records?: TeiRecords,
     recordsOrder?: RecordsOrder,
     currentTemplateId?: string,
-    initialViewConfig: Object,
+    initialViewConfig: InitialViewConfig,
     filters?: FiltersData,
     sortById?: string,
     sortByDirection?: string,
