@@ -30,7 +30,7 @@ import type {
     UpdateTemplate,
     UpdateList,
 } from '../../WorkingListsCommon';
-import type { TeiWorkingListsTemplate, TeiWorkingListsTemplates, TeiRecords } from '../types';
+import type { TeiWorkingListsTemplates, TeiRecords } from '../types';
 
 export type Props = $ReadOnly<{|
     storeId: string,
@@ -39,7 +39,6 @@ export type Props = $ReadOnly<{|
 export type TeiWorkingListsReduxOutputProps = {|
     categories?: Categories,
     currentPage?: number,
-    currentTemplate?: TeiWorkingListsTemplate,
     currentTemplateId?: string,
     currentViewHasTemplateChanges?: boolean,
     customColumnOrder?: CustomColumnOrder,
