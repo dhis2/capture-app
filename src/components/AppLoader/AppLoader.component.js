@@ -28,7 +28,7 @@ const useApiUtils = () => {
 const AppLoader = (props: Props) => {
     const { onRunApp, onCacheExpired } = props;
     const [loadError, setLoadError] = React.useState(null);
-    const apiUtils = useApiUtils();
+    const { querySingleResource, mutate, absoluteApiPath } = useApiUtils();
 
     const logError = useCallback((error) => {
         if (error instanceof Error) {
@@ -42,13 +42,16 @@ const AppLoader = (props: Props) => {
         try {
             await initializeAsync(
                 onCacheExpired,
-                apiUtils.querySingleResource,
-                apiUtils.absoluteApiPath,
+                querySingleResource,
+                absoluteApiPath,
             );
             const history = createHistory();
             const store = getStore(
-                history,
-                apiUtils,
+                history, {
+                    querySingleResource,
+                    mutate,
+                    absoluteApiPath,
+                },
                 // $FlowFixMe[prop-missing] automated comment
                 () => onRunApp(store, history));
         } catch (error) {
@@ -70,7 +73,9 @@ const AppLoader = (props: Props) => {
         logError,
         onCacheExpired,
         onRunApp,
-        apiUtils,
+        querySingleResource,
+        mutate,
+        absoluteApiPath,
     ]);
 
     useEffect(() => {
