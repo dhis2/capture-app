@@ -1,3 +1,11 @@
+## [1.3.7](https://github.com/dhis2/capture-app/compare/v1.3.6...v1.3.7) (2020-12-18)
+
+
+### Bug Fixes
+
+* DHIS2-5490 rules engine numeric value parsing ([6cfed47](https://github.com/dhis2/capture-app/commit/6cfed47148f58f016b23928cb1a3d82d774ab43d))
+* **translations:** sync translations from transifex (master) ([ce8b87a](https://github.com/dhis2/capture-app/commit/ce8b87a39784a1fb662c34bb04e1f0cd67b1c4e5))
+
 ## [1.3.6](https://github.com/dhis2/capture-app/compare/v1.3.5...v1.3.6) (2020-12-10)
 
 
