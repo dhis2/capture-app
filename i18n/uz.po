@@ -559,7 +559,7 @@ msgid "An error occured loading possible duplicates"
 msgstr "Бўлиши мумкин бўлган нусхаларни юклашда хатолик юз берди"
 
 msgid "Hide"
-msgstr "Яшириш"
+msgstr "Беркитиш"
 
 msgid "Save as new {{tetName}}"
 msgstr "Янги {{tetName}} сифатида сақлаш"
@@ -604,7 +604,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr "Янги {{trackedEntityType}} яратиш"
 
 msgid "Register"
-msgstr "Рўйхат"
+msgstr "Рўйхатга олиш"
 
 msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
