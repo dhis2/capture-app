@@ -138,7 +138,7 @@ msgid "search group result could not be retrieved"
 msgstr "Гуруҳ қидируви натижасини олиш имкони йўқ"
 
 msgid "Complete"
-msgstr "Бажарилди"
+msgstr "Тўлдириш"
 
 msgid "Warnings found"
 msgstr "Огоҳлантиришлар топилди"
@@ -273,7 +273,7 @@ msgid "selected"
 msgstr "танланган"
 
 msgid "Delete"
-msgstr "Ўчириш"
+msgstr "Ўчириб ташлаш"
 
 msgid "Select file"
 msgstr "Файлни танлаш"
@@ -360,7 +360,7 @@ msgid "View event info"
 msgstr "Ҳодиса/тадбир маълумотларини кўриш"
 
 msgid "Delete event"
-msgstr "Тадбирни ўчиринг"
+msgstr "Ҳодиса/Тадбирни ўчириб ташлаш"
 
 msgid "Update"
 msgstr "Янгилаш"
@@ -396,7 +396,7 @@ msgid "Active"
 msgstr "Фаол"
 
 msgid "Completed"
-msgstr "бажарилди"
+msgstr "Тўлдирилди"
 
 msgid "Could not get organisation unit"
 msgstr "Ташкилий бўлимни олиб бўлмади"
@@ -668,7 +668,7 @@ msgid "No programs available."
 msgstr "Ҳеч қандай дастур мавжуд эмас"
 
 msgid "You dont have access to delete this relationship"
-msgstr "Ушбу ҳодиса/тадбирни ўчириш ҳуқуқига эга эмассиз"
+msgstr "Ушбу ҳодиса/тадбирни ўчириб ташлаш ҳуқуқига эга эмассиз"
 
 msgid "You dont have access to create any relationships"
 msgstr "Ушбу ўзаро алоқаларни яратиш ҳуқуқига эга эмассиз"
@@ -743,7 +743,7 @@ msgid "error"
 msgstr "хато"
 
 msgid "Delete polygon"
-msgstr "Полигон (кўпбурчак) ни ўчириш"
+msgstr "Полигон (кўпбурчак) ни ўчириб ташлаш"
 
 msgid "Set area"
 msgstr "Ҳудудни белгиланг"
