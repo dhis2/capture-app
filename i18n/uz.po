@@ -57,7 +57,7 @@ msgid "Warnings"
 msgstr "Огоҳлантириш"
 
 msgid "Complete"
-msgstr "Бажарилди"
+msgstr "Тўлдириш"
 
 msgid "Warnings found"
 msgstr "Огоҳлантиришлар топилди"
@@ -151,7 +151,7 @@ msgid "selected"
 msgstr "танланган"
 
 msgid "Delete"
-msgstr "Ўчириш"
+msgstr "Ўчириб ташлаш"
 
 msgid "Select file"
 msgstr "Файлни танлаш"
@@ -226,7 +226,7 @@ msgid "Organisation unit could not be loaded"
 msgstr "Ташкилий бўлимни юклаб бўлмади"
 
 msgid "Delete event"
-msgstr "Тадбирни ўчиринг"
+msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
 
 msgid "Update"
 msgstr "Янгилаш"
@@ -354,7 +354,7 @@ msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"
 
 msgid "Delete polygon"
-msgstr "Полигон (кўпбурчак) ни ўчириш"
+msgstr "Полигон (кўпбурчак) ни ўчириб ташлаш"
 
 msgid "Set area"
 msgstr "Ҳудудни белгиланг"
