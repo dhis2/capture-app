@@ -138,7 +138,7 @@ msgid "search group result could not be retrieved"
 msgstr "Гуруҳ қидируви натижасини олиш имкони йўқ"
 
 msgid "Complete"
-msgstr "Бажарилди"
+msgstr "Тўлдириш"
 
 msgid "Warnings found"
 msgstr "Огоҳлантиришлар топилди"
@@ -261,7 +261,7 @@ msgid "selected"
 msgstr "танланган"
 
 msgid "Delete"
-msgstr "Ўчириш"
+msgstr "Ўчириб ташлаш"
 
 msgid "Select file"
 msgstr "Файлни танлаш"
@@ -348,7 +348,7 @@ msgid "View event info"
 msgstr "Ҳодиса/тадбир маълумотларини кўриш"
 
 msgid "Delete event"
-msgstr "Тадбирни ўчиринг"
+msgstr "Ҳодиса/Тадбирни ўчириб ташлаш"
 
 msgid "Update"
 msgstr "Янгилаш"
@@ -402,13 +402,13 @@ msgid "Save current view as..."
 msgstr "Ушбу кўриниш сифатида сақлаш"
 
 msgid "Delete view"
-msgstr "Исмини кўриш"
+msgstr "Кўздан кечиришни ўчириб ташлаш"
 
 msgid "Share view..."
 msgstr "Кўриниш билан бўлишиш ..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Ҳақиқатдан ҳам '{{templateName}}' кўринишини очмоқчимисиз?"
+msgstr "Ҳақиқатдан ҳам '{{templateName}}' кўринишини ўчириб ташламоқчимисиз?"
 
 msgid "Confirm"
 msgstr "Тасдиқланг"
@@ -438,7 +438,7 @@ msgid "Active"
 msgstr "Фаол"
 
 msgid "Completed"
-msgstr "бажарилди"
+msgstr "Тўлдирилди"
 
 msgid "Could not get organisation unit"
 msgstr "Ташкилий бўлимни олиб бўлмади"
@@ -710,7 +710,7 @@ msgid "No programs available."
 msgstr "Ҳеч қандай дастур мавжуд эмас"
 
 msgid "You dont have access to delete this relationship"
-msgstr "Ушбу ҳодиса/тадбирни ўчириш ҳуқуқига эга эмассиз"
+msgstr "Ушбу ўзаро алоқаларни ўчириб ташлаш ҳуқуқига эга эмассиз"
 
 msgid "You dont have access to create any relationships"
 msgstr "Ушбу ўзаро алоқаларни яратиш ҳуқуқига эга эмассиз"
@@ -752,7 +752,7 @@ msgid "Could not save event. See log for details"
 msgstr "Ҳодиса/тадбир сақланмади. Тафсилотлар учун журналга қаранг"
 
 msgid "Could not delete event"
-msgstr "Ҳодиса/тадбирни ўчириб бўлмади"
+msgstr "Ҳодиса/тадбирни ўчириб ташлаб бўлмади"
 
 msgid "Could not save working list"
 msgstr "Ишчи рўйхат сақланмади"
@@ -761,13 +761,13 @@ msgid "Could not add working list"
 msgstr "Ишчи рўйхатни қўшиб бўлмади"
 
 msgid "Could not delete working list"
-msgstr "Ташкилот бўлимини қидириб бўлмади. Тафсилотлар учун журналга қаранг"
+msgstr "Ишчи рўйхатни ўчириб ташлаб бўлмади"
 
 msgid "Organisation unit search failed. See log for details"
-msgstr "кузатувдаги шах"
+msgstr "Ташкилот бўлимини қидириб бўлмади. Тафсилотлар учун журналга қаранг"
 
 msgid "tracked entity instance"
-msgstr "кузатилаётган объект намунаси"
+msgstr "кузатувдаги объект намунаси"
 
 msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"
@@ -797,7 +797,7 @@ msgid "error"
 msgstr "хато"
 
 msgid "Delete polygon"
-msgstr "Полигон (кўпбурчак) ни ўчириш"
+msgstr "Полигон (кўпбурчак) ни ўчириб ташлаш"
 
 msgid "Set area"
 msgstr "Ҳудудни белгиланг"
