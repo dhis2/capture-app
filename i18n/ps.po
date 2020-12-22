@@ -1,13 +1,13 @@
 # 
 # Translators:
-# phil_dhis2, 2019
+# phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-07T12:44:32.955Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Pushto (https://www.transifex.com/hisp-uio/teams/100509/ps/)\n"
 "MIME-Version: 1.0\n"
@@ -257,7 +257,7 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "هو [ درست ]"
+msgstr "هو"
 
 msgid "mm/dd/yyyy"
 msgstr ""
@@ -284,7 +284,7 @@ msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "نه [ نه ]"
+msgstr "نه"
 
 msgid "Uploading image"
 msgstr ""
@@ -299,6 +299,9 @@ msgid "Clear"
 msgstr "پاک یې کړئ"
 
 msgid "No results"
+msgstr ""
+
+msgid "start typing to search"
 msgstr ""
 
 msgid "suggestions could not be retrieved"

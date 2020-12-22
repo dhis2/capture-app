@@ -1,15 +1,18 @@
 # 
 # Translators:
-# Marta Vila <marta@dhis2.org>, 2019
-# phil_dhis2, 2019
+# ericbp <ericbarredap@gmail.com>, 2020
+# Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
+# phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
+# Marta Vila <marta@dhis2.org>, 2020
+# Pablo Pajuelo Cabezas <ppajuelo@quadram.mobi>, 2020
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-07T12:44:32.955Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
@@ -160,7 +163,7 @@ msgid "search group result could not be retrieved"
 msgstr ""
 
 msgid "Complete"
-msgstr "Completo"
+msgstr "Completar"
 
 msgid "Warnings found"
 msgstr ""
@@ -259,7 +262,7 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "Si"
+msgstr "Sí"
 
 msgid "mm/dd/yyyy"
 msgstr ""
@@ -280,7 +283,7 @@ msgid "selected"
 msgstr "seleccionado"
 
 msgid "Delete"
-msgstr "Borrar"
+msgstr "Eliminar"
 
 msgid "Select file"
 msgstr ""
@@ -301,6 +304,9 @@ msgid "Clear"
 msgstr "Limpiar"
 
 msgid "No results"
+msgstr ""
+
+msgid "start typing to search"
 msgstr ""
 
 msgid "suggestions could not be retrieved"
@@ -543,7 +549,7 @@ msgid ""
 msgstr ""
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Usuario asignado"
 
 msgid "Relationships"
 msgstr "Relaciones"

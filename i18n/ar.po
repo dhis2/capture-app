@@ -1,17 +1,17 @@
 # 
 # Translators:
-# phil_dhis2, 2019
+# phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # Antonia Bezenchek <antonia@informa.pro>, 2020
-# KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # Hamza Assada <7amza.it@gmail.com>, 2020
+# KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-07T12:44:32.955Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
+"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"PO-Revision-Date: 2020-12-22 22:12+0000\n"
+"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 msgid "Choose one or more dates..."
-msgstr "اختر تاريخًا أو أكثر ..."
+msgstr "اختر تاريخاً أو أكثر ..."
 
 msgid "Choose a date..."
 msgstr "اختر تاريخاً"
@@ -47,7 +47,7 @@ msgstr ""
 "النسخ الأخرى."
 
 msgid "Columns to show in table"
-msgstr "الأعمدة التي سيتم عرضها في الجدول"
+msgstr "الأعمدة التي ستعرض في الجدول"
 
 msgid "Column"
 msgstr "العمود"
@@ -59,13 +59,13 @@ msgid "Async field update failed"
 msgstr "فشل تحديث حقل متزامن"
 
 msgid "A value is required"
-msgstr "قيمة مطلوبة"
+msgstr "مطلوب قيمة"
 
 msgid "Please provide a valid number"
-msgstr "نرجوا ادخال صيغة رقمية سليمة"
+msgstr "يرجى ادخال صيغة رقمية سليمة"
 
 msgid "Please provide a valid integer"
-msgstr "من فضلك ادخل رقماً صحيحاً سليماً، من غير كسر"
+msgstr "من فضلك ادخل رقماً صحيحاً"
 
 msgid "Please provide a positive integer"
 msgstr "من فضلك ادخل رقماً صحيحاً موجباً"
@@ -77,37 +77,37 @@ msgid "Please provide a negative integer"
 msgstr "من فضلك ادخل عدداً صحيحاً سالباً"
 
 msgid "Please provide a valid date"
-msgstr "يرجى ادخال صيغة سليمة للتاريخ"
+msgstr "يرجى ادخال صيغة تاريخ سليمة"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "استخدام تاريخ مستقبلي غير مسموح."
 
 msgid "Please provide a valid date and time"
-msgstr "من فضلك ادخل صيغة سليمة للتاريخ والوقت"
+msgstr "من فضلك ادخل صيغة تاريخ ووقت سليمة"
 
 msgid "Please provide a valid time"
-msgstr "من فضلك ادخل صيغة وقت سليمة"
+msgstr "من فضلك ادخل صيغة سليمة للوقت"
 
 msgid "Please provide a valid percentage"
-msgstr "من فضلك ادخل صيغة نسبة مئوية سليمة"
+msgstr "يرجى ادخال صيغة نسبة مئوية سليمة"
 
 msgid "Please provide a valid url"
-msgstr "من فضلك ادخل الأرتباط التشعبي بصيغة سليمة"
+msgstr "يرجى ادخال صيغة ارتباط تشعبي سليمة"
 
 msgid "Please provide a valid email address"
-msgstr "من فضلك ادخل صيغة بريد الكتروني سليمة"
+msgstr "يرجى ادخال صيغة بريد الكتروني سليمة"
 
 msgid "Please provide a valid age"
-msgstr "من فضلك ادخل صيغة عمرية سليمة"
+msgstr "يرجى ادخال صيغة عمرية سليمة"
 
 msgid "Please provide a valid phone number"
-msgstr "من فضلك ادخل صيغة رقم تلفون سليمة"
+msgstr "يرجى ادخال صيغة رقم هاتف سليمة"
 
 msgid "Please provide a valid organisation unit"
 msgstr "من فضلك ادخل وحدة تنظيمية صالحة"
 
 msgid "Please provide valid coordinates"
-msgstr "من فضلك ادخل صيغة احداثيات سليمة"
+msgstr "يرجى ادخال صيغة احداثيات سليمة"
 
 msgid "This value already exists"
 msgstr "هذه القيمة موجودة مسبقاً"
@@ -128,7 +128,7 @@ msgid "Enrollment"
 msgstr "التسجيل"
 
 msgid "A future date is not allowed"
-msgstr "لا يسمح بإدخال تاريخ في المستقبل"
+msgstr "لايسمح بتاريخ في المستقبل"
 
 msgid "An error has occured. See log for details"
 msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
@@ -137,7 +137,7 @@ msgid "Cancel"
 msgstr "إلغاء"
 
 msgid "Unsaved changes"
-msgstr "تعديلات لم يتم حفظها"
+msgstr "تغييرات غير محفوظة"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -153,7 +153,7 @@ msgid "validation failed"
 msgstr "فشل التحقق من الصحة"
 
 msgid "Errors"
-msgstr "اخطاء"
+msgstr "أخطاء"
 
 msgid "Feedback"
 msgstr "التغذية الراجعة"
@@ -162,7 +162,7 @@ msgid "Indicators"
 msgstr "المؤشرات"
 
 msgid "Warnings"
-msgstr "تحذيرات"
+msgstr "اشعارات تحذيرية"
 
 msgid "search group result could not be retrieved"
 msgstr "تعذر استرداد نتيجة مجموعة البحث"
@@ -177,13 +177,13 @@ msgid "Abort"
 msgstr "إحباط"
 
 msgid "Back to form"
-msgstr "العودة اللنموذج"
+msgstr "العودة للنموذج"
 
 msgid "Save anyway"
 msgstr "حفظ على اية حال"
 
 msgid "Validation errors and warnings"
-msgstr "أخطاء وتحذيرات التحقق"
+msgstr "أخطاء وتحذيرات التحقق من الصحة"
 
 msgid "Validation errors"
 msgstr "أخطاء تحقق من الصحة"
@@ -234,10 +234,10 @@ msgid "From"
 msgstr "من"
 
 msgid "To"
-msgstr "الى"
+msgstr "إلى"
 
 msgid "This week"
-msgstr "الأسبوع الحالي"
+msgstr "هذا الأسبوع"
 
 msgid "This month"
 msgstr "الشهر الحالي"
@@ -282,7 +282,7 @@ msgid "Days"
 msgstr "‏‏الأيام"
 
 msgid "Uploading file"
-msgstr "تحميل ملف"
+msgstr "رفع ملف"
 
 msgid "selected"
 msgstr "محدد"
@@ -300,16 +300,19 @@ msgid "Uploading image"
 msgstr "تحميل الصورة"
 
 msgid "Select image"
-msgstr "حدد الصورة"
+msgstr "اختيار صورة"
 
 msgid "Search"
-msgstr "البحث"
+msgstr "بحث"
 
 msgid "Clear"
 msgstr "مسح"
 
 msgid "No results"
 msgstr "لا توجد نتائج"
+
+msgid "start typing to search"
+msgstr "ابدأ الكتابة للبحث"
 
 msgid "suggestions could not be retrieved"
 msgstr "تعذر استرداد الاقتراحات"
@@ -336,7 +339,7 @@ msgid "Start again"
 msgstr "البدء من جديد"
 
 msgid "Find"
-msgstr "بحث"
+msgstr "إيجاد"
 
 msgid "Selected registering unit"
 msgstr "وحدة التسجيل المختارة"
@@ -372,7 +375,7 @@ msgid "Select program"
 msgstr "تحديد البرنامج"
 
 msgid "No programs available."
-msgstr "لا توجد برامج متاحة"
+msgstr "لا توجد برامج متاحة."
 
 msgid "Online"
 msgstr "متصل"
@@ -405,7 +408,7 @@ msgid "Please add or cancel comment before saving the event"
 msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
 
 msgid "No write access"
-msgstr "لا توجد صلاحية الوصول للكتابة"
+msgstr "لا توجد صلاحية وصول للكتابة"
 
 msgid "Save"
 msgstr "حفظ"
@@ -450,7 +453,7 @@ msgid "less than or equal to"
 msgstr "أقل من أو يساوي"
 
 msgid "More filters"
-msgstr "عوامل تصفية أكثر"
+msgstr "المزيد من عوامل التصفية"
 
 msgid "Select columns"
 msgstr "حدد الأعمدة"
@@ -477,7 +480,7 @@ msgid "Update view"
 msgstr "تحديث العرض"
 
 msgid "Save current view..."
-msgstr "حفظ العرض الحالي"
+msgstr "حفظ العرض الحالي..."
 
 msgid "Save current view as..."
 msgstr "حفظ العرض الحالي بإسم..."
@@ -519,7 +522,7 @@ msgid "Active"
 msgstr "فعال"
 
 msgid "Completed"
-msgstr "مكتمل"
+msgstr "المكتملة"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
@@ -534,7 +537,7 @@ msgid "Finish"
 msgstr "إنهاء"
 
 msgid "Switch to form view"
-msgstr "التحويل الى العرض كنموذج"
+msgstr "التحويل إلى العرض كنموذج"
 
 msgid "Switch to row view"
 msgstr "التحويل إلى العرض كصفوف"
@@ -556,7 +559,7 @@ msgid "Assigned user"
 msgstr "المستخدم المعين"
 
 msgid "Relationships"
-msgstr "علاقات"
+msgstr "العلاقات"
 
 msgid "Assignee"
 msgstr "المحال إليه"
@@ -581,19 +584,19 @@ msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
-"العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}}  موجودة مسبقاً"
+"العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}} موجودة مسبقاً"
 
 msgid "New event"
 msgstr "حدث جديد"
 
 msgid "New event relationship"
-msgstr "علاقة جديدة بالحدث"
+msgstr "علاقة جديدة مع الحدث"
 
 msgid "Adding relationship to event."
 msgstr "إضافة علاقة للحدث."
 
 msgid "Go back to event without saving relationship"
-msgstr "ارجع إلى الحدث بدون حفظ العلاقة"
+msgstr "الرجوع إلى الحدث من غير حفظ العلاقة"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -648,10 +651,10 @@ msgid "Link"
 msgstr "ربط"
 
 msgid "Metadata error. see log for details"
-msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
+msgstr "خطأ في البيانات الوصفية، للتفاصيل انظر السجل"
 
 msgid "Review duplicates"
-msgstr "مراجعة التكرار"
+msgstr "مراجعة التكرارات"
 
 msgid "Create {{trackedEntityTypeName}} and link"
 msgstr "إنشاء {{trackedEntityTypeName}} وربط"
@@ -755,10 +758,10 @@ msgid "Program is not a tracker program"
 msgstr "البرنامج ليس برنامج تتبع"
 
 msgid "Profile"
-msgstr "ملف التعريف"
+msgstr "الملف الشخصي"
 
 msgid "Error saving event"
-msgstr "خطأ عند حفظ الحدث"
+msgstr "خطأ في حفظ الحدث"
 
 msgid "Could not save event. See log for details"
 msgstr "تعذر حفظ الحدث. انظر إلى السجل للحصول على التفاصيل"

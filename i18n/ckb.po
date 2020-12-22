@@ -1,13 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
+# Viktor Varland <viktor@dhis2.org>, 2020
+# Asos <aso.rezaiy@gmail.com>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-07T12:44:32.955Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
 "MIME-Version: 1.0\n"
@@ -149,7 +150,7 @@ msgid "validation failed"
 msgstr "سەلماندنەکە سەرکەوتوونەبوو"
 
 msgid "Errors"
-msgstr "هەڵەکان"
+msgstr "هەڵە"
 
 msgid "Feedback"
 msgstr "ڕاووبۆچون"
@@ -308,6 +309,9 @@ msgstr "پاککردنەوە"
 
 msgid "No results"
 msgstr "هیچ ئەنجامێک بەردەست نیە"
+
+msgid "start typing to search"
+msgstr ""
 
 msgid "suggestions could not be retrieved"
 msgstr "پێشنیارەکان نەتواندرا بهێندرێت"

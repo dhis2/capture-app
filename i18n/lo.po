@@ -1,13 +1,13 @@
 # 
 # Translators:
-# phil_dhis2, 2019
+# phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-07T12:44:32.955Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
@@ -125,7 +125,7 @@ msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Cancel"
-msgstr "ຍົກເລີກ"
+msgstr "Cancel"
 
 msgid "Unsaved changes"
 msgstr ""
@@ -248,16 +248,16 @@ msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr "ຄ່າໃຫ່ຍສຸດ"
+msgstr "ຄ່າສູງສຸດ"
 
 msgid "Min"
-msgstr "ຄ່າຕໍ່າສຸດ"
+msgstr "ຄ່ານ້ອຍສຸດ"
 
 msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "ແມ່ນ"
+msgstr "Yes"
 
 msgid "mm/dd/yyyy"
 msgstr ""
@@ -284,7 +284,7 @@ msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "ບໍ່"
+msgstr "No"
 
 msgid "Uploading image"
 msgstr ""
@@ -299,6 +299,9 @@ msgid "Clear"
 msgstr "ລຶບ"
 
 msgid "No results"
+msgstr ""
+
+msgid "start typing to search"
 msgstr ""
 
 msgid "suggestions could not be retrieved"
@@ -356,7 +359,7 @@ msgid "Show all"
 msgstr "ສະແດງທັງໝົດ"
 
 msgid "Program"
-msgstr "ສາຍງານ"
+msgstr "Program"
 
 msgid "Select program"
 msgstr "ຂະແໜງທີ່ຖືກເລືອກ"
