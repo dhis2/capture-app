@@ -9,7 +9,6 @@ const mapStateToProps = (state: ReduxState, { id }) => {
     const ready = !registerTeiContainer.loading;
 
     const dataEntryId = id || 'relationship';
-    debugger;
     const dataEntryKey = ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;
     return {
         ready,

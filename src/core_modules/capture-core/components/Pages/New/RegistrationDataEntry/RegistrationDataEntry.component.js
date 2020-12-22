@@ -7,7 +7,6 @@ import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrat
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
-import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 
