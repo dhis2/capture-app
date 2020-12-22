@@ -1,6 +1,6 @@
 // @flow
-import type { RegistrationFormMetadata } from '../common/types';
 import type { RenderFoundation } from '../../../metaData/RenderFoundation';
+import type { RegistrationFormMetadata } from '../common/types';
 
 export type OwnProps = $ReadOnly<{|
   id: string,
