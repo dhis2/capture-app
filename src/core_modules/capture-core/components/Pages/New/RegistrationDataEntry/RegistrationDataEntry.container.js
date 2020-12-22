@@ -28,8 +28,8 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
               dataEntryId={dataEntryId}
               selectedScopeId={selectedScopeId}
               setScopeId={setScopeId}
+              dataEntryIsReady={dataEntryIsReady}
               onSaveWithoutEnrollment={dispatchOnSaveWithoutEnrollment}
               onSaveWithEnrollment={dispatchOnSaveWithEnrollment}
-              dataEntryIsReady={dataEntryIsReady}
           />);
   };
