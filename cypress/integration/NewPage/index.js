@@ -150,7 +150,7 @@ And('you see the registration form for the Malaria case registration', () => {
         .should('exist');
 
     cy.get('[data-test="dhis2-uicore-splitbutton"]')
-        .contains('Save an exit')
+        .contains('Save and exit')
         .should('exist');
 
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
@@ -285,7 +285,7 @@ And('you see the registration form for the scpecific partner', () => {
         .should('exist');
 
     cy.get('[data-test="dhis2-uicore-splitbutton"]')
-        .contains('Save an exit')
+        .contains('Save and exit')
         .should('exist');
 
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
