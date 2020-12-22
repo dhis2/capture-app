@@ -74,7 +74,7 @@ const RegistrationDataEntryPlain = (
 
                     <div className={classes.registrationContainer}>
                         <Grid container justify="space-between">
-                            <Grid item xs={9}>
+                            <Grid item md sm={9} xs={9} >
                                 <EnrollmentRegistrationEntry
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
@@ -112,7 +112,7 @@ const RegistrationDataEntryPlain = (
                     </div>
                     <div className={classes.registrationContainer}>
                         <Grid container justify="space-between">
-                            <Grid item xs={9}>
+                            <Grid item md sm={9} xs={9} >
                                 <TeiRegistrationEntry
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
