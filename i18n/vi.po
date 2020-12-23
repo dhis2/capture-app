@@ -30,6 +30,8 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"Lý do có thể do trình duyệt hoặc chế độ (ví dụ: chế độ bảo mật) không được "
+"hỗ trợ. Xem nhật ký để biết chi tiết."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -37,6 +39,10 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"Bạn đã mở một phiên bản khác của Ứng dụng Ghi trong cùng một miền. Hiện tại,"
+" Ứng dụng Ghi chỉ hỗ trợ chạy đồng thời một phiên bản (trong cùng một miền)."
+" Vui lòng làm mới trang này nếu bạn muốn sử dụng lại phiên bản này, nhưng "
+"lưu ý rằng điều này sẽ đóng các phiên bản khác."
 
 msgid "Columns to show in table"
 msgstr "Cột hiển thị trong bảng"
@@ -45,70 +51,70 @@ msgid "Column"
 msgstr "Biểu đồ cột"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "Giá trị này đang xác thực"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "Cập nhật trường không đồng bộ không thành công"
 
 msgid "A value is required"
 msgstr "Yêu cầu có giá trị"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Vui lòng cung cấp một số hợp lệ"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Vui lòng cung cấp một số nguyên hợp lệ"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "Vui lòng cung cấp một số nguyên dương"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Vui lòng cung cấp số 0 hoặc số nguyên dương"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Vui lòng cung cấp một số nguyên âm"
 
 msgid "Please provide a valid date"
 msgstr "Xin vui lòng cung cấp ngày đúng"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Không được phép nhập ngày trong tương lai"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "Vui lòng cung cấp ngày và giờ hợp lệ"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "Vui lòng cung cấp thời gian hợp lệ"
 
 msgid "Please provide a valid percentage"
-msgstr ""
+msgstr "Vui lòng cung cấp một tỷ lệ phần trăm hợp lệ"
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Vui lòng cung cấp một url hợp lệ"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "Vui lòng cung cấp một địa chỉ email hợp lệ"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "Vui lòng cung cấp độ tuổi hợp lệ"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "Vui lòng cung cấp một số điện thoại hợp lệ"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "Vui lòng cung cấp một đơn vị hợp lệ"
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "Vui lòng cung cấp tọa độ hợp lệ"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "Giá trị này đã tồn tại"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "\"Từ\" không được lớn hơn \"Tới\""
 
 msgid "Checking..."
-msgstr ""
+msgstr "Đang kiểm tra ..."
 
 msgid "Area"
 msgstr "Khu vực"
@@ -120,7 +126,7 @@ msgid "Enrollment"
 msgstr "Đăng ký"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "Ngày tương lai không được phép"
 
 msgid "An error has occured. See log for details"
 msgstr "Có lỗi. Xem log để biết thêm chi tiết."
@@ -129,20 +135,20 @@ msgid "Cancel"
 msgstr "Hủy"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Các thay đổi chưa được lưu"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Rời khỏi trang ngày sẽ hủy các thay đổi bạn đã thực hiện cho sự kiện này."
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "Có, loại bỏ"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Không, ở lại đây"
 
 msgid "validation failed"
-msgstr ""
+msgstr "xác thực không thành công"
 
 msgid "Errors"
 msgstr "Lỗi"
@@ -157,7 +163,7 @@ msgid "Warnings"
 msgstr "Cảnh báo"
 
 msgid "search group result could not be retrieved"
-msgstr ""
+msgstr "không thể truy xuất kết quả nhóm tìm kiếm"
 
 msgid "Complete"
 msgstr "Hoàn tất"
@@ -169,25 +175,25 @@ msgid "Abort"
 msgstr "Hủy bỏ"
 
 msgid "Back to form"
-msgstr ""
+msgstr "Quay lại biểu mẫu"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "Lưu bằng mọi cách"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "Lỗi xác thực và cảnh báo"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "Lỗi xác thực"
 
 msgid "Validation warnings"
 msgstr "Cảnh báo tính hợp lệ"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "Một số hoạt động vẫn đang chạy. Vui lòng đợi .."
 
 msgid "Operations running"
-msgstr ""
+msgstr "Hoạt động đang chạy"
 
 msgid "Sort"
 msgstr "Sắp xếp"
@@ -202,22 +208,22 @@ msgid "Close"
 msgstr "Đóng lại"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "Vui lòng chọn người dùng"
 
 msgid "Search for user"
-msgstr ""
+msgstr "Tìm kiếm người dùng"
 
 msgid "Me"
-msgstr ""
+msgstr "Tôi"
 
 msgid "Anyone"
-msgstr ""
+msgstr "Bất kỳ ai"
 
 msgid "None"
 msgstr "Không"
 
 msgid "Select user"
-msgstr ""
+msgstr "Chọn người dùng"
 
 msgid "to"
 msgstr "thành"
@@ -235,7 +241,7 @@ msgid "This month"
 msgstr "Tháng này"
 
 msgid "This Year"
-msgstr ""
+msgstr "Năm nay"
 
 msgid "Last week"
 msgstr "Tuần trước"
@@ -262,7 +268,7 @@ msgid "Yes"
 msgstr "Có"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm / dd / yyyy"
 
 msgid "Years"
 msgstr "Năm"
@@ -304,10 +310,10 @@ msgid "No results"
 msgstr "Không có kết quả"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "bắt đầu nhập để tìm kiếm"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "đề xuất không thể được truy xuất"
 
 msgid "No items to display"
 msgstr "Không có mục để hiển thị"
@@ -319,10 +325,10 @@ msgid "Program doesn't exist"
 msgstr "Chương trình không tồn tại"
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
+msgstr "Chương trình đã chọn không hợp lệ cho đơn vị đăng ký đã chọn"
 
 msgid "New {{typeName}}"
-msgstr ""
+msgstr "{{TypeName}} mới"
 
 msgid "New"
 msgstr "Mới"
@@ -340,7 +346,7 @@ msgid "Start Again"
 msgstr "Khởi Đầu Lại"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "Bạn có chắc không? Tất cả dữ liệu chưa được lưu sẽ bị mất."
 
 msgid "Accept"
 msgstr "Chấp nhận"
@@ -382,7 +388,7 @@ msgid "Add comment"
 msgstr "Thêm bình luận"
 
 msgid "You dont have access to write comments"
-msgstr ""
+msgstr "Bạn không có quyền viết bình luận"
 
 msgid "Write comment"
 msgstr "Viết bình luận"
@@ -430,13 +436,13 @@ msgid "Update"
 msgstr "Cập nhật"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
+msgstr "{{fromDate}} đến {{toDate}}"
 
 msgid "after or equal to {{date}}"
-msgstr ""
+msgstr "sau hoặc bằng {{date}}"
 
 msgid "before or equal to {{date}}"
-msgstr ""
+msgstr "trước hoặc bằng {{date}}"
 
 msgid "greater than or equal to"
 msgstr "lớn hơn hoặc bằng"
@@ -448,7 +454,7 @@ msgid "More filters"
 msgstr "Thêm bộ lọc"
 
 msgid "Select columns"
-msgstr ""
+msgstr "Chọn cột"
 
 msgid "Download as JSON"
 msgstr "Tải về dạng JSON"
@@ -460,52 +466,52 @@ msgid "Download as CSV"
 msgstr "Tải xuống với CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "Tải xuống với các bộ lọc hiện tại"
 
 msgid "Download data..."
-msgstr ""
+msgstr "Tải xuống dữ liệu ..."
 
 msgid "Rows per page"
 msgstr "Dòng mỗi trang"
 
 msgid "Update view"
-msgstr ""
+msgstr "Cập nhật chế độ xem"
 
 msgid "Save current view..."
-msgstr ""
+msgstr "Lưu chế độ xem hiện tại ..."
 
 msgid "Save current view as..."
-msgstr ""
+msgstr "Lưu chế độ xem hiện tại dưới dạng ..."
 
 msgid "Delete view"
-msgstr ""
+msgstr "Xóa chế độ xem"
 
 msgid "Share view..."
-msgstr ""
+msgstr "Chia sẻ chế độ xem ..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
+msgstr "Bạn có thực sự muốn xóa chế độ xem '{{templateName}}' không?"
 
 msgid "Confirm"
 msgstr "Xác nhận"
 
 msgid "Save As view"
-msgstr ""
+msgstr "Lưu dưới dạng xem"
 
 msgid "View name"
 msgstr "Xem tên"
 
 msgid "Show Less"
-msgstr ""
+msgstr "Hiện ít hơn"
 
 msgid "Show All"
-msgstr ""
+msgstr "Hiển thị tất cả"
 
 msgid "Working list could not be loaded"
-msgstr ""
+msgstr "Không thể tải danh sách làm việc"
 
 msgid "an error occurred loading working lists"
-msgstr ""
+msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
 
 msgid "Registered events"
 msgstr "Sự kiện đã đăng ký"
@@ -517,7 +523,7 @@ msgid "Completed"
 msgstr "Hoàn tất"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
+msgstr "Tạo {{TET}} mới trong {{program}} trong {{orgUnit}}"
 
 msgid "Save and add another"
 msgstr "Lưu và thêm sự kiện khác"
@@ -535,18 +541,20 @@ msgid "Switch to row view"
 msgstr "Chuyển sang xem dòng"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "{{TET}} mới"
 
 msgid "Working Lists"
-msgstr ""
+msgstr "Danh sách làm việc"
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
 msgstr ""
+"Chương trình có chương trình {{programId}} không phải là chương trình theo "
+"dõi. Việc đăng ký chỉ có thể được thực hiện trong các chương trình theo dõi."
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Người dùng được chỉ định"
 
 msgid "Relationships"
 msgstr "Mối quan hệ"
@@ -568,24 +576,24 @@ msgstr ""
 " để biết thêm chi tiết."
 
 msgid "This event"
-msgstr ""
+msgstr "Sự kiện này"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
-msgstr ""
+msgstr "Kiểu quan hệ {{mối quan hệTypeName}} với {{entityName}} đã tồn tại"
 
 msgid "New event"
 msgstr "Sự kiện mới"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "Kiểu quan hệ sự kiện mới"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "Thêm kiểu quan hệ vào sự kiện."
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "Quay lại sự kiện mà không lưu mối quan hệ"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -639,7 +647,7 @@ msgid "Link"
 msgstr ""
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "Lỗi siêu dữ liệu. xem nhật ký để biết chi tiết"
 
 msgid "Review duplicates"
 msgstr ""
