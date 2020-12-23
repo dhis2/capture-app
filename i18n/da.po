@@ -1,23 +1,19 @@
 # 
 # Translators:
-# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2020
 # phil_dhis2, 2020
-# Carwoto Sa'an <carwoto@gmail.com>, 2020
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
-"Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
+"Last-Translator: phil_dhis2, 2020\n"
+"Language-Team: Danish (https://www.transifex.com/hisp-uio/teams/100509/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: id\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -26,7 +22,7 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr "Hari ini"
+msgstr ""
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -44,7 +40,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr "Kolom"
+msgstr ""
 
 msgid "This value is validating"
 msgstr ""
@@ -113,13 +109,13 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr "Area"
+msgstr ""
 
 msgid "Coordinate"
-msgstr "Koordinat"
+msgstr "Coordinate"
 
 msgid "Enrollment"
-msgstr "Pendaftaran"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -128,7 +124,7 @@ msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Cancel"
-msgstr "Batal"
+msgstr "Cancel"
 
 msgid "Unsaved changes"
 msgstr ""
@@ -146,13 +142,13 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr "Kesalahan"
+msgstr ""
 
 msgid "Feedback"
-msgstr "Umpan balik"
+msgstr "Feedback"
 
 msgid "Indicators"
-msgstr "Indikator"
+msgstr "Indicators"
 
 msgid "Warnings"
 msgstr ""
@@ -161,7 +157,7 @@ msgid "search group result could not be retrieved"
 msgstr ""
 
 msgid "Complete"
-msgstr "Lengkap"
+msgstr ""
 
 msgid "Warnings found"
 msgstr ""
@@ -191,7 +187,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr "Urutkan"
+msgstr ""
 
 msgid "No events to display"
 msgstr ""
@@ -200,7 +196,7 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr "Tutup"
+msgstr "Close"
 
 msgid "Please select the user"
 msgstr ""
@@ -215,7 +211,7 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr "Tidak ada"
+msgstr "None"
 
 msgid "Select user"
 msgstr ""
@@ -224,34 +220,34 @@ msgid "to"
 msgstr ""
 
 msgid "From"
-msgstr "Dari"
+msgstr ""
 
 msgid "To"
-msgstr "Untuk"
+msgstr ""
 
 msgid "This week"
-msgstr "Minggu ini"
+msgstr ""
 
 msgid "This month"
-msgstr "Bulan ini"
+msgstr ""
 
 msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr "Minggu lalu"
+msgstr "Last week"
 
 msgid "Last month"
-msgstr "Bulan lalu"
+msgstr "Last month"
 
 msgid "Last 3 months"
-msgstr "3 bulan terakhir"
+msgstr "Last 3 months"
 
 msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr "Maks"
+msgstr "Max"
 
 msgid "Min"
 msgstr "Min"
@@ -260,34 +256,34 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "Ya"
+msgstr "Yes"
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "Tahun"
+msgstr ""
 
 msgid "Months"
-msgstr "Bulan"
+msgstr ""
 
 msgid "Days"
-msgstr "Hari"
+msgstr ""
 
 msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr "Terpilih"
+msgstr ""
 
 msgid "Delete"
-msgstr "Hapus"
+msgstr "Delete"
 
 msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "Tidak"
+msgstr "No"
 
 msgid "Uploading image"
 msgstr ""
@@ -296,10 +292,10 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr "Pencarian"
+msgstr ""
 
 msgid "Clear"
-msgstr "Hapus"
+msgstr "Clear"
 
 msgid "No results"
 msgstr ""
@@ -326,13 +322,13 @@ msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
-msgstr "Baru"
+msgstr "New"
 
 msgid "Start again"
 msgstr ""
 
 msgid "Find"
-msgstr "Cari"
+msgstr "Find"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -344,13 +340,13 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr "Terima"
+msgstr ""
 
 msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Select"
-msgstr "Pilih"
+msgstr ""
 
 msgid "Selected Program"
 msgstr ""
@@ -359,22 +355,22 @@ msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Show all"
-msgstr "Tampilkan semua"
+msgstr ""
 
 msgid "Program"
-msgstr "Program"
+msgstr ""
 
 msgid "Select program"
-msgstr "Pilih program"
+msgstr ""
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 msgid "Syncing"
 msgstr ""
@@ -404,7 +400,7 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr "Simpan"
+msgstr "Save"
 
 msgid "Show all events"
 msgstr ""
@@ -425,10 +421,10 @@ msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr "Hapus even"
+msgstr ""
 
 msgid "Update"
-msgstr "perbarui"
+msgstr "Update"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -452,13 +448,13 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr "Download dalam bentuk JSON"
+msgstr ""
 
 msgid "Download as XML"
-msgstr "Download dalam bentuk XML"
+msgstr ""
 
 msgid "Download as CSV"
-msgstr "Download dalam bentuk CSV"
+msgstr ""
 
 msgid "Download with current filters"
 msgstr ""
@@ -488,13 +484,13 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr "Konfirmasi"
+msgstr ""
 
 msgid "Save As view"
 msgstr ""
 
 msgid "View name"
-msgstr "Tampilkan nama"
+msgstr ""
 
 msgid "Show Less"
 msgstr ""
@@ -512,10 +508,10 @@ msgid "Registered events"
 msgstr ""
 
 msgid "Active"
-msgstr "Aktif"
+msgstr "Active"
 
 msgid "Completed"
-msgstr "Selesai"
+msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
@@ -550,7 +546,7 @@ msgid "Assigned user"
 msgstr ""
 
 msgid "Relationships"
-msgstr "Hubungan"
+msgstr ""
 
 msgid "Assignee"
 msgstr ""
@@ -559,7 +555,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr "dalam"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -575,7 +571,7 @@ msgid ""
 msgstr ""
 
 msgid "New event"
-msgstr "Event baru"
+msgstr ""
 
 msgid "New event relationship"
 msgstr ""
@@ -653,16 +649,16 @@ msgid "An error occured loading possible duplicates"
 msgstr ""
 
 msgid "Hide"
-msgstr "Sembunyikan"
+msgstr ""
 
 msgid "Save as new {{tetName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr "Unit Organisasi"
+msgstr ""
 
 msgid "Registration"
-msgstr "Pendaftaran"
+msgstr ""
 
 msgid "Review Duplicates"
 msgstr ""
@@ -689,7 +685,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr "Daftar"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr ""
@@ -703,7 +699,7 @@ msgid "No one is assigned to this event"
 msgstr ""
 
 msgid "Assign"
-msgstr "Daftarkan"
+msgstr ""
 
 msgid "Event assigned to {{name}}"
 msgstr ""
@@ -718,10 +714,10 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr "Tambahkan hubungan"
+msgstr ""
 
 msgid "Selected program"
-msgstr "Program yang dipilih"
+msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -745,7 +741,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr "Profil"
+msgstr "Profile"
 
 msgid "Error saving event"
 msgstr ""
@@ -772,22 +768,22 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "Tentukan koordinat"
+msgstr ""
 
 msgid "Date"
-msgstr "Tanggal"
+msgstr "Date"
 
 msgid "Time"
 msgstr ""
 
 msgid "From date"
-msgstr "Dari tanggal"
+msgstr ""
 
 msgid "From time"
 msgstr ""
 
 msgid "To date"
-msgstr "Ke tanggal"
+msgstr ""
 
 msgid "To time"
 msgstr ""
