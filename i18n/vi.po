@@ -58,6 +58,8 @@ msgstr "Viết bình luận"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
+"Dữ liệu của bạn đang tải lên. Vui lòng đợi cho đến khi thông báo này biến "
+"mất"
 
 msgid "No write access"
 msgstr "Không có quyền viết"
@@ -66,7 +68,7 @@ msgid "Save"
 msgstr "Lưu lại"
 
 msgid "Uploading data"
-msgstr ""
+msgstr "Tải lên dữ liệu"
 
 msgid "Sort"
 msgstr "Sắp xếp"
@@ -174,10 +176,10 @@ msgid "Syncing"
 msgstr "Đang đồng bộ"
 
 msgid "Field"
-msgstr ""
+msgstr "Trường"
 
 msgid "could not be updated"
-msgstr ""
+msgstr "không thể cập nhật"
 
 msgid "Start Again"
 msgstr "Khởi Đầu Lại"
@@ -186,16 +188,16 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr "Bạn có chắc không? Tất cả dữ liệu chưa được lưu sẽ bị mất."
 
 msgid "Reset Organisation Unit"
-msgstr ""
+msgstr "Đặt lại đơn vị "
 
 msgid "Reset Program"
-msgstr ""
+msgstr "Đặt lại chương trình"
 
 msgid "Reset Category Option"
-msgstr ""
+msgstr "Đặt lại tùy chọn phân loại"
 
 msgid "Create New Event"
-msgstr ""
+msgstr "Tạo sự kiện mới"
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Không thể tải sự kiện. Bạn có chắc nó tồn tại?"
@@ -268,7 +270,7 @@ msgid "Save and exit"
 msgstr "Lưu và đóng"
 
 msgid "Are you sure? All unsaved data will be lost"
-msgstr ""
+msgstr "Bạn có chắc không? Tất cả dữ liệu chưa được lưu sẽ bị mất"
 
 msgid "events added"
 msgstr "sự kiện đã được thêm"
@@ -289,7 +291,7 @@ msgid "Selected registering unit"
 msgstr "Đơn vị đăng ký đã chọn"
 
 msgid "Registering Oraginastion Unit"
-msgstr ""
+msgstr "Đăng ký đơn vị "
 
 msgid "Registering Organisation Unit"
 msgstr "Đơn Vị Đăng Ký"
