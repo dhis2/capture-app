@@ -617,6 +617,8 @@ msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
+"Rời khỏi trang này sẽ hủy các lựa chọn bạn đã thực hiện cho một mối quan hệ "
+"mới"
 
 msgid "events added"
 msgstr "sự kiện đã được thêm"
@@ -625,65 +627,69 @@ msgid "No events added"
 msgstr "Không có sự kiện được thêm"
 
 msgid "Choose a registering unit and program to get started"
-msgstr ""
+msgstr "Chọn đơn vị đăng ký và chương trình để bắt đầu"
 
 msgid "Choose a program to start reporting"
-msgstr ""
+msgstr "Chọn một chương trình để bắt đầu báo cáo"
 
 msgid "Choose a category option to start reporting"
-msgstr ""
+msgstr "Chọn một tùy chọn phân loại để bắt đầu báo cáo"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
+"Bạn không có quyền truy cập để tạo sự kiện trong các lựa chọn hiện tại"
 
 msgid "Review duplicates"
-msgstr ""
+msgstr "Xem lại các bản sao"
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "Tạo {{trackedEntityTypeName}} và liên kết"
 
 msgid "Review Duplicates"
-msgstr ""
+msgstr "Xem lại các bản sao"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
+"Tồn tại một bản sao nhưng có một số lỗi, hãy xem nhật ký để biết chi tiết"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
+"Một mục có {{attributeName}} này đã được đăng ký, nhưng bạn không có quyền "
+"truy cập vào nó"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "Bạn đã đăng ký {{attributeName}} này"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
-msgstr ""
+msgstr "{{TrackedEntityTypeName}} với {{attributeName}} này đã được đăng ký"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
 
 msgid "Registered person"
-msgstr ""
+msgstr "Người đã đăng ký"
 
 msgid "Link"
-msgstr ""
+msgstr "Liên kết"
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "Có thể tìm thấy các bản sao"
 
 msgid "No results found"
 msgstr "Không tìm thấy kết quả nào"
 
 msgid "An error occured loading possible duplicates"
-msgstr ""
+msgstr "Đã xảy ra lỗi khi tải các bản sao "
 
 msgid "Hide"
 msgstr "Ẩn"
 
 msgid "Save as new {{tetName}}"
-msgstr ""
+msgstr "Lưu dưới dạng {{tetName}} mới"
 
 msgid "Organisation Unit"
 msgstr "Đơn vị"
@@ -695,19 +701,19 @@ msgid "Search results"
 msgstr "Kết quả tìm kiếm"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "Không tìm thấy {{trackedEntityTypeName}}."
 
 msgid "New search"
-msgstr ""
+msgstr "Tìm kiếm mới"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Chỉnh sửa tìm kiếm"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "Liên kết đến {{trackedEntityType}} hiện có"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Tạo {{trackedEntityType}} mới"
 
 msgid "Register"
 msgstr "Đăng ký"
@@ -715,15 +721,16 @@ msgstr "Đăng ký"
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
+"Điền vào ít nhất {{minAttributesRequiredToSearch}} thuộc tính để tìm kiếm"
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "Tim kiêm {{name}}"
 
 msgid "Find by {{name}}"
-msgstr ""
+msgstr "Tìm theo {{name}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Tìm kiếm theo thuộc tính"
 
 msgid "Back"
 msgstr "Trở lại"
@@ -732,86 +739,97 @@ msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
 msgstr ""
+"Bạn có thể thay đổi cụm từ tìm kiếm của mình và tìm kiếm lại để tìm những gì"
+" bạn muốn."
 
 msgid "Back to search"
-msgstr ""
+msgstr "Quay lại tìm kiếm"
 
 msgid "An error has occurred"
-msgstr ""
+msgstr "một lỗi đã xảy ra"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later. For more details open the Console tab of the Developer tools"
 msgstr ""
+"Có sự cố với tìm kiếm này, vui lòng thay đổi cụm từ tìm kiếm hoặc thử lại "
+"sau. Để biết thêm chi tiết, hãy mở tab Bảng điều khiển của Công cụ dành cho "
+"nhà phát triển"
 
 msgid "Too many results"
-msgstr ""
+msgstr "Quá nhiều kết quả"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
 msgstr ""
+"Tìm kiếm này trả về quá nhiều kết quả để hiển thị. Thử thay đổi các cụm từ "
+"tìm kiếm hoặc tìm kiếm theo nhiều thuộc tính hơn để thu hẹp kết quả."
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "Chọn một loại để bắt đầu tìm kiếm"
 
 msgid "View dashboard"
-msgstr ""
+msgstr "Xem bảng điều khiển"
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "Xem đăng ký đang hoạt động"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "Đăng ký lại"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
 msgstr ""
+"Không tìm thấy kết quả bạn đang tìm kiếm? Cố gắng tìm kiếm tất cả các chương"
+" trình sử dụng loại"
 
 msgid "Search in all programs"
-msgstr ""
+msgstr "Tìm kiếm trong tất cả các chương trình"
 
 msgid "You dont have access to edit this event"
-msgstr ""
+msgstr "Bạn không có quyền truy cập để chỉnh sửa sự kiện này"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
+"Rời khỏi trang này sẽ hủy mọi lựa chọn bạn đã thực hiện cho một mối quan hệ "
+"mới"
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "Không ai được chỉ định cho sự kiện này"
 
 msgid "Assign"
 msgstr "Gán"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "Sự kiện được chỉ định cho {{name}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "Phản hồi"
 
 msgid "You dont have access to delete this relationship"
-msgstr ""
+msgstr "Bạn không có quyền truy cập để xóa mối quan hệ này"
 
 msgid "You dont have access to create any relationships"
-msgstr ""
+msgstr "Bạn không có quyền truy cập để tạo bất kỳ mối quan hệ nào"
 
 msgid "Add relationship"
 msgstr "Thêm Quan Hệ"
 
 msgid "Results found"
-msgstr ""
+msgstr "Kết quả tìm thấy"
 
 msgid "Selected program"
 msgstr "Chương trình đã chọn"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Tìm kiếm {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "Điền vào ít nhất {{minAttributesRequired}} thuộc tính để tìm kiếm"
 
 msgid "Search for"
 msgstr "Tìm"
@@ -819,21 +837,23 @@ msgstr "Tìm"
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
+"Bạn cũng có thể chọn một chương trình từ thanh trên cùng và tìm kiếm trong "
+"chương trình đó"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "Để làm việc với chương trình đã chọn,"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "mở ứng dụng Tracker Capture"
 
 msgid "An error has occured. See log for details"
 msgstr "Có lỗi. Xem log để biết thêm chi tiết."
 
 msgid "Program not found"
-msgstr ""
+msgstr "Chương trình không tìm thấy"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "Chương trình không phải là một chương trình theo dõi"
 
 msgid "Profile"
 msgstr "Hồ sơ"
@@ -845,28 +865,28 @@ msgid "Could not save event. See log for details"
 msgstr "Không thể lưu sự kiện. Xem log để biết thêm chi tiết"
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "Không thể xóa sự kiện"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "Không thể lưu danh sách làm việc"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "Không thể thêm danh sách làm việc"
 
 msgid "Could not delete working list"
-msgstr ""
+msgstr "Không thể xóa danh sách làm việc"
 
 msgid "Organisation unit search failed. See log for details"
-msgstr ""
+msgstr "Tìm kiếm đơn vị không thành công. Xem nhật ký để biết chi tiết"
 
 msgid "tracked entity instance"
-msgstr ""
+msgstr "thực thể được theo dõi"
 
 msgid "Set coordinate"
 msgstr "Đặt tọa độ"
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "Trang {{currentPage}}"
 
 msgid "Date"
 msgstr "Ngày"
@@ -878,25 +898,25 @@ msgid "From date"
 msgstr "Từ ngày"
 
 msgid "From time"
-msgstr ""
+msgstr "Từ "
 
 msgid "To date"
 msgstr "Đến ngày"
 
 msgid "To time"
-msgstr ""
+msgstr "Đến "
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "gặp lỗi trong quá trình xác thực trường"
 
 msgid "error"
-msgstr ""
+msgstr "lỗi"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Xóa đa giác"
 
 msgid "Set area"
-msgstr ""
+msgstr "Đặt khu vực"
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "Chế độ tương thích"
