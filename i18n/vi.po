@@ -27,7 +27,7 @@ msgid "Cancel"
 msgstr "Hủy"
 
 msgid "Discard event?"
-msgstr ""
+msgstr "Hủy sự kiện?"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -37,7 +37,7 @@ msgid "Discard"
 msgstr "Bỏ"
 
 msgid "Back to event"
-msgstr ""
+msgstr "Quay lại sự kiện"
 
 msgid "Add comment"
 msgstr "Thêm bình luận"
@@ -68,6 +68,8 @@ msgstr "Hủy bỏ"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
+"Dữ liệu của bạn đang tải lên. Vui lòng đợi cho đến khi thông báo này biến "
+"mất"
 
 msgid "No write access"
 msgstr "Không có quyền viết"
@@ -76,7 +78,7 @@ msgid "Save"
 msgstr "Lưu lại"
 
 msgid "Uploading data"
-msgstr ""
+msgstr "Tải lên dữ liệu"
 
 msgid "Sort"
 msgstr "Sắp xếp"
@@ -199,10 +201,10 @@ msgid "Comments"
 msgstr "Bình luận"
 
 msgid "Field"
-msgstr ""
+msgstr "Trường"
 
 msgid "could not be updated"
-msgstr ""
+msgstr "không thể cập nhật"
 
 msgid "Please provide a valid date"
 msgstr "Xin vui lòng cung cấp ngày đúng"
@@ -353,10 +355,10 @@ msgid "Set coordinate"
 msgstr "Đặt tọa độ"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Xóa đa giác"
 
 msgid "Set area"
-msgstr ""
+msgstr "Đặt khu vực"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
