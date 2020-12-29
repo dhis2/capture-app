@@ -8,6 +8,10 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 
 
 const styles = ({ typography }) => ({
+    container: {
+        marginLeft: typography.pxToRem(8),
+        marginTop: typography.pxToRem(8),
+    },
     marginLeft: {
         marginLeft: typography.pxToRem(12),
     },
@@ -52,7 +56,7 @@ const Index = ({
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
 
     return (
-        <>
+        <div className={classes.container}>
             <Button
                 small
                 secondary
@@ -118,7 +122,7 @@ const Index = ({
                     :
                     null
             }
-        </>
+        </div>
     );
 };
 

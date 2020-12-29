@@ -5,17 +5,26 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-
+import { colors } from '@dhis2/ui';
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 
 import ProgramSelector from './Program/ProgramSelector.component';
 import OrgUnitSelector from './OrgUnitSelector.component';
 import { ActionButtons } from './ActionButtons.component';
 
-const styles = () => ({
+const styles = ({ palette }) => ({
     paper: {
         flexGrow: 1,
-        padding: 10,
+    },
+    programSelector: {
+        backgroundColor: palette.grey.lighter,
+        borderRight: `1px solid ${colors.grey500}`,
+    },
+    orgUnitSelector: {
+        backgroundColor: palette.grey.lighter,
+        margin: '0 0 0 -1px',
+        borderRight: `1px solid ${colors.grey500}`,
+        borderLeft: `1px solid ${colors.grey500}`,
     },
 });
 
@@ -71,14 +80,14 @@ class QuickSelector extends Component<Props> {
         const selectedProgramId = this.props.selectedProgramId;
         const selectedProgram = QuickSelector.getSelectedProgram(selectedProgramId);
 
-        let orgUnitSelectorWidth = 3;
-        let programSelectorWidth = 3;
-        let actionButtonsWidth = 6;
+        let orgUnitSelectorWidth = 2;
+        let programSelectorWidth = 2;
+        let actionButtonsWidth = 4;
 
         if (selectedProgram && selectedProgram.categoryCombination) {
-            orgUnitSelectorWidth = 3;
-            programSelectorWidth = 6;
-            actionButtonsWidth = 3;
+            orgUnitSelectorWidth = 2;
+            programSelectorWidth = 4;
+            actionButtonsWidth = 2;
         }
 
         return {
@@ -93,16 +102,8 @@ class QuickSelector extends Component<Props> {
 
         return (
             <Paper className={this.props.classes.paper}>
-                <Grid container spacing={16}>
-                    <Grid item xs={12} sm={orgUnitSelectorWidth}>
-                        <OrgUnitSelector
-                            selectedOrgUnitId={this.props.selectedOrgUnitId}
-                            handleClickOrgUnit={this.handleClickOrgUnit}
-                            selectedOrgUnit={this.props.selectedOrgUnit}
-                            onReset={this.props.onResetOrgUnitId}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={programSelectorWidth}>
+                <Grid container spacing={0}>
+                    <Grid item xs={12} sm={programSelectorWidth} className={this.props.classes.programSelector}>
                         <ProgramSelector
                             selectedProgram={this.props.selectedProgramId}
                             selectedOrgUnitId={this.props.selectedOrgUnitId}
@@ -114,6 +115,14 @@ class QuickSelector extends Component<Props> {
                             onResetProgramId={this.props.onResetProgramId}
                             onResetCategoryOption={this.props.onResetCategoryOption}
                             onResetOrgUnit={this.props.onResetOrgUnitId}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={orgUnitSelectorWidth} className={this.props.classes.orgUnitSelector}>
+                        <OrgUnitSelector
+                            selectedOrgUnitId={this.props.selectedOrgUnitId}
+                            handleClickOrgUnit={this.handleClickOrgUnit}
+                            selectedOrgUnit={this.props.selectedOrgUnit}
+                            onReset={this.props.onResetOrgUnitId}
                         />
                     </Grid>
                     <Grid item xs={12} sm={actionButtonsWidth}>
