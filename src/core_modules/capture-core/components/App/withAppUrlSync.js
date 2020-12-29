@@ -24,28 +24,30 @@ const pageKeys = {
     VIEW_EVENT: 'viewEvent',
     SEARCH: 'search',
     NEW: 'new',
+    ENROLLMENT: 'enrollment',
+};
+
+const programIdProperties = {
+    urlKey: 'programId',
+    propKey: 'programId',
+};
+const orgUnitIdProperties = {
+    urlKey: 'orgUnitId',
+    propKey: 'orgUnitId',
+};
+const trackedEntityTypeIdProperties = {
+    urlKey: 'trackedEntityTypeId',
+    propKey: 'trackedEntityTypeId',
 };
 
 const specificationForPages = {
     [pageKeys.MAIN]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
+        programIdProperties,
+        orgUnitIdProperties,
     ],
     [pageKeys.NEW_EVENT]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
+        programIdProperties,
+        orgUnitIdProperties,
     ],
     [pageKeys.VIEW_EVENT]: [
         {
@@ -54,32 +56,18 @@ const specificationForPages = {
         },
     ],
     [pageKeys.SEARCH]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
-        {
-            urlKey: 'trackedEntityTypeId',
-            propKey: 'trackedEntityTypeId',
-        },
+        programIdProperties,
+        orgUnitIdProperties,
     ],
     [pageKeys.NEW]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
-        {
-            urlKey: 'trackedEntityTypeId',
-            propKey: 'trackedEntityTypeId',
-        },
+        programIdProperties,
+        orgUnitIdProperties,
+        trackedEntityTypeIdProperties,
+    ],
+    [pageKeys.ENROLLMENT]: [
+        programIdProperties,
+        orgUnitIdProperties,
+        trackedEntityTypeIdProperties,
     ],
 };
 
@@ -88,6 +76,7 @@ const updaterForPages = {
     [pageKeys.NEW_EVENT]: updateSelectionsFromUrl,
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.NEW]: updateSelectionsFromUrl,
+    [pageKeys.ENROLLMENT]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
 };
 
