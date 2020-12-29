@@ -8,7 +8,6 @@ import {
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../components/Pages/NewEvent';
 import { actionTypes as viewEventDataEntryActionTypes } from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
-import { enrollmentPageActionTypes } from "../../components/Pages/Enrollment/EnrollmentPage.actions";
 
 export const activePageDesc = createReducerDescription({
     [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
@@ -18,12 +17,6 @@ export const activePageDesc = createReducerDescription({
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: state => ({
         ...state,
         isPageLoading: true,
-    }),
-
-    [enrollmentPageActionTypes.BASED_ON_ENROLLMENT_ID_SELECTIONS_FROM_URL_UPDATE]: state => ({
-        ...state,
-        // todo
-        isPageLoading: false,
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID]: state => ({
         ...state,

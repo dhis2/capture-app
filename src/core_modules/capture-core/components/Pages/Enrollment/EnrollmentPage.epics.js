@@ -22,8 +22,8 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
                         let r;
                         return of(showInitialViewOnEnrollmentPage());
                     }),
-                    // startWith(showLoadingViewOnEnrollmentPage()),
-                    // catchError(() => of(showErrorViewOnEnrollmentPage())),
+                    startWith(showLoadingViewOnEnrollmentPage()),
+                    catchError(() => of(showErrorViewOnEnrollmentPage())),
                 ),
         ),
     );
