@@ -38,9 +38,8 @@ const styles = (theme: Theme) => ({
     },
     selectedText: {
         marginTop: 5,
-        marginLeft: 5,
         padding: 5,
-        borderLeft: '2px solid #71a4f8',
+        borderLeft: '2px solid #147cd7',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
