@@ -117,8 +117,7 @@ class QuickSelector extends Component<Props> {
                         />
                     </Grid>
                     {
-                        currentPage === 'enrollment'
-                        &&
+                        currentPage === 'enrollment' &&
                         <>
                             <Grid item xs={12} sm={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                 <SingleLockedSelect title={i18n.t('Person')} />
