@@ -80,14 +80,14 @@ class QuickSelector extends Component<Props> {
         const selectedProgramId = this.props.selectedProgramId;
         const selectedProgram = QuickSelector.getSelectedProgram(selectedProgramId);
 
-        let orgUnitSelectorWidth = 2;
-        let programSelectorWidth = 2;
-        let actionButtonsWidth = 4;
+        let orgUnitSelectorWidth = 3;
+        let programSelectorWidth = 3;
+        let actionButtonsWidth = 3;
 
         if (selectedProgram && selectedProgram.categoryCombination) {
-            orgUnitSelectorWidth = 2;
-            programSelectorWidth = 4;
-            actionButtonsWidth = 2;
+            orgUnitSelectorWidth = 3;
+            programSelectorWidth = 5;
+            actionButtonsWidth = 3;
         }
 
         return {
