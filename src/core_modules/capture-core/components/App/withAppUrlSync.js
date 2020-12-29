@@ -67,7 +67,6 @@ const specificationForPages = {
     [pageKeys.ENROLLMENT]: [
         programIdProperties,
         orgUnitIdProperties,
-        trackedEntityTypeIdProperties,
     ],
 };
 
