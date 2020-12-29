@@ -20,6 +20,7 @@ import {
 } from '../../components/LockedSelector';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -126,6 +127,10 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         locationSwitchInProgress: true,
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => ({
+        ...state,
+        page: action.payload.nextPage,
+    }),
+    [enrollmentPageActionTypes.BASED_ON_ENROLLMENT_ID_SELECTIONS_FROM_URL_UPDATE]: (state, action) => ({
         ...state,
         page: action.payload.nextPage,
     }),

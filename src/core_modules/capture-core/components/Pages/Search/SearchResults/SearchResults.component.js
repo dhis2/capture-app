@@ -148,16 +148,17 @@ export const SearchResultsIndex = ({
             currentProgramId={currentProgramId}
             items={searchResults}
             dataElements={dataElements}
-            getCustomItemBottomElements={({ item, navigationButtonsState, programName }) => (
-                <CardListButtons
+            getCustomItemBottomElements={({ item, navigationButtonsState, programName }) => {
+                debugger;
+                return (<CardListButtons
                     programName={programName}
                     currentSearchScopeId={currentSearchScopeId}
                     currentSearchScopeType={currentSearchScopeType}
                     id={item.id}
                     orgUnitId={item.tei.orgUnit}
                     navigationButtonsState={navigationButtonsState}
-                />
-            )}
+                />);
+            }}
         />
         <div className={classes.pagination}>
             <SearchPagination

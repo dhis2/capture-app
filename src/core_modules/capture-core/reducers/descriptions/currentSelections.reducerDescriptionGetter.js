@@ -18,6 +18,7 @@ import {
 } from '../../components/LockedSelector';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
+import { enrollmentPageActionTypes } from "../../components/Pages/Enrollment/EnrollmentPage.actions";
 
 const setCategoryOption = (
     state: Object,
@@ -171,6 +172,16 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         complete: false,
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => {
+        const { nextProps: selections } = action.payload;
+        return {
+            ...state,
+            ...selections,
+            categories: undefined,
+            categoriesMeta: undefined,
+            complete: false,
+        };
+    },
+    [enrollmentPageActionTypes.BASED_ON_ENROLLMENT_ID_SELECTIONS_FROM_URL_UPDATE]: (state, action) => {
         const { nextProps: selections } = action.payload;
         return {
             ...state,
