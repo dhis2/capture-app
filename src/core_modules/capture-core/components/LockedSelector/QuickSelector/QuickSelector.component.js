@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-
+import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { colors } from '@dhis2/ui';
@@ -11,6 +11,7 @@ import programs from 'capture-core/metaDataMemoryStores/programCollection/progra
 import ProgramSelector from './Program/ProgramSelector.component';
 import OrgUnitSelector from './OrgUnitSelector.component';
 import { ActionButtons } from './ActionButtons.component';
+import { SingleLockedSelect } from './SingleLockedSelect.component';
 
 const styles = ({ palette }) => ({
     paper: {
@@ -80,30 +81,20 @@ class QuickSelector extends Component<Props> {
         const selectedProgramId = this.props.selectedProgramId;
         const selectedProgram = QuickSelector.getSelectedProgram(selectedProgramId);
 
-        let orgUnitSelectorWidth = 3;
-        let programSelectorWidth = 3;
-        let actionButtonsWidth = 3;
-
-        if (selectedProgram && selectedProgram.categoryCombination) {
-            orgUnitSelectorWidth = 3;
-            programSelectorWidth = 5;
-            actionButtonsWidth = 3;
-        }
-
         return {
-            orgUnitSelectorWidth,
-            programSelectorWidth,
-            actionButtonsWidth,
+            programSelectorWidth: selectedProgram && selectedProgram.categoryCombination ? 4 : 2,
+            width: 2,
         };
     }
 
     render() {
-        const { orgUnitSelectorWidth, programSelectorWidth, actionButtonsWidth } = this.calculateColumnWidths();
+        const { width, programSelectorWidth } = this.calculateColumnWidths();
+        const { currentPage } = this.props;
 
         return (
             <Paper className={this.props.classes.paper}>
                 <Grid container spacing={0}>
-                    <Grid item xs={12} sm={programSelectorWidth} className={this.props.classes.programSelector}>
+                    <Grid item xs={12} sm={programSelectorWidth * 2} lg={programSelectorWidth} className={this.props.classes.programSelector}>
                         <ProgramSelector
                             selectedProgram={this.props.selectedProgramId}
                             selectedOrgUnitId={this.props.selectedOrgUnitId}
@@ -117,7 +108,7 @@ class QuickSelector extends Component<Props> {
                             onResetOrgUnit={this.props.onResetOrgUnitId}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={orgUnitSelectorWidth} className={this.props.classes.orgUnitSelector}>
+                    <Grid item xs={12} sm={width * 2} lg={width} className={this.props.classes.orgUnitSelector}>
                         <OrgUnitSelector
                             selectedOrgUnitId={this.props.selectedOrgUnitId}
                             handleClickOrgUnit={this.handleClickOrgUnit}
@@ -125,7 +116,20 @@ class QuickSelector extends Component<Props> {
                             onReset={this.props.onResetOrgUnitId}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={actionButtonsWidth}>
+                    {
+                        currentPage === 'enrollment'
+                        &&
+                        <>
+                            <Grid item xs={12} sm={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
+                                <SingleLockedSelect title={i18n.t('Person')} />
+                            </Grid>
+                            <Grid item xs={12} sm={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
+                                <SingleLockedSelect title={i18n.t('Enrollment')} />
+                            </Grid>
+                        </>
+
+                    }
+                    <Grid item xs={12} sm={width * 2} lg={2} >
                         <ActionButtons
                             selectedProgramId={this.props.selectedProgramId}
                             onStartAgainClick={this.props.onStartAgain}

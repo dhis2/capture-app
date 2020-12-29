@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-12-03T16:03:19.413Z\n"
-"PO-Revision-Date: 2020-12-03T16:03:19.413Z\n"
+"POT-Creation-Date: 2020-12-29T12:57:03.779Z\n"
+"PO-Revision-Date: 2020-12-29T12:57:03.779Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -399,6 +399,9 @@ msgid "Select program"
 msgstr ""
 
 msgid "No programs available."
+msgstr ""
+
+msgid "Person"
 msgstr ""
 
 msgid "Online"
