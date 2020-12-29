@@ -10,6 +10,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 const styles = ({ typography }) => ({
     container: {
         marginLeft: typography.pxToRem(8),
+        marginBottom: typography.pxToRem(8),
         marginTop: typography.pxToRem(8),
     },
     marginLeft: {

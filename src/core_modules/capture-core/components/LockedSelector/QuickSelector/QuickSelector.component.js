@@ -94,7 +94,7 @@ class QuickSelector extends Component<Props> {
         return (
             <Paper className={this.props.classes.paper}>
                 <Grid container spacing={0}>
-                    <Grid item xs={12} sm={programSelectorWidth * 2} lg={programSelectorWidth} className={this.props.classes.programSelector}>
+                    <Grid item xs={12} sm={programSelectorWidth * 3} md={programSelectorWidth * 2} lg={programSelectorWidth} className={this.props.classes.programSelector}>
                         <ProgramSelector
                             selectedProgram={this.props.selectedProgramId}
                             selectedOrgUnitId={this.props.selectedOrgUnitId}
@@ -108,7 +108,7 @@ class QuickSelector extends Component<Props> {
                             onResetOrgUnit={this.props.onResetOrgUnitId}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={width * 2} lg={width} className={this.props.classes.orgUnitSelector}>
+                    <Grid item xs={12} sm={width * 3} md={width * 2} lg={width} className={this.props.classes.orgUnitSelector}>
                         <OrgUnitSelector
                             selectedOrgUnitId={this.props.selectedOrgUnitId}
                             handleClickOrgUnit={this.handleClickOrgUnit}
@@ -119,16 +119,16 @@ class QuickSelector extends Component<Props> {
                     {
                         currentPage === 'enrollment' &&
                         <>
-                            <Grid item xs={12} sm={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
+                            <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                 <SingleLockedSelect title={i18n.t('Person')} />
                             </Grid>
-                            <Grid item xs={12} sm={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
+                            <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                 <SingleLockedSelect title={i18n.t('Enrollment')} />
                             </Grid>
                         </>
 
                     }
-                    <Grid item xs={12} sm={width * 2} lg={2} >
+                    <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} >
                         <ActionButtons
                             selectedProgramId={this.props.selectedProgramId}
                             onStartAgainClick={this.props.onStartAgain}
