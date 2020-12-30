@@ -27,8 +27,10 @@ export const enrollmentPageDesc = createReducerDescription({
         enrollmentPageStatus: enrollmentPageStatuses.ERROR,
     }),
     [ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS]:
-      state => ({
+      (state, { payload: { selectedEnrollment, enrollmentsSortedByDate } }) => ({
           ...state,
+          selectedEnrollment,
+          enrollments: enrollmentsSortedByDate,
           enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
       }),
 }, 'enrollmentPage', initialReducerValue);

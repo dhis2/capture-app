@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
+import i18n from '@dhis2/d2-i18n';
 import Select from 'react-virtualized-select';
 
 const styles = (theme: Theme) => ({
@@ -64,9 +65,9 @@ const styles = (theme: Theme) => ({
 type Props = {|
     options: Array<{|label: string, value: any, |}>,
     onClear?: () => void,
-    onSelect?: () => void,
+    onSelect?: (value: string) => void,
     title: string,
-    selectedText: ?string,
+    selectedValue: string,
     ...CssClasses
 |};
 
@@ -75,32 +76,35 @@ const SingleLockedSelectPlain =
       onClear,
       onSelect,
       title,
-      selectedText,
+      selectedValue,
       options,
       classes,
   }: Props) => {
       const [selected, toggleSelected] = useState(false);
       useEffect(
-          () => toggleSelected(Boolean(selectedText)),
-          [selectedText],
+          () => toggleSelected(Boolean(selectedValue)),
+          [selectedValue],
       );
 
       const handleOnClear = () => {
           toggleSelected(false);
           onClear && onClear();
       };
-      const handleOnSelect = () => {
+      const handleOnSelect = ({ value }) => {
           toggleSelected(true);
-          onSelect && onSelect();
+          onSelect && onSelect(value);
       };
 
+      const { label } = options.find((({ value }) => value === selectedValue)) || {};
       return (<>
           {
               selected ?
                   <Paper square elevation={0} className={classes.selectedPaper}>
-                      <h4 className={classes.title}>{ title }</h4>
+                      <h4 className={classes.title}>
+                          {i18n.t('Selected')} {title}
+                      </h4>
                       <div className={classes.selectedItemContainer}>
-                          <div>{selectedText}</div>
+                          <div>{label}</div>
 
                           <div className={classes.selectedItemClear}>
                               <IconButton className={classes.selectedButton} onClick={handleOnClear}>
@@ -112,7 +116,9 @@ const SingleLockedSelectPlain =
                   :
                   <div data-test="dhis2-capture-org-unit-selector-container">
                       <Paper square elevation={0} className={classes.paper}>
-                          <h4 className={classes.title}>{ title }</h4>
+                          <h4 className={classes.title}>
+                              { title }
+                          </h4>
                           <Select
                               onChange={handleOnSelect}
                               options={options}

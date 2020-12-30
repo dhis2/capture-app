@@ -48,8 +48,11 @@ type Props = {
     onFindClick: () => void,
     onFindClickWithoutProgramId: () => void,
     currentPage: string,
+    selectedEnrollmentId: string,
     selectedTrackedEntityTypeName: string,
     onTrackedEntityInstanceClear: () => void,
+    enrollmentsAsOptions: Array<Object>,
+    onEnrollmentSelectionSet: () => void,
 };
 
 class QuickSelector extends Component<Props> {
@@ -93,7 +96,14 @@ class QuickSelector extends Component<Props> {
 
     render() {
         const { width, programSelectorWidth } = this.calculateColumnWidths();
-        const { currentPage, selectedTrackedEntityTypeName, onTrackedEntityInstanceClear } = this.props;
+        const {
+            currentPage,
+            selectedTrackedEntityTypeName,
+            enrollmentsAsOptions,
+            selectedEnrollmentId,
+            onTrackedEntityInstanceClear,
+            onEnrollmentSelectionSet,
+        } = this.props;
 
         return (
             <Paper className={this.props.classes.paper}>
@@ -129,13 +139,24 @@ class QuickSelector extends Component<Props> {
                                     options={[
                                         {
                                             label: selectedTrackedEntityTypeName,
-                                            value: selectedTrackedEntityTypeName,
+                                            value: 'one',
                                         },
                                     ]}
-                                    selectedText={selectedTrackedEntityTypeName}
+                                    selectedValue="one"
                                     title={i18n.t('Selected Tracked Entity Type')}
                                 />
                             </Grid>
+                            {
+                                enrollmentsAsOptions &&
+                                <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
+                                    <SingleLockedSelect
+                                        onSelect={onEnrollmentSelectionSet}
+                                        options={enrollmentsAsOptions}
+                                        selectedValue={selectedEnrollmentId}
+                                        title={i18n.t('Enrollment')}
+                                    />
+                                </Grid>
+                            }
                         </>
 
                     }

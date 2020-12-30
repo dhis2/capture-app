@@ -2,21 +2,41 @@
 
 import { connect } from 'react-redux';
 import QuickSelector from './QuickSelector.component';
-import { clearTrackedEntityInstanceSelection } from '../../Pages/Enrollment/EnrollmentPage.actions';
+import { clearTrackedEntityInstanceSelection, setEnrollmentSelection } from '../../Pages/Enrollment/EnrollmentPage.actions';
+import { convertValue } from '../../../converters/clientToView';
+import { dataElementTypes } from '../../../metaData/DataElement';
 
-const mapStateToProps = (state: Object) => ({
-    selectedProgramId: state.currentSelections.programId,
-    selectedCategories: state.currentSelections.categoriesMeta,
-    selectedOrgUnitId: state.currentSelections.orgUnitId,
-    selectedOrgUnit: state.currentSelections.orgUnitId ? state.organisationUnits[state.currentSelections.orgUnitId] : null,
-    currentPage: state.app.page,
-    selectedTrackedEntityTypeName: state.currentSelections.trackedEntityTypeDisplayName,
-});
+const buildEnrollmentsAsOptions = (enrollments = []) =>
+    enrollments
+        .map(({ created, enrollment }) => (
+            {
+                label: convertValue(created, dataElementTypes.DATETIME),
+                value: enrollment,
+            }
+        ));
+const mapStateToProps = (state: Object) => {
+    const { currentSelections, app, enrollmentPage, organisationUnits } = state;
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollmentPage.enrollments);
+
+    return {
+        selectedProgramId: currentSelections.programId,
+        selectedCategories: currentSelections.categoriesMeta,
+        selectedOrgUnitId: currentSelections.orgUnitId,
+        selectedEnrollmentId: currentSelections.enrollmentId,
+        selectedOrgUnit: currentSelections.orgUnitId ? organisationUnits[currentSelections.orgUnitId] : null,
+        currentPage: app.page,
+        selectedTrackedEntityTypeName: currentSelections.trackedEntityTypeDisplayName,
+        enrollmentsAsOptions,
+    };
+};
 
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onTrackedEntityInstanceClear: () => {
         dispatch(clearTrackedEntityInstanceSelection());
+    },
+    onEnrollmentSelectionSet: (enrollmentId) => {
+        dispatch(setEnrollmentSelection({ enrollmentId }));
     },
 });
 

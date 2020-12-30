@@ -8,6 +8,7 @@ export const enrollmentPageActionTypes = {
     ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_ERROR: 'ErrorOnFetchingEnrollmentPageInformationBasedOnIdFromUrl',
     ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS: 'SuccessfulFetchingFetchEnrollmentPageInformationBasedOnIdFromUrl',
     TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR: 'ClearTrackedEntityInstanceSelection',
+    ENROLLMENT_SELECTION_SET: 'SetEnrollmentSelection',
 };
 
 export const showInitialViewOnEnrollmentPage = () =>
@@ -22,8 +23,13 @@ export const showLoadingViewOnEnrollmentPage = () =>
 export const showErrorViewOnEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY)();
 
-export const successfulFetchingEnrollmentPageInformationFromUrl = ({ selectedName }: Object) =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS)({ selectedName });
+export const successfulFetchingEnrollmentPageInformationFromUrl = ({ selectedName, selectedEnrollment, enrollmentsSortedByDate }: Object) =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS)(
+        { selectedName, selectedEnrollment, enrollmentsSortedByDate },
+    );
 
 export const clearTrackedEntityInstanceSelection = () =>
     actionCreator(enrollmentPageActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR)();
+
+export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET)({ enrollmentId });
