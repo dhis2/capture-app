@@ -186,8 +186,7 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) =>
-            // $FlowFixMe[invalid-computed-prop] automated comment
-            dispatch(updaterForPages[page](updateData)),
+            page != null && dispatch(updaterForPages[page](updateData)),
     });
 
     // $FlowFixMe[missing-annot] automated comment

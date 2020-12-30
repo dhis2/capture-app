@@ -15,6 +15,7 @@ import {
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
 import { urlArguments } from '../../utils/url';
+import { enrollmentPageActionTypes } from '../Pages/Enrollment/EnrollmentPage.actions';
 
 const exactUrl = (page: string, url: string) => {
     if (page && page !== 'viewEvent') {
@@ -33,10 +34,10 @@ export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: 
         ),
         map(() => {
             const {
-                currentSelections: { programId, orgUnitId, trackedEntityTypeId },
+                currentSelections: { programId, orgUnitId, trackedEntityTypeId, enrollmentId },
                 app: { page },
             } = store.value;
-            return push(exactUrl(page, urlArguments({ programId, orgUnitId, trackedEntityTypeId })));
+            return push(exactUrl(page, urlArguments({ programId, orgUnitId, trackedEntityTypeId, enrollmentId })));
         }));
 
 export const startAgainEpic = (action$: InputObservable) =>
@@ -46,7 +47,10 @@ export const startAgainEpic = (action$: InputObservable) =>
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE),
+        ofType(
+            lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE,
+            enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START,
+        ),
         filter(action => action.payload.nextProps.orgUnitId),
         switchMap(action => getApi()
             .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
@@ -62,7 +66,10 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
 
 export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE),
+        ofType(
+            lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE,
+            enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START,
+        ),
         filter(action => !action.payload.nextProps.orgUnitId),
         map(() => setEmptyOrgUnitBasedOnUrl()));
 
