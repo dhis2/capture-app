@@ -23,9 +23,9 @@ export const showLoadingViewOnEnrollmentPage = () =>
 export const showErrorViewOnEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY)();
 
-export const successfulFetchingEnrollmentPageInformationFromUrl = ({ selectedName, selectedEnrollment, enrollmentsSortedByDate }: Object) =>
+export const successfulFetchingEnrollmentPageInformationFromUrl = ({ selectedName, enrollmentsSortedByDate }: Object) =>
     actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS)(
-        { selectedName, selectedEnrollment, enrollmentsSortedByDate },
+        { selectedName, enrollmentsSortedByDate },
     );
 
 export const clearTrackedEntityInstanceSelection = () =>

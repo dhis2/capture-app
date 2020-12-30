@@ -32,16 +32,14 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
                                         (acc, { value: dataElementValue }) =>
                                             (acc ? `${acc} ${dataElementValue}` : dataElementValue),
                                         '');
-                                    const selectedEnrollment =
-                                      enrollments
-                                          .find(({ enrollment }) => enrollment === enrollmentId);
-
                                     const enrollmentsSortedByDate =
                                       enrollments
-                                          .sort((a, b) => moment.utc(a.enrollmentDate).diff(moment.utc(b.enrollmentDate)));
+                                          .sort((a, b) =>
+                                              moment.utc(a.enrollmentDate).diff(moment.utc(b.enrollmentDate)),
+                                          );
+
                                     return successfulFetchingEnrollmentPageInformationFromUrl({
                                         selectedName,
-                                        selectedEnrollment,
                                         enrollmentsSortedByDate,
                                     });
                                 }),
@@ -61,8 +59,12 @@ export const clearTrackedEntityInstanceSelectionEpic = (action$: InputObservable
         }),
     );
 
-export const setEnrollmentSelectionEpic = (action$: InputObservable) =>
+export const setEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET),
-        map(({ payload: { enrollmentId } }) => push(`/enrollment/${urlArguments({ enrollmentId })}`)),
+        map(({ payload: { enrollmentId } }) => {
+            const { currentSelections: { programId, orgUnitId } } = store.value;
+
+            return push(`/enrollment/${urlArguments({ programId, orgUnitId, enrollmentId })}`);
+        }),
     );
