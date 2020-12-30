@@ -94,7 +94,6 @@ const SingleLockedSelectPlain =
           onSelect && onSelect();
       };
 
-      debugger;
       return (<>
           {
               selected ?

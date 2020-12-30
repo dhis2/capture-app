@@ -12,6 +12,7 @@ import ProgramSelector from './Program/ProgramSelector.component';
 import OrgUnitSelector from './OrgUnitSelector.component';
 import { ActionButtons } from './ActionButtons.component';
 import { SingleLockedSelect } from './SingleLockedSelect.component';
+import { pageKeys } from '../../App/withAppUrlSync';
 
 const styles = ({ palette }) => ({
     paper: {
@@ -46,7 +47,9 @@ type Props = {
     onNewClick: () => void,
     onFindClick: () => void,
     onFindClickWithoutProgramId: () => void,
-    currentPage: string
+    currentPage: string,
+    selectedTrackedEntityTypeName: string,
+    onTrackedEntityInstanceClear: () => void,
 };
 
 class QuickSelector extends Component<Props> {
@@ -90,7 +93,7 @@ class QuickSelector extends Component<Props> {
 
     render() {
         const { width, programSelectorWidth } = this.calculateColumnWidths();
-        const { currentPage, selectedName } = this.props;
+        const { currentPage, selectedTrackedEntityTypeName, onTrackedEntityInstanceClear } = this.props;
 
         return (
             <Paper className={this.props.classes.paper}>
@@ -118,13 +121,19 @@ class QuickSelector extends Component<Props> {
                         />
                     </Grid>
                     {
-                        currentPage === 'enrollment' &&
+                        currentPage === pageKeys.ENROLLMENT &&
                         <>
                             <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                 <SingleLockedSelect
-                                    options={[{ label: selectedName, value: selectedName },]}
-                                    selectedText={selectedName}
-                                    title={i18n.t('Person')}
+                                    onClear={onTrackedEntityInstanceClear}
+                                    options={[
+                                        {
+                                            label: selectedTrackedEntityTypeName,
+                                            value: selectedTrackedEntityTypeName,
+                                        },
+                                    ]}
+                                    selectedText={selectedTrackedEntityTypeName}
+                                    title={i18n.t('Selected Tracked Entity Type')}
                                 />
                             </Grid>
                         </>

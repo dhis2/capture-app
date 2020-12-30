@@ -24,15 +24,17 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
     <div data-test="dhis2-capture-enrollment-page-content" className={classes.container} >
 
         {
-            enrollmentPageStatus === enrollmentPageStatuses.LOADING &&
+            enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
             <div>default</div>
         }
-        {/*{*/}
-        {/*    enrollmentPageStatus === enrollmentPageStatuses.LOADING &&*/}
-        {/*    <div className={classes.loadingMask}>*/}
-        {/*        <LoadingMask />*/}
-        {/*    </div>*/}
-        {/*}*/}
+
+        {
+            enrollmentPageStatus === enrollmentPageStatuses.LOADING &&
+            <div className={classes.loadingMask}>
+                <LoadingMask />
+            </div>
+        }
+
         {
             enrollmentPageStatus === enrollmentPageStatuses.ERROR &&
             <div>

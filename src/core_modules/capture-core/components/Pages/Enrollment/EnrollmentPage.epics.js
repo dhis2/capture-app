@@ -1,5 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
+import { push } from 'connected-react-router';
 import { catchError, filter, flatMap, map, pluck, startWith } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { getApi } from '../../../d2';
@@ -9,6 +10,7 @@ import {
     showLoadingViewOnEnrollmentPage,
     successfulFetchingEnrollmentPageInformationFromUrl,
 } from './EnrollmentPage.actions';
+import { urlArguments } from '../../../utils/url';
 
 export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable) =>
     action$.pipe(
@@ -18,9 +20,8 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
         flatMap(({ nextProps: { enrollmentId } }) =>
             from(getApi().get(`enrollments/${enrollmentId}`))
                 .pipe(
-                    flatMap(({ trackedEntityInstance }) => {
-                        let r;
-                        return from(getApi().get(`trackedEntityInstances/${trackedEntityInstance}`))
+                    flatMap(({ trackedEntityInstance }) =>
+                        from(getApi().get(`trackedEntityInstances/${trackedEntityInstance}`))
                             .pipe(
                                 map(({ attributes }) => {
                                     const selectedName = attributes.reduce(
@@ -29,10 +30,18 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
                                         '');
                                     return successfulFetchingEnrollmentPageInformationFromUrl({ selectedName });
                                 }),
-                            );
-                    }),
+                            )),
                     startWith(showLoadingViewOnEnrollmentPage()),
                     catchError(() => of(showErrorViewOnEnrollmentPage())),
                 ),
         ),
+    );
+
+export const clearTrackedEntityInstanceSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(enrollmentPageActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR),
+        map(() => {
+            const { currentSelections: { programId, orgUnitId } } = store.value;
+            return push(`/${urlArguments({ programId, orgUnitId })}`);
+        }),
     );
