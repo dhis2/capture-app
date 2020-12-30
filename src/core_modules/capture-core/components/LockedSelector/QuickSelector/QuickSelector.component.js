@@ -122,13 +122,10 @@ class QuickSelector extends Component<Props> {
                         <>
                             <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                 <SingleLockedSelect
-                                  // onClear={}
+                                    options={[{ label: selectedName, value: selectedName },]}
                                     selectedText={selectedName}
                                     title={i18n.t('Person')}
                                 />
-                            </Grid>
-                            <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
-                                <SingleLockedSelect title={i18n.t('Enrollment')} />
                             </Grid>
                         </>
 

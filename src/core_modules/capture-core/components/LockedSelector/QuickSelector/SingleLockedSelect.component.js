@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
-import VirtualizedSelect from 'react-virtualized-select';
+import Select from 'react-virtualized-select';
 
 const styles = (theme: Theme) => ({
     paper: {
@@ -62,8 +62,9 @@ const styles = (theme: Theme) => ({
 });
 
 type Props = {|
-    onClear: () => void,
-    onSelect: () => void,
+    options: Array<{|label: string, value: any, |}>,
+    onClear?: () => void,
+    onSelect?: () => void,
     title: string,
     selectedText: ?string,
     ...CssClasses
@@ -71,10 +72,11 @@ type Props = {|
 
 const SingleLockedSelectPlain =
   ({
-      title,
       onClear,
       onSelect,
+      title,
       selectedText,
+      options,
       classes,
   }: Props) => {
       const [selected, toggleSelected] = useState(false);
@@ -85,7 +87,11 @@ const SingleLockedSelectPlain =
 
       const handleOnClear = () => {
           toggleSelected(false);
-          // todo also clean redux state
+          onClear && onClear();
+      };
+      const handleOnSelect = () => {
+          toggleSelected(true);
+          onSelect && onSelect();
       };
 
       debugger;
@@ -108,7 +114,10 @@ const SingleLockedSelectPlain =
                   <div data-test="dhis2-capture-org-unit-selector-container">
                       <Paper square elevation={0} className={classes.paper}>
                           <h4 className={classes.title}>{ title }</h4>
-                          <VirtualizedSelect />
+                          <Select
+                              onChange={handleOnSelect}
+                              options={options}
+                          />
                       </Paper>
                   </div>
           }
