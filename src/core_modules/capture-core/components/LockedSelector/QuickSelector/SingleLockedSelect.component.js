@@ -1,17 +1,10 @@
 // @flow
-import React, { Component } from 'react';
-import i18n from '@dhis2/d2-i18n';
+import React, { type ComponentType, useEffect, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
-import { Button } from '../../Buttons';
-import OrgUnitField from './OrgUnitField.container';
+import VirtualizedSelect from 'react-virtualized-select';
 
 const styles = (theme: Theme) => ({
     paper: {
@@ -69,51 +62,58 @@ const styles = (theme: Theme) => ({
 });
 
 type Props = {|
-    onReset: () => void,
+    onClear: () => void,
     onSelect: () => void,
-    selected: boolean,
     title: string,
-    selectionName: string,
+    selectedText: ?string,
     ...CssClasses
 |};
 
 const SingleLockedSelectPlain =
   ({
       title,
-      onReset,
+      onClear,
       onSelect,
-      selected = true,
-      selectionName = 'I am selected',
+      selectedText,
       classes,
-  }: Props) => (<>
-      {
-          selected ?
-              <Paper square elevation={0} className={classes.selectedPaper}>
-                  <h4 className={classes.title}>{ title }</h4>
-                  <div className={classes.selectedItemContainer}>
-                      <div>{selectionName}</div>
+  }: Props) => {
+      const [selected, toggleSelected] = useState(false);
+      useEffect(
+          () => toggleSelected(Boolean(selectedText)),
+          [selectedText],
+      );
 
-                      <div className={classes.selectedItemClear}>
-                          <IconButton className={classes.selectedButton} onClick={onReset}>
-                              <ClearIcon className={classes.selectedButtonIcon} />
-                          </IconButton>
-                      </div>
-                  </div>
-              </Paper>
-              :
-              <div data-test="dhis2-capture-org-unit-selector-container">
-                  <Paper square elevation={0} className={classes.paper}>
-                      <h4 className={classes.title}>{ i18n.t('Registering Organisation Unit') }</h4>
-                      <div>
-                          <OrgUnitField
-                              data-test="dhis2-capture-org-unit-field"
-                              onSelectClick={onSelect}
-                          />
+      const handleOnClear = () => {
+          toggleSelected(false);
+          // todo also clean redux state
+      };
+
+      debugger;
+      return (<>
+          {
+              selected ?
+                  <Paper square elevation={0} className={classes.selectedPaper}>
+                      <h4 className={classes.title}>{ title }</h4>
+                      <div className={classes.selectedItemContainer}>
+                          <div>{selectedText}</div>
+
+                          <div className={classes.selectedItemClear}>
+                              <IconButton className={classes.selectedButton} onClick={handleOnClear}>
+                                  <ClearIcon className={classes.selectedButtonIcon} />
+                              </IconButton>
+                          </div>
                       </div>
                   </Paper>
-              </div>
-      }
-  </>
-  );
+                  :
+                  <div data-test="dhis2-capture-org-unit-selector-container">
+                      <Paper square elevation={0} className={classes.paper}>
+                          <h4 className={classes.title}>{ title }</h4>
+                          <VirtualizedSelect />
+                      </Paper>
+                  </div>
+          }
+      </>);
+  };
 
-export const SingleLockedSelect = withStyles(styles)(SingleLockedSelectPlain);
+export const SingleLockedSelect: ComponentType<$Diff<Props, CssClasses>>
+  = withStyles(styles)(SingleLockedSelectPlain);

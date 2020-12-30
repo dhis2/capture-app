@@ -1,26 +1,35 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { catchError, filter, flatMap, pluck, startWith } from 'rxjs/operators';
+import { catchError, filter, flatMap, map, pluck, startWith } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { getApi } from '../../../d2';
 import {
     enrollmentPageActionTypes,
     showErrorViewOnEnrollmentPage,
-    showInitialViewOnEnrollmentPage,
     showLoadingViewOnEnrollmentPage,
+    successfulFetchingEnrollmentPageInformationFromUrl,
 } from './EnrollmentPage.actions';
 
 export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(enrollmentPageActionTypes.BASED_ON_ENROLLMENT_ID_SELECTIONS_FROM_URL_UPDATE),
+        ofType(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START),
         pluck('payload'),
         filter(({ nextProps: { enrollmentId } }) => enrollmentId),
         flatMap(({ nextProps: { enrollmentId } }) =>
             from(getApi().get(`enrollments/${enrollmentId}`))
                 .pipe(
-                    flatMap((enrollment) => {
+                    flatMap(({ trackedEntityInstance }) => {
                         let r;
-                        return of(showInitialViewOnEnrollmentPage());
+                        return from(getApi().get(`trackedEntityInstances/${trackedEntityInstance}`))
+                            .pipe(
+                                map(({ attributes }) => {
+                                    const selectedName = attributes.reduce(
+                                        (acc, { value: dataElementValue }) =>
+                                            (acc ? `${acc} ${dataElementValue}` : dataElementValue),
+                                        '');
+                                    return successfulFetchingEnrollmentPageInformationFromUrl({ selectedName });
+                                }),
+                            );
                     }),
                     startWith(showLoadingViewOnEnrollmentPage()),
                     catchError(() => of(showErrorViewOnEnrollmentPage())),

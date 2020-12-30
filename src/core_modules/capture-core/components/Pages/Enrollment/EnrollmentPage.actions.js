@@ -2,20 +2,24 @@
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const enrollmentPageActionTypes = {
-    BASED_ON_ENROLLMENT_ID_SELECTIONS_FROM_URL_UPDATE: 'UpdateSelectionsBasedOnTheEnrollmentIdFromUrl',
     ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY: 'DisplayInitialViewOnEnrollmentPage',
-    ENROLLMENT_PAGE_LOADING_VIEW_DISPLAY: 'DisplayLoadingViewOnEnrollmentPage',
-    ENROLLMENT_PAGE_ERROR_VIEW_DISPLAY: 'DisplayErrorViewOnEnrollmentPage',
+    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START: 'StartFetchingEnrollmentPageInformationBasedOnIdFromUrl',
+    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_LOADING: 'LoadingOnFetchingEnrollmentPageInformationBasedOnIdFromUrl',
+    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_ERROR: 'ErrorOnFetchingEnrollmentPageInformationBasedOnIdFromUrl',
+    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS: 'SuccessfulFetchingFetchEnrollmentPageInformationBasedOnIdFromUrl',
 };
-
-export const fetchEnrollmentPageInformationFromUrl = (data: Object) => actionCreator(enrollmentPageActionTypes.BASED_ON_ENROLLMENT_ID_SELECTIONS_FROM_URL_UPDATE)(data);
 
 export const showInitialViewOnEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY)();
 
+export const startFetchingEnrollmentPageInformationFromUrl = (data: Object) =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START)(data);
+
 export const showLoadingViewOnEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_LOADING_VIEW_DISPLAY)();
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_LOADING)();
 
 export const showErrorViewOnEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_ERROR_VIEW_DISPLAY)();
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY)();
 
+export const successfulFetchingEnrollmentPageInformationFromUrl = ({ selectedName }: Object) =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS)({ selectedName });

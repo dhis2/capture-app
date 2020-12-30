@@ -6,17 +6,30 @@ import { enrollmentPageStatuses } from '../../components/Pages/Enrollment/Enroll
 const initialReducerValue = {
     enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
 };
+const {
+    ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY,
+    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_LOADING,
+    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_ERROR,
+    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS,
+} = enrollmentPageActionTypes;
+
 export const enrollmentPageDesc = createReducerDescription({
-    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY]: state => ({
+    [ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY]: state => ({
         ...state,
         enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
     }),
-    [enrollmentPageActionTypes.ENROLLMENT_PAGE_LOADING_VIEW_DISPLAY]: state => ({
+    [ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_LOADING]: state => ({
         ...state,
         enrollmentPageStatus: enrollmentPageStatuses.LOADING,
     }),
-    [enrollmentPageActionTypes.ENROLLMENT_PAGE_ERROR_VIEW_DISPLAY]: state => ({
+    [ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_ERROR]: state => ({
         ...state,
         enrollmentPageStatus: enrollmentPageStatuses.ERROR,
     }),
+    [ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS]:
+      (state, { payload: { selectedName } }) => ({
+          ...state,
+          selectedName,
+          enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
+      }),
 }, 'enrollmentPage', initialReducerValue);

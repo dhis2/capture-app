@@ -46,6 +46,7 @@ type Props = {
     onNewClick: () => void,
     onFindClick: () => void,
     onFindClickWithoutProgramId: () => void,
+    currentPage: string
 };
 
 class QuickSelector extends Component<Props> {
@@ -89,7 +90,7 @@ class QuickSelector extends Component<Props> {
 
     render() {
         const { width, programSelectorWidth } = this.calculateColumnWidths();
-        const { currentPage } = this.props;
+        const { currentPage, selectedName } = this.props;
 
         return (
             <Paper className={this.props.classes.paper}>
@@ -120,7 +121,11 @@ class QuickSelector extends Component<Props> {
                         currentPage === 'enrollment' &&
                         <>
                             <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
-                                <SingleLockedSelect title={i18n.t('Person')} />
+                                <SingleLockedSelect
+                                  // onClear={}
+                                    selectedText={selectedName}
+                                    title={i18n.t('Person')}
+                                />
                             </Grid>
                             <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                 <SingleLockedSelect title={i18n.t('Enrollment')} />

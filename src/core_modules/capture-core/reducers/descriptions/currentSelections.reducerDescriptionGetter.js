@@ -181,7 +181,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             complete: false,
         };
     },
-    [enrollmentPageActionTypes.BASED_ON_ENROLLMENT_ID_SELECTIONS_FROM_URL_UPDATE]: (state, action) => {
+    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START]: (state, action) => {
         const { nextProps: selections } = action.payload;
         return {
             ...state,
