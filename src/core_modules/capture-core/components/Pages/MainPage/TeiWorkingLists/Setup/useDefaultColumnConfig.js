@@ -12,7 +12,7 @@ import type {
     TeiWorkingListsColumnConfigs,
 } from '../types';
 
-const getDefaultMainConfig = (): Array<MainColumnConfig> => [{
+const mainConfig: Array<MainColumnConfig> = [{
     id: 'regUnit',
     visible: false,
     type: dataElementTypes.TEXT,
@@ -48,7 +48,7 @@ export const useDefaultColumnConfig = (program: TrackerProgram): TeiWorkingLists
     useMemo(() => {
         const { attributes } = program;
         return [
-            ...getDefaultMainConfig(),
+            ...mainConfig,
             ...getMetaDataConfig(attributes),
         ];
     }, [program]);
