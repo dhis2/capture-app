@@ -134,7 +134,7 @@ class QuickSelector extends Component<Props> {
                                         },
                                     ]}
                                     selectedText={selectedTrackedEntityTypeName}
-                                    title={i18n.t('Selected Tracked Entity Type')}
+                                    title={i18n.t('Tracked Entity Type')}
                                 />
                             </Grid>
                         </>
