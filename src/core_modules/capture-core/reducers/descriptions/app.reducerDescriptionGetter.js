@@ -129,12 +129,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: action.payload.nextPage,
     }),
-    [lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN]: state => ({
-        ...state,
-        page: 'new',
-        locationSwitchInProgress: true,
-    }),
-    [lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_WITHOUT_PROGRAM_ID_OPEN]: state => ({
+    [lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
         ...state,
         page: 'new',
         locationSwitchInProgress: true,

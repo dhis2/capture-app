@@ -579,9 +579,9 @@ class NewEventDataEntry extends Component<Props> {
                         {...passOnProps}
                     />
                 </div>
-                <InfoIconText
-                    text={this.getSavingText()}
-                />
+                <InfoIconText>
+                    {this.getSavingText()}
+                </InfoIconText>
             </div>
         );
     }

@@ -20,10 +20,6 @@ import {
     teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry';
 import {
-    openNewEventPageLocationChangeEpic,
-} from 'capture-core/components/DataEntries/SingleEventRegistrationEntry/SingleEventRegistrationEntry.epics';
-
-import {
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
@@ -194,7 +190,7 @@ import {
     completeSavingNewTrackedEntityTypeEpic,
     startSavingNewTrackedEntityTypeEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
-import { openNewRegistrationPageWithoutProgramIdEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
+import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -211,7 +207,6 @@ export default combineEpics(
     addTemplateEpic,
     deleteTemplateEpic,
     requestDeleteEventEpic,
-    openNewEventPageLocationChangeEpic,
     openNewEventInDataEntryEpic,
     resetDataEntryForNewEventEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
@@ -308,6 +303,6 @@ export default combineEpics(
     startNewEnrollmentDataEntrySelfInitialisationEpic,
     startSavingNewTrackedEntityTypeEpic,
     completeSavingNewTrackedEntityTypeEpic,
-    openNewRegistrationPageWithoutProgramIdEpic,
+    openNewRegistrationPageFromLockedSelectorEpic,
     ...getDataEntryEpics(),
 );
