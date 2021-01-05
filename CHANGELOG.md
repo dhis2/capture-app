@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/dhis2/capture-app/compare/v1.3.9...v1.4.0) (2021-01-05)
+
+
+### Features
+
+* DHIS2-9652 with save buttons ([#1260](https://github.com/dhis2/capture-app/issues/1260)) ([24ec241](https://github.com/dhis2/capture-app/commit/24ec24135a74be9f1ba9efda0b26ed978f659d4c)), closes [#1266](https://github.com/dhis2/capture-app/issues/1266)
+
 ## [1.3.9](https://github.com/dhis2/capture-app/compare/v1.3.8...v1.3.9) (2021-01-05)
 
 
