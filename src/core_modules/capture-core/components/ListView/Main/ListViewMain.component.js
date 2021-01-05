@@ -84,7 +84,7 @@ class ListViewMainPlain extends React.PureComponent<Props> {
             ...passOnProps
         } = this.props;
 
-        const ListComponent = (!customRowMenuContents || customRowMenuContents.length <= 0) ?
+        const ListComponent = (!customRowMenuContents || !customRowMenuContents.length) ?
             OnlineList :
             ListWithEndColumnMenu;
 

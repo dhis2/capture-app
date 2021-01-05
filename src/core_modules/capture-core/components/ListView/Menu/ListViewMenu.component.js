@@ -88,7 +88,7 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
         </Paper>
     ), [renderMenuItems]);
 
-    if (customMenuContents.length <= 0) {
+    if (!customMenuContents.length) {
         return null;
     }
 
