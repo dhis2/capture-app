@@ -307,6 +307,6 @@ export default combineEpics(
     startSavingNewTrackedEntityTypeWithEnrollmentEpic,
     completeSavingNewTrackedEntityTypeEpic,
     completeSavingNewTrackedEntityTypeWithEnrollmentEpic,
-    openNewRegistrationPageWithoutProgramIdEpic,
+    openNewRegistrationPageFromLockedSelectorEpic,
     ...getDataEntryEpics(),
 );
