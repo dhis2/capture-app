@@ -1,3 +1,10 @@
+## [1.3.9](https://github.com/dhis2/capture-app/compare/v1.3.8...v1.3.9) (2021-01-05)
+
+
+### Bug Fixes
+
+* styles of the horizontal form ([#1265](https://github.com/dhis2/capture-app/issues/1265)) ([5592250](https://github.com/dhis2/capture-app/commit/5592250d1f3120d36f3127ec4771ce4cb3a5b467))
+
 ## [1.3.8](https://github.com/dhis2/capture-app/compare/v1.3.7...v1.3.8) (2020-12-19)
 
 
