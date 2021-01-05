@@ -34,10 +34,10 @@ export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: 
         ),
         map(() => {
             const {
-                currentSelections: { programId, orgUnitId, trackedEntityTypeId, enrollmentId },
+                currentSelections: { programId, orgUnitId, trackedEntityTypeId, trackedEntityInstanceId, enrollmentId },
                 app: { page },
             } = store.value;
-            return push(exactUrl(page, urlArguments({ programId, orgUnitId, trackedEntityTypeId, enrollmentId })));
+            return push(exactUrl(page, urlArguments({ programId, orgUnitId, trackedEntityTypeId, trackedEntityInstanceId,enrollmentId })));
         }));
 
 export const startAgainEpic = (action$: InputObservable) =>

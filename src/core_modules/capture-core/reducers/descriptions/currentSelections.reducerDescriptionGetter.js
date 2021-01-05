@@ -235,4 +235,12 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
           ...state,
           trackedEntityTypeDisplayName: selectedName,
       }),
+    [enrollmentPageActionTypes.UPDATE_CONTEXT]:
+      (state, { payload: { programId, orgUnitId, trackedEntityInstanceId, enrollmentId } }) => ({
+          ...state,
+          programId,
+          orgUnitId,
+          trackedEntityInstanceId,
+          enrollmentId,
+      }),
 }, 'currentSelections');

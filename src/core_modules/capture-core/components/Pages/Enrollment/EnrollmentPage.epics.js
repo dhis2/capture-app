@@ -72,9 +72,9 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
     action$.pipe(
         ofType(enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET),
         map(({ payload: { enrollmentId } }) => {
-            const { currentSelections: { programId, orgUnitId } } = store.value;
+            const { currentSelections: { programId, orgUnitId, trackedEntityInstanceId } } = store.value;
 
-            return push(`/enrollment/${urlArguments({ programId, orgUnitId, enrollmentId })}`);
+            return push(`/enrollment/${urlArguments({ programId, orgUnitId, trackedEntityInstanceId, enrollmentId })}`);
         }),
     );
 
@@ -82,5 +82,5 @@ export const pushCompleteUrlEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.UPDATE_CONTEXT),
         map(({ payload: { programId, orgUnitId, trackedEntityInstanceId, enrollmentId } }) =>
-            push(`/enrollment/${urlArguments({ programId, orgUnitId, enrollmentId })}`)),
+            push(`/enrollment/${urlArguments({ programId, orgUnitId, trackedEntityInstanceId, enrollmentId })}`)),
     );
