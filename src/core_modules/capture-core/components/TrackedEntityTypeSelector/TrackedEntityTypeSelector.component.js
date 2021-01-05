@@ -77,9 +77,9 @@ export const TrackedEntityTypeSelectorPlain =
           {
               !selectedSearchScopeId &&
               <div className={classes.informativeIcon}>
-                  <InfoIconText
-                      text={i18n.t('You can also choose a program from the top bar and search in that program')}
-                  />
+                  <InfoIconText>
+                      {i18n.t('You can also choose a program from the top bar and search in that program')}
+                  </InfoIconText>
               </div>
           }
       </>
