@@ -9,7 +9,6 @@
   "projectId": "322xnh",
   "experimentalFetchPolyfill": true,
   "retries": {
-    "runMode": 2,
-    "openMode": 0
+    "runMode": 2
   }
 }
