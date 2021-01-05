@@ -1,5 +1,5 @@
 // @flow
-type Url = {programId?: string, orgUnitId?: string, trackedEntityTypeId?: string}
+type Url = {programId?: string, orgUnitId?: string, trackedEntityTypeId?: string, enrollmentId?: string}
 
 export const urlArguments = ({ programId, orgUnitId, trackedEntityTypeId, enrollmentId }: Url): string => {
     const argArray = [];

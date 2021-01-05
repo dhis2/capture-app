@@ -1,8 +1,8 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { push } from 'connected-react-router';
+import { push, replace } from 'connected-react-router';
 import { catchError, filter, flatMap, map, pluck, startWith } from 'rxjs/operators';
-import { from, of } from 'rxjs';
+import { concat, from, of } from 'rxjs';
 import moment from 'moment';
 import { getApi } from '../../../d2';
 import {
@@ -10,6 +10,7 @@ import {
     showErrorViewOnEnrollmentPage,
     showLoadingViewOnEnrollmentPage,
     successfulFetchingEnrollmentPageInformationFromUrl,
+    pushCompleteUrl,
 } from './EnrollmentPage.actions';
 import { urlArguments } from '../../../utils/url';
 
@@ -24,24 +25,32 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
         flatMap(({ nextProps: { enrollmentId } }) =>
             from(fetchEnrollment(enrollmentId))
                 .pipe(
-                    flatMap(({ trackedEntityInstance }) =>
+                    flatMap(({ trackedEntityInstance, program, orgUnit }) =>
                         from(fetchTrackedEntityInstance(trackedEntityInstance))
                             .pipe(
-                                map(({ attributes, enrollments }) => {
+                                flatMap(({ attributes, enrollments }) => {
                                     const selectedName = attributes.reduce(
                                         (acc, { value: dataElementValue }) =>
-                                            (acc ? `${acc} ${dataElementValue}` : dataElementValue),
-                                        '');
+                                            (acc ? `${acc} ${dataElementValue}` : dataElementValue), '');
                                     const enrollmentsSortedByDate =
                                       enrollments
                                           .sort((a, b) =>
                                               moment.utc(a.enrollmentDate).diff(moment.utc(b.enrollmentDate)),
                                           );
 
-                                    return successfulFetchingEnrollmentPageInformationFromUrl({
-                                        selectedName,
-                                        enrollmentsSortedByDate,
-                                    });
+                                    return concat(
+                                        of(successfulFetchingEnrollmentPageInformationFromUrl({
+                                            selectedName,
+                                            enrollmentsSortedByDate,
+                                        })),
+                                        of(pushCompleteUrl({
+                                            programId: program,
+                                            orgUnitId: orgUnit,
+                                            trackedEntityInstanceId: trackedEntityInstance,
+                                            enrollmentId,
+                                        }),
+                                        ),
+                                    );
                                 }),
                             )),
                     startWith(showLoadingViewOnEnrollmentPage()),
@@ -67,4 +76,11 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
 
             return push(`/enrollment/${urlArguments({ programId, orgUnitId, enrollmentId })}`);
         }),
+    );
+
+export const pushCompleteUrlEpic = (action$: InputObservable) =>
+    action$.pipe(
+        ofType(enrollmentPageActionTypes.UPDATE_CONTEXT),
+        map(({ payload: { programId, orgUnitId, trackedEntityInstanceId, enrollmentId } }) =>
+            push(`/enrollment/${urlArguments({ programId, orgUnitId, enrollmentId })}`)),
     );

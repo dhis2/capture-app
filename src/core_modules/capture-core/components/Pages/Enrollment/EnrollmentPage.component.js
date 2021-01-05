@@ -6,7 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './EnrollmentPage.types';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
-import { LoadingMask } from '../../LoadingMasks';
+import { withLoadingIndicator } from '../../../HOC';
 
 const getStyles = () => ({
     container: {
@@ -18,33 +18,29 @@ const getStyles = () => ({
     },
 });
 
-const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
-    <LockedSelector />
+const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (
+    <>
+        <LockedSelector />
 
-    <div data-test="dhis2-capture-enrollment-page-content" className={classes.container} >
+        <div data-test="dhis2-capture-enrollment-page-content" className={classes.container} >
 
-        {
-            enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
-            <div>default</div>
-        }
+            {
+                enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
+                    <div>default</div>
+            }
 
-        {
-            enrollmentPageStatus === enrollmentPageStatuses.LOADING &&
-            <div className={classes.loadingMask}>
-                <LoadingMask />
-            </div>
-        }
-
-        {
-            enrollmentPageStatus === enrollmentPageStatuses.ERROR &&
-            <div>
-                error
-            </div>
-        }
-    </div>
-</>);
+            {
+                enrollmentPageStatus === enrollmentPageStatuses.ERROR &&
+                    <div>
+                        error
+                    </div>
+            }
+        </div>
+    </>
+);
 
 export const EnrollmentPageComponent: ComponentType<$Diff<Props, CssClasses>> =
   compose(
+      withLoadingIndicator(),
       withStyles(getStyles),
   )(EnrollmentPagePlain);

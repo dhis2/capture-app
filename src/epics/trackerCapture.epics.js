@@ -187,6 +187,7 @@ import {
     clearTrackedEntityInstanceSelectionEpic,
     fetchEnrollmentPageInformationFromUrlEpic,
     setEnrollmentSelectionEpic,
+    pushCompleteUrlEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 
 export default combineEpics(
@@ -298,5 +299,6 @@ export default combineEpics(
     fetchEnrollmentPageInformationFromUrlEpic,
     clearTrackedEntityInstanceSelectionEpic,
     setEnrollmentSelectionEpic,
+    pushCompleteUrlEpic,
     ...getDataEntryEpics(),
 );

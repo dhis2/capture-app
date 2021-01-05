@@ -9,6 +9,8 @@ export const enrollmentPageActionTypes = {
     ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS: 'SuccessfulFetchingFetchEnrollmentPageInformationBasedOnIdFromUrl',
     TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR: 'ClearTrackedEntityInstanceSelection',
     ENROLLMENT_SELECTION_SET: 'SetEnrollmentSelection',
+
+    UPDATE_CONTEXT: 'UpdateBothUrlAndCurrentSelectionsWithInformationDerivedFromEnrollmentId',
 };
 
 export const showInitialViewOnEnrollmentPage = () =>
@@ -33,3 +35,7 @@ export const clearTrackedEntityInstanceSelection = () =>
 
 export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
     actionCreator(enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET)({ enrollmentId });
+
+
+export const pushCompleteUrl = ({ programId, orgUnitId, trackedEntityInstanceId, enrollmentId }: Object) =>
+    actionCreator(enrollmentPageActionTypes.UPDATE_CONTEXT)({ programId, orgUnitId, trackedEntityInstanceId, enrollmentId });
