@@ -50,10 +50,11 @@ type Props = {
     onFindClickWithoutProgramId: () => void,
     currentPage: string,
     selectedEnrollmentId: string,
-    selectedTrackedEntityTypeName: string,
+    selectedTeiName: string,
     onTrackedEntityInstanceClear: () => void,
     enrollmentsAsOptions: Array<Object>,
     onEnrollmentSelectionSet: () => void,
+    onEnrollmentSelectionClear: () => void,
 };
 
 class QuickSelector extends Component<Props> {
@@ -99,11 +100,12 @@ class QuickSelector extends Component<Props> {
         const { width, programSelectorWidth } = this.calculateColumnWidths();
         const {
             currentPage,
-            selectedTrackedEntityTypeName,
+            selectedTeiName,
             enrollmentsAsOptions,
             selectedEnrollmentId,
             onTrackedEntityInstanceClear,
             onEnrollmentSelectionSet,
+            onEnrollmentSelectionClear,
         } = this.props;
 
         return (
@@ -139,7 +141,7 @@ class QuickSelector extends Component<Props> {
                                     onClear={onTrackedEntityInstanceClear}
                                     options={[
                                         {
-                                            label: selectedTrackedEntityTypeName,
+                                            label: selectedTeiName,
                                             value: 'one',
                                         },
                                     ]}
@@ -151,6 +153,7 @@ class QuickSelector extends Component<Props> {
                                 enrollmentsAsOptions &&
                                 <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                     <SingleLockedSelect
+                                        onClear={onEnrollmentSelectionClear}
                                         onSelect={onEnrollmentSelectionSet}
                                         options={enrollmentsAsOptions}
                                         selectedValue={selectedEnrollmentId}

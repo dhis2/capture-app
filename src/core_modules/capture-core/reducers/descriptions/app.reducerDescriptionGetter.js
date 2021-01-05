@@ -130,10 +130,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: action.payload.nextPage,
     }),
-    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START]: (state, action) => ({
-        ...state,
-        page: action.payload.nextPage,
-    }),
     [lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN]: state => ({
         ...state,
         page: 'newEvent',
@@ -163,6 +159,20 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [lockedSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
         ...state,
         page: 'search',
+        locationSwitchInProgress: true,
+    }),
+
+    [enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [enrollmentPageActionTypes.ENROLLMENT_SELECTION_CLEAR]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [enrollmentPageActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR]: state => ({
+        ...state,
+        page: '',
         locationSwitchInProgress: true,
     }),
 }, 'app');

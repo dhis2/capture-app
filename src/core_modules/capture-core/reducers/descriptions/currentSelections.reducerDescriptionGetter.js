@@ -219,28 +219,29 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         categoriesMeta: undefined,
         trackedEntityTypeId,
     }),
-    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START]:
-      (state, action) => {
-          const { nextProps: selections } = action.payload;
-          return {
-              ...state,
-              ...selections,
-              categories: undefined,
-              categoriesMeta: undefined,
-              complete: false,
-          };
-      },
-    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS]:
-      (state, { payload: { selectedName } }) => ({
-          ...state,
-          trackedEntityTypeDisplayName: selectedName,
-      }),
-    [enrollmentPageActionTypes.UPDATE_CONTEXT]:
+    [enrollmentPageActionTypes.CURRENT_SELECTIONS_UPDATE]:
       (state, { payload: { programId, orgUnitId, trackedEntityInstanceId, enrollmentId } }) => ({
           ...state,
           programId,
           orgUnitId,
           trackedEntityInstanceId,
           enrollmentId,
+      }),
+    [enrollmentPageActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR]:
+      state => ({
+          ...state,
+          trackedEntityinstanceDisplayName: undefined,
+          trackedEntityInstanceId: undefined,
+          enrollmentId: undefined,
+      }),
+    [enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET]:
+      (state, { payload: { enrollmentId } }) => ({
+          ...state,
+          enrollmentId,
+      }),
+    [enrollmentPageActionTypes.ENROLLMENT_SELECTION_CLEAR]:
+      state => ({
+          ...state,
+          enrollmentId: undefined,
       }),
 }, 'currentSelections');

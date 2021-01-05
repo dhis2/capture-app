@@ -1,7 +1,7 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { push, replace } from 'connected-react-router';
-import { catchError, filter, flatMap, map, pluck, startWith } from 'rxjs/operators';
+import { push } from 'connected-react-router';
+import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { concat, from, of } from 'rxjs';
 import moment from 'moment';
 import { getApi } from '../../../d2';
@@ -17,13 +17,13 @@ import { urlArguments } from '../../../utils/url';
 const fetchEnrollment = id => getApi().get(`enrollments/${id}`);
 const fetchTrackedEntityInstance = id => getApi().get(`trackedEntityInstances/${id}`, { fields: '*' });
 
-export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable) =>
+export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START),
-        pluck('payload'),
-        filter(({ nextProps: { enrollmentId } }) => enrollmentId),
-        flatMap(({ nextProps: { enrollmentId } }) =>
-            from(fetchEnrollment(enrollmentId))
+        flatMap(() => {
+            const { currentSelections: { enrollmentId } } = store.value;
+
+            return from(fetchEnrollment(enrollmentId))
                 .pipe(
                     flatMap(({ trackedEntityInstance, program, orgUnit }) =>
                         from(fetchTrackedEntityInstance(trackedEntityInstance))
@@ -55,7 +55,8 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
                             )),
                     startWith(showLoadingViewOnEnrollmentPage()),
                     catchError(() => of(showErrorViewOnEnrollmentPage())),
-                ),
+                );
+        },
         ),
     );
 
@@ -73,14 +74,23 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
         ofType(enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET),
         map(({ payload: { enrollmentId } }) => {
             const { currentSelections: { programId, orgUnitId, trackedEntityInstanceId } } = store.value;
-
-            return push(`/enrollment/${urlArguments({ programId, orgUnitId, trackedEntityInstanceId, enrollmentId })}`);
+            return push(`/enrollment/${urlArguments({ programId, orgUnitId, enrollmentId })}`);
         }),
     );
 
+export const clearEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(enrollmentPageActionTypes.ENROLLMENT_SELECTION_CLEAR),
+        map(() => {
+            const { currentSelections: { programId, orgUnitId, trackedEntityInstanceId } } = store.value;
+            return push(`/enrollment/${urlArguments({ programId, orgUnitId })}`);
+        }),
+    );
+
+
 export const pushCompleteUrlEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(enrollmentPageActionTypes.UPDATE_CONTEXT),
+        ofType(enrollmentPageActionTypes.CURRENT_SELECTIONS_UPDATE),
         map(({ payload: { programId, orgUnitId, trackedEntityInstanceId, enrollmentId } }) =>
-            push(`/enrollment/${urlArguments({ programId, orgUnitId, trackedEntityInstanceId, enrollmentId })}`)),
+            push(`/enrollment/${urlArguments({ programId, orgUnitId, enrollmentId })}`)),
     );

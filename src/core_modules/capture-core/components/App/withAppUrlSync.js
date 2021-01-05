@@ -7,7 +7,6 @@ import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEven
 import { updateSelectionsFromUrl } from '../LockedSelector';
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
-import { startFetchingEnrollmentPageInformationFromUrl } from '../Pages/Enrollment/EnrollmentPage.actions';
 
 type Props = {
     location: {
@@ -86,7 +85,7 @@ const updaterForPages = {
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
-    [pageKeys.ENROLLMENT]: startFetchingEnrollmentPageInformationFromUrl,
+    [pageKeys.ENROLLMENT]: updateSelectionsFromUrl,
 };
 
 const getUrlParts = (pathName: string) => {
