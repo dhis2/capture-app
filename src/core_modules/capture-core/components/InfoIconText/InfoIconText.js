@@ -15,7 +15,7 @@ const InfoOutlinedIconWithStyles = withStyles({
     },
 })(InfoOutlinedIcon);
 
-type OwnProps = {| text: string | Node |}
+type OwnProps = {| children: string | Node |}
 
 const styles = () => ({
     container: {
@@ -31,13 +31,13 @@ const styles = () => ({
 });
 
 
-const InfoIconTextPlain = ({ classes, text }) => (
+const InfoIconTextPlain = ({ classes, children }) => (
     <Grid container direction="row" alignItems="center" className={classes.container}>
         <Grid item>
             <InfoOutlinedIconWithStyles />
         </Grid>
         <Grid item className={classes.text}>
-            {text}
+            {children}
         </Grid>
     </Grid>
 );

@@ -72,9 +72,9 @@ const TeiRegistrationEntryPlain =
                           </Button>
                       }
 
-                      <InfoIconText
-                          text={translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
-                      />
+                      <InfoIconText>
+                          {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
+                      </InfoIconText>
 
                   </>
               }
