@@ -18,8 +18,7 @@ export const lockedSelectorActionTypes = {
     BASED_ON_URL_ORG_UNIT_ERROR_RETRIEVING: 'BasedOnUrlOrgUnitErrorRetrieving',
     BASED_ON_URL_ORG_UNIT_EMPTY_SET: 'BasedOnUrlOrgUnitEmptySet',
 
-    NEW_EVENT_PAGE_OPEN: 'NewEventPageOpen',
-    NEW_REGISTRATION_PAGE_WITHOUT_PROGRAM_ID_OPEN: 'NewRegistrationPageWithoutProgramIdOpen',
+    NEW_REGISTRATION_PAGE_OPEN: 'NewRegistrationPageOpen',
     SEARCH_PAGE_OPEN: 'SearchPageOpen',
 };
 
@@ -38,8 +37,7 @@ export const resetProgramIdFromLockedSelector = () => actionCreator(lockedSelect
 export const resetCategoryOptionFromLockedSelector = (categoryId: string) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_RESET)({ categoryId });
 export const resetAllCategoryOptionsFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET)();
 
-export const openNewEventPageFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN)();
-export const openNewRegistrationPageWithoutProgramIdFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_WITHOUT_PROGRAM_ID_OPEN)();
+export const openNewRegistrationPageFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN)();
 export const openSearchPageFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.SEARCH_PAGE_OPEN)();
 
 

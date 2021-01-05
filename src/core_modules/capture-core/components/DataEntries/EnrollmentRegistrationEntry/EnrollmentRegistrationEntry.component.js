@@ -66,9 +66,9 @@ const EnrollmentRegistrationEntryPlain =
                           </Button>
                       }
 
-                      <InfoIconText
-                          text={translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name)}
-                      />
+                      <InfoIconText>
+                          {translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name)}
+                      </InfoIconText>
                   </>
               }
           </>
