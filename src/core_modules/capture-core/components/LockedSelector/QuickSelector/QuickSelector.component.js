@@ -21,6 +21,7 @@ const styles = ({ palette }) => ({
     programSelector: {
         backgroundColor: palette.grey.lighter,
         borderRight: `1px solid ${colors.grey500}`,
+        margin: '0 0 0 -1px',
     },
     orgUnitSelector: {
         backgroundColor: palette.grey.lighter,
@@ -143,7 +144,7 @@ class QuickSelector extends Component<Props> {
                                         },
                                     ]}
                                     selectedValue="one"
-                                    title={i18n.t('Selected Tracked Entity Type')}
+                                    title={i18n.t('Tracked Entity Type')}
                                 />
                             </Grid>
                             {
