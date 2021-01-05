@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from '../../../../Buttons';
-import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
-import { type Enrollment } from '../../../../../metaData';
+import { Button } from '../../../../../Buttons';
+import getDataEntryKey from '../../../../../DataEntry/common/getDataEntryKey';
+import { type Enrollment } from '../../../../../../metaData';
 
 type Props = {
     onSave: () => void,

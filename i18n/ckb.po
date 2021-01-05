@@ -136,6 +136,9 @@ msgstr "تۆمارکردن"
 msgid "A future date is not allowed"
 msgstr "بەرواری داهاتوو ناکرێت تۆماربکرێت"
 
+msgid "Metadata error. see log for details"
+msgstr "هەڵەیەک لە مێتا داتا هەیە، سەیری لۆگ فایل بکە بۆ زانیاری زیاتر"
+
 msgid "An error has occurred. See log for details"
 msgstr ""
 
@@ -635,6 +638,15 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr "مافی دروستکردنی حاڵەتت نیە لە هەڵژێردراوەکانی ئێستات"
 
+msgid "Review duplicates"
+msgstr " بە دووبارەبووەکان دابچۆرەوە"
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr "{{trackedEntityTypeName}} و لینک دروست بکە"
+
+msgid "Review Duplicates"
+msgstr "پێداچوونەوە بە دووبارەبووەکان"
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "دووبارەبوونەوە هەیە(بەڵآم هەندێک هەڵە هەیە، سەریری لۆگ فایل بکە بۆ زانیاری "
@@ -664,15 +676,6 @@ msgstr "کەسی تۆمارکراو"
 msgid "Link"
 msgstr "لینک"
 
-msgid "Metadata error. see log for details"
-msgstr "هەڵەیەک لە مێتا داتا هەیە، سەیری لۆگ فایل بکە بۆ زانیاری زیاتر"
-
-msgid "Review duplicates"
-msgstr " بە دووبارەبووەکان دابچۆرەوە"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "{{trackedEntityTypeName}} و لینک دروست بکە"
-
 msgid "Possible duplicates found"
 msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
 
@@ -693,9 +696,6 @@ msgstr "یەکەی ڕێخکڕاو"
 
 msgid "Registration"
 msgstr "تۆمارکردن"
-
-msgid "Review Duplicates"
-msgstr "پێداچوونەوە بە دووبارەبووەکان"
 
 msgid "Search results"
 msgstr "بۆ ئەنجامەکان بگەڕێ"

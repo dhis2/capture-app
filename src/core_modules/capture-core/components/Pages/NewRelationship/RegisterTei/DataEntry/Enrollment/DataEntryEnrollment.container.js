@@ -1,9 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import {
-    makeEnrollmentMetadataSelector,
-} from './enrollment.selectors';
-import NewEnrollmentRelationship from './Enrollment.component';
+import { makeEnrollmentMetadataSelector } from './enrollment.selectors';
+import NewEnrollmentRelationship from './DataEntryEnrollment.component';
 
 const makeMapStateToProps = () => {
     const enrollmentMetadataSelector = makeEnrollmentMetadataSelector();
@@ -22,4 +20,4 @@ const makeMapStateToProps = () => {
 };
 
 // $FlowFixMe
-export default connect(makeMapStateToProps, () => ({}))(NewEnrollmentRelationship);
+export const DataEntryEnrollment = connect(makeMapStateToProps, () => ({}))(NewEnrollmentRelationship);

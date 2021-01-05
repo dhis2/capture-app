@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-12-03T16:03:19.413Z\n"
-"PO-Revision-Date: 2020-12-03T16:03:19.413Z\n"
+"POT-Creation-Date: 2021-01-05T09:32:01.126Z\n"
+"PO-Revision-Date: 2021-01-05T09:32:01.126Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -120,6 +120,9 @@ msgid "Enrollment"
 msgstr ""
 
 msgid "A future date is not allowed"
+msgstr ""
+
+msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "An error has occurred. See log for details"
@@ -599,6 +602,15 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
 
+msgid "Review duplicates"
+msgstr ""
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Review Duplicates"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 
@@ -624,15 +636,6 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-msgid "Metadata error. see log for details"
-msgstr ""
-
-msgid "Review duplicates"
-msgstr ""
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
-
 msgid "Possible duplicates found"
 msgstr ""
 
@@ -652,9 +655,6 @@ msgid "Organisation Unit"
 msgstr ""
 
 msgid "Registration"
-msgstr ""
-
-msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { Enrollment } from '../Enrollment';
-import { TrackedEntityInstance } from '../TrackedEntityInstance';
+import { DataEntryEnrollment } from './Enrollment';
+import { DataEntryTrackedEntityInstance } from './TrackedEntityInstance';
 import withErrorMessagePostProcessor from './withErrorMessagePostProcessor';
 
 type Props = {
@@ -16,17 +16,16 @@ class RegisterTeiDataEntry extends React.Component<Props> {
         if (!showDataEntry) {
             return null;
         }
-
         if (programId) {
             return (
-                <Enrollment
+                <DataEntryEnrollment
                     {...passOnProps}
                 />
             );
         }
 
         return (
-            <TrackedEntityInstance
+            <DataEntryTrackedEntityInstance
                 {...passOnProps}
             />
         );
