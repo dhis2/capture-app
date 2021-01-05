@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { SelectBoxes, orientations, type Options } from '../../FormFields/Options/SelectBoxes';
+import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes';
 import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './optionSetFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
+import type { Props } from './optionSetFilter.types';
 
 const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {
@@ -11,20 +12,10 @@ const getStyles = (theme: Theme) => ({
         overflowY: 'auto',
         marginRight: theme.typography.pxToRem(-24),
     },
-    inner: {
+    selectBoxesInnerContainer: {
         marginLeft: 12,
     },
 });
-
-type Props = {
-    options: Options,
-    value: any,
-    onCommitValue: (value: any) => void,
-    classes: {
-        selectBoxesContainer: string,
-    },
-    singleSelect?: ?boolean,
-};
 
 // $FlowFixMe[incompatible-variance] automated comment
 // $FlowFixMe[cannot-resolve-name] automated comment
@@ -54,16 +45,16 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
             <div
                 className={classes.selectBoxesContainer}
             >
-                <div className={classes.inner}>
-                { /* $FlowFixMe */ }
-                <SelectBoxes
-                    options={options}
-                    value={value}
-                    onBlur={onCommitValue}
-                    orientation={orientations.VERTICAL}
-                    multiSelect={!singleSelect}
-                    nullable
-                />
+                <div className={classes.selectBoxesInnerContainer}>
+                    { /* $FlowFixMe */ }
+                    <SelectBoxes
+                        options={options}
+                        value={value}
+                        onBlur={onCommitValue}
+                        orientation={orientations.VERTICAL}
+                        multiSelect={!singleSelect}
+                        nullable
+                    />
                 </div>
             </div>
         );

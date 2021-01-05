@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import SelectBoxes from '../SelectionBoxes/SelectionBoxes.component';
-import CheckedIcon from '../Icons/MultiSelectionCheckedIcon.component';
-import UncheckedIcon from '../Icons/MultiSelectionUncheckedIcon.component';
+import { MultiSelectionCheckedIcon, MultiSelectionUncheckedIcon } from '../Icons';
 import type { OptionRendererInputData } from '../internal/SelectionBoxes/selectBoxes.types';
 
 type Props = {
@@ -41,7 +40,7 @@ class D2BooleanField extends Component<Props> {
                 >
                     {
                         (optionData, isSelected) =>
-                            (isSelected ? <CheckedIcon /> : <UncheckedIcon />)
+                            (isSelected ? <MultiSelectionCheckedIcon /> : <MultiSelectionUncheckedIcon />)
                     }
                 </SelectBoxes>
             </div>

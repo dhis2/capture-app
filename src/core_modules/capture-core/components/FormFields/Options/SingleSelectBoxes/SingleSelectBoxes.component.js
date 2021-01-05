@@ -7,10 +7,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
-
-import CheckedIcon from 'capture-ui/Icons/SingleSelectionCheckedIcon.component';
-import UncheckedIcon from 'capture-ui/Icons/SingleSelectionUncheckedIcon.component';
-
+import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from 'capture-ui/Icons';
 import { singleOrientations } from './singleSelectBoxes.const';
 
 const styles = theme => ({
@@ -68,12 +65,8 @@ class SingleSelectBoxesPlain extends Component<Props> {
                             (e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, value); }
                         }
                         checked={this.isChecked(value)}
-                        icon={
-                            <UncheckedIcon className={classes.iconDeselected} />
-                        }
-                        checkedIcon={
-                            <CheckedIcon className={classes.iconSelected} />
-                        }
+                        icon={<SingleSelectionUncheckedIcon className={classes.iconDeselected} />}
+                        checkedIcon={<SingleSelectionCheckedIcon className={classes.iconSelected} />}
                         disableRipple
                         {...passOnProps}
                     />

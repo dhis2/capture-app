@@ -9,22 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import IconButton from '@material-ui/core/IconButton';
 import withStyles from '@material-ui/core/styles/withStyles';
-import type { CustomRowMenuContents, DataSourceItem } from '../types';
-
-type Props = {
-    classes: {
-        deleteIcon: string,
-        menuList: string,
-        popperContainerHidden: string,
-        popperContainer: string,
-    },
-    row: DataSourceItem,
-    customRowMenuContents?: CustomRowMenuContents,
-}
-
-type State = {
-    menuOpen: ?boolean,
-}
+import type { Props, State } from './rowMenu.types';
 
 const styles = theme => ({
     deleteIcon: {
