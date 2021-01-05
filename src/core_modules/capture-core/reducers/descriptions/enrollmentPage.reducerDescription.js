@@ -31,6 +31,6 @@ export const enrollmentPageDesc = createReducerDescription({
           ...state,
           enrollments: enrollmentsSortedByDate,
           enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
-          trackedEntityinstanceDisplayName: selectedName,
+          trackedEntityInstanceDisplayName: selectedName,
       }),
 }, 'enrollmentPage', initialReducerValue);

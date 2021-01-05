@@ -11,7 +11,6 @@ export const enrollmentPageActionTypes = {
 
     TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR: 'TrackedEntityInstanceSelectionClear',
     ENROLLMENT_SELECTION_SET: 'EnrollmentSelectionSet',
-    ENROLLMENT_SELECTION_CLEAR: 'EnrollmentSelectionClear',
 
     OPEN_ENROLLMENT_PAGE: 'OpenEnrollmentPage',
 };
@@ -39,5 +38,5 @@ export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
 export const clearEnrollmentSelection = () =>
     actionCreator(enrollmentPageActionTypes.ENROLLMENT_SELECTION_CLEAR)();
 
-export const openEnrollmentPage = ({ programId, orgUnitId, trackedEntityInstanceId, enrollmentId }: Object) =>
-    actionCreator(enrollmentPageActionTypes.OPEN_ENROLLMENT_PAGE)({ programId, orgUnitId, trackedEntityInstanceId, enrollmentId });
+export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }: Object) =>
+    actionCreator(enrollmentPageActionTypes.OPEN_ENROLLMENT_PAGE)({ programId, orgUnitId, teiId, enrollmentId });

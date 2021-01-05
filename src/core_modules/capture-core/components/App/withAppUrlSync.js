@@ -43,9 +43,9 @@ const enrollmentIdProperties = {
     urlKey: 'enrollmentId',
     propKey: 'enrollmentId',
 };
-const trackedEntityInstanceIdProperties = {
-    urlKey: 'trackedEntityInstanceId',
-    propKey: 'trackedEntityInstanceId',
+const teiIdProperties = {
+    urlKey: 'teiId',
+    propKey: 'teiId',
 };
 
 const specificationForPages = {
@@ -76,6 +76,7 @@ const specificationForPages = {
         programIdProperties,
         orgUnitIdProperties,
         enrollmentIdProperties,
+        teiIdProperties,
     ],
 };
 

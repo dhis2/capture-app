@@ -3,15 +3,15 @@ type Url = {|
     programId?: string,
     orgUnitId?: string,
     trackedEntityTypeId?: string,
+    teiId?: string,
     enrollmentId?: string,
-    trackedEntityInstanceId?: string
 |}
 
 export const urlArguments = ({
     programId,
     orgUnitId,
     trackedEntityTypeId,
-    trackedEntityInstanceId,
+    teiId,
     enrollmentId,
 }: Url): string => {
     const argArray = [];
@@ -23,8 +23,8 @@ export const urlArguments = ({
     if (orgUnitId) {
         argArray.push(`orgUnitId=${orgUnitId}`);
     }
-    if (trackedEntityInstanceId) {
-        argArray.push(`trackedEntityInstanceId=${trackedEntityInstanceId}`);
+    if (teiId) {
+        argArray.push(`teiId=${teiId}`);
     }
     if (enrollmentId) {
         argArray.push(`enrollmentId=${enrollmentId}`);

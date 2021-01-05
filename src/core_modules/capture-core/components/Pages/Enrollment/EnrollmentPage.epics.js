@@ -46,7 +46,7 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
                                         of(openEnrollmentPage({
                                             programId: program,
                                             orgUnitId: orgUnit,
-                                            trackedEntityInstanceId: trackedEntityInstance,
+                                            teiId: trackedEntityInstance,
                                             enrollmentId,
                                         }),
                                         ),
@@ -73,24 +73,14 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
     action$.pipe(
         ofType(enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET),
         map(({ payload: { enrollmentId } }) => {
-            const { currentSelections: { programId, orgUnitId, trackedEntityInstanceId } } = store.value;
-            return push(`/enrollment/${urlArguments({ programId, orgUnitId, enrollmentId })}`);
+            const { currentSelections: { programId, orgUnitId, teiId } } = store.value;
+            return push(`/enrollment/${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
         }),
     );
 
-export const clearEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(enrollmentPageActionTypes.ENROLLMENT_SELECTION_CLEAR),
-        map(() => {
-            const { currentSelections: { programId, orgUnitId, trackedEntityInstanceId } } = store.value;
-            return push(`/enrollment/${urlArguments({ programId, orgUnitId })}`);
-        }),
-    );
-
-
-export const pushCompleteUrlEpic = (action$: InputObservable) =>
+export const openEnrollmentPageEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.OPEN_ENROLLMENT_PAGE),
-        map(({ payload: { programId, orgUnitId, trackedEntityInstanceId, enrollmentId } }) =>
-            push(`/enrollment/${urlArguments({ programId, orgUnitId, enrollmentId })}`)),
+        map(({ payload: { programId, orgUnitId, teiId, enrollmentId } }) =>
+            push(`/enrollment/${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`)),
     );

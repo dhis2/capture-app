@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux';
 import QuickSelector from './QuickSelector.component';
-import { clearEnrollmentSelection, clearTrackedEntityInstanceSelection, setEnrollmentSelection } from '../../Pages/Enrollment/EnrollmentPage.actions';
+import { clearTrackedEntityInstanceSelection, setEnrollmentSelection } from '../../Pages/Enrollment/EnrollmentPage.actions';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 
@@ -25,7 +25,7 @@ const mapStateToProps = (state: Object) => {
         selectedEnrollmentId: currentSelections.enrollmentId,
         selectedOrgUnit: currentSelections.orgUnitId ? organisationUnits[currentSelections.orgUnitId] : null,
         currentPage: app.page,
-        selectedTeiName: enrollmentPage.trackedEntityinstanceDisplayName,
+        selectedTeiName: enrollmentPage.trackedEntityInstanceDisplayName,
         enrollmentsAsOptions,
     };
 };
@@ -37,9 +37,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onEnrollmentSelectionSet: (enrollmentId) => {
         dispatch(setEnrollmentSelection({ enrollmentId }));
-    },
-    onEnrollmentSelectionClear: () => {
-        // dispatch(clearEnrollmentSelection());
     },
 });
 
