@@ -10,7 +10,7 @@ import {
     showErrorViewOnEnrollmentPage,
     showLoadingViewOnEnrollmentPage,
     successfulFetchingEnrollmentPageInformationFromUrl,
-    pushCompleteUrl,
+    openEnrollmentPage,
 } from './EnrollmentPage.actions';
 import { urlArguments } from '../../../utils/url';
 
@@ -19,7 +19,7 @@ const fetchTrackedEntityInstance = id => getApi().get(`trackedEntityInstances/${
 
 export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START),
+        ofType(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_FETCH),
         flatMap(() => {
             const { currentSelections: { enrollmentId } } = store.value;
 
@@ -43,7 +43,7 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
                                             selectedName,
                                             enrollmentsSortedByDate,
                                         })),
-                                        of(pushCompleteUrl({
+                                        of(openEnrollmentPage({
                                             programId: program,
                                             orgUnitId: orgUnit,
                                             trackedEntityInstanceId: trackedEntityInstance,
@@ -90,7 +90,7 @@ export const clearEnrollmentSelectionEpic = (action$: InputObservable, store: Re
 
 export const pushCompleteUrlEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(enrollmentPageActionTypes.CURRENT_SELECTIONS_UPDATE),
+        ofType(enrollmentPageActionTypes.OPEN_ENROLLMENT_PAGE),
         map(({ payload: { programId, orgUnitId, trackedEntityInstanceId, enrollmentId } }) =>
             push(`/enrollment/${urlArguments({ programId, orgUnitId, enrollmentId })}`)),
     );

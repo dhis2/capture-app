@@ -26,7 +26,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
 
     return (
         <EnrollmentPageComponent
-            ready={enrollmentPageStatus !== enrollmentPageStatuses.LOADING}
+            // ready={enrollmentPageStatus !== enrollmentPageStatuses.LOADING}
             enrollmentPageStatus={enrollmentPageStatus}
         />
     );

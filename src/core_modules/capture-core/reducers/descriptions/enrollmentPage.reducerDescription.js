@@ -8,9 +8,9 @@ const initialReducerValue = {
 };
 const {
     ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY,
-    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_LOADING,
-    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_ERROR,
-    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS,
+    ENROLLMENT_PAGE_INFORMATION_LOADING_FETCH,
+    ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH,
+    ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH,
 } = enrollmentPageActionTypes;
 
 export const enrollmentPageDesc = createReducerDescription({
@@ -18,15 +18,15 @@ export const enrollmentPageDesc = createReducerDescription({
         ...state,
         enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
     }),
-    [ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_LOADING]: state => ({
+    [ENROLLMENT_PAGE_INFORMATION_LOADING_FETCH]: state => ({
         ...state,
         enrollmentPageStatus: enrollmentPageStatuses.LOADING,
     }),
-    [ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_ERROR]: state => ({
+    [ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH]: state => ({
         ...state,
         enrollmentPageStatus: enrollmentPageStatuses.ERROR,
     }),
-    [ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS]:
+    [ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH]:
       (state, { payload: { enrollmentsSortedByDate, selectedName } }) => ({
           ...state,
           enrollments: enrollmentsSortedByDate,
