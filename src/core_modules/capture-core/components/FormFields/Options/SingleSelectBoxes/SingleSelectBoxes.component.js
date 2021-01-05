@@ -9,32 +9,17 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
 import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from 'capture-ui/Icons';
 import { singleOrientations } from './singleSelectBoxes.const';
+import type { Props } from './singleSelectBoxes.types';
 
-const styles = theme => ({
-    label: theme.typography.formFieldTitle,
+const styles = ({ typography, palette }) => ({
+    label: typography.formFieldTitle,
     iconSelected: {
-        fill: theme.palette.secondary.main,
+        fill: palette.secondary.main,
     },
     iconDeselected: {
-        fill: theme.palette.grey[700],
+        fill: palette.grey[700],
     },
 });
-
-type Props = {
-    onBlur: (value: any) => void,
-    options: Array<{text: string, value: any}>,
-    label?: string,
-    nullable?: boolean,
-    value?: any,
-    orientation?: ?$Values<typeof singleOrientations>,
-    required?: ?boolean,
-    classes: {
-        label: string,
-        iconSelected: string,
-        iconDeselected: string,
-    },
-    style?: ?Object,
-};
 
 class SingleSelectBoxesPlain extends Component<Props> {
     handleOptionChange: (e: Object, isChecked: boolean, value: any) => void;

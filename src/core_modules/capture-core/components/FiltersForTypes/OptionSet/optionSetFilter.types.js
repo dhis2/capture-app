@@ -1,5 +1,5 @@
 // @flow
-import { type Options } from '../../FormFields/Options/SelectBoxes';
+import type { Options } from '../../FormFields/Options/SelectBoxes';
 
 export type Props = {
     options: Options,
