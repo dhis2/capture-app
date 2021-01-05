@@ -25,7 +25,7 @@ const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     </>);
 
 
-export const RegistrationDataEntry = ({ selectedScopeId, dataEntryId }: OwnProps) => {
+export const RegistrationDataEntryComponent = ({ selectedScopeId, dataEntryId, onSave }: OwnProps) => {
     const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
     const { registrationMetaData } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const orgUnit = useCurrentOrgUnitInfo();
@@ -61,7 +61,7 @@ export const RegistrationDataEntry = ({ selectedScopeId, dataEntryId }: OwnProps
                         selectedScopeId={selectedScopeId}
                         teiRegistrationMetadata={registrationMetaData}
                         saveButtonText={'Save new'}
-                        onSave={() => alert('onSave will save in the future')}
+                        onSave={onSave}
                         onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
                         onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
                     />
