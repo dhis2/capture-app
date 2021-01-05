@@ -1,6 +1,7 @@
 // @flow
 /* eslint-disable class-methods-use-this */
-import { moment } from '../../../../capture-core-utils/moment';
+import { parseNumber } from 'capture-core-utils/parsers';
+import { moment } from 'capture-core-utils/moment';
 import type { IConvertInputRulesValue } from '../rulesEngine.types';
 
 const dateMomentFormat = 'YYYY-MM-DD';
@@ -51,28 +52,36 @@ class RulesValueConverter implements IConvertInputRulesValue {
         return value || '';
     }
 
-    convertNumber(value: any): number | string {
-        return (value || value === 0) ? value : '';
+    convertNumber(value: number | ''): number {
+        return value || 0;
     }
 
-    convertInteger(value: any): number | string {
-        return (value || value === 0) ? value : '';
+    convertInteger(value: number | ''): number {
+        return value || 0;
     }
 
-    convertIntegerPositive(value: any): number | string {
-        return (value || value === 0) ? value : '';
+    convertIntegerPositive(value: number | ''): number {
+        return value || 0;
     }
 
-    convertIntegerNegative(value: any): number | string {
-        return (value || value === 0) ? value : '';
+    convertIntegerNegative(value: number | ''): number {
+        return value || 0;
     }
 
-    convertIntegerZeroOrPositive(value: any): number | string {
-        return (value || value === 0) ? value : '';
+    convertIntegerZeroOrPositive(value: number | ''): number {
+        return value || 0;
     }
 
-    convertPercentage(value: any): number | string {
-        return (value || value === 0) ? value : '';
+    convertPercentage(value: string): number {
+        if (!value) {
+            return 0;
+        }
+        const numberValue = parseNumber(value);
+        if (isNaN(numberValue)) {
+            return 0;
+        }
+
+        return numberValue / 100;
     }
 
     convertUrl(value: any): string {

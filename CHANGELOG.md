@@ -1,3 +1,25 @@
+## [1.3.9](https://github.com/dhis2/capture-app/compare/v1.3.8...v1.3.9) (2021-01-05)
+
+
+### Bug Fixes
+
+* styles of the horizontal form ([#1265](https://github.com/dhis2/capture-app/issues/1265)) ([5592250](https://github.com/dhis2/capture-app/commit/5592250d1f3120d36f3127ec4771ce4cb3a5b467))
+
+## [1.3.8](https://github.com/dhis2/capture-app/compare/v1.3.7...v1.3.8) (2020-12-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([41bc468](https://github.com/dhis2/capture-app/commit/41bc468d7d3fcdfe6b1809936dd3969acb6eb4dc))
+
+## [1.3.7](https://github.com/dhis2/capture-app/compare/v1.3.6...v1.3.7) (2020-12-18)
+
+
+### Bug Fixes
+
+* DHIS2-5490 rules engine numeric value parsing ([6cfed47](https://github.com/dhis2/capture-app/commit/6cfed47148f58f016b23928cb1a3d82d774ab43d))
+* **translations:** sync translations from transifex (master) ([ce8b87a](https://github.com/dhis2/capture-app/commit/ce8b87a39784a1fb662c34bb04e1f0cd67b1c4e5))
+
 ## [1.3.6](https://github.com/dhis2/capture-app/compare/v1.3.5...v1.3.6) (2020-12-10)
 
 

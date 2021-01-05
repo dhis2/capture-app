@@ -97,9 +97,9 @@ const RegistrationDataEntryPlain = (
                             onUpdateField={() => console.log('onUpdateField will be here in the future in the future')}
                             onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future in the future')}
                         />
-                        <InfoIconText
-                            text={translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name)}
-                        />
+                        <InfoIconText>
+                            {translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name)}
+                        </InfoIconText>
                     </div>
                 </Paper>
             }
@@ -125,9 +125,9 @@ const RegistrationDataEntryPlain = (
                             onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
                             onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
                         />
-                        <InfoIconText
-                            text={translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
-                        />
+                        <InfoIconText >
+                            {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
+                        </InfoIconText>
                     </div>
                 </Paper>
             }
