@@ -3,11 +3,12 @@ import { useMemo } from 'react';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
+import type { RegistrationFormMetadata } from './types';
 
 type RegistrationOptions = $ReadOnly<{|
   [elementId: string]: {|
     +name: string,
-    +registrationMetaData: string,
+    +registrationMetaData: RegistrationFormMetadata,
     +formId: string,
     +formFoundation: Object,
   |}
@@ -48,5 +49,5 @@ export const useRegistrationFormInfoForSelectedScope = (selectedScopeId: string)
         const { formFoundation, formId, registrationMetaData } = options[selectedScopeId];
         return { formFoundation, formId, registrationMetaData };
     }
-    return { formFoundation: [], formId: null, registrationMetaData: {} };
+    return { formFoundation: [], formId: null, registrationMetaData: null };
 };

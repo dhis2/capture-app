@@ -524,6 +524,24 @@ msgstr ""
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -563,9 +581,6 @@ msgid "Assignee"
 msgstr ""
 
 msgid "Saving to"
-msgstr ""
-
-msgid "in"
 msgstr ""
 
 msgid ""
@@ -616,15 +631,6 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
 
-msgid "Review duplicates"
-msgstr ""
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
-
-msgid "Review Duplicates"
-msgstr ""
-
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 
@@ -648,6 +654,12 @@ msgid "Registered person"
 msgstr ""
 
 msgid "Link"
+msgstr ""
+
+msgid "Review Duplicates"
+msgstr ""
+
+msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
