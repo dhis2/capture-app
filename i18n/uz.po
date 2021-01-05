@@ -689,7 +689,7 @@ msgid "An error occured loading possible duplicates"
 msgstr "Бўлиши мумкин бўлган нусхаларни юклашда хатолик юз берди"
 
 msgid "Hide"
-msgstr "Яшириш"
+msgstr "Беркитиш"
 
 msgid "Save as new {{tetName}}"
 msgstr "Янги {{tetName}} сифатида сақлаш"
@@ -719,7 +719,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr "Янги {{trackedEntityType}} яратиш"
 
 msgid "Register"
-msgstr "Рўйхат"
+msgstr "Рўйхатга олиш"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"

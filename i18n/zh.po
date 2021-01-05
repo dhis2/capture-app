@@ -138,7 +138,7 @@ msgid "Metadata error. see log for details"
 msgstr "元数据错误"
 
 msgid "An error has occurred. See log for details"
-msgstr ""
+msgstr "发生了错误。查看日志以获取详细信息"
 
 msgid "Cancel"
 msgstr "取消"
