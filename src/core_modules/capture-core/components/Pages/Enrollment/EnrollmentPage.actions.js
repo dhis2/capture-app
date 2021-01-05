@@ -35,8 +35,5 @@ export const clearTrackedEntityInstanceSelection = () =>
 export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
     actionCreator(enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET)({ enrollmentId });
 
-export const clearEnrollmentSelection = () =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENT_SELECTION_CLEAR)();
-
 export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }: Object) =>
     actionCreator(enrollmentPageActionTypes.OPEN_ENROLLMENT_PAGE)({ programId, orgUnitId, teiId, enrollmentId });
