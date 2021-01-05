@@ -4,7 +4,6 @@ import type { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
 import type { EnrollmentPageStatus } from './EnrollmentPage.types';
-import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { startFetchingEnrollmentPageInformation } from './EnrollmentPage.actions';
 
 export const EnrollmentPage: ComponentType<{||}> = () => {
@@ -26,7 +25,6 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
 
     return (
         <EnrollmentPageComponent
-            // ready={enrollmentPageStatus !== enrollmentPageStatuses.LOADING}
             enrollmentPageStatus={enrollmentPageStatus}
         />
     );

@@ -219,14 +219,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         categoriesMeta: undefined,
         trackedEntityTypeId,
     }),
-    [enrollmentPageActionTypes.OPEN_ENROLLMENT_PAGE]:
-      (state, { payload: { programId, orgUnitId, teiId, enrollmentId } }) => ({
-          ...state,
-          programId,
-          orgUnitId,
-          teiId,
-          enrollmentId,
-      }),
     [enrollmentPageActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR]:
       state => ({
           ...state,

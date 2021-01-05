@@ -14,8 +14,8 @@ import {
 } from './EnrollmentPage.actions';
 import { urlArguments } from '../../../utils/url';
 
-const fetchEnrollment = id => getApi().get(`enrollments/${id}`);
-const fetchTrackedEntityInstance = id => getApi().get(`trackedEntityInstances/${id}`, { fields: '*' });
+const fetchEnrollment = id => getApi().get(`enrollments/${id}`, { fields: 'trackedEntityInstance,program,orgUnit' });
+const fetchTrackedEntityInstance = id => getApi().get(`trackedEntityInstances/${id}`, { fields: 'attributes,enrollments' });
 
 export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

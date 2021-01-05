@@ -23,7 +23,13 @@ import type { Props, DispatchersFromRedux, OwnProps } from './LockedSelector.typ
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
-    ready: !state.activePage.isPageLoading,
+    ready: (() => {
+        if (state.currentSelections.orgUnitId) {
+            const orgUnit = state.organisationUnits[state.currentSelections.orgUnitId];
+            return Boolean(orgUnit && orgUnit.id);
+        }
+        return !state.activePage.isPageLoading;
+    })(),
 });
 
 const mapDispatchToProps = (

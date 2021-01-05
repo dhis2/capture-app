@@ -51,7 +51,7 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
         ),
         filter(action => action.payload.nextProps.orgUnitId),
         switchMap(action => getApi()
-            .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
+            .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`, { fields: 'id,displayName' })
             .then(response => setCurrentOrgUnitBasedOnUrl({
                 id: response.id,
                 name: response.displayName,
