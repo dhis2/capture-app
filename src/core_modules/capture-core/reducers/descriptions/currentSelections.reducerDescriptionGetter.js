@@ -239,9 +239,4 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
           ...state,
           enrollmentId,
       }),
-    [enrollmentPageActionTypes.ENROLLMENT_SELECTION_CLEAR]:
-      state => ({
-          ...state,
-          enrollmentId: undefined,
-      }),
 }, 'currentSelections');
