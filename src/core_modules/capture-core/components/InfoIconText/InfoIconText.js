@@ -5,6 +5,7 @@ import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Grid from '@material-ui/core/Grid';
 import { colors } from '@dhis2/ui';
 
+
 const InfoOutlinedIconWithStyles = withStyles({
     root: {
         fontSize: 14,
