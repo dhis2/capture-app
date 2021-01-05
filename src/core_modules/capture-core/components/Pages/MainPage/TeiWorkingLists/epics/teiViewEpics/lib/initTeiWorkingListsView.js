@@ -9,7 +9,7 @@ import {
 } from '../../../../WorkingListsCommon';
 import type { Input } from './initTeiWorkingListsView.types';
 
-const getSortByConfig = (columnsMetaForDataFetching) => {
+const getSortConfig = (columnsMetaForDataFetching) => {
     let column = columnsMetaForDataFetching.find(col => col.visible);
     if (!column) {
         column = columnsMetaForDataFetching[0];
@@ -29,7 +29,7 @@ export const initTeiWorkingListsView = ({
     querySingleResource,
     absoluteApiPath,
 }: Input) => {
-    const { sortById, sortByDirection } = getSortByConfig([...columnsMetaForDataFetching.values()]);
+    const { sortById, sortByDirection } = getSortConfig([...columnsMetaForDataFetching.values()]);
     const pageSize = 15;
     const page = 1;
 
