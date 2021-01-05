@@ -13,7 +13,7 @@ export type Column = {
     header: string,
     options?: ?Options,
     multiValueFilter?: boolean,
-    disableFilter?: boolean,
+    filterDisabled?: boolean,
 };
 
 export type Columns = Array<Column>;

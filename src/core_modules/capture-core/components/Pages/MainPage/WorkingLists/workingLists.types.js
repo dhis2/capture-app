@@ -40,7 +40,7 @@ export type ColumnConfig = {
     header: string,
     options?: ?Array<{text: string, value: any}>,
     multiValueFilter?: boolean,
-    disableFilter?: boolean,
+    filterDisabled?: boolean,
 };
 
 export type ColumnConfigs = Array<ColumnConfig>;
