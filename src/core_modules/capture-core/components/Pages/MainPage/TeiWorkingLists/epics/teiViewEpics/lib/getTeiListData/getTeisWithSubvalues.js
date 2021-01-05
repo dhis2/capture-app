@@ -25,22 +25,24 @@ const getTeisWithSubvaluesPlain = (querySingleResource: QuerySingleResource, abs
             }, {});
     };
 
+    const getOrganisationUnitSubvalue = async (keys: Array<string>) => {
+        const ids = keys
+            .join(',');
+
+        const { organisationUnits = [] } = await querySingleResource({ resource: 'organisationUnits', params: { filter: `id:in:[${ids}]` } });
+
+        return organisationUnits
+            .reduce((acc, { id, displayName: name }) => {
+                acc[id] = {
+                    id,
+                    name,
+                };
+                return acc;
+            }, {});
+    };
+
     const subvalueGetterByType: {|[string]: any |} = {
-        [dataElementTypes.ORGANISATION_UNIT]: async (keys: Array<string>) => {
-            const ids = keys
-                .join(',');
-
-            const { organisationUnits = [] } = await querySingleResource({ resource: 'organisationUnits', params: { filter: `id:in:[${ids}]` } });
-
-            return organisationUnits
-                .reduce((acc, { id, displayName: name }) => {
-                    acc[id] = {
-                        id,
-                        name,
-                    };
-                    return acc;
-                }, {});
-        },
+        [dataElementTypes.ORGANISATION_UNIT]: getOrganisationUnitSubvalue,
         [dataElementTypes.IMAGE]: getImageOrFileResourceSubvalue,
         [dataElementTypes.FILE_RESOURCE]: getImageOrFileResourceSubvalue,
     };
