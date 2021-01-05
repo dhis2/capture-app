@@ -2,8 +2,8 @@
 import { convertServerToClient } from '../../../../../../../../converters';
 import type { ApiTeis, ApiTeiAttributes, TeiColumnsMetaForDataFetchingArray, ClientTeis } from './types';
 
-const getValuesById = (attributeValues?: ApiTeiAttributes) =>
-    (attributeValues || [])
+const getValuesById = (attributeValues?: ApiTeiAttributes = []) =>
+    attributeValues
         .reduce((acc, { attribute, value }) => {
             acc[attribute] = value;
             return acc;
