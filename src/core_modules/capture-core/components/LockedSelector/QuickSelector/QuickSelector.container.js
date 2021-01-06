@@ -2,9 +2,9 @@
 
 import { connect } from 'react-redux';
 import QuickSelector from './QuickSelector.component';
-import { clearTrackedEntityInstanceSelection, setEnrollmentSelection } from '../../Pages/Enrollment/EnrollmentPage.actions';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
+import { clearTrackedEntityInstanceSelection, setEnrollmentSelection } from '../LockedSelector.actions';
 
 const buildEnrollmentsAsOptions = (enrollments = []) =>
     enrollments

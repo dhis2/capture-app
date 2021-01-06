@@ -11,7 +11,7 @@ const mapStateToProps = (state: ReduxState) => {
       state.newEventPage.showAddRelationship;
     return {
         error: state.activePage.selectionsError && state.activePage.selectionsError.error,
-        ready: !state.activePage.isPageLoading,
+        ready: !state.activePage.lockedSelectorLoads,
         isSelectionsComplete: !!state.currentSelections.complete,
         isUserInteractionInProgress,
     };

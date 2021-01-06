@@ -9,9 +9,6 @@ export const enrollmentPageActionTypes = {
     ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH: 'ErrorOnFetchingEnrollmentPageInformation',
     ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH: 'SuccessOnFetchingEnrollmentPageInformation',
 
-    TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR: 'TrackedEntityInstanceSelectionClear',
-    ENROLLMENT_SELECTION_SET: 'EnrollmentSelectionSet',
-
     OPEN_ENROLLMENT_PAGE: 'OpenEnrollmentPage',
 };
 
@@ -27,13 +24,6 @@ export const showErrorViewOnEnrollmentPage = () =>
 export const successfulFetchingEnrollmentPageInformationFromUrl = ({ selectedName, enrollmentsSortedByDate }: Object) =>
     actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH)(
         { selectedName, enrollmentsSortedByDate });
-
-// todo move to locked selector
-export const clearTrackedEntityInstanceSelection = () =>
-    actionCreator(enrollmentPageActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR)();
-
-export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET)({ enrollmentId });
 
 export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }: Object) =>
     actionCreator(enrollmentPageActionTypes.OPEN_ENROLLMENT_PAGE)({ programId, orgUnitId, teiId, enrollmentId });

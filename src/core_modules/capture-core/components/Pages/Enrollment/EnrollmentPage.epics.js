@@ -60,27 +60,10 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
         ),
     );
 
-export const clearTrackedEntityInstanceSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(enrollmentPageActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR),
-        map(() => {
-            const { currentSelections: { programId, orgUnitId } } = store.value;
-            return push(`/${urlArguments({ programId, orgUnitId })}`);
-        }),
-    );
-
-export const setEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET),
-        map(({ payload: { enrollmentId } }) => {
-            const { currentSelections: { programId, orgUnitId, teiId } } = store.value;
-            return push(`/enrollment/${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
-        }),
-    );
-
 export const openEnrollmentPageEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.OPEN_ENROLLMENT_PAGE),
-        map(({ payload: { programId, orgUnitId, teiId, enrollmentId } }) =>
-            push(`/enrollment/${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`)),
+        map(({ payload: { enrollmentId, programId, orgUnitId, teiId } }) =>
+            push(`/enrollment/${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`),
+        ),
     );

@@ -20,7 +20,6 @@ import {
 } from '../../components/LockedSelector';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
-import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -162,15 +161,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         locationSwitchInProgress: true,
     }),
 
-    [enrollmentPageActionTypes.ENROLLMENT_SELECTION_SET]: state => ({
+    [lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET]: state => ({
         ...state,
         locationSwitchInProgress: true,
     }),
-    [enrollmentPageActionTypes.ENROLLMENT_SELECTION_CLEAR]: state => ({
-        ...state,
-        locationSwitchInProgress: true,
-    }),
-    [enrollmentPageActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR]: state => ({
+    [lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR]: state => ({
         ...state,
         page: '',
         locationSwitchInProgress: true,

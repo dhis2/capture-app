@@ -8,6 +8,7 @@ import {
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../components/Pages/NewEvent';
 import { actionTypes as viewEventDataEntryActionTypes } from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
+import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 export const activePageDesc = createReducerDescription({
     [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
@@ -16,29 +17,29 @@ export const activePageDesc = createReducerDescription({
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: state => ({
         ...state,
-        isPageLoading: true,
+        lockedSelectorLoads: true,
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID]: state => ({
         ...state,
         selectionsError: null,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
         isDataEntryLoading: true,
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID]: (state, action) => ({
         ...state,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
         selectionsError: action.payload,
     }),
     [lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_ERROR_RETRIEVING]: (state, action) => ({
         ...state,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
         selectionsError: action.payload,
     }),
 
     [viewEventPageActionTypes.VIEW_EVENT_FROM_URL]: state => ({
         ...state,
         isDataEntryLoading: true,
-        isPageLoading: true,
+        lockedSelectorLoads: true,
     }),
     [viewEventDataEntryActionTypes.PREREQUISITES_ERROR_LOADING_VIEW_EVENT_DATA_ENTRY]: (state, action) => ({
         ...state,
@@ -60,17 +61,17 @@ export const activePageDesc = createReducerDescription({
     [viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: state => ({
         ...state,
         isDataEntryLoading: true,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
     }),
     [viewEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE]: state => ({
         ...state,
         isDataEntryLoading: true,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
     }),
     [viewEventPageActionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED]: (state, action) => ({
         ...state,
         viewEventLoadError: action.payload,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
     }),
 
     [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: state => ({
@@ -81,4 +82,18 @@ export const activePageDesc = createReducerDescription({
         ...state,
         isDataEntryLoading: false,
     }),
-}, 'activePage', { isPageLoading: false });
+
+    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_FETCH]: state => ({
+        ...state,
+        lockedSelectorLoads: true,
+    }),
+    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH]: state => ({
+        ...state,
+        lockedSelectorLoads: false,
+    }),
+    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH]: state => ({
+        ...state,
+        lockedSelectorLoads: false,
+    }),
+
+}, 'activePage', { lockedSelectorLoads: false });

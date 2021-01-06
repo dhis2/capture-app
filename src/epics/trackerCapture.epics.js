@@ -162,6 +162,8 @@ import {
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     startAgainEpic,
+    clearTrackedEntityInstanceSelectionEpic,
+    setEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 import {
     setTrackedEntityTypeIdOnUrlEpic,
@@ -184,9 +186,7 @@ import {
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 
 import {
-    clearTrackedEntityInstanceSelectionEpic,
     fetchEnrollmentPageInformationFromUrlEpic,
-    setEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 
