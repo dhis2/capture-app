@@ -10,6 +10,7 @@ export const enrollmentPageActionTypes = {
     ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH: 'SuccessOnFetchingEnrollmentPageInformation',
 
     OPEN_ENROLLMENT_PAGE: 'OpenEnrollmentPage',
+    ENROLLMENT_PAGE_CLEAN: 'CleanEnrollmentPage',
 };
 
 export const startFetchingEnrollmentPageInformation = (data: Object) =>
@@ -27,3 +28,6 @@ export const successfulFetchingEnrollmentPageInformationFromUrl = ({ selectedNam
 
 export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }: Object) =>
     actionCreator(enrollmentPageActionTypes.OPEN_ENROLLMENT_PAGE)({ programId, orgUnitId, teiId, enrollmentId });
+
+export const cleanEnrollmentPage = () =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_CLEAN)();
