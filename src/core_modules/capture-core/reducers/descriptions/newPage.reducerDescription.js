@@ -22,7 +22,7 @@ export const newPageDesc = createReducerDescription(
         }),
         [newPageActionTypes.NEW_PAGE_WITHOUT_PROGRAM_CATEGORY_SELECTED_VIEW]: state => ({
             ...state,
-            newPageStatus: newPageStatuses.WITHOUT_PROGRAM_PARTNER_SELECTED,
+            newPageStatus: newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED,
         }),
     },
     'newPage',

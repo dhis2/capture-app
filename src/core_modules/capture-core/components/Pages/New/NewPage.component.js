@@ -12,6 +12,7 @@ import { newPageStatuses } from './NewPage.constants';
 import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
+import { programCollection } from '../../../metaDataMemoryStores';
 
 const getStyles = () => ({
     container: {
@@ -84,10 +85,16 @@ const NewPagePlain = ({
             }
 
             {
-                newPageStatus === newPageStatuses.WITHOUT_PROGRAM_PARTNER_SELECTED &&
-                <InefficientSelectionsMessage
-                    message={i18n.t('Choose a category to start reporting')}
-                />
+                newPageStatus === newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED &&
+                (() => {
+                    const { categoryCombination } = programCollection.get(currentScopeId) || {};
+                    const { name = 'program category' } = categoryCombination || {};
+                    return (
+                        <InefficientSelectionsMessage
+                            message={i18n.t('Choose a {{name}} to start reporting', { name })}
+                        />
+                    );
+                })()
             }
         </div>
     </>);
