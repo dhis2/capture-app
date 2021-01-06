@@ -2,7 +2,7 @@ import { actionCreator } from '../../../actions/actions.utils';
 
 export const newPageActionTypes = {
     NEW_PAGE_WITHOUT_ORG_UNIT_SELECTED_VIEW: 'NewPageWithoutOrgUnitSelectedView',
-    NEW_PAGE_WITHOUT_PROGRAM_PARTNER_SELECTED_VIEW: 'NewPageWithoutProgramPartnerSelectedView',
+    NEW_PAGE_WITHOUT_PROGRAM_COMBO_SELECTED_VIEW: 'NewPageWithoutProgramComboSelectedView',
     NEW_PAGE_DEFAULT_VIEW: 'NewPageDefaultView',
 };
 
@@ -11,7 +11,7 @@ export const showMessageToSelectOrgUnitOnNewPage = () =>
     actionCreator(newPageActionTypes.NEW_PAGE_WITHOUT_ORG_UNIT_SELECTED_VIEW)();
 
 export const showMessageToSelectProgramPartnerOnNewPage = () =>
-    actionCreator(newPageActionTypes.NEW_PAGE_WITHOUT_PROGRAM_PARTNER_SELECTED_VIEW)();
+    actionCreator(newPageActionTypes.NEW_PAGE_WITHOUT_PROGRAM_COMBO_SELECTED_VIEW)();
 
 export const showDefaultViewOnNewPage = () =>
     actionCreator(newPageActionTypes.NEW_PAGE_DEFAULT_VIEW)();

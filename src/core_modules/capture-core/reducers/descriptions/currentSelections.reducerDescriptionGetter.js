@@ -239,9 +239,4 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
 }, 'currentSelections', {
     complete: false,
     categoryCheckInProgress: false,
-    orgUnitId: null,
-    programId: null,
-    trackedEntityTypeId: null,
-    categories: null,
-    categoriesMeta: null,
 });
