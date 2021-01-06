@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -540,6 +540,24 @@ msgstr "هەموو پیشان بدە"
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr "لە"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr " {{TET}} نوێ دروستبکە لە {{program}} لە {{orgUnit}}"
 
@@ -582,9 +600,6 @@ msgstr "نوێنەر"
 
 msgid "Saving to"
 msgstr "تۆمارکردن بۆ"
-
-msgid "in"
-msgstr "لە"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -638,15 +653,6 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr "مافی دروستکردنی حاڵەتت نیە لە هەڵژێردراوەکانی ئێستات"
 
-msgid "Review duplicates"
-msgstr " بە دووبارەبووەکان دابچۆرەوە"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "{{trackedEntityTypeName}} و لینک دروست بکە"
-
-msgid "Review Duplicates"
-msgstr "پێداچوونەوە بە دووبارەبووەکان"
-
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "دووبارەبوونەوە هەیە(بەڵآم هەندێک هەڵە هەیە، سەریری لۆگ فایل بکە بۆ زانیاری "
@@ -675,6 +681,12 @@ msgstr "کەسی تۆمارکراو"
 
 msgid "Link"
 msgstr "لینک"
+
+msgid "Review Duplicates"
+msgstr "پێداچوونەوە بە دووبارەبووەکان"
+
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
