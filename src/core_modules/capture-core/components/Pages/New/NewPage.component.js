@@ -86,7 +86,7 @@ const NewPagePlain = ({
             {
                 newPageStatus === newPageStatuses.WITHOUT_PROGRAM_PARTNER_SELECTED &&
                 <InefficientSelectionsMessage
-                    message={i18n.t('Choose a partner to start reporting')}
+                    message={i18n.t('Choose a category to start reporting')}
                 />
             }
         </div>
