@@ -32,11 +32,8 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
                                     const selectedName = attributes.reduce(
                                         (acc, { value: dataElementValue }) =>
                                             (acc ? `${acc} ${dataElementValue}` : dataElementValue), '');
-                                    const enrollmentsSortedByDate =
-                                      enrollments
-                                          .sort((a, b) =>
-                                              moment.utc(a.enrollmentDate).diff(moment.utc(b.enrollmentDate)),
-                                          );
+                                    const enrollmentsSortedByDate = enrollments.sort((a, b) =>
+                                        moment.utc(a.enrollmentDate).diff(moment.utc(b.enrollmentDate)));
 
                                     return concat(
                                         of(successfulFetchingEnrollmentPageInformationFromUrl({
