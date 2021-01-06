@@ -27,7 +27,6 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
 
     const enrollmentPageStatus: EnrollmentPageStatus =
       useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
-
     return (
         <EnrollmentPageComponent
             enrollmentPageStatus={enrollmentPageStatus}

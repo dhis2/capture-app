@@ -4,7 +4,7 @@ import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/Enr
 import { enrollmentPageStatuses } from '../../components/Pages/Enrollment/EnrollmentPage.constants';
 
 const initialReducerValue = {
-    enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
+    enrollmentPageStatus: null,
 };
 const {
     ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY,
