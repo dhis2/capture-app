@@ -21,7 +21,7 @@ import {
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
-import { navigateToTrackedEntityDashboard } from '../sharedUtils';
+import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
 import { PAGINATION } from '../SearchPage.constants';
 import { urlArguments } from '../../../../utils/url';
 

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -536,6 +536,24 @@ msgstr "显示全部"
 msgid "Choose a registering unit to start reporting"
 msgstr "选择一个注册机构开始填报"
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr " 在"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
 
@@ -576,9 +594,6 @@ msgstr "分配者"
 
 msgid "Saving to"
 msgstr "保存到"
-
-msgid "in"
-msgstr " 在"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -628,15 +643,6 @@ msgstr "选择一个分类选项以开始填报"
 msgid "You dont have access to create an event in the current selections"
 msgstr "你没有在当前选择创建事件的权限"
 
-msgid "Review duplicates"
-msgstr "复查重复"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "创建 {{trackedEntityTypeName}}  和链接"
-
-msgid "Review Duplicates"
-msgstr "复查重复"
-
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "存在重复，但是有错误，查看日志详情。"
 
@@ -661,6 +667,12 @@ msgstr "注册的人"
 
 msgid "Link"
 msgstr "链接"
+
+msgid "Review Duplicates"
+msgstr "复查重复"
+
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"

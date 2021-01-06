@@ -33,7 +33,7 @@ type Props = {
 
 type IsCompletingFn = (props: Props) => boolean;
 type FilterPropsFn = (props: Object) => Object;
-type GetFormFoundationFn = (props: Object) => RenderFoundation;
+type GetFormFoundationFn = (props: Object) => ?RenderFoundation;
 
 type State = {
     messagesDialogOpen: boolean,
@@ -217,10 +217,6 @@ const getSaveHandler = (
                 calculatedFoundation,
                 ...passOnProps
             } = this.props;
-
-            if (!itemId) {
-                return null;
-            }
 
             const filteredProps = onFilterProps ? onFilterProps(passOnProps) : passOnProps;
             this.isCompleting = !!(onIsCompleting && onIsCompleting(this.props));

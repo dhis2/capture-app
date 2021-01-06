@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -537,6 +537,24 @@ msgstr "Ukázat vše"
 msgid "Choose a registering unit to start reporting"
 msgstr "Vyberte registraci jednotky a začněte hlásit"
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr "v"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "Vytváření nového {{TET}} v {{program}} v {{orgUnit}}"
 
@@ -579,9 +597,6 @@ msgstr "Přiřazený"
 
 msgid "Saving to"
 msgstr "Ukládání do"
-
-msgid "in"
-msgstr "v"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -634,15 +649,6 @@ msgstr "Chcete-li začít hlášení zpráv, vyberte možnost kategorie"
 msgid "You dont have access to create an event in the current selections"
 msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
 
-msgid "Review duplicates"
-msgstr "Zkontrolujte duplikáty"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "Vytvořit {{trackedEntityTypeName}} a odkaz"
-
-msgid "Review Duplicates"
-msgstr "Zkontrolovat duplikáty"
-
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "Existuje duplikát (ale došlo k některým chybám, podrobnosti najdete v "
@@ -672,6 +678,12 @@ msgstr "Registrovaná osoba"
 
 msgid "Link"
 msgstr "Odkaz"
+
+msgid "Review Duplicates"
+msgstr "Zkontrolovat duplikáty"
+
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
