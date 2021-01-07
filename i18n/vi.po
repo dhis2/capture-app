@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2020\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -558,37 +558,6 @@ msgstr ""
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "Tạo {{TET}} mới trong {{program}} trong {{orgUnit}}"
-
-msgid "Save and add another"
-msgstr "Lưu và thêm sự kiện khác"
-
-msgid "Save and exit"
-msgstr "Lưu và đóng"
-
-msgid "Finish"
-msgstr "Hoàn tất"
-
-msgid "Switch to form view"
-msgstr "Chuyển sang xem biểu nhập"
-
-msgid "Switch to row view"
-msgstr "Chuyển sang xem dòng"
-
-msgid "New {{TET}}"
-msgstr "{{TET}} mới"
-
-msgid "Working Lists"
-msgstr "Danh sách làm việc"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr ""
-"Chương trình có chương trình {{programId}} không phải là chương trình theo "
-"dõi. Việc đăng ký chỉ có thể được thực hiện trong các chương trình theo dõi."
-
 msgid "Assigned user"
 msgstr "Người dùng được chỉ định"
 
@@ -616,8 +585,23 @@ msgid ""
 "exists"
 msgstr "Kiểu quan hệ {{relationshipTypeName}} với {{entityName}} đã tồn tại"
 
+msgid "Save and add another"
+msgstr "Lưu và thêm sự kiện khác"
+
+msgid "Save and exit"
+msgstr "Lưu và đóng"
+
+msgid "Finish"
+msgstr "Hoàn tất"
+
 msgid "New event"
 msgstr "Sự kiện mới"
+
+msgid "Switch to form view"
+msgstr "Chuyển sang xem biểu nhập"
+
+msgid "Switch to row view"
+msgstr "Chuyển sang xem dòng"
 
 msgid "New event relationship"
 msgstr "Kiểu quan hệ sự kiện mới"

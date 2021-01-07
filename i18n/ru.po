@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -564,37 +564,6 @@ msgstr ""
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "Создать новую {{TET}} в {{program}} для {{orgUnit}}"
-
-msgid "Save and add another"
-msgstr "Сохранить и добавить другую"
-
-msgid "Save and exit"
-msgstr "Сохранить и выйти"
-
-msgid "Finish"
-msgstr "Завершить"
-
-msgid "Switch to form view"
-msgstr "Переключиь вид на Формы"
-
-msgid "Switch to row view"
-msgstr "Переключиться на строчный просмотр "
-
-msgid "New {{TET}}"
-msgstr "Новый {{TET}}"
-
-msgid "Working Lists"
-msgstr "Рабочие листы"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr ""
-"Программа с идентификатором {{programId}} не является программой "
-"отслеживания. Регистрация возможна только в программе отслеживания."
-
 msgid "Assigned user"
 msgstr "Назначенный пользователь"
 
@@ -622,8 +591,23 @@ msgid ""
 "exists"
 msgstr "Тип Родство {{relationshipTypeName}} к {{entityName}} уже существует"
 
+msgid "Save and add another"
+msgstr "Сохранить и добавить другую"
+
+msgid "Save and exit"
+msgstr "Сохранить и выйти"
+
+msgid "Finish"
+msgstr "Завершить"
+
 msgid "New event"
 msgstr "Новое событие"
+
+msgid "Switch to form view"
+msgstr "Переключиь вид на Формы"
+
+msgid "Switch to row view"
+msgstr "Переключиться на строчный просмотр "
 
 msgid "New event relationship"
 msgstr "Отношение нового события"

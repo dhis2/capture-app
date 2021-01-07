@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -560,37 +560,6 @@ msgstr ""
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
-
-msgid "Save and add another"
-msgstr "حفظ واضافة جديد"
-
-msgid "Save and exit"
-msgstr "حفظ وخروج"
-
-msgid "Finish"
-msgstr "إنهاء"
-
-msgid "Switch to form view"
-msgstr "التحويل الى العرض كنموذج"
-
-msgid "Switch to row view"
-msgstr "التحويل إلى العرض كصفوف"
-
-msgid "New {{TET}}"
-msgstr "{{TET}} جديد"
-
-msgid "Working Lists"
-msgstr "قوائم العمل"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr ""
-"البرنامج بالرقم المعرف {{programId}} ليس برنامج تتبع. لا يمكن التسجيل إلا في"
-" برامج التتبع."
-
 msgid "Assigned user"
 msgstr "المستخدم المعين"
 
@@ -619,8 +588,23 @@ msgid ""
 msgstr ""
 "العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}}  موجودة مسبقاً"
 
+msgid "Save and add another"
+msgstr "حفظ واضافة جديد"
+
+msgid "Save and exit"
+msgstr "حفظ وخروج"
+
+msgid "Finish"
+msgstr "إنهاء"
+
 msgid "New event"
 msgstr "حدث جديد"
+
+msgid "Switch to form view"
+msgstr "التحويل الى العرض كنموذج"
+
+msgid "Switch to row view"
+msgstr "التحويل إلى العرض كصفوف"
 
 msgid "New event relationship"
 msgstr "علاقة جديدة بالحدث"

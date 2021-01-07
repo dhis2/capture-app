@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -559,37 +559,6 @@ msgstr ""
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "Oppretter en ny {{TET}} i {{program}} i {{orgUnit}}"
-
-msgid "Save and add another"
-msgstr "Lagre og legg til en til"
-
-msgid "Save and exit"
-msgstr "Lagre og avslutt"
-
-msgid "Finish"
-msgstr "Fullfør"
-
-msgid "Switch to form view"
-msgstr "Bytt til skjemavisning"
-
-msgid "Switch to row view"
-msgstr "Bytt til radvisning"
-
-msgid "New {{TET}}"
-msgstr "Ny {{TET}}"
-
-msgid "Working Lists"
-msgstr "Arbeidslister"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr ""
-"Program med programid {{programId}} er ikke et Tracker-program. "
-"Registreringer kan bare gjøres i Tracker-programmer."
-
 msgid "Assigned user"
 msgstr "Tildelt programbruker"
 
@@ -618,8 +587,23 @@ msgid ""
 msgstr ""
 "Relasjon av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
 
+msgid "Save and add another"
+msgstr "Lagre og legg til en til"
+
+msgid "Save and exit"
+msgstr "Lagre og avslutt"
+
+msgid "Finish"
+msgstr "Fullfør"
+
 msgid "New event"
 msgstr "Ny hendelse"
+
+msgid "Switch to form view"
+msgstr "Bytt til skjemavisning"
+
+msgid "Switch to row view"
+msgstr "Bytt til radvisning"
 
 msgid "New event relationship"
 msgstr "Ny hendelsesrelasjon"
