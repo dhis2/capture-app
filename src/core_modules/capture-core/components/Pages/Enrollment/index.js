@@ -1,1 +1,1 @@
-export { EnrollmentPage } from './EnrollmentPage.component';
+export { EnrollmentPage } from './EnrollmentPage.container';

@@ -81,4 +81,4 @@ export const activePageDesc = createReducerDescription({
         ...state,
         isDataEntryLoading: false,
     }),
-}, 'activePage');
+}, 'activePage', { isPageLoading: false });
