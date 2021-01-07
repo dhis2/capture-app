@@ -302,6 +302,5 @@ export default combineEpics(
     startSavingNewTrackedEntityTypeEpic,
     completeSavingNewTrackedEntityTypeEpic,
     fetchEnrollmentPageInformationFromUrlEpic,
-    openEnrollmentPageEpic,
     ...getDataEntryEpics(),
 );
