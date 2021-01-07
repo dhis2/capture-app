@@ -29,9 +29,9 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
                         from(fetchTrackedEntityInstance(trackedEntityInstance))
                             .pipe(
                                 flatMap(({ attributes, enrollments }) => {
-                                    const selectedName = attributes.reduce(
-                                        (acc, { value: dataElementValue }) =>
-                                            (acc ? `${acc} ${dataElementValue}` : dataElementValue), '');
+                                    // todo this is not scaling
+                                    const selectedName = attributes.reduce((acc, { value: dataElementValue }) =>
+                                        (acc ? `${acc} ${dataElementValue}` : dataElementValue), '');
                                     const enrollmentsSortedByDate = enrollments.sort((a, b) =>
                                         moment.utc(a.enrollmentDate).diff(moment.utc(b.enrollmentDate)));
 
