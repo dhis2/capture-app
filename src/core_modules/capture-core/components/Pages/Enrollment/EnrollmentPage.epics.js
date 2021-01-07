@@ -21,39 +21,48 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
     action$.pipe(
         ofType(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_FETCH),
         flatMap(() => {
-            const { currentSelections: { enrollmentId } } = store.value;
+            const {
+                currentSelections: {
+                    enrollmentId: selectedEnrollmentId,
+                    orgUnitId: selectedOrgUnitId,
+                    programId: selectedProgramId,
+                    teiId: selectedTeiId,
+                },
+            } = store.value;
+            const urlCompleted = Boolean(selectedEnrollmentId && selectedOrgUnitId && selectedProgramId && selectedTeiId);
 
-            return from(fetchEnrollment(enrollmentId))
+            return from(fetchEnrollment(selectedEnrollmentId))
                 .pipe(
                     flatMap(({ trackedEntityInstance, program, orgUnit }) =>
                         from(fetchTrackedEntityInstance(trackedEntityInstance))
                             .pipe(
-                                flatMap(({ attributes, enrollments }) => {
-                                    // todo this is not scaling
+                                map(({ attributes, enrollments }) => {
+                                    // todo this is not scaling when you have many attributes the name will be huge
                                     const selectedName = attributes.reduce((acc, { value: dataElementValue }) =>
                                         (acc ? `${acc} ${dataElementValue}` : dataElementValue), '');
                                     const enrollmentsSortedByDate = enrollments.sort((a, b) =>
                                         moment.utc(a.enrollmentDate).diff(moment.utc(b.enrollmentDate)));
 
-                                    return concat(
-                                        of(successfulFetchingEnrollmentPageInformationFromUrl({
+
+                                    return urlCompleted ?
+                                        successfulFetchingEnrollmentPageInformationFromUrl({
                                             selectedName,
                                             enrollmentsSortedByDate,
-                                        })),
-                                        of(openEnrollmentPage({
+                                        })
+                                        :
+                                        openEnrollmentPage({
                                             programId: program,
                                             orgUnitId: orgUnit,
                                             teiId: trackedEntityInstance,
-                                            enrollmentId,
-                                        }),
-                                        ),
-                                    );
+                                            enrollmentId: selectedEnrollmentId,
+                                        });
                                 }),
+                                catchError(() => of(showErrorViewOnEnrollmentPage())),
                             )),
-                    startWith(showLoadingViewOnEnrollmentPage()),
                     catchError(() => of(showErrorViewOnEnrollmentPage())),
                 );
         }),
+        startWith(showLoadingViewOnEnrollmentPage()),
     );
 
 export const openEnrollmentPageEpic = (action$: InputObservable) =>
