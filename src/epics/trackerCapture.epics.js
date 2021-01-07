@@ -113,13 +113,6 @@ import {
     teiSearchChangePageEpic,
 } from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
 import {
-    getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
-    emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
-    validationForNewEnrollmentUrlUpdateEpic,
-    openNewEnrollmentInDataEntryEpic,
-    saveNewEnrollmentEpic,
-} from 'capture-core/components/Pages/NewEnrollment';
-import {
     asyncUpdateFieldEpic,
 } from 'capture-core/components/D2Form';
 import {
@@ -256,13 +249,8 @@ export default combineEpics(
     addRelationshipForNewSingleEventEpic,
     saveNewEventRelationshipsIfExistsEpic,
     saveNewEventRelationshipFinishedEpic,
-    getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
-    emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
-    validationForNewEnrollmentUrlUpdateEpic,
-    openNewEnrollmentInDataEntryEpic,
     runRulesOnEnrollmentFieldUpdateEpic,
     runRulesOnEnrollmentDataEntryFieldUpdateEpic,
-    saveNewEnrollmentEpic,
     filterFormFieldOrgUnitsEpic,
     asyncUpdateFieldEpic,
     teiSearchFilterOrgUnitsEpic,

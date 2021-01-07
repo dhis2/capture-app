@@ -3,7 +3,6 @@ export {
     openDataEntryForNewEnrollmentBatchAsync,
     sectionKeys as sectionKeysForEnrollmentDataEntry,
     runRulesOnUpdateFieldBatch,
-    buildServerData as buildServerDataForEnrollmentDataEntry,
     openBatchActionTypes as enrollmentOpenBatchActionTypes,
     enrollmentBatchActionTypes,
     runRulesOnEnrollmentFieldUpdateEpic,
