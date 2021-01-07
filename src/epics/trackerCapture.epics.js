@@ -161,6 +161,8 @@ import {
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     startAgainEpic,
+    clearTrackedEntityInstanceSelectionEpic,
+    setEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 import {
     setTrackedEntityTypeIdOnUrlEpic,
@@ -302,5 +304,7 @@ export default combineEpics(
     startSavingNewTrackedEntityTypeEpic,
     completeSavingNewTrackedEntityTypeEpic,
     fetchEnrollmentPageInformationFromUrlEpic,
+    clearTrackedEntityInstanceSelectionEpic,
+    setEnrollmentSelectionEpic,
     ...getDataEntryEpics(),
 );

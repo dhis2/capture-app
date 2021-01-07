@@ -49,8 +49,11 @@ type Props = {
     onFindClick: () => void,
     onFindClickWithoutProgramId: () => void,
     currentPage: string,
-    selectedTrackedEntityTypeName: string,
+    selectedEnrollmentId: string,
+    selectedTeiName: string,
+    enrollmentsAsOptions: Array<Object>,
     onTrackedEntityInstanceClear: () => void,
+    onEnrollmentSelectionSet: () => void,
 };
 
 class QuickSelector extends Component<Props> {
@@ -94,7 +97,15 @@ class QuickSelector extends Component<Props> {
 
     render() {
         const { width, programSelectorWidth } = this.calculateColumnWidths();
-        const { currentPage, selectedTrackedEntityTypeName, onTrackedEntityInstanceClear } = this.props;
+        const {
+            currentPage,
+            selectedTeiName,
+            enrollmentsAsOptions,
+            selectedEnrollmentId,
+            onTrackedEntityInstanceClear,
+            onEnrollmentSelectionSet,
+            enrollmentLockedSelectReady,
+        } = this.props;
 
         return (
             <Paper className={this.props.classes.paper}>
@@ -126,17 +137,30 @@ class QuickSelector extends Component<Props> {
                         <>
                             <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                 <SingleLockedSelect
+                                    ready={enrollmentLockedSelectReady}
                                     onClear={onTrackedEntityInstanceClear}
                                     options={[
                                         {
-                                            label: selectedTrackedEntityTypeName,
-                                            value: selectedTrackedEntityTypeName,
+                                            label: selectedTeiName,
+                                            value: 'one',
                                         },
                                     ]}
-                                    selectedText={selectedTrackedEntityTypeName}
+                                    selectedValue="one"
                                     title={i18n.t('Tracked Entity Type')}
                                 />
                             </Grid>
+                            {
+                                enrollmentsAsOptions &&
+                                <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
+                                    <SingleLockedSelect
+                                        ready={enrollmentLockedSelectReady}
+                                        onSelect={onEnrollmentSelectionSet}
+                                        options={enrollmentsAsOptions}
+                                        selectedValue={selectedEnrollmentId}
+                                        title={i18n.t('Enrollment')}
+                                    />
+                                </Grid>
+                            }
                         </>
 
                     }

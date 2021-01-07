@@ -218,4 +218,16 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         categoriesMeta: undefined,
         trackedEntityTypeId,
     }),
+    [lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR]:
+      state => ({
+          ...state,
+          trackedEntityInstanceDisplayName: undefined,
+          teiId: undefined,
+          enrollmentId: undefined,
+      }),
+    [lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET]:
+      (state, { payload: { enrollmentId } }) => ({
+          ...state,
+          enrollmentId,
+      }),
 }, 'currentSelections');

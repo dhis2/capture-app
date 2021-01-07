@@ -404,6 +404,12 @@ msgstr ""
 msgid "No programs available."
 msgstr ""
 
+msgid "Tracked Entity Type"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
 msgid "Online"
 msgstr ""
 
