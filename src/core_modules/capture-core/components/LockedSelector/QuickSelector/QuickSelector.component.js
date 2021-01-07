@@ -54,6 +54,7 @@ type Props = {
     enrollmentsAsOptions: Array<Object>,
     onTrackedEntityInstanceClear: () => void,
     onEnrollmentSelectionSet: () => void,
+    enrollmentLockedSelectReady: boolean,
 };
 
 class QuickSelector extends Component<Props> {
