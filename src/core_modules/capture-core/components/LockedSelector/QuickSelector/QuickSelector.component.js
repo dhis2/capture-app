@@ -104,6 +104,7 @@ class QuickSelector extends Component<Props> {
             selectedEnrollmentId,
             onTrackedEntityInstanceClear,
             onEnrollmentSelectionSet,
+            enrollmentLockedSelectReady,
         } = this.props;
 
         return (
@@ -136,6 +137,7 @@ class QuickSelector extends Component<Props> {
                         <>
                             <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                 <SingleLockedSelect
+                                    ready={enrollmentLockedSelectReady}
                                     onClear={onTrackedEntityInstanceClear}
                                     options={[
                                         {
@@ -151,6 +153,7 @@ class QuickSelector extends Component<Props> {
                                 enrollmentsAsOptions &&
                                 <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                     <SingleLockedSelect
+                                        ready={enrollmentLockedSelectReady}
                                         onSelect={onEnrollmentSelectionSet}
                                         options={enrollmentsAsOptions}
                                         selectedValue={selectedEnrollmentId}

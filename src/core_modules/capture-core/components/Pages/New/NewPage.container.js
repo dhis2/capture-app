@@ -17,7 +17,6 @@ export const NewPage: ComponentType<{||}> = () => {
         () => { dispatch(showDefaultViewOnNewPage()); },
         [dispatch]);
 
-
     const error: boolean =
         useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
 
