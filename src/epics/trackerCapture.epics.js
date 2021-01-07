@@ -187,10 +187,10 @@ import {
     startNewTeiDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.epics';
 import {
-    completeSavingNewTrackedEntityTypeEpic,
-    completeSavingNewTrackedEntityTypeWithEnrollmentEpic,
-    startSavingNewTrackedEntityTypeEpic,
-    startSavingNewTrackedEntityTypeWithEnrollmentEpic,
+    completeSavingNewTrackedEntityInstanceEpic,
+    completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
+    startSavingNewTrackedEntityInstanceEpic,
+    startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
 
@@ -303,10 +303,10 @@ export default combineEpics(
     setTrackedEntityTypeIdOnUrlEpic,
     startNewTeiDataEntrySelfInitialisationEpic,
     startNewEnrollmentDataEntrySelfInitialisationEpic,
-    startSavingNewTrackedEntityTypeEpic,
-    startSavingNewTrackedEntityTypeWithEnrollmentEpic,
-    completeSavingNewTrackedEntityTypeEpic,
-    completeSavingNewTrackedEntityTypeWithEnrollmentEpic,
+    startSavingNewTrackedEntityInstanceEpic,
+    startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
+    completeSavingNewTrackedEntityInstanceEpic,
+    completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     openNewRegistrationPageFromLockedSelectorEpic,
     ...getDataEntryEpics(),
 );

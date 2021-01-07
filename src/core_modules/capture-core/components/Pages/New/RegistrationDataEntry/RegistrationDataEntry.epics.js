@@ -4,8 +4,8 @@ import { map } from 'rxjs/operators';
 import { empty } from 'rxjs';
 import {
     registrationFormActionTypes,
-    saveNewTrackedEntityType,
-    saveNewTrackedEntityTypeWithEnrollment,
+    saveNewTrackedEntityInstance,
+    saveNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
 import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
 import { getScopeFromScopeId, scopeTypes, TrackerProgram } from '../../../../metaData';
@@ -15,13 +15,13 @@ const deriveAttributesFromFormValues = (formValues = {}) =>
     Object.keys(formValues)
         .map(key => ({ attribute: key, value: formValues[key] }));
 
-export const startSavingNewTrackedEntityTypeEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
+export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_SAVE_START),
+        ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START),
         map(() => {
             const { orgUnitId, trackedEntityTypeId } = store.value.currentSelections;
 
-            return saveNewTrackedEntityType(
+            return saveNewTrackedEntityInstance(
                 {
                     attributes: deriveAttributesFromFormValues(store.value.formsValues['newPageDataEntryId-newTei']),
                     enrollments: [],
@@ -31,9 +31,9 @@ export const startSavingNewTrackedEntityTypeEpic: Epic = (action$: InputObservab
         }),
     );
 
-export const completeSavingNewTrackedEntityTypeEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
+export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_SAVE_COMPLETED),
+        ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_COMPLETED),
         map(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
             const { orgUnitId, trackedEntityTypeId } = store.value.currentSelections;
 
@@ -46,14 +46,14 @@ export const completeSavingNewTrackedEntityTypeEpic: Epic = (action$: InputObser
         }),
     );
 
-export const startSavingNewTrackedEntityTypeWithEnrollmentEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
+export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_WITH_ENROLLMENT_SAVE_START),
+        ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map(() => {
             const { orgUnitId, programId } = store.value.currentSelections;
             const enrollmentFormValues = store.value.dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
             const scope = getScopeFromScopeId(programId);
-            return saveNewTrackedEntityTypeWithEnrollment(
+            return saveNewTrackedEntityInstanceWithEnrollment(
                 {
                     attributes: deriveAttributesFromFormValues(store.value.formsValues['newPageDataEntryId-newEnrollment']),
                     enrollments: [
@@ -70,9 +70,9 @@ export const startSavingNewTrackedEntityTypeWithEnrollmentEpic: Epic = (action$:
         }),
     );
 
-export const completeSavingNewTrackedEntityTypeWithEnrollmentEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
+export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_WITH_ENROLLMENT_SAVE_COMPLETED),
+        ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED),
         map(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
             const { orgUnitId, programId } = store.value.currentSelections;
 
