@@ -2,7 +2,7 @@
 import { ofType } from 'redux-observable';
 import { push } from 'connected-react-router';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
-import { concat, from, of } from 'rxjs';
+import { from, of } from 'rxjs';
 import moment from 'moment';
 import { getApi } from '../../../d2';
 import {
