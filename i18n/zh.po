@@ -3,14 +3,14 @@
 # phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 晓东 林 <13981924470@126.com>, 2020
-# easylin <lin_xd@126.com>, 2020
+# easylin <lin_xd@126.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2020\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -134,8 +134,11 @@ msgstr "注册"
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
 
+msgid "Metadata error. see log for details"
+msgstr "元数据错误"
+
 msgid "An error has occurred. See log for details"
-msgstr ""
+msgstr "发生了错误。查看日志以获取详细信息"
 
 msgid "Cancel"
 msgstr "取消"
@@ -533,6 +536,24 @@ msgstr "显示全部"
 msgid "Choose a registering unit to start reporting"
 msgstr "选择一个注册机构开始填报"
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr "将{{trackedEntityName}}保存在"
+
+msgid "in"
+msgstr " 在"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr "保存{{trackedEntityName}}"
+
+msgid "without"
+msgstr "没有"
+
+msgid "enrollment"
+msgstr "注册"
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr "通过从顶部栏中选择一个项目来注册"
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
 
@@ -573,9 +594,6 @@ msgstr "分配者"
 
 msgid "Saving to"
 msgstr "保存到"
-
-msgid "in"
-msgstr " 在"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -650,14 +668,11 @@ msgstr "注册的人"
 msgid "Link"
 msgstr "链接"
 
-msgid "Metadata error. see log for details"
-msgstr "元数据错误"
-
-msgid "Review duplicates"
+msgid "Review Duplicates"
 msgstr "复查重复"
 
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "创建 {{trackedEntityTypeName}}  和链接"
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr "保存新的{{trackedEntityTypeName}}并链接"
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
@@ -679,9 +694,6 @@ msgstr "组织机构"
 
 msgid "Registration"
 msgstr "注册"
-
-msgid "Review Duplicates"
-msgstr "复查重复"
 
 msgid "Search results"
 msgstr "搜索结果"

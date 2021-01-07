@@ -1,6 +1,6 @@
 {
   "baseUrl": "http://localhost:3000",
-  "video": false,
+  "video": true,
   "testFiles": "**/*.feature",
   "dhis2_datatest_prefix": "dhis2-capture",
   "chromeWebSecurityComment": "chromeWebSecurity should removed once https://github.com/cypress-io/cypress/issues/4220 is fixed",
@@ -9,7 +9,6 @@
   "projectId": "322xnh",
   "experimentalFetchPolyfill": true,
   "retries": {
-    "runMode": 2,
-    "openMode": 0
+    "runMode": 2
   }
 }
