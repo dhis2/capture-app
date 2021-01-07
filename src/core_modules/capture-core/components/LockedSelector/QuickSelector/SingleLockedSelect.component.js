@@ -80,20 +80,30 @@ const SingleLockedSelectPlain =
       options,
       classes,
   }: Props) => {
-      const [selected, toggleSelected] = useState(false);
-      useEffect(
-          () => toggleSelected(Boolean(selectedValue)),
-          [selectedValue],
-      );
-
       const handleOnClear = () => {
           toggleSelected(false);
           onClear && onClear();
       };
-      const handleOnSelect = ({ value }) => {
+      const handleOnSelect = useCallback(({ value }) => {
           toggleSelected(true);
           onSelect && onSelect(value);
-      };
+      },
+      [onSelect]);
+
+      const [selected, toggleSelected] = useState(false);
+      useEffect(() => toggleSelected(Boolean(selectedValue)),
+          [selectedValue],
+      );
+
+      useEffect(
+          () => {
+              if (options.length === 1 && selectedValue !== options[0].value) {
+                  const { value } = options[0];
+                  handleOnSelect({ value });
+              }
+          },
+          [handleOnSelect, options, selectedValue],
+      );
 
       const { label } = options.find((({ value }) => value === selectedValue)) || {};
       return (<>
