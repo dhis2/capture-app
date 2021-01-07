@@ -88,10 +88,10 @@ const NewPagePlain = ({
                 newPageStatus === newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED &&
                 (() => {
                     const { categoryCombination } = programCollection.get(currentScopeId) || {};
-                    const { name = 'program category' } = categoryCombination || {};
+                    const { name = 'a program category' } = categoryCombination || { };
                     return (
                         <InefficientSelectionsMessage
-                            message={i18n.t('Choose a {{name}} to start reporting', { name })}
+                            message={i18n.t('Choose {{name}} to start reporting', { name })}
                         />
                     );
                 })()
