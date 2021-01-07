@@ -17,7 +17,7 @@ const useRegistrationOptions = (): RegistrationOptions => {
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
     return useMemo(() =>
         Object.values(trackedEntityTypesWithCorrelatedPrograms)
-        // $FlowFixMe https://github.com/facebook/flow/issues/2221
+            // $FlowFixMe https://github.com/facebook/flow/issues/2221
             .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeTeiRegistration, programs }) => ({
                 ...acc,
                 [trackedEntityTypeId]: {

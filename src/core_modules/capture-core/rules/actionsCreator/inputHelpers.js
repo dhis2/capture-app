@@ -31,11 +31,10 @@ function convertFormValuesToClientValues(formValues: {[key: string]: any}, rende
 
 function getValidFormValues(formValues: { [key: string]: any }, fieldsValidation: { [key: string]: boolean }) {
     return Object.keys(formValues)
-        .reduce((accValidFormValues, key) => {
-            const isValid = fieldsValidation[key];
-            accValidFormValues[key] = isValid ? formValues[key] : null;
-            return accValidFormValues;
-        }, {});
+        .filter(key => fieldsValidation[key])
+        .reduce((accValidFormValues, key) => (
+            { ...accValidFormValues, [key]: formValues[key] }
+        ), {});
 }
 
 function getFieldsValidationForForm(sectionsFieldsUI: Object, formId: string) {
@@ -72,7 +71,6 @@ export function getCurrentClientValues(
         fieldValidations;
 
     const validFormValues = getValidFormValues(updatedCurrentFormData, updatedFieldValidations);
-
     const clientData = convertFormValuesToClientValues(validFormValues, foundation);
     return clientData;
 }

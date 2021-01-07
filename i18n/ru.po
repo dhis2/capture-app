@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -138,6 +138,9 @@ msgstr "Регистрация"
 
 msgid "A future date is not allowed"
 msgstr "Ввод даты будущего периода запрещена"
+
+msgid "Metadata error. see log for details"
+msgstr "Ошибка в метаданных. Смотрите детали в лог-файле."
 
 msgid "An error has occurred. See log for details"
 msgstr ""
@@ -543,6 +546,24 @@ msgstr "Показать все"
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr "в"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "Создать новую {{TET}} в {{program}} для {{orgUnit}}"
 
@@ -585,9 +606,6 @@ msgstr "Уполномоченный"
 
 msgid "Saving to"
 msgstr "Сохраняю в"
-
-msgid "in"
-msgstr "в"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -672,14 +690,11 @@ msgstr "Зарегистрированное лицо"
 msgid "Link"
 msgstr "Ссылка"
 
-msgid "Metadata error. see log for details"
-msgstr "Ошибка в метаданных. Смотрите детали в лог-файле."
-
-msgid "Review duplicates"
+msgid "Review Duplicates"
 msgstr "Пересмотр дубликатов"
 
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "Создать {{trackedEntityTypeName}} и ссылку"
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты"
@@ -701,9 +716,6 @@ msgstr "Организация"
 
 msgid "Registration"
 msgstr "Регистрация"
-
-msgid "Review Duplicates"
-msgstr "Пересмотр дубликатов"
 
 msgid "Search results"
 msgstr "Результаты поиска"

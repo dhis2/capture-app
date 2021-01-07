@@ -1,9 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import {
-    makeTeiRegistrationMetadataSelector,
-} from './tei.selectors';
-import TrackedEntityInstance from './TrackedEntityInstance.component';
+import { makeTeiRegistrationMetadataSelector } from './tei.selectors';
+import TrackedEntityInstance from './DataEntryTrackedEntityInstance.component';
 
 const makeMapStateToProps = () => {
     const teiRegistrationMetadataSelector = makeTeiRegistrationMetadataSelector();
@@ -11,15 +9,11 @@ const makeMapStateToProps = () => {
     const mapStateToProps = (state: ReduxState) => {
         const teiRegistrationMetadata = teiRegistrationMetadataSelector(state);
 
-        return {
-            teiRegistrationMetadata,
-            orgUnit: state.newRelationshipRegisterTei.orgUnit,
-        };
+        return { teiRegistrationMetadata };
     };
     // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
-// $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeMapStateToProps, () => ({}))(TrackedEntityInstance);
+export const DataEntryTrackedEntityInstance = connect(makeMapStateToProps, () => ({}))(TrackedEntityInstance);

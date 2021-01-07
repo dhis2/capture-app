@@ -1,5 +1,5 @@
 // @flow
-export { default as Enrollment } from './Enrollment.container';
+export { EnrollmentDataEntry } from './EnrollmentDataEntry.container';
 export { default as sectionKeys } from './constants/sectionKeys.const';
 export { actionTypes as openActionTypes } from './actions/open.actions';
 export {
