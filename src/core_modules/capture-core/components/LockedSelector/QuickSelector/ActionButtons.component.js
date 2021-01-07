@@ -13,11 +13,10 @@ const styles = ({ typography }) => ({
         marginBottom: typography.pxToRem(8),
         marginTop: typography.pxToRem(8),
     },
-    marginLeft: {
-        marginLeft: typography.pxToRem(12),
+    marginRight: {
+        marginRight: typography.pxToRem(12),
     },
     buttonAsLink: {
-        marginLeft: typography.pxToRem(12),
         fontSize: typography.pxToRem(13),
         background: 'none!important',
         border: 'none',
@@ -62,6 +61,7 @@ const Index = ({
                 small
                 secondary
                 dataTest="dhis2-capture-new-event-button"
+                className={classes.marginRight}
                 onClick={onNewClick}
             >
                 {
@@ -77,7 +77,7 @@ const Index = ({
                         small
                         secondary
                         dataTest="dhis2-capture-find-button"
-                        className={classes.marginLeft}
+                        className={classes.marginRight}
                         onClick={onFindClickWithoutProgramId}
                     >
                         { i18n.t('Find') }
@@ -87,7 +87,7 @@ const Index = ({
                         small
                         secondary
                         dataTest="dhis2-capture-find-button"
-                        className={classes.marginLeft}
+                        className={classes.marginRight}
                         component={
                             <FlyoutMenu
                                 dense
@@ -109,7 +109,6 @@ const Index = ({
                         { i18n.t('Find') }
                     </DropdownButton>
             }
-
 
             {
                 showResetButton ?
