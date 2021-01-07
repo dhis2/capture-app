@@ -10,8 +10,5 @@ export const actionTypes = {
 export const openDataEntry = () =>
     actionCreator(actionTypes.DATA_ENTRY_OPEN)();
 
-export const openDataEntryCancelled = () =>
-    actionCreator(actionTypes.DATA_ENTRY_OPEN_CANCELLED)();
-
 export const openDataEntryFailed = (errorMessage: string) =>
     actionCreator(actionTypes.DATA_ENTRY_OPEN_FAILED)({ errorMessage });

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -134,6 +134,9 @@ msgstr "التسجيل"
 
 msgid "A future date is not allowed"
 msgstr "غير مسموح تاريخ بالمستقبل"
+
+msgid "Metadata error. see log for details"
+msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
 
 msgid "An error has occurred. See log for details"
 msgstr ""
@@ -535,6 +538,24 @@ msgstr "إظهار الكل"
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr "في"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
 
@@ -577,9 +598,6 @@ msgstr "المحال إليه"
 
 msgid "Saving to"
 msgstr "حفظ إلى"
-
-msgid "in"
-msgstr "في"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -658,14 +676,11 @@ msgstr "الشخص المسجل"
 msgid "Link"
 msgstr "ربط"
 
-msgid "Metadata error. see log for details"
-msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
+msgid "Review Duplicates"
+msgstr "مراجعة التكرارات"
 
-msgid "Review duplicates"
-msgstr "مراجعة التكرار"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "إنشاء {{trackedEntityTypeName}} وربط"
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
@@ -687,9 +702,6 @@ msgstr "الوحدة التنظيمية"
 
 msgid "Registration"
 msgstr "التسجيل"
-
-msgid "Review Duplicates"
-msgstr "مراجعة التكرارات"
 
 msgid "Search results"
 msgstr "نتائج البحث"
