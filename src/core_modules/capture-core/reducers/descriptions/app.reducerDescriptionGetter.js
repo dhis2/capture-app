@@ -129,10 +129,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: action.payload.nextPage,
     }),
-    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START]: (state, action) => ({
-        ...state,
-        page: action.payload.nextPage,
-    }),
     [lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN]: state => ({
         ...state,
         page: 'newEvent',
