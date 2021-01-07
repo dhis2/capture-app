@@ -5,6 +5,7 @@ import QuickSelector from './QuickSelector.component';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 import { clearTrackedEntityInstanceSelection, setEnrollmentSelection } from '../LockedSelector.actions';
+import { enrollmentPageStatuses } from '../../Pages/Enrollment/EnrollmentPage.constants';
 
 const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
     enrollments
@@ -28,6 +29,7 @@ const mapStateToProps = (state: Object) => {
         currentPage: app.page,
         selectedTeiName: enrollmentPage.trackedEntityInstanceDisplayName,
         enrollmentsAsOptions,
+        enrollmentLockedSelectReady: enrollmentPage.enrollmentPageStatus !== enrollmentPageStatuses.LOADING,
     };
 };
 
