@@ -2,21 +2,21 @@ import { actionCreator } from '../../../../actions/actions.utils';
 import { effectMethods } from '../../../../trackerOffline';
 
 export const registrationFormActionTypes = {
-    NEW_TRACKED_ENTITY_TYPE_SAVE_START: 'StartSavingNewTrackedEntityType',
-    NEW_TRACKED_ENTITY_TYPE_SAVE: 'SaveNewTrackedEntityType',
-    NEW_TRACKED_ENTITY_TYPE_SAVE_COMPLETED: 'CompleteSavingNewTrackedEntityType',
+    NEW_TRACKED_ENTITY_INSTANCE_SAVE_START: 'StartSavingNewTrackedEntityInstance',
+    NEW_TRACKED_ENTITY_INSTANCE_SAVE: 'SaveNewTrackedEntityInstance',
+    NEW_TRACKED_ENTITY_INSTANCE_SAVE_COMPLETED: 'CompleteSavingNewTrackedEntityInstance',
 
-    NEW_TRACKED_ENTITY_TYPE_WITH_ENROLLMENT_SAVE_START: 'StartSavingNewTrackedEntityTypeWithEnrollment',
-    NEW_TRACKED_ENTITY_TYPE_WITH_ENROLLMENT_SAVE: 'SaveNewTrackedEntityTypeWithEnrollment',
-    NEW_TRACKED_ENTITY_TYPE_WITH_ENROLLMENT_SAVE_COMPLETED: 'CompleteSavingNewTrackedEntityTypeWithEnrollment',
+    NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START: 'StartSavingNewTrackedEntityInstanceWithEnrollment',
+    NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE: 'SaveNewTrackedEntityInstanceWithEnrollment',
+    NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED: 'CompleteSavingNewTrackedEntityInstanceWithEnrollment',
 };
 
 // without enrollment
-export const startSavingNewTrackedEntityType = () =>
-    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_SAVE_START)();
+export const startSavingNewTrackedEntityInstance = () =>
+    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START)();
 
-export const saveNewTrackedEntityType = candidateForRegistration =>
-    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_SAVE)(
+export const saveNewTrackedEntityInstance = candidateForRegistration =>
+    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE)(
         { ...candidateForRegistration },
         {
             offline: {
@@ -26,10 +26,10 @@ export const saveNewTrackedEntityType = candidateForRegistration =>
                     data: candidateForRegistration,
                 },
                 commit: {
-                    type: registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_SAVE_COMPLETED,
+                    type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_COMPLETED,
                 },
                 rollback: {
-                    type: registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_SAVE_FAILED,
+                    type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_FAILED,
                 },
 
             },
@@ -37,11 +37,11 @@ export const saveNewTrackedEntityType = candidateForRegistration =>
     );
 
 // with enrollment
-export const startSavingNewTrackedEntityTypeWithEnrollment = () =>
-    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_WITH_ENROLLMENT_SAVE_START)();
+export const startSavingNewTrackedEntityInstanceWithEnrollment = () =>
+    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START)();
 
-export const saveNewTrackedEntityTypeWithEnrollment = candidateForRegistration =>
-    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_WITH_ENROLLMENT_SAVE)({ ...candidateForRegistration },
+export const saveNewTrackedEntityInstanceWithEnrollment = candidateForRegistration =>
+    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE)({ ...candidateForRegistration },
         {
             offline: {
                 effect: {
@@ -50,7 +50,7 @@ export const saveNewTrackedEntityTypeWithEnrollment = candidateForRegistration =
                     data: candidateForRegistration,
                 },
                 commit: {
-                    type: registrationFormActionTypes.NEW_TRACKED_ENTITY_TYPE_WITH_ENROLLMENT_SAVE_COMPLETED,
+                    type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED,
                 },
             },
         });
