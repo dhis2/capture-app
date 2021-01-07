@@ -4,8 +4,8 @@ import React, { useCallback, type ComponentType } from 'react';
 import { RegistrationDataEntryComponent } from './RegistrationDataEntry.component';
 import type { OwnProps } from './RegistrationDataEntry.types';
 import {
-    startSavingNewTrackedEntityType,
-    startSavingNewTrackedEntityTypeWithEnrollment,
+    startSavingNewTrackedEntityInstance,
+    startSavingNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
 
 export const RegistrationDataEntry: ComponentType<OwnProps>
@@ -13,11 +13,11 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
       const dispatch = useDispatch();
 
       const dispatchOnSaveWithoutEnrollment = useCallback(
-          () => { dispatch(startSavingNewTrackedEntityType()); },
+          () => { dispatch(startSavingNewTrackedEntityInstance()); },
           [dispatch]);
 
       const dispatchOnSaveWithEnrollment = useCallback(
-          () => { dispatch(startSavingNewTrackedEntityTypeWithEnrollment()); },
+          () => { dispatch(startSavingNewTrackedEntityInstanceWithEnrollment()); },
           [dispatch]);
 
 
