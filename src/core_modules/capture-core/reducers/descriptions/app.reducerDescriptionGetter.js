@@ -20,7 +20,6 @@ import {
 } from '../../components/LockedSelector';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
-import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
