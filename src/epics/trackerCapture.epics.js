@@ -141,7 +141,6 @@ import {
 
 import {
     openNewRelationshipRegisterTeiEpic,
-    openNewRelationshipRegisterTeiDataEntryEpic,
     loadSearchGroupDuplicatesForReviewEpic,
 } from 'capture-core/components/Pages/NewRelationship/RegisterTei';
 
@@ -180,7 +179,14 @@ import {
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
 import {
-    startDataEntryInitialisationEpic,
+    startNewEnrollmentDataEntrySelfInitialisationEpic,
+} from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';
+import {
+    startNewTeiDataEntrySelfInitialisationEpic,
+} from '../core_modules/capture-core/components/DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.epics';
+import {
+    completeSavingNewTrackedEntityTypeEpic,
+    startSavingNewTrackedEntityTypeEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 
 import {
@@ -274,7 +280,6 @@ export default combineEpics(
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
     openNewRelationshipRegisterTeiEpic,
-    openNewRelationshipRegisterTeiDataEntryEpic,
     loadSearchGroupDuplicatesForReviewEpic,
     teiForNewEventRelationshipSavedEpic,
     saveAssigneeEpic,
@@ -293,7 +298,10 @@ export default combineEpics(
     fallbackSearchEpic,
     fallbackPushPageEpic,
     setTrackedEntityTypeIdOnUrlEpic,
-    startDataEntryInitialisationEpic,
+    startNewTeiDataEntrySelfInitialisationEpic,
+    startNewEnrollmentDataEntrySelfInitialisationEpic,
+    startSavingNewTrackedEntityTypeEpic,
+    completeSavingNewTrackedEntityTypeEpic,
     fetchEnrollmentPageInformationFromUrlEpic,
     clearTrackedEntityInstanceSelectionEpic,
     ...getDataEntryEpics(),

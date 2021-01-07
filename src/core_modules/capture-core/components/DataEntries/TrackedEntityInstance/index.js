@@ -1,5 +1,5 @@
 // @flow
-export { default as TrackedEntityInstance } from './TrackedEntityInstance.container';
+export { TrackedEntityInstanceDataEntry } from './TrackedEntityInstanceDataEntry.container';
 export { openDataEntryForNewTeiBatchAsync } from './actions/open.actionBatches';
 export { batchActionTypes } from './actions/tei.actionBatches';
 export { batchActionTypes as openBatchActionTypes } from './actions/open.actionBatches';

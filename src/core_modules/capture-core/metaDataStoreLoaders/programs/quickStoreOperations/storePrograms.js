@@ -101,6 +101,7 @@ export const storePrograms = (programIds: Array<string>) => {
     const query = {
         resource: 'programs',
         params: {
+            restrictToCaptureScope: true,
             fields: fieldsParam,
             filter: `id:in:[${programIds.join(',')}]`,
             pageSize: programIds.length,

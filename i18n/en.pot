@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-05T15:19:13.731Z\n"
-"PO-Revision-Date: 2021-01-05T15:19:13.731Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
+"PO-Revision-Date: 2021-01-06T08:52:06.342Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -120,6 +120,9 @@ msgid "Enrollment"
 msgstr ""
 
 msgid "A future date is not allowed"
+msgstr ""
+
+msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "An error has occurred. See log for details"
@@ -524,6 +527,24 @@ msgstr ""
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
 msgid "Assigned user"
 msgstr ""
 
@@ -534,9 +555,6 @@ msgid "Assignee"
 msgstr ""
 
 msgid "Saving to"
-msgstr ""
-
-msgid "in"
 msgstr ""
 
 msgid ""
@@ -627,13 +645,10 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-msgid "Metadata error. see log for details"
+msgid "Review Duplicates"
 msgstr ""
 
-msgid "Review duplicates"
-msgstr ""
-
-msgid "Create {{trackedEntityTypeName}} and link"
+msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -655,9 +670,6 @@ msgid "Organisation Unit"
 msgstr ""
 
 msgid "Registration"
-msgstr ""
-
-msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"
