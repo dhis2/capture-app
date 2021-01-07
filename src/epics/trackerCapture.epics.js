@@ -190,7 +190,6 @@ import {
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 
 import {
-    clearTrackedEntityInstanceSelectionEpic,
     fetchEnrollmentPageInformationFromUrlEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 
@@ -303,6 +302,5 @@ export default combineEpics(
     startSavingNewTrackedEntityTypeEpic,
     completeSavingNewTrackedEntityTypeEpic,
     fetchEnrollmentPageInformationFromUrlEpic,
-    clearTrackedEntityInstanceSelectionEpic,
     ...getDataEntryEpics(),
 );

@@ -7,7 +7,6 @@ import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEven
 import { updateSelectionsFromUrl } from '../LockedSelector';
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
-import { startFetchingEnrollmentPageInformationFromUrl } from '../Pages/Enrollment/EnrollmentPage.actions';
 
 type Props = {
     location: {
@@ -44,6 +43,10 @@ const enrollmentIdProperties = {
     urlKey: 'enrollmentId',
     propKey: 'enrollmentId',
 };
+const teiIdProperties = {
+    urlKey: 'teiId',
+    propKey: 'teiId',
+};
 
 const specificationForPages = {
     [pageKeys.MAIN]: [
@@ -73,6 +76,7 @@ const specificationForPages = {
         programIdProperties,
         orgUnitIdProperties,
         enrollmentIdProperties,
+        teiIdProperties,
     ],
 };
 
@@ -82,7 +86,7 @@ const updaterForPages = {
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
-    [pageKeys.ENROLLMENT]: startFetchingEnrollmentPageInformationFromUrl,
+    [pageKeys.ENROLLMENT]: updateSelectionsFromUrl,
 };
 
 const getUrlParts = (pathName: string) => {
@@ -186,8 +190,7 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) =>
-            // $FlowFixMe[invalid-computed-prop] automated comment
-            dispatch(updaterForPages[page](updateData)),
+            page != null && dispatch(updaterForPages[page](updateData)),
     });
 
     // $FlowFixMe[missing-annot] automated comment

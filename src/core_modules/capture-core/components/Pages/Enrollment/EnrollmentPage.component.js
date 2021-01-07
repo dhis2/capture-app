@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { compose } from 'redux';
 import type { ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { LockedSelector } from '../../LockedSelector';
@@ -25,26 +24,24 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
 
         {
             enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
-            <div>default</div>
+                <div>default</div>
         }
 
         {
             enrollmentPageStatus === enrollmentPageStatuses.LOADING &&
-            <div className={classes.loadingMask}>
-                <LoadingMask />
-            </div>
+                <div className={classes.loadingMask}>
+                    <LoadingMask />
+                </div>
         }
 
         {
             enrollmentPageStatus === enrollmentPageStatuses.ERROR &&
-            <div>
-                error
-            </div>
+                <div>
+                    error
+                </div>
         }
     </div>
 </>);
 
 export const EnrollmentPageComponent: ComponentType<$Diff<Props, CssClasses>> =
-  compose(
-      withStyles(getStyles),
-  )(EnrollmentPagePlain);
+  withStyles(getStyles)(EnrollmentPagePlain);
