@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-12-22T09:11:47.332Z\n"
-"PO-Revision-Date: 2020-12-22T09:11:47.332Z\n"
+"POT-Creation-Date: 2021-01-07T09:59:29.238Z\n"
+"PO-Revision-Date: 2021-01-07T09:59:29.238Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -284,7 +284,7 @@ msgstr ""
 msgid "Back to form"
 msgstr ""
 
-msgid "Save anyway!"
+msgid "Save anyway"
 msgstr ""
 
 msgid "Validation errors and warnings"
@@ -297,9 +297,6 @@ msgid "Validation errors"
 msgstr ""
 
 msgid "Validation warnings"
-msgstr ""
-
-msgid "Save anyway"
 msgstr ""
 
 msgid "Some operations are still runnning. Please wait.."
