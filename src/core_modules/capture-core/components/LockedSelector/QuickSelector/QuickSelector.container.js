@@ -6,8 +6,9 @@ import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 import { clearTrackedEntityInstanceSelection, setEnrollmentSelection } from '../LockedSelector.actions';
 
-const buildEnrollmentsAsOptions = (enrollments = []) =>
+const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
     enrollments
+        .filter(({ program }) => program === selectedProgramId)
         .map(({ created, enrollment }) => (
             {
                 label: convertValue(created, dataElementTypes.DATETIME),
@@ -16,7 +17,7 @@ const buildEnrollmentsAsOptions = (enrollments = []) =>
         ));
 const mapStateToProps = (state: Object) => {
     const { currentSelections, app, enrollmentPage, organisationUnits } = state;
-    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollmentPage.enrollments);
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollmentPage.enrollments, currentSelections.programId);
 
     return {
         selectedProgramId: currentSelections.programId,

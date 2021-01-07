@@ -98,7 +98,7 @@ const SingleLockedSelectPlain =
       const { label } = options.find((({ value }) => value === selectedValue)) || {};
       return (<>
           {
-              selected ?
+              selected && label ?
                   <Paper square elevation={0} className={classes.selectedPaper}>
                       <h4 className={classes.title}>
                           {i18n.t('Selected')} {title}
