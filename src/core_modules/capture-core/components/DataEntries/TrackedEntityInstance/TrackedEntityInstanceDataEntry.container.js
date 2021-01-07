@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { updateFieldBatch, asyncUpdateSuccessBatch } from './actions/tei.actionBatches';
 import { startAsyncUpdateFieldForNewTei } from './actions/tei.actions';
-import TrackedEntityInstance from './TrackedEntityInstance.component';
+import TrackedEntityInstance from './TrackedEntityInstanceDataEntry.component';
 
 const mapStateToProps = () => ({});
 
@@ -32,5 +32,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps)(TrackedEntityInstance);
+export const TrackedEntityInstanceDataEntry = connect(mapStateToProps, mapDispatchToProps)(TrackedEntityInstance);
 

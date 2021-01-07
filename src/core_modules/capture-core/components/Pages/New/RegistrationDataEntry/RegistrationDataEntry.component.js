@@ -1,61 +1,76 @@
 // @flow
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import { scopeTypes } from '../../../../metaData';
-import { startDataEntryInitialisation } from './RegistrationDataEntry.actions';
-import { EnrollmentDataEntry, TrackedEntityInstanceDataEntry } from '../../../DataEntries';
-import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
+import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import type { OwnProps } from './RegistrationDataEntry.types';
-import { useRegistrationFormInfoForSelectedScope } from './useRegistrationFormInfoForSelectedScope';
-
-const useDataEntryLifecycle = (selectedScopeId, dataEntryId) => {
-    const dispatch = useDispatch();
-    const selectedOrgUnitInfo = useCurrentOrgUnitInfo();
-    const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-
-    useEffect(() => {
-        if (formId) {
-            dispatch(startDataEntryInitialisation({ selectedOrgUnitInfo, dataEntryId, formFoundation }));
-        }
-    }, [selectedOrgUnitInfo, formId, dataEntryId, dispatch, formFoundation]);
-};
+import { EnrollmentRegistrationEntry, TeiRegistrationEntry } from '../../../DataEntries';
+import { scopeTypes } from '../../../../metaData';
+import { useScopeInfo } from '../../../../hooks/useScopeInfo';
+import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
+import { InfoIconText } from '../../../InfoIconText';
+import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
 
 
-export const RegistrationDataEntry = ({ selectedScopeId, dataEntryId }: OwnProps) => {
-    useDataEntryLifecycle(selectedScopeId, dataEntryId);
-    const { formId, registrationMetaData, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
+const translatedTextWithStylesForProgram = (trackedEntityName, programName, orgUnitName) =>
+    (<>
+        {i18n.t('Saving a {{trackedEntityName}} in', { trackedEntityName })} <b>{programName}</b>
+        {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.
+    </>);
+
+
+const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
+    (<>
+        {i18n.t('Saving a {{trackedEntityName}}', { trackedEntityName })} <b>{i18n.t('without')}</b> {i18n.t('enrollment')}
+        {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.{' '}
+        {i18n.t('Enroll in a program by selecting a program from the top bar.')}
+    </>);
+
+
+export const RegistrationDataEntryComponent = ({ selectedScopeId, dataEntryId, onSave }: OwnProps) => {
+    const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
+    const { registrationMetaData } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const orgUnit = useCurrentOrgUnitInfo();
-    const { scopeType } = useScopeInfo(selectedScopeId);
 
     return (
         <>
             {
-                formId &&
+                scopeType === scopeTypes.TRACKER_PROGRAM &&
                 <>
-                    {
-                        scopeType === scopeTypes.TRACKER_PROGRAM &&
-                        <EnrollmentDataEntry
-                            orgUnit={orgUnit}
-                            programId={selectedScopeId}
-                            formFoundation={formFoundation}
-                            enrollmentMetadata={registrationMetaData}
-                            id={dataEntryId}
-                        />
-                    }
-                    {
-                        scopeType === scopeTypes.TRACKED_ENTITY_TYPE &&
-                        <TrackedEntityInstanceDataEntry
-                            orgUnit={orgUnit}
-                            formFoundation={formFoundation}
-                            programId={selectedScopeId}
-                            teiRegistrationMetadata={registrationMetaData}
-                            id={dataEntryId}
-                        />
-                    }
+                    <EnrollmentRegistrationEntry
+                        id={dataEntryId}
+                        selectedScopeId={selectedScopeId}
+                        enrollmentMetadata={registrationMetaData}
+                        saveButtonText={'Save new'}
+                        onSave={() => alert('onSave will save in the future')}
+                        onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
+                        onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
+                        onUpdateField={() => console.log('onUpdateField will be here in the future in the future')}
+                        onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future in the future')}
+                    />
+                    <InfoIconText>
+                        {translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name)}
+                    </InfoIconText>
 
                 </>
             }
+
+            {
+                scopeType === scopeTypes.TRACKED_ENTITY_TYPE &&
+                <>
+                    <TeiRegistrationEntry
+                        id={dataEntryId}
+                        selectedScopeId={selectedScopeId}
+                        teiRegistrationMetadata={registrationMetaData}
+                        saveButtonText={'Save new'}
+                        onSave={onSave}
+                        onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
+                        onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
+                    />
+                    <InfoIconText>
+                        {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
+                    </InfoIconText>
+                </>
+            }
+
         </>
     );
 };

@@ -1,7 +1,9 @@
 // @flow
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import DataEntry from './DataEntry.component';
 import { updateFormField } from './actions/dataEntry.actions';
+import { withLoadingIndicator } from '../../HOC';
 
 const mapStateToProps = (state: Object, props: { id: string }) => ({
     itemId: state.dataEntries[props.id] && state.dataEntries[props.id].itemId,
@@ -38,5 +40,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         }
     },
 });
-// $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps, null)(DataEntry);
+export default compose(
+    // $FlowFixMe
+    connect(mapStateToProps, mapDispatchToProps, null),
+    withLoadingIndicator(() => ({ height: '350px' }), null, ({ dataEntryExists }) => (dataEntryExists)),
+)(DataEntry);

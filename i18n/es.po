@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -131,6 +131,9 @@ msgid "Enrollment"
 msgstr "Inscripción"
 
 msgid "A future date is not allowed"
+msgstr ""
+
+msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "An error has occurred. See log for details"
@@ -532,6 +535,24 @@ msgstr ""
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -571,9 +592,6 @@ msgid "Assignee"
 msgstr ""
 
 msgid "Saving to"
-msgstr ""
-
-msgid "in"
 msgstr ""
 
 msgid ""
@@ -649,13 +667,10 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-msgid "Metadata error. see log for details"
+msgid "Review Duplicates"
 msgstr ""
 
-msgid "Review duplicates"
-msgstr ""
-
-msgid "Create {{trackedEntityTypeName}} and link"
+msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -678,9 +693,6 @@ msgstr "Unidad Organizativa"
 
 msgid "Registration"
 msgstr "Registro"
-
-msgid "Review Duplicates"
-msgstr ""
 
 msgid "Search results"
 msgstr "Resultados de la búsqueda"

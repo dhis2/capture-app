@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2020\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -135,8 +135,11 @@ msgstr "Рўйхатга олиш"
 msgid "A future date is not allowed"
 msgstr "Келажакдаги сана танловига рухсат берилмайди"
 
+msgid "Metadata error. see log for details"
+msgstr "МетаМаълумотда хатолик. Тафсилотлар учун журналга қаранг."
+
 msgid "An error has occurred. See log for details"
-msgstr ""
+msgstr "Хатолик юз берди. Тафсилотлар учун журналга қаранг"
 
 msgid "Cancel"
 msgstr "Бекор қилиш"
@@ -174,7 +177,7 @@ msgid "search group result could not be retrieved"
 msgstr "Гуруҳ қидируви натижасини олиш имкони йўқ"
 
 msgid "Complete"
-msgstr "Бажарилди"
+msgstr "Тўлдириш"
 
 msgid "Warnings found"
 msgstr "Огоҳлантиришлар топилди"
@@ -294,7 +297,7 @@ msgid "selected"
 msgstr "танланган"
 
 msgid "Delete"
-msgstr "Ўчириш"
+msgstr "Ўчириб ташлаш"
 
 msgid "Select file"
 msgstr "Файлни танлаш"
@@ -468,7 +471,7 @@ msgid "Organisation unit could not be loaded"
 msgstr "Ташкилий бўлимни юклаб бўлмади"
 
 msgid "Delete event"
-msgstr "Тадбирни ўчиринг"
+msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
 
 msgid "Download as JSON"
 msgstr "JSON сифатида юклаш"
@@ -495,7 +498,7 @@ msgid "Active"
 msgstr "Фаол"
 
 msgid "Completed"
-msgstr "бажарилди"
+msgstr "Тўлдирилди"
 
 msgid "Registered events"
 msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
@@ -510,13 +513,13 @@ msgid "Save current view as..."
 msgstr "Ушбу жорий кўриниш сифатида сақлаш"
 
 msgid "Delete view"
-msgstr "Исмини кўриш"
+msgstr "Кўздан кечиришни ўчириб ташлаш"
 
 msgid "Share view..."
 msgstr "Кўриниш билан бўлишиш ..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Ҳақиқатдан ҳам '{{templateName}}' кўринишини очмоқчимисиз?"
+msgstr "Ҳақиқатдан ҳам '{{templateName}}' кўринишини ўчириб ташламоқчимисиз?"
 
 msgid "Confirm"
 msgstr "Тасдиқланг"
@@ -535,6 +538,24 @@ msgstr "Барчасини кўрсатиш"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Хисобот бошлаш учун рўйхатдан ўтишни танланг"
+
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr "ичида"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "{{OrgUnit}} да {{program}} да янги {{TET}} яратилмоқда"
@@ -578,9 +599,6 @@ msgstr "Ваколат берилган шахс"
 
 msgid "Saving to"
 msgstr "...да сақлаш"
-
-msgid "in"
-msgstr "ичида"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -667,14 +685,11 @@ msgstr "Рўйхатдан ўтган шахс"
 msgid "Link"
 msgstr "Ҳавола"
 
-msgid "Metadata error. see log for details"
-msgstr "МетаМаълумотда хатолик. Тафсилотлар учун журналга қаранг."
+msgid "Review Duplicates"
+msgstr "Нусхаларни кўриб чиқиш"
 
-msgid "Review duplicates"
-msgstr "Иккинчи нусхани кўриб чиқиш"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr " {{trackedEntityTypeName}} яратинг ва уланг"
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Бўлиши мумкин бўлган нусхалар топилди"
@@ -686,7 +701,7 @@ msgid "An error occured loading possible duplicates"
 msgstr "Бўлиши мумкин бўлган нусхаларни юклашда хатолик юз берди"
 
 msgid "Hide"
-msgstr "Яшириш"
+msgstr "Беркитиш"
 
 msgid "Save as new {{tetName}}"
 msgstr "Янги {{tetName}} сифатида сақлаш"
@@ -696,9 +711,6 @@ msgstr "Ташкилий Бўлим"
 
 msgid "Registration"
 msgstr "Рўйхатдан ўтиш"
-
-msgid "Review Duplicates"
-msgstr "Нусхаларни кўриб чиқиш"
 
 msgid "Search results"
 msgstr "Қидирув натижалари"
@@ -719,7 +731,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr "Янги {{trackedEntityType}} яратиш"
 
 msgid "Register"
-msgstr "Рўйхат"
+msgstr "Рўйхатга олиш"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -816,7 +828,7 @@ msgid "Feedbacks"
 msgstr "Қайта алоқалар"
 
 msgid "You dont have access to delete this relationship"
-msgstr "Ушбу ўзаро алоқаларни ўчириш ҳуқуқига эга эмассиз"
+msgstr "Ушбу ўзаро алоқаларни ўчириб ташлаш ҳуқуқига эга эмассиз"
 
 msgid "You dont have access to create any relationships"
 msgstr "Ушбу ўзаро алоқаларни яратиш ҳуқуқига эга эмассиз"
@@ -870,7 +882,7 @@ msgid "Could not save event. See log for details"
 msgstr "Ҳодиса/тадбир сақланмади. Тафсилотлар учун журналга қаранг"
 
 msgid "Could not delete event"
-msgstr "Ҳодиса/тадбирни ўчириб бўлмади"
+msgstr "Ҳодиса/тадбирни ўчириб ташлаб бўлмади"
 
 msgid "Could not save working list"
 msgstr "Ишчи рўйхат сақланмади"
@@ -879,7 +891,7 @@ msgid "Could not add working list"
 msgstr "Ишчи рўйхатни қўшиб бўлмади"
 
 msgid "Could not delete working list"
-msgstr "Ишчи рўйхатни ўчириб бўлмади"
+msgstr "Ишчи рўйхатни ўчириб ташлаб бўлмади"
 
 msgid "Organisation unit search failed. See log for details"
 msgstr "Ташкилот бўлимини қидириб бўлмади. Тафсилотлар учун журналга қаранг"
@@ -918,7 +930,7 @@ msgid "error"
 msgstr "хато"
 
 msgid "Delete polygon"
-msgstr "Полигон (кўпбурчак) ни ўчириш"
+msgstr "Полигон (кўпбурчак) ни ўчириб ташлаш"
 
 msgid "Set area"
 msgstr "Ҳудудни белгиланг"
