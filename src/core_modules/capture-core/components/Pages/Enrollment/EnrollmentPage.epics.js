@@ -60,9 +60,9 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
                                 catchError(() => of(showErrorViewOnEnrollmentPage())),
                             )),
                     catchError(() => of(showErrorViewOnEnrollmentPage())),
+                    startWith(showLoadingViewOnEnrollmentPage()),
                 );
         }),
-        startWith(showLoadingViewOnEnrollmentPage()),
     );
 
 export const openEnrollmentPageEpic = (action$: InputObservable) =>
