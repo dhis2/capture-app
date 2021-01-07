@@ -44,6 +44,10 @@ const enrollmentIdProperties = {
     urlKey: 'enrollmentId',
     propKey: 'enrollmentId',
 };
+const teiIdProperties = {
+    urlKey: 'teiId',
+    propKey: 'teiId',
+};
 
 const specificationForPages = {
     [pageKeys.MAIN]: [
@@ -73,6 +77,7 @@ const specificationForPages = {
         programIdProperties,
         orgUnitIdProperties,
         enrollmentIdProperties,
+        teiIdProperties,
     ],
 };
 
@@ -82,7 +87,7 @@ const updaterForPages = {
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
-    [pageKeys.ENROLLMENT]: startFetchingEnrollmentPageInformationFromUrl,
+    [pageKeys.ENROLLMENT]: updateSelectionsFromUrl,
 };
 
 const getUrlParts = (pathName: string) => {
@@ -186,8 +191,7 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) =>
-            // $FlowFixMe[invalid-computed-prop] automated comment
-            dispatch(updaterForPages[page](updateData)),
+            page != null && dispatch(updaterForPages[page](updateData)),
     });
 
     // $FlowFixMe[missing-annot] automated comment

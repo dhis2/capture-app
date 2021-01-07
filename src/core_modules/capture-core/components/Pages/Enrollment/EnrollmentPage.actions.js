@@ -2,28 +2,21 @@
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const enrollmentPageActionTypes = {
-    ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY: 'DisplayInitialViewOnEnrollmentPage',
-    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START: 'StartFetchingEnrollmentPageInformationBasedOnIdFromUrl',
-    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_LOADING: 'LoadingOnFetchingEnrollmentPageInformationBasedOnIdFromUrl',
-    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_ERROR: 'ErrorOnFetchingEnrollmentPageInformationBasedOnIdFromUrl',
-    ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS: 'SuccessfulFetchingFetchEnrollmentPageInformationBasedOnIdFromUrl',
-    TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR: 'ClearTrackedEntityInstanceSelection',
+    ENROLLMENT_PAGE_INFORMATION_FETCH: 'StartFetchingEnrollmentPageInformation',
+    ENROLLMENT_PAGE_INFORMATION_LOADING_FETCH: 'LoadingOnFetchingEnrollmentPageInformation',
+    ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH: 'ErrorOnFetchingEnrollmentPageInformation',
+    ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH: 'SuccessOnFetchingEnrollmentPageInformation',
 };
 
-export const showInitialViewOnEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY)();
-
-export const startFetchingEnrollmentPageInformationFromUrl = (data: Object) =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_START)(data);
+export const startFetchingEnrollmentPageInformation = (data: Object) =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_FETCH)(data);
 
 export const showLoadingViewOnEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_LOADING)();
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_LOADING_FETCH)();
 
 export const showErrorViewOnEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INITIAL_VIEW_DISPLAY)();
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH)();
 
-export const successfulFetchingEnrollmentPageInformationFromUrl = ({ selectedName }: Object) =>
-    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_BASED_ON_ID_FROM_URL_FETCH_SUCCESS)({ selectedName });
-
-export const clearTrackedEntityInstanceSelection = () =>
-    actionCreator(enrollmentPageActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR)();
+export const successfulFetchingEnrollmentPageInformationFromUrl = ({ selectedName, enrollmentsSortedByDate }: Object) =>
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH)(
+        { selectedName, enrollmentsSortedByDate });
