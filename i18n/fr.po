@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yao Selom SAKA <saka.yao@yahoo.fr>, 2020\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -567,38 +567,6 @@ msgstr ""
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "Créer un nouveau {{TET}} dans {{programme}} dans {{orgunit}}"
-
-msgid "Save and add another"
-msgstr "Sauvegarder et ajouter nouveau"
-
-msgid "Save and exit"
-msgstr "Sauvegarder et quitter"
-
-msgid "Finish"
-msgstr "Terminer"
-
-msgid "Switch to form view"
-msgstr "Passer à la vue du formulaire"
-
-msgid "Switch to row view"
-msgstr "Passer à la vue des lignes"
-
-msgid "New {{TET}}"
-msgstr "Nouveau {{TET}}"
-
-msgid "Working Lists"
-msgstr "Listes de tâches"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr ""
-"Un programme disposant d'un ID de programme {{programId}} n'est pas un "
-"programme de suivi. Les inscriptions ne sont possibles que dans les "
-"programmes de suivi."
-
 msgid "Assigned user"
 msgstr "Utilisateur affecté"
 
@@ -628,8 +596,23 @@ msgstr ""
 "La relation entre le type {{nom du type de relation}} et {{Nom d'entité}} "
 "existe déjà"
 
+msgid "Save and add another"
+msgstr "Sauvegarder et ajouter nouveau"
+
+msgid "Save and exit"
+msgstr "Sauvegarder et quitter"
+
+msgid "Finish"
+msgstr "Terminer"
+
 msgid "New event"
 msgstr "Nouvel événement"
+
+msgid "Switch to form view"
+msgstr "Passer à la vue du formulaire"
+
+msgid "Switch to row view"
+msgstr "Passer à la vue des lignes"
 
 msgid "New event relationship"
 msgstr "Nouvelle relation d'événement"

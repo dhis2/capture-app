@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -555,37 +555,6 @@ msgstr ""
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "Vytváření nového {{TET}} v {{program}} v {{orgUnit}}"
-
-msgid "Save and add another"
-msgstr "Uložit a přidat další"
-
-msgid "Save and exit"
-msgstr "Uložit a odejít"
-
-msgid "Finish"
-msgstr "Dokončit"
-
-msgid "Switch to form view"
-msgstr "Přepnout do formulářového zobrazení"
-
-msgid "Switch to row view"
-msgstr "Přepnout do zobrazení řádků"
-
-msgid "New {{TET}}"
-msgstr "Nové {{TET}}"
-
-msgid "Working Lists"
-msgstr "Pracovní seznamy"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr ""
-"Program s programid {{programId}} není trasovací program. Registrace lze "
-"provádět pouze v trasovacích programech."
-
 msgid "Assigned user"
 msgstr "Přiřazený uživatel"
 
@@ -613,8 +582,23 @@ msgid ""
 "exists"
 msgstr "Vztah typu {{relationshipTypeName}} k {{entityName}} již existuje"
 
+msgid "Save and add another"
+msgstr "Uložit a přidat další"
+
+msgid "Save and exit"
+msgstr "Uložit a odejít"
+
+msgid "Finish"
+msgstr "Dokončit"
+
 msgid "New event"
 msgstr "Nová událost"
+
+msgid "Switch to form view"
+msgstr "Přepnout do formulářového zobrazení"
+
+msgid "Switch to row view"
+msgstr "Přepnout do zobrazení řádků"
 
 msgid "New event relationship"
 msgstr "Nový vztah události"

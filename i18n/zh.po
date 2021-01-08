@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -554,35 +554,6 @@ msgstr "注册"
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "通过从顶部栏中选择一个项目来注册"
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
-
-msgid "Save and add another"
-msgstr "保存并另外添加"
-
-msgid "Save and exit"
-msgstr "保存后退出"
-
-msgid "Finish"
-msgstr "结束"
-
-msgid "Switch to form view"
-msgstr "切换到表单视图"
-
-msgid "Switch to row view"
-msgstr "切换到行视图"
-
-msgid "New {{TET}}"
-msgstr "新建 {{TET}}"
-
-msgid "Working Lists"
-msgstr "工作列表"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr "项目标识为 {{programId}}的项目不是跟踪随访项目，注册仅仅可能在跟踪随访项目里进行"
-
 msgid "Assigned user"
 msgstr "分配的用户"
 
@@ -608,8 +579,23 @@ msgid ""
 "exists"
 msgstr "{{entityName}} 的 {{relationshipTypeName}}  关系类型已经存在"
 
+msgid "Save and add another"
+msgstr "保存并另外添加"
+
+msgid "Save and exit"
+msgstr "保存后退出"
+
+msgid "Finish"
+msgstr "结束"
+
 msgid "New event"
 msgstr "新事件"
+
+msgid "Switch to form view"
+msgstr "切换到表单视图"
+
+msgid "Switch to row view"
+msgstr "切换到行视图"
 
 msgid "New event relationship"
 msgstr "新建事件关系"

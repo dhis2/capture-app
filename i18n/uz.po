@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Ibatov <ibatovk@who.int>, 2020
+# Ibatov <ibatovk@who.int>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-05T10:14:25.321Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Ibatov <ibatovk@who.int>, 2020\n"
+"Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -216,7 +216,7 @@ msgid "Data for offline list not present"
 msgstr "Оффлайн рўйхат учун маълумотлар мавжуд эмас"
 
 msgid "Close"
-msgstr "Ёпиш"
+msgstr "Ёпмоқ"
 
 msgid "Please select the user"
 msgstr "Илтимос, фойдаланувчини танланг"
@@ -557,37 +557,6 @@ msgstr ""
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "{{OrgUnit}} да {{program}} да янги {{TET}} яратилмоқда"
-
-msgid "Save and add another"
-msgstr "Сақлаш ва бошқасини қўшиш"
-
-msgid "Save and exit"
-msgstr "Сақлаш ва чиқиш"
-
-msgid "Finish"
-msgstr "Тугатиш"
-
-msgid "Switch to form view"
-msgstr "Шакл кўринишига ўтиш"
-
-msgid "Switch to row view"
-msgstr "Жадвал кўринишига ўтиш"
-
-msgid "New {{TET}}"
-msgstr "Янги {{TET}}"
-
-msgid "Working Lists"
-msgstr "Ишчи рўйхатлар"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr ""
-"{{programId}} ДастурID Кузатув-Назорат дастури эмас. Рўйхатдан ўтиш фақат "
-"Кузатув-назорат дастурида амалга оширилиши мумкин."
-
 msgid "Assigned user"
 msgstr "Тавсия этилган фойдаланувчи"
 
@@ -617,8 +586,23 @@ msgstr ""
 " {{relationshipTypeName}} турининг {{entityName}} билан алоқаси аллақачон "
 "мавжуд"
 
+msgid "Save and add another"
+msgstr "Сақлаш ва бошқасини қўшиш"
+
+msgid "Save and exit"
+msgstr "Сақлаш ва чиқиш"
+
+msgid "Finish"
+msgstr "Тугатиш"
+
 msgid "New event"
 msgstr "Янги ҳодиса"
+
+msgid "Switch to form view"
+msgstr "Шакл кўринишига ўтиш"
+
+msgid "Switch to row view"
+msgstr "Жадвал кўринишига ўтиш"
 
 msgid "New event relationship"
 msgstr "Янги ҳодиса/тадбир муносабатлари"
