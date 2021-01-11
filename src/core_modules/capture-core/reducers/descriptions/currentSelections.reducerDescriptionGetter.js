@@ -50,7 +50,7 @@ const setCategoryOption = (
 const deleteKeyFromObject = (key, object) =>
     Object.keys(object).reduce((acc, objectKey) => {
         if (objectKey !== key) {
-            return { ...acc, [objectKey]: object };
+            return { ...acc, [objectKey]: object[objectKey] };
         }
         return acc;
     }, {});
