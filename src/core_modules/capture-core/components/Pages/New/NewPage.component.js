@@ -12,7 +12,6 @@ import { newPageStatuses } from './NewPage.constants';
 import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
-import { programCollection } from '../../../metaDataMemoryStores';
 
 const getStyles = () => ({
     container: {
@@ -30,7 +29,8 @@ const NewPagePlain = ({
     classes,
     currentScopeId,
     newPageStatus,
-    partnerSelectionIncomplete,
+    programCategorySelectionIncomplete,
+    missingCategoriesInProgramSelection,
     orgUnitSelectionIncomplete,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
@@ -43,14 +43,14 @@ const NewPagePlain = ({
     useEffect(() => {
         if (orgUnitSelectionIncomplete) {
             showMessageToSelectOrgUnitOnNewPage();
-        } else if (partnerSelectionIncomplete) {
+        } else if (programCategorySelectionIncomplete) {
             showMessageToSelectProgramPartnerOnNewPage();
         } else {
             showDefaultViewOnNewPage();
         }
     },
     [
-        partnerSelectionIncomplete,
+        programCategorySelectionIncomplete,
         orgUnitSelectionIncomplete,
         showMessageToSelectOrgUnitOnNewPage,
         showMessageToSelectProgramPartnerOnNewPage,
@@ -87,11 +87,16 @@ const NewPagePlain = ({
             {
                 newPageStatus === newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED &&
                 (() => {
-                    const { categoryCombination } = programCollection.get(currentScopeId) || {};
-                    const { name = 'a program category' } = categoryCombination || { };
+                    const missingCategories = missingCategoriesInProgramSelection.reduce((acc, { name }, index) => {
+                        if ((index + 1 === missingCategoriesInProgramSelection.length)) {
+                            return `${acc} ${name} ${missingCategoriesInProgramSelection.length > 1 ? 'categories' : 'category'}`;
+                        }
+                        return `${acc} ${name},`;
+                    }, '');
+
                     return (
                         <InefficientSelectionsMessage
-                            message={i18n.t('Choose {{name}} to start reporting', { name })}
+                            message={i18n.t('Choose the {{missingCategories}} to start reporting', { missingCategories })}
                         />
                     );
                 })()
