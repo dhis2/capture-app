@@ -299,3 +299,38 @@ When('you click the first page button', () => {
     cy.get('[data-test="dhis2-capture-search-pagination-first-page"]')
         .click();
 });
+
+When('you click the first name column header', () => {
+    cy.get('[data-test="online-list-table"]')
+        .contains('First name')
+        .should('exist');
+
+    cy.route('GET', '**/trackedEntityInstances**').as('getTeis');
+
+    cy.get('[data-test="online-list-table"]')
+        .contains('First name')
+        .click();
+});
+
+Then('the sort arrow should indicate descending order', () => {
+    cy.get('[data-test="data-table-desc-sort-icon"]')
+        .should('exist');
+});
+
+Then('teis should be retrieved from the api ordered descendingly by first name', () => {
+    cy.wait('@getTeis', { timeout: 40000 }).as('result');
+
+    cy.get('@result')
+        .its('status')
+        .should('equal', 200);
+
+    cy.get('@result')
+        .its('url')
+        .should('match', /order=.*desc/);
+
+    cy.get('@result')
+        .its('url')
+        .should('include', 'page=1');
+
+    cy.get('@result').its('response.body.trackedEntityInstances').as('teis');
+});

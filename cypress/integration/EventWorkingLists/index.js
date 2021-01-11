@@ -292,3 +292,38 @@ Then('an event batch capped at 50 records should be retrieved from the api', () 
 
     cy.get('@result').its('response.body.events').as('events');
 });
+
+When('you click the report date column header', () => {
+    cy.get('[data-test="online-list-table"]')
+        .contains('Report date')
+        .should('exist');
+
+    cy.route('GET', '**/events**').as('getEvents');
+
+    cy.get('[data-test="online-list-table"]')
+        .contains('Report date')
+        .click();
+});
+
+Then('the sort arrow should indicate ascending order', () => {
+    cy.get('[data-test="data-table-asc-sort-icon"]')
+        .should('exist');
+});
+
+Then('events should be retrieved from the api ordered ascendingly by report date', () => {
+    cy.wait('@getEvents', { timeout: 40000 }).as('result');
+
+    cy.get('@result')
+        .its('status')
+        .should('equal', 200);
+
+    cy.get('@result')
+        .its('url')
+        .should('match', /order=.*asc/);
+
+    cy.get('@result')
+        .its('url')
+        .should('include', 'page=1');
+
+    cy.get('@result').its('response.body.events').as('events');
+});

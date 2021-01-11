@@ -85,3 +85,11 @@ When you change rows per page to 50
 Then an event batch capped at 50 records should be retrieved from the api
 Then the list should display the events retrieved from the api
 And the list should show the first page
+
+Scenario: Show events ordered ascendingly by report date 
+Given you open the main page with Ngelehun and malaria case context
+When you click the report date column header
+Then the sort arrow should indicate ascending order
+Then events should be retrieved from the api ordered ascendingly by report date
+And the list should display the events retrieved from the api
+And the list should show the first page

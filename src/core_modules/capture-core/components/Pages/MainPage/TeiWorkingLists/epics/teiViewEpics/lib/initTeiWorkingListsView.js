@@ -9,6 +9,10 @@ import {
     buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
 import type { Input } from './initTeiWorkingListsView.types';
+import { dataElementTypes } from '../../../../../../../metaData';
+
+const getSortDirection = columnType =>
+    ([dataElementTypes.TEXT, dataElementTypes.LONG_TEXT].includes(columnType) ? 'asc' : 'desc');
 
 const getSortByConfig = (columnsMetaForDataFetching) => {
     let column = columnsMetaForDataFetching.find(col => col.visible);
@@ -18,7 +22,7 @@ const getSortByConfig = (columnsMetaForDataFetching) => {
 
     return {
         sortById: column.id,
-        sortByDirection: 'desc',
+        sortByDirection: getSortDirection(column.type),
     };
 };
 

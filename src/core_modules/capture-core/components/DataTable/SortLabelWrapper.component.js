@@ -30,6 +30,22 @@ type Props = {
 };
 
 class SortLabelWrapper extends React.Component<Props> {
+    static getDirectionBasedIconValues(direction?: ?$Values<typeof sortLabelDirections>) {
+        if (direction === sortLabelDirections.ASC) {
+            return {
+                IconComponent: ArrowUpwardIcon,
+                dataTestValue: 'data-table-asc-sort-icon',
+                invertedDirection: sortLabelDirections.DESC,
+            };
+        }
+
+        return {
+            IconComponent: ArrowDownwardIcon,
+            dataTestValue: 'data-table-desc-sort-icon',
+            invertedDirection: sortLabelDirections.ASC,
+        };
+    }
+
     getIconClickHandler = (
         direction: $Values<typeof sortLabelDirections>,
         onSort: (direction: $Values<typeof sortLabelDirections>) => void) =>
@@ -44,14 +60,15 @@ class SortLabelWrapper extends React.Component<Props> {
     ) => {
         const isDisabled = this.props.disabled;
         const classes = this.props.classes;
-        const IconComponent = direction === sortLabelDirections.ASC ? ArrowUpwardIcon : ArrowDownwardIcon;
+
+        const { IconComponent, dataTestValue, invertedDirection } =
+            SortLabelWrapper.getDirectionBasedIconValues(direction);
+
         const icon = (
             <IconComponent
                 className={isDisabled ? classes.iconBase : classNames(classes.iconBase, classes.enabledIcon)}
-                onClick={this.getIconClickHandler(
-                    direction === sortLabelDirections.DESC ? sortLabelDirections.ASC : sortLabelDirections.DESC,
-                    onSort,
-                )}
+                onClick={this.getIconClickHandler(invertedDirection, onSort)}
+                data-test={dataTestValue}
             />
         );
 
