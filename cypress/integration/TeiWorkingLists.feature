@@ -54,36 +54,36 @@ Scenario: Show next page
 Given you open the main page with Ngelehun and child programme context
 When you click the next page buttton
 Then new teis should be retrieved from the api
-Then the list should display the teis retrieved from the api
+And the list should display the teis retrieved from the api
 And the list should show the second page
 
 Scenario: Show next page then previous page
 Given you open the main page with Ngelehun and child programme context
 When you click the next page buttton
 Then new teis should be retrieved from the api
-Then the list should display the teis retrieved from the api
+And the list should display the teis retrieved from the api
 And the list should show the second page
 When you click the previous page button
 Then new teis should be retrieved from the api
-Then the list should display the teis retrieved from the api
+And the list should display the teis retrieved from the api
 And the list should show the first page
 
 Scenario: Show next page then first page
 Given you open the main page with Ngelehun and child programme context
 When you click the next page buttton
 Then new teis should be retrieved from the api
-Then the list should display the teis retrieved from the api
+And the list should display the teis retrieved from the api
 And the list should show the second page
 When you click the first page button
 Then new teis should be retrieved from the api
-Then the list should display the teis retrieved from the api
+And the list should display the teis retrieved from the api
 And the list should show the first page
 
 Scenario: Show 50 rows per page
 Given you open the main page with Ngelehun and child programme context
 When you change rows per page to 50
 Then a tei batch capped at 50 records should be retrieved from the api
-Then the list should display the teis retrieved from the api
+And the list should display the teis retrieved from the api
 And the list should show the first page
 
 Scenario: Show teis ordered descendingly by first name 
