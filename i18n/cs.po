@@ -1,13 +1,13 @@
 # 
 # Translators:
-# trendspotter, 2020
+# trendspotter, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: trendspotter, 2020\n"
+"Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -538,22 +538,22 @@ msgid "Choose a registering unit to start reporting"
 msgstr "Vyberte registraci jednotky a začněte hlásit"
 
 msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
+msgstr "Ukládání {{trackedEntityName}} v"
 
 msgid "in"
 msgstr "v"
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr ""
+msgstr "Ukládání {{trackedEntityName}}"
 
 msgid "without"
-msgstr ""
+msgstr "bez"
 
 msgid "enrollment"
-msgstr ""
+msgstr "zápis"
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr ""
+msgstr "Zapište se do programu výběrem programu v horní liště."
 
 msgid "Assigned user"
 msgstr "Přiřazený uživatel"
@@ -667,7 +667,7 @@ msgid "Review Duplicates"
 msgstr "Zkontrolovat duplikáty"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "Uložit nový {{trackedEntityTypeName}} a odkaz"
 
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
