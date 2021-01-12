@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -540,36 +540,23 @@ msgstr "هەموو پیشان بدە"
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr " {{TET}} نوێ دروستبکە لە {{program}} لە {{orgUnit}}"
-
-msgid "Save and add another"
-msgstr "تۆمار بکە و دانەیەکی دیکە زیاد بکە"
-
-msgid "Save and exit"
-msgstr "تۆمارکردن و دەرچوون"
-
-msgid "Finish"
-msgstr "تەواکردن"
-
-msgid "Switch to form view"
-msgstr "گۆڕین بۆ پیشاندانی فۆرم"
-
-msgid "Switch to row view"
-msgstr "گۆڕین بۆ پیشاندانی ئاسۆیی"
-
-msgid "New {{TET}}"
-msgstr "نوێ{{TET}}"
-
-msgid "Working Lists"
-msgstr "لیستی کارەکان"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
+msgid "Saving a {{trackedEntityName}} in"
 msgstr ""
-"پرۆگرم بە پرۆگرام ئایدی{{programId}} پرۆگرامی تراکەر نیە. تۆمارکردن تەنها "
-"دەتواندرێت ئەنجام بدرێت لە پرۆگرامی تراکەر"
+
+msgid "in"
+msgstr "لە"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
 
 msgid "Assigned user"
 msgstr "بەکارهێنەری دەستنیشانکراو"
@@ -582,9 +569,6 @@ msgstr "نوێنەر"
 
 msgid "Saving to"
 msgstr "تۆمارکردن بۆ"
-
-msgid "in"
-msgstr "لە"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -601,8 +585,23 @@ msgid ""
 "exists"
 msgstr "پەیوەنی لە جۆری {{relationshipTypeName}} بۆ{{entityName}}پێشتر هەبووە"
 
+msgid "Save and add another"
+msgstr "تۆمار بکە و دانەیەکی دیکە زیاد بکە"
+
+msgid "Save and exit"
+msgstr "تۆمارکردن و دەرچوون"
+
+msgid "Finish"
+msgstr "تەواکردن"
+
 msgid "New event"
 msgstr "رووداوي نوي"
+
+msgid "Switch to form view"
+msgstr "گۆڕین بۆ پیشاندانی فۆرم"
+
+msgid "Switch to row view"
+msgstr "گۆڕین بۆ پیشاندانی ئاسۆیی"
 
 msgid "New event relationship"
 msgstr "پەوەندی حالەتی نوێ"
@@ -638,15 +637,6 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr "مافی دروستکردنی حاڵەتت نیە لە هەڵژێردراوەکانی ئێستات"
 
-msgid "Review duplicates"
-msgstr " بە دووبارەبووەکان دابچۆرەوە"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "{{trackedEntityTypeName}} و لینک دروست بکە"
-
-msgid "Review Duplicates"
-msgstr "پێداچوونەوە بە دووبارەبووەکان"
-
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "دووبارەبوونەوە هەیە(بەڵآم هەندێک هەڵە هەیە، سەریری لۆگ فایل بکە بۆ زانیاری "
@@ -675,6 +665,12 @@ msgstr "کەسی تۆمارکراو"
 
 msgid "Link"
 msgstr "لینک"
+
+msgid "Review Duplicates"
+msgstr "پێداچوونەوە بە دووبارەبووەکان"
+
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"

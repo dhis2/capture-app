@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -546,36 +546,23 @@ msgstr "Показать все"
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "Создать новую {{TET}} в {{program}} для {{orgUnit}}"
-
-msgid "Save and add another"
-msgstr "Сохранить и добавить другую"
-
-msgid "Save and exit"
-msgstr "Сохранить и выйти"
-
-msgid "Finish"
-msgstr "Завершить"
-
-msgid "Switch to form view"
-msgstr "Переключиь вид на Формы"
-
-msgid "Switch to row view"
-msgstr "Переключиться на строчный просмотр "
-
-msgid "New {{TET}}"
-msgstr "Новый {{TET}}"
-
-msgid "Working Lists"
-msgstr "Рабочие листы"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
+msgid "Saving a {{trackedEntityName}} in"
 msgstr ""
-"Программа с идентификатором {{programId}} не является программой "
-"отслеживания. Регистрация возможна только в программе отслеживания."
+
+msgid "in"
+msgstr "в"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
 
 msgid "Assigned user"
 msgstr "Назначенный пользователь"
@@ -588,9 +575,6 @@ msgstr "Уполномоченный"
 
 msgid "Saving to"
 msgstr "Сохраняю в"
-
-msgid "in"
-msgstr "в"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -607,8 +591,23 @@ msgid ""
 "exists"
 msgstr "Тип Родство {{relationshipTypeName}} к {{entityName}} уже существует"
 
+msgid "Save and add another"
+msgstr "Сохранить и добавить другую"
+
+msgid "Save and exit"
+msgstr "Сохранить и выйти"
+
+msgid "Finish"
+msgstr "Завершить"
+
 msgid "New event"
 msgstr "Новое событие"
+
+msgid "Switch to form view"
+msgstr "Переключиь вид на Формы"
+
+msgid "Switch to row view"
+msgstr "Переключиться на строчный просмотр "
 
 msgid "New event relationship"
 msgstr "Отношение нового события"
@@ -644,15 +643,6 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr "Не достаточно прав для создания Событий с текущим выбором"
 
-msgid "Review duplicates"
-msgstr "Пересмотр дубликатов"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "Создать {{trackedEntityTypeName}} и ссылку"
-
-msgid "Review Duplicates"
-msgstr "Пересмотр дубликатов"
-
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "Существует дубликат(имеются дополнительные ошибки, смотрите детали в лог-"
@@ -683,6 +673,12 @@ msgstr "Зарегистрированное лицо"
 
 msgid "Link"
 msgstr "Ссылка"
+
+msgid "Review Duplicates"
+msgstr "Пересмотр дубликатов"
+
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты"
