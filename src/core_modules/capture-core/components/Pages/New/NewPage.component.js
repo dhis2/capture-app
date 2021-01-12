@@ -23,7 +23,7 @@ export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
-    showMessageToSelectProgramPartnerOnNewPage,
+    showMessageToSelectProgramCategoryOnNewPage,
     showDefaultViewOnNewPage,
     handleMainPageNavigation,
     classes,
@@ -44,7 +44,7 @@ const NewPagePlain = ({
         if (orgUnitSelectionIncomplete) {
             showMessageToSelectOrgUnitOnNewPage();
         } else if (programCategorySelectionIncomplete) {
-            showMessageToSelectProgramPartnerOnNewPage();
+            showMessageToSelectProgramCategoryOnNewPage();
         } else {
             showDefaultViewOnNewPage();
         }
@@ -53,7 +53,7 @@ const NewPagePlain = ({
         programCategorySelectionIncomplete,
         orgUnitSelectionIncomplete,
         showMessageToSelectOrgUnitOnNewPage,
-        showMessageToSelectProgramPartnerOnNewPage,
+        showMessageToSelectProgramCategoryOnNewPage,
         showDefaultViewOnNewPage,
     ]);
 

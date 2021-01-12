@@ -10,7 +10,7 @@ export const newPageActionTypes = {
 export const showMessageToSelectOrgUnitOnNewPage = () =>
     actionCreator(newPageActionTypes.NEW_PAGE_WITHOUT_ORG_UNIT_SELECTED_VIEW)();
 
-export const showMessageToSelectProgramPartnerOnNewPage = () =>
+export const showMessageToSelectProgramCategoryOnNewPage = () =>
     actionCreator(newPageActionTypes.NEW_PAGE_WITHOUT_PROGRAM_CATEGORY_SELECTED_VIEW)();
 
 export const showDefaultViewOnNewPage = () =>

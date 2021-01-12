@@ -5,7 +5,7 @@ export type ProgramCategories = Array<{|name: string, id: string|}>
 
 export type ContainerProps = $ReadOnly<{|
   showMessageToSelectOrgUnitOnNewPage: ()=>void,
-  showMessageToSelectProgramPartnerOnNewPage: ()=>void,
+  showMessageToSelectProgramCategoryOnNewPage: ()=>void,
   showDefaultViewOnNewPage: ()=>void,
   handleMainPageNavigation: ()=>void,
   currentScopeId: string,

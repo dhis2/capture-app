@@ -7,7 +7,7 @@ import { NewPageComponent } from './NewPage.component';
 import {
     showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
-    showMessageToSelectProgramPartnerOnNewPage,
+    showMessageToSelectProgramCategoryOnNewPage,
 } from './NewPage.actions';
 import { typeof newPageStatuses } from './NewPage.constants';
 import { urlArguments } from '../../../utils/url';
@@ -24,8 +24,8 @@ export const NewPage: ComponentType<{||}> = () => {
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
         [dispatch]);
 
-    const dispatchShowMessageToSelectProgramPartnerOnNewPage = useCallback(
-        () => { dispatch(showMessageToSelectProgramPartnerOnNewPage()); },
+    const dispatchshowMessageToSelectProgramCategoryOnNewPage = useCallback(
+        () => { dispatch(showMessageToSelectProgramCategoryOnNewPage()); },
         [dispatch]);
 
     const dispatchShowDefaultViewOnNewPage = useCallback(
@@ -77,7 +77,7 @@ export const NewPage: ComponentType<{||}> = () => {
     return (
         <NewPageComponent
             showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
-            showMessageToSelectProgramPartnerOnNewPage={dispatchShowMessageToSelectProgramPartnerOnNewPage}
+            showMessageToSelectProgramCategoryOnNewPage={dispatchshowMessageToSelectProgramCategoryOnNewPage}
             showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
             handleMainPageNavigation={handleMainPageNavigation}
             currentScopeId={currentScopeId}
