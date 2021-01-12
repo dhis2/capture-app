@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-12-13T23:38:50.849Z\n"
-"PO-Revision-Date: 2020-12-13T23:38:50.849Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
+"PO-Revision-Date: 2021-01-06T08:52:06.342Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -605,18 +605,67 @@ msgstr ""
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
+msgid "Assigned user"
 msgstr ""
 
-msgid "New {{TET}}"
+msgid "Relationships"
 msgstr ""
 
-msgid "Working Lists"
+msgid "Assignee"
+msgstr ""
+
+msgid "Saving to"
 msgstr ""
 
 msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid "This event"
+msgstr ""
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Finish"
+msgstr ""
+
+msgid "New event"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "New event relationship"
+msgstr ""
+
+msgid "Adding relationship to event."
+msgstr ""
+
+msgid "Go back to event without saving relationship"
+msgstr ""
+
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
 msgstr ""
 
 msgid "Choose a registering unit and program to get started"

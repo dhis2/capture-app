@@ -14,9 +14,6 @@ import {
     actionTypes as crossPageActionTypes,
 } from '../../components/Pages/actions/crossPage.actions';
 import {
-    urlActionTypes as newEnrollmentUrlActionTypes,
-} from '../../components/Pages/NewEnrollment';
-import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
@@ -83,18 +80,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             categoriesMeta: undefined,
             trackedEntityTypeId: undefined,
             complete: false,
-        };
-        return newState;
-    },
-    [newEnrollmentUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
-        return newState;
-    },
-    [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
-        const newState = {
-            ...state,
-            orgUnitId: null,
         };
         return newState;
     },
