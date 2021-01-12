@@ -22,6 +22,9 @@ const styles = theme => ({
         zIndex: 100,
     },
     iconContainer: {
+        position: 'relative',
+    },
+    icon: {
         position: 'absolute',
         marginTop: '-24px',
     },
@@ -107,6 +110,7 @@ class Index extends React.Component<Props, State> {
                                     <IconButton
                                         data-test="dhis2-capture-event-content-menu"
                                         onClick={this.toggleMenu}
+                                        className={classes.icon}
                                     >
                                         <MoreHoriz />
                                     </IconButton>

@@ -8,6 +8,7 @@ export type Props = {
         popperContainerHidden: string,
         popperContainer: string,
         iconContainer: string,
+        icon: string,
     },
     row: DataSourceItem,
     customRowMenuContents?: CustomRowMenuContents,
