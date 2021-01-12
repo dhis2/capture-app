@@ -237,18 +237,18 @@ When('you are navigated to the Contraceptives Voucher Program registration page 
 
 And('there should be informative message explaining you need to complete your selections', () => {
     cy.get('[data-test="dhis2-capture-informative-paper"]')
-        .contains('Choose a partner to start reporting')
+        .contains('to start reporting')
         .should('exist');
 });
 
-And('you select the first partner', () => {
+And('you select the first category', () => {
     cy.get('.Select')
         .type('AIDSRelief Con');
     cy.contains('AIDSRelief Consortium')
         .click();
 });
 
-And('you see the registration form for the scpecific partner', () => {
+And('you see the registration form for the specific category', () => {
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
         .contains('New Contraceptives Voucher Program')
         .should('exist');
