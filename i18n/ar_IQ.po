@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -538,36 +538,23 @@ msgstr "إظهار الكل"
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
-
-msgid "Save and add another"
-msgstr "حفظ واضافة جديد"
-
-msgid "Save and exit"
-msgstr "حفظ وخروج"
-
-msgid "Finish"
-msgstr "إنهاء"
-
-msgid "Switch to form view"
-msgstr "التحويل الى العرض كنموذج"
-
-msgid "Switch to row view"
-msgstr "التحويل إلى العرض كصفوف"
-
-msgid "New {{TET}}"
-msgstr "{{TET}} جديد"
-
-msgid "Working Lists"
-msgstr "قوائم العمل"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
+msgid "Saving a {{trackedEntityName}} in"
 msgstr ""
-"البرنامج بالرقم المعرف {{programId}} ليس برنامج تتبع. لا يمكن التسجيل إلا في"
-" برامج التتبع."
+
+msgid "in"
+msgstr "في"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
 
 msgid "Assigned user"
 msgstr "المستخدم المعين"
@@ -580,9 +567,6 @@ msgstr "المحال إليه"
 
 msgid "Saving to"
 msgstr "حفظ إلى"
-
-msgid "in"
-msgstr "في"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -600,8 +584,23 @@ msgid ""
 msgstr ""
 "العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}}  موجودة مسبقاً"
 
+msgid "Save and add another"
+msgstr "حفظ واضافة جديد"
+
+msgid "Save and exit"
+msgstr "حفظ وخروج"
+
+msgid "Finish"
+msgstr "إنهاء"
+
 msgid "New event"
 msgstr "حدث جديد"
+
+msgid "Switch to form view"
+msgstr "التحويل الى العرض كنموذج"
+
+msgid "Switch to row view"
+msgstr "التحويل إلى العرض كصفوف"
 
 msgid "New event relationship"
 msgstr "علاقة جديدة بالحدث"
@@ -635,15 +634,6 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
 
-msgid "Review duplicates"
-msgstr "مراجعة التكرار"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "إنشاء {{trackedEntityTypeName}} وربط"
-
-msgid "Review Duplicates"
-msgstr "مراجعة التكرارات"
-
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "يوجد نسخة مكررة (ولكن كانت هناك بعض الأخطاء ، راجع السجل للحصول على التفاصيل"
@@ -669,6 +659,12 @@ msgstr "الشخص المسجل"
 
 msgid "Link"
 msgstr "ربط"
+
+msgid "Review Duplicates"
+msgstr "مراجعة التكرارات"
+
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"

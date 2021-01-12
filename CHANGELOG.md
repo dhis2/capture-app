@@ -1,3 +1,38 @@
+## [1.4.4](https://github.com/dhis2/capture-app/compare/v1.4.3...v1.4.4) (2021-01-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([26bed84](https://github.com/dhis2/capture-app/commit/26bed8409d5d7921cb027be7844377cc82d8997e))
+
+## [1.4.3](https://github.com/dhis2/capture-app/compare/v1.4.2...v1.4.3) (2021-01-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([667afca](https://github.com/dhis2/capture-app/commit/667afcaa35d4360785f6cf93998284fa0b4c3e8b))
+
+## [1.4.2](https://github.com/dhis2/capture-app/compare/v1.4.1...v1.4.2) (2021-01-07)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([15da467](https://github.com/dhis2/capture-app/commit/15da4677211e7e929ac3b29b7dda06656f46f54f))
+
+## [1.4.1](https://github.com/dhis2/capture-app/compare/v1.4.0...v1.4.1) (2021-01-06)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e942525](https://github.com/dhis2/capture-app/commit/e94252580d191e480194124f6486cc703e2fcad1))
+
+# [1.4.0](https://github.com/dhis2/capture-app/compare/v1.3.9...v1.4.0) (2021-01-05)
+
+
+### Features
+
+* DHIS2-9652 with save buttons ([#1260](https://github.com/dhis2/capture-app/issues/1260)) ([24ec241](https://github.com/dhis2/capture-app/commit/24ec24135a74be9f1ba9efda0b26ed978f659d4c)), closes [#1266](https://github.com/dhis2/capture-app/issues/1266)
+
 ## [1.3.9](https://github.com/dhis2/capture-app/compare/v1.3.8...v1.3.9) (2021-01-05)
 
 
