@@ -3,7 +3,7 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import { InefficientSelectionsMessage } from '../../../InefficientSelectionsMessage';
+import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
 import type { Props } from './DataEntrySelectionsIncomplete.types';
 
 const getStyles = () => ({
@@ -31,7 +31,7 @@ const DataEntrySelectionsIncompletePlain = ({ classes, onCancel, isProgramSelect
     };
     return (
         <div className={classes.container}>
-            <InefficientSelectionsMessage message={getText()} />
+            <IncompleteSelectionsMessage> {getText()} </IncompleteSelectionsMessage>
             <div
                 className={classes.buttonRow}
             >

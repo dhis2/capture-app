@@ -9,7 +9,7 @@ import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { newPageStatuses } from './NewPage.constants';
-import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { scopeTypes } from '../../../metaData';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
@@ -114,9 +114,9 @@ const NewPagePlain = ({
 
             {
                 newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
-                <InefficientSelectionsMessage
-                    message={i18n.t('Choose a registering unit to start reporting')}
-                />
+                <IncompleteSelectionsMessage>
+                    {i18n.t('Choose a registering unit to start reporting')}
+                </IncompleteSelectionsMessage>
             }
         </div>
     </>);

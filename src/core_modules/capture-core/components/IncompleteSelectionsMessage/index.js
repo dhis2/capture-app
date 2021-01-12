@@ -15,14 +15,14 @@ const StyledPaper = withStyles({
     },
 })(Paper);
 
-export const InefficientSelectionsMessage = ({ message, dataTest = 'dhis2-capture-informative-paper' }) => (
+export const IncompleteSelectionsMessage = ({ children, dataTest = 'dhis2-capture-informative-paper' }) => (
     <Grid container justify="center">
         <Grid item>
             <StyledPaper
                 data-test={dataTest}
                 elevation={0}
             >
-                {message}
+                {children}
             </StyledPaper>
         </Grid>
     </Grid>);
