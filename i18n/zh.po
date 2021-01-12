@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
+"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -137,23 +137,119 @@ msgstr "将来的日期不允许"
 msgid "Metadata error. see log for details"
 msgstr "元数据错误"
 
-msgid "An error has occurred. See log for details"
-msgstr "发生了错误。查看日志以获取详细信息"
+msgid "Assigned user"
+msgstr "分配的用户"
 
-msgid "Cancel"
-msgstr "取消"
+msgid "Search for user"
+msgstr "搜索用户 "
+
+msgid "Basic info"
+msgstr "基本信息"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "Comments"
+msgstr "评论"
+
+msgid "Relationships"
+msgstr "关系"
+
+msgid "Assignee"
+msgstr "分配者"
+
+msgid "Saving to"
+msgstr "保存到"
+
+msgid "in"
+msgstr " 在"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr "这不是事件项目或者元数据坏了，查看日志详情"
+
+msgid "This event"
+msgstr "该事件"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr "{{entityName}} 的 {{relationshipTypeName}}  关系类型已经存在"
+
+msgid "Active"
+msgstr "活动的"
+
+msgid "Completed"
+msgstr "已完成"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr "保存事件前请添加或取消被或许"
+
+msgid "Save and add another"
+msgstr "保存并另外添加"
+
+msgid "Save and exit"
+msgstr "保存后退出"
+
+msgid "Finish"
+msgstr "结束"
+
+msgid "No write access"
+msgstr "无写权限"
+
+msgid "Switch to form view"
+msgstr "切换到表单视图"
+
+msgid "Switch to row view"
+msgstr "切换到行视图"
+
+msgid "events added"
+msgstr "事件已经被添加"
+
+msgid "No events added"
+msgstr "没有事件被添加"
+
+msgid "New event relationship"
+msgstr "新建事件关系"
+
+msgid "Adding relationship to event."
+msgstr "添加关系到事件"
+
+msgid "Go back to event without saving relationship"
+msgstr "后退到事件不保存关系"
 
 msgid "Unsaved changes"
 msgstr "未保存的更改"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "离开此页面将放弃您对此事件所做的更改。"
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr "离开本页将丢掉你的新关系的选择"
 
 msgid "Yes, discard"
 msgstr "是的，丢弃"
 
 msgid "No, stay here"
 msgstr "不，待在这里"
+
+msgid "New event"
+msgstr "新事件"
+
+msgid "You dont have access to create an event in the current selections"
+msgstr "你没有在当前选择创建事件的权限"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr "离开此页面将放弃您对此事件所做的更改。"
+
+msgid "An error has occurred. See log for details"
+msgstr "发生了错误。查看日志以获取详细信息"
 
 msgid "validation failed"
 msgstr "验证失败"
@@ -217,9 +313,6 @@ msgstr "关闭"
 
 msgid "Please select the user"
 msgstr "请选择用户"
-
-msgid "Search for user"
-msgstr "搜索用户 "
 
 msgid "Me"
 msgstr "我"
@@ -368,9 +461,6 @@ msgstr "项目不存在"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "选择的项目对选择的机构无效"
 
-msgid "New {{typeName}}"
-msgstr "新建 {{typeName}}"
-
 msgid "New"
 msgstr "新建"
 
@@ -434,24 +524,6 @@ msgstr "你没有权限写备注"
 msgid "Write comment"
 msgstr "写备注"
 
-msgid "Basic info"
-msgstr "基本信息"
-
-msgid "Status"
-msgstr "状态"
-
-msgid "Comments"
-msgstr "评论"
-
-msgid "Please add or cancel comment before saving the event"
-msgstr "保存事件前请添加或取消被或许"
-
-msgid "No write access"
-msgstr "无写权限"
-
-msgid "Save"
-msgstr "保存"
-
 msgid "Show all events"
 msgstr "显示所有事件"
 
@@ -490,12 +562,6 @@ msgstr "工作列表不能载入"
 
 msgid "an error occurred loading working lists"
 msgstr "载入工作列表发生错误"
-
-msgid "Active"
-msgstr "活动的"
-
-msgid "Completed"
-msgstr "已完成"
 
 msgid "Registered events"
 msgstr "登记的事件"
@@ -536,11 +602,11 @@ msgstr "显示全部"
 msgid "Choose a registering unit to start reporting"
 msgstr "选择一个注册机构开始填报"
 
+msgid "Choose the {{missingCategories}} to start reporting"
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in"
 msgstr "将{{trackedEntityName}}保存在"
-
-msgid "in"
-msgstr " 在"
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr "保存{{trackedEntityName}}"
@@ -553,81 +619,6 @@ msgstr "注册"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "通过从顶部栏中选择一个项目来注册"
-
-msgid "Assigned user"
-msgstr "分配的用户"
-
-msgid "Relationships"
-msgstr "关系"
-
-msgid "Assignee"
-msgstr "分配者"
-
-msgid "Saving to"
-msgstr "保存到"
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr "这不是事件项目或者元数据坏了，查看日志详情"
-
-msgid "This event"
-msgstr "该事件"
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr "{{entityName}} 的 {{relationshipTypeName}}  关系类型已经存在"
-
-msgid "Save and add another"
-msgstr "保存并另外添加"
-
-msgid "Save and exit"
-msgstr "保存后退出"
-
-msgid "Finish"
-msgstr "结束"
-
-msgid "New event"
-msgstr "新事件"
-
-msgid "Switch to form view"
-msgstr "切换到表单视图"
-
-msgid "Switch to row view"
-msgstr "切换到行视图"
-
-msgid "New event relationship"
-msgstr "新建事件关系"
-
-msgid "Adding relationship to event."
-msgstr "添加关系到事件"
-
-msgid "Go back to event without saving relationship"
-msgstr "后退到事件不保存关系"
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr "离开本页将丢掉你的新关系的选择"
-
-msgid "events added"
-msgstr "事件已经被添加"
-
-msgid "No events added"
-msgstr "没有事件被添加"
-
-msgid "Choose a registering unit and program to get started"
-msgstr "选择注册机构和项目后开始"
-
-msgid "Choose a program to start reporting"
-msgstr "选择一个项目开始报告"
-
-msgid "Choose a category option to start reporting"
-msgstr "选择一个分类选项以开始填报"
-
-msgid "You dont have access to create an event in the current selections"
-msgstr "你没有在当前选择创建事件的权限"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "存在重复，但是有错误，查看日志详情。"

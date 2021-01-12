@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
+"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -138,25 +138,127 @@ msgstr "Келажакдаги сана танловига рухсат бери
 msgid "Metadata error. see log for details"
 msgstr "МетаМаълумотда хатолик. Тафсилотлар учун журналга қаранг."
 
-msgid "An error has occurred. See log for details"
-msgstr "Хатолик юз берди. Тафсилотлар учун журналга қаранг"
+msgid "Assigned user"
+msgstr "Тавсия этилган фойдаланувчи"
 
-msgid "Cancel"
-msgstr "Бекор қилиш"
+msgid "Search for user"
+msgstr "Фойдаланувчини излаш"
+
+msgid "Basic info"
+msgstr "Асосий маълумот"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Comments"
+msgstr "Изоҳлар"
+
+msgid "Relationships"
+msgstr "Ўзаро алоқалар"
+
+msgid "Assignee"
+msgstr "Ваколат берилган шахс"
+
+msgid "Saving to"
+msgstr "...да сақлаш"
+
+msgid "in"
+msgstr "ичида"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"Бу ҳодиса/тадбир дастури эмас ёки метамаълумотлар бузилган. Тафсилотлар учун"
+" журналга қаранг."
+
+msgid "This event"
+msgstr "Ушбу ҳодиса/тадбир"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+" {{relationshipTypeName}} турининг {{entityName}} билан алоқаси аллақачон "
+"мавжуд"
+
+msgid "Active"
+msgstr "Фаол"
+
+msgid "Completed"
+msgstr "Тўлдирилди"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr "Илтимос, ҳодиса/тадбирни сақлашдан олдин шарҳ ёзинг ёки бекор қилинг"
+
+msgid "Save and add another"
+msgstr "Сақлаш ва бошқасини қўшиш"
+
+msgid "Save and exit"
+msgstr "Сақлаш ва чиқиш"
+
+msgid "Finish"
+msgstr "Тугатиш"
+
+msgid "No write access"
+msgstr "Ёзув киритиш учун рухсат йўқ"
+
+msgid "Switch to form view"
+msgstr "Шакл кўринишига ўтиш"
+
+msgid "Switch to row view"
+msgstr "Жадвал кўринишига ўтиш"
+
+msgid "events added"
+msgstr "ҳодиса/тадбирлар қўшилди"
+
+msgid "No events added"
+msgstr "Ҳеч қандай ҳодиса/тадбир қўшилмаган"
+
+msgid "New event relationship"
+msgstr "Янги ҳодиса/тадбир муносабатлари"
+
+msgid "Adding relationship to event."
+msgstr "Ҳодиса/тадбирга алоқа-муносабатлар қўшиш"
+
+msgid "Go back to event without saving relationship"
+msgstr "Алоқа-муносабатларни сақламасдан ҳодиса/тадбирга қайтиш"
 
 msgid "Unsaved changes"
 msgstr "Сақланмаган ўзгартиришлар"
 
-msgid "Leaving this page will discard the changes you made to this event."
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
 msgstr ""
-"Агарда ушбу саҳифани тарк этсангиз, ҳодиса/тадбир бўйича киритган барча "
-"ўзгартиришлар сақланмайди."
+"Ушбу саҳифани тарк этсангиз, янги муносабатлар учун қилган танловингиз бекор"
+" қилинади."
 
 msgid "Yes, discard"
 msgstr "Ҳа, рад этилсин"
 
 msgid "No, stay here"
 msgstr "Йўқ, саҳифада қолиш"
+
+msgid "New event"
+msgstr "Янги ҳодиса"
+
+msgid "You dont have access to create an event in the current selections"
+msgstr "Ҳозирги танловларда ҳодиса/тадбир яратиш ҳуқуқига эга эмассиз"
+
+msgid "Save"
+msgstr "Сақлаш"
+
+msgid "Cancel"
+msgstr "Бекор қилиш"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Агарда ушбу саҳифани тарк этсангиз, ҳодиса/тадбир бўйича киритган барча "
+"ўзгартиришлар сақланмайди."
+
+msgid "An error has occurred. See log for details"
+msgstr "Хатолик юз берди. Тафсилотлар учун журналга қаранг"
 
 msgid "validation failed"
 msgstr "Тасдиқлаш амалга ошмади"
@@ -220,9 +322,6 @@ msgstr "Ёпмоқ"
 
 msgid "Please select the user"
 msgstr "Илтимос, фойдаланувчини танланг"
-
-msgid "Search for user"
-msgstr "Фойдаланувчини излаш"
 
 msgid "Me"
 msgstr "Мен"
@@ -371,9 +470,6 @@ msgstr "Дастур мавжуд эмас"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Танланган дастур танланган рўйхатдан олинадиган бўлим учун яроқсиз"
 
-msgid "New {{typeName}}"
-msgstr "Янги  {{typeName}}"
-
 msgid "New"
 msgstr "Янги"
 
@@ -437,24 +533,6 @@ msgstr "Фикр ёзиш ҳуқуқига эга эмассиз"
 msgid "Write comment"
 msgstr "Фикр ёзинг"
 
-msgid "Basic info"
-msgstr "Асосий маълумот"
-
-msgid "Status"
-msgstr "Статус"
-
-msgid "Comments"
-msgstr "Изоҳлар"
-
-msgid "Please add or cancel comment before saving the event"
-msgstr "Илтимос, ҳодиса/тадбирни сақлашдан олдин шарҳ ёзинг ёки бекор қилинг"
-
-msgid "No write access"
-msgstr "Ёзув киритиш учун рухсат йўқ"
-
-msgid "Save"
-msgstr "Сақлаш"
-
 msgid "Show all events"
 msgstr "Барча ҳодиса/тадбирларни кўрсатиш"
 
@@ -493,12 +571,6 @@ msgstr "Ишчи рўйхатни юклаб бўлмади"
 
 msgid "an error occurred loading working lists"
 msgstr "ишчи рўйхатни юклашда хатолик юз берди"
-
-msgid "Active"
-msgstr "Фаол"
-
-msgid "Completed"
-msgstr "Тўлдирилди"
 
 msgid "Registered events"
 msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
@@ -539,11 +611,11 @@ msgstr "Барчасини кўрсатиш"
 msgid "Choose a registering unit to start reporting"
 msgstr "Хисобот бошлаш учун рўйхатдан ўтишни танланг"
 
-msgid "Saving a {{trackedEntityName}} in"
+msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "in"
-msgstr "ичида"
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
@@ -556,87 +628,6 @@ msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
-
-msgid "Assigned user"
-msgstr "Тавсия этилган фойдаланувчи"
-
-msgid "Relationships"
-msgstr "Ўзаро алоқалар"
-
-msgid "Assignee"
-msgstr "Ваколат берилган шахс"
-
-msgid "Saving to"
-msgstr "...да сақлаш"
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-"Бу ҳодиса/тадбир дастури эмас ёки метамаълумотлар бузилган. Тафсилотлар учун"
-" журналга қаранг."
-
-msgid "This event"
-msgstr "Ушбу ҳодиса/тадбир"
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr ""
-" {{relationshipTypeName}} турининг {{entityName}} билан алоқаси аллақачон "
-"мавжуд"
-
-msgid "Save and add another"
-msgstr "Сақлаш ва бошқасини қўшиш"
-
-msgid "Save and exit"
-msgstr "Сақлаш ва чиқиш"
-
-msgid "Finish"
-msgstr "Тугатиш"
-
-msgid "New event"
-msgstr "Янги ҳодиса"
-
-msgid "Switch to form view"
-msgstr "Шакл кўринишига ўтиш"
-
-msgid "Switch to row view"
-msgstr "Жадвал кўринишига ўтиш"
-
-msgid "New event relationship"
-msgstr "Янги ҳодиса/тадбир муносабатлари"
-
-msgid "Adding relationship to event."
-msgstr "Ҳодиса/тадбирга алоқа-муносабатлар қўшиш"
-
-msgid "Go back to event without saving relationship"
-msgstr "Алоқа-муносабатларни сақламасдан ҳодиса/тадбирга қайтиш"
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr ""
-"Ушбу саҳифани тарк этсангиз, янги муносабатлар учун қилган танловингиз бекор"
-" қилинади."
-
-msgid "events added"
-msgstr "ҳодиса/тадбирлар қўшилди"
-
-msgid "No events added"
-msgstr "Ҳеч қандай ҳодиса/тадбир қўшилмаган"
-
-msgid "Choose a registering unit and program to get started"
-msgstr "Ишни бошлаш учун рўйхатдан ўтиш бирлиги ва дастурини танланг"
-
-msgid "Choose a program to start reporting"
-msgstr "Ҳисобот беришни бошлаш учун дастурни танланг"
-
-msgid "Choose a category option to start reporting"
-msgstr "Ҳисобот беришни бошлаш учун рўйхатдан ўтишни танланг"
-
-msgid "You dont have access to create an event in the current selections"
-msgstr "Ҳозирги танловларда ҳодиса/тадбир яратиш ҳуқуқига эга эмассиз"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""

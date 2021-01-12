@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
+"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yao Selom SAKA <saka.yao@yahoo.fr>, 2020\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -144,25 +144,130 @@ msgstr "Une date future n'est pas permise"
 msgid "Metadata error. see log for details"
 msgstr "Erreur de métadonnées. Voir le journal pour plus de détails"
 
-msgid "An error has occurred. See log for details"
-msgstr "Une erreur s'est produite. Voir le journal pour plus de détails"
+msgid "Assigned user"
+msgstr "Utilisateur affecté"
 
-msgid "Cancel"
-msgstr "Annuler"
+msgid "Search for user"
+msgstr "Rechercher un utilisateur"
+
+msgid "Basic info"
+msgstr "Infos de base"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Comments"
+msgstr "Commentaires"
+
+msgid "Relationships"
+msgstr "Relations"
+
+msgid "Assignee"
+msgstr "Attributaire"
+
+msgid "Saving to"
+msgstr "Enregistrement à"
+
+msgid "in"
+msgstr "dans"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"Il ne s'agit pas d'un programme d'événement ou les métadonnées sont "
+"corrompues. Voir le journal pour plus de détails."
+
+msgid "This event"
+msgstr "Cet événement"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+"La relation entre le type {{nom du type de relation}} et {{Nom d'entité}} "
+"existe déjà"
+
+msgid "Active"
+msgstr "Actif"
+
+msgid "Completed"
+msgstr "Terminé"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr ""
+"Veuillez ajouter ou annuler un commentaire avant avant d'enregistrer "
+"l'événement"
+
+msgid "Save and add another"
+msgstr "Sauvegarder et ajouter nouveau"
+
+msgid "Save and exit"
+msgstr "Sauvegarder et quitter"
+
+msgid "Finish"
+msgstr "Terminer"
+
+msgid "No write access"
+msgstr "Aucun accès en écriture"
+
+msgid "Switch to form view"
+msgstr "Passer à la vue du formulaire"
+
+msgid "Switch to row view"
+msgstr "Passer à la vue des lignes"
+
+msgid "events added"
+msgstr "événements ajoutés"
+
+msgid "No events added"
+msgstr "Aucun événement n'a été ajouté"
+
+msgid "New event relationship"
+msgstr "Nouvelle relation d'événement"
+
+msgid "Adding relationship to event."
+msgstr "Ajouter une relation à l'événement."
+
+msgid "Go back to event without saving relationship"
+msgstr "Revenir à l'événement sans sauvegarder la relation"
 
 msgid "Unsaved changes"
 msgstr "Modifications non enregistrées"
 
-msgid "Leaving this page will discard the changes you made to this event."
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
 msgstr ""
-"En quittant cette page, les modifications apportées à cet événement seront "
-"annulées."
+"En quittant cette page, les choix effectués dans le cadre d'une nouvelle "
+"relation seront rejetés"
 
 msgid "Yes, discard"
 msgstr "Oui, supprimer"
 
 msgid "No, stay here"
 msgstr "Non, continuer ici"
+
+msgid "New event"
+msgstr "Nouvel événement"
+
+msgid "You dont have access to create an event in the current selections"
+msgstr ""
+"Vous n'êtes pas autorisé à créer un événement dans les sélections actuelles"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"En quittant cette page, les modifications apportées à cet événement seront "
+"annulées."
+
+msgid "An error has occurred. See log for details"
+msgstr "Une erreur s'est produite. Voir le journal pour plus de détails"
 
 msgid "validation failed"
 msgstr "validation échouée"
@@ -226,9 +331,6 @@ msgstr "Fermer"
 
 msgid "Please select the user"
 msgstr "Veuillez sélectionner l'utilisateur"
-
-msgid "Search for user"
-msgstr "Rechercher un utilisateur"
 
 msgid "Me"
 msgstr "Moi"
@@ -379,9 +481,6 @@ msgstr ""
 "Le programme sélectionné est invalide pour l'unité d'enregistrement "
 "sélectionnée"
 
-msgid "New {{typeName}}"
-msgstr "Nouveau {{typeName}}"
-
 msgid "New"
 msgstr "Nouveau"
 
@@ -445,26 +544,6 @@ msgstr "Vous n'avez pas accès aux commentaires"
 msgid "Write comment"
 msgstr "Ecrire commentaire"
 
-msgid "Basic info"
-msgstr "Infos de base"
-
-msgid "Status"
-msgstr "Statut"
-
-msgid "Comments"
-msgstr "Commentaires"
-
-msgid "Please add or cancel comment before saving the event"
-msgstr ""
-"Veuillez ajouter ou annuler un commentaire avant avant d'enregistrer "
-"l'événement"
-
-msgid "No write access"
-msgstr "Aucun accès en écriture"
-
-msgid "Save"
-msgstr "Enregistrer"
-
 msgid "Show all events"
 msgstr "Afficher tous les événements"
 
@@ -503,12 +582,6 @@ msgstr "La liste des tâches n'a pas pu être chargée"
 
 msgid "an error occurred loading working lists"
 msgstr "une erreur est survenue lors du chargement des listes de tâches"
-
-msgid "Active"
-msgstr "Actif"
-
-msgid "Completed"
-msgstr "Terminé"
 
 msgid "Registered events"
 msgstr "Événements enregistrés"
@@ -549,11 +622,11 @@ msgstr "Afficher tout"
 msgid "Choose a registering unit to start reporting"
 msgstr "Sélectionnez une unité d'enregistrement pour commencer un rapport"
 
-msgid "Saving a {{trackedEntityName}} in"
+msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "in"
-msgstr "dans"
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
@@ -566,88 +639,6 @@ msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
-
-msgid "Assigned user"
-msgstr "Utilisateur affecté"
-
-msgid "Relationships"
-msgstr "Relations"
-
-msgid "Assignee"
-msgstr "Attributaire"
-
-msgid "Saving to"
-msgstr "Enregistrement à"
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-"Il ne s'agit pas d'un programme d'événement ou les métadonnées sont "
-"corrompues. Voir le journal pour plus de détails."
-
-msgid "This event"
-msgstr "Cet événement"
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr ""
-"La relation entre le type {{nom du type de relation}} et {{Nom d'entité}} "
-"existe déjà"
-
-msgid "Save and add another"
-msgstr "Sauvegarder et ajouter nouveau"
-
-msgid "Save and exit"
-msgstr "Sauvegarder et quitter"
-
-msgid "Finish"
-msgstr "Terminer"
-
-msgid "New event"
-msgstr "Nouvel événement"
-
-msgid "Switch to form view"
-msgstr "Passer à la vue du formulaire"
-
-msgid "Switch to row view"
-msgstr "Passer à la vue des lignes"
-
-msgid "New event relationship"
-msgstr "Nouvelle relation d'événement"
-
-msgid "Adding relationship to event."
-msgstr "Ajouter une relation à l'événement."
-
-msgid "Go back to event without saving relationship"
-msgstr "Revenir à l'événement sans sauvegarder la relation"
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr ""
-"En quittant cette page, les choix effectués dans le cadre d'une nouvelle "
-"relation seront rejetés"
-
-msgid "events added"
-msgstr "événements ajoutés"
-
-msgid "No events added"
-msgstr "Aucun événement n'a été ajouté"
-
-msgid "Choose a registering unit and program to get started"
-msgstr "Choisissez une unité d'enregistrement et un programme pour commencer"
-
-msgid "Choose a program to start reporting"
-msgstr "Choisissez un programme pour commencer un rapport"
-
-msgid "Choose a category option to start reporting"
-msgstr "Choisissez une option de catégorie pour commencer un rapport"
-
-msgid "You dont have access to create an event in the current selections"
-msgstr ""
-"Vous n'êtes pas autorisé à créer un événement dans les sélections actuelles"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""

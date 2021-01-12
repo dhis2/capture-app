@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
+"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -138,24 +138,123 @@ msgstr "غير مسموح تاريخ بالمستقبل"
 msgid "Metadata error. see log for details"
 msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
 
-msgid "An error has occurred. See log for details"
-msgstr ""
+msgid "Assigned user"
+msgstr "المستخدم المعين"
 
-msgid "Cancel"
-msgstr "إلغاء"
+msgid "Search for user"
+msgstr "البحث عن مستخدم"
+
+msgid "Basic info"
+msgstr "المعلومات الأساسية"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Comments"
+msgstr "التعليقات"
+
+msgid "Relationships"
+msgstr "علاقات"
+
+msgid "Assignee"
+msgstr "المحال إليه"
+
+msgid "Saving to"
+msgstr "حفظ إلى"
+
+msgid "in"
+msgstr "في"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"هذا ليس برنامج تسجيل حدث أو أن بيانات التعريف تالفة. انظر السجل للحصول على "
+"التفاصيل."
+
+msgid "This event"
+msgstr "هذا الحدث"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+"العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}}  موجودة مسبقاً"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Completed"
+msgstr "مكتمل"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
+
+msgid "Save and add another"
+msgstr "حفظ واضافة جديد"
+
+msgid "Save and exit"
+msgstr "حفظ وخروج"
+
+msgid "Finish"
+msgstr "إنهاء"
+
+msgid "No write access"
+msgstr "لا توجد صلاحية الوصول للكتابة"
+
+msgid "Switch to form view"
+msgstr "التحويل الى العرض كنموذج"
+
+msgid "Switch to row view"
+msgstr "التحويل إلى العرض كصفوف"
+
+msgid "events added"
+msgstr "تمت إضافة الأحداث"
+
+msgid "No events added"
+msgstr "لم تتم إضافة أحداث"
+
+msgid "New event relationship"
+msgstr "علاقة جديدة بالحدث"
+
+msgid "Adding relationship to event."
+msgstr "إضافة علاقة للحدث."
+
+msgid "Go back to event without saving relationship"
+msgstr "ارجع إلى الحدث بدون حفظ العلاقة"
 
 msgid "Unsaved changes"
 msgstr "تعديلات لم يتم حفظها"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"ستؤدي مغادرة هذه الصفحة إلى تجاهل التغييرات التي أجريتها على هذا الحدث."
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحديدات التي أجريتها لعلاقة جديدة"
 
 msgid "Yes, discard"
 msgstr "نعم ، تجاهل"
 
 msgid "No, stay here"
 msgstr "لا ، ابق هنا"
+
+msgid "New event"
+msgstr "حدث جديد"
+
+msgid "You dont have access to create an event in the current selections"
+msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"ستؤدي مغادرة هذه الصفحة إلى تجاهل التغييرات التي أجريتها على هذا الحدث."
+
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "validation failed"
 msgstr "فشل التحقق من الصحة"
@@ -219,9 +318,6 @@ msgstr "إغلاق"
 
 msgid "Please select the user"
 msgstr "من فضلك قم بإختيار المستخدم"
-
-msgid "Search for user"
-msgstr "البحث عن مستخدم"
 
 msgid "Me"
 msgstr "أنا"
@@ -370,9 +466,6 @@ msgstr "البرنامج غير موجود"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
 
-msgid "New {{typeName}}"
-msgstr "{{typeName}} جديد"
-
 msgid "New"
 msgstr "جديد"
 
@@ -436,24 +529,6 @@ msgstr "ليس لديك حق الوصول إلى كتابة التعليقات"
 msgid "Write comment"
 msgstr "اكتب تعليقاً"
 
-msgid "Basic info"
-msgstr "المعلومات الأساسية"
-
-msgid "Status"
-msgstr "الحالة"
-
-msgid "Comments"
-msgstr "التعليقات"
-
-msgid "Please add or cancel comment before saving the event"
-msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
-
-msgid "No write access"
-msgstr "لا توجد صلاحية الوصول للكتابة"
-
-msgid "Save"
-msgstr "حفظ"
-
 msgid "Show all events"
 msgstr "عرض جميع الأحداث"
 
@@ -492,12 +567,6 @@ msgstr "تعذر تحميل قائمة العمل"
 
 msgid "an error occurred loading working lists"
 msgstr "حدث خطأ اثناء تحميل قوائم العمل"
-
-msgid "Active"
-msgstr "فعال"
-
-msgid "Completed"
-msgstr "مكتمل"
 
 msgid "Registered events"
 msgstr "الأحداث المسجلة"
@@ -538,11 +607,11 @@ msgstr "إظهار الكل"
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Saving a {{trackedEntityName}} in"
+msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "in"
-msgstr "في"
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
@@ -555,84 +624,6 @@ msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
-
-msgid "Assigned user"
-msgstr "المستخدم المعين"
-
-msgid "Relationships"
-msgstr "علاقات"
-
-msgid "Assignee"
-msgstr "المحال إليه"
-
-msgid "Saving to"
-msgstr "حفظ إلى"
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-"هذا ليس برنامج تسجيل حدث أو أن بيانات التعريف تالفة. انظر السجل للحصول على "
-"التفاصيل."
-
-msgid "This event"
-msgstr "هذا الحدث"
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr ""
-"العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}}  موجودة مسبقاً"
-
-msgid "Save and add another"
-msgstr "حفظ واضافة جديد"
-
-msgid "Save and exit"
-msgstr "حفظ وخروج"
-
-msgid "Finish"
-msgstr "إنهاء"
-
-msgid "New event"
-msgstr "حدث جديد"
-
-msgid "Switch to form view"
-msgstr "التحويل الى العرض كنموذج"
-
-msgid "Switch to row view"
-msgstr "التحويل إلى العرض كصفوف"
-
-msgid "New event relationship"
-msgstr "علاقة جديدة بالحدث"
-
-msgid "Adding relationship to event."
-msgstr "إضافة علاقة للحدث."
-
-msgid "Go back to event without saving relationship"
-msgstr "ارجع إلى الحدث بدون حفظ العلاقة"
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحديدات التي أجريتها لعلاقة جديدة"
-
-msgid "events added"
-msgstr "تمت إضافة الأحداث"
-
-msgid "No events added"
-msgstr "لم تتم إضافة أحداث"
-
-msgid "Choose a registering unit and program to get started"
-msgstr ""
-
-msgid "Choose a program to start reporting"
-msgstr ""
-
-msgid "Choose a category option to start reporting"
-msgstr ""
-
-msgid "You dont have access to create an event in the current selections"
-msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
