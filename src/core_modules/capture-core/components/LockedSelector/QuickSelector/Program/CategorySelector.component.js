@@ -11,7 +11,7 @@ import { makeOnSelectSelector } from './categorySelector.selectors';
 
 const VirtualizedSelectLoadingIndicatorHOC =
     withLoadingIndicator(
-        () => ({ marginTop: 5, paddingTop: 3 }),
+        () => ({ marginTop: 5, paddingTop: 3, height: 0 }),
         () => ({ size: 22 }),
         (props: Object) => props.options)(VirtualizedSelect);
 

@@ -23,3 +23,4 @@ export {
 } from './converters/converters';
 export { EnrollmentRegistrationEntry } from './EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.container';
 export { TeiRegistrationEntry } from './TeiRegistrationEntry/TeiRegistrationEntry.container';
+export { SingleEventRegistrationEntry } from './SingleEventRegistrationEntry/SingleEventRegistrationEntry.container';

@@ -3,7 +3,6 @@ import { combineEpics } from 'redux-observable';
 import {
     cancelNewEventEpic,
     cancelNewEventLocationChangeEpic,
-    cancelNewEventIncompleteSelectionsLocationChangeEpic,
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
@@ -19,11 +18,7 @@ import {
     saveNewEventRelationshipsIfExistsEpic,
     saveNewEventRelationshipFinishedEpic,
     teiForNewEventRelationshipSavedEpic,
-} from 'capture-core/components/Pages/NewEvent';
-import {
-    openNewEventPageLocationChangeEpic,
-} from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
-
+} from 'capture-core/components/DataEntries/SingleEventRegistrationEntry';
 import {
     initEventListEpic,
     updateEventListEpic,
@@ -188,6 +183,7 @@ import {
     completeSavingNewTrackedEntityTypeEpic,
     startSavingNewTrackedEntityTypeEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
+import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -204,7 +200,6 @@ export default combineEpics(
     addTemplateEpic,
     deleteTemplateEpic,
     requestDeleteEventEpic,
-    openNewEventPageLocationChangeEpic,
     openNewEventInDataEntryEpic,
     resetDataEntryForNewEventEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
@@ -214,7 +209,6 @@ export default combineEpics(
     saveNewEventEpic,
     cancelNewEventLocationChangeEpic,
     cancelNewEventEpic,
-    cancelNewEventIncompleteSelectionsLocationChangeEpic,
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
     openEditEventInDataEntryEpic,
@@ -297,5 +291,6 @@ export default combineEpics(
     startNewEnrollmentDataEntrySelfInitialisationEpic,
     startSavingNewTrackedEntityTypeEpic,
     completeSavingNewTrackedEntityTypeEpic,
+    openNewRegistrationPageFromLockedSelectorEpic,
     ...getDataEntryEpics(),
 );

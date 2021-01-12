@@ -37,7 +37,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.setState({ openStartAgainWarning: true });
     }
 
-    handleOpenOrgUnitWarning=() => {
+    handleOpenOrgUnitWarning = () => {
         if (this.dontShowWarning()) {
             this.props.onResetOrgUnitId();
             return;
@@ -45,7 +45,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.setState({ openOrgUnitWarning: true });
     }
 
-    handleOpenProgramWarning=(baseAction: ReduxAction<any, any>) => {
+    handleOpenProgramWarning = (baseAction: ReduxAction<any, any>) => {
         if (this.dontShowWarning()) {
             this.props.onResetProgramId(baseAction);
             return;
@@ -53,7 +53,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.setState({ openProgramWarning: baseAction });
     }
 
-    handleOpenCatComboWarning=(categoryId: string) => {
+    handleOpenCatComboWarning = (categoryId: string) => {
         if (this.dontShowWarning()) {
             this.props.onResetCategoryOption(categoryId);
             return;
@@ -61,7 +61,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.setState({ openCatComboWarning: true, categoryIdToReset: categoryId });
     }
 
-    handleClose=() => {
+    handleClose = () => {
         this.setState({
             openStartAgainWarning: false,
             openOrgUnitWarning: false,
@@ -71,17 +71,17 @@ export class LockedSelectorComponent extends Component<Props, State> {
         });
     }
 
-    handleAcceptStartAgain=() => {
+    handleAcceptStartAgain = () => {
         this.props.onStartAgain();
         this.handleClose();
     }
 
-    handleAcceptOrgUnit=() => {
+    handleAcceptOrgUnit = () => {
         this.props.onResetOrgUnitId();
         this.handleClose();
     }
 
-    handleAcceptProgram=() => {
+    handleAcceptProgram = () => {
         if (this.state.openProgramWarning) {
             this.props.onResetProgramId(this.state.openProgramWarning);
         }
@@ -93,7 +93,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.handleClose();
     }
 
-    handleClickNew=() => {
+    openNewRegistrationPage = () => {
         if (this.props.isUserInteractionInProgress) {
             this.setState({ openNewEventWarning: true });
             return;
@@ -101,7 +101,11 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
     }
 
-    handleAcceptNew =() => {
+    handleOpenNewRegistrationPageWithoutProgramId = () => {
+        this.props.onOpenNewRegistrationPageWithoutProgramId();
+    }
+
+    handleAcceptNew = () => {
         this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
         this.handleClose();
     }
@@ -118,7 +122,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
         return (
-            <div>
+            <div data-test={'dhis2-capture-locked-selector'}>
                 <QuickSelector
                     onSetOrgUnit={onSetOrgUnit}
                     onSetProgramId={onSetProgramId}
@@ -128,9 +132,10 @@ export class LockedSelectorComponent extends Component<Props, State> {
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
                     onStartAgain={this.handleOpenStartAgainWarning}
-                    onNewClick={this.handleClickNew}
-                    onFindClickWithoutProgramId={this.handleOpenSearchPageWithoutProgramId}
+                    onNewClick={this.openNewRegistrationPage}
+                    onNewClickWithoutProgramId={this.handleOpenNewRegistrationPageWithoutProgramId}
                     onFindClick={this.handleOpenSearchPage}
+                    onFindClickWithoutProgramId={this.handleOpenSearchPageWithoutProgramId}
                 />
                 <ConfirmDialog
                     onConfirm={this.handleAcceptStartAgain}

@@ -3,7 +3,7 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
-import { scopeTypes, TrackerProgram } from '../../../metaData';
+import { scopeTypes } from '../../../metaData';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 
 
@@ -27,45 +27,66 @@ type Props = $ReadOnly<{|
     selectedProgramId: string,
     onStartAgainClick: () => void,
     onNewClick: () => void,
+    onNewClickWithoutProgramId: () => void,
     onFindClick: () => void,
     onFindClickWithoutProgramId: () => void,
     showResetButton: boolean,
 |}>;
 
 
-const Index = ({
+const ActionButtonsPlain = ({
     onStartAgainClick,
     onNewClick,
+    onNewClickWithoutProgramId,
     onFindClick,
     onFindClickWithoutProgramId,
     selectedProgramId,
     classes,
     showResetButton,
 }: Props & CssClasses) => {
-    const typeName =
-      selectedProgramId instanceof TrackerProgram
-          ?
-          selectedProgramId.trackedEntityType.name
-          :
-          'Event';
-
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
 
     return (
         <>
-            <Button
-                small
-                secondary
-                dataTest="dhis2-capture-new-event-button"
-                onClick={onNewClick}
-            >
-                {
-                    selectedProgramId ?
-                        i18n.t('New {{typeName}}', { typeName })
-                        :
-                        i18n.t('New')
-                }
-            </Button>
+            {
+                (scopeType !== scopeTypes.TRACKER_PROGRAM && scopeType !== scopeTypes.EVENT_PROGRAM) ?
+                    <Button
+                        small
+                        secondary
+                        dataTest="dhis2-capture-new-event-button"
+                        className={classes.marginLeft}
+                        onClick={onNewClickWithoutProgramId}
+                    >
+                        { i18n.t('New') }
+                    </Button>
+                    :
+                    <DropdownButton
+                        small
+                        secondary
+                        dataTest="dhis2-capture-new-button"
+                        className={classes.marginLeft}
+                        component={
+                            <FlyoutMenu
+                                dense
+                                maxWidth="250px"
+                            >
+                                <MenuItem
+                                    dataTest="dhis2-capture-new-menuitem-one"
+                                    label={`New ${trackedEntityName} in ${programName}`}
+                                    onClick={onNewClick}
+                                />
+                                <MenuItem
+                                    dataTest="dhis2-capture-new-menuitem-two"
+                                    label="New..."
+                                    onClick={onNewClickWithoutProgramId}
+                                />
+                            </FlyoutMenu>
+                        }
+                    >
+                        { i18n.t('New') }
+                    </DropdownButton>
+            }
+
             {
                 scopeType !== scopeTypes.TRACKER_PROGRAM ?
                     <Button
@@ -105,7 +126,6 @@ const Index = ({
                     </DropdownButton>
             }
 
-
             {
                 showResetButton ?
                     <button
@@ -122,4 +142,4 @@ const Index = ({
     );
 };
 
-export const ActionButtons: ComponentType<Props> = withStyles(styles)(Index);
+export const ActionButtons: ComponentType<Props> = withStyles(styles)(ActionButtonsPlain);
