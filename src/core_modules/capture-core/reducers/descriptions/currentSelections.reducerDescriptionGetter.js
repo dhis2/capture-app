@@ -14,9 +14,6 @@ import {
     actionTypes as crossPageActionTypes,
 } from '../../components/Pages/actions/crossPage.actions';
 import {
-    urlActionTypes as newEnrollmentUrlActionTypes,
-} from '../../components/Pages/NewEnrollment';
-import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
@@ -39,7 +36,6 @@ const setCategoryOption = (
         },
     };
 
-    // todo i think those could simple be undefined.
     return {
         ...state,
         categories,
@@ -51,7 +47,7 @@ const setCategoryOption = (
 const deleteKeyFromObject = (key, object) =>
     Object.keys(object).reduce((acc, objectKey) => {
         if (objectKey !== key) {
-            return { ...acc, [objectKey]: object };
+            return { ...acc, [objectKey]: object[objectKey] };
         }
         return acc;
     }, {});
@@ -87,18 +83,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             categoriesMeta: undefined,
             trackedEntityTypeId: undefined,
             complete: false,
-        };
-        return newState;
-    },
-    [newEnrollmentUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
-        return newState;
-    },
-    [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
-        const newState = {
-            ...state,
-            orgUnitId: null,
         };
         return newState;
     },
@@ -240,9 +224,4 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
 }, 'currentSelections', {
     complete: false,
     categoryCheckInProgress: false,
-    orgUnitId: null,
-    programId: null,
-    trackedEntityTypeId: null,
-    categories: null,
-    categoriesMeta: null,
 });

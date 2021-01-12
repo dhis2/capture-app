@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-26T09:58:16.261Z\n"
+"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: Persian (Afghanistan) (https://www.transifex.com/hisp-uio/teams/100509/fa_AF/)\n"
@@ -531,33 +531,22 @@ msgstr ""
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
+msgid "Saving a {{trackedEntityName}} in"
 msgstr ""
 
-msgid "Save and add another"
+msgid "in"
+msgstr "در"
+
+msgid "Saving a {{trackedEntityName}}"
 msgstr ""
 
-msgid "Save and exit"
+msgid "without"
 msgstr ""
 
-msgid "Finish"
+msgid "enrollment"
 msgstr ""
 
-msgid "Switch to form view"
-msgstr ""
-
-msgid "Switch to row view"
-msgstr ""
-
-msgid "New {{TET}}"
-msgstr ""
-
-msgid "Working Lists"
-msgstr ""
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
+msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "Assigned user"
@@ -572,9 +561,6 @@ msgstr ""
 msgid "Saving to"
 msgstr ""
 
-msgid "in"
-msgstr "در"
-
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -588,8 +574,23 @@ msgid ""
 "exists"
 msgstr ""
 
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Finish"
+msgstr ""
+
 msgid "New event"
 msgstr "رویداد جدید"
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
 
 msgid "New event relationship"
 msgstr ""
@@ -623,15 +624,6 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
 
-msgid "Review duplicates"
-msgstr ""
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
-
-msgid "Review Duplicates"
-msgstr ""
-
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 
@@ -655,6 +647,12 @@ msgid "Registered person"
 msgstr ""
 
 msgid "Link"
+msgstr ""
+
+msgid "Review Duplicates"
+msgstr ""
+
+msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-12-13T22:47:19.786Z\n"
-"PO-Revision-Date: 2020-12-13T22:47:19.786Z\n"
+"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
+"PO-Revision-Date: 2021-01-12T10:53:21.230Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -590,7 +590,7 @@ msgstr ""
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Choose a partner to start reporting"
+msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
 msgid "Saving a {{trackedEntityName}} in"
@@ -606,20 +606,6 @@ msgid "enrollment"
 msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr ""
-
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
-
-msgid "New {{TET}}"
-msgstr ""
-
-msgid "Working Lists"
-msgstr ""
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
