@@ -1,6 +1,5 @@
 // @flow
 import React, { type ComponentType } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { Grid, Paper, withStyles } from '@material-ui/core';
 import type { Props } from './RegistrationDataEntry.types';
 import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
