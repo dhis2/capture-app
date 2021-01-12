@@ -252,7 +252,6 @@ And('you see the registration form for the specific category', () => {
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
         .contains('New Contraceptives Voucher Program')
         .should('exist');
-
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
         .contains('Basic info')
         .should('exist');
