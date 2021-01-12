@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-12T12:45:54.170Z\n"
-"PO-Revision-Date: 2021-01-12T12:45:54.170Z\n"
+"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"PO-Revision-Date: 2021-01-12T13:01:48.740Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -288,9 +288,6 @@ msgid "Save anyway"
 msgstr ""
 
 msgid "Validation errors and warnings"
-msgstr ""
-
-msgid "Save anyway!!"
 msgstr ""
 
 msgid "Validation errors"
@@ -609,21 +606,6 @@ msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}}"
-msgstr ""
-
-msgid "without"
-msgstr ""
-
-msgid "enrollment"
-msgstr ""
-
-msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"

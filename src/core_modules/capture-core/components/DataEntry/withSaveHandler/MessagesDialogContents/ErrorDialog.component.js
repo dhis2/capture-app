@@ -63,7 +63,7 @@ class ErrorDialog extends React.Component<Props> {
                         initialFocus
                         className={classes.marginLeft}
                     >
-                        {i18n.t('Save anyway!!')}
+                        {i18n.t('Save anyway')}
                     </Button>) : null
                 }
             </div>
