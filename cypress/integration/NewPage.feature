@@ -4,7 +4,7 @@ Feature: User creates a new entries from the registration page
     Given you are on the default registration page
     Then there should be informative message explaining you need to select an organisation unit
 
-  Scenario: Viewing the registration page with incomplete partner selection
+  Scenario: Viewing the registration page with incomplete program categories selection
     Given you are in the main page with no selections made
     And you select org unit
     And you select the Contraceptives Voucher Program
@@ -56,7 +56,7 @@ Feature: User creates a new entries from the registration page
     And you see a registration form for the Child Programme
     And you have Child Programme selected
 
-  Scenario: Navigating to registration page after selecting partner
+  Scenario: Navigating to registration page after selecting program category
     Given you are in the main page with no selections made
     And you select org unit
     And you select the Contraceptives Voucher Program
@@ -64,5 +64,5 @@ Feature: User creates a new entries from the registration page
     When you click the the first option option
     Then you are navigated to the Contraceptives Voucher Program registration page with program selected
     And there should be informative message explaining you need to complete your selections
-    When you select the first partner
-    Then you see the registration form for the scpecific partner
+    When you select the first category
+    Then you see the registration form for the specific category

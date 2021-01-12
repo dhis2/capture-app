@@ -9,7 +9,7 @@ import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { newPageStatuses } from './NewPage.constants';
-import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 
@@ -23,13 +23,14 @@ export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
-    showMessageToSelectProgramPartnerOnNewPage,
+    showMessageToSelectProgramCategoryOnNewPage,
     showDefaultViewOnNewPage,
     handleMainPageNavigation,
     classes,
     currentScopeId,
     newPageStatus,
-    partnerSelectionIncomplete,
+    programCategorySelectionIncomplete,
+    missingCategoriesInProgramSelection,
     orgUnitSelectionIncomplete,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
@@ -42,17 +43,17 @@ const NewPagePlain = ({
     useEffect(() => {
         if (orgUnitSelectionIncomplete) {
             showMessageToSelectOrgUnitOnNewPage();
-        } else if (partnerSelectionIncomplete) {
-            showMessageToSelectProgramPartnerOnNewPage();
+        } else if (programCategorySelectionIncomplete) {
+            showMessageToSelectProgramCategoryOnNewPage();
         } else {
             showDefaultViewOnNewPage();
         }
     },
     [
-        partnerSelectionIncomplete,
+        programCategorySelectionIncomplete,
         orgUnitSelectionIncomplete,
         showMessageToSelectOrgUnitOnNewPage,
-        showMessageToSelectProgramPartnerOnNewPage,
+        showMessageToSelectProgramCategoryOnNewPage,
         showDefaultViewOnNewPage,
     ]);
 
@@ -71,9 +72,9 @@ const NewPagePlain = ({
             {
                 newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
                 <>
-                    <InefficientSelectionsMessage
-                        message={i18n.t('Choose a registering unit to start reporting')}
-                    />
+                    <IncompleteSelectionsMessage>
+                        {i18n.t('Choose a registering unit to start reporting')}
+                    </IncompleteSelectionsMessage>
                     <Button
                         dataTest="dhis2-capture-new-page-cancel-button"
                         onClick={handleMainPageNavigation}
@@ -82,12 +83,30 @@ const NewPagePlain = ({
                     </Button>
                 </>
             }
-
+            
             {
                 newPageStatus === newPageStatuses.WITHOUT_PROGRAM_PARTNER_SELECTED &&
                 <InefficientSelectionsMessage
                     message={i18n.t('Choose a partner to start reporting')}
                 />
+            }
+
+            {
+                newPageStatus === newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED &&
+                (() => {
+                    const missingCategories = missingCategoriesInProgramSelection.reduce((acc, { name }, index) => {
+                        if ((index + 1 === missingCategoriesInProgramSelection.length)) {
+                            return `${acc} ${name} ${missingCategoriesInProgramSelection.length > 1 ? 'categories' : 'category'}`;
+                        }
+                        return `${acc} ${name},`;
+                    }, '');
+
+                    return (
+                        <IncompleteSelectionsMessage>
+                            {i18n.t('Choose the {{missingCategories}} to start reporting', { missingCategories })}
+                        </IncompleteSelectionsMessage>
+                    );
+                })()
             }
         </div>
     </>);

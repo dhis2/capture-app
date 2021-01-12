@@ -12,7 +12,7 @@
     "@dhis2/d2-ui-org-unit-tree": "^6.1.0",
     "@dhis2/d2-ui-rich-text": "^6.1.0",
     "@dhis2/d2-ui-sharing-dialog": "^6.5.10",
-    "@dhis2/ui": "^5.7",
+    "@dhis2/ui": "^6.1",
     "@joakim_sm/react-infinite-calendar": "^2.4.2",
     "@material-ui/core": "3.9.4",
     "@material-ui/icons": "3",
@@ -34,7 +34,6 @@
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-addons-update": "^15.6.3",
-    "react-autosuggest": "^10.0.3",
     "react-dnd": "^8.0.2",
     "react-dnd-html5-backend": "^8.0.2",
     "react-dom": "^16.14.0",
@@ -81,9 +80,9 @@
     }
   },
   "devDependencies": {
-    "@babel/plugin-transform-flow-strip-types": "^7.12.1",
+    "@babel/plugin-transform-flow-strip-types": "^7.12.10",
     "@dhis2/cli-app-scripts": "^4.0.9",
-    "@dhis2/cli-helpers-engine": "^1.5.0",
+    "@dhis2/cli-helpers-engine": "^2.1.1",
     "@dhis2/cli-utils-cypress": "^4.1.0",
     "@dhis2/cypress-commands": "^5.0.0",
     "docdash": "^1.2.0",

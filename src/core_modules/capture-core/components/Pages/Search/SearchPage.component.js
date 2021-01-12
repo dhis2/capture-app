@@ -24,7 +24,7 @@ import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
 import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { searchScopes } from './SearchPage.constants';
 import { ResultsPageSizeContext } from '../shared-contexts';
 import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
@@ -234,9 +234,9 @@ const Index = ({
             </div>
             {
                 searchStatus === searchPageStatus.INITIAL && !selectedSearchScopeId &&
-                    <InefficientSelectionsMessage
-                        message={i18n.t('Choose a type to start searching')}
-                    />
+                <IncompleteSelectionsMessage>
+                    {i18n.t('Choose a type to start searching')}
+                </IncompleteSelectionsMessage>
             }
         </ResultsPageSizeContext.Provider>
     </>);

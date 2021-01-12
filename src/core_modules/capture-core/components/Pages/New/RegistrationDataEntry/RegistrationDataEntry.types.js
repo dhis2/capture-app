@@ -11,3 +11,8 @@ export type Props = $ReadOnly<{|
   ...CssClasses,
   ...OwnProps
 |}>
+
+export type Props = $ReadOnly<{|
+  ...CssClasses,
+  ...OwnProps
+|}>
