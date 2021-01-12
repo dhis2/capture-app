@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
-"PO-Revision-Date: 2021-01-06T08:52:06.342Z\n"
+"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
+"PO-Revision-Date: 2021-01-12T10:53:21.230Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -590,6 +590,9 @@ msgstr ""
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
+msgid "Choose the {{missingCategories}} to start reporting"
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in"
 msgstr ""
 
@@ -603,78 +606,6 @@ msgid "enrollment"
 msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr ""
-
-msgid "Assigned user"
-msgstr ""
-
-msgid "Relationships"
-msgstr ""
-
-msgid "Assignee"
-msgstr ""
-
-msgid "Saving to"
-msgstr ""
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-
-msgid "This event"
-msgstr ""
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr ""
-
-msgid "Save and add another"
-msgstr ""
-
-msgid "Save and exit"
-msgstr ""
-
-msgid "Finish"
-msgstr ""
-
-msgid "New event"
-msgstr ""
-
-msgid "Switch to form view"
-msgstr ""
-
-msgid "Switch to row view"
-msgstr ""
-
-msgid "New event relationship"
-msgstr ""
-
-msgid "Adding relationship to event."
-msgstr ""
-
-msgid "Go back to event without saving relationship"
-msgstr ""
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr ""
-
-msgid "events added"
-msgstr ""
-
-msgid "No events added"
-msgstr ""
-
-msgid "Choose a registering unit and program to get started"
-msgstr ""
-
-msgid "Choose a program to start reporting"
-msgstr ""
-
-msgid "Choose a category option to start reporting"
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"

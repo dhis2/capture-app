@@ -2,54 +2,20 @@
 import React, { useEffect, useState } from 'react';
 import { compose } from 'redux';
 import type { ComponentType } from 'react';
-import { useHistory } from 'react-router';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
-import Paper from '@material-ui/core/Paper/Paper';
 import { Button } from '@dhis2/ui';
 import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { newPageStatuses } from './NewPage.constants';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
-import { scopeTypes } from '../../../metaData';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
-import { urlArguments } from '../../../utils/url';
 
-const getStyles = ({ typography }) => ({
+const getStyles = () => ({
     container: {
-        padding: '8px 24px 16px 24px',
-    },
-    paper: {
-        marginBottom: typography.pxToRem(10),
-        padding: typography.pxToRem(10),
-    },
-    maxWidth: {
-        maxWidth: typography.pxToRem(950),
-    },
-    title: {
-        padding: '8px 0 0px 8px',
-        fontWeight: 500,
-    },
-    tetypeContainer: {
-        marginTop: typography.pxToRem(16),
-    },
-    registrationContainer: {
-        marginLeft: typography.pxToRem(8),
-        marginRight: typography.pxToRem(8),
-    },
-    selectorTopMargin: {
-        margin: typography.pxToRem(16),
-    },
-    emptySelectionPaperContent: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: 50,
-        paddingBottom: 50,
+        padding: '24px 24px 16px 24px',
     },
 });
 
@@ -57,68 +23,50 @@ export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
+    showMessageToSelectProgramCategoryOnNewPage,
     showDefaultViewOnNewPage,
+    handleMainPageNavigation,
     classes,
-    currentOrgUnitId,
     currentScopeId,
     newPageStatus,
+    programCategorySelectionIncomplete,
+    missingCategoriesInProgramSelection,
+    orgUnitSelectionIncomplete,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
-    const titleText = useScopeTitleText(selectedScopeId);
-    const history = useHistory();
 
     useEffect(() => {
         setScopeId(currentScopeId);
     }, [scopeType, currentScopeId]);
 
     useEffect(() => {
-        if (!currentOrgUnitId) {
+        if (orgUnitSelectionIncomplete) {
             showMessageToSelectOrgUnitOnNewPage();
+        } else if (programCategorySelectionIncomplete) {
+            showMessageToSelectProgramCategoryOnNewPage();
         } else {
             showDefaultViewOnNewPage();
         }
     },
     [
+        programCategorySelectionIncomplete,
+        orgUnitSelectionIncomplete,
         showMessageToSelectOrgUnitOnNewPage,
+        showMessageToSelectProgramCategoryOnNewPage,
         showDefaultViewOnNewPage,
-        currentOrgUnitId,
     ]);
-
-    const handleRegistrationScopeSelection = (id) => {
-        setScopeId(id);
-    };
-
-    const handleMainPageNavigation = () => {
-        history.push(`/${urlArguments({ orgUnitId: currentOrgUnitId, programId: currentScopeId })}`);
-    };
-
 
     return (<>
         <LockedSelector />
-
         <div data-test="dhis2-capture-registration-page-content" className={classes.container} >
             {
                 newPageStatus === newPageStatuses.DEFAULT &&
-                <Paper className={classes.paper}>
-                    <div className={classes.maxWidth}>
-                        <div className={classes.title} >
-                            New {titleText}
-                        </div>
-                        {
-                            (!scopeType || scopeType === scopeTypes.TRACKED_ENTITY_TYPE) &&
-                                <div className={classes.tetypeContainer}>
-                                    <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
-                                </div>
-                        }
-                        <div className={classes.registrationContainer}>
-                            <RegistrationDataEntry
-                                dataEntryId={NEW_TEI_DATA_ENTRY_ID}
-                                selectedScopeId={selectedScopeId}
-                            />
-                        </div>
-                    </div>
-                </Paper>
+                <RegistrationDataEntry
+                    dataEntryId={NEW_TEI_DATA_ENTRY_ID}
+                    selectedScopeId={selectedScopeId}
+                    setScopeId={setScopeId}
+                />
             }
 
             {
@@ -134,6 +82,24 @@ const NewPagePlain = ({
                         {i18n.t('Cancel')}
                     </Button>
                 </>
+            }
+
+            {
+                newPageStatus === newPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED &&
+                (() => {
+                    const missingCategories = missingCategoriesInProgramSelection.reduce((acc, { name }, index) => {
+                        if ((index + 1 === missingCategoriesInProgramSelection.length)) {
+                            return `${acc} ${name} ${missingCategoriesInProgramSelection.length > 1 ? 'categories' : 'category'}`;
+                        }
+                        return `${acc} ${name},`;
+                    }, '');
+
+                    return (
+                        <IncompleteSelectionsMessage>
+                            {i18n.t('Choose the {{missingCategories}} to start reporting', { missingCategories })}
+                        </IncompleteSelectionsMessage>
+                    );
+                })()
             }
         </div>
     </>);

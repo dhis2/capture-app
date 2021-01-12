@@ -83,14 +83,14 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN,
+            lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN,
             lockedSelectorActionTypes.PROGRAM_ID_SET,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
         ),
         filter(() => {
             const { app: { page } } = store.value;
-            return page === 'newEvent';
+            return page === 'new';
         }),
         filter((action) => {
             const type = action.type;
@@ -138,14 +138,14 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN,
+            lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             lockedSelectorActionTypes.PROGRAM_ID_SET,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
         ),
         filter(() => {
             const { app: { page } } = store.value;
-            return page === 'newEvent';
+            return page === 'new';
         }),
         filter((action) => {
             // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATED and the underlying action is not SET_ORG_UNIT or SELECTIONS_FROM_URL_VALID

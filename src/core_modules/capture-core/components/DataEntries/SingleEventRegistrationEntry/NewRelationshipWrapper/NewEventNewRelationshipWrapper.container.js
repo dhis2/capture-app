@@ -34,6 +34,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowFixMe[missing-annot] automated comment
 export const NewRelationshipWrapper: ComponentType<{||}> =
   connect(makeMapStateToProps, mapDispatchToProps)(NewRelationshipWrapperComponent);
