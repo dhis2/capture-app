@@ -83,7 +83,7 @@
   "devDependencies": {
     "@babel/plugin-transform-flow-strip-types": "^7.12.10",
     "@dhis2/cli-app-scripts": "^4.0.9",
-    "@dhis2/cli-helpers-engine": "^1.5.0",
+    "@dhis2/cli-helpers-engine": "^2.1.1",
     "@dhis2/cli-utils-cypress": "^4.1.0",
     "@dhis2/cypress-commands": "^5.0.0",
     "docdash": "^1.2.0",
