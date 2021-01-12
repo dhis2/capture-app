@@ -44,7 +44,6 @@ import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reduce
 import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
 import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';
 import { viewEventPageDesc } from 'capture-core/reducers/descriptions/viewEvent.reducerDescription';
-import { newEnrollmentPageDesc } from 'capture-core/reducers/descriptions/newEnrollment.reducerDescription';
 import {
     newRelationshipDesc,
     newRelationshipRegisterTeiDesc,
@@ -121,7 +120,6 @@ export default [
     editEventPageDesc,
     viewEventPageDesc,
     newPageDesc,
-    newEnrollmentPageDesc,
     newRelationshipDesc,
     newRelationshipRegisterTeiDesc,
     newRelationshipRegisterTeiDuplicatesReviewDesc,

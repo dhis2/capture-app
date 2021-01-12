@@ -7,12 +7,14 @@ import { NewPageComponent } from './NewPage.component';
 import {
     showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
-    showMessageToSelectProgramPartnerOnNewPage,
+    showMessageToSelectProgramCategoryOnNewPage,
 } from './NewPage.actions';
 import { typeof newPageStatuses } from './NewPage.constants';
 import { urlArguments } from '../../../utils/url';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
+import { programCollection } from '../../../metaDataMemoryStores';
+import type { ProgramCategories } from './NewPage.types';
 
 export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
@@ -22,8 +24,8 @@ export const NewPage: ComponentType<{||}> = () => {
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
         [dispatch]);
 
-    const dispatchShowMessageToSelectProgramPartnerOnNewPage = useCallback(
-        () => { dispatch(showMessageToSelectProgramPartnerOnNewPage()); },
+    const dispatchshowMessageToSelectProgramCategoryOnNewPage = useCallback(
+        () => { dispatch(showMessageToSelectProgramCategoryOnNewPage()); },
         [dispatch]);
 
     const dispatchShowDefaultViewOnNewPage = useCallback(
@@ -39,10 +41,26 @@ export const NewPage: ComponentType<{||}> = () => {
     const currentScopeId: string =
         useSelector(({ currentSelections }) => currentSelections.programId || currentSelections.trackedEntityTypeId);
 
-    // This is partner selection. When you have selected a program but
+    // This is combo category selection. When you have selected a program but
     // the selection is incomplete we want the user to see a specific message
-    const partnerSelectionIncomplete: boolean =
+    const programCategorySelectionIncomplete: boolean =
       useSelector(({ currentSelections: { programId, complete } }) => programId && !complete);
+
+    const missingCategoriesInProgramSelection: ProgramCategories =
+      useSelector(({ currentSelections: { categoriesMeta = {}, programId, complete } }) => {
+          const selectedProgram = programId && programCollection.get(programId);
+          if (selectedProgram && selectedProgram.categoryCombination && !complete) {
+              const programCategories = Array.from(selectedProgram.categoryCombination.categories.values())
+                  .map(({ id, name }) => ({ id, name }));
+
+              return programCategories.filter(({ id }) =>
+                  !(Object.keys(categoriesMeta)
+                      .some((programCategoryId => programCategoryId === id))
+                  ),
+              );
+          }
+          return [];
+      });
 
     const orgUnitSelectionIncomplete: boolean =
       useSelector(({ currentSelections: { orgUnitId, complete } }) => !orgUnitId && !complete);
@@ -59,12 +77,13 @@ export const NewPage: ComponentType<{||}> = () => {
     return (
         <NewPageComponent
             showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
-            showMessageToSelectProgramPartnerOnNewPage={dispatchShowMessageToSelectProgramPartnerOnNewPage}
+            showMessageToSelectProgramCategoryOnNewPage={dispatchshowMessageToSelectProgramCategoryOnNewPage}
             showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
             handleMainPageNavigation={handleMainPageNavigation}
             currentScopeId={currentScopeId}
             orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
-            partnerSelectionIncomplete={partnerSelectionIncomplete}
+            programCategorySelectionIncomplete={programCategorySelectionIncomplete}
+            missingCategoriesInProgramSelection={missingCategoriesInProgramSelection}
             newPageStatus={newPageStatus}
             error={error}
             ready={ready}

@@ -3,7 +3,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { paramsSelector } from './appSync.selectors';
 import { LoadingMaskForPage } from '../LoadingMasks';
-import { updateSelectionsFromUrl as updateSelectionsFromUrlForNewEnrollment } from '../Pages/NewEnrollment';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { updateSelectionsFromUrl } from '../LockedSelector';
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
@@ -22,7 +21,6 @@ type Props = {
 const pageKeys = {
     MAIN: '',
     VIEW_EVENT: 'viewEvent',
-    NEW_ENROLLMENT: 'newEnrollment',
     SEARCH: 'search',
     NEW: 'new',
 };
@@ -42,16 +40,6 @@ const specificationForPages = {
         {
             urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
             propKey: 'viewEventId',
-        },
-    ],
-    [pageKeys.NEW_ENROLLMENT]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
         },
     ],
     [pageKeys.SEARCH]: [
@@ -89,7 +77,6 @@ const updaterForPages = {
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
-    [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,
 };
 
 const getUrlParts = (pathName: string) => {
