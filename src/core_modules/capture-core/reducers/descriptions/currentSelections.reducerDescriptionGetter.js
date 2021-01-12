@@ -36,7 +36,6 @@ const setCategoryOption = (
         },
     };
 
-    // todo i think those could simple be undefined.
     return {
         ...state,
         categories,
