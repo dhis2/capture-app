@@ -9,7 +9,7 @@ import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './NewPage.types';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { newPageStatuses } from './NewPage.constants';
-import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 
@@ -72,9 +72,9 @@ const NewPagePlain = ({
             {
                 newPageStatus === newPageStatuses.WITHOUT_ORG_UNIT_SELECTED &&
                 <>
-                    <InefficientSelectionsMessage
-                        message={i18n.t('Choose a registering unit to start reporting')}
-                    />
+                    <IncompleteSelectionsMessage>
+                        {i18n.t('Choose a registering unit to start reporting')}
+                    </IncompleteSelectionsMessage>
                     <Button
                         dataTest="dhis2-capture-new-page-cancel-button"
                         onClick={handleMainPageNavigation}
@@ -95,9 +95,9 @@ const NewPagePlain = ({
                     }, '');
 
                     return (
-                        <InefficientSelectionsMessage
-                            message={i18n.t('Choose the {{missingCategories}} to start reporting', { missingCategories })}
-                        />
+                        <IncompleteSelectionsMessage>
+                            {i18n.t('Choose the {{missingCategories}} to start reporting', { missingCategories })}
+                        </IncompleteSelectionsMessage>
                     );
                 })()
             }
