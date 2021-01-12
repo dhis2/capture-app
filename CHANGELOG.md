@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/dhis2/capture-app/compare/v1.4.4...v1.5.0) (2021-01-12)
+
+
+### Features
+
+* DHIS2-9637 adds new button and unifies the urls ([#1312](https://github.com/dhis2/capture-app/issues/1312)) ([54b8157](https://github.com/dhis2/capture-app/commit/54b81572a94a4cd27e4d6f7db8079b90694ba72b)), closes [#1314](https://github.com/dhis2/capture-app/issues/1314) [#1313](https://github.com/dhis2/capture-app/issues/1313) [#1316](https://github.com/dhis2/capture-app/issues/1316)
+
 ## [1.4.4](https://github.com/dhis2/capture-app/compare/v1.4.3...v1.4.4) (2021-01-12)
 
 
