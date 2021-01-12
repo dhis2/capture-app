@@ -5,15 +5,11 @@ import {
     actionTypes as viewEventActionTypes,
     actionTypes as viewEventPageActionTypes,
 } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../components/Pages/NewEvent';
+import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import { actionTypes as viewEventDataEntryActionTypes } from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 
 export const activePageDesc = createReducerDescription({
-    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
-        ...state,
-        isDataEntryLoading: true,
-    }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: state => ({
         ...state,
         isPageLoading: true,
@@ -22,7 +18,7 @@ export const activePageDesc = createReducerDescription({
         ...state,
         selectionsError: null,
         isPageLoading: false,
-        isDataEntryLoading: true,
+        isDataEntryLoading: false,
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID]: (state, action) => ({
         ...state,
@@ -49,6 +45,7 @@ export const activePageDesc = createReducerDescription({
         ...state,
         isDataEntryLoading: false,
     }),
+
     [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: state => ({
         ...state,
         isDataEntryLoading: true,
@@ -81,4 +78,9 @@ export const activePageDesc = createReducerDescription({
         ...state,
         isDataEntryLoading: false,
     }),
-}, 'activePage');
+}, 'activePage', {
+    selectionsError: null,
+    isPageLoading: false,
+    isDataEntryLoading: false,
+    viewEventLoadError: false,
+});

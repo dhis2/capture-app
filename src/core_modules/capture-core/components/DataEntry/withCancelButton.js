@@ -21,10 +21,6 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
 
         getWrappedInstance = () => this.innerInstance;
 
-        getCancelButtonInstance = (cancelButtonInstance: ?any) => {
-            this.props.cancelButtonRef && this.props.cancelButtonRef(cancelButtonInstance);
-        }
-
         render() {
             const { onCancel, cancelButtonRef, ...passOnProps } = this.props;
             const options = (optionsFn && optionsFn(this.props)) || {};
@@ -36,7 +32,6 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
                     cancelButton={
                         <CancelButton
                             id={this.props.id}
-                            ref={this.getCancelButtonInstance}
                             onCancel={onCancel}
                             options={options}
                         />
