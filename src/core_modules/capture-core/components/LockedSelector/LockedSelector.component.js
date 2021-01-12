@@ -37,7 +37,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.setState({ openStartAgainWarning: true });
     }
 
-    handleOpenOrgUnitWarning=() => {
+    handleOpenOrgUnitWarning = () => {
         if (this.dontShowWarning()) {
             this.props.onResetOrgUnitId();
             return;
@@ -45,7 +45,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.setState({ openOrgUnitWarning: true });
     }
 
-    handleOpenProgramWarning=(baseAction: ReduxAction<any, any>) => {
+    handleOpenProgramWarning = (baseAction: ReduxAction<any, any>) => {
         if (this.dontShowWarning()) {
             this.props.onResetProgramId(baseAction);
             return;
@@ -53,7 +53,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.setState({ openProgramWarning: baseAction });
     }
 
-    handleOpenCatComboWarning=(categoryId: string) => {
+    handleOpenCatComboWarning = (categoryId: string) => {
         if (this.dontShowWarning()) {
             this.props.onResetCategoryOption(categoryId);
             return;
@@ -61,7 +61,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.setState({ openCatComboWarning: true, categoryIdToReset: categoryId });
     }
 
-    handleClose=() => {
+    handleClose = () => {
         this.setState({
             openStartAgainWarning: false,
             openOrgUnitWarning: false,
@@ -71,17 +71,17 @@ export class LockedSelectorComponent extends Component<Props, State> {
         });
     }
 
-    handleAcceptStartAgain=() => {
+    handleAcceptStartAgain = () => {
         this.props.onStartAgain();
         this.handleClose();
     }
 
-    handleAcceptOrgUnit=() => {
+    handleAcceptOrgUnit = () => {
         this.props.onResetOrgUnitId();
         this.handleClose();
     }
 
-    handleAcceptProgram=() => {
+    handleAcceptProgram = () => {
         if (this.state.openProgramWarning) {
             this.props.onResetProgramId(this.state.openProgramWarning);
         }
@@ -93,7 +93,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.handleClose();
     }
 
-    openNewRegistrationPage=() => {
+    openNewRegistrationPage = () => {
         if (this.props.isUserInteractionInProgress) {
             this.setState({ openNewEventWarning: true });
             return;
@@ -101,11 +101,11 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
     }
 
-    handleOpenNewRegistrationPageWithoutProgramId=() => {
+    handleOpenNewRegistrationPageWithoutProgramId = () => {
         this.props.onOpenNewRegistrationPageWithoutProgramId();
     }
 
-    handleAcceptNew =() => {
+    handleAcceptNew = () => {
         this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
         this.handleClose();
     }
