@@ -24,7 +24,7 @@ import { registrationSectionActionTypes } from '../../components/Pages/NewRelati
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 import { workingListsCommonActionTypes } from '../../components/Pages/MainPage/WorkingListsCommon';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
-import { registrationFormActionTypes } from "../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions";
+import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?Node) {
     const newState = [...state];
