@@ -1,14 +1,14 @@
 # 
 # Translators:
 # 晓东 林 <13981924470@126.com>, 2020
-# easylin <lin_xd@126.com>, 2020
+# easylin <lin_xd@126.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2020\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "请提供有效的日期"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "表中显示的列"
 
 msgid "Column"
-msgstr ""
+msgstr "列"
 
 msgid "Errors"
 msgstr "错误"
@@ -35,7 +35,7 @@ msgid "Indicators"
 msgstr "指标"
 
 msgid "Warnings"
-msgstr ""
+msgstr "错误"
 
 msgid "Cancel"
 msgstr "取消"
@@ -44,22 +44,22 @@ msgid "Complete"
 msgstr "完成"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "发现警告"
 
 msgid "Abort"
-msgstr ""
+msgstr "关于"
 
 msgid "Save comment"
 msgstr ""
 
 msgid "Write comment"
-msgstr ""
+msgstr "写备注"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
 
 msgid "No write access"
-msgstr ""
+msgstr "无写权限"
 
 msgid "Save"
 msgstr "保存"
@@ -71,10 +71,10 @@ msgid "Sort"
 msgstr "排序"
 
 msgid "No events to display"
-msgstr ""
+msgstr "无事件可显示"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "离线列表的数据不存在"
 
 msgid "Last week"
 msgstr "上周"
@@ -86,10 +86,10 @@ msgid "Last 3 months"
 msgstr "最近3个月"
 
 msgid "Custom range"
-msgstr ""
+msgstr "自订范围"
 
 msgid "to"
-msgstr ""
+msgstr "到"
 
 msgid "after or equal to"
 msgstr ""
@@ -110,19 +110,19 @@ msgid "Min"
 msgstr "最小"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "大于等于"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "小于等于"
 
 msgid "Contains text"
-msgstr ""
+msgstr "包含文本"
 
 msgid "Yes"
 msgstr "Yes"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/yyyy"
 
 msgid "Years"
 msgstr "年"
@@ -134,7 +134,7 @@ msgid "Days"
 msgstr "天数"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "上传文件"
 
 msgid "selected"
 msgstr "选择的"
@@ -143,34 +143,34 @@ msgid "Delete"
 msgstr "删除"
 
 msgid "Select file"
-msgstr ""
+msgstr "选择文件"
 
 msgid "No"
 msgstr "No"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "上传图像"
 
 msgid "Select image"
-msgstr ""
+msgstr "选择图像"
 
 msgid "Clear"
 msgstr "清除"
 
 msgid "No results"
-msgstr ""
+msgstr "无结果"
 
 msgid "No items to display"
-msgstr ""
+msgstr "无条目可显示"
 
 msgid "Online"
-msgstr ""
+msgstr "在线"
 
 msgid "Offline"
-msgstr ""
+msgstr "离线"
 
 msgid "Syncing"
-msgstr ""
+msgstr "同步"
 
 msgid "Field"
 msgstr "区域"
@@ -179,10 +179,10 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"
-msgstr ""
+msgstr "再开始"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "你确信？所以未保存的数据将丢失"
 
 msgid "Reset Organisation Unit"
 msgstr ""
@@ -197,13 +197,13 @@ msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "事件不能载入"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "事件不能载入"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "机构不能载入"
 
 msgid "Update"
 msgstr "更新"
@@ -212,16 +212,16 @@ msgid "Close"
 msgstr "关闭"
 
 msgid "More filters"
-msgstr ""
+msgstr "更多过滤器"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "行每页"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "不能获取机构"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "项目不存在"
 
 msgid "Selected program is invalid for registering unit"
 msgstr ""
@@ -242,13 +242,13 @@ msgid "New event"
 msgstr "新事件"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "切换到表单视图"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "切换到行视图"
 
 msgid "Saving to"
-msgstr ""
+msgstr "保存到"
 
 msgid "in"
 msgstr "在"
@@ -256,22 +256,22 @@ msgstr "在"
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
-msgstr ""
+msgstr "这不是事件项目或者元数据坏了，查看日志详情"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "保存并另外添加"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "保存后退出"
 
 msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "事件已经被添加"
 
 msgid "No events added"
-msgstr ""
+msgstr "没有事件被添加"
 
 msgid "Reset"
 msgstr "复位"
@@ -283,16 +283,16 @@ msgid "Find"
 msgstr "发现"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "选择注册的机构"
 
 msgid "Registering Oraginastion Unit"
 msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "在注册的机构"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "选择的项目"
 
 msgid "Select"
 msgstr "选择"
@@ -301,31 +301,31 @@ msgid "Program"
 msgstr "项目"
 
 msgid "No programs available."
-msgstr ""
+msgstr "无可用项目"
 
 msgid "Show all"
 msgstr "全部显示"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "有些项目已经被过滤了"
 
 msgid "Select program"
 msgstr "选择项目"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "发生错误。查看日志以获取详细信息"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "保存时间错误"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "不能保存事件，看日志"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "选择一个或多个日期"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "选择日期"
 
 msgid "Today"
 msgstr "今天"
