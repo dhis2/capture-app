@@ -8,7 +8,7 @@ import {
     saveNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
 import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
-import { getScopeFromScopeId, getTrackerProgramThrowIfNotFound, scopeTypes, TrackerProgram } from "../../../../metaData";
+import { getTrackerProgramThrowIfNotFound, scopeTypes } from '../../../../metaData';
 
 
 const deriveAttributesFromFormValues = (formValues = {}) =>
