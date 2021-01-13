@@ -8,7 +8,7 @@ import {
     saveNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
 import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
-import { getScopeFromScopeId, scopeTypes, TrackerProgram } from '../../../../metaData';
+import { getScopeFromScopeId, getTrackerProgramThrowIfNotFound, scopeTypes, TrackerProgram } from "../../../../metaData";
 
 
 const deriveAttributesFromFormValues = (formValues = {}) =>
@@ -52,7 +52,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
         map(() => {
             const { orgUnitId, programId } = store.value.currentSelections;
             const enrollmentFormValues = store.value.dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
-            const scope = getScopeFromScopeId(programId);
+            const trackerProgram = getTrackerProgramThrowIfNotFound(programId);
             return saveNewTrackedEntityInstanceWithEnrollment(
                 {
                     attributes: deriveAttributesFromFormValues(store.value.formsValues['newPageDataEntryId-newEnrollment']),
@@ -65,7 +65,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
                         },
                     ],
                     orgUnit: orgUnitId,
-                    trackedEntityType: scope instanceof TrackerProgram && scope.trackedEntityType.id,
+                    trackedEntityType: trackerProgram.trackedEntityType.id,
                 });
         }),
     );
