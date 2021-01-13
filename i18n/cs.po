@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
+"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -138,23 +138,122 @@ msgstr "Budoucí datum není povoleno"
 msgid "Metadata error. see log for details"
 msgstr "Chyba metadat. viz log pro podrobnosti"
 
-msgid "An error has occurred. See log for details"
-msgstr "Došlo k chybě. Podrobnosti najdete v protokolu"
+msgid "Assigned user"
+msgstr "Přiřazený uživatel"
 
-msgid "Cancel"
-msgstr "Zrušit"
+msgid "Search for user"
+msgstr "Hledat uživatele"
+
+msgid "Basic info"
+msgstr "Základní informace"
+
+msgid "Status"
+msgstr "Stav"
+
+msgid "Comments"
+msgstr "Komentáře"
+
+msgid "Relationships"
+msgstr "Vztahy"
+
+msgid "Assignee"
+msgstr "Přiřazený"
+
+msgid "Saving to"
+msgstr "Ukládání do"
+
+msgid "in"
+msgstr "v"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"Nejedná se o program událostí, nebo jsou poškozena metadata. Podrobnosti "
+"najdete v protokolu."
+
+msgid "This event"
+msgstr "Tato událost"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr "Vztah typu {{relationshipTypeName}} k {{entityName}} již existuje"
+
+msgid "Active"
+msgstr "Aktivní"
+
+msgid "Completed"
+msgstr "Dokončeno"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr "Před uložením události prosím přidejte nebo zrušte komentář"
+
+msgid "Save and add another"
+msgstr "Uložit a přidat další"
+
+msgid "Save and exit"
+msgstr "Uložit a odejít"
+
+msgid "Finish"
+msgstr "Dokončit"
+
+msgid "No write access"
+msgstr "Žádný přístup pro zápis"
+
+msgid "Switch to form view"
+msgstr "Přepnout do formulářového zobrazení"
+
+msgid "Switch to row view"
+msgstr "Přepnout do zobrazení řádků"
+
+msgid "events added"
+msgstr "přidány události"
+
+msgid "No events added"
+msgstr "Nebyly přidány žádné události"
+
+msgid "New event relationship"
+msgstr "Nový vztah události"
+
+msgid "Adding relationship to event."
+msgstr "Přidání vztahu k události."
+
+msgid "Go back to event without saving relationship"
+msgstr "Vraťte se k události bez uložení vztahu"
 
 msgid "Unsaved changes"
 msgstr "Neuložené změny"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr ""
+"Opuštěním této stránky zrušíte výběr, který jste provedli pro nový vztah"
 
 msgid "Yes, discard"
 msgstr "Ano, zahodit"
 
 msgid "No, stay here"
 msgstr "Ne, zůstat zde"
+
+msgid "New event"
+msgstr "Nová událost"
+
+msgid "You dont have access to create an event in the current selections"
+msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
+
+msgid "An error has occurred. See log for details"
+msgstr "Došlo k chybě. Podrobnosti najdete v protokolu"
 
 msgid "validation failed"
 msgstr "ověření selhalo"
@@ -218,9 +317,6 @@ msgstr "Zavřít"
 
 msgid "Please select the user"
 msgstr "Vyberte uživatele"
-
-msgid "Search for user"
-msgstr "Hledat uživatele"
 
 msgid "Me"
 msgstr "Mě"
@@ -369,9 +465,6 @@ msgstr "Program neexistuje"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Vybraný program je pro vybranou registrační jednotku neplatný"
 
-msgid "New {{typeName}}"
-msgstr "Nový {{typeName}}"
-
 msgid "New"
 msgstr "Nový"
 
@@ -435,24 +528,6 @@ msgstr "Nemáte přístup k psaní komentářů"
 msgid "Write comment"
 msgstr "Napsat komentář"
 
-msgid "Basic info"
-msgstr "Základní informace"
-
-msgid "Status"
-msgstr "Stav"
-
-msgid "Comments"
-msgstr "Komentáře"
-
-msgid "Please add or cancel comment before saving the event"
-msgstr "Před uložením události prosím přidejte nebo zrušte komentář"
-
-msgid "No write access"
-msgstr "Žádný přístup pro zápis"
-
-msgid "Save"
-msgstr "Uložit"
-
 msgid "Show all events"
 msgstr "Zobrazit všechny události"
 
@@ -491,12 +566,6 @@ msgstr "Pracovní seznam nelze načíst"
 
 msgid "an error occurred loading working lists"
 msgstr "při načítání pracovních seznamů došlo k chybě"
-
-msgid "Active"
-msgstr "Aktivní"
-
-msgid "Completed"
-msgstr "Dokončeno"
 
 msgid "Registered events"
 msgstr "Registrované události"
@@ -537,11 +606,11 @@ msgstr "Ukázat vše"
 msgid "Choose a registering unit to start reporting"
 msgstr "Vyberte registraci jednotky a začněte hlásit"
 
+msgid "Choose the {{missingCategories}} to start reporting"
+msgstr ""
+
 msgid "Saving a {{trackedEntityName}} in"
 msgstr "Ukládání {{trackedEntityName}} v"
-
-msgid "in"
-msgstr "v"
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Ukládání {{trackedEntityName}}"
@@ -554,84 +623,6 @@ msgstr "zápis"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Zapište se do programu výběrem programu v horní liště."
-
-msgid "Assigned user"
-msgstr "Přiřazený uživatel"
-
-msgid "Relationships"
-msgstr "Vztahy"
-
-msgid "Assignee"
-msgstr "Přiřazený"
-
-msgid "Saving to"
-msgstr "Ukládání do"
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-"Nejedná se o program událostí, nebo jsou poškozena metadata. Podrobnosti "
-"najdete v protokolu."
-
-msgid "This event"
-msgstr "Tato událost"
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr "Vztah typu {{relationshipTypeName}} k {{entityName}} již existuje"
-
-msgid "Save and add another"
-msgstr "Uložit a přidat další"
-
-msgid "Save and exit"
-msgstr "Uložit a odejít"
-
-msgid "Finish"
-msgstr "Dokončit"
-
-msgid "New event"
-msgstr "Nová událost"
-
-msgid "Switch to form view"
-msgstr "Přepnout do formulářového zobrazení"
-
-msgid "Switch to row view"
-msgstr "Přepnout do zobrazení řádků"
-
-msgid "New event relationship"
-msgstr "Nový vztah události"
-
-msgid "Adding relationship to event."
-msgstr "Přidání vztahu k události."
-
-msgid "Go back to event without saving relationship"
-msgstr "Vraťte se k události bez uložení vztahu"
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr ""
-"Opuštěním této stránky zrušíte výběr, který jste provedli pro nový vztah"
-
-msgid "events added"
-msgstr "přidány události"
-
-msgid "No events added"
-msgstr "Nebyly přidány žádné události"
-
-msgid "Choose a registering unit and program to get started"
-msgstr "Začněte registrací jednotky a výběrem programu"
-
-msgid "Choose a program to start reporting"
-msgstr "Vyberte program k zahájení hlášení zpráv"
-
-msgid "Choose a category option to start reporting"
-msgstr "Chcete-li začít hlášení zpráv, vyberte možnost kategorie"
-
-msgid "You dont have access to create an event in the current selections"
-msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""

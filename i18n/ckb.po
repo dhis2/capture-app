@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
+"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -139,23 +139,123 @@ msgstr "بەرواری داهاتوو ناکرێت تۆماربکرێت"
 msgid "Metadata error. see log for details"
 msgstr "هەڵەیەک لە مێتا داتا هەیە، سەیری لۆگ فایل بکە بۆ زانیاری زیاتر"
 
-msgid "An error has occurred. See log for details"
-msgstr ""
+msgid "Assigned user"
+msgstr "بەکارهێنەری دەستنیشانکراو"
 
-msgid "Cancel"
-msgstr "لابردن"
+msgid "Search for user"
+msgstr "بۆ بەکاربەرەکە بگەرێ"
+
+msgid "Basic info"
+msgstr "زانیاریە سەرەتاییەکان"
+
+msgid "Status"
+msgstr "پێگە"
+
+msgid "Comments"
+msgstr "کۆمێنتەکان"
+
+msgid "Relationships"
+msgstr "پەیوەندیەکان"
+
+msgid "Assignee"
+msgstr "نوێنەر"
+
+msgid "Saving to"
+msgstr "تۆمارکردن بۆ"
+
+msgid "in"
+msgstr "لە"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"ئەمە پرۆگرامی حالەت نیە یاخود زانیاریەکە تێکچووە. تکایە سەریری لۆگ فایل بکە "
+"بۆ زانیاری زیاتر"
+
+msgid "This event"
+msgstr "ئەم حاڵەتە"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr "پەیوەنی لە جۆری {{relationshipTypeName}} بۆ{{entityName}}پێشتر هەبووە"
+
+msgid "Active"
+msgstr "چاڵاک"
+
+msgid "Completed"
+msgstr "تەواوبوو"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr "تکایە کۆمێنت زیاد بکە یاخود لاییببە پێش تۆمارکردن"
+
+msgid "Save and add another"
+msgstr "تۆمار بکە و دانەیەکی دیکە زیاد بکە"
+
+msgid "Save and exit"
+msgstr "تۆمارکردن و دەرچوون"
+
+msgid "Finish"
+msgstr "تەواکردن"
+
+msgid "No write access"
+msgstr "مافی نوسینت نیە"
+
+msgid "Switch to form view"
+msgstr "گۆڕین بۆ پیشاندانی فۆرم"
+
+msgid "Switch to row view"
+msgstr "گۆڕین بۆ پیشاندانی ئاسۆیی"
+
+msgid "events added"
+msgstr "حاڵەتەکان زیادکران"
+
+msgid "No events added"
+msgstr "هیچ حاڵەتێک زیادنەکرا"
+
+msgid "New event relationship"
+msgstr "پەوەندی حالەتی نوێ"
+
+msgid "Adding relationship to event."
+msgstr "زیادکردنی پەوەندی بۆ حاڵەت"
+
+msgid "Go back to event without saving relationship"
+msgstr "بگەڕێەوە بۆ حاڵەتەکە بێئەوەی پەوەندیەکە تۆمار بکەیت"
 
 msgid "Unsaved changes"
 msgstr "گۆڕانکاریە تۆمارنەکراوەکان"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "بەجێهێشنتی ئەم پەڕەیە هەموو چاڵآکیەکانت دەسرێتەوە کە کردووتە"
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr ""
+"بەجێهێشتنی ئەم پەڕەیە هەڵبژاردنەکانت هەڵدەسپێری کە بۆ پەیوەندیە نوێیەکان "
+"کردووتە"
 
 msgid "Yes, discard"
 msgstr "بەڵێ، لایببە"
 
 msgid "No, stay here"
 msgstr "نەخێر، بمێنەوە"
+
+msgid "New event"
+msgstr "رووداوي نوي"
+
+msgid "You dont have access to create an event in the current selections"
+msgstr "مافی دروستکردنی حاڵەتت نیە لە هەڵژێردراوەکانی ئێستات"
+
+msgid "Save"
+msgstr "تۆمارکردن"
+
+msgid "Cancel"
+msgstr "لابردن"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr "بەجێهێشنتی ئەم پەڕەیە هەموو چاڵآکیەکانت دەسرێتەوە کە کردووتە"
+
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "validation failed"
 msgstr "سەلماندنەکە سەرکەوتوونەبوو"
@@ -221,9 +321,6 @@ msgstr "داخستن"
 
 msgid "Please select the user"
 msgstr "تکایە بەکاربەرەکە هەڵبژێرە"
-
-msgid "Search for user"
-msgstr "بۆ بەکاربەرەکە بگەرێ"
 
 msgid "Me"
 msgstr "من"
@@ -372,9 +469,6 @@ msgstr "پرۆگرامەکە بوونی نیە"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
 
-msgid "New {{typeName}}"
-msgstr "{{typeName}} ی نوێ"
-
 msgid "New"
 msgstr "نوێ"
 
@@ -438,24 +532,6 @@ msgstr "مافی ئەوەت نیە کە کۆمێنت بنووسیت"
 msgid "Write comment"
 msgstr "کۆمێنت بنووسە"
 
-msgid "Basic info"
-msgstr "زانیاریە سەرەتاییەکان"
-
-msgid "Status"
-msgstr "پێگە"
-
-msgid "Comments"
-msgstr "کۆمێنتەکان"
-
-msgid "Please add or cancel comment before saving the event"
-msgstr "تکایە کۆمێنت زیاد بکە یاخود لاییببە پێش تۆمارکردن"
-
-msgid "No write access"
-msgstr "مافی نوسینت نیە"
-
-msgid "Save"
-msgstr "تۆمارکردن"
-
 msgid "Show all events"
 msgstr "هەموو حاڵەتەکان پیشان بدە"
 
@@ -494,12 +570,6 @@ msgstr "لیستی کارکردن نەتواندرا بهێندرێت"
 
 msgid "an error occurred loading working lists"
 msgstr "هەڵەیەک ڕوویدا لە هێنانی  لیستی کارکردن"
-
-msgid "Active"
-msgstr "چاڵاک"
-
-msgid "Completed"
-msgstr "تەواوبوو"
 
 msgid "Registered events"
 msgstr "حالەتە تۆمارکراوەکان"
@@ -540,11 +610,11 @@ msgstr "هەموو پیشان بدە"
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Saving a {{trackedEntityName}} in"
+msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "in"
-msgstr "لە"
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
@@ -557,85 +627,6 @@ msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
-
-msgid "Assigned user"
-msgstr "بەکارهێنەری دەستنیشانکراو"
-
-msgid "Relationships"
-msgstr "پەیوەندیەکان"
-
-msgid "Assignee"
-msgstr "نوێنەر"
-
-msgid "Saving to"
-msgstr "تۆمارکردن بۆ"
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-"ئەمە پرۆگرامی حالەت نیە یاخود زانیاریەکە تێکچووە. تکایە سەریری لۆگ فایل بکە "
-"بۆ زانیاری زیاتر"
-
-msgid "This event"
-msgstr "ئەم حاڵەتە"
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr "پەیوەنی لە جۆری {{relationshipTypeName}} بۆ{{entityName}}پێشتر هەبووە"
-
-msgid "Save and add another"
-msgstr "تۆمار بکە و دانەیەکی دیکە زیاد بکە"
-
-msgid "Save and exit"
-msgstr "تۆمارکردن و دەرچوون"
-
-msgid "Finish"
-msgstr "تەواکردن"
-
-msgid "New event"
-msgstr "رووداوي نوي"
-
-msgid "Switch to form view"
-msgstr "گۆڕین بۆ پیشاندانی فۆرم"
-
-msgid "Switch to row view"
-msgstr "گۆڕین بۆ پیشاندانی ئاسۆیی"
-
-msgid "New event relationship"
-msgstr "پەوەندی حالەتی نوێ"
-
-msgid "Adding relationship to event."
-msgstr "زیادکردنی پەوەندی بۆ حاڵەت"
-
-msgid "Go back to event without saving relationship"
-msgstr "بگەڕێەوە بۆ حاڵەتەکە بێئەوەی پەوەندیەکە تۆمار بکەیت"
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr ""
-"بەجێهێشتنی ئەم پەڕەیە هەڵبژاردنەکانت هەڵدەسپێری کە بۆ پەیوەندیە نوێیەکان "
-"کردووتە"
-
-msgid "events added"
-msgstr "حاڵەتەکان زیادکران"
-
-msgid "No events added"
-msgstr "هیچ حاڵەتێک زیادنەکرا"
-
-msgid "Choose a registering unit and program to get started"
-msgstr ""
-
-msgid "Choose a program to start reporting"
-msgstr ""
-
-msgid "Choose a category option to start reporting"
-msgstr ""
-
-msgid "You dont have access to create an event in the current selections"
-msgstr "مافی دروستکردنی حاڵەتت نیە لە هەڵژێردراوەکانی ئێستات"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""

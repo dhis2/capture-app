@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-06T08:52:06.342Z\n"
+"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -142,25 +142,127 @@ msgstr "Ввод даты будущего периода запрещена"
 msgid "Metadata error. see log for details"
 msgstr "Ошибка в метаданных. Смотрите детали в лог-файле."
 
-msgid "An error has occurred. See log for details"
-msgstr ""
+msgid "Assigned user"
+msgstr "Назначенный пользователь"
 
-msgid "Cancel"
-msgstr "Отмена"
+msgid "Search for user"
+msgstr "Поиск пользователя"
+
+msgid "Basic info"
+msgstr "Начальные сведения"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Comments"
+msgstr "Комментарии"
+
+msgid "Relationships"
+msgstr "Зависимости"
+
+msgid "Assignee"
+msgstr "Уполномоченный"
+
+msgid "Saving to"
+msgstr "Сохраняю в"
+
+msgid "in"
+msgstr "в"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"Это не программа Событие или метаданные испорчены. Смотрите детали в лог-"
+"файле"
+
+msgid "This event"
+msgstr "Это событие"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr "Тип Родство {{relationshipTypeName}} к {{entityName}} уже существует"
+
+msgid "Active"
+msgstr "Действующий"
+
+msgid "Completed"
+msgstr "Завершенный"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr ""
+"Пожалуйста добавьте или удалите комментарии, перед сохранением Записи-"
+"события"
+
+msgid "Save and add another"
+msgstr "Сохранить и добавить другую"
+
+msgid "Save and exit"
+msgstr "Сохранить и выйти"
+
+msgid "Finish"
+msgstr "Завершить"
+
+msgid "No write access"
+msgstr "Отсутствует право на запись "
+
+msgid "Switch to form view"
+msgstr "Переключиь вид на Формы"
+
+msgid "Switch to row view"
+msgstr "Переключиться на строчный просмотр "
+
+msgid "events added"
+msgstr "Добавлены события"
+
+msgid "No events added"
+msgstr "Нет событий для добавления"
+
+msgid "New event relationship"
+msgstr "Отношение нового события"
+
+msgid "Adding relationship to event."
+msgstr "Добавляю Родственные отношения к событию"
+
+msgid "Go back to event without saving relationship"
+msgstr "Назад к событию, без сохранения отношений"
 
 msgid "Unsaved changes"
 msgstr "Не сохраненные изменения"
 
-msgid "Leaving this page will discard the changes you made to this event."
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
 msgstr ""
-"Произведенные изменения в данных не будут сохранены, если вы покинете данную"
-" страницу."
+"Если вы покидата данную страницу, не будут сохранены все выборки для нового "
+"отшения"
 
 msgid "Yes, discard"
 msgstr "Да, не сохранять"
 
 msgid "No, stay here"
 msgstr "Нет, остаюсь тут"
+
+msgid "New event"
+msgstr "Новое событие"
+
+msgid "You dont have access to create an event in the current selections"
+msgstr "Не достаточно прав для создания Событий с текущим выбором"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Произведенные изменения в данных не будут сохранены, если вы покинете данную"
+" страницу."
+
+msgid "An error has occurred. See log for details"
+msgstr ""
 
 msgid "validation failed"
 msgstr "Не удалась валидация"
@@ -224,9 +326,6 @@ msgstr "Закрыть"
 
 msgid "Please select the user"
 msgstr "Пожалуйста, выберите пользователя"
-
-msgid "Search for user"
-msgstr "Поиск пользователя"
 
 msgid "Me"
 msgstr "Я"
@@ -376,9 +475,6 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 "Выбранная программа не действительна для выбранной организации-регистратора"
 
-msgid "New {{typeName}}"
-msgstr "Новый  {{typeName}}"
-
 msgid "New"
 msgstr "Новый"
 
@@ -442,26 +538,6 @@ msgstr "У вас не достаточно прав для написания �
 msgid "Write comment"
 msgstr "Написать комментарий"
 
-msgid "Basic info"
-msgstr "Начальные сведения"
-
-msgid "Status"
-msgstr "Статус"
-
-msgid "Comments"
-msgstr "Комментарии"
-
-msgid "Please add or cancel comment before saving the event"
-msgstr ""
-"Пожалуйста добавьте или удалите комментарии, перед сохранением Записи-"
-"события"
-
-msgid "No write access"
-msgstr "Отсутствует право на запись "
-
-msgid "Save"
-msgstr "Сохранить"
-
 msgid "Show all events"
 msgstr "Показать все события"
 
@@ -500,12 +576,6 @@ msgstr "Не могу загрузить Рабочий список "
 
 msgid "an error occurred loading working lists"
 msgstr "Произошла ошибка во время загрузки Рабочих списков"
-
-msgid "Active"
-msgstr "Действующий"
-
-msgid "Completed"
-msgstr "Завершенный"
 
 msgid "Registered events"
 msgstr "Зарегистрированные события"
@@ -546,11 +616,11 @@ msgstr "Показать все"
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Saving a {{trackedEntityName}} in"
+msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "in"
-msgstr "в"
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
@@ -563,85 +633,6 @@ msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
-
-msgid "Assigned user"
-msgstr "Назначенный пользователь"
-
-msgid "Relationships"
-msgstr "Зависимости"
-
-msgid "Assignee"
-msgstr "Уполномоченный"
-
-msgid "Saving to"
-msgstr "Сохраняю в"
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-"Это не программа Событие или метаданные испорчены. Смотрите детали в лог-"
-"файле"
-
-msgid "This event"
-msgstr "Это событие"
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr "Тип Родство {{relationshipTypeName}} к {{entityName}} уже существует"
-
-msgid "Save and add another"
-msgstr "Сохранить и добавить другую"
-
-msgid "Save and exit"
-msgstr "Сохранить и выйти"
-
-msgid "Finish"
-msgstr "Завершить"
-
-msgid "New event"
-msgstr "Новое событие"
-
-msgid "Switch to form view"
-msgstr "Переключиь вид на Формы"
-
-msgid "Switch to row view"
-msgstr "Переключиться на строчный просмотр "
-
-msgid "New event relationship"
-msgstr "Отношение нового события"
-
-msgid "Adding relationship to event."
-msgstr "Добавляю Родственные отношения к событию"
-
-msgid "Go back to event without saving relationship"
-msgstr "Назад к событию, без сохранения отношений"
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr ""
-"Если вы покидата данную страницу, не будут сохранены все выборки для нового "
-"отшения"
-
-msgid "events added"
-msgstr "Добавлены события"
-
-msgid "No events added"
-msgstr "Нет событий для добавления"
-
-msgid "Choose a registering unit and program to get started"
-msgstr ""
-
-msgid "Choose a program to start reporting"
-msgstr ""
-
-msgid "Choose a category option to start reporting"
-msgstr ""
-
-msgid "You dont have access to create an event in the current selections"
-msgstr "Не достаточно прав для создания Событий с текущим выбором"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
