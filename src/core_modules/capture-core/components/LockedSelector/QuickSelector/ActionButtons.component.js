@@ -58,7 +58,7 @@ const ActionButtonsPlain = ({
                         small
                         secondary
                         dataTest="dhis2-capture-new-event-button"
-                        className={classes.marginLeft}
+                        className={classes.marginRight}
                         onClick={onNewClickWithoutProgramId}
                     >
                         { i18n.t('New') }
@@ -68,7 +68,7 @@ const ActionButtonsPlain = ({
                         small
                         secondary
                         dataTest="dhis2-capture-new-button"
-                        className={classes.marginLeft}
+                        className={classes.marginRight}
                         component={
                             <FlyoutMenu
                                 dense
