@@ -18,7 +18,7 @@ type Props = {
     locationSwitchInProgress: ?boolean,
 };
 
-const pageKeys = {
+export const pageKeys = {
     MAIN: '',
     VIEW_EVENT: 'viewEvent',
     SEARCH: 'search',
@@ -37,6 +37,14 @@ const orgUnitIdProperties = {
 const trackedEntityTypeIdProperties = {
     urlKey: 'trackedEntityTypeId',
     propKey: 'trackedEntityTypeId',
+};
+const enrollmentIdProperties = {
+    urlKey: 'enrollmentId',
+    propKey: 'enrollmentId',
+};
+const teiIdProperties = {
+    urlKey: 'teiId',
+    propKey: 'teiId',
 };
 
 const specificationForPages = {
@@ -62,6 +70,8 @@ const specificationForPages = {
     [pageKeys.ENROLLMENT]: [
         programIdProperties,
         orgUnitIdProperties,
+        enrollmentIdProperties,
+        teiIdProperties,
     ],
 };
 
@@ -71,6 +81,7 @@ const updaterForPages = {
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.ENROLLMENT]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
+    [pageKeys.ENROLLMENT]: updateSelectionsFromUrl,
 };
 
 const getUrlParts = (pathName: string) => {
@@ -174,8 +185,7 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) =>
-            // $FlowFixMe[invalid-computed-prop] automated comment
-            dispatch(updaterForPages[page](updateData)),
+            page != null && dispatch(updaterForPages[page](updateData)),
     });
 
     // $FlowFixMe[missing-annot] automated comment

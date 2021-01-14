@@ -20,10 +20,23 @@ import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.action
 import withLoadingIndicator from '../../HOC/withLoadingIndicator';
 import type { Props, DispatchersFromRedux, OwnProps } from './LockedSelector.types';
 
-const mapStateToProps = (state: ReduxState) => ({
-    selectedProgramId: state.currentSelections.programId,
-    selectedOrgUnitId: state.currentSelections.orgUnitId,
-    ready: !state.activePage.isPageLoading,
+const deriveReadiness = (isPageLoading, selectedOrgUnitId, organisationUnits) => {
+    // because we want the orgUnit to be fetched and stored
+    // before allowing the user to view the locked selector
+    if (selectedOrgUnitId) {
+        const orgUnit = organisationUnits[selectedOrgUnitId];
+        return Boolean(orgUnit && orgUnit.id && !isPageLoading);
+    }
+    return !isPageLoading;
+};
+
+const mapStateToProps = ({
+    activePage: { isPageLoading },
+    currentSelections: { programId, orgUnitId }, organisationUnits,
+}: ReduxState) => ({
+    selectedProgramId: programId,
+    selectedOrgUnitId: orgUnitId,
+    ready: deriveReadiness(isPageLoading, orgUnitId, organisationUnits),
 });
 
 const mapDispatchToProps = (

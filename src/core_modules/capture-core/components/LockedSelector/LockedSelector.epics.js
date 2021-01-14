@@ -33,10 +33,10 @@ export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: 
         ),
         map(() => {
             const {
-                currentSelections: { programId, orgUnitId, trackedEntityTypeId },
+                currentSelections: { programId, orgUnitId, trackedEntityTypeId, teiId, enrollmentId },
                 app: { page },
             } = store.value;
-            return push(exactUrl(page, urlArguments({ programId, orgUnitId, trackedEntityTypeId })));
+            return push(exactUrl(page, urlArguments({ programId, orgUnitId, trackedEntityTypeId, teiId, enrollmentId })));
         }));
 
 export const startAgainEpic = (action$: InputObservable) =>
@@ -49,7 +49,7 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
         ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE),
         filter(action => action.payload.nextProps.orgUnitId),
         switchMap(action => getApi()
-            .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
+            .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`, { fields: 'id,displayName' })
             .then(response => setCurrentOrgUnitBasedOnUrl({
                 id: response.id,
                 name: response.displayName,

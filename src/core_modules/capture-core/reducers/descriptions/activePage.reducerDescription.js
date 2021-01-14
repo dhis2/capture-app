@@ -8,6 +8,7 @@ import {
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import { actionTypes as viewEventDataEntryActionTypes } from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
+import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 export const activePageDesc = createReducerDescription({
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: state => ({
@@ -78,6 +79,19 @@ export const activePageDesc = createReducerDescription({
         ...state,
         isDataEntryLoading: false,
     }),
+    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_FETCH]: state => ({
+        ...state,
+        isPageLoading: true,
+    }),
+    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH]: state => ({
+        ...state,
+        isPageLoading: false,
+    }),
+    [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH]: state => ({
+        ...state,
+        isPageLoading: false,
+    }),
+
 }, 'activePage', {
     selectionsError: null,
     isPageLoading: false,

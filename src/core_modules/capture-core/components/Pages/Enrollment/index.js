@@ -1,2 +1,2 @@
 // @flow
-export { EnrollmentPage } from './EnrollmentPage.component';
+export { EnrollmentPageComponent } from './EnrollmentPage.component';
