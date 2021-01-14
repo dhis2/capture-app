@@ -7,27 +7,33 @@ const initialReducerValue = {
     enrollmentPageStatus: null,
 };
 const {
-    ENROLLMENT_PAGE_INFORMATION_LOADING_FETCH,
-    ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH,
-    ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH,
-    ENROLLMENT_PAGE_CLEAN,
+    INFORMATION_LOADING_FETCH,
+    INFORMATION_ERROR_FETCH,
+    INFORMATION_SUCCESS_FETCH,
+    PAGE_CLEAN,
+    DEFAULT_VIEW,
 } = enrollmentPageActionTypes;
 
 export const enrollmentPageDesc = createReducerDescription({
-    [ENROLLMENT_PAGE_INFORMATION_LOADING_FETCH]: state => ({
+    [INFORMATION_LOADING_FETCH]: state => ({
         ...state,
         enrollmentPageStatus: enrollmentPageStatuses.LOADING,
     }),
-    [ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH]: state => ({
+    [INFORMATION_ERROR_FETCH]: state => ({
         ...state,
         enrollmentPageStatus: enrollmentPageStatuses.ERROR,
     }),
-    [ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH]:
+    [INFORMATION_SUCCESS_FETCH]:
       (state, { payload: { enrollmentsSortedByDate, selectedName } }) => ({
           ...state,
           enrollments: enrollmentsSortedByDate,
           enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
           trackedEntityInstanceDisplayName: selectedName,
       }),
-    [ENROLLMENT_PAGE_CLEAN]: () => initialReducerValue,
+    [DEFAULT_VIEW]:
+      state => ({
+          ...state,
+          enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
+      }),
+    [PAGE_CLEAN]: () => initialReducerValue,
 }, 'enrollmentPage', initialReducerValue);

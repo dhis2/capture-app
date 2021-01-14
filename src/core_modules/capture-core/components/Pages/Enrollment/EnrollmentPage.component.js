@@ -2,14 +2,16 @@
 import React from 'react';
 import type { ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { compose } from 'redux';
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './EnrollmentPage.types';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import LoadingMaskForPage from '../../LoadingMasks/LoadingMaskForPage.component';
+import { withErrorMessageHandler } from '../../../HOC';
 
 const getStyles = () => ({
     container: {
-        padding: '8px 24px 16px 24px',
+        padding: '24px 24px 16px 24px',
     },
     loadingMask: {
         height: '100vh',
@@ -43,4 +45,7 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
 </>);
 
 export const EnrollmentPageComponent: ComponentType<$Diff<Props, CssClasses>> =
-  withStyles(getStyles)(EnrollmentPagePlain);
+  compose(
+      withErrorMessageHandler(),
+      withStyles(getStyles),
+  )(EnrollmentPagePlain);

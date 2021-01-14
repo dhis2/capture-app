@@ -189,6 +189,7 @@ import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/c
 
 import {
     fetchEnrollmentPageInformationFromUrlEpic,
+    startFetchingTeiFromEnrollmentIdEpic,
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 
@@ -300,6 +301,7 @@ export default combineEpics(
     completeSavingNewTrackedEntityTypeEpic,
     openNewRegistrationPageFromLockedSelectorEpic,
     fetchEnrollmentPageInformationFromUrlEpic,
+    startFetchingTeiFromEnrollmentIdEpic,
     clearTrackedEntityInstanceSelectionEpic,
     setEnrollmentSelectionEpic,
     openEnrollmentPageEpic,

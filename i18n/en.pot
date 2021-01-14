@@ -533,6 +533,15 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
+msgid "Tracked entity instance with id '{{teiId}}' doesn't exist"
+msgstr ""
+
+msgid "There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id '{{selectedEnrollmentId}}' doesn't exist"
+msgstr ""
+
 msgid "Delete event"
 msgstr ""
 

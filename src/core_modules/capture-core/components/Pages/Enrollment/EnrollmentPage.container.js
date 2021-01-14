@@ -4,32 +4,30 @@ import type { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
 import type { EnrollmentPageStatus } from './EnrollmentPage.types';
-import { cleanEnrollmentPage, startFetchingEnrollmentPageInformation } from './EnrollmentPage.actions';
+import { cleanEnrollmentPage, fetchEnrollmentPageInformation } from './EnrollmentPage.actions';
 
 export const EnrollmentPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
-
-    const enrollmentId: EnrollmentPageStatus =
-      useSelector(({ currentSelections }) => currentSelections.enrollmentId);
-    const enrollments: Object =
-      useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
+    const selectedTeiId: EnrollmentPageStatus =
+      useSelector(({ currentSelections }) => currentSelections.teiId);
+    const enrollmentPageStatus: EnrollmentPageStatus =
+      useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
 
     useEffect(() => {
-        const enrollmentIsNotPreset = !(enrollments && enrollments.some(({ enrollment }) => enrollmentId === enrollment));
-        enrollmentIsNotPreset && dispatch(startFetchingEnrollmentPageInformation());
+        dispatch(fetchEnrollmentPageInformation());
     },
     [
-        enrollments,
-        enrollmentId,
+        selectedTeiId,
         dispatch,
     ]);
     useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch]);
 
-    const enrollmentPageStatus: EnrollmentPageStatus =
-      useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
+    const error: boolean =
+      useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
 
     return (
         <EnrollmentPageComponent
+            error={error}
             enrollmentPageStatus={enrollmentPageStatus}
         />
     );
