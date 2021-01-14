@@ -18,6 +18,7 @@ import {
 } from '../../components/LockedSelector';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
+import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 const setCategoryOption = (
     state: Object,
@@ -221,7 +222,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         categoriesMeta: undefined,
         trackedEntityTypeId,
     }),
-    [lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR]:
+    [lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_RESET]:
       state => ({
           ...state,
           trackedEntityInstanceDisplayName: undefined,
@@ -232,6 +233,16 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
       (state, { payload: { enrollmentId } }) => ({
           ...state,
           enrollmentId,
+      }),
+    [lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET]:
+      state => ({
+          ...state,
+          enrollmentId: undefined,
+      }),
+    [enrollmentPageActionTypes.CUSTOM_PROGRAM_RESET]:
+      state => ({
+          ...state,
+          enrollmentId: undefined,
       }),
 }, 'currentSelections', {
     complete: false,

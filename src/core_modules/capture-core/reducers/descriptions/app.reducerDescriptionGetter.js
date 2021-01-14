@@ -158,7 +158,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         locationSwitchInProgress: true,
     }),
-    [lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR]: state => ({
+    [lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_RESET]: state => ({
         ...state,
         page: '',
         locationSwitchInProgress: true,

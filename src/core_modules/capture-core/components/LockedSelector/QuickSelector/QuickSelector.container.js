@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import QuickSelector from './QuickSelector.component';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
-import { clearTrackedEntityInstanceSelection, setEnrollmentSelection } from '../LockedSelector.actions';
+import { clearTrackedEntityInstanceSelection, resetEnrollmentSelection, setEnrollmentSelection } from '../LockedSelector.actions';
 
 const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
     enrollments
@@ -39,6 +39,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onEnrollmentSelectionSet: (enrollmentId) => {
         dispatch(setEnrollmentSelection({ enrollmentId }));
+    },
+    onEnrollmentSelectionReset: () => {
+        dispatch(resetEnrollmentSelection());
     },
 });
 

@@ -12,5 +12,6 @@ export {
     startAgainEpic,
     setEnrollmentSelectionEpic,
     clearTrackedEntityInstanceSelectionEpic,
+    resetEnrollmentSelectionEpic,
 } from './LockedSelector.epics';
 export { LockedSelector } from './LockedSelector.container';

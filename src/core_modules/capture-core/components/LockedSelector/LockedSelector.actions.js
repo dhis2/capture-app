@@ -9,8 +9,9 @@ export const lockedSelectorActionTypes = {
     CATEGORY_OPTION_SET: 'CategoryOptionSet',
     CATEGORY_OPTION_RESET: 'CategoryOptionReset',
     ALL_CATEGORY_OPTIONS_RESET: 'AllCategoryOptionsReset',
-    TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR: 'TrackedEntityInstanceSelectionReset',
+    TRACKED_ENTITY_INSTANCE_SELECTION_RESET: 'TrackedEntityInstanceSelectionReset',
     ENROLLMENT_SELECTION_SET: 'EnrollmentSelectionSet',
+    ENROLLMENT_SELECTION_RESET: 'EnrollmentSelectionReset',
 
     SELECTIONS_FROM_URL_UPDATE: 'SelectionsFromUrlUpdate',
     SELECTIONS_FROM_URL_VALID: 'SelectionsFromUrlValid',
@@ -54,7 +55,10 @@ export const setEmptyOrgUnitBasedOnUrl = () => actionCreator(lockedSelectorActio
 
 // enrollment related
 export const clearTrackedEntityInstanceSelection = () =>
-    actionCreator(lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR)();
+    actionCreator(lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_RESET)();
 
 export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
     actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET)({ enrollmentId });
+
+export const resetEnrollmentSelection = () =>
+    actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET)();

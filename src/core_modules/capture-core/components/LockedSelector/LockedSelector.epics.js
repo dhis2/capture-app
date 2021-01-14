@@ -91,7 +91,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable,
 
 export const clearTrackedEntityInstanceSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR),
+        ofType(lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_RESET),
         map(() => {
             const { currentSelections: { programId, orgUnitId } } = store.value;
             return push(`/${urlArguments({ programId, orgUnitId })}`);
@@ -104,5 +104,14 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
         map(({ payload: { enrollmentId } }) => {
             const { currentSelections: { programId, orgUnitId, teiId } } = store.value;
             return push(`/enrollment/${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
+        }),
+    );
+
+export const resetEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET),
+        map(() => {
+            const { currentSelections: { programId, orgUnitId, teiId } } = store.value;
+            return push(`/enrollment/${urlArguments({ programId, orgUnitId, teiId })}`);
         }),
     );

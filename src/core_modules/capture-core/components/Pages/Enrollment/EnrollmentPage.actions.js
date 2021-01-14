@@ -11,6 +11,8 @@ export const enrollmentPageActionTypes = {
 
     PAGE_OPEN: 'EnrollmentPage.Open',
     PAGE_CLEAN: 'EnrollmentPage.CleanOnUnmount',
+    CUSTOM_PROGRAM_RESET: 'EnrollmentPage.CustomProgramReset',
+
     DEFAULT_VIEW: 'EnrollmentPage.DefaultView',
 };
 
@@ -35,3 +37,6 @@ export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }
 
 export const cleanEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.PAGE_CLEAN)();
+
+export const resetProgramOnEnrollmentPage = () =>
+    actionCreator(enrollmentPageActionTypes.CUSTOM_PROGRAM_RESET)();
