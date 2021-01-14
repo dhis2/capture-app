@@ -13,6 +13,7 @@ import {
     successfulFetchingEnrollmentPageInformationFromUrl,
     openEnrollmentPage,
     startFetchingTeiFromEnrollmentId,
+    startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
 import { urlArguments } from '../../../utils/url';
 
@@ -50,11 +51,14 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
             const {
                 currentSelections: {
                     enrollmentId: selectedEnrollmentId,
+                    teiId: selectedTeiId,
                 },
             } = store.value;
 
             if (selectedEnrollmentId) {
                 return startFetchingTeiFromEnrollmentId();
+            } else if (selectedTeiId) {
+                return startFetchingTeiFromTeiId();
             }
             const error = i18n.t('There is an error while opening this enrollment. Please enter a valid url.');
             return showErrorViewOnEnrollmentPage({ error });
@@ -94,6 +98,16 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
                     }),
                     startWith(showLoadingViewOnEnrollmentPage()),
                 );
+        }),
+    );
+
+export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH),
+        flatMap(() => {
+            const { currentSelections: { teiId } } = store.value;
+
+            return fetchTeiStream(teiId);
         }),
     );
 

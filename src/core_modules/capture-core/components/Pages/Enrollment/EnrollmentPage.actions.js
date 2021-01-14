@@ -19,6 +19,9 @@ export const enrollmentPageActionTypes = {
 export const fetchEnrollmentPageInformation = () =>
     actionCreator(enrollmentPageActionTypes.INFORMATION_FETCH)();
 
+export const startFetchingTeiFromTeiId = () =>
+    actionCreator(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH)();
+
 export const startFetchingTeiFromEnrollmentId = () =>
     actionCreator(enrollmentPageActionTypes.INFORMATION_USING_ENROLLMENT_ID_FETCH)();
 
