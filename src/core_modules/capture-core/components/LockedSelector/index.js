@@ -10,5 +10,7 @@ export {
     getOrgUnitDataBasedOnUrlUpdateEpic,
     updateUrlViaLockedSelectorEpic,
     startAgainEpic,
+    setEnrollmentSelectionEpic,
+    clearTrackedEntityInstanceSelectionEpic,
 } from './LockedSelector.epics';
 export { LockedSelector } from './LockedSelector.container';

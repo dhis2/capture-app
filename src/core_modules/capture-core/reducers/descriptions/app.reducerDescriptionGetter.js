@@ -153,4 +153,14 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         page: 'search',
         locationSwitchInProgress: true,
     }),
+
+    [lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR]: state => ({
+        ...state,
+        page: '',
+        locationSwitchInProgress: true,
+    }),
 }, 'app');

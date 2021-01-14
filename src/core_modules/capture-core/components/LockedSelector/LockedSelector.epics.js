@@ -88,3 +88,21 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable,
 
             return validSelectionsFromUrl();
         }));
+
+export const clearTrackedEntityInstanceSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR),
+        map(() => {
+            const { currentSelections: { programId, orgUnitId } } = store.value;
+            return push(`/${urlArguments({ programId, orgUnitId })}`);
+        }),
+    );
+
+export const setEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET),
+        map(({ payload: { enrollmentId } }) => {
+            const { currentSelections: { programId, orgUnitId, teiId } } = store.value;
+            return push(`/enrollment/${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
+        }),
+    );

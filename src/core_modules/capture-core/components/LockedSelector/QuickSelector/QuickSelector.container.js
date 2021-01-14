@@ -2,14 +2,46 @@
 
 import { connect } from 'react-redux';
 import QuickSelector from './QuickSelector.component';
+import { convertValue } from '../../../converters/clientToView';
+import { dataElementTypes } from '../../../metaData/DataElement';
+import { clearTrackedEntityInstanceSelection, setEnrollmentSelection } from '../LockedSelector.actions';
+import { enrollmentPageStatuses } from '../../Pages/Enrollment/EnrollmentPage.constants';
 
-const mapStateToProps = (state: Object) => ({
-    selectedProgramId: state.currentSelections.programId,
-    selectedCategories: state.currentSelections.categoriesMeta,
-    selectedOrgUnitId: state.currentSelections.orgUnitId,
-    selectedOrgUnit: state.currentSelections.orgUnitId ? state.organisationUnits[state.currentSelections.orgUnitId] : null,
+const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
+    enrollments
+        .filter(({ program }) => program === selectedProgramId)
+        .map(({ created, enrollment }) => (
+            {
+                label: convertValue(created, dataElementTypes.DATETIME),
+                value: enrollment,
+            }
+        ));
+const mapStateToProps = (state: Object) => {
+    const { currentSelections, app, enrollmentPage, organisationUnits } = state;
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollmentPage.enrollments, currentSelections.programId);
+
+    return {
+        selectedProgramId: currentSelections.programId,
+        selectedCategories: currentSelections.categoriesMeta,
+        selectedOrgUnitId: currentSelections.orgUnitId,
+        selectedEnrollmentId: currentSelections.enrollmentId,
+        selectedOrgUnit: currentSelections.orgUnitId ? organisationUnits[currentSelections.orgUnitId] : null,
+        currentPage: app.page,
+        selectedTeiName: enrollmentPage.trackedEntityInstanceDisplayName,
+        enrollmentsAsOptions,
+        enrollmentLockedSelectReady: enrollmentPage.enrollmentPageStatus !== enrollmentPageStatuses.LOADING,
+    };
+};
+
+
+const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+    onTrackedEntityInstanceClear: () => {
+        dispatch(clearTrackedEntityInstanceSelection());
+    },
+    onEnrollmentSelectionSet: (enrollmentId) => {
+        dispatch(setEnrollmentSelection({ enrollmentId }));
+    },
 });
 
-
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, () => ({}))(QuickSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(QuickSelector);
