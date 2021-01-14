@@ -20,7 +20,6 @@ const styles = ({ palette }) => ({
     },
     programSelector: {
         backgroundColor: palette.grey.lighter,
-        borderRight: `1px solid ${colors.grey500}`,
         margin: '0 0 0 -1px',
     },
     orgUnitSelector: {
@@ -140,13 +139,12 @@ class QuickSelector extends Component<Props> {
                                 <SingleLockedSelect
                                     ready={enrollmentLockedSelectReady}
                                     onClear={onTrackedEntityInstanceClear}
-                                    options={[
-                                        {
-                                            label: selectedTeiName,
-                                            value: 'one',
-                                        },
-                                    ]}
-                                    selectedValue="one"
+                                    options={[{
+                                        label: selectedTeiName,
+                                        value: 'alwaysPreselected',
+
+                                    }]}
+                                    selectedValue="alwaysPreselected"
                                     title={i18n.t('Tracked Entity Type')}
                                 />
                             </Grid>

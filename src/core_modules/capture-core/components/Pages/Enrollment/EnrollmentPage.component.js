@@ -9,7 +9,7 @@ import LoadingMaskForPage from '../../LoadingMasks/LoadingMaskForPage.component'
 
 const getStyles = () => ({
     container: {
-        padding: '8px 24px 16px 24px',
+        padding: '24px 24px 16px 24px',
     },
     loadingMask: {
         height: '100vh',
