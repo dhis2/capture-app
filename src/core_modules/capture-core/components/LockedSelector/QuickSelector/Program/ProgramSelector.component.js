@@ -67,7 +67,6 @@ const styles = (theme: Theme) => ({
     selectedPaper: {
         backgroundColor: theme.palette.grey.lighter,
         padding: 8,
-        borderRadius: 0,
     },
     selectedButton: {
         float: 'right',
@@ -234,7 +233,7 @@ class ProgramSelector extends Component<Props> {
             return (
                 <Grid container>
                     <Grid item xs={12} sm={6} className={this.props.classes.border}>
-                        <Paper sqaure elevation={0} className={classes.selectedPaper}>
+                        <Paper square elevation={0} className={classes.selectedPaper}>
                             {this.renderSelectedProgram(selectedProgram)}
                         </Paper>
                     </Grid>
@@ -242,7 +241,7 @@ class ProgramSelector extends Component<Props> {
                         // $FlowFixMe
                         Array.from(selectedProgram.categoryCombination.categories.values()).map(category =>
                             (<Grid key={category.id} item xs={12} sm={6}>
-                                <Paper sqaure elevation={0} className={classes.selectedPaper}>
+                                <Paper square elevation={0} className={classes.selectedPaper}>
                                     <h4 className={classes.title}>{category.name}</h4>
                                     {
                                         (() => {
