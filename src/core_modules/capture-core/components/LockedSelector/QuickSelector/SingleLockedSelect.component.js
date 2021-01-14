@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useCallback, useEffect, useState } from 'react';
+import React, { type ComponentType, useCallback, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
@@ -86,6 +86,8 @@ const SingleLockedSelectPlain =
       options,
       classes,
   }: Props) => {
+      const [selected, toggleSelected] = useState((Boolean(selectedValue)));
+
       const handleOnClear = () => {
           toggleSelected(false);
           onClear && onClear();
@@ -95,21 +97,6 @@ const SingleLockedSelectPlain =
           onSelect && onSelect(value);
       },
       [onSelect]);
-
-      const [selected, toggleSelected] = useState(false);
-      useEffect(() => toggleSelected(Boolean(selectedValue)),
-          [selectedValue],
-      );
-
-      useEffect(
-          () => {
-              if (options.length === 1 && selectedValue !== options[0].value) {
-                  const { value } = options[0];
-                  handleOnSelect({ value });
-              }
-          },
-          [handleOnSelect, options, selectedValue],
-      );
 
       const { label } = options.find((({ value }) => value === selectedValue)) || {};
       return (<>
