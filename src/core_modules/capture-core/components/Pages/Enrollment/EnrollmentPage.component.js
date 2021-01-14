@@ -1,13 +1,14 @@
 // @flow
 import React from 'react';
 import type { ComponentType } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { compose } from 'redux';
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './EnrollmentPage.types';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import LoadingMaskForPage from '../../LoadingMasks/LoadingMaskForPage.component';
-import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { resetProgramOnEnrollmentPage } from './EnrollmentPage.actions';
 import { withErrorMessageHandler } from '../../../HOC';
 
@@ -32,43 +33,43 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
 
         {
             enrollmentPageStatus === enrollmentPageStatuses.MISSING_PROGRAM_SELECTION &&
-            <InefficientSelectionsMessage
-                message={i18n.t('Choose program to view more information')}
-            />
+            <IncompleteSelectionsMessage>
+                {i18n.t('Choose program to view more information')}
+            </IncompleteSelectionsMessage>
         }
 
         {
             enrollmentPageStatus === enrollmentPageStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION &&
-            <InefficientSelectionsMessage
-                message={i18n.t('MISSING CATEGORIES NEEDS BETTER TEXT')}
-            />
+            <IncompleteSelectionsMessage>
+                {i18n.t('MISSING CATEGORIES NEEDS BETTER TEXT')}
+            </IncompleteSelectionsMessage>
         }
 
         {
             enrollmentPageStatus === enrollmentPageStatuses.MISSING_ENROLLMENT_SELECTION &&
-            <InefficientSelectionsMessage
-                message={i18n.t('Choose enrollment to view more information')}
-            />
+            <IncompleteSelectionsMessage>
+                {i18n.t('Choose enrollment to view more information')}
+            </IncompleteSelectionsMessage>
+
         }
 
         {
             enrollmentPageStatus === enrollmentPageStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED &&
-            <InefficientSelectionsMessage
-                message={i18n.t('There are no enrollments for this program.')}
-            />
+            <IncompleteSelectionsMessage>
+                {i18n.t('There are no enrollments for this program.')}
+            </IncompleteSelectionsMessage>
         }
 
         {
             // todo need to make "here" a link
             enrollmentPageStatus === enrollmentPageStatuses.EVENT_PROGRAM_SELECTED &&
-            <InefficientSelectionsMessage
-                message={<div style={{ textAlign: 'center' }}>
+            <IncompleteSelectionsMessage>
+                <div style={{ textAlign: 'center' }}>
                     {i18n.t('You selected an event program. Event do not have enrollments.')}
                     <div>{i18n.t('To create a new event click **here**.')}</div>
                     <div>{i18n.t('To view the working lists click **here**.')}</div>
                 </div>
-                }
-            />
+            </IncompleteSelectionsMessage>
         }
 
         {
@@ -77,7 +78,6 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
                     <LoadingMaskForPage />
                 </div>
         }
-
     </div>
 </>);
 
