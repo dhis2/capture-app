@@ -1,20 +1,6 @@
 // @flow
 import defaultQueue from '@redux-offline/redux-offline/lib/defaults/queue';
 import { effectMethods } from './trackerOffline.const';
-import type { OfflineEffect, OfflineError } from './trackerOffline.types';
-
-export const getEffectReconciler = (() => {
-    const mutateTypeForMethods = {
-        [effectMethods.POST]: 'create',
-        [effectMethods.UPDATE]: 'replace',
-        [effectMethods.DELETE]: 'delete',
-    };
-
-    return (onApiMutate: Function) => ({ url: resource, method, data }: OfflineEffect) => {
-        const type = mutateTypeForMethods[method];
-        return onApiMutate({ resource, type, data });
-    };
-})();
 
 /* eslint-disable no-new-func */
 // $FlowFixMe
@@ -23,7 +9,6 @@ const getFunctionFromString = (functionAsString: string) => Function(`return ${f
 function getEffect(action: any) {
     return action && action.meta && action.meta.offline && action.meta.offline.effect ? action.meta.offline.effect : {};
 }
-
 export const queueConfig = {
     ...defaultQueue,
     enqueue(array, action) {
@@ -54,13 +39,4 @@ export const queueConfig = {
 
         return rest;
     },
-};
-
-export const shouldDiscard = (error?: OfflineError) => {
-    const statusCode = error?.details?.httpStatusCode;
-    if (!statusCode || [408, 429, 502, 503, 504].includes(statusCode)) {
-        return false;
-    }
-
-    return statusCode >= 400;
 };
