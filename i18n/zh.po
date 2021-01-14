@@ -603,7 +603,7 @@ msgid "Choose a registering unit to start reporting"
 msgstr "选择一个注册机构开始填报"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
+msgstr "选择{{missingCategories}}开始报告"
 
 msgid "Saving a {{trackedEntityName}} in"
 msgstr "将{{trackedEntityName}}保存在"
