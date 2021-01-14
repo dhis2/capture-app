@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/dhis2/capture-app/compare/v1.5.2...v1.5.3) (2021-01-14)
+
+
+### Bug Fixes
+
+* TECH-522 redux offline retry handling ([84c84bc](https://github.com/dhis2/capture-app/commit/84c84bcbc7895709753cc02662583ee283520c0e))
+
 ## [1.5.2](https://github.com/dhis2/capture-app/compare/v1.5.1...v1.5.2) (2021-01-14)
 
 
