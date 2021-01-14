@@ -18,7 +18,7 @@ export const activePageDesc = createReducerDescription({
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID]: state => ({
         ...state,
         selectionsError: null,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
         isDataEntryLoading: false,
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID]: (state, action) => ({
@@ -81,20 +81,20 @@ export const activePageDesc = createReducerDescription({
     }),
     [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_FETCH]: state => ({
         ...state,
-        isPageLoading: true,
+        lockedSelectorLoads: true,
     }),
     [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH]: state => ({
         ...state,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
     }),
     [enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH]: state => ({
         ...state,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
     }),
 
 }, 'activePage', {
     selectionsError: null,
-    isPageLoading: false,
+    lockedSelectorLoads: false,
     isDataEntryLoading: false,
     viewEventLoadError: false,
 });
