@@ -12,6 +12,10 @@ const {
     INFORMATION_SUCCESS_FETCH,
     PAGE_CLEAN,
     DEFAULT_VIEW,
+    ZERO_ENROLLMENTS_VIEW,
+    MISSING_ENROLLMENT_VIEW,
+    MISSING_PROGRAM_VIEW,
+    EVENT_PROGRAM_SELECTED_VIEW,
 } = enrollmentPageActionTypes;
 
 export const enrollmentPageDesc = createReducerDescription({
@@ -34,6 +38,26 @@ export const enrollmentPageDesc = createReducerDescription({
       state => ({
           ...state,
           enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
+      }),
+    [ZERO_ENROLLMENTS_VIEW]:
+      state => ({
+          ...state,
+          enrollmentPageStatus: enrollmentPageStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED,
+      }),
+    [MISSING_ENROLLMENT_VIEW]:
+      state => ({
+          ...state,
+          enrollmentPageStatus: enrollmentPageStatuses.MISSING_ENROLLMENT_SELECTION,
+      }),
+    [MISSING_PROGRAM_VIEW]:
+      state => ({
+          ...state,
+          enrollmentPageStatus: enrollmentPageStatuses.MISSING_PROGRAM_SELECTION,
+      }),
+    [EVENT_PROGRAM_SELECTED_VIEW]:
+      state => ({
+          ...state,
+          enrollmentPageStatus: enrollmentPageStatuses.EVENT_PROGRAM_SELECTED,
       }),
     [PAGE_CLEAN]: () => initialReducerValue,
 }, 'enrollmentPage', initialReducerValue);

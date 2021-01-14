@@ -7,6 +7,7 @@ import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './EnrollmentPage.types';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import LoadingMaskForPage from '../../LoadingMasks/LoadingMaskForPage.component';
+import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
 import { resetProgramOnEnrollmentPage } from './EnrollmentPage.actions';
 import { withErrorMessageHandler } from '../../../HOC';
 
@@ -30,18 +31,53 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
         }
 
         {
+            enrollmentPageStatus === enrollmentPageStatuses.MISSING_PROGRAM_SELECTION &&
+            <InefficientSelectionsMessage
+                message={i18n.t('Choose program to view more information')}
+            />
+        }
+
+        {
+            enrollmentPageStatus === enrollmentPageStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION &&
+            <InefficientSelectionsMessage
+                message={i18n.t('MISSING CATEGORIES NEEDS BETTER TEXT')}
+            />
+        }
+
+        {
+            enrollmentPageStatus === enrollmentPageStatuses.MISSING_ENROLLMENT_SELECTION &&
+            <InefficientSelectionsMessage
+                message={i18n.t('Choose enrollment to view more information')}
+            />
+        }
+
+        {
+            enrollmentPageStatus === enrollmentPageStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED &&
+            <InefficientSelectionsMessage
+                message={i18n.t('There are no enrollments for this program.')}
+            />
+        }
+
+        {
+            // todo need to make "here" a link
+            enrollmentPageStatus === enrollmentPageStatuses.EVENT_PROGRAM_SELECTED &&
+            <InefficientSelectionsMessage
+                message={<div style={{ textAlign: 'center' }}>
+                    {i18n.t('You selected an event program. Event do not have enrollments.')}
+                    <div>{i18n.t('To create a new event click **here**.')}</div>
+                    <div>{i18n.t('To view the working lists click **here**.')}</div>
+                </div>
+                }
+            />
+        }
+
+        {
             enrollmentPageStatus === enrollmentPageStatuses.LOADING &&
                 <div className={classes.loadingMask}>
                     <LoadingMaskForPage />
                 </div>
         }
 
-        {
-            enrollmentPageStatus === enrollmentPageStatuses.ERROR &&
-                <div>
-                    error
-                </div>
-        }
     </div>
 </>);
 
