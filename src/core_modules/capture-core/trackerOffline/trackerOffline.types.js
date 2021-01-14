@@ -6,3 +6,14 @@ export type OfflineEffect = {
     data: any,
     method: $Values<effectMethods>,
 };
+
+export type OfflineError = {|
+    details?: {
+        httpStatus: string,
+        httpStatusCode: number,
+        message?: string,
+        status?: string,
+    },
+    type: string,
+    message: string,
+|};

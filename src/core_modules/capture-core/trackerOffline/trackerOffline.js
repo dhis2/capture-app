@@ -1,7 +1,7 @@
 // @flow
 import defaultQueue from '@redux-offline/redux-offline/lib/defaults/queue';
 import { effectMethods } from './trackerOffline.const';
-import type { OfflineEffect } from './trackerOffline.types';
+import type { OfflineEffect, OfflineError } from './trackerOffline.types';
 
 export const getEffectReconciler = (() => {
     const mutateTypeForMethods = {
@@ -56,13 +56,9 @@ export const queueConfig = {
     },
 };
 
-export const shouldDiscard = (error: ?{httpStatusCode?: number}) => {
-    const statusCode = error && error.httpStatusCode;
-    if (!statusCode) {
-        return false;
-    }
-
-    if ([408, 429, 502, 503, 504].includes(statusCode)) {
+export const shouldDiscard = (error?: OfflineError) => {
+    const statusCode = error?.details?.httpStatusCode;
+    if (!statusCode || [408, 429, 502, 503, 504].includes(statusCode)) {
         return false;
     }
 
