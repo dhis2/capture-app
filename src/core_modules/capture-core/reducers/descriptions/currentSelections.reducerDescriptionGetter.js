@@ -234,6 +234,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
           enrollmentId,
       }),
 }, 'currentSelections', {
-    categoryCheckInProgress: false,
     complete: false,
+    categoryCheckInProgress: false,
 });
