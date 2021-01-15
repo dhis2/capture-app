@@ -5,12 +5,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import i18n from '@dhis2/d2-i18n';
-import Button from '../../../Buttons/Button.component';
+import { Button } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
 
 type Props = {
     warnings: Array<{key: string, name: ?string, warning: string }>,
     onSave: () => void,
     onAbort: () => void,
+    ...CssClasses
 };
 
 class WarningDialog extends React.Component<Props> {
@@ -46,7 +48,7 @@ class WarningDialog extends React.Component<Props> {
     }
 
     render() {
-        const { onAbort, onSave } = this.props;
+        const { onAbort, onSave, classes } = this.props;
         return (
             <React.Fragment>
                 <DialogTitle id="save-dialog-errors-and-warnings-title">
@@ -58,16 +60,28 @@ class WarningDialog extends React.Component<Props> {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={onAbort} color="primary">
-                        {i18n.t('Back to form')}
-                    </Button>
-                    <Button onClick={onSave} color="primary" autoFocus>
-                        {i18n.t('Save anyway')}
-                    </Button>
+                    <div style={{ margin: '0 20px 12px 20px' }}>
+                        <Button onClick={onAbort} color="primary">
+                            {i18n.t('Back to form')}
+                        </Button>
+                        <Button
+                            onClick={onSave}
+                            primary
+                            initialFocus
+                            className={classes.marginLeft}
+                        >
+                            {i18n.t('Save anyway')}
+                        </Button>
+                    </div>
                 </DialogActions>
             </React.Fragment>
         );
     }
 }
 
-export default WarningDialog;
+const styles = () => ({
+    marginLeft: {
+        marginLeft: 8,
+    },
+});
+export default withStyles(styles)(WarningDialog);
