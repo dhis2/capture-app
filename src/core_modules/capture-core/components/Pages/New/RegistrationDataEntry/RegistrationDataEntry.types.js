@@ -3,11 +3,16 @@ export type OwnProps = $ReadOnly<{|
   setScopeId: Function,
   selectedScopeId: string,
   dataEntryId: string,
-  onSaveWithoutEnrollment: Function,
-  onSaveWithEnrollment: Function,
 |}>
 
+type ContainerProps = {|
+  dataEntryIsReady: boolean,
+  onSaveWithoutEnrollment: Function,
+  onSaveWithEnrollment: Function,
+|}
+
 export type Props = $ReadOnly<{|
+  ...OwnProps,
   ...CssClasses,
-  ...OwnProps
+  ...ContainerProps
 |}>
