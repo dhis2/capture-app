@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/dhis2/capture-app/compare/v1.5.3...v1.6.0) (2021-01-15)
+
+
+### Features
+
+* DHIS2-9654 DHIS2-9655 can submit enrollments and see rule indicators ([#1334](https://github.com/dhis2/capture-app/issues/1334)) ([7a2b2df](https://github.com/dhis2/capture-app/commit/7a2b2df9a0484d540cce78f14b8ebd277a1061e5)), closes [#1335](https://github.com/dhis2/capture-app/issues/1335) [#1355](https://github.com/dhis2/capture-app/issues/1355)
+
 ## [1.5.3](https://github.com/dhis2/capture-app/compare/v1.5.2...v1.5.3) (2021-01-14)
 
 
