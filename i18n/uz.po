@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
+"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -135,6 +135,12 @@ msgstr "Рўйхатга олиш"
 msgid "A future date is not allowed"
 msgstr "Келажакдаги сана танловига рухсат берилмайди"
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr "ичида"
+
 msgid "Metadata error. see log for details"
 msgstr "МетаМаълумотда хатолик. Тафсилотлар учун журналга қаранг."
 
@@ -161,9 +167,6 @@ msgstr "Ваколат берилган шахс"
 
 msgid "Saving to"
 msgstr "...да сақлаш"
-
-msgid "in"
-msgstr "ичида"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -256,6 +259,18 @@ msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Агарда ушбу саҳифани тарк этсангиз, ҳодиса/тадбир бўйича киритган барча "
 "ўзгартиришлар сақланмайди."
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr "Хатолик юз берди. Тафсилотлар учун журналга қаранг"
@@ -612,21 +627,6 @@ msgid "Choose a registering unit to start reporting"
 msgstr "Хисобот бошлаш учун рўйхатдан ўтишни танланг"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}}"
-msgstr ""
-
-msgid "without"
-msgstr ""
-
-msgid "enrollment"
-msgstr ""
-
-msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"

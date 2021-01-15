@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
+"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -135,6 +135,12 @@ msgstr "Zápis"
 msgid "A future date is not allowed"
 msgstr "Budoucí datum není povoleno"
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr "Ukládání {{trackedEntityName}} v"
+
+msgid "in"
+msgstr "v"
+
 msgid "Metadata error. see log for details"
 msgstr "Chyba metadat. viz log pro podrobnosti"
 
@@ -161,9 +167,6 @@ msgstr "Přiřazený"
 
 msgid "Saving to"
 msgstr "Ukládání do"
-
-msgid "in"
-msgstr "v"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -251,6 +254,18 @@ msgstr "Zrušit"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr "Ukládání {{trackedEntityName}}"
+
+msgid "without"
+msgstr "bez"
+
+msgid "enrollment"
+msgstr "zápis"
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr "Zapište se do programu výběrem programu v horní liště."
 
 msgid "An error has occurred. See log for details"
 msgstr "Došlo k chybě. Podrobnosti najdete v protokolu"
@@ -608,21 +623,6 @@ msgstr "Vyberte registraci jednotky a začněte hlásit"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
-
-msgid "Saving a {{trackedEntityName}} in"
-msgstr "Ukládání {{trackedEntityName}} v"
-
-msgid "Saving a {{trackedEntityName}}"
-msgstr "Ukládání {{trackedEntityName}}"
-
-msgid "without"
-msgstr "bez"
-
-msgid "enrollment"
-msgstr "zápis"
-
-msgid "Enroll in a program by selecting a program from the top bar."
-msgstr "Zapište se do programu výběrem programu v horní liště."
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
