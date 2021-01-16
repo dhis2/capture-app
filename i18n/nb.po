@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
+"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -137,6 +137,12 @@ msgstr "Registrering"
 msgid "A future date is not allowed"
 msgstr "En fremtidig dato er ikke tillatt"
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr "i"
+
 msgid "Metadata error. see log for details"
 msgstr "Metadata feil, se logg for detaljer"
 
@@ -163,9 +169,6 @@ msgstr "Tildelt programbruker"
 
 msgid "Saving to"
 msgstr "Lagrer til"
-
-msgid "in"
-msgstr "i"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -257,6 +260,18 @@ msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
 "denne hendelsen."
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
@@ -613,21 +628,6 @@ msgid "Choose a registering unit to start reporting"
 msgstr "Velg en registreringsenhet for å starte rapportering"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}}"
-msgstr ""
-
-msgid "without"
-msgstr ""
-
-msgid "enrollment"
-msgstr ""
-
-msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
+"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -134,6 +134,12 @@ msgstr "注册"
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr "将{{trackedEntityName}}保存在"
+
+msgid "in"
+msgstr " 在"
+
 msgid "Metadata error. see log for details"
 msgstr "元数据错误"
 
@@ -160,9 +166,6 @@ msgstr "分配者"
 
 msgid "Saving to"
 msgstr "保存到"
-
-msgid "in"
-msgstr " 在"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -247,6 +250,18 @@ msgstr "取消"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "离开此页面将放弃您对此事件所做的更改。"
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr "保存{{trackedEntityName}}"
+
+msgid "without"
+msgstr "没有"
+
+msgid "enrollment"
+msgstr "注册"
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr "通过从顶部栏中选择一个项目来注册"
 
 msgid "An error has occurred. See log for details"
 msgstr "发生了错误。查看日志以获取详细信息"
@@ -604,21 +619,6 @@ msgstr "选择一个注册机构开始填报"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
-
-msgid "Saving a {{trackedEntityName}} in"
-msgstr "将{{trackedEntityName}}保存在"
-
-msgid "Saving a {{trackedEntityName}}"
-msgstr "保存{{trackedEntityName}}"
-
-msgid "without"
-msgstr "没有"
-
-msgid "enrollment"
-msgstr "注册"
-
-msgid "Enroll in a program by selecting a program from the top bar."
-msgstr "通过从顶部栏中选择一个项目来注册"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "存在重复，但是有错误，查看日志详情。"
