@@ -11,15 +11,18 @@ import Section from '../Section/Section.component';
 import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 
 const styles = theme => ({
+    loadingContainer: {
+        marginTop: 12,
+    },
     d2FormContainer: {
         paddingTop: 10,
         paddingBottom: 10,
     },
     footerBar: {
         display: 'flex',
-        paddingTop: theme.typography.pxToRem(10),
     },
     button: {
+        marginTop: theme.typography.pxToRem(2),
         paddingRight: theme.spacing.unit * 2,
     },
     horizontalFormInnerContainer: {
@@ -33,7 +36,6 @@ const styles = theme => ({
         paddingTop: theme.typography.pxToRem(10),
     },
     verticalFormInnerContainer: {
-        // overflow: 'auto',
         maxWidth: theme.typography.pxToRem(892),
     },
     verticalDataEntryContainer: {
@@ -51,7 +53,7 @@ const styles = theme => ({
         flexGrow: 1,
         width: theme.typography.pxToRem(300),
         margin: theme.typography.pxToRem(10),
-        marginTop: 0,
+        marginRight: 0,
     },
     verticalOutputsContainer: {
         marginBottom: theme.typography.pxToRem(10),
@@ -59,10 +61,6 @@ const styles = theme => ({
     dataEntryFieldSectionContainer: {
         paddingTop: theme.typography.pxToRem(10),
         paddingBottom: theme.typography.pxToRem(10),
-    },
-    dataEntryFieldSection: {
-        padding: theme.typography.pxToRem(8),
-        maxWidth: theme.typography.pxToRem(892),
     },
 });
 
@@ -83,6 +81,7 @@ type DirectionClasses = {
 type Props = {
     id: string,
     itemId: string,
+    ready: boolean,
     formFoundation: ?RenderFoundation,
     completeButton?: ?React.Element<any>,
     mainButton?: ?React.Element<any>,
@@ -180,7 +179,6 @@ class DataEntry extends React.Component<Props> {
                                 className={this.props.classes.dataEntryFieldSectionContainer}
                             >
                                 <Section
-                                    className={this.props.classes.dataEntryFieldSection}
                                     header={
                                         <SectionHeaderSimple
                                             title={section.name}
@@ -310,9 +308,7 @@ class DataEntry extends React.Component<Props> {
                         </div>
                     }
                 </div>
-                <div
-                    className={classes.footerBar}
-                >
+                <div className={classes.footerBar}>
                     {
                         (() => {
                             if (completeButton) {

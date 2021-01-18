@@ -42,7 +42,12 @@ async function convertToClientTei(apiTei: ApiTrackedEntityInstance, attributes: 
     };
 }
 
-export async function getTrackedEntityInstances(queryParams: Object, attributes: Array<DataElments>) {
+type TrackedEntityInstancesPromise = Promise<{|
+    trackedEntityInstanceContainers: any,
+    pagingData: any
+|}>
+
+export async function getTrackedEntityInstances(queryParams: Object, attributes: Array<DataElments>): TrackedEntityInstancesPromise {
     const api = getApi();
     const apiRes = await api
         .get('trackedEntityInstances', queryParams);

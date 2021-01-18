@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme: Theme) => ({
     container: {
-        padding: 8,
+        padding: '8px 8px 8px 12px',
     },
     activeContainer: {
         backgroundColor: theme.palette.info.main,

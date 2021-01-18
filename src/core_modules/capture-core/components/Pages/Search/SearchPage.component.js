@@ -6,6 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import { useLocation } from 'react-router';
 import {
     Modal,
     ModalTitle,
@@ -23,17 +24,18 @@ import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
 import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import { InefficientSelectionsMessage } from '../../InefficientSelectionsMessage';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { searchScopes } from './SearchPage.constants';
 import { ResultsPageSizeContext } from '../shared-contexts';
 import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
+import { cleanFallbackRelatedData } from './SearchPage.actions';
 
 const getStyles = (theme: Theme) => ({
     maxWidth: {
         maxWidth: theme.typography.pxToRem(950),
     },
     title: {
-        padding: '10px 0 0px 10px',
+        padding: '8px 0 0px 8px',
         fontWeight: 500,
         marginBottom: theme.typography.pxToRem(16),
     },
@@ -64,35 +66,59 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
+const useFallbackTriggered = (): boolean => {
+    const defaultValue = { fallback: false };
+    const { state: { fallback } = defaultValue } = useLocation();
+
+    return fallback;
+};
+
 const Index = ({
     showInitialSearchPage,
     navigateToMainPage,
+    cleanSearchRelatedInfo,
     classes,
-    trackedEntityTypesWithCorrelatedPrograms,
     availableSearchOptions,
     preselectedProgramId,
     searchStatus,
+    trackedEntityTypeId,
 }: Props) => {
     const [selectedSearchScopeId, setSearchScopeId] = useState(preselectedProgramId);
     const [selectedSearchScopeType, setSearchScopeType] = useState(preselectedProgramId ? searchScopes.PROGRAM : null);
     const titleText = useScopeTitleText(selectedSearchScopeId);
+    const fallbackTriggered = useFallbackTriggered();
 
     useEffect(() => {
-        showInitialSearchPage();
-        setSearchScopeId(preselectedProgramId);
+        const scopeId = preselectedProgramId || trackedEntityTypeId;
+        setSearchScopeId(scopeId);
 
         const type = preselectedProgramId ? searchScopes.PROGRAM : null;
         setSearchScopeType(type);
-    }, [showInitialSearchPage, preselectedProgramId]);
-
-    useEffect(() => {
-        if (!preselectedProgramId) {
-            showInitialSearchPage();
-        }
-
-        return () => showInitialSearchPage();
     },
     [
+        trackedEntityTypeId,
+        preselectedProgramId,
+    ]);
+
+    useEffect(() => {
+        // This statement is here because when we trigger the fallback search,
+        // we rerender the page without a preselectedProgramId.
+        // This is triggering this hook. However the fallback search view needs
+        // to start with a loading spinner and not with the initial view.
+        if (!fallbackTriggered) {
+            cleanFallbackRelatedData();
+            showInitialSearchPage();
+        }
+        return () => {
+            if (fallbackTriggered) {
+                return cleanSearchRelatedInfo();
+            }
+            return undefined;
+        };
+    },
+    [
+        fallbackTriggered,
+        cleanSearchRelatedInfo,
         preselectedProgramId,
         showInitialSearchPage,
     ]);
@@ -103,10 +129,10 @@ const Index = ({
 
     const handleSearchScopeSelection = (searchScopeId, searchType) => {
         showInitialSearchPage();
+        cleanSearchRelatedInfo();
         setSearchScopeId(searchScopeId);
         setSearchScopeType(searchType);
     };
-
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
             <LockedSelector />
@@ -127,21 +153,21 @@ const Index = ({
                         </div>
                         {
                             (selectedSearchScopeType !== searchScopes.PROGRAM) &&
-                            <TrackedEntityTypeSelector
-                                trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
-                                onSelect={handleSearchScopeSelection}
-                                selectedSearchScopeId={selectedSearchScopeId}
-                            />
+                            <TrackedEntityTypeSelector onSelect={handleSearchScopeSelection} />
                         }
 
                         <SearchForm
+                            fallbackTriggered={fallbackTriggered}
                             selectedSearchScopeId={selectedSearchScopeId}
                             searchGroupsForSelectedScope={searchGroupsForSelectedScope}
                         />
 
                         {
                             searchStatus === searchPageStatus.SHOW_RESULTS &&
-                            <SearchResults />
+                            <SearchResults
+                                availableSearchOptions={availableSearchOptions}
+                                fallbackTriggered={fallbackTriggered}
+                            />
                         }
 
                         {
@@ -208,9 +234,9 @@ const Index = ({
             </div>
             {
                 searchStatus === searchPageStatus.INITIAL && !selectedSearchScopeId &&
-                    <InefficientSelectionsMessage
-                        message={i18n.t('Choose a type to start searching')}
-                    />
+                <IncompleteSelectionsMessage>
+                    {i18n.t('Choose a type to start searching')}
+                </IncompleteSelectionsMessage>
             }
         </ResultsPageSizeContext.Provider>
     </>);

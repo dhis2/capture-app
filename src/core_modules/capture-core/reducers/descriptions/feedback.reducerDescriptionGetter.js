@@ -11,7 +11,7 @@ import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/
 import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
-} from '../../components/Pages/NewEvent';
+} from '../../components/DataEntries/SingleEventRegistrationEntry';
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
@@ -24,6 +24,7 @@ import { registrationSectionActionTypes } from '../../components/Pages/NewRelati
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 import { workingListsCommonActionTypes } from '../../components/Pages/MainPage/WorkingListsCommon';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
+import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?Node) {
     const newState = [...state];
@@ -120,6 +121,10 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
     [viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
     [registrationSectionActionTypes.ORG_UNIT_SEARCH_FAILED]: state =>
+        addErrorFeedback(state, i18n.t('Organisation unit search failed. See log for details')),
+    [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_FAILED]: state =>
+        addErrorFeedback(state, i18n.t('Organisation unit search failed. See log for details')),
+    [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Organisation unit search failed. See log for details')),
 }, 'feedbacks', []);
 

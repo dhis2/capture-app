@@ -14,11 +14,10 @@ import {
     actionTypes as crossPageActionTypes,
 } from '../../components/Pages/actions/crossPage.actions';
 import {
-    urlActionTypes as newEnrollmentUrlActionTypes,
-} from '../../components/Pages/NewEnrollment';
-import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
+import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
 
 const setCategoryOption = (
     state: Object,
@@ -45,21 +44,24 @@ const setCategoryOption = (
     };
 };
 
-const resetCategoryOption = (state: Object, categoryId: string) => {
-    const categories = {
-        ...state.categories,
-        [categoryId]: undefined,
-    };
+const deleteKeyFromObject = (key, object) =>
+    Object.keys(object).reduce((acc, objectKey) => {
+        if (objectKey !== key) {
+            return { ...acc, [objectKey]: object[objectKey] };
+        }
+        return acc;
+    }, {});
 
-    const categoriesMeta = {
-        ...state.categoriesMeta,
-        [categoryId]: undefined,
-    };
+const resetCategoryOption = (state: Object, categoryId: string) => {
+    const { categoriesMeta, categories } = state;
+
+    const newCategories = deleteKeyFromObject(categoryId, categories);
+    const newCategoriesMeta = deleteKeyFromObject(categoryId, categoriesMeta);
 
     return {
         ...state,
-        categories,
-        categoriesMeta,
+        categories: newCategories,
+        categoriesMeta: newCategoriesMeta,
         complete: false,
     };
 };
@@ -79,19 +81,8 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             programId: undefined,
             categories: undefined,
             categoriesMeta: undefined,
+            trackedEntityTypeId: undefined,
             complete: false,
-        };
-        return newState;
-    },
-    [newEnrollmentUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
-        return newState;
-    },
-    [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
-        const newState = {
-            ...state,
-            orgUnitId: null,
         };
         return newState;
     },
@@ -197,6 +188,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return {
             ...state,
             programId,
+            trackedEntityTypeId: undefined,
             complete: false,
         };
     },
@@ -213,5 +205,23 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         categories: undefined,
         categoriesMeta: undefined,
     }),
-
-}, 'currentSelections');
+    [searchPageActionTypes.FALLBACK_SEARCH_COMPLETED]:
+      (state, { payload: { trackedEntityTypeId } }) => ({
+          ...state,
+          programId: undefined,
+          categories: undefined,
+          categoriesMeta: undefined,
+          trackedEntityTypeId,
+      }),
+    [trackedEntityTypeSelectorActionTypes.TRACKED_ENTITY_TYPE_ID_ON_URL_SET]: (
+        state, { payload: { trackedEntityTypeId } }) => ({
+        ...state,
+        programId: undefined,
+        categories: undefined,
+        categoriesMeta: undefined,
+        trackedEntityTypeId,
+    }),
+}, 'currentSelections', {
+    complete: false,
+    categoryCheckInProgress: false,
+});

@@ -89,7 +89,7 @@ class DataEntryField extends React.Component<Props> {
             propName,
             onUpdateField,
             onUpdateFieldInner,
-            valueMeta,
+            valueMeta = {},
             itemId,
             dataEntryId,
             componentProps,

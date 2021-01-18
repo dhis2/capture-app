@@ -3,7 +3,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { paramsSelector } from './appSync.selectors';
 import { LoadingMaskForPage } from '../LoadingMasks';
-import { updateSelectionsFromUrl as updateSelectionsFromUrlForNewEnrollment } from '../Pages/NewEnrollment';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { updateSelectionsFromUrl } from '../LockedSelector';
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
@@ -21,9 +20,7 @@ type Props = {
 
 const pageKeys = {
     MAIN: '',
-    NEW_EVENT: 'newEvent',
     VIEW_EVENT: 'viewEvent',
-    NEW_ENROLLMENT: 'newEnrollment',
     SEARCH: 'search',
     NEW: 'new',
 };
@@ -39,30 +36,10 @@ const specificationForPages = {
             propKey: 'orgUnitId',
         },
     ],
-    [pageKeys.NEW_EVENT]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
-    ],
     [pageKeys.VIEW_EVENT]: [
         {
             urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
             propKey: 'viewEventId',
-        },
-    ],
-    [pageKeys.NEW_ENROLLMENT]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
         },
     ],
     [pageKeys.SEARCH]: [
@@ -74,6 +51,10 @@ const specificationForPages = {
             urlKey: 'orgUnitId',
             propKey: 'orgUnitId',
         },
+        {
+            urlKey: 'trackedEntityTypeId',
+            propKey: 'trackedEntityTypeId',
+        },
     ],
     [pageKeys.NEW]: [
         {
@@ -84,16 +65,18 @@ const specificationForPages = {
             urlKey: 'orgUnitId',
             propKey: 'orgUnitId',
         },
+        {
+            urlKey: 'trackedEntityTypeId',
+            propKey: 'trackedEntityTypeId',
+        },
     ],
 };
 
 const updaterForPages = {
     [pageKeys.MAIN]: updateSelectionsFromUrl,
-    [pageKeys.NEW_EVENT]: updateSelectionsFromUrl,
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
-    [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,
 };
 
 const getUrlParts = (pathName: string) => {

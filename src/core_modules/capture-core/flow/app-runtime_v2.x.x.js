@@ -30,7 +30,6 @@ declare module '@dhis2/app-runtime' {
     declare type QueryResultArray = Array<QueryResult>;
     declare type QueryResultObject = {| [key: string]: QueryResult |};
     declare type QueryResult = boolean | number | string | null | QueryResultArray | QueryResultObject;
-    
     declare type FetchErrorTypeName = 'network' | 'unknown' | 'access' | 'aborted';
     declare type FetchErrorDetails = { message?: string };
 
@@ -74,7 +73,7 @@ declare module '@dhis2/app-runtime' {
         ...ResourceQuery,
         type: 'delete',
         id: string,
-    |};     
+    |};
     declare type Mutation = CreateMutation | UpdateMutation | DeleteMutation;
     declare type MutationOptions = {|
         variables?: QueryVariables,
@@ -94,4 +93,29 @@ declare module '@dhis2/app-runtime' {
         baseUrl: string,
         apiVersion: string,
     |};
+
+    declare export type ApiNetworkError = {|
+        type: 'network',
+        message: string,
+        details: any,
+    |};
+    
+    declare export type ApiAccessError = {|
+        type: 'access',
+        message: string,
+        details: {
+            httpStatus: string,
+            httpStatusCode: number,
+            message: string,
+            status: string,
+        },
+    |};
+    
+    declare export type ApiUnknownError = {|
+        type: 'unknown',
+        message: string,
+        details: any,
+    |};
+    
+    declare export type ApiError = ApiNetworkError | ApiAccessError | ApiUnknownError;
 }

@@ -3,8 +3,7 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
-    selectionsIncompleteActionTypes as newEventPageSelectionsIncompleteActionTypes,
-} from '../../components/Pages/NewEvent';
+} from '../../components/DataEntries/SingleEventRegistrationEntry';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
@@ -15,9 +14,6 @@ import { actionTypes as connectivityActionTypes } from '../../components/Connect
 import {
     actionTypes as setCurrentSelectionsActionTypes,
 } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
-import {
-    urlActionTypes as newEnrollmentUrlActionTypes,
-} from '../../components/Pages/NewEnrollment';
 import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
@@ -37,10 +33,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         const newState = { ...state, page: action.payload.page };
         return newState;
     },
-    [newEnrollmentUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => ({
-        ...state,
-        page: action.payload.nextPage,
-    }),
     [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
@@ -48,12 +40,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.page = null;
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [newEventPageSelectionsIncompleteActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;
@@ -124,10 +110,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
 
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => ({
-        ...state,
-        page: action.payload.nextPage,
-    }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
         ...state,
         locationSwitchInProgress: true,
@@ -140,9 +122,9 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: action.payload.nextPage,
     }),
-    [lockedSelectorActionTypes.NEW_EVENT_PAGE_OPEN]: state => ({
+    [lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
         ...state,
-        page: 'newEvent',
+        page: 'new',
         locationSwitchInProgress: true,
     }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({

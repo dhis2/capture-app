@@ -11,7 +11,7 @@ export const navigateBackToMainPageEpic = (action$: InputObservable, store: Redu
         ofType(searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE),
         map(() => {
             const { currentSelections: { programId, orgUnitId } } = store.value;
-            return push(`/${urlArguments(programId, orgUnitId)}`);
+            return push(`/${urlArguments({ programId, orgUnitId })}`);
         }),
     );
 
@@ -20,5 +20,5 @@ export const openSearchPageLocationChangeEpic = (action$: InputObservable, store
         ofType(lockedSelectorActionTypes.SEARCH_PAGE_OPEN),
         map(() => {
             const { orgUnitId, programId } = store.value.currentSelections;
-            return push(`/search/${urlArguments(programId, orgUnitId)}`);
+            return push(`/search/${urlArguments({ programId, orgUnitId })}`);
         }));

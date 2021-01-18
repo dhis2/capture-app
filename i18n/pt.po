@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
+"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -53,15 +53,6 @@ msgstr ""
 
 msgid "Previously enrolled"
 msgstr ""
-
-msgid "Not enrolled"
-msgstr ""
-
-msgid "Columns to show in table"
-msgstr "Colunas a serem mostradas na tabela"
-
-msgid "Column"
-msgstr "Coluna"
 
 msgid "This value is validating"
 msgstr "Este valor está validando"
@@ -141,22 +132,136 @@ msgstr "Inscrição"
 msgid "A future date is not allowed"
 msgstr ""
 
-msgid "An error has occured. See log for details"
+msgid "Saving a {{trackedEntityName}} in"
 msgstr ""
 
-msgid "Cancel"
-msgstr "Cancelar"
+msgid "in"
+msgstr "no"
+
+msgid "Metadata error. see log for details"
+msgstr ""
+
+msgid "Assigned user"
+msgstr "Usuário designado"
+
+msgid "Search for user"
+msgstr ""
+
+msgid "Basic info"
+msgstr ""
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Comments"
+msgstr "Comentarios"
+
+msgid "Relationships"
+msgstr "Relacionamentos"
+
+msgid "Assignee"
+msgstr ""
+
+msgid "Saving to"
+msgstr ""
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid "This event"
+msgstr ""
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+
+msgid "Active"
+msgstr "Activo"
+
+msgid "Completed"
+msgstr "Completo"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr ""
+
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Finish"
+msgstr "Terminar"
+
+msgid "No write access"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
+msgstr ""
+
+msgid "New event relationship"
+msgstr ""
+
+msgid "Adding relationship to event."
+msgstr ""
+
+msgid "Go back to event without saving relationship"
+msgstr ""
 
 msgid "Unsaved changes"
 msgstr "Alterações não salvas"
 
-msgid "Leaving this page will discard the changes you made to this event."
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
 msgstr ""
 
 msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
+msgstr ""
+
+msgid "New event"
+msgstr "Novo evento"
+
+msgid "You dont have access to create an event in the current selections"
+msgstr ""
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
+msgid "An error has occurred. See log for details"
 msgstr ""
 
 msgid "validation failed"
@@ -220,9 +325,6 @@ msgid "Close"
 msgstr "Fechar"
 
 msgid "Please select the user"
-msgstr ""
-
-msgid "Search for user"
 msgstr ""
 
 msgid "Me"
@@ -330,6 +432,39 @@ msgstr ""
 msgid "No items to display"
 msgstr ""
 
+msgid "Select columns"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr "Colunas a serem mostradas na tabela"
+
+msgid "Column"
+msgstr "Coluna"
+
+msgid "Update"
+msgstr "Actualizar"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr ""
+
+msgid "after or equal to {{date}}"
+msgstr ""
+
+msgid "before or equal to {{date}}"
+msgstr ""
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "More filters"
+msgstr ""
+
+msgid "Rows per page"
+msgstr ""
+
 msgid "Could not get organisation unit"
 msgstr ""
 
@@ -337,9 +472,6 @@ msgid "Program doesn't exist"
 msgstr ""
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
-
-msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
@@ -405,24 +537,6 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
-msgid "Basic info"
-msgstr ""
-
-msgid "Status"
-msgstr "Estado"
-
-msgid "Comments"
-msgstr "Comentarios"
-
-msgid "Please add or cancel comment before saving the event"
-msgstr ""
-
-msgid "No write access"
-msgstr ""
-
-msgid "Save"
-msgstr "Salvar"
-
 msgid "Show all events"
 msgstr ""
 
@@ -438,35 +552,8 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
-msgid "View event info"
-msgstr ""
-
 msgid "Delete event"
 msgstr "Suprimir evento"
-
-msgid "Update"
-msgstr "Actualizar"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
-
-msgid "after or equal to {{date}}"
-msgstr ""
-
-msgid "before or equal to {{date}}"
-msgstr ""
-
-msgid "greater than or equal to"
-msgstr ""
-
-msgid "less than or equal to"
-msgstr ""
-
-msgid "More filters"
-msgstr ""
-
-msgid "Select columns"
-msgstr ""
 
 msgid "Download as JSON"
 msgstr "Transferir como JSON"
@@ -483,8 +570,14 @@ msgstr ""
 msgid "Download data..."
 msgstr ""
 
-msgid "Rows per page"
+msgid "Working list could not be loaded"
 msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Registered events"
+msgstr "Eventos registrados"
 
 msgid "Update view"
 msgstr ""
@@ -519,117 +612,10 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
-msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "an error occurred loading working lists"
-msgstr ""
-
-msgid "Registered events"
-msgstr "Eventos registrados"
-
-msgid "Active"
-msgstr "Activo"
-
-msgid "Completed"
-msgstr "Completo"
-
-msgid "\"Choose a registering unit to start reporting"
-msgstr ""
-
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
-
-msgid "Save and add another"
-msgstr ""
-
-msgid "Save and exit"
-msgstr ""
-
-msgid "Finish"
-msgstr "Terminar"
-
-msgid "Switch to form view"
-msgstr ""
-
-msgid "Switch to row view"
-msgstr ""
-
-msgid "New {{TET}}"
-msgstr ""
-
-msgid "Working Lists"
-msgstr ""
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr ""
-
-msgid "Assigned user"
-msgstr "Usuário designado"
-
-msgid "Relationships"
-msgstr "Relacionamentos"
-
-msgid "Assignee"
-msgstr ""
-
-msgid "Saving to"
-msgstr ""
-
-msgid "in"
-msgstr "no"
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-
-msgid "This event"
-msgstr ""
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr ""
-
-msgid "New event"
-msgstr "Novo evento"
-
-msgid "New event relationship"
-msgstr ""
-
-msgid "Adding relationship to event."
-msgstr ""
-
-msgid "Go back to event without saving relationship"
-msgstr ""
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr ""
-
-msgid "events added"
-msgstr ""
-
-msgid "No events added"
-msgstr ""
-
-msgid "Choose a registering unit and program to get started"
-msgstr ""
-
-msgid "Choose a program to start reporting"
-msgstr ""
-
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
-msgid "Choose a category option to start reporting"
-msgstr ""
-
-msgid "You dont have access to create an event in the current selections"
+msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
@@ -657,13 +643,10 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-msgid "Metadata error. see log for details"
+msgid "Review Duplicates"
 msgstr ""
 
-msgid "Review duplicates"
-msgstr ""
-
-msgid "Create {{trackedEntityTypeName}} and link"
+msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -686,9 +669,6 @@ msgstr "Unidade organizacional"
 
 msgid "Registration"
 msgstr "Registo"
-
-msgid "Review Duplicates"
-msgstr ""
 
 msgid "Search results"
 msgstr "Procurar Resultados"
@@ -763,6 +743,14 @@ msgstr ""
 msgid "Re-enroll"
 msgstr ""
 
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+
+msgid "Search in all programs"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr ""
 
@@ -815,6 +803,9 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Program not found"

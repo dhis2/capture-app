@@ -3,15 +3,15 @@
 # Antonia Bezenchek <antonia@informa.pro>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # phil_dhis2, 2020
-# Hamza Assada <7amza.it@gmail.com>, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
+# Hamza Assada <7amza.it@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
+"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,15 +60,6 @@ msgstr "مسجل"
 
 msgid "Previously enrolled"
 msgstr "مسجل سابقًا"
-
-msgid "Not enrolled"
-msgstr "غير مسجل"
-
-msgid "Columns to show in table"
-msgstr "الأعمدة التي سيتم عرضها في الجدول"
-
-msgid "Column"
-msgstr "العمود"
 
 msgid "This value is validating"
 msgstr "يتم التحقق من القيمة"
@@ -148,24 +139,141 @@ msgstr "التسجيل"
 msgid "A future date is not allowed"
 msgstr "لا يسمح بإدخال تاريخ في المستقبل"
 
-msgid "An error has occured. See log for details"
-msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
 
-msgid "Cancel"
-msgstr "إلغاء"
+msgid "in"
+msgstr "في"
+
+msgid "Metadata error. see log for details"
+msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
+
+msgid "Assigned user"
+msgstr "المستخدم المعين"
+
+msgid "Search for user"
+msgstr "البحث عن مستخدم"
+
+msgid "Basic info"
+msgstr "المعلومات الأساسية"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Comments"
+msgstr "التعليقات"
+
+msgid "Relationships"
+msgstr "علاقات"
+
+msgid "Assignee"
+msgstr "المحال إليه"
+
+msgid "Saving to"
+msgstr "حفظ إلى"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"هذا ليس برنامج تسجيل حدث أو أن بيانات التعريف تالفة. انظر السجل للحصول على "
+"التفاصيل."
+
+msgid "This event"
+msgstr "هذا الحدث"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+"العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}}  موجودة مسبقاً"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Completed"
+msgstr "مكتمل"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
+
+msgid "Save and add another"
+msgstr "حفظ واضافة جديد"
+
+msgid "Save and exit"
+msgstr "حفظ وخروج"
+
+msgid "Finish"
+msgstr "إنهاء"
+
+msgid "No write access"
+msgstr "لا توجد صلاحية الوصول للكتابة"
+
+msgid "Switch to form view"
+msgstr "التحويل الى العرض كنموذج"
+
+msgid "Switch to row view"
+msgstr "التحويل إلى العرض كصفوف"
+
+msgid "events added"
+msgstr "تمت إضافة الأحداث"
+
+msgid "No events added"
+msgstr "لم تتم إضافة أحداث"
+
+msgid "New event relationship"
+msgstr "علاقة جديدة بالحدث"
+
+msgid "Adding relationship to event."
+msgstr "إضافة علاقة للحدث."
+
+msgid "Go back to event without saving relationship"
+msgstr "ارجع إلى الحدث بدون حفظ العلاقة"
 
 msgid "Unsaved changes"
 msgstr "تعديلات لم يتم حفظها"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"ستؤدي مغادرة هذه الصفحة إلى تجاهل التغييرات التي أجريتها على هذا الحدث."
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحديدات التي أجريتها لعلاقة جديدة"
 
 msgid "Yes, discard"
 msgstr "نعم ، تجاهل"
 
 msgid "No, stay here"
 msgstr "لا ، ابق هنا"
+
+msgid "New event"
+msgstr "حدث جديد"
+
+msgid "You dont have access to create an event in the current selections"
+msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"ستؤدي مغادرة هذه الصفحة إلى تجاهل التغييرات التي أجريتها على هذا الحدث."
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
+msgid "An error has occurred. See log for details"
+msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
 
 msgid "validation failed"
 msgstr "فشل التحقق من الصحة"
@@ -229,9 +337,6 @@ msgstr "إغلاق"
 
 msgid "Please select the user"
 msgstr "من فضلك قم بإختيار المستخدم"
-
-msgid "Search for user"
-msgstr "البحث عن مستخدم"
 
 msgid "Me"
 msgstr "أنا"
@@ -338,6 +443,39 @@ msgstr "تعذر استرداد الاقتراحات"
 msgid "No items to display"
 msgstr "لا توجد عناصر للعرض"
 
+msgid "Select columns"
+msgstr "حدد الأعمدة"
+
+msgid "Columns to show in table"
+msgstr "الأعمدة التي سيتم عرضها في الجدول"
+
+msgid "Column"
+msgstr "العمود"
+
+msgid "Update"
+msgstr "تحديث"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} إلى {{toDate}}"
+
+msgid "after or equal to {{date}}"
+msgstr "من بعد أو مساوٍ لـ {{date}}"
+
+msgid "before or equal to {{date}}"
+msgstr "من قبل أو مساوٍ لـ {{date}}"
+
+msgid "greater than or equal to"
+msgstr "أكبر من أو يساوي"
+
+msgid "less than or equal to"
+msgstr "أقل من أو يساوي"
+
+msgid "More filters"
+msgstr "عوامل تصفية أكثر"
+
+msgid "Rows per page"
+msgstr "عدد الصفوف لكل صفحة"
+
 msgid "Could not get organisation unit"
 msgstr "تعذر جلب الوحدة التنظيمية"
 
@@ -347,9 +485,6 @@ msgstr "البرنامج غير موجود"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
 
-msgid "New {{typeName}}"
-msgstr "{{typeName}} جديد"
-
 msgid "New"
 msgstr "جديد"
 
@@ -357,7 +492,7 @@ msgid "Find"
 msgstr "بحث"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "إلغاء تحديد ماتم تحديده"
 
 msgid "Selected registering unit"
 msgstr "وحدة التسجيل المختارة"
@@ -413,24 +548,6 @@ msgstr "ليس لديك حق الوصول إلى كتابة التعليقات"
 msgid "Write comment"
 msgstr "اكتب تعليقاً"
 
-msgid "Basic info"
-msgstr "المعلومات الأساسية"
-
-msgid "Status"
-msgstr "الحالة"
-
-msgid "Comments"
-msgstr "التعليقات"
-
-msgid "Please add or cancel comment before saving the event"
-msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
-
-msgid "No write access"
-msgstr "لا توجد صلاحية الوصول للكتابة"
-
-msgid "Save"
-msgstr "حفظ"
-
 msgid "Show all events"
 msgstr "عرض جميع الأحداث"
 
@@ -446,35 +563,8 @@ msgstr "تعذر تحميل الحدث"
 msgid "Organisation unit could not be loaded"
 msgstr "تعذر تحميل الوحدة التنظيمية"
 
-msgid "View event info"
-msgstr "عرض معلومات عن الحدث"
-
 msgid "Delete event"
 msgstr "حذف الحدث"
-
-msgid "Update"
-msgstr "تحديث"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} إلى {{toDate}}"
-
-msgid "after or equal to {{date}}"
-msgstr "من بعد أو مساوٍ لـ {{date}}"
-
-msgid "before or equal to {{date}}"
-msgstr "من قبل أو مساوٍ لـ {{date}}"
-
-msgid "greater than or equal to"
-msgstr "أكبر من أو يساوي"
-
-msgid "less than or equal to"
-msgstr "أقل من أو يساوي"
-
-msgid "More filters"
-msgstr "عوامل تصفية أكثر"
-
-msgid "Select columns"
-msgstr "حدد الأعمدة"
 
 msgid "Download as JSON"
 msgstr "تنزيل كملف JSON"
@@ -491,8 +581,14 @@ msgstr "تنزيل مع اعتماد عوامل التصفية الحالية"
 msgid "Download data..."
 msgstr "تنزيل البيانات"
 
-msgid "Rows per page"
-msgstr "عدد الصفوف لكل صفحة"
+msgid "Working list could not be loaded"
+msgstr "تعذر تحميل قائمة العمل"
+
+msgid "an error occurred loading working lists"
+msgstr "حدث خطأ اثناء تحميل قوائم العمل"
+
+msgid "Registered events"
+msgstr "الأحداث المسجلة"
 
 msgid "Update view"
 msgstr "تحديث العرض"
@@ -527,123 +623,11 @@ msgstr "إظهار أقل"
 msgid "Show All"
 msgstr "إظهار الكل"
 
-msgid "Working list could not be loaded"
-msgstr "تعذر تحميل قائمة العمل"
-
-msgid "an error occurred loading working lists"
-msgstr "حدث خطأ اثناء تحميل قوائم العمل"
-
-msgid "Registered events"
-msgstr "الأحداث المسجلة"
-
-msgid "Active"
-msgstr "فعال"
-
-msgid "Completed"
-msgstr "مكتمل"
-
-msgid "\"Choose a registering unit to start reporting"
-msgstr ""
-
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
-
-msgid "Save and add another"
-msgstr "حفظ واضافة جديد"
-
-msgid "Save and exit"
-msgstr "حفظ وخروج"
-
-msgid "Finish"
-msgstr "إنهاء"
-
-msgid "Switch to form view"
-msgstr "التحويل الى العرض كنموذج"
-
-msgid "Switch to row view"
-msgstr "التحويل إلى العرض كصفوف"
-
-msgid "New {{TET}}"
-msgstr "{{TET}} جديد"
-
-msgid "Working Lists"
-msgstr "قوائم العمل"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr ""
-"البرنامج بالرقم المعرف {{programId}} ليس برنامج تتبع. لا يمكن التسجيل إلا في"
-" برامج التتبع."
-
-msgid "Assigned user"
-msgstr "المستخدم المعين"
-
-msgid "Relationships"
-msgstr "علاقات"
-
-msgid "Assignee"
-msgstr "المحال إليه"
-
-msgid "Saving to"
-msgstr "حفظ إلى"
-
-msgid "in"
-msgstr "في"
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-"هذا ليس برنامج تسجيل حدث أو أن بيانات التعريف تالفة. انظر السجل للحصول على "
-"التفاصيل."
-
-msgid "This event"
-msgstr "هذا الحدث"
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr ""
-"العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}}  موجودة مسبقاً"
-
-msgid "New event"
-msgstr "حدث جديد"
-
-msgid "New event relationship"
-msgstr "علاقة جديدة بالحدث"
-
-msgid "Adding relationship to event."
-msgstr "إضافة علاقة للحدث."
-
-msgid "Go back to event without saving relationship"
-msgstr "ارجع إلى الحدث بدون حفظ العلاقة"
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحديدات التي أجريتها لعلاقة جديدة"
-
-msgid "events added"
-msgstr "تمت إضافة الأحداث"
-
-msgid "No events added"
-msgstr "لم تتم إضافة أحداث"
-
-msgid "Choose a registering unit and program to get started"
-msgstr ""
-
-msgid "Choose a program to start reporting"
-msgstr ""
-
 msgid "Choose a registering unit to start reporting"
-msgstr ""
+msgstr "اختر وحدة تسجيل لبدء الإبلاغ"
 
-msgid "Choose a category option to start reporting"
+msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
-
-msgid "You dont have access to create an event in the current selections"
-msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -671,14 +655,11 @@ msgstr "الشخص المسجل"
 msgid "Link"
 msgstr "ربط"
 
-msgid "Metadata error. see log for details"
-msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
+msgid "Review Duplicates"
+msgstr "مراجعة التكرارات"
 
-msgid "Review duplicates"
-msgstr "مراجعة التكرار"
-
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "إنشاء {{trackedEntityTypeName}} وربط"
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
@@ -700,9 +681,6 @@ msgstr "الوحدة التنظيمية"
 
 msgid "Registration"
 msgstr "التسجيل"
-
-msgid "Review Duplicates"
-msgstr "مراجعة التكرارات"
 
 msgid "Search results"
 msgstr "نتائج البحث"
@@ -760,15 +738,17 @@ msgstr ""
 "لاحقًا. لمزيد من التفاصيل، افتح تبويب Console الخاصة بـ Developer tools"
 
 msgid "Too many results"
-msgstr ""
+msgstr "نتائج كثيرة جدًا"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
 msgstr ""
+"نتج من هذا البحث نتائج كثيرة جدًا للعرض. حاول تغيير مصطلحات البحث أو البحث "
+"بمزيد من السمات لتضييق نطاق النتائج."
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "اختر نوعًا لبدء البحث"
 
 msgid "View dashboard"
 msgstr "عرض لوحة المعلومات"
@@ -778,6 +758,16 @@ msgstr "عرض التسجيل النشط"
 
 msgid "Re-enroll"
 msgstr "إعادة التسجيل"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"لم يتم إيجاد النتائج التي كنت تبحث عنها؟ حاول البحث في جميع البرامج التي "
+"تستخدم النوع"
+
+msgid "Search in all programs"
+msgstr "البحث في جميع البرامج"
 
 msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
@@ -825,13 +815,16 @@ msgstr "ابحث عن"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
-msgstr ""
+msgstr "يمكنك أيضًا اختيار برنامج من الشريط العلوي والبحث فيه"
 
 msgid "To work with the selected program,"
 msgstr "للعمل مع البرنامج المحدد"
 
 msgid "open the Tracker Capture app"
 msgstr "فتح برنامج التتبع والإلتقاط"
+
+msgid "An error has occured. See log for details"
+msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
 
 msgid "Program not found"
 msgstr "لم يتم ايجاد البرنامج"

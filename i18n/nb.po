@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-11-17T15:37:02.279Z\n"
+"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -58,15 +58,6 @@ msgstr "Registrert"
 
 msgid "Previously enrolled"
 msgstr "Tidligere registrert"
-
-msgid "Not enrolled"
-msgstr "Ikke registrert"
-
-msgid "Columns to show in table"
-msgstr "Kolonner som skal vises i tabellen"
-
-msgid "Column"
-msgstr "Kolonne"
 
 msgid "This value is validating"
 msgstr "Denne verdien validerer"
@@ -146,25 +137,144 @@ msgstr "Registrering"
 msgid "A future date is not allowed"
 msgstr "En fremtidig dato er ikke tillatt"
 
-msgid "An error has occured. See log for details"
-msgstr "Det har oppstått en feil. Se logg for detaljer"
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
 
-msgid "Cancel"
-msgstr "Avbryt"
+msgid "in"
+msgstr "i"
+
+msgid "Metadata error. see log for details"
+msgstr "Metadata feil, se logg for detaljer"
+
+msgid "Assigned user"
+msgstr "Tildelt programbruker"
+
+msgid "Search for user"
+msgstr "Søk etter bruker"
+
+msgid "Basic info"
+msgstr "Grunnleggende informasjon"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Comments"
+msgstr "Kommentarer"
+
+msgid "Relationships"
+msgstr "Relasjoner"
+
+msgid "Assignee"
+msgstr "Tildelt programbruker"
+
+msgid "Saving to"
+msgstr "Lagrer til"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"Dette er ikke et hendelsesprogram, eller metadataene er korrupte. Se logg "
+"for detaljer."
+
+msgid "This event"
+msgstr "Denne hendelsen"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+"Relasjon av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Completed"
+msgstr "Fullført"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr "Legg til eller avbryt kommentar før du lagrer hendelsen"
+
+msgid "Save and add another"
+msgstr "Lagre og legg til en til"
+
+msgid "Save and exit"
+msgstr "Lagre og avslutt"
+
+msgid "Finish"
+msgstr "Fullfør"
+
+msgid "No write access"
+msgstr "Ingen skrivetilgang"
+
+msgid "Switch to form view"
+msgstr "Bytt til skjemavisning"
+
+msgid "Switch to row view"
+msgstr "Bytt til radvisning"
+
+msgid "events added"
+msgstr "Hendelser lagt til"
+
+msgid "No events added"
+msgstr "Ingen hendelser lagt til"
+
+msgid "New event relationship"
+msgstr "Ny hendelsesrelasjon"
+
+msgid "Adding relationship to event."
+msgstr "Legger til relasjon til hendelsen."
+
+msgid "Go back to event without saving relationship"
+msgstr "Gå tilbake til hendelsen uten å lagre relasjonen"
 
 msgid "Unsaved changes"
 msgstr "Ikke lagrede endringer"
 
-msgid "Leaving this page will discard the changes you made to this event."
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
 msgstr ""
-"Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
-"denne hendelsen."
+"Hvis du forlater denne siden, vil du forkaste valgene du gjorde for en ny "
+"relasjon"
 
 msgid "Yes, discard"
 msgstr "Ja, kast"
 
 msgid "No, stay here"
 msgstr "Nei, bli her"
+
+msgid "New event"
+msgstr "Ny hendelse"
+
+msgid "You dont have access to create an event in the current selections"
+msgstr "Du har ikke tilgang til å opprette en hendelse i gjeldende valg"
+
+msgid "Save"
+msgstr "Lagre"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
+"denne hendelsen."
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
+
+msgid "An error has occurred. See log for details"
+msgstr "Det har oppstått en feil. Se logg for detaljer"
 
 msgid "validation failed"
 msgstr "validering mislyktes"
@@ -228,9 +338,6 @@ msgstr "Lukk"
 
 msgid "Please select the user"
 msgstr "Velg bruker"
-
-msgid "Search for user"
-msgstr "Søk etter bruker"
 
 msgid "Me"
 msgstr "Meg"
@@ -337,6 +444,39 @@ msgstr "forslag kunne ikke hentes"
 msgid "No items to display"
 msgstr "Ingen elementer å vise"
 
+msgid "Select columns"
+msgstr "Velg kolonner"
+
+msgid "Columns to show in table"
+msgstr "Kolonner som skal vises i tabellen"
+
+msgid "Column"
+msgstr "Kolonne"
+
+msgid "Update"
+msgstr "Oppdater"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} til {{toDate}}"
+
+msgid "after or equal to {{date}}"
+msgstr "etter eller lik {{date}}"
+
+msgid "before or equal to {{date}}"
+msgstr "før eller lik {{date}}"
+
+msgid "greater than or equal to"
+msgstr "større enn eller lik"
+
+msgid "less than or equal to"
+msgstr "mindre enn eller lik"
+
+msgid "More filters"
+msgstr "Flere filtre"
+
+msgid "Rows per page"
+msgstr "Rader per side"
+
 msgid "Could not get organisation unit"
 msgstr "Kunne ikke få tak i organisasjonsenhet"
 
@@ -346,9 +486,6 @@ msgstr "Programmet finnes ikke"
 msgid "Selected program is invalid for selected registering unit"
 msgstr "Valgt program er ugyldig for registreringsenhet"
 
-msgid "New {{typeName}}"
-msgstr "Ny {{typeName}}"
-
 msgid "New"
 msgstr "Ny"
 
@@ -356,7 +493,7 @@ msgid "Find"
 msgstr "Finn"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "Tøm valg"
 
 msgid "Selected registering unit"
 msgstr "Valgt registreringsenhet"
@@ -412,24 +549,6 @@ msgstr "Du har ikke tilgang til å skrive kommentarer"
 msgid "Write comment"
 msgstr "Skriv kommentar"
 
-msgid "Basic info"
-msgstr "Grunnleggende informasjon"
-
-msgid "Status"
-msgstr "Status"
-
-msgid "Comments"
-msgstr "Kommentarer"
-
-msgid "Please add or cancel comment before saving the event"
-msgstr "Legg til eller avbryt kommentar før du lagrer hendelsen"
-
-msgid "No write access"
-msgstr "Ingen skrivetilgang"
-
-msgid "Save"
-msgstr "Lagre"
-
 msgid "Show all events"
 msgstr "Vis alle hendelser"
 
@@ -445,35 +564,8 @@ msgstr "Hendelse kunne ikke lastes inn"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisasjonsenhet kunne ikke lastes inn"
 
-msgid "View event info"
-msgstr "Se hendelsesinfo"
-
 msgid "Delete event"
 msgstr "Slett hendelse"
-
-msgid "Update"
-msgstr "Oppdater"
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{fromDate}} til {{toDate}}"
-
-msgid "after or equal to {{date}}"
-msgstr "etter eller lik {{date}}"
-
-msgid "before or equal to {{date}}"
-msgstr "før eller lik {{date}}"
-
-msgid "greater than or equal to"
-msgstr "større enn eller lik"
-
-msgid "less than or equal to"
-msgstr "mindre enn eller lik"
-
-msgid "More filters"
-msgstr "Flere filtre"
-
-msgid "Select columns"
-msgstr "Velg kolonner"
 
 msgid "Download as JSON"
 msgstr "Last ned i JSON format"
@@ -490,8 +582,14 @@ msgstr "Last ned med gjeldende filtre"
 msgid "Download data..."
 msgstr "Last ned data..."
 
-msgid "Rows per page"
-msgstr "Rader per side"
+msgid "Working list could not be loaded"
+msgstr "Arbeidslisten kunne ikke lastes inn"
+
+msgid "an error occurred loading working lists"
+msgstr "en feil oppstod ved lasting av arbeidslister"
+
+msgid "Registered events"
+msgstr "Registrerte hendelser"
 
 msgid "Update view"
 msgstr "Oppdater visning"
@@ -526,125 +624,11 @@ msgstr "Vis mindre"
 msgid "Show All"
 msgstr "Vis alle"
 
-msgid "Working list could not be loaded"
-msgstr "Arbeidslisten kunne ikke lastes inn"
-
-msgid "an error occurred loading working lists"
-msgstr "en feil oppstod ved lasting av arbeidslister"
-
-msgid "Registered events"
-msgstr "Registrerte hendelser"
-
-msgid "Active"
-msgstr "Aktiv"
-
-msgid "Completed"
-msgstr "Fullført"
-
-msgid "\"Choose a registering unit to start reporting"
-msgstr ""
-
-msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr "Oppretter en ny {{TET}} i {{program}} i {{orgUnit}}"
-
-msgid "Save and add another"
-msgstr "Lagre og legg til en til"
-
-msgid "Save and exit"
-msgstr "Lagre og avslutt"
-
-msgid "Finish"
-msgstr "Fullfør"
-
-msgid "Switch to form view"
-msgstr "Bytt til skjemavisning"
-
-msgid "Switch to row view"
-msgstr "Bytt til radvisning"
-
-msgid "New {{TET}}"
-msgstr "Ny {{TET}}"
-
-msgid "Working Lists"
-msgstr "Arbeidslister"
-
-msgid ""
-"Program with programid {{programId}} isn't a tracker program. Enrollments "
-"can only be done in tracker programs."
-msgstr ""
-"Program med programid {{programId}} er ikke et Tracker-program. "
-"Registreringer kan bare gjøres i Tracker-programmer."
-
-msgid "Assigned user"
-msgstr "Tildelt programbruker"
-
-msgid "Relationships"
-msgstr "Relasjoner"
-
-msgid "Assignee"
-msgstr "Tildelt programbruker"
-
-msgid "Saving to"
-msgstr "Lagrer til"
-
-msgid "in"
-msgstr "i"
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-"Dette er ikke et hendelsesprogram, eller metadataene er korrupte. Se logg "
-"for detaljer."
-
-msgid "This event"
-msgstr "Denne hendelsen"
-
-msgid ""
-"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
-"exists"
-msgstr ""
-"Relasjon av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
-
-msgid "New event"
-msgstr "Ny hendelse"
-
-msgid "New event relationship"
-msgstr "Ny hendelsesrelasjon"
-
-msgid "Adding relationship to event."
-msgstr "Legger til relasjon til hendelsen."
-
-msgid "Go back to event without saving relationship"
-msgstr "Gå tilbake til hendelsen uten å lagre relasjonen"
-
-msgid ""
-"Leaving this page will discard the selections you made for a new "
-"relationship"
-msgstr ""
-"Hvis du forlater denne siden, vil du forkaste valgene du gjorde for en ny "
-"relasjon"
-
-msgid "events added"
-msgstr "Hendelser lagt til"
-
-msgid "No events added"
-msgstr "Ingen hendelser lagt til"
-
-msgid "Choose a registering unit and program to get started"
-msgstr ""
-
-msgid "Choose a program to start reporting"
-msgstr ""
-
 msgid "Choose a registering unit to start reporting"
-msgstr ""
+msgstr "Velg en registreringsenhet for å starte rapportering"
 
-msgid "Choose a category option to start reporting"
+msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
-
-msgid "You dont have access to create an event in the current selections"
-msgstr "Du har ikke tilgang til å opprette en hendelse i gjeldende valg"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
@@ -675,14 +659,11 @@ msgstr "Registrert person"
 msgid "Link"
 msgstr "Link"
 
-msgid "Metadata error. see log for details"
-msgstr "Metadata feil, se logg for detaljer"
-
-msgid "Review duplicates"
+msgid "Review Duplicates"
 msgstr "Gjennomgå duplikater"
 
-msgid "Create {{trackedEntityTypeName}} and link"
-msgstr "Opprett {{trackedEntityTypeName}} og link"
+msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr ""
 
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
@@ -704,9 +685,6 @@ msgstr "Organisasjonsenhet"
 
 msgid "Registration"
 msgstr "Registrering"
-
-msgid "Review Duplicates"
-msgstr "Gjennomgå duplikater"
 
 msgid "Search results"
 msgstr "Søkeresultater"
@@ -765,15 +743,17 @@ msgstr ""
 " For mer informasjon, åpne konsollfanen i Utviklerverktøy"
 
 msgid "Too many results"
-msgstr ""
+msgstr "For mange resultat"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
 msgstr ""
+"Dette søket returnerte for mange resultater til å vises. Prøv å endre "
+"søkeord eller søke etter flere attributter for å begrense resultatene."
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "Velg en type for å begynne å søke"
 
 msgid "View dashboard"
 msgstr "Vis dashbord"
@@ -783,6 +763,16 @@ msgstr "Vis aktiv registrering"
 
 msgid "Re-enroll"
 msgstr "Registrer på nytt"
+
+msgid ""
+"Not finding the results you were looking for? Try to search all programs "
+"that use type "
+msgstr ""
+"Finner du ikke resultatene du leter etter? Prøv å søke i alle programmer som"
+" bruker type"
+
+msgid "Search in all programs"
+msgstr "Søk i alle programmer"
 
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
@@ -833,12 +823,16 @@ msgstr "Søk etter"
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
+"Du kan også velge et program fra den øverste linjen og søke i det programmet"
 
 msgid "To work with the selected program,"
 msgstr "For å jobbe med det valgte programmet,"
 
 msgid "open the Tracker Capture app"
 msgstr "åpne Tracker Capture app"
+
+msgid "An error has occured. See log for details"
+msgstr "Det har oppstått en feil. Se logg for detaljer"
 
 msgid "Program not found"
 msgstr "Program ble ikke funnet"

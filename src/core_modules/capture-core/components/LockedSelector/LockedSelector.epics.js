@@ -14,20 +14,13 @@ import {
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
+import { urlArguments } from '../../utils/url';
 
-const exactUrl = (page: string, programId: string, orgUnitId: string) => {
-    const argArray = [];
-    if (programId) {
-        argArray.push(`programId=${programId}`);
-    }
-    if (orgUnitId) {
-        argArray.push(`orgUnitId=${orgUnitId}`);
-    }
-
+const exactUrl = (page: string, url: string) => {
     if (page && page !== 'viewEvent') {
-        return `/${page}/${argArray.join('&')}`;
+        return `/${page}/${url}`;
     }
-    return `/${argArray.join('&')}`;
+    return `/${url}`;
 };
 
 export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -40,10 +33,10 @@ export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: 
         ),
         map(() => {
             const {
-                currentSelections: { programId, orgUnitId },
+                currentSelections: { programId, orgUnitId, trackedEntityTypeId },
                 app: { page },
             } = store.value;
-            return push(exactUrl(page, programId, orgUnitId));
+            return push(exactUrl(page, urlArguments({ programId, orgUnitId, trackedEntityTypeId })));
         }));
 
 export const startAgainEpic = (action$: InputObservable) =>

@@ -3,8 +3,8 @@ import type { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { SearchResultsComponent } from './SearchResults.component';
-import type { Props, PropsFromRedux, DispatchersFromRedux } from './SearchResults.types';
-import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram } from '../SearchPage.actions';
+import type { Props, PropsFromRedux, DispatchersFromRedux, OwnProps } from './SearchResults.types';
+import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram, startFallbackSearch } from '../SearchPage.actions';
 import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
 import { searchScopes, PAGINATION } from '../SearchPage.constants';
 
@@ -59,7 +59,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
 };
 
 
-const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch, { availableSearchOptions }): DispatchersFromRedux => ({
     searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId, page, resultsPageSize }) => {
         dispatch(searchViaAttributesOnScopeTrackedEntityType({
             trackedEntityTypeId,
@@ -78,10 +78,18 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
             triggeredFrom: PAGINATION,
         }));
     },
+    startFallbackSearch: ({ programId, formId, resultsPageSize }) => {
+        dispatch(startFallbackSearch({
+            programId,
+            formId,
+            availableSearchOptions,
+            pageSize: resultsPageSize,
+        }));
+    },
 });
 
 
-export const SearchResults: ComponentType<{||}> =
+export const SearchResults: ComponentType<OwnProps> =
   compose(
       connect<Props, _, _, _, _, _>(mapStateToProps, mapDispatchToProps),
   )(SearchResultsComponent);

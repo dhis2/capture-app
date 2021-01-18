@@ -11,6 +11,9 @@ const getStyles = (theme: Theme) => ({
     deleteIcon: {
         fill: theme.palette.error.main,
     },
+    deleteContainer: {
+        display: 'flex',
+    },
 });
 
 export const EventWorkingListsRowMenuSetupPlain = ({ onDeleteEvent, classes, ...passOnProps }: Props) => {
@@ -18,12 +21,15 @@ export const EventWorkingListsRowMenuSetupPlain = ({ onDeleteEvent, classes, ...
         key: 'deleteEventItem',
         clickHandler: ({ eventId }) => onDeleteEvent(eventId),
         element: (
-            <React.Fragment>
+            <span
+                data-test="dhis2-capture-delete-event-button"
+                className={classes.deleteContainer}
+            >
                 <Delete className={classes.deleteIcon} />
                 {i18n.t('Delete event')}
-            </React.Fragment>
+            </span>
         ),
-    }], [onDeleteEvent, classes.deleteIcon]);
+    }], [onDeleteEvent, classes.deleteIcon, classes.deleteContainer]);
 
     return (
         <EventWorkingListsUpdateTrigger
