@@ -20,6 +20,9 @@ import { programCollection } from '../../../metaDataMemoryStores';
 
 const useUserWriteAccess = (scopeId) => {
     const scope = getScopeFromScopeId(scopeId);
+    if (!scope) {
+        return false;
+    }
     try {
         if (scope instanceof TrackerProgram) {
             const { access } = scope;
