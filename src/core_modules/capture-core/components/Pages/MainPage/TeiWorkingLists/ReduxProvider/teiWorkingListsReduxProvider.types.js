@@ -24,10 +24,8 @@ import type {
     UpdateFilter,
 } from '../../WorkingLists';
 import type {
-    AddTemplate,
     CustomColumnOrder,
     RecordsOrder,
-    UpdateTemplate,
     UpdateList,
     InitialViewConfig,
 } from '../../WorkingListsCommon';
@@ -51,14 +49,12 @@ export type TeiWorkingListsReduxOutputProps = {|
     loading: boolean,
     loadViewError?: string,
     loadTemplatesError?: string,
-    onAddTemplate: AddTemplate,
     onCancelLoadView: CancelLoadView,
     onCancelLoadTemplates: CancelLoadTemplates,
     onCancelUpdateList: CancelUpdateList,
     onChangePage: ChangePage,
     onChangeRowsPerPage: ChangeRowsPerPage,
     onClearFilter: ClearFilter,
-    onDeleteTemplate: Function,
     onLoadView: LoadView,
     onLoadTemplates: LoadTemplates,
     onSelectListRow: SelectRow,
@@ -69,7 +65,6 @@ export type TeiWorkingListsReduxOutputProps = {|
     onUnloadingContext?: UnloadingContext,
     onUpdateFilter: UpdateFilter,
     onUpdateList: UpdateList,
-    onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     program: TrackerProgram,
     records?: TeiRecords,
