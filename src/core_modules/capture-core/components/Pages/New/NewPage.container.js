@@ -13,9 +13,26 @@ import { typeof newPageStatuses } from './NewPage.constants';
 import { urlArguments } from '../../../utils/url';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
-import { programCollection } from '../../../metaDataMemoryStores';
-import type { ProgramCategories } from './NewPage.types';
+import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
 
+
+const useUserWriteAccess = (scopeId) => {
+    const scope = getScopeFromScopeId(scopeId);
+    try {
+        if (scope instanceof TrackerProgram) {
+            const { access } = scope;
+
+            return access && access.data && access.data.write;
+        } else if (scope instanceof TrackedEntityType) {
+            const { access } = scope;
+
+            return access && access.data && access.data.write;
+        }
+        return true;
+    } catch (e) {
+        return false;
+    }
+};
 export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -24,7 +41,7 @@ export const NewPage: ComponentType<{||}> = () => {
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
         [dispatch]);
 
-    const dispatchshowMessageToSelectProgramCategoryOnNewPage = useCallback(
+    const dispatchShowMessageToSelectProgramCategoryOnNewPage = useCallback(
         () => { dispatch(showMessageToSelectProgramCategoryOnNewPage()); },
         [dispatch]);
 
@@ -74,16 +91,18 @@ export const NewPage: ComponentType<{||}> = () => {
         history.push(`/${urlArguments({ orgUnitId, programId })}`);
     };
 
+    const writeAccess = useUserWriteAccess(currentScopeId);
     return (
         <NewPageComponent
             showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
-            showMessageToSelectProgramCategoryOnNewPage={dispatchshowMessageToSelectProgramCategoryOnNewPage}
+            showMessageToSelectProgramCategoryOnNewPage={dispatchShowMessageToSelectProgramCategoryOnNewPage}
             showDefaultViewOnNewPage={dispatchShowDefaultViewOnNewPage}
             handleMainPageNavigation={handleMainPageNavigation}
             currentScopeId={currentScopeId}
             orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
             programCategorySelectionIncomplete={programCategorySelectionIncomplete}
             missingCategoriesInProgramSelection={missingCategoriesInProgramSelection}
+            writeAccess={writeAccess}
             newPageStatus={newPageStatus}
             error={error}
             ready={ready}

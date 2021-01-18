@@ -2,13 +2,10 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import Paper from '@material-ui/core/Paper';
 import Button from '../../../Buttons/Button.component';
+import { NoWriteAccessMessage } from '../../../NoWriteAccessMessage';
 
 const getStyles = (theme: Theme) => ({
-    container: {
-        padding: 24,
-    },
     contents: {
         display: 'flex',
         justifyContent: 'center',
@@ -25,58 +22,26 @@ const getStyles = (theme: Theme) => ({
     buttonContainer: {
         paddingRight: theme.spacing.unit * 2,
     },
-    headerContainer: {
-        paddingTop: 9,
-        paddingBottom: 20,
-    },
-    // $FlowFixMe[cannot-spread-inexact] automated comment
-    header: {
-        flexGrow: 1,
-        ...theme.typography.title,
-        fontSize: 16,
-        fontWeight: 500,
-    },
 });
 type Props = {
     classes: {
-        container: string,
         contents: string,
         buttonRow: string,
         buttonContainer: string,
-        headerContainer: string,
         header: string,
     },
     onCancel: () => void,
 };
 
 class DataEntrySelectionsNoAccess extends Component<Props> {
-    renderHeader() {
-        return (
-            <div
-                className={this.props.classes.headerContainer}
-            >
-                <div
-                    className={this.props.classes.header}
-                >
-                    {i18n.t('New event')}
-                </div>
-            </div>
-        );
-    }
     render() {
         const { classes, onCancel } = this.props;
         return (
-            <div className={classes.container}>
-                {this.renderHeader()}
-                <Paper
-                    elevation={0}
-                >
-                    <div
-                        className={classes.contents}
-                    >
-                        {i18n.t('You dont have access to create an event in the current selections')}
-                    </div>
-                </Paper>
+            <div>
+                <NoWriteAccessMessage
+                    title={i18n.t('New event')}
+                    message={i18n.t("You don't have access to create an event in the current selections")}
+                />
                 <div
                     className={classes.buttonRow}
                 >

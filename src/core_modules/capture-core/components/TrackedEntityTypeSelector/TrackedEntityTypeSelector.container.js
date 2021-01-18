@@ -5,7 +5,7 @@ import type { OwnProps } from './TrackedEntityTypeSelector.types';
 import { setTrackedEntityTypeIdOnUrl } from './TrackedEntityTypeSelector.actions';
 import { TrackedEntityTypeSelectorComponent } from './TrackedEntityTypeSelector.component';
 
-export const TrackedEntityTypeSelector = ({ onSelect }: OwnProps) => {
+export const TrackedEntityTypeSelector = ({ onSelect, accessNeeded }: OwnProps) => {
     const dispatch = useDispatch();
 
     const dispatchSetTrackedEntityTypeIdOnUrl = useCallback(
@@ -14,6 +14,7 @@ export const TrackedEntityTypeSelector = ({ onSelect }: OwnProps) => {
 
     return (
         <TrackedEntityTypeSelectorComponent
+            accessNeeded={accessNeeded}
             onSelect={onSelect}
             onSetTrackedEntityTypeIdOnUrl={dispatchSetTrackedEntityTypeIdOnUrl}
         />
