@@ -20,6 +20,7 @@ export type TeiWorkingListsTemplate = {
     notPreserved?: boolean,
     deleted?: boolean,
     updating?: boolean,
+    order?: number,
 };
 
 export type TeiWorkingListsTemplates = Array<TeiWorkingListsTemplate>;
