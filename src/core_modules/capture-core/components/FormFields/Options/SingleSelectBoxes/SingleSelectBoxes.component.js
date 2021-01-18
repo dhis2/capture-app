@@ -7,6 +7,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
+import { colors } from '@dhis2/ui';
 import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from 'capture-ui/Icons';
 import { singleOrientations } from './singleSelectBoxes.const';
 import type { Props } from './singleSelectBoxes.types';
@@ -17,7 +18,7 @@ const styles = ({ typography, palette }) => ({
         fill: palette.secondary.main,
     },
     iconDeselected: {
-        fill: palette.grey[700],
+        fill: colors.grey700,
     },
 });
 
