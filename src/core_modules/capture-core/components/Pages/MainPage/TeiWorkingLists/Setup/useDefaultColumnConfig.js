@@ -15,22 +15,26 @@ import type {
 const getDefaultMainConfig = (): Array<MainColumnConfig> => [{
     id: 'regUnit',
     visible: false,
-    type: dataElementTypes.TEXT,
+    type: dataElementTypes.ORGANISATION_UNIT,
     header: i18n.t('Registering unit'),
+    apiName: 'orgUnit',
 }, {
     id: 'regDate',
     visible: false,
     type: dataElementTypes.DATE,
     header: i18n.t('Registration Date'),
+    apiName: 'created',
+    filterDisabled: true,
 }, {
     id: 'inactive',
     visible: false,
     type: dataElementTypes.BOOLEAN,
     header: i18n.t('Inactive'),
+    filterDisabled: true,
 }]
     .map(field => ({
         ...field,
-        isMainProperty: true,
+        mainProperty: true,
     }));
 
 const getMetaDataConfig = (attributes: Array<DataElement>): Array<MetadataColumnConfig> =>
@@ -48,7 +52,7 @@ export const useDefaultColumnConfig = (program: TrackerProgram): TeiWorkingLists
     useMemo(() => {
         const { attributes } = program;
         return [
-            ...getDefaultMainConfig(),
             ...getMetaDataConfig(attributes),
+            ...getDefaultMainConfig(),
         ];
     }, [program]);
