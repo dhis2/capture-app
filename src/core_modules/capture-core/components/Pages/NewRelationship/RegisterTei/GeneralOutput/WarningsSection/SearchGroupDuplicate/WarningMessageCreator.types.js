@@ -1,8 +1,8 @@
 // @flow
 export type OwnProps = {|
     onOpenReviewDialog: () => void,
+    dataEntryId: string,
+    selectedScopeId: string
 |}
-type DispatchersFromRedux = {|
-    onReviewDuplicates: (onOpenReviewDialog: Function) => void,
-|}
-export type Props = {| ...DispatchersFromRedux, ...OwnProps, ...CssClasses |}
+
+export type Props = {| ...OwnProps, ...CssClasses |}

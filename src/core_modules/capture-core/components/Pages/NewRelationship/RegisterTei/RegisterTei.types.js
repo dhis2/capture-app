@@ -1,6 +1,8 @@
 // @flow
 type PropsFromRedux = {|
-    tetName: ?string,
+    dataEntryId: string,
+    trackedEntityName: ?string,
+    newRelationshipProgramId: string,
     ready: boolean,
     error: string,
     possibleDuplicates: ?boolean,

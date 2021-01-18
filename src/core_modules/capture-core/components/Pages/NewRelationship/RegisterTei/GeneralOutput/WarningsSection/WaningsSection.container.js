@@ -31,6 +31,5 @@ const makeStateToProps = () => {
     return mapStateToProps;
 };
 
-// $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
 export default connect(makeStateToProps, () => ({}))(WarningsSection);

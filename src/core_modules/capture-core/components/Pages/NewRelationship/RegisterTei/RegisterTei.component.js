@@ -1,14 +1,16 @@
 // @flow
 import React, { type ComponentType, useContext, useState } from 'react';
+import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../Buttons';
 import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
 import GeneralOutput from './GeneralOutput/GeneralOutput.container';
-import { ReviewDialog } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/ReviewDialog.component';
+import { PossibleDuplicatesDialog } from '../../../PossibleDuplicatesDialog';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import type { Props } from './RegisterTei.types';
+import { withErrorMessageHandler, withLoadingIndicator } from '../../../../HOC';
 
 const getStyles = () => ({
     container: {
@@ -27,8 +29,10 @@ const RegisterTeiPlain = ({
     onSave,
     onReviewDuplicates,
     onGetUnsavedAttributeValues,
+    dataEntryId,
     possibleDuplicates,
-    tetName,
+    trackedEntityName,
+    newRelationshipProgramId,
     classes,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
@@ -60,7 +64,7 @@ const RegisterTeiPlain = ({
                     onClick={handleSaveFromDialog}
                     primary
                 >
-                    {i18n.t('Save as new {{tetName}}', { tetName })}
+                    {i18n.t('Save as new {{trackedEntityName}}', { trackedEntityName })}
                 </Button>
             </div>
         </React.Fragment>
@@ -85,9 +89,13 @@ const RegisterTeiPlain = ({
                 />
             </div>
             <GeneralOutput
+                dataEntryId={dataEntryId}
+                selectedScopeId={newRelationshipProgramId}
                 onLink={onLink}
             />
-            <ReviewDialog
+            <PossibleDuplicatesDialog
+                dataEntryId={dataEntryId}
+                selectedScopeId={newRelationshipProgramId}
                 open={duplicatesOpen}
                 onLink={onLink}
                 onCancel={handleDialogCancel}
@@ -97,4 +105,9 @@ const RegisterTeiPlain = ({
     );
 };
 
-export const RegisterTeiComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(RegisterTeiPlain);
+export const RegisterTeiComponent: ComponentType<$Diff<Props, CssClasses>> =
+  compose(
+      withLoadingIndicator(),
+      withErrorMessageHandler(),
+      withStyles(getStyles),
+  )(RegisterTeiPlain);

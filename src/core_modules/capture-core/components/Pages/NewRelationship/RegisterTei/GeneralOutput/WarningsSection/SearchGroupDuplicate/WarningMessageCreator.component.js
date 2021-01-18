@@ -1,10 +1,10 @@
 // @flow
-import React, { type ComponentType, useContext } from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import LinkButton from '../../../../../../Buttons/LinkButton.component';
-import { ResultsPageSizeContext } from '../../../../../shared-contexts';
 import type { Props } from './WarningMessageCreator.types';
+import { useDuplicates } from '../../../../../../PossibleDuplicatesDialog/useDuplicates';
 
 const getStyles = () => ({
     linkButton: {
@@ -18,13 +18,11 @@ const getStyles = () => ({
     },
 });
 
-
-const WarningMessageCreatorPlain = ({ classes, onOpenReviewDialog, onReviewDuplicates }: Props) => {
-    const { resultsPageSize } = useContext(ResultsPageSizeContext);
-
+const WarningMessageCreatorPlain = ({ classes, onOpenReviewDialog, dataEntryId, selectedScopeId }: Props) => {
+    const { onReviewDuplicates } = useDuplicates(dataEntryId, selectedScopeId);
     const handleDuplicatesClick = () => {
         onOpenReviewDialog();
-        onReviewDuplicates(resultsPageSize);
+        onReviewDuplicates();
     };
 
     return (
@@ -38,5 +36,5 @@ const WarningMessageCreatorPlain = ({ classes, onOpenReviewDialog, onReviewDupli
     );
 };
 
-export const WarningMessageCreatorComponent: ComponentType<$Diff<Props, CssClasses>> =
+export const WarningMessageCreator: ComponentType<$Diff<Props, CssClasses>> =
   withStyles(getStyles)(WarningMessageCreatorPlain);

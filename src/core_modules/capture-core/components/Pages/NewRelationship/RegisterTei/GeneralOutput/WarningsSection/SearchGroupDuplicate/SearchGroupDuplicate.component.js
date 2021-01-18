@@ -2,18 +2,20 @@
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../../../../Buttons';
-import { WarningMessageCreator } from './WarningMessageCreator.container';
-import { ReviewDialog } from './ReviewDialog.component';
+import { WarningMessageCreator } from './WarningMessageCreator.component';
+import { PossibleDuplicatesDialog } from '../../../../../../PossibleDuplicatesDialog';
 
-type Props = {
+type Props = {|
     onLink: Function,
-};
+    selectedScopeId: string,
+    dataEntryId: string
+|};
 
 type State = {
     duplicatesReviewDialogOpen: boolean,
 };
 
-class SearchGroupDuplicate extends React.Component<Props, State> {
+export class SearchGroupDuplicate extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -42,15 +44,19 @@ class SearchGroupDuplicate extends React.Component<Props, State> {
     }
 
     render() {
-        const { onLink } = this.props;
+        const { onLink, selectedScopeId, dataEntryId } = this.props;
         const { duplicatesReviewDialogOpen } = this.state;
 
         return (
             <React.Fragment>
                 <WarningMessageCreator
+                    dataEntryId={dataEntryId}
+                    selectedScopeId={selectedScopeId}
                     onOpenReviewDialog={this.handleOpenReviewDialog}
                 />
-                <ReviewDialog
+                <PossibleDuplicatesDialog
+                    dataEntryId={dataEntryId}
+                    selectedScopeId={selectedScopeId}
                     open={duplicatesReviewDialogOpen}
                     onCancel={this.handleCloseReviewDialog}
                     onLink={onLink}
@@ -60,5 +66,3 @@ class SearchGroupDuplicate extends React.Component<Props, State> {
         );
     }
 }
-
-export default SearchGroupDuplicate;

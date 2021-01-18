@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
-"PO-Revision-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-01-18T09:14:41.445Z\n"
+"PO-Revision-Date: 2021-01-18T09:14:41.445Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -639,19 +639,13 @@ msgstr ""
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr ""
-
-msgid "No results found"
-msgstr ""
-
-msgid "An error occured loading possible duplicates"
-msgstr ""
-
 msgid "Hide"
 msgstr ""
 
-msgid "Save as new {{tetName}}"
+msgid "Possible duplicates found"
+msgstr ""
+
+msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
@@ -694,6 +688,9 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
+msgstr ""
+
+msgid "No results found"
 msgstr ""
 
 msgid ""
@@ -758,6 +755,9 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
+msgstr ""
+
+msgid "An error occurred loading possible duplicates"
 msgstr ""
 
 msgid "You dont have access to delete this relationship"
