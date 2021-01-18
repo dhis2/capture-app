@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../metaData';
 import { programTypes } from './programTypes.const';
 
-export const useProgram = (programId: string) => useMemo(() => {
+export const useProgramInfo = (programId: string) => useMemo(() => {
     const program = getProgramFromProgramIdThrowIfNotFound(programId);
     return {
         program,

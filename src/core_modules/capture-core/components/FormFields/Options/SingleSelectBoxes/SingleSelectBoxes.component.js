@@ -7,29 +7,20 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
-
-import RadioOffIcon from '@material-ui/icons/PanoramaFishEye';
-import RadioOnIcon from '@material-ui/icons/CheckCircle';
-
+import { colors } from '@dhis2/ui';
+import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from 'capture-ui/Icons';
 import { singleOrientations } from './singleSelectBoxes.const';
+import type { Props } from './singleSelectBoxes.types';
 
-const styles = theme => ({
-    label: theme.typography.formFieldTitle,
-});
-
-type Props = {
-    onBlur: (value: any) => void,
-    options: Array<{text: string, value: any}>,
-    label?: string,
-    nullable?: boolean,
-    value?: any,
-    orientation?: ?$Values<typeof singleOrientations>,
-    required?: ?boolean,
-    classes: {
-        label: string,
+const styles = ({ typography, palette }) => ({
+    label: typography.formFieldTitle,
+    iconSelected: {
+        fill: palette.secondary.main,
     },
-    style?: ?Object,
-};
+    iconDeselected: {
+        fill: colors.grey700,
+    },
+});
 
 class SingleSelectBoxesPlain extends Component<Props> {
     handleOptionChange: (e: Object, isChecked: boolean, value: any) => void;
@@ -51,7 +42,7 @@ class SingleSelectBoxesPlain extends Component<Props> {
     }
 
     getBoxes(passOnProps: ?Object) {
-        const { options } = this.props;
+        const { options, classes } = this.props;
         return options.map(({ text, value }, index: number) => (
             <FormControlLabel
                 control={
@@ -60,12 +51,9 @@ class SingleSelectBoxesPlain extends Component<Props> {
                             (e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, value); }
                         }
                         checked={this.isChecked(value)}
-                        icon={
-                            <RadioOffIcon />
-                        }
-                        checkedIcon={
-                            <RadioOnIcon />
-                        }
+                        icon={<SingleSelectionUncheckedIcon className={classes.iconDeselected} />}
+                        checkedIcon={<SingleSelectionCheckedIcon className={classes.iconSelected} />}
+                        disableRipple
                         {...passOnProps}
                     />
                 }

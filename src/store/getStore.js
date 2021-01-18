@@ -16,10 +16,9 @@ import getPersistOptions from './persist/persistOptionsGetter';
 import reducerDescriptions from '../reducers/descriptions/trackerCapture.reducerDescriptions';
 import epics from '../epics/trackerCapture.epics';
 
-
 export function getStore(
     history: BrowserHistory | HashHistory,
-    onApiMutate: Function,
+    apiUtils: ApiUtils,
     onRehydrated: () => void) {
     const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptions);
 
@@ -36,14 +35,14 @@ export function getStore(
     } = createOffline({
         ...offlineConfig,
         discard: shouldDiscard,
-        effect: getEffectReconciler(onApiMutate),
+        effect: getEffectReconciler(apiUtils.mutate),
         persistCallback: onRehydrated,
         queue: queueConfig,
         persistOptions: getPersistOptions(),
     });
 
     const epicMiddleware = createEpicMiddleware({
-        dependencies: {},
+        dependencies: apiUtils,
     });
 
     const middleware = [epicMiddleware, routerMiddleware(history), offlineMiddleware];
