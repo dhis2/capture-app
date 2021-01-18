@@ -16,9 +16,11 @@ export type TeiWorkingListsTemplate = {
         write: boolean,
         manage: boolean,
     },
+    criteria?: {| [string]: any |},
     notPreserved?: boolean,
     deleted?: boolean,
     updating?: boolean,
+    order?: number,
 };
 
 export type TeiWorkingListsTemplates = Array<TeiWorkingListsTemplate>;
@@ -56,6 +58,14 @@ export type TeiColumnMetaForDataFetching = {
 
 export type TeiColumnsMetaForDataFetching = Map<string, TeiColumnMetaForDataFetching>;
 
+export type TeiFilterOnlyMetaForDataFetching = {
+    id: string,
+    type: $Values<dataElementTypes>,
+    transformRecordsFilter: (rawFilter: any) => Object,
+};
+
+export type TeiFiltersOnlyMetaForDataFetching = Map<string, TeiFilterOnlyMetaForDataFetching>;
+
 export type LoadTeiView = (
     template: TeiWorkingListsTemplate,
     context: {|
@@ -65,5 +75,7 @@ export type LoadTeiView = (
     |},
     meta: {|
         columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,
+        filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
     |},
 ) => void;
+

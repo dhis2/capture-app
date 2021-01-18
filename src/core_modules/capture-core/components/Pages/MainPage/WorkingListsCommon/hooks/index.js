@@ -3,3 +3,4 @@ export { useWorkingListsCommonStateManagement } from './useWorkingListsCommonSta
 export { useWorkingListsCommonStateManagementOffline } from './useWorkingListsCommonStateManagementOffline';
 export { useColumns } from './useColumns';
 export { useDataSource } from './useDataSource';
+export { useViewHasTemplateChanges } from './useViewHasTemplateChanges';
