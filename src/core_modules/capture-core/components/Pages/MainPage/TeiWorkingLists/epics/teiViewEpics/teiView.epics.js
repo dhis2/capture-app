@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { takeUntil, filter, concatMap } from 'rxjs/operators';
 import { workingListsCommonActionTypes } from '../../../WorkingListsCommon';
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';
-import { initTeiWorkingListsView, updateTeiWorkingListsRecords } from './lib';
+import { initTeiWorkingListsView, updateTeiWorkingListsRecords } from './helpers';
 
 export const initTeiViewEpic = (
     action$: InputObservable,
