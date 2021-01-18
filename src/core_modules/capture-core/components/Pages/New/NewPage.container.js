@@ -20,7 +20,7 @@ import { programCollection } from '../../../metaDataMemoryStores';
 
 const useUserWriteAccess = (scopeId) => {
     const scope = getScopeFromScopeId(scopeId);
-    if (!scope) {
+    if (scopeId && !scope) {
         return false;
     }
     try {
