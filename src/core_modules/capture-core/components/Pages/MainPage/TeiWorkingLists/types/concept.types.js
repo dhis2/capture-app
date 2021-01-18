@@ -16,9 +16,11 @@ export type TeiWorkingListsTemplate = {
         write: boolean,
         manage: boolean,
     },
+    criteria?: {| [string]: any |},
     notPreserved?: boolean,
     deleted?: boolean,
     updating?: boolean,
+    order?: number,
 };
 
 export type TeiWorkingListsTemplates = Array<TeiWorkingListsTemplate>;
@@ -76,3 +78,4 @@ export type LoadTeiView = (
         filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
     |},
 ) => void;
+
