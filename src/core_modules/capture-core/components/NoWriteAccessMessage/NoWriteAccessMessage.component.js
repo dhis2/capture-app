@@ -26,9 +26,9 @@ export const NoWriteAccessMessagePlain: ComponentType<Props> = ({ title, message
             {title}
         </div>
         <div className={classes.message}>
-            <InefficientSelectionsMessage>
+            <IncompleteSelectionsMessage>
                 {message}
-            </InefficientSelectionsMessage>
+            </IncompleteSelectionsMessage>
         </div>
     </>
 );
