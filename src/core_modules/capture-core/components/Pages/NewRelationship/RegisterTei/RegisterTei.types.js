@@ -5,7 +5,7 @@ type PropsFromRedux = {|
     newRelationshipProgramId: string,
     ready: boolean,
     error: string,
-    possibleDuplicates: ?boolean,
+    possibleDuplicatesExist: ?boolean,
 |};
 type DispatchersFromRedux = {|
     onReviewDuplicates: (pageSize: number) => void,

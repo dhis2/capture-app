@@ -38,7 +38,7 @@ export const RegisterTei = ({ onLink, onSave, onGetUnsavedAttributeValues }: Own
             newRelationshipProgramId={newRelationshipProgramId}
             ready={ready}
             error={error}
-            possibleDuplicates={usePossibleDuplicatesExist(dataEntryId)}
+            possibleDuplicatesExist={usePossibleDuplicatesExist(dataEntryId)}
         />);
 };
 

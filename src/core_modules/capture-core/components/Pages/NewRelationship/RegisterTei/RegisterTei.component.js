@@ -30,7 +30,7 @@ const RegisterTeiPlain = ({
     onReviewDuplicates,
     onGetUnsavedAttributeValues,
     dataEntryId,
-    possibleDuplicates,
+    possibleDuplicatesExist,
     trackedEntityName,
     newRelationshipProgramId,
     classes,
@@ -41,7 +41,7 @@ const RegisterTeiPlain = ({
     const [savedArguments, setArguments] = useState([]);
 
     function handleSaveAttempt(...args) {
-        if (possibleDuplicates) {
+        if (possibleDuplicatesExist) {
             setArguments(args);
             onReviewDuplicates(resultsPageSize);
             toggleDuplicatesModal(true);
