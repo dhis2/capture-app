@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/dhis2/capture-app/compare/v1.6.2...v1.6.3) (2021-01-18)
+
+
+### Bug Fixes
+
+* TECH-522 rework of redux offline retry handling ([491195a](https://github.com/dhis2/capture-app/commit/491195a0d90c882becd4cf17acef7268cc900238))
+
 ## [1.6.2](https://github.com/dhis2/capture-app/compare/v1.6.1...v1.6.2) (2021-01-18)
 
 
