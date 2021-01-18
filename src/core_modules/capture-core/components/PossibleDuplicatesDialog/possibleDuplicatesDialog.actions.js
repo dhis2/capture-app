@@ -3,10 +3,10 @@ import { actionCreator } from '../../actions/actions.utils';
 import type { ChangePageActionCreator, ReviewDuplicatesActionCreator } from './PossibleDuplicatesDialog.types';
 
 export const actionTypes = {
-    DUPLICATES_REVIEW: 'RelationshipTeiRegistrationDuplicatesReview',
-    DUPLICATES_REVIEW_RETRIEVAL_SUCCESS: 'RelationshipTeiRegistrationDuplicatesReviewRetrievalSuccess',
-    DUPLICATES_REVIEW_RETRIEVAL_FAILED: 'RelationshipTeiRegistrationDuplicatesReviewRetrievalFailed',
-    DUPLICATES_REVIEW_CHANGE_PAGE: 'RelationshipTeiRegistrationDuplicatesChangePage',
+    DUPLICATES_REVIEW: 'PossibleDuplicatesReview',
+    DUPLICATES_REVIEW_RETRIEVAL_SUCCESS: 'PossibleDuplicatesReviewRetrievalSuccess',
+    DUPLICATES_REVIEW_RETRIEVAL_FAILED: 'PossibleDuplicatesReviewRetrievalFailed',
+    DUPLICATES_REVIEW_CHANGE_PAGE: 'PossibleDuplicatesChangePage',
 };
 
 

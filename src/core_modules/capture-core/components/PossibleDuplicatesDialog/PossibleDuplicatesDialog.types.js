@@ -1,17 +1,17 @@
 // @flow
-export type ReviewDuplicatesActionCreator = {
+export type ReviewDuplicatesActionCreator = {|
     pageSize: number,
     orgUnitId: string,
     selectedScopeId: string,
     scopeType: string,
     dataEntryId: string
-}
+|}
 
-export type ChangePageActionCreator = {
+export type ChangePageActionCreator = {|
     pageSize: number,
     page: number,
     orgUnitId: string,
     selectedScopeId: string,
     scopeType: string,
     dataEntryId: string
-}
+|}
