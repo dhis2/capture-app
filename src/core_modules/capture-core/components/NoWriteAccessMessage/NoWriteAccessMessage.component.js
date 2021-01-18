@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { InefficientSelectionsMessage } from '../InefficientSelectionsMessage';
+import { IncompleteSelectionsMessage } from '../IncompleteSelectionsMessage';
 
 const styles = () => ({
     header: {
@@ -26,7 +26,9 @@ export const NoWriteAccessMessagePlain: ComponentType<Props> = ({ title, message
             {title}
         </div>
         <div className={classes.message}>
-            <InefficientSelectionsMessage message={message} />
+            <InefficientSelectionsMessage>
+                {message}
+            </InefficientSelectionsMessage>
         </div>
     </>
 );

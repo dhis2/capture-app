@@ -14,6 +14,8 @@ import { urlArguments } from '../../../utils/url';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
+import type { ProgramCategories } from './NewPage.types';
+import { programCollection } from '../../../metaDataMemoryStores';
 
 
 const useUserWriteAccess = (scopeId) => {
