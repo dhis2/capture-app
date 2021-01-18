@@ -42,9 +42,3 @@ export {
 // UI-Elements
 export { default as DividerHorizontal } from './Divider/DividerHorizontal.component';
 export { default as Button } from './Buttons/Button.component';
-
-// Icons
-export { default as MultiSelectionCheckedIcon } from './Icons/MultiSelectionCheckedIcon.component';
-export { default as MultiSelectionUncheckedIcon } from './Icons/MultiSelectionUncheckedIcon.component';
-export { default as SingleSelectionCheckedIcon } from './Icons/SingleSelectionCheckedIcon.component';
-export { default as SingleSelectionUncheckedIcon } from './Icons/SingleSelectionUncheckedIcon.component';

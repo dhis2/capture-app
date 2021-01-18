@@ -2,12 +2,12 @@
 import { typeof dataElementTypes } from '../../../../../metaData';
 import type { CustomColumnOrder } from '../../WorkingListsCommon';
 
-export type ColumnMetaForDataFetching = {|
+export type ColumnMetaForDataFetching = {
     id: string,
     type: $Values<dataElementTypes>,
     apiName?: string,
     isMainProperty?: boolean,
-|};
+};
 
 export type ColumnsMetaForDataFetching = Map<string, ColumnMetaForDataFetching>;
 
