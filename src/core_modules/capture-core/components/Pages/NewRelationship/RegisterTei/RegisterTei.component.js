@@ -6,7 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../Buttons';
 import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
-import GeneralOutput from './GeneralOutput/GeneralOutput.container';
+import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { PossibleDuplicatesDialog } from '../../../PossibleDuplicatesDialog';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import type { Props } from './RegisterTei.types';
@@ -88,7 +88,7 @@ const RegisterTeiPlain = ({
                     onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
                 />
             </div>
-            <GeneralOutput
+            <DataEntryWidgetOutput
                 dataEntryId={dataEntryId}
                 selectedScopeId={newRelationshipProgramId}
                 onLink={onLink}

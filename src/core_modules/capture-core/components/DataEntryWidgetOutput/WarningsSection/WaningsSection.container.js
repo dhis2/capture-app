@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
-import WarningsSection from '../../../../ViewEvent/RightColumn/WarningsSection/WarningsSection.component';
+import WarningsSection from '../../Pages/ViewEvent/RightColumn/WarningsSection/WarningsSection.component';
 import { makeGetSearchGroupWarning, makeGetWarningMessages } from './warningsSection.selectors';
-import { makeGetVisibleMessages } from '../../../../ViewEvent/RightColumn/ErrorsSection/messageSection.selectors';
+import { makeGetVisibleMessages } from '../../Pages/ViewEvent/RightColumn/ErrorsSection/messageSection.selectors';
 
 const makeStateToProps = () => {
     const getSearchGroupWarning = makeGetSearchGroupWarning();

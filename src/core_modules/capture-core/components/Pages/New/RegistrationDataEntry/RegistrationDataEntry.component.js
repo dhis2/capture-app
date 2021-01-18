@@ -8,8 +8,7 @@ import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
-import GeneralOutput from '../../NewRelationship/RegisterTei/GeneralOutput/GeneralOutput.container';
-
+import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 
 const getStyles = ({ typography }) => ({
     paper: {
@@ -90,7 +89,10 @@ const RegistrationDataEntryPlain = (
                                 dataEntryIsReady &&
                                 <Grid item>
                                     <div className={classes.marginTop}>
-                                        <GeneralOutput id={dataEntryId} />
+                                        <DataEntryWidgetOutput
+                                            selectedScopeId={selectedScopeId}
+                                            dataEntryId={dataEntryId}
+                                        />
                                     </div>
                                 </Grid>
                             }
@@ -126,7 +128,10 @@ const RegistrationDataEntryPlain = (
                                 dataEntryIsReady &&
                                 <Grid item>
                                     <div className={classes.marginTop}>
-                                        <GeneralOutput id={dataEntryId} />
+                                        <DataEntryWidgetOutput
+                                            selectedScopeId={selectedScopeId}
+                                            dataEntryId={dataEntryId}
+                                        />
                                     </div>
                                 </Grid>
                             }

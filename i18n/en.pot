@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-18T09:14:41.445Z\n"
-"PO-Revision-Date: 2021-01-18T09:14:41.445Z\n"
+"POT-Creation-Date: 2021-01-18T10:52:49.539Z\n"
+"PO-Revision-Date: 2021-01-18T10:52:49.540Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -300,6 +300,12 @@ msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Possible duplicates found"
 msgstr ""
 
 msgid "Sort"
@@ -637,12 +643,6 @@ msgid "Review Duplicates"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr ""
-
-msgid "Hide"
-msgstr ""
-
-msgid "Possible duplicates found"
 msgstr ""
 
 msgid "Save as new {{trackedEntityName}}"
