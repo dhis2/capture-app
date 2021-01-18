@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/dhis2/capture-app/compare/v1.6.3...v1.7.0) (2021-01-18)
+
+
+### Features
+
+* DHIS2-9276 Tracked entity instance working lists ([9667109](https://github.com/dhis2/capture-app/commit/9667109c61a41473dc2608e873a2560df1ffade0))
+
 ## [1.6.3](https://github.com/dhis2/capture-app/compare/v1.6.2...v1.6.3) (2021-01-18)
 
 
