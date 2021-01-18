@@ -46,15 +46,14 @@ const useTemplates = (
     { storeId, workingListsType }: { storeId: string, workingListsType: string }) => {
     const templateState = useSelector(({ workingListsTemplates }) => {
         const {
-            selectedTemplateId,
+            selectedTemplateId: currentTemplateId,
             templates,
             loading: templatesLoading,
             loadError: loadTemplatesError,
         } = workingListsTemplates[storeId] || {};
 
         return {
-            currentTemplate: selectedTemplateId && templates &&
-                templates.find(template => template.id === selectedTemplateId),
+            currentTemplateId,
             templates,
             templatesLoading: !!templatesLoading,
             loadTemplatesError,
@@ -179,11 +178,10 @@ const useView = (
                     workingListsType,
                 },
             )),
-        onUpdateList: (queryArgs: Object, lastTransaction: number, columnsMetaForDataFetching: Object) =>
+        onUpdateList: (queryArgs: Object, meta: Object) =>
             dispatch(updateList(
                 queryArgs, {
-                    columnsMetaForDataFetching,
-                    lastTransaction,
+                    ...meta,
                     categoryCombinationId,
                     storeId,
                     workingListsType,

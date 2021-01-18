@@ -1,4 +1,6 @@
 // @flow
+import type { QuerySingleResource } from '../utils/api/api.types';
+
 declare type D2 = {
     models: Object,
     system: {
@@ -195,4 +197,10 @@ declare class process {
 
 declare type CssClasses = {|
     +classes: Object,
+|};
+
+declare type ApiUtils = {|
+    querySingleResource: QuerySingleResource,
+    mutate: DataEngineMutate,
+    absoluteApiPath: string,
 |};
