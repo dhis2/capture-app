@@ -438,7 +438,7 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-msgid "Update"
+msgid "Apply"
 msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
@@ -574,6 +574,27 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Registered events"
+msgstr ""
+
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Cancelled"
+msgstr ""
+
+msgid "Assigned to"
+msgstr ""
+
+msgid "Registering unit"
+msgstr ""
+
+msgid "Registration Date"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Working list could not be updated"
 msgstr ""
 
 msgid "Update view"

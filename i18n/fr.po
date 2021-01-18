@@ -461,8 +461,8 @@ msgstr "Colonnes à afficher dans ce tableau"
 msgid "Column"
 msgstr "Colonne"
 
-msgid "Update"
-msgstr "Mettre à jour"
+msgid "Apply"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{de}} à {{à}}"
@@ -600,6 +600,27 @@ msgstr "une erreur est survenue lors du chargement des listes de tâches"
 
 msgid "Registered events"
 msgstr "Événements enregistrés"
+
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Cancelled"
+msgstr ""
+
+msgid "Assigned to"
+msgstr ""
+
+msgid "Registering unit"
+msgstr ""
+
+msgid "Registration Date"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Working list could not be updated"
+msgstr ""
 
 msgid "Update view"
 msgstr "Mettre à jour la vue"
