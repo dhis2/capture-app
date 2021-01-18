@@ -152,7 +152,6 @@ export const workingListsTemplatesDesc = createReducerDescription({
             criteria,
             isDefault: undefined,
             notPreserved: true,
-            skipInitDuringAddProcedure: true,
             access: {
                 update: true,
                 delete: true,
@@ -184,17 +183,14 @@ export const workingListsTemplatesDesc = createReducerDescription({
         const currentlySelectedTemplateId = state[storeId].selectedTemplateId;
 
         let selectedTemplateId = currentlySelectedTemplateId;
-        let skipInitDuringAddProcedure;
         if (currentlySelectedTemplateId === clientId) {
             selectedTemplateId = templateId;
-            skipInitDuringAddProcedure = true;
         }
 
         const updatedTemplate = {
             ...targetTemplate,
             id: templateId,
             notPreserved: undefined,
-            skipInitDuringAddProcedure,
         };
 
         return {
