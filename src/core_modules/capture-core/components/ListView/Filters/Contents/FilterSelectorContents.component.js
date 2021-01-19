@@ -77,7 +77,7 @@ const FilterSelectorContentsPlain = ({
 }: Props) => {
     const contents = useContents({ classes, filterValue, type, options, multiValueFilter, ...passOnProps });
     return (
-        <div className={classes.container}>
+        <div className={classes.container} data-test="list-view-filter-contents">
             {contents}
         </div>
     );
