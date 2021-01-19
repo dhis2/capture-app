@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/dhis2/capture-app/compare/v1.7.0...v1.7.1) (2021-01-19)
+
+
+### Bug Fixes
+
+* delete event ([b40329c](https://github.com/dhis2/capture-app/commit/b40329cc5e772908ae9dd86e49f054f67347890d))
+
 # [1.7.0](https://github.com/dhis2/capture-app/compare/v1.6.3...v1.7.0) (2021-01-18)
 
 
