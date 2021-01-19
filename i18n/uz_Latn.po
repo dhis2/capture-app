@@ -1,20 +1,19 @@
 # 
 # Translators:
-# phil_dhis2, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
+# Yury Rogachev <yury@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
-"Language-Team: Swedish (https://www.transifex.com/hisp-uio/teams/100509/sv/)\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
+"Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sv\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: uz@Latn\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -38,7 +37,7 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr "Organisationsenhet"
+msgstr ""
 
 msgid "Date of enrollment"
 msgstr ""
@@ -95,7 +94,7 @@ msgid "Please provide a valid url"
 msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr "Ange en giltig epost adress"
+msgstr ""
 
 msgid "Please provide a valid age"
 msgstr ""
@@ -122,7 +121,7 @@ msgid "Area"
 msgstr ""
 
 msgid "Coordinate"
-msgstr "Coordinate"
+msgstr ""
 
 msgid "Enrollment"
 msgstr ""
@@ -149,13 +148,13 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 msgid "Comments"
 msgstr ""
 
 msgid "Relationships"
-msgstr "Relationer"
+msgstr ""
 
 msgid "Assignee"
 msgstr ""
@@ -177,10 +176,10 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr "Aktiva"
+msgstr ""
 
 msgid "Completed"
-msgstr "Avklarad"
+msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -219,7 +218,7 @@ msgid "Go back to event without saving relationship"
 msgstr ""
 
 msgid "Unsaved changes"
-msgstr "Ej sparade ändringar"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -233,16 +232,16 @@ msgid "No, stay here"
 msgstr ""
 
 msgid "New event"
-msgstr "Ny händelse"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
-msgstr "Spara"
+msgstr ""
 
 msgid "Cancel"
-msgstr "Annullera"
+msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -269,10 +268,10 @@ msgid "Errors"
 msgstr ""
 
 msgid "Feedback"
-msgstr "Återkoppling"
+msgstr ""
 
 msgid "Indicators"
-msgstr "indikatorer"
+msgstr ""
 
 msgid "Warnings"
 msgstr ""
@@ -281,7 +280,7 @@ msgid "search group result could not be retrieved"
 msgstr ""
 
 msgid "Complete"
-msgstr "Färdigt"
+msgstr ""
 
 msgid "Warnings found"
 msgstr ""
@@ -320,7 +319,7 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr "Stänga"
+msgstr ""
 
 msgid "Please select the user"
 msgstr ""
@@ -332,7 +331,7 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr "Ingen"
+msgstr ""
 
 msgid "Select user"
 msgstr ""
@@ -347,49 +346,49 @@ msgid "To"
 msgstr ""
 
 msgid "This week"
-msgstr "Denna vecka"
+msgstr ""
 
 msgid "This month"
-msgstr "Den här månaden"
+msgstr ""
 
 msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr "Förra veckan"
+msgstr ""
 
 msgid "Last month"
-msgstr "Förra månaden"
+msgstr ""
 
 msgid "Last 3 months"
-msgstr "Senaste 3 månaderna"
+msgstr ""
 
 msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr "max"
+msgstr ""
 
 msgid "Min"
-msgstr "min"
+msgstr ""
 
 msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "Ja"
+msgstr ""
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "År"
+msgstr ""
 
 msgid "Months"
-msgstr "Månader"
+msgstr ""
 
 msgid "Days"
-msgstr "Dagar"
+msgstr ""
 
 msgid "Uploading file"
 msgstr ""
@@ -398,13 +397,13 @@ msgid "selected"
 msgstr ""
 
 msgid "Delete"
-msgstr "Radera"
+msgstr ""
 
 msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "Nej"
+msgstr ""
 
 msgid "Uploading image"
 msgstr ""
@@ -413,10 +412,10 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr "Sök"
+msgstr ""
 
 msgid "Clear"
-msgstr "Klar"
+msgstr ""
 
 msgid "No results"
 msgstr ""
@@ -440,7 +439,7 @@ msgid "Column"
 msgstr ""
 
 msgid "Apply"
-msgstr "Verkställ"
+msgstr "Murojaat qilish"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -473,10 +472,10 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "New"
-msgstr "Ny"
+msgstr ""
 
 msgid "Find"
-msgstr "Hitta"
+msgstr ""
 
 msgid "Clear selections"
 msgstr ""
@@ -491,13 +490,13 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr "Acceptera"
+msgstr ""
 
 msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Select"
-msgstr "Markera"
+msgstr ""
 
 msgid "Selected Program"
 msgstr ""
@@ -509,19 +508,19 @@ msgid "Show all"
 msgstr ""
 
 msgid "Program"
-msgstr "Program"
+msgstr ""
 
 msgid "Select program"
-msgstr "Välj program"
+msgstr ""
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Online"
-msgstr "Uppkopplad"
+msgstr ""
 
 msgid "Offline"
-msgstr "Off-line"
+msgstr ""
 
 msgid "Syncing"
 msgstr ""
@@ -551,7 +550,7 @@ msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "Delete event"
-msgstr "Ta bort händelse"
+msgstr ""
 
 msgid "Download as JSON"
 msgstr ""
@@ -578,22 +577,22 @@ msgid "Registered events"
 msgstr ""
 
 msgid "Enrollment status"
-msgstr ""
+msgstr "Roʼyxatga olish holati"
 
 msgid "Cancelled"
-msgstr "Avbruten"
+msgstr "Bekor qilindi"
 
 msgid "Assigned to"
 msgstr ""
 
 msgid "Registering unit"
-msgstr ""
+msgstr "Roʼyxatga olish muassasasi"
 
 msgid "Registration Date"
 msgstr ""
 
 msgid "Inactive"
-msgstr ""
+msgstr "Faol emas"
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -617,7 +616,7 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr "Bekräfta"
+msgstr ""
 
 msgid "Save As view"
 msgstr ""
@@ -672,7 +671,7 @@ msgid "Possible duplicates found"
 msgstr ""
 
 msgid "No results found"
-msgstr "Inga resultat hittades"
+msgstr ""
 
 msgid "An error occured loading possible duplicates"
 msgstr ""
@@ -684,7 +683,7 @@ msgid "Save as new {{tetName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr "Organisationsenhet"
+msgstr ""
 
 msgid "Registration"
 msgstr ""
@@ -724,7 +723,7 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr "Tillbaka"
+msgstr ""
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -834,7 +833,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr "Profil"
+msgstr ""
 
 msgid "Error saving event"
 msgstr ""
@@ -867,7 +866,7 @@ msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr "Datum"
+msgstr ""
 
 msgid "Time"
 msgstr ""
