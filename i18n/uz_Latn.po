@@ -1,20 +1,19 @@
 # 
 # Translators:
-# phil_dhis2, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
+# Yury Rogachev <yury@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
-"Language-Team: Urdu (https://www.transifex.com/hisp-uio/teams/100509/ur/)\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
+"Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ur\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: uz@Latn\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -23,7 +22,7 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr "آج"
+msgstr ""
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -38,13 +37,13 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr "تنظیم یونٹ"
+msgstr ""
 
 msgid "Date of enrollment"
-msgstr "اندراج کی تاریخ"
+msgstr ""
 
 msgid "Last updated"
-msgstr "آخری اپ ڈیٹ"
+msgstr ""
 
 msgid "Enrolled"
 msgstr ""
@@ -119,13 +118,13 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr "رقبہ"
+msgstr ""
 
 msgid "Coordinate"
-msgstr "کورڈینیٹ"
+msgstr ""
 
 msgid "Enrollment"
-msgstr "اندراج"
+msgstr ""
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -134,7 +133,7 @@ msgid "Saving a {{trackedEntityName}} in"
 msgstr ""
 
 msgid "in"
-msgstr "اندر"
+msgstr ""
 
 msgid "Metadata error. see log for details"
 msgstr ""
@@ -149,13 +148,13 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr "حالت"
+msgstr ""
 
 msgid "Comments"
-msgstr "تبصرے"
+msgstr ""
 
 msgid "Relationships"
-msgstr "تعلقات"
+msgstr ""
 
 msgid "Assignee"
 msgstr ""
@@ -177,10 +176,10 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr "فعال"
+msgstr ""
 
 msgid "Completed"
-msgstr "مکمل"
+msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -233,16 +232,16 @@ msgid "No, stay here"
 msgstr ""
 
 msgid "New event"
-msgstr "نئی تقریب"
+msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
-msgstr "محفوظ"
+msgstr ""
 
 msgid "Cancel"
-msgstr "منسوخ"
+msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -266,13 +265,13 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr "غلطیاں"
+msgstr ""
 
 msgid "Feedback"
-msgstr "رائے"
+msgstr ""
 
 msgid "Indicators"
-msgstr "اشارے"
+msgstr ""
 
 msgid "Warnings"
 msgstr ""
@@ -281,7 +280,7 @@ msgid "search group result could not be retrieved"
 msgstr ""
 
 msgid "Complete"
-msgstr "مکمل"
+msgstr ""
 
 msgid "Warnings found"
 msgstr ""
@@ -302,7 +301,7 @@ msgid "Validation errors"
 msgstr ""
 
 msgid "Validation warnings"
-msgstr "توثیق انتباہ"
+msgstr ""
 
 msgid "Some operations are still runnning. Please wait.."
 msgstr ""
@@ -311,7 +310,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr "ترتیب دیں"
+msgstr ""
 
 msgid "No events to display"
 msgstr ""
@@ -320,7 +319,7 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
-msgstr "بند"
+msgstr ""
 
 msgid "Please select the user"
 msgstr ""
@@ -332,7 +331,7 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr "کوئی نہں"
+msgstr ""
 
 msgid "Select user"
 msgstr ""
@@ -341,70 +340,70 @@ msgid "to"
 msgstr ""
 
 msgid "From"
-msgstr "سے"
+msgstr ""
 
 msgid "To"
-msgstr "کرنے کے لئے"
+msgstr ""
 
 msgid "This week"
-msgstr "اس ہفتے"
+msgstr ""
 
 msgid "This month"
-msgstr "اس مہینے"
+msgstr ""
 
 msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr "آخری ہفتہ"
+msgstr ""
 
 msgid "Last month"
-msgstr "آخری ماہ"
+msgstr ""
 
 msgid "Last 3 months"
-msgstr "آخری ۳ ماہ"
+msgstr ""
 
 msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr "زیادہ سے زیادہ"
+msgstr ""
 
 msgid "Min"
-msgstr "کم سے کم"
+msgstr ""
 
 msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "ہاں"
+msgstr ""
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "سال"
+msgstr ""
 
 msgid "Months"
-msgstr "مہینے"
+msgstr ""
 
 msgid "Days"
-msgstr "دن"
+msgstr ""
 
 msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr "منتخب شدہ"
+msgstr ""
 
 msgid "Delete"
-msgstr "حذف"
+msgstr ""
 
 msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "نہیں"
+msgstr ""
 
 msgid "Uploading image"
 msgstr ""
@@ -413,10 +412,10 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr "تلاش کریں"
+msgstr ""
 
 msgid "Clear"
-msgstr "کلیئر"
+msgstr ""
 
 msgid "No results"
 msgstr ""
@@ -437,10 +436,10 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr "کالم"
+msgstr ""
 
 msgid "Apply"
-msgstr "درخواست دیں"
+msgstr "Murojaat qilish"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -473,10 +472,10 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "New"
-msgstr "نیا"
+msgstr ""
 
 msgid "Find"
-msgstr "تلاش"
+msgstr ""
 
 msgid "Clear selections"
 msgstr ""
@@ -497,7 +496,7 @@ msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Select"
-msgstr "منتخب کریں"
+msgstr ""
 
 msgid "Selected Program"
 msgstr ""
@@ -506,22 +505,22 @@ msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Show all"
-msgstr "سارے دکھاو"
+msgstr ""
 
 msgid "Program"
-msgstr "پروگرام"
+msgstr ""
 
 msgid "Select program"
-msgstr "پروگرام منتخب کریں"
+msgstr ""
 
 msgid "No programs available."
 msgstr ""
 
 msgid "Online"
-msgstr "آن لائن"
+msgstr ""
 
 msgid "Offline"
-msgstr "آف لائن"
+msgstr ""
 
 msgid "Syncing"
 msgstr ""
@@ -554,13 +553,13 @@ msgid "Delete event"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr "JSON کے طور پر ڈاؤن لوڈ کریں"
+msgstr ""
 
 msgid "Download as XML"
-msgstr "XML کے طور پر ڈاؤن لوڈ کریں"
+msgstr ""
 
 msgid "Download as CSV"
-msgstr "CSV کے طور پر ڈاؤن لوڈ کریں"
+msgstr ""
 
 msgid "Download with current filters"
 msgstr ""
@@ -575,25 +574,25 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Registered events"
-msgstr "رجسٹرڈ واقعات"
+msgstr ""
 
 msgid "Enrollment status"
-msgstr "اندراج کی حیثیت"
+msgstr "Roʼyxatga olish holati"
 
 msgid "Cancelled"
-msgstr "منسوخ"
+msgstr "Bekor qilindi"
 
 msgid "Assigned to"
-msgstr "مقرر کیا، مقرر کرنا"
+msgstr ""
 
 msgid "Registering unit"
-msgstr "رجسٹرنگ یونٹ"
+msgstr "Roʼyxatga olish muassasasi"
 
 msgid "Registration Date"
 msgstr ""
 
 msgid "Inactive"
-msgstr "غیر فعال"
+msgstr "Faol emas"
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -617,13 +616,13 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr "تصدیق کریں"
+msgstr ""
 
 msgid "Save As view"
 msgstr ""
 
 msgid "View name"
-msgstr "نام دیکھیں"
+msgstr ""
 
 msgid "Show Less"
 msgstr ""
@@ -672,13 +671,13 @@ msgid "Possible duplicates found"
 msgstr ""
 
 msgid "No results found"
-msgstr "کوئی نتیجہ نہیں ملا"
+msgstr ""
 
 msgid "An error occured loading possible duplicates"
 msgstr ""
 
 msgid "Hide"
-msgstr "چھپائیں"
+msgstr ""
 
 msgid "Save as new {{tetName}}"
 msgstr ""
@@ -687,10 +686,10 @@ msgid "Organisation Unit"
 msgstr ""
 
 msgid "Registration"
-msgstr "رجسٹریشن"
+msgstr ""
 
 msgid "Search results"
-msgstr "تلاش کے نتائج"
+msgstr ""
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
@@ -708,7 +707,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr "رجسٹر کریں"
+msgstr ""
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -724,7 +723,7 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr "واپس"
+msgstr ""
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -782,7 +781,7 @@ msgid "No one is assigned to this event"
 msgstr ""
 
 msgid "Assign"
-msgstr "تفویض"
+msgstr ""
 
 msgid "Event assigned to {{name}}"
 msgstr ""
@@ -797,13 +796,13 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr "تعلقات شامل کریں"
+msgstr ""
 
 msgid "Results found"
 msgstr ""
 
 msgid "Selected program"
-msgstr "منتخب کردہ پروگرام"
+msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -812,7 +811,7 @@ msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
 msgid "Search for"
-msgstr "تلاش کریں"
+msgstr ""
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
@@ -834,7 +833,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr "پرفائل"
+msgstr ""
 
 msgid "Error saving event"
 msgstr ""
@@ -861,25 +860,25 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "ہم آہنگی مقرر کریں"
+msgstr ""
 
 msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr "تاریخ"
+msgstr ""
 
 msgid "Time"
-msgstr "وقت"
+msgstr ""
 
 msgid "From date"
-msgstr "اس تاریخ سے"
+msgstr ""
 
 msgid "From time"
 msgstr ""
 
 msgid "To date"
-msgstr "تاریخ تک"
+msgstr ""
 
 msgid "To time"
 msgstr ""
