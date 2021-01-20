@@ -12,11 +12,13 @@ const getStyles = ({ typography }) => ({
 });
 
 const TeiWorkingListsPlain = ({ classes: { listContainer } }: Props) => (
-    <Paper className={listContainer}>
-        <TeiWorkingListsReduxProvider
-            storeId={'teiList'}
-        />
-    </Paper>
+    <div data-test="tei-working-lists">
+        <Paper className={listContainer}>
+            <TeiWorkingListsReduxProvider
+                storeId={'teiList'}
+            />
+        </Paper>
+    </div>
 );
 
 export const TeiWorkingLists: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(TeiWorkingListsPlain);

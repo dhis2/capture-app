@@ -2,6 +2,7 @@
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
+import { dataElementTypes } from '../../../../../../../metaData';
 import { getTeiListData } from './getTeiListData';
 import {
     initListViewSuccess,
@@ -9,6 +10,9 @@ import {
     buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
 import type { Input } from './initTeiWorkingListsView.types';
+
+const getSortDirection = columnType =>
+    ([dataElementTypes.TEXT, dataElementTypes.LONG_TEXT].includes(columnType) ? 'asc' : 'desc');
 
 const getSortConfig = (columnsMetaForDataFetching) => {
     let column = columnsMetaForDataFetching.find(col => col.visible);
@@ -18,7 +22,7 @@ const getSortConfig = (columnsMetaForDataFetching) => {
 
     return {
         sortById: column.id,
-        sortByDirection: 'desc',
+        sortByDirection: getSortDirection(column.type),
     };
 };
 

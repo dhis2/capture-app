@@ -85,6 +85,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                             className={classes.firstButtonContainer}
                         >
                             <Button
+                                dataTest="list-view-filter-apply-button"
                                 muiButtonRef={this.setUpdateButtonInstance}
                                 primary
                                 onClick={this.handleUpdateClick}
@@ -93,6 +94,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                             </Button>
                         </div>
                         <Button
+                            dataTest="list-view-filter-cancel-button"
                             muiButtonRef={this.setCloseButtonInstance}
                             secondary
                             onClick={onClose}
