@@ -189,6 +189,7 @@ import {
 import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
 
 export default combineEpics(
+  
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
     resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,
