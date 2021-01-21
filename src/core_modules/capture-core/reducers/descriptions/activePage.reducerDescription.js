@@ -10,31 +10,36 @@ import { actionTypes as viewEventDataEntryActionTypes } from '../../components/P
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 
 export const activePageDesc = createReducerDescription({
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: state => ({
+    [lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE]: state => ({
         ...state,
-        isPageLoading: true,
+        lockedSelectorLoads: true,
     }),
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID]: state => ({
+    [lockedSelectorActionTypes.FETCH_ORG_UNIT_ERROR]: (state, action) => ({
+        ...state,
+        lockedSelectorLoads: false,
+        selectionsError: action.payload,
+    }),
+    [lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS]: state => ({
+        ...state,
+        lockedSelectorLoads: false,
+    }),
+    [lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID]: state => ({
         ...state,
         selectionsError: null,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
         isDataEntryLoading: false,
     }),
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID]: (state, action) => ({
+    [lockedSelectorActionTypes.CURRENT_SELECTIONS_INVALID]: (state, action) => ({
         ...state,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
         selectionsError: action.payload,
     }),
-    [lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_ERROR_RETRIEVING]: (state, action) => ({
-        ...state,
-        isPageLoading: false,
-        selectionsError: action.payload,
-    }),
+
 
     [viewEventPageActionTypes.VIEW_EVENT_FROM_URL]: state => ({
         ...state,
         isDataEntryLoading: true,
-        isPageLoading: true,
+        lockedSelectorLoads: true,
     }),
     [viewEventDataEntryActionTypes.PREREQUISITES_ERROR_LOADING_VIEW_EVENT_DATA_ENTRY]: (state, action) => ({
         ...state,
@@ -57,17 +62,17 @@ export const activePageDesc = createReducerDescription({
     [viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: state => ({
         ...state,
         isDataEntryLoading: true,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
     }),
     [viewEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE]: state => ({
         ...state,
         isDataEntryLoading: true,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
     }),
     [viewEventPageActionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED]: (state, action) => ({
         ...state,
         viewEventLoadError: action.payload,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
     }),
 
     [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: state => ({
@@ -80,7 +85,7 @@ export const activePageDesc = createReducerDescription({
     }),
 }, 'activePage', {
     selectionsError: null,
-    isPageLoading: false,
+    lockedSelectorLoads: false,
     isDataEntryLoading: false,
     viewEventLoadError: false,
 });

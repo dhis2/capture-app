@@ -151,11 +151,16 @@ import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../compone
 import getDataEntryEpics from './getDataEntryEpics';
 
 import {
-    updateUrlViaLockedSelectorEpic,
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     startAgainEpic,
+    resetTrackedEntityInstanceSelectionEpic,
+    setOrgUnitId,
+    setProgramId,
+    resetOrgUnitId,
+    resetProgramId,
+    fetchOrgUnitEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 import {
     setTrackedEntityTypeIdOnUrlEpic,
@@ -277,7 +282,8 @@ export default combineEpics(
     loadSearchGroupDuplicatesForReviewEpic,
     teiForNewEventRelationshipSavedEpic,
     saveAssigneeEpic,
-    updateUrlViaLockedSelectorEpic,
+    setOrgUnitId,
+    setProgramId,
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
@@ -299,5 +305,9 @@ export default combineEpics(
     completeSavingNewTrackedEntityInstanceEpic,
     completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     openNewRegistrationPageFromLockedSelectorEpic,
+    resetTrackedEntityInstanceSelectionEpic,
+    resetOrgUnitId,
+    resetProgramId,
+    fetchOrgUnitEpic,
     ...getDataEntryEpics(),
 );

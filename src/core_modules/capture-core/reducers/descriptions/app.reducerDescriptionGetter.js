@@ -118,9 +118,13 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         locationSwitchInProgress: true,
     }),
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => ({
+    [lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE]: (state, action) => ({
         ...state,
         page: action.payload.nextPage,
+    }),
+    [lockedSelectorActionTypes.CURRENT_PAGE_STORE]: (state, { payload: { page } }) => ({
+        ...state,
+        page,
     }),
     [lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
         ...state,

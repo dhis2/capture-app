@@ -11,9 +11,10 @@ export const setOrgUnit = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(selectionActionTypes.SET_ORG_UNIT_ID),
         map(() => {
+            // todo not sure if these are used?!
             const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
-            return push(`/${urlArguments({ programId, orgUnitId })}`);
+            return push(`/?${urlArguments({ programId, orgUnitId })}`);
         }));
 
 export const setProgram = (action$: InputObservable, store: ReduxStore) =>

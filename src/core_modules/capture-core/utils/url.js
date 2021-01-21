@@ -1,7 +1,15 @@
 // @flow
-type Url = {programId?: string, orgUnitId?: string, trackedEntityTypeId?: string}
+type Url = {|
+    programId?: string,
+    orgUnitId?: string,
+    trackedEntityTypeId?: string,
+|}
 
-export const urlArguments = ({ programId, orgUnitId, trackedEntityTypeId }: Url): string => {
+export const urlArguments = ({
+    programId,
+    orgUnitId,
+    trackedEntityTypeId,
+}: Url): string => {
     const argArray = [];
     if (programId) {
         argArray.push(`programId=${programId}`);
@@ -13,4 +21,15 @@ export const urlArguments = ({ programId, orgUnitId, trackedEntityTypeId }: Url)
     }
 
     return argArray.join('&');
+};
+
+export const pageKeys = {
+    MAIN: '',
+    VIEW_EVENT: 'viewEvent',
+    SEARCH: 'search',
+    NEW: 'new',
+};
+
+export const pagesWithRouter = {
+    enrollment: 'enrollment',
 };
