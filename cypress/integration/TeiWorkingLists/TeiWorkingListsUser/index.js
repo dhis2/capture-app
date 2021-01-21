@@ -58,6 +58,7 @@ When('you select the working list called completed enrollments', () => {
         .click();
 });
 
+
 Then('the list should display teis with a completed enrollment', () => {
     const names = [
         'Filona Ryder',
