@@ -13,7 +13,6 @@ import {
     resetAllCategoryOptionsFromLockedSelector,
     openNewRegistrationPageFromLockedSelector,
     openSearchPageFromLockedSelector,
-    fetchOrgUnit,
     lockedSelectorBatchActionTypes,
 } from './LockedSelector.actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
@@ -51,15 +50,6 @@ const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string
             pathname,
         }),
     );
-
-const useComponentLifecycle = () => {
-    const dispatch = useDispatch();
-    const { selectedOrgUnitId } = useUrlQueries();
-    useEffect(() => {
-        selectedOrgUnitId && dispatch(fetchOrgUnit(selectedOrgUnitId));
-    },
-    [dispatch, selectedOrgUnitId]);
-};
 
 export const LockedSelector: ComponentType<OwnProps> =
   ({
@@ -175,8 +165,6 @@ export const LockedSelector: ComponentType<OwnProps> =
         useSelector(({ organisationUnits: orgUnits }) => orgUnits);
 
       const ready = deriveReadiness(isPageLoading, selectedOrgUnitId, organisationUnits);
-
-      useComponentLifecycle();
 
       return (
           <LockedSelectorComponent
