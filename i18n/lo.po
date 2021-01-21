@@ -1,14 +1,14 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
+"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -130,6 +130,12 @@ msgstr "ການລົງທະບຽນ"
 msgid "A future date is not allowed"
 msgstr ""
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr "in"
+
 msgid "Metadata error. see log for details"
 msgstr ""
 
@@ -156,9 +162,6 @@ msgstr ""
 
 msgid "Saving to"
 msgstr ""
-
-msgid "in"
-msgstr "in"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -242,6 +245,18 @@ msgid "Cancel"
 msgstr "ຍົກເລີກ"
 
 msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "An error has occurred. See log for details"
@@ -424,8 +439,8 @@ msgstr ""
 msgid "Column"
 msgstr "ຖັນ"
 
-msgid "Update"
-msgstr "ປັບປຸງ"
+msgid "Apply"
+msgstr "ນຳໃຊ້"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -562,6 +577,27 @@ msgstr ""
 msgid "Registered events"
 msgstr "ເຫດການທີ່ໄດ້ລົງທະບຽນ"
 
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Cancelled"
+msgstr "ຍົກເລີກແລ້ວ"
+
+msgid "Assigned to"
+msgstr "Assigned to"
+
+msgid "Registering unit"
+msgstr "ສະຖານທີ່ລົງທະບຽນ"
+
+msgid "Registration Date"
+msgstr ""
+
+msgid "Inactive"
+msgstr "ບໍ່ໄດ້ໃຊ້ງານ"
+
+msgid "Working list could not be updated"
+msgstr ""
+
 msgid "Update view"
 msgstr ""
 
@@ -599,21 +635,6 @@ msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}}"
-msgstr ""
-
-msgid "without"
-msgstr ""
-
-msgid "enrollment"
-msgstr ""
-
-msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"

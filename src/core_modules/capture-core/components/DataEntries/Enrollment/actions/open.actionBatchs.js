@@ -34,7 +34,7 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 ];
 
 export const batchActionTypes = {
-    OPEN_DATA_ENYRY_FOR_NEW_ENROLLMENT_BATCH: 'OpenDataEntryForNewEnrollmentBatch',
+    OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH: 'OpenDataEntryForNewEnrollmentBatch',
 };
 
 export const openDataEntryForNewEnrollmentBatchAsync = async (
@@ -89,5 +89,5 @@ export const openDataEntryForNewEnrollmentBatchAsync = async (
         ...dataEntryActions,
         ...rulesActions,
         ...extraActions,
-    ], batchActionTypes.OPEN_DATA_ENYRY_FOR_NEW_ENROLLMENT_BATCH);
+    ], batchActionTypes.OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT_BATCH);
 };

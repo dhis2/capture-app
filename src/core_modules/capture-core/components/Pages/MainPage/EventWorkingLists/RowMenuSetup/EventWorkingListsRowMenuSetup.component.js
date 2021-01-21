@@ -19,7 +19,7 @@ const getStyles = (theme: Theme) => ({
 export const EventWorkingListsRowMenuSetupPlain = ({ onDeleteEvent, classes, ...passOnProps }: Props) => {
     const customRowMenuContents: CustomRowMenuContents = useMemo(() => [{
         key: 'deleteEventItem',
-        clickHandler: ({ eventId }) => onDeleteEvent(eventId),
+        clickHandler: ({ id }) => onDeleteEvent(id),
         element: (
             <span
                 data-test="dhis2-capture-delete-event-button"
