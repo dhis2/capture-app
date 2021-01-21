@@ -15,7 +15,8 @@ import {
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
-import { pageKeys, pagesWithRouter, urlArguments } from '../../utils/url';
+import { deriveUrlQueries, pagesWithRouter, urlArguments } from '../../utils/url';
+import { pageKeys } from '../App/withAppUrlSync';
 
 const exactUrl = (page: string, url: string) => {
     if (page && page !== 'viewEvent') {
@@ -27,6 +28,7 @@ const exactUrl = (page: string, url: string) => {
 export const pageIsUsingTheOldWayOfRendering = (page: string): boolean =>
     Object.values(pageKeys).includes(page);
 
+// todo need to get rid of this bit
 export const pageIsUsingTheStandardRouter = (page: string): boolean =>
     Object.values(pagesWithRouter).includes(page);
 

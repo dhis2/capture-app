@@ -37,3 +37,7 @@ export const deriveUrlQueries = (state: Object) => {
 
     return { programId, orgUnitId, trackedEntityTypeId };
 };
+
+export const pagesWithRouter = {
+    ENROLLMENT: 'enrollment',
+};

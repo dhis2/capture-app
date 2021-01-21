@@ -19,7 +19,7 @@ type Props = {
     locationSwitchInProgress: ?boolean,
 };
 
-const pageKeys = {
+export const pageKeys = {
     MAIN: '',
     VIEW_EVENT: 'viewEvent',
     SEARCH: 'search',

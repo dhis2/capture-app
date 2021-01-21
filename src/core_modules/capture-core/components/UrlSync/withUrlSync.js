@@ -4,6 +4,7 @@
  */
 import * as React from 'react';
 import { parse } from 'query-string';
+import { pageKeys } from "../App/withAppUrlSync";
 
 type Props = {
     urlPage: string,
