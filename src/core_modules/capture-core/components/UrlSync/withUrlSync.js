@@ -28,10 +28,6 @@ export type UpdateDataContainer = {
     prevPage: ?string,
 };
 
-export const reservedUrlKeys = {
-    ENTIRE_PARAM_STRING: 'ENTIRE_PARAM_STRING',
-};
-
 const getUrlSyncer = (
     InnerComponent: React.ComponentType<any>,
     onGetSyncSpecification: SyncSpecificationGetter) =>

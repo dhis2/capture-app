@@ -6,7 +6,6 @@ import { paramsSelector } from './appSync.selectors';
 import { LoadingMaskForPage } from '../LoadingMasks';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { updateSelectionsFromUrl } from '../LockedSelector';
-import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
 
 type Props = {
@@ -40,7 +39,7 @@ const specificationForPages = {
     ],
     [pageKeys.VIEW_EVENT]: [
         {
-            urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
+            urlKey: 'viewEventId',
             propKey: 'viewEventId',
         },
     ],
