@@ -174,7 +174,7 @@ export const LockedSelector: ComponentType<OwnProps> =
       const organisationUnits: Object =
         useSelector(({ organisationUnits: orgUnits }) => orgUnits);
 
-      const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, organisationUnits);
+      const ready = deriveReadiness(isPageLoading, selectedOrgUnitId, organisationUnits);
 
       useComponentLifecycle();
 
