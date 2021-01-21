@@ -2,8 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
-import { catchError, filter, map, switchMap } from 'rxjs/operators';
-import { from, of } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 import {
     lockedSelectorActionTypes,
     lockedSelectorBatchActionTypes,
@@ -15,20 +14,14 @@ import {
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
-import { pageKeys, pagesWithRouter, urlArguments } from '../../utils/url';
+import { urlArguments } from '../../utils/url';
 
 const exactUrl = (page: string, url: string) => {
     if (page && page !== 'viewEvent') {
-        return `${page}?${url}`;
+        return `/${page}/${url}`;
     }
-    return `/?${url}`;
+    return `/${url}`;
 };
-
-export const pageIsUsingTheOldWayOfRendering = (page: string): boolean =>
-    Object.values(pageKeys).includes(page);
-
-export const pageIsUsingTheStandardRouter = (page: string): boolean =>
-    Object.values(pagesWithRouter).includes(page);
 
 const fetchOrgUnits = id => getApi().get(`organisationUnits/${id}`, { fields: 'id,displayName' });
 
@@ -59,10 +52,10 @@ export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
         map(({ payload: { orgUnitId } }) => {
-            const { pathname } = store.value.router.location;
+            const { app: { page } } = store.value;
             const queries = deriveUrlQueries(store.value);
 
-            return push(exactUrl(pathname, urlArguments({ ...queries, orgUnitId })));
+            return push(exactUrl(page, urlArguments({ ...queries, orgUnitId })));
         }));
 
 export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore) =>
@@ -79,9 +72,9 @@ export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.PROGRAM_ID_SET),
         map(({ payload: { programId } }) => {
-            const { pathname } = store.value.router.location;
+            const { app: { page } } = store.value;
             const queries = deriveUrlQueries(store.value);
-            return push(exactUrl(pathname, urlArguments({ ...queries, programId })));
+            return push(exactUrl(page, urlArguments({ ...queries, programId })));
         }));
 
 export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
