@@ -33,7 +33,7 @@ const trackedEntityTypeIdProperties = {
     propKey: 'trackedEntityTypeId',
 };
 const eventIdProperties = {
-    urlKey: 'viewEventId',
+    urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
     propKey: 'viewEventId',
 };
 
