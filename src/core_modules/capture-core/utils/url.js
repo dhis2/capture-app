@@ -14,10 +14,3 @@ export const urlArguments = ({ programId, orgUnitId, trackedEntityTypeId }: Url)
 
     return argArray.join('&');
 };
-
-export const pageKeys = {
-    MAIN: '',
-    VIEW_EVENT: 'viewEvent',
-    SEARCH: 'search',
-    NEW: 'new',
-};

@@ -7,7 +7,6 @@ import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEven
 import { updateSelectionsFromUrl } from '../LockedSelector';
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
-import { pageKeys } from '../../utils/url';
 
 type Props = {
     location: {
@@ -18,6 +17,13 @@ type Props = {
     params: Object,
     page: ?string,
     locationSwitchInProgress: ?boolean,
+};
+
+const pageKeys = {
+    MAIN: '',
+    VIEW_EVENT: 'viewEvent',
+    SEARCH: 'search',
+    NEW: 'new',
 };
 
 const programIdProperties = {
