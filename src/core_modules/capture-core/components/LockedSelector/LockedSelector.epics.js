@@ -37,31 +37,25 @@ const deriveUrlQueries = (state) => {
         currentSelections: {
             programId: selectedProgramId,
             orgUnitId: selectedOrgUnitId,
-            teiId: selectedTeiId,
             trackedEntityTypeId: selectedTet,
-            enrollmentId: selectedEnrollmentId,
         },
         router: {
             location: {
                 query: {
                     programId: routerProgramId,
                     orgUnitId: routerOrgUnitId,
-                    teiId: routerTeiId,
                     trackedEntityTypeId: routerTet,
-                    enrollmentId: routerEnrollmentId,
                 },
             } },
     } = state;
     const programId = routerProgramId || selectedProgramId;
     const orgUnitId = routerOrgUnitId || selectedOrgUnitId;
-    const enrollmentId = routerEnrollmentId || selectedTeiId;
-    const teiId = routerTeiId || selectedTet;
-    const trackedEntityTypeId = routerTet || selectedEnrollmentId;
+    const trackedEntityTypeId = routerTet || selectedTet;
 
-    return { programId, orgUnitId, enrollmentId, teiId, trackedEntityTypeId };
+    return { programId, orgUnitId, trackedEntityTypeId };
 };
 
-export const setOrgUnitId = (action$: InputObservable, store: ReduxStore) =>
+export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
         map(({ payload: { orgUnitId } }) => {
@@ -81,7 +75,7 @@ export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore) =>
             return push(exactUrl(page, urlArguments({ ...restOfQueries })));
         }));
 
-export const setProgramId = (action$: InputObservable, store: ReduxStore) =>
+export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.PROGRAM_ID_SET),
         map(({ payload: { programId } }) => {
@@ -90,7 +84,7 @@ export const setProgramId = (action$: InputObservable, store: ReduxStore) =>
             return push(exactUrl(pathname, urlArguments({ ...queries, programId })));
         }));
 
-export const resetProgramId = (action$: InputObservable, store: ReduxStore) =>
+export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH),
         map(() => {
