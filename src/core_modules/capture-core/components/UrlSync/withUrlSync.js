@@ -96,7 +96,7 @@ const getUrlSyncer = (
 
         isOutOfSync() {
             const syncSpecification = onGetSyncSpecification(this.props);
-            const { history: { location }, statePage, urlPage, stateParams } = this.props;
+            const { history: { location }, statePage, urlPage } = this.props;
             const locationParams = parse(location && location.search);
             const pageNeedsUpdate = this.paramsNeedsUpdate(syncSpecification, locationParams);
 
