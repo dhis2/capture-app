@@ -136,7 +136,7 @@ Then('the assignee filter button should show that unassigned filter is in effect
         .should('exist');
 });
 
-Then('the list should display teis with a completed enrollment and unassinged events', () => {
+Then('the list should display teis with an active enrollment and unassinged events', () => {
     const names = [
         'John Kelly',
         'Anna Jones',
