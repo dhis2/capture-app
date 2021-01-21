@@ -68,7 +68,7 @@ const resetCategoryOption = (state: Object, categoryId: string) => {
 
 export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
     ...appUpdaters,
-    [crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED]: (state, action) => {
+    [crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE]: (state, action) => {
         const newState = {
             ...state,
             complete: action.payload.isComplete,
@@ -173,7 +173,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         orgUnitId: null,
         complete: false,
     }),
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => {
+    [lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE]: (state, action) => {
         const { nextProps: selections } = action.payload;
         return {
             ...state,

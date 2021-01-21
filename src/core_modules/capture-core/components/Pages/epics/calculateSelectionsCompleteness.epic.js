@@ -3,7 +3,7 @@ import programs from 'capture-core/metaDataMemoryStores/programCollection/progra
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import {
-    selectionsCompletenessCalculated,
+    calculateSelectionsCompleteness,
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
@@ -37,13 +37,13 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
         ofType(
             lockedSelectorActionTypes.PROGRAM_ID_SET,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
-            lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
+            lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,
         ),
         map((action) => {
             const isComplete = calculateCompleteStatus(store.value.currentSelections);
-            return selectionsCompletenessCalculated(
+            return calculateSelectionsCompleteness(
                 isComplete,
                 (action.payload && action.payload.triggeringActionType) || action.type,
             );
