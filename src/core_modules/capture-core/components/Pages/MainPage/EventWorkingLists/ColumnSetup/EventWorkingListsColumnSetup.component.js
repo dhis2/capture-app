@@ -1,6 +1,7 @@
 // @flow
 import React, { useCallback } from 'react';
-import { useDefaultColumnConfig, useColumns } from '../../EventWorkingListsCommon';
+import { useColumns } from '../../WorkingListsCommon';
+import { useDefaultColumnConfig, type EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
 import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
@@ -22,7 +23,7 @@ const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
                 // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
-        onUpdateList(queryArgs, lastTransaction, columnsMetaForDataFetching);
+        onUpdateList(queryArgs, { columnsMetaForDataFetching, lastTransaction });
     }, [onUpdateList, defaultColumns]);
 
 export const EventWorkingListsColumnSetup = ({
@@ -36,8 +37,7 @@ export const EventWorkingListsColumnSetup = ({
 
     const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView);
     const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateList);
-
-    const columns = useColumns(customColumnOrder, defaultColumns);
+    const columns = useColumns<EventWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
 
     return (
         <CurrentViewChangesResolver
