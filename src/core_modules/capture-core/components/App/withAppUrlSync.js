@@ -26,39 +26,50 @@ const pageKeys = {
     NEW: 'new',
 };
 
-const programIdProperties = {
-    urlKey: 'programId',
-    propKey: 'programId',
-};
-const orgUnitIdProperties = {
-    urlKey: 'orgUnitId',
-    propKey: 'orgUnitId',
-};
-const trackedEntityTypeIdProperties = {
-    urlKey: 'trackedEntityTypeId',
-    propKey: 'trackedEntityTypeId',
-};
-const eventIdProperties = {
-    urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
-    propKey: 'viewEventId',
-};
-
 const specificationForPages = {
     [pageKeys.MAIN]: [
-        programIdProperties,
-        orgUnitIdProperties,
+        {
+            urlKey: 'programId',
+            propKey: 'programId',
+        },
+        {
+            urlKey: 'orgUnitId',
+            propKey: 'orgUnitId',
+        },
     ],
     [pageKeys.VIEW_EVENT]: [
-        eventIdProperties,
+        {
+            urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
+            propKey: 'viewEventId',
+        },
     ],
     [pageKeys.SEARCH]: [
-        programIdProperties,
-        orgUnitIdProperties,
+        {
+            urlKey: 'programId',
+            propKey: 'programId',
+        },
+        {
+            urlKey: 'orgUnitId',
+            propKey: 'orgUnitId',
+        },
+        {
+            urlKey: 'trackedEntityTypeId',
+            propKey: 'trackedEntityTypeId',
+        },
     ],
     [pageKeys.NEW]: [
-        programIdProperties,
-        orgUnitIdProperties,
-        trackedEntityTypeIdProperties,
+        {
+            urlKey: 'programId',
+            propKey: 'programId',
+        },
+        {
+            urlKey: 'orgUnitId',
+            propKey: 'orgUnitId',
+        },
+        {
+            urlKey: 'trackedEntityTypeId',
+            propKey: 'trackedEntityTypeId',
+        },
     ],
 };
 
