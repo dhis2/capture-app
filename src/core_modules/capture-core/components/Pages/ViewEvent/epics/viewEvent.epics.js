@@ -32,9 +32,8 @@ import { eventWorkingListsActionTypes } from '../../../Pages/MainPage/EventWorki
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        switchMap((action) => {
+        switchMap(({ payload: { eventId } }) => {
             const state = store.value;
-            const eventId = action.payload;
             return getEvent(eventId)
                 .then((eventContainer) => {
                     if (!eventContainer) {
