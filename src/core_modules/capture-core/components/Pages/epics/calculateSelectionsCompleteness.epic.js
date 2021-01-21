@@ -7,7 +7,7 @@ import {
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
-import { pageIsUsingTheOldWayOfRendering, pageIsUsingTheStandardRouter } from '../../LockedSelector/LockedSelector.epics';
+import { pageIsUsingTheStandardRouter } from '../../LockedSelector/LockedSelector.epics';
 
 type CurrentSelectionsState = {
     programId?: ?string,
@@ -44,6 +44,7 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
         ),
         filter(() => {
             const { pathname } = store.value.router.location;
+            // todo this needs to be updated propertly
             const is = pageIsUsingTheStandardRouter(pathname.substring(1));
             return !is;
         }),
