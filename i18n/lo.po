@@ -1,14 +1,14 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -439,8 +439,8 @@ msgstr ""
 msgid "Column"
 msgstr "ຖັນ"
 
-msgid "Update"
-msgstr "ປັບປຸງ"
+msgid "Apply"
+msgstr "ນຳໃຊ້"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -576,6 +576,27 @@ msgstr ""
 
 msgid "Registered events"
 msgstr "ເຫດການທີ່ໄດ້ລົງທະບຽນ"
+
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Cancelled"
+msgstr "ຍົກເລີກແລ້ວ"
+
+msgid "Assigned to"
+msgstr "Assigned to"
+
+msgid "Registering unit"
+msgstr "ສະຖານທີ່ລົງທະບຽນ"
+
+msgid "Registration Date"
+msgstr ""
+
+msgid "Inactive"
+msgstr "ບໍ່ໄດ້ໃຊ້ງານ"
+
+msgid "Working list could not be updated"
+msgstr ""
 
 msgid "Update view"
 msgstr ""

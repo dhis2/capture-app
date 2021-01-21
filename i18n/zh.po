@@ -1,16 +1,16 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
-# 晓东 林 <13981924470@126.com>, 2020
 # easylin <lin_xd@126.com>, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
+# 晓东 林 <13981924470@126.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2021\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -443,8 +443,8 @@ msgstr "表中显示的列"
 msgid "Column"
 msgstr "列"
 
-msgid "Update"
-msgstr "更新"
+msgid "Apply"
+msgstr "应用"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} 到 {{toDate}}"
@@ -580,6 +580,27 @@ msgstr "载入工作列表发生错误"
 
 msgid "Registered events"
 msgstr "登记的事件"
+
+msgid "Enrollment status"
+msgstr "登记状态"
+
+msgid "Cancelled"
+msgstr "已取消"
+
+msgid "Assigned to"
+msgstr "指派到"
+
+msgid "Registering unit"
+msgstr "注册机构"
+
+msgid "Registration Date"
+msgstr "登记日期"
+
+msgid "Inactive"
+msgstr "闲置"
+
+msgid "Working list could not be updated"
+msgstr ""
 
 msgid "Update view"
 msgstr "更新视图"

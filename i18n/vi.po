@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2020
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -452,8 +452,8 @@ msgstr "Cột hiển thị trong bảng"
 msgid "Column"
 msgstr "Cột"
 
-msgid "Update"
-msgstr "Cập nhật"
+msgid "Apply"
+msgstr "Áp dụng"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} đến {{toDate}}"
@@ -589,6 +589,27 @@ msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
 
 msgid "Registered events"
 msgstr "Sự kiện đã đăng ký"
+
+msgid "Enrollment status"
+msgstr "Trạng thái đăng ký"
+
+msgid "Cancelled"
+msgstr "Đã hủy"
+
+msgid "Assigned to"
+msgstr "Đã gán cho"
+
+msgid "Registering unit"
+msgstr "Đơn Vị đăng ký"
+
+msgid "Registration Date"
+msgstr "Ngày đăng ký"
+
+msgid "Inactive"
+msgstr "Không kích hoạt"
+
+msgid "Working list could not be updated"
+msgstr ""
 
 msgid "Update view"
 msgstr "Cập nhật chế độ xem"

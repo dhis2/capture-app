@@ -71,9 +71,19 @@ const TemplateSelector = (props: Props) => {
 
     const customTemplates = React.useMemo(() => templates
         .filter(c => !c.isDefault)
-        .sort((a, b) => a.name.localeCompare(b.name)), [
-        templates,
-    ]);
+        .sort(({ order: orderA, name: nameA }, { order: orderB, name: nameB }) => {
+            let sortResult;
+            if (orderA && orderB) {
+                sortResult = orderA - orderB;
+            } else if (orderA) {
+                sortResult = 1;
+            } else if (orderB) {
+                sortResult = -1;
+            } else {
+                sortResult = nameA.localeCompare(nameB);
+            }
+            return sortResult;
+        }), [templates]);
 
     const getHeightModifierButton = React.useCallback(() => (
         <LinkButton

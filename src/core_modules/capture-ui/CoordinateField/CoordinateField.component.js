@@ -6,7 +6,7 @@ import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
-import AddLocationIcon from '../Icons/AddLocationIcon.component';
+import { AddLocationIcon } from '../Icons';
 import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.module.css';
 import orientations from '../constants/orientations.const';

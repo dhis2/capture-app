@@ -173,6 +173,7 @@ import {
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
+import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/Pages/MainPage/TeiWorkingLists';
 import {
     startNewEnrollmentDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';
@@ -196,6 +197,8 @@ export default combineEpics(
     loadAppEpic,
     loadCoreFailedEpic,
     initEventListEpic,
+    initTeiViewEpic,
+    updateTeiListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
     updateTemplateEpic,
