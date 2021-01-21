@@ -80,17 +80,6 @@ const updaterForPages = {
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
 };
 
-const getUrlParts = (pathName: string) => {
-    const urlParts = pathName.match(/[/][^/]+/g);
-
-    if (urlParts == null) {
-        return [];
-    }
-
-    return urlParts
-        .map(part => part.substring(1));
-};
-
 /**
  * Provides data for withUrlSync and calls an update action if not in sync (based on the page)
  * @alias withAppUrlSync
@@ -112,32 +101,9 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
         }
 
         setPageAndParams() {
-            const urlParts = getUrlParts(this.props.location.pathname);
-
-            if (urlParts.length === 0) {
-                this.page = pageKeys.MAIN;
-                this.params = null;
-                return;
-            }
-
-            if (urlParts.length === 1) {
-                const singlePart = urlParts[0];
-                if (
-                    Object
-                        .keys(pageKeys)
-                        .map(key => pageKeys[key])
-                        .includes(singlePart)
-                ) {
-                    this.page = singlePart;
-                    this.params = null;
-                } else {
-                    this.params = singlePart;
-                    this.page = pageKeys.MAIN;
-                }
-            } else {
-                this.page = urlParts[0];
-                this.params = urlParts[1];
-            }
+            const { location } = this.props;
+            this.page = location.pathname.substring(1);
+            this.params = parse(location && location.search);
         }
 
         render() {
