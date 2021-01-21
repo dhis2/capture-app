@@ -31,6 +31,7 @@ import type {
     UpdateList,
     RecordsOrder,
     CustomColumnOrder,
+    InitialViewConfig,
 } from '../../WorkingListsCommon';
 import type { EventRecords } from '../../EventWorkingListsCommon';
 import type {
@@ -50,9 +51,9 @@ export type EventWorkingListsReduxOutputProps = {|
     customListViewMenuContents?: CustomMenuContents,
     customRowMenuContents?: CustomRowMenuContents,
     downloadRequest: Object,
-    eventRecords?: EventRecords,
+    records?: EventRecords,
     filters?: FiltersData,
-    initialViewConfig?: Object,
+    initialViewConfig?: InitialViewConfig,
     lastIdDeleted?: string,
     lastTransaction: number,
     lastTransactionOnListDataRefresh?: number,

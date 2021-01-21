@@ -1,3 +1,52 @@
+## [1.7.2](https://github.com/dhis2/capture-app/compare/v1.7.1...v1.7.2) (2021-01-20)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([54f57c0](https://github.com/dhis2/capture-app/commit/54f57c0e60dfa860f85dde3f68d2919259c1909e))
+
+## [1.7.1](https://github.com/dhis2/capture-app/compare/v1.7.0...v1.7.1) (2021-01-19)
+
+
+### Bug Fixes
+
+* delete event ([b40329c](https://github.com/dhis2/capture-app/commit/b40329cc5e772908ae9dd86e49f054f67347890d))
+
+# [1.7.0](https://github.com/dhis2/capture-app/compare/v1.6.3...v1.7.0) (2021-01-18)
+
+
+### Features
+
+* DHIS2-9276 Tracked entity instance working lists ([9667109](https://github.com/dhis2/capture-app/commit/9667109c61a41473dc2608e873a2560df1ffade0))
+
+## [1.6.3](https://github.com/dhis2/capture-app/compare/v1.6.2...v1.6.3) (2021-01-18)
+
+
+### Bug Fixes
+
+* TECH-522 rework of redux offline retry handling ([491195a](https://github.com/dhis2/capture-app/commit/491195a0d90c882becd4cf17acef7268cc900238))
+
+## [1.6.2](https://github.com/dhis2/capture-app/compare/v1.6.1...v1.6.2) (2021-01-18)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b5d5349](https://github.com/dhis2/capture-app/commit/b5d5349fac08722d96048fb786473204e6f7fd29))
+
+## [1.6.1](https://github.com/dhis2/capture-app/compare/v1.6.0...v1.6.1) (2021-01-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([f84c514](https://github.com/dhis2/capture-app/commit/f84c514f5dee592ba747268b423917c283d1278e))
+
+# [1.6.0](https://github.com/dhis2/capture-app/compare/v1.5.3...v1.6.0) (2021-01-15)
+
+
+### Features
+
+* DHIS2-9654 DHIS2-9655 can submit enrollments and see rule indicators ([#1334](https://github.com/dhis2/capture-app/issues/1334)) ([7a2b2df](https://github.com/dhis2/capture-app/commit/7a2b2df9a0484d540cce78f14b8ebd277a1061e5)), closes [#1335](https://github.com/dhis2/capture-app/issues/1335) [#1355](https://github.com/dhis2/capture-app/issues/1355)
+
 ## [1.5.3](https://github.com/dhis2/capture-app/compare/v1.5.2...v1.5.3) (2021-01-14)
 
 

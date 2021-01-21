@@ -176,6 +176,7 @@ import {
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
+import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/Pages/MainPage/TeiWorkingLists';
 import {
     startNewEnrollmentDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';
@@ -183,8 +184,10 @@ import {
     startNewTeiDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.epics';
 import {
-    completeSavingNewTrackedEntityTypeEpic,
-    startSavingNewTrackedEntityTypeEpic,
+    completeSavingNewTrackedEntityInstanceEpic,
+    completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
+    startSavingNewTrackedEntityInstanceEpic,
+    startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
 
@@ -204,6 +207,8 @@ export default combineEpics(
     loadAppEpic,
     loadCoreFailedEpic,
     initEventListEpic,
+    initTeiViewEpic,
+    updateTeiListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
     updateTemplateEpic,
@@ -299,8 +304,10 @@ export default combineEpics(
     setTrackedEntityTypeIdOnUrlEpic,
     startNewTeiDataEntrySelfInitialisationEpic,
     startNewEnrollmentDataEntrySelfInitialisationEpic,
-    startSavingNewTrackedEntityTypeEpic,
-    completeSavingNewTrackedEntityTypeEpic,
+    startSavingNewTrackedEntityInstanceEpic,
+    startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
+    completeSavingNewTrackedEntityInstanceEpic,
+    completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     openNewRegistrationPageFromLockedSelectorEpic,
     fetchEnrollmentPageInformationFromUrlEpic,
     startFetchingTeiFromEnrollmentIdEpic,

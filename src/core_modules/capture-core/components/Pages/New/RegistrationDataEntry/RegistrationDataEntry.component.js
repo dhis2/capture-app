@@ -1,31 +1,15 @@
 // @flow
-import React from 'react';
-import i18n from '@dhis2/d2-i18n';
-import { Paper, withStyles } from '@material-ui/core';
+import React, { type ComponentType } from 'react';
+import { Grid, Paper, withStyles } from '@material-ui/core';
 import type { Props } from './RegistrationDataEntry.types';
 import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
-import { InfoIconText } from '../../../InfoIconText';
-import { useCurrentOrgUnitInfo } from '../../../../hooks/useCurrentOrgUnitInfo';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
+import GeneralOutput from '../../NewRelationship/RegisterTei/GeneralOutput/GeneralOutput.container';
 
-
-const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string) =>
-    (<>
-        {i18n.t('Saving a {{trackedEntityName}} in', { trackedEntityName })} <b>{programName}</b>
-        {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.
-    </>);
-
-
-const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
-    (<>
-        {i18n.t('Saving a {{trackedEntityName}}', { trackedEntityName })} <b>{i18n.t('without')}</b> {i18n.t('enrollment')}
-        {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.{' '}
-        {i18n.t('Enroll in a program by selecting a program from the top bar.')}
-    </>);
 
 const getStyles = ({ typography }) => ({
     paper: {
@@ -43,13 +27,23 @@ const getStyles = ({ typography }) => ({
         marginLeft: typography.pxToRem(8),
         marginRight: typography.pxToRem(8),
     },
+    marginTop: {
+        marginTop: typography.pxToRem(20),
+    },
 });
 
-
-const RegistrationDataEntryPlain = ({ setScopeId, classes, selectedScopeId, dataEntryId, onSave }: Props) => {
-    const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
+const RegistrationDataEntryPlain = (
+    {
+        classes,
+        setScopeId,
+        selectedScopeId,
+        dataEntryId,
+        onSaveWithoutEnrollment,
+        onSaveWithEnrollment,
+        dataEntryIsReady,
+    }: Props) => {
+    const { scopeType } = useScopeInfo(selectedScopeId);
     const { registrationMetaData } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
-    const orgUnit = useCurrentOrgUnitInfo();
     const titleText = useScopeTitleText(selectedScopeId);
 
     const handleRegistrationScopeSelection = (id) => {
@@ -78,20 +72,29 @@ const RegistrationDataEntryPlain = ({ setScopeId, classes, selectedScopeId, data
                     </div>
 
                     <div className={classes.registrationContainer}>
-                        <EnrollmentRegistrationEntry
-                            id={dataEntryId}
-                            selectedScopeId={selectedScopeId}
-                            enrollmentMetadata={registrationMetaData}
-                            saveButtonText={'Save new'}
-                            onSave={() => alert('onSave will save in the future')}
-                            onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
-                            onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
-                            onUpdateField={() => console.log('onUpdateField will be here in the future in the future')}
-                            onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future in the future')}
-                        />
-                        <InfoIconText>
-                            {translatedTextWithStylesForProgram(trackedEntityName.toLowerCase(), programName, orgUnit.name)}
-                        </InfoIconText>
+                        <Grid container justify="space-between">
+                            <Grid item md sm={9} xs={9} >
+                                <EnrollmentRegistrationEntry
+                                    id={dataEntryId}
+                                    selectedScopeId={selectedScopeId}
+                                    enrollmentMetadata={registrationMetaData}
+                                    saveButtonText={'Save new'}
+                                    onSave={onSaveWithEnrollment}
+                                    onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
+                                    onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
+                                    onUpdateField={() => console.log('onUpdateField will be here in the future in the future')}
+                                    onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future in the future')}
+                                />
+                            </Grid>
+                            {
+                                dataEntryIsReady &&
+                                <Grid item>
+                                    <div className={classes.marginTop}>
+                                        <GeneralOutput id={dataEntryId} />
+                                    </div>
+                                </Grid>
+                            }
+                        </Grid>
                     </div>
                 </Paper>
             }
@@ -107,19 +110,27 @@ const RegistrationDataEntryPlain = ({ setScopeId, classes, selectedScopeId, data
                         <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
                     </div>
                     <div className={classes.registrationContainer}>
-
-                        <TeiRegistrationEntry
-                            id={dataEntryId}
-                            selectedScopeId={selectedScopeId}
-                            teiRegistrationMetadata={registrationMetaData}
-                            saveButtonText={'Save new'}
-                            onSave={onSave}
-                            onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
-                            onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
-                        />
-                        <InfoIconText >
-                            {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
-                        </InfoIconText>
+                        <Grid container justify="space-between">
+                            <Grid item md sm={9} xs={9} >
+                                <TeiRegistrationEntry
+                                    id={dataEntryId}
+                                    selectedScopeId={selectedScopeId}
+                                    teiRegistrationMetadata={registrationMetaData}
+                                    saveButtonText={'Save new'}
+                                    onSave={onSaveWithoutEnrollment}
+                                    onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
+                                    onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
+                                />
+                            </Grid>
+                            {
+                                dataEntryIsReady &&
+                                <Grid item>
+                                    <div className={classes.marginTop}>
+                                        <GeneralOutput id={dataEntryId} />
+                                    </div>
+                                </Grid>
+                            }
+                        </Grid>
                     </div>
                 </Paper>
             }
@@ -135,4 +146,4 @@ const RegistrationDataEntryPlain = ({ setScopeId, classes, selectedScopeId, data
     );
 };
 
-export const RegistrationDataEntryComponent = withStyles(getStyles)(RegistrationDataEntryPlain);
+export const RegistrationDataEntryComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(RegistrationDataEntryPlain);
