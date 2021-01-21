@@ -2,21 +2,21 @@
 import { actionCreator } from '../../actions/actions.utils';
 
 export const lockedSelectorActionTypes = {
-    ORG_UNIT_ID_SET: 'OrgUnitSet',
-    ORG_UNIT_ID_RESET: 'OrgUnitIdReset',
+    ORG_UNIT_ID_SET: 'LockedSelector.OrgUnitSet',
+    ORG_UNIT_ID_RESET: 'LockedSelector.OrgUnitIdReset',
     PROGRAM_ID_SET: 'LockedSelector.ProgramIdSet',
-    PROGRAM_ID_RESET: 'ProgramIdReset',
-    CATEGORY_OPTION_SET: 'CategoryOptionSet',
-    CATEGORY_OPTION_RESET: 'CategoryOptionReset',
-    ALL_CATEGORY_OPTIONS_RESET: 'AllCategoryOptionsReset',
+    PROGRAM_ID_RESET: 'LockedSelector.ProgramIdReset',
+    CATEGORY_OPTION_SET: 'LockedSelector.CategoryOptionSet',
+    CATEGORY_OPTION_RESET: 'LockedSelector.CategoryOptionReset',
+    ALL_CATEGORY_OPTIONS_RESET: 'LockedSelector.AllCategoryOptionsReset',
 
     CURRENT_SELECTIONS_UPDATE: 'LockedSelector.CurrentSelectionsUpdate',
     CURRENT_SELECTIONS_VALID: 'LockedSelector.CurrentSelectionsValid',
     CURRENT_SELECTIONS_INVALID: 'LockedSelector.CurrentSelectionsInvalid',
     EMPTY_ORG_UNIT_SET: 'LockedSelector.EmptyOrgUnitSet',
 
-    NEW_REGISTRATION_PAGE_OPEN: 'NewRegistrationPageOpen',
-    SEARCH_PAGE_OPEN: 'SearchPageOpen',
+    NEW_REGISTRATION_PAGE_OPEN: 'LockedSelector.NewRegistrationPageOpen',
+    SEARCH_PAGE_OPEN: 'LockedSelector.SearchPageOpen',
 
     CURRENT_PAGE_STORE: 'LockedSelector.StoreCurrentPage',
     FETCH_ORG_UNIT: 'LockedSelector.FetchOrgUnit',
