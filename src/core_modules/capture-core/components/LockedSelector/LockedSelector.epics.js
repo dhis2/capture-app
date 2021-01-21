@@ -46,7 +46,7 @@ export const startAgainEpic = (action$: InputObservable) =>
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE),
+        ofType(lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE),
         filter(action => action.payload.nextProps.orgUnitId),
         switchMap(action => getApi()
             .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
@@ -62,15 +62,15 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
 
 export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE),
+        ofType(lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE),
         filter(action => !action.payload.nextProps.orgUnitId),
         map(() => setEmptyOrgUnitBasedOnUrl()));
 
 export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET,
-            lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_EMPTY_SET,
+            lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS,
+            lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET,
         ),
         map(() => {
             const { programId, orgUnitId } = store.value.currentSelections;
