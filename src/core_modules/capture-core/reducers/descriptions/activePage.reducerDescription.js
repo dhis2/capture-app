@@ -40,6 +40,7 @@ export const activePageDesc = createReducerDescription({
         ...state,
         isDataEntryLoading: true,
         isPageLoading: true,
+        viewEventLoadError: null,
     }),
     [viewEventDataEntryActionTypes.PREREQUISITES_ERROR_LOADING_VIEW_EVENT_DATA_ENTRY]: (state, action) => ({
         ...state,
@@ -87,5 +88,5 @@ export const activePageDesc = createReducerDescription({
     selectionsError: null,
     isPageLoading: false,
     isDataEntryLoading: false,
-    viewEventLoadError: false,
+    viewEventLoadError: null,
 });
