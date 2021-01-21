@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { parse } from 'query-string';
 import { paramsSelector } from './appSync.selectors';
 import { LoadingMaskForPage } from '../LoadingMasks';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { updateSelectionsFromUrl } from '../LockedSelector';
-import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
 
 type Props = {
@@ -26,50 +26,39 @@ const pageKeys = {
     NEW: 'new',
 };
 
+const programIdProperties = {
+    urlKey: 'programId',
+    propKey: 'programId',
+};
+const orgUnitIdProperties = {
+    urlKey: 'orgUnitId',
+    propKey: 'orgUnitId',
+};
+const trackedEntityTypeIdProperties = {
+    urlKey: 'trackedEntityTypeId',
+    propKey: 'trackedEntityTypeId',
+};
+const eventIdProperties = {
+    urlKey: 'viewEventId',
+    propKey: 'viewEventId',
+};
+
 const specificationForPages = {
     [pageKeys.MAIN]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
+        programIdProperties,
+        orgUnitIdProperties,
     ],
     [pageKeys.VIEW_EVENT]: [
-        {
-            urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
-            propKey: 'viewEventId',
-        },
+        eventIdProperties,
     ],
     [pageKeys.SEARCH]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
-        {
-            urlKey: 'trackedEntityTypeId',
-            propKey: 'trackedEntityTypeId',
-        },
+        programIdProperties,
+        orgUnitIdProperties,
     ],
     [pageKeys.NEW]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
-        {
-            urlKey: 'trackedEntityTypeId',
-            propKey: 'trackedEntityTypeId',
-        },
+        programIdProperties,
+        orgUnitIdProperties,
+        trackedEntityTypeIdProperties,
     ],
 };
 
@@ -180,9 +169,13 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) =>
-            // $FlowFixMe[invalid-computed-prop] automated comment
-            dispatch(updaterForPages[page](updateData)),
+        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) => {
+            const pageIsUsingTheOldWayOfRendering = Object.values(pageKeys).includes(page);
+
+            if (pageIsUsingTheOldWayOfRendering && page != null) {
+                dispatch(updaterForPages[page](updateData));
+            }
+        },
     });
 
     // $FlowFixMe[missing-annot] automated comment

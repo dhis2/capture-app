@@ -2,7 +2,8 @@
 import i18n from '@dhis2/d2-i18n';
 import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { catchError, filter, map, switchMap } from 'rxjs/operators';
+import { from, of } from 'rxjs';
 import {
     lockedSelectorActionTypes,
     lockedSelectorBatchActionTypes,
@@ -14,7 +15,7 @@ import {
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
-import { deriveUrlQueries, urlArguments } from '../../utils/url';
+import { pageKeys, pagesWithRouter, urlArguments } from '../../utils/url';
 
 const exactUrl = (page: string, url: string) => {
     if (page && page !== 'viewEvent') {
@@ -23,16 +24,22 @@ const exactUrl = (page: string, url: string) => {
     return `/?${url}`;
 };
 
+export const pageIsUsingTheOldWayOfRendering = (page: string): boolean =>
+    Object.values(pageKeys).includes(page);
+
+export const pageIsUsingTheStandardRouter = (page: string): boolean =>
+    Object.values(pagesWithRouter).includes(page);
+
 const fetchOrgUnits = id => getApi().get(`organisationUnits/${id}`, { fields: 'id,displayName' });
 
 export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
         map(({ payload: { orgUnitId } }) => {
-            const { app: { page } } = store.value;
+            const { pathname } = store.value.router.location;
             const queries = deriveUrlQueries(store.value);
 
-            return push(exactUrl(page, urlArguments({ ...queries, orgUnitId })));
+            return push(exactUrl(pathname, urlArguments({ ...queries, orgUnitId })));
         }));
 
 export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore) =>
@@ -49,9 +56,9 @@ export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.PROGRAM_ID_SET),
         map(({ payload: { programId } }) => {
-            const { app: { page } } = store.value;
+            const { pathname } = store.value.router.location;
             const queries = deriveUrlQueries(store.value);
-            return push(exactUrl(page, urlArguments({ ...queries, programId })));
+            return push(exactUrl(pathname, urlArguments({ ...queries, programId })));
         }));
 
 export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -97,6 +104,11 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable,
             lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS,
             lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET,
         ),
+        filter(() => {
+            const { location: { pathname } } = store.value.router;
+            const is = pageIsUsingTheStandardRouter(pathname.substring(1));
+            return !is;
+        }),
         map(() => {
             const { programId, orgUnitId } = store.value.currentSelections;
 
@@ -113,3 +125,15 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable,
 
             return validSelectionsFromUrl();
         }));
+
+export const fetchOrgUnitEpic = (action$: InputObservable) =>
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.FETCH_ORG_UNIT),
+        switchMap(({ payload: { orgUnitId } }) =>
+            from(fetchOrgUnits(orgUnitId))
+                .pipe(
+                    map(({ id, displayName: name }) =>
+                        setCurrentOrgUnitBasedOnUrl({ id, name })),
+                )),
+        catchError(() => of(errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')))),
+    );

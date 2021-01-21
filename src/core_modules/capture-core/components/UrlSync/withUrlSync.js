@@ -28,10 +28,6 @@ export type UpdateDataContainer = {
     prevPage: ?string,
 };
 
-export const reservedUrlKeys = {
-    ENTIRE_PARAM_STRING: 'ENTIRE_PARAM_STRING',
-};
-
 const getUrlSyncer = (
     InnerComponent: React.ComponentType<any>,
     onGetSyncSpecification: SyncSpecificationGetter) =>
@@ -115,8 +111,9 @@ const getUrlSyncer = (
         render() {
             const { onUpdate, urlParams, stateParams, urlPage, statePage, ...passOnProps } = this.props;
             const urlOutOfSync = this.isOutOfSync();
+            const pageIsUsingTheOldWayOfRendering = Object.values(pageKeys).includes(urlPage);
 
-            if (urlOutOfSync) {
+            if (urlOutOfSync && pageIsUsingTheOldWayOfRendering) {
                 return (
                     // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent

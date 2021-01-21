@@ -54,3 +54,6 @@ export const setCurrentOrgUnitBasedOnUrl = (orgUnit: Object) => actionCreator(lo
 export const errorRetrievingOrgUnitBasedOnUrl = (error: string) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT_ERROR)({ error });
 export const setEmptyOrgUnitBasedOnUrl = () => actionCreator(lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET)();
 
+// component Lifecycle
+export const fetchOrgUnit = (orgUnitId: string) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT)({ orgUnitId });
+export const storeCurrentPage = (page: string) => actionCreator(lockedSelectorActionTypes.CURRENT_PAGE_STORE)({ page });

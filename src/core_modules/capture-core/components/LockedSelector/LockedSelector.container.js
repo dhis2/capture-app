@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useCallback } from 'react';
+import React, { type ComponentType, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import { LockedSelectorComponent } from './LockedSelector.component';
@@ -13,6 +13,7 @@ import {
     resetAllCategoryOptionsFromLockedSelector,
     openNewRegistrationPageFromLockedSelector,
     openSearchPageFromLockedSelector,
+    fetchOrgUnit,
     lockedSelectorBatchActionTypes,
 } from './LockedSelector.actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
@@ -50,6 +51,15 @@ const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string
             pathname,
         }),
     );
+
+const useComponentLifecycle = () => {
+    const dispatch = useDispatch();
+    const { selectedOrgUnitId } = useUrlQueries();
+    useEffect(() => {
+        selectedOrgUnitId && dispatch(fetchOrgUnit(selectedOrgUnitId));
+    },
+    [dispatch, selectedOrgUnitId]);
+};
 
 export const LockedSelector: ComponentType<OwnProps> =
   ({
@@ -164,7 +174,9 @@ export const LockedSelector: ComponentType<OwnProps> =
       const organisationUnits: Object =
         useSelector(({ organisationUnits: orgUnits }) => orgUnits);
 
-      const ready = deriveReadiness(isPageLoading, selectedOrgUnitId, organisationUnits);
+      const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, organisationUnits);
+
+      useComponentLifecycle();
 
       return (
           <LockedSelectorComponent
