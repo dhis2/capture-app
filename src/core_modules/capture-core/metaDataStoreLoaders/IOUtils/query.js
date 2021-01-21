@@ -1,15 +1,11 @@
 // @flow
+import type { ResourceQuery, QueryVariables } from '@dhis2/app-runtime';
 import { getContext } from '../context';
-import type { ApiQueryExtended } from './IOUtils.types';
 
-export const query = async (
-    querySpecification: ApiQueryExtended,
-    variables: Object,
+export const query = (
+    resourceQuery: ResourceQuery,
+    variables?: QueryVariables,
 ) => {
     const { onQueryApi } = getContext();
-    const externalQuery = {
-        [querySpecification.resource]: querySpecification,
-    };
-    const response = await onQueryApi(externalQuery, { variables });
-    return response[querySpecification.resource];
+    return onQueryApi(resourceQuery, variables);
 };

@@ -14,3 +14,13 @@ export type OwnProps = $ReadOnly<{|
   onUpdateField: Function,
   onStartAsyncUpdateField: Function,
 |}>
+
+type ContainerProps = {|
+  ready: boolean,
+|}
+
+export type Props = $ReadOnly<{|
+  ...OwnProps,
+  ...CssClasses,
+  ...ContainerProps
+|}>

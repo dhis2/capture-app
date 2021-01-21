@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2020
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
+"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -137,6 +137,12 @@ msgstr "Đăng ký"
 msgid "A future date is not allowed"
 msgstr "Ngày tương lai không được phép"
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr "trong"
+
 msgid "Metadata error. see log for details"
 msgstr "Lỗi siêu dữ liệu. xem nhật ký để biết chi tiết"
 
@@ -163,9 +169,6 @@ msgstr "Người nhận"
 
 msgid "Saving to"
 msgstr "Đang lưu vào"
-
-msgid "in"
-msgstr "trong"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -256,6 +259,18 @@ msgstr "Hủy"
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Rời khỏi trang ngày sẽ hủy các thay đổi bạn đã thực hiện cho sự kiện này."
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr "Một lỗi đã xảy ra. Xem nhật ký để biết chi tiết"
@@ -437,8 +452,8 @@ msgstr "Cột hiển thị trong bảng"
 msgid "Column"
 msgstr "Cột"
 
-msgid "Update"
-msgstr "Cập nhật"
+msgid "Apply"
+msgstr "Áp dụng"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} đến {{toDate}}"
@@ -575,6 +590,27 @@ msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
 msgid "Registered events"
 msgstr "Sự kiện đã đăng ký"
 
+msgid "Enrollment status"
+msgstr "Trạng thái đăng ký"
+
+msgid "Cancelled"
+msgstr "Đã hủy"
+
+msgid "Assigned to"
+msgstr "Đã gán cho"
+
+msgid "Registering unit"
+msgstr "Đơn Vị đăng ký"
+
+msgid "Registration Date"
+msgstr "Ngày đăng ký"
+
+msgid "Inactive"
+msgstr "Không kích hoạt"
+
+msgid "Working list could not be updated"
+msgstr ""
+
 msgid "Update view"
 msgstr "Cập nhật chế độ xem"
 
@@ -612,21 +648,6 @@ msgid "Choose a registering unit to start reporting"
 msgstr "Chọn một đơn vị đăng ký để bắt đầu báo cáo"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}}"
-msgstr ""
-
-msgid "without"
-msgstr ""
-
-msgid "enrollment"
-msgstr ""
-
-msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
