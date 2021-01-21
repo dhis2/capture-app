@@ -64,5 +64,5 @@ export const saveEditEventLocationChangeEpic = (action$: InputObservable, store:
             const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
-            return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
+            return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
         }));

@@ -14,28 +14,16 @@ import {
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
-import { urlArguments } from '../../utils/url';
+import { deriveUrlQueries, urlArguments } from '../../utils/url';
 
 const exactUrl = (page: string, url: string) => {
     if (page && page !== 'viewEvent') {
-        return `/${page}/${url}`;
+        return `${page}?${url}`;
     }
-    return `/${url}`;
+    return `/?${url}`;
 };
 
 const fetchOrgUnits = id => getApi().get(`organisationUnits/${id}`, { fields: 'id,displayName' });
-
-const deriveUrlQueries = (state) => {
-    const {
-        currentSelections: {
-            programId,
-            orgUnitId,
-            trackedEntityTypeId,
-        },
-    } = state;
-
-    return { programId, orgUnitId, trackedEntityTypeId };
-};
 
 export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

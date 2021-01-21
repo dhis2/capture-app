@@ -76,11 +76,6 @@ import {
     networkMonitorStatusEpic,
 } from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
 import {
-    setOrgUnit,
-    setProgram,
-    goBackToListContext,
-} from 'capture-core/components/LockedSelector/QuickSelector/epics/setSelection.epics';
-import {
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
 } from 'capture-core/components/LockedSelector/QuickSelector';
@@ -232,9 +227,6 @@ export default combineEpics(
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
     goingOnlineEpic,
-    setOrgUnit,
-    setProgram,
-    goBackToListContext,
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,

@@ -14,3 +14,26 @@ export const urlArguments = ({ programId, orgUnitId, trackedEntityTypeId }: Url)
 
     return argArray.join('&');
 };
+
+export const deriveUrlQueries = (state: Object) => {
+    const {
+        currentSelections: {
+            programId: selectedProgramId,
+            orgUnitId: selectedOrgUnitId,
+            trackedEntityTypeId: selectedTet,
+        },
+        router: {
+            location: {
+                query: {
+                    programId: routerProgramId,
+                    orgUnitId: routerOrgUnitId,
+                    trackedEntityTypeId: routerTet,
+                },
+            } },
+    } = state;
+    const programId = routerProgramId || selectedProgramId;
+    const orgUnitId = routerOrgUnitId || selectedOrgUnitId;
+    const trackedEntityTypeId = routerTet || selectedTet;
+
+    return { programId, orgUnitId, trackedEntityTypeId };
+};
