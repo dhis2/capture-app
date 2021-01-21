@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useEffect, useCallback } from 'react';
+import React, { type ComponentType, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import { LockedSelectorComponent } from './LockedSelector.component';
