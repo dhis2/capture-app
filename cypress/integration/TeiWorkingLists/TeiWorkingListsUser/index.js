@@ -3,7 +3,7 @@ beforeEach(() => {
 });
 
 Given('you open the main page with Ngelehun and child programme context', () => {
-    cy.visit('#/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+    cy.visit('#/?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {
