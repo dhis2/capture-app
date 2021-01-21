@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { withTheme } from '@material-ui/core';
-import type { RenderFoundation, TeiRegistration } from '../../../../../../metaData';
+import type { TeiRegistration } from '../../../../../../metaData';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import teiClasses from './trackedEntityInstance.module.css';
 import { TeiRegistrationEntry } from '../../../../../DataEntries';
@@ -9,7 +9,7 @@ import { useSaveButtonText } from '../useSaveButtonText';
 
 type Props = {|
     theme: Theme,
-    onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
+    onSave: () => void,
     onGetUnsavedAttributeValues: Function,
     onPostProcessErrorMessage: Function,
     teiRegistrationMetadata?: TeiRegistration,
