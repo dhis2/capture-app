@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-import CheckedIcon from '../../../Icons/SingleSelectionCheckedIcon.component';
-import UncheckedIcon from '../../../Icons/SingleSelectionUncheckedIcon.component';
+import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from '../../../Icons';
 import SingleSelectBox from './SingleSelectBox/SingleSelectBox.component';
 import withFocusHandler from './SingleSelectBox/withFocusHandler';
 import orientations from '../../../constants/orientations.const';
@@ -51,7 +50,7 @@ class SingleSelectionBoxes extends React.Component<Props> {
         const { classes, disabled } = this.props;
         const { iconDisabled, iconSelected } = classes || {};
         return (
-            <CheckedIcon
+            <SingleSelectionCheckedIcon
                 className={this.getCheckedClass(iconSelected, iconDisabled, disabled)}
             />
         );
@@ -61,7 +60,7 @@ class SingleSelectionBoxes extends React.Component<Props> {
         const { classes, disabled } = this.props;
         const { iconDisabled, iconDeselected } = classes || {};
         return (
-            <UncheckedIcon
+            <SingleSelectionUncheckedIcon
                 className={this.getUncheckedClass(iconDeselected, iconDisabled, disabled)}
             />
         );

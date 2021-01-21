@@ -40,7 +40,7 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
             const rowsPerPage = this.props.rowsPerPage;
 
             return (
-                <div id="rows-per-page-selector">
+                <div id="rows-per-page-selector" data-test="rows-per-page-selector">
                     <OptionsSelectWithTranslations
                         onSelect={this.handleRowsSelect}
                         options={this.options}

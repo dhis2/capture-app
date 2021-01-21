@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2019
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
-# phil_dhis2, 2020
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T10:53:21.230Z\n"
+"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,6 +139,12 @@ msgstr "Регистрация"
 msgid "A future date is not allowed"
 msgstr "Ввод даты будущего периода запрещена"
 
+msgid "Saving a {{trackedEntityName}} in"
+msgstr ""
+
+msgid "in"
+msgstr "в"
+
 msgid "Metadata error. see log for details"
 msgstr "Ошибка в метаданных. Смотрите детали в лог-файле."
 
@@ -165,9 +171,6 @@ msgstr "Уполномоченный"
 
 msgid "Saving to"
 msgstr "Сохраняю в"
-
-msgid "in"
-msgstr "в"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -260,6 +263,18 @@ msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Произведенные изменения в данных не будут сохранены, если вы покинете данную"
 " страницу."
+
+msgid "Saving a {{trackedEntityName}}"
+msgstr ""
+
+msgid "without"
+msgstr ""
+
+msgid "enrollment"
+msgstr ""
+
+msgid "Enroll in a program by selecting a program from the top bar."
+msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr ""
@@ -441,8 +456,8 @@ msgstr "Столбы, для показа в таблице"
 msgid "Column"
 msgstr "Столбец"
 
-msgid "Update"
-msgstr "Обновить"
+msgid "Apply"
+msgstr "Применить"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} по {{toDate}}"
@@ -580,6 +595,27 @@ msgstr "Произошла ошибка во время загрузки Раб�
 msgid "Registered events"
 msgstr "Зарегистрированные события"
 
+msgid "Enrollment status"
+msgstr "Статус регистрации"
+
+msgid "Cancelled"
+msgstr "Отмененный"
+
+msgid "Assigned to"
+msgstr "закреплено за"
+
+msgid "Registering unit"
+msgstr "Регистрирующая единица"
+
+msgid "Registration Date"
+msgstr "Дата регистрации"
+
+msgid "Inactive"
+msgstr "Неактивный"
+
+msgid "Working list could not be updated"
+msgstr ""
+
 msgid "Update view"
 msgstr "Обновить вид"
 
@@ -617,21 +653,6 @@ msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
-
-msgid "Saving a {{trackedEntityName}}"
-msgstr ""
-
-msgid "without"
-msgstr ""
-
-msgid "enrollment"
-msgstr ""
-
-msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"

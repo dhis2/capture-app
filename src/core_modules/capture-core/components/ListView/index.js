@@ -9,6 +9,7 @@ export type {
     CustomMenuContent,
     DataSource,
     FiltersData,
+    FiltersOnly,
     StickyFilters,
     ChangePage,
     ChangeRowsPerPage,

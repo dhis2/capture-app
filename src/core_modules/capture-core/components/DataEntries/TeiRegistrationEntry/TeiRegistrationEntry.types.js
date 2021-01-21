@@ -12,3 +12,14 @@ export type OwnProps = $ReadOnly<{|
   onGetUnsavedAttributeValues: Function,
   onPostProcessErrorMessage: Function,
 |}>
+
+type ContainerProps = {|
+  ready: boolean,
+|}
+
+export type Props = $ReadOnly<{|
+  ...OwnProps,
+  ...CssClasses,
+  ...ContainerProps
+|}>
+

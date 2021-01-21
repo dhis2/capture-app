@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { useDataSource } from '../../EventWorkingListsCommon';
+import { useDataSource } from '../../WorkingListsCommon';
 import { createOfflineListWrapper } from '../../../../List'; // TODO: Refactor list
 import type { Props } from './eventWorkingListsOfflineDataSourceSetup.types';
 
@@ -20,7 +20,7 @@ export const EventWorkingListsOfflineDataSourceSetup = ({
             hasData={hasData}
             dataSource={useDataSource(eventRecords, recordsOrder, columns)}
             columns={columns}
-            rowIdKey="eventId"
+            rowIdKey="id"
         />
     );
 };
