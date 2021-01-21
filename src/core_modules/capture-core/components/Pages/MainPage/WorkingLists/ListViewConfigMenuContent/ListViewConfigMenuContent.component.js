@@ -32,17 +32,17 @@ const ListViewConfigMenuContentPlain = (props: Props) => {
 
     const updateTemplateHandler = React.useCallback((...args) => {
         setMaintenanceDialogOpenMode(null);
-        onUpdateTemplate(...args);
+        onUpdateTemplate && onUpdateTemplate(...args);
     }, [onUpdateTemplate]);
 
     const addTemplateHandler = React.useCallback((...args) => {
         setMaintenanceDialogOpenMode(null);
-        onAddTemplate(...args);
+        onAddTemplate && onAddTemplate(...args);
     }, [onAddTemplate]);
 
     const deleteTemplateHandler = React.useCallback((...args) => {
         setMaintenanceDialogOpenMode(null);
-        onDeleteTemplate(...args);
+        onDeleteTemplate && onDeleteTemplate(...args);
     }, [onDeleteTemplate]);
 
     const getSaveItem = React.useCallback(() => ({
@@ -105,9 +105,11 @@ const ListViewConfigMenuContentPlain = (props: Props) => {
 
         const { access, isDefault, notPreserved, name } = currentTemplate;
 
-        currentViewContents.push(getSaveAsItem(!!isDefault, currentViewHasTemplateChanges));
+        if (onAddTemplate) {
+            currentViewContents.push(getSaveAsItem(!!isDefault, currentViewHasTemplateChanges));
+        }
 
-        if (!isDefault && !notPreserved && access.write && access.update && currentViewHasTemplateChanges) {
+        if (!isDefault && !notPreserved && access.write && access.update && currentViewHasTemplateChanges && onUpdateTemplate) {
             savedViewContents.push(getSaveItem());
         }
 
@@ -115,7 +117,7 @@ const ListViewConfigMenuContentPlain = (props: Props) => {
             savedViewContents.push(getShareItem());
         }
 
-        if (!isDefault && !notPreserved && access.delete) {
+        if (!isDefault && !notPreserved && access.delete && onDeleteTemplate) {
             savedViewContents.push(getDeleteItem());
         }
 
@@ -137,6 +139,9 @@ const ListViewConfigMenuContentPlain = (props: Props) => {
         currentViewHasTemplateChanges,
         getSavedViewSubHeader,
         customListViewMenuContents,
+        onAddTemplate,
+        onUpdateTemplate,
+        onDeleteTemplate,
     ]);
 
     return (

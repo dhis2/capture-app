@@ -6,7 +6,7 @@ type Props = {
 
 };
 
-export default (props: Props) => (
+export const MultiSelectionCheckedIcon = (props: Props) => (
     <SvgIcon
         {...props}
     >

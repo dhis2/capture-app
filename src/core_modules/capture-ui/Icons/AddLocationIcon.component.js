@@ -6,7 +6,7 @@ type Props = {
 
 };
 
-export default (props: Props) => (
+export const AddLocationIcon = (props: Props) => (
     <SvgIcon
         {...props}
     >

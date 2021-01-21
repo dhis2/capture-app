@@ -85,19 +85,21 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                             className={classes.firstButtonContainer}
                         >
                             <Button
+                                dataTest="list-view-filter-apply-button"
                                 muiButtonRef={this.setUpdateButtonInstance}
                                 primary
                                 onClick={this.handleUpdateClick}
                             >
-                                {i18n.t('Update')}
+                                {i18n.t('Apply')}
                             </Button>
                         </div>
                         <Button
+                            dataTest="list-view-filter-cancel-button"
                             muiButtonRef={this.setCloseButtonInstance}
                             secondary
                             onClick={onClose}
                         >
-                            {i18n.t('Close')}
+                            {i18n.t('Cancel')}
                         </Button>
                     </div>
                 </React.Fragment>
