@@ -447,8 +447,8 @@ msgstr "Sloupce k zobrazení v tabulce"
 msgid "Column"
 msgstr "Sloupec"
 
-msgid "Update"
-msgstr "Aktualizovat"
+msgid "Apply"
+msgstr "Použít"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} do {{toDate}}"
@@ -584,6 +584,27 @@ msgstr "při načítání pracovních seznamů došlo k chybě"
 
 msgid "Registered events"
 msgstr "Registrované události"
+
+msgid "Enrollment status"
+msgstr "Stav zápisu"
+
+msgid "Cancelled"
+msgstr "Zrušeno"
+
+msgid "Assigned to"
+msgstr "Přiřazen k"
+
+msgid "Registering unit"
+msgstr "Registrační jednotka"
+
+msgid "Registration Date"
+msgstr "Datum registrace"
+
+msgid "Inactive"
+msgstr "Neaktivní"
+
+msgid "Working list could not be updated"
+msgstr ""
 
 msgid "Update view"
 msgstr "Aktualizovat zobrazení"

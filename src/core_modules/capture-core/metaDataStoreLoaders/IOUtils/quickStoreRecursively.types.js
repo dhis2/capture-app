@@ -12,10 +12,10 @@ export type QueryVariables = {
     iteration: number,
 };
 
-export type RecursiveQuery = {
+export type RecursiveQuery = {|
     ...ApiQuery,
     params?: (queryVariables: QueryVariables) => Object,
-};
+|};
 
 export type QuickStoreIterationOptions = {
     convertQueryResponse: ConvertQueryResponseFn,

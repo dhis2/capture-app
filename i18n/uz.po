@@ -452,8 +452,8 @@ msgstr "Жадвалда кўрсатиладиган устунлар"
 msgid "Column"
 msgstr "Устун"
 
-msgid "Update"
-msgstr "Янгилаш"
+msgid "Apply"
+msgstr "Мурожаат қилиш"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} дан {{toDate}} га"
@@ -589,6 +589,27 @@ msgstr "ишчи рўйхатни юклашда хатолик юз берди"
 
 msgid "Registered events"
 msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
+
+msgid "Enrollment status"
+msgstr "Рўйхатга олиш ҳолати"
+
+msgid "Cancelled"
+msgstr "Бекор қилинди"
+
+msgid "Assigned to"
+msgstr "Тайинланган"
+
+msgid "Registering unit"
+msgstr "Рўйхатга олиш муассасаси"
+
+msgid "Registration Date"
+msgstr "Рўйхатга олинган сана"
+
+msgid "Inactive"
+msgstr "Фаол эмас"
+
+msgid "Working list could not be updated"
+msgstr ""
 
 msgid "Update view"
 msgstr "Янгиланган кўриниш"
