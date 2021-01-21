@@ -16,4 +16,5 @@ export {
 } from './trackedEntityType/getTrackedEntityTypeThrowIfNotFound';
 export { convertValues as convertDataElementsValues } from './DataElements';
 export { getScopeFromScopeId } from './getScopeFromScopeId';
+export { programTypes, scopeTypes } from './constants';
 export { getDataElementsFromScopeId } from './getDataElementsFromScopeId';
