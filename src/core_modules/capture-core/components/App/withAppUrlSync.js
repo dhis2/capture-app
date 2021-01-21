@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { parse } from 'query-string';
 import { paramsSelector } from './appSync.selectors';
 import { LoadingMaskForPage } from '../LoadingMasks';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
