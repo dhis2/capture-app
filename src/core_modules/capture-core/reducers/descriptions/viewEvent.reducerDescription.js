@@ -44,13 +44,13 @@ export const viewEventPageDesc = createReducerDescription({
         newState.dataEntryLoadError = action.payload;
         return newState;
     },
-    [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: (state, { payload: { eventId } }) => {
+    [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: (state, action) => {
         const newState = {
             eventDetailsSection: {},
             notesSection: { isLoading: true },
             relationshipsSection: { isLoading: true },
             assigneeSection: { isLoading: true },
-            eventId,
+            eventId: action.payload,
         };
         return newState;
     },
