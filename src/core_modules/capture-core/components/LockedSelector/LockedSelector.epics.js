@@ -15,8 +15,7 @@ import {
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
-import { deriveUrlQueries, pagesWithRouter, urlArguments } from '../../utils/url';
-import { pageKeys } from '../App/withAppUrlSync';
+import { deriveUrlQueries, pageFetchesOrgUnitUsingTheOldWay, urlArguments } from '../../utils/url';
 
 const exactUrl = (page: string, url: string) => {
     if (page && page !== 'viewEvent') {
@@ -24,13 +23,6 @@ const exactUrl = (page: string, url: string) => {
     }
     return `/?${url}`;
 };
-
-export const pageIsUsingTheOldWayOfRendering = (page: string): boolean =>
-    Object.values(pageKeys).includes(page);
-
-// todo need to get rid of this bit
-export const pageIsUsingTheStandardRouter = (page: string): boolean =>
-    Object.values(pagesWithRouter).includes(page);
 
 const fetchOrgUnits = id => getApi().get(`organisationUnits/${id}`, { fields: 'id,displayName' });
 
@@ -108,8 +100,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable,
         ),
         filter(() => {
             const { location: { pathname } } = store.value.router;
-            const is = pageIsUsingTheStandardRouter(pathname.substring(1));
-            return !is;
+            return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
         map(() => {
             const { programId, orgUnitId } = store.value.currentSelections;

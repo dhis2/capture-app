@@ -1,4 +1,6 @@
 // @flow
+import { pageKeys } from '../components/App/withAppUrlSync';
+
 type Url = {programId?: string, orgUnitId?: string, trackedEntityTypeId?: string}
 
 export const urlArguments = ({ programId, orgUnitId, trackedEntityTypeId }: Url): string => {
@@ -38,6 +40,5 @@ export const deriveUrlQueries = (state: Object) => {
     return { programId, orgUnitId, trackedEntityTypeId };
 };
 
-export const pagesWithRouter = {
-    ENROLLMENT: 'enrollment',
-};
+export const pageFetchesOrgUnitUsingTheOldWay = (page: string, pages: Object = pageKeys): boolean =>
+    Object.values(pages).includes(page);

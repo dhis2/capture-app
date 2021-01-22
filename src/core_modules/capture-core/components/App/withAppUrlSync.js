@@ -7,6 +7,7 @@ import { LoadingMaskForPage } from '../LoadingMasks';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { updateSelectionsFromUrl } from '../LockedSelector';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
+import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
 type Props = {
     location: {
@@ -135,10 +136,8 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) => {
-            const pageIsUsingTheOldWayOfRendering = Object.values(pageKeys).includes(page);
-
-            if (pageIsUsingTheOldWayOfRendering && page != null) {
+        onUpdateFromUrl: (page: string, updateData: UpdateDataContainer) => {
+            if (pageFetchesOrgUnitUsingTheOldWay(page) && page != null) {
                 dispatch(updaterForPages[page](updateData));
             }
         },

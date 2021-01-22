@@ -4,7 +4,7 @@
  */
 import * as React from 'react';
 import { parse } from 'query-string';
-import { pageKeys } from '../App/withAppUrlSync';
+import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
 type Props = {
     urlPage: string,
@@ -112,9 +112,8 @@ const getUrlSyncer = (
         render() {
             const { onUpdate, urlParams, stateParams, urlPage, statePage, ...passOnProps } = this.props;
             const urlOutOfSync = this.isOutOfSync();
-            const pageIsUsingTheOldWayOfRendering = Object.values(pageKeys).includes(urlPage);
 
-            if (urlOutOfSync && pageIsUsingTheOldWayOfRendering) {
+            if (urlOutOfSync && pageFetchesOrgUnitUsingTheOldWay(urlPage)) {
                 return (
                     // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent

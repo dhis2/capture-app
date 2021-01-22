@@ -2,6 +2,7 @@
 import React, { type ComponentType, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import { useLocation } from 'react-router';
 import { LockedSelectorComponent } from './LockedSelector.component';
 import {
     resetOrgUnitIdFromLockedSelector,
@@ -18,6 +19,7 @@ import {
 } from './LockedSelector.actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import type { OwnProps } from './LockedSelector.types';
+import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
 const deriveReadiness = (isPageLoading, selectedOrgUnitId, organisationUnits) => {
     // because we want the orgUnit to be fetched and stored
@@ -55,10 +57,13 @@ const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
     const { selectedOrgUnitId } = useUrlQueries();
+    const { pathname } = useLocation();
+    const pageIsResponsibleForFetchingOrgUnit = !pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
+
     useEffect(() => {
-        selectedOrgUnitId && dispatch(fetchOrgUnit(selectedOrgUnitId));
+        pageIsResponsibleForFetchingOrgUnit && selectedOrgUnitId && dispatch(fetchOrgUnit(selectedOrgUnitId));
     },
-    [dispatch, selectedOrgUnitId]);
+    [dispatch, selectedOrgUnitId, pageIsResponsibleForFetchingOrgUnit]);
 };
 
 export const LockedSelector: ComponentType<OwnProps> =
