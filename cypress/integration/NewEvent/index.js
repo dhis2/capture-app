@@ -101,7 +101,6 @@ Then('the data should be sent to the server successfully', () => {
                 cy.request('DELETE', relationshipUrl);
             });
     });
-    
     cy.get('@postTrackedEntityInstance').then((result) => {
         const id = result.response.body.response.importSummaries[0].reference;
         cy.buildApiUrl('trackedEntityInstances', id)
