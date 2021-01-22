@@ -18,7 +18,6 @@ export const lockedSelectorActionTypes = {
     NEW_REGISTRATION_PAGE_OPEN: 'LockedSelector.NewRegistrationPageOpen',
     SEARCH_PAGE_OPEN: 'LockedSelector.SearchPageOpen',
 
-    CURRENT_PAGE_STORE: 'LockedSelector.StoreCurrentPage',
     FETCH_ORG_UNIT: 'LockedSelector.FetchOrgUnit',
     FETCH_ORG_UNIT_SUCCESS: 'LockedSelector.FetchOrgUnitSuccess',
     FETCH_ORG_UNIT_ERROR: 'LockedSelector.FetchOrgUnitError',
@@ -56,4 +55,3 @@ export const setEmptyOrgUnitBasedOnUrl = () => actionCreator(lockedSelectorActio
 
 // component Lifecycle
 export const fetchOrgUnit = (orgUnitId: string) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT)({ orgUnitId });
-export const storeCurrentPage = (page: string) => actionCreator(lockedSelectorActionTypes.CURRENT_PAGE_STORE)({ page });
