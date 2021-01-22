@@ -58,12 +58,12 @@ const useComponentLifecycle = () => {
     const dispatch = useDispatch();
     const { selectedOrgUnitId } = useUrlQueries();
     const { pathname } = useLocation();
-    const pageIsResponsibleForFetchingOrgUnit = !pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
+    const pageFetchesOrgUnit = !pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
 
     useEffect(() => {
-        pageIsResponsibleForFetchingOrgUnit && selectedOrgUnitId && dispatch(fetchOrgUnit(selectedOrgUnitId));
+        pageFetchesOrgUnit && selectedOrgUnitId && dispatch(fetchOrgUnit(selectedOrgUnitId));
     },
-    [dispatch, selectedOrgUnitId, pageIsResponsibleForFetchingOrgUnit]);
+    [dispatch, selectedOrgUnitId, pageFetchesOrgUnit]);
 };
 
 export const LockedSelector: ComponentType<OwnProps> =
