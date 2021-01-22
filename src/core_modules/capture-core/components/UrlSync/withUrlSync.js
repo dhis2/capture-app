@@ -16,10 +16,9 @@ type Props = {
     history: Object
 };
 
-type SyncSpecification = {
-    urlKey: string,
-    propKey: string,
-};
+type SyncSpecification = {|
+    urlParameterName: string,
+|};
 type SyncSpecificationGetter = (props: Props) => Array<SyncSpecification>;
 
 export type UpdateDataContainer = {
@@ -46,8 +45,8 @@ const getUrlSyncer = (
             const nextParams = Object
                 .keys(locationParams)
                 .reduce((accNextParams, locationKey) => {
-                    const syncSpec = syncSpecification.find(s => s.urlKey === locationKey) || {};
-                    accNextParams[syncSpec.propKey || locationKey] = locationParams[locationKey];
+                    const syncSpec = syncSpecification.find(s => s.urlParameterName === locationKey) || {};
+                    accNextParams[syncSpec.urlParameterName || locationKey] = locationParams[locationKey];
                     return accNextParams;
                 }, {});
 
@@ -88,8 +87,8 @@ const getUrlSyncer = (
         paramsNeedsUpdate(syncSpecifications: Array<SyncSpecification>, locationParams: { [key: string]: string}) {
             return syncSpecifications
                 .some((spec) => {
-                    const locationValue = locationParams[spec.urlKey];
-                    const propValue = (this.props.stateParams && this.props.stateParams[spec.propKey]) || undefined;
+                    const locationValue = locationParams[spec.urlParameterName];
+                    const propValue = (this.props.stateParams && this.props.stateParams[spec.urlParameterName]) || undefined;
                     return locationValue !== propValue;
                 });
         }
@@ -135,7 +134,7 @@ const getUrlSyncer = (
  * Compare values from the url params and the props (usually from the state) based on the sync specification. Calls onUpdate or onNoUpdateRequired accordingly. Additionally checks if the page has changed.
  * @alias withUrlSync
  * @memberof UrlSync
- * @example withUrlSync(props => [{ urlKey: 'programId', propKey: 'programId' }])([InnerComponent])
+ * @example withUrlSync(props => [{ urlParameterName: 'programId' }])([InnerComponent])
  */
 export const withUrlSync = (onGetSyncSpecification: SyncSpecificationGetter) =>
     (InnerComponent: React.ComponentType<any>) =>

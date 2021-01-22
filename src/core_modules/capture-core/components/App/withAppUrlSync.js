@@ -27,40 +27,24 @@ export const pageKeys = {
     NEW: 'new',
 };
 
-const programIdProperties = {
-    urlKey: 'programId',
-    propKey: 'programId',
+const programIdParameter = {
+    urlParameterName: 'programId',
 };
-const orgUnitIdProperties = {
-    urlKey: 'orgUnitId',
-    propKey: 'orgUnitId',
+const orgUnitIdParameter = {
+    urlParameterName: 'orgUnitId',
 };
-const trackedEntityTypeIdProperties = {
-    urlKey: 'trackedEntityTypeId',
-    propKey: 'trackedEntityTypeId',
+const tetIdParameter = {
+    urlParameterName: 'trackedEntityTypeId',
 };
-const eventIdProperties = {
-    urlKey: 'viewEventId',
-    propKey: 'viewEventId',
+const eventIdParameter = {
+    urlParameterName: 'viewEventId',
 };
 
 const specificationForPages = {
-    [pageKeys.MAIN]: [
-        programIdProperties,
-        orgUnitIdProperties,
-    ],
-    [pageKeys.VIEW_EVENT]: [
-        eventIdProperties,
-    ],
-    [pageKeys.SEARCH]: [
-        programIdProperties,
-        orgUnitIdProperties,
-    ],
-    [pageKeys.NEW]: [
-        programIdProperties,
-        orgUnitIdProperties,
-        trackedEntityTypeIdProperties,
-    ],
+    [pageKeys.MAIN]: [programIdParameter, orgUnitIdParameter],
+    [pageKeys.VIEW_EVENT]: [eventIdParameter],
+    [pageKeys.SEARCH]: [programIdParameter, orgUnitIdParameter],
+    [pageKeys.NEW]: [programIdParameter, orgUnitIdParameter, tetIdParameter],
 };
 
 const updaterForPages = {
