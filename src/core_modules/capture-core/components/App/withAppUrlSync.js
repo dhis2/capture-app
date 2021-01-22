@@ -49,10 +49,6 @@ const specificationForPages = {
         orgUnitIdProperties,
     ],
     [pageKeys.VIEW_EVENT]: [
-        {
-            urlKey: 'viewEventId',
-            propKey: 'viewEventId',
-        },
         eventIdProperties,
     ],
     [pageKeys.SEARCH]: [
