@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -237,8 +237,8 @@ msgstr "不，待在这里"
 msgid "New event"
 msgstr "新事件"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "你没有在当前选择创建事件的权限"
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
 
 msgid "Save"
 msgstr "保存"
@@ -311,6 +311,12 @@ msgstr "有些操作一直在运行,请等待"
 
 msgid "Operations running"
 msgstr "运作中"
+
+msgid "Hide"
+msgstr "隐藏"
+
+msgid "Possible duplicates found"
+msgstr "发现可能的重复"
 
 msgid "Sort"
 msgstr "排序"
@@ -639,6 +645,9 @@ msgstr "选择一个注册机构开始填报"
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
 
+msgid "Save as new"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "存在重复，但是有错误，查看日志详情。"
 
@@ -670,20 +679,8 @@ msgstr "复查重复"
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
 
-msgid "Possible duplicates found"
-msgstr "发现可能的重复"
-
-msgid "No results found"
-msgstr "没有结果"
-
-msgid "An error occured loading possible duplicates"
-msgstr "载入可能的重复发生错误"
-
-msgid "Hide"
-msgstr "隐藏"
-
-msgid "Save as new {{tetName}}"
-msgstr "保存为新的  {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr ""
 
 msgid "Organisation Unit"
 msgstr "组织机构"
@@ -727,6 +724,9 @@ msgstr "按属性搜索"
 
 msgid "Back"
 msgstr "后退"
+
+msgid "No results found"
+msgstr "没有结果"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -791,6 +791,9 @@ msgstr "事件被分配到  {{name}}"
 
 msgid "Feedbacks"
 msgstr "反馈"
+
+msgid "An error occurred loading possible duplicates"
+msgstr ""
 
 msgid "You dont have access to delete this relationship"
 msgstr "你v不能访问删除的关系"

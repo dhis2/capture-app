@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2021\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -247,8 +247,8 @@ msgstr "لا ، ابق هنا"
 msgid "New event"
 msgstr "حدث جديد"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
 
 msgid "Save"
 msgstr "حفظ"
@@ -322,6 +322,12 @@ msgstr "لا تزال بعض العمليات قيد التشغيل. يرجى ا
 
 msgid "Operations running"
 msgstr "العمليات الجارية"
+
+msgid "Hide"
+msgstr "إخفاء"
+
+msgid "Possible duplicates found"
+msgstr "إحتمال وجود تكرار"
 
 msgid "Sort"
 msgstr "فرز"
@@ -650,6 +656,9 @@ msgstr "اختر وحدة تسجيل لبدء الإبلاغ"
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
+msgid "Save as new"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "يوجد نسخة مكررة (ولكن كانت هناك بعض الأخطاء ، راجع السجل للحصول على التفاصيل"
@@ -682,20 +691,8 @@ msgstr "مراجعة التكرارات"
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr "إحتمال وجود تكرار"
-
-msgid "No results found"
-msgstr "لم يتم العثور على أي نتائج"
-
-msgid "An error occured loading possible duplicates"
-msgstr "حدث خطأ أثناء تحميل التكرارات المحتملة"
-
-msgid "Hide"
-msgstr "إخفاء"
-
-msgid "Save as new {{tetName}}"
-msgstr "حفظ {{tetName}} كجديد"
+msgid "Save as new {{trackedEntityName}}"
+msgstr ""
 
 msgid "Organisation Unit"
 msgstr "الوحدة التنظيمية"
@@ -739,6 +736,9 @@ msgstr "البحث حسب السمة"
 
 msgid "Back"
 msgstr "الخلف"
+
+msgid "No results found"
+msgstr "لم يتم العثور على أي نتائج"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -809,6 +809,9 @@ msgstr "تم تعيين الحدث إلى {{name}}"
 
 msgid "Feedbacks"
 msgstr "تغذيات راجعة"
+
+msgid "An error occurred loading possible duplicates"
+msgstr ""
 
 msgid "You dont have access to delete this relationship"
 msgstr "ليس لديك حق الوصول لحذف هذه العلاقة"

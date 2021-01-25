@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -245,8 +245,8 @@ msgstr "نەخێر، بمێنەوە"
 msgid "New event"
 msgstr "رووداوي نوي"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "مافی دروستکردنی حاڵەتت نیە لە هەڵژێردراوەکانی ئێستات"
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
 
 msgid "Save"
 msgstr "تۆمارکردن"
@@ -321,6 +321,12 @@ msgstr ""
 
 msgid "Operations running"
 msgstr "کردارەکان کاردەکەن"
+
+msgid "Hide"
+msgstr "شاردنەوە"
+
+msgid "Possible duplicates found"
+msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
 
 msgid "Sort"
 msgstr "پۆلینکردن"
@@ -649,6 +655,9 @@ msgstr ""
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
+msgid "Save as new"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "دووبارەبوونەوە هەیە(بەڵآم هەندێک هەڵە هەیە، سەریری لۆگ فایل بکە بۆ زانیاری "
@@ -684,20 +693,8 @@ msgstr "پێداچوونەوە بە دووبارەبووەکان"
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
-
-msgid "No results found"
+msgid "Save as new {{trackedEntityName}}"
 msgstr ""
-
-msgid "An error occured loading possible duplicates"
-msgstr "هەڵەیەک ڕوویدا لە کاتی هێنانی دووبارەبوەکان"
-
-msgid "Hide"
-msgstr "شاردنەوە"
-
-msgid "Save as new {{tetName}}"
-msgstr "وەکو {{tetName}} نوێ تۆمار بکە"
 
 msgid "Organisation Unit"
 msgstr "یەکەی ڕێخکڕاو"
@@ -741,6 +738,9 @@ msgstr "بە پێ ئاتریبیوت بگەڕێ"
 
 msgid "Back"
 msgstr "كةرانةوة"
+
+msgid "No results found"
+msgstr ""
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -807,6 +807,9 @@ msgstr "حاڵەتەکە ڕاپسێردراوە بە  {{name}}"
 
 msgid "Feedbacks"
 msgstr "بۆچوونەکان"
+
+msgid "An error occurred loading possible duplicates"
+msgstr ""
 
 msgid "You dont have access to delete this relationship"
 msgstr "مافی سڕینەوە ئەم پەیوەندیەت نیە"

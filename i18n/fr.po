@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -255,9 +255,8 @@ msgstr "Non, continuer ici"
 msgid "New event"
 msgstr "Nouvel événement"
 
-msgid "You dont have access to create an event in the current selections"
+msgid "You don't have access to create an event in the current selections"
 msgstr ""
-"Vous n'êtes pas autorisé à créer un événement dans les sélections actuelles"
 
 msgid "Save"
 msgstr "Enregistrer"
@@ -332,6 +331,12 @@ msgstr "Certaines opérations sont encore en cours. Veuillez patienter..."
 
 msgid "Operations running"
 msgstr "Opérations en cours"
+
+msgid "Hide"
+msgstr "Masquer"
+
+msgid "Possible duplicates found"
+msgstr "Doublons éventuellement détectés"
 
 msgid "Sort"
 msgstr "Trier"
@@ -662,6 +667,9 @@ msgstr "Sélectionnez une unité d'enregistrement pour commencer un rapport"
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
+msgid "Save as new"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "Un doublon existe (mais des erreurs ont été commises. Voir le journal pour "
@@ -699,20 +707,8 @@ msgstr "Vérifier les doublons"
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr "Doublons éventuellement détectés"
-
-msgid "No results found"
-msgstr "Aucun résultat trouvé"
-
-msgid "An error occured loading possible duplicates"
-msgstr "Une erreur est survenue lors du chargement d'éventuels doublons"
-
-msgid "Hide"
-msgstr "Masquer"
-
-msgid "Save as new {{tetName}}"
-msgstr "Enregister sous {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr ""
 
 msgid "Organisation Unit"
 msgstr "Unité d'organisation"
@@ -758,6 +754,9 @@ msgstr "Chercher par attributs"
 
 msgid "Back"
 msgstr "Précédent"
+
+msgid "No results found"
+msgstr "Aucun résultat trouvé"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -833,6 +832,9 @@ msgstr "Événement attribué à {{nom}}"
 
 msgid "Feedbacks"
 msgstr "Feedbacks"
+
+msgid "An error occurred loading possible duplicates"
+msgstr ""
 
 msgid "You dont have access to delete this relationship"
 msgstr "Vous n'êtes pas autorisé à supprimer cette relation"

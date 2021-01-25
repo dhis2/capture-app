@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: Tetum (Tetun) (https://www.transifex.com/hisp-uio/teams/100509/tet/)\n"
@@ -235,7 +235,7 @@ msgstr ""
 msgid "New event"
 msgstr ""
 
-msgid "You dont have access to create an event in the current selections"
+msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
@@ -308,6 +308,12 @@ msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
+msgstr ""
+
+msgid "Hide"
+msgstr "Subar"
+
+msgid "Possible duplicates found"
 msgstr ""
 
 msgid "Sort"
@@ -637,6 +643,9 @@ msgstr ""
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
+msgid "Save as new"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 
@@ -668,19 +677,7 @@ msgstr ""
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr ""
-
-msgid "No results found"
-msgstr ""
-
-msgid "An error occured loading possible duplicates"
-msgstr ""
-
-msgid "Hide"
-msgstr "Subar"
-
-msgid "Save as new {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
@@ -725,6 +722,9 @@ msgstr ""
 
 msgid "Back"
 msgstr "Ba kotuk"
+
+msgid "No results found"
+msgstr ""
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -788,6 +788,9 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
+msgstr ""
+
+msgid "An error occurred loading possible duplicates"
 msgstr ""
 
 msgid "You dont have access to delete this relationship"

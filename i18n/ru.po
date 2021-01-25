@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -250,8 +250,8 @@ msgstr "Нет, остаюсь тут"
 msgid "New event"
 msgstr "Новое событие"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "Не достаточно прав для создания Событий с текущим выбором"
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
 
 msgid "Save"
 msgstr "Сохранить"
@@ -326,6 +326,12 @@ msgstr "Некоторые операции еще не заверщены. По
 
 msgid "Operations running"
 msgstr "Операции запущены..."
+
+msgid "Hide"
+msgstr "Скрыть"
+
+msgid "Possible duplicates found"
+msgstr "Найдены возможные дубликаты"
 
 msgid "Sort"
 msgstr "Сортировать"
@@ -655,6 +661,9 @@ msgstr ""
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
+msgid "Save as new"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "Существует дубликат(имеются дополнительные ошибки, смотрите детали в лог-"
@@ -692,20 +701,8 @@ msgstr "Пересмотр дубликатов"
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr "Найдены возможные дубликаты"
-
-msgid "No results found"
-msgstr "Результаты не найдены"
-
-msgid "An error occured loading possible duplicates"
-msgstr "Произошла ошибка во время загрузки возможных дубликатов"
-
-msgid "Hide"
-msgstr "Скрыть"
-
-msgid "Save as new {{tetName}}"
-msgstr "Сохранить как новый {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr ""
 
 msgid "Organisation Unit"
 msgstr "Организация"
@@ -750,6 +747,9 @@ msgstr "Поиск по атрибутам"
 
 msgid "Back"
 msgstr "Назад"
+
+msgid "No results found"
+msgstr "Результаты не найдены"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -819,6 +819,9 @@ msgstr "Событие назначен: {{name}}"
 
 msgid "Feedbacks"
 msgstr "Отзывы"
+
+msgid "An error occurred loading possible duplicates"
+msgstr ""
 
 msgid "You dont have access to delete this relationship"
 msgstr "У вас нет прав на удаление данного Родового отношения"

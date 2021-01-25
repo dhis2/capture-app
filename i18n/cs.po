@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -243,8 +243,8 @@ msgstr "Ne, zůstat zde"
 msgid "New event"
 msgstr "Nová událost"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
 
 msgid "Save"
 msgstr "Uložit"
@@ -317,6 +317,12 @@ msgstr "Některé operace stále běží. Prosím, čekejte.."
 
 msgid "Operations running"
 msgstr "Provoz běží"
+
+msgid "Hide"
+msgstr "Skrýt"
+
+msgid "Possible duplicates found"
+msgstr "Byly nalezeny možné duplikáty"
 
 msgid "Sort"
 msgstr "Třídit"
@@ -645,6 +651,9 @@ msgstr "Vyberte registraci jednotky a začněte hlásit"
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Chcete-li zahájit vytváření hlášení, vyberte {{missingCategories}}"
 
+msgid "Save as new"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "Existuje duplikát (ale došlo k některým chybám, podrobnosti najdete v "
@@ -681,20 +690,8 @@ msgstr "Zkontrolovat duplikáty"
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Uložit nový {{trackedEntityTypeName}} a odkaz"
 
-msgid "Possible duplicates found"
-msgstr "Byly nalezeny možné duplikáty"
-
-msgid "No results found"
-msgstr "Nenalezeny žádné výsledky"
-
-msgid "An error occured loading possible duplicates"
-msgstr "Při načítání možných duplikátů došlo k chybě"
-
-msgid "Hide"
-msgstr "Skrýt"
-
-msgid "Save as new {{tetName}}"
-msgstr "Uložit jako nový {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr ""
 
 msgid "Organisation Unit"
 msgstr "Organizační jednotka"
@@ -739,6 +736,9 @@ msgstr "Hledání podle atributů"
 
 msgid "Back"
 msgstr "Zpět"
+
+msgid "No results found"
+msgstr "Nenalezeny žádné výsledky"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -814,6 +814,9 @@ msgstr "Událost přiřazená uživateli {{name}}"
 
 msgid "Feedbacks"
 msgstr "Zpětná vazba"
+
+msgid "An error occurred loading possible duplicates"
+msgstr ""
 
 msgid "You dont have access to delete this relationship"
 msgstr "K odstranění tohoto vztahu nemáte přístup"

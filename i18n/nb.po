@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -247,8 +247,8 @@ msgstr "Nei, bli her"
 msgid "New event"
 msgstr "Ny hendelse"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "Du har ikke tilgang til å opprette en hendelse i gjeldende valg"
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
 
 msgid "Save"
 msgstr "Lagre"
@@ -323,6 +323,12 @@ msgstr "Noen operasjoner kjører fortsatt. Vennligst vent.."
 
 msgid "Operations running"
 msgstr "Operasjoner kjører"
+
+msgid "Hide"
+msgstr "Skjul"
+
+msgid "Possible duplicates found"
+msgstr "Mulige duplikater funnet"
 
 msgid "Sort"
 msgstr "Sorter"
@@ -651,6 +657,9 @@ msgstr "Velg en registreringsenhet for å starte rapportering"
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
+msgid "Save as new"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
 
@@ -686,20 +695,8 @@ msgstr "Gjennomgå duplikater"
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr "Mulige duplikater funnet"
-
-msgid "No results found"
-msgstr "Ingen resultater funnet"
-
-msgid "An error occured loading possible duplicates"
-msgstr "En feil oppsto ved lasting av mulige duplikater"
-
-msgid "Hide"
-msgstr "Skjul"
-
-msgid "Save as new {{tetName}}"
-msgstr "Lagre som ny {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr ""
 
 msgid "Organisation Unit"
 msgstr "Organisasjonsenhet"
@@ -744,6 +741,9 @@ msgstr "Søk etter attributter"
 
 msgid "Back"
 msgstr "Tilbake"
+
+msgid "No results found"
+msgstr "Ingen resultater funnet"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -816,6 +816,9 @@ msgstr "Hendelse er tildelt til {{name}}"
 
 msgid "Feedbacks"
 msgstr "Tilbakemeldinger"
+
+msgid "An error occurred loading possible duplicates"
+msgstr ""
 
 msgid "You dont have access to delete this relationship"
 msgstr "Du har ikke tilgang til å slette denne relasjonen"

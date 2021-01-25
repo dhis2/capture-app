@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Mai Nguyen <thanhmai.jica@gmail.com>, 2020
 # Viktor Varland <viktor@dhis2.org>, 2021
+# Mai Nguyen <thanhmai.jica@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -138,7 +138,7 @@ msgid "A future date is not allowed"
 msgstr "Ngày tương lai không được phép"
 
 msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
+msgstr "Đang lưu {{trackedEntityName}} trong"
 
 msgid "in"
 msgstr "trong"
@@ -246,9 +246,8 @@ msgstr "Không, ở lại đây"
 msgid "New event"
 msgstr "Sự kiện mới"
 
-msgid "You dont have access to create an event in the current selections"
+msgid "You don't have access to create an event in the current selections"
 msgstr ""
-"Bạn không có quyền truy cập để tạo sự kiện trong các lựa chọn hiện tại"
 
 msgid "Save"
 msgstr "Lưu lại"
@@ -261,16 +260,17 @@ msgstr ""
 "Rời khỏi trang ngày sẽ hủy các thay đổi bạn đã thực hiện cho sự kiện này."
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr ""
+msgstr "Đang lưu {{trackedEntityName}}"
 
 msgid "without"
-msgstr ""
+msgstr "không có"
 
 msgid "enrollment"
-msgstr ""
+msgstr "đăng ký"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
+"Đăng ký chương trình bằng cách chọn một chương trình từ thanh trên cùng."
 
 msgid "An error has occurred. See log for details"
 msgstr "Một lỗi đã xảy ra. Xem nhật ký để biết chi tiết"
@@ -322,6 +322,12 @@ msgstr "Một số hoạt động vẫn đang chạy. Vui lòng đợi .."
 
 msgid "Operations running"
 msgstr "Hoạt động đang chạy"
+
+msgid "Hide"
+msgstr "Ẩn"
+
+msgid "Possible duplicates found"
+msgstr "Có thể tìm thấy các bản sao"
 
 msgid "Sort"
 msgstr "Sắp xếp"
@@ -609,7 +615,7 @@ msgid "Inactive"
 msgstr "Không kích hoạt"
 
 msgid "Working list could not be updated"
-msgstr ""
+msgstr "Không thể cập nhật danh sách làm việc"
 
 msgid "Update view"
 msgstr "Cập nhật chế độ xem"
@@ -648,6 +654,9 @@ msgid "Choose a registering unit to start reporting"
 msgstr "Chọn một đơn vị đăng ký để bắt đầu báo cáo"
 
 msgid "Choose the {{missingCategories}} to start reporting"
+msgstr "Chọn {{missingCategories}} để bắt đầu báo cáo"
+
+msgid "Save as new"
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
@@ -682,22 +691,10 @@ msgid "Review Duplicates"
 msgstr "Xem lại các bản sao"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
+msgstr "Lưu {{trackedEntityTypeName}} mới và liên kết"
+
+msgid "Save as new {{trackedEntityName}}"
 msgstr ""
-
-msgid "Possible duplicates found"
-msgstr "Có thể tìm thấy các bản sao"
-
-msgid "No results found"
-msgstr "Không tìm thấy kết quả nào"
-
-msgid "An error occured loading possible duplicates"
-msgstr "Đã xảy ra lỗi khi tải các bản sao "
-
-msgid "Hide"
-msgstr "Ẩn"
-
-msgid "Save as new {{tetName}}"
-msgstr "Lưu dưới dạng {{tetName}} mới"
 
 msgid "Organisation Unit"
 msgstr "Đơn vị"
@@ -742,6 +739,9 @@ msgstr "Tìm kiếm theo thuộc tính"
 
 msgid "Back"
 msgstr "Trở lại"
+
+msgid "No results found"
+msgstr "Không tìm thấy kết quả nào"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -817,6 +817,9 @@ msgstr "Sự kiện được chỉ định cho {{name}}"
 
 msgid "Feedbacks"
 msgstr "Phản hồi"
+
+msgid "An error occurred loading possible duplicates"
+msgstr ""
 
 msgid "You dont have access to delete this relationship"
 msgstr "Bạn không có quyền truy cập để xóa mối quan hệ này"
