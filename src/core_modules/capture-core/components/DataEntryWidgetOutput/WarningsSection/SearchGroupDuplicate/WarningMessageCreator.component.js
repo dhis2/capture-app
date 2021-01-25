@@ -2,9 +2,9 @@
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import LinkButton from '../../../../../../Buttons/LinkButton.component';
+import LinkButton from '../../../Buttons/LinkButton.component';
 import type { Props } from './WarningMessageCreator.types';
-import { useDuplicates } from '../../../../../../PossibleDuplicatesDialog/useDuplicates';
+import { useDuplicates } from '../../../PossibleDuplicatesDialog/useDuplicates';
 
 const getStyles = () => ({
     linkButton: {

@@ -5,7 +5,7 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import type{ CategoryCombination } from '../CategoryCombinations';
 import type Icon from '../Icon/Icon';
-import type { Access } from '../Access/Access';
+import type { Access } from '../Access';
 import type ProgramStage from './ProgramStage';
 
 export default class Program {
