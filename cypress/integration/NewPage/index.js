@@ -22,7 +22,7 @@ And('you select org unit', () => {
 And('you see the dropdown menu for selecting tracked entity type', () => {
     cy.get('[data-test="dhis2-uicore-select"')
         .should('exist');
-    cy.contains('You can also choose a program from the top bar and search in that program')
+    cy.contains('You can also choose a program from the top bar and create in that program')
         .should('exist');
 });
 
