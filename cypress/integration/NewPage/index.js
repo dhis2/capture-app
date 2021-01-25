@@ -480,11 +480,11 @@ And('you fill the registration form with its required unique values', () => {
 And('you fill the Child programme registration form with its required values', () => {
     cy.get('[data-test="capture-ui-input"]')
         .eq(0)
-        .type('2021-01-01')
+        .type('1999-01-01')
         .blur();
     cy.get('[data-test="capture-ui-input"]')
         .eq(1)
-        .type('2021-01-01')
+        .type('1999-01-01')
         .blur();
 
     cy.get('[data-test="capture-ui-input"]')
