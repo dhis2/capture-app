@@ -1,5 +1,6 @@
 // @flow
 import React, { type ComponentType } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { Grid, Paper, withStyles } from '@material-ui/core';
 import type { Props } from './RegistrationDataEntry.types';
 import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
@@ -59,7 +60,11 @@ const RegistrationDataEntryPlain = (
                         New
                     </div>
                     <div className={classes.tetypeContainer}>
-                        <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
+                        <TrackedEntityTypeSelector
+                            onSelect={handleRegistrationScopeSelection}
+                            headerText={i18n.t('Create for')}
+                            footerText={i18n.t('You can also choose a program from the top bar and create in that program')}
+                        />
                     </div>
                 </Paper>
             }
@@ -107,7 +112,11 @@ const RegistrationDataEntryPlain = (
                     </div>
 
                     <div className={classes.tetypeContainer}>
-                        <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
+                        <TrackedEntityTypeSelector
+                            onSelect={handleRegistrationScopeSelection}
+                            headerText={i18n.t('Create for')}
+                            footerText={i18n.t('You can also choose a program from the top bar and create in that program')}
+                        />
                     </div>
                     <div className={classes.registrationContainer}>
                         <Grid container justify="space-between">

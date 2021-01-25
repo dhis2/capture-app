@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
-"PO-Revision-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-01-25T12:45:59.201Z\n"
+"PO-Revision-Date: 2021-01-25T12:45:59.201Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -629,6 +629,12 @@ msgstr ""
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
+msgid "Create for"
+msgstr ""
+
+msgid "You can also choose a program from the top bar and create in that program"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 
@@ -717,6 +723,12 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
+msgid "Search for"
+msgstr ""
+
+msgid "You can also choose a program from the top bar and search in that program"
+msgstr ""
+
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
@@ -800,12 +812,6 @@ msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
-
-msgid "Search for"
-msgstr ""
-
-msgid "You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "To work with the selected program,"
