@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
+import { flatMap, map } from 'rxjs/operators';
 import { empty } from 'rxjs';
 import {
     registrationFormActionTypes,
@@ -34,9 +34,8 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
 export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_COMPLETED),
-        map(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
+        flatMap(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
             const { orgUnitId, trackedEntityTypeId } = store.value.currentSelections;
-
             navigateToTrackedEntityDashboard(
                 reference,
                 orgUnitId,
@@ -73,7 +72,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
 export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED),
-        map(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
+        flatMap(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
             const { orgUnitId, programId } = store.value.currentSelections;
 
             navigateToTrackedEntityDashboard(

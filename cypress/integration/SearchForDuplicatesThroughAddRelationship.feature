@@ -39,7 +39,7 @@ Feature: Search for duplicates in the process of creating a new TEInstance
     And all pagination is disabled
 
 
-  Scenario: Clicking the possible duplicates button shows a list with duplicates
+  Scenario: Clicking the possible duplicates anchor shows a list with duplicates
     Given you open the the new event page in Ngelehun and malaria case context
     And you navigate to register a person relationship
     When you fill in the first name with values that have duplicates
@@ -47,7 +47,7 @@ Feature: Search for duplicates in the process of creating a new TEInstance
     Then you can see a modal
     And you can see the first page of the results
 
-  Scenario: Clicking the possible duplicates button shows a list with no results on the second page
+  Scenario: Clicking the possible duplicates anchor shows a list with no results on the second page
     Given you open the the new event page in Ngelehun and malaria case context
     And you navigate to register a person relationship
     When you fill in the first name with values that have exactly 5 duplicates
@@ -58,7 +58,7 @@ Feature: Search for duplicates in the process of creating a new TEInstance
     When you click the previous page button
     Then you can see the first page of the results
 
-  Scenario: Clicking the possible duplicates button shows a list has working pagination
+  Scenario: Clicking the possible duplicates anchor shows a list with working pagination
     Given you open the the new event page in Ngelehun and malaria case context
     And you navigate to register a person relationship
     When you fill in the first name with values that have duplicates
@@ -69,7 +69,7 @@ Feature: Search for duplicates in the process of creating a new TEInstance
     When you click the previous page button
     Then you can see the first page of the results
 
-  Scenario: Clicking the possible duplicates button shows a list with disabled pagination
+  Scenario: Clicking the possible duplicates anchor shows a list with disabled pagination
     Given you open the the new event page in Ngelehun and malaria case context
     And you navigate to register a person relationship
     When you fill in the first name with values that have less than 5 duplicates
