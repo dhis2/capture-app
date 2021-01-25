@@ -109,7 +109,10 @@ const RegistrationDataEntryPlain = (
                         New
                     </div>
                     <div className={classes.tetypeContainer}>
-                        <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
+                        <TrackedEntityTypeSelector
+                            accessNeeded="write"
+                            onSelect={handleRegistrationScopeSelection}
+                        />
                     </div>
                 </Paper>
             }
@@ -173,7 +176,10 @@ const RegistrationDataEntryPlain = (
                     </div>
 
                     <div className={classes.tetypeContainer}>
-                        <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
+                        <TrackedEntityTypeSelector
+                            accessNeeded="write"
+                            onSelect={handleRegistrationScopeSelection}
+                        />
                     </div>
                     <div className={classes.registrationContainer}>
                         <Grid container justify="space-between">

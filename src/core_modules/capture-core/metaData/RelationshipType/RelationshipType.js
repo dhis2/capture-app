@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { Access } from '../Access/Access';
+import type { Access } from '../Access';
 
 type RelationshipConstraint = {
     entity: string,
