@@ -97,7 +97,6 @@ When('you fill in the unique identifier field with values that will return a tra
 });
 
 Then('you are navigated to the Tracker Capture', () => {
-    cy.wait(200);
     cy.url().should('include', 'dashboard?tei=');
     cy.url().should('include', 'ou=DiszpKrYNg8&program=qDkgAbB5Jlk');
 });
