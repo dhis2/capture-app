@@ -336,7 +336,7 @@ And('you are navigated to the working list', () => {
     cy.url()
         .should('eq', `${Cypress.config().baseUrl}/#/programId=lxAQ7Zs9VYR&orgUnitId=DiszpKrYNg8`);
 
-    cy.get('[data-test="dhis2-capture-event-list-table"]')
+    cy.get('[data-test="event-working-lists"]')
         .contains('2021-01-01')
         .should('exist');
 });

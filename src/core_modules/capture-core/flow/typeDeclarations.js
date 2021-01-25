@@ -37,7 +37,8 @@ declare type ReduxDispatch = (action: {
 
 declare type ReduxStore = {
     value: ReduxState,
-    dispatch: ReduxDispatch
+    dispatch: ReduxDispatch,
+    getState: ()=>ReduxState
 }
 
 // Events
