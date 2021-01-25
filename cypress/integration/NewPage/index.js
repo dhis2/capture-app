@@ -457,7 +457,7 @@ And('you see validation warning on birth date', () => {
         .should('exist');
 });
 
-And('you fill the registration form with its required unique values', () => {
+And('you fill the WHO RMNCH program registration form with its required unique values', () => {
     cy.get('[data-test="capture-ui-input"]')
         .eq(0)
         .type('2021-01-01')
@@ -483,20 +483,17 @@ And('you fill the WHO RMNCH program registration form with its required values',
         .type('1999-01-01')
         .blur();
     cy.get('[data-test="capture-ui-input"]')
-        .eq(1)
-        .type('1999-01-01')
-        .blur();
-
-    cy.get('[data-test="capture-ui-input"]')
         .eq(2)
-        .type('Sarah');
+        .type('Ava');
 
     cy.get('[data-test="capture-ui-input"]')
         .eq(3)
-        .type('T');
+        .type('Didriksson');
+
     cy.get('[data-test="capture-ui-input"]')
-        .eq(5)
-        .type('2001-01-01');
+        .eq(9)
+        .type('1985-10-01')
+        .blur();
 });
 
 And('you fill in child programme first name with value that has duplicates', () => {
