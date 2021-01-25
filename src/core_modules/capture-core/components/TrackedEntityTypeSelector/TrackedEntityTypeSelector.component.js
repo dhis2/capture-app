@@ -1,6 +1,5 @@
 // @flow
 import React, { useMemo, type ComponentType } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
     SingleSelect,
