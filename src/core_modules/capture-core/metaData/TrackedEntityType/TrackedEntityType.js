@@ -3,10 +3,12 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 import type { SearchGroup } from '../SearchGroup';
 import type { DataElement } from '../DataElement';
 import type { TeiRegistration } from './TeiRegistration';
+import type { Access } from '../Access';
 
 /* eslint-disable no-underscore-dangle */
 class TrackedEntityType {
     _id: string;
+    _access: Access;
     _name: string;
     _teiRegistration: TeiRegistration;
     _attributes: Array<DataElement>;
@@ -22,6 +24,13 @@ class TrackedEntityType {
     }
     get id(): string {
         return this._id;
+    }
+
+    set access(access: Access) {
+        this._access = access;
+    }
+    get access(): Access {
+        return this._access;
     }
 
     set name(name: string) {

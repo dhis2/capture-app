@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-18T10:52:49.539Z\n"
-"PO-Revision-Date: 2021-01-18T10:52:49.540Z\n"
+"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
+"PO-Revision-Date: 2021-01-18T11:18:28.545Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -227,7 +227,7 @@ msgstr ""
 msgid "New event"
 msgstr ""
 
-msgid "You dont have access to create an event in the current selections"
+msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
@@ -633,6 +633,9 @@ msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
+msgstr ""
+
+msgid "Save as new"
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"
