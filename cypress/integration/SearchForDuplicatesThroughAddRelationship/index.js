@@ -116,4 +116,3 @@ Then('all pagination is disabled', () => {
         .contains('Page 1')
         .should('exist');
 });
-

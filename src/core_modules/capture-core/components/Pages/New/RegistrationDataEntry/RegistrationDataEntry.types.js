@@ -9,6 +9,7 @@ type ContainerProps = {|
   dataEntryIsReady: boolean,
   onSaveWithoutEnrollment: Function,
   onSaveWithEnrollment: Function,
+  onReviewDuplicates: Function,
 |}
 
 export type Props = $ReadOnly<{|
