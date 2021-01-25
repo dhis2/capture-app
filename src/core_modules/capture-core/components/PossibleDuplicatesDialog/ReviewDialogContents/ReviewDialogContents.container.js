@@ -7,10 +7,10 @@ import { ReviewDialogContentsComponent } from './ReviewDialogContents.component'
 import withLoadingIndicator from '../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../HOC/withErrorMessageHandler';
 import type { Props, OwnProps } from './ReviewDialogContents.types';
-import { getDataElementsFromScopeId } from '../../../metaData/helpers';
+import { getAttributesFromScopeId } from '../../../metaData/helpers';
 
 const buildDataElements = (scopeId) => {
-    const currentSearchScopeDataElements = getDataElementsFromScopeId(scopeId);
+    const currentSearchScopeDataElements = getAttributesFromScopeId(scopeId);
 
     return currentSearchScopeDataElements
         .filter(({ displayInReports }) => displayInReports)
