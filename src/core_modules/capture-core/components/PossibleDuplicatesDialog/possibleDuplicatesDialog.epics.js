@@ -14,7 +14,7 @@ import {
 import getDataEntryKey from '../DataEntry/common/getDataEntryKey';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { getTrackedEntityInstances } from '../../trackedEntityInstances/trackedEntityInstanceRequests';
-import { getDataElementsFromScopeId } from '../../metaData/helpers';
+import { getAttributesFromScopeId } from '../../metaData/helpers';
 
 function getGroupElementsFromScopeId(scopeId: ?string) {
     if (!scopeId) {
@@ -74,7 +74,7 @@ export const loadSearchGroupDuplicatesForReviewEpic: Epic = (action$, store) =>
                     fields: '*',
                     ...contextParam,
                 };
-                const attributes = getDataElementsFromScopeId(selectedScopeId);
+                const attributes = getAttributesFromScopeId(selectedScopeId);
 
                 const stream$: Stream = from(getTrackedEntityInstances(queryArgs, attributes));
                 return stream$.pipe(
