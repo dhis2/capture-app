@@ -209,7 +209,7 @@ msgid "Update"
 msgstr "Янгилаш"
 
 msgid "Close"
-msgstr "Ёпмоқ"
+msgstr "Ёпиш"
 
 msgid "More filters"
 msgstr "Кўпроқ фильтр"
