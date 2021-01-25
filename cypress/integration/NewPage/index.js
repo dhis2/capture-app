@@ -437,7 +437,7 @@ And('you click hide the modal is not visible', () => {
 });
 
 // New person in WHO RMNCH Tracker
-And('you are in the WHO RMNCH Tracker registration page', () => {
+And('you are in the WHO RMNCH program registration page', () => {
     cy.visit('/#/new/programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
 });
 And('you are in Child programme registration page', () => {
@@ -477,7 +477,7 @@ And('you fill the registration form with its required unique values', () => {
         .blur();
 });
 
-And('you fill the Child programme registration form with its required values', () => {
+And('you fill the WHO RMNCH program registration form with its required values', () => {
     cy.get('[data-test="capture-ui-input"]')
         .eq(0)
         .type('1999-01-01')
@@ -488,28 +488,27 @@ And('you fill the Child programme registration form with its required values', (
         .blur();
 
     cy.get('[data-test="capture-ui-input"]')
-        .eq(4)
+        .eq(2)
         .type('Sarah');
 
     cy.get('[data-test="capture-ui-input"]')
+        .eq(3)
+        .type('T');
+    cy.get('[data-test="capture-ui-input"]')
         .eq(5)
-        .type('Gonz');
+        .type('2001-01-01');
 });
 
-And('you fill in child programe first name with value that has duplicates', () => {
+And('you fill in child programme first name with value that has duplicates', () => {
     cy.get('[data-test="capture-ui-input"]')
         .eq(4)
         .type('Sarah')
         .blur();
 });
 
-Then('you are navigated to the WHO RMNCH Tracker in Tracker Capture app', () => {
+Then('you are navigated to the WHO RMNCH program in Tracker Capture app', () => {
     cy.url().should('include', 'dashboard?tei=');
     cy.url().should('include', 'ou=DiszpKrYNg8&program=WSGAb5XwJ3Y');
-});
-Then('you are navigated to the Child programme in Tracker Capture app', () => {
-    cy.url().should('include', 'dashboard?tei=');
-    cy.url().should('include', 'ou=DiszpKrYNg8&program=IpHINAT79UW');
 });
 
 And('you fill the Child programme registration form with a first name with value that has duplicates', () => {

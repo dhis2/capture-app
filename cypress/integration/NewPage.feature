@@ -132,32 +132,32 @@ Feature: User creates a new entries from the registration page
 ### New person in Tracker Program
   Scenario: New person in Tracker Program > Filling the form shows possible duplicates indicator
     Given you are in Child programme registration page
-    When you fill in child programe first name with value that has duplicates
+    When you fill in child programme first name with value that has duplicates
     Then you see the possible duplicates button
 
   Scenario: New person in Tracker Program > Submitting the form with empty visit date throws validation error
-    Given you are in the WHO RMNCH Tracker registration page
+    Given you are in the WHO RMNCH program registration page
     And you click the save new submit button
     Then you see validation error on visit date
 
   Scenario: New person in Tracker Program > Filling the age with age 0 throws validation warning
-    Given you are in the WHO RMNCH Tracker registration page
+    Given you are in the WHO RMNCH program registration page
     And you fill the form with age 0
     Then you see validation warning on birth date
 
   Scenario: New person in Tracker Program > Submitting the form with unique values navigates you to the user dashboard
-    Given you are in the WHO RMNCH Tracker registration page
+    Given you are in the WHO RMNCH program registration page
     When you fill the registration form with its required unique values
     And you click the save new submit button
-    Then you are navigated to the WHO RMNCH Tracker in Tracker Capture app
+    Then you are navigated to the WHO RMNCH program in Tracker Capture app
 
   Scenario: New person in Tracker Program > Submitting the form from the duplicates modal navigates you to the user dashboard
-    Given you are in Child programme registration page
-    When you fill the Child programme registration form with its required values
+    Given you are in the WHO RMNCH program registration page
+    When you fill the WHO RMNCH program registration form with its required values
     And you click the save new submit button
     And you see the possible duplicates modal
     When you submit the form again from the duplicates modal
-    Then you are navigated to the Child programme in Tracker Capture app
+    Then you are navigated to the WHO RMNCH program in Tracker Capture app
 
   Scenario: New person in Tracker Program > Submitting the form shows a list with duplicates
     Given you are in Child programme registration page
