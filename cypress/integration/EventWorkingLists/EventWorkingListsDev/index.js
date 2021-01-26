@@ -6,7 +6,7 @@ Given('you open the main page with Ngelehun and malaria case context', () => {
     cy.server();
     cy.route('GET', '**/events**').as('getDefaultEvents');
 
-    cy.visit('#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
+    cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
 
 Then('events should be retrieved from the api using the default query args', () => {

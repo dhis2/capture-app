@@ -48,16 +48,11 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_FETCH),
         map(() => {
-            const {
-                currentSelections: {
-                    enrollmentId: selectedEnrollmentId,
-                    teiId: selectedTeiId,
-                },
-            } = store.value;
+            const { query: { enrollmentId, teiId } } = store.value.router.location;
 
-            if (selectedEnrollmentId) {
+            if (enrollmentId) {
                 return startFetchingTeiFromEnrollmentId();
-            } else if (selectedTeiId) {
+            } else if (teiId) {
                 return startFetchingTeiFromTeiId();
             }
             const error = i18n.t('There is an error while opening this enrollment. Please enter a valid url.');
@@ -69,16 +64,10 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_ENROLLMENT_ID_FETCH),
         flatMap(() => {
-            const {
-                currentSelections: {
-                    enrollmentId: selectedEnrollmentId,
-                    orgUnitId: selectedOrgUnitId,
-                    programId: selectedProgramId,
-                    teiId: selectedTeiId,
-                },
-            } = store.value;
-            const urlCompleted = Boolean(selectedEnrollmentId && selectedOrgUnitId && selectedProgramId && selectedTeiId);
-            return from(fetchEnrollment(selectedEnrollmentId))
+            const { query: { enrollmentId, orgUnitId, programId, teiId } } = store.value.router.location;
+            const urlCompleted = Boolean(enrollmentId && orgUnitId && programId && teiId);
+
+            return from(fetchEnrollment(enrollmentId))
                 .pipe(
                     flatMap(({ trackedEntityInstance, program, orgUnit }) => (
                         urlCompleted
@@ -89,11 +78,11 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
                                 programId: program,
                                 orgUnitId: orgUnit,
                                 teiId: trackedEntityInstance,
-                                enrollmentId: selectedEnrollmentId,
+                                enrollmentId,
                             }))
                     )),
                     catchError(() => {
-                        const error = i18n.t("Enrollment with id '{{selectedEnrollmentId}}' doesn't exist", { selectedEnrollmentId });
+                        const error = i18n.t("Enrollment with id '{{selectedEnrollmentId}}' doesn't exist", { enrollmentId });
                         return of(showErrorViewOnEnrollmentPage({ error }));
                     }),
                     startWith(showLoadingViewOnEnrollmentPage()),
@@ -115,6 +104,6 @@ export const openEnrollmentPageEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PAGE_OPEN),
         map(({ payload: { enrollmentId, programId, orgUnitId, teiId } }) =>
-            push(`/enrollment/${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`),
+            push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`),
         ),
     );

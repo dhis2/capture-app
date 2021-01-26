@@ -8,10 +8,14 @@ export {
     validateSelectionsBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
-    updateUrlViaLockedSelectorEpic,
+    setOrgUnitIdEpic,
+    setProgramIdEpic,
     startAgainEpic,
     setEnrollmentSelectionEpic,
     clearTrackedEntityInstanceSelectionEpic,
+    resetProgramIdEpic,
+    resetOrgUnitId,
+    fetchOrgUnitEpic,
     resetEnrollmentSelectionEpic,
 } from './LockedSelector.epics';
 export { LockedSelector } from './LockedSelector.container';

@@ -62,8 +62,8 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     useComponentLifecycle();
 
     const dispatch = useDispatch();
-    const selectedTeiId: EnrollmentPageStatus =
-      useSelector(({ currentSelections }) => currentSelections.teiId);
+    const selectedTeiId: string =
+      useSelector(({ router: { location: { query } } }) => query.teiId);
     const enrollmentPageStatus: EnrollmentPageStatus =
       useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
 

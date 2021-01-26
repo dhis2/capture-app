@@ -3,6 +3,7 @@ export type OwnProps = $ReadOnly<{|
   isUserInteractionInProgress?: boolean,
   customActionsOnOrgUnitIdReset?: Array<any>,
   customActionsOnProgramIdReset?: Array<any>,
+  pageToPush?: string,
 |}>
 
 export type PropsFromRedux = $ReadOnly<{|
