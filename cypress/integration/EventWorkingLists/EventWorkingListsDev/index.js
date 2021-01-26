@@ -1,7 +1,3 @@
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you open the main page with Ngelehun and malaria case context', () => {
     cy.server();
     cy.route('GET', '**/events**').as('getDefaultEvents');

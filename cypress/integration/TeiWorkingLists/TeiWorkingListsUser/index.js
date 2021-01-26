@@ -1,7 +1,3 @@
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 Given('you open the main page with Ngelehun and child programme context', () => {
     cy.visit('#/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });

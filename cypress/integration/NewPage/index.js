@@ -1,7 +1,3 @@
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
 And('you are on the default registration page', () => {
     cy.visit('/#/new');
 });
