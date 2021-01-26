@@ -11,31 +11,37 @@ import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/Ev
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 export const activePageDesc = createReducerDescription({
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: state => ({
+    [lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE]: state => ({
         ...state,
         lockedSelectorLoads: true,
     }),
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID]: state => ({
+    [lockedSelectorActionTypes.FETCH_ORG_UNIT_ERROR]: (state, action) => ({
+        ...state,
+        isPageLoading: false,
+        selectionsError: action.payload,
+    }),
+    [lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS]: state => ({
+        ...state,
+        isPageLoading: false,
+    }),
+    [lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID]: state => ({
         ...state,
         selectionsError: null,
-        lockedSelectorLoads: false,
+        isPageLoading: false,
         isDataEntryLoading: false,
     }),
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID]: (state, action) => ({
+    [lockedSelectorActionTypes.CURRENT_SELECTIONS_INVALID]: (state, action) => ({
         ...state,
-        lockedSelectorLoads: false,
+        isPageLoading: false,
         selectionsError: action.payload,
     }),
-    [lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_ERROR_RETRIEVING]: (state, action) => ({
-        ...state,
-        lockedSelectorLoads: false,
-        selectionsError: action.payload,
-    }),
+
 
     [viewEventPageActionTypes.VIEW_EVENT_FROM_URL]: state => ({
         ...state,
         isDataEntryLoading: true,
-        lockedSelectorLoads: true,
+        isPageLoading: true,
+        viewEventLoadError: null,
     }),
     [viewEventDataEntryActionTypes.PREREQUISITES_ERROR_LOADING_VIEW_EVENT_DATA_ENTRY]: (state, action) => ({
         ...state,
@@ -96,5 +102,5 @@ export const activePageDesc = createReducerDescription({
     selectionsError: null,
     lockedSelectorLoads: false,
     isDataEntryLoading: false,
-    viewEventLoadError: false,
+    viewEventLoadError: null,
 });

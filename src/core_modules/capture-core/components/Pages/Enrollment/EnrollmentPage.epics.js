@@ -21,17 +21,10 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
     action$.pipe(
         ofType(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_FETCH),
         flatMap(() => {
-            const {
-                currentSelections: {
-                    enrollmentId: selectedEnrollmentId,
-                    orgUnitId: selectedOrgUnitId,
-                    programId: selectedProgramId,
-                    teiId: selectedTeiId,
-                },
-            } = store.value;
-            const urlCompleted = Boolean(selectedEnrollmentId && selectedOrgUnitId && selectedProgramId && selectedTeiId);
+            const { query: { enrollmentId, orgUnitId, programId, teiId } } = store.value.router.location;
+            const urlCompleted = Boolean(enrollmentId && orgUnitId && programId && teiId);
 
-            return from(fetchEnrollment(selectedEnrollmentId))
+            return from(fetchEnrollment(enrollmentId))
                 .pipe(
                     flatMap(({ trackedEntityInstance, program, orgUnit }) =>
                         from(fetchTrackedEntityInstance(trackedEntityInstance))
@@ -54,7 +47,7 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
                                             programId: program,
                                             orgUnitId: orgUnit,
                                             teiId: trackedEntityInstance,
-                                            enrollmentId: selectedEnrollmentId,
+                                            enrollmentId,
                                         });
                                 }),
                                 catchError(() => of(showErrorViewOnEnrollmentPage())),
