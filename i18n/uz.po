@@ -177,7 +177,7 @@ msgid "Data for offline list not present"
 msgstr "Оффлайн рўйхат учун маълумотлар мавжуд эмас"
 
 msgid "Close"
-msgstr "Ёпмоқ"
+msgstr "Ёпиш"
 
 msgid "Please select the user"
 msgstr "Илтимос, фойдаланувчини танланг"
