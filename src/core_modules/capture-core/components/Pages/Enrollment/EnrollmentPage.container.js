@@ -8,8 +8,8 @@ import { cleanEnrollmentPage, fetchEnrollmentPageInformation } from './Enrollmen
 
 export const EnrollmentPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
-    const selectedTeiId: EnrollmentPageStatus =
-      useSelector(({ currentSelections }) => currentSelections.teiId);
+    const selectedTeiId: string =
+      useSelector(({ router: { location: { query } } }) => query.teiId);
     const enrollmentPageStatus: EnrollmentPageStatus =
       useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
 
