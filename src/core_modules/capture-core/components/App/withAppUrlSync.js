@@ -1,15 +1,17 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { parse } from 'query-string';
 import { paramsSelector } from './appSync.selectors';
 import { LoadingMaskForPage } from '../LoadingMasks';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { updateSelectionsFromUrl } from '../LockedSelector';
-import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
+import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
 type Props = {
     location: {
+        search: string,
         pathname: string,
     },
     onUpdateFromUrl: (page: ?string, data: UpdateDataContainer) => void,
@@ -18,7 +20,7 @@ type Props = {
     locationSwitchInProgress: ?boolean,
 };
 
-const pageKeys = {
+export const pageKeys = {
     MAIN: '',
     VIEW_EVENT: 'viewEvent',
     SEARCH: 'search',
@@ -26,43 +28,24 @@ const pageKeys = {
     ENROLLMENT: 'enrollment',
 };
 
-const programIdProperties = {
-    urlKey: 'programId',
-    propKey: 'programId',
+const programIdParameter = {
+    urlParameterName: 'programId',
 };
-const orgUnitIdProperties = {
-    urlKey: 'orgUnitId',
-    propKey: 'orgUnitId',
+const orgUnitIdParameter = {
+    urlParameterName: 'orgUnitId',
 };
-const trackedEntityTypeIdProperties = {
-    urlKey: 'trackedEntityTypeId',
-    propKey: 'trackedEntityTypeId',
+const tetIdParameter = {
+    urlParameterName: 'trackedEntityTypeId',
+};
+const eventIdParameter = {
+    urlParameterName: 'viewEventId',
 };
 
 const specificationForPages = {
-    [pageKeys.MAIN]: [
-        programIdProperties,
-        orgUnitIdProperties,
-    ],
-    [pageKeys.VIEW_EVENT]: [
-        {
-            urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
-            propKey: 'viewEventId',
-        },
-    ],
-    [pageKeys.SEARCH]: [
-        programIdProperties,
-        orgUnitIdProperties,
-    ],
-    [pageKeys.NEW]: [
-        programIdProperties,
-        orgUnitIdProperties,
-        trackedEntityTypeIdProperties,
-    ],
-    [pageKeys.ENROLLMENT]: [
-        programIdProperties,
-        orgUnitIdProperties,
-    ],
+    [pageKeys.MAIN]: [programIdParameter, orgUnitIdParameter],
+    [pageKeys.VIEW_EVENT]: [eventIdParameter],
+    [pageKeys.SEARCH]: [programIdParameter, orgUnitIdParameter],
+    [pageKeys.NEW]: [programIdParameter, orgUnitIdParameter, tetIdParameter],
 };
 
 const updaterForPages = {
@@ -71,17 +54,6 @@ const updaterForPages = {
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.ENROLLMENT]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
-};
-
-const getUrlParts = (pathName: string) => {
-    const urlParts = pathName.match(/[/][^/]+/g);
-
-    if (urlParts == null) {
-        return [];
-    }
-
-    return urlParts
-        .map(part => part.substring(1));
 };
 
 /**
@@ -105,32 +77,9 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
         }
 
         setPageAndParams() {
-            const urlParts = getUrlParts(this.props.location.pathname);
-
-            if (urlParts.length === 0) {
-                this.page = pageKeys.MAIN;
-                this.params = null;
-                return;
-            }
-
-            if (urlParts.length === 1) {
-                const singlePart = urlParts[0];
-                if (
-                    Object
-                        .keys(pageKeys)
-                        .map(key => pageKeys[key])
-                        .includes(singlePart)
-                ) {
-                    this.page = singlePart;
-                    this.params = null;
-                } else {
-                    this.params = singlePart;
-                    this.page = pageKeys.MAIN;
-                }
-            } else {
-                this.page = urlParts[0];
-                this.params = urlParts[1];
-            }
+            const { location } = this.props;
+            this.page = location.pathname.substring(1);
+            this.params = parse(location && location.search);
         }
 
         render() {
@@ -173,9 +122,11 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) =>
-            // $FlowFixMe[invalid-computed-prop] automated comment
-            dispatch(updaterForPages[page](updateData)),
+        onUpdateFromUrl: (page: string, updateData: UpdateDataContainer) => {
+            if (pageFetchesOrgUnitUsingTheOldWay(page) && page != null) {
+                dispatch(updaterForPages[page](updateData));
+            }
+        },
     });
 
     // $FlowFixMe[missing-annot] automated comment
