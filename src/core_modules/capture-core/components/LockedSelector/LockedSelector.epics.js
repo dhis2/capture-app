@@ -17,11 +17,10 @@ import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
 import { deriveUrlQueries, pageFetchesOrgUnitUsingTheOldWay, urlArguments } from '../../utils/url';
 
-const exactUrl = (page: string, url: string) => {
-    if (page && page !== 'viewEvent') {
-        return `${page}?${url}`;
-    }
-    return `/?${url}`;
+const derivePayloadFromAction = (batchPayload, actionType) => {
+    // $FlowFixMe
+    const { payload } = Object.values(batchPayload).find(({ type }) => type === actionType);
+    return payload;
 };
 
 const fetchOrgUnits = id => getApi().get(`organisationUnits/${id}`, { fields: 'id,displayName' });
@@ -29,43 +28,39 @@ const fetchOrgUnits = id => getApi().get(`organisationUnits/${id}`, { fields: 'i
 export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
-        map(({ payload: { orgUnitId } }) => {
-            const { pathname } = store.value.router.location;
+        map(({ payload: { orgUnitId, pageToPush } }) => {
             const queries = deriveUrlQueries(store.value);
 
-            return push(exactUrl(pathname, urlArguments({ ...queries, orgUnitId })));
+            return push(`/${pageToPush}?${urlArguments({ ...queries, orgUnitId })}`);
         }));
 
 export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH),
-        map(() => {
-            const { app: { page } } = store.value;
+        map(({ payload: batchPayload }) => {
+            const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.ORG_UNIT_ID_RESET);
             const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            return push(exactUrl(page, urlArguments({ ...restOfQueries })));
+            return push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`);
         }));
 
 export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.PROGRAM_ID_SET),
-        map(({ payload: { programId } }) => {
-            const { pathname } = store.value.router.location;
+        map(({ payload: { programId, pageToPush } }) => {
             const queries = deriveUrlQueries(store.value);
-            return push(exactUrl(pathname, urlArguments({ ...queries, programId })));
+
+            return push(`/${pageToPush}?${urlArguments({ ...queries, programId })}`);
         }));
 
 export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH),
-        map(() => {
-            const { app: { page } } = store.value;
+        map(({ payload: batchPayload }) => {
+            const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.PROGRAM_ID_RESET);
             const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            // todo this is problematic here because when you are on the enrollment page you want to reset the page using the `pathname`
-            // but also this action is triggered when you are clicking the `New` and `Search` button.
-            // In these two cases we want to use the `page` from the redux
-            return push(exactUrl(page, urlArguments({ ...restOfQueries })));
+            return push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`);
         }),
     );
 
