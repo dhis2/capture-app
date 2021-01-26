@@ -48,6 +48,8 @@ export const deriveUrlQueries = (state: Object) => {
                     programId: routerProgramId,
                     orgUnitId: routerOrgUnitId,
                     trackedEntityTypeId: routerTet,
+                    teiId,
+                    enrollmentId,
                 },
             } },
     } = state;
@@ -55,7 +57,13 @@ export const deriveUrlQueries = (state: Object) => {
     const orgUnitId = routerOrgUnitId || selectedOrgUnitId;
     const trackedEntityTypeId = routerTet || selectedTet;
 
-    return { programId, orgUnitId, trackedEntityTypeId };
+    return {
+        programId,
+        orgUnitId,
+        trackedEntityTypeId,
+        teiId,
+        enrollmentId,
+    };
 };
 
 export const pageFetchesOrgUnitUsingTheOldWay = (page: string, pages: Object = pageKeys): boolean =>
