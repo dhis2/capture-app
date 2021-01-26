@@ -135,7 +135,8 @@ export const clearTrackedEntityInstanceSelectionEpic = (action$: InputObservable
     action$.pipe(
         ofType(lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR),
         map(() => {
-            const { currentSelections: { programId, orgUnitId } } = store.value;
+            const { query: { programId, orgUnitId } } = store.value.router.location;
+
             return push(`/${urlArguments({ programId, orgUnitId })}`);
         }),
     );
@@ -144,7 +145,8 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
     action$.pipe(
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET),
         map(({ payload: { enrollmentId } }) => {
-            const { currentSelections: { programId, orgUnitId, teiId } } = store.value;
-            return push(`/enrollment/${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
+            const { query: { programId, orgUnitId, teiId } } = store.value.router.location;
+
+            return push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
         }),
     );

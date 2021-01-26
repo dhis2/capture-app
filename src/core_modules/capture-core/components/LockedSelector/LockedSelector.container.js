@@ -21,14 +21,14 @@ import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.action
 import type { OwnProps } from './LockedSelector.types';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
-const deriveReadiness = (isPageLoading, selectedOrgUnitId, organisationUnits) => {
+const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, organisationUnits) => {
     // because we want the orgUnit to be fetched and stored
     // before allowing the user to view the locked selector
     if (selectedOrgUnitId) {
         const orgUnit = organisationUnits[selectedOrgUnitId];
-        return Boolean(orgUnit && orgUnit.id && !isPageLoading);
+        return Boolean(orgUnit && orgUnit.id && !lockedSelectorLoads);
     }
-    return !isPageLoading;
+    return !lockedSelectorLoads;
 };
 
 const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string, pathname: string } =>
@@ -172,14 +172,14 @@ export const LockedSelector: ComponentType<OwnProps> =
 
       const { selectedOrgUnitId, selectedProgramId } = useUrlQueries();
 
-      const isPageLoading: string =
-        useSelector(({ activePage }) => activePage.isPageLoading);
+      const lockedSelectorLoads: string =
+        useSelector(({ activePage }) => activePage.lockedSelectorLoads);
 
 
       const organisationUnits: Object =
         useSelector(({ organisationUnits: orgUnits }) => orgUnits);
 
-      const ready = deriveReadiness(isPageLoading, selectedOrgUnitId, organisationUnits);
+      const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, organisationUnits);
 
       useComponentLifecycle();
 
