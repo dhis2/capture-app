@@ -24,7 +24,7 @@ export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: Inpu
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
         switchMap((action) => {
-            const orgUnitId = action.payload.id;
+            const { orgUnitId } = action.payload;
             const selectedCategories = store.value.currentSelections.categories;
             if (!selectedCategories) {
                 return Promise.resolve(skipCategoriesResetAfterSettingOrgUnit(action.type));

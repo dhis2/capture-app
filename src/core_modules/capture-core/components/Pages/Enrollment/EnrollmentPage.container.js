@@ -9,8 +9,8 @@ import { startFetchingEnrollmentPageInformation } from './EnrollmentPage.actions
 export const EnrollmentPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
 
-    const enrollmentId: EnrollmentPageStatus =
-      useSelector(({ currentSelections }) => currentSelections.enrollmentId);
+    const enrollmentId: string =
+      useSelector(({ router: { location: { query } } }) => query.enrollmentId);
     const enrollments: Object =
       useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
 

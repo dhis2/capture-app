@@ -3,7 +3,7 @@ beforeEach(() => {
 });
 
 Given('you open the main page with Ngelehun and malaria case context', () => {
-    cy.visit('#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
+    cy.visit('#/?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
 
 Then('the default working list should be displayed', () => {

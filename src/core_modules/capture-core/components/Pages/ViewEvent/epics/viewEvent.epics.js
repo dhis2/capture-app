@@ -32,9 +32,8 @@ import { eventWorkingListsActionTypes } from '../../../Pages/MainPage/EventWorki
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        switchMap((action) => {
+        switchMap(({ payload: { eventId } }) => {
             const state = store.value;
-            const eventId = action.payload;
             return getEvent(eventId)
                 .then((eventContainer) => {
                     if (!eventContainer) {
@@ -102,7 +101,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
 export const openViewPageLocationChangeEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        map(action => push(`/viewEvent/${action.payload}`)));
+        map(({ payload: { eventId } }) => push(`/viewEvent?viewEventId=${eventId}`)));
 
 export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -142,7 +141,7 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
             const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
-            return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
+            return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
         }));
 
 export const openAddRelationshipForViewEventEpic = (action$: InputObservable) =>

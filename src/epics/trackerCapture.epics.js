@@ -76,11 +76,6 @@ import {
     networkMonitorStatusEpic,
 } from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
 import {
-    setOrgUnit,
-    setProgram,
-    goBackToListContext,
-} from 'capture-core/components/LockedSelector/QuickSelector/epics/setSelection.epics';
-import {
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
 } from 'capture-core/components/LockedSelector/QuickSelector';
@@ -151,11 +146,15 @@ import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../compone
 import getDataEntryEpics from './getDataEntryEpics';
 
 import {
-    updateUrlViaLockedSelectorEpic,
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     startAgainEpic,
+    setOrgUnitIdEpic,
+    setProgramIdEpic,
+    resetOrgUnitId,
+    resetProgramIdEpic,
+    fetchOrgUnitEpic,
     clearTrackedEntityInstanceSelectionEpic,
     setEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
@@ -235,9 +234,6 @@ export default combineEpics(
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
     goingOnlineEpic,
-    setOrgUnit,
-    setProgram,
-    goBackToListContext,
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
@@ -283,7 +279,11 @@ export default combineEpics(
     loadSearchGroupDuplicatesForReviewEpic,
     teiForNewEventRelationshipSavedEpic,
     saveAssigneeEpic,
-    updateUrlViaLockedSelectorEpic,
+    setOrgUnitIdEpic,
+    setProgramIdEpic,
+    resetOrgUnitId,
+    resetProgramIdEpic,
+    fetchOrgUnitEpic,
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
