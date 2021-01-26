@@ -48,16 +48,11 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_FETCH),
         map(() => {
-            const {
-                currentSelections: {
-                    enrollmentId: selectedEnrollmentId,
-                    teiId: selectedTeiId,
-                },
-            } = store.value;
+            const { query: { enrollmentId, teiId } } = store.value.router.location;
 
-            if (selectedEnrollmentId) {
+            if (enrollmentId) {
                 return startFetchingTeiFromEnrollmentId();
-            } else if (selectedTeiId) {
+            } else if (teiId) {
                 return startFetchingTeiFromTeiId();
             }
             const error = i18n.t('There is an error while opening this enrollment. Please enter a valid url.');
