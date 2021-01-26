@@ -18,6 +18,7 @@ type Props = {
     classes: {
         orgunitTree: string,
     },
+    onSelectClick: Function,
     treeKey: string,
 };
 
@@ -32,7 +33,7 @@ class OrgUnitTree extends React.Component<Props> {
     }
 
     render() {
-        const { roots, classes, treeKey, ...passOnProps } = this.props;
+        const { roots, classes, treeKey, onSelectClick, ...passOnProps } = this.props;
 
         if (!roots) {
             return null;
@@ -46,6 +47,7 @@ class OrgUnitTree extends React.Component<Props> {
                     roots={roots}
                     initiallyExpanded={this.getExpandedItems()}
                     hideCheckboxes
+                    onSelectClick={onSelectClick}
                     {...passOnProps}
                 />
             </div>

@@ -250,9 +250,9 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
 export const fallbackPushPageEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED),
-        map(({ payload: { orgUnitId, trackedEntityTypeId } }) =>
-            push({
-                pathname: urlArguments({ orgUnitId, trackedEntityTypeId }),
-                state: { fallback: true },
-            })),
+        map(({ payload: { orgUnitId, trackedEntityTypeId } }) => push({
+            pathname: '/search',
+            search: `?${urlArguments({ orgUnitId, trackedEntityTypeId })}`,
+            state: { fallback: true },
+        })),
     );

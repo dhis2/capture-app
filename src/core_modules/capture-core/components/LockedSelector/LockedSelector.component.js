@@ -1,9 +1,11 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, type ComponentType } from 'react';
+import { compose } from 'redux';
 import i18n from '@dhis2/d2-i18n';
 import QuickSelector from './QuickSelector/QuickSelector.container';
 import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
 import type { Props, State } from './LockedSelector.types';
+import { withLoadingIndicator } from '../../HOC';
 
 const defaultDialogProps = {
     header: i18n.t('Unsaved changes'),
@@ -13,7 +15,7 @@ const defaultDialogProps = {
 };
 
 
-export class LockedSelectorComponent extends Component<Props, State> {
+class LockedSelectorClass extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
@@ -171,3 +173,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
         );
     }
 }
+
+export const LockedSelectorComponent: ComponentType<$Diff<Props, CssClasses>> = compose(
+    withLoadingIndicator(() => ({ height: '100px' })),
+)(LockedSelectorClass);

@@ -48,7 +48,7 @@ export function getStore(
     const middleware = [epicMiddleware, routerMiddleware(history), offlineMiddleware];
 
     if (process.env.NODE_ENV !== environments.prod) {
-        middleware.push(createLogger({}));
+        middleware.push(createLogger({ collapsed: true, diff: true }));
     }
 
     // $FlowFixMe[missing-annot] automated comment
