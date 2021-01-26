@@ -12,7 +12,6 @@ import ProgramSelector from './Program/ProgramSelector.component';
 import OrgUnitSelector from './OrgUnitSelector.component';
 import { ActionButtons } from './ActionButtons.component';
 import { SingleLockedSelect } from './SingleLockedSelect.component';
-import { pageKeys } from '../../App/withAppUrlSync';
 
 const styles = ({ palette }) => ({
     paper: {
@@ -134,7 +133,7 @@ class QuickSelector extends Component<Props> {
                         />
                     </Grid>
                     {
-                        currentPage === pageKeys.ENROLLMENT &&
+                        currentPage === 'enrollment' &&
                         <>
                             <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                 <SingleLockedSelect

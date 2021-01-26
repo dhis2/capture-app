@@ -21,7 +21,7 @@ const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
 const mapStateToProps = (state: Object) => {
     const { orgUnitId, programId } = deriveUrlQueries(state);
     const {
-        router: { location: { pathname } },
+        router: { location: { pathname, query: { enrollmentId } } },
         currentSelections: { categoriesMeta },
         organisationUnits,
         enrollmentPage,
@@ -35,6 +35,7 @@ const mapStateToProps = (state: Object) => {
         selectedOrgUnit: orgUnitId ? organisationUnits[orgUnitId] : null,
         currentPage: pathname.substring(1),
         selectedTeiName: enrollmentPage.trackedEntityInstanceDisplayName,
+        selectedEnrollmentId: enrollmentId,
         enrollmentsAsOptions,
         enrollmentLockedSelectReady: enrollmentPage.enrollmentPageStatus !== enrollmentPageStatuses.LOADING,
     };

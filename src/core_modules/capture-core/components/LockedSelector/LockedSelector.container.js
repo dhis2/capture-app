@@ -172,14 +172,14 @@ export const LockedSelector: ComponentType<OwnProps> =
 
       const { selectedOrgUnitId, selectedProgramId } = useUrlQueries();
 
-      const isPageLoading: string =
-        useSelector(({ activePage }) => activePage.isPageLoading);
+      const lockedSelectorLoads: string =
+        useSelector(({ activePage }) => activePage.lockedSelectorLoads);
 
 
       const organisationUnits: Object =
         useSelector(({ organisationUnits: orgUnits }) => orgUnits);
 
-      const ready = deriveReadiness(isPageLoading, selectedOrgUnitId, organisationUnits);
+      const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, organisationUnits);
 
       useComponentLifecycle();
 
