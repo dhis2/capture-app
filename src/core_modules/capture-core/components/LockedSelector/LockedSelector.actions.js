@@ -11,7 +11,7 @@ export const lockedSelectorActionTypes = {
     CATEGORY_OPTION_SET: 'LockedSelector.CategoryOptionSet',
     CATEGORY_OPTION_RESET: 'LockedSelector.CategoryOptionReset',
     ALL_CATEGORY_OPTIONS_RESET: 'LockedSelector.AllCategoryOptionsReset',
-    TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR: 'TrackedEntityInstanceSelectionReset',
+    TRACKED_ENTITY_INSTANCE_SELECTION_RESET: 'TrackedEntityInstanceSelectionReset',
     ENROLLMENT_SELECTION_SET: 'EnrollmentSelectionSet',
     ENROLLMENT_SELECTION_RESET: 'EnrollmentSelectionReset',
 

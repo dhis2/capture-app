@@ -150,7 +150,7 @@ export const resetEnrollmentSelectionEpic = (action$: InputObservable, store: Re
     action$.pipe(
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET),
         map(() => {
-            const { currentSelections: { programId, orgUnitId, teiId } } = store.value;
-            return push(`/enrollment/${urlArguments({ programId, orgUnitId, teiId })}`);
+            const { query: { orgUnitId, programId, teiId } } = store.value.router.location;
+            return push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId })}`);
         }),
     );
