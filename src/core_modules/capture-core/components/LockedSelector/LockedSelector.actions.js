@@ -1,42 +1,47 @@
 // @flow
 import { actionCreator } from '../../actions/actions.utils';
+import { batchActions } from 'redux-batched-actions';
+import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 
 export const lockedSelectorActionTypes = {
-    ORG_UNIT_ID_SET: 'OrgUnitSet',
-    ORG_UNIT_ID_RESET: 'OrgUnitIdReset',
-    PROGRAM_ID_SET: 'ProgramIdSet',
-    PROGRAM_ID_RESET: 'ProgramIdReset',
-    CATEGORY_OPTION_SET: 'CategoryOptionSet',
-    CATEGORY_OPTION_RESET: 'CategoryOptionReset',
-    ALL_CATEGORY_OPTIONS_RESET: 'AllCategoryOptionsReset',
-    TRACKED_ENTITY_INSTANCE_SELECTION_RESET: 'TrackedEntityInstanceSelectionReset',
+    ORG_UNIT_ID_SET: 'LockedSelector.OrgUnitSet',
+    ORG_UNIT_ID_RESET: 'LockedSelector.OrgUnitIdReset',
+    PROGRAM_ID_SET: 'LockedSelector.ProgramIdSet',
+    PROGRAM_ID_RESET: 'LockedSelector.ProgramIdReset',
+    CATEGORY_OPTION_SET: 'LockedSelector.CategoryOptionSet',
+    CATEGORY_OPTION_RESET: 'LockedSelector.CategoryOptionReset',
+    ALL_CATEGORY_OPTIONS_RESET: 'LockedSelector.AllCategoryOptionsReset',
+    TRACKED_ENTITY_INSTANCE_SELECTION_CLEAR: 'TrackedEntityInstanceSelectionReset',
     ENROLLMENT_SELECTION_SET: 'EnrollmentSelectionSet',
     ENROLLMENT_SELECTION_RESET: 'EnrollmentSelectionReset',
 
-    SELECTIONS_FROM_URL_UPDATE: 'SelectionsFromUrlUpdate',
-    SELECTIONS_FROM_URL_VALID: 'SelectionsFromUrlValid',
-    SELECTIONS_FROM_URL_INVALID: 'SelectionsFromUrlInvalid',
+    CURRENT_SELECTIONS_UPDATE: 'LockedSelector.CurrentSelectionsUpdate',
+    CURRENT_SELECTIONS_VALID: 'LockedSelector.CurrentSelectionsValid',
+    CURRENT_SELECTIONS_INVALID: 'LockedSelector.CurrentSelectionsInvalid',
+    EMPTY_ORG_UNIT_SET: 'LockedSelector.EmptyOrgUnitSet',
 
-    BASED_ON_URL_ORG_UNIT_SET: 'BasedOnUrlOrgUnitSet',
-    BASED_ON_URL_ORG_UNIT_ERROR_RETRIEVING: 'BasedOnUrlOrgUnitErrorRetrieving',
-    BASED_ON_URL_ORG_UNIT_EMPTY_SET: 'BasedOnUrlOrgUnitEmptySet',
+    NEW_REGISTRATION_PAGE_OPEN: 'LockedSelector.NewRegistrationPageOpen',
+    SEARCH_PAGE_OPEN: 'LockedSelector.SearchPageOpen',
 
-    NEW_REGISTRATION_PAGE_OPEN: 'NewRegistrationPageOpen',
-    SEARCH_PAGE_OPEN: 'SearchPageOpen',
+    FETCH_ORG_UNIT: 'LockedSelector.FetchOrgUnit',
+    FETCH_ORG_UNIT_SUCCESS: 'LockedSelector.FetchOrgUnitSuccess',
+    FETCH_ORG_UNIT_ERROR: 'LockedSelector.FetchOrgUnitError',
+
+    PROGRAM_ID_STORE: 'LockedSelector.StoreProgramId',
 };
 
 export const lockedSelectorBatchActionTypes = {
-    AGAIN_START: 'BatchAgainStart',
-    PROGRAM_ID_RESET_BATCH: 'BatchProgramIdReset',
-    ORG_UNIT_ID_RESET_BATCH: 'BatchOrgUnitIdReset',
+    AGAIN_START: 'LockedSelector.BatchAgainStart',
+    PROGRAM_ID_RESET_BATCH: 'LockedSelector.BatchProgramIdReset',
+    ORG_UNIT_ID_RESET_BATCH: 'LockedSelector.BatchOrgUnitIdReset',
 };
 
-export const setOrgUnitFromLockedSelector = (id: string, orgUnit: Object) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_SET)({ id, orgUnit });
-export const setProgramIdFromLockedSelector = (id: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_SET)(id);
+export const setOrgUnitFromLockedSelector = (id: string, orgUnit: Object, pageToPush: string) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_SET)({ orgUnitId: id, orgUnit, pageToPush });
+export const setProgramIdFromLockedSelector = (id: string, pageToPush: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_SET)({ programId: id, pageToPush });
 export const setCategoryOptionFromLockedSelector = (categoryId: string, categoryOption: Object) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });
 
-export const resetOrgUnitIdFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_RESET)();
-export const resetProgramIdFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_RESET)();
+export const resetOrgUnitIdFromLockedSelector = (pageToPush: string) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_RESET)({ pageToPush });
+export const resetProgramIdFromLockedSelector = (pageToPush: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_RESET)({ pageToPush });
 export const resetCategoryOptionFromLockedSelector = (categoryId: string) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_RESET)({ categoryId });
 export const resetAllCategoryOptionsFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET)();
 
@@ -46,12 +51,15 @@ export const openSearchPageFromLockedSelector = () => actionCreator(lockedSelect
 
 // these actions are being triggered only when the user updates the url from the url bar.
 // this way we keep our stored data in sync with the page the user is.
-export const updateSelectionsFromUrl = (data: Object) => actionCreator(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)(data);
-export const validSelectionsFromUrl = () => actionCreator(lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID)();
-export const invalidSelectionsFromUrl = (error: string) => actionCreator(lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID)({ error });
-export const setCurrentOrgUnitBasedOnUrl = (orgUnit: Object) => actionCreator(lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET)(orgUnit);
-export const errorRetrievingOrgUnitBasedOnUrl = (error: string) => actionCreator(lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_ERROR_RETRIEVING)({ error });
-export const setEmptyOrgUnitBasedOnUrl = () => actionCreator(lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_EMPTY_SET)();
+export const updateSelectionsFromUrl = (data: Object) => actionCreator(lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE)(data);
+export const validSelectionsFromUrl = () => actionCreator(lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID)();
+export const invalidSelectionsFromUrl = (error: string) => actionCreator(lockedSelectorActionTypes.CURRENT_SELECTIONS_INVALID)({ error });
+export const setCurrentOrgUnitBasedOnUrl = (orgUnit: Object) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS)(orgUnit);
+export const errorRetrievingOrgUnitBasedOnUrl = (error: string) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT_ERROR)({ error });
+export const setEmptyOrgUnitBasedOnUrl = () => actionCreator(lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET)();
+
+// component Lifecycle
+export const fetchOrgUnit = (orgUnitId: string) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT)({ orgUnitId });
 
 // enrollment related
 export const clearTrackedEntityInstanceSelection = () =>
@@ -62,3 +70,25 @@ export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
 
 export const resetEnrollmentSelection = () =>
     actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET)();
+
+
+export const resetProgramIdBatchAction = (actions: Array<Object>, pageToPush: string) =>
+    batchActions([
+        ...actions,
+        resetAllCategoryOptionsFromLockedSelector(),
+        resetProgramIdFromLockedSelector(pageToPush),
+    ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH);
+
+export const resetOrgUnitIdBatchAction = (customActionsOnOrgUnitIdReset: Array<Object>, pageToPush: string) =>
+    batchActions([
+        resetOrgUnitIdFromLockedSelector(pageToPush),
+        ...customActionsOnOrgUnitIdReset,
+    ], lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH);
+
+export const startAgainBatchAction = () =>
+    batchActions([
+        resetProgramIdFromLockedSelector(''),
+        resetOrgUnitIdFromLockedSelector(''),
+        resetAllCategoryOptionsFromLockedSelector(),
+        resetProgramIdBase(),
+    ], lockedSelectorBatchActionTypes.AGAIN_START);

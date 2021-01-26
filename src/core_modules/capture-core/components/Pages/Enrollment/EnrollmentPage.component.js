@@ -20,7 +20,7 @@ const getStyles = () => ({
 });
 
 const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
-    <LockedSelector customActionsOnProgramIdReset={[resetProgramOnEnrollmentPage()]} />
+    <LockedSelector pageToPush="enrollment" customActionsOnProgramIdReset={[resetProgramOnEnrollmentPage()]} />
 
     <div data-test="dhis2-capture-enrollment-page-content" className={classes.container} >
 

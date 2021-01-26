@@ -58,7 +58,7 @@ const NewPagePlain = ({
     ]);
 
     return (<>
-        <LockedSelector />
+        <LockedSelector pageToPush="new" />
         <div data-test="dhis2-capture-registration-page-content" className={classes.container} >
             {
                 newPageStatus === newPageStatuses.DEFAULT &&
