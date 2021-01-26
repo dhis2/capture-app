@@ -11,6 +11,8 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
 
     const enrollmentId: string =
       useSelector(({ router: { location: { query } } }) => query.enrollmentId);
+    const teiId: string =
+      useSelector(({ router: { location: { query } } }) => query.teiId);
     const enrollments: Object =
       useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
 
@@ -21,6 +23,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     [
         enrollments,
         enrollmentId,
+        teiId,
         dispatch,
     ]);
     useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch]);
