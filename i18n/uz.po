@@ -180,7 +180,7 @@ msgid "Data for offline list not present"
 msgstr "Оффлайн рўйхат учун маълумотлар мавжуд эмас"
 
 msgid "Close"
-msgstr "Ёпмоқ"
+msgstr "Ёпиш"
 
 msgid "Last week"
 msgstr "Охирги ҳафта"
