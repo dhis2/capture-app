@@ -21,24 +21,30 @@ import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissin
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
 
-    const selectedTeiId: EnrollmentPageStatus = useSelector(({ currentSelections }) => currentSelections.teiId);
-    const selectedProgramId: string = useSelector(({ currentSelections }) => currentSelections.programId);
-    const selectedEnrollmentId: string = useSelector(({ currentSelections }) => currentSelections.enrollmentId);
+    const { teiId, programId, enrollmentId } =
+      useSelector(({ router: { location: { query } } }) =>
+          ({
+              teiId: query.teidId,
+              programId: query.programId,
+              enrollmentId: query.enrollmentId,
+          }),
+      );
+
     // todo annotate
     const enrollments: Object = useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
-    const programHasEnrollments = enrollments && enrollments.some(({ program }) => selectedProgramId === program);
-    const { scopeType } = useScopeInfo(selectedProgramId);
+    const programHasEnrollments = enrollments && enrollments.some(({ program }) => programId === program);
+    const { scopeType } = useScopeInfo(programId);
     const { programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
 
     useEffect(() => {
-        const selectedProgramIsTracker = selectedProgramId && scopeType === scopeTypes.TRACKER_PROGRAM;
-        const selectedProgramIsEvent = selectedProgramId && scopeType === scopeTypes.EVENT_PROGRAM;
+        const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
+        const selectedProgramIsEvent = programId && scopeType === scopeTypes.EVENT_PROGRAM;
 
         if (selectedProgramIsTracker && programSelectionIsIncomplete) {
             dispatch(showMissingCategoryMessageOnEnrollmentPage());
-        } else if (selectedProgramIsTracker && programHasEnrollments && selectedEnrollmentId) {
+        } else if (selectedProgramIsTracker && programHasEnrollments && enrollmentId) {
             dispatch(showDefaultViewOnEnrollmentPage());
-        } else if (selectedProgramIsTracker && programHasEnrollments && !selectedEnrollmentId) {
+        } else if (selectedProgramIsTracker && programHasEnrollments && !enrollmentId) {
             dispatch(showMissingEnrollmentMessageOnEnrollmentPage());
         } else if (selectedProgramIsTracker && !programHasEnrollments) {
             dispatch(showZeroEnrollmentsMessageOnEnrollmentPage());
@@ -49,13 +55,13 @@ const useComponentLifecycle = () => {
         }
     }, [
         dispatch,
-        selectedProgramId,
-        selectedEnrollmentId,
+        programId,
+        enrollmentId,
         programSelectionIsIncomplete,
         programHasEnrollments,
         scopeType,
     ]);
-    useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch, selectedTeiId]);
+    useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch, teiId]);
 };
 
 export const EnrollmentPage: ComponentType<{||}> = () => {

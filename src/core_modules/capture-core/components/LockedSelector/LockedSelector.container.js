@@ -15,7 +15,7 @@ import {
     openNewRegistrationPageFromLockedSelector,
     openSearchPageFromLockedSelector,
     fetchOrgUnit,
-    lockedSelectorBatchActionTypes, resetProgramIdBatchAction, startAgainBatchAction, resetOrgUnitIdBatchAction,
+    resetProgramIdBatchAction, startAgainBatchAction, resetOrgUnitIdBatchAction,
 } from './LockedSelector.actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import type { OwnProps } from './LockedSelector.types';
