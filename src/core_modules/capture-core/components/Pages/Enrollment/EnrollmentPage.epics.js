@@ -94,7 +94,7 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH),
         flatMap(() => {
-            const { currentSelections: { teiId } } = store.value;
+            const { query: { teiId } } = store.value.router.location;
 
             return fetchTeiStream(teiId);
         }),
