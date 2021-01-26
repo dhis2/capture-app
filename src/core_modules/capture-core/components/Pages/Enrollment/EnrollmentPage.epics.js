@@ -18,7 +18,7 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
     action$.pipe(
         ofType(enrollmentPageActionTypes.ENROLLMENT_PAGE_INFORMATION_FETCH),
         flatMap(() => {
-            const { currentSelections: { enrollmentId } } = store.value;
+            const { query: { enrollmentId } } = store.value.router.location;
 
             return from(fetchEnrollment(enrollmentId))
                 .pipe(
