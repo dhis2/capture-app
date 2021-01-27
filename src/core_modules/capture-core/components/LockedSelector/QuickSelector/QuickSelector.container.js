@@ -5,7 +5,6 @@ import QuickSelector from './QuickSelector.component';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 import { clearTrackedEntityInstanceSelection, setEnrollmentSelection } from '../LockedSelector.actions';
-import { enrollmentPageStatuses } from '../../Pages/Enrollment/EnrollmentPage.constants';
 import { deriveUrlQueries } from '../../../utils/url';
 
 const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
