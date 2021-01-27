@@ -1,6 +1,6 @@
 // @flow
-import { actionCreator } from '../../actions/actions.utils';
 import { batchActions } from 'redux-batched-actions';
+import { actionCreator } from '../../actions/actions.utils';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 
 export const lockedSelectorActionTypes = {

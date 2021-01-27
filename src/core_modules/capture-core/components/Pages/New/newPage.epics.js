@@ -9,6 +9,6 @@ export const openNewRegistrationPageFromLockedSelectorEpic = (action$: InputObse
     action$.pipe(
         ofType(lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN),
         map(() => {
-          const { query: { orgUnitId, programId } } = store.value.router.location;
+            const { query: { orgUnitId, programId } } = store.value.router.location;
             return push(`/new?${urlArguments({ programId, orgUnitId })}`);
         }));
