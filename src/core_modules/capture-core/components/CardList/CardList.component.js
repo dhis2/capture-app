@@ -41,9 +41,8 @@ const CardListIndex = ({
                         {noItemsText}
                     </div>)
                     :
-                    items.map((item) => {
-                        debugger;
-                        return (<CardListItem
+                    items.map(item => (
+                        <CardListItem
                             key={item.id}
                             item={item}
                             currentSearchScopeName={currentSearchScopeName}
@@ -51,8 +50,8 @@ const CardListIndex = ({
                             getCustomBottomElements={getCustomItemBottomElements}
                             profileImageDataElement={profileImageDataElement}
                             dataElements={dataElementsExceptProfileImage}
-                        />);
-                    })
+                        />
+                    ))
             }
         </div>
     );
