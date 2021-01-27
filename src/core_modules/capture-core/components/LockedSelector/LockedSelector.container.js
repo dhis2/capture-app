@@ -1,21 +1,20 @@
 // @flow
 import React, { type ComponentType, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { batchActions } from 'redux-batched-actions';
 import { useLocation } from 'react-router';
 import { LockedSelectorComponent } from './LockedSelector.component';
 import {
-    resetOrgUnitIdFromLockedSelector,
     setOrgUnitFromLockedSelector,
     setProgramIdFromLockedSelector,
-    resetProgramIdFromLockedSelector,
     setCategoryOptionFromLockedSelector,
     resetCategoryOptionFromLockedSelector,
     resetAllCategoryOptionsFromLockedSelector,
     openNewRegistrationPageFromLockedSelector,
     openSearchPageFromLockedSelector,
     fetchOrgUnit,
-    resetProgramIdBatchAction, startAgainBatchAction, resetOrgUnitIdBatchAction,
+    resetProgramIdBatchAction,
+    startAgainBatchAction,
+    resetOrgUnitIdBatchAction,
 } from './LockedSelector.actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import type { OwnProps } from './LockedSelector.types';

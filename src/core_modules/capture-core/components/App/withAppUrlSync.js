@@ -52,7 +52,6 @@ const updaterForPages = {
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
-    [pageKeys.ENROLLMENT]: updateSelectionsFromUrl,
 };
 
 /**
