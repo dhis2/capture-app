@@ -244,7 +244,7 @@ msgid "New event"
 msgstr "Nová událost"
 
 msgid "You don't have access to create an event in the current selections"
-msgstr ""
+msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
 
 msgid "Save"
 msgstr "Uložit"
@@ -610,7 +610,7 @@ msgid "Inactive"
 msgstr "Neaktivní"
 
 msgid "Working list could not be updated"
-msgstr ""
+msgstr "Pracovní seznam nelze aktualizovat"
 
 msgid "Update view"
 msgstr "Aktualizovat zobrazení"
@@ -652,7 +652,7 @@ msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Chcete-li zahájit vytváření hlášení, vyberte {{missingCategories}}"
 
 msgid "Save as new"
-msgstr ""
+msgstr "Uložit jako nové"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -691,7 +691,7 @@ msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Uložit nový {{trackedEntityTypeName}} a odkaz"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "Uložit jako nový {{trackedEntityName}}"
 
 msgid "Organisation Unit"
 msgstr "Organizační jednotka"
@@ -816,7 +816,7 @@ msgid "Feedbacks"
 msgstr "Zpětná vazba"
 
 msgid "An error occurred loading possible duplicates"
-msgstr ""
+msgstr "Při načítání možných duplikátů došlo k chybě"
 
 msgid "You dont have access to delete this relationship"
 msgstr "K odstranění tohoto vztahu nemáte přístup"
