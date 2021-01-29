@@ -16,9 +16,10 @@ import {
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
 import { urlArguments } from '../../../utils/url';
+import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData/helpers';
 
 const fetchEnrollment = id => getApi().get(`enrollments/${id}`, { fields: 'trackedEntityInstance,program,orgUnit' });
-const fetchTrackedEntityInstance = id => getApi().get(`trackedEntityInstances/${id}`, { fields: 'attributes,enrollments' });
+const fetchTrackedEntityInstance = id => getApi().get(`trackedEntityInstances/${id}`, { fields: 'attributes,enrollments,trackedEntityType' });
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
@@ -28,13 +29,15 @@ const deriveSelectedName = (attributes = {}) => attributes.reduce((acc, { value:
 
 const fetchTeiStream = teiId => from(fetchTrackedEntityInstance(teiId))
     .pipe(
-        map(({ attributes, enrollments }) => {
+        map(({ attributes, enrollments, trackedEntityType }) => {
             // todo this is not scaling when you have many attributes the name will be huge
-            const selectedName = deriveSelectedName(attributes);
+            const teiDisplayName = deriveSelectedName(attributes);
             const enrollmentsSortedByDate = sortByDate(enrollments);
+            const { name: tetDisplayName } = getTrackedEntityTypeThrowIfNotFound(trackedEntityType);
 
             return successfulFetchingEnrollmentPageInformationFromUrl({
-                selectedName,
+                teiDisplayName,
+                tetDisplayName,
                 enrollmentsSortedByDate,
             });
         }),
