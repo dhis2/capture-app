@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import type { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
 import type { EnrollmentPageStatus } from './EnrollmentPage.types';
 import {
@@ -73,12 +74,15 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     const enrollmentPageStatus: EnrollmentPageStatus =
       useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
 
+
+    const { state: { triggerFetch } = { triggerFetch: false } } = useLocation();
     useEffect(() => {
         dispatch(fetchEnrollmentPageInformation());
     },
     // todo there is a bug when you have http://localhost:3000/#/enrollment?teiId=EaOyKGOIGRp&enrollmentId=W9YcBFADeRj
     // because you have both tei and enrollmentId it stucks in an attermon loop
     [
+        triggerFetch,
         selectedTeiId,
         dispatch,
     ]);
