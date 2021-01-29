@@ -51,7 +51,7 @@ type Props = {
     selectedEnrollmentId: string,
     selectedTeiName: string,
     enrollmentsAsOptions: Array<Object>,
-    onTrackedEntityInstanceClear: () => void,
+    onTeiReset: () => void,
     onEnrollmentSelectionSet: () => void,
     enrollmentLockedSelectReady: boolean,
 };
@@ -102,7 +102,7 @@ class QuickSelector extends Component<Props> {
             selectedTeiName,
             enrollmentsAsOptions,
             selectedEnrollmentId,
-            onTrackedEntityInstanceClear,
+            onTeiReset,
             onEnrollmentSelectionSet,
             enrollmentLockedSelectReady,
         } = this.props;

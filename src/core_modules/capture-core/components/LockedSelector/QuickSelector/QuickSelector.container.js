@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import QuickSelector from './QuickSelector.component';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
-import { clearTrackedEntityInstanceSelection, setEnrollmentSelection } from '../LockedSelector.actions';
+import { resetTeiSelection, setEnrollmentSelection } from '../LockedSelector.actions';
 import { enrollmentPageStatuses } from '../../Pages/Enrollment/EnrollmentPage.constants';
 import { deriveUrlQueries } from '../../../utils/url';
 
@@ -43,8 +43,8 @@ const mapStateToProps = (state: Object) => {
 
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onTrackedEntityInstanceClear: () => {
-        dispatch(clearTrackedEntityInstanceSelection());
+    onTeiReset: () => {
+        dispatch(resetTeiSelection());
     },
     onEnrollmentSelectionSet: (enrollmentId) => {
         dispatch(setEnrollmentSelection({ enrollmentId }));
