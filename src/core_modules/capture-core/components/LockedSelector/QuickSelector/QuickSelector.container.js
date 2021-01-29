@@ -42,8 +42,8 @@ const mapStateToProps = (state: Object) => {
 
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onTrackedEntityInstanceClear: () => {
-        dispatch(clearTrackedEntityInstanceSelection());
+    onTeiSelectionReset: () => {
+        dispatch(resetTeiSelection());
     },
     onEnrollmentSelectionSet: (enrollmentId) => {
         dispatch(setEnrollmentSelection({ enrollmentId }));

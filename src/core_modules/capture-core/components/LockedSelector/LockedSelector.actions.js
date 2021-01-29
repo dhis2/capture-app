@@ -11,8 +11,8 @@ export const lockedSelectorActionTypes = {
     CATEGORY_OPTION_SET: 'LockedSelector.CategoryOptionSet',
     CATEGORY_OPTION_RESET: 'LockedSelector.CategoryOptionReset',
     ALL_CATEGORY_OPTIONS_RESET: 'LockedSelector.AllCategoryOptionsReset',
-    TRACKED_ENTITY_INSTANCE_SELECTION_RESET: 'TrackedEntityInstanceSelectionReset',
-    ENROLLMENT_SELECTION_SET: 'EnrollmentSelectionSet',
+    TEI_SELECTION_RESET: 'LockedSelector.TeiSelectionReset',
+    ENROLLMENT_SELECTION_SET: 'LockedSelector.EnrollmentSelectionSet',
     ENROLLMENT_SELECTION_RESET: 'EnrollmentSelectionReset',
 
     CURRENT_SELECTIONS_UPDATE: 'LockedSelector.CurrentSelectionsUpdate',
@@ -62,8 +62,8 @@ export const setEmptyOrgUnitBasedOnUrl = () => actionCreator(lockedSelectorActio
 export const fetchOrgUnit = (orgUnitId: string) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT)({ orgUnitId });
 
 // enrollment related
-export const clearTrackedEntityInstanceSelection = () =>
-    actionCreator(lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_RESET)();
+export const resetTeiSelection = () =>
+    actionCreator(lockedSelectorActionTypes.TEI_SELECTION_RESET)();
 
 export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
     actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET)({ enrollmentId });
@@ -71,7 +71,7 @@ export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
 export const resetEnrollmentSelection = () =>
     actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET)();
 
-
+// batch related actions
 export const resetProgramIdBatchAction = (actions: Array<Object>, pageToPush: string) =>
     batchActions([
         ...actions,
