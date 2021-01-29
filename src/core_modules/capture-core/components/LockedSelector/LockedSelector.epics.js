@@ -125,3 +125,23 @@ export const fetchOrgUnitEpic = (action$: InputObservable) =>
                 )),
         catchError(() => of(errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')))),
     );
+
+export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.TEI_SELECTION_RESET),
+        map(() => {
+            const { query: { programId, orgUnitId } } = store.value.router.location;
+
+            return push(`/${urlArguments({ programId, orgUnitId })}`);
+        }),
+    );
+
+export const setEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET),
+        map(({ payload: { enrollmentId } }) => {
+            const { query: { programId, orgUnitId, teiId } } = store.value.router.location;
+
+            return push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
+        }),
+    );

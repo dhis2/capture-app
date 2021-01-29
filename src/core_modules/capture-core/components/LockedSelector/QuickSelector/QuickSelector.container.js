@@ -2,24 +2,54 @@
 
 import { connect } from 'react-redux';
 import QuickSelector from './QuickSelector.component';
+import { convertValue } from '../../../converters/clientToView';
+import { dataElementTypes } from '../../../metaData/DataElement';
+import { resetTeiSelection, setEnrollmentSelection } from '../LockedSelector.actions';
+import { enrollmentPageStatuses } from '../../Pages/Enrollment/EnrollmentPage.constants';
 import { deriveUrlQueries } from '../../../utils/url';
+
+const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
+    enrollments
+        .filter(({ program }) => program === selectedProgramId)
+        .map(({ created, enrollment }) => (
+            {
+                label: convertValue(created, dataElementTypes.DATETIME),
+                value: enrollment,
+            }
+        ));
 
 const mapStateToProps = (state: Object) => {
     const { orgUnitId, programId } = deriveUrlQueries(state);
     const {
-        router: { location: { pathname } },
+        router: { location: { pathname, query: { enrollmentId } } },
         currentSelections: { categoriesMeta },
         organisationUnits,
+        enrollmentPage,
     } = state;
 
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollmentPage.enrollments, programId);
     return {
         selectedProgramId: programId,
         selectedOrgUnitId: orgUnitId,
         selectedCategories: categoriesMeta,
         selectedOrgUnit: orgUnitId ? organisationUnits[orgUnitId] : null,
         currentPage: pathname.substring(1),
+        selectedTeiName: enrollmentPage.trackedEntityInstanceDisplayName,
+        selectedEnrollmentId: enrollmentId,
+        enrollmentsAsOptions,
+        enrollmentLockedSelectReady: enrollmentPage.enrollmentPageStatus !== enrollmentPageStatuses.LOADING,
     };
 };
 
+
+const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+    onTeiReset: () => {
+        dispatch(resetTeiSelection());
+    },
+    onEnrollmentSelectionSet: (enrollmentId) => {
+        dispatch(setEnrollmentSelection({ enrollmentId }));
+    },
+});
+
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, () => ({}))(QuickSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(QuickSelector);
