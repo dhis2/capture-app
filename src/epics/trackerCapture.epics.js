@@ -187,6 +187,10 @@ import {
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
 
+import {
+    fetchEnrollmentPageInformationFromUrlEpic,
+} from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
+
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
     resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
@@ -299,5 +303,6 @@ export default combineEpics(
     completeSavingNewTrackedEntityInstanceEpic,
     completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     openNewRegistrationPageFromLockedSelectorEpic,
+    fetchEnrollmentPageInformationFromUrlEpic,
     ...getDataEntryEpics(),
 );
