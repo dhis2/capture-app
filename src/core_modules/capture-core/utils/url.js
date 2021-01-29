@@ -9,7 +9,7 @@ type Url = {|
     enrollmentId?: string,
 |}
 
-    export const urlArguments = ({
+export const urlArguments = ({
     programId,
     orgUnitId,
     trackedEntityTypeId,
