@@ -1,9 +1,21 @@
 // @flow
 import { pageKeys } from '../components/App/withAppUrlSync';
 
-type Url = {programId?: string, orgUnitId?: string, trackedEntityTypeId?: string}
+type Url = {|
+    programId?: string,
+    orgUnitId?: string,
+    trackedEntityTypeId?: string,
+    teiId?: string,
+    enrollmentId?: string,
+|}
 
-export const urlArguments = ({ programId, orgUnitId, trackedEntityTypeId }: Url): string => {
+export const urlArguments = ({
+    programId,
+    orgUnitId,
+    trackedEntityTypeId,
+    teiId,
+    enrollmentId,
+}: Url): string => {
     const argArray = [];
     if (programId) {
         argArray.push(`programId=${programId}`);
@@ -12,6 +24,12 @@ export const urlArguments = ({ programId, orgUnitId, trackedEntityTypeId }: Url)
     }
     if (orgUnitId) {
         argArray.push(`orgUnitId=${orgUnitId}`);
+    }
+    if (teiId) {
+        argArray.push(`teiId=${teiId}`);
+    }
+    if (enrollmentId) {
+        argArray.push(`enrollmentId=${enrollmentId}`);
     }
 
     return argArray.join('&');
@@ -30,6 +48,8 @@ export const deriveUrlQueries = (state: Object) => {
                     programId: routerProgramId,
                     orgUnitId: routerOrgUnitId,
                     trackedEntityTypeId: routerTet,
+                    teiId,
+                    enrollmentId,
                 },
             } },
     } = state;
@@ -37,7 +57,13 @@ export const deriveUrlQueries = (state: Object) => {
     const orgUnitId = routerOrgUnitId || selectedOrgUnitId;
     const trackedEntityTypeId = routerTet || selectedTet;
 
-    return { programId, orgUnitId, trackedEntityTypeId };
+    return {
+        programId,
+        orgUnitId,
+        trackedEntityTypeId,
+        teiId,
+        enrollmentId,
+    };
 };
 
 export const pageFetchesOrgUnitUsingTheOldWay = (page: string, pages: Object = pageKeys): boolean =>

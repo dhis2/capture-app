@@ -1,5 +1,7 @@
 // @flow
+import { batchActions } from 'redux-batched-actions';
 import { actionCreator } from '../../actions/actions.utils';
+import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 
 export const lockedSelectorActionTypes = {
     ORG_UNIT_ID_SET: 'LockedSelector.OrgUnitSet',
@@ -31,12 +33,12 @@ export const lockedSelectorBatchActionTypes = {
     ORG_UNIT_ID_RESET_BATCH: 'LockedSelector.BatchOrgUnitIdReset',
 };
 
-export const setOrgUnitFromLockedSelector = (id: string, orgUnit: Object) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_SET)({ orgUnitId: id, orgUnit });
-export const setProgramIdFromLockedSelector = (id: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_SET)({ programId: id });
+export const setOrgUnitFromLockedSelector = (id: string, orgUnit: Object, pageToPush: string) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_SET)({ orgUnitId: id, orgUnit, pageToPush });
+export const setProgramIdFromLockedSelector = (id: string, pageToPush: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_SET)({ programId: id, pageToPush });
 export const setCategoryOptionFromLockedSelector = (categoryId: string, categoryOption: Object) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });
 
-export const resetOrgUnitIdFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_RESET)();
-export const resetProgramIdFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_RESET)();
+export const resetOrgUnitIdFromLockedSelector = (pageToPush: string) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_RESET)({ pageToPush });
+export const resetProgramIdFromLockedSelector = (pageToPush: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_RESET)({ pageToPush });
 export const resetCategoryOptionFromLockedSelector = (categoryId: string) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_RESET)({ categoryId });
 export const resetAllCategoryOptionsFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET)();
 
@@ -55,3 +57,26 @@ export const setEmptyOrgUnitBasedOnUrl = () => actionCreator(lockedSelectorActio
 
 // component Lifecycle
 export const fetchOrgUnit = (orgUnitId: string) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT)({ orgUnitId });
+
+
+// batch related actions
+export const resetProgramIdBatchAction = (actions: Array<Object>, pageToPush: string) =>
+    batchActions([
+        ...actions,
+        resetAllCategoryOptionsFromLockedSelector(),
+        resetProgramIdFromLockedSelector(pageToPush),
+    ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH);
+
+export const resetOrgUnitIdBatchAction = (customActionsOnOrgUnitIdReset: Array<Object>, pageToPush: string) =>
+    batchActions([
+        resetOrgUnitIdFromLockedSelector(pageToPush),
+        ...customActionsOnOrgUnitIdReset,
+    ], lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH);
+
+export const startAgainBatchAction = () =>
+    batchActions([
+        resetProgramIdFromLockedSelector(''),
+        resetOrgUnitIdFromLockedSelector(''),
+        resetAllCategoryOptionsFromLockedSelector(),
+        resetProgramIdBase(),
+    ], lockedSelectorBatchActionTypes.AGAIN_START);
