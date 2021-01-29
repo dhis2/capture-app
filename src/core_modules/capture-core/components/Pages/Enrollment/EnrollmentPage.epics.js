@@ -30,7 +30,6 @@ const deriveSelectedName = (attributes = {}) => attributes.reduce((acc, { value:
 const fetchTeiStream = teiId => from(fetchTrackedEntityInstance(teiId))
     .pipe(
         map(({ attributes, enrollments, trackedEntityType }) => {
-            // todo this is not scaling when you have many attributes the name will be huge
             const teiDisplayName = deriveSelectedName(attributes);
             const enrollmentsSortedByDate = sortByDate(enrollments);
             const { name: tetDisplayName } = getTrackedEntityTypeThrowIfNotFound(trackedEntityType);
