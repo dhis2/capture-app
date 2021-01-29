@@ -7,7 +7,7 @@ export const enrollmentPageActionTypes = {
     ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH: 'ErrorOnFetchingEnrollmentPageInformation',
     ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH: 'SuccessOnFetchingEnrollmentPageInformation',
 
-    OPEN_ENROLLMENT_PAGE: 'OpenEnrollmentPage',
+    ENROLLMENT_PAGE_OPEN: 'OpenEnrollmentPage',
     ENROLLMENT_PAGE_CLEAN: 'CleanEnrollmentPage',
 };
 
@@ -25,7 +25,7 @@ export const successfulFetchingEnrollmentPageInformationFromUrl = ({ selectedNam
         { selectedName, enrollmentsSortedByDate });
 
 export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }: Object) =>
-    actionCreator(enrollmentPageActionTypes.OPEN_ENROLLMENT_PAGE)({ programId, orgUnitId, teiId, enrollmentId });
+    actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_OPEN)({ programId, orgUnitId, teiId, enrollmentId });
 
 export const cleanEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.ENROLLMENT_PAGE_CLEAN)();

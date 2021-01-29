@@ -309,5 +309,6 @@ export default combineEpics(
     fetchEnrollmentPageInformationFromUrlEpic,
     resetTeiSelectionEpic,
     setEnrollmentSelectionEpic,
+    openEnrollmentPageEpic,
     ...getDataEntryEpics(),
 );

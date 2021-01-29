@@ -60,7 +60,7 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
 
 export const openEnrollmentPageEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(enrollmentPageActionTypes.OPEN_ENROLLMENT_PAGE),
+        ofType(enrollmentPageActionTypes.ENROLLMENT_PAGE_OPEN),
         map(({ payload: { enrollmentId, programId, orgUnitId, teiId } }) =>
             push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`),
         ),
