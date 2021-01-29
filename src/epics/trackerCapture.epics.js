@@ -155,7 +155,7 @@ import {
     resetOrgUnitId,
     resetProgramIdEpic,
     fetchOrgUnitEpic,
-    clearTrackedEntityInstanceSelectionEpic,
+    resetTeiSelectionEpic,
     setEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 import {
@@ -311,7 +311,7 @@ export default combineEpics(
     fetchEnrollmentPageInformationFromUrlEpic,
     startFetchingTeiFromEnrollmentIdEpic,
     startFetchingTeiFromTeiIdEpic,
-    clearTrackedEntityInstanceSelectionEpic,
+    resetTeiSelectionEpic,
     setEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
     ...getDataEntryEpics(),
