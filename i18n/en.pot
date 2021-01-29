@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-29T14:21:43.269Z\n"
-"PO-Revision-Date: 2021-01-29T14:21:43.269Z\n"
+"POT-Creation-Date: 2021-01-29T15:13:29.596Z\n"
+"PO-Revision-Date: 2021-01-29T15:13:29.596Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -560,10 +560,10 @@ msgstr ""
 msgid "You selected an event program. Event do not have enrollments."
 msgstr ""
 
-msgid "To create a new event click **here**."
+msgid "To create a new event"
 msgstr ""
 
-msgid "To view the working lists click **here**."
+msgid "To view the working lists click"
 msgstr ""
 
 msgid "Tracked entity instance with id '{{teiId}}' doesn't exist"
