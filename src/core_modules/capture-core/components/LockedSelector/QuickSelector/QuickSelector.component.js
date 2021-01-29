@@ -51,7 +51,7 @@ type Props = {
     selectedEnrollmentId: string,
     selectedTeiName: string,
     enrollmentsAsOptions: Array<Object>,
-    onTrackedEntityInstanceClear: () => void,
+    onTeiSelectionReset: () => void,
     onEnrollmentSelectionSet: () => void,
     onEnrollmentSelectionReset: () => void,
     enrollmentLockedSelectReady: boolean,
@@ -103,7 +103,7 @@ class QuickSelector extends Component<Props> {
             selectedTeiName,
             enrollmentsAsOptions,
             selectedEnrollmentId,
-            onTrackedEntityInstanceClear,
+            onTeiSelectionReset,
             onEnrollmentSelectionSet,
             onEnrollmentSelectionReset,
             enrollmentLockedSelectReady,
@@ -140,7 +140,7 @@ class QuickSelector extends Component<Props> {
                             <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
                                 <SingleLockedSelect
                                     ready={enrollmentLockedSelectReady}
-                                    onClear={onTrackedEntityInstanceClear}
+                                    onClear={onTeiSelectionReset}
                                     options={[{
                                         label: selectedTeiName,
                                         value: 'alwaysPreselected',

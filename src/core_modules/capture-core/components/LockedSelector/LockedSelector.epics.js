@@ -126,9 +126,9 @@ export const fetchOrgUnitEpic = (action$: InputObservable) =>
         catchError(() => of(errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')))),
     );
 
-export const clearTrackedEntityInstanceSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_RESET),
+        ofType(lockedSelectorActionTypes.TEI_SELECTION_RESET),
         map(() => {
             const { query: { programId, orgUnitId } } = store.value.router.location;
 

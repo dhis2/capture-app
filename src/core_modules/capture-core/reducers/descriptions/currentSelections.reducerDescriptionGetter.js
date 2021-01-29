@@ -223,28 +223,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         categoriesMeta: undefined,
         trackedEntityTypeId,
     }),
-    [lockedSelectorActionTypes.TRACKED_ENTITY_INSTANCE_SELECTION_RESET]:
-      state => ({
-          ...state,
-          trackedEntityInstanceDisplayName: undefined,
-          teiId: undefined,
-          enrollmentId: undefined,
-      }),
-    [lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET]:
-      (state, { payload: { enrollmentId } }) => ({
-          ...state,
-          enrollmentId,
-      }),
-    [lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET]:
-      state => ({
-          ...state,
-          enrollmentId: undefined,
-      }),
-    [enrollmentPageActionTypes.CUSTOM_PROGRAM_RESET]:
-      state => ({
-          ...state,
-          enrollmentId: undefined,
-      }),
 }, 'currentSelections', {
     complete: false,
     categoryCheckInProgress: false,
