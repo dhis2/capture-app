@@ -13,7 +13,7 @@ export const lockedSelectorActionTypes = {
     ALL_CATEGORY_OPTIONS_RESET: 'LockedSelector.AllCategoryOptionsReset',
     TEI_SELECTION_RESET: 'LockedSelector.TeiSelectionReset',
     ENROLLMENT_SELECTION_SET: 'LockedSelector.EnrollmentSelectionSet',
-    ENROLLMENT_SELECTION_RESET: 'EnrollmentSelectionReset',
+    ENROLLMENT_SELECTION_RESET: 'LockedSelector.EnrollmentSelectionReset',
 
     CURRENT_SELECTIONS_UPDATE: 'LockedSelector.CurrentSelectionsUpdate',
     CURRENT_SELECTIONS_VALID: 'LockedSelector.CurrentSelectionsValid',
