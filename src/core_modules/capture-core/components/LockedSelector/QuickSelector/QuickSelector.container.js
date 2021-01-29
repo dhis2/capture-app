@@ -43,7 +43,7 @@ const mapStateToProps = (state: Object) => {
 
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onTeiReset: () => {
+    onTeiSelectionReset: () => {
         dispatch(resetTeiSelection());
     },
     onEnrollmentSelectionSet: (enrollmentId) => {
