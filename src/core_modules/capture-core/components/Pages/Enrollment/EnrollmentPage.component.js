@@ -71,7 +71,6 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus, selectedProgramId,
             }
 
             {
-                // todo need to make "here" a link
                 enrollmentPageStatus === enrollmentPageStatuses.EVENT_PROGRAM_SELECTED &&
                 <IncompleteSelectionsMessage>
                     <div style={{ textAlign: 'center' }}>
