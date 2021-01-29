@@ -29,7 +29,7 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus, selectedProgramId,
     const navigateToEventRegistrationPage = () =>
         history.push(`/new?${urlArguments({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId })}`);
     const navigateToEventWorkingList = () =>
-        history.push(`/new?${urlArguments({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId })}`);
+        history.push(`/?${urlArguments({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId })}`);
 
     return (<>
         <LockedSelector pageToPush="enrollment" customActionsOnProgramIdReset={[resetProgramOnEnrollmentPage()]} />
@@ -80,7 +80,11 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus, selectedProgramId,
                             {i18n.t('To create a new event')}
                             {' '}
                             <LinkButton
-                                style={{ background: 'transparent', padding: 0 }}
+                                style={{
+                                    background: 'transparent',
+                                    padding: 0,
+                                    color: '#0000EE',
+                                }}
                                 onClick={navigateToEventRegistrationPage}
                             >
                                 here
@@ -91,7 +95,11 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus, selectedProgramId,
                             {i18n.t('To view the working lists click')}
                             {' '}
                             <LinkButton
-                                style={{ background: 'transparent', padding: 0 }}
+                                style={{
+                                    background: 'transparent',
+                                    padding: 0,
+                                    color: '#0000EE',
+                                }}
                                 onClick={navigateToEventWorkingList}
                             >
                                 here
