@@ -131,49 +131,6 @@ Feature: Use the LockedSelector to navigate
     Then you should see error message
 
   # Enrollment page
-    Scenario: Enrollment page > Landing on the page with having typed only the enrollmentId on the url
-      Given you land on the enrollment page by having typed only the enrollmentId on the url
-      Then you can see on the locked selector all the four selections completed
-      And you see the default text on the enrollment page
-
-    Scenario: Enrollment page > Landing on the page with having typed the enrollmentId and the programId on the url
-      Given you land on the enrollment page by having typed the enrollmentId and the programId on the url
-      Then you can see on the locked selector all the four selections completed
-      And you see the default text on the enrollment page
-
-    Scenario: Enrollment page > Landing on the page with having typed the enrollmentId and the orgUnitId on the url
-      Given you land on the enrollment page by having typed the enrollmentId and the orgUnitId on the url
-      Then you can see on the locked selector all the four selections completed
-      And you see the default text on the enrollment page
-
-    Scenario: Enrollment page > Landing on the page with only typing the enrollmentId and the teiId on the url
-      Given you land on the enrollment page by having typed the enrollmentId and the orgUnitId on the url
-      Then you can see on the locked selector all the four selections completed
-      And you see the default text on the enrollment page
-
-    Scenario: Enrollment page > Landing on the page with having typed only the teiId on the url
-      Given you land on the enrollment page by having typed only the teiId on the url
-      Then you can see on the locked selector only the tei name selected
-      And you see message saying you have to select a program to view the enrollment page
-
-    Scenario: Enrollment page > Landing on the page with having typed the teiId and the orgUnitId on the url
-      Given you land on the enrollment page by having typed the teiId and the orgUnitId on the url
-      Then you can see on the locked selector the tei name and orgUnitId selected
-      And you see message saying you have to select a program to view the enrollment page
-
-    Scenario: Enrollment page > Landing on the page with having typed the teiId and the programId on the url
-      Given you land on the enrollment page by having typed the teiId and the programId on the url
-      Then you can see on the locked selector the tei name and the programId selected
-      And you see message saying you have to select an enrollment to view the enrollment page
-
-    Scenario: Enrollment page > Landing on the page with having typed only the programId on the url
-      Given you land on the enrollment page by having typed only the programId on the url
-      And you see an error message explaining your url is invalid
-
-    Scenario: Enrollment page > Landing on the page with having typed only the orgUnitId on the url
-      Given you land on the enrollment page by having typed only the orgUnitId on the url
-      And you see an error message explaining your url is invalid
-
   Scenario Outline: Enrollment page > Landing on the page with url
     Given you land on the enrollment page by having typed the <url>
     Then you can see on the locked selector the following <state>
@@ -181,15 +138,45 @@ Feature: Use the LockedSelector to navigate
 
     Examples:
       | url | state | message |
-      | /#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8  | all                  | default                                        |
-      | /#/enrollment?enrollmentId=gPDueU02tn8                                                                | all                  | default                                        |
-      | /#/enrollment?programId=IpHINAT79UW&enrollmentId=gPDueU02tn8                                          | all                  | default                                        |
-      | /#/enrollment?orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                                          | all                  | default                                        |
+      | /#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8  | all                  | Enrollment Dashboard                           |
+      | /#/enrollment?enrollmentId=gPDueU02tn8                                                                | all                  | Enrollment Dashboard                           |
+      | /#/enrollment?programId=IpHINAT79UW&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment Dashboard                           |
+      | /#/enrollment?orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment Dashboard                           |
       | /#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ                                                 | teiAndOrgUnit        | Choose program to view more information.       |
       | /#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ                                                 | teiAndTrackerProgram | Choose enrollment to view more information.    |
-      | /#/enrollment?programId=qDkgAbB5Jlk&teiId=fhFQhO0xILJ                                                 | teiAndTrackerProgram | There are no enrollments for this program.    |
+      | /#/enrollment?programId=qDkgAbB5Jlk&teiId=fhFQhO0xILJ                                                 | teiAndTrackerProgram | There are no enrollments for this program.     |
       | /#/enrollment?programId=lxAQ7Zs9VYR&teiId=fhFQhO0xILJ                                                 | teiAndEventProgram   | You selected an event program.                 |
       | /#/enrollment?programId=IpHINAT79UW                                                                   | error                | Please enter a valid url.                      |
       | /#/enrollment?orgUnitId=UgYg0YW7ZIh                                                                   | error                | Please enter a valid url.                      |
 
-#  Scenario: Enrollment page > Landing on the page with having typed only the orgUnitId on the url
+  Scenario: Enrollment page > resetting the tei
+    Given you land on the enrollment page by having typed only the enrollmentId on the url
+    When you reset the tei selection
+    And you navigated to the main page
+
+  Scenario: Enrollment page > resetting the program
+    Given you land on the enrollment page by having typed only the enrollmentId on the url
+    When you reset the program selection
+    And you see message explaining you need to select a program
+
+  Scenario: Enrollment page > resetting the org unit
+    Given you land on the enrollment page by having typed only the enrollmentId on the url
+    When you reset the org unit selection
+    And you see the enrollment page but there is no org unit id in the url
+
+  Scenario: Enrollment page > resetting the enrollment
+    Given you land on the enrollment page by having typed only the enrollmentId on the url
+    When you reset the enrollment selection
+    And you see message explaining you need to select an enrollment
+
+  Scenario: Enrollment page > navigating using the locked selector
+    Given you land on the enrollment page by having typed only the enrollmentId on the url
+    When you reset the program selection
+    And you select the MNCH PNC program
+    Then you see message explaining there are no enrollments for this program
+    When you reset the program selection
+    And you select the Antenatal care visit
+    Then you see message explaining this is an Event program
+    When you reset the program selection
+    And you select the Child Programme
+    And you see the enrollment page

@@ -15,12 +15,15 @@ import { withErrorMessageHandler } from '../../../HOC';
 import LinkButton from '../../Buttons/LinkButton.component';
 import { urlArguments } from '../../../utils/url';
 
-const getStyles = () => ({
+const getStyles = ({ typography }) => ({
     container: {
-        padding: '24px 24px 16px 24px',
+        padding: '16px 24px 16px 24px',
     },
     loadingMask: {
         height: '100vh',
+    },
+    title: {
+        ...typography.title,
     },
 });
 
@@ -38,7 +41,7 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus, selectedProgramId,
 
             {
                 enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
-                <div>default</div>
+                <div className={classes.title}>Enrollment Dashboard</div>
             }
 
             {

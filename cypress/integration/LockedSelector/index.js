@@ -257,120 +257,6 @@ And('there should be Child Programme domain forms visible to search with', () =>
         .should('have.length', 1);
 });
 
-And('you land on the enrollment page by having typed the full url', () => {
-    cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
-});
-
-And('you land on the enrollment page by having typed only the enrollmentId on the url', () => {
-    cy.visit('/#/enrollment?enrollmentId=gPDueU02tn8');
-});
-
-And('you land on the enrollment page by having typed the enrollmentId and the programId on the url', () => {
-    cy.visit('/#/enrollment?programId=IpHINAT79UW&enrollmentId=gPDueU02tn8');
-});
-
-And('you land on the enrollment page by having typed the enrollmentId and the orgUnitId on the url', () => {
-    cy.visit('/#/enrollment?orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8');
-});
-
-And('you land on the enrollment page by having typed only the teiId on the url', () => {
-    cy.visit('/#/enrollment?teiId=fhFQhO0xILJ');
-});
-
-And('you land on the enrollment page by having typed only the programId on the url', () => {
-    cy.visit('/#/enrollment?programId=IpHINAT79UW');
-});
-
-And('you land on the enrollment page by having typed only the orgUnitId on the url', () => {
-    cy.visit('/#/enrollment?orgUnitId=UgYg0YW7ZIh');
-});
-
-And('you land on the enrollment page by having typed the teiId and the orgUnitId on the url', () => {
-    cy.visit('/#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ');
-});
-
-And('you land on the enrollment page by having typed the teiId and the programId on the url', () => {
-    cy.visit('/#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ');
-});
-
-And('you can see on the locked selector all the four selections completed', () => {
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Selected Program');
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Child Programme');
-
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Selected registering unit');
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Taninahun (Malen) CHP');
-
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Selected Person');
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Carlos Cruz');
-
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Selected Enrollment');
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('2018-08-07 15:47');
-
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
-});
-
-And('you can see on the locked selector only the tei name selected', () => {
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Selected Person');
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Carlos Cruz');
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?teiId=fhFQhO0xILJ`);
-});
-
-And('you can see on the locked selector the tei name and orgUnitId selected', () => {
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Selected registering unit');
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Taninahun (Malen) CHP');
-
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Selected Person');
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Carlos Cruz');
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ`);
-});
-
-And('you can see on the locked selector the tei name and the programId selected', () => {
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Selected Program');
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Child Programme');
-
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Selected Person');
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Carlos Cruz');
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ`);
-});
-
-And('you see an error message explaining your url is invalid', () => {
-    cy.get('[data-test="dhis2-capture-error-message-handler"]')
-        .contains('There is an error while opening this enrollment. Please enter a valid url.');
-});
-
-And('you see the default text on the enrollment page', () => {
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
-        .contains('default');
-});
-
-And('you see message saying you have to select a program to view the enrollment page', () => {
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
-        .contains('Choose program to view more information');
-});
-
-And('you see message saying you have to select an enrollment to view the enrollment page', () => {
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
-        .contains('Choose enrollment to view more information');
-});
-
 const selectedProgram = ['Selected Program', 'Child Programme'];
 const selectedEventProgram = ['Selected Program', 'Antenatal care visit'];
 const emptyProgramSelection = ['Program', 'Select program'];
@@ -399,3 +285,100 @@ Then(/^you can see on the locked selector the following (.*)$/, (state) => {
 Then(/^you see the following (.*)$/, (message) => {
     cy.contains(message);
 });
+
+And('you land on the enrollment page by having typed only the enrollmentId on the url', () => {
+    cy.visit('/#/enrollment?enrollmentId=gPDueU02tn8');
+});
+
+And('you reset the tei selection', () => {
+    cy.get('[data-test="reset-selection-button"]')
+        .should('have.length.greaterThan', 2);
+    cy.get('[data-test="reset-selection-button"]')
+        .eq(2)
+        .click();
+});
+
+And('you navigated to the main page', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh`);
+});
+
+And('you reset the program selection', () => {
+    cy.get('[data-test="reset-selection-button"]')
+        .should('have.length.greaterThan', 2);
+    cy.get('[data-test="reset-selection-button"]')
+        .eq(0)
+        .click();
+});
+
+And('you see message explaining you need to select a program', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8 `);
+    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+        .contains('Choose program to view more information.');
+});
+
+And('you reset the org unit selection', () => {
+    cy.get('[data-test="reset-selection-button"]')
+        .should('have.length.greaterThan', 2);
+
+    cy.get('[data-test="reset-selection-button"]')
+        .eq(1)
+        .click();
+});
+
+And('you see the enrollment page but there is no org unit id in the url', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
+    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+        .contains('Enrollment Dashboard');
+});
+
+And('you see the enrollment page', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
+    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+        .contains('Enrollment Dashboard');
+});
+
+And('you reset the enrollment selection', () => {
+    cy.get('[data-test="reset-selection-button"]')
+        .should('have.length.greaterThan', 2);
+    cy.get('[data-test="reset-selection-button"]')
+        .eq(3)
+        .click();
+});
+
+And('you see message explaining you need to select an enrollment', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ`);
+    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+        .contains('Choose enrollment to view more information.');
+});
+
+And('you select the MNCH PNC program', () => {
+    cy.get('.Select').eq(0)
+        .type('MNCH');
+    cy.contains('PNC (Adult Woman)')
+        .click();
+});
+
+And('you select the Child Programme', () => {
+    cy.get('.Select').eq(0)
+        .type('Child Program');
+    cy.contains('Child Programme')
+        .click();
+});
+
+And('you see message explaining there are no enrollments for this program', () => {
+    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+        .contains('There are no enrollments for this program.');
+});
+
+And('you select the Antenatal care visit', () => {
+    cy.get('.Select').eq(0)
+        .type('Antenatal care');
+    cy.contains('Antenatal care visit')
+        .click();
+});
+
+And('you see message explaining this is an Event program', () => {
+    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+        .contains('You selected an event program.');
+});
+
