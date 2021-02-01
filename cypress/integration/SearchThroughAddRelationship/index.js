@@ -1,4 +1,3 @@
-
 beforeEach(() => {
     cy.loginThroughForm();
 });
