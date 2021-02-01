@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/dhis2/capture-app/compare/v1.7.2...v1.8.0) (2021-01-25)
+
+
+### Features
+
+* DHIS2-9658 adds duplicates | DHIS2-10179 Block users from seeing a page when they have no access to it ([#1369](https://github.com/dhis2/capture-app/issues/1369)) ([450fe0a](https://github.com/dhis2/capture-app/commit/450fe0a94a8d6291b1c233f4b0b93eea595ebbb5)), closes [#1370](https://github.com/dhis2/capture-app/issues/1370) [#1371](https://github.com/dhis2/capture-app/issues/1371) [#1373](https://github.com/dhis2/capture-app/issues/1373) [#1374](https://github.com/dhis2/capture-app/issues/1374)
+
 ## [1.7.2](https://github.com/dhis2/capture-app/compare/v1.7.1...v1.7.2) (2021-01-20)
 
 

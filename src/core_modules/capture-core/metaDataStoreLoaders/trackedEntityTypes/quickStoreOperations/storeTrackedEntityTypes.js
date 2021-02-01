@@ -26,7 +26,7 @@ const convert = (() => {
             }));
 })();
 
-const fieldsParam = 'id,displayName,minAttributesRequiredToSearch,featureType,' +
+const fieldsParam = 'id,access,displayName,minAttributesRequiredToSearch,featureType,' +
     'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
     'translations[property,locale,value]';
 

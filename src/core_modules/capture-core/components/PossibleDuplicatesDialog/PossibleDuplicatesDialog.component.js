@@ -3,14 +3,16 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import { ReviewDialogContents } from './ReviewDialogContents.container';
+import { ReviewDialogContents } from './ReviewDialogContents/ReviewDialogContents.container';
 
-type Props = {
+type Props = {|
+    dataEntryId: string,
     open: boolean,
     onCancel: () => void,
-    onLink: Function,
+    onLink?: Function,
     extraActions?: ?React.Node,
-};
+    selectedScopeId: string
+|};
 
 const StyledDialogActions = withStyles({
     root: { margin: 24 },
@@ -24,7 +26,7 @@ class ReviewDialogClass extends React.Component<Props > {
     };
 
     render() {
-        const { open, onCancel, onLink, extraActions } = this.props;
+        const { open, onCancel, onLink, extraActions, selectedScopeId, dataEntryId } = this.props;
 
         return (
             <Dialog
@@ -32,9 +34,11 @@ class ReviewDialogClass extends React.Component<Props > {
                 onClose={onCancel}
                 maxWidth="sm"
                 fullWidth
-                PaperProps={ReviewDialog.paperProps}
+                PaperProps={PossibleDuplicatesDialog.paperProps}
             >
                 <ReviewDialogContents
+                    dataEntryId={dataEntryId}
+                    selectedScopeId={selectedScopeId}
                     onLink={onLink}
                 />
                 <StyledDialogActions>
@@ -45,4 +49,4 @@ class ReviewDialogClass extends React.Component<Props > {
     }
 }
 
-export const ReviewDialog = ReviewDialogClass;
+export const PossibleDuplicatesDialog = ReviewDialogClass;

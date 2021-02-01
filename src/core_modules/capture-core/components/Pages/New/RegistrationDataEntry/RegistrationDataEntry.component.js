@@ -1,5 +1,7 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useContext, useState } from 'react';
+import i18n from '@dhis2/d2-i18n';
+import { Button } from '@dhis2/ui';
 import { Grid, Paper, withStyles } from '@material-ui/core';
 import type { Props } from './RegistrationDataEntry.types';
 import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
@@ -8,8 +10,10 @@ import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
-import GeneralOutput from '../../NewRelationship/RegisterTei/GeneralOutput/GeneralOutput.container';
-
+import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
+import { PossibleDuplicatesDialog } from '../../../PossibleDuplicatesDialog/PossibleDuplicatesDialog.component';
+import { usePossibleDuplicatesExist } from '../../../PossibleDuplicatesDialog/usePossibleDuplicatesExist';
+import { ResultsPageSizeContext } from '../../shared-contexts';
 
 const getStyles = ({ typography }) => ({
     paper: {
@@ -32,6 +36,50 @@ const getStyles = ({ typography }) => ({
     },
 });
 
+const DialogButtons = ({ onCancel, onSave }) => (<>
+    <Button onClick={onCancel} secondary>
+        {i18n.t('Cancel')}
+    </Button>
+    {
+        onSave &&
+        <div style={{ marginLeft: 8 }}>
+            <Button
+                dataTest="dhis2-capture-create-as-new-person"
+                onClick={onSave}
+                primary
+            >
+                {i18n.t('Save as new')}
+            </Button>
+        </div>
+    }
+</>);
+
+const useHandleSaveAttempt = (dataEntryId, onReviewDuplicates) => {
+    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+
+    const [modalIsOpen, toggleDuplicatesModal] = useState(false);
+
+    const possibleDuplicatesExist = usePossibleDuplicatesExist(dataEntryId);
+    const handleSaveAttempt = (onSave) => {
+        if (possibleDuplicatesExist) {
+            onReviewDuplicates(resultsPageSize);
+
+            toggleDuplicatesModal(true);
+        } else {
+            onSave();
+        }
+    };
+    const closeModal = () => {
+        toggleDuplicatesModal(false);
+    };
+
+    return {
+        closeModal,
+        handleSaveAttempt,
+        modalIsOpen,
+    };
+};
+
 const RegistrationDataEntryPlain = (
     {
         classes,
@@ -40,6 +88,7 @@ const RegistrationDataEntryPlain = (
         dataEntryId,
         onSaveWithoutEnrollment,
         onSaveWithEnrollment,
+        onReviewDuplicates,
         dataEntryIsReady,
     }: Props) => {
     const { scopeType } = useScopeInfo(selectedScopeId);
@@ -50,6 +99,7 @@ const RegistrationDataEntryPlain = (
         setScopeId(id);
     };
 
+    const { closeModal, handleSaveAttempt, modalIsOpen } = useHandleSaveAttempt(dataEntryId, onReviewDuplicates);
     return (
         <>
             {
@@ -59,7 +109,10 @@ const RegistrationDataEntryPlain = (
                         New
                     </div>
                     <div className={classes.tetypeContainer}>
-                        <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
+                        <TrackedEntityTypeSelector
+                            accessNeeded="write"
+                            onSelect={handleRegistrationScopeSelection}
+                        />
                     </div>
                 </Paper>
             }
@@ -79,7 +132,7 @@ const RegistrationDataEntryPlain = (
                                     selectedScopeId={selectedScopeId}
                                     enrollmentMetadata={registrationMetaData}
                                     saveButtonText={'Save new'}
-                                    onSave={onSaveWithEnrollment}
+                                    onSave={() => handleSaveAttempt(onSaveWithEnrollment)}
                                     onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
                                     onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
                                     onUpdateField={() => console.log('onUpdateField will be here in the future in the future')}
@@ -90,8 +143,24 @@ const RegistrationDataEntryPlain = (
                                 dataEntryIsReady &&
                                 <Grid item>
                                     <div className={classes.marginTop}>
-                                        <GeneralOutput id={dataEntryId} />
+                                        <DataEntryWidgetOutput
+                                            selectedScopeId={selectedScopeId}
+                                            dataEntryId={dataEntryId}
+                                        />
                                     </div>
+
+                                    <PossibleDuplicatesDialog
+                                        dataEntryId={dataEntryId}
+                                        selectedScopeId={selectedScopeId}
+                                        open={modalIsOpen}
+                                        onCancel={closeModal}
+                                        extraActions={
+                                            <DialogButtons
+                                                onCancel={closeModal}
+                                                onSave={onSaveWithEnrollment}
+                                            />
+                                        }
+                                    />
                                 </Grid>
                             }
                         </Grid>
@@ -107,7 +176,10 @@ const RegistrationDataEntryPlain = (
                     </div>
 
                     <div className={classes.tetypeContainer}>
-                        <TrackedEntityTypeSelector onSelect={handleRegistrationScopeSelection} />
+                        <TrackedEntityTypeSelector
+                            accessNeeded="write"
+                            onSelect={handleRegistrationScopeSelection}
+                        />
                     </div>
                     <div className={classes.registrationContainer}>
                         <Grid container justify="space-between">
@@ -117,7 +189,7 @@ const RegistrationDataEntryPlain = (
                                     selectedScopeId={selectedScopeId}
                                     teiRegistrationMetadata={registrationMetaData}
                                     saveButtonText={'Save new'}
-                                    onSave={onSaveWithoutEnrollment}
+                                    onSave={() => handleSaveAttempt(onSaveWithoutEnrollment)}
                                     onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
                                     onPostProcessErrorMessage={() => console.log('onPostProcessErrorMessage will be here in the future in the future')}
                                 />
@@ -126,8 +198,24 @@ const RegistrationDataEntryPlain = (
                                 dataEntryIsReady &&
                                 <Grid item>
                                     <div className={classes.marginTop}>
-                                        <GeneralOutput id={dataEntryId} />
+                                        <DataEntryWidgetOutput
+                                            dataEntryId={dataEntryId}
+                                            selectedScopeId={selectedScopeId}
+                                        />
                                     </div>
+
+                                    <PossibleDuplicatesDialog
+                                        dataEntryId={dataEntryId}
+                                        selectedScopeId={selectedScopeId}
+                                        open={modalIsOpen}
+                                        onCancel={closeModal}
+                                        extraActions={
+                                            <DialogButtons
+                                                onCancel={closeModal}
+                                                onSave={onSaveWithoutEnrollment}
+                                            />
+                                        }
+                                    />
                                 </Grid>
                             }
                         </Grid>

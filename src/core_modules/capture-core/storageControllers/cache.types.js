@@ -1,5 +1,7 @@
 // @flow
 
+import { type Access } from '../metaData/Access';
+
 type Translation = {
     property: string,
     locale: string,
@@ -146,6 +148,7 @@ export type CachedTrackedEntityTypeTranslation = {
 
 export type CachedTrackedEntityType = {
     id: string,
+    access: Access,
     displayName: string,
     trackedEntityTypeAttributes: ?Array<CachedTrackedEntityTypeAttribute>,
     translations: Array<CachedTrackedEntityTypeTranslation>,
@@ -155,7 +158,7 @@ export type CachedTrackedEntityType = {
 
 export type CachedProgram = {
     id: string,
-    access: Object,
+    access: Access,
     displayName: string,
     displayShortName: string,
     organisationUnits: Object,

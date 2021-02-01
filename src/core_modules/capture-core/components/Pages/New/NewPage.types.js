@@ -13,6 +13,7 @@ export type ContainerProps = $ReadOnly<{|
   programCategorySelectionIncomplete: boolean,
   missingCategoriesInProgramSelection: ProgramCategories,
   newPageStatus: $Keys<newPageStatuses>,
+  writeAccess: boolean,
   error: boolean,
   ready: boolean,
 |}
