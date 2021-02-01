@@ -257,7 +257,8 @@ And('there should be Child Programme domain forms visible to search with', () =>
         .should('have.length', 1);
 });
 
-const selectedProgram = ['Selected Program', 'Child Programme'];
+const selectedChildProgram = ['Selected Program', 'Child Programme'];
+const selectedMalariaProgram = ['Selected Program', 'Child Programme'];
 const selectedEventProgram = ['Selected Program', 'Antenatal care visit'];
 const emptyProgramSelection = ['Program', 'Select program'];
 const selectedOrgUnit = ['Selected registering unit', 'Taninahun (Malen) CHP'];
@@ -267,9 +268,10 @@ const selectedEnrollment = ['Selected Enrollment', '2018-08-07 15:47'];
 const emptyEnrollmentSelection = ['Enrollment', 'Select...'];
 
 const lockedSelectorCases = {
-    all: [...selectedProgram, ...selectedOrgUnit, ...selectedTei, ...selectedEnrollment],
+    all: [...selectedChildProgram, ...selectedOrgUnit, ...selectedTei, ...selectedEnrollment],
     teiAndOrgUnit: [...emptyProgramSelection, ...selectedOrgUnit, ...selectedTei, ...emptyEnrollmentSelection],
-    teiAndTrackerProgram: [...selectedProgram, ...emptyOrgUnitSelection, ...selectedTei, ...emptyEnrollmentSelection],
+    teiAndChildProgram: [...selectedChildProgram, ...emptyOrgUnitSelection, ...selectedTei, ...emptyEnrollmentSelection],
+    teiAndMalariaProgram: [...selectedMalariaProgram, ...emptyOrgUnitSelection, ...selectedTei, ...emptyEnrollmentSelection],
     teiAndEventProgram: [...selectedEventProgram, ...emptyOrgUnitSelection, ...selectedTei, ...emptyEnrollmentSelection],
     error: [],
 };
@@ -311,7 +313,7 @@ And('you reset the program selection', () => {
 });
 
 And('you see message explaining you need to select a program', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8 `);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
     cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
         .contains('Choose program to view more information.');
 });
