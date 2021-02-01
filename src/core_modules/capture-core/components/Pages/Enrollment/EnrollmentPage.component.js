@@ -44,7 +44,7 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus, selectedProgramId,
             {
                 enrollmentPageStatus === enrollmentPageStatuses.MISSING_PROGRAM_SELECTION &&
                 <IncompleteSelectionsMessage>
-                    {i18n.t('Choose program to view more information')}
+                    {i18n.t('Choose program to view more information.')}
                 </IncompleteSelectionsMessage>
             }
 
@@ -58,7 +58,7 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus, selectedProgramId,
             {
                 enrollmentPageStatus === enrollmentPageStatuses.MISSING_ENROLLMENT_SELECTION &&
                 <IncompleteSelectionsMessage>
-                    {i18n.t('Choose enrollment to view more information')}
+                    {i18n.t('Choose enrollment to view more information.')}
                 </IncompleteSelectionsMessage>
 
             }
