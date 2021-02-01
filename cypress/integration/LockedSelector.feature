@@ -187,6 +187,7 @@ Feature: Use the LockedSelector to navigate
       | /#/enrollment?orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                                          | all                  | default                                        |
       | /#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ                                                 | teiAndOrgUnit        | Choose program to view more information.       |
       | /#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ                                                 | teiAndTrackerProgram | Choose enrollment to view more information.    |
+      | /#/enrollment?programId=qDkgAbB5Jlk&teiId=fhFQhO0xILJ                                                 | teiAndTrackerProgram | There are no enrollments for this program.    |
       | /#/enrollment?programId=lxAQ7Zs9VYR&teiId=fhFQhO0xILJ                                                 | teiAndEventProgram   | You selected an event program.                 |
       | /#/enrollment?programId=IpHINAT79UW                                                                   | error                | Please enter a valid url.                      |
       | /#/enrollment?orgUnitId=UgYg0YW7ZIh                                                                   | error                | Please enter a valid url.                      |
