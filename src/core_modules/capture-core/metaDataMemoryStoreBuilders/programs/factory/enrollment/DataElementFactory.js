@@ -7,7 +7,6 @@ import { pipe, errorCreator } from 'capture-core-utils';
 import type {
     CachedAttributeTranslation,
     CachedProgramTrackedEntityAttribute,
-    CachedOptionSet,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
 import {
@@ -20,6 +19,7 @@ import {
 import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { getApi } from '../../../../d2/d2Instance';
+import type { ConstructorInput } from './dataElementFactory.types';
 
 
 class DataElementFactory {
@@ -124,11 +124,11 @@ class DataElementFactory {
     locale: ?string;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
-    constructor(
-        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-        cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: ?string,
-    ) {
+    constructor({
+        cachedTrackedEntityAttributes,
+        cachedOptionSets,
+        locale,
+    }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.locale = locale;
         this.optionSetFactory = new OptionSetFactory(

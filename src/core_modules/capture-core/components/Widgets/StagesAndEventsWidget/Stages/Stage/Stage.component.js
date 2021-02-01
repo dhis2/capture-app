@@ -13,10 +13,11 @@ const styles = {
 };
 
 
-export const StagePlain = ({ stage: { name }, classes }: Props) => (
+export const StagePlain = ({ stage: { name, icon }, classes }: Props) => (
     <div className={classes.overview}>
         <StageOverview
             title={name}
+            icon={icon}
         />
     </div>
 );
