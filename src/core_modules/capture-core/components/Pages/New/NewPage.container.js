@@ -25,9 +25,11 @@ const useUserWriteAccess = (scopeId) => {
     }
     try {
         if (scope instanceof TrackerProgram) {
-            const { access } = scope;
+            const { access, trackedEntityType: { access: tetypeAccess } } = scope;
+            const userHasWriteAccessForTheProgram = access && access.data && access.data.write;
+            const userHasWriteAccessForTheTEType = tetypeAccess && tetypeAccess.data && tetypeAccess.data.write;
 
-            return access && access.data && access.data.write;
+            return userHasWriteAccessForTheProgram && userHasWriteAccessForTheTEType;
         } else if (scope instanceof TrackedEntityType) {
             const { access } = scope;
 
