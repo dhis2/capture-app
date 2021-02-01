@@ -73,6 +73,7 @@ export const TrackedEntityTypeSelectorPlain =
                                         && trackedEntityTypeAccess.data
                                         && trackedEntityTypeAccess.data.read;
                                   }
+                                  return false;
                               })
                               // $FlowFixMe https://github.com/facebook/flow/issues/2221
                               .map(({ trackedEntityTypeName, trackedEntityTypeId }) =>
