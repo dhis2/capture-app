@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-01-25T12:45:59.201Z\n"
-"PO-Revision-Date: 2021-01-25T12:45:59.201Z\n"
+"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
+"PO-Revision-Date: 2021-02-01T16:04:09.943Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -227,7 +227,7 @@ msgstr ""
 msgid "New event"
 msgstr ""
 
-msgid "You dont have access to create an event in the current selections"
+msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
@@ -300,6 +300,12 @@ msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Possible duplicates found"
 msgstr ""
 
 msgid "Sort"
@@ -629,6 +635,9 @@ msgstr ""
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
+msgid "Save as new"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -666,19 +675,7 @@ msgstr ""
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr ""
-
-msgid "No results found"
-msgstr ""
-
-msgid "An error occured loading possible duplicates"
-msgstr ""
-
-msgid "Hide"
-msgstr ""
-
-msgid "Save as new {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
@@ -727,6 +724,9 @@ msgid "Search for"
 msgstr ""
 
 msgid "You can also choose a program from the top bar and search in that program"
+msgstr ""
+
+msgid "No results found"
 msgstr ""
 
 msgid ""
@@ -791,6 +791,9 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
+msgstr ""
+
+msgid "An error occurred loading possible duplicates"
 msgstr ""
 
 msgid "You dont have access to delete this relationship"

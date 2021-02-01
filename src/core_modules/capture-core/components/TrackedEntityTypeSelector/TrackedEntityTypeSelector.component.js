@@ -38,7 +38,7 @@ const styles = ({ typography }) => ({
 
 
 export const TrackedEntityTypeSelectorPlain =
-  ({ classes, onSelect, onSetTrackedEntityTypeIdOnUrl, headerText, footerText }: Props) => {
+  ({ classes, onSelect, onSetTrackedEntityTypeIdOnUrl, accessNeeded, headerText, footerText }: Props) => {
       const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
       const selectedSearchScopeId = useCurrentTrackedEntityTypeId();
 
@@ -62,13 +62,29 @@ export const TrackedEntityTypeSelectorPlain =
                       {
                           useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
                               // $FlowFixMe https://github.com/facebook/flow/issues/2221
+                              .filter(({ trackedEntityTypeAccess }) => {
+                                  if (accessNeeded === 'write') {
+                                      return trackedEntityTypeAccess
+                                        && trackedEntityTypeAccess.data
+                                        && trackedEntityTypeAccess.data.write;
+                                  }
+                                  if (accessNeeded === 'read') {
+                                      return trackedEntityTypeAccess
+                                        && trackedEntityTypeAccess.data
+                                        && trackedEntityTypeAccess.data.read;
+                                  }
+                              })
+                              // $FlowFixMe https://github.com/facebook/flow/issues/2221
                               .map(({ trackedEntityTypeName, trackedEntityTypeId }) =>
                                   (<SingleSelectOption
                                       key={trackedEntityTypeId}
                                       value={trackedEntityTypeId}
                                       label={trackedEntityTypeName}
                                   />),
-                              ), [trackedEntityTypesWithCorrelatedPrograms])
+                              ), [
+                              accessNeeded,
+                              trackedEntityTypesWithCorrelatedPrograms,
+                          ])
                       }
                   </SingleSelect>
               </div>

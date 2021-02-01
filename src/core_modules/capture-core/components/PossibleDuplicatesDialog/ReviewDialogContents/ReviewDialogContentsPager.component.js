@@ -1,10 +1,10 @@
 // @flow
-import React, { type ComponentType, useContext } from 'react';
+import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Pagination } from 'capture-ui';
-import withNavigation from '../../../../../../Pagination/withDefaultNavigation';
-import { ResultsPageSizeContext } from '../../../../../shared-contexts';
+import withNavigation from '../../Pagination/withDefaultNavigation';
 import type { Props } from './ReviewDialogContentsPager.types';
+import { useDuplicates } from '../useDuplicates';
 
 const Pager = withNavigation()(Pagination);
 
@@ -17,8 +17,14 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const ReviewDialogContentsPagerPlain = ({ onChangePage, currentPage, nextPageButtonDisabled, classes }: Props) => {
-    const { resultsPageSize } = useContext(ResultsPageSizeContext);
+const ReviewDialogContentsPagerPlain = ({
+    currentPage,
+    nextPageButtonDisabled,
+    selectedScopeId,
+    dataEntryId,
+    classes,
+}: Props) => {
+    const { changePageOnReviewDuplicates } = useDuplicates(dataEntryId, selectedScopeId);
 
     return (
         <div
@@ -26,7 +32,7 @@ const ReviewDialogContentsPagerPlain = ({ onChangePage, currentPage, nextPageBut
         >
             <Pager
                 currentPage={currentPage}
-                onChangePage={page => onChangePage(page, resultsPageSize)}
+                onChangePage={changePageOnReviewDuplicates}
                 nextPageButtonDisabled={nextPageButtonDisabled}
             />
         </div>
