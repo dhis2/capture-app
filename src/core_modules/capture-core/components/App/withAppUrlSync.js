@@ -7,6 +7,7 @@ import { LoadingMaskForPage } from '../LoadingMasks';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { updateSelectionsFromUrl } from '../LockedSelector';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
+import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
 type Props = {
     location: {
@@ -19,58 +20,31 @@ type Props = {
     locationSwitchInProgress: ?boolean,
 };
 
-const pageKeys = {
+export const pageKeys = {
     MAIN: '',
     VIEW_EVENT: 'viewEvent',
     SEARCH: 'search',
     NEW: 'new',
 };
 
+const programIdParameter = {
+    urlParameterName: 'programId',
+};
+const orgUnitIdParameter = {
+    urlParameterName: 'orgUnitId',
+};
+const tetIdParameter = {
+    urlParameterName: 'trackedEntityTypeId',
+};
+const eventIdParameter = {
+    urlParameterName: 'viewEventId',
+};
+
 const specificationForPages = {
-    [pageKeys.MAIN]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
-    ],
-    [pageKeys.VIEW_EVENT]: [
-        {
-            urlKey: 'viewEventId',
-            propKey: 'viewEventId',
-        },
-    ],
-    [pageKeys.SEARCH]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
-        {
-            urlKey: 'trackedEntityTypeId',
-            propKey: 'trackedEntityTypeId',
-        },
-    ],
-    [pageKeys.NEW]: [
-        {
-            urlKey: 'programId',
-            propKey: 'programId',
-        },
-        {
-            urlKey: 'orgUnitId',
-            propKey: 'orgUnitId',
-        },
-        {
-            urlKey: 'trackedEntityTypeId',
-            propKey: 'trackedEntityTypeId',
-        },
-    ],
+    [pageKeys.MAIN]: [programIdParameter, orgUnitIdParameter],
+    [pageKeys.VIEW_EVENT]: [eventIdParameter],
+    [pageKeys.SEARCH]: [programIdParameter, orgUnitIdParameter],
+    [pageKeys.NEW]: [programIdParameter, orgUnitIdParameter, tetIdParameter],
 };
 
 const updaterForPages = {
@@ -146,9 +120,11 @@ export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) =
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) =>
-            // $FlowFixMe[invalid-computed-prop] automated comment
-            dispatch(updaterForPages[page](updateData)),
+        onUpdateFromUrl: (page: string, updateData: UpdateDataContainer) => {
+            if (pageFetchesOrgUnitUsingTheOldWay(page) && page != null) {
+                dispatch(updaterForPages[page](updateData));
+            }
+        },
     });
 
     // $FlowFixMe[missing-annot] automated comment

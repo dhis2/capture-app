@@ -1,22 +1,24 @@
 // @flow
-import React, { type ComponentType, useCallback } from 'react';
+import React, { type ComponentType, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { batchActions } from 'redux-batched-actions';
+import { useLocation } from 'react-router';
 import { LockedSelectorComponent } from './LockedSelector.component';
 import {
-    resetOrgUnitIdFromLockedSelector,
     setOrgUnitFromLockedSelector,
     setProgramIdFromLockedSelector,
-    resetProgramIdFromLockedSelector,
     setCategoryOptionFromLockedSelector,
     resetCategoryOptionFromLockedSelector,
     resetAllCategoryOptionsFromLockedSelector,
     openNewRegistrationPageFromLockedSelector,
     openSearchPageFromLockedSelector,
-    lockedSelectorBatchActionTypes,
+    fetchOrgUnit,
+    resetProgramIdBatchAction,
+    startAgainBatchAction,
+    resetOrgUnitIdBatchAction,
 } from './LockedSelector.actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import type { OwnProps } from './LockedSelector.types';
+import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
 const deriveReadiness = (isPageLoading, selectedOrgUnitId, organisationUnits) => {
     // because we want the orgUnit to be fetched and stored
@@ -51,24 +53,37 @@ const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string
         }),
     );
 
+const useComponentLifecycle = () => {
+    const dispatch = useDispatch();
+    const { selectedOrgUnitId } = useUrlQueries();
+    const { pathname } = useLocation();
+    const pageFetchesOrgUnit = !pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
+
+    useEffect(() => {
+        pageFetchesOrgUnit && selectedOrgUnitId && dispatch(fetchOrgUnit(selectedOrgUnitId));
+    },
+    [dispatch, selectedOrgUnitId, pageFetchesOrgUnit]);
+};
+
 export const LockedSelector: ComponentType<OwnProps> =
   ({
       customActionsOnProgramIdReset = [],
       customActionsOnOrgUnitIdReset = [],
+      pageToPush = '',
   }) => {
       const dispatch = useDispatch();
 
       const dispatchOnSetOrgUnit = useCallback(
           (id: string, orgUnit: Object) => {
-              dispatch(setOrgUnitFromLockedSelector(id, orgUnit));
+              dispatch(setOrgUnitFromLockedSelector(id, orgUnit, pageToPush));
           },
-          [dispatch]);
+          [pageToPush, dispatch]);
 
       const dispatchOnSetProgramId = useCallback(
           (id: string) => {
-              dispatch(setProgramIdFromLockedSelector(id));
+              dispatch(setProgramIdFromLockedSelector(id, pageToPush));
           },
-          [dispatch]);
+          [pageToPush, dispatch]);
 
       const dispatchOnSetCategoryOption = useCallback(
           (categoryId: string, categoryOption: Object) => {
@@ -96,13 +111,11 @@ export const LockedSelector: ComponentType<OwnProps> =
 
       const dispatchOnOpenNewRegistrationPageWithoutProgramId = useCallback(
           () => {
-              // todo this is problematic here
-              dispatch(batchActions([
-                  resetProgramIdFromLockedSelector(),
-                  resetAllCategoryOptionsFromLockedSelector(),
+              const actions = [
                   resetProgramIdBase(),
                   openNewRegistrationPageFromLockedSelector(),
-              ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH));
+              ];
+              dispatch(resetProgramIdBatchAction(actions, 'new'));
           },
           [dispatch]);
 
@@ -114,46 +127,36 @@ export const LockedSelector: ComponentType<OwnProps> =
 
       const dispatchOnOpenSearchPageWithoutProgramId = useCallback(
           () => {
-              // todo this is problematic here
-              dispatch(batchActions([
-                  resetProgramIdFromLockedSelector(),
-                  resetAllCategoryOptionsFromLockedSelector(),
+              const actions = [
                   resetProgramIdBase(),
                   openSearchPageFromLockedSelector(),
-              ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH));
+                  ...customActionsOnProgramIdReset,
+              ];
+              dispatch(resetProgramIdBatchAction(actions, 'search'));
           },
-          [dispatch]);
+          [customActionsOnProgramIdReset, dispatch]);
 
       const dispatchOnStartAgain = useCallback(
           () => {
-              dispatch(batchActions([
-                  resetOrgUnitIdFromLockedSelector(),
-                  resetProgramIdFromLockedSelector(),
-                  resetAllCategoryOptionsFromLockedSelector(),
-                  resetProgramIdBase(),
-              ], lockedSelectorBatchActionTypes.AGAIN_START));
-          },
-          [dispatch]);
+              dispatch(startAgainBatchAction());
+          }, [dispatch]);
 
       const dispatchOnResetOrgUnitId = useCallback(
           () => {
-              dispatch(batchActions([
-                  resetOrgUnitIdFromLockedSelector(),
-                  ...customActionsOnOrgUnitIdReset,
-              ], lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH));
+              dispatch(resetOrgUnitIdBatchAction(customActionsOnOrgUnitIdReset, pageToPush));
           },
-          [customActionsOnOrgUnitIdReset, dispatch]);
+          [pageToPush, customActionsOnOrgUnitIdReset, dispatch]);
 
       const dispatchOnResetProgramId = useCallback(
           (baseAction: ReduxAction<any, any>) => {
-              dispatch(batchActions([
-                  resetProgramIdFromLockedSelector(),
-                  resetAllCategoryOptionsFromLockedSelector(),
+              const actions = [
                   baseAction,
                   ...customActionsOnProgramIdReset,
-              ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH));
+              ];
+
+              dispatch(resetProgramIdBatchAction(actions, pageToPush));
           },
-          [customActionsOnProgramIdReset, dispatch]);
+          [pageToPush, customActionsOnProgramIdReset, dispatch]);
 
       const { selectedOrgUnitId, selectedProgramId } = useUrlQueries();
 
@@ -165,6 +168,8 @@ export const LockedSelector: ComponentType<OwnProps> =
         useSelector(({ organisationUnits: orgUnits }) => orgUnits);
 
       const ready = deriveReadiness(isPageLoading, selectedOrgUnitId, organisationUnits);
+
+      useComponentLifecycle();
 
       return (
           <LockedSelectorComponent

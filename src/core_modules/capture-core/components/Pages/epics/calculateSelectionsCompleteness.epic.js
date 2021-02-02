@@ -1,12 +1,13 @@
 // @flow
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import {
     calculateSelectionsCompleteness,
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
+import { pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
 
 type CurrentSelectionsState = {
     programId?: ?string,
@@ -41,6 +42,10 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,
         ),
+        filter(() => {
+            const { pathname } = store.value.router.location;
+            return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
+        }),
         map((action) => {
             const isComplete = calculateCompleteStatus(store.value.currentSelections);
             return calculateSelectionsCompleteness(

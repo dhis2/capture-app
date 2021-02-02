@@ -13,5 +13,6 @@ export {
     startAgainEpic,
     resetProgramIdEpic,
     resetOrgUnitId,
+    fetchOrgUnitEpic,
 } from './LockedSelector.epics';
 export { LockedSelector } from './LockedSelector.container';

@@ -154,6 +154,7 @@ import {
     setProgramIdEpic,
     resetOrgUnitId,
     resetProgramIdEpic,
+    fetchOrgUnitEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 import {
     setTrackedEntityTypeIdOnUrlEpic,
@@ -276,6 +277,7 @@ export default combineEpics(
     setProgramIdEpic,
     resetOrgUnitId,
     resetProgramIdEpic,
+    fetchOrgUnitEpic,
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
