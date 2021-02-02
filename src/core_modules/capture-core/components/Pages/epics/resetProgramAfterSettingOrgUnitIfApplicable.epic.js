@@ -27,9 +27,9 @@ const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
 export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
-        filter((action) => {
-            const orgUnitId = action.payload.id;
+        filter(({ payload: { orgUnitId } }) => {
             const currentlySelectedProgramId = store.value.currentSelections.programId;
+
             return programShouldReset(orgUnitId, currentlySelectedProgramId);
         }),
         map(() => resetProgramIdBase()));

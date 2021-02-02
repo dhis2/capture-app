@@ -27,7 +27,7 @@ Then('there should be Person domain forms available to search with', () => {
 });
 
 Given('you are in the search page with the Child Programme being preselected from the url', () => {
-    cy.visit('/#/search/programId=IpHINAT79UW');
+    cy.visit('/#/search?programId=IpHINAT79UW');
 });
 
 Then('there should be visible a title with Child Program', () => {
@@ -220,7 +220,7 @@ Then('there should be a validation error message', () => {
 });
 
 Given('you are on the search page with preselected program and org unit', () => {
-    cy.visit('/#/search/programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/search?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8');
 });
 
 When('when you click the back button', () => {
@@ -230,7 +230,7 @@ When('when you click the back button', () => {
 
 Then('you should be taken to the main page with program and org unit preselected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8`);
+        .should('eq', `${Cypress.config().baseUrl}/#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8`);
 });
 
 Then('you can see the first page of the results', () => {
@@ -298,7 +298,7 @@ And('there should be Malaria case diagnosis forms visible to search with', () =>
 });
 
 Given('you are in the search page with the Adult Woman being preselected from the url', () => {
-    cy.visit('/#/search/programId=uy2gU8kT1jF&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/search?programId=uy2gU8kT1jF&orgUnitId=DiszpKrYNg8');
 });
 
 When('you fill in the date of birth', () => {
@@ -315,7 +315,7 @@ When('you fill in the date of birth', () => {
 });
 
 Given('you are in the search page with the TB program being preselected from the url', () => {
-    cy.visit('/#/search/programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/search?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8');
 });
 
 When('you fill in the zip code range numbers', () => {
@@ -359,7 +359,7 @@ When('you fill in the first and last name with values that will return results',
 });
 
 When('you navigated to a search page with tracked entity id on the url', () => {
-    cy.url().should('include', 'search/trackedEntityTypeId=nEenWmSyUEp');
+    cy.url().should('include', 'search?trackedEntityTypeId=nEenWmSyUEp');
 });
 
 When('you have no program selection', () => {
