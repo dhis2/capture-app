@@ -110,8 +110,10 @@ const RegistrationDataEntryPlain = (
                     </div>
                     <div className={classes.tetypeContainer}>
                         <TrackedEntityTypeSelector
-                            accessNeeded="write"
                             onSelect={handleRegistrationScopeSelection}
+                            headerText={i18n.t('Create for')}
+                            footerText={i18n.t('You can also choose a program from the top bar and create in that program')}
+                            accessNeeded="write"
                         />
                     </div>
                 </Paper>
@@ -177,8 +179,10 @@ const RegistrationDataEntryPlain = (
 
                     <div className={classes.tetypeContainer}>
                         <TrackedEntityTypeSelector
-                            accessNeeded="write"
                             onSelect={handleRegistrationScopeSelection}
+                            headerText={i18n.t('Create for')}
+                            footerText={i18n.t('You can also choose a program from the top bar and create in that program')}
+                            accessNeeded="write"
                         />
                     </div>
                     <div className={classes.registrationContainer}>

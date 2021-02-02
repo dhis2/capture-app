@@ -43,7 +43,7 @@ Then('you should be taken to the new page', () => {
 And('you see the dropdown menu for selecting tracked entity type', () => {
     cy.get('[data-test="dhis2-uicore-singleselect"]')
         .should('exist');
-    cy.contains('You can also choose a program from the top bar and search in that program')
+    cy.contains('You can also choose a program from the top bar and create in that program')
         .should('exist');
 });
 
