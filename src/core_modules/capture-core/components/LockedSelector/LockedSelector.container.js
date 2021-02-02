@@ -1,102 +1,193 @@
 // @flow
-import type { ComponentType } from 'react';
-import { connect } from 'react-redux';
-import { batchActions } from 'redux-batched-actions';
-import { compose } from 'redux';
+import React, { type ComponentType, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
 import { LockedSelectorComponent } from './LockedSelector.component';
 import {
-    resetOrgUnitIdFromLockedSelector,
     setOrgUnitFromLockedSelector,
     setProgramIdFromLockedSelector,
-    resetProgramIdFromLockedSelector,
     setCategoryOptionFromLockedSelector,
     resetCategoryOptionFromLockedSelector,
     resetAllCategoryOptionsFromLockedSelector,
     openNewRegistrationPageFromLockedSelector,
     openSearchPageFromLockedSelector,
-    lockedSelectorBatchActionTypes,
+    fetchOrgUnit,
+    resetProgramIdBatchAction,
+    startAgainBatchAction,
+    resetOrgUnitIdBatchAction,
 } from './LockedSelector.actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
-import withLoadingIndicator from '../../HOC/withLoadingIndicator';
-import type { Props, DispatchersFromRedux, OwnProps } from './LockedSelector.types';
+import type { OwnProps } from './LockedSelector.types';
+import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
-const mapStateToProps = (state: ReduxState) => ({
-    selectedProgramId: state.currentSelections.programId,
-    selectedOrgUnitId: state.currentSelections.orgUnitId,
-    ready: !state.activePage.isPageLoading,
-});
+const deriveReadiness = (isPageLoading, selectedOrgUnitId, organisationUnits) => {
+    // because we want the orgUnit to be fetched and stored
+    // before allowing the user to view the locked selector
+    if (selectedOrgUnitId) {
+        const orgUnit = organisationUnits[selectedOrgUnitId];
+        return Boolean(orgUnit && orgUnit.id && !isPageLoading);
+    }
+    return !isPageLoading;
+};
 
-const mapDispatchToProps = (
-    dispatch: ReduxDispatch,
-    {
-        customActionsOnProgramIdReset = [],
-        customActionsOnOrgUnitIdReset = [],
-    }: OwnProps,
-): DispatchersFromRedux => ({
-    onSetOrgUnit: (id: string, orgUnit: Object) => {
-        dispatch(setOrgUnitFromLockedSelector(id, orgUnit));
+const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string, pathname: string } =>
+    useSelector(({
+        currentSelections: {
+            programId: selectedProgramId,
+            orgUnitId: selectedOrgUnitId,
+        },
+        router: {
+            location: {
+                query: {
+                    programId: routerProgramId,
+                    orgUnitId: routerOrgUnitId,
+                },
+                pathname,
+            },
+        },
+    }) =>
+        ({
+            selectedProgramId: routerProgramId || selectedProgramId,
+            selectedOrgUnitId: routerOrgUnitId || selectedOrgUnitId,
+            pathname,
+        }),
+    );
+
+const useComponentLifecycle = () => {
+    const dispatch = useDispatch();
+    const { selectedOrgUnitId } = useUrlQueries();
+    const { pathname } = useLocation();
+    const pageFetchesOrgUnit = !pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
+
+    useEffect(() => {
+        pageFetchesOrgUnit && selectedOrgUnitId && dispatch(fetchOrgUnit(selectedOrgUnitId));
     },
-    onSetProgramId: (id: string) => {
-        dispatch(setProgramIdFromLockedSelector(id));
-    },
-    onSetCategoryOption: (categoryId: string, categoryOption: Object) => {
-        dispatch(setCategoryOptionFromLockedSelector(categoryId, categoryOption));
-    },
-    onResetCategoryOption: (categoryId: string) => {
-        dispatch(resetCategoryOptionFromLockedSelector(categoryId));
-    },
-    onResetAllCategoryOptions: () => {
-        dispatch(resetAllCategoryOptionsFromLockedSelector());
-    },
-    onOpenNewEventPage: () => {
-        dispatch(openNewRegistrationPageFromLockedSelector());
-    },
-    onOpenNewRegistrationPageWithoutProgramId: () => {
-        dispatch(batchActions([
-            resetProgramIdFromLockedSelector(),
-            resetAllCategoryOptionsFromLockedSelector(),
-            resetProgramIdBase(),
-            openNewRegistrationPageFromLockedSelector(),
-        ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH));
-    },
-    onOpenSearchPage: () => {
-        dispatch(openSearchPageFromLockedSelector());
-    },
-    onOpenSearchPageWithoutProgramId: () => {
-        dispatch(batchActions([
-            resetProgramIdFromLockedSelector(),
-            resetAllCategoryOptionsFromLockedSelector(),
-            resetProgramIdBase(),
-            openSearchPageFromLockedSelector(),
-        ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH));
-    },
-    onStartAgain: () => {
-        dispatch(batchActions([
-            resetOrgUnitIdFromLockedSelector(),
-            resetProgramIdFromLockedSelector(),
-            resetAllCategoryOptionsFromLockedSelector(),
-            resetProgramIdBase(),
-        ], lockedSelectorBatchActionTypes.AGAIN_START));
-    },
-    onResetOrgUnitId: () => {
-        dispatch(batchActions([
-            resetOrgUnitIdFromLockedSelector(),
-            ...customActionsOnOrgUnitIdReset,
-        ], lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH));
-    },
-    onResetProgramId: (baseAction: ReduxAction<any, any>) => {
-        dispatch(batchActions([
-            resetProgramIdFromLockedSelector(),
-            resetAllCategoryOptionsFromLockedSelector(),
-            baseAction,
-            ...customActionsOnProgramIdReset,
-        ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH));
-    },
-});
+    [dispatch, selectedOrgUnitId, pageFetchesOrgUnit]);
+};
 
 export const LockedSelector: ComponentType<OwnProps> =
-  compose(
-      connect<Props, OwnProps & CssClasses, _, _, _, _>(mapStateToProps, mapDispatchToProps),
-      withLoadingIndicator(() => ({ height: '100px' })),
-  )(LockedSelectorComponent);
+  ({
+      customActionsOnProgramIdReset = [],
+      customActionsOnOrgUnitIdReset = [],
+      pageToPush = '',
+  }) => {
+      const dispatch = useDispatch();
 
+      const dispatchOnSetOrgUnit = useCallback(
+          (id: string, orgUnit: Object) => {
+              dispatch(setOrgUnitFromLockedSelector(id, orgUnit, pageToPush));
+          },
+          [pageToPush, dispatch]);
+
+      const dispatchOnSetProgramId = useCallback(
+          (id: string) => {
+              dispatch(setProgramIdFromLockedSelector(id, pageToPush));
+          },
+          [pageToPush, dispatch]);
+
+      const dispatchOnSetCategoryOption = useCallback(
+          (categoryId: string, categoryOption: Object) => {
+              dispatch(setCategoryOptionFromLockedSelector(categoryId, categoryOption));
+          },
+          [dispatch]);
+
+      const dispatchOnResetCategoryOption = useCallback(
+          (categoryId: string) => {
+              dispatch(resetCategoryOptionFromLockedSelector(categoryId));
+          },
+          [dispatch]);
+
+      const dispatchOnResetAllCategoryOptions = useCallback(
+          () => {
+              dispatch(resetAllCategoryOptionsFromLockedSelector());
+          },
+          [dispatch]);
+
+      const dispatchOnOpenNewEventPage = useCallback(
+          () => {
+              dispatch(openNewRegistrationPageFromLockedSelector());
+          },
+          [dispatch]);
+
+      const dispatchOnOpenNewRegistrationPageWithoutProgramId = useCallback(
+          () => {
+              const actions = [
+                  resetProgramIdBase(),
+                  openNewRegistrationPageFromLockedSelector(),
+              ];
+              dispatch(resetProgramIdBatchAction(actions, 'new'));
+          },
+          [dispatch]);
+
+      const dispatchOnOpenSearchPage = useCallback(
+          () => {
+              dispatch(openSearchPageFromLockedSelector());
+          },
+          [dispatch]);
+
+      const dispatchOnOpenSearchPageWithoutProgramId = useCallback(
+          () => {
+              const actions = [
+                  resetProgramIdBase(),
+                  openSearchPageFromLockedSelector(),
+                  ...customActionsOnProgramIdReset,
+              ];
+              dispatch(resetProgramIdBatchAction(actions, 'search'));
+          },
+          [customActionsOnProgramIdReset, dispatch]);
+
+      const dispatchOnStartAgain = useCallback(
+          () => {
+              dispatch(startAgainBatchAction());
+          }, [dispatch]);
+
+      const dispatchOnResetOrgUnitId = useCallback(
+          () => {
+              dispatch(resetOrgUnitIdBatchAction(customActionsOnOrgUnitIdReset, pageToPush));
+          },
+          [pageToPush, customActionsOnOrgUnitIdReset, dispatch]);
+
+      const dispatchOnResetProgramId = useCallback(
+          (baseAction: ReduxAction<any, any>) => {
+              const actions = [
+                  baseAction,
+                  ...customActionsOnProgramIdReset,
+              ];
+
+              dispatch(resetProgramIdBatchAction(actions, pageToPush));
+          },
+          [pageToPush, customActionsOnProgramIdReset, dispatch]);
+
+      const { selectedOrgUnitId, selectedProgramId } = useUrlQueries();
+
+      const isPageLoading: string =
+        useSelector(({ activePage }) => activePage.isPageLoading);
+
+
+      const organisationUnits: Object =
+        useSelector(({ organisationUnits: orgUnits }) => orgUnits);
+
+      const ready = deriveReadiness(isPageLoading, selectedOrgUnitId, organisationUnits);
+
+      useComponentLifecycle();
+
+      return (
+          <LockedSelectorComponent
+              onStartAgain={dispatchOnStartAgain}
+              onOpenSearchPageWithoutProgramId={dispatchOnOpenSearchPageWithoutProgramId}
+              onOpenSearchPage={dispatchOnOpenSearchPage}
+              onOpenNewRegistrationPageWithoutProgramId={dispatchOnOpenNewRegistrationPageWithoutProgramId}
+              onOpenNewEventPage={dispatchOnOpenNewEventPage}
+              onResetProgramId={dispatchOnResetProgramId}
+              onResetOrgUnitId={dispatchOnResetOrgUnitId}
+              onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}
+              onResetCategoryOption={dispatchOnResetCategoryOption}
+              onSetCategoryOption={dispatchOnSetCategoryOption}
+              onSetProgramId={dispatchOnSetProgramId}
+              onSetOrgUnit={dispatchOnSetOrgUnit}
+              selectedOrgUnitId={selectedOrgUnitId}
+              selectedProgramId={selectedProgramId}
+              ready={ready}
+          />
+      );
+  };

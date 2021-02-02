@@ -163,10 +163,9 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         ...state,
         categoryCheckInProgress: false,
     }),
-
-    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, action) => ({
+    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, { payload: { orgUnitId } }) => ({
         ...state,
-        orgUnitId: action.payload.id,
+        orgUnitId,
     }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
@@ -183,15 +182,17 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             complete: false,
         };
     },
-    [lockedSelectorActionTypes.PROGRAM_ID_SET]: (state, action) => {
-        const programId = action.payload;
-        return {
-            ...state,
-            programId,
-            trackedEntityTypeId: undefined,
-            complete: false,
-        };
-    },
+    [lockedSelectorActionTypes.PROGRAM_ID_SET]: (state, { payload: { programId } }) => ({
+        ...state,
+        programId,
+        trackedEntityTypeId: undefined,
+        complete: false,
+    }),
+    [lockedSelectorActionTypes.PROGRAM_ID_STORE]:
+      (state, { payload: { programId } }) => ({
+          ...state,
+          programId,
+      }),
     [lockedSelectorActionTypes.CATEGORY_OPTION_SET]: (state, action) => {
         const { categoryId, categoryOption } = action.payload;
         return setCategoryOption(state, categoryId, categoryOption);

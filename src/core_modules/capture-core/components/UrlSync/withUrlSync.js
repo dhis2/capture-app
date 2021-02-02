@@ -3,6 +3,8 @@
  * @namespace UrlSync
  */
 import * as React from 'react';
+import { parse } from 'query-string';
+import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
 type Props = {
     urlPage: string,
@@ -11,12 +13,12 @@ type Props = {
     stateParams: ?Object,
     onUpdate: (selections: Object) => void,
     onNoUpdateRequired?: ?() => void,
+    history: Object
 };
 
-type SyncSpecification = {
-    urlKey: string,
-    propKey: string,
-};
+type SyncSpecification = {|
+    urlParameterName: string,
+|};
 type SyncSpecificationGetter = (props: Props) => Array<SyncSpecification>;
 
 export type UpdateDataContainer = {
@@ -24,10 +26,6 @@ export type UpdateDataContainer = {
     prevProps: Object,
     nextPage: ?string,
     prevPage: ?string,
-};
-
-export const reservedUrlKeys = {
-    ENTIRE_PARAM_STRING: 'ENTIRE_PARAM_STRING',
 };
 
 const getUrlSyncer = (
@@ -47,8 +45,8 @@ const getUrlSyncer = (
             const nextParams = Object
                 .keys(locationParams)
                 .reduce((accNextParams, locationKey) => {
-                    const syncSpec = syncSpecification.find(s => s.urlKey === locationKey) || {};
-                    accNextParams[syncSpec.propKey || locationKey] = locationParams[locationKey];
+                    const syncSpec = syncSpecification.find(s => s.urlParameterName === locationKey) || {};
+                    accNextParams[syncSpec.urlParameterName || locationKey] = locationParams[locationKey];
                     return accNextParams;
                 }, {});
 
@@ -86,50 +84,25 @@ const getUrlSyncer = (
             }
         }
 
-        getLocationParams(syncSpecifications: Array<SyncSpecification>) {
-            const urlParams = this.props.urlParams;
-            return syncSpecifications
-                .map((spec) => {
-                    const key = spec.urlKey;
-                    let value;
-                    if (!urlParams) {
-                        value = null;
-                    } else if (key === reservedUrlKeys.ENTIRE_PARAM_STRING) {
-                        value = urlParams;
-                    } else {
-                        const regExp = new RegExp(`${key}[^&]+`, 'i');
-                        const keyParams = urlParams.match(regExp);
-                        value = UrlSyncer.getValueFromParam(keyParams, key);
-                    }
-                    return {
-                        key,
-                        value,
-                    };
-                })
-                .reduce((accParams, param) => {
-                    accParams[param.key] = param.value;
-                    return accParams;
-                }, {});
-        }
-
         paramsNeedsUpdate(syncSpecifications: Array<SyncSpecification>, locationParams: { [key: string]: string}) {
             return syncSpecifications
                 .some((spec) => {
-                    const locationValue = locationParams[spec.urlKey];
-                    const propValue = (this.props.stateParams && this.props.stateParams[spec.propKey]) || null;
+                    const locationValue = locationParams[spec.urlParameterName];
+                    const propValue = (this.props.stateParams && this.props.stateParams[spec.urlParameterName]) || undefined;
                     return locationValue !== propValue;
                 });
         }
 
         isOutOfSync() {
             const syncSpecification = onGetSyncSpecification(this.props);
-            const locationParams = this.getLocationParams(syncSpecification);
-            if (this.props.urlPage !== this.props.statePage ||
-                this.paramsNeedsUpdate(syncSpecification, locationParams)) {
+            const { history: { location }, statePage, urlPage } = this.props;
+            const locationParams = parse(location && location.search);
+            const urlParamsAreOutOfSync = this.paramsNeedsUpdate(syncSpecification, locationParams);
+            const urlPathnameIsOutOfSync = urlPage !== statePage;
+
+            if (urlPathnameIsOutOfSync || urlParamsAreOutOfSync) {
                 const nextProps = UrlSyncer.getNextProps(locationParams, syncSpecification);
-                this.queuedUpdate = {
-                    nextProps,
-                };
+                this.queuedUpdate = { nextProps };
                 return true;
             }
             return false;
@@ -137,9 +110,9 @@ const getUrlSyncer = (
 
         render() {
             const { onUpdate, urlParams, stateParams, urlPage, statePage, ...passOnProps } = this.props;
-
             const urlOutOfSync = this.isOutOfSync();
-            if (urlOutOfSync) {
+
+            if (urlOutOfSync && pageFetchesOrgUnitUsingTheOldWay(urlPage)) {
                 return (
                     // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
@@ -161,7 +134,7 @@ const getUrlSyncer = (
  * Compare values from the url params and the props (usually from the state) based on the sync specification. Calls onUpdate or onNoUpdateRequired accordingly. Additionally checks if the page has changed.
  * @alias withUrlSync
  * @memberof UrlSync
- * @example withUrlSync(props => [{ urlKey: 'programId', propKey: 'programId' }])([InnerComponent])
+ * @example withUrlSync(props => [{ urlParameterName: 'programId' }])([InnerComponent])
  */
 export const withUrlSync = (onGetSyncSpecification: SyncSpecificationGetter) =>
     (InnerComponent: React.ComponentType<any>) =>
