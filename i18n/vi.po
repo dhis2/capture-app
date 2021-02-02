@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
+"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -659,6 +659,13 @@ msgstr "Chọn {{missingCategories}} để bắt đầu báo cáo"
 msgid "Save as new"
 msgstr ""
 
+msgid "Create for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and create in that program"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "Tồn tại một bản sao nhưng có một số lỗi, hãy xem nhật ký để biết chi tiết"
@@ -739,6 +746,15 @@ msgstr "Tìm kiếm theo thuộc tính"
 
 msgid "Back"
 msgstr "Trở lại"
+
+msgid "Search for"
+msgstr "Tìm"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Bạn cũng có thể chọn một chương trình từ thanh trên cùng và tìm kiếm trong "
+"chương trình đó"
 
 msgid "No results found"
 msgstr "Không tìm thấy kết quả nào"
@@ -841,15 +857,6 @@ msgstr "Tìm kiếm {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Điền vào ít nhất {{minAttributesRequired}} thuộc tính để tìm kiếm"
-
-msgid "Search for"
-msgstr "Tìm"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Bạn cũng có thể chọn một chương trình từ thanh trên cùng và tìm kiếm trong "
-"chương trình đó"
 
 msgid "To work with the selected program,"
 msgstr "Để làm việc với chương trình đã chọn,"

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
+"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -650,6 +650,13 @@ msgstr "选择{{missingCategories}}开始报告"
 msgid "Save as new"
 msgstr "另存为新"
 
+msgid "Create for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and create in that program"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "存在重复，但是有错误，查看日志详情。"
 
@@ -726,6 +733,13 @@ msgstr "按属性搜索"
 
 msgid "Back"
 msgstr "后退"
+
+msgid "Search for"
+msgstr "搜索"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
 
 msgid "No results found"
 msgstr "没有结果"
@@ -817,13 +831,6 @@ msgstr "搜索 {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
-
-msgid "Search for"
-msgstr "搜索"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
 
 msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"

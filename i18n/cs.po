@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
+"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Jiří Podhorecký, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -654,6 +654,13 @@ msgstr "Chcete-li zahájit vytváření hlášení, vyberte {{missingCategories}
 msgid "Save as new"
 msgstr "Uložit jako nové"
 
+msgid "Create for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and create in that program"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "Existuje duplikát (ale došlo k některým chybám, podrobnosti najdete v "
@@ -736,6 +743,13 @@ msgstr "Hledání podle atributů"
 
 msgid "Back"
 msgstr "Zpět"
+
+msgid "Search for"
+msgstr "Hledat"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
 
 msgid "No results found"
 msgstr "Nenalezeny žádné výsledky"
@@ -838,13 +852,6 @@ msgstr "Hledat {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Chcete-li hledat, vyplňte alespoň {{minAttributesRequired}} atributy"
-
-msgid "Search for"
-msgstr "Hledat"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
 
 msgid "To work with the selected program,"
 msgstr "Chcete-li pracovat s vybraným programem,"

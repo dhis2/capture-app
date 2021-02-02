@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
+"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -660,6 +660,13 @@ msgstr ""
 msgid "Save as new"
 msgstr ""
 
+msgid "Create for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and create in that program"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
 
@@ -741,6 +748,14 @@ msgstr "Søk etter attributter"
 
 msgid "Back"
 msgstr "Tilbake"
+
+msgid "Search for"
+msgstr "Søk etter"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Du kan også velge et program fra den øverste linjen og søke i det programmet"
 
 msgid "No results found"
 msgstr "Ingen resultater funnet"
@@ -840,14 +855,6 @@ msgstr "Søk {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Fyll inn minst {{minAttributesRequired}} attributter for å søke"
-
-msgid "Search for"
-msgstr "Søk etter"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Du kan også velge et program fra den øverste linjen og søke i det programmet"
 
 msgid "To work with the selected program,"
 msgstr "For å jobbe med det valgte programmet,"

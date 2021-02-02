@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-18T11:18:28.545Z\n"
+"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -659,6 +659,13 @@ msgstr "Ҳисоботни бошлаш учун {{missingCategories}} ни та
 msgid "Save as new"
 msgstr "Янги сифатида сақлаш"
 
+msgid "Create for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and create in that program"
+msgstr ""
+
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
 "Икки нусхаси мавжуд (лекин хатолар бўлган, батафсил маълумот учун журналга "
@@ -743,6 +750,15 @@ msgstr "Атрибут орқали қидириш"
 
 msgid "Back"
 msgstr "Орқага"
+
+msgid "Search for"
+msgstr "Қидириш"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Бундан ташқари, юқори сатрда дастурни танлашингиз ва ушбу дастур ичида "
+"қидиришингиз мумкин"
 
 msgid "No results found"
 msgstr "Ҳеч қандай натижа топилмади"
@@ -846,15 +862,6 @@ msgstr "{{uniqueAttrName}} орқали қидириш"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Қидириш учун камида {{minAttributesRequired}} атрибутларини тўлдиринг"
-
-msgid "Search for"
-msgstr "Қидириш"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Бундан ташқари, юқори сатрда дастурни танлашингиз ва ушбу дастур ичида "
-"қидиришингиз мумкин"
 
 msgid "To work with the selected program,"
 msgstr "Танланган дастур билан ишлаш учун,"
