@@ -76,11 +76,6 @@ import {
     networkMonitorStatusEpic,
 } from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
 import {
-    setOrgUnit,
-    setProgram,
-    goBackToListContext,
-} from 'capture-core/components/LockedSelector/QuickSelector/epics/setSelection.epics';
-import {
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
 } from 'capture-core/components/LockedSelector/QuickSelector';
@@ -159,6 +154,7 @@ import {
     setProgramIdEpic,
     resetOrgUnitId,
     resetProgramIdEpic,
+    fetchOrgUnitEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 import {
     setTrackedEntityTypeIdOnUrlEpic,
@@ -232,9 +228,6 @@ export default combineEpics(
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
     goingOnlineEpic,
-    setOrgUnit,
-    setProgram,
-    goBackToListContext,
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
@@ -284,6 +277,7 @@ export default combineEpics(
     setProgramIdEpic,
     resetOrgUnitId,
     resetProgramIdEpic,
+    fetchOrgUnitEpic,
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,

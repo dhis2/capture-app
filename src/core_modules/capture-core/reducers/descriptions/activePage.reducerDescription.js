@@ -14,6 +14,15 @@ export const activePageDesc = createReducerDescription({
         ...state,
         isPageLoading: true,
     }),
+    [lockedSelectorActionTypes.FETCH_ORG_UNIT_ERROR]: (state, action) => ({
+        ...state,
+        isPageLoading: false,
+        selectionsError: action.payload,
+    }),
+    [lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS]: state => ({
+        ...state,
+        isPageLoading: false,
+    }),
     [lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID]: state => ({
         ...state,
         selectionsError: null,
@@ -25,16 +34,13 @@ export const activePageDesc = createReducerDescription({
         isPageLoading: false,
         selectionsError: action.payload,
     }),
-    [lockedSelectorActionTypes.FETCH_ORG_UNIT_ERROR]: (state, action) => ({
-        ...state,
-        isPageLoading: false,
-        selectionsError: action.payload,
-    }),
+
 
     [viewEventPageActionTypes.VIEW_EVENT_FROM_URL]: state => ({
         ...state,
         isDataEntryLoading: true,
         isPageLoading: true,
+        viewEventLoadError: null,
     }),
     [viewEventDataEntryActionTypes.PREREQUISITES_ERROR_LOADING_VIEW_EVENT_DATA_ENTRY]: (state, action) => ({
         ...state,
@@ -82,5 +88,5 @@ export const activePageDesc = createReducerDescription({
     selectionsError: null,
     isPageLoading: false,
     isDataEntryLoading: false,
-    viewEventLoadError: false,
+    viewEventLoadError: null,
 });

@@ -188,6 +188,11 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         trackedEntityTypeId: undefined,
         complete: false,
     }),
+    [lockedSelectorActionTypes.PROGRAM_ID_STORE]:
+      (state, { payload: { programId } }) => ({
+          ...state,
+          programId,
+      }),
     [lockedSelectorActionTypes.CATEGORY_OPTION_SET]: (state, action) => {
         const { categoryId, categoryOption } = action.payload;
         return setCategoryOption(state, categoryId, categoryOption);
