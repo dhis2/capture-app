@@ -1,3 +1,11 @@
+## [1.8.1](https://github.com/dhis2/capture-app/compare/v1.8.0...v1.8.1) (2021-02-02)
+
+
+### Bug Fixes
+
+* DHIS2-10142 - dynamic text on component TrackedEntityTypeSelector ([#1457](https://github.com/dhis2/capture-app/issues/1457)) ([828c5ca](https://github.com/dhis2/capture-app/commit/828c5ca0d2bc4baf6552ee611a784c7c68806ffd))
+* the access problem in the search page ([#1466](https://github.com/dhis2/capture-app/issues/1466)) ([ad76505](https://github.com/dhis2/capture-app/commit/ad76505bf15a9dfe9c886a302619184f114aab73))
+
 # [1.8.0](https://github.com/dhis2/capture-app/compare/v1.7.2...v1.8.0) (2021-01-25)
 
 
