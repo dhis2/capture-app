@@ -1,6 +1,5 @@
 // @flow
 import React, { useMemo, type ComponentType } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
     SingleSelect,
@@ -39,7 +38,7 @@ const styles = ({ typography }) => ({
 
 
 export const TrackedEntityTypeSelectorPlain =
-  ({ classes, onSelect, onSetTrackedEntityTypeIdOnUrl }: Props) => {
+  ({ classes, onSelect, onSetTrackedEntityTypeIdOnUrl, accessNeeded, headerText, footerText }: Props) => {
       const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
       const selectedSearchScopeId = useCurrentTrackedEntityTypeId();
 
@@ -50,7 +49,7 @@ export const TrackedEntityTypeSelectorPlain =
 
       return (<>
           <div className={classes.header}>
-              { i18n.t('Search for')}
+              { headerText }
           </div>
 
           <div className={classes.searchRow}>
@@ -63,13 +62,30 @@ export const TrackedEntityTypeSelectorPlain =
                       {
                           useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
                               // $FlowFixMe https://github.com/facebook/flow/issues/2221
+                              .filter(({ trackedEntityTypeAccess }) => {
+                                  if (accessNeeded === 'write') {
+                                      return trackedEntityTypeAccess
+                                        && trackedEntityTypeAccess.data
+                                        && trackedEntityTypeAccess.data.write;
+                                  }
+                                  if (accessNeeded === 'read') {
+                                      return trackedEntityTypeAccess
+                                        && trackedEntityTypeAccess.data
+                                        && trackedEntityTypeAccess.data.read;
+                                  }
+                                  return false;
+                              })
+                              // $FlowFixMe https://github.com/facebook/flow/issues/2221
                               .map(({ trackedEntityTypeName, trackedEntityTypeId }) =>
                                   (<SingleSelectOption
                                       key={trackedEntityTypeId}
                                       value={trackedEntityTypeId}
                                       label={trackedEntityTypeName}
                                   />),
-                              ), [trackedEntityTypesWithCorrelatedPrograms])
+                              ), [
+                              accessNeeded,
+                              trackedEntityTypesWithCorrelatedPrograms,
+                          ])
                       }
                   </SingleSelect>
               </div>
@@ -78,7 +94,7 @@ export const TrackedEntityTypeSelectorPlain =
               !selectedSearchScopeId &&
               <div className={classes.informativeIcon}>
                   <InfoIconText>
-                      {i18n.t('You can also choose a program from the top bar and search in that program')}
+                      { footerText }
                   </InfoIconText>
               </div>
           }
