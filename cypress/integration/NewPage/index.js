@@ -294,7 +294,7 @@ And('you see the registration form for the specific category', () => {
 
 // New event in Antenatal care visit
 And('you are in the Antenatal care visit registration page', () => {
-    cy.visit('/#/new/programId=lxAQ7Zs9VYR&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/new?programId=lxAQ7Zs9VYR&orgUnitId=DiszpKrYNg8');
 });
 
 And('you submit the form', () => {
@@ -334,7 +334,7 @@ And('you fill in the hemoglobin', () => {
 
 And('you are navigated to the working list', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/programId=lxAQ7Zs9VYR&orgUnitId=DiszpKrYNg8`);
+        .should('eq', `${Cypress.config().baseUrl}/#/?programId=lxAQ7Zs9VYR&orgUnitId=DiszpKrYNg8`);
 
     cy.get('[data-test="event-working-lists"]')
         .contains('2021-01-01')
@@ -344,7 +344,7 @@ And('you are navigated to the working list', () => {
 
 // New person
 And('you are in the Person registration page', () => {
-    cy.visit('/#/new/trackedEntityTypeId=nEenWmSyUEp&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/new?trackedEntityTypeId=nEenWmSyUEp&orgUnitId=DiszpKrYNg8');
 });
 
 And('you fill in the first name with value that has duplicates', () => {
@@ -438,10 +438,10 @@ And('you click hide the modal is not visible', () => {
 
 // New person in WHO RMNCH Tracker
 And('you are in the WHO RMNCH program registration page', () => {
-    cy.visit('/#/new/programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/new?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
 });
 And('you are in Child programme registration page', () => {
-    cy.visit('/#/new/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/new?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
 });
 
 And('you fill the form with age 0', () => {
