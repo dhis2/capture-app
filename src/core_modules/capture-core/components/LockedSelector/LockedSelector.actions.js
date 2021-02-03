@@ -33,8 +33,8 @@ export const lockedSelectorBatchActionTypes = {
     ORG_UNIT_ID_RESET_BATCH: 'LockedSelector.BatchOrgUnitIdReset',
 };
 
-export const setOrgUnitFromLockedSelector = (id: string, orgUnit: Object, pageToPush: string) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_SET)({ orgUnitId: id, orgUnit, pageToPush });
-export const setProgramIdFromLockedSelector = (id: string, pageToPush: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_SET)({ programId: id, pageToPush });
+export const setOrgUnitFromLockedSelector = (orgUnitId: string, orgUnit: Object, pageToPush: string) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_SET)({ orgUnitId, orgUnit, pageToPush });
+export const setProgramIdFromLockedSelector = (programId: string, pageToPush: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_SET)({ programId, pageToPush });
 export const setCategoryOptionFromLockedSelector = (categoryId: string, categoryOption: Object) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });
 
 export const resetOrgUnitIdFromLockedSelector = (pageToPush: string) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_RESET)({ pageToPush });
