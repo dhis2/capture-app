@@ -70,7 +70,7 @@ export const startAgainEpic = (action$: InputObservable) =>
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (
     action$: InputObservable,
-    _,
+    _: ReduxStore,
     { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE),
@@ -118,7 +118,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable,
 
 export const fetchOrgUnitEpic = (
     action$: InputObservable,
-    _,
+    _: ReduxStore,
     { querySingleResource }: ApiUtils,
 ) =>
     action$.pipe(
