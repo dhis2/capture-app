@@ -14,7 +14,6 @@ import {
     setEmptyOrgUnitBasedOnUrl,
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
-import { getApi } from '../../d2';
 import { deriveUrlQueries, pageFetchesOrgUnitUsingTheOldWay, urlArguments } from '../../utils/url';
 
 const derivePayloadFromAction = (batchPayload, actionType) => {
@@ -23,7 +22,7 @@ const derivePayloadFromAction = (batchPayload, actionType) => {
     return payload;
 };
 
-const fetchOrgUnits = id => getApi().get(`organisationUnits/${id}`, { fields: 'id,displayName' });
+const orgUnitsQuery = id => ({ resource: 'organisationUnits', id });
 
 export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -69,12 +68,15 @@ export const startAgainEpic = (action$: InputObservable) =>
         ofType(lockedSelectorBatchActionTypes.AGAIN_START),
         map(() => push('/')));
 
-export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
+export const getOrgUnitDataBasedOnUrlUpdateEpic = (
+    action$: InputObservable,
+    _,
+    { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE),
         filter(action => action.payload.nextProps.orgUnitId),
         switchMap(action =>
-            fetchOrgUnits(action.payload.nextProps.orgUnitId)
+            querySingleResource(orgUnitsQuery(action.payload.nextProps.orgUnitId))
                 .then(response =>
                     setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }))
                 .catch(() =>
@@ -114,11 +116,15 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable,
             return validSelectionsFromUrl();
         }));
 
-export const fetchOrgUnitEpic = (action$: InputObservable) =>
+export const fetchOrgUnitEpic = (
+    action$: InputObservable,
+    _,
+    { querySingleResource }: ApiUtils,
+) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.FETCH_ORG_UNIT),
         switchMap(({ payload: { orgUnitId } }) =>
-            from(fetchOrgUnits(orgUnitId))
+            from(querySingleResource(orgUnitsQuery(orgUnitId)))
                 .pipe(
                     map(({ id, displayName: name }) =>
                         setCurrentOrgUnitBasedOnUrl({ id, name })),
