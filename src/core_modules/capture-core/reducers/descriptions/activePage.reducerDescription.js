@@ -35,7 +35,6 @@ export const activePageDesc = createReducerDescription({
         isPageLoading: false,
     }),
 
-
     [viewEventPageActionTypes.VIEW_EVENT_FROM_URL]: state => ({
         ...state,
         isDataEntryLoading: true,
