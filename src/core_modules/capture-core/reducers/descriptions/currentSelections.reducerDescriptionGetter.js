@@ -68,7 +68,7 @@ const resetCategoryOption = (state: Object, categoryId: string) => {
 
 export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
     ...appUpdaters,
-    [crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED]: (state, action) => {
+    [crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE]: (state, action) => {
         const newState = {
             ...state,
             complete: action.payload.isComplete,
@@ -163,17 +163,16 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         ...state,
         categoryCheckInProgress: false,
     }),
-
-    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, action) => ({
+    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, { payload: { orgUnitId } }) => ({
         ...state,
-        orgUnitId: action.payload.id,
+        orgUnitId,
     }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
         orgUnitId: null,
         complete: false,
     }),
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => {
+    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE]: (state, action) => {
         const { nextProps: selections } = action.payload;
         return {
             ...state,
@@ -183,15 +182,17 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             complete: false,
         };
     },
-    [lockedSelectorActionTypes.PROGRAM_ID_SET]: (state, action) => {
-        const programId = action.payload;
-        return {
-            ...state,
-            programId,
-            trackedEntityTypeId: undefined,
-            complete: false,
-        };
-    },
+    [lockedSelectorActionTypes.PROGRAM_ID_SET]: (state, { payload: { programId } }) => ({
+        ...state,
+        programId,
+        trackedEntityTypeId: undefined,
+        complete: false,
+    }),
+    [lockedSelectorActionTypes.PROGRAM_ID_STORE]:
+      (state, { payload: { programId } }) => ({
+          ...state,
+          programId,
+      }),
     [lockedSelectorActionTypes.CATEGORY_OPTION_SET]: (state, action) => {
         const { categoryId, categoryOption } = action.payload;
         return setCategoryOption(state, categoryId, categoryOption);

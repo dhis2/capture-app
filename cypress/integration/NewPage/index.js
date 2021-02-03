@@ -200,12 +200,12 @@ When('you click the the first option option', () => {
 
 When('you are navigated to the registration page without program selected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/new/orgUnitId=DiszpKrYNg8`);
+        .should('eq', `${Cypress.config().baseUrl}/#/new?orgUnitId=DiszpKrYNg8`);
 });
 
 When('you are navigated to the Child Programme registration page with program selected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/new/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
+        .should('eq', `${Cypress.config().baseUrl}/#/new?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
 });
 
 When('you have no program selection', () => {
@@ -232,7 +232,7 @@ And('you select the Contraceptives Voucher Program', () => {
 
 When('you are navigated to the Contraceptives Voucher Program registration page with program selected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/new/programId=kla3mAPgvCH&orgUnitId=DiszpKrYNg8`);
+        .should('eq', `${Cypress.config().baseUrl}/#/new?programId=kla3mAPgvCH&orgUnitId=DiszpKrYNg8`);
 });
 
 And('there should be informative message explaining you need to complete your selections', () => {

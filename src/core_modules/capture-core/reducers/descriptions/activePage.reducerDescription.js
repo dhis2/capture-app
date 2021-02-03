@@ -10,31 +10,37 @@ import { actionTypes as viewEventDataEntryActionTypes } from '../../components/P
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 
 export const activePageDesc = createReducerDescription({
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: state => ({
+    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE]: state => ({
         ...state,
         isPageLoading: true,
     }),
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID]: state => ({
+    [lockedSelectorActionTypes.FETCH_ORG_UNIT_ERROR]: (state, action) => ({
+        ...state,
+        isPageLoading: false,
+        selectionsError: action.payload,
+    }),
+    [lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS]: state => ({
+        ...state,
+        isPageLoading: false,
+    }),
+    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID]: state => ({
         ...state,
         selectionsError: null,
         isPageLoading: false,
         isDataEntryLoading: false,
     }),
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID]: (state, action) => ({
-        ...state,
-        isPageLoading: false,
-        selectionsError: action.payload,
-    }),
-    [lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_ERROR_RETRIEVING]: (state, action) => ({
+    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_INVALID]: (state, action) => ({
         ...state,
         isPageLoading: false,
         selectionsError: action.payload,
     }),
 
+
     [viewEventPageActionTypes.VIEW_EVENT_FROM_URL]: state => ({
         ...state,
         isDataEntryLoading: true,
         isPageLoading: true,
+        viewEventLoadError: null,
     }),
     [viewEventDataEntryActionTypes.PREREQUISITES_ERROR_LOADING_VIEW_EVENT_DATA_ENTRY]: (state, action) => ({
         ...state,
@@ -82,5 +88,5 @@ export const activePageDesc = createReducerDescription({
     selectionsError: null,
     isPageLoading: false,
     isDataEntryLoading: false,
-    viewEventLoadError: false,
+    viewEventLoadError: null,
 });

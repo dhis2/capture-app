@@ -4,7 +4,7 @@ beforeEach(() => {
 });
 
 Given('you open the the new event page in Ngelehun and malaria case context', () => {
-    cy.visit('/#/new/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/new?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
 
 When('you navigate to register a person relationship', () => {
@@ -21,6 +21,7 @@ And('you fill in the first name with values that have duplicates', () => {
     cy.get('[data-test="dhis2-capture-d2-form-component"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
+        .wait(500)
         .type('Tesmi')
         .blur();
 });
@@ -42,6 +43,7 @@ And('you fill in the first name with values that have exactly 5 duplicates', () 
     cy.get('[data-test="dhis2-capture-d2-form-component"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
+        .wait(500)
         .type('Tesmi')
         .blur();
     cy.get('[data-test="dhis2-capture-d2-form-component"]')

@@ -95,7 +95,7 @@ export const NewPage: ComponentType<{||}> = () => {
     const { id: orgUnitId } = useCurrentOrgUnitInfo();
     const { id: programId } = useCurrentProgramInfo();
     const handleMainPageNavigation = () => {
-        history.push(`/${urlArguments({ orgUnitId, programId })}`);
+        history.push(`/?${urlArguments({ orgUnitId, programId })}`);
     };
 
     const writeAccess = useUserWriteAccess(currentScopeId);

@@ -86,7 +86,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN,
             lockedSelectorActionTypes.PROGRAM_ID_SET,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
-            crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
+            crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE,
         ),
         filter(() => {
             const { app: { page } } = store.value;
@@ -95,10 +95,10 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         filter((action) => {
             const type = action.type;
             const triggeringActionType = action.payload && action.payload.triggeringActionType;
-            if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
+            if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
                 return (!!triggeringActionType) && [
                     lockedSelectorActionTypes.ORG_UNIT_ID_SET,
-                    lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
+                    lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID,
                 ].includes(triggeringActionType);
             }
             return true;
@@ -141,18 +141,18 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             lockedSelectorActionTypes.PROGRAM_ID_SET,
-            crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
+            crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE,
         ),
         filter(() => {
             const { app: { page } } = store.value;
             return page === 'new';
         }),
         filter((action) => {
-            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATED and the underlying action is not SET_ORG_UNIT or SELECTIONS_FROM_URL_VALID
+            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATE and the underlying action is not SET_ORG_UNIT or FROM_URL_CURRENT_SELECTIONS_VALID
             const type = action.type;
-            if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
+            if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
                 const triggeringActionType = action.payload && action.payload.triggeringActionType;
-                if (![lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID, lockedSelectorActionTypes.ORG_UNIT_ID_SET]
+                if (![lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID, lockedSelectorActionTypes.ORG_UNIT_ID_SET]
                     .includes(triggeringActionType)) {
                     return false;
                 }

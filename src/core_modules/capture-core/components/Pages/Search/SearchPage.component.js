@@ -135,7 +135,7 @@ const Index = ({
     };
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
-            <LockedSelector />
+            <LockedSelector pageToPush="search" />
             <div data-test="dhis2-capture-search-page-content" className={classes.container} >
                 <Button
                     dataTest="dhis2-capture-back-button"
