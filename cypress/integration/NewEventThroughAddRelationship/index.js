@@ -1,10 +1,7 @@
+import '../sharedSteps';
 
 beforeEach(() => {
     cy.loginThroughForm();
-});
-
-Given('you open the the new event page in Ngelehun and malaria case context', () => {
-    cy.visit('/#/new?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
 
 When('you add data to the form', () => {
@@ -40,14 +37,6 @@ Then('the event should be sent to the server successfully', () => {
         });
 });
 
-When('you navigate to register a person relationship', () => {
-    cy.get('[data-test="dhis2-capture-add-relationship-button"]')
-        .click();
-    cy.get('[data-test="dhis2-capture-relationship-type-selector-button-mxZDvSZYxlw"]')
-        .click();
-    cy.get('[data-test="dhis2-capture-create-relationship-button"]')
-        .click();
-});
 
 When('you fill in the registration details', () => {
     cy.get('[data-test="dhis2-capture-relationship-register-tei-program-selector"]')
@@ -117,15 +106,6 @@ Then('the data should be sent to the server successfully', () => {
     });
 });
 
-When('you navigate to find a person relationship', () => {
-    cy.get('[data-test="dhis2-capture-add-relationship-button"]')
-        .click();
-    cy.get('[data-test="dhis2-capture-relationship-type-selector-button-mxZDvSZYxlw"]')
-        .click();
-    cy.get('[data-test="dhis2-capture-find-relationship-button"]')
-        .click();
-});
-
 When('you search for an existing unique id and link to the person', () => {
     cy.get('[data-test="dhis2-capture-form-field-lZGmxYbs97q"]')
         .find('input')
@@ -182,19 +162,3 @@ And('you expand the attributes search area', () => {
         .eq(4)
         .click();
 });
-
-
-And('you click search', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
-        .find('button')
-        .click();
-});
-
-Then('you can see the first page of the results', () => {
-    cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-pagination"]')
-        .contains('Page 1')
-        .should('exist');
-});
-

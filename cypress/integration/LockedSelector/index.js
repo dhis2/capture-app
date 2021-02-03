@@ -1,16 +1,7 @@
+import '../sharedSteps';
+
 beforeEach(() => {
     cy.loginThroughForm();
-});
-
-Given('you are in the main page with no selections made', () => {
-    cy.visit('/#/');
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
-        .should('exist');
-});
-
-When('you click the "New" button to add a new event', () => {
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
-        .click();
 });
 
 When('you click the "New" button to add a new event', () => {
@@ -38,13 +29,6 @@ Given('you are in the main page with organisation unit preselected', () => {
 
 Then('you should be taken to the new page', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/new?orgUnitId=DiszpKrYNg8`);
-});
-
-And('you see the dropdown menu for selecting tracked entity type', () => {
-    cy.get('[data-test="dhis2-uicore-singleselect"]')
-        .should('exist');
-    cy.contains('You can also choose a program from the top bar and create in that program')
-        .should('exist');
 });
 
 Given('you are in the main page with program preselected', () => {
@@ -154,23 +138,10 @@ Given('you land on a new event page with preselected org unit', () => {
     cy.visit('/#/new?orgUnitId=DiszpKrYNg8');
 });
 
-When('you select program', () => {
-    cy.get('.Select')
-        .type('Malaria case re');
-    cy.contains('Malaria case registration')
-        .click();
-});
-
 Given('you land on a new event page with preselected program', () => {
     cy.visit('/#/new?programId=VBqh0ynB2wv');
 });
 
-When('you select org unit', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .type('Ngelehun C');
-    cy.contains('Ngelehun CHC')
-        .click();
-});
 
 Then('new event page url is valid', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/new?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
@@ -189,13 +160,6 @@ When('you select program', () => {
 
 Given('you land on a main event page with preselected program', () => {
     cy.visit('/#/?programId=VBqh0ynB2wv');
-});
-
-When('you select org unit', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .type('Ngelehun C');
-    cy.contains('Ngelehun CHC')
-        .click();
 });
 
 Then('main page page url is valid', () => {
@@ -243,16 +207,4 @@ Then('you navigated to the search page without a program being selected', () => 
 
 Then('you are navigated to the search page with the same org unit and program Child Programme', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/search?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
-});
-
-Then('there should be visible a title with Child Program', () => {
-    cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .contains('person in program: Child Programme')
-        .should('exist');
-});
-
-And('there should be Child Programme domain forms visible to search with', () => {
-    cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .find('[data-test="capture-ui-input"]')
-        .should('have.length', 1);
 });

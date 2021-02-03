@@ -1,3 +1,5 @@
+import '../../sharedSteps';
+
 beforeEach(() => {
     cy.loginThroughForm();
 });
@@ -48,12 +50,6 @@ Then('the list should display the events retrieved from the api', () => {
         });
 });
 
-Then('the page navigation should show that you are on the first page', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Page 1')
-        .should('exist');
-});
-
 When('you select the working list called events assigned to anyone', () => {
     cy.get('[data-test="workinglists-template-selector-chips-container"]')
         .contains('Events assigned to anyone')
@@ -84,36 +80,10 @@ Then('events assigned to anyone should be retrieved from the api', () => {
     cy.get('@result').its('response.body.events').as('events');
 });
 
-When('you set the assignee filter to anyone', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Assigned to')
-        .click();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Anyone')
-        .click();
-});
-
 When('you apply the assignee filter', () => {
     cy.route('GET', '**/events**').as('getEventsAssignedToAnyone');
 
     cy.get('[data-test="list-view-filter-apply-button"]')
-        .click();
-});
-
-Then('the assigned to filter button should show that the anyone filter is in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Assigned to: Anyone')
-        .should('exist');
-});
-
-When('you set the status filter to active', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Status')
-        .click();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .contains('Active')
         .click();
 });
 
@@ -122,12 +92,6 @@ When('you apply the status filter', () => {
 
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
-});
-
-Then('the status filter button should show that the active filter is in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Status: Active')
-        .should('exist');
 });
 
 Then('active events that are assigned to anyone should be retrieved from the api', () => {
@@ -152,31 +116,11 @@ Then('active events that are assigned to anyone should be retrieved from the api
     cy.get('@result').its('response.body.events').as('events');
 });
 
-When('you set the age filter to 10-20', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years)')
-        .click();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .find('input[placeholder="Min"]')
-        .type('10');
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .find('input[placeholder="Max"]')
-        .type('20');
-});
-
-When('you apply the current filter', () => {
+When('you apply the current filter on the event working list', () => {
     cy.route('GET', '**/events**').as('getEvents');
 
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
-});
-
-Then('the age filter button should show that the filter is in effect', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years): 10 to 20')
-        .should('exist');
 });
 
 Then('events where age is between 10 and 20 should be retrieved from the api', () => {
@@ -201,7 +145,7 @@ Then('events where age is between 10 and 20 should be retrieved from the api', (
     cy.get('@result').its('response.body.events').as('events');
 });
 
-When('you click the next page buttton', () => {
+When('you click the next page button on the event working list', () => {
     cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
         .should('exist');
 
@@ -221,20 +165,14 @@ Then('new events should be retrieved from the api', () => {
     cy.get('@result').its('response.body.events').as('events');
 });
 
-Then('the list should show the second page', () => {
-    cy.get('[data-test="event-working-lists"]')
-        .contains('Page 2')
-        .should('exist');
-});
-
-When('you click the previous page button', () => {
+When('you click the previous page button on the event working list', () => {
     cy.route('GET', '**/events**').as('getEvents');
 
     cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
         .click();
 });
 
-When('you click the first page button', () => {
+When('you click the first page button on the event working list', () => {
     cy.route('GET', '**/events**').as('getEvents');
 
     cy.get('[data-test="dhis2-capture-search-pagination-first-page"]')
@@ -281,11 +219,6 @@ When('you click the report date column header', () => {
     cy.get('[data-test="online-list-table"]')
         .contains('Report date')
         .click();
-});
-
-Then('the sort arrow should indicate ascending order', () => {
-    cy.get('[data-test="data-table-asc-sort-icon"]')
-        .should('exist');
 });
 
 Then('events should be retrieved from the api ordered ascendingly by report date', () => {
