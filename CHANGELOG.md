@@ -1,3 +1,18 @@
+## [1.8.1](https://github.com/dhis2/capture-app/compare/v1.8.0...v1.8.1) (2021-02-02)
+
+
+### Bug Fixes
+
+* DHIS2-10142 - dynamic text on component TrackedEntityTypeSelector ([#1457](https://github.com/dhis2/capture-app/issues/1457)) ([828c5ca](https://github.com/dhis2/capture-app/commit/828c5ca0d2bc4baf6552ee611a784c7c68806ffd))
+* the access problem in the search page ([#1466](https://github.com/dhis2/capture-app/issues/1466)) ([ad76505](https://github.com/dhis2/capture-app/commit/ad76505bf15a9dfe9c886a302619184f114aab73))
+
+# [1.8.0](https://github.com/dhis2/capture-app/compare/v1.7.2...v1.8.0) (2021-01-25)
+
+
+### Features
+
+* DHIS2-9658 adds duplicates | DHIS2-10179 Block users from seeing a page when they have no access to it ([#1369](https://github.com/dhis2/capture-app/issues/1369)) ([450fe0a](https://github.com/dhis2/capture-app/commit/450fe0a94a8d6291b1c233f4b0b93eea595ebbb5)), closes [#1370](https://github.com/dhis2/capture-app/issues/1370) [#1371](https://github.com/dhis2/capture-app/issues/1371) [#1373](https://github.com/dhis2/capture-app/issues/1373) [#1374](https://github.com/dhis2/capture-app/issues/1374)
+
 ## [1.7.2](https://github.com/dhis2/capture-app/compare/v1.7.1...v1.7.2) (2021-01-20)
 
 

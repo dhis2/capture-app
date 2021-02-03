@@ -22,7 +22,7 @@ And('you select org unit', () => {
 And('you see the dropdown menu for selecting tracked entity type', () => {
     cy.get('[data-test="dhis2-uicore-select"')
         .should('exist');
-    cy.contains('You can also choose a program from the top bar and search in that program')
+    cy.contains('You can also choose a program from the top bar and create in that program')
         .should('exist');
 });
 
@@ -291,3 +291,235 @@ And('you see the registration form for the specific category', () => {
         .contains('Saving to Contraceptives Voucher Program in Ngelehun CHC')
         .should('exist');
 });
+
+// New event in Antenatal care visit
+And('you are in the Antenatal care visit registration page', () => {
+    cy.visit('/#/new/programId=lxAQ7Zs9VYR&orgUnitId=DiszpKrYNg8');
+});
+
+And('you submit the form', () => {
+    cy.contains('Save and exit')
+        .click();
+});
+
+And('you see validation error on visit date', () => {
+    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+        .contains('A value is required')
+        .should('exist');
+});
+
+And('you fill in 200 in the hemoglobin', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('200');
+});
+
+And('you see validation error on hemoglobin', () => {
+    cy.get('[data-test="dhis2-capture-data-entry-container"]')
+        .contains('The hemoglobin value cannot be above 99')
+        .should('exist');
+});
+
+And('you fill in the visit date', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('2021-01-01');
+});
+
+And('you fill in the hemoglobin', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('50');
+});
+
+And('you are navigated to the working list', () => {
+    cy.url()
+        .should('eq', `${Cypress.config().baseUrl}/#/programId=lxAQ7Zs9VYR&orgUnitId=DiszpKrYNg8`);
+
+    cy.get('[data-test="event-working-lists"]')
+        .contains('2021-01-01')
+        .should('exist');
+});
+
+
+// New person
+And('you are in the Person registration page', () => {
+    cy.visit('/#/new/trackedEntityTypeId=nEenWmSyUEp&orgUnitId=DiszpKrYNg8');
+});
+
+And('you fill in the first name with value that has duplicates', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('Sarah')
+        .blur();
+});
+
+
+And('you see the possible duplicates button', () => {
+    cy.get('[data-test="dhis2-capture-possible-duplicates-found-button"]')
+        .contains('Possible duplicates found')
+        .should('exist');
+});
+
+
+And('you fill in a unique first name', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`)
+        .blur();
+});
+
+And('you click the save new submit button', () => {
+    cy.contains('Save new')
+        .click();
+});
+
+Then('you are navigated to the Tracker Capture', () => {
+    cy.url().should('include', 'dashboard?tei=');
+    cy.url().should('include', 'ou=DiszpKrYNg8&tracked_entity_type=nEenWmSyUEp');
+});
+
+Then('you see the possible duplicates modal', () => {
+    cy.get('[data-test="dhis2-capture-duplicates-modal"]')
+        .contains('Possible duplicates found')
+        .should('exist');
+});
+
+Then('you submit the form again from the duplicates modal', () => {
+    cy.get('[data-test="dhis2-capture-create-as-new-person"]')
+        .contains('Save as new')
+        .click();
+});
+
+
+When('you click the next page button', () => {
+    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+        .click();
+});
+
+Then('you can see the second page of the results', () => {
+    cy.get('[data-test="dhis2-capture-search-results-list"]')
+        .should('exist');
+    cy.get('[data-test="dhis2-capture-card-list-item"]')
+        .should('have.length.greaterThan', 0);
+    cy.get('[data-test="dhis2-capture-pagination"]')
+        .contains('Page 2')
+        .should('exist');
+});
+
+When('you click the previous page button', () => {
+    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
+        .click();
+});
+
+Then('you can see the first page of the results', () => {
+    cy.get('[data-test="dhis2-capture-search-results-list"]')
+        .should('exist');
+    cy.get('[data-test="dhis2-capture-card-list-item"]')
+        .should('have.length.greaterThan', 0);
+    cy.get('[data-test="dhis2-capture-pagination"]')
+        .contains('Page 1')
+        .should('exist');
+});
+
+And('you click the possible duplicates button', () => {
+    cy.get('[data-test="dhis2-capture-possible-duplicates-found-button"]')
+        .contains('Possible duplicates found')
+        .click();
+});
+
+And('you click hide the modal is not visible', () => {
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains('Hide')
+        .click();
+    cy.get('[data-test="dhis2-capture-search-results-list"]')
+        .should('not.exist');
+});
+
+// New person in WHO RMNCH Tracker
+And('you are in the WHO RMNCH program registration page', () => {
+    cy.visit('/#/new/programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
+});
+And('you are in Child programme registration page', () => {
+    cy.visit('/#/new/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
+And('you fill the form with age 0', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(9)
+        .type('2021-01-01')
+        .blur();
+});
+
+And('you see validation warning on birth date', () => {
+    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+        .contains('The womans age is outside the normal range. With the birthdate entered, the age would be: 0')
+        .should('exist');
+});
+
+And('you fill the WHO RMNCH program registration form with its required unique values', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('2021-01-01')
+        .blur();
+
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(2)
+        .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`);
+
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(3)
+        .type('Gonzales');
+
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(9)
+        .type('1992-01-01')
+        .blur();
+});
+
+And('you fill the WHO RMNCH program registration form with its required values', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('1999-01-01')
+        .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(2)
+        .type('Ava');
+
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(3)
+        .type('Didriksson');
+
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(9)
+        .type('1985-10-01')
+        .blur();
+});
+
+And('you fill in child programme first name with value that has duplicates', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(4)
+        .type('Sarah')
+        .blur();
+});
+
+Then('you are navigated to the WHO RMNCH program in Tracker Capture app', () => {
+    cy.url().should('include', 'dashboard?tei=');
+    cy.url().should('include', 'ou=DiszpKrYNg8&program=WSGAb5XwJ3Y');
+});
+
+And('you fill the Child programme registration form with a first name with value that has duplicates', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('2021-01-01')
+        .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('2021-01-01')
+        .blur();
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(4)
+        .type('Sarah')
+        .blur();
+});
+
