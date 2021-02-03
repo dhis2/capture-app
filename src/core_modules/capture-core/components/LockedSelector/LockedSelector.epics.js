@@ -71,7 +71,7 @@ export const startAgainEpic = (action$: InputObservable) =>
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE),
+        ofType(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE),
         filter(action => action.payload.nextProps.orgUnitId),
         switchMap(action =>
             fetchOrgUnits(action.payload.nextProps.orgUnitId)
@@ -83,7 +83,7 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
 
 export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE),
+        ofType(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE),
         filter(action => !action.payload.nextProps.orgUnitId),
         map(() => setEmptyOrgUnitBasedOnUrl()));
 

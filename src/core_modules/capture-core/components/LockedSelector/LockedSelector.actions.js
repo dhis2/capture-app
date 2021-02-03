@@ -12,9 +12,9 @@ export const lockedSelectorActionTypes = {
     CATEGORY_OPTION_RESET: 'LockedSelector.CategoryOptionReset',
     ALL_CATEGORY_OPTIONS_RESET: 'LockedSelector.AllCategoryOptionsReset',
 
-    CURRENT_SELECTIONS_UPDATE: 'LockedSelector.CurrentSelectionsUpdate',
-    CURRENT_SELECTIONS_VALID: 'LockedSelector.CurrentSelectionsValid',
-    CURRENT_SELECTIONS_INVALID: 'LockedSelector.CurrentSelectionsInvalid',
+    FROM_URL_CURRENT_SELECTIONS_UPDATE: 'LockedSelector.FromUrlCurrentSelectionsUpdate',
+    FROM_URL_CURRENT_SELECTIONS_VALID: 'LockedSelector.FromUrlCurrentSelectionsValid',
+    FROM_URL_CURRENT_SELECTIONS_INVALID: 'LockedSelector.FromUrlCurrentSelectionsInvalid',
     EMPTY_ORG_UNIT_SET: 'LockedSelector.EmptyOrgUnitSet',
 
     NEW_REGISTRATION_PAGE_OPEN: 'LockedSelector.NewRegistrationPageOpen',
@@ -48,9 +48,9 @@ export const openSearchPageFromLockedSelector = () => actionCreator(lockedSelect
 
 // these actions are being triggered only when the user updates the url from the url bar.
 // this way we keep our stored data in sync with the page the user is.
-export const updateSelectionsFromUrl = (data: Object) => actionCreator(lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE)(data);
-export const validSelectionsFromUrl = () => actionCreator(lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID)();
-export const invalidSelectionsFromUrl = (error: string) => actionCreator(lockedSelectorActionTypes.CURRENT_SELECTIONS_INVALID)({ error });
+export const updateSelectionsFromUrl = (data: Object) => actionCreator(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE)(data);
+export const validSelectionsFromUrl = () => actionCreator(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID)();
+export const invalidSelectionsFromUrl = (error: string) => actionCreator(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_INVALID)({ error });
 export const setCurrentOrgUnitBasedOnUrl = (orgUnit: Object) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS)(orgUnit);
 export const errorRetrievingOrgUnitBasedOnUrl = (error: string) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT_ERROR)({ error });
 export const setEmptyOrgUnitBasedOnUrl = () => actionCreator(lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET)();

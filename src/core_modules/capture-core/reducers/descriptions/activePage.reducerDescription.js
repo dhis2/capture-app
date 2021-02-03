@@ -10,7 +10,7 @@ import { actionTypes as viewEventDataEntryActionTypes } from '../../components/P
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 
 export const activePageDesc = createReducerDescription({
-    [lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE]: state => ({
+    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE]: state => ({
         ...state,
         isPageLoading: true,
     }),
@@ -23,13 +23,13 @@ export const activePageDesc = createReducerDescription({
         ...state,
         isPageLoading: false,
     }),
-    [lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID]: state => ({
+    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID]: state => ({
         ...state,
         selectionsError: null,
         isPageLoading: false,
         isDataEntryLoading: false,
     }),
-    [lockedSelectorActionTypes.CURRENT_SELECTIONS_INVALID]: (state, action) => ({
+    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_INVALID]: (state, action) => ({
         ...state,
         isPageLoading: false,
         selectionsError: action.payload,

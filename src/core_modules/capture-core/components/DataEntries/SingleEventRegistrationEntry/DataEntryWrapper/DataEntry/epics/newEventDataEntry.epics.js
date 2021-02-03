@@ -98,7 +98,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
                 return (!!triggeringActionType) && [
                     lockedSelectorActionTypes.ORG_UNIT_ID_SET,
-                    lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID,
+                    lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID,
                 ].includes(triggeringActionType);
             }
             return true;
@@ -148,11 +148,11 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             return page === 'new';
         }),
         filter((action) => {
-            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATE and the underlying action is not SET_ORG_UNIT or CURRENT_SELECTIONS_VALID
+            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATE and the underlying action is not SET_ORG_UNIT or FROM_URL_CURRENT_SELECTIONS_VALID
             const type = action.type;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
                 const triggeringActionType = action.payload && action.payload.triggeringActionType;
-                if (![lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID, lockedSelectorActionTypes.ORG_UNIT_ID_SET]
+                if (![lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID, lockedSelectorActionTypes.ORG_UNIT_ID_SET]
                     .includes(triggeringActionType)) {
                     return false;
                 }
