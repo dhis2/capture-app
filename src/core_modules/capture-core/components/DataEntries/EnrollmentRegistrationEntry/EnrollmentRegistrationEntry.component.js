@@ -14,7 +14,6 @@ import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
 import withErrorMessagePostProcessor from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
-import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 
 const styles = ({ typography }) => ({
     marginTop: {
