@@ -9,10 +9,11 @@ import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
-import type { Props } from './EnrollmentRegistrationEntry.types';
+import type { HOCProps, Props } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
+import withErrorMessagePostProcessor from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 
 const styles = ({ typography }) => ({
     marginTop: {
@@ -75,8 +76,9 @@ const EnrollmentRegistrationEntryPlain =
       );
   };
 
-export const EnrollmentRegistrationEntryComponent: ComponentType<$Diff<Props, CssClasses>> =
+export const EnrollmentRegistrationEntryComponent: ComponentType<$Diff<Props, HOCProps>> =
   compose(
+      withErrorMessagePostProcessor(),
       withLoadingIndicator(() => ({ height: '350px' })),
       withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm }),
       withStyles(styles),

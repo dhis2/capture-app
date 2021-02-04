@@ -7,7 +7,7 @@ import type { ErrorData } from './uniqueTEADuplicate.types';
 type Props = {
     id: string,
     errorData: ErrorData,
-    onLink: (teiId: string, values: Object) => void,
+    onLink?: (teiId?: ?string, values: Object) => void,
 };
 
 type State = {
@@ -39,8 +39,7 @@ class UniqueTEADuplicate extends React.Component<Props, State> {
             existingTeiDialogOpen: false,
         });
         const teiId = this.props.errorData.id;
-        // $FlowFixMe[incompatible-call] automated comment
-        this.props.onLink(teiId, values);
+        this.props.onLink && this.props.onLink(teiId, values);
     }
 
     render() {

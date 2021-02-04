@@ -11,7 +11,6 @@ type Props = {|
     theme: Theme,
     onSave: () => void,
     onGetUnsavedAttributeValues: Function,
-    onPostProcessErrorMessage: Function,
     teiRegistrationMetadata?: TeiRegistration,
 |};
 
@@ -20,7 +19,6 @@ const RelationshipTrackedEntityInstance =
       theme,
       onSave,
       onGetUnsavedAttributeValues,
-      onPostProcessErrorMessage,
       teiRegistrationMetadata = {},
   }: Props) => {
       const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
@@ -36,7 +34,6 @@ const RelationshipTrackedEntityInstance =
               fieldOptions={fieldOptions}
               onSave={onSave}
               onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
-              onPostProcessErrorMessage={onPostProcessErrorMessage}
           />
       );
   };

@@ -8,10 +8,11 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import type { Props } from './TeiRegistrationEntry.types';
+import type { HOCProps, Props } from './TeiRegistrationEntry.types';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
+import withErrorMessagePostProcessor from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>
@@ -82,8 +83,9 @@ const TeiRegistrationEntryPlain =
       );
   };
 
-export const TeiRegistrationEntryComponent: ComponentType<$Diff<Props, CssClasses>> =
+export const TeiRegistrationEntryComponent: ComponentType<$Diff<Props, HOCProps>> =
   compose(
+      withErrorMessagePostProcessor(),
       withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }) => {
           const form = teiRegistrationMetadata && teiRegistrationMetadata.form;
           return form;

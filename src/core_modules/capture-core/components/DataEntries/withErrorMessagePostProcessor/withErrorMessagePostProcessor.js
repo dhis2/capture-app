@@ -3,7 +3,7 @@ import * as React from 'react';
 import UniqueTEADuplicate from './UniqueTEADuplicate/UniqueTEADuplicate.component';
 
 type Props = {
-    onLink: (teiId: string) => void,
+    onLink?: (teiId?: ?string, values: Object) => void,
 };
 
 type CacheItem = {
