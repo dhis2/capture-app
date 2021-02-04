@@ -12,20 +12,14 @@ type Props = {
     programId: string,
     enrollmentMetadata?: Enrollment,
     onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
-    onGetUnsavedAttributeValues: Function,
-    onUpdateField: (innerAction: ReduxAction<any, any>) => void,
-    onStartAsyncUpdateField: Function,
 };
 
 const NewEnrollmentRelationship =
   ({
       theme,
       onSave,
-      onGetUnsavedAttributeValues,
       enrollmentMetadata,
       programId,
-      onUpdateField,
-      onStartAsyncUpdateField,
   }: Props) => {
       const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
       const { trackedEntityType } = enrollmentMetadata || {};
@@ -39,9 +33,6 @@ const NewEnrollmentRelationship =
               saveButtonText={saveButtonText}
               fieldOptions={fieldOptions}
               onSave={onSave}
-              onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
-              onUpdateField={onUpdateField}
-              onStartAsyncUpdateField={onStartAsyncUpdateField}
           />
       );
   };

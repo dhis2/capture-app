@@ -14,6 +14,7 @@ import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
 import withErrorMessagePostProcessor from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 
 const styles = ({ typography }) => ({
     marginTop: {
@@ -36,6 +37,7 @@ const EnrollmentRegistrationEntryPlain =
       saveButtonText,
       classes,
       onSave,
+      onPostProcessErrorMessage,
       ...rest
   }: Props) => {
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
@@ -53,6 +55,10 @@ const EnrollmentRegistrationEntryPlain =
                           formFoundation={formFoundation}
                           enrollmentMetadata={enrollmentMetadata}
                           id={id}
+                          onPostProcessErrorMessage={onPostProcessErrorMessage}
+                          onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future')}
+                          onUpdateField={() => console.log('onUpdateField will be here in the future')}
+                          onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future')}
                           {...rest}
                       />
                       {

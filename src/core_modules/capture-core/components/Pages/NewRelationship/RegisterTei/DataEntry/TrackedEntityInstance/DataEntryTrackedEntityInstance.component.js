@@ -10,7 +10,6 @@ import { useSaveButtonText } from '../useSaveButtonText';
 type Props = {|
     theme: Theme,
     onSave: () => void,
-    onGetUnsavedAttributeValues: Function,
     teiRegistrationMetadata?: TeiRegistration,
 |};
 
@@ -18,7 +17,6 @@ const RelationshipTrackedEntityInstance =
   ({
       theme,
       onSave,
-      onGetUnsavedAttributeValues,
       teiRegistrationMetadata = {},
   }: Props) => {
       const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
@@ -33,7 +31,6 @@ const RelationshipTrackedEntityInstance =
               saveButtonText={saveButtonText}
               fieldOptions={fieldOptions}
               onSave={onSave}
-              onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
           />
       );
   };

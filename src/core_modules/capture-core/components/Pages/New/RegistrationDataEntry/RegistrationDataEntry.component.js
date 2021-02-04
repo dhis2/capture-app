@@ -135,9 +135,6 @@ const RegistrationDataEntryPlain = (
                                     enrollmentMetadata={registrationMetaData}
                                     saveButtonText={'Save new'}
                                     onSave={() => handleSaveAttempt(onSaveWithEnrollment)}
-                                    onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
-                                    onUpdateField={() => console.log('onUpdateField will be here in the future in the future')}
-                                    onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future in the future')}
                                 />
                             </Grid>
                             {
@@ -193,7 +190,6 @@ const RegistrationDataEntryPlain = (
                                     teiRegistrationMetadata={registrationMetaData}
                                     saveButtonText={'Save new'}
                                     onSave={() => handleSaveAttempt(onSaveWithoutEnrollment)}
-                                    onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future in the future')}
                                 />
                             </Grid>
                             {

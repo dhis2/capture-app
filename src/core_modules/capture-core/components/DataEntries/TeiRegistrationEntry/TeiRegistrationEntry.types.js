@@ -9,7 +9,6 @@ export type OwnProps = $ReadOnly<{|
   saveButtonText: string,
   fieldOptions?: Object,
   onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
-  onGetUnsavedAttributeValues: Function,
 |}>
 
 export type HOCProps = {|
