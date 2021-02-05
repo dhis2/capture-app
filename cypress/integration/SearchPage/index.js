@@ -141,7 +141,7 @@ When('for Person you fill in values that will return less than 5 results', () =>
     cy.get('[data-test="dhis2-capture-form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
-        .type('Gonzales')
+        .type('Fis')
         .blur();
 });
 
