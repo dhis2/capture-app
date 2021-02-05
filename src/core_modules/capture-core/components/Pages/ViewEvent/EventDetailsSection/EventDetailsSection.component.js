@@ -4,8 +4,8 @@ import { Info as InfoIcon } from '@material-ui/icons';
 import { withStyles, Tooltip } from '@material-ui/core/';
 import i18n from '@dhis2/d2-i18n';
 import Button from '../../../Buttons/Button.component';
-import ViewEventSection from '../Section/ViewEventSection.component';
-import ViewEventSectionHeader from '../Section/ViewEventSectionHeader.component';
+import { OutputSection } from '../../../DataEntryWidgetOutput/OutputSection/OutputSection.component';
+import { OutputSectionHeader } from '../../../DataEntryWidgetOutput/OutputSection/OutputSectionHeader.component';
 import EditEventDataEntry from './EditEventDataEntry/EditEventDataEntry.container';
 import ViewEventDataEntry from './ViewEventDataEntry/ViewEventDataEntry.container';
 import type { ProgramStage } from '../../../../metaData';
@@ -114,14 +114,14 @@ class EventDetailsSection extends Component<Props> {
         } = this.props;
         return (
             <div className={classes.container}>
-                <ViewEventSection
-                    header={<ViewEventSectionHeader text="Event details" icon={InfoIcon} />}
+                <OutputSection
+                    header={<OutputSectionHeader text="Event details" icon={InfoIcon} />}
                 >
                     <div className={classes.content}>
                         {this.renderDataEntryContainer()}
                         {this.renderActionsContainer()}
                     </div>
-                </ViewEventSection>
+                </OutputSection>
             </div>
         );
     }

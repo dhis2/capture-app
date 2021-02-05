@@ -11,8 +11,8 @@ import {
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/editEventDataEntry.actions';
-import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
-import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
+import { actionTypes as viewEventNotesActionTypes } from '../../components/DataEntryWidgetOutput/OutputSection/NotesSection/viewEventNotes.actions';
+import { assigneeSectionActionTypes } from '../../components/DataEntryWidgetOutput/OutputSection/AssigneeSection';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 
 export const viewEventPageDesc = createReducerDescription({

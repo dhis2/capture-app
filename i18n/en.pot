@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
-"PO-Revision-Date: 2021-02-01T16:04:09.943Z\n"
+"POT-Creation-Date: 2021-02-05T09:15:29.675Z\n"
+"PO-Revision-Date: 2021-02-05T09:15:29.675Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -300,6 +300,18 @@ msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
+msgstr ""
+
+msgid "No one is assigned to this event"
+msgstr ""
+
+msgid "Assign"
+msgstr ""
+
+msgid "Event assigned to {{name}}"
+msgstr ""
+
+msgid "Feedbacks"
 msgstr ""
 
 msgid "Hide"
@@ -779,18 +791,6 @@ msgstr ""
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
-msgstr ""
-
-msgid "No one is assigned to this event"
-msgstr ""
-
-msgid "Assign"
-msgstr ""
-
-msgid "Event assigned to {{name}}"
-msgstr ""
-
-msgid "Feedbacks"
 msgstr ""
 
 msgid "An error occurred loading possible duplicates"

@@ -3,10 +3,10 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import StickyOnScroll from '../Sticky/StickyOnScroll.component';
-import ErrorsSection from './ErrorsSection/ErrorsSection.container';
-import WarningsSection from './WarningsSection/WaningsSection.container';
-import FeedbacksSection from '../Pages/ViewEvent/RightColumn/FeedbacksSection/FeedbacksSection.container';
-import IndicatorsSection from '../Pages/ViewEvent/RightColumn/IndicatorsSection/IndicatorsSection.container';
+import ErrorsSection from './OutputSection/ErrorsSection/ErrorsSection.container';
+import WarningsSection from './OutputSection/WarningsSection/WaningsSection.container';
+import FeedbacksSection from './OutputSection/FeedbacksSection/FeedbacksSection.container';
+import IndicatorsSection from './OutputSection/IndicatorsSection/IndicatorsSection.container';
 
 type Props = {
     onLink: (teiId: string) => void,
