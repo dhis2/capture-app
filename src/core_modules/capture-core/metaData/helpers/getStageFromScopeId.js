@@ -1,5 +1,5 @@
 // @flow
-import { EventProgram, ProgramStage, TrackerProgram } from '../Program';
+import { EventProgram, TrackerProgram, type ProgramStage } from '../Program';
 import { getScopeFromScopeId } from './getScopeFromScopeId';
 
 export const getStageFromScopeId = (scopeId: string): Array<ProgramStage> => {
