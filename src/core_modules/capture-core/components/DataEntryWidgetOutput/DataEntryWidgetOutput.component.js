@@ -32,7 +32,7 @@ const componentContainers = [
     { id: 'IndicatorsSection', Component: IndicatorsSection },
 ];
 
-class DataEntryWidgetOutputComponent extends React.Component<Props> {
+class DataEntryWidgetOutputClass extends React.Component<Props> {
     renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => {
         const { onLink, ...otherProps } = props;
         const passOnProps = container.id === 'WarningsSection' ? props : otherProps;
@@ -56,5 +56,5 @@ class DataEntryWidgetOutputComponent extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(DataEntryWidgetOutputComponent);
+export const DataEntryWidgetOutputComponent = withStyles(getStyles)(DataEntryWidgetOutputClass);
 

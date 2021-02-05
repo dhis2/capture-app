@@ -1,14 +1,17 @@
 // @flow
 import { connect } from 'react-redux';
-import React, { type ComponentType } from 'react';
-import GeneralOutputComponent from './DataEntryWidgetOutput.component';
+import { type ComponentType } from 'react';
+import { compose } from 'redux';
+import { DataEntryWidgetOutputComponent } from './DataEntryWidgetOutput.component';
 import getDataEntryKey from '../DataEntry/common/getDataEntryKey';
+import { withLoadingIndicator } from '../../HOC';
 
 type OwnProps = {|
     onLink?: (teiId: string) => void,
     dataEntryId: string,
     selectedScopeId: string,
 |}
+
 const mapStateToProps = (state: ReduxState, { dataEntryId }) => {
     const registerTeiContainer = state.newRelationshipRegisterTei;
     const ready = !registerTeiContainer.loading;
@@ -21,6 +24,7 @@ const mapStateToProps = (state: ReduxState, { dataEntryId }) => {
 };
 
 export const DataEntryWidgetOutput: ComponentType<OwnProps> =
-  connect(mapStateToProps, () => ({}))(
-      (props: Object) => (props.ready ? <GeneralOutputComponent {...props} /> : null),
+  compose(
+      connect(mapStateToProps, () => ({}))(DataEntryWidgetOutputComponent),
+      withLoadingIndicator(),
   );

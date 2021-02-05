@@ -124,10 +124,11 @@ import {
 } from 'capture-core/components/Pages/ViewEvent/Relationship/ViewEventRelationships.epics';
 
 import {
-    loadNotesForViewEventEpic,
     addNoteForViewEventEpic,
+    loadNotesForViewEventEpic,
     saveNoteForViewEventFailedEpic,
-} from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
+} from '../core_modules/capture-core/components/DataEntryWidgetOutput/OutputSection/NotesSection/viewEventNotes.epics';
+import { saveAssigneeEpic } from '../core_modules/capture-core/components/DataEntryWidgetOutput/OutputSection/AssigneeSection';
 
 import {
     openNewRelationshipRegisterTeiEpic,
@@ -138,7 +139,6 @@ import {
     runRulesOnEnrollmentFieldUpdateEpic,
     runRulesOnEnrollmentDataEntryFieldUpdateEpic,
 } from 'capture-core/components/DataEntries';
-import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
 
 import { loadCoreEpic } from 'capture-core/init';
 import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../components/AppStart';
