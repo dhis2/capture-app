@@ -33,6 +33,7 @@ const styles = theme => ({
     verticalFormContainer: {
         flexGrow: 10,
         maxWidth: '100%',
+        paddingRight: theme.typography.pxToRem(12),
         paddingTop: theme.typography.pxToRem(10),
     },
     verticalFormInnerContainer: {

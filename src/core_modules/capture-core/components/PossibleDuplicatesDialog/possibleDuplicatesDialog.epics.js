@@ -9,12 +9,11 @@ import {
     duplicatesForReviewRetrievalFailed,
 } from './possibleDuplicatesDialog.actions';
 import {
-    scopeTypes, getScopeFromScopeId, EventProgram, TrackerProgram, TrackedEntityType,
+    scopeTypes, getAttributesFromScopeId, getScopeFromScopeId, EventProgram, TrackerProgram, TrackedEntityType,
 } from '../../metaData';
 import getDataEntryKey from '../DataEntry/common/getDataEntryKey';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { getTrackedEntityInstances } from '../../trackedEntityInstances/trackedEntityInstanceRequests';
-import { getAttributesFromScopeId } from '../../metaData/helpers';
 
 function getGroupElementsFromScopeId(scopeId: ?string) {
     if (!scopeId) {

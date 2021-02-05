@@ -22,6 +22,7 @@ export { SearchGroup } from './SearchGroup';
 export { InputSearchGroup } from './InputSearchGroup';
 export { TrackedEntityType, TeiRegistration } from './TrackedEntityType';
 export { SystemSettings } from './SystemSettings';
+
 // helpers
 export {
     getScopeFromScopeId,
@@ -35,6 +36,7 @@ export {
     convertDataElementsValues,
     getEventProgramThrowIfNotFound,
     getEventProgramEventAccess,
+    getAttributesFromScopeId,
     programTypes,
     scopeTypes,
 } from './helpers';
