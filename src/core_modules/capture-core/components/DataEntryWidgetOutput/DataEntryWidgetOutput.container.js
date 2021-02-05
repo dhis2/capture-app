@@ -10,19 +10,14 @@ type OwnProps = {|
     onLink?: (teiId: string) => void,
     dataEntryId: string,
     selectedScopeId: string,
-    eventAccess: { read: boolean, write: boolean },
+    eventAccess?: { read: boolean, write: boolean },
     ready: boolean,
 |}
 
-const mapStateToProps = (state: ReduxState, { dataEntryId, ready }) => {
-    const registerTeiContainer = state.newRelationshipRegisterTei;
-
-    const dataEntryKey = ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;
-    return {
-        ready,
-        dataEntryKey,
-    };
-};
+const mapStateToProps = (state: ReduxState, { dataEntryId, ready }) => ({
+    ready,
+    dataEntryKey: ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null,
+});
 
 export const DataEntryWidgetOutput: ComponentType<OwnProps> =
   compose(
