@@ -15,7 +15,7 @@ import {
 } from './viewEventNotes.actions';
 import {
     actionTypes as viewEventActionTypes,
-} from '../ViewEventComponent/viewEvent.actions';
+} from '../../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import {
     addNote,
     removeNote,
