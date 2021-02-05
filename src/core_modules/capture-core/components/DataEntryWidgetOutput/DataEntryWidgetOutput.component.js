@@ -22,8 +22,7 @@ const getStyles = (theme: Theme) => ({
     stickyOnScroll: {
         position: 'relative',
         flexGrow: 1,
-        width: theme.typography.pxToRem(300),
-        margin: theme.typography.pxToRem(10),
+        minWidth: theme.typography.pxToRem(300),
         marginTop: 0,
     },
 });
@@ -62,5 +61,6 @@ class DataEntryWidgetOutputClass extends React.Component<Props> {
     }
 }
 
-export const DataEntryWidgetOutputComponent = withStyles(getStyles)(DataEntryWidgetOutputClass);
+export const DataEntryWidgetOutputComponent =
+  withStyles(getStyles)(DataEntryWidgetOutputClass);
 

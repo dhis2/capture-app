@@ -1,13 +1,14 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import EventDetails from '../EventDetailsSection/EventDetailsSection.container';
 import Button from '../../../Buttons/Button.component';
-import RightColumnWrapper from './RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
-
+import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
+import { editEventIds } from '../../EditEvent/DataEntry/editEventDataEntry.actions';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -20,7 +21,7 @@ const getStyles = (theme: Theme) => ({
     },
     showAllEvents: {
         paddingLeft: 8,
-        marginBottom: 10,
+        marginTop: 4,
         textTransform: 'none',
         backgroundColor: '#E9EEF4',
         boxShadow: 'none',
@@ -42,7 +43,8 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     onBackToAllEvents: () => void,
-    currentDataEntryKey: string,
+    ready: boolean,
+    currentProgramId: string,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
     classes: {
@@ -61,25 +63,30 @@ class ViewEvent extends Component<Props> {
     }
 
     render() {
-        const { classes, programStage, currentDataEntryKey, eventAccess } = this.props;
+        const { classes, programStage, eventAccess, currentProgramId, ready } = this.props;
         return (
             <div className={classes.container}>
                 <Button className={classes.showAllEvents} variant="raised" onClick={this.handleGoBackToAllEvents}>
                     <ChevronLeft />
-                    {i18n.t('Show all events')}
+                    {i18n.t('Show all eventsasdasd')}
                 </Button>
-                <div className={classes.contentContainer}>
-                    <EventDetails
-                        eventAccess={eventAccess}
-                        programStage={programStage}
-                    />
-                    <RightColumnWrapper
-                        eventAccess={eventAccess}
-                        programStage={programStage}
-                        dataEntryKey={currentDataEntryKey}
-                    />
-                </div>
+                <Grid container>
+                    <Grid item md={7} sm={7} xs={12} >
+                        <EventDetails
+                            eventAccess={eventAccess}
+                            programStage={programStage}
+                        />
+                    </Grid>
 
+                    <Grid item md={3} sm={3} xs={12} >
+                        <DataEntryWidgetOutput
+                            ready={ready}
+                            eventAccess={eventAccess}
+                            dataEntryId={editEventIds.dataEntryId}
+                            selectedScopeId={currentProgramId}
+                        />
+                    </Grid>
+                </Grid>
             </div>
 
         );

@@ -4,7 +4,6 @@ import {
     startGoBackToMainPage,
 } from './viewEvent.actions';
 import ViewEvent from './ViewEvent.component';
-import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 import { editEventIds } from '../../EditEvent/DataEntry/editEventDataEntry.actions';
 import { viewEventIds } from '../EventDetailsSection/eventDetails.actions';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
@@ -18,11 +17,15 @@ const makeMapStateToProps = () => {
     // $FlowFixMe[not-an-object] automated comment
     return (state: ReduxState) => {
         const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
+        const dataEntryId = eventDetailsSection.showEditEvent ? editEventIds.dataEntryId : viewEventIds.dataEntryId;
+        const ready = Boolean(state.dataEntries[dataEntryId] && state.dataEntries[dataEntryId].itemId);
+        debugger;
         return {
+            currentProgramId: state.currentSelections.programId,
             programStage: programStageSelector(state),
             eventAccess: eventAccessSelector(state),
             error: state.viewEventPage.loadError,
-            currentDataEntryKey: eventDetailsSection.showEditEvent ? getDataEntryKey(editEventIds.dataEntryId, editEventIds.itemId) : getDataEntryKey(viewEventIds.dataEntryId, viewEventIds.itemId),
+            ready,
         };
     };
 };
@@ -33,6 +36,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
 export default connect(makeMapStateToProps, mapDispatchToProps)(withErrorMessageHandler()(ViewEvent));

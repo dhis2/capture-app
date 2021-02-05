@@ -57,7 +57,6 @@ class WarningsSection extends React.Component<Props> {
                 collapsable
                 header={this.renderHeader()}
             >
-                heeeeelo
                 {this.renderItems(warnings)}
             </OutputSection>
         ) : null;

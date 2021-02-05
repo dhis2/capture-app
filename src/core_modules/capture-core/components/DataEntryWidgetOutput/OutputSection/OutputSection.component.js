@@ -6,7 +6,8 @@ import { ArrowDropDown, ArrowDropUp } from '@material-ui/icons';
 
 const getStyles = (theme: Theme) => ({
     container: {
-        margin: theme.typography.pxToRem(10),
+        marginRight: theme.typography.pxToRem(12),
+        marginTop: theme.typography.pxToRem(12),
     },
     headerContainer: {
         display: 'flex',

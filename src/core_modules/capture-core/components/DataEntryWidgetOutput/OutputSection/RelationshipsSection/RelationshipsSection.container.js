@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import RelationshipsSection from './RelationshipsSection.component';
 import { openAddRelationship } from '../../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { requestDeleteEventRelationship } from '../../../Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
+import { getEventProgramThrowIfNotFound } from '../../../../metaData';
 
-const mapStateToProps = (state: ReduxState) => {
+const mapStateToProps = (state: ReduxState, { selectedScopeId }) => {
     const relationshipsSection = state.viewEventPage.relationshipsSection || {};
     return {
         eventId: state.viewEventPage.eventId,
         ready: !relationshipsSection.isLoading,
         relationships: state.relationships.viewEvent || [],
         orgUnitId: state.currentSelections.orgUnitId,
+        programStage: getEventProgramThrowIfNotFound(selectedScopeId).stage,
     };
 };
 
