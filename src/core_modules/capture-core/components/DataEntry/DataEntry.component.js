@@ -55,6 +55,7 @@ const styles = theme => ({
         width: theme.typography.pxToRem(300),
         margin: theme.typography.pxToRem(10),
         marginRight: 0,
+        marginLeft: 0,
     },
     verticalOutputsContainer: {
         marginBottom: theme.typography.pxToRem(10),
