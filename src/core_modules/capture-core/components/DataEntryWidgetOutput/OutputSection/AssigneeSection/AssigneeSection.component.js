@@ -14,6 +14,7 @@ const LoadingContents = withLoadingIndicator(null, props => ({ style: props.load
 type Props = {
     programStage: ProgramStage,
     classes: Object,
+    eventAccess: { read: boolean, write: boolean },
 }
 
 const loadingIndicatorStyle = {
@@ -30,24 +31,28 @@ class AssigneeSection extends React.Component<Props> {
     )
 
     render() {
-        const { programStage, ...passOnProps } = this.props;
+        const { programStage, eventAccess, ...passOnProps } = this.props;
 
         if (!programStage.enableUserAssignment) {
             return null;
         }
 
-        return (
-            <OutputSection
-                collapsable
-                header={this.renderHeader()}
-            >
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <LoadingContents
-                    loadingIndicatorStyle={loadingIndicatorStyle}
-                    {...passOnProps}
-                />
-            </OutputSection>
-        );
+        return (<>
+            {
+                eventAccess &&
+                    <OutputSection
+                        collapsable
+                        header={this.renderHeader()}
+                    >
+                        {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                        <LoadingContents
+                            loadingIndicatorStyle={loadingIndicatorStyle}
+                            eventAccess={eventAccess}
+                            {...passOnProps}
+                        />
+                    </OutputSection>
+            }
+        </>);
     }
 }
 

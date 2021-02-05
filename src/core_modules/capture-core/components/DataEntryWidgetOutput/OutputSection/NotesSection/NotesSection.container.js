@@ -2,15 +2,17 @@
 import { connect } from 'react-redux';
 import NotesSection from './NotesSection.component';
 import { requestSaveEventNote, updateEventNoteField } from './viewEventNotes.actions';
-import { getEventProgramThrowIfNotFound } from '../../../../metaData';
+import { getStageFromScopeId } from '../../../../metaData/helpers/getStageFromScopeId';
 
 const mapStateToProps = (state: ReduxState, { selectedScopeId }) => {
     const notesSection = state.viewEventPage.notesSection || {};
+    const [programStage] = getStageFromScopeId(selectedScopeId);
+
     return {
         notes: state.notes.viewEvent || [],
         ready: !notesSection.isLoading,
         fieldValue: notesSection.fieldValue,
-        programStage: getEventProgramThrowIfNotFound(selectedScopeId).stage,
+        programStage,
     };
 };
 

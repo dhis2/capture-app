@@ -2,13 +2,14 @@
 import { connect } from 'react-redux';
 import AssigneeSection from './AssigneeSection.component';
 import { setAssignee } from './assigneeSection.actions';
-import { getEventProgramThrowIfNotFound } from '../../../../metaData';
+import { getStageFromScopeId } from '../../../../metaData';
 
 const mapStateToProps = (state: ReduxState, { selectedScopeId }) => {
     const assigneeSection = state.viewEventPage.assigneeSection || {};
+    const [programStage] = getStageFromScopeId(selectedScopeId);
 
     return {
-        programStage: getEventProgramThrowIfNotFound(selectedScopeId).stage,
+        programStage,
         assignee: (!assigneeSection.isLoading) ?
             state.viewEventPage.loadedValues.eventContainer.event.assignee :
             undefined,

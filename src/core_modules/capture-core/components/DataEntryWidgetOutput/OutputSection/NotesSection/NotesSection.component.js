@@ -20,7 +20,7 @@ type Props = {
     fieldValue: ?string,
     ready: boolean,
     programStage: ProgramStage,
-    eventAccess: any,
+    eventAccess?: { read: boolean, write: boolean },
 }
 
 const loadingIndicatorStyle = {
@@ -60,24 +60,27 @@ class NotesSection extends React.Component<Props> {
 
     render() {
         const { notes, fieldValue, onAddNote, ready, programStage, eventAccess } = this.props;
-        return (
-            <OutputSection
-                collapsable
-                header={this.renderHeader()}
-            >
-                <LoadingNotes
-                    loadingIndicatorStyle={loadingIndicatorStyle}
-                    ready={ready}
-                    notes={notes}
-                    entityAccess={eventAccess}
-                    addNotAllowed={!programStage.stageForm.access.data.write}
-                    onAddNote={onAddNote}
-                    onBlur={this.props.onUpdateNoteField}
-                    value={fieldValue}
-                    smallMainButton
-                />
-            </OutputSection>
-        );
+        return (<>
+            {
+                eventAccess &&
+                <OutputSection
+                    collapsable
+                    header={this.renderHeader()}
+                >
+                    <LoadingNotes
+                        loadingIndicatorStyle={loadingIndicatorStyle}
+                        ready={ready}
+                        notes={notes}
+                        entityAccess={eventAccess}
+                        addNotAllowed={!programStage.stageForm.access.data.write}
+                        onAddNote={onAddNote}
+                        onBlur={this.props.onUpdateNoteField}
+                        value={fieldValue}
+                        smallMainButton
+                    />
+                </OutputSection>
+            }
+        </>);
     }
 }
 

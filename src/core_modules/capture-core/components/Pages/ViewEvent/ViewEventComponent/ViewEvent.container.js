@@ -19,7 +19,6 @@ const makeMapStateToProps = () => {
         const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
         const dataEntryId = eventDetailsSection.showEditEvent ? editEventIds.dataEntryId : viewEventIds.dataEntryId;
         const ready = Boolean(state.dataEntries[dataEntryId] && state.dataEntries[dataEntryId].itemId);
-        debugger;
         return {
             currentProgramId: state.currentSelections.programId,
             programStage: programStageSelector(state),

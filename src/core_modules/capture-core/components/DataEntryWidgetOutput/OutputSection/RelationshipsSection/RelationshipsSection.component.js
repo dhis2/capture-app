@@ -93,7 +93,7 @@ class RelationshipsSection extends React.Component<Props> {
         const writableRelationshipTypes =
             programStage.relationshipTypesWhereStageIsFrom.filter(rt => rt.access.data.write);
 
-        return hasRelationshipTypes && (
+        return hasRelationshipTypes && eventAccess && (
             <OutputSection
                 collapsable
                 header={this.renderHeader()}

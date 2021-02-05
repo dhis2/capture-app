@@ -68,7 +68,7 @@ class ViewEvent extends Component<Props> {
             <div className={classes.container}>
                 <Button className={classes.showAllEvents} variant="raised" onClick={this.handleGoBackToAllEvents}>
                     <ChevronLeft />
-                    {i18n.t('Show all eventsasdasd')}
+                    {i18n.t('Show all event')}
                 </Button>
                 <Grid container>
                     <Grid item md={7} sm={7} xs={12} >
