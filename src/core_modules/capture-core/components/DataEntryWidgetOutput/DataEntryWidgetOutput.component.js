@@ -7,6 +7,9 @@ import ErrorsSection from './OutputSection/ErrorsSection/ErrorsSection.container
 import WarningsSection from './OutputSection/WarningsSection/WaningsSection.container';
 import FeedbacksSection from './OutputSection/FeedbacksSection/FeedbacksSection.container';
 import IndicatorsSection from './OutputSection/IndicatorsSection/IndicatorsSection.container';
+import AssigneeSection from './OutputSection/AssigneeSection/AssigneeSection.container';
+import RelationshipsSection from './OutputSection/RelationshipsSection/RelationshipsSection.container';
+import NotesSection from './OutputSection/NotesSection/NotesSection.container';
 
 type Props = {
     onLink: (teiId: string) => void,
@@ -30,6 +33,9 @@ const componentContainers = [
     { id: 'WarningsSection', Component: WarningsSection },
     { id: 'FeedbacksSection', Component: FeedbacksSection },
     { id: 'IndicatorsSection', Component: IndicatorsSection },
+    { id: 'AssigneeSection', Component: AssigneeSection },
+    { id: 'RelationshipsSection', Component: RelationshipsSection },
+    { id: 'NotesSection', Component: NotesSection },
 ];
 
 class DataEntryWidgetOutputClass extends React.Component<Props> {
