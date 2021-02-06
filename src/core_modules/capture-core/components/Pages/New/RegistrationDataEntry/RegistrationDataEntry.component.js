@@ -146,6 +146,7 @@ const RegistrationDataEntryPlain = (
                                 <Grid item>
                                     <div className={classes.marginTop}>
                                         <DataEntryWidgetOutput
+                                            ready={dataEntryIsReady}
                                             selectedScopeId={selectedScopeId}
                                             dataEntryId={dataEntryId}
                                         />
@@ -203,6 +204,7 @@ const RegistrationDataEntryPlain = (
                                 <Grid item>
                                     <div className={classes.marginTop}>
                                         <DataEntryWidgetOutput
+                                            ready={dataEntryIsReady}
                                             dataEntryId={dataEntryId}
                                             selectedScopeId={selectedScopeId}
                                         />

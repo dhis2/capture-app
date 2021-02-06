@@ -34,6 +34,7 @@ const RegisterTeiPlain = ({
     trackedEntityName,
     newRelationshipProgramId,
     classes,
+    ready,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
 
@@ -89,6 +90,7 @@ const RegisterTeiPlain = ({
                 />
             </div>
             <DataEntryWidgetOutput
+                ready={ready}
                 dataEntryId={dataEntryId}
                 selectedScopeId={newRelationshipProgramId}
                 onLink={onLink}
