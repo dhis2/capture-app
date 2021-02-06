@@ -655,11 +655,11 @@ msgid "Save as new"
 msgstr "Uložit jako nové"
 
 msgid "Create for"
-msgstr ""
+msgstr "Vytvořit pro"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
-msgstr ""
+msgstr "Můžete také vybrat program z horní lišty a vytvořit v něm program"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
