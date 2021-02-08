@@ -16,5 +16,6 @@ export {
     resetOrgUnitId,
     fetchOrgUnitEpic,
     resetTeiSelectionEpic,
+    resetEnrollmentSelectionEpic,
 } from './LockedSelector.epics';
 export { LockedSelector } from './LockedSelector.container';

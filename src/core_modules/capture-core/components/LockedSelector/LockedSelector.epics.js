@@ -138,7 +138,7 @@ export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStor
         map(() => {
             const { query: { programId, orgUnitId } } = store.value.router.location;
 
-            return push(`/${urlArguments({ programId, orgUnitId })}`);
+            return push(`/?${urlArguments({ programId, orgUnitId })}`);
         }),
     );
 
@@ -149,5 +149,14 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
             const { query: { programId, orgUnitId, teiId } } = store.value.router.location;
 
             return push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
+        }),
+    );
+
+export const resetEnrollmentSelectionEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET),
+        map(() => {
+            const { query: { orgUnitId, programId, teiId } } = store.value.router.location;
+            return push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId })}`);
         }),
     );
