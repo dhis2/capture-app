@@ -263,7 +263,7 @@ const selectedEventProgram = ['Selected Program', 'Antenatal care visit'];
 const emptyProgramSelection = ['Program', 'Select program'];
 const selectedOrgUnit = ['Selected registering unit', 'Taninahun (Malen) CHP'];
 const emptyOrgUnitSelection = ['Registering Organisation Unit'];
-const selectedTei = ['Selected person', 'Carlos Cruz'];
+const selectedTei = ['Selected', 'Carlos Cruz'];
 const selectedEnrollment = ['Selected Enrollment', '2018-08-07 15:47'];
 const emptyEnrollmentSelection = ['Enrollment', 'Select...'];
 
@@ -369,7 +369,7 @@ And('you select the Child Programme', () => {
 
 And('you see message explaining there are no enrollments for this program', () => {
     cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
-        .contains('There are no enrollments for this program.');
+        .contains('There are no enrollments');
 });
 
 And('you select the Antenatal care visit', () => {
