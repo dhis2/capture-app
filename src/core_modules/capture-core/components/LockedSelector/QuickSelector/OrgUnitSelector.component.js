@@ -131,7 +131,7 @@ class OrgUnitSelector extends Component<Props, State> {
                         <div className={this.props.classes.selectedItemContainer}>
                             <div>{this.props.selectedOrgUnit.name}</div>
                             <div className={this.props.classes.selectedItemClear}>
-                                <IconButton className={this.props.classes.selectedButton} onClick={() => this.props.onReset()}>
+                                <IconButton data-test="reset-selection-button" className={this.props.classes.selectedButton} onClick={() => this.props.onReset()}>
                                     <ClearIcon className={this.props.classes.selectedButtonIcon} />
                                 </IconButton>
                             </div>
