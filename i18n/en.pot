@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-02-08T15:33:42.044Z\n"
-"PO-Revision-Date: 2021-02-08T15:33:42.044Z\n"
+"POT-Creation-Date: 2021-02-08T17:46:26.582Z\n"
+"PO-Revision-Date: 2021-02-08T17:46:26.582Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -522,22 +522,22 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
+msgid "Program"
+msgstr ""
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
 msgid "Selected Program"
 msgstr ""
 
 msgid "Some programs are being filtered."
 msgstr ""
 
-msgid "Show all"
-msgstr ""
-
-msgid "Program"
-msgstr ""
-
 msgid "Select program"
-msgstr ""
-
-msgid "No programs available."
 msgstr ""
 
 msgid "Selected"
