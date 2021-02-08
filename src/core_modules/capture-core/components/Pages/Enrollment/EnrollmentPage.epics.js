@@ -30,9 +30,10 @@ const teiQuery = id => ({
     },
 });
 
-const fetchTeiStream = query =>
-    from(query).pipe(
-        map(({ attributes, enrollments, trackedEntityType }) => {
+const fetchTeiStream = (teiId, querySingleResource) =>
+    from(querySingleResource(teiQuery(teiId)))
+        .pipe(
+            map(({ attributes, enrollments, trackedEntityType }) => {
             const teiDisplayName = deriveSelectedName(attributes);
             const enrollmentsSortedByDate = sortByDate(enrollments);
             const { name: tetDisplayName } = getTrackedEntityTypeThrowIfNotFound(trackedEntityType);
@@ -44,10 +45,10 @@ const fetchTeiStream = query =>
             });
         }),
         catchError(() => {
-            const error = i18n.t("Tracked entity instance with id '{{teiId}}' doesn't exist", { teiId });
-            return of(showErrorViewOnEnrollmentPage({ error }));
-        }),
-    );
+                const error = i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId });
+                return of(showErrorViewOnEnrollmentPage({ error }));
+            }),
+        );
 
 export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -77,7 +78,7 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
                     flatMap(({ trackedEntityInstance, program, orgUnit }) => (
                         urlCompleted
                             ?
-                            fetchTeiStream(querySingleResource(teiQuery(trackedEntityInstance)))
+                            fetchTeiStream(trackedEntityInstance, querySingleResource)
                             :
                             of(openEnrollmentPage({
                                 programId: program,
@@ -101,7 +102,7 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
         flatMap(() => {
             const { query: { teiId } } = store.value.router.location;
 
-            return fetchTeiStream(querySingleResource(teiQuery(teiId)));
+            return fetchTeiStream(teiId, querySingleResource);
         }),
     );
 

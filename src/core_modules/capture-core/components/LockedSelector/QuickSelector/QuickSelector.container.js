@@ -41,7 +41,7 @@ const mapStateToProps = (state: Object) => {
         selectedTetName: tetDisplayName,
         selectedEnrollmentId: enrollmentId,
         enrollmentsAsOptions,
-        enrollmentLockedSelectReady: enrollments && enrollments.length,
+        enrollmentLockedSelectReady: enrollments && Array.isArray(enrollments),
     };
 };
 
