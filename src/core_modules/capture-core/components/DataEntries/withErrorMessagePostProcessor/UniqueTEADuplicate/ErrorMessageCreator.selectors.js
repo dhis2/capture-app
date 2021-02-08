@@ -4,11 +4,11 @@ import { createSelector } from 'reselect';
 import {
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
-} from '../../../../../../metaData';
+} from '../../../../metaData';
 import type {
     TrackedEntityType,
     TrackerProgram,
-} from '../../../../../../metaData';
+} from '../../../../metaData';
 
 const TETIdSelector = state => state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
 
