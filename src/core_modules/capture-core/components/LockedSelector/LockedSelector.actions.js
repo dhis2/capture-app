@@ -13,6 +13,7 @@ export const lockedSelectorActionTypes = {
     ALL_CATEGORY_OPTIONS_RESET: 'LockedSelector.AllCategoryOptionsReset',
     TEI_SELECTION_RESET: 'LockedSelector.TeiSelectionReset',
     ENROLLMENT_SELECTION_SET: 'LockedSelector.EnrollmentSelectionSet',
+    ENROLLMENT_SELECTION_RESET: 'LockedSelector.EnrollmentSelectionReset',
 
     FROM_URL_CURRENT_SELECTIONS_UPDATE: 'LockedSelector.FromUrlCurrentSelectionsUpdate',
     FROM_URL_CURRENT_SELECTIONS_VALID: 'LockedSelector.FromUrlCurrentSelectionsValid',
@@ -66,6 +67,9 @@ export const resetTeiSelection = () =>
 
 export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
     actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET)({ enrollmentId });
+
+export const resetEnrollmentSelection = () =>
+    actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET)();
 
 // batch related actions
 export const resetProgramIdBatchAction = (actions: Array<Object>, pageToPush: string) =>
