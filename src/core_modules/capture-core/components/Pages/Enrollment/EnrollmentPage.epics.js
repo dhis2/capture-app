@@ -31,26 +31,13 @@ const deriveSelectedTeiName = (attributes = {}) =>
     attributes.reduce((acc, { value: dataElementValue }) =>
         (acc ? `${acc} ${dataElementValue}` : dataElementValue), '');
 
-const deriveSelectedName = (attributes, dataElements = []) => {
-    const [firstId, secondId] = dataElements
-        .filter(({ displayInReports }) => displayInReports)
-        .map(({ id }) => id);
-
-
-    const { value: firstValue = '' } = attributes.find(({ attribute }) => attribute === firstId);
-    const { value: secondValue = '' } = attributes.find(({ attribute }) => attribute === secondId);
-    return `${firstValue}${firstValue && ' '}${secondValue}`;
-};
-
 const fetchTeiStream = (teiId, querySingleResource) =>
     from(querySingleResource(teiQuery(teiId)))
         .pipe(
             map(({ attributes, enrollments }) => {
                 const enrollmentsSortedByDate = sortByDate(enrollments);
                 const teiDisplayName = deriveSelectedTeiName(attributes);
-                // const dataElements = getAttributesFromScopeId(programId);
 
-                debugger;
                 return successfulFetchingEnrollmentPageInformationFromUrl({
                     teiDisplayName,
                     enrollmentsSortedByDate,
@@ -68,7 +55,7 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
         map(() => {
             const { query: { enrollmentId, teiId } } = store.value.router.location;
 
-            if (enrollmentId && teiId) {
+            if (enrollmentId) {
                 return startFetchingTeiFromEnrollmentId();
             } else if (teiId) {
                 return startFetchingTeiFromTeiId();
