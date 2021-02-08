@@ -220,7 +220,7 @@ class ProgramSelector extends Component<Props> {
                             {selectedProgram.name}
                         </div>
                     </div>
-                    <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
+                    <IconButton data-test="reset-selection-button" className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
                         <ClearIcon className={this.props.classes.selectedButtonIcon} />
                     </IconButton>
                 </div>
@@ -250,7 +250,7 @@ class ProgramSelector extends Component<Props> {
                                                 return (
                                                     <div className={classes.selectedText}>
                                                         <div className={classes.selectedCategoryNameContainer}>{selectedCategories[category.id].name}</div>
-                                                        <IconButton className={classes.selectedButton} onClick={() => this.handleResetCategoryOption(category.id)}>
+                                                        <IconButton data-test="reset-selection-button" className={classes.selectedButton} onClick={() => this.handleResetCategoryOption(category.id)}>
                                                             <ClearIcon className={classes.selectedButtonIcon} />
                                                         </IconButton>
                                                     </div>
