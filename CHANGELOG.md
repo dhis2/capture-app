@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/dhis2/capture-app/compare/v1.8.1...v1.8.2) (2021-02-05)
+
+
+### Bug Fixes
+
+* cypress - reduces time on failing tests ([#1486](https://github.com/dhis2/capture-app/issues/1486)) ([501ce1c](https://github.com/dhis2/capture-app/commit/501ce1c9b0e06a2e26a929514901af0a65753b8f))
+
 ## [1.8.1](https://github.com/dhis2/capture-app/compare/v1.8.0...v1.8.1) (2021-02-02)
 
 
