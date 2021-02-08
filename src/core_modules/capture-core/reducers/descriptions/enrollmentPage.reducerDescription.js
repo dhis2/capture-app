@@ -10,6 +10,7 @@ const {
     ENROLLMENT_PAGE_INFORMATION_LOADING_FETCH,
     ENROLLMENT_PAGE_INFORMATION_ERROR_FETCH,
     ENROLLMENT_PAGE_INFORMATION_SUCCESS_FETCH,
+    ENROLLMENT_PAGE_CLEAN,
 } = enrollmentPageActionTypes;
 
 export const enrollmentPageDesc = createReducerDescription({
@@ -28,4 +29,5 @@ export const enrollmentPageDesc = createReducerDescription({
           enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
           trackedEntityInstanceDisplayName: selectedName,
       }),
+    [ENROLLMENT_PAGE_CLEAN]: () => initialReducerValue,
 }, 'enrollmentPage', initialReducerValue);

@@ -4,13 +4,15 @@ import type { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
 import type { EnrollmentPageStatus } from './EnrollmentPage.types';
-import { startFetchingEnrollmentPageInformation } from './EnrollmentPage.actions';
+import { cleanEnrollmentPage, startFetchingEnrollmentPageInformation } from './EnrollmentPage.actions';
 
 export const EnrollmentPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
 
     const enrollmentId: string =
       useSelector(({ router: { location: { query } } }) => query.enrollmentId);
+    const teiId: string =
+      useSelector(({ router: { location: { query } } }) => query.teiId);
     const enrollments: Object =
       useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
 
@@ -21,8 +23,11 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     [
         enrollments,
         enrollmentId,
+        teiId,
         dispatch,
     ]);
+    useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch]);
+
     const enrollmentPageStatus: EnrollmentPageStatus =
       useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
 
