@@ -15,7 +15,6 @@ import {
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
 import { urlArguments } from '../../../utils/url';
-import { getAttributesFromScopeId } from '../../../metaData/helpers';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
@@ -47,7 +46,7 @@ const fetchTeiStream = (teiId, querySingleResource) =>
                 // const dataElements = getAttributesFromScopeId(programId);
                 // const teiDisplayName = deriveSelectedName(attributes, dataElements);
 
-                debugger
+                debugger;
                 return successfulFetchingEnrollmentPageInformationFromUrl({
                     teiDisplayName: 'Anna Jones',
                     enrollmentsSortedByDate,
@@ -65,7 +64,7 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
         map(() => {
             const { query: { enrollmentId, teiId } } = store.value.router.location;
 
-            if (enrollmentId) {
+            if (enrollmentId && teiId) {
                 return startFetchingTeiFromEnrollmentId();
             } else if (teiId) {
                 return startFetchingTeiFromTeiId();
