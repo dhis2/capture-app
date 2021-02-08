@@ -27,6 +27,10 @@ const teiQuery = id => ({
     },
 });
 
+const deriveSelectedTeiName = (attributes = {}) =>
+    attributes.reduce((acc, { value: dataElementValue }) =>
+        (acc ? `${acc} ${dataElementValue}` : dataElementValue), '');
+
 const deriveSelectedName = (attributes, dataElements = []) => {
     const [firstId, secondId] = dataElements
         .filter(({ displayInReports }) => displayInReports)
@@ -43,12 +47,12 @@ const fetchTeiStream = (teiId, querySingleResource) =>
         .pipe(
             map(({ attributes, enrollments }) => {
                 const enrollmentsSortedByDate = sortByDate(enrollments);
+                const teiDisplayName = deriveSelectedTeiName(attributes);
                 // const dataElements = getAttributesFromScopeId(programId);
-                // const teiDisplayName = deriveSelectedName(attributes, dataElements);
 
                 debugger;
                 return successfulFetchingEnrollmentPageInformationFromUrl({
-                    teiDisplayName: 'Anna Jones',
+                    teiDisplayName,
                     enrollmentsSortedByDate,
                 });
             }),
