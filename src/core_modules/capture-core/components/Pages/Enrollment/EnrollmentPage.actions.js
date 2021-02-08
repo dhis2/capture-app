@@ -54,9 +54,9 @@ export const showMissingEnrollmentMessageOnEnrollmentPage = () =>
 export const showErrorViewOnEnrollmentPage = ({ error }: { error: string }) =>
     actionCreator(enrollmentPageActionTypes.INFORMATION_ERROR_FETCH)({ error });
 
-export const successfulFetchingEnrollmentPageInformationFromUrl = ({ teiDisplayName, tetDisplayName, enrollmentsSortedByDate }: Object) =>
+export const successfulFetchingEnrollmentPageInformationFromUrl = ({ teiDisplayName, enrollmentsSortedByDate }: Object) =>
     actionCreator(enrollmentPageActionTypes.INFORMATION_SUCCESS_FETCH)(
-        { teiDisplayName, tetDisplayName, enrollmentsSortedByDate });
+        { teiDisplayName, enrollmentsSortedByDate });
 
 export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }: Object) =>
     actionCreator(enrollmentPageActionTypes.PAGE_OPEN)({ programId, orgUnitId, teiId, enrollmentId });

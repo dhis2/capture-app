@@ -32,14 +32,12 @@ export const enrollmentPageDesc = createReducerDescription({
         {
             enrollmentsSortedByDate,
             teiDisplayName,
-            tetDisplayName,
         },
       }) => ({
           ...state,
           enrollments: enrollmentsSortedByDate,
           enrollmentPageStatus: enrollmentPageStatuses.DEFAULT,
           teiDisplayName,
-          tetDisplayName,
       }),
     [DEFAULT_VIEW]:
       state => ({

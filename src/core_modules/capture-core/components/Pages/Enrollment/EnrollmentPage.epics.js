@@ -15,12 +15,10 @@ import {
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
 import { urlArguments } from '../../../utils/url';
-import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData/helpers';
+import { getAttributesFromScopeId } from '../../../metaData/helpers';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
-const deriveSelectedName = (attributes = {}) => attributes.reduce((acc, { value: dataElementValue }) =>
-    (acc ? `${acc} ${dataElementValue}` : dataElementValue), '');
 
 const teiQuery = id => ({
     resource: 'trackedEntityInstances',
@@ -30,21 +28,31 @@ const teiQuery = id => ({
     },
 });
 
-const fetchTeiStream = (teiId, querySingleResource) =>
+const deriveSelectedName = (attributes, dataElements = []) => {
+    const [firstId, secondId] = dataElements
+        .filter(({ displayInReports }) => displayInReports)
+        .map(({ id }) => id);
+
+
+    const { value: firstValue = '' } = attributes.find(({ attribute }) => attribute === firstId);
+    const { value: secondValue = '' } = attributes.find(({ attribute }) => attribute === secondId);
+    return `${firstValue}${firstValue && ' '}${secondValue}`;
+};
+
+const fetchTeiStream = (teiId, programId, querySingleResource) =>
     from(querySingleResource(teiQuery(teiId)))
         .pipe(
-            map(({ attributes, enrollments, trackedEntityType }) => {
-            const teiDisplayName = deriveSelectedName(attributes);
-            const enrollmentsSortedByDate = sortByDate(enrollments);
-            const { name: tetDisplayName } = getTrackedEntityTypeThrowIfNotFound(trackedEntityType);
+            map(({ attributes, enrollments }) => {
+                const enrollmentsSortedByDate = sortByDate(enrollments);
+                const dataElements = getAttributesFromScopeId(programId);
+                const teiDisplayName = deriveSelectedName(attributes, dataElements);
 
-            return successfulFetchingEnrollmentPageInformationFromUrl({
-                teiDisplayName,
-                tetDisplayName,
-                enrollmentsSortedByDate,
-            });
-        }),
-        catchError(() => {
+                return successfulFetchingEnrollmentPageInformationFromUrl({
+                    teiDisplayName,
+                    enrollmentsSortedByDate,
+                });
+            }),
+            catchError(() => {
                 const error = i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId });
                 return of(showErrorViewOnEnrollmentPage({ error }));
             }),
@@ -78,7 +86,7 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
                     flatMap(({ trackedEntityInstance, program, orgUnit }) => (
                         urlCompleted
                             ?
-                            fetchTeiStream(trackedEntityInstance, querySingleResource)
+                            fetchTeiStream(trackedEntityInstance, program, querySingleResource)
                             :
                             of(openEnrollmentPage({
                                 programId: program,
@@ -100,9 +108,9 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH),
         flatMap(() => {
-            const { query: { teiId } } = store.value.router.location;
+            const { query: { teiId, programId } } = store.value.router.location;
 
-            return fetchTeiStream(teiId, querySingleResource);
+            return fetchTeiStream(teiId, programId, querySingleResource);
         }),
     );
 
