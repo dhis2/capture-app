@@ -132,7 +132,7 @@ export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStor
         map(() => {
             const { query: { programId, orgUnitId } } = store.value.router.location;
 
-            return push(`/${urlArguments({ programId, orgUnitId })}`);
+            return push(`/?${urlArguments({ programId, orgUnitId })}`);
         }),
     );
 
