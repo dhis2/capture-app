@@ -11,10 +11,11 @@ export {
     setOrgUnitIdEpic,
     setProgramIdEpic,
     startAgainEpic,
+    setEnrollmentSelectionEpic,
     resetProgramIdEpic,
     resetOrgUnitId,
     fetchOrgUnitEpic,
     resetTeiSelectionEpic,
-    setEnrollmentSelectionEpic,
+    resetEnrollmentSelectionEpic,
 } from './LockedSelector.epics';
 export { LockedSelector } from './LockedSelector.container';
