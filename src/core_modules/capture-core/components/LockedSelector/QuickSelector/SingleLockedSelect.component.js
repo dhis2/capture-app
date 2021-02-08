@@ -105,7 +105,7 @@ const SingleLockedSelectPlain =
                           <div>{label}</div>
 
                           <div className={classes.selectedItemClear}>
-                              <IconButton className={classes.selectedButton} onClick={handleOnClear}>
+                              <IconButton data-test="reset-selection-button" className={classes.selectedButton} onClick={handleOnClear}>
                                   <ClearIcon className={classes.selectedButtonIcon} />
                               </IconButton>
                           </div>
