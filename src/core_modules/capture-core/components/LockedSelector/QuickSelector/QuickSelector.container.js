@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import QuickSelector from './QuickSelector.component';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
-import { resetTeiSelection, setEnrollmentSelection } from '../LockedSelector.actions';
-import { enrollmentPageStatuses } from '../../Pages/Enrollment/EnrollmentPage.constants';
+import {
+    resetEnrollmentSelection,
+    resetTeiSelection,
+    setEnrollmentSelection,
+} from '../LockedSelector.actions';
 import { deriveUrlQueries } from '../../../utils/url';
 
 const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
@@ -24,20 +27,21 @@ const mapStateToProps = (state: Object) => {
         router: { location: { pathname, query: { enrollmentId } } },
         currentSelections: { categoriesMeta },
         organisationUnits,
-        enrollmentPage,
+        enrollmentPage: { enrollments, teiDisplayName, tetDisplayName },
     } = state;
 
-    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollmentPage.enrollments, programId);
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
     return {
         selectedProgramId: programId,
         selectedOrgUnitId: orgUnitId,
         selectedCategories: categoriesMeta,
         selectedOrgUnit: orgUnitId ? organisationUnits[orgUnitId] : null,
         currentPage: pathname.substring(1),
-        selectedTeiName: enrollmentPage.trackedEntityInstanceDisplayName,
+        selectedTeiName: teiDisplayName,
+        selectedTetName: tetDisplayName,
         selectedEnrollmentId: enrollmentId,
         enrollmentsAsOptions,
-        enrollmentLockedSelectReady: enrollmentPage.enrollmentPageStatus !== enrollmentPageStatuses.LOADING,
+        enrollmentLockedSelectReady: enrollments && enrollments.length,
     };
 };
 
@@ -48,6 +52,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onEnrollmentSelectionSet: (enrollmentId) => {
         dispatch(setEnrollmentSelection({ enrollmentId }));
+    },
+    onEnrollmentSelectionReset: () => {
+        dispatch(resetEnrollmentSelection());
     },
 });
 
