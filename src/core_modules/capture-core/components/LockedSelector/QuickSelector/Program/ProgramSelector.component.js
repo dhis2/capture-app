@@ -40,7 +40,7 @@ const styles = (theme: Theme) => ({
         marginTop: 6,
         marginBottom: 4,
         padding: 5,
-        borderLeft: '2px solid #147cd7',
+        borderLeft: `2px solid ${colors.blue600}`,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
