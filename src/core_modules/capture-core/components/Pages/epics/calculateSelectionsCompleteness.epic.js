@@ -38,7 +38,7 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
         ofType(
             lockedSelectorActionTypes.PROGRAM_ID_SET,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
-            lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID,
+            lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,
         ),

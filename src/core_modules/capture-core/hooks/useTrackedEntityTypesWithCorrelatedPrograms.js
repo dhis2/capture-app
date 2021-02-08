@@ -1,11 +1,12 @@
 // @flow
 import { useMemo } from 'react';
 import { programCollection } from '../metaDataMemoryStores';
-import { TrackerProgram } from '../metaData/Program';
+import { type Access, TrackerProgram } from '../metaData';
 
 type TrackedEntityTypesWithCorrelatedPrograms = $Exact<$ReadOnly<{
     [elementId: string]: {|
         +trackedEntityTypeId: string,
+        +trackedEntityTypeAccess: Access,
         +trackedEntityTypeName: string,
         +programs: Array<{|
             +programName: string,
@@ -24,6 +25,7 @@ export const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityType
                 name: programName,
                 trackedEntityType: {
                     id: trackedEntityTypeId,
+                    access: trackedEntityTypeAccess,
                     name: trackedEntityTypeName,
                     searchGroups: trackedEntityTypeSearchGroups,
                     teiRegistration: { form, inputSearchGroups },
@@ -37,6 +39,7 @@ export const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityType
                     ...acc,
                     [trackedEntityTypeId]: {
                         trackedEntityTypeId,
+                        trackedEntityTypeAccess,
                         trackedEntityTypeName,
                         trackedEntityTypeSearchGroups,
                         trackedEntityTypeTeiRegistration: { form, inputSearchGroups },

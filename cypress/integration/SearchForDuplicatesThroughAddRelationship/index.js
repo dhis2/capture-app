@@ -35,7 +35,7 @@ And('you fill in the first name with values that have less than 5 duplicates', (
     cy.get('[data-test="dhis2-capture-d2-form-component"]')
         .find('[data-test="capture-ui-input"]')
         .eq(2)
-        .type('Gonz')
+        .type('Fis')
         .blur();
 });
 
@@ -118,4 +118,3 @@ Then('all pagination is disabled', () => {
         .contains('Page 1')
         .should('exist');
 });
-

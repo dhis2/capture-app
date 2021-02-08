@@ -11,31 +11,30 @@ import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/Ev
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 export const activePageDesc = createReducerDescription({
-    [lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE]: state => ({
+    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE]: state => ({
         ...state,
         lockedSelectorLoads: true,
     }),
+    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID]: state => ({
+        ...state,
+        selectionsError: null,
+        isPageLoading: false,
+        isDataEntryLoading: false,
+    }),
+    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_INVALID]: (state, action) => ({
+        ...state,
+        isPageLoading: false,
+        selectionsError: action.payload,
+    }),
     [lockedSelectorActionTypes.FETCH_ORG_UNIT_ERROR]: (state, action) => ({
         ...state,
-        lockedSelectorLoads: false,
+        isPageLoading: false,
         selectionsError: action.payload,
     }),
     [lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS]: state => ({
         ...state,
-        lockedSelectorLoads: false,
+        isPageLoading: false,
     }),
-    [lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID]: state => ({
-        ...state,
-        selectionsError: null,
-        lockedSelectorLoads: false,
-        isDataEntryLoading: false,
-    }),
-    [lockedSelectorActionTypes.CURRENT_SELECTIONS_INVALID]: (state, action) => ({
-        ...state,
-        lockedSelectorLoads: false,
-        selectionsError: action.payload,
-    }),
-
 
     [viewEventPageActionTypes.VIEW_EVENT_FROM_URL]: state => ({
         ...state,

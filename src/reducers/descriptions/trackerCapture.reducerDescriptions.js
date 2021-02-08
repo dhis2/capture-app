@@ -47,7 +47,6 @@ import { viewEventPageDesc } from 'capture-core/reducers/descriptions/viewEvent.
 import {
     newRelationshipDesc,
     newRelationshipRegisterTeiDesc,
-    newRelationshipRegisterTeiDuplicatesReviewDesc,
 } from 'capture-core/reducers/descriptions/newRelationship.reducerDescription';
 import {
     organisationUnitDesc,
@@ -76,6 +75,7 @@ import { activePageDesc } from '../../core_modules/capture-core/reducers/descrip
 import { searchPageDesc } from '../../core_modules/capture-core/reducers/descriptions/searchPage.reducerDescription';
 import { enrollmentPageDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentPage.reducerDescription';
 import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
+import { possibleDuplicatesDesc } from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
 
 export default [
     activePageDesc,
@@ -107,10 +107,10 @@ export default [
     newPageDesc,
     newRelationshipDesc,
     newRelationshipRegisterTeiDesc,
-    newRelationshipRegisterTeiDuplicatesReviewDesc,
     notesDesc,
     organisationUnitDesc,
     organisationUnitRootsDesc,
+    possibleDuplicatesDesc,
     registeringUnitListDesc,
     recentlyAddedEventsDesc,
     recentlyAddedEventsValuesDesc,

@@ -14,9 +14,9 @@ export const lockedSelectorActionTypes = {
     TEI_SELECTION_RESET: 'LockedSelector.TeiSelectionReset',
     ENROLLMENT_SELECTION_SET: 'LockedSelector.EnrollmentSelectionSet',
 
-    CURRENT_SELECTIONS_UPDATE: 'LockedSelector.CurrentSelectionsUpdate',
-    CURRENT_SELECTIONS_VALID: 'LockedSelector.CurrentSelectionsValid',
-    CURRENT_SELECTIONS_INVALID: 'LockedSelector.CurrentSelectionsInvalid',
+    FROM_URL_CURRENT_SELECTIONS_UPDATE: 'LockedSelector.FromUrlCurrentSelectionsUpdate',
+    FROM_URL_CURRENT_SELECTIONS_VALID: 'LockedSelector.FromUrlCurrentSelectionsValid',
+    FROM_URL_CURRENT_SELECTIONS_INVALID: 'LockedSelector.FromUrlCurrentSelectionsInvalid',
     EMPTY_ORG_UNIT_SET: 'LockedSelector.EmptyOrgUnitSet',
 
     NEW_REGISTRATION_PAGE_OPEN: 'LockedSelector.NewRegistrationPageOpen',
@@ -35,8 +35,8 @@ export const lockedSelectorBatchActionTypes = {
     ORG_UNIT_ID_RESET_BATCH: 'LockedSelector.BatchOrgUnitIdReset',
 };
 
-export const setOrgUnitFromLockedSelector = (id: string, orgUnit: Object, pageToPush: string) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_SET)({ orgUnitId: id, orgUnit, pageToPush });
-export const setProgramIdFromLockedSelector = (id: string, pageToPush: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_SET)({ programId: id, pageToPush });
+export const setOrgUnitFromLockedSelector = (orgUnitId: string, orgUnit: Object, pageToPush: string) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_SET)({ orgUnitId, orgUnit, pageToPush });
+export const setProgramIdFromLockedSelector = (programId: string, pageToPush: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_SET)({ programId, pageToPush });
 export const setCategoryOptionFromLockedSelector = (categoryId: string, categoryOption: Object) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });
 
 export const resetOrgUnitIdFromLockedSelector = (pageToPush: string) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_RESET)({ pageToPush });
@@ -50,9 +50,9 @@ export const openSearchPageFromLockedSelector = () => actionCreator(lockedSelect
 
 // these actions are being triggered only when the user updates the url from the url bar.
 // this way we keep our stored data in sync with the page the user is.
-export const updateSelectionsFromUrl = (data: Object) => actionCreator(lockedSelectorActionTypes.CURRENT_SELECTIONS_UPDATE)(data);
-export const validSelectionsFromUrl = () => actionCreator(lockedSelectorActionTypes.CURRENT_SELECTIONS_VALID)();
-export const invalidSelectionsFromUrl = (error: string) => actionCreator(lockedSelectorActionTypes.CURRENT_SELECTIONS_INVALID)({ error });
+export const updateSelectionsFromUrl = (data: Object) => actionCreator(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE)(data);
+export const validSelectionsFromUrl = () => actionCreator(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID)();
+export const invalidSelectionsFromUrl = (error: string) => actionCreator(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_INVALID)({ error });
 export const setCurrentOrgUnitBasedOnUrl = (orgUnit: Object) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS)(orgUnit);
 export const errorRetrievingOrgUnitBasedOnUrl = (error: string) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT_ERROR)({ error });
 export const setEmptyOrgUnitBasedOnUrl = () => actionCreator(lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET)();
