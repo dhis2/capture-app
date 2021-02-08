@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
+"POT-Creation-Date: 2021-02-04T12:10:53.605Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -277,6 +277,37 @@ msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr "Xatolik yuz berdi. Tafsilotlar uchun jurnalga qarang"
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+"Ikki nusxasi mavjud (lekin xatolar boʼlgan, batafsil maʼlumot uchun jurnalga"
+" qarang"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+"Ushbu {{attributeName}} element allaqachon roʼyxatdan oʼtgan, ammo siz unga "
+"kirish huquqiga ega emassiz"
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "Siz allaqachon {{attributeName}} da roʼyxatdan oʼtgansiz"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+"{{trackedEntityTypeName}} ushbu {{attributeName}} bilan allaqachon "
+"roʼyxatdan oʼtgan"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "Roʼyxatdan oʼtgan {{trackedEntityTypeName}} ni koʼrsatish"
+
+msgid "Registered person"
+msgstr "Roʼyxatdan oʼtgan shaxs"
+
+msgid "Link"
+msgstr "Havola"
 
 msgid "validation failed"
 msgstr "Tasdiqlash amalga oshmadi"
@@ -671,37 +702,6 @@ msgstr ""
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
-
-msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr ""
-"Ikki nusxasi mavjud (lekin xatolar boʼlgan, batafsil maʼlumot uchun jurnalga"
-" qarang"
-
-msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr ""
-"Ushbu {{attributeName}} element allaqachon roʼyxatdan oʼtgan, ammo siz unga "
-"kirish huquqiga ega emassiz"
-
-msgid "You have already registered this {{attributeName}}"
-msgstr "Siz allaqachon {{attributeName}} da roʼyxatdan oʼtgansiz"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr ""
-"{{trackedEntityTypeName}} ushbu {{attributeName}} bilan allaqachon "
-"roʼyxatdan oʼtgan"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Roʼyxatdan oʼtgan {{trackedEntityTypeName}} ni koʼrsatish"
-
-msgid "Registered person"
-msgstr "Roʼyxatdan oʼtgan shaxs"
-
-msgid "Link"
-msgstr "Havola"
 
 msgid "Review Duplicates"
 msgstr "Nusxalarni koʼrib chiqish"

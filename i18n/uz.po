@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
+"POT-Creation-Date: 2021-02-04T12:10:53.605Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -274,6 +274,37 @@ msgstr "Юқори панелдан дастурни танлаб, дастур 
 
 msgid "An error has occurred. See log for details"
 msgstr "Хатолик юз берди. Тафсилотлар учун журналга қаранг"
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+"Икки нусхаси мавжуд (лекин хатолар бўлган, батафсил маълумот учун журналга "
+"қаранг"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+"Ушбу {{attributeName}} элемент аллақачон рўйхатдан ўтган, аммо сиз унга "
+"кириш ҳуқуқига эга эмассиз"
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "Сиз аллақачон {{attributeName}} да рўйхатдан ўтгансиз"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+"{{trackedEntityTypeName}} ушбу {{attributeName}} билан аллақачон рўйхатдан "
+"ўтган"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "Рўйхатдан ўтган {{trackedEntityTypeName}} ни кўрсатиш"
+
+msgid "Registered person"
+msgstr "Рўйхатдан ўтган шахс"
+
+msgid "Link"
+msgstr "Ҳавола"
 
 msgid "validation failed"
 msgstr "Тасдиқлаш амалга ошмади"
@@ -665,37 +696,6 @@ msgstr ""
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
-
-msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr ""
-"Икки нусхаси мавжуд (лекин хатолар бўлган, батафсил маълумот учун журналга "
-"қаранг"
-
-msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr ""
-"Ушбу {{attributeName}} элемент аллақачон рўйхатдан ўтган, аммо сиз унга "
-"кириш ҳуқуқига эга эмассиз"
-
-msgid "You have already registered this {{attributeName}}"
-msgstr "Сиз аллақачон {{attributeName}} да рўйхатдан ўтгансиз"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr ""
-"{{trackedEntityTypeName}} ушбу {{attributeName}} билан аллақачон рўйхатдан "
-"ўтган"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Рўйхатдан ўтган {{trackedEntityTypeName}} ни кўрсатиш"
-
-msgid "Registered person"
-msgstr "Рўйхатдан ўтган шахс"
-
-msgid "Link"
-msgstr "Ҳавола"
 
 msgid "Review Duplicates"
 msgstr "Нусхаларни кўриб чиқиш"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
+"POT-Creation-Date: 2021-02-04T12:10:53.605Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -274,6 +274,34 @@ msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr "Một lỗi đã xảy ra. Xem nhật ký để biết chi tiết"
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+"Tồn tại một bản sao nhưng có một số lỗi, hãy xem nhật ký để biết chi tiết"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+"Một mục có {{attributeName}} này đã được đăng ký, nhưng bạn không có quyền "
+"truy cập vào nó"
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "Bạn đã đăng ký {{attributeName}} này"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr "{{TrackedEntityTypeName}} với {{attributeName}} này đã được đăng ký"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
+
+msgid "Registered person"
+msgstr "Người đã đăng ký"
+
+msgid "Link"
+msgstr "Liên kết"
 
 msgid "validation failed"
 msgstr "xác thực không thành công"
@@ -665,34 +693,6 @@ msgstr ""
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
-
-msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr ""
-"Tồn tại một bản sao nhưng có một số lỗi, hãy xem nhật ký để biết chi tiết"
-
-msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr ""
-"Một mục có {{attributeName}} này đã được đăng ký, nhưng bạn không có quyền "
-"truy cập vào nó"
-
-msgid "You have already registered this {{attributeName}}"
-msgstr "Bạn đã đăng ký {{attributeName}} này"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr "{{TrackedEntityTypeName}} với {{attributeName}} này đã được đăng ký"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Hiển thị {{trackedEntityTypeName}} đã đăng ký"
-
-msgid "Registered person"
-msgstr "Người đã đăng ký"
-
-msgid "Link"
-msgstr "Liên kết"
 
 msgid "Review Duplicates"
 msgstr "Xem lại các bản sao"

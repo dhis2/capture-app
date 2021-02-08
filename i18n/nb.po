@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
+"POT-Creation-Date: 2021-02-04T12:10:53.605Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -275,6 +275,35 @@ msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+"Et element med dette {{attributeName}} er allerede registrert, men du har "
+"ikke tilgang til den."
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "Du har allerede registrert dette {{attributeName}}"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+"En {{trackedEntityTypeName}} med dette {{attributeName}} er allerede "
+"registrert"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "Vis registrert {{trackedEntityTypeName}}"
+
+msgid "Registered person"
+msgstr "Registrert person"
+
+msgid "Link"
+msgstr "Link"
 
 msgid "validation failed"
 msgstr "validering mislyktes"
@@ -666,35 +695,6 @@ msgstr ""
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
-
-msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
-
-msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr ""
-"Et element med dette {{attributeName}} er allerede registrert, men du har "
-"ikke tilgang til den."
-
-msgid "You have already registered this {{attributeName}}"
-msgstr "Du har allerede registrert dette {{attributeName}}"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr ""
-"En {{trackedEntityTypeName}} med dette {{attributeName}} er allerede "
-"registrert"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Vis registrert {{trackedEntityTypeName}}"
-
-msgid "Registered person"
-msgstr "Registrert person"
-
-msgid "Link"
-msgstr "Link"
 
 msgid "Review Duplicates"
 msgstr "Gjennomgå duplikater"

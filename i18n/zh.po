@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
+"POT-Creation-Date: 2021-02-04T12:10:53.605Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -265,6 +265,31 @@ msgstr "通过从顶部栏中选择一个项目来注册"
 
 msgid "An error has occurred. See log for details"
 msgstr "发生了错误。查看日志以获取详细信息"
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr "存在重复，但是有错误，查看日志详情。"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr " 具有 {{attributeName}}  属性的条目已经注册 ，但是你不能访问 "
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "你已经登记了该属性"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr "一个 {{trackedEntityTypeName}} 且具有 {{attributeName}} 已经注册"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "显示登记的 {{attributeName}} "
+
+msgid "Registered person"
+msgstr "注册的人"
+
+msgid "Link"
+msgstr "链接"
 
 msgid "validation failed"
 msgstr "验证失败"
@@ -656,31 +681,6 @@ msgstr ""
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
-
-msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr "存在重复，但是有错误，查看日志详情。"
-
-msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr " 具有 {{attributeName}}  属性的条目已经注册 ，但是你不能访问 "
-
-msgid "You have already registered this {{attributeName}}"
-msgstr "你已经登记了该属性"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr "一个 {{trackedEntityTypeName}} 且具有 {{attributeName}} 已经注册"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "显示登记的 {{attributeName}} "
-
-msgid "Registered person"
-msgstr "注册的人"
-
-msgid "Link"
-msgstr "链接"
 
 msgid "Review Duplicates"
 msgstr "复查重复"
