@@ -1,3 +1,10 @@
+## [1.8.3](https://github.com/dhis2/capture-app/compare/v1.8.2...v1.8.3) (2021-02-08)
+
+
+### Bug Fixes
+
+* DHIS2-10205 user can see validation messages on the form ([#1487](https://github.com/dhis2/capture-app/issues/1487)) ([c331cf9](https://github.com/dhis2/capture-app/commit/c331cf911db674bded11368d713ce180affe5903))
+
 ## [1.8.2](https://github.com/dhis2/capture-app/compare/v1.8.1...v1.8.2) (2021-02-05)
 
 
