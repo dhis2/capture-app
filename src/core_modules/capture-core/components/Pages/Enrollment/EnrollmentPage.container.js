@@ -83,12 +83,18 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
         dispatch,
     ]);
 
+    const selectedProgramId: string =
+      useSelector(({ router: { location: { query } } }) => query.programId);
+    const selectedOrgUnitId: string =
+      useSelector(({ router: { location: { query } } }) => query.orgUnitId);
     const error: boolean =
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
 
     return (
         <EnrollmentPageComponent
             error={error}
+            selectedProgramId={selectedProgramId}
+            selectedOrgUnitId={selectedOrgUnitId}
             enrollmentPageStatus={enrollmentPageStatus}
         />
     );
