@@ -27,20 +27,21 @@ const mapStateToProps = (state: Object) => {
         router: { location: { pathname, query: { enrollmentId } } },
         currentSelections: { categoriesMeta },
         organisationUnits,
-        enrollmentPage,
+        enrollmentPage: { enrollments, teiDisplayName, tetDisplayName },
     } = state;
 
-    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollmentPage.enrollments, programId);
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
     return {
         selectedProgramId: programId,
         selectedOrgUnitId: orgUnitId,
         selectedCategories: categoriesMeta,
         selectedOrgUnit: orgUnitId ? organisationUnits[orgUnitId] : null,
         currentPage: pathname.substring(1),
-        selectedTeiName: enrollmentPage.trackedEntityInstanceDisplayName,
+        selectedTeiName: teiDisplayName,
+        selectedTetName: tetDisplayName,
         selectedEnrollmentId: enrollmentId,
         enrollmentsAsOptions,
-        enrollmentLockedSelectReady: enrollmentPage.enrollments && enrollmentPage.enrollments.length,
+        enrollmentLockedSelectReady: enrollments && enrollments.length,
     };
 };
 

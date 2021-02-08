@@ -50,6 +50,7 @@ type Props = {
     currentPage: string,
     selectedEnrollmentId: string,
     selectedTeiName: string,
+    selectedTetName: string,
     enrollmentsAsOptions: Array<Object>,
     onTeiSelectionReset: () => void,
     onEnrollmentSelectionSet: () => void,
@@ -101,6 +102,7 @@ class QuickSelector extends Component<Props> {
         const {
             currentPage,
             selectedTeiName,
+            selectedTetName,
             enrollmentsAsOptions,
             selectedEnrollmentId,
             onTeiSelectionReset,
@@ -147,7 +149,7 @@ class QuickSelector extends Component<Props> {
 
                                     }]}
                                     selectedValue="alwaysPreselected"
-                                    title={i18n.t('Tracked Entity Type')}
+                                    title={selectedTetName}
                                 />
                             </Grid>
                             {
