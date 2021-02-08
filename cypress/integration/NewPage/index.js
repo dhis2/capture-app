@@ -523,3 +523,13 @@ And('you fill the Child programme registration form with a first name with value
         .blur();
 });
 
+And('you are in the WNCH / PNC program registration page', () => {
+    cy.visit('/#/new?programId=uy2gU8kT1jF&orgUnitId=DiszpKrYNg8');
+});
+
+
+And('you see validation errors on the WHO RMNCH program registration page', () => {
+    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+        .find('[data-test="error-message"]')
+        .should('have.length', 5);
+});

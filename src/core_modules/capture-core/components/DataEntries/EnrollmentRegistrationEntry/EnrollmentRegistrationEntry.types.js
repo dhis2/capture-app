@@ -9,18 +9,19 @@ export type OwnProps = $ReadOnly<{|
   saveButtonText: string,
   fieldOptions?: Object,
   onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
-  onPostProcessErrorMessage: Function,
-  onGetUnsavedAttributeValues: Function,
-  onUpdateField: Function,
-  onStartAsyncUpdateField: Function,
 |}>
+
+export type HOCProps = {|
+  onPostProcessErrorMessage: Function,
+  ...CssClasses,
+|}
 
 type ContainerProps = {|
   ready: boolean,
 |}
 
 export type Props = $ReadOnly<{|
+  ...HOCProps,
   ...OwnProps,
-  ...CssClasses,
   ...ContainerProps
 |}>

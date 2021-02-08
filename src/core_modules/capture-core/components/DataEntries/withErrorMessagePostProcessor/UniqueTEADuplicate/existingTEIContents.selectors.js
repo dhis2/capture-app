@@ -1,15 +1,15 @@
 // @flow
 
 import { createSelector } from 'reselect';
-import { convertServerToClient } from '../../../../../../converters';
+import { convertServerToClient } from '../../../../converters';
 import {
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
-} from '../../../../../../metaData';
+} from '../../../../metaData';
 import type {
     TrackerProgram,
     DataElement,
-} from '../../../../../../metaData';
+} from '../../../../metaData';
 
 const programIdSelector = props => props.programId;
 const tetAttributesOnlySelector = props => props.tetAttributesOnly;
