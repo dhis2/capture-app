@@ -39,16 +39,17 @@ const deriveSelectedName = (attributes, dataElements = []) => {
     return `${firstValue}${firstValue && ' '}${secondValue}`;
 };
 
-const fetchTeiStream = (teiId, programId, querySingleResource) =>
+const fetchTeiStream = (teiId, querySingleResource) =>
     from(querySingleResource(teiQuery(teiId)))
         .pipe(
             map(({ attributes, enrollments }) => {
                 const enrollmentsSortedByDate = sortByDate(enrollments);
-                const dataElements = getAttributesFromScopeId(programId);
-                const teiDisplayName = deriveSelectedName(attributes, dataElements);
+                // const dataElements = getAttributesFromScopeId(programId);
+                // const teiDisplayName = deriveSelectedName(attributes, dataElements);
 
+                debugger
                 return successfulFetchingEnrollmentPageInformationFromUrl({
-                    teiDisplayName,
+                    teiDisplayName: 'Anna Jones',
                     enrollmentsSortedByDate,
                 });
             }),
@@ -86,7 +87,7 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
                     flatMap(({ trackedEntityInstance, program, orgUnit }) => (
                         urlCompleted
                             ?
-                            fetchTeiStream(trackedEntityInstance, program, querySingleResource)
+                            fetchTeiStream(trackedEntityInstance, querySingleResource)
                             :
                             of(openEnrollmentPage({
                                 programId: program,
@@ -108,9 +109,9 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH),
         flatMap(() => {
-            const { query: { teiId, programId } } = store.value.router.location;
+            const { query: { teiId } } = store.value.router.location;
 
-            return fetchTeiStream(teiId, programId, querySingleResource);
+            return fetchTeiStream(teiId, querySingleResource);
         }),
     );
 
