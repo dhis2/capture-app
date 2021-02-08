@@ -8,7 +8,7 @@ import { validationStrategies, validationStrategiesAsArray } from './renderFound
 import type Section from './Section';
 import type CustomForm from './CustomForm';
 import type DataElement, { ConvertFn } from '../DataElement/DataElement';
-import type { Access } from '../Access/Access';
+import type { Access } from '../Access';
 import { convertDataElementsValues } from '../helpers';
 import type { ValuesType } from '../helpers/DataElements/convertValues';
 

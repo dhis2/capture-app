@@ -153,7 +153,11 @@ const Index = ({
                         </div>
                         {
                             (selectedSearchScopeType !== searchScopes.PROGRAM) &&
-                            <TrackedEntityTypeSelector onSelect={handleSearchScopeSelection} />
+                            <TrackedEntityTypeSelector
+                                onSelect={handleSearchScopeSelection}
+                                headerText={i18n.t('Search for')}
+                                footerText={i18n.t('You can also choose a program from the top bar and search in that program')}
+                            />
                         }
 
                         <SearchForm

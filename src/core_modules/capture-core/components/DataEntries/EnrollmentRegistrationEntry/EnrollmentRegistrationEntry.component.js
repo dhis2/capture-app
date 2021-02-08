@@ -9,10 +9,11 @@ import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
-import type { Props } from './EnrollmentRegistrationEntry.types';
+import type { HOCProps, Props } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
+import withErrorMessagePostProcessor from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 
 const styles = ({ typography }) => ({
     marginTop: {
@@ -35,6 +36,7 @@ const EnrollmentRegistrationEntryPlain =
       saveButtonText,
       classes,
       onSave,
+      onPostProcessErrorMessage,
       ...rest
   }: Props) => {
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
@@ -52,6 +54,10 @@ const EnrollmentRegistrationEntryPlain =
                           formFoundation={formFoundation}
                           enrollmentMetadata={enrollmentMetadata}
                           id={id}
+                          onPostProcessErrorMessage={onPostProcessErrorMessage}
+                          onGetUnsavedAttributeValues={() => console.log('onGetUnsavedAttributeValues will be here in the future')}
+                          onUpdateField={() => console.log('onUpdateField will be here in the future')}
+                          onStartAsyncUpdateField={() => console.log('onStartAsyncUpdateField will be here in the future')}
                           {...rest}
                       />
                       {
@@ -75,8 +81,9 @@ const EnrollmentRegistrationEntryPlain =
       );
   };
 
-export const EnrollmentRegistrationEntryComponent: ComponentType<$Diff<Props, CssClasses>> =
+export const EnrollmentRegistrationEntryComponent: ComponentType<$Diff<Props, HOCProps>> =
   compose(
+      withErrorMessagePostProcessor(),
       withLoadingIndicator(() => ({ height: '350px' })),
       withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm }),
       withStyles(styles),

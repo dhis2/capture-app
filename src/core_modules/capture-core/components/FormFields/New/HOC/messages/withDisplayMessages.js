@@ -96,6 +96,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
 
             return (
                 <div
+                    data-test="error-message"
                     className={classNames(baseClass, messageClass)}
                 >
                     {text}
