@@ -100,7 +100,7 @@ class LockedSelectorClass extends Component<Props, State> {
             this.setState({ openNewEventWarning: true });
             return;
         }
-        this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
+        this.props.onOpenNewEventPage();
     }
 
     handleOpenNewRegistrationPageWithoutProgramId = () => {
@@ -108,7 +108,7 @@ class LockedSelectorClass extends Component<Props, State> {
     }
 
     handleAcceptNew = () => {
-        this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
+        this.props.onOpenNewEventPage();
         this.handleClose();
     }
 
