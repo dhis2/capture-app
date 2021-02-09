@@ -38,6 +38,7 @@ class ExistingTEIContents extends React.Component<Props> {
                     </DialogTitle>
                     <CardList
                         currentProgramId={programId}
+                        // $FlowFixMe
                         items={items}
                         dataElements={dataElements}
                     />

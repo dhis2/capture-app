@@ -24,6 +24,17 @@ const getStyles = () => ({
     },
 });
 
+
+const CardListButton = (({ teiId, values, handleOnClick }) => (
+    <Button
+        small
+        dataTest="dhis2-capture-view-dashboard-button"
+        onClick={() => { handleOnClick(teiId, values); }}
+    >
+        {i18n.t('Link')}
+    </Button>
+));
+
 const RegisterTeiPlain = ({
     onLink,
     onSave,
@@ -91,15 +102,19 @@ const RegisterTeiPlain = ({
             <DataEntryWidgetOutput
                 dataEntryId={dataEntryId}
                 selectedScopeId={newRelationshipProgramId}
-                onLink={onLink}
+                renderCardActions={({ item }) =>
+                    <CardListButton teiId={item.id} values={item.values} handleOnClick={onLink} />
+                }
             />
             <PossibleDuplicatesDialog
                 dataEntryId={dataEntryId}
                 selectedScopeId={newRelationshipProgramId}
                 open={duplicatesOpen}
-                onLink={onLink}
                 onCancel={handleDialogCancel}
                 extraActions={getActions()}
+                renderCardActions={({ item }) =>
+                    <CardListButton teiId={item.id} values={item.values} handleOnClick={onLink} />
+                }
             />
         </div>
     );

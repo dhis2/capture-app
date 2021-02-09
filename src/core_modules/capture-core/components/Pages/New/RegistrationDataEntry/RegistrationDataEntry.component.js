@@ -1,5 +1,6 @@
 // @flow
 import React, { type ComponentType, useContext, useState } from 'react';
+import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { Grid, Paper, withStyles } from '@material-ui/core';
@@ -14,6 +15,7 @@ import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryW
 import { PossibleDuplicatesDialog } from '../../../PossibleDuplicatesDialog/PossibleDuplicatesDialog.component';
 import { usePossibleDuplicatesExist } from '../../../PossibleDuplicatesDialog/usePossibleDuplicatesExist';
 import { ResultsPageSizeContext } from '../../shared-contexts';
+import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
 
 const getStyles = ({ typography }) => ({
     paper: {
@@ -53,6 +55,22 @@ const DialogButtons = ({ onCancel, onSave }) => (<>
         </div>
     }
 </>);
+
+const CardListButton = (({ teiId, orgUnitId }) => {
+    const scopeHierarchy = useSelector(({ router: { location: { query } } }) => (query.programId ? 'PROGRAM' : 'TRACKED_ENTITY_TYPE'));
+    const selectedScopeId: string = useSelector(({ router: { location: { query } } }) => query.trackedEntityTypeId || query.programId);
+    const scopeSearchParam = `${scopeHierarchy.toLowerCase()}=${selectedScopeId}`;
+
+    return (
+        <Button
+            small
+            dataTest="dhis2-capture-view-dashboard-button"
+            onClick={() => navigateToTrackedEntityDashboard(teiId, orgUnitId, scopeSearchParam)}
+        >
+            {i18n.t('View dashboard')}
+        </Button>
+    );
+});
 
 const useHandleSaveAttempt = (dataEntryId, onReviewDuplicates) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
@@ -144,6 +162,9 @@ const RegistrationDataEntryPlain = (
                                         <DataEntryWidgetOutput
                                             selectedScopeId={selectedScopeId}
                                             dataEntryId={dataEntryId}
+                                            renderCardActions={({ item }) =>
+                                                <CardListButton teiId={item.id} orgUnitId={item.tei.orgUnit} item={item} />
+                                            }
                                         />
                                     </div>
 
@@ -152,6 +173,10 @@ const RegistrationDataEntryPlain = (
                                         selectedScopeId={selectedScopeId}
                                         open={modalIsOpen}
                                         onCancel={closeModal}
+                                        renderCardActions={
+                                            ({ item }) =>
+                                                <CardListButton teiId={item.id} orgUnitId={item.tei.orgUnit} item={item} />
+                                        }
                                         extraActions={
                                             <DialogButtons
                                                 onCancel={closeModal}
@@ -199,6 +224,9 @@ const RegistrationDataEntryPlain = (
                                         <DataEntryWidgetOutput
                                             dataEntryId={dataEntryId}
                                             selectedScopeId={selectedScopeId}
+                                            renderCardActions={({ item }) =>
+                                                <CardListButton teiId={item.id} orgUnitId={item.tei.orgUnit} item={item} />
+                                            }
                                         />
                                     </div>
 
@@ -207,6 +235,9 @@ const RegistrationDataEntryPlain = (
                                         selectedScopeId={selectedScopeId}
                                         open={modalIsOpen}
                                         onCancel={closeModal}
+                                        renderCardActions={({ item }) =>
+                                            <CardListButton teiId={item.id} orgUnitId={item.tei.orgUnit} item={item} />
+                                        }
                                         extraActions={
                                             <DialogButtons
                                                 onCancel={closeModal}

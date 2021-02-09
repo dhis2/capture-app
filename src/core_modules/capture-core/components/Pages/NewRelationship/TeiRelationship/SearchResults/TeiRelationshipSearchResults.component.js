@@ -10,9 +10,9 @@ import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
 import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';
 import { SearchResultsHeader } from '../../../../SearchResultsHeader';
-import { type SearchResultItem } from '../../../Search/SearchResults/SearchResults.types';
 import { type SearchGroup } from '../../../../../metaData';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
+import type { ListItem } from '../../../../CardList/CardList.types';
 
 const SearchResultsPager = withNavigation()(Pagination);
 
@@ -25,7 +25,7 @@ type Props = {|
     searchGroup: SearchGroup,
     searchValues: any,
     selectedProgramId: string,
-    teis: Array<SearchResultItem>,
+    teis: Array<ListItem>,
     trackedEntityTypeName: string,
     ...CssClasses
 |}
@@ -59,6 +59,16 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
+const CardListButton = ({ handleOnClick, teiId }) => (
+    <Button
+        small
+        dataTest={`dhis2-capture-relationship-tei-link-${teiId}`}
+        onClick={handleOnClick}
+    >
+        {i18n.t('Link')}
+    </Button>
+);
+
 class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
     getAttributes: Function;
     constructor(props: Props) {
@@ -68,22 +78,6 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
 
     onAddRelationship = (item) => {
         this.props.onAddRelationship(item.id, item.values);
-    }
-
-    getItemActions = ({ item }: Object) => {
-        const classes = this.props.classes;
-        return (
-            <div className={classes.itemActionsContainer}>
-                <Button
-                    small
-                    dataTest={`dhis2-capture-relationship-tei-link-${item.id}`}
-                    color="primary"
-                    onClick={() => this.onAddRelationship(item)}
-                >
-                    {i18n.t('Link')}
-                </Button>
-            </div>
-        );
     }
 
     renderResults = () => {
@@ -98,7 +92,9 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
                     items={teis}
                     dataElements={attributes}
                     noItemsText={i18n.t('No {{trackedEntityTypeName}} found.', { trackedEntityTypeName })}
-                    getCustomItemBottomElements={itemProps => this.getItemActions(itemProps)}
+                    renderCustomCardActions={({ item }) =>
+                        <CardListButton teiId={item.id} handleOnClick={() => this.onAddRelationship(item)} />
+                    }
                 />
                 {this.renderPager()}
             </React.Fragment>

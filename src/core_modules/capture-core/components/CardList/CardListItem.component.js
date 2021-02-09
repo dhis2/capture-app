@@ -2,26 +2,31 @@
 import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import moment from 'moment';
-import type { ComponentType, Element } from 'react';
+import type { ComponentType } from 'react';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
 import DoneIcon from '@material-ui/icons/Done';
 import { colors, Tag } from '@dhis2/ui';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
-    SearchResultItem,
 } from '../Pages/Search/SearchResults/SearchResults.types';
-import { availableCardListButtonState, enrollmentTypes } from './CardList.constants';
+import { enrollmentTypes } from './CardList.constants';
 import { ListEntry } from './ListEntry.component';
 import { dataElementTypes } from '../../metaData';
+import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 type OwnProps = $ReadOnly<{|
-    item: SearchResultItem,
+    item: ListItem,
     currentSearchScopeName?: string,
     currentProgramId?: string,
-    getCustomBottomElements?: (props: Object) => Element<any>,
+    renderCustomCardActions?: RenderCustomCardActions,
     profileImageDataElement: ?CardProfileImageElementInformation,
     dataElements: CardDataElementsInformation,
+|}>;
+
+type Props = $ReadOnly<{|
+    ...OwnProps,
+    ...CssClasses
 |}>;
 
 const getStyles = (theme: Theme) => ({
@@ -58,21 +63,10 @@ const getStyles = (theme: Theme) => ({
         height: theme.typography.pxToRem(44),
         marginRight: theme.typography.pxToRem(8),
     },
+    buttonMargin: {
+        marginTop: theme.typography.pxToRem(8),
+    },
 });
-
-const deriveNavigationButtonState =
-  (type): $Keys<typeof availableCardListButtonState> => {
-      switch (type) {
-      case enrollmentTypes.ACTIVE:
-          return availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON;
-      case enrollmentTypes.CANCELLED:
-      case enrollmentTypes.COMPLETED:
-          return availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON;
-      default:
-          return availableCardListButtonState.DONT_SHOW_BUTTON;
-      }
-  };
-
 
 const deriveEnrollmentType =
   (enrollments, currentProgramId): $Keys<typeof enrollmentTypes> => {
@@ -116,11 +110,11 @@ const CardListItemIndex = ({
     item,
     classes,
     profileImageDataElement,
-    getCustomBottomElements,
+    renderCustomCardActions,
     dataElements,
     currentProgramId,
     currentSearchScopeName,
-}: OwnProps & CssClasses) => {
+}: Props) => {
     const renderImageDataElement = (imageElement: CardProfileImageElementInformation) => {
         const imageValue = item.values[imageElement.id];
         return (
@@ -227,15 +221,23 @@ const CardListItemIndex = ({
             </div>
 
             {
-                getCustomBottomElements &&
-                getCustomBottomElements({
-                    item,
-                    navigationButtonsState: deriveNavigationButtonState(enrollmentType),
-                    programName: currentSearchScopeName,
-                })
+                renderCustomCardActions
+                &&
+                <div className={classes.buttonMargin}>
+                    {
+                        renderCustomCardActions({
+                            item,
+                            // we pass the programName because we have the case that the scope of the search
+                            // can be different that the scopeId from the url
+                            // this can happen for example when you are registering through the relationships
+                            programName: currentSearchScopeName,
+                            enrollmentType,
+                        })
+                    }
+                </div>
             }
         </div>
     );
 };
 
-export const CardListItem: ComponentType<OwnProps> = withStyles(getStyles)(CardListItemIndex);
+export const CardListItem: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(CardListItemIndex);
