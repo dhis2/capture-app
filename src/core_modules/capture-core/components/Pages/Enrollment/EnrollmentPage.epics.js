@@ -17,6 +17,7 @@ import {
 import { urlArguments } from '../../../utils/url';
 import { getAttributesFromScopeId } from '../../../metaData/helpers';
 
+
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
 
