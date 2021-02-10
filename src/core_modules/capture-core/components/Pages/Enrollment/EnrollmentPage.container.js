@@ -12,6 +12,7 @@ import {
 } from './EnrollmentPage.actions';
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { useEnrollmentInfo } from './hooks';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
@@ -25,13 +26,13 @@ const useComponentLifecycle = () => {
           }),
       );
 
+
     const { scopeType } = useScopeInfo(programId);
-    const enrollments: Object = useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
-    const programHasEnrollments = enrollments && enrollments.some(({ program }) => programId === program);
+    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId } = useEnrollmentInfo(enrollmentId, programId);
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
 
-        if (selectedProgramIsTracker && programHasEnrollments && enrollmentId) {
+        if (selectedProgramIsTracker && programHasEnrollments && enrollmentsOnProgramContainEnrollmentId) {
             dispatch(showDefaultViewOnEnrollmentPage());
         } else {
             dispatch(showMissingMessageViewOnEnrollmentPage());
@@ -39,7 +40,7 @@ const useComponentLifecycle = () => {
     }, [
         dispatch,
         programId,
-        enrollmentId,
+        enrollmentsOnProgramContainEnrollmentId,
         programHasEnrollments,
         scopeType,
     ]);

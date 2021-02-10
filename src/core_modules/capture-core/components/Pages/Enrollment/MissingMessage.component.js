@@ -9,6 +9,7 @@ import { scopeTypes } from '../../../metaData/helpers/constants';
 import { urlArguments } from '../../../utils/url';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import LinkButton from '../../Buttons/LinkButton.component';
+import { useEnrollmentInfo } from './hooks';
 
 export const missingStatuses = {
     TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED: 'TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED',
@@ -31,17 +32,16 @@ const useMissingStatus = () => {
           }),
       );
 
-    const enrollments = useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
-    const programHasEnrollments = enrollments && enrollments.some(({ program }) => programId === program);
     const { scopeType } = useScopeInfo(programId);
     const { programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
+    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId } = useEnrollmentInfo(enrollmentId, programId);
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
         const selectedProgramIsEvent = programId && scopeType === scopeTypes.EVENT_PROGRAM;
 
         if (selectedProgramIsTracker && programSelectionIsIncomplete) {
             setStatus(missingStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION);
-        } else if (selectedProgramIsTracker && programHasEnrollments && !enrollmentId) {
+        } else if (selectedProgramIsTracker && programHasEnrollments && !enrollmentsOnProgramContainEnrollmentId) {
             setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION);
         } else if (selectedProgramIsTracker && !programHasEnrollments) {
             setStatus(missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED);
@@ -53,9 +53,9 @@ const useMissingStatus = () => {
     }, [
         dispatch,
         programId,
-        enrollmentId,
         programSelectionIsIncomplete,
         programHasEnrollments,
+        enrollmentsOnProgramContainEnrollmentId,
         scopeType,
     ]);
 
