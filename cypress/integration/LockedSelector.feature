@@ -145,7 +145,7 @@ Feature: Use the LockedSelector to navigate
       | /#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ                                                 | teiAndOrgUnit        | Choose program to view more information.       |
       | /#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ                                                 | teiAndChildProgram   | Choose enrollment to view more information.    |
       | /#/enrollment?programId=qDkgAbB5Jlk&teiId=fhFQhO0xILJ                                                 | teiAndMalariaProgram | There are no enrollments for this program.     |
-      | /#/enrollment?programId=lxAQ7Zs9VYR&teiId=fhFQhO0xILJ                                                 | teiAndEventProgram   | You selected an event program.                 |
+      | /#/enrollment?programId=lxAQ7Zs9VYR&teiId=fhFQhO0xILJ                                                 | teiAndEventProgram   | You selected an Event program.                 |
       | /#/enrollment?programId=IpHINAT79UW                                                                   | error                | Please enter a valid url.                      |
       | /#/enrollment?orgUnitId=UgYg0YW7ZIh                                                                   | error                | Please enter a valid url.                      |
 
