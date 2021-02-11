@@ -3,7 +3,7 @@ beforeEach(() => {
 });
 
 Given('you are on an enrollment page', () => {
-    cy.visit('/#/enrollment?enrollmentId=gPDueU02tn8');
+    cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
 });
 
 
