@@ -65,10 +65,7 @@ export const NewPage: ComponentType<{||}> = () => {
 
     // This is combo category selection. When you have selected a program but
     // the selection is incomplete we want the user to see a specific message
-    const programCategorySelectionIncomplete: boolean =
-      useSelector(({ currentSelections: { programId, complete }, router: { location: { query } } }) => (query.programId || programId) && !complete);
-
-    const { missingCategories } = useMissingCategoriesInProgramSelection();
+    const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
 
     const orgUnitSelectionIncomplete: boolean =
       useSelector(({ currentSelections: { orgUnitId, complete }, router: { location: { query } } }) => !(query.orgUnitId || orgUnitId) && !complete);
@@ -91,7 +88,7 @@ export const NewPage: ComponentType<{||}> = () => {
             handleMainPageNavigation={handleMainPageNavigation}
             currentScopeId={currentScopeId}
             orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
-            programCategorySelectionIncomplete={programCategorySelectionIncomplete}
+            programCategorySelectionIncomplete={programSelectionIsIncomplete}
             missingCategoriesInProgramSelection={missingCategories}
             writeAccess={writeAccess}
             newPageStatus={newPageStatus}
