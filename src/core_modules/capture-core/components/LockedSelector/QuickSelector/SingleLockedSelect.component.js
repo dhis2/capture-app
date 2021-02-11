@@ -99,7 +99,7 @@ const SingleLockedSelectPlain =
               selected && label ?
                   <Paper square elevation={0} className={classes.selectedPaper}>
                       <h4 className={classes.title}>
-                          {i18n.t('Selected')} {title}
+                          {i18n.t('Selected')} {title.toLowerCase()}
                       </h4>
                       <div className={classes.selectedItemContainer}>
                           <div>{label}</div>

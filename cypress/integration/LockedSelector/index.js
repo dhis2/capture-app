@@ -257,14 +257,14 @@ And('there should be Child Programme domain forms visible to search with', () =>
         .should('have.length', 1);
 });
 
-const selectedChildProgram = ['Selected Program', 'Child Programme'];
-const selectedMalariaProgram = ['Selected Program', 'Malaria case diagnosis'];
-const selectedEventProgram = ['Selected Program', 'Antenatal care visit'];
+const selectedChildProgram = ['Selected program', 'Child Programme'];
+const selectedMalariaProgram = ['Selected program', 'Malaria case diagnosis'];
+const selectedEventProgram = ['Selected program', 'Antenatal care visit'];
 const emptyProgramSelection = ['Program', 'Select program'];
 const selectedOrgUnit = ['Selected registering unit', 'Taninahun (Malen) CHP'];
 const emptyOrgUnitSelection = ['Registering Organisation Unit'];
 const selectedTei = ['Selected', 'Carlos Cruz'];
-const selectedEnrollment = ['Selected Enrollment', '2018-08-07 15:47'];
+const selectedEnrollment = ['Selected enrollment', '2018-08-07 15:47'];
 const emptyEnrollmentSelection = ['Enrollment', 'Select...'];
 
 const lockedSelectorCases = {
@@ -315,7 +315,7 @@ And('you reset the program selection', () => {
 And('you see message explaining you need to select a program', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
     cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
-        .contains('Choose program to view more information.');
+        .contains('Carlos Cruz is enrolled in multiple programs. Choose a program.');
 });
 
 And('you reset the org unit selection', () => {
@@ -350,7 +350,7 @@ And('you reset the enrollment selection', () => {
 And('you see message explaining you need to select an enrollment', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ`);
     cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
-        .contains('Choose enrollment to view more information.');
+        .contains('There are multiple enrollments for this program. Choose an enrollment to view the dashboard.');
 });
 
 And('you select the MNCH PNC program', () => {
@@ -369,7 +369,9 @@ And('you select the Child Programme', () => {
 
 And('you see message explaining there are no enrollments for this program', () => {
     cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
-        .contains('There are no enrollments');
+        .contains('Carlos Cruz is not enrolled in this program.');
+    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+        .contains('Enroll Carlos Cruz in this program.');
 });
 
 And('you select the Antenatal care visit', () => {
@@ -381,6 +383,6 @@ And('you select the Antenatal care visit', () => {
 
 And('you see message explaining this is an Event program', () => {
     cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
-        .contains('You selected an Event program.');
+        .contains('Antenatal care visit is an event program and does not have enrollments.');
 });
 

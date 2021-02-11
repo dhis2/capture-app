@@ -49,6 +49,7 @@ const fetchTeiStream = (teiId, querySingleResource) =>
 
                 return successfulFetchingEnrollmentPageInformationFromUrl({
                     teiDisplayName,
+                    tetId: trackedEntityType,
                     enrollmentsSortedByDate,
                 });
             }),
