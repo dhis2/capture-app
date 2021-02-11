@@ -36,10 +36,7 @@ And('you select tracked entity type person', () => {
 
 And('you see the registration form for the Person', () => {
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
-        .contains('New Person')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
-        .contains('New Person')
+        .contains('New person')
         .should('exist');
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
         .contains('Profile')
