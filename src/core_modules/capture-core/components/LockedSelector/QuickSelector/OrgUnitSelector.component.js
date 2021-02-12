@@ -17,7 +17,6 @@ const styles = (theme: Theme) => ({
     paper: {
         padding: 8,
         backgroundColor: theme.palette.grey.lighter,
-        borderRadius: 8,
     },
     title: {
         margin: 0,
@@ -43,7 +42,6 @@ const styles = (theme: Theme) => ({
     },
     selectedPaper: {
         backgroundColor: theme.palette.grey.lighter,
-        borderRadius: 8,
         padding: 8,
     },
     selectedButton: {
@@ -59,7 +57,8 @@ const styles = (theme: Theme) => ({
         display: 'flex',
         alignItems: 'center',
         minHeight: 28,
-        margin: '7px 0px 7px 0px',
+        marginTop: 8,
+        marginBottom: 4,
         paddingLeft: 5,
         borderLeft: `2px solid ${theme.palette.primary.light}`,
     },
@@ -127,12 +126,12 @@ class OrgUnitSelector extends Component<Props, State> {
         if (this.props.selectedOrgUnitId) {
             return (
                 <div>
-                    <Paper elevation={0} className={this.props.classes.selectedPaper}>
+                    <Paper square elevation={0} className={this.props.classes.selectedPaper}>
                         <h4 className={this.props.classes.title}>{ i18n.t('Selected registering unit') }</h4>
                         <div className={this.props.classes.selectedItemContainer}>
                             <div>{this.props.selectedOrgUnit.name}</div>
                             <div className={this.props.classes.selectedItemClear}>
-                                <IconButton className={this.props.classes.selectedButton} onClick={() => this.props.onReset()}>
+                                <IconButton data-test="reset-selection-button" className={this.props.classes.selectedButton} onClick={() => this.props.onReset()}>
                                     <ClearIcon className={this.props.classes.selectedButtonIcon} />
                                 </IconButton>
                             </div>
@@ -169,7 +168,7 @@ class OrgUnitSelector extends Component<Props, State> {
 
         return (
             <div data-test="dhis2-capture-org-unit-selector-container">
-                <Paper elevation={0} className={this.props.classes.paper}>
+                <Paper square elevation={0} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ i18n.t('Registering Organisation Unit') }</h4>
                     <div>
                         <OrgUnitField

@@ -11,6 +11,9 @@ export const lockedSelectorActionTypes = {
     CATEGORY_OPTION_SET: 'LockedSelector.CategoryOptionSet',
     CATEGORY_OPTION_RESET: 'LockedSelector.CategoryOptionReset',
     ALL_CATEGORY_OPTIONS_RESET: 'LockedSelector.AllCategoryOptionsReset',
+    TEI_SELECTION_RESET: 'LockedSelector.TeiSelectionReset',
+    ENROLLMENT_SELECTION_SET: 'LockedSelector.EnrollmentSelectionSet',
+    ENROLLMENT_SELECTION_RESET: 'LockedSelector.EnrollmentSelectionReset',
 
     FROM_URL_CURRENT_SELECTIONS_UPDATE: 'LockedSelector.FromUrlCurrentSelectionsUpdate',
     FROM_URL_CURRENT_SELECTIONS_VALID: 'LockedSelector.FromUrlCurrentSelectionsValid',
@@ -58,6 +61,15 @@ export const setEmptyOrgUnitBasedOnUrl = () => actionCreator(lockedSelectorActio
 // component Lifecycle
 export const fetchOrgUnit = (orgUnitId: string) => actionCreator(lockedSelectorActionTypes.FETCH_ORG_UNIT)({ orgUnitId });
 
+// enrollment related
+export const resetTeiSelection = () =>
+    actionCreator(lockedSelectorActionTypes.TEI_SELECTION_RESET)();
+
+export const setEnrollmentSelection = ({ enrollmentId }: Object) =>
+    actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET)({ enrollmentId });
+
+export const resetEnrollmentSelection = () =>
+    actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET)();
 
 // batch related actions
 export const resetProgramIdBatchAction = (actions: Array<Object>, pageToPush: string) =>

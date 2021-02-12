@@ -16,13 +16,13 @@ const getStyles = () => ({
         backgroundColor: 'white',
     },
     searchField: {
+        height: '40px',
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,
         boxShadow: 'none',
         border: 'none',
     },
     debounceFieldContainer: {
-        padding: 2,
         paddingBottom: 0,
     },
     orgUnitTreeContainer: {

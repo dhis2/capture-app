@@ -2,22 +2,53 @@
 import React from 'react';
 import type { ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { compose } from 'redux';
 import { LockedSelector } from '../../LockedSelector';
+import type { Props } from './EnrollmentPage.types';
+import { enrollmentPageStatuses } from './EnrollmentPage.constants';
+import LoadingMaskForPage from '../../LoadingMasks/LoadingMaskForPage.component';
+import { resetProgramOnEnrollmentPage } from './EnrollmentPage.actions';
+import { withErrorMessageHandler } from '../../../HOC';
+import { MissingMessage } from './MissingMessage.component';
 
-const getStyles = () => ({
+const getStyles = ({ typography }) => ({
     container: {
-        padding: '8px 24px 16px 24px',
+        padding: '16px 24px 16px 24px',
+    },
+    loadingMask: {
+        height: '100vh',
+    },
+    title: {
+        ...typography.title,
     },
 });
 
-
-const EnrollmentPagePlain = ({ classes }) => (<>
-    <LockedSelector />
+const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
+    <LockedSelector pageToPush="enrollment" customActionsOnProgramIdReset={[resetProgramOnEnrollmentPage()]} />
 
     <div data-test="dhis2-capture-enrollment-page-content" className={classes.container} >
-        hello from enrollment
+
+        {
+            enrollmentPageStatus === enrollmentPageStatuses.MISSING_SELECTIONS &&
+                <MissingMessage />
+        }
+
+        {
+            enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
+                <div className={classes.title}>Enrollment Dashboard</div>
+        }
+
+        {
+            enrollmentPageStatus === enrollmentPageStatuses.LOADING &&
+                <div className={classes.loadingMask}>
+                    <LoadingMaskForPage />
+                </div>
+        }
     </div>
 </>);
 
-export const EnrollmentPage: ComponentType<{||}> =
-  withStyles(getStyles)(EnrollmentPagePlain);
+export const EnrollmentPageComponent: ComponentType<$Diff<Props, CssClasses>> =
+  compose(
+      withErrorMessageHandler(),
+      withStyles(getStyles),
+  )(EnrollmentPagePlain);
