@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-04T12:10:53.605Z\n"
+"POT-Creation-Date: 2021-02-12T12:19:06.824Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: ericbp <ericbarredap@gmail.com>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -534,22 +534,25 @@ msgstr ""
 msgid "Select"
 msgstr "Seleccionar"
 
+msgid "Program"
+msgstr "Programa"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Show all"
+msgstr "Mostrar todo"
+
 msgid "Selected Program"
 msgstr ""
 
 msgid "Some programs are being filtered."
 msgstr ""
 
-msgid "Show all"
-msgstr "Mostrar todo"
-
-msgid "Program"
-msgstr "Programa"
-
 msgid "Select program"
 msgstr "Seleccionar programa"
 
-msgid "No programs available."
+msgid "Selected"
 msgstr ""
 
 msgid "Online"
@@ -583,6 +586,37 @@ msgid "Event could not be loaded"
 msgstr ""
 
 msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id '{{selectedEnrollmentId}}' doesn't exist"
+msgstr ""
+
+msgid "Choose program to view more information."
+msgstr ""
+
+msgid "Choose enrollment to view more information."
+msgstr ""
+
+msgid ""
+"There are no enrollments for {{teiDisplayName}} in the selected program"
+msgstr ""
+
+msgid ""
+"You selected an Event program. Event programs do not have tracked entities "
+"nor enrollments."
+msgstr ""
+
+msgid "To create a new event"
+msgstr ""
+
+msgid "To view the working lists click"
 msgstr ""
 
 msgid "Delete event"

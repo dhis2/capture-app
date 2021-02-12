@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-04T12:10:53.605Z\n"
+"POT-Creation-Date: 2021-02-12T12:19:06.824Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -532,23 +532,26 @@ msgstr "在注册的机构"
 msgid "Select"
 msgstr "选择"
 
+msgid "Program"
+msgstr "项目"
+
+msgid "No programs available."
+msgstr "无可用项目"
+
+msgid "Show all"
+msgstr "显示全部"
+
 msgid "Selected Program"
 msgstr "选择的项目"
 
 msgid "Some programs are being filtered."
 msgstr "有些项目已经被过滤了"
 
-msgid "Show all"
-msgstr "显示全部"
-
-msgid "Program"
-msgstr "项目"
-
 msgid "Select program"
 msgstr "选择项目"
 
-msgid "No programs available."
-msgstr "无可用项目"
+msgid "Selected"
+msgstr ""
 
 msgid "Online"
 msgstr "在线"
@@ -582,6 +585,37 @@ msgstr "事件不能载入"
 
 msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id '{{selectedEnrollmentId}}' doesn't exist"
+msgstr ""
+
+msgid "Choose program to view more information."
+msgstr ""
+
+msgid "Choose enrollment to view more information."
+msgstr ""
+
+msgid ""
+"There are no enrollments for {{teiDisplayName}} in the selected program"
+msgstr ""
+
+msgid ""
+"You selected an Event program. Event programs do not have tracked entities "
+"nor enrollments."
+msgstr ""
+
+msgid "To create a new event"
+msgstr ""
+
+msgid "To view the working lists click"
+msgstr ""
 
 msgid "Delete event"
 msgstr "删除事件"

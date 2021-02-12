@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-04T12:10:53.605Z\n"
+"POT-Creation-Date: 2021-02-12T12:19:06.824Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -546,23 +546,26 @@ msgstr "Đơn Vị Đăng Ký"
 msgid "Select"
 msgstr "Chọn"
 
+msgid "Program"
+msgstr "Chương trình"
+
+msgid "No programs available."
+msgstr "Không có chương trình"
+
+msgid "Show all"
+msgstr "Hiển thị tất cả"
+
 msgid "Selected Program"
 msgstr "Chương Trình Đã Chọn"
 
 msgid "Some programs are being filtered."
 msgstr "Chương trình đang được lọc"
 
-msgid "Show all"
-msgstr "Hiển thị tất cả"
-
-msgid "Program"
-msgstr "Chương trình"
-
 msgid "Select program"
 msgstr "Chọn Chương Trình"
 
-msgid "No programs available."
-msgstr "Không có chương trình"
+msgid "Selected"
+msgstr ""
 
 msgid "Online"
 msgstr "Trực tuyến"
@@ -596,6 +599,37 @@ msgstr "Không thể tải sự kiện"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Không thể tải đơn vị"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id '{{selectedEnrollmentId}}' doesn't exist"
+msgstr ""
+
+msgid "Choose program to view more information."
+msgstr ""
+
+msgid "Choose enrollment to view more information."
+msgstr ""
+
+msgid ""
+"There are no enrollments for {{teiDisplayName}} in the selected program"
+msgstr ""
+
+msgid ""
+"You selected an Event program. Event programs do not have tracked entities "
+"nor enrollments."
+msgstr ""
+
+msgid "To create a new event"
+msgstr ""
+
+msgid "To view the working lists click"
+msgstr ""
 
 msgid "Delete event"
 msgstr "Xóa sự kiện"
