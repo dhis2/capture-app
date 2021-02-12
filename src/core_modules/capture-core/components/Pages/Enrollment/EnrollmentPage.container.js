@@ -45,7 +45,6 @@ const useComponentLifecycle = () => {
         scopeType,
     ]);
 
-
     useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch, teiId]);
 };
 
