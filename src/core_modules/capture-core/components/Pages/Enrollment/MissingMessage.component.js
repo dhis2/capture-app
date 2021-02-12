@@ -1,10 +1,9 @@
 // @flow
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { urlArguments } from '../../../utils/url';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
@@ -15,7 +14,6 @@ export const missingStatuses = {
     TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED: 'TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED',
     EVENT_PROGRAM_SELECTED: 'EVENT_PROGRAM_SELECTED',
     MISSING_ENROLLMENT_SELECTION: 'MISSING_ENROLLMENT_SELECTION',
-    MISSING_PROGRAM_CATEGORIES_SELECTION: 'MISSING_PROGRAM_CATEGORIES_SELECTION',
     MISSING_PROGRAM_SELECTION: 'MISSING_PROGRAM_SELECTION',
 };
 
@@ -30,14 +28,11 @@ const useMissingStatus = () => {
       );
 
     const { scopeType } = useScopeInfo(programId);
-    const { programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
     const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId } = useEnrollmentInfo(enrollmentId, programId);
     const missingStatus = useMemo(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
         const selectedProgramIsEvent = programId && scopeType === scopeTypes.EVENT_PROGRAM;
-        if (selectedProgramIsTracker && programSelectionIsIncomplete) {
-            return missingStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION;
-        } else if (selectedProgramIsTracker && programHasEnrollments && !enrollmentsOnProgramContainEnrollmentId) {
+        if (selectedProgramIsTracker && programHasEnrollments && !enrollmentsOnProgramContainEnrollmentId) {
             return missingStatuses.MISSING_ENROLLMENT_SELECTION;
         } else if (selectedProgramIsTracker && !programHasEnrollments) {
             return missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED;
@@ -47,7 +42,6 @@ const useMissingStatus = () => {
         return missingStatuses.MISSING_PROGRAM_SELECTION;
     }, [
         programId,
-        programSelectionIsIncomplete,
         programHasEnrollments,
         enrollmentsOnProgramContainEnrollmentId,
         scopeType,
@@ -80,13 +74,6 @@ export const MissingMessage = () => {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
             <IncompleteSelectionsMessage>
                 {i18n.t('Choose program to view more information.')}
-            </IncompleteSelectionsMessage>
-        }
-
-        {
-            missingStatus === missingStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION &&
-            <IncompleteSelectionsMessage>
-                {i18n.t('MISSING CATEGORIES NEEDS BETTER TEXT')}
             </IncompleteSelectionsMessage>
         }
 

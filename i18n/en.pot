@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-02-08T17:46:26.582Z\n"
-"PO-Revision-Date: 2021-02-08T17:46:26.582Z\n"
+"POT-Creation-Date: 2021-02-12T12:19:06.824Z\n"
+"PO-Revision-Date: 2021-02-12T12:19:06.824Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -586,9 +586,6 @@ msgid "Enrollment with id '{{selectedEnrollmentId}}' doesn't exist"
 msgstr ""
 
 msgid "Choose program to view more information."
-msgstr ""
-
-msgid "MISSING CATEGORIES NEEDS BETTER TEXT"
 msgstr ""
 
 msgid "Choose enrollment to view more information."
