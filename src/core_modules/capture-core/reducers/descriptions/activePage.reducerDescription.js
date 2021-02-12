@@ -18,22 +18,22 @@ export const activePageDesc = createReducerDescription({
     [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID]: state => ({
         ...state,
         selectionsError: null,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
         isDataEntryLoading: false,
     }),
     [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_INVALID]: (state, action) => ({
         ...state,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
         selectionsError: action.payload,
     }),
     [lockedSelectorActionTypes.FETCH_ORG_UNIT_ERROR]: (state, action) => ({
         ...state,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
         selectionsError: action.payload,
     }),
     [lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS]: state => ({
         ...state,
-        isPageLoading: false,
+        lockedSelectorLoads: false,
     }),
 
     [viewEventPageActionTypes.VIEW_EVENT_FROM_URL]: state => ({

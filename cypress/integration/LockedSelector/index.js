@@ -258,12 +258,12 @@ And('there should be Child Programme domain forms visible to search with', () =>
 });
 
 const selectedChildProgram = ['Selected Program', 'Child Programme'];
-const selectedMalariaProgram = ['Selected Program', 'Child Programme'];
+const selectedMalariaProgram = ['Selected Program', 'Malaria case diagnosis'];
 const selectedEventProgram = ['Selected Program', 'Antenatal care visit'];
 const emptyProgramSelection = ['Program', 'Select program'];
 const selectedOrgUnit = ['Selected registering unit', 'Taninahun (Malen) CHP'];
 const emptyOrgUnitSelection = ['Registering Organisation Unit'];
-const selectedTei = ['Selected Person', 'Carlos Cruz'];
+const selectedTei = ['Selected', 'Carlos Cruz'];
 const selectedEnrollment = ['Selected Enrollment', '2018-08-07 15:47'];
 const emptyEnrollmentSelection = ['Enrollment', 'Select...'];
 
@@ -369,7 +369,7 @@ And('you select the Child Programme', () => {
 
 And('you see message explaining there are no enrollments for this program', () => {
     cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
-        .contains('There are no enrollments for this program.');
+        .contains('There are no enrollments');
 });
 
 And('you select the Antenatal care visit', () => {
@@ -381,6 +381,6 @@ And('you select the Antenatal care visit', () => {
 
 And('you see message explaining this is an Event program', () => {
     cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
-        .contains('You selected an event program.');
+        .contains('You selected an Event program.');
 });
 

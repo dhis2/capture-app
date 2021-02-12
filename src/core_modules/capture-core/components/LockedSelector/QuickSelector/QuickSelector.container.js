@@ -10,6 +10,7 @@ import {
     setEnrollmentSelection,
 } from '../LockedSelector.actions';
 import { deriveUrlQueries } from '../../../utils/url';
+import { getScopeInfo } from '../../../metaData';
 
 const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
     enrollments
@@ -27,10 +28,12 @@ const mapStateToProps = (state: Object) => {
         router: { location: { pathname, query: { enrollmentId } } },
         currentSelections: { categoriesMeta },
         organisationUnits,
-        enrollmentPage: { enrollments, teiDisplayName, tetDisplayName },
+        enrollmentPage: { enrollments, teiDisplayName },
     } = state;
 
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
+    const { trackedEntityName } = getScopeInfo(programId);
+
     return {
         selectedProgramId: programId,
         selectedOrgUnitId: orgUnitId,
@@ -38,10 +41,10 @@ const mapStateToProps = (state: Object) => {
         selectedOrgUnit: orgUnitId ? organisationUnits[orgUnitId] : null,
         currentPage: pathname.substring(1),
         selectedTeiName: teiDisplayName,
-        selectedTetName: tetDisplayName,
+        selectedTetName: trackedEntityName.length ? trackedEntityName : 'instance',
         selectedEnrollmentId: enrollmentId,
         enrollmentsAsOptions,
-        enrollmentLockedSelectReady: enrollments && enrollments.length,
+        enrollmentLockedSelectReady: Array.isArray(enrollments),
     };
 };
 

@@ -1,14 +1,15 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router';
+import { useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import Grid from '@material-ui/core/Grid';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
-
 import { programCollection } from '../../../../metaDataMemoryStores';
 import VirtualizedSelect from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import ProgramList from './ProgramList';
@@ -18,6 +19,40 @@ import type { Program } from '../../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
 import LinkButton from '../../../Buttons/LinkButton.component';
+import { urlArguments } from '../../../../utils/url';
+
+
+const EmptyPrograms = ({ classes, handleResetOrgUnit }) => {
+    const { push } = useHistory();
+    const pathname: string = useSelector(({ router: { location } }) => location.pathname);
+    const { enrollmentId, teiId, orgUnitId } = useSelector(({ router: { location: { query } } }) => query);
+
+
+    useEffect(() => {
+        const navigateToEventRegistrationPage = () => {
+            push(`${pathname}?${urlArguments({ enrollmentId, teiId, orgUnitId })}`);
+        };
+
+        navigateToEventRegistrationPage();
+    }, [push, pathname, enrollmentId, teiId, orgUnitId]);
+
+    return (
+        <Paper square elevation={0} className={classes.paper}>
+            <h4 className={classes.title}>{ i18n.t('Program') }</h4>
+            <div
+                className={classes.noProgramsContainer}
+            >
+                {i18n.t('No programs available.')}
+                <LinkButton
+                    className={classes.programsHiddenTextResetOrgUnit}
+                    onClick={handleResetOrgUnit}
+                >
+                    {i18n.t('Show all')}
+                </LinkButton>
+            </div>
+        </Paper>
+    );
+};
 
 const styles = (theme: Theme) => ({
     border: {
@@ -40,7 +75,7 @@ const styles = (theme: Theme) => ({
         marginTop: 6,
         marginBottom: 4,
         padding: 5,
-        borderLeft: '2px solid #147cd7',
+        borderLeft: `2px solid ${colors.blue600}`,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -333,30 +368,11 @@ class ProgramSelector extends Component<Props> {
         );
     }
 
-    renderEmpty() {
-        return (
-            <Paper square elevation={0} className={this.props.classes.paper}>
-                <h4 className={this.props.classes.title}>{ i18n.t('Program') }</h4>
-                <div
-                    className={this.props.classes.noProgramsContainer}
-                >
-                    {i18n.t('No programs available.')}
-                    <LinkButton
-                        className={this.props.classes.programsHiddenTextResetOrgUnit}
-                        onClick={() => this.handleResetOrgUnit()}
-                    >
-                        {i18n.t('Show all')}
-                    </LinkButton>
-                </div>
-            </Paper>
-        );
-    }
-
     render() {
         const programOptions = this.getOptions();
 
         if (programOptions.length === 0) {
-            return this.renderEmpty();
+            return <EmptyPrograms classes={this.props.classes} handleResetOrgUnit={this.props.onResetOrgUnit} />;
         }
 
         const selectedProgram = this.props.selectedProgram ? programCollection.get(this.props.selectedProgram) : null;
@@ -366,5 +382,4 @@ class ProgramSelector extends Component<Props> {
         return this.renderWithoutSelectedProgram(programOptions);
     }
 }
-
 export default withStyles(styles, { index: 1 })(ProgramSelector);

@@ -8,15 +8,11 @@ import {
     cleanEnrollmentPage,
     fetchEnrollmentPageInformation,
     showDefaultViewOnEnrollmentPage,
-    showMissingProgramMessageOnEnrollmentPage,
-    showMissingEnrollmentMessageOnEnrollmentPage,
-    showEventProgramMessageOnEnrollmentPage,
-    showMissingCategoryMessageOnEnrollmentPage,
-    showZeroEnrollmentsMessageOnEnrollmentPage,
+    showMissingMessageViewOnEnrollmentPage,
 } from './EnrollmentPage.actions';
+import { scopeTypes } from '../../../metaData/helpers/constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes } from '../../../metaData';
-import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
+import { useEnrollmentInfo } from './hooks';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
@@ -30,37 +26,26 @@ const useComponentLifecycle = () => {
           }),
       );
 
-    // todo annotate
-    const enrollments: Object = useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
-    const programHasEnrollments = enrollments && enrollments.some(({ program }) => programId === program);
-    const { scopeType } = useScopeInfo(programId);
-    const { programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
 
+    const { scopeType } = useScopeInfo(programId);
+    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId } = useEnrollmentInfo(enrollmentId, programId);
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
-        const selectedProgramIsEvent = programId && scopeType === scopeTypes.EVENT_PROGRAM;
 
-        if (selectedProgramIsTracker && programSelectionIsIncomplete) {
-            dispatch(showMissingCategoryMessageOnEnrollmentPage());
-        } else if (selectedProgramIsTracker && programHasEnrollments && enrollmentId) {
+        if (selectedProgramIsTracker && programHasEnrollments && enrollmentsOnProgramContainEnrollmentId) {
             dispatch(showDefaultViewOnEnrollmentPage());
-        } else if (selectedProgramIsTracker && programHasEnrollments && !enrollmentId) {
-            dispatch(showMissingEnrollmentMessageOnEnrollmentPage());
-        } else if (selectedProgramIsTracker && !programHasEnrollments) {
-            dispatch(showZeroEnrollmentsMessageOnEnrollmentPage());
-        } else if (selectedProgramIsEvent) {
-            dispatch(showEventProgramMessageOnEnrollmentPage());
         } else {
-            dispatch(showMissingProgramMessageOnEnrollmentPage());
+            dispatch(showMissingMessageViewOnEnrollmentPage());
         }
     }, [
         dispatch,
         programId,
-        enrollmentId,
-        programSelectionIsIncomplete,
+        enrollmentsOnProgramContainEnrollmentId,
         programHasEnrollments,
         scopeType,
     ]);
+
+
     useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch, teiId]);
 };
 
@@ -83,18 +68,12 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
         dispatch,
     ]);
 
-    const selectedProgramId: string =
-      useSelector(({ router: { location: { query } } }) => query.programId);
-    const selectedOrgUnitId: string =
-      useSelector(({ router: { location: { query } } }) => query.orgUnitId);
     const error: boolean =
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
 
     return (
         <EnrollmentPageComponent
             error={error}
-            selectedProgramId={selectedProgramId}
-            selectedOrgUnitId={selectedOrgUnitId}
             enrollmentPageStatus={enrollmentPageStatus}
         />
     );

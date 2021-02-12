@@ -5,7 +5,6 @@ import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { from, of } from 'rxjs';
 import moment from 'moment';
-import { getApi } from '../../../d2';
 import {
     enrollmentPageActionTypes,
     showErrorViewOnEnrollmentPage,
@@ -16,35 +15,48 @@ import {
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
 import { urlArguments } from '../../../utils/url';
-import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData/helpers';
+import { getAttributesFromScopeId } from '../../../metaData/helpers';
 
-const fetchEnrollment = id => getApi().get(`enrollments/${id}`, { fields: 'trackedEntityInstance,program,orgUnit' });
-const fetchTrackedEntityInstance = id => getApi().get(`trackedEntityInstances/${id}`, { fields: 'attributes,enrollments,trackedEntityType' });
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
-const deriveSelectedName = (attributes = {}) => attributes.reduce((acc, { value: dataElementValue }) =>
-    (acc ? `${acc} ${dataElementValue}` : dataElementValue), '');
 
+const teiQuery = id => ({
+    resource: 'trackedEntityInstances',
+    id,
+    params: {
+        fields: ['attributes', 'enrollments', 'trackedEntityType'],
+    },
+});
 
-const fetchTeiStream = teiId => from(fetchTrackedEntityInstance(teiId))
-    .pipe(
-        map(({ attributes, enrollments, trackedEntityType }) => {
-            const teiDisplayName = deriveSelectedName(attributes);
-            const enrollmentsSortedByDate = sortByDate(enrollments);
-            const { name: tetDisplayName } = getTrackedEntityTypeThrowIfNotFound(trackedEntityType);
+const deriveTeiName = (attributes, trackedEntityType) => {
+    const tetAttributes = getAttributesFromScopeId(trackedEntityType);
+    const [firstId, secondId] = tetAttributes
+        .filter(({ displayInReports }) => displayInReports)
+        .map(({ id }) => id);
 
-            return successfulFetchingEnrollmentPageInformationFromUrl({
-                teiDisplayName,
-                tetDisplayName,
-                enrollmentsSortedByDate,
-            });
-        }),
-        catchError(() => {
-            const error = i18n.t("Tracked entity instance with id '{{teiId}}' doesn't exist", { teiId });
-            return of(showErrorViewOnEnrollmentPage({ error }));
-        }),
-    );
+    const { value: firstValue = '' } = attributes.find(({ attribute }) => attribute === firstId);
+    const { value: secondValue = '' } = attributes.find(({ attribute }) => attribute === secondId);
+    return `${firstValue}${firstValue && ' '}${secondValue}`;
+};
+
+const fetchTeiStream = (teiId, querySingleResource) =>
+    from(querySingleResource(teiQuery(teiId)))
+        .pipe(
+            map(({ attributes, enrollments, trackedEntityType }) => {
+                const enrollmentsSortedByDate = sortByDate(enrollments);
+                const teiDisplayName = deriveTeiName(attributes, trackedEntityType);
+
+                return successfulFetchingEnrollmentPageInformationFromUrl({
+                    teiDisplayName,
+                    enrollmentsSortedByDate,
+                });
+            }),
+            catchError(() => {
+                const error = i18n.t('Tracked entity instance with id "{{teiId}}" does not exist', { teiId });
+                return of(showErrorViewOnEnrollmentPage({ error }));
+            }),
+        );
 
 export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -62,19 +74,19 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
         }),
     );
 
-export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore) =>
+export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_ENROLLMENT_ID_FETCH),
         flatMap(() => {
             const { query: { enrollmentId, orgUnitId, programId, teiId } } = store.value.router.location;
             const urlCompleted = Boolean(enrollmentId && orgUnitId && programId && teiId);
 
-            return from(fetchEnrollment(enrollmentId))
+            return from(querySingleResource({ resource: 'enrollments', id: enrollmentId }))
                 .pipe(
                     flatMap(({ trackedEntityInstance, program, orgUnit }) => (
                         urlCompleted
                             ?
-                            fetchTeiStream(trackedEntityInstance)
+                            fetchTeiStream(trackedEntityInstance, querySingleResource)
                             :
                             of(openEnrollmentPage({
                                 programId: program,
@@ -92,13 +104,13 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
         }),
     );
 
-export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: ReduxStore) =>
+export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH),
         flatMap(() => {
             const { query: { teiId } } = store.value.router.location;
 
-            return fetchTeiStream(teiId);
+            return fetchTeiStream(teiId, querySingleResource);
         }),
     );
 
