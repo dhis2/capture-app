@@ -8,6 +8,8 @@ import { openDataEntryForNewEnrollment } from './open.actions';
 import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer } from '../fieldValidators';
 import { convertGeometryOut } from '../../converters';
 import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
+import moment from 'moment';
+import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 
 const itemId = 'newEnrollment';
 
@@ -55,7 +57,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async (
                 dataEntryId,
                 itemId,
                 [...dataEntryPropsToInclude, ...extraDataEntryProps],
-                null,
+                { enrollmentDate: convertDateObjectToDateFormatString(new Date()) },
                 generatedItemContainers
                     .reduce((accValuesByKey, container) => {
                         accValuesByKey[container.id] = container.item.value;
