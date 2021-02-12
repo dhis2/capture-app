@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-02-04T12:10:53.605Z\n"
-"PO-Revision-Date: 2021-02-04T12:10:53.605Z\n"
+"POT-Creation-Date: 2021-02-12T12:19:06.824Z\n"
+"PO-Revision-Date: 2021-02-12T12:19:06.824Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -522,22 +522,25 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
+msgid "Program"
+msgstr ""
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
 msgid "Selected Program"
 msgstr ""
 
 msgid "Some programs are being filtered."
 msgstr ""
 
-msgid "Show all"
-msgstr ""
-
-msgid "Program"
-msgstr ""
-
 msgid "Select program"
 msgstr ""
 
-msgid "No programs available."
+msgid "Selected"
 msgstr ""
 
 msgid "Online"
@@ -571,6 +574,35 @@ msgid "Event could not be loaded"
 msgstr ""
 
 msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid "There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id '{{selectedEnrollmentId}}' doesn't exist"
+msgstr ""
+
+msgid "Choose program to view more information."
+msgstr ""
+
+msgid "Choose enrollment to view more information."
+msgstr ""
+
+msgid "There are no enrollments for {{teiDisplayName}} in the selected program"
+msgstr ""
+
+msgid ""
+"You selected an Event program. Event programs do not have tracked entities "
+"nor enrollments."
+msgstr ""
+
+msgid "To create a new event"
+msgstr ""
+
+msgid "To view the working lists click"
 msgstr ""
 
 msgid "Delete event"

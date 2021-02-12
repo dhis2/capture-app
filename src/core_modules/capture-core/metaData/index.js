@@ -35,6 +35,7 @@ export {
     convertDataElementsValues,
     getEventProgramThrowIfNotFound,
     getEventProgramEventAccess,
+    getScopeInfo,
     programTypes,
     scopeTypes,
 } from './helpers';
