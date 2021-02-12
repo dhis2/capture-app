@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useMemo } from "react";
 import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
