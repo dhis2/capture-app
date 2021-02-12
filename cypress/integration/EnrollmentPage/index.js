@@ -4,6 +4,8 @@ beforeEach(() => {
 
 Given('you are on an enrollment page', () => {
     cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
+    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+        .contains('Enrollment Dashboard');
 });
 
 And('you reset the program selection', () => {

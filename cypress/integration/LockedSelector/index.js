@@ -290,6 +290,8 @@ Then(/^you see the following (.*)$/, (message) => {
 
 And('you land on the enrollment page by having typed only the enrollmentId on the url', () => {
     cy.visit('/#/enrollment?enrollmentId=gPDueU02tn8');
+    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+        .contains('Enrollment Dashboard');
 });
 
 And('you reset the tei selection', () => {
