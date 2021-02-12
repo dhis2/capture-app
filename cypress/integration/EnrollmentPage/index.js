@@ -3,7 +3,7 @@ beforeEach(() => {
 });
 
 Given('you are on an enrollment page', () => {
-    cy.visit('/#/enrollment?enrollmentId=gPDueU02tn8');
+    cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
 });
 
 
@@ -42,10 +42,10 @@ And('you see the registration form for the Malaria case diagnosis', () => {
 
 And('you see the registration form for the MNCH PNC program', () => {
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
-        .contains('New person in program: MNCH / PNC (Adult Woman)\n')
+        .contains('New person in program: MNCH / PNC (Adult Woman)')
         .should('exist');
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
-        .contains('Saving a person in MNCH / PNC (Adult Woman) in Taninahun (Malen) CHP.\n')
+        .contains('Saving a person in MNCH / PNC (Adult Woman) in Taninahun (Malen) CHP.')
         .should('exist');
 });
 
