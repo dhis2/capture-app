@@ -6,7 +6,6 @@ Given('you are on an enrollment page', () => {
     cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
 });
 
-
 And('you reset the program selection', () => {
     cy.get('[data-test="reset-selection-button"]')
         .should('have.length.greaterThan', 2);

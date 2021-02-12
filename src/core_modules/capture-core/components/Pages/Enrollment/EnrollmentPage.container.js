@@ -61,8 +61,6 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     useEffect(() => {
         dispatch(fetchEnrollmentPageInformation());
     },
-    // todo there is a bug when you have http://localhost:3000/#/enrollment?teiId=EaOyKGOIGRp&enrollmentId=W9YcBFADeRj
-    // because you have both tei and enrollmentId it stucks in an attermon loop
     [
         selectedTeiId,
         dispatch,
