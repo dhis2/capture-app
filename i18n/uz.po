@@ -568,7 +568,7 @@ msgid "Select program"
 msgstr "Дастурни танлаш"
 
 msgid "Selected"
-msgstr ""
+msgstr "Танланган"
 
 msgid "Online"
 msgstr "Онлайн"

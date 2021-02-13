@@ -559,7 +559,7 @@ msgid "Select program"
 msgstr "تحديد البرنامج"
 
 msgid "Selected"
-msgstr ""
+msgstr "محدد"
 
 msgid "Online"
 msgstr "متصل"

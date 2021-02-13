@@ -572,7 +572,7 @@ msgid "Select program"
 msgstr "Dasturni tanlash"
 
 msgid "Selected"
-msgstr ""
+msgstr "Tanlangan"
 
 msgid "Online"
 msgstr "Onlayn"

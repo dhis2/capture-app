@@ -548,7 +548,7 @@ msgid "Select program"
 msgstr "پروګرام غوره کړئ"
 
 msgid "Selected"
-msgstr ""
+msgstr "انتخاب شده"
 
 msgid "Online"
 msgstr "آنلاین"

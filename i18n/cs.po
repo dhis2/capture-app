@@ -562,7 +562,7 @@ msgid "Select program"
 msgstr "Vybrat program"
 
 msgid "Selected"
-msgstr ""
+msgstr "Vybráno"
 
 msgid "Online"
 msgstr "Online"
