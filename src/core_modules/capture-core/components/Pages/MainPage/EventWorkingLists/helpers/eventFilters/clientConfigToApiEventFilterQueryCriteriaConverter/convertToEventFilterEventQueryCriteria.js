@@ -67,18 +67,18 @@ const convertDate = (rawValue: string): string => {
     return momentDate.format('YYYY-MM-DD');
 };
 
-const getDateFilter = (filter: DateFilterData): ApiDataFilterDate => {
-    if (filter.type === dateFilterTypes.RELATIVE) {
-        return {
-            type: filter.type,
-            period: filter.period,
-        };
-    }
+const getDateFilter = (dateFilter: DateFilterData): ApiDataFilterDate => {
+    const apiDateFilterContents = dateFilter.type === dateFilterTypes.RELATIVE ? {
+        type: dateFilter.type,
+        period: dateFilter.period,
+    } : {
+        type: dateFilter.type,
+        startDate: dateFilter.ge ? convertDate(dateFilter.ge) : undefined,
+        endDate: dateFilter.le ? convertDate(dateFilter.le) : undefined,
+    };
 
     return {
-        type: filter.type,
-        startDate: filter.ge ? convertDate(filter.ge) : undefined,
-        endDate: filter.le ? convertDate(filter.le) : undefined,
+        dateFilter: apiDateFilterContents,
     };
 };
 
@@ -146,7 +146,7 @@ const getMainFilter = (filter: Object): Object => {
         break;
     case 'eventDate':
         mainValue = {
-            eventDate: filterValues,
+            eventDate: filterValues.dateFilter,
         };
         break;
     case 'assignee':
