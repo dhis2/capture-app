@@ -42,6 +42,8 @@ export type {
     LoadTemplates,
     LoadView,
     SelectTemplate,
+    SetTemplateSharingSettings,
+    SharingSettings,
     UnloadingContext,
     UpdateList,
     UpdateTemplate,

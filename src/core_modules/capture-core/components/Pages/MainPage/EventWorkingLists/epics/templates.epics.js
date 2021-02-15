@@ -17,15 +17,18 @@ import {
     deleteTemplateError,
 } from '../../WorkingListsCommon';
 import { getTemplates } from './getTemplates';
-import { getApi } from '../../../../../d2';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 
-export const retrieveTemplatesEpic = (action$: InputObservable) =>
+export const retrieveTemplatesEpic = (
+    action$: InputObservable,
+    store: ReduxStore, {
+        querySingleResource,
+    }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATES_FETCH),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap(({ payload: { storeId, programId } }) => {
-            const promise = getTemplates(programId)
+            const promise = getTemplates(programId, querySingleResource)
                 .then(({ templates, defaultTemplateId }) =>
                     fetchTemplatesSuccess(templates, defaultTemplateId, storeId))
                 .catch((error) => {
@@ -45,54 +48,55 @@ export const retrieveTemplatesEpic = (action$: InputObservable) =>
             );
         }));
 
-export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
+export const updateTemplateEpic = (
+    action$: InputObservable,
+    store: ReduxStore, {
+        mutate,
+    }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_UPDATE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
-        concatMap((action) => {
-            const {
-                template,
-                criteria: eventQueryCriteria,
-                programId,
-                storeId,
-            } = action.payload;
-
+        concatMap(({ payload: {
+            template: {
+                id,
+                name,
+                externalAccess,
+                publicAccess,
+                user,
+                userGroupAccesses,
+                userAccesses,
+            },
+            criteria: eventQueryCriteria,
+            programId,
+            storeId,
+        } }) => {
             const eventFilterData = {
-                name: template.name,
+                name,
                 program: programId,
                 eventQueryCriteria,
+                externalAccess,
+                publicAccess,
+                user,
+                userGroupAccesses,
+                userAccesses,
             };
 
-            const api = getApi();
+            const requestPromise = mutate({
+                resource: 'eventFilters',
+                id,
+                data: eventFilterData,
+                type: 'replace',
+            }).then(() => {
+                const isActiveTemplate =
+                    store.value.workingListsTemplates[storeId].selectedTemplateId === id;
 
-            const requestPromise = api
-                .update(`eventFilters/${template.id}`, eventFilterData)
-                .then(() => api
-                    .post(`sharing?type=eventFilter&id=${template.id}`, {
-                        object: {
-                            publicAccess: '--------',
-                            externalAccess: false,
-                        },
-                    })
-                    .catch((error) => {
-                        log.error(
-                            errorCreator('could not set sharing settings for template')({
-                                error,
-                                eventFilterData,
-                                templateId: template.id,
-                            }),
-                        );
-                    }))
-                .then(() => {
-                    const isActiveTemplate =
-            store.value.workingListsTemplates[storeId].selectedTemplateId === template.id;
-                    return updateTemplateSuccess(
-                        template.id,
-                        eventQueryCriteria, {
-                            storeId,
-                            isActiveTemplate,
-                        });
-                })
+                return updateTemplateSuccess(
+                    id,
+                    eventQueryCriteria, {
+                        storeId,
+                        isActiveTemplate,
+                    });
+            })
                 .catch((error) => {
                     log.error(
                         errorCreator('could not update template')({
@@ -101,9 +105,9 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                         }),
                     );
                     const isActiveTemplate =
-            store.value.workingListsTemplates[storeId].selectedTemplateId === template.id;
+            store.value.workingListsTemplates[storeId].selectedTemplateId === id;
                     return updateTemplateError(
-                        template.id,
+                        id,
                         eventQueryCriteria, {
                             storeId,
                             isActiveTemplate,
@@ -114,7 +118,7 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                 takeUntil(
                     action$.pipe(
                         ofType(workingListsCommonActionTypes.TEMPLATE_UPDATE),
-                        filter(cancelAction => cancelAction.payload.template.id === template.id),
+                        filter(cancelAction => cancelAction.payload.template.id === id),
                     ),
                 ),
                 takeUntil(
@@ -126,7 +130,11 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
             );
         }));
 
-export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
+export const addTemplateEpic = (
+    action$: InputObservable,
+    store: ReduxStore, {
+        mutate,
+    }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_ADD),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
@@ -145,45 +153,25 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
                 eventQueryCriteria,
             };
 
-            const api = getApi();
-
-            const requestPromise = api
-                .post('eventFilters', eventFilterData)
-                .then((result) => {
-                    const templateId = result.response.uid;
-                    return api
-                        .post(`sharing?type=eventFilter&id=${templateId}`, {
-                            object: {
-                                publicAccess: '--------',
-                                externalAccess: false,
-                            },
-                        })
-                        .catch((error) => {
-                            log.error(
-                                errorCreator('could not set sharing settings for template')({
-                                    error,
-                                    eventFilterData,
-                                    templateId,
-                                }),
-                            );
-                        })
-                        .then(() => {
-                            const isActiveTemplate =
+            const requestPromise = mutate({
+                resource: 'eventFilters',
+                type: 'create',
+                data: eventFilterData,
+            }).then((result) => {
+                const isActiveTemplate =
                     store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
-                            return addTemplateSuccess(result.response.uid, clientId, { storeId, isActiveTemplate });
-                        });
-                })
-                .catch((error) => {
-                    log.error(
-                        errorCreator('could not add template')({
-                            error,
-                            eventFilterData,
-                        }),
-                    );
-                    const isActiveTemplate =
-                store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
-                    return addTemplateError(clientId, { storeId, isActiveTemplate });
-                });
+                return addTemplateSuccess(result.response.uid, clientId, { storeId, isActiveTemplate });
+            }).catch((error) => {
+                log.error(
+                    errorCreator('could not add template')({
+                        error,
+                        eventFilterData,
+                    }),
+                );
+                const isActiveTemplate =
+            store.value.workingListsTemplates[storeId].selectedTemplateId === clientId;
+                return addTemplateError(clientId, { storeId, isActiveTemplate });
+            });
 
             return from(requestPromise).pipe(
                 takeUntil(
@@ -195,19 +183,20 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
             );
         }));
 
-export const deleteTemplateEpic = (action$: InputObservable) =>
+export const deleteTemplateEpic = (
+    action$: InputObservable,
+    store: ReduxStore, {
+        mutate,
+    }: ApiUtils) =>
     action$.pipe(
         ofType(workingListsCommonActionTypes.TEMPLATE_DELETE),
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
-        concatMap((action) => {
-            const {
-                template,
-                storeId,
-            } = action.payload;
-
-            const requestPromise = getApi()
-                .delete(`eventFilters/${template.id}`)
-                .then(() => deleteTemplateSuccess(template, storeId))
+        concatMap(({ payload: { template, storeId } }) => {
+            const requestPromise = mutate({
+                resource: 'eventFilters',
+                id: template.id,
+                type: 'delete',
+            }).then(() => deleteTemplateSuccess(template, storeId))
                 .catch((error) => {
                     log.error(
                         errorCreator('could not delete template')({

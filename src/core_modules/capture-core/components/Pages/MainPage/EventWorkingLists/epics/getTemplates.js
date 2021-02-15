@@ -1,9 +1,10 @@
 // @flow
 import { getApiEventFilters } from '../helpers/eventFilters';
+import type { QuerySingleResource } from '../../../../../utils/api/api.types';
 import type { EventWorkingListsTemplates } from '../types';
 
-export const getTemplates = (programId: string): Promise<{ templates: EventWorkingListsTemplates, defaultTemplateId: string}> =>
-    getApiEventFilters(programId).then((apiEventFilters) => {
+export const getTemplates = (programId: string, querySingleResource: QuerySingleResource): Promise<{ templates: EventWorkingListsTemplates, defaultTemplateId: string}> =>
+    getApiEventFilters(programId, querySingleResource).then((apiEventFilters) => {
         const defaultTemplate = {
             id: `${programId}-default`,
             isDefault: true,

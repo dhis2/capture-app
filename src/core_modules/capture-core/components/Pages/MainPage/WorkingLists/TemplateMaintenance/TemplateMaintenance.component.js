@@ -3,22 +3,10 @@ import React, { useCallback, useImperativeHandle, forwardRef } from 'react';
 import ExistingTemplateDialog from './ExistingTemplateDialog.component';
 import NewTemplateDialog from './NewTemplateDialog.component';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog.component';
-import SharingDialog from './SharingDialog.component';
+import { SharingDialog } from './SharingDialog.component';
 import { dialogModes } from './dialogModes';
-import type { WorkingListTemplate } from '../workingLists.types';
-
-type PassOnProps = {
-    onClose: Function,
-};
-
-type Props = {
-    ...PassOnProps,
-    mode: ?$Values<typeof dialogModes>,
-    currentTemplate: WorkingListTemplate,
-    onAddTemplate: Function,
-    onUpdateTemplate: Function,
-    onDeleteTemplate: Function,
-};
+import type { SharingSettings } from '../workingLists.types';
+import type { Props } from './templateMaintenance.types';
 
 const TemplateMaintenance = (props: Props, ref) => {
     const {
@@ -27,32 +15,30 @@ const TemplateMaintenance = (props: Props, ref) => {
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
+        onSetSharingSettings,
         ...passOnProps
     } = props;
 
-    const addTemplateHandler = useCallback((name: string) => {
-        onAddTemplate(name, currentTemplate);
-    }, [
-        onAddTemplate,
-        currentTemplate,
-    ]);
-
-    const updateTemplateHandler = useCallback(() => {
+    const handleUpdateTemplate = useCallback(() => {
         onUpdateTemplate(currentTemplate);
     }, [
         onUpdateTemplate,
         currentTemplate,
     ]);
 
-    const deleteTemplateHandler = useCallback(() => {
+    const handleDeleteTemplate = useCallback(() => {
         onDeleteTemplate(currentTemplate);
     }, [
         onDeleteTemplate,
         currentTemplate,
     ]);
 
+    const handleSetSharingSettings = useCallback((sharingSettings: SharingSettings) => {
+        onSetSharingSettings(sharingSettings, currentTemplate.id);
+    }, [onSetSharingSettings, currentTemplate.id]);
+
     useImperativeHandle(ref, () => ({
-        updateTemplateHandler,
+        handleUpdateTemplate,
     }));
 
     return (
@@ -60,26 +46,26 @@ const TemplateMaintenance = (props: Props, ref) => {
             <ExistingTemplateDialog
                 {...passOnProps}
                 open={mode === dialogModes.REPLACE}
-                onSaveTemplate={updateTemplateHandler}
+                onSaveTemplate={handleUpdateTemplate}
             />
             <NewTemplateDialog
                 {...passOnProps}
                 open={mode === dialogModes.NEW}
-                onSaveTemplate={addTemplateHandler}
+                onSaveTemplate={onAddTemplate}
             />
             <DeleteConfirmationDialog
                 {...passOnProps}
                 open={mode === dialogModes.DELETE}
-                onDeleteTemplate={deleteTemplateHandler}
+                onDeleteTemplate={handleDeleteTemplate}
                 templateName={currentTemplate.name}
             />
             <SharingDialog
-                {...passOnProps}
                 open={mode === dialogModes.SHARING}
                 templateId={currentTemplate.id}
+                onClose={handleSetSharingSettings}
             />
         </>
     );
 };
 
-export default forwardRef<Props, { updateTemplateHandler: Function }>(TemplateMaintenance);
+export default forwardRef<Props, { handleUpdateTemplate: Function }>(TemplateMaintenance);
