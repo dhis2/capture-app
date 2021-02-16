@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-12T12:19:06.824Z\n"
+"POT-Creation-Date: 2021-02-16T11:21:42.194Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Tajik (https://www.transifex.com/hisp-uio/teams/100509/tg/)\n"
@@ -539,7 +539,7 @@ msgstr ""
 msgid "Show all"
 msgstr ""
 
-msgid "Selected Program"
+msgid "Selected program"
 msgstr ""
 
 msgid "Some programs are being filtered."
@@ -591,28 +591,42 @@ msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
 
-msgid "Enrollment with id '{{selectedEnrollmentId}}' doesn't exist"
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
-msgid "Choose program to view more information."
-msgstr ""
-
-msgid "Choose enrollment to view more information."
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
 msgid ""
-"There are no enrollments for {{teiDisplayName}} in the selected program"
+"{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
 
 msgid ""
-"You selected an Event program. Event programs do not have tracked entities "
-"nor enrollments."
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
 msgstr ""
 
-msgid "To create a new event"
+msgid "{{teiDisplayName}} is not enrolled in this program."
 msgstr ""
 
-msgid "To view the working lists click"
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr ""
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr ""
+
+msgid "View working list in this program."
 msgstr ""
 
 msgid "Delete event"
@@ -851,9 +865,6 @@ msgid "Add relationship"
 msgstr ""
 
 msgid "Results found"
-msgstr ""
-
-msgid "Selected program"
 msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
