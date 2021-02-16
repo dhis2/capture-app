@@ -18,7 +18,7 @@ const deriveAttributesFromFormValues = (formValues = {}) =>
 
 const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnitId }) => {
     // in case we have a program that does not have an incident date, such as Malaria case diagnosis,
-    // we want the incident to bedefault to enrollmentDate
+    // we want the incident to default to enrollmentDate
     const incident = (incidentDate || enrollmentDate);
 
     return [...stages.values()]
