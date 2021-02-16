@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/dhis2/capture-app/compare/v1.9.0...v1.10.0) (2021-02-16)
+
+
+### Features
+
+* adds missing parts from the chain ([#1513](https://github.com/dhis2/capture-app/issues/1513)) ([409b07e](https://github.com/dhis2/capture-app/commit/409b07e3cf0cd35ac079386f281da8bfc489b322))
+
 ## [1.8.3](https://github.com/dhis2/capture-app/compare/v1.8.2...v1.8.3) (2021-02-08)
 
 
