@@ -7,7 +7,6 @@ import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './EnrollmentPage.types';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import LoadingMaskForPage from '../../LoadingMasks/LoadingMaskForPage.component';
-import { resetProgramOnEnrollmentPage } from './EnrollmentPage.actions';
 import { withErrorMessageHandler } from '../../../HOC';
 import { MissingMessage } from './MissingMessage.component';
 
@@ -24,7 +23,7 @@ const getStyles = ({ typography }) => ({
 });
 
 const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
-    <LockedSelector pageToPush="enrollment" customActionsOnProgramIdReset={[resetProgramOnEnrollmentPage()]} />
+    <LockedSelector pageToPush="enrollment" />
 
     <div data-test="dhis2-capture-enrollment-page-content" className={classes.container} >
 

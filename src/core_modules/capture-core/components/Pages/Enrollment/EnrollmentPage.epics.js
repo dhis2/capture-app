@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { push } from 'connected-react-router';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
-import { from, of } from 'rxjs';
+import { concat, empty, from, of } from 'rxjs';
 import moment from 'moment';
 import {
     enrollmentPageActionTypes,
@@ -16,7 +16,6 @@ import {
 } from './EnrollmentPage.actions';
 import { urlArguments } from '../../../utils/url';
 import { getAttributesFromScopeId } from '../../../metaData/helpers';
-
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
@@ -49,6 +48,7 @@ const fetchTeiStream = (teiId, querySingleResource) =>
 
                 return successfulFetchingEnrollmentPageInformationFromUrl({
                     teiDisplayName,
+                    tetId: trackedEntityType,
                     enrollmentsSortedByDate,
                 });
             }),
@@ -78,25 +78,23 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_ENROLLMENT_ID_FETCH),
         flatMap(() => {
-            const { query: { enrollmentId, orgUnitId, programId, teiId } } = store.value.router.location;
-            const urlCompleted = Boolean(enrollmentId && orgUnitId && programId && teiId);
+            const { query: { enrollmentId } } = store.value.router.location;
 
             return from(querySingleResource({ resource: 'enrollments', id: enrollmentId }))
                 .pipe(
                     flatMap(({ trackedEntityInstance, program, orgUnit }) => (
-                        urlCompleted
-                            ?
-                            fetchTeiStream(trackedEntityInstance, querySingleResource)
-                            :
+                        concat(
+                            fetchTeiStream(trackedEntityInstance, querySingleResource),
                             of(openEnrollmentPage({
                                 programId: program,
                                 orgUnitId: orgUnit,
                                 teiId: trackedEntityInstance,
                                 enrollmentId,
-                            }))
+                            })),
+                        )
                     )),
                     catchError(() => {
-                        const error = i18n.t("Enrollment with id '{{selectedEnrollmentId}}' doesn't exist", { enrollmentId });
+                        const error = i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId });
                         return of(showErrorViewOnEnrollmentPage({ error }));
                     }),
                     startWith(showLoadingViewOnEnrollmentPage()),
@@ -114,10 +112,24 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
         }),
     );
 
-export const openEnrollmentPageEpic = (action$: InputObservable) =>
+export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PAGE_OPEN),
-        map(({ payload: { enrollmentId, programId, orgUnitId, teiId } }) =>
-            push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`),
+        flatMap(({ payload: { enrollmentId, programId, orgUnitId, teiId } }) => {
+            const {
+                query: {
+                    enrollmentId: queryEnrollment,
+                    orgUnitId: queryOrgUnitId,
+                    programId: queryProgramId,
+                    teiId: queryTeiId,
+                },
+            } = store.value.router.location;
+            const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
+
+            if (!urlCompleted) {
+                return of(push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`));
+            }
+            return empty();
+        },
         ),
     );

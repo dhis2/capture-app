@@ -1,10 +1,3 @@
-# [1.9.0](https://github.com/dhis2/capture-app/compare/v1.8.3...v1.9.0) (2021-02-12)
-
-
-### Features
-
-* DHIS2-10161 Create enrollment page with routing ([#1387](https://github.com/dhis2/capture-app/issues/1387)) ([efa2828](https://github.com/dhis2/capture-app/commit/efa282893c51cb97c66f6df0c2a6f3b4126da8f1)), closes [#1448](https://github.com/dhis2/capture-app/issues/1448) [#1449](https://github.com/dhis2/capture-app/issues/1449) [#1450](https://github.com/dhis2/capture-app/issues/1450) [#1451](https://github.com/dhis2/capture-app/issues/1451) [#1388](https://github.com/dhis2/capture-app/issues/1388) [#1495](https://github.com/dhis2/capture-app/issues/1495) [#1497](https://github.com/dhis2/capture-app/issues/1497)
-
 ## [1.8.3](https://github.com/dhis2/capture-app/compare/v1.8.2...v1.8.3) (2021-02-08)
 
 

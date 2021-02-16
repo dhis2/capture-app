@@ -2,7 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
-import { catchError, filter, map, switchMap } from 'rxjs/operators';
+import { catchError, filter, flatMap, map, startWith, switchMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import {
     lockedSelectorActionTypes,
@@ -12,6 +12,8 @@ import {
     setCurrentOrgUnitBasedOnUrl,
     errorRetrievingOrgUnitBasedOnUrl,
     setEmptyOrgUnitBasedOnUrl,
+    startLoading,
+    completeUrlUpdate,
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { deriveUrlQueries, pageFetchesOrgUnitUsingTheOldWay, urlArguments } from '../../utils/url';
@@ -70,28 +72,38 @@ export const startAgainEpic = (action$: InputObservable) =>
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (
     action$: InputObservable,
-    _: ReduxStore,
+    store: ReduxStore,
     { querySingleResource }: ApiUtils) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE),
+        ofType(lockedSelectorActionTypes.FROM_URL_UPDATE),
         filter(action => action.payload.nextProps.orgUnitId),
-        switchMap(action =>
-            querySingleResource(orgUnitsQuery(action.payload.nextProps.orgUnitId))
-                .then(response =>
-                    setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }))
-                .catch(() =>
-                    errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit'))),
+        switchMap((action) => {
+            const { organisationUnits } = store.value;
+            const { orgUnitId } = action.payload.nextProps;
+            if (organisationUnits[orgUnitId]) {
+                return of(completeUrlUpdate());
+            }
+            return from(querySingleResource(orgUnitsQuery(action.payload.nextProps.orgUnitId)))
+                .pipe(
+                    flatMap(response =>
+                        of(setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }))),
+                    catchError(() =>
+                        of(errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')))),
+                    startWith(startLoading()),
+                );
+        },
         ));
 
 export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE),
+        ofType(lockedSelectorActionTypes.FROM_URL_UPDATE),
         filter(action => !action.payload.nextProps.orgUnitId),
         map(() => setEmptyOrgUnitBasedOnUrl()));
 
 export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
+            lockedSelectorActionTypes.FROM_URL_UPDATE_COMPLETE,
             lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS,
             lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET,
         ),

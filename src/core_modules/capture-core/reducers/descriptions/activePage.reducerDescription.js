@@ -11,10 +11,6 @@ import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/Ev
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 export const activePageDesc = createReducerDescription({
-    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE]: state => ({
-        ...state,
-        lockedSelectorLoads: true,
-    }),
     [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID]: state => ({
         ...state,
         selectionsError: null,
@@ -32,6 +28,14 @@ export const activePageDesc = createReducerDescription({
         selectionsError: action.payload,
     }),
     [lockedSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS]: state => ({
+        ...state,
+        lockedSelectorLoads: false,
+    }),
+    [lockedSelectorActionTypes.LOADING_START]: state => ({
+        ...state,
+        lockedSelectorLoads: true,
+    }),
+    [lockedSelectorActionTypes.FROM_URL_UPDATE_COMPLETE]: state => ({
         ...state,
         lockedSelectorLoads: false,
     }),

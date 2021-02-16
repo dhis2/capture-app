@@ -1,9 +1,11 @@
 // @flow
-import React, { useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { urlArguments } from '../../../utils/url';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
@@ -12,12 +14,17 @@ import { useEnrollmentInfo } from './hooks';
 
 export const missingStatuses = {
     TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED: 'TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED',
+    TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED: 'TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED',
     EVENT_PROGRAM_SELECTED: 'EVENT_PROGRAM_SELECTED',
     MISSING_ENROLLMENT_SELECTION: 'MISSING_ENROLLMENT_SELECTION',
+    MISSING_PROGRAM_CATEGORIES_SELECTION: 'MISSING_PROGRAM_CATEGORIES_SELECTION',
     MISSING_PROGRAM_SELECTION: 'MISSING_PROGRAM_SELECTION',
 };
 
 const useMissingStatus = () => {
+    const dispatch = useDispatch();
+    const [missingStatus, setStatus] = useState(null);
+
     const { programId, enrollmentId } =
       useSelector(({ router: { location: { query } } }) =>
           ({
@@ -27,23 +34,34 @@ const useMissingStatus = () => {
           }),
       );
 
-    const { scopeType } = useScopeInfo(programId);
-    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId } = useEnrollmentInfo(enrollmentId, programId);
-    const missingStatus = useMemo(() => {
+    const { scopeType, tetId: scopeTetId } = useScopeInfo(programId);
+    const { programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
+    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, tetId } = useEnrollmentInfo(enrollmentId, programId);
+    const selectedProgramIsOfDifferentTypTetype = scopeTetId !== tetId;
+    useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
         const selectedProgramIsEvent = programId && scopeType === scopeTypes.EVENT_PROGRAM;
-        if (selectedProgramIsTracker && programHasEnrollments && !enrollmentsOnProgramContainEnrollmentId) {
-            return missingStatuses.MISSING_ENROLLMENT_SELECTION;
+
+        if (selectedProgramIsTracker && programSelectionIsIncomplete) {
+            setStatus(missingStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION);
+        } else if (selectedProgramIsTracker && selectedProgramIsOfDifferentTypTetype) {
+            setStatus(missingStatuses.TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED);
+        } else if (selectedProgramIsTracker && programHasEnrollments && !enrollmentsOnProgramContainEnrollmentId) {
+            setStatus(missingStatuses.MISSING_ENROLLMENT_SELECTION);
         } else if (selectedProgramIsTracker && !programHasEnrollments) {
-            return missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED;
+            setStatus(missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED);
         } else if (selectedProgramIsEvent) {
-            return missingStatuses.EVENT_PROGRAM_SELECTED;
+            setStatus(missingStatuses.EVENT_PROGRAM_SELECTED);
+        } else {
+            setStatus(missingStatuses.MISSING_PROGRAM_SELECTION);
         }
-        return missingStatuses.MISSING_PROGRAM_SELECTION;
     }, [
+        dispatch,
         programId,
+        programSelectionIsIncomplete,
         programHasEnrollments,
         enrollmentsOnProgramContainEnrollmentId,
+        selectedProgramIsOfDifferentTypTetype,
         scopeType,
     ]);
 
@@ -52,35 +70,58 @@ const useMissingStatus = () => {
 
 const useNavigations = () => {
     const history = useHistory();
+    const { tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
+
     const selectedProgramId: string =
       useSelector(({ router: { location: { query } } }) => query.programId);
     const selectedOrgUnitId: string =
       useSelector(({ router: { location: { query } } }) => query.orgUnitId);
-    const navigateToEventRegistrationPage = () =>
+    const navigateToProgramRegistrationPage = () =>
         history.push(`/new?${urlArguments({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId })}`);
     const navigateToEventWorkingList = () =>
         history.push(`/?${urlArguments({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId })}`);
+    const navigateToTetRegistrationPage = () =>
+        history.push(`/new?${urlArguments({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId, trackedEntityTypeId: tetId })}`);
 
-    return { navigateToEventRegistrationPage, navigateToEventWorkingList };
+    return { navigateToProgramRegistrationPage, navigateToEventWorkingList, navigateToTetRegistrationPage };
 };
 
-export const MissingMessage = () => {
-    const { navigateToEventRegistrationPage, navigateToEventWorkingList } = useNavigations();
-    const { missingStatus } = useMissingStatus();
-    const { teiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
+const getStyles = () => ({
+    lineHeight: { lineHeight: 1.8 },
+    link: {
+        background: 'transparent',
+        padding: 0,
+    },
+});
 
+export const MissingMessage = withStyles(getStyles)(({ classes }) => {
+    const { navigateToProgramRegistrationPage, navigateToEventWorkingList } = useNavigations();
+    const { missingStatus } = useMissingStatus();
+    const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    const selectedProgramId: string =
+      useSelector(({ router: { location: { query } } }) => query.programId);
+
+    const { trackedEntityName: tetName } = useScopeInfo(tetId);
+    const { programName, trackedEntityName: selectedTetName } = useScopeInfo(selectedProgramId);
     return (<>
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose program to view more information.')}
+                {i18n.t('{{teiDisplayName}} is enrolled in multiple programs. Choose a program.', { teiDisplayName })}
+            </IncompleteSelectionsMessage>
+        }
+
+        {
+            missingStatus === missingStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION &&
+            <IncompleteSelectionsMessage>
+                {i18n.t('{{programName}} has categories. Choose all categories to view dashboard.', { programName })}
             </IncompleteSelectionsMessage>
         }
 
         {
             missingStatus === missingStatuses.MISSING_ENROLLMENT_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('Choose enrollment to view more information.')}
+                {i18n.t('There are multiple enrollments for this program. Choose an enrollment to view the dashboard.')}
             </IncompleteSelectionsMessage>
 
         }
@@ -88,48 +129,62 @@ export const MissingMessage = () => {
         {
             missingStatus === missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED &&
             <IncompleteSelectionsMessage>
-                {i18n.t('There are no enrollments for {{teiDisplayName}} in the selected program', { teiDisplayName })}
+                <div className={classes.lineHeight}>
+                    {i18n.t('{{teiDisplayName}} is not enrolled in this program.', { teiDisplayName })}
+                    <div>
+
+                        <LinkButton
+                            className={classes.link}
+                            onClick={navigateToProgramRegistrationPage}
+                        >
+                            {i18n.t('Enroll {{teiDisplayName}} in this program.', { teiDisplayName })}
+                        </LinkButton>
+                    </div>
+                </div>
+            </IncompleteSelectionsMessage>
+        }
+
+        {
+            missingStatus === missingStatuses.TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED &&
+            <IncompleteSelectionsMessage>
+                <div className={classes.lineHeight}>
+                    {i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} enrollment. ', { teiDisplayName, programName, tetName })}
+                    <div>
+                        <LinkButton
+                            className={classes.link}
+                            onClick={navigateToProgramRegistrationPage}
+                        >
+                            {i18n.t('Enroll a new {{selectedTetName}} in this program.', { selectedTetName })}
+                        </LinkButton>
+                    </div>
+                </div>
             </IncompleteSelectionsMessage>
         }
 
         {
             missingStatus === missingStatuses.EVENT_PROGRAM_SELECTED &&
             <IncompleteSelectionsMessage>
-                <div style={{ textAlign: 'center' }}>
-                    {i18n.t('You selected an Event program. Event programs do not have tracked entities nor enrollments.')}
+                <div className={classes.lineHeight}>
+                    {i18n.t('{{programName}} is an event program and does not have enrollments.', { programName })}
                     <div>
-                        {i18n.t('To create a new event')}
-                        {' '}
                         <LinkButton
-                            style={{
-                                background: 'transparent',
-                                padding: 0,
-                                color: '#0000EE',
-                            }}
-                            onClick={navigateToEventRegistrationPage}
+                            className={classes.link}
+                            onClick={navigateToProgramRegistrationPage}
                         >
-                            here
+                            {i18n.t('Create a new event in this program.')}
                         </LinkButton>
-                        .
                     </div>
                     <div>
-                        {i18n.t('To view the working lists click')}
-                        {' '}
                         <LinkButton
-                            style={{
-                                background: 'transparent',
-                                padding: 0,
-                                color: '#0000EE',
-                            }}
+                            className={classes.link}
                             onClick={navigateToEventWorkingList}
                         >
-                            here
+                            {i18n.t('View working list in this program.')}
                         </LinkButton>
-                        .
                     </div>
                 </div>
             </IncompleteSelectionsMessage>
         }
 
     </>);
-};
+});

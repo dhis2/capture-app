@@ -38,15 +38,12 @@ export const showMissingMessageViewOnEnrollmentPage = () =>
 export const showErrorViewOnEnrollmentPage = ({ error }: { error: string }) =>
     actionCreator(enrollmentPageActionTypes.INFORMATION_ERROR_FETCH)({ error });
 
-export const successfulFetchingEnrollmentPageInformationFromUrl = ({ teiDisplayName, enrollmentsSortedByDate }: Object) =>
+export const successfulFetchingEnrollmentPageInformationFromUrl = ({ teiDisplayName, tetId, enrollmentsSortedByDate }: Object) =>
     actionCreator(enrollmentPageActionTypes.INFORMATION_SUCCESS_FETCH)(
-        { teiDisplayName, enrollmentsSortedByDate });
+        { teiDisplayName, tetId, enrollmentsSortedByDate });
 
 export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }: Object) =>
     actionCreator(enrollmentPageActionTypes.PAGE_OPEN)({ programId, orgUnitId, teiId, enrollmentId });
 
 export const cleanEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.PAGE_CLEAN)();
-
-export const resetProgramOnEnrollmentPage = () =>
-    actionCreator(enrollmentPageActionTypes.CUSTOM_PROGRAM_RESET)();
