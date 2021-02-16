@@ -172,7 +172,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         orgUnitId: null,
         complete: false,
     }),
-    [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_UPDATE]: (state, action) => {
+    [lockedSelectorActionTypes.FROM_URL_UPDATE]: (state, action) => {
         const { nextProps: selections } = action.payload;
         return {
             ...state,

@@ -243,7 +243,7 @@ class ProgramSelector extends Component<Props> {
     renderSelectedProgram(selectedProgram) {
         return (
             <React.Fragment>
-                <h4 className={this.props.classes.title}>{ i18n.t('Selected Program') }</h4>
+                <h4 className={this.props.classes.title}>{ i18n.t('Selected program') }</h4>
                 <div className={this.props.classes.selectedText}>
                     <div
                         className={this.props.classes.selectedTextAndIconContainer}

@@ -137,17 +137,19 @@ Feature: Use the LockedSelector to navigate
     And you see the following <message>
 
     Examples:
-      | url | state | message |
-      | /#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8  | all                  | Enrollment Dashboard                           |
-      | /#/enrollment?enrollmentId=gPDueU02tn8                                                                | all                  | Enrollment Dashboard                           |
-      | /#/enrollment?programId=IpHINAT79UW&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment Dashboard                           |
-      | /#/enrollment?orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment Dashboard                           |
-      | /#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ                                                 | teiAndOrgUnit        | Choose program to view more information.       |
-      | /#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ                                                 | teiAndChildProgram   | Choose enrollment to view more information.    |
-      | /#/enrollment?programId=qDkgAbB5Jlk&teiId=fhFQhO0xILJ                                                 | teiAndMalariaProgram | There are no enrollments                       |
-      | /#/enrollment?programId=lxAQ7Zs9VYR&teiId=fhFQhO0xILJ                                                 | teiAndEventProgram   | You selected an Event program.                 |
-      | /#/enrollment?programId=IpHINAT79UW                                                                   | error                | Please enter a valid url.                      |
-      | /#/enrollment?orgUnitId=UgYg0YW7ZIh                                                                   | error                | Please enter a valid url.                      |
+        | url | state | message |
+      | /#/enrollment?enrollmentId=gPDueU02tn8                                                                | all                  | Enrollment Dashboard |
+      | /#/enrollment?teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                                              | all                  | Enrollment Dashboard |
+      | /#/enrollment?orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment Dashboard |
+      | /#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                        | all                  | Enrollment Dashboard |
+      | /#/enrollment?programId=IpHINAT79UW&enrollmentId=gPDueU02tn8                                          | all                  | Enrollment Dashboard |
+      | /#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8                        | all                  | Enrollment Dashboard |
+      | /#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&enrollmentId=gPDueU02tn8                    | all                  | Enrollment Dashboard |
+      | /#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8  | all                  | Enrollment Dashboard |
+      | /#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ                                                 | teiAndOrgUnit        | Carlos Cruz is enrolled in multiple programs. Choose a program. |
+      | /#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ                                                 | teiAndChildProgram   | There are multiple enrollments for this program. Choose an enrollment to view the dashboard. |
+      | /#/enrollment?programId=qDkgAbB5Jlk&teiId=fhFQhO0xILJ                                                 | teiAndMalariaProgram | Carlos Cruz is a person and cannot be enrolled in the Malaria case diagnosis, treatment and investigation. Choose another program that allows person enrollment. Enroll a new malaria entity in this program.|
+      | /#/enrollment?programId=lxAQ7Zs9VYR&teiId=fhFQhO0xILJ                                                 | teiAndEventProgram   | Antenatal care visit is an event program and does not have enrollments. |
 
   Scenario: Enrollment page > resetting the tei
     Given you land on the enrollment page by having typed only the enrollmentId on the url
