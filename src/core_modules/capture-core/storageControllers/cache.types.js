@@ -102,6 +102,7 @@ export type CachedProgramStage = {
     featureType: ?string,
     validationStrategy: string,
     enableUserAssignment?: ?boolean,
+    autoGenerateEvent?: ?boolean,
 };
 
 export type CachedCategoryOption = {

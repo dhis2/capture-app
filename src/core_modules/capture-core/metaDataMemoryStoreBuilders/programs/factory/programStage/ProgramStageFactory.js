@@ -127,6 +127,7 @@ class ProgramStageFactory {
                 cachedProgramStage.id,
             );
             _stage.enableUserAssignment = !!cachedProgramStage.enableUserAssignment;
+            _stage.autoGenerateEvent = !!cachedProgramStage.autoGenerateEvent;
             _stage.stageForm = new RenderFoundation((_form) => {
                 _form.id = cachedProgramStage.id;
                 _form.name = cachedProgramStage.displayName;

@@ -13,6 +13,7 @@ export default class ProgramStage {
     _stageForm: RenderFoundation;
     _relationshipTypes: Array<RelationshipType>;
     _enableUserAssignment: boolean;
+    _autoGenerateEvent: boolean;
 
     constructor(initFn: ?(_this: ProgramStage) => void) {
         initFn && isFunction(initFn) && initFn(this);
@@ -60,5 +61,13 @@ export default class ProgramStage {
 
     set enableUserAssignment(enable: boolean) {
         this._enableUserAssignment = enable;
+    }
+
+    get autoGenerateEvent(): boolean {
+        return this._autoGenerateEvent;
+    }
+
+    set autoGenerateEvent(autoGenerate: boolean) {
+        this._autoGenerateEvent = autoGenerate;
     }
 }
