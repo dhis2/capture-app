@@ -19,13 +19,13 @@ const deriveAttributesFromFormValues = (formValues = {}) =>
 const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnitId }) => {
     // in case we have a program that does not have an incident date, such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate
-    const incident = (incidentDate || enrollmentDate);
+    const sanitisedIncidentDate = incidentDate || enrollmentDate;
 
     return [...stages.values()]
         .filter(autoGenerateEvent => autoGenerateEvent)
         .map(({ id: programStage, generatedByEnrollmentDate, openAfterEnrollment, reportDateToUse, standardInterval }) => {
-            const dateToUseInActiveStatus = reportDateToUse === 'enrollmentDate' ? enrollmentDate : incident;
-            const dateToUseInScheduleStatus = generatedByEnrollmentDate ? enrollmentDate : incident;
+            const dateToUseInActiveStatus = reportDateToUse === 'enrollmentDate' ? enrollmentDate : sanitisedIncidentDate;
+            const dateToUseInScheduleStatus = generatedByEnrollmentDate ? enrollmentDate : sanitisedIncidentDate;
 
             const eventInfo = openAfterEnrollment
                 ?
@@ -47,8 +47,7 @@ const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnit
                 program: programId,
                 orgUnit: orgUnitId,
             };
-        },
-        );
+        });
 };
 
 export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
