@@ -9,6 +9,7 @@ import {
 } from './RegistrationDataEntry.actions';
 import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
 import { getTrackerProgramThrowIfNotFound, scopeTypes } from '../../../../metaData';
+import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 
 
 const deriveAttributesFromFormValues = (formValues = {}) =>
@@ -19,11 +20,11 @@ export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObse
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START),
         map(() => {
-            const { orgUnitId, trackedEntityTypeId } = store.value.currentSelections;
-
+            const { currentSelections: { orgUnitId, trackedEntityTypeId }, formsValues } = store.value;
+            const values = formsValues['newPageDataEntryId-newTei'];
             return saveNewTrackedEntityInstance(
                 {
-                    attributes: deriveAttributesFromFormValues(store.value.formsValues['newPageDataEntryId-newTei']),
+                    attributes: deriveAttributesFromFormValues(values),
                     enrollments: [],
                     orgUnit: orgUnitId,
                     trackedEntityType: trackedEntityTypeId,
@@ -49,22 +50,54 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
         map(() => {
-            const { orgUnitId, programId } = store.value.currentSelections;
-            const enrollmentFormValues = store.value.dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || {};
-            const trackerProgram = getTrackerProgramThrowIfNotFound(programId);
+            const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
+            const { incidentDate, enrollmentDate } = dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || { };
+            const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
+            const values = formsValues['newPageDataEntryId-newEnrollment'];
+            const events = [...stages.values()]
+                .filter(autoGenerateEvent => autoGenerateEvent)
+                .map(
+                    ({ generatedByEnrollmentDate, openAfterEnrollment, reportDateToUse, id }) => {
+                        const dateToUseInActiveStatus = reportDateToUse === 'enrollmentDate' ? enrollmentDate : (incidentDate || enrollmentDate);
+                        const dateToUseInScheduleStatus = generatedByEnrollmentDate ? enrollmentDate : (incidentDate || enrollmentDate);
+
+                        const eventInfo = openAfterEnrollment
+                            ?
+                            {
+                                status: 'ACTIVE',
+                                eventDate: dateToUseInActiveStatus,
+                                dueDate: dateToUseInActiveStatus,
+                            }
+                            :
+                            {
+                                status: 'SCHEDULE',
+                                dueDate: dateToUseInScheduleStatus,
+                            };
+                        debugger;
+                        return {
+                            ...eventInfo,
+                            programStage: id,
+                            program: programId,
+                            orgUnit: orgUnitId,
+                        };
+                    },
+                );
+            debugger;
             return saveNewTrackedEntityInstanceWithEnrollment(
                 {
-                    attributes: deriveAttributesFromFormValues(store.value.formsValues['newPageDataEntryId-newEnrollment']),
+                    attributes: deriveAttributesFromFormValues(values),
                     enrollments: [
                         {
-                            ...enrollmentFormValues,
+                            incidentDate,
+                            enrollmentDate,
                             program: programId,
                             orgUnit: orgUnitId,
                             status: 'ACTIVE',
+                            events,
                         },
                     ],
                     orgUnit: orgUnitId,
-                    trackedEntityType: trackerProgram.trackedEntityType.id,
+                    trackedEntityType: trackedEntityType.id,
                 });
         }),
     );
