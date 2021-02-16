@@ -94,7 +94,7 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
                         )
                     )),
                     catchError(() => {
-                        const error = i18n.t("Enrollment with id '{{selectedEnrollmentId}}' doesn't exist", { enrollmentId });
+                        const error = i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId });
                         return of(showErrorViewOnEnrollmentPage({ error }));
                     }),
                     startWith(showLoadingViewOnEnrollmentPage()),
