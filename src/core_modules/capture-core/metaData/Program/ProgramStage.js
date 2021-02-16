@@ -17,6 +17,7 @@ export default class ProgramStage {
     _openAfterEnrollment: boolean;
     _generatedByEnrollmentDate: boolean;
     _reportDateToUse: string;
+    _standardInterval: number;
 
     constructor(initFn: ?(_this: ProgramStage) => void) {
         initFn && isFunction(initFn) && initFn(this);
@@ -100,5 +101,13 @@ export default class ProgramStage {
         } else {
             this._reportDateToUse = reportDate;
         }
+    }
+
+    get standardInterval(): number {
+        return this._standardInterval;
+    }
+
+    set standardInterval(interval: number = 0) {
+        this._standardInterval = interval;
     }
 }

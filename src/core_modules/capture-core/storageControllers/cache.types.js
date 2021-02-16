@@ -106,6 +106,7 @@ export type CachedProgramStage = {
     openAfterEnrollment?: ?boolean,
     generatedByEnrollmentDate?: ?boolean,
     reportDateToUse: string,
+    standardInterval: number,
 };
 
 export type CachedCategoryOption = {

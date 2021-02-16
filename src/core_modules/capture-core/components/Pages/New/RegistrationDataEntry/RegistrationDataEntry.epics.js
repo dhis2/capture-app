@@ -2,6 +2,7 @@
 import { ofType } from 'redux-observable';
 import { flatMap, map } from 'rxjs/operators';
 import { empty } from 'rxjs';
+import moment from 'moment';
 import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,
@@ -9,12 +10,46 @@ import {
 } from './RegistrationDataEntry.actions';
 import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
 import { getTrackerProgramThrowIfNotFound, scopeTypes } from '../../../../metaData';
-import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 
 
 const deriveAttributesFromFormValues = (formValues = {}) =>
     Object.keys(formValues)
         .map(key => ({ attribute: key, value: formValues[key] }));
+
+const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnitId }) => {
+    // in case we have a program that does not have an incident date, such as Malaria case diagnosis,
+    // we want the incident to bedefault to enrollmentDate
+    const incident = (incidentDate || enrollmentDate);
+
+    return [...stages.values()]
+        .filter(autoGenerateEvent => autoGenerateEvent)
+        .map(({ id: programStage, generatedByEnrollmentDate, openAfterEnrollment, reportDateToUse, standardInterval }) => {
+            const dateToUseInActiveStatus = reportDateToUse === 'enrollmentDate' ? enrollmentDate : incident;
+            const dateToUseInScheduleStatus = generatedByEnrollmentDate ? enrollmentDate : incident;
+
+            const eventInfo = openAfterEnrollment
+                ?
+                {
+                    status: 'ACTIVE',
+                    eventDate: dateToUseInActiveStatus,
+                    dueDate: dateToUseInActiveStatus,
+                }
+                :
+                {
+                    status: 'SCHEDULE',
+                    // for schedule type of events we want to add the standard interval days to the date
+                    dueDate: moment(dateToUseInScheduleStatus).add(standardInterval, 'days').format('YYYY-MM-DD'),
+                };
+
+            return {
+                ...eventInfo,
+                programStage,
+                program: programId,
+                orgUnit: orgUnitId,
+            };
+        },
+        );
+};
 
 export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -54,35 +89,8 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
             const { incidentDate, enrollmentDate } = dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || { };
             const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
             const values = formsValues['newPageDataEntryId-newEnrollment'];
-            const events = [...stages.values()]
-                .filter(autoGenerateEvent => autoGenerateEvent)
-                .map(
-                    ({ generatedByEnrollmentDate, openAfterEnrollment, reportDateToUse, id }) => {
-                        const dateToUseInActiveStatus = reportDateToUse === 'enrollmentDate' ? enrollmentDate : (incidentDate || enrollmentDate);
-                        const dateToUseInScheduleStatus = generatedByEnrollmentDate ? enrollmentDate : (incidentDate || enrollmentDate);
+            const events = deriveEvents({ stages, enrollmentDate, incidentDate, programId, orgUnitId });
 
-                        const eventInfo = openAfterEnrollment
-                            ?
-                            {
-                                status: 'ACTIVE',
-                                eventDate: dateToUseInActiveStatus,
-                                dueDate: dateToUseInActiveStatus,
-                            }
-                            :
-                            {
-                                status: 'SCHEDULE',
-                                dueDate: dateToUseInScheduleStatus,
-                            };
-                        debugger;
-                        return {
-                            ...eventInfo,
-                            programStage: id,
-                            program: programId,
-                            orgUnit: orgUnitId,
-                        };
-                    },
-                );
-            debugger;
             return saveNewTrackedEntityInstanceWithEnrollment(
                 {
                     attributes: deriveAttributesFromFormValues(values),
