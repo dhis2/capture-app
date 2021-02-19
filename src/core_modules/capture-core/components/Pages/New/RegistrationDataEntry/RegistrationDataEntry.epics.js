@@ -20,26 +20,32 @@ const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnit
     // in case we have a program that does not have an incident date, such as Malaria case diagnosis,
     // we want the incident to default to enrollmentDate
     const sanitisedIncidentDate = incidentDate || enrollmentDate;
-
     return [...stages.values()]
-        .filter(autoGenerateEvent => autoGenerateEvent)
-        .map(({ id: programStage, generatedByEnrollmentDate, openAfterEnrollment, reportDateToUse, standardInterval }) => {
-            const dateToUseInActiveStatus = reportDateToUse === 'enrollmentDate' ? enrollmentDate : sanitisedIncidentDate;
-            const dateToUseInScheduleStatus = generatedByEnrollmentDate ? enrollmentDate : sanitisedIncidentDate;
+        .filter(({ autoGenerateEvent }) => autoGenerateEvent)
+        .map(({
+            id: programStage,
+            reportDateToUse: reportDateToUseInActiveStatus,
+            generatedByEnrollmentDate: generateScheduleDateByEnrollmentDate,
+            openAfterEnrollment,
+            standardInterval,
+        }) => {
+            const dateToUseInActiveStatus = reportDateToUseInActiveStatus === 'enrollmentDate' ? enrollmentDate : sanitisedIncidentDate;
+            const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrollmentDate : sanitisedIncidentDate;
 
-            const eventInfo = openAfterEnrollment
-                ?
-                {
-                    status: 'ACTIVE',
-                    eventDate: dateToUseInActiveStatus,
-                    dueDate: dateToUseInActiveStatus,
-                }
-                :
-                {
-                    status: 'SCHEDULE',
-                    // for schedule type of events we want to add the standard interval days to the date
-                    dueDate: moment(dateToUseInScheduleStatus).add(standardInterval, 'days').format('YYYY-MM-DD'),
-                };
+            const eventInfo =
+              openAfterEnrollment
+                  ?
+                  {
+                      status: 'ACTIVE',
+                      eventDate: dateToUseInActiveStatus,
+                      dueDate: dateToUseInActiveStatus,
+                  }
+                  :
+                  {
+                      status: 'SCHEDULE',
+                      // for schedule type of events we want to add the standard interval days to the date
+                      dueDate: moment(dateToUseInScheduleStatus).add(standardInterval, 'days').format('YYYY-MM-DD'),
+                  };
 
             return {
                 ...eventInfo,
@@ -90,6 +96,7 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
             const values = formsValues['newPageDataEntryId-newEnrollment'];
             const events = deriveEvents({ stages, enrollmentDate, incidentDate, programId, orgUnitId });
 
+            debugger;
             return saveNewTrackedEntityInstanceWithEnrollment(
                 {
                     attributes: deriveAttributesFromFormValues(values),
