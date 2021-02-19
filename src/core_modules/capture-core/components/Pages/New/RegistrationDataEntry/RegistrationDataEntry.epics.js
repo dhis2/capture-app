@@ -96,7 +96,6 @@ export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (acti
             const values = formsValues['newPageDataEntryId-newEnrollment'];
             const events = deriveEvents({ stages, enrollmentDate, incidentDate, programId, orgUnitId });
 
-            debugger;
             return saveNewTrackedEntityInstanceWithEnrollment(
                 {
                     attributes: deriveAttributesFromFormValues(values),
