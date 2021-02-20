@@ -598,49 +598,56 @@ msgid "Organisation unit could not be loaded"
 msgstr "Organizační jednotku se nepodařilo načíst"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
+msgstr "Instance trasované entity s ID \"{{teiId}}\" neexistuje"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
+"Při otevírání tohoto zápuisu došlo k chybě. Zadejte platnou adresu URL."
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
+msgstr "Zápis s ID \"{{enrollmentId}}\" neexistuje"
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
-msgstr ""
+msgstr "{{teiDisplayName}} je zapsán do několika programů. Vyberte program."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
+"Program {{programName}} má kategorie. Chcete-li zobrazit ovládací panel, "
+"vyberte všechny kategorie."
 
 msgid ""
 "There are multiple enrollments for this program. Choose an enrollment to "
 "view the dashboard."
 msgstr ""
+"Existuje několik zápisů pro tento program. Zvolte zápis pro zobrazení "
+"řídicího panelu."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "{{teiDisplayName}} není v tomto programu zapsán."
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "Zapsat {{teiDisplayName}} do tohoto programu."
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
+"{{teiDisplayName}} je {{tetName}} a nelze jej zapsat do {{programName}}. "
+"Vyberte jiný program, který umožňuje zápis {{tetName}}."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr ""
+msgstr "Zapsat nový {{selectedTetName}} do tohoto programu."
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr ""
+msgstr "{{programName}} je program událostí a nemá zápisy."
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "Vytvořte novou událost v tomto programu."
 
 msgid "View working list in this program."
-msgstr ""
+msgstr "Zobrazit pracovní seznam v tomto programu."
 
 msgid "Delete event"
 msgstr "Smazat událost"
