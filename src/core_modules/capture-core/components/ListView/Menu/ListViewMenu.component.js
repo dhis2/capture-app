@@ -30,7 +30,10 @@ const getStyles = () => ({
 
 const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
     const renderPopperAction = useCallback((togglePopper: Function) => (
-        <IconButton onClick={togglePopper}>
+        <IconButton
+            data-test="list-view-menu-button"
+            onClick={togglePopper}
+        >
             <MoreHoriz />
         </IconButton>
     ), []);
