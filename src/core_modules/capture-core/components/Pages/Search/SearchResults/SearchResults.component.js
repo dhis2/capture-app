@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, colors } from '@dhis2/ui';
+import { useLocation } from 'react-router';
 import { CardList } from '../../../CardList';
 import withNavigation from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
@@ -13,7 +14,6 @@ import { availableCardListButtonState } from '../../../CardList/CardList.constan
 import { SearchResultsHeader } from '../../../SearchResultsHeader';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import { useLocation } from 'react-router';
 
 const SearchPagination = withNavigation()(Pagination);
 
