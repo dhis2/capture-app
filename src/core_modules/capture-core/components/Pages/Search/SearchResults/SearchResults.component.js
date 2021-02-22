@@ -13,6 +13,7 @@ import { availableCardListButtonState } from '../../../CardList/CardList.constan
 import { SearchResultsHeader } from '../../../SearchResultsHeader';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
+import { useLocation } from 'react-router';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -53,12 +54,14 @@ const CardListButtons = withStyles(buttonStyles)(
         classes,
     }) => {
         const scopeSearchParam = `${currentSearchScopeType.toLowerCase()}=${currentSearchScopeId}`;
+        const { pathname, search } = useLocation();
+
         return (
             <div className={classes.margin}>
                 <Button
                     small
                     dataTest="dhis2-capture-view-dashboard-button"
-                    onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
+                    onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
                 >
                     {i18n.t('View dashboard')}
                 </Button>
@@ -68,7 +71,7 @@ const CardListButtons = withStyles(buttonStyles)(
                         small
                         className={classes.buttonMargin}
                         dataTest="dhis2-capture-view-active-enrollment-button"
-                        onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
+                        onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
                     >
                         {i18n.t('View active enrollment')}
                     </Button>
@@ -79,7 +82,7 @@ const CardListButtons = withStyles(buttonStyles)(
                         small
                         className={classes.buttonMargin}
                         dataTest="dhis2-capture-re-enrollment-button"
-                        onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
+                        onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
                     >
                         {i18n.t('Re-enroll')} {programName && `${i18n.t('in')} ${programName}`}
                     </Button>
