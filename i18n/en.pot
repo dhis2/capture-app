@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-02-16T11:21:42.194Z\n"
-"PO-Revision-Date: 2021-02-16T11:21:42.194Z\n"
+"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
+"PO-Revision-Date: 2021-02-23T13:09:00.376Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -128,6 +128,9 @@ msgstr ""
 msgid "in"
 msgstr ""
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Metadata error. see log for details"
 msgstr ""
 
@@ -231,9 +234,6 @@ msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
-msgstr ""
-
-msgid "Cancel"
 msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."

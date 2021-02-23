@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
+import { useHistory } from 'react-router';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
@@ -13,6 +14,7 @@ import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrati
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
 import withErrorMessagePostProcessor from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import { urlArguments } from '../../../utils/url';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>
@@ -24,6 +26,9 @@ const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
 const styles = ({ typography }) => ({
     marginTop: {
         marginTop: typography.pxToRem(2),
+    },
+    marginLeft: {
+        marginLeft: typography.pxToRem(16),
     },
 });
 
@@ -39,9 +44,21 @@ const TeiRegistrationEntryPlain =
       onPostProcessErrorMessage,
       ...rest
   }: Props) => {
+      const { push } = useHistory();
+
       const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
       const { formId, formFoundation } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
       const orgUnit = useCurrentOrgUnitInfo();
+
+      const navigateToWorkingListsPage = () => {
+          const url =
+            scopeType === scopeTypes.TRACKER_PROGRAM
+                ?
+                urlArguments({ programId: selectedScopeId, orgUnitId: orgUnit.id })
+                :
+                urlArguments({ orgUnitId: orgUnit.id });
+          return push(`/?${url}`);
+      };
 
       return (
           <>
@@ -60,18 +77,28 @@ const TeiRegistrationEntryPlain =
                           onGetUnsavedAttributeValues={() => console.log('similar to the withErrorMessagePostProcessor this will come in the future')}
                           {...rest}
                       />
-                      {
-                          onSave &&
+                      <div className={classes.marginTop}>
+
+                          {
+                              onSave &&
+                              <Button
+                                  dataTest="dhis2-capture-create-and-link-button"
+                                  primary
+                                  onClick={onSave}
+                              >
+                                  {saveButtonText}
+                              </Button>
+                          }
+
                           <Button
                               dataTest="dhis2-capture-create-and-link-button"
-                              primary
-                              onClick={onSave}
-                              className={classes.marginTop}
+                              secondary
+                              onClick={navigateToWorkingListsPage}
+                              className={classes.marginLeft}
                           >
-                              {saveButtonText}
+                              {i18n.t('Cancel')}
                           </Button>
-                      }
-
+                      </div>
                       <InfoIconText>
                           {translatedTextWithStylesForTei(trackedEntityName.toLowerCase(), orgUnit.name)}
                       </InfoIconText>
