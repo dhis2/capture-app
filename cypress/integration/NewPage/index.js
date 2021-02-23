@@ -116,7 +116,7 @@ And('you see the registration form for the Malaria case registration', () => {
         .contains('Coordinate')
         .should('exist');
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
-        .contains('Age (years)')
+        .contains('Age in years')
         .should('exist');
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
         .contains('Household location')
