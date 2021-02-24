@@ -13,6 +13,11 @@ export default class ProgramStage {
     _stageForm: RenderFoundation;
     _relationshipTypes: Array<RelationshipType>;
     _enableUserAssignment: boolean;
+    _autoGenerateEvent: boolean;
+    _openAfterEnrollment: boolean;
+    _generatedByEnrollmentDate: boolean;
+    _reportDateToUse: string;
+    _standardInterval: number;
 
     constructor(initFn: ?(_this: ProgramStage) => void) {
         initFn && isFunction(initFn) && initFn(this);
@@ -60,5 +65,49 @@ export default class ProgramStage {
 
     set enableUserAssignment(enable: boolean) {
         this._enableUserAssignment = enable;
+    }
+
+    get autoGenerateEvent(): boolean {
+        return this._autoGenerateEvent;
+    }
+
+    set autoGenerateEvent(autoGenerate: boolean) {
+        this._autoGenerateEvent = autoGenerate;
+    }
+
+    get generatedByEnrollmentDate(): boolean {
+        return this._generatedByEnrollmentDate;
+    }
+
+    set generatedByEnrollmentDate(generate: boolean) {
+        this._generatedByEnrollmentDate = generate;
+    }
+
+    get openAfterEnrollment(): boolean {
+        return this._openAfterEnrollment;
+    }
+
+    set openAfterEnrollment(open: boolean) {
+        this._openAfterEnrollment = open;
+    }
+
+    get reportDateToUse(): string {
+        return this._reportDateToUse;
+    }
+
+    set reportDateToUse(reportDate: string = 'enrollmentDate') {
+        if (reportDate === 'false') {
+            this._reportDateToUse = 'enrollmentDate';
+        } else {
+            this._reportDateToUse = reportDate;
+        }
+    }
+
+    get standardInterval(): number {
+        return this._standardInterval;
+    }
+
+    set standardInterval(interval: number = 0) {
+        this._standardInterval = interval;
     }
 }
