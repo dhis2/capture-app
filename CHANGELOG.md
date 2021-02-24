@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/dhis2/capture-app/compare/v1.12.0...v1.12.1) (2021-02-24)
+
+
+### Bug Fixes
+
+* DHIS2-10493 Preserve sharing settings ([6838b0a](https://github.com/dhis2/capture-app/commit/6838b0a73b71dca2d77d7c2c07533fa7c52b96fa))
+
 # [1.12.0](https://github.com/dhis2/capture-app/compare/v1.11.0...v1.12.0) (2021-02-24)
 
 
