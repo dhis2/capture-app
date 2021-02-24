@@ -76,11 +76,16 @@ export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputO
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_COMPLETED),
         flatMap(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
-            const { orgUnitId, trackedEntityTypeId } = store.value.currentSelections;
+            const {
+                currentSelections: { orgUnitId, trackedEntityTypeId },
+                router: { location: { pathname, search } },
+            } = store.value;
+
             navigateToTrackedEntityDashboard(
                 reference,
                 orgUnitId,
                 `${scopeTypes.TRACKED_ENTITY_TYPE.toLowerCase()}=${trackedEntityTypeId}`,
+                `${pathname}${search}`,
             );
             return empty();
         }),
@@ -119,12 +124,16 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (a
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED),
         flatMap(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
-            const { orgUnitId, programId } = store.value.currentSelections;
+            const {
+                currentSelections: { orgUnitId, programId },
+                router: { location: { pathname, search } },
+            } = store.value;
 
             navigateToTrackedEntityDashboard(
                 reference,
                 orgUnitId,
                 `program=${programId}`,
+                `${pathname}${search}`,
             );
             return empty();
         }),
