@@ -91,7 +91,7 @@ const EnrollmentRegistrationEntryPlain =
                           }
 
                           <Button
-                              dataTest="dhis2-capture-create-and-link-button"
+                              dataTest="dhis2-capture-cancel-button"
                               secondary
                               onClick={navigateToWorkingListsPage}
                               className={classes.marginLeft}
