@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/dhis2/capture-app/compare/v1.11.0...v1.12.0) (2021-02-24)
+
+
+### Features
+
+* DHIS2-10315 Autogenerate event when submitting enrollment ([#1518](https://github.com/dhis2/capture-app/issues/1518)) ([76e3dae](https://github.com/dhis2/capture-app/commit/76e3dae0932751bbddae61b84274618cf0cd24aa))
+
 # [1.11.0](https://github.com/dhis2/capture-app/compare/v1.10.1...v1.11.0) (2021-02-24)
 
 
