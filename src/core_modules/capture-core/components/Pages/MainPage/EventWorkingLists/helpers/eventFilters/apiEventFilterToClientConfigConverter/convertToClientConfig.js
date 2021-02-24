@@ -47,18 +47,18 @@ const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterD
     value: true,
 });
 
-const getDateFilter = (filter: ApiDataFilterDate): DateFilterData => {
-    if (filter.period) {
+const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData => {
+    if (dateFilter.type === apiDateFilterTypes.RELATIVE) {
         return {
-            type: apiDateFilterTypes.RELATIVE,
-            period: filter.period,
+            type: dateFilter.type,
+            period: dateFilter.period,
         };
     }
 
     return {
-        type: apiDateFilterTypes.ABSOLUTE,
-        ge: filter.startDate ? moment(filter.startDate, 'YYYY-MM-DD').toISOString() : undefined,
-        le: filter.endDate ? moment(filter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
+        type: dateFilter.type,
+        ge: dateFilter.startDate ? moment(dateFilter.startDate, 'YYYY-MM-DD').toISOString() : undefined,
+        le: dateFilter.endDate ? moment(dateFilter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
     };
 };
 
@@ -188,7 +188,7 @@ const getMainDataFilters = async (
         filters.push({ ...getOptionSetFilter({ in: [status] }, columnsMetaForDataFetching.get('status').type), id: 'status' });
     }
     if (eventDate) {
-        filters.push({ ...getDateFilter(eventDate), id: 'eventDate' });
+        filters.push({ ...getDateFilter({ dateFilter: eventDate }), id: 'eventDate' });
     }
     if (assignedUserMode) {
         filters.push({ ...(await getAssigneeFilter(assignedUserMode, assignedUsers)), id: 'assignee' });
