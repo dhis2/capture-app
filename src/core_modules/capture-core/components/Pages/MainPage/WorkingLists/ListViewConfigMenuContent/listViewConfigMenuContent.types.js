@@ -1,5 +1,5 @@
 // @flow
-import type { WorkingListTemplate, AddTemplate, UpdateTemplate, DeleteTemplate } from '../workingLists.types';
+import type { WorkingListTemplate, AddTemplate, UpdateTemplate, DeleteTemplate, SetTemplateSharingSettings } from '../workingLists.types';
 import type { CustomMenuContents } from '../../../../ListView';
 import type { ListViewConfigOutputProps } from '../ListViewConfig';
 
@@ -8,6 +8,7 @@ type ExtractedProps = {|
     onAddTemplate?: AddTemplate,
     onUpdateTemplate?: UpdateTemplate,
     onDeleteTemplate?: DeleteTemplate,
+    onSetTemplateSharingSettings?: SetTemplateSharingSettings,
     currentViewHasTemplateChanges: boolean,
     customListViewMenuContents?: CustomMenuContents,
     classes: Object,
@@ -17,6 +18,7 @@ type OptionalExtractedProps = {|
     onAddTemplate: AddTemplate,
     onUpdateTemplate: UpdateTemplate,
     onDeleteTemplate: DeleteTemplate,
+    onSetTemplateSharingSettings: SetTemplateSharingSettings,
 |};
 
 type RestProps = $Rest<ListViewConfigOutputProps & OptionalExtractedProps, ExtractedProps & OptionalExtractedProps>;
