@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/dhis2/capture-app/compare/v1.10.0...v1.10.1) (2021-02-24)
+
+
+### Bug Fixes
+
+* broken cypress tests ([6b97844](https://github.com/dhis2/capture-app/commit/6b97844e9abfaff895ff6566ba53894e70f161a7))
+
 # [1.10.0](https://github.com/dhis2/capture-app/compare/v1.9.0...v1.10.0) (2021-02-16)
 
 
