@@ -1,3 +1,11 @@
+# [1.13.0](https://github.com/dhis2/capture-app/compare/v1.12.2...v1.13.0) (2021-02-24)
+
+
+### Features
+
+* adds the cancel button ([#1522](https://github.com/dhis2/capture-app/issues/1522)) ([20ef271](https://github.com/dhis2/capture-app/commit/20ef271ac8a67438c3a9c7ff3a533d2534f6c859))
+* DHIS2-10525 adds url ([#1520](https://github.com/dhis2/capture-app/issues/1520)) ([104d8ce](https://github.com/dhis2/capture-app/commit/104d8ce950e4afc4fa5fc24e3da5b5db8877a6bf))
+
 ## [1.12.2](https://github.com/dhis2/capture-app/compare/v1.12.1...v1.12.2) (2021-02-24)
 
 
