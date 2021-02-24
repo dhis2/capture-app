@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-16T11:21:42.194Z\n"
+"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Bengali (https://www.transifex.com/hisp-uio/teams/100509/bn/)\n"
@@ -135,6 +135,9 @@ msgstr ""
 msgid "in"
 msgstr ""
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Metadata error. see log for details"
 msgstr ""
 
@@ -238,9 +241,6 @@ msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
-msgstr ""
-
-msgid "Cancel"
 msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."

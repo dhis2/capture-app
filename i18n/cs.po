@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-16T11:21:42.194Z\n"
+"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -141,6 +141,9 @@ msgstr "Ukládání {{trackedEntityName}} v"
 msgid "in"
 msgstr "v"
 
+msgid "Cancel"
+msgstr "Zrušit"
+
 msgid "Metadata error. see log for details"
 msgstr "Chyba metadat. viz log pro podrobnosti"
 
@@ -248,9 +251,6 @@ msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
 
 msgid "Save"
 msgstr "Uložit"
-
-msgid "Cancel"
-msgstr "Zrušit"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Opuštěním této stránky zrušíte změny provedené v této události."

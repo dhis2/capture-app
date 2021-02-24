@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-16T11:21:42.194Z\n"
+"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -148,6 +148,9 @@ msgstr ""
 msgid "in"
 msgstr "dans"
 
+msgid "Cancel"
+msgstr "Annuler"
+
 msgid "Metadata error. see log for details"
 msgstr "Erreur de métadonnées. Voir le journal pour plus de détails"
 
@@ -260,9 +263,6 @@ msgstr ""
 
 msgid "Save"
 msgstr "Enregistrer"
-
-msgid "Cancel"
-msgstr "Annuler"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""

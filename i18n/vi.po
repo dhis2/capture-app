@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-16T11:21:42.194Z\n"
+"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -143,6 +143,9 @@ msgstr "Đang lưu {{trackedEntityName}} trong"
 msgid "in"
 msgstr "trong"
 
+msgid "Cancel"
+msgstr "Hủy"
+
 msgid "Metadata error. see log for details"
 msgstr "Lỗi siêu dữ liệu. xem nhật ký để biết chi tiết"
 
@@ -251,9 +254,6 @@ msgstr ""
 
 msgid "Save"
 msgstr "Lưu lại"
-
-msgid "Cancel"
-msgstr "Hủy"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""

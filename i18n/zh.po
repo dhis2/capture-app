@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-16T11:21:42.194Z\n"
+"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -140,6 +140,9 @@ msgstr "将{{trackedEntityName}}保存在"
 msgid "in"
 msgstr " 在"
 
+msgid "Cancel"
+msgstr "取消"
+
 msgid "Metadata error. see log for details"
 msgstr "元数据错误"
 
@@ -244,9 +247,6 @@ msgstr "您无权在当前选择中创建活动"
 
 msgid "Save"
 msgstr "保存"
-
-msgid "Cancel"
-msgstr "取消"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "离开此页面将放弃您对此事件所做的更改。"

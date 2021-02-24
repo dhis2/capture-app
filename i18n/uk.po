@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-16T11:21:42.194Z\n"
+"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Wanda <wanda@frontlineaids.org>, 2021\n"
 "Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
@@ -137,6 +137,9 @@ msgstr ""
 msgid "in"
 msgstr ""
 
+msgid "Cancel"
+msgstr "Скасувати"
+
 msgid "Metadata error. see log for details"
 msgstr ""
 
@@ -241,9 +244,6 @@ msgstr ""
 
 msgid "Save"
 msgstr "Зберегти"
-
-msgid "Cancel"
-msgstr "Скасувати"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""

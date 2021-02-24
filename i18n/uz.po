@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-16T11:21:42.194Z\n"
+"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -141,6 +141,9 @@ msgstr "{{trackedEntityName}} сақланмоқда ...да"
 msgid "in"
 msgstr "ичида"
 
+msgid "Cancel"
+msgstr "Бекор қилиш"
+
 msgid "Metadata error. see log for details"
 msgstr "МетаМаълумотда хатолик. Тафсилотлар учун журналга қаранг."
 
@@ -251,9 +254,6 @@ msgstr "Ҳозирги танловларда ҳодиса/тадбир ярат
 
 msgid "Save"
 msgstr "Сақлаш"
-
-msgid "Cancel"
-msgstr "Бекор қилиш"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
