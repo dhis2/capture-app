@@ -1,3 +1,10 @@
+## [1.12.2](https://github.com/dhis2/capture-app/compare/v1.12.1...v1.12.2) (2021-02-24)
+
+
+### Bug Fixes
+
+* DHIS2-10461 Date filters ([bf37690](https://github.com/dhis2/capture-app/commit/bf37690b8183fb72bf5a676826e2155e5e2e3c6a))
+
 ## [1.12.1](https://github.com/dhis2/capture-app/compare/v1.12.0...v1.12.1) (2021-02-24)
 
 
