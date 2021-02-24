@@ -8,7 +8,6 @@ import { openDataEntryForNewEnrollment } from './open.actions';
 import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer } from '../fieldValidators';
 import { convertGeometryOut } from '../../converters';
 import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
-import moment from 'moment';
 import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 
 const itemId = 'newEnrollment';
