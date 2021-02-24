@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/dhis2/capture-app/compare/v1.10.1...v1.11.0) (2021-02-24)
+
+
+### Features
+
+* DHIS2-10312 adds default value in enrolment date ([#1505](https://github.com/dhis2/capture-app/issues/1505)) ([2c72bbb](https://github.com/dhis2/capture-app/commit/2c72bbbec53e8af043eb012207897fdabdf2dad1))
+
 ## [1.10.1](https://github.com/dhis2/capture-app/compare/v1.10.0...v1.10.1) (2021-02-24)
 
 
