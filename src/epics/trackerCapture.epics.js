@@ -155,6 +155,9 @@ import {
     resetOrgUnitId,
     resetProgramIdEpic,
     fetchOrgUnitEpic,
+    resetTeiSelectionEpic,
+    setEnrollmentSelectionEpic,
+    resetEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 import {
     setTrackedEntityTypeIdOnUrlEpic,
@@ -186,6 +189,13 @@ import {
     startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
 } from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
+
+import {
+    fetchEnrollmentPageInformationFromUrlEpic,
+    startFetchingTeiFromEnrollmentIdEpic,
+    startFetchingTeiFromTeiIdEpic,
+    openEnrollmentPageEpic,
+} from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -299,5 +309,12 @@ export default combineEpics(
     completeSavingNewTrackedEntityInstanceEpic,
     completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
     openNewRegistrationPageFromLockedSelectorEpic,
+    fetchEnrollmentPageInformationFromUrlEpic,
+    startFetchingTeiFromEnrollmentIdEpic,
+    startFetchingTeiFromTeiIdEpic,
+    resetTeiSelectionEpic,
+    setEnrollmentSelectionEpic,
+    resetEnrollmentSelectionEpic,
+    openEnrollmentPageEpic,
     ...getDataEntryEpics(),
 );

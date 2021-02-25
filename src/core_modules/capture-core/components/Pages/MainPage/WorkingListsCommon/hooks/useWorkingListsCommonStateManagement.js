@@ -22,6 +22,7 @@ import {
     selectRestMenuItem,
     changePage,
     changeRowsPerPage,
+    setTemplateSharingSettings,
 } from '../actions';
 import type { Program } from '../../../../../metaData';
 import type {
@@ -36,6 +37,8 @@ import type {
     SelectRestMenuItem,
     SelectTemplate,
     SetColumnOrder,
+    SetTemplateSharingSettings,
+    SharingSettings,
     Sort,
     UpdateFilter,
 } from '../../WorkingLists';
@@ -83,6 +86,7 @@ const useTemplates = (
                 },
             )),
         onDeleteTemplate: (...args) => dispatch(deleteTemplate(...args, { storeId, workingListsType })),
+        onSetTemplateSharingSettings: (sharingSettings: SharingSettings, templateId: string) => dispatch(setTemplateSharingSettings(sharingSettings, templateId, storeId)),
     }: {|
         onSelectTemplate: SelectTemplate,
         onLoadTemplates: LoadTemplates,
@@ -90,6 +94,7 @@ const useTemplates = (
         onAddTemplate: AddTemplate,
         onUpdateTemplate: UpdateTemplate,
         onDeleteTemplate: DeleteTemplate,
+        onSetTemplateSharingSettings: SetTemplateSharingSettings,
     |}), [storeId, dispatch, workingListsType]);
 
     return {

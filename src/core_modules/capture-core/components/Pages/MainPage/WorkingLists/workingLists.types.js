@@ -64,7 +64,7 @@ export type LoadedViewContext = {|
 
 export type Categories = { [id: string]: string };
 
-export type AddTemplate = (name: string, template: WorkingListTemplate) => void;
+export type AddTemplate = (name: string) => void;
 export type CancelLoadView = () => void;
 export type CancelLoadTemplates = () => void;
 export type CancelUpdateList = () => void;
@@ -142,6 +142,22 @@ export type ListViewBuilderContextData = {|
     stickyFilters?: StickyFilters,
 |};
 
+export type SharingSettings = {|
+    externalAccess: boolean,
+    publicAccess: string,
+    userAccesses: Array<{
+        id: string,
+        name: string,
+        access: string,
+    }>,
+    userGroupAccesses: Array<{
+        id: string,
+        name: string,
+        access: string,
+    }>,
+|};
+export type SetTemplateSharingSettings = (sharingSettings: SharingSettings, templateId: string) => void;
+
 export type InterfaceProps = $ReadOnly<{|
     categories?: Categories,
     columns: ColumnConfigs,
@@ -173,6 +189,7 @@ export type InterfaceProps = $ReadOnly<{|
     onSelectRestMenuItem: SelectRestMenuItem,
     onSelectTemplate: SelectTemplate,
     onSetListColumnOrder: SetColumnOrder,
+    onSetTemplateSharingSettings?: SetTemplateSharingSettings,
     onSortList: Sort,
     onUnloadingContext?: UnloadingContext,
     onUpdateFilter: UpdateFilter,

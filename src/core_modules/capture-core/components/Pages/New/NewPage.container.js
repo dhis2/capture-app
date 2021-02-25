@@ -14,9 +14,7 @@ import { urlArguments } from '../../../utils/url';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
-import type { ProgramCategories } from './NewPage.types';
-import { programCollection } from '../../../metaDataMemoryStores';
-
+import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 
 const useUserWriteAccess = (scopeId) => {
     const scope = getScopeFromScopeId(scopeId);
@@ -60,34 +58,17 @@ export const NewPage: ComponentType<{||}> = () => {
         useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
 
     const ready: boolean =
-        useSelector(({ activePage }) => !activePage.isPageLoading && !activePage.isDataEntryLoading);
+        useSelector(({ activePage }) => !activePage.lockedSelectorLoads && !activePage.isDataEntryLoading);
 
     const currentScopeId: string =
         useSelector(({ currentSelections }) => currentSelections.programId || currentSelections.trackedEntityTypeId);
 
     // This is combo category selection. When you have selected a program but
     // the selection is incomplete we want the user to see a specific message
-    const programCategorySelectionIncomplete: boolean =
-      useSelector(({ currentSelections: { programId, complete } }) => programId && !complete);
-
-    const missingCategoriesInProgramSelection: ProgramCategories =
-      useSelector(({ currentSelections: { categoriesMeta = {}, programId, complete } }) => {
-          const selectedProgram = programId && programCollection.get(programId);
-          if (selectedProgram && selectedProgram.categoryCombination && !complete) {
-              const programCategories = Array.from(selectedProgram.categoryCombination.categories.values())
-                  .map(({ id, name }) => ({ id, name }));
-
-              return programCategories.filter(({ id }) =>
-                  !(Object.keys(categoriesMeta)
-                      .some((programCategoryId => programCategoryId === id))
-                  ),
-              );
-          }
-          return [];
-      });
+    const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
 
     const orgUnitSelectionIncomplete: boolean =
-      useSelector(({ currentSelections: { orgUnitId, complete } }) => !orgUnitId && !complete);
+      useSelector(({ currentSelections: { orgUnitId, complete }, router: { location: { query } } }) => !(query.orgUnitId || orgUnitId) && !complete);
 
     const newPageStatus: $Keys<newPageStatuses> =
         useSelector(({ newPage }) => newPage.newPageStatus);
@@ -107,8 +88,8 @@ export const NewPage: ComponentType<{||}> = () => {
             handleMainPageNavigation={handleMainPageNavigation}
             currentScopeId={currentScopeId}
             orgUnitSelectionIncomplete={orgUnitSelectionIncomplete}
-            programCategorySelectionIncomplete={programCategorySelectionIncomplete}
-            missingCategoriesInProgramSelection={missingCategoriesInProgramSelection}
+            programCategorySelectionIncomplete={programSelectionIsIncomplete}
+            missingCategoriesInProgramSelection={missingCategories}
             writeAccess={writeAccess}
             newPageStatus={newPageStatus}
             error={error}

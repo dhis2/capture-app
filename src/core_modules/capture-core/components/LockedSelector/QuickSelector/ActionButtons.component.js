@@ -8,11 +8,15 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 
 
 const styles = ({ typography }) => ({
-    marginLeft: {
-        marginLeft: typography.pxToRem(12),
+    container: {
+        marginLeft: typography.pxToRem(8),
+        marginBottom: typography.pxToRem(8),
+        marginTop: typography.pxToRem(8),
+    },
+    marginRight: {
+        marginRight: typography.pxToRem(12),
     },
     buttonAsLink: {
-        marginLeft: typography.pxToRem(12),
         fontSize: typography.pxToRem(13),
         background: 'none!important',
         border: 'none',
@@ -47,14 +51,14 @@ const ActionButtonsPlain = ({
     const { trackedEntityName, scopeType, programName } = useScopeInfo(selectedProgramId);
 
     return (
-        <>
+        <div className={classes.container}>
             {
                 (scopeType !== scopeTypes.TRACKER_PROGRAM && scopeType !== scopeTypes.EVENT_PROGRAM) ?
                     <Button
                         small
                         secondary
                         dataTest="dhis2-capture-new-event-button"
-                        className={classes.marginLeft}
+                        className={classes.marginRight}
                         onClick={onNewClickWithoutProgramId}
                     >
                         { i18n.t('New') }
@@ -64,7 +68,7 @@ const ActionButtonsPlain = ({
                         small
                         secondary
                         dataTest="dhis2-capture-new-button"
-                        className={classes.marginLeft}
+                        className={classes.marginRight}
                         component={
                             <FlyoutMenu
                                 dense
@@ -93,7 +97,7 @@ const ActionButtonsPlain = ({
                         small
                         secondary
                         dataTest="dhis2-capture-find-button"
-                        className={classes.marginLeft}
+                        className={classes.marginRight}
                         onClick={onFindClickWithoutProgramId}
                     >
                         { i18n.t('Find') }
@@ -103,7 +107,7 @@ const ActionButtonsPlain = ({
                         small
                         secondary
                         dataTest="dhis2-capture-find-button"
-                        className={classes.marginLeft}
+                        className={classes.marginRight}
                         component={
                             <FlyoutMenu
                                 dense
@@ -138,7 +142,7 @@ const ActionButtonsPlain = ({
                     :
                     null
             }
-        </>
+        </div>
     );
 };
 

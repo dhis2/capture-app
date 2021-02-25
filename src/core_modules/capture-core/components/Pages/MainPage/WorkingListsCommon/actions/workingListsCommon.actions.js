@@ -1,5 +1,9 @@
 // @flow
 import { actionCreator } from '../../../../../actions/actions.utils';
+import type {
+    SharingSettings,
+} from '../../WorkingLists';
+
 
 export const workingListsCommonActionTypes = {
     TEMPLATES_FETCH: 'WorkingListsTemplatesFetch',
@@ -33,6 +37,7 @@ export const workingListsCommonActionTypes = {
     STICKY_FILTERS_AFTER_COLUMN_SORTING_SET: 'WorkingListsStickyFiltersAfterColumnSortingSet',
     PAGE_CHANGE: 'WorkingListsPageChange',
     ROWS_PER_PAGE_CHANGE: 'WorkingListsRowsPerPageChange',
+    TEMPLATE_SHARING_SETTINGS_SET: 'WorkingListsTemplateSharingSettingsSet',
 };
 
 export const fetchTemplates =
@@ -131,3 +136,6 @@ export const changePage = (pageNumber: number, storeId: string) =>
 
 export const changeRowsPerPage = (rowsPerPage: number, storeId: string) =>
     actionCreator(workingListsCommonActionTypes.ROWS_PER_PAGE_CHANGE)({ rowsPerPage, storeId });
+
+export const setTemplateSharingSettings = (sharingSettings: SharingSettings, templateId: string, storeId: string) =>
+    actionCreator(workingListsCommonActionTypes.TEMPLATE_SHARING_SETTINGS_SET)({ sharingSettings, templateId, storeId });
