@@ -191,11 +191,18 @@ Given('you land on a main event page with preselected program', () => {
     cy.visit('/#/?programId=VBqh0ynB2wv');
 });
 
-When('you select org unit', () => {
+When('you select org unit that is incompatible with the already selected program', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .type('Ngelehun C');
-    cy.contains('Ngelehun CHC')
+        .type('Bombal');
+    cy.contains('Bombali')
         .click();
+});
+
+Then('you can see message on the locked selector', () => {
+    cy.get('[data-test="dhis2-capture-locked-selector"]')
+        .contains('No programs available.');
+    cy.get('[data-test="dhis2-capture-locked-selector"]')
+        .contains('Show all');
 });
 
 Then('main page page url is valid', () => {

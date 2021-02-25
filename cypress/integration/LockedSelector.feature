@@ -62,6 +62,11 @@ Feature: Use the LockedSelector to navigate
     And there should be visible a title with Child Program
     And there should be Child Programme domain forms visible to search with
 
+  Scenario: Main page > Having a program preselected select an org unit which does not contain the program
+    Given you land on a main event page with preselected program
+    When you select org unit that is incompatible with the already selected program
+    Then you can see message on the locked selector
+
   # New Event page
   Scenario: New event page > Landing on the page
     Given you are in the main page with no selections made
