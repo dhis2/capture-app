@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/dhis2/capture-app/compare/v1.14.0...v1.15.0) (2021-02-25)
+
+
+### Features
+
+* DHIS2-10326 open enrollment from working list ([22be83e](https://github.com/dhis2/capture-app/commit/22be83e01a6bd1895b8ee9d822149200a629ca35))
+
 # [1.14.0](https://github.com/dhis2/capture-app/compare/v1.13.0...v1.14.0) (2021-02-25)
 
 
