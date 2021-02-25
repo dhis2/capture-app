@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/dhis2/capture-app/compare/v1.13.0...v1.14.0) (2021-02-25)
+
+
+### Features
+
+* DHIS2-10321 adds View Dashboard button on duplicates modal ([#1496](https://github.com/dhis2/capture-app/issues/1496)) ([14058b1](https://github.com/dhis2/capture-app/commit/14058b10e7fabbb9ef8e56d03cb17e0e92679aab))
+
 # [1.13.0](https://github.com/dhis2/capture-app/compare/v1.12.2...v1.13.0) (2021-02-24)
 
 
