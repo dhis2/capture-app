@@ -8,17 +8,17 @@ const searchGroupCountSelector = (state, props) =>
     state.dataEntriesSearchGroupsResults[props.dataEntryKey].main &&
     state.dataEntriesSearchGroupsResults[props.dataEntryKey].main.count;
 
-const onLinkSelector = (state, props) => props.onLink;
+const renderCardActionsSelector = (state, props) => props.renderCardActions;
 const selectedScopeIdSelector = (_, props) => props.selectedScopeId;
 const dataEntryIdSelector = (_, props) => props.dataEntryId;
 
 // $FlowFixMe
 export const makeGetSearchGroupWarning = () => createSelector(
     searchGroupCountSelector,
-    onLinkSelector,
+    renderCardActionsSelector,
     selectedScopeIdSelector,
     dataEntryIdSelector,
-    (count: ?number, onLink: Function, selectedScopeId: string, dataEntryId: string) => {
+    (count: ?number, renderCardActions, selectedScopeId: string, dataEntryId: string) => {
         if (!count) {
             return null;
         }
@@ -28,7 +28,7 @@ export const makeGetSearchGroupWarning = () => createSelector(
                 <SearchGroupDuplicate
                     dataEntryId={dataEntryId}
                     selectedScopeId={selectedScopeId}
-                    onLink={onLink}
+                    renderCardActions={renderCardActions}
                 />
             ),
         };

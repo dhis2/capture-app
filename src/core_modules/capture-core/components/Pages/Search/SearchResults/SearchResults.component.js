@@ -10,7 +10,7 @@ import withNavigation from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
 import type { Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
-import { availableCardListButtonState } from '../../../CardList/CardList.constants';
+import { availableCardListButtonState, enrollmentTypes } from '../../../CardList/CardList.constants';
 import { SearchResultsHeader } from '../../../SearchResultsHeader';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
@@ -35,9 +35,6 @@ export const getStyles = (theme: Theme) => ({
 });
 
 const buttonStyles = (theme: Theme) => ({
-    margin: {
-        marginTop: theme.typography.pxToRem(8),
-    },
     buttonMargin: {
         marginLeft: theme.typography.pxToRem(8),
     },
@@ -49,15 +46,30 @@ const CardListButtons = withStyles(buttonStyles)(
         currentSearchScopeType,
         id,
         orgUnitId,
-        navigationButtonsState,
+        enrollmentType,
         programName,
         classes,
     }) => {
+        const deriveNavigationButtonState =
+          (type): $Keys<typeof availableCardListButtonState> => {
+              switch (type) {
+              case enrollmentTypes.ACTIVE:
+                  return availableCardListButtonState.SHOW_VIEW_ACTIVE_ENROLLMENT_BUTTON;
+              case enrollmentTypes.CANCELLED:
+              case enrollmentTypes.COMPLETED:
+                  return availableCardListButtonState.SHOW_RE_ENROLLMENT_BUTTON;
+              default:
+                  return availableCardListButtonState.DONT_SHOW_BUTTON;
+              }
+          };
+
+        const navigationButtonsState = deriveNavigationButtonState(enrollmentType);
+
         const scopeSearchParam = `${currentSearchScopeType.toLowerCase()}=${currentSearchScopeId}`;
         const { pathname, search } = useLocation();
 
         return (
-            <div className={classes.margin}>
+            <>
                 <Button
                     small
                     dataTest="dhis2-capture-view-dashboard-button"
@@ -87,7 +99,7 @@ const CardListButtons = withStyles(buttonStyles)(
                         {i18n.t('Re-enroll')} {programName && `${i18n.t('in')} ${programName}`}
                     </Button>
                 }
-            </div>
+            </>
         );
     });
 
@@ -151,14 +163,14 @@ export const SearchResultsIndex = ({
             currentProgramId={currentProgramId}
             items={searchResults}
             dataElements={dataElements}
-            getCustomItemBottomElements={({ item, navigationButtonsState, programName }) => (
+            renderCustomCardActions={({ item, enrollmentType, programName }) => (
                 <CardListButtons
                     programName={programName}
                     currentSearchScopeId={currentSearchScopeId}
                     currentSearchScopeType={currentSearchScopeType}
                     id={item.id}
                     orgUnitId={item.tei.orgUnit}
-                    navigationButtonsState={navigationButtonsState}
+                    enrollmentType={enrollmentType}
                 />
             )}
         />

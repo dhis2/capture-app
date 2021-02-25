@@ -9,7 +9,7 @@ import FeedbacksSection from '../Pages/ViewEvent/RightColumn/FeedbacksSection/Fe
 import IndicatorsSection from '../Pages/ViewEvent/RightColumn/IndicatorsSection/IndicatorsSection.container';
 
 type Props = {
-    onLink: (teiId: string) => void,
+    onLink: (teiId: string, values: Object) => void,
     classes: {
         stickyOnScroll: string,
     }
@@ -34,7 +34,8 @@ const componentContainers = [
 
 class DataEntryWidgetOutputComponent extends React.Component<Props> {
     renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => {
-        const { onLink, ...otherProps } = props;
+        const { renderCardActions, ...otherProps } = props;
+
         const passOnProps = container.id === 'WarningsSection' ? props : otherProps;
         return (
             <container.Component key={container.id} {...passOnProps} />

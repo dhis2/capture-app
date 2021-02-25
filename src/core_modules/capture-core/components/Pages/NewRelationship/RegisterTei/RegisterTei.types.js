@@ -12,7 +12,7 @@ type DispatchersFromRedux = {|
 |};
 
 export type OwnProps = {|
-    onLink: (teiId: string) => void,
+    onLink: (teiId: string, values: Object) => void,
     onGetUnsavedAttributeValues?: ?Function,
     onSave: Function,
 |};

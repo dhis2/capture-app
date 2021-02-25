@@ -1,11 +1,11 @@
 // @flow
 import type {
     CardDataElementsInformation,
-    SearchResultItem,
 } from '../../Pages/Search/SearchResults/SearchResults.types';
+import type { ListItem, RenderCustomCardActions } from '../../CardList/CardList.types';
 
 export type OwnProps = {|
-    onLink?: (id: string, values: any)=>void,
+    renderCardActions?: RenderCustomCardActions,
     selectedScopeId: string,
     dataEntryId: string,
     selectedScopeId: string
@@ -15,7 +15,7 @@ type PropsFromRedux = {|
     ready: boolean,
     isUpdating: boolean,
     error: ?string,
-    teis: Array<SearchResultItem>,
+    teis: Array<ListItem>,
     dataElements: CardDataElementsInformation,
 |}
 
