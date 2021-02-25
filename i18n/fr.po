@@ -749,6 +749,9 @@ msgstr ""
 msgid "Save as new"
 msgstr ""
 
+msgid "View dashboard"
+msgstr "Voir le tableau de bord"
+
 msgid "Create for"
 msgstr ""
 
@@ -856,9 +859,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr "Choisir un type pour commencer la recherche"
-
-msgid "View dashboard"
-msgstr "Voir le tableau de bord"
 
 msgid "View active enrollment"
 msgstr "Voir les inscriptions actives"

@@ -724,6 +724,9 @@ msgstr "选择{{missingCategories}}开始报告"
 msgid "Save as new"
 msgstr "另存为新"
 
+msgid "View dashboard"
+msgstr "查看仪表盘"
+
 msgid "Create for"
 msgstr "为创建"
 
@@ -819,9 +822,6 @@ msgstr "该搜索返回了太多结果，无法显示。尝试更改搜索词或
 
 msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
-
-msgid "View dashboard"
-msgstr "查看仪表盘"
 
 msgid "View active enrollment"
 msgstr "查看有效的注册"

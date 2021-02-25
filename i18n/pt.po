@@ -721,6 +721,9 @@ msgstr ""
 msgid "Save as new"
 msgstr ""
 
+msgid "View dashboard"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
@@ -815,9 +818,6 @@ msgid ""
 msgstr ""
 
 msgid "Choose a type to start searching"
-msgstr ""
-
-msgid "View dashboard"
 msgstr ""
 
 msgid "View active enrollment"

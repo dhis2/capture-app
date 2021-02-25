@@ -138,7 +138,7 @@ msgid "A future date is not allowed"
 msgstr "En fremtidig dato er ikke tillatt"
 
 msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
+msgstr "Lagrer en {{trackedEntityName}} i"
 
 msgid "in"
 msgstr "i"
@@ -251,7 +251,7 @@ msgid "New event"
 msgstr "Ny hendelse"
 
 msgid "You don't have access to create an event in the current selections"
-msgstr ""
+msgstr "Du har ikke tilgang til å lage en hendelse i gjeldende valg"
 
 msgid "Save"
 msgstr "Lagre"
@@ -262,16 +262,16 @@ msgstr ""
 "denne hendelsen."
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr ""
+msgstr "Lagrer en {{trackedEntityName}}"
 
 msgid "without"
-msgstr ""
+msgstr "uten"
 
 msgid "enrollment"
-msgstr ""
+msgstr "registrering"
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr ""
+msgstr "Registrer i et program ved å velge et program fra topplinjen."
 
 msgid "An error has occurred. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
@@ -603,49 +603,57 @@ msgid "Organisation unit could not be loaded"
 msgstr "Organisasjonsenhet kunne ikke lastes inn"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
+msgstr "Sporet enhetsforekomst med id \"{{teiId}}\"  eksisterer ikke"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
+"Det oppsto en feil under åpningen av denne registreringen. Vennligst skriv "
+"inn en gyldig url."
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
+msgstr "Registrering med ID-en \"{{enrollmentId}}\" eksisterer ikke"
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
-msgstr ""
+msgstr "{{teiDisplayName}} er registrert i flere programmer. Velg et program."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
+"{{programName}} har kategorier. Velg alle kategorier for å se dashbordet."
 
 msgid ""
 "There are multiple enrollments for this program. Choose an enrollment to "
 "view the dashboard."
 msgstr ""
+"Det er flere registreringer i dette programmet. Velg en registreringg for å "
+"se dashbordet."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "{{teiDisplayName}} er ikke registrert i dette programmet."
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "Registrer {{teiDisplayName}} i dette programmet"
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
+"{{teiDisplayName}} er en {{tetName}} og kan ikke registreres i "
+"{{programName}}. Velg et annet program som tillater registrering av "
+"{{tetName}}."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr ""
+msgstr "Registrer en ny {{teiDisplayName}} i dette programmet"
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr ""
+msgstr "{{programName}} er et hendelsesprogram og har ikke registreringer."
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "Opprett ny hendelse i dette programmet"
 
 msgid "View working list in this program."
-msgstr ""
+msgstr "Se arbeidsliste i dette programmet."
 
 msgid "Delete event"
 msgstr "Slett hendelse"
@@ -687,13 +695,13 @@ msgid "Registering unit"
 msgstr "Registreringsenhet"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "Innregistreringsdato"
 
 msgid "Inactive"
 msgstr "Inaktiv"
 
 msgid "Working list could not be updated"
-msgstr ""
+msgstr "Arbeidslisten kunne ikke oppdateres"
 
 msgid "Update view"
 msgstr "Oppdater visning"
@@ -732,26 +740,30 @@ msgid "Choose a registering unit to start reporting"
 msgstr "Velg en registreringsenhet for å starte rapportering"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
+msgstr "Velg {{missingCategories}} for å starte rapportering"
 
 msgid "Save as new"
-msgstr ""
+msgstr "Lagre som ny"
+
+msgid "View dashboard"
+msgstr "Vis dashbord"
 
 msgid "Create for"
-msgstr ""
+msgstr "Opprett for"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
+"Du kan også velge et program fra topplinjen og opprette i det programmet"
 
 msgid "Review Duplicates"
 msgstr "Gjennomgå duplikater"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "Opprett ny {{trackedEntityTypeName}} og link"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "Lagre som ny {{trackedEntityName}}"
 
 msgid "Organisation Unit"
 msgstr "Organisasjonsenhet"
@@ -802,8 +814,7 @@ msgstr "Søk etter"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Du kan også velge et program fra den øverste linjen og søke i det programmet"
+msgstr "Du kan også velge et program fra topplinjen og søke i det programmet"
 
 msgid "No results found"
 msgstr "Ingen resultater funnet"
@@ -838,9 +849,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr "Velg en type for å begynne å søke"
-
-msgid "View dashboard"
-msgstr "Vis dashbord"
 
 msgid "View active enrollment"
 msgstr "Vis aktiv registrering"
@@ -881,7 +889,7 @@ msgid "Feedbacks"
 msgstr "Tilbakemeldinger"
 
 msgid "An error occurred loading possible duplicates"
-msgstr ""
+msgstr "En feil oppsto ved lasting av mulige duplikater"
 
 msgid "You dont have access to delete this relationship"
 msgstr "Du har ikke tilgang til å slette denne relasjonen"

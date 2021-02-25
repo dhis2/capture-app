@@ -739,6 +739,9 @@ msgstr "Chcete-li zahájit vytváření hlášení, vyberte {{missingCategories}
 msgid "Save as new"
 msgstr "Uložit jako nové"
 
+msgid "View dashboard"
+msgstr "Zobrazit ovládací panel"
+
 msgid "Create for"
 msgstr "Vytvořit pro"
 
@@ -842,9 +845,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
-
-msgid "View dashboard"
-msgstr "Zobrazit ovládací panel"
 
 msgid "View active enrollment"
 msgstr "Zobrazit aktivní zápisy"

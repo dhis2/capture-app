@@ -743,6 +743,9 @@ msgstr ""
 msgid "Save as new"
 msgstr ""
 
+msgid "View dashboard"
+msgstr "Смотреть Панель"
+
 msgid "Create for"
 msgstr ""
 
@@ -842,9 +845,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr ""
-
-msgid "View dashboard"
-msgstr "Смотреть Панель"
 
 msgid "View active enrollment"
 msgstr "Смотреть действующие регистрации"

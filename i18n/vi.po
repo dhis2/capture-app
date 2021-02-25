@@ -735,6 +735,9 @@ msgstr "Chọn {{missingCategories}} để bắt đầu báo cáo"
 msgid "Save as new"
 msgstr ""
 
+msgid "View dashboard"
+msgstr "Xem bảng điều khiển"
+
 msgid "Create for"
 msgstr ""
 
@@ -840,9 +843,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr "Chọn một loại để bắt đầu tìm kiếm"
-
-msgid "View dashboard"
-msgstr "Xem bảng điều khiển"
 
 msgid "View active enrollment"
 msgstr "Xem đăng ký đang hoạt động"

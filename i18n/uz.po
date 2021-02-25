@@ -738,6 +738,9 @@ msgstr "Ҳисоботни бошлаш учун {{missingCategories}} ни та
 msgid "Save as new"
 msgstr "Янги сифатида сақлаш"
 
+msgid "View dashboard"
+msgstr "Бошқарув панелини кўриш"
+
 msgid "Create for"
 msgstr ""
 
@@ -845,9 +848,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr "Қидирув турини танланг ва қидиришни бошланг"
-
-msgid "View dashboard"
-msgstr "Бошқарув панелини кўриш"
 
 msgid "View active enrollment"
 msgstr "Фаол рўйхатдан ўтаётганларни кўриш"

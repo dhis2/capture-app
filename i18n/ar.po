@@ -733,6 +733,9 @@ msgstr ""
 msgid "Save as new"
 msgstr ""
 
+msgid "View dashboard"
+msgstr "عرض لوحة المعلومات"
+
 msgid "Create for"
 msgstr ""
 
@@ -832,9 +835,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr "اختر نوعًا لبدء البحث"
-
-msgid "View dashboard"
-msgstr "عرض لوحة المعلومات"
 
 msgid "View active enrollment"
 msgstr "عرض التسجيل النشط"
