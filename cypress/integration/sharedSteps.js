@@ -84,7 +84,7 @@ When('you click the previous page button', () => {
         .click();
 });
 
-Then('you can see the first page of the results', () => {
+And('you can see the first page of the results', () => {
     cy.get('[data-test="dhis2-capture-search-results-list"]')
         .should('exist');
     cy.get('[data-test="dhis2-capture-card-list-item"]')
