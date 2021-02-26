@@ -1,4 +1,4 @@
-Feature: Use the LockedSelector to navigate
+Feature: User uses the LockedSelector to navigate
 
   # Main page
   Scenario: Main page > Notifying that you need to select org unit and program to get started

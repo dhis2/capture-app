@@ -390,11 +390,6 @@ And('you see validation warning on birth date', () => {
 
 And('you fill the WHO RMNCH program registration form with its required unique values', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(0)
-        .type('2021-01-01')
-        .blur();
-
-    cy.get('[data-test="capture-ui-input"]')
         .eq(2)
         .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`);
 
@@ -409,10 +404,6 @@ And('you fill the WHO RMNCH program registration form with its required unique v
 });
 
 And('you fill the WHO RMNCH program registration form with its required values', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(0)
-        .type('1999-01-01')
-        .blur();
     cy.get('[data-test="capture-ui-input"]')
         .eq(2)
         .type('Ava');
@@ -441,10 +432,6 @@ Then('you are navigated to the WHO RMNCH program in Tracker Capture app', () => 
 
 And('you fill the Child programme registration form with a first name with value that has duplicates', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(0)
-        .type('2021-01-01')
-        .blur();
-    cy.get('[data-test="capture-ui-input"]')
         .eq(1)
         .type('2021-01-01')
         .blur();
@@ -462,5 +449,5 @@ And('you are in the WNCH / PNC program registration page', () => {
 And('you see validation errors on the WHO RMNCH program registration page', () => {
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
         .find('[data-test="error-message"]')
-        .should('have.length', 5);
+        .should('have.length', 4);
 });

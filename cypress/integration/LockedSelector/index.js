@@ -270,14 +270,6 @@ And('you navigated to the main page', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh`);
 });
 
-And('you reset the program selection', () => {
-    cy.get('[data-test="reset-selection-button"]')
-        .should('have.length.greaterThan', 2);
-    cy.get('[data-test="reset-selection-button"]')
-        .eq(0)
-        .click();
-});
-
 And('you see message explaining you need to select a program', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
     cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
@@ -317,13 +309,6 @@ And('you see message explaining you need to select an enrollment', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ`);
     cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
         .contains('There are multiple enrollments for this program. Choose an enrollment to view the dashboard.');
-});
-
-And('you select the MNCH PNC program', () => {
-    cy.get('.Select').eq(0)
-        .type('MNCH');
-    cy.contains('PNC (Adult Woman)')
-        .click();
 });
 
 And('you select the Child Programme', () => {
