@@ -239,7 +239,7 @@ Then('the list should display 10 rows of data', () => {
         'Donald',
         'Donna',
         'Elizabeth',
-        'Emiliy',
+        'Emily',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
