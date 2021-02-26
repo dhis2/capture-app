@@ -416,7 +416,7 @@ When('you set the date of admission filter', () => {
             cy.contains('More filters')
                 .click();
 
-            cy.contains('Date of admission')
+            cy.contains('Admission Date')
                 .click();
         });
 
@@ -468,7 +468,7 @@ When('you open the dateFilterWorkingList', () => {
 
 Then('the admission filter should be in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Date of admission: 2018-01...')
+        .contains('Admission Date: 2018-01...')
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')

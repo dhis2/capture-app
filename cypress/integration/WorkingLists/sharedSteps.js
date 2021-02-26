@@ -44,7 +44,7 @@ Then('the status filter button should show that the active filter is in effect',
 
 When('you set the age filter to 10-20', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years)')
+        .contains('Age in years')
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
@@ -58,7 +58,7 @@ When('you set the age filter to 10-20', () => {
 
 Then('the age filter button should show that the filter is in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Age (years): 10 to 20')
+        .contains('Age in years: 10 to 20')
         .should('exist');
 });
 
