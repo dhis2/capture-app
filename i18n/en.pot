@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-02-01T16:04:09.943Z\n"
-"PO-Revision-Date: 2021-02-01T16:04:09.943Z\n"
+"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
+"PO-Revision-Date: 2021-02-23T13:09:00.376Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -128,6 +128,9 @@ msgstr ""
 msgid "in"
 msgstr ""
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Metadata error. see log for details"
 msgstr ""
 
@@ -233,9 +236,6 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-msgid "Cancel"
-msgstr ""
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 
@@ -252,6 +252,31 @@ msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "An error has occurred. See log for details"
+msgstr ""
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+
+msgid "You have already registered this {{attributeName}}"
+msgstr ""
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Registered person"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "validation failed"
@@ -497,22 +522,25 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-msgid "Selected Program"
+msgid "Program"
 msgstr ""
 
-msgid "Some programs are being filtered."
+msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
 msgstr ""
 
-msgid "Program"
+msgid "Selected program"
+msgstr ""
+
+msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
 msgstr ""
 
-msgid "No programs available."
+msgid "Selected"
 msgstr ""
 
 msgid "Online"
@@ -546,6 +574,49 @@ msgid "Event could not be loaded"
 msgstr ""
 
 msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid "There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr ""
+
+msgid "{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr ""
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr ""
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr ""
+
+msgid "View working list in this program."
 msgstr ""
 
 msgid "Delete event"
@@ -638,35 +709,13 @@ msgstr ""
 msgid "Save as new"
 msgstr ""
 
+msgid "View dashboard"
+msgstr ""
+
 msgid "Create for"
 msgstr ""
 
 msgid "You can also choose a program from the top bar and create in that program"
-msgstr ""
-
-msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr ""
-
-msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr ""
-
-msgid "You have already registered this {{attributeName}}"
-msgstr ""
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr ""
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
-
-msgid "Registered person"
-msgstr ""
-
-msgid "Link"
 msgstr ""
 
 msgid "Review Duplicates"
@@ -756,9 +805,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr ""
 
-msgid "View dashboard"
-msgstr ""
-
 msgid "View active enrollment"
 msgstr ""
 
@@ -806,9 +852,6 @@ msgid "Add relationship"
 msgstr ""
 
 msgid "Results found"
-msgstr ""
-
-msgid "Selected program"
 msgstr ""
 
 msgid "Search {{uniqueAttrName}}"

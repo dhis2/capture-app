@@ -4,9 +4,10 @@ import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../Buttons';
 import { WarningMessageCreator } from './WarningMessageCreator.component';
 import { PossibleDuplicatesDialog } from '../../../PossibleDuplicatesDialog';
+import type { RenderCustomCardActions } from '../../../CardList/CardList.types';
 
 type Props = {|
-    onLink: Function,
+    renderCardActions: RenderCustomCardActions,
     selectedScopeId: string,
     dataEntryId: string
 |};
@@ -44,7 +45,7 @@ export class SearchGroupDuplicate extends React.Component<Props, State> {
     }
 
     render() {
-        const { onLink, selectedScopeId, dataEntryId } = this.props;
+        const { selectedScopeId, dataEntryId, renderCardActions } = this.props;
         const { duplicatesReviewDialogOpen } = this.state;
 
         return (
@@ -59,8 +60,8 @@ export class SearchGroupDuplicate extends React.Component<Props, State> {
                     selectedScopeId={selectedScopeId}
                     open={duplicatesReviewDialogOpen}
                     onCancel={this.handleCloseReviewDialog}
-                    onLink={onLink}
                     extraActions={this.getHideButton()}
+                    renderCardActions={renderCardActions}
                 />
             </React.Fragment>
         );

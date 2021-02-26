@@ -18,18 +18,18 @@ export type ApiDataFilterTrueOnly = {|
     eq: string,
 |};
 
-type ApiDataFilterDateAbsolute = {|
+type ApiDataFilterDateAbsoluteContents = {|
     type: 'ABSOLUTE',
     startDate?: ?string,
     endDate?: ?string,
 |};
 
-type ApiDataFilterDateRelative = {|
+type ApiDataFilterDateRelativeContents = {|
     type: 'RELATIVE',
     period: string,
 |};
 
-export type ApiDataFilterDate = ApiDataFilterDateAbsolute | ApiDataFilterDateRelative;
+export type ApiDataFilterDate = { dateFilter: ApiDataFilterDateAbsoluteContents | ApiDataFilterDateRelativeContents };
 
 export type ApiDataFilterAssignee = {|
     assignedUserMode: $Values<apiAssigneeFilterModes>,

@@ -10,21 +10,21 @@ Given('you open the main page with Ngelehun and child programme context', () => 
 
 Then('the default working list should be displayed', () => {
     const names = [
-        'John Kelly',
-        'Anna Jones',
-        'Maria Wright',
-        'Joe Riley',
-        'Anthony Banks',
-        'Alan West',
-        'Heather Greene',
-        'Andrea Burton',
-        'Donald Johnson',
-        'Frances Rodriguez',
-        'Julia Harrison',
-        'Elizabeth Alvarez',
-        'Donald Williams',
-        'Wayne Roberts',
-        'Johnny Lynch',
+        'Alan',
+        'Alan',
+        'Andrea',
+        'Anna',
+        'Anthony',
+        'Donald',
+        'Donald',
+        'Donna',
+        'Elizabeth',
+        'Emily',
+        'Emma',
+        'Emma',
+        'Evelyn',
+        'Filona',
+        'Frances',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -33,11 +33,7 @@ Then('the default working list should be displayed', () => {
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[0])
-                    .should('exist');
-
-                cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[1])
+                    .contains(names[index - 1])
                     .should('exist');
             }
         });
@@ -51,11 +47,11 @@ When('you select the working list called completed enrollments', () => {
 
 Then('the list should display teis with a completed enrollment', () => {
     const names = [
+        'Alan Thompson',
+        'Emma Johnson',
         'Filona Ryder',
         'Frank Fjordsen',
         'Gertrude Fjordsen',
-        'Alan Thompson',
-        'Emma Johnson',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -90,15 +86,52 @@ When('you set the enrollment status filter to completed', () => {
         .click();
 });
 
-Then('the list should display teis with a completed enrollment and unassinged events', () => {
+When('you apply the current filter', () => {
+    cy.get('[data-test="list-view-filter-apply-button"]')
+        .click();
+});
+
+When('you set the enrollment status filter to active', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Enrollment status')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('Active')
+        .click();
+});
+
+When('you set the assginee filter to none', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Assigned to')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .contains('None')
+        .click();
+});
+
+Then('the enrollment status filter button should show that the active filter is in effect', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Enrollment status: Active')
+        .should('exist');
+});
+
+Then('the assignee filter button should show that unassigned filter is in effect', () => {
+    cy.get('[data-test="tei-working-lists"]')
+        .contains('Assigned to: None')
+        .should('exist');
+});
+
+Then('the list should display teis with an active enrollment and unassinged events', () => {
     const names = [
-        'John Kelly',
-        'Anna Jones',
-        'Maria Wright',
-        'Joe Riley',
-        'Anthony Banks',
-        'Alan West',
-        'Heather Greene',
+        'Alan',
+        'Alan',
+        'Andrea',
+        'Anna',
+        'Anthony',
+        'Donald',
+        'Donald',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -107,11 +140,7 @@ Then('the list should display teis with a completed enrollment and unassinged ev
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[0])
-                    .should('exist');
-
-                cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[1])
+                    .contains(names[index - 1])
                     .should('exist');
             }
         });
@@ -119,9 +148,9 @@ Then('the list should display teis with a completed enrollment and unassinged ev
 
 Then('the list should display teis with John as the first name', () => {
     const names = [
-        'John Kelly',
-        'Johnny Lynch',
-        'John Thomson',
+        'John',
+        'John',
+        'Johnny',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -130,11 +159,7 @@ Then('the list should display teis with John as the first name', () => {
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[0])
-                    .should('exist');
-
-                cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[1])
+                    .contains(names[index - 1])
                     .should('exist');
             }
         });
@@ -165,21 +190,21 @@ Then('the registering unit should display in the list', () => {
 
 Then('the list should display data for the second page', () => {
     const names = [
-        'Donna Campbell',
-        'Sharon Johnson',
-        'Scott Hansen',
-        'Emily Jones',
-        'Alan Thompson',
-        'Tom Johnson',
-        'Jack Dean',
-        'Tim Johnson',
-        'James Dunn',
-        'Noah Thompson',
-        'Lily Matthews',
-        'Olvia Watts',
-        'Emma Thompson',
-        'Sophia Jackson',
-        'Tom Johson',
+        'Frank',
+        'Gertrude',
+        'Heather',
+        'Jack',
+        'James',
+        'Joe',
+        'John',
+        'John',
+        'Johnny',
+        'Julia',
+        'Lily',
+        'Maria',
+        'Noah',
+        'Olvia',
+        'Scott',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -200,16 +225,16 @@ Then('the list should display data for the second page', () => {
 
 Then('the list should display 10 rows of data', () => {
     const names = [
-        'John Kelly',
-        'Anna Jones',
-        'Maria Wright',
-        'Joe Riley',
-        'Anthony Banks',
-        'Alan West',
-        'Heather Greene',
-        'Andrea Burton',
-        'Donald Johnson',
-        'Frances Rodriguez',
+        'Alan',
+        'Alan',
+        'Andrea',
+        'Anna',
+        'Anthony',
+        'Donald',
+        'Donald',
+        'Donna',
+        'Elizabeth',
+        'Emiliy',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -236,21 +261,21 @@ When('you click the first name column header', () => {
 
 Then('the list should display data ordered descendingly by first name', () => {
     const names = [
-        'John Kelly',
-        'Anna Jones',
-        'Maria Wright',
-        'Joe Riley',
-        'Anthony Banks',
-        'Alan West',
-        'Heather Greene',
-        'Andrea Burton',
-        'Donald Johnson',
-        'Frances Rodriguez',
-        'Julia Harrison',
-        'Elizabeth Alvarez',
-        'Donald Williams',
-        'Wayne Roberts',
-        'Johnny Lynch',
+        'Wayne',
+        'Tom',
+        'Tom',
+        'Tim',
+        'Sophia',
+        'Sharon',
+        'Scott',
+        'Olvia',
+        'Noah',
+        'Maria',
+        'Lily',
+        'Julia',
+        'Johnny',
+        'John',
+        'John',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -259,11 +284,7 @@ Then('the list should display data ordered descendingly by first name', () => {
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[0])
-                    .should('exist');
-
-                cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[1])
+                    .contains(names[index - 1])
                     .should('exist');
             }
         });

@@ -1,13 +1,15 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router';
+import { useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import Grid from '@material-ui/core/Grid';
 import i18n from '@dhis2/d2-i18n';
-
+import { colors } from '@dhis2/ui';
 import { programCollection } from '../../../../metaDataMemoryStores';
 import VirtualizedSelect from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import ProgramList from './ProgramList';
@@ -17,12 +19,48 @@ import type { Program } from '../../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
 import LinkButton from '../../../Buttons/LinkButton.component';
+import { urlArguments } from '../../../../utils/url';
+
+
+const EmptyPrograms = ({ classes, handleResetOrgUnit }) => {
+    const { push } = useHistory();
+    const pathname: string = useSelector(({ router: { location } }) => location.pathname);
+    const { enrollmentId, teiId, orgUnitId } = useSelector(({ router: { location: { query } } }) => query);
+
+
+    useEffect(() => {
+        const navigateToEventRegistrationPage = () => {
+            push(`${pathname}?${urlArguments({ enrollmentId, teiId, orgUnitId })}`);
+        };
+
+        navigateToEventRegistrationPage();
+    }, [push, pathname, enrollmentId, teiId, orgUnitId]);
+
+    return (
+        <Paper square elevation={0} className={classes.paper}>
+            <h4 className={classes.title}>{ i18n.t('Program') }</h4>
+            <div
+                className={classes.noProgramsContainer}
+            >
+                {i18n.t('No programs available.')}
+                <LinkButton
+                    className={classes.programsHiddenTextResetOrgUnit}
+                    onClick={handleResetOrgUnit}
+                >
+                    {i18n.t('Show all')}
+                </LinkButton>
+            </div>
+        </Paper>
+    );
+};
 
 const styles = (theme: Theme) => ({
+    border: {
+        borderRight: `1px solid ${colors.grey500}`,
+    },
     paper: {
         padding: 8,
         backgroundColor: theme.palette.grey.lighter,
-        borderRadius: 8,
     },
     title: {
         margin: 0,
@@ -34,11 +72,10 @@ const styles = (theme: Theme) => ({
         width: '100%',
     },
     selectedText: {
-        marginTop: 5,
-        marginBottom: 5,
-        marginLeft: 5,
+        marginTop: 6,
+        marginBottom: 4,
         padding: 5,
-        borderLeft: '2px solid #71a4f8',
+        borderLeft: `2px solid ${colors.blue600}`,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -65,7 +102,6 @@ const styles = (theme: Theme) => ({
     },
     selectedPaper: {
         backgroundColor: theme.palette.grey.lighter,
-        borderRadius: 8,
         padding: 8,
     },
     selectedButton: {
@@ -102,8 +138,8 @@ const styles = (theme: Theme) => ({
         paddingRight: 5,
     },
     icon: {
-        width: 22,
-        height: 22,
+        width: 20,
+        height: 20,
         borderRadius: 2,
     },
 });
@@ -207,7 +243,7 @@ class ProgramSelector extends Component<Props> {
     renderSelectedProgram(selectedProgram) {
         return (
             <React.Fragment>
-                <h4 className={this.props.classes.title}>{ i18n.t('Selected Program') }</h4>
+                <h4 className={this.props.classes.title}>{ i18n.t('Selected program') }</h4>
                 <div className={this.props.classes.selectedText}>
                     <div
                         className={this.props.classes.selectedTextAndIconContainer}
@@ -219,7 +255,7 @@ class ProgramSelector extends Component<Props> {
                             {selectedProgram.name}
                         </div>
                     </div>
-                    <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
+                    <IconButton data-test="reset-selection-button" className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
                         <ClearIcon className={this.props.classes.selectedButtonIcon} />
                     </IconButton>
                 </div>
@@ -231,53 +267,51 @@ class ProgramSelector extends Component<Props> {
         if (selectedProgram.categoryCombination) {
             const { classes, selectedCategories, selectedOrgUnitId } = this.props;
             return (
-                <div>
-                    <Paper elevation={0} className={classes.selectedPaper}>
-                        <Grid container spacing={8}>
-                            <Grid item xs={12} sm={6}>
-                                {this.renderSelectedProgram(selectedProgram)}
-                            </Grid>
-                            {
-                                // $FlowFixMe
-                                Array.from(selectedProgram.categoryCombination.categories.values()).map(category =>
-                                    (<Grid key={category.id} item xs={12} sm={6}>
-                                        <h4 className={classes.title}>{category.name}</h4>
-                                        {
-                                            (() => {
-                                                if (selectedCategories && selectedCategories[category.id]) {
-                                                    return (
-                                                        <div className={classes.selectedText}>
-                                                            <div className={classes.selectedCategoryNameContainer}>{selectedCategories[category.id].name}</div>
-                                                            <IconButton className={classes.selectedButton} onClick={() => this.handleResetCategoryOption(category.id)}>
-                                                                <ClearIcon className={classes.selectedButtonIcon} />
-                                                            </IconButton>
-                                                        </div>
-                                                    );
-                                                }
+                <Grid container>
+                    <Grid item xs={12} sm={6} className={this.props.classes.border}>
+                        <Paper square elevation={0} className={classes.selectedPaper}>
+                            {this.renderSelectedProgram(selectedProgram)}
+                        </Paper>
+                    </Grid>
+                    {
+                        // $FlowFixMe
+                        Array.from(selectedProgram.categoryCombination.categories.values()).map(category =>
+                            (<Grid key={category.id} item xs={12} sm={6}>
+                                <Paper square elevation={0} className={classes.selectedPaper}>
+                                    <h4 className={classes.title}>{category.name}</h4>
+                                    {
+                                        (() => {
+                                            if (selectedCategories && selectedCategories[category.id]) {
                                                 return (
-                                                    <CategorySelector
-                                                        category={category}
-                                                        // $FlowFixMe[incompatible-call] automated comment
-                                                        onSelect={(option) => { this.handleClickCategoryOption(option, category.id); }}
-                                                        selectedOrgUnitId={selectedOrgUnitId}
-                                                    />
+                                                    <div className={classes.selectedText}>
+                                                        <div className={classes.selectedCategoryNameContainer}>{selectedCategories[category.id].name}</div>
+                                                        <IconButton data-test="reset-selection-button" className={classes.selectedButton} onClick={() => this.handleResetCategoryOption(category.id)}>
+                                                            <ClearIcon className={classes.selectedButtonIcon} />
+                                                        </IconButton>
+                                                    </div>
                                                 );
-                                            })()
-                                        }
-                                    </Grid>))
-                            }
-                        </Grid>
-                    </Paper>
-                </div>
+                                            }
+                                            return (
+                                                <CategorySelector
+                                                    category={category}
+                                                    // $FlowFixMe[incompatible-call] automated comment
+                                                    onSelect={(option) => { this.handleClickCategoryOption(option, category.id); }}
+                                                    selectedOrgUnitId={selectedOrgUnitId}
+                                                />
+                                            );
+                                        })()
+                                    }
+                                </Paper>
+                            </Grid>))
+                    }
+                </Grid>
             );
         }
 
         return (
-            <div>
-                <Paper elevation={0} className={this.props.classes.selectedPaper}>
-                    {this.renderSelectedProgram(selectedProgram)}
-                </Paper>
-            </div>
+            <Paper square elevation={0} className={this.props.classes.selectedPaper}>
+                {this.renderSelectedProgram(selectedProgram)}
+            </Paper>
         );
     }
 
@@ -301,7 +335,7 @@ class ProgramSelector extends Component<Props> {
             : null;
 
         return (
-            <Paper elevation={0} className={classes.paper} data-test="dhis2-capture-program-selector-container">
+            <Paper square elevation={0} className={classes.paper} data-test="dhis2-capture-program-selector-container">
                 <h4 className={classes.title}>
                     { i18n.t('Program') }
                 </h4>
@@ -334,32 +368,11 @@ class ProgramSelector extends Component<Props> {
         );
     }
 
-    renderEmpty() {
-        return (
-            <div>
-                <Paper elevation={0} className={this.props.classes.paper}>
-                    <h4 className={this.props.classes.title}>{ i18n.t('Program') }</h4>
-                    <div
-                        className={this.props.classes.noProgramsContainer}
-                    >
-                        {i18n.t('No programs available.')}
-                        <LinkButton
-                            className={this.props.classes.programsHiddenTextResetOrgUnit}
-                            onClick={() => this.handleResetOrgUnit()}
-                        >
-                            {i18n.t('Show all')}
-                        </LinkButton>
-                    </div>
-                </Paper>
-            </div>
-        );
-    }
-
     render() {
         const programOptions = this.getOptions();
 
         if (programOptions.length === 0) {
-            return this.renderEmpty();
+            return <EmptyPrograms classes={this.props.classes} handleResetOrgUnit={this.props.onResetOrgUnit} />;
         }
 
         const selectedProgram = this.props.selectedProgram ? programCollection.get(this.props.selectedProgram) : null;
@@ -369,5 +382,4 @@ class ProgramSelector extends Component<Props> {
         return this.renderWithoutSelectedProgram(programOptions);
     }
 }
-
 export default withStyles(styles, { index: 1 })(ProgramSelector);

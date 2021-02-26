@@ -141,16 +141,16 @@ export const workingListsTemplatesDesc = createReducerDescription({
         }
         return state;
     },
-    [workingListsCommonActionTypes.TEMPLATE_ADD]: (state, action) => {
-        const { name, criteria, template, clientId, storeId } = action.payload;
-
+    [workingListsCommonActionTypes.TEMPLATE_ADD]: (state, { payload: {
+        name,
+        criteria,
+        clientId: id,
+        storeId,
+    } }) => {
         const newTemplate = {
-            ...template,
+            id,
             name,
-            displayName: name,
-            id: clientId,
             criteria,
-            isDefault: undefined,
             notPreserved: true,
             access: {
                 update: true,
@@ -166,7 +166,7 @@ export const workingListsTemplatesDesc = createReducerDescription({
             ...state,
             [storeId]: {
                 ...state[storeId],
-                selectedTemplateId: clientId,
+                selectedTemplateId: id,
                 templates: [
                     ...templates,
                     newTemplate,
@@ -273,6 +273,33 @@ export const workingListsTemplatesDesc = createReducerDescription({
                     ...otherTemplates,
                     failedToDeleteTemplate,
                 ],
+            },
+        };
+    },
+    [workingListsCommonActionTypes.TEMPLATE_SHARING_SETTINGS_SET]: (
+        state, {
+            payload: {
+                sharingSettings,
+                templateId,
+                storeId,
+            },
+        }) => {
+        const initialTemplates = state[storeId].templates;
+        const templateIndex = initialTemplates.findIndex(template => template.id === templateId);
+
+        const template = {
+            ...initialTemplates[templateIndex],
+            ...sharingSettings,
+        };
+
+        const updatedTemplates = [...initialTemplates];
+        updatedTemplates[templateIndex] = template;
+
+        return {
+            ...state,
+            [storeId]: {
+                ...state[storeId],
+                templates: updatedTemplates,
             },
         };
     },

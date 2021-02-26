@@ -7,7 +7,7 @@ const mapStateToProps = (state: ReduxState) => ({
     currentSelectionsComplete: !!state.currentSelections.complete,
     programId: state.currentSelections.programId,
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
-    ready: !state.activePage.isPageLoading,  // TODO: Should probably remove this
+    ready: !state.activePage.lockedSelectorLoads,  // TODO: Should probably remove this
 });
 
 // $FlowFixMe[missing-annot] automated comment

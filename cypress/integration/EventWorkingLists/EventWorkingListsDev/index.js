@@ -116,11 +116,31 @@ Then('active events that are assigned to anyone should be retrieved from the api
     cy.get('@result').its('response.body.events').as('events');
 });
 
+When('you set the age filter to 10-20', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains('Age in years')
+        .click();
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .find('input[placeholder="Min"]')
+        .type('10');
+
+    cy.get('[data-test="list-view-filter-contents"]')
+        .find('input[placeholder="Max"]')
+        .type('20');
+});
+
 When('you apply the current filter on the event working list', () => {
     cy.route('GET', '**/events**').as('getEvents');
 
     cy.get('[data-test="list-view-filter-apply-button"]')
         .click();
+});
+
+Then('the age filter button should show that the filter is in effect', () => {
+    cy.get('[data-test="event-working-lists"]')
+        .contains('Age in years: 10 to 20')
+        .should('exist');
 });
 
 Then('events where age is between 10 and 20 should be retrieved from the api', () => {

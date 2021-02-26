@@ -1,18 +1,19 @@
 // @flow
 import React from 'react';
-import type { ComponentType, Element } from 'react';
+import type { ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { CardListItem } from './CardListItem.component';
 import { makeElementsContainerSelector } from './CardList.selectors';
-import type { CardDataElementsInformation, SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
+import type { CardDataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.types';
+import type { ListItem, RenderCustomCardActions } from './CardList.types';
 
 type OwnProps = $ReadOnly<{|
     dataElements: CardDataElementsInformation,
-    items: Array<SearchResultItem>,
+    items: Array<ListItem>,
     currentProgramId?: string,
     currentSearchScopeName?: string,
     noItemsText?: string,
-    getCustomItemBottomElements?: (itemProps: Object) => Element<any>,
+    renderCustomCardActions?: RenderCustomCardActions,
 |}>
 
 const getStyles = (theme: Theme) => ({
@@ -22,10 +23,11 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
+
 const CardListIndex = ({
     classes,
     items,
-    getCustomItemBottomElements,
+    renderCustomCardActions,
     dataElements,
     noItemsText,
     currentProgramId,
@@ -47,7 +49,7 @@ const CardListIndex = ({
                             item={item}
                             currentSearchScopeName={currentSearchScopeName}
                             currentProgramId={currentProgramId}
-                            getCustomBottomElements={getCustomItemBottomElements}
+                            renderCustomCardActions={renderCustomCardActions}
                             profileImageDataElement={profileImageDataElement}
                             dataElements={dataElementsExceptProfileImage}
                         />

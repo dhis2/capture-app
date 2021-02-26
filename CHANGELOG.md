@@ -1,3 +1,81 @@
+# [1.15.0](https://github.com/dhis2/capture-app/compare/v1.14.0...v1.15.0) (2021-02-25)
+
+
+### Features
+
+* DHIS2-10326 open enrollment from working list ([22be83e](https://github.com/dhis2/capture-app/commit/22be83e01a6bd1895b8ee9d822149200a629ca35))
+
+# [1.14.0](https://github.com/dhis2/capture-app/compare/v1.13.0...v1.14.0) (2021-02-25)
+
+
+### Features
+
+* DHIS2-10321 adds View Dashboard button on duplicates modal ([#1496](https://github.com/dhis2/capture-app/issues/1496)) ([14058b1](https://github.com/dhis2/capture-app/commit/14058b10e7fabbb9ef8e56d03cb17e0e92679aab))
+
+# [1.13.0](https://github.com/dhis2/capture-app/compare/v1.12.2...v1.13.0) (2021-02-24)
+
+
+### Features
+
+* adds the cancel button ([#1522](https://github.com/dhis2/capture-app/issues/1522)) ([20ef271](https://github.com/dhis2/capture-app/commit/20ef271ac8a67438c3a9c7ff3a533d2534f6c859))
+* DHIS2-10525 adds url ([#1520](https://github.com/dhis2/capture-app/issues/1520)) ([104d8ce](https://github.com/dhis2/capture-app/commit/104d8ce950e4afc4fa5fc24e3da5b5db8877a6bf))
+
+## [1.12.2](https://github.com/dhis2/capture-app/compare/v1.12.1...v1.12.2) (2021-02-24)
+
+
+### Bug Fixes
+
+* DHIS2-10461 Date filters ([bf37690](https://github.com/dhis2/capture-app/commit/bf37690b8183fb72bf5a676826e2155e5e2e3c6a))
+
+## [1.12.1](https://github.com/dhis2/capture-app/compare/v1.12.0...v1.12.1) (2021-02-24)
+
+
+### Bug Fixes
+
+* DHIS2-10493 Preserve sharing settings ([6838b0a](https://github.com/dhis2/capture-app/commit/6838b0a73b71dca2d77d7c2c07533fa7c52b96fa))
+
+# [1.12.0](https://github.com/dhis2/capture-app/compare/v1.11.0...v1.12.0) (2021-02-24)
+
+
+### Features
+
+* DHIS2-10315 Autogenerate event when submitting enrollment ([#1518](https://github.com/dhis2/capture-app/issues/1518)) ([76e3dae](https://github.com/dhis2/capture-app/commit/76e3dae0932751bbddae61b84274618cf0cd24aa))
+
+# [1.11.0](https://github.com/dhis2/capture-app/compare/v1.10.1...v1.11.0) (2021-02-24)
+
+
+### Features
+
+* DHIS2-10312 adds default value in enrolment date ([#1505](https://github.com/dhis2/capture-app/issues/1505)) ([2c72bbb](https://github.com/dhis2/capture-app/commit/2c72bbbec53e8af043eb012207897fdabdf2dad1))
+
+## [1.10.1](https://github.com/dhis2/capture-app/compare/v1.10.0...v1.10.1) (2021-02-24)
+
+
+### Bug Fixes
+
+* broken cypress tests ([6b97844](https://github.com/dhis2/capture-app/commit/6b97844e9abfaff895ff6566ba53894e70f161a7))
+
+# [1.10.0](https://github.com/dhis2/capture-app/compare/v1.9.0...v1.10.0) (2021-02-16)
+
+
+### Features
+
+* adds missing parts from the chain ([#1513](https://github.com/dhis2/capture-app/issues/1513)) ([409b07e](https://github.com/dhis2/capture-app/commit/409b07e3cf0cd35ac079386f281da8bfc489b322))
+
+## [1.8.3](https://github.com/dhis2/capture-app/compare/v1.8.2...v1.8.3) (2021-02-08)
+
+
+### Bug Fixes
+
+* DHIS2-10205 user can see validation messages on the form ([#1487](https://github.com/dhis2/capture-app/issues/1487)) ([c331cf9](https://github.com/dhis2/capture-app/commit/c331cf911db674bded11368d713ce180affe5903))
+
+## [1.8.2](https://github.com/dhis2/capture-app/compare/v1.8.1...v1.8.2) (2021-02-05)
+
+
+### Bug Fixes
+
+* cypress - reduces time on failing tests ([#1486](https://github.com/dhis2/capture-app/issues/1486)) ([501ce1c](https://github.com/dhis2/capture-app/commit/501ce1c9b0e06a2e26a929514901af0a65753b8f))
+
 ## [1.8.1](https://github.com/dhis2/capture-app/compare/v1.8.0...v1.8.1) (2021-02-02)
 
 

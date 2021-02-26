@@ -3,7 +3,7 @@ import { EventProgram, TrackerProgram } from '../Program';
 import { TrackedEntityType } from '../TrackedEntityType';
 import { programCollection, trackedEntityTypesCollection } from '../../metaDataMemoryStores';
 
-type Scope = (EventProgram | TrackerProgram | TrackedEntityType)
+export type Scope = (EventProgram | TrackerProgram | TrackedEntityType)
 
 export function getScopeFromScopeId(scopeId: ?string): ?Scope {
     if (!scopeId) {

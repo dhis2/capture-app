@@ -4,9 +4,9 @@ import i18n from '@dhis2/d2-i18n';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
-import { Button } from '../../../../../Buttons';
-import { CardList } from '../../../../../CardList';
-import type { CardDataElementsInformation } from '../../../../Search/SearchResults/SearchResults.types';
+import { Button } from '../../../Buttons';
+import { CardList } from '../../../CardList';
+import type { CardDataElementsInformation } from '../../../Pages/Search/SearchResults/SearchResults.types';
 
 type Props = {
     attributeValues: {[id: string]: any},
@@ -38,6 +38,7 @@ class ExistingTEIContents extends React.Component<Props> {
                     </DialogTitle>
                     <CardList
                         currentProgramId={programId}
+                        // $FlowFixMe
                         items={items}
                         dataElements={dataElements}
                     />

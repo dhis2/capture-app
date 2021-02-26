@@ -14,7 +14,7 @@ And the list should display teis with a completed enrollment
 And rows per page should be set to 15
 And for a tracker program the page navigation should show that you are on the first page
 
-Scenario: Show only teis with active enrollments using the filter
+Scenario: Show only teis with completed enrollments using the filter
 Given you open the main page with Ngelehun and child programme context
 When you set the enrollment status filter to completed
 And you apply the current filter
@@ -31,7 +31,7 @@ And you set the assginee filter to none
 And you apply the current filter
 Then the enrollment status filter button should show that the active filter is in effect
 And the assignee filter button should show that unassigned filter is in effect
-And the list should display teis with a completed enrollment and unassinged events
+And the list should display teis with an active enrollment and unassinged events
 And rows per page should be set to 15
 And for a tracker program the page navigation should show that you are on the first page
 
