@@ -133,11 +133,19 @@ Then('the list should display teis with an active enrollment and unassinged even
         'Anthony',
         'Donald',
         'Donald',
+        'Donna',
+        'Elizabeth',
+        'Emily',
+        'Emma',
+        'Evelyn',
+        'Frances',
+        'Heather',
+        'Jack',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
-        .should('have.length', 8)
+        .should('have.length', 16)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
@@ -216,10 +224,6 @@ Then('the list should display data for the second page', () => {
                 cy.wrap($teiRow)
                     .contains(names[index - 1].split(' ')[0])
                     .should('exist');
-
-                cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[1])
-                    .should('exist');
             }
         });
 });
@@ -245,10 +249,6 @@ Then('the list should display 10 rows of data', () => {
             if (index) {
                 cy.wrap($teiRow)
                     .contains(names[index - 1].split(' ')[0])
-                    .should('exist');
-
-                cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[1])
                     .should('exist');
             }
         });
