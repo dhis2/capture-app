@@ -1,3 +1,5 @@
+import '../sharedSteps';
+
 beforeEach(() => {
     cy.loginThroughForm();
 });
@@ -6,14 +8,6 @@ Given('you are on an enrollment page', () => {
     cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
     cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
         .contains('Enrollment Dashboard');
-});
-
-And('you reset the program selection', () => {
-    cy.get('[data-test="reset-selection-button"]')
-        .should('have.length.greaterThan', 2);
-    cy.get('[data-test="reset-selection-button"]')
-        .eq(0)
-        .click();
 });
 
 And('you select the Inpatient morbidity program', () => {
@@ -61,13 +55,6 @@ And('you select the Malaria case diagnosis program', () => {
     cy.get('.Select').eq(0)
         .type('Malaria case diag');
     cy.contains('Malaria case diagnosis')
-        .click();
-});
-
-And('you select the MNCH PNC program', () => {
-    cy.get('.Select').eq(0)
-        .type('MNCH');
-    cy.contains('PNC (Adult Woman)')
         .click();
 });
 

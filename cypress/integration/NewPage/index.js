@@ -1,3 +1,5 @@
+import '../sharedSteps';
+
 beforeEach(() => {
     cy.loginThroughForm();
 });
@@ -9,20 +11,6 @@ And('you are on the default registration page', () => {
 And('there should be informative message explaining you need to select an organisation unit', () => {
     cy.get('[data-test="dhis2-capture-informative-paper"]')
         .contains('Choose a registering unit to start reporting')
-        .should('exist');
-});
-
-And('you select org unit', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .type('Ngelehun C');
-    cy.contains('Ngelehun CHC')
-        .click();
-});
-
-And('you see the dropdown menu for selecting tracked entity type', () => {
-    cy.get('[data-test="dhis2-uicore-select"')
-        .should('exist');
-    cy.contains('You can also choose a program from the top bar and create in that program')
         .should('exist');
 });
 
@@ -155,24 +143,11 @@ And('you see the registration form for the Malaria case registration', () => {
         .should('exist');
 });
 
-And('you select the Child Programme', () => {
-    cy.get('.Select')
-        .type('Child Program');
-    cy.contains('Child Programme')
-        .click();
-});
-
 And('you select the Malaria case registration program', () => {
     cy.get('.Select')
         .type('Malaria case registr');
     cy.contains('Malaria case registration')
         .click();
-});
-
-Given('you are in the main page with no selections made', () => {
-    cy.visit('/#/');
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
-        .should('exist');
 });
 
 When('you see a dropdown button', () => {
@@ -203,16 +178,6 @@ When('you are navigated to the registration page without program selected', () =
 When('you are navigated to the Child Programme registration page with program selected', () => {
     cy.url()
         .should('eq', `${Cypress.config().baseUrl}/#/new?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
-});
-
-When('you have no program selection', () => {
-    cy.get('[data-test="dhis2-capture-program-selector-container"]')
-        .contains('Select program');
-});
-
-When('you have no program selection', () => {
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Select program');
 });
 
 When('you have Child Programme selected', () => {
@@ -388,37 +353,6 @@ Then('you submit the form again from the duplicates modal', () => {
         .click();
 });
 
-
-When('you click the next page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
-        .click();
-});
-
-Then('you can see the second page of the results', () => {
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-pagination"]')
-        .contains('Page 2')
-        .should('exist');
-});
-
-When('you click the previous page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
-        .click();
-});
-
-Then('you can see the first page of the results', () => {
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-pagination"]')
-        .contains('Page 1')
-        .should('exist');
-});
-
 And('you click the possible duplicates button', () => {
     cy.get('[data-test="dhis2-capture-possible-duplicates-found-button"]')
         .contains('Possible duplicates found')
@@ -456,11 +390,6 @@ And('you see validation warning on birth date', () => {
 
 And('you fill the WHO RMNCH program registration form with its required unique values', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(0)
-        .type('2021-01-01')
-        .blur();
-
-    cy.get('[data-test="capture-ui-input"]')
         .eq(2)
         .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`);
 
@@ -475,10 +404,6 @@ And('you fill the WHO RMNCH program registration form with its required unique v
 });
 
 And('you fill the WHO RMNCH program registration form with its required values', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(0)
-        .type('1999-01-01')
-        .blur();
     cy.get('[data-test="capture-ui-input"]')
         .eq(2)
         .type('Ava');
@@ -507,10 +432,6 @@ Then('you are navigated to the WHO RMNCH program in Tracker Capture app', () => 
 
 And('you fill the Child programme registration form with a first name with value that has duplicates', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(0)
-        .type('2021-01-01')
-        .blur();
-    cy.get('[data-test="capture-ui-input"]')
         .eq(1)
         .type('2021-01-01')
         .blur();
@@ -528,5 +449,5 @@ And('you are in the WNCH / PNC program registration page', () => {
 And('you see validation errors on the WHO RMNCH program registration page', () => {
     cy.get('[data-test="dhis2-capture-registration-page-content"]')
         .find('[data-test="error-message"]')
-        .should('have.length', 5);
+        .should('have.length', 4);
 });
