@@ -117,7 +117,7 @@ Feature: User interacts with Search page
 
   Scenario: Changing the program from the LockedSelector will change the search scope
     Given you are on the default search page
-    And you select the search domain Child Programme
+    And you select Child Programme
     When you remove the Child Programme selection
     And you select the search domain Malaria Case diagnosis
     Then there should be visible a title with Malaria case diagnosis
@@ -225,6 +225,6 @@ Feature: User interacts with Search page
     And you navigated to a search page with tracked entity id on the url
     And you have no program selection
     And you can see the first page of the results
-    When you select the search domain Child Programme
+    When you select Child Programme
     And you are in the search page with the Child Programme being preselected from the url
     And and you can see the unique identifier input

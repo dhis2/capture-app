@@ -1,3 +1,6 @@
+import '../../sharedSteps';
+import '../../../sharedSteps';
+
 beforeEach(() => {
     cy.loginThroughForm();
 });
@@ -35,17 +38,6 @@ Then('the default working list should be displayed', () => {
                     .should('exist');
             }
         });
-});
-
-Then('rows per page should be set to 15', () => {
-    cy.get('div[data-test="rows-per-page-selector"]')
-        .contains('15')
-        .should('exist');
-});
-Then('the page navigation should show that you are on the first page', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('Page 1')
-        .should('exist');
 });
 
 When('you select the working list called completed enrollments', () => {
@@ -141,11 +133,19 @@ Then('the list should display teis with an active enrollment and unassinged even
         'Anthony',
         'Donald',
         'Donald',
+        'Donna',
+        'Elizabeth',
+        'Emily',
+        'Emma',
+        'Evelyn',
+        'Frances',
+        'Heather',
+        'Jack',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
-        .should('have.length', 8)
+        .should('have.length', 16)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
@@ -153,28 +153,6 @@ Then('the list should display teis with an active enrollment and unassinged even
                     .should('exist');
             }
         });
-});
-
-When('you set the first name filter to John', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('More filters')
-        .click();
-
-    cy.get('[data-test="tei-working-lists"]')
-        .find('li')
-        .contains('First name')
-        .click();
-
-    cy.get('[data-test="list-view-filter-contents"]')
-        .find('input')
-        .type('John')
-        .blur();
-});
-
-Then('the first name filter button should show that the filter is in effect', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('First name: John')
-        .should('exist');
 });
 
 Then('the list should display teis with John as the first name', () => {
@@ -219,11 +197,6 @@ Then('the registering unit should display in the list', () => {
         .should('exist');
 });
 
-When('you click the next page buttton', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
-        .click();
-});
-
 Then('the list should display data for the second page', () => {
     const names = [
         'Frank',
@@ -251,35 +224,8 @@ Then('the list should display data for the second page', () => {
                 cy.wrap($teiRow)
                     .contains(names[index - 1].split(' ')[0])
                     .should('exist');
-
-                cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[1])
-                    .should('exist');
             }
         });
-});
-
-Then('the page navigation should show that you are on the second page', () => {
-    cy.get('[data-test="tei-working-lists"]')
-        .contains('Page 2')
-        .should('exist');
-});
-
-When('you click the previous page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
-        .click();
-});
-
-When('you click the first page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-first-page"]')
-        .click();
-});
-
-When('you change rows per page to 10', () => {
-    cy.get('div[data-test="rows-per-page-selector"]')
-        .click()
-        .contains('10')
-        .click();
 });
 
 Then('the list should display 10 rows of data', () => {
@@ -293,7 +239,7 @@ Then('the list should display 10 rows of data', () => {
         'Donald',
         'Donna',
         'Elizabeth',
-        'Emiliy',
+        'Emily',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -304,10 +250,6 @@ Then('the list should display 10 rows of data', () => {
                 cy.wrap($teiRow)
                     .contains(names[index - 1].split(' ')[0])
                     .should('exist');
-
-                cy.wrap($teiRow)
-                    .contains(names[index - 1].split(' ')[1])
-                    .should('exist');
             }
         });
 });
@@ -316,11 +258,6 @@ When('you click the first name column header', () => {
     cy.get('[data-test="online-list-table"]')
         .contains('First name')
         .click();
-});
-
-Then('the sort arrow should indicate descending order', () => {
-    cy.get('[data-test="data-table-desc-sort-icon"]')
-        .should('exist');
 });
 
 Then('the list should display data ordered descendingly by first name', () => {
