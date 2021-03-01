@@ -337,3 +337,17 @@ And('you see message explaining this is an Event program', () => {
         .contains('Antenatal care visit is an event program and does not have enrollments.');
 });
 
+When('you select org unit that is incompatible with the already selected program', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .type('Bombal');
+    cy.contains('Bombali')
+        .click();
+});
+
+Then('you can see message on the locked selector', () => {
+    cy.get('[data-test="dhis2-capture-locked-selector"]')
+        .contains('No programs available.');
+    cy.get('[data-test="dhis2-capture-locked-selector"]')
+        .contains('Show all');
+});
+
