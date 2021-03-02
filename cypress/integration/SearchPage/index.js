@@ -1,3 +1,5 @@
+import '../sharedSteps';
+
 beforeEach(() => {
     cy.loginThroughForm();
 });
@@ -28,25 +30,6 @@ Then('there should be Person domain forms available to search with', () => {
 
 Given('you are in the search page with the Child Programme being preselected from the url', () => {
     cy.visit('/#/search?programId=IpHINAT79UW');
-});
-
-Then('there should be visible a title with Child Program', () => {
-    cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .contains('person in program: Child Programme')
-        .should('exist');
-});
-
-And('there should be Child Programme domain forms visible to search with', () => {
-    cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .find('[data-test="capture-ui-input"]')
-        .should('have.length', 1);
-});
-
-And('you select the search domain Child Programme', () => {
-    cy.get('.Select')
-        .type('Child Program');
-    cy.contains('Child Programme')
-        .click();
 });
 
 And('you select the search domain Malaria Case diagnosis', () => {
@@ -145,16 +128,6 @@ When('for Person you fill in values that will return less than 5 results', () =>
         .blur();
 });
 
-And('you click search', () => {
-    // click outside of the input for the values to be updated
-    cy.get('[data-test="dhis2-capture-form-attributes"]').click();
-
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
-        .find('[data-test="dhis2-uicore-button"]')
-        .first()
-        .click();
-});
-
 When('you fill in the first name with values that will return an error', () => {
     cy.get('[data-test="dhis2-capture-form-attributes"]')
         .find('[data-test="capture-ui-input"]')
@@ -233,23 +206,6 @@ Then('you should be taken to the main page with program and org unit preselected
         .should('eq', `${Cypress.config().baseUrl}/#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8`);
 });
 
-Then('you can see the first page of the results', () => {
-    cy.get('[data-test="dhis2-capture-search-results-top"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-pagination"]')
-        .contains('Page 1')
-        .should('exist');
-});
-
-When('you click the next page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
-        .click();
-});
-
 And('the next page button is disabled', () => {
     cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
         .should('exist')
@@ -259,23 +215,6 @@ And('the next page button is disabled', () => {
 When('you click the view dashboard button', () => {
     cy.get('[data-test="dhis2-capture-view-dashboard-button"]')
         .first()
-        .click();
-});
-
-Then('you can see the second page of the results', () => {
-    cy.get('[data-test="dhis2-capture-search-results-top"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-pagination"]')
-        .contains('Page 2')
-        .should('exist');
-});
-
-When('you click the previous page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
         .click();
 });
 
@@ -360,11 +299,6 @@ When('you fill in the first and last name with values that will return results',
 
 When('you navigated to a search page with tracked entity id on the url', () => {
     cy.url().should('include', 'search?trackedEntityTypeId=nEenWmSyUEp');
-});
-
-When('you have no program selection', () => {
-    cy.get('[data-test="dhis2-capture-program-selector-container"]')
-        .contains('Select program');
 });
 
 When('you can see the domain selector with the tetype person selected', () => {

@@ -27,7 +27,7 @@ Feature: User creates a new entries from the registration page
   Scenario: Viewing the registration page with organisation unit and tracker program Child Programme selected
     Given you are on the default registration page
     And you select org unit
-    And you select the Child Programme
+    And you select Child Programme
     Then you see a registration form for the Child Programme
 
   Scenario: Viewing the registration page with organisation unit and event program Malaria case registration selected
@@ -39,7 +39,7 @@ Feature: User creates a new entries from the registration page
   Scenario: Navigating to registration page without program selected
     Given you are in the main page with no selections made
     And you select org unit
-    And you select the Child Programme
+    And you select Child Programme
     Then you see a dropdown button
     When you click the "New..." option
     Then you are navigated to the registration page without program selected
@@ -49,7 +49,7 @@ Feature: User creates a new entries from the registration page
   Scenario: Navigating to registration page with program selected
     Given you are in the main page with no selections made
     And you select org unit
-    And you select the Child Programme
+    And you select Child Programme
     Then you see a dropdown button
     When you click the the first option option
     Then you are navigated to the Child Programme registration page with program selected
