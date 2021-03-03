@@ -1,19 +1,7 @@
+import '../sharedSteps';
 
 beforeEach(() => {
     cy.loginThroughForm();
-});
-
-Given('you open the the new event page in Ngelehun and malaria case context', () => {
-    cy.visit('/#/new?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
-});
-
-And('you navigate to find a person relationship', () => {
-    cy.get('[data-test="dhis2-capture-add-relationship-button"]')
-        .click();
-    cy.get('[data-test="dhis2-capture-relationship-type-selector-button-mxZDvSZYxlw"]')
-        .click();
-    cy.get('[data-test="dhis2-capture-find-relationship-button"]')
-        .click();
 });
 
 And('you select search scope TB program', () => {
@@ -51,21 +39,8 @@ And('you fill in the first name with values that will return results', () => {
         .blur();
 });
 
-And('you click search', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
-        .find('button')
-        .click();
-});
-
-
 And('you can see an empty page', () => {
     cy.contains('No Person found')
-        .should('exist');
-});
-
-Then('all pagination is disabled', () => {
-    cy.get('[data-test="dhis2-capture-pagination"]')
-        .contains('Page 1')
         .should('exist');
 });
 
@@ -119,40 +94,6 @@ And('you fill in the first name with values that will return an error', () => {
         .blur();
 });
 
-Then('you click the next page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
-        .click();
-});
-
-Then('you can see the second page of the results', () => {
-    cy.get('[data-test="dhis2-capture-search-results-top"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-pagination"]')
-        .contains('Page 2')
-        .should('exist');
-});
-
-When('you click the previous page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
-        .click();
-});
-
-Then('you can see the first page of the results', () => {
-    cy.get('[data-test="dhis2-capture-search-results-top"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-pagination"]')
-        .contains('Page 1')
-        .should('exist');
-});
-
 And('the next page button is disabled', () => {
     cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
         .should('exist')
@@ -191,7 +132,7 @@ And('you fill in the the form with values that will return exactly 5 results', (
         .blur();
 });
 
-And('you fill in the zip code range numbers', () => {
+When('you fill in the zip code range numbers', () => {
     cy.get('[data-test="dhis2-capture-d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(5)
@@ -204,3 +145,4 @@ And('you fill in the zip code range numbers', () => {
         .type('7135')
         .blur();
 });
+

@@ -30,9 +30,16 @@ export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
         map(({ payload: { orgUnitId, pageToPush } }) => {
-            const queries = deriveUrlQueries(store.value);
+            const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            return push(`/${pageToPush}?${urlArguments({ ...queries, orgUnitId })}`);
+            if (programId) {
+                const programContainsOrgUnitId = programCollection.get(programId)?.organisationUnits[orgUnitId];
+                if (orgUnitId && !programContainsOrgUnitId) {
+                    return push(`/${pageToPush}?${urlArguments({ ...restOfQueries, orgUnitId })}`);
+                }
+            }
+
+            return push(`/${pageToPush}?${urlArguments({ ...restOfQueries, programId, orgUnitId })}`);
         }));
 
 export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore) =>
