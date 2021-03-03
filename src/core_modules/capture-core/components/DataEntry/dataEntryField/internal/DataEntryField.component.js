@@ -100,7 +100,7 @@ class DataEntryField extends React.Component<Props> {
             <div
                 ref={(gotoInstance) => { this.gotoInstance = gotoInstance; }}
                 key={propName}
-                data-test={`dhis2-capture-dataentry-field-${propName}`}
+                data-test={`dataentry-field-${propName}`}
             >
                 <Component
                     onBlur={this.handleSet}

@@ -61,7 +61,7 @@ const NewPagePlain = ({
 
     return (<>
         <LockedSelector pageToPush="new" />
-        <div data-test="dhis2-capture-registration-page-content" className={classes.container} >
+        <div data-test="registration-page-content" className={classes.container} >
             {
                 !writeAccess ?
                     <NoWriteAccessMessage
@@ -86,7 +86,7 @@ const NewPagePlain = ({
                                     {i18n.t('Choose a registering unit to start reporting')}
                                 </IncompleteSelectionsMessage>
                                 <Button
-                                    dataTest="dhis2-capture-new-page-cancel-button"
+                                    dataTest="new-page-cancel-button"
                                     onClick={handleMainPageNavigation}
                                 >
                                     {i18n.t('Cancel')}

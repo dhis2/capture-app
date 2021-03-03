@@ -82,7 +82,7 @@ const EnrollmentRegistrationEntryPlain =
                           {
                               onSave &&
                               <Button
-                                  dataTest="dhis2-capture-create-and-link-button"
+                                  dataTest="create-and-link-button"
                                   primary
                                   onClick={onSave}
                               >
@@ -91,7 +91,7 @@ const EnrollmentRegistrationEntryPlain =
                           }
 
                           <Button
-                              dataTest="dhis2-capture-cancel-button"
+                              dataTest="cancel-button"
                               secondary
                               onClick={navigateToWorkingListsPage}
                               className={classes.marginLeft}

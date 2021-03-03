@@ -22,7 +22,7 @@ type SearchResultsHeaderType = $ReadOnly<{|
 
 const SearchResultsHeaderPlain =
   ({ currentSearchTerms, currentSearchScopeName, classes }: SearchResultsHeaderType) =>
-      (<div data-test="dhis2-capture-search-results-top" className={classes.topSection} >
+      (<div data-test="search-results-top" className={classes.topSection} >
           {i18n.t('Results found')} {currentSearchScopeName && `${i18n.t('in')} ${currentSearchScopeName}`}
           <div>
               {

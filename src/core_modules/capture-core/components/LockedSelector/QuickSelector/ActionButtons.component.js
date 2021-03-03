@@ -57,7 +57,7 @@ const ActionButtonsPlain = ({
                     <Button
                         small
                         secondary
-                        dataTest="dhis2-capture-new-event-button"
+                        dataTest="new-event-button"
                         className={classes.marginRight}
                         onClick={onNewClickWithoutProgramId}
                     >
@@ -67,7 +67,7 @@ const ActionButtonsPlain = ({
                     <DropdownButton
                         small
                         secondary
-                        dataTest="dhis2-capture-new-button"
+                        dataTest="new-button"
                         className={classes.marginRight}
                         component={
                             <FlyoutMenu
@@ -75,12 +75,12 @@ const ActionButtonsPlain = ({
                                 maxWidth="250px"
                             >
                                 <MenuItem
-                                    dataTest="dhis2-capture-new-menuitem-one"
+                                    dataTest="new-menuitem-one"
                                     label={`New ${trackedEntityName} in ${programName}`}
                                     onClick={onNewClick}
                                 />
                                 <MenuItem
-                                    dataTest="dhis2-capture-new-menuitem-two"
+                                    dataTest="new-menuitem-two"
                                     label="New..."
                                     onClick={onNewClickWithoutProgramId}
                                 />
@@ -96,7 +96,7 @@ const ActionButtonsPlain = ({
                     <Button
                         small
                         secondary
-                        dataTest="dhis2-capture-find-button"
+                        dataTest="find-button"
                         className={classes.marginRight}
                         onClick={onFindClickWithoutProgramId}
                     >
@@ -106,7 +106,7 @@ const ActionButtonsPlain = ({
                     <DropdownButton
                         small
                         secondary
-                        dataTest="dhis2-capture-find-button"
+                        dataTest="find-button"
                         className={classes.marginRight}
                         component={
                             <FlyoutMenu
@@ -114,12 +114,12 @@ const ActionButtonsPlain = ({
                                 maxWidth="250px"
                             >
                                 <MenuItem
-                                    dataTest="dhis2-capture-find-menuitem-one"
+                                    dataTest="find-menuitem-one"
                                     label={`Find a ${trackedEntityName} in ${programName}`}
                                     onClick={onFindClick}
                                 />
                                 <MenuItem
-                                    dataTest="dhis2-capture-find-menuitem-two"
+                                    dataTest="find-menuitem-two"
                                     label="Find..."
                                     onClick={onFindClickWithoutProgramId}
                                 />
@@ -134,7 +134,7 @@ const ActionButtonsPlain = ({
                 showResetButton ?
                     <button
                         className={classes.buttonAsLink}
-                        data-test="dhis2-capture-start-again-button"
+                        data-test="start-again-button"
                         onClick={onStartAgainClick}
                     >
                         { i18n.t('Clear selections') }

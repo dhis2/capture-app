@@ -25,7 +25,7 @@ const getStyles = ({ typography }) => ({
 const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
     <LockedSelector pageToPush="enrollment" />
 
-    <div data-test="dhis2-capture-enrollment-page-content" className={classes.container} >
+    <div data-test="enrollment-page-content" className={classes.container} >
 
         {
             enrollmentPageStatus === enrollmentPageStatuses.MISSING_SELECTIONS &&

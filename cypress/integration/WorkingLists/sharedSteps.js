@@ -133,7 +133,7 @@ Then('the first name filter button should show that the filter is in effect', ()
 });
 
 When('you click the first page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-first-page"]')
+    cy.get('[data-test="search-pagination-first-page"]')
         .click();
 });
 
