@@ -228,7 +228,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
         const menuContainerStyle = { ...OptionsSelectVirtualized.defaultMenuContainerStyle, ...menuStyle };
         return (
             <div
-                data-test="dhis2-capture-virtualized-select"
+                data-test="virtualized-select"
                 ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
             >
                 <div

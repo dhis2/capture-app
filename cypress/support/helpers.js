@@ -22,6 +22,6 @@ Cypress.Commands.add('loginThroughForm', () => {
         cy.get('form').submit();
     });
 
-    cy.get('[data-test="dhis2-capture-locked-selector"]', { timeout: 60000 })
+    cy.get('[data-test="locked-selector"]', { timeout: 60000 })
         .should('exist');
 });

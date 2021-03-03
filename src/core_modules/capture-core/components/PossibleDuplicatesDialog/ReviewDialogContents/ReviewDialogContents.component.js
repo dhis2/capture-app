@@ -30,7 +30,7 @@ const ReviewDialogContentsPlain = ({
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
     return (
         <React.Fragment>
-            <DialogContent data-test="dhis2-capture-duplicates-modal">
+            <DialogContent data-test="duplicates-modal">
                 <DialogTitle className={classes.title}>
                     {i18n.t('Possible duplicates found')}
                 </DialogTitle>

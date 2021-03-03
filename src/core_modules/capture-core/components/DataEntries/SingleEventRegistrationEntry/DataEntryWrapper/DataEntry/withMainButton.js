@@ -76,7 +76,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             const secondaries = buttons.slice(1);
             return (
                 <Tooltip title={!hasWriteAccess ? i18n.t('No write access') : ''}>
-                    <div data-test="dhis2-capture-main-button">
+                    <div data-test="main-button">
                         <SimpleSplitButton
                             primary
                             disabled={!hasWriteAccess}

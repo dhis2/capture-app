@@ -112,7 +112,7 @@ const SingleLockedSelectPlain =
                       </div>
                   </Paper>
                   :
-                  <div data-test="dhis2-capture-org-unit-selector-container">
+                  <div data-test="org-unit-selector-container">
                       <Paper square elevation={0} className={classes.paper}>
                           <h4 className={classes.title}>
                               { title }

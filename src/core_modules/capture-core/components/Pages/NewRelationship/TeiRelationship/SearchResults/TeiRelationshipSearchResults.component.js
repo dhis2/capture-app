@@ -62,7 +62,7 @@ const getStyles = (theme: Theme) => ({
 const CardListButton = ({ handleOnClick, teiId }) => (
     <Button
         small
-        dataTest={`dhis2-capture-relationship-tei-link-${teiId}`}
+        dataTest={`relationship-tei-link-${teiId}`}
         onClick={handleOnClick}
     >
         {i18n.t('Link')}

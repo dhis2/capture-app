@@ -6,7 +6,7 @@ beforeEach(() => {
 
 Given('you are on an enrollment page', () => {
     cy.visit('/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8');
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+    cy.get('[data-test="enrollment-page-content"]')
         .contains('Enrollment Dashboard');
 });
 
@@ -18,28 +18,28 @@ And('you select the Inpatient morbidity program', () => {
 });
 
 And('you see the registration form for the Inpatient morbidity program', () => {
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('New Inpatient morbidity and mortality')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Saving to Inpatient morbidity and mortality in Taninahun (Malen) CHP')
         .should('exist');
 });
 
 And('you see the registration form for the Malaria case diagnosis', () => {
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('New malaria entity in program: Malaria case diagnosis, treatment and investigation')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Saving a malaria entity in Malaria case diagnosis, treatment and investigation in Taninahun (Malen) CHP.')
         .should('exist');
 });
 
 And('you see the registration form for the MNCH PNC program', () => {
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('New person in program: MNCH / PNC (Adult Woman)')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Saving a person in MNCH / PNC (Adult Woman) in Taninahun (Malen) CHP.')
         .should('exist');
 });

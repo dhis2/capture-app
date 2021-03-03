@@ -151,7 +151,7 @@ class SearchForm extends React.Component<Props> {
         const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
         return (
             <div
-                data-test="dhis2-capture-d2-form-area"
+                data-test="d2-form-area"
                 className={classes.container}
             >
                 <D2Form
@@ -164,7 +164,7 @@ class SearchForm extends React.Component<Props> {
                     className={classes.searchButtonContainer}
                 >
                     <Button
-                        dataTest={`dhis2-capture-relationship-tei-search-button-${id}`}
+                        dataTest={`relationship-tei-search-button-${id}`}
                         onClick={this.handleSearchAttempt}
                     >
                         {searchButtonText}
