@@ -226,7 +226,7 @@ When('you remove the Child Programme selection', () => {
 
 Then('there should be visible a title with Malaria case diagnosis', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
-        .contains('Find malaria entity in program: Malaria case diagnosis, treatment and investigation')
+        .contains('Search malaria entity in program: Malaria case diagnosis, treatment and investigation')
         .should('exist');
 });
 
