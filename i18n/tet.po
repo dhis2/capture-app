@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: phil_dhis2, 2020\n"
 "Language-Team: Tetum (Tetun) (https://www.transifex.com/hisp-uio/teams/100509/tet/)\n"
 "MIME-Version: 1.0\n"
@@ -38,13 +38,13 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr "Unidade organizasional"
+msgstr ""
 
 msgid "Date of enrollment"
 msgstr ""
 
 msgid "Last updated"
-msgstr "Atualizasaun ikus"
+msgstr ""
 
 msgid "Enrolled"
 msgstr ""
@@ -136,6 +136,9 @@ msgstr ""
 msgid "in"
 msgstr ""
 
+msgid "Cancel"
+msgstr "Kansela"
+
 msgid "Metadata error. see log for details"
 msgstr ""
 
@@ -149,7 +152,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr "Estadu"
+msgstr ""
 
 msgid "Comments"
 msgstr ""
@@ -177,7 +180,7 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr "Ativu"
+msgstr ""
 
 msgid "Completed"
 msgstr ""
@@ -235,14 +238,11 @@ msgstr ""
 msgid "New event"
 msgstr ""
 
-msgid "You dont have access to create an event in the current selections"
+msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
 msgstr "Rai"
-
-msgid "Cancel"
-msgstr "Kansela"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -260,6 +260,31 @@ msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "An error has occurred. See log for details"
+msgstr ""
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+
+msgid "You have already registered this {{attributeName}}"
+msgstr ""
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Registered person"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "validation failed"
@@ -310,6 +335,12 @@ msgstr ""
 msgid "Operations running"
 msgstr ""
 
+msgid "Hide"
+msgstr ""
+
+msgid "Possible duplicates found"
+msgstr ""
+
 msgid "Sort"
 msgstr ""
 
@@ -332,7 +363,7 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr "Nein ida"
+msgstr ""
 
 msgid "Select user"
 msgstr ""
@@ -499,22 +530,25 @@ msgstr ""
 msgid "Select"
 msgstr "Selesiona"
 
-msgid "Selected Program"
+msgid "Program"
 msgstr ""
 
-msgid "Some programs are being filtered."
+msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
 msgstr ""
 
-msgid "Program"
+msgid "Selected program"
+msgstr ""
+
+msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
 msgstr ""
 
-msgid "No programs available."
+msgid "Selected"
 msgstr ""
 
 msgid "Online"
@@ -548,6 +582,51 @@ msgid "Event could not be loaded"
 msgstr ""
 
 msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr ""
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr ""
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr ""
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr ""
+
+msgid "View working list in this program."
 msgstr ""
 
 msgid "Delete event"
@@ -637,29 +716,17 @@ msgstr ""
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "A duplicate exists (but there were some errors, see log for details"
+msgid "Save as new"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "Create for"
 msgstr ""
 
 msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr ""
-
-msgid "You have already registered this {{attributeName}}"
-msgstr ""
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr ""
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
-
-msgid "Registered person"
-msgstr ""
-
-msgid "Link"
+"You can also choose a program from the top bar and create in that program"
 msgstr ""
 
 msgid "Review Duplicates"
@@ -668,23 +735,11 @@ msgstr ""
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr ""
-
-msgid "No results found"
-msgstr ""
-
-msgid "An error occured loading possible duplicates"
-msgstr ""
-
-msgid "Hide"
-msgstr "Subar"
-
-msgid "Save as new {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr "Unidade Organizasaun"
+msgstr ""
 
 msgid "Registration"
 msgstr ""
@@ -724,7 +779,17 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr "Ba kotuk"
+msgstr ""
+
+msgid "Search for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -751,9 +816,6 @@ msgid ""
 msgstr ""
 
 msgid "Choose a type to start searching"
-msgstr ""
-
-msgid "View dashboard"
 msgstr ""
 
 msgid "View active enrollment"
@@ -790,6 +852,9 @@ msgstr ""
 msgid "Feedbacks"
 msgstr ""
 
+msgid "An error occurred loading possible duplicates"
+msgstr ""
+
 msgid "You dont have access to delete this relationship"
 msgstr ""
 
@@ -802,20 +867,10 @@ msgstr ""
 msgid "Results found"
 msgstr ""
 
-msgid "Selected program"
-msgstr ""
-
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
-
-msgid "Search for"
-msgstr ""
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "To work with the selected program,"
@@ -834,7 +889,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr "Perfil"
+msgstr ""
 
 msgid "Error saving event"
 msgstr ""
@@ -867,7 +922,7 @@ msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr "Data"
+msgstr ""
 
 msgid "Time"
 msgstr ""
