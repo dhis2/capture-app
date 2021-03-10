@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# phil_dhis2, 2020
+# Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: phil_dhis2, 2020\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Khmer (https://www.transifex.com/hisp-uio/teams/100509/km/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,13 +38,13 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "ផ្នែក​នៃ​អង្គការ"
 
 msgid "Date of enrollment"
 msgstr ""
 
 msgid "Last updated"
-msgstr ""
+msgstr "បាន​ធ្វើ​បច្ចុប្បន្នភាព​ចុងក្រោយ"
 
 msgid "Enrolled"
 msgstr ""
@@ -152,13 +152,13 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "ស្ថានភាព"
 
 msgid "Comments"
 msgstr ""
 
 msgid "Relationships"
-msgstr ""
+msgstr "ទំនាក់ទំនង"
 
 msgid "Assignee"
 msgstr ""
@@ -183,7 +183,7 @@ msgid "Active"
 msgstr ""
 
 msgid "Completed"
-msgstr ""
+msgstr "បានបញ្ចប់"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -363,7 +363,7 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "គ្មាន"
 
 msgid "Select user"
 msgstr ""
@@ -444,7 +444,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "ស្វែងរក"
 
 msgid "Clear"
 msgstr "លុបចោល"
@@ -506,9 +506,6 @@ msgstr ""
 msgid "New"
 msgstr "ថ្មី"
 
-msgid "Find"
-msgstr ""
-
 msgid "Clear selections"
 msgstr ""
 
@@ -522,7 +519,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "ទទួលយក"
 
 msgid "Registering Organisation Unit"
 msgstr ""
@@ -549,7 +546,7 @@ msgid "Select program"
 msgstr ""
 
 msgid "Selected"
-msgstr ""
+msgstr "បាន​ជ្រើស"
 
 msgid "Online"
 msgstr "លើបណ្ដាញអិនធឺរណែត"
@@ -630,7 +627,7 @@ msgid "View working list in this program."
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "លុបចោលព្រឹត្តិការណ៏"
 
 msgid "Download as JSON"
 msgstr ""
@@ -660,7 +657,7 @@ msgid "Enrollment status"
 msgstr ""
 
 msgid "Cancelled"
-msgstr ""
+msgstr "បានលុបចោល"
 
 msgid "Assigned to"
 msgstr ""
@@ -739,7 +736,7 @@ msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "ផ្នែក​នៃ​អង្គការ"
 
 msgid "Registration"
 msgstr ""
@@ -772,14 +769,14 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr ""
 
-msgid "Find by {{name}}"
+msgid "Search by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "ថយក្រោយ"
 
 msgid "Search for"
 msgstr ""
@@ -889,7 +886,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr ""
+msgstr "ជីវប្រវត្តិ"
 
 msgid "Error saving event"
 msgstr ""
@@ -922,7 +919,7 @@ msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "កាលបរិច្ឆេទ"
 
 msgid "Time"
 msgstr ""

@@ -1,14 +1,15 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2021
+# Wanda <wanda@frontlineaids.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: phil_dhis2, 2019\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,13 +39,13 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Організаційний підрозділ"
 
 msgid "Date of enrollment"
 msgstr ""
 
 msgid "Last updated"
-msgstr ""
+msgstr "Останнє оновлення"
 
 msgid "Enrolled"
 msgstr ""
@@ -122,10 +123,10 @@ msgid "Area"
 msgstr ""
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Координата"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "Реєстрація"
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -143,7 +144,7 @@ msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Призначений користувач"
 
 msgid "Search for user"
 msgstr ""
@@ -152,13 +153,13 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 msgid "Comments"
 msgstr ""
 
 msgid "Relationships"
-msgstr ""
+msgstr "Зв'язки"
 
 msgid "Assignee"
 msgstr ""
@@ -180,10 +181,10 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr ""
+msgstr "Активне"
 
 msgid "Completed"
-msgstr ""
+msgstr "Завершено"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -336,7 +337,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Hide"
-msgstr ""
+msgstr "Сховати"
 
 msgid "Possible duplicates found"
 msgstr ""
@@ -363,7 +364,7 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Жодного"
 
 msgid "Select user"
 msgstr ""
@@ -378,10 +379,10 @@ msgid "To"
 msgstr "До"
 
 msgid "This week"
-msgstr ""
+msgstr "Поточний тиждень"
 
 msgid "This month"
-msgstr ""
+msgstr "Поточний місяць"
 
 msgid "This Year"
 msgstr ""
@@ -444,7 +445,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "Пошук"
 
 msgid "Clear"
 msgstr "Очистити"
@@ -471,7 +472,7 @@ msgid "Column"
 msgstr "Стовпчик"
 
 msgid "Apply"
-msgstr ""
+msgstr "Застосувати"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -506,9 +507,6 @@ msgstr ""
 msgid "New"
 msgstr "Нове"
 
-msgid "Find"
-msgstr "Знайти"
-
 msgid "Clear selections"
 msgstr ""
 
@@ -540,7 +538,7 @@ msgid "Show all"
 msgstr "Показати все"
 
 msgid "Selected program"
-msgstr ""
+msgstr "Обрані програми"
 
 msgid "Some programs are being filtered."
 msgstr ""
@@ -549,7 +547,7 @@ msgid "Select program"
 msgstr "Обрати програму"
 
 msgid "Selected"
-msgstr ""
+msgstr "Обране"
 
 msgid "Online"
 msgstr "Онлайн"
@@ -657,22 +655,22 @@ msgid "Registered events"
 msgstr ""
 
 msgid "Enrollment status"
-msgstr ""
+msgstr "Статус реєстрації"
 
 msgid "Cancelled"
-msgstr ""
+msgstr "Скасовано"
 
 msgid "Assigned to"
 msgstr ""
 
 msgid "Registering unit"
-msgstr ""
+msgstr "Підрозділ, що реєструє"
 
 msgid "Registration Date"
 msgstr ""
 
 msgid "Inactive"
-msgstr ""
+msgstr "Неактивне"
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -739,10 +737,10 @@ msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "Організаційний підрозділ"
 
 msgid "Registration"
-msgstr ""
+msgstr "Реєстрація"
 
 msgid "Search results"
 msgstr ""
@@ -763,7 +761,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr ""
+msgstr "Реєструвати"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -772,24 +770,24 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr ""
 
-msgid "Find by {{name}}"
+msgid "Search by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 msgid "Search for"
-msgstr ""
+msgstr "Шукати"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "No results found"
-msgstr ""
+msgstr "Результатів не знайдено"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -862,7 +860,7 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Додати зв'язок"
 
 msgid "Results found"
 msgstr ""
@@ -889,7 +887,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr ""
+msgstr "Профіль"
 
 msgid "Error saving event"
 msgstr ""
@@ -916,13 +914,13 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Встановити координату"
 
 msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 msgid "Time"
 msgstr ""

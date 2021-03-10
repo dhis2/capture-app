@@ -1,16 +1,16 @@
 # 
 # Translators:
-# phil_dhis2, 2019
-# Viktor Varland <viktor@dhis2.org>, 2019
-# easylin <lin_xd@126.com>, 2020
-# 晓东 林 <13981924470@126.com>, 2020
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
+# 晓东 林 <13981924470@126.com>, 2021
+# easylin <lin_xd@126.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: 晓东 林 <13981924470@126.com>, 2020\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgstr "今天"
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
-msgstr ""
+msgstr "造成这种情况的可能原因是不支持浏览器或模式（例如隐私模式）。有关详细信息，请参见日志。"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -38,102 +38,104 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"您在同一域中打开了另一个版本的Capture App。当前，Capture "
+"App仅支持同时运行一个版本（在同一域中）。如果您想再次使用此版本，请刷新此页面，但是请注意，它将关闭其他版本。"
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "机构"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "注册日期"
 
 msgid "Last updated"
-msgstr ""
+msgstr "上次更新"
 
 msgid "Enrolled"
-msgstr ""
+msgstr "已注册"
 
 msgid "Previously enrolled"
-msgstr ""
+msgstr "以前报名的"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "值正在被验证"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "异步字段更新失败"
 
 msgid "A value is required"
-msgstr ""
+msgstr "需要一个值"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "请提供一个有效的数字"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "请提供一个整数"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "提供一个正整数"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "0或负整数"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "负整数"
 
 msgid "Please provide a valid date"
 msgstr "请提供有效的日期"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "不允许将来的日期"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "日期和时间"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "有效的时间"
 
 msgid "Please provide a valid percentage"
-msgstr ""
+msgstr "有效的百分比"
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "有效的URL"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "有效的邮箱"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "有效的年龄"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "有效的电话号码"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "有效的机构"
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "有效的坐标"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "值已经存在"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "自不能大于至"
 
 msgid "Checking..."
-msgstr ""
+msgstr "检查"
 
 msgid "Area"
-msgstr ""
+msgstr "面积"
 
 msgid "Coordinate"
-msgstr ""
+msgstr "坐标"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "注册"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "将来的日期不允许"
 
 msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
+msgstr "将{{trackedEntityName}}保存在"
 
 msgid "in"
 msgstr " 在"
@@ -142,28 +144,28 @@ msgid "Cancel"
 msgstr "取消"
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "元数据错误"
 
 msgid "Assigned user"
-msgstr ""
+msgstr "指派的用户"
 
 msgid "Search for user"
-msgstr ""
+msgstr "搜索用户 "
 
 msgid "Basic info"
-msgstr ""
+msgstr "基本信息"
 
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 msgid "Comments"
-msgstr ""
+msgstr "评论"
 
 msgid "Relationships"
-msgstr ""
+msgstr "关系"
 
 msgid "Assignee"
-msgstr ""
+msgstr "分配者"
 
 msgid "Saving to"
 msgstr "保存到"
@@ -174,21 +176,21 @@ msgid ""
 msgstr "这不是事件项目或者元数据坏了，查看日志详情"
 
 msgid "This event"
-msgstr ""
+msgstr "该事件"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
-msgstr ""
+msgstr "{{entityName}} 的 {{relationshipTypeName}}  关系类型已经存在"
 
 msgid "Active"
-msgstr ""
+msgstr "活跃的"
 
 msgid "Completed"
-msgstr ""
+msgstr "完成"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr ""
+msgstr "保存事件前请添加或取消备注"
 
 msgid "Save and add another"
 msgstr "保存并另外添加"
@@ -197,7 +199,7 @@ msgid "Save and exit"
 msgstr "保存后退出"
 
 msgid "Finish"
-msgstr ""
+msgstr "保存"
 
 msgid "No write access"
 msgstr "无写权限"
@@ -215,82 +217,82 @@ msgid "No events added"
 msgstr "没有事件被添加"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "新建事件关系"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "添加关系到事件"
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "后退到事件不保存关系"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "未保存的更改"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
-msgstr ""
+msgstr "离开本页将丢掉你的新关系的选择"
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "是的，丢弃"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "不，待在这里"
 
 msgid "New event"
 msgstr "新事件"
 
 msgid "You don't have access to create an event in the current selections"
-msgstr ""
+msgstr "您无权在当前选择中创建活动"
 
 msgid "Save"
 msgstr "保存"
 
 msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
+msgstr "离开此页面将放弃您对此事件所做的更改。"
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr ""
+msgstr "保存{{trackedEntityName}}"
 
 msgid "without"
-msgstr ""
+msgstr "没有"
 
 msgid "enrollment"
-msgstr ""
+msgstr "注册"
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr ""
+msgstr "通过从顶部栏中选择一个项目来注册"
 
 msgid "An error has occurred. See log for details"
-msgstr ""
+msgstr "发生了错误。查看日志以获取详细信息"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr ""
+msgstr "存在重复，但是有错误，查看日志详情。"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
-msgstr ""
+msgstr " 具有 {{attributeName}}  属性的条目已经注册 ，但是你不能访问 "
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "你已经登记了该属性"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
-msgstr ""
+msgstr "一个 {{trackedEntityTypeName}} 且具有 {{attributeName}} 已经注册"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "显示登记的 {{attributeName}} "
 
 msgid "Registered person"
-msgstr ""
+msgstr "注册的人"
 
 msgid "Link"
-msgstr ""
+msgstr "链接"
 
 msgid "validation failed"
-msgstr ""
+msgstr "验证失败"
 
 msgid "Errors"
 msgstr "错误"
@@ -305,7 +307,7 @@ msgid "Warnings"
 msgstr "错误"
 
 msgid "search group result could not be retrieved"
-msgstr ""
+msgstr "搜索组结果不能提取"
 
 msgid "Complete"
 msgstr "完成"
@@ -317,31 +319,31 @@ msgid "Abort"
 msgstr "关于"
 
 msgid "Back to form"
-msgstr ""
+msgstr "回到表单"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "仍然保存"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "验证错误和警告"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "验证错误"
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "有效性警告"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "有些操作一直在运行,请等待"
 
 msgid "Operations running"
-msgstr ""
+msgstr "运作中"
 
 msgid "Hide"
-msgstr ""
+msgstr "隐藏"
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "发现可能的重复"
 
 msgid "Sort"
 msgstr "排序"
@@ -356,19 +358,19 @@ msgid "Close"
 msgstr "关闭"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "请选择用户"
 
 msgid "Me"
-msgstr ""
+msgstr "我"
 
 msgid "Anyone"
-msgstr ""
+msgstr "任何人"
 
 msgid "None"
-msgstr ""
+msgstr "没有"
 
 msgid "Select user"
-msgstr ""
+msgstr "选择用户"
 
 msgid "to"
 msgstr "到"
@@ -380,13 +382,13 @@ msgid "To"
 msgstr "至"
 
 msgid "This week"
-msgstr ""
+msgstr "本年"
 
 msgid "This month"
-msgstr ""
+msgstr "本月"
 
 msgid "This Year"
-msgstr ""
+msgstr "今年"
 
 msgid "Last week"
 msgstr "上周"
@@ -446,7 +448,7 @@ msgid "Select image"
 msgstr "选择图像"
 
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 msgid "Clear"
 msgstr "清除"
@@ -455,16 +457,16 @@ msgid "No results"
 msgstr "无结果"
 
 msgid "start typing to search"
-msgstr ""
+msgstr "开始输入搜索内容"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "建议不能提取"
 
 msgid "No items to display"
 msgstr "无条目可显示"
 
 msgid "Select columns"
-msgstr ""
+msgstr "选择列"
 
 msgid "Columns to show in table"
 msgstr "表中显示的列"
@@ -473,16 +475,16 @@ msgid "Column"
 msgstr "列"
 
 msgid "Apply"
-msgstr ""
+msgstr "应用"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
+msgstr "{{fromDate}} 到 {{toDate}}"
 
 msgid "after or equal to {{date}}"
-msgstr ""
+msgstr "晚于或等于 {{date}}"
 
 msgid "before or equal to {{date}}"
-msgstr ""
+msgstr "早于或等于 {{date}}"
 
 msgid "greater than or equal to"
 msgstr "大于等于"
@@ -503,16 +505,13 @@ msgid "Program doesn't exist"
 msgstr "项目不存在"
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
+msgstr "选择的项目对选择的机构无效"
 
 msgid "New"
 msgstr "新建"
 
-msgid "Find"
-msgstr "查询"
-
 msgid "Clear selections"
-msgstr ""
+msgstr "清除选择"
 
 msgid "Selected registering unit"
 msgstr "选择注册的机构"
@@ -524,7 +523,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr "你确信？所以未保存的数据将丢失"
 
 msgid "Accept"
-msgstr ""
+msgstr "接受"
 
 msgid "Registering Organisation Unit"
 msgstr "在注册的机构"
@@ -542,7 +541,7 @@ msgid "Show all"
 msgstr "显示全部"
 
 msgid "Selected program"
-msgstr ""
+msgstr "选择的项目"
 
 msgid "Some programs are being filtered."
 msgstr "有些项目已经被过滤了"
@@ -551,7 +550,7 @@ msgid "Select program"
 msgstr "选择项目"
 
 msgid "Selected"
-msgstr ""
+msgstr "选择的"
 
 msgid "Online"
 msgstr "在线"
@@ -563,19 +562,19 @@ msgid "Syncing"
 msgstr "同步"
 
 msgid "Add comment"
-msgstr ""
+msgstr "添加备注"
 
 msgid "You dont have access to write comments"
-msgstr ""
+msgstr "你没有权限写备注"
 
 msgid "Write comment"
 msgstr "写备注"
 
 msgid "Show all events"
-msgstr ""
+msgstr "显示所有事件"
 
 msgid "Edit event"
-msgstr ""
+msgstr "编辑事件"
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "事件不能载入"
@@ -587,311 +586,312 @@ msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
+msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
-msgstr ""
+msgstr "打开此注册时出现错误。请输入有效网址。"
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
+msgstr "ID为“ {{enrollmentId}}”的注册不存在"
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
-msgstr ""
+msgstr "{{teiDisplayName}}已注册多个项目。选择一个项目。"
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
-msgstr ""
+msgstr "{{programName}}具有类别。选择所有类别以查看仪表板。"
 
 msgid ""
 "There are multiple enrollments for this program. Choose an enrollment to "
 "view the dashboard."
-msgstr ""
+msgstr "该计划有多个注册。选择一个注册以查看仪表板。"
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "该项目未注册{{teiDisplayName}} 。"
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "在此项目中注册{{teiDisplayName}}。"
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
+"{{teiDisplayName}}是一个{{tetName}}，无法注册到{{programName}}中。选择另一个允许{{tetName}}注册的项目。"
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr ""
+msgstr "在此项目中注册新的{{selectedTetName}}。"
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr ""
+msgstr "{{programName}}是事件项目，不需要注册。"
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "在此项目中创建一个新事件。"
 
 msgid "View working list in this program."
-msgstr ""
+msgstr "查看此项目中的工作清单。"
 
 msgid "Delete event"
-msgstr ""
+msgstr "删除事件"
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "下载为JSON"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "下载为XML"
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "获取CSV格式报表"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "随着过滤器下载"
 
 msgid "Download data..."
-msgstr ""
+msgstr "下载数据"
 
 msgid "Working list could not be loaded"
-msgstr ""
+msgstr "工作列表不能载入"
 
 msgid "an error occurred loading working lists"
-msgstr ""
+msgstr "载入工作列表发生错误"
 
 msgid "Registered events"
-msgstr ""
+msgstr "登记的事件"
 
 msgid "Enrollment status"
-msgstr ""
+msgstr "登记状态"
 
 msgid "Cancelled"
-msgstr ""
+msgstr "已取消"
 
 msgid "Assigned to"
-msgstr ""
+msgstr "指派到"
 
 msgid "Registering unit"
-msgstr ""
+msgstr "注册机构"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "登记日期"
 
 msgid "Inactive"
-msgstr ""
+msgstr "闲置"
 
 msgid "Working list could not be updated"
-msgstr ""
+msgstr "工作清单无法更新"
 
 msgid "Update view"
-msgstr ""
+msgstr "更新视图"
 
 msgid "Save current view..."
-msgstr ""
+msgstr "保存当前视图"
 
 msgid "Save current view as..."
-msgstr ""
+msgstr "另存当前视图为"
 
 msgid "Delete view"
-msgstr ""
+msgstr "删除视图"
 
 msgid "Share view..."
-msgstr ""
+msgstr "分享视图"
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
+msgstr "你真想删除  '{{templateName}}'  视图"
 
 msgid "Confirm"
-msgstr ""
+msgstr "确认"
 
 msgid "Save As view"
-msgstr ""
+msgstr "另存视图为"
 
 msgid "View name"
-msgstr ""
+msgstr "视图名称"
 
 msgid "Show Less"
-msgstr ""
+msgstr "显示较少<br>"
 
 msgid "Show All"
-msgstr ""
+msgstr "显示全部"
 
 msgid "Choose a registering unit to start reporting"
-msgstr ""
+msgstr "选择一个注册机构开始填报"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
+msgstr "选择{{missingCategories}}开始报告"
 
 msgid "Save as new"
-msgstr ""
+msgstr "另存为新的"
 
 msgid "View dashboard"
-msgstr ""
+msgstr "查看仪表盘"
 
 msgid "Create for"
-msgstr ""
+msgstr "为创建"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
-msgstr ""
+msgstr "您也可以从顶部栏中选择一个项目并在该项目中创建"
 
 msgid "Review Duplicates"
-msgstr ""
+msgstr "复查重复"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "保存新的{{trackedEntityTypeName}}并链接"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "另存为新的{{trackedEntityName}}"
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "组织机构"
 
 msgid "Registration"
-msgstr ""
+msgstr "登记"
 
 msgid "Search results"
-msgstr ""
+msgstr "搜索结果"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "没有发现  {{trackedEntityTypeName}} "
 
 msgid "New search"
-msgstr ""
+msgstr "新搜索"
 
 msgid "Edit search"
-msgstr ""
+msgstr "编辑搜索"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "链接到存在的 {{trackedEntityType}}"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "创建新的{{trackedEntityType}}"
 
 msgid "Register"
-msgstr ""
+msgstr "登记"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
-msgstr ""
+msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
 
 msgid "Search {{name}}"
-msgstr ""
+msgstr "搜索{{name}}"
 
-msgid "Find by {{name}}"
+msgid "Search by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "按属性搜索"
 
 msgid "Back"
-msgstr ""
+msgstr "后退"
 
 msgid "Search for"
-msgstr ""
+msgstr "搜索"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
-msgstr ""
+msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
 
 msgid "No results found"
-msgstr ""
+msgstr "没有结果"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
 "looking for."
-msgstr ""
+msgstr "您可以更改搜索条件，然后再次搜索以查找所需内容。"
 
 msgid "Back to search"
-msgstr ""
+msgstr "返回搜寻"
 
 msgid "An error has occurred"
-msgstr ""
+msgstr "发生了错误"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
 "again later. For more details open the Console tab of the Developer tools"
-msgstr ""
+msgstr "该搜索存在问题，请更改搜索词或稍后再试。有关更多详细信息，请打开开发人员工具的控制台选项卡。"
 
 msgid "Too many results"
-msgstr ""
+msgstr "结果太多"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
 "searching by more attributes to narrow down the results."
-msgstr ""
+msgstr "该搜索返回了太多结果，无法显示。尝试更改搜索词或按更多属性搜索以缩小搜索范围。"
 
 msgid "Choose a type to start searching"
-msgstr ""
+msgstr "选择一种类型以开始搜索"
 
 msgid "View active enrollment"
-msgstr ""
+msgstr "查看有效的注册"
 
 msgid "Re-enroll"
-msgstr ""
+msgstr "重新注册"
 
 msgid ""
 "Not finding the results you were looking for? Try to search all programs "
 "that use type "
-msgstr ""
+msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
 
 msgid "Search in all programs"
-msgstr ""
+msgstr "搜索所有项目"
 
 msgid "You dont have access to edit this event"
-msgstr ""
+msgstr "你没有访问该事件的权限"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
-msgstr ""
+msgstr "离开该页将丢失你创建新关系的所有选择"
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "没有人被分配到的该事件"
 
 msgid "Assign"
-msgstr ""
+msgstr "分配"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "事件被分配到  {{name}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "反馈"
 
 msgid "An error occurred loading possible duplicates"
-msgstr ""
+msgstr "加载可能的重复项时发生错误"
 
 msgid "You dont have access to delete this relationship"
-msgstr ""
+msgstr "你v不能访问删除的关系"
 
 msgid "You dont have access to create any relationships"
-msgstr ""
+msgstr "你没有权限创建任何关系"
 
 msgid "Add relationship"
-msgstr ""
+msgstr "添加关系"
 
 msgid "Results found"
-msgstr ""
+msgstr "找到的结果"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "搜索 {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "基于选择的项目工作"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "打开跟踪随访APP"
 
 msgid "An error has occured. See log for details"
 msgstr "发生一个错误,看日志"
 
 msgid "Program not found"
-msgstr ""
+msgstr "没有发现项目"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "项目不是跟踪随访项目"
 
 msgid "Profile"
-msgstr ""
+msgstr "基本信息"
 
 msgid "Error saving event"
 msgstr "保存时间错误"
@@ -900,58 +900,58 @@ msgid "Could not save event. See log for details"
 msgstr "不能保存事件，看日志"
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "不能删除事件"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "不能保存工作列表"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "不能添加工作列表"
 
 msgid "Could not delete working list"
-msgstr ""
+msgstr "不能删除工作列表"
 
 msgid "Organisation unit search failed. See log for details"
-msgstr ""
+msgstr "机构搜索失败，查看日志"
 
 msgid "tracked entity instance"
-msgstr ""
+msgstr "跟踪的实体实例"
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "设置坐标"
 
 msgid "Page {{currentPage}}"
-msgstr ""
+msgstr "第{{currentPage}}页"
 
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 msgid "Time"
-msgstr ""
+msgstr "时间"
 
 msgid "From date"
-msgstr ""
+msgstr "起始日期"
 
 msgid "From time"
-msgstr ""
+msgstr "从时间"
 
 msgid "To date"
-msgstr ""
+msgstr "到目前为止"
 
 msgid "To time"
-msgstr ""
+msgstr "到时间"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "字段验证发生错误。"
 
 msgid "error"
-msgstr ""
+msgstr "错误"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "删除多边形"
 
 msgid "Set area"
-msgstr ""
+msgstr "设置区域"
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "兼容性模式"

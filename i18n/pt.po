@@ -1,16 +1,16 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# phil_dhis2, 2019
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
-# Ge Joao <gsimango@saudigitus.org>, 2020
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
+# Ge Joao <gsimango@saudigitus.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Ge Joao <gsimango@saudigitus.org>, 2020\n"
+"Last-Translator: Ge Joao <gsimango@saudigitus.org>, 2021\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,13 +40,13 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Unidade organizacional"
 
 msgid "Date of enrollment"
-msgstr ""
+msgstr "Data de Inscrição"
 
 msgid "Last updated"
-msgstr ""
+msgstr "Última actualização"
 
 msgid "Enrolled"
 msgstr ""
@@ -55,37 +55,37 @@ msgid "Previously enrolled"
 msgstr ""
 
 msgid "This value is validating"
-msgstr ""
+msgstr "Este valor está validando"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "Falha na atualização do campo sincronização "
 
 msgid "A value is required"
-msgstr ""
+msgstr "É necessário um valor"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Forneça um numero valido "
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Forneça um número inteiro válido"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "Forneça um número inteiro positivo"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Forneça zero ou um número inteiro positivo"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Forneça um número inteiro negativo"
 
 msgid "Please provide a valid date"
 msgstr "Por favor forneça data valida "
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Uma data no futuro não é permitida"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "Forneça uma data e hora válidas"
 
 msgid "Please provide a valid time"
 msgstr ""
@@ -97,7 +97,7 @@ msgid "Please provide a valid url"
 msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "Por favor forneça um endereço de e-mail válido"
 
 msgid "Please provide a valid age"
 msgstr ""
@@ -121,13 +121,13 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Área"
 
 msgid "Coordinate"
-msgstr ""
+msgstr "Coordenadas"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "Inscrição"
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -145,7 +145,7 @@ msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Usuário designado"
 
 msgid "Search for user"
 msgstr ""
@@ -154,13 +154,13 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Comments"
-msgstr ""
+msgstr "Comentarios"
 
 msgid "Relationships"
-msgstr ""
+msgstr "Relacionamentos"
 
 msgid "Assignee"
 msgstr ""
@@ -182,10 +182,10 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr ""
+msgstr "Activo"
 
 msgid "Completed"
-msgstr ""
+msgstr "Completo"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -197,7 +197,7 @@ msgid "Save and exit"
 msgstr ""
 
 msgid "Finish"
-msgstr ""
+msgstr "Terminar"
 
 msgid "No write access"
 msgstr ""
@@ -224,7 +224,7 @@ msgid "Go back to event without saving relationship"
 msgstr ""
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Alterações não salvas"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -329,7 +329,7 @@ msgid "Validation errors"
 msgstr ""
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "Alertas de validação"
 
 msgid "Some operations are still runnning. Please wait.."
 msgstr ""
@@ -338,7 +338,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Hide"
-msgstr ""
+msgstr "Esconder"
 
 msgid "Possible duplicates found"
 msgstr ""
@@ -365,7 +365,7 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 msgid "Select user"
 msgstr ""
@@ -380,10 +380,10 @@ msgid "To"
 msgstr "Até"
 
 msgid "This week"
-msgstr ""
+msgstr "Esta semana"
 
 msgid "This month"
-msgstr ""
+msgstr "Este mês"
 
 msgid "This Year"
 msgstr ""
@@ -446,7 +446,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "Pesquisar"
 
 msgid "Clear"
 msgstr "Limpar"
@@ -473,7 +473,7 @@ msgid "Column"
 msgstr "Coluna"
 
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -508,9 +508,6 @@ msgstr ""
 msgid "New"
 msgstr "Novo"
 
-msgid "Find"
-msgstr "Encontrar"
-
 msgid "Clear selections"
 msgstr ""
 
@@ -524,7 +521,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "Aceitar"
 
 msgid "Registering Organisation Unit"
 msgstr ""
@@ -542,7 +539,7 @@ msgid "Show all"
 msgstr "Mostrar tudo"
 
 msgid "Selected program"
-msgstr ""
+msgstr "Seleccionar o programa"
 
 msgid "Some programs are being filtered."
 msgstr ""
@@ -551,7 +548,7 @@ msgid "Select program"
 msgstr "Selecionar o programa"
 
 msgid "Selected"
-msgstr ""
+msgstr "Seleccionado"
 
 msgid "Online"
 msgstr "Ligado"
@@ -632,16 +629,16 @@ msgid "View working list in this program."
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "Suprimir evento"
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Transferir como JSON"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "Transferir como XML"
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "Exportar como CSV"
 
 msgid "Download with current filters"
 msgstr ""
@@ -656,25 +653,25 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Registered events"
-msgstr ""
+msgstr "Eventos registrados"
 
 msgid "Enrollment status"
-msgstr ""
+msgstr "Status da inscrição"
 
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancelado"
 
 msgid "Assigned to"
-msgstr ""
+msgstr "Atribuido a"
 
 msgid "Registering unit"
-msgstr ""
+msgstr "Unidade de registro"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "Data do Registo"
 
 msgid "Inactive"
-msgstr ""
+msgstr "Inactivo"
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -698,13 +695,13 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 msgid "Save As view"
 msgstr ""
 
 msgid "View name"
-msgstr ""
+msgstr "Visualizar o nome "
 
 msgid "Show Less"
 msgstr ""
@@ -741,13 +738,13 @@ msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "Unidade organizacional"
 
 msgid "Registration"
-msgstr ""
+msgstr "Registo"
 
 msgid "Search results"
-msgstr ""
+msgstr "Procurar Resultados"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
@@ -765,7 +762,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr ""
+msgstr "Registo"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -774,24 +771,24 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr ""
 
-msgid "Find by {{name}}"
+msgid "Search by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "Voltar"
 
 msgid "Search for"
-msgstr ""
+msgstr "Procurar por"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "No results found"
-msgstr ""
+msgstr "Nenhum resultado encontrado"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -846,7 +843,7 @@ msgid "No one is assigned to this event"
 msgstr ""
 
 msgid "Assign"
-msgstr ""
+msgstr "Atribuir"
 
 msgid "Event assigned to {{name}}"
 msgstr ""
@@ -864,7 +861,7 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "Adicionar relacionamento"
 
 msgid "Results found"
 msgstr ""
@@ -891,7 +888,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr ""
+msgstr "Perfil"
 
 msgid "Error saving event"
 msgstr ""
@@ -918,25 +915,25 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "Definir coordenadas"
 
 msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 msgid "Time"
-msgstr ""
+msgstr "Tempo "
 
 msgid "From date"
-msgstr ""
+msgstr "Data de inicio"
 
 msgid "From time"
 msgstr ""
 
 msgid "To date"
-msgstr ""
+msgstr "Até à data"
 
 msgid "To time"
 msgstr ""

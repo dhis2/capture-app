@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
-# phil_dhis2, 2019
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: phil_dhis2, 2019\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Pushto (https://www.transifex.com/hisp-uio/teams/100509/ps/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,13 +38,13 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "د سازمان واحد"
 
 msgid "Date of enrollment"
 msgstr ""
 
 msgid "Last updated"
-msgstr ""
+msgstr "د وروستي ځل لپاره تجدید شوې"
 
 msgid "Enrolled"
 msgstr ""
@@ -122,10 +122,10 @@ msgid "Area"
 msgstr ""
 
 msgid "Coordinate"
-msgstr ""
+msgstr "همغږي کول"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "شاملول یا نوم لیکنه"
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -152,13 +152,13 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "وضعیت"
 
 msgid "Comments"
-msgstr ""
+msgstr "څرګندونې"
 
 msgid "Relationships"
-msgstr ""
+msgstr "اړیکې"
 
 msgid "Assignee"
 msgstr ""
@@ -180,10 +180,10 @@ msgid ""
 msgstr ""
 
 msgid "Active"
-msgstr ""
+msgstr "فعال"
 
 msgid "Completed"
-msgstr ""
+msgstr "بشپړ شوی"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -327,7 +327,7 @@ msgid "Validation errors"
 msgstr ""
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "اخطارونو ته اعتبار ورکول"
 
 msgid "Some operations are still runnning. Please wait.."
 msgstr ""
@@ -336,7 +336,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Hide"
-msgstr ""
+msgstr "پټ یې کړئ"
 
 msgid "Possible duplicates found"
 msgstr ""
@@ -363,7 +363,7 @@ msgid "Anyone"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "هېڅ یو"
 
 msgid "Select user"
 msgstr ""
@@ -378,10 +378,10 @@ msgid "To"
 msgstr "تر"
 
 msgid "This week"
-msgstr ""
+msgstr "هفته هذا"
 
 msgid "This month"
-msgstr ""
+msgstr "ماه هذا"
 
 msgid "This Year"
 msgstr ""
@@ -444,7 +444,7 @@ msgid "Select image"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "جستجو"
 
 msgid "Clear"
 msgstr "پاک یې کړئ"
@@ -471,7 +471,7 @@ msgid "Column"
 msgstr "ستون"
 
 msgid "Apply"
-msgstr ""
+msgstr "عملي یې کړئ"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -506,9 +506,6 @@ msgstr ""
 msgid "New"
 msgstr "نوی"
 
-msgid "Find"
-msgstr "پیدا یې کړئ"
-
 msgid "Clear selections"
 msgstr ""
 
@@ -522,7 +519,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "د منلو وړ"
 
 msgid "Registering Organisation Unit"
 msgstr ""
@@ -540,7 +537,7 @@ msgid "Show all"
 msgstr "ټول ښکاره کړئ"
 
 msgid "Selected program"
-msgstr ""
+msgstr "انتخاب شوی پروګرام"
 
 msgid "Some programs are being filtered."
 msgstr ""
@@ -549,7 +546,7 @@ msgid "Select program"
 msgstr "د پروګرام ټاکل"
 
 msgid "Selected"
-msgstr ""
+msgstr "غوره شوي دي"
 
 msgid "Online"
 msgstr "په لیکه کې دی"
@@ -639,7 +636,7 @@ msgid "Download as XML"
 msgstr ""
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "د اېس.سي. وي په شکل یې ښکته کړئ"
 
 msgid "Download with current filters"
 msgstr ""
@@ -654,25 +651,25 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Registered events"
-msgstr ""
+msgstr "ثبت شوې پېښې"
 
 msgid "Enrollment status"
-msgstr ""
+msgstr "د نوم ثبتونې څرنګوالۍ یا وضعیت"
 
 msgid "Cancelled"
-msgstr ""
+msgstr "لغوه شوی"
 
 msgid "Assigned to"
 msgstr ""
 
 msgid "Registering unit"
-msgstr ""
+msgstr "د ثبتولو واحد"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "د راجسټرېشن نېټه"
 
 msgid "Inactive"
-msgstr ""
+msgstr "غېرې فعال دی"
 
 msgid "Working list could not be updated"
 msgstr ""
@@ -742,10 +739,10 @@ msgid "Organisation Unit"
 msgstr ""
 
 msgid "Registration"
-msgstr ""
+msgstr "راجسټرېشن"
 
 msgid "Search results"
-msgstr ""
+msgstr "پایلې ولټوئ"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
@@ -763,7 +760,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr ""
+msgstr "ثبت راجسټر کول"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -772,24 +769,24 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr ""
 
-msgid "Find by {{name}}"
+msgid "Search by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
-msgstr ""
+msgstr "شا ته کېدل"
 
 msgid "Search for"
-msgstr ""
+msgstr "لپاره یې ولټوئ"
 
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "No results found"
-msgstr ""
+msgstr "هېڅ پایله ترلاسه نه شوه"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -862,7 +859,7 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "اړیکه اضافه کړئ"
 
 msgid "Results found"
 msgstr ""
@@ -889,7 +886,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr ""
+msgstr "مشخصات یاپروفایل"
 
 msgid "Error saving event"
 msgstr ""
@@ -916,13 +913,13 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "همغږي ترتیب کړئ"
 
 msgid "Page {{currentPage}}"
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "نېټه"
 
 msgid "Time"
 msgstr ""
