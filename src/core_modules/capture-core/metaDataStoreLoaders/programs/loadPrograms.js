@@ -4,6 +4,7 @@ import { getContext } from '../context';
 import { queryProgramsOutline } from './queries';
 import {
     storePrograms,
+    storeOrganisationUnitsByProgram,
 } from './quickStoreOperations';
 import { loadRulesCentricMetadata } from './loadRulesCentricMetadata';
 
@@ -37,6 +38,7 @@ const removeUnavailablePrograms = async (apiPrograms, cachedPrograms) => {
     if (unavailableProgramIds.length > 0) {
         const { storageController, storeNames } = getContext();
         await storageController.remove(storeNames.PROGRAMS, unavailableProgramIds);
+        await storageController.remove(storeNames.ORGANISATION_UNITS_BY_PROGRAM, unavailableProgramIds);
     }
 };
 
@@ -66,6 +68,7 @@ const getStaleProgramIds = (apiPrograms, cachedPrograms) => {
  * The side effects data is used later when determining what other metadata to load.
  */
 const loadProgramBatch = async (programIds) => {
+    await storeOrganisationUnitsByProgram(programIds);
     const { convertedData: programs = [] } = await storePrograms(programIds);
     await loadRulesCentricMetadata(programIds);
     return programs
