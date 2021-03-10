@@ -11,7 +11,7 @@ import programs from 'capture-core/metaDataMemoryStores/programCollection/progra
 import ProgramSelector from './ProgramSelector/ProgramSelector.component';
 import OrgUnitSelector from './OrgUnitSelector/OrgUnitSelector.component';
 import { ActionButtons } from './ActionButtons/ActionButtons.component';
-import { SingleLockedSelect } from './SingleLockedSelector/SingleLockedSelect.component';
+import { SingleLockedSelect } from './SingleLockedSelect/SingleLockedSelect.component';
 import type { Props } from './QuickSelector.types';
 
 const styles = ({ palette }) => ({
