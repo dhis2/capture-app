@@ -19,15 +19,17 @@ import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 import { resetEnrollmentSelection, resetTeiSelection, setEnrollmentSelection } from '../../LockedSelector/LockedSelector.actions';
 
-const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
-    enrollments
-        .filter(({ program }) => program === selectedProgramId)
-        .map(({ created, enrollment }) => (
-            {
-                label: convertValue(created, dataElementTypes.DATETIME),
-                value: enrollment,
-            }
-        ));
+const buildEnrollmentsAsOptions =
+  (enrollments = [], selectedProgramId): Array<{|label: string, value: any, |}> =>
+      enrollments
+          .filter(({ program }) => program === selectedProgramId)
+          .map(({ created, enrollment }) => (
+              {
+                  // $FlowFixMe
+                  label: convertValue(created, dataElementTypes.DATETIME),
+                  value: enrollment,
+              }
+          ));
 
 
 const getStyles = ({ typography }) => ({
@@ -89,7 +91,6 @@ const Extras = ({ width, classes }) => {
                     onClear={onEnrollmentSelectionReset}
                     ready={enrollmentLockedSelectReady}
                     onSelect={onEnrollmentSelectionSet}
-                    // $FlowFixMe
                     options={enrollmentsAsOptions}
                     selectedValue={selectedEnrollmentId}
                     title={i18n.t('Enrollment')}
