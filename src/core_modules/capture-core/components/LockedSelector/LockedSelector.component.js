@@ -122,7 +122,7 @@ class LockedSelectorClass extends Component<Props, State> {
 
 
     render() {
-        const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
+        const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions, renderExtraSelectors } = this.props;
         return (
             <div data-test={'locked-selector'}>
                 <QuickSelector
@@ -138,6 +138,7 @@ class LockedSelectorClass extends Component<Props, State> {
                     onNewClickWithoutProgramId={this.handleOpenNewRegistrationPageWithoutProgramId}
                     onFindClick={this.handleOpenSearchPage}
                     onFindClickWithoutProgramId={this.handleOpenSearchPageWithoutProgramId}
+                    renderExtraSelectors={renderExtraSelectors}
                 />
                 <ConfirmDialog
                     onConfirm={this.handleAcceptStartAgain}
