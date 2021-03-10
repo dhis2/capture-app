@@ -10,7 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
-import { Button } from '../../Buttons';
+import { Button } from '../../../Buttons';
 import OrgUnitField from './OrgUnitField.container';
 
 const styles = (theme: Theme) => ({

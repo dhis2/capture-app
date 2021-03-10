@@ -2,7 +2,7 @@
 import React, { Component, type ComponentType } from 'react';
 import { compose } from 'redux';
 import i18n from '@dhis2/d2-i18n';
-import QuickSelector from './QuickSelector/QuickSelector.container';
+import { QuickSelector } from './QuickSelector/QuickSelector.container';
 import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
 import type { Props, State } from './LockedSelector.types';
 import { withLoadingIndicator } from '../../HOC';

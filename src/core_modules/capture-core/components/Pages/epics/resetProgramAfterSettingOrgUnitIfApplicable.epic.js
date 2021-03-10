@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import {
     resetProgramIdBase,
-} from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+} from '../../LockedSelector/QuickSelector/QuickSelector.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
 
 const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {

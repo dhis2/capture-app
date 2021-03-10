@@ -8,10 +8,11 @@ import Grid from '@material-ui/core/Grid';
 import { colors } from '@dhis2/ui';
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 
-import ProgramSelector from './Program/ProgramSelector.component';
-import OrgUnitSelector from './OrgUnitSelector.component';
-import { ActionButtons } from './ActionButtons.component';
-import { SingleLockedSelect } from './SingleLockedSelect.component';
+import ProgramSelector from './ProgramSelector/ProgramSelector.component';
+import OrgUnitSelector from './OrgUnitSelector/OrgUnitSelector.component';
+import { ActionButtons } from './ActionButtons/ActionButtons.component';
+import { SingleLockedSelect } from './SingleLockedSelector/SingleLockedSelect.component';
+import type { Props } from './QuickSelector.types';
 
 const styles = ({ palette }) => ({
     paper: {
@@ -28,35 +29,6 @@ const styles = ({ palette }) => ({
         borderLeft: `1px solid ${colors.grey500}`,
     },
 });
-
-type Props = {
-    selectedOrgUnitId: string,
-    selectedProgramId: string,
-    selectedCategories: Object,
-    selectedOrgUnit: Object,
-    classes: Object,
-    onSetOrgUnit: (orgUnitId: string, orgUnitObject: Object) => void,
-    onSetProgramId: (programId: string) => void,
-    onSetCategoryOption: (categoryId: string, categoryOptionId: string) => void,
-    onResetOrgUnitId: () => void,
-    onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
-    onResetCategoryOption: (categoryId: string) => void,
-    onResetAllCategoryOptions: () => void,
-    onStartAgain: () => void,
-    onNewClick: () => void,
-    onNewClickWithoutProgramId: () => void,
-    onFindClick: () => void,
-    onFindClickWithoutProgramId: () => void,
-    currentPage: string,
-    selectedEnrollmentId: string,
-    selectedTeiName: string,
-    selectedTetName: string,
-    enrollmentsAsOptions: Array<Object>,
-    onTeiSelectionReset: () => void,
-    onEnrollmentSelectionSet: () => void,
-    onEnrollmentSelectionReset: () => void,
-    enrollmentLockedSelectReady: boolean,
-};
 
 class QuickSelector extends Component<Props> {
     static getSelectedProgram(selectedProgramId: string) {

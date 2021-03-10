@@ -7,7 +7,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import i18n from '@dhis2/d2-i18n';
 import Select from 'react-virtualized-select';
 import { compose } from 'redux';
-import { withLoadingIndicator } from '../../../HOC';
+import { withLoadingIndicator } from '../../../../HOC';
 
 const styles = (theme: Theme) => ({
     paper: {

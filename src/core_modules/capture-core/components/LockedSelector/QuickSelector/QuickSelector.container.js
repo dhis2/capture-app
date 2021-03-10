@@ -1,7 +1,7 @@
 // @flow
-
+import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
-import QuickSelector from './QuickSelector.component';
+import QuickSelectorComponent from './QuickSelector.component';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 import {
@@ -11,6 +11,7 @@ import {
 } from '../LockedSelector.actions';
 import { deriveUrlQueries } from '../../../utils/url';
 import { getScopeInfo } from '../../../metaData';
+import type { OwnProps } from './QuickSelector.types';
 
 const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
     enrollments
@@ -62,5 +63,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-// $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(QuickSelector);
+export const QuickSelector: ComponentType<OwnProps> = connect(mapStateToProps, mapDispatchToProps)(QuickSelectorComponent);

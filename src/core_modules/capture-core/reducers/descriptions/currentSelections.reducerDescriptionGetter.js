@@ -3,7 +3,7 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import {
     actionTypes as quickSelectorActionTypes,
-} from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
+} from '../../components/LockedSelector/QuickSelector/QuickSelector.actions';
 import {
     actionTypes as editEventActionTypes,
 } from '../../components/Pages/EditEvent/editEvent.actions';
