@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
 "MIME-Version: 1.0\n"
@@ -141,6 +141,9 @@ msgstr ""
 msgid "in"
 msgstr "في"
 
+msgid "Cancel"
+msgstr "إلغاء"
+
 msgid "Metadata error. see log for details"
 msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
 
@@ -243,14 +246,11 @@ msgstr "لا ، ابق هنا"
 msgid "New event"
 msgstr "حدث جديد"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
 
 msgid "Save"
 msgstr "حفظ"
-
-msgid "Cancel"
-msgstr "إلغاء"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -270,6 +270,32 @@ msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr ""
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+"يوجد نسخة مكررة (ولكن كانت هناك بعض الأخطاء ، راجع السجل للحصول على التفاصيل"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr "سبق وأن تم تسجيل عنصر بـ {{attributeName}}، ولكن لا يمكنك الوصول إليه"
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "لقد قمت بتسجيل {{attributeName}} مسبقاً"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr "{{trackedEntityTypeName}} مع {{attributeName}} مسجلة مسبقاً"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "إظهار الـ {{trackedEntityTypeName}} المسجلة"
+
+msgid "Registered person"
+msgstr "الشخص المسجل"
+
+msgid "Link"
+msgstr "ربط"
 
 msgid "validation failed"
 msgstr "فشل التحقق من الصحة"
@@ -318,6 +344,12 @@ msgstr "لا تزال بعض العمليات قيد التشغيل. أرجو ا
 
 msgid "Operations running"
 msgstr "العمليات الجارية"
+
+msgid "Hide"
+msgstr "إخفاء"
+
+msgid "Possible duplicates found"
+msgstr "إحتمال وجود تكرار"
 
 msgid "Sort"
 msgstr "فرز"
@@ -484,9 +516,6 @@ msgstr "البرنامج المحدد غير صالح لوحدة التسجيل 
 msgid "New"
 msgstr "جديد"
 
-msgid "Find"
-msgstr "بحث"
-
 msgid "Clear selections"
 msgstr ""
 
@@ -508,23 +537,26 @@ msgstr "تسجيل الوحدة التنظيمية"
 msgid "Select"
 msgstr "تحديد"
 
-msgid "Selected Program"
+msgid "Program"
+msgstr "البرنامج"
+
+msgid "No programs available."
+msgstr "لا توجد برامج متاحة"
+
+msgid "Show all"
+msgstr "إظهار الكل"
+
+msgid "Selected program"
 msgstr "البرنامج المحدد"
 
 msgid "Some programs are being filtered."
 msgstr "بعض البرامج يتم تصفيتها"
 
-msgid "Show all"
-msgstr "إظهار الكل"
-
-msgid "Program"
-msgstr "البرنامج"
-
 msgid "Select program"
 msgstr "تحديد البرنامج"
 
-msgid "No programs available."
-msgstr "لا توجد برامج متاحة"
+msgid "Selected"
+msgstr "محدد"
 
 msgid "Online"
 msgstr "متصل"
@@ -558,6 +590,51 @@ msgstr "تعذر تحميل الحدث"
 
 msgid "Organisation unit could not be loaded"
 msgstr "تعذر تحميل الوحدة التنظيمية"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr ""
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr ""
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr ""
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr ""
+
+msgid "View working list in this program."
+msgstr ""
 
 msgid "Delete event"
 msgstr "حذف الحدث"
@@ -646,31 +723,18 @@ msgstr ""
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "A duplicate exists (but there were some errors, see log for details"
+msgid "Save as new"
 msgstr ""
-"يوجد نسخة مكررة (ولكن كانت هناك بعض الأخطاء ، راجع السجل للحصول على التفاصيل"
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "Create for"
+msgstr ""
 
 msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr "سبق وأن تم تسجيل عنصر بـ {{attributeName}}، ولكن لا يمكنك الوصول إليه"
-
-msgid "You have already registered this {{attributeName}}"
-msgstr "لقد قمت بتسجيل {{attributeName}} مسبقاً"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr "{{trackedEntityTypeName}} مع {{attributeName}} مسجلة مسبقاً"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "إظهار الـ {{trackedEntityTypeName}} المسجلة"
-
-msgid "Registered person"
-msgstr "الشخص المسجل"
-
-msgid "Link"
-msgstr "ربط"
+"You can also choose a program from the top bar and create in that program"
+msgstr ""
 
 msgid "Review Duplicates"
 msgstr "مراجعة التكرارات"
@@ -678,20 +742,8 @@ msgstr "مراجعة التكرارات"
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr "إحتمال وجود تكرار"
-
-msgid "No results found"
+msgid "Save as new {{trackedEntityName}}"
 msgstr ""
-
-msgid "An error occured loading possible duplicates"
-msgstr "حدث خطأ أثناء تحميل التكرارات المحتملة"
-
-msgid "Hide"
-msgstr "إخفاء"
-
-msgid "Save as new {{tetName}}"
-msgstr "حفظ {{tetName}} كجديد"
 
 msgid "Organisation Unit"
 msgstr "الوحدة التنظيمية"
@@ -727,13 +779,23 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr ""
 
-msgid "Find by {{name}}"
+msgid "Search by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
 msgstr "البحث حسب السمة"
 
 msgid "Back"
+msgstr ""
+
+msgid "Search for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+
+msgid "No results found"
 msgstr ""
 
 msgid ""
@@ -761,9 +823,6 @@ msgid ""
 msgstr ""
 
 msgid "Choose a type to start searching"
-msgstr ""
-
-msgid "View dashboard"
 msgstr ""
 
 msgid "View active enrollment"
@@ -800,6 +859,9 @@ msgstr "تم تعيين الحدث إلى {{name}}"
 msgid "Feedbacks"
 msgstr "تغذيات راجعة"
 
+msgid "An error occurred loading possible duplicates"
+msgstr ""
+
 msgid "You dont have access to delete this relationship"
 msgstr "ليس لديك حق الوصول لحذف هذه العلاقة"
 
@@ -812,21 +874,11 @@ msgstr "اضف علاقة"
 msgid "Results found"
 msgstr ""
 
-msgid "Selected program"
-msgstr "البرنامج المحدد"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "بحث {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "املأ {{minAttributesRequired}} سمات على الأقل للبحث"
-
-msgid "Search for"
-msgstr ""
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "للعمل مع البرنامج المحدد"
