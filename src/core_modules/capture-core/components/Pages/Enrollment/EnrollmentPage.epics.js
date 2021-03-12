@@ -15,7 +15,7 @@ import {
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
 import { urlArguments } from '../../../utils/url';
-import { getAttributesFromScopeId } from '../../../metaData/helpers';
+import { deriveTeiName } from './helpers';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
@@ -27,17 +27,6 @@ const teiQuery = id => ({
         fields: ['attributes', 'enrollments', 'trackedEntityType'],
     },
 });
-
-const deriveTeiName = (attributes, trackedEntityType) => {
-    const tetAttributes = getAttributesFromScopeId(trackedEntityType);
-    const [firstId, secondId] = tetAttributes
-        .filter(({ displayInReports }) => displayInReports)
-        .map(({ id }) => id);
-
-    const { value: firstValue = '' } = attributes.find(({ attribute }) => attribute === firstId);
-    const { value: secondValue = '' } = attributes.find(({ attribute }) => attribute === secondId);
-    return `${firstValue}${firstValue && ' '}${secondValue}`;
-};
 
 const fetchTeiStream = (teiId, querySingleResource) =>
     from(querySingleResource(teiQuery(teiId)))

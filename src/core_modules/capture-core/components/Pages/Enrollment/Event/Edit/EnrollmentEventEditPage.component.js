@@ -1,15 +1,18 @@
 // @flow
 import React, { type ComponentType } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Grid } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { LockedSelector } from '../../../../LockedSelector';
 import type { Props } from './EnrollmentEventEditPage.types';
 import { withErrorMessageHandler } from '../../../../../HOC';
 import { SingleLockedSelect } from '../../../../LockedSelector/QuickSelector/SingleLockedSelect/SingleLockedSelect.component';
-import { useExtras } from '../../hooks';
-import { enrollmentPageStatuses } from '../../EnrollmentPage.constants';
-import { enrollmentEventEditPageStatuses } from "./enrollmentEventEditPage.constants";
+import { enrollmentEventEditPageStatuses } from './enrollmentEventEditPage.constants';
+import { getScopeInfo } from '../../../../../metaData/helpers';
+import { urlArguments } from '../../../../../utils/url';
 
 
 const styles = ({ typography }) => ({
@@ -26,68 +29,79 @@ const styles = ({ typography }) => ({
 
 
 const ExtraSelectors = ({ width, classes }) => {
+    const { push } = useHistory();
+
     const {
-        onTeiSelectionReset,
-        selectedEnrollmentId,
-        teiDisplayName,
-        enrollmentsAsOptions,
-        trackedEntityName,
-        enrollmentLockedSelectReady,
-        onEnrollmentSelectionSet,
-        onEnrollmentSelectionReset,
-    } = useExtras();
+        teiId,
+        programId,
+        orgUnitId,
+        enrollmentId,
+    } = useSelector(({ router: { location: { query } } }) => query);
+    const { trackedEntityName } = getScopeInfo(programId);
+
+    const { teiDisplayName, enrollmentDisplayDate, programStageDisplayName, eventDisplayDate } =
+      useSelector(({ enrollmentEventEditPage }) => enrollmentEventEditPage);
+
+    const resetTei = () => push(`/?${urlArguments({ programId, orgUnitId })}`);
+    const resetEnrollment = () => push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId })}`);
+    const resetStage = () => push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
+    const resetEvent = () => {
+        const url = urlArguments({ programId, orgUnitId, teiId, enrollmentId });
+        debugger;
+        push(`/enrollment?${url}`);
+    };
 
     return (<>
         <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={classes.orgUnitSelector}>
             <SingleLockedSelect
                 ready
-                onClear={onTeiSelectionReset}
+                onClear={resetTei}
                 options={[{
-                    label: 'name',
+                    label: teiDisplayName,
                     value: 'alwaysPreselected',
 
                 }]}
                 selectedValue="alwaysPreselected"
-                title={'trackedEntityName'}
+                title={trackedEntityName}
             />
         </Grid>
         <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={classes.orgUnitSelector}>
             <SingleLockedSelect
                 ready
-                onClear={onTeiSelectionReset}
+                onClear={resetEnrollment}
                 options={[{
-                    label: 'name',
+                    label: enrollmentDisplayDate,
                     value: 'alwaysPreselected',
 
                 }]}
                 selectedValue="alwaysPreselected"
-                title={'trackedEntityName'}
+                title={i18n.t('Enrollment')}
             />
         </Grid>
         <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={classes.orgUnitSelector}>
             <SingleLockedSelect
                 ready
-                onClear={onTeiSelectionReset}
+                onClear={resetStage}
                 options={[{
-                    label: 'name',
+                    label: programStageDisplayName,
                     value: 'alwaysPreselected',
 
                 }]}
                 selectedValue="alwaysPreselected"
-                title={'trackedEntityName'}
+                title={i18n.t('Stage')}
             />
         </Grid>
         <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={classes.orgUnitSelector}>
             <SingleLockedSelect
                 ready
-                onClear={onTeiSelectionReset}
+                onClear={resetEvent}
                 options={[{
-                    label: 'name',
+                    label: eventDisplayDate,
                     value: 'alwaysPreselected',
 
                 }]}
                 selectedValue="alwaysPreselected"
-                title={'trackedEntityName'}
+                title={i18n.t('Event')}
             />
         </Grid>
     </>);

@@ -17,8 +17,12 @@ export const enrollmentEventEditPageDesc = createReducerDescription({
         pageStatus: enrollmentEventEditPageStatuses.ERROR,
     }),
     [enrollmentEventEditPagePageActionTypes.EVENT_SUCCESS_FETCH]:
-      state => ({
+      (state, { payload: { teiDisplayName, enrollmentDisplayDate, programStageDisplayName,eventDisplayDate } }) => ({
           ...state,
+          teiDisplayName,
+          enrollmentDisplayDate,
+          programStageDisplayName,
+          eventDisplayDate,
           pageStatus: enrollmentEventEditPageStatuses.DEFAULT,
       }),
 }, 'enrollmentEventEditPage', initialReducerValue);

@@ -4,12 +4,11 @@ import type { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EnrollmentEventEditPageComponent } from './EnrollmentEventEditPage.component';
 import { fetchEventInformation } from './EnrollmentEventEditPage.actions';
-import type { EnrollmentPageStatus } from "../../EnrollmentPage.types";
+import type { EnrollmentPageStatus } from '../../EnrollmentPage.types';
 
 
 export const EnrollmentEventEditPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
-
 
     const error: boolean =
     useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);

@@ -1,12 +1,24 @@
 // @flow
-
 import { actionCreator } from '../../../../../actions/actions.utils';
+import { enrollmentPageActionTypes } from "../../EnrollmentPage.actions";
 
 export const enrollmentEventEditPagePageActionTypes = {
     EVENT_START_FETCH: 'EnrollmentEventEditPage.FetchingEvent',
     EVENT_ERROR_FETCH: 'EnrollmentEventEditPage.ErrorOnFetching',
     EVENT_SUCCESS_FETCH: 'EnrollmentEventEditPage.SuccessOnFetching',
     EVENT_LOADING_FETCH: 'EnrollmentEventEditPage.LoadingOnFetching',
+
+    TEI_RESET: 'EnrollmentEventEditPage.ResetTei',
+    ENROLLMENT_RESET: 'EnrollmentEventEditPage.ResetEnrollment',
+    STAGE_RESET: 'EnrollmentEventEditPage.ResetStage',
+    EVENT_RESET: 'EnrollmentEventEditPage.ResetEvent',
+
+    PAGE_OPEN: 'EnrollmentPage.Open',
+    PAGE_CLEAN: 'EnrollmentPage.CleanOnUnmount',
+    CUSTOM_PROGRAM_RESET: 'EnrollmentPage.CustomProgramReset',
+
+    DEFAULT_VIEW: 'EnrollmentPage.DefaultView',
+    MISSING_MESSAGE_VIEW: 'EnrollmentPage.MissingMessageView',
 };
 
 export const showLoadingViewOnEnrollmentEventEditPage = () =>
@@ -18,5 +30,5 @@ export const showErrorViewOnEnrollmentEventEditPage = ({ error }: { error: strin
 export const fetchEventInformation = () =>
     actionCreator(enrollmentEventEditPagePageActionTypes.EVENT_START_FETCH)();
 
-export const successfulFetchingEventInformation = () =>
-    actionCreator(enrollmentEventEditPagePageActionTypes.EVENT_SUCCESS_FETCH)();
+export const successfulFetchingEventInformation = ({ teiDisplayName, enrollmentDisplayDate, programStageDisplayName, eventDisplayDate }: any) =>
+    actionCreator(enrollmentEventEditPagePageActionTypes.EVENT_SUCCESS_FETCH)({ teiDisplayName, enrollmentDisplayDate, programStageDisplayName, eventDisplayDate });
