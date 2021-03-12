@@ -9,6 +9,7 @@ import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../comp
 import { actionTypes as viewEventDataEntryActionTypes } from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
+import { enrollmentEventEditPagePageActionTypes } from '../../components/Pages/Enrollment/Event/Edit/EnrollmentEventEditPage.actions';
 
 export const activePageDesc = createReducerDescription({
     [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID]: state => ({
@@ -98,6 +99,20 @@ export const activePageDesc = createReducerDescription({
         lockedSelectorLoads: false,
     }),
     [enrollmentPageActionTypes.INFORMATION_ERROR_FETCH]: (state, { payload: { error } }) => ({
+        ...state,
+        lockedSelectorLoads: false,
+        selectionsError: { error },
+    }),
+
+    [enrollmentEventEditPagePageActionTypes.EVENT_START_FETCH]: state => ({
+        ...state,
+        lockedSelectorLoads: true,
+    }),
+    [enrollmentEventEditPagePageActionTypes.EVENT_SUCCESS_FETCH]: state => ({
+        ...state,
+        lockedSelectorLoads: false,
+    }),
+    [enrollmentEventEditPagePageActionTypes.EVENT_ERROR_FETCH]: (state, { payload: { error } }) => ({
         ...state,
         lockedSelectorLoads: false,
         selectionsError: { error },
