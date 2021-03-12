@@ -12,6 +12,8 @@ import {
 import { deriveTeiName } from '../../helpers';
 import { convertValue } from '../../../../../converters/clientToView';
 import { dataElementTypes } from '../../../../../metaData/DataElement';
+import programCollection from '../../../../../metaDataMemoryStores/programCollection/programCollection';
+
 
 export const fetchEventInformationEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
@@ -24,22 +26,41 @@ export const fetchEventInformationEpic = (action$: InputObservable, store: Redux
                 return of(showErrorViewOnEnrollmentEventEditPage({ error }));
             }
 
-            return from(querySingleResource({ resource: 'events', id: eventId }))
+            return from(querySingleResource({
+                resource: 'events',
+                id: eventId,
+                params: { fields: ['trackedEntityInstance', 'enrollment', 'programStage', 'eventDate', 'program'] },
+            }),
+            )
                 .pipe(
-                    flatMap(({ trackedEntityInstance, enrollment, programStage, event, eventDate }) =>
+                    flatMap(({ trackedEntityInstance, enrollment, programStage, eventDate, program }) =>
                         forkJoin(
-                            querySingleResource({ resource: 'enrollments', id: enrollment, params: { fields: ['created'] } }),
-                            querySingleResource({ resource: 'trackedEntityInstances', id: trackedEntityInstance }),
-                            querySingleResource({ resource: 'programStages', id: programStage }),
+                            querySingleResource({
+                                resource: 'enrollments',
+                                id: enrollment,
+                                params: { fields: ['created'] },
+                            }),
+                            querySingleResource({
+                                resource: 'trackedEntityInstances',
+                                id: trackedEntityInstance,
+                                params: { fields: ['attributes', 'trackedEntityType'] },
+                            }),
                         ).pipe(
-                            map(([{ created }, { attributes, trackedEntityType }, programStageResponse]) => {
+                            map(([{ created }, { attributes, trackedEntityType }]) => {
                                 const teiDisplayName = deriveTeiName(attributes, trackedEntityType);
                                 // $FlowFixMe;
                                 const enrollmentDisplayDate: string = convertValue(created, dataElementTypes.DATETIME);
                                 // $FlowFixMe;
                                 const eventDisplayDate: string = convertValue(eventDate, dataElementTypes.DATETIME);
+                                const { stages } = programCollection.get(program) || { stages: new Map() };
+                                const { name: programStageDisplayName } = stages.get(programStage) || { name: '' };
 
-                                return successfulFetchingEventInformation({ teiDisplayName, enrollmentDisplayDate, programStageDisplayName: 'Yet to come', eventDisplayDate });
+                                return successfulFetchingEventInformation({
+                                    teiDisplayName,
+                                    enrollmentDisplayDate,
+                                    programStageDisplayName,
+                                    eventDisplayDate,
+                                });
                             }))),
                     catchError(() => {
                         const error = i18n.t('Enrollment with id "{{eventId}}" does not exist', { eventId });
