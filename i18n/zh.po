@@ -775,7 +775,7 @@ msgid "Search {{name}}"
 msgstr "搜索{{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "按{{name}}搜索"
 
 msgid "Search by attributes"
 msgstr "按属性搜索"
