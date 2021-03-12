@@ -23,7 +23,7 @@ type Props = {
     muiButtonRef: (muiButtonInstance: any) => void,
 };
 
-const Button = (props: Props) => {
+const ButtonPlain = (props: Props) => {
     const { classes, children, muiClasses, muiButtonRef, ...passOnProps } = props;
     const buttonRefPropObject = muiButtonRef ? { buttonRef: muiButtonRef } : null;
 
@@ -44,5 +44,4 @@ const Button = (props: Props) => {
     );
 };
 
-export default withStyles(styles)(Button);
-
+export const Button = withStyles(styles)(ButtonPlain);

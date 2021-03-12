@@ -1,6 +1,6 @@
 // @flow
 // default form
-export { default as getAgeFieldConfig } from './ageField/getAgeFieldConfig';
+export { getAgeFieldConfig } from './ageField/getAgeFieldConfig';
 export { default as getBooleanFieldConfig } from './booleanField/getBooleanFieldConfig';
 export { default as getCoordinateFieldConfig } from './coordinateField/getCoordinateFieldConfig';
 export { default as getDateFieldConfig } from './dateField/getDateFieldConfig';

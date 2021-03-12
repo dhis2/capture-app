@@ -6,7 +6,7 @@ import { type DataElement } from '../../../../../metaData';
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
 
-const getAgeField = (metaData: DataElement, options: Object) => {
+export const getAgeFieldConfig = (metaData: DataElement, options: Object) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
@@ -21,5 +21,3 @@ const getAgeField = (metaData: DataElement, options: Object) => {
         props,
     }, metaData);
 };
-
-export default getAgeField;
