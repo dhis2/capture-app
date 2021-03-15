@@ -49,7 +49,7 @@ export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore) =>
             const { pageToPush, customActionExists } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.ORG_UNIT_ID_RESET);
             const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            return customActionExists ? of(push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`)) : empty();
+            return customActionExists ? empty() : of(push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`));
         }));
 
 export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -68,7 +68,7 @@ export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore) 
             const { pageToPush, customActionExists } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.PROGRAM_ID_RESET);
             const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            return customActionExists ? of(push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`)) : empty();
+            return customActionExists ? empty() : of(push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`));
         }),
     );
 
