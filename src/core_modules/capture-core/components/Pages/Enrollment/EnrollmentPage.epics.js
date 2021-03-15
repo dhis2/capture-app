@@ -112,13 +112,13 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
                     programId: queryProgramId,
                     teiId: queryTeiId,
                 },
+                state: { automaticUrlCompletion = true },
             } = store.value.router.location;
             const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
 
-            if (!urlCompleted) {
+            if (!urlCompleted && automaticUrlCompletion) {
                 return of(push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`));
             }
             return empty();
-        },
-        ),
+        }),
     );

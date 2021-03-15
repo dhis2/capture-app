@@ -29,7 +29,7 @@ export const fetchEventInformationEpic = (action$: InputObservable, store: Redux
         ofType(enrollmentEventEditPagePageActionTypes.EVENT_START_FETCH),
         flatMap(() => {
             const { query: { teiId, enrollmentId, stageId, eventId } } = store.value.router.location;
-            const urlComplete = Boolean(teiId) && Boolean(enrollmentId) && Boolean(stageId) && Boolean(eventId);
+            const urlComplete = Boolean(teiId && enrollmentId && stageId && eventId);
             if (!urlComplete) {
                 const error = i18n.t('There is an error while opening this enrollment. Please enter a valid url.');
                 return of(showErrorViewOnEnrollmentEventEditPage({ error }));

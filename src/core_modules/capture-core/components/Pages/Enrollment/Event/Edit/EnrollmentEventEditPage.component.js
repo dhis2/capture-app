@@ -12,6 +12,7 @@ import { withErrorMessageHandler } from '../../../../../HOC';
 import { SingleLockedSelect } from '../../../../LockedSelector/QuickSelector/SingleLockedSelect/SingleLockedSelect.component';
 import { enrollmentEventEditPageStatuses } from './enrollmentEventEditPage.constants';
 import { urlArguments } from '../../../../../utils/url';
+import { push } from 'connected-react-router';
 
 
 const styles = ({ typography }) => ({
@@ -46,13 +47,26 @@ const ExtraSelectors = ({ width, classes }) => {
         eventDisplayDate,
     } = useSelector(({ enrollmentEventEditPage }) => enrollmentEventEditPage);
 
-    const resetTei = () => push(`/?${urlArguments({ programId, orgUnitId })}`);
-    const resetEnrollment = () => push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId })}`);
-    const resetStage = () => push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
-    const resetEvent = () => {
-        const url = urlArguments({ programId, orgUnitId, teiId, enrollmentId });
-        push(`/enrollment?${url}`);
-    };
+    const resetTei = () => push({
+        pathname: '/',
+        search: `?${urlArguments({ programId, orgUnitId })}`,
+        state: { automaticUrlCompletion: false },
+    });
+    const resetEnrollment = () => push({
+        pathname: '/enrollment',
+        search: `?${urlArguments({ programId, orgUnitId, teiId })}`,
+        state: { automaticUrlCompletion: false },
+    });
+    const resetStage = () => push({
+        pathname: '/enrollment',
+        search: `?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`,
+        state: { automaticUrlCompletion: false },
+    });
+    const resetEvent = () => push({
+        pathname: '/enrollment',
+        search: `?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`,
+        state: { automaticUrlCompletion: false },
+    });
 
     return (<>
         <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={classes.orgUnitSelector}>
@@ -111,7 +125,7 @@ const ExtraSelectors = ({ width, classes }) => {
 };
 
 const EnrollmentEventEditPagePlain = ({ pageStatus, classes }) => (<>
-    <LockedSelector pageToPush="enrollment/event/edit" renderExtraSelectors={(width, extraClasses) => <ExtraSelectors width={width} classes={extraClasses} />} />
+    <LockedSelector pageToPush="enrollment" renderExtraSelectors={(width, extraClasses) => <ExtraSelectors width={width} classes={extraClasses} />} />
 
     <div data-test="enrollment-event-edit-page-content" className={classes.container} >
 
