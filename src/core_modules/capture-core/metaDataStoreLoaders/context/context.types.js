@@ -9,6 +9,7 @@ type StoreNames = {
     RELATIONSHIP_TYPES: string,
     TRACKED_ENTITY_TYPES: string,
     PROGRAMS: string,
+    ORGANISATION_UNITS_BY_PROGRAM: string,
     PROGRAM_RULES: string,
     PROGRAM_RULES_VARIABLES: string,
     PROGRAM_INDICATORS: string,

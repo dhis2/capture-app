@@ -27,7 +27,7 @@ const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnit
             reportDateToUse: reportDateToUseInActiveStatus,
             generatedByEnrollmentDate: generateScheduleDateByEnrollmentDate,
             openAfterEnrollment,
-            standardInterval,
+            minDaysFromStart,
         }) => {
             const dateToUseInActiveStatus = reportDateToUseInActiveStatus === 'enrollmentDate' ? enrollmentDate : sanitisedIncidentDate;
             const dateToUseInScheduleStatus = generateScheduleDateByEnrollmentDate ? enrollmentDate : sanitisedIncidentDate;
@@ -44,7 +44,7 @@ const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnit
                   {
                       status: 'SCHEDULE',
                       // for schedule type of events we want to add the standard interval days to the date
-                      dueDate: moment(dateToUseInScheduleStatus).add(standardInterval, 'days').format('YYYY-MM-DD'),
+                      dueDate: moment(dateToUseInScheduleStatus).add(minDaysFromStart, 'days').format('YYYY-MM-DD'),
                   };
 
             return {
