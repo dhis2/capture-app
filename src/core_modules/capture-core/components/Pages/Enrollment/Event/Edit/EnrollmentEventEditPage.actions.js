@@ -1,6 +1,5 @@
 // @flow
 import { actionCreator } from '../../../../../actions/actions.utils';
-import { enrollmentPageActionTypes } from "../../EnrollmentPage.actions";
 
 export const enrollmentEventEditPagePageActionTypes = {
     EVENT_START_FETCH: 'EnrollmentEventEditPage.FetchingEvent',
@@ -30,5 +29,5 @@ export const showErrorViewOnEnrollmentEventEditPage = ({ error }: { error: strin
 export const fetchEventInformation = () =>
     actionCreator(enrollmentEventEditPagePageActionTypes.EVENT_START_FETCH)();
 
-export const successfulFetchingEventInformation = ({ teiDisplayName, enrollmentDisplayDate, programStageDisplayName, eventDisplayDate }: any) =>
-    actionCreator(enrollmentEventEditPagePageActionTypes.EVENT_SUCCESS_FETCH)({ teiDisplayName, enrollmentDisplayDate, programStageDisplayName, eventDisplayDate });
+export const successfulFetchingEventInformation = ({ ...args }: any) =>
+    actionCreator(enrollmentEventEditPagePageActionTypes.EVENT_SUCCESS_FETCH)({ ...args });

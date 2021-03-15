@@ -11,7 +11,6 @@ import type { Props } from './EnrollmentEventEditPage.types';
 import { withErrorMessageHandler } from '../../../../../HOC';
 import { SingleLockedSelect } from '../../../../LockedSelector/QuickSelector/SingleLockedSelect/SingleLockedSelect.component';
 import { enrollmentEventEditPageStatuses } from './enrollmentEventEditPage.constants';
-import { getScopeInfo } from '../../../../../metaData/helpers';
 import { urlArguments } from '../../../../../utils/url';
 
 
@@ -37,24 +36,28 @@ const ExtraSelectors = ({ width, classes }) => {
         orgUnitId,
         enrollmentId,
     } = useSelector(({ router: { location: { query } } }) => query);
-    const { trackedEntityName } = getScopeInfo(programId);
 
-    const { teiDisplayName, enrollmentDisplayDate, programStageDisplayName, eventDisplayDate } =
-      useSelector(({ enrollmentEventEditPage }) => enrollmentEventEditPage);
+    const {
+        teiDisplayName,
+        tetDisplayName,
+        enrollmentDisplayDate,
+        enrollmentDisplayName,
+        programStageDisplayName,
+        eventDisplayDate,
+    } = useSelector(({ enrollmentEventEditPage }) => enrollmentEventEditPage);
 
     const resetTei = () => push(`/?${urlArguments({ programId, orgUnitId })}`);
     const resetEnrollment = () => push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId })}`);
     const resetStage = () => push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
     const resetEvent = () => {
         const url = urlArguments({ programId, orgUnitId, teiId, enrollmentId });
-        debugger;
         push(`/enrollment?${url}`);
     };
 
     return (<>
         <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={classes.orgUnitSelector}>
             <SingleLockedSelect
-                ready
+                ready={Boolean(teiDisplayName)}
                 onClear={resetTei}
                 options={[{
                     label: teiDisplayName,
@@ -62,12 +65,12 @@ const ExtraSelectors = ({ width, classes }) => {
 
                 }]}
                 selectedValue="alwaysPreselected"
-                title={trackedEntityName}
+                title={tetDisplayName}
             />
         </Grid>
         <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={classes.orgUnitSelector}>
             <SingleLockedSelect
-                ready
+                ready={Boolean(enrollmentDisplayDate)}
                 onClear={resetEnrollment}
                 options={[{
                     label: enrollmentDisplayDate,
@@ -75,12 +78,12 @@ const ExtraSelectors = ({ width, classes }) => {
 
                 }]}
                 selectedValue="alwaysPreselected"
-                title={i18n.t('Enrollment')}
+                title={enrollmentDisplayName}
             />
         </Grid>
         <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={classes.orgUnitSelector}>
             <SingleLockedSelect
-                ready
+                ready={Boolean(programStageDisplayName)}
                 onClear={resetStage}
                 options={[{
                     label: programStageDisplayName,
@@ -93,7 +96,7 @@ const ExtraSelectors = ({ width, classes }) => {
         </Grid>
         <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={classes.orgUnitSelector}>
             <SingleLockedSelect
-                ready
+                ready={Boolean(eventDisplayDate)}
                 onClear={resetEvent}
                 options={[{
                     label: eventDisplayDate,

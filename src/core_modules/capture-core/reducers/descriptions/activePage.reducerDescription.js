@@ -90,31 +90,13 @@ export const activePageDesc = createReducerDescription({
         isDataEntryLoading: false,
     }),
 
-    [enrollmentPageActionTypes.INFORMATION_FETCH]: state => ({
-        ...state,
-        lockedSelectorLoads: true,
-    }),
-    [enrollmentPageActionTypes.INFORMATION_SUCCESS_FETCH]: state => ({
-        ...state,
-        lockedSelectorLoads: false,
-    }),
     [enrollmentPageActionTypes.INFORMATION_ERROR_FETCH]: (state, { payload: { error } }) => ({
         ...state,
-        lockedSelectorLoads: false,
         selectionsError: { error },
     }),
 
-    [enrollmentEventEditPagePageActionTypes.EVENT_START_FETCH]: state => ({
-        ...state,
-        lockedSelectorLoads: true,
-    }),
-    [enrollmentEventEditPagePageActionTypes.EVENT_SUCCESS_FETCH]: state => ({
-        ...state,
-        lockedSelectorLoads: false,
-    }),
     [enrollmentEventEditPagePageActionTypes.EVENT_ERROR_FETCH]: (state, { payload: { error } }) => ({
         ...state,
-        lockedSelectorLoads: false,
         selectionsError: { error },
     }),
 }, 'activePage', {
