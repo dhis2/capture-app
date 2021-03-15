@@ -1,8 +1,9 @@
 // @flow
 import { ofType } from 'redux-observable';
 import i18n from '@dhis2/d2-i18n';
-import { catchError, flatMap, map, startWith } from 'rxjs/operators';
+import { catchError, flatMap, map, startWith, filter } from 'rxjs/operators';
 import { forkJoin, from, of } from 'rxjs';
+import { push, replace } from 'connected-react-router';
 import {
     enrollmentEventEditPagePageActionTypes,
     showErrorViewOnEnrollmentEventEditPage,
@@ -15,6 +16,8 @@ import { dataElementTypes } from '../../../../../metaData/DataElement';
 import programCollection from '../../../../../metaDataMemoryStores/programCollection/programCollection';
 import { TrackerProgram } from '../../../../../metaData/Program';
 import { getScopeInfo } from '../../../../../metaData/helpers';
+import { lockedSelectorBatchActionTypes } from '../../../../LockedSelector';
+import { deriveUrlQueries, urlArguments } from '../../../../../utils/url';
 
 const deriveEnrollmentInfo = (program, programStage) => {
     const trackerProgram = [...programCollection.values()].find(({ id }) => id === program) || {};
@@ -80,5 +83,41 @@ export const fetchEventInformationEpic = (action$: InputObservable, store: Redux
                     }),
                     startWith(showLoadingViewOnEnrollmentEventEditPage()),
                 );
+        }),
+    );
+
+export const resetProgramIdFromEnrollmentPageEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH),
+        filter(({ payload }) =>
+            Object.values(payload)
+                // $FlowFixMe
+                .some(({ type }) => type === enrollmentEventEditPagePageActionTypes.CUSTOM_PROGRAM_RESET)),
+        map(() => {
+            const { orgUnitId, teiId, enrollmentId } = deriveUrlQueries(store.value);
+
+            return replace({
+                pathname: '/enrollment',
+                search: `?${urlArguments({ orgUnitId, teiId, enrollmentId })}`,
+                state: { automaticUrlCompletion: false },
+            });
+        }),
+    );
+
+export const resetOrgUnitIdFromEnrollmentPageEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH),
+        filter(({ payload }) =>
+            Object.values(payload)
+                // $FlowFixMe
+                .some(({ type }) => type === enrollmentEventEditPagePageActionTypes.CUSTOM_ORG_UNIT_RESET)),
+        map(() => {
+            const { programId, teiId, enrollmentId, stageId, eventId } = deriveUrlQueries(store.value);
+
+            return replace({
+                pathname: '/enrollment/event/edit',
+                search: `?${urlArguments({ programId, teiId, enrollmentId, stageId, eventId })}`,
+                state: { automaticUrlCompletion: false },
+            });
         }),
     );

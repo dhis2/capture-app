@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
 import { catchError, filter, flatMap, map, startWith, switchMap } from 'rxjs/operators';
-import { from, of } from 'rxjs';
+import { empty, from, of } from 'rxjs';
 import {
     lockedSelectorActionTypes,
     lockedSelectorBatchActionTypes,
@@ -45,11 +45,11 @@ export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore) =>
 export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH),
-        map(({ payload: batchPayload }) => {
-            const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.ORG_UNIT_ID_RESET);
+        flatMap(({ payload: batchPayload }) => {
+            const { pageToPush, customActionExists } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.ORG_UNIT_ID_RESET);
             const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            return push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`);
+            return customActionExists ? of(push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`)) : empty();
         }));
 
 export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -64,11 +64,11 @@ export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
 export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH),
-        map(({ payload: batchPayload }) => {
-            const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.PROGRAM_ID_RESET);
+        flatMap(({ payload: batchPayload }) => {
+            const { pageToPush, customActionExists } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.PROGRAM_ID_RESET);
             const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            return push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`);
+            return customActionExists ? of(push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`)) : empty();
         }),
     );
 

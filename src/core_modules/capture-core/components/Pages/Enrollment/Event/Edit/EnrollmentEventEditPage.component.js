@@ -12,7 +12,7 @@ import { withErrorMessageHandler } from '../../../../../HOC';
 import { SingleLockedSelect } from '../../../../LockedSelector/QuickSelector/SingleLockedSelect/SingleLockedSelect.component';
 import { enrollmentEventEditPageStatuses } from './enrollmentEventEditPage.constants';
 import { urlArguments } from '../../../../../utils/url';
-import { push } from 'connected-react-router';
+import { customProgramIdReset, customOrgUnitIdReset } from './EnrollmentEventEditPage.actions';
 
 
 const styles = ({ typography }) => ({
@@ -125,10 +125,14 @@ const ExtraSelectors = ({ width, classes }) => {
 };
 
 const EnrollmentEventEditPagePlain = ({ pageStatus, classes }) => (<>
-    <LockedSelector pageToPush="enrollment" renderExtraSelectors={(width, extraClasses) => <ExtraSelectors width={width} classes={extraClasses} />} />
+    <LockedSelector
+        pageToPush="enrollment/event/edit"
+        renderExtraSelectors={(width, extraClasses) => <ExtraSelectors width={width} classes={extraClasses} />}
+        customActionsOnProgramIdReset={[customProgramIdReset()]}
+        customActionsOnOrgUnitIdReset={[customOrgUnitIdReset()]}
+    />
 
-    <div data-test="enrollment-event-edit-page-content" className={classes.container} >
-
+    <div data-test="enrollment-event-edit-page-content" className={classes.container}>
         {
             pageStatus === enrollmentEventEditPageStatuses.DEFAULT &&
             <div className={classes.title}>Enrollment: Edit Event</div>

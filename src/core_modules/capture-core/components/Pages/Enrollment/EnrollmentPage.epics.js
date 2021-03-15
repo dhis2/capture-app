@@ -112,8 +112,9 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
                     programId: queryProgramId,
                     teiId: queryTeiId,
                 },
-                state: { automaticUrlCompletion = true },
+                state,
             } = store.value.router.location;
+            const { automaticUrlCompletion } = state || { automaticUrlCompletion: true };
             const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
 
             if (!urlCompleted && automaticUrlCompletion) {

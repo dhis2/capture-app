@@ -42,8 +42,8 @@ export const setOrgUnitFromLockedSelector = (orgUnitId: string, orgUnit: Object,
 export const setProgramIdFromLockedSelector = (programId: string, pageToPush: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_SET)({ programId, pageToPush });
 export const setCategoryOptionFromLockedSelector = (categoryId: string, categoryOption: Object) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });
 
-export const resetOrgUnitIdFromLockedSelector = (pageToPush: string) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_RESET)({ pageToPush });
-export const resetProgramIdFromLockedSelector = (pageToPush: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_RESET)({ pageToPush });
+export const resetOrgUnitIdFromLockedSelector = (pageToPush: string, customActionExists?: boolean) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_RESET)({ pageToPush, customActionExists });
+export const resetProgramIdFromLockedSelector = (pageToPush: string, customActionExists?: boolean) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_RESET)({ pageToPush, customActionExists });
 export const resetCategoryOptionFromLockedSelector = (categoryId: string) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_RESET)({ categoryId });
 export const resetAllCategoryOptionsFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET)();
 
@@ -76,16 +76,16 @@ export const resetEnrollmentSelection = () =>
     actionCreator(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET)();
 
 // batch related actions
-export const resetProgramIdBatchAction = (actions: Array<Object>, pageToPush: string) =>
+export const resetProgramIdBatchAction = (actions: Array<Object>, pageToPush: string, customActionExists?: boolean) =>
     batchActions([
         ...actions,
         resetAllCategoryOptionsFromLockedSelector(),
-        resetProgramIdFromLockedSelector(pageToPush),
+        resetProgramIdFromLockedSelector(pageToPush, Boolean(customActionExists)),
     ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH);
 
-export const resetOrgUnitIdBatchAction = (customActionsOnOrgUnitIdReset: Array<Object>, pageToPush: string) =>
+export const resetOrgUnitIdBatchAction = (customActionsOnOrgUnitIdReset: Array<Object>, pageToPush: string, customActionExists?: boolean) =>
     batchActions([
-        resetOrgUnitIdFromLockedSelector(pageToPush),
+        resetOrgUnitIdFromLockedSelector(pageToPush, Boolean(customActionExists)),
         ...customActionsOnOrgUnitIdReset,
     ], lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH);
 
