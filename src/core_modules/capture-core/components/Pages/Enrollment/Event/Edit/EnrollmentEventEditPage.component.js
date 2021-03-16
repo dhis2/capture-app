@@ -127,7 +127,6 @@ const EnrollmentEventEditPagePlain = ({ pageStatus, classes }) => (<>
     <LockedSelector pageToPush="enrollment" renderExtraSelectors={(width, extraClasses) => <ExtraSelectors width={width} classes={extraClasses} />} />
 
     <div data-test="enrollment-event-edit-page-content" className={classes.container} >
-
         {
             pageStatus === enrollmentEventEditPageStatuses.DEFAULT &&
             <div className={classes.title}>Enrollment: Edit Event</div>
