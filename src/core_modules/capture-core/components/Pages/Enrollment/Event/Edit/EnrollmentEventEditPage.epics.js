@@ -45,7 +45,7 @@ export const fetchEventInformationEpic = (action$: InputObservable, store: Redux
             }),
             )
                 .pipe(
-                    flatMap(({ trackedEntityInstance, enrollment, programStage, eventDate, program, ...rest }) =>
+                    flatMap(({ trackedEntityInstance, enrollment, programStage, eventDate, program }) =>
                         forkJoin(
                             querySingleResource({
                                 resource: 'enrollments',
