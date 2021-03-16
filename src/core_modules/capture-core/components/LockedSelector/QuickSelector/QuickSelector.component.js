@@ -14,6 +14,7 @@ import { ActionButtons } from './ActionButtons/ActionButtons.component';
 import { SingleLockedSelect } from './SingleLockedSelect/SingleLockedSelect.component';
 import type { Props } from './QuickSelector.types';
 
+
 const styles = ({ palette }) => ({
     paper: {
         flexGrow: 1,
