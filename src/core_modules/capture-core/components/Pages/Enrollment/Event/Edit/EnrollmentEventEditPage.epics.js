@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import i18n from '@dhis2/d2-i18n';
 import { catchError, flatMap, map, startWith, filter } from 'rxjs/operators';
 import { forkJoin, from, of } from 'rxjs';
-import { push, replace } from 'connected-react-router';
+import { replace } from 'connected-react-router';
 import {
     enrollmentEventEditPagePageActionTypes,
     showErrorViewOnEnrollmentEventEditPage,

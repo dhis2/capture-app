@@ -150,7 +150,7 @@ export const LockedSelector: ComponentType<OwnProps> =
               const customActionExists = Boolean(customActionsOnProgramIdReset.length);
               dispatch(resetOrgUnitIdBatchAction(customActionsOnOrgUnitIdReset, pageToPush, customActionExists));
           },
-          [pageToPush, customActionsOnOrgUnitIdReset, dispatch]);
+          [pageToPush, customActionsOnOrgUnitIdReset, customActionsOnProgramIdReset.length, dispatch]);
 
       const dispatchOnResetProgramId = useCallback(
           (baseAction: ReduxAction<any, any>) => {

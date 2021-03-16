@@ -12,7 +12,6 @@ export const enrollmentEventEditPagePageActionTypes = {
 
     DEFAULT_VIEW: 'EnrollmentEventEditPage.DefaultView',
     MISSING_MESSAGE_VIEW: 'EnrollmentEventEditPage.MissingMessageView',
-    DEFAULT_VIEW: 'EnrollmentEventEditPage.DefaultView',
 };
 
 export const showLoadingViewOnEnrollmentEventEditPage = () =>
