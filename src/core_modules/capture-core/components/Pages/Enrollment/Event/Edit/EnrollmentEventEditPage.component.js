@@ -12,7 +12,6 @@ import { withErrorMessageHandler } from '../../../../../HOC';
 import { SingleLockedSelect } from '../../../../LockedSelector/QuickSelector/SingleLockedSelect/SingleLockedSelect.component';
 import { enrollmentEventEditPageStatuses } from './enrollmentEventEditPage.constants';
 import { urlArguments } from '../../../../../utils/url';
-import { push } from 'connected-react-router';
 
 
 const styles = ({ typography }) => ({
