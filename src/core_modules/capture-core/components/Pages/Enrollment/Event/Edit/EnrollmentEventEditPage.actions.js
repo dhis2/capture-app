@@ -6,6 +6,8 @@ export const enrollmentEventEditPagePageActionTypes = {
     EVENT_ERROR_FETCH: 'EnrollmentEventEditPage.ErrorOnFetching',
     EVENT_SUCCESS_FETCH: 'EnrollmentEventEditPage.SuccessOnFetching',
     EVENT_LOADING_FETCH: 'EnrollmentEventEditPage.LoadingOnFetching',
+
+    DEFAULT_VIEW: 'EnrollmentEventEditPage.DefaultView',
 };
 
 export const showLoadingViewOnEnrollmentEventEditPage = () =>
