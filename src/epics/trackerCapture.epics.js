@@ -196,7 +196,7 @@ import {
     startFetchingTeiFromTeiIdEpic,
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
-import { fetchEventInformationEpic } from "../core_modules/capture-core/components/Pages/Enrollment/Event/Edit/EnrollmentEventEditPage.epics";
+import { fetchEventInformationEpic } from '../core_modules/capture-core/components/Pages/Enrollment/Event/Edit/EnrollmentEventEditPage.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
