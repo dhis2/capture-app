@@ -80,6 +80,7 @@ type DirectionClasses = {
 
 type Props = {
     id: string,
+    programId: string,
     itemId: string,
     ready: boolean,
     formFoundation: ?RenderFoundation,
@@ -238,6 +239,7 @@ class DataEntry extends React.Component<Props> {
         const d2Form = (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <D2Form
+                scope={passOnProps.programId}
                 id={getDataEntryKey(id, itemId)}
                 validationAttempted={completionAttempted || saveAttempted}
                 onUpdateField={this.handleUpdateField}
