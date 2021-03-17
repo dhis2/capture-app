@@ -4,11 +4,16 @@ import { compose } from 'redux';
 import DataEntry from './DataEntry.component';
 import { updateFormField } from './actions/dataEntry.actions';
 import { withLoadingIndicator } from '../../HOC';
+import { deriveUrlQueries } from '../../utils/url';
 
-const mapStateToProps = (state: Object, props: { id: string }) => ({
-    itemId: state.dataEntries[props.id] && state.dataEntries[props.id].itemId,
-    ready: !!state.dataEntries[props.id],
-});
+const mapStateToProps = (state: Object, props: { id: string }) => {
+    const { programId, trackedEntityTypeId } = deriveUrlQueries(state);
+    return {
+        itemId: state.dataEntries[props.id] && state.dataEntries[props.id].itemId,
+        ready: !!state.dataEntries[props.id],
+        scope: programId || trackedEntityTypeId,
+    };
+};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateFieldInner: (

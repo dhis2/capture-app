@@ -11,10 +11,12 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
     const searchId = props.searchId;
     const formId = props.id;
     const formState = state.teiSearch[searchId] && state.teiSearch[searchId][formId] ? state.teiSearch[searchId][formId] : {};
+    const { selectedProgramId, selectedTrackedEntityTypeId } = state.teiSearch[searchId];
 
     return {
         searchAttempted: formState.validationFailed,
         attributesWithValuesCount: getAttributesWithValuesCount(state, formId),
+        scope: selectedProgramId || selectedTrackedEntityTypeId,
     };
 };
 

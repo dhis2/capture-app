@@ -36,6 +36,7 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     id: string,
+    scope: string,
     searchGroupId: string,
     onSearch: (formId: string, searchGroupId: string) => void,
     onSearchValidationFailed: (formId: string, SearchGroupId: string) => void,
@@ -137,8 +138,9 @@ class SearchForm extends React.Component<Props> {
     }
 
     render() {
-        const { searchGroup, classes, id } = this.props;
+        const { searchGroup, classes, id, scope } = this.props;
 
+        debugger;
         const searchForm = searchGroup && searchGroup.searchForm;
 
         if (!searchForm) {
@@ -155,6 +157,7 @@ class SearchForm extends React.Component<Props> {
                 className={classes.container}
             >
                 <D2Form
+                    scope={scope}
                     formRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={searchGroup.searchForm}
                     id={id}

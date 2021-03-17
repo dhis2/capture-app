@@ -62,7 +62,6 @@ const mapStateToProps = (state: ReduxState, { searchGroupsForSelectedScope }: Ow
         },
     } = state;
 
-
     return {
         keptFallbackSearchFormValues,
         formsValues,

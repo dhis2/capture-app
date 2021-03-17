@@ -211,6 +211,7 @@ const SearchFormIndex = ({
                                     <div className={classes.searchRow}>
                                         <div className={classes.searchRowSelectElement}>
                                             <D2Form
+                                                scope={selectedSearchScopeId}
                                                 formRef={
                                                     (formInstance) => { formReference[formId] = formInstance; }
                                                 }
@@ -263,6 +264,7 @@ const SearchFormIndex = ({
                                     <div className={classes.searchRow}>
                                         <div className={classes.searchRowSelectElement}>
                                             <D2Form
+                                                scope={selectedSearchScopeId}
                                                 formRef={(formInstance) => { formReference[formId] = formInstance; }}
                                                 formFoundation={searchForm}
                                                 id={formId}
