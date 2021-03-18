@@ -37,6 +37,7 @@ export const useDataSource = (
                                     'Missing value in options')(
                                     { id, clientValue, options }),
                             );
+                            acc[id] = convertClientToList(clientValue, type);
                         } else {
                             acc[id] = option.text;
                         }
