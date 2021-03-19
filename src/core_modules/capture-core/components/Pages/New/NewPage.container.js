@@ -58,7 +58,7 @@ export const NewPage: ComponentType<{||}> = () => {
         useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
 
     const ready: boolean =
-        useSelector(({ activePage }) => !activePage.lockedSelectorLoads && !activePage.isDataEntryLoading);
+        useSelector(({ activePage }) => ((activePage.lockedSelectorLoads === false) && (activePage.isDataEntryLoading === false)));
 
     const currentScopeId: string =
         useSelector(({ currentSelections }) => currentSelections.programId || currentSelections.trackedEntityTypeId);
