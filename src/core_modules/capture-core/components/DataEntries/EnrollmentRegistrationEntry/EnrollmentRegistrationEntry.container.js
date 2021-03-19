@@ -35,7 +35,6 @@ const useInitialiseEnrollmentRegistration = (selectedScopeId, dataEntryId) => {
     ]);
 };
 
-
 export const EnrollmentRegistrationEntry: ComponentType<OwnProps> = ({ selectedScopeId, id, ...rest }) => {
     useInitialiseEnrollmentRegistration(selectedScopeId, id);
     const ready = useSelector(({ dataEntries }) => (!!dataEntries[id]));
