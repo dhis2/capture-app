@@ -5,7 +5,6 @@ import {
     actionTypes as viewEventActionTypes,
     actionTypes as viewEventPageActionTypes,
 } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import { actionTypes as viewEventDataEntryActionTypes } from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
