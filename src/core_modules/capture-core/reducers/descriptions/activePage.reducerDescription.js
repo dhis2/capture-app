@@ -80,15 +80,6 @@ export const activePageDesc = createReducerDescription({
         lockedSelectorLoads: false,
     }),
 
-    [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: state => ({
-        ...state,
-        isDataEntryLoading: false,
-    }),
-    [newEventDataEntryActionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL]: state => ({
-        ...state,
-        isDataEntryLoading: false,
-    }),
-
     [enrollmentPageActionTypes.INFORMATION_FETCH]: state => ({
         ...state,
         lockedSelectorLoads: true,
