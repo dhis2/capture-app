@@ -104,7 +104,7 @@ export const activePageDesc = createReducerDescription({
     }),
 }, 'activePage', {
     selectionsError: null,
-    lockedSelectorLoads: undefined,
-    isDataEntryLoading: undefined,
+    lockedSelectorLoads: false,
+    isDataEntryLoading: false,
     viewEventLoadError: null,
 });
