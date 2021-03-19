@@ -78,7 +78,6 @@ const TeiRegistrationEntryPlain =
                           {...rest}
                       />
                       <div className={classes.marginTop}>
-
                           {
                               onSave &&
                               <Button

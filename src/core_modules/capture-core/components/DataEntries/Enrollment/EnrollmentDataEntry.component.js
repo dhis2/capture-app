@@ -274,10 +274,12 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 
     render() {
         const { enrollmentMetadata, programId, ...passOnProps } = this.props;
+
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntry
                 {...passOnProps}
+                scope={programId}
                 dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
                 formFoundation={enrollmentMetadata.enrollmentForm}
             />

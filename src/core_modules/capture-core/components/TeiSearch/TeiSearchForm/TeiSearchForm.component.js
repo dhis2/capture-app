@@ -140,7 +140,6 @@ class SearchForm extends React.Component<Props> {
     render() {
         const { searchGroup, classes, id, scope } = this.props;
 
-        debugger;
         const searchForm = searchGroup && searchGroup.searchForm;
 
         if (!searchForm) {

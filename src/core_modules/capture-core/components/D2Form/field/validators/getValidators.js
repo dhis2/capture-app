@@ -248,7 +248,6 @@ function buildUniqueValidator(metaData: DataElement): Array<?ValidatorContainer>
                     if (!value && value !== 0 && value !== false) {
                         return true;
                     }
-                    // debugger;
                     // $FlowFixMe
                     return metaData.unique.onValidate(value, contextProps, scope);
                 },

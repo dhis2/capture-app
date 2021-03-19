@@ -120,7 +120,6 @@ class ProgramFactory {
 
     async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>, id: string) {
         const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
-            // debugger;
             // $FlowFixMe[incompatible-call] automated comment
             const dataElement = await this.dataElementFactory.build({ ...ptea, scopeId: id });
             return dataElement;
@@ -164,7 +163,6 @@ class ProgramFactory {
                     cachedProgram.minAttributesRequiredToSearch,
                 );
 
-                // debugger;
                 // $FlowFixMe
                 program.attributes = await this._buildProgramAttributes(cachedProgram.programTrackedEntityAttributes, cachedProgram.id);
             }

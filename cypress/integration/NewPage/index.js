@@ -441,7 +441,7 @@ And('you fill the Child programme registration form with a first name with value
         .blur();
 });
 
-And('you are in the WNCH / PNC program registration page', () => {
+And('you are in the WNCH PNC program registration page', () => {
     cy.visit('/#/new?programId=uy2gU8kT1jF&orgUnitId=DiszpKrYNg8');
 });
 

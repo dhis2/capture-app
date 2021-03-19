@@ -30,6 +30,7 @@ class FinalTeiDataEntry extends React.Component<FinalTeiDataEntryProps> {
         return (
             <DataEntry
                 {...passOnProps}
+                scope={passOnProps.programId}
                 formFoundation={teiRegistrationMetadata.form}
             />
         );
