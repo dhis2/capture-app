@@ -131,7 +131,7 @@ class LeftSection extends PureComponent {
 const OnlineIcon = props => <span className={props.status} />;
 
 // eslint-disable-next-line react/no-multi-comp
-class NetworkStatusBadge extends PureComponent {
+class NetworkStatusBadgePlain extends PureComponent {
     render() {
         const status = this.props.offline || {};
         const classes = this.props.classes;
@@ -152,4 +152,4 @@ const mapStateToProps = state => ({
     networkStatus: state.networkStatus,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(NetworkStatusBadge));
+export const NetworkStatusBadge = connect(mapStateToProps)(withStyles(styles)(NetworkStatusBadgePlain));

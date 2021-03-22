@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import EventDetails from '../EventDetailsSection/EventDetailsSection.container';
-import Button from '../../../Buttons/Button.component';
+import { Button } from '../../../Buttons/Button.component';
 import RightColumnWrapper from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
 

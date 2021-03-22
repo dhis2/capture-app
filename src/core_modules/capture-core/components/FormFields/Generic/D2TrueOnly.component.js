@@ -25,7 +25,7 @@ type Props = {
     useValueLabel?: ?boolean,
 };
 
-class D2TrueOnly extends Component<Props> {
+class D2TrueOnlyPlain extends Component<Props> {
     handleChange: (e: Object, checked: boolean) => void;
     materialUIContainerInstance: ?HTMLDivElement;
     labelClasses: Object;
@@ -101,4 +101,4 @@ class D2TrueOnly extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(D2TrueOnly);
+export const D2TrueOnly = withStyles(styles)(D2TrueOnlyPlain);

@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
-import Button from '../../../../Buttons/Button.component';
+import { Button } from '../../../../Buttons/Button.component';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import { CardList } from '../../../../CardList';
 import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';

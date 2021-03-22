@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import { DATA_ENTRY_ID } from '../registerTei.const';
 
 export const useSaveButtonText = trackedEntityTypeName =>

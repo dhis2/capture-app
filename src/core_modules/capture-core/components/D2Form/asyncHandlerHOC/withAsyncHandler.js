@@ -116,7 +116,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 
-export default () =>
+export const withAsyncHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
 
         // $FlowFixMe[missing-annot] automated comment

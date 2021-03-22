@@ -19,7 +19,7 @@ import {
     removeListItem,
 } from '../../RecentlyAddedEventsList';
 
-import getDataEntryKey from '../../../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 

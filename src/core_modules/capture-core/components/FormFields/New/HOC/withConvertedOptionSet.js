@@ -9,7 +9,7 @@ type Props = {
     optionSet: OptionSet
 };
 
-export default () =>
+export const withConvertedOptionSet = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class OptionSetConverter extends React.Component<Props> {
             formOptionSet: OptionSet;

@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import SelectBoxes from '../SelectionBoxes/SelectionBoxes.component';
+import { SelectionBoxes } from '../SelectionBoxes/SelectionBoxes.component';
 import type { OptionRendererInputData } from '../internal/SelectionBoxes/selectBoxes.types';
 
 type Props = {
@@ -38,7 +38,7 @@ class D2BooleanField extends Component<Props> {
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <SelectBoxes
+                <SelectionBoxes
                     options={this.options}
                     multiSelect={allowMultiple}
                     {...passOnProps}

@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import type { Category as CategoryMetadata } from '../../../../metaData';
-import VirtualizedSelect from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import { makeOnSelectSelector } from './categorySelector.selectors';
@@ -13,7 +13,7 @@ const VirtualizedSelectLoadingIndicatorHOC =
     withLoadingIndicator(
         () => ({ marginTop: 5, paddingTop: 3, height: 0 }),
         () => ({ size: 22 }),
-        (props: Object) => props.options)(VirtualizedSelect);
+        (props: Object) => props.options)(OptionsSelectVirtualized);
 
 type SelectOption = {
     label: string,
@@ -31,7 +31,7 @@ type State = {
     prevOrgUnitId: ?string,
 };
 
-class CategorySelector extends React.Component<Props, State> {
+export class CategorySelector extends React.Component<Props, State> {
     static getOptionsAsync(
         categoryId: string,
         selectedOrgUnitId: ?string,
@@ -168,5 +168,3 @@ class CategorySelector extends React.Component<Props, State> {
         );
     }
 }
-
-export default CategorySelector;

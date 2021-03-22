@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import getDataEntryKey from '../common/getDataEntryKey';
+import { getDataEntryKey } from '../common/getDataEntryKey';
 import withDataEntryOutput from './withDataEntryOutput';
 
 
@@ -105,7 +105,7 @@ const mapStateToProps = (state: ReduxState, props: any) => {
 
 const mapDispatchToProps = () => ({});
 
-export default () =>
+export const withIndicatorOutput = () =>
     (InnerComponent: React.ComponentType<any>) =>
 
         withDataEntryOutput()(

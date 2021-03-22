@@ -7,8 +7,8 @@ import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes'
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import Option from '../../../metaData/OptionSet/Option';
 
-import From from './From.component';
-import To from './To.component';
+import { FromDateFilter } from './From.component';
+import { ToDateFilter } from './To.component';
 import {
     isValidDate,
 } from '../../../utils/validators/form';
@@ -69,7 +69,7 @@ type State = {
 };
 
 // $FlowFixMe[incompatible-variance] automated comment
-class DateFilter extends Component<Props, State> implements UpdatableFilterContent<Value> {
+class DateFilterPlain extends Component<Props, State> implements UpdatableFilterContent<Value> {
     static validateField(value: ?string, type: $Keys<typeof dataElementTypes>) {
         if (!value) {
             return {
@@ -298,7 +298,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
                     >
                         { /* $FlowSuppress: Flow not working 100% with HOCs */ }
                         {/* $FlowFixMe[prop-missing] automated comment */}
-                        <From
+                        <FromDateFilter
                             value={value && value.from}
                             error={minValueError}
                             errorClass={classes.error}
@@ -317,7 +317,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
                     >
                         { /* $FlowSuppress: Flow not working 100% with HOCs */ }
                         {/* $FlowFixMe[prop-missing] automated comment */}
-                        <To
+                        <ToDateFilter
                             value={value && value.to}
                             error={maxValueError}
                             errorClass={classes.error}
@@ -336,4 +336,4 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     }
 }
 
-export default withStyles(getStyles)(DateFilter);
+export const DateFilter = withStyles(getStyles)(DateFilterPlain);

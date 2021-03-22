@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import i18n from '@dhis2/d2-i18n';
-import Button from '../../../Buttons/Button.component';
+import { Button } from '../../../Buttons/Button.component';
 
 import type { Column } from '../../types';
 
@@ -60,7 +60,7 @@ type State = {
     filterSelectorOpen: boolean,
 };
 
-class FilterRestMenu extends React.Component<Props, State> {
+class FilterRestMenuPlain extends React.Component<Props, State> {
     menuClasses: Object;
     menuItemClasses: Object;
     managerRef: (instance: any) => void;
@@ -196,4 +196,4 @@ class FilterRestMenu extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(getStyles)(FilterRestMenu);
+export const FilterRestMenu = withStyles(getStyles)(FilterRestMenuPlain);

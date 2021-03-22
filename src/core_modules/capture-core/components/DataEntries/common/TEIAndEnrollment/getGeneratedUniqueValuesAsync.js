@@ -74,7 +74,7 @@ function getActiveUniqueItemFromCache(
     return (cacheItem.expires > requiredTimeStamp) ? cacheItem : null;
 }
 
-export default function getGeneratedUniqueValuesAsync(
+export function getGeneratedUniqueValuesAsync(
     foundation: ?RenderFoundation,
     generatedUniqueValuesCache: Object,
     staticPatternValues: StaticPatternValues,

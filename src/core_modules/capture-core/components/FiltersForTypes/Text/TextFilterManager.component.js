@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import TextFilter from './TextFilter.component';
+import { TextFilter } from './TextFilter.component';
 import type { TextFilterData } from './types';
 
 type Props = {
@@ -12,7 +12,7 @@ type State = {
     value: ?string,
 };
 
-class TextFilterManager extends React.Component<Props, State> {
+export class TextFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: ?TextFilterData) {
         return {
             value: (filter && filter.value ? filter.value : undefined),
@@ -44,5 +44,3 @@ class TextFilterManager extends React.Component<Props, State> {
         );
     }
 }
-
-export default TextFilterManager;

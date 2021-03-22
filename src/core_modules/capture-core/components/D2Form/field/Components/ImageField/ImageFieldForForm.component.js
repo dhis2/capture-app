@@ -1,5 +1,5 @@
 // @flow
 import { withDefaultFieldWrapperForForm } from '../internal';
-import ImageField from '../../../../FormFields/Image/D2Image.component';
+import { D2Image } from '../../../../FormFields/Image/D2Image.component';
 
-export default withDefaultFieldWrapperForForm()(ImageField);
+export const ImageFieldForForm = withDefaultFieldWrapperForForm()(D2Image);

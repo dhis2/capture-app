@@ -3,7 +3,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Section from '../Section/Section.component';
 import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
-import D2SectionFields from './D2SectionFields.container';
+import { D2SectionFields } from './D2SectionFields.container';
 import { Section as MetaDataSection } from '../../metaData';
 
 const getStyles = theme => ({
@@ -25,7 +25,7 @@ type Props = {
     formId: string,
 };
 
-class D2Section extends React.PureComponent<Props> {
+class D2SectionPlain extends React.PureComponent<Props> {
     // $FlowFixMe[speculation-ambiguous] automated comment
     sectionFieldsInstance: ?D2SectionFields;
     renderSectionHeader() {
@@ -81,4 +81,4 @@ class D2Section extends React.PureComponent<Props> {
     }
 }
 
-export default withStyles(getStyles)(D2Section);
+export const D2Section = withStyles(getStyles)(D2SectionPlain);

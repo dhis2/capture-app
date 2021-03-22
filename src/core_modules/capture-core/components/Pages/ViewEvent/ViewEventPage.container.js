@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { ViewEventPageComponent } from './ViewEventPage.component';
-import dataEntryHasChanges from '../../DataEntry/common/dataEntryHasChanges';
+import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../HOC';
 
 const mapStateToProps = (state: ReduxState) => {

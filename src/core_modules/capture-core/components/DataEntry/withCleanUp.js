@@ -16,6 +16,6 @@ const getCleanUpHOC = (InnerComponent: React.ComponentType<any>) =>
         );
     };
 
-export default () =>
+export const withCleanUpHOC = () =>
     (InnerComponent: React.ComponentType<any>) =>
         getCleanUpHOC(InnerComponent);

@@ -7,7 +7,7 @@ import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-ut
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { getProgramAndStageFromEvent } from '../../../../../metaData';
 import { openEventForEditInDataEntry } from '../../../EditEvent/DataEntry/editEventDataEntry.actions';
-import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
 

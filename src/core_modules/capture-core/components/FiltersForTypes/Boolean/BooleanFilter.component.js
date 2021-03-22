@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import D2TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
+import { D2TrueFalse } from '../../FormFields/Generic/D2TrueFalse.component';
 import { orientations } from '../../FormFields/Options/SelectBoxes'; // TODO: Refactor
 import { getBooleanFilterData } from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
@@ -23,7 +23,7 @@ type Props = {
 };
 // $FlowSuppress
 // $FlowFixMe[incompatible-variance] automated comment
-class BooleanFilter extends Component<Props> implements UpdatableFilterContent<Value> {
+class BooleanFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     booleanFieldInstance: ?D2TrueFalse;
 
     onGetUpdateData() {
@@ -63,4 +63,4 @@ class BooleanFilter extends Component<Props> implements UpdatableFilterContent<V
     }
 }
 
-export default withStyles(getStyles)(BooleanFilter);
+export const BooleanFilter = withStyles(getStyles)(BooleanFilterPlain);

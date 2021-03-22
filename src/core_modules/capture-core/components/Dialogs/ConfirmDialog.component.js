@@ -17,7 +17,7 @@ type Props = {
     onConfirm: () => void,
 };
 
-class ConfirmDialog extends Component<Props> {
+export class ConfirmDialog extends Component<Props> {
     render() {
         const {
             open,
@@ -52,5 +52,3 @@ class ConfirmDialog extends Component<Props> {
         );
     }
 }
-
-export default (ConfirmDialog);

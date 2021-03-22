@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Search from './Search.component';
-import Selected from './Selected.component';
+import { Search } from './Search.component';
+import { Selected } from './Selected.component';
 import type { User } from './types';
 
 const getStyles = (theme: Theme) => ({
@@ -25,7 +25,7 @@ type Props = {
     usernameOnlyMode?: boolean,
 };
 
-const UserField = (props: Props) => {
+const UserFieldPlain = (props: Props) => {
     const {
         classes,
         value,
@@ -87,4 +87,4 @@ const UserField = (props: Props) => {
     );
 };
 
-export default withStyles(getStyles)(UserField);
+export const UserField = withStyles(getStyles)(UserFieldPlain);

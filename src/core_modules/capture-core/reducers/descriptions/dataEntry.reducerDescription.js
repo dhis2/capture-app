@@ -7,7 +7,7 @@ import {
     loadNewActionTypes,
     loadEditActionTypes,
 } from '../../components/DataEntry';
-import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../components/DataEntry/common/getDataEntryKey';
 
 export const dataEntriesDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {

@@ -15,7 +15,7 @@ import {
     sortLabelDirections,
     sorLabelPlacements,
 } from 'capture-ui';
-import SortLabelWrapper from '../../DataTable/SortLabelWrapper.component';
+import { SortLabelWrapper } from '../../DataTable/SortLabelWrapper.component';
 import { dataElementTypes } from '../../../metaData';
 import type { OptionSet } from '../../../metaData';
 import { LoadingMask } from '../../LoadingMasks';

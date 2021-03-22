@@ -13,7 +13,7 @@ import type { HOCProps, Props } from './TeiRegistrationEntry.types';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
-import withErrorMessagePostProcessor from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import { urlArguments } from '../../../utils/url';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>

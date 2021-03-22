@@ -32,4 +32,4 @@ const makeStateToProps = () => {
 };
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeStateToProps, () => ({}))(WarningsSection);
+export /*coming back to this later*/ default connect(makeStateToProps, () => ({}))(WarningsSection);

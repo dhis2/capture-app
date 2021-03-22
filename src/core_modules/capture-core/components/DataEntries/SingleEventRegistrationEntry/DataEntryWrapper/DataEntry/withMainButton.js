@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import Tooltip from '@material-ui/core/Tooltip';
 import newEventSaveTypes from './newEventSaveTypes';
-import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import { type RenderFoundation } from '../../../../../metaData';
 import { SimpleSplitButton } from '../../../../Buttons';
-import getDataEntryHasChanges from '../../getNewEventDataEntryHasChanges';
+import { getDataEntryHasChanges } from '../../getNewEventDataEntryHasChanges';
 
 type Props = {
     onSave: (saveType: $Values<typeof newEventSaveTypes>) => void,
@@ -126,7 +126,7 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
 
 const mapDispatchToProps = () => ({});
 
-export default () =>
+export const withMainButton = () =>
     (InnerComponent: React.ComponentType<any>) =>
 
         // $FlowFixMe[missing-annot] automated comment

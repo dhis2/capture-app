@@ -1,8 +1,8 @@
 // @flow
 import React, { useCallback, useImperativeHandle, forwardRef } from 'react';
-import ExistingTemplateDialog from './ExistingTemplateDialog.component';
-import NewTemplateDialog from './NewTemplateDialog.component';
-import DeleteConfirmationDialog from './DeleteConfirmationDialog.component';
+import { ExistingTemplateDialog } from './ExistingTemplateDialog.component';
+import { NewTemplateDialog } from './NewTemplateDialog.component';
+import { DeleteConfirmationDialog } from './DeleteConfirmationDialog.component';
 import { SharingDialog } from './SharingDialog.component';
 import { dialogModes } from './dialogModes';
 import type { SharingSettings } from '../workingLists.types';

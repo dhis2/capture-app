@@ -1,2 +1,2 @@
 // @flow
-export { default as OptionSetFilter } from './OptionSetFilterManager.component';
+export { OptionSetFilterManager as OptionSetFilter } from './OptionSetFilterManager.component';

@@ -18,7 +18,7 @@ const styles = () => ({
     },
 });
 
-class OptionsSelectVirtualizedOption extends Component<Props> {
+class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
     static defaultContainerStyle = {
         cursor: 'pointer',
         paddingLeft: 5,
@@ -57,4 +57,4 @@ class OptionsSelectVirtualizedOption extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(OptionsSelectVirtualizedOption);
+export const OptionsSelectVirtualizedOption = withStyles(styles)(OptionsSelectVirtualizedOptionPlain);

@@ -16,7 +16,7 @@ type Props = {
     programId?: string,
 };
 
-class ExistingTEIContents extends React.Component<Props> {
+export class ExistingTEIContents extends React.Component<Props> {
     handleLink = () => {
         this.props.onLink(this.props.attributeValues);
     }
@@ -61,5 +61,3 @@ class ExistingTEIContents extends React.Component<Props> {
         );
     }
 }
-
-export default ExistingTEIContents;

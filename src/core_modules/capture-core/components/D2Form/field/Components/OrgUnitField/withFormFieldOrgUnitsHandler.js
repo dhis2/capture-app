@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default () =>
+export const withFormFieldOrgUnitsHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowFixMe[missing-annot] automated comment
         connect(mapStateToProps, mapDispatchToProps)(getFormFieldOrgUnitsHandler(InnerComponent));

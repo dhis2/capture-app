@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import TextField from '../../FormFields/Generic/D2TextField.component';
-import withInternalChangeHandler from '../../FormFields/withInternalChangeHandler';
+import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
+import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
     value: ?string,
@@ -12,7 +12,7 @@ type Props = {
     errorClass: string,
 };
 
-class MinNumericFilter extends Component<Props> {
+class MinNumericFilterPlain extends Component<Props> {
     static getValueObject(value: string) {
         return { min: value.trim() };
     }
@@ -32,7 +32,7 @@ class MinNumericFilter extends Component<Props> {
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <TextField
+                <D2TextField
                     onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}
                     placeholder={i18n.t('Min')}
@@ -47,4 +47,4 @@ class MinNumericFilter extends Component<Props> {
     }
 }
 
-export default withInternalChangeHandler()(MinNumericFilter);
+export const MinNumericFilter = withInternalChangeHandler()(MinNumericFilterPlain);

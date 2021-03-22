@@ -1,15 +1,15 @@
 // @flow
 import * as React from 'react';
-import withInternalFilterHandler from './withInternalFilterHandler';
+import { withInternalFilterHandler } from './withInternalFilterHandler';
 import { get as getOrgUnitRoots } from '../orgUnitRoots.store';
-import scopes from './scopes.const';
+import { orgUnitFieldScopes } from './scopes.const';
 
 type Props = {
-    scope: $Values<typeof scopes>,
+    scope: $Values<typeof orgUnitFieldScopes>,
 };
 
 // Wraps withInternalFilterHandler. Passes on defaultRoots from the organisation unit store based on the input scope.
-export default () =>
+export const withOrgUnitFieldImplicitRootsFilterHandler = () =>
     (InnerComponent: React.ComponentType<any>) => {
         const InternalFilterHandlerHOC = withInternalFilterHandler()(InnerComponent);
 
@@ -22,8 +22,8 @@ export default () =>
                     getOrgUnitRoots(OrgUnitImplicitInternalFilterHandlerHOC.DEFAULT_ROOTS_DATA[scope]) || [];
             }
             static DEFAULT_ROOTS_DATA = {
-                [scopes.USER_CAPTURE]: 'captureRoots',
-                [scopes.USER_SEARCH]: 'search',
+                [orgUnitFieldScopes.USER_CAPTURE]: 'captureRoots',
+                [orgUnitFieldScopes.USER_SEARCH]: 'search',
             };
 
             render() {

@@ -25,7 +25,7 @@ const isValidIncidentDate = (value: string, isFutureDateAllowed: boolean) => {
 };
 
 
-const getValidatorContainers = (isFutureIncidentDateAllowed: boolean) => {
+export const getIncidentDateValidatorContainer = (isFutureIncidentDateAllowed: boolean) => {
     const validatorContainers = [
         {
             validator: hasValue,
@@ -39,5 +39,3 @@ const getValidatorContainers = (isFutureIncidentDateAllowed: boolean) => {
     ];
     return validatorContainers;
 };
-
-export default getValidatorContainers;

@@ -28,7 +28,7 @@ type Props = {
     }
 };
 
-const ProgressButton = (props: Props) => {
+const ProgressButtonPlain = (props: Props) => {
     const { inProgress, children, classes, ...buttonProps } = props;
 
     if (inProgress) {
@@ -59,4 +59,4 @@ const ProgressButton = (props: Props) => {
     );
 };
 
-export default withStyles(styles)(ProgressButton);
+export const ProgressButton = withStyles(styles)(ProgressButtonPlain);

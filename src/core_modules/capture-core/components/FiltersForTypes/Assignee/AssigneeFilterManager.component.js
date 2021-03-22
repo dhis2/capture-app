@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import AssigneeFilter from './AssigneeFilter.component';
+import { AssigneeFilter } from './AssigneeFilter.component';
 import type { AssigneeFilterData } from './types';
 
 type Props = {
@@ -15,7 +15,7 @@ type State = {
     },
 };
 
-class AssigneeFilterManager extends React.Component<Props, State> {
+export class AssigneeFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(filter: ?AssigneeFilterData) {
         if (!filter) {
             return undefined;
@@ -54,5 +54,3 @@ class AssigneeFilterManager extends React.Component<Props, State> {
         );
     }
 }
-
-export default AssigneeFilterManager;

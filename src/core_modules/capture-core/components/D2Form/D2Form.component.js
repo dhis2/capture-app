@@ -3,7 +3,7 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import D2SectionContainer from './D2Section.container';
+import { D2SectionContainer } from './D2Section.container';
 import type { Props, PropsForPureComponent } from './D2Form.types';
 import { type Section } from '../../metaData';
 

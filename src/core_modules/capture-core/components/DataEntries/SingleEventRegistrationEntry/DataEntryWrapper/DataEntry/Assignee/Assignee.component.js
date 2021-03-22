@@ -29,7 +29,7 @@ type Props = {
     orientation: string
 };
 
-const Assignee = (props: Props) => {
+const AssigneePlain = (props: Props) => {
     const { classes, orientation, ...passOnProps } = props;
     return (
         <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
@@ -43,4 +43,4 @@ const Assignee = (props: Props) => {
         </div>);
 };
 
-export default withStyles(getStyles)(Assignee);
+export const Assignee = withStyles(getStyles)(Assignee);

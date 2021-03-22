@@ -4,7 +4,7 @@ import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { CoordinateFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
-const getCoordinateField = (metaData: MetaDataElement) => {
+export const getCoordinateFieldConfigForCustomForm = (metaData: MetaDataElement) => {
     const props = createProps({
         orientation: orientations.HORIZONTAL,
         shrinkDisabled: false,
@@ -15,5 +15,3 @@ const getCoordinateField = (metaData: MetaDataElement) => {
         props,
     }, metaData);
 };
-
-export default getCoordinateField;

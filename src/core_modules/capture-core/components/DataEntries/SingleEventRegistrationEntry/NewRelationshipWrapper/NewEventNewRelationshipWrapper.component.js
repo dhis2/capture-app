@@ -4,8 +4,8 @@ import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
 import NewRelationship from '../../../Pages/NewRelationship/NewRelationship.container';
-import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
-import LinkButton from '../../../Buttons/LinkButton.component';
+import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
+import { LinkButton } from '../../../Buttons/LinkButton.component';
 
 
 const getStyles = theme => ({
@@ -131,4 +131,4 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(getStyles)(NewEventNewRelationshipWrapper);
+export const NewRelationshipWrapperComponent = withStyles(getStyles)(NewEventNewRelationshipWrapper);

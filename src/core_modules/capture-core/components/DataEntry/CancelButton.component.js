@@ -2,7 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../Buttons';
-import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
+import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 
 type Props = {
     dataEntryHasChanges: boolean,
@@ -13,7 +13,7 @@ type State = {
     dialogOpen: boolean,
 }
 
-export default class CancelButton extends React.Component<Props, State> {
+export class CancelButton extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = { dialogOpen: false };

@@ -22,7 +22,7 @@ type Props = {
     treeKey: string,
 };
 
-class OrgUnitTree extends React.Component<Props> {
+class OrgUnitTreePlain extends React.Component<Props> {
     getExpandedItems() {
         const { roots } = this.props;
         if (roots && roots.length === 1) {
@@ -55,4 +55,4 @@ class OrgUnitTree extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(withLoadingIndicator(() => ({ margin: 4 }), () => ({ size: 20 }))(OrgUnitTree));
+export const OrgUnitField = withStyles(getStyles)(withLoadingIndicator(() => ({ margin: 4 }), () => ({ size: 20 }))(OrgUnitTreePlain));

@@ -1,7 +1,7 @@
 // @flow
 export {
     openDataEntryForNewEnrollmentBatchAsync,
-    sectionKeys as sectionKeysForEnrollmentDataEntry,
+    sectionKeysForEnrollmentDataEntry,
     runRulesOnUpdateFieldBatch,
     openBatchActionTypes as enrollmentOpenBatchActionTypes,
     enrollmentBatchActionTypes,

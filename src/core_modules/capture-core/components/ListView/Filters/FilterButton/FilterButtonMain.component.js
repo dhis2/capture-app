@@ -5,7 +5,7 @@ import Popover from '@material-ui/core/Popover';
 import ArrowDownwardIcon from '@material-ui/icons/KeyboardArrowDown';
 import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Button } from '../../../Buttons';
-import ActiveFilterButton from './ActiveFilterButton.component';
+import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
 import type { UpdateFilter, ClearFilter } from '../../types';
 import type { FilterData, Options } from '../../../FiltersForTypes';

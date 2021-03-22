@@ -5,7 +5,7 @@ import { withFilters } from './withFilters';
 import { ListPagination } from '../Pagination';
 import { ColumnSelector } from '../ColumnSelector';
 import { withEndColumnMenu } from '../withEndColumnMenu';
-import DialogLoadingMask from '../../LoadingMasks/DialogLoadingMask.component';
+import { DialogLoadingMask } from '../../LoadingMasks/DialogLoadingMask.component';
 import { OnlineList } from '../../List';
 import { ListViewMenu } from '../Menu';
 import type { Props } from './listViewMain.types';

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
-import EditEventDataEntry from './EditEventDataEntry.component';
+import { EditEventDataEntry } from './EditEventDataEntry.component';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
@@ -97,6 +97,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(
+export const EditEventDataEntry = connect(mapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(withErrorMessageHandler()(EditEventDataEntry)),
 );

@@ -57,7 +57,7 @@ type PreTeiDataEntryProps = {
     onGetUnsavedAttributeValues?: ?Function,
 };
 
-class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
+export class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
     getValidationContext = () => {
         const { orgUnit, onGetUnsavedAttributeValues } = this.props;
         return {
@@ -95,5 +95,3 @@ class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
         );
     }
 }
-
-export default PreTeiDataEntry;

@@ -36,7 +36,7 @@ import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 import getStageForEventProgram from '../../../../../../metaData/helpers/EventProgram/getStageFromProgramId';
-import getDataEntryKey from '../../../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';

@@ -33,7 +33,7 @@ type Props = {
  * Converts icon objects in options to React nodes, with property key iconRight.
 */
 
-export default () =>
+export const withOptionsIconElement = () =>
     (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
         class CreateOptionsIconElementHOC extends React.Component<Props> {
             options: Array<{icon: React.Node}>;

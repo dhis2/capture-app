@@ -10,7 +10,7 @@ type Props = {
     focusInputOnMount: boolean,
 };
 
-const Selected = (props: Props) => {
+export const Selected = (props: Props) => {
     const { text, onClear, focusInputOnMount } = props;
     const inputDomElement = React.useRef();
 
@@ -56,5 +56,3 @@ const Selected = (props: Props) => {
         </div>
     );
 };
-
-export default Selected;

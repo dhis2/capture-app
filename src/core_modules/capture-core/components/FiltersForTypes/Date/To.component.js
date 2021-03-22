@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
+import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import { anchorPositions, modes, absoluteDirections } from '../../FormFields/DateAndTime/D2Date/d2DatePopup.const';
-import withInternalChangeHandler from '../../FormFields/withInternalChangeHandler';
+import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
     value: ?string,
@@ -15,7 +15,7 @@ type Props = {
     onFocusUpdateButton: () => void,
 };
 
-class ToDateFilter extends Component<Props> {
+class ToDateFilterPlain extends Component<Props> {
     static getValueObject(value: string) {
         return { to: value.trim() };
     }
@@ -71,4 +71,4 @@ class ToDateFilter extends Component<Props> {
     }
 }
 
-export default withInternalChangeHandler()(ToDateFilter);
+export const ToDateFilter = withInternalChangeHandler()(ToDateFilterPlain);

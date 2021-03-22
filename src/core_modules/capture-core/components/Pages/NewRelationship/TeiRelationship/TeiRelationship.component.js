@@ -6,7 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { SelectedRelationshipType } from '../newRelationship.types';
-import Button from '../../../Buttons/Button.component';
+import { Button } from '../../../Buttons/Button.component';
 import { RegisterTei } from '../RegisterTei';
 import { TeiSearch } from '../../../TeiSearch/TeiSearch.container';
 import { TeiRelationshipSearchResults } from './SearchResults/TeiRelationshipSearchResults.component';

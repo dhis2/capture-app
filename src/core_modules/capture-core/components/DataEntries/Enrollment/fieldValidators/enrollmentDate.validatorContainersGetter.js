@@ -24,7 +24,7 @@ const isValidEnrollmentDate = (value: string, isFutureDateAllowed: boolean) => {
     };
 };
 
-const getValidatorContainers = (isFutureEnrollmentDateAllowed: boolean) => {
+export const getEnrollmentDateValidatorContainer = (isFutureEnrollmentDateAllowed: boolean) => {
     const validatorContainers = [
         {
             validator: hasValue,
@@ -38,5 +38,3 @@ const getValidatorContainers = (isFutureEnrollmentDateAllowed: boolean) => {
     ];
     return validatorContainers;
 };
-
-export default getValidatorContainers;

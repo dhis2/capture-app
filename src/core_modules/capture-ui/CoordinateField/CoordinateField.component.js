@@ -10,7 +10,7 @@ import { AddLocationIcon } from '../Icons';
 import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.module.css';
 import orientations from '../constants/orientations.const';
-import Button from '../Buttons/Button.component';
+import { Button } from '../Buttons/Button.component';
 
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 

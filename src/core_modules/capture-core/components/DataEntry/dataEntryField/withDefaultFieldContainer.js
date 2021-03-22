@@ -32,6 +32,6 @@ const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, cust
         }
     };
 
-export default (customStyles?: ?Object) =>
+export const withDefaultFieldContainer = (customStyles?: ?Object) =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(styles)(getFieldContainerBuilder(InnerComponent, customStyles));

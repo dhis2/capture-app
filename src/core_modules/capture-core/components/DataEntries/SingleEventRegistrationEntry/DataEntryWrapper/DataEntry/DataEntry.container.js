@@ -3,7 +3,7 @@ import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
-import DataEntry from './DataEntry.component';
+import { DataEntry } from './DataEntry.component';
 import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import {
     startAsyncUpdateFieldForNewEvent,
@@ -23,7 +23,7 @@ import {
 import { type RenderFoundation } from '../../../../../metaData';
 import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../../HOC/withErrorMessageHandler';
-import typeof saveTypes from './newEventSaveTypes';
+import typeof { saveTypes } from './newEventSaveTypes';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -107,6 +107,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeMapStateToProps, mapDispatchToProps)(
+export const DataEntry = connect(makeMapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(withErrorMessageHandler()(DataEntry)),
 );

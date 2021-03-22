@@ -2,16 +2,16 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import DataEntry from '../../../../components/DataEntry/DataEntry.container';
-import withCancelButton from '../../../../components/DataEntry/withCancelButton';
-import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
-import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
-import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
+import { DataEntry } from '../../../../components/DataEntry/DataEntry.container';
+import { withCancelButton } from '../../../../components/DataEntry/withCancelButton';
+import { withDataEntryField } from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
+import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
 import { type RenderFoundation } from '../../../../metaData';
-import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
-import withMainButton from './withMainButton';
-import withFilterProps from '../../../FormFields/New/HOC/withFilterProps';
-import withDataEntryNotesHandler from '../../../../components/DataEntry/dataEntryNotes/withDataEntryNotesHandler';
+import { withDataEntryFieldIfApplicable } from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
+import { withMainButton } from './withMainButton';
+import { withFilterProps } from '../../../FormFields/New/HOC/withFilterProps';
+import { withDataEntryNotesHandler } from '../../../../components/DataEntry/dataEntryNotes/withDataEntryNotesHandler';
 import Notes from '../../../Notes/Notes.component';
 
 import {
@@ -33,12 +33,12 @@ import {
     withDefaultShouldUpdateInterface,
 } from '../../../FormFields/New';
 
-import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
-import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
-import withFeedbackOutput from '../../../DataEntry/dataEntryOutput/withFeedbackOutput';
-import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';
-import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOutput';
-import withBrowserBackWarning from '../../../DataEntry/withBrowserBackWarning';
+import { inMemoryFileStore } from '../../../DataEntry/file/inMemoryFileStore';
+import { withIndicatorOutput } from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
+import { withFeedbackOutput } from '../../../DataEntry/dataEntryOutput/withFeedbackOutput';
+import { withErrorOutput } from '../../../DataEntry/dataEntryOutput/withErrorOutput';
+import { withWarningOutput } from '../../../DataEntry/dataEntryOutput/withWarningOutput';
+import { withBrowserBackWarning } from '../../../DataEntry/withBrowserBackWarning';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 
 const getStyles = (theme: Theme) => ({
@@ -334,7 +334,7 @@ const dataEntrySectionDefinitions = {
     },
 };
 
-class EditEventDataEntry extends Component<Props> {
+class EditEventDataEntryPlain extends Component<Props> {
     fieldOptions: { theme: Theme };
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
@@ -372,4 +372,4 @@ class EditEventDataEntry extends Component<Props> {
 }
 
 
-export default withStyles(getStyles)(EditEventDataEntry);
+export const EditEventDataEntry = withStyles(getStyles)(EditEventDataEntryPlain);

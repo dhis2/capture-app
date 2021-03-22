@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import D2CustomForm from './D2CustomForm.component';
+import { D2CustomForm } from './D2CustomForm.component';
 
 import type { CustomForm as MetadataCustomForm } from '../../../metaData';
 
@@ -8,7 +8,7 @@ type Props = {
     customForm: MetadataCustomForm,
 };
 
-export default () => (InnerComponent: React.ComponentType<any>) =>
+export const withCustomForm = () => (InnerComponent: React.ComponentType<any>) =>
     class CustomFormHOC extends React.Component<Props> {
         render() {
             const { customForm: customFormSpecs, ...passOnProps } = this.props;

@@ -1,2 +1,2 @@
 // @flow
-export { default as TrueOnlyFilter } from './TrueOnlyFilterManager.component';
+export { TrueOnlyFilterManager as TrueOnlyFilter } from './TrueOnlyFilterManager.component';

@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import getEventDateValidatorContainers from '../../../EditEvent/DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import { getEventDateValidatorContainers } from '../../../EditEvent/DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import type { RenderFoundation } from '../../../../../metaData';
-import withMainButton from '../../../EditEvent/DataEntry/withMainButton';
-import withFilterProps from '../../../../FormFields/New/HOC/withFilterProps';
+import { withMainButton } from '../../../EditEvent/DataEntry/withMainButton';
+import { withFilterProps } from '../../../../FormFields/New/HOC/withFilterProps';
 
 import {
     DataEntry,
@@ -31,7 +31,7 @@ import {
     withDefaultShouldUpdateInterface,
 } from '../../../../FormFields/New';
 
-import inMemoryFileStore from '../../../../DataEntry/file/inMemoryFileStore';
+import { inMemoryFileStore } from '../../../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../../../EditEvent/DataEntry/dataEntryFieldLabels.module.css';
 
 const getStyles = (theme: Theme) => ({

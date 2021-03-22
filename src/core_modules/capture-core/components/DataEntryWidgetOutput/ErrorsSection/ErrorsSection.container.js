@@ -26,4 +26,4 @@ const makeStateToProps = () => {
 };
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeStateToProps, () => ({}))(ErrorsSection);
+export /*coming back to this later*/ default connect(makeStateToProps, () => ({}))(ErrorsSection);

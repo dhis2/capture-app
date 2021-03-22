@@ -8,8 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import { colors } from '@dhis2/ui';
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 
-import ProgramSelector from './Program/ProgramSelector.component';
-import OrgUnitSelector from './OrgUnitSelector.component';
+import { ProgramSelector } from './Program/ProgramSelector.component';
+import { OrgUnitSelector } from './OrgUnitSelector.component';
 import { ActionButtons } from './ActionButtons.component';
 import { SingleLockedSelect } from './SingleLockedSelect.component';
 
@@ -58,7 +58,7 @@ type Props = {
     enrollmentLockedSelectReady: boolean,
 };
 
-class QuickSelector extends Component<Props> {
+class QuickSelectorPlain extends Component<Props> {
     static getSelectedProgram(selectedProgramId: string) {
         return programs.get(selectedProgramId) || {};
     }
@@ -185,4 +185,4 @@ class QuickSelector extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(QuickSelector);
+export const QuickSelector = withStyles(styles)(QuickSelectorPlain);

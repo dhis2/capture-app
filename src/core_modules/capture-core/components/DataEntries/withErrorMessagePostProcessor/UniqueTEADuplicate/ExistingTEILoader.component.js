@@ -2,7 +2,7 @@
 import React from 'react';
 import { makeCancelablePromise } from 'capture-core-utils';
 import { getApi } from '../../../../d2/d2Instance';
-import ExistingTEIContents from './ExistingTEIContents.container';
+import ExistingTEIContents from './;
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import type { ErrorData } from './uniqueTEADuplicate.types';
 
@@ -19,7 +19,7 @@ type State = {
     attributeValues: ?{[id: string]: any},
 };
 
-class ExistingTEILoader extends React.Component<Props, State> {
+export class ExistingTEILoader extends React.Component<Props, State> {
     cancelablePromise: any;
     constructor(props: Props) {
         super(props);
@@ -140,5 +140,3 @@ class ExistingTEILoader extends React.Component<Props, State> {
         );
     }
 }
-
-export default ExistingTEILoader;

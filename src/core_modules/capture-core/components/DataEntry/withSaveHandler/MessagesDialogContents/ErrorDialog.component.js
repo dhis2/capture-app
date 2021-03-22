@@ -16,7 +16,7 @@ type Props = {
     ...CssClasses
 };
 
-class ErrorDialog extends React.Component<Props> {
+class ErrorDialogPlain extends React.Component<Props> {
     static getItemWithName(name: string, message: string) {
         return (
             <React.Fragment>
@@ -95,4 +95,4 @@ const styles = () => ({
     },
 });
 
-export default withStyles(styles)(ErrorDialog);
+export const ErrorDialog = withStyles(styles)(ErrorDialog);

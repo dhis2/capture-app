@@ -22,7 +22,7 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {};
 
-class SelectionBoxes extends React.Component<Props> {
+class SelectionBoxesPlain extends React.Component<Props> {
     render() {
         const { ...passOnProps } = this.props;
         return (
@@ -33,4 +33,4 @@ class SelectionBoxes extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(SelectionBoxes);
+export const SelectionBoxes = withStyles(getStyles)(SelectionBoxesPlain);

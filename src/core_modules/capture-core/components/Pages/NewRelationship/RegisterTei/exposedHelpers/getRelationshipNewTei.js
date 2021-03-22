@@ -10,8 +10,8 @@ import {
 } from '../../../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../../../converters';
 import getDisplayName from '../../../../../trackedEntityInstances/getDisplayName';
-import convertDataEntryValuesToClientValues from '../../../../DataEntry/common/convertDataEntryValuesToClientValues';
-import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
+import { convertDataEntryValuesToClientValues } from '../../../../DataEntry/common/convertDataEntryValuesToClientValues';
+import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 
 function getTrackerProgramMetadata(programId: string) {
     const program = getTrackerProgramThrowIfNotFound(programId);

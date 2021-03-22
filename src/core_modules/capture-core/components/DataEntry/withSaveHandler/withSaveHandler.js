@@ -10,7 +10,7 @@ import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { validationStrategies } from '../../../metaData/RenderFoundation/renderFoundation.const';
 import { saveValidationFailed, saveAbort } from '../actions/dataEntry.actions';
-import getDataEntryKey from '../common/getDataEntryKey';
+import { getDataEntryKey } from '../common/getDataEntryKey';
 import { type RenderFoundation } from '../../../metaData';
 import { MessagesDialogContents } from './MessagesDialogContents';
 import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
@@ -301,7 +301,7 @@ const getSaveHandler = (
     return connect(makeStateToProps, mapDispatchToProps)(SaveHandlerHOC);
 };
 
-export default (
+export const withSaveHandler = (
     options?: {
         onIsCompleting?: IsCompletingFn,
         onFilterProps?: FilterPropsFn,

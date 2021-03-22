@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import defaultClasses from './searchSuggestions.module.css';
-import SearchSuggestionsUp from './SearchSuggestionsUp.component';
-import SearchSuggestion from './SearchSuggestion.component';
+import { SearchSuggestionsUp } from './SearchSuggestionsUp.component';
+import { SearchSuggestions } from './SearchSuggestion.component';
 import type { User } from './types';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
     useUpwardList?: ?boolean,
 };
 
-class UserSearchSuggestions extends React.Component<Props> {
+export class UserSearchSuggestions extends React.Component<Props> {
     static renderSuggestions(
         suggestions: Array<User>,
         query: string,
@@ -69,5 +69,3 @@ class UserSearchSuggestions extends React.Component<Props> {
         );
     }
 }
-
-export default UserSearchSuggestions;

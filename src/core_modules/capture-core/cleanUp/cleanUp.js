@@ -9,7 +9,7 @@ function getActionToCleanUpInLoadingList(state: ReduxState) {
     return null;
 }
 
-export default function cleanUp(store: ReduxStore) {
+export const cleanUpCommon = function cleanUp(store: ReduxStore) {
     const cleanUpActions = [getActionToCleanUpInLoadingList(store.getState())]
         .filter(value => value);
 

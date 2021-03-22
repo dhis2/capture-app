@@ -1,6 +1,6 @@
 // @flow
 import { withTransformPropName } from '../../../../../HOC';
-import UserNameField from '../../../../FormFields/UserField/UserField.component';
+import { UserField } from '../../../../FormFields/UserField/UserField.component';
 import {
     withGotoInterface,
     withHideCompatibility,
@@ -19,7 +19,7 @@ import customFormStyles from './userNameFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
-export default withGotoInterface()(
+export const UserNameFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(
@@ -30,7 +30,7 @@ export default withGotoInterface()(
                                 withCustomElementContainer(getContainerClass)(
                                     withTransformPropName(['onBlur', 'onSet'])(
                                         withInternalChangeHandler()(
-                                            UserNameField,
+                                            UserField,
                                         ),
                                     ),
                                 ),

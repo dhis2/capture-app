@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import CancelButton from './CancelButton.container';
+import { CancelButton } from './CancelButton.container';
 
 type Props = {
     id: string,
@@ -43,7 +43,7 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
     };
 
 
-export default (optionsFn?: ?OptionsFn) =>
+export const withCancelButton = (optionsFn?: ?OptionsFn) =>
     (InnerComponent: React.ComponentType<any>) =>
 
         getCancelButton(InnerComponent, optionsFn);

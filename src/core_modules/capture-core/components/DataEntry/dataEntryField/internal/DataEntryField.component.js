@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { updateField } from '../../actions/dataEntry.actions';
 import { getValidationError } from './dataEntryField.utils';
-import getDataEntryKey from '../../common/getDataEntryKey';
+import { getDataEntryKey } from '../../common/getDataEntryKey';
 import type { ValidatorContainer } from './dataEntryField.utils';
 
 type ValueMetaInput = {
@@ -152,4 +152,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(DataEntryField);
+export const DataEntryField = connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(DataEntryField);

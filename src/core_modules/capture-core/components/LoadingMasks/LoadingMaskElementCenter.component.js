@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import LoadingMask from './LoadingMask.component';
+import { LoadingMask } from './LoadingMask.component';
 
 const styles = () => ({
     container: {
@@ -19,7 +19,7 @@ type Props = {
     containerStyle?: ?Object,
 };
 
-const LoadingMaskForPage = (props: Props) => {
+const LoadingMaskForPagePlain = (props: Props) => {
     const { containerStyle, classes, ...passOnProps } = props;
     return (
         <div
@@ -33,4 +33,4 @@ const LoadingMaskForPage = (props: Props) => {
     );
 };
 
-export default withStyles(styles)(LoadingMaskForPage);
+export const LoadingMaskForPage = withStyles(styles)(LoadingMaskForPagePlain);

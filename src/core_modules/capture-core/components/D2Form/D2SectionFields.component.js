@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import type FormBuilder, { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
-import FormBuilderContainer from './FormBuilder.container';
-import withDivider from './FieldDivider/withDivider';
-import withAlternateBackgroundColors from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
-import withCustomForm from './D2CustomForm/withCustomForm';
-import buildField from './field/buildField';
+import { FormBuilderContainer } from './FormBuilder.container';
+import { withDivider } from './FieldDivider/withDivider';
+import { withAlternateBackgroundColors } from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
+import { withCustomForm } from './D2CustomForm/withCustomForm';
+import { buildField } from './field/buildField';
 import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
 import type { DataElement, CustomForm } from '../../metaData';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
@@ -55,7 +55,7 @@ type Props = {
     viewMode?: ?boolean,
 };
 
-class D2SectionFields extends Component<Props> {
+export class D2SectionFields extends Component<Props> {
     static buildFormFields(props: Props): Array<FieldConfig> {
         const { fieldsMetaData, customForm, fieldOptions } = props;
 
@@ -265,5 +265,3 @@ class D2SectionFields extends Component<Props> {
         );
     }
 }
-
-export default D2SectionFields;

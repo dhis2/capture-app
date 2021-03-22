@@ -9,7 +9,7 @@ type Props = {
     ...PassOnProps,
 };
 
-const NewTemplateTextField = (props: Props) => {
+export const NewTemplateTextField = (props: Props) => {
     const { ...passOnProps } = props;
     const [name, setName] = React.useState('');
 
@@ -29,5 +29,3 @@ const NewTemplateTextField = (props: Props) => {
         />
     );
 };
-
-export default NewTemplateTextField;

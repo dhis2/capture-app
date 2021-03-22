@@ -4,7 +4,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import { type InputSearchGroup } from '../../metaData';
-import getDataEntryKey from './common/getDataEntryKey';
+import { getDataEntryKey } from './common/getDataEntryKey';
 import {
     filterSearchGroupForCountSearch,
     filterSearchGroupForCountSearchToBeExecuted,
@@ -178,7 +178,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default (
+export const withSearchGroups = (
     onGetSearchGroups: SearchGroupsGetter,
     onGetSearchContext?: ?SearchContextGetter,
 ) =>
