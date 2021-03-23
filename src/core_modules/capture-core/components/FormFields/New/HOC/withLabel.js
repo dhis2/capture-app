@@ -158,6 +158,7 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
             </Tooltip>
         );
     };
+
     const LabelWithStyles = withStyles(getStylesLabel)(Label);
 
     const ProjectLabelHOC = withStyles(getStyles)((props: Props) => {
