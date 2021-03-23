@@ -83,7 +83,7 @@ And for a tracker program the page navigation should show that you are on the fi
 Scenario: Show teis ordered descendingly by first name 
 Given you open the main page with Ngelehun and child programme context
 When you click the first name column header
-Then the sort arrow should indicate descending order
-And teis should be retrieved from the api ordered descendingly by first name
+Then the sort arrow should indicate ascending order
+And teis should be retrieved from the api ordered ascendingly by first name
 And the list should display the teis retrieved from the api
 And for a tracker program the page navigation should show that you are on the first page
