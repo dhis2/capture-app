@@ -83,7 +83,7 @@ class EnrollmentFactory {
         }
 
         const featureType = teType.featureType;
-        if (!featureType || !['POINT', 'POLYGON'].includes(featureType)) {
+        if (!featureType || !['POINT', 'POLYGON2'].includes(featureType)) {
             return null;
         }
 
