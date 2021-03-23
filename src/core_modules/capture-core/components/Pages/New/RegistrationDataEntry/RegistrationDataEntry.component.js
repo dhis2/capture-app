@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { Grid, Paper, withStyles } from '@material-ui/core';
+import { useLocation } from 'react-router';
 import type { Props } from './RegistrationDataEntry.types';
 import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
 import { scopeTypes } from '../../../../metaData';
@@ -57,6 +58,7 @@ const DialogButtons = ({ onCancel, onSave }) => (<>
 </>);
 
 const CardListButton = (({ teiId, orgUnitId }) => {
+    const { pathname, search } = useLocation();
     const scopeHierarchy = useSelector(({ router: { location: { query } } }) => (query.programId ? 'PROGRAM' : 'TRACKED_ENTITY_TYPE'));
     const selectedScopeId: string = useSelector(({ router: { location: { query } } }) => query.trackedEntityTypeId || query.programId);
     const scopeSearchParam = `${scopeHierarchy.toLowerCase()}=${selectedScopeId}`;
@@ -65,7 +67,7 @@ const CardListButton = (({ teiId, orgUnitId }) => {
         <Button
             small
             dataTest="view-dashboard-button"
-            onClick={() => navigateToTrackedEntityDashboard(teiId, orgUnitId, scopeSearchParam)}
+            onClick={() => navigateToTrackedEntityDashboard(teiId, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
         >
             {i18n.t('View dashboard')}
         </Button>
