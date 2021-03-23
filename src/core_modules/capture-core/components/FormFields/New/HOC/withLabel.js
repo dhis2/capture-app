@@ -3,6 +3,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { withLabel as UIWithLabel } from 'capture-ui';
+import { Tooltip } from '@dhis2/ui';
 
 const getStyles = (theme: Theme) => ({
     label: {
@@ -16,8 +17,11 @@ const getStyles = (theme: Theme) => ({
 
 const getStylesLabel = (theme: Theme) => ({
     container: {
-        display: 'flex',
+        display: 'block',
         alignItems: 'center',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
     },
     required: {
         color: theme.palette.required,
@@ -135,11 +139,13 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
             <div
                 className={classes.container}
             >
-                <CalculatedLabel
-                    label={label || ''}
-                    required={required}
-                    requiredClass={classes.required}
-                />
+                <Tooltip content={label}>
+                    <CalculatedLabel
+                        label={label || ''}
+                        required={required}
+                        requiredClass={classes.required}
+                    />
+                </Tooltip>
                 <div
                     className={classes.iconContainer}
                 >
