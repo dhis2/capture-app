@@ -136,26 +136,26 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
         const { label, required, icon, classes } = props;
 
         return (
-            <div
-                className={classes.container}
-            >
-                <Tooltip content={label}>
+            <Tooltip content={label}>
+                <div
+                    className={classes.container}
+                >
                     <CalculatedLabel
                         label={label || ''}
                         required={required}
                         requiredClass={classes.required}
                     />
-                </Tooltip>
-                <div
-                    className={classes.iconContainer}
-                >
-                    <Icon
-                        icon={icon}
-                        label={label}
-                        iconClass={classes.icon}
-                    />
+                    <div
+                        className={classes.iconContainer}
+                    >
+                        <Icon
+                            icon={icon}
+                            label={label}
+                            iconClass={classes.icon}
+                        />
+                    </div>
                 </div>
-            </div>
+            </Tooltip>
         );
     };
     const LabelWithStyles = withStyles(getStylesLabel)(Label);
