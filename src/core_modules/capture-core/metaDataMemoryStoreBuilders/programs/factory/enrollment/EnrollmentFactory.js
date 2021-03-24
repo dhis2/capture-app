@@ -25,6 +25,7 @@ import type {
 import DataElementFactory from './DataElementFactory';
 import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
+import { setProgramId } from '../../../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 class EnrollmentFactory {
     static errorMessages = {
@@ -222,13 +223,13 @@ class EnrollmentFactory {
                 o.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
                 o.searchFoundation = this._buildInputSearchGroupFoundation(cachedProgram, searchGroup);
                 o.onSearch = (values: Object = {}, contextProps: Object = {}) => {
-                    const { orgUnitId, program } = contextProps;
+                    const { orgUnitId, programId } = contextProps;
                     return getApi()
                         .get(
                             'trackedEntityInstances/count.json',
                             {
                                 ou: orgUnitId,
-                                program,
+                                program: programId,
                                 ouMode: 'ACCESSIBLE',
                                 filter: Object
                                     .keys(values)

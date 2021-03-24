@@ -1,23 +1,20 @@
 // @flow
 import React from 'react';
 import { withTheme } from '@material-ui/core';
-import type { TeiRegistration } from '../../../../../../metaData';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import teiClasses from './trackedEntityInstance.module.css';
 import { TeiRegistrationEntry } from '../../../../../DataEntries';
 import { useSaveButtonText } from '../useSaveButtonText';
-
-type Props = {|
-    theme: Theme,
-    onSave: () => void,
-    teiRegistrationMetadata?: TeiRegistration,
-|};
+import type { Props } from './dataEntryTrackedEntityInstance.types';
 
 const RelationshipTrackedEntityInstance =
   ({
       theme,
       onSave,
       teiRegistrationMetadata = {},
+      duplicatesReviewPageSize,
+      renderDuplicatesDialogActions,
+      renderDuplicatesCardActions,
   }: Props) => {
       const fieldOptions = { theme, fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased };
       const { trackedEntityType } = teiRegistrationMetadata || {};
@@ -31,6 +28,9 @@ const RelationshipTrackedEntityInstance =
               saveButtonText={saveButtonText}
               fieldOptions={fieldOptions}
               onSave={onSave}
+              duplicatesReviewPageSize={duplicatesReviewPageSize}
+              renderDuplicatesDialogActions={renderDuplicatesDialogActions}
+              renderDuplicatesCardActions={renderDuplicatesCardActions}
           />
       );
   };

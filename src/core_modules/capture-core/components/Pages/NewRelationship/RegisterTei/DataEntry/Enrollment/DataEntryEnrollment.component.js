@@ -1,18 +1,11 @@
 // @flow
 import React from 'react';
 import { withTheme } from '@material-ui/core/styles';
-import type { Enrollment, RenderFoundation } from '../../../../../../metaData';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import enrollmentClasses from './enrollment.module.css';
 import { EnrollmentRegistrationEntry } from '../../../../../DataEntries';
 import { useSaveButtonText } from '../useSaveButtonText';
-
-type Props = {
-    theme: Theme,
-    programId: string,
-    enrollmentMetadata?: Enrollment,
-    onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
-};
+import type { Props } from './dataEntryEnrollment.types';
 
 const NewEnrollmentRelationship =
   ({
@@ -20,6 +13,9 @@ const NewEnrollmentRelationship =
       onSave,
       enrollmentMetadata,
       programId,
+      duplicatesReviewPageSize,
+      renderDuplicatesDialogActions,
+      renderDuplicatesCardActions,
   }: Props) => {
       const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
       const { trackedEntityType } = enrollmentMetadata || {};
@@ -33,6 +29,9 @@ const NewEnrollmentRelationship =
               saveButtonText={saveButtonText}
               fieldOptions={fieldOptions}
               onSave={onSave}
+              duplicatesReviewPageSize={duplicatesReviewPageSize}
+              renderDuplicatesDialogActions={renderDuplicatesDialogActions}
+              renderDuplicatesCardActions={renderDuplicatesCardActions}
           />
       );
   };
