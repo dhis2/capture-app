@@ -41,15 +41,7 @@ And('you fill in the first name with values that have exactly 5 duplicates', () 
 });
 
 When('you click create', () => {
-    cy.get('[data-test="possible-duplicates-found-button"]')
-        .should('exist');
-
     cy.get('[data-test="create-and-link-button"]')
-        .click();
-});
-
-When('you click the show possible duplicates button', () => {
-    cy.get('[data-test="possible-duplicates-found-button"]')
         .click();
 });
 
