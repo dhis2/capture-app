@@ -147,9 +147,10 @@ export const LockedSelector: ComponentType<OwnProps> =
 
       const dispatchOnResetOrgUnitId = useCallback(
           () => {
-              dispatch(resetOrgUnitIdBatchAction(customActionsOnOrgUnitIdReset, pageToPush));
+              const customActionExists = Boolean(customActionsOnProgramIdReset.length);
+              dispatch(resetOrgUnitIdBatchAction(customActionsOnOrgUnitIdReset, pageToPush, customActionExists));
           },
-          [pageToPush, customActionsOnOrgUnitIdReset, dispatch]);
+          [pageToPush, customActionsOnOrgUnitIdReset, customActionsOnProgramIdReset.length, dispatch]);
 
       const dispatchOnResetProgramId = useCallback(
           (baseAction: ReduxAction<any, any>) => {
@@ -158,7 +159,8 @@ export const LockedSelector: ComponentType<OwnProps> =
                   ...customActionsOnProgramIdReset,
               ];
 
-              dispatch(resetProgramIdBatchAction(actions, pageToPush));
+              const customActionExists = Boolean(customActionsOnProgramIdReset.length);
+              dispatch(resetProgramIdBatchAction(actions, pageToPush, customActionExists));
           },
           [pageToPush, customActionsOnProgramIdReset, dispatch]);
 
