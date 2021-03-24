@@ -30,7 +30,7 @@ const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, organisationUni
     return !lockedSelectorLoads;
 };
 
-const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string, pathname: string } =>
+export const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string, selectedEnrollmentId: string, pathname: string } =>
     useSelector(({
         currentSelections: {
             programId: selectedProgramId,
@@ -41,6 +41,7 @@ const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string
                 query: {
                     programId: routerProgramId,
                     orgUnitId: routerOrgUnitId,
+                    enrollmentId,
                 },
                 pathname,
             },
@@ -49,6 +50,7 @@ const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string
         ({
             selectedProgramId: routerProgramId || selectedProgramId,
             selectedOrgUnitId: routerOrgUnitId || selectedOrgUnitId,
+            selectedEnrollmentId: enrollmentId,
             pathname,
         }),
     );
@@ -70,6 +72,7 @@ export const LockedSelector: ComponentType<OwnProps> =
       customActionsOnProgramIdReset = [],
       customActionsOnOrgUnitIdReset = [],
       pageToPush = '',
+      renderExtraSelectors,
   }) => {
       const dispatch = useDispatch();
 
@@ -173,6 +176,7 @@ export const LockedSelector: ComponentType<OwnProps> =
 
       return (
           <LockedSelectorComponent
+              renderExtraSelectors={renderExtraSelectors}
               onStartAgain={dispatchOnStartAgain}
               onOpenSearchPageWithoutProgramId={dispatchOnOpenSearchPageWithoutProgramId}
               onOpenSearchPage={dispatchOnOpenSearchPage}

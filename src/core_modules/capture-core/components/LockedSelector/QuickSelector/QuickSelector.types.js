@@ -1,5 +1,4 @@
 // @flow
-
 export type State = {|
   openStartAgainWarning: boolean;
   openOrgUnitWarning: boolean;
@@ -41,6 +40,7 @@ export type OwnProps = $ReadOnly<{|
   onNewClickWithoutProgramId: () => void,
   onFindClick: () => void,
   onFindClickWithoutProgramId: () => void,
+  renderExtraSelectors?: Function
 |}>
 
 export type Props = {|

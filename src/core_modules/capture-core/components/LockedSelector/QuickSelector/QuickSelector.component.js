@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { colors } from '@dhis2/ui';
@@ -11,7 +10,6 @@ import programs from 'capture-core/metaDataMemoryStores/programCollection/progra
 import ProgramSelector from './ProgramSelector/ProgramSelector.component';
 import OrgUnitSelector from './OrgUnitSelector/OrgUnitSelector.component';
 import { ActionButtons } from './ActionButtons/ActionButtons.component';
-import { SingleLockedSelect } from './SingleLockedSelect/SingleLockedSelect.component';
 import type { Props } from './QuickSelector.types';
 
 const styles = ({ palette }) => ({
@@ -71,17 +69,7 @@ class QuickSelector extends Component<Props> {
 
     render() {
         const { width, programSelectorWidth } = this.calculateColumnWidths();
-        const {
-            currentPage,
-            selectedTeiName,
-            selectedTetName,
-            enrollmentsAsOptions,
-            selectedEnrollmentId,
-            onTeiSelectionReset,
-            onEnrollmentSelectionSet,
-            onEnrollmentSelectionReset,
-            enrollmentLockedSelectReady,
-        } = this.props;
+        const { renderExtraSelectors } = this.props;
 
         return (
             <Paper className={this.props.classes.paper}>
@@ -109,36 +97,7 @@ class QuickSelector extends Component<Props> {
                         />
                     </Grid>
                     {
-                        currentPage === 'enrollment' &&
-                        <>
-                            <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
-                                <SingleLockedSelect
-                                    ready={enrollmentLockedSelectReady}
-                                    onClear={onTeiSelectionReset}
-                                    options={[{
-                                        label: selectedTeiName,
-                                        value: 'alwaysPreselected',
-
-                                    }]}
-                                    selectedValue="alwaysPreselected"
-                                    title={selectedTetName}
-                                />
-                            </Grid>
-                            {
-                                enrollmentsAsOptions &&
-                                <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} className={this.props.classes.orgUnitSelector}>
-                                    <SingleLockedSelect
-                                        onClear={onEnrollmentSelectionReset}
-                                        ready={enrollmentLockedSelectReady}
-                                        onSelect={onEnrollmentSelectionSet}
-                                        options={enrollmentsAsOptions}
-                                        selectedValue={selectedEnrollmentId}
-                                        title={i18n.t('Enrollment')}
-                                    />
-                                </Grid>
-                            }
-                        </>
-
+                        renderExtraSelectors && renderExtraSelectors(width, this.props.classes)
                     }
                     <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} >
                         <ActionButtons

@@ -4,6 +4,8 @@ export type OwnProps = $ReadOnly<{|
   customActionsOnOrgUnitIdReset?: Array<any>,
   customActionsOnProgramIdReset?: Array<any>,
   pageToPush?: string,
+
+  renderExtraSelectors?: Function
 |}>
 
 export type PropsFromRedux = $ReadOnly<{|
