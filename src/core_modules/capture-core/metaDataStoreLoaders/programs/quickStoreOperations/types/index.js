@@ -1,2 +1,3 @@
 // @flow
-export type { apiProgramsResponse } from './apiPrograms.types';
+export * from './apiPrograms.types';
+export * from './apiOrganisationUnitsByProgram.types';

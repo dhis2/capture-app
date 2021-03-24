@@ -2,7 +2,6 @@
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import { dataElementTypes } from '../../../../../../../metaData';
 import { getTeiListData } from './getTeiListData';
 import {
     initListViewSuccess,
@@ -10,21 +9,6 @@ import {
     buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
 import type { Input } from './initTeiWorkingListsView.types';
-
-const getSortDirection = columnType =>
-    ([dataElementTypes.TEXT, dataElementTypes.LONG_TEXT].includes(columnType) ? 'asc' : 'desc');
-
-const getSortConfig = (columnsMetaForDataFetching) => {
-    let column = columnsMetaForDataFetching.find(col => col.visible);
-    if (!column) {
-        column = columnsMetaForDataFetching[0];
-    }
-
-    return {
-        sortById: column.id,
-        sortByDirection: getSortDirection(column.type),
-    };
-};
 
 const getClientFilters = (criteria = {}) => {
     // Build logic later when we actually have some non static templates
@@ -48,7 +32,8 @@ export const initTeiWorkingListsView = ({
     querySingleResource,
     absoluteApiPath,
 }: Input) => {
-    const { sortById, sortByDirection } = getSortConfig([...columnsMetaForDataFetching.values()]);
+    const sortById = 'regDate';
+    const sortByDirection = 'desc';
     const pageSize = 15;
     const page = 1;
     const filters = getClientFilters(selectedTemplate.criteria);
