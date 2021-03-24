@@ -76,6 +76,7 @@ import { searchPageDesc } from '../../core_modules/capture-core/reducers/descrip
 import { enrollmentPageDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentPage.reducerDescription';
 import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
 import { possibleDuplicatesDesc } from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
+import { enrollmentEventEditPageDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentEventEditPage.reducerDescription';
 
 export default [
     activePageDesc,
@@ -83,6 +84,7 @@ export default [
     currentSelectionsReducerDesc,
     editEventPageDesc,
     enrollmentPageDesc,
+    enrollmentEventEditPageDesc,
     eventsDesc,
     eventsValuesDesc,
     dataEntriesDesc,

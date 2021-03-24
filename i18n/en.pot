@@ -582,6 +582,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
+msgid "Enrollment with id \"{{eventId}}\" does not exist"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
