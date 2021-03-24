@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -136,7 +136,10 @@ msgid "Saving a {{trackedEntityName}} in"
 msgstr "将{{trackedEntityName}}保存在"
 
 msgid "in"
-msgstr " 在"
+msgstr "在"
+
+msgid "Cancel"
+msgstr "取消"
 
 msgid "Metadata error. see log for details"
 msgstr "元数据错误"
@@ -182,7 +185,7 @@ msgid "Active"
 msgstr "活动的"
 
 msgid "Completed"
-msgstr "已完成"
+msgstr "完成"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "保存事件前请添加或取消被或许"
@@ -237,14 +240,11 @@ msgstr "不，待在这里"
 msgid "New event"
 msgstr "新事件"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "你没有在当前选择创建事件的权限"
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
 
 msgid "Save"
 msgstr "保存"
-
-msgid "Cancel"
-msgstr "取消"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "离开此页面将放弃您对此事件所做的更改。"
@@ -263,6 +263,31 @@ msgstr "通过从顶部栏中选择一个项目来注册"
 
 msgid "An error has occurred. See log for details"
 msgstr "发生了错误。查看日志以获取详细信息"
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr "存在重复，但是有错误，查看日志详情。"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr " 具有 {{attributeName}}  属性的条目已经注册 ，但是你不能访问 "
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "你已经登记了该属性"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr "一个 {{trackedEntityTypeName}} 且具有 {{attributeName}} 已经注册"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "显示登记的 {{attributeName}} "
+
+msgid "Registered person"
+msgstr "注册的人"
+
+msgid "Link"
+msgstr "链接"
 
 msgid "validation failed"
 msgstr "验证失败"
@@ -312,6 +337,12 @@ msgstr "有些操作一直在运行,请等待"
 msgid "Operations running"
 msgstr "运作中"
 
+msgid "Hide"
+msgstr "隐藏"
+
+msgid "Possible duplicates found"
+msgstr "发现可能的重复"
+
 msgid "Sort"
 msgstr "排序"
 
@@ -346,7 +377,7 @@ msgid "From"
 msgstr "从"
 
 msgid "To"
-msgstr "至"
+msgstr "到"
 
 msgid "This week"
 msgstr "本周"
@@ -379,7 +410,7 @@ msgid "Contains text"
 msgstr "包含文本"
 
 msgid "Yes"
-msgstr "是"
+msgstr "Yes"
 
 msgid "mm/dd/yyyy"
 msgstr "mm/dd/yyyy"
@@ -391,7 +422,7 @@ msgid "Months"
 msgstr "月"
 
 msgid "Days"
-msgstr "天"
+msgstr "天数"
 
 msgid "Uploading file"
 msgstr "上传文件"
@@ -406,7 +437,7 @@ msgid "Select file"
 msgstr "选择文件"
 
 msgid "No"
-msgstr "否"
+msgstr "No"
 
 msgid "Uploading image"
 msgstr "上传图像"
@@ -477,9 +508,6 @@ msgstr "选择的项目对选择的机构无效"
 msgid "New"
 msgstr "新建"
 
-msgid "Find"
-msgstr "查询"
-
 msgid "Clear selections"
 msgstr "清除选择"
 
@@ -501,23 +529,26 @@ msgstr "在注册的机构"
 msgid "Select"
 msgstr "选择"
 
-msgid "Selected Program"
+msgid "Program"
+msgstr "项目"
+
+msgid "No programs available."
+msgstr "无可用项目"
+
+msgid "Show all"
+msgstr "全部显示"
+
+msgid "Selected program"
 msgstr "选择的项目"
 
 msgid "Some programs are being filtered."
 msgstr "有些项目已经被过滤了"
 
-msgid "Show all"
-msgstr "显示全部"
-
-msgid "Program"
-msgstr "项目"
-
 msgid "Select program"
 msgstr "选择项目"
 
-msgid "No programs available."
-msgstr "无可用项目"
+msgid "Selected"
+msgstr "已选择"
 
 msgid "Online"
 msgstr "在线"
@@ -551,6 +582,51 @@ msgstr "事件不能载入"
 
 msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr ""
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr ""
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr ""
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr ""
+
+msgid "View working list in this program."
+msgstr ""
 
 msgid "Delete event"
 msgstr "删除事件"
@@ -639,30 +715,18 @@ msgstr "选择一个注册机构开始填报"
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
 
-msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr "存在重复，但是有错误，查看日志详情。"
+msgid "Save as new"
+msgstr ""
+
+msgid "View dashboard"
+msgstr "查看仪表盘"
+
+msgid "Create for"
+msgstr ""
 
 msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr " 具有 {{attributeName}}  属性的条目已经注册 ，但是你不能访问 "
-
-msgid "You have already registered this {{attributeName}}"
-msgstr "你已经登记了该属性"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr "一个 {{trackedEntityTypeName}} 且具有 {{attributeName}} 已经注册"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "显示登记的 {{attributeName}} "
-
-msgid "Registered person"
-msgstr "注册的人"
-
-msgid "Link"
-msgstr "链接"
+"You can also choose a program from the top bar and create in that program"
+msgstr ""
 
 msgid "Review Duplicates"
 msgstr "复查重复"
@@ -670,20 +734,8 @@ msgstr "复查重复"
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
 
-msgid "Possible duplicates found"
-msgstr "发现可能的重复"
-
-msgid "No results found"
-msgstr "没有结果"
-
-msgid "An error occured loading possible duplicates"
-msgstr "载入可能的重复发生错误"
-
-msgid "Hide"
-msgstr "隐藏"
-
-msgid "Save as new {{tetName}}"
-msgstr "保存为新的  {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr ""
 
 msgid "Organisation Unit"
 msgstr "组织机构"
@@ -719,14 +771,24 @@ msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
 msgid "Search {{name}}"
 msgstr "搜索{{name}}"
 
-msgid "Find by {{name}}"
-msgstr "按{{name}}查找"
+msgid "Search by {{name}}"
+msgstr ""
 
 msgid "Search by attributes"
 msgstr "按属性搜索"
 
 msgid "Back"
 msgstr "后退"
+
+msgid "Search for"
+msgstr "搜索"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
+
+msgid "No results found"
+msgstr "没有结果"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -754,9 +816,6 @@ msgstr "该搜索返回了太多结果，无法显示。尝试更改搜索词或
 
 msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
-
-msgid "View dashboard"
-msgstr "查看仪表盘"
 
 msgid "View active enrollment"
 msgstr "查看有效的注册"
@@ -792,6 +851,9 @@ msgstr "事件被分配到  {{name}}"
 msgid "Feedbacks"
 msgstr "反馈"
 
+msgid "An error occurred loading possible duplicates"
+msgstr ""
+
 msgid "You dont have access to delete this relationship"
 msgstr "你v不能访问删除的关系"
 
@@ -804,21 +866,11 @@ msgstr "添加关系"
 msgid "Results found"
 msgstr "找到的结果"
 
-msgid "Selected program"
-msgstr "选择的项目"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
-
-msgid "Search for"
-msgstr "搜索"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
 
 msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"
