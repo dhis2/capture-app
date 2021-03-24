@@ -2,12 +2,20 @@
 import { useSelector } from 'react-redux';
 
 export const useEnrollmentInfo = (enrollmentId: string, programId: string) => {
-    const enrollments = useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
+    const enrollments: ?Array<Object> = useSelector(({ enrollmentPage }) => enrollmentPage.enrollments);
     const tetId = useSelector(({ enrollmentPage }) => enrollmentPage.tetId);
-    const programHasEnrollments = enrollments && enrollments.some(({ program }) => programId === program);
-    const enrollmentsOnProgramContainEnrollmentId = enrollments && enrollments
-        .filter(({ program }) => program === programId)
-        .some(({ enrollment }) => enrollmentId === enrollment);
+    const programHasEnrollments =
+      Array.isArray(enrollments) ?
+          enrollments
+              .some(({ program }) => programId === program)
+          : null;
+
+    const enrollmentsOnProgramContainEnrollmentId =
+      Array.isArray(enrollments) ?
+          enrollments
+              .filter(({ program }) => program === programId)
+              .some(({ enrollment }) => enrollmentId === enrollment)
+          : null;
 
     return { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, tetId };
 };

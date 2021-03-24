@@ -60,11 +60,12 @@ const useComponentLifecycle = () => {
     const { selectedOrgUnitId } = useUrlQueries();
     const { pathname } = useLocation();
     const pageFetchesOrgUnit = !pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
+    const organisationUnitAlreadyFetched = useSelector(({ organisationUnits }) => (selectedOrgUnitId && organisationUnits[selectedOrgUnitId]));
 
     useEffect(() => {
-        pageFetchesOrgUnit && selectedOrgUnitId && dispatch(fetchOrgUnit(selectedOrgUnitId));
+        pageFetchesOrgUnit && !organisationUnitAlreadyFetched && dispatch(fetchOrgUnit(selectedOrgUnitId));
     },
-    [dispatch, selectedOrgUnitId, pageFetchesOrgUnit]);
+    [dispatch, selectedOrgUnitId, pageFetchesOrgUnit, organisationUnitAlreadyFetched]);
 };
 
 export const LockedSelector: ComponentType<OwnProps> =

@@ -1,5 +1,4 @@
 // @flow
-
 import { actionCreator } from '../../../../../actions/actions.utils';
 
 export const enrollmentEventEditPagePageActionTypes = {
@@ -7,6 +6,8 @@ export const enrollmentEventEditPagePageActionTypes = {
     EVENT_ERROR_FETCH: 'EnrollmentEventEditPage.ErrorOnFetching',
     EVENT_SUCCESS_FETCH: 'EnrollmentEventEditPage.SuccessOnFetching',
     EVENT_LOADING_FETCH: 'EnrollmentEventEditPage.LoadingOnFetching',
+
+    DEFAULT_VIEW: 'EnrollmentEventEditPage.DefaultView',
 };
 
 export const showLoadingViewOnEnrollmentEventEditPage = () =>
@@ -18,5 +19,5 @@ export const showErrorViewOnEnrollmentEventEditPage = ({ error }: { error: strin
 export const fetchEventInformation = () =>
     actionCreator(enrollmentEventEditPagePageActionTypes.EVENT_START_FETCH)();
 
-export const successfulFetchingEventInformation = () =>
-    actionCreator(enrollmentEventEditPagePageActionTypes.EVENT_SUCCESS_FETCH)();
+export const successfulFetchingEventInformation = ({ ...args }: any) =>
+    actionCreator(enrollmentEventEditPagePageActionTypes.EVENT_SUCCESS_FETCH)({ ...args });

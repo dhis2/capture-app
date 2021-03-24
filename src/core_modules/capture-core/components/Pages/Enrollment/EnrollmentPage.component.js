@@ -26,7 +26,7 @@ const buildEnrollmentsAsOptions =
           .map(({ created, enrollment }) => (
               {
                   // $FlowFixMe
-                  label: convertValue(created, dataElementTypes.DATETIME),
+                  label: convertValue(created, dataElementTypes.DATE),
                   value: enrollment,
               }
           ));

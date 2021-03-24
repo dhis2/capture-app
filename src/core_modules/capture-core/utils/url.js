@@ -7,6 +7,8 @@ type Url = {|
     trackedEntityTypeId?: string,
     teiId?: string,
     enrollmentId?: string,
+    stageId?: string,
+    eventId?: string,
 |}
 
 export const urlArguments = ({
@@ -15,6 +17,8 @@ export const urlArguments = ({
     trackedEntityTypeId,
     teiId,
     enrollmentId,
+    stageId,
+    eventId,
 }: Url): string => {
     const argArray = [];
     if (programId) {
@@ -31,11 +35,17 @@ export const urlArguments = ({
     if (enrollmentId) {
         argArray.push(`enrollmentId=${enrollmentId}`);
     }
+    if (stageId) {
+        argArray.push(`stageId=${stageId}`);
+    }
+    if (eventId) {
+        argArray.push(`eventId=${eventId}`);
+    }
 
     return argArray.join('&');
 };
 
-export const deriveUrlQueries = (state: Object) => {
+export const deriveUrlQueries = (state: Object): Url => {
     const {
         currentSelections: {
             programId: selectedProgramId,
@@ -50,6 +60,8 @@ export const deriveUrlQueries = (state: Object) => {
                     trackedEntityTypeId: routerTet,
                     teiId,
                     enrollmentId,
+                    stageId,
+                    eventId,
                 },
             } },
     } = state;
@@ -63,6 +75,8 @@ export const deriveUrlQueries = (state: Object) => {
         trackedEntityTypeId,
         teiId,
         enrollmentId,
+        stageId,
+        eventId,
     };
 };
 

@@ -34,7 +34,7 @@ const useComponentLifecycle = () => {
 
         if (selectedProgramIsTracker && programHasEnrollments && enrollmentsOnProgramContainEnrollmentId) {
             dispatch(showDefaultViewOnEnrollmentPage());
-        } else {
+        } else if (programHasEnrollments === false || enrollmentsOnProgramContainEnrollmentId === false) {
             dispatch(showMissingMessageViewOnEnrollmentPage());
         }
     }, [

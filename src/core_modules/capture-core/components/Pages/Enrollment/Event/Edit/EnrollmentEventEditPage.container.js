@@ -10,7 +10,6 @@ import type { EnrollmentPageStatus } from '../../EnrollmentPage.types';
 export const EnrollmentEventEditPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
 
-
     const error: boolean =
     useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
     const selectedEventId: string =
