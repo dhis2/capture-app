@@ -17,10 +17,12 @@ const getStyles = (theme: Theme) => ({
 
 const getStylesLabel = (theme: Theme) => ({
     container: {
-        alignItems: 'center',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
+    },
+    truncateContainer: {
+        width: '-webkit-fill-available',
     },
     required: {
         color: theme.palette.required,
@@ -135,25 +137,32 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
         const { label, required, icon, classes } = props;
 
         return (
-            <Tooltip content={label}>
-                <div
-                    className={classes.container}
-                >
-                    <CalculatedLabel
-                        label={label || ''}
-                        required={required}
-                        requiredClass={classes.required}
-                    />
+            <Tooltip
+                content={label}
+            >
+                {({ ref, onMouseOver, onMouseOut }) => (
                     <div
-                        className={classes.iconContainer}
+                        ref={ref}
+                        onMouseOver={onMouseOver}
+                        onMouseOut={onMouseOut}
+                        className={classes.container}
                     >
-                        <Icon
-                            icon={icon}
-                            label={label}
-                            iconClass={classes.icon}
+                        <CalculatedLabel
+                            label={label || ''}
+                            required={required}
+                            requiredClass={classes.required}
                         />
+                        <div
+                            className={classes.iconContainer}
+                        >
+                            <Icon
+                                icon={icon}
+                                label={label}
+                                iconClass={classes.icon}
+                            />
+                        </div>
                     </div>
-                </div>
+                )}
             </Tooltip>
         );
     };
