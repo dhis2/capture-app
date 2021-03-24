@@ -1,16 +1,16 @@
 # 
 # Translators:
-# Wanda <wanda@frontlineaids.org>, 2019
-# Ulanbek Abakirov <ulans@mail.ru>, 2020
+# Wanda <wanda@frontlineaids.org>, 2021
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# Ulanbek Abakirov <ulans@mail.ru>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -145,6 +145,9 @@ msgstr ""
 msgid "in"
 msgstr "в"
 
+msgid "Cancel"
+msgstr "Отмена"
+
 msgid "Metadata error. see log for details"
 msgstr "Ошибка в метаданных. Смотрите детали в лог-файле."
 
@@ -199,7 +202,7 @@ msgstr ""
 "события"
 
 msgid "Save and add another"
-msgstr "Сохранить и добавить другую"
+msgstr "Сохранить и создать другую"
 
 msgid "Save and exit"
 msgstr "Сохранить и выйти"
@@ -250,14 +253,11 @@ msgstr "Нет, остаюсь тут"
 msgid "New event"
 msgstr "Новое событие"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "Не достаточно прав для создания Событий с текущим выбором"
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
 
 msgid "Save"
 msgstr "Сохранить"
-
-msgid "Cancel"
-msgstr "Отмена"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -278,6 +278,37 @@ msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr ""
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+"Существует дубликат(имеются дополнительные ошибки, смотрите детали в лог-"
+"файле)"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+"Элемент {{attributeName}} уже зарегистрирован, но у вас нет прав доступа к "
+"нему"
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "{{attributeName}} уже зарегистрирован"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+"Трекер {{trackedEntityTypeName}} с атрибутом {{attributeName}} уже "
+"зарегистрирован"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "Показать зарегистрированную {{trackedEntityTypeName}}"
+
+msgid "Registered person"
+msgstr "Зарегистрированное лицо"
+
+msgid "Link"
+msgstr "Ссылка"
 
 msgid "validation failed"
 msgstr "Не удалась валидация"
@@ -326,6 +357,12 @@ msgstr "Некоторые операции еще не заверщены. По
 
 msgid "Operations running"
 msgstr "Операции запущены..."
+
+msgid "Hide"
+msgstr "Скрыть"
+
+msgid "Possible duplicates found"
+msgstr "Найдены возможные дубликаты"
 
 msgid "Sort"
 msgstr "Сортировать"
@@ -493,9 +530,6 @@ msgstr ""
 msgid "New"
 msgstr "Новый"
 
-msgid "Find"
-msgstr "Найти"
-
 msgid "Clear selections"
 msgstr ""
 
@@ -517,23 +551,26 @@ msgstr "Регистрация Организационной единицы"
 msgid "Select"
 msgstr "Выбрать"
 
-msgid "Selected Program"
+msgid "Program"
+msgstr "Программа"
+
+msgid "No programs available."
+msgstr "Нет доступных программ"
+
+msgid "Show all"
+msgstr "Показать все"
+
+msgid "Selected program"
 msgstr "Выбранная программа"
 
 msgid "Some programs are being filtered."
 msgstr "Фильтруются некоторые программы "
 
-msgid "Show all"
-msgstr "Показать все"
-
-msgid "Program"
-msgstr "Программа"
-
 msgid "Select program"
 msgstr "Выбрать программу"
 
-msgid "No programs available."
-msgstr "Нет доступных программ"
+msgid "Selected"
+msgstr "Выбранный"
 
 msgid "Online"
 msgstr "Онлайн"
@@ -567,6 +604,51 @@ msgstr "Событие не может быть загружено"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Не могу загрузить Организационную единицу"
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr ""
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr ""
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr ""
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr ""
+
+msgid "View working list in this program."
+msgstr ""
 
 msgid "Delete event"
 msgstr "Удалить событие"
@@ -655,36 +737,18 @@ msgstr ""
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "A duplicate exists (but there were some errors, see log for details"
+msgid "Save as new"
 msgstr ""
-"Существует дубликат(имеются дополнительные ошибки, смотрите детали в лог-"
-"файле)"
+
+msgid "View dashboard"
+msgstr "Смотреть Панель"
+
+msgid "Create for"
+msgstr ""
 
 msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
+"You can also choose a program from the top bar and create in that program"
 msgstr ""
-"Элемент {{attributeName}} уже зарегистрирован, но у вас нет прав доступа к "
-"нему"
-
-msgid "You have already registered this {{attributeName}}"
-msgstr "{{attributeName}} уже зарегистрирован"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr ""
-"Трекер {{trackedEntityTypeName}} с атрибутом {{attributeName}} уже "
-"зарегистрирован"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Показать зарегистрированную {{trackedEntityTypeName}}"
-
-msgid "Registered person"
-msgstr "Зарегистрированное лицо"
-
-msgid "Link"
-msgstr "Ссылка"
 
 msgid "Review Duplicates"
 msgstr "Пересмотр дубликатов"
@@ -692,20 +756,8 @@ msgstr "Пересмотр дубликатов"
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr "Найдены возможные дубликаты"
-
-msgid "No results found"
-msgstr "Результаты не найдены"
-
-msgid "An error occured loading possible duplicates"
-msgstr "Произошла ошибка во время загрузки возможных дубликатов"
-
-msgid "Hide"
-msgstr "Скрыть"
-
-msgid "Save as new {{tetName}}"
-msgstr "Сохранить как новый {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr ""
 
 msgid "Organisation Unit"
 msgstr "Организация"
@@ -742,14 +794,24 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr "Искать {{name}}"
 
-msgid "Find by {{name}}"
-msgstr "Найдено  {{name}}"
+msgid "Search by {{name}}"
+msgstr ""
 
 msgid "Search by attributes"
 msgstr "Поиск по атрибутам"
 
 msgid "Back"
 msgstr "Назад"
+
+msgid "Search for"
+msgstr "Поиск"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+
+msgid "No results found"
+msgstr "Результаты не найдены"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -780,9 +842,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr ""
-
-msgid "View dashboard"
-msgstr "Смотреть Панель"
 
 msgid "View active enrollment"
 msgstr "Смотреть действующие регистрации"
@@ -820,6 +879,9 @@ msgstr "Событие назначен: {{name}}"
 msgid "Feedbacks"
 msgstr "Отзывы"
 
+msgid "An error occurred loading possible duplicates"
+msgstr ""
+
 msgid "You dont have access to delete this relationship"
 msgstr "У вас нет прав на удаление данного Родового отношения"
 
@@ -832,22 +894,12 @@ msgstr "Добавить зависимость"
 msgid "Results found"
 msgstr "Найдены результаты"
 
-msgid "Selected program"
-msgstr "Выбранная программа"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "Поиск {{uniqueAttrName}}"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 "Заполните хотя бы {{minAttributesRequiredToSearch}} атрибутов для поиска"
-
-msgid "Search for"
-msgstr "Поиск"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
 
 msgid "To work with the selected program,"
 msgstr "Работать с выбранной программой"
@@ -892,7 +944,7 @@ msgid "tracked entity instance"
 msgstr "Элемент отслеживаемого объекта"
 
 msgid "Set coordinate"
-msgstr "Выставить координату"
+msgstr "Задать координату"
 
 msgid "Page {{currentPage}}"
 msgstr "Страница {{currentPage}}"
