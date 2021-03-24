@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Urdu (https://www.transifex.com/hisp-uio/teams/100509/ur/)\n"
 "MIME-Version: 1.0\n"
@@ -136,6 +136,9 @@ msgstr ""
 msgid "in"
 msgstr "اندر"
 
+msgid "Cancel"
+msgstr "منسوخ"
+
 msgid "Metadata error. see log for details"
 msgstr ""
 
@@ -235,14 +238,11 @@ msgstr ""
 msgid "New event"
 msgstr "نئی تقریب"
 
-msgid "You dont have access to create an event in the current selections"
+msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
 msgstr "محفوظ"
-
-msgid "Cancel"
-msgstr "منسوخ"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -260,6 +260,31 @@ msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
 
 msgid "An error has occurred. See log for details"
+msgstr ""
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+
+msgid "You have already registered this {{attributeName}}"
+msgstr ""
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Registered person"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "validation failed"
@@ -308,6 +333,12 @@ msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
+msgstr ""
+
+msgid "Hide"
+msgstr "چھپائیں"
+
+msgid "Possible duplicates found"
 msgstr ""
 
 msgid "Sort"
@@ -475,9 +506,6 @@ msgstr ""
 msgid "New"
 msgstr "نیا"
 
-msgid "Find"
-msgstr "تلاش"
-
 msgid "Clear selections"
 msgstr ""
 
@@ -499,23 +527,26 @@ msgstr ""
 msgid "Select"
 msgstr "منتخب کریں"
 
-msgid "Selected Program"
-msgstr ""
+msgid "Program"
+msgstr "پروگرام"
 
-msgid "Some programs are being filtered."
+msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
 msgstr "سارے دکھاو"
 
-msgid "Program"
-msgstr "پروگرام"
+msgid "Selected program"
+msgstr "منتخب کردہ پروگرام"
+
+msgid "Some programs are being filtered."
+msgstr ""
 
 msgid "Select program"
 msgstr "پروگرام منتخب کریں"
 
-msgid "No programs available."
-msgstr ""
+msgid "Selected"
+msgstr "منتخب"
 
 msgid "Online"
 msgstr "آن لائن"
@@ -548,6 +579,51 @@ msgid "Event could not be loaded"
 msgstr ""
 
 msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr ""
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr ""
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr ""
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr ""
+
+msgid "View working list in this program."
 msgstr ""
 
 msgid "Delete event"
@@ -637,29 +713,17 @@ msgstr ""
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "A duplicate exists (but there were some errors, see log for details"
+msgid "Save as new"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "Create for"
 msgstr ""
 
 msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr ""
-
-msgid "You have already registered this {{attributeName}}"
-msgstr ""
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr ""
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
-
-msgid "Registered person"
-msgstr ""
-
-msgid "Link"
+"You can also choose a program from the top bar and create in that program"
 msgstr ""
 
 msgid "Review Duplicates"
@@ -668,19 +732,7 @@ msgstr ""
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr ""
-
-msgid "No results found"
-msgstr "کوئی نتیجہ نہیں ملا"
-
-msgid "An error occured loading possible duplicates"
-msgstr ""
-
-msgid "Hide"
-msgstr "چھپائیں"
-
-msgid "Save as new {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
@@ -717,7 +769,7 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr ""
 
-msgid "Find by {{name}}"
+msgid "Search by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
@@ -725,6 +777,16 @@ msgstr ""
 
 msgid "Back"
 msgstr "واپس"
+
+msgid "Search for"
+msgstr "تلاش کریں"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+
+msgid "No results found"
+msgstr "کوئی نتیجہ نہیں ملا"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -751,9 +813,6 @@ msgid ""
 msgstr ""
 
 msgid "Choose a type to start searching"
-msgstr ""
-
-msgid "View dashboard"
 msgstr ""
 
 msgid "View active enrollment"
@@ -790,6 +849,9 @@ msgstr ""
 msgid "Feedbacks"
 msgstr ""
 
+msgid "An error occurred loading possible duplicates"
+msgstr ""
+
 msgid "You dont have access to delete this relationship"
 msgstr ""
 
@@ -802,20 +864,10 @@ msgstr "تعلقات شامل کریں"
 msgid "Results found"
 msgstr ""
 
-msgid "Selected program"
-msgstr "منتخب کردہ پروگرام"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
-
-msgid "Search for"
-msgstr "تلاش کریں"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
 msgstr ""
 
 msgid "To work with the selected program,"

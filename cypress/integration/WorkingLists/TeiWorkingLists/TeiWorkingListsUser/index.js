@@ -11,21 +11,21 @@ Given('you open the main page with Ngelehun and child programme context', () => 
 
 Then('the default working list should be displayed', () => {
     const names = [
-        'Alan',
-        'Alan',
-        'Andrea',
-        'Anna',
-        'Anthony',
-        'Donald',
-        'Donald',
-        'Donna',
-        'Elizabeth',
-        'Emily',
-        'Emma',
-        'Emma',
-        'Evelyn',
         'Filona',
+        'Gertrude',
+        'Frank',
+        'Maria',
+        'Joe',
+        'Anthony',
+        'Alan',
+        'Heather',
+        'Andrea',
+        'Donald',
         'Frances',
+        'Julia',
+        'Elizabeth',
+        'Donald',
+        'Wayne',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -48,11 +48,11 @@ When('you select the working list called completed enrollments', () => {
 
 Then('the list should display teis with a completed enrollment', () => {
     const names = [
-        'Alan Thompson',
-        'Emma Johnson',
         'Filona Ryder',
-        'Frank Fjordsen',
         'Gertrude Fjordsen',
+        'Frank Fjordsen',
+        'Emma Johnson',
+        'Alan Thompson',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -126,21 +126,21 @@ Then('the assignee filter button should show that unassigned filter is in effect
 
 Then('the list should display teis with an active enrollment and unassinged events', () => {
     const names = [
-        'Alan',
-        'Alan',
-        'Andrea',
-        'Anna',
+        'Maria',
+        'Joe',
         'Anthony',
-        'Donald',
-        'Donald',
-        'Donna',
-        'Elizabeth',
-        'Emily',
-        'Emma',
-        'Evelyn',
-        'Frances',
+        'Alan',
         'Heather',
-        'Jack',
+        'Andrea',
+        'Donald',
+        'Frances',
+        'Julia',
+        'Elizabeth',
+        'Donald',
+        'Wayne',
+        'Johnny',
+        'Donna',
+        'Sharon',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -157,9 +157,9 @@ Then('the list should display teis with an active enrollment and unassinged even
 
 Then('the list should display teis with John as the first name', () => {
     const names = [
-        'John',
-        'John',
         'Johnny',
+        'John',
+        'John',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -199,21 +199,21 @@ Then('the registering unit should display in the list', () => {
 
 Then('the list should display data for the second page', () => {
     const names = [
-        'Frank',
-        'Gertrude',
-        'Heather',
-        'Jack',
-        'James',
-        'Joe',
-        'John',
-        'John',
         'Johnny',
-        'Julia',
-        'Lily',
-        'Maria',
-        'Noah',
-        'Olvia',
+        'Donna',
+        'Sharon',
         'Scott',
+        'Tom',
+        'Emma',
+        'Alan',
+        'Anna',
+        'Jack',
+        'Tim',
+        'James',
+        'Noah',
+        'Emily',
+        'Lily',
+        'Olvia',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -230,16 +230,16 @@ Then('the list should display data for the second page', () => {
 
 Then('the list should display 10 rows of data', () => {
     const names = [
-        'Alan',
-        'Alan',
-        'Andrea',
-        'Anna',
+        'Filona',
+        'Gertrud',
+        'Frank',
+        'Maria',
+        'Joe',
         'Anthony',
+        'Alan',
+        'Heather',
+        'Andrea',
         'Donald',
-        'Donald',
-        'Donna',
-        'Elizabeth',
-        'Emily',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
@@ -260,22 +260,23 @@ When('you click the first name column header', () => {
         .click();
 });
 
-Then('the list should display data ordered descendingly by first name', () => {
+Then('the list should display data ordered ascendingly by first name', () => {
     const names = [
-        'Wayne',
-        'Tom',
-        'Tom',
-        'Tim',
-        'Sophia',
-        'Sharon',
-        'Scott',
-        'Olvia',
-        'Noah',
-        'Maria',
-        'Lily',
-        'Julia',
-        'Johnny',
-        'John',
+        'Alan',
+        'Alan',
+        'Andrea',
+        'Anna',
+        'Anthony',
+        'Donald',
+        'Donald',
+        'Donna',
+        'Elizabeth',
+        'Emily',
+        'Emma',
+        'Emma',
+        'Evelyn',
+        'Filona',
+        'Frances',
         'John',
     ];
 

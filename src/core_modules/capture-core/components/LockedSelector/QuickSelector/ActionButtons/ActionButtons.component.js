@@ -100,7 +100,7 @@ const ActionButtonsPlain = ({
                         className={classes.marginRight}
                         onClick={onFindClickWithoutProgramId}
                     >
-                        { i18n.t('Find') }
+                        { i18n.t('Search') }
                     </Button>
                     :
                     <DropdownButton
@@ -115,18 +115,18 @@ const ActionButtonsPlain = ({
                             >
                                 <MenuItem
                                     dataTest="find-menuitem-one"
-                                    label={`Find a ${trackedEntityName} in ${programName}`}
+                                    label={`Search for a ${trackedEntityName} in ${programName}`}
                                     onClick={onFindClick}
                                 />
                                 <MenuItem
                                     dataTest="find-menuitem-two"
-                                    label="Find..."
+                                    label="Search..."
                                     onClick={onFindClickWithoutProgramId}
                                 />
                             </FlyoutMenu>
                         }
                     >
-                        { i18n.t('Find') }
+                        { i18n.t('Search') }
                     </DropdownButton>
             }
 
