@@ -7,6 +7,7 @@ export default {
     RELATIONSHIP_TYPES: 'relationshipTypes',
     TRACKED_ENTITY_TYPES: 'trackedEntityTypes',
     PROGRAMS: 'programs',
+    ORGANISATION_UNITS_BY_PROGRAM: 'organisationUnitsByProgram',
     PROGRAM_RULES: 'programRules',
     PROGRAM_RULES_VARIABLES: 'programRulesVariables',
     PROGRAM_INDICATORS: 'programIndicators',

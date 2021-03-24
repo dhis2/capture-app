@@ -228,7 +228,7 @@ When('you click the first name column header', () => {
         .click();
 });
 
-Then('teis should be retrieved from the api ordered descendingly by first name', () => {
+Then('teis should be retrieved from the api ordered ascendingly by first name', () => {
     cy.wait('@getTeis', { timeout: 40000 }).as('result');
 
     cy.get('@result')
@@ -237,7 +237,7 @@ Then('teis should be retrieved from the api ordered descendingly by first name',
 
     cy.get('@result')
         .its('url')
-        .should('match', /order=.*desc/);
+        .should('match', /order=.*asc/);
 
     cy.get('@result')
         .its('url')
