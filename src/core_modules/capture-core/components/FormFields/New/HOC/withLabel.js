@@ -17,7 +17,6 @@ const getStyles = (theme: Theme) => ({
 
 const getStylesLabel = (theme: Theme) => ({
     container: {
-        display: 'block',
         alignItems: 'center',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
