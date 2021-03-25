@@ -18,6 +18,7 @@ export type CachedTrackedEntityAttribute = {
     id: string,
     displayName: string,
     displayShortName: string,
+    displayFormName: string,
     description: string,
     translations: Array<CachedAttributeTranslation>,
     valueType: string,
