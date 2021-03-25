@@ -59,6 +59,14 @@ const getFiltersForAttributesSearchQuery = (formValues) => {
 
     return [...stringFilters, ...rangeFilers];
 };
+
+const handleErrors = ({ httpStatusCode, message }) => {
+    if (httpStatusCode === 409 && message === 'maxteicountreached') {
+        return of(showTooManyResultsViewOnSearchPage());
+    }
+    return of(showErrorViewOnSearchPage());
+};
+
 const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
@@ -79,12 +87,7 @@ const searchViaAttributesStream = (queryArgs, attributes, triggeredFrom) =>
             return showEmptyResultsViewOnSearchPage();
         }),
         startWith(showLoadingViewOnSearchPage()),
-        catchError(({ httpStatusCode, message }) => {
-            if (httpStatusCode === 409 && message === 'maxteicountreached') {
-                return of(showTooManyResultsViewOnSearchPage());
-            }
-            return of(showErrorViewOnSearchPage());
-        }),
+        catchError(handleErrors),
     );
 
 export const searchViaUniqueIdOnScopeProgramEpic: Epic = (action$, store) =>
@@ -259,7 +262,7 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
                     return of(showEmptyResultsViewOnSearchPage());
                 }),
                 startWith(showLoadingViewOnSearchPage()),
-                catchError(() => of(showErrorViewOnSearchPage())),
+                catchError(handleErrors),
             );
         }),
     );
