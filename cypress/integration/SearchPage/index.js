@@ -345,3 +345,17 @@ When('and you can see the unique identifier input', () => {
         .find('[data-test="capture-ui-input"]')
         .should('exist');
 });
+
+Given('you are in the search page with the Child Programme and org unit being preselected from the url', () => {
+    cy.visit('/#/search?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
+When('you click the back button', () => {
+    cy.get('[data-test="dhis2-capture-back-button"]')
+        .click();
+});
+
+Then('you should be taken to the main page with org unit preselected', () => {
+    cy.url()
+        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
+});
