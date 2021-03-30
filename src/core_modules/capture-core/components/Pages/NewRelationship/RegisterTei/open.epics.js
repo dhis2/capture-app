@@ -1,5 +1,5 @@
 // @flow
-import { from } from 'rxjs';
+import { from, of } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import log from 'loglevel';
@@ -55,10 +55,10 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
     action$.pipe(
         ofType(newRelationshipActionTypes.SELECT_FIND_MODE),
         filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER),
-        switchMap((action) => { // eslint-disable-line
+        switchMap(() => {
             const state = store.value;
             const selectedRelationshipType = state.newRelationship.selectedRelationshipType;
-            const { programId: suggestedProgramId, trackedEntityTypeId } = selectedRelationshipType.to;
+            const { programId: suggestedProgramId } = selectedRelationshipType.to;
             const { orgUnitId: suggestedOrgUnitId } = state.currentSelections;
 
             let trackerProgram: ?TrackerProgram;
@@ -75,46 +75,8 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
             if (!orgUnitId) {
                 return Promise.resolve(initializeRegisterTei(trackerProgram && trackerProgram.id));
             }
-
             const orgUnit = state
                 .organisationUnits[orgUnitId];
 
-            if (trackerProgram) { // enrollment form
-                const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
-                    trackerProgram,
-                    trackerProgram.enrollment.enrollmentForm,
-                    orgUnit,
-                    DATA_ENTRY_ID,
-                    [initializeRegisterTei(trackerProgram.id, orgUnit)],
-                    [],
-                    state.generatedUniqueValuesCache[DATA_ENTRY_ID],
-                );
-
-                return from(openEnrollmentPromise).pipe(
-                    takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
-                );
-            }
-
-            // tei (tet attribues) form
-            let TETType;
-            try {
-                TETType = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
-            } catch (error) {
-                log.error(
-                    errorCreator('TET for id not found')({ trackedEntityTypeId, error }),
-                );
-                return Promise.resolve(initializeRegisterTeiFailed(i18n.t('Metadata error. see log for details')));
-            }
-
-            const openTeiPromise = openDataEntryForNewTeiBatchAsync(
-                TETType.teiRegistration.form,
-                orgUnit,
-                DATA_ENTRY_ID,
-                [initializeRegisterTei(null, orgUnit)],
-                state.generatedUniqueValuesCache[DATA_ENTRY_ID],
-            );
-
-            return from(openTeiPromise).pipe(
-                takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
-            );
+            return of(initializeRegisterTei(null, orgUnit));
         }));
