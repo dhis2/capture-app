@@ -1,7 +1,7 @@
 // @flow
-import { from, of } from 'rxjs';
+import { of } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -9,20 +9,14 @@ import {
     actionTypes as newRelationshipActionTypes,
 } from '../newRelationship.actions';
 import {
-    openDataEntryForNewEnrollmentBatchAsync,
-    openDataEntryForNewTeiBatchAsync,
-} from '../../../DataEntries';
-import {
     initializeRegisterTei,
     initializeRegisterTeiFailed,
 } from './registerTei.actions';
 import {
     getTrackerProgramThrowIfNotFound,
-    getTrackedEntityTypeThrowIfNotFound,
     type TrackerProgram,
 } from '../../../../metaData';
 import { findModes } from '../findModes';
-import { DATA_ENTRY_ID } from './registerTei.const';
 
 // get tracker program if the suggested program id is valid for the current context
 function getTrackerProgram(suggestedProgramId: string) {
