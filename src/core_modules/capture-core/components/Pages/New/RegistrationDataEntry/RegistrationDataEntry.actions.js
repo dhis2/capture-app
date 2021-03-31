@@ -11,6 +11,8 @@ export const registrationFormActionTypes = {
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE: 'SaveNewTrackedEntityInstanceWithEnrollment',
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED: 'CompleteSavingNewTrackedEntityInstanceWithEnrollment',
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED: 'FailSavingNewTrackedEntityInstanceWithEnrollment',
+
+    CLEAN_UP_DATA_ENTRY: 'DataEntryCleanUp',
 };
 
 // without enrollment
@@ -59,3 +61,5 @@ export const saveNewTrackedEntityInstanceWithEnrollment = candidateForRegistrati
                 },
             },
         });
+
+export const cleanUpDataEntry = dataEntryId => actionCreator(registrationFormActionTypes.CLEAN_UP_DATA_ENTRY)({ dataEntryId });
