@@ -13,6 +13,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import { cleanUpDataEntry } from './NewPage.actions';
 
 const getStyles = () => ({
     container: {
@@ -61,7 +62,12 @@ const NewPagePlain = ({
     ]);
 
     return (<>
-        <LockedSelector pageToPush="new" isUserInteractionInProgress={isUserInteractionInProgress}/>
+        <LockedSelector
+            pageToPush="new"
+            isUserInteractionInProgress={isUserInteractionInProgress}
+            customActionsOnProgramIdReset={[cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID)]}
+            customActionsOnOrgUnitIdReset={[cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID)]}
+        />
         <div data-test="registration-page-content" className={classes.container} >
             {
                 !writeAccess ?
