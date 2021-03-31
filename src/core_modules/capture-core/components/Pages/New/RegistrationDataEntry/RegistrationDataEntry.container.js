@@ -9,6 +9,7 @@ import {
     startSavingNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
 import { useDuplicates } from '../../../PossibleDuplicatesDialog/useDuplicates';
+import { deriveUrlQueries } from '../../../../utils/url';
 
 export const RegistrationDataEntry: ComponentType<OwnProps>
   = ({ selectedScopeId, dataEntryId, setScopeId }) => {
@@ -26,7 +27,8 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
 
       const dataEntryIsReady = useSelector(({ dataEntries }) => (!!dataEntries[dataEntryId]));
 
-      useEffect(() => () => dispatch(cleanUpDataEntry(dataEntryId)), [dispatch, dataEntryId]);
+      const { orgUnitId, programId, trackedEntityTypeId } = useSelector(state => (deriveUrlQueries(state)));
+      useEffect(() => { dispatch(cleanUpDataEntry(dataEntryId)); }, [dispatch, dataEntryId, orgUnitId, programId, trackedEntityTypeId]);
 
       return (
           <RegistrationDataEntryComponent

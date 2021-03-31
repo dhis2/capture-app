@@ -12,7 +12,7 @@ export const registrationFormActionTypes = {
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_COMPLETED: 'CompleteSavingNewTrackedEntityInstanceWithEnrollment',
     NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED: 'FailSavingNewTrackedEntityInstanceWithEnrollment',
 
-    CLEAN_UP_DATA_ENTRY: 'DataEntryCleanUp',
+    CLEAN_UP_DATA_ENTRY: 'NewPage.DataEntryCleanUp',
 };
 
 // without enrollment

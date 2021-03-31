@@ -14,10 +14,19 @@ import getOrgUnitRootsKey from '../../components/D2Form/field/Components/OrgUnit
 import {
     set as setStoreRoots,
 } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
+import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 
 const removeFormData = (state, { payload: { formId } }) => {
     const remainingKeys = Object.keys(state).filter(key => !key.includes(formId));
     return remainingKeys.reduce((acc, key) => ({ ...acc, [key]: state[key] }), {});
+};
+
+// cleans up data entries that _start with_ dataEntryId
+const cleanUp = (state, { payload: { dataEntryId } }) => {
+    const newState = Object.keys(state).reduce((acc, curr) =>
+        (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc }), {});
+
+    return newState;
 };
 
 export const formsValuesDesc = createReducerDescription({
@@ -81,6 +90,7 @@ export const formsValuesDesc = createReducerDescription({
         return newState;
     },
     [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
+    [registrationFormActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
 }, 'formsValues');
 
 export const formsSectionsFieldsUIDesc = createReducerDescription({
@@ -202,6 +212,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         };
     },
     [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
+    [registrationFormActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
 }, 'formsSectionsFieldsUI');
 
 export const formsDesc = createReducerDescription({

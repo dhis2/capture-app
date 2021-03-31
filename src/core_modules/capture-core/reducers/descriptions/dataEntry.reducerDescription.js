@@ -11,9 +11,12 @@ import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
 import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 
 // cleans up data entries that start with dataEntryId
-const cleanUpDataEntry = (state, { payload: { dataEntryId } }) =>
-    Object.keys(state).reduce((acc, curr) =>
-        (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc }), {});
+const cleanUp = (state, { payload: { dataEntryId } }) => {
+    const newState = Object.keys(state).reduce((acc, curr) =>
+      (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc }), {});
+
+    return newState;
+}
 
 export const dataEntriesDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
@@ -123,7 +126,7 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         dataEntryValues[payload.fieldId] = payload.value;
         return newState;
     },
-    [registrationFormActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUpDataEntry,
+    [registrationFormActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
 }, 'dataEntriesFieldsValue');
 
 export const dataEntriesNotesDesc = createReducerDescription({
@@ -216,7 +219,7 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         dataEntryValuesUI[payload.fieldId] = { ...dataEntryValuesUI[payload.fieldId], ...payload.valueMeta, modified: true };
         return newState;
     },
-    [registrationFormActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUpDataEntry,
+    [registrationFormActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
 }, 'dataEntriesFieldsUI');
 
 export const dataEntriesRelationshipsDesc = createReducerDescription({
