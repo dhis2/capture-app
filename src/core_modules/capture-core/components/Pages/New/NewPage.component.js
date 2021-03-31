@@ -34,6 +34,7 @@ const NewPagePlain = ({
     programCategorySelectionIncomplete,
     missingCategoriesInProgramSelection,
     orgUnitSelectionIncomplete,
+    isUserInteractionInProgress,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
@@ -60,7 +61,7 @@ const NewPagePlain = ({
     ]);
 
     return (<>
-        <LockedSelector pageToPush="new" />
+        <LockedSelector pageToPush="new" isUserInteractionInProgress={isUserInteractionInProgress}/>
         <div data-test="registration-page-content" className={classes.container} >
             {
                 !writeAccess ?
