@@ -105,7 +105,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
     )
     renderVertical = (section: Section, passOnProps: any, classes: Object) => (
         <div
-            data-test="dhis2-capture-d2-form-component"
+            data-test="d2-form-component"
             className={this.props.formFoundation.customForm ? classes.containerCustomForm : ''}
             key={section.id}
         >

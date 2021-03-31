@@ -166,12 +166,12 @@ Then('events where age is between 10 and 20 should be retrieved from the api', (
 });
 
 When('you click the next page button on the event working list', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+    cy.get('[data-test="search-pagination-next-page"]')
         .should('exist');
 
     cy.route('GET', '**/events**').as('getEvents');
 
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+    cy.get('[data-test="search-pagination-next-page"]')
         .click();
 });
 
@@ -188,14 +188,14 @@ Then('new events should be retrieved from the api', () => {
 When('you click the previous page button on the event working list', () => {
     cy.route('GET', '**/events**').as('getEvents');
 
-    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
+    cy.get('[data-test="search-pagination-previous-page"]')
         .click();
 });
 
 When('you click the first page button on the event working list', () => {
     cy.route('GET', '**/events**').as('getEvents');
 
-    cy.get('[data-test="dhis2-capture-search-pagination-first-page"]')
+    cy.get('[data-test="search-pagination-first-page"]')
         .click();
 });
 

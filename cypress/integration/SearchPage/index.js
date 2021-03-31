@@ -11,7 +11,7 @@ Given('you are on the default search page', () => {
 Then('there should be no search domain preselected', () => {
     cy.get('[data-test="dhis2-uicore-select-input"]')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-informative-paper"]')
+    cy.get('[data-test="informative-paper"]')
         .should('exist');
 });
 
@@ -23,7 +23,7 @@ When('you select the search domain Person', () => {
 });
 
 Then('there should be Person domain forms available to search with', () => {
-    cy.get('[data-test="dhis2-capture-search-page-content"]')
+    cy.get('[data-test="search-page-content"]')
         .find('[data-test="capture-ui-input"]')
         .should('have.length', 1);
 });
@@ -40,7 +40,7 @@ And('you select the search domain Malaria Case diagnosis', () => {
 });
 
 When('you fill in the unique identifier field with values that will not return a tracked entity instance', () => {
-    cy.get('[data-test="dhis2-capture-form-unique"]')
+    cy.get('[data-test="form-unique"]')
         .find('[data-test="capture-ui-input"]')
         .first()
         .type('123')
@@ -49,9 +49,9 @@ When('you fill in the unique identifier field with values that will not return a
 
 And('you click find', () => {
     // click outside of the input for the values to be updated
-    cy.get('[data-test="dhis2-capture-search-page-content"]').click();
+    cy.get('[data-test="search-page-content"]').click();
 
-    cy.get('[data-test="dhis2-capture-form-unique"]')
+    cy.get('[data-test="form-unique"]')
         .find('[data-test="dhis2-uicore-button"]')
         .first()
         .click();
@@ -71,7 +71,7 @@ When('you can close the modal', () => {
 });
 
 When('you fill in the unique identifier field with values that will return a tracked entity instance', () => {
-    cy.get('[data-test="dhis2-capture-form-unique"]')
+    cy.get('[data-test="form-unique"]')
         .find('[data-test="capture-ui-input"]')
         .first()
         .clear()
@@ -85,7 +85,7 @@ Then('you are navigated to the Tracker Capture', () => {
 });
 
 When('you fill in the first name with values that will return no results', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .first()
         .type('user non existing')
@@ -93,14 +93,14 @@ When('you fill in the first name with values that will return no results', () =>
 });
 
 And('you expand the attributes search area', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('button')
         .first()
         .click();
 });
 
 When('you fill in the last name with values that will return results', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Smith')
@@ -108,7 +108,7 @@ When('you fill in the last name with values that will return results', () => {
 });
 
 When('for Malaria case you fill in values that will return less than 5 results', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(2)
         .type('Sara')
@@ -116,12 +116,12 @@ When('for Malaria case you fill in values that will return less than 5 results',
 });
 
 When('for Person you fill in values that will return less than 5 results', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Sara')
         .blur();
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Fis')
@@ -129,7 +129,7 @@ When('for Person you fill in values that will return less than 5 results', () =>
 });
 
 When('you fill in the first name with values that will return an error', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .first()
         .type(',,,,')
@@ -137,57 +137,57 @@ When('you fill in the first name with values that will return an error', () => {
 });
 
 Then('there should be an generic error message', () => {
-    cy.get('[data-test="dhis2-capture-general-purpose-error-mesage"]')
+    cy.get('[data-test="general-purpose-error-mesage"]')
         .should('exist');
 });
 
 When('you dont fill in any of the values', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .first()
         .clear();
 });
 
 When('you fill the values with nothing but spaces', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .first()
         .type('      ');
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('      ');
 });
 
 When('you fill in the the form with values', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Smith');
 
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Smith');
 });
 
 When('you clear the values', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .first()
         .clear();
-    cy.get('[data-test="dhis2-capture-form-attributes"]').click();
+    cy.get('[data-test="form-attributes"]').click();
 
 
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .clear();
-    cy.get('[data-test="dhis2-capture-form-attributes"]').click();
+    cy.get('[data-test="form-attributes"]').click();
 });
 
 Then('there should be a validation error message', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .contains('Fill in at least 1 attributes to search')
         .shouldIncludeClass('textError');
 });
@@ -197,7 +197,7 @@ Given('you are on the search page with preselected program and org unit', () => 
 });
 
 When('when you click the back button', () => {
-    cy.get('[data-test="dhis2-capture-back-button"]')
+    cy.get('[data-test="back-button"]')
         .click();
 });
 
@@ -207,13 +207,13 @@ Then('you should be taken to the main page with program and org unit preselected
 });
 
 And('the next page button is disabled', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+    cy.get('[data-test="search-pagination-next-page"]')
         .should('exist')
         .should('be.disabled');
 });
 
 When('you click the view dashboard button', () => {
-    cy.get('[data-test="dhis2-capture-view-dashboard-button"]')
+    cy.get('[data-test="view-dashboard-button"]')
         .first()
         .click();
 });
@@ -225,13 +225,13 @@ When('you remove the Child Programme selection', () => {
 });
 
 Then('there should be visible a title with Malaria case diagnosis', () => {
-    cy.get('[data-test="dhis2-capture-search-page-content"]')
+    cy.get('[data-test="search-page-content"]')
         .contains('Search for malaria entity in program: Malaria case diagnosis, treatment and investigation')
         .should('exist');
 });
 
 And('there should be Malaria case diagnosis forms visible to search with', () => {
-    cy.get('[data-test="dhis2-capture-search-page-content"]')
+    cy.get('[data-test="search-page-content"]')
         .find('[data-test="capture-ui-input"]')
         .should('have.length', 1);
 });
@@ -241,12 +241,12 @@ Given('you are in the search page with the Adult Woman being preselected from th
 });
 
 When('you fill in the date of birth', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(2)
         .type('1999-09-01')
         .blur();
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(3)
         .type('2020-01-01')
@@ -258,12 +258,12 @@ Given('you are in the search page with the TB program being preselected from the
 });
 
 When('you fill in the zip code range numbers', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(5)
         .type('7130')
         .blur();
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(6)
         .type('7135')
@@ -271,7 +271,7 @@ When('you fill in the zip code range numbers', () => {
 });
 
 When('you fill in the first name', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Lid')
@@ -284,13 +284,13 @@ When('you click the fallback search button', () => {
 });
 
 When('you fill in the first and last name with values that will return results', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Go')
         .blur();
 
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Sarah')
@@ -307,41 +307,41 @@ When('you can see the domain selector with the tetype person selected', () => {
 });
 
 When('there is not enrollment tag', () => {
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
+    cy.get('[data-test="search-results-list"]')
         .find('[data-test="dhis2-uicore-tag"]')
         .should('not.exist');
 });
 
 When('you select gender', () => {
-    cy.get('[data-test="dhis2-capture-form-field-cejWyOfXge6"]')
+    cy.get('[data-test="form-field-cejWyOfXge6"]')
         .find('input')
         .type('Female{enter}', { force: true });
 });
 
 When('you see that in the search terms there is no gender displayed', () => {
-    cy.get('[data-test="dhis2-capture-search-results-top"]')
+    cy.get('[data-test="search-results-top"]')
         .should('not.have.value', 'Gender');
-    cy.get('[data-test="dhis2-capture-search-results-top"]')
+    cy.get('[data-test="search-results-top"]')
         .contains('First name');
-    cy.get('[data-test="dhis2-capture-search-results-top"]')
+    cy.get('[data-test="search-results-top"]')
         .contains('Last name');
 });
 
 When('you see the attributes search area being expanded', () => {
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .contains('First name');
-    cy.get('[data-test="dhis2-capture-form-attributes"]')
+    cy.get('[data-test="form-attributes"]')
         .contains('Last name');
 });
 
 When('that first and last name are prefilled', () => {
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
+    cy.get('[data-test="search-results-list"]')
         .find('[data-test="dhis2-uicore-tag"]')
         .should('not.exist');
 });
 
 When('and you can see the unique identifier input', () => {
-    cy.get('[data-test="dhis2-capture-form-unique"]')
+    cy.get('[data-test="form-unique"]')
         .find('[data-test="capture-ui-input"]')
         .should('exist');
 });

@@ -15,7 +15,7 @@ const StyledPaper = withStyles({
     },
 })(Paper);
 
-export const IncompleteSelectionsMessage = ({ children, dataTest = 'dhis2-capture-informative-paper' }) => (
+export const IncompleteSelectionsMessage = ({ children, dataTest = 'informative-paper' }) => (
     <Grid container justify="center">
         <Grid item>
             <StyledPaper

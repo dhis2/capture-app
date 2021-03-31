@@ -27,7 +27,7 @@ const WarningMessageCreatorPlain = ({ classes, onOpenReviewDialog, dataEntryId, 
 
     return (
         <LinkButton
-            data-test="dhis2-capture-possible-duplicates-found-button"
+            data-test="possible-duplicates-found-button"
             onClick={handleDuplicatesClick}
             className={classes.linkButton}
         >

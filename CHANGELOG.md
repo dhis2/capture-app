@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/dhis2/capture-app/compare/v1.15.0...v1.15.1) (2021-03-04)
+
+
+### Bug Fixes
+
+* the bug ([#1536](https://github.com/dhis2/capture-app/issues/1536)) ([fd2616f](https://github.com/dhis2/capture-app/commit/fd2616f92b768249601be6e020527e9f89cd19ef))
+
 # [1.15.0](https://github.com/dhis2/capture-app/compare/v1.14.0...v1.15.0) (2021-02-25)
 
 
