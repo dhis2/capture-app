@@ -127,7 +127,7 @@ const getMapStateToProps = (settings: Settings) => (state: ReduxState, props: Ob
         const propName = getPropName(props);
         const itemId = state.dataEntries[props.id].itemId;
         const key = getDataEntryKey(props.id, itemId);
-        const value = state.dataEntriesFieldsValue[key] && state.dataEntriesFieldsValue[key][propName];
+        const value = state.dataEntriesFieldsValue[key][propName];
         passOnFieldDataProp = {
             [`${propName}DataEntryFieldValue`]: value,
         };

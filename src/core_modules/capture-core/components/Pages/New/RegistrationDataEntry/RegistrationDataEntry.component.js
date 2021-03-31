@@ -1,6 +1,6 @@
 // @flow
-import React, { type ComponentType, useContext, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { type ComponentType, useContext, useState } from 'react';
+import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { Grid, Paper, withStyles } from '@material-ui/core';
@@ -17,7 +17,6 @@ import { PossibleDuplicatesDialog } from '../../../PossibleDuplicatesDialog/Poss
 import { usePossibleDuplicatesExist } from '../../../PossibleDuplicatesDialog/usePossibleDuplicatesExist';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
-import { cleanUpDataEntry } from './RegistrationDataEntry.actions';
 
 const getStyles = ({ typography }) => ({
     paper: {

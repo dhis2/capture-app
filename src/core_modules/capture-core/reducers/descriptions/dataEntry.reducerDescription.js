@@ -13,10 +13,10 @@ import { registrationFormActionTypes } from '../../components/Pages/New/Registra
 // cleans up data entries that start with dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {
     const newState = Object.keys(state).reduce((acc, curr) =>
-      (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc }), {});
+        (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc }), {});
 
     return newState;
-}
+};
 
 export const dataEntriesDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {

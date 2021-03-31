@@ -120,8 +120,8 @@ const mapStateToProps = (state: ReduxState, props: ContainerProps) => {
     const key = getDataEntryKey(props.dataEntryId, itemId);
 
     return {
-        value: state.dataEntriesFieldsValue[key] && state.dataEntriesFieldsValue[key][propName],
-        valueMeta: state.dataEntriesFieldsValue[key] && state.dataEntriesFieldsUI[key][propName],
+        value: state.dataEntriesFieldsValue[key][propName],
+        valueMeta: state.dataEntriesFieldsUI[key][propName],
         itemId,
         propName,
     };
