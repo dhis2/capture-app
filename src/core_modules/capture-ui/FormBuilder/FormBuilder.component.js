@@ -71,7 +71,6 @@ type Props = {
     onGetContainerProps?: ?GetContainerPropsFn,
     onGetValidationContext: ?() => ?Object,
     onIsValidating: ?IsValidatingFn,
-    onCleanUp?: ?(remainingUids: Array<string>) => void,
     loadNr: number,
     onPostProcessErrorMessage: (message: string, type: ?string, messageData: ?string, id: string, fieldId: string) => React.Node,
 };
@@ -260,8 +259,6 @@ class FormBuilder extends React.Component<Props> {
         if (newProps.id !== this.props.id || newProps.loadNr !== this.props.loadNr) {
             this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
             this.commitUpdateTriggeredForFields = {};
-            const onCleanUp = newProps.onCleanUp;
-            onCleanUp && onCleanUp(this.getCleanUpData());
             if (this.props.validateIfNoUIData) {
                 this.validateAllFields(newProps);
             }
@@ -269,11 +266,6 @@ class FormBuilder extends React.Component<Props> {
             this.asyncUIState =
                 FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
         }
-    }
-
-    componentWillUnmount() {
-        const onCleanUp = this.props.onCleanUp;
-        onCleanUp && onCleanUp(this.getCleanUpData());
     }
 
     getCleanUpData() {
@@ -528,7 +520,6 @@ class FormBuilder extends React.Component<Props> {
             onGetContainerProps: extractOnGetContainerProps,
             onIsValidating,
             onGetValidationContext,
-            onCleanUp,
             loadNr,
             onPostProcessErrorMessage,
             ...passOnProps } = this.props;
