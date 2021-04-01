@@ -105,7 +105,7 @@ class TeiSearchPlain extends React.Component<Props, State> {
         const collapsed = this.props.openSearchGroupSection !== searchGroupId;
         return (
             <Section
-                data-test="dhis2-capture-search-by-attributes-forms"
+                data-test="search-by-attributes-forms"
                 key={formId}
                 isCollapsed={collapsed}
                 className={this.props.classes.formContainerSection}

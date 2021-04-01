@@ -136,9 +136,9 @@ const Index = ({
     return (<>
         <ResultsPageSizeContext.Provider value={{ resultsPageSize: 5 }}>
             <LockedSelector pageToPush="search" />
-            <div data-test="dhis2-capture-search-page-content" className={classes.container} >
+            <div data-test="search-page-content" className={classes.container} >
                 <Button
-                    dataTest="dhis2-capture-back-button"
+                    dataTest="back-button"
                     className={classes.backButton}
                     onClick={navigateToMainPage}
                 >
@@ -205,7 +205,7 @@ const Index = ({
                         {
                             searchStatus === searchPageStatus.ERROR &&
                             <div
-                                data-test="dhis2-capture-general-purpose-error-mesage"
+                                data-test="general-purpose-error-mesage"
                                 className={classes.informativeMessage}
                             >
                                 <NoticeBox
@@ -220,7 +220,7 @@ const Index = ({
                         {
                             searchStatus === searchPageStatus.TOO_MANY_RESULTS &&
                             <div
-                                data-test="dhis2-capture-general-purpose-too-many-results-mesage"
+                                data-test="general-purpose-too-many-results-mesage"
                                 className={classes.informativeMessage}
                             >
                                 <NoticeBox

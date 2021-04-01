@@ -72,7 +72,7 @@ const CardListButtons = withStyles(buttonStyles)(
             <>
                 <Button
                     small
-                    dataTest="dhis2-capture-view-dashboard-button"
+                    dataTest="view-dashboard-button"
                     onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
                 >
                     {i18n.t('View dashboard')}
@@ -82,7 +82,7 @@ const CardListButtons = withStyles(buttonStyles)(
                     <Button
                         small
                         className={classes.buttonMargin}
-                        dataTest="dhis2-capture-view-active-enrollment-button"
+                        dataTest="view-active-enrollment-button"
                         onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
                     >
                         {i18n.t('View active enrollment')}
@@ -93,7 +93,7 @@ const CardListButtons = withStyles(buttonStyles)(
                     <Button
                         small
                         className={classes.buttonMargin}
-                        dataTest="dhis2-capture-re-enrollment-button"
+                        dataTest="re-enrollment-button"
                         onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
                     >
                         {i18n.t('Re-enroll')} {programName && `${i18n.t('in')} ${programName}`}

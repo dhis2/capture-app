@@ -5,14 +5,14 @@ beforeEach(() => {
 });
 
 When('you add data to the form', () => {
-    cy.get('[data-test="dhis2-capture-dataentry-field-eventDate"]')
+    cy.get('[data-test="dataentry-field-eventDate"]')
         .find('input')
         .type('2020-01-01')
         .blur();
-    cy.get('[data-test="dhis2-capture-form-field-qrur9Dvnyt5"]')
+    cy.get('[data-test="form-field-qrur9Dvnyt5"]')
         .find('input')
         .type('25');
-    cy.get('[data-test="dhis2-capture-form-field-oZg33kd9taw"]')
+    cy.get('[data-test="form-field-oZg33kd9taw"]')
         .find('input')
         .type('Male{enter}', { force: true });
 });
@@ -39,28 +39,28 @@ Then('the event should be sent to the server successfully', () => {
 
 
 When('you fill in the registration details', () => {
-    cy.get('[data-test="dhis2-capture-relationship-register-tei-program-selector"]')
+    cy.get('[data-test="relationship-register-tei-program-selector"]')
         .find('input')
         .type('Child{enter}', { force: true });
-    cy.get('[data-test="dhis2-capture-form-field-w75KJ2mc4zz"]')
+    cy.get('[data-test="form-field-w75KJ2mc4zz"]')
         .find('input')
         .type('Sarah');
-    cy.get('[data-test="dhis2-capture-form-field-zDhUuAYrxNC"]')
+    cy.get('[data-test="form-field-zDhUuAYrxNC"]')
         .find('input')
         .type('Gonz');
-    cy.get('[data-test="dhis2-capture-form-field-cejWyOfXge6"]')
+    cy.get('[data-test="form-field-cejWyOfXge6"]')
         .find('input')
         .type('Female{enter}', { force: true });
-    cy.get('[data-test="dhis2-capture-dataentry-field-incidentDate"]')
+    cy.get('[data-test="dataentry-field-incidentDate"]')
         .find('input')
         .type('2020-01-01')
         .blur();
 });
 
 When('you submit the registration form', () => {
-    cy.get('[data-test="dhis2-capture-create-and-link-button"]')
+    cy.get('[data-test="create-and-link-button"]')
         .click();
-    cy.get('[data-test="dhis2-capture-create-as-new-person"]')
+    cy.get('[data-test="create-as-new-person"]')
         .click();
 });
 
@@ -103,15 +103,15 @@ Then('the data should be sent to the server successfully', () => {
 });
 
 When('you search for an existing unique id and link to the person', () => {
-    cy.get('[data-test="dhis2-capture-form-field-lZGmxYbs97q"]')
+    cy.get('[data-test="form-field-lZGmxYbs97q"]')
         .find('input')
         .type('9191132445122')
         .blur(); // TODO: Look into why the click below is failing if the field is not blurred first
 
-    cy.get('[data-test="dhis2-capture-relationship-tei-search-button-relationshipTeiSearch-nEenWmSyUEp-0"]')
+    cy.get('[data-test="relationship-tei-search-button-relationshipTeiSearch-nEenWmSyUEp-0"]')
         .click();
 
-    cy.get('[data-test="dhis2-capture-relationship-tei-link-vu9dsAuJ29q"]')
+    cy.get('[data-test="relationship-tei-link-vu9dsAuJ29q"]')
         .click();
 });
 
@@ -147,14 +147,14 @@ Then('the event and relationship should be sent to the server successfully', () 
 });
 
 When('you select search scope TB program', () => {
-    cy.get('[data-test="dhis2-capture-virtualized-select"]')
+    cy.get('[data-test="virtualized-select"]')
         .click()
         .contains('TB prog')
         .click();
 });
 
 And('you expand the attributes search area', () => {
-    cy.get('[data-test="dhis2-capture-collapsible-button"]')
+    cy.get('[data-test="collapsible-button"]')
         .eq(4)
         .click();
 });

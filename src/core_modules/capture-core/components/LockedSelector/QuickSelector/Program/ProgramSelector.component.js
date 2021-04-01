@@ -335,7 +335,7 @@ class ProgramSelector extends Component<Props> {
             : null;
 
         return (
-            <Paper square elevation={0} className={classes.paper} data-test="dhis2-capture-program-selector-container">
+            <Paper square elevation={0} className={classes.paper} data-test="program-selector-container">
                 <h4 className={classes.title}>
                     { i18n.t('Program') }
                 </h4>

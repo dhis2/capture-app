@@ -47,7 +47,7 @@ const DialogButtons = ({ onCancel, onSave }) => (<>
         onSave &&
         <div style={{ marginLeft: 8 }}>
             <Button
-                dataTest="dhis2-capture-create-as-new-person"
+                dataTest="create-as-new-person"
                 onClick={onSave}
                 primary
             >
@@ -66,7 +66,7 @@ const CardListButton = (({ teiId, orgUnitId }) => {
     return (
         <Button
             small
-            dataTest="dhis2-capture-view-dashboard-button"
+            dataTest="view-dashboard-button"
             onClick={() => navigateToTrackedEntityDashboard(teiId, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
         >
             {i18n.t('View dashboard')}

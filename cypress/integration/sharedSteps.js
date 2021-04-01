@@ -1,6 +1,6 @@
 Given('you are in the main page with no selections made', () => {
     cy.visit('/#/');
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
+    cy.get('[data-test="new-event-button"]')
         .should('exist');
 });
 
@@ -19,13 +19,13 @@ And('you select org unit', () => {
 });
 
 Then('there should be visible a title with Child Program', () => {
-    cy.get('[data-test="dhis2-capture-search-page-content"]')
+    cy.get('[data-test="search-page-content"]')
         .contains('person in program: Child Programme')
         .should('exist');
 });
 
 And('there should be Child Programme domain forms visible to search with', () => {
-    cy.get('[data-test="dhis2-capture-search-page-content"]')
+    cy.get('[data-test="search-page-content"]')
         .find('[data-test="capture-ui-input"]')
         .should('have.length', 1);
 });
@@ -35,20 +35,20 @@ Given('you open the the new event page in Ngelehun and malaria case context', ()
 });
 
 When('you navigate to register a person relationship', () => {
-    cy.get('[data-test="dhis2-capture-add-relationship-button"]')
+    cy.get('[data-test="add-relationship-button"]')
         .click();
-    cy.get('[data-test="dhis2-capture-relationship-type-selector-button-mxZDvSZYxlw"]')
+    cy.get('[data-test="relationship-type-selector-button-mxZDvSZYxlw"]')
         .click();
-    cy.get('[data-test="dhis2-capture-create-relationship-button"]')
+    cy.get('[data-test="create-relationship-button"]')
         .click();
 });
 
 And('you navigate to find a person relationship', () => {
-    cy.get('[data-test="dhis2-capture-add-relationship-button"]')
+    cy.get('[data-test="add-relationship-button"]')
         .click();
-    cy.get('[data-test="dhis2-capture-relationship-type-selector-button-mxZDvSZYxlw"]')
+    cy.get('[data-test="relationship-type-selector-button-mxZDvSZYxlw"]')
         .click();
-    cy.get('[data-test="dhis2-capture-find-relationship-button"]')
+    cy.get('[data-test="find-relationship-button"]')
         .click();
 });
 
@@ -60,49 +60,49 @@ And('you select Child Programme', () => {
 });
 
 When('you have no program selection', () => {
-    cy.get('[data-test="dhis2-capture-program-selector-container"]')
+    cy.get('[data-test="program-selector-container"]')
         .contains('Select program');
 });
 
 When('you click the next page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+    cy.get('[data-test="search-pagination-next-page"]')
         .click();
 });
 
 Then('you can see the second page of the results', () => {
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
+    cy.get('[data-test="search-results-list"]')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-card-list-item"]')
+    cy.get('[data-test="card-list-item"]')
         .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-pagination"]')
+    cy.get('[data-test="pagination"]')
         .contains('Page 2')
         .should('exist');
 });
 
 When('you click the previous page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
+    cy.get('[data-test="search-pagination-previous-page"]')
         .click();
 });
 
 And('you can see the first page of the results', () => {
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
+    cy.get('[data-test="search-results-list"]')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-card-list-item"]')
+    cy.get('[data-test="card-list-item"]')
         .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-pagination"]')
+    cy.get('[data-test="pagination"]')
         .contains('Page 1')
         .should('exist');
 });
 
 Then('all pagination is disabled', () => {
-    cy.get('[data-test="dhis2-capture-pagination"]')
+    cy.get('[data-test="pagination"]')
         .contains('Page 1')
         .should('exist');
 });
 
 And('you click search', () => {
     // click outside of the input for the values to be updated
-    cy.get('[data-test="dhis2-capture-d2-form-component"]')
+    cy.get('[data-test="d2-form-component"]')
         .click();
 
     cy.get('button')
