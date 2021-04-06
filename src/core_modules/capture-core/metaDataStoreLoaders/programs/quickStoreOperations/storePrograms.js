@@ -2,7 +2,6 @@
 import { quickStore } from '../../IOUtils';
 import { getContext } from '../../context';
 import type { apiProgramsResponse } from './types';
-import { filter } from 'rxjs/operators';
 
 const convert = (() => {
     const sort = (arr: Array<any>, sortBy: string = 'sortOrder') => {
