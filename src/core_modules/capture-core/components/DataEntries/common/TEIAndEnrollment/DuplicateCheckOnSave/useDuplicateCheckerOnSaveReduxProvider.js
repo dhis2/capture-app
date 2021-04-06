@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { checkForDuplicate, resetCheckForDuplicate } from '../../../../DataEntryUtils';
 import { useDuplicates } from '../../../../PossibleDuplicatesDialog/useDuplicates';
-import { InputSearchGroup } from '../../../../../metaData';
+import type { InputSearchGroup } from '../../../../../metaData';
 
 export const useDuplicateCheckerOnSaveReduxProvider = (dataEntryId: string, selectedScopeId: string) => {
     const dispatch = useDispatch();

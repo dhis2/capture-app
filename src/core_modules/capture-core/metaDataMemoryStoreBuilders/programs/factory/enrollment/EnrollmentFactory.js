@@ -25,7 +25,6 @@ import type {
 import DataElementFactory from './DataElementFactory';
 import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
-import { setProgramId } from '../../../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 class EnrollmentFactory {
     static errorMessages = {

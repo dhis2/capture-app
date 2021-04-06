@@ -2,7 +2,7 @@
 import { from } from 'rxjs';
 import { concatMap, takeUntil, filter, map } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
-import { RenderFoundation } from '../../../metaData';
+import type { RenderFoundation } from '../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../converters';
 import getDataEntryKey from '../../DataEntry/common/getDataEntryKey';
 import { checkForDuplicateActionTypes, checkForDuplicateSuccess } from './checkForDuplicate.actions';
