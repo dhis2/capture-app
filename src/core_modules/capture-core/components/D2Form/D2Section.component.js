@@ -5,6 +5,7 @@ import Section from '../Section/Section.component';
 import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 import D2SectionFields from './D2SectionFields.container';
 import { Section as MetaDataSection } from '../../metaData';
+import { NoticeBox } from '@dhis2/ui';
 
 const getStyles = theme => ({
     section: {
@@ -42,6 +43,20 @@ class D2Section extends React.PureComponent<Props> {
         );
     }
 
+    renderSectionDescription() {
+        const description = this.props.sectionMetaData.displayDescription;
+
+        if (!description) {
+            return null;
+        }
+
+        return (
+            <NoticeBox title={description}>
+                {/* {description} */}
+            </NoticeBox>
+        )
+    }
+
     render() {
         const { sectionMetaData, isHidden, classes, sectionId, ...passOnProps } = this.props;
 
@@ -63,6 +78,7 @@ class D2Section extends React.PureComponent<Props> {
             <div>
                 <Section
                     header={this.renderSectionHeader()}
+                    description={this.renderSectionDescription()}
                     elevation={2}
                     className={classes.section}
                 >

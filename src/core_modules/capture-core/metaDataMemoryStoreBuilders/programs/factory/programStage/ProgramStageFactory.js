@@ -25,6 +25,7 @@ import RelationshipTypesFactory from './RelationshipTypesFactory';
 type SectionSpecs = {
     id: string,
     displayName: string,
+    displayDescription: string,
     dataElements: ?Array<CachedSectionDataElements>
 };
 
@@ -59,6 +60,7 @@ class ProgramStageFactory {
         const section = new Section((o) => {
             o.id = sectionSpecs.id;
             o.name = sectionSpecs.displayName;
+            o.displayDescription = sectionSpecs.displayDescription;
         });
 
         if (sectionSpecs.dataElements) {
@@ -176,6 +178,7 @@ class ProgramStageFactory {
                 stageForm.addSection(await this._buildSection(cachedProgramStageDataElementsAsObject, {
                     id: section.id,
                     displayName: section.displayName,
+                    displayDescription: section.displayDescription,
                     dataElements: section.dataElements,
                 }));
             });
