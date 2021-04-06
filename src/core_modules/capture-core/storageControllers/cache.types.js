@@ -167,6 +167,7 @@ export type CachedProgram = {
     displayName: string,
     displayShortName: string,
     organisationUnits: Object,
+    programSections: ?Array,
     programStages: Array<CachedProgramStage>,
     programType: string,
     categoryCombo: ?ProgramCachedCategoryCombo,
