@@ -10,7 +10,7 @@ const errorMessages = {
     GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
-export default function getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId: string): TrackedEntityType {
+export function getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId: string): TrackedEntityType {
     const trackedEntityType = trackedEntityTypesCollection.get(trackedEntityTypeId);
     if (!trackedEntityType) {
         log.error(errorCreator(errorMessages.TRACKED_ENTITY_TYPE_NOT_FOUND)({ trackedEntityTypeId }));

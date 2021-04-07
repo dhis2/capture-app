@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
-import SearchOrgUnitSelector from './SearchOrgUnitSelector.component';
+import { SearchOrgUnitSelector } from './SearchOrgUnitSelector.component';
 
 type Props = {
     innerRef: Function,
 };
 
-const SearchOrgUnitSelectorRefHandler = (props: Props) => {
+export const SearchOrgUnitSelectorRefHandler = (props: Props) => {
     const { innerRef, ...passOnProps } = props;
     return (
         // $FlowFixMe[cannot-spread-inexact] automated comment
@@ -16,5 +16,3 @@ const SearchOrgUnitSelectorRefHandler = (props: Props) => {
         />
     );
 };
-
-export default SearchOrgUnitSelectorRefHandler;

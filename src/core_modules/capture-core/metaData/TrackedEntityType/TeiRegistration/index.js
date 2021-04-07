@@ -1,2 +1,2 @@
 // @flow
-export { default as TeiRegistration } from './TeiRegistration';
+export { TeiRegistration } from './TeiRegistration';

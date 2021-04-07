@@ -1,6 +1,6 @@
 // @flow
-import isValidZeroOrPositiveInteger from './integerZeroOrPositive.validator';
-import isValidDate from './date.validator';
+import { isValidZeroOrPositiveInteger } from './integerZeroOrPositive.validator';
+import { isValidDate } from './date.validator';
 /**
  *
  * @export
@@ -60,7 +60,7 @@ function isAllEmpty(value: AgeValues) {
     return (!value.date && !value.years && !value.months && !value.days);
 }
 
-export default function isValidAge(value: AgeValues, dateFormat: string) {
+export function isValidAge(value: AgeValues, dateFormat: string) {
     if (isAllEmpty(value)) {
         return false;
     }

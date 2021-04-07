@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { makeEnrollmentMetadataSelector } from './enrollment.selectors';
-import NewEnrollmentRelationship from './DataEntryEnrollment.component';
+import { NewEnrollmentRelationship } from './DataEntryEnrollment.component';
 
 const makeMapStateToProps = () => {
     const enrollmentMetadataSelector = makeEnrollmentMetadataSelector();

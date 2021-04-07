@@ -34,7 +34,7 @@ class OrgUnitFieldWrapper extends React.Component<Props> {
     }
 }
 
-const ComposedRegUnitSelector =
+export const ComposedRegUnitSelector =
     withDefaultShouldUpdateInterface()(
         withDefaultFieldContainer()(
             withLabel({
@@ -53,5 +53,3 @@ const ComposedRegUnitSelector =
             ),
         ),
     );
-
-export default ComposedRegUnitSelector;

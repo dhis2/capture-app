@@ -9,7 +9,7 @@ type Props = {
     useRealBooleanValues?: ?boolean, // instead of string as option values
 };
 
-class D2BooleanField extends Component<Props> {
+export class BooleanField extends Component<Props> {
     static getOptions(useRealBooleanValues: boolean) {
         const trueText = i18n.t('Yes');
         const falseText = i18n.t('No');
@@ -47,5 +47,3 @@ class D2BooleanField extends Component<Props> {
         );
     }
 }
-
-export default D2BooleanField;

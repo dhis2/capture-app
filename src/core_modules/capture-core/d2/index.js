@@ -1,6 +1,6 @@
 // @flow
 export {
-    default as getD2,
+    getD2,
     setD2,
     getApi,
     getModels,

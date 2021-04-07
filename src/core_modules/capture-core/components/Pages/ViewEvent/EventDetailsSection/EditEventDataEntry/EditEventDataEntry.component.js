@@ -285,7 +285,7 @@ const dataEntrySectionDefinitions = {
     },
 };
 
-class EditEventDataEntry extends Component<Props> {
+class EditEventDataEntryPlain extends Component<Props> {
     fieldOptions: { theme: Theme };
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
@@ -321,4 +321,4 @@ class EditEventDataEntry extends Component<Props> {
 }
 
 
-export default withStyles(getStyles)(EditEventDataEntry);
+export const EditEventDataEntry = withStyles(getStyles)(EditEventDataEntryPlain);

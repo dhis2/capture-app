@@ -12,7 +12,7 @@ const errorMessages = {
     NOT_TRACKER_PROGRAM_DISPLAY: i18n.t('Program is not a tracker program'),
 };
 
-export default function getTrackerProgramThrowIfNotFound(programId: string): TrackerProgram {
+export function getTrackerProgramThrowIfNotFound(programId: string): TrackerProgram {
     const program = programCollection.get(programId);
 
     if (!program) {

@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import SearchProgramSelector from './SearchProgramSelector.component';
+import { SearchProgramSelector as SearchProgramSelectorComponent } from './SearchProgramSelector.component';
 import { startSetProgram } from './searchProgramSelector.actions';
 import { makeProgramOptionsSelector } from './searchProgramSelector.selectors';
 
@@ -21,4 +21,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeMapStateToProps, mapDispatchToProps)(SearchProgramSelector);
+export const SearchProgramSelector = connect(makeMapStateToProps, mapDispatchToProps)(
+    SearchProgramSelectorComponent
+);

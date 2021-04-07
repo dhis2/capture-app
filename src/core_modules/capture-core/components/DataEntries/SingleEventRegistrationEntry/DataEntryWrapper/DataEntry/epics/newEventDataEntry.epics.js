@@ -20,7 +20,7 @@ import {
     getCurrentClientMainData,
     getRulesActionsForEvent,
 } from '../../../../../../rules/actionsCreator';
-import getProgramAndStageFromProgramId from
+import { getProgramAndStageFromProgramId } from
     '../../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
 import {
     getDefaultMainConfig as getDefaultMainColumnConfig,
@@ -35,7 +35,7 @@ import type {
 import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
-import getStageForEventProgram from '../../../../../../metaData/helpers/EventProgram/getStageFromProgramId';
+import { getStageForEventProgram } from '../../../../../../metaData/helpers/EventProgram/getStageFromProgramId';
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';

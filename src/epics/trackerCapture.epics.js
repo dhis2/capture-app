@@ -143,7 +143,7 @@ import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightC
 import { loadCoreEpic } from 'capture-core/init';
 import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../components/AppStart';
 
-import getDataEntryEpics from './getDataEntryEpics';
+import { getDataEntryEpics } from './getDataEntryEpics';
 
 import {
     validateSelectionsBasedOnUrlUpdateEpic,
@@ -197,7 +197,7 @@ import {
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 
-export default combineEpics(
+export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
     resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,

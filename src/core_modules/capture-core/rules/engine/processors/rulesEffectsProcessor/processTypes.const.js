@@ -1,6 +1,6 @@
 // @flow
 
-export default {
+export const processTypes =  {
     EVENT: 'event',
     TEI: 'tei',
 };

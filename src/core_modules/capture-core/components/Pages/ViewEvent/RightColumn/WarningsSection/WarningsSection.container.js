@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import WarningsSection from './WarningsSection.component';
+import { WarningsSection as WarningsSectionComponent } from './WarningsSection.component';
 import { makeGetVisibleMessages } from '../ErrorsSection/messageSection.selectors';
 
 const makeStateToProps = () => {
@@ -22,4 +22,4 @@ const makeStateToProps = () => {
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeStateToProps, () => ({}))(WarningsSection);
+export const WarningsSection = connect(makeStateToProps, () => ({}))(WarningsSectionComponent);

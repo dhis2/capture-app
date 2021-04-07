@@ -5,9 +5,9 @@ import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
 import { EditEventDataEntry } from './EditEventDataEntry.component';
-import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
-import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
-import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
+import { withLoadingIndicator } from '../../../../HOC/withLoadingIndicator';
+import { withErrorMessageHandler } from '../../../../HOC/withErrorMessageHandler';
+import { programCollection } from '../../../../metaDataMemoryStores/programCollection/programCollection';
 import {
     startAsyncUpdateFieldForEditEvent,
     startRunRulesOnUpdateForEditSingleEvent,

@@ -9,7 +9,7 @@ import {
     DataElement,
     typeof dataElementTypes,
 } from '../../../metaData';
-import getStageFromEvent from '../../../metaData/helpers/getStageFromEvent';
+import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 import { convertValue } from '../../../converters/clientToList';
 import type { RenderFoundation } from '../../../metaData';
 

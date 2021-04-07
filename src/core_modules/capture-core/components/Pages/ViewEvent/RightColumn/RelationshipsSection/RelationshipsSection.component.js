@@ -4,11 +4,11 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Link as LinkIcon } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
-import ViewEventSection from '../../Section/ViewEventSection.component';
-import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
-import Relationships from '../../../../Relationships/Relationships.component';
+import { ViewEventSection } from '../../Section/ViewEventSection.component';
+import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
+import { Relationships } from '../../../../Relationships/Relationships.component';
 import { type ProgramStage } from '../../../../../metaData';
-import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
+import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { ConnectedEntity } from './ConnectedEntity';
 import type { Entity } from '../../../../Relationships/relationships.types';
 
@@ -47,7 +47,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-class RelationshipsSection extends React.Component<Props> {
+class RelationshipsSectionPlain extends React.Component<Props> {
     renderHeader = () => {
         const { classes, relationships, ready } = this.props;
         let count = relationships ? relationships.length : 0;
@@ -115,4 +115,4 @@ class RelationshipsSection extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(RelationshipsSection);
+export const RelationshipsSection = withStyles(getStyles)(RelationshipsSectionPlain);

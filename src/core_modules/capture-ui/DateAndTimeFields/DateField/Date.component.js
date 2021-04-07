@@ -1,9 +1,9 @@
 // @flow
 import React, { createRef } from 'react';
-import DatePopup from './DatePopup.component';
-import DateCalendar from './DateCalendar.component';
-import lowerCaseFirstLetter from '../../internal/utils/string/lowerCaseFirstLetter';
-import DateInput from '../../internal/DateInput/DateInput.component';
+import { DatePopup } from './DatePopup.component';
+import { DateCalendar } from './DateCalendar.component';
+import { lowerCaseFirstLetter } from '../../internal/utils/string/lowerCaseFirstLetter';
+import { DateInput } from '../../internal/DateInput/DateInput.component';
 
 type Props = {
     value: ?string,
@@ -21,7 +21,7 @@ type State = {
     popoverOpen: boolean,
 };
 
-class UIDate extends React.Component<Props, State> {
+export class DateField extends React.Component<Props, State> {
     static splitPassOnProps(passOnProps: ?Object) {
         const splittedProps = {
             input: {},
@@ -204,5 +204,3 @@ class UIDate extends React.Component<Props, State> {
         );
     }
 }
-
-export default UIDate;

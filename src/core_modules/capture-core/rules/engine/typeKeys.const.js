@@ -1,5 +1,5 @@
 // @flow
-export default {
+export const typeKeys {
     TEXT: 'TEXT',
     LONG_TEXT: 'LONG_TEXT',
     LETTER: 'LETTER',

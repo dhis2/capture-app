@@ -6,7 +6,7 @@ import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import type { Category as CategoryMetadata } from '../../../../metaData';
 import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
-import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
+import { withLoadingIndicator } from '../../../../HOC/withLoadingIndicator';
 import { makeOnSelectSelector } from './categorySelector.selectors';
 
 const VirtualizedSelectLoadingIndicatorHOC =

@@ -6,7 +6,7 @@ type Props = {
     children: React.Node,
 };
 
-class Footer extends React.Component<Props> {
+export class Footer extends React.Component<Props> {
     static childContextTypes = {
         table: PropTypes.object,
     };
@@ -28,5 +28,3 @@ class Footer extends React.Component<Props> {
         );
     }
 }
-
-export default Footer;

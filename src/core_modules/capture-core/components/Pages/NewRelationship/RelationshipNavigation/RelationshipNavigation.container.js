@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import RelationshipNavigation from './RelationshipNavigation.component';
+import { RelationshipNavigation as RelationshipNavigationComponent } from './RelationshipNavigation.component';
 
 
 const mapStateToProps = (state: ReduxState) => ({
@@ -11,4 +11,4 @@ const mapDispatchToProps = () => ({
 });
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(RelationshipNavigation);
+export const RelationshipNavigation = connect(mapStateToProps, mapDispatchToProps)(RelationshipNavigationComponent);

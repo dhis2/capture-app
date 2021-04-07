@@ -1,16 +1,16 @@
 // @flow
 import * as React from 'react';
 
-import MultiSelectBoxes from '../internal/SelectionBoxes/MultiSelectionsBoxes/MultiSelectionsBoxes.component';
-import SingleSelectBoxes from '../internal/SelectionBoxes/SingleSelectionBoxes/SingleSelectionBoxes.component';
+import { MultiSelectBoxes } from '../internal/SelectionBoxes/MultiSelectionsBoxes/MultiSelectionsBoxes.component';
+import { SingleSelectBoxes } from '../internal/SelectionBoxes/SingleSelectionBoxes/SingleSelectionBoxes.component';
 
-import orientations from '../constants/orientations.const';
+import { orientations } from '../constants/orientations.const';
 
 type Props = {
     multiSelect?: ?boolean,
 };
 
-const SelectBoxes = (props: Props) => {
+export const SelectionBoxes = (props: Props) => {
     const { multiSelect, ...passOnProps } = props;
 
     if (multiSelect) {
@@ -31,5 +31,3 @@ const SelectBoxes = (props: Props) => {
         />
     );
 };
-
-export default SelectBoxes;

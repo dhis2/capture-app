@@ -4,8 +4,8 @@ import { errorCreator } from '../../../capture-core-utils';
 import { RulesEngine } from '../engine';
 import { TrackerProgram } from '../../metaData';
 import type { DataElement, RenderFoundation } from '../../metaData';
-import constantsStore from '../../metaDataMemoryStores/constants/constants.store';
-import optionSetsStore from '../../metaDataMemoryStores/optionSets/optionSets.store';
+import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
+import { optionSetsStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
 
 import type {
     ProgramRulesContainer,
@@ -103,7 +103,7 @@ function prepare(
     return null;
 }
 
-export default function runRulesForTEI(
+export function runRulesForTEI(
     program: ?TrackerProgram,
     foundation: ?RenderFoundation,
     orgUnit: Object,

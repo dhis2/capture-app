@@ -5,11 +5,11 @@ import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
-import AgeNumberInput from '../internal/AgeInput/AgeNumberInput.component';
-import AgeDateInput from '../internal/AgeInput/AgeDateInput.component';
+import { AgeNumberInput } from '../internal/AgeInput/AgeNumberInput.component';
+import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
-import orientations from '../constants/orientations.const';
-import withInternalChangeHandler from '../HOC/withInternalChangeHandler';
+import { orientations } from '../constants/orientations.const';
+import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
 
 type AgeValues = {
     date?: ?string,
@@ -92,7 +92,7 @@ const messageTypeClass = {
     validating: 'innerInputValidating',
 };
 
-class D2AgeField extends Component<Props> {
+class D2AgeFieldPlain extends Component<Props> {
     static isEmptyNumbers(values: AgeValues) {
         return !values.years && !values.months && !values.days;
     }
@@ -261,4 +261,4 @@ class D2AgeField extends Component<Props> {
     }
 }
 
-export default withInternalChangeHandler()(D2AgeField);
+export const AgeField = withInternalChangeHandler()(D2AgeFieldPlain);

@@ -13,7 +13,7 @@ type Props = {|
     teiRegistrationMetadata?: TeiRegistration,
 |};
 
-const RelationshipTrackedEntityInstance =
+const RelationshipTrackedEntityInstancePlain =
   ({
       theme,
       onSave,
@@ -35,4 +35,4 @@ const RelationshipTrackedEntityInstance =
       );
   };
 
-export default withTheme()(RelationshipTrackedEntityInstance);
+export const RelationshipTrackedEntityInstance = withTheme()(RelationshipTrackedEntityInstancePlain);

@@ -1,2 +1,2 @@
 // @flow
-export { default as Icon } from './Icon';
+export { Icon } from './Icon';

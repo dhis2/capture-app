@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
-import getD2 from 'capture-core/d2/d2Instance';
+import { getD2 } from 'capture-core/d2/d2Instance';
 import { errorCreator } from 'capture-core-utils';
 import {
     actionTypes as orgUnitListActions,

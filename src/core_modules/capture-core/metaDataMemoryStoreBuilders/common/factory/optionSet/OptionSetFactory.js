@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
-import getCamelCaseUppercaseString from 'capture-core-utils/string/getCamelCaseFromUppercase';
+import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import { errorCreator } from 'capture-core-utils';
 import type {
     CachedStyle,
@@ -13,10 +13,10 @@ import type {
 import { OptionSet, Option, optionSetInputTypes as inputTypes, Icon } from '../../../../metaData';
 import type { DataElement } from '../../../../metaData';
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
-import getDhisIconAsync from '../../getDhisIcon';
-import OptionGroup from '../../../../metaData/OptionSet/OptionGroup';
+import { getDhisIconAsync } from '../../getDhisIcon';
+import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
 
-class OptionSetFactory {
+export class OptionSetFactory {
     static OPTION_SET_NOT_FOUND = 'Optionset not found';
 
     static translationPropertyNames = {
@@ -46,7 +46,7 @@ class OptionSetFactory {
     }
 
     static getRenderType(renderType: ?string) {
-        return renderType && getCamelCaseUppercaseString(renderType);
+        return renderType && camelCaseUppercaseString(renderType);
     }
 
     cachedOptionSets: Map<string, CachedOptionSet>;
@@ -117,5 +117,3 @@ class OptionSetFactory {
         return optionSet;
     }
 }
-
-export default OptionSetFactory;

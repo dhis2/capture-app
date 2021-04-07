@@ -21,8 +21,8 @@ import {
     makeProgramNameSelector,
 } from './dataEntry.selectors';
 import { type RenderFoundation } from '../../../../../metaData';
-import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
-import withErrorMessageHandler from '../../../../../HOC/withErrorMessageHandler';
+import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { withErrorMessageHandler } from '../../../../../HOC/withErrorMessageHandler';
 import typeof { saveTypes } from './newEventSaveTypes';
 
 const makeMapStateToProps = () => {

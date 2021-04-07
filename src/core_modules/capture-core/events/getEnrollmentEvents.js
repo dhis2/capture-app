@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../d2/d2Instance';
-import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
+import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
 
@@ -98,7 +98,7 @@ function convertToClientEvent(event: ApiTEIEvent) {
     };
 }
 
-export default async function getEnrollmentEvents() {
+export async function getEnrollmentEvents() {
     const api = getApi();
     const apiRes = await api
         .get('events?program=eBAyeGv0exc&orgUnit=DiszpKrYNg8&paging=false');

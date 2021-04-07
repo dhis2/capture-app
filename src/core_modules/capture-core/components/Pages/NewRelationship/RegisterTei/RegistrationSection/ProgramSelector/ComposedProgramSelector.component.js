@@ -131,7 +131,7 @@ class ProgramSelector extends React.Component<Props> {
     }
 }
 
-const ComposedProgramSelector =
+export const ComposedProgramSelector =
     withFocusSaver()(
         withDefaultFieldContainer()(
             withLabel({
@@ -151,5 +151,3 @@ const ComposedProgramSelector =
             ),
         ),
     );
-
-export default ComposedProgramSelector;

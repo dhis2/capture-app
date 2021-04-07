@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import ErrorsSection from './ErrorsSection.component';
+import { ErrorsSection as ErrorsSectionComponent } from './ErrorsSection.component';
 import { makeGetVisibleMessages } from './messageSection.selectors';
 
 const makeStateToProps = () => {
@@ -21,4 +21,4 @@ const makeStateToProps = () => {
 };
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeStateToProps, () => ({}))(ErrorsSection);
+export const ErrorsSection = connect(makeStateToProps, () => ({}))(ErrorsSectionComponent);

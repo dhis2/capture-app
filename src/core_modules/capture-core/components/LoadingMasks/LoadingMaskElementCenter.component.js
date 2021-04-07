@@ -33,4 +33,4 @@ const LoadingMaskForPagePlain = (props: Props) => {
     );
 };
 
-export const LoadingMaskForPage = withStyles(styles)(LoadingMaskForPagePlain);
+export const LoadingMaskElementCenter = withStyles(styles)(LoadingMaskForPagePlain);

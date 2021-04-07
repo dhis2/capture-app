@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { Info as InfoIcon } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
-import ViewEventSection from '../../Section/ViewEventSection.component';
-import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
+import { ViewEventSection } from '../../Section/ViewEventSection.component';
+import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 
 type Props = {
     classes: Object,
@@ -37,7 +37,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-class IndicatorsSection extends React.Component<Props> {
+class IndicatorsSectionPlain extends React.Component<Props> {
     renderHeader = (count: number) => {
         const classes = this.props.classes;
         return (
@@ -86,4 +86,4 @@ class IndicatorsSection extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(IndicatorsSection);
+export const IndicatorsSection = withStyles(getStyles)(IndicatorsSectionPlain);

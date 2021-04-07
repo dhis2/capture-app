@@ -1,2 +1,2 @@
 // @flow
-export { default as SystemSettings } from './SystemSettings';
+export { SystemSettings } from './SystemSettings';

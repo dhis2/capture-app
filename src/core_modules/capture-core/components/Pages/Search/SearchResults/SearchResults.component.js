@@ -6,7 +6,7 @@ import { Pagination } from 'capture-ui';
 import { Button, colors } from '@dhis2/ui';
 import { useLocation } from 'react-router';
 import { CardList } from '../../../CardList';
-import withNavigation from '../../../Pagination/withDefaultNavigation';
+import { withNavigation } from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
 import type { Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';

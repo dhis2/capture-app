@@ -6,7 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { colors } from '@dhis2/ui';
-import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 
 import { ProgramSelector } from './Program/ProgramSelector.component';
 import { OrgUnitSelector } from './OrgUnitSelector.component';
@@ -60,7 +60,7 @@ type Props = {
 
 class QuickSelectorPlain extends Component<Props> {
     static getSelectedProgram(selectedProgramId: string) {
-        return programs.get(selectedProgramId) || {};
+        return programCollection.get(selectedProgramId) || {};
     }
 
     handleClickProgram: (programId: string) => void;

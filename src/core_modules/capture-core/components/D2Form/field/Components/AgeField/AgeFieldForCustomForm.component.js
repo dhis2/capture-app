@@ -15,7 +15,7 @@ import {
     withCustomElementContainer,
 } from '../internal';
 
-export const withGotoInterface()(
+export const AgeFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

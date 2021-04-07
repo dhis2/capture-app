@@ -14,7 +14,7 @@ type Props = {
     onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
 };
 
-const NewEnrollmentRelationship =
+const NewEnrollmentRelationshipPlain =
   ({
       theme,
       onSave,
@@ -37,4 +37,4 @@ const NewEnrollmentRelationship =
       );
   };
 
-export default withTheme()(NewEnrollmentRelationship);
+export const NewEnrollmentRelationship = withTheme()(NewEnrollmentRelationshipPlain);

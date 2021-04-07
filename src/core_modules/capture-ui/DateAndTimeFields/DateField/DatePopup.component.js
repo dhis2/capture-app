@@ -14,7 +14,7 @@ type Props = {
     inputUsesFloatingLabel: boolean,
 };
 
-class DatePopup extends React.Component<Props> {
+export class DatePopup extends React.Component<Props> {
     getAbsoluteBottom() {
         const inputUsesFloatingLabel = this.props.inputUsesFloatingLabel;
         return inputUsesFloatingLabel ? 60 : 40;
@@ -85,5 +85,3 @@ class DatePopup extends React.Component<Props> {
         );
     }
 }
-
-export default DatePopup;

@@ -25,7 +25,7 @@ type Props = {
     onSetProgram: (searchId: string, programId: ?string) => void,
     programOptions: Array<VirtualizedOptionConfig>,
 }
-class SearchProgramSelector extends React.Component<Props> {
+export class SearchProgramSelector extends React.Component<Props> {
     onSelectProgram = (programId: ?string) => {
         this.props.onSetProgram(this.props.searchId, programId);
     }
@@ -41,5 +41,3 @@ class SearchProgramSelector extends React.Component<Props> {
         );
     }
 }
-
-export default SearchProgramSelector;

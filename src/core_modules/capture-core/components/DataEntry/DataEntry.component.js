@@ -6,9 +6,9 @@ import { D2Form } from '../D2Form';
 import { placements } from './constants/placements.const';
 import type { RenderFoundation } from '../../metaData';
 import { getDataEntryKey } from './common/getDataEntryKey';
-import StickyOnScroll from '../Sticky/StickyOnScroll.component';
-import Section from '../Section/Section.component';
-import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
+import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
+import { Section } from '../Section/Section.component';
+import { SectionHeaderSimple } from '../Section/SectionHeaderSimple.component';
 
 const styles = theme => ({
     loadingContainer: {

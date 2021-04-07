@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import DataElement from './DataElement';
+import { DataElement } from './DataElement';
 
 export class DateDataElement extends DataElement {
     _allowFutureDate: boolean;

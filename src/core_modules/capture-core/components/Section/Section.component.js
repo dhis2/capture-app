@@ -31,7 +31,7 @@ type Props = {
     className?: ?string,
 };
 
-class Section extends Component<Props> {
+class SectionPlain extends Component<Props> {
     getHeader() {
         const orgHeader = this.props.header;
 
@@ -86,4 +86,4 @@ class Section extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(Section);
+export const Section = withStyles(styles)(SectionPlain);

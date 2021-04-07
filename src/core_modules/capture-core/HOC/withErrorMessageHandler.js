@@ -16,7 +16,7 @@ type Props = {
     }
 };
 
-const withErrorMessageHandler = () =>
+export const withErrorMessageHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(getStyles)((props: Props) => {
             const { error, classes, ...passOnProps } = props;
@@ -38,5 +38,3 @@ const withErrorMessageHandler = () =>
                 />
             );
         });
-
-export default withErrorMessageHandler;

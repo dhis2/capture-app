@@ -1,6 +1,6 @@
 // @flow
 
-export default {
+export const userStores = {
     CONSTANTS: 'constants',
     ORGANISATION_UNIT_LEVELS: 'organisationUnitLevels',
     ORGANISATION_UNIT_GROUPS: 'organisationUnitGroups',

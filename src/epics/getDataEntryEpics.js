@@ -9,7 +9,7 @@ import {
     teiOpenBatchActionTypes,
 } from 'capture-core/components/DataEntries';
 
-export default () => [
+export const getDataEntryEpics = () => [
     getFilterSearchGroupForSearchEpic([
         enrollmentBatchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT,
         teiBatchActionTypes.NEW_TEI_FIELD_UPDATE_BATCH,

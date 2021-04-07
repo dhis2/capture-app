@@ -10,10 +10,10 @@ import {
     type Category,
 } from '../../../../metaData';
 
-import getProgramIconAsync from './getProgramIcon';
+import { getProgramIconAsync } from './getProgramIcon';
 import { SearchGroupFactory } from '../../../common/factory';
 import { EnrollmentFactory } from '../enrollment';
-import DataElementFactory from '../enrollment/DataElementFactory';
+import { DataElementFactory } from '../enrollment/DataElementFactory';
 import {
     ProgramStageFactory,
 } from '../programStage';
@@ -34,7 +34,7 @@ import type
     CachedProgramTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
 
-class ProgramFactory {
+export class ProgramFactory {
     programStageFactory: ProgramStageFactory;
     enrollmentFactory: EnrollmentFactory;
     searchGroupFactory: SearchGroupFactory;
@@ -185,5 +185,3 @@ class ProgramFactory {
         return program;
     }
 }
-
-export default ProgramFactory;

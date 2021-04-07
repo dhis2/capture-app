@@ -2,14 +2,14 @@
 import uuid from 'd2-utilizr/src/uuid';
 import { moment } from 'capture-core-utils/moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
-import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
     type RenderFoundation,
 } from '../../../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../../../converters';
-import getDisplayName from '../../../../../trackedEntityInstances/getDisplayName';
+import { getDisplayName } from '../../../../../trackedEntityInstances/getDisplayName';
 import { convertDataEntryValuesToClientValues } from '../../../../DataEntry/common/convertDataEntryValuesToClientValues';
 import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 
@@ -82,7 +82,7 @@ function buildGeometryProp(key: string, serverValues: Object) {
     };
 }
 
-export default function getRelationshipNewTei(dataEntryId: string, itemId: string, state: ReduxState) {
+export function getRelationshipNewTei(dataEntryId: string, itemId: string, state: ReduxState) {
     const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
     const formValues = state.formsValues[dataEntryKey];
     const { programId, orgUnit } = state.newRelationshipRegisterTei;

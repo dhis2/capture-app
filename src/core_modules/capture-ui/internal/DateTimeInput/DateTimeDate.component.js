@@ -1,18 +1,18 @@
 // @flow
 import React from 'react';
-import withFocusSaver from '../../HOC/withFocusSaver';
-import UIDate from '../../DateAndTimeFields/DateField/Date.component';
-import withShrinkLabel from '../../HOC/withShrinkLabel';
+import { withFocusSaver } from '../../HOC/withFocusSaver';
+import { DateField } from '../../DateAndTimeFields/DateField/Date.component';
+import { withShrinkLabel } from '../../HOC/withShrinkLabel';
 
 
-function DateTimeDate(props) {
+function DateTimeDatePlain(props) {
     const { value, ...passOnProps } = props;
     return (
-        <UIDate
+        <DateField
             value={value || ''}
             {...passOnProps}
         />
     );
 }
 
-export default withFocusSaver()(withShrinkLabel()(DateTimeDate));
+export const DateTimeDate = withFocusSaver()(withShrinkLabel()(DateTimeDatePlain));

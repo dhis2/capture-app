@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import RelationshipsSection from './RelationshipsSection.component';
+import { RelationshipsSection as RelationshipsSectionComponent } from './RelationshipsSection.component';
 import { openAddRelationship } from '../../ViewEventComponent/viewEvent.actions';
 import { requestDeleteEventRelationship } from '../../Relationship/ViewEventRelationships.actions';
 
@@ -25,4 +25,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(RelationshipsSection);
+export const RelationshipsSection = connect(mapStateToProps, mapDispatchToProps)(RelationshipsSectionComponent);

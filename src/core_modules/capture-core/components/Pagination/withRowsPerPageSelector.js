@@ -72,6 +72,6 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
  * @memberof Pagination
  * @example withRowsPerPageSelector()([InnerComponent])
 */
-export default () =>
+export const withRowsPerPageSelector = () =>
     (InnerComponent: React.ComponentType<any>) =>
         getRowsPerPageSelector(InnerComponent);

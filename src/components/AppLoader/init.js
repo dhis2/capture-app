@@ -2,9 +2,9 @@
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
 import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2';
-import environments from 'capture-core/constants/environments';
+import { environments } from 'capture-core/constants/environments';
 import moment from 'moment';
-import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
+import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
 import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';

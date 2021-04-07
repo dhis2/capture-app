@@ -5,8 +5,8 @@ import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { Adjust as AdjustIcon } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
-import ViewEventSection from '../../Section/ViewEventSection.component';
-import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
+import { ViewEventSection } from '../../Section/ViewEventSection.component';
+import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 
 type Props = {
     classes: Object,
@@ -38,7 +38,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-class FeedbacksSection extends React.Component<Props> {
+class FeedbacksSectionPlain extends React.Component<Props> {
     renderHeader = (count: number) => {
         const classes = this.props.classes;
         return (
@@ -87,4 +87,4 @@ class FeedbacksSection extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(FeedbacksSection);
+export const FeedbacksSection = withStyles(getStyles)(FeedbacksSectionPlain);

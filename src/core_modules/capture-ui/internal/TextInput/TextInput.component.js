@@ -14,7 +14,7 @@ type Props = {
     style?: ?Object,
 };
 
-const TextInput = (props: Props) => {
+export const TextInput = (props: Props) => {
     const { multiLine, classes, inputRef, style, ...passOnProps } = props;
 
     return (
@@ -43,5 +43,3 @@ const TextInput = (props: Props) => {
 TextInput.defaultProps = {
     classes: {},
 };
-
-export default TextInput;

@@ -19,4 +19,4 @@ class ConstantStore {
     }
 }
 
-export default new ConstantStore();
+export const constantsStore = new ConstantStore();

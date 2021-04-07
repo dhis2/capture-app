@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { errorCreator } from 'capture-core-utils';
 import { Button } from '../../Buttons/Button.component';
 import { D2Form } from '../../D2Form';
-import SearchOrgUnitSelector from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
+import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import { type SearchGroup } from '../../../metaData';
 import { withGotoInterface } from '../../FormFields/New';
 
@@ -52,7 +52,7 @@ type Props = {
     },
 };
 
-class SearchForm extends React.Component<Props> {
+class SearchFormPlain extends React.Component<Props> {
     formInstance: any;
     orgUnitSelectorInstance: SearchOrgUnitSelector;
 
@@ -176,4 +176,4 @@ class SearchForm extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(SearchForm);
+export const TeiSearchForm = withStyles(getStyles)(SearchFormPlain);

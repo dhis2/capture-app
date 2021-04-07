@@ -1,6 +1,6 @@
 // @flow
 
-export default {
+export const envinronments {
     prod: 'production',
     dev: 'development',
     test: 'test',

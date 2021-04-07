@@ -9,11 +9,11 @@ import type {
     CachedOptionSet,
 
 } from '../../../../storageControllers/cache.types';
-import getDhisIconAsync from '../../../common/getDhisIcon';
+import { getDhisIconAsync } from '../../../common/getDhisIcon';
 import { DataElement, DateDataElement, Icon, dataElementTypes } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
 
-class DataElementFactory {
+export class DataElementFactory {
     static propertyNames = {
         NAME: 'NAME',
         DESCRIPTION: 'DESCRIPTION',
@@ -142,5 +142,3 @@ class DataElementFactory {
             this._buildBaseDataElement(cachedProgramStageDataElement, dataElementType);
     }
 }
-
-export default DataElementFactory;

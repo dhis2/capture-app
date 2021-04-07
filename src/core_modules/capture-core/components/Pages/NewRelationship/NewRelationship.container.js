@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import NewRelationship from './NewRelationship.component';
+import { NewRelationship as NewRelationshipComponent } from './NewRelationship.component';
 import type { SelectedRelationshipType } from './newRelationship.types';
 import {
     selectRelationshipType,
@@ -30,4 +30,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(NewRelationship);
+export const NewRelationship = connect(mapStateToProps, mapDispatchToProps)(NewRelationshipComponent);

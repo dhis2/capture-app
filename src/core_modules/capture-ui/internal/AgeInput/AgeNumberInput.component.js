@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import TextInput from '../TextInput/TextInput.component';
-import withShrinkLabel from '../../HOC/withShrinkLabel';
-import withFocusSaver from '../../HOC/withFocusSaver';
-import withFocusHandler from '../../internal/TextInput/withFocusHandler';
+import { TextInput } from '../TextInput/TextInput.component';
+import { withShrinkLabel } from '../../HOC/withShrinkLabel';
+import { withFocusSaver } from '../../HOC/withFocusSaver';
+import { withTextFieldFocusHandler } from '../../internal/TextInput/withFocusHandler';
 
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
     classes?: ?any,
 }
 
-class AgeNumberInput extends Component<Props> {
+class AgeNumberInputPlain extends Component<Props> {
     handleBlur = (event) => {
         this.props.onBlur(event.currentTarget.value);
     }
@@ -38,4 +38,5 @@ class AgeNumberInput extends Component<Props> {
     }
 }
 
-export default withFocusSaver()(withShrinkLabel()(withFocusHandler()(AgeNumberInput)));
+export const AgeNumberInput =
+    withFocusSaver()(withShrinkLabel()(withTextFieldFocusHandler()(AgeNumberInputPlain)));

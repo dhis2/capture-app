@@ -26,7 +26,7 @@ type Props = {
     classes: Object,
 };
 
-const EditMode = (props: Props) => {
+const EditModePlain = (props: Props) => {
     const { onCancel, classes, ...passOnProps } = props;
     return (
         <div
@@ -58,4 +58,4 @@ const EditMode = (props: Props) => {
     );
 };
 
-export default withStyles(getStyles)(EditMode);
+export const EditMode = withStyles(getStyles)(EditModePlain);

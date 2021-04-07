@@ -8,7 +8,7 @@ import { dialogModes } from './dialogModes';
 import type { SharingSettings } from '../workingLists.types';
 import type { Props } from './templateMaintenance.types';
 
-const TemplateMaintenance = (props: Props, ref) => {
+const TemplateMaintenancePlain = (props: Props, ref) => {
     const {
         mode,
         currentTemplate,
@@ -68,4 +68,4 @@ const TemplateMaintenance = (props: Props, ref) => {
     );
 };
 
-export default forwardRef<Props, { handleUpdateTemplate: Function }>(TemplateMaintenance);
+export const TemplateMaintenance = forwardRef<Props, { handleUpdateTemplate: Function }>(TemplateMaintenancePlain);

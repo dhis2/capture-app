@@ -3,8 +3,8 @@
 
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
-import getCamelCaseUppercaseString from 'capture-core-utils/string/getCamelCaseFromUppercase';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import type {
     CachedProgramStageDataElement,
     CachedSectionDataElements,
@@ -14,13 +14,13 @@ import type {
     CachedOptionSet,
     CachedRelationshipType,
 } from '../../../../storageControllers/cache.types';
-import Section from '../../../../metaData/RenderFoundation/Section';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
-import CustomForm from '../../../../metaData/RenderFoundation/CustomForm';
-import isNonEmptyArray from '../../../../utils/isNonEmptyArray';
-import ProgramStage from '../../../../metaData/Program/ProgramStage';
-import DataElementFactory from './DataElementFactory';
-import RelationshipTypesFactory from './RelationshipTypesFactory';
+import { Section } from '../../../../metaData/RenderFoundation/Section';
+import { RenderFoundation } from '../../../../metaData/RenderFoundation/RenderFoundation';
+import { CustomForm } from '../../../../metaData/RenderFoundation/CustomForm';
+import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';
+import { ProgramStage } from '../../../../metaData/Program/ProgramStage';
+import { DataElementFactory } from './DataElementFactory';
+import { RelationshipTypesFactory } from './RelationshipTypesFactory';
 
 type SectionSpecs = {
     id: string,
@@ -29,7 +29,7 @@ type SectionSpecs = {
 };
 
 
-class ProgramStageFactory {
+export class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
 
     cachedOptionSets: Map<string, CachedOptionSet>;
@@ -141,7 +141,7 @@ class ProgramStageFactory {
                 _form.addLabel({ id: 'eventDate', label: cachedProgramStage.executionDateLabel || 'Incident date' });
                 _form.validationStrategy =
                     cachedProgramStage.validationStrategy &&
-                    getCamelCaseUppercaseString(cachedProgramStage.validationStrategy);
+                    camelCaseUppercaseString(cachedProgramStage.validationStrategy);
             });
         });
 
@@ -186,5 +186,3 @@ class ProgramStageFactory {
         return stage;
     }
 }
-
-export default ProgramStageFactory;

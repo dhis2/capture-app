@@ -100,7 +100,7 @@ const getMapStateToProps = (inEffectFn: InEffectFn) => (state: ReduxState, props
 
 const mapDispatchToProps = () => ({});
 
-export default (dialogConfig: DialogConfig, inEffect: InEffectFn) =>
+export const withBrowserBackWarning = (dialogConfig: DialogConfig, inEffect: InEffectFn) =>
     (InnerComponent: React.ComponentType<any>) =>
 
         // $FlowFixMe[missing-annot] automated comment

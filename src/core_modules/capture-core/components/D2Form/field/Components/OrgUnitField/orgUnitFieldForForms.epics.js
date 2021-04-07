@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import getD2 from 'capture-core/d2/d2Instance';
+import { getD2 } from 'capture-core/d2/d2Instance';
 import { from } from 'rxjs';
 import { map, concatMap, takeUntil, filter } from 'rxjs/operators';
 import { ofType } from 'redux-observable';

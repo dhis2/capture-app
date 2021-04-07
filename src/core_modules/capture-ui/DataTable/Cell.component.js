@@ -9,7 +9,7 @@ type Props = {
     className?: ?string,
 };
 
-const Cell = (props: Props, context: { table?: ?{ head: boolean, footer: boolean }}) => {
+export const Cell = (props: Props, context: { table?: ?{ head: boolean, footer: boolean }}) => {
     const { children, className, ...passOnProps } = props;
 
     const { table } = context;
@@ -36,6 +36,3 @@ const Cell = (props: Props, context: { table?: ?{ head: boolean, footer: boolean
 Cell.contextTypes = {
     table: PropTypes.object,
 };
-
-
-export default Cell;

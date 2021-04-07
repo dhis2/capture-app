@@ -77,7 +77,7 @@ import { enrollmentPageDesc } from '../../core_modules/capture-core/reducers/des
 import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
 import { possibleDuplicatesDesc } from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
 
-export default [
+export const reducerDescriptions = [
     activePageDesc,
     appReducerDesc,
     currentSelectionsReducerDesc,

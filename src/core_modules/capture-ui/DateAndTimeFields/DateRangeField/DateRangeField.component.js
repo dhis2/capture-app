@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import DateField from '../DateField/Date.component';
-import withFocusSaver from '../../HOC/withFocusSaver';
-import withShrinkLabel from '../../HOC/withShrinkLabel';
+import { DateField } from '../DateField/Date.component';
+import { withFocusSaver } from '../../HOC/withFocusSaver';
+import { withShrinkLabel } from '../../HOC/withShrinkLabel';
 import defaultClasses from './dateRangeField.module.css';
-import InnerMessage from '../../internal/InnerMessage/InnerMessage.component';
+import { InnerMessage } from '../../internal/InnerMessage/InnerMessage.component';
 
 
 const RangeInputField = withFocusSaver()(withShrinkLabel()(DateField));
@@ -29,7 +29,7 @@ const inputKeys = {
 };
 
 
-class DateRangeField extends React.Component<Props> {
+export class DateRangeField extends React.Component<Props> {
     touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
@@ -122,4 +122,3 @@ class DateRangeField extends React.Component<Props> {
         );
     }
 }
-export default DateRangeField;

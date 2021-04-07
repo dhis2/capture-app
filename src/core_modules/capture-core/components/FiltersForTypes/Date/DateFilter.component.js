@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes';
-import OptionSet from '../../../metaData/OptionSet/OptionSet';
-import Option from '../../../metaData/OptionSet/Option';
+import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
+import { Option } from '../../../metaData/OptionSet/Option';
 
 import { FromDateFilter } from './From.component';
 import { ToDateFilter } from './To.component';

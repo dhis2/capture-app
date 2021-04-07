@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import ViewEventDataEntry from './ViewEventDataEntry.component';
-import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
+import { ViewEventDataEntry as ViewEventDataEntryComponent } from './ViewEventDataEntry.component';
+import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 
 
 const mapStateToProps = (state: ReduxState) => {
@@ -15,4 +15,6 @@ const mapDispatchToProps = (): any => ({});
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(ViewEventDataEntry));
+export const ViewEventDataEntry = connect(mapStateToProps, mapDispatchToProps)(
+    withLoadingIndicator()(ViewEventDataEntryComponent)
+);

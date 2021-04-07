@@ -7,7 +7,7 @@ import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import '@joakim_sm/react-infinite-calendar/styles.css';
 import './customStyles.css';
 import { parseDate, convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
-import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
+import { CurrentLocaleData } from '../../../../utils/localeData/CurrentLocaleData';
 import { getTheme } from './getTheme';
 
 type Props = {

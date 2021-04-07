@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { errorCreator } from 'capture-core-utils';
 import type {
     CachedProgram,
@@ -22,11 +22,11 @@ import type {
     TrackedEntityType,
     SearchGroup,
 } from '../../../../metaData';
-import DataElementFactory from './DataElementFactory';
+import { DataElementFactory } from './DataElementFactory';
 import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
 
-class EnrollmentFactory {
+export class EnrollmentFactory {
     static errorMessages = {
         CUSTOM_FORM_TEMPLATE_ERROR: 'Error in custom form template',
     };
@@ -264,5 +264,3 @@ class EnrollmentFactory {
         return enrollment;
     }
 }
-
-export default EnrollmentFactory;

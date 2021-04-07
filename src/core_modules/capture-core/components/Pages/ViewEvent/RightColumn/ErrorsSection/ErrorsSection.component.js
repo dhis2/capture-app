@@ -4,8 +4,8 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Error as ErrorIcon } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
-import ViewEventSection from '../../Section/ViewEventSection.component';
-import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
+import { ViewEventSection } from '../../Section/ViewEventSection.component';
+import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 
 
 type Props = {
@@ -29,7 +29,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-class ErrorsSection extends React.Component<Props> {
+class ErrorsSectionPlain extends React.Component<Props> {
     renderHeader = () => {
         const { classes, errors } = this.props;
         const count = errors ? errors.length : 0;
@@ -65,5 +65,5 @@ class ErrorsSection extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(ErrorsSection);
+export const ErrorsSection = withStyles(getStyles)(ErrorsSectionPlain);
 

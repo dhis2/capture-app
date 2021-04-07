@@ -1,5 +1,5 @@
 // @flow
-import isValidDate from './date.validator';
+import { isValidDate } from './date.validator';
 import isValidTime from './time.validator';
 
 type DateTimeValue = {
@@ -7,7 +7,7 @@ type DateTimeValue = {
     time?: ?string,
 };
 
-export default function isValidDateTime(value: DateTimeValue, dateFormat: string) {
+export function isValidDateTime(value: DateTimeValue, dateFormat: string) {
     if (!value) return false;
     const date = value.date;
     const time = value.time;

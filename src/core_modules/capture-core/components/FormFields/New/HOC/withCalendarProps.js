@@ -3,7 +3,7 @@ import * as React from 'react';
 import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import { parseDate, convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import { getCalendarTheme } from '../Fields/DateAndTimeFields/getCalendarTheme';
-import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
+import { CurrentLocaleData } from '../../../../utils/localeData/CurrentLocaleData';
 
 type Props = {
     theme: Object,

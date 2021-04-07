@@ -3,7 +3,7 @@ import * as React from 'react';
 import log from 'loglevel';
 import { makeCancelablePromise, errorCreator } from 'capture-core-utils';
 import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
-import getD2 from '../../../../../../d2/d2Instance';
+import { getD2 } from '../../../../../../d2/d2Instance';
 import { orgUnitFieldScopes } from './scopes.const';
 
 type Props = {

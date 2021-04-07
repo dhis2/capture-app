@@ -19,7 +19,7 @@ import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { getApi } from '../../../../d2/d2Instance';
 
-class DataElementFactory {
+export class DataElementFactory {
     static translationPropertyNames = {
         NAME: 'NAME',
         DESCRIPTION: 'DESCRIPTION',
@@ -194,5 +194,3 @@ class DataElementFactory {
         return dataElement;
     }
 }
-
-export default DataElementFactory;

@@ -45,7 +45,7 @@ const searchAttributeElementTypes = {
 };
 
 
-class SearchGroupFactory {
+export class SearchGroupFactory {
     static errorMessages = {
         TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
     };
@@ -224,5 +224,3 @@ class SearchGroupFactory {
         );
     }
 }
-
-export default SearchGroupFactory;

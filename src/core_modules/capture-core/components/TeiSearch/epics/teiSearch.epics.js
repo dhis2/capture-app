@@ -20,7 +20,7 @@ import {
 import {
     actionTypes as programSelectorActionTypes,
 } from '../SearchProgramSelector/searchProgramSelector.actions';
-import getSearchGroups from '../getSearchGroups';
+import { getSearchGroups } from '../getSearchGroups';
 import { getTrackedEntityInstances } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
 
 import {
@@ -30,7 +30,7 @@ import {
     getTrackerProgramThrowIfNotFound as getTrackerProgram,
     getTrackedEntityTypeThrowIfNotFound as getTrackedEntityType,
 } from '../../../metaData';
-import getSearchFormId from '../getSearchFormId';
+import { getSearchFormId } from '../getSearchFormId';
 
 const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) =>
     (orgUnitScope !== 'ACCESSIBLE' ?

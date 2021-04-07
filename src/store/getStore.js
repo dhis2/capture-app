@@ -12,9 +12,9 @@ import type { BrowserHistory, HashHistory } from 'history';
 import { createOffline } from '@redux-offline/redux-offline';
 import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
 import { getEffectReconciler, shouldDiscard, queueConfig } from 'capture-core/trackerOffline';
-import getPersistOptions from './persist/persistOptionsGetter';
-import reducerDescriptions from '../reducers/descriptions/trackerCapture.reducerDescriptions';
-import epics from '../epics/trackerCapture.epics';
+import { getPersistOptions } from './persist/persistOptionsGetter';
+import { reducerDescriptions } from '../reducers/descriptions/trackerCapture.reducerDescriptions';
+import { epics } from '../epics/trackerCapture.epics';
 
 export function getStore(
     history: BrowserHistory | HashHistory,

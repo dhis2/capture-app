@@ -14,7 +14,7 @@ import { ProgressButton } from '../Buttons/ProgressButton.component';
 import { DataEntry } from './DataEntry.component';
 import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
 import { getDataEntryKey } from './common/getDataEntryKey';
-import getStageFromEvent from '../../metaData/helpers/getStageFromEvent';
+import { getStageFromEvent } from '../../metaData/helpers/getStageFromEvent';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
 type Props = {
