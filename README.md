@@ -22,14 +22,14 @@ You can download and install Node on your machine from [here](https://nodejs.org
 
 You can find a tutorial on how to install `git` on your machine [here](https://www.atlassian.com/git/tutorials/install-git).
 
-#### Yarn 
+#### Yarn 1
 
-You can install `yarn` on your machine [here](https://classic.yarnpkg.com/en/docs/install/).
+You can install `yarn 1` on your machine following the instructions [here](https://classic.yarnpkg.com/en/docs/install/).
 
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
+Step by step instructions for setting up a development environment.
 
 #### 1. Clone the repository
 
@@ -50,26 +50,30 @@ To install the dependencies you will have to be at the source folder of the clon
 ```
 yarn 
 ```
+#### 3. Enable cross-site cookies in your browser (if server is running on a different domain)
 
-#### 3. Set environment variables for backend communication
+Read about cross-site cookies and DHIS2 applications [here](https://dhis2.nu/2020/08/cross-origin-cookies)
 
-The application needs to communicate with a DHIS2 backend instance. The `.env.development` file contains default configuration, but you can override it by supplying a `.env.development.local` file in the root folder of the project.
-
-An example of `.env.development`:
-```
-# Default admin/district authorization for development
-REACT_APP_DHIS2_BASE_URL="https://debug.dhis2.org/2.34dev/"
-REACT_APP_DHIS2_AUTHORIZATION="Basic c3lzdGVtOlN5c3RlbTEyMw=="
-REACT_APP_TRACKER_CAPTURE_APP_PATH="https://debug.dhis2.org/2.34dev/dhis-web-tracker-capture"
-```
+TL;DR: Using Google Chrome or a Chromium-based browser open chrome://flags/#same-site-by-default-cookies and set `SameSite by default cookies` to `Disabled` (Browser restart required).
 
 #### 4. Run the application
 
-To start the application locally and interact with it on the browser, run:
+To start the application locally and interact with it in the browser, run:
 
 ```
 yarn start
 ```
+
+`http://localhost:3000` should automatically open in your browser. 
+
+You will be prompted for a path to the server instance, a user name and a password.
+
+The path to the server instance can also be set by supplying a `.env.development.local` file in the root folder of the project. An example of an `.env.development.local` file:
+
+```
+REACT_APP_DHIS2_BASE_URL="http://localhost:8080"
+```
+
 
 ## Built With
 

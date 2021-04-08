@@ -152,12 +152,12 @@ Then('the list should display the teis retrieved from the api', () => {
 });
 
 When('you click the next page button on the tei working list', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+    cy.get('[data-test="search-pagination-next-page"]')
         .should('exist');
 
     cy.route('GET', '**/trackedEntityInstances**').as('getTeis');
 
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+    cy.get('[data-test="search-pagination-next-page"]')
         .click();
 });
 
@@ -175,7 +175,7 @@ Then('new teis should be retrieved from the api', () => {
 When('you click the previous page button on the tei working list', () => {
     cy.route('GET', '**/trackedEntityInstances**').as('getTeis');
 
-    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
+    cy.get('[data-test="search-pagination-previous-page"]')
         .click();
 });
 
@@ -212,7 +212,7 @@ Then('a tei batch capped at 50 records should be retrieved from the api', () => 
 When('you click the first page button on the tei working list', () => {
     cy.route('GET', '**/trackedEntityInstances**').as('getTeis');
 
-    cy.get('[data-test="dhis2-capture-search-pagination-first-page"]')
+    cy.get('[data-test="search-pagination-first-page"]')
         .click();
 });
 

@@ -5,26 +5,26 @@ beforeEach(() => {
 });
 
 And('you select search scope TB program', () => {
-    cy.get('[data-test="dhis2-capture-virtualized-select"]')
+    cy.get('[data-test="virtualized-select"]')
         .click()
         .contains('TB prog')
         .click();
 });
 
 When('you expand the fifth search area', () => {
-    cy.get('[data-test="dhis2-capture-collapsible-button"]')
+    cy.get('[data-test="collapsible-button"]')
         .eq(4)
         .click();
 });
 
 When('you expand the third search area', () => {
-    cy.get('[data-test="dhis2-capture-collapsible-button"]')
+    cy.get('[data-test="collapsible-button"]')
         .eq(2)
         .click();
 });
 
 And('you fill in the first name with values that will return no results', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Name doesnt exist')
@@ -32,7 +32,7 @@ And('you fill in the first name with values that will return no results', () => 
 });
 
 And('you fill in the first name with values that will return results', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Tesmi')
@@ -47,28 +47,28 @@ And('you can see an empty page', () => {
 And('there should be a validation error message', () => {
     cy.contains('Fill in at least 1 attributes to search')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[class*=minAttribtuesRequiredInvalid]');
 });
 
 And('you fill the values with nothing but spaces', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('      ');
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('      ');
 });
 
 And('you fill in the the form with values', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Tesmi')
         .blur();
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Tesmi')
@@ -76,18 +76,18 @@ And('you fill in the the form with values', () => {
 });
 
 And('you clear the values', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .clear();
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .clear();
 });
 
 And('you fill in the first name with values that will return an error', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .first()
         .type(',,,,')
@@ -95,24 +95,24 @@ And('you fill in the first name with values that will return an error', () => {
 });
 
 And('the next page button is disabled', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+    cy.get('[data-test="search-pagination-next-page"]')
         .should('exist')
         .should('be.disabled');
-    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
+    cy.get('[data-test="search-pagination-previous-page"]')
         .should('exist')
         .should('be.disabled');
-    cy.get('[data-test="dhis2-capture-search-pagination-first-page"]')
+    cy.get('[data-test="search-pagination-first-page"]')
         .should('exist')
         .should('be.disabled');
 });
 
 And('you fill in the the form with values that will return less than 5 results', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Sara')
         .blur();
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Gonzalez')
@@ -120,12 +120,12 @@ And('you fill in the the form with values that will return less than 5 results',
 });
 
 And('you fill in the the form with values that will return exactly 5 results', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(0)
         .type('Tesmi')
         .blur();
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(1)
         .type('Abel')
@@ -133,13 +133,13 @@ And('you fill in the the form with values that will return exactly 5 results', (
 });
 
 When('you fill in the zip code range numbers', () => {
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(5)
         .type('7130')
         .blur();
 
-    cy.get('[data-test="dhis2-capture-d2-form-area"]')
+    cy.get('[data-test="d2-form-area"]')
         .find('[data-test="capture-ui-input"]')
         .eq(6)
         .type('7135')

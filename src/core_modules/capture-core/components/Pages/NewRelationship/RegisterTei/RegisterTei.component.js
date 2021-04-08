@@ -28,7 +28,7 @@ const getStyles = () => ({
 const CardListButton = (({ teiId, values, handleOnClick }) => (
     <Button
         small
-        dataTest="dhis2-capture-view-dashboard-button"
+        dataTest="view-dashboard-button"
         onClick={() => { handleOnClick(teiId, values); }}
     >
         {i18n.t('Link')}
@@ -71,7 +71,7 @@ const RegisterTeiPlain = ({
             </Button>
             <div style={{ marginLeft: 16 }}>
                 <Button
-                    dataTest="dhis2-capture-create-as-new-person"
+                    dataTest="create-as-new-person"
                     onClick={handleSaveFromDialog}
                     primary
                 >
