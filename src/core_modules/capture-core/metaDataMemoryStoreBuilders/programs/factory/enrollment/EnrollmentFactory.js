@@ -15,6 +15,7 @@ import {
     RenderFoundation,
     Section,
     Enrollment,
+    // CustomForm,
     InputSearchGroup,
 } from '../../../../metaData';
 import type {
@@ -94,6 +95,7 @@ class EnrollmentFactory {
         cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
         cachedProgramTrackedEntityTypeId: ?string,
         cachedSectionCustomLabel: ?string,
+        cachedSectionCustomId: ?string,
     ) {
         const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId);
         if ((!cachedProgramTrackedEntityAttributes ||
@@ -103,9 +105,9 @@ class EnrollmentFactory {
         }
 
         let section;
-        if (cachedSectionCustomLabel) {
+        if (cachedSectionCustomLabel && cachedSectionCustomId) {
             section = new Section((o) => {
-                o.id = Section.TEST_SECTION_ID;
+                o.id = cachedSectionCustomId;
                 o.name = cachedSectionCustomLabel;
             });
         } else {
@@ -140,7 +142,7 @@ class EnrollmentFactory {
         if (cachedProgram.programSections && cachedProgram.programSections.length > 0) {
             cachedProgram.programSections.map(async (ps) => {
                 const arr = cachedProgram.programTrackedEntityAttributes.filter(e => ps.trackedEntityAttributes.includes(e.trackedEntityAttributeId));
-                section = await this._buildSection(arr, cachedProgram.trackedEntityTypeId, ps.displayFormName);
+                section = await this._buildSection(arr, cachedProgram.trackedEntityTypeId, ps.displayFormName, ps.id);
                 section && await enrollmentForm.addSection(section);
             });
         } else {
