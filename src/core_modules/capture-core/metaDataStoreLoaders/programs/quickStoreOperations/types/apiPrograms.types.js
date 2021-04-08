@@ -62,7 +62,7 @@ type apiTranslation = {
 type apiProgramSections = {
     id: string,
     displayFormName: string,
-    trackedEntityAttributes: Array<string>
+    trackedEntityAttributes: Array<{ id: string }>
 }
 
 type apiDataElement = {
