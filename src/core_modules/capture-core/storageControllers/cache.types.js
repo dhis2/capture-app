@@ -150,6 +150,11 @@ export type CachedTrackedEntityTypeTranslation = {
     locale: string,
     value: string,
 };
+export type CachedProgramSections = {
+    id: string,
+    displayFormName: string,
+    trackedEntityAttributes: Array<string>
+}
 
 export type CachedTrackedEntityType = {
     id: string,
@@ -167,7 +172,7 @@ export type CachedProgram = {
     displayName: string,
     displayShortName: string,
     organisationUnits: Object,
-    programSections: ?Array,
+    programSections: ?Array<CachedProgramSections>,
     programStages: Array<CachedProgramStage>,
     programType: string,
     categoryCombo: ?ProgramCachedCategoryCombo,
