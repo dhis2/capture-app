@@ -94,6 +94,7 @@ class EnrollmentFactory {
     async _buildSection(
         cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
         cachedProgramTrackedEntityTypeId: ?string,
+        cachedSectionCustomLabel: ?string,
     ) {
         const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId);
         if ((!cachedProgramTrackedEntityAttributes ||
@@ -102,10 +103,19 @@ class EnrollmentFactory {
             return null;
         }
 
-        const section = new Section((o) => {
-            o.id = Section.MAIN_SECTION_ID;
-            o.name = i18n.t('Profile');
-        });
+        let section;
+        if (cachedSectionCustomLabel) {
+            section = new Section((o) => {
+                o.id = Section.TEST_SECTION_ID;
+                o.name = cachedSectionCustomLabel;
+            });
+        } else {
+            section = new Section((o) => {
+                o.id = Section.MAIN_SECTION_ID;
+                o.name = i18n.t('Profile');
+            });
+        }
+
 
         featureTypeField && section.addElement(featureTypeField);
         if (cachedProgramTrackedEntityAttributes && cachedProgramTrackedEntityAttributes.length > 0) {
@@ -127,9 +137,19 @@ class EnrollmentFactory {
             o.name = cachedProgram.displayName;
         });
 
-        let section =
-            await this._buildSection(cachedProgram.programTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
-        section && enrollmentForm.addSection(section);
+        let section;
+        if (cachedProgram.programSections && cachedProgram.programSections.length > 0) {
+            debugger;
+            cachedProgram.programSections.map(async (ps) => {
+                const arr = cachedProgram.programTrackedEntityAttributes.filter(e => ps.trackedEntityAttributes.includes(e.trackedEntityAttributeId));
+                section = await this._buildSection(arr, cachedProgram.trackedEntityTypeId, ps.displayFormName);
+                section && await enrollmentForm.addSection(section);
+            });
+        } else {
+            section = await this._buildSection(cachedProgram.programTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
+            section && enrollmentForm.addSection(section);
+        }
+
 
         if (cachedProgram.dataEntryForm) {
             if (!section) {
