@@ -14,7 +14,7 @@ import getOrgUnitRootsKey from '../../components/D2Form/field/Components/OrgUnit
 import {
     set as setStoreRoots,
 } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
+import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 
 const removeFormData = (state, { payload: { formId } }) => {
     const remainingKeys = Object.keys(state).filter(key => !key.includes(formId));
@@ -90,7 +90,7 @@ export const formsValuesDesc = createReducerDescription({
         return newState;
     },
     [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
-    [registrationFormActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
 }, 'formsValues');
 
 export const formsSectionsFieldsUIDesc = createReducerDescription({
@@ -212,7 +212,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         };
     },
     [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
-    [registrationFormActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
 }, 'formsSectionsFieldsUI');
 
 export const formsDesc = createReducerDescription({
