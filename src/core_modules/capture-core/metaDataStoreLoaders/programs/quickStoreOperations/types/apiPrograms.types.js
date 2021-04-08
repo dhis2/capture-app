@@ -59,6 +59,12 @@ type apiTranslation = {
     value: string,
 };
 
+type apiProgramSections = {
+    id: string,
+    displayFormName: string,
+    trackedEntityAttributes: Array<string>
+}
+
 type apiDataElement = {
     id: string,
     displayName: string,
@@ -125,6 +131,7 @@ type apiProgram = {
     organisationUnits?: ?Array<apiProgramOrganisationUnit>,
     userRoles?: ?Array<apiProgramUserRoles>,
     programStages?: ?Array<apiProgramStage>,
+    programSections?: ?Array<apiProgramSections>,
     programTrackedEntityAttributes?: ?Array<apiProgramTrackedEntityAttribute>,
 };
 
