@@ -139,14 +139,21 @@ class EnrollmentFactory {
         });
 
         let section;
-        if (cachedProgram.programSections && cachedProgram.programSections.length > 0 && cachedProgram.programTrackedEntityAttributes) {
+        if (cachedProgram.programSections && cachedProgram.programSections.length > 0) {
             cachedProgram.programSections.map(async (ps) => {
-                const arr = cachedProgram.programTrackedEntityAttributes.filter(e => ps.trackedEntityAttributes.includes(e.trackedEntityAttributeId));
+                let arr;
+                if (cachedProgram.programTrackedEntityAttributes &&
+                    cachedProgram.programTrackedEntityAttributes.length > 0) {
+                    arr = cachedProgram.programTrackedEntityAttributes
+                        .filter(e => ps.trackedEntityAttributes
+                            .includes(e.trackedEntityAttributeId));
+                }
                 section = await this._buildSection(arr, cachedProgram.trackedEntityTypeId, ps.displayFormName, ps.id);
                 section && await enrollmentForm.addSection(section);
             });
         } else {
-            section = await this._buildSection(cachedProgram.programTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
+            section = await
+            this._buildSection(cachedProgram.programTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
             section && enrollmentForm.addSection(section);
         }
 
