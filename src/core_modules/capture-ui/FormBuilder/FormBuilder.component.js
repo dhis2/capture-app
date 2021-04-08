@@ -195,6 +195,7 @@ class FormBuilder extends React.Component<Props> {
                         id,
                         fieldValidatingPromiseContainer.validatingCompleteUid,
                         message,
+                        null,
                     );
 
                     return fieldValidatingPromiseContainer.cancelableValidatingPromise.promise;
