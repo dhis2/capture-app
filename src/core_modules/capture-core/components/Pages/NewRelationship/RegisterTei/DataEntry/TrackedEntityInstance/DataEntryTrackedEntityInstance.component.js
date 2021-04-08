@@ -5,7 +5,7 @@ import { DATA_ENTRY_ID } from '../../registerTei.const';
 import teiClasses from './trackedEntityInstance.module.css';
 import { TeiRegistrationEntry } from '../../../../../DataEntries';
 import { useSaveButtonText } from '../useSaveButtonText';
-import type { Props } from './dataEntryTrackedEntityInstance.types';
+import type { Props } from './dataEntryTrackedEntityInstance.types';
 
 const RelationshipTrackedEntityInstance =
   ({
