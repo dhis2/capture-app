@@ -228,3 +228,12 @@ Feature: User interacts with Search page
     When you select Child Programme
     And you are in the search page with the Child Programme being preselected from the url
     And and you can see the unique identifier input
+
+  Scenario: Fallback search navigates back to main page
+    Given you are in the search page with the Child Programme and org unit being preselected from the url
+    And you expand the attributes search area
+    When you fill in the first and last name with values that will return results
+    And you click search
+    And you click the fallback search button
+    When you click the back button
+    Then you should be taken to the main page with org unit preselected
