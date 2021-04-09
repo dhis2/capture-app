@@ -11,7 +11,7 @@ type PropsFromRedux = {|
 export type OwnProps = {|
     onLink: (teiId: string, values: Object) => void,
     onGetUnsavedAttributeValues?: ?Function,
-    onSave: Function,
+    onSave: (itemId: string, dataEntryId: string) => void,
 |};
 
 export type Props = {|...PropsFromRedux, ...OwnProps, ...CssClasses |}
