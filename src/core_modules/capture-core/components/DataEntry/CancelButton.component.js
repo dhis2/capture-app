@@ -13,7 +13,7 @@ type State = {
     dialogOpen: boolean,
 }
 
-export class CancelButton extends React.Component<Props, State> {
+export class CancelButtonComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = { dialogOpen: false };

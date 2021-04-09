@@ -115,4 +115,4 @@ class RelationshipsSectionPlain extends React.Component<Props> {
     }
 }
 
-export const RelationshipsSection = withStyles(getStyles)(RelationshipsSectionPlain);
+export const RelationshipsSectionComponent = withStyles(getStyles)(RelationshipsSectionPlain);

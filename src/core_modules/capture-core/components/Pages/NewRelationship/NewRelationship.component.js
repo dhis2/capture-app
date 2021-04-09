@@ -63,4 +63,4 @@ class NewRelationshipPlain extends React.Component<Props> {
     }
 }
 
-export const NewRelationship = withStyles(getStyles)(NewRelationshipPlain);
+export const NewRelationshipComponent = withStyles(getStyles)(NewRelationshipPlain);

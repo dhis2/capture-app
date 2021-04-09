@@ -89,7 +89,7 @@ class QuickSelectorPlain extends Component<Props> {
     calculateColumnWidths() {
         // The grid has a total width of 12 columns, we need to calculate how much width each selector should have.
         const selectedProgramId = this.props.selectedProgramId;
-        const selectedProgram = QuickSelector.getSelectedProgram(selectedProgramId);
+        const selectedProgram = QuickSelectorPlain.getSelectedProgram(selectedProgramId);
 
         return {
             programSelectorWidth: selectedProgram && selectedProgram.categoryCombination ? 4 : 2,
@@ -185,4 +185,4 @@ class QuickSelectorPlain extends Component<Props> {
     }
 }
 
-export const QuickSelector = withStyles(styles)(QuickSelectorPlain);
+export const QuickSelectorComponent = withStyles(styles)(QuickSelectorPlain);

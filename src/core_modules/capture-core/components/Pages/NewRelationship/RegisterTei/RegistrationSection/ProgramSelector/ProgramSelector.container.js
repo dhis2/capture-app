@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { ProgramSelector as ProgramSelectorComponent } from './ProgramSelector.component';
+import { ProgramSelectorComponent } from './ProgramSelector.component';
 import { changeProgram, clearProgramFilter } from '../registrationSection.actions';
 
 const mapStateToProps = (state: ReduxState) => ({

@@ -597,4 +597,4 @@ class NewEventDataEntry extends Component<Props> {
 }
 
 
-export const DataEntry = withStyles(getStyles)(withTheme()(NewEventDataEntry));
+export const DataEntryComponent = withStyles(getStyles)(withTheme()(NewEventDataEntry));

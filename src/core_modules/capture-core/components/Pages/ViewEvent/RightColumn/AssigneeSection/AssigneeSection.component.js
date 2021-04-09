@@ -21,7 +21,7 @@ const loadingIndicatorStyle = {
     width: 36,
 };
 
-export class AssigneeSection extends React.Component<Props> {
+export class AssigneeSectionComponent extends React.Component<Props> {
     renderHeader = () => (
         <ViewEventSectionHeader
             icon={AssignmentIcon}

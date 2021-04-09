@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { RegUnitSelector as RegUnitSelectorComponent } from './RegUnitSelector.component';
+import { RegUnitSelectorComponent } from './RegUnitSelector.component';
 import { changeOrgUnit, searchOrgUnitFailed } from '../registrationSection.actions';
 
 const mapStateToProps = (state: ReduxState) => ({

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Chip } from '@dhis2/ui';
-import { TextFieldPlain } from 'capture-ui';
+import { TextField } from 'capture-ui';
 import defaultClasses from './selected.module.css';
 
 type Props = {
@@ -37,7 +37,7 @@ export const Selected = (props: Props) => {
                 tabIndex={0}
                 onKeyDown={handleKeyDown}
             >
-                <TextFieldPlain
+                <TextField
                     classes={defaultClasses}
                     value={''}
                     disabled

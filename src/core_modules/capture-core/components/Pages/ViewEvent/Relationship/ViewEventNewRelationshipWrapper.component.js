@@ -119,4 +119,4 @@ class ViewEventNewRelationshipWrapperPlain extends React.Component<Props, State>
     }
 }
 
-export const ViewEventNewRelationshipWrapper = withStyles(getStyles)(ViewEventNewRelationshipWrapperPlain);
+export const ViewEventNewRelationshipWrapperComponent = withStyles(getStyles)(ViewEventNewRelationshipWrapperPlain);

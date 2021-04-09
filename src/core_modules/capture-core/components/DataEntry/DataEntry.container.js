@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { DataEntry as DataEntryComponent } from './DataEntry.component';
+import { DataEntryComponent } from './DataEntry.component';
 import { updateFormField } from './actions/dataEntry.actions';
 import { withLoadingIndicator } from '../../HOC';
 

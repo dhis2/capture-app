@@ -19,7 +19,7 @@ type State = {
     attributeValues: ?{[id: string]: any},
 };
 
-export class ExistingTEILoader extends React.Component<Props, State> {
+export class ExistingTEILoaderComponent extends React.Component<Props, State> {
     cancelablePromise: any;
     constructor(props: Props) {
         super(props);

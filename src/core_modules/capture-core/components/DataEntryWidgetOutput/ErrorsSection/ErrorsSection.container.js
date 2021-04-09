@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { ErrorsSection as ErrorsSectionComponent } from '../../Pages/ViewEvent/RightColumn/ErrorsSection/ErrorsSection.component';
+import { ErrorsSectionComponent } from '../../Pages/ViewEvent/RightColumn/ErrorsSection/ErrorsSection.component';
 import { makeGetVisibleMessages } from '../../Pages/ViewEvent/RightColumn/ErrorsSection/messageSection.selectors';
 
 const makeStateToProps = () => {

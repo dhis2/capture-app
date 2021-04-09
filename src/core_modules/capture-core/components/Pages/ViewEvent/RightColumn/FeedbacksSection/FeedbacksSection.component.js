@@ -87,4 +87,4 @@ class FeedbacksSectionPlain extends React.Component<Props> {
     }
 }
 
-export const FeedbacksSection = withStyles(getStyles)(FeedbacksSectionPlain);
+export const FeedbacksSectionComponent = withStyles(getStyles)(FeedbacksSectionPlain);

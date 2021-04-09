@@ -65,5 +65,5 @@ class ErrorsSectionPlain extends React.Component<Props> {
     }
 }
 
-export const ErrorsSection = withStyles(getStyles)(ErrorsSectionPlain);
+export const ErrorsSectionComponent = withStyles(getStyles)(ErrorsSectionPlain);
 

@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { ViewEventDataEntry as ViewEventDataEntryComponent } from './ViewEventDataEntry.component';
+import { ViewEventDataEntryComponent } from './ViewEventDataEntry.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 
 

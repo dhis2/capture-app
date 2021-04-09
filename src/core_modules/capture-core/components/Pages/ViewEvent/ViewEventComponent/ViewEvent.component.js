@@ -86,4 +86,4 @@ class ViewEventPlain extends Component<Props> {
     }
 }
 
-export const ViewEvent = withStyles(getStyles)(ViewEventPlain);
+export const ViewEventComponent = withStyles(getStyles)(ViewEventPlain);

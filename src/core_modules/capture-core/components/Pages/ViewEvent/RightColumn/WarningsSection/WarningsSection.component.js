@@ -63,4 +63,4 @@ class WarningsSectionPlain extends React.Component<Props> {
     }
 }
 
-export const WarningsSection = withStyles(getStyles)(WarningsSectionPlain);
+export const WarningsSectionComponent = withStyles(getStyles)(WarningsSectionPlain);

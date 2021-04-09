@@ -263,7 +263,7 @@ class DataEntryPlain extends React.Component<Props> {
         if (!itemId) {
             return (
                 <div>
-                    {DataEntry.errorMessages.NO_ITEM_SELECTED}
+                    {DataEntryPlain.errorMessages.NO_ITEM_SELECTED}
                 </div>
             );
         }
@@ -271,7 +271,7 @@ class DataEntryPlain extends React.Component<Props> {
         if (!formFoundation) {
             return (
                 <div>
-                    {DataEntry.errorMessages.FORM_FOUNDATION_MISSING}
+                    {DataEntryPlain.errorMessages.FORM_FOUNDATION_MISSING}
                 </div>
             );
         }
@@ -359,4 +359,4 @@ class DataEntryPlain extends React.Component<Props> {
     }
 }
 
-export const DataEntry = withStyles(styles)(DataEntryPlain);
+export const DataEntryComponent = withStyles(styles)(DataEntryPlain);

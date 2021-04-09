@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { NewRelationship as NewRelationshipComponent } from './NewRelationship.component';
+import { NewRelationshipComponent } from './NewRelationship.component';
 import type { SelectedRelationshipType } from './newRelationship.types';
 import {
     selectRelationshipType,

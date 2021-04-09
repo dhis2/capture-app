@@ -253,5 +253,4 @@ class ViewEventDataEntryPlain extends Component<Props> {
     }
 }
 
-
-export const ViewEventDataEntry = withStyles(getStyles)(ViewEventDataEntryPlain);
+export const ViewEventDataEntryComponent = withStyles(getStyles)(ViewEventDataEntryPlain);

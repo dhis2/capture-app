@@ -176,4 +176,4 @@ class SearchFormPlain extends React.Component<Props> {
     }
 }
 
-export const TeiSearchForm = withStyles(getStyles)(SearchFormPlain);
+export const TeiSearchFormComponent = withStyles(getStyles)(SearchFormPlain);

@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { SearchProgramSelector as SearchProgramSelectorComponent } from './SearchProgramSelector.component';
+import { SearchProgramSelectorComponent } from './SearchProgramSelector.component';
 import { startSetProgram } from './searchProgramSelector.actions';
 import { makeProgramOptionsSelector } from './searchProgramSelector.selectors';
 

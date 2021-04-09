@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { RelationshipNavigation as RelationshipNavigationComponent } from './RelationshipNavigation.component';
+import { RelationshipNavigationComponent } from './RelationshipNavigation.component';
 
 
 const mapStateToProps = (state: ReduxState) => ({

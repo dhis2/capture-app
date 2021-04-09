@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { errorCreator } from 'capture-core-utils';
 import { Button } from '../Buttons/Button.component';
 import { ProgressButton } from '../Buttons/ProgressButton.component';
-import { DataEntry } from './DataEntry.component';
+import { DataEntryComponent } from './DataEntry.component';
 import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
 import { getDataEntryKey } from './common/getDataEntryKey';
 import { getStageFromEvent } from '../../metaData/helpers/getStageFromEvent';
@@ -85,7 +85,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
             const eventFields = [];
             while (!done) {
                 currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
-                if (!currentInstance || currentInstance instanceof DataEntry) {
+                if (!currentInstance || currentInstance instanceof DataEntryComponent) {
                     done = true;
                 } else if (currentInstance.name === 'EventFieldBuilder') {
                     eventFields.push(currentInstance);

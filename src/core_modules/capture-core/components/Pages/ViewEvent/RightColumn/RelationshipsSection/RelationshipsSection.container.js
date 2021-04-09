@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { RelationshipsSection as RelationshipsSectionComponent } from './RelationshipsSection.component';
+import { RelationshipsSectionComponent } from './RelationshipsSection.component';
 import { openAddRelationship } from '../../ViewEventComponent/viewEvent.actions';
 import { requestDeleteEventRelationship } from '../../Relationship/ViewEventRelationships.actions';
 

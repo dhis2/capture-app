@@ -7,7 +7,7 @@ export { DateTimeField } from './DateAndTimeFields/DateTimeField/DateTime.compon
 export { PolygonField } from './PolygonField/PolygonField.component';
 export { SelectionBoxes } from './SelectionBoxes/SelectionBoxes.component';
 export { TextField } from './TextField/TextField.component';
-export { TextFieldPlain } from './internal/TextInput/TextInput.component';
+export { TextInput } from './internal/TextInput/TextInput.component';
 export { TrueOnlyField } from './TrueOnlyField/TrueOnlyField.component';
 export { DebounceField } from './DebounceField/DebounceField.component';
 export { TextRangeField } from './TextField/TextRangeField.component';

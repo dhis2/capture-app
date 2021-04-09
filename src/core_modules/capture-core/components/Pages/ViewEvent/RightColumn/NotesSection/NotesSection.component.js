@@ -81,4 +81,4 @@ class NotesSectionPlain extends React.Component<Props> {
     }
 }
 
-export const NotesSection = withStyles(getStyles)(NotesSectionPlain);
+export const NotesSectionComponent = withStyles(getStyles)(NotesSectionPlain);

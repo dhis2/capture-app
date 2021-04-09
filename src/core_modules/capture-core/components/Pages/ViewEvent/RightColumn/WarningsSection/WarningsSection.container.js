@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { WarningsSection as WarningsSectionComponent } from './WarningsSection.component';
+import { WarningsSectionComponent } from './WarningsSection.component';
 import { makeGetVisibleMessages } from '../ErrorsSection/messageSection.selectors';
 
 const makeStateToProps = () => {

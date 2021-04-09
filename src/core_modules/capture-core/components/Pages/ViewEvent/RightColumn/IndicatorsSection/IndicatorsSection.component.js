@@ -86,4 +86,4 @@ class IndicatorsSectionPlain extends React.Component<Props> {
     }
 }
 
-export const IndicatorsSection = withStyles(getStyles)(IndicatorsSectionPlain);
+export const IndicatorsSectionComponent = withStyles(getStyles)(IndicatorsSectionPlain);

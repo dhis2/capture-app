@@ -320,5 +320,4 @@ class EditEventDataEntryPlain extends Component<Props> {
     }
 }
 
-
-export const EditEventDataEntry = withStyles(getStyles)(EditEventDataEntryPlain);
+export const EditEventDataEntryComponent = withStyles(getStyles)(EditEventDataEntryPlain);

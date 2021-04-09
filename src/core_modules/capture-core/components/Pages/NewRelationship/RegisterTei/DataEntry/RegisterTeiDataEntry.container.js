@@ -1,7 +1,7 @@
 // @flow
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { RegisterTeiDataEntry as DataEntry } from './RegisterTeiDataEntry.component';
+import { RegisterTeiDataEntryComponent } from './RegisterTeiDataEntry.component';
 import { withErrorMessageHandler } from '../../../../../HOC/withErrorMessageHandler';
 
 const mapStateToProps = (state: ReduxState) => ({
@@ -17,4 +17,4 @@ export const RegisterTeiDataEntry =
       // $FlowFixMe[missing-annot] automated comment
       connect(mapStateToProps, mapDispatchToProps),
       withErrorMessageHandler(),
-  )(DataEntry);
+  )(RegisterTeiDataEntryComponent);

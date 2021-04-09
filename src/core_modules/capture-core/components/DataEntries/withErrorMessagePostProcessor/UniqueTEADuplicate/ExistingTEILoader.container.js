@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { ExistingTEILoader as ExistingTEILoaderComponent } from './ExistingTEILoader.component';
+import { ExistingTEILoaderComponent } from './ExistingTEILoader.component';
 
 const mapStateToProps = (state: ReduxState) => ({
     programId: state.newRelationshipRegisterTei.programId,

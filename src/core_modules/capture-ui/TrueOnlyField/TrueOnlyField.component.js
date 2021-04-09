@@ -9,7 +9,7 @@ type Props = {
     useRealTrueValue?: ?boolean, // instead of string as option values
 };
 
-class TrueOnlyField extends Component<Props> {
+export class TrueOnlyField extends Component<Props> {
     static getOptions(useRealTrueValue: boolean) {
         const trueText = i18n.t('Yes');
 

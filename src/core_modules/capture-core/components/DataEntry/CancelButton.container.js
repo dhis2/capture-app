@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { CancelButton as CancelButtonComponent } from './CancelButton.component';
+import { CancelButtonComponent } from './CancelButton.component';
 import { getDataEntryKey } from './common/getDataEntryKey';
 import { getDataEntryHasChanges } from './common/dataEntryHasChanges';
 

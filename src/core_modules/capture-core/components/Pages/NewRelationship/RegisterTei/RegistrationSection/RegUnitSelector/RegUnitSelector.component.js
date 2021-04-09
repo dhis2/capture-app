@@ -57,11 +57,11 @@ class RegUnitSelectorPlain extends React.Component<Props> {
             <ComposedRegUnitSelector
                 labelClass={classes.label}
                 label={i18n.t('Organisation Unit')}
-                styles={RegUnitSelector.baseComponentStyles}
+                styles={RegUnitSelectorPlain.baseComponentStyles}
                 onUpdateSelectedOrgUnit={this.handleUpdateSelectedOrgUnit}
                 {...passOnProps}
             />
         );
     }
 }
-export const RegUnitSelector = withStyles(getStyles)(RegUnitSelectorPlain);
+export const RegUnitSelectorComponent = withStyles(getStyles)(RegUnitSelectorPlain);

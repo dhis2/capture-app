@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import React, { type ComponentType } from 'react';
-import { DataEntryWidgetOutput as GeneralOutputComponent } from './DataEntryWidgetOutput.component';
+import { DataEntryWidgetOutputComponent } from './DataEntryWidgetOutput.component';
 import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import type { RenderCustomCardActions } from '../CardList/CardList.types';
 
@@ -23,5 +23,5 @@ const mapStateToProps = (state: ReduxState, { dataEntryId }) => {
 
 export const DataEntryWidgetOutput: ComponentType<OwnProps> =
   connect(mapStateToProps, () => ({}))(
-      (props: Object) => (props.ready ? <GeneralOutputComponent {...props} /> : null),
+      (props: Object) => (props.ready ? <DataEntryWidgetOutputComponent {...props} /> : null),
   );

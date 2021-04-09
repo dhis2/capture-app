@@ -33,7 +33,7 @@ class ProgramSelectorPlain extends React.Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <ComposedProgramSelector
                 dataTest="relationship-register-tei-program-selector"
-                styles={ProgramSelector.baseComponentStyles}
+                styles={ProgramSelectorPlain.baseComponentStyles}
                 programLabelClass={classes.programLabel}
                 label={i18n.t('Program')}
                 {...passOnProps}
@@ -41,4 +41,4 @@ class ProgramSelectorPlain extends React.Component<Props> {
         );
     }
 }
-export const ProgramSelector = withStyles(getStyles)(ProgramSelectorPlain);
+export const ProgramSelectorComponent = withStyles(getStyles)(ProgramSelectorPlain);

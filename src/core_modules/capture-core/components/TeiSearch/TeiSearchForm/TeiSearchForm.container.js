@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { TeiSearchForm as TeiSearchFormComponent } from './TeiSearchForm.component';
+import { TeiSearchFormComponent } from './TeiSearchForm.component';
 
 const getAttributesWithValuesCount = (state: ReduxState, formId: string) => {
     const formValues = state.formsValues[formId] || {};

@@ -8,7 +8,7 @@ type Props = {
     programId: string,
 };
 
-export class RegisterTeiDataEntry extends React.Component<Props> {
+export class RegisterTeiDataEntryComponent extends React.Component<Props> {
     render() {
         const { showDataEntry, programId, ...passOnProps } = this.props;
 

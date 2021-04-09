@@ -1,7 +1,7 @@
 // @flow
 
 import { connect } from 'react-redux';
-import { QuickSelector as QuickSelectorComponent } from './QuickSelector.component';
+import { QuickSelectorComponent } from './QuickSelector.component';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 import {

@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { D2SectionFields as D2SectionFieldsComponent } from './D2SectionFields.component';
+import { D2SectionFieldsComponent } from './D2SectionFields.component';
 import { updateField } from './D2SectionFields.actions';
 import {
     makeGetSectionValues,

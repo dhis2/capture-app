@@ -3,7 +3,7 @@ import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
-import { DataEntry as DataEntryComponent } from './DataEntry.component';
+import { DataEntryComponent } from './DataEntry.component';
 import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import {
     startAsyncUpdateFieldForNewEvent,

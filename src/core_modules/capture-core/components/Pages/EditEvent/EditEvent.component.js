@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import { EditEventDataEntry } from './DataEntry/EditEventDataEntry.container';
 import { Button } from '../../Buttons/Button.component';
-import type { CancelButton } from '../../DataEntry/CancelButton.component';
+import type { CancelButtonComponent } from '../../DataEntry/CancelButton.component';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -49,13 +49,13 @@ type Props = {
 
 
 class EditEventPlain extends Component<Props> {
-    cancelButtonInstance: ?CancelButton;
+    cancelButtonInstance: ?CancelButtonComponent;
 
     handleGoBackToAllEvents = () => {
         this.cancelButtonInstance && this.cancelButtonInstance.handleCancel();
     }
 
-    setCancelButtonInstance = (cancelButtonInstance: ?CancelButton) => {
+    setCancelButtonInstance = (cancelButtonInstance: ?CancelButtonComponent) => {
         this.cancelButtonInstance = cancelButtonInstance;
     }
 

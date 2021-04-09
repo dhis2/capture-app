@@ -17,7 +17,7 @@ type Props = {
     header: any,
 }
 
-export class RelationshipNavigation extends React.Component<Props> {
+export class RelationshipNavigationComponent extends React.Component<Props> {
     renderForRelationshipType = (selectedRelationshipType: SelectedRelationshipType) => {
         const { onSelectRelationshipType, findMode } = this.props;
         const relationshipTypeName = selectedRelationshipType.name;
