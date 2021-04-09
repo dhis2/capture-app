@@ -11,7 +11,7 @@ const preValidateDate = (value?: ?string) => {
     return isValidDate(value);
 };
 
-const getEventDateValidatorContainers = () => {
+export const getEventDateValidatorContainers = () => {
     const validatorContainers = [
         {
             validator: hasValue,

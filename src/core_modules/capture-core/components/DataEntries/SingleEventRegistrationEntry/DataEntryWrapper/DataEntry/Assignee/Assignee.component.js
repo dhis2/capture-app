@@ -2,7 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import Username from '../../../../../FormFields/UserField/UserField.component';
+import { UserField } from '../../../../../FormFields/UserField/UserField.component';
 
 const getStyles = () => ({
     container: {
@@ -38,9 +38,9 @@ const AssigneePlain = (props: Props) => {
             </div>
             <div className={orientation === 'horizontal' && classes.field}>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <Username inputPlaceholderText={i18n.t('Search for user')} {...passOnProps} />
+                <UserField inputPlaceholderText={i18n.t('Search for user')} {...passOnProps} />
             </div>
         </div>);
 };
 
-export const Assignee = withStyles(getStyles)(Assignee);
+export const Assignee = withStyles(getStyles)(AssigneePlain);

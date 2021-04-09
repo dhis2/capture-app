@@ -54,4 +54,4 @@ const DeleteConfirmationDialogPlain = (props: Props) => {
     );
 };
 
-export const DeleteConfirmationDialog = withStyles(getStyles)(DeleteConfirmationDialog);
+export const DeleteConfirmationDialog = withStyles(getStyles)(DeleteConfirmationDialogPlain);

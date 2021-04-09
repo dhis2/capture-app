@@ -9,7 +9,7 @@ type Props = {
     value: ?string,
 };
 
-class Input extends React.Component<Props> {
+class InputPlain extends React.Component<Props> {
     handleKeyPress = (event: SyntheticKeyboardEvent<HTMLButtonElement>) => {
         if (event.key === 'Enter') {
             this.props.onEnterKey(this.props.value);
@@ -30,4 +30,4 @@ class Input extends React.Component<Props> {
     }
 }
 
-export const Input = withInternalChangeHandler()(Input);
+export const Input = withInternalChangeHandler()(InputPlain);

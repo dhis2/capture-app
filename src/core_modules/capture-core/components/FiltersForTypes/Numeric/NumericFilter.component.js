@@ -13,7 +13,7 @@ import {
 import { MinNumericFilter } from './Min.component';
 import { MaxNumericFilter } from './Max.component';
 import { dataElementTypes } from '../../../metaData';
-import type D2TextField from '../../FormFields/Generic/D2TextField.component';
+import type { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 import { getNumericFilterData } from './numericFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 

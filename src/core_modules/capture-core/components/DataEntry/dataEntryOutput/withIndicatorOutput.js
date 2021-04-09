@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
-import withDataEntryOutput from './withDataEntryOutput';
+import { withDataEntryOutput } from './withDataEntryOutput';
 
 
 type Props = {

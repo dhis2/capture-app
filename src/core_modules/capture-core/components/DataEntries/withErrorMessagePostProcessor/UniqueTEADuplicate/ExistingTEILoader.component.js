@@ -2,7 +2,7 @@
 import React from 'react';
 import { makeCancelablePromise } from 'capture-core-utils';
 import { getApi } from '../../../../d2/d2Instance';
-import ExistingTEIContents from './;
+import { ExistingTEIContents } from './ExistingTEIContents.container';
 import { withLoadingIndicator } from '../../../../HOC/withLoadingIndicator';
 import type { ErrorData } from './uniqueTEADuplicate.types';
 

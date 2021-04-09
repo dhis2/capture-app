@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { AssigneeSectionComponent } from './AssigneeSection.component';
+import { AssigneeSection as AssigneeSectionComponent } from './AssigneeSection.component';
 import { setAssignee } from './assigneeSection.actions';
 
 const mapStateToProps = (state: ReduxState) => {

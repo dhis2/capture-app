@@ -17,7 +17,7 @@ import {
     withDisabledFieldCalculation,
 } from '../internal';
 import labelTypeClasses from '../../buildField.module.css';
-import UserNameField from '../../../../FormFields/UserField/UserField.component';
+import { UserField } from '../../../../FormFields/UserField/UserField.component';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;
@@ -40,7 +40,7 @@ export const UserNameFieldForForm = withGotoInterface()(
                                     withDisplayMessages()(
                                         withFilterProps(getFilteredProps)(
                                             withTransformPropName(['onBlur', 'onSet'])(
-                                                withInternalChangeHandler()(UserNameField),
+                                                withInternalChangeHandler()(UserField),
                                             ),
                                         ),
                                     ),

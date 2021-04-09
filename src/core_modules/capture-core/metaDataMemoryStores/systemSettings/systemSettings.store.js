@@ -14,4 +14,4 @@ class SystemSettingsStore {
     }
 }
 
-export const systemsSettingsStore = new SystemSettingsStore();
+export const systemSettingsStore = new SystemSettingsStore();

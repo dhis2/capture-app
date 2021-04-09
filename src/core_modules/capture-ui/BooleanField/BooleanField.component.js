@@ -30,7 +30,7 @@ export class BooleanField extends Component<Props> {
 
     constructor(props: Props) {
         super(props);
-        this.options = D2BooleanField.getOptions(!!this.props.useRealBooleanValues);
+        this.options = BooleanField.getOptions(!!this.props.useRealBooleanValues);
     }
 
     render() {

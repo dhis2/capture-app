@@ -5,7 +5,7 @@ import { errorCreator } from '../../../capture-core-utils';
 import type { Program, RenderFoundation, DataElement } from '../../metaData';
 import { EventProgram } from '../../metaData';
 import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
-import { optionSetsStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
+import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
 import type {
     DataElement as DataElementForRulesEngine,
     EventsData,
@@ -83,7 +83,7 @@ function prepare(
     }
 
     const constants = constantsStore.get();
-    const optionSets = optionSetsStore.get();
+    const optionSets = optionSetStore.get();
     const dataElementsInProgram = getDataElements(program);
     const allEvents = getEventsData(allEventsData);
 

@@ -55,4 +55,4 @@ class OrgUnitTreePlain extends React.Component<Props> {
     }
 }
 
-export const OrgUnitField = withStyles(getStyles)(withLoadingIndicator(() => ({ margin: 4 }), () => ({ size: 20 }))(OrgUnitTreePlain));
+export const OrgUnitTree = withStyles(getStyles)(withLoadingIndicator(() => ({ margin: 4 }), () => ({ size: 20 }))(OrgUnitTreePlain));

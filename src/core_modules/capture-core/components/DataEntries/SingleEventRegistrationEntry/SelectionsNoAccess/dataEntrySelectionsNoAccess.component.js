@@ -73,4 +73,4 @@ class DataEntrySelectionsNoAccessPlain extends Component<Props> {
     }
 }
 
-export const DataEntrySelectionsNoAccess = withStyles(getStyles)(DataEntrySelectionsNoAccess);
+export const DataEntrySelectionsNoAccess = withStyles(getStyles)(DataEntrySelectionsNoAccessPlain);

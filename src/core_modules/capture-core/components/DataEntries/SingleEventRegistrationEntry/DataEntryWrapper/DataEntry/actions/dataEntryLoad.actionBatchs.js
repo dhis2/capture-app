@@ -29,7 +29,7 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
         id: 'note',
         type: 'TEXT',
-        validatorContainers: getNotesValidatorContainers(),
+        validatorContainers: getNoteValidatorContainers(),
         clientIgnore: true,
     },
     {

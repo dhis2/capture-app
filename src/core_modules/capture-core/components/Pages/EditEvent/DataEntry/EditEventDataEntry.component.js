@@ -12,7 +12,7 @@ import { withDataEntryFieldIfApplicable } from '../../../DataEntry/dataEntryFiel
 import { withMainButton } from './withMainButton';
 import { withFilterProps } from '../../../FormFields/New/HOC/withFilterProps';
 import { withDataEntryNotesHandler } from '../../../../components/DataEntry/dataEntryNotes/withDataEntryNotesHandler';
-import Notes from '../../../Notes/Notes.component';
+import { Notes } from '../../../Notes/Notes.component';
 
 import {
     withSaveHandler,

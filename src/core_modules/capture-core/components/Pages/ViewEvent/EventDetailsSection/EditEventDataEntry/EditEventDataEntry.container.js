@@ -2,7 +2,7 @@
 import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
-import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
+import { EditEventDataEntry as EditEventDataEntryComponent } from './EditEventDataEntry.component';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import {
     startAsyncUpdateFieldForEditEvent,

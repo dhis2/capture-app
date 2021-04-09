@@ -18,7 +18,7 @@ class MinNumericFilterPlain extends Component<Props> {
     }
 
     handleBlur = (value: string) => {
-        this.props.onBlur(MinNumericFilter.getValueObject(value));
+        this.props.onBlur(MinNumericFilterPlain.getValueObject(value));
     }
 
     handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {

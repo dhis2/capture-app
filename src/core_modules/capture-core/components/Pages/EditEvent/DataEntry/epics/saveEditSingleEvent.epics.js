@@ -10,7 +10,7 @@ import {
 } from '../editEventDataEntry.actions';
 
 import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
-import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
+import { convertDataEntryToClientValues } from '../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
 

@@ -35,7 +35,7 @@ import type {
 import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
-import { getStageForEventProgram } from '../../../../../../metaData/helpers/EventProgram/getStageFromProgramId';
+import { getStageFromProgramId } from '../../../../../../metaData/helpers/EventProgram/getStageFromProgramId';
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
@@ -172,7 +172,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         map(() => {
             const state = store.value;
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
-            const stageContainer = getStageForEventProgram(state.currentSelections.programId);
+            const stageContainer = getStageFromProgramId(state.currentSelections.programId);
             // $FlowFixMe[incompatible-call] automated comment
             // $FlowFixMe[incompatible-use] automated comment
             const columnConfig = [...getDefaultMainColumnConfig(stageContainer.stage), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];

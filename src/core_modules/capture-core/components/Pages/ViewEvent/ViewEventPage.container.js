@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { ViewEventPageComponent } from './ViewEventPage.component';
-import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../HOC';
 
 const mapStateToProps = (state: ReduxState) => {
@@ -9,7 +9,7 @@ const mapStateToProps = (state: ReduxState) => {
     const isUserInteractionInProgress =
         state.currentSelections.complete &&
         eventDetailsSection.showEditEvent &&
-        dataEntryHasChanges(state, 'singleEvent-editEvent');
+        getDataEntryHasChanges(state, 'singleEvent-editEvent');
     return {
         error: state.activePage.viewEventLoadError && state.activePage.viewEventLoadError.error,
         ready: !state.activePage.lockedSelectorLoads,

@@ -8,7 +8,7 @@ import { errorCreator } from 'capture-core-utils';
 import { Button } from '../../Buttons/Button.component';
 import { D2Form } from '../../D2Form';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
-import { type SearchGroup } from '../../../metaData';
+import type { SearchGroup } from '../../../metaData';
 import { withGotoInterface } from '../../FormFields/New';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
@@ -71,7 +71,7 @@ class SearchFormPlain extends React.Component<Props> {
         if (!this.formInstance) {
             log.error(
                 errorCreator(
-                    SearchForm.errorMessages.SEARCH_FORM_MISSING)({ Search: this }),
+                    SearchFormPlain.errorMessages.SEARCH_FORM_MISSING)({ Search: this }),
             );
             return {
                 error: true,
@@ -144,7 +144,7 @@ class SearchFormPlain extends React.Component<Props> {
         if (!searchForm) {
             return (
                 <div>
-                    {SearchForm.errorMessages.SEARCH_FORM_MISSING}
+                    {SearchFormPlain.errorMessages.SEARCH_FORM_MISSING}
                 </div>
             );
         }

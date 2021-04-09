@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { ExistingTEIContents } from './ExistingTEIContents.component';
+import { ExistingTEIContents as ExistingTEIContentsComponent } from './ExistingTEIContents.component';
 import { makeDataElementsSelector, makeGetClientValuesSelector } from './existingTEIContents.selectors';
 
 const makeMapStateToProps = () => {
@@ -24,4 +24,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 };
 
 // $FlowFixMe
-export const ExistingTEIContentsContainer = connect(makeMapStateToProps, () => ({}), mergeProps)(ExistingTEIContents);
+export const ExistingTEIContents= connect(makeMapStateToProps, () => ({}), mergeProps)(ExistingTEIContentsComponent);

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { DataEntry } from '../../../../DataEntry/DataEntry.container';
+import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
 import { withCancelButton } from '../../../../DataEntry/withCancelButton';
 import { withDataEntryField } from '../../../../DataEntry/dataEntryField/withDataEntryField';
 import { withDataEntryNotesHandler } from '../../../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
@@ -406,7 +406,7 @@ const dataEntryFilterProps = (props: Object) => {
 };
 
 
-const CleanUpHOC = withCleanUpHOC()(withFilterProps(dataEntryFilterProps)(DataEntry));
+const CleanUpHOC = withCleanUpHOC()(withFilterProps(dataEntryFilterProps)(DataEntryContainer));
 const AssigneeField = withDataEntryFieldIfApplicable(buildAssigneeSettingsFn())(CleanUpHOC);
 const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(AssigneeField);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);

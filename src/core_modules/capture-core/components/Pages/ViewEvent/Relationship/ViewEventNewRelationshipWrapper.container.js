@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { eventCancelNewRelationship, requestAddEventRelationship } from './ViewEventRelationships.actions';
 import {
-    ViewEventNewRelationshipWrapper as ViewEventRelationshipWrapperComponent
+    ViewEventNewRelationshipWrapper as ViewEventNewRelationshipWrapperComponent
 } from './ViewEventNewRelationshipWrapper.component';
 import { makeRelationshipTypesSelector } from './ViewEventNewRelationshipWrapper.selectors';
 

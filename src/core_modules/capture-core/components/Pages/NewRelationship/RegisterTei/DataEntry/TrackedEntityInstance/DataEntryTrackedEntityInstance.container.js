@@ -16,5 +16,7 @@ const makeMapStateToProps = () => {
 };
 
 // $FlowFixMe[missing-annot] automated comment
-export const DataEntryTrackedEntityInstance =
-    connect(makeMapStateToProps, () => ({}))(RelationshipTrackedEntityInstance);
+export const DataEntryTrackedEntityInstance = connect(
+    makeMapStateToProps,
+    () => ({})
+)(RelationshipTrackedEntityInstance);

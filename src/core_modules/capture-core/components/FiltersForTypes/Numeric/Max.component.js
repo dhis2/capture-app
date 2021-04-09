@@ -19,12 +19,12 @@ class MaxNumericFilterPlain extends Component<Props> {
     }
 
     handleBlur = (value: string) => {
-        this.props.onBlur(MaxNumericFilter.getValueObject(value));
+        this.props.onBlur(MaxNumericFilterPlain.getValueObject(value));
     }
 
     handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            this.props.onEnterKey(MaxNumericFilter.getValueObject(this.props.value || ''));
+            this.props.onEnterKey(MaxNumericFilterPlain.getValueObject(this.props.value || ''));
         }
     }
 

@@ -1,4 +1,4 @@
 // @flow
-export const sectionKeysForEnrollmentDataEntry {
+export const sectionKeysForEnrollmentDataEntry = {
     ENROLLMENT: 'enrollment',
 };

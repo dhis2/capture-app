@@ -1,5 +1,5 @@
 // @flow
-import { isPositiveInteger } from './integerPositive.validator';
+import { isValidPositiveInteger } from './integerPositive.validator';
 
 /**
  *
@@ -11,5 +11,5 @@ export const isValidZeroOrPositiveInteger = (value: string) => {
     if (value === '0') {
         return true;
     }
-    return isPositiveInteger(value);
+    return isValidPositiveInteger(value);
 };

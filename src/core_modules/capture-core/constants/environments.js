@@ -1,6 +1,6 @@
 // @flow
 
-export const envinronments {
+export const environments = {
     prod: 'production',
     dev: 'development',
     test: 'test',

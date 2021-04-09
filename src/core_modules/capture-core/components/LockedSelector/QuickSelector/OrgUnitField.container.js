@@ -23,4 +23,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe[missing-annot] automated comment
-export const OrgUnitField connect(mapStateToProps, mapDispatchToProps)(BasicOrgUnitField);
+export const OrgUnitField = connect(mapStateToProps, mapDispatchToProps)(BasicOrgUnitField);

@@ -30,12 +30,12 @@ class ToDateFilterPlain extends Component<Props> {
     }
 
     handleBlur = (value: string) => {
-        this.props.onBlur(ToDateFilter.getValueObject(value));
+        this.props.onBlur(ToDateFilterPlain.getValueObject(value));
     }
 
     handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            this.props.onEnterKey(ToDateFilter.getValueObject(this.props.value || ''));
+            this.props.onEnterKey(ToDateFilterPlain.getValueObject(this.props.value || ''));
         }
     }
 

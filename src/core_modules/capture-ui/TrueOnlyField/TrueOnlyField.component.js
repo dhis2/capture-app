@@ -25,7 +25,7 @@ class TrueOnlyField extends Component<Props> {
 
     constructor(props: Props) {
         super(props);
-        this.options = D2BooleanField.getOptions(!!this.props.useRealTrueValue);
+        this.options = TrueOnlyField.getOptions(!!this.props.useRealTrueValue);
     }
 
     render() {

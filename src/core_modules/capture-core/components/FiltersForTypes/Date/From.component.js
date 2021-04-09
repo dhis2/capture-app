@@ -27,7 +27,7 @@ class FromDateFilterPlain extends Component<Props> {
     }
 
     handleBlur = (value: string) => {
-        this.props.onBlur(FromDateFilter.getValueObject(value));
+        this.props.onBlur(FromDateFilterPlain.getValueObject(value));
     }
 
     handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {

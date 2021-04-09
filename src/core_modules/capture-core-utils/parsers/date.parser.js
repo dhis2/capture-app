@@ -1,5 +1,5 @@
 // @flow
-import moment from 'capture-core-utils/moment/momentResolver';
+import { moment } from 'capture-core-utils/moment/momentResolver';
 
 const getReturnObject = (momentDate: ?moment$Moment) => ({
     momentDate,

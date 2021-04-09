@@ -95,4 +95,4 @@ const styles = () => ({
     },
 });
 
-export const ErrorDialog = withStyles(styles)(ErrorDialog);
+export const ErrorDialog = withStyles(styles)(ErrorDialogPlain);

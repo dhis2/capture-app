@@ -1,6 +1,5 @@
 // @flow
 import { connect } from 'react-redux';
-import { FeedbacksSection as  } from './FeedbacksSection.component';
 import { FeedbacksSection as FeedbacksSectionComponent } from './FeedbacksSection.component';
 
 const mapStateToProps = (state: ReduxState, props: Object) => ({

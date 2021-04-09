@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { makeCancelablePromise } from 'capture-core-utils';
 import { getApi } from '../../../d2/d2Instance';
 import { Input } from './Input.component';
-import SearchSuggestions from './SearchSuggestions.component';
+import { SearchSuggestions } from './SearchSuggestions.component';
 import { SearchContext } from './Search.context';
 import type { User } from './types';
 

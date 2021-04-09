@@ -1,6 +1,6 @@
 // @flow
 import { isValidDate } from './date.validator';
-import isValidTime from './time.validator';
+import { isValidTime } from './time.validator';
 
 type DateTimeValue = {
     date?: ?string,

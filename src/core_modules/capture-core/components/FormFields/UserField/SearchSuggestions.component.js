@@ -2,7 +2,7 @@
 import * as React from 'react';
 import defaultClasses from './searchSuggestions.module.css';
 import { SearchSuggestionsUp } from './SearchSuggestionsUp.component';
-import { SearchSuggestions } from './SearchSuggestion.component';
+import { SearchSuggestion } from './SearchSuggestion.component';
 import type { User } from './types';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
     useUpwardList?: ?boolean,
 };
 
-export class UserSearchSuggestions extends React.Component<Props> {
+export class SearchSuggestions extends React.Component<Props> {
     static renderSuggestions(
         suggestions: Array<User>,
         query: string,
@@ -62,8 +62,8 @@ export class UserSearchSuggestions extends React.Component<Props> {
             >
                 {
                     suggestions.length > 0 ?
-                        UserSearchSuggestions.renderSuggestions(suggestions, query, highlighted, passOnProps)
-                        : UserSearchSuggestions.renderEmpty()
+                        SearchSuggestions.renderSuggestions(suggestions, query, highlighted, passOnProps)
+                        : SearchSuggestions.renderEmpty()
                 }
             </div>
         );

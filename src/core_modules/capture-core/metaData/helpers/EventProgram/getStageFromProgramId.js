@@ -11,7 +11,7 @@ const errorMessages = {
     GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
-export function getStageForEventProgram(programId: string) {
+export function getStageFromProgramId(programId: string) {
     const program = programCollection.get(programId);
     if (!program) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));

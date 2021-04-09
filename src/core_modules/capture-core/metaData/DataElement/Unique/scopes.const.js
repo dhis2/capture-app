@@ -1,6 +1,6 @@
 // @flow
 
-export const scopes {
+export const scopes = {
     ENTIRE_SYSTEM: 'entireSystem',
     ORGANISATION_UNIT: 'organisationUnit',
 };

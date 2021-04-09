@@ -45,7 +45,7 @@ type ContainerProps = {
     propName: string,
 };
 
-class DataEntryField extends React.Component<Props> {
+class DataEntryFieldPlain extends React.Component<Props> {
     gotoInstance: ?HTMLDivElement;
     validateAndScrollToIfFailed() {
         const isValid = this.props.valueMeta && this.props.valueMeta.isValid;
@@ -152,4 +152,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe
-export const DataEntryField = connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(DataEntryField);
+export const DataEntryField = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    null,
+    { forwardRef: true }
+)(DataEntryFieldPlain);

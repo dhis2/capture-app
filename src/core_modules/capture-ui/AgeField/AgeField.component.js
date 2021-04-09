@@ -101,9 +101,9 @@ class D2AgeFieldPlain extends Component<Props> {
     }
     // eslint-disable-next-line complexity
     static isValidNumbers(values: AgeValues) {
-        return D2AgeField.isPositiveOrZeroNumber(values.years || '0') &&
-            D2AgeField.isPositiveOrZeroNumber(values.months || '0') &&
-            D2AgeField.isPositiveOrZeroNumber(values.days || '0');
+        return D2AgeFieldPlain.isPositiveOrZeroNumber(values.years || '0') &&
+            D2AgeFieldPlain.isPositiveOrZeroNumber(values.months || '0') &&
+            D2AgeFieldPlain.isPositiveOrZeroNumber(values.days || '0');
     }
 
     static getNumberOrZero(value: ?string) {
@@ -118,20 +118,20 @@ class D2AgeFieldPlain extends Component<Props> {
         const { onParseDate, onGetFormattedDateStringFromMoment, onRemoveFocus, moment } = this.props;
 
         onRemoveFocus && onRemoveFocus();
-        if (D2AgeField.isEmptyNumbers(values)) {
+        if (D2AgeFieldPlain.isEmptyNumbers(values)) {
             this.props.onBlur(values.date ? { date: values.date } : null);
             return;
         }
 
-        if (!D2AgeField.isValidNumbers(values)) {
+        if (!D2AgeFieldPlain.isValidNumbers(values)) {
             this.props.onBlur({ ...values, date: '' });
             return;
         }
 
         const momentDate = moment(undefined, undefined, true);
-        momentDate.subtract(D2AgeField.getNumberOrZero(values.years), 'years');
-        momentDate.subtract(D2AgeField.getNumberOrZero(values.months), 'months');
-        momentDate.subtract(D2AgeField.getNumberOrZero(values.days), 'days');
+        momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.years), 'years');
+        momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.months), 'months');
+        momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.days), 'days');
         const calculatedValues = getCalculatedValues(
             onGetFormattedDateStringFromMoment(momentDate),
             onParseDate,
