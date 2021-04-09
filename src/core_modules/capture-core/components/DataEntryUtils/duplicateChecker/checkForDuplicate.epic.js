@@ -1,11 +1,13 @@
 // @flow
-import { from } from 'rxjs';
-import { concatMap, takeUntil, filter, map } from 'rxjs/operators';
+import { from, of } from 'rxjs';
+import { catchError, concatMap, takeUntil, filter, map } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import type { RenderFoundation } from '../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../converters';
 import getDataEntryKey from '../../DataEntry/common/getDataEntryKey';
-import { checkForDuplicateActionTypes, checkForDuplicateSuccess } from './checkForDuplicate.actions';
+import { checkForDuplicateActionTypes, checkForDuplicateSuccess, checkForDuplicateError } from './checkForDuplicate.actions';
 
 const getSearchValues = (
     formValues: Object,
@@ -37,6 +39,10 @@ export const checkForDuplicateEpic = (action$: InputObservable, store: ReduxStor
                     map(duplicateCount =>
                         checkForDuplicateSuccess(dataEntryId, Boolean(duplicateCount)),
                     ),
+                    catchError((error) => {
+                        log.error(errorCreator('duplicate check api request failed')({ searchValues, searchContext, error }));
+                        return of(checkForDuplicateError(dataEntryId));
+                    }),
                     takeUntil(action$.pipe(
                         ofType(checkForDuplicateActionTypes.DUPLICATE_CHECK_RESET, checkForDuplicateActionTypes.DUPLICATE_CHECK_CANCEL),
                         filter(({ dataEntryId: cancelDataEntryId }) => cancelDataEntryId === dataEntryId),

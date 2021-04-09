@@ -9,6 +9,12 @@ export const dataEntriesSearchGroupResultsReducerDesc = createReducerDescription
             hasDuplicate,
         },
     }),
+    [checkForDuplicateActionTypes.DUPLICATE_CHECK_ERROR]: (state, { payload: { dataEntryId } }) => ({
+        ...state,
+        [dataEntryId]: {
+            hasDuplicate: false,
+        },
+    }),
     [checkForDuplicateActionTypes.DUPLICATE_CHECK_RESET]: (state, { payload: { dataEntryId } }) =>
         Object
             .keys(state)
