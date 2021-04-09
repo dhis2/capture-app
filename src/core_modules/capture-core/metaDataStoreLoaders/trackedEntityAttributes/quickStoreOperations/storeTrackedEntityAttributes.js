@@ -6,7 +6,7 @@ export const storeTrackedEntityAttributes = (ids: Array<string>) => {
     const query = {
         resource: 'trackedEntityAttributes',
         params: {
-            fields: 'id,displayName,displayShortName,description,valueType,optionSetValue,unique,orgunitScope,' +
+            fields: 'id,displayName,displayShortName,displayFormName,description,valueType,optionSetValue,unique,orgunitScope,' +
             'pattern,translations[property,locale,value],optionSet[id]',
             filter: `id:in:[${ids.join(',')}]`,
             pageSize: ids.length,
