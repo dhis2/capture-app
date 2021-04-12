@@ -359,3 +359,4 @@ Then('you should be taken to the main page with org unit preselected', () => {
     cy.url()
         .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
 });
+
