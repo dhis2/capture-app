@@ -2,6 +2,7 @@
 import type { Node } from 'react';
 import type { RegistrationFormMetadata } from '../common/types';
 import type { RenderCustomCardActions } from '../../CardList';
+import type { SaveForDuplicateCheck } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 
 export type OwnProps = $ReadOnly<{|
   id: string,
@@ -9,10 +10,10 @@ export type OwnProps = $ReadOnly<{|
   selectedScopeId: string,
   saveButtonText: string,
   fieldOptions?: Object,
-  onSave: () => void,
+  onSave: SaveForDuplicateCheck,
   duplicatesReviewPageSize: number,
   renderDuplicatesCardActions?: RenderCustomCardActions,
-  renderDuplicatesDialogActions?: (onCancel: () => void, onSave: () => void) => Node,
+  renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck) => Node,
 |}>;
 
 type ContainerProps = {|
@@ -27,12 +28,17 @@ export type Props = $ReadOnly<{|
 type PropsAddedInHOC = {|
     onPostProcessErrorMessage: Function,
     ...CssClasses,
+    onSave: (saveType?: ?string) => void,
 |};
 type PropsRemovedInHOC = {|
     renderDuplicatesCardActions?: RenderCustomCardActions,
-    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: () => void) => Node,
+    renderDuplicatesDialogActions?: (onCancel: () => void, onSave: SaveForDuplicateCheck,) => Node,
     duplicatesReviewPageSize: number,
+    onSave: SaveForDuplicateCheck,
 |};
 
-export type PlainProps = $Diff<{|...Props, ...PropsAddedInHOC|}, PropsRemovedInHOC>;
+export type PlainProps = {|
+    ...$Diff<Props, PropsRemovedInHOC>,
+    ...PropsAddedInHOC,
+|};
 

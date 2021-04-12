@@ -1,8 +1,9 @@
 // @flow
 import { type InputSearchGroup, typeof scopeTypes } from '../../../../../metaData';
+import type { SaveForDuplicateCheck } from './types';
 
 export type Input = {|
-    onSave: () => void,
+    onSave: SaveForDuplicateCheck,
     duplicateInfo?: {| hasDuplicate: boolean |},
     onCheckForDuplicate: (searchGroup: InputSearchGroup, scopeContext: Object) => void,
     onResetCheckForDuplicate: () => void,

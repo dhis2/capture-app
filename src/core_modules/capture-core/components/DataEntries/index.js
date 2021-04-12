@@ -24,3 +24,4 @@ export {
 export { EnrollmentRegistrationEntry } from './EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.container';
 export { TeiRegistrationEntry } from './TeiRegistrationEntry/TeiRegistrationEntry.container';
 export { SingleEventRegistrationEntry } from './SingleEventRegistrationEntry/SingleEventRegistrationEntry.container';
+export type { SaveForDuplicateCheck as SaveForEnrollmentAndTeiRegistration } from './common/TEIAndEnrollment/DuplicateCheckOnSave';
