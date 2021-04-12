@@ -181,7 +181,7 @@ class ProgramFactory {
         }
         // $FlowFixMe
         program.icon = await ProgramFactory._buildProgramIcon(cachedProgram.style);
-        program.organisationUnits = (await getUserStorageController().get(userStores.ORGANISATION_UNITS_BY_PROGRAM, program.id)).organisationUnits;
+        program.organisationUnits = (await getUserStorageController().get(userStores.ORGANISATION_UNITS_BY_PROGRAM, program.id))?.organisationUnits;
 
         return program;
     }
