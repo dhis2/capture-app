@@ -21,7 +21,6 @@ const useNewRelationshipScopeId = (): string =>
 
 export const RegisterTei = ({ onLink, onSave, onGetUnsavedAttributeValues }: OwnProps) => {
     const dataEntryId = 'relationship';
-    const ready = useSelector(({ newRelationshipRegisterTei }) => (!newRelationshipRegisterTei.loading));
     const error = useSelector(({ newRelationshipRegisterTei }) => (newRelationshipRegisterTei.error));
     const newRelationshipProgramId = useNewRelationshipScopeId();
     const { trackedEntityName } = useScopeInfo(newRelationshipProgramId);
@@ -36,7 +35,6 @@ export const RegisterTei = ({ onLink, onSave, onGetUnsavedAttributeValues }: Own
             onReviewDuplicates={onReviewDuplicates}
             trackedEntityName={trackedEntityName}
             newRelationshipProgramId={newRelationshipProgramId}
-            ready={ready}
             error={error}
             possibleDuplicatesExist={usePossibleDuplicatesExist(dataEntryId)}
         />);

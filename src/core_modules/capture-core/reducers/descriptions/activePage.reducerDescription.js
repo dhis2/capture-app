@@ -5,7 +5,6 @@ import {
     actionTypes as viewEventActionTypes,
     actionTypes as viewEventPageActionTypes,
 } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import { actionTypes as viewEventDataEntryActionTypes } from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
@@ -78,15 +77,6 @@ export const activePageDesc = createReducerDescription({
         ...state,
         viewEventLoadError: action.payload,
         lockedSelectorLoads: false,
-    }),
-
-    [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: state => ({
-        ...state,
-        isDataEntryLoading: false,
-    }),
-    [newEventDataEntryActionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL]: state => ({
-        ...state,
-        isDataEntryLoading: false,
     }),
 
     [enrollmentPageActionTypes.INFORMATION_FETCH]: state => ({

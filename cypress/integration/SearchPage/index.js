@@ -351,7 +351,7 @@ Given('you are in the search page with the Child Programme and org unit being pr
 });
 
 When('you click the back button', () => {
-    cy.get('[data-test="dhis2-capture-back-button"]')
+    cy.get('[data-test="back-button"]')
         .click();
 });
 
