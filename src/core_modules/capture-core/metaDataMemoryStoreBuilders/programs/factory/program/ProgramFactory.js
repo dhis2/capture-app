@@ -118,10 +118,10 @@ class ProgramFactory {
         return icon;
     }
 
-    async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>, id: string) {
+    async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
         const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
             // $FlowFixMe[incompatible-call] automated comment
-            const dataElement = await this.dataElementFactory.build({ ...ptea, scopeId: id });
+            const dataElement = await this.dataElementFactory.build(ptea);
             return dataElement;
         });
 
@@ -164,7 +164,7 @@ class ProgramFactory {
                 );
 
                 // $FlowFixMe
-                program.attributes = await this._buildProgramAttributes(cachedProgram.programTrackedEntityAttributes, cachedProgram.id);
+                program.attributes = await this._buildProgramAttributes(cachedProgram.programTrackedEntityAttributes);
             }
 
             // $FlowFixMe

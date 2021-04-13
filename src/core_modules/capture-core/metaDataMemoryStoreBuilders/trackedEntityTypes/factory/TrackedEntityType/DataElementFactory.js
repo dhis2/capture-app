@@ -138,7 +138,6 @@ class DataElementFactory {
                         }
                     }
 
-                    debugger
                     let requestPromise;
                     if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                         const orgUnitId = contextProps.orgUnitId;

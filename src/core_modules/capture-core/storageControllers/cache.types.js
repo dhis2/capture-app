@@ -35,7 +35,6 @@ export type CachedProgramTrackedEntityAttribute = {
     mandatory: boolean,
     renderOptionsAsRadio: ?boolean,
     allowFutureDate?: ?boolean,
-    scopeId: string,
 };
 
 export type CachedDataElementTranslation = {

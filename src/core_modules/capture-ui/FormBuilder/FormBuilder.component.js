@@ -11,7 +11,7 @@ import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
 
 export type ValidatorContainer = {
-    validator: (value: any, validationContext: ?Object, scope: string) => boolean,
+    validator: (value: any, validationContext: ?Object) => boolean,
     message: string,
     validatingMessage?: ?string,
     type?: ?string,
@@ -56,7 +56,6 @@ type IsValidatingFn = (
 
 type Props = {
     id: string,
-    scope: string,
     fields: Array<FieldConfig>,
     values: { [id: string]: any },
     fieldsUI: { [id: string]: FieldUI },
@@ -90,7 +89,6 @@ class FormBuilder extends React.Component<Props> {
         value: any,
         validationContext: ?Object,
         onIsValidatingInternal: ?Function,
-        scope: string,
     ): Promise<{ valid: boolean, errorMessage?: ?string, errorType?: ?string }> {
         if (!field.validators || field.validators.length === 0) {
             return {
@@ -102,7 +100,7 @@ class FormBuilder extends React.Component<Props> {
             .reduce(async (passPromise, currentValidator) => {
                 const pass = await passPromise;
                 if (pass === true) {
-                    let result = currentValidator.validator(value, validationContext, scope);
+                    let result = currentValidator.validator(value, validationContext);
                     if (result instanceof Promise) {
                         result = onIsValidatingInternal ? onIsValidatingInternal(currentValidator.validatingMessage, result) : result;
                         result = await result;
@@ -177,7 +175,6 @@ class FormBuilder extends React.Component<Props> {
             values,
             onGetValidationContext,
             onIsValidating,
-            scope,
         } = props;
         const validationContext = onGetValidationContext && onGetValidationContext();
         const validationPromises = fields
@@ -211,7 +208,6 @@ class FormBuilder extends React.Component<Props> {
                         values[field.id],
                         validationContext,
                         handleIsValidatingInternal,
-                        scope,
                     );
                 } catch (reason) {
                     if (reason && isObject(reason) && reason.isCanceled) {
@@ -377,7 +373,6 @@ class FormBuilder extends React.Component<Props> {
             onGetValidationContext,
             id,
             onIsValidating,
-            scope,
         } = this.props;
         const field = this.getFieldProp(fieldId);
         const touched = options && isDefined(options.touched) ? options.touched : true;
@@ -415,7 +410,6 @@ class FormBuilder extends React.Component<Props> {
             value,
             onGetValidationContext && onGetValidationContext(),
             handleIsValidatingInternal,
-            scope,
         )
             // $FlowFixMe[prop-missing] automated comment
             .then(({ valid, errorMessage, errorType, errorData }) => {

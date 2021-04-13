@@ -18,7 +18,6 @@ const getSearchContext = (props: Object) => ({
 
 type FinalTeiDataEntryProps = {
     teiRegistrationMetadata: TeiRegistration,
-    programId: string,
 };
 // final step before the generic dataEntry is inserted
 class FinalTeiDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -31,7 +30,6 @@ class FinalTeiDataEntry extends React.Component<FinalTeiDataEntryProps> {
         return (
             <DataEntry
                 {...passOnProps}
-                scope={passOnProps.programId}
                 formFoundation={teiRegistrationMetadata.form}
             />
         );

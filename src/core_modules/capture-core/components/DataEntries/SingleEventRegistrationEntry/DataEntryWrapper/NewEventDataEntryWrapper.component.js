@@ -82,7 +82,6 @@ const NewEventDataEntryWrapperPlain = ({
             </div>
             <div className={classes.marginLeft}>
                 <DataEntry
-                    scope={programId}
                     stage={stage}
                     formFoundation={formFoundation}
                     formHorizontal={formHorizontal}
