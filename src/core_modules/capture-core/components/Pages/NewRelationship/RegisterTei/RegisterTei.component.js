@@ -10,7 +10,7 @@ import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryW
 import { PossibleDuplicatesDialog } from '../../../PossibleDuplicatesDialog';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import type { Props } from './RegisterTei.types';
-import { withErrorMessageHandler, withLoadingIndicator } from '../../../../HOC';
+import { withErrorMessageHandler } from '../../../../HOC';
 
 const getStyles = () => ({
     container: {
@@ -122,7 +122,6 @@ const RegisterTeiPlain = ({
 
 export const RegisterTeiComponent: ComponentType<$Diff<Props, CssClasses>> =
   compose(
-      withLoadingIndicator(),
       withErrorMessageHandler(),
       withStyles(getStyles),
   )(RegisterTeiPlain);
