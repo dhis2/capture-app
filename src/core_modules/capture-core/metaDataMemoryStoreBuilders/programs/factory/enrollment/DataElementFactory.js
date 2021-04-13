@@ -55,7 +55,7 @@ class DataElementFactory {
                 dataElementUniqueScope.ORGANISATION_UNIT :
                 dataElementUniqueScope.ENTIRE_SYSTEM;
 
-            o.onValidate = (value: any, contextProps: Object = {}, scope) => {
+            o.onValidate = (value: any, contextProps: Object = {}) => {
                 const serverValue = pipe(
                     convertFormToClient,
                     convertClientToServer,
@@ -84,7 +84,7 @@ class DataElementFactory {
                         .get(
                             'trackedEntityInstances',
                             {
-                                program: scope,
+                                program: contextProps.scope,
                                 ou: orgUnitId,
                                 filter: `${dataElement.id}:EQ:${serverValue}`,
                             },
@@ -94,7 +94,7 @@ class DataElementFactory {
                         .get(
                             'trackedEntityInstances',
                             {
-                                program: scope,
+                                program: contextProps.scope,
                                 ouMode: 'ACCESSIBLE',
                                 filter: `${dataElement.id}:EQ:${serverValue}`,
                             },

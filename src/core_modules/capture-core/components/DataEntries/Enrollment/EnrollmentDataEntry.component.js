@@ -314,8 +314,10 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
 
 export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnit, onGetUnsavedAttributeValues } = this.props;
+        const { orgUnit, onGetUnsavedAttributeValues, programId } = this.props;
+        debugger;
         return {
+            scope: programId,
             orgUnitId: orgUnit.id,
             onGetUnsavedAttributeValues,
         };

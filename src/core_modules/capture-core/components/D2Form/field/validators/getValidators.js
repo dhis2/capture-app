@@ -244,12 +244,12 @@ function buildUniqueValidator(metaData: DataElement): Array<?ValidatorContainer>
         ?
         [
             {
-                validator: (value: any, contextProps: ?Object, scope) => {
+                validator: (value: any, contextProps: ?Object) => {
                     if (!value && value !== 0 && value !== false) {
                         return true;
                     }
                     // $FlowFixMe
-                    return metaData.unique.onValidate(value, contextProps, scope);
+                    return metaData.unique.onValidate(value, contextProps);
                 },
                 message: errorMessages.UNIQUENESS,
                 validatingMessage: validationMessages.UNIQUENESS,
