@@ -59,49 +59,37 @@ export const updateDataEntryFieldBatch = (
     return batchActions([
         innerAction,
         startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-        startRunRulesOnUpdateForNewEnrollment(innerAction.payload, null, uid, programId, orgUnit),
+        startRunRulesOnUpdateForNewEnrollment(innerAction.payload, uid, programId, orgUnit),
     ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };
 
 export const updateFieldBatch = (
     innerAction: ReduxAction<any, any>,
-    extraActions: {
-        filterActions: Array<ReduxAction<any, any>>,
-        filterActionsToBeExecuted: Array<ReduxAction<any, any>>
-    },
     programId: string,
     orgUnit: Object,
 ) => {
-    const { filterActions, filterActionsToBeExecuted } = extraActions;
     const { dataEntryId, itemId } = innerAction.payload;
     const uid = uuid();
 
     return batchActions([
         innerAction,
-        ...filterActionsToBeExecuted,
         startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-        startRunRulesOnUpdateForNewEnrollment(innerAction.payload, filterActions, uid, programId, orgUnit),
+        startRunRulesOnUpdateForNewEnrollment(innerAction.payload, uid, programId, orgUnit),
     ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };
 
 export const asyncUpdateSuccessBatch = (
     innerAction: ReduxAction<any, any>,
-    extraActions: {
-        filterActions: Array<ReduxAction<any, any>>,
-        filterActionsToBeExecuted: Array<ReduxAction<any, any>>,
-    },
     dataEntryId: string,
     itemId: string,
     programId: string,
     orgUnit: Object,
 ) => {
-    const { filterActions, filterActionsToBeExecuted } = extraActions;
     const uid = uuid();
 
     return batchActions([
         innerAction,
-        ...filterActionsToBeExecuted,
         startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-        startRunRulesOnUpdateForNewEnrollment({ ...innerAction.payload, dataEntryId, itemId }, filterActions, uid, programId, orgUnit),
+        startRunRulesOnUpdateForNewEnrollment({ ...innerAction.payload, dataEntryId, itemId }, uid, programId, orgUnit),
     ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };

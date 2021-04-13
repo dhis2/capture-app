@@ -7,7 +7,6 @@ import {
     startSavingNewTrackedEntityInstance,
     startSavingNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
-import { useDuplicates } from '../../../PossibleDuplicatesDialog/useDuplicates';
 
 export const RegistrationDataEntry: ComponentType<OwnProps>
   = ({ selectedScopeId, dataEntryId, setScopeId }) => {
@@ -21,8 +20,6 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
           () => { dispatch(startSavingNewTrackedEntityInstanceWithEnrollment()); },
           [dispatch]);
 
-      const { onReviewDuplicates } = useDuplicates(dataEntryId, selectedScopeId);
-
       const dataEntryIsReady = useSelector(({ dataEntries }) => (!!dataEntries[dataEntryId]));
 
       return (
@@ -31,7 +28,6 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
               selectedScopeId={selectedScopeId}
               setScopeId={setScopeId}
               dataEntryIsReady={dataEntryIsReady}
-              onReviewDuplicates={onReviewDuplicates}
               onSaveWithoutEnrollment={dispatchOnSaveWithoutEnrollment}
               onSaveWithEnrollment={dispatchOnSaveWithEnrollment}
           />);

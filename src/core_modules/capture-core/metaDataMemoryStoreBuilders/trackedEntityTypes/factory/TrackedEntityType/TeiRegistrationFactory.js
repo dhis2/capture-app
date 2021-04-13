@@ -160,13 +160,13 @@ class TeiRegistrationFactory {
                 o.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
                 o.searchFoundation = this._buildInputSearchGroupFoundation(cachedType, searchGroup);
                 o.onSearch = (values: Object = {}, contextProps: Object = {}) => {
-                    const { orgUnitId, trackedEntityType } = contextProps;
+                    const { orgUnitId, trackedEntityTypeId } = contextProps;
                     return getApi()
                         .get(
                             'trackedEntityInstances/count.json',
                             {
                                 ou: orgUnitId,
-                                trackedEntityType,
+                                trackedEntityType: trackedEntityTypeId,
                                 ouMode: 'ACCESSIBLE',
                                 filter: Object
                                     .keys(values)
