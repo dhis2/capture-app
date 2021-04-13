@@ -68,7 +68,6 @@ class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
         };
     }
 
-
     render() {
         const {
             orgUnit,
