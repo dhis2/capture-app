@@ -9,7 +9,6 @@ export type FormRef = $ReadOnly<{|
 export type OwnProps = $ReadOnly<{|
   formFoundation: RenderFoundation,
   id: string,
-  scope: ?string,
   formHorizontal?: boolean,
   ...FormRef
 |}>
