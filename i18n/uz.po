@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -321,9 +321,6 @@ msgstr "Индикаторлар"
 msgid "Warnings"
 msgstr "Огоҳлантириш"
 
-msgid "search group result could not be retrieved"
-msgstr "Гуруҳ қидируви натижасини олиш имкони йўқ"
-
 msgid "Complete"
 msgstr "Тўлдириш"
 
@@ -353,12 +350,6 @@ msgstr "Баъзи операциялар ҳали ҳам бажарилмоқд
 
 msgid "Operations running"
 msgstr "Амалиётлар бажарилмоқда"
-
-msgid "Hide"
-msgstr "Беркитиш"
-
-msgid "Possible duplicates found"
-msgstr "Бўлиши мумкин бўлган нусхалар топилди"
 
 msgid "Sort"
 msgstr "Саралаш"
@@ -745,9 +736,6 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr "Нусхаларни кўриб чиқиш"
-
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Янги {{trackedEntityTypeName}} ва ҳаволани сақлаш"
 
@@ -884,6 +872,9 @@ msgstr "Ҳодиса/тадбир {{name}} га бириктирилди"
 msgid "Feedbacks"
 msgstr "Қайта алоқалар"
 
+msgid "Possible duplicates found"
+msgstr "Бўлиши мумкин бўлган нусхалар топилди"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "Эҳтимолий нусхаларни юклашда хатолик юз берди"
 
@@ -926,8 +917,8 @@ msgstr "Профил"
 msgid "Error saving event"
 msgstr "Ҳодиса/тадбирни сақлашда хато"
 
-msgid "Could not save event. See log for details"
-msgstr "Ҳодиса/тадбир сақланмади. Тафсилотлар учун журналга қаранг"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "Ҳодиса/тадбирни ўчириб ташлаб бўлмади"
@@ -941,8 +932,14 @@ msgstr "Ишчи рўйхатни қўшиб бўлмади"
 msgid "Could not delete working list"
 msgstr "Ишчи рўйхатни ўчириб ташлаб бўлмади"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "Ташкилот бўлимини қидириб бўлмади. Тафсилотлар учун журналга қаранг"
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "кузатувдаги объект намунаси"

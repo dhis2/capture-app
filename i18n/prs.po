@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Persian (Afghanistan) (https://www.transifex.com/hisp-uio/teams/100509/fa_AF/)\n"
@@ -301,9 +301,6 @@ msgstr "شاخص ها"
 msgid "Warnings"
 msgstr ""
 
-msgid "search group result could not be retrieved"
-msgstr ""
-
 msgid "Complete"
 msgstr "تکمیل"
 
@@ -332,12 +329,6 @@ msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
-msgstr ""
-
-msgid "Hide"
-msgstr "مخفی کردن"
-
-msgid "Possible duplicates found"
 msgstr ""
 
 msgid "Sort"
@@ -725,9 +716,6 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr ""
-
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
@@ -848,6 +836,9 @@ msgstr ""
 msgid "Feedbacks"
 msgstr ""
 
+msgid "Possible duplicates found"
+msgstr ""
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -890,7 +881,7 @@ msgstr "مشخصات"
 msgid "Error saving event"
 msgstr ""
 
-msgid "Could not save event. See log for details"
+msgid "Could not save event"
 msgstr ""
 
 msgid "Could not delete event"
@@ -905,7 +896,13 @@ msgstr ""
 msgid "Could not delete working list"
 msgstr ""
 
-msgid "Organisation unit search failed. See log for details"
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
 msgstr ""
 
 msgid "tracked entity instance"

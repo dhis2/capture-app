@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -324,9 +324,6 @@ msgstr "Indikatorlar"
 msgid "Warnings"
 msgstr "Ogohlantirishlar"
 
-msgid "search group result could not be retrieved"
-msgstr "Guruh qidiruvi natijasini olish imkoni yoʼq"
-
 msgid "Complete"
 msgstr "Toʼldirish"
 
@@ -356,12 +353,6 @@ msgstr "Baʼzi operatsiyalar hali ham bajarilmoqda. Iltimos, kuting ..."
 
 msgid "Operations running"
 msgstr "Аmaliyotlar bajarilmoqda"
-
-msgid "Hide"
-msgstr "Berkitish"
-
-msgid "Possible duplicates found"
-msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
 
 msgid "Sort"
 msgstr "Saralash"
@@ -751,9 +742,6 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr "Nusxalarni koʼrib chiqish"
-
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
@@ -888,6 +876,9 @@ msgstr "Hodisa/tadbir {{name}} ga biriktirildi"
 msgid "Feedbacks"
 msgstr "Qayta aloqalar"
 
+msgid "Possible duplicates found"
+msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -931,8 +922,8 @@ msgstr "Profil"
 msgid "Error saving event"
 msgstr "Hodisa/tadbirni saqlashda xato"
 
-msgid "Could not save event. See log for details"
-msgstr "Hodisa/tadbir saqlanmadi. Tafsilotlar uchun jurnalga qarang"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "Hodisa/tadbirni oʼchirib tashlab boʼlmadi"
@@ -946,9 +937,14 @@ msgstr "Ishchi roʼyxatni qoʼshib boʼlmadi"
 msgid "Could not delete working list"
 msgstr "Ishchi roʼyxatni oʼchirib tashlab boʼlmadi"
 
-msgid "Organisation unit search failed. See log for details"
+msgid "Organisation unit search failed."
 msgstr ""
-"Tashkilot boʼlimini qidirib boʼlmadi. Tafsilotlar uchun jurnalga qarang"
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "kuzatilayotgan obʼekt namunasi"

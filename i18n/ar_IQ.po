@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -312,9 +312,6 @@ msgstr "المؤشرات"
 msgid "Warnings"
 msgstr "تحذيرات"
 
-msgid "search group result could not be retrieved"
-msgstr "تعذر استرداد نتيجة مجموعة البحث"
-
 msgid "Complete"
 msgstr "مكتمل"
 
@@ -344,12 +341,6 @@ msgstr "لا تزال بعض العمليات قيد التشغيل. أرجو ا
 
 msgid "Operations running"
 msgstr "العمليات الجارية"
-
-msgid "Hide"
-msgstr "إخفاء"
-
-msgid "Possible duplicates found"
-msgstr "إحتمال وجود تكرار"
 
 msgid "Sort"
 msgstr "فرز"
@@ -736,9 +727,6 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr "مراجعة التكرارات"
-
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
@@ -859,6 +847,9 @@ msgstr "تم تعيين الحدث إلى {{name}}"
 msgid "Feedbacks"
 msgstr "تغذيات راجعة"
 
+msgid "Possible duplicates found"
+msgstr "إحتمال وجود تكرار"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -901,8 +892,8 @@ msgstr "ملف التعريف"
 msgid "Error saving event"
 msgstr "خطأ عند حفظ الحدث"
 
-msgid "Could not save event. See log for details"
-msgstr "تعذر حفظ الحدث. انظر إلى السجل للحصول على التفاصيل"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "تعذر حذف الحدث"
@@ -916,8 +907,14 @@ msgstr "تعذر إضافة قائمة العمل"
 msgid "Could not delete working list"
 msgstr "تعذر حذف قائمة العمل"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "فشل البحث عن الوحدة التنظيمية. للحصول على التفاصيل، انظر السجل"
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"
