@@ -5,7 +5,7 @@ import Section from '../Section/Section.component';
 import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 import D2SectionFields from './D2SectionFields.container';
 import { Section as MetaDataSection } from '../../metaData';
-import { NoticeBox } from '@dhis2/ui';
+import { SectionDescriptionBox } from  './SectionDescriptionBox.component';
 
 const getStyles = theme => ({
     section: {
@@ -51,9 +51,7 @@ class D2Section extends React.PureComponent<Props> {
         }
 
         return (
-            <NoticeBox title={description}>
-                {/* {description} */}
-            </NoticeBox>
+            <SectionDescriptionBox description={description}/>
         )
     }
 

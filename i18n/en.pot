@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-03-22T09:59:56.680Z\n"
-"PO-Revision-Date: 2021-03-22T09:59:56.680Z\n"
+"POT-Creation-Date: 2021-04-12T06:58:43.104Z\n"
+"PO-Revision-Date: 2021-04-12T06:58:43.104Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -366,6 +366,9 @@ msgstr ""
 msgid "From"
 msgstr ""
 
+msgid "To"
+msgstr ""
+
 msgid "This week"
 msgstr ""
 
@@ -385,9 +388,6 @@ msgid "Last 3 months"
 msgstr ""
 
 msgid "Custom range"
-msgstr ""
-
-msgid "To"
 msgstr ""
 
 msgid "Max"
@@ -619,12 +619,6 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
-msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "an error occurred loading working lists"
-msgstr ""
-
 msgid "Delete event"
 msgstr ""
 
@@ -643,10 +637,13 @@ msgstr ""
 msgid "Download data..."
 msgstr ""
 
-msgid "Registered events"
+msgid "Working list could not be loaded"
 msgstr ""
 
-msgid "Working list could not be updated"
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Registered events"
 msgstr ""
 
 msgid "Enrollment status"
@@ -665,6 +662,9 @@ msgid "Registration Date"
 msgstr ""
 
 msgid "Inactive"
+msgstr ""
+
+msgid "Working list could not be updated"
 msgstr ""
 
 msgid "Update view"
@@ -718,9 +718,6 @@ msgstr ""
 msgid "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Register"
-msgstr ""
-
 msgid "Review Duplicates"
 msgstr ""
 
@@ -730,10 +727,10 @@ msgstr ""
 msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
-msgid "Registration"
+msgid "Organisation Unit"
 msgstr ""
 
-msgid "Organisation Unit"
+msgid "Registration"
 msgstr ""
 
 msgid "Search results"
@@ -752,6 +749,9 @@ msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
 
 msgid "Create new {{trackedEntityType}}"
+msgstr ""
+
+msgid "Register"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
