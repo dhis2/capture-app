@@ -37,8 +37,8 @@ type State = {
 }
 
 const coordinateKeys = {
-    LATITUDE: 'latitude',
-    LONGITUDE: 'longitude',
+    LATITUDE: i18n.t('Latitude'),
+    LONGITUDE: i18n.t('Longitude'),
 };
 
 export default class D2Coordinate extends React.Component<Props, State> {
