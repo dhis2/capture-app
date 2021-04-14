@@ -64,7 +64,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
         const newState = [
             ...state,
-            getErrorFeedback(i18n.t('Could not save event. See log for details')),
+            getErrorFeedback(i18n.t('Could not save event')),
         ];
         return newState;
     },
@@ -75,7 +75,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
         const newState = [
             ...state,
-            getErrorFeedback(i18n.t('Could not save event. See log for details')),
+            getErrorFeedback(i18n.t('Could not save event')),
         ];
         return newState;
     },
@@ -108,7 +108,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
         const newState = [
             ...state,
-            getErrorFeedback(i18n.t('Could not save event. See log for details')),
+            getErrorFeedback(i18n.t('Could not save event')),
         ];
         return newState;
     },
@@ -121,10 +121,10 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
     [viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
     [registrationSectionActionTypes.ORG_UNIT_SEARCH_FAILED]: state =>
-        addErrorFeedback(state, i18n.t('Organisation unit search failed. See log for details')),
+        addErrorFeedback(state, i18n.t('Organisation unit search failed.')),
     [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_FAILED]: state =>
-        addErrorFeedback(state, i18n.t('Organisation unit search failed. See log for details')),
+        addErrorFeedback(state, i18n.t('Error saving tracked entity instance')),
     [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED]: state =>
-        addErrorFeedback(state, i18n.t('Organisation unit search failed. See log for details')),
+        addErrorFeedback(state, i18n.t('Error saving enrollment')),
 }, 'feedbacks', []);
 
