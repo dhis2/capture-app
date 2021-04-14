@@ -41,18 +41,9 @@ And('you fill in the first name with values that have exactly 5 duplicates', () 
 });
 
 When('you click create', () => {
-    cy.get('[data-test="dhis2-capture-possible-duplicates-found-button"]')
-        .should('exist');
-
     cy.get('[data-test="dhis2-capture-create-and-link-button"]')
         .click();
 });
-
-When('you click the show possible duplicates button', () => {
-    cy.get('[data-test="dhis2-capture-possible-duplicates-found-button"]')
-        .click();
-});
-
 
 And('you can see a modal', () => {
     cy.get('[data-test="dhis2-capture-duplicates-modal"]')
