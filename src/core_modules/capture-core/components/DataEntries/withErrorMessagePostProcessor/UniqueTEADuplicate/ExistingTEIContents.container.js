@@ -24,4 +24,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 };
 
 // $FlowFixMe
-export const ExistingTEIContents= connect(makeMapStateToProps, () => ({}), mergeProps)(ExistingTEIContentsComponent);
+export const ExistingTEIContents = connect(makeMapStateToProps, () => ({}), mergeProps)(ExistingTEIContentsComponent);

@@ -42,5 +42,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 // $FlowFixMe[missing-annot] automated comment
 export const SearchOrgUnitSelector = connect(mapStateToProps, mapDispatchToProps)(
-    SearchOrgUnitSelectorRefHandler
+    SearchOrgUnitSelectorRefHandler,
 );

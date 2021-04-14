@@ -36,5 +36,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
 export const ViewEvent = connect(makeMapStateToProps, mapDispatchToProps)(
-    withErrorMessageHandler()(ViewEventComponent)
+    withErrorMessageHandler()(ViewEventComponent),
 );

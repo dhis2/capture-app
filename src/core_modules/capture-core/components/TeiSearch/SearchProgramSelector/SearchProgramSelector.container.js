@@ -22,5 +22,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 // $FlowFixMe[missing-annot] automated comment
 export const SearchProgramSelector = connect(makeMapStateToProps, mapDispatchToProps)(
-    SearchProgramSelectorComponent
+    SearchProgramSelectorComponent,
 );

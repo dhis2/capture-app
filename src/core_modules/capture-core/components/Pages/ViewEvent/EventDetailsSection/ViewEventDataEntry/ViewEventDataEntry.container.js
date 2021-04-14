@@ -16,5 +16,5 @@ const mapDispatchToProps = (): any => ({});
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
 export const ViewEventDataEntry = connect(mapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(ViewEventDataEntryComponent)
+    withLoadingIndicator()(ViewEventDataEntryComponent),
 );

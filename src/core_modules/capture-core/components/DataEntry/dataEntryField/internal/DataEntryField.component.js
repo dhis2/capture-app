@@ -156,5 +156,5 @@ export const DataEntryField = connect(
     mapStateToProps,
     mapDispatchToProps,
     null,
-    { forwardRef: true }
+    { forwardRef: true },
 )(DataEntryFieldPlain);

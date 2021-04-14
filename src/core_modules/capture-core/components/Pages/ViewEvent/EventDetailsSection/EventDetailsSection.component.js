@@ -6,7 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../Buttons/Button.component';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
-import { EditEventDataEntry} from './EditEventDataEntry/EditEventDataEntry.container';
+import { EditEventDataEntry } from './EditEventDataEntry/EditEventDataEntry.container';
 import { ViewEventDataEntry } from './ViewEventDataEntry/ViewEventDataEntry.container';
 import type { ProgramStage } from '../../../../metaData';
 

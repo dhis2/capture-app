@@ -15,4 +15,4 @@ export async function getProgramIconAsync(name: ?string) {
     }
 
     return icon;
-};
+}

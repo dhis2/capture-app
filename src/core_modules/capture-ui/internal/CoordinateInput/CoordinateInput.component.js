@@ -38,5 +38,5 @@ class CoordinateInputPlain extends Component<Props> {
     }
 }
 
-export const CoordinateInput = 
+export const CoordinateInput =
     withFocusSaver()(withShrinkLabel()(withTextFieldFocusHandler()(CoordinateInputPlain)));
