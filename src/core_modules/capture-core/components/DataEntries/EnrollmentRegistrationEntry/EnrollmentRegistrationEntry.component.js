@@ -113,6 +113,6 @@ export const EnrollmentRegistrationEntryComponent: ComponentType<$Diff<Props, HO
   compose(
       withErrorMessagePostProcessor(),
       withLoadingIndicator(() => ({ height: '350px' })),
-      withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm }),
+      withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm, onIsCompleting: () => true}),
       withStyles(styles),
   )(EnrollmentRegistrationEntryPlain);
