@@ -7,6 +7,8 @@ import {
     startSavingNewTrackedEntityInstance,
     startSavingNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
+import { cleanUpDataEntry } from '../NewPage.actions';
+import { NEW_TEI_DATA_ENTRY_ID } from '../NewPage.component';
 
 export const RegistrationDataEntry: ComponentType<OwnProps>
   = ({ selectedScopeId, dataEntryId, setScopeId }) => {
