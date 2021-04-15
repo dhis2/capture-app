@@ -14,8 +14,6 @@ import {
     dataEntriesRelationshipsDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
-    dataEntriesSearchGroupsResultsDesc,
-    dataEntriesSearchGroupsPreviousValuesDesc,
     dataEntriesInProgressListDesc,
 } from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
 import {
@@ -68,6 +66,8 @@ import {
     generatedUniqueValuesCacheDesc,
 } from 'capture-core/reducers/descriptions/generatedUniqueValuesCache.reducerDescription';
 
+import { dataEntriesSearchGroupResultsReducerDesc } from 'capture-core/components/DataEntryUtils';
+
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
 import { feedbackDesc } from './feedback.reducerDescription';
@@ -92,8 +92,7 @@ export default [
     dataEntriesRelationshipsDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
-    dataEntriesSearchGroupsResultsDesc,
-    dataEntriesSearchGroupsPreviousValuesDesc,
+    dataEntriesSearchGroupResultsReducerDesc,
     dataEntriesInProgressListDesc,
     feedbackDesc,
     formsValuesDesc,
