@@ -24,7 +24,8 @@ const removeFormData = (state, { payload: { formId } }) => {
 // cleans up data entries that _start with_ dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {
     const newState = Object.keys(state).reduce((acc, curr) =>
-        (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc }), {});
+        (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc, [curr]: state[curr] }),
+    {});
 
     return newState;
 };
