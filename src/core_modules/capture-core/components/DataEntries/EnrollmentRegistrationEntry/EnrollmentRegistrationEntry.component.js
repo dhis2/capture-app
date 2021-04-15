@@ -10,12 +10,13 @@ import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
-import type { HOCProps, Props } from './EnrollmentRegistrationEntry.types';
+import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import { urlArguments } from '../../../utils/url';
+import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 
 const styles = ({ typography }) => ({
     marginTop: {
@@ -43,7 +44,7 @@ const EnrollmentRegistrationEntryPlain =
       onSave,
       onPostProcessErrorMessage,
       ...rest
-  }: Props) => {
+  }: PlainProps) => {
       const { push } = useHistory();
 
       const { scopeType, trackedEntityName, programName } = useScopeInfo(selectedScopeId);
@@ -109,10 +110,11 @@ const EnrollmentRegistrationEntryPlain =
       );
   };
 
-export const EnrollmentRegistrationEntryComponent: ComponentType<$Diff<Props, HOCProps>> =
+export const EnrollmentRegistrationEntryComponent: ComponentType<Props> =
   compose(
       withErrorMessagePostProcessor(),
       withLoadingIndicator(() => ({ height: '350px' })),
+      withDuplicateCheckOnSave(),
       withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm }),
       withStyles(styles),
   )(EnrollmentRegistrationEntryPlain);

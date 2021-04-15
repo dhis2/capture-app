@@ -226,7 +226,7 @@ When('you remove the Child Programme selection', () => {
 
 Then('there should be visible a title with Malaria case diagnosis', () => {
     cy.get('[data-test="search-page-content"]')
-        .contains('Find malaria entity in program: Malaria case diagnosis, treatment and investigation')
+        .contains('Search for malaria entity in program: Malaria case diagnosis, treatment and investigation')
         .should('exist');
 });
 
@@ -344,4 +344,18 @@ When('and you can see the unique identifier input', () => {
     cy.get('[data-test="form-unique"]')
         .find('[data-test="capture-ui-input"]')
         .should('exist');
+});
+
+Given('you are in the search page with the Child Programme and org unit being preselected from the url', () => {
+    cy.visit('/#/search?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
+When('you click the back button', () => {
+    cy.get('[data-test="back-button"]')
+        .click();
+});
+
+Then('you should be taken to the main page with org unit preselected', () => {
+    cy.url()
+        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8`);
 });

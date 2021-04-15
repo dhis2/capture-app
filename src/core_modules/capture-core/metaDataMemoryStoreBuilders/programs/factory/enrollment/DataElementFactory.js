@@ -27,6 +27,7 @@ export class DataElementFactory {
         NAME: 'NAME',
         DESCRIPTION: 'DESCRIPTION',
         SHORT_NAME: 'SHORT_NAME',
+        FORM_NAME: 'FORM_NAME',
     };
 
     static errorMessages = {
@@ -165,7 +166,11 @@ export class DataElementFactory {
                 cachedTrackedEntityAttribute.translations,
                 DataElementFactory.translationPropertyNames.SHORT_NAME) ||
                 cachedTrackedEntityAttribute.displayShortName;
-        dataElement.formName = dataElement.name;
+        dataElement.formName =
+            this._getAttributeTranslation(
+                cachedTrackedEntityAttribute.translations,
+                DataElementFactory.translationPropertyNames.FORM_NAME) ||
+                cachedTrackedEntityAttribute.displayFormName;
         dataElement.description =
             this._getAttributeTranslation(
                 cachedTrackedEntityAttribute.translations,

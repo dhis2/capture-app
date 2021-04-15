@@ -11,8 +11,8 @@ type OwnProps = {|
     selectedScopeId: string,
 |}
 const mapStateToProps = (state: ReduxState, { dataEntryId }) => {
-    const registerTeiContainer = state.newRelationshipRegisterTei;
-    const ready = !registerTeiContainer.loading;
+    const { dataEntries } = state;
+    const ready = !!dataEntries[dataEntryId];
 
     const dataEntryKey = ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;
     return {

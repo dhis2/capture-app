@@ -5,16 +5,9 @@ import i18n from '@dhis2/d2-i18n';
 import {
     DataEntry,
     withBrowserBackWarning,
-    withSearchGroups,
     inMemoryFileStore,
 } from '../../DataEntry';
 import type { TeiRegistration } from '../../../metaData';
-
-const getSearchGroups = (props: Object) => props.teiRegistrationMetadata.inputSearchGroups;
-const getSearchContext = (props: Object) => ({
-    ...props.onGetValidationContext(),
-    trackedEntityType: props.teiRegistrationMetadata.form.id,
-});
 
 type FinalTeiDataEntryProps = {
     teiRegistrationMetadata: TeiRegistration,
@@ -36,8 +29,7 @@ class FinalTeiDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-const SearchGroupsHOC = withSearchGroups(getSearchGroups, getSearchContext)(FinalTeiDataEntry);
-const BrowserBackWarningHOC = withBrowserBackWarning()(SearchGroupsHOC);
+const BrowserBackWarningHOC = withBrowserBackWarning()(FinalTeiDataEntry);
 
 class PreTeiDataEntryPure extends React.PureComponent<Object> {
     render() {

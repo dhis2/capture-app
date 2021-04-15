@@ -24,6 +24,7 @@ export class DataElementFactory {
         NAME: 'NAME',
         DESCRIPTION: 'DESCRIPTION',
         SHORT_NAME: 'SHORT_NAME',
+        FORM_NAME: 'FORM_NAME',
     };
 
     static errorMessages = {
@@ -99,8 +100,8 @@ export class DataElementFactory {
                     cachedAttribute.displayShortName;
             o.formName =
                 this._getAttributeTranslation(
-                    cachedAttribute.translations, DataElementFactory.translationPropertyNames.NAME) ||
-                    cachedAttribute.displayName;
+                    cachedAttribute.translations, DataElementFactory.translationPropertyNames.FORM_NAME) ||
+                    cachedAttribute.displayFormName;
             o.description =
                 this._getAttributeTranslation(
                     cachedAttribute.translations, DataElementFactory.translationPropertyNames.DESCRIPTION) ||

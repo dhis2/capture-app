@@ -208,6 +208,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [searchPageActionTypes.FALLBACK_SEARCH_COMPLETED]:
       (state, { payload: { trackedEntityTypeId } }) => ({
           ...state,
+          complete: false,
           programId: undefined,
           categories: undefined,
           categoriesMeta: undefined,
@@ -219,6 +220,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         programId: undefined,
         categories: undefined,
         categoriesMeta: undefined,
+        complete: false,
         trackedEntityTypeId,
     }),
 }, 'currentSelections', {

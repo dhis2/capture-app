@@ -13,7 +13,6 @@ export { withFeedbackOutput } from './dataEntryOutput/withFeedbackOutput';
 export { withWarningOutput } from './dataEntryOutput/withWarningOutput';
 export { withErrorOutput } from './dataEntryOutput/withErrorOutput';
 export { withIndicatorOutput } from './dataEntryOutput/withIndicatorOutput';
-export { withSearchGroups } from './withSearchGroups';
 export { withCleanUpHOC } from './withCleanUp';
 
 // misc
@@ -23,7 +22,6 @@ export { inMemoryFileStore } from './file/inMemoryFileStore';
 export { placements } from './constants/placements.const';
 
 // actions
-export { actionTypes as searchGroupActionTypes } from './actions/searchGroup.actions';
 export {
     actionTypes as mainActionTypes,
     startRunRulesPostUpdateField,
@@ -31,9 +29,3 @@ export {
 } from './actions/dataEntry.actions';
 export { actionTypes as loadNewActionTypes } from './actions/dataEntryLoadNew.actions';
 export { actionTypes as loadEditActionTypes } from './actions/dataEntry.actions';
-
-// epics
-export {
-    getFilterSearchGroupForSearchEpic,
-    getExecuteSearchForSearchGroupEpic,
-} from './epics/searchGroups.epics';

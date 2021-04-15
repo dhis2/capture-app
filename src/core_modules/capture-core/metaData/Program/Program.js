@@ -30,6 +30,7 @@ export class Program {
         this.programRuleVariables = [];
         this.organisationUnits = {};
         this._stages = new Map();
+        this._organisationUnits = {};
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -69,8 +70,8 @@ export class Program {
         return this._shortName;
     }
 
-    set organisationUnits(organisationUnits: Object) {
-        this._organisationUnits = organisationUnits;
+    set organisationUnits(organisationUnits: ?Object) {
+        this._organisationUnits = organisationUnits || {};
     }
     get organisationUnits(): Object {
         return this._organisationUnits;

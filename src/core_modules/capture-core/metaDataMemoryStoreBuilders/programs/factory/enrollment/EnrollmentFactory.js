@@ -222,13 +222,13 @@ export class EnrollmentFactory {
                 o.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
                 o.searchFoundation = this._buildInputSearchGroupFoundation(cachedProgram, searchGroup);
                 o.onSearch = (values: Object = {}, contextProps: Object = {}) => {
-                    const { orgUnitId, program } = contextProps;
+                    const { orgUnitId, programId } = contextProps;
                     return getApi()
                         .get(
                             'trackedEntityInstances/count.json',
                             {
                                 ou: orgUnitId,
-                                program,
+                                program: programId,
                                 ouMode: 'ACCESSIBLE',
                                 filter: Object
                                     .keys(values)
