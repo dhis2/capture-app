@@ -12,7 +12,8 @@ import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 // cleans up data entries that start with dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {
     const newState = Object.keys(state).reduce((acc, curr) =>
-        (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc }), {});
+        (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc, [curr]: state[curr] })
+    , {});
 
     return newState;
 };
