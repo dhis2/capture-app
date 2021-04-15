@@ -10,6 +10,7 @@ import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/f
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { actionTypes as rulesEffectsActionTypes } from '../../rules/actionsCreator';
 import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
+import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import getOrgUnitRootsKey from '../../components/D2Form/field/Components/OrgUnitField/getOrgUnitRootsKey';
 import {
     set as setStoreRoots,
@@ -92,6 +93,7 @@ export const formsValuesDesc = createReducerDescription({
     },
     [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [newRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: cleanUp,
 }, 'formsValues');
 
 export const formsSectionsFieldsUIDesc = createReducerDescription({

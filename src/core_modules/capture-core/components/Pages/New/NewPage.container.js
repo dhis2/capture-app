@@ -83,7 +83,13 @@ export const NewPage: ComponentType<{||}> = () => {
     const writeAccess = useUserWriteAccess(currentScopeId);
 
     const isUserInteractionInProgress: boolean = useSelector(
-        state => dataEntryHasChanges(state, 'singleEvent-newEvent') || dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment'));
+        state =>
+            dataEntryHasChanges(state, 'singleEvent-newEvent')
+          || dataEntryHasChanges(state, 'relationship-newTei')
+          || dataEntryHasChanges(state, 'relationship-newEvent')
+          || dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
+          || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
+    );
 
     return (
         <NewPageComponent

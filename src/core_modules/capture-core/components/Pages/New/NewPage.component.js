@@ -22,6 +22,8 @@ const getStyles = () => ({
 });
 
 export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
+export const NEW_SINGLE_EVENT_DATA_ENTRY_ID = 'singleEvent';
+export const NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID = 'relationship';
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
@@ -65,8 +67,16 @@ const NewPagePlain = ({
         <LockedSelector
             pageToPush="new"
             isUserInteractionInProgress={isUserInteractionInProgress}
-            customActionsOnProgramIdReset={[cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID)]}
-            customActionsOnOrgUnitIdReset={[cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID)]}
+            customActionsOnProgramIdReset={[
+                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
+                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
+                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
+            ]}
+            customActionsOnOrgUnitIdReset={[
+                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
+                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
+                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
+            ]}
         />
         <div data-test="registration-page-content" className={classes.container} >
             {

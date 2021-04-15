@@ -8,12 +8,13 @@ import {
 } from '../../components/DataEntry';
 import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
+import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 
 // cleans up data entries that start with dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {
     const newState = Object.keys(state).reduce((acc, curr) =>
-        (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc, [curr]: state[curr] })
-    , {});
+        (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc, [curr]: state[curr] }),
+    {});
 
     return newState;
 };
@@ -127,6 +128,7 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         return newState;
     },
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [newRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: cleanUp,
 }, 'dataEntriesFieldsValue');
 
 export const dataEntriesNotesDesc = createReducerDescription({
@@ -220,6 +222,7 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         return newState;
     },
     [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [newRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: cleanUp,
 }, 'dataEntriesFieldsUI');
 
 export const dataEntriesRelationshipsDesc = createReducerDescription({
