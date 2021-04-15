@@ -39,11 +39,11 @@ const mainConfig: Array<MainColumnConfig> = [{
 
 const getMetaDataConfig = (attributes: Array<DataElement>): Array<MetadataColumnConfig> =>
     attributes
-        .map(({ id, displayInReports, type, formName, optionSet }) => ({
+        .map(({ id, displayInReports, type, name, optionSet }) => ({
             id,
             visible: displayInReports,
             type,
-            header: formName,
+            header: name,
             options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
             multiValueFilter: !!optionSet,
         }));

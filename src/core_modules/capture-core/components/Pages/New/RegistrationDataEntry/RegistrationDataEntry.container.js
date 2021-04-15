@@ -7,9 +7,6 @@ import {
     startSavingNewTrackedEntityInstance,
     startSavingNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
-import { useDuplicates } from '../../../PossibleDuplicatesDialog/useDuplicates';
-import { cleanUpDataEntry } from '../NewPage.actions';
-import { NEW_TEI_DATA_ENTRY_ID } from '../NewPage.component';
 
 export const RegistrationDataEntry: ComponentType<OwnProps>
   = ({ selectedScopeId, dataEntryId, setScopeId }) => {
@@ -23,8 +20,6 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
           () => { dispatch(startSavingNewTrackedEntityInstanceWithEnrollment()); },
           [dispatch]);
 
-      const { onReviewDuplicates } = useDuplicates(dataEntryId, selectedScopeId);
-
       const dataEntryIsReady = useSelector(({ dataEntries }) => (!!dataEntries[dataEntryId]));
 
       useEffect(() => () => dispatch(cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID)), [dispatch]);
@@ -35,7 +30,6 @@ export const RegistrationDataEntry: ComponentType<OwnProps>
               selectedScopeId={selectedScopeId}
               setScopeId={setScopeId}
               dataEntryIsReady={dataEntryIsReady}
-              onReviewDuplicates={onReviewDuplicates}
               onSaveWithoutEnrollment={dispatchOnSaveWithoutEnrollment}
               onSaveWithEnrollment={dispatchOnSaveWithEnrollment}
           />);
