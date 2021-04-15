@@ -13,7 +13,7 @@ import {
 import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as setCurrentSelectionsActionTypes,
-} from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
+} from '../../components/LockedSelector/QuickSelector/QuickSelector.actions';
 import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';

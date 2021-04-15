@@ -1,6 +1,5 @@
 // epics
-export { searchRegisteringUnitListEpic, showRegisteringUnitListIndicatorEpic } from './epics/orgUnitList.epics';
-
+export { searchRegisteringUnitListEpic, showRegisteringUnitListIndicatorEpic } from './OrgUnitSelector/orgUnitList.epics';
 
 // actions
-export { actionTypes as orgUnitListActionTypes } from './actions/orgUnitList.actions';
+export { orgUnitListActionTypes } from './OrgUnitSelector/orgUnitList.actions';

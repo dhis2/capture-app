@@ -16,7 +16,7 @@ import ProgramList from './ProgramList';
 import CategorySelector from './CategorySelector.component';
 
 import type { Program } from '../../../../metaData';
-import { resetProgramIdBase } from '../actions/QuickSelector.actions';
+import { resetProgramIdBase } from '../QuickSelector.actions';
 import './programSelector.css';
 import LinkButton from '../../../Buttons/LinkButton.component';
 import { urlArguments } from '../../../../utils/url';

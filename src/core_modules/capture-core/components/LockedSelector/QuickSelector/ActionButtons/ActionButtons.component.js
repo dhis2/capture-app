@@ -3,8 +3,8 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Button, colors, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
-import { scopeTypes } from '../../../metaData';
-import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { scopeTypes } from '../../../../metaData';
+import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 
 
 const styles = ({ typography }) => ({

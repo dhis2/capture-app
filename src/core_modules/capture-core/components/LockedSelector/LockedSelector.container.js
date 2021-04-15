@@ -16,7 +16,7 @@ import {
     startAgainBatchAction,
     resetOrgUnitIdBatchAction,
 } from './LockedSelector.actions';
-import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
+import { resetProgramIdBase } from './QuickSelector/QuickSelector.actions';
 import type { OwnProps } from './LockedSelector.types';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
