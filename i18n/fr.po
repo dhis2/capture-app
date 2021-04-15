@@ -262,6 +262,7 @@ msgstr "Nouvel événement"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
+"Vous n'avez pas accès pour créer un événement dans les sélections actuelles"
 
 msgid "Save"
 msgstr "Enregistrer"
@@ -272,7 +273,7 @@ msgstr ""
 "supprimées."
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr ""
+msgstr "Enrégistrer un {{trackedEntityName}}"
 
 msgid "without"
 msgstr ""
