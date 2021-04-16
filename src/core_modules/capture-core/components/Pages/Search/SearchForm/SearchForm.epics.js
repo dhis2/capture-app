@@ -47,7 +47,7 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam, curren
         catchError(() => of(showErrorViewOnSearchPage())),
     );
 
-export const deriveFilterKeyword = (fieldId, attributes: Array<DataElement>): ("eq" | "like") => {
+export const deriveFilterKeyword = (fieldId: string, attributes: Array<DataElement>): ("eq" | "like") => {
     const hasOptionSet = Boolean(attributes.find(({ id, optionSet }) => (id === fieldId) && (optionSet)));
     return hasOptionSet ? 'eq' : 'like';
 };
