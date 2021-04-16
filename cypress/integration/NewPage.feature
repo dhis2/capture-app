@@ -36,6 +36,12 @@ Feature: User creates a new entries from the registration page
     And you select the Malaria case registration program
     Then you see the registration form for the Malaria case registration
 
+  Scenario: Viewing section descriptions with organisation unit and event program Inpatient morbidity and mortality selected
+    Given you are on the default registration page
+    And you select org unit
+    And you select the Inpatient morbidity and mortality program
+    Then see the description text for each section
+
   Scenario: Navigating to registration page without program selected
     Given you are in the main page with no selections made
     And you select org unit
