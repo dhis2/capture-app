@@ -276,13 +276,15 @@ msgid "Saving a {{trackedEntityName}}"
 msgstr "Enrégistrer un {{trackedEntityName}}"
 
 msgid "without"
-msgstr ""
+msgstr "Sans"
 
 msgid "enrollment"
-msgstr ""
+msgstr "Enrôlement"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
+"Inscrivez-vous dans un programme en sélectionnant un programme dans la barre"
+" supérieure."
 
 msgid "An error has occurred. See log for details"
 msgstr "Une erreur s'est produite. Voir le journal pour plus de détails"
@@ -606,49 +608,61 @@ msgid "Organisation unit could not be loaded"
 msgstr "L'unité d'organisation n'a pas pu être chargée"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
-msgstr ""
+msgstr "L'entité suivie avec id \"{{teiId}}\" n'existe pas"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
+"Une erreur s'est produite lors de l'ouverture de cette inscription. Veuillez"
+" saisir une URL valide."
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
+msgstr "L'inscription avec id \"{{enrollmentId}}\" n'existe pas"
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
+"{{teiDisplayName}} est inscrit dans plusieurs programmes. Choisir un "
+"programme"
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
+"{{programName}} a des catégories. Choisir toutes les catégories pour "
+"afficher le tableau de bord."
 
 msgid ""
 "There are multiple enrollments for this program. Choose an enrollment to "
 "view the dashboard."
 msgstr ""
+"Il y a plusieurs inscriptions à ce programme. Choisir une inscription pour "
+"afficher le tableau de bord."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "{{teiDisplayName}} n'est pas inscrit à ce programme"
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "Inscrire {{teiDisplayName}} à ce programme"
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
+"{{teiDisplayName}} est un {{tetName}} et ne peut pas être inscrit dans le "
+"{{programName}}. Choisir un autre programme qui autorise l'inscription de "
+"{{tetName}}."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr ""
+msgstr "Inscrire un nouveau {{selectedTetName}} à ce progr"
 
 msgid "{{programName}} is an event program and does not have enrollments."
 msgstr ""
+"{{programName}} est un programme d'événement et n'a pas d'inscription."
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "Créez un nouvel événement dans ce programme."
 
 msgid "View working list in this program."
-msgstr ""
+msgstr "Afficher la liste de travail dans ce programme."
 
 msgid "Delete event"
 msgstr "Effacer l´événement"
@@ -696,7 +710,7 @@ msgid "Inactive"
 msgstr "Inactif"
 
 msgid "Working list could not be updated"
-msgstr ""
+msgstr "La liste de travail n'a pas pu être mise à jour"
 
 msgid "Update view"
 msgstr "Mettre à jour la vue"
@@ -735,26 +749,28 @@ msgid "Choose a registering unit to start reporting"
 msgstr "Sélectionnez une unité d'enregistrement pour commencer un rapport"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
+msgstr "Choisir le {{missingCategories}} pour commencer à rapporter"
 
 msgid "Save as new"
-msgstr ""
+msgstr "Enregistrer comme nouveau"
 
 msgid "View dashboard"
 msgstr "Voir le tableau de bord"
 
 msgid "Create for"
-msgstr ""
+msgstr "Créer pour"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
+"Vous pouvez également choisir un programme dans la barre supérieure et créer"
+" dans ce programme"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "Enregistrer le nouveau {{trackedEntityTypeName}} et le lien"
 
 msgid "Save as new {{trackedEntityName}}"
-msgstr ""
+msgstr "Enregistrer comme un nouveau {{trackedEntityName}}"
 
 msgid "Organisation Unit"
 msgstr "Unité d'organisation"
@@ -793,7 +809,7 @@ msgid "Search {{name}}"
 msgstr "Rechercher {{nom}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "Rechercher par {{name}}"
 
 msgid "Search by attributes"
 msgstr "Chercher par attributs"
@@ -889,7 +905,7 @@ msgid "Possible duplicates found"
 msgstr "Doublons éventuellement détectés"
 
 msgid "An error occurred loading possible duplicates"
-msgstr ""
+msgstr "Une erreur s'est produite lors du chargement des doublons possibles"
 
 msgid "You dont have access to delete this relationship"
 msgstr "Vous n'êtes pas autorisé à supprimer cette relation"
@@ -933,7 +949,7 @@ msgid "Error saving event"
 msgstr "Erreur lors de la sauvegarde de l'événement"
 
 msgid "Could not save event"
-msgstr ""
+msgstr "Impossible d'enregistrer l'événement"
 
 msgid "Could not delete event"
 msgstr "Impossible de supprimer l'événement"
@@ -948,13 +964,13 @@ msgid "Could not delete working list"
 msgstr "Impossible de supprimer la liste des tâches"
 
 msgid "Organisation unit search failed."
-msgstr ""
+msgstr "Recherche de l'unité d'organisation échouée"
 
 msgid "Error saving tracked entity instance"
-msgstr ""
+msgstr "Erreur lors de l'enregistrement de l'entité suivie"
 
 msgid "Error saving enrollment"
-msgstr ""
+msgstr "Erreur lors de l'enregistrement de l'inscription"
 
 msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
