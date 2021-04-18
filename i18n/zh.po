@@ -888,7 +888,7 @@ msgid "Error saving event"
 msgstr "保存时间错误"
 
 msgid "Could not save event"
-msgstr ""
+msgstr "无法保存事件"
 
 msgid "Could not delete event"
 msgstr "不能删除事件"
@@ -903,13 +903,13 @@ msgid "Could not delete working list"
 msgstr "不能删除工作列表"
 
 msgid "Organisation unit search failed."
-msgstr ""
+msgstr "组织机构搜索失败。"
 
 msgid "Error saving tracked entity instance"
-msgstr ""
+msgstr "保存跟踪的实体实例时出错"
 
 msgid "Error saving enrollment"
-msgstr ""
+msgstr "保存注册时出错"
 
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
