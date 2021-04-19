@@ -8,13 +8,13 @@ const styles = {
         display: 'flex',
         marginBottom: 8,
         marginRight: 15,
+        color: '#4A5768',
     },
     icon: {
         minWidth: 16,
         marginLeft: 10,
         marginRight: 5,
         marginTop: 1,
-        color: '#4A5768'
     },
     description: {
         fontSize: 13,
