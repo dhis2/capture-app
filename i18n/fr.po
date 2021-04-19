@@ -1,17 +1,18 @@
 # 
 # Translators:
-# Karoline Tufte Lien <karoline@dhis2.org>, 2020
-# Bram Piot <bram.piot@gmail.com>, 2020
-# phil_dhis2, 2020
-# Yao Selom SAKA <saka.yao@yahoo.fr>, 2020
+# phil_dhis2, 2021
+# Edem Kossi <ekossi@hispwca.org>, 2021
+# Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# Bram Piot <bram.piot@gmail.com>, 2021
+# Yao Selom SAKA <saka.yao@yahoo.fr>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -148,6 +149,9 @@ msgstr ""
 msgid "in"
 msgstr "dans"
 
+msgid "Cancel"
+msgstr "Annuler"
+
 msgid "Metadata error. see log for details"
 msgstr "Erreur de métadonnées. Voir le journal pour plus de détails"
 
@@ -255,20 +259,16 @@ msgstr "Non, continuer ici"
 msgid "New event"
 msgstr "Nouvel événement"
 
-msgid "You dont have access to create an event in the current selections"
+msgid "You don't have access to create an event in the current selections"
 msgstr ""
-"Vous n'êtes pas autorisé à créer un événement dans les sélections actuelles"
 
 msgid "Save"
 msgstr "Enregistrer"
 
-msgid "Cancel"
-msgstr "Annuler"
-
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "En quittant cette page, les modifications apportées à cet événement seront "
-"annulées."
+"supprimées."
 
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
@@ -284,6 +284,37 @@ msgstr ""
 
 msgid "An error has occurred. See log for details"
 msgstr "Une erreur s'est produite. Voir le journal pour plus de détails"
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+"Un doublon existe (mais des erreurs ont été commises. Voir le journal pour "
+"plus de détails"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+"Un élément est déjà enregistré avec ce {{nom d'attribut}}, mais vous n'y "
+"avez pas accès"
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "Vous avez déjà enregistré ce {{nom d'attribut}}"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+"Un {{Nom de type d'entité suivie}} ayant ce {{Nom d'attribut}} est déjà "
+"enregistré"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "Afficher le {{Nom de type d'entité suivie}} enregistré"
+
+msgid "Registered person"
+msgstr "Personne inscrite"
+
+msgid "Link"
+msgstr "Lien"
 
 msgid "validation failed"
 msgstr "validation échouée"
@@ -332,6 +363,12 @@ msgstr "Certaines opérations sont encore en cours. Veuillez patienter..."
 
 msgid "Operations running"
 msgstr "Opérations en cours"
+
+msgid "Hide"
+msgstr "Masquer"
+
+msgid "Possible duplicates found"
+msgstr "Doublons éventuellement détectés"
 
 msgid "Sort"
 msgstr "Trier"
@@ -500,9 +537,6 @@ msgstr ""
 msgid "New"
 msgstr "Nouveau"
 
-msgid "Find"
-msgstr "Trouver"
-
 msgid "Clear selections"
 msgstr "Effacer les sélections"
 
@@ -524,23 +558,26 @@ msgstr "Unité d'organisation d'enregistrement"
 msgid "Select"
 msgstr "Sélectionner"
 
-msgid "Selected Program"
+msgid "Program"
+msgstr "Programme"
+
+msgid "No programs available."
+msgstr "Aucun programme disponible"
+
+msgid "Show all"
+msgstr "Tout afficher"
+
+msgid "Selected program"
 msgstr "Programme choisi"
 
 msgid "Some programs are being filtered."
 msgstr "Certains programmes sont en cours de filtrage."
 
-msgid "Show all"
-msgstr "Tout afficher"
-
-msgid "Program"
-msgstr "Programme"
-
 msgid "Select program"
 msgstr "Sélectionner le programme"
 
-msgid "No programs available."
-msgstr "Aucun programme disponible"
+msgid "Selected"
+msgstr "Sélectionné"
 
 msgid "Online"
 msgstr "En ligne"
@@ -564,7 +601,7 @@ msgid "Show all events"
 msgstr "Afficher tous les événements"
 
 msgid "Edit event"
-msgstr "Modifier un événement"
+msgstr "Modifier l'événement"
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "L'événement n'a pas pu être chargé. Etes-vous sûr qu'il existe ?"
@@ -575,6 +612,51 @@ msgstr "L'événement n'a pas pu être chargé"
 msgid "Organisation unit could not be loaded"
 msgstr "L'unité d'organisation n'a pas pu être chargée"
 
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr ""
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr ""
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr ""
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr ""
+
+msgid "View working list in this program."
+msgstr ""
+
 msgid "Delete event"
 msgstr "Effacer l´événement"
 
@@ -582,7 +664,7 @@ msgid "Download as JSON"
 msgstr "Télécharger en JSON"
 
 msgid "Download as XML"
-msgstr "Download as XML"
+msgstr "Télécharger en XML"
 
 msgid "Download as CSV"
 msgstr "Télécharger en CSV"
@@ -633,13 +715,13 @@ msgid "Save current view as..."
 msgstr "Enregistrer la vue actuelle sous..."
 
 msgid "Delete view"
-msgstr "Supprimer une vue"
+msgstr "Supprimer la vue"
 
 msgid "Share view..."
-msgstr "Partager une vue..."
+msgstr "Partager la vue..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Souhaitez-vous vraiment supprimer la vue '{{nom du modèle}' ?"
+msgstr "Souhaitez-vous vraiment supprimer la vue '{{nom du modèle}}' ?"
 
 msgid "Confirm"
 msgstr "Confirmer"
@@ -662,36 +744,18 @@ msgstr "Sélectionnez une unité d'enregistrement pour commencer un rapport"
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "A duplicate exists (but there were some errors, see log for details"
+msgid "Save as new"
 msgstr ""
-"Un doublon existe (mais des erreurs ont été commises. Voir le journal pour "
-"plus de détails"
+
+msgid "View dashboard"
+msgstr "Voir le tableau de bord"
+
+msgid "Create for"
+msgstr ""
 
 msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
+"You can also choose a program from the top bar and create in that program"
 msgstr ""
-"Un élément est déjà enregistré avec ce {{nom d'attribut}}, mais vous n'y "
-"avez pas accès"
-
-msgid "You have already registered this {{attributeName}}"
-msgstr "Vous avez déjà enregistré ce {{nom d'attribut}}"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr ""
-"Un {{Nom de type d'entité suivie}} ayant ce {{Nom d'attribut}} est déjà "
-"enregistré"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Afficher le {{Nom de type d'entité suivie}} enregistré"
-
-msgid "Registered person"
-msgstr "Personne inscrite"
-
-msgid "Link"
-msgstr "Lien"
 
 msgid "Review Duplicates"
 msgstr "Vérifier les doublons"
@@ -699,20 +763,8 @@ msgstr "Vérifier les doublons"
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr "Doublons éventuellement détectés"
-
-msgid "No results found"
-msgstr "Aucun résultat trouvé"
-
-msgid "An error occured loading possible duplicates"
-msgstr "Une erreur est survenue lors du chargement d'éventuels doublons"
-
-msgid "Hide"
-msgstr "Masquer"
-
-msgid "Save as new {{tetName}}"
-msgstr "Enregister sous {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr ""
 
 msgid "Organisation Unit"
 msgstr "Unité d'organisation"
@@ -750,14 +802,26 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr "Rechercher {{nom}}"
 
-msgid "Find by {{name}}"
-msgstr "Chercher par {{nom}}"
+msgid "Search by {{name}}"
+msgstr ""
 
 msgid "Search by attributes"
 msgstr "Chercher par attributs"
 
 msgid "Back"
 msgstr "Précédent"
+
+msgid "Search for"
+msgstr "Rechercher"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+"Vous pouvez également choisir un programme dans la barre supérieure et y "
+"effectuer une recherche"
+
+msgid "No results found"
+msgstr "Aucun résultat trouvé"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -793,9 +857,6 @@ msgstr ""
 
 msgid "Choose a type to start searching"
 msgstr "Choisir un type pour commencer la recherche"
-
-msgid "View dashboard"
-msgstr "Voir le tableau de bord"
 
 msgid "View active enrollment"
 msgstr "Voir les inscriptions actives"
@@ -834,6 +895,9 @@ msgstr "Événement attribué à {{nom}}"
 msgid "Feedbacks"
 msgstr "Feedbacks"
 
+msgid "An error occurred loading possible duplicates"
+msgstr ""
+
 msgid "You dont have access to delete this relationship"
 msgstr "Vous n'êtes pas autorisé à supprimer cette relation"
 
@@ -846,9 +910,6 @@ msgstr "Ajouetr relation"
 msgid "Results found"
 msgstr "Résultats trouvés"
 
-msgid "Selected program"
-msgstr "Programme choisi"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "Chercher {{uniqueAttrName}}"
 
@@ -857,15 +918,6 @@ msgstr ""
 "Renseigner au moins les attributs {{Nombre minimal d'attributs requis}} pour"
 " la recherche"
 
-msgid "Search for"
-msgstr "Rechercher"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Vous pouvez également choisir un programme dans la barre supérieure et y "
-"effectuer une recherche"
-
 msgid "To work with the selected program,"
 msgstr "Pour utiliser le programme sélectionné,"
 
@@ -873,7 +925,7 @@ msgid "open the Tracker Capture app"
 msgstr "ouvrez l'application Saisie Tracker"
 
 msgid "An error has occured. See log for details"
-msgstr "Une erreur s'est produite. Voir le journal pour plus de détails"
+msgstr "Une erreur s'est produite. Voir le log pour plus de détails"
 
 msgid "Program not found"
 msgstr "Programme introuvable"

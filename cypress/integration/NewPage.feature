@@ -95,10 +95,6 @@ Feature: User creates a new entries from the registration page
 
 
 ### New Person
-   Scenario: New person > Filling the form shows possible duplicates indicator
-      Given you are in the Person registration page
-      When you fill in the first name with value that has duplicates
-      Then you see the possible duplicates button
 
   Scenario: New person > Submitting the form with unique name navigates you to the user dashboard
       Given you are in the Person registration page
@@ -124,22 +120,7 @@ Feature: User creates a new entries from the registration page
     When you click the previous page button
     Then you can see the first page of the results
 
-  Scenario: New person > Clicking on the warning indicator for possible duplicates shows a list with duplicates
-    Given you are in the Person registration page
-    When you fill in the first name with value that has duplicates
-    And you click the possible duplicates button
-    Then you see the possible duplicates modal
-    When you click the next page button
-    Then you can see the second page of the results
-    When you click the previous page button
-    Then you can see the first page of the results
-    When you click hide the modal is not visible
-
 ### New person in Tracker Program
-  Scenario: New person in Tracker Program > Filling the form shows possible duplicates indicator
-    Given you are in Child programme registration page
-    When you fill in child programme first name with value that has duplicates
-    Then you see the possible duplicates button
 
   Scenario: New person in Tracker Program > Submitting the form with empty visit date throws validation error
     Given you are in the WHO RMNCH program registration page
@@ -174,17 +155,6 @@ Feature: User creates a new entries from the registration page
     Then you can see the second page of the results
     When you click the previous page button
     Then you can see the first page of the results
-
-  Scenario: New person in Tracker Program > Clicking on the warning indicator for possible duplicates shows a list with duplicates
-    Given you are in Child programme registration page
-    When you fill the Child programme registration form with a first name with value that has duplicates
-    And you click the possible duplicates button
-    Then you see the possible duplicates modal
-    When you click the next page button
-    Then you can see the second page of the results
-    When you click the previous page button
-    Then you can see the first page of the results
-    When you click hide the modal is not visible
 
   Scenario: New person in Tracker Program > Submitting without filling the form shows errors underneath the fields
     Given you are in the WNCH / PNC program registration page

@@ -18,7 +18,7 @@ export default class ProgramStage {
     _openAfterEnrollment: boolean;
     _generatedByEnrollmentDate: boolean;
     _reportDateToUse: string;
-    _standardInterval: number;
+    _minDaysFromStart: number;
 
     constructor(initFn: ?(_this: ProgramStage) => void) {
         initFn && isFunction(initFn) && initFn(this);
@@ -104,11 +104,11 @@ export default class ProgramStage {
         }
     }
 
-    get standardInterval(): number {
-        return this._standardInterval;
+    get minDaysFromStart(): number {
+        return this._minDaysFromStart;
     }
 
-    set standardInterval(interval: number = 0) {
-        this._standardInterval = interval;
+    set minDaysFromStart(minDays: number = 0) {
+        this._minDaysFromStart = minDays;
     }
 }

@@ -32,22 +32,17 @@ export const newRelationshipDesc = createReducerDescription({
 }, 'newRelationship', {});
 
 export const newRelationshipRegisterTeiDesc = createReducerDescription({
-    [newRelationshipActionTypes.SELECT_FIND_MODE]: () => ({
-        loading: true,
-    }),
     [registerTeiActionTypes.REGISTER_TEI_INITIALIZE]: (state, action) => {
         const { programId, orgUnit } = action.payload;
         return {
             ...state,
             programId,
             orgUnit,
-            loading: false,
         };
     },
     [registerTeiActionTypes.REGISTER_TEI_INITIALIZE_FAILED]: (state, action) => ({
         ...state,
         error: action.payload.errorMessage,
-        loading: false,
     }),
     [registrationSectionActionTypes.PROGRAM_CHANGE]: (state, action) => {
         const { programId } = action.payload;

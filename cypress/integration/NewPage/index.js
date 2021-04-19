@@ -332,14 +332,6 @@ And('you fill in the first name with value that has duplicates', () => {
         .blur();
 });
 
-
-And('you see the possible duplicates button', () => {
-    cy.get('[data-test="possible-duplicates-found-button"]')
-        .contains('Possible duplicates found')
-        .should('exist');
-});
-
-
 And('you fill in a unique first name', () => {
     cy.get('[data-test="capture-ui-input"]')
         .eq(1)
@@ -367,20 +359,6 @@ Then('you submit the form again from the duplicates modal', () => {
     cy.get('[data-test="create-as-new-person"]')
         .contains('Save as new')
         .click();
-});
-
-And('you click the possible duplicates button', () => {
-    cy.get('[data-test="possible-duplicates-found-button"]')
-        .contains('Possible duplicates found')
-        .click();
-});
-
-And('you click hide the modal is not visible', () => {
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('Hide')
-        .click();
-    cy.get('[data-test="search-results-list"]')
-        .should('not.exist');
 });
 
 // New person in WHO RMNCH Tracker

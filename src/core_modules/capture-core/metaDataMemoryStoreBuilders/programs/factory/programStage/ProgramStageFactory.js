@@ -133,7 +133,7 @@ class ProgramStageFactory {
             _stage.openAfterEnrollment = !!cachedProgramStage.openAfterEnrollment;
             _stage.generatedByEnrollmentDate = !!cachedProgramStage.generatedByEnrollmentDate;
             _stage.reportDateToUse = cachedProgramStage.reportDateToUse;
-            _stage.standardInterval = cachedProgramStage.standardInterval;
+            _stage.minDaysFromStart = cachedProgramStage.minDaysFromStart;
             _stage.stageForm = new RenderFoundation((_form) => {
                 _form.id = cachedProgramStage.id;
                 _form.name = cachedProgramStage.displayName;

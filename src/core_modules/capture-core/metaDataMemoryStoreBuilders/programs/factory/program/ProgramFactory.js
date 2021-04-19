@@ -9,6 +9,8 @@ import {
     type TrackedEntityType,
     type Category,
 } from '../../../../metaData';
+import { getUserStorageController } from '../../../../storageControllers';
+import { userStores } from '../../../../storageControllers/stores';
 
 import getProgramIconAsync from './getProgramIcon';
 import { SearchGroupFactory } from '../../../common/factory';
@@ -137,7 +139,6 @@ class ProgramFactory {
                 o.access = cachedProgram.access;
                 o.name = cachedProgram.displayName;
                 o.shortName = cachedProgram.displayShortName;
-                o.organisationUnits = cachedProgram.organisationUnits;
                 o.categoryCombination = this._buildCategoryCombination(cachedProgram.categoryCombo);
             });
             const d2Stage = cachedProgram.programStages && cachedProgram.programStages[0];
@@ -152,7 +153,6 @@ class ProgramFactory {
                 o.access = cachedProgram.access;
                 o.name = cachedProgram.displayName;
                 o.shortName = cachedProgram.displayShortName;
-                o.organisationUnits = cachedProgram.organisationUnits;
                 // $FlowFixMe
                 o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId);
             });
@@ -181,6 +181,7 @@ class ProgramFactory {
         }
         // $FlowFixMe
         program.icon = await ProgramFactory._buildProgramIcon(cachedProgram.style);
+        program.organisationUnits = (await getUserStorageController().get(userStores.ORGANISATION_UNITS_BY_PROGRAM, program.id))?.organisationUnits;
 
         return program;
     }
