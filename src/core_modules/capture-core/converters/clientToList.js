@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { moment } from 'capture-core-utils/moment';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import DataElement from '../metaData/DataElement/DataElement';
@@ -61,8 +62,8 @@ const valueConvertersForType = {
     [elementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
     [elementTypes.DATETIME]: convertDateTimeForListDisplay,
     [elementTypes.TIME]: convertTimeForListDisplay,
-    [elementTypes.TRUE_ONLY]: () => 'Yes',
-    [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
+    [elementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
+    [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [elementTypes.COORDINATE]: MinimalCoordinates,
     [elementTypes.AGE]: convertDateForListDisplay,
     [elementTypes.FILE_RESOURCE]: convertResourceForDisplay,
