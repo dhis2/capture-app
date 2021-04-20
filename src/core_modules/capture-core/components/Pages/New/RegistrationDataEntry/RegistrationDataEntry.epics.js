@@ -21,10 +21,13 @@ const deriveAttributesFromFormValues = (formValues = {}) =>
         .filter(key => !geometryType(key))
         .map(key => ({ attribute: key, value: formValues[key] }));
 
-const deriveGeometryFromFormValues = (formValues = {}) =>
-    Object.keys(formValues)
+const deriveGeometryFromFormValues = (formValues = {}) => {
+    const geoJSON = Object.keys(formValues)
         .filter(key => geometryType(key))
         .reduce((acc, currentKey) => ({ type: geometryType(currentKey), coordinates: formValues[currentKey] }), {});
+
+    return geoJSON.type ? geoJSON : undefined;
+};
 
 const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnitId }) => {
     // in case we have a program that does not have an incident date, such as Malaria case diagnosis,
