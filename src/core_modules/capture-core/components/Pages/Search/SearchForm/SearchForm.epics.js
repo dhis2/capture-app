@@ -20,6 +20,7 @@ import {
     scopeTypes,
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
+    type DataElement,
 } from '../../../../metaData';
 import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
 import { PAGINATION } from '../SearchPage.constants';
@@ -46,11 +47,16 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam, curren
         catchError(() => of(showErrorViewOnSearchPage())),
     );
 
-const getFiltersForAttributesSearchQuery = (formValues) => {
+export const deriveFilterKeyword = (fieldId: string, attributes: Array<DataElement>): ("eq" | "like") => {
+    const hasOptionSet = Boolean(attributes.find(({ id, optionSet }) => (id === fieldId) && (optionSet)));
+    return hasOptionSet ? 'eq' : 'like';
+};
+
+const getFiltersForAttributesSearchQuery = (formValues, attributes) => {
     const stringFilters = Object.keys(formValues)
         .filter(fieldId => isString(formValues[fieldId]))
         .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
-        .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
+        .map(fieldId => `${fieldId}:${deriveFilterKeyword(fieldId, attributes)}:${formValues[fieldId]}`);
 
     const rangeFilers = Object.keys(formValues)
         .filter(fieldId => isObject(formValues[fieldId]))
@@ -148,16 +154,16 @@ export const searchViaAttributesOnScopeProgramEpic: Epic = (action$, store) =>
         ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId, page, triggeredFrom } }) => {
             const { formsValues } = store.value;
+            const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
 
             const queryArgs = {
-                filter: getFiltersForAttributesSearchQuery(formsValues[formId]),
+                filter: getFiltersForAttributesSearchQuery(formsValues[formId], attributes),
                 program: programId,
                 page,
                 pageSize: 5,
                 ouMode: 'ACCESSIBLE',
                 fields: '*',
             };
-            const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
 
             return searchViaAttributesStream(queryArgs, attributes, triggeredFrom);
         }),
@@ -168,16 +174,15 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic: Epic = (action$, s
         ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId, page, triggeredFrom } }) => {
             const { formsValues } = store.value;
+            const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
 
             const queryArgs = {
-                filter: getFiltersForAttributesSearchQuery(formsValues[formId]),
+                filter: getFiltersForAttributesSearchQuery(formsValues[formId], attributes),
                 trackedEntityType: trackedEntityTypeId,
                 page,
                 pageSize: 5,
                 ouMode: 'ACCESSIBLE',
             };
-
-            const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
 
             return searchViaAttributesStream(queryArgs, attributes, triggeredFrom);
         }),
@@ -242,7 +247,9 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH),
         flatMap(({ payload: { fallbackFormValues, trackedEntityTypeId, pageSize, page } }) => {
-            const filter = getFiltersForAttributesSearchQuery(fallbackFormValues);
+            const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
+
+            const filter = getFiltersForAttributesSearchQuery(fallbackFormValues, attributes);
             const queryArgs = {
                 filter,
                 trackedEntityType: trackedEntityTypeId,
@@ -251,7 +258,6 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
                 ouMode: 'ACCESSIBLE',
             };
 
-            const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
 
             return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
                 map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
