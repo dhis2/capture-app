@@ -13,6 +13,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { RegistrationDataEntry } from './RegistrationDataEntry';
 import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import { cleanUpDataEntry } from './NewPage.actions';
 
 const getStyles = () => ({
     container: {
@@ -21,6 +22,8 @@ const getStyles = () => ({
 });
 
 export const NEW_TEI_DATA_ENTRY_ID = 'newPageDataEntryId';
+export const NEW_SINGLE_EVENT_DATA_ENTRY_ID = 'singleEvent';
+export const NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID = 'relationship';
 
 const NewPagePlain = ({
     showMessageToSelectOrgUnitOnNewPage,
@@ -34,6 +37,7 @@ const NewPagePlain = ({
     programCategorySelectionIncomplete,
     missingCategoriesInProgramSelection,
     orgUnitSelectionIncomplete,
+    isUserInteractionInProgress,
 }: Props) => {
     const { scopeType } = useScopeInfo(currentScopeId);
     const [selectedScopeId, setScopeId] = useState(currentScopeId);
@@ -60,7 +64,20 @@ const NewPagePlain = ({
     ]);
 
     return (<>
-        <LockedSelector pageToPush="new" />
+        <LockedSelector
+            pageToPush="new"
+            isUserInteractionInProgress={isUserInteractionInProgress}
+            customActionsOnProgramIdReset={[
+                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
+                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
+                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
+            ]}
+            customActionsOnOrgUnitIdReset={[
+                cleanUpDataEntry(NEW_TEI_DATA_ENTRY_ID),
+                cleanUpDataEntry(NEW_SINGLE_EVENT_DATA_ENTRY_ID),
+                cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
+            ]}
+        />
         <div data-test="dhis2-capture-registration-page-content" className={classes.container} >
             {
                 !writeAccess ?
