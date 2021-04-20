@@ -5,7 +5,7 @@ import Section from '../Section/Section.component';
 import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 import D2SectionFields from './D2SectionFields.container';
 import { Section as MetaDataSection } from '../../metaData';
-import { SectionDescriptionBox } from  './SectionDescriptionBox.component';
+import { SectionDescriptionBox } from './SectionDescriptionBox.component';
 
 const getStyles = theme => ({
     section: {
@@ -51,8 +51,8 @@ class D2Section extends React.PureComponent<Props> {
         }
 
         return (
-            <SectionDescriptionBox description={description}/>
-        )
+            <SectionDescriptionBox description={description} />
+        );
     }
 
     render() {

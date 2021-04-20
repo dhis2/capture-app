@@ -1,6 +1,7 @@
+// @flow
 import * as React from 'react';
 
-import { IconInfo16 } from '@dhis2/ui'
+import { IconInfo16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
@@ -24,7 +25,8 @@ const styles = {
 
 type Props = {
     classes: {
-        // icon: String,
+        descriptionBox: String,
+        icon: String,
         description: String,
     },
     description: String,
@@ -36,7 +38,7 @@ const SectionDescriptionBoxPlain = (props: Props) => {
     return (
         <div className={classes.descriptionBox}>
             <div className={classes.icon}>
-                <IconInfo16/>
+                <IconInfo16 />
             </div>
             <div className={classes.description}>
                 {description}
