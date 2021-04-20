@@ -68,7 +68,7 @@ const valueConvertersForType = {
     [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
     [dataElementTypes.DATETIME]: convertDateTimeForListDisplay,
     [dataElementTypes.TIME]: convertTimeForListDisplay,
-    [dataElementTypes.TRUE_ONLY]: () => 'Yes',
+    [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.AGE]: convertDateForListDisplay,
