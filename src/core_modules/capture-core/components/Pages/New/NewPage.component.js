@@ -78,7 +78,6 @@ const NewPagePlain = ({
                 cleanUpDataEntry(NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID),
             ]}
         />
-        <div data-test="dhis2-capture-registration-page-content" className={classes.container} >
         <div data-test="registration-page-content" className={classes.container} >
             {
                 !writeAccess ?
