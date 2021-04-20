@@ -42,7 +42,8 @@ const getStyles = theme => ({
 });
 
 type Props = {
-    onCancel: () => void,
+    onCancel: (dataEntryid: string) => void,
+    dataEntryKey: string,
     classes: {
         headerContainer: string,
         header: string,
@@ -122,7 +123,7 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
                     text={i18n.t('Leaving this page will discard the selections you made for a new relationship')}
                     confirmText={i18n.t('Yes, discard')}
                     cancelText={i18n.t('No, stay here')}
-                    onConfirm={this.props.onCancel}
+                    onConfirm={() => this.props.onCancel('relationship')}
                     open={!!this.state.discardDialogOpen}
                     onCancel={this.handleCancelDiscard}
                 />

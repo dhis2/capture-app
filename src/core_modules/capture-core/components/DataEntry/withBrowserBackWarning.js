@@ -6,7 +6,7 @@ import { withRouter } from 'react-router';
 
 import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
 import getDataEntryKey from './common/getDataEntryKey';
-import getDataEntryHasChanges from './common/dataEntryHasChanges';
+import { dataEntryHasChanges as getDataEntryHasChanges } from './common/dataEntryHasChanges';
 
 type Props = {
     dataEntryHasChanges: boolean,
