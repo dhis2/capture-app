@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-04-16T14:03:15.339Z\n"
-"PO-Revision-Date: 2021-04-16T14:03:15.339Z\n"
+"POT-Creation-Date: 2021-04-20T11:24:37.353Z\n"
+"PO-Revision-Date: 2021-04-20T11:24:37.353Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -140,6 +140,9 @@ msgstr ""
 msgid "Search for user"
 msgstr ""
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr ""
 
@@ -175,6 +178,9 @@ msgid "Active"
 msgstr ""
 
 msgid "Completed"
+msgstr ""
+
+msgid "Assigned to"
 msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
@@ -640,9 +646,6 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
-msgid "Assigned to"
-msgstr ""
-
 msgid "Registering unit"
 msgstr ""
 
@@ -807,6 +810,12 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -840,6 +849,15 @@ msgid "Add relationship"
 msgstr ""
 
 msgid "Results found"
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
@@ -897,6 +915,12 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "tracked entity instance"
+msgstr ""
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
 msgstr ""
 
 msgid "Set coordinate"
