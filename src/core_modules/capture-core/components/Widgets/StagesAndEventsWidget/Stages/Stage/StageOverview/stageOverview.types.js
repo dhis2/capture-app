@@ -1,5 +1,5 @@
 // @flow
-import { Icon } from '../../../../../../metaData';
+import type { Icon } from '../../../../../../metaData';
 
 export type Props = {|
     title: string,
