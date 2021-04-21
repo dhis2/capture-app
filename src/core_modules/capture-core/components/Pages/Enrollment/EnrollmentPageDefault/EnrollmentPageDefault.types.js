@@ -1,6 +1,5 @@
 // @flow
-
-import { Program } from '../../../../metaData';
+import type { Program } from '../../../../metaData';
 
 export type Props = {|
     program: Program,
