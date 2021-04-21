@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useContext, useState } from 'react';
+import React, { type ComponentType, useContext, useCallback } from 'react';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -7,10 +7,9 @@ import { Button } from '../../../Buttons';
 import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
-import { PossibleDuplicatesDialog } from '../../../PossibleDuplicatesDialog';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import type { Props } from './RegisterTei.types';
-import { withErrorMessageHandler, withLoadingIndicator } from '../../../../HOC';
+import { withErrorMessageHandler } from '../../../../HOC';
 
 const getStyles = () => ({
     container: {
@@ -24,7 +23,6 @@ const getStyles = () => ({
     },
 });
 
-
 const CardListButton = (({ teiId, values, handleOnClick }) => (
     <Button
         small
@@ -35,59 +33,57 @@ const CardListButton = (({ teiId, values, handleOnClick }) => (
     </Button>
 ));
 
+const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
+    <>
+        <Button
+            onClick={onCancel}
+            secondary
+        >
+            {i18n.t('Cancel')}
+        </Button>
+        <div style={{ marginLeft: 16 }}>
+            <Button
+                dataTest="create-as-new-person"
+                onClick={onSave}
+                primary
+            >
+                {i18n.t('Save as new {{trackedEntityName}}', { trackedEntityName })}
+            </Button>
+        </div>
+    </>
+);
+
 const RegisterTeiPlain = ({
+    dataEntryId,
+    itemId,
     onLink,
     onSave,
-    onReviewDuplicates,
     onGetUnsavedAttributeValues,
-    dataEntryId,
-    possibleDuplicatesExist,
     trackedEntityName,
     newRelationshipProgramId,
     classes,
 }: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
 
-    const [duplicatesOpen, toggleDuplicatesModal] = useState(false);
-    const [savedArguments, setArguments] = useState([]);
+    const renderDuplicatesCardActions = useCallback(({ item }) => (
+        <CardListButton
+            teiId={item.id}
+            values={item.values}
+            handleOnClick={onLink}
+        />
+    ), [onLink]);
 
-    function handleSaveAttempt(...args) {
-        if (possibleDuplicatesExist) {
-            setArguments(args);
-            onReviewDuplicates(resultsPageSize);
-            toggleDuplicatesModal(true);
-        } else {
-            onSave(...args);
-        }
-    }
+    const renderDuplicatesDialogActions = useCallback((onCancel, onSaveArgument) => (
+        <DialogButtons
+            onCancel={onCancel}
+            onSave={onSaveArgument}
+            trackedEntityName={trackedEntityName}
+        />
+    ), [trackedEntityName]);
 
-    const getActions = () => (
-        <React.Fragment>
-            <Button
-                onClick={handleDialogCancel}
-                secondary
-            >
-                {i18n.t('Cancel')}
-            </Button>
-            <div style={{ marginLeft: 16 }}>
-                <Button
-                    dataTest="create-as-new-person"
-                    onClick={handleSaveFromDialog}
-                    primary
-                >
-                    {i18n.t('Save as new {{trackedEntityName}}', { trackedEntityName })}
-                </Button>
-            </div>
-        </React.Fragment>
-    );
-
-    const handleSaveFromDialog = () => {
-        onSave(...savedArguments);
-    };
-
-    const handleDialogCancel = () => {
-        toggleDuplicatesModal(false);
-    };
+    const handleSave = useCallback(() => {
+        onSave(itemId, dataEntryId);
+    }, [onSave, itemId, dataEntryId]);
 
     return (
         <div className={classes.container}>
@@ -95,23 +91,16 @@ const RegisterTeiPlain = ({
                 <RegistrationSection />
                 <RegisterTeiDataEntry
                     onLink={onLink}
-                    onSave={handleSaveAttempt}
+                    onSave={handleSave}
                     onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
+                    duplicatesReviewPageSize={resultsPageSize}
+                    renderDuplicatesDialogActions={renderDuplicatesDialogActions}
+                    renderDuplicatesCardActions={renderDuplicatesCardActions}
                 />
             </div>
             <DataEntryWidgetOutput
                 dataEntryId={dataEntryId}
                 selectedScopeId={newRelationshipProgramId}
-                renderCardActions={({ item }) =>
-                    <CardListButton teiId={item.id} values={item.values} handleOnClick={onLink} />
-                }
-            />
-            <PossibleDuplicatesDialog
-                dataEntryId={dataEntryId}
-                selectedScopeId={newRelationshipProgramId}
-                open={duplicatesOpen}
-                onCancel={handleDialogCancel}
-                extraActions={getActions()}
                 renderCardActions={({ item }) =>
                     <CardListButton teiId={item.id} values={item.values} handleOnClick={onLink} />
                 }
@@ -122,7 +111,6 @@ const RegisterTeiPlain = ({
 
 export const RegisterTeiComponent: ComponentType<$Diff<Props, CssClasses>> =
   compose(
-      withLoadingIndicator(),
       withErrorMessageHandler(),
       withStyles(getStyles),
   )(RegisterTeiPlain);

@@ -1,12 +1,9 @@
 // @flow
 import { connect } from 'react-redux';
 import WarningsSection from '../../Pages/ViewEvent/RightColumn/WarningsSection/WarningsSection.component';
-import { makeGetSearchGroupWarning, makeGetWarningMessages } from './warningsSection.selectors';
 import { makeGetVisibleMessages } from '../../Pages/ViewEvent/RightColumn/ErrorsSection/messageSection.selectors';
 
 const makeStateToProps = () => {
-    const getSearchGroupWarning = makeGetSearchGroupWarning();
-    const getWarningMessages = makeGetWarningMessages();
     const getVisibleMessages = makeGetVisibleMessages();
 
     const mapStateToProps = (state: ReduxState, props: Object) => {
@@ -22,9 +19,9 @@ const makeStateToProps = () => {
             containerPropNameOnComplete: 'warningOnComplete',
             showOnComplete,
         });
-        const searchGroupWarning = getSearchGroupWarning(state, props);
+
         return {
-            warnings: getWarningMessages(searchGroupWarning, rulesWarnings),
+            warnings: rulesWarnings,
         };
     };
     // $FlowFixMe[not-an-object] automated comment

@@ -1,20 +1,16 @@
 // @flow
 type PropsFromRedux = {|
     dataEntryId: string,
+    itemId: string,
     trackedEntityName: ?string,
     newRelationshipProgramId: string,
-    ready: boolean,
     error: string,
-    possibleDuplicatesExist: ?boolean,
-|};
-type DispatchersFromRedux = {|
-    onReviewDuplicates: (pageSize: number) => void,
 |};
 
 export type OwnProps = {|
     onLink: (teiId: string, values: Object) => void,
     onGetUnsavedAttributeValues?: ?Function,
-    onSave: Function,
+    onSave: (itemId: string, dataEntryId: string) => void,
 |};
 
-export type Props = {|...PropsFromRedux, ...OwnProps, ...DispatchersFromRedux, ...CssClasses |}
+export type Props = {|...PropsFromRedux, ...OwnProps, ...CssClasses |}

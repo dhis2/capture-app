@@ -230,7 +230,7 @@ const SearchFormIndex = ({
                                                 formId,
                                             )}
                                         >
-                                            {i18n.t('Find by {{name}}', { name })}
+                                            {i18n.t('Search by {{name}}', { name })}
                                         </Button>
                                     </div>
                                 </Section>
