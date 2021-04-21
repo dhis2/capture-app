@@ -8,6 +8,7 @@ import type {
     CachedProgram,
     CachedProgramTrackedEntityAttribute,
     CachedOptionSet,
+    CachedProgramSection,
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
 } from '../../../../storageControllers/cache.types';
@@ -132,6 +133,8 @@ class EnrollmentFactory {
 
     async _buildEnrollmentForm(
         cachedProgram: CachedProgram,
+        cachedProgramSections: ?Array<CachedProgramSection>,
+        cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
     ) {
         const enrollmentForm = new RenderFoundation((o) => {
             o.featureType = EnrollmentFactory._getFeatureType(cachedProgram.featureType);
@@ -139,18 +142,19 @@ class EnrollmentFactory {
         });
 
         let section;
-        if (cachedProgram.programSections && cachedProgram.programSections.length > 0) {
-            for (const ps of cachedProgram.programSections) {
+        if (cachedProgramSections && cachedProgramSections.length > 0) {
+            // $FlowFixMe
+            cachedProgramSections.asyncForEach(async (ps) => {
                 let arr;
-                if (cachedProgram.programTrackedEntityAttributes &&
-                    cachedProgram.programTrackedEntityAttributes.length > 0) {
-                    arr = cachedProgram.programTrackedEntityAttributes
+                if (cachedProgramTrackedEntityAttributes &&
+                    cachedProgramTrackedEntityAttributes.length > 0) {
+                    arr = cachedProgramTrackedEntityAttributes
                         .filter(e => ps.trackedEntityAttributes
                             .includes(e.trackedEntityAttributeId));
                 }
                 section = await this._buildSection(arr, cachedProgram.trackedEntityTypeId, ps.displayFormName, ps.id);
                 section && await enrollmentForm.addSection(section);
-            }
+            });
         } else {
             section = await
             this._buildSection(cachedProgram.programTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
@@ -287,7 +291,7 @@ class EnrollmentFactory {
             o.inputSearchGroups = this._buildInputSearchGroups(cachedProgram, programSearchGroups);
         });
 
-        enrollment.enrollmentForm = await this._buildEnrollmentForm(cachedProgram);
+        enrollment.enrollmentForm = await this._buildEnrollmentForm(cachedProgram, cachedProgram.programSections, cachedProgram.programTrackedEntityAttributes);
         return enrollment;
     }
 }
