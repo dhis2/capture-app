@@ -4,7 +4,7 @@
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import type{ CategoryCombination } from '../CategoryCombinations';
-import { Icon } from '../Icon';
+import type { Icon } from '../Icon';
 import type { Access } from '../Access';
 import type ProgramStage from './ProgramStage';
 
