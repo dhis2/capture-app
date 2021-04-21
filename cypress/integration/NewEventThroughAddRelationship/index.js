@@ -50,7 +50,9 @@ When('you fill in the registration details', () => {
         .type('Gonz');
     cy.get('[data-test="form-field-cejWyOfXge6"]')
         .find('input')
-        .type('Female{enter}', { force: true });
+        .type('Female', { force: true })
+        .wait(300)
+        .type('{enter}', { force: true });
     cy.get('[data-test="dataentry-field-incidentDate"]')
         .find('input')
         .type('2020-01-01')
