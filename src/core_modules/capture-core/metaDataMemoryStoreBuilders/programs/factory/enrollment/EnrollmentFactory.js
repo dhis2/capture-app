@@ -140,7 +140,7 @@ class EnrollmentFactory {
 
         let section;
         if (cachedProgram.programSections && cachedProgram.programSections.length > 0) {
-            cachedProgram.programSections.map(async (ps) => {
+            for (const ps of cachedProgram.programSections) {
                 let arr;
                 if (cachedProgram.programTrackedEntityAttributes &&
                     cachedProgram.programTrackedEntityAttributes.length > 0) {
@@ -150,7 +150,7 @@ class EnrollmentFactory {
                 }
                 section = await this._buildSection(arr, cachedProgram.trackedEntityTypeId, ps.displayFormName, ps.id);
                 section && await enrollmentForm.addSection(section);
-            });
+            }
         } else {
             section = await
             this._buildSection(cachedProgram.programTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);

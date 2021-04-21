@@ -61,6 +61,7 @@ type apiTranslation = {
 
 type apiProgramSections = {
     id: string,
+    sortOrder: number,
     displayFormName: string,
     trackedEntityAttributes: Array<{ id: string }>
 }
