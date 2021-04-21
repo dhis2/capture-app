@@ -2,8 +2,8 @@ beforeEach(() => {
     cy.loginThroughForm();
 });
 
-Given('you open the enrollment dummy page', () => {
-    cy.visit('#/enrollmentDummy');
+Given('you open the enrollment page', () => {
+    cy.visit('#/enrollment?enrollmentId=wBU0RAsYjKE');
 });
 
 Then('the program stages should be displayed', () => {
