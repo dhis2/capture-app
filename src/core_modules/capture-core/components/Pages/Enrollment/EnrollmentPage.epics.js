@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { push } from 'connected-react-router';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
-import { concat, empty, from, of } from 'rxjs';
+import { concat, from, of } from 'rxjs';
 import moment from 'moment';
 import {
     enrollmentPageActionTypes,
