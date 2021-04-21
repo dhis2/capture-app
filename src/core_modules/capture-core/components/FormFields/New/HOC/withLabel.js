@@ -3,6 +3,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { withLabel as UIWithLabel } from 'capture-ui';
+import { Tooltip } from '@dhis2/ui';
 
 const getStyles = (theme: Theme) => ({
     label: {
@@ -16,8 +17,12 @@ const getStyles = (theme: Theme) => ({
 
 const getStylesLabel = (theme: Theme) => ({
     container: {
-        display: 'flex',
-        alignItems: 'center',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+    },
+    truncateContainer: {
+        width: '-webkit-fill-available',
     },
     required: {
         color: theme.palette.required,
@@ -132,24 +137,33 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
         const { label, required, icon, classes } = props;
 
         return (
-            <div
-                className={classes.container}
+            <Tooltip
+                content={label}
             >
-                <CalculatedLabel
-                    label={label || ''}
-                    required={required}
-                    requiredClass={classes.required}
-                />
-                <div
-                    className={classes.iconContainer}
-                >
-                    <Icon
-                        icon={icon}
-                        label={label}
-                        iconClass={classes.icon}
-                    />
-                </div>
-            </div>
+                {({ ref, onMouseOver, onMouseOut }) => (
+                    <div
+                        ref={ref}
+                        onMouseOver={onMouseOver}
+                        onMouseOut={onMouseOut}
+                        className={classes.container}
+                    >
+                        <CalculatedLabel
+                            label={label || ''}
+                            required={required}
+                            requiredClass={classes.required}
+                        />
+                        <div
+                            className={classes.iconContainer}
+                        >
+                            <Icon
+                                icon={icon}
+                                label={label}
+                                iconClass={classes.icon}
+                            />
+                        </div>
+                    </div>
+                )}
+            </Tooltip>
         );
     };
     const LabelWithStyles = withStyles(getStylesLabel)(Label);
