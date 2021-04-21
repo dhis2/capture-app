@@ -236,8 +236,8 @@ const buildGeometrySettingsFn = () => ({
 
         return createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: 'Coordinate',
-            dialogLabel: 'Coordinate',
+            label: i18n.t('Coordinate'),
+            dialogLabel: i18n.t('Coordinate'),
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
@@ -275,7 +275,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: 'Complete event',
+            label: i18n.t('Complete event'),
             id: 'complete',
         }),
         getPropName: () => 'complete',

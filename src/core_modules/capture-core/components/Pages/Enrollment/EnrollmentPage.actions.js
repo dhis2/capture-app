@@ -42,8 +42,8 @@ export const successfulFetchingEnrollmentPageInformationFromUrl = ({ teiDisplayN
     actionCreator(enrollmentPageActionTypes.INFORMATION_SUCCESS_FETCH)(
         { teiDisplayName, tetId, enrollmentsSortedByDate });
 
-export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }: Object) =>
-    actionCreator(enrollmentPageActionTypes.PAGE_OPEN)({ programId, orgUnitId, teiId, enrollmentId });
+export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId, fetchResultAction }: Object) =>
+    actionCreator(enrollmentPageActionTypes.PAGE_OPEN)({ programId, orgUnitId, teiId, enrollmentId, fetchResultAction });
 
 export const cleanEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.PAGE_CLEAN)();
