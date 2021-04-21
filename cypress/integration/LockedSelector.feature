@@ -138,8 +138,8 @@ Feature: User uses the LockedSelector to navigate
   # Enrollment page
   Scenario Outline: Enrollment page > Landing on the page with url
     Given you land on the enrollment page by having typed the <url>
-    Then you can see on the locked selector the following <state>
-    And you see the following <message>
+    Then you see the following <message>
+    And you can see on the locked selector the following <state>
 
     Examples:
         | url | state | message |
