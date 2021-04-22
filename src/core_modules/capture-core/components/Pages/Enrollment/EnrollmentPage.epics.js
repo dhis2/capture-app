@@ -82,18 +82,13 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
 
             return from(querySingleResource({ resource: 'enrollments', id: enrollmentId }))
                 .pipe(
-                    flatMap(({ trackedEntityInstance, program, orgUnit }) =>
-                        fetchTeiStream(trackedEntityInstance, querySingleResource)
-                            .pipe(
-                                map(fetchResultAction => openEnrollmentPage({
-                                    programId: program,
-                                    orgUnitId: orgUnit,
-                                    teiId: trackedEntityInstance,
-                                    enrollmentId,
-                                    fetchResultAction,
-                                })),
-                            ),
-                    ),
+                    map(({ trackedEntityInstance, program, orgUnit }) =>
+                        openEnrollmentPage({
+                            programId: program,
+                            orgUnitId: orgUnit,
+                            teiId: trackedEntityInstance,
+                            enrollmentId,
+                        })),
                     catchError(() => {
                         const error = i18n.t('Enrollment with id "{{enrollmentId}}" does not exist', { enrollmentId });
                         return of(showErrorViewOnEnrollmentPage({ error }));
@@ -113,10 +108,10 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
         }),
     );
 
-export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxStore) =>
+export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PAGE_OPEN),
-        flatMap(({ payload: { enrollmentId, programId, orgUnitId, teiId, fetchResultAction } }) => {
+        flatMap(({ payload: { enrollmentId, programId, orgUnitId, teiId } }) => {
             const {
                 query: {
                     enrollmentId: queryEnrollment,
@@ -130,10 +125,10 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
             if (!urlCompleted) {
                 return concat(
                     of(push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`)),
-                    of(fetchResultAction),
+                    fetchTeiStream(teiId, querySingleResource),
                 );
             }
-            return of(fetchResultAction);
+            return fetchTeiStream(teiId, querySingleResource);
         },
         ),
     );
