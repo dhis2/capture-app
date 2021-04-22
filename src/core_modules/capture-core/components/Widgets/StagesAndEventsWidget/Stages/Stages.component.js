@@ -15,14 +15,11 @@ export const StagesPlain = ({ stages, classes }: Props) => (
         {
             [...stages.values()]
                 .map(stage => (
-                    <div
+                    <Stage
                         key={stage.id}
+                        stage={stage}
                         className={classes.stage}
-                    >
-                        <Stage
-                            stage={stage}
-                        />
-                    </div>
+                    />
                 ))
         }
     </>
