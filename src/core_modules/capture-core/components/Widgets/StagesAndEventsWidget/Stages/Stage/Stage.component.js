@@ -1,5 +1,6 @@
 // @flow
 import React, { type ComponentType } from 'react';
+import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
 import { spacersNum } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
@@ -13,8 +14,8 @@ const styles = {
 };
 
 
-export const StagePlain = ({ stage: { name }, classes }: Props) => (
-    <div className={classes.overview}>
+export const StagePlain = ({ stage: { name }, classes, className }: Props) => (
+    <div className={cx(classes.overview, className)}>
         <StageOverview
             title={name}
         />
