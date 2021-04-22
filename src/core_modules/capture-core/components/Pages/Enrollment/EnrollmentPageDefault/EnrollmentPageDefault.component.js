@@ -1,6 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { spacersNum } from '@dhis2/ui';
 import { StagesAndEventsWidget } from '../../../Widgets';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 
@@ -16,13 +17,13 @@ const getStyles = ({ typography }) => ({
     rightColumn: {
         flexGrow: 1,
         flexShrink: 1,
-        paddingLeft: 16,
+        paddingLeft: spacersNum.dp16,
         width: 360,
     },
     title: {
         ...typography.title,
-        paddingTop: 16,
-        paddingBottom: 16,
+        paddingTop: spacersNum.dp16,
+        paddingBottom: spacersNum.dp16,
     },
 });
 
