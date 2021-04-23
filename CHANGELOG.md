@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/dhis2/capture-app/compare/v1.16.0...v1.17.0) (2021-04-23)
+
+
+### Features
+
+* [DHIS2-10941] Enrollment widget ([67b34d0](https://github.com/dhis2/capture-app/commit/67b34d084133f4146c03df17e8b31cb5931abf60))
+
 # [1.16.0](https://github.com/dhis2/capture-app/compare/v1.15.1...v1.16.0) (2021-04-23)
 
 
