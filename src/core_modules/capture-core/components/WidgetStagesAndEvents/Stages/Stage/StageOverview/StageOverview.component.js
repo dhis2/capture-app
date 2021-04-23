@@ -2,7 +2,7 @@
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { colors, spacersNum } from '@dhis2/ui';
-import { NonBundledDhis2Icon } from '../../../../../NonBundledDhis2Icon';
+import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { Props } from './stageOverview.types';
 
 const styles = {

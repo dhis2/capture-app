@@ -2,7 +2,7 @@
 import React, { type ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum } from '@dhis2/ui';
-import { StagesAndEventsWidget } from '../../../Widgets';
+import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 
 const getStyles = ({ typography }) => ({
@@ -34,7 +34,7 @@ export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => 
         </div>
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
-                <StagesAndEventsWidget
+                <WidgetStagesAndEvents
                     stages={program.stages}
                 />
             </div>
