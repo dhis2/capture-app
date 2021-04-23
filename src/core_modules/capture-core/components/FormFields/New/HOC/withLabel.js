@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import { withLabel as UIWithLabel } from 'capture-ui';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
@@ -101,11 +102,12 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
         if (!icon) {
             return null;
         }
+
         return (
             <NonBundledDhis2Icon
                 name={icon.name}
                 color={icon.color}
-                alternativeText={`Icon for ${label || ''}`}
+                alternativeText={i18n.t('Icon for {{field}}', { field: label || '' })}
                 cornerRadius={2}
                 width={22}
                 height={22}
