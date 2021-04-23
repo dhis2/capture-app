@@ -444,6 +444,9 @@ msgstr ""
 msgid "No results"
 msgstr ""
 
+msgid "Icon for {{field}}"
+msgstr ""
+
 msgid "start typing to search"
 msgstr ""
 
@@ -882,6 +885,9 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Stages and Events"
 msgstr ""
 
 msgid "An error has occured. See log for details"

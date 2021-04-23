@@ -227,7 +227,7 @@ const selectedEventProgram = ['Selected program', 'Antenatal care visit'];
 const emptyProgramSelection = ['Program', 'Select program'];
 const selectedOrgUnit = ['Selected registering unit', 'Taninahun (Malen) CHP'];
 const emptyOrgUnitSelection = ['Registering Organisation Unit'];
-const selectedTei = ['Selected', 'Carlos Cruz'];
+const selectedTei = ['Selected person', 'Carlos Cruz'];
 const selectedEnrollment = ['Selected enrollment', '2018-08-07 15:47'];
 const emptyEnrollmentSelection = ['Enrollment', 'Select...'];
 

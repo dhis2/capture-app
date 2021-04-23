@@ -26,13 +26,13 @@ const flattenOptionSetForRadioButtons = (formOptionSet: OptionSet) => formOption
 
 const flattenOptionSetForSelect = (formOptionSet: OptionSet) => formOptionSet
     .options
-    .map(option => ({
-        id: option.id,
-        label: option.text,
-        value: option.value,
-        icon: option.icon ? {
-            data: option.icon.data,
-            color: option.icon.color,
+    .map(({ id, text, value, icon }) => ({
+        id,
+        label: text,
+        value,
+        icon: icon ? {
+            name: icon.name,
+            color: icon.color,
         } : null,
     }));
 

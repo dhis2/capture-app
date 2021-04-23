@@ -3,26 +3,26 @@
 import isFunction from 'd2-utilizr/lib/isFunction';
 
 export default class Icon {
-    _color: string;
-    _data: string;
+    _color: string | void;
+    _name: string | void;
 
     constructor(initFn: ?(_this: Icon) => void) {
         this.color = 'white';
         initFn && isFunction(initFn) && initFn(this);
     }
 
-    set color(color: string) {
+    set color(color?: string) {
         this._color = color;
     }
-    get color(): string {
+    get color(): string | void {
         return this._color;
     }
 
-    set data(data: string) {
-        this._data = data;
+    set name(name?: string) {
+        this._name = name;
     }
-    get data(): string {
-        return this._data;
+    get name(): string | void {
+        return this._name;
     }
 
     clone() {

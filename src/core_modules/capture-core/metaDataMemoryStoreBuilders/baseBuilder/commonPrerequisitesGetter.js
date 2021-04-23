@@ -1,5 +1,6 @@
 // @flow
 import { getUserStorageController } from '../../storageControllers';
+import { typeof userStores } from '../../storageControllers/stores';
 
 function arrayToMap(array: Array<Object>) {
     return array.reduce((accMap, item) => {
@@ -8,7 +9,7 @@ function arrayToMap(array: Array<Object>) {
     }, new Map());
 }
 
-export default function getCommonPreRequisitesAsync(...stores: Array<string>) {
+export default function getCommonPreRequisitesAsync(...stores: Array<$Values<userStores>>): { [$Values<userStores>]: Map<string, any> } {
     const storageController = getUserStorageController();
     const storePromises = stores
         .map(store => storageController.getAll(store));
