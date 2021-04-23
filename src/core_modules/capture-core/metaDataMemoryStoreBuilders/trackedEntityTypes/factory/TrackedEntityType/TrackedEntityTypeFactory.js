@@ -34,22 +34,21 @@ class TrackedEntityTypeFactory {
         locale: ?string,
     ) {
         this.locale = locale;
-        this.dataElementFactory = new DataElementFactory(
+        this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
-        this.searchGroupFactory = new SearchGroupFactory(
+        });
+        this.searchGroupFactory = new SearchGroupFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
-
-        this.teiRegistrationFactory = new TeiRegistrationFactory(
+        });
+        this.teiRegistrationFactory = new TeiRegistrationFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
+        });
     }
 
     _getTranslation(

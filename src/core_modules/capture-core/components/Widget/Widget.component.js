@@ -128,6 +128,7 @@ export const WidgetPlain = ({ header, open, onOpen, onClose, children, classes }
             {
                 childrenVisible ? (
                     <div
+                        data-test="widget-contents"
                         className={cx(classes.children, {
                             open: animationsReady && open,
                             close: animationsReady && !open })}

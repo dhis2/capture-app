@@ -1,4 +1,4 @@
-Feature: User interacts with Search page
+Feature: User interacts with Enrollment page
 
   Scenario: Navigating to the registration page for new event by clicking the link button
     Given you are on an enrollment page
