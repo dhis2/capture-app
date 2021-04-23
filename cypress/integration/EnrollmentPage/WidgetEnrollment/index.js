@@ -4,11 +4,10 @@ beforeEach(() => {
     cy.loginThroughForm();
 });
 
-Then('the program stages should be displayed', () => {
+Then('the enrollment details should be displayed', () => {
     cy.get('[data-test="enrollment-widget"]')
         .within(() => {
-            cy.contains('Birth').should('exist');
-            cy.contains('Baby Postnatal').should('exist');
+            cy.contains('placeholder content enrollment').should('exist');
         });
 });
 
@@ -26,6 +25,6 @@ Then('the enrollment widget should be closed', () => {
             cy.get('[data-test="widget-contents"]')
                 .children()
                 .should('not.exist');
-            cy.contains('Birth').should('not.exist');
+            cy.contains('placeholder content enrollment').should('not.exist');
         });
 });

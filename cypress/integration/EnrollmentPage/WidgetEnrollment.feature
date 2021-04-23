@@ -9,4 +9,4 @@ Scenario: User can close and reopen the Enrollment Widget
 Given you open the enrollment page
 When you click the enrollment widget toggle open close button
 And you click the enrollment widget toggle open close button
-Then the program stages should be displayed
+Then the enrollment details should be displayed
