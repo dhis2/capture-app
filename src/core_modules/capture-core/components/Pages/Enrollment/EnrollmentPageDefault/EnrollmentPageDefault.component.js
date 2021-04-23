@@ -4,6 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum } from '@dhis2/ui';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
+import { ProfileWidget} from '../../../Widgets';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -27,7 +28,7 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => (
+export const EnrollmentPageDefaultPlain = ({ program, attributes, classes }: PlainProps) => (
     <>
         <div className={classes.title}>
             Enrollment Dashboard
@@ -39,7 +40,7 @@ export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => 
                 />
             </div>
             <div className={classes.rightColumn}>
-                [placeholder]
+                <ProfileWidget attributes={attributes}/>
             </div>
         </div>
     </>
