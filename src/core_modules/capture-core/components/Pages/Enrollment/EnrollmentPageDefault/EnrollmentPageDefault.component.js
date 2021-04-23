@@ -3,6 +3,7 @@ import React, { type ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum } from '@dhis2/ui';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
+import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 
 const getStyles = ({ typography }) => ({
@@ -39,7 +40,8 @@ export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => 
                 />
             </div>
             <div className={classes.rightColumn}>
-                [placeholder]
+                [placeholder profile widget]
+                <WidgetEnrollment />
             </div>
         </div>
     </>
