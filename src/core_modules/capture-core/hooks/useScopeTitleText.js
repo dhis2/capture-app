@@ -1,4 +1,5 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import { scopeTypes } from '../metaData';
 import { useScopeInfo } from './useScopeInfo';
 
@@ -7,7 +8,8 @@ export const useScopeTitleText = (scopeId: ?string) => {
 
     const text = {
         [scopeTypes.EVENT_PROGRAM]: `${programName}`,
-        [scopeTypes.TRACKER_PROGRAM]: `${trackedEntityName} in program: ${programName}`,
+        [scopeTypes.TRACKER_PROGRAM]:
+            `${i18n.t('{{trackedEntityName}} in program', { trackedEntityName })}: ${programName}`,
         [scopeTypes.TRACKED_ENTITY_TYPE]: `${trackedEntityName}`,
     };
 

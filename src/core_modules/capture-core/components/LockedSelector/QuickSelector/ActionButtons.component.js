@@ -76,12 +76,12 @@ const ActionButtonsPlain = ({
                             >
                                 <MenuItem
                                     dataTest="new-menuitem-one"
-                                    label={`New ${trackedEntityName} in ${programName}`}
+                                    label={i18n.t('New {{trackedEntityName}} in {{programName}}', { trackedEntityName, programName })}
                                     onClick={onNewClick}
                                 />
                                 <MenuItem
                                     dataTest="new-menuitem-two"
-                                    label="New..."
+                                    label={`${i18n.t('New')}...`}
                                     onClick={onNewClickWithoutProgramId}
                                 />
                             </FlyoutMenu>
@@ -115,12 +115,12 @@ const ActionButtonsPlain = ({
                             >
                                 <MenuItem
                                     dataTest="find-menuitem-one"
-                                    label={`Search for a ${trackedEntityName} in ${programName}`}
+                                    label={i18n.t('Search for a {{trackedEntityName}} in {{programName}}', { trackedEntityName, programName })}
                                     onClick={onFindClick}
                                 />
                                 <MenuItem
                                     dataTest="find-menuitem-two"
-                                    label="Search..."
+                                    label={`${i18n.t('Search')}...`}
                                     onClick={onFindClickWithoutProgramId}
                                 />
                             </FlyoutMenu>
