@@ -1,6 +1,6 @@
 // @flow
 
 export type Props = {|
-    className?: string,
+    classes?: string,
     attributes: any[]
 |};

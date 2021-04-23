@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum } from '@dhis2/ui';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
-import { ProfileWidget} from '../../../Widgets';
+import { ProfileWidget } from '../../../Widgets';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -40,7 +40,7 @@ export const EnrollmentPageDefaultPlain = ({ program, attributes, classes }: Pla
                 />
             </div>
             <div className={classes.rightColumn}>
-                <ProfileWidget attributes={attributes}/>
+                <ProfileWidget attributes={attributes} />
             </div>
         </div>
     </>
