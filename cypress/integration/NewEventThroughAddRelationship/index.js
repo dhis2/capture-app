@@ -51,7 +51,7 @@ When('you fill in the registration details', () => {
     cy.get('[data-test="form-field-cejWyOfXge6"]')
         .find('input')
         .type('Female', { force: true })
-        .wait(300)
+        .wait(500)
         .type('{enter}', { force: true });
     cy.get('[data-test="dataentry-field-incidentDate"]')
         .find('input')
