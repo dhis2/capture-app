@@ -1,12 +1,12 @@
 // @flow
 import React, { type ComponentType, useState, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Widget } from '../../Widget';
-import type { Props } from './profileWidget.types';
 import { FlatList } from 'capture-ui';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
 import { colors } from '@dhis2/ui';
+import { Widget } from '../../Widget';
+import type { Props } from './profileWidget.types';
 
 const styles = {
     flatListWrapper: {

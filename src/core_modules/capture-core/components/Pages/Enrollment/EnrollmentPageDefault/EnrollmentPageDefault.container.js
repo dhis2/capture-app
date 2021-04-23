@@ -14,7 +14,7 @@ export const EnrollmentPageDefault = () => {
     }) => query.programId);
 
     const { program } = useProgramInfo(programId);
-    const attributes = useSelector(({ enrollmentPage }) => enrollmentPage?.profileInformation );
+    const attributes = useSelector(({ enrollmentPage }) => enrollmentPage?.profileInformation);
 
     return (
         <EnrollmentPageDefaultComponent
