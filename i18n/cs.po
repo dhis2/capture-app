@@ -779,7 +779,7 @@ msgid "Search {{name}}"
 msgstr "Hledat {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "Hledat podle {{name}}"
 
 msgid "Search by attributes"
 msgstr "Hledání podle atributů"
@@ -915,7 +915,7 @@ msgid "Error saving event"
 msgstr "Při ukládání události došlo k chybě"
 
 msgid "Could not save event"
-msgstr ""
+msgstr "Událost se nepodařilo uložit"
 
 msgid "Could not delete event"
 msgstr "Událost se nepodařilo smazat"
@@ -930,13 +930,13 @@ msgid "Could not delete working list"
 msgstr "Pracovní seznam se nepodařilo smazat"
 
 msgid "Organisation unit search failed."
-msgstr ""
+msgstr "Hledání organizační jednotky se nezdařilo."
 
 msgid "Error saving tracked entity instance"
-msgstr ""
+msgstr "Při ukládání instance trasované entity došlo k chybě"
 
 msgid "Error saving enrollment"
-msgstr ""
+msgstr "Při ukládání zápisu došlo k chybě"
 
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
