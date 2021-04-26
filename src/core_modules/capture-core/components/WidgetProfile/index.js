@@ -1,2 +1,2 @@
 // @flow
-export { WidgetProfile } from './WidgetProfile.container';
+export { WidgetProfile } from './WidgetProfile.component';

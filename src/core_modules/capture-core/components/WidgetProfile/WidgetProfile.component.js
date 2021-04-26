@@ -6,6 +6,7 @@ import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
 import { colors } from '@dhis2/ui';
 import { Widget } from '../Widget';
+import { useWidgetProfileData } from './hooks';
 import type { Props } from './widgetProfile.types';
 
 const styles = {
@@ -25,9 +26,10 @@ const styles = {
         color: colors.grey600,
     },
 };
-const ProfileWidgetPlain = ({ classes, attributes }: Props) => {
+const ProfileWidgetPlain = ({ classes }: Props) => {
+    const attributes = useWidgetProfileData();
     const [open, setOpenStatus] = useState(true);
-    const lastItem = attributes[attributes.length - 1];
+    const lastItem = attributes && attributes[attributes.length - 1];
 
     const renderAttributeItem = item => (
         <div className={cx(classes.itemRow, { isLastItem: item.attribute === lastItem.attribute })}>
@@ -35,6 +37,8 @@ const ProfileWidgetPlain = ({ classes, attributes }: Props) => {
             <div>{item.value}</div>
         </div>
     );
+
+
     return (
         <div
             data-test="profile-widget"

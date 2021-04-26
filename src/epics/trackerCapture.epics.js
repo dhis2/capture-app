@@ -197,9 +197,6 @@ import {
     startFetchingTeiFromTeiIdEpic,
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
-import {
-    startFetchingProfileEpic,
-} from '../core_modules/capture-core/components/WidgetProfile/WidgetProfile.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -321,5 +318,4 @@ export default combineEpics(
     resetEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
     checkForDuplicateEpic,
-    startFetchingProfileEpic,
 );
