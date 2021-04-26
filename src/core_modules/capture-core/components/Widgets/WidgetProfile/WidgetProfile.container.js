@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import type { ComponentType } from 'react';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProfileInformation } from './ProfileWidget.actions';
-import { ProfileWidget } from './ProfileWidget.component';
+import { fetchProfileInformation } from './WidgetProfile.actions';
+import { ProfileWidget } from './WidgetProfile.component';
 
-export const ProfileWidgetContainer: ComponentType<{||}> = () => {
+export const WidgetProfile: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
     const selectedTeiId: string =
       useSelector(({ router: { location: { query } } }) => query.teiId);

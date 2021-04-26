@@ -2,7 +2,7 @@
 import { ofType } from 'redux-observable';
 import { flatMap, map } from 'rxjs/operators';
 import { from } from 'rxjs';
-import { successFetchProfile, profileWidgetActionTypes } from './ProfileWidget.actions';
+import { successFetchProfile, profileWidgetActionTypes } from './WidgetProfile.actions';
 
 
 const profileQuery = (id, programId) => ({
