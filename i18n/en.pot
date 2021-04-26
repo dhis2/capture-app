@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-04-23T12:47:43.622Z\n"
-"PO-Revision-Date: 2021-04-23T12:47:43.622Z\n"
+"POT-Creation-Date: 2021-04-26T07:17:10.010Z\n"
+"PO-Revision-Date: 2021-04-26T07:17:10.010Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -854,6 +854,9 @@ msgstr ""
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
+msgid "Person Profile"
+msgstr ""
+
 msgid "You dont have access to delete this relationship"
 msgstr ""
 
@@ -888,9 +891,6 @@ msgid "open the Tracker Capture app"
 msgstr ""
 
 msgid "Stages and Events"
-msgstr ""
-
-msgid "Person Profile"
 msgstr ""
 
 msgid "An error has occured. See log for details"

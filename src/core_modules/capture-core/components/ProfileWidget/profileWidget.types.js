@@ -5,5 +5,6 @@ export type Props = {|
         flatListWrapper: string;
         itemRow: string;
         itemKey: string;
-    }
+    },
+    attributes: any[]
 |};

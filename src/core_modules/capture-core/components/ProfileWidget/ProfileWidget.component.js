@@ -5,9 +5,8 @@ import { FlatList } from 'capture-ui';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
 import { colors } from '@dhis2/ui';
-import { Widget } from '../../Widget';
+import { Widget } from '../Widget';
 import type { Props } from './profileWidget.types';
-import { useProfileInfo } from './hooks';
 
 const styles = {
     flatListWrapper: {
@@ -26,8 +25,7 @@ const styles = {
         color: colors.grey600,
     },
 };
-const ProfileWidgetPlain = ({ classes }: Props) => {
-    const { attributes } = useProfileInfo();
+const ProfileWidgetPlain = ({ classes, attributes }: Props) => {
     const [open, setOpenStatus] = useState(true);
     const lastItem = attributes[attributes.length - 1];
 
