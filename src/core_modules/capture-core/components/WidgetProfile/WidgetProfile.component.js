@@ -5,8 +5,8 @@ import { FlatList } from 'capture-ui';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
 import { colors } from '@dhis2/ui';
-import { Widget } from '../../Widget';
-import type { Props } from './profileWidget.types';
+import { Widget } from '../Widget';
+import type { Props } from './widgetProfile.types';
 import { useProfileInfo } from './hooks';
 
 const styles = {
@@ -58,4 +58,4 @@ const ProfileWidgetPlain = ({ classes }: Props) => {
 };
 
 
-export const ProfileWidget: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ProfileWidgetPlain);
+export const WidgetProfile: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ProfileWidgetPlain);
