@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum } from '@dhis2/ui';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
-import { WidgetProfile } from '../../../Widgets';
+import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 
 const getStyles = ({ typography }) => ({

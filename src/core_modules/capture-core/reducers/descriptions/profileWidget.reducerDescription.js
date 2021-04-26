@@ -1,6 +1,6 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { profileWidgetActionTypes } from '../../components/Widgets/WidgetProfile/WidgetProfile.actions';
+import { profileWidgetActionTypes } from '../../components/WidgetProfile/WidgetProfile.actions';
 
 const initialReducerValue = {
     attributes: [],

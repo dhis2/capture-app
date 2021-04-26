@@ -5,7 +5,7 @@ import { FlatList } from 'capture-ui';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
 import { colors } from '@dhis2/ui';
-import { Widget } from '../../Widget';
+import { Widget } from '../Widget';
 import type { Props } from './widgetProfile.types';
 
 const styles = {

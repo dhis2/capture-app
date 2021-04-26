@@ -199,7 +199,7 @@ import {
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 import {
     startFetchingProfileEpic,
-} from '../core_modules/capture-core/components/Widgets/WidgetProfile/WidgetProfile.epics';
+} from '../core_modules/capture-core/components/WidgetProfile/WidgetProfile.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
