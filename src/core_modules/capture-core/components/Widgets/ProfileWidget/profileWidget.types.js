@@ -1,6 +1,11 @@
 // @flow
 
+import { string } from 'prop-types';
+
 export type Props = {|
-    classes?: string,
-    attributes: any[]
+    classes: {
+        flatListWrapper: string;
+        itemRow: string;
+        itemKey: string;
+    }
 |};
