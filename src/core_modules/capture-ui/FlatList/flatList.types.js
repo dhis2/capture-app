@@ -1,10 +1,10 @@
 // @flow
 
-import * as React from 'react';
+import { type Element } from 'react';
 
-export type Props = {
+export type Props = {|
     list: any[],
-    renderItem: (item: any) => React.Element<any>,
+    renderItem: (item: any) => Element<any>,
     className?: string,
     dataTest?: string,
-};
+|};

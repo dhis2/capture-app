@@ -56,4 +56,4 @@ const ProfileWidgetPlain = ({ classes, attributes }: Props) => {
 };
 
 
-export const ProfileWidget: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ProfileWidgetPlain);
+export const WidgetProfile: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ProfileWidgetPlain);
