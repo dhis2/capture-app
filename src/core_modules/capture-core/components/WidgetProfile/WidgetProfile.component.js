@@ -15,10 +15,10 @@ const styles = {
 
 };
 const ProfileWidgetPlain = ({ classes }: Props) => {
-    const attributes = useWidgetProfileData();
+    const attributes = useWidgetProfileData() ?? [];
     const [open, setOpenStatus] = useState(true);
 
-    const formatAttributes = () => (attributes ?? []).map(attribute => ({ id: attribute.id, key: attribute.displayName, children: <>{attribute.value}</> }));
+    const formatAttributes = () => attributes.map(attribute => ({ id: attribute.id, key: attribute.displayName, children: <>{attribute.value}</> }));
 
     return (
         <div
@@ -32,7 +32,7 @@ const ProfileWidgetPlain = ({ classes }: Props) => {
                 open={open}
             >
                 <FlatList
-                    list={formatAttributes(attributes)}
+                    list={formatAttributes()}
                 />
             </Widget>
         </div>
