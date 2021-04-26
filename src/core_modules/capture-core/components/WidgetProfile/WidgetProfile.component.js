@@ -2,46 +2,28 @@
 import React, { type ComponentType, useState, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { FlatList } from 'capture-ui';
-import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
-import { colors } from '@dhis2/ui';
 import { Widget } from '../Widget';
 import { useWidgetProfileData } from './hooks';
 import type { Props } from './widgetProfile.types';
 
+
 const styles = {
-    flatListWrapper: {
-        padding: '0 16px',
+    profileWidgetWrapper: {
+        paddingBottom: '12px',
     },
-    itemRow: {
-        borderBottom: `1px solid${colors.grey400}`,
-        display: 'flex',
-        padding: '16px 0',
-        '&.isLastItem': {
-            borderBottomWidth: 0,
-        },
-    },
-    itemKey: {
-        width: 150,
-        color: colors.grey600,
-    },
+
 };
 const ProfileWidgetPlain = ({ classes }: Props) => {
     const attributes = useWidgetProfileData();
     const [open, setOpenStatus] = useState(true);
-    const lastItem = attributes && attributes[attributes.length - 1];
 
-    const renderAttributeItem = item => (
-        <div className={cx(classes.itemRow, { isLastItem: item.attribute === lastItem.attribute })}>
-            <div className={classes.itemKey}>{item.displayName}</div>
-            <div>{item.value}</div>
-        </div>
-    );
-
+    const formatAttributes = () => (attributes ?? []).map(attribute => ({ id: attribute.id, key: attribute.displayName, children: <>{attribute.value}</> }));
 
     return (
         <div
             data-test="profile-widget"
+            className={classes.profileWidgetWrapper}
         >
             <Widget
                 header={i18n.t('Person Profile')}
@@ -50,9 +32,7 @@ const ProfileWidgetPlain = ({ classes }: Props) => {
                 open={open}
             >
                 <FlatList
-                    list={attributes ?? []}
-                    renderItem={renderAttributeItem}
-                    className={cx(classes.flatListWrapper)}
+                    list={formatAttributes(attributes)}
                 />
             </Widget>
         </div>
