@@ -5,12 +5,7 @@ import { IconClock16, colors, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../Widget';
-
-type Props = {|
-    enrollment?: Object,
-    ...CssClasses,
-|};
-
+import type { Props } from './enrollmentComponent.types';
 
 const styles = {
     icon: {
@@ -22,11 +17,6 @@ const styles = {
 
 export const WidgetEnrollmentPlain = ({ classes, enrollment = {} }: Props) => {
     const [open, setOpenStatus] = useState(true);
-
-    // console.log(enrollment.orgUnitName);
-    // console.log(enrollment.status);
-    // console.log(enrollment.incidentDate);
-    // console.log(enrollment.enrollmentDate);
 
     return (
         <div
