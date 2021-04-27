@@ -7,7 +7,8 @@ beforeEach(() => {
 Then('the enrollment details should be displayed', () => {
     cy.get('[data-test="enrollment-widget"]')
         .within(() => {
-            cy.contains('placeholder content enrollment').should('exist');
+            cy.get('[data-test="enrollment-widget-icon-clock"]')
+                .should('exist');
         });
 });
 
@@ -25,6 +26,6 @@ Then('the enrollment widget should be closed', () => {
             cy.get('[data-test="widget-contents"]')
                 .children()
                 .should('not.exist');
-            cy.contains('placeholder content enrollment').should('not.exist');
+            cy.get('[data-test="enrollment-widget-icon-clock"]').should('not.exist');
         });
 });

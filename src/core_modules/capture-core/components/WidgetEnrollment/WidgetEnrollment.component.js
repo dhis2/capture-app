@@ -1,7 +1,7 @@
 // @flow
 import React, { useState, useCallback } from 'react';
 import moment from 'moment';
-import { IconClock16, colors, spacersNum } from '@dhis2/ui';
+import { IconClock16, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../Widget';
@@ -10,7 +10,6 @@ import type { Props } from './enrollmentComponent.types';
 const styles = {
     icon: {
         color: colors.grey700,
-        padding: `0 ${spacersNum.dp8}px`,
     },
 };
 
@@ -28,7 +27,7 @@ export const WidgetEnrollmentPlain = ({ classes, enrollment = {} }: Props) => {
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                <span className={classes.icon} >
+                <span className={classes.icon} data-test="enrollment-widget-icon-clock" >
                     <IconClock16 />
                 </span>
                 {moment(enrollment.lastUpdated).fromNow()}
