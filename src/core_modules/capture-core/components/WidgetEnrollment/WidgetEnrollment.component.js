@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, ComponentType } from 'react';
 import moment from 'moment';
 import { IconClock16, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
