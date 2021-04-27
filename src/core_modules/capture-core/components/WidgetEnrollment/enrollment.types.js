@@ -1,5 +1,8 @@
 // @flow
 
 export type Props = {|
-    className?: string,
+    trackedEntityInstances?: string,
+    enrollmentId?: string,
+    enrollment?: Object,
+    ...CssClasses,
 |};

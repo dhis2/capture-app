@@ -1,9 +1,10 @@
 // @flow
 import React, { type ComponentType } from 'react';
+import { useSelector } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum } from '@dhis2/ui';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
-import { WidgetEnrollment } from '../../../WidgetEnrollment';
+import { WidgetEnrollmentContainer as WidgetEnrollment } from '../../../WidgetEnrollment';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 
 const getStyles = ({ typography }) => ({
@@ -28,23 +29,32 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => (
-    <>
-        <div className={classes.title}>
-            Enrollment Dashboard
-        </div>
-        <div className={classes.columns}>
-            <div className={classes.leftColumn}>
-                <WidgetStagesAndEvents
-                    stages={program.stages}
-                />
+export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => {
+    const { enrollmentId, teiId } =
+      useSelector(({ router: { location: { query } } }) =>
+          ({
+              enrollmentId: query.enrollmentId,
+              teiId: query.teiId,
+          }),
+      );
+    return (
+        <>
+            <div className={classes.title}>
+                Enrollment Dashboard
             </div>
-            <div className={classes.rightColumn}>
-                [placeholder profile widget]
-                <WidgetEnrollment />
+            <div className={classes.columns}>
+                <div className={classes.leftColumn}>
+                    <WidgetStagesAndEvents
+                        stages={program.stages}
+                    />
+                </div>
+                <div className={classes.rightColumn}>
+                    [placeholder profile widget]
+                    <WidgetEnrollment trackedEntityInstances={teiId} enrollmentId={enrollmentId} />
+                </div>
             </div>
-        </div>
-    </>
-);
+        </>
+    );
+};
 
 export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(getStyles)(EnrollmentPageDefaultPlain);
