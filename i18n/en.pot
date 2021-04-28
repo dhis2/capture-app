@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-04-22T10:37:49.317Z\n"
-"PO-Revision-Date: 2021-04-22T10:37:49.317Z\n"
+"POT-Creation-Date: 2021-04-26T09:11:58.819Z\n"
+"PO-Revision-Date: 2021-04-26T09:11:58.819Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -885,6 +885,9 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Person Profile"
 msgstr ""
 
 msgid "Stages and Events"
