@@ -1,7 +1,6 @@
 // @flow
 
 export type Props = {|
-    enrollment?: Object,
-    program?: Object,
+    status: string,
     ...CssClasses,
 |};

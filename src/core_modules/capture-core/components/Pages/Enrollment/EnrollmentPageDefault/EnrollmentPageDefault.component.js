@@ -30,11 +30,12 @@ const getStyles = ({ typography }) => ({
 });
 
 export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => {
-    const { enrollmentId, teiId } =
+    const { enrollmentId, teiId, programId } =
       useSelector(({ router: { location: { query } } }) =>
           ({
               enrollmentId: query.enrollmentId,
               teiId: query.teiId,
+              programId: query.programId,
           }),
       );
     return (
@@ -50,7 +51,7 @@ export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => 
                 </div>
                 <div className={classes.rightColumn}>
                     [placeholder profile widget]
-                    <WidgetEnrollment trackedEntityInstances={teiId} enrollmentId={enrollmentId} />
+                    <WidgetEnrollment teiId={teiId} enrollmentId={enrollmentId} programId={programId} />
                 </div>
             </div>
         </>

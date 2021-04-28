@@ -1,6 +1,7 @@
 // @flow
 
 export type Props = {|
-    trackedEntityInstances: string,
+    teiId: string,
     enrollmentId: string,
+    programId: string
 |};
