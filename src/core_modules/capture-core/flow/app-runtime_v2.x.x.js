@@ -27,9 +27,7 @@ declare module '@dhis2/app-runtime' {
         [resourceId: string]: ResourceQuery,
     |};
 
-    declare type QueryResultArray = Array<QueryResult>;
-    declare type QueryResultObject = {| [key: string]: QueryResult |};
-    declare type QueryResult = boolean | number | string | null | QueryResultArray | QueryResultObject;
+    declare type QueryResult = any;
 
     declare type RefetchOptions = {|
         variables?: QueryVariables
@@ -130,10 +128,10 @@ declare module '@dhis2/app-runtime' {
         called: boolean,
         loading: boolean,
         error?: FetchError,
-        data?: QueryResult,
+        data: QueryResult,
         engine: DataEngine,
         refetch: QueryRefetchFunction,
     |};
 
-    declare export function useDataQuery(query: Query, queryOptions: QueryOptions): QueryRenderInput;
+    declare export function useDataQuery(resourceQueries: ResourceQueries, queryOptions?: QueryOptions): QueryRenderInput;
 }
