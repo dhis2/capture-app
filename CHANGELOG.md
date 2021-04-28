@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/dhis2/capture-app/compare/v1.17.0...v1.18.0) (2021-04-28)
+
+
+### Features
+
+* [DHIS2-10947] Profile widget ([#1644](https://github.com/dhis2/capture-app/issues/1644)) ([5c2babc](https://github.com/dhis2/capture-app/commit/5c2babc594e6b5874fb09daa0e1cc54b9a8b2f31))
+
 # [1.17.0](https://github.com/dhis2/capture-app/compare/v1.16.0...v1.17.0) (2021-04-23)
 
 

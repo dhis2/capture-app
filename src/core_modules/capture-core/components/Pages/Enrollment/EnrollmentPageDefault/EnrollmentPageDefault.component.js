@@ -7,6 +7,7 @@ import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 
+
 const getStyles = ({ typography }) => ({
     columns: {
         display: 'flex',
