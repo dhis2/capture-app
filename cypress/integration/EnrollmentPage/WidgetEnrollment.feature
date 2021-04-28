@@ -1,12 +1,12 @@
-Feature: User interacts with Widget Profile
+Feature: User interacts with Enrollment Widget
 
-    Scenario: User can close the Widget Profile
+    Scenario: User can close the Enrollment Widget
         Given you open the enrollment page
-        When you click the widget profile toggle open close button
-        Then the widget profile should be closed
+        When you click the enrollment widget toggle open close button
+        Then the enrollment widget should be closed
 
-    Scenario: User can close and reopen the Widget Profile
+    Scenario: User can close and reopen the Enrollment Widget
         Given you open the enrollment page
-        When you click the widget profile toggle open close button
-        And you click the widget profile toggle open close button
-        Then the profile details should be displayed
+        When you click the enrollment widget toggle open close button
+        And you click the enrollment widget toggle open close button
+        Then the enrollment details should be displayed
