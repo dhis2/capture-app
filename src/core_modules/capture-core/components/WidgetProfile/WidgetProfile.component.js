@@ -3,7 +3,6 @@ import React, { type ComponentType, useState, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { FlatList } from 'capture-ui';
 import { withStyles } from '@material-ui/core';
-import { useSelector } from 'react-redux';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { Widget } from '../Widget';
 import type { Props } from './widgetProfile.types';
@@ -15,12 +14,8 @@ const styles = {
     },
 
 };
-const ProfileWidgetPlain = ({ classes }: Props) => {
-    const { teiId, programId } =
-      useSelector(({ router: { location: { query } } }) => ({ teiId: query.teiId, programId: query.programId }));
-
+const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
     const [open, setOpenStatus] = useState(true);
-
     const getProgram = useMemo(() => ({
         indicators: {
             resource: 'programs',

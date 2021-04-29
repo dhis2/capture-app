@@ -1,19 +1,19 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import cx from 'classnames';
-import { colors } from '@dhis2/ui';
+import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import type { Props } from './flatList.types';
 
 
 const styles = {
     flatListWrapper: {
-        padding: '0 16px',
+        padding: `0 ${spacersNum.dp16}px`,
     },
     itemRow: {
         borderBottom: `1px solid${colors.grey400}`,
         display: 'flex',
-        padding: '16px 0',
+        padding: `${spacersNum.dp16}px 0`,
         '&.isLastItem': {
             borderBottomWidth: 0,
         },

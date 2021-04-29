@@ -5,18 +5,21 @@ import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 
 export const EnrollmentPageDefault = () => {
-    const programId = useSelector(({
+    const { teiId, programId } = useSelector(({
         router: {
             location: {
                 query,
             },
         },
-    }) => query.programId);
+    }) => ({ teiId: query.teiId, programId: query.programId }));
 
     const { program } = useProgramInfo(programId);
 
+
     return (
         <EnrollmentPageDefaultComponent
+            teiId={teiId}
+            programId={programId}
             program={program}
         />
     );

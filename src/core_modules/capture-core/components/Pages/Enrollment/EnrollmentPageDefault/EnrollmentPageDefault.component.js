@@ -30,7 +30,7 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => (
+export const EnrollmentPageDefaultPlain = ({ program, teiId, programId, classes }: PlainProps) => (
     <>
         <div className={classes.title}>
             Enrollment Dashboard
@@ -42,7 +42,7 @@ export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => 
                 />
             </div>
             <div className={classes.rightColumn}>
-                <WidgetProfile />
+                <WidgetProfile teiId={teiId} programId={programId} />
                 <WidgetEnrollment />
             </div>
         </div>
