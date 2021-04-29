@@ -1,4 +1,4 @@
-import '../sharedSteps';
+import '../../sharedSteps';
 
 beforeEach(() => {
     cy.loginThroughForm();

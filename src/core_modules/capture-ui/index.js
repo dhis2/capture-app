@@ -42,3 +42,6 @@ export {
 // UI-Elements
 export { default as DividerHorizontal } from './Divider/DividerHorizontal.component';
 export { default as Button } from './Buttons/Button.component';
+export { IconButton } from './IconButton';
+export { NonBundledIcon } from './NonBundledIcon';
+export { FlatList } from './FlatList';

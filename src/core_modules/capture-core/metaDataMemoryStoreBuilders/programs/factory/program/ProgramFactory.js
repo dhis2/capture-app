@@ -2,7 +2,6 @@
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
 import {
-    Icon,
     EventProgram,
     TrackerProgram,
     CategoryCombination,
@@ -11,9 +10,8 @@ import {
 } from '../../../../metaData';
 import { getUserStorageController } from '../../../../storageControllers';
 import { userStores } from '../../../../storageControllers/stores';
-
-import getProgramIconAsync from './getProgramIcon';
 import { SearchGroupFactory } from '../../../common/factory';
+import { buildIcon } from '../../../common/helpers';
 import { EnrollmentFactory } from '../enrollment';
 import DataElementFactory from '../enrollment/DataElementFactory';
 import {
@@ -23,7 +21,6 @@ import { CategoryFactory } from '../category';
 
 import type
 {
-    CachedStyle,
     CachedProgramStage,
     ProgramCachedCategoryCombo,
     CachedProgram,
@@ -54,28 +51,28 @@ class ProgramFactory {
         locale: ?string,
     ) {
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
-        this.programStageFactory = new ProgramStageFactory(
+        this.programStageFactory = new ProgramStageFactory({
             cachedOptionSets,
             cachedRelationshipTypes,
             locale,
-        );
-        this.enrollmentFactory = new EnrollmentFactory(
+        });
+        this.enrollmentFactory = new EnrollmentFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             cachedTrackedEntityTypes,
-            locale,
             trackedEntityTypeCollection,
-        );
-        this.searchGroupFactory = new SearchGroupFactory(
+            locale,
+        });
+        this.searchGroupFactory = new SearchGroupFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
-        this.dataElementFactory = new DataElementFactory(
+        });
+        this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
+        });
         this.categoryFactory = new CategoryFactory(
             cachedCategories,
         );
@@ -111,13 +108,6 @@ class ProgramFactory {
             // $FlowFixMe
                 this._buildCategories(cachedCategoryCombination.categories, this.cachedCategories);
         });
-    }
-
-    static async _buildProgramIcon(cachedStyle: CachedStyle = {}) {
-        const icon = new Icon();
-        icon.color = cachedStyle.color || '#e0e0e0';
-        icon.data = await getProgramIconAsync(cachedStyle.icon);
-        return icon;
     }
 
     async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
@@ -179,9 +169,8 @@ class ProgramFactory {
 
             program.enrollment = await this.enrollmentFactory.build(cachedProgram, program.searchGroups);
         }
-        // $FlowFixMe
-        program.icon = await ProgramFactory._buildProgramIcon(cachedProgram.style);
         program.organisationUnits = (await getUserStorageController().get(userStores.ORGANISATION_UNITS_BY_PROGRAM, program.id))?.organisationUnits;
+        program.icon = buildIcon(cachedProgram.style);
 
         return program;
     }

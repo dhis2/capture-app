@@ -11,21 +11,10 @@ import {
 } from '../../../../metaData';
 import type {
     CachedAttributeTranslation,
-    CachedOptionSet,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
 import { OptionSetFactory } from '../optionSet';
-
-type InputSearchAttribute = {
-    trackedEntityAttributeId: ?string,
-    searchable: boolean,
-    displayInList: boolean,
-    renderOptionsAsRadio: ?boolean,
-}
-
-type SearchAttribute = InputSearchAttribute & {
-    trackedEntityAttribute: CachedTrackedEntityAttribute
-}
+import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
 
 const translationPropertyNames = {
     NAME: 'NAME',
@@ -57,11 +46,11 @@ class SearchGroupFactory {
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     locale: ?string;
     optionSetFactory: OptionSetFactory;
-    constructor(
-        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-        cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: ?string,
-    ) {
+    constructor({
+        cachedTrackedEntityAttributes,
+        cachedOptionSets,
+        locale,
+    }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.locale = locale;
         this.optionSetFactory = new OptionSetFactory(
