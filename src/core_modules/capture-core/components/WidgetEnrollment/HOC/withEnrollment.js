@@ -6,25 +6,21 @@ type Props = {
     enrollmentId: string,
 };
 
-export const withEnrollment = (Component: ComponentType) => (props: Props) => {
-    const enrollmentQuery = useMemo(
-        () => ({
-            enrollment: {
-                resource: `enrollments/${props.enrollmentId}`,
-            },
-        }),
-        [props.enrollmentId],
+export const withEnrollment = (Component: ComponentType<any>) => (props: Props) => {
+    const { error, loading, data } = useDataQuery(
+        useMemo(
+            () => ({
+                enrollment: {
+                    resource: `enrollments/${props.enrollmentId}`,
+                },
+            }),
+            [props.enrollmentId],
+        ),
     );
 
-    const enrollmentFetch = useDataQuery(enrollmentQuery);
-
-    if (enrollmentFetch.error) {
-        throw enrollmentFetch.error;
+    if (error) {
+        throw error;
     }
 
-    return enrollmentFetch.data && enrollmentFetch.data.enrollment ? (
-        <Component {...props} enrollment={enrollmentFetch.data.enrollment} />
-    ) : (
-        <> </>
-    );
+    return !loading && data && data.enrollment ? <Component {...props} enrollment={data.enrollment} /> : <> </>;
 };

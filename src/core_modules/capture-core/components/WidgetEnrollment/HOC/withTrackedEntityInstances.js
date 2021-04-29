@@ -7,35 +7,33 @@ type Props = {
     teiId: string,
 };
 
-export const withTrackedEntityInstances = (Component: ComponentType) => (props: Props) => {
-    const trackedEntityInstancesQuery = useMemo(
-        () => ({
-            trackedEntityInstances: {
-                resource: `trackedEntityInstances/${props.teiId}`,
-                params: {
-                    fields: ['programOwners[ownerOrgUnit]'],
-                    program: [props.programId],
+export const withTrackedEntityInstances = (Component: ComponentType<any>) => (props: Props) => {
+    const { error, loading, data } = useDataQuery(
+        useMemo(
+            () => ({
+                trackedEntityInstances: {
+                    resource: `trackedEntityInstances/${props.teiId}`,
+                    params: {
+                        fields: ['programOwners[ownerOrgUnit]'],
+                        program: [props.programId],
+                    },
                 },
-            },
-        }),
-        [props.teiId, props.programId],
+            }),
+            [props.teiId, props.programId],
+        ),
     );
 
-    const trackedEntityInstancesFetch = useDataQuery(trackedEntityInstancesQuery);
-
-    if (trackedEntityInstancesFetch.error) {
-        throw trackedEntityInstancesFetch.error;
+    if (error) {
+        throw error;
     }
 
-    return trackedEntityInstancesFetch.data &&
-        trackedEntityInstancesFetch.data.trackedEntityInstances &&
-        trackedEntityInstancesFetch.data.trackedEntityInstances.programOwners &&
-        trackedEntityInstancesFetch.data.trackedEntityInstances.programOwners[0] &&
-        trackedEntityInstancesFetch.data.trackedEntityInstances.programOwners[0].ownerOrgUnit ? (
-            <Component
-                {...props}
-                ownerOrgUnit={trackedEntityInstancesFetch.data.trackedEntityInstances.programOwners[0].ownerOrgUnit}
-            />
+    return !loading &&
+        data &&
+        data.trackedEntityInstances &&
+        data.trackedEntityInstances.programOwners &&
+        data.trackedEntityInstances.programOwners[0] &&
+        data.trackedEntityInstances.programOwners[0].ownerOrgUnit ? (
+            <Component {...props} ownerOrgUnit={data.trackedEntityInstances.programOwners[0].ownerOrgUnit} />
         ) : (
             <></>
         );

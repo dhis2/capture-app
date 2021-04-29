@@ -6,35 +6,37 @@ type Props = {
     ownerOrgUnit: string,
 };
 
-export const withOrganizationUnit = (Component: ComponentType) => (props: Props) => {
-    const organisationUnitsQuery = useMemo(
-        () => ({
-            organisationUnits: {
-                resource: `organisationUnits/${props.ownerOrgUnit}`,
-                params: {
-                    fields: ['displayName'],
+export const withOrganizationUnit = (Component: ComponentType<any>) => (props: Props) => {
+    const { error, loading, data } = useDataQuery(
+        useMemo(
+            () => ({
+                organisationUnits: {
+                    resource: `organisationUnits/${props.ownerOrgUnit}`,
+                    params: {
+                        fields: ['displayName'],
+                    },
                 },
-            },
-        }),
-        [props.ownerOrgUnit],
+            }),
+            [props.ownerOrgUnit],
+        ),
     );
-    const organisationUnitsFetch = useDataQuery(organisationUnitsQuery);
 
-    if (organisationUnitsFetch.error) {
-        throw organisationUnitsFetch.error;
+    if (error) {
+        throw error;
     }
 
-    return organisationUnitsFetch.data &&
-        organisationUnitsFetch.data.organisationUnits &&
-        organisationUnitsFetch.data.organisationUnits.displayName ? (
+    return (
+        !loading,
+        data && data.organisationUnits && data.organisationUnits.displayName ? (
             <Component
                 {...props}
                 ownerOrgUnit={{
                     ...props.ownerOrgUnit,
-                    displayName: organisationUnitsFetch.data.organisationUnits.displayName,
+                    displayName: data.organisationUnits.displayName,
                 }}
             />
         ) : (
             <> </>
-        );
+        )
+    );
 };

@@ -70,7 +70,7 @@ const valueConvertersForType = {
     [dataElementTypes.TIME]: convertTimeForListDisplay,
     [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
     [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
-    [dataElementTypes.COORDINATE]: MinimalCoordinates, // here
+    [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.AGE]: convertDateForListDisplay,
     [dataElementTypes.FILE_RESOURCE]: convertResourceForDisplay,
     [dataElementTypes.IMAGE]: convertResourceForDisplay,

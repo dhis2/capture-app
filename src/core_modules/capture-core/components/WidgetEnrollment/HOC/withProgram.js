@@ -6,28 +6,24 @@ type Props = {
     programId: string,
 };
 
-export const withProgram = (Component: ComponentType) => (props: Props) => {
-    const programQuery = useMemo(
-        () => ({
-            programs: {
-                resource: `programs/${props.programId}`,
-                params: {
-                    fields: ['displayIncidentDate,incidentDateLabel,enrollmentDateLabel'],
+export const withProgram = (Component: ComponentType<any>) => (props: Props) => {
+    const { error, loading, data } = useDataQuery(
+        useMemo(
+            () => ({
+                programs: {
+                    resource: `programs/${props.programId}`,
+                    params: {
+                        fields: ['displayIncidentDate,incidentDateLabel,enrollmentDateLabel'],
+                    },
                 },
-            },
-        }),
-        [props.programId],
+            }),
+            [props.programId],
+        ),
     );
 
-    const programFetch = useDataQuery(programQuery);
-
-    if (programFetch.error) {
-        throw programFetch.error;
+    if (error) {
+        throw error;
     }
 
-    return programFetch.data && programFetch.data.programs ? (
-        <Component {...props} program={programFetch.data.programs} />
-    ) : (
-        <> </>
-    );
+    return !loading && data && data.programs ? <Component {...props} program={data.programs} /> : <> </>;
 };

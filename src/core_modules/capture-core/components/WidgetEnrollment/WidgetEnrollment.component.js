@@ -7,6 +7,9 @@ import { withStyles } from '@material-ui/core';
 import { Widget } from '../Widget';
 import type { Props } from './enrollment.types';
 import { Status } from './Status';
+// import { convertValue } from '../../converters/serverToClient';
+import { convertValue } from '../../converters/clientToList';
+import { dataElementTypes } from '../../metaData';
 
 const styles = {
     icon: {
@@ -23,7 +26,10 @@ const styles = {
 
 export const WidgetEnrollmentPlain = ({ classes, enrollment, program, ownerOrgUnit }: Props) => {
     const [open, setOpenStatus] = useState(true);
-    // console.log(enrollment.geometry);
+    console.log(enrollment.geometry);
+    console.log(convertValue(enrollment.geometry.coordinates, dataElementTypes.COORDINATE));
+
+    // o.type = featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
     return (
         <div data-test="enrollment-widget">
             <Widget
