@@ -83,7 +83,7 @@ const ProfileWidgetPlain = ({ classes }: Props) => {
                 open={open}
             >
                 <FlatList
-                    data-test="profile-widget-flatlist"
+                    dataTest="profile-widget-flatlist"
                     list={mergeAttributes()}
                 />
             </Widget>

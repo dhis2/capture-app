@@ -7,7 +7,8 @@ beforeEach(() => {
 Then('the profile details should be displayed', () => {
     cy.get('[data-test="profile-widget"]')
         .within(() => {
-            cy.contains('[data-test="widget-contents"]').should('exist');
+            cy.get('[data-test="widget-contents"]', { timeout: 1000 }).should('be.visible');
+            cy.get('[data-test="profile-widget-flatlist"]').should('be.visible');
         });
 });
 
