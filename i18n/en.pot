@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-04-26T09:11:58.819Z\n"
-"PO-Revision-Date: 2021-04-26T09:11:58.819Z\n"
+"POT-Creation-Date: 2021-04-29T12:46:45.002Z\n"
+"PO-Revision-Date: 2021-04-29T12:46:45.002Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -769,7 +769,7 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-msgid "Search for "
+msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search for"
@@ -896,7 +896,7 @@ msgstr ""
 msgid "An error has occured. See log for details"
 msgstr ""
 
-msgid "{{trackedEntityName}} in program"
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Program not found"

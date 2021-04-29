@@ -7,10 +7,14 @@ export const useScopeTitleText = (scopeId: ?string) => {
     const { trackedEntityName, programName, scopeType } = useScopeInfo(scopeId);
 
     const text = {
-        [scopeTypes.EVENT_PROGRAM]: `${programName}`,
+        [scopeTypes.EVENT_PROGRAM]: programName,
         [scopeTypes.TRACKER_PROGRAM]:
-            `${i18n.t('{{trackedEntityName}} in program', { trackedEntityName })}: ${programName}`,
-        [scopeTypes.TRACKED_ENTITY_TYPE]: `${trackedEntityName}`,
+            i18n.t('{{trackedEntityName}} in program{{escape}} {{programName}}', {
+                trackedEntityName,
+                programName,
+                escape: ':',
+            }),
+        [scopeTypes.TRACKED_ENTITY_TYPE]: trackedEntityName,
     };
 
     return scopeType ? text[scopeType] : '';
