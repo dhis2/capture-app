@@ -5,7 +5,7 @@ import { IconClock16, IconDimensionOrgUnit16, IconCalendar16, colors, Tag, space
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../Widget';
-import type { Props } from './enrollmentComponent.types';
+import type { Props } from './enrollment.types';
 import { Status } from './Status';
 
 const styles = {
@@ -21,15 +21,11 @@ const styles = {
     },
 };
 
-
-export const WidgetEnrollmentPlain = ({ classes, enrollment = {}, program = {} }: Props) => {
+export const WidgetEnrollmentPlain = ({ classes, enrollment, program, ownerOrgUnit }: Props) => {
     const [open, setOpenStatus] = useState(true);
     // console.log(enrollment.geometry);
-
     return (
-        <div
-            data-test="enrollment-widget"
-        >
+        <div data-test="enrollment-widget">
             <Widget
                 header={i18n.t('Enrollment')}
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
@@ -37,21 +33,18 @@ export const WidgetEnrollmentPlain = ({ classes, enrollment = {}, program = {} }
                 open={open}
             >
                 <div className={classes.enrollment}>
-                    {enrollment.followup &&
-                    <div>
-                        <Tag
-                            className={classes.followup}
-                            negative
-                        >
-                            {i18n.t('Follow-up')}
-                        </Tag>
-                    </div>
-                    }
+                    {enrollment.followup && (
+                        <div>
+                            <Tag className={classes.followup} negative>
+                                {i18n.t('Follow-up')}
+                            </Tag>
+                        </div>
+                    )}
 
                     <div>
                         <Status status={enrollment.status} />
                         {i18n.t('at')}
-                        <span className={classes.icon} >
+                        <span className={classes.icon}>
                             <IconDimensionOrgUnit16 />
                         </span>
                         {enrollment.orgUnitName}
@@ -64,24 +57,24 @@ export const WidgetEnrollmentPlain = ({ classes, enrollment = {}, program = {} }
                         {program.enrollmentDateLabel} {moment(enrollment.enrollmentDate).format('l')}
                     </div>
 
-                    {program.displayIncidentDate &&
+                    {program.displayIncidentDate && (
+                        <div>
+                            <span className={classes.icon}>
+                                <IconCalendar16 />
+                            </span>
+                            {program.incidentDateLabel} {moment(enrollment.incidentDate).format('l')}
+                        </div>
+                    )}
+
                     <div>
                         <span className={classes.icon}>
-                            <IconCalendar16 />
-                        </span>
-                        {program.incidentDateLabel} {moment(enrollment.incidentDate).format('l')}
-                    </div>
-                    }
-
-                    <div >
-                        <span className={classes.icon} >
                             <IconDimensionOrgUnit16 />
                         </span>
-                        {i18n.t('Enrolled at')} TODO
+                        {i18n.t('Enrolled at')} {ownerOrgUnit.displayName}
                     </div>
 
                     <div>
-                        <span className={classes.icon} data-test="enrollment-widget-icon-clock" >
+                        <span className={classes.icon} data-test="enrollment-widget-icon-clock">
                             <IconClock16 />
                         </span>
                         {i18n.t('Last updated')} {moment(enrollment.lastUpdated).fromNow()}
