@@ -894,6 +894,7 @@ msgid "at"
 msgstr ""
 
 msgid "Enrolled at"
+msgid "Person Profile"
 msgstr ""
 
 msgid "Stages and Events"
