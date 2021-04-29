@@ -8,8 +8,8 @@ import { Widget } from '../Widget';
 import type { Props } from './enrollment.types';
 import { Status } from './Status';
 // import { convertValue } from '../../converters/serverToClient';
-import { convertValue } from '../../converters/clientToList';
-import { dataElementTypes } from '../../metaData';
+// import { convertValue } from '../../converters/clientToList';
+// import { dataElementTypes } from '../../metaData';
 
 const styles = {
     icon: {
@@ -26,9 +26,8 @@ const styles = {
 
 export const WidgetEnrollmentPlain = ({ classes, enrollment, program, ownerOrgUnit }: Props) => {
     const [open, setOpenStatus] = useState(true);
-    console.log(enrollment.geometry);
-    console.log(convertValue(enrollment.geometry.coordinates, dataElementTypes.COORDINATE));
-
+    // console.log(enrollment.geometry);
+    // console.log(convertValue(enrollment.geometry.coordinates, dataElementTypes.COORDINATE));
     // o.type = featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
     return (
         <div data-test="enrollment-widget">
@@ -57,7 +56,7 @@ export const WidgetEnrollmentPlain = ({ classes, enrollment, program, ownerOrgUn
                     </div>
 
                     <div>
-                        <span className={classes.icon}>
+                        <span className={classes.icon} data-test="enrollment-widget-icon-calendar">
                             <IconCalendar16 />
                         </span>
                         {program.enrollmentDateLabel} {moment(enrollment.enrollmentDate).format('l')}
@@ -73,7 +72,7 @@ export const WidgetEnrollmentPlain = ({ classes, enrollment, program, ownerOrgUn
                     )}
 
                     <div>
-                        <span className={classes.icon}>
+                        <span className={classes.icon} data-test="enrollment-widget-icon-orgunit">
                             <IconDimensionOrgUnit16 />
                         </span>
                         {i18n.t('Enrolled at')} {ownerOrgUnit.displayName}
