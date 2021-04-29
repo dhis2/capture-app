@@ -11,8 +11,9 @@ export const useScopeTitleText = (scopeId: ?string) => {
         [scopeTypes.TRACKER_PROGRAM]:
             i18n.t('{{trackedEntityName}} in program{{escape}} {{programName}}', {
                 trackedEntityName,
-                programName,
                 escape: ':',
+                programName,
+                interpolation: { escapeValue: false },
             }),
         [scopeTypes.TRACKED_ENTITY_TYPE]: trackedEntityName,
     };

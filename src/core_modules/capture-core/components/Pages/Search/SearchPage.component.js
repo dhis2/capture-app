@@ -149,7 +149,7 @@ const Index = ({
                 <Paper className={classes.paper}>
                     <div className={classes.maxWidth}>
                         <div className={classes.title} >
-                            {i18n.t('Search for {{titleText}}', {titleText})}
+                            {i18n.t('Search for {{titleText}}', { titleText })}
                         </div>
                         {
                             (selectedSearchScopeType !== searchScopes.PROGRAM) &&
