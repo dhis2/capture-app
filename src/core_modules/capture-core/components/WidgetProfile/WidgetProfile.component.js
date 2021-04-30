@@ -5,6 +5,7 @@ import { FlatList } from 'capture-ui';
 import { withStyles } from '@material-ui/core';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { Widget } from '../Widget';
+import { convertValue } from '../../converters/clientToView';
 import type { Props } from './widgetProfile.types';
 
 
@@ -21,7 +22,7 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
             resource: 'programs',
             id: programId,
             params: {
-                fields: ['programTrackedEntityAttributes[id,displayInList,trackedEntityAttribute[id,displayName]]'],
+                fields: ['programTrackedEntityAttributes[id,displayInList,trackedEntityAttribute[id,displayName,valueType]]'],
             },
         },
     }), [programId]);
@@ -53,7 +54,9 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
     const mergeAttributes = () => {
         const { programTrackedEntityAttributes } = programQuery.indicators;
         const { attributes } = attributesQuery.indicators;
-        const displayEntities = programTrackedEntityAttributes.reduce((acc, curr) => { acc = [...acc, curr.trackedEntityAttribute]; return acc; }, []);
+        const displayEntities = programTrackedEntityAttributes
+            .filter(item => item.displayInList)
+            .reduce((acc, curr) => { acc = [...acc, curr.trackedEntityAttribute]; return acc; }, []);
 
         const formattedAttributes = [];
         displayEntities.forEach((entity) => {
@@ -62,7 +65,12 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
                 formattedAttributes.push({ ...entity, value: displayAttribute.value });
             }
         });
-        return formattedAttributes.map(attribute => ({ id: attribute.id, key: attribute.displayName, children: <>{attribute.value}</> }));
+        return formattedAttributes
+            .map(attribute => (
+                { id: attribute.id,
+                    key: attribute.displayName,
+                    children: <>{convertValue(attribute.value, attribute.valueType)}</>,
+                }));
     };
 
 
