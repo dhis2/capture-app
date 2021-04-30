@@ -129,7 +129,7 @@ const RegistrationDataEntryPlain = ({
                 scopeType === scopeTypes.TRACKER_PROGRAM &&
                 <Paper className={classes.paper}>
                     <div className={classes.title} >
-                        {i18n.t('New {{titleText}}', {titleText})} 
+                        {i18n.t('New {{titleText}}', { titleText })}
                     </div>
 
                     <div className={classes.registrationContainer}>
@@ -166,7 +166,7 @@ const RegistrationDataEntryPlain = ({
                 scopeType === scopeTypes.TRACKED_ENTITY_TYPE &&
                 <Paper className={classes.paper}>
                     <div className={classes.title} >
-                        {i18n.t('New {{titleText}}', {titleText})} 
+                        {i18n.t('New {{titleText}}', { titleText })}
                     </div>
 
                     <div className={classes.tetypeContainer}>
