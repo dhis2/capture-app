@@ -30,11 +30,7 @@ export const withTrackedEntityInstances = (Component: ComponentType<any>) => (
     }
 
     return !loading &&
-        data &&
-        data.trackedEntityInstances &&
-        data.trackedEntityInstances.programOwners &&
-        data.trackedEntityInstances.programOwners[0] &&
-        data.trackedEntityInstances.programOwners[0].ownerOrgUnit ? (
+        data?.trackedEntityInstances?.programOwners[0]?.ownerOrgUnit ? (
             <Component
                 {...props}
                 ownerOrgUnit={

@@ -29,7 +29,7 @@ export const withProgram = (Component: ComponentType<any>) => (
         throw error;
     }
 
-    return !loading && data && data.programs ? (
+    return !loading && data?.programs ? (
         <Component {...props} program={data.programs} />
     ) : (
         <> </>

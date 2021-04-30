@@ -24,7 +24,7 @@ export const withEnrollment = (Component: ComponentType<any>) => (
         throw error;
     }
 
-    return !loading && data && data.enrollment ? (
+    return !loading && data?.enrollment ? (
         <Component {...props} enrollment={data.enrollment} />
     ) : (
         <> </>
