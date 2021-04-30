@@ -44,8 +44,8 @@ const valueConvertersForType = {
     [dataElementTypes.DATETIME]: (d2Value: string) => moment(d2Value).toISOString(),
     [dataElementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [dataElementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
-    [dataElementTypes.COORDINATE]: (d2Value: string) => {
-        const arr = JSON.parse(d2Value);
+    [dataElementTypes.COORDINATE]: (d2Value: string | array) => {
+        const arr = typeof d2Value === 'string' ? JSON.parse(d2Value) : d2Value;
         return { latitude: arr[1], longitude: arr[0] };
     },
 };

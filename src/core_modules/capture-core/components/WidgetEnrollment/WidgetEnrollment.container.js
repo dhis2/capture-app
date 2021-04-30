@@ -6,5 +6,7 @@ import { withEnrollment } from './HOC/withEnrollment';
 import { withProgram } from './HOC/withProgram';
 
 export const WidgetEnrollmentContainer = withProgram(
-    withEnrollment(withTrackedEntityInstances(withOrganizationUnit(WidgetEnrollment))),
+    withEnrollment(
+        withTrackedEntityInstances(withOrganizationUnit(WidgetEnrollment))
+    )
 );

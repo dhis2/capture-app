@@ -1,15 +1,22 @@
 // @flow
 import React, { useState, useCallback, type ComponentType } from 'react';
 import moment from 'moment';
-import { IconClock16, IconDimensionOrgUnit16, IconCalendar16, colors, Tag, spacersNum } from '@dhis2/ui';
+import {
+    IconClock16,
+    IconDimensionOrgUnit16,
+    IconCalendar16,
+    colors,
+    Tag,
+    spacersNum,
+} from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../Widget';
 import type { Props } from './enrollment.types';
 import { Status } from './Status';
-// import { convertValue } from '../../converters/serverToClient';
-// import { convertValue } from '../../converters/clientToList';
-// import { dataElementTypes } from '../../metaData';
+import { convertValue as convertValueServerToClient } from '../../converters/serverToClient';
+import { convertValue as convertValueClientToView } from '../../converters/clientToView';
+import { dataElementTypes } from '../../metaData';
 
 const styles = {
     icon: {
@@ -24,17 +31,22 @@ const styles = {
     },
 };
 
-export const WidgetEnrollmentPlain = ({ classes, enrollment, program, ownerOrgUnit }: Props) => {
+export const WidgetEnrollmentPlain = ({
+    classes,
+    enrollment,
+    program,
+    ownerOrgUnit,
+}: Props) => {
     const [open, setOpenStatus] = useState(true);
-    // console.log(enrollment.geometry);
-    // console.log(convertValue(enrollment.geometry.coordinates, dataElementTypes.COORDINATE));
-    // o.type = featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
+
     return (
         <div data-test="enrollment-widget">
             <Widget
                 header={i18n.t('Enrollment')}
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
-                onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
+                onClose={useCallback(() => setOpenStatus(false), [
+                    setOpenStatus,
+                ])}
                 open={open}
             >
                 <div className={classes.enrollment}>
@@ -56,10 +68,14 @@ export const WidgetEnrollmentPlain = ({ classes, enrollment, program, ownerOrgUn
                     </div>
 
                     <div>
-                        <span className={classes.icon} data-test="enrollment-widget-icon-calendar">
+                        <span
+                            className={classes.icon}
+                            data-test="enrollment-widget-icon-calendar"
+                        >
                             <IconCalendar16 />
                         </span>
-                        {program.enrollmentDateLabel} {moment(enrollment.enrollmentDate).format('l')}
+                        {program.enrollmentDateLabel}{' '}
+                        {moment(enrollment.enrollmentDate).format('l')}
                     </div>
 
                     {program.displayIncidentDate && (
@@ -67,29 +83,51 @@ export const WidgetEnrollmentPlain = ({ classes, enrollment, program, ownerOrgUn
                             <span className={classes.icon}>
                                 <IconCalendar16 />
                             </span>
-                            {program.incidentDateLabel} {moment(enrollment.incidentDate).format('l')}
+                            {program.incidentDateLabel}{' '}
+                            {moment(enrollment.incidentDate).format('l')}
                         </div>
                     )}
 
                     <div>
-                        <span className={classes.icon} data-test="enrollment-widget-icon-orgunit">
+                        <span
+                            className={classes.icon}
+                            data-test="enrollment-widget-icon-orgunit"
+                        >
                             <IconDimensionOrgUnit16 />
                         </span>
                         {i18n.t('Enrolled at')} {ownerOrgUnit.displayName}
                     </div>
 
                     <div>
-                        <span className={classes.icon} data-test="enrollment-widget-icon-clock">
+                        <span
+                            className={classes.icon}
+                            data-test="enrollment-widget-icon-clock"
+                        >
                             <IconClock16 />
                         </span>
-                        {i18n.t('Last updated')} {moment(enrollment.lastUpdated).fromNow()}
+                        {i18n.t('Last updated')}
+                        {moment(enrollment.lastUpdated).fromNow()}
                     </div>
 
-                    {enrollment.geometry && <div> location TODO</div>}
+                    {enrollment.geometry && (
+                        <div>
+                            <>
+                                {convertValueClientToView(
+                                    convertValueServerToClient(
+                                        enrollment.geometry.coordinates,
+                                        dataElementTypes.COORDINATE
+                                    ),
+                                    dataElementTypes.COORDINATE
+                                )}
+                            </>
+                        </div>
+                    )}
                 </div>
             </Widget>
         </div>
     );
 };
 
-export const WidgetEnrollment: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetEnrollmentPlain);
+export const WidgetEnrollment: ComponentType<
+    $Diff<Props, CssClasses>
+> = withStyles(styles)(WidgetEnrollmentPlain);

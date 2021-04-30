@@ -6,24 +6,32 @@ type Props = {
     programId: string,
 };
 
-export const withProgram = (Component: ComponentType<any>) => (props: Props) => {
+export const withProgram = (Component: ComponentType<any>) => (
+    props: Props
+) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
             () => ({
                 programs: {
                     resource: `programs/${props.programId}`,
                     params: {
-                        fields: ['displayIncidentDate,incidentDateLabel,enrollmentDateLabel'],
+                        fields: [
+                            'displayIncidentDate,incidentDateLabel,enrollmentDateLabel',
+                        ],
                     },
                 },
             }),
-            [props.programId],
-        ),
+            [props.programId]
+        )
     );
 
     if (error) {
         throw error;
     }
 
-    return !loading && data && data.programs ? <Component {...props} program={data.programs} /> : <> </>;
+    return !loading && data && data.programs ? (
+        <Component {...props} program={data.programs} />
+    ) : (
+        <> </>
+    );
 };
