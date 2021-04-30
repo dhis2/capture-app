@@ -26,6 +26,9 @@ const styles = {
     enrollment: {
         padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
     },
+    row: {
+        margin: `${spacersNum.dp4}px 0`,
+    },
     followup: {
         margin: spacersNum.dp4,
     },
@@ -50,7 +53,7 @@ export const WidgetEnrollmentPlain = ({
                 open={open}
             >
                 <div className={classes.enrollment}>
-                    {enrollment.followup && (
+                    {!enrollment.followup && (
                         <div>
                             <Tag className={classes.followup} negative>
                                 {i18n.t('Follow-up')}
@@ -67,28 +70,28 @@ export const WidgetEnrollmentPlain = ({
                         {enrollment.orgUnitName}
                     </div>
 
-                    <div>
+                    <div className={classes.row}>
                         <span
                             className={classes.icon}
                             data-test="enrollment-widget-icon-calendar"
                         >
                             <IconCalendar16 />
                         </span>
-                        {program.enrollmentDateLabel}{' '}
+                        {program.enrollmentDateLabel}
                         {moment(enrollment.enrollmentDate).format('l')}
                     </div>
 
                     {program.displayIncidentDate && (
-                        <div>
+                        <div className={classes.row}>
                             <span className={classes.icon}>
                                 <IconCalendar16 />
                             </span>
-                            {program.incidentDateLabel}{' '}
+                            {program.incidentDateLabel}
                             {moment(enrollment.incidentDate).format('l')}
                         </div>
                     )}
 
-                    <div>
+                    <div className={classes.row}>
                         <span
                             className={classes.icon}
                             data-test="enrollment-widget-icon-orgunit"
@@ -98,7 +101,7 @@ export const WidgetEnrollmentPlain = ({
                         {i18n.t('Enrolled at')} {ownerOrgUnit.displayName}
                     </div>
 
-                    <div>
+                    <div className={classes.row}>
                         <span
                             className={classes.icon}
                             data-test="enrollment-widget-icon-clock"
@@ -110,7 +113,7 @@ export const WidgetEnrollmentPlain = ({
                     </div>
 
                     {enrollment.geometry && (
-                        <div>
+                        <div className={classes.row}>
                             <>
                                 {convertValueClientToView(
                                     convertValueServerToClient(
