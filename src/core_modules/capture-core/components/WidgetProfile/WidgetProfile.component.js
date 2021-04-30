@@ -5,7 +5,8 @@ import { FlatList } from 'capture-ui';
 import { withStyles } from '@material-ui/core';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { Widget } from '../Widget';
-import { convertValue } from '../../converters/clientToView';
+import { convertValue as convertClientToView } from '../../converters/clientToView';
+import { convertValue as convertServerToClient } from '../../converters/serverToClient';
 import type { Props } from './widgetProfile.types';
 
 
@@ -22,7 +23,8 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
             resource: 'programs',
             id: programId,
             params: {
-                fields: ['programTrackedEntityAttributes[id,displayInList,trackedEntityAttribute[id,displayName,valueType]]'],
+                fields:
+                ['programTrackedEntityAttributes[id,displayInList,trackedEntityAttribute[id,displayName,valueType]]'],
             },
         },
     }), [programId]);
@@ -62,14 +64,19 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
         displayEntities.forEach((entity) => {
             const displayAttribute = attributes.find(att => att.attribute === entity.id);
             if (displayAttribute) {
-                formattedAttributes.push({ ...entity, value: displayAttribute.value });
+                formattedAttributes.push(
+                    { ...entity,
+                        value: convertServerToClient(displayAttribute.value, displayAttribute.valueType),
+                    });
             }
         });
         return formattedAttributes
             .map(attribute => (
                 { id: attribute.id,
                     key: attribute.displayName,
-                    children: <>{convertValue(attribute.value, attribute.valueType)}</>,
+                    children: <>
+                        {convertClientToView(attribute.value, attribute.valueType)}
+                    </>,
                 }));
     };
 
