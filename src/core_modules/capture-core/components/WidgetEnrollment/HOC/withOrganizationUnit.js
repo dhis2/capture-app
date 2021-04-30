@@ -31,14 +31,14 @@ export const withOrganizationUnit = (Component: ComponentType<any>) => (
         data &&
         data.organisationUnits &&
         data.organisationUnits.displayName ? (
-        <Component
-            {...props}
-            ownerOrgUnit={{
-                ...props.ownerOrgUnit,
-                displayName: data.organisationUnits.displayName,
-            }}
-        />
-    ) : (
-        <> </>
-    );
+            <Component
+                {...props}
+                ownerOrgUnit={{
+                    ...props.ownerOrgUnit,
+                    displayName: data.organisationUnits.displayName,
+                }}
+            />
+        ) : (
+            <> </>
+        );
 };
