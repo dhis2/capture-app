@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const withOrganizationUnit = (Component: ComponentType<any>) => (
-    props: Props
+    props: Props,
 ) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
@@ -19,8 +19,8 @@ export const withOrganizationUnit = (Component: ComponentType<any>) => (
                     },
                 },
             }),
-            [props.ownerOrgUnit]
-        )
+            [props.ownerOrgUnit],
+        ),
     );
 
     if (error) {

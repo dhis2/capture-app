@@ -115,9 +115,9 @@ export const WidgetEnrollmentPlain = ({
                                 {convertValueClientToView(
                                     convertValueServerToClient(
                                         enrollment.geometry.coordinates,
-                                        dataElementTypes.COORDINATE
+                                        dataElementTypes.COORDINATE,
                                     ),
-                                    dataElementTypes.COORDINATE
+                                    dataElementTypes.COORDINATE,
                                 )}
                             </>
                         </div>
@@ -129,5 +129,5 @@ export const WidgetEnrollmentPlain = ({
 };
 
 export const WidgetEnrollment: ComponentType<
-    $Diff<Props, CssClasses>
+    $Diff<Props, CssClasses>,
 > = withStyles(styles)(WidgetEnrollmentPlain);

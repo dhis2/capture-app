@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const withProgram = (Component: ComponentType<any>) => (
-    props: Props
+    props: Props,
 ) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
@@ -21,8 +21,8 @@ export const withProgram = (Component: ComponentType<any>) => (
                     },
                 },
             }),
-            [props.programId]
-        )
+            [props.programId],
+        ),
     );
 
     if (error) {

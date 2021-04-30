@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const withTrackedEntityInstances = (Component: ComponentType<any>) => (
-    props: Props
+    props: Props,
 ) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
@@ -21,8 +21,8 @@ export const withTrackedEntityInstances = (Component: ComponentType<any>) => (
                     },
                 },
             }),
-            [props.teiId, props.programId]
-        )
+            [props.teiId, props.programId],
+        ),
     );
 
     if (error) {
@@ -35,13 +35,13 @@ export const withTrackedEntityInstances = (Component: ComponentType<any>) => (
         data.trackedEntityInstances.programOwners &&
         data.trackedEntityInstances.programOwners[0] &&
         data.trackedEntityInstances.programOwners[0].ownerOrgUnit ? (
-        <Component
-            {...props}
-            ownerOrgUnit={
-                data.trackedEntityInstances.programOwners[0].ownerOrgUnit
-            }
-        />
-    ) : (
-        <></>
-    );
+            <Component
+                {...props}
+                ownerOrgUnit={
+                    data.trackedEntityInstances.programOwners[0].ownerOrgUnit
+                }
+            />
+        ) : (
+            <></>
+        );
 };

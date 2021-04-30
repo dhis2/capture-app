@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const withEnrollment = (Component: ComponentType<any>) => (
-    props: Props
+    props: Props,
 ) => {
     const { error, loading, data } = useDataQuery(
         useMemo(
@@ -16,8 +16,8 @@ export const withEnrollment = (Component: ComponentType<any>) => (
                     resource: `enrollments/${props.enrollmentId}`,
                 },
             }),
-            [props.enrollmentId]
-        )
+            [props.enrollmentId],
+        ),
     );
 
     if (error) {
