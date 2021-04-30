@@ -53,7 +53,7 @@ export const WidgetEnrollmentPlain = ({
                 open={open}
             >
                 <div className={classes.enrollment}>
-                    {!enrollment.followup && (
+                    {enrollment.followup && (
                         <div>
                             <Tag className={classes.followup} negative>
                                 {i18n.t('Follow-up')}
@@ -77,7 +77,7 @@ export const WidgetEnrollmentPlain = ({
                         >
                             <IconCalendar16 />
                         </span>
-                        {program.enrollmentDateLabel}
+                        {program.enrollmentDateLabel}{' '}
                         {moment(enrollment.enrollmentDate).format('l')}
                     </div>
 
@@ -86,7 +86,7 @@ export const WidgetEnrollmentPlain = ({
                             <span className={classes.icon}>
                                 <IconCalendar16 />
                             </span>
-                            {program.incidentDateLabel}
+                            {program.incidentDateLabel}{' '}
                             {moment(enrollment.incidentDate).format('l')}
                         </div>
                     )}
@@ -108,7 +108,7 @@ export const WidgetEnrollmentPlain = ({
                         >
                             <IconClock16 />
                         </span>
-                        {i18n.t('Last updated')}
+                        {i18n.t('Last updated')}{' '}
                         {moment(enrollment.lastUpdated).fromNow()}
                     </div>
 

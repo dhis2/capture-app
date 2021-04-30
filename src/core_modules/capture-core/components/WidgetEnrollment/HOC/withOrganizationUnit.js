@@ -27,18 +27,18 @@ export const withOrganizationUnit = (Component: ComponentType<any>) => (
         throw error;
     }
 
-    return (
-        !loading,
-        data && data.organisationUnits && data.organisationUnits.displayName ? (
-            <Component
-                {...props}
-                ownerOrgUnit={{
-                    ...props.ownerOrgUnit,
-                    displayName: data.organisationUnits.displayName,
-                }}
-            />
-        ) : (
-            <> </>
-        )
+    return !loading &&
+        data &&
+        data.organisationUnits &&
+        data.organisationUnits.displayName ? (
+        <Component
+            {...props}
+            ownerOrgUnit={{
+                ...props.ownerOrgUnit,
+                displayName: data.organisationUnits.displayName,
+            }}
+        />
+    ) : (
+        <> </>
     );
 };
