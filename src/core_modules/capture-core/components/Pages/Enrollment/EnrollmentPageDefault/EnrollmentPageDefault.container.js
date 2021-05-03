@@ -1,15 +1,23 @@
 // @flow
 import React from 'react';
-import { useSelector } from 'react-redux';
+// $FlowFixMe
+import { useSelector, shallowEqual } from 'react-redux';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 
 export const EnrollmentPageDefault = () => {
-    const { enrollmentId, teiId, programId } = useSelector(({ router: { location: { query } } }) => ({
-        enrollmentId: query.enrollmentId,
-        teiId: query.teiId,
-        programId: query.programId,
-    }));
+    const { enrollmentId, programId, teiId } = useSelector(
+        ({
+            router: {
+                location: { query },
+            },
+        }) => ({
+            enrollmentId: query.enrollmentId,
+            teiId: query.teiId,
+            programId: query.programId,
+        }),
+        shallowEqual,
+    );
 
     const { program } = useProgramInfo(programId);
 
@@ -18,7 +26,6 @@ export const EnrollmentPageDefault = () => {
             program={program}
             enrollmentId={enrollmentId}
             teiId={teiId}
-            programId={programId}
         />
     );
 };

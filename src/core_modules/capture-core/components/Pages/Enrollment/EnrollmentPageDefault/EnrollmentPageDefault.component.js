@@ -29,23 +29,30 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-export const EnrollmentPageDefaultPlain = ({ program, teiId, enrollmentId, programId, classes }: PlainProps) => (
+export const EnrollmentPageDefaultPlain = ({
+    program,
+    teiId,
+    enrollmentId,
+    classes,
+}: PlainProps) => (
     <>
-        <div className={classes.title}>
-            Enrollment Dashboard
-        </div>
+        <div className={classes.title}>Enrollment Dashboard</div>
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
-                <WidgetStagesAndEvents
-                    stages={program.stages}
-                />
+                <WidgetStagesAndEvents stages={program.stages} />
             </div>
             <div className={classes.rightColumn}>
                 <WidgetProfile />
-                <WidgetEnrollment teiId={teiId} enrollmentId={enrollmentId} programId={programId} />
+                <WidgetEnrollment
+                    teiId={teiId}
+                    enrollmentId={enrollmentId}
+                    programId={program.id}
+                />
             </div>
         </div>
     </>
 );
 
-export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(getStyles)(EnrollmentPageDefaultPlain);
+export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(
+    getStyles,
+)(EnrollmentPageDefaultPlain);
