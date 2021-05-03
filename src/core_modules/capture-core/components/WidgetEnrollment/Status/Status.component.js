@@ -11,15 +11,20 @@ const styles = {
     },
 };
 
-export const translateStatus = (value: string) => {
-    switch (value) {
-    case 'ACTIVE': return i18n.t('Active');
-    case 'COMPLETED': return i18n.t('Complete');
-    case 'CANCELLED': return i18n.t('Cancelled');
-    default: return value;
-    }
-};
+const status = Object.freeze({
+    ACTIVE: i18n.t('Active'),
+    COMPLETED: i18n.t('Complete'),
+    CANCELLED: i18n.t('Cancelled'),
+});
 
+export const translateStatus = (status: string) => {
+    return (
+        Object.keys(status).find((key) => {
+            console.log(key, status)
+            return key === status;
+        }) || status
+    );
+};
 
 export const StatusPlain = ({ status = '', classes }: Props) => (
     <>
@@ -32,8 +37,8 @@ export const StatusPlain = ({ status = '', classes }: Props) => (
             {translateStatus(status)}
         </Tag>
     </>
-
 );
 
-export const Status: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(StatusPlain);
-
+export const Status: ComponentType<$Diff<Props, CssClasses>> = withStyles(
+    styles,
+)(StatusPlain);
