@@ -1,3 +1,10 @@
+## [1.18.2](https://github.com/dhis2/capture-app/compare/v1.18.1...v1.18.2) (2021-05-03)
+
+
+### Bug Fixes
+
+* upgrade version to v37 ([748bfcc](https://github.com/dhis2/capture-app/commit/748bfcc116b298e6fb1be5cbdb3a11c354d32485))
+
 ## [1.18.1](https://github.com/dhis2/capture-app/compare/v1.18.0...v1.18.1) (2021-05-03)
 
 
