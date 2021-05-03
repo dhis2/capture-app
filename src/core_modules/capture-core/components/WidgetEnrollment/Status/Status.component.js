@@ -10,31 +10,27 @@ const styles = {
         margin: spacersNum.dp4,
     },
 };
-
-const status = Object.freeze({
-    ACTIVE: i18n.t('Active'),
-    COMPLETED: i18n.t('Complete'),
-    CANCELLED: i18n.t('Cancelled'),
+const plainStatus = Object.freeze({
+    ACTIVE: 'ACTIVE',
+    COMPLETED: 'COMPLETED',
+    CANCELLED: 'CANCELLED',
 });
 
-export const translateStatus = (status: string) => {
-    return (
-        Object.keys(status).find((key) => {
-            console.log(key, status)
-            return key === status;
-        }) || status
-    );
-};
+const translatedStatus = Object.freeze({
+    [plainStatus.ACTIVE]: i18n.t('Active'),
+    [plainStatus.COMPLETED]: i18n.t('Complete'),
+    [plainStatus.CANCELLED]: i18n.t('Cancelled'),
+});
 
 export const StatusPlain = ({ status = '', classes }: Props) => (
     <>
         <Tag
             className={classes.status}
             dataTest="widget-enrollment-status"
-            neutral={status === 'ACTIVE'}
-            negative={status === 'CANCELLED'}
+            neutral={status === plainStatus.ACTIVE}
+            negative={status === plainStatus.CANCELLED}
         >
-            {translateStatus(status)}
+            {translatedStatus[status] || status}
         </Tag>
     </>
 );
