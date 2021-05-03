@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/dhis2/capture-app/compare/v1.18.0...v1.18.1) (2021-05-03)
+
+
+### Bug Fixes
+
+* [DHIS-8998] unspllit and escape translatable strings ([475b27d](https://github.com/dhis2/capture-app/commit/475b27d142c52672efe9a7b399fb92342bcc1837))
+
 # [1.18.0](https://github.com/dhis2/capture-app/compare/v1.17.0...v1.18.0) (2021-04-28)
 
 
