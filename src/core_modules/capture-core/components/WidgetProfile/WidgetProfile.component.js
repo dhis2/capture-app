@@ -5,6 +5,7 @@ import { FlatList } from 'capture-ui';
 import { withStyles } from '@material-ui/core';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { Widget } from '../Widget';
+import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
 import { convertValue as convertServerToClient } from '../../converters/serverToClient';
 import type { Props } from './widgetProfile.types';
@@ -18,7 +19,7 @@ const styles = {
 };
 const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
     const [open, setOpenStatus] = useState(true);
-    const getProgram = useMemo(() => ({
+    const getProgramQuery = useMemo(() => ({
         indicators: {
             resource: 'programs',
             id: programId,
@@ -29,7 +30,7 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
         },
     }), [programId]);
 
-    const getAttributes = useMemo(() => ({
+    const getTrackedEntityInstances = useMemo(() => ({
         indicators: {
             resource: 'trackedEntityInstances',
             id: teiId,
@@ -40,13 +41,13 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
     }), [teiId, programId]);
 
 
-    const { loading: programLoading, data: programQuery, error: programError } = useDataQuery(getProgram);
-    const { loading: attributesLoading, data: attributesQuery, error: attributesError } = useDataQuery(getAttributes);
-    const loading = programLoading || attributesLoading;
-    const error = programError || attributesError;
+    const { loading: programLoading, data: programQueryData, error: programError } = useDataQuery(getProgramQuery);
+    const { loading: trackedEntityInstancesLoading, data: trackedEntityInstancesQueryData, error: trackedEntityInstancesError } = useDataQuery(getTrackedEntityInstances);
+    const loading = programLoading || trackedEntityInstancesLoading;
+    const error = programError || trackedEntityInstancesError;
 
     if (loading) {
-        return <></>;
+        return <LoadingMaskElementCenter />;
     }
 
     if (error) {
@@ -54,8 +55,8 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
     }
 
     const mergeAttributes = () => {
-        const { programTrackedEntityAttributes } = programQuery.indicators;
-        const { attributes } = attributesQuery.indicators;
+        const { programTrackedEntityAttributes } = programQueryData.indicators;
+        const { attributes } = trackedEntityInstancesQueryData.indicators;
         const displayEntities = programTrackedEntityAttributes
             .filter(item => item.displayInList)
             .reduce((acc, curr) => { acc = [...acc, curr.trackedEntityAttribute]; return acc; }, []);
@@ -63,18 +64,19 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
         const formattedAttributes = [];
         displayEntities.forEach((entity) => {
             const displayAttribute = attributes.find(att => att.attribute === entity.id);
-            if (displayAttribute) {
-                formattedAttributes.push(
-                    { ...entity,
-                        value: convertServerToClient(displayAttribute.value, displayAttribute.valueType),
-                    });
-            }
+
+            formattedAttributes.push(
+                { ...entity,
+                    value: convertServerToClient(displayAttribute.value, displayAttribute.valueType),
+                });
         });
+
         return formattedAttributes
             .map(attribute => (
-                { id: attribute.id,
+                {
+                    reactKey: attribute.id,
                     key: attribute.displayName,
-                    children: <>
+                    value: <>
                         {convertClientToView(attribute.value, attribute.valueType)}
                     </>,
                 }));

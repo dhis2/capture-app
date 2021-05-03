@@ -25,11 +25,11 @@ const styles = {
 };
 
 const FlatListPlain = ({ list, classes, dataTest }: Props) => {
-    const lastItem = list[list.length - 1];
+    const lastItemKey = list[list.length - 1]?.reactKey;
     const renderItem = item => (
         <>
             <div className={classes.itemKey}>{item.key}</div>
-            <div>{item.children}</div>
+            <div>{item.value}</div>
         </>
     );
 
@@ -38,7 +38,13 @@ const FlatListPlain = ({ list, classes, dataTest }: Props) => {
             data-test={dataTest}
             className={classes.flatListWrapper}
         >
-            {list.map(item => (<div key={item.id} className={cx(classes.itemRow, { isLastItem: item.id === lastItem.id })}>{renderItem(item)}</div>))}
+            {list.map(item => (
+                <div
+                    key={item.reactKey}
+                    className={cx(classes.itemRow, { isLastItem: item.reactKey === lastItemKey })}
+                >
+                    {renderItem(item)}
+                </div>))}
         </div>
     );
 };
