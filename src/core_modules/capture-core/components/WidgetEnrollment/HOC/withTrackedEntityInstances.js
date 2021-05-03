@@ -38,13 +38,13 @@ export const withTrackedEntityInstances = (Component: ComponentType<any>) => (
 
     return !loading &&
         data?.trackedEntityInstances?.programOwners[0]?.ownerOrgUnit ? (
-        <Component
-            {...props}
+            <Component
+                {...props}
                 ownerOrgUnit={
                     data.trackedEntityInstances.programOwners[0].ownerOrgUnit
                 }
-        />
-    ) : (
-        <LoadingMaskElementCenter />
-    );
+            />
+        ) : (
+            <LoadingMaskElementCenter />
+        );
 };
