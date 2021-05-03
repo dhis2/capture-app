@@ -14,5 +14,6 @@ export type ConstructorInput = {|
 export type SectionSpecs = {|
     id: string,
     displayName: string,
+    displayDescription: string,
     dataElements: ?Array<CachedSectionDataElements>,
 |};
