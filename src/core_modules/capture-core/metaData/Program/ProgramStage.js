@@ -10,7 +10,6 @@ import type { RelationshipType } from '../RelationshipType';
 export default class ProgramStage {
     _id: string;
     _name: string;
-    _displayDescription: string;
     _stageForm: RenderFoundation;
     _relationshipTypes: Array<RelationshipType>;
     _enableUserAssignment: boolean;

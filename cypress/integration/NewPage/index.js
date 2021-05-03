@@ -150,12 +150,9 @@ And('you select the Malaria case registration program', () => {
         .click();
 });
 
-Then('you see the description text for each section', () => {
+Then('you see a description text for one section', () => {
     cy.get('[data-test="registration-page-content"]')
-        .contains('A text containing some clarifying info about the Patient details sections.')
-        .should('exist');
-    cy.get('[data-test="registration-page-content"]')
-        .contains('This is sample explanatory text for this section.')
+        .contains('General characteristics of the patient')
         .should('exist');
 });
 
