@@ -30,7 +30,7 @@ export default class DataElement {
     _optionSet: ?OptionSet;
     _displayInForms: boolean;
     _displayInReports: boolean;
-    _icon: ?Icon;
+    _icon: Icon | void;
     _unique: ?Unique;
 
     constructor(initFn: ?(_this: DataElement) => void) {
@@ -121,10 +121,10 @@ export default class DataElement {
         return this._optionSet;
     }
 
-    set icon(icon: ?Icon) {
+    set icon(icon: Icon | void) {
         this._icon = icon;
     }
-    get icon(): ?Icon {
+    get icon(): Icon | void {
         return this._icon;
     }
 

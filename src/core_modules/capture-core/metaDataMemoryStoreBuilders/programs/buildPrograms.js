@@ -16,6 +16,7 @@ import type {
     CachedCategory,
 } from '../../storageControllers/cache.types';
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
+import type { BuildProgramsInput } from './buildPrograms.types';
 
 
 function getPrograms(storageController: StorageController, storeName: string): Promise<Array<Object>> {
@@ -217,13 +218,13 @@ function postProcessPrograms(
     }
 }
 
-export default async function buildPrograms(
-    locale: string,
-    cachedOptionSets: Map<string, CachedOptionSet>,
-    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-    cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
-    trackedEntityTypeCollection: Map<string, TrackedEntityType>,
-) {
+export default async function buildPrograms({
+    cachedOptionSets,
+    cachedTrackedEntityAttributes,
+    cachedTrackedEntityTypes,
+    trackedEntityTypeCollection,
+    locale,
+}: BuildProgramsInput) {
     const [
         cachedPrograms,
         cachedProgramRulesVariables,

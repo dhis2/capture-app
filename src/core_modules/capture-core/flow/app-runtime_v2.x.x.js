@@ -27,9 +27,14 @@ declare module '@dhis2/app-runtime' {
         [resourceId: string]: ResourceQuery,
     |};
 
-    declare type QueryResultArray = Array<QueryResult>;
-    declare type QueryResultObject = {| [key: string]: QueryResult |};
-    declare type QueryResult = boolean | number | string | null | QueryResultArray | QueryResultObject;
+    declare type QueryResult = any;
+
+    declare type RefetchOptions = {|
+        variables?: QueryVariables
+    |};
+    declare type RefetchFunction<ReturnType> = (options?: RefetchOptions) => Promise<ReturnType>;
+    declare type QueryRefetchFunction = RefetchFunction<QueryResult>;
+
     declare type FetchErrorTypeName = 'network' | 'unknown' | 'access' | 'aborted';
     declare type FetchErrorDetails = { message?: string };
 
@@ -118,4 +123,15 @@ declare module '@dhis2/app-runtime' {
     |};
     
     declare export type ApiError = ApiNetworkError | ApiAccessError | ApiUnknownError;
+    
+    declare type QueryRenderInput = {|
+        called: boolean,
+        loading: boolean,
+        error?: FetchError,
+        data: QueryResult,
+        engine: DataEngine,
+        refetch: QueryRefetchFunction,
+    |};
+
+    declare export function useDataQuery(resourceQueries: ResourceQueries, queryOptions?: QueryOptions): QueryRenderInput;
 }
