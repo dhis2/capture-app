@@ -4,6 +4,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
+import { LoadingMaskElementCenter } from '../../LoadingMasks';
 
 type Props = {
     programId: string,
@@ -37,13 +38,13 @@ export const withTrackedEntityInstances = (Component: ComponentType<any>) => (
 
     return !loading &&
         data?.trackedEntityInstances?.programOwners[0]?.ownerOrgUnit ? (
-            <Component
-                {...props}
+        <Component
+            {...props}
                 ownerOrgUnit={
                     data.trackedEntityInstances.programOwners[0].ownerOrgUnit
                 }
-            />
-        ) : (
-            <></>
-        );
+        />
+    ) : (
+        <LoadingMaskElementCenter />
+    );
 };
