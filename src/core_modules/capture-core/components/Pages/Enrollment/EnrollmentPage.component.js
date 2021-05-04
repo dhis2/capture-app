@@ -9,6 +9,7 @@ import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import LoadingMaskForPage from '../../LoadingMasks/LoadingMaskForPage.component';
 import { withErrorMessageHandler } from '../../../HOC';
 import { MissingMessage } from './MissingMessage.component';
+import { EnrollmentPageDefault } from './EnrollmentPageDefault';
 
 const getStyles = ({ typography }) => ({
     container: {
@@ -25,7 +26,7 @@ const getStyles = ({ typography }) => ({
 const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
     <LockedSelector pageToPush="enrollment" />
 
-    <div data-test="dhis2-capture-enrollment-page-content" className={classes.container} >
+    <div data-test="enrollment-page-content" className={classes.container} >
 
         {
             enrollmentPageStatus === enrollmentPageStatuses.MISSING_SELECTIONS &&
@@ -33,8 +34,9 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
         }
 
         {
-            enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
-                <div className={classes.title}>Enrollment Dashboard</div>
+            enrollmentPageStatus === enrollmentPageStatuses.DEFAULT && (
+                <EnrollmentPageDefault />
+            )
         }
 
         {

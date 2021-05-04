@@ -236,8 +236,8 @@ const buildGeometrySettingsFn = () => ({
 
         return createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
-            label: 'Coordinate',
-            dialogLabel: 'Coordinate',
+            label: i18n.t('Coordinate'),
+            dialogLabel: i18n.t('Coordinate'),
             required: false,
             orientation: getOrientation(props.formHorizontal),
             shrinkDisabled: props.formHorizontal,
@@ -275,7 +275,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: 'Complete event',
+            label: i18n.t('Complete event'),
             id: 'complete',
         }),
         getPropName: () => 'complete',
@@ -566,7 +566,7 @@ class NewEventDataEntry extends Component<Props> {
         } = this.props;
         return (
             <div>
-                <div data-test="dhis2-capture-data-entry-container">
+                <div data-test="data-entry-container">
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <WrappedDataEntry
                         id={'singleEvent'}

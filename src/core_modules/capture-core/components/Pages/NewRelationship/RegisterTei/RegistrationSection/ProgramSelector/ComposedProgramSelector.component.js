@@ -14,6 +14,7 @@ import {
     withLabel,
     withFilterProps,
 } from '../../../../../FormFields/New';
+import { NonBundledDhis2Icon } from '../../../../../NonBundledDhis2Icon';
 
 const getStyles = (theme: Theme) => ({
     iconContainer: {
@@ -69,22 +70,23 @@ class ProgramSelector extends React.Component<Props> {
                 iconLeft: this.getProgramIcon(program),
             }));
 
-    getProgramIcon(program: Program) {
-        const classes = this.props.classes;
-        return program.icon.data
-            ? (
-                <div
-                    className={classes.iconContainer}
-                >
-                    <img
-                        style={{ backgroundColor: program.icon.color }}
-                        className={classes.icon}
-                        src={program.icon.data}
-                        alt={program.name}
-                    />
-                </div>
-            )
-            : null;
+    getProgramIcon({ icon: { color, name } = {}, name: programName }: Program) {
+        const { classes } = this.props;
+
+        return (
+            <div
+                className={classes.iconContainer}
+            >
+                <NonBundledDhis2Icon
+                    name={name || 'clinical_fe_outline'}
+                    color={color || '#e0e0e0'}
+                    alternativeText={programName}
+                    width={22}
+                    height={22}
+                    cornerRadius={2}
+                />
+            </div>
+        );
     }
 
     renderIsFilteredText() {

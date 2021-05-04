@@ -4,7 +4,7 @@
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import type{ CategoryCombination } from '../CategoryCombinations';
-import type Icon from '../Icon/Icon';
+import type { Icon } from '../Icon';
 import type { Access } from '../Access';
 import type ProgramStage from './ProgramStage';
 
@@ -23,13 +23,14 @@ export default class Program {
     _categoryCombination: ?CategoryCombination;
     _programRules: Array<ProgramRule>;
     _programRuleVariables: Array<ProgramRuleVariable>;
-    _icon: Icon;
+    _icon: Icon | void;
 
     constructor(initFn: ?(_this: Program) => void) {
         this.programRules = [];
         this.programRuleVariables = [];
         this.organisationUnits = {};
         this._stages = new Map();
+        this._organisationUnits = {};
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -69,8 +70,8 @@ export default class Program {
         return this._shortName;
     }
 
-    set organisationUnits(organisationUnits: Object) {
-        this._organisationUnits = organisationUnits;
+    set organisationUnits(organisationUnits: ?Object) {
+        this._organisationUnits = organisationUnits || {};
     }
     get organisationUnits(): Object {
         return this._organisationUnits;
@@ -97,10 +98,10 @@ export default class Program {
         return this._programRuleVariables;
     }
 
-    set icon(icon: Icon) {
+    set icon(icon?: Icon) {
         this._icon = icon;
     }
-    get icon(): Icon {
+    get icon(): Icon | void {
         return this._icon;
     }
 

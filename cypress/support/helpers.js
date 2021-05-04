@@ -13,15 +13,13 @@ Cypress.Commands.add(
             .should('contain', className),
 );
 
-Cypress.Commands.add('loginThroughForm', () => {
-    const username = Cypress.env('DHIS2_USERNAME');
-    const password = Cypress.env('DHIS2_PASSWORD');
+Cypress.Commands.add('loginThroughForm', (username = 'DHIS2_USERNAME', password = 'DHIS2_PASSWORD') => {
     cy.visit('/').then(() => {
-        cy.get('#j_username').type(username);
-        cy.get('#j_password').type(password);
+        cy.get('#j_username').type(Cypress.env(username));
+        cy.get('#j_password').type(Cypress.env(password));
         cy.get('form').submit();
     });
 
-    cy.get('[data-test="dhis2-capture-locked-selector"]', { timeout: 60000 })
+    cy.get('[data-test="locked-selector"]', { timeout: 60000 })
         .should('exist');
 });

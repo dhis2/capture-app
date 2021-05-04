@@ -61,7 +61,7 @@ class RelationshipTypeSelector extends React.Component<Props> {
         return relationshipTypes ? relationshipTypes.map(rt => (
             <div
                 key={rt.id}
-                data-test={`dhis2-capture-relationship-type-selector-button-${rt.id}`}
+                data-test={`relationship-type-selector-button-${rt.id}`}
                 className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)}
                 role="button"
                 tabIndex="0"

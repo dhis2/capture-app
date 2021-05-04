@@ -32,9 +32,9 @@ When('you sign in', () => {
 });
 
 Then('you should see the app main selections', () => {
-    cy.get('[data-test="dhis2-capture-org-unit-selector-container"]');
+    cy.get('[data-test="org-unit-selector-container"]');
 
-    cy.get('[data-test="dhis2-capture-program-selector-container"]');
+    cy.get('[data-test="program-selector-container"]');
 });
 
 Then('you should see the header bar', () => {

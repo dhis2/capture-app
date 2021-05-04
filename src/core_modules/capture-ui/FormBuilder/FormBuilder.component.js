@@ -196,6 +196,7 @@ class FormBuilder extends React.Component<Props> {
                         id,
                         fieldValidatingPromiseContainer.validatingCompleteUid,
                         message,
+                        null,
                     );
 
                     return fieldValidatingPromiseContainer.cancelableValidatingPromise.promise;
@@ -564,7 +565,7 @@ class FormBuilder extends React.Component<Props> {
             <div
                 key={field.id}
                 className={defaultClasses.fieldOuterContainer}
-                data-test={`dhis2-capture-form-field-${field.id}`}
+                data-test={`form-field-${field.id}`}
             >
                 <div
                     {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}

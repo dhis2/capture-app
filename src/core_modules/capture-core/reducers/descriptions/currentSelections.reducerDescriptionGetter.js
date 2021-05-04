@@ -175,7 +175,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [lockedSelectorActionTypes.FROM_URL_UPDATE]: (state, action) => {
         const { nextProps: selections } = action.payload;
         return {
-            ...state,
             ...selections,
             categories: undefined,
             categoriesMeta: undefined,
@@ -209,6 +208,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [searchPageActionTypes.FALLBACK_SEARCH_COMPLETED]:
       (state, { payload: { trackedEntityTypeId } }) => ({
           ...state,
+          complete: false,
           programId: undefined,
           categories: undefined,
           categoriesMeta: undefined,
@@ -220,6 +220,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         programId: undefined,
         categories: undefined,
         categoriesMeta: undefined,
+        complete: false,
         trackedEntityTypeId,
     }),
 }, 'currentSelections', {

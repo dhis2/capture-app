@@ -1,6 +1,6 @@
 # 
 # Translators:
-# phil_dhis2, 2020
+# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # 晓东 林 <13981924470@126.com>, 2021
 # easylin <lin_xd@126.com>, 2021
@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
@@ -147,7 +147,7 @@ msgid "Metadata error. see log for details"
 msgstr "元数据错误"
 
 msgid "Assigned user"
-msgstr "分配的用户"
+msgstr "指派的用户"
 
 msgid "Search for user"
 msgstr "搜索用户 "
@@ -184,13 +184,13 @@ msgid ""
 msgstr "{{entityName}} 的 {{relationshipTypeName}}  关系类型已经存在"
 
 msgid "Active"
-msgstr "活动的"
+msgstr "活跃的"
 
 msgid "Completed"
-msgstr "已完成"
+msgstr "完成"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr "保存事件前请添加或取消被或许"
+msgstr "保存事件前请添加或取消备注"
 
 msgid "Save and add another"
 msgstr "保存并另外添加"
@@ -199,7 +199,7 @@ msgid "Save and exit"
 msgstr "保存后退出"
 
 msgid "Finish"
-msgstr "结束"
+msgstr "保存"
 
 msgid "No write access"
 msgstr "无写权限"
@@ -352,7 +352,7 @@ msgid "No events to display"
 msgstr "无事件可显示"
 
 msgid "Data for offline list not present"
-msgstr "离线列表的数据不存在"
+msgstr "离线列表数据不在"
 
 msgid "Close"
 msgstr "关闭"
@@ -367,7 +367,7 @@ msgid "Anyone"
 msgstr "任何人"
 
 msgid "None"
-msgstr "无"
+msgstr "没有"
 
 msgid "Select user"
 msgstr "选择用户"
@@ -382,7 +382,7 @@ msgid "To"
 msgstr "至"
 
 msgid "This week"
-msgstr "本周"
+msgstr "本年"
 
 msgid "This month"
 msgstr "本月"
@@ -400,7 +400,7 @@ msgid "Last 3 months"
 msgstr "最近3个月"
 
 msgid "Custom range"
-msgstr "自订范围"
+msgstr "定制范围"
 
 msgid "Max"
 msgstr "最大"
@@ -510,9 +510,6 @@ msgstr "选择的项目对选择的机构无效"
 msgid "New"
 msgstr "新建"
 
-msgid "Find"
-msgstr "查询"
-
 msgid "Clear selections"
 msgstr "清除选择"
 
@@ -526,7 +523,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr "你确信？所以未保存的数据将丢失"
 
 msgid "Accept"
-msgstr "接受<br>"
+msgstr "接受"
 
 msgid "Registering Organisation Unit"
 msgstr "在注册的机构"
@@ -641,7 +638,7 @@ msgid "Download as JSON"
 msgstr "下载为JSON"
 
 msgid "Download as XML"
-msgstr "下载为xml"
+msgstr "下载为XML"
 
 msgid "Download as CSV"
 msgstr "获取CSV格式报表"
@@ -722,7 +719,7 @@ msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
 
 msgid "Save as new"
-msgstr "另存为新"
+msgstr "另存为新的"
 
 msgid "View dashboard"
 msgstr "查看仪表盘"
@@ -747,7 +744,7 @@ msgid "Organisation Unit"
 msgstr "组织机构"
 
 msgid "Registration"
-msgstr "注册"
+msgstr "登记"
 
 msgid "Search results"
 msgstr "搜索结果"
@@ -768,7 +765,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr "创建新的{{trackedEntityType}}"
 
 msgid "Register"
-msgstr "注册"
+msgstr "登记"
 
 msgid ""
 "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
@@ -777,8 +774,8 @@ msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
 msgid "Search {{name}}"
 msgstr "搜索{{name}}"
 
-msgid "Find by {{name}}"
-msgstr "按{{name}}查找"
+msgid "Search by {{name}}"
+msgstr ""
 
 msgid "Search by attributes"
 msgstr "按属性搜索"
@@ -885,7 +882,7 @@ msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访APP"
 
 msgid "An error has occured. See log for details"
-msgstr "发生错误。查看日志以获取详细信息"
+msgstr "发生一个错误,看日志"
 
 msgid "Program not found"
 msgstr "没有发现项目"
@@ -894,7 +891,7 @@ msgid "Program is not a tracker program"
 msgstr "项目不是跟踪随访项目"
 
 msgid "Profile"
-msgstr "简历"
+msgstr "基本信息"
 
 msgid "Error saving event"
 msgstr "保存时间错误"

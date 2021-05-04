@@ -1,3 +1,70 @@
+## [1.18.2](https://github.com/dhis2/capture-app/compare/v1.18.1...v1.18.2) (2021-05-03)
+
+
+### Bug Fixes
+
+* upgrade version to v37 ([748bfcc](https://github.com/dhis2/capture-app/commit/748bfcc116b298e6fb1be5cbdb3a11c354d32485))
+
+## [1.18.1](https://github.com/dhis2/capture-app/compare/v1.18.0...v1.18.1) (2021-05-03)
+
+
+### Bug Fixes
+
+* [DHIS-8998] unspllit and escape translatable strings ([475b27d](https://github.com/dhis2/capture-app/commit/475b27d142c52672efe9a7b399fb92342bcc1837))
+
+# [1.18.0](https://github.com/dhis2/capture-app/compare/v1.17.0...v1.18.0) (2021-04-28)
+
+
+### Features
+
+* [DHIS2-10947] Profile widget ([#1644](https://github.com/dhis2/capture-app/issues/1644)) ([5c2babc](https://github.com/dhis2/capture-app/commit/5c2babc594e6b5874fb09daa0e1cc54b9a8b2f31))
+
+# [1.17.0](https://github.com/dhis2/capture-app/compare/v1.16.0...v1.17.0) (2021-04-23)
+
+
+### Features
+
+* [DHIS2-10941] Enrollment widget ([67b34d0](https://github.com/dhis2/capture-app/commit/67b34d084133f4146c03df17e8b31cb5931abf60))
+
+# [1.16.0](https://github.com/dhis2/capture-app/compare/v1.15.1...v1.16.0) (2021-04-23)
+
+
+### Bug Fixes
+
+* **translations:** [DHIS2-8998] translate strings ([b92350c](https://github.com/dhis2/capture-app/commit/b92350c697865e1b3161656d52d4051291bab053))
+* correct app name and title specified in d2.config.js ([#1599](https://github.com/dhis2/capture-app/issues/1599)) ([f14cf01](https://github.com/dhis2/capture-app/commit/f14cf01324eb7129fd52f25550c64bd15bbc334c))
+* DHIS2-10711 duplicated calls on search page ([#1572](https://github.com/dhis2/capture-app/issues/1572)) ([1360124](https://github.com/dhis2/capture-app/commit/1360124e90457a07e7dbe3b6e2033bbe07092f69))
+* DHIS2-10712 duplicate checking on save only ([3665b76](https://github.com/dhis2/capture-app/commit/3665b761a22df8fbeabcc4a713ebf9451562ef70))
+* DHIS2-10713 when optionSet use EQ to filter ([#1624](https://github.com/dhis2/capture-app/issues/1624)) ([60b3764](https://github.com/dhis2/capture-app/commit/60b3764f706ae717e7e8ba502519633fe5d9a7fb)), closes [#1618](https://github.com/dhis2/capture-app/issues/1618)
+* DHIS2-10715 working lists default sorting ([e8280c3](https://github.com/dhis2/capture-app/commit/e8280c3d8d0236b84be985da8001d81788a9d5ca))
+* DHIS2-10716 use code if option not found ([b80effd](https://github.com/dhis2/capture-app/commit/b80effdabd3de3a77ac2db471a456a16200ae376))
+* DHIS2-10723 ([#1622](https://github.com/dhis2/capture-app/issues/1622)) ([#1631](https://github.com/dhis2/capture-app/issues/1631)) ([fce7307](https://github.com/dhis2/capture-app/commit/fce730768ddb7829bd055f861e2138743eb91abb))
+* DHIS2-10723 port on 2.36.0 ([#1630](https://github.com/dhis2/capture-app/issues/1630)) ([#1633](https://github.com/dhis2/capture-app/issues/1633)) ([b47524f](https://github.com/dhis2/capture-app/commit/b47524f4cce4722931171ef6a230b26a50b79ba6)), closes [#1622](https://github.com/dhis2/capture-app/issues/1622)
+* **translations:** [DHIS2-8998] missing translation ([#1617](https://github.com/dhis2/capture-app/issues/1617)) ([70b103e](https://github.com/dhis2/capture-app/commit/70b103e619d12360fc0f6dca371bb129f31abdb2))
+* DHIS2-10738 pressing the back button after a fallback crashes app ([#1581](https://github.com/dhis2/capture-app/issues/1581)) ([6a75e9c](https://github.com/dhis2/capture-app/commit/6a75e9ca0c24f79d8c88e4d3eaf2814114c0ebb0))
+* DHIS2-10765 use form names ([8578891](https://github.com/dhis2/capture-app/commit/8578891f414fcc8a5acf9dadd149e3aff3bd4aa1))
+* DHIS2-10765 use form names ([ab74dc3](https://github.com/dhis2/capture-app/commit/ab74dc304d402865a56d5a2dafddd0e7206a9363))
+* DHIS2-10830 capture app will crash when program is missing some orgUnits ([#1600](https://github.com/dhis2/capture-app/issues/1600)) ([dc1a351](https://github.com/dhis2/capture-app/commit/dc1a351e13e9dc05b504f52e3ec412b479960a59)), closes [#1483](https://github.com/dhis2/capture-app/issues/1483) [#1532](https://github.com/dhis2/capture-app/issues/1532) [#1410](https://github.com/dhis2/capture-app/issues/1410) [#1536](https://github.com/dhis2/capture-app/issues/1536) [#1536](https://github.com/dhis2/capture-app/issues/1536) [#1588](https://github.com/dhis2/capture-app/issues/1588) [#1581](https://github.com/dhis2/capture-app/issues/1581) [#1580](https://github.com/dhis2/capture-app/issues/1580) [#1589](https://github.com/dhis2/capture-app/issues/1589)
+* DHIS2-9931 wording from Find to Search ([#1540](https://github.com/dhis2/capture-app/issues/1540)) ([0893bad](https://github.com/dhis2/capture-app/commit/0893bad8417c947785f319051f52f1059f61f8e0))
+* TECH-542 Switch to new endpoint for org units ([dba014e](https://github.com/dhis2/capture-app/commit/dba014e5a04a4b493903b0d7e3eb28fef5cba68c))
+* the bug ([#1536](https://github.com/dhis2/capture-app/issues/1536)) ([043f4fd](https://github.com/dhis2/capture-app/commit/043f4fdf02b2da1ad8137811c979e845cf8dcbf8))
+* the bug ([#1580](https://github.com/dhis2/capture-app/issues/1580)) ([c491a00](https://github.com/dhis2/capture-app/commit/c491a00a8f407c3f6bff11c9d83283e0ce229099))
+* **translations:** sync translations from transifex (v36) ([c017642](https://github.com/dhis2/capture-app/commit/c017642821f8426902e9e31839d1a983c4199d12))
+
+
+### Features
+
+* adds new icon for capture app ([#1534](https://github.com/dhis2/capture-app/issues/1534)) ([c700edd](https://github.com/dhis2/capture-app/commit/c700eddc4dd7cbf6c7f3628154d4c279a684f781))
+* adds smaller icon ([#1544](https://github.com/dhis2/capture-app/issues/1544)) ([181a94c](https://github.com/dhis2/capture-app/commit/181a94c65fcdd8f5aa70d5b4fb3fe78a35807ac1))
+* DHIS2-10218 stages and events widget - user can see a list of the different stages ([524dd92](https://github.com/dhis2/capture-app/commit/524dd92b0aaa0a66c9327e94fdb2d5f91d006156))
+
+## [1.15.1](https://github.com/dhis2/capture-app/compare/v1.15.0...v1.15.1) (2021-03-04)
+
+
+### Bug Fixes
+
+* the bug ([#1536](https://github.com/dhis2/capture-app/issues/1536)) ([fd2616f](https://github.com/dhis2/capture-app/commit/fd2616f92b768249601be6e020527e9f89cd19ef))
+
 # [1.15.0](https://github.com/dhis2/capture-app/compare/v1.14.0...v1.15.0) (2021-02-25)
 
 

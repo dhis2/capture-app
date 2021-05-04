@@ -108,7 +108,7 @@ class Index extends React.Component<Props, State> {
                                     className={classes.iconContainer}
                                 >
                                     <IconButton
-                                        data-test="dhis2-capture-event-content-menu"
+                                        data-test="event-content-menu"
                                         onClick={this.toggleMenu}
                                         className={classes.icon}
                                     >

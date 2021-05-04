@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import IconButton from '@material-ui/core/IconButton';
+import i18n from '@dhis2/d2-i18n';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
 const styles = theme => ({
@@ -85,9 +86,9 @@ class SectionHeaderSimple extends Component<Props> {
                             if (onChangeCollapseState) {
                                 return (
                                     <IconButton
-                                        data-test="dhis2-capture-collapsible-button"
+                                        data-test="collapsible-button"
                                         disabled={!this.props.isCollapseButtonEnabled}
-                                        title={this.props.isCollapsed ? 'Åpne' : 'Lukk'}
+                                        title={this.props.isCollapsed ? i18n.t('Open') : i18n.t('Close')}
                                         onClick={this.handleChangeCollapse}
                                     >
                                         {this.props.isCollapsed ? <KeyboardArrowDown /> : <KeyboardArrowUp />}

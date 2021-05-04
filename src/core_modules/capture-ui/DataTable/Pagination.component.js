@@ -42,7 +42,7 @@ class Pagination extends React.Component<Props> {
         const rowsCountElement = Pagination.getRowsCountElement(rowsCountSelectorLabel, rowsCountSelector);
         return (
             <div
-                data-test="dhis2-capture-pagination"
+                data-test="pagination"
                 className={defaultClasses.pagination}
             >
                 {rowsCountElement}

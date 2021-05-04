@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-02-23T13:09:00.376Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -519,9 +519,6 @@ msgstr "Vybraný program je pro vybranou registrační jednotku neplatný"
 msgid "New"
 msgstr "Nový"
 
-msgid "Find"
-msgstr "Hledat"
-
 msgid "Clear selections"
 msgstr "Vymazat výběry"
 
@@ -793,8 +790,8 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr "Hledat {{name}}"
 
-msgid "Find by {{name}}"
-msgstr "Najít podle {{name}}"
+msgid "Search by {{name}}"
+msgstr ""
 
 msgid "Search by attributes"
 msgstr "Hledání podle atributů"

@@ -1,4 +1,4 @@
-Feature: Use the LockedSelector to navigate
+Feature: User uses the LockedSelector to navigate
 
   # Main page
   Scenario: Main page > Notifying that you need to select org unit and program to get started
@@ -61,6 +61,11 @@ Feature: Use the LockedSelector to navigate
     Then you are navigated to the search page with the same org unit and program Child Programme
     And there should be visible a title with Child Program
     And there should be Child Programme domain forms visible to search with
+
+  Scenario: Main page > Having a program preselected, select an org unit which does not contain the program
+    Given you land on a main event page with preselected program
+    When you select org unit that is incompatible with the already selected program
+    Then you can see message on the locked selector
 
   # New Event page
   Scenario: New event page > Landing on the page
@@ -133,8 +138,8 @@ Feature: Use the LockedSelector to navigate
   # Enrollment page
   Scenario Outline: Enrollment page > Landing on the page with url
     Given you land on the enrollment page by having typed the <url>
-    Then you can see on the locked selector the following <state>
-    And you see the following <message>
+    Then you see the following <message>
+    And you can see on the locked selector the following <state>
 
     Examples:
         | url | state | message |

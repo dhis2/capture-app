@@ -1,3 +1,5 @@
+import '../sharedSteps';
+
 beforeEach(() => {
     cy.loginThroughForm();
 });
@@ -7,22 +9,8 @@ And('you are on the default registration page', () => {
 });
 
 And('there should be informative message explaining you need to select an organisation unit', () => {
-    cy.get('[data-test="dhis2-capture-informative-paper"]')
+    cy.get('[data-test="informative-paper"]')
         .contains('Choose a registering unit to start reporting')
-        .should('exist');
-});
-
-And('you select org unit', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .type('Ngelehun C');
-    cy.contains('Ngelehun CHC')
-        .click();
-});
-
-And('you see the dropdown menu for selecting tracked entity type', () => {
-    cy.get('[data-test="dhis2-uicore-select"')
-        .should('exist');
-    cy.contains('You can also choose a program from the top bar and create in that program')
         .should('exist');
 });
 
@@ -35,114 +23,114 @@ And('you select tracked entity type person', () => {
 });
 
 And('you see the registration form for the Person', () => {
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('New person')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Profile')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Unique ID')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('First name')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Last name')
         .should('exist');
 
-    cy.get('[data-test="dhis2-capture-create-and-link-button"]')
+    cy.get('[data-test="create-and-link-button"]')
         .contains('Save new')
         .should('exist');
 
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Saving a person without enrollment in Ngelehun CHC. Enroll in a program by selecting a program from the top bar.')
         .should('exist');
 });
 
 And('you see a registration form for the Child Programme', () => {
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('New person in program: Child Programme')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Enrollment')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Date of enrollment')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Date of birth')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Coordinate')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Profile')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Unique ID')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('First name')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Last name')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Gender')
         .should('exist');
 
-    cy.get('[data-test="dhis2-capture-create-and-link-button"]')
+    cy.get('[data-test="create-and-link-button"]')
         .contains('Save new')
         .should('exist');
 
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Saving a person in Child Programme in Ngelehun CHC.')
         .should('exist');
 });
 
 And('you see the registration form for the Malaria case registration', () => {
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('New Malaria case registration')
         .should('exist');
 
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Basic info')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Report date')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Coordinate')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Age in years')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Household location')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Status')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Complete event')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Comments')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Write comment')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Relationships')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Add relationship')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Assignee')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Assigned user')
         .should('exist');
 
@@ -150,16 +138,9 @@ And('you see the registration form for the Malaria case registration', () => {
         .contains('Save and exit')
         .should('exist');
 
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Saving to Malaria case registration in Ngelehun CHC')
         .should('exist');
-});
-
-And('you select the Child Programme', () => {
-    cy.get('.Select')
-        .type('Child Program');
-    cy.contains('Child Programme')
-        .click();
 });
 
 And('you select the Malaria case registration program', () => {
@@ -169,29 +150,23 @@ And('you select the Malaria case registration program', () => {
         .click();
 });
 
-Given('you are in the main page with no selections made', () => {
-    cy.visit('/#/');
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
-        .should('exist');
-});
-
 When('you see a dropdown button', () => {
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="new-button"]')
         .contains('New')
         .should('exist');
 });
 
 When('you click the "New..." option', () => {
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="new-button"]')
         .click();
-    cy.get('[data-test="dhis2-capture-new-menuitem-two"]')
+    cy.get('[data-test="new-menuitem-two"]')
         .click();
 });
 
 When('you click the the first option option', () => {
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="new-button"]')
         .click();
-    cy.get('[data-test="dhis2-capture-new-menuitem-one"]')
+    cy.get('[data-test="new-menuitem-one"]')
         .click();
 });
 
@@ -205,18 +180,8 @@ When('you are navigated to the Child Programme registration page with program se
         .should('eq', `${Cypress.config().baseUrl}/#/new?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
 });
 
-When('you have no program selection', () => {
-    cy.get('[data-test="dhis2-capture-program-selector-container"]')
-        .contains('Select program');
-});
-
-When('you have no program selection', () => {
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
-        .contains('Select program');
-});
-
 When('you have Child Programme selected', () => {
-    cy.get('[data-test="dhis2-capture-locked-selector"]')
+    cy.get('[data-test="locked-selector"]')
         .contains('Child Programme');
 });
 
@@ -233,7 +198,7 @@ When('you are navigated to the Contraceptives Voucher Program registration page 
 });
 
 And('there should be informative message explaining you need to complete your selections', () => {
-    cy.get('[data-test="dhis2-capture-informative-paper"]')
+    cy.get('[data-test="informative-paper"]')
         .contains('to start reporting')
         .should('exist');
 });
@@ -246,37 +211,37 @@ And('you select the first category', () => {
 });
 
 And('you see the registration form for the specific category', () => {
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('New Contraceptives Voucher Program')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Basic info')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Report date')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Voucher HTC')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Voucher IMCI')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Voucher Implants')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Voucher Injections')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Status')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Complete event')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Comments')
         .should('exist');
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Write comment')
         .should('exist');
 
@@ -284,7 +249,7 @@ And('you see the registration form for the specific category', () => {
         .contains('Save and exit')
         .should('exist');
 
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('Saving to Contraceptives Voucher Program in Ngelehun CHC')
         .should('exist');
 });
@@ -300,7 +265,7 @@ And('you submit the form', () => {
 });
 
 And('you see validation error on visit date', () => {
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('A value is required')
         .should('exist');
 });
@@ -312,7 +277,7 @@ And('you fill in 200 in the hemoglobin', () => {
 });
 
 And('you see validation error on hemoglobin', () => {
-    cy.get('[data-test="dhis2-capture-data-entry-container"]')
+    cy.get('[data-test="data-entry-container"]')
         .contains('The hemoglobin value cannot be above 99')
         .should('exist');
 });
@@ -351,14 +316,6 @@ And('you fill in the first name with value that has duplicates', () => {
         .blur();
 });
 
-
-And('you see the possible duplicates button', () => {
-    cy.get('[data-test="dhis2-capture-possible-duplicates-found-button"]')
-        .contains('Possible duplicates found')
-        .should('exist');
-});
-
-
 And('you fill in a unique first name', () => {
     cy.get('[data-test="capture-ui-input"]')
         .eq(1)
@@ -377,60 +334,15 @@ Then('you are navigated to the Tracker Capture', () => {
 });
 
 Then('you see the possible duplicates modal', () => {
-    cy.get('[data-test="dhis2-capture-duplicates-modal"]')
+    cy.get('[data-test="duplicates-modal"]')
         .contains('Possible duplicates found')
         .should('exist');
 });
 
 Then('you submit the form again from the duplicates modal', () => {
-    cy.get('[data-test="dhis2-capture-create-as-new-person"]')
+    cy.get('[data-test="create-as-new-person"]')
         .contains('Save as new')
         .click();
-});
-
-
-When('you click the next page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
-        .click();
-});
-
-Then('you can see the second page of the results', () => {
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-pagination"]')
-        .contains('Page 2')
-        .should('exist');
-});
-
-When('you click the previous page button', () => {
-    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
-        .click();
-});
-
-Then('you can see the first page of the results', () => {
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
-        .should('exist');
-    cy.get('[data-test="dhis2-capture-card-list-item"]')
-        .should('have.length.greaterThan', 0);
-    cy.get('[data-test="dhis2-capture-pagination"]')
-        .contains('Page 1')
-        .should('exist');
-});
-
-And('you click the possible duplicates button', () => {
-    cy.get('[data-test="dhis2-capture-possible-duplicates-found-button"]')
-        .contains('Possible duplicates found')
-        .click();
-});
-
-And('you click hide the modal is not visible', () => {
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('Hide')
-        .click();
-    cy.get('[data-test="dhis2-capture-search-results-list"]')
-        .should('not.exist');
 });
 
 // New person in WHO RMNCH Tracker
@@ -449,17 +361,12 @@ And('you fill the form with age 0', () => {
 });
 
 And('you see validation warning on birth date', () => {
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .contains('The womans age is outside the normal range. With the birthdate entered, the age would be: 0')
         .should('exist');
 });
 
 And('you fill the WHO RMNCH program registration form with its required unique values', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(0)
-        .type('2021-01-01')
-        .blur();
-
     cy.get('[data-test="capture-ui-input"]')
         .eq(2)
         .type(`Sarah-${Math.round((new Date()).getTime() / 1000)}`);
@@ -475,10 +382,6 @@ And('you fill the WHO RMNCH program registration form with its required unique v
 });
 
 And('you fill the WHO RMNCH program registration form with its required values', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .eq(0)
-        .type('1999-01-01')
-        .blur();
     cy.get('[data-test="capture-ui-input"]')
         .eq(2)
         .type('Ava');
@@ -507,10 +410,6 @@ Then('you are navigated to the WHO RMNCH program in Tracker Capture app', () => 
 
 And('you fill the Child programme registration form with a first name with value that has duplicates', () => {
     cy.get('[data-test="capture-ui-input"]')
-        .eq(0)
-        .type('2021-01-01')
-        .blur();
-    cy.get('[data-test="capture-ui-input"]')
         .eq(1)
         .type('2021-01-01')
         .blur();
@@ -526,7 +425,7 @@ And('you are in the WNCH / PNC program registration page', () => {
 
 
 And('you see validation errors on the WHO RMNCH program registration page', () => {
-    cy.get('[data-test="dhis2-capture-registration-page-content"]')
+    cy.get('[data-test="registration-page-content"]')
         .find('[data-test="error-message"]')
-        .should('have.length', 5);
+        .should('have.length', 4);
 });

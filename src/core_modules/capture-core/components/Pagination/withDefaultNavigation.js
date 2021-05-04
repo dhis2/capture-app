@@ -49,7 +49,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                     className={classes.root}
                 >
                     <IconButton
-                        data-test={'dhis2-capture-search-pagination-first-page'}
+                        data-test={'search-pagination-first-page'}
                         onClick={this.handleFirstPageButtonClick}
                         disabled={currentPage <= 1}
                         aria-label="First Page"
@@ -57,7 +57,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
                     </IconButton>
                     <IconButton
-                        data-test={'dhis2-capture-search-pagination-previous-page'}
+                        data-test={'search-pagination-previous-page'}
                         onClick={this.handleBackButtonClick}
                         disabled={currentPage <= 1}
                         aria-label="Previous Page"
@@ -65,7 +65,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
                     </IconButton>
                     <IconButton
-                        data-test={'dhis2-capture-search-pagination-next-page'}
+                        data-test={'search-pagination-next-page'}
                         onClick={this.handleNextButtonClick}
                         disabled={nextPageButtonDisabled}
                         aria-label="Next Page"

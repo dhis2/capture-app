@@ -1,7 +1,8 @@
 // @flow
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// $FlowFixMe
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { EnrollmentPageComponent } from './EnrollmentPage.component';
 import type { EnrollmentPageStatus } from './EnrollmentPage.types';
 import {
@@ -13,19 +14,17 @@ import {
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useEnrollmentInfo } from './hooks';
+import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
 
     const { teiId, programId, enrollmentId } =
-      useSelector(({ router: { location: { query } } }) =>
-          ({
-              teiId: query.teidId,
-              programId: query.programId,
-              enrollmentId: query.enrollmentId,
-          }),
-      );
-
+        useSelector(({ router: { location: { query } } }) => ({
+            teiId: query.teidId,
+            programId: query.programId,
+            enrollmentId: query.enrollmentId,
+        }), shallowEqual);
 
     const { scopeType } = useScopeInfo(programId);
     const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId } = useEnrollmentInfo(enrollmentId, programId);
@@ -48,14 +47,39 @@ const useComponentLifecycle = () => {
     useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch, teiId]);
 };
 
+// dirty fix for scenarios where you deselect the program.
+// This should be removed as part of fixing the url sync issue, https://jira.dhis2.org/browse/TECH-580
+const useComputedEnrollmentPageStatus = () => {
+    const enrollmentPageStatus: EnrollmentPageStatus =
+    useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
+
+    const { teiId, programId, enrollmentId } =
+        useSelector(({ router: { location: { query } } }) => ({
+            teiId: query.teiId,
+            programId: query.programId,
+            enrollmentId: query.enrollmentId,
+        }), shallowEqual);
+
+    return useMemo(() => {
+        if (enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
+            !(programId && teiId && enrollmentId)) {
+            return enrollmentPageStatuses.LOADING;
+        }
+        return enrollmentPageStatus;
+    }, [
+        enrollmentPageStatus,
+        enrollmentId,
+        teiId,
+        programId,
+    ]);
+};
+
 export const EnrollmentPage: ComponentType<{||}> = () => {
     useComponentLifecycle();
 
     const dispatch = useDispatch();
     const selectedTeiId: string =
       useSelector(({ router: { location: { query } } }) => query.teiId);
-    const enrollmentPageStatus: EnrollmentPageStatus =
-      useSelector(({ enrollmentPage }) => enrollmentPage.enrollmentPageStatus);
 
     useEffect(() => {
         dispatch(fetchEnrollmentPageInformation());
@@ -71,7 +95,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     return (
         <EnrollmentPageComponent
             error={error}
-            enrollmentPageStatus={enrollmentPageStatus}
+            enrollmentPageStatus={useComputedEnrollmentPageStatus()}
         />
     );
 };

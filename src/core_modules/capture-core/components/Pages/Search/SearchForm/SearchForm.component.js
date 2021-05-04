@@ -194,7 +194,7 @@ const SearchFormIndex = ({
                         const name = searchForm.getElements()[0].formName;
 
                         return (
-                            <div key={formId} data-test="dhis2-capture-form-unique">
+                            <div key={formId} data-test="form-unique">
                                 <Section
                                     isCollapsed={isSearchSectionCollapsed}
                                     className={classes.searchDomainSelectorSection}
@@ -230,7 +230,7 @@ const SearchFormIndex = ({
                                                 formId,
                                             )}
                                         >
-                                            {i18n.t('Find by {{name}}', { name })}
+                                            {i18n.t('Search by {{name}}', { name })}
                                         </Button>
                                     </div>
                                 </Section>
@@ -246,7 +246,7 @@ const SearchFormIndex = ({
                         const searchByText = i18n.t('Search by attributes');
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
                         return (
-                            <div key={formId} data-test="dhis2-capture-form-attributes">
+                            <div key={formId} data-test="form-attributes">
                                 <Section
                                     isCollapsed={isSearchSectionCollapsed}
                                     className={classes.searchDomainSelectorSection}

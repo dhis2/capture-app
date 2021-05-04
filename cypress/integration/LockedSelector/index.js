@@ -1,38 +1,29 @@
+import '../sharedSteps';
+
 beforeEach(() => {
     cy.loginThroughForm();
 });
 
-Given('you are in the main page with no selections made', () => {
-    cy.visit('/#/');
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
-        .should('exist');
-});
-
 When('you click the "New" button to add a new event', () => {
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
-        .click();
-});
-
-When('you click the "New" button to add a new event', () => {
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
+    cy.get('[data-test="new-event-button"]')
         .click();
 });
 
 When('you click the first option from the "New" button to add a new event', () => {
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="new-button"]')
         .click();
-    cy.get('[data-test="dhis2-capture-new-menuitem-one"]')
+    cy.get('[data-test="new-menuitem-one"]')
         .click();
 });
 
 Then('you should see informative text saying you should do finish your selections', () => {
-    cy.get('[data-test="dhis2-capture-informative-paper"]')
+    cy.get('[data-test="informative-paper"]')
         .should('exist');
 });
 
 Given('you are in the main page with organisation unit preselected', () => {
     cy.visit('/#/?orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="dhis2-capture-new-event-button"]')
+    cy.get('[data-test="new-event-button"]')
         .should('exist');
 });
 
@@ -40,16 +31,9 @@ Then('you should be taken to the new page', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/new?orgUnitId=DiszpKrYNg8`);
 });
 
-And('you see the dropdown menu for selecting tracked entity type', () => {
-    cy.get('[data-test="dhis2-uicore-singleselect"]')
-        .should('exist');
-    cy.contains('You can also choose a program from the top bar and create in that program')
-        .should('exist');
-});
-
 Given('you are in the main page with program preselected', () => {
     cy.visit('/#/?programId=VBqh0ynB2wv');
-    cy.get('[data-test="dhis2-capture-new-button"]')
+    cy.get('[data-test="new-button"]')
         .should('exist');
 });
 
@@ -82,7 +66,7 @@ Given('you select both org unit and program Child Programme', () => {
 });
 
 When('you click the "Start again" button', () => {
-    cy.get('[data-test="dhis2-capture-start-again-button"]')
+    cy.get('[data-test="start-again-button"]')
         .click();
 });
 
@@ -99,7 +83,7 @@ Then('you should see the table', () => {
 });
 
 Then('you can see the new event page', () => {
-    cy.get('[data-test="dhis2-capture-start-again-button"]')
+    cy.get('[data-test="start-again-button"]')
         .should('exist');
 });
 
@@ -123,7 +107,7 @@ Given('you land on a main page with an invalid org unit id', () => {
 });
 
 Then('you should see error message', () => {
-    cy.get('[data-test="dhis2-capture-error-message-handler"]')
+    cy.get('[data-test="error-message-handler"]')
         .should('exist');
 });
 
@@ -133,12 +117,12 @@ Given('you land on a view event page from the url', () => {
 
 Given('you are in the new event page with no selections made', () => {
     cy.visit('/#/new');
-    cy.get('[data-test="dhis2-capture-informative-paper"]')
+    cy.get('[data-test="informative-paper"]')
         .should('exist');
 });
 
 When('you click the cancel button', () => {
-    cy.get('[data-test="dhis2-capture-new-page-cancel-button"]')
+    cy.get('[data-test="new-page-cancel-button"]')
         .click();
 });
 
@@ -154,23 +138,10 @@ Given('you land on a new event page with preselected org unit', () => {
     cy.visit('/#/new?orgUnitId=DiszpKrYNg8');
 });
 
-When('you select program', () => {
-    cy.get('.Select')
-        .type('Malaria case re');
-    cy.contains('Malaria case registration')
-        .click();
-});
-
 Given('you land on a new event page with preselected program', () => {
     cy.visit('/#/new?programId=VBqh0ynB2wv');
 });
 
-When('you select org unit', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .type('Ngelehun C');
-    cy.contains('Ngelehun CHC')
-        .click();
-});
 
 Then('new event page url is valid', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/new?programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
@@ -189,13 +160,6 @@ When('you select program', () => {
 
 Given('you land on a main event page with preselected program', () => {
     cy.visit('/#/?programId=VBqh0ynB2wv');
-});
-
-When('you select org unit', () => {
-    cy.get('[data-test="capture-ui-input"]')
-        .type('Ngelehun C');
-    cy.contains('Ngelehun CHC')
-        .click();
 });
 
 Then('main page page url is valid', () => {
@@ -226,14 +190,14 @@ Given('you land on a view event page with an invalid id', () => {
 });
 
 When('you click the find button', () => {
-    cy.get('[data-test="dhis2-capture-find-button"]')
+    cy.get('[data-test="find-button"]')
         .click();
 });
 
 When('you click the find button from the dropdown menu', () => {
-    cy.get('[data-test="dhis2-capture-find-button"]')
+    cy.get('[data-test="find-button"]')
         .click();
-    cy.get('[data-test="dhis2-capture-find-menuitem-one"]')
+    cy.get('[data-test="find-menuitem-one"]')
         .click();
 });
 
@@ -246,13 +210,13 @@ Then('you are navigated to the search page with the same org unit and program Ch
 });
 
 Then('there should be visible a title with Child Program', () => {
-    cy.get('[data-test="dhis2-capture-search-page-content"]')
+    cy.get('[data-test="search-page-content"]')
         .contains('person in program: Child Programme')
         .should('exist');
 });
 
 And('there should be Child Programme domain forms visible to search with', () => {
-    cy.get('[data-test="dhis2-capture-search-page-content"]')
+    cy.get('[data-test="search-page-content"]')
         .find('[data-test="capture-ui-input"]')
         .should('have.length', 1);
 });
@@ -263,7 +227,7 @@ const selectedEventProgram = ['Selected program', 'Antenatal care visit'];
 const emptyProgramSelection = ['Program', 'Select program'];
 const selectedOrgUnit = ['Selected registering unit', 'Taninahun (Malen) CHP'];
 const emptyOrgUnitSelection = ['Registering Organisation Unit'];
-const selectedTei = ['Selected', 'Carlos Cruz'];
+const selectedTei = ['Selected person', 'Carlos Cruz'];
 const selectedEnrollment = ['Selected enrollment', '2018-08-07 15:47'];
 const emptyEnrollmentSelection = ['Enrollment', 'Select...'];
 
@@ -281,7 +245,7 @@ Given(/^you land on the enrollment page by having typed the (.*)$/, (url) => {
 });
 
 Then(/^you can see on the locked selector the following (.*)$/, (state) => {
-    lockedSelectorCases[state].map(selection => cy.get('[data-test="dhis2-capture-locked-selector"]').contains(selection));
+    lockedSelectorCases[state].map(selection => cy.get('[data-test="locked-selector"]').contains(selection));
 });
 
 Then(/^you see the following (.*)$/, (message) => {
@@ -290,7 +254,7 @@ Then(/^you see the following (.*)$/, (message) => {
 
 And('you land on the enrollment page by having typed only the enrollmentId on the url', () => {
     cy.visit('/#/enrollment?enrollmentId=gPDueU02tn8');
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+    cy.get('[data-test="enrollment-page-content"]')
         .contains('Enrollment Dashboard');
 });
 
@@ -306,17 +270,9 @@ And('you navigated to the main page', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh`);
 });
 
-And('you reset the program selection', () => {
-    cy.get('[data-test="reset-selection-button"]')
-        .should('have.length.greaterThan', 2);
-    cy.get('[data-test="reset-selection-button"]')
-        .eq(0)
-        .click();
-});
-
 And('you see message explaining you need to select a program', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+    cy.get('[data-test="enrollment-page-content"]')
         .contains('Carlos Cruz is enrolled in multiple programs. Choose a program.');
 });
 
@@ -331,13 +287,13 @@ And('you reset the org unit selection', () => {
 
 And('you see the enrollment page but there is no org unit id in the url', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+    cy.get('[data-test="enrollment-page-content"]')
         .contains('Enrollment Dashboard');
 });
 
 And('you see the enrollment page', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+    cy.get('[data-test="enrollment-page-content"]')
         .contains('Enrollment Dashboard');
 });
 
@@ -351,15 +307,8 @@ And('you reset the enrollment selection', () => {
 
 And('you see message explaining you need to select an enrollment', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ`);
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+    cy.get('[data-test="enrollment-page-content"]')
         .contains('There are multiple enrollments for this program. Choose an enrollment to view the dashboard.');
-});
-
-And('you select the MNCH PNC program', () => {
-    cy.get('.Select').eq(0)
-        .type('MNCH');
-    cy.contains('PNC (Adult Woman)')
-        .click();
 });
 
 And('you select the Child Programme', () => {
@@ -370,9 +319,9 @@ And('you select the Child Programme', () => {
 });
 
 And('you see message explaining there are no enrollments for this program', () => {
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+    cy.get('[data-test="enrollment-page-content"]')
         .contains('Carlos Cruz is not enrolled in this program.');
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+    cy.get('[data-test="enrollment-page-content"]')
         .contains('Enroll Carlos Cruz in this program.');
 });
 
@@ -384,7 +333,21 @@ And('you select the Antenatal care visit', () => {
 });
 
 And('you see message explaining this is an Event program', () => {
-    cy.get('[data-test="dhis2-capture-enrollment-page-content"]')
+    cy.get('[data-test="enrollment-page-content"]')
         .contains('Antenatal care visit is an event program and does not have enrollments.');
+});
+
+When('you select org unit that is incompatible with the already selected program', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .type('Bombal');
+    cy.contains('Bombali')
+        .click();
+});
+
+Then('you can see message on the locked selector', () => {
+    cy.get('[data-test="locked-selector"]')
+        .contains('No programs available.');
+    cy.get('[data-test="locked-selector"]')
+        .contains('Show all');
 });
 
