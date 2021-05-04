@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
 "Last-Translator: Carwoto Sa'an <carwoto@gmail.com>, 2020\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -313,6 +313,9 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr ""
 
@@ -511,6 +514,9 @@ msgid ""
 "exists"
 msgstr ""
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "New event"
 msgstr "Event baru"
 
@@ -640,6 +646,12 @@ msgstr "Daftar"
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -705,6 +717,18 @@ msgstr ""
 msgid "Add relationship"
 msgstr "Tambahkan hubungan"
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Selected program"
 msgstr "Program yang dipilih"
 
@@ -754,6 +778,12 @@ msgid "Organisation unit search failed. See log for details"
 msgstr ""
 
 msgid "tracked entity instance"
+msgstr ""
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
 msgstr ""
 
 msgid "Set coordinate"

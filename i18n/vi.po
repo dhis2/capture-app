@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2020\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -312,6 +312,9 @@ msgstr "Bạn không có quyền viết bình luận"
 msgid "Write comment"
 msgstr "Viết bình luận"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Thông tin cơ bản"
 
@@ -514,6 +517,9 @@ msgid ""
 "exists"
 msgstr "Kiểu quan hệ {{mối quan hệTypeName}} với {{entityName}} đã tồn tại"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "New event"
 msgstr "Sự kiện mới"
 
@@ -649,6 +655,12 @@ msgstr "Đăng ký"
 msgid "You dont have access to edit this event"
 msgstr "Bạn không có quyền truy cập để chỉnh sửa sự kiện này"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -716,6 +728,18 @@ msgstr "Bạn không có quyền truy cập để tạo bất kỳ mối quan h�
 msgid "Add relationship"
 msgstr "Thêm Quan Hệ"
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Selected program"
 msgstr "Chương trình đã chọn"
 
@@ -766,6 +790,12 @@ msgstr "Tìm kiếm đơn vị không thành công. Xem nhật ký để biết 
 
 msgid "tracked entity instance"
 msgstr "thực thể được theo dõi"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Đặt tọa độ"

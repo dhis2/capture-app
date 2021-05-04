@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -310,6 +310,9 @@ msgstr "ليس لديك حق الوصول إلى كتابة التعليقات"
 msgid "Write comment"
 msgstr "اكتب تعليقاً"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
 
@@ -513,6 +516,9 @@ msgid ""
 msgstr ""
 "العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}}  موجودة مسبقاً"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "New event"
 msgstr "حدث جديد"
 
@@ -643,6 +649,12 @@ msgstr "تسجيل"
 msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -708,6 +720,18 @@ msgstr "ليس لديك حق الوصول لإنشاء علاقات"
 msgid "Add relationship"
 msgstr "اضف علاقة"
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Selected program"
 msgstr "البرنامج المحدد"
 
@@ -758,6 +782,12 @@ msgstr "فشل البحث عن الوحدة التنظيمية. للحصول ع�
 
 msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"
