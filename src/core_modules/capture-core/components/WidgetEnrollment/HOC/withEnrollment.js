@@ -25,7 +25,7 @@ export const withEnrollment = (Component: ComponentType<any>) => (
     );
 
     if (error) {
-        log.error(errorCreator('Enrollment widget could not be loaded. Please try again later')({ error }));
+        log.error(errorCreator('Enrollment widget could not be loaded')({ error }));
         return <span>{i18n.t('Enrollment widget could not be loaded. Please try again later')} </span>;
     }
 
