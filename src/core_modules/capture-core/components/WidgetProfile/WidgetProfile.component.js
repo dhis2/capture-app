@@ -12,7 +12,6 @@ import { convertValue as convertClientToView } from '../../converters/clientToVi
 import { convertValue as convertServerToClient } from '../../converters/serverToClient';
 import type { Props } from './widgetProfile.types';
 
-const PROFILE_WIDGET_RETRIEVE_ERROR = 'Profile widget could not be loaded. Please try again later';
 const styles = {
     profileWidgetWrapper: {
         paddingBottom: '12px',
@@ -61,8 +60,8 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
     }
 
     if (error) {
-        log.error(errorCreator(PROFILE_WIDGET_RETRIEVE_ERROR)({ error }));
-        return <span>{i18n.t(PROFILE_WIDGET_RETRIEVE_ERROR)}</span>;
+        log.error(errorCreator('Profile widget could not be loaded')({ error }));
+        return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
     }
 
     const formatValue = (value, valueType) => {
