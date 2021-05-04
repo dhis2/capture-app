@@ -1,13 +1,13 @@
 // @flow
-export type PlainProps = {|
+export type Props = {|
     description: string,
 |};
 
-export type Props = {|
+export type PlainProps = {|
     classes: {
         descriptionBox: string,
         icon: string,
         description: string,
     },
-    ...PlainProps,
+    ...Props,
 |};

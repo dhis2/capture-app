@@ -24,7 +24,7 @@ const styles = {
     },
 };
 
-const SectionDescriptionBoxPlain = (props: Props) => {
+const SectionDescriptionBoxPlain = (props: PlainProps) => {
     const { classes, description } = props;
 
     return (
@@ -39,4 +39,4 @@ const SectionDescriptionBoxPlain = (props: Props) => {
     );
 };
 
-export const SectionDescriptionBox: ComponentType<PlainProps> = withStyles(styles)(SectionDescriptionBoxPlain);
+export const SectionDescriptionBox: ComponentType<Props> = withStyles(styles)(SectionDescriptionBoxPlain);
