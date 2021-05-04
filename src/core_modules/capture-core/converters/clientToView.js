@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { moment } from 'capture-core-utils/moment';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import DataElement from '../metaData/DataElement/DataElement';
@@ -62,9 +63,9 @@ const valueConvertersForType = {
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TIME]: convertTimeForView,
     // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.TRUE_ONLY]: () => 'Yes',
+    [elementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
     // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
+    [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.COORDINATE]: MinimalCoordinates,
     // $FlowFixMe[prop-missing] automated comment
