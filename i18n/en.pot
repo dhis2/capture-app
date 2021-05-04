@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-03T11:43:12.076Z\n"
-"PO-Revision-Date: 2021-05-03T11:43:12.076Z\n"
+"POT-Creation-Date: 2021-05-04T15:03:48.540Z\n"
+"PO-Revision-Date: 2021-05-04T15:03:48.540Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -888,6 +888,9 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Follow-up"

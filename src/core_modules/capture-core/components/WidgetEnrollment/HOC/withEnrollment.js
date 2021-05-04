@@ -9,8 +9,6 @@ import { LoadingMaskElementCenter } from '../../LoadingMasks';
 type Props = {
     enrollmentId: string,
 };
-const ENROLLMENT_RETRIEVE_ERROR =
-    'Enrollment widget could not be loaded. Please try again later';
 
 export const withEnrollment = (Component: ComponentType<any>) => (
     props: Props,
@@ -27,8 +25,8 @@ export const withEnrollment = (Component: ComponentType<any>) => (
     );
 
     if (error) {
-        log.error(errorCreator(ENROLLMENT_RETRIEVE_ERROR)({ error }));
-        return <span>{i18n.t(ENROLLMENT_RETRIEVE_ERROR)} </span>;
+        log.error(errorCreator('Enrollment widget could not be loaded. Please try again later')({ error }));
+        return <span>{i18n.t('Enrollment widget could not be loaded. Please try again later')} </span>;
     }
 
     return !loading && data?.enrollment ? (
