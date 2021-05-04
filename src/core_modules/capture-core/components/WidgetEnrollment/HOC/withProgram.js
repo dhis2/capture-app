@@ -29,7 +29,7 @@ export const withProgram = (Component: ComponentType<any>) => (
         ),
     );
 
-    if (!error) {
+    if (error) {
         log.error(errorCreator('Enrollment widget could not be loaded')({ error }));
         return <span>{i18n.t('Enrollment widget could not be loaded. Please try again later')} </span>;
     }
