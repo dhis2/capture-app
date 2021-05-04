@@ -26,7 +26,6 @@ export const StatusPlain = ({ status = '', classes }: Props) => (
     <>
         <Tag
             className={classes.status}
-            dataTest="widget-enrollment-status"
             neutral={status === plainStatus.ACTIVE}
             negative={status === plainStatus.CANCELLED}
         >

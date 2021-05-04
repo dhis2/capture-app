@@ -43,7 +43,7 @@ export const WidgetEnrollmentPlain = ({
     const [open, setOpenStatus] = useState(true);
 
     return (
-        <div data-test="enrollment-widget">
+        <div data-test="widget-enrollment">
             <Widget
                 header={i18n.t('Enrollment')}
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
@@ -61,7 +61,7 @@ export const WidgetEnrollmentPlain = ({
                         </div>
                     )}
 
-                    <div>
+                    <div data-test="widget-enrollment-status">
                         <Status status={enrollment.status} />
                         {i18n.t('at')}
                         <span className={classes.icon}>
@@ -70,10 +70,13 @@ export const WidgetEnrollmentPlain = ({
                         {enrollment.orgUnitName}
                     </div>
 
-                    <div className={classes.row}>
+                    <div
+                        className={classes.row}
+                        data-test="widget-enrollment-enrollment-date"
+                    >
                         <span
                             className={classes.icon}
-                            data-test="enrollment-widget-icon-calendar"
+                            data-test="widget-enrollment-icon-calendar"
                         >
                             <IconCalendar16 />
                         </span>
@@ -82,7 +85,10 @@ export const WidgetEnrollmentPlain = ({
                     </div>
 
                     {program.displayIncidentDate && (
-                        <div className={classes.row}>
+                        <div
+                            className={classes.row}
+                            data-test="widget-enrollment-incident-date"
+                        >
                             <span className={classes.icon}>
                                 <IconCalendar16 />
                             </span>
@@ -91,20 +97,26 @@ export const WidgetEnrollmentPlain = ({
                         </div>
                     )}
 
-                    <div className={classes.row}>
+                    <div
+                        className={classes.row}
+                        data-test="widget-enrollment-orgunit"
+                    >
                         <span
                             className={classes.icon}
-                            data-test="enrollment-widget-icon-orgunit"
+                            data-test="widget-enrollment-icon-orgunit"
                         >
                             <IconDimensionOrgUnit16 />
                         </span>
                         {i18n.t('Enrolled at')} {ownerOrgUnit.displayName}
                     </div>
 
-                    <div className={classes.row}>
+                    <div
+                        className={classes.row}
+                        data-test="widget-enrollment-last-update"
+                    >
                         <span
                             className={classes.icon}
-                            data-test="enrollment-widget-icon-clock"
+                            data-test="widget-enrollment-icon-clock"
                         >
                             <IconClock16 />
                         </span>
