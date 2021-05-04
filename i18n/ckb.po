@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -316,9 +316,6 @@ msgstr "نیشاندەر"
 msgid "Warnings"
 msgstr "ئاگادارکردنەوەکان"
 
-msgid "search group result could not be retrieved"
-msgstr "گەڕان بە دواای گروپەکە هیچ ئەنجامێکی نەبوو"
-
 msgid "Complete"
 msgstr "تەواوبکە"
 
@@ -350,12 +347,6 @@ msgstr ""
 
 msgid "Operations running"
 msgstr "کردارەکان کاردەکەن"
-
-msgid "Hide"
-msgstr "شاردنەوە"
-
-msgid "Possible duplicates found"
-msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
 
 msgid "Sort"
 msgstr "پۆلینکردن"
@@ -742,9 +733,6 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr "پێداچوونەوە بە دووبارەبووەکان"
-
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
@@ -867,6 +855,9 @@ msgstr "حاڵەتەکە ڕاپسێردراوە بە  {{name}}"
 msgid "Feedbacks"
 msgstr "بۆچوونەکان"
 
+msgid "Possible duplicates found"
+msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -909,8 +900,8 @@ msgstr "پرۆفایل"
 msgid "Error saving event"
 msgstr "هەڵەیەک ڕوویدا لە تۆمارکردنی حاڵەتەکە"
 
-msgid "Could not save event. See log for details"
-msgstr "نەتواندرا حاڵەتەکە تۆماربکرێت. سەیری فایل لۆگ بکە بۆ زانیاری زیاتر"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "نەتواندرا حاڵەتەکە بسڕدرێتەوە"
@@ -924,10 +915,14 @@ msgstr "نەتواندرا لیسی کارەکان زیادبکرێت"
 msgid "Could not delete working list"
 msgstr "نەتواندرا لیسی کارەکان بسڕدرێتەوە"
 
-msgid "Organisation unit search failed. See log for details"
+msgid "Organisation unit search failed."
 msgstr ""
-" هەڵە ڕوویدا لە گەڕان بە دوای یەکەی ڕێکخراو، سەیری لۆگەکان بکە بۆ زانیاری "
-"زیاتر"
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "نمونەی یەکەی بەدواداچوون"

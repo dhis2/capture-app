@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -306,9 +306,6 @@ msgstr "指标"
 msgid "Warnings"
 msgstr "错误"
 
-msgid "search group result could not be retrieved"
-msgstr "搜索组结果不能提取"
-
 msgid "Complete"
 msgstr "完成"
 
@@ -338,12 +335,6 @@ msgstr "有些操作一直在运行,请等待"
 
 msgid "Operations running"
 msgstr "运作中"
-
-msgid "Hide"
-msgstr "隐藏"
-
-msgid "Possible duplicates found"
-msgstr "发现可能的重复"
 
 msgid "Sort"
 msgstr "排序"
@@ -731,9 +722,6 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr "您也可以从顶部栏中选择一个项目并在该项目中创建"
 
-msgid "Review Duplicates"
-msgstr "复查重复"
-
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
 
@@ -775,7 +763,7 @@ msgid "Search {{name}}"
 msgstr "搜索{{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "按{{name}}搜索"
 
 msgid "Search by attributes"
 msgstr "按属性搜索"
@@ -854,6 +842,9 @@ msgstr "事件被分配到  {{name}}"
 msgid "Feedbacks"
 msgstr "反馈"
 
+msgid "Possible duplicates found"
+msgstr "发现可能的重复"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "加载可能的重复项时发生错误"
 
@@ -896,8 +887,8 @@ msgstr "基本信息"
 msgid "Error saving event"
 msgstr "保存时间错误"
 
-msgid "Could not save event. See log for details"
-msgstr "不能保存事件，看日志"
+msgid "Could not save event"
+msgstr "无法保存事件"
 
 msgid "Could not delete event"
 msgstr "不能删除事件"
@@ -911,8 +902,14 @@ msgstr "不能添加工作列表"
 msgid "Could not delete working list"
 msgstr "不能删除工作列表"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "机构搜索失败，查看日志"
+msgid "Organisation unit search failed."
+msgstr "组织机构搜索失败。"
+
+msgid "Error saving tracked entity instance"
+msgstr "保存跟踪的实体实例时出错"
+
+msgid "Error saving enrollment"
+msgstr "保存注册时出错"
 
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -325,9 +325,6 @@ msgstr "Индикаторы"
 msgid "Warnings"
 msgstr "Предупреждения"
 
-msgid "search group result could not be retrieved"
-msgstr "Результат группы поиска не может быть получен"
-
 msgid "Complete"
 msgstr "Завершенный"
 
@@ -357,12 +354,6 @@ msgstr "Некоторые операции еще не заверщены. По
 
 msgid "Operations running"
 msgstr "Операции запущены..."
-
-msgid "Hide"
-msgstr "Скрыть"
-
-msgid "Possible duplicates found"
-msgstr "Найдены возможные дубликаты"
 
 msgid "Sort"
 msgstr "Сортировать"
@@ -750,9 +741,6 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr "Пересмотр дубликатов"
-
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
@@ -879,6 +867,9 @@ msgstr "Событие назначен: {{name}}"
 msgid "Feedbacks"
 msgstr "Отзывы"
 
+msgid "Possible duplicates found"
+msgstr "Найдены возможные дубликаты"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -922,8 +913,8 @@ msgstr "Профиль"
 msgid "Error saving event"
 msgstr "Ошибка сохранения события"
 
-msgid "Could not save event. See log for details"
-msgstr "Не удалось сохранить событие. Смотрите детали в лог-файле"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "Не возможно удалить событие"
@@ -937,8 +928,14 @@ msgstr "Не возможно добавить рабочий список"
 msgid "Could not delete working list"
 msgstr "Не возможно удалить рабочий список"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "Поиск Орг.единицы не возможен. Смотри детали в лог-файле."
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "Элемент отслеживаемого объекта"

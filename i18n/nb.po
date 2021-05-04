@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2021
+# Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -320,9 +320,6 @@ msgstr "Indikatorer"
 msgid "Warnings"
 msgstr "Advarsler"
 
-msgid "search group result could not be retrieved"
-msgstr "søkegrupperesultat kunne ikke hentes"
-
 msgid "Complete"
 msgstr "Fullfør"
 
@@ -352,12 +349,6 @@ msgstr "Noen operasjoner kjører fortsatt. Vennligst vent.."
 
 msgid "Operations running"
 msgstr "Operasjoner kjører"
-
-msgid "Hide"
-msgstr "Skjul"
-
-msgid "Possible duplicates found"
-msgstr "Mulige duplikater funnet"
 
 msgid "Sort"
 msgstr "Sorter"
@@ -753,9 +744,6 @@ msgid ""
 msgstr ""
 "Du kan også velge et program fra topplinjen og opprette i det programmet"
 
-msgid "Review Duplicates"
-msgstr "Gjennomgå duplikater"
-
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Opprett ny {{trackedEntityTypeName}} og link"
 
@@ -798,7 +786,7 @@ msgid "Search {{name}}"
 msgstr "Søk {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "Søk etter {{name}}"
 
 msgid "Search by attributes"
 msgstr "Søk etter attributter"
@@ -885,6 +873,9 @@ msgstr "Hendelse er tildelt til {{name}}"
 msgid "Feedbacks"
 msgstr "Tilbakemeldinger"
 
+msgid "Possible duplicates found"
+msgstr "Mulige duplikater funnet"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "En feil oppsto ved lasting av mulige duplikater"
 
@@ -927,8 +918,8 @@ msgstr "Profil"
 msgid "Error saving event"
 msgstr "Feil ved lagring av hendelse"
 
-msgid "Could not save event. See log for details"
-msgstr "Kunne ikke lagre hendelse. Se loggen for detaljer"
+msgid "Could not save event"
+msgstr "Kunne ikke lagre hendelse"
 
 msgid "Could not delete event"
 msgstr "Kunne ikke slette hendelse"
@@ -942,8 +933,14 @@ msgstr "Kunne ikke legge til arbeidsliste"
 msgid "Could not delete working list"
 msgstr "Kunne ikke slette arbeidsliste"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "Organisasjonsenhetsøk feilet. Se logg for detaljer"
+msgid "Organisation unit search failed."
+msgstr "Organisasjonsenhetssøk mislyktes."
+
+msgid "Error saving tracked entity instance"
+msgstr "Feil ved lagring av sporet enhetsforekomst"
+
+msgid "Error saving enrollment"
+msgstr "Feil ved lagring av registrering"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
