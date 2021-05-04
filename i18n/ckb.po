@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -154,6 +154,9 @@ msgstr "بەکارهێنەری دەستنیشانکراو"
 msgid "Search for user"
 msgstr "بۆ بەکاربەرەکە بگەرێ"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "زانیاریە سەرەتاییەکان"
 
@@ -193,6 +196,9 @@ msgstr "چاڵاک"
 msgid "Completed"
 msgstr "تەواوبوو"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "تکایە کۆمێنت زیاد بکە یاخود لاییببە پێش تۆمارکردن"
 
@@ -207,6 +213,9 @@ msgstr "تەواکردن"
 
 msgid "No write access"
 msgstr "مافی نوسینت نیە"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "گۆڕین بۆ پیشاندانی فۆرم"
@@ -513,6 +522,12 @@ msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەک�
 msgid "New"
 msgstr "نوێ"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr ""
 
@@ -666,9 +681,6 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
-msgid "Assigned to"
-msgstr ""
-
 msgid "Registering unit"
 msgstr "تؤمار كردني يةكة"
 
@@ -733,6 +745,9 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "Save new"
+msgstr ""
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
@@ -781,6 +796,9 @@ msgstr "بە پێ ئاتریبیوت بگەڕێ"
 
 msgid "Back"
 msgstr "كةرانةوة"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr ""
@@ -836,6 +854,12 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -873,6 +897,15 @@ msgstr "پەوەندی درووستبکە"
 msgid "Results found"
 msgstr ""
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
 
@@ -887,6 +920,9 @@ msgstr "پرۆگرامی بەدواداچوونی کاپچەر/ کاپچەر ت�
 
 msgid "An error has occured. See log for details"
 msgstr "هەڵەیک ڕوویدا، تکایە سەیری لۆگ فایل بکە بۆ وردەکاری زیاتر"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "پرۆگرام نەدۆزرایەوە"
@@ -926,6 +962,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "نمونەی یەکەی بەدواداچوون"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "هێڵی درێژی و پانی دیاریبکە"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -155,6 +155,9 @@ msgstr "Tildelt programbruker"
 msgid "Search for user"
 msgstr "Søk etter bruker"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Grunnleggende informasjon"
 
@@ -195,6 +198,9 @@ msgstr "Aktiv"
 msgid "Completed"
 msgstr "Fullført"
 
+msgid "Assigned to"
+msgstr "Tildelt til"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "Legg til eller avbryt kommentar før du lagrer hendelsen"
 
@@ -209,6 +215,9 @@ msgstr "Fullfør"
 
 msgid "No write access"
 msgstr "Ingen skrivetilgang"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Bytt til skjemavisning"
@@ -515,6 +524,12 @@ msgstr "Valgt program er ugyldig for registreringsenhet"
 msgid "New"
 msgstr "Ny"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr "Tøm valg"
 
@@ -676,9 +691,6 @@ msgstr "Registreringsstatus"
 msgid "Cancelled"
 msgstr "Kansellert"
 
-msgid "Assigned to"
-msgstr "Tildelt til"
-
 msgid "Registering unit"
 msgstr "Registreringsenhet"
 
@@ -744,6 +756,9 @@ msgid ""
 msgstr ""
 "Du kan også velge et program fra topplinjen og opprette i det programmet"
 
+msgid "Save new"
+msgstr ""
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Opprett ny {{trackedEntityTypeName}} og link"
 
@@ -793,6 +808,9 @@ msgstr "Søk etter attributter"
 
 msgid "Back"
 msgstr "Tilbake"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Søk etter"
@@ -854,6 +872,12 @@ msgstr "Søk i alle programmer"
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -891,6 +915,15 @@ msgstr "Legg til relasjon"
 msgid "Results found"
 msgstr "Resultater funnet"
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Søk {{uniqueAttrName}}"
 
@@ -905,6 +938,9 @@ msgstr "åpne Tracker Capture app"
 
 msgid "An error has occured. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Program ble ikke funnet"
@@ -944,6 +980,12 @@ msgstr "Feil ved lagring av registrering"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"

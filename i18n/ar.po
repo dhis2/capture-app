@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2021\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -157,6 +157,9 @@ msgstr "المستخدم المعين"
 msgid "Search for user"
 msgstr "البحث عن مستخدم"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
 
@@ -197,6 +200,9 @@ msgstr "فعال"
 msgid "Completed"
 msgstr "المكتملة"
 
+msgid "Assigned to"
+msgstr "مسندة إلى"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
 
@@ -211,6 +217,9 @@ msgstr "إنهاء"
 
 msgid "No write access"
 msgstr "لا توجد صلاحية الوصول للكتابة"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "التحويل الى العرض كنموذج"
@@ -511,6 +520,12 @@ msgstr "البرنامج المحدد غير صالح لوحدة التسجيل 
 msgid "New"
 msgstr "جديد"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr "إلغاء تحديد ماتم تحديده"
 
@@ -664,9 +679,6 @@ msgstr "حالة التسجيل"
 msgid "Cancelled"
 msgstr "تم الإلغاء"
 
-msgid "Assigned to"
-msgstr "مسندة إلى"
-
 msgid "Registering unit"
 msgstr "وحدة التسجيل"
 
@@ -731,6 +743,9 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "Save new"
+msgstr ""
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
@@ -779,6 +794,9 @@ msgstr "البحث حسب السمة"
 
 msgid "Back"
 msgstr "الخلف"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "ابحث عن"
@@ -840,6 +858,12 @@ msgstr "البحث في جميع البرامج"
 msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -875,6 +899,15 @@ msgstr "اضف علاقة"
 msgid "Results found"
 msgstr "العثور على نتائج"
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "بحث {{uniqueAttrName}}"
 
@@ -889,6 +922,9 @@ msgstr "فتح برنامج التتبع والإلتقاط"
 
 msgid "An error has occured. See log for details"
 msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "لم يتم ايجاد البرنامج"
@@ -928,6 +964,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"

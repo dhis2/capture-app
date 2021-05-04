@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -152,6 +152,9 @@ msgstr "指派的用户"
 msgid "Search for user"
 msgstr "搜索用户 "
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "基本信息"
 
@@ -189,6 +192,9 @@ msgstr "活跃的"
 msgid "Completed"
 msgstr "完成"
 
+msgid "Assigned to"
+msgstr "指派到"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "保存事件前请添加或取消备注"
 
@@ -203,6 +209,9 @@ msgstr "保存"
 
 msgid "No write access"
 msgstr "无写权限"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "切换到表单视图"
@@ -501,6 +510,12 @@ msgstr "选择的项目对选择的机构无效"
 msgid "New"
 msgstr "新建"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr "清除选择"
 
@@ -655,9 +670,6 @@ msgstr "登记状态"
 msgid "Cancelled"
 msgstr "已取消"
 
-msgid "Assigned to"
-msgstr "指派到"
-
 msgid "Registering unit"
 msgstr "注册机构"
 
@@ -722,6 +734,9 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr "您也可以从顶部栏中选择一个项目并在该项目中创建"
 
+msgid "Save new"
+msgstr ""
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
 
@@ -770,6 +785,9 @@ msgstr "按属性搜索"
 
 msgid "Back"
 msgstr "后退"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "搜索"
@@ -825,6 +843,12 @@ msgstr "搜索所有项目"
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -860,6 +884,15 @@ msgstr "添加关系"
 msgid "Results found"
 msgstr "找到的结果"
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
 
@@ -874,6 +907,9 @@ msgstr "打开跟踪随访APP"
 
 msgid "An error has occured. See log for details"
 msgstr "发生一个错误,看日志"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "没有发现项目"
@@ -913,6 +949,12 @@ msgstr "保存注册时出错"
 
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "设置坐标"

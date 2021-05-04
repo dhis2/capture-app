@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -153,6 +153,9 @@ msgstr "Тавсия этилган фойдаланувчи"
 msgid "Search for user"
 msgstr "Фойдаланувчини излаш"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Асосий маълумот"
 
@@ -194,6 +197,9 @@ msgstr "Фаол"
 msgid "Completed"
 msgstr "Тўлдирилди"
 
+msgid "Assigned to"
+msgstr "Тайинланган"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "Илтимос, ҳодиса/тадбирни сақлашдан олдин шарҳ ёзинг ёки бекор қилинг"
 
@@ -208,6 +214,9 @@ msgstr "Тугатиш"
 
 msgid "No write access"
 msgstr "Ёзув киритиш учун рухсат йўқ"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Шакл кўринишига ўтиш"
@@ -516,6 +525,12 @@ msgstr "Танланган дастур танланган рўйхатдан о
 msgid "New"
 msgstr "Янги"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr "Танловларни тозалаш"
 
@@ -669,9 +684,6 @@ msgstr "Рўйхатга олиш ҳолати"
 msgid "Cancelled"
 msgstr "Бекор қилинди"
 
-msgid "Assigned to"
-msgstr "Тайинланган"
-
 msgid "Registering unit"
 msgstr "Рўйхатга олиш муассасаси"
 
@@ -736,6 +748,9 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "Save new"
+msgstr ""
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Янги {{trackedEntityTypeName}} ва ҳаволани сақлаш"
 
@@ -786,6 +801,9 @@ msgstr "Атрибут орқали қидириш"
 
 msgid "Back"
 msgstr "Орқага"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Қидириш"
@@ -853,6 +871,12 @@ msgstr "Барча дастурларда қидириш"
 msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -890,6 +914,15 @@ msgstr "Ўзаро алоқа қўшиш"
 msgid "Results found"
 msgstr "Натижалар топилди"
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "{{uniqueAttrName}} орқали қидириш"
 
@@ -904,6 +937,9 @@ msgstr "Кузатув-Назорат дастурини очинг"
 
 msgid "An error has occured. See log for details"
 msgstr "Хатолик юз берди. Тафсилотларни журналдан кўринг."
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Дастур топилмади"
@@ -943,6 +979,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "кузатувдаги объект намунаси"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"
