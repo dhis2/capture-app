@@ -40,7 +40,7 @@ const AppLoader = (props: Props) => {
             // $FlowFixMe[prop-missing] automated comment
             const store = getStore(history, () => onRunApp(store, history));
         } catch (error) {
-            let message = 'The application could not be loaded.';
+            let message = 'The application could not be loaded2.';
             if (error && error instanceof DisplayException) {
                 logError(error.innerError);
                 message += ` ${error.toString()}`;
