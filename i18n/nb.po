@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,6 +155,9 @@ msgstr "Tildelt programbruker"
 msgid "Search for user"
 msgstr "Søk etter bruker"
 
+msgid "Complete event"
+msgstr "Fullfør hendelse"
+
 msgid "Basic info"
 msgstr "Grunnleggende informasjon"
 
@@ -187,13 +190,16 @@ msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
-"Forhold av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
+"Relasjon av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
 
 msgid "Active"
 msgstr "Aktiv"
 
 msgid "Completed"
 msgstr "Fullført"
+
+msgid "Assigned to"
+msgstr "Tildelt til"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "Legg til eller avbryt kommentar før du lagrer hendelsen"
@@ -209,6 +215,9 @@ msgstr "Fullfør"
 
 msgid "No write access"
 msgstr "Ingen skrivetilgang"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Bytt til skjemavisning"
@@ -277,7 +286,7 @@ msgid "An error has occurred. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr "Et duplikat finnes (men det var noen feil, se logg for detaljer)"
+msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
@@ -320,9 +329,6 @@ msgstr "Indikatorer"
 msgid "Warnings"
 msgstr "Advarsler"
 
-msgid "search group result could not be retrieved"
-msgstr "søkegrupperesultat kunne ikke hentes"
-
 msgid "Complete"
 msgstr "Fullfør"
 
@@ -352,12 +358,6 @@ msgstr "Noen operasjoner kjører fortsatt. Vennligst vent.."
 
 msgid "Operations running"
 msgstr "Operasjoner kjører"
-
-msgid "Hide"
-msgstr "Skjul"
-
-msgid "Possible duplicates found"
-msgstr "Mulige duplikater funnet"
 
 msgid "Sort"
 msgstr "Sorter"
@@ -470,6 +470,9 @@ msgstr "Fjern"
 msgid "No results"
 msgstr "Ingen resultater"
 
+msgid "Icon for {{field}}"
+msgstr "Ikon for {{field}}"
+
 msgid "start typing to search"
 msgstr "begynn å skrive for å søke"
 
@@ -523,6 +526,12 @@ msgstr "Valgt program er ugyldig for registreringsenhet"
 
 msgid "New"
 msgstr "Ny"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "Ny {{trackedEntityName}} i {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
 
 msgid "Clear selections"
 msgstr "Tøm valg"
@@ -685,9 +694,6 @@ msgstr "Registreringsstatus"
 msgid "Cancelled"
 msgstr "Kansellert"
 
-msgid "Assigned to"
-msgstr "Tildelt til"
-
 msgid "Registering unit"
 msgstr "Registreringsenhet"
 
@@ -753,8 +759,8 @@ msgid ""
 msgstr ""
 "Du kan også velge et program fra topplinjen og opprette i det programmet"
 
-msgid "Review Duplicates"
-msgstr "Gjennomgå duplikater"
+msgid "Save new"
+msgstr "Lagre ny"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Opprett ny {{trackedEntityTypeName}} og link"
@@ -798,13 +804,16 @@ msgid "Search {{name}}"
 msgstr "Søk {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "Søk etter {{name}}"
 
 msgid "Search by attributes"
 msgstr "Søk etter attributter"
 
 msgid "Back"
 msgstr "Tilbake"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Søk etter"
@@ -866,6 +875,12 @@ msgstr "Søk i alle programmer"
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
+msgid "Event details"
+msgstr "Hendelsesdetaljer"
+
+msgid "Event completed"
+msgstr "Hendelse fullført"
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -885,6 +900,9 @@ msgstr "Hendelse er tildelt til {{name}}"
 msgid "Feedbacks"
 msgstr "Tilbakemeldinger"
 
+msgid "Possible duplicates found"
+msgstr "Mulige duplikater funnet"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "En feil oppsto ved lasting av mulige duplikater"
 
@@ -900,6 +918,15 @@ msgstr "Legg til relasjon"
 msgid "Results found"
 msgstr "Resultater funnet"
 
+msgid "Open"
+msgstr "Åpne"
+
+msgid "All accessible"
+msgstr "Alle tilgjengelige"
+
+msgid "Organisation unit scope"
+msgstr "Organisasjonsenhet-omfang"
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Søk {{uniqueAttrName}}"
 
@@ -912,8 +939,17 @@ msgstr "For å jobbe med det valgte programmet,"
 msgid "open the Tracker Capture app"
 msgstr "åpne Tracker Capture app"
 
+msgid "Person Profile"
+msgstr "Personprofil"
+
+msgid "Stages and Events"
+msgstr "Faser og hendelser"
+
 msgid "An error has occured. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Program ble ikke funnet"
@@ -927,8 +963,8 @@ msgstr "Profil"
 msgid "Error saving event"
 msgstr "Feil ved lagring av hendelse"
 
-msgid "Could not save event. See log for details"
-msgstr "Kunne ikke lagre hendelse. Se loggen for detaljer"
+msgid "Could not save event"
+msgstr "Kunne ikke lagre hendelse"
 
 msgid "Could not delete event"
 msgstr "Kunne ikke slette hendelse"
@@ -942,11 +978,23 @@ msgstr "Kunne ikke legge til arbeidsliste"
 msgid "Could not delete working list"
 msgstr "Kunne ikke slette arbeidsliste"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "Organisasjonsenhetsøk feilet. Se logg for detaljer"
+msgid "Organisation unit search failed."
+msgstr "Organisasjonsenhetssøk mislyktes."
+
+msgid "Error saving tracked entity instance"
+msgstr "Feil ved lagring av sporet enhetsforekomst"
+
+msgid "Error saving enrollment"
+msgstr "Feil ved lagring av registrering"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
+
+msgid "Latitude"
+msgstr "Breddegrad"
+
+msgid "Longitude"
+msgstr "Lengdegrad"
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"
