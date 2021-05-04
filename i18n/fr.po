@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2021-04-21T09:54:58.143Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -402,6 +402,9 @@ msgstr "Vous n'avez pas accès aux commentaires"
 msgid "Write comment"
 msgstr "Ecrire commentaire"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Infos de base"
 
@@ -597,6 +600,9 @@ msgstr ""
 "La relation entre le type {{nom du type de relation}} et {{Nom d'entité}} "
 "existe déjà"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "New event"
 msgstr "Nouvel événement"
 
@@ -728,6 +734,12 @@ msgstr "Enregistrer"
 msgid "You dont have access to edit this event"
 msgstr "Vous n'êtes pas autorisé à modifier cet événement"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -754,6 +766,18 @@ msgstr "Vous n'êtes pas autorisé à créer des relations"
 
 msgid "Add relationship"
 msgstr "Ajouetr relation"
+
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Programme choisi"
@@ -810,6 +834,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Définir les coordonnées"

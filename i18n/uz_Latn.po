@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2021-04-21T09:54:58.143Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -395,6 +395,9 @@ msgstr "Fikr yozish huquqiga ega emassiz"
 msgid "Write comment"
 msgstr "Fikr yozing"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Аsosiy maʼlumot"
 
@@ -588,6 +591,9 @@ msgstr ""
 "{{relationshipTypeName}} turining {{entityName}} bilan aloqasi allaqachon "
 "mavjud"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "New event"
 msgstr "Yangi hodisa"
 
@@ -716,6 +722,12 @@ msgstr "Roʼyxatga olish"
 msgid "You dont have access to edit this event"
 msgstr "Ushbu hodisa/tadbirni tahrirlash huquqiga ega emassiz"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -743,6 +755,18 @@ msgstr "Ushbu oʼzaro aloqalarni yaratish huquqiga ega emassiz"
 
 msgid "Add relationship"
 msgstr "Oʼzaro aloqa kiritish"
+
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Tanlangan dastur"
@@ -796,6 +820,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "kuzatilayotgan obʼekt namunasi"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Koordinatani oʼrnating"

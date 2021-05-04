@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2021-04-21T09:54:58.143Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: trendspotter, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -390,6 +390,9 @@ msgstr "Nemáte přístup k psaní komentářů"
 msgid "Write comment"
 msgstr "Napsat komentář"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Základní informace"
 
@@ -580,6 +583,9 @@ msgid ""
 "exists"
 msgstr "Vztah typu {{relationshipTypeName}} k {{entityName}} již existuje"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "New event"
 msgstr "Nová událost"
 
@@ -706,6 +712,12 @@ msgstr "Registrovat"
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -733,6 +745,18 @@ msgstr "Nemáte přístup k vytváření jakýchkoli vztahů"
 
 msgid "Add relationship"
 msgstr "Přidat vztah"
+
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Vybraný program"
@@ -785,6 +809,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"

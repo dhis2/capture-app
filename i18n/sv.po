@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2021-04-21T09:54:58.143Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Swedish (https://www.transifex.com/hisp-uio/teams/100509/sv/)\n"
@@ -385,6 +385,9 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr ""
 
@@ -571,6 +574,9 @@ msgid ""
 "exists"
 msgstr ""
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "New event"
 msgstr "Ny händelse"
 
@@ -691,6 +697,12 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -715,6 +727,18 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Selected program"
@@ -766,6 +790,12 @@ msgid "Organisation unit search failed. See log for details"
 msgstr ""
 
 msgid "tracked entity instance"
+msgstr ""
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
 msgstr ""
 
 msgid "Set coordinate"

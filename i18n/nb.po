@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2021-04-21T09:54:58.143Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -394,6 +394,9 @@ msgstr "Du har ikke tilgang til å skrive kommentarer"
 msgid "Write comment"
 msgstr "Skriv kommentar"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Grunnleggende informasjon"
 
@@ -585,6 +588,9 @@ msgid ""
 msgstr ""
 "Forhold av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "New event"
 msgstr "Ny hendelse"
 
@@ -711,6 +717,12 @@ msgstr "Registrere"
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -738,6 +750,18 @@ msgstr "Du har ikke tilgang til å opprette noen relasjoner"
 
 msgid "Add relationship"
 msgstr "Legg til relasjon"
+
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Valgt program"
@@ -789,6 +813,12 @@ msgstr "Organisasjonsenhetsøk feilet. Se logg for detaljer"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"

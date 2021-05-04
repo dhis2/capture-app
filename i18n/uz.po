@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2021-04-21T09:54:58.143Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -392,6 +392,9 @@ msgstr "Фикр ёзиш ҳуқуқига эга эмассиз"
 msgid "Write comment"
 msgstr "Фикр ёзинг"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Асосий маълумот"
 
@@ -584,6 +587,9 @@ msgstr ""
 " {{relationshipTypeName}} турининг {{entityName}} билан алоқаси аллақачон "
 "мавжуд"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "New event"
 msgstr "Янги тадбир"
 
@@ -713,6 +719,12 @@ msgstr "Рўйхатга олиш"
 msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -740,6 +752,18 @@ msgstr "Ушбу ўзаро алоқаларни яратиш ҳуқуқига �
 
 msgid "Add relationship"
 msgstr "Ўзаро алоқа қўшиш"
+
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr "Танланган дастур"
@@ -791,6 +815,12 @@ msgstr "Ташкилот бўлимини қидириб бўлмади. Таф�
 
 msgid "tracked entity instance"
 msgstr "кузатувдаги объект намунаси"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"
