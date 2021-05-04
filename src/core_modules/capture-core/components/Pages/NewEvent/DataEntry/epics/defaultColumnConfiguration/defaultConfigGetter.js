@@ -36,7 +36,7 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
             id: mainPropertyNames.ASSIGNEE,
             type: 'ASSIGNEE',
             apiName: 'assignedUser',
-            header: 'Assigned to',
+            header: i18n.t('Assigned to'),
             visible: true,
             isMainProperty: true,
         };
