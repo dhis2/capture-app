@@ -550,7 +550,7 @@ msgid "Program"
 msgstr "Программа"
 
 msgid "No programs available."
-msgstr "Ҳеч қандай дастур мавжуд эмас"
+msgstr "Ҳеч қандай дастур мавжуд эмас."
 
 msgid "Show all"
 msgstr "Барчага кўрсатиш"

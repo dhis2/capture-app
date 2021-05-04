@@ -5,6 +5,7 @@
 # Carwoto Sa'an <carwoto@gmail.com>, 2021
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
