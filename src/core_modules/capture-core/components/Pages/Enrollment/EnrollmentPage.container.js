@@ -18,7 +18,6 @@ import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
-
     const { teiId, programId, enrollmentId } =
         useSelector(({ router: { location: { query } } }) => ({
             teiId: query.teidId,
