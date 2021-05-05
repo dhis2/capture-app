@@ -312,7 +312,7 @@ msgid "Write comment"
 msgstr "Фикр ёзинг"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Ҳодиса/тадбирни якунлаш"
 
 msgid "Basic info"
 msgstr "Асосий маълумот"
@@ -517,7 +517,7 @@ msgid ""
 msgstr " {{relationshipTypeName}} турининг {{entityName}} "
 
 msgid "Assigned to"
-msgstr ""
+msgstr "Тайинланган"
 
 msgid "New event"
 msgstr "Янги ҳодиса"
@@ -658,7 +658,7 @@ msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
 
 msgid "Event details"
-msgstr ""
+msgstr "Ҳодиса/тадбир тафсилотлари"
 
 msgid "Event completed"
 msgstr ""
@@ -731,16 +731,16 @@ msgid "Add relationship"
 msgstr "Ўзаро алоқа киритиш"
 
 msgid "Open"
-msgstr ""
+msgstr "Очиқ"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Барчага кириш мумкин"
 
 msgid "Selected"
-msgstr ""
+msgstr "Танланган"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Ташкилий бўлим ҳуқуқ ва бурчлари"
 
 msgid "Selected program"
 msgstr "Танланган дастур"
@@ -794,10 +794,10 @@ msgid "tracked entity instance"
 msgstr "кузатувдаги объект намунаси"
 
 msgid "Latitude"
-msgstr ""
+msgstr "Кенглик"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Узунлик"
 
 msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"

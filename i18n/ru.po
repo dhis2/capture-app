@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2020
-# phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -315,7 +315,7 @@ msgid "Write comment"
 msgstr "Написать комментарий"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Завершить событие"
 
 msgid "Basic info"
 msgstr "Базовая информация"
@@ -523,7 +523,7 @@ msgid ""
 msgstr "Тип Родство {{relationshipTypeName}} к {{entityName}} уже существует"
 
 msgid "Assigned to"
-msgstr ""
+msgstr "закреплено за"
 
 msgid "New event"
 msgstr "Новое событие"
@@ -663,7 +663,7 @@ msgid "You dont have access to edit this event"
 msgstr "У вас нет прав на исправление данного события"
 
 msgid "Event details"
-msgstr ""
+msgstr "Детали события"
 
 msgid "Event completed"
 msgstr ""
@@ -736,16 +736,16 @@ msgid "Add relationship"
 msgstr "Добавить зависимость"
 
 msgid "Open"
-msgstr ""
+msgstr "Открыть"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Все доступные"
 
 msgid "Selected"
-msgstr ""
+msgstr "Выбранный"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Масштаб организационной единицы"
 
 msgid "Selected program"
 msgstr "Выбранная программа"
@@ -800,10 +800,10 @@ msgid "tracked entity instance"
 msgstr "Элемент отслеживаемый объекта"
 
 msgid "Latitude"
-msgstr ""
+msgstr "Широта"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Долгота"
 
 msgid "Set coordinate"
 msgstr "Задать координату"
