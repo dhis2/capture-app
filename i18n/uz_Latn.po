@@ -757,16 +757,16 @@ msgid "Add relationship"
 msgstr "Oʼzaro aloqa kiritish"
 
 msgid "Open"
-msgstr ""
+msgstr "Ochiq"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Barchaga kirish mumkin"
 
 msgid "Selected"
-msgstr ""
+msgstr "Tanlangan"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Tashkiliy boʼlim huquq va burchlari"
 
 msgid "Selected program"
 msgstr "Tanlangan dastur"
@@ -822,10 +822,10 @@ msgid "tracked entity instance"
 msgstr "kuzatilayotgan obʼekt namunasi"
 
 msgid "Latitude"
-msgstr ""
+msgstr "Kenglik"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Kenglik"
 
 msgid "Set coordinate"
 msgstr "Koordinatani oʼrnating"
