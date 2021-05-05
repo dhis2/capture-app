@@ -158,7 +158,7 @@ msgid "Search for user"
 msgstr "البحث عن مستخدم"
 
 msgid "Complete event"
-msgstr ""
+msgstr "إكمال الحدث"
 
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
@@ -859,7 +859,7 @@ msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
 
 msgid "Event details"
-msgstr ""
+msgstr "تفاصيل الحدث"
 
 msgid "Event completed"
 msgstr ""
@@ -900,13 +900,13 @@ msgid "Results found"
 msgstr "العثور على نتائج"
 
 msgid "Open"
-msgstr ""
+msgstr "مفتوح"
 
 msgid "All accessible"
-msgstr ""
+msgstr "الكل يمكن الوصول اليه"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "مدى وحدة التنظيم"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "بحث {{uniqueAttrName}}"
@@ -966,10 +966,10 @@ msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"
 
 msgid "Latitude"
-msgstr ""
+msgstr "خط العرض"
 
 msgid "Longitude"
-msgstr ""
+msgstr "خط الطول"
 
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"

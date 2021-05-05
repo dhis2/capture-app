@@ -149,7 +149,7 @@ msgid "Search for user"
 msgstr ""
 
 msgid "Complete event"
-msgstr ""
+msgstr "Complete event"
 
 msgid "Basic info"
 msgstr ""
@@ -839,7 +839,7 @@ msgid "You dont have access to edit this event"
 msgstr ""
 
 msgid "Event details"
-msgstr ""
+msgstr "ລາຍລະອຽດເຫດການ"
 
 msgid "Event completed"
 msgstr ""
@@ -880,10 +880,10 @@ msgid "Results found"
 msgstr ""
 
 msgid "Open"
-msgstr ""
+msgstr "ເປີດ"
 
 msgid "All accessible"
-msgstr ""
+msgstr "ເຂົ້າເຖິງໄດ້ໝົດ"
 
 msgid "Organisation unit scope"
 msgstr ""
@@ -946,10 +946,10 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Latitude"
-msgstr ""
+msgstr "ເສັ້ນແວ້ງ"
 
 msgid "Longitude"
-msgstr ""
+msgstr "ເສັ້ນຂະໜານ"
 
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"

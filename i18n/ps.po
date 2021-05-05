@@ -839,7 +839,7 @@ msgid "You dont have access to edit this event"
 msgstr ""
 
 msgid "Event details"
-msgstr ""
+msgstr "د پېښې جزیات"
 
 msgid "Event completed"
 msgstr ""
@@ -880,13 +880,13 @@ msgid "Results found"
 msgstr ""
 
 msgid "Open"
-msgstr ""
+msgstr "خلاص یې کړئ"
 
 msgid "All accessible"
-msgstr ""
+msgstr "ټول د لاسرسي وړ دي"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "د سازمان د واحد له محدودې څخه ګټه اخیستل"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -946,10 +946,10 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Latitude"
-msgstr ""
+msgstr "لېټېټيوډ"
 
 msgid "Longitude"
-msgstr ""
+msgstr "لانګېټيوډ"
 
 msgid "Set coordinate"
 msgstr "همغږي ترتیب کړئ"

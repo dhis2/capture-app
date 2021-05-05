@@ -919,13 +919,13 @@ msgid "Results found"
 msgstr "Natijalar topildi"
 
 msgid "Open"
-msgstr ""
+msgstr "Ochiq"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Barchaga kirish mumkin"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Tashkiliy boʼlim huquq va burchlari"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "{{uniqueAttrName}} orqali qidirish"
@@ -986,10 +986,10 @@ msgid "tracked entity instance"
 msgstr "kuzatilayotgan obʼekt namunasi"
 
 msgid "Latitude"
-msgstr ""
+msgstr "Kenglik"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Kenglik"
 
 msgid "Set coordinate"
 msgstr "Koordinatani oʼrnating"

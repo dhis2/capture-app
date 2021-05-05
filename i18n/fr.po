@@ -1,12 +1,12 @@
 # 
 # Translators:
-# phil_dhis2, 2021
 # Edem Kossi <ekossi@hispwca.org>, 2021
 # Karoline Tufte Lien <karoline@dhis2.org>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # Bram Piot <bram.piot@gmail.com>, 2021
 # Yao Selom Saka <ysaka@hispwca.org>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # Yayra Gomado <ygomado@hispwca.org>, 2021
 # 
 msgid ""
@@ -163,7 +163,7 @@ msgid "Search for user"
 msgstr "Rechercher un utilisateur"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Evènement complété"
 
 msgid "Basic info"
 msgstr "Infos de base"
@@ -542,10 +542,10 @@ msgid "New"
 msgstr "Nouveau"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Nouveau {{trackedEntityName}} dans {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Rechercher un {{trackedEntityName}} dans {{programName}}"
 
 msgid "Clear selections"
 msgstr "Effacer les sélections"
@@ -779,7 +779,7 @@ msgstr ""
 " dans ce programme"
 
 msgid "Save new"
-msgstr ""
+msgstr "Enregistrer nouveau"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Enregistrer le nouveau {{trackedEntityTypeName}} et le lien"
@@ -902,10 +902,10 @@ msgid "You dont have access to edit this event"
 msgstr "Vous n'êtes pas autorisé à modifier cet événement"
 
 msgid "Event details"
-msgstr ""
+msgstr "Détails de l'évènement"
 
 msgid "Event completed"
-msgstr ""
+msgstr "Événement terminé"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -944,13 +944,13 @@ msgid "Results found"
 msgstr "Résultats trouvés"
 
 msgid "Open"
-msgstr ""
+msgstr "Ouvrir"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Tous accessibles"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Portée d'unité d'organisation"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Chercher {{uniqueAttrName}}"
@@ -1012,10 +1012,10 @@ msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
 
 msgid "Latitude"
-msgstr ""
+msgstr "Latitude"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Longitude"
 
 msgid "Set coordinate"
 msgstr "Définir les coordonnées"

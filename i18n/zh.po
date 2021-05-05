@@ -1,16 +1,16 @@
 # 
 # Translators:
 # phil_dhis2, 2021
+# easylin <lin_xd@126.com>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # 晓东 林 <13981924470@126.com>, 2021
-# easylin <lin_xd@126.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2021\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -153,7 +153,7 @@ msgid "Search for user"
 msgstr "搜索用户 "
 
 msgid "Complete event"
-msgstr ""
+msgstr "完成事件"
 
 msgid "Basic info"
 msgstr "基本信息"
@@ -844,10 +844,10 @@ msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
 msgid "Event details"
-msgstr ""
+msgstr "事件详情"
 
 msgid "Event completed"
-msgstr ""
+msgstr "事件完成"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -885,13 +885,13 @@ msgid "Results found"
 msgstr "找到的结果"
 
 msgid "Open"
-msgstr ""
+msgstr "开放"
 
 msgid "All accessible"
-msgstr ""
+msgstr "所有可访问的"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "使用的机构范围"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
@@ -951,10 +951,10 @@ msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
 
 msgid "Latitude"
-msgstr ""
+msgstr "维度"
 
 msgid "Longitude"
-msgstr ""
+msgstr "经度"
 
 msgid "Set coordinate"
 msgstr "设置坐标"

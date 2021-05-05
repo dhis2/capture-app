@@ -151,7 +151,7 @@ msgid "Search for user"
 msgstr "搜索用户 "
 
 msgid "Complete event"
-msgstr ""
+msgstr "完成事件"
 
 msgid "Basic info"
 msgstr "基本信息"
@@ -882,13 +882,13 @@ msgid "Results found"
 msgstr "找到的结果"
 
 msgid "Open"
-msgstr ""
+msgstr "打开"
 
 msgid "All accessible"
-msgstr ""
+msgstr "所有可访问的"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "机构范围"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
@@ -948,10 +948,10 @@ msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
 
 msgid "Latitude"
-msgstr ""
+msgstr "纬度"
 
 msgid "Longitude"
-msgstr ""
+msgstr "经度"
 
 msgid "Set coordinate"
 msgstr "设置坐标"

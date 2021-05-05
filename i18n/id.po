@@ -1,8 +1,8 @@
 # 
 # Translators:
 # phil_dhis2, 2019
-# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
 # Carwoto Sa'an <carwoto@gmail.com>, 2021
+# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # 
@@ -883,13 +883,13 @@ msgid "Results found"
 msgstr ""
 
 msgid "Open"
-msgstr ""
+msgstr "Buka"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Semua dapat diakses"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Cakupan unit organisasi"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -949,10 +949,10 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Latitude"
-msgstr ""
+msgstr "Lintang"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Bujur"
 
 msgid "Set coordinate"
 msgstr "Tentukan koordinat"

@@ -156,7 +156,7 @@ msgid "Search for user"
 msgstr "Søk etter bruker"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Fullfør hendelse"
 
 msgid "Basic info"
 msgstr "Grunnleggende informasjon"
@@ -217,7 +217,7 @@ msgid "No write access"
 msgstr "Ingen skrivetilgang"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "Ny {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Bytt til skjemavisning"
@@ -525,10 +525,10 @@ msgid "New"
 msgstr "Ny"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Ny {{trackedEntityName}} i {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
 
 msgid "Clear selections"
 msgstr "Tøm valg"
@@ -757,7 +757,7 @@ msgstr ""
 "Du kan også velge et program fra topplinjen og opprette i det programmet"
 
 msgid "Save new"
-msgstr ""
+msgstr "Lagre ny"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Opprett ny {{trackedEntityTypeName}} og link"
@@ -810,7 +810,7 @@ msgid "Back"
 msgstr "Tilbake"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Søk etter {{titleText}}"
 
 msgid "Search for"
 msgstr "Søk etter"
@@ -873,10 +873,10 @@ msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
 msgid "Event details"
-msgstr ""
+msgstr "Hendelsesdetaljer"
 
 msgid "Event completed"
-msgstr ""
+msgstr "Hendelse fullført"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -916,13 +916,13 @@ msgid "Results found"
 msgstr "Resultater funnet"
 
 msgid "Open"
-msgstr ""
+msgstr "Åpne"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Alle tilgjengelige"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Organisasjonsenhet-omfang"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Søk {{uniqueAttrName}}"
@@ -940,7 +940,7 @@ msgid "An error has occured. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "{{trackedEntityName}} i program{{escape}} {{programName}}"
 
 msgid "Program not found"
 msgstr "Program ble ikke funnet"
@@ -982,10 +982,10 @@ msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
 
 msgid "Latitude"
-msgstr ""
+msgstr "Breddegrad"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Lengdegrad"
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"

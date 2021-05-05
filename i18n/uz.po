@@ -154,7 +154,7 @@ msgid "Search for user"
 msgstr "Фойдаланувчини излаш"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Ҳодиса/тадбирни якунлаш"
 
 msgid "Basic info"
 msgstr "Асосий маълумот"
@@ -872,7 +872,7 @@ msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
 
 msgid "Event details"
-msgstr ""
+msgstr "Ҳодиса/тадбир тафсилотлари"
 
 msgid "Event completed"
 msgstr ""
@@ -915,13 +915,13 @@ msgid "Results found"
 msgstr "Натижалар топилди"
 
 msgid "Open"
-msgstr ""
+msgstr "Очиқ"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Барчага кириш мумкин"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Ташкилий бўлим ҳуқуқ ва бурчлари"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "{{uniqueAttrName}} орқали қидириш"
@@ -981,10 +981,10 @@ msgid "tracked entity instance"
 msgstr "кузатувдаги объект намунаси"
 
 msgid "Latitude"
-msgstr ""
+msgstr "Кенглик"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Узунлик"
 
 msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"
