@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -153,6 +153,9 @@ msgstr "Přiřazený uživatel"
 msgid "Search for user"
 msgstr "Hledat uživatele"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Základní informace"
 
@@ -192,6 +195,9 @@ msgstr "Aktivní"
 msgid "Completed"
 msgstr "Dokončeno"
 
+msgid "Assigned to"
+msgstr "Přiřazen k"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "Před uložením události prosím přidejte nebo zrušte komentář"
 
@@ -206,6 +212,9 @@ msgstr "Dokončit"
 
 msgid "No write access"
 msgstr "Žádný přístup pro zápis"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Přepnout do formulářového zobrazení"
@@ -510,6 +519,12 @@ msgstr "Vybraný program je pro vybranou registrační jednotku neplatný"
 msgid "New"
 msgstr "Nový"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr "Vymazat výběry"
 
@@ -670,9 +685,6 @@ msgstr "Stav zápisu"
 msgid "Cancelled"
 msgstr "Zrušeno"
 
-msgid "Assigned to"
-msgstr "Přiřazen k"
-
 msgid "Registering unit"
 msgstr "Registrační jednotka"
 
@@ -737,6 +749,9 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr "Můžete také vybrat program z horní lišty a vytvořit v něm program"
 
+msgid "Save new"
+msgstr ""
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Uložit nový {{trackedEntityTypeName}} a odkaz"
 
@@ -786,6 +801,9 @@ msgstr "Hledání podle atributů"
 
 msgid "Back"
 msgstr "Zpět"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Hledat"
@@ -850,6 +868,12 @@ msgstr "Hledat ve všech programech"
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -887,6 +911,15 @@ msgstr "Přidat vztah"
 msgid "Results found"
 msgstr "Nalezeny výsledky"
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Hledat {{uniqueAttrName}}"
 
@@ -901,6 +934,9 @@ msgstr "otevřít aplikaci Tracker Capture"
 
 msgid "An error has occured. See log for details"
 msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Program nebyl nalezen"
@@ -940,6 +976,12 @@ msgstr "Při ukládání zápisu došlo k chybě"
 
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"

@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Yayra Gomado <ygomado@hispwca.org>, 2021\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -162,6 +162,9 @@ msgstr "Utilisateur affecté"
 msgid "Search for user"
 msgstr "Rechercher un utilisateur"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Infos de base"
 
@@ -203,6 +206,9 @@ msgstr "Actif"
 msgid "Completed"
 msgstr "Terminé"
 
+msgid "Assigned to"
+msgstr "Attribue"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 "Veuillez ajouter ou annuler un commentaire avant avant d'enregistrer "
@@ -219,6 +225,9 @@ msgstr "Terminer"
 
 msgid "No write access"
 msgstr "Aucun accès en écriture"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Passer à la vue du formulaire"
@@ -532,6 +541,12 @@ msgstr ""
 msgid "New"
 msgstr "Nouveau"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr "Effacer les sélections"
 
@@ -697,9 +712,6 @@ msgstr "Statut de l'enrôlement"
 msgid "Cancelled"
 msgstr "Annulé"
 
-msgid "Assigned to"
-msgstr "Attribue"
-
 msgid "Registering unit"
 msgstr "Unité qui enregistre"
 
@@ -766,6 +778,9 @@ msgstr ""
 "Vous pouvez également choisir un programme dans la barre supérieure et créer"
 " dans ce programme"
 
+msgid "Save new"
+msgstr ""
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Enregistrer le nouveau {{trackedEntityTypeName}} et le lien"
 
@@ -816,6 +831,9 @@ msgstr "Chercher par attributs"
 
 msgid "Back"
 msgstr "Précédent"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Rechercher"
@@ -883,6 +901,12 @@ msgstr "Rechercher dans tous les programmes"
 msgid "You dont have access to edit this event"
 msgstr "Vous n'êtes pas autorisé à modifier cet événement"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -919,6 +943,15 @@ msgstr "Ajouetr relation"
 msgid "Results found"
 msgstr "Résultats trouvés"
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Chercher {{uniqueAttrName}}"
 
@@ -935,6 +968,9 @@ msgstr "ouvrez l'application Saisie Tracker"
 
 msgid "An error has occured. See log for details"
 msgstr "Une erreur s'est produite. Voir le log pour plus de détails"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Programme introuvable"
@@ -974,6 +1010,12 @@ msgstr "Erreur lors de l'enregistrement de l'inscription"
 
 msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Définir les coordonnées"

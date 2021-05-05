@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -157,6 +157,9 @@ msgstr "Назначенный пользователь"
 msgid "Search for user"
 msgstr "Поиск пользователя"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Начальные сведения"
 
@@ -196,6 +199,9 @@ msgstr "Действующий"
 msgid "Completed"
 msgstr "Завершенный"
 
+msgid "Assigned to"
+msgstr "закреплено за"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 "Пожалуйста добавьте или удалите комментарии, перед сохранением Записи-"
@@ -212,6 +218,9 @@ msgstr "Завершить"
 
 msgid "No write access"
 msgstr "Отсутствует право на запись "
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Переключиь вид на Формы"
@@ -521,6 +530,12 @@ msgstr ""
 msgid "New"
 msgstr "Новый"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr ""
 
@@ -674,9 +689,6 @@ msgstr "Статус регистрации"
 msgid "Cancelled"
 msgstr "Отмененный"
 
-msgid "Assigned to"
-msgstr "закреплено за"
-
 msgid "Registering unit"
 msgstr "Регистрирующая единица"
 
@@ -741,6 +753,9 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "Save new"
+msgstr ""
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
@@ -790,6 +805,9 @@ msgstr "Поиск по атрибутам"
 
 msgid "Back"
 msgstr "Назад"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Поиск"
@@ -848,6 +866,12 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "У вас нет прав на исправление данного события"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -885,6 +909,15 @@ msgstr "Добавить зависимость"
 msgid "Results found"
 msgstr "Найдены результаты"
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Поиск {{uniqueAttrName}}"
 
@@ -900,6 +933,9 @@ msgstr "Открыть приложение \"Отслеживание объе�
 
 msgid "An error has occured. See log for details"
 msgstr "Произошла ошибка. Смотрите подробности в лог-файле"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Программа не найдена"
@@ -939,6 +975,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "Элемент отслеживаемого объекта"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Задать координату"

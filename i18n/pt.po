@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Ge Joao <gsimango@saudigitus.org>, 2021\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -150,6 +150,9 @@ msgstr "Usuário designado"
 msgid "Search for user"
 msgstr ""
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr ""
 
@@ -187,6 +190,9 @@ msgstr "Activo"
 msgid "Completed"
 msgstr "Completo"
 
+msgid "Assigned to"
+msgstr "Atribuido a"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
@@ -200,6 +206,9 @@ msgid "Finish"
 msgstr "Terminar"
 
 msgid "No write access"
+msgstr ""
+
+msgid "New {{titleText}}"
 msgstr ""
 
 msgid "Switch to form view"
@@ -499,6 +508,12 @@ msgstr ""
 msgid "New"
 msgstr "Novo"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr ""
 
@@ -652,9 +667,6 @@ msgstr "Status da inscrição"
 msgid "Cancelled"
 msgstr "Cancelado"
 
-msgid "Assigned to"
-msgstr "Atribuido a"
-
 msgid "Registering unit"
 msgstr "Unidade de registro"
 
@@ -719,6 +731,9 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "Save new"
+msgstr ""
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
@@ -767,6 +782,9 @@ msgstr ""
 
 msgid "Back"
 msgstr "Voltar"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Procurar por"
@@ -822,6 +840,12 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -857,6 +881,15 @@ msgstr "Adicionar relacionamento"
 msgid "Results found"
 msgstr ""
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
@@ -870,6 +903,9 @@ msgid "open the Tracker Capture app"
 msgstr ""
 
 msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Program not found"
@@ -909,6 +945,12 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "tracked entity instance"
+msgstr ""
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
 msgstr ""
 
 msgid "Set coordinate"

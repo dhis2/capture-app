@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-06T22:21:56.698Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -155,6 +155,9 @@ msgstr "Người dùng được chỉ định"
 msgid "Search for user"
 msgstr "Tìm kiếm người dùng"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "Thông tin cơ bản"
 
@@ -194,6 +197,9 @@ msgstr "Hoạt động"
 msgid "Completed"
 msgstr "Hoàn tất"
 
+msgid "Assigned to"
+msgstr "Đã gán cho"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "Xin vui lòng thêm hoặc xóa bình luận trước khi lưu sự kiện"
 
@@ -208,6 +214,9 @@ msgstr "Hoàn tất"
 
 msgid "No write access"
 msgstr "Không có quyền viết"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Chuyển sang xem biểu nhập"
@@ -513,6 +522,12 @@ msgstr "Chương trình đã chọn không hợp lệ cho đơn vị đăng ký 
 msgid "New"
 msgstr "Mới"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr "Xóa các lựa chọn"
 
@@ -666,9 +681,6 @@ msgstr "Trạng thái đăng ký"
 msgid "Cancelled"
 msgstr "Đã hủy"
 
-msgid "Assigned to"
-msgstr "Đã gán cho"
-
 msgid "Registering unit"
 msgstr "Đơn Vị đăng ký"
 
@@ -733,6 +745,9 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "Save new"
+msgstr ""
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Lưu {{trackedEntityTypeName}} mới và liên kết"
 
@@ -782,6 +797,9 @@ msgstr "Tìm kiếm theo thuộc tính"
 
 msgid "Back"
 msgstr "Trở lại"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Tìm"
@@ -848,6 +866,12 @@ msgstr "Tìm kiếm trong tất cả các chương trình"
 msgid "You dont have access to edit this event"
 msgstr "Bạn không có quyền truy cập để chỉnh sửa sự kiện này"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -885,6 +909,15 @@ msgstr "Thêm Quan Hệ"
 msgid "Results found"
 msgstr "Kết quả tìm thấy"
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Tìm kiếm {{uniqueAttrName}}"
 
@@ -899,6 +932,9 @@ msgstr "mở ứng dụng Tracker Capture"
 
 msgid "An error has occured. See log for details"
 msgstr "Có lỗi. Xem log để biết thêm chi tiết."
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Chương trình không tìm thấy"
@@ -938,6 +974,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "thực thể được theo dõi"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "Đặt tọa độ"
