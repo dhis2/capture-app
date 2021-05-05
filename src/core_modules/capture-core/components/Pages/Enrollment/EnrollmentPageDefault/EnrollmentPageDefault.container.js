@@ -26,7 +26,6 @@ export const EnrollmentPageDefault = () => {
             teiId={teiId}
             program={program}
             enrollmentId={enrollmentId}
-            teiId={teiId}
         />
     );
 };
