@@ -938,6 +938,9 @@ msgstr "Танланган дастур билан ишлаш учун,"
 msgid "open the Tracker Capture app"
 msgstr "Кузатув-Назорат дастурини очинг"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
 msgid "Person Profile"
 msgstr ""
 

@@ -913,6 +913,9 @@ msgstr "للعمل مع البرنامج المحدد"
 msgid "open the Tracker Capture app"
 msgstr "فتح برنامج التتبع والإلتقاط"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
 msgid "Person Profile"
 msgstr ""
 

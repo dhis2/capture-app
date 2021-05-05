@@ -943,6 +943,9 @@ msgstr "Tanlangan dastur bilan ishlash uchun,"
 msgid "open the Tracker Capture app"
 msgstr "Kuzatuv-Nazorat dasturini oching"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
 msgid "Person Profile"
 msgstr ""
 

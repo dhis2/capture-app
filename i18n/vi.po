@@ -933,6 +933,9 @@ msgstr "Để làm việc với chương trình đã chọn,"
 msgid "open the Tracker Capture app"
 msgstr "mở ứng dụng Tracker Capture"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
 msgid "Person Profile"
 msgstr ""
 
