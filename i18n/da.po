@@ -879,7 +879,7 @@ msgid "Results found"
 msgstr ""
 
 msgid "Open"
-msgstr ""
+msgstr "Open"
 
 msgid "All accessible"
 msgstr ""

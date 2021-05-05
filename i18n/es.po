@@ -1,18 +1,18 @@
 # 
 # Translators:
 # phil_dhis2, 2021
-# Marta Vila <marta@dhis2.org>, 2021
 # ericbp <ericbarredap@gmail.com>, 2021
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
+# Marta Vila <marta@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021\n"
+"Last-Translator: Marta Vila <marta@dhis2.org>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -843,7 +843,7 @@ msgid "You dont have access to edit this event"
 msgstr ""
 
 msgid "Event details"
-msgstr ""
+msgstr "Detalles del evento"
 
 msgid "Event completed"
 msgstr ""
@@ -884,13 +884,13 @@ msgid "Results found"
 msgstr ""
 
 msgid "Open"
-msgstr ""
+msgstr "Abierto"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Todo accesible"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Alcance de la unidad organizativa a utilizar"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -950,10 +950,10 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Latitude"
-msgstr ""
+msgstr "Latitud"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Longitud"
 
 msgid "Set coordinate"
 msgstr "Establecer coordenadas"

@@ -148,7 +148,7 @@ msgid "Search for user"
 msgstr ""
 
 msgid "Complete event"
-msgstr ""
+msgstr "تکمیلی رویداد"
 
 msgid "Basic info"
 msgstr ""
@@ -838,7 +838,7 @@ msgid "You dont have access to edit this event"
 msgstr ""
 
 msgid "Event details"
-msgstr ""
+msgstr "جزئیات رویداد"
 
 msgid "Event completed"
 msgstr ""
@@ -879,13 +879,13 @@ msgid "Results found"
 msgstr ""
 
 msgid "Open"
-msgstr ""
+msgstr "باز کردن"
 
 msgid "All accessible"
-msgstr ""
+msgstr "همه قابل دسترسی"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "محدوده کاری نهاد"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -945,10 +945,10 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Latitude"
-msgstr ""
+msgstr "عرض البلد"
 
 msgid "Longitude"
-msgstr ""
+msgstr "طول البلد"
 
 msgid "Set coordinate"
 msgstr "تعین مختصات"

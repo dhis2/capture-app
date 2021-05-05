@@ -154,7 +154,7 @@ msgid "Search for user"
 msgstr "Hledat uživatele"
 
 msgid "Complete event"
-msgstr ""
+msgstr "Dokončit událost"
 
 msgid "Basic info"
 msgstr "Základní informace"
@@ -520,10 +520,10 @@ msgid "New"
 msgstr "Nový"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Nový {{trackedEntityName}} v {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Vyhledat {{trackedEntityName}} v {{programName}}"
 
 msgid "Clear selections"
 msgstr "Vymazat výběry"
@@ -750,7 +750,7 @@ msgid ""
 msgstr "Můžete také vybrat program z horní lišty a vytvořit v něm program"
 
 msgid "Save new"
-msgstr ""
+msgstr "Uložit nový"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Uložit nový {{trackedEntityTypeName}} a odkaz"
@@ -869,10 +869,10 @@ msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
 
 msgid "Event details"
-msgstr ""
+msgstr "Podrobnosti události"
 
 msgid "Event completed"
-msgstr ""
+msgstr "Událost dokončena"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -912,13 +912,13 @@ msgid "Results found"
 msgstr "Nalezeny výsledky"
 
 msgid "Open"
-msgstr ""
+msgstr "Otevřít"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Všechno přístupné"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Rozsah organizační jednotky"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Hledat {{uniqueAttrName}}"
@@ -978,10 +978,10 @@ msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
 
 msgid "Latitude"
-msgstr ""
+msgstr "Zeměpisná šířka"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Zeměpisná délka"
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"

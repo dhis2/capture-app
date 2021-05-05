@@ -890,7 +890,7 @@ msgid "Results found"
 msgstr ""
 
 msgid "Open"
-msgstr ""
+msgstr "فتح"
 
 msgid "All accessible"
 msgstr ""

@@ -149,7 +149,7 @@ msgid "Search for user"
 msgstr ""
 
 msgid "Complete event"
-msgstr ""
+msgstr "Рӯйдоди анҷомёфта"
 
 msgid "Basic info"
 msgstr ""
@@ -946,10 +946,10 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Latitude"
-msgstr ""
+msgstr "Тӯл"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Арз"
 
 msgid "Set coordinate"
 msgstr ""
