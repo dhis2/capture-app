@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -153,6 +153,9 @@ msgstr "Přiřazený uživatel"
 msgid "Search for user"
 msgstr "Hledat uživatele"
 
+msgid "Complete event"
+msgstr "Dokončit událost"
+
 msgid "Basic info"
 msgstr "Základní informace"
 
@@ -192,6 +195,9 @@ msgstr "Aktivní"
 msgid "Completed"
 msgstr "Dokončeno"
 
+msgid "Assigned to"
+msgstr "Přiřazen k"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "Před uložením události prosím přidejte nebo zrušte komentář"
 
@@ -206,6 +212,9 @@ msgstr "Dokončit"
 
 msgid "No write access"
 msgstr "Žádný přístup pro zápis"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Přepnout do formulářového zobrazení"
@@ -315,9 +324,6 @@ msgstr "Indikátory"
 msgid "Warnings"
 msgstr "Varování"
 
-msgid "search group result could not be retrieved"
-msgstr "výsledek vyhledávací skupiny nelze načíst"
-
 msgid "Complete"
 msgstr "Dokončit"
 
@@ -347,12 +353,6 @@ msgstr "Některé operace stále běží. Prosím, čekejte.."
 
 msgid "Operations running"
 msgstr "Provoz běží"
-
-msgid "Hide"
-msgstr "Skrýt"
-
-msgid "Possible duplicates found"
-msgstr "Byly nalezeny možné duplikáty"
 
 msgid "Sort"
 msgstr "Třídit"
@@ -465,6 +465,9 @@ msgstr "Vyčistit"
 msgid "No results"
 msgstr "Žádné výsledky"
 
+msgid "Icon for {{field}}"
+msgstr "Ikona pro {{field}}"
+
 msgid "start typing to search"
 msgstr "začněte psát pro vyhledávání"
 
@@ -518,6 +521,12 @@ msgstr "Vybraný program je pro vybranou registrační jednotku neplatný"
 
 msgid "New"
 msgstr "Nový"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "Nový {{trackedEntityName}} v {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Vyhledat {{trackedEntityName}} v {{programName}}"
 
 msgid "Clear selections"
 msgstr "Vymazat výběry"
@@ -679,9 +688,6 @@ msgstr "Stav zápisu"
 msgid "Cancelled"
 msgstr "Zrušeno"
 
-msgid "Assigned to"
-msgstr "Přiřazen k"
-
 msgid "Registering unit"
 msgstr "Registrační jednotka"
 
@@ -746,8 +752,8 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr "Můžete také vybrat program z horní lišty a vytvořit v něm program"
 
-msgid "Review Duplicates"
-msgstr "Zkontrolovat duplikáty"
+msgid "Save new"
+msgstr "Uložit nový"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Uložit nový {{trackedEntityTypeName}} a odkaz"
@@ -791,13 +797,16 @@ msgid "Search {{name}}"
 msgstr "Hledat {{name}}"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "Hledat podle {{name}}"
 
 msgid "Search by attributes"
 msgstr "Hledání podle atributů"
 
 msgid "Back"
 msgstr "Zpět"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Hledat"
@@ -862,6 +871,12 @@ msgstr "Hledat ve všech programech"
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
 
+msgid "Event details"
+msgstr "Podrobnosti události"
+
+msgid "Event completed"
+msgstr "Událost dokončena"
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -881,6 +896,9 @@ msgstr "Událost přiřazená uživateli {{name}}"
 msgid "Feedbacks"
 msgstr "Zpětná vazba"
 
+msgid "Possible duplicates found"
+msgstr "Byly nalezeny možné duplikáty"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "Při načítání možných duplikátů došlo k chybě"
 
@@ -896,6 +914,15 @@ msgstr "Přidat vztah"
 msgid "Results found"
 msgstr "Nalezeny výsledky"
 
+msgid "Open"
+msgstr "Otevřít"
+
+msgid "All accessible"
+msgstr "Všechno přístupné"
+
+msgid "Organisation unit scope"
+msgstr "Rozsah organizační jednotky"
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "Hledat {{uniqueAttrName}}"
 
@@ -908,8 +935,17 @@ msgstr "Chcete-li pracovat s vybraným programem,"
 msgid "open the Tracker Capture app"
 msgstr "otevřít aplikaci Tracker Capture"
 
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr "Fáze a události"
+
 msgid "An error has occured. See log for details"
 msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Program nebyl nalezen"
@@ -923,8 +959,8 @@ msgstr "Profil"
 msgid "Error saving event"
 msgstr "Při ukládání události došlo k chybě"
 
-msgid "Could not save event. See log for details"
-msgstr "Událost se nepodařilo uložit. Podrobnosti najdete v protokolu"
+msgid "Could not save event"
+msgstr "Událost se nepodařilo uložit"
 
 msgid "Could not delete event"
 msgstr "Událost se nepodařilo smazat"
@@ -938,12 +974,23 @@ msgstr "Nelze přidat pracovní seznam"
 msgid "Could not delete working list"
 msgstr "Pracovní seznam se nepodařilo smazat"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr ""
-"Hledání organizační jednotky se nezdařilo. Podrobnosti najdete v protokolu"
+msgid "Organisation unit search failed."
+msgstr "Hledání organizační jednotky se nezdařilo."
+
+msgid "Error saving tracked entity instance"
+msgstr "Při ukládání instance trasované entity došlo k chybě"
+
+msgid "Error saving enrollment"
+msgstr "Při ukládání zápisu došlo k chybě"
 
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
+
+msgid "Latitude"
+msgstr "Zeměpisná šířka"
+
+msgid "Longitude"
+msgstr "Zeměpisná délka"
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"
