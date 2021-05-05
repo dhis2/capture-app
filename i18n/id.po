@@ -1,17 +1,17 @@
 # 
 # Translators:
-# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2020
 # phil_dhis2, 2020
 # Carwoto Sa'an <carwoto@gmail.com>, 2020
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
+# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-04-21T09:54:58.143Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -578,7 +578,7 @@ msgid ""
 msgstr ""
 
 msgid "Assigned to"
-msgstr ""
+msgstr "Ditugaskan pada"
 
 msgid "New event"
 msgstr "Event baru"
@@ -733,16 +733,16 @@ msgid "Add relationship"
 msgstr "Tambahkan hubungan"
 
 msgid "Open"
-msgstr ""
+msgstr "Buka"
 
 msgid "All accessible"
-msgstr ""
+msgstr "Semua dapat diakses"
 
 msgid "Selected"
-msgstr ""
+msgstr "Terpilih"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "Cakupan unit organisasi"
 
 msgid "Selected program"
 msgstr "Program yang dipilih"
@@ -796,10 +796,10 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Latitude"
-msgstr ""
+msgstr "Lintang"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Bujur"
 
 msgid "Set coordinate"
 msgstr "Tentukan koordinat"

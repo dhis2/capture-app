@@ -1,17 +1,17 @@
 # 
 # Translators:
-# phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Antonia Bezenchek <antonia@informa.pro>, 2020
-# Hamza Assada <7amza.it@gmail.com>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
+# Hamza Assada <7amza.it@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-04-21T09:54:58.143Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
-"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
+"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2021\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -396,7 +396,7 @@ msgid "Write comment"
 msgstr "اكتب تعليقاً"
 
 msgid "Complete event"
-msgstr ""
+msgstr "إكمال الحدث"
 
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
@@ -590,7 +590,7 @@ msgstr ""
 "العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}} موجودة مسبقاً"
 
 msgid "Assigned to"
-msgstr ""
+msgstr "مسندة إلى"
 
 msgid "New event"
 msgstr "حدث جديد"
@@ -714,7 +714,7 @@ msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
 
 msgid "Event details"
-msgstr ""
+msgstr "تفاصيل الحدث"
 
 msgid "Event completed"
 msgstr ""
@@ -746,16 +746,16 @@ msgid "Add relationship"
 msgstr "اضف علاقة"
 
 msgid "Open"
-msgstr ""
+msgstr "مفتوح"
 
 msgid "All accessible"
-msgstr ""
+msgstr "الكل يمكن الوصول اليه"
 
 msgid "Selected"
-msgstr ""
+msgstr "محدد"
 
 msgid "Organisation unit scope"
-msgstr ""
+msgstr "مدى وحدة التنظيم"
 
 msgid "Selected program"
 msgstr "البرنامج المحدد"
@@ -809,10 +809,10 @@ msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"
 
 msgid "Latitude"
-msgstr ""
+msgstr "خط العرض"
 
 msgid "Longitude"
-msgstr ""
+msgstr "خط الطول"
 
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"
