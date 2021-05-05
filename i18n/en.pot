@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-04T14:23:47.356Z\n"
-"PO-Revision-Date: 2021-05-04T14:23:47.356Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"PO-Revision-Date: 2021-04-30T12:14:22.957Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -198,7 +198,7 @@ msgstr ""
 msgid "No write access"
 msgstr ""
 
-msgid "New"
+msgid "New {{titleText}}"
 msgstr ""
 
 msgid "Switch to form view"
@@ -498,6 +498,9 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
+msgid "New"
+msgstr ""
+
 msgid "New {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
@@ -769,7 +772,7 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-msgid "Search for "
+msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search for"
@@ -899,7 +902,7 @@ msgstr ""
 msgid "An error has occured. See log for details"
 msgstr ""
 
-msgid "{{trackedEntityName}} in program"
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Program not found"

@@ -55,7 +55,10 @@ const NewEventDataEntryWrapperPlain = ({
     return (
         <Paper className={classes.paper}>
             <div className={classes.title} >
-                ${i18n.t('New')} {titleText}
+                {i18n.t('New {{titleText}}', {
+                    titleText,
+                    interpolation: { escapeValue: false },
+                })}
             </div>
 
             <div className={classes.flexContainer}>
