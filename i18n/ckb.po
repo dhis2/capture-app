@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
+"POT-Creation-Date: 2021-04-21T09:54:58.143Z\n"
 "PO-Revision-Date: 2020-12-22 22:12+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -394,6 +394,9 @@ msgstr "مافی ئەوەت نیە کە کۆمێنت بنووسیت"
 msgid "Write comment"
 msgstr "کۆمێنت بنووسە"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "زانیاریە سەرەتاییەکان"
 
@@ -584,6 +587,9 @@ msgid ""
 "exists"
 msgstr "پەیوەنی لە جۆری {{relationshipTypeName}} بۆ{{entityName}}پێشتر هەبووە"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "New event"
 msgstr "رووداوي نوي"
 
@@ -710,6 +716,12 @@ msgstr "تۆمار بکە"
 msgid "You dont have access to edit this event"
 msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -737,6 +749,18 @@ msgstr "مافی دروستکردنی ئەم پەیوەندیەت نیە"
 
 msgid "Add relationship"
 msgstr "پەوەندی درووستبکە"
+
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
 
 msgid "Selected program"
 msgstr "پرۆگرامە هەڵبژێردراوەکە"
@@ -790,6 +814,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "نمونەی یەکەی بەدواداچوون"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "هێڵی درێژی و پانی دیاریبکە"
