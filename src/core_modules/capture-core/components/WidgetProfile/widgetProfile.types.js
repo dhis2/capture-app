@@ -1,9 +1,8 @@
 // @flow
 
+
 export type Props = {|
-    classes: {
-        flatListWrapper: string;
-        itemRow: string;
-        itemKey: string;
-    }
+    teiId: string,
+    programId: string,
+    ...CssClasses
 |};

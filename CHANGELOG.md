@@ -1,3 +1,24 @@
+# [1.19.0](https://github.com/dhis2/capture-app/compare/v1.18.3...v1.19.0) (2021-05-05)
+
+
+### Features
+
+* [DHIS2-10948] fetch profile widget ([#1648](https://github.com/dhis2/capture-app/issues/1648)) ([02b78b5](https://github.com/dhis2/capture-app/commit/02b78b55556e934204a9a8b8e43e2d467897d7df))
+
+## [1.18.3](https://github.com/dhis2/capture-app/compare/v1.18.2...v1.18.3) (2021-05-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#1458](https://github.com/dhis2/capture-app/issues/1458)) ([c38d2dd](https://github.com/dhis2/capture-app/commit/c38d2dd178a022bed45268f543889f260c69c74e))
+
+## [1.18.2](https://github.com/dhis2/capture-app/compare/v1.18.1...v1.18.2) (2021-05-03)
+
+
+### Bug Fixes
+
+* upgrade version to v37 ([748bfcc](https://github.com/dhis2/capture-app/commit/748bfcc116b298e6fb1be5cbdb3a11c354d32485))
+
 ## [1.18.1](https://github.com/dhis2/capture-app/compare/v1.18.0...v1.18.1) (2021-05-03)
 
 
