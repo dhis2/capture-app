@@ -1,4 +1,4 @@
-// flow-typed signature: 658a275d44c8cfa84f5e692d3a00d01a
+// flow-typed signature: 16fdd9b2e4a48de50f7270ba0af38fcd
 // flow-typed version: <<STUB>>/react-rte_v^0.16.3/flow_v0.132.0
 
 /**
@@ -35,6 +35,10 @@ declare module 'react-rte/lib/demo' {
 }
 
 declare module 'react-rte/lib/EditorDemo' {
+  declare module.exports: any;
+}
+
+declare module 'react-rte/lib/lib/blockStyleFunctions' {
   declare module.exports: any;
 }
 
@@ -146,6 +150,9 @@ declare module 'react-rte/lib/demo.js' {
 }
 declare module 'react-rte/lib/EditorDemo.js' {
   declare module.exports: $Exports<'react-rte/lib/EditorDemo'>;
+}
+declare module 'react-rte/lib/lib/blockStyleFunctions.js' {
+  declare module.exports: $Exports<'react-rte/lib/lib/blockStyleFunctions'>;
 }
 declare module 'react-rte/lib/lib/changeBlockDepth.js' {
   declare module.exports: $Exports<'react-rte/lib/lib/changeBlockDepth'>;

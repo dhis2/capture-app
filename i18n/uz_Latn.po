@@ -45,7 +45,7 @@ msgstr ""
 " yopilishini unutmang."
 
 msgid "Organisation unit"
-msgstr "Ташкилий бирлик"
+msgstr "Tashkiliy birlik"
 
 msgid "Date of enrollment"
 msgstr "Roʼyxatga kiritilgan sana"
@@ -194,7 +194,7 @@ msgid "Active"
 msgstr "Faol"
 
 msgid "Completed"
-msgstr "bajarildi"
+msgstr "Toʼldirildi"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -385,7 +385,7 @@ msgid "Anyone"
 msgstr "Kimdir"
 
 msgid "None"
-msgstr "Йўқ"
+msgstr "Yoʼq"
 
 msgid "Select user"
 msgstr "Foydalanuvchini tanlang"
@@ -400,10 +400,10 @@ msgid "To"
 msgstr "Kimga"
 
 msgid "This week"
-msgstr "Ушбу ҳафта"
+msgstr "Ushbu hafta"
 
 msgid "This month"
-msgstr "Ушбу ой"
+msgstr "Ushbu oy"
 
 msgid "This Year"
 msgstr ""
@@ -529,6 +529,9 @@ msgstr ""
 msgid "New"
 msgstr "Yangi"
 
+msgid "Find"
+msgstr "Toping"
+
 msgid "Clear selections"
 msgstr "Tanlovlarni tozalash"
 
@@ -651,7 +654,7 @@ msgid "View working list in this program."
 msgstr ""
 
 msgid "Delete event"
-msgstr "Hodisa/Tadbirni oʼchirib tashlash"
+msgstr "Hodisa/tadbirni oʼchirib tashlash"
 
 msgid "Download as JSON"
 msgstr "JSON sifatida yuklash"
@@ -796,8 +799,8 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr "{{name}} orqali qidirish"
 
-msgid "Search by {{name}}"
-msgstr ""
+msgid "Find by {{name}}"
+msgstr "{{name}} orqali topish"
 
 msgid "Search by attributes"
 msgstr "Аtribut orqali qidirish"

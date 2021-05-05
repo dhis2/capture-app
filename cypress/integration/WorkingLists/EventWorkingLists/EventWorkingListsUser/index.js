@@ -296,7 +296,7 @@ When('you select the working list called Events today', () => {
 When('you change the sharing settings', () => {
     // Making post requests using the old d2 library doesn't work for cypress tests atm
     // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=eventFilter&id=DLROs7S1P6R')
+    cy.buildApiUrl('sharing?type=eventFilter&id=CLBKvCKspBk')
         .then((sharingUrl) => {
             cy.request('POST', sharingUrl, {
                 meta: {
@@ -383,7 +383,7 @@ Then('your newly defined sharing settings should still be present', () => {
 
     // Making post requests using the old d2 library doesn't work for cypress tests atm
     // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
-    cy.buildApiUrl('sharing?type=eventFilter&id=DLROs7S1P6R')
+    cy.buildApiUrl('sharing?type=eventFilter&id=CLBKvCKspBk')
         .then((sharingUrl) => {
             cy.request('POST', sharingUrl, {
                 meta: {

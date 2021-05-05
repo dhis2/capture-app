@@ -4,7 +4,6 @@ import type {
     CachedOptionSet,
 } from '../../storageControllers/cache.types';
 
-export function buildOptionSets(cachedOptionSets: Array<CachedOptionSet>) {
-    // $FlowFixMe
+export function buildOptionSets(cachedOptionSets: Map<string, CachedOptionSet>) {
     optionSetStore.set(cachedOptionSets);
 }

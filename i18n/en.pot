@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-04-09T10:56:33.814Z\n"
-"PO-Revision-Date: 2021-04-09T10:56:33.814Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"PO-Revision-Date: 2021-04-30T12:14:22.957Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -140,6 +140,9 @@ msgstr ""
 msgid "Search for user"
 msgstr ""
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr ""
 
@@ -177,6 +180,9 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
@@ -190,6 +196,9 @@ msgid "Finish"
 msgstr ""
 
 msgid "No write access"
+msgstr ""
+
+msgid "New {{titleText}}"
 msgstr ""
 
 msgid "Switch to form view"
@@ -435,6 +444,9 @@ msgstr ""
 msgid "No results"
 msgstr ""
 
+msgid "Icon for {{field}}"
+msgstr ""
+
 msgid "start typing to search"
 msgstr ""
 
@@ -487,6 +499,12 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "New"
+msgstr ""
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
 msgstr ""
 
 msgid "Clear selections"
@@ -640,9 +658,6 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
-msgid "Assigned to"
-msgstr ""
-
 msgid "Registering unit"
 msgstr ""
 
@@ -706,6 +721,9 @@ msgstr ""
 msgid "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
+msgid "Save new"
+msgstr ""
+
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
@@ -752,6 +770,9 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
+msgstr ""
+
+msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search for"
@@ -807,6 +828,12 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -842,6 +869,15 @@ msgstr ""
 msgid "Results found"
 msgstr ""
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
@@ -854,7 +890,19 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr ""
+
 msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Program not found"
@@ -894,6 +942,12 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "tracked entity instance"
+msgstr ""
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
 msgstr ""
 
 msgid "Set coordinate"

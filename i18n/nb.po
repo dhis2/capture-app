@@ -1,8 +1,8 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2021
+# Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""

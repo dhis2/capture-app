@@ -1,5 +1,5 @@
-// flow-typed signature: 90337b03d736e9bdaa68004c36c4d3ee
-// flow-typed version: 51319746df/history_v4.10.x/flow_>=v0.104.x
+// flow-typed signature: 58cc95d240510cd0f952113ab5fd1910
+// flow-typed version: 72313e0b69/history_v4.x.x/flow_>=v0.104.x
 
 declare module 'history' {
   declare type Unregister = () => void;

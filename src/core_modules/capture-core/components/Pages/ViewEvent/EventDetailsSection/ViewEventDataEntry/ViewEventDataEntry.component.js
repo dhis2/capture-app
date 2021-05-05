@@ -151,7 +151,7 @@ const buildGeometrySettingsFn = () => ({
         });
 
         return createComponentProps(props, {
-            label: 'Coordinate',
+            label: i18n.t('Coordinate'),
             valueConverter: value => pointDataElement.convertValue(value, valueConvertFn),
         });
     },
@@ -172,7 +172,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: 'Event completed',
+            label: i18n.t('Event completed'),
             id: dataElement.id,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),

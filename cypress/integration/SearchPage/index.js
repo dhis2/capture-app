@@ -315,7 +315,9 @@ When('there is not enrollment tag', () => {
 When('you select gender', () => {
     cy.get('[data-test="form-field-cejWyOfXge6"]')
         .find('input')
-        .type('Female{enter}', { force: true });
+        .type('Female', { force: true })
+        .wait(500)
+        .type('{enter}', { force: true });
 });
 
 When('you see that in the search terms there is no gender displayed', () => {
