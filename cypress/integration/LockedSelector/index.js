@@ -305,7 +305,7 @@ And('you reset the enrollment selection', () => {
     cy.get('[data-test="profile-widget"]')
         .contains('Person Profile');
     cy.get('[data-test="enrollment-widget"]')
-        .contains('Enrollment');   
+        .contains('Enrollment');
     cy.get('[data-test="reset-selection-button"]')
         .eq(3)
         .wait(500)
