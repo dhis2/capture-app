@@ -113,13 +113,9 @@ And('you click search', () => {
 And('you reset the program selection', () => {
     cy.get('[data-test="reset-selection-button"]')
         .should('have.length.greaterThan', 2);
-    cy.get('[data-test="profile-widget"]')
-        .contains('Person Profile');
-    cy.get('[data-test="enrollment-widget"]')
-        .contains('Enrollment');
+    cy.wait(500);
     cy.get('[data-test="reset-selection-button"]')
         .eq(0)
-        .wait(500)
         .click();
 });
 
