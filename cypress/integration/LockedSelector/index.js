@@ -302,6 +302,7 @@ And('you reset the enrollment selection', () => {
         .should('have.length.greaterThan', 2);
     cy.get('[data-test="reset-selection-button"]')
         .eq(3)
+        .wait(500)
         .click();
 });
 
