@@ -935,6 +935,9 @@ msgstr "Chcete-li pracovat s vybraným programem,"
 msgid "open the Tracker Capture app"
 msgstr "otevřít aplikaci Tracker Capture"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
 msgid "Person Profile"
 msgstr ""
 

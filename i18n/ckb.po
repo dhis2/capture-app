@@ -921,6 +921,9 @@ msgstr "بۆ کارکردن لەگەڵ پرۆگرامە هەڵبژێردراوە
 msgid "open the Tracker Capture app"
 msgstr "پرۆگرامی بەدواداچوونی کاپچەر/ کاپچەر تراکەر بکەرەوە"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
 msgid "Person Profile"
 msgstr ""
 

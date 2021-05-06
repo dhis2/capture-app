@@ -968,6 +968,9 @@ msgstr "Pour utiliser le programme sélectionné,"
 msgid "open the Tracker Capture app"
 msgstr "ouvrez l'application Saisie Tracker"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
 msgid "Person Profile"
 msgstr ""
 

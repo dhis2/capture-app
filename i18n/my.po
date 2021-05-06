@@ -904,6 +904,9 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
 msgid "Person Profile"
 msgstr ""
 

@@ -934,6 +934,9 @@ msgstr "Работать с выбранной программой"
 msgid "open the Tracker Capture app"
 msgstr "Открыть приложение \"Отслеживание объектов\""
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
 msgid "Person Profile"
 msgstr ""
 
