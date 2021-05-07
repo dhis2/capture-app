@@ -3,12 +3,12 @@ import React, { useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../Widget';
 import type { Props } from './WidgetFeedback.types';
+import { WidgetFeedbackContent } from './WidgetFeedbackContent/WidgetFeedbackContent';
 
 export const WidgetFeedback = ({ className, feedbackRules }: Props) => {
     const [openStatus, setOpenStatus] = useState(false);
 
     const { filteredText, filteredKeyValue } = useMemo(() => {
-        console.log('kjører');
         const data = {
             filteredText: [],
             filteredKeyValue: [],
@@ -18,8 +18,6 @@ export const WidgetFeedback = ({ className, feedbackRules }: Props) => {
 
         return data;
     }, [feedbackRules]);
-
-    const printKeyValuePairs = () => filteredKeyValue && filteredKeyValue.map(item => <p>{item.displayKeyValuePair?.value}</p>);
 
     return (
         <div
@@ -31,9 +29,10 @@ export const WidgetFeedback = ({ className, feedbackRules }: Props) => {
                 onClose={() => setOpenStatus(false)}
                 open={openStatus}
             >
-                <>
-                    {printKeyValuePairs()}
-                </>
+                <WidgetFeedbackContent
+                    filteredText={filteredText}
+                    filteredKeyValue={filteredKeyValue}
+                />
             </Widget>
         </div>
     );

@@ -34,7 +34,14 @@ export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => 
         id: 'feedback',
         displayText: {
             id: 'kTPYlwna5TA',
-            message: 'Error',
+            message: 'More than 3 previous enrollments in this program. Confirm that this enrollment is active.',
+        },
+    },{
+        type: 'DISPLAYTEXT',
+        id: 'feedback',
+        displayText: {
+            id: 'kjsaldhf6DS',
+            message: 'Person has been enrolled in RMNCH program in the last 2 years.',
         },
     }, {
         type: 'DISPLAYKEYVALUEPAIR',

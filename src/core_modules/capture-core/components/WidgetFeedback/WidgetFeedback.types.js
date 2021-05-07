@@ -5,10 +5,22 @@ type displayText = {|
     message: string
 |}
 
+type filteredText = {|
+    type: string,
+    id: string,
+    displayText?: Array<displayText>,
+|}
+
 type displayKeyValuePair = {|
     id: string,
     key: string,
     value: any
+|}
+
+type filteredKeyValue = {|
+    type: string,
+    id: string,
+    displayKeyValuePair: Array<displayKeyValuePair>
 |}
 
 type feedbackRules = {|
@@ -23,3 +35,8 @@ export type Props = {|
     feedbackRules: Array<feedbackRules>
 |}
 
+export type contentProps = {|
+    filteredText?: filteredText,
+    filteredKeyValue?: filteredKeyValue,
+    ...CssClasses
+|}
