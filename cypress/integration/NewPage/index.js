@@ -150,6 +150,19 @@ And('you select the Malaria case registration program', () => {
         .click();
 });
 
+Then('you see a description text for one section', () => {
+    cy.get('[data-test="registration-page-content"]')
+        .contains('General characteristics of the patient')
+        .should('exist');
+});
+
+When('you select the Inpatient morbidity and mortality program', () => {
+    cy.get('.Select')
+        .type('Inpatient mor');
+    cy.contains('Inpatient morbidity and mortality')
+        .click();
+});
+
 When('you see a dropdown button', () => {
     cy.get('[data-test="new-button"]')
         .contains('New')
