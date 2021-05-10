@@ -113,7 +113,6 @@ And('you click search', () => {
 And('you reset the program selection', () => {
     cy.get('[data-test="reset-selection-button"]')
         .should('have.length.greaterThan', 2);
-    cy.wait(500);
     cy.get('[data-test="reset-selection-button"]')
         .eq(0)
         .click();

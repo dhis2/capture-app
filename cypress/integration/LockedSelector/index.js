@@ -297,12 +297,23 @@ And('you see the enrollment page', () => {
         .contains('Enrollment Dashboard');
 });
 
-And('you reset the enrollment selection', () => {
+And('you wait to reset the enrollment selection', () => {
+    cy.get('[data-test="enrollment-page-content"]')
+        .contains('Person Profile');
     cy.get('[data-test="reset-selection-button"]')
         .should('have.length.greaterThan', 2);
-    cy.wait(500);
     cy.get('[data-test="reset-selection-button"]')
         .eq(3)
+        .click();
+});
+
+And('you wait to reset the program selection', () => {
+    cy.get('[data-test="enrollment-page-content"]')
+        .contains('Person Profile');
+    cy.get('[data-test="reset-selection-button"]')
+        .should('have.length.greaterThan', 2);
+    cy.get('[data-test="reset-selection-button"]')
+        .eq(0)
         .click();
 });
 
