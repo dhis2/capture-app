@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/dhis2/capture-app/compare/v1.19.2...v1.20.0) (2021-05-10)
+
+
+### Features
+
+* DHIS2-8938 section descriptions ([5b2dea2](https://github.com/dhis2/capture-app/commit/5b2dea2ecb321fcf5774702479936fee4003dc00))
+
 ## [1.19.2](https://github.com/dhis2/capture-app/compare/v1.19.1...v1.19.2) (2021-05-06)
 
 
