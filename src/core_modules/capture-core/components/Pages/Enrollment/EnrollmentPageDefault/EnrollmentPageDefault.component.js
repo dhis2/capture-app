@@ -36,7 +36,7 @@ export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => 
             id: 'kTPYlwna5TA',
             message: 'More than 3 previous enrollments in this program. Confirm that this enrollment is active.',
         },
-    },{
+    }, {
         type: 'DISPLAYTEXT',
         id: 'feedback',
         displayText: {
@@ -48,8 +48,8 @@ export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => 
         id: 'feedback',
         displayKeyValuePair: {
             id: 'kTPYlwna5TA',
-            key: 'Key/val',
-            value: 'pair',
+            key: 'Appgar score',
+            value: '40',
         },
     }];
 

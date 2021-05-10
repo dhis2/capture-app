@@ -12,12 +12,17 @@ const styles = {
     unorderedList: {
         paddingLeft: '20px',
         lineHeight: '1.375',
+        fontSize: '14px',
+        color: '#212934',
     },
     noFeedbackText: {
         color: '#6B7280',
     },
     listItem: {
         marginBottom: '5px',
+        '&::marker': {
+            color: '#A0ADBA',
+        },
     },
 };
 
@@ -39,7 +44,7 @@ const WidgetFeedbackContentComponent = ({ filteredText, filteredKeyValue, classe
                             key={item.id}
                             className={classes.listItem}
                         >
-                            {item.displayKeyValuePair.value}
+                            {item.displayKeyValuePair.key}: {item.displayKeyValuePair.value}
                         </li>)) : null}
                 </ul>
             }
