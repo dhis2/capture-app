@@ -101,7 +101,9 @@ export const WidgetEnrollmentPlain = ({
                         >
                             <IconDimensionOrgUnit16 color={colors.grey700} />
                         </span>
-                        {i18n.t('Started at')} {enrollment.orgUnitName}
+                        {i18n.t('Started at {{orgUnitName}}', {
+                            orgUnitName: enrollment.orgUnitName,
+                        })}
                     </div>
 
                     <div
@@ -114,7 +116,9 @@ export const WidgetEnrollmentPlain = ({
                         >
                             <IconDimensionOrgUnit16 color={colors.grey700} />
                         </span>
-                        {i18n.t('Owned by')} {ownerOrgUnit.displayName}
+                        {i18n.t('Owned by {{ownerOrgUnit}}', {
+                            ownerOrgUnit: ownerOrgUnit.displayName,
+                        })}
                     </div>
 
                     <div
@@ -127,8 +131,9 @@ export const WidgetEnrollmentPlain = ({
                         >
                             <IconClock16 color={colors.grey700} />
                         </span>
-                        {i18n.t('Last updated')}{' '}
-                        {moment(enrollment.lastUpdated).fromNow()}
+                        {i18n.t('Last updated {{date}}', {
+                            date: moment(enrollment.lastUpdated).fromNow(),
+                        })}
                     </div>
 
                     {enrollment.geometry && (
