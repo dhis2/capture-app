@@ -2,13 +2,12 @@
 # Translators:
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
-# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
@@ -149,6 +148,9 @@ msgstr ""
 msgid "Search for user"
 msgstr ""
 
+msgid "Complete event"
+msgstr "Complete event"
+
 msgid "Basic info"
 msgstr ""
 
@@ -186,6 +188,9 @@ msgstr "ທີ່ຍັງນໍາໃຊ້ຢູ່"
 msgid "Completed"
 msgstr "ສໍາເລັດແລ້ວ"
 
+msgid "Assigned to"
+msgstr "Assigned to"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
@@ -199,6 +204,9 @@ msgid "Finish"
 msgstr ""
 
 msgid "No write access"
+msgstr ""
+
+msgid "New {{titleText}}"
 msgstr ""
 
 msgid "Switch to form view"
@@ -303,9 +311,6 @@ msgstr "ຕົວຊີ້ວັດ"
 msgid "Warnings"
 msgstr ""
 
-msgid "search group result could not be retrieved"
-msgstr ""
-
 msgid "Complete"
 msgstr "ສຳເລັດແລ້ວ"
 
@@ -334,12 +339,6 @@ msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
-msgstr ""
-
-msgid "Hide"
-msgstr "ເຊື່ອງ"
-
-msgid "Possible duplicates found"
 msgstr ""
 
 msgid "Sort"
@@ -453,6 +452,9 @@ msgstr "ລຶບ"
 msgid "No results"
 msgstr ""
 
+msgid "Icon for {{field}}"
+msgstr ""
+
 msgid "start typing to search"
 msgstr ""
 
@@ -506,6 +508,12 @@ msgstr ""
 
 msgid "New"
 msgstr "ສ້າງໃຫມ່"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
 
 msgid "Clear selections"
 msgstr ""
@@ -660,9 +668,6 @@ msgstr ""
 msgid "Cancelled"
 msgstr "ຍົກເລີກແລ້ວ"
 
-msgid "Assigned to"
-msgstr "Assigned to"
-
 msgid "Registering unit"
 msgstr "ສະຖານທີ່ລົງທະບຽນ"
 
@@ -727,7 +732,7 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
+msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -778,6 +783,9 @@ msgstr ""
 
 msgid "Back"
 msgstr "​ກັບ​ຄືນ"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "ຄົ້ນຫາສໍາລັບ"
@@ -833,6 +841,12 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Event details"
+msgstr "ລາຍລະອຽດເຫດການ"
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -850,6 +864,9 @@ msgstr ""
 msgid "Feedbacks"
 msgstr ""
 
+msgid "Possible duplicates found"
+msgstr ""
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -865,6 +882,15 @@ msgstr "ເພີ່ມຄວາມສໍາພັນ"
 msgid "Results found"
 msgstr ""
 
+msgid "Open"
+msgstr "ເປີດ"
+
+msgid "All accessible"
+msgstr "ເຂົ້າເຖິງໄດ້ໝົດ"
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
@@ -877,7 +903,19 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr ""
+
 msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Program not found"
@@ -892,7 +930,7 @@ msgstr "ລາຍລະອຽດສ່ວນຕົົວ"
 msgid "Error saving event"
 msgstr ""
 
-msgid "Could not save event. See log for details"
+msgid "Could not save event"
 msgstr ""
 
 msgid "Could not delete event"
@@ -907,11 +945,23 @@ msgstr ""
 msgid "Could not delete working list"
 msgstr ""
 
-msgid "Organisation unit search failed. See log for details"
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
 msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
+
+msgid "Latitude"
+msgstr "ເສັ້ນແວ້ງ"
+
+msgid "Longitude"
+msgstr "ເສັ້ນຂະໜານ"
 
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"

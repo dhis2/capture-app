@@ -1,14 +1,14 @@
 # 
 # Translators:
+# KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # Viktor Varland <viktor@dhis2.org>, 2021
-# KRG HIS <antonia.bezenchek@informa.pro>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -154,6 +154,9 @@ msgstr "بەکارهێنەری دەستنیشانکراو"
 msgid "Search for user"
 msgstr "بۆ بەکاربەرەکە بگەرێ"
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr "زانیاریە سەرەتاییەکان"
 
@@ -193,6 +196,9 @@ msgstr "چاڵاک"
 msgid "Completed"
 msgstr "تەواوبوو"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "تکایە کۆمێنت زیاد بکە یاخود لاییببە پێش تۆمارکردن"
 
@@ -207,6 +213,9 @@ msgstr "تەواکردن"
 
 msgid "No write access"
 msgstr "مافی نوسینت نیە"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "گۆڕین بۆ پیشاندانی فۆرم"
@@ -252,7 +261,7 @@ msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
-msgstr "خةزن كردن"
+msgstr "تۆمارکردن"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "بەجێهێشنتی ئەم پەڕەیە هەموو چاڵآکیەکانت دەسرێتەوە کە کردووتە"
@@ -316,9 +325,6 @@ msgstr "نیشاندەر"
 msgid "Warnings"
 msgstr "ئاگادارکردنەوەکان"
 
-msgid "search group result could not be retrieved"
-msgstr "گەڕان بە دواای گروپەکە هیچ ئەنجامێکی نەبوو"
-
 msgid "Complete"
 msgstr "تەواوبکە"
 
@@ -350,12 +356,6 @@ msgstr ""
 
 msgid "Operations running"
 msgstr "کردارەکان کاردەکەن"
-
-msgid "Hide"
-msgstr "شاردنەوە"
-
-msgid "Possible duplicates found"
-msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
 
 msgid "Sort"
 msgstr "پۆلینکردن"
@@ -403,13 +403,13 @@ msgid "This Year"
 msgstr "ئەم ساڵە"
 
 msgid "Last week"
-msgstr "هەفتەی پێشووتر"
+msgstr "هەفتەی ڕابردوو"
 
 msgid "Last month"
 msgstr "مانگی ڕابردوو"
 
 msgid "Last 3 months"
-msgstr "سێ مانگ پێشووتر"
+msgstr "٣ مانگ پێشووتر"
 
 msgid "Custom range"
 msgstr "مەودایەکی ئارەزوومەندانە"
@@ -424,7 +424,7 @@ msgid "Contains text"
 msgstr "نووسینی تێدایە"
 
 msgid "Yes"
-msgstr "ەڵێ"
+msgstr "بەڵێ"
 
 msgid "mm/dd/yyyy"
 msgstr "مانگ/رۆژ/ساڵ"
@@ -445,7 +445,7 @@ msgid "selected"
 msgstr "هەڵبژێردرا"
 
 msgid "Delete"
-msgstr "سرينةوة"
+msgstr "سڕینەوە"
 
 msgid "Select file"
 msgstr "فایل هەڵبژێرە"
@@ -463,10 +463,13 @@ msgid "Search"
 msgstr "گەڕان"
 
 msgid "Clear"
-msgstr "باك"
+msgstr "پاککردنەوە"
 
 msgid "No results"
 msgstr "هیچ ئەنجامێک بەردەست نیە"
+
+msgid "Icon for {{field}}"
+msgstr ""
 
 msgid "start typing to search"
 msgstr ""
@@ -522,6 +525,12 @@ msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەک�
 msgid "New"
 msgstr "نوێ"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr ""
 
@@ -544,13 +553,13 @@ msgid "Select"
 msgstr "هەڵبژاردن"
 
 msgid "Program"
-msgstr "بةرنامة"
+msgstr "پرۆگرام"
 
 msgid "No programs available."
 msgstr "هیچ پرۆگرامێک بەردەست نیە"
 
 msgid "Show all"
-msgstr "بيشانداني هةمووان"
+msgstr "پێشاندانی هەمووان"
 
 msgid "Selected program"
 msgstr "پرۆگرامە هەڵبژێردراوەکە"
@@ -559,7 +568,7 @@ msgid "Some programs are being filtered."
 msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
 
 msgid "Select program"
-msgstr "بةرنامة هةلبزيرة"
+msgstr "پرۆگرام هەڵبژێرە"
 
 msgid "Selected"
 msgstr ""
@@ -589,7 +598,7 @@ msgid "Edit event"
 msgstr "حاڵەتەکە دەستکاری بکە"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "حالەتەکە نەتواندرا پیشان بدرێت، ئایا دڵنیای کە بوونی هەیە؟"
+msgstr "حاڵەتەکە نەتواندرا پیشان بدرێت، ئایا دڵنیای کە بوونی هەیە؟"
 
 msgid "Event could not be loaded"
 msgstr "حاڵەتەکە نەتواندرا بهێندرێت"
@@ -675,9 +684,6 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
-msgid "Assigned to"
-msgstr ""
-
 msgid "Registering unit"
 msgstr "تؤمار كردني يةكة"
 
@@ -742,8 +748,8 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr "پێداچوونەوە بە دووبارەبووەکان"
+msgid "Save new"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
@@ -793,6 +799,9 @@ msgstr "بە پێ ئاتریبیوت بگەڕێ"
 
 msgid "Back"
 msgstr "كةرانةوة"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr ""
@@ -848,6 +857,12 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
 
+msgid "Event details"
+msgstr "دريذةي رووداوةكان"
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -867,6 +882,9 @@ msgstr "حاڵەتەکە ڕاپسێردراوە بە  {{name}}"
 msgid "Feedbacks"
 msgstr "بۆچوونەکان"
 
+msgid "Possible duplicates found"
+msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -882,6 +900,15 @@ msgstr "پەوەندی درووستبکە"
 msgid "Results found"
 msgstr ""
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Search {{uniqueAttrName}}"
 msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
 
@@ -894,8 +921,20 @@ msgstr "بۆ کارکردن لەگەڵ پرۆگرامە هەڵبژێردراوە
 msgid "open the Tracker Capture app"
 msgstr "پرۆگرامی بەدواداچوونی کاپچەر/ کاپچەر تراکەر بکەرەوە"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr ""
+
 msgid "An error has occured. See log for details"
 msgstr "هەڵەیک ڕوویدا، تکایە سەیری لۆگ فایل بکە بۆ وردەکاری زیاتر"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "پرۆگرام نەدۆزرایەوە"
@@ -909,8 +948,8 @@ msgstr "پرۆفایل"
 msgid "Error saving event"
 msgstr "هەڵەیەک ڕوویدا لە تۆمارکردنی حاڵەتەکە"
 
-msgid "Could not save event. See log for details"
-msgstr "نەتواندرا حاڵەتەکە تۆماربکرێت. سەیری فایل لۆگ بکە بۆ زانیاری زیاتر"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "نەتواندرا حاڵەتەکە بسڕدرێتەوە"
@@ -924,13 +963,23 @@ msgstr "نەتواندرا لیسی کارەکان زیادبکرێت"
 msgid "Could not delete working list"
 msgstr "نەتواندرا لیسی کارەکان بسڕدرێتەوە"
 
-msgid "Organisation unit search failed. See log for details"
+msgid "Organisation unit search failed."
 msgstr ""
-" هەڵە ڕوویدا لە گەڕان بە دوای یەکەی ڕێکخراو، سەیری لۆگەکان بکە بۆ زانیاری "
-"زیاتر"
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "نمونەی یەکەی بەدواداچوون"
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
+msgstr ""
 
 msgid "Set coordinate"
 msgstr "هێڵی درێژی و پانی دیاریبکە"
