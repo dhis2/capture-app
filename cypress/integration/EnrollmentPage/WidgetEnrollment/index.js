@@ -30,9 +30,6 @@ Then('the user sees the enrollment status', () => {
         cy.get('[data-test="widget-enrollment-status"]')
             .contains('Active')
             .should('exist');
-        cy.get('[data-test="widget-enrollment-status"]')
-            .contains('Ngelehun CHC')
-            .should('exist');
     });
 });
 
@@ -52,12 +49,22 @@ Then('the user sees the incident date', () => {
             .should('exist');
     });
 });
-
-Then('the user sees the owner organisation unit', () => {
+Then('the user sees the enrollment organisation unit', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-icon-orgunit"]').should('exist');
         cy.get('[data-test="widget-enrollment-orgunit"]')
-            .contains('Enrolled at Ngelehun CHC')
+            .contains('Started at Ngelehun CHC')
+            .should('exist');
+    });
+});
+
+Then('the user sees the owner organisation unit', () => {
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-icon-owner-orgunit"]').should(
+            'exist',
+        );
+        cy.get('[data-test="widget-enrollment-owner-orgunit"]')
+            .contains('Owned by Ngelehun CHC')
             .should('exist');
     });
 });

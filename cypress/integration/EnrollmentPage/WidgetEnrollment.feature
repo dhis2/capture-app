@@ -17,5 +17,6 @@ Feature: User interacts with Enrollment Widget
         And the user sees the enrollment status
         And the user sees the enrollment date
         And the user sees the incident date
+        And the user sees the enrollment organisation unit
         And the user sees the owner organisation unit
         And the user sees the last update date

@@ -20,7 +20,6 @@ import { dataElementTypes } from '../../metaData';
 
 const styles = {
     icon: {
-        color: colors.grey700,
         margin: spacersNum.dp4,
     },
     enrollment: {
@@ -63,11 +62,6 @@ export const WidgetEnrollmentPlain = ({
 
                     <div data-test="widget-enrollment-status">
                         <Status status={enrollment.status} />
-                        {i18n.t('at')}
-                        <span className={classes.icon}>
-                            <IconDimensionOrgUnit16 />
-                        </span>
-                        {enrollment.orgUnitName}
                     </div>
 
                     <div
@@ -78,7 +72,7 @@ export const WidgetEnrollmentPlain = ({
                             className={classes.icon}
                             data-test="widget-enrollment-icon-calendar"
                         >
-                            <IconCalendar16 />
+                            <IconCalendar16 color={colors.grey700} />
                         </span>
                         {program.enrollmentDateLabel}{' '}
                         {moment(enrollment.enrollmentDate).format('l')}
@@ -90,7 +84,7 @@ export const WidgetEnrollmentPlain = ({
                             data-test="widget-enrollment-incident-date"
                         >
                             <span className={classes.icon}>
-                                <IconCalendar16 />
+                                <IconCalendar16 color={colors.grey700} />
                             </span>
                             {program.incidentDateLabel}{' '}
                             {moment(enrollment.incidentDate).format('l')}
@@ -105,9 +99,22 @@ export const WidgetEnrollmentPlain = ({
                             className={classes.icon}
                             data-test="widget-enrollment-icon-orgunit"
                         >
-                            <IconDimensionOrgUnit16 />
+                            <IconDimensionOrgUnit16 color={colors.grey700} />
                         </span>
-                        {i18n.t('Enrolled at')} {ownerOrgUnit.displayName}
+                        {i18n.t('Started at')} {enrollment.orgUnitName}
+                    </div>
+
+                    <div
+                        className={classes.row}
+                        data-test="widget-enrollment-owner-orgunit"
+                    >
+                        <span
+                            className={classes.icon}
+                            data-test="widget-enrollment-icon-owner-orgunit"
+                        >
+                            <IconDimensionOrgUnit16 color={colors.grey700} />
+                        </span>
+                        {i18n.t('Owned by')} {ownerOrgUnit.displayName}
                     </div>
 
                     <div
@@ -118,7 +125,7 @@ export const WidgetEnrollmentPlain = ({
                             className={classes.icon}
                             data-test="widget-enrollment-icon-clock"
                         >
-                            <IconClock16 />
+                            <IconClock16 color={colors.grey700} />
                         </span>
                         {i18n.t('Last updated')}{' '}
                         {moment(enrollment.lastUpdated).fromNow()}

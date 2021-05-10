@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-04T15:03:48.540Z\n"
-"PO-Revision-Date: 2021-05-04T15:03:48.540Z\n"
+"POT-Creation-Date: 2021-05-10T09:28:08.759Z\n"
+"PO-Revision-Date: 2021-05-10T09:28:08.759Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -896,10 +896,10 @@ msgstr ""
 msgid "Follow-up"
 msgstr ""
 
-msgid "at"
+msgid "Started at"
 msgstr ""
 
-msgid "Enrolled at"
+msgid "Owned by"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
