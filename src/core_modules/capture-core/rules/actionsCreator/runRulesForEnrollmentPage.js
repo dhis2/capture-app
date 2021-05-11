@@ -5,6 +5,7 @@ import type {
     EventsData,
     EventData,
     OrgUnit,
+    DataElement,
 } from '../engine';
 import constantsStore from '../../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../../metaDataMemoryStores/optionSets/optionSets.store';
@@ -15,7 +16,7 @@ export default function runRulesForEnrollmentPage(
     orgUnit: OrgUnit,
     currentEvent: EventData,
     allEventsData: EventsData,
-    dataElementsInProgram: any,
+    dataElementsInProgram: { [string]: DataElement },
 ) {
     const { programRuleVariables: programRulesVariables } = program;
     const programRules = [...program.programRules];

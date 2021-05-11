@@ -59,24 +59,16 @@ export const EnrollmentPageDefault = () => {
             }, {});
     };
 
-    const [, setIndicators] = React.useState([]);
 
     React.useEffect(() => {
         if (Object.keys(dataElements).length) {
             const rules = runRulesForEnrollmentPage(program,
                 orgUnit,
                 program.stages,
-                program.stages,
+                Array.from(program.stages, ([stage]) => ({ ...stage })),
                 dataElements,
             );
-            setIndicators(rules
-                .filter(rule => rule.id === 'indicators')
-                .reduce((acc, curr) => {
-                    if (!acc.displayKeyValuePairs) { acc.displayKeyValuePairs = []; }
-                    acc.displayKeyValuePairs.push(curr.displayKeyValuePair);
-                    return acc;
-                }, {},
-                ));
+            console.log({ rules });
         }
     }, [orgUnit, program, dataElements]);
 
