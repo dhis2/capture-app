@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Aung Kyi Min <AungKyi.Min@savethechildren.org>, 2020
-# 晓东 林 <13981924470@126.com>, 2020
 # easylin <lin_xd@126.com>, 2021
+# 晓东 林 <13981924470@126.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2021\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -311,6 +311,9 @@ msgstr "你没有权限写备注"
 msgid "Write comment"
 msgstr "写备注"
 
+msgid "Complete event"
+msgstr "完成事件"
+
 msgid "Basic info"
 msgstr "基本信息"
 
@@ -509,6 +512,9 @@ msgid ""
 "exists"
 msgstr "{{entityName}} 的 {{relationshipTypeName}}  关系类型已经存在"
 
+msgid "Assigned to"
+msgstr "指派到"
+
 msgid "New event"
 msgstr "新事件"
 
@@ -638,6 +644,12 @@ msgstr "登记"
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -703,6 +715,18 @@ msgstr "你没有权限创建任何关系"
 msgid "Add relationship"
 msgstr "添加关系"
 
+msgid "Open"
+msgstr "打开"
+
+msgid "All accessible"
+msgstr "所有可访问的"
+
+msgid "Selected"
+msgstr "已选择"
+
+msgid "Organisation unit scope"
+msgstr "机构范围"
+
 msgid "Selected program"
 msgstr "选择的项目"
 
@@ -753,6 +777,12 @@ msgstr "机构搜索失败，查看日志"
 
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
+
+msgid "Latitude"
+msgstr "纬度"
+
+msgid "Longitude"
+msgstr "经度"
 
 msgid "Set coordinate"
 msgstr "设置坐标"

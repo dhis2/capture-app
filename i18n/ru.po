@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2020
-# phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -314,6 +314,9 @@ msgstr "У вас не достаточно прав для написания �
 msgid "Write comment"
 msgstr "Написать комментарий"
 
+msgid "Complete event"
+msgstr "Завершить событие"
+
 msgid "Basic info"
 msgstr "Базовая информация"
 
@@ -519,6 +522,9 @@ msgid ""
 "exists"
 msgstr "Тип Родство {{relationshipTypeName}} к {{entityName}} уже существует"
 
+msgid "Assigned to"
+msgstr "закреплено за"
+
 msgid "New event"
 msgstr "Новое событие"
 
@@ -656,6 +662,12 @@ msgstr "Зарегистрировать"
 msgid "You dont have access to edit this event"
 msgstr "У вас нет прав на исправление данного события"
 
+msgid "Event details"
+msgstr "Детали события"
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -723,6 +735,18 @@ msgstr "У вас нет прав для создания \"Родовых от�
 msgid "Add relationship"
 msgstr "Добавить зависимость"
 
+msgid "Open"
+msgstr "Открыть"
+
+msgid "All accessible"
+msgstr "Все доступные"
+
+msgid "Selected"
+msgstr "Выбранный"
+
+msgid "Organisation unit scope"
+msgstr "Масштаб организационной единицы"
+
 msgid "Selected program"
 msgstr "Выбранная программа"
 
@@ -774,6 +798,12 @@ msgstr "Не удалось найти Орг.единицу. Смотри де�
 
 msgid "tracked entity instance"
 msgstr "Элемент отслеживаемый объекта"
+
+msgid "Latitude"
+msgstr "Широта"
+
+msgid "Longitude"
+msgstr "Долгота"
 
 msgid "Set coordinate"
 msgstr "Задать координату"

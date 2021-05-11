@@ -1,18 +1,18 @@
 # 
 # Translators:
-# Marta Vila <marta@dhis2.org>, 2020
-# phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # ericbp <ericbarredap@gmail.com>, 2020
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
+# Marta Vila <marta@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020\n"
+"Last-Translator: Marta Vila <marta@dhis2.org>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -314,6 +314,9 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
+msgid "Complete event"
+msgstr ""
+
 msgid "Basic info"
 msgstr ""
 
@@ -512,6 +515,9 @@ msgid ""
 "exists"
 msgstr ""
 
+msgid "Assigned to"
+msgstr "Asignado a"
+
 msgid "New event"
 msgstr "Evento nuevo"
 
@@ -641,6 +647,12 @@ msgstr "Registrar"
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Event details"
+msgstr "Detalles del evento"
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -706,6 +718,18 @@ msgstr ""
 msgid "Add relationship"
 msgstr "Añadir relación"
 
+msgid "Open"
+msgstr "Abierto"
+
+msgid "All accessible"
+msgstr "Todo accesible"
+
+msgid "Selected"
+msgstr "Seleccionado"
+
+msgid "Organisation unit scope"
+msgstr "Alcance de la unidad organizativa a utilizar"
+
 msgid "Selected program"
 msgstr "Programa seleccionado"
 
@@ -756,6 +780,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
+
+msgid "Latitude"
+msgstr "Latitud"
+
+msgid "Longitude"
+msgstr "Longitud"
 
 msgid "Set coordinate"
 msgstr "Establecer coordenadas"

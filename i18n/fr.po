@@ -1,18 +1,19 @@
 # 
 # Translators:
-# phil_dhis2, 2020
 # Bram Piot <bram.piot@gmail.com>, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
 # Edem Kossi <ekossi@hispwca.org>, 2020
-# Yao Selom SAKA <saka.yao@yahoo.fr>, 2020
+# Yao Selom Saka <ysaka@hispwca.org>, 2020
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
+# Yayra Gomado <ygomado@hispwca.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Yao Selom SAKA <saka.yao@yahoo.fr>, 2020\n"
+"Last-Translator: Yayra Gomado <ygomado@hispwca.org>, 2021\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -316,6 +317,9 @@ msgstr "Vous n'avez pas accès aux commentaires"
 msgid "Write comment"
 msgstr "Ecrire commentaire"
 
+msgid "Complete event"
+msgstr "Evènement complété"
+
 msgid "Basic info"
 msgstr "Infos de base"
 
@@ -524,6 +528,9 @@ msgid ""
 msgstr ""
 "La relation entre le type {{relationTypeNom}} et {{entitéNom}} existe déjà"
 
+msgid "Assigned to"
+msgstr "Attribue"
+
 msgid "New event"
 msgstr "Nouvel événement"
 
@@ -664,6 +671,12 @@ msgstr "Enregistrer"
 msgid "You dont have access to edit this event"
 msgstr "Vous n'êtes pas autorisé à modifier cet événement"
 
+msgid "Event details"
+msgstr "Détails de l'évènement"
+
+msgid "Event completed"
+msgstr "Événement terminé"
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -730,6 +743,18 @@ msgstr "Vous n'êtes pas autorisé à créer des relations"
 msgid "Add relationship"
 msgstr "Ajouetr relation"
 
+msgid "Open"
+msgstr "Ouvrir"
+
+msgid "All accessible"
+msgstr "Tous accessibles"
+
+msgid "Selected"
+msgstr "Sélectionné"
+
+msgid "Organisation unit scope"
+msgstr "Portée d'unité d'organisation"
+
 msgid "Selected program"
 msgstr "Programme choisi"
 
@@ -785,6 +810,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
+
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Longitude"
+msgstr "Longitude"
 
 msgid "Set coordinate"
 msgstr "Définir les coordonnées"

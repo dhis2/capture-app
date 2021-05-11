@@ -1,13 +1,13 @@
 # 
 # Translators:
-# trendspotter, 2020
+# trendspotter, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: trendspotter, 2020\n"
+"Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -309,6 +309,9 @@ msgstr "Nemáte přístup k psaní komentářů"
 msgid "Write comment"
 msgstr "Napsat komentář"
 
+msgid "Complete event"
+msgstr "Dokončit událost"
+
 msgid "Basic info"
 msgstr "Základní informace"
 
@@ -511,6 +514,9 @@ msgid ""
 "exists"
 msgstr "Vztah typu {{relationshipTypeName}} k {{entityName}} již existuje"
 
+msgid "Assigned to"
+msgstr "Přiřazen k"
+
 msgid "New event"
 msgstr "Nová událost"
 
@@ -646,6 +652,12 @@ msgstr "Registrovat"
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
 
+msgid "Event details"
+msgstr "Podrobnosti události"
+
+msgid "Event completed"
+msgstr "Událost dokončena"
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -713,6 +725,18 @@ msgstr "Nemáte přístup k vytváření jakýchkoli vztahů"
 msgid "Add relationship"
 msgstr "Přidat vztah"
 
+msgid "Open"
+msgstr "Otevřít"
+
+msgid "All accessible"
+msgstr "Všechno přístupné"
+
+msgid "Selected"
+msgstr "Vybráno"
+
+msgid "Organisation unit scope"
+msgstr "Rozsah organizační jednotky"
+
 msgid "Selected program"
 msgstr "Vybraný program"
 
@@ -764,6 +788,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
+
+msgid "Latitude"
+msgstr "Zeměpisná šířka"
+
+msgid "Longitude"
+msgstr "Zeměpisná délka"
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"

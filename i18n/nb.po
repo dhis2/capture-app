@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Caroline Hesthagen Holen <caroline@devotta.no>, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2020
+# Karoline Tufte Lien <karoline@dhis2.org>, 2021
+# Caroline Hesthagen Holen <caroline@devotta.no>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
+"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -313,6 +313,9 @@ msgstr "Du har ikke tilgang til å skrive kommentarer"
 msgid "Write comment"
 msgstr "Skriv kommentar"
 
+msgid "Complete event"
+msgstr "Fullfør hendelse"
+
 msgid "Basic info"
 msgstr "Grunnleggende informasjon"
 
@@ -516,6 +519,9 @@ msgid ""
 msgstr ""
 "Forhold av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
 
+msgid "Assigned to"
+msgstr "Tildelt til"
+
 msgid "New event"
 msgstr "Ny hendelse"
 
@@ -651,6 +657,12 @@ msgstr "Registrere"
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
+msgid "Event details"
+msgstr "Hendelsesdetaljer"
+
+msgid "Event completed"
+msgstr "Hendelse fullført"
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -718,6 +730,18 @@ msgstr "Du har ikke tilgang til å opprette noen relasjoner"
 msgid "Add relationship"
 msgstr "Legg til relasjon"
 
+msgid "Open"
+msgstr "Åpne"
+
+msgid "All accessible"
+msgstr "Alle tilgjengelige"
+
+msgid "Selected"
+msgstr "Valgt"
+
+msgid "Organisation unit scope"
+msgstr "Organisasjonsenhet-omfang"
+
 msgid "Selected program"
 msgstr "Valgt program"
 
@@ -768,6 +792,12 @@ msgstr "Organisasjonsenhetsøk feilet. Se logg for detaljer"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
+
+msgid "Latitude"
+msgstr "Breddegrad"
+
+msgid "Longitude"
+msgstr "Lengdegrad"
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"

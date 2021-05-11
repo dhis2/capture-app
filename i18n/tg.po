@@ -1,14 +1,14 @@
 # 
 # Translators:
-# phil_dhis2, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Tajik (https://www.transifex.com/hisp-uio/teams/100509/tg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -310,6 +310,9 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
+msgid "Complete event"
+msgstr "Рӯйдоди анҷомёфта"
+
 msgid "Basic info"
 msgstr ""
 
@@ -508,6 +511,9 @@ msgid ""
 "exists"
 msgstr ""
 
+msgid "Assigned to"
+msgstr "таъиншуда ба"
+
 msgid "New event"
 msgstr ""
 
@@ -637,6 +643,12 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -702,6 +714,18 @@ msgstr ""
 msgid "Add relationship"
 msgstr ""
 
+msgid "Open"
+msgstr ""
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Selected"
+msgstr "Интихобшуда"
+
+msgid "Organisation unit scope"
+msgstr ""
+
 msgid "Selected program"
 msgstr ""
 
@@ -752,6 +776,12 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
+
+msgid "Latitude"
+msgstr "Тӯл"
+
+msgid "Longitude"
+msgstr "Арз"
 
 msgid "Set coordinate"
 msgstr ""
