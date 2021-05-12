@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { WidgetEnrollment as WidgetEnrollmentComponent } from './WidgetEnrollment.component';
 import { useOrganizationUnit } from './hooks/useOrganizationUnit';
@@ -23,7 +24,13 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId }: Props) => {
 
     if (errorEnrollment || errorProgram || errorOwnerOrgUnit || errorOrgUnit) {
         log.error(errorCreator('Enrollment widget could not be loaded'));
-        return <LoadingMaskElementCenter />;
+        return (
+            <span>
+                {i18n.t(
+                    'Enrollment widget could not be loaded. Please try again later',
+                )}
+            </span>
+        );
     }
 
     return enrollment && program && displayName ? (
