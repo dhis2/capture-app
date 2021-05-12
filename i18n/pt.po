@@ -1,16 +1,16 @@
 # 
 # Translators:
+# Ge Joao <gsimango@saudigitus.org>, 2021
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
-# Ge Joao <gsimango@saudigitus.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Ge Joao <gsimango@saudigitus.org>, 2021\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -150,11 +150,14 @@ msgstr "Usuário designado"
 msgid "Search for user"
 msgstr ""
 
+msgid "Complete event"
+msgstr "Marcar o evento como completo"
+
 msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr "Status"
+msgstr "Estado"
 
 msgid "Comments"
 msgstr "Comentarios"
@@ -187,6 +190,9 @@ msgstr "Activo"
 msgid "Completed"
 msgstr "Completo"
 
+msgid "Assigned to"
+msgstr "Atribuido a"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
@@ -200,6 +206,9 @@ msgid "Finish"
 msgstr "Terminar"
 
 msgid "No write access"
+msgstr ""
+
+msgid "New {{titleText}}"
 msgstr ""
 
 msgid "Switch to form view"
@@ -304,9 +313,6 @@ msgstr "Indicadores"
 msgid "Warnings"
 msgstr ""
 
-msgid "search group result could not be retrieved"
-msgstr ""
-
 msgid "Complete"
 msgstr "Completo"
 
@@ -335,12 +341,6 @@ msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
-msgstr ""
-
-msgid "Hide"
-msgstr "Esconder"
-
-msgid "Possible duplicates found"
 msgstr ""
 
 msgid "Sort"
@@ -454,6 +454,9 @@ msgstr "Limpar"
 msgid "No results"
 msgstr ""
 
+msgid "Icon for {{field}}"
+msgstr ""
+
 msgid "start typing to search"
 msgstr ""
 
@@ -507,6 +510,12 @@ msgstr ""
 
 msgid "New"
 msgstr "Novo"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
 
 msgid "Clear selections"
 msgstr ""
@@ -661,9 +670,6 @@ msgstr "Status da inscrição"
 msgid "Cancelled"
 msgstr "Cancelado"
 
-msgid "Assigned to"
-msgstr "Atribuido a"
-
 msgid "Registering unit"
 msgstr "Unidade de registro"
 
@@ -728,7 +734,7 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
+msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -779,6 +785,9 @@ msgstr ""
 
 msgid "Back"
 msgstr "Voltar"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Procurar por"
@@ -834,6 +843,12 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Event details"
+msgstr "Detalhes de evento"
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -851,6 +866,9 @@ msgstr ""
 msgid "Feedbacks"
 msgstr ""
 
+msgid "Possible duplicates found"
+msgstr ""
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -866,6 +884,15 @@ msgstr "Adicionar relacionamento"
 msgid "Results found"
 msgstr ""
 
+msgid "Open"
+msgstr "Abrir"
+
+msgid "All accessible"
+msgstr "Todos acessíveis"
+
+msgid "Organisation unit scope"
+msgstr "Escopo da unidade organizacional a ser usado"
+
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
@@ -878,7 +905,19 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr ""
+
 msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Program not found"
@@ -893,7 +932,7 @@ msgstr "Perfil"
 msgid "Error saving event"
 msgstr ""
 
-msgid "Could not save event. See log for details"
+msgid "Could not save event"
 msgstr ""
 
 msgid "Could not delete event"
@@ -908,11 +947,23 @@ msgstr ""
 msgid "Could not delete working list"
 msgstr ""
 
-msgid "Organisation unit search failed. See log for details"
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
 msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
+
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Longitude"
+msgstr "Longitude"
 
 msgid "Set coordinate"
 msgstr "Definir coordenadas"

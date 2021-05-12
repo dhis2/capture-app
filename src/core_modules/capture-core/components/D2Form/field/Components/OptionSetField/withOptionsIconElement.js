@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 
 const getStyles = () => ({
     iconContainer: {
@@ -16,7 +17,7 @@ const getStyles = () => ({
 });
 
 type Icon = {
-    data: string,
+    name: string,
     color: string,
 };
 
@@ -50,11 +51,13 @@ export default () =>
                         <div
                             className={classes.iconContainer}
                         >
-                            <img
-                                style={{ backgroundColor: icon.color }}
-                                className={classes.icon}
-                                src={icon.data}
-                                alt={label}
+                            <NonBundledDhis2Icon
+                                name={icon.name}
+                                color={icon.color}
+                                width={22}
+                                height={22}
+                                cornerRadius={2}
+                                alternativeText={label || undefined}
                             />
                         </div>
                     )

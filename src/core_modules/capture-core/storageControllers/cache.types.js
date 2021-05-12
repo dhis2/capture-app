@@ -82,6 +82,7 @@ export type CachedSectionDataElements = {
 export type CachedProgramStageSection = {
     id: string,
     displayName: string,
+    displayDescription: string,
     dataElements: ?Array<CachedSectionDataElements>
 };
 
@@ -108,6 +109,7 @@ export type CachedProgramStage = {
     generatedByEnrollmentDate?: ?boolean,
     reportDateToUse: string,
     minDaysFromStart: number,
+    style?: ?CachedStyle,
 };
 
 export type CachedCategoryOption = {

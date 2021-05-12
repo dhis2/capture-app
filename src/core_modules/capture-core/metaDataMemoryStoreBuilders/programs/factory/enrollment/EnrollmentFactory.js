@@ -7,7 +7,6 @@ import { errorCreator } from 'capture-core-utils';
 import type {
     CachedProgram,
     CachedProgramTrackedEntityAttribute,
-    CachedOptionSet,
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
 } from '../../../../storageControllers/cache.types';
@@ -25,6 +24,7 @@ import type {
 import DataElementFactory from './DataElementFactory';
 import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
+import type { ConstructorInput } from './enrollmentFactory.types';
 
 class EnrollmentFactory {
     static errorMessages = {
@@ -58,22 +58,22 @@ class EnrollmentFactory {
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>;
-    constructor(
-        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-        cachedOptionSets: Map<string, CachedOptionSet>,
-        cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
-        locale: ?string,
-        trackedEntityTypeCollection: Map<string, TrackedEntityType>,
-    ) {
+    constructor({
+        cachedTrackedEntityAttributes,
+        cachedOptionSets,
+        cachedTrackedEntityTypes,
+        trackedEntityTypeCollection,
+        locale,
+    }: ConstructorInput) {
         this.locale = locale;
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.cachedTrackedEntityTypes = cachedTrackedEntityTypes;
-        this.dataElementFactory = new DataElementFactory(
+        this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
+        });
     }
 
     _buildTetFeatureTypeField(trackedEntityTypeId: ?string) {

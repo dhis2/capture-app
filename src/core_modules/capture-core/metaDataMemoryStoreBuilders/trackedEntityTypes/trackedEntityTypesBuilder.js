@@ -1,18 +1,14 @@
 // @flow
-import type {
-    CachedTrackedEntityAttribute,
-    CachedOptionSet,
-    CachedTrackedEntityType,
-} from '../../storageControllers/cache.types';
 import { trackedEntityTypesCollection } from '../../metaDataMemoryStores';
 import { TrackedEntityTypeFactory } from './factory';
+import type { BuildTrackedEntityTypesInput } from './trackedEntityTypesBuilder.types';
 
-export default async function buildTrackedEntityTypes(
-    cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
-    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-    cachedOptionSets: Map<string, CachedOptionSet>,
-    locale: ?string,
-) {
+export default async function buildTrackedEntityTypes({
+    cachedTrackedEntityTypes,
+    cachedTrackedEntityAttributes,
+    cachedOptionSets,
+    locale,
+}: BuildTrackedEntityTypesInput) {
     const trackedEntityTypeFactory = new TrackedEntityTypeFactory(
         cachedTrackedEntityAttributes,
         cachedOptionSets,

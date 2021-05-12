@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { parse } from 'query-string';
+import { parse, type QueryParameters } from 'query-string';
 import { paramsSelector } from './appSync.selectors';
 import { LoadingMaskForPage } from '../LoadingMasks';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
@@ -62,7 +62,7 @@ const updaterForPages = {
  */
 export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     class AppUrlSyncer extends React.Component<Props> {
-        params: ?string;
+        params: ?QueryParameters;
         page: string;
 
         handleUpdate = (updateData: UpdateDataContainer) => {

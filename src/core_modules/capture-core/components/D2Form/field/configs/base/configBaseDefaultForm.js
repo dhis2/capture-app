@@ -2,7 +2,7 @@
 import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
 
 import { convertPx, getBaseConfigForField } from './configBase';
-import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import type { DataElement } from '../../../../../metaData';
 import type { FieldConfigForType } from './configBase';
 
 const baseComponentStyles = {
@@ -23,14 +23,14 @@ const baseComponentStylesVertical = {
     },
 };
 
-const getBaseProps = (metaData: MetaDataElement) => ({
+const getBaseProps = ({ formName, compulsory, disabled, unique, icon }: DataElement) => ({
     styles: baseComponentStyles,
-    label: metaData.formName,
-    metaCompulsory: metaData.compulsory,
-    metaDisabled: metaData.disabled || (metaData.unique && metaData.unique.generatable),
-    icon: metaData.icon ? {
-        data: metaData.icon.data,
-        color: metaData.icon.color,
+    label: formName,
+    metaCompulsory: compulsory,
+    metaDisabled: disabled || (unique && unique.generatable),
+    icon: icon ? {
+        name: icon.name,
+        color: icon.color,
     } : null,
 });
 
@@ -41,7 +41,7 @@ const getBaseFormHorizontalProps = (options: Object) => ({
     styles: baseComponentStylesVertical,
 });
 
-export const createProps = (props?: ?Object, options: Object, metaData: MetaDataElement) => ({
+export const createProps = (props?: ?Object, options: Object, metaData: DataElement) => ({
     ...getBaseProps(metaData),
     ...(options && options.formHorizontal ? getBaseFormHorizontalProps(options) : {}),
     ...props,
@@ -49,7 +49,7 @@ export const createProps = (props?: ?Object, options: Object, metaData: MetaData
 
 // $FlowFixMe[prop-missing] automated comment
 // $FlowFixMe[incompatible-return] automated comment
-export const createFieldConfig = (fieldSpecifications: FieldConfigForType, metaData: MetaDataElement): FieldConfig => ({
+export const createFieldConfig = (fieldSpecifications: FieldConfigForType, metaData: DataElement): FieldConfig => ({
     ...getBaseConfigForField(metaData),
     ...fieldSpecifications,
 });
