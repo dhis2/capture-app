@@ -112,7 +112,7 @@ const RegistrationDataEntryPlain = ({
                 !scopeType &&
                 <Paper className={classes.paper}>
                     <div className={classes.title} >
-                        New
+                        {i18n.t('New')}
                     </div>
                     <div className={classes.tetypeContainer}>
                         <TrackedEntityTypeSelector
@@ -129,7 +129,10 @@ const RegistrationDataEntryPlain = ({
                 scopeType === scopeTypes.TRACKER_PROGRAM &&
                 <Paper className={classes.paper}>
                     <div className={classes.title} >
-                        New {titleText}
+                        {i18n.t('New {{titleText}}', {
+                            titleText,
+                            interpolation: { escapeValue: false },
+                        })}
                     </div>
 
                     <div className={classes.registrationContainer}>
@@ -139,7 +142,7 @@ const RegistrationDataEntryPlain = ({
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     enrollmentMetadata={registrationMetaData}
-                                    saveButtonText={'Save new'}
+                                    saveButtonText={i18n.t('Save new')}
                                     onSave={onSaveWithEnrollment}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}
@@ -166,7 +169,10 @@ const RegistrationDataEntryPlain = ({
                 scopeType === scopeTypes.TRACKED_ENTITY_TYPE &&
                 <Paper className={classes.paper}>
                     <div className={classes.title} >
-                        New {titleText}
+                        {i18n.t('New {{titleText}}', {
+                            titleText,
+                            interpolation: { escapeValue: false },
+                        })}
                     </div>
 
                     <div className={classes.tetypeContainer}>
@@ -184,7 +190,7 @@ const RegistrationDataEntryPlain = ({
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     teiRegistrationMetadata={registrationMetaData}
-                                    saveButtonText={'Save new'}
+                                    saveButtonText={i18n.t('Save new')}
                                     onSave={onSaveWithoutEnrollment}
                                     duplicatesReviewPageSize={resultsPageSize}
                                     renderDuplicatesDialogActions={renderDuplicatesDialogActions}

@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2021
+# Ulanbek Abakirov <ulans@mail.ru>, 2021
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
-# Ulanbek Abakirov <ulans@mail.ru>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2021\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -157,6 +157,9 @@ msgstr "Назначенный пользователь"
 msgid "Search for user"
 msgstr "Поиск пользователя"
 
+msgid "Complete event"
+msgstr "Завершить событие"
+
 msgid "Basic info"
 msgstr "Начальные сведения"
 
@@ -196,6 +199,9 @@ msgstr "Действующий"
 msgid "Completed"
 msgstr "Завершенный"
 
+msgid "Assigned to"
+msgstr "закреплено за"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 "Пожалуйста добавьте или удалите комментарии, перед сохранением Записи-"
@@ -212,6 +218,9 @@ msgstr "Завершить"
 
 msgid "No write access"
 msgstr "Отсутствует право на запись "
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Переключиь вид на Формы"
@@ -325,9 +334,6 @@ msgstr "Индикаторы"
 msgid "Warnings"
 msgstr "Предупреждения"
 
-msgid "search group result could not be retrieved"
-msgstr "Результат группы поиска не может быть получен"
-
 msgid "Complete"
 msgstr "Завершенный"
 
@@ -357,12 +363,6 @@ msgstr "Некоторые операции еще не заверщены. По
 
 msgid "Operations running"
 msgstr "Операции запущены..."
-
-msgid "Hide"
-msgstr "Скрыть"
-
-msgid "Possible duplicates found"
-msgstr "Найдены возможные дубликаты"
 
 msgid "Sort"
 msgstr "Сортировать"
@@ -530,6 +530,12 @@ msgstr ""
 msgid "New"
 msgstr "Новый"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr ""
 
@@ -683,9 +689,6 @@ msgstr "Статус регистрации"
 msgid "Cancelled"
 msgstr "Отмененный"
 
-msgid "Assigned to"
-msgstr "закреплено за"
-
 msgid "Registering unit"
 msgstr "Регистрирующая единица"
 
@@ -750,8 +753,8 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr "Пересмотр дубликатов"
+msgid "Save new"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
@@ -802,6 +805,9 @@ msgstr "Поиск по атрибутам"
 
 msgid "Back"
 msgstr "Назад"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Поиск"
@@ -860,6 +866,12 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "У вас нет прав на исправление данного события"
 
+msgid "Event details"
+msgstr "Детали события"
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -879,6 +891,9 @@ msgstr "Событие назначен: {{name}}"
 msgid "Feedbacks"
 msgstr "Отзывы"
 
+msgid "Possible duplicates found"
+msgstr "Найдены возможные дубликаты"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -893,6 +908,15 @@ msgstr "Добавить зависимость"
 
 msgid "Results found"
 msgstr "Найдены результаты"
+
+msgid "Open"
+msgstr "Открыть"
+
+msgid "All accessible"
+msgstr "Все доступные"
+
+msgid "Organisation unit scope"
+msgstr "Масштаб организационной единицы"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Поиск {{uniqueAttrName}}"
@@ -910,6 +934,9 @@ msgstr "Открыть приложение \"Отслеживание объе�
 msgid "An error has occured. See log for details"
 msgstr "Произошла ошибка. Смотрите подробности в лог-файле"
 
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Program not found"
 msgstr "Программа не найдена"
 
@@ -922,8 +949,8 @@ msgstr "Профиль"
 msgid "Error saving event"
 msgstr "Ошибка сохранения события"
 
-msgid "Could not save event. See log for details"
-msgstr "Не удалось сохранить событие. Смотрите детали в лог-файле"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "Не возможно удалить событие"
@@ -937,11 +964,23 @@ msgstr "Не возможно добавить рабочий список"
 msgid "Could not delete working list"
 msgstr "Не возможно удалить рабочий список"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "Поиск Орг.единицы не возможен. Смотри детали в лог-файле."
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "Элемент отслеживаемого объекта"
+
+msgid "Latitude"
+msgstr "Широта"
+
+msgid "Longitude"
+msgstr "Долгота"
 
 msgid "Set coordinate"
 msgstr "Задать координату"

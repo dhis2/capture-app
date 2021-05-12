@@ -1,15 +1,15 @@
 # 
 # Translators:
+# Mai Nguyen <thanhmai.jica@gmail.com>, 2021
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
-# Mai Nguyen <thanhmai.jica@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2021\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,6 +155,9 @@ msgstr "Người dùng được chỉ định"
 msgid "Search for user"
 msgstr "Tìm kiếm người dùng"
 
+msgid "Complete event"
+msgstr "Hoàn tất chương trình"
+
 msgid "Basic info"
 msgstr "Thông tin cơ bản"
 
@@ -194,6 +197,9 @@ msgstr "Hoạt động"
 msgid "Completed"
 msgstr "Hoàn tất"
 
+msgid "Assigned to"
+msgstr "Đã gán cho"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "Xin vui lòng thêm hoặc xóa bình luận trước khi lưu sự kiện"
 
@@ -208,6 +214,9 @@ msgstr "Hoàn tất"
 
 msgid "No write access"
 msgstr "Không có quyền viết"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Chuyển sang xem biểu nhập"
@@ -318,9 +327,6 @@ msgstr "Các chỉ số"
 msgid "Warnings"
 msgstr "Cảnh báo"
 
-msgid "search group result could not be retrieved"
-msgstr "không thể truy xuất kết quả nhóm tìm kiếm"
-
 msgid "Complete"
 msgstr "Hoàn tất"
 
@@ -350,12 +356,6 @@ msgstr "Một số hoạt động vẫn đang chạy. Vui lòng đợi .."
 
 msgid "Operations running"
 msgstr "Hoạt động đang chạy"
-
-msgid "Hide"
-msgstr "Ẩn"
-
-msgid "Possible duplicates found"
-msgstr "Có thể tìm thấy các bản sao"
 
 msgid "Sort"
 msgstr "Sắp xếp"
@@ -522,6 +522,12 @@ msgstr "Chương trình đã chọn không hợp lệ cho đơn vị đăng ký 
 msgid "New"
 msgstr "Mới"
 
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
 msgid "Clear selections"
 msgstr "Xóa các lựa chọn"
 
@@ -675,9 +681,6 @@ msgstr "Trạng thái đăng ký"
 msgid "Cancelled"
 msgstr "Đã hủy"
 
-msgid "Assigned to"
-msgstr "Đã gán cho"
-
 msgid "Registering unit"
 msgstr "Đơn Vị đăng ký"
 
@@ -742,8 +745,8 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr "Xem lại các bản sao"
+msgid "Save new"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Lưu {{trackedEntityTypeName}} mới và liên kết"
@@ -794,6 +797,9 @@ msgstr "Tìm kiếm theo thuộc tính"
 
 msgid "Back"
 msgstr "Trở lại"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Tìm"
@@ -860,6 +866,12 @@ msgstr "Tìm kiếm trong tất cả các chương trình"
 msgid "You dont have access to edit this event"
 msgstr "Bạn không có quyền truy cập để chỉnh sửa sự kiện này"
 
+msgid "Event details"
+msgstr "Chi tiết sự kiện"
+
+msgid "Event completed"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -879,6 +891,9 @@ msgstr "Sự kiện được chỉ định cho {{name}}"
 msgid "Feedbacks"
 msgstr "Phản hồi"
 
+msgid "Possible duplicates found"
+msgstr "Có thể tìm thấy các bản sao"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -893,6 +908,15 @@ msgstr "Thêm Quan Hệ"
 
 msgid "Results found"
 msgstr "Kết quả tìm thấy"
+
+msgid "Open"
+msgstr "Mở"
+
+msgid "All accessible"
+msgstr "Tất cả có thể truy cập"
+
+msgid "Organisation unit scope"
+msgstr "Phạm Vi Đơn Vị"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Tìm kiếm {{uniqueAttrName}}"
@@ -909,6 +933,9 @@ msgstr "mở ứng dụng Tracker Capture"
 msgid "An error has occured. See log for details"
 msgstr "Có lỗi. Xem log để biết thêm chi tiết."
 
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
+
 msgid "Program not found"
 msgstr "Chương trình không tìm thấy"
 
@@ -921,8 +948,8 @@ msgstr "Hồ sơ"
 msgid "Error saving event"
 msgstr "Có lỗi khi đang lưu sự kiện"
 
-msgid "Could not save event. See log for details"
-msgstr "Không thể lưu sự kiện. Xem log để biết thêm chi tiết"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "Không thể xóa sự kiện"
@@ -936,11 +963,23 @@ msgstr "Không thể thêm danh sách làm việc"
 msgid "Could not delete working list"
 msgstr "Không thể xóa danh sách làm việc"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "Tìm kiếm đơn vị không thành công. Xem nhật ký để biết chi tiết"
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "thực thể được theo dõi"
+
+msgid "Latitude"
+msgstr "Vĩ độ"
+
+msgid "Longitude"
+msgstr "Kinh độ"
 
 msgid "Set coordinate"
 msgstr "Đặt tọa độ"
