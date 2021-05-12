@@ -1,2 +1,2 @@
 // @flow
-export { WidgetEnrollmentContainer } from './WidgetEnrollment.container';
+export { WidgetEnrollment } from './WidgetEnrollment.container';
