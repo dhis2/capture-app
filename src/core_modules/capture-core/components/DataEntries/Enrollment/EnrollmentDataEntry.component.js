@@ -338,6 +338,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     render() {
         const {
             orgUnit,
+            programId,
             onUpdateField,
             onUpdateDataEntryField,
             onStartAsyncUpdateField,
