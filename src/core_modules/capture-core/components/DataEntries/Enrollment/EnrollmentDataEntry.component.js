@@ -9,7 +9,6 @@ import {
     withDataEntryField,
     withDataEntryFieldIfApplicable,
     withBrowserBackWarning,
-    withSearchGroups,
     inMemoryFileStore,
 } from '../../DataEntry';
 import {
@@ -248,13 +247,6 @@ const getGeometrySettings = () => ({
     }),
 });
 
-const getSearchGroups = (props: Object) => props.enrollmentMetadata.inputSearchGroups;
-const getSearchContext = (props: Object) => ({
-    ...props.onGetValidationContext(),
-    trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
-    program: props.programId,
-});
-
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
     programId: string,
@@ -285,8 +277,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-const SearchGroupsHOC = withSearchGroups(getSearchGroups, getSearchContext)(FinalEnrollmentDataEntry);
-const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(SearchGroupsHOC);
+const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(FinalEnrollmentDataEntry);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);

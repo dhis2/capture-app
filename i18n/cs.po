@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Jiří Podhorecký, 2021
+# trendspotter, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Jiří Podhorecký, 2021\n"
+"Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -141,6 +141,9 @@ msgstr "Ukládání {{trackedEntityName}} v"
 msgid "in"
 msgstr "v"
 
+msgid "Cancel"
+msgstr "Zrušit"
+
 msgid "Metadata error. see log for details"
 msgstr "Chyba metadat. viz log pro podrobnosti"
 
@@ -149,6 +152,9 @@ msgstr "Přiřazený uživatel"
 
 msgid "Search for user"
 msgstr "Hledat uživatele"
+
+msgid "Complete event"
+msgstr "Dokončit událost"
 
 msgid "Basic info"
 msgstr "Základní informace"
@@ -189,6 +195,9 @@ msgstr "Aktivní"
 msgid "Completed"
 msgstr "Dokončeno"
 
+msgid "Assigned to"
+msgstr "Přiřazen k"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "Před uložením události prosím přidejte nebo zrušte komentář"
 
@@ -203,6 +212,9 @@ msgstr "Dokončit"
 
 msgid "No write access"
 msgstr "Žádný přístup pro zápis"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Přepnout do formulářového zobrazení"
@@ -243,14 +255,11 @@ msgstr "Ne, zůstat zde"
 msgid "New event"
 msgstr "Nová událost"
 
-msgid "You dont have access to create an event in the current selections"
+msgid "You don't have access to create an event in the current selections"
 msgstr "V aktuálním výběru nemáte přístup k vytvoření události"
 
 msgid "Save"
 msgstr "Uložit"
-
-msgid "Cancel"
-msgstr "Zrušit"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "Opuštěním této stránky zrušíte změny provedené v této události."
@@ -270,6 +279,36 @@ msgstr "Zapište se do programu výběrem programu v horní liště."
 msgid "An error has occurred. See log for details"
 msgstr "Došlo k chybě. Podrobnosti najdete v protokolu"
 
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+"Existuje duplikát (ale došlo k některým chybám, podrobnosti najdete v "
+"protokolu"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+"Položka s názvem {{attributeName}} je již zaregistrována, ale nemáte k ní "
+"přístup"
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "Tento {{attributeName}} jste již zaregistrovali"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+"{{TrackedEntityTypeName}} s tímto {{attributeName}} je již zaregistrován"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "Zobrazit registrovaného {{trackedEntityTypeName}}"
+
+msgid "Registered person"
+msgstr "Registrovaná osoba"
+
+msgid "Link"
+msgstr "Odkaz"
+
 msgid "validation failed"
 msgstr "ověření selhalo"
 
@@ -284,9 +323,6 @@ msgstr "Indikátory"
 
 msgid "Warnings"
 msgstr "Varování"
-
-msgid "search group result could not be retrieved"
-msgstr "výsledek vyhledávací skupiny nelze načíst"
 
 msgid "Complete"
 msgstr "Dokončit"
@@ -429,6 +465,9 @@ msgstr "Vyčistit"
 msgid "No results"
 msgstr "Žádné výsledky"
 
+msgid "Icon for {{field}}"
+msgstr "Ikona pro {{field}}"
+
 msgid "start typing to search"
 msgstr "začněte psát pro vyhledávání"
 
@@ -483,8 +522,11 @@ msgstr "Vybraný program je pro vybranou registrační jednotku neplatný"
 msgid "New"
 msgstr "Nový"
 
-msgid "Find"
-msgstr "Hledat"
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "Nový {{trackedEntityName}} v {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Vyhledat {{trackedEntityName}} v {{programName}}"
 
 msgid "Clear selections"
 msgstr "Vymazat výběry"
@@ -507,23 +549,26 @@ msgstr "Registrování organizační jednotky"
 msgid "Select"
 msgstr "Vybrat"
 
-msgid "Selected Program"
+msgid "Program"
+msgstr "Program"
+
+msgid "No programs available."
+msgstr "Nejsou k dispozici žádné programy."
+
+msgid "Show all"
+msgstr "Ukázat vše"
+
+msgid "Selected program"
 msgstr "Vybraný program"
 
 msgid "Some programs are being filtered."
 msgstr "Některé programy jsou filtrovány."
 
-msgid "Show all"
-msgstr "Ukázat vše"
-
-msgid "Program"
-msgstr "Program"
-
 msgid "Select program"
 msgstr "Vybrat program"
 
-msgid "No programs available."
-msgstr "Nejsou k dispozici žádné programy."
+msgid "Selected"
+msgstr "Vybráno"
 
 msgid "Online"
 msgstr "Online"
@@ -558,6 +603,58 @@ msgstr "Událost se nepodařilo načíst"
 msgid "Organisation unit could not be loaded"
 msgstr "Organizační jednotku se nepodařilo načíst"
 
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "Instance trasované entity s ID \"{{teiId}}\" neexistuje"
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+"Při otevírání tohoto zápuisu došlo k chybě. Zadejte platnou adresu URL."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Zápis s ID \"{{enrollmentId}}\" neexistuje"
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr "{{teiDisplayName}} je zapsán do několika programů. Vyberte program."
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+"Program {{programName}} má kategorie. Chcete-li zobrazit ovládací panel, "
+"vyberte všechny kategorie."
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+"Existuje několik zápisů pro tento program. Zvolte zápis pro zobrazení "
+"řídicího panelu."
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr "{{teiDisplayName}} není v tomto programu zapsán."
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr "Zapsat {{teiDisplayName}} do tohoto programu."
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+"{{teiDisplayName}} je {{tetName}} a nelze jej zapsat do {{programName}}. "
+"Vyberte jiný program, který umožňuje zápis {{tetName}}."
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr "Zapsat nový {{selectedTetName}} do tohoto programu."
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr "{{programName}} je program událostí a nemá zápisy."
+
+msgid "Create a new event in this program."
+msgstr "Vytvořte novou událost v tomto programu."
+
+msgid "View working list in this program."
+msgstr "Zobrazit pracovní seznam v tomto programu."
+
 msgid "Delete event"
 msgstr "Smazat událost"
 
@@ -591,9 +688,6 @@ msgstr "Stav zápisu"
 msgid "Cancelled"
 msgstr "Zrušeno"
 
-msgid "Assigned to"
-msgstr "Přiřazen k"
-
 msgid "Registering unit"
 msgstr "Registrační jednotka"
 
@@ -604,7 +698,7 @@ msgid "Inactive"
 msgstr "Neaktivní"
 
 msgid "Working list could not be updated"
-msgstr ""
+msgstr "Pracovní seznam nelze aktualizovat"
 
 msgid "Update view"
 msgstr "Aktualizovat zobrazení"
@@ -645,56 +739,27 @@ msgstr "Vyberte registraci jednotky a začněte hlásit"
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Chcete-li zahájit vytváření hlášení, vyberte {{missingCategories}}"
 
-msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr ""
-"Existuje duplikát (ale došlo k některým chybám, podrobnosti najdete v "
-"protokolu"
+msgid "Save as new"
+msgstr "Uložit jako nové"
+
+msgid "View dashboard"
+msgstr "Zobrazit ovládací panel"
+
+msgid "Create for"
+msgstr "Vytvořit pro"
 
 msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr ""
-"Položka s názvem {{attributeName}} je již zaregistrována, ale nemáte k ní "
-"přístup"
+"You can also choose a program from the top bar and create in that program"
+msgstr "Můžete také vybrat program z horní lišty a vytvořit v něm program"
 
-msgid "You have already registered this {{attributeName}}"
-msgstr "Tento {{attributeName}} jste již zaregistrovali"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr ""
-"{{TrackedEntityTypeName}} s tímto {{attributeName}} je již zaregistrován"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Zobrazit registrovaného {{trackedEntityTypeName}}"
-
-msgid "Registered person"
-msgstr "Registrovaná osoba"
-
-msgid "Link"
-msgstr "Odkaz"
-
-msgid "Review Duplicates"
-msgstr "Zkontrolovat duplikáty"
+msgid "Save new"
+msgstr "Uložit nový"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Uložit nový {{trackedEntityTypeName}} a odkaz"
 
-msgid "Possible duplicates found"
-msgstr "Byly nalezeny možné duplikáty"
-
-msgid "No results found"
-msgstr "Nenalezeny žádné výsledky"
-
-msgid "An error occured loading possible duplicates"
-msgstr "Při načítání možných duplikátů došlo k chybě"
-
-msgid "Hide"
-msgstr "Skrýt"
-
-msgid "Save as new {{tetName}}"
-msgstr "Uložit jako nový {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr "Uložit jako nový {{trackedEntityName}}"
 
 msgid "Organisation Unit"
 msgstr "Organizační jednotka"
@@ -731,14 +796,27 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr "Hledat {{name}}"
 
-msgid "Find by {{name}}"
-msgstr "Najít podle {{name}}"
+msgid "Search by {{name}}"
+msgstr "Hledat podle {{name}}"
 
 msgid "Search by attributes"
 msgstr "Hledání podle atributů"
 
 msgid "Back"
 msgstr "Zpět"
+
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr "Hledat"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
+
+msgid "No results found"
+msgstr "Nenalezeny žádné výsledky"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -774,9 +852,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr "Chcete-li zahájit vyhledávání, vyberte typ"
 
-msgid "View dashboard"
-msgstr "Zobrazit ovládací panel"
-
 msgid "View active enrollment"
 msgstr "Zobrazit aktivní zápisy"
 
@@ -795,6 +870,12 @@ msgstr "Hledat ve všech programech"
 
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
+
+msgid "Event details"
+msgstr "Podrobnosti události"
+
+msgid "Event completed"
+msgstr "Událost dokončena"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -815,6 +896,12 @@ msgstr "Událost přiřazená uživateli {{name}}"
 msgid "Feedbacks"
 msgstr "Zpětná vazba"
 
+msgid "Possible duplicates found"
+msgstr "Byly nalezeny možné duplikáty"
+
+msgid "An error occurred loading possible duplicates"
+msgstr "Při načítání možných duplikátů došlo k chybě"
+
 msgid "You dont have access to delete this relationship"
 msgstr "K odstranění tohoto vztahu nemáte přístup"
 
@@ -827,8 +914,14 @@ msgstr "Přidat vztah"
 msgid "Results found"
 msgstr "Nalezeny výsledky"
 
-msgid "Selected program"
-msgstr "Vybraný program"
+msgid "Open"
+msgstr "Otevřít"
+
+msgid "All accessible"
+msgstr "Všechno přístupné"
+
+msgid "Organisation unit scope"
+msgstr "Rozsah organizační jednotky"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Hledat {{uniqueAttrName}}"
@@ -836,21 +929,26 @@ msgstr "Hledat {{uniqueAttrName}}"
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Chcete-li hledat, vyplňte alespoň {{minAttributesRequired}} atributy"
 
-msgid "Search for"
-msgstr "Hledat"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "Můžete také vybrat program z horní lišty a vyhledávat v něm"
-
 msgid "To work with the selected program,"
 msgstr "Chcete-li pracovat s vybraným programem,"
 
 msgid "open the Tracker Capture app"
 msgstr "otevřít aplikaci Tracker Capture"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr "Fáze a události"
+
 msgid "An error has occured. See log for details"
 msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Program nebyl nalezen"
@@ -864,8 +962,8 @@ msgstr "Profil"
 msgid "Error saving event"
 msgstr "Při ukládání události došlo k chybě"
 
-msgid "Could not save event. See log for details"
-msgstr "Událost se nepodařilo uložit. Podrobnosti najdete v protokolu"
+msgid "Could not save event"
+msgstr "Událost se nepodařilo uložit"
 
 msgid "Could not delete event"
 msgstr "Událost se nepodařilo smazat"
@@ -879,12 +977,23 @@ msgstr "Nelze přidat pracovní seznam"
 msgid "Could not delete working list"
 msgstr "Pracovní seznam se nepodařilo smazat"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr ""
-"Hledání organizační jednotky se nezdařilo. Podrobnosti najdete v protokolu"
+msgid "Organisation unit search failed."
+msgstr "Hledání organizační jednotky se nezdařilo."
+
+msgid "Error saving tracked entity instance"
+msgstr "Při ukládání instance trasované entity došlo k chybě"
+
+msgid "Error saving enrollment"
+msgstr "Při ukládání zápisu došlo k chybě"
 
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
+
+msgid "Latitude"
+msgstr "Zeměpisná šířka"
+
+msgid "Longitude"
+msgstr "Zeměpisná délka"
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"

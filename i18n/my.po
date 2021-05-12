@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Aung Kyi Min <AungKyi.Min@savethechildren.org>, 2019
-# phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Burmese (https://www.transifex.com/hisp-uio/teams/100509/my/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -137,6 +137,9 @@ msgstr ""
 msgid "in"
 msgstr ""
 
+msgid "Cancel"
+msgstr "ပယ်ဖျက်သည်"
+
 msgid "Metadata error. see log for details"
 msgstr ""
 
@@ -144,6 +147,9 @@ msgid "Assigned user"
 msgstr ""
 
 msgid "Search for user"
+msgstr ""
+
+msgid "Complete event"
 msgstr ""
 
 msgid "Basic info"
@@ -183,6 +189,9 @@ msgstr "လုပ်ဆောင်နိုင်သည်"
 msgid "Completed"
 msgstr ""
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
@@ -196,6 +205,9 @@ msgid "Finish"
 msgstr "မှတ်သားမည်"
 
 msgid "No write access"
+msgstr ""
+
+msgid "New {{titleText}}"
 msgstr ""
 
 msgid "Switch to form view"
@@ -236,14 +248,11 @@ msgstr ""
 msgid "New event"
 msgstr ""
 
-msgid "You dont have access to create an event in the current selections"
+msgid "You don't have access to create an event in the current selections"
 msgstr ""
 
 msgid "Save"
 msgstr "သိမ်းဆည်းသည်"
-
-msgid "Cancel"
-msgstr "ပယ်ဖျက်သည်"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -263,6 +272,31 @@ msgstr ""
 msgid "An error has occurred. See log for details"
 msgstr ""
 
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+
+msgid "You have already registered this {{attributeName}}"
+msgstr ""
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Registered person"
+msgstr ""
+
+msgid "Link"
+msgstr ""
+
 msgid "validation failed"
 msgstr ""
 
@@ -276,9 +310,6 @@ msgid "Indicators"
 msgstr "အညွှန်းများ"
 
 msgid "Warnings"
-msgstr ""
-
-msgid "search group result could not be retrieved"
 msgstr ""
 
 msgid "Complete"
@@ -422,6 +453,9 @@ msgstr "ရှင်းလင်းသည်"
 msgid "No results"
 msgstr ""
 
+msgid "Icon for {{field}}"
+msgstr ""
+
 msgid "start typing to search"
 msgstr ""
 
@@ -476,8 +510,11 @@ msgstr ""
 msgid "New"
 msgstr "အသစ်"
 
-msgid "Find"
-msgstr "ရှာသည်"
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
 
 msgid "Clear selections"
 msgstr ""
@@ -500,23 +537,26 @@ msgstr ""
 msgid "Select"
 msgstr "ရွေးချယ်ပါ။"
 
-msgid "Selected Program"
+msgid "Program"
 msgstr ""
 
-msgid "Some programs are being filtered."
+msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
 msgstr ""
 
-msgid "Program"
+msgid "Selected program"
+msgstr ""
+
+msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
 msgstr "Select Program"
 
-msgid "No programs available."
-msgstr ""
+msgid "Selected"
+msgstr "‌ရွေးချယ်ထားပြီး"
 
 msgid "Online"
 msgstr "အင်တာနက်နှင့်ချိတ်ဆက်ထားသည်"
@@ -551,6 +591,51 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr ""
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr ""
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr ""
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr ""
+
+msgid "View working list in this program."
+msgstr ""
+
 msgid "Delete event"
 msgstr ""
 
@@ -582,9 +667,6 @@ msgid "Enrollment status"
 msgstr ""
 
 msgid "Cancelled"
-msgstr ""
-
-msgid "Assigned to"
 msgstr ""
 
 msgid "Registering unit"
@@ -638,50 +720,26 @@ msgstr ""
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "A duplicate exists (but there were some errors, see log for details"
+msgid "Save as new"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "Create for"
 msgstr ""
 
 msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
+"You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "You have already registered this {{attributeName}}"
-msgstr ""
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr ""
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
-
-msgid "Registered person"
-msgstr ""
-
-msgid "Link"
-msgstr ""
-
-msgid "Review Duplicates"
+msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr ""
-
-msgid "No results found"
-msgstr "No results found"
-
-msgid "An error occured loading possible duplicates"
-msgstr ""
-
-msgid "Hide"
-msgstr ""
-
-msgid "Save as new {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
 msgstr ""
 
 msgid "Organisation Unit"
@@ -718,7 +776,7 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr ""
 
-msgid "Find by {{name}}"
+msgid "Search by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
@@ -726,6 +784,19 @@ msgstr ""
 
 msgid "Back"
 msgstr "‌နောက်သို့ပြန်သွားသည်"
+
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr ""
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+
+msgid "No results found"
+msgstr "No results found"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -754,9 +825,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr ""
 
-msgid "View dashboard"
-msgstr ""
-
 msgid "View active enrollment"
 msgstr ""
 
@@ -772,6 +840,12 @@ msgid "Search in all programs"
 msgstr ""
 
 msgid "You dont have access to edit this event"
+msgstr ""
+
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
 msgstr ""
 
 msgid ""
@@ -791,6 +865,12 @@ msgstr ""
 msgid "Feedbacks"
 msgstr ""
 
+msgid "Possible duplicates found"
+msgstr ""
+
+msgid "An error occurred loading possible duplicates"
+msgstr ""
+
 msgid "You dont have access to delete this relationship"
 msgstr ""
 
@@ -803,7 +883,13 @@ msgstr ""
 msgid "Results found"
 msgstr ""
 
-msgid "Selected program"
+msgid "Open"
+msgstr "Open"
+
+msgid "All accessible"
+msgstr ""
+
+msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
@@ -812,20 +898,25 @@ msgstr ""
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
-msgid "Search for"
-msgstr ""
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-
 msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr ""
+
 msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Program not found"
@@ -840,7 +931,7 @@ msgstr "အတ္ထုပ္ပတ္တိအကျဉ်း"
 msgid "Error saving event"
 msgstr ""
 
-msgid "Could not save event. See log for details"
+msgid "Could not save event"
 msgstr ""
 
 msgid "Could not delete event"
@@ -855,10 +946,22 @@ msgstr ""
 msgid "Could not delete working list"
 msgstr ""
 
-msgid "Organisation unit search failed. See log for details"
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
 msgstr ""
 
 msgid "tracked entity instance"
+msgstr ""
+
+msgid "Latitude"
+msgstr ""
+
+msgid "Longitude"
 msgstr ""
 
 msgid "Set coordinate"

@@ -2,16 +2,16 @@
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
 import {
-    Icon,
     EventProgram,
     TrackerProgram,
     CategoryCombination,
     type TrackedEntityType,
     type Category,
 } from '../../../../metaData';
-
-import getProgramIconAsync from './getProgramIcon';
+import { getUserStorageController } from '../../../../storageControllers';
+import { userStores } from '../../../../storageControllers/stores';
 import { SearchGroupFactory } from '../../../common/factory';
+import { buildIcon } from '../../../common/helpers';
 import { EnrollmentFactory } from '../enrollment';
 import DataElementFactory from '../enrollment/DataElementFactory';
 import {
@@ -21,7 +21,6 @@ import { CategoryFactory } from '../category';
 
 import type
 {
-    CachedStyle,
     CachedProgramStage,
     ProgramCachedCategoryCombo,
     CachedProgram,
@@ -52,28 +51,28 @@ class ProgramFactory {
         locale: ?string,
     ) {
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
-        this.programStageFactory = new ProgramStageFactory(
+        this.programStageFactory = new ProgramStageFactory({
             cachedOptionSets,
             cachedRelationshipTypes,
             locale,
-        );
-        this.enrollmentFactory = new EnrollmentFactory(
+        });
+        this.enrollmentFactory = new EnrollmentFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             cachedTrackedEntityTypes,
-            locale,
             trackedEntityTypeCollection,
-        );
-        this.searchGroupFactory = new SearchGroupFactory(
+            locale,
+        });
+        this.searchGroupFactory = new SearchGroupFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
-        this.dataElementFactory = new DataElementFactory(
+        });
+        this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
+        });
         this.categoryFactory = new CategoryFactory(
             cachedCategories,
         );
@@ -111,13 +110,6 @@ class ProgramFactory {
         });
     }
 
-    static async _buildProgramIcon(cachedStyle: CachedStyle = {}) {
-        const icon = new Icon();
-        icon.color = cachedStyle.color || '#e0e0e0';
-        icon.data = await getProgramIconAsync(cachedStyle.icon);
-        return icon;
-    }
-
     async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
         const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
             // $FlowFixMe[incompatible-call] automated comment
@@ -137,7 +129,6 @@ class ProgramFactory {
                 o.access = cachedProgram.access;
                 o.name = cachedProgram.displayName;
                 o.shortName = cachedProgram.displayShortName;
-                o.organisationUnits = cachedProgram.organisationUnits;
                 o.categoryCombination = this._buildCategoryCombination(cachedProgram.categoryCombo);
             });
             const d2Stage = cachedProgram.programStages && cachedProgram.programStages[0];
@@ -152,7 +143,6 @@ class ProgramFactory {
                 o.access = cachedProgram.access;
                 o.name = cachedProgram.displayName;
                 o.shortName = cachedProgram.displayShortName;
-                o.organisationUnits = cachedProgram.organisationUnits;
                 // $FlowFixMe
                 o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId);
             });
@@ -179,8 +169,8 @@ class ProgramFactory {
 
             program.enrollment = await this.enrollmentFactory.build(cachedProgram, program.searchGroups);
         }
-        // $FlowFixMe
-        program.icon = await ProgramFactory._buildProgramIcon(cachedProgram.style);
+        program.organisationUnits = (await getUserStorageController().get(userStores.ORGANISATION_UNITS_BY_PROGRAM, program.id))?.organisationUnits;
+        program.icon = buildIcon(cachedProgram.style);
 
         return program;
     }

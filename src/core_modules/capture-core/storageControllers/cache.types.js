@@ -18,6 +18,7 @@ export type CachedTrackedEntityAttribute = {
     id: string,
     displayName: string,
     displayShortName: string,
+    displayFormName: string,
     description: string,
     translations: Array<CachedAttributeTranslation>,
     valueType: string,
@@ -81,6 +82,7 @@ export type CachedSectionDataElements = {
 export type CachedProgramStageSection = {
     id: string,
     displayName: string,
+    displayDescription: string,
     dataElements: ?Array<CachedSectionDataElements>
 };
 
@@ -106,7 +108,8 @@ export type CachedProgramStage = {
     openAfterEnrollment?: ?boolean,
     generatedByEnrollmentDate?: ?boolean,
     reportDateToUse: string,
-    standardInterval: number,
+    minDaysFromStart: number,
+    style?: ?CachedStyle,
 };
 
 export type CachedCategoryOption = {

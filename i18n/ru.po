@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -145,6 +145,9 @@ msgstr ""
 msgid "in"
 msgstr "в"
 
+msgid "Cancel"
+msgstr "Отмена"
+
 msgid "Metadata error. see log for details"
 msgstr "Ошибка в метаданных. Смотрите детали в лог-файле."
 
@@ -153,6 +156,9 @@ msgstr "Назначенный пользователь"
 
 msgid "Search for user"
 msgstr "Поиск пользователя"
+
+msgid "Complete event"
+msgstr "Завершить событие"
 
 msgid "Basic info"
 msgstr "Начальные сведения"
@@ -193,6 +199,9 @@ msgstr "Действующий"
 msgid "Completed"
 msgstr "Завершенный"
 
+msgid "Assigned to"
+msgstr "закреплено за"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 "Пожалуйста добавьте или удалите комментарии, перед сохранением Записи-"
@@ -209,6 +218,9 @@ msgstr "Завершить"
 
 msgid "No write access"
 msgstr "Отсутствует право на запись "
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "Переключиь вид на Формы"
@@ -250,14 +262,11 @@ msgstr "Нет, остаюсь тут"
 msgid "New event"
 msgstr "Новое событие"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "Не достаточно прав для создания Событий с текущим выбором"
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
 
 msgid "Save"
 msgstr "Сохранить"
-
-msgid "Cancel"
-msgstr "Отмена"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -279,6 +288,37 @@ msgstr ""
 msgid "An error has occurred. See log for details"
 msgstr ""
 
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+"Существует дубликат(имеются дополнительные ошибки, смотрите детали в лог-"
+"файле)"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+"Элемент {{attributeName}} уже зарегистрирован, но у вас нет прав доступа к "
+"нему"
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "{{attributeName}} уже зарегистрирован"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+"Трекер {{trackedEntityTypeName}} с атрибутом {{attributeName}} уже "
+"зарегистрирован"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "Показать зарегистрированную {{trackedEntityTypeName}}"
+
+msgid "Registered person"
+msgstr "Зарегистрированное лицо"
+
+msgid "Link"
+msgstr "Ссылка"
+
 msgid "validation failed"
 msgstr "Не удалась валидация"
 
@@ -293,9 +333,6 @@ msgstr "Индикаторы"
 
 msgid "Warnings"
 msgstr "Предупреждения"
-
-msgid "search group result could not be retrieved"
-msgstr "Результат группы поиска не может быть получен"
 
 msgid "Complete"
 msgstr "Завершенный"
@@ -438,6 +475,9 @@ msgstr "Очистить"
 msgid "No results"
 msgstr "Результатов нет"
 
+msgid "Icon for {{field}}"
+msgstr ""
+
 msgid "start typing to search"
 msgstr "Начинайте вводить для поиска"
 
@@ -493,8 +533,11 @@ msgstr ""
 msgid "New"
 msgstr "Новый"
 
-msgid "Find"
-msgstr "Найти"
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
 
 msgid "Clear selections"
 msgstr ""
@@ -517,23 +560,26 @@ msgstr "Регистрация Организационной единицы"
 msgid "Select"
 msgstr "Выбрать"
 
-msgid "Selected Program"
+msgid "Program"
+msgstr "Программа"
+
+msgid "No programs available."
+msgstr "Нет доступных программ"
+
+msgid "Show all"
+msgstr "Показать все"
+
+msgid "Selected program"
 msgstr "Выбранная программа"
 
 msgid "Some programs are being filtered."
 msgstr "Фильтруются некоторые программы "
 
-msgid "Show all"
-msgstr "Показать все"
-
-msgid "Program"
-msgstr "Программа"
-
 msgid "Select program"
 msgstr "Выбрать программу"
 
-msgid "No programs available."
-msgstr "Нет доступных программ"
+msgid "Selected"
+msgstr "Выбранный"
 
 msgid "Online"
 msgstr "Онлайн"
@@ -568,6 +614,51 @@ msgstr "Событие не может быть загружено"
 msgid "Organisation unit could not be loaded"
 msgstr "Не могу загрузить Организационную единицу"
 
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr ""
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr ""
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr ""
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr ""
+
+msgid "View working list in this program."
+msgstr ""
+
 msgid "Delete event"
 msgstr "Удалить событие"
 
@@ -600,9 +691,6 @@ msgstr "Статус регистрации"
 
 msgid "Cancelled"
 msgstr "Отмененный"
-
-msgid "Assigned to"
-msgstr "закреплено за"
 
 msgid "Registering unit"
 msgstr "Регистрирующая единица"
@@ -655,57 +743,27 @@ msgstr ""
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr ""
 
-msgid "A duplicate exists (but there were some errors, see log for details"
+msgid "Save as new"
 msgstr ""
-"Существует дубликат(имеются дополнительные ошибки, смотрите детали в лог-"
-"файле)"
+
+msgid "View dashboard"
+msgstr "Смотреть Панель"
+
+msgid "Create for"
+msgstr ""
 
 msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
+"You can also choose a program from the top bar and create in that program"
 msgstr ""
-"Элемент {{attributeName}} уже зарегистрирован, но у вас нет прав доступа к "
-"нему"
 
-msgid "You have already registered this {{attributeName}}"
-msgstr "{{attributeName}} уже зарегистрирован"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
+msgid "Save new"
 msgstr ""
-"Трекер {{trackedEntityTypeName}} с атрибутом {{attributeName}} уже "
-"зарегистрирован"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Показать зарегистрированную {{trackedEntityTypeName}}"
-
-msgid "Registered person"
-msgstr "Зарегистрированное лицо"
-
-msgid "Link"
-msgstr "Ссылка"
-
-msgid "Review Duplicates"
-msgstr "Пересмотр дубликатов"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
 
-msgid "Possible duplicates found"
-msgstr "Найдены возможные дубликаты"
-
-msgid "No results found"
-msgstr "Результаты не найдены"
-
-msgid "An error occured loading possible duplicates"
-msgstr "Произошла ошибка во время загрузки возможных дубликатов"
-
-msgid "Hide"
-msgstr "Скрыть"
-
-msgid "Save as new {{tetName}}"
-msgstr "Сохранить как новый {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr ""
 
 msgid "Organisation Unit"
 msgstr "Организация"
@@ -742,14 +800,27 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr "Искать {{name}}"
 
-msgid "Find by {{name}}"
-msgstr "Найдено  {{name}}"
+msgid "Search by {{name}}"
+msgstr ""
 
 msgid "Search by attributes"
 msgstr "Поиск по атрибутам"
 
 msgid "Back"
 msgstr "Назад"
+
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr "Поиск"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr ""
+
+msgid "No results found"
+msgstr "Результаты не найдены"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -781,9 +852,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr ""
 
-msgid "View dashboard"
-msgstr "Смотреть Панель"
-
 msgid "View active enrollment"
 msgstr "Смотреть действующие регистрации"
 
@@ -800,6 +868,12 @@ msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr "У вас нет прав на исправление данного события"
+
+msgid "Event details"
+msgstr "Детали события"
+
+msgid "Event completed"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -820,6 +894,12 @@ msgstr "Событие назначен: {{name}}"
 msgid "Feedbacks"
 msgstr "Отзывы"
 
+msgid "Possible duplicates found"
+msgstr "Найдены возможные дубликаты"
+
+msgid "An error occurred loading possible duplicates"
+msgstr ""
+
 msgid "You dont have access to delete this relationship"
 msgstr "У вас нет прав на удаление данного Родового отношения"
 
@@ -832,8 +912,14 @@ msgstr "Добавить зависимость"
 msgid "Results found"
 msgstr "Найдены результаты"
 
-msgid "Selected program"
-msgstr "Выбранная программа"
+msgid "Open"
+msgstr "Открыть"
+
+msgid "All accessible"
+msgstr "Все доступные"
+
+msgid "Organisation unit scope"
+msgstr "Масштаб организационной единицы"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Поиск {{uniqueAttrName}}"
@@ -842,21 +928,26 @@ msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 "Заполните хотя бы {{minAttributesRequiredToSearch}} атрибутов для поиска"
 
-msgid "Search for"
-msgstr "Поиск"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-
 msgid "To work with the selected program,"
 msgstr "Работать с выбранной программой"
 
 msgid "open the Tracker Capture app"
 msgstr "Открыть приложение \"Отслеживание объектов\""
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr ""
+
 msgid "An error has occured. See log for details"
 msgstr "Произошла ошибка. Смотрите подробности в лог-файле"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Программа не найдена"
@@ -870,8 +961,8 @@ msgstr "Профиль"
 msgid "Error saving event"
 msgstr "Ошибка сохранения события"
 
-msgid "Could not save event. See log for details"
-msgstr "Не удалось сохранить событие. Смотрите детали в лог-файле"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "Не возможно удалить событие"
@@ -885,11 +976,23 @@ msgstr "Не возможно добавить рабочий список"
 msgid "Could not delete working list"
 msgstr "Не возможно удалить рабочий список"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "Поиск Орг.единицы не возможен. Смотри детали в лог-файле."
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "Элемент отслеживаемого объекта"
+
+msgid "Latitude"
+msgstr "Широта"
+
+msgid "Longitude"
+msgstr "Долгота"
 
 msgid "Set coordinate"
 msgstr "Выставить координату"

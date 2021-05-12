@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -138,6 +138,9 @@ msgstr "将{{trackedEntityName}}保存在"
 msgid "in"
 msgstr " 在"
 
+msgid "Cancel"
+msgstr "取消"
+
 msgid "Metadata error. see log for details"
 msgstr "元数据错误"
 
@@ -146,6 +149,9 @@ msgstr "分配的用户"
 
 msgid "Search for user"
 msgstr "搜索用户 "
+
+msgid "Complete event"
+msgstr "完成事件"
 
 msgid "Basic info"
 msgstr "基本信息"
@@ -184,6 +190,9 @@ msgstr "活动的"
 msgid "Completed"
 msgstr "已完成"
 
+msgid "Assigned to"
+msgstr "指派到"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "保存事件前请添加或取消被或许"
 
@@ -198,6 +207,9 @@ msgstr "结束"
 
 msgid "No write access"
 msgstr "无写权限"
+
+msgid "New {{titleText}}"
+msgstr ""
 
 msgid "Switch to form view"
 msgstr "切换到表单视图"
@@ -237,14 +249,11 @@ msgstr "不，待在这里"
 msgid "New event"
 msgstr "新事件"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "你没有在当前选择创建事件的权限"
+msgid "You don't have access to create an event in the current selections"
+msgstr ""
 
 msgid "Save"
 msgstr "保存"
-
-msgid "Cancel"
-msgstr "取消"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "离开此页面将放弃您对此事件所做的更改。"
@@ -264,6 +273,31 @@ msgstr "通过从顶部栏中选择一个项目来注册"
 msgid "An error has occurred. See log for details"
 msgstr "发生了错误。查看日志以获取详细信息"
 
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr "存在重复，但是有错误，查看日志详情。"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr " 具有 {{attributeName}}  属性的条目已经注册 ，但是你不能访问 "
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "你已经登记了该属性"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr "一个 {{trackedEntityTypeName}} 且具有 {{attributeName}} 已经注册"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "显示登记的 {{attributeName}} "
+
+msgid "Registered person"
+msgstr "注册的人"
+
+msgid "Link"
+msgstr "链接"
+
 msgid "validation failed"
 msgstr "验证失败"
 
@@ -278,9 +312,6 @@ msgstr "指标"
 
 msgid "Warnings"
 msgstr "错误"
-
-msgid "search group result could not be retrieved"
-msgstr "搜索组结果不能提取"
 
 msgid "Complete"
 msgstr "完成"
@@ -423,6 +454,9 @@ msgstr "清除"
 msgid "No results"
 msgstr "无结果"
 
+msgid "Icon for {{field}}"
+msgstr ""
+
 msgid "start typing to search"
 msgstr "开始输入搜索内容"
 
@@ -477,8 +511,11 @@ msgstr "选择的项目对选择的机构无效"
 msgid "New"
 msgstr "新建"
 
-msgid "Find"
-msgstr "查询"
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
 
 msgid "Clear selections"
 msgstr "清除选择"
@@ -501,23 +538,26 @@ msgstr "在注册的机构"
 msgid "Select"
 msgstr "选择"
 
-msgid "Selected Program"
+msgid "Program"
+msgstr "项目"
+
+msgid "No programs available."
+msgstr "无可用项目"
+
+msgid "Show all"
+msgstr "显示全部"
+
+msgid "Selected program"
 msgstr "选择的项目"
 
 msgid "Some programs are being filtered."
 msgstr "有些项目已经被过滤了"
 
-msgid "Show all"
-msgstr "显示全部"
-
-msgid "Program"
-msgstr "项目"
-
 msgid "Select program"
 msgstr "选择项目"
 
-msgid "No programs available."
-msgstr "无可用项目"
+msgid "Selected"
+msgstr "已选择"
 
 msgid "Online"
 msgstr "在线"
@@ -552,6 +592,51 @@ msgstr "事件不能载入"
 msgid "Organisation unit could not be loaded"
 msgstr "机构不能载入"
 
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr ""
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr ""
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr ""
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr ""
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr ""
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr ""
+
+msgid "Create a new event in this program."
+msgstr ""
+
+msgid "View working list in this program."
+msgstr ""
+
 msgid "Delete event"
 msgstr "删除事件"
 
@@ -584,9 +669,6 @@ msgstr "登记状态"
 
 msgid "Cancelled"
 msgstr "已取消"
-
-msgid "Assigned to"
-msgstr "指派到"
 
 msgid "Registering unit"
 msgstr "注册机构"
@@ -639,51 +721,27 @@ msgstr "选择一个注册机构开始填报"
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
 
-msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr "存在重复，但是有错误，查看日志详情。"
+msgid "Save as new"
+msgstr ""
+
+msgid "View dashboard"
+msgstr "查看仪表盘"
+
+msgid "Create for"
+msgstr ""
 
 msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr " 具有 {{attributeName}}  属性的条目已经注册 ，但是你不能访问 "
+"You can also choose a program from the top bar and create in that program"
+msgstr ""
 
-msgid "You have already registered this {{attributeName}}"
-msgstr "你已经登记了该属性"
-
-msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
-msgstr "一个 {{trackedEntityTypeName}} 且具有 {{attributeName}} 已经注册"
-
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "显示登记的 {{attributeName}} "
-
-msgid "Registered person"
-msgstr "注册的人"
-
-msgid "Link"
-msgstr "链接"
-
-msgid "Review Duplicates"
-msgstr "复查重复"
+msgid "Save new"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "保存新的{{trackedEntityTypeName}}并链接"
 
-msgid "Possible duplicates found"
-msgstr "发现可能的重复"
-
-msgid "No results found"
-msgstr "没有结果"
-
-msgid "An error occured loading possible duplicates"
-msgstr "载入可能的重复发生错误"
-
-msgid "Hide"
-msgstr "隐藏"
-
-msgid "Save as new {{tetName}}"
-msgstr "保存为新的  {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr ""
 
 msgid "Organisation Unit"
 msgstr "组织机构"
@@ -719,14 +777,27 @@ msgstr "至少填写{{minAttributesRequiredToSearch}}个属性以进行搜索"
 msgid "Search {{name}}"
 msgstr "搜索{{name}}"
 
-msgid "Find by {{name}}"
-msgstr "按{{name}}查找"
+msgid "Search by {{name}}"
+msgstr ""
 
 msgid "Search by attributes"
 msgstr "按属性搜索"
 
 msgid "Back"
 msgstr "后退"
+
+msgid "Search for {{titleText}}"
+msgstr ""
+
+msgid "Search for"
+msgstr "搜索"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
+
+msgid "No results found"
+msgstr "没有结果"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -755,9 +826,6 @@ msgstr "该搜索返回了太多结果，无法显示。尝试更改搜索词或
 msgid "Choose a type to start searching"
 msgstr "选择一种类型以开始搜索"
 
-msgid "View dashboard"
-msgstr "查看仪表盘"
-
 msgid "View active enrollment"
 msgstr "查看有效的注册"
 
@@ -774,6 +842,12 @@ msgstr "搜索所有项目"
 
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
+
+msgid "Event details"
+msgstr ""
+
+msgid "Event completed"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -792,6 +866,12 @@ msgstr "事件被分配到  {{name}}"
 msgid "Feedbacks"
 msgstr "反馈"
 
+msgid "Possible duplicates found"
+msgstr "发现可能的重复"
+
+msgid "An error occurred loading possible duplicates"
+msgstr ""
+
 msgid "You dont have access to delete this relationship"
 msgstr "你v不能访问删除的关系"
 
@@ -804,8 +884,14 @@ msgstr "添加关系"
 msgid "Results found"
 msgstr "找到的结果"
 
-msgid "Selected program"
-msgstr "选择的项目"
+msgid "Open"
+msgstr "打开"
+
+msgid "All accessible"
+msgstr "所有可访问的"
+
+msgid "Organisation unit scope"
+msgstr "机构范围"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
@@ -813,21 +899,26 @@ msgstr "搜索 {{uniqueAttrName}}"
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
 
-msgid "Search for"
-msgstr "搜索"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr "您也可以从顶部栏中选择一个项目，然后在该项目中进行搜索"
-
 msgid "To work with the selected program,"
 msgstr "基于选择的项目工作"
 
 msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访APP"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr ""
+
 msgid "An error has occured. See log for details"
 msgstr "发生错误。查看日志以获取详细信息"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "没有发现项目"
@@ -841,8 +932,8 @@ msgstr "简历"
 msgid "Error saving event"
 msgstr "保存时间错误"
 
-msgid "Could not save event. See log for details"
-msgstr "不能保存事件，看日志"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "不能删除事件"
@@ -856,11 +947,23 @@ msgstr "不能添加工作列表"
 msgid "Could not delete working list"
 msgstr "不能删除工作列表"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "机构搜索失败，查看日志"
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
+
+msgid "Latitude"
+msgstr "纬度"
+
+msgid "Longitude"
+msgstr "经度"
 
 msgid "Set coordinate"
 msgstr "设置坐标"

@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2021
+# Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-01-12T13:01:48.740Z\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -138,10 +138,13 @@ msgid "A future date is not allowed"
 msgstr "En fremtidig dato er ikke tillatt"
 
 msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
+msgstr "Lagrer en {{trackedEntityName}} i"
 
 msgid "in"
 msgstr "i"
+
+msgid "Cancel"
+msgstr "Avbryt"
 
 msgid "Metadata error. see log for details"
 msgstr "Metadata feil, se logg for detaljer"
@@ -151,6 +154,9 @@ msgstr "Tildelt programbruker"
 
 msgid "Search for user"
 msgstr "Søk etter bruker"
+
+msgid "Complete event"
+msgstr "Fullfør hendelse"
 
 msgid "Basic info"
 msgstr "Grunnleggende informasjon"
@@ -192,6 +198,9 @@ msgstr "Aktiv"
 msgid "Completed"
 msgstr "Fullført"
 
+msgid "Assigned to"
+msgstr "Tildelt til"
+
 msgid "Please add or cancel comment before saving the event"
 msgstr "Legg til eller avbryt kommentar før du lagrer hendelsen"
 
@@ -206,6 +215,9 @@ msgstr "Fullfør"
 
 msgid "No write access"
 msgstr "Ingen skrivetilgang"
+
+msgid "New {{titleText}}"
+msgstr "Ny {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Bytt til skjemavisning"
@@ -247,14 +259,11 @@ msgstr "Nei, bli her"
 msgid "New event"
 msgstr "Ny hendelse"
 
-msgid "You dont have access to create an event in the current selections"
-msgstr "Du har ikke tilgang til å opprette en hendelse i gjeldende valg"
+msgid "You don't have access to create an event in the current selections"
+msgstr "Du har ikke tilgang til å lage en hendelse i gjeldende valg"
 
 msgid "Save"
 msgstr "Lagre"
-
-msgid "Cancel"
-msgstr "Avbryt"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -262,19 +271,48 @@ msgstr ""
 "denne hendelsen."
 
 msgid "Saving a {{trackedEntityName}}"
-msgstr ""
+msgstr "Lagrer en {{trackedEntityName}}"
 
 msgid "without"
-msgstr ""
+msgstr "uten"
 
 msgid "enrollment"
-msgstr ""
+msgstr "registrering"
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr ""
+msgstr "Registrer i et program ved å velge et program fra topplinjen."
 
 msgid "An error has occurred. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+"Et element med dette {{attributeName}} er allerede registrert, men du har "
+"ikke tilgang til den."
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "Du har allerede registrert dette {{attributeName}}"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+"En {{trackedEntityTypeName}} med dette {{attributeName}} er allerede "
+"registrert"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "Vis registrert {{trackedEntityTypeName}}"
+
+msgid "Registered person"
+msgstr "Registrert person"
+
+msgid "Link"
+msgstr "Link"
 
 msgid "validation failed"
 msgstr "validering mislyktes"
@@ -290,9 +328,6 @@ msgstr "Indikatorer"
 
 msgid "Warnings"
 msgstr "Advarsler"
-
-msgid "search group result could not be retrieved"
-msgstr "søkegrupperesultat kunne ikke hentes"
 
 msgid "Complete"
 msgstr "Fullfør"
@@ -435,6 +470,9 @@ msgstr "Fjern"
 msgid "No results"
 msgstr "Ingen resultater"
 
+msgid "Icon for {{field}}"
+msgstr "Ikon for {{field}}"
+
 msgid "start typing to search"
 msgstr "begynn å skrive for å søke"
 
@@ -489,8 +527,11 @@ msgstr "Valgt program er ugyldig for registreringsenhet"
 msgid "New"
 msgstr "Ny"
 
-msgid "Find"
-msgstr "Finn"
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr "Ny {{trackedEntityName}} i {{programName}}"
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr "Søk etter {{trackedEntityName}} i {{programName}}"
 
 msgid "Clear selections"
 msgstr "Tøm valg"
@@ -513,23 +554,26 @@ msgstr "Registrering av organisasjonsenhet"
 msgid "Select"
 msgstr "Velg"
 
-msgid "Selected Program"
+msgid "Program"
+msgstr "Program"
+
+msgid "No programs available."
+msgstr "Ingen programmer tilgjengelig."
+
+msgid "Show all"
+msgstr "Vis alle"
+
+msgid "Selected program"
 msgstr "Valgt program"
 
 msgid "Some programs are being filtered."
 msgstr "Noen programmer blir filtrert."
 
-msgid "Show all"
-msgstr "Vis alle"
-
-msgid "Program"
-msgstr "Program"
-
 msgid "Select program"
 msgstr "Velg program"
 
-msgid "No programs available."
-msgstr "Ingen programmer tilgjengelig."
+msgid "Selected"
+msgstr "Valgt"
 
 msgid "Online"
 msgstr "Påkoblet"
@@ -564,6 +608,59 @@ msgstr "Hendelse kunne ikke lastes inn"
 msgid "Organisation unit could not be loaded"
 msgstr "Organisasjonsenhet kunne ikke lastes inn"
 
+msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
+msgstr "Sporet enhetsforekomst med id \"{{teiId}}\"  eksisterer ikke"
+
+msgid ""
+"There is an error while opening this enrollment. Please enter a valid url."
+msgstr ""
+"Det oppsto en feil under åpningen av denne registreringen. Vennligst skriv "
+"inn en gyldig url."
+
+msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr "Registrering med ID-en \"{{enrollmentId}}\" eksisterer ikke"
+
+msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
+msgstr "{{teiDisplayName}} er registrert i flere programmer. Velg et program."
+
+msgid ""
+"{{programName}} has categories. Choose all categories to view dashboard."
+msgstr ""
+"{{programName}} har kategorier. Velg alle kategorier for å se dashbordet."
+
+msgid ""
+"There are multiple enrollments for this program. Choose an enrollment to "
+"view the dashboard."
+msgstr ""
+"Det er flere registreringer i dette programmet. Velg en registreringg for å "
+"se dashbordet."
+
+msgid "{{teiDisplayName}} is not enrolled in this program."
+msgstr "{{teiDisplayName}} er ikke registrert i dette programmet."
+
+msgid "Enroll {{teiDisplayName}} in this program."
+msgstr "Registrer {{teiDisplayName}} i dette programmet"
+
+msgid ""
+"{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
+"{{programName}}. Choose another program that allows {{tetName}} enrollment. "
+msgstr ""
+"{{teiDisplayName}} er en {{tetName}} og kan ikke registreres i "
+"{{programName}}. Velg et annet program som tillater registrering av "
+"{{tetName}}."
+
+msgid "Enroll a new {{selectedTetName}} in this program."
+msgstr "Registrer en ny {{teiDisplayName}} i dette programmet"
+
+msgid "{{programName}} is an event program and does not have enrollments."
+msgstr "{{programName}} er et hendelsesprogram og har ikke registreringer."
+
+msgid "Create a new event in this program."
+msgstr "Opprett ny hendelse i dette programmet"
+
+msgid "View working list in this program."
+msgstr "Se arbeidsliste i dette programmet."
+
 msgid "Delete event"
 msgstr "Slett hendelse"
 
@@ -597,20 +694,17 @@ msgstr "Registreringsstatus"
 msgid "Cancelled"
 msgstr "Kansellert"
 
-msgid "Assigned to"
-msgstr "Tildelt til"
-
 msgid "Registering unit"
 msgstr "Registreringsenhet"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "Innregistreringsdato"
 
 msgid "Inactive"
 msgstr "Inaktiv"
 
 msgid "Working list could not be updated"
-msgstr ""
+msgstr "Arbeidslisten kunne ikke oppdateres"
 
 msgid "Update view"
 msgstr "Oppdater visning"
@@ -649,57 +743,30 @@ msgid "Choose a registering unit to start reporting"
 msgstr "Velg en registreringsenhet for å starte rapportering"
 
 msgid "Choose the {{missingCategories}} to start reporting"
-msgstr ""
+msgstr "Velg {{missingCategories}} for å starte rapportering"
 
-msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
+msgid "Save as new"
+msgstr "Lagre som ny"
 
-msgid ""
-"An item with this {{attributeName}} is already registered, but you don't "
-"have access to it"
-msgstr ""
-"Et element med dette {{attributeName}} er allerede registrert, men du har "
-"ikke tilgang til den."
+msgid "View dashboard"
+msgstr "Vis dashbord"
 
-msgid "You have already registered this {{attributeName}}"
-msgstr "Du har allerede registrert dette {{attributeName}}"
+msgid "Create for"
+msgstr "Opprett for"
 
 msgid ""
-"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
-"registered"
+"You can also choose a program from the top bar and create in that program"
 msgstr ""
-"En {{trackedEntityTypeName}} med dette {{attributeName}} er allerede "
-"registrert"
+"Du kan også velge et program fra topplinjen og opprette i det programmet"
 
-msgid "Show registered {{trackedEntityTypeName}}"
-msgstr "Vis registrert {{trackedEntityTypeName}}"
-
-msgid "Registered person"
-msgstr "Registrert person"
-
-msgid "Link"
-msgstr "Link"
-
-msgid "Review Duplicates"
-msgstr "Gjennomgå duplikater"
+msgid "Save new"
+msgstr "Lagre ny"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "Opprett ny {{trackedEntityTypeName}} og link"
 
-msgid "Possible duplicates found"
-msgstr "Mulige duplikater funnet"
-
-msgid "No results found"
-msgstr "Ingen resultater funnet"
-
-msgid "An error occured loading possible duplicates"
-msgstr "En feil oppsto ved lasting av mulige duplikater"
-
-msgid "Hide"
-msgstr "Skjul"
-
-msgid "Save as new {{tetName}}"
-msgstr "Lagre som ny {{tetName}}"
+msgid "Save as new {{trackedEntityName}}"
+msgstr "Lagre som ny {{trackedEntityName}}"
 
 msgid "Organisation Unit"
 msgstr "Organisasjonsenhet"
@@ -736,14 +803,27 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr "Søk {{name}}"
 
-msgid "Find by {{name}}"
-msgstr "Finn etter {{name}}"
+msgid "Search by {{name}}"
+msgstr "Søk etter {{name}}"
 
 msgid "Search by attributes"
 msgstr "Søk etter attributter"
 
 msgid "Back"
 msgstr "Tilbake"
+
+msgid "Search for {{titleText}}"
+msgstr "Søk etter {{titleText}}"
+
+msgid "Search for"
+msgstr "Søk etter"
+
+msgid ""
+"You can also choose a program from the top bar and search in that program"
+msgstr "Du kan også velge et program fra topplinjen og søke i det programmet"
+
+msgid "No results found"
+msgstr "Ingen resultater funnet"
 
 msgid ""
 "You can change your search terms and search again to find what you are "
@@ -776,9 +856,6 @@ msgstr ""
 msgid "Choose a type to start searching"
 msgstr "Velg en type for å begynne å søke"
 
-msgid "View dashboard"
-msgstr "Vis dashbord"
-
 msgid "View active enrollment"
 msgstr "Vis aktiv registrering"
 
@@ -797,6 +874,12 @@ msgstr "Søk i alle programmer"
 
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
+
+msgid "Event details"
+msgstr "Hendelsesdetaljer"
+
+msgid "Event completed"
+msgstr "Hendelse fullført"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -817,6 +900,12 @@ msgstr "Hendelse er tildelt til {{name}}"
 msgid "Feedbacks"
 msgstr "Tilbakemeldinger"
 
+msgid "Possible duplicates found"
+msgstr "Mulige duplikater funnet"
+
+msgid "An error occurred loading possible duplicates"
+msgstr "En feil oppsto ved lasting av mulige duplikater"
+
 msgid "You dont have access to delete this relationship"
 msgstr "Du har ikke tilgang til å slette denne relasjonen"
 
@@ -829,8 +918,14 @@ msgstr "Legg til relasjon"
 msgid "Results found"
 msgstr "Resultater funnet"
 
-msgid "Selected program"
-msgstr "Valgt program"
+msgid "Open"
+msgstr "Åpne"
+
+msgid "All accessible"
+msgstr "Alle tilgjengelige"
+
+msgid "Organisation unit scope"
+msgstr "Organisasjonsenhet-omfang"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Søk {{uniqueAttrName}}"
@@ -838,22 +933,26 @@ msgstr "Søk {{uniqueAttrName}}"
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "Fyll inn minst {{minAttributesRequired}} attributter for å søke"
 
-msgid "Search for"
-msgstr "Søk etter"
-
-msgid ""
-"You can also choose a program from the top bar and search in that program"
-msgstr ""
-"Du kan også velge et program fra den øverste linjen og søke i det programmet"
-
 msgid "To work with the selected program,"
 msgstr "For å jobbe med det valgte programmet,"
 
 msgid "open the Tracker Capture app"
 msgstr "åpne Tracker Capture app"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr "Personprofil"
+
+msgid "Stages and Events"
+msgstr "Faser og hendelser"
+
 msgid "An error has occured. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr "{{trackedEntityName}} i program{{escape}} {{programName}}"
 
 msgid "Program not found"
 msgstr "Program ble ikke funnet"
@@ -867,8 +966,8 @@ msgstr "Profil"
 msgid "Error saving event"
 msgstr "Feil ved lagring av hendelse"
 
-msgid "Could not save event. See log for details"
-msgstr "Kunne ikke lagre hendelse. Se loggen for detaljer"
+msgid "Could not save event"
+msgstr "Kunne ikke lagre hendelse"
 
 msgid "Could not delete event"
 msgstr "Kunne ikke slette hendelse"
@@ -882,11 +981,23 @@ msgstr "Kunne ikke legge til arbeidsliste"
 msgid "Could not delete working list"
 msgstr "Kunne ikke slette arbeidsliste"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "Organisasjonsenhetsøk feilet. Se logg for detaljer"
+msgid "Organisation unit search failed."
+msgstr "Organisasjonsenhetssøk mislyktes."
+
+msgid "Error saving tracked entity instance"
+msgstr "Feil ved lagring av sporet enhetsforekomst"
+
+msgid "Error saving enrollment"
+msgstr "Feil ved lagring av registrering"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
+
+msgid "Latitude"
+msgstr "Breddegrad"
+
+msgid "Longitude"
+msgstr "Lengdegrad"
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"

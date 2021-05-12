@@ -12,22 +12,13 @@ import type {
     CachedProgramStage,
     CachedProgramStageDataElementsAsObject,
     CachedOptionSet,
-    CachedRelationshipType,
 } from '../../../../storageControllers/cache.types';
-import Section from '../../../../metaData/RenderFoundation/Section';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
-import CustomForm from '../../../../metaData/RenderFoundation/CustomForm';
+import { Section, ProgramStage, RenderFoundation, CustomForm } from '../../../../metaData';
+import { buildIcon } from '../../../common/helpers';
 import isNonEmptyArray from '../../../../utils/isNonEmptyArray';
-import ProgramStage from '../../../../metaData/Program/ProgramStage';
 import DataElementFactory from './DataElementFactory';
 import RelationshipTypesFactory from './RelationshipTypesFactory';
-
-type SectionSpecs = {
-    id: string,
-    displayName: string,
-    dataElements: ?Array<CachedSectionDataElements>
-};
-
+import type { ConstructorInput, SectionSpecs } from './programStageFactory.types';
 
 class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
@@ -37,11 +28,11 @@ class ProgramStageFactory {
     dataElementFactory: DataElementFactory;
     relationshipTypesFactory: RelationshipTypesFactory;
 
-    constructor(
-        cachedOptionSets: Map<string, CachedOptionSet>,
-        cachedRelationshipTypes: Array<CachedRelationshipType>,
-        locale: ?string,
-    ) {
+    constructor({
+        cachedOptionSets,
+        cachedRelationshipTypes,
+        locale,
+    }: ConstructorInput) {
         this.cachedOptionSets = cachedOptionSets;
         this.locale = locale;
         this.relationshipTypesFactory = new RelationshipTypesFactory(
@@ -59,6 +50,7 @@ class ProgramStageFactory {
         const section = new Section((o) => {
             o.id = sectionSpecs.id;
             o.name = sectionSpecs.displayName;
+            o.displayDescription = sectionSpecs.displayDescription;
         });
 
         if (sectionSpecs.dataElements) {
@@ -131,7 +123,7 @@ class ProgramStageFactory {
             _stage.openAfterEnrollment = !!cachedProgramStage.openAfterEnrollment;
             _stage.generatedByEnrollmentDate = !!cachedProgramStage.generatedByEnrollmentDate;
             _stage.reportDateToUse = cachedProgramStage.reportDateToUse;
-            _stage.standardInterval = cachedProgramStage.standardInterval;
+            _stage.minDaysFromStart = cachedProgramStage.minDaysFromStart;
             _stage.stageForm = new RenderFoundation((_form) => {
                 _form.id = cachedProgramStage.id;
                 _form.name = cachedProgramStage.displayName;
@@ -143,6 +135,7 @@ class ProgramStageFactory {
                     cachedProgramStage.validationStrategy &&
                     getCamelCaseUppercaseString(cachedProgramStage.validationStrategy);
             });
+            _stage.icon = buildIcon(cachedProgramStage.style);
         });
 
         const stageForm = stage.stageForm;
@@ -176,6 +169,7 @@ class ProgramStageFactory {
                 stageForm.addSection(await this._buildSection(cachedProgramStageDataElementsAsObject, {
                     id: section.id,
                     displayName: section.displayName,
+                    displayDescription: section.displayDescription,
                     dataElements: section.dataElements,
                 }));
             });

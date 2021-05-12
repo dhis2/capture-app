@@ -227,7 +227,7 @@ const selectedEventProgram = ['Selected program', 'Antenatal care visit'];
 const emptyProgramSelection = ['Program', 'Select program'];
 const selectedOrgUnit = ['Selected registering unit', 'Taninahun (Malen) CHP'];
 const emptyOrgUnitSelection = ['Registering Organisation Unit'];
-const selectedTei = ['Selected', 'Carlos Cruz'];
+const selectedTei = ['Selected person', 'Carlos Cruz'];
 const selectedEnrollment = ['Selected enrollment', '2018-08-07 15:47'];
 const emptyEnrollmentSelection = ['Enrollment', 'Select...'];
 
@@ -297,11 +297,23 @@ And('you see the enrollment page', () => {
         .contains('Enrollment Dashboard');
 });
 
-And('you reset the enrollment selection', () => {
+And('you wait to reset the enrollment selection', () => {
+    cy.get('[data-test="enrollment-page-content"]')
+        .contains('Person Profile');
     cy.get('[data-test="reset-selection-button"]')
         .should('have.length.greaterThan', 2);
     cy.get('[data-test="reset-selection-button"]')
         .eq(3)
+        .click();
+});
+
+And('you wait to reset the program selection', () => {
+    cy.get('[data-test="enrollment-page-content"]')
+        .contains('Person Profile');
+    cy.get('[data-test="reset-selection-button"]')
+        .should('have.length.greaterThan', 2);
+    cy.get('[data-test="reset-selection-button"]')
+        .eq(0)
         .click();
 });
 

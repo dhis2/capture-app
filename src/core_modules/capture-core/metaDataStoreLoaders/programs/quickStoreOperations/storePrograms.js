@@ -50,13 +50,6 @@ const convert = (() => {
         return programStages;
     };
 
-    const getOrganisationUnits = apiOrganisationUnits =>
-        (apiOrganisationUnits || [])
-            .reduce((accOrganisationUnits, organisationUnit) => {
-                accOrganisationUnits[organisationUnit.id] = organisationUnit;
-                return accOrganisationUnits;
-            }, {});
-
     const getProgramTrackedEntityAttribute = programAttribute => ({
         ...programAttribute,
         trackedEntityAttribute: undefined,
@@ -76,7 +69,6 @@ const convert = (() => {
                 trackedEntityType: undefined,
                 trackedEntityTypeId: apiProgram.trackedEntityType && apiProgram.trackedEntityType.id,
                 programStages: getProgramStages(apiProgram.programStages),
-                organisationUnits: getOrganisationUnits(apiProgram.organisationUnits),
                 programTrackedEntityAttributes:
                     getProgramTrackedEntityAttributes(apiProgram.programTrackedEntityAttributes),
             }));
@@ -90,10 +82,9 @@ const fieldsParam = 'id,version,displayName,displayShortName,description,program
 'access[*],' +
 'trackedEntityType[id],' +
 'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
-'organisationUnits[id,displayName],' +
 'userRoles[id,displayName],' +
-'programStages[id,access,autoGenerateEvent,openAfterEnrollment,generatedByEnrollmentDate,reportDateToUse,standardInterval,displayName,description,executionDateLabel,formType,featureType,validationStrategy,enableUserAssignment,dataEntryForm[id,htmlCode],' +
-'programStageSections[id,displayName,sortOrder,dataElements[id]],programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],' +
+'programStages[id,access,autoGenerateEvent,openAfterEnrollment,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,displayName,description,executionDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,dataEntryForm[id,htmlCode],' +
+'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],' +
 'dataElement[id,displayName,displayShortName,displayFormName,valueType,translations[*],description,optionSetValue,style,optionSet[id]]]],' +
 'programTrackedEntityAttributes[trackedEntityAttribute[id],displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate]';
 
@@ -101,7 +92,6 @@ export const storePrograms = (programIds: Array<string>) => {
     const query = {
         resource: 'programs',
         params: {
-            restrictToCaptureScope: true,
             fields: fieldsParam,
             filter: `id:in:[${programIds.join(',')}]`,
             pageSize: programIds.length,
