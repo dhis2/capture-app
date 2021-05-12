@@ -24,6 +24,7 @@ type Props = {
     contentStyle?: ?Object,
     mainActionButton?: ?React$Element<any>,
     header?: ?React$Element<any>,
+    description?: ?React$Element<any>,
     isCollapsed?: ?boolean,
     onChangeCollapseState?: ?() => void,
     extendedCollapsibility?: boolean,
@@ -60,6 +61,7 @@ class Section extends Component<Props> {
         return (
             <div>
                 {this.getHeader()}
+                {this.props.description}
                 <div style={accContentStyle}>
                     {mainActionButtonElement}
                     {

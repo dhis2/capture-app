@@ -3,14 +3,13 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import type {
-    CachedStyle,
     CachedDataElement,
     CachedProgramStageDataElement,
     CachedOptionSet,
 
 } from '../../../../storageControllers/cache.types';
-import getDhisIconAsync from '../../../common/getDhisIcon';
-import { DataElement, DateDataElement, Icon, dataElementTypes } from '../../../../metaData';
+import { DataElement, DateDataElement, dataElementTypes } from '../../../../metaData';
+import { buildIcon } from '../../../common/helpers';
 import { OptionSetFactory } from '../../../common/factory';
 
 class DataElementFactory {
@@ -26,25 +25,6 @@ class DataElementFactory {
         };
 
         return converters[cachedValueType] || cachedValueType;
-    }
-
-    static async _buildDataElementIconAsync(cachedStyle: CachedStyle = {}) {
-        const icon = cachedStyle && cachedStyle.icon;
-        if (!icon) {
-            return null;
-        }
-
-        try {
-            const iconData = await getDhisIconAsync(icon);
-            return new Icon((o) => {
-                if (cachedStyle.color) {
-                    o.color = cachedStyle.color;
-                }
-                o.data = iconData;
-            });
-        } catch (error) {
-            return null;
-        }
     }
 
     locale: ?string;
@@ -91,7 +71,7 @@ class DataElementFactory {
         dataElement.displayInReports = cachedProgramStageDataElement.displayInReports;
         dataElement.compulsory = cachedProgramStageDataElement.compulsory;
         dataElement.disabled = false;
-        dataElement.icon = await DataElementFactory._buildDataElementIconAsync(cachedDataElement.style);
+        dataElement.icon = buildIcon(cachedDataElement.style);
 
         if (cachedDataElement.optionSet && cachedDataElement.optionSet.id) {
             dataElement.optionSet = await this.optionSetFactory.build(

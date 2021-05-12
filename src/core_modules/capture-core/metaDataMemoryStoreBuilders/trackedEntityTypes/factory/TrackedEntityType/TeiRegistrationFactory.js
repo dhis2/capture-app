@@ -15,9 +15,9 @@ import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
 import type {
     CachedTrackedEntityType,
     CachedTrackedEntityAttribute,
-    CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
 import DataElementFactory from './DataElementFactory';
+import type { ConstructorInput } from './teiRegistrationFactory.types';
 
 class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
@@ -52,17 +52,17 @@ class TeiRegistrationFactory {
     dataElementFactory: DataElementFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
 
-    constructor(
-        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-        cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: ?string,
-    ) {
+    constructor({
+        cachedTrackedEntityAttributes,
+        cachedOptionSets,
+        locale,
+    }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
-        this.dataElementFactory = new DataElementFactory(
+        this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
+        });
     }
 
     async _buildSection(
