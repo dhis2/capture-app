@@ -1,3 +1,10 @@
+## [1.20.4](https://github.com/dhis2/capture-app/compare/v1.20.3...v1.20.4) (2021-05-12)
+
+
+### Bug Fixes
+
+* TECH-594 program/tet added to all tracked entity instance api requests ([80d5448](https://github.com/dhis2/capture-app/commit/80d5448fe5b7897cc02e378a2461e29313431312))
+
 ## [1.20.3](https://github.com/dhis2/capture-app/compare/v1.20.2...v1.20.3) (2021-05-12)
 
 
