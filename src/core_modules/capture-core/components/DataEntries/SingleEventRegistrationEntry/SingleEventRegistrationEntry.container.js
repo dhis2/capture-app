@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { compose } from 'redux';
 import { SingleEventRegistrationEntryComponent } from './SingleEventRegistrationEntry.component';
 import withBrowserBackWarning from '../../../HOC/withBrowserBackWarning';
-import dataEntryHasChanges from '../../DataEntry/common/dataEntryHasChanges';
+import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { makeEventAccessSelector } from './SingleEventRegistrationEntry.selectors';
 import { withLoadingIndicator } from '../../../HOC';
 

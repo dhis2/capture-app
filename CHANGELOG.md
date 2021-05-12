@@ -1,3 +1,24 @@
+## [1.20.3](https://github.com/dhis2/capture-app/compare/v1.20.2...v1.20.3) (2021-05-12)
+
+
+### Bug Fixes
+
+* DHIS2-10394 Show error/warning on complete when actually completing ([6b3e531](https://github.com/dhis2/capture-app/commit/6b3e531bdb14df242df8166dd0fd28158377c76b))
+
+## [1.20.2](https://github.com/dhis2/capture-app/compare/v1.20.1...v1.20.2) (2021-05-12)
+
+
+### Bug Fixes
+
+* DHIS2-10206 confirmation dialog ([0fac39f](https://github.com/dhis2/capture-app/commit/0fac39fd8c299a2d27fde1a2031685b2e6792928))
+
+## [1.20.1](https://github.com/dhis2/capture-app/compare/v1.20.0...v1.20.1) (2021-05-11)
+
+
+### Bug Fixes
+
+* [DHIS2-11067] flaky Cypress tests in Enrollment page ([#1673](https://github.com/dhis2/capture-app/issues/1673)) ([1a7e1bb](https://github.com/dhis2/capture-app/commit/1a7e1bb7f100d2be9b218ebfd5d2286ce8d613d7))
+
 # [1.20.0](https://github.com/dhis2/capture-app/compare/v1.19.2...v1.20.0) (2021-05-10)
 
 

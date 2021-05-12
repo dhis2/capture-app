@@ -50,11 +50,11 @@ const selectionBoxesStyles = {
 
 const options = [
     {
-        name: i18n.t('All accessible'),
+        name: 'All accessible',
         value: 'ACCESSIBLE',
     },
     {
-        name: i18n.t('Selected'),
+        name: 'Selected',
         value: 'SELECTED',
     },
 ];
@@ -77,7 +77,7 @@ class SearchOrgUnitSelector extends React.Component<Props> {
         return (
             <TeiSearchSelectionBoxes
                 options={options}
-                label={i18n.t('Organisation unit scope')}
+                label="Organisation unit scope"
                 styles={selectionBoxesStyles}
                 onSelect={this.onSelectOrgUnitScope}
                 value={selectedOrgUnitScope}
