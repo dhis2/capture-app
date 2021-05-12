@@ -153,9 +153,6 @@ msgstr "Přiřazený uživatel"
 msgid "Search for user"
 msgstr "Hledat uživatele"
 
-msgid "Complete event"
-msgstr "Dokončit událost"
-
 msgid "Basic info"
 msgstr "Základní informace"
 
@@ -194,9 +191,6 @@ msgstr "Aktivní"
 
 msgid "Completed"
 msgstr "Dokončeno"
-
-msgid "Assigned to"
-msgstr "Přiřazen k"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "Před uložením události prosím přidejte nebo zrušte komentář"
@@ -688,6 +682,9 @@ msgstr "Stav zápisu"
 msgid "Cancelled"
 msgstr "Zrušeno"
 
+msgid "Assigned to"
+msgstr "Přiřazen k"
+
 msgid "Registering unit"
 msgstr "Registrační jednotka"
 
@@ -871,12 +868,6 @@ msgstr "Hledat ve všech programech"
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
 
-msgid "Event details"
-msgstr "Podrobnosti události"
-
-msgid "Event completed"
-msgstr "Událost dokončena"
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -913,15 +904,6 @@ msgstr "Přidat vztah"
 
 msgid "Results found"
 msgstr "Nalezeny výsledky"
-
-msgid "Open"
-msgstr "Otevřít"
-
-msgid "All accessible"
-msgstr "Všechno přístupné"
-
-msgid "Organisation unit scope"
-msgstr "Rozsah organizační jednotky"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Hledat {{uniqueAttrName}}"
@@ -988,12 +970,6 @@ msgstr "Při ukládání zápisu došlo k chybě"
 
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
-
-msgid "Latitude"
-msgstr "Zeměpisná šířka"
-
-msgid "Longitude"
-msgstr "Zeměpisná délka"
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"

@@ -152,9 +152,6 @@ msgstr "分配的用户"
 msgid "Search for user"
 msgstr "搜索用户 "
 
-msgid "Complete event"
-msgstr "完成事件"
-
 msgid "Basic info"
 msgstr "基本信息"
 
@@ -191,9 +188,6 @@ msgstr "活动的"
 
 msgid "Completed"
 msgstr "已完成"
-
-msgid "Assigned to"
-msgstr "指派到"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "保存事件前请添加或取消被或许"
@@ -673,6 +667,9 @@ msgstr "登记状态"
 msgid "Cancelled"
 msgstr "已取消"
 
+msgid "Assigned to"
+msgstr "指派到"
+
 msgid "Registering unit"
 msgstr "注册机构"
 
@@ -846,12 +843,6 @@ msgstr "搜索所有项目"
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
-msgid "Event details"
-msgstr "事件详情"
-
-msgid "Event completed"
-msgstr "事件完成"
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -886,15 +877,6 @@ msgstr "添加关系"
 
 msgid "Results found"
 msgstr "找到的结果"
-
-msgid "Open"
-msgstr "开放"
-
-msgid "All accessible"
-msgstr "所有可访问的"
-
-msgid "Organisation unit scope"
-msgstr "使用的机构范围"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
@@ -961,12 +943,6 @@ msgstr "保存注册时出错"
 
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
-
-msgid "Latitude"
-msgstr "维度"
-
-msgid "Longitude"
-msgstr "经度"
 
 msgid "Set coordinate"
 msgstr "设置坐标"
