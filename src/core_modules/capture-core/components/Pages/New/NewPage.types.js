@@ -16,6 +16,7 @@ export type ContainerProps = $ReadOnly<{|
   writeAccess: boolean,
   error: boolean,
   ready: boolean,
+  isUserInteractionInProgress: boolean
 |}
 >
 

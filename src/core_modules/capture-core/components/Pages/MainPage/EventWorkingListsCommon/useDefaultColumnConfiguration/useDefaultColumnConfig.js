@@ -38,7 +38,7 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
             id: mainPropertyNames.ASSIGNEE,
             visible: true,
             type: 'ASSIGNEE',
-            header: i18n.t('Assigned to'),
+            header: 'Assigned to',
             apiName: 'assignedUser',
         });
     }
