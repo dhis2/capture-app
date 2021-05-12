@@ -155,9 +155,6 @@ msgstr "Tildelt programbruker"
 msgid "Search for user"
 msgstr "Søk etter bruker"
 
-msgid "Complete event"
-msgstr "Fullfør hendelse"
-
 msgid "Basic info"
 msgstr "Grunnleggende informasjon"
 
@@ -197,9 +194,6 @@ msgstr "Aktiv"
 
 msgid "Completed"
 msgstr "Fullført"
-
-msgid "Assigned to"
-msgstr "Tildelt til"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "Legg til eller avbryt kommentar før du lagrer hendelsen"
@@ -694,6 +688,9 @@ msgstr "Registreringsstatus"
 msgid "Cancelled"
 msgstr "Kansellert"
 
+msgid "Assigned to"
+msgstr "Tildelt til"
+
 msgid "Registering unit"
 msgstr "Registreringsenhet"
 
@@ -875,12 +872,6 @@ msgstr "Søk i alle programmer"
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
-msgid "Event details"
-msgstr "Hendelsesdetaljer"
-
-msgid "Event completed"
-msgstr "Hendelse fullført"
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -917,15 +908,6 @@ msgstr "Legg til relasjon"
 
 msgid "Results found"
 msgstr "Resultater funnet"
-
-msgid "Open"
-msgstr "Åpne"
-
-msgid "All accessible"
-msgstr "Alle tilgjengelige"
-
-msgid "Organisation unit scope"
-msgstr "Organisasjonsenhet-omfang"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "Søk {{uniqueAttrName}}"
@@ -992,12 +974,6 @@ msgstr "Feil ved lagring av registrering"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
-
-msgid "Latitude"
-msgstr "Breddegrad"
-
-msgid "Longitude"
-msgstr "Lengdegrad"
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"

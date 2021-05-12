@@ -149,9 +149,6 @@ msgstr ""
 msgid "Search for user"
 msgstr ""
 
-msgid "Complete event"
-msgstr ""
-
 msgid "Basic info"
 msgstr ""
 
@@ -187,9 +184,6 @@ msgid "Active"
 msgstr "လုပ်ဆောင်နိုင်သည်"
 
 msgid "Completed"
-msgstr ""
-
-msgid "Assigned to"
 msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
@@ -669,6 +663,9 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Registering unit"
 msgstr ""
 
@@ -842,12 +839,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
-msgid "Event details"
-msgstr ""
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -881,15 +872,6 @@ msgid "Add relationship"
 msgstr ""
 
 msgid "Results found"
-msgstr ""
-
-msgid "Open"
-msgstr "Open"
-
-msgid "All accessible"
-msgstr ""
-
-msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
@@ -956,12 +938,6 @@ msgid "Error saving enrollment"
 msgstr ""
 
 msgid "tracked entity instance"
-msgstr ""
-
-msgid "Latitude"
-msgstr ""
-
-msgid "Longitude"
 msgstr ""
 
 msgid "Set coordinate"

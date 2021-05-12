@@ -155,9 +155,6 @@ msgstr "Tavsiya etilgan foydalanuvchi"
 msgid "Search for user"
 msgstr "Foydalanuvchini izlash"
 
-msgid "Complete event"
-msgstr ""
-
 msgid "Basic info"
 msgstr "Аsosiy maʼlumot"
 
@@ -198,9 +195,6 @@ msgstr "Faol"
 
 msgid "Completed"
 msgstr "Toʼldirildi"
-
-msgid "Assigned to"
-msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -692,6 +686,9 @@ msgstr "Roʼyxatga olish holati"
 msgid "Cancelled"
 msgstr "Bekor qilindi"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Registering unit"
 msgstr "Roʼyxatga olish muassasasi"
 
@@ -878,12 +875,6 @@ msgstr "Barcha dasturlarda qidirish"
 msgid "You dont have access to edit this event"
 msgstr "Ushbu hodisa/tadbirni tahrirlash huquqiga ega emassiz"
 
-msgid "Event details"
-msgstr ""
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -920,15 +911,6 @@ msgstr "Oʼzaro aloqa kiritish"
 
 msgid "Results found"
 msgstr "Natijalar topildi"
-
-msgid "Open"
-msgstr "Ochiq"
-
-msgid "All accessible"
-msgstr "Barchaga kirish mumkin"
-
-msgid "Organisation unit scope"
-msgstr "Tashkiliy boʼlim huquq va burchlari"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr "{{uniqueAttrName}} orqali qidirish"
@@ -996,12 +978,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "kuzatilayotgan obʼekt namunasi"
-
-msgid "Latitude"
-msgstr "Kenglik"
-
-msgid "Longitude"
-msgstr "Kenglik"
 
 msgid "Set coordinate"
 msgstr "Koordinatani oʼrnating"
