@@ -59,6 +59,7 @@ const valueConvertersForType = {
     [dataElementTypes.FILE_RESOURCE]: convertResourceForView,
     [dataElementTypes.IMAGE]: convertResourceForView,
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
+    [dataElementTypes.POLYGON]: () => 'Polygon',
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, dataElement?: ?DataElement) {
