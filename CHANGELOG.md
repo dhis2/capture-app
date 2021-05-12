@@ -1,3 +1,10 @@
+## [1.20.3](https://github.com/dhis2/capture-app/compare/v1.20.2...v1.20.3) (2021-05-12)
+
+
+### Bug Fixes
+
+* DHIS2-10394 Show error/warning on complete when actually completing ([6b3e531](https://github.com/dhis2/capture-app/commit/6b3e531bdb14df242df8166dd0fd28158377c76b))
+
 ## [1.20.2](https://github.com/dhis2/capture-app/compare/v1.20.1...v1.20.2) (2021-05-12)
 
 
