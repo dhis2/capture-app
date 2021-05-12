@@ -211,7 +211,7 @@ msgid "No write access"
 msgstr "无写权限"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "新的{{titleText}}"
 
 msgid "Switch to form view"
 msgstr "切换到表单视图"
@@ -790,7 +790,7 @@ msgid "Back"
 msgstr "后退"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "搜索{{titleText}}"
 
 msgid "Search for"
 msgstr "搜索"
@@ -909,7 +909,7 @@ msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访APP"
 
 msgid "Profile widget could not be loaded. Please try again later"
-msgstr ""
+msgstr "无法加载个人资料窗口小部件。请稍后再试"
 
 msgid "Person Profile"
 msgstr "人物简介"
@@ -921,7 +921,7 @@ msgid "An error has occured. See log for details"
 msgstr "发生错误。查看日志以获取详细信息"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "项目{{escape}} {{programName}}中的{{trackedEntityName}}"
 
 msgid "Program not found"
 msgstr "没有发现项目"
