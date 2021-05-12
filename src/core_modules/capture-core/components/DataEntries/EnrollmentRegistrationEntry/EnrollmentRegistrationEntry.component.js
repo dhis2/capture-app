@@ -115,6 +115,6 @@ export const EnrollmentRegistrationEntryComponent: ComponentType<Props> =
       withErrorMessagePostProcessor(),
       withLoadingIndicator(() => ({ height: '350px' })),
       withDuplicateCheckOnSave(),
-      withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm }),
+      withSaveHandler({ onGetFormFoundation: ({ enrollmentMetadata }) => enrollmentMetadata && enrollmentMetadata.enrollmentForm, onIsCompleting: () => true }),
       withStyles(styles),
   )(EnrollmentRegistrationEntryPlain);
