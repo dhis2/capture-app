@@ -69,7 +69,7 @@ const TeiRegistrationEntryPlain =
                       <TrackedEntityInstanceDataEntry
                           orgUnit={orgUnit}
                           formFoundation={formFoundation}
-                          programId={selectedScopeId}
+                          trackedEntityTypeId={selectedScopeId}
                           teiRegistrationMetadata={teiRegistrationMetadata}
                           id={id}
                           fieldOptions={fieldOptions}

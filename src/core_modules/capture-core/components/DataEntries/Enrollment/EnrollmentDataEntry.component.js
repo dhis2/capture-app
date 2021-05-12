@@ -314,7 +314,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     getValidationContext = () => {
         const { orgUnit, onGetUnsavedAttributeValues, programId } = this.props;
         return {
-            scope: programId,
+            programId,
             orgUnitId: orgUnit.id,
             onGetUnsavedAttributeValues,
         };
