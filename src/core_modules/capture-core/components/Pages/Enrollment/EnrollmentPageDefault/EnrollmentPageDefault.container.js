@@ -15,12 +15,15 @@ export const EnrollmentPageDefault = () => {
     }) => ({ teiId: query.teiId, programId: query.programId }), shallowEqual);
 
     const { program } = useProgramInfo(programId);
-
+    const events = useSelector(({
+        enrollmentPage,
+    }) => enrollmentPage?.enrollments?.[0].events, shallowEqual);
 
     return (
         <EnrollmentPageDefaultComponent
             teiId={teiId}
             program={program}
+            events={events}
         />
     );
 };

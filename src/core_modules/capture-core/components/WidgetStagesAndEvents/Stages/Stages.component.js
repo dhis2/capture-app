@@ -10,12 +10,13 @@ const styles = {
         marginBottom: spacersNum.dp16,
     },
 };
-export const StagesPlain = ({ stages, classes }: Props) => (
+export const StagesPlain = ({ stages, events, classes }: Props) => (
     <>
         {
             [...stages.values()]
                 .map(stage => (
                     <Stage
+                        events={events?.filter(event => event.programStage === stage.id)}
                         key={stage.id}
                         stage={stage}
                         className={classes.stage}

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
-"PO-Revision-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-13T07:08:36.423Z\n"
+"PO-Revision-Date: 2021-05-13T07:08:36.423Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -876,6 +876,18 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
+msgstr ""
+
+msgid "Report date"
+msgstr ""
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "1 event"
+msgstr ""
+
+msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Stages and Events"
