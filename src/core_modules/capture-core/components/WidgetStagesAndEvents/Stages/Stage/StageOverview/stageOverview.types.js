@@ -1,5 +1,4 @@
 // @flow
-import { string } from 'prop-types';
 import type { Icon } from '../../../../../metaData';
 
 export type Props = {|

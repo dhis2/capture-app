@@ -1,5 +1,4 @@
 // @flow
-import { any } from 'prop-types';
 import type { ProgramStage } from '../../../metaData';
 
 export type Props = {|
