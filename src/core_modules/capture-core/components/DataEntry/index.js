@@ -13,7 +13,7 @@ export { withFeedbackOutput } from './dataEntryOutput/withFeedbackOutput';
 export { withWarningOutput } from './dataEntryOutput/withWarningOutput';
 export { withErrorOutput } from './dataEntryOutput/withErrorOutput';
 export { withIndicatorOutput } from './dataEntryOutput/withIndicatorOutput';
-export { withCleanUpHOC } from './withCleanUp';
+export { withCleanUp } from './withCleanUp';
 
 // misc
 export { inMemoryFileStore } from './file/inMemoryFileStore';

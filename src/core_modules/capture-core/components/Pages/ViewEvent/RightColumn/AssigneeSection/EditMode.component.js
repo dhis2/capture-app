@@ -2,7 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import { Search } from '../../../../FormFields/UserField/Search.component';
+import { UserSearch } from '../../../../FormFields/UserField/UserSearch.component';
 import { Button } from '../../../../Buttons';
 
 const getStyles = () => ({
@@ -36,7 +36,7 @@ const EditModePlain = (props: Props) => {
                 className={classes.searchContainer}
             >
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <Search
+                <UserSearch
                     inputWrapperClasses={{}}
                     focusInputOnMount
                     exitBehaviour="doNothing"

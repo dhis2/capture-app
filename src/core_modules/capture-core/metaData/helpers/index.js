@@ -1,7 +1,7 @@
 // @flow
 export {
-    getProgramAndStageFromProgramId as getProgramAndStageFromProgramIdForEventProgram,
-    getStageFromProgramId as getStageFromProgramIdForEventProgram,
+    getProgramAndStageForEventProgram,
+    getStageForEventProgram,
     getEventProgramThrowIfNotFound,
     getEventProgramEventAccess,
 } from './EventProgram';

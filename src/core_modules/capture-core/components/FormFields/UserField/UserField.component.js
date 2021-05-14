@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Search } from './Search.component';
+import { UserSearch } from './UserSearch.component';
 import { Selected } from './Selected.component';
 import type { User } from './types';
 
@@ -74,7 +74,7 @@ const UserFieldPlain = (props: Props) => {
 
     return (
         <div>
-            <Search
+            <UserSearch
                 onSet={handleSet}
                 inputWrapperClasses={classes}
                 // $FlowFixMe[incompatible-type] automated comment

@@ -11,20 +11,20 @@ const errorMessages = {
     GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
-export function getStageFromProgramId(programId: string) {
+export function getProgramAndStageForEventProgram(programId: string) {
     const program = programCollection.get(programId);
     if (!program) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));
-        return { error: i18n.t(errorMessages.GENERIC_ERROR), stage: null };
+        return { error: i18n.t(errorMessages.GENERIC_ERROR), stage: null, program: null };
     }
 
 
     // $FlowFixMe[prop-missing] automated comment
     const stage = program.stage;
     if (!stage) {
-        log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ programId }));
-        return { error: i18n.t(errorMessages.GENERIC_ERROR), stage: null };
+        log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ program, programId }));
+        return { error: i18n.t(errorMessages.GENERIC_ERROR), stage: null, program: null };
     }
 
-    return { stage, error: null };
+    return { stage, program, error: null };
 }

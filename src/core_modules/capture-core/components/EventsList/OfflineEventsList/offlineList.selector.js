@@ -3,7 +3,7 @@ import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect'
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import {
-    getStageFromProgramIdForEventProgram,
+    getStageForEventProgram,
     OptionSet,
     Option,
     DataElement,
@@ -57,7 +57,7 @@ export const makeColumnsSelector = () => createSelector(
     programIdSelector,
     columnsOrderStateSelector,
     (programId, columnsOrderFromState: ColumnsOrderFromState) => {
-        const stageContainer = getStageFromProgramIdForEventProgram(programId);
+        const stageContainer = getStageForEventProgram(programId);
         if (stageContainer.error) {
             return columnsOrderFromState;
         }

@@ -14,7 +14,7 @@ import {
     withDataEntryField,
     withDataEntryFieldIfApplicable,
     placements,
-    withCleanUpHOC,
+    withCleanUp,
     withBrowserBackWarning,
 } from '../../../../../components/DataEntry';
 import {
@@ -247,7 +247,7 @@ const saveHandlerConfig = {
     },
 };
 
-const CleanUpHOC = withCleanUpHOC()(DataEntry);
+const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));

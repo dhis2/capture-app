@@ -17,7 +17,7 @@ import { Notes } from '../../../Notes/Notes.component';
 import {
     withSaveHandler,
     placements,
-    withCleanUpHOC,
+    withCleanUp,
 } from '../../../../components/DataEntry';
 import {
     withInternalChangeHandler,
@@ -287,7 +287,7 @@ const saveHandlerConfig = {
     },
 };
 
-const CleanUpHOC = withCleanUpHOC()(DataEntry);
+const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const NotesField = withDataEntryField(buildNotesSettingsFn())(ReportDateField);

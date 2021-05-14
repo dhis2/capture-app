@@ -20,8 +20,8 @@ import {
     getCurrentClientMainData,
     getRulesActionsForEvent,
 } from '../../../../../../rules/actionsCreator';
-import { getProgramAndStageFromProgramId } from
-    '../../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
+import { getProgramAndStageForEventProgram } from
+    '../../../../../../metaData/helpers/EventProgram/getProgramAndStageForEventProgram';
 import {
     getDefaultMainConfig as getDefaultMainColumnConfig,
     getMetaDataConfig as getColumnMetaDataConfig,
@@ -35,7 +35,7 @@ import type {
 import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
-import { getStageFromProgramId } from '../../../../../../metaData/helpers/EventProgram/getStageFromProgramId';
+import { getStageForEventProgram } from '../../../../../../metaData/helpers/EventProgram/getStageForEventProgram';
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
@@ -61,7 +61,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
 
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
-            const metadataContainer = getProgramAndStageFromProgramId(programId);
+            const metadataContainer = getProgramAndStageForEventProgram(programId);
             if (metadataContainer.error) {
                 log.error(
                     errorCreator(
@@ -118,7 +118,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
-            const metadataContainer = getProgramAndStageFromProgramId(programId);
+            const metadataContainer = getProgramAndStageForEventProgram(programId);
             if (metadataContainer.error) {
                 log.error(
                     errorCreator(
@@ -172,7 +172,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         map(() => {
             const state = store.value;
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
-            const stageContainer = getStageFromProgramId(state.currentSelections.programId);
+            const stageContainer = getStageForEventProgram(state.currentSelections.programId);
             // $FlowFixMe[incompatible-call] automated comment
             // $FlowFixMe[incompatible-use] automated comment
             const columnConfig = [...getDefaultMainColumnConfig(stageContainer.stage), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];
@@ -184,7 +184,7 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const programId = state.currentSelections.programId;
-    const metadataContainer = getProgramAndStageFromProgramId(programId);
+    const metadataContainer = getProgramAndStageForEventProgram(programId);
 
     const orgUnitId = state.currentSelections.orgUnitId;
     const orgUnit = state.organisationUnits[orgUnitId];

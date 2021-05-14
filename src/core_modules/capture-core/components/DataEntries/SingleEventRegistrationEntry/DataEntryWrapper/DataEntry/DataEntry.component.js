@@ -16,7 +16,7 @@ import { getNoteValidatorContainers } from './fieldValidators/note.validatorCont
 import {
     withSaveHandler,
     placements,
-    withCleanUpHOC,
+    withCleanUp,
 } from '../../../../DataEntry';
 import {
     withInternalChangeHandler,
@@ -406,7 +406,7 @@ const dataEntryFilterProps = (props: Object) => {
 };
 
 
-const CleanUpHOC = withCleanUpHOC()(withFilterProps(dataEntryFilterProps)(DataEntryContainer));
+const CleanUpHOC = withCleanUp()(withFilterProps(dataEntryFilterProps)(DataEntryContainer));
 const AssigneeField = withDataEntryFieldIfApplicable(buildAssigneeSettingsFn())(CleanUpHOC);
 const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(AssigneeField);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);

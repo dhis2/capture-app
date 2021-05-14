@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/';
 import i18n from '@dhis2/d2-i18n';
 import {
     placements,
-    withCleanUpHOC,
+    withCleanUp,
     DataEntry,
     withDataEntryField,
     withDataEntryFieldIfApplicable,
@@ -186,7 +186,7 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
-const CleanUpHOC = withCleanUpHOC()(DataEntry);
+const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
