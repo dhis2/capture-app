@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
 "MIME-Version: 1.0\n"
@@ -209,6 +209,9 @@ msgstr "Тугатиш"
 msgid "No write access"
 msgstr "Ёзув киритиш учун рухсат йўқ"
 
+msgid "New {{titleText}}"
+msgstr ""
+
 msgid "Switch to form view"
 msgstr "Шакл кўринишига ўтиш"
 
@@ -319,10 +322,7 @@ msgid "Indicators"
 msgstr "Индикаторлар"
 
 msgid "Warnings"
-msgstr "Огоҳлантириш"
-
-msgid "search group result could not be retrieved"
-msgstr "Гуруҳ қидируви натижасини олиш имкони йўқ"
+msgstr "Огоҳлантиришлар"
 
 msgid "Complete"
 msgstr "Тўлдириш"
@@ -353,12 +353,6 @@ msgstr "Баъзи операциялар ҳали ҳам бажарилмоқд
 
 msgid "Operations running"
 msgstr "Амалиётлар бажарилмоқда"
-
-msgid "Hide"
-msgstr "Беркитиш"
-
-msgid "Possible duplicates found"
-msgstr "Бўлиши мумкин бўлган нусхалар топилди"
 
 msgid "Sort"
 msgstr "Саралаш"
@@ -463,13 +457,16 @@ msgid "Select image"
 msgstr "Расмни танланг"
 
 msgid "Search"
-msgstr "Қидириш"
+msgstr "Излаш"
 
 msgid "Clear"
 msgstr "Тозалаш"
 
 msgid "No results"
 msgstr "Натижа йўқ"
+
+msgid "Icon for {{field}}"
+msgstr ""
 
 msgid "start typing to search"
 msgstr "қидириш учун ёзишни бошланг"
@@ -524,6 +521,12 @@ msgstr "Танланган дастур танланган рўйхатдан о
 
 msgid "New"
 msgstr "Янги"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
 
 msgid "Clear selections"
 msgstr "Танловларни тозалаш"
@@ -646,7 +649,7 @@ msgid "View working list in this program."
 msgstr ""
 
 msgid "Delete event"
-msgstr "Ҳодиса/Тадбирни ўчириб ташлаш"
+msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
 
 msgid "Download as JSON"
 msgstr "JSON сифатида юклаш"
@@ -745,8 +748,8 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr "Нусхаларни кўриб чиқиш"
+msgid "Save new"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Янги {{trackedEntityTypeName}} ва ҳаволани сақлаш"
@@ -798,6 +801,9 @@ msgstr "Атрибут орқали қидириш"
 
 msgid "Back"
 msgstr "Орқага"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Қидириш"
@@ -884,6 +890,9 @@ msgstr "Ҳодиса/тадбир {{name}} га бириктирилди"
 msgid "Feedbacks"
 msgstr "Қайта алоқалар"
 
+msgid "Possible duplicates found"
+msgstr "Бўлиши мумкин бўлган нусхалар топилди"
+
 msgid "An error occurred loading possible duplicates"
 msgstr "Эҳтимолий нусхаларни юклашда хатолик юз берди"
 
@@ -894,7 +903,7 @@ msgid "You dont have access to create any relationships"
 msgstr "Ушбу ўзаро алоқаларни яратиш ҳуқуқига эга эмассиз"
 
 msgid "Add relationship"
-msgstr "Ўзаро алоқа қўшиш"
+msgstr "Ўзаро алоқа киритиш"
 
 msgid "Results found"
 msgstr "Натижалар топилди"
@@ -911,8 +920,20 @@ msgstr "Танланган дастур билан ишлаш учун,"
 msgid "open the Tracker Capture app"
 msgstr "Кузатув-Назорат дастурини очинг"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr ""
+
 msgid "An error has occured. See log for details"
 msgstr "Хатолик юз берди. Тафсилотларни журналдан кўринг."
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Дастур топилмади"
@@ -926,8 +947,8 @@ msgstr "Профил"
 msgid "Error saving event"
 msgstr "Ҳодиса/тадбирни сақлашда хато"
 
-msgid "Could not save event. See log for details"
-msgstr "Ҳодиса/тадбир сақланмади. Тафсилотлар учун журналга қаранг"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "Ҳодиса/тадбирни ўчириб ташлаб бўлмади"
@@ -941,11 +962,17 @@ msgstr "Ишчи рўйхатни қўшиб бўлмади"
 msgid "Could not delete working list"
 msgstr "Ишчи рўйхатни ўчириб ташлаб бўлмади"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "Ташкилот бўлимини қидириб бўлмади. Тафсилотлар учун журналга қаранг"
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
-msgstr "кузатувдаги объект намунаси"
+msgstr "кузатилаётган объект намунаси"
 
 msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"

@@ -224,7 +224,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: i18n.t('Complete event'),
+            label: 'Complete event',
             id: 'complete',
         }),
         getPropName: () => 'complete',

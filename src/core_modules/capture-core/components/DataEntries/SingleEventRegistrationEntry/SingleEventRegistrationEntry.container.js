@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { compose } from 'redux';
 import { SingleEventRegistrationEntryComponent } from './SingleEventRegistrationEntry.component';
 import { withBrowserBackWarning } from '../../../HOC/withBrowserBackWarning';
-import { getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { makeEventAccessSelector } from './SingleEventRegistrationEntry.selectors';
 import { withLoadingIndicator } from '../../../HOC';
 
@@ -16,7 +16,7 @@ const dialogConfig = {
     cancelText: i18n.t('No, stay here'),
 };
 
-const inEffect = (state: ReduxState) => getDataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
+const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
 
 const makeMapStateToProps = () => {
     const eventAccessSelector = makeEventAccessSelector();

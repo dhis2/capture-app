@@ -1,6 +1,5 @@
 # 
 # Translators:
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
 # Ge Joao <gsimango@saudigitus.org>, 2021
@@ -9,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Ge Joao <gsimango@saudigitus.org>, 2021\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,7 +154,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr "Status"
+msgstr "Estado"
 
 msgid "Comments"
 msgstr "Comentarios"
@@ -201,6 +200,9 @@ msgid "Finish"
 msgstr "Terminar"
 
 msgid "No write access"
+msgstr ""
+
+msgid "New {{titleText}}"
 msgstr ""
 
 msgid "Switch to form view"
@@ -305,9 +307,6 @@ msgstr "Indicadores"
 msgid "Warnings"
 msgstr ""
 
-msgid "search group result could not be retrieved"
-msgstr ""
-
 msgid "Complete"
 msgstr "Completo"
 
@@ -336,12 +335,6 @@ msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
-msgstr ""
-
-msgid "Hide"
-msgstr "Esconder"
-
-msgid "Possible duplicates found"
 msgstr ""
 
 msgid "Sort"
@@ -455,6 +448,9 @@ msgstr "Limpar"
 msgid "No results"
 msgstr ""
 
+msgid "Icon for {{field}}"
+msgstr ""
+
 msgid "start typing to search"
 msgstr ""
 
@@ -508,6 +504,12 @@ msgstr ""
 
 msgid "New"
 msgstr "Novo"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
 
 msgid "Clear selections"
 msgstr ""
@@ -729,7 +731,7 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
+msgid "Save new"
 msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
@@ -780,6 +782,9 @@ msgstr ""
 
 msgid "Back"
 msgstr "Voltar"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Procurar por"
@@ -852,6 +857,9 @@ msgstr ""
 msgid "Feedbacks"
 msgstr ""
 
+msgid "Possible duplicates found"
+msgstr ""
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -879,7 +887,19 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr ""
+
 msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
 msgid "Program not found"
@@ -894,7 +914,7 @@ msgstr "Perfil"
 msgid "Error saving event"
 msgstr ""
 
-msgid "Could not save event. See log for details"
+msgid "Could not save event"
 msgstr ""
 
 msgid "Could not delete event"
@@ -909,7 +929,13 @@ msgstr ""
 msgid "Could not delete working list"
 msgstr ""
 
-msgid "Organisation unit search failed. See log for details"
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
 msgstr ""
 
 msgid "tracked entity instance"

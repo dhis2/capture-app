@@ -26,8 +26,8 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onCancel: () => {
-        dispatch(newEventCancelNewRelationship());
+    onCancel: (dataEntryId: string) => {
+        dispatch(newEventCancelNewRelationship(dataEntryId));
     },
     onAddRelationship: (relationshipType: { id: string, name: string}, entity: Object, entityType: string) => {
         dispatch(addNewEventRelationship(relationshipType, entity, entityType));

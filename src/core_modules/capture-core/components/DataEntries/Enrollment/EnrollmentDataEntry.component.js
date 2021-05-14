@@ -303,8 +303,9 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
 
 export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnit, onGetUnsavedAttributeValues } = this.props;
+        const { orgUnit, onGetUnsavedAttributeValues, programId } = this.props;
         return {
+            programId,
             orgUnitId: orgUnit.id,
             onGetUnsavedAttributeValues,
         };
@@ -328,6 +329,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     render() {
         const {
             orgUnit,
+            programId,
             onUpdateField,
             onUpdateDataEntryField,
             onStartAsyncUpdateField,

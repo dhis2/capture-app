@@ -39,6 +39,38 @@ class LockedSelectorClass extends Component<Props, State> {
         this.setState({ openStartAgainWarning: true });
     }
 
+    openNewRegistrationPage = () => {
+        if (this.props.isUserInteractionInProgress) {
+            this.setState({ openStartAgainWarning: true });
+            return;
+        }
+        this.props.onOpenNewEventPage();
+    }
+
+    handleOpenNewRegistrationPageWithoutProgramId = () => {
+        if (this.dontShowWarning()) {
+            this.props.onOpenNewRegistrationPageWithoutProgramId();
+            return;
+        }
+        this.setState({ openStartAgainWarning: true });
+    }
+
+    handleOpenSearchPage = () => {
+        if (this.dontShowWarning()) {
+            this.props.onOpenSearchPage();
+            return;
+        }
+        this.setState({ openStartAgainWarning: true });
+    }
+
+    handleOpenSearchPageWithoutProgramId = () => {
+        if (this.dontShowWarning()) {
+            this.props.onOpenSearchPageWithoutProgramId();
+            return;
+        }
+        this.setState({ openStartAgainWarning: true });
+    }
+
     handleOpenOrgUnitWarning = () => {
         if (this.dontShowWarning()) {
             this.props.onResetOrgUnitId();
@@ -95,31 +127,10 @@ class LockedSelectorClass extends Component<Props, State> {
         this.handleClose();
     }
 
-    openNewRegistrationPage = () => {
-        if (this.props.isUserInteractionInProgress) {
-            this.setState({ openNewEventWarning: true });
-            return;
-        }
-        this.props.onOpenNewEventPage();
-    }
-
-    handleOpenNewRegistrationPageWithoutProgramId = () => {
-        this.props.onOpenNewRegistrationPageWithoutProgramId();
-    }
-
     handleAcceptNew = () => {
         this.props.onOpenNewEventPage();
         this.handleClose();
     }
-
-    handleOpenSearchPage = () => {
-        this.props.onOpenSearchPage();
-    }
-
-    handleOpenSearchPageWithoutProgramId = () => {
-        this.props.onOpenSearchPageWithoutProgramId();
-    }
-
 
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;

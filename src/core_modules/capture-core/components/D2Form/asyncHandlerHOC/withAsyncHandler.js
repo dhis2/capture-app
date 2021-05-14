@@ -2,13 +2,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
-import { fieldIsValidating, fieldsValidated, cleanUpFormBuilder, startUpdateFieldAsync } from './actions';
+import { fieldIsValidating, fieldsValidated, startUpdateFieldAsync } from './actions';
 
 type Props = {
     id: string,
     onIsValidating: Function,
     onFieldsValidated: Function,
-    onCleanUp: Function,
     onUpdateFieldAsyncInner: Function,
     onUpdateFieldAsync: ?Function,
 };
@@ -29,12 +28,6 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
         }
 
         // $FlowFixMe[missing-annot] automated comment
-        handleCleanUp = (...args) => {
-            const { id } = this.props;
-            this.props.onCleanUp(...args, id);
-        }
-
-        // $FlowFixMe[missing-annot] automated comment
         handleUpdateFieldAsyncInner = (...args) => {
             const { onUpdateFieldAsyncInner, onUpdateFieldAsync } = this.props;
             onUpdateFieldAsyncInner(...args, onUpdateFieldAsync);
@@ -44,7 +37,6 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
             const {
                 onIsValidating,
                 onFieldsValidated,
-                onCleanUp,
                 onUpdateFieldAsyncInner,
                 onUpdateFieldAsync,
                 ...passOnProps } = this.props;
@@ -54,7 +46,6 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
                     onIsValidating={this.handleIsValidating}
                     onFieldsValidated={this.handleFieldsValidated}
                     onUpdateFieldAsync={this.handleUpdateFieldAsyncInner}
-                    onCleanUp={this.handleCleanUp}
                     {...passOnProps}
                 />
             );
@@ -83,12 +74,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     ) => {
         const action = fieldsValidated(fieldsUI, formBuilderId, formId, validatingUids);
         dispatch(action);
-    },
-    onCleanUp: (
-        remainingUids: Array<string>,
-        formId: string,
-    ) => {
-        dispatch(cleanUpFormBuilder(remainingUids, formId));
     },
     onUpdateFieldAsyncInner: (
         fieldId: string,

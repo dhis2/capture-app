@@ -2,13 +2,13 @@
 import { connect } from 'react-redux';
 import { CancelButtonComponent } from './CancelButton.component';
 import { getDataEntryKey } from './common/getDataEntryKey';
-import { getDataEntryHasChanges } from './common/dataEntryHasChanges';
+import { dataEntryHasChanges } from './common/dataEntryHasChanges';
 
 const mapStateToProps = (state: ReduxState, props: {id: string}) => {
     const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
     return {
-        dataEntryHasChanges: !!getDataEntryHasChanges(state, key),
+        dataEntryHasChanges: !!dataEntryHasChanges(state, key),
     };
 };
 

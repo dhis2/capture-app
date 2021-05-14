@@ -10,14 +10,25 @@ import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/f
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { actionTypes as rulesEffectsActionTypes } from '../../rules/actionsCreator';
 import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
+import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import { getOrgUnitRootsKey } from '../../components/D2Form/field/Components/OrgUnitField/getOrgUnitRootsKey';
 import {
     set as setStoreRoots,
 } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
+import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 
 const removeFormData = (state, { payload: { formId } }) => {
     const remainingKeys = Object.keys(state).filter(key => !key.includes(formId));
     return remainingKeys.reduce((acc, key) => ({ ...acc, [key]: state[key] }), {});
+};
+
+// cleans up data entries that _start with_ dataEntryId
+const cleanUp = (state, { payload: { dataEntryId } }) => {
+    const newState = Object.keys(state).reduce((acc, curr) =>
+        (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc, [curr]: state[curr] }),
+    {});
+
+    return newState;
 };
 
 export const formsValuesDesc = createReducerDescription({
@@ -81,6 +92,8 @@ export const formsValuesDesc = createReducerDescription({
         return newState;
     },
     [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
+    [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [newRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: cleanUp,
 }, 'formsValues');
 
 export const formsSectionsFieldsUIDesc = createReducerDescription({
@@ -202,6 +215,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         };
     },
     [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
+    [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
 }, 'formsSectionsFieldsUI');
 
 export const formsDesc = createReducerDescription({

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
 "MIME-Version: 1.0\n"
@@ -208,6 +208,9 @@ msgstr "إنهاء"
 msgid "No write access"
 msgstr "لا توجد صلاحية الوصول للكتابة"
 
+msgid "New {{titleText}}"
+msgstr ""
+
 msgid "Switch to form view"
 msgstr "التحويل الى العرض كنموذج"
 
@@ -312,9 +315,6 @@ msgstr "المؤشرات"
 msgid "Warnings"
 msgstr "تحذيرات"
 
-msgid "search group result could not be retrieved"
-msgstr "تعذر استرداد نتيجة مجموعة البحث"
-
 msgid "Complete"
 msgstr "مكتمل"
 
@@ -344,12 +344,6 @@ msgstr "لا تزال بعض العمليات قيد التشغيل. أرجو ا
 
 msgid "Operations running"
 msgstr "العمليات الجارية"
-
-msgid "Hide"
-msgstr "إخفاء"
-
-msgid "Possible duplicates found"
-msgstr "إحتمال وجود تكرار"
 
 msgid "Sort"
 msgstr "فرز"
@@ -462,6 +456,9 @@ msgstr "مسح"
 msgid "No results"
 msgstr "لا توجد نتائج"
 
+msgid "Icon for {{field}}"
+msgstr ""
+
 msgid "start typing to search"
 msgstr ""
 
@@ -515,6 +512,12 @@ msgstr "البرنامج المحدد غير صالح لوحدة التسجيل 
 
 msgid "New"
 msgstr "جديد"
+
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
 
 msgid "Clear selections"
 msgstr ""
@@ -736,8 +739,8 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr "مراجعة التكرارات"
+msgid "Save new"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
@@ -786,6 +789,9 @@ msgid "Search by attributes"
 msgstr "البحث حسب السمة"
 
 msgid "Back"
+msgstr ""
+
+msgid "Search for {{titleText}}"
 msgstr ""
 
 msgid "Search for"
@@ -859,6 +865,9 @@ msgstr "تم تعيين الحدث إلى {{name}}"
 msgid "Feedbacks"
 msgstr "تغذيات راجعة"
 
+msgid "Possible duplicates found"
+msgstr "إحتمال وجود تكرار"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -886,8 +895,20 @@ msgstr "للعمل مع البرنامج المحدد"
 msgid "open the Tracker Capture app"
 msgstr "فتح برنامج التتبع والإلتقاط"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr ""
+
 msgid "An error has occured. See log for details"
 msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "لم يتم ايجاد البرنامج"
@@ -901,8 +922,8 @@ msgstr "ملف التعريف"
 msgid "Error saving event"
 msgstr "خطأ عند حفظ الحدث"
 
-msgid "Could not save event. See log for details"
-msgstr "تعذر حفظ الحدث. انظر إلى السجل للحصول على التفاصيل"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "تعذر حذف الحدث"
@@ -916,8 +937,14 @@ msgstr "تعذر إضافة قائمة العمل"
 msgid "Could not delete working list"
 msgstr "تعذر حذف قائمة العمل"
 
-msgid "Organisation unit search failed. See log for details"
-msgstr "فشل البحث عن الوحدة التنظيمية. للحصول على التفاصيل، انظر السجل"
+msgid "Organisation unit search failed."
+msgstr ""
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"

@@ -37,8 +37,8 @@ type State = {
 }
 
 const coordinateKeys = {
-    LATITUDE: i18n.t('Latitude'),
-    LONGITUDE: i18n.t('Longitude'),
+    LATITUDE: 'latitude',
+    LONGITUDE: 'longitude',
 };
 
 export class CoordinateField extends React.Component<Props, State> {

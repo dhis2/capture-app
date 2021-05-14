@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-03-04T11:19:33.496Z\n"
-"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
@@ -212,6 +212,9 @@ msgstr "Tugatish"
 msgid "No write access"
 msgstr "Yozuv kiritish uchun ruxsat yoʼq"
 
+msgid "New {{titleText}}"
+msgstr ""
+
 msgid "Switch to form view"
 msgstr "Shakl koʼrinishiga oʼtish"
 
@@ -324,9 +327,6 @@ msgstr "Indikatorlar"
 msgid "Warnings"
 msgstr "Ogohlantirishlar"
 
-msgid "search group result could not be retrieved"
-msgstr "Guruh qidiruvi natijasini olish imkoni yoʼq"
-
 msgid "Complete"
 msgstr "Toʼldirish"
 
@@ -356,12 +356,6 @@ msgstr "Baʼzi operatsiyalar hali ham bajarilmoqda. Iltimos, kuting ..."
 
 msgid "Operations running"
 msgstr "Аmaliyotlar bajarilmoqda"
-
-msgid "Hide"
-msgstr "Berkitish"
-
-msgid "Possible duplicates found"
-msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
 
 msgid "Sort"
 msgstr "Saralash"
@@ -474,6 +468,9 @@ msgstr "Tozalash"
 msgid "No results"
 msgstr "Natija yoʼq"
 
+msgid "Icon for {{field}}"
+msgstr ""
+
 msgid "start typing to search"
 msgstr "qidirish uchun yozishni boshlang"
 
@@ -529,8 +526,11 @@ msgstr ""
 msgid "New"
 msgstr "Yangi"
 
-msgid "Find"
-msgstr "Toping"
+msgid "New {{trackedEntityName}} in {{programName}}"
+msgstr ""
+
+msgid "Search for a {{trackedEntityName}} in {{programName}}"
+msgstr ""
 
 msgid "Clear selections"
 msgstr "Tanlovlarni tozalash"
@@ -681,7 +681,7 @@ msgid "Registered events"
 msgstr "Roʼyxatdan oʼtgan hodisa/tadbirlar"
 
 msgid "Enrollment status"
-msgstr "roʼyxatga olish holati"
+msgstr "Roʼyxatga olish holati"
 
 msgid "Cancelled"
 msgstr "Bekor qilindi"
@@ -693,7 +693,7 @@ msgid "Registering unit"
 msgstr "Roʼyxatga olish muassasasi"
 
 msgid "Registration Date"
-msgstr "Roʼyxatga olingan sana"
+msgstr ""
 
 msgid "Inactive"
 msgstr "Faol emas"
@@ -721,7 +721,7 @@ msgstr ""
 "Haqiqatdan ham '{{templateName}}' koʼrinishini oʼchirib tashlamoqchimisiz?"
 
 msgid "Confirm"
-msgstr "Tasdiqlang"
+msgstr ""
 
 msgid "Save As view"
 msgstr "Ushbu koʼrinish sifatida saqlash"
@@ -754,8 +754,8 @@ msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
 
-msgid "Review Duplicates"
-msgstr "Nusxalarni koʼrib chiqish"
+msgid "Save new"
+msgstr ""
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr ""
@@ -799,14 +799,17 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr "{{name}} orqali qidirish"
 
-msgid "Find by {{name}}"
-msgstr "{{name}} orqali topish"
+msgid "Search by {{name}}"
+msgstr ""
 
 msgid "Search by attributes"
 msgstr "Аtribut orqali qidirish"
 
 msgid "Back"
 msgstr "Orqaga"
+
+msgid "Search for {{titleText}}"
+msgstr ""
 
 msgid "Search for"
 msgstr "Qidirish"
@@ -891,6 +894,9 @@ msgstr "Hodisa/tadbir {{name}} ga biriktirildi"
 msgid "Feedbacks"
 msgstr "Qayta aloqalar"
 
+msgid "Possible duplicates found"
+msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"
+
 msgid "An error occurred loading possible duplicates"
 msgstr ""
 
@@ -919,8 +925,20 @@ msgstr "Tanlangan dastur bilan ishlash uchun,"
 msgid "open the Tracker Capture app"
 msgstr "Kuzatuv-Nazorat dasturini oching"
 
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Person Profile"
+msgstr ""
+
+msgid "Stages and Events"
+msgstr ""
+
 msgid "An error has occured. See log for details"
 msgstr "Xatolik yuz berdi. Tafsilotlarni jurnaldan koʼring."
+
+msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Dastur topilmadi"
@@ -934,8 +952,8 @@ msgstr "Profil"
 msgid "Error saving event"
 msgstr "Hodisa/tadbirni saqlashda xato"
 
-msgid "Could not save event. See log for details"
-msgstr "Hodisa/tadbir saqlanmadi. Tafsilotlar uchun jurnalga qarang"
+msgid "Could not save event"
+msgstr ""
 
 msgid "Could not delete event"
 msgstr "Hodisa/tadbirni oʼchirib tashlab boʼlmadi"
@@ -949,9 +967,14 @@ msgstr "Ishchi roʼyxatni qoʼshib boʼlmadi"
 msgid "Could not delete working list"
 msgstr "Ishchi roʼyxatni oʼchirib tashlab boʼlmadi"
 
-msgid "Organisation unit search failed. See log for details"
+msgid "Organisation unit search failed."
 msgstr ""
-"Tashkilot boʼlimini qidirib boʼlmadi. Tafsilotlar uchun jurnalga qarang"
+
+msgid "Error saving tracked entity instance"
+msgstr ""
+
+msgid "Error saving enrollment"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "kuzatilayotgan obʼekt namunasi"

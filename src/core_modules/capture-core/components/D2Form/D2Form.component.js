@@ -143,7 +143,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
                         :
                         log.error(
                             errorCreator(
-                                'In order for the component to render you must to add a form id in the redux store. ' +
+                                'In order for the component to render you must add a form id in the redux store. ' +
                                 'The right reducer to do this is called "forms".')(
                                 {
                                     method: 'D2Form.component',
