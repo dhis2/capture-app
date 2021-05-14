@@ -24,11 +24,17 @@ const styles = {
 
 type Props = {|
     enrollment: Object,
-    mutate: (arg: Object) => void,
+    updateAction: (arg: Object) => void,
+    deleteAction: () => void,
     ...CssClasses,
 |};
 
-export const ActionsPlain = ({ enrollment = {}, mutate, classes }: Props) => (
+export const ActionsPlain = ({
+    enrollment = {},
+    updateAction,
+    deleteAction,
+    classes,
+}: Props) => (
     <>
         <DropdownButton
             secondary
@@ -38,8 +44,14 @@ export const ActionsPlain = ({ enrollment = {}, mutate, classes }: Props) => (
             component={
                 <span>
                     <FlyoutMenu dense maxWidth="250px">
-                        <Complete enrollment={enrollment} mutate={mutate} />
-                        <Followup enrollment={enrollment} mutate={mutate} />
+                        <Complete
+                            enrollment={enrollment}
+                            updateAction={updateAction}
+                        />
+                        <Followup
+                            enrollment={enrollment}
+                            updateAction={updateAction}
+                        />
 
                         <MenuItem
                             icon={<IconArrowRight16 />}
@@ -51,8 +63,14 @@ export const ActionsPlain = ({ enrollment = {}, mutate, classes }: Props) => (
                         />
 
                         <MenuDivider />
-                        <Cancel enrollment={enrollment} mutate={mutate} />
-                        <Delete enrollment={enrollment} mutate={mutate} />
+                        <Cancel
+                            enrollment={enrollment}
+                            updateAction={updateAction}
+                        />
+                        <Delete
+                            enrollment={enrollment}
+                            deleteAction={deleteAction}
+                        />
                     </FlyoutMenu>
                 </span>
             }
@@ -62,6 +80,5 @@ export const ActionsPlain = ({ enrollment = {}, mutate, classes }: Props) => (
     </>
 );
 
-export const ActionsComponent: ComponentType<
-    $Diff<Props, CssClasses>,
-> = withStyles(styles)(ActionsPlain);
+export const ActionsComponent: ComponentType<$Diff<Props, CssClasses>> =
+    withStyles(styles)(ActionsPlain);

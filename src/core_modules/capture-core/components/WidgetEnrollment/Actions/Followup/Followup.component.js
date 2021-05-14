@@ -4,12 +4,12 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './followup.types';
 
-export const Followup = ({ enrollment, mutate }: Props) =>
+export const Followup = ({ enrollment, updateAction }: Props) =>
     (enrollment.followup ? (
         <MenuItem
             dense
             onClick={async () =>
-                mutate({
+                updateAction({
                     ...enrollment,
                     followup: false,
                 })
@@ -21,7 +21,7 @@ export const Followup = ({ enrollment, mutate }: Props) =>
         <MenuItem
             dense
             onClick={async () =>
-                mutate({
+                updateAction({
                     ...enrollment,
                     followup: true,
                 })

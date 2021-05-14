@@ -5,12 +5,12 @@ import i18n from '@dhis2/d2-i18n';
 import type { Props } from './cancel.types';
 import { plainStatus } from '../../constants/status.const';
 
-export const Cancel = ({ enrollment, mutate }: Props) =>
-    (enrollment.status === plainStatus.CANCELLED ? (
+export const Cancel = ({ enrollment, updateAction }: Props) =>
+    enrollment.status === plainStatus.CANCELLED ? (
         <MenuItem
             dense
             onClick={async () =>
-                mutate({
+                updateAction({
                     ...enrollment,
                     status: plainStatus.ACTIVE,
                 })
@@ -22,7 +22,7 @@ export const Cancel = ({ enrollment, mutate }: Props) =>
         <MenuItem
             dense
             onClick={async () =>
-                mutate({
+                updateAction({
                     ...enrollment,
                     status: plainStatus.CANCELLED,
                 })
@@ -31,4 +31,4 @@ export const Cancel = ({ enrollment, mutate }: Props) =>
             destructive
             label={i18n.t('Mark as cancelled')}
         />
-    ));
+    );

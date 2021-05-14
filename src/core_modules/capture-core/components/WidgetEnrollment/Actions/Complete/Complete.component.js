@@ -6,12 +6,12 @@ import type { Props } from './complete.types';
 
 import { plainStatus } from '../../constants/status.const';
 
-export const Complete = ({ enrollment, mutate }: Props) =>
+export const Complete = ({ enrollment, updateAction }: Props) =>
     (enrollment.status === plainStatus.COMPLETED ? (
         <MenuItem
             dense
             onClick={async () =>
-                mutate({
+                updateAction({
                     ...enrollment,
                     status: plainStatus.ACTIVE,
                 })
@@ -23,7 +23,7 @@ export const Complete = ({ enrollment, mutate }: Props) =>
         <MenuItem
             dense
             onClick={async () =>
-                mutate({
+                updateAction({
                     ...enrollment,
                     status: plainStatus.COMPLETED,
                 })

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-07T12:16:53.884Z\n"
-"PO-Revision-Date: 2021-05-07T12:16:53.884Z\n"
+"POT-Creation-Date: 2021-05-14T07:08:00.213Z\n"
+"PO-Revision-Date: 2021-05-14T07:08:00.213Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -872,15 +872,6 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
-msgid "Follow-up"
-msgstr ""
-
-msgid "Enrollment date"
-msgstr ""
-
-msgid "Incident date"
-msgstr ""
-
 msgid "Transfer..."
 msgstr ""
 
@@ -905,7 +896,16 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
-msgid "Enrollment widget could not be loaded. Please try again later"
+msgid "Follow-up"
+msgstr ""
+
+msgid "at"
+msgstr ""
+
+msgid "Enrollment date"
+msgstr ""
+
+msgid "Incident date"
 msgstr ""
 
 msgid "Owned by {{ownerOrgUnit}}"
