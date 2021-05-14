@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-05-14T07:08:00.213Z\n"
-"PO-Revision-Date: 2021-05-14T07:08:00.213Z\n"
+"POT-Creation-Date: 2021-05-14T11:54:47.675Z\n"
+"PO-Revision-Date: 2021-05-14T11:54:47.675Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -896,10 +896,10 @@ msgstr ""
 msgid "Mark for follow-up"
 msgstr ""
 
-msgid "Follow-up"
+msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
-msgid "at"
+msgid "Follow-up"
 msgstr ""
 
 msgid "Enrollment date"
@@ -908,13 +908,13 @@ msgstr ""
 msgid "Incident date"
 msgstr ""
 
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
 msgid "Owned by {{ownerOrgUnit}}"
 msgstr ""
 
 msgid "Last updated {{date}}"
-msgstr ""
-
-msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"

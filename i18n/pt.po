@@ -1,16 +1,16 @@
 # 
 # Translators:
-# Ge Joao <gsimango@saudigitus.org>, 2021
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
+# Ge Joao <gsimango@saudigitus.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -150,9 +150,6 @@ msgstr "Usuário designado"
 msgid "Search for user"
 msgstr ""
 
-msgid "Complete event"
-msgstr "Marcar o evento como completo"
-
 msgid "Basic info"
 msgstr ""
 
@@ -189,9 +186,6 @@ msgstr "Activo"
 
 msgid "Completed"
 msgstr "Completo"
-
-msgid "Assigned to"
-msgstr "Atribuido a"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -670,6 +664,9 @@ msgstr "Status da inscrição"
 msgid "Cancelled"
 msgstr "Cancelado"
 
+msgid "Assigned to"
+msgstr "Atribuido a"
+
 msgid "Registering unit"
 msgstr "Unidade de registro"
 
@@ -843,12 +840,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
-msgid "Event details"
-msgstr "Detalhes de evento"
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -883,15 +874,6 @@ msgstr "Adicionar relacionamento"
 
 msgid "Results found"
 msgstr ""
-
-msgid "Open"
-msgstr "Abrir"
-
-msgid "All accessible"
-msgstr "Todos acessíveis"
-
-msgid "Organisation unit scope"
-msgstr "Escopo da unidade organizacional a ser usado"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -958,12 +940,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
-
-msgid "Latitude"
-msgstr "Latitude"
-
-msgid "Longitude"
-msgstr "Longitude"
 
 msgid "Set coordinate"
 msgstr "Definir coordenadas"

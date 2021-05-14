@@ -1,6 +1,8 @@
 // @flow
 import React, { useState, useCallback, type ComponentType } from 'react';
 import moment from 'moment';
+import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
 import {
     IconClock16,
     IconDimensionOrgUnit16,
@@ -12,6 +14,7 @@ import {
 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
+import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
 import type { Props } from './enrollment.types';
 import { Status } from './Status';
@@ -22,7 +25,7 @@ import { Actions } from './Actions';
 
 const styles = {
     icon: {
-        margin: spacersNum.dp4,
+        margin: `0 ${spacersNum.dp4}px`,
     },
     enrollment: {
         padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
@@ -42,8 +45,14 @@ export const WidgetEnrollmentPlain = ({
     program = {},
     ownerOrgUnit = {},
     refetch,
+    error,
+    loading,
 }: Props) => {
     const [open, setOpenStatus] = useState(true);
+
+    if (error) {
+        log.error(errorCreator('Enrollment widget could not be loaded'));
+    }
 
     const geometryType =
         enrollment?.geometry?.type === 'Point'
@@ -61,111 +70,135 @@ export const WidgetEnrollmentPlain = ({
                 )}
                 open={open}
             >
-                <div className={classes.enrollment}>
-                    <div data-test="widget-enrollment-status">
-                        {enrollment.followup && (
-                            <Tag className={classes.followup} negative>
-                                {i18n.t('Follow-up')}
-                            </Tag>
-                        )}
-                        <Status status={enrollment.status} />
-                        {i18n.t('at')}
-                        <span className={classes.icon}>
-                            <IconDimensionOrgUnit16 color={colors.grey700} />
-                        </span>
-                        {enrollment.orgUnitName}
-                    </div>
-
-                    <div
-                        className={classes.row}
-                        data-test="widget-enrollment-enrollment-date"
-                    >
-                        <span
-                            className={classes.icon}
-                            data-test="widget-enrollment-icon-calendar"
-                        >
-                            <IconCalendar16 color={colors.grey700} />
-                        </span>
-                        {program.enrollmentDateLabel ||
-                            i18n.t('Enrollment date')}{' '}
-                        {convertValueClientToView(
-                            convertValueServerToClient(
-                                enrollment.enrollmentDate,
-                                dataElementTypes.DATE,
-                            ),
-                            dataElementTypes.DATE,
+                {error && (
+                    <div className={classes.enrollment}>
+                        {i18n.t(
+                            'Enrollment widget could not be loaded. Please try again later',
                         )}
                     </div>
+                )}
+                {loading && <LoadingMaskElementCenter />}
+                {!error && !loading && (
+                    <div className={classes.enrollment}>
+                        <div data-test="widget-enrollment-status">
+                            {enrollment.followup && (
+                                <Tag className={classes.followup} negative>
+                                    {i18n.t('Follow-up')}
+                                </Tag>
+                            )}
+                            <Status status={enrollment.status} />
+                        </div>
 
-                    {program.displayIncidentDate && (
                         <div
                             className={classes.row}
-                            data-test="widget-enrollment-incident-date"
+                            data-test="widget-enrollment-enrollment-date"
                         >
-                            <span className={classes.icon}>
+                            <span
+                                className={classes.icon}
+                                data-test="widget-enrollment-icon-calendar"
+                            >
                                 <IconCalendar16 color={colors.grey700} />
                             </span>
-                            {program.incidentDateLabel ||
-                                i18n.t('Incident date')}{' '}
+                            {program.enrollmentDateLabel ||
+                                i18n.t('Enrollment date')}{' '}
                             {convertValueClientToView(
                                 convertValueServerToClient(
-                                    enrollment.incidentDate,
+                                    enrollment.enrollmentDate,
                                     dataElementTypes.DATE,
                                 ),
                                 dataElementTypes.DATE,
                             )}
                         </div>
-                    )}
 
-                    <div
-                        className={classes.row}
-                        data-test="widget-enrollment-orgunit"
-                    >
-                        <span
-                            className={classes.icon}
-                            data-test="widget-enrollment-icon-orgunit"
+                        {program.displayIncidentDate && (
+                            <div
+                                className={classes.row}
+                                data-test="widget-enrollment-incident-date"
+                            >
+                                <span className={classes.icon}>
+                                    <IconCalendar16 color={colors.grey700} />
+                                </span>
+                                {program.incidentDateLabel ||
+                                    i18n.t('Incident date')}{' '}
+                                {convertValueClientToView(
+                                    convertValueServerToClient(
+                                        enrollment.incidentDate,
+                                        dataElementTypes.DATE,
+                                    ),
+                                    dataElementTypes.DATE,
+                                )}
+                            </div>
+                        )}
+
+                        <div
+                            className={classes.row}
+                            data-test="widget-enrollment-orgunit"
                         >
-                            <IconDimensionOrgUnit16 color={colors.grey700} />
-                        </span>
-                        {i18n.t('Owned by {{ownerOrgUnit}}', {
-                            ownerOrgUnit: ownerOrgUnit.displayName,
-                        })}
-                    </div>
+                            <span
+                                className={classes.icon}
+                                data-test="widget-enrollment-icon-orgunit"
+                            >
+                                <IconDimensionOrgUnit16
+                                    color={colors.grey700}
+                                />
+                            </span>
+                            {i18n.t('Started at {{orgUnitName}}', {
+                                orgUnitName: enrollment.orgUnitName,
+                            })}
+                        </div>
 
-                    <div
-                        className={classes.row}
-                        data-test="widget-enrollment-last-update"
-                    >
-                        <span
-                            className={classes.icon}
-                            data-test="widget-enrollment-icon-clock"
+                        <div
+                            className={classes.row}
+                            data-test="widget-enrollment-owner-orgunit"
                         >
-                            <IconClock16 color={colors.grey700} />
-                        </span>
-                        {i18n.t('Last updated {{date}}', {
-                            date: moment(enrollment.lastUpdated).fromNow(),
-                        })}
-                    </div>
+                            <span
+                                className={classes.icon}
+                                data-test="widget-enrollment-icon-owner-orgunit"
+                            >
+                                <IconDimensionOrgUnit16
+                                    color={colors.grey700}
+                                />
+                            </span>
+                            {i18n.t('Owned by {{ownerOrgUnit}}', {
+                                ownerOrgUnit: ownerOrgUnit.displayName,
+                            })}
+                        </div>
 
-                    {enrollment.geometry && (
-                        <div className={classes.row}>
+                        <div
+                            className={classes.row}
+                            data-test="widget-enrollment-last-update"
+                        >
                             <span
                                 className={classes.icon}
                                 data-test="widget-enrollment-icon-clock"
                             >
-                                <IconLocation16 color={colors.grey700} />
+                                <IconClock16 color={colors.grey700} />
                             </span>
-                            {convertValueClientToView(
-                                convertValueServerToClient(
-                                    enrollment.geometry.coordinates,
-                                    geometryType,
-                                ),
-                                geometryType,
-                            )}
+                            {i18n.t('Last updated {{date}}', {
+                                date: moment(enrollment.lastUpdated).fromNow(),
+                            })}
                         </div>
-                    )}
-                    <Actions enrollment={enrollment} refetch={refetch} />
-                </div>
+
+                        {enrollment.geometry && (
+                            <div className={classes.row}>
+                                <span
+                                    className={classes.icon}
+                                    data-test="widget-enrollment-icon-clock"
+                                >
+                                    <IconLocation16 color={colors.grey700} />
+                                </span>
+                                {convertValueClientToView(
+                                    convertValueServerToClient(
+                                        enrollment.geometry.coordinates,
+                                        geometryType,
+                                    ),
+                                    geometryType,
+                                )}
+                            </div>
+                        )}
+                        <Actions enrollment={enrollment} refetch={refetch} />
+                    </div>
+                )}
             </Widget>
         </div>
     );

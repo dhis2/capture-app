@@ -153,9 +153,6 @@ msgstr "المستخدم المعين"
 msgid "Search for user"
 msgstr "البحث عن مستخدم"
 
-msgid "Complete event"
-msgstr ""
-
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
 
@@ -195,9 +192,6 @@ msgstr "فعال"
 
 msgid "Completed"
 msgstr "مكتمل"
-
-msgid "Assigned to"
-msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
@@ -678,6 +672,9 @@ msgstr ""
 msgid "Cancelled"
 msgstr "تم الإلغاء"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Registering unit"
 msgstr ""
 
@@ -851,12 +848,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
 
-msgid "Event details"
-msgstr ""
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -890,15 +881,6 @@ msgid "Add relationship"
 msgstr "اضف علاقة"
 
 msgid "Results found"
-msgstr ""
-
-msgid "Open"
-msgstr "فتح"
-
-msgid "All accessible"
-msgstr ""
-
-msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
@@ -966,12 +948,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"
-
-msgid "Latitude"
-msgstr ""
-
-msgid "Longitude"
-msgstr ""
 
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"

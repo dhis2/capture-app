@@ -152,9 +152,6 @@ msgstr "分配的用户"
 msgid "Search for user"
 msgstr "搜索用户 "
 
-msgid "Complete event"
-msgstr "完成事件"
-
 msgid "Basic info"
 msgstr "基本信息"
 
@@ -192,9 +189,6 @@ msgstr "活动的"
 msgid "Completed"
 msgstr "已完成"
 
-msgid "Assigned to"
-msgstr "指派到"
-
 msgid "Please add or cancel comment before saving the event"
 msgstr "保存事件前请添加或取消被或许"
 
@@ -211,7 +205,7 @@ msgid "No write access"
 msgstr "无写权限"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "新的{{titleText}}"
 
 msgid "Switch to form view"
 msgstr "切换到表单视图"
@@ -673,6 +667,9 @@ msgstr "登记状态"
 msgid "Cancelled"
 msgstr "已取消"
 
+msgid "Assigned to"
+msgstr "指派到"
+
 msgid "Registering unit"
 msgstr "注册机构"
 
@@ -790,7 +787,7 @@ msgid "Back"
 msgstr "后退"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "搜索{{titleText}}"
 
 msgid "Search for"
 msgstr "搜索"
@@ -846,12 +843,6 @@ msgstr "搜索所有项目"
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
-msgid "Event details"
-msgstr "事件详情"
-
-msgid "Event completed"
-msgstr "事件完成"
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -887,15 +878,6 @@ msgstr "添加关系"
 msgid "Results found"
 msgstr "找到的结果"
 
-msgid "Open"
-msgstr "开放"
-
-msgid "All accessible"
-msgstr "所有可访问的"
-
-msgid "Organisation unit scope"
-msgstr "使用的机构范围"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
 
@@ -909,7 +891,7 @@ msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访APP"
 
 msgid "Profile widget could not be loaded. Please try again later"
-msgstr ""
+msgstr "无法加载个人资料窗口小部件。请稍后再试"
 
 msgid "Person Profile"
 msgstr "人物简介"
@@ -921,7 +903,7 @@ msgid "An error has occured. See log for details"
 msgstr "发生错误。查看日志以获取详细信息"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "项目{{escape}} {{programName}}中的{{trackedEntityName}}"
 
 msgid "Program not found"
 msgstr "没有发现项目"
@@ -961,12 +943,6 @@ msgstr "保存注册时出错"
 
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
-
-msgid "Latitude"
-msgstr "维度"
-
-msgid "Longitude"
-msgstr "经度"
 
 msgid "Set coordinate"
 msgstr "设置坐标"

@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './delete.types';
 
-export const Delete = ({ enrollment, deleteAction }: Props) => {
+export const Delete = ({ deleteAction }: Props) => {
     const [toggle, setToggle] = useState(false);
 
     return (

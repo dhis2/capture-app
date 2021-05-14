@@ -161,7 +161,7 @@ const getSaveHandler = (
             const { onSaveValidationFailed, itemId, id, warnings, errors } = this.props;
             if (!isFormValid) {
                 onSaveValidationFailed(itemId, id);
-            } else if ((errors && errors.length > 0) || (warnings && warnings.length > 0)) {
+            } else if (this.isCompleting && ((errors && errors.length > 0) || (warnings && warnings.length > 0))) {
                 this.showMessagesPopup(saveType);
             } else {
                 this.handleSave(saveType);

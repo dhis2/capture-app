@@ -147,9 +147,6 @@ msgstr ""
 msgid "Search for user"
 msgstr ""
 
-msgid "Complete event"
-msgstr "تکمیلی رویداد"
-
 msgid "Basic info"
 msgstr ""
 
@@ -186,9 +183,6 @@ msgstr "فعال"
 
 msgid "Completed"
 msgstr "تکمیل شد"
-
-msgid "Assigned to"
-msgstr "تعین شده"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -667,6 +661,9 @@ msgstr "تاریخ ثبت نام"
 msgid "Cancelled"
 msgstr ""
 
+msgid "Assigned to"
+msgstr "تعین شده"
+
 msgid "Registering unit"
 msgstr "بخش ثبت نام"
 
@@ -840,12 +837,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
-msgid "Event details"
-msgstr "جزئیات رویداد"
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -880,15 +871,6 @@ msgstr "وابستگی را اضافه کنید"
 
 msgid "Results found"
 msgstr ""
-
-msgid "Open"
-msgstr "باز کردن"
-
-msgid "All accessible"
-msgstr "همه قابل دسترسی"
-
-msgid "Organisation unit scope"
-msgstr "محدوده کاری نهاد"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -955,12 +937,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
-
-msgid "Latitude"
-msgstr "عرض البلد"
-
-msgid "Longitude"
-msgstr "طول البلد"
 
 msgid "Set coordinate"
 msgstr "تعین مختصات"

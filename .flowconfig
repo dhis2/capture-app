@@ -14,4 +14,3 @@ module.name_mapper='^capture-core' ->'<PROJECT_ROOT>/src/core_modules/capture-co
 module.name_mapper='^capture-ui' ->'<PROJECT_ROOT>/src/core_modules/capture-ui'
 module.name_mapper='^capture-core-utils' ->'<PROJECT_ROOT>/src/core_modules/capture-core-utils'
 esproposal.optional_chaining=enable
-sharedmemory.hash_table_pow=21
