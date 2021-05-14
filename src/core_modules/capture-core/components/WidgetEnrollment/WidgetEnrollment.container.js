@@ -17,7 +17,7 @@ type Props = {|
 |};
 
 export const WidgetEnrollment = ({ teiId, enrollmentId, programId }: Props) => {
-    const { error: errorEnrollment, enrollment } = useEnrollment(enrollmentId);
+    const { error: errorEnrollment, enrollment, refetch } = useEnrollment(enrollmentId);
     const { error: errorProgram, program } = useProgram(programId);
     const { error: errorOwnerOrgUnit, ownerOrgUnit } = useTrackedEntityInstances(teiId, programId);
     const { error: errorOrgUnit, displayName } = useOrganizationUnit(ownerOrgUnit);
@@ -38,6 +38,7 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId }: Props) => {
             enrollment={enrollment}
             program={program}
             ownerOrgUnit={{ id: ownerOrgUnit, displayName }}
+            refetch={refetch}
         />
     ) : (
         <LoadingMaskElementCenter />

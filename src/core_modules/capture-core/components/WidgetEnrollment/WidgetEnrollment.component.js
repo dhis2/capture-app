@@ -18,10 +18,11 @@ import { Status } from './Status';
 import { convertValue as convertValueServerToClient } from '../../converters/serverToClient';
 import { convertValue as convertValueClientToView } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
+import { Actions } from './Actions';
 
 const styles = {
     icon: {
-        margin: `0 ${spacersNum.dp4}px`,
+        margin: spacersNum.dp4,
     },
     enrollment: {
         padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
@@ -40,6 +41,7 @@ export const WidgetEnrollmentPlain = ({
     enrollment = {},
     program = {},
     ownerOrgUnit = {},
+    refetch,
 }: Props) => {
     const [open, setOpenStatus] = useState(true);
 
@@ -67,6 +69,11 @@ export const WidgetEnrollmentPlain = ({
                             </Tag>
                         )}
                         <Status status={enrollment.status} />
+                        {i18n.t('at')}
+                        <span className={classes.icon}>
+                            <IconDimensionOrgUnit16 color={colors.grey700} />
+                        </span>
+                        {enrollment.orgUnitName}
                     </div>
 
                     <div
@@ -120,21 +127,6 @@ export const WidgetEnrollmentPlain = ({
                         >
                             <IconDimensionOrgUnit16 color={colors.grey700} />
                         </span>
-                        {i18n.t('Started at {{orgUnitName}}', {
-                            orgUnitName: enrollment.orgUnitName,
-                        })}
-                    </div>
-
-                    <div
-                        className={classes.row}
-                        data-test="widget-enrollment-owner-orgunit"
-                    >
-                        <span
-                            className={classes.icon}
-                            data-test="widget-enrollment-icon-owner-orgunit"
-                        >
-                            <IconDimensionOrgUnit16 color={colors.grey700} />
-                        </span>
                         {i18n.t('Owned by {{ownerOrgUnit}}', {
                             ownerOrgUnit: ownerOrgUnit.displayName,
                         })}
@@ -172,6 +164,7 @@ export const WidgetEnrollmentPlain = ({
                             )}
                         </div>
                     )}
+                    <Actions enrollment={enrollment} refetch={refetch} />
                 </div>
             </Widget>
         </div>

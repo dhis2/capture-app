@@ -70,7 +70,7 @@ declare module '@dhis2/app-runtime' {
     declare type UpdateMutation = {|
         ...ResourceQuery,
         type: 'update' | 'replace',
-        id: string,
+        id: string | (data: Object) => string,
         partial?: boolean,
         data: MutationData,
     |};
@@ -134,4 +134,6 @@ declare module '@dhis2/app-runtime' {
     |};
 
     declare export function useDataQuery(resourceQueries: ResourceQueries, queryOptions?: QueryOptions): QueryRenderInput;
+
+    declare export function useDataMutation(mutation: Mutation, mutationOptions?: QueryOptions): MutationRenderInput;
 }
