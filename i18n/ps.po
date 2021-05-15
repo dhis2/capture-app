@@ -892,10 +892,10 @@ msgid "Follow-up"
 msgstr ""
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "د نوم ثبتونې نېټه"
 
 msgid "Incident date"
-msgstr ""
+msgstr "د پېښې نېټه"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

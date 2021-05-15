@@ -921,13 +921,13 @@ msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Follow-up"
-msgstr ""
+msgstr "Následovat"
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "Datum zápisu"
 
 msgid "Incident date"
-msgstr ""
+msgstr "Datum incidentu"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

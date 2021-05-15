@@ -1,7 +1,7 @@
 # 
 # Translators:
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
 # Wanda <wanda@frontlineaids.org>, 2021
 # 
 msgid ""
@@ -890,13 +890,13 @@ msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Follow-up"
-msgstr ""
+msgstr "Подальші дії"
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "Дата реєстрації"
 
 msgid "Incident date"
-msgstr ""
+msgstr "Дата інциденту"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
