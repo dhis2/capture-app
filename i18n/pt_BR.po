@@ -889,7 +889,7 @@ msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Follow-up"
-msgstr ""
+msgstr "Seguimento"
 
 msgid "Enrollment date"
 msgstr ""

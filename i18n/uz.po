@@ -924,13 +924,13 @@ msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Follow-up"
-msgstr ""
+msgstr "Кузатиш"
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "Қайд этилган сана"
 
 msgid "Incident date"
-msgstr ""
+msgstr "Ҳодиса санаси"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

@@ -919,13 +919,13 @@ msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Follow-up"
-msgstr ""
+msgstr "Theo dõi sau"
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "Ngày ghi vào"
 
 msgid "Incident date"
-msgstr ""
+msgstr "Ngày đến"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

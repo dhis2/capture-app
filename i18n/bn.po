@@ -891,7 +891,7 @@ msgid "Follow-up"
 msgstr ""
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "নিবন্ধনের তারিখ"
 
 msgid "Incident date"
 msgstr ""

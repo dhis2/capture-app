@@ -929,13 +929,13 @@ msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Follow-up"
-msgstr ""
+msgstr "Kuzatish"
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "Qayd qilingan sana"
 
 msgid "Incident date"
-msgstr ""
+msgstr "Hodisa sanasi"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

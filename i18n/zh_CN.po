@@ -1,14 +1,14 @@
 # 
 # Translators:
-# 晓东 林 <13981924470@126.com>, 2021
 # easylin <lin_xd@126.com>, 2021
+# 晓东 林 <13981924470@126.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2021\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -894,10 +894,10 @@ msgid "Follow-up"
 msgstr ""
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "登记日期"
 
 msgid "Incident date"
-msgstr ""
+msgstr "事件日期"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""

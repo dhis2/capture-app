@@ -893,13 +893,13 @@ msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Follow-up"
-msgstr ""
+msgstr "Seguimiento"
 
 msgid "Enrollment date"
-msgstr ""
+msgstr "Fecha de inscripción"
 
 msgid "Incident date"
-msgstr ""
+msgstr "Fecha del incidente"
 
 msgid "Started at {{orgUnitName}}"
 msgstr ""
