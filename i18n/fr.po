@@ -2,18 +2,18 @@
 # Translators:
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
 # Bram Piot <bram.piot@gmail.com>, 2020
-# Yao Selom Saka <ysaka@hispwca.org>, 2020
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
 # Yayra Gomado <ygomado@hispwca.org>, 2021
+# phil_dhis2, 2021
+# Yao Selom Saka <ysaka@hispwca.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yayra Gomado <ygomado@hispwca.org>, 2021\n"
+"Last-Translator: Yao Selom Saka <ysaka@hispwca.org>, 2021\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -161,9 +161,6 @@ msgstr "Utilisateur affecté"
 msgid "Search for user"
 msgstr "Rechercher un utilisateur"
 
-msgid "Complete event"
-msgstr "Evènement complété"
-
 msgid "Basic info"
 msgstr "Infos de base"
 
@@ -204,9 +201,6 @@ msgstr "Actif"
 
 msgid "Completed"
 msgstr "Terminé"
-
-msgid "Assigned to"
-msgstr "Attribue"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -714,6 +708,9 @@ msgstr "Statut de l'enrôlement"
 msgid "Cancelled"
 msgstr "Annulé"
 
+msgid "Assigned to"
+msgstr "Attribue"
+
 msgid "Registering unit"
 msgstr "Unité qui enregistre"
 
@@ -903,12 +900,6 @@ msgstr "Rechercher dans tous les programmes"
 msgid "You dont have access to edit this event"
 msgstr "Vous n'êtes pas autorisé à modifier cet événement"
 
-msgid "Event details"
-msgstr "Détails de l'évènement"
-
-msgid "Event completed"
-msgstr "Événement terminé"
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -945,15 +936,6 @@ msgstr "Ajouetr relation"
 msgid "Results found"
 msgstr "Résultats trouvés"
 
-msgid "Open"
-msgstr "Ouvrir"
-
-msgid "All accessible"
-msgstr "Tous accessibles"
-
-msgid "Organisation unit scope"
-msgstr "Portée d'unité d'organisation"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "Chercher {{uniqueAttrName}}"
 
@@ -967,6 +949,27 @@ msgstr "Pour utiliser le programme sélectionné,"
 
 msgid "open the Tracker Capture app"
 msgstr "ouvrez l'application Saisie Tracker"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Suivi"
+
+msgid "Enrollment date"
+msgstr "Date d'enrôlement"
+
+msgid "Incident date"
+msgstr "Date de l´incident"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
@@ -1021,12 +1024,6 @@ msgstr "Erreur lors de l'enregistrement de l'inscription"
 
 msgid "tracked entity instance"
 msgstr "instance d'entité suivie"
-
-msgid "Latitude"
-msgstr "Latitude"
-
-msgid "Longitude"
-msgstr "Longitude"
 
 msgid "Set coordinate"
 msgstr "Définir les coordonnées"

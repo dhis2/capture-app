@@ -1,3 +1,52 @@
+## [1.21.3](https://github.com/dhis2/capture-app/compare/v1.21.2...v1.21.3) (2021-05-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6eef9ac](https://github.com/dhis2/capture-app/commit/6eef9acb1dc939e09c4f2b25c14e6e7ecbf923ec))
+
+## [1.21.2](https://github.com/dhis2/capture-app/compare/v1.21.1...v1.21.2) (2021-05-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8ad7b2a](https://github.com/dhis2/capture-app/commit/8ad7b2aea79375f0382c70b260ce0d30a0b90f76))
+
+## [1.21.1](https://github.com/dhis2/capture-app/compare/v1.21.0...v1.21.1) (2021-05-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([3804be1](https://github.com/dhis2/capture-app/commit/3804be1d6e1b8771c9e871aa01018f2537d965c7))
+
+# [1.21.0](https://github.com/dhis2/capture-app/compare/v1.20.6...v1.21.0) (2021-05-14)
+
+
+### Features
+
+* [DHIS2-10942] Enrollment widget content ([8bdbb06](https://github.com/dhis2/capture-app/commit/8bdbb06886dc15a7e5960814428c5edb9a2381c3))
+
+## [1.20.6](https://github.com/dhis2/capture-app/compare/v1.20.5...v1.20.6) (2021-05-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([846e1e1](https://github.com/dhis2/capture-app/commit/846e1e1c6b3b9a75d7b47a591c65f894b0855c8e))
+
+## [1.20.5](https://github.com/dhis2/capture-app/compare/v1.20.4...v1.20.5) (2021-05-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#1681](https://github.com/dhis2/capture-app/issues/1681)) ([dd7c80a](https://github.com/dhis2/capture-app/commit/dd7c80a8c796451dc018adda8fbe8aa1f698339b))
+
+## [1.20.4](https://github.com/dhis2/capture-app/compare/v1.20.3...v1.20.4) (2021-05-12)
+
+
+### Bug Fixes
+
+* TECH-594 program/tet added to all tracked entity instance api requests ([80d5448](https://github.com/dhis2/capture-app/commit/80d5448fe5b7897cc02e378a2461e29313431312))
+
 ## [1.20.3](https://github.com/dhis2/capture-app/compare/v1.20.2...v1.20.3) (2021-05-12)
 
 

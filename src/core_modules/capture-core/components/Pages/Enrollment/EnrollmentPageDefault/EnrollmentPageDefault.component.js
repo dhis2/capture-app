@@ -7,7 +7,6 @@ import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 
-
 const getStyles = ({ typography }) => ({
     columns: {
         display: 'flex',
@@ -30,11 +29,9 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-export const EnrollmentPageDefaultPlain = ({ program, teiId, events, classes }: PlainProps) => (
+export const EnrollmentPageDefaultPlain = ({ program, teiId, events, enrollmentId, classes }: PlainProps) => (
     <>
-        <div className={classes.title}>
-            Enrollment Dashboard
-        </div>
+        <div className={classes.title}>Enrollment Dashboard</div>
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
                 <WidgetStagesAndEvents
@@ -44,10 +41,16 @@ export const EnrollmentPageDefaultPlain = ({ program, teiId, events, classes }: 
             </div>
             <div className={classes.rightColumn}>
                 <WidgetProfile teiId={teiId} programId={program.id} />
-                <WidgetEnrollment />
+                <WidgetEnrollment
+                    teiId={teiId}
+                    enrollmentId={enrollmentId}
+                    programId={program.id}
+                />
             </div>
         </div>
     </>
 );
 
-export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(getStyles)(EnrollmentPageDefaultPlain);
+export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(
+    getStyles,
+)(EnrollmentPageDefaultPlain);

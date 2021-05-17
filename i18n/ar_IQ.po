@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -153,9 +153,6 @@ msgstr "المستخدم المعين"
 msgid "Search for user"
 msgstr "البحث عن مستخدم"
 
-msgid "Complete event"
-msgstr ""
-
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
 
@@ -195,9 +192,6 @@ msgstr "فعال"
 
 msgid "Completed"
 msgstr "مكتمل"
-
-msgid "Assigned to"
-msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
@@ -678,6 +672,9 @@ msgstr ""
 msgid "Cancelled"
 msgstr "تم الإلغاء"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Registering unit"
 msgstr ""
 
@@ -851,12 +848,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
 
-msgid "Event details"
-msgstr ""
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -892,15 +883,6 @@ msgstr "اضف علاقة"
 msgid "Results found"
 msgstr ""
 
-msgid "Open"
-msgstr "فتح"
-
-msgid "All accessible"
-msgstr ""
-
-msgid "Organisation unit scope"
-msgstr ""
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "بحث {{uniqueAttrName}}"
 
@@ -912,6 +894,27 @@ msgstr "للعمل مع البرنامج المحدد"
 
 msgid "open the Tracker Capture app"
 msgstr "فتح برنامج التتبع والإلتقاط"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr ""
+
+msgid "Enrollment date"
+msgstr "تاريخ التسجيل"
+
+msgid "Incident date"
+msgstr "تاريخ الواقعة"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
@@ -966,12 +969,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"
-
-msgid "Latitude"
-msgstr ""
-
-msgid "Longitude"
-msgstr ""
 
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -154,9 +154,6 @@ msgstr "بەکارهێنەری دەستنیشانکراو"
 msgid "Search for user"
 msgstr "بۆ بەکاربەرەکە بگەرێ"
 
-msgid "Complete event"
-msgstr ""
-
 msgid "Basic info"
 msgstr "زانیاریە سەرەتاییەکان"
 
@@ -195,9 +192,6 @@ msgstr "چاڵاک"
 
 msgid "Completed"
 msgstr "تەواوبوو"
-
-msgid "Assigned to"
-msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "تکایە کۆمێنت زیاد بکە یاخود لاییببە پێش تۆمارکردن"
@@ -684,6 +678,9 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Registering unit"
 msgstr "تؤمار كردني يةكة"
 
@@ -857,12 +854,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
 
-msgid "Event details"
-msgstr "دريذةي رووداوةكان"
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -900,15 +891,6 @@ msgstr "پەوەندی درووستبکە"
 msgid "Results found"
 msgstr ""
 
-msgid "Open"
-msgstr ""
-
-msgid "All accessible"
-msgstr ""
-
-msgid "Organisation unit scope"
-msgstr ""
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
 
@@ -920,6 +902,27 @@ msgstr "بۆ کارکردن لەگەڵ پرۆگرامە هەڵبژێردراوە
 
 msgid "open the Tracker Capture app"
 msgstr "پرۆگرامی بەدواداچوونی کاپچەر/ کاپچەر تراکەر بکەرەوە"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr ""
+
+msgid "Enrollment date"
+msgstr ""
+
+msgid "Incident date"
+msgstr ""
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
@@ -974,12 +977,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "نمونەی یەکەی بەدواداچوون"
-
-msgid "Latitude"
-msgstr ""
-
-msgid "Longitude"
-msgstr ""
 
 msgid "Set coordinate"
 msgstr "هێڵی درێژی و پانی دیاریبکە"

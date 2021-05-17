@@ -70,7 +70,7 @@ const TeiRegistrationEntryPlain =
                       <TrackedEntityInstanceDataEntry
                           orgUnit={orgUnit}
                           formFoundation={formFoundation}
-                          programId={selectedScopeId}
+                          trackedEntityTypeId={selectedScopeId}
                           teiRegistrationMetadata={teiRegistrationMetadata}
                           id={id}
                           fieldOptions={fieldOptions}
@@ -79,7 +79,6 @@ const TeiRegistrationEntryPlain =
                           {...rest}
                       />
                       <div className={classes.marginTop}>
-
                           {
                               onSave &&
                               <Button

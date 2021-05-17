@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -153,9 +153,6 @@ msgstr "Přiřazený uživatel"
 msgid "Search for user"
 msgstr "Hledat uživatele"
 
-msgid "Complete event"
-msgstr "Dokončit událost"
-
 msgid "Basic info"
 msgstr "Základní informace"
 
@@ -194,9 +191,6 @@ msgstr "Aktivní"
 
 msgid "Completed"
 msgstr "Dokončeno"
-
-msgid "Assigned to"
-msgstr "Přiřazen k"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "Před uložením události prosím přidejte nebo zrušte komentář"
@@ -688,6 +682,9 @@ msgstr "Stav zápisu"
 msgid "Cancelled"
 msgstr "Zrušeno"
 
+msgid "Assigned to"
+msgstr "Přiřazen k"
+
 msgid "Registering unit"
 msgstr "Registrační jednotka"
 
@@ -871,12 +868,6 @@ msgstr "Hledat ve všech programech"
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
 
-msgid "Event details"
-msgstr "Podrobnosti události"
-
-msgid "Event completed"
-msgstr "Událost dokončena"
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -914,15 +905,6 @@ msgstr "Přidat vztah"
 msgid "Results found"
 msgstr "Nalezeny výsledky"
 
-msgid "Open"
-msgstr "Otevřít"
-
-msgid "All accessible"
-msgstr "Všechno přístupné"
-
-msgid "Organisation unit scope"
-msgstr "Rozsah organizační jednotky"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "Hledat {{uniqueAttrName}}"
 
@@ -934,6 +916,27 @@ msgstr "Chcete-li pracovat s vybraným programem,"
 
 msgid "open the Tracker Capture app"
 msgstr "otevřít aplikaci Tracker Capture"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Následovat"
+
+msgid "Enrollment date"
+msgstr "Datum zápisu"
+
+msgid "Incident date"
+msgstr "Datum incidentu"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
@@ -988,12 +991,6 @@ msgstr "Při ukládání zápisu došlo k chybě"
 
 msgid "tracked entity instance"
 msgstr "sledovaná instance entity"
-
-msgid "Latitude"
-msgstr "Zeměpisná šířka"
-
-msgid "Longitude"
-msgstr "Zeměpisná délka"
 
 msgid "Set coordinate"
 msgstr "Nastavit souřadnice"

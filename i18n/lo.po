@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -148,9 +148,6 @@ msgstr ""
 msgid "Search for user"
 msgstr ""
 
-msgid "Complete event"
-msgstr "Complete event"
-
 msgid "Basic info"
 msgstr ""
 
@@ -187,9 +184,6 @@ msgstr "ທີ່ຍັງນໍາໃຊ້ຢູ່"
 
 msgid "Completed"
 msgstr "ສໍາເລັດແລ້ວ"
-
-msgid "Assigned to"
-msgstr "Assigned to"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -668,6 +662,9 @@ msgstr ""
 msgid "Cancelled"
 msgstr "ຍົກເລີກແລ້ວ"
 
+msgid "Assigned to"
+msgstr "Assigned to"
+
 msgid "Registering unit"
 msgstr "ສະຖານທີ່ລົງທະບຽນ"
 
@@ -841,12 +838,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
-msgid "Event details"
-msgstr "ລາຍລະອຽດເຫດການ"
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -882,15 +873,6 @@ msgstr "ເພີ່ມຄວາມສໍາພັນ"
 msgid "Results found"
 msgstr ""
 
-msgid "Open"
-msgstr "ເປີດ"
-
-msgid "All accessible"
-msgstr "ເຂົ້າເຖິງໄດ້ໝົດ"
-
-msgid "Organisation unit scope"
-msgstr ""
-
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
@@ -901,6 +883,27 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "ຕິດຕາມ"
+
+msgid "Enrollment date"
+msgstr "ວັນທີ່ລົງທະບຽນ"
+
+msgid "Incident date"
+msgstr "ວັນທີເດືອນປີທີ່ເຫດການເກີດຂື້ນ"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
@@ -956,12 +959,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
-
-msgid "Latitude"
-msgstr "ເສັ້ນແວ້ງ"
-
-msgid "Longitude"
-msgstr "ເສັ້ນຂະໜານ"
 
 msgid "Set coordinate"
 msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"

@@ -1,2 +1,2 @@
 // @flow
-export { WidgetEnrollment } from './WidgetEnrollment.component';
+export { WidgetEnrollment } from './WidgetEnrollment.container';

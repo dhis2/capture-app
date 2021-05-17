@@ -85,6 +85,7 @@ class DataElementFactory {
                         .get(
                             'trackedEntityInstances',
                             {
+                                program: contextProps.programId,
                                 ou: orgUnitId,
                                 filter: `${dataElement.id}:EQ:${serverValue}`,
                             },
@@ -94,6 +95,7 @@ class DataElementFactory {
                         .get(
                             'trackedEntityInstances',
                             {
+                                program: contextProps.programId,
                                 ouMode: 'ACCESSIBLE',
                                 filter: `${dataElement.id}:EQ:${serverValue}`,
                             },

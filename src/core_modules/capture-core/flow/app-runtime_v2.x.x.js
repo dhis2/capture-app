@@ -44,7 +44,7 @@ declare module '@dhis2/app-runtime' {
         message: string,
     }
 
-    declare class FetchError extends Error implements FetchErrorPayload {
+    declare export class FetchError extends Error implements FetchErrorPayload {
         type: FetchErrorTypeName;
         details: FetchErrorDetails;
     }

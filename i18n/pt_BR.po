@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
@@ -148,9 +148,6 @@ msgstr ""
 msgid "Search for user"
 msgstr ""
 
-msgid "Complete event"
-msgstr ""
-
 msgid "Basic info"
 msgstr ""
 
@@ -187,9 +184,6 @@ msgstr "Activo"
 
 msgid "Completed"
 msgstr ""
-
-msgid "Assigned to"
-msgstr "Atribuido a"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -668,6 +662,9 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
+msgid "Assigned to"
+msgstr "Atribuido a"
+
 msgid "Registering unit"
 msgstr ""
 
@@ -841,12 +838,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
-msgid "Event details"
-msgstr ""
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -882,15 +873,6 @@ msgstr ""
 msgid "Results found"
 msgstr ""
 
-msgid "Open"
-msgstr ""
-
-msgid "All accessible"
-msgstr ""
-
-msgid "Organisation unit scope"
-msgstr ""
-
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
@@ -901,6 +883,27 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Seguimento"
+
+msgid "Enrollment date"
+msgstr ""
+
+msgid "Incident date"
+msgstr ""
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
@@ -956,12 +959,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
-
-msgid "Latitude"
-msgstr "Latitude"
-
-msgid "Longitude"
-msgstr "Longitude"
 
 msgid "Set coordinate"
 msgstr ""
