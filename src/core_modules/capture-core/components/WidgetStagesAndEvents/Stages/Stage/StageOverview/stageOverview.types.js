@@ -5,6 +5,6 @@ export type Props = {|
     title: string,
     icon?: Icon,
     description?: string,
-    events: any,
+    events: any[],
     ...CssClasses,
 |};

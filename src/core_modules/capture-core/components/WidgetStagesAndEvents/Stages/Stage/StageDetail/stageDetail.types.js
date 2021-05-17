@@ -1,7 +1,9 @@
 // @flow
 
+
 export type Props = {|
-    events: any,
+    events: any[],
     data: any,
     ...CssClasses,
 |};
+

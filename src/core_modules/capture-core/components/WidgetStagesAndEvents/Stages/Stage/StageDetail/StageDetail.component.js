@@ -11,9 +11,10 @@ import {
     Body,
 } from 'capture-ui';
 import { colors, spacersNum } from '@dhis2/ui';
-import { convertValue as convertClientToView } from '../../../../../converters/clientToView';
-import { convertValue as convertServerToClient } from '../../../../../converters/serverToClient';
+import { formatValueForView, getValueByKeyFromEvent } from './helpers';
+import { dataElementTypes } from '../../../../../metaData';
 import type { Props } from './stageDetail.types';
+
 
 const styles = {
     table: {
@@ -40,18 +41,19 @@ const StageDetailPlain = ({ events, data, classes }: Props) => {
 
     const dataSource = events.reduce((acc, currentEvent) => {
         const keys = [
-            { id: 'status', type: 'TEXT' },
-            { id: 'eventDate', type: 'DATE' },
-            { id: 'orgUnitName', type: 'TEXT' }];
+            { id: 'status', type: dataElementTypes.STATUS },
+            { id: 'eventDate', type: dataElementTypes.DATE },
+            { id: 'orgUnitName', type: dataElementTypes.TEXT }];
         const dataElementsInEvent = currentEvent.dataValues
             .map(item => ({ id: item.dataElement,
-                value: convertClientToView(
-                    convertServerToClient(item.value, data.get(item.dataElement).type),
-                    data.get(item.dataElement).type),
+                value: formatValueForView(item.value, data.get(item.dataElement).type),
             }));
 
         acc.push([
-            ...keys.map(key => ({ id: key.id, value: convertClientToView(currentEvent[key.id], key.type) })),
+            ...keys.map(key => ({
+                id: key.id,
+                value: formatValueForView(getValueByKeyFromEvent(currentEvent, key.id), key.type),
+            })),
             ...dataElementsInEvent]);
         return acc;
     }, []);
