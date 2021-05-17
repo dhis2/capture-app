@@ -91,6 +91,10 @@ class RulesValueConverter implements IConvertInputRulesValue {
     convertAge(value: any): string {
         return this.convertDate(value);
     }
+
+    convertOrgUnit(value: any): string {
+        return value.id;
+    }
 }
 
 export default new RulesValueConverter();

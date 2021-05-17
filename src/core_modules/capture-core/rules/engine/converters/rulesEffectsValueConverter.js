@@ -82,6 +82,9 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
             days: days.toString(),
         };
     }
+    convertOrgUnit(value: any): string {
+        return value.id;
+    }
 }
 
 export default new RulesValueConverter();
