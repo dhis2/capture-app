@@ -2,7 +2,7 @@
 import React, { type ComponentType } from 'react';
 import cx from 'classnames';
 import { withStyles, Tooltip } from '@material-ui/core';
-import { colors, spacersNum, IconInfo16 } from '@dhis2/ui';
+import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
@@ -18,9 +18,9 @@ const styles = {
         paddingRight: spacersNum.dp8,
 
     },
-    descriptionIcon: {
+    indicatorIcon: {
         paddingLeft: spacersNum.dp4,
-        paddingRight: spacersNum.dp4,
+        paddingRight: spacersNum.dp12,
     },
     title: {
         fontSize: 18,
@@ -32,13 +32,23 @@ const styles = {
     indicator: {
         padding: spacersNum.dp8,
         color: colors.grey600,
+        display: 'flex',
+    },
+    warningIndicator: {
+        color: colors.red500,
     },
     smallText: {
         fontSize: 13,
     },
 };
-export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props) => (
-    <div className={classes.container}>
+export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props) => {
+    const totalEvents = events.length;
+    const overdueEvents = events.filter(event =>
+        moment(event.dueDate).isSameOrBefore(new Date()) && event.status !== 'COMPLETED',
+    ).length;
+    const scheduledEvents = events.filter(event => event.status === 'SCHEDULE').length;
+
+    return (<div className={classes.container}>
 
         {
             icon && (
@@ -61,20 +71,32 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
             title={description}
             placement="top"
         >
-            <div className={classes.descriptionIcon}>
+            <div className={classes.indicatorIcon}>
                 <IconInfo16 />
             </div>
         </Tooltip>
 
         <div className={classes.indicator}>
-            {events.length > 1
-                ? i18n.t('{{ totalEvents }} events', { totalEvents: events.length })
+            {totalEvents > 1
+                ? i18n.t('{{ totalEvents }} events', { totalEvents })
                 : i18n.t('1 event')}
         </div>
+        {overdueEvents > 0 ? <div className={cx(classes.indicator, classes.warningIndicator)}>
+            <div className={classes.indicatorIcon}>
+                <IconWarning16 />
+            </div>
+            {i18n.t('{{ overdueEvents }} overdue', { overdueEvents })}
+        </div> : null}
+        {scheduledEvents > 0 ? <div className={classes.indicator}>
+            <div className={classes.indicatorIcon}>
+                <IconCalendar16 />
+            </div>
+            {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
+        </div> : null }
         <div className={cx(classes.smallText, classes.indicator)}>
             {i18n.t('Last updated {{date}}', { date: moment(events[0].lastUpdated).fromNow() })}
         </div>
-    </div>
-);
+    </div>);
+};
 
 export const StageOverview: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(StageOverviewPlain);
