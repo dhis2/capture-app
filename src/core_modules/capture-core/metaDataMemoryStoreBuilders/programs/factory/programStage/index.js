@@ -1,2 +1,2 @@
 // @flow
-export { default as ProgramStageFactory } from './ProgramStageFactory';
+export { ProgramStageFactory } from './ProgramStageFactory';

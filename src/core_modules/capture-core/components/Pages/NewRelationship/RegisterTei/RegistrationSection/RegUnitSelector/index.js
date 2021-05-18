@@ -1,3 +1,3 @@
 // @flow
 
-export { default as RegUnitSelector } from './RegUnitSelector.container';
+export { RegUnitSelector } from './RegUnitSelector.container';

@@ -14,7 +14,7 @@ import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
 import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
-import withErrorMessagePostProcessor from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import { urlArguments } from '../../../utils/url';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 

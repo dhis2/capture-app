@@ -7,7 +7,7 @@ import type {
     RenderFoundation,
     ProgramStage,
 } from '../../../../../../../metaData';
-import mainPropertyNames from '../../../../../../../events/mainPropertyNames.const';
+import { mainPropertyNames } from '../../../../../../../events/mainPropertyNames.const';
 
 export const getDefaultMainConfig = (stage: ProgramStage) => {
     const baseFields = [

@@ -1,3 +1,3 @@
 // @flow
-export { default as Category } from './Category';
-export { default as CategoryCombination } from './CategoryCombination';
+export { Category } from './Category';
+export { CategoryCombination } from './CategoryCombination';

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-import Label from '../internal/Label/Label.component';
+import { Label } from '../internal/Label/Label.component';
 import defaultClasses from './withLabel.module.css';
 
 type LabelHOCClasses = {
@@ -37,7 +37,7 @@ type HOCParamsContainer = {
     onGetUseVerticalOrientation?: ?onGetUseVerticalOrientation,
 };
 
-export default (hocParams: ?HOCParamsContainer) =>
+export const withLabel = (hocParams: ?HOCParamsContainer) =>
     (InnerComponent: React.ComponentType<any>) =>
         (class LabelHOC extends React.Component<Props> {
             labelContainerClass: ?string;

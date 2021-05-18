@@ -2,11 +2,11 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type Icon from '../Icon/Icon';
+import type { Icon } from '../Icon/Icon';
 
 export type Value = string | number | boolean | {};
 
-export default class Option {
+export class Option {
     _id: string;
     _value: Value;
     _text: string;

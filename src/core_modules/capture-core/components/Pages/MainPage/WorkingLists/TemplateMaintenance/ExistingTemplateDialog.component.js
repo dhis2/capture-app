@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Dialog } from '@material-ui/core';
-import ExistingTemplateContents from './ExistingTemplateContents.component';
+import { ExistingTemplateContents } from './ExistingTemplateContents.component';
 
 type Props = {
     open: boolean,
@@ -9,7 +9,7 @@ type Props = {
     onSaveTemplate: () => void,
 };
 
-const ExistingTemplateDialog = (props: Props) => {
+export const ExistingTemplateDialog = (props: Props) => {
     const {
         open,
         onClose,
@@ -29,5 +29,3 @@ const ExistingTemplateDialog = (props: Props) => {
         </Dialog>
     );
 };
-
-export default ExistingTemplateDialog;

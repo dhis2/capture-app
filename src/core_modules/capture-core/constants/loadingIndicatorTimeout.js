@@ -1,2 +1,2 @@
 // @flow
-export default 500;
+export const LOADING_INDICATOR_TIMEOUT = 500;

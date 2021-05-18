@@ -4,7 +4,7 @@ import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { BooleanFieldForForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
-const getBooleanField = (metaData: MetaDataElement, options: Object) => {
+export const getBooleanFieldConfig = (metaData: MetaDataElement, options: Object) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
@@ -17,5 +17,3 @@ const getBooleanField = (metaData: MetaDataElement, options: Object) => {
         props,
     }, metaData);
 };
-
-export default getBooleanField;

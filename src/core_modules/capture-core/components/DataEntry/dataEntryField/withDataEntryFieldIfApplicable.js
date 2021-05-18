@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import withDataEntryField from './withDataEntryField';
+import { withDataEntryField } from './withDataEntryField';
 
 type Props = {
 
@@ -34,6 +34,6 @@ const getDataEntryFieldIfApplicable = (settings: Settings, InnerComponent: React
         }
     };
 
-export default (settings: Settings) =>
+export const withDataEntryFieldIfApplicable = (settings: Settings) =>
     (InnerComponent: React.ComponentType<any>) =>
         getDataEntryFieldIfApplicable(settings, InnerComponent);

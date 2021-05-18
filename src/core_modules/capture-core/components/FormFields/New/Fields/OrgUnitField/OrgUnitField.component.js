@@ -3,7 +3,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import { DebounceField } from 'capture-ui';
-import OrgUnitTree from './OrgUnitTree.component';
+import { OrgUnitTree } from './OrgUnitTree.component';
 
 const getStyles = () => ({
     container: {
@@ -51,7 +51,7 @@ type Props = {
     },
 };
 
-class OrgUnitField extends React.Component<Props> {
+class OrgUnitFieldPlain extends React.Component<Props> {
     classes: Object;
     static defaultProps = {
         roots: [],
@@ -108,4 +108,4 @@ class OrgUnitField extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(OrgUnitField);
+export const OrgUnitField = withStyles(getStyles)(OrgUnitFieldPlain);

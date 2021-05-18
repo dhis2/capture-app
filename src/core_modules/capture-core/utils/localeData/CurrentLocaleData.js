@@ -12,7 +12,7 @@ export type LocaleDataType = {
     weekStartsOn: number
 }
 
-export default class CurrentLocaleData {
+export class CurrentLocaleData {
     // $FlowFixMe[missing-annot] automated comment
     static currentData;
 

@@ -9,12 +9,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import { errorCreator } from 'capture-core-utils';
-import Button from '../Buttons/Button.component';
-import ProgressButton from '../Buttons/ProgressButton.component';
-import DataEntry from './DataEntry.component';
+import { Button } from '../Buttons/Button.component';
+import { ProgressButton } from '../Buttons/ProgressButton.component';
+import { DataEntryComponent } from './DataEntry.component';
 import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
-import getDataEntryKey from './common/getDataEntryKey';
-import getStageFromEvent from '../../metaData/helpers/getStageFromEvent';
+import { getDataEntryKey } from './common/getDataEntryKey';
+import { getStageFromEvent } from '../../metaData/helpers/getStageFromEvent';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
 type Props = {
@@ -85,7 +85,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
             const eventFields = [];
             while (!done) {
                 currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
-                if (!currentInstance || currentInstance instanceof DataEntry) {
+                if (!currentInstance || currentInstance instanceof DataEntryComponent) {
                     done = true;
                 } else if (currentInstance.name === 'EventFieldBuilder') {
                     eventFields.push(currentInstance);
@@ -284,7 +284,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // todo is this being used  (report lgmt)
-export default (optionFn?: ?OptionFn) =>
+export const withCompleteButton = (optionFn?: ?OptionFn) =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowFixMe[missing-annot] automated comment
         connect(

@@ -5,7 +5,7 @@ type Props = {
 
 };
 
-class MultiSelectionsBoxes extends React.Component<Props> {
+export class MultiSelectionsBoxes extends React.Component<Props> {
     render() {
         return (
             <div>
@@ -14,5 +14,3 @@ class MultiSelectionsBoxes extends React.Component<Props> {
         );
     }
 }
-
-export default MultiSelectionsBoxes;

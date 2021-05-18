@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import ViewEvent from './ViewEventComponent/ViewEvent.container';
-import ViewEventNewRelationshipWrapper from './Relationship/ViewEventNewRelationshipWrapper.container';
+import { ViewEvent } from './ViewEventComponent/ViewEvent.container';
+import { ViewEventNewRelationshipWrapper } from './Relationship/ViewEventNewRelationshipWrapper.container';
 import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
 import { customOrgUnitIdIdReset, customProgramIdReset } from './ViewEventPage.actions';
 

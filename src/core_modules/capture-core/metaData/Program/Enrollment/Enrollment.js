@@ -12,7 +12,7 @@ type OptionFlags = {
     showIncidentDate: boolean,
 };
 
-export default class Enrollment {
+export class Enrollment {
     _labels: { [key: $Values<typeof labelKeys>]: string };
     _optionFlags: OptionFlags;
     _enrollmentForm: RenderFoundation;

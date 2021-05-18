@@ -11,7 +11,7 @@ import { loadApp } from './appStart.actions';
 import { addBeforeUnloadEventListener } from './unload';
 import { CacheExpired } from './CacheExpired.component';
 import { JSSProviderShell } from './JSSProviderShell.component';
-import theme from '../../styles/uiTheme';
+import { theme } from '../../styles/uiTheme';
 
 export const AppStart = () => {
     const [ready, setReadyStatus] = useState(false);

@@ -3,7 +3,7 @@ import React, { useCallback, memo, type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { IconButton, Paper, MenuList, MenuItem, Divider } from '@material-ui/core';
 import { MoreHoriz } from '@material-ui/icons';
-import Popper from '../../Popper/Popper.component';
+import { MenuPopper } from '../../Popper/Popper.component';
 import type { Props } from './listViewMenu.types';
 
 const getStyles = () => ({
@@ -96,7 +96,7 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
     }
 
     return (
-        <Popper
+        <MenuPopper
             getPopperAction={renderPopperAction}
             getPopperContent={renderPopperContent}
         />

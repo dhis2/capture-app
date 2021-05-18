@@ -7,8 +7,8 @@ import { capitalizeFirstLetter } from 'capture-core-utils/string';
 import '@joakim_sm/react-infinite-calendar/styles.css';
 import './customStyles.css';
 import { parseDate, convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
-import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
-import getTheme from './getTheme';
+import { CurrentLocaleData } from '../../../../utils/localeData/CurrentLocaleData';
+import { getTheme } from './getTheme';
 
 type Props = {
     onDateSelected: (value: any) => void,
@@ -26,7 +26,7 @@ const styles = () => ({
     container: {},
 });
 
-class D2DateCalendar extends Component<Props> {
+class D2DateCalendarPlain extends Component<Props> {
     handleChange: (e: any, dates: ?Array<Date>) => void;
     calendarLocaleData: Object;
     theme: Object;
@@ -155,4 +155,4 @@ class D2DateCalendar extends Component<Props> {
     }
 }
 
-export default withTheme()(withStyles(styles)(D2DateCalendar));
+export const D2DateCalendar = withTheme()(withStyles(styles)(D2DateCalendarPlain));

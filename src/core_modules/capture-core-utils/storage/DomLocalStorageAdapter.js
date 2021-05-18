@@ -53,7 +53,7 @@ class Indexer {
     }
 }
 
-class DomLocalStorageAdapter {
+export class DomLocalStorageAdapter {
     static storage = window.localStorage;
     static adapterName = 'DomLocalStorageAdapter';
     static CACHEVERSIONKEY = '__VERSION__';
@@ -266,5 +266,3 @@ class DomLocalStorageAdapter {
         return storeKey.replace(`${this.name}.${store}.`, '');
     }
 }
-
-export default DomLocalStorageAdapter;

@@ -3,7 +3,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { withStyles, IconButton } from '@material-ui/core';
 import { Clear as ClearIcon } from '@material-ui/icons';
-import OrgUnitField from './OrgUnitField.component';
+import { OrgUnitField } from './OrgUnitField.component';
 
 const getStyles = (theme: Theme) => ({
     selectedOrgUnitContainer: {
@@ -43,7 +43,7 @@ type Props = {
     }
 }
 
-class SingleOrgUnitSelectField extends React.Component<Props> {
+class SingleOrgUnitSelectFieldPlain extends React.Component<Props> {
     renderSelectedOrgUnit = (selectedOrgUnit: OrgUnitValue) => {
         const { classes, disabled } = this.props;
         const buttonClass = classNames(classes.clearSelectedOrgUnitButton, {
@@ -90,4 +90,4 @@ class SingleOrgUnitSelectField extends React.Component<Props> {
         return value ? this.renderSelectedOrgUnit(value) : this.renderOrgUnitField();
     }
 }
-export default withStyles(getStyles)(SingleOrgUnitSelectField);
+export const SingleOrgUnitSelectField = withStyles(getStyles)(SingleOrgUnitSelectFieldPlain);

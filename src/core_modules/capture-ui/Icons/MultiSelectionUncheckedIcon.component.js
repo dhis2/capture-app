@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import SvgIcon from '../internal/SvgIcon/SvgIcon.component';
+import { SvgIcon } from '../internal/SvgIcon/SvgIcon.component';
 
 type Props = {
 

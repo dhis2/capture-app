@@ -1,6 +1,6 @@
 // @flow
-export { default as programCollection } from './programCollection/programCollection';
-export { default as trackedEntityTypesCollection } from './trackedEntityTypeCollection/trackedEntityTypeCollection';
-export { default as optionSetStore } from './optionSets/optionSets.store';
-export { default as constantsStore } from './constants/constants.store';
-export { default as systemSettingsStore } from './systemSettings/systemSettings.store';
+export { programCollection } from './programCollection/programCollection';
+export { trackedEntityTypesCollection } from './trackedEntityTypeCollection/trackedEntityTypeCollection';
+export { optionSetStore } from './optionSets/optionSets.store';
+export { constantsStore } from './constants/constants.store';
+export { systemSettingsStore } from './systemSettings/systemSettings.store';

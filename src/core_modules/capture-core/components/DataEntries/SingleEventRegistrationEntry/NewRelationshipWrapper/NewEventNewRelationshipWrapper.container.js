@@ -2,9 +2,9 @@
 import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { newEventCancelNewRelationship, addNewEventRelationship } from './NewEventNewRelationshipWrapper.actions';
-import NewRelationshipWrapperComponent from './NewEventNewRelationshipWrapper.component';
+import { NewRelationshipWrapperComponent } from './NewEventNewRelationshipWrapper.component';
 import { makeRelationshipTypesSelector } from './NewEventNewRelationshipWrapper.selectors';
-import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 
 const makeMapStateToProps = () => {
     const relationshipTypesSelector = makeRelationshipTypesSelector();

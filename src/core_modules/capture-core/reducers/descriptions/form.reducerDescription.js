@@ -11,7 +11,7 @@ import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/
 import { actionTypes as rulesEffectsActionTypes } from '../../rules/actionsCreator';
 import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
-import getOrgUnitRootsKey from '../../components/D2Form/field/Components/OrgUnitField/getOrgUnitRootsKey';
+import { getOrgUnitRootsKey } from '../../components/D2Form/field/Components/OrgUnitField/getOrgUnitRootsKey';
 import {
     set as setStoreRoots,
 } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';

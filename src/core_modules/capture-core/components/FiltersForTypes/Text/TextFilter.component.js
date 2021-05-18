@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Input from './Input.component';
+import { Input } from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
@@ -14,7 +14,7 @@ type Props = {
 
 // $FlowSuppress
 // $FlowFixMe[incompatible-variance] automated comment
-class TextFilter extends Component<Props> implements UpdatableFilterContent<Value> {
+export class TextFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
         const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
 
@@ -46,5 +46,3 @@ class TextFilter extends Component<Props> implements UpdatableFilterContent<Valu
         );
     }
 }
-
-export default TextFilter;

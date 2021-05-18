@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
-import withFocusHandler from '../TextInput/withFocusHandler';
-import TextInput from '../TextInput/TextInput.component';
+import { withTextFieldFocusHandler } from '../TextInput/withFocusHandler';
+import { TextInput } from '../TextInput/TextInput.component';
 
 type Props = {
     onBlur: (value: any) => void,
     onChange?: ?(value: any) => void,
 }
 
-class DateInput extends React.Component<Props> {
+class DateInputPlain extends React.Component<Props> {
     handleBlur = (event) => {
         this.props.onBlur(event);
     }
@@ -32,4 +32,4 @@ class DateInput extends React.Component<Props> {
     }
 }
 
-export default withFocusHandler()(DateInput);
+export const DateInput = withTextFieldFocusHandler()(DateInputPlain);

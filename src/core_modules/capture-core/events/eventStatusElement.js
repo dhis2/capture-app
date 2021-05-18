@@ -2,7 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { DataElement, OptionSet, Option, dataElementTypes } from '../metaData';
 
-const eventStatusElement = new DataElement((o) => {
+export const eventStatusElement = new DataElement((o) => {
     o.id = 'status';
     o.type = dataElementTypes.TEXT;
 });
@@ -19,5 +19,3 @@ const eventStatusOptionSet = new OptionSet('statusOptionSet', [
 ], null, eventStatusElement);
 
 eventStatusElement.optionSet = eventStatusOptionSet;
-
-export default eventStatusElement;

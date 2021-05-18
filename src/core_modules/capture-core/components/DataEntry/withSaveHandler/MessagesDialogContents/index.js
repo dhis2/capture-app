@@ -1,2 +1,2 @@
 // @flow
-export { default as MessagesDialogContents } from './MessagesDialogContents.component';
+export { MessagesDialogContents } from './MessagesDialogContents.component';

@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import EventDetails from '../EventDetailsSection/EventDetailsSection.container';
-import Button from '../../../Buttons/Button.component';
-import RightColumnWrapper from '../RightColumn/RightColumnWrapper.component';
+import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
+import { Button } from '../../../Buttons/Button.component';
+import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 import type { ProgramStage } from '../../../../metaData';
 
 
@@ -55,7 +55,7 @@ type Props = {
 };
 
 
-class ViewEvent extends Component<Props> {
+class ViewEventPlain extends Component<Props> {
     handleGoBackToAllEvents = () => {
         this.props.onBackToAllEvents();
     }
@@ -86,4 +86,4 @@ class ViewEvent extends Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(ViewEvent);
+export const ViewEventComponent = withStyles(getStyles)(ViewEventPlain);

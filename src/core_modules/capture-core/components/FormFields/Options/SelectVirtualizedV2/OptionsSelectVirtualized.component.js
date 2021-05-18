@@ -11,7 +11,7 @@ import 'react-virtualized/styles.css';
 import 'react-virtualized-select/styles.css';
 import './optionsSelectVirtualized.css';
 
-import VirtualizedOption from './OptionsSelectVirtualizedOption.component';
+import { OptionsSelectVirtualizedOption } from './OptionsSelectVirtualizedOption.component';
 
 export type VirtualizedOptionConfig = {label: string, value: any, iconLeft?: ?React.Node, iconRight?: ?React.Node };
 
@@ -69,7 +69,7 @@ type OptionContainer = {
     valueArray: ?Array<VirtualizedOptionConfig>,
 }
 
-class OptionsSelectVirtualized extends React.Component<Props, State> {
+class OptionsSelectVirtualizedPlain extends React.Component<Props, State> {
     static getFilteredOptions(options: Array<VirtualizedOptionConfig>, filterValue: any): Array<VirtualizedOptionConfig> {
         const filterValueLC = filterValue.toLowerCase();
         return (options && options.filter(o => o.label.toLowerCase().indexOf(filterValueLC) > -1)) || [];
@@ -161,7 +161,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
     renderOption(optionContainer: OptionContainer) {
         const inFocus = optionContainer.option === optionContainer.focusedOption;
         return (
-            <VirtualizedOption
+            <OptionsSelectVirtualizedOption
                 key={optionContainer.option.value}
                 option={optionContainer.option}
                 inFocus={inFocus}
@@ -261,4 +261,4 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(getStyles)(OptionsSelectVirtualized);
+export const OptionsSelectVirtualized = withStyles(getStyles)(OptionsSelectVirtualizedPlain);

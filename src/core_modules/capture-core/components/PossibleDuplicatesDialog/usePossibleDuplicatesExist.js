@@ -1,6 +1,6 @@
 // @flow
 import { useSelector } from 'react-redux';
-import getDataEntryKey from '../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 
 export const usePossibleDuplicatesExist = (dataEntryId: string) => {
     const { itemId } = useSelector(({ dataEntries }) => (dataEntries[dataEntryId] ? dataEntries[dataEntryId] : {}));

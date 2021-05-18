@@ -4,7 +4,7 @@ import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { AgeFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
-const getAgeFieldForCustomForm = (metaData: MetaDataElement) => {
+export const getAgeFieldConfigForCustomForm = (metaData: MetaDataElement) => {
     const props = createProps({
         orientation: orientations.HORIZONTAL,
         shrinkDisabled: false,
@@ -15,5 +15,3 @@ const getAgeFieldForCustomForm = (metaData: MetaDataElement) => {
         props,
     }, metaData);
 };
-
-export default getAgeFieldForCustomForm;

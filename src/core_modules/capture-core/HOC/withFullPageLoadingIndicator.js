@@ -6,7 +6,7 @@ type Props = {
     ready: boolean,
 };
 
-const withLoadingIndicator =
+export const withLoadingIndicator =
     (readyFn?: (props: any) => boolean) =>
         (InnerComponent: React.ComponentType<any>) =>
             (props: Props) => {
@@ -24,5 +24,3 @@ const withLoadingIndicator =
                     />
                 );
             };
-
-export default withLoadingIndicator;

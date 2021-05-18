@@ -4,7 +4,7 @@ import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { BooleanFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
-const getBooleanField = (metaData: MetaDataElement) => {
+export const getBooleanFieldConfigForCustomForm = (metaData: MetaDataElement) => {
     const props = createProps({
         orientation: orientations.HORIZONTAL,
         id: metaData.id,
@@ -15,5 +15,3 @@ const getBooleanField = (metaData: MetaDataElement) => {
         props,
     }, metaData);
 };
-
-export default getBooleanField;

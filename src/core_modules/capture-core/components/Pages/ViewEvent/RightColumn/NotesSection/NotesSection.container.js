@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import NotesSection from './NotesSection.component';
+import { NotesSectionComponent } from './NotesSection.component';
 import { requestSaveEventNote, updateEventNoteField } from '../../Notes/viewEventNotes.actions';
 
 const mapStateToProps = (state: ReduxState) => {
@@ -24,4 +24,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(NotesSection);
+export const NotesSection = connect(mapStateToProps, mapDispatchToProps)(NotesSectionComponent);

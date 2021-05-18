@@ -5,11 +5,11 @@ import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
-import AgeNumberInput from '../internal/AgeInput/AgeNumberInput.component';
-import AgeDateInput from '../internal/AgeInput/AgeDateInput.component';
+import { AgeNumberInput } from '../internal/AgeInput/AgeNumberInput.component';
+import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
-import orientations from '../constants/orientations.const';
-import withInternalChangeHandler from '../HOC/withInternalChangeHandler';
+import { orientations } from '../constants/orientations.const';
+import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
 
 type AgeValues = {
     date?: ?string,
@@ -92,7 +92,7 @@ const messageTypeClass = {
     validating: 'innerInputValidating',
 };
 
-class D2AgeField extends Component<Props> {
+class D2AgeFieldPlain extends Component<Props> {
     static isEmptyNumbers(values: AgeValues) {
         return !values.years && !values.months && !values.days;
     }
@@ -101,9 +101,9 @@ class D2AgeField extends Component<Props> {
     }
     // eslint-disable-next-line complexity
     static isValidNumbers(values: AgeValues) {
-        return D2AgeField.isPositiveOrZeroNumber(values.years || '0') &&
-            D2AgeField.isPositiveOrZeroNumber(values.months || '0') &&
-            D2AgeField.isPositiveOrZeroNumber(values.days || '0');
+        return D2AgeFieldPlain.isPositiveOrZeroNumber(values.years || '0') &&
+            D2AgeFieldPlain.isPositiveOrZeroNumber(values.months || '0') &&
+            D2AgeFieldPlain.isPositiveOrZeroNumber(values.days || '0');
     }
 
     static getNumberOrZero(value: ?string) {
@@ -118,20 +118,20 @@ class D2AgeField extends Component<Props> {
         const { onParseDate, onGetFormattedDateStringFromMoment, onRemoveFocus, moment } = this.props;
 
         onRemoveFocus && onRemoveFocus();
-        if (D2AgeField.isEmptyNumbers(values)) {
+        if (D2AgeFieldPlain.isEmptyNumbers(values)) {
             this.props.onBlur(values.date ? { date: values.date } : null);
             return;
         }
 
-        if (!D2AgeField.isValidNumbers(values)) {
+        if (!D2AgeFieldPlain.isValidNumbers(values)) {
             this.props.onBlur({ ...values, date: '' });
             return;
         }
 
         const momentDate = moment(undefined, undefined, true);
-        momentDate.subtract(D2AgeField.getNumberOrZero(values.years), 'years');
-        momentDate.subtract(D2AgeField.getNumberOrZero(values.months), 'months');
-        momentDate.subtract(D2AgeField.getNumberOrZero(values.days), 'days');
+        momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.years), 'years');
+        momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.months), 'months');
+        momentDate.subtract(D2AgeFieldPlain.getNumberOrZero(values.days), 'days');
         const calculatedValues = getCalculatedValues(
             onGetFormattedDateStringFromMoment(momentDate),
             onParseDate,
@@ -261,4 +261,4 @@ class D2AgeField extends Component<Props> {
     }
 }
 
-export default withInternalChangeHandler()(D2AgeField);
+export const AgeField = withInternalChangeHandler()(D2AgeFieldPlain);

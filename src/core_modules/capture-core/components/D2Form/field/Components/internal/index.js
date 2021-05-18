@@ -1,7 +1,5 @@
 // @flow
-export { default as withRequiredFieldCalculation } from './withRequiredFieldCalculation/withRequiredFieldCalculation';
-export { default as withDisabledFieldCalculation } from './withDisabledFieldCalculation/withDisabledFieldCalculation';
-export {
-    default as withDefaultFieldWrapperForForm,
-} from './withDefaultFieldWrapperForForm/withDefaultFieldWrapperForForm';
-export { default as withCustomElementContainer } from './withCustomElementContainer/withCustomElementContainer';
+export { withRequiredFieldCalculation } from './withRequiredFieldCalculation/withRequiredFieldCalculation';
+export { withDisabledFieldCalculation } from './withDisabledFieldCalculation/withDisabledFieldCalculation';
+export { withDefaultFieldWrapperForForm } from './withDefaultFieldWrapperForForm/withDefaultFieldWrapperForForm';
+export { withCustomElementContainer } from './withCustomElementContainer/withCustomElementContainer';

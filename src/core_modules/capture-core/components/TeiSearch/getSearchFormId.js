@@ -1,6 +1,6 @@
 // @flow
 
-export default function getSearchFormId(
+export function getSearchFormId(
     searchId: string,
     contextId: string,
     searchGroupId: string,

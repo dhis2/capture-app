@@ -11,14 +11,14 @@ import Grid from '@material-ui/core/Grid';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { programCollection } from '../../../../metaDataMemoryStores';
-import VirtualizedSelect from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import ProgramList from './ProgramList';
-import CategorySelector from './CategorySelector.component';
+import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { ProgramList } from './ProgramList';
+import { CategorySelector } from './CategorySelector.component';
 
 import type { Program } from '../../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
-import LinkButton from '../../../Buttons/LinkButton.component';
+import { LinkButton } from '../../../Buttons/LinkButton.component';
 import { urlArguments } from '../../../../utils/url';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
@@ -152,7 +152,7 @@ type Props = {
     classes: Object,
 };
 
-class ProgramSelector extends Component<Props> {
+class ProgramSelectorPlain extends Component<Props> {
     handleClick: (program: Object) => void;
     handleClickCategoryOption: (value: string, value: string) => void;
     programsArray: Array<Program>;
@@ -348,7 +348,7 @@ class ProgramSelector extends Component<Props> {
                         return (
                             <div>
                                 <div id="program-selector">
-                                    <VirtualizedSelect
+                                    <OptionsSelectVirtualized
                                         options={programOptions}
                                         onSelect={handleClickProgram}
                                         placeholder={i18n.t('Select program')}
@@ -378,4 +378,4 @@ class ProgramSelector extends Component<Props> {
         return this.renderWithoutSelectedProgram(programOptions);
     }
 }
-export default withStyles(styles, { index: 1 })(ProgramSelector);
+export const ProgramSelector = withStyles(styles, { index: 1 })(ProgramSelectorPlain);

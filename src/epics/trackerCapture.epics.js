@@ -198,7 +198,7 @@ import {
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 
-export default combineEpics(
+export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
     resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,

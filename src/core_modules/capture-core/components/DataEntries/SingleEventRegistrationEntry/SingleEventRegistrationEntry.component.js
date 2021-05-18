@@ -2,7 +2,7 @@
 import React from 'react';
 import { NewEventDataEntryWrapper } from './DataEntryWrapper/NewEventDataEntryWrapper.container';
 import { NewRelationshipWrapper } from './NewRelationshipWrapper/NewEventNewRelationshipWrapper.container';
-import SelectionsNoAccess from './SelectionsNoAccess/dataEntrySelectionsNoAccess.container';
+import { SelectionsNoAccess } from './SelectionsNoAccess/dataEntrySelectionsNoAccess.container';
 
 type Props = {|
     showAddRelationship: boolean,

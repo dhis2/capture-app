@@ -1,2 +1,2 @@
 // @flow
-export { default as Assignee } from './Assignee.component';
+export { Assignee } from './Assignee.component';

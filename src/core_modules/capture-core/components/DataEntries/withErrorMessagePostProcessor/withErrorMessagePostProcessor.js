@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import UniqueTEADuplicate from './UniqueTEADuplicate/UniqueTEADuplicate.component';
+import { UniqueTEADuplicate } from './UniqueTEADuplicate/UniqueTEADuplicate.component';
 
 type Props = {
     onLink?: (teiId?: ?string, values: Object) => void,
@@ -12,7 +12,7 @@ type CacheItem = {
     outputElement: React.Node,
 };
 
-export default () => (InnerComponent: React.ComponentType<any>) =>
+export const withErrorMessagePostProcessor = () => (InnerComponent: React.ComponentType<any>) =>
     class ErrorMessagePostProcessorHOC extends React.Component<Props> {
         cache: CacheItem;
         constructor(props: Props) {

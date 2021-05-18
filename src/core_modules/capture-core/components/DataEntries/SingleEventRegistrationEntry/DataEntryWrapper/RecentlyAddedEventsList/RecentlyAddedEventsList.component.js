@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import i18n from '@dhis2/d2-i18n';
-import OfflineEventsList from '../../../../EventsList/OfflineEventsList/OfflineEventsList.component';
+import { OfflineEventsList } from '../../../../EventsList/OfflineEventsList/OfflineEventsList.component';
 import { listId } from './RecentlyAddedEventsList.const';
 
 type Props = {
@@ -23,7 +23,7 @@ const styles = (theme: Theme) => ({
     },
 });
 
-const NewEventsList = (props: Props) => {
+const NewEventsListPlain = (props: Props) => {
     const { classes, ...passOnProps } = props;
     const eventsAdded = props.events ? Object.keys(props.events).length : 0;
     if (eventsAdded === 0) {
@@ -47,4 +47,4 @@ const NewEventsList = (props: Props) => {
     );
 };
 
-export default withStyles(styles)(NewEventsList);
+export const NewEventsList = withStyles(styles)(NewEventsListPlain);

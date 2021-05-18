@@ -44,7 +44,7 @@ type Props = {
     className: string,
 };
 
-class Button extends React.Component<Props> {
+export class Button extends React.Component<Props> {
     static defaultProps = {
         size: buttonSizes.medium,
         kind: buttonKinds.basic,
@@ -68,6 +68,3 @@ class Button extends React.Component<Props> {
         );
     }
 }
-
-export default Button;
-

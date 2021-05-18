@@ -1,5 +1,5 @@
 // @flow
-import OrgUnitTree from '../../../../FormFields/OrgUnitTree/OrgUnitTree.component';
+import { OrgUnitTree } from '../../../../FormFields/OrgUnitTree/OrgUnitTree.component';
 import {
     withGotoInterface,
     withHideCompatibility,
@@ -14,7 +14,7 @@ import {
     withCustomElementContainer,
 } from '../internal';
 
-export default withGotoInterface()(
+export const OrgUnitFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

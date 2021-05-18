@@ -5,7 +5,7 @@ import type { RenderFoundation } from '../../RenderFoundation';
 import type { InputSearchGroup } from '../../InputSearchGroup';
 import type { TrackedEntityType } from '../../TrackedEntityType';
 
-export default class TeiRegistration {
+export class TeiRegistration {
     _form: RenderFoundation;
     _inputSearchGroups: ?Array<InputSearchGroup>;
     _trackedEntityType: TrackedEntityType;

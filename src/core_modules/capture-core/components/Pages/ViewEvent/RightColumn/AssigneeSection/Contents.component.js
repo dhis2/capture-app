@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
-import DisplayMode from './DisplayMode.component';
-import EditMode from './EditMode.component';
+import { DisplayMode } from './DisplayMode.component';
+import { EditMode } from './EditMode.component';
 
 type Props = {
     onSet: (user: Object) => void,
 };
 
-const Contents = (props: Props) => {
+export const Contents = (props: Props) => {
     const { onSet, ...passOnProps } = props;
     const [editMode, setEditMode] = React.useState(false);
 
@@ -38,5 +38,3 @@ const Contents = (props: Props) => {
         />
     );
 };
-
-export default Contents;

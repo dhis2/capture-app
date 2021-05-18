@@ -6,7 +6,7 @@ import {
     dataElementTypes as elementTypeKeys,
     type EventProgram,
 } from '../../../../../metaData';
-import mainPropertyNames from '../../../../../events/mainPropertyNames.const';
+import { mainPropertyNames } from '../../../../../events/mainPropertyNames.const';
 import type {
     MainColumnConfig,
     MetadataColumnConfig,

@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import ProgramSelector from './ProgramSelector.component';
+import { ProgramSelectorComponent } from './ProgramSelector.component';
 import { changeProgram, clearProgramFilter } from '../registrationSection.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
@@ -20,4 +20,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(ProgramSelector);
+export const ProgramSelector = connect(mapStateToProps, mapDispatchToProps)(ProgramSelectorComponent);

@@ -7,10 +7,10 @@ import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import { AddLocationIcon } from '../Icons';
-import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.component';
+import { CoordinateInput } from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.module.css';
-import orientations from '../constants/orientations.const';
-import Button from '../Buttons/Button.component';
+import { orientations } from '../constants/orientations.const';
+import { Button } from '../Buttons/Button.component';
 
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
@@ -41,7 +41,7 @@ const coordinateKeys = {
     LONGITUDE: 'longitude',
 };
 
-export default class D2Coordinate extends React.Component<Props, State> {
+export class CoordinateField extends React.Component<Props, State> {
     mapInstance: ?any;
 
     static defaultProps = {

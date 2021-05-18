@@ -10,10 +10,10 @@ import {
     isValidNegativeInteger,
     isValidZeroOrPositiveInteger,
 } from 'capture-core-utils/validators/form';
-import Min from './Min.component';
-import Max from './Max.component';
+import { MinNumericFilter } from './Min.component';
+import { MaxNumericFilter } from './Max.component';
 import { dataElementTypes } from '../../../metaData';
-import type D2TextField from '../../FormFields/Generic/D2TextField.component';
+import type { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 import { getNumericFilterData } from './numericFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
 
@@ -60,7 +60,7 @@ type Props = {
 };
 
 // $FlowFixMe[incompatible-variance] automated comment
-class NumericFilter extends Component<Props> implements UpdatableFilterContent<Value> {
+class NumericFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     static validateField(value: ?string, type: $Keys<typeof dataElementTypes>) {
         if (!value) {
             return {
@@ -189,7 +189,7 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
                     >
                         { /* $FlowSuppress: Flow not working 100% with HOCs */ }
                         {/* $FlowFixMe[prop-missing] automated comment */}
-                        <Min
+                        <MinNumericFilter
                             value={value && value.min}
                             error={minValueError}
                             errorClass={classes.error}
@@ -207,7 +207,7 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
                     >
                         { /* $FlowSuppress: Flow not working 100% with HOCs */ }
                         {/* $FlowFixMe[prop-missing] automated comment */}
-                        <Max
+                        <MaxNumericFilter
                             value={value && value.max}
                             error={maxValueError}
                             errorClass={classes.error}
@@ -225,4 +225,4 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
     }
 }
 
-export default withStyles(getStyles)(NumericFilter);
+export const NumericFilter = withStyles(getStyles)(NumericFilterPlain);

@@ -48,7 +48,7 @@ function Node({
     );
 }
 
-export default class Tree extends React.Component {
+export class Tree extends React.Component {
     updateState(list, open, value) {
         if (!Array.isArray(list)) {
             return list;

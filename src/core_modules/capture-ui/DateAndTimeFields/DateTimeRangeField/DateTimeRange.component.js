@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import DateTimeField from '../DateTimeField/DateTime.component';
-import withFocusSaver from '../../HOC/withFocusSaver';
+import { DateTimeField } from '../DateTimeField/DateTime.component';
+import { withFocusSaver } from '../../HOC/withFocusSaver';
 import defaultClasses from './dateTimeRangeField.module.css';
-import InnerMessage from '../../internal/InnerMessage/InnerMessage.component';
+import { InnerMessage } from '../../internal/InnerMessage/InnerMessage.component';
 
 const RangeInputField = withFocusSaver()(DateTimeField);
 
@@ -36,7 +36,7 @@ const inputKeys = {
     TO: 'to',
 };
 
-class DateTimeRangeField extends React.Component<Props> {
+export class DateTimeRangeField extends React.Component<Props> {
     touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
@@ -162,4 +162,3 @@ class DateTimeRangeField extends React.Component<Props> {
         );
     }
 }
-export default DateTimeRangeField;

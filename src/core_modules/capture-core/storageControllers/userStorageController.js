@@ -46,7 +46,7 @@ const storeSpecificCreateActions = {
     },
 };
 
-async function initUserControllerAsync(mainStorageController: typeof StorageController) {
+export async function initUserControllerAsync(mainStorageController: typeof StorageController) {
     const userStorageController =
         createStorageController(mainStorageController);
 
@@ -74,5 +74,3 @@ async function initUserControllerAsync(mainStorageController: typeof StorageCont
         );
     return userStorageController;
 }
-
-export default initUserControllerAsync;

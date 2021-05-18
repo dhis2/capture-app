@@ -5,7 +5,7 @@
  * @param {string} value
  * @returns
  */
-const isValidInteger = (value: string) => {
+export const isValidInteger = (value: string) => {
     if (isNaN(value)) {
         return false;
     }
@@ -13,5 +13,3 @@ const isValidInteger = (value: string) => {
     const number = Number(value);
     return Number.isSafeInteger(number);
 };
-
-export default isValidInteger;

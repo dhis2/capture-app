@@ -21,4 +21,4 @@ class OptionSetStore {
     }
 }
 
-export default new OptionSetStore();
+export const optionSetStore = new OptionSetStore();

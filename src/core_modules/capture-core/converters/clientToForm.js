@@ -3,7 +3,7 @@ import { moment } from 'capture-core-utils/moment';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { dataElementTypes } from '../metaData';
 
-import stringifyNumber from './common/stringifyNumber';
+import { stringifyNumber } from './common/stringifyNumber';
 
 type DateTimeFormValue = {
     date: string,

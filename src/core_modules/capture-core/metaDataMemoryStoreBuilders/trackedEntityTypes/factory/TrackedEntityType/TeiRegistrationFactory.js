@@ -16,10 +16,10 @@ import type {
     CachedTrackedEntityType,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
-import DataElementFactory from './DataElementFactory';
+import { DataElementFactory } from './DataElementFactory';
 import type { ConstructorInput } from './teiRegistrationFactory.types';
 
-class TeiRegistrationFactory {
+export class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
         const element = new DataElement((o) => {
             o.id = searchGroupElement.id;
@@ -194,5 +194,3 @@ class TeiRegistrationFactory {
         });
     }
 }
-
-export default TeiRegistrationFactory;

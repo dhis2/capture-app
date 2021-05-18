@@ -14,7 +14,7 @@ type Props = {
     classes?: ?Object,
 }
 
-export default function InnerMessage(props: Props) {
+export function InnerMessage(props: Props) {
     const { innerMessage: messageContainer, messageKey: key, classes } = props;
     if (messageContainer) {
         const message = messageContainer.message && messageContainer.message[key];

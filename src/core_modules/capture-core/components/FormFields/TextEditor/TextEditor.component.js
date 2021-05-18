@@ -36,7 +36,7 @@ const styles = theme => ({
 
 const editorDefaultValue = '<p><br></p>';
 
-class TextEditor extends React.Component<Props, State> {
+class TextEditorPlain extends React.Component<Props, State> {
     static defaultProps = {
         format: 'html',
     }
@@ -128,4 +128,4 @@ class TextEditor extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(TextEditor);
+export const TextEditor = withStyles(styles)(TextEditorPlain);

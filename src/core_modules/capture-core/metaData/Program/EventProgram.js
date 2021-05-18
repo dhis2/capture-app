@@ -2,10 +2,10 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import Program from './Program';
-import type ProgramStage from './ProgramStage';
+import { Program } from './Program';
+import type { ProgramStage } from './ProgramStage';
 
-export default class EventProgram extends Program {
+export class EventProgram extends Program {
     static EVENT_PROGRAM_STAGE_KEY = 'EventProgramStage';
 
     constructor(initFn: ?(_this: EventProgram) => void) {

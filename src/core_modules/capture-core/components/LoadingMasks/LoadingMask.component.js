@@ -7,7 +7,7 @@ type Props = {
 
 };
 
-const LoadingMask = (props: Props) => {
+export const LoadingMask = (props: Props) => {
     const { ...passOnProps } = props;
 
     return (
@@ -16,5 +16,3 @@ const LoadingMask = (props: Props) => {
         />
     );
 };
-
-export default LoadingMask;

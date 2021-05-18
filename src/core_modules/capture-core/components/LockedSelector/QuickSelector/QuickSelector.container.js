@@ -1,7 +1,7 @@
 // @flow
 
 import { connect } from 'react-redux';
-import QuickSelector from './QuickSelector.component';
+import { QuickSelectorComponent } from './QuickSelector.component';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 import {
@@ -63,4 +63,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(QuickSelector);
+export const QuickSelector = connect(mapStateToProps, mapDispatchToProps)(QuickSelectorComponent);

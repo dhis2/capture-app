@@ -18,7 +18,7 @@ const getStyles = () => ({
     },
 });
 
-class ViewModeField extends React.Component<Props> {
+class ViewModeFieldPlain extends React.Component<Props> {
     render() {
         const { value, valueConverter, classes } = this.props;
         const displayValue = valueConverter ? valueConverter(value) : value;
@@ -31,4 +31,4 @@ class ViewModeField extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(ViewModeField);
+export const ViewModeField = withStyles(getStyles)(ViewModeFieldPlain);

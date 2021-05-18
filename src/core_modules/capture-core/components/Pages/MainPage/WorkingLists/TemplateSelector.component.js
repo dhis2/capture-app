@@ -3,9 +3,9 @@ import * as React from 'react';
 import { fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import TemplateSelectorChip from './TemplateSelectorChip.component';
-import CaptureScrollHeight from './CaptureScrollHeight.component';
-import LinkButton from '../../../Buttons/LinkButton.component';
+import { TemplateSelectorChip } from './TemplateSelectorChip.component';
+import { CaptureScrollHeight } from './CaptureScrollHeight.component';
+import { LinkButton } from '../../../Buttons/LinkButton.component';
 import type { WorkingListTemplates } from './workingLists.types';
 
 const getBorder = (theme: Theme) => {
@@ -57,7 +57,7 @@ type Props = {
     classes: Object,
 };
 
-const TemplateSelector = (props: Props) => {
+const TemplateSelectorPlain = (props: Props) => {
     const {
         templates,
         currentTemplateId,
@@ -145,4 +145,4 @@ const TemplateSelector = (props: Props) => {
     );
 };
 
-export default withStyles(getStyles)(TemplateSelector);
+export const TemplateSelector = withStyles(getStyles)(TemplateSelectorPlain);

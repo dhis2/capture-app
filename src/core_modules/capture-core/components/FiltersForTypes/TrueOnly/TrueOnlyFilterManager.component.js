@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import TrueOnlyFilter from './TrueOnlyFilter.component';
+import { TrueOnlyFilter } from './TrueOnlyFilter.component';
 import type { TrueOnlyFilterData } from './types';
 
 type Props = {
@@ -12,7 +12,7 @@ type State = {
     value: ?Array<string>,
 };
 
-class TrueOnlyFilterManager extends React.Component<Props, State> {
+export class TrueOnlyFilterManager extends React.Component<Props, State> {
     static calculateDefaultState(filter: ?TrueOnlyFilterData) {
         return {
             value: filter && filter.value ? ['true'] : undefined,
@@ -44,5 +44,3 @@ class TrueOnlyFilterManager extends React.Component<Props, State> {
         );
     }
 }
-
-export default TrueOnlyFilterManager;

@@ -15,7 +15,7 @@ type Props = {
     }
 };
 
-export default () => (InnerCompnent: React.ComponentType<any>) =>
+export const withFocusHandler = () => (InnerCompnent: React.ComponentType<any>) =>
     class FocusHandlerHOC extends React.Component<Props> {
         handleBlur = (event: SyntheticEvent<HTMLInputElement>) => {
             this.props.onRemoveFocus();

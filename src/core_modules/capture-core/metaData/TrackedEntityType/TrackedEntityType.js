@@ -6,7 +6,7 @@ import type { TeiRegistration } from './TeiRegistration';
 import type { Access } from '../Access';
 
 /* eslint-disable no-underscore-dangle */
-class TrackedEntityType {
+export class TrackedEntityType {
     _id: string;
     _access: Access;
     _name: string;
@@ -61,5 +61,3 @@ class TrackedEntityType {
         return this._attributes;
     }
 }
-
-export default TrackedEntityType;

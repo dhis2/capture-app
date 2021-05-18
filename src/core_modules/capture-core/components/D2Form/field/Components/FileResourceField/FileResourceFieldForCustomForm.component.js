@@ -13,9 +13,9 @@ import {
     withDisabledFieldCalculation,
     withCustomElementContainer,
 } from '../internal';
-import FileField from '../../../../FormFields/File/D2File.component';
+import { D2File } from '../../../../FormFields/File/D2File.component';
 
-export default withGotoInterface()(
+export const FileResourceFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(
@@ -25,7 +25,7 @@ export default withGotoInterface()(
                             withDisplayMessages()(
                                 withCustomElementContainer()(
                                     withInternalChangeHandler()(
-                                        FileField,
+                                        D2File,
                                     ),
                                 ),
                             ),

@@ -1,2 +1,2 @@
 // @flow
-export { default as addBeforeUnloadEventListener } from './addBeforeUnloadEventListener';
+export { addBeforeUnloadEventListener } from './addBeforeUnloadEventListener';

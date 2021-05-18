@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import DataEntry from './DataEntry.component';
+import { DataEntryComponent } from './DataEntry.component';
 import { updateFormField } from './actions/dataEntry.actions';
 import { withLoadingIndicator } from '../../HOC';
 
@@ -40,8 +40,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         }
     },
 });
-export default compose(
+
+export const DataEntry = compose(
     // $FlowFixMe
     connect(mapStateToProps, mapDispatchToProps, null),
     withLoadingIndicator(() => ({ height: '350px' })),
-)(DataEntry);
+)(DataEntryComponent);
