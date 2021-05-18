@@ -28,8 +28,6 @@ const loadingIndicatorStyle = {
     width: 36,
 };
 
-const headerText = i18n.t('Comments');
-
 const getStyles = (theme: Theme) => ({
     badge: {
         backgroundColor: theme.palette.grey.light,
@@ -51,7 +49,7 @@ class NotesSection extends React.Component<Props> {
         return (
             <ViewEventSectionHeader
                 icon={ChatIcon}
-                text={headerText}
+                text={i18n.t('Comments')}
                 badgeClass={classes.badge}
                 badgeCount={count}
             />

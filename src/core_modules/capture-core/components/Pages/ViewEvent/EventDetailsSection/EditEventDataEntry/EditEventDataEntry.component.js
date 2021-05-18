@@ -274,7 +274,7 @@ type DataEntrySection = {
     name: string,
 };
 
-const dataEntrySectionDefinitions = {
+const dataEntrySectionDefinitions = () => ({
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -283,7 +283,7 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Status'),
     },
-};
+});
 
 class EditEventDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };

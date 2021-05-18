@@ -48,7 +48,7 @@ const selectionBoxesStyles = {
     },
 };
 
-const options = [
+const options = () => ([
     {
         name: i18n.t('All accessible'),
         value: 'ACCESSIBLE',
@@ -57,7 +57,7 @@ const options = [
         name: i18n.t('Selected'),
         value: 'SELECTED',
     },
-];
+]);
 
 const errorMessage = 'Please select an organisation unit';
 

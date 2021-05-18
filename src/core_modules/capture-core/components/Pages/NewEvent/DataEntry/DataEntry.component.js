@@ -313,7 +313,7 @@ const buildNotesSettingsFn = () => {
     const notesSettings = {
         getComponent: () => noteComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: 'Comments',
+            label: i18n.t('Comments'),
             onAddNote: props.onAddNote,
             id: 'comments',
             dataEntryId: props.id,
@@ -454,7 +454,7 @@ type DataEntrySection = {
     name: string,
 };
 
-const dataEntrySectionDefinitions = {
+const dataEntrySectionDefinitions = () => ({
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -475,7 +475,7 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Assignee'),
     },
-};
+});
 class NewEventDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };

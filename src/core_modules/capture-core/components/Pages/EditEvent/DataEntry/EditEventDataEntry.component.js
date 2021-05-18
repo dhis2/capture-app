@@ -263,7 +263,7 @@ const buildNotesSettingsFn = () => {
         getComponent: () => noteComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             id: 'comments',
-            label: 'Comments',
+            label: i18n.t('Comments'),
             onAddNote: props.onAddNote,
             dataEntryId: props.id,
             readonly: !props.formFoundation.access.data.write,
@@ -319,7 +319,7 @@ type DataEntrySection = {
     name: string,
 };
 
-const dataEntrySectionDefinitions = {
+const dataEntrySectionDefinitions = () => ({
     [dataEntrySectionNames.BASICINFO]: {
         placement: placements.TOP,
         name: i18n.t('Basic info'),
@@ -332,7 +332,7 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Comments'),
     },
-};
+});
 
 class EditEventDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
