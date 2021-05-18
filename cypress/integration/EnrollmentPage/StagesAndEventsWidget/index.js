@@ -16,6 +16,7 @@ When('you click the stages and events widget toggle open close button', () => {
     cy.get('[data-test="stages-and-events-widget"]')
         .within(() => {
             cy.get('[data-test="widget-open-close-toggle-button"]')
+                .first()
                 .click();
         });
 });
