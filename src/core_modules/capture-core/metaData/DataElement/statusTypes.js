@@ -13,7 +13,7 @@ export const statusTypes = {
 
 export const translatedStatusTypes = (options?: string) => ({
     [statusTypes.ACTIVE]: i18n.t('Active'),
-    [statusTypes.SCHEDULE]: i18n.t('Scheduled: due {{ time }}', { time: options }),
+    [statusTypes.SCHEDULE]: options ? i18n.t('Scheduled due {{ time }}', { time: options }) : i18n.t('Scheduled'),
     [statusTypes.COMPLETED]: i18n.t('Completed'),
     [statusTypes.OVERDUE]: i18n.t('Overdue'),
     [statusTypes.SKIPPED]: i18n.t('Skipped'),
