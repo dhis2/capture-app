@@ -13,8 +13,7 @@ type Props = {
     errors: ?Array<any>,
 }
 
-const headerText = i18n.t('Errors');
-
+const headerText = () => i18n.t('Errors');
 const getStyles = (theme: Theme) => ({
     badge: {
         backgroundColor: theme.palette.error.main,
@@ -36,7 +35,7 @@ class ErrorsSection extends React.Component<Props> {
         return (
             <ViewEventSectionHeader
                 icon={ErrorIcon}
-                text={headerText}
+                text={headerText()}
                 badgeClass={classes.badge}
                 badgeCount={count}
             />

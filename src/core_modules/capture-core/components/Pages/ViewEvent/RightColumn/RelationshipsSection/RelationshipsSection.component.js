@@ -32,8 +32,7 @@ const loadingIndicatorStyle = {
     width: 36,
 };
 
-const headerText = i18n.t('Relationships');
-
+const headerText = () => i18n.t('Relationships');
 const getStyles = (theme: Theme) => ({
     badge: {
         backgroundColor: theme.palette.grey.light,
@@ -55,7 +54,7 @@ class RelationshipsSection extends React.Component<Props> {
         return (
             <ViewEventSectionHeader
                 icon={LinkIcon}
-                text={headerText}
+                text={headerText()}
                 badgeClass={classes.badge}
                 badgeCount={count}
             />

@@ -73,12 +73,12 @@ type DataEntrySection = {
     name: string,
 };
 
-const dataEntrySectionDefinitions = {
+const dataEntrySectionDefinitions = () => ({
     [dataEntrySectionKeys.ENROLLMENT]: {
         placement: placements.TOP,
         name: i18n.t('Enrollment'),
     },
-};
+});
 
 class NewEnrollmentDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };

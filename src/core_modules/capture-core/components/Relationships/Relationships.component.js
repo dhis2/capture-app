@@ -64,9 +64,9 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const fromNames = {
+const fromNames = () => ({
     PROGRAM_STAGE_INSTANCE: i18n.t('This event'),
-};
+});
 
 type Props = {
     classes: {
@@ -157,7 +157,7 @@ class Relationships extends React.Component<Props> {
         const { onRenderConnectedEntity } = this.props;
 
         if (entity.id === this.props.currentEntityId) {
-            return fromNames[entity.type];
+            return fromNames()[entity.type];
         }
 
         return onRenderConnectedEntity ? onRenderConnectedEntity(entity) : entity.name;

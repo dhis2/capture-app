@@ -13,8 +13,7 @@ type Props = {
     feedbacks: ?{ displayTexts: ?Array<string>, displayKeyValuePairs: ?Array<{ key: string, value: string }>},
 }
 
-const headerText = i18n.t('Feedbacks');
-
+const headerText = () => i18n.t('Feedbacks');
 const getStyles = (theme: Theme) => ({
     badge: {
         backgroundColor: theme.palette.grey.light,
@@ -44,7 +43,7 @@ class FeedbacksSection extends React.Component<Props> {
         return (
             <ViewEventSectionHeader
                 icon={AdjustIcon}
-                text={headerText}
+                text={headerText()}
                 badgeClass={classes.badge}
                 badgeCount={count}
             />
