@@ -344,7 +344,6 @@ class EditEventDataEntry extends Component<Props> {
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
-        debugger;
     }
     componentWillUnmount() {
         inMemoryFileStore.clear();

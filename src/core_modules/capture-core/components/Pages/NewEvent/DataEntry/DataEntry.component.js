@@ -488,7 +488,6 @@ class NewEventDataEntry extends Component<Props> {
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
-        debugger;
     }
 
     componentWillMount() {
