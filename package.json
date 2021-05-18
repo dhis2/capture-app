@@ -78,7 +78,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "d2-app-scripts i18n extract && git add ./i18n/"
+      "pre-commit": "d2-app-scripts i18n extract && git add ./i18n/",
+      "pre-push": "yarn linter:check && yarn flow:check"
     }
   },
   "devDependencies": {
