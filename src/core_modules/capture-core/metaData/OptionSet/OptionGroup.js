@@ -5,7 +5,7 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 
 export type Value = string | number | boolean | {};
 
-export default class OptionGroup {
+export class OptionGroup {
     _id: string;
     _optionIds: Map<string, string>;
 

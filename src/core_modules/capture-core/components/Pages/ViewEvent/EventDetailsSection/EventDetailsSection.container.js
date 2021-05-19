@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import EventDetailsSection from './EventDetailsSection.component';
+import { EventDetailsSection } from './EventDetailsSection.component';
 import {
     startShowEditEventDataEntry,
 } from './eventDetails.actions';
@@ -17,4 +17,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(EventDetailsSection);
+export const EventDetails = connect(mapStateToProps, mapDispatchToProps)(EventDetailsSection);

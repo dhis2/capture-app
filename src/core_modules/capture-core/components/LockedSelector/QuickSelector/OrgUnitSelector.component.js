@@ -11,7 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import { Button } from '../../Buttons';
-import OrgUnitField from './OrgUnitField.container';
+import { OrgUnitField } from './OrgUnitField.container';
 
 const styles = (theme: Theme) => ({
     paper: {
@@ -82,7 +82,7 @@ type State = {
     open: boolean,
 };
 
-class OrgUnitSelector extends Component<Props, State> {
+class OrgUnitSelectorPlain extends Component<Props, State> {
     handleShowWarning: () => void;
     handleClose: () => void;
     handleClick: (orgUnit: Object) => void;
@@ -182,4 +182,4 @@ class OrgUnitSelector extends Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(OrgUnitSelector);
+export const OrgUnitSelector = withStyles(styles)(OrgUnitSelectorPlain);

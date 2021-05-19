@@ -26,8 +26,8 @@ import {
     addRelationship,
     relationshipAlreadyExists,
 } from '../../../../../DataEntry/actions/dataEntry.actions';
-import getDataEntryKey from '../../../../../DataEntry/common/getDataEntryKey';
-import convertClientRelationshipToServer from '../../../../../../relationships/convertClientToServer';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
+import { convertClientRelationshipToServer } from '../../../../../../relationships/convertClientToServer';
 import { getRelationshipNewTei } from '../../../../../Pages/NewRelationship/RegisterTei';
 
 const dataEntryId = 'singleEvent';

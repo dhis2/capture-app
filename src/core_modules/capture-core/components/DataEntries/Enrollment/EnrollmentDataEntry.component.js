@@ -2,7 +2,7 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import moment from 'capture-core-utils/moment/momentResolver';
+import { moment } from 'capture-core-utils/moment/momentResolver';
 import {
     DataEntry,
     placements,
@@ -31,7 +31,7 @@ import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
-import dataEntrySectionKeys from './constants/sectionKeys.const';
+import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
 import { type Enrollment } from '../../../metaData';
 
 const overrideMessagePropNames = {
@@ -109,7 +109,7 @@ const getEnrollmentDateSettings = () => {
             getEnrollmentDateValidatorContainer(props.enrollmentMetadata.allowFutureEnrollmentDate),
         getMeta: () => ({
             placement: placements.TOP,
-            section: dataEntrySectionKeys.ENROLLMENT,
+            section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
         }),
     };
 
@@ -156,7 +156,7 @@ const getIncidentDateSettings = () => {
             getIncidentDateValidatorContainer(props.enrollmentMetadata.allowFutureIncidentDate),
         getMeta: () => ({
             placement: placements.TOP,
-            section: dataEntrySectionKeys.ENROLLMENT,
+            section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
         }),
     };
 
@@ -243,7 +243,7 @@ const getGeometrySettings = () => ({
     getValidatorContainers: () => [],
     getMeta: () => ({
         placement: placements.TOP,
-        section: dataEntrySectionKeys.ENROLLMENT,
+        section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
     }),
 });
 
@@ -258,7 +258,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 
     static dataEntrySectionDefinitions = {
-        [dataEntrySectionKeys.ENROLLMENT]: {
+        [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
             placement: placements.TOP,
             name: i18n.t('Enrollment'),
         },

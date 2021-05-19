@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
+import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import { modes, absoluteDirections } from '../../FormFields/DateAndTime/D2Date/d2DatePopup.const';
-import withInternalChangeHandler from '../../FormFields/withInternalChangeHandler';
+import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
     value: ?string,
@@ -13,7 +13,7 @@ type Props = {
     errorClass: string,
 };
 
-class FromDateFilter extends Component<Props> {
+class FromDateFilterPlain extends Component<Props> {
     static getValueObject(value: string) {
         return { from: value.trim() };
     }
@@ -27,7 +27,7 @@ class FromDateFilter extends Component<Props> {
     }
 
     handleBlur = (value: string) => {
-        this.props.onBlur(FromDateFilter.getValueObject(value));
+        this.props.onBlur(FromDateFilterPlain.getValueObject(value));
     }
 
     handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
@@ -62,4 +62,4 @@ class FromDateFilter extends Component<Props> {
     }
 }
 
-export default withInternalChangeHandler()(FromDateFilter);
+export const FromDateFilter = withInternalChangeHandler()(FromDateFilterPlain);

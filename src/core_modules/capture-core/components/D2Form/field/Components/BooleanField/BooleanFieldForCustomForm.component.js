@@ -14,7 +14,7 @@ import {
     withCustomElementContainer,
 } from '../internal';
 
-export default withGotoInterface()(
+export const BooleanFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

@@ -23,7 +23,7 @@ type Props = {
     },
 };
 
-class TextField extends Component<Props> {
+class TextFieldPlain extends Component<Props> {
     handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
         this.props.onChange && this.props.onChange(event.currentTarget.value, event);
     }
@@ -54,4 +54,4 @@ class TextField extends Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(TextField);
+export const TextField = withStyles(getStyles)(TextFieldPlain);

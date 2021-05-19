@@ -32,7 +32,7 @@ const mapInputTypeToComponent = {
     [inputTypes.VERTICAL_RADIOBUTTONS]: OptionSetBoxesFieldForCustomForm,
 };
 
-const getOptionSetFieldConfig = (metaData: DataElement, options: Object) => {
+export const getOptionSetFieldConfigForCustomForm = (metaData: DataElement, options: Object) => {
     // $FlowFixMe[incompatible-type] automated comment
     const optionSet: OptionSet = metaData.optionSet;
     const inputType = optionSet.inputType;
@@ -51,5 +51,3 @@ const getOptionSetFieldConfig = (metaData: DataElement, options: Object) => {
         commitEvent: inputType === inputTypes.DROPDOWN ? 'onBlur' : 'onSelect',
     }, metaData);
 };
-
-export default getOptionSetFieldConfig;

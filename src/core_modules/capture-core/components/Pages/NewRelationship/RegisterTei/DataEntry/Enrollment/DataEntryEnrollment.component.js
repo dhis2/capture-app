@@ -7,7 +7,7 @@ import enrollmentClasses from './enrollment.module.css';
 import { EnrollmentRegistrationEntry } from '../../../../../DataEntries';
 import type { Props } from './dataEntryEnrollment.types';
 
-const NewEnrollmentRelationship =
+const NewEnrollmentRelationshipPlain =
   ({
       theme,
       onSave,
@@ -36,4 +36,4 @@ const NewEnrollmentRelationship =
       );
   };
 
-export default withTheme()(NewEnrollmentRelationship);
+export const NewEnrollmentRelationship = withTheme()(NewEnrollmentRelationshipPlain);

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { DebounceField, withTextFieldFocusHandler, withFocusSaver } from 'capture-ui';
-import SearchContext from './Search.context';
+import { SearchContext } from './Search.context';
 
 const FocusableDebounceField = withFocusSaver()(withTextFieldFocusHandler()(DebounceField));
 
@@ -31,7 +31,7 @@ const isSuggestionBlurTarget = (target, suggestionName) => {
     return (parentElement.getAttribute('name') === suggestionName);
 };
 
-const Input = (props: Props) => {
+export const Input = (props: Props) => {
     const {
         onUpdateValue,
         onHighlightSuggestion,
@@ -80,6 +80,3 @@ const Input = (props: Props) => {
         />
     );
 };
-
-export default Input;
-

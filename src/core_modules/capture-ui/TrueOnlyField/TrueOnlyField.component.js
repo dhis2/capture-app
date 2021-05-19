@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import SelectBoxes from '../SelectionBoxes/SelectionBoxes.component';
+import { SelectionBoxes } from '../SelectionBoxes/SelectionBoxes.component';
 import { MultiSelectionCheckedIcon, MultiSelectionUncheckedIcon } from '../Icons';
 import type { OptionRendererInputData } from '../internal/SelectionBoxes/selectBoxes.types';
 
@@ -9,7 +9,7 @@ type Props = {
     useRealTrueValue?: ?boolean, // instead of string as option values
 };
 
-class D2BooleanField extends Component<Props> {
+export class TrueOnlyField extends Component<Props> {
     static getOptions(useRealTrueValue: boolean) {
         const trueText = i18n.t('Yes');
 
@@ -25,7 +25,7 @@ class D2BooleanField extends Component<Props> {
 
     constructor(props: Props) {
         super(props);
-        this.options = D2BooleanField.getOptions(!!this.props.useRealTrueValue);
+        this.options = TrueOnlyField.getOptions(!!this.props.useRealTrueValue);
     }
 
     render() {
@@ -34,7 +34,7 @@ class D2BooleanField extends Component<Props> {
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <SelectBoxes
+                <SelectionBoxes
                     options={this.options}
                     {...passOnProps}
                 >
@@ -42,10 +42,8 @@ class D2BooleanField extends Component<Props> {
                         (optionData, isSelected) =>
                             (isSelected ? <MultiSelectionCheckedIcon /> : <MultiSelectionUncheckedIcon />)
                     }
-                </SelectBoxes>
+                </SelectionBoxes>
             </div>
         );
     }
 }
-
-export default D2BooleanField;

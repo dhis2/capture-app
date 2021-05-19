@@ -2,7 +2,7 @@
 import { getUserStorageController } from 'capture-core/storageControllers';
 import { userStores } from 'capture-core/storageControllers/stores';
 
-export default function getCustomStorage() {
+export function getCustomStorage() {
     const store = userStores.REDUX_PERSIST;
     const storageController = getUserStorageController();
 

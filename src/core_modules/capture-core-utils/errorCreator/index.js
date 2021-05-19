@@ -1,2 +1,2 @@
 // @flow
-export { default as errorCreator } from './errorCreator';
+export { errorCreator } from './errorCreator';

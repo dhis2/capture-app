@@ -9,7 +9,7 @@ import {
     cancelNewEventInitializeWorkingLists,
 } from '../actions/dataEntry.actions';
 
-import isSelectionsEqual from '../../../../../App/isSelectionsEqual';
+import { isSelectionsEqual } from '../../../../../App/isSelectionsEqual';
 
 export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

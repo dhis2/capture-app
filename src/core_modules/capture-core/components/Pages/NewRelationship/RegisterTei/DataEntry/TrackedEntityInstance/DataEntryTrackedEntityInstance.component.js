@@ -7,7 +7,7 @@ import teiClasses from './trackedEntityInstance.module.css';
 import { TeiRegistrationEntry } from '../../../../../DataEntries';
 import type { Props } from './dataEntryTrackedEntityInstance.types';
 
-const RelationshipTrackedEntityInstance =
+const RelationshipTrackedEntityInstancePlain =
   ({
       theme,
       onSave,
@@ -35,4 +35,4 @@ const RelationshipTrackedEntityInstance =
       );
   };
 
-export default withTheme()(RelationshipTrackedEntityInstance);
+export const RelationshipTrackedEntityInstance = withTheme()(RelationshipTrackedEntityInstancePlain);

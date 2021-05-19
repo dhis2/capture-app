@@ -40,7 +40,7 @@ type Props = {
     classes: Object
 };
 
-class SectionHeaderSimple extends Component<Props> {
+class SectionHeaderSimplePlain extends Component<Props> {
     handleChangeCollapse: () => void;
 
     static defaultProps = {
@@ -103,4 +103,4 @@ class SectionHeaderSimple extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(SectionHeaderSimple);
+export const SectionHeaderSimple = withStyles(styles)(SectionHeaderSimplePlain);

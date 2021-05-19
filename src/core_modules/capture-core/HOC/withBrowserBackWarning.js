@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router'; //eslint-disable-line
-import ConfirmDialog from '../components/Dialogs/ConfirmDialog.component';
+import { ConfirmDialog } from '../components/Dialogs/ConfirmDialog.component';
 
 type Props = {
     dataEntryHasChanges: boolean,
@@ -100,7 +100,7 @@ const getMapStateToProps = (inEffectFn: InEffectFn) => (state: ReduxState, props
 
 const mapDispatchToProps = () => ({});
 
-export default (dialogConfig: DialogConfig, inEffect: InEffectFn) =>
+export const withBrowserBackWarning = (dialogConfig: DialogConfig, inEffect: InEffectFn) =>
     (InnerComponent: React.ComponentType<any>) =>
 
         // $FlowFixMe[missing-annot] automated comment

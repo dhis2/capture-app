@@ -25,7 +25,7 @@ const useApiUtils = () => {
     }), [dataEngine]);
 };
 
-const AppLoader = (props: Props) => {
+export const AppLoader = (props: Props) => {
     const { onRunApp, onCacheExpired } = props;
     const [loadError, setLoadError] = React.useState(null);
     const { querySingleResource, mutate, absoluteApiPath } = useApiUtils();
@@ -88,5 +88,3 @@ const AppLoader = (props: Props) => {
         <LoadingMaskForPage />
     );
 };
-
-export default AppLoader;

@@ -8,7 +8,7 @@ type Props = {
     value: ?string,
 };
 
-class D2TextField extends Component<Props> {
+export class D2TextField extends Component<Props> {
     materialUIInstance: ?HTMLInputElement;
     materialUIContainerInstance: ?HTMLDivElement;
     static defaultProps = {
@@ -50,5 +50,3 @@ class D2TextField extends Component<Props> {
         );
     }
 }
-
-export default D2TextField;

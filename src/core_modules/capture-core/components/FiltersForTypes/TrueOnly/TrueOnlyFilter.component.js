@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import D2TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
+import { D2TrueOnly } from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/SelectBoxes';  // TODO: Refactor
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../types';
@@ -24,7 +24,7 @@ type Props = {
 };
 // $FlowSuppress
 // $FlowFixMe[incompatible-variance] automated comment
-class TrueOnlyFilter extends Component<Props> implements UpdatableFilterContent<Value> {
+class TrueOnlyFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const value = this.props.value;
 
@@ -62,4 +62,4 @@ class TrueOnlyFilter extends Component<Props> implements UpdatableFilterContent<
     }
 }
 
-export default withStyles(getStyles)(TrueOnlyFilter);
+export const TrueOnlyFilter = withStyles(getStyles)(TrueOnlyFilterPlain);

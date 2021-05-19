@@ -31,7 +31,7 @@ type Props = {
     dialogLabel: string,
 }
 
-class PolygonField extends React.Component<Props> {
+class PolygonFieldPlain extends React.Component<Props> {
     dialogClasses: Object;
     passOnClasses: Object;
 
@@ -63,4 +63,4 @@ class PolygonField extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(PolygonField);
+export const PolygonField = withStyles(getStyles)(PolygonFieldPlain);

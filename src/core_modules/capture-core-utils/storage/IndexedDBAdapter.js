@@ -2,7 +2,7 @@ import isDefined from 'd2-utilizr/lib/isDefined';
 import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
 
-class IndexedDBAdapter {
+export class IndexedDBAdapter {
     static errorMessages = {
         OPEN_FAILED: 'open indexedDB failed',
         OPEN_BLOCKED: 'indexedDB blocked',
@@ -748,5 +748,3 @@ class IndexedDBAdapter {
         return !!this.db;
     }
 }
-
-export default IndexedDBAdapter;

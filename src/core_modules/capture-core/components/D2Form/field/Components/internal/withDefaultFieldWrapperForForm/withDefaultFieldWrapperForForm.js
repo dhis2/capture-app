@@ -23,7 +23,7 @@ const getFilteredProps = (props: Object) => {
     return passOnProps;
 };
 
-export default () =>
+export const withDefaultFieldWrapperForForm = () =>
     (InnerComponent: ComponentType<any>) =>
         withGotoInterface()(
             withHideCompatibility()(

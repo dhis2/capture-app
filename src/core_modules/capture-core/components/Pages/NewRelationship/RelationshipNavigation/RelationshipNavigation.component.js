@@ -3,7 +3,7 @@
 import * as React from 'react';
 import I18n from '@dhis2/d2-i18n';
 import type { SelectedRelationshipType } from '../newRelationship.types';
-import LinkButton from '../../../Buttons/LinkButton.component';
+import { LinkButton } from '../../../Buttons/LinkButton.component';
 import { typeof findModes, findModeDisplayNames } from '../findModes';
 
 
@@ -17,7 +17,7 @@ type Props = {
     header: any,
 }
 
-class RelationshipNavigation extends React.Component<Props> {
+export class RelationshipNavigationComponent extends React.Component<Props> {
     renderForRelationshipType = (selectedRelationshipType: SelectedRelationshipType) => {
         const { onSelectRelationshipType, findMode } = this.props;
         const relationshipTypeName = selectedRelationshipType.name;
@@ -76,5 +76,3 @@ class RelationshipNavigation extends React.Component<Props> {
         );
     }
 }
-
-export default RelationshipNavigation;

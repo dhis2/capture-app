@@ -1,6 +1,6 @@
 // @flow
 
-export default class ComponentSpecification {
+export class ComponentSpecification {
     _inputOption: string;
     _viewOption: string;
 }

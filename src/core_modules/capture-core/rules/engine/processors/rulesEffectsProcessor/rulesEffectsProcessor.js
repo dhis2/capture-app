@@ -1,6 +1,6 @@
 // @flow
-import mapTypeToInterfaceFnName from '../../typeToInterfaceFnName.const';
-import processTypes from './processTypes.const';
+import { mapTypeToInterfaceFnName } from '../../typeToInterfaceFnName.const';
+import { processTypes } from './processTypes.const';
 import { effectActions } from '../../effectActions.const';
 
 import type {
@@ -34,7 +34,7 @@ const sanitiseFalsy = (value) => {
     return '';
 };
 
-export default function getRulesEffectsProcessor(
+export function getRulesEffectsProcessor(
     onConvertDataToBaseOutputValue: ConvertDataToBaseOutputValue,
     rulesEffectsValueConverters: IConvertOutputRulesEffectsValue,
 ) {

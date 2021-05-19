@@ -7,7 +7,7 @@ import type { RenderFoundation } from '../../../metaData';
 // $FlowFixMe[prop-missing] automated comment
 const getFunctionFromString = (functionAsString: string) => Function(`return ${functionAsString}`)();
 
-export default function convertDataEntryValuesToClientValues(
+export function convertDataEntryValuesToClientValues(
     dataEntryValues: Object,
     dataEntryValuesMeta: Object,
     foundation: RenderFoundation,

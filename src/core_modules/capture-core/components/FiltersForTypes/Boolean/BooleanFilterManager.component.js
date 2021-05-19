@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import BooleanFilter from './BooleanFilter.component';
+import { BooleanFilter } from './BooleanFilter.component';
 import type { BooleanFilterData } from './types';
 
 type Props = {
@@ -12,7 +12,7 @@ type State = {
     value: ?Array<string>,
 };
 
-class BooleanFilterManager extends React.Component<Props, State> {
+export class BooleanFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(filter: ?BooleanFilterData): ?Array<string> {
         if (!filter) {
             return undefined;
@@ -50,5 +50,3 @@ class BooleanFilterManager extends React.Component<Props, State> {
         );
     }
 }
-
-export default BooleanFilterManager;

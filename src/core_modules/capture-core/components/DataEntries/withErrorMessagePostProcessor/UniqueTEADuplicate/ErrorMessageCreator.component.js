@@ -3,7 +3,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import type { TrackedEntityType } from '../../../../metaData';
-import LinkButton from '../../../Buttons/LinkButton.component';
+import { LinkButton } from '../../../Buttons/LinkButton.component';
 import type { ErrorData } from './uniqueTEADuplicate.types';
 
 const getStyles = () => ({
@@ -139,4 +139,4 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(UniqueTEADuplicateErrorMessageCreator);
+export const UniqueTEADuplicate = withStyles(getStyles)(UniqueTEADuplicateErrorMessageCreator);

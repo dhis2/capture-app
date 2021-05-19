@@ -15,7 +15,7 @@ type Props = {
     ...CssClasses
 };
 
-class WarningDialog extends React.Component<Props> {
+class WarningDialogPlain extends React.Component<Props> {
     static getItemWithName(name: string, message: string) {
         return (
             <React.Fragment>
@@ -84,4 +84,4 @@ const styles = () => ({
         marginLeft: 8,
     },
 });
-export default withStyles(styles)(WarningDialog);
+export const WarningDialog = withStyles(styles)(WarningDialogPlain);

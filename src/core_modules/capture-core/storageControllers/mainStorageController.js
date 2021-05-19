@@ -1,5 +1,5 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
+import { StorageController } from 'capture-core-utils/storage/StorageController';
 import { mainStores } from './stores';
 
 const MAIN_STORAGE_KEY = 'dhis2ca';
@@ -37,7 +37,7 @@ function createStorageController(storageName: string, AdapterClasses: Array<any>
     return storageController;
 }
 
-async function initMainControllerAsync(adapterTypes: Array<any>, onCacheExpired: Function) {
+export async function initMainControllerAsync(adapterTypes: Array<any>, onCacheExpired: Function) {
     const mainStorageController = createStorageController(MAIN_STORAGE_KEY, adapterTypes, onCacheExpired);
     let upgradeTempData;
     await mainStorageController.open(
@@ -57,5 +57,3 @@ async function initMainControllerAsync(adapterTypes: Array<any>, onCacheExpired:
 
     return mainStorageController;
 }
-
-export default initMainControllerAsync;

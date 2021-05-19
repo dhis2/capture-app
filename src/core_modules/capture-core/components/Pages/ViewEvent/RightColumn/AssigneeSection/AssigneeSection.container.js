@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import AssigneeSection from './AssigneeSection.component';
+import { AssigneeSectionComponent } from './AssigneeSection.component';
 import { setAssignee } from './assigneeSection.actions';
 
 const mapStateToProps = (state: ReduxState) => {
@@ -22,4 +22,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(AssigneeSection);
+export const AssigneeSection = connect(mapStateToProps, mapDispatchToProps)(AssigneeSectionComponent);

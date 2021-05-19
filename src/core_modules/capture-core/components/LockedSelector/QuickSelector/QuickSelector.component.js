@@ -6,10 +6,10 @@ import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { colors } from '@dhis2/ui';
-import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 
-import ProgramSelector from './Program/ProgramSelector.component';
-import OrgUnitSelector from './OrgUnitSelector.component';
+import { ProgramSelector } from './Program/ProgramSelector.component';
+import { OrgUnitSelector } from './OrgUnitSelector.component';
 import { ActionButtons } from './ActionButtons.component';
 import { SingleLockedSelect } from './SingleLockedSelect.component';
 
@@ -58,9 +58,9 @@ type Props = {
     enrollmentLockedSelectReady: boolean,
 };
 
-class QuickSelector extends Component<Props> {
+class QuickSelectorPlain extends Component<Props> {
     static getSelectedProgram(selectedProgramId: string) {
-        return programs.get(selectedProgramId) || {};
+        return programCollection.get(selectedProgramId) || {};
     }
 
     handleClickProgram: (programId: string) => void;
@@ -89,7 +89,7 @@ class QuickSelector extends Component<Props> {
     calculateColumnWidths() {
         // The grid has a total width of 12 columns, we need to calculate how much width each selector should have.
         const selectedProgramId = this.props.selectedProgramId;
-        const selectedProgram = QuickSelector.getSelectedProgram(selectedProgramId);
+        const selectedProgram = QuickSelectorPlain.getSelectedProgram(selectedProgramId);
 
         return {
             programSelectorWidth: selectedProgram && selectedProgram.categoryCombination ? 4 : 2,
@@ -185,4 +185,4 @@ class QuickSelector extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(QuickSelector);
+export const QuickSelectorComponent = withStyles(styles)(QuickSelectorPlain);

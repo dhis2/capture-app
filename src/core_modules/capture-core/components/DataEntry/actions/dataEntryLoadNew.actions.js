@@ -1,7 +1,7 @@
 // @flow
 import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
-import getDataEntryKey from '../common/getDataEntryKey';
+import { getDataEntryKey } from '../common/getDataEntryKey';
 import { getDataEntryMeta, validateDataEntryValues } from './dataEntryLoad.utils';
 
 import type { DataEntryPropToInclude } from './dataEntryLoad.utils';

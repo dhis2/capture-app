@@ -3,7 +3,7 @@ import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { UserNameFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
-const getUsernameField = (metaData: MetaDataElement) => {
+export const getUserNameFieldConfigForCustomForm = (metaData: MetaDataElement) => {
     const props = createProps({
     }, metaData);
 
@@ -12,5 +12,3 @@ const getUsernameField = (metaData: MetaDataElement) => {
         props,
     }, metaData);
 };
-
-export default getUsernameField;

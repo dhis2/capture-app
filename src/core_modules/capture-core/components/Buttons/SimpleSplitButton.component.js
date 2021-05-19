@@ -13,7 +13,7 @@ type Props = {
     dropDownItems: Array<Item>,
 };
 
-const SimpleSplitButton = (props: Props) => {
+export const SimpleSplitButton = (props: Props) => {
     const { dropDownItems, ...passOnProps } = props;
     return (
         // $FlowFixMe[cannot-spread-inexact] automated comment
@@ -30,4 +30,3 @@ const SimpleSplitButton = (props: Props) => {
         />
     );
 };
-export default SimpleSplitButton;

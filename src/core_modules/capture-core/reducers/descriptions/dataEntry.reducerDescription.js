@@ -6,7 +6,7 @@ import {
     loadNewActionTypes,
     loadEditActionTypes,
 } from '../../components/DataEntry';
-import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../components/DataEntry/common/getDataEntryKey';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 

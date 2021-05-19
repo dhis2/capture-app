@@ -3,7 +3,7 @@ import { actionCreator } from '../../../../../actions/actions.utils';
 import type { RenderFoundation, Program } from '../../../../../metaData';
 import { viewEventIds } from '../eventDetails.actions';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../../../DataEntries';
-import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import { loadEditDataEntryAsync } from '../../../../DataEntry/templates/dataEntryLoadEdit.template';
 import { getRulesActionsForEvent } from '../../../../../rules/actionsCreator';
 import { dataElementTypes } from '../../../../../metaData';

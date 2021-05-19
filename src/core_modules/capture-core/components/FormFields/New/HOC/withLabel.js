@@ -67,7 +67,7 @@ type HOCParams = {
     onGetCustomFieldLabeClass?: ?(props: Object) => string,
 };
 
-export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<any>) => {
+export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<any>) => {
     const onGetUseVerticalOrientation = hocParams && hocParams.onGetUseVerticalOrientation;
     const onGetCustomFieldLabeClass = hocParams && hocParams.onGetCustomFieldLabeClass;
 

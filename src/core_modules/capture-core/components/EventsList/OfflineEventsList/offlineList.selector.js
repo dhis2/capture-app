@@ -3,13 +3,13 @@ import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect'
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import {
-    getStageFromProgramIdForEventProgram,
+    getStageForEventProgram,
     OptionSet,
     Option,
     DataElement,
     typeof dataElementTypes,
 } from '../../../metaData';
-import getStageFromEvent from '../../../metaData/helpers/getStageFromEvent';
+import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 import { convertValue } from '../../../converters/clientToList';
 import type { RenderFoundation } from '../../../metaData';
 
@@ -57,7 +57,7 @@ export const makeColumnsSelector = () => createSelector(
     programIdSelector,
     columnsOrderStateSelector,
     (programId, columnsOrderFromState: ColumnsOrderFromState) => {
-        const stageContainer = getStageFromProgramIdForEventProgram(programId);
+        const stageContainer = getStageForEventProgram(programId);
         if (stageContainer.error) {
             return columnsOrderFromState;
         }

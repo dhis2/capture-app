@@ -13,9 +13,7 @@ type OrgUnitValue = {
     path: string,
 }
 
-const isValidOrgUnit = (value: OrgUnitValue) => {
+export const isValidOrgUnit = (value: OrgUnitValue) => {
     const valid = !!(value && value.id && value.name);
     return valid;
 };
-
-export default isValidOrgUnit;

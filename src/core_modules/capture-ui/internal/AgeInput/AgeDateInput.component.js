@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import moment from 'moment';
-import UIDate from '../../DateAndTimeFields/DateField/Date.component';
-import typeof orientations from '../../constants/orientations.const';
-import withFocusSaver from '../../HOC/withFocusSaver';
+import { DateField } from '../../DateAndTimeFields/DateField/Date.component';
+import typeof { orientations } from '../../constants/orientations.const';
+import { withFocusSaver } from '../../HOC/withFocusSaver';
 
 type Props = {
     value: ?string,
@@ -12,12 +12,12 @@ type Props = {
     orientation: $Values<orientations>,
 }
 
-class AgeDateInput extends Component<Props> {
+class AgeDateInputPlain extends Component<Props> {
     render() {
         const { value, orientation, ...passOnProps } = this.props;
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
-            <UIDate
+            <DateField
                 value={value || ''}
                 calendarMaxMoment={moment()}
                 width={150}
@@ -29,4 +29,4 @@ class AgeDateInput extends Component<Props> {
     }
 }
 
-export default withFocusSaver()(AgeDateInput);
+export const AgeDateInput = withFocusSaver()(AgeDateInputPlain);

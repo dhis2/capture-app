@@ -1,2 +1,2 @@
 // @flow
-export { default as TextFilter } from './TextFilterManager.component';
+export { TextFilterManager as TextFilter } from './TextFilterManager.component';

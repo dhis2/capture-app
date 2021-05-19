@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import ErrorAndWarningDialog from './ErrorAndWarningDialog.component';
-import ErrorDialog from './ErrorDialog.component';
-import WarningDialog from './WarningDialog.component';
+import { ErrorAndWarningDialog } from './ErrorAndWarningDialog.component';
+import { ErrorDialog } from './ErrorDialog.component';
+import { WarningDialog } from './WarningDialog.component';
 
 import { validationStrategies } from '../../../../metaData/RenderFoundation/renderFoundation.const';
 
@@ -26,7 +26,7 @@ function isSaveAllowedWithErrors(isCompleting: boolean, validationStrategy: $Val
     return false;
 }
 
-const MessagesDialogContents = (props: Props) => {
+export const MessagesDialogContents = (props: Props) => {
     const { open, warnings, errors, isCompleting, validationStrategy, ...passOnProps } = props;
     if (!open) {
         return null;
@@ -63,5 +63,3 @@ const MessagesDialogContents = (props: Props) => {
         />
     );
 };
-
-export default MessagesDialogContents;

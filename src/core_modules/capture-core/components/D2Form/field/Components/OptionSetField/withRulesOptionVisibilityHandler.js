@@ -92,7 +92,7 @@ const makeMapStateToProps = () => {
     return mapStateToProps;
 };
 
-export default () =>
+export const withRulesOptionVisibilityHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowFixMe[missing-annot] automated comment
         connect(makeMapStateToProps, () => ({}))(getCreateRulesOptionsVisibilityHandlerHOC(InnerComponent));

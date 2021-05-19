@@ -10,7 +10,7 @@ const errorMessages = {
     GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
-export default function getEventProgramThrowIfNotFound(programId: string): EventProgram {
+export function getEventProgramThrowIfNotFound(programId: string): EventProgram {
     const program = programCollection.get(programId);
     if (!program || !(program instanceof EventProgram)) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));

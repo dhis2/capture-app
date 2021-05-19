@@ -10,7 +10,7 @@ type Props = {
     navigationElements: React.Node,
 };
 
-class Pagination extends React.Component<Props> {
+export class Pagination extends React.Component<Props> {
     static getRowsCountElement(rowsCountSelectorLabel?: ?string, rowsCountSelector?: ?React.Node) {
         if (!rowsCountSelector) {
             return null;
@@ -57,5 +57,3 @@ class Pagination extends React.Component<Props> {
         );
     }
 }
-
-export default Pagination;

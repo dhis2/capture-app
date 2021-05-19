@@ -179,7 +179,7 @@ function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator
     };
 }
 
-export default function getRulesAndVariablesFromProgramIndicators(
+export function getRulesAndVariablesFromProgramIndicators(
     cachedProgramIndicators: Array<CachedProgramIndicator>,
     programId: string) {
     return cachedProgramIndicators

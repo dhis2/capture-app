@@ -5,7 +5,7 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 type Props = {
 };
 
-export default () =>
+export const withDefaultShouldUpdateInterface = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class ShuoldFieldUpdateInterface extends React.Component<Props> {
             shouldComponentUpdate(nextProps: Props) {

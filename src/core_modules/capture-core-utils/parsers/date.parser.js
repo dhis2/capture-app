@@ -1,5 +1,5 @@
 // @flow
-import moment from 'capture-core-utils/moment/momentResolver';
+import { moment } from 'capture-core-utils/moment/momentResolver';
 
 const getReturnObject = (momentDate: ?moment$Moment) => ({
     momentDate,
@@ -78,7 +78,7 @@ function parseWithoutSeparator(dateString: string, localeFormat: string, separat
     return getReturnObject(null);
 }
 
-export default function parseDate(dateString: string, format: string) {
+export function parseDate(dateString: string, format: string) {
     const separatorPattern = /[.,\-_/\\]/g;
     if (separatorPattern.test(dateString) && separatorPattern.test(format)) {
         return parseWithSeparator(dateString, format, separatorPattern);

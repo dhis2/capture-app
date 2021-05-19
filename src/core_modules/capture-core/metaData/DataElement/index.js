@@ -1,5 +1,5 @@
 // @flow
-export { default as DataElement } from './DataElement';
+export { DataElement } from './DataElement';
 export { DateDataElement } from './DateDataElement';
 export { dataElementTypes } from './dataElementTypes';
 export {

@@ -5,7 +5,7 @@ export type CancelablePromise<T> = {
     cancel: () => void,
 };
 
-const makeCancelable = (promise: Promise<any>) => {
+export const makeCancelable = (promise: Promise<any>) => {
     let hasCanceled = false;
 
     const wrappedPromise: Promise<any> = new Promise((resolve, reject) => {
@@ -22,5 +22,3 @@ const makeCancelable = (promise: Promise<any>) => {
         },
     };
 };
-
-export default makeCancelable;

@@ -46,7 +46,7 @@ type Props = {
     },
 }
 
-const TextRangeField = (props: Props) => {
+const TextRangeFieldPlain = (props: Props) => {
     const { ...passOnProps } = props;
     return (
         <UITextRangeField
@@ -55,4 +55,4 @@ const TextRangeField = (props: Props) => {
     );
 };
 
-export default withTheme()(withStyles(getStyles)(TextRangeField));
+export const TextRangeField = withTheme()(withStyles(getStyles)(TextRangeFieldPlain));

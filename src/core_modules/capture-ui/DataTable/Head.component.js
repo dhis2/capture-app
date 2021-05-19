@@ -6,7 +6,7 @@ type Props = {
     children: React.Node,
 };
 
-class Head extends React.Component<Props> {
+export class Head extends React.Component<Props> {
     static childContextTypes = {
         table: PropTypes.object,
     };
@@ -28,5 +28,3 @@ class Head extends React.Component<Props> {
         );
     }
 }
-
-export default Head;

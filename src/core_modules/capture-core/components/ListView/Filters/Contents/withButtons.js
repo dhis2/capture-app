@@ -24,7 +24,7 @@ type Props = {
     },
 };
 
-export default () => (InnerComponent: React.ComponentType<any>) =>
+export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
     withStyles(getStyles)(class FilterContentsButtons extends React.Component<Props> {
         filterTypeInstance: UpdatableFilterContent<any>;
         updateButtonInstance: HTMLButtonElement;

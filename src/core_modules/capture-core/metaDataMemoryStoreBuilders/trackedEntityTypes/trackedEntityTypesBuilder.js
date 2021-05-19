@@ -3,7 +3,7 @@ import { trackedEntityTypesCollection } from '../../metaDataMemoryStores';
 import { TrackedEntityTypeFactory } from './factory';
 import type { BuildTrackedEntityTypesInput } from './trackedEntityTypesBuilder.types';
 
-export default async function buildTrackedEntityTypes({
+export async function buildTrackedEntityTypes({
     cachedTrackedEntityTypes,
     cachedTrackedEntityAttributes,
     cachedOptionSets,

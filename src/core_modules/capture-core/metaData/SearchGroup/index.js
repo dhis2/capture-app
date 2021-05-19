@@ -1,2 +1,2 @@
 // @flow
-export { default as SearchGroup } from './SearchGroup';
+export { SearchGroup } from './SearchGroup';

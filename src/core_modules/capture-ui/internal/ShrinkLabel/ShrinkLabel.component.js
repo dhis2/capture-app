@@ -4,7 +4,7 @@ import React from 'react';
 import classNames from 'classnames';
 import defaultClasses from './shrinkLabel.module.css';
 
-function InputLabel(props) {
+export function ShrinkLabel(props) {
     const {
         children,
         shrink,
@@ -16,5 +16,3 @@ function InputLabel(props) {
         </div>
     );
 }
-
-export default InputLabel;

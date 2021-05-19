@@ -4,7 +4,7 @@ import { moment } from 'capture-core-utils/moment';
 import { Tag } from '@dhis2/ui';
 import { dataElementTypes, statusTypes, translatedStatusTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
-import stringifyNumber from './common/stringifyNumber';
+import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
 
 
