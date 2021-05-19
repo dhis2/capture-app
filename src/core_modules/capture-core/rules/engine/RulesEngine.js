@@ -21,6 +21,7 @@ import type {
     ProgramRule,
     RuleVariables,
     D2Functions,
+    EventValues,
 } from './rulesEngine.types';
 import { inputValueConverter } from './converters/inputValueConverter';
 import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
@@ -400,7 +401,7 @@ export class RulesEngine {
 
     static programRuleEffectsForEnrollment(
         programRulesContainer: ProgramRulesContainer,
-        allEvents: EventData,
+        allEvents: EventValues,
         selectedOrgUnit: OrgUnit,
         dataElements: ?DataElements,
         teiValues: ?TEIValues,
