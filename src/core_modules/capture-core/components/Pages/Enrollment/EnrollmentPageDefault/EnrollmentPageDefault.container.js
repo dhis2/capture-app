@@ -84,7 +84,7 @@ export const EnrollmentPageDefault = () => {
             const rules = runRulesForEnrollmentPage(
                 program,
                 orgUnit,
-                Array.from(program.stages, ([stage]) => ({ ...stage })),
+                program.stages,
                 dataElements,
                 { enrollmentDate: enrollments?.[0].enrollmentDate,
                     incidentDate: enrollments?.[0].incidentDate,
