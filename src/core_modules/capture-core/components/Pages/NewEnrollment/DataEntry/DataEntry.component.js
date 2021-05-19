@@ -90,7 +90,7 @@ class NewEnrollmentDataEntry extends Component<Props> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
+        this.dataEntrySections = dataEntrySectionDefinitions();
     }
 
     componentWillMount() {
