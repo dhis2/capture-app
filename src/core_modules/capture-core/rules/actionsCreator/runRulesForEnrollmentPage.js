@@ -3,7 +3,6 @@ import { RulesEngine } from '../engine';
 import type { Program } from '../../metaData';
 import type {
     EventsData,
-    EventData,
     OrgUnit,
     DataElement,
 } from '../engine';
@@ -14,9 +13,11 @@ import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets
 export default function runRulesForEnrollmentPage(
     program: Program,
     orgUnit: OrgUnit,
-    currentEvent: EventData,
     allEventsData: EventsData,
     dataElementsInProgram: { [string]: DataElement },
+    teiValues: ?TEIValues,
+    trackedEntityAttributes: ?TrackedEntityAttributes,
+    enrollmentData: ?Enrollment,
 ) {
     const { programRuleVariables: programRulesVariables } = program;
     const programRules = [...program.programRules];
@@ -25,11 +26,14 @@ export default function runRulesForEnrollmentPage(
     const optionSets = optionSetStore.get();
 
     // returns an array of effects that need to take place in the UI.
-    return RulesEngine.programRuleEffectsForEvent(
+    return RulesEngine.programRuleEffectsForEnrollment(
         { programRulesVariables, programRules, constants },
-        { currentEvent, allEventsData },
-        dataElementsInProgram,
+        allEventsData,
         orgUnit,
+        dataElementsInProgram,
+        teiValues,
+        trackedEntityAttributes,
+        enrollmentData,
         // $FlowFixMe[prop-missing] automated comment
         optionSets,
     );

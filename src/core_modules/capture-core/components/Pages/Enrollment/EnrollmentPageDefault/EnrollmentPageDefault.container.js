@@ -23,12 +23,20 @@ export const EnrollmentPageDefault = () => {
             programId: query.programId,
             orgUnitId: query.orgUnitId,
         }), shallowEqual);
-
     const orgUnit = useSelector(({ organisationUnits }) => organisationUnits[orgUnitId], shallowEqual);
+
     const [dataElements, setDataElements] = React.useState({});
+    const [teiAttributes, setTeiAttributes] = React.useState({});
 
     const { program } = useProgramInfo(programId);
 
+    const teiAttributesQuery = useMemo(() => ({
+        teiAttributes: {
+            resource: 'trackedEntityInstances',
+            id: teiId,
+            params: { fields: ['enrollments[*],attributes'] },
+        },
+    }), [teiId]);
 
     const programsQuery = useMemo(() => ({
         programRules: {
@@ -42,16 +50,17 @@ export const EnrollmentPageDefault = () => {
     }), [programId]);
 
 
-    const { data, error: programStageError } = useDataQuery(programsQuery);
-    if (programStageError) {
-        log.error(errorCreator('Profile widget could not be loaded')({ programStageError }));
-    }
+    const { error: programStageError } = useDataQuery(programsQuery, {
+        onComplete: data => setDataElements(extractDataElements(data)),
+    });
 
-    React.useEffect(() => {
-        if (!Object.keys(dataElements).length && data) {
-            setDataElements(extractDataElements(data));
-        }
-    }, [data, dataElements]);
+    const { error: teiError } = useDataQuery(teiAttributesQuery, {
+        onComplete: attributesData => setTeiAttributes(attributesData),
+    });
+
+    if (programStageError || teiError) {
+        log.error(errorCreator('Profile widget could not be loaded')({ programStageError, teiError }));
+    }
 
     const extractDataElements = (rules) => {
         if (!rules?.programRules) { return {}; }
@@ -64,18 +73,28 @@ export const EnrollmentPageDefault = () => {
             }, {});
     };
 
-
     React.useEffect(() => {
-        if (Object.keys(dataElements).length) {
-            const rules = runRulesForEnrollmentPage(program,
+        if (Object.keys(dataElements).length && Object.keys(teiAttributes).length) {
+            const { attributes, enrollments } = teiAttributes;
+            const currentTEIValues = attributes?.map(item => ({ id: item.attribute, valueType: item.valueType }));
+            const currentEnrollmentValues = attributes?.reduce((acc, item) => {
+                acc[item.attribute] = item.value;
+                return acc;
+            }, {});
+            const rules = runRulesForEnrollmentPage(
+                program,
                 orgUnit,
-                program.stages,
                 Array.from(program.stages, ([stage]) => ({ ...stage })),
                 dataElements,
+                { enrollmentDate: enrollments?.[0].enrollmentDate,
+                    incidentDate: enrollments?.[0].incidentDate,
+                    enrollmentId: enrollments?.[0].enrollmentId },
+                currentEnrollmentValues,
+                currentTEIValues,
             );
             console.log({ rules });
         }
-    }, [orgUnit, program, dataElements]);
+    }, [orgUnit, program, dataElements, teiAttributes]);
 
 
     return (
