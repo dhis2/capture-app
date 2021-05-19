@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import ExistingTEILoader from './ExistingTEILoader.container';
+import { ExistingTEILoader } from './ExistingTEILoader.container';
 
 type Props = {
     open: boolean,
     onCancel: () => void,
 };
 
-const ExistingTEIDialog = (props: Props) => {
+export const ExistingTEIDialog = (props: Props) => {
     const { open, ...passOnProps } = props;
     return (
         <Dialog
@@ -23,5 +23,3 @@ const ExistingTEIDialog = (props: Props) => {
         </Dialog>
     );
 };
-
-export default ExistingTEIDialog;

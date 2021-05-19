@@ -11,7 +11,7 @@ type State = {
     inFocus: boolean,
 };
 
-export default () =>
+export const withFocusSaver = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class DefaultIsFocusedHandler extends React.Component<Props, State> {
             constructor(props: Props) {

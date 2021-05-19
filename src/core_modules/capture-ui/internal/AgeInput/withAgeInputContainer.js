@@ -11,7 +11,7 @@ type Props = {
 type State = {
     value: any,
 };
-export default () =>
+export const withAgeInputContainer = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class AgeInputContainer extends React.Component<Props, State> {
             render() {

@@ -1,12 +1,12 @@
 // @flow
 import log from 'loglevel';
-import getD2 from 'capture-core/d2/d2Instance';
+import { getD2 } from 'capture-core/d2/d2Instance';
 import { from } from 'rxjs';
 import { map, concatMap, takeUntil, filter } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
-import getOrgUnitRootsKey from './getOrgUnitRootsKey';
+import { getOrgUnitRootsKey } from './getOrgUnitRootsKey';
 
 import { actionTypes as formActionTypes } from '../../../actions/form.actions';
 

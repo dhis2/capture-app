@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import VirtualizedSelect from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { OptionsSelectVirtualized } from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import type {
     VirtualizedOptionConfig,
 } from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { withDefaultFieldContainer, withLabel } from '../../FormFields/New';
 
-const SearchProgramField = withDefaultFieldContainer()(withLabel()(VirtualizedSelect));
+const SearchProgramField = withDefaultFieldContainer()(withLabel()(OptionsSelectVirtualized));
 
 const programFieldStyles = {
     labelContainerStyle: {
@@ -25,7 +25,7 @@ type Props = {
     onSetProgram: (searchId: string, programId: ?string) => void,
     programOptions: Array<VirtualizedOptionConfig>,
 }
-class SearchProgramSelector extends React.Component<Props> {
+export class SearchProgramSelectorComponent extends React.Component<Props> {
     onSelectProgram = (programId: ?string) => {
         this.props.onSetProgram(this.props.searchId, programId);
     }
@@ -41,5 +41,3 @@ class SearchProgramSelector extends React.Component<Props> {
         );
     }
 }
-
-export default SearchProgramSelector;

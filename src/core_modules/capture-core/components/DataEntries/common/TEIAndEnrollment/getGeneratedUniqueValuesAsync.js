@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
-import moment from 'capture-core-utils/moment/momentResolver';
+import { moment } from 'capture-core-utils/moment/momentResolver';
 import { convertServerToClient, convertClientToForm } from '../../../../converters';
 import { getApi } from '../../../../d2/d2Instance';
 import type { RenderFoundation } from '../../../../metaData';
@@ -74,7 +74,7 @@ function getActiveUniqueItemFromCache(
     return (cacheItem.expires > requiredTimeStamp) ? cacheItem : null;
 }
 
-export default function getGeneratedUniqueValuesAsync(
+export function getGeneratedUniqueValuesAsync(
     foundation: ?RenderFoundation,
     generatedUniqueValuesCache: Object,
     staticPatternValues: StaticPatternValues,

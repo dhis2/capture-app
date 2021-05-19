@@ -1,5 +1,5 @@
 // @flow
-import isPositiveInteger from './integerPositive.validator';
+import { isValidPositiveInteger } from './integerPositive.validator';
 
 /**
  *
@@ -7,11 +7,9 @@ import isPositiveInteger from './integerPositive.validator';
  * @param {string} value
  * @returns
  */
-const isZeroOrPositiveInteger = (value: string) => {
+export const isValidZeroOrPositiveInteger = (value: string) => {
     if (value === '0') {
         return true;
     }
-    return isPositiveInteger(value);
+    return isValidPositiveInteger(value);
 };
-
-export default isZeroOrPositiveInteger;

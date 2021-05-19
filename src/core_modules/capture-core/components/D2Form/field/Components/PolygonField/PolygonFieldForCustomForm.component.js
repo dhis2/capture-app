@@ -18,7 +18,7 @@ import customFormStyles from './polygonFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
-export default withGotoInterface()(
+export const PolygonFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

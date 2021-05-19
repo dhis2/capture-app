@@ -11,7 +11,7 @@ const mapEventClientKeyToServerKey = {
     enrollmentId: 'enrollment',
 };
 
-export default function getServerValuesToSaveFromMainEvent(event: CaptureClientEvent) {
+export function getServerValuesToSaveFromMainEvent(event: CaptureClientEvent) {
     return Object
         .keys(event)
         .reduce((accServerEvent, inputKey) => {

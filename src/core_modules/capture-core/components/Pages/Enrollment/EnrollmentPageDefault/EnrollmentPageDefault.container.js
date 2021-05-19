@@ -11,13 +11,18 @@ import runRulesForEnrollmentPage from '../../../../rules/actionsCreator/runRules
 
 
 export const EnrollmentPageDefault = () => {
-    const { teiId, programId, orgUnitId } = useSelector(({
+    const { enrollmentId, teiId, programId, orgUnitId } = useSelector(({
         router: {
             location: {
                 query,
             },
         },
-    }) => ({ teiId: query.teiId, programId: query.programId, orgUnitId: query.orgUnitId }), shallowEqual);
+    }) => (
+        { enrollmentId: query.enrollmentId,
+            teiId: query.teiId,
+            programId: query.programId,
+            orgUnitId: query.orgUnitId,
+        }), shallowEqual);
 
     const orgUnit = useSelector(({ organisationUnits }) => organisationUnits[orgUnitId], shallowEqual);
     const [dataElements, setDataElements] = React.useState({});
@@ -77,6 +82,7 @@ export const EnrollmentPageDefault = () => {
         <EnrollmentPageDefaultComponent
             teiId={teiId}
             program={program}
+            enrollmentId={enrollmentId}
         />
     );
 };

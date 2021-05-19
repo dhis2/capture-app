@@ -3,9 +3,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import placements from '../constants/placements.const';
-import DataEntryField from './internal/DataEntryField.component';
-import getDataEntryKey from '../common/getDataEntryKey';
+import { placements } from '../constants/placements.const';
+import { DataEntryField } from './internal/DataEntryField.component';
+import { getDataEntryKey } from '../common/getDataEntryKey';
 import { makeReselectComponentProps } from './withDataEntryField.selectors';
 
 import type { ValidatorContainer } from './internal/dataEntryField.utils';
@@ -139,7 +139,7 @@ const getMapStateToProps = (settings: Settings) => (state: ReduxState, props: Ob
 };
 
 
-export default (settings: Settings) =>
+export const withDataEntryField = (settings: Settings) =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowFixMe
         connect(getMapStateToProps(settings), () => ({}))(

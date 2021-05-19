@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Persian (Afghanistan) (https://www.transifex.com/hisp-uio/teams/100509/fa_AF/)\n"
@@ -147,9 +147,6 @@ msgstr ""
 msgid "Search for user"
 msgstr ""
 
-msgid "Complete event"
-msgstr "تکمیلی رویداد"
-
 msgid "Basic info"
 msgstr ""
 
@@ -186,9 +183,6 @@ msgstr "فعال"
 
 msgid "Completed"
 msgstr "تکمیل شد"
-
-msgid "Assigned to"
-msgstr "تعین شده"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -667,6 +661,9 @@ msgstr "تاریخ ثبت نام"
 msgid "Cancelled"
 msgstr ""
 
+msgid "Assigned to"
+msgstr "تعین شده"
+
 msgid "Registering unit"
 msgstr "بخش ثبت نام"
 
@@ -840,12 +837,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
-msgid "Event details"
-msgstr "جزئیات رویداد"
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -881,15 +872,6 @@ msgstr "وابستگی را اضافه کنید"
 msgid "Results found"
 msgstr ""
 
-msgid "Open"
-msgstr "باز کردن"
-
-msgid "All accessible"
-msgstr "همه قابل دسترسی"
-
-msgid "Organisation unit scope"
-msgstr "محدوده کاری نهاد"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
@@ -900,6 +882,30 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "تعقیب کردن"
+
+msgid "Enrollment date"
+msgstr "تاریخ شمولیت"
+
+msgid "Incident date"
+msgstr "تاریخ رویداد/ واقعه"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
@@ -952,12 +958,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
-
-msgid "Latitude"
-msgstr "عرض البلد"
-
-msgid "Longitude"
-msgstr "طول البلد"
 
 msgid "Set coordinate"
 msgstr "تعین مختصات"

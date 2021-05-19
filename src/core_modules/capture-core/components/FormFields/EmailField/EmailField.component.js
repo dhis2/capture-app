@@ -7,7 +7,7 @@ type Props = {
   onBlur: (value: string, event: UiEventData) => void,
 };
 
-class D2EmailField extends Component<Props> {
+export class D2EmailField extends Component<Props> {
   materialUIInstance: any;
   materialUIContainerInstance: any;
   handleChange: (event: UiEventData) => void;
@@ -48,5 +48,3 @@ class D2EmailField extends Component<Props> {
       );
   }
 }
-
-export default D2EmailField;

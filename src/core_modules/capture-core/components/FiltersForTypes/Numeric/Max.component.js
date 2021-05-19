@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import TextField from '../../FormFields/Generic/D2TextField.component';
-import withInternalChangeHandler from '../../FormFields/withInternalChangeHandler';
+import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
+import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
     value: ?string,
@@ -13,18 +13,18 @@ type Props = {
     errorClass: string,
 };
 
-class MaxNumericFilter extends Component<Props> {
+class MaxNumericFilterPlain extends Component<Props> {
     static getValueObject(value: string) {
         return { max: value.trim() };
     }
 
     handleBlur = (value: string) => {
-        this.props.onBlur(MaxNumericFilter.getValueObject(value));
+        this.props.onBlur(MaxNumericFilterPlain.getValueObject(value));
     }
 
     handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            this.props.onEnterKey(MaxNumericFilter.getValueObject(this.props.value || ''));
+            this.props.onEnterKey(MaxNumericFilterPlain.getValueObject(this.props.value || ''));
         }
     }
 
@@ -33,7 +33,7 @@ class MaxNumericFilter extends Component<Props> {
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <TextField
+                <D2TextField
                     ref={textFieldRef}
                     onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}
@@ -49,4 +49,4 @@ class MaxNumericFilter extends Component<Props> {
     }
 }
 
-export default withInternalChangeHandler()(MaxNumericFilter);
+export const MaxNumericFilter = withInternalChangeHandler()(MaxNumericFilterPlain);

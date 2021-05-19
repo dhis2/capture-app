@@ -20,7 +20,7 @@ type Props = {
     disabled?: ?boolean,
 };
 
-class SortLabel extends React.Component<Props> {
+export class SortLabel extends React.Component<Props> {
     handleSort = () => {
         const { isActive, direction, disabled } = this.props;
 
@@ -97,5 +97,3 @@ class SortLabel extends React.Component<Props> {
         );
     }
 }
-
-export default SortLabel;

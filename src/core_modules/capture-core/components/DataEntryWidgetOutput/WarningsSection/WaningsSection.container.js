@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import WarningsSection from '../../Pages/ViewEvent/RightColumn/WarningsSection/WarningsSection.component';
+import { WarningsSectionComponent } from '../../Pages/ViewEvent/RightColumn/WarningsSection/WarningsSection.component';
 import { makeGetVisibleMessages } from '../../Pages/ViewEvent/RightColumn/ErrorsSection/messageSection.selectors';
 
 const makeStateToProps = () => {
@@ -29,4 +29,4 @@ const makeStateToProps = () => {
 };
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeStateToProps, () => ({}))(WarningsSection);
+export const WarningsSection = connect(makeStateToProps, () => ({}))(WarningsSectionComponent);

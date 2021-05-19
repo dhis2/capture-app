@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
 
-export default class Icon {
+export class Icon {
     _color: string | void;
     _name: string | void;
 

@@ -4,7 +4,7 @@ import * as React from 'react';
 type Props = {
 };
 
-export default () =>
+export const withGotoInterface = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class GotoFieldInterface extends React.Component<Props> {
             gotoInstance: any;

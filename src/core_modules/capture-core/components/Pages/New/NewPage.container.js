@@ -15,6 +15,7 @@ import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
+import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 const useUserWriteAccess = (scopeId) => {
     const scope = getScopeFromScopeId(scopeId);
@@ -80,6 +81,16 @@ export const NewPage: ComponentType<{||}> = () => {
     };
 
     const writeAccess = useUserWriteAccess(currentScopeId);
+
+    const isUserInteractionInProgress: boolean = useSelector(
+        state =>
+            dataEntryHasChanges(state, 'singleEvent-newEvent')
+          || dataEntryHasChanges(state, 'relationship-newTei')
+          || dataEntryHasChanges(state, 'relationship-newEvent')
+          || dataEntryHasChanges(state, 'newPageDataEntryId-newEnrollment')
+          || dataEntryHasChanges(state, 'newPageDataEntryId-newTei'),
+    );
+
     return (
         <NewPageComponent
             showMessageToSelectOrgUnitOnNewPage={dispatchShowMessageToSelectOrgUnitOnNewPage}
@@ -94,5 +105,6 @@ export const NewPage: ComponentType<{||}> = () => {
             newPageStatus={newPageStatus}
             error={error}
             ready={ready}
+            isUserInteractionInProgress={isUserInteractionInProgress}
         />);
 };

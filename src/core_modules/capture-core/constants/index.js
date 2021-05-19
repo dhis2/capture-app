@@ -1,3 +1,3 @@
 // @flow
-export { default as LOADING_INDICATOR_TIMEOUT } from './loadingIndicatorTimeout';
-export { default as environments } from './environments';
+export { LOADING_INDICATOR_TIMEOUT } from './loadingIndicatorTimeout';
+export { environments } from './environments';

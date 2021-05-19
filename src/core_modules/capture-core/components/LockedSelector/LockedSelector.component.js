@@ -2,8 +2,8 @@
 import React, { Component, type ComponentType } from 'react';
 import { compose } from 'redux';
 import i18n from '@dhis2/d2-i18n';
-import QuickSelector from './QuickSelector/QuickSelector.container';
-import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
+import { QuickSelector } from './QuickSelector/QuickSelector.container';
+import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 import type { Props, State } from './LockedSelector.types';
 import { withLoadingIndicator } from '../../HOC';
 
@@ -34,6 +34,38 @@ class LockedSelectorClass extends Component<Props, State> {
     handleOpenStartAgainWarning=() => {
         if (this.dontShowWarning()) {
             this.props.onStartAgain();
+            return;
+        }
+        this.setState({ openStartAgainWarning: true });
+    }
+
+    openNewRegistrationPage = () => {
+        if (this.props.isUserInteractionInProgress) {
+            this.setState({ openStartAgainWarning: true });
+            return;
+        }
+        this.props.onOpenNewEventPage();
+    }
+
+    handleOpenNewRegistrationPageWithoutProgramId = () => {
+        if (this.dontShowWarning()) {
+            this.props.onOpenNewRegistrationPageWithoutProgramId();
+            return;
+        }
+        this.setState({ openStartAgainWarning: true });
+    }
+
+    handleOpenSearchPage = () => {
+        if (this.dontShowWarning()) {
+            this.props.onOpenSearchPage();
+            return;
+        }
+        this.setState({ openStartAgainWarning: true });
+    }
+
+    handleOpenSearchPageWithoutProgramId = () => {
+        if (this.dontShowWarning()) {
+            this.props.onOpenSearchPageWithoutProgramId();
             return;
         }
         this.setState({ openStartAgainWarning: true });
@@ -95,31 +127,10 @@ class LockedSelectorClass extends Component<Props, State> {
         this.handleClose();
     }
 
-    openNewRegistrationPage = () => {
-        if (this.props.isUserInteractionInProgress) {
-            this.setState({ openNewEventWarning: true });
-            return;
-        }
-        this.props.onOpenNewEventPage();
-    }
-
-    handleOpenNewRegistrationPageWithoutProgramId = () => {
-        this.props.onOpenNewRegistrationPageWithoutProgramId();
-    }
-
     handleAcceptNew = () => {
         this.props.onOpenNewEventPage();
         this.handleClose();
     }
-
-    handleOpenSearchPage = () => {
-        this.props.onOpenSearchPage();
-    }
-
-    handleOpenSearchPageWithoutProgramId = () => {
-        this.props.onOpenSearchPageWithoutProgramId();
-    }
-
 
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;

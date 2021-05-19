@@ -4,11 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
-import Button from '../../Buttons/Button.component';
+import { Button } from '../../Buttons/Button.component';
 import { getApi } from '../../../d2/d2Instance';
 import { LoadingMask } from '../../LoadingMasks';
-import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
-import LinkButton from '../../Buttons/LinkButton.component';
+import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import { LinkButton } from '../../Buttons/LinkButton.component';
 
 type Props = {
     value: ?{ value: string, name: string, url?: ?string },
@@ -79,7 +79,7 @@ const styles = theme => ({
     },
 });
 
-class D2File extends Component<Props> {
+class D2FilePlain extends Component<Props> {
     hiddenFileSelectorRef: any;
 
     handleFileChange = (e: Object) => {
@@ -191,4 +191,4 @@ class D2File extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(D2File);
+export const D2File = withStyles(styles)(D2FilePlain);

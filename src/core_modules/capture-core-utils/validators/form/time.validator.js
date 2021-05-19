@@ -7,9 +7,7 @@ import { parseTime } from '../../parsers';
  * @param {string} value
  * @returns
  */
-function isValidTime(value: string) {
+export function isValidTime(value: string) {
     const momentTime = parseTime(value);
     return momentTime.isValid;
 }
-
-export default isValidTime;

@@ -6,15 +6,15 @@ import log from 'loglevel';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
-import type Icon from '../Icon/Icon';
-import OptionSet from '../OptionSet/OptionSet';
+import type { Icon } from '../Icon/Icon';
+import { OptionSet } from '../OptionSet/OptionSet';
 import type { Unique } from './Unique';
 import { dataElementTypes } from './dataElementTypes';
 
 // eslint-disable-next-line no-use-before-define
 export type ConvertFn = (value: any, type: $Keys<typeof dataElementTypes>, element: DataElement) => any;
 
-export default class DataElement {
+export class DataElement {
     static errorMessages = {
         TYPE_NOT_FOUND: 'type not supported',
     };

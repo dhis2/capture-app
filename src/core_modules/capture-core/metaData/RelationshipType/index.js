@@ -1,3 +1,3 @@
 // @flow
 
-export { default as RelationshipType } from './RelationshipType';
+export { RelationshipType } from './RelationshipType';

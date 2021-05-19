@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { AgeField as UIAgeField } from 'capture-ui';
 import { moment } from 'capture-core-utils/moment';
-import withCalendarProps from '../../HOC/withCalendarProps';
+import { withCalendarProps } from '../../HOC/withCalendarProps';
 import { parseDate, convertMomentToDateFormatString } from '../../../../../utils/converters/date';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 
@@ -54,7 +54,7 @@ type Props = {
     calendarOnConvertValueOut: Function,
 }
 
-const AgeField = (props: Props) => {
+const AgeFieldPlain = (props: Props) => {
     const {
         calendarTheme,
         calendarLocale,
@@ -79,4 +79,4 @@ const AgeField = (props: Props) => {
     );
 };
 
-export default withTheme()(withCalendarProps()(withStyles(getStyles)(AgeField)));
+export const AgeField = withTheme()(withCalendarProps()(withStyles(getStyles)(AgeFieldPlain)));

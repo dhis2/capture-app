@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -151,9 +151,6 @@ msgstr ""
 msgid "Search for user"
 msgstr ""
 
-msgid "Complete event"
-msgstr ""
-
 msgid "Basic info"
 msgstr ""
 
@@ -190,9 +187,6 @@ msgstr "Aktif"
 
 msgid "Completed"
 msgstr "Selesai"
-
-msgid "Assigned to"
-msgstr "Ditugaskan pada"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -671,6 +665,9 @@ msgstr ""
 msgid "Cancelled"
 msgstr "Dibatalkan"
 
+msgid "Assigned to"
+msgstr "Ditugaskan pada"
+
 msgid "Registering unit"
 msgstr "Unit pendaftaran"
 
@@ -844,12 +841,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
-msgid "Event details"
-msgstr ""
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -885,15 +876,6 @@ msgstr "Tambahkan hubungan"
 msgid "Results found"
 msgstr ""
 
-msgid "Open"
-msgstr "Buka"
-
-msgid "All accessible"
-msgstr "Semua dapat diakses"
-
-msgid "Organisation unit scope"
-msgstr "Cakupan unit organisasi"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
@@ -904,6 +886,30 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr ""
+
+msgid "Enrollment date"
+msgstr "Tanggal pendaftaran"
+
+msgid "Incident date"
+msgstr "Tanggal insiden"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
@@ -956,12 +962,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
-
-msgid "Latitude"
-msgstr "Lintang"
-
-msgid "Longitude"
-msgstr "Bujur"
 
 msgid "Set coordinate"
 msgstr "Tentukan koordinat"

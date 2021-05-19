@@ -46,6 +46,6 @@ const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: Re
         }
     };
 
-export default () =>
+export const withDataEntryOutput = () =>
     (InnerComponent: React.ComponentType<any>, Output: React.ComponentType<any>) =>
         getDataEntryOutput(InnerComponent, Output);

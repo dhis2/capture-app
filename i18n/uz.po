@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -153,9 +153,6 @@ msgstr "Тавсия этилган фойдаланувчи"
 msgid "Search for user"
 msgstr "Фойдаланувчини излаш"
 
-msgid "Complete event"
-msgstr "Ҳодиса/тадбирни якунлаш"
-
 msgid "Basic info"
 msgstr "Асосий маълумот"
 
@@ -196,9 +193,6 @@ msgstr "Фаол"
 
 msgid "Completed"
 msgstr "Тўлдирилди"
-
-msgid "Assigned to"
-msgstr "Тайинланган"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "Илтимос, ҳодиса/тадбирни сақлашдан олдин шарҳ ёзинг ёки бекор қилинг"
@@ -687,6 +681,9 @@ msgstr "Рўйхатга олиш ҳолати"
 msgid "Cancelled"
 msgstr "Бекор қилинди"
 
+msgid "Assigned to"
+msgstr "Тайинланган"
+
 msgid "Registering unit"
 msgstr "Рўйхатга олиш муассасаси"
 
@@ -874,12 +871,6 @@ msgstr "Барча дастурларда қидириш"
 msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
 
-msgid "Event details"
-msgstr "Ҳодиса/тадбир тафсилотлари"
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -917,15 +908,6 @@ msgstr "Ўзаро алоқа киритиш"
 msgid "Results found"
 msgstr "Натижалар топилди"
 
-msgid "Open"
-msgstr "Очиқ"
-
-msgid "All accessible"
-msgstr "Барчага кириш мумкин"
-
-msgid "Organisation unit scope"
-msgstr "Ташкилий бўлим ҳуқуқ ва бурчлари"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "{{uniqueAttrName}} орқали қидириш"
 
@@ -937,6 +919,30 @@ msgstr "Танланган дастур билан ишлаш учун,"
 
 msgid "open the Tracker Capture app"
 msgstr "Кузатув-Назорат дастурини очинг"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Кузатиш"
+
+msgid "Enrollment date"
+msgstr "Қайд этилган сана"
+
+msgid "Incident date"
+msgstr "Ҳодиса санаси"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
 
 msgid "Person Profile"
 msgstr ""
@@ -988,12 +994,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "кузатилаётган объект намунаси"
-
-msgid "Latitude"
-msgstr "Кенглик"
-
-msgid "Longitude"
-msgstr "Узунлик"
 
 msgid "Set coordinate"
 msgstr "Координатани ўрнатинг"

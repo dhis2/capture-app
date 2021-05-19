@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import RegUnitSelector from './RegUnitSelector.component';
+import { RegUnitSelectorComponent } from './RegUnitSelector.component';
 import { changeOrgUnit, searchOrgUnitFailed } from '../registrationSection.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
@@ -19,4 +19,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(RegUnitSelector);
+export const RegUnitSelector = connect(mapStateToProps, mapDispatchToProps)(RegUnitSelectorComponent);

@@ -16,4 +16,4 @@ class RulesMomentConverter implements IMomentConverter {
     }
 }
 
-export default new RulesMomentConverter();
+export const momentConverter = new RulesMomentConverter();

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -150,9 +150,6 @@ msgstr "分配的用户"
 msgid "Search for user"
 msgstr "搜索用户 "
 
-msgid "Complete event"
-msgstr "完成事件"
-
 msgid "Basic info"
 msgstr "基本信息"
 
@@ -189,9 +186,6 @@ msgstr "活动的"
 
 msgid "Completed"
 msgstr "已完成"
-
-msgid "Assigned to"
-msgstr "指派到"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "保存事件前请添加或取消被或许"
@@ -670,6 +664,9 @@ msgstr "登记状态"
 msgid "Cancelled"
 msgstr "已取消"
 
+msgid "Assigned to"
+msgstr "指派到"
+
 msgid "Registering unit"
 msgstr "注册机构"
 
@@ -843,12 +840,6 @@ msgstr "搜索所有项目"
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
-msgid "Event details"
-msgstr ""
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -884,15 +875,6 @@ msgstr "添加关系"
 msgid "Results found"
 msgstr "找到的结果"
 
-msgid "Open"
-msgstr "打开"
-
-msgid "All accessible"
-msgstr "所有可访问的"
-
-msgid "Organisation unit scope"
-msgstr "机构范围"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "搜索 {{uniqueAttrName}}"
 
@@ -904,6 +886,30 @@ msgstr "基于选择的项目工作"
 
 msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访APP"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr ""
+
+msgid "Enrollment date"
+msgstr "登记日期"
+
+msgid "Incident date"
+msgstr "事件日期"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
 
 msgid "Person Profile"
 msgstr ""
@@ -955,12 +961,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
-
-msgid "Latitude"
-msgstr "纬度"
-
-msgid "Longitude"
-msgstr "经度"
 
 msgid "Set coordinate"
 msgstr "设置坐标"

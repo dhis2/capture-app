@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import type FormBuilder, { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
-import FormBuilderContainer from './FormBuilder.container';
-import withDivider from './FieldDivider/withDivider';
-import withAlternateBackgroundColors from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
-import withCustomForm from './D2CustomForm/withCustomForm';
-import buildField from './field/buildField';
+import type { FormBuilder, FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
+import { FormBuilderContainer } from './FormBuilder.container';
+import { withDivider } from './FieldDivider/withDivider';
+import { withAlternateBackgroundColors } from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
+import { withCustomForm } from './D2CustomForm/withCustomForm';
+import { buildField } from './field/buildField';
 import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
 import type { DataElement, CustomForm } from '../../metaData';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
@@ -55,7 +55,7 @@ type Props = {
     viewMode?: ?boolean,
 };
 
-class D2SectionFields extends Component<Props> {
+export class D2SectionFieldsComponent extends Component<Props> {
     static buildFormFields(props: Props): Array<FieldConfig> {
         const { fieldsMetaData, customForm, fieldOptions } = props;
 
@@ -91,13 +91,13 @@ class D2SectionFields extends Component<Props> {
     constructor(props: Props) {
         super(props);
         this.handleUpdateField = this.handleUpdateField.bind(this);
-        this.formFields = D2SectionFields.buildFormFields(this.props);
+        this.formFields = D2SectionFieldsComponent.buildFormFields(this.props);
         this.rulesCompulsoryErrors = {};
     }
 
     UNSAFE_componentWillReceiveProps(newProps: Props) {
         if (newProps.fieldsMetaData !== this.props.fieldsMetaData) {
-            this.formFields = D2SectionFields.buildFormFields(newProps);
+            this.formFields = D2SectionFieldsComponent.buildFormFields(newProps);
         }
     }
 
@@ -140,13 +140,13 @@ class D2SectionFields extends Component<Props> {
     validateBasedOnStrategy(options?: ?{ isCompleting: boolean }, formBuilderInstance: FormBuilder) {
         const validationStrategy = this.props.validationStrategy;
         if (validationStrategy === validationStrategies.NONE) {
-            return D2SectionFields.validateBaseOnly(formBuilderInstance);
+            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
         } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
             const isCompleting = options && options.isCompleting;
             if (isCompleting) {
                 return this.validateFull(formBuilderInstance);
             }
-            return D2SectionFields.validateBaseOnly(formBuilderInstance);
+            return D2SectionFieldsComponent.validateBaseOnly(formBuilderInstance);
         }
         return this.validateFull(formBuilderInstance);
     }
@@ -265,5 +265,3 @@ class D2SectionFields extends Component<Props> {
         );
     }
 }
-
-export default D2SectionFields;

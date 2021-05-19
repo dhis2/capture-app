@@ -1,2 +1,2 @@
 // @flow
-export { default as moment } from './momentResolver';
+export { moment } from './momentResolver';

@@ -1,10 +1,10 @@
 // @flow
 import log from 'loglevel';
-import OptionSetHelper from '../../helpers/OptionSetHelper';
-import typeKeys from '../../typeKeys.const';
-import variablePrefixes from './variablePrefixes.const';
-import getDateUtils from '../../commonUtils/dateUtils';
-import momentConverter from '../../converters/momentConverter';
+import { OptionSetHelper } from '../../helpers/OptionSetHelper';
+import { typeKeys } from '../../typeKeys.const';
+import { variablePrefixes } from './variablePrefixes.const';
+import { getDateUtils } from '../../commonUtils/dateUtils';
+import { momentConverter } from '../../converters/momentConverter';
 
 import type {
     ProgramRuleVariable,
@@ -52,7 +52,7 @@ const variableSourceTypes = {
 
 const EMPTY_STRING = '';
 
-export default class VariableService {
+export class VariableService {
     static getDataElementValueForVariable(value: any, dataElementId: string, useNameForOptionSet: ?boolean, dataElements: ?DataElements, optionSets: OptionSets) {
         const hasValue = !!value || value === 0 || value === false;
         return (hasValue && useNameForOptionSet && dataElements && dataElements[dataElementId] && dataElements[dataElementId].optionSetId) ?

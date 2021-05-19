@@ -2,11 +2,11 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-syntax */
-import scopes from './scopes.const';
+import { scopes } from './scopes.const';
 
 type Validator = (value: any, contextProps: any) => Promise<any> | any;
 
-export default class Unique {
+export class Unique {
     _generatable: boolean;
     _scope: $Values<typeof scopes>;
     _onValidate: Validator;

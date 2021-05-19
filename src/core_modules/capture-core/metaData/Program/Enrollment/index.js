@@ -1,3 +1,3 @@
 // @flow
 
-export { default as Enrollment } from './Enrollment';
+export { Enrollment } from './Enrollment';

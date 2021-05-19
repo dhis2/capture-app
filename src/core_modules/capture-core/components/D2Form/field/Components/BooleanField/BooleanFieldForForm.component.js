@@ -22,7 +22,7 @@ const getFilteredProps = (props: Object) => {
     return passOnProps;
 };
 
-export default withGotoInterface()(
+export const BooleanFieldForForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
-import Button from '../../../../Buttons/Button.component';
+import { Button } from '../../../../Buttons/Button.component';
 
 const getStyles = () => ({
     buttonContainer: {
@@ -18,7 +18,7 @@ type Props = {
     classes: Object,
 };
 
-const ExistingTemplateContents = (props: Props) => {
+const ExistingTemplateContentsPlain = (props: Props) => {
     const { onSaveTemplate, onClose, classes } = props;
     return (
         <React.Fragment>
@@ -38,4 +38,4 @@ const ExistingTemplateContents = (props: Props) => {
     );
 };
 
-export default withStyles(getStyles)(ExistingTemplateContents);
+export const ExistingTemplateContents = withStyles(getStyles)(ExistingTemplateContentsPlain);

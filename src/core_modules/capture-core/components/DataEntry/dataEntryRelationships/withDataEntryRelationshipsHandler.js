@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import getDataEntryKey from '../common/getDataEntryKey';
+import { getDataEntryKey } from '../common/getDataEntryKey';
 import {
     removeRelationship,
 } from '../actions/dataEntry.actions';
@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default () =>
+export const withDataEntryRelationshipsHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
 
         // $FlowFixMe[missing-annot] automated comment

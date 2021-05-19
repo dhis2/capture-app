@@ -2,7 +2,7 @@
 import { ofType } from 'redux-observable';
 import { concatMap } from 'rxjs/operators';
 import { actionTypes, loadCoreFailed } from './init.actions';
-import getOrgUnitRootsActions from './getOrgUnitRootsActions';
+import { getOrgUnitRootsActions } from './getOrgUnitRootsActions';
 import { loadCoreSuccessBatch } from './init.actionBatches';
 
 export const loadCoreEpic = (action$: InputObservable) =>

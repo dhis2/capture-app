@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import UniqueTEADuplicate from './ErrorMessageCreator.component';
+import { UniqueTEADuplicate } from './ErrorMessageCreator.component';
 import { makeTETSelector, makeAttributeNameSelector } from './ErrorMessageCreator.selectors';
 
 const makeMapStateToProps = () => {
@@ -20,4 +20,4 @@ const makeMapStateToProps = () => {
 };
 
 // $FlowFixMe
-export default connect(makeMapStateToProps, () => ({}))(UniqueTEADuplicate);
+export const ErrorMessageCreator = connect(makeMapStateToProps, () => ({}))(UniqueTEADuplicate);

@@ -8,7 +8,7 @@ import {
 import {
     makeStageSelector,
 } from './newEventDataEntryWrapper.selectors';
-import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
+import { getDataEntryHasChanges } from '../getNewEventDataEntryHasChanges';
 
 
 const makeMapStateToProps = () => {

@@ -96,7 +96,7 @@ type State = {
     value: ?string,
 }
 
-class Notes extends React.Component<Props, State> {
+class NotesPlain extends React.Component<Props, State> {
     static defaultProps = {
         entityAccess: { read: true, write: true },
     }
@@ -226,4 +226,4 @@ class Notes extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(Notes);
+export const Notes = withStyles(styles)(NotesPlain);

@@ -20,7 +20,7 @@ import {
 
 } from '../../../../../rules/actionsCreator';
 import type { FieldData } from '../../../../../rules/actionsCreator';
-import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 
 export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
     action$.pipe(

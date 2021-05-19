@@ -13,7 +13,7 @@ function buildTranslations() {
     };
 }
 
-export default () =>
+export const withSelectTranslations = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class TranslationBuilder extends React.Component<Props> {
             translations: Object;

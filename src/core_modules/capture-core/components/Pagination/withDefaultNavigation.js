@@ -95,6 +95,6 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
  * @memberof Pagination
  * @example withDefaultNavigation()([InnerComponent])
 */
-export default () =>
+export const withNavigation = () =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(styles, { withTheme: true })(getNavigation(InnerComponent));

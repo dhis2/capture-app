@@ -1,10 +1,11 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Section from '../Section/Section.component';
-import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
-import D2SectionFields from './D2SectionFields.container';
+import { Section } from '../Section/Section.component';
+import { SectionHeaderSimple } from '../Section/SectionHeaderSimple.component';
+import { D2SectionFields } from './D2SectionFields.container';
 import { Section as MetaDataSection } from '../../metaData';
+import { SectionDescriptionBox } from './SectionDescriptionBox.component';
 
 const getStyles = theme => ({
     section: {
@@ -25,7 +26,7 @@ type Props = {
     formId: string,
 };
 
-class D2Section extends React.PureComponent<Props> {
+class D2SectionPlain extends React.PureComponent<Props> {
     // $FlowFixMe[speculation-ambiguous] automated comment
     sectionFieldsInstance: ?D2SectionFields;
     renderSectionHeader() {
@@ -39,6 +40,18 @@ class D2Section extends React.PureComponent<Props> {
             <SectionHeaderSimple
                 title={title}
             />
+        );
+    }
+
+    renderSectionDescription() {
+        const description = this.props.sectionMetaData.displayDescription;
+
+        if (!description) {
+            return null;
+        }
+
+        return (
+            <SectionDescriptionBox description={description} />
         );
     }
 
@@ -63,6 +76,7 @@ class D2Section extends React.PureComponent<Props> {
             <div>
                 <Section
                     header={this.renderSectionHeader()}
+                    description={this.renderSectionDescription()}
                     elevation={2}
                     className={classes.section}
                 >
@@ -81,4 +95,4 @@ class D2Section extends React.PureComponent<Props> {
     }
 }
 
-export default withStyles(getStyles)(D2Section);
+export const D2Section = withStyles(getStyles)(D2SectionPlain);

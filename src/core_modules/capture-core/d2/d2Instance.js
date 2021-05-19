@@ -7,7 +7,7 @@ export function setD2(d2: D2) {
     d2Instance = d2;
 }
 
-const getD2 = () => {
+export const getD2 = () => {
     if (!d2Instance) {
         log.error('please set d2 before using it');
     }
@@ -24,6 +24,3 @@ export const canViewOtherUsers = () => {
     const hasUserViewAuth = getD2().currentUser.authorities.has('F_USER_VIEW');
     return hasUserViewAuth;
 };
-
-
-export default getD2;

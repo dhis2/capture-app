@@ -3,8 +3,8 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
-import Button from '../../../../Buttons/Button.component';
-import NewTemplateTextField from './NewTemplateTextField.component';
+import { Button } from '../../../../Buttons/Button.component';
+import { NewTemplateTextField } from './NewTemplateTextField.component';
 
 const getStyles = (theme: Theme) => ({
     error: {
@@ -26,7 +26,7 @@ type Props = {
     classes: Object,
 };
 
-const NewTemplateContents = (props: Props) => {
+const NewTemplateContentsPlain = (props: Props) => {
     const { onSaveTemplate, onClose, classes } = props;
     const [name, setName] = React.useState('');
     const [error, setError] = React.useState();
@@ -79,4 +79,4 @@ const NewTemplateContents = (props: Props) => {
     );
 };
 
-export default withStyles(getStyles)(NewTemplateContents);
+export const NewTemplateContents = withStyles(getStyles)(NewTemplateContentsPlain);

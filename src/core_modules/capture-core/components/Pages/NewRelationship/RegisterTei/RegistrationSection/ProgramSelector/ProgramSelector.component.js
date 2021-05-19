@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import ComposedProgramSelector from './ComposedProgramSelector.component';
+import { ComposedProgramSelector } from './ComposedProgramSelector.component';
 
 const getStyles = (theme: Theme) => ({
     programLabel: {
@@ -17,7 +17,7 @@ type Props = {
     classes: Object,
 };
 
-class ProgramSelector extends React.Component<Props> {
+class ProgramSelectorPlain extends React.Component<Props> {
     static baseComponentStyles = {
         labelContainerStyle: {
             flexBasis: 200,
@@ -33,7 +33,7 @@ class ProgramSelector extends React.Component<Props> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <ComposedProgramSelector
                 dataTest="relationship-register-tei-program-selector"
-                styles={ProgramSelector.baseComponentStyles}
+                styles={ProgramSelectorPlain.baseComponentStyles}
                 programLabelClass={classes.programLabel}
                 label={i18n.t('Program')}
                 {...passOnProps}
@@ -41,4 +41,4 @@ class ProgramSelector extends React.Component<Props> {
         );
     }
 }
-export default withStyles(getStyles)(ProgramSelector);
+export const ProgramSelectorComponent = withStyles(getStyles)(ProgramSelectorPlain);

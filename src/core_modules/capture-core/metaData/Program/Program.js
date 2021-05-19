@@ -6,9 +6,9 @@ import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import type{ CategoryCombination } from '../CategoryCombinations';
 import type { Icon } from '../Icon';
 import type { Access } from '../Access';
-import type ProgramStage from './ProgramStage';
+import type { ProgramStage } from './ProgramStage';
 
-export default class Program {
+export class Program {
     static errorMessages = {
         STAGE_NOT_FOUND: 'Stage was not found',
         STAGE_INDEX_NOT_FOUND: 'No stage found on index',

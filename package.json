@@ -64,6 +64,7 @@
     "start": "yarn verifyCacheVersion && d2-app-scripts start",
     "start:forCypress": "node scripts/startAppForCypress.js",
     "build": "yarn verifyCacheVersion && GENERATE_SOURCEMAP=false d2-app-scripts build && cp ./package.json ./build/app/package.json",
+    "build:standalone": "GENERATE_SOURCEMAP=false d2-app-scripts build --standalone",
     "test": "d2-app-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
@@ -77,7 +78,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "d2-app-scripts i18n extract && git add ./i18n/"
+      "pre-commit": "d2-app-scripts i18n extract && git add ./i18n/",
+      "pre-push": "yarn linter:check && yarn flow:check"
     }
   },
   "devDependencies": {

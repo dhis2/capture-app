@@ -1,3 +1,3 @@
 // @flow
 
-export default (formId: string, elementId: string) => [formId, elementId].join('-');
+export const getOrgUnitRootsKey = (formId: string, elementId: string) => [formId, elementId].join('-');

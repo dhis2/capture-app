@@ -1,2 +1,2 @@
 // @flow
-export { default as buildSystemSettingsAsync } from './systemSettingsBuilder';
+export { buildSystemSettingsAsync } from './systemSettingsBuilder';

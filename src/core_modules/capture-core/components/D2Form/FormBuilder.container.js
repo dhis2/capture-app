@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import FormBuilder from 'capture-ui/FormBuilder/FormBuilder.component';
+import { FormBuilder } from 'capture-ui/FormBuilder/FormBuilder.component';
 import { updateFieldUIOnly } from './formBuilder.actions';
 
 const FormBuilderRefBuilder = (props: Object) => {
@@ -25,4 +25,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps)(FormBuilderRefBuilder);
+export const FormBuilderContainer = connect(mapStateToProps, mapDispatchToProps)(FormBuilderRefBuilder);

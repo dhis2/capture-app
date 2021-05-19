@@ -33,7 +33,7 @@ const isFunctionSignatureBroken = (dhisFunctionParameters: ?number, parameters: 
     return false;
 };
 
-const executeExpression = (dhisFunctions: D2Functions, expression: string, logError: any) => {
+export const executeExpression = (dhisFunctions: D2Functions, expression: string, logError: any) => {
     const dhisFunctionWhenNameIncludedOnExpression = ({ name }) => expression.includes(name);
     const onExpressionReplaceFunctionCallStringWithEvaluatedString =
       ({ evaluatedExpression, isUpdated }, { name, dhisFunction, parameters }) => {
@@ -99,5 +99,3 @@ const executeExpression = (dhisFunctions: D2Functions, expression: string, logEr
     }
     return answer;
 };
-
-export default executeExpression;

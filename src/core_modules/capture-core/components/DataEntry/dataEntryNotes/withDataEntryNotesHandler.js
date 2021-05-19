@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import getDataEntryKey from '../common/getDataEntryKey';
+import { getDataEntryKey } from '../common/getDataEntryKey';
 
 type Props = {
     itemId: string,
@@ -35,7 +35,7 @@ const mapStateToProps = (state: ReduxState, props: { dataEntryId: string }) => {
     };
 };
 
-export default () =>
+export const withDataEntryNotesHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
 
         // $FlowFixMe[missing-annot] automated comment

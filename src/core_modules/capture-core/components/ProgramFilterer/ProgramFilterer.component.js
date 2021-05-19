@@ -11,7 +11,7 @@ type Props = {
 };
 
 // Filter programs based on organisation units and a baseline filter. Uses a render prop for children.
-class ProgramFilterer extends React.Component<Props> {
+export class ProgramFilterer extends React.Component<Props> {
     static isBeingFiltered(basePrograms: Array<Program>, filteredPrograms: Array<Program>) {
         return basePrograms.length !== filteredPrograms.length;
     }
@@ -55,5 +55,3 @@ class ProgramFilterer extends React.Component<Props> {
             ), passOnProps);
     }
 }
-
-export default ProgramFilterer;

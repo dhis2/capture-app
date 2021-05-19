@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { OrgUnitTreeMultipleRoots as D2OrgUnitTree } from '@dhis2/d2-ui-org-unit-tree';
 import { withStyles } from '@material-ui/core/styles';
-import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
+import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 
 const getStyles = () => ({
     orgunitTree: {
@@ -22,7 +22,7 @@ type Props = {
     treeKey: string,
 };
 
-class OrgUnitTree extends React.Component<Props> {
+class OrgUnitTreePlain extends React.Component<Props> {
     getExpandedItems() {
         const { roots } = this.props;
         if (roots && roots.length === 1) {
@@ -55,4 +55,4 @@ class OrgUnitTree extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(withLoadingIndicator(() => ({ margin: 4 }), () => ({ size: 20 }))(OrgUnitTree));
+export const OrgUnitTree = withStyles(getStyles)(withLoadingIndicator(() => ({ margin: 4 }), () => ({ size: 20 }))(OrgUnitTreePlain));

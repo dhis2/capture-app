@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { debounce } from 'lodash';
-import TextInput from '../internal/TextInput/TextInput.component';
+import { TextInput } from '../internal/TextInput/TextInput.component';
 
 type Props = {
     onDebounced: (event: SyntheticEvent<HTMLInputElement>) => void,
@@ -16,7 +16,7 @@ type State = {
  * Text field exposing a callback method triggered when the input is debounced
  * @class DebounceField
  */
-class DebounceField extends React.Component<Props, State> {
+export class DebounceField extends React.Component<Props, State> {
     debouncer: Function;
     constructor(props: Props) {
         super(props);
@@ -63,5 +63,3 @@ class DebounceField extends React.Component<Props, State> {
         );
     }
 }
-
-export default DebounceField;

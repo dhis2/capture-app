@@ -9,7 +9,7 @@ import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissin
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { urlArguments } from '../../../utils/url';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import LinkButton from '../../Buttons/LinkButton.component';
+import { LinkButton } from '../../Buttons/LinkButton.component';
 import { useEnrollmentInfo } from './hooks';
 
 export const missingStatuses = {

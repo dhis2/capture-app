@@ -1,7 +1,7 @@
 // @flow
 import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
-import moment from 'capture-core-utils/moment/momentResolver';
+import { moment } from 'capture-core-utils/moment/momentResolver';
 import { parseDate } from '../../../../utils/converters/date';
 
 const isValidEnrollmentDate = (value: string, isFutureDateAllowed: boolean) => {
@@ -24,7 +24,7 @@ const isValidEnrollmentDate = (value: string, isFutureDateAllowed: boolean) => {
     };
 };
 
-const getValidatorContainers = (isFutureEnrollmentDateAllowed: boolean) => {
+export const getEnrollmentDateValidatorContainer = (isFutureEnrollmentDateAllowed: boolean) => {
     const validatorContainers = [
         {
             validator: hasValue,
@@ -38,5 +38,3 @@ const getValidatorContainers = (isFutureEnrollmentDateAllowed: boolean) => {
     ];
     return validatorContainers;
 };
-
-export default getValidatorContainers;

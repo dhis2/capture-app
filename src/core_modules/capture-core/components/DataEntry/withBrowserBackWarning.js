@@ -4,9 +4,9 @@ import i18n from '@dhis2/d2-i18n';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
-import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
-import getDataEntryKey from './common/getDataEntryKey';
-import getDataEntryHasChanges from './common/dataEntryHasChanges';
+import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
+import { getDataEntryKey } from './common/getDataEntryKey';
+import { dataEntryHasChanges as getDataEntryHasChanges } from './common/dataEntryHasChanges';
 
 type Props = {
     dataEntryHasChanges: boolean,
@@ -92,7 +92,7 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
 
 const mapDispatchToProps = () => ({});
 
-export default () =>
+export const withBrowserBackWarning = () =>
     (InnerComponent: React.ComponentType<any>) =>
 
         // $FlowFixMe[missing-annot] automated comment

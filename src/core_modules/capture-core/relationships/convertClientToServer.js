@@ -13,7 +13,7 @@ const getServerConstraintByType = {
     }),
 };
 
-export default function convertToServerRelationship(clientRelationship: Object) {
+export function convertClientRelationshipToServer(clientRelationship: Object) {
     return {
         relationshipType: clientRelationship.relationshipType.id,
         from: getServerConstraintByType[clientRelationship.from.type](clientRelationship.from.id),

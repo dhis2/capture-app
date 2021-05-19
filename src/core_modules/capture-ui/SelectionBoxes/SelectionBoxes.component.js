@@ -1,22 +1,22 @@
 // @flow
 import * as React from 'react';
 
-import MultiSelectBoxes from '../internal/SelectionBoxes/MultiSelectionsBoxes/MultiSelectionsBoxes.component';
-import SingleSelectBoxes from '../internal/SelectionBoxes/SingleSelectionBoxes/SingleSelectionBoxes.component';
+import { MultiSelectionsBoxes } from '../internal/SelectionBoxes/MultiSelectionsBoxes/MultiSelectionsBoxes.component';
+import { SingleSelectionBoxes } from '../internal/SelectionBoxes/SingleSelectionBoxes/SingleSelectionBoxes.component';
 
-import orientations from '../constants/orientations.const';
+import { orientations } from '../constants/orientations.const';
 
 type Props = {
     multiSelect?: ?boolean,
 };
 
-const SelectBoxes = (props: Props) => {
+export const SelectionBoxes = (props: Props) => {
     const { multiSelect, ...passOnProps } = props;
 
     if (multiSelect) {
         return (
             // $FlowFixMe[cannot-spread-inexact] automated comment
-            <MultiSelectBoxes
+            <MultiSelectionsBoxes
                 orientation={orientations.HORIZONTAL}
                 {...passOnProps}
             />
@@ -25,11 +25,9 @@ const SelectBoxes = (props: Props) => {
 
     return (
         // $FlowFixMe[cannot-spread-inexact] automated comment
-        <SingleSelectBoxes
+        <SingleSelectionBoxes
             orientation={orientations.HORIZONTAL}
             {...passOnProps}
         />
     );
 };
-
-export default SelectBoxes;

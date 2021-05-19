@@ -44,7 +44,7 @@ function getTEIServerData(
 }
 
 // todo (report lgtm) this function is used. when its used 6 elements are being passed in but here the last four are not being used.
-export default function buildServerData(
+export function buildServerData(
     dataEntryKey: string,
     selections: Selections,
     enrollment: Enrollment,

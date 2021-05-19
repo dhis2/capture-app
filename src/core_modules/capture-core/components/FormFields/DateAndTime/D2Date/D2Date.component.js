@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import lowerCaseFirstLetter from 'capture-core-utils/string/lowerCaseFirstLetter';
-import D2TextField from '../../Generic/D2TextField.component';
-import D2DatePopup from './D2DatePopup.component';
-import D2DateCalendar from './D2DateCalendar.component';
+import { lowerCaseFirstLetter } from 'capture-core-utils/string/lowerCaseFirstLetter';
+import { D2TextField } from '../../Generic/D2TextField.component';
+import { D2DatePopup } from './D2DatePopup.component';
+import { D2DateCalendar } from './D2DateCalendar.component';
 
 type Props = {
     label: string,
@@ -30,7 +30,7 @@ const styles = () => ({
     },
 });
 
-class D2Date extends React.Component<Props, State> {
+class D2DatePlain extends React.Component<Props, State> {
     static splitPassOnProps(passOnProps: ?Object) {
         const splittedProps = {
             input: {},
@@ -204,4 +204,4 @@ class D2Date extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(D2Date);
+export const D2Date = withStyles(styles)(D2DatePlain);

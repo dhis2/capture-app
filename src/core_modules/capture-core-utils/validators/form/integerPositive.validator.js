@@ -5,7 +5,7 @@
  * @param {string} value
  * @returns
  */
-const isValidPositiveInteger = (value: string) => {
+export const isValidPositiveInteger = (value: string) => {
     if (isNaN(value)) {
         return false;
     }
@@ -13,5 +13,3 @@ const isValidPositiveInteger = (value: string) => {
     const number = Number(value);
     return Number.isSafeInteger(number) && number > 0;
 };
-
-export default isValidPositiveInteger;

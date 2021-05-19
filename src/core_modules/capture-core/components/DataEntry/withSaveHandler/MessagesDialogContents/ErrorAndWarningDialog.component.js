@@ -36,7 +36,7 @@ type Props = {
     classes: Object,
 };
 
-class ErrorAndWarningDialog extends React.Component<Props> {
+class ErrorAndWarningDialogPlain extends React.Component<Props> {
     static getItemWithName(name: string, message: string) {
         return (
             <React.Fragment>
@@ -150,4 +150,4 @@ class ErrorAndWarningDialog extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(ErrorAndWarningDialog);
+export const ErrorAndWarningDialog = withStyles(getStyles)(ErrorAndWarningDialogPlain);

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Section, SectionHeaderSimple } from '../../../../Section';
-import SectionContents from './SectionContents.component';
+import { SectionContents } from './SectionContents.component';
 
 const getStyles = (theme: Theme) => ({
     section: {
@@ -25,7 +25,7 @@ const renderSectionHeader = () => {
     );
 };
 
-const RegistrationSection = (props: Props) => {
+const RegistrationSectionPlain = (props: Props) => {
     const { classes } = props;
     return (
         <Section
@@ -37,4 +37,4 @@ const RegistrationSection = (props: Props) => {
         </Section>
     );
 };
-export default withStyles(getStyles)(RegistrationSection);
+export const RegistrationSection = withStyles(getStyles)(RegistrationSectionPlain);

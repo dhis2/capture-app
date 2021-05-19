@@ -18,7 +18,7 @@ import customFormStyles from './coordinateFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
-export default withGotoInterface()(
+export const CoordinateFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

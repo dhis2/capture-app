@@ -1,8 +1,10 @@
 // @flow
-import getEventProgramThrowIfNotFound from './getEventProgramThrowIfNotFound';
+import { getEventProgramThrowIfNotFound } from './getEventProgramThrowIfNotFound';
 
-
-export default function (programId: string, categoriesMeta: ?{ [categoryId: string]: { writeAccess: boolean } }) {
+export function getEventProgramEventAccess(
+    programId: string,
+    categoriesMeta: ?{ [categoryId: string]: { writeAccess: boolean } },
+) {
     const program = getEventProgramThrowIfNotFound(programId);
     const stage = program.stage;
     const access = {

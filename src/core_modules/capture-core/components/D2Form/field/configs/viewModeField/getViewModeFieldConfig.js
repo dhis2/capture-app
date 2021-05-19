@@ -15,7 +15,7 @@ const baseComponentStyles = {
     },
 };
 
-const getViewModeConfig = (dataElement: MetaDataElement, options: Object) => {
+export const getViewModeFieldConfig = (dataElement: MetaDataElement, options: Object) => {
     const props = {
         valueConverter: (value: any) => dataElement.convertValue(value, convertFn),
         styles: baseComponentStyles,
@@ -30,5 +30,3 @@ const getViewModeConfig = (dataElement: MetaDataElement, options: Object) => {
         props,
     };
 };
-
-export default getViewModeConfig;

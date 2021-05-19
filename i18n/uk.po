@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Wanda <wanda@frontlineaids.org>, 2021
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
+# Wanda <wanda@frontlineaids.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: Wanda <wanda@frontlineaids.org>, 2021\n"
 "Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -149,9 +149,6 @@ msgstr "Призначений користувач"
 msgid "Search for user"
 msgstr ""
 
-msgid "Complete event"
-msgstr ""
-
 msgid "Basic info"
 msgstr ""
 
@@ -188,9 +185,6 @@ msgstr "Активне"
 
 msgid "Completed"
 msgstr "Завершено"
-
-msgid "Assigned to"
-msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -669,6 +663,9 @@ msgstr "Статус реєстрації"
 msgid "Cancelled"
 msgstr "Скасовано"
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Registering unit"
 msgstr "Підрозділ, що реєструє"
 
@@ -842,12 +839,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
-msgid "Event details"
-msgstr ""
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -883,15 +874,6 @@ msgstr "Додати зв'язок"
 msgid "Results found"
 msgstr ""
 
-msgid "Open"
-msgstr "Відкрити"
-
-msgid "All accessible"
-msgstr "Все доступне"
-
-msgid "Organisation unit scope"
-msgstr "Охоплення організаційного підрозділу"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
@@ -902,6 +884,30 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Подальші дії"
+
+msgid "Enrollment date"
+msgstr "Дата реєстрації"
+
+msgid "Incident date"
+msgstr "Дата інциденту"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
@@ -954,12 +960,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
-
-msgid "Latitude"
-msgstr "Широта"
-
-msgid "Longitude"
-msgstr "Довгота"
 
 msgid "Set coordinate"
 msgstr "Встановити координату"

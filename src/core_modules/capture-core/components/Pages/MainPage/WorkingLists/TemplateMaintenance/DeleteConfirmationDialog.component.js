@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
-import Button from '../../../../Buttons/Button.component';
+import { Button } from '../../../../Buttons/Button.component';
 
 const getStyles = () => ({
     buttonContainer: {
@@ -20,7 +20,7 @@ type Props = {
     classes: Object,
 };
 
-const DeleteConfirmationDialog = (props: Props) => {
+const DeleteConfirmationDialogPlain = (props: Props) => {
     const {
         open,
         onClose,
@@ -54,4 +54,4 @@ const DeleteConfirmationDialog = (props: Props) => {
     );
 };
 
-export default withStyles(getStyles)(DeleteConfirmationDialog);
+export const DeleteConfirmationDialog = withStyles(getStyles)(DeleteConfirmationDialogPlain);

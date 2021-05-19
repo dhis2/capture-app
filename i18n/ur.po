@@ -1,14 +1,14 @@
 # 
 # Translators:
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Urdu (https://www.transifex.com/hisp-uio/teams/100509/ur/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -148,9 +148,6 @@ msgstr ""
 msgid "Search for user"
 msgstr ""
 
-msgid "Complete event"
-msgstr "مکمل ایونٹ"
-
 msgid "Basic info"
 msgstr ""
 
@@ -187,9 +184,6 @@ msgstr "فعال"
 
 msgid "Completed"
 msgstr "مکمل"
-
-msgid "Assigned to"
-msgstr "مقرر کیا، مقرر کرنا"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -668,6 +662,9 @@ msgstr "اندراج کی حیثیت"
 msgid "Cancelled"
 msgstr "منسوخ"
 
+msgid "Assigned to"
+msgstr "مقرر کیا، مقرر کرنا"
+
 msgid "Registering unit"
 msgstr "رجسٹرنگ یونٹ"
 
@@ -841,12 +838,6 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
-msgid "Event details"
-msgstr "واقعہ کی تفصیلات"
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -882,15 +873,6 @@ msgstr "تعلقات شامل کریں"
 msgid "Results found"
 msgstr ""
 
-msgid "Open"
-msgstr "کھلا"
-
-msgid "All accessible"
-msgstr "تمام قابل رسائی"
-
-msgid "Organisation unit scope"
-msgstr "تنظیم یونٹ کی گنجائش"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
 
@@ -901,6 +883,30 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr ""
+
+msgid "Enrollment date"
+msgstr "اندراج کی تاریخ"
+
+msgid "Incident date"
+msgstr "واقعات کی تاریخ"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
@@ -953,12 +959,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr ""
-
-msgid "Latitude"
-msgstr "طول"
-
-msgid "Longitude"
-msgstr "لمبائی"
 
 msgid "Set coordinate"
 msgstr "ہم آہنگی مقرر کریں"

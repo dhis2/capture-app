@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import defaultClasses from './textField.module.css';
-import TextInput from '../internal/TextInput/TextInput.component';
-import withFocusHandler from '../internal/TextInput/withFocusHandler';
+import { TextInput } from '../internal/TextInput/TextInput.component';
+import { withTextFieldFocusHandler } from '../internal/TextInput/withFocusHandler';
 
 type Classes = {
     input?: ?string,
@@ -33,4 +33,4 @@ class D2TextField extends React.Component<Props> {
     }
 }
 
-export default withFocusHandler()(D2TextField);
+export const TextField = withTextFieldFocusHandler()(D2TextField);

@@ -3,7 +3,7 @@
 const CATEGORIES_KEY = 'categories';
 const COMPLETE_KEY = 'complete';
 
-const isSelectionsEqual = (set1: Object, set2: Object) => {
+export const isSelectionsEqual = (set1: Object, set2: Object) => {
     const set1Keys = Object
         .keys(set1)
         .filter(key =>
@@ -30,5 +30,3 @@ const isSelectionsEqual = (set1: Object, set2: Object) => {
             return value1 === value2;
         });
 };
-
-export default isSelectionsEqual;

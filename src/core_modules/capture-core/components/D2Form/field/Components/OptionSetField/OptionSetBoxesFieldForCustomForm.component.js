@@ -12,9 +12,9 @@ import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
 } from '../internal';
-import withRulesOptionVisibilityHandler from './withRulesOptionVisibilityHandler';
+import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
-export default withGotoInterface()(
+export const OptionSetBoxesFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

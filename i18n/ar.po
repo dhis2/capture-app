@@ -2,14 +2,14 @@
 # Translators:
 # Antonia Bezenchek <antonia@informa.pro>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
 # Hamza Assada <7amza.it@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2021\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -157,9 +157,6 @@ msgstr "المستخدم المعين"
 msgid "Search for user"
 msgstr "البحث عن مستخدم"
 
-msgid "Complete event"
-msgstr "إكمال الحدث"
-
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
 
@@ -199,9 +196,6 @@ msgstr "فعال"
 
 msgid "Completed"
 msgstr "مكتمل"
-
-msgid "Assigned to"
-msgstr "مسندة إلى"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
@@ -682,6 +676,9 @@ msgstr "حالة التسجيل"
 msgid "Cancelled"
 msgstr "تم الإلغاء"
 
+msgid "Assigned to"
+msgstr "مسندة إلى"
+
 msgid "Registering unit"
 msgstr "وحدة التسجيل"
 
@@ -861,12 +858,6 @@ msgstr "البحث في جميع البرامج"
 msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
 
-msgid "Event details"
-msgstr "تفاصيل الحدث"
-
-msgid "Event completed"
-msgstr ""
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -902,15 +893,6 @@ msgstr "اضف علاقة"
 msgid "Results found"
 msgstr "العثور على نتائج"
 
-msgid "Open"
-msgstr "مفتوح"
-
-msgid "All accessible"
-msgstr "الكل يمكن الوصول اليه"
-
-msgid "Organisation unit scope"
-msgstr "مدى وحدة التنظيم"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "بحث {{uniqueAttrName}}"
 
@@ -922,6 +904,30 @@ msgstr "للعمل مع البرنامج المحدد"
 
 msgid "open the Tracker Capture app"
 msgstr "فتح برنامج التتبع والإلتقاط"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "متابعة"
+
+msgid "Enrollment date"
+msgstr "تاريخ التسجيل"
+
+msgid "Incident date"
+msgstr "تاريخ وقوع الحدث"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
 
 msgid "Person Profile"
 msgstr ""
@@ -973,12 +979,6 @@ msgstr ""
 
 msgid "tracked entity instance"
 msgstr "نموذج الكيان المتتبع"
-
-msgid "Latitude"
-msgstr "خط العرض"
-
-msgid "Longitude"
-msgstr "خط الطول"
 
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"

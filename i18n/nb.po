@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Caroline Hesthagen Holen <caroline@devotta.no>, 2021
 # Karoline Tufte Lien <karoline@dhis2.org>, 2021
+# Caroline Hesthagen Holen <caroline@devotta.no>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
+"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,9 +155,6 @@ msgstr "Tildelt programbruker"
 msgid "Search for user"
 msgstr "Søk etter bruker"
 
-msgid "Complete event"
-msgstr "Fullfør hendelse"
-
 msgid "Basic info"
 msgstr "Grunnleggende informasjon"
 
@@ -198,9 +195,6 @@ msgstr "Aktiv"
 msgid "Completed"
 msgstr "Fullført"
 
-msgid "Assigned to"
-msgstr "Tildelt til"
-
 msgid "Please add or cancel comment before saving the event"
 msgstr "Legg til eller avbryt kommentar før du lagrer hendelsen"
 
@@ -217,7 +211,7 @@ msgid "No write access"
 msgstr "Ingen skrivetilgang"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "Ny {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Bytt til skjemavisning"
@@ -694,6 +688,9 @@ msgstr "Registreringsstatus"
 msgid "Cancelled"
 msgstr "Kansellert"
 
+msgid "Assigned to"
+msgstr "Tildelt til"
+
 msgid "Registering unit"
 msgstr "Registreringsenhet"
 
@@ -813,7 +810,7 @@ msgid "Back"
 msgstr "Tilbake"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Søk etter {{titleText}}"
 
 msgid "Search for"
 msgstr "Søk etter"
@@ -875,12 +872,6 @@ msgstr "Søk i alle programmer"
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
 
-msgid "Event details"
-msgstr "Hendelsesdetaljer"
-
-msgid "Event completed"
-msgstr "Hendelse fullført"
-
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -918,15 +909,6 @@ msgstr "Legg til relasjon"
 msgid "Results found"
 msgstr "Resultater funnet"
 
-msgid "Open"
-msgstr "Åpne"
-
-msgid "All accessible"
-msgstr "Alle tilgjengelige"
-
-msgid "Organisation unit scope"
-msgstr "Organisasjonsenhet-omfang"
-
 msgid "Search {{uniqueAttrName}}"
 msgstr "Søk {{uniqueAttrName}}"
 
@@ -939,6 +921,30 @@ msgstr "For å jobbe med det valgte programmet,"
 msgid "open the Tracker Capture app"
 msgstr "åpne Tracker Capture app"
 
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "Oppfølging"
+
+msgid "Enrollment date"
+msgstr "Registreringsdato"
+
+msgid "Incident date"
+msgstr "Forekomstdato"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Profile widget could not be loaded. Please try again later"
+msgstr ""
+
 msgid "Person Profile"
 msgstr "Personprofil"
 
@@ -949,7 +955,7 @@ msgid "An error has occured. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "{{trackedEntityName}} i program{{escape}} {{programName}}"
 
 msgid "Program not found"
 msgstr "Program ble ikke funnet"
@@ -989,12 +995,6 @@ msgstr "Feil ved lagring av registrering"
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
-
-msgid "Latitude"
-msgstr "Breddegrad"
-
-msgid "Longitude"
-msgstr "Lengdegrad"
 
 msgid "Set coordinate"
 msgstr "Sett koordinater"

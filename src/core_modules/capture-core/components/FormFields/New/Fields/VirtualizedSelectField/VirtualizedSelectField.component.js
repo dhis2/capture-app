@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import VirtualizedSelect from '../../../Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import withFocusHandler from './withFocusHandler';
+import { OptionsSelectVirtualized } from '../../../Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { withFocusHandler } from './withFocusHandler';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -26,10 +26,10 @@ type Props = {
 
 const VirtualizedSelectComponent =
     withFocusHandler()(
-        VirtualizedSelect,
+        OptionsSelectVirtualized,
     );
 
-class VirtualizedSelectField extends Component<Props> {
+class VirtualizedSelectFieldPlain extends Component<Props> {
     handleSelect = (value: any) => {
         this.props.onBlur && this.props.onBlur(value);
     }
@@ -55,4 +55,4 @@ class VirtualizedSelectField extends Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(VirtualizedSelectField);
+export const VirtualizedSelectField = withStyles(getStyles)(VirtualizedSelectFieldPlain);

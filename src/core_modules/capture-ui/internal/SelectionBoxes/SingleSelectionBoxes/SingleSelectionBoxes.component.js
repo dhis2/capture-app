@@ -2,9 +2,9 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from '../../../Icons';
-import SingleSelectBox from './SingleSelectBox/SingleSelectBox.component';
-import withFocusHandler from './SingleSelectBox/withFocusHandler';
-import orientations from '../../../constants/orientations.const';
+import { SingleSelectBox } from './SingleSelectBox/SingleSelectBox.component';
+import { withFocusHandler } from './SingleSelectBox/withFocusHandler';
+import { orientations } from '../../../constants/orientations.const';
 import defaultClasses from './singleSelectionBoxes.module.css';
 import type { OptionRendererInputData, OptionsArray, OptionRenderer } from '../selectBoxes.types';
 
@@ -31,7 +31,7 @@ type Props = {
     disabled?: ?boolean,
 };
 
-class SingleSelectionBoxes extends React.Component<Props> {
+export class SingleSelectionBoxes extends React.Component<Props> {
     static getFocusClass(classes: Object, isSelected: boolean) {
         return isSelected ? classes.focusSelected : classes.focusUnselected;
     }
@@ -141,5 +141,3 @@ class SingleSelectionBoxes extends React.Component<Props> {
         );
     }
 }
-
-export default SingleSelectionBoxes;

@@ -2,7 +2,7 @@
 import { createSelector } from 'reselect';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
+import { programCollection } from '../../../../metaDataMemoryStores/programCollection/programCollection';
 
 const programIdSelector = state => state.currentSelections.programId;
 

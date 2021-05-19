@@ -9,7 +9,7 @@ import {
     requestFilterFormFieldOrgUnits,
     resetFormFieldOrgUnitsFilter,
 } from './orgUnitFieldForForms.actions';
-import getOrgUnitRootsKey from './getOrgUnitRootsKey';
+import { getOrgUnitRootsKey } from './getOrgUnitRootsKey';
 
 type Props = {
     formId: string,
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default () =>
+export const withFormFieldOrgUnitsHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowFixMe[missing-annot] automated comment
         connect(mapStateToProps, mapDispatchToProps)(getFormFieldOrgUnitsHandler(InnerComponent));

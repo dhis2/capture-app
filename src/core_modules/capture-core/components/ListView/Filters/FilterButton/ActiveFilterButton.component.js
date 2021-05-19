@@ -52,7 +52,7 @@ type Props = {
 
 const MAX_LENGTH_OF_VALUE = 10;
 
-class ActiveFilterButton extends React.Component<Props, State> {
+class ActiveFilterButtonPlain extends React.Component<Props, State> {
     static stopClearPropagation(event: SyntheticEvent<any>) {
         event.stopPropagation();
     }
@@ -132,4 +132,4 @@ class ActiveFilterButton extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(getStyles)(ActiveFilterButton);
+export const ActiveFilterButton = withStyles(getStyles)(ActiveFilterButtonPlain);

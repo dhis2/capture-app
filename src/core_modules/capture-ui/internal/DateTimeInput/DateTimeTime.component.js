@@ -1,16 +1,16 @@
 // @flow
 import React from 'react';
-import withFocusSaver from '../../HOC/withFocusSaver';
-import withFocusHandler from '../TextInput/withFocusHandler';
-import TextInput from '../TextInput/TextInput.component';
-import withShrinkLabel from '../../HOC/withShrinkLabel';
+import { withFocusSaver } from '../../HOC/withFocusSaver';
+import { withTextFieldFocusHandler } from '../TextInput/withFocusHandler';
+import { TextInput } from '../TextInput/TextInput.component';
+import { withShrinkLabel } from '../../HOC/withShrinkLabel';
 
 type Props = {
     onBlur: (value: any) => void,
     onChange?: ?(value: any) => void,
 }
 
-class DateTimeTime extends React.Component<Props> {
+class DateTimeTimePlain extends React.Component<Props> {
     handleBlur = (event) => {
         this.props.onBlur(event.currentTarget.value);
     }
@@ -34,4 +34,5 @@ class DateTimeTime extends React.Component<Props> {
     }
 }
 
-export default withFocusSaver()(withShrinkLabel()(withFocusHandler()(DateTimeTime)));
+export const DateTimeTime =
+    withFocusSaver()(withShrinkLabel()(withTextFieldFocusHandler()(DateTimeTimePlain)));

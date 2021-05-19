@@ -7,7 +7,7 @@ import {
     startSaveNewEventAfterReturnedToMainPage,
 } from '../actions/dataEntry.actions';
 
-import getDataEntryKey from '../../../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>

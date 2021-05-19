@@ -3,12 +3,12 @@ import * as React from 'react';
 import log from 'loglevel';
 import { makeCancelablePromise, errorCreator } from 'capture-core-utils';
 import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
-import getD2 from '../../../../../../d2/d2Instance';
-import scopes from './scopes.const';
+import { getD2 } from '../../../../../../d2/d2Instance';
+import { orgUnitFieldScopes } from './scopes.const';
 
 type Props = {
     defaultRoots: Array<any>,
-    scope: $Values<typeof scopes>,
+    scope: $Values<typeof orgUnitFieldScopes>,
     onSearchError?: ?(message: string) => void,
     onSelect: Function,
 };
@@ -21,7 +21,7 @@ type State = {
 };
 
 // Handles organisation unit filtering internally in this component.
-export default () =>
+export const withInternalFilterHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class OrgUnitInternalFilterHandlerHOC extends React.Component<Props, State> {
             cancelablePromise: ?CancelablePromise<any>;
@@ -47,7 +47,7 @@ export default () =>
             filterOrgUnits(filterText: string) {
                 const { scope, onSearchError } = this.props;
                 const hierarchyProp =
-                    scope === scopes.USER_CAPTURE ? { withinUserHierarchy: true } : { withinUserSearchHierarchy: true };
+                    scope === orgUnitFieldScopes.USER_CAPTURE ? { withinUserHierarchy: true } : { withinUserSearchHierarchy: true };
                 this.setState({
                     inProgress: true,
                 });

@@ -3,7 +3,7 @@ import i18n from '@dhis2/d2-i18n';
 
 const validateNote = (value?: ?string) => !value;
 
-const getValidatorContainers = () => {
+export const getNoteValidatorContainers = () => {
     const validatorContainers = [
         {
             validator: validateNote,
@@ -12,5 +12,3 @@ const getValidatorContainers = () => {
     ];
     return validatorContainers;
 };
-
-export default getValidatorContainers;
