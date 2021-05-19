@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
+"POT-Creation-Date: 2021-05-18T12:46:51.099Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Swedish (https://www.transifex.com/hisp-uio/teams/100509/sv/)\n"
@@ -313,14 +313,14 @@ msgstr ""
 msgid "Complete event"
 msgstr ""
 
+msgid "Comments"
+msgstr ""
+
 msgid "Basic info"
 msgstr ""
 
 msgid "Status"
 msgstr "Status"
-
-msgid "Comments"
-msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -724,6 +724,9 @@ msgid "Selected"
 msgstr "Vald"
 
 msgid "Organisation unit scope"
+msgstr ""
+
+msgid "Organisation unit"
 msgstr ""
 
 msgid "Selected program"
