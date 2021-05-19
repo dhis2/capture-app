@@ -29,6 +29,11 @@ const getStyles = ({ typography }) => ({
     },
 });
 
+const callbackDelete = () => {
+    // TODO Pending decision on what should happen after an enrollment is deleted. For now reload the page.
+    location.reload();
+};
+
 export const EnrollmentPageDefaultPlain = ({
     program,
     teiId,
@@ -47,6 +52,7 @@ export const EnrollmentPageDefaultPlain = ({
                     teiId={teiId}
                     enrollmentId={enrollmentId}
                     programId={program.id}
+                    callbackDelete={callbackDelete}
                 />
             </div>
         </div>

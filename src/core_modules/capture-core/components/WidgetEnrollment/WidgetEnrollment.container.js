@@ -10,9 +10,10 @@ type Props = {|
     teiId: string,
     enrollmentId: string,
     programId: string,
+    callbackDelete: () => void,
 |};
 
-export const WidgetEnrollment = ({ teiId, enrollmentId, programId }: Props) => {
+export const WidgetEnrollment = ({ teiId, enrollmentId, programId, callbackDelete }: Props) => {
     const {
         error: errorEnrollment,
         enrollment,
@@ -31,6 +32,7 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId }: Props) => {
             refetch={refetch}
             ownerOrgUnit={{ id: ownerOrgUnit, displayName }}
             loading={!(enrollment && program && displayName)}
+            callbackDelete={callbackDelete}
             error={
                 errorEnrollment ||
                 errorProgram ||

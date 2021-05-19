@@ -77,7 +77,7 @@ declare module '@dhis2/app-runtime' {
     declare type DeleteMutation = {|
         ...ResourceQuery,
         type: 'delete',
-        id: string,
+        id: string | (data: Object) => string,
     |};
     declare type Mutation = CreateMutation | UpdateMutation | DeleteMutation;
     declare type MutationOptions = {|

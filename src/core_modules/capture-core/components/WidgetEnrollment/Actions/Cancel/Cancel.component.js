@@ -6,7 +6,7 @@ import type { Props } from './cancel.types';
 import { plainStatus } from '../../constants/status.const';
 
 export const Cancel = ({ enrollment, updateAction }: Props) =>
-    enrollment.status === plainStatus.CANCELLED ? (
+    (enrollment.status === plainStatus.CANCELLED ? (
         <MenuItem
             dense
             onClick={async () =>
@@ -31,4 +31,4 @@ export const Cancel = ({ enrollment, updateAction }: Props) =>
             destructive
             label={i18n.t('Mark as cancelled')}
         />
-    );
+    ));

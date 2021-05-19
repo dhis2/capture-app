@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './delete.types';
 
-export const Delete = ({ deleteAction }: Props) => {
+export const Delete = ({ enrollment, deleteAction }: Props) => {
     const [toggle, setToggle] = useState(false);
 
     return (
@@ -28,18 +28,22 @@ export const Delete = ({ deleteAction }: Props) => {
 
             {toggle && (
                 <Modal small onClose={() => setToggle(false)}>
-                    <ModalTitle>Delete enrollment</ModalTitle>
+                    <ModalTitle>{i18n.t('Delete enrollment')}</ModalTitle>
                     <ModalContent>
-                        Are you sure you want to delete this enrollment? This
-                        will permanently remove the current enrollment.
+                        {i18n.t(
+                            'Are you sure you want to delete this enrollment? This will permanently remove the current enrollment.',
+                        )}
                     </ModalContent>
                     <ModalActions>
                         <ButtonStrip end>
                             <Button onClick={() => setToggle(false)} secondary>
-                                No, cancel
+                                {i18n.t('No, cancel')}
                             </Button>
-                            <Button destructive onClick={() => deleteAction()}>
-                                Yes, delete enrollment.
+                            <Button
+                                destructive
+                                onClick={() => deleteAction(enrollment)}
+                            >
+                                {i18n.t('Yes, delete enrollment.')}
                             </Button>
                         </ButtonStrip>
                     </ModalActions>

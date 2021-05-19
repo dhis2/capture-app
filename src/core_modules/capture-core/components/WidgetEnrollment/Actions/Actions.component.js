@@ -25,7 +25,7 @@ const styles = {
 type Props = {|
     enrollment: Object,
     updateAction: (arg: Object) => void,
-    deleteAction: () => void,
+    deleteAction: (arg: Object) => void,
     ...CssClasses,
 |};
 
