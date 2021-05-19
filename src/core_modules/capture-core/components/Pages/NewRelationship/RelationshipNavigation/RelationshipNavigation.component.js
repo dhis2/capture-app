@@ -39,7 +39,7 @@ class RelationshipNavigation extends React.Component<Props> {
 
     renderForFindMode = (findMode: $Values<typeof findModes>) => {
         const { onSelectFindMode, searching } = this.props;
-        const displayName = findModeDisplayNames[findMode];
+        const displayName = findModeDisplayNames()[findMode];
         return (
             <React.Fragment>
                 {this.renderSlash()}

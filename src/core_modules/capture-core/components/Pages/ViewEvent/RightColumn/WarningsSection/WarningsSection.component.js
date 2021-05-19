@@ -13,8 +13,7 @@ type Props = {
     warnings: ?Array<any>,
 }
 
-const headerText = i18n.t('Warnings');
-
+const headerText = () => i18n.t('Warnings');
 const getStyles = (theme: Theme) => ({
     badge: {
         backgroundColor: theme.palette.warning.light,
@@ -35,7 +34,7 @@ class WarningsSection extends React.Component<Props> {
         return (
             <ViewEventSectionHeader
                 icon={WarningIcon}
-                text={headerText}
+                text={headerText()}
                 badgeClass={classes.badge}
                 badgeCount={count}
             />

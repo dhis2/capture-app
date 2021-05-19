@@ -6,7 +6,7 @@ export const findModes = {
     TEI_REGISTER: 'TEI_REGISTER',
 };
 
-export const findModeDisplayNames = {
+export const findModeDisplayNames = () => ({
     [findModes.TEI_SEARCH]: i18n.t('Search'),
     [findModes.TEI_REGISTER]: i18n.t('Register'),
-};
+});

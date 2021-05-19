@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-04-21T10:03:09.217Z\n"
-"PO-Revision-Date: 2021-04-21T10:03:09.217Z\n"
+"POT-Creation-Date: 2021-05-18T12:46:51.099Z\n"
+"PO-Revision-Date: 2021-05-18T12:46:51.099Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -305,13 +305,13 @@ msgstr ""
 msgid "Complete event"
 msgstr ""
 
+msgid "Comments"
+msgstr ""
+
 msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
-
-msgid "Comments"
 msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
@@ -716,6 +716,9 @@ msgid "Selected"
 msgstr ""
 
 msgid "Organisation unit scope"
+msgstr ""
+
+msgid "Organisation unit"
 msgstr ""
 
 msgid "Selected program"

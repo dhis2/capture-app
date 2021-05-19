@@ -73,12 +73,12 @@ type DataEntrySection = {
     name: string,
 };
 
-const dataEntrySectionDefinitions = {
+const dataEntrySectionDefinitions = () => ({
     [dataEntrySectionKeys.ENROLLMENT]: {
         placement: placements.TOP,
         name: i18n.t('Enrollment'),
     },
-};
+});
 
 class NewEnrollmentDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
@@ -90,7 +90,7 @@ class NewEnrollmentDataEntry extends Component<Props> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
-        this.dataEntrySections = dataEntrySectionDefinitions;
+        this.dataEntrySections = dataEntrySectionDefinitions();
     }
 
     componentWillMount() {

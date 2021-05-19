@@ -12,8 +12,7 @@ type Props = {
     indicators: ?{ displayTexts: ?Array<string>, displayKeyValuePairs: ?Array<{ key: string, value: string }>},
 }
 
-const headerText = i18n.t('Indicators');
-
+const headerText = () => i18n.t('Indicators');
 const getStyles = (theme: Theme) => ({
     badge: {
         backgroundColor: theme.palette.grey.light,
@@ -43,7 +42,7 @@ class IndicatorsSection extends React.Component<Props> {
         return (
             <ViewEventSectionHeader
                 icon={InfoIcon}
-                text={headerText}
+                text={headerText()}
                 badgeClass={classes.badge}
                 badgeCount={count}
             />
