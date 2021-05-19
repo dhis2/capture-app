@@ -59,7 +59,7 @@ export const EnrollmentPageDefault = () => {
     });
 
     if (programStageError || teiError) {
-        log.error(errorCreator('Profile widget could not be loaded')({ programStageError, teiError }));
+        log.error(errorCreator('Enrollment page could not be loaded')({ programStageError, teiError }));
     }
 
     const extractDataElements = (rules) => {
