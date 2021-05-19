@@ -7,8 +7,8 @@ import type {
     OrgUnit,
     DataElement,
 } from '../engine';
-import constantsStore from '../../metaDataMemoryStores/constants/constants.store';
-import optionSetsStore from '../../metaDataMemoryStores/optionSets/optionSets.store';
+import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
+import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
 
 
 export default function runRulesForEnrollmentPage(
@@ -22,7 +22,7 @@ export default function runRulesForEnrollmentPage(
     const programRules = [...program.programRules];
 
     const constants = constantsStore.get();
-    const optionSets = optionSetsStore.get();
+    const optionSets = optionSetStore.get();
 
     // returns an array of effects that need to take place in the UI.
     return RulesEngine.programRuleEffectsForEvent(
