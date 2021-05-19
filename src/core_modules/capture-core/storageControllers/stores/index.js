@@ -1,4 +1,4 @@
 // @flow
 
-export { default as mainStores } from './mainStores.const';
-export { default as userStores } from './userStores.const';
+export { mainStores } from './mainStores.const';
+export { userStores } from './userStores.const';

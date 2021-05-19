@@ -6,7 +6,7 @@ import { parseDate } from '../../parsers';
  * @param {string} value
  * @returns
  */
-export default function isValidDate(value: string, format: string) {
+export function isValidDate(value: string, format: string) {
     const parseData = parseDate(value, format);
     return parseData.isValid;
 }

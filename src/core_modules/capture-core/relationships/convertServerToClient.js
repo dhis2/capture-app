@@ -2,7 +2,7 @@
 import type { RelationshipType } from '../metaData';
 import { getTrackedEntityTypeThrowIfNotFound } from '../metaData';
 import { programCollection } from '../metaDataMemoryStores';
-import getTeiDisplayName from '../trackedEntityInstances/getDisplayName';
+import { getDisplayName } from '../trackedEntityInstances/getDisplayName';
 
 const getClientConstraintByType = {
     TRACKED_ENTITY_INSTANCE: (constraint, relationshipConstraint) => {
@@ -14,7 +14,7 @@ const getClientConstraintByType = {
         }, {});
         return {
             id: tei.trackedEntityInstance,
-            name: getTeiDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
+            name: getDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
             type: 'TRACKED_ENTITY_INSTANCE',
             linkProgramId: relationshipConstraint.programId,
         };
@@ -39,7 +39,7 @@ const getClientConstraintByType = {
     },
 };
 
-export default function convertToClientRelationship(serverRelationship: Object, relationshipTypes: Array<RelationshipType>) {
+export function convertServerRelationshipToClient(serverRelationship: Object, relationshipTypes: Array<RelationshipType>) {
     const relationshipType = relationshipTypes.find(r => r.id === serverRelationship.relationshipType);
     if (!relationshipType) {
         return null;

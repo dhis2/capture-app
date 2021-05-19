@@ -13,7 +13,7 @@ const getFilteredProps = (props: Object) => {
     return passOnProps;
 };
 
-export default
+export const ViewModeFieldForForm =
 withDefaultFieldContainer()(
     withLabel({
         onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,

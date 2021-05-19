@@ -13,7 +13,7 @@ import { userStores } from '../../../../storageControllers/stores';
 import { SearchGroupFactory } from '../../../common/factory';
 import { buildIcon } from '../../../common/helpers';
 import { EnrollmentFactory } from '../enrollment';
-import DataElementFactory from '../enrollment/DataElementFactory';
+import { DataElementFactory } from '../enrollment/DataElementFactory';
 import {
     ProgramStageFactory,
 } from '../programStage';
@@ -33,7 +33,7 @@ import type
     CachedProgramTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
 
-class ProgramFactory {
+export class ProgramFactory {
     programStageFactory: ProgramStageFactory;
     enrollmentFactory: EnrollmentFactory;
     searchGroupFactory: SearchGroupFactory;
@@ -175,5 +175,3 @@ class ProgramFactory {
         return program;
     }
 }
-
-export default ProgramFactory;

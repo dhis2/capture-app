@@ -16,7 +16,7 @@ type State = {
     popperOpen: ?boolean,
 }
 
-class MenuPopper extends React.Component<Props, State> {
+export class MenuPopper extends React.Component<Props, State> {
     managerRef: (instance: any) => void;
     menuReferenceInstance: ?HTMLDivElement;
 
@@ -105,5 +105,3 @@ class MenuPopper extends React.Component<Props, State> {
         );
     }
 }
-
-export default MenuPopper;

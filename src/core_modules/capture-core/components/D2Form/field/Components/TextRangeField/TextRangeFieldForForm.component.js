@@ -23,7 +23,7 @@ const getFilteredProps = (props: Object) => {
     return passOnProps;
 };
 
-export default withGotoInterface()(
+export const TextRangeFieldForForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

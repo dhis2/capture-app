@@ -1,4 +1,4 @@
 // @flow
-export { default as parseDate } from './date.parser';
-export { default as parseNumber } from './number.parser';
-export { default as parseTime } from './time.parser';
+export { parseDate } from './date.parser';
+export { parseNumber } from './number.parser';
+export { parseTime } from './time.parser';

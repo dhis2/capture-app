@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import getEventDateValidatorContainers from '../../../EditEvent/DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import { getEventDateValidatorContainers } from '../../../EditEvent/DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import type { RenderFoundation } from '../../../../../metaData';
-import withMainButton from '../../../EditEvent/DataEntry/withMainButton';
-import withFilterProps from '../../../../FormFields/New/HOC/withFilterProps';
+import { withMainButton } from '../../../EditEvent/DataEntry/withMainButton';
+import { withFilterProps } from '../../../../FormFields/New/HOC/withFilterProps';
 
 import {
     DataEntry,
@@ -14,7 +14,7 @@ import {
     withDataEntryField,
     withDataEntryFieldIfApplicable,
     placements,
-    withCleanUpHOC,
+    withCleanUp,
     withBrowserBackWarning,
 } from '../../../../../components/DataEntry';
 import {
@@ -31,7 +31,7 @@ import {
     withDefaultShouldUpdateInterface,
 } from '../../../../FormFields/New';
 
-import inMemoryFileStore from '../../../../DataEntry/file/inMemoryFileStore';
+import { inMemoryFileStore } from '../../../../DataEntry/file/inMemoryFileStore';
 import labelTypeClasses from '../../../EditEvent/DataEntry/dataEntryFieldLabels.module.css';
 
 const getStyles = (theme: Theme) => ({
@@ -247,7 +247,7 @@ const saveHandlerConfig = {
     },
 };
 
-const CleanUpHOC = withCleanUpHOC()(DataEntry);
+const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
@@ -285,7 +285,7 @@ const dataEntrySectionDefinitions = {
     },
 };
 
-class EditEventDataEntry extends Component<Props> {
+class EditEventDataEntryPlain extends Component<Props> {
     fieldOptions: { theme: Theme };
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
@@ -320,5 +320,4 @@ class EditEventDataEntry extends Component<Props> {
     }
 }
 
-
-export default withStyles(getStyles)(EditEventDataEntry);
+export const EditEventDataEntryComponent = withStyles(getStyles)(EditEventDataEntryPlain);

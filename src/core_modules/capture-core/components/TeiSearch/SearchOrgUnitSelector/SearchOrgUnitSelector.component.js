@@ -61,7 +61,7 @@ const options = [
 
 const errorMessage = 'Please select an organisation unit';
 
-class SearchOrgUnitSelector extends React.Component<Props> {
+export class SearchOrgUnitSelector extends React.Component<Props> {
     gotoInstance: any;
 
     onSelectOrgUnitScope = (value: any) => {
@@ -150,5 +150,3 @@ class SearchOrgUnitSelector extends React.Component<Props> {
         );
     }
 }
-
-export default SearchOrgUnitSelector;

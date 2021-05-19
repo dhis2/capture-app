@@ -5,7 +5,7 @@ type Props = {
 
 };
 
-const withTransformPropName =
+export const withTransformPropName =
     (fromToPropNames: Array<string>) =>
         (InnerComponent: React.ComponentType<any>) =>
             (props: Props) => {
@@ -26,5 +26,3 @@ const withTransformPropName =
                     />
                 );
             };
-
-export default withTransformPropName;

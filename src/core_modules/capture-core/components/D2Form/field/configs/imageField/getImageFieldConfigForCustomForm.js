@@ -4,7 +4,7 @@ import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { ImageFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
-const getImageFieldConfig = (metaData: MetaDataElement) => {
+export const getImageFieldConfigForCustomForm = (metaData: MetaDataElement) => {
     const props = createProps({
         async: true,
         orientation: orientations.HORIZONTAL,
@@ -15,5 +15,3 @@ const getImageFieldConfig = (metaData: MetaDataElement) => {
         props,
     }, metaData);
 };
-
-export default getImageFieldConfig;

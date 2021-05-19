@@ -1,7 +1,7 @@
 // @flow
-import typeKeys from './typeKeys.const';
+import { typeKeys } from './typeKeys.const';
 
-export default {
+export const mapTypeToInterfaceFnName = {
     [typeKeys.TEXT]: 'convertText',
     [typeKeys.LONG_TEXT]: 'convertLongText',
     [typeKeys.LETTER]: 'convertLetter',

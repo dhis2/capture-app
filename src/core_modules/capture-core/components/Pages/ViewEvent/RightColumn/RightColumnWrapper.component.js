@@ -2,13 +2,13 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import ErrorsSection from './ErrorsSection/ErrorsSection.container';
-import WarningsSection from './WarningsSection/WarningsSection.container';
-import FeedbacksSection from './FeedbacksSection/FeedbacksSection.container';
-import IndicatorsSection from './IndicatorsSection/IndicatorsSection.container';
-import RelationshipsSection from './RelationshipsSection/RelationshipsSection.container';
-import NotesSection from './NotesSection/NotesSection.container';
-import AssigneeSection from './AssigneeSection/AssigneeSection.container';
+import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
+import { WarningsSection } from './WarningsSection/WarningsSection.container';
+import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container';
+import { IndicatorsSection } from './IndicatorsSection/IndicatorsSection.container';
+import { RelationshipsSection } from './RelationshipsSection/RelationshipsSection.container';
+import { NotesSection } from './NotesSection/NotesSection.container';
+import { AssigneeSection } from './AssigneeSection/AssigneeSection.container';
 
 type Props = {
     classes: {
@@ -34,7 +34,7 @@ const componentContainers = [
     { id: 'NotesSection', Component: NotesSection },
 ];
 
-class RightColumnWrapper extends React.Component<Props> {
+class RightColumnWrapperPlain extends React.Component<Props> {
     renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => (
         <container.Component key={container.id} {...props} />
     )
@@ -49,4 +49,4 @@ class RightColumnWrapper extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(RightColumnWrapper);
+export const RightColumnWrapper = withStyles(getStyles)(RightColumnWrapperPlain);

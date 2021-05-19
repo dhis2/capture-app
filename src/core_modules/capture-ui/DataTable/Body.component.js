@@ -5,7 +5,7 @@ type Props = {
     children: React.Node,
 };
 
-class Body extends React.Component<Props> {
+export class Body extends React.Component<Props> {
     render() {
         return (
             <tbody>
@@ -14,5 +14,3 @@ class Body extends React.Component<Props> {
         );
     }
 }
-
-export default Body;

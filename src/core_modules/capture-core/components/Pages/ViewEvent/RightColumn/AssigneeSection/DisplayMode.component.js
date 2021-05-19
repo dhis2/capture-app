@@ -39,7 +39,7 @@ type Props = {
     eventAccess: { read: boolean, write: boolean },
 };
 
-const DisplayMode = (props: Props) => {
+const DisplayModePlain = (props: Props) => {
     const { eventAccess, assignee, onEdit, classes } = props;
 
     if (!assignee) {
@@ -88,4 +88,4 @@ const DisplayMode = (props: Props) => {
     );
 };
 
-export default withStyles(getStyles)(DisplayMode);
+export const DisplayMode = withStyles(getStyles)(DisplayModePlain);

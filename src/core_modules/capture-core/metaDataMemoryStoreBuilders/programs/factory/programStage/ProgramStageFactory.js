@@ -3,8 +3,8 @@
 
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
-import getCamelCaseUppercaseString from 'capture-core-utils/string/getCamelCaseFromUppercase';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import type {
     CachedProgramStageDataElement,
     CachedSectionDataElements,
@@ -15,12 +15,12 @@ import type {
 } from '../../../../storageControllers/cache.types';
 import { Section, ProgramStage, RenderFoundation, CustomForm } from '../../../../metaData';
 import { buildIcon } from '../../../common/helpers';
-import isNonEmptyArray from '../../../../utils/isNonEmptyArray';
-import DataElementFactory from './DataElementFactory';
-import RelationshipTypesFactory from './RelationshipTypesFactory';
+import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';
+import { DataElementFactory } from './DataElementFactory';
+import { RelationshipTypesFactory } from './RelationshipTypesFactory';
 import type { ConstructorInput, SectionSpecs } from './programStageFactory.types';
 
-class ProgramStageFactory {
+export class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
 
     cachedOptionSets: Map<string, CachedOptionSet>;
@@ -133,7 +133,7 @@ class ProgramStageFactory {
                 _form.addLabel({ id: 'eventDate', label: cachedProgramStage.executionDateLabel || 'Incident date' });
                 _form.validationStrategy =
                     cachedProgramStage.validationStrategy &&
-                    getCamelCaseUppercaseString(cachedProgramStage.validationStrategy);
+                    camelCaseUppercaseString(cachedProgramStage.validationStrategy);
             });
             _stage.icon = buildIcon(cachedProgramStage.style);
         });
@@ -180,5 +180,3 @@ class ProgramStageFactory {
         return stage;
     }
 }
-
-export default ProgramStageFactory;

@@ -3,14 +3,14 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 
-import withFocusSaver from '../HOC/withFocusSaver';
-import withShrinkLabel from '../HOC/withShrinkLabel';
-import withFocusHandler from '../internal/TextInput/withFocusHandler';
-import TextInput from '../internal/TextInput/TextInput.component';
+import { withFocusSaver } from '../HOC/withFocusSaver';
+import { withShrinkLabel } from '../HOC/withShrinkLabel';
+import { withTextFieldFocusHandler } from '../internal/TextInput/withFocusHandler';
+import { TextInput } from '../internal/TextInput/TextInput.component';
 import defaultClasses from './textRangeField.module.css';
-import InnerMessage from '../internal/InnerMessage/InnerMessage.component';
+import { InnerMessage } from '../internal/InnerMessage/InnerMessage.component';
 
-const RangeInputField = withFocusSaver()(withShrinkLabel()(withFocusHandler()(TextInput)));
+const RangeInputField = withFocusSaver()(withShrinkLabel()(withTextFieldFocusHandler()(TextInput)));
 
 const inputKeys = {
     FROM: 'from',
@@ -29,7 +29,7 @@ type Props = {
     onChange: (value: ?TextRangeValue) => void,
     onBlur: (value: ?TextRangeValue, opts?: ?Object) => void,
 }
-class TextRangeField extends React.Component<Props> {
+export class TextRangeField extends React.Component<Props> {
     touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
@@ -140,4 +140,3 @@ class TextRangeField extends React.Component<Props> {
         );
     }
 }
-export default TextRangeField;

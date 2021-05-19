@@ -2,7 +2,7 @@
 import isString from 'd2-utilizr/lib/isString';
 import isObject from 'd2-utilizr/lib/isObject';
 
-export default function getErrorMessageAndDetails(error: any) {
+export function getErrorMessageAndDetails(error: any) {
     if (!error) {
         return {
             message: null,

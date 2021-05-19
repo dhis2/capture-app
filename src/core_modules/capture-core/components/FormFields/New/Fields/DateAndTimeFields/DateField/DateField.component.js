@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { DateField as UIDateField } from 'capture-ui';
-import withCalendarProps from '../../../HOC/withCalendarProps';
+import { withCalendarProps } from '../../../HOC/withCalendarProps';
 import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
 
 const getStyles = (theme: Theme) => ({
@@ -38,7 +38,7 @@ const getStyles = (theme: Theme) => ({
 type Props = {
 }
 
-class DateField extends React.Component<Props> {
+class DateFieldPlain extends React.Component<Props> {
     render() {
         const { ...passOnProps } = this.props;
         return (
@@ -51,4 +51,4 @@ class DateField extends React.Component<Props> {
     }
 }
 
-export default withTheme()(withCalendarProps()(withStyles(getStyles)(DateField)));
+export const DateField = withTheme()(withCalendarProps()(withStyles(getStyles)(DateFieldPlain)));

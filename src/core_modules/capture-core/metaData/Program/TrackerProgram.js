@@ -1,13 +1,13 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import Program from './Program';
+import { Program } from './Program';
 import type { TrackedEntityType } from '../TrackedEntityType';
 import type { SearchGroup } from '../SearchGroup';
 import type { Enrollment } from './Enrollment';
 import type { DataElement } from '../DataElement';
 
-export default class TrackerProgram extends Program {
+export class TrackerProgram extends Program {
     _searchGroups: Array<SearchGroup>;
     _trackedEntityType: TrackedEntityType;
     _attributes: Array<DataElement>;

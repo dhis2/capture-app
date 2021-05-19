@@ -4,7 +4,7 @@ import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { TrueOnlyFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
-const getTrueOnlyField = (metaData: MetaDataElement) => {
+export const getTrueOnlyFieldConfigForCustomForm = (metaData: MetaDataElement) => {
     const props = createProps({
         orientation: orientations.HORIZONTAL,
         id: metaData.id,
@@ -15,5 +15,3 @@ const getTrueOnlyField = (metaData: MetaDataElement) => {
         props,
     }, metaData);
 };
-
-export default getTrueOnlyField;

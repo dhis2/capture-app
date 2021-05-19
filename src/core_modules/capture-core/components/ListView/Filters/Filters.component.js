@@ -4,7 +4,7 @@ import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
 import { errorCreator } from 'capture-core-utils';
 import { FilterButton } from './FilterButton';
-import FilterRestMenu from './FilterRestMenu/FilterRestMenu.component';
+import { FilterRestMenu } from './FilterRestMenu/FilterRestMenu.component';
 import { filterTypesObject } from './filters.const';
 import type { Column, StickyFilters, FiltersOnly } from '../types';
 

@@ -47,7 +47,7 @@ const getStyles = theme => ({
 });
 
 
-class RelationshipTypeSelector extends React.Component<Props> {
+class RelationshipTypeSelectorPlain extends React.Component<Props> {
     onSelectRelationshipType = (rt: RelationshipType) => {
         this.props.onSelectRelationshipType({
             id: rt.id,
@@ -97,5 +97,4 @@ class RelationshipTypeSelector extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(RelationshipTypeSelector);
-
+export const RelationshipTypeSelector = withStyles(getStyles)(RelationshipTypeSelectorPlain);

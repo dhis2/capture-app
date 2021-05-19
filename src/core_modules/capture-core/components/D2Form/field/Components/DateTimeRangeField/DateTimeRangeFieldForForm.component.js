@@ -23,7 +23,7 @@ const getFilteredProps = (props: Object) => {
     return passOnProps;
 };
 
-export default withGotoInterface()(
+export const DateTimeRangeFieldForForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

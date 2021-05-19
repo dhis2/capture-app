@@ -1,8 +1,8 @@
 import React from 'react';
 import { getInstance } from 'd2';
-import Tree from './Tree';
+import { Tree } from './Tree';
 
-export default class OrgUnitTree extends React.Component {
+export class OrgUnitTree extends React.Component {
   state = {
       list: [],
       selected: this.props.value,

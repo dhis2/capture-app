@@ -8,7 +8,7 @@ import type { Icon } from '../Icon';
 import type { RenderFoundation } from '../RenderFoundation';
 import type { RelationshipType } from '../RelationshipType';
 
-export default class ProgramStage {
+export class ProgramStage {
     _id: string;
     _name: string;
     _stageForm: RenderFoundation;

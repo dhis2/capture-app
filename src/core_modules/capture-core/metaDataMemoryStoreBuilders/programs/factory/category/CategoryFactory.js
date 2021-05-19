@@ -11,7 +11,7 @@ import type
     CachedCategory,
 } from '../../../../storageControllers/cache.types';
 
-class CategoryFactory {
+export class CategoryFactory {
     cachedCategories: {[categoryId: string]: CachedCategory};
     constructor(cachedCategories: {[categoryId: string]: CachedCategory}) {
         this.cachedCategories = cachedCategories;
@@ -32,5 +32,3 @@ class CategoryFactory {
         });
     }
 }
-
-export default CategoryFactory;

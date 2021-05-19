@@ -9,7 +9,7 @@ import customFormStyles from './ViewModeFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
-export default
+export const ViewModeFieldForCustomForm =
 withCustomElementContainer(getContainerClass)(
     ViewModeField,
 );

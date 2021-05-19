@@ -3,15 +3,15 @@
 # Antonia Bezenchek <antonia@informa.pro>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # Viktor Varland <viktor@dhis2.org>, 2021
-# Hamza Assada <7amza.it@gmail.com>, 2021
 # phil_dhis2, 2021
+# Hamza Assada <7amza.it@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2021\n"
+"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2021\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -904,6 +904,27 @@ msgstr "للعمل مع البرنامج المحدد"
 
 msgid "open the Tracker Capture app"
 msgstr "فتح برنامج التتبع والإلتقاط"
+
+msgid "Enrollment widget could not be loaded. Please try again later"
+msgstr ""
+
+msgid "Follow-up"
+msgstr "متابعة"
+
+msgid "Enrollment date"
+msgstr "تاريخ التسجيل"
+
+msgid "Incident date"
+msgstr "تاريخ وقوع الحدث"
+
+msgid "Started at {{orgUnitName}}"
+msgstr ""
+
+msgid "Owned by {{ownerOrgUnit}}"
+msgstr ""
+
+msgid "Last updated {{date}}"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

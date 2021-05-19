@@ -12,7 +12,7 @@ import { DataElement, DateDataElement, dataElementTypes } from '../../../../meta
 import { buildIcon } from '../../../common/helpers';
 import { OptionSetFactory } from '../../../common/factory';
 
-class DataElementFactory {
+export class DataElementFactory {
     static propertyNames = {
         NAME: 'NAME',
         DESCRIPTION: 'DESCRIPTION',
@@ -122,5 +122,3 @@ class DataElementFactory {
             this._buildBaseDataElement(cachedProgramStageDataElement, dataElementType);
     }
 }
-
-export default DataElementFactory;

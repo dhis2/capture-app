@@ -14,13 +14,13 @@ import {
     withDisabledFieldCalculation,
     withCustomElementContainer,
 } from '../internal';
-import withOptionsIconElement from './withOptionsIconElement';
+import { withOptionsIconElement } from './withOptionsIconElement';
 import customFormStyles from './optionSetSelectFieldForCustomForm.module.css';
-import withRulesOptionVisibilityHandler from './withRulesOptionVisibilityHandler';
+import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
-export default withGotoInterface()(
+export const OptionSetSelectFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

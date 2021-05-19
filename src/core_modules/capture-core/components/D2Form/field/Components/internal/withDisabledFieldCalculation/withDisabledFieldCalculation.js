@@ -6,7 +6,7 @@ type Props = {
     rulesDisabled?: ?boolean,
 };
 
-export default () =>
+export const withDisabledFieldCalculation = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class DisabledFieldCalculationHOC extends React.Component<Props> {
             render() {

@@ -21,6 +21,4 @@ class InMemoryFileStore {
     }
 }
 
-const inMemoryFileStore = new InMemoryFileStore();
-
-export default inMemoryFileStore;
+export const inMemoryFileStore = new InMemoryFileStore();

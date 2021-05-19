@@ -21,7 +21,7 @@ type Props = {
 const StyledDialog = withStyles({ root: { zIndex: 3000 } })(Dialog);
 const StyledDialogActions = withStyles({ root: { margin: '8px 8px 12px 0' } })(DialogActions);
 
-class ConfirmDialog extends Component<Props> {
+export class ConfirmDialog extends Component<Props> {
     render() {
         const {
             open,
@@ -56,5 +56,3 @@ class ConfirmDialog extends Component<Props> {
         );
     }
 }
-
-export default ConfirmDialog;

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import LinkButton from '../../../../../Buttons/LinkButton.component';
+import { LinkButton } from '../../../../../Buttons/LinkButton.component';
 import { ProgramFilterer } from '../../../../../ProgramFilterer';
 import type { Program } from '../../../../../../metaData';
 import { TrackerProgram } from '../../../../../../metaData';
@@ -133,7 +133,7 @@ class ProgramSelector extends React.Component<Props> {
     }
 }
 
-const ComposedProgramSelector =
+export const ComposedProgramSelector =
     withFocusSaver()(
         withDefaultFieldContainer()(
             withLabel({
@@ -153,5 +153,3 @@ const ComposedProgramSelector =
             ),
         ),
     );
-
-export default ComposedProgramSelector;

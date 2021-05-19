@@ -18,7 +18,7 @@ import customFormStyles from './textFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
-export default withGotoInterface()(
+export const TextFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

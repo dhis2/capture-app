@@ -3,7 +3,7 @@ import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import isObject from 'd2-utilizr/lib/isObject';
 import { errorCreator } from 'capture-core-utils';
-import { type DataElement } from '../../DataElement';
+import type { DataElement } from '../../DataElement';
 import type { ConvertFn } from '../../DataElement/DataElement';
 
 export type ValuesType = { [key: string]: any };
@@ -35,7 +35,7 @@ function convertArrayValues(
     return arrayOfValues.map((values: ValuesType) => this.convertObjectValues(values, elementsById, onConvert));
 }
 
-export default function convertValues<T: ?ValuesType | Array<ValuesType>>(
+export function convertValues<T: ?ValuesType | Array<ValuesType>>(
     values: T,
     dataElements: Array<DataElement>,
     onConvert: ConvertFn,

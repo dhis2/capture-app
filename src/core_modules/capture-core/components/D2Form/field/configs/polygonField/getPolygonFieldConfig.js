@@ -4,7 +4,7 @@ import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { PolygonFieldForForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
-const getPolygonField = (metaData: MetaDataElement, options: Object) => {
+export const getPolygonFieldConfig = (metaData: MetaDataElement, options: Object) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
@@ -18,5 +18,3 @@ const getPolygonField = (metaData: MetaDataElement, options: Object) => {
         props,
     }, metaData);
 };
-
-export default getPolygonField;

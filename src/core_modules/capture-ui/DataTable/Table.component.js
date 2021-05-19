@@ -12,7 +12,7 @@ type Props = {
     className?: ?string,
 };
 
-const Table = (props: Props) => {
+export const Table = (props: Props) => {
     const { children, className, ...passOnProps } = props;
     const classes = classNames(defaultClasses.table, className);
     return (
@@ -25,5 +25,3 @@ const Table = (props: Props) => {
         </table>
     );
 };
-
-export default Table;

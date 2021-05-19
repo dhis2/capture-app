@@ -2,12 +2,12 @@
 import { actionCreator } from '../../../../../../actions/actions.utils';
 import { actionTypes } from './dataEntry.actions';
 import { loadNewDataEntry } from '../../../../../DataEntry/actions/dataEntryLoadNew.actions';
-import getDataEntryKey from '../../../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getRulesActionsForEvent } from '../../../../../../rules/actionsCreator';
 import type { RenderFoundation, EventProgram } from '../../../../../../metaData';
-import getEventDateValidatorContainers from '../fieldValidators/eventDate.validatorContainersGetter';
+import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
 import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../../index';
-import getNotesValidatorContainers from '../fieldValidators/note.validatorContainersGetter';
+import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 
 const dataEntryId = 'singleEvent';
 const itemId = 'newEvent';
@@ -29,7 +29,7 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
         id: 'note',
         type: 'TEXT',
-        validatorContainers: getNotesValidatorContainers(),
+        validatorContainers: getNoteValidatorContainers(),
         clientIgnore: true,
     },
     {

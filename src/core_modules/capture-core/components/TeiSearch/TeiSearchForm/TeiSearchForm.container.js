@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import TeiSearchForm from './TeiSearchForm.component';
+import { TeiSearchFormComponent } from './TeiSearchForm.component';
 
 const getAttributesWithValuesCount = (state: ReduxState, formId: string) => {
     const formValues = state.formsValues[formId] || {};
@@ -20,4 +20,4 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, () => ({}))(TeiSearchForm);
+export const TeiSearchForm = connect(mapStateToProps, () => ({}))(TeiSearchFormComponent);

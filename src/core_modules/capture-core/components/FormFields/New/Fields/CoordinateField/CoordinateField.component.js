@@ -64,7 +64,7 @@ type Props = {
     dialogLabel: string,
 }
 
-class CoordinateField extends React.Component<Props> {
+class CoordinateFieldPlain extends React.Component<Props> {
     dialogClasses: Object;
     passOnClasses: Object;
 
@@ -98,4 +98,4 @@ class CoordinateField extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(CoordinateField);
+export const CoordinateField = withStyles(getStyles)(CoordinateFieldPlain);

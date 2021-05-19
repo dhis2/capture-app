@@ -25,7 +25,7 @@ type EventListenerSpec = {
  * @class D2CustomForm
  * @extends {React.Component<Props>}
  */
-class D2CustomForm extends React.Component<Props> {
+export class D2CustomForm extends React.Component<Props> {
     static getEventListenersForCurrentNode(nodeProps: Object): Array<string> {
         const eventListeners =
             Object
@@ -252,6 +252,3 @@ class D2CustomForm extends React.Component<Props> {
         );
     }
 }
-
-export default D2CustomForm;
-

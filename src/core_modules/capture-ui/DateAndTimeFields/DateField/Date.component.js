@@ -1,9 +1,9 @@
 // @flow
 import React, { createRef } from 'react';
-import DatePopup from './DatePopup.component';
-import DateCalendar from './DateCalendar.component';
-import lowerCaseFirstLetter from '../../internal/utils/string/lowerCaseFirstLetter';
-import DateInput from '../../internal/DateInput/DateInput.component';
+import { DatePopup } from './DatePopup.component';
+import { DateCalendar } from './DateCalendar.component';
+import { lowerCaseFirstLetter } from '../../internal/utils/string/lowerCaseFirstLetter';
+import { DateInput } from '../../internal/DateInput/DateInput.component';
 
 type Props = {
     value: ?string,
@@ -21,7 +21,7 @@ type State = {
     popoverOpen: boolean,
 };
 
-class UIDate extends React.Component<Props, State> {
+export class DateField extends React.Component<Props, State> {
     static splitPassOnProps(passOnProps: ?Object) {
         const splittedProps = {
             input: {},
@@ -37,12 +37,12 @@ class UIDate extends React.Component<Props, State> {
             .keys(passOnProps)
             .reduce((accSplittedProps, propKey) => {
                 let propContainer;
-                if (propKey.startsWith(UIDate.propContainers.CALENDAR)) {
-                    propContainer = UIDate.propContainers.CALENDAR;
-                } else if (propKey.startsWith(UIDate.propContainers.POPUP)) {
-                    propContainer = UIDate.propContainers.POPUP;
+                if (propKey.startsWith(DateField.propContainers.CALENDAR)) {
+                    propContainer = DateField.propContainers.CALENDAR;
+                } else if (propKey.startsWith(DateField.propContainers.POPUP)) {
+                    propContainer = DateField.propContainers.POPUP;
                 } else {
-                    propContainer = UIDate.propContainers.INPUT;
+                    propContainer = DateField.propContainers.INPUT;
                 }
 
                 const outputKey = lowerCaseFirstLetter(propKey.replace(propContainer, ''));
@@ -155,7 +155,7 @@ class UIDate extends React.Component<Props, State> {
         const { popoverOpen } = this.state;
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
-        const splittedPassOnProps = UIDate.splitPassOnProps(passOnProps);
+        const splittedPassOnProps = DateField.splitPassOnProps(passOnProps);
         const calculatedCalendarHeight = calendarHeight || 350;
 
         return (
@@ -204,5 +204,3 @@ class UIDate extends React.Component<Props, State> {
         );
     }
 }
-
-export default UIDate;

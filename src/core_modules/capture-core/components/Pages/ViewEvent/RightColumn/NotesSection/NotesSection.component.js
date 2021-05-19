@@ -4,10 +4,10 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Chat as ChatIcon } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
-import ViewEventSection from '../../Section/ViewEventSection.component';
-import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
-import Notes from '../../../../Notes/Notes.component';
-import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
+import { ViewEventSection } from '../../Section/ViewEventSection.component';
+import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
+import { Notes } from '../../../../Notes/Notes.component';
+import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import type { ProgramStage } from '../../../../../metaData';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
@@ -43,7 +43,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-class NotesSection extends React.Component<Props> {
+class NotesSectionPlain extends React.Component<Props> {
     renderHeader = () => {
         const { classes, notes, ready } = this.props;
         let count = notes ? notes.length : 0;
@@ -81,4 +81,4 @@ class NotesSection extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(NotesSection);
+export const NotesSectionComponent = withStyles(getStyles)(NotesSectionPlain);

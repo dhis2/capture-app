@@ -30,7 +30,7 @@ type Props = {
     onFocusOption: (option: VirtualizedOptionConfig) => void,
 };
 
-class OptionsSelectVirtualizedOption extends Component<Props> {
+class OptionsSelectVirtualizedOptionPlain extends Component<Props> {
     static defaultContainerStyle = {
         display: 'flex',
         alignItems: 'center',
@@ -107,4 +107,4 @@ class OptionsSelectVirtualizedOption extends Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(OptionsSelectVirtualizedOption);
+export const OptionsSelectVirtualizedOption = withStyles(getStyles)(OptionsSelectVirtualizedOptionPlain);

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import OptionSetFilter from './OptionSetFilter.component';
+import { OptionSetFilter } from './OptionSetFilter.component';
 import type { OptionSetFilterData } from './types';
 
 type Props = {
@@ -13,7 +13,7 @@ type State = {
     value?: ?Array<any>,
 };
 
-class OptionSetFilterManager extends React.Component<Props, State> {
+export class OptionSetFilterManager extends React.Component<Props, State> {
     static calculateDefaultValueState(filter: ?OptionSetFilterData, singleSelect: boolean) {
         if (!filter) {
             return undefined;
@@ -49,5 +49,3 @@ class OptionSetFilterManager extends React.Component<Props, State> {
         );
     }
 }
-
-export default OptionSetFilterManager;

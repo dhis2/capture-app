@@ -7,7 +7,7 @@ type Props = {
     className?: ?string,
 };
 
-const SvgIcon = (props: Props) => {
+export const SvgIcon = (props: Props) => {
     const { className, ...passOnProps } = props;
     return (
         // $FlowFixMe[cannot-spread-inexact] automated comment
@@ -17,5 +17,3 @@ const SvgIcon = (props: Props) => {
         />
     );
 };
-
-export default SvgIcon;

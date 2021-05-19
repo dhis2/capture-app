@@ -7,7 +7,7 @@ import {
     clearOrgUnitsFilter,
 } from './searchOrgUnitSelector.actions';
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import SearchOrgUnitSelectorRefHandler from './SearchOrgUnitSelectorRefHandler.component';
+import { SearchOrgUnitSelectorRefHandler } from './SearchOrgUnitSelectorRefHandler.component';
 
 const mapStateToProps = (state: ReduxState, props: Object) => {
     const searchId = props.searchId;
@@ -41,4 +41,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(SearchOrgUnitSelectorRefHandler);
+export const SearchOrgUnitSelector = connect(mapStateToProps, mapDispatchToProps)(
+    SearchOrgUnitSelectorRefHandler,
+);

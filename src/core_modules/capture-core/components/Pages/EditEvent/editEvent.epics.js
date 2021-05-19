@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
-import getErrorMessageAndDetails from '../../../utils/errors/getErrorMessageAndDetails';
+import { getErrorMessageAndDetails } from '../../../utils/errors/getErrorMessageAndDetails';
 import { getApi } from '../../../d2';
 import {
     actionTypes as editEventActionTypes,

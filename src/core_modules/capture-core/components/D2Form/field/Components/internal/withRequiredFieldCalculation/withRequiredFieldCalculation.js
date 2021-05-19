@@ -6,7 +6,7 @@ type Props = {
     rulesCompulsory?: ?boolean,
 };
 
-export default () =>
+export const withRequiredFieldCalculation = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class RequiredFieldCalculationHOC extends React.Component<Props> {
             render() {

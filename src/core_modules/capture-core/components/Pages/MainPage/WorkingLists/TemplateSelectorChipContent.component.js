@@ -6,7 +6,7 @@ type Props = {
     isSelectedTemplate: boolean,
 };
 
-const TemplateSelectorChipContent = (props: Props) => {
+export const TemplateSelectorChipContent = (props: Props) => {
     const {
         currentListIsModified,
         text,
@@ -18,5 +18,3 @@ const TemplateSelectorChipContent = (props: Props) => {
 
     return content;
 };
-
-export default TemplateSelectorChipContent;

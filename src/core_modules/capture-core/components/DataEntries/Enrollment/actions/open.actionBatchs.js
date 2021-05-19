@@ -2,7 +2,7 @@
 import { batchActions } from 'redux-batched-actions';
 import { getRulesActionsForTEI } from '../../../../rules/actionsCreator';
 import { RenderFoundation, TrackerProgram } from '../../../../metaData';
-import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewEnrollment } from './open.actions';
 import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer } from '../fieldValidators';

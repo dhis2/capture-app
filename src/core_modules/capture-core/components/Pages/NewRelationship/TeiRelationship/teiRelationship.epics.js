@@ -18,13 +18,13 @@ import {
     initializeTeiSearch,
 } from '../../../TeiSearch/actions/teiSearch.actions';
 
-import getSearchFormId from '../../../TeiSearch/getSearchFormId';
+import { getSearchFormId } from '../../../TeiSearch/getSearchFormId';
 
 import {
     addFormData,
 } from '../../../D2Form/actions/form.actions';
 
-import getSearchGroups from '../../../TeiSearch/getSearchGroups';
+import { getSearchGroups } from '../../../TeiSearch/getSearchGroups';
 
 const searchId = 'relationshipTeiSearch';
 

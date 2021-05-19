@@ -18,6 +18,6 @@ const getStyledContainerHOC = (InnerComponent: React.ComponentType<any>, getStyl
         }
     };
 
-export default (getStyles: (props: Object) => ?Object) =>
+export const withStyledContainer = (getStyles: (props: Object) => ?Object) =>
     (InnerComponent: React.ComponentType<any>) =>
         getStyledContainerHOC(InnerComponent, getStyles);

@@ -7,7 +7,7 @@ type Props = {
     extraTriggers: Array<any>,
 };
 
-const CaptureScrollHeight = (props: Props) => {
+export const CaptureScrollHeight = (props: Props) => {
     const { captureEl, extraTriggers } = props;
     const [height, setHeight] = React.useState(0);
 
@@ -26,5 +26,3 @@ const CaptureScrollHeight = (props: Props) => {
 
     return props.children(height);
 };
-
-export default CaptureScrollHeight;

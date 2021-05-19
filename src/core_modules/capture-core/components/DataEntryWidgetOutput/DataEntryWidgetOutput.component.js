@@ -2,11 +2,11 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import StickyOnScroll from '../Sticky/StickyOnScroll.component';
-import ErrorsSection from './ErrorsSection/ErrorsSection.container';
-import WarningsSection from './WarningsSection/WaningsSection.container';
-import FeedbacksSection from '../Pages/ViewEvent/RightColumn/FeedbacksSection/FeedbacksSection.container';
-import IndicatorsSection from '../Pages/ViewEvent/RightColumn/IndicatorsSection/IndicatorsSection.container';
+import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
+import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
+import { WarningsSection } from './WarningsSection/WaningsSection.container';
+import { FeedbacksSection } from '../Pages/ViewEvent/RightColumn/FeedbacksSection/FeedbacksSection.container';
+import { IndicatorsSection } from '../Pages/ViewEvent/RightColumn/IndicatorsSection/IndicatorsSection.container';
 
 type Props = {
     onLink: (teiId: string, values: Object) => void,
@@ -32,7 +32,7 @@ const componentContainers = [
     { id: 'IndicatorsSection', Component: IndicatorsSection },
 ];
 
-class DataEntryWidgetOutputComponent extends React.Component<Props> {
+class DataEntryWidgetOutputPlain extends React.Component<Props> {
     renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => {
         const { renderCardActions, ...otherProps } = props;
 
@@ -57,5 +57,4 @@ class DataEntryWidgetOutputComponent extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(DataEntryWidgetOutputComponent);
-
+export const DataEntryWidgetOutputComponent = withStyles(getStyles)(DataEntryWidgetOutputPlain);

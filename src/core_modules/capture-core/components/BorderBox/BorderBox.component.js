@@ -19,7 +19,7 @@ const styles = (theme: Theme) => ({
     },
 });
 
-const BorderBox = (props: Props) => {
+const BorderBoxPlain = (props: Props) => {
     const { classes, children, contentClassName } = props;
     return (
         <div className={classes.borderBox}>
@@ -30,4 +30,4 @@ const BorderBox = (props: Props) => {
     );
 };
 
-export default withStyles(styles)(BorderBox);
+export const BorderBox = withStyles(styles)(BorderBoxPlain);

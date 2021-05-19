@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Chip } from '@dhis2/ui';
-import { TextFieldPlain } from 'capture-ui';
+import { TextField } from 'capture-ui';
 import defaultClasses from './selected.module.css';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
     focusInputOnMount: boolean,
 };
 
-const Selected = (props: Props) => {
+export const Selected = (props: Props) => {
     const { text, onClear, focusInputOnMount } = props;
     const inputDomElement = React.useRef();
 
@@ -37,7 +37,7 @@ const Selected = (props: Props) => {
                 tabIndex={0}
                 onKeyDown={handleKeyDown}
             >
-                <TextFieldPlain
+                <TextField
                     classes={defaultClasses}
                     value={''}
                     disabled
@@ -56,5 +56,3 @@ const Selected = (props: Props) => {
         </div>
     );
 };
-
-export default Selected;

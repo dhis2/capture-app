@@ -9,7 +9,7 @@ function arrayToMap(array: Array<Object>) {
     }, new Map());
 }
 
-export default function getCommonPreRequisitesAsync(...stores: Array<$Values<userStores>>): { [$Values<userStores>]: Map<string, any> } {
+export function getCommonPrerequisitesAsync(...stores: Array<$Values<userStores>>): { [$Values<userStores>]: Map<string, any> } {
     const storageController = getUserStorageController();
     const storePromises = stores
         .map(store => storageController.getAll(store));

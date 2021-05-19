@@ -2,12 +2,12 @@
 import * as React from 'react';
 import './rowsPerPage.css';
 
-import OptionsSelect from '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import withTranslations from '../FormFields/Options/SelectVirtualized/withTranslations';
+import { OptionsSelectVirtualized } from '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { withTranslations } from '../FormFields/Options/SelectVirtualized/withTranslations';
 import type { VirtualizedOptionConfig } from
     '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 
-const OptionsSelectWithTranslations = withTranslations()(OptionsSelect);
+const OptionsSelectWithTranslations = withTranslations()(OptionsSelectVirtualized);
 
 type Props = {
     rowsPerPage: number,
@@ -72,6 +72,6 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
  * @memberof Pagination
  * @example withRowsPerPageSelector()([InnerComponent])
 */
-export default () =>
+export const withRowsPerPageSelector = () =>
     (InnerComponent: React.ComponentType<any>) =>
         getRowsPerPageSelector(InnerComponent);

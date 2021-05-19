@@ -21,7 +21,7 @@ function isNumValid(num) {
  * @param { latitude: number, longitude: number } value
  * @returns
  */
-const isValidCoordinate = (value: Location) => {
+export const isValidCoordinate = (value: Location) => {
     if (!value) {
         return false;
     }
@@ -36,5 +36,3 @@ const isValidCoordinate = (value: Location) => {
 
     return ld >= -180 && ld <= 180 && lt >= -90 && lt <= 90;
 };
-
-export default isValidCoordinate;

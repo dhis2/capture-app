@@ -1,5 +1,5 @@
 // @flow
-import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { ofType } from 'redux-observable';
 import { filter, map } from 'rxjs/operators';
 import {
@@ -21,7 +21,7 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
         return false;
     }
 
-    const selectedProgram = state.programId && programs.get(state.programId);
+    const selectedProgram = state.programId && programCollection.get(state.programId);
 
     if (selectedProgram && selectedProgram.categoryCombination) {
         const categories = Array.from(selectedProgram.categoryCombination.categories.values());

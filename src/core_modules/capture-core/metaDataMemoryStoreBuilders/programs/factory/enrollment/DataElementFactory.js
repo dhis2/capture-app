@@ -22,7 +22,7 @@ import { getApi } from '../../../../d2/d2Instance';
 import type { ConstructorInput } from './dataElementFactory.types';
 
 
-class DataElementFactory {
+export class DataElementFactory {
     static translationPropertyNames = {
         NAME: 'NAME',
         DESCRIPTION: 'DESCRIPTION',
@@ -248,5 +248,3 @@ class DataElementFactory {
             this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute);
     }
 }
-
-export default DataElementFactory;

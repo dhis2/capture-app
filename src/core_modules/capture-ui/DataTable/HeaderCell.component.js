@@ -9,7 +9,7 @@ type Props = {
     innerRef?: ?(instance?: ?HTMLElement) => void,
 };
 
-const HeaderCell = (props: Props) => {
+export const HeaderCell = (props: Props) => {
     const { children, className, innerRef, ...passOnProps } = props;
     const classes = classNames(defaultClasses.tableCell, defaultClasses.tableCellHeader, className);
     return (
@@ -23,5 +23,3 @@ const HeaderCell = (props: Props) => {
         </td>
     );
 };
-
-export default HeaderCell;
