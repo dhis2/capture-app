@@ -8,6 +8,7 @@ import moment from 'moment';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import { statusTypes } from '../../../../../metaData';
 import type { Props } from './stageOverview.types';
+import { isEventOverdue } from '../helpers';
 
 const styles = {
     container: {
@@ -44,9 +45,7 @@ const styles = {
 };
 export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props) => {
     const totalEvents = events.length;
-    const overdueEvents = events.filter(event =>
-        moment(event.dueDate).isSameOrBefore(new Date()) && event.status !== statusTypes.COMPLETED,
-    ).length;
+    const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
 
     return (<div className={classes.container}>

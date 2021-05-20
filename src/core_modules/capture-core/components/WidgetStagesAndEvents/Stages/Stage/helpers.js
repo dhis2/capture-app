@@ -1,12 +1,14 @@
 // @flow
 import moment from 'moment';
-import { convertValue as convertClientToView } from '../../../../../converters/clientToView';
-import { convertValue as convertServerToClient } from '../../../../../converters/serverToClient';
-import { statusTypes, dataElementTypes } from '../../../../../metaData';
+import { convertValue as convertClientToView } from '../../../../converters/clientToView';
+import { convertValue as convertServerToClient } from '../../../../converters/serverToClient';
+import { statusTypes, dataElementTypes } from '../../../../metaData';
+
+export const isEventOverdue = event => moment(event.dueDate).isSameOrBefore(new Date())
+    && event.status === statusTypes.SCHEDULE;
 
 const getEventStatus = (event: any) => {
-    const isOverdue = moment(event.dueDate).isSameOrBefore(new Date()) && event.status !== statusTypes.COMPLETED;
-    if (isOverdue) {
+    if (isEventOverdue(event)) {
         return { value: statusTypes.OVERDUE };
     }
     if (event.status === statusTypes.SCHEDULE) {

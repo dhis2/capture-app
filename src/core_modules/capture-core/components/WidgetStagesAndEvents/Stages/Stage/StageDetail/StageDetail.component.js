@@ -11,7 +11,7 @@ import {
     Body,
 } from 'capture-ui';
 import { colors, spacersNum } from '@dhis2/ui';
-import { formatValueForView, getValueByKeyFromEvent } from './helpers';
+import { formatValueForView, getValueByKeyFromEvent } from '../helpers';
 import { dataElementTypes } from '../../../../../metaData';
 import type { Props } from './stageDetail.types';
 

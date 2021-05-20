@@ -7,7 +7,6 @@ export const statusTypes = {
     COMPLETED: 'COMPLETED',
     OVERDUE: 'OVERDUE',
     SKIPPED: 'SKIPPED',
-    VISITED: 'VISITED',
 };
 
 
