@@ -5,7 +5,7 @@
   "cacheVersion": "1",
   "private": false,
   "dependencies": {
-    "@dhis2/app-runtime": "^2.6.1",
+    "@dhis2/app-runtime": "^2.8.0",
     "@dhis2/d2-i18n": "^1.0.6",
     "@dhis2/d2-icons": "^1.0.1",
     "@dhis2/d2-ui-app": "^2.0.0",
