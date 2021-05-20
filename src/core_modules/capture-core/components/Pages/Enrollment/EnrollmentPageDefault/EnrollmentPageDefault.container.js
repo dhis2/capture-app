@@ -1,9 +1,9 @@
 // @flow
 import React, { useMemo } from 'react';
-// $FlowFixMe
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
+// $FlowFixMe
 import { useSelector, shallowEqual } from 'react-redux';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';

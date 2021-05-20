@@ -4,7 +4,7 @@ import { convertValue as convertClientToView } from '../../../../converters/clie
 import { convertValue as convertServerToClient } from '../../../../converters/serverToClient';
 import { statusTypes, dataElementTypes } from '../../../../metaData';
 
-// @FlowFixMe
+// $FlowFixMe
 export const isEventOverdue = event => moment(event.dueDate).isSameOrBefore(new Date())
     && event.status === statusTypes.SCHEDULE;
 
