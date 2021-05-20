@@ -16,6 +16,5 @@ export const translatedStatusTypes = (options?: string) => ({
     [statusTypes.COMPLETED]: i18n.t('Completed'),
     [statusTypes.OVERDUE]: i18n.t('Overdue'),
     [statusTypes.SKIPPED]: i18n.t('Skipped'),
-    [statusTypes.VISITED]: i18n.t('Visited'),
 });
 
