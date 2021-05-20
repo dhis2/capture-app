@@ -29,15 +29,11 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-const callbackDelete = () => {
-    // TODO Pending decision on what should happen after an enrollment is deleted. For now reload the page.
-    location.reload();
-};
-
 export const EnrollmentPageDefaultPlain = ({
     program,
     teiId,
     enrollmentId,
+    callbackDelete,
     classes,
 }: PlainProps) => (
     <>

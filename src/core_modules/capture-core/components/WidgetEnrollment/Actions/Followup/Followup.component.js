@@ -8,6 +8,7 @@ export const Followup = ({ enrollment, updateAction }: Props) =>
     (enrollment.followup ? (
         <MenuItem
             dense
+            dataTest="widget-enrollment-actions-followup-remove"
             onClick={async () =>
                 updateAction({
                     ...enrollment,
@@ -20,6 +21,7 @@ export const Followup = ({ enrollment, updateAction }: Props) =>
     ) : (
         <MenuItem
             dense
+            dataTest="widget-enrollment-actions-followup-mark"
             onClick={async () =>
                 updateAction({
                     ...enrollment,

@@ -5,13 +5,7 @@ import { useOrganizationUnit } from './hooks/useOrganizationUnit';
 import { useTrackedEntityInstances } from './hooks/useTrackedEntityInstances';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
-
-type Props = {|
-    teiId: string,
-    enrollmentId: string,
-    programId: string,
-    callbackDelete: () => void,
-|};
+import type { Props } from './enrollment.types';
 
 export const WidgetEnrollment = ({ teiId, enrollmentId, programId, callbackDelete }: Props) => {
     const {

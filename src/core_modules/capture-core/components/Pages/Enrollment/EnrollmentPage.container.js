@@ -43,7 +43,8 @@ const useComponentLifecycle = () => {
         scopeType,
     ]);
 
-    useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch, teiId]);
+    useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch, teiId, enrollmentId]);
+    useEffect(() => () => dispatch(fetchEnrollmentPageInformation()), [dispatch, enrollmentId]);
 };
 
 // dirty fix for scenarios where you deselect the program.

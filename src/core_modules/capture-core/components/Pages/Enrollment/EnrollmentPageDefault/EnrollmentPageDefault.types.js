@@ -5,6 +5,7 @@ export type Props = {|
     program: Program,
     enrollmentId: string,
     teiId: string,
+    callbackDelete: () => void,
 |};
 
 export type PlainProps = {|

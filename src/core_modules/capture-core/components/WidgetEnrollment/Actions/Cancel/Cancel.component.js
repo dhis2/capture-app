@@ -9,6 +9,7 @@ export const Cancel = ({ enrollment, updateAction }: Props) =>
     (enrollment.status === plainStatus.CANCELLED ? (
         <MenuItem
             dense
+            dataTest="widget-enrollment-actions-reactivate"
             onClick={async () =>
                 updateAction({
                     ...enrollment,
@@ -21,6 +22,7 @@ export const Cancel = ({ enrollment, updateAction }: Props) =>
     ) : (
         <MenuItem
             dense
+            dataTest="widget-enrollment-actions-cancel"
             onClick={async () =>
                 updateAction({
                     ...enrollment,
