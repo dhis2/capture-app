@@ -12,7 +12,7 @@ export const mainOptionKeys = {
     CUSTOM_RANGE: 'CUSTOM_RANGE',
 };
 
-export const mainOptionTranslatedTexts = {
+export const mainOptionTranslatedTexts = () => ({
     [mainOptionKeys.TODAY]: i18n.t('Today'),
     [mainOptionKeys.THIS_WEEK]: i18n.t('This week'),
     [mainOptionKeys.THIS_MONTH]: i18n.t('This month'),
@@ -21,4 +21,4 @@ export const mainOptionTranslatedTexts = {
     [mainOptionKeys.LAST_MONTH]: i18n.t('Last month'),
     [mainOptionKeys.LAST_3_MONTHS]: i18n.t('Last 3 months'),
     [mainOptionKeys.CUSTOM_RANGE]: i18n.t('Custom range'),
-};
+});
