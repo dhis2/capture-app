@@ -26,6 +26,7 @@ const extractDataElements = (data) => {
         }, {});
 };
 
+// $FlowFixMe
 export const useRunRulesForEnrollement = (orgUnit, program, programStagesData, teiAttributes) => {
     if (Object.keys(programStagesData ?? {}).length && Object.keys(teiAttributes ?? {}).length) {
         const dataElements = extractDataElements(programStagesData);
