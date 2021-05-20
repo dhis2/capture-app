@@ -93,9 +93,9 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
             </div>
             {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
         </div> : null }
-        <div className={cx(classes.smallText, classes.indicator)}>
+        {events.length > 0 && <div className={cx(classes.smallText, classes.indicator)}>
             {i18n.t('Last updated {{date}}', { date: moment(events[0].lastUpdated).fromNow() })}
-        </div>
+        </div>}
     </div>);
 };
 

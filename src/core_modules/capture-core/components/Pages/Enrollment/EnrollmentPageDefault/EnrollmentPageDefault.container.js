@@ -1,6 +1,9 @@
 // @flow
-import React from 'react';
+import React, { useMemo } from 'react';
 // $FlowFixMe
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import { useDataQuery } from '@dhis2/app-runtime';
 import { useSelector, shallowEqual } from 'react-redux';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
@@ -20,15 +23,24 @@ export const EnrollmentPageDefault = () => {
     );
 
     const { program } = useProgramInfo(programId);
-    const events = useSelector(({
-        enrollmentPage,
-    }) => enrollmentPage?.enrollments?.[0].events, shallowEqual);
+    const teiAttributesQuery = useMemo(() => ({
+        teiAttributes: {
+            resource: 'trackedEntityInstances',
+            id: teiId,
+            params: { fields: ['enrollments[*],attributes'] },
+        },
+    }), [teiId]);
+    const { data: teiAttributes, error: teiError } = useDataQuery(teiAttributesQuery);
+
+    if (teiError) {
+        log.error(errorCreator('Enrollment page could not be loaded')({ teiError }));
+    }
 
     return (
         <EnrollmentPageDefaultComponent
             teiId={teiId}
             program={program}
-            events={events}
+            events={teiAttributes?.teiAttributes?.enrollments?.[0].events ?? []}
             enrollmentId={enrollmentId}
         />
     );

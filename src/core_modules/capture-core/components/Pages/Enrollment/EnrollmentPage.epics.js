@@ -24,7 +24,7 @@ const teiQuery = id => ({
     resource: 'trackedEntityInstances',
     id,
     params: {
-        fields: ['attributes', 'enrollments[*]', 'trackedEntityType'],
+        fields: ['attributes', 'enrollments', 'trackedEntityType'],
     },
 });
 

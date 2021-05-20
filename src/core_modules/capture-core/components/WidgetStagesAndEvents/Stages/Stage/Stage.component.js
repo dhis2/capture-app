@@ -31,7 +31,7 @@ export const StagePlain = ({ stage: { name, icon, stageForm }, events, classes, 
             onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
             open={open}
         >
-            <StageDetail events={events} data={stageForm.sections.get('#MAIN#')?.elements} />
+            { events.length > 0 && <StageDetail events={events} data={stageForm.sections.get('#MAIN#')?.elements} />}
         </Widget>
 
     </div>);
