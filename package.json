@@ -87,7 +87,7 @@
     "@dhis2/cli-app-scripts": "^4.0.9",
     "@dhis2/cli-helpers-engine": "^2.1.1",
     "@dhis2/cli-utils-cypress": "^7.0.1",
-    "@dhis2/cypress-commands": "^5.0.0",
+    "@dhis2/cypress-commands": "^7.0.1",
     "docdash": "^1.2.0",
     "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
