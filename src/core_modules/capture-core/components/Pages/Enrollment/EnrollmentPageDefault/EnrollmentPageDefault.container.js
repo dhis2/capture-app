@@ -7,8 +7,7 @@ import { errorCreator } from 'capture-core-utils';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
-import runRulesForEnrollmentPage from '../../../../rules/actionsCreator/runRulesForEnrollmentPage';
-
+import { useRunRulesForEnrollement } from '../hooks';
 
 export const EnrollmentPageDefault = () => {
     const { enrollmentId, teiId, programId, orgUnitId } = useSelector(({
@@ -25,9 +24,6 @@ export const EnrollmentPageDefault = () => {
         }), shallowEqual);
     const orgUnit = useSelector(({ organisationUnits }) => organisationUnits[orgUnitId], shallowEqual);
 
-    const [dataElements, setDataElements] = React.useState({});
-    const [teiAttributes, setTeiAttributes] = React.useState({});
-
     const { program } = useProgramInfo(programId);
 
     const teiAttributesQuery = useMemo(() => ({
@@ -39,7 +35,7 @@ export const EnrollmentPageDefault = () => {
     }), [teiId]);
 
     const programsQuery = useMemo(() => ({
-        programRules: {
+        programData: {
             resource: 'programs',
             id: programId,
             params: {
@@ -49,53 +45,15 @@ export const EnrollmentPageDefault = () => {
         },
     }), [programId]);
 
-
-    const { error: programStageError } = useDataQuery(programsQuery, {
-        onComplete: data => setDataElements(extractDataElements(data)),
-    });
-
-    const { error: teiError } = useDataQuery(teiAttributesQuery, {
-        onComplete: attributesData => setTeiAttributes(attributesData),
-    });
+    const { data: programStagesData, error: programStageError } = useDataQuery(programsQuery);
+    const { data: teiAttributes, error: teiError } = useDataQuery(teiAttributesQuery);
 
     if (programStageError || teiError) {
         log.error(errorCreator('Enrollment page could not be loaded')({ programStageError, teiError }));
     }
 
-    const extractDataElements = (rules) => {
-        if (!rules?.programRules) { return {}; }
-        return rules.programRules.programStages
-            .reduce((acc, curr) => {
-                curr.programStageDataElements.forEach((stage) => {
-                    acc[stage.dataElement.id] = { ...stage.dataElement };
-                });
-                return acc;
-            }, {});
-    };
-
-    React.useEffect(() => {
-        if (Object.keys(dataElements).length && Object.keys(teiAttributes).length) {
-            const { attributes, enrollments } = teiAttributes;
-            const currentTEIValues = attributes?.map(item => ({ id: item.attribute, valueType: item.valueType }));
-            const currentEnrollmentValues = attributes?.reduce((acc, item) => {
-                acc[item.attribute] = item.value;
-                return acc;
-            }, {});
-            const rules = runRulesForEnrollmentPage(
-                program,
-                orgUnit,
-                program.stages,
-                dataElements,
-                { enrollmentDate: enrollments?.[0].enrollmentDate,
-                    incidentDate: enrollments?.[0].incidentDate,
-                    enrollmentId: enrollments?.[0].enrollmentId },
-                currentEnrollmentValues,
-                currentTEIValues,
-            );
-            console.log({ rules });
-        }
-    }, [orgUnit, program, dataElements, teiAttributes]);
-
+    const rules = useRunRulesForEnrollement(orgUnit, program, programStagesData, teiAttributes);
+    console.log({ rules });
 
     return (
         <EnrollmentPageDefaultComponent
