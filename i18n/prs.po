@@ -726,7 +726,7 @@ msgid "Organisation unit scope"
 msgstr "محدوده کاری نهاد"
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "واحد سازمان"
 
 msgid "Selected program"
 msgstr "برنامه های انتخاب شده"

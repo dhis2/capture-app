@@ -741,7 +741,7 @@ msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "يةكةي ريكخراو"
 
 msgid "Selected program"
 msgstr "پرۆگرامە هەڵبژێردراوەکە"

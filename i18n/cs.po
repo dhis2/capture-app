@@ -738,7 +738,7 @@ msgid "Organisation unit scope"
 msgstr "Rozsah organizační jednotky"
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Organizační jednotka"
 
 msgid "Selected program"
 msgstr "Vybraný program"

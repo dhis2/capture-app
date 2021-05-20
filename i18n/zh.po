@@ -729,7 +729,7 @@ msgid "Organisation unit scope"
 msgstr "使用的机构范围"
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "机构"
 
 msgid "Selected program"
 msgstr "选择的项目"

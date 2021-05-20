@@ -733,7 +733,7 @@ msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "الوحدة التنظيمية"
 
 msgid "Selected program"
 msgstr "البرنامج المحدد"
