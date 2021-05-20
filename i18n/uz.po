@@ -743,7 +743,7 @@ msgid "Organisation unit scope"
 msgstr "Ташкилий бўлим ҳуқуқ ва бурчлари"
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Ташкилий бўлим"
 
 msgid "Selected program"
 msgstr "Танланган дастур"

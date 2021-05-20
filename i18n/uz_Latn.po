@@ -746,7 +746,7 @@ msgid "Organisation unit scope"
 msgstr "Tashkiliy boʼlim huquq va burchlari"
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Ташкилий бирлик"
 
 msgid "Selected program"
 msgstr "Tanlangan dastur"

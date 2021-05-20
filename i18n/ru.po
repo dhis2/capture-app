@@ -2,15 +2,15 @@
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2020
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-05-18T12:46:51.099Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -748,7 +748,7 @@ msgid "Organisation unit scope"
 msgstr "Масштаб организационной единицы"
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Организационная единица"
 
 msgid "Selected program"
 msgstr "Выбранная программа"

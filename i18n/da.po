@@ -726,7 +726,7 @@ msgid "Organisation unit scope"
 msgstr ""
 
 msgid "Organisation unit"
-msgstr ""
+msgstr "Organisation unit"
 
 msgid "Selected program"
 msgstr ""
