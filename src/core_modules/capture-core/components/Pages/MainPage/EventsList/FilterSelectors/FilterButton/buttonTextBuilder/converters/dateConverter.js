@@ -16,7 +16,7 @@ const periods = {
     CUSTOM_RANGE: 'CUSTOM_RANGE',
 };
 
-const translatedPeriods = {
+const translatedPeriods = () => ({
     [periods.TODAY]: i18n.t('Today'),
     [periods.THIS_WEEK]: i18n.t('This week'),
     [periods.THIS_MONTH]: i18n.t('This month'),
@@ -24,7 +24,7 @@ const translatedPeriods = {
     [periods.LAST_WEEK]: i18n.t('Last week'),
     [periods.LAST_MONTH]: i18n.t('Last month'),
     [periods.LAST_3_MONTHS]: i18n.t('Last 3 months'),
-};
+});
 
 const convertToViewValue = (filterValue: string) => pipe(
     value => moment(value),
@@ -62,5 +62,5 @@ export function convertDate(filter: DateFilterData) {
         return translateAbsoluteDate(filter);
     }
 
-    return translatedPeriods[filter.period];
+    return translatedPeriods()[filter.period];
 }

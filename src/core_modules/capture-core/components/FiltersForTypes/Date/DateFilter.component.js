@@ -81,7 +81,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         [elementTypes.DATE]: isValidDate,
     };
 
-    static mainOptionSet = new OptionSet('mainOptions', [
+    static mainOptionSet = (mainOptionTranslatedTexts) => new OptionSet('mainOptions', [
         new Option((_this) => {
             _this.text = mainOptionTranslatedTexts[mainOptionKeys.TODAY];
             _this.value = mainOptionKeys.TODAY;
@@ -280,7 +280,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
             <div id="dateFilter">
                 <div>
                     <SelectBoxes
-                        optionSet={DateFilter.mainOptionSet}
+                        optionSet={DateFilter.mainOptionSet(mainOptionTranslatedTexts())}
                         orientation={orientations.VERTICAL}
                         value={value && value.main}
                         onBlur={this.handleMainSelect}
