@@ -3,7 +3,6 @@ import { IconCheckmark16, MenuItem } from '@dhis2/ui';
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './complete.types';
-
 import { plainStatus } from '../../constants/status.const';
 
 export const Complete = ({ enrollment, updateAction }: Props) =>

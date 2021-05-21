@@ -7,6 +7,7 @@ import { Cancel } from './Cancel';
 import { Complete } from './Complete';
 import { Delete } from './Delete';
 import { Followup } from './Followup';
+import type { PlainProps } from './actions.types';
 
 const styles = {
     actions: {
@@ -14,25 +15,18 @@ const styles = {
     },
 };
 
-type Props = {|
-    enrollment: Object,
-    updateAction: (arg: Object) => void,
-    deleteAction: (arg: Object) => void,
-    ...CssClasses,
-|};
-
 export const ActionsPlain = ({
     enrollment = {},
     updateAction,
     deleteAction,
     classes,
-}: Props) => (
+}: PlainProps) => (
     <>
         <DropdownButton
+            dataTest="widget-enrollment-actions-button"
             secondary
             small
             className={classes.actions}
-            dataTest="widget-enrollment-actions-button"
             component={
                 <span>
                     <FlyoutMenu dense maxWidth="250px">
@@ -62,5 +56,5 @@ export const ActionsPlain = ({
     </>
 );
 
-export const ActionsComponent: ComponentType<$Diff<Props, CssClasses>> =
+export const ActionsComponent: ComponentType<$Diff<PlainProps, CssClasses>> =
     withStyles(styles)(ActionsPlain);

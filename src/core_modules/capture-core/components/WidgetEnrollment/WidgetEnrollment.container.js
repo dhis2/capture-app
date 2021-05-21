@@ -14,10 +14,8 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, callbackDelet
         refetch,
     } = useEnrollment(enrollmentId);
     const { error: errorProgram, program } = useProgram(programId);
-    const { error: errorOwnerOrgUnit, ownerOrgUnit } =
-        useTrackedEntityInstances(teiId, programId);
-    const { error: errorOrgUnit, displayName } =
-        useOrganizationUnit(ownerOrgUnit);
+    const { error: errorOwnerOrgUnit, ownerOrgUnit } = useTrackedEntityInstances(teiId, programId);
+    const { error: errorOrgUnit, displayName } = useOrganizationUnit(ownerOrgUnit);
 
     return (
         <WidgetEnrollmentComponent

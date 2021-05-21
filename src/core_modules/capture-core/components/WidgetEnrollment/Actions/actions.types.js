@@ -6,3 +6,11 @@ export type Props = {|
     refetch: QueryRefetchFunction,
     callbackDelete: () => void,
 |};
+
+export type PlainProps = {|
+    enrollment: Object,
+    updateAction: (arg: Object) => void,
+    deleteAction: (arg: Object) => void,
+    ...CssClasses,
+|};
+
