@@ -52,16 +52,6 @@ export const ActionsPlain = ({
                             enrollment={enrollment}
                             updateAction={updateAction}
                         />
-
-                        <MenuItem
-                            icon={<IconArrowRight16 />}
-                            label={i18n.t('Transfer...')}
-                        />
-                        <MenuItem
-                            icon={<IconMore16 />}
-                            label={i18n.t('Show 4 previous enrollments')}
-                        />
-
                         <MenuDivider />
                         <Cancel
                             enrollment={enrollment}
