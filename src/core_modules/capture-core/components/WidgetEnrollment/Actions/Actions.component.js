@@ -1,13 +1,5 @@
 // @flow
-import {
-    DropdownButton,
-    FlyoutMenu,
-    IconArrowRight16,
-    IconMore16,
-    MenuDivider,
-    MenuItem,
-    spacersNum,
-} from '@dhis2/ui';
+import { DropdownButton, FlyoutMenu, MenuDivider, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import React, { type ComponentType } from 'react';
