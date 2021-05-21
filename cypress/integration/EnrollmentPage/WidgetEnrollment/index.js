@@ -1,10 +1,9 @@
-import '../sharedSteps';
-
 beforeEach(() => {
     cy.loginThroughForm();
 });
+
 Given('you open the enrollment page', () => {
-    cy.visit('#/enrollment?enrollmentId=wBU0RAsYjKE');
+    cy.visit('#/enrollment?enrollmentId=kcX0O3juDAH');
 });
 
 When('you click the enrollment widget toggle open close button', () => {
@@ -25,19 +24,11 @@ Then('the enrollment widget should be opened', () => {
     });
 });
 
-Then('the user sees the enrollment status', () => {
-    cy.get('[data-test="widget-enrollment"]').within(() => {
-        cy.get('[data-test="widget-enrollment-status"]')
-            .contains('Active')
-            .should('exist');
-    });
-});
-
 Then('the user sees the enrollment date', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-icon-calendar"]').should('exist');
         cy.get('[data-test="widget-enrollment-enrollment-date"]')
-            .contains('Date of enrollment 2021-08-01')
+            .contains('Date of enrollment 2021-02-20')
             .should('exist');
     });
 });
@@ -45,7 +36,7 @@ Then('the user sees the enrollment date', () => {
 Then('the user sees the incident date', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-incident-date"]')
-            .contains('Date of birth 2021-08-01')
+            .contains('Date of birth 2021-02-20')
             .should('exist');
     });
 });
@@ -77,3 +68,54 @@ Then('the user sees the last update date', () => {
             .should('exist');
     });
 });
+
+When('the user opens the enrollment actions menu', () => {
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-actions-button"]').click();
+    });
+});
+
+When(/^the user changes the enrollment status to (.*)$/, status =>
+    cy
+        .get(`[data-test="widget-enrollment-actions-${status}"]`)
+        .click()
+        .wait(500),
+);
+
+Then(/^the user sees the enrollment status is (.*)$/, status =>
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-status"]')
+            .contains(status)
+            .should('exist');
+    }),
+);
+
+When(/^the user (.*) the enrollment for followup/, action =>
+    cy
+        .get(`[data-test="widget-enrollment-actions-followup-${action}"]`)
+        .click()
+        .wait(500),
+);
+
+Then(/^the user can see the enrollment is ?(.*) marked for follow up/, not =>
+    cy.get('[data-test="widget-enrollment"]').within(() => {
+        cy.get('[data-test="widget-enrollment-status"]')
+            .contains('Follow-up')
+            .should(not ? 'not.exist' : 'exist');
+    }),
+);
+
+When(/^the user clicks on the delete action/, () =>
+    cy.get('[data-test="widget-enrollment-actions-delete"]').click(),
+);
+
+Then(/^the user sees the delete enrollment modal/, () =>
+    cy.get('[data-test="widget-enrollment-actions-modal"]').within(() => {
+        cy.contains('Delete enrollment').should('exist');
+        cy.contains(
+            'Are you sure you want to delete this enrollment? This will permanently remove the current enrollment.',
+        ).should('exist');
+        cy.contains('No, cancel').should('exist');
+        cy.contains('Yes, delete enrollment').should('exist');
+    }),
+);

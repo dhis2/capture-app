@@ -20,6 +20,7 @@ export const Delete = ({ enrollment, deleteAction }: Props) => {
         <div>
             <MenuItem
                 dense
+                dataTest="widget-enrollment-actions-delete"
                 icon={<IconDelete16 />}
                 destructive
                 label={i18n.t('Delete')}
@@ -27,7 +28,11 @@ export const Delete = ({ enrollment, deleteAction }: Props) => {
             />
 
             {toggle && (
-                <Modal small onClose={() => setToggle(false)}>
+                <Modal
+                    small
+                    onClose={() => setToggle(false)}
+                    dataTest="widget-enrollment-actions-modal"
+                >
                     <ModalTitle>{i18n.t('Delete enrollment')}</ModalTitle>
                     <ModalContent>
                         {i18n.t(
