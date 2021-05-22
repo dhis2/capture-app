@@ -15,6 +15,9 @@ const styles = theme => ({
         marginTop: 12,
     },
     d2FormContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '10px',
         paddingTop: 10,
         paddingBottom: 10,
     },
