@@ -146,14 +146,19 @@ class EnrollmentFactory {
             // $FlowFixMe
             cachedProgramSections.asyncForEach(async (ps) => {
                 let arr;
+                if (cachedProgram.trackedEntityTypeId) {
+                    const TEILabel = this.cachedTrackedEntityTypes.get(cachedProgram.trackedEntityTypeId)?.displayName;
+                    section = await this._buildSection(arr, cachedProgram.trackedEntityTypeId, TEILabel, 'TEIFeatureType');
+                    section && enrollmentForm.addSection(section);
+                }
                 if (cachedProgramTrackedEntityAttributes &&
                     cachedProgramTrackedEntityAttributes.length > 0) {
                     arr = cachedProgramTrackedEntityAttributes
                         .filter(e => ps.trackedEntityAttributes
                             .includes(e.trackedEntityAttributeId));
                 }
-                section = await this._buildSection(arr, cachedProgram.trackedEntityTypeId, ps.displayFormName, ps.id);
-                section && await enrollmentForm.addSection(section);
+                section = await this._buildSection(arr, null, ps.displayFormName, ps.id);
+                section && enrollmentForm.addSection(section);
             });
         } else {
             section = await
