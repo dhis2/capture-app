@@ -661,7 +661,7 @@ msgid "Event details"
 msgstr "Ҳодиса/тадбир тафсилотлари"
 
 msgid "Event completed"
-msgstr ""
+msgstr "Ҳодиса/тадбир якунланди"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
