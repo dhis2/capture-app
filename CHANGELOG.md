@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/dhis2/capture-app/compare/v1.21.3...v1.22.0) (2021-05-20)
+
+
+### Features
+
+* DHIS2-10977 WidgetFeedback component ([d154126](https://github.com/dhis2/capture-app/commit/d154126e598b6a0025591d525dc587b8a3f703ef))
+
 ## [1.21.3](https://github.com/dhis2/capture-app/compare/v1.21.2...v1.21.3) (2021-05-16)
 
 
