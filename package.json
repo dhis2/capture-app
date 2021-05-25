@@ -108,7 +108,7 @@
     "jsdoc": "^3.6.4",
     "jsdoc-babel": "^0.5.0",
     "jsdoc-export-default-interop": "^0.3.1",
-    "redux-devtools-extension": "^2.13.2"
+    "redux-devtools-extension": "^2.13.9"
   },
   "browserslist": {
     "production": [
