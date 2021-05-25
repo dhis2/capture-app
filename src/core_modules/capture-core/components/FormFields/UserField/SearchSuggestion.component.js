@@ -3,7 +3,7 @@ import * as React from 'react';
 import parse from 'autosuggest-highlight/parse';
 import MenuItem from '@material-ui/core/MenuItem';
 import classNames from 'classnames';
-import SearchContext from './Search.context';
+import { SearchContext } from './Search.context';
 import defaultClasses from './searchSuggestion.module.css';
 import type { User } from './types';
 
@@ -49,7 +49,7 @@ function isInternalTarget(target, suggestionName, inputName) {
     return (parentElement.getAttribute('name') === suggestionName);
 }
 
-const SearchSuggestion = (props: Props) => {
+export const SearchSuggestion = (props: Props) => {
     const {
         user,
         query,
@@ -127,5 +127,3 @@ const SearchSuggestion = (props: Props) => {
         </div>
     );
 };
-
-export default SearchSuggestion;

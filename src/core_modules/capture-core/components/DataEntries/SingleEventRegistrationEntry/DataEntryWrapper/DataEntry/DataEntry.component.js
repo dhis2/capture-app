@@ -2,21 +2,21 @@
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import DataEntry from '../../../../DataEntry/DataEntry.container';
-import withCancelButton from '../../../../DataEntry/withCancelButton';
-import withDataEntryField from '../../../../DataEntry/dataEntryField/withDataEntryField';
-import withDataEntryNotesHandler from '../../../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
-import Notes from '../../../../Notes/Notes.component';
-import withDataEntryRelationshipsHandler from '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
-import Relationships from '../../../../Relationships/Relationships.component';
-import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
+import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
+import { withCancelButton } from '../../../../DataEntry/withCancelButton';
+import { withDataEntryField } from '../../../../DataEntry/dataEntryField/withDataEntryField';
+import { withDataEntryNotesHandler } from '../../../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
+import { Notes } from '../../../../Notes/Notes.component';
+import { withDataEntryRelationshipsHandler } from '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
+import { Relationships } from '../../../../Relationships/Relationships.component';
+import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
 import { type RenderFoundation } from '../../../../../metaData';
-import withMainButton from './withMainButton';
-import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
+import { withMainButton } from './withMainButton';
+import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
 import {
     withSaveHandler,
     placements,
-    withCleanUpHOC,
+    withCleanUp,
 } from '../../../../DataEntry';
 import {
     withInternalChangeHandler,
@@ -35,14 +35,14 @@ import {
 } from '../../../../FormFields/New';
 import { Assignee } from './Assignee';
 
-import withFeedbackOutput from '../../../../DataEntry/dataEntryOutput/withFeedbackOutput';
-import inMemoryFileStore from '../../../../DataEntry/file/inMemoryFileStore';
-import withIndicatorOutput from '../../../../DataEntry/dataEntryOutput/withIndicatorOutput';
-import withErrorOutput from '../../../../DataEntry/dataEntryOutput/withErrorOutput';
-import withWarningOutput from '../../../../DataEntry/dataEntryOutput/withWarningOutput';
-import newEventSaveTypes from './newEventSaveTypes';
+import { withFeedbackOutput } from '../../../../DataEntry/dataEntryOutput/withFeedbackOutput';
+import { inMemoryFileStore } from '../../../../DataEntry/file/inMemoryFileStore';
+import { withIndicatorOutput } from '../../../../DataEntry/dataEntryOutput/withIndicatorOutput';
+import { withErrorOutput } from '../../../../DataEntry/dataEntryOutput/withErrorOutput';
+import { withWarningOutput } from '../../../../DataEntry/dataEntryOutput/withWarningOutput';
+import { newEventSaveTypes } from './newEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
-import withDataEntryFieldIfApplicable from '../../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
+import { withDataEntryFieldIfApplicable } from '../../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
 import { withTransformPropName } from '../../../../../HOC';
 import { InfoIconText } from '../../../../InfoIconText';
@@ -406,7 +406,7 @@ const dataEntryFilterProps = (props: Object) => {
 };
 
 
-const CleanUpHOC = withCleanUpHOC()(withFilterProps(dataEntryFilterProps)(DataEntry));
+const CleanUpHOC = withCleanUp()(withFilterProps(dataEntryFilterProps)(DataEntryContainer));
 const AssigneeField = withDataEntryFieldIfApplicable(buildAssigneeSettingsFn())(CleanUpHOC);
 const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(AssigneeField);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
@@ -597,4 +597,4 @@ class NewEventDataEntry extends Component<Props> {
 }
 
 
-export default withStyles(getStyles)(withTheme()(NewEventDataEntry));
+export const DataEntryComponent = withStyles(getStyles)(withTheme()(NewEventDataEntry));

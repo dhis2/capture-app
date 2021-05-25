@@ -9,7 +9,7 @@ async function getSystemSettingsFromStore() {
     return storageController.getAll(mainStores.SYSTEM_SETTINGS);
 }
 
-export default async function buildSystemSettingsAsync(cacheData?: ?Array<Object>) {
+export async function buildSystemSettingsAsync(cacheData?: ?Array<Object>) {
     const loadedCacheData = cacheData || await getSystemSettingsFromStore();
 
     const systemSettings = new SystemSettings();

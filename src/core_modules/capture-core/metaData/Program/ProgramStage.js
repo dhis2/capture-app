@@ -4,10 +4,11 @@
 /* eslint-disable no-restricted-syntax */
 
 import isFunction from 'd2-utilizr/lib/isFunction';
+import type { Icon } from '../Icon';
 import type { RenderFoundation } from '../RenderFoundation';
 import type { RelationshipType } from '../RelationshipType';
 
-export default class ProgramStage {
+export class ProgramStage {
     _id: string;
     _name: string;
     _stageForm: RenderFoundation;
@@ -18,6 +19,7 @@ export default class ProgramStage {
     _generatedByEnrollmentDate: boolean;
     _reportDateToUse: string;
     _minDaysFromStart: number;
+    _icon: Icon | void;
 
     constructor(initFn: ?(_this: ProgramStage) => void) {
         initFn && isFunction(initFn) && initFn(this);
@@ -45,6 +47,13 @@ export default class ProgramStage {
 
     set name(name: string) {
         this._name = name;
+    }
+
+    set icon(icon: Icon | void) {
+        this._icon = icon;
+    }
+    get icon(): Icon | void {
+        return this._icon;
     }
 
     get relationshipTypes(): Array<RelationshipType> {

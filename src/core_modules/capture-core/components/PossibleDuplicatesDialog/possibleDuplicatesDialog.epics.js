@@ -11,7 +11,7 @@ import {
 import {
     scopeTypes, getScopeFromScopeId, EventProgram, TrackerProgram, TrackedEntityType,
 } from '../../metaData';
-import getDataEntryKey from '../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import { convertFormToClient, convertClientToServer } from '../../converters';
 import { getTrackedEntityInstances } from '../../trackedEntityInstances/trackedEntityInstanceRequests';
 import { getAttributesFromScopeId } from '../../metaData/helpers';
@@ -60,7 +60,7 @@ export const loadSearchGroupDuplicatesForReviewEpic: Epic = (action$, store) =>
                             return null;
                         }
                         const serverValue = element.convertValue(value, pipeD2(convertFormToClient, convertClientToServer));
-                        return `${element.id}:LIKE:${serverValue}`;
+                        return `${element.id}:${element.optionSet ? 'eq' : 'like'}:${serverValue}`;
                     })
                     .filter(f => f);
 

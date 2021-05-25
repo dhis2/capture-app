@@ -2,12 +2,11 @@
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { errorCreator } from 'capture-core-utils';
 import type {
     CachedProgram,
     CachedProgramTrackedEntityAttribute,
-    CachedOptionSet,
     CachedProgramSection,
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
@@ -23,11 +22,12 @@ import type {
     TrackedEntityType,
     SearchGroup,
 } from '../../../../metaData';
-import DataElementFactory from './DataElementFactory';
+import { DataElementFactory } from './DataElementFactory';
 import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
+import type { ConstructorInput } from './enrollmentFactory.types';
 
-class EnrollmentFactory {
+export class EnrollmentFactory {
     static errorMessages = {
         CUSTOM_FORM_TEMPLATE_ERROR: 'Error in custom form template',
     };
@@ -59,22 +59,22 @@ class EnrollmentFactory {
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>;
-    constructor(
-        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-        cachedOptionSets: Map<string, CachedOptionSet>,
-        cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
-        locale: ?string,
-        trackedEntityTypeCollection: Map<string, TrackedEntityType>,
-    ) {
+    constructor({
+        cachedTrackedEntityAttributes,
+        cachedOptionSets,
+        cachedTrackedEntityTypes,
+        trackedEntityTypeCollection,
+        locale,
+    }: ConstructorInput) {
         this.locale = locale;
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.cachedTrackedEntityTypes = cachedTrackedEntityTypes;
-        this.dataElementFactory = new DataElementFactory(
+        this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
+        });
     }
 
     _buildTetFeatureTypeField(trackedEntityTypeId: ?string) {
@@ -258,13 +258,13 @@ class EnrollmentFactory {
                 o.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
                 o.searchFoundation = this._buildInputSearchGroupFoundation(cachedProgram, searchGroup);
                 o.onSearch = (values: Object = {}, contextProps: Object = {}) => {
-                    const { orgUnitId, program } = contextProps;
+                    const { orgUnitId, programId } = contextProps;
                     return getApi()
                         .get(
                             'trackedEntityInstances/count.json',
                             {
                                 ou: orgUnitId,
-                                program,
+                                program: programId,
                                 ouMode: 'ACCESSIBLE',
                                 filter: Object
                                     .keys(values)
@@ -300,5 +300,3 @@ class EnrollmentFactory {
         return enrollment;
     }
 }
-
-export default EnrollmentFactory;

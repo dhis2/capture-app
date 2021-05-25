@@ -5,16 +5,9 @@ import i18n from '@dhis2/d2-i18n';
 import {
     DataEntry,
     withBrowserBackWarning,
-    withSearchGroups,
     inMemoryFileStore,
 } from '../../DataEntry';
 import type { TeiRegistration } from '../../../metaData';
-
-const getSearchGroups = (props: Object) => props.teiRegistrationMetadata.inputSearchGroups;
-const getSearchContext = (props: Object) => ({
-    ...props.onGetValidationContext(),
-    trackedEntityType: props.teiRegistrationMetadata.form.id,
-});
 
 type FinalTeiDataEntryProps = {
     teiRegistrationMetadata: TeiRegistration,
@@ -36,8 +29,7 @@ class FinalTeiDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-const SearchGroupsHOC = withSearchGroups(getSearchGroups, getSearchContext)(FinalTeiDataEntry);
-const BrowserBackWarningHOC = withBrowserBackWarning()(SearchGroupsHOC);
+const BrowserBackWarningHOC = withBrowserBackWarning()(FinalTeiDataEntry);
 
 class PreTeiDataEntryPure extends React.PureComponent<Object> {
     render() {
@@ -51,16 +43,18 @@ class PreTeiDataEntryPure extends React.PureComponent<Object> {
 
 type PreTeiDataEntryProps = {
     orgUnit: Object,
+    trackedEntityTypeId: string,
     onUpdateField: Function,
     onStartAsyncUpdateField: Function,
     teiRegistrationMetadata: ?TeiRegistration,
     onGetUnsavedAttributeValues?: ?Function,
 };
 
-class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
+export class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnit, onGetUnsavedAttributeValues } = this.props;
+        const { orgUnit, onGetUnsavedAttributeValues, trackedEntityTypeId } = this.props;
         return {
+            trackedEntityTypeId,
             orgUnitId: orgUnit.id,
             onGetUnsavedAttributeValues,
         };
@@ -69,6 +63,7 @@ class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
     render() {
         const {
             orgUnit,
+            trackedEntityTypeId,
             onUpdateField,
             onStartAsyncUpdateField,
             teiRegistrationMetadata,
@@ -95,5 +90,3 @@ class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
         );
     }
 }
-
-export default PreTeiDataEntry;

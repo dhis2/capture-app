@@ -141,9 +141,10 @@ import {
 import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
 
 import { loadCoreEpic } from 'capture-core/init';
-import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../components/AppStart';
 
-import getDataEntryEpics from './getDataEntryEpics';
+import { checkForDuplicateEpic } from 'capture-core/components/DataEntryUtils';
+
+import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../components/AppStart';
 
 import {
     validateSelectionsBasedOnUrlUpdateEpic,
@@ -197,7 +198,7 @@ import {
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 
-export default combineEpics(
+export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
     resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,
@@ -316,5 +317,5 @@ export default combineEpics(
     setEnrollmentSelectionEpic,
     resetEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
-    ...getDataEntryEpics(),
+    checkForDuplicateEpic,
 );

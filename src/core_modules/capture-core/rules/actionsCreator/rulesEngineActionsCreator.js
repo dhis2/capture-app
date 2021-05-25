@@ -3,9 +3,9 @@
  * @module rulesEngineActionsCreator
  */
 import type { Program, RenderFoundation, TrackerProgram } from '../../metaData';
-import runRulesForSingleEvent from './runRulesForSingleEvent';
-import runRulesForTEI from './runRulesForTEI';
-import postProcessRulesEffects from './postProcessRulesEffects';
+import { runRulesForSingleEvent } from './runRulesForSingleEvent';
+import { runRulesForTEI } from './runRulesForTEI';
+import { postProcessRulesEffects } from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
 import type {
     OutputEffects,

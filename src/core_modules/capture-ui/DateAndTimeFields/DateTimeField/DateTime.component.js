@@ -4,9 +4,9 @@ import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import defaultClasses from './dateTime.module.css';
 
-import orientations from '../../constants/orientations.const';
-import DateTimeDate from '../../internal/DateTimeInput/DateTimeDate.component';
-import DateTimeTime from '../../internal/DateTimeInput/DateTimeTime.component';
+import { orientations } from '../../constants/orientations.const';
+import { DateTimeDate } from '../../internal/DateTimeInput/DateTimeDate.component';
+import { DateTimeTime } from '../../internal/DateTimeInput/DateTimeTime.component';
 
 type Value = {
     date?: ?string,
@@ -31,7 +31,7 @@ type Props = {
     timeLabel: string,
 };
 
-class D2DateTime extends Component<Props> {
+export class DateTimeField extends Component<Props> {
     handleTimeChange: (timeValue: string) => void;
     handleDateChange: (dateValue: string) => void;
     handleTimeBlur: (timeValue: string) => void;
@@ -168,5 +168,3 @@ class D2DateTime extends Component<Props> {
         );
     }
 }
-
-export default D2DateTime;

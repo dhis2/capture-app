@@ -1,5 +1,5 @@
 // @flow
 import { withDefaultFieldWrapperForForm } from '../internal';
-import FileField from '../../../../FormFields/File/D2File.component';
+import { D2File } from '../../../../FormFields/File/D2File.component';
 
-export default withDefaultFieldWrapperForForm()(FileField);
+export const FileResourceFieldForForm = withDefaultFieldWrapperForForm()(D2File);

@@ -2,14 +2,13 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import moment from 'capture-core-utils/moment/momentResolver';
+import { moment } from 'capture-core-utils/moment/momentResolver';
 import {
     DataEntry,
     placements,
     withDataEntryField,
     withDataEntryFieldIfApplicable,
     withBrowserBackWarning,
-    withSearchGroups,
     inMemoryFileStore,
 } from '../../DataEntry';
 import {
@@ -32,7 +31,7 @@ import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
-import dataEntrySectionKeys from './constants/sectionKeys.const';
+import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
 import { type Enrollment } from '../../../metaData';
 
 const overrideMessagePropNames = {
@@ -110,7 +109,7 @@ const getEnrollmentDateSettings = () => {
             getEnrollmentDateValidatorContainer(props.enrollmentMetadata.allowFutureEnrollmentDate),
         getMeta: () => ({
             placement: placements.TOP,
-            section: dataEntrySectionKeys.ENROLLMENT,
+            section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
         }),
     };
 
@@ -157,7 +156,7 @@ const getIncidentDateSettings = () => {
             getIncidentDateValidatorContainer(props.enrollmentMetadata.allowFutureIncidentDate),
         getMeta: () => ({
             placement: placements.TOP,
-            section: dataEntrySectionKeys.ENROLLMENT,
+            section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
         }),
     };
 
@@ -244,15 +243,8 @@ const getGeometrySettings = () => ({
     getValidatorContainers: () => [],
     getMeta: () => ({
         placement: placements.TOP,
-        section: dataEntrySectionKeys.ENROLLMENT,
+        section: sectionKeysForEnrollmentDataEntry.ENROLLMENT,
     }),
-});
-
-const getSearchGroups = (props: Object) => props.enrollmentMetadata.inputSearchGroups;
-const getSearchContext = (props: Object) => ({
-    ...props.onGetValidationContext(),
-    trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
-    program: props.programId,
 });
 
 type FinalTeiDataEntryProps = {
@@ -266,7 +258,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 
     static dataEntrySectionDefinitions = {
-        [dataEntrySectionKeys.ENROLLMENT]: {
+        [sectionKeysForEnrollmentDataEntry.ENROLLMENT]: {
             placement: placements.TOP,
             name: i18n.t('Enrollment'),
         },
@@ -285,8 +277,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 }
 
-const SearchGroupsHOC = withSearchGroups(getSearchGroups, getSearchContext)(FinalEnrollmentDataEntry);
-const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(SearchGroupsHOC);
+const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(FinalEnrollmentDataEntry);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
@@ -312,8 +303,9 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
 
 export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnit, onGetUnsavedAttributeValues } = this.props;
+        const { orgUnit, onGetUnsavedAttributeValues, programId } = this.props;
         return {
+            programId,
             orgUnitId: orgUnit.id,
             onGetUnsavedAttributeValues,
         };
@@ -337,6 +329,7 @@ export class EnrollmentDataEntryComponent extends React.Component<PreEnrollmentD
     render() {
         const {
             orgUnit,
+            programId,
             onUpdateField,
             onUpdateDataEntryField,
             onStartAsyncUpdateField,

@@ -1,2 +1,2 @@
 // @flow
-export { default as ProgramSelector } from './ProgramSelector.container';
+export { ProgramSelector } from './ProgramSelector.container';

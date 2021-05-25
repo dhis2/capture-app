@@ -92,7 +92,7 @@ type Props = {
     smallMainButton: boolean,
 };
 
-class Relationships extends React.Component<Props> {
+class RelationshipsPlain extends React.Component<Props> {
     static defaultProps = {
         entityAccess: { read: true, write: true },
     }
@@ -201,4 +201,4 @@ class Relationships extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(Relationships);
+export const Relationships = withStyles(getStyles)(RelationshipsPlain);

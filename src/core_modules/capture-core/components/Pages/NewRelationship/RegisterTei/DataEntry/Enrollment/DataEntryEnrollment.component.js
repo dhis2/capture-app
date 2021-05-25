@@ -1,40 +1,39 @@
 // @flow
 import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { withTheme } from '@material-ui/core/styles';
-import type { Enrollment, RenderFoundation } from '../../../../../../metaData';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
 import enrollmentClasses from './enrollment.module.css';
 import { EnrollmentRegistrationEntry } from '../../../../../DataEntries';
-import { useSaveButtonText } from '../useSaveButtonText';
+import type { Props } from './dataEntryEnrollment.types';
 
-type Props = {
-    theme: Theme,
-    programId: string,
-    enrollmentMetadata?: Enrollment,
-    onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
-};
-
-const NewEnrollmentRelationship =
+const NewEnrollmentRelationshipPlain =
   ({
       theme,
       onSave,
       enrollmentMetadata,
       programId,
+      duplicatesReviewPageSize,
+      renderDuplicatesDialogActions,
+      renderDuplicatesCardActions,
   }: Props) => {
       const fieldOptions = { theme, fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased };
       const { trackedEntityType } = enrollmentMetadata || {};
-      const saveButtonText = useSaveButtonText(trackedEntityType.name);
+      const trackedEntityTypeNameLC = trackedEntityType.name.toLocaleLowerCase();
 
       return (
           <EnrollmentRegistrationEntry
               id={DATA_ENTRY_ID}
               enrollmentMetadata={enrollmentMetadata}
               selectedScopeId={programId}
-              saveButtonText={saveButtonText}
+              saveButtonText={i18n.t('Save new {{trackedEntityTypeName}} and link', { trackedEntityTypeName: trackedEntityTypeNameLC })}
               fieldOptions={fieldOptions}
               onSave={onSave}
+              duplicatesReviewPageSize={duplicatesReviewPageSize}
+              renderDuplicatesDialogActions={renderDuplicatesDialogActions}
+              renderDuplicatesCardActions={renderDuplicatesCardActions}
           />
       );
   };
 
-export default withTheme()(NewEnrollmentRelationship);
+export const NewEnrollmentRelationship = withTheme()(NewEnrollmentRelationshipPlain);

@@ -3,8 +3,8 @@
 import {
     TrackedEntityType,
 } from '../../../../metaData';
-import DataElementFactory from './DataElementFactory';
-import TeiRegistrationFactory from './TeiRegistrationFactory';
+import { DataElementFactory } from './DataElementFactory';
+import { TeiRegistrationFactory } from './TeiRegistrationFactory';
 import { SearchGroupFactory } from '../../../common/factory';
 import type { DataElement } from '../../../../metaData';
 import type
@@ -16,7 +16,7 @@ import type
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
 
-class TrackedEntityTypeFactory {
+export class TrackedEntityTypeFactory {
     static translationPropertyNames = {
         NAME: 'NAME',
         SHORT_NAME: 'SHORT_NAME',
@@ -34,22 +34,21 @@ class TrackedEntityTypeFactory {
         locale: ?string,
     ) {
         this.locale = locale;
-        this.dataElementFactory = new DataElementFactory(
+        this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
-        this.searchGroupFactory = new SearchGroupFactory(
+        });
+        this.searchGroupFactory = new SearchGroupFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
-
-        this.teiRegistrationFactory = new TeiRegistrationFactory(
+        });
+        this.teiRegistrationFactory = new TeiRegistrationFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
+        });
     }
 
     _getTranslation(
@@ -99,5 +98,3 @@ class TrackedEntityTypeFactory {
         return trackedEntityType;
     }
 }
-
-export default TrackedEntityTypeFactory;

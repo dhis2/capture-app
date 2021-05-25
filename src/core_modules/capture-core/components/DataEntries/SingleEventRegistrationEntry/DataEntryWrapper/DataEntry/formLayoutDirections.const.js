@@ -1,2 +1,2 @@
 // @flow
-export default { HORIZONTAL: 'horizontal', VERTICAL: 'vertical' };
+export const formLayoutDirections = { HORIZONTAL: 'horizontal', VERTICAL: 'vertical' };

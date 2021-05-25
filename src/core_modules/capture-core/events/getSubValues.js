@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { config } from 'd2';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import { errorCreator } from 'capture-core-utils';
-import getD2, { getApi } from '../d2/d2Instance';
+import { getD2, getApi } from '../d2/d2Instance';
 import { type RenderFoundation, dataElementTypes } from '../metaData';
 
 const GET_SUBVALUE_ERROR = 'Could not get subvalue';

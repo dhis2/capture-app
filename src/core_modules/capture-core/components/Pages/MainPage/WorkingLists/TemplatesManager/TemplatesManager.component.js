@@ -3,7 +3,7 @@ import React, { useContext, type ComponentType } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { ListViewConfig } from '../ListViewConfig';
-import TemplateSelector from '../TemplateSelector.component';
+import { TemplateSelector } from '../TemplateSelector.component';
 import { ManagerContext } from '../workingLists.context';
 import { withBorder } from '../borderHOC';
 import type {

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import ErrorMessageCreator from './ErrorMessageCreator.container';
-import ExistingTEIDialog from './ExistingTEIDialog.component';
+import { ErrorMessageCreator } from './ErrorMessageCreator.container';
+import { ExistingTEIDialog } from './ExistingTEIDialog.component';
 import type { ErrorData } from './uniqueTEADuplicate.types';
 
 type Props = {
@@ -14,7 +14,7 @@ type State = {
     existingTeiDialogOpen: boolean,
 };
 
-class UniqueTEADuplicate extends React.Component<Props, State> {
+export class UniqueTEADuplicate extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -65,5 +65,3 @@ class UniqueTEADuplicate extends React.Component<Props, State> {
         );
     }
 }
-
-export default UniqueTEADuplicate;

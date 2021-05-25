@@ -3,13 +3,13 @@
 import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
-import type OptionGroup from './OptionGroup';
+import type { OptionGroup } from './OptionGroup';
 import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
 import type { DataElement } from '../DataElement';
 import type { ConvertFn } from '../DataElement/DataElement';
-import type Option, { Value } from './Option';
+import type { Option, Value } from './Option';
 
-export default class OptionSet {
+export class OptionSet {
     static errorMessages = {
         OPTION_NOT_FOUND: 'Option not found',
         UNSUPPORTED_VIEWTYPE: 'Tried to set an unsupported viewType',

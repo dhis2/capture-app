@@ -8,7 +8,7 @@ import { actionTypes } from '../actions/enrollment.actions';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../metaData';
 import { getCurrentClientValues, getCurrentClientMainData } from '../../../../rules/actionsCreator';
 import type { FieldData } from '../../../../rules/actionsCreator';
-import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',

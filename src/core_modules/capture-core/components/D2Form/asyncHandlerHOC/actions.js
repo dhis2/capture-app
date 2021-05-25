@@ -5,7 +5,6 @@ import { actionCreator } from '../../../actions/actions.utils';
 export const actionTypes = {
     FIELDS_VALIDATED: 'FieldsValidated',
     FIELD_IS_VALIDATING: 'FieldIsValidating',
-    CLEAN_UP_FORM_BUILDER: 'CleanUpFormBuilder',
     START_UPDATE_FIELD_ASYNC: 'StartUpdateFieldAsync',
     UPDATE_FIELD_FROM_ASYNC: 'UpdateFieldFromAsync',
     ASYNC_UPDATE_FIELD_FAILED: 'AsyncUpdateFieldFailed',
@@ -38,10 +37,6 @@ export const fieldsValidated = (
 ) =>
     actionCreator(actionTypes.FIELDS_VALIDATED)(
         { fieldsUI, formBuilderId, formId, validatingUids });
-
-export const cleanUpFormBuilder = (remainingUids: Array<string>, formId: string) =>
-    actionCreator(actionTypes.CLEAN_UP_FORM_BUILDER)(
-        { remainingUids, formId });
 
 export const startUpdateFieldAsync = (
     elementId: string,

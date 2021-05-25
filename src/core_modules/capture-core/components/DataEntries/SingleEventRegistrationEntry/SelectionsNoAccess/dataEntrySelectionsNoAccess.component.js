@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import Button from '../../../Buttons/Button.component';
+import { Button } from '../../../Buttons/Button.component';
 import { NoWriteAccessMessage } from '../../../NoWriteAccessMessage';
 
 const getStyles = (theme: Theme) => ({
@@ -33,7 +33,7 @@ type Props = {
     onCancel: () => void,
 };
 
-class DataEntrySelectionsNoAccess extends Component<Props> {
+class DataEntrySelectionsNoAccessPlain extends Component<Props> {
     render() {
         const { classes, onCancel } = this.props;
         return (
@@ -73,4 +73,4 @@ class DataEntrySelectionsNoAccess extends Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(DataEntrySelectionsNoAccess);
+export const DataEntrySelectionsNoAccess = withStyles(getStyles)(DataEntrySelectionsNoAccessPlain);

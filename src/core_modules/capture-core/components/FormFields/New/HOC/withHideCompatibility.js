@@ -5,7 +5,7 @@ type Props = {
     hidden?: ?boolean,
 };
 
-export default () =>
+export const withHideCompatibility = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class HideFieldCompatibilityInterface extends React.Component<Props> {
             render() {

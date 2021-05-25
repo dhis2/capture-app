@@ -15,11 +15,11 @@ import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
 import type {
     CachedTrackedEntityType,
     CachedTrackedEntityAttribute,
-    CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
-import DataElementFactory from './DataElementFactory';
+import { DataElementFactory } from './DataElementFactory';
+import type { ConstructorInput } from './teiRegistrationFactory.types';
 
-class TeiRegistrationFactory {
+export class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
         const element = new DataElement((o) => {
             o.id = searchGroupElement.id;
@@ -52,17 +52,17 @@ class TeiRegistrationFactory {
     dataElementFactory: DataElementFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
 
-    constructor(
-        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-        cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: ?string,
-    ) {
+    constructor({
+        cachedTrackedEntityAttributes,
+        cachedOptionSets,
+        locale,
+    }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
-        this.dataElementFactory = new DataElementFactory(
+        this.dataElementFactory = new DataElementFactory({
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
-        );
+        });
     }
 
     async _buildSection(
@@ -160,13 +160,13 @@ class TeiRegistrationFactory {
                 o.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
                 o.searchFoundation = this._buildInputSearchGroupFoundation(cachedType, searchGroup);
                 o.onSearch = (values: Object = {}, contextProps: Object = {}) => {
-                    const { orgUnitId, trackedEntityType } = contextProps;
+                    const { orgUnitId, trackedEntityTypeId } = contextProps;
                     return getApi()
                         .get(
                             'trackedEntityInstances/count.json',
                             {
                                 ou: orgUnitId,
-                                trackedEntityType,
+                                trackedEntityType: trackedEntityTypeId,
                                 ouMode: 'ACCESSIBLE',
                                 filter: Object
                                     .keys(values)
@@ -194,5 +194,3 @@ class TeiRegistrationFactory {
         });
     }
 }
-
-export default TeiRegistrationFactory;

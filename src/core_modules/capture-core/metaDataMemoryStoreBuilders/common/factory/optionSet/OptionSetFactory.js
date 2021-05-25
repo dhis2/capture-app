@@ -1,22 +1,21 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
-import getCamelCaseUppercaseString from 'capture-core-utils/string/getCamelCaseFromUppercase';
+import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import { errorCreator } from 'capture-core-utils';
 import type {
-    CachedStyle,
     CachedOptionSet,
     CachedOptionGroup,
     CachedOptionSetTranslation,
     CachedOptionTranslation,
 } from '../../../../storageControllers/cache.types';
-import { OptionSet, Option, optionSetInputTypes as inputTypes, Icon } from '../../../../metaData';
+import { OptionSet, Option, optionSetInputTypes as inputTypes } from '../../../../metaData';
 import type { DataElement } from '../../../../metaData';
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
-import getDhisIconAsync from '../../getDhisIcon';
-import OptionGroup from '../../../../metaData/OptionSet/OptionGroup';
+import { buildIcon } from '../../../common/helpers';
+import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
 
-class OptionSetFactory {
+export class OptionSetFactory {
     static OPTION_SET_NOT_FOUND = 'Optionset not found';
 
     static translationPropertyNames = {
@@ -25,28 +24,8 @@ class OptionSetFactory {
         SHORT_NAME: 'SHORT_NAME',
     };
 
-    static async _buildOptionIcon(cachedStyle: ?CachedStyle = {}) {
-        const icon = cachedStyle && cachedStyle.icon;
-        if (!icon) {
-            return null;
-        }
-
-        try {
-            const iconData = await getDhisIconAsync(icon);
-            return new Icon((o) => {
-                // $FlowFixMe
-                if (cachedStyle.color) {
-                    o.color = cachedStyle.color;
-                }
-                o.data = iconData;
-            });
-        } catch (error) {
-            return null;
-        }
-    }
-
     static getRenderType(renderType: ?string) {
-        return renderType && getCamelCaseUppercaseString(renderType);
+        return renderType && camelCaseUppercaseString(renderType);
     }
 
     cachedOptionSets: Map<string, CachedOptionSet>;
@@ -90,8 +69,7 @@ class OptionSetFactory {
         const optionsPromises = cachedOptionSet
             .options
             .map(async (cachedOption) => {
-                const icon = await OptionSetFactory._buildOptionIcon(cachedOption.style);
-
+                const icon = buildIcon(cachedOption.style);
                 return new Option((o) => {
                     o.id = cachedOption.id;
                     o.value = cachedOption.code;
@@ -117,5 +95,3 @@ class OptionSetFactory {
         return optionSet;
     }
 }
-
-export default OptionSetFactory;

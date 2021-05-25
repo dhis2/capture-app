@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import DataEntrySelectionsNoAccess from './dataEntrySelectionsNoAccess.component';
+import { DataEntrySelectionsNoAccess } from './dataEntrySelectionsNoAccess.component';
 import {
     cancelNewEventAndReturnToMainPage,
 } from '../DataEntryWrapper/DataEntry/actions/dataEntry.actions';
@@ -16,4 +16,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(DataEntrySelectionsNoAccess);
+export const SelectionsNoAccess = connect(mapStateToProps, mapDispatchToProps)(DataEntrySelectionsNoAccess);

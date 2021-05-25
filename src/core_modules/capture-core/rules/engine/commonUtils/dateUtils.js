@@ -1,9 +1,9 @@
 // @flow
 import moment from 'moment';
-import trimQuotes from './trimQuotes';
+import { trimQuotes } from './trimQuotes';
 import type { IMomentConverter } from '../rulesEngine.types';
 
-export default function getDateUtils(converterObject: IMomentConverter) {
+export function getDateUtils(converterObject: IMomentConverter) {
     const between = (unit: string, firstRulesDate: string, secondRulesDate: string) => {
         const firsRulesDateTrimmed = trimQuotes(firstRulesDate);
         const secondRulesDateTrimmed = trimQuotes(secondRulesDate);

@@ -2,16 +2,16 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type Icon from '../Icon/Icon';
+import type { Icon } from '../Icon/Icon';
 
 export type Value = string | number | boolean | {};
 
-export default class Option {
+export class Option {
     _id: string;
     _value: Value;
     _text: string;
     _description: ?string;
-    _icon: ?Icon;
+    _icon: Icon | void;
 
     constructor(initFn?: (_this: Option) => void) {
         initFn && isFunction(initFn) && initFn(this);
@@ -46,10 +46,10 @@ export default class Option {
         return this._description;
     }
 
-    set icon(icon: ?Icon) {
+    set icon(icon?: Icon) {
         this._icon = icon;
     }
-    get icon(): ?Icon {
+    get icon(): Icon | void {
         return this._icon;
     }
 

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 
-import Button from './ButtonOld.component';
+import { Button } from './ButtonOld.component';
 import { LoadingMaskForButton } from '../LoadingMasks';
 
 const styles = () => ({
@@ -28,7 +28,7 @@ type Props = {
     }
 };
 
-const ProgressButton = (props: Props) => {
+const ProgressButtonPlain = (props: Props) => {
     const { inProgress, children, classes, ...buttonProps } = props;
 
     if (inProgress) {
@@ -59,4 +59,4 @@ const ProgressButton = (props: Props) => {
     );
 };
 
-export default withStyles(styles)(ProgressButton);
+export const ProgressButton = withStyles(styles)(ProgressButtonPlain);

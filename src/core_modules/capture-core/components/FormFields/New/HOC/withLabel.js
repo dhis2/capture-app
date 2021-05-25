@@ -1,8 +1,10 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import { withLabel as UIWithLabel } from 'capture-ui';
+import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
 const getStyles = (theme: Theme) => ({
     label: {
@@ -27,19 +29,13 @@ const getStylesLabel = (theme: Theme) => ({
         display: 'flex',
         alignItems: 'center',
     },
-    icon: {
-        width: 22,
-        height: 22,
-        borderRadius: 2,
-    },
 });
 
-type IconType = { data: string, color: string };
+type IconType = { name?: string, color?: string };
 
 type IconProps = {
     icon: ?IconType,
     label: ?string,
-    iconClass: string,
 };
 
 type CalculatedLabelProps = {
@@ -63,7 +59,6 @@ type Props = {
         labelVertical: string,
         required: string,
         iconContainer: string,
-        icon: string,
     },
 };
 
@@ -72,7 +67,7 @@ type HOCParams = {
     onGetCustomFieldLabeClass?: ?(props: Object) => string,
 };
 
-export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<any>) => {
+export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<any>) => {
     const onGetUseVerticalOrientation = hocParams && hocParams.onGetUseVerticalOrientation;
     const onGetCustomFieldLabeClass = hocParams && hocParams.onGetCustomFieldLabeClass;
 
@@ -103,16 +98,19 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
     );
 
     const Icon = (props: IconProps) => {
-        const { icon, label, iconClass } = props;
+        const { icon, label } = props;
         if (!icon) {
             return null;
         }
+
         return (
-            <img
-                className={iconClass}
-                src={icon.data}
-                style={{ backgroundColor: icon.color }}
-                alt={`Icon for ${label || ''}`}
+            <NonBundledDhis2Icon
+                name={icon.name}
+                color={icon.color}
+                alternativeText={i18n.t('Icon for {{field}}', { field: label || '' })}
+                cornerRadius={2}
+                width={22}
+                height={22}
             />
         );
     };
@@ -146,7 +144,6 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
                     <Icon
                         icon={icon}
                         label={label}
-                        iconClass={classes.icon}
                     />
                 </div>
             </div>

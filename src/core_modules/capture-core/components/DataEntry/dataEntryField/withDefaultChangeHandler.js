@@ -10,7 +10,7 @@ type State = {
     value: any,
 };
 
-export default () =>
+export const withDefaultChangeHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         (class DefaultFieldChangeHandler extends React.Component<Props, State> {
             handleChange: (value: any) => void;

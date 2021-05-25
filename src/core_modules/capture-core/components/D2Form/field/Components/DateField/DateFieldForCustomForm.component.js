@@ -15,7 +15,7 @@ import {
     withCustomElementContainer,
 } from '../internal';
 
-export default withGotoInterface()(
+export const DateFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

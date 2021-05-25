@@ -7,7 +7,6 @@ import { pipe, errorCreator } from 'capture-core-utils';
 import type {
     CachedAttributeTranslation,
     CachedProgramTrackedEntityAttribute,
-    CachedOptionSet,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
 import {
@@ -20,13 +19,15 @@ import {
 import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { getApi } from '../../../../d2/d2Instance';
+import type { ConstructorInput } from './dataElementFactory.types';
 
 
-class DataElementFactory {
+export class DataElementFactory {
     static translationPropertyNames = {
         NAME: 'NAME',
         DESCRIPTION: 'DESCRIPTION',
         SHORT_NAME: 'SHORT_NAME',
+        FORM_NAME: 'FORM_NAME',
     };
 
     static errorMessages = {
@@ -84,6 +85,7 @@ class DataElementFactory {
                         .get(
                             'trackedEntityInstances',
                             {
+                                program: contextProps.programId,
                                 ou: orgUnitId,
                                 filter: `${dataElement.id}:EQ:${serverValue}`,
                             },
@@ -93,6 +95,7 @@ class DataElementFactory {
                         .get(
                             'trackedEntityInstances',
                             {
+                                program: contextProps.programId,
                                 ouMode: 'ACCESSIBLE',
                                 filter: `${dataElement.id}:EQ:${serverValue}`,
                             },
@@ -123,11 +126,11 @@ class DataElementFactory {
     locale: ?string;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
-    constructor(
-        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-        cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: ?string,
-    ) {
+    constructor({
+        cachedTrackedEntityAttributes,
+        cachedOptionSets,
+        locale,
+    }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.locale = locale;
         this.optionSetFactory = new OptionSetFactory(
@@ -165,7 +168,11 @@ class DataElementFactory {
                 cachedTrackedEntityAttribute.translations,
                 DataElementFactory.translationPropertyNames.SHORT_NAME) ||
                 cachedTrackedEntityAttribute.displayShortName;
-        dataElement.formName = dataElement.name;
+        dataElement.formName =
+            this._getAttributeTranslation(
+                cachedTrackedEntityAttribute.translations,
+                DataElementFactory.translationPropertyNames.FORM_NAME) ||
+                cachedTrackedEntityAttribute.displayFormName;
         dataElement.description =
             this._getAttributeTranslation(
                 cachedTrackedEntityAttribute.translations,
@@ -241,5 +248,3 @@ class DataElementFactory {
             this._buildBaseDataElement(cachedProgramTrackedEntityAttribute, cachedTrackedEntityAttribute);
     }
 }
-
-export default DataElementFactory;

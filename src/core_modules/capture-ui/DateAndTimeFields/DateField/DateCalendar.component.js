@@ -20,7 +20,7 @@ type Props = {
     onConvertValueOut: (date: Date) => string,
 };
 
-class DateCalendar extends Component<Props> {
+export class DateCalendar extends Component<Props> {
     handleChange: (e: any, dates: ?Array<Date>) => void;
     displayOptions: Object;
 
@@ -96,5 +96,3 @@ class DateCalendar extends Component<Props> {
         );
     }
 }
-
-export default DateCalendar;

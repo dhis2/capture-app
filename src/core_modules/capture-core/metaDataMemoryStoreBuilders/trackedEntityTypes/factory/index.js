@@ -1,2 +1,2 @@
 // @flow
-export { default as TrackedEntityTypeFactory } from './TrackedEntityType/TrackedEntityTypeFactory';
+export { TrackedEntityTypeFactory } from './TrackedEntityType/TrackedEntityTypeFactory';

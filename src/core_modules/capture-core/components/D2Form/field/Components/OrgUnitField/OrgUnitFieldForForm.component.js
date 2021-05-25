@@ -15,7 +15,7 @@ import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
 } from '../internal';
-import withFormFieldOrgUnitsHandler from './withFormFieldOrgUnitsHandler';
+import { withFormFieldOrgUnitsHandler } from './withFormFieldOrgUnitsHandler';
 import labelTypeClasses from '../../buildField.module.css';
 
 const getFilteredProps = (props: Object) => {
@@ -23,7 +23,7 @@ const getFilteredProps = (props: Object) => {
     return passOnProps;
 };
 
-export default withGotoInterface()(
+export const OrgUnitFieldForForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

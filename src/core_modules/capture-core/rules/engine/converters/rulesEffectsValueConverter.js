@@ -84,4 +84,4 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
     }
 }
 
-export default new RulesValueConverter();
+export const rulesEffectsValueConverter = new RulesValueConverter();

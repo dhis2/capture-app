@@ -1,5 +1,5 @@
 // @flow
-import getD2, { getCurrentUser } from '../d2/d2Instance';
+import { getD2, getCurrentUser } from '../d2/d2Instance';
 import {
     set as setStoreRoots,
     get as getStoreRoots,
@@ -63,7 +63,7 @@ async function getOrgUnitSearchRootsAction() {
     return loadOrgUnitSearchRootsSuccess(searchRootsForStore);
 }
 
-export default async function getOrgUnitRootsActions() {
+export async function getOrgUnitRootsActions() {
     const captureRootsAction = await getOrgUnitCaptureRootsAction();
     const searchRootsAction = await getOrgUnitSearchRootsAction();
     return [

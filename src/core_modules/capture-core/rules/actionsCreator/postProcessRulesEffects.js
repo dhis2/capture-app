@@ -167,7 +167,7 @@ function filterSectionsHideEffects(
         }, {});
 }
 
-export default function postProcessRulesEffects(
+export function postProcessRulesEffects(
     rulesEffects: ?OutputEffects,
     foundation: ?RenderFoundation) {
     if (!rulesEffects || !foundation) {

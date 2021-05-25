@@ -1,5 +1,5 @@
 // @flow
-import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import {
@@ -12,7 +12,7 @@ const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
         return false;
     }
 
-    const program = programs.get(currentlySelectedProgramId);
+    const program = programCollection.get(currentlySelectedProgramId);
     if (!program) {
         return true;
     }

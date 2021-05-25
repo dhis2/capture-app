@@ -37,7 +37,7 @@ type State = {
     collapsed: ?boolean,
 }
 
-class ViewEventSection extends React.Component<Props, State> {
+class ViewEventSectionPlain extends React.Component<Props, State> {
     constructor(props) {
         super(props);
         this.state = {
@@ -95,4 +95,4 @@ class ViewEventSection extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(getStyles)(ViewEventSection);
+export const ViewEventSection = withStyles(getStyles)(ViewEventSectionPlain);

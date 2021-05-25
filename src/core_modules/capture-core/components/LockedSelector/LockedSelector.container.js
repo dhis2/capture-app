@@ -70,6 +70,7 @@ export const LockedSelector: ComponentType<OwnProps> =
       customActionsOnProgramIdReset = [],
       customActionsOnOrgUnitIdReset = [],
       pageToPush = '',
+      isUserInteractionInProgress = false,
   }) => {
       const dispatch = useDispatch();
 
@@ -187,6 +188,7 @@ export const LockedSelector: ComponentType<OwnProps> =
               onSetOrgUnit={dispatchOnSetOrgUnit}
               selectedOrgUnitId={selectedOrgUnitId}
               selectedProgramId={selectedProgramId}
+              isUserInteractionInProgress={isUserInteractionInProgress}
               ready={ready}
           />
       );

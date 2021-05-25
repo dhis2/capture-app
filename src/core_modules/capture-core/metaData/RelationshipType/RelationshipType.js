@@ -10,7 +10,7 @@ type RelationshipConstraint = {
     trackedEntityTypeId: string,
 }
 
-export default class RelationshipType {
+export class RelationshipType {
     _id: string;
     _name: string;
     _access: Access;

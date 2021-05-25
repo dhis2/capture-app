@@ -61,6 +61,6 @@ const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
-export default () =>
+export const withDefaultMessages = () =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(styles)(getFieldMessages(InnerComponent));

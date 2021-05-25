@@ -6,15 +6,15 @@ import log from 'loglevel';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
-import type Icon from '../Icon/Icon';
-import OptionSet from '../OptionSet/OptionSet';
+import type { Icon } from '../Icon/Icon';
+import { OptionSet } from '../OptionSet/OptionSet';
 import type { Unique } from './Unique';
 import { dataElementTypes } from './dataElementTypes';
 
 // eslint-disable-next-line no-use-before-define
 export type ConvertFn = (value: any, type: $Keys<typeof dataElementTypes>, element: DataElement) => any;
 
-export default class DataElement {
+export class DataElement {
     static errorMessages = {
         TYPE_NOT_FOUND: 'type not supported',
     };
@@ -30,7 +30,7 @@ export default class DataElement {
     _optionSet: ?OptionSet;
     _displayInForms: boolean;
     _displayInReports: boolean;
-    _icon: ?Icon;
+    _icon: Icon | void;
     _unique: ?Unique;
 
     constructor(initFn: ?(_this: DataElement) => void) {
@@ -121,10 +121,10 @@ export default class DataElement {
         return this._optionSet;
     }
 
-    set icon(icon: ?Icon) {
+    set icon(icon: Icon | void) {
         this._icon = icon;
     }
-    get icon(): ?Icon {
+    get icon(): Icon | void {
         return this._icon;
     }
 

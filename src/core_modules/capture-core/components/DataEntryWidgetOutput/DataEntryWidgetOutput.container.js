@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
 import React, { type ComponentType } from 'react';
-import GeneralOutputComponent from './DataEntryWidgetOutput.component';
-import getDataEntryKey from '../DataEntry/common/getDataEntryKey';
+import { DataEntryWidgetOutputComponent } from './DataEntryWidgetOutput.component';
+import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
 import type { RenderCustomCardActions } from '../CardList/CardList.types';
 
 type OwnProps = {|
@@ -11,8 +11,8 @@ type OwnProps = {|
     selectedScopeId: string,
 |}
 const mapStateToProps = (state: ReduxState, { dataEntryId }) => {
-    const registerTeiContainer = state.newRelationshipRegisterTei;
-    const ready = !registerTeiContainer.loading;
+    const { dataEntries } = state;
+    const ready = !!dataEntries[dataEntryId];
 
     const dataEntryKey = ready ? getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId) : null;
     return {
@@ -23,5 +23,5 @@ const mapStateToProps = (state: ReduxState, { dataEntryId }) => {
 
 export const DataEntryWidgetOutput: ComponentType<OwnProps> =
   connect(mapStateToProps, () => ({}))(
-      (props: Object) => (props.ready ? <GeneralOutputComponent {...props} /> : null),
+      (props: Object) => (props.ready ? <DataEntryWidgetOutputComponent {...props} /> : null),
   );

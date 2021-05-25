@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import { errorCreator } from '../errorCreator';
 
-class MemoryAdapter {
+export class MemoryAdapter {
     static errorMessages = {
         INVALID_STORE_NAME: 'Invalid store name',
         KEY_BASED_COUNT_IS_NOT_SUPPORTED: 'Key based count is not supported by DomLocalStorageAdapter',
@@ -110,5 +110,3 @@ class MemoryAdapter {
         return this.opened;
     }
 }
-
-export default MemoryAdapter;

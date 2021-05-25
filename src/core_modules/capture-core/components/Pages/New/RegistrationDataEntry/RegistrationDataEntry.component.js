@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useContext, useState } from 'react';
+import React, { type ComponentType, useContext, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
@@ -13,8 +13,6 @@ import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/co
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
-import { PossibleDuplicatesDialog } from '../../../PossibleDuplicatesDialog/PossibleDuplicatesDialog.component';
-import { usePossibleDuplicatesExist } from '../../../PossibleDuplicatesDialog/usePossibleDuplicatesExist';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
 
@@ -39,23 +37,25 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-const DialogButtons = ({ onCancel, onSave }) => (<>
-    <Button onClick={onCancel} secondary>
-        {i18n.t('Cancel')}
-    </Button>
-    {
-        onSave &&
-        <div style={{ marginLeft: 8 }}>
-            <Button
-                dataTest="create-as-new-person"
-                onClick={onSave}
-                primary
-            >
-                {i18n.t('Save as new')}
-            </Button>
-        </div>
-    }
-</>);
+const DialogButtons = ({ onCancel, onSave }) => (
+    <>
+        <Button onClick={onCancel} secondary>
+            {i18n.t('Cancel')}
+        </Button>
+        {
+            onSave &&
+            <div style={{ marginLeft: 8 }}>
+                <Button
+                    dataTest="create-as-new-person"
+                    onClick={onSave}
+                    primary
+                >
+                    {i18n.t('Save as new')}
+                </Button>
+            </div>
+        }
+    </>
+);
 
 const CardListButton = (({ teiId, orgUnitId }) => {
     const { pathname, search } = useLocation();
@@ -74,43 +74,16 @@ const CardListButton = (({ teiId, orgUnitId }) => {
     );
 });
 
-const useHandleSaveAttempt = (dataEntryId, onReviewDuplicates) => {
+const RegistrationDataEntryPlain = ({
+    classes,
+    setScopeId,
+    selectedScopeId,
+    dataEntryId,
+    onSaveWithoutEnrollment,
+    onSaveWithEnrollment,
+    dataEntryIsReady,
+}: Props) => {
     const { resultsPageSize } = useContext(ResultsPageSizeContext);
-
-    const [modalIsOpen, toggleDuplicatesModal] = useState(false);
-
-    const possibleDuplicatesExist = usePossibleDuplicatesExist(dataEntryId);
-    const handleSaveAttempt = (onSave) => {
-        if (possibleDuplicatesExist) {
-            onReviewDuplicates(resultsPageSize);
-
-            toggleDuplicatesModal(true);
-        } else {
-            onSave();
-        }
-    };
-    const closeModal = () => {
-        toggleDuplicatesModal(false);
-    };
-
-    return {
-        closeModal,
-        handleSaveAttempt,
-        modalIsOpen,
-    };
-};
-
-const RegistrationDataEntryPlain = (
-    {
-        classes,
-        setScopeId,
-        selectedScopeId,
-        dataEntryId,
-        onSaveWithoutEnrollment,
-        onSaveWithEnrollment,
-        onReviewDuplicates,
-        dataEntryIsReady,
-    }: Props) => {
     const { scopeType } = useScopeInfo(selectedScopeId);
     const { registrationMetaData } = useRegistrationFormInfoForSelectedScope(selectedScopeId);
     const titleText = useScopeTitleText(selectedScopeId);
@@ -119,14 +92,27 @@ const RegistrationDataEntryPlain = (
         setScopeId(id);
     };
 
-    const { closeModal, handleSaveAttempt, modalIsOpen } = useHandleSaveAttempt(dataEntryId, onReviewDuplicates);
+    const renderDuplicatesDialogActions = useCallback((onCancel, onSave) => (
+        <DialogButtons
+            onCancel={onCancel}
+            onSave={onSave}
+        />
+    ), []);
+
+    const renderDuplicatesCardActions = useCallback(({ item }) => (
+        <CardListButton
+            teiId={item.id}
+            orgUnitId={item.tei.orgUnit}
+        />
+    ), []);
+
     return (
         <>
             {
                 !scopeType &&
                 <Paper className={classes.paper}>
                     <div className={classes.title} >
-                        New
+                        {i18n.t('New')}
                     </div>
                     <div className={classes.tetypeContainer}>
                         <TrackedEntityTypeSelector
@@ -143,7 +129,10 @@ const RegistrationDataEntryPlain = (
                 scopeType === scopeTypes.TRACKER_PROGRAM &&
                 <Paper className={classes.paper}>
                     <div className={classes.title} >
-                        New {titleText}
+                        {i18n.t('New {{titleText}}', {
+                            titleText,
+                            interpolation: { escapeValue: false },
+                        })}
                     </div>
 
                     <div className={classes.registrationContainer}>
@@ -153,8 +142,11 @@ const RegistrationDataEntryPlain = (
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     enrollmentMetadata={registrationMetaData}
-                                    saveButtonText={'Save new'}
-                                    onSave={() => handleSaveAttempt(onSaveWithEnrollment)}
+                                    saveButtonText={i18n.t('Save new')}
+                                    onSave={onSaveWithEnrollment}
+                                    duplicatesReviewPageSize={resultsPageSize}
+                                    renderDuplicatesDialogActions={renderDuplicatesDialogActions}
+                                    renderDuplicatesCardActions={renderDuplicatesCardActions}
                                 />
                             </Grid>
                             {
@@ -164,28 +156,8 @@ const RegistrationDataEntryPlain = (
                                         <DataEntryWidgetOutput
                                             selectedScopeId={selectedScopeId}
                                             dataEntryId={dataEntryId}
-                                            renderCardActions={({ item }) =>
-                                                <CardListButton teiId={item.id} orgUnitId={item.tei.orgUnit} item={item} />
-                                            }
                                         />
                                     </div>
-
-                                    <PossibleDuplicatesDialog
-                                        dataEntryId={dataEntryId}
-                                        selectedScopeId={selectedScopeId}
-                                        open={modalIsOpen}
-                                        onCancel={closeModal}
-                                        renderCardActions={
-                                            ({ item }) =>
-                                                <CardListButton teiId={item.id} orgUnitId={item.tei.orgUnit} item={item} />
-                                        }
-                                        extraActions={
-                                            <DialogButtons
-                                                onCancel={closeModal}
-                                                onSave={onSaveWithEnrollment}
-                                            />
-                                        }
-                                    />
                                 </Grid>
                             }
                         </Grid>
@@ -197,7 +169,10 @@ const RegistrationDataEntryPlain = (
                 scopeType === scopeTypes.TRACKED_ENTITY_TYPE &&
                 <Paper className={classes.paper}>
                     <div className={classes.title} >
-                        New {titleText}
+                        {i18n.t('New {{titleText}}', {
+                            titleText,
+                            interpolation: { escapeValue: false },
+                        })}
                     </div>
 
                     <div className={classes.tetypeContainer}>
@@ -215,8 +190,11 @@ const RegistrationDataEntryPlain = (
                                     id={dataEntryId}
                                     selectedScopeId={selectedScopeId}
                                     teiRegistrationMetadata={registrationMetaData}
-                                    saveButtonText={'Save new'}
-                                    onSave={() => handleSaveAttempt(onSaveWithoutEnrollment)}
+                                    saveButtonText={i18n.t('Save new')}
+                                    onSave={onSaveWithoutEnrollment}
+                                    duplicatesReviewPageSize={resultsPageSize}
+                                    renderDuplicatesDialogActions={renderDuplicatesDialogActions}
+                                    renderDuplicatesCardActions={renderDuplicatesCardActions}
                                 />
                             </Grid>
                             {
@@ -224,29 +202,10 @@ const RegistrationDataEntryPlain = (
                                 <Grid item>
                                     <div className={classes.marginTop}>
                                         <DataEntryWidgetOutput
-                                            dataEntryId={dataEntryId}
                                             selectedScopeId={selectedScopeId}
-                                            renderCardActions={({ item }) =>
-                                                <CardListButton teiId={item.id} orgUnitId={item.tei.orgUnit} item={item} />
-                                            }
+                                            dataEntryId={dataEntryId}
                                         />
                                     </div>
-
-                                    <PossibleDuplicatesDialog
-                                        dataEntryId={dataEntryId}
-                                        selectedScopeId={selectedScopeId}
-                                        open={modalIsOpen}
-                                        onCancel={closeModal}
-                                        renderCardActions={({ item }) =>
-                                            <CardListButton teiId={item.id} orgUnitId={item.tei.orgUnit} item={item} />
-                                        }
-                                        extraActions={
-                                            <DialogButtons
-                                                onCancel={closeModal}
-                                                onSave={onSaveWithoutEnrollment}
-                                            />
-                                        }
-                                    />
                                 </Grid>
                             }
                         </Grid>
@@ -265,4 +224,5 @@ const RegistrationDataEntryPlain = (
     );
 };
 
-export const RegistrationDataEntryComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(getStyles)(RegistrationDataEntryPlain);
+export const RegistrationDataEntryComponent: ComponentType<$Diff<Props, CssClasses>> =
+    withStyles(getStyles)(RegistrationDataEntryPlain);

@@ -1,5 +1,5 @@
 // @flow
-export default (state: ReduxState) => {
+export const getDataEntryHasChanges = (state: ReduxState) => {
     const formValues = state.formsValues['singleEvent-newEvent'] || {};
     const formHasChanges = Object
         .keys(formValues)

@@ -3,7 +3,7 @@ import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { OrgUnitFieldForForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
-const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
+export const getOrgUnitFieldConfig = (metaData: MetaDataElement, options: Object) => {
     const props = createProps({
         formId: options.formId,
         elementId: metaData.id,
@@ -17,5 +17,3 @@ const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
         props,
     }, metaData);
 };
-
-export default getOrgUnitField;

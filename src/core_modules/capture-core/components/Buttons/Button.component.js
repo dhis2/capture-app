@@ -4,7 +4,7 @@ import { Button as D2Button } from '@dhis2/ui';
 
 type Props = {};
 
-const Button = (props: Props) => {
+export const Button = (props: Props) => {
     const { ...passOnProps } = props;
     return (
         <D2Button
@@ -12,5 +12,3 @@ const Button = (props: Props) => {
         />
     );
 };
-
-export default Button;

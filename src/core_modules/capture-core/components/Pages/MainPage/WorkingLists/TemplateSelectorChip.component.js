@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Chip } from '@dhis2/ui';
-import TemplateSelectorChipContent from './TemplateSelectorChipContent.component';
+import { TemplateSelectorChipContent } from './TemplateSelectorChipContent.component';
 import type { WorkingListTemplate } from './workingLists.types';
 
 type PassOnProps = {
@@ -15,7 +15,7 @@ type Props = {
     onSelectTemplate: Function,
 };
 
-const TemplateSelectorChip = (props: Props) => {
+export const TemplateSelectorChip = (props: Props) => {
     const { template, currentTemplateId, onSelectTemplate, ...passOnProps } = props;
     const { name, id } = template;
 
@@ -40,5 +40,3 @@ const TemplateSelectorChip = (props: Props) => {
         </Chip>
     );
 };
-
-export default TemplateSelectorChip;

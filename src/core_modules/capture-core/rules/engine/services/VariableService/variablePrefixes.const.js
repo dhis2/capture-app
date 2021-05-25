@@ -1,6 +1,6 @@
 // @flow
 
-export default {
+export const variablePrefixes = {
     DATAELEMENT: '#',
     TRACKED_ENTITY_ATTRIBUTE: 'A',
     CONTEXT_VARIABLE: 'V',

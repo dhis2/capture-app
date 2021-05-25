@@ -1,5 +1,5 @@
 // @flow
-export default (message: string) => (details?: ?Object) => ({
+export const errorCreator = (message: string) => (details?: ?Object) => ({
     ...details,
     message,
 });

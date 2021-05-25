@@ -4,11 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
-import Button from '../../Buttons/Button.component';
-import LinkButton from '../../Buttons/LinkButton.component';
+import { Button } from '../../Buttons/Button.component';
+import { LinkButton } from '../../Buttons/LinkButton.component';
 import { getApi } from '../../../d2/d2Instance';
 import { LoadingMask } from '../../LoadingMasks';
-import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
+import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 
 
 type Props = {
@@ -78,7 +78,7 @@ const styles = theme => ({
     },
 });
 
-class D2Image extends Component<Props> {
+class D2ImagePlain extends Component<Props> {
     hiddenimageSelectorRef: any;
 
     handleImageChange = (e: Object) => {
@@ -206,4 +206,4 @@ class D2Image extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(D2Image);
+export const D2Image = withStyles(styles)(D2ImagePlain);

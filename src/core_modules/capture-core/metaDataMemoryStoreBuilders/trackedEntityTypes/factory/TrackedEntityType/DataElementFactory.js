@@ -6,7 +6,6 @@ import { pipe, errorCreator } from 'capture-core-utils';
 import type {
     CachedAttributeTranslation,
     CachedTrackedEntityTypeAttribute,
-    CachedOptionSet,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
 import {
@@ -18,12 +17,14 @@ import {
 import { OptionSetFactory } from '../../../common/factory';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { getApi } from '../../../../d2/d2Instance';
+import type { ConstructorInput } from './dataElementFactory.types';
 
-class DataElementFactory {
+export class DataElementFactory {
     static translationPropertyNames = {
         NAME: 'NAME',
         DESCRIPTION: 'DESCRIPTION',
         SHORT_NAME: 'SHORT_NAME',
+        FORM_NAME: 'FORM_NAME',
     };
 
     static errorMessages = {
@@ -46,11 +47,11 @@ class DataElementFactory {
     locale: ?string;
     optionSetFactory: OptionSetFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
-    constructor(
-        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
-        cachedOptionSets: Map<string, CachedOptionSet>,
-        locale: ?string,
-    ) {
+    constructor({
+        cachedTrackedEntityAttributes,
+        cachedOptionSets,
+        locale,
+    }: ConstructorInput) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.locale = locale;
         this.optionSetFactory = new OptionSetFactory(
@@ -99,8 +100,8 @@ class DataElementFactory {
                     cachedAttribute.displayShortName;
             o.formName =
                 this._getAttributeTranslation(
-                    cachedAttribute.translations, DataElementFactory.translationPropertyNames.NAME) ||
-                    cachedAttribute.displayName;
+                    cachedAttribute.translations, DataElementFactory.translationPropertyNames.FORM_NAME) ||
+                    cachedAttribute.displayFormName;
             o.description =
                 this._getAttributeTranslation(
                     cachedAttribute.translations, DataElementFactory.translationPropertyNames.DESCRIPTION) ||
@@ -145,6 +146,7 @@ class DataElementFactory {
                             .get(
                                 'trackedEntityInstances',
                                 {
+                                    trackedEntityType: contextProps.trackedEntityTypeId,
                                     ou: orgUnitId,
                                     filter: `${dataElement.id}:EQ:${serverValue}`,
                                 },
@@ -154,6 +156,7 @@ class DataElementFactory {
                             .get(
                                 'trackedEntityInstances',
                                 {
+                                    trackedEntityType: contextProps.trackedEntityTypeId,
                                     ouMode: 'ACCESSIBLE',
                                     filter: `${dataElement.id}:EQ:${serverValue}`,
                                 },
@@ -194,5 +197,3 @@ class DataElementFactory {
         return dataElement;
     }
 }
-
-export default DataElementFactory;

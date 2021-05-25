@@ -4,7 +4,7 @@ import isArray from 'd2-utilizr/lib/isArray';
 import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
 
-export default class StorageController {
+export class StorageController {
     static errorMessages = {
         INVALID_NAME: 'A valid database name must be provided',
         NO_OBJECTSTORES_DEFINED: 'no objectStores defined',

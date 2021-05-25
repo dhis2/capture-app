@@ -1,5 +1,5 @@
 // @flow
-export { default as OptionSet } from './OptionSet';
-export { default as Option } from './Option';
-export { default as OptionGroup } from './OptionGroup';
+export { OptionSet } from './OptionSet';
+export { Option } from './Option';
+export { OptionGroup } from './OptionGroup';
 export { inputTypes, inputTypesAsArray, viewTypes } from './optionSet.const';

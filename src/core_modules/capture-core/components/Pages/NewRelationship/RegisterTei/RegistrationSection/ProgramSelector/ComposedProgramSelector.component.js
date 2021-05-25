@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import LinkButton from '../../../../../Buttons/LinkButton.component';
+import { LinkButton } from '../../../../../Buttons/LinkButton.component';
 import { ProgramFilterer } from '../../../../../ProgramFilterer';
 import type { Program } from '../../../../../../metaData';
 import { TrackerProgram } from '../../../../../../metaData';
@@ -14,6 +14,7 @@ import {
     withLabel,
     withFilterProps,
 } from '../../../../../FormFields/New';
+import { NonBundledDhis2Icon } from '../../../../../NonBundledDhis2Icon';
 
 const getStyles = (theme: Theme) => ({
     iconContainer: {
@@ -69,22 +70,23 @@ class ProgramSelector extends React.Component<Props> {
                 iconLeft: this.getProgramIcon(program),
             }));
 
-    getProgramIcon(program: Program) {
-        const classes = this.props.classes;
-        return program.icon.data
-            ? (
-                <div
-                    className={classes.iconContainer}
-                >
-                    <img
-                        style={{ backgroundColor: program.icon.color }}
-                        className={classes.icon}
-                        src={program.icon.data}
-                        alt={program.name}
-                    />
-                </div>
-            )
-            : null;
+    getProgramIcon({ icon: { color, name } = {}, name: programName }: Program) {
+        const { classes } = this.props;
+
+        return (
+            <div
+                className={classes.iconContainer}
+            >
+                <NonBundledDhis2Icon
+                    name={name || 'clinical_fe_outline'}
+                    color={color || '#e0e0e0'}
+                    alternativeText={programName}
+                    width={22}
+                    height={22}
+                    cornerRadius={2}
+                />
+            </div>
+        );
     }
 
     renderIsFilteredText() {
@@ -131,7 +133,7 @@ class ProgramSelector extends React.Component<Props> {
     }
 }
 
-const ComposedProgramSelector =
+export const ComposedProgramSelector =
     withFocusSaver()(
         withDefaultFieldContainer()(
             withLabel({
@@ -151,5 +153,3 @@ const ComposedProgramSelector =
             ),
         ),
     );
-
-export default ComposedProgramSelector;

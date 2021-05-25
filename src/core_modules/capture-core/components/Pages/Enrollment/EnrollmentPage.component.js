@@ -6,9 +6,10 @@ import { compose } from 'redux';
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './EnrollmentPage.types';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
-import LoadingMaskForPage from '../../LoadingMasks/LoadingMaskForPage.component';
+import { LoadingMaskForPage } from '../../LoadingMasks/LoadingMaskForPage.component';
 import { withErrorMessageHandler } from '../../../HOC';
 import { MissingMessage } from './MissingMessage.component';
+import { EnrollmentPageDefault } from './EnrollmentPageDefault';
 
 const getStyles = ({ typography }) => ({
     container: {
@@ -33,8 +34,9 @@ const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
         }
 
         {
-            enrollmentPageStatus === enrollmentPageStatuses.DEFAULT &&
-                <div className={classes.title}>Enrollment Dashboard</div>
+            enrollmentPageStatus === enrollmentPageStatuses.DEFAULT && (
+                <EnrollmentPageDefault />
+            )
         }
 
         {

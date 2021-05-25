@@ -14,7 +14,7 @@ type Props = {
     useVerticalOrientation: ?boolean,
 };
 
-class Label extends React.PureComponent<Props> {
+export class Label extends React.PureComponent<Props> {
     render() {
         const { classes, children, labelRef, useVerticalOrientation, ...passOnProps } = this.props;
         const labelContainerDefault =
@@ -32,5 +32,3 @@ class Label extends React.PureComponent<Props> {
         );
     }
 }
-
-export default Label;

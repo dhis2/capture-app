@@ -30,7 +30,7 @@ type Props = {
 }
 
 
-class ViewEventSectionHeader extends React.Component<Props> {
+class ViewEventSectionHeaderPlain extends React.Component<Props> {
     render() {
         // $FlowFixMe[prop-missing] automated comment
         const { icon: Icon, text, badgeCount, classes, badgeClass } = this.props;
@@ -54,4 +54,4 @@ class ViewEventSectionHeader extends React.Component<Props> {
 }
 
 
-export default withStyles(getStyles)(ViewEventSectionHeader);
+export const ViewEventSectionHeader = withStyles(getStyles)(ViewEventSectionHeaderPlain);

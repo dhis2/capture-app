@@ -19,7 +19,7 @@ const getStyles = (theme: Theme) => ({
 
 // $FlowFixMe[incompatible-variance] automated comment
 // $FlowFixMe[cannot-resolve-name] automated comment
-class OptionSetFilter extends Component<Props> implements UpdatableFilterContent<Value> {
+class OptionSetFilterPlain extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const { value, singleSelect } = this.props;
 
@@ -61,4 +61,4 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
     }
 }
 
-export default withStyles(getStyles)(OptionSetFilter);
+export const OptionSetFilter = withStyles(getStyles)(OptionSetFilterPlain);

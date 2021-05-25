@@ -3,11 +3,21 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
 import {
     mainActionTypes as actionTypes,
-    searchGroupActionTypes,
     loadNewActionTypes,
     loadEditActionTypes,
 } from '../../components/DataEntry';
-import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../components/DataEntry/common/getDataEntryKey';
+import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
+import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
+
+// cleans up data entries that start with dataEntryId
+const cleanUp = (state, { payload: { dataEntryId } }) => {
+    const newState = Object.keys(state).reduce((acc, curr) =>
+        (curr.startsWith(dataEntryId) ? { ...acc, [curr]: {} } : { ...acc, [curr]: state[curr] }),
+    {});
+
+    return newState;
+};
 
 export const dataEntriesDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
@@ -27,18 +37,6 @@ export const dataEntriesDesc = createReducerDescription({
         };
         return newState;
     },
-    /*
-    [loadViewActionTypes.LOAD_VIEW_DATA_ENTRY]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        newState[payload.dataEntryId] = {
-            ...newState[payload.dataEntryId],
-            itemId: payload.itemId,
-            ...payload.extraProps,
-        };
-        return newState;
-    },
-    */
     [actionTypes.SET_CURRENT_DATA_ENTRY]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
@@ -70,17 +68,6 @@ export const dataEntriesUIDesc = createReducerDescription({
         };
         return newState;
     },
-    /*
-    [loadViewActionTypes.LOAD_VIEW_DATA_ENTRY]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        const key = payload.key;
-        newState[key] = {
-            loaded: true,
-        };
-        return newState;
-    },
-    */
     [actionTypes.SAVE_VALIDATION_FALED]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
@@ -130,15 +117,6 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         newState[key] = payload.dataEntryValues;
         return newState;
     },
-    /*
-    [loadViewActionTypes.LOAD_VIEW_DATA_ENTRY]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        const key = payload.key;
-        newState[key] = payload.dataEntryValues;
-        return newState;
-    },
-    */
     [actionTypes.UPDATE_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
@@ -149,6 +127,8 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         dataEntryValues[payload.fieldId] = payload.value;
         return newState;
     },
+    [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [newRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: cleanUp,
 }, 'dataEntriesFieldsValue');
 
 export const dataEntriesNotesDesc = createReducerDescription({
@@ -200,15 +180,6 @@ export const dataEntriesFieldsMetaDesc = createReducerDescription({
         newState[key] = payload.dataEntryMeta;
         return newState;
     },
-    /*
-    [loadViewActionTypes.LOAD_VIEW_DATA_ENTRY]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        const key = payload.key;
-        newState[key] = payload.dataEntryMeta;
-        return newState;
-    },
-    */
 }, 'dataEntriesFieldsMeta');
 
 export const dataEntriesFieldsUIDesc = createReducerDescription({
@@ -240,22 +211,6 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
 
         return newState;
     },
-    /*
-    [loadViewActionTypes.LOAD_VIEW_DATA_ENTRY]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        const key = payload.key;
-        newState[key] = Object.keys(payload.dataEntryUI).reduce((accValuesUI, elementKey) => {
-            accValuesUI[elementKey] = {
-                ...payload.dataEntryUI[elementKey],
-                touched: false,
-            };
-            return accValuesUI;
-        }, {});
-
-        return newState;
-    },
-    */
     [actionTypes.UPDATE_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
@@ -266,6 +221,8 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         dataEntryValuesUI[payload.fieldId] = { ...dataEntryValuesUI[payload.fieldId], ...payload.valueMeta, modified: true };
         return newState;
     },
+    [newPageActionTypes.CLEAN_UP_DATA_ENTRY]: cleanUp,
+    [newRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: cleanUp,
 }, 'dataEntriesFieldsUI');
 
 export const dataEntriesRelationshipsDesc = createReducerDescription({
@@ -300,94 +257,6 @@ export const dataEntriesRelationshipsDesc = createReducerDescription({
     },
 }, 'dataEntriesRelationships', {});
 
-export const dataEntriesSearchGroupsResultsDesc = createReducerDescription({
-    [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
-        const newState = { ...state };
-        newState[action.payload.key] = null;
-        return newState;
-    },
-    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
-        const newState = { ...state };
-        newState[action.payload.key] = null;
-        return newState;
-    },
-    [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIVED]: (state, action) => {
-        const { count, dataEntryKey, groupId } = action.payload;
-        return {
-            ...state,
-            [dataEntryKey]: {
-                ...state[dataEntryKey],
-                [groupId]: {
-                    ...(state[dataEntryKey] && state[dataEntryKey][groupId]),
-                    count,
-                },
-            },
-        };
-    },
-    [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIEVAL_FAILED]: (state, action) => {
-        const { error: countError, dataEntryKey, groupId } = action.payload;
-        return {
-            ...state,
-            [dataEntryKey]: {
-                ...state[dataEntryKey],
-                [groupId]: {
-                    ...(state[dataEntryKey] && state[dataEntryKey][groupId]),
-                    countError,
-                },
-            },
-        };
-    },
-    [searchGroupActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
-        const { dataEntryKey, groupId } = action.payload;
-        return {
-            ...state,
-            [dataEntryKey]: {
-                ...state[dataEntryKey],
-                [groupId]: null,
-            },
-        };
-    },
-}, 'dataEntriesSearchGroupsResults');
-
-export const dataEntriesSearchGroupsPreviousValuesDesc = createReducerDescription({
-    [searchGroupActionTypes.START_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
-        const { dataEntryKey, searchGroupId, values } = action.payload;
-        return {
-            ...state,
-            [dataEntryKey]: {
-                ...state[dataEntryKey],
-                [searchGroupId]: {
-                    ...values,
-                },
-            },
-        };
-    },
-    [searchGroupActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
-        const { dataEntryKey, groupId } = action.payload;
-        return {
-            ...state,
-            [dataEntryKey]: {
-                ...state[dataEntryKey],
-                [groupId]: null,
-            },
-        };
-    },
-    [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
-        const { key } = action.payload;
-        return {
-            ...state,
-            [key]: null,
-        };
-    },
-    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
-        const { key } = action.payload;
-        return {
-            ...state,
-            [key]: null,
-        };
-    },
-}, 'dataEntriesSearchGroupsPreviousValues');
-
 export const dataEntriesInProgressListDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
         const { key } = action.payload;
@@ -401,60 +270,6 @@ export const dataEntriesInProgressListDesc = createReducerDescription({
         return {
             ...state,
             [key]: null,
-        };
-    },
-    [searchGroupActionTypes.FILTER_SEARCH_GROUP_FOR_COUNT_TO_BE_EXECUTED]: (state, action) => {
-        const { uid, dataEntryKey } = action.payload;
-        return {
-            ...state,
-            [dataEntryKey]: [
-                ...(state[dataEntryKey] || []),
-                uid,
-            ],
-        };
-    },
-    [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIVED]: (state, action) => {
-        const { uids, dataEntryKey } = action.payload;
-        const updatedList = [
-            ...(state[dataEntryKey] || []).filter(entry => !uids.includes(entry)),
-        ];
-
-        return {
-            ...state,
-            [dataEntryKey]: updatedList,
-        };
-    },
-    [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIEVAL_FAILED]: (state, action) => {
-        const { uids, dataEntryKey } = action.payload;
-        const updatedList = [
-            ...(state[dataEntryKey] || []).filter(entry => !uids.includes(entry)),
-        ];
-
-        return {
-            ...state,
-            [dataEntryKey]: updatedList,
-        };
-    },
-    [searchGroupActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
-        const { uids, dataEntryKey } = action.payload;
-        const updatedList = [
-            ...(state[dataEntryKey] || []).filter(entry => !uids.includes(entry)),
-        ];
-
-        return {
-            ...state,
-            [dataEntryKey]: updatedList,
-        };
-    },
-    [searchGroupActionTypes.CANCEL_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
-        const { uid, dataEntryKey } = action.payload;
-        const updatedList = [
-            ...(state[dataEntryKey] || []).filter(entry => uid !== entry),
-        ];
-
-        return {
-            ...state,
-            [dataEntryKey]: updatedList,
         };
     },
     [formAsyncActionTypes.FIELD_IS_VALIDATING]: (state, action) => {

@@ -11,16 +11,16 @@ import Grid from '@material-ui/core/Grid';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
 import { programCollection } from '../../../../metaDataMemoryStores';
-import VirtualizedSelect from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import ProgramList from './ProgramList';
-import CategorySelector from './CategorySelector.component';
+import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { ProgramList } from './ProgramList';
+import { CategorySelector } from './CategorySelector.component';
 
 import type { Program } from '../../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
-import LinkButton from '../../../Buttons/LinkButton.component';
+import { LinkButton } from '../../../Buttons/LinkButton.component';
 import { urlArguments } from '../../../../utils/url';
-
+import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
 const EmptyPrograms = ({ classes, handleResetOrgUnit }) => {
     const { push } = useHistory();
@@ -137,11 +137,6 @@ const styles = (theme: Theme) => ({
         alignItems: 'center',
         paddingRight: 5,
     },
-    icon: {
-        width: 20,
-        height: 20,
-        borderRadius: 2,
-    },
 });
 
 type Props = {
@@ -157,7 +152,7 @@ type Props = {
     classes: Object,
 };
 
-class ProgramSelector extends Component<Props> {
+class ProgramSelectorPlain extends Component<Props> {
     handleClick: (program: Object) => void;
     handleClickCategoryOption: (value: string, value: string) => void;
     programsArray: Array<Program>;
@@ -172,22 +167,23 @@ class ProgramSelector extends Component<Props> {
         this.programsArray = Array.from(programCollection.values());
     }
 
-    getProgramIcon(program: Program) {
-        const classes = this.props.classes;
-        return program.icon.data
-            ? (
-                <div
-                    className={classes.iconContainer}
-                >
-                    <img
-                        style={{ backgroundColor: program.icon.color }}
-                        className={classes.icon}
-                        src={program.icon.data}
-                        alt={program.name}
-                    />
-                </div>
-            )
-            : null;
+    getProgramIcon({ icon: { color, name } = {}, name: programName }: Program) {
+        const { classes } = this.props;
+
+        return (
+            <div
+                className={classes.iconContainer}
+            >
+                <NonBundledDhis2Icon
+                    name={name || 'clinical_fe_outline'}
+                    color={color || '#e0e0e0'}
+                    alternativeText={programName}
+                    width={22}
+                    height={22}
+                    cornerRadius={2}
+                />
+            </div>
+        );
     }
 
     getOptionsFromPrograms(programs: Array<Program>) {
@@ -352,7 +348,7 @@ class ProgramSelector extends Component<Props> {
                         return (
                             <div>
                                 <div id="program-selector">
-                                    <VirtualizedSelect
+                                    <OptionsSelectVirtualized
                                         options={programOptions}
                                         onSelect={handleClickProgram}
                                         placeholder={i18n.t('Select program')}
@@ -382,4 +378,4 @@ class ProgramSelector extends Component<Props> {
         return this.renderWithoutSelectedProgram(programOptions);
     }
 }
-export default withStyles(styles, { index: 1 })(ProgramSelector);
+export const ProgramSelector = withStyles(styles, { index: 1 })(ProgramSelectorPlain);

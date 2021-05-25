@@ -29,4 +29,4 @@ const makeMapStateToProps = () => {
 };
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeMapStateToProps, {});
+export const OfflineListContainerCreator = connect(makeMapStateToProps, {});

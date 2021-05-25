@@ -6,7 +6,7 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import type { DataElement } from '../DataElement';
 
-export default class Section {
+export class Section {
     static MAIN_SECTION_ID = '#MAIN#';
 
     static errorMessages = {
@@ -15,6 +15,7 @@ export default class Section {
 
     _id: string;
     _name: string;
+    _displayDescription: string;
     _open: boolean;
     _visible: boolean;
     _collapsible: boolean;
@@ -42,6 +43,13 @@ export default class Section {
     }
     get name(): string {
         return this._name;
+    }
+
+    set displayDescription(description: string) {
+        this._displayDescription = description;
+    }
+    get displayDescription(): string {
+        return this._displayDescription;
     }
 
     set open(open: ?boolean) {

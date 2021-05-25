@@ -4,7 +4,7 @@ import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { DateFieldForCustomForm } from '../../Components';
 import type { DateDataElement } from '../../../../../metaData';
 
-const getDateFieldConfig = (metaData: DateDataElement) => {
+export const getDateFieldConfigForCustomForm = (metaData: DateDataElement) => {
     const props = createProps({
         width: 350,
         maxWidth: 350,
@@ -17,5 +17,3 @@ const getDateFieldConfig = (metaData: DateDataElement) => {
         props,
     }, metaData);
 };
-
-export default getDateFieldConfig;

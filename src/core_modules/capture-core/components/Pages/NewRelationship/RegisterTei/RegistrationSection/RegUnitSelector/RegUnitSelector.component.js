@@ -3,7 +3,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import ComposedRegUnitSelector from './ComposedRegUnitSelector.component';
+import { ComposedRegUnitSelector } from './ComposedRegUnitSelector.component';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../metaData';
 
 const getStyles = (theme: Theme) => ({
@@ -22,7 +22,7 @@ type Props = {
     programId: string,
 };
 
-class RegUnitSelector extends React.Component<Props> {
+class RegUnitSelectorPlain extends React.Component<Props> {
     static baseComponentStyles = {
         labelContainerStyle: {
             flexBasis: 200,
@@ -57,11 +57,11 @@ class RegUnitSelector extends React.Component<Props> {
             <ComposedRegUnitSelector
                 labelClass={classes.label}
                 label={i18n.t('Organisation Unit')}
-                styles={RegUnitSelector.baseComponentStyles}
+                styles={RegUnitSelectorPlain.baseComponentStyles}
                 onUpdateSelectedOrgUnit={this.handleUpdateSelectedOrgUnit}
                 {...passOnProps}
             />
         );
     }
 }
-export default withStyles(getStyles)(RegUnitSelector);
+export const RegUnitSelectorComponent = withStyles(getStyles)(RegUnitSelectorPlain);

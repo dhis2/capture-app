@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import OfflineListWrapper from './OfflineListWrapper.container';
+import { OfflineListWrapper } from './OfflineListWrapper.container';
 
 type Props = {
     listId?: ?string,
 }
 
 
-class OfflineEventsList extends React.Component<Props> {
+export class OfflineEventsList extends React.Component<Props> {
     render() {
         // $FlowFixMe[prop-missing] automated comment
         const { listId, noItemsText, emptyListText, ...passOnProps } = this.props;
@@ -24,5 +24,3 @@ class OfflineEventsList extends React.Component<Props> {
         );
     }
 }
-
-export default OfflineEventsList;

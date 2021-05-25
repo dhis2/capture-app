@@ -14,7 +14,7 @@ type Data = {
  * @export
  * @class CustomForm
  */
-export default class CustomForm {
+export class CustomForm {
     _id: string;
     _data: Data;
 

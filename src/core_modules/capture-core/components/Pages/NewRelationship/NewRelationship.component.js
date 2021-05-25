@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import RelationshipTypeSelector from './RelationshipTypeSelector/RelationshipTypeSelector.component';
-import TeiRelationship from './TeiRelationship/TeiRelationship.component';
+import { RelationshipTypeSelector } from './RelationshipTypeSelector/RelationshipTypeSelector.component';
+import { TeiRelationship } from './TeiRelationship/TeiRelationship.component';
 import type { SelectedRelationshipType } from './newRelationship.types';
-import RelationshipNavigation from './RelationshipNavigation/RelationshipNavigation.container';
+import { RelationshipNavigation } from './RelationshipNavigation/RelationshipNavigation.container';
 
 
 type Props = {
@@ -25,7 +25,7 @@ const relationshipComponentByEntityType = {
     TRACKED_ENTITY_INSTANCE: TeiRelationship,
 };
 
-class NewRelationship extends React.Component<Props> {
+class NewRelationshipPlain extends React.Component<Props> {
     renderRelationship = (selectedRelationshipType: SelectedRelationshipType, props: Object) => {
         const RelationshipComponent = relationshipComponentByEntityType[selectedRelationshipType.to.entity];
         return (
@@ -63,4 +63,4 @@ class NewRelationship extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(NewRelationship);
+export const NewRelationshipComponent = withStyles(getStyles)(NewRelationshipPlain);

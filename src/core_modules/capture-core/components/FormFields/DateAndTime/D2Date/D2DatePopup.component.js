@@ -32,7 +32,7 @@ type Props = {
     inputUsesFloatingLabel: boolean,
 };
 
-class D2DatePopup extends React.Component<Props> {
+class D2DatePopupPlain extends React.Component<Props> {
     getAbsoluteBottom() {
         const inputUsesFloatingLabel = this.props.inputUsesFloatingLabel;
         return inputUsesFloatingLabel ? 60 : 40;
@@ -91,4 +91,4 @@ class D2DatePopup extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(D2DatePopup);
+export const D2DatePopup = withStyles(getStyles)(D2DatePopupPlain);

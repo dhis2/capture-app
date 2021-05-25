@@ -4,7 +4,7 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 import type { RenderFoundation } from '../RenderFoundation';
 
 
-export default class SearchGroup {
+export class SearchGroup {
     _id: string;
     _minAttributesRequiredToSearch: number;
     _searchForm: RenderFoundation;

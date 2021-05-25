@@ -3,7 +3,7 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import D2SectionContainer from './D2Section.container';
+import { D2SectionContainer } from './D2Section.container';
 import type { Props, PropsForPureComponent } from './D2Form.types';
 import { type Section } from '../../metaData';
 
@@ -143,7 +143,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
                         :
                         log.error(
                             errorCreator(
-                                'In order for the component to render you must to add a form id in the redux store. ' +
+                                'In order for the component to render you must add a form id in the redux store. ' +
                                 'The right reducer to do this is called "forms".')(
                                 {
                                     method: 'D2Form.component',

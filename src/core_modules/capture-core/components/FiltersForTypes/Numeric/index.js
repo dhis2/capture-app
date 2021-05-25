@@ -1,2 +1,2 @@
 // @flow
-export { default as NumericFilter } from './NumericFilterManager.component';
+export { NumericFilterManager as NumericFilter } from './NumericFilterManager.component';

@@ -1,4 +1,4 @@
 // @flow
-export default {
+export const sectionKeysForEnrollmentDataEntry = {
     ENROLLMENT: 'enrollment',
 };

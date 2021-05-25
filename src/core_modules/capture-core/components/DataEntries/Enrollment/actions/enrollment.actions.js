@@ -7,13 +7,12 @@ export const actionTypes = {
 
 export const startRunRulesOnUpdateForNewEnrollment = (
     payload: Object,
-    searchActions: any,
     uid: string,
     programId: string,
     orgUnit: Object,
 ) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(
-        { innerPayload: payload, searchActions, uid, programId, orgUnit }, { skipLogging: ['searchActions'] });
+        { innerPayload: payload, uid, programId, orgUnit });
 
 export const startAsyncUpdateFieldForNewEnrollment = (
     innerAction: ReduxAction<any, any>,

@@ -1,5 +1,5 @@
 // @flow
-export { default as getProgramAndStageFromProgramId } from './getProgramAndStageFromProgramId';
-export { default as getStageFromProgramId } from './getStageFromProgramId';
-export { default as getEventProgramThrowIfNotFound } from './getEventProgramThrowIfNotFound';
-export { default as getEventProgramEventAccess } from './getEventProgramEventAccess';
+export { getProgramAndStageForEventProgram } from './getProgramAndStageForEventProgram';
+export { getStageForEventProgram } from './getStageForEventProgram';
+export { getEventProgramThrowIfNotFound } from './getEventProgramThrowIfNotFound';
+export { getEventProgramEventAccess } from './getEventProgramEventAccess';

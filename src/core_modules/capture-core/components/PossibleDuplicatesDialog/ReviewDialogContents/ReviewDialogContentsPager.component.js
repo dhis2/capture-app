@@ -2,7 +2,7 @@
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Pagination } from 'capture-ui';
-import withNavigation from '../../Pagination/withDefaultNavigation';
+import { withNavigation } from '../../Pagination/withDefaultNavigation';
 import type { Props } from './ReviewDialogContentsPager.types';
 import { useDuplicates } from '../useDuplicates';
 

@@ -1,0 +1,10 @@
+.button {
+    cursor: pointer;
+}
+
+.button:focus {
+    outline-style: solid; 
+    outline-color: grey;
+    outline-width: 1px;
+    outline-offset: 0px;
+}

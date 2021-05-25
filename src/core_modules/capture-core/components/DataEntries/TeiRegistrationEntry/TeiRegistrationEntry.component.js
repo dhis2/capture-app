@@ -9,12 +9,13 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import type { HOCProps, Props } from './TeiRegistrationEntry.types';
+import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
-import withErrorMessagePostProcessor from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import { urlArguments } from '../../../utils/url';
+import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>
@@ -43,7 +44,7 @@ const TeiRegistrationEntryPlain =
       classes,
       onPostProcessErrorMessage,
       ...rest
-  }: Props) => {
+  }: PlainProps) => {
       const { push } = useHistory();
 
       const { scopeType, trackedEntityName } = useScopeInfo(selectedScopeId);
@@ -69,7 +70,7 @@ const TeiRegistrationEntryPlain =
                       <TrackedEntityInstanceDataEntry
                           orgUnit={orgUnit}
                           formFoundation={formFoundation}
-                          programId={selectedScopeId}
+                          trackedEntityTypeId={selectedScopeId}
                           teiRegistrationMetadata={teiRegistrationMetadata}
                           id={id}
                           fieldOptions={fieldOptions}
@@ -78,7 +79,6 @@ const TeiRegistrationEntryPlain =
                           {...rest}
                       />
                       <div className={classes.marginTop}>
-
                           {
                               onSave &&
                               <Button
@@ -109,9 +109,10 @@ const TeiRegistrationEntryPlain =
       );
   };
 
-export const TeiRegistrationEntryComponent: ComponentType<$Diff<Props, HOCProps>> =
+export const TeiRegistrationEntryComponent: ComponentType<Props> =
   compose(
       withErrorMessagePostProcessor(),
+      withDuplicateCheckOnSave(),
       withSaveHandler({ onGetFormFoundation: ({ teiRegistrationMetadata }) => {
           const form = teiRegistrationMetadata && teiRegistrationMetadata.form;
           return form;

@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import TextField from '@material-ui/core/TextField';
 import ClearIcon from '@material-ui/icons/Clear';
-import D2Date from '../DateAndTime/D2Date/D2Date.component';
+import { D2Date } from '../DateAndTime/D2Date/D2Date.component';
 
 type Props = {
   onBlur: (value: string, event: UiEventData) => void,
@@ -83,7 +83,7 @@ function calculatedValues(d) {
     };
 }
 
-class D2AgeField extends Component<Props> {
+export class AgeField extends Component<Props> {
   static defaultProps = {
       value: '',
   };
@@ -228,5 +228,3 @@ class D2AgeField extends Component<Props> {
       );
   }
 }
-
-export default D2AgeField;

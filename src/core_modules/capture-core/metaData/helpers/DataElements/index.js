@@ -1,3 +1,3 @@
 // @flow
 
-export { default as convertValues } from './convertValues';
+export { convertValues } from './convertValues';

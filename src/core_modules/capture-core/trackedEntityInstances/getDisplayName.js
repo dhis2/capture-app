@@ -5,7 +5,7 @@ import { convertClientToView } from '../converters';
 
 const DEFAULT_NAME = i18n.t('tracked entity instance');
 
-export default function getDisplayName(
+export function getDisplayName(
     values: {[attrId: string]: any },
     attributes: Array<DataElement>,
     fallbackName?: ?string,

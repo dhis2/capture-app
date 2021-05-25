@@ -8,7 +8,7 @@ type Props = {
     errorText?: ?string,
 };
 
-export default () =>
+export const withDefaultShouldUpdateInterface = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class ShuoldFieldUpdateInterface extends React.Component<Props> {
             shouldComponentUpdate(nextProps: Props) {

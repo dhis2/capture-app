@@ -3,12 +3,12 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { D2Form } from '../D2Form';
-import placements from './constants/placements.const';
+import { placements } from './constants/placements.const';
 import type { RenderFoundation } from '../../metaData';
-import getDataEntryKey from './common/getDataEntryKey';
-import StickyOnScroll from '../Sticky/StickyOnScroll.component';
-import Section from '../Section/Section.component';
-import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
+import { getDataEntryKey } from './common/getDataEntryKey';
+import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
+import { Section } from '../Section/Section.component';
+import { SectionHeaderSimple } from '../Section/SectionHeaderSimple.component';
 
 const styles = theme => ({
     loadingContainer: {
@@ -126,7 +126,7 @@ const fieldVerticalFilter = (placement: $Values<typeof placements>) =>
     (fieldContainer: FieldContainer) =>
         fieldContainer.placement === placement && !fieldContainer.section;
 
-class DataEntry extends React.Component<Props> {
+class DataEntryPlain extends React.Component<Props> {
     static errorMessages = {
         NO_ITEM_SELECTED: 'No item selected',
         FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
@@ -266,7 +266,7 @@ class DataEntry extends React.Component<Props> {
         if (!itemId) {
             return (
                 <div>
-                    {DataEntry.errorMessages.NO_ITEM_SELECTED}
+                    {DataEntryPlain.errorMessages.NO_ITEM_SELECTED}
                 </div>
             );
         }
@@ -274,7 +274,7 @@ class DataEntry extends React.Component<Props> {
         if (!formFoundation) {
             return (
                 <div>
-                    {DataEntry.errorMessages.FORM_FOUNDATION_MISSING}
+                    {DataEntryPlain.errorMessages.FORM_FOUNDATION_MISSING}
                 </div>
             );
         }
@@ -362,4 +362,4 @@ class DataEntry extends React.Component<Props> {
     }
 }
 
-export default withStyles(styles)(DataEntry);
+export const DataEntryComponent = withStyles(styles)(DataEntryPlain);
