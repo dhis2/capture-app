@@ -10,7 +10,7 @@ export const Complete = ({ enrollment, updateAction }: Props) =>
         <MenuItem
             dense
             dataTest="widget-enrollment-actions-incomplete"
-            onClick={async () =>
+            onClick={() =>
                 updateAction({
                     ...enrollment,
                     status: plainStatus.ACTIVE,
@@ -23,7 +23,7 @@ export const Complete = ({ enrollment, updateAction }: Props) =>
         <MenuItem
             dense
             dataTest="widget-enrollment-actions-complete"
-            onClick={async () =>
+            onClick={() =>
                 updateAction({
                     ...enrollment,
                     status: plainStatus.COMPLETED,
