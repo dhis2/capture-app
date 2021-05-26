@@ -11,6 +11,12 @@ const styles = {
     errorWidgetWrapper: {
         backgroundColor: '#ffe6e8',
     },
+    errorUL: {
+        '&::marker': {
+            content: '"!"',
+            color: '#d52525',
+        },
+    },
 };
 
 const WidgetErrorPlain = ({ classes }: Props) => {
@@ -53,6 +59,11 @@ const WidgetErrorPlain = ({ classes }: Props) => {
     ];
 
     const { showError } = useFilteredWidgetData(rules);
+
+    if (!showError || showError.length === 0) {
+        return null;
+    }
+
     return (
         <div
             className={classes}
@@ -61,11 +72,11 @@ const WidgetErrorPlain = ({ classes }: Props) => {
             <Widget
                 header={i18n.t('Error')}
                 open={openStatus}
-                onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
-                onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
+                onOpen={() => setOpenStatus(true)}
+                onClose={() => setOpenStatus(false)}
             >
                 <div className={classes.errorWidgetWrapper}>
-                    <ul >
+                    <ul className={classes.errorUL}>
                         {showError && showError.map(errorRule => (
                             <li key={errorRule.error.id}>
                                 {errorRule.error.message}
