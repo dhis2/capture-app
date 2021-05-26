@@ -1,3 +1,24 @@
+## [1.22.2](https://github.com/dhis2/capture-app/compare/v1.22.1...v1.22.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* husky lost hooks ([#1728](https://github.com/dhis2/capture-app/issues/1728)) ([4c9e480](https://github.com/dhis2/capture-app/commit/4c9e4803baa9d0e184a13669e1e3d287c861d193))
+
+## [1.22.1](https://github.com/dhis2/capture-app/compare/v1.22.0...v1.22.1) (2021-05-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8874f24](https://github.com/dhis2/capture-app/commit/8874f24728dd6d54584290eb0f9cc257d8473c11))
+
+# [1.22.0](https://github.com/dhis2/capture-app/compare/v1.21.3...v1.22.0) (2021-05-20)
+
+
+### Features
+
+* DHIS2-10977 WidgetFeedback component ([d154126](https://github.com/dhis2/capture-app/commit/d154126e598b6a0025591d525dc587b8a3f703ef))
+
 ## [1.21.3](https://github.com/dhis2/capture-app/compare/v1.21.2...v1.21.3) (2021-05-16)
 
 

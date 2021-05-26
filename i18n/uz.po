@@ -210,7 +210,7 @@ msgid "No write access"
 msgstr "Ёзув киритиш учун рухсат йўқ"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "Янги {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Шакл кўринишига ўтиш"
@@ -466,7 +466,7 @@ msgid "No results"
 msgstr "Натижа йўқ"
 
 msgid "Icon for {{field}}"
-msgstr ""
+msgstr "Белгиси {{field}}"
 
 msgid "start typing to search"
 msgstr "қидириш учун ёзишни бошланг"
@@ -523,10 +523,10 @@ msgid "New"
 msgstr "Янги"
 
 msgid "New {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Янги {{trackedEntityName}} да {{programName}}"
 
 msgid "Search for a {{trackedEntityName}} in {{programName}}"
-msgstr ""
+msgstr "Қидирув {{trackedEntityName}} да {{programName}}"
 
 msgid "Clear selections"
 msgstr "Танловларни тозалаш"
@@ -605,48 +605,58 @@ msgstr "Ташкилий бўлимни юклаб бўлмади"
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
+"\"{{teiId}}\" идентификатори билан кузатувдаги объект намунаси мавжуд эмас"
 
 msgid ""
 "There is an error while opening this enrollment. Please enter a valid url."
 msgstr ""
+"Ушбу қайд бўлимини очишда хатолик юз берди. Илтимос, Ҳақиқий URL манзилни "
+"киритинг."
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr ""
+msgstr "\"{{enrollmentId}}\" идентификатори билан қайд қилиш имконсиз"
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
+"{{teiDisplayName}} бир неча дастурларда қайд этилган. Дастурни танланг."
 
 msgid ""
 "{{programName}} has categories. Choose all categories to view dashboard."
 msgstr ""
+"{{programName}} тоифаларга эга. Панелни кўриш учун барча тоифаларни танланг."
 
 msgid ""
 "There are multiple enrollments for this program. Choose an enrollment to "
 "view the dashboard."
 msgstr ""
+"Ушбу дастур бир нечта дастурларда қайд этилган. Панелни кўриш учун рўйхатдан"
+" ўтишни танланг."
 
 msgid "{{teiDisplayName}} is not enrolled in this program."
-msgstr ""
+msgstr "{{teiDisplayName}} ушбу дастурда қайд этилмаган."
 
 msgid "Enroll {{teiDisplayName}} in this program."
-msgstr ""
+msgstr "{{teiDisplayName}} ни ушбу дастурда қайд этинг."
 
 msgid ""
 "{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the "
 "{{programName}}. Choose another program that allows {{tetName}} enrollment. "
 msgstr ""
+"{{teiDisplayName}} бу {{tetName}} ва уни {{programName}} да қайд этиб "
+"бўлмайди. {{tetName}} да қайд этишга рухсат берадиган бошқа дастурни "
+"танланг."
 
 msgid "Enroll a new {{selectedTetName}} in this program."
-msgstr ""
+msgstr "Ушбу янги {{selectedTetName}} ни дастурда қайд этинг."
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr ""
+msgstr "{{programName}} - тадбир дастуридир ва унда қайд этиш мавжуд эмас."
 
 msgid "Create a new event in this program."
-msgstr ""
+msgstr "Ушбу дастурда янги ҳодиса/тадбирни яратиш."
 
 msgid "View working list in this program."
-msgstr ""
+msgstr "Ушбу дастурдаги ишчи рўйхатни кўриб чиқиш"
 
 msgid "Delete event"
 msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
@@ -742,14 +752,16 @@ msgid "View dashboard"
 msgstr "Бошқарув панелини кўриш"
 
 msgid "Create for"
-msgstr ""
+msgstr "Учун яратиш"
 
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
+"Бундан ташқари, бош панелдан дастурни танлашингиз ва ушбу дастур ичида "
+"яратишингиз мумкин"
 
 msgid "Save new"
-msgstr ""
+msgstr "Янгисини сақлаш"
 
 msgid "Save new {{trackedEntityTypeName}} and link"
 msgstr "Янги {{trackedEntityTypeName}} ва ҳаволани сақлаш"
@@ -794,7 +806,7 @@ msgid "Search {{name}}"
 msgstr "{{name}} орқали қидириш"
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "{{name}} орқали қидириш"
 
 msgid "Search by attributes"
 msgstr "Атрибут орқали қидириш"
@@ -803,7 +815,7 @@ msgid "Back"
 msgstr "Орқага"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr " {{titleText}} орқали қидириш"
 
 msgid "Search for"
 msgstr "Қидириш"
@@ -922,6 +934,7 @@ msgstr "Кузатув-Назорат дастурини очинг"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
+"Қайд этиш виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
 
 msgid "Follow-up"
 msgstr "Кузатиш"
@@ -933,28 +946,29 @@ msgid "Incident date"
 msgstr "Ҳодиса санаси"
 
 msgid "Started at {{orgUnitName}}"
-msgstr ""
+msgstr " {{orgUnitName}} да бошланган"
 
 msgid "Owned by {{ownerOrgUnit}}"
-msgstr ""
+msgstr " {{orgUnitName}} эгалиги асосида"
 
 msgid "Last updated {{date}}"
-msgstr ""
+msgstr " {{date}}да охирги марта янгиланган"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
+"Профила виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
 
 msgid "Person Profile"
-msgstr ""
+msgstr "Шахс профили"
 
 msgid "Stages and Events"
-msgstr ""
+msgstr "Босқичлар ва Ҳодиса/тадбирлар"
 
 msgid "An error has occured. See log for details"
 msgstr "Хатолик юз берди. Тафсилотларни журналдан кўринг."
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "{{escape}} {{programName}} дастурида {{trackedEntityName}} "
 
 msgid "Program not found"
 msgstr "Дастур топилмади"
@@ -969,7 +983,7 @@ msgid "Error saving event"
 msgstr "Ҳодиса/тадбирни сақлашда хато"
 
 msgid "Could not save event"
-msgstr ""
+msgstr "Ҳодиса/тадбирни сақлаб бўлмади"
 
 msgid "Could not delete event"
 msgstr "Ҳодиса/тадбирни ўчириб ташлаб бўлмади"
@@ -984,13 +998,13 @@ msgid "Could not delete working list"
 msgstr "Ишчи рўйхатни ўчириб ташлаб бўлмади"
 
 msgid "Organisation unit search failed."
-msgstr ""
+msgstr "Ташкилий бўлимни излаш амалга ошмади."
 
 msgid "Error saving tracked entity instance"
-msgstr ""
+msgstr "Кузатувдаги шахс нусхаларини сақлашда хатолик келиб чиқди"
 
 msgid "Error saving enrollment"
-msgstr ""
+msgstr "Қайдни сақлашда хатолик юзага келди"
 
 msgid "tracked entity instance"
 msgstr "кузатилаётган объект намунаси"
