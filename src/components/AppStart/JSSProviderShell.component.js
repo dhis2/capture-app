@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const JSSProviderShell = ({ children }: Props) => (
-    <JssProvider jss={jss} generateClassName={generateClassName}>
+    <JssProvider jss={jss} generateId={generateClassName}>
         {children}
     </JssProvider>
 );
