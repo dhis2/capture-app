@@ -37,23 +37,22 @@ const styles = theme => ({
 const editorDefaultValue = '<p><br></p>';
 
 class TextEditorPlain extends React.Component<Props, State> {
+    static getDerivedStateFromProps(newProps: Props) {
+        this.updateStateFromProps(newProps);
+    }
+
     static defaultProps = {
         format: 'html',
     }
+
     constructor(props: Props) {
         super(props);
         this.state = {
             editorValue: RichTextEditor.createEmptyValue(),
         };
-    }
-
-    UNSAFE_componentWillMount() {
         this.updateStateFromProps(this.props);
     }
 
-    UNSAFE_componentWillReceiveProps(newProps) {
-        this.updateStateFromProps(newProps);
-    }
 
     updateStateFromProps = (props) => {
         const editorStringValue = this.getStringValue();

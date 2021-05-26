@@ -95,12 +95,11 @@ export class D2SectionFieldsComponent extends Component<Props> {
         this.rulesCompulsoryErrors = {};
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: Props) {
-        if (newProps.fieldsMetaData !== this.props.fieldsMetaData) {
-            this.formFields = D2SectionFieldsComponent.buildFormFields(newProps);
+    componentDidUpdate(prevProps: Props) {
+        if (prevProps.fieldsMetaData !== this.props.fieldsMetaData) {
+            this.formFields = D2SectionFieldsComponent.buildFormFields(this.props);
         }
     }
-
     rulesIsValid() {
         const rulesMessages = this.props.rulesMessages;
         const errorMessages = Object.keys(rulesMessages)

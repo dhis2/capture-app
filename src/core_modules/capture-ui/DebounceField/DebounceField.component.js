@@ -17,27 +17,29 @@ type State = {
  * @class DebounceField
  */
 export class DebounceField extends React.Component<Props, State> {
-    debouncer: Function;
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            value: this.props.value || '',
-        };
-
-        this.debouncer = debounce(this.handleDebounced, 500);
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.value !== this.props.value) {
-            this.setState({
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.value !== prevState.value) {
+            return {
                 value: nextProps.value || '',
-            });
+            };
         }
+        return null;
     }
 
-    componentWillUnmount() {
-        this.debouncer.cancel();
-    }
+     debouncer: Function;
+     constructor(props: Props) {
+         super(props);
+         this.state = {
+             value: this.props.value || '',
+         };
+
+         this.debouncer = debounce(this.handleDebounced, 500);
+     }
+
+
+     componentWillUnmount() {
+         this.debouncer.cancel();
+     }
 
     handleDebounced = (event: SyntheticEvent<HTMLInputElement>) => {
         this.props.onDebounced(event);

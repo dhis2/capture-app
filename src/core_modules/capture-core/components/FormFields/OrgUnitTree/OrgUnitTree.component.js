@@ -3,18 +3,19 @@ import { getInstance } from 'd2';
 import { Tree } from './Tree';
 
 export class OrgUnitTree extends React.Component {
-  state = {
-      list: [],
-      selected: this.props.value,
-  }
+    static getDerivedStateFromProps(nextProps) {
+        return ({ selected: nextProps.value });
+    }
 
-  async UNSAFE_componentWillMount() {
-      await this.fetchRoot();
-  }
+    state = {
+        list: [],
+        selected: this.props.value,
+    }
 
-  UNSAFE_componentWillReceiveProps({ value }) {
-      this.setState({ selected: value });
-  }
+    async componentDidMount() {
+        await this.fetchRoot();
+    }
+
 
   setSelected = (selected) => {
       this.setState({ selected });

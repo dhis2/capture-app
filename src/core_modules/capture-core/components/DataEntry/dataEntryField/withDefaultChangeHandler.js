@@ -15,19 +15,20 @@ export const withDefaultChangeHandler = () =>
         (class DefaultFieldChangeHandler extends React.Component<Props, State> {
             handleChange: (value: any) => void;
 
+            static getDerivedStateFromProps(nextProps: Props) {
+                if (nextProps.value !== this.props.value) {
+                    return {
+                        value: nextProps.value,
+                    };
+                }
+                return null;
+            }
+
             constructor(props: Props) {
                 super(props);
                 this.handleChange = this.handleChange.bind(this);
                 const value = this.props.value;
                 this.state = { value };
-            }
-
-            UNSAFE_componentWillReceiveProps(nextProps: Props) {
-                if (nextProps.value !== this.props.value) {
-                    this.setState({
-                        value: nextProps.value,
-                    });
-                }
             }
 
             handleChange(value: any) {

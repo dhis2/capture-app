@@ -38,19 +38,19 @@ type State = {
 }
 
 class ViewEventSectionPlain extends React.Component<Props, State> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            collapsed: this.props.collapsed || false,
-        };
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps: Props) {
+    static getDerivedStateFromProps(nextProps: Props) {
         if (nextProps.collapsed !== this.props.collapsed) {
             this.setState({
                 collapsed: nextProps.collapsed,
             });
         }
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            collapsed: this.props.collapsed || false,
+        };
     }
 
     toggleCollapse = () => {

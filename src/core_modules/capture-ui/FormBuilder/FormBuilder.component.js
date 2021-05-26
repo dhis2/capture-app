@@ -256,16 +256,16 @@ export class FormBuilder extends React.Component<Props> {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: Props) {
-        if (newProps.id !== this.props.id || newProps.loadNr !== this.props.loadNr) {
+    componentDidUpdate(prevProps: Props) {
+        if (prevProps.id !== this.props.id || prevProps.loadNr !== this.props.loadNr) {
             this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
             this.commitUpdateTriggeredForFields = {};
             if (this.props.validateIfNoUIData) {
-                this.validateAllFields(newProps);
+                this.validateAllFields(this.props);
             }
         } else {
             this.asyncUIState =
-                FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
+                FormBuilder.updateAsyncUIState(this.props.fieldsUI, this.props.fieldsUI, this.asyncUIState);
         }
     }
 
