@@ -144,20 +144,20 @@ export class EnrollmentFactory {
         let section;
         if (cachedProgramSections && cachedProgramSections.length > 0) {
             // $FlowFixMe
-            cachedProgramSections.asyncForEach(async (ps) => {
-                let arr;
+            cachedProgramSections.asyncForEach(async (programSection) => {
+                let trackedEntityAttributes;
                 if (cachedProgram.trackedEntityTypeId) {
                     const TEFTLabel = this.cachedTrackedEntityTypes.get(cachedProgram.trackedEntityTypeId)?.displayName;
-                    section = await this._buildSection(arr, cachedProgram.trackedEntityTypeId, TEFTLabel, cachedProgram.trackedEntityTypeId);
+                    section = await this._buildSection(trackedEntityAttributes, cachedProgram.trackedEntityTypeId, TEFTLabel, cachedProgram.trackedEntityTypeId);
                     section && enrollmentForm.addSection(section);
                 }
                 if (cachedProgramTrackedEntityAttributes &&
                     cachedProgramTrackedEntityAttributes.length > 0) {
-                    arr = cachedProgramTrackedEntityAttributes
-                        .filter(e => ps.trackedEntityAttributes
-                            .includes(e.trackedEntityAttributeId));
+                    trackedEntityAttributes = cachedProgramTrackedEntityAttributes
+                        .filter(trackedEntityAttribute => programSection.trackedEntityAttributes
+                            .includes(trackedEntityAttribute.trackedEntityAttributeId));
                 }
-                section = await this._buildSection(arr, null, ps.displayFormName, ps.id);
+                section = await this._buildSection(trackedEntityAttributes, null, programSection.displayFormName, programSection.id);
                 section && enrollmentForm.addSection(section);
             });
         } else {
