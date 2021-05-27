@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import JssProvider from 'react-jss/lib/JssProvider';
+import { JssProvider } from 'react-jss';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const JSSProviderShell = ({ children }: Props) => (
-    <JssProvider jss={jss} generateClassName={generateClassName}>
+    <JssProvider jss={jss} generateId={generateClassName}>
         {children}
     </JssProvider>
 );
