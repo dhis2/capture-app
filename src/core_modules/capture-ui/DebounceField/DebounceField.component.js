@@ -17,15 +17,6 @@ type State = {
  * @class DebounceField
  */
 export class DebounceField extends React.Component<Props, State> {
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.value !== prevState.value) {
-            return {
-                value: nextProps.value || '',
-            };
-        }
-        return null;
-    }
-
      debouncer: Function;
      constructor(props: Props) {
          super(props);
@@ -36,6 +27,14 @@ export class DebounceField extends React.Component<Props, State> {
          this.debouncer = debounce(this.handleDebounced, 500);
      }
 
+     componentDidUpdate(prevProps: Props) {
+         if (prevProps.value !== this.props.value) {
+             // eslint-disable-next-line react/no-did-update-set-state
+             this.setState({
+                 value: this.props.value || '',
+             });
+         }
+     }
 
      componentWillUnmount() {
          this.debouncer.cancel();

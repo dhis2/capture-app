@@ -97,15 +97,6 @@ type State = {
 }
 
 class NotesPlain extends React.Component<Props, State> {
-    static getDerivedStateFromProps(nextProps: Props) {
-        if (nextProps.value !== this.props.value
-            || this.props.value !== this.state.value) {
-            this.setState({
-                value: nextProps.value,
-            });
-        }
-    }
-
     static defaultProps = {
         entityAccess: { read: true, write: true },
     }
@@ -116,6 +107,16 @@ class NotesPlain extends React.Component<Props, State> {
             addIsOpen: !!this.props.value,
             value: this.props.value || null,
         };
+    }
+
+    componentDidUpdate(prevProps: Props) {
+        if (prevProps.value !== this.props.value
+            || this.props.value !== this.state.value) {
+            // eslint-disable-next-line react/no-did-update-set-state
+            this.setState({
+                value: this.props.value,
+            });
+        }
     }
 
     toggleIsOpen = () => {

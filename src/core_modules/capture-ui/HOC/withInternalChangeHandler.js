@@ -13,15 +13,6 @@ type State = {
 export const withInternalChangeHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         (class DefaultFieldChangeHandler extends React.Component<Props, State> {
-            static getDerivedStateFromProps(nextProps: Props) {
-                if (nextProps.value !== this.props.value) {
-                    return {
-                        value: nextProps.value,
-                    };
-                }
-                return null;
-            }
-
             handleChange: (value: any) => void;
 
             constructor(props: Props) {
@@ -30,6 +21,17 @@ export const withInternalChangeHandler = () =>
                 const value = this.props.value;
                 this.state = { value };
             }
+
+            componentDidUpdate(prevProps: Props) {
+                if (prevProps.value !== this.props.value) {
+                    // todo (eslint)
+                    // eslint-disable-next-line react/no-did-update-set-state
+                    this.setState({
+                        value: this.props.value,
+                    });
+                }
+            }
+
 
             handleChange(value: any) {
                 this.setState({

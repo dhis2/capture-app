@@ -153,9 +153,10 @@ class OptionsSelectVirtualizedPlain extends Component<Props, State> {
 
     componentDidUpdate(prevProps: Props) {
         if (prevProps.optionSet !== this.props.optionSet) {
-            this.options = this.buildOptions(this.options.optionSet);
+            this.options = this.buildOptions(this.props.optionSet);
         }
     }
+
     static defaultSelectStyle = {
         border: 'none',
         outline: 'none',

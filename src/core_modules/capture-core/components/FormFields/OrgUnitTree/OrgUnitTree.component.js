@@ -3,8 +3,8 @@ import { getInstance } from 'd2';
 import { Tree } from './Tree';
 
 export class OrgUnitTree extends React.Component {
-    static getDerivedStateFromProps(nextProps) {
-        return ({ selected: nextProps.value });
+    static getDerivedStateFromProps(props) {
+        return ({ selected: props.value });
     }
 
     state = {

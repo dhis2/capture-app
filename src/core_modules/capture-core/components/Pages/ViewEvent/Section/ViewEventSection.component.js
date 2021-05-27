@@ -38,19 +38,20 @@ type State = {
 }
 
 class ViewEventSectionPlain extends React.Component<Props, State> {
-    static getDerivedStateFromProps(nextProps: Props) {
-        if (nextProps.collapsed !== this.props.collapsed) {
-            this.setState({
-                collapsed: nextProps.collapsed,
-            });
-        }
-    }
-
     constructor(props) {
         super(props);
         this.state = {
             collapsed: this.props.collapsed || false,
         };
+    }
+
+    componentDidUpdate(prevProps: Props) {
+        if (prevProps.collapsed !== this.props.collapsed) {
+            // eslint-disable-next-line react/no-did-update-set-state
+            this.setState({
+                collapsed: this.props.collapsed,
+            });
+        }
     }
 
     toggleCollapse = () => {

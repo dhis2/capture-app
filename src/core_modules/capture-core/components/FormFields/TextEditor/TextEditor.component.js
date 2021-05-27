@@ -37,10 +37,6 @@ const styles = theme => ({
 const editorDefaultValue = '<p><br></p>';
 
 class TextEditorPlain extends React.Component<Props, State> {
-    static getDerivedStateFromProps(newProps: Props) {
-        this.updateStateFromProps(newProps);
-    }
-
     static defaultProps = {
         format: 'html',
     }
@@ -53,6 +49,9 @@ class TextEditorPlain extends React.Component<Props, State> {
         this.updateStateFromProps(this.props);
     }
 
+    componentDidUpdate() {
+        this.updateStateFromProps(this.props);
+    }
 
     updateStateFromProps = (props) => {
         const editorStringValue = this.getStringValue();

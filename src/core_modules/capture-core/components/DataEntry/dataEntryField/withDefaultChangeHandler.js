@@ -14,21 +14,20 @@ export const withDefaultChangeHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         (class DefaultFieldChangeHandler extends React.Component<Props, State> {
             handleChange: (value: any) => void;
-
-            static getDerivedStateFromProps(nextProps: Props) {
-                if (nextProps.value !== this.props.value) {
-                    return {
-                        value: nextProps.value,
-                    };
-                }
-                return null;
-            }
-
             constructor(props: Props) {
                 super(props);
                 this.handleChange = this.handleChange.bind(this);
                 const value = this.props.value;
                 this.state = { value };
+            }
+
+            componentDidUpdate(prevProps: Props) {
+                if (prevProps.value !== this.props.value) {
+                    // eslint-disable-next-line react/no-did-update-set-state
+                    this.setState({
+                        value: this.props.value,
+                    });
+                }
             }
 
             handleChange(value: any) {
