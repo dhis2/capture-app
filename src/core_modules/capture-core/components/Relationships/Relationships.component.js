@@ -4,7 +4,8 @@ import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { IconButton, withStyles, Tooltip } from '@material-ui/core';
-import { ArrowForward as ArrowIcon, Clear as ClearIcon } from '@material-ui/icons';
+import { Clear as ClearIcon } from '@material-ui/icons';
+import { IconArrowRight16 } from '@dhis2/ui';
 import { Button } from '../Buttons';
 import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
@@ -128,7 +129,7 @@ class RelationshipsPlain extends React.Component<Props> {
                     </div>
                     <div className={classes.relationshipEntities}>
                         {this.getEntityName(relationship.from)}
-                        <ArrowIcon className={classes.arrowIcon} />
+                        <span className={classes.arrowIcon}> <IconArrowRight16 /> </span>
                         {this.getEntityName(relationship.to)}
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { withStyles, IconButton, Paper } from '@material-ui/core';
-import { ArrowDropDown, ArrowDropUp } from '@material-ui/icons';
+import { IconChevronDown24, IconChevronUp24 } from '@dhis2/ui';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -61,11 +61,12 @@ class ViewEventSectionPlain extends React.Component<Props, State> {
 
     renderCollapsable = () => {
         const classes = this.props.classes;
+
         return (
             <IconButton className={classes.toggleCollapseButton} onClick={this.toggleCollapse}>
                 {this.state.collapsed ?
-                    <ArrowDropDown /> :
-                    <ArrowDropUp />
+                    <IconChevronDown24 /> :
+                    <IconChevronUp24 />
                 }
             </IconButton>
 
