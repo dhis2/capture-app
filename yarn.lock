@@ -6742,14 +6742,10 @@ date-fns@^1.27.2:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
-date-fns@^1.29.0:
-  version "1.29.0"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
-
-date-fns@^2.0.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.8.1.tgz#2109362ccb6c87c3ca011e9e31f702bc09e4123b"
-  integrity sha512-EL/C8IHvYRwAHYgFRse4MGAPSqlJVlOrhVYZ75iQBKrnv+ZedmYsgwH3t+BCDuZDXpoo07+q9j4qgSSOa7irJg==
+date-fns@^2.0.1, date-fns@^2.22.0:
+  version "2.22.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.22.0.tgz#e25d79dda0639ae9e840d02ab34446613037c392"
+  integrity sha512-1TMrlJRPYjeR6KS9TgnJz4DX1rHW5NkfgIHpe9NWL6TGTzd6qo8mLo6ibt3p1wvXAu/DOal1Yce5YloFGeexBA==
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -10695,10 +10691,10 @@ jest-leak-detector@^24.9.0:
     jest-get-type "^24.9.0"
     pretty-format "^24.9.0"
 
-jest-localstorage-mock@^2.4.12:
-  version "2.4.12"
-  resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.4.12.tgz#113d5ee5328b62d033d672d4594da484e8973644"
-  integrity sha512-J4ODx0RvWhD9+S3vvDN4Lc1/1BujuFW/OeMKo870c5h7W/AA6EDPdWv69QLN0iZdb21dDYJasIRyJHiToHkj0g==
+jest-localstorage-mock@^2.4.13:
+  version "2.4.13"
+  resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.4.13.tgz#67564cfca453409eb4e72920fcf6872521d6ad64"
+  integrity sha512-wCKZTgjaJB3CwJduY1x+VFn5Ldky5bRl8I+qZ/i0GSHWwxNYbjwI8OlNSDncDMg2GZ8AF11PuvluZuj5u1ESPA==
 
 jest-matcher-utils@^24.9.0:
   version "24.9.0"
