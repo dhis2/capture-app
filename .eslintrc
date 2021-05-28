@@ -33,7 +33,7 @@
         "Cypress": true
     },
     "rules": {
-        "indent": [2, 4],
+        "indent" : ["error", 4, { "ignoredNodes": ["JSXElement", "JSXElement *"] }],
         "max-len": [
             1,
             120,

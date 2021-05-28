@@ -16,6 +16,9 @@ const styles = {
     profileWidgetWrapper: {
         paddingBottom: '12px',
     },
+    test: {
+        backgroundColor: 'red',
+    },
 
 };
 const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
@@ -100,6 +103,7 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
                 onOpen={() => setOpenStatus(true)}
                 onClose={() => setOpenStatus(false)}
                 open={open}
+                className={classes.test}
             >
                 <FlatList
                     dataTest="profile-widget-flatlist"
