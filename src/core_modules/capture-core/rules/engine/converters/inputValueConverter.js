@@ -93,7 +93,7 @@ class RulesValueConverter implements IConvertInputRulesValue {
     }
 
     convertOrgUnit(value: any): string {
-        return value?.id;
+        return value?.id || '';
     }
 }
 
