@@ -160,21 +160,23 @@ export class EnrollmentFactory {
                 section = await this._buildSection(trackedEntityAttributes, null, programSection.displayFormName, programSection.id);
                 section && enrollmentForm.addSection(section);
             });
-        } else {
-            section = await
-            this._buildSection(cachedProgram.programTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
-            section && enrollmentForm.addSection(section);
-        }
-
-
-        if (cachedProgram.dataEntryForm) {
-            if (!section) {
-                section = new Section((o) => {
-                    o.id = Section.MAIN_SECTION_ID;
-                });
-            }
+        } else if (cachedProgram.dataEntryForm) {
+            section = await this._buildSection(cachedProgram.programTrackedEntityAttributes);
             section.showContainer = false;
             const dataEntryForm = cachedProgram.dataEntryForm;
+            dataEntryForm.htmlCode = "<h1 style=\"color:red;\">Teststyle</h1>\n" +
+                "\n" +
+                "<p>&nbsp;</p>\n" +
+                "\n" +
+                "<p>First name:&nbsp;<input id=\"IpHINAT79UW-w75KJ2mc4zz-val\" name='entryfield' title=\"First name\" value=\"[ First name ]\" /></p>\n" +
+                "\n" +
+                "<p>Gender:&nbsp;<input id=\"IpHINAT79UW-cejWyOfXge6-val\" name='entryfield' title=\"Gender\" value=\"[ Gender ]\" /></p>\n" +
+                "\n" +
+                "<p>Last name:&nbsp;<input id=\"IpHINAT79UW-zDhUuAYrxNC-val\" name='entryfield' title=\"Last name\" value=\"[ Last name ]\" /></p>\n" +
+                "\n" +
+                "<p>Unique ID:&nbsp;<input id=\"IpHINAT79UW-lZGmxYbs97q-val\" name='entryfield' title=\"Unique ID\" value=\"[ Unique ID ]\" /></p>"
+
+            section && enrollmentForm.addSection(section);
             try {
                 enrollmentForm.customForm = new CustomForm((o) => {
                     o.id = dataEntryForm.id;
@@ -184,7 +186,31 @@ export class EnrollmentFactory {
                 log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
                     template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
             }
+        } else {
+            section = await
+            this._buildSection(cachedProgram.programTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
+            section && enrollmentForm.addSection(section);
         }
+
+
+        // if (cachedProgram.dataEntryForm) {
+        //     if (!section) {
+        //         section = new Section((o) => {
+        //             o.id = Section.MAIN_SECTION_ID;
+        //         });
+        //     }
+        //     section.showContainer = false;
+        //     const dataEntryForm = cachedProgram.dataEntryForm;
+        //     try {
+        //         enrollmentForm.customForm = new CustomForm((o) => {
+        //             o.id = dataEntryForm.id;
+        //             o.data = dataEntryForm.htmlCode;
+        //         });
+        //     } catch (error) {
+        //         log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
+        //             template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
+        //     }
+        // }
         return enrollmentForm;
     }
 
