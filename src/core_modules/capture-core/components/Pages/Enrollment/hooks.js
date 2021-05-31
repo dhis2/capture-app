@@ -5,6 +5,10 @@ import { useMemo } from 'react';
 type rulesProps = {
     type: string,
     id: string,
+    error?: { id: string, message: string },
+    warning?: { id: string, message: string },
+    displayText?: { id: string, message: string },
+    displayKeyValuePair?: { id: string, key: string, value: string }
 }
 
 export const useEnrollmentInfo = (enrollmentId: string, programId: string) => {
@@ -30,10 +34,10 @@ export const useFilteredWidgetData = (rules: Array<rulesProps>) => useMemo(() =>
         if (rule.id === 'general') {
             switch (rule.type) {
             case 'SHOWWARNING':
-                showWarning = [...showWarning, rule];
+                showWarning = [...showWarning, rule.warning];
                 break;
             case 'SHOWERROR':
-                showError = [...showError, rule];
+                showError = [...showError, rule.error];
                 break;
             default:
                 break;
@@ -41,10 +45,10 @@ export const useFilteredWidgetData = (rules: Array<rulesProps>) => useMemo(() =>
         } else if (rule.id === 'feedback') {
             switch (rule.type) {
             case 'DISPLAYKEYVALUEPAIRS':
-                feedbackKeyValuePairs = [...feedbackKeyValuePairs, rule];
+                feedbackKeyValuePairs = [...feedbackKeyValuePairs, rule.displayKeyValuePair];
                 break;
             case 'DISPLAYTEXT':
-                feedbackDisplayText = [...feedbackDisplayText, rule];
+                feedbackDisplayText = [...feedbackDisplayText, rule.displayText];
                 break;
             default:
                 break;
@@ -52,10 +56,10 @@ export const useFilteredWidgetData = (rules: Array<rulesProps>) => useMemo(() =>
         } else if (rule.id === 'indicators') {
             switch (rule.type) {
             case 'DISPLAYKEYVALUEPAIRS':
-                indicatorKeyValue = [...indicatorKeyValue, rule];
+                indicatorKeyValue = [...indicatorKeyValue, rule.displayKeyValuePair];
                 break;
             case 'DISPLAYTEXT':
-                indicatorDisplayText = [...indicatorDisplayText, rule];
+                indicatorDisplayText = [...indicatorDisplayText, rule.displayText];
                 break;
             default:
                 break;
