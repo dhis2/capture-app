@@ -13,7 +13,7 @@ import {
 } from './EnrollmentPage.actions';
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { useEnrollmentInfo } from './hooks';
+import { useEnrollmentInfo } from './hooks/useEnrollmentInfo';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 
 const useComponentLifecycle = () => {

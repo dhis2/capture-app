@@ -2,7 +2,7 @@
 import { RulesEngine } from '../engine';
 import type { Program } from '../../metaData';
 import type {
-    EventValues,
+    EventsData,
     OrgUnit,
     DataElement,
     TEIValues,
@@ -13,15 +13,20 @@ import { constantsStore } from '../../metaDataMemoryStores/constants/constants.s
 import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
 
 
-export default function runRulesForEnrollmentPage(
-    program: Program,
+export interface RuleEnrollmentData {
+     program: Program,
     orgUnit: OrgUnit,
-    allEventsData: EventValues,
+    allEventsData: EventsData,
     dataElementsInProgram: { [string]: DataElement },
     teiValues: ?TEIValues,
     trackedEntityAttributes: ?TrackedEntityAttributes,
     enrollmentData: ?Enrollment,
-) {
+}
+
+export default function runRulesForEnrollmentPage(data: RuleEnrollmentData) {
+    const { program, orgUnit, allEventsData, dataElementsInProgram,
+        teiValues, trackedEntityAttributes, enrollmentData,
+    } = data;
     const { programRuleVariables: programRulesVariables } = program;
     const programRules = [...program.programRules];
 
