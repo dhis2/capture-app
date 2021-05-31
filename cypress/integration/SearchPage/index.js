@@ -219,9 +219,9 @@ When('you click the view dashboard button', () => {
 });
 
 When('you remove the Child Programme selection', () => {
-    cy.get('button')
-        .find('[class*=ProgramSelector]')
-        .click();
+    cy.get('[data-test="program-selector-container"]').within(() => {
+        cy.get('[data-test="reset-selection-button"]').eq(0).click();
+    });
 });
 
 Then('there should be visible a title with Malaria case diagnosis', () => {
