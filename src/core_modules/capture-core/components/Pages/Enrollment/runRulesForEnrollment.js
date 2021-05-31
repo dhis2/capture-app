@@ -71,7 +71,7 @@ export const runRulesForEnrollment = ({ orgUnit, program, programMetadata, enrol
         return runRulesForEnrollmentPage({
             program,
             orgUnit,
-            allEventsData: { all: eventsData },
+            allEventsData: eventsData,
             dataElementsInProgram: dataElements,
             teiValues: teiAttributesValues,
             trackedEntityAttributes,

@@ -21,7 +21,7 @@ import type {
     ProgramRule,
     RuleVariables,
     D2Functions,
-    EventValues,
+    EventsData,
 } from './rulesEngine.types';
 import { inputValueConverter } from './converters/inputValueConverter';
 import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
@@ -401,7 +401,7 @@ export class RulesEngine {
 
     static programRuleEffectsForEnrollment(
         programRulesContainer: ProgramRulesContainer,
-        allEvents: EventValues,
+        allEvents: EventsData,
         selectedOrgUnit: OrgUnit,
         dataElements: ?DataElements,
         teiValues: ?TEIValues,
@@ -413,7 +413,7 @@ export class RulesEngine {
         const variablesHash = RulesEngine.variableService().getVariables(
             { constants, programRulesVariables },
             null,
-            allEvents,
+            { all: allEvents, byStage: {} },
             dataElements,
             trackedEntityAttributes,
             teiValues,
