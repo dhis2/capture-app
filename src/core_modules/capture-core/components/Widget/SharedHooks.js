@@ -7,21 +7,21 @@ type rulesProps = {
 }
 
 export const useFilteredWidgetData = (rules: Array<rulesProps>) => useMemo(() => {
-    const showWarning = [];
-    const showError = [];
-    const feedbackKeyValuePairs = [];
-    const feedbackDisplayText = [];
-    const indicatorKeyValue = [];
-    const indicatorDisplayText = [];
+    let showWarning = [];
+    let showError = [];
+    let feedbackKeyValuePairs = [];
+    let feedbackDisplayText = [];
+    let indicatorKeyValue = [];
+    let indicatorDisplayText = [];
 
     rules && rules.forEach((rule) => {
         if (rule.id === 'general') {
             switch (rule.type) {
             case 'SHOWWARNING':
-                showWarning.push(rule);
+                showWarning = [...showWarning, rule];
                 break;
             case 'SHOWERROR':
-                showError.push(rule);
+                showError = [...showError, rule];
                 break;
             default:
                 break;
@@ -29,10 +29,10 @@ export const useFilteredWidgetData = (rules: Array<rulesProps>) => useMemo(() =>
         } else if (rule.id === 'feedback') {
             switch (rule.type) {
             case 'DISPLAYKEYVALUEPAIRS':
-                feedbackKeyValuePairs.push(rule);
+                feedbackKeyValuePairs = [...feedbackKeyValuePairs, rule];
                 break;
             case 'DISPLAYTEXT':
-                feedbackDisplayText.push(rule);
+                feedbackDisplayText = [...feedbackDisplayText, rule];
                 break;
             default:
                 break;
@@ -40,10 +40,10 @@ export const useFilteredWidgetData = (rules: Array<rulesProps>) => useMemo(() =>
         } else if (rule.id === 'indicators') {
             switch (rule.type) {
             case 'DISPLAYKEYVALUEPAIRS':
-                indicatorKeyValue.push(rule);
+                indicatorKeyValue = [...indicatorKeyValue, rule];
                 break;
             case 'DISPLAYTEXT':
-                indicatorDisplayText.push(rule);
+                indicatorDisplayText = [...indicatorDisplayText, rule];
                 break;
             default:
                 break;
