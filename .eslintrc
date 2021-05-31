@@ -132,11 +132,7 @@
             "error",
             {
                 "properties": "never",
-                "allow": [
-                    "UNSAFE_componentWillMount",
-                    "UNSAFE_componentWillReceiveProps",
-                    "UNSAFE_componentWillUpdate"
-                ]
+                "allow": []
             }
         ],
         "import/extensions": ["error", "never"]
