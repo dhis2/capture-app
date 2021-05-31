@@ -2,32 +2,54 @@
 export const useFilteredWidgetData = (rules) => {
     const showWarning = [];
     const showError = [];
-    const displayKeyValuePairs = [];
-    const displayText = [];
+    const feedbackKeyValuePairs = [];
+    const feedbackDisplayText = [];
+    const indicatorKeyValue = [];
+    const indicatorDisplayText = [];
 
     rules && rules.forEach((rule) => {
-        switch (rule.type) {
-        case 'SHOWWARNING':
-            showWarning.push(rule);
-            break;
-        case 'SHOWERROR':
-            showError.push(rule);
-            break;
-        case 'DISPLAYKEYVALUEPAIRS':
-            displayKeyValuePairs.push(rule);
-            break;
-        case 'DISPLAYTEXT':
-            displayText.push(rule);
-            break;
-        default:
-            break;
+        if (rule.id === 'general') {
+            switch (rule.type) {
+            case 'SHOWWARNING':
+                showWarning.push(rule);
+                break;
+            case 'SHOWERROR':
+                showError.push(rule);
+                break;
+            default:
+                break;
+            }
+        } else if (rule.id === 'feedback') {
+            switch (rule.type) {
+            case 'DISPLAYKEYVALUEPAIRS':
+                feedbackKeyValuePairs.push(rule);
+                break;
+            case 'DISPLAYTEXT':
+                feedbackDisplayText.push(rule);
+                break;
+            default:
+                break;
+            }
+        } else if (rule.id === 'indicators') {
+            switch (rule.type) {
+            case 'DISPLAYKEYVALUEPAIRS':
+                indicatorKeyValue.push(rule);
+                break;
+            case 'DISPLAYTEXT':
+                indicatorDisplayText.push(rule);
+                break;
+            default:
+                break;
+            }
         }
     });
 
     return {
         showWarning,
         showError,
-        displayKeyValuePairs,
-        displayText,
+        feedbackKeyValuePairs,
+        feedbackDisplayText,
+        indicatorDisplayText,
+        indicatorKeyValue,
     };
 };
