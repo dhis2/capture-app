@@ -31,12 +31,12 @@ type feedbackRules = {|
 |}
 
 export type Props = {|
-    className?: string,
-    feedbackRules: Array<feedbackRules>
+    feedbackRules: Array<feedbackRules>,
+    ...CssClasses
 |}
 
 export type contentProps = {|
-    filteredText?: filteredText,
-    filteredKeyValue?: filteredKeyValue,
+    feedbackDisplayText?: Array<filteredText>,
+    feedbackKeyValuePair?: Array<filteredKeyValue>,
     ...CssClasses
 |}

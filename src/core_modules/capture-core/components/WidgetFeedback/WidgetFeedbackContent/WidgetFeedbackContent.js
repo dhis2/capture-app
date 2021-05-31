@@ -26,20 +26,20 @@ const styles = {
     },
 };
 
-const WidgetFeedbackContentComponent = ({ filteredText, filteredKeyValue, classes }: contentProps) => {
+const WidgetFeedbackContentComponent = ({ feedbackDisplayText, feedbackKeyValuePair, classes }: contentProps) => {
 
     return (
         <div className={classes.container}>
-            {!filteredText.length > 0 && !filteredKeyValue.length > 0 ?
+            {!feedbackDisplayText.length > 0 && !feedbackKeyValuePair.length > 0 ?
                 <p className={classes.noFeedbackText}>No feedback for this enrollment yet</p> : <ul className={classes.unorderedList}>
-                    {filteredText && filteredText.length > 0 ? filteredText.map(item => (
+                    {feedbackDisplayText && feedbackDisplayText.length > 0 ? feedbackDisplayText.map(item => (
                         <li
                             className={classes.listItem}
                             key={item.displayText.id}
                         >
                             {item.displayText.message}
                         </li>)) : null}
-                    {filteredKeyValue && filteredKeyValue.length > 0 ? filteredKeyValue.map(item => (
+                    {feedbackKeyValuePair && feedbackKeyValuePair.length > 0 ? feedbackKeyValuePair.map(item => (
                         <li
                             key={item.id}
                             className={classes.listItem}
