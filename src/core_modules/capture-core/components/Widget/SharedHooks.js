@@ -1,11 +1,12 @@
 // @flow
+import { useMemo } from 'react';
 
 type rulesProps = {
     type: string,
     id: string,
 }
 
-export const useFilteredWidgetData = (rules: Array<rulesProps>) => {
+export const useFilteredWidgetData = (rules: Array<rulesProps>) => useMemo(() => {
     const showWarning = [];
     const showError = [];
     const feedbackKeyValuePairs = [];
@@ -58,4 +59,4 @@ export const useFilteredWidgetData = (rules: Array<rulesProps>) => {
         indicatorDisplayText,
         indicatorKeyValue,
     };
-};
+}, [rules]);
