@@ -29,30 +29,6 @@ const getStyles = ({ typography }) => ({
 });
 
 export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => {
-    const mockedObject = [{
-        type: 'DISPLAYTEXT',
-        id: 'feedback',
-        displayText: {
-            id: 'kTPYlwna5TA',
-            message: 'More than 3 previous enrollments in this program. Confirm that this enrollment is active.',
-        },
-    }, {
-        type: 'DISPLAYTEXT',
-        id: 'feedback',
-        displayText: {
-            id: 'kjsaldhf6DS',
-            message: 'Person has been enrolled in RMNCH program in the last 2 years.',
-        },
-    }, {
-        type: 'DISPLAYKEYVALUEPAIR',
-        id: 'feedback',
-        displayKeyValuePair: {
-            id: 'kTPYlwna5TA',
-            key: 'Appgar score',
-            value: '40',
-        },
-    }];
-
     return (
         <>
             <div className={classes.title}>
@@ -65,7 +41,7 @@ export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => 
                     />
                 </div>
                 <div className={classes.rightColumn}>
-                    <WidgetFeedback feedbackRules={mockedObject} />
+                    <WidgetFeedback />
                 </div>
             </div>
         </>
