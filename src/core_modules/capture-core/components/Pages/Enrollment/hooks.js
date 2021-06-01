@@ -30,35 +30,48 @@ export const useFilteredWidgetData = (rules: Array<rulesProps>) => useMemo(() =>
     let indicatorKeyValue = [];
     let indicatorDisplayText = [];
 
+    const ruleTypes = Object.freeze({
+        SHOWWARNING: 'SHOWWARNING',
+        SHOWERROR: 'SHOWERROR',
+        DISPLAYKEYVALUEPAIRS: 'DISPLAYKEYVALUEPAIRS',
+        DISPLAYTEXT: 'DISPLAYTEXT',
+    });
+
+    const ruleIDs = Object.freeze({
+        general: 'general',
+        feedback: 'feedback',
+        indicators: 'indicators',
+    });
+
     rules && rules.forEach((rule) => {
-        if (rule.id === 'general') {
+        if (rule.id === ruleIDs.general) {
             switch (rule.type) {
-            case 'SHOWWARNING':
+            case ruleTypes.SHOWWARNING:
                 showWarning = [...showWarning, rule.warning];
                 break;
-            case 'SHOWERROR':
+            case ruleTypes.SHOWERROR:
                 showError = [...showError, rule.error];
                 break;
             default:
                 break;
             }
-        } else if (rule.id === 'feedback') {
+        } else if (rule.id === ruleIDs.feedback) {
             switch (rule.type) {
-            case 'DISPLAYKEYVALUEPAIRS':
+            case ruleTypes.DISPLAYKEYVALUEPAIRS:
                 feedbackKeyValuePairs = [...feedbackKeyValuePairs, rule.displayKeyValuePair];
                 break;
-            case 'DISPLAYTEXT':
+            case ruleTypes.DISPLAYTEXT:
                 feedbackDisplayText = [...feedbackDisplayText, rule.displayText];
                 break;
             default:
                 break;
             }
-        } else if (rule.id === 'indicators') {
+        } else if (rule.id === ruleIDs.feedback) {
             switch (rule.type) {
-            case 'DISPLAYKEYVALUEPAIRS':
+            case ruleTypes.DISPLAYKEYVALUEPAIRS:
                 indicatorKeyValue = [...indicatorKeyValue, rule.displayKeyValuePair];
                 break;
-            case 'DISPLAYTEXT':
+            case ruleTypes.DISPLAYTEXT:
                 indicatorDisplayText = [...indicatorDisplayText, rule.displayText];
                 break;
             default:
