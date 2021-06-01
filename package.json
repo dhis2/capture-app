@@ -84,7 +84,7 @@
     "@dhis2/cli-helpers-engine": "^2.2.0",
     "@dhis2/cli-utils-cypress": "^7.0.1",
     "@dhis2/cypress-commands": "^7.0.1",
-    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
     "babel-eslint": "^10.1.0",
     "docdash": "^1.2.0",
     "dotenv": "^10.0.0",
