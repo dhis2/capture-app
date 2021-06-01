@@ -1,7 +1,32 @@
 // @flow
+import type { Program } from 'capture-core/metaData';
+import { dataElementTypes } from 'capture-core/metaData';
+import type { OrgUnit, EnrollmentData } from 'capture-core/rules/engine';
 import { convertValue } from 'capture-core/converters/serverToClient';
-import runRulesForEnrollmentPage from '../../../rules/actionsCreator/runRulesForEnrollmentPage';
+import runRulesForEnrollmentPage from 'capture-core/rules/actionsCreator/runRulesForEnrollmentPage';
 
+type InputDataElement = {
+    id: string;
+    valueType: $Keys<typeof dataElementTypes>
+}
+
+type InputProgramMetadata = {
+    programStages: Array<{ programStageDataElements: Array<{ dataElement: InputDataElement }>}>
+}
+
+type InputTrackedEntityAttributes = {
+    value: string,
+    valueType: string,
+    attribute: string
+}
+
+type InputRuleEnrollmentData = {
+    orgUnit: OrgUnit,
+    program: Program,
+    programMetadata: InputProgramMetadata,
+    enrollments: Array<EnrollmentData>,
+    attributes: Array<InputTrackedEntityAttributes>,
+}
 
 const getDataElementsFromProgram = (data, eventsDataValues) => {
     if (!data?.programStages) { return {}; }
@@ -48,20 +73,24 @@ const getEventsDataFromEnrollment = (enrollment, dataElements) => enrollment.eve
 
 const getEnrollmentData = enrollment => ({ enrollmentDate: enrollment.enrollmentDate,
     incidentDate: enrollment.incidentDate,
-    enrollmentId: enrollment.enrollmentId });
+    enrollmentId: enrollment.enrollment });
 
 const flatDataValuesFromEvents = events => events.reduce((acc, currentEvent) => {
     acc = [...acc, ...(currentEvent.dataValues)];
     return acc;
 }, []);
 
-// $FlowFixMe
-export const runRulesForEnrollment = ({ orgUnit, program, programMetadata, enrollments, attributes }: Object) => {
+export const runRulesForEnrollment = (input: InputRuleEnrollmentData) => {
+    const { orgUnit, program, programMetadata, enrollments, attributes } = input;
     if (programMetadata && attributes && enrollments) {
         const dataValueList = flatDataValuesFromEvents(enrollments[0].events);
         const dataElements = getDataElementsFromProgram(programMetadata, dataValueList);
 
-        const trackedEntityAttributes = attributes?.map(item => ({ id: item.attribute, valueType: item.valueType }));
+        const trackedEntityAttributes = attributes.reduce((acc, item) => {
+            acc[item.attribute] = { id: item.attribute, valueType: item.valueType };
+            return acc;
+        }, {});
+
         const teiAttributesValues = attributes?.reduce((acc, item) => {
             acc[item.attribute] = item.value;
             return acc;
