@@ -82,7 +82,7 @@ const flatDataValuesFromEvents = events => events.reduce((acc, currentEvent) => 
 
 export const runRulesForEnrollment = (input: InputRuleEnrollmentData) => {
     const { orgUnit, program, programMetadata, enrollments, attributes } = input;
-    if (programMetadata && attributes && enrollments) {
+    if (orgUnit && program && programMetadata && attributes && enrollments) {
         const dataValueList = flatDataValuesFromEvents(enrollments[0].events);
         const dataElements = getDataElementsFromProgram(programMetadata, dataValueList);
 

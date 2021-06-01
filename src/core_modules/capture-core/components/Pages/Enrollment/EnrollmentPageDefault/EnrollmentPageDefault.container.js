@@ -32,14 +32,15 @@ export const EnrollmentPageDefault = () => {
         log.error(errorCreator('Enrollment page could not be loaded')({ programMetaDataError, enrollmentsError }));
     }
 
-    const [ruleEffects, setRuleEffects] = useState(undefined);
+    const [, setRuleEffects] = useState(undefined);
     useEffect(() => {
         const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollments, attributes });
         if (effects) {
             setRuleEffects(effects);
         }
     }, [orgUnit, program, programMetadata, enrollments, attributes]);
-    console.log({ ruleEffects });
+
+
     return (
         <EnrollmentPageDefaultComponent
             teiId={teiId}
