@@ -9,6 +9,7 @@ import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.compon
 import { EditEventDataEntry } from './EditEventDataEntry/EditEventDataEntry.container';
 import { ViewEventDataEntry } from './ViewEventDataEntry/ViewEventDataEntry.container';
 import type { ProgramStage } from '../../../../metaData';
+import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -40,6 +41,8 @@ type Props = {
     onOpenEditEvent: () => void,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
+    hasName: ?boolean,
+    hasIcon: ?boolean,
     classes: {
         container: string,
         content: string,
@@ -111,11 +114,33 @@ class EventDetailsSectionPlain extends Component<Props> {
     render() {
         const {
             classes,
+            programStage: { name, icon },
+            hasName,
+            hasIcon,
         } = this.props;
         return (
             <div className={classes.container}>
                 <ViewEventSection
-                    header={<ViewEventSectionHeader text="Event details" icon={InfoIcon} />}
+                    header={
+                        <ViewEventSectionHeader
+                            text={
+                                hasName && name ? name : i18n.t('Event details')
+                            }
+                            icon={
+                                hasIcon && icon
+                                    ? () => (
+                                        <NonBundledDhis2Icon
+                                            name={icon.name}
+                                            color={icon.color}
+                                            width={30}
+                                            height={30}
+                                            cornerRadius={2}
+                                        />
+                                    )
+                                    : InfoIcon
+                            }
+                        />
+                    }
                 >
                     <div className={classes.content}>
                         {this.renderDataEntryContainer()}
