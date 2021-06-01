@@ -6,7 +6,7 @@ import type { Props } from './WidgetFeedback.types';
 import { WidgetFeedbackContent } from './WidgetFeedbackContent/WidgetFeedbackContent';
 
 export const WidgetFeedback = ({ displayText, displayKeyValue, classes }: Props) => {
-    const [openStatus, setOpenStatus] = useState(false);
+    const [openStatus, setOpenStatus] = useState(true);
 
     return (
         <div
