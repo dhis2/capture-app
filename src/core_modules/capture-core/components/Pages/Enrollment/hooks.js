@@ -66,7 +66,7 @@ export const useFilteredWidgetData = (rules: Array<rulesProps>) => useMemo(() =>
             default:
                 break;
             }
-        } else if (rule.id === ruleIDs.feedback) {
+        } else if (rule.id === ruleIDs.indicators) {
             switch (rule.type) {
             case ruleTypes.DISPLAYKEYVALUEPAIRS:
                 indicatorKeyValue = [...indicatorKeyValue, rule.displayKeyValuePair];
