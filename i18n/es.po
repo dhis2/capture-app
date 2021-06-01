@@ -4,13 +4,14 @@
 # Marta Vila <marta@dhis2.org>, 2019
 # phil_dhis2, 2019
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
+# Alison Andrade <aandrade@ippfwhr.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T12:27:04.744Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020\n"
+"Last-Translator: Alison Andrade <aandrade@ippfwhr.org>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Columnas para mostrar en la tabla"
 
 msgid "Column"
 msgstr "Columna"
@@ -32,6 +33,8 @@ msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
+"Al salir de esta página, se descartarán los cambios que realizó en este "
+"evento."
 
 msgid "Discard"
 msgstr "Descartar"
@@ -40,10 +43,10 @@ msgid "Back to event"
 msgstr ""
 
 msgid "Add comment"
-msgstr ""
+msgstr "Agregar comentario"
 
 msgid "Write comment"
-msgstr ""
+msgstr "Escribir comentario"
 
 msgid "Errors"
 msgstr "Errores"
@@ -55,22 +58,22 @@ msgid "Indicators"
 msgstr "Indicadores"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Advertencias"
 
 msgid "Complete"
 msgstr "Completo"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Advertencias encontradas"
 
 msgid "Abort"
-msgstr ""
+msgstr "Abortar"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
 
 msgid "No write access"
-msgstr ""
+msgstr "Sin acceso de escritura"
 
 msgid "Save"
 msgstr "Guardar"
@@ -82,10 +85,10 @@ msgid "Sort"
 msgstr "Organizar"
 
 msgid "No events to display"
-msgstr ""
+msgstr "No hay eventos para mostrar"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Los datos de la lista sin conexión no están presentes"
 
 msgid "Last week"
 msgstr "Última semana"
@@ -97,7 +100,7 @@ msgid "Last 3 months"
 msgstr "Últimos 3 meses"
 
 msgid "Custom range"
-msgstr ""
+msgstr "Rango personalizado"
 
 msgid "to"
 msgstr "a"
@@ -121,19 +124,19 @@ msgid "Min"
 msgstr "Mín"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "mayor qué o igual a"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "menos que o igual a"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Contiene texto"
 
 msgid "Yes"
 msgstr "Si"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm / dd / aaaa"
 
 msgid "Years"
 msgstr "Años"
@@ -145,7 +148,7 @@ msgid "Days"
 msgstr "Días"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Subiendo archivo"
 
 msgid "selected"
 msgstr "seleccionado"
@@ -154,16 +157,16 @@ msgid "Delete"
 msgstr "Borrar"
 
 msgid "Select file"
-msgstr ""
+msgstr "Seleccionar archivos"
 
 msgid "No"
 msgstr "No"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Subiendo imagen"
 
 msgid "Select image"
-msgstr ""
+msgstr "Seleccionar imagen"
 
 msgid "Search"
 msgstr "Buscar"
@@ -172,10 +175,10 @@ msgid "Clear"
 msgstr "Limpiar"
 
 msgid "No results"
-msgstr ""
+msgstr "No hay resultados"
 
 msgid "No items to display"
-msgstr ""
+msgstr "No hay elementos para mostrar"
 
 msgid "Online"
 msgstr "Conectado"
@@ -184,13 +187,13 @@ msgid "Offline"
 msgstr "Desconectado"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Sincronizando"
 
 msgid "Area"
 msgstr "Área"
 
 msgid "Basic info"
-msgstr ""
+msgstr "Información básica"
 
 msgid "Status"
 msgstr "Estado"
@@ -205,25 +208,25 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Proporcione una fecha válida"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr ""
+msgstr "Agregue o cancele el comentario antes de guardar el evento"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Mostrar todos los eventos"
 
 msgid "Edit event"
-msgstr ""
+msgstr "Editar evento"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "No se pudo cargar el evento"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "No se pudo cargar la unidad organizativa"
 
 msgid "Delete event"
 msgstr "Eliminar evento"
@@ -235,54 +238,56 @@ msgid "Close"
 msgstr "Cerrar"
 
 msgid "More filters"
-msgstr ""
+msgstr "Más filtros"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Filas por página"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "No se pudo obtener la unidad organizativa"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "El programa no existe"
 
 msgid "Selected program is invalid for registering unit"
 msgstr ""
 
 msgid "Saving to"
-msgstr ""
+msgstr "Guardando a"
 
 msgid "in"
-msgstr ""
+msgstr "en"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Este no es un programa de eventos o los metadatos están corruptos. Consulte "
+"el registro para obtener más detalles."
 
 msgid "A value is required"
-msgstr ""
+msgstr "Se requiere un valor"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Guardar y agregar otro"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Guardar y salir"
 
 msgid "Finish"
 msgstr "Acabar"
 
 msgid "events added"
-msgstr ""
+msgstr "eventos agregados"
 
 msgid "No events added"
-msgstr ""
+msgstr "No se agregaron eventos"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Cambiar a la vista de formulario"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Cambiar a la vista de filas"
 
 msgid "New event"
 msgstr "Evento nuevo"
@@ -309,13 +314,13 @@ msgid "Find"
 msgstr "Encontrar"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "Unidad de registro seleccionada"
 
 msgid "Start Again"
-msgstr ""
+msgstr "Empezar de nuevo"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Unidad organizativa de registro"
 
 msgid "Select"
 msgstr "Seleccionar"
@@ -324,7 +329,7 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Se están filtrando algunos programas."
 
 msgid "Show all"
 msgstr "Mostrar todo"
@@ -336,13 +341,13 @@ msgid "Select program"
 msgstr "Seleccionar programa"
 
 msgid "No programs available."
-msgstr ""
+msgstr "No hay programas disponibles."
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Se ha producido un error. Ver registro para más detalles"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Error al guardar el evento"
 
 msgid "Could not save event. See log for details"
 msgstr ""
@@ -351,10 +356,10 @@ msgid "Set coordinate"
 msgstr "Establecer coordenadas"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Eliminar polígono"
 
 msgid "Set area"
-msgstr ""
+msgstr "Establecer área"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -362,12 +367,17 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"Abriste otra versión de la aplicación Capturar en el mismo dominio. "
+"Actualmente, la aplicación Capturar solo admite la ejecución de una versión "
+"al mismo tiempo (en el mismo dominio). Actualice esta página si desea "
+"utilizar esta versión nuevamente, pero tenga en cuenta que esto cerrará "
+"otras versiones."
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Elija una o más fechas"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Elija una fecha..."
 
 msgid "Today"
 msgstr "Hoy"
