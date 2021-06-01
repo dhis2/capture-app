@@ -2,6 +2,7 @@
 
 import React, { type ComponentType } from 'react';
 import { spacersNum } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import type { Props } from '../WidgetFeedback.types';
 
@@ -32,7 +33,7 @@ const styles = {
 
 const WidgetFeedbackContentComponent = ({ displayText, displayKeyValue, classes }: Props) => {
     if ((!displayText || displayText.length <= 0) && (!displayKeyValue || displayKeyValue.length <= 0)) {
-        return <p className={classes.noFeedbackText}>No feedback for this enrollment yet</p>;
+        return <p className={classes.noFeedbackText}>{i18n.t('No feedback for this enrollment yet')}</p>;
     }
 
     return (
