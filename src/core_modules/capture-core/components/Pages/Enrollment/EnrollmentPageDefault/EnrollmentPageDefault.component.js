@@ -28,6 +28,7 @@ const getStyles = ({ typography }) => ({
     },
 });
 
+// eslint-disable-next-line arrow-body-style
 export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => {
     return (
         <>
