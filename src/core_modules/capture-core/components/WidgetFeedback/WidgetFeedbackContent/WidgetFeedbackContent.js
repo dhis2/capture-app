@@ -1,7 +1,7 @@
 // @flow
 
 import React, { type ComponentType } from 'react';
-import { spacersNum } from '@dhis2/ui';
+import { spacersNum, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import type { Props } from '../WidgetFeedback.types';
@@ -15,10 +15,10 @@ const styles = {
         marginTop: '0px',
         lineHeight: '1.375',
         fontSize: '14px',
-        color: '#212934',
+        color: colors.gray900,
     },
     noFeedbackText: {
-        color: '#6B7280',
+        color: colors.gray600,
         paddingLeft: '15px',
         fontSize: '14px',
         marginTop: '0px',
@@ -26,7 +26,7 @@ const styles = {
     listItem: {
         marginBottom: '5px',
         '&::marker': {
-            color: '#A0ADBA',
+            color: colors.gray500,
         },
     },
 };
