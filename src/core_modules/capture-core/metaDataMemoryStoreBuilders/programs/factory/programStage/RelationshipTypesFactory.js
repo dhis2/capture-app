@@ -7,7 +7,7 @@ import type {
 } from '../../../../storageControllers/cache.types';
 import { RelationshipType } from '../../../../metaData';
 
-class RelationshipTypesFactory {
+export class RelationshipTypesFactory {
     static RELATIONSHIP_ENTITY_NAME = 'PROGRAM_STAGE_INSTANCE';
     cachedRelationshipTypes: Array<CachedRelationshipType>;
 
@@ -79,5 +79,3 @@ class RelationshipTypesFactory {
             .map(rt => this._buildRelationshipType(rt));
     }
 }
-
-export default RelationshipTypesFactory;

@@ -1,10 +1,9 @@
 // @flow
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { moment } from 'capture-core-utils/moment';
 import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
-import stringifyNumber from './common/stringifyNumber';
+import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
 
 function convertDateForListDisplay(rawValue: string): string {
@@ -68,8 +67,8 @@ const valueConvertersForType = {
     [dataElementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
     [dataElementTypes.DATETIME]: convertDateTimeForListDisplay,
     [dataElementTypes.TIME]: convertTimeForListDisplay,
-    [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
-    [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
+    [dataElementTypes.TRUE_ONLY]: () => 'Yes',
+    [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.AGE]: convertDateForListDisplay,
     [dataElementTypes.FILE_RESOURCE]: convertResourceForDisplay,

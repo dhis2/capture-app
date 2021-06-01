@@ -16,16 +16,16 @@ import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
 } from '../internal';
-import withOptionsIconElement from './withOptionsIconElement';
+import { withOptionsIconElement } from './withOptionsIconElement';
 import labelTypeClasses from '../../buildField.module.css';
-import withRulesOptionVisibilityHandler from './withRulesOptionVisibilityHandler';
+import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;
     return passOnProps;
 };
 
-export default withGotoInterface()(
+export const OptionSetSelectFieldForForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(

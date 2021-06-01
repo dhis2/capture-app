@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import SelectBoxes from '../SelectionBoxes/SelectionBoxes.component';
+import { SelectionBoxes } from '../SelectionBoxes/SelectionBoxes.component';
 import type { OptionRendererInputData } from '../internal/SelectionBoxes/selectBoxes.types';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
     useRealBooleanValues?: ?boolean, // instead of string as option values
 };
 
-class D2BooleanField extends Component<Props> {
+export class BooleanField extends Component<Props> {
     static getOptions(useRealBooleanValues: boolean) {
         const trueText = i18n.t('Yes');
         const falseText = i18n.t('No');
@@ -30,7 +30,7 @@ class D2BooleanField extends Component<Props> {
 
     constructor(props: Props) {
         super(props);
-        this.options = D2BooleanField.getOptions(!!this.props.useRealBooleanValues);
+        this.options = BooleanField.getOptions(!!this.props.useRealBooleanValues);
     }
 
     render() {
@@ -38,7 +38,7 @@ class D2BooleanField extends Component<Props> {
         return (
             <div>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <SelectBoxes
+                <SelectionBoxes
                     options={this.options}
                     multiSelect={allowMultiple}
                     {...passOnProps}
@@ -47,5 +47,3 @@ class D2BooleanField extends Component<Props> {
         );
     }
 }
-
-export default D2BooleanField;

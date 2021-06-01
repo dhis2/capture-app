@@ -6,14 +6,14 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { SelectedRelationshipType } from '../newRelationship.types';
-import Button from '../../../Buttons/Button.component';
+import { Button } from '../../../Buttons/Button.component';
 import { RegisterTei } from '../RegisterTei';
 import { TeiSearch } from '../../../TeiSearch/TeiSearch.container';
 import { TeiRelationshipSearchResults } from './SearchResults/TeiRelationshipSearchResults.component';
 import { makeTrackedEntityTypeSelector } from './teiRelationship.selectors';
 import type { TrackedEntityType } from '../../../../metaData';
 import { findModes } from '../findModes';
-import getTeiDisplayName from '../../../../trackedEntityInstances/getDisplayName';
+import { getDisplayName } from '../../../../trackedEntityInstances/getDisplayName';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 
 
@@ -55,7 +55,7 @@ const getStyles = theme => ({
 
 const defaultTrackedEntityTypeName = 'Tracked entity instance';
 
-class TeiRelationship extends React.Component<Props> {
+class TeiRelationshipPlain extends React.Component<Props> {
     trackedEntityTypeSelector: (props: Props) => TrackedEntityType;
     constructor(props: Props) {
         super(props);
@@ -74,7 +74,7 @@ class TeiRelationship extends React.Component<Props> {
         const trackedEntityType = this.trackedEntityTypeSelector(this.props);
         this.props.onAddRelationship({
             id: teiId,
-            name: getTeiDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
+            name: getDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
         });
     }
 
@@ -173,5 +173,5 @@ class TeiRelationship extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(TeiRelationship);
+export const TeiRelationship = withStyles(getStyles)(TeiRelationshipPlain);
 

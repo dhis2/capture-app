@@ -3,7 +3,7 @@
  * @namespace UrlSync
  */
 import * as React from 'react';
-import { parse } from 'query-string';
+import { parse, type QueryParameters } from 'query-string';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
 type Props = {
@@ -84,7 +84,7 @@ const getUrlSyncer = (
             }
         }
 
-        paramsNeedsUpdate(syncSpecifications: Array<SyncSpecification>, locationParams: { [key: string]: string}) {
+        paramsNeedsUpdate(syncSpecifications: Array<SyncSpecification>, locationParams: QueryParameters) {
             return syncSpecifications
                 .some((spec) => {
                     const locationValue = locationParams[spec.urlParameterName];

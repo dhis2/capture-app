@@ -19,7 +19,7 @@ import { convertFormToClient, convertClientToServer } from '../../../../converte
 import { getApi } from '../../../../d2/d2Instance';
 import type { ConstructorInput } from './dataElementFactory.types';
 
-class DataElementFactory {
+export class DataElementFactory {
     static translationPropertyNames = {
         NAME: 'NAME',
         DESCRIPTION: 'DESCRIPTION',
@@ -146,6 +146,7 @@ class DataElementFactory {
                             .get(
                                 'trackedEntityInstances',
                                 {
+                                    trackedEntityType: contextProps.trackedEntityTypeId,
                                     ou: orgUnitId,
                                     filter: `${dataElement.id}:EQ:${serverValue}`,
                                 },
@@ -155,6 +156,7 @@ class DataElementFactory {
                             .get(
                                 'trackedEntityInstances',
                                 {
+                                    trackedEntityType: contextProps.trackedEntityTypeId,
                                     ouMode: 'ACCESSIBLE',
                                     filter: `${dataElement.id}:EQ:${serverValue}`,
                                 },
@@ -195,5 +197,3 @@ class DataElementFactory {
         return dataElement;
     }
 }
-
-export default DataElementFactory;

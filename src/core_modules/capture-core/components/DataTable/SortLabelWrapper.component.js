@@ -29,7 +29,7 @@ type Props = {
     disabled?: ?boolean,
 };
 
-class SortLabelWrapper extends React.Component<Props> {
+class SortLabelWrapperPlain extends React.Component<Props> {
     static getDirectionBasedIconValues(direction?: ?$Values<typeof sortLabelDirections>) {
         if (direction === sortLabelDirections.ASC) {
             return {
@@ -147,4 +147,4 @@ class SortLabelWrapper extends React.Component<Props> {
  * @alias SortLabelWrapper
  * @memberof DataTable
  */
-export default withStyles(styles)(SortLabelWrapper);
+export const SortLabelWrapper = withStyles(styles)(SortLabelWrapperPlain);

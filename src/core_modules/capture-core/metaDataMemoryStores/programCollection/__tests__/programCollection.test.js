@@ -1,4 +1,4 @@
-import programCollection from '../programCollection';
+import { programCollection } from '../programCollection';
 
 jest.mock('d2-utilizr/src/isFunction', () => ({ default: () => null }));
 jest.mock('d2-utilizr/src/isDefined', () => ({ default: () => null }));

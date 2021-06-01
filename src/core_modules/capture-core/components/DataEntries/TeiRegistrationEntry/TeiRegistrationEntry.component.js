@@ -13,7 +13,7 @@ import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
-import withErrorMessagePostProcessor from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import { urlArguments } from '../../../utils/url';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 
@@ -70,7 +70,7 @@ const TeiRegistrationEntryPlain =
                       <TrackedEntityInstanceDataEntry
                           orgUnit={orgUnit}
                           formFoundation={formFoundation}
-                          programId={selectedScopeId}
+                          trackedEntityTypeId={selectedScopeId}
                           teiRegistrationMetadata={teiRegistrationMetadata}
                           id={id}
                           fieldOptions={fieldOptions}
@@ -79,7 +79,6 @@ const TeiRegistrationEntryPlain =
                           {...rest}
                       />
                       <div className={classes.marginTop}>
-
                           {
                               onSave &&
                               <Button

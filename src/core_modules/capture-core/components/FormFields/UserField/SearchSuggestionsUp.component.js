@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import SearchContext from './Search.context';
+import { SearchContext } from './Search.context';
 import defaultClasses from './searchSuggestionsUp.module.css';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
     onHighlightPrev: () => void,
 };
 
-const SearchSuggestionsUp = (props: Props) => {
+export const SearchSuggestionsUp = (props: Props) => {
     const { children, onHighlightNext, onHighlightPrev } = props;
     const listUpEl = React.useRef(null);
     React.useLayoutEffect(() => {
@@ -51,5 +51,3 @@ const SearchSuggestionsUp = (props: Props) => {
         </div>
     );
 };
-
-export default SearchSuggestionsUp;

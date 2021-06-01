@@ -1,4 +1,4 @@
-import MemoryAdapter from '../MemoryAdapter';
+import { MemoryAdapter } from '../MemoryAdapter';
 
 const storeName = 'testStore';
 const options = { name: 'testDB', version: 1, keyPath: 'id', objectStores: [storeName] };

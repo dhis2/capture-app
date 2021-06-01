@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../d2/d2Instance';
-import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
+import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
 import { getSubValues } from './getSubValues';

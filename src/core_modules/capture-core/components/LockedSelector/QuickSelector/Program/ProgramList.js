@@ -40,7 +40,7 @@ type Props = {
     },
 };
 
-const ProgramList = (props: Props) => {
+const ProgramListPlain = (props: Props) => {
     const { items, onSelect, classes } = props;
     return (
         <List className={classes.list}>
@@ -69,4 +69,4 @@ const ProgramList = (props: Props) => {
     );
 };
 
-export default withStyles(getStyles)(ProgramList);
+export const ProgramList = withStyles(getStyles)(ProgramListPlain);

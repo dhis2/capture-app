@@ -1,7 +1,7 @@
 // @flow
 import { moment } from 'capture-core-utils/moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
-import convertDataEntryToClientValues from '../../../../../DataEntry/common/convertDataEntryToClientValues';
+import { convertDataEntryToClientValues } from '../../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../../events/mainConverters';
 import { type RenderFoundation } from '../../../../../../metaData';

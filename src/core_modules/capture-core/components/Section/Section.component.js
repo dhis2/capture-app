@@ -24,6 +24,7 @@ type Props = {
     contentStyle?: ?Object,
     mainActionButton?: ?React$Element<any>,
     header?: ?React$Element<any>,
+    description?: ?React$Element<any>,
     isCollapsed?: ?boolean,
     onChangeCollapseState?: ?() => void,
     extendedCollapsibility?: boolean,
@@ -31,7 +32,7 @@ type Props = {
     className?: ?string,
 };
 
-class Section extends Component<Props> {
+class SectionPlain extends Component<Props> {
     getHeader() {
         const orgHeader = this.props.header;
 
@@ -60,6 +61,7 @@ class Section extends Component<Props> {
         return (
             <div>
                 {this.getHeader()}
+                {this.props.description}
                 <div style={accContentStyle}>
                     {mainActionButtonElement}
                     {
@@ -86,4 +88,4 @@ class Section extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(Section);
+export const Section = withStyles(styles)(SectionPlain);

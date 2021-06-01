@@ -1,5 +1,5 @@
 import indexedDB from 'fake-indexeddb';
-import IndexedDBAdapter from '../IndexedDBAdapter';
+import { IndexedDBAdapter } from '../IndexedDBAdapter';
 
 const storeName = 'testStore';
 const options = { name: 'testDB', version: 2, keyPath: 'id', objectStores: [storeName] };

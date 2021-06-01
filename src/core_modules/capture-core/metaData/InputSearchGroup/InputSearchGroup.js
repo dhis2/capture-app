@@ -5,7 +5,7 @@ import type { RenderFoundation } from '../RenderFoundation';
 
 type Searcher = (values: Object, contextProps: Object) => Promise<any>;
 
-export default class InputSearchGroup {
+export class InputSearchGroup {
     _id: string;
     _minAttributesRequiredToSearch: number;
     _searchFoundation: RenderFoundation;

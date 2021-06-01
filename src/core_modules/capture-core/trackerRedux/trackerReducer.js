@@ -4,7 +4,7 @@ import isArray from 'd2-utilizr/lib/isArray';
 import log from 'loglevel';
 import type { Reducer } from 'redux';
 
-import environments from '../constants/environments';
+import { environments } from '../constants/environments';
 
 type Action = {
     type: string,

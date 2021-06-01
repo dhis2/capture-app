@@ -12,7 +12,7 @@ const primary = {
 };
 
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
     overrides: {
         MuiButton: { // Name of the component ⚛️ / style sheet
             raisedPrimary: { // Name of the rule
@@ -102,5 +102,3 @@ theme.palette = {
     dividerForm: '#f2f4f5',
     required: red[500],
 };
-
-export default theme;

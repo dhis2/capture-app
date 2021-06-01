@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import D2SectionFields from './D2SectionFields.component';
+import { D2SectionFieldsComponent } from './D2SectionFields.component';
 import { updateField } from './D2SectionFields.actions';
 import {
     makeGetSectionValues,
@@ -41,4 +41,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 };
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeMapStateToProps, mapDispatchToProps, mergeProps, { forwardRef: true })(D2SectionFields);
+export const D2SectionFields = connect(makeMapStateToProps, mapDispatchToProps, mergeProps, { forwardRef: true })(D2SectionFieldsComponent);

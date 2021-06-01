@@ -4,7 +4,7 @@ import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import { ProgramFactory } from './factory';
 import type { TrackedEntityType, EventProgram, TrackerProgram } from '../../metaData';
 import { programCollection } from '../../metaDataMemoryStores';
-import getRulesAndVariablesFromProgramIndicators from './getRulesAndVariablesFromIndicators';
+import { getRulesAndVariablesFromProgramIndicators } from './getRulesAndVariablesFromIndicators';
 import { getUserStorageController } from '../../storageControllers';
 import { userStores as stores } from '../../storageControllers/stores';
 import type {
@@ -218,7 +218,7 @@ function postProcessPrograms(
     }
 }
 
-export default async function buildPrograms({
+export async function buildPrograms({
     cachedOptionSets,
     cachedTrackedEntityAttributes,
     cachedTrackedEntityTypes,

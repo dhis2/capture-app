@@ -35,7 +35,7 @@ type State = {
 };
 // $FlowSuppress
 // $FlowFixMe[incompatible-variance] automated comment
-class AssigneeFilter extends Component<Props, State> implements UpdatableFilterContent<Value> {
+class AssigneeFilterPlain extends Component<Props, State> implements UpdatableFilterContent<Value> {
     modeOptions: Array<Object>;
     constructor(props: Props) {
         super(props);
@@ -122,4 +122,4 @@ class AssigneeFilter extends Component<Props, State> implements UpdatableFilterC
     }
 }
 
-export default withStyles(getStyles)(AssigneeFilter);
+export const AssigneeFilter = withStyles(getStyles)(AssigneeFilterPlain);

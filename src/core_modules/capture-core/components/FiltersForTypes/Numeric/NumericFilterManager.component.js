@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import NumericFilter from './NumericFilter.component';
+import { NumericFilter } from './NumericFilter.component';
 import type { NumericFilterData } from './types';
 
 type Props = {
@@ -15,7 +15,7 @@ type State = {
     },
 };
 
-class NumericFilterManager extends React.Component<Props, State> {
+export class NumericFilterManager extends React.Component<Props, State> {
     // eslint-disable-next-line complexity
     static calculateDefaultState(filter: ?NumericFilterData) {
         return {
@@ -51,5 +51,3 @@ class NumericFilterManager extends React.Component<Props, State> {
         );
     }
 }
-
-export default NumericFilterManager;

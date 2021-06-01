@@ -1,5 +1,5 @@
 // @flow
-export default function parseNumber(stringValue: string) {
+export function parseNumber(stringValue: string) {
     stringValue = stringValue.replace(/[ ]/g, '');
     stringValue = stringValue.replace(',', '.');
     stringValue = stringValue.replace(/^[+]$/, '');

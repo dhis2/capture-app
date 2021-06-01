@@ -1,3 +1,3 @@
 // @flow
-export { default as Button } from './Button.component';
-export { default as SimpleSplitButton } from './SimpleSplitButton.component';
+export { Button } from './Button.component';
+export { SimpleSplitButton } from './SimpleSplitButton.component';

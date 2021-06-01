@@ -5,9 +5,9 @@ import Paper from '@material-ui/core/Paper';
 
 import { withStyles } from '@material-ui/core/styles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import EditEventDataEntry from './DataEntry/EditEventDataEntry.container';
-import Button from '../../Buttons/Button.component';
-import type CancelButton from '../../DataEntry/CancelButton.component';
+import { EditEventDataEntry } from './DataEntry/EditEventDataEntry.container';
+import { Button } from '../../Buttons/Button.component';
+import type { CancelButtonComponent } from '../../DataEntry/CancelButton.component';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -48,14 +48,14 @@ type Props = {
 };
 
 
-class EditEvent extends Component<Props> {
-    cancelButtonInstance: ?CancelButton;
+class EditEventPlain extends Component<Props> {
+    cancelButtonInstance: ?CancelButtonComponent;
 
     handleGoBackToAllEvents = () => {
         this.cancelButtonInstance && this.cancelButtonInstance.handleCancel();
     }
 
-    setCancelButtonInstance = (cancelButtonInstance: ?CancelButton) => {
+    setCancelButtonInstance = (cancelButtonInstance: ?CancelButtonComponent) => {
         this.cancelButtonInstance = cancelButtonInstance;
     }
 
@@ -83,4 +83,4 @@ class EditEvent extends Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(EditEvent);
+export const EditEvent = withStyles(getStyles)(EditEventPlain);

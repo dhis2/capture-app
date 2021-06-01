@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/';
 import i18n from '@dhis2/d2-i18n';
 import {
     placements,
-    withCleanUpHOC,
+    withCleanUp,
     DataEntry,
     withDataEntryField,
     withDataEntryFieldIfApplicable,
@@ -151,7 +151,7 @@ const buildGeometrySettingsFn = () => ({
         });
 
         return createComponentProps(props, {
-            label: i18n.t('Coordinate'),
+            label: 'Coordinate',
             valueConverter: value => pointDataElement.convertValue(value, valueConvertFn),
         });
     },
@@ -172,7 +172,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => viewModeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: i18n.t('Event completed'),
+            label: 'Event completed',
             id: dataElement.id,
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
@@ -186,7 +186,7 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
-const CleanUpHOC = withCleanUpHOC()(DataEntry);
+const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
@@ -224,7 +224,7 @@ const dataEntrySectionDefinitions = {
     },
 };
 
-class ViewEventDataEntry extends Component<Props> {
+class ViewEventDataEntryPlain extends Component<Props> {
     fieldOptions: { theme: Theme };
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
@@ -253,5 +253,4 @@ class ViewEventDataEntry extends Component<Props> {
     }
 }
 
-
-export default withStyles(getStyles)(ViewEventDataEntry);
+export const ViewEventDataEntryComponent = withStyles(getStyles)(ViewEventDataEntryPlain);

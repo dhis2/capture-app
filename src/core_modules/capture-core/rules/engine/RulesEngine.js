@@ -2,11 +2,11 @@
 import log from 'loglevel';
 import isString from 'd2-utilizr/lib/isString';
 import isDefined from 'd2-utilizr/lib/isDefined';
-import VariableService from './services/VariableService/VariableService';
-import ValueProcessor from './processors/ValueProcessor';
-import executeExpression from './services/executionService';
-import getDateUtils from './commonUtils/dateUtils';
-import processTypes from './processors/rulesEffectsProcessor/processTypes.const';
+import { VariableService } from './services/VariableService/VariableService';
+import { ValueProcessor } from './processors/ValueProcessor';
+import { executeExpression } from './services/executionService';
+import { getDateUtils } from './commonUtils/dateUtils';
+import { processTypes } from './processors/rulesEffectsProcessor/processTypes.const';
 import { d2Functions } from './d2Functions';
 import type {
     OutputEffects,
@@ -22,13 +22,13 @@ import type {
     RuleVariables,
     D2Functions,
 } from './rulesEngine.types';
-import inputValueConverter from './converters/inputValueConverter';
-import getRulesEffectsProcessor from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
-import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
-import momentConverter from './converters/momentConverter';
+import { inputValueConverter } from './converters/inputValueConverter';
+import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
+import { rulesEffectsValueConverter } from './converters/rulesEffectsValueConverter';
+import { momentConverter } from './converters/momentConverter';
 import { effectActions } from './effectActions.const';
-import typeKeys from './typeKeys.const';
-import trimQuotes from './commonUtils/trimQuotes';
+import { typeKeys } from './typeKeys.const';
+import { trimQuotes } from './commonUtils/trimQuotes';
 
 const convertRuleEffectDataToOutputBaseValue = (data: any, valueType: string) => {
     const convertNumber = (numberRepresentation) => {
@@ -337,7 +337,7 @@ function getProgramRuleEffects(
     return processRulesEffects(effects, processType, dataElements, trackedEntityAttributes);
 }
 
-export default class RulesEngine {
+export class RulesEngine {
     static dateUtils = getDateUtils(momentConverter)
 
     static variableService() {

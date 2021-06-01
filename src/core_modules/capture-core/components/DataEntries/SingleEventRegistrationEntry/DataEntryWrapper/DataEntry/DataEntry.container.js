@@ -3,7 +3,7 @@ import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
-import DataEntry from './DataEntry.component';
+import { DataEntryComponent } from './DataEntry.component';
 import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import {
     startAsyncUpdateFieldForNewEvent,
@@ -21,9 +21,9 @@ import {
     makeProgramNameSelector,
 } from './dataEntry.selectors';
 import { type RenderFoundation } from '../../../../../metaData';
-import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
-import withErrorMessageHandler from '../../../../../HOC/withErrorMessageHandler';
-import typeof saveTypes from './newEventSaveTypes';
+import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { withErrorMessageHandler } from '../../../../../HOC/withErrorMessageHandler';
+import typeof { newEventSaveTypes } from './newEventSaveTypes';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -88,7 +88,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onAddNote: (itemId: string, dataEntryId: string, note: string) => {
         dispatch(addNewEventNote(itemId, dataEntryId, note));
     },
-    onSetSaveTypes: (newSaveTypes: ?Array<$Values<saveTypes>>) => {
+    onSetSaveTypes: (newSaveTypes: ?Array<$Values<newEventSaveTypes>>) => {
         dispatch(setNewEventSaveTypes(newSaveTypes));
     },
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
@@ -107,6 +107,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeMapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(withErrorMessageHandler()(DataEntry)),
+export const DataEntry = connect(makeMapStateToProps, mapDispatchToProps)(
+    withLoadingIndicator()(withErrorMessageHandler()(DataEntryComponent)),
 );

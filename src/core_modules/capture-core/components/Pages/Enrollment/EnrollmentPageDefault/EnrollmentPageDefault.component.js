@@ -3,6 +3,8 @@ import React, { type ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum } from '@dhis2/ui';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
+import { WidgetEnrollment } from '../../../WidgetEnrollment';
+import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 import { WidgetFeedback } from '../../../WidgetFeedback';
 
@@ -28,25 +30,31 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-// eslint-disable-next-line arrow-body-style
-export const EnrollmentPageDefaultPlain = ({ program, classes }: PlainProps) => {
-    return (
-        <>
-            <div className={classes.title}>
-                Enrollment Dashboard
+export const EnrollmentPageDefaultPlain = ({
+    program,
+    teiId,
+    enrollmentId,
+    classes,
+}: PlainProps) => (
+    <>
+        <div className={classes.title}>Enrollment Dashboard</div>
+        <div className={classes.columns}>
+            <div className={classes.leftColumn}>
+                <WidgetStagesAndEvents stages={program.stages} />
             </div>
-            <div className={classes.columns}>
-                <div className={classes.leftColumn}>
-                    <WidgetStagesAndEvents
-                        stages={program.stages}
-                    />
-                </div>
-                <div className={classes.rightColumn}>
-                    <WidgetFeedback />
-                </div>
+            <div className={classes.rightColumn}>
+                <WidgetFeedback />
+                <WidgetProfile teiId={teiId} programId={program.id} />
+                <WidgetEnrollment
+                    teiId={teiId}
+                    enrollmentId={enrollmentId}
+                    programId={program.id}
+                />
             </div>
-        </>
-    );
-};
+        </div>
+    </>
+);
 
-export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(getStyles)(EnrollmentPageDefaultPlain);
+export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(
+    getStyles,
+)(EnrollmentPageDefaultPlain);

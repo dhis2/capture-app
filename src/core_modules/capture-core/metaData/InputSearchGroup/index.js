@@ -1,2 +1,2 @@
 // @flow
-export { default as InputSearchGroup } from './InputSearchGroup';
+export { InputSearchGroup } from './InputSearchGroup';

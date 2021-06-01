@@ -7,7 +7,7 @@ import type {
     RenderFoundation,
     ProgramStage,
 } from '../../../../../../../metaData';
-import mainPropertyNames from '../../../../../../../events/mainPropertyNames.const';
+import { mainPropertyNames } from '../../../../../../../events/mainPropertyNames.const';
 
 export const getDefaultMainConfig = (stage: ProgramStage) => {
     const baseFields = [
@@ -37,7 +37,7 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
             id: mainPropertyNames.ASSIGNEE,
             type: 'ASSIGNEE',
             apiName: 'assignedUser',
-            header: i18n.t('Assigned to'),
+            header: 'Assigned to',
             visible: true,
             isMainProperty: true,
         };

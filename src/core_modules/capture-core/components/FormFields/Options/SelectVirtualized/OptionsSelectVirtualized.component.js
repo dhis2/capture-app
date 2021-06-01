@@ -9,7 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import 'react-select/dist/react-select.css';
 import 'react-virtualized/styles.css';
 import 'react-virtualized-select/styles.css';
-import VirtualizedOption from './OptionsSelectVirtualizedOption.component';
+import { OptionsSelectVirtualizedOption } from './OptionsSelectVirtualizedOption.component';
 import type{ OptionSet, Option } from '../../../../metaData';
 
 const styles = theme => ({
@@ -119,7 +119,7 @@ type State = {
     inFocus: boolean,
 };
 
-class OptionsSelectVirtualized extends Component<Props, State> {
+class OptionsSelectVirtualizedPlain extends Component<Props, State> {
     // $FlowFixMe[incompatible-type] automated comment
     handleChange: (e: Object, index: number, value: any) => void;
     handleFocus: () => void;
@@ -201,7 +201,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
 
     renderOption({ option, style, selectValue, valueArray }: {option: virtualizedOptionConfig, style: Object, selectValue: (value: virtualizedOptionConfig) => void, valueArray: ?Array<virtualizedOptionConfig>}) {
         return (
-            <VirtualizedOption
+            <OptionsSelectVirtualizedOption
                 key={option.value}
                 option={option}
                 style={style}
@@ -282,4 +282,4 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(OptionsSelectVirtualized);
+export const OptionsSelectVirtualized = withStyles(styles)(OptionsSelectVirtualizedPlain);

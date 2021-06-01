@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import ShrinkLabel from '../internal/ShrinkLabel/ShrinkLabel.component';
+import { ShrinkLabel } from '../internal/ShrinkLabel/ShrinkLabel.component';
 import defaultClasses from './withShrinkLabel.module.css';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
     shrinkDisabled?: ?boolean,
 }
 
-export default () =>
+export const withShrinkLabel = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class ShrinkLabelHOC extends React.Component<Props> {
             renderDisabled = (props: any) => (

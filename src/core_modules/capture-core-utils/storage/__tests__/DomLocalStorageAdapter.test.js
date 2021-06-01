@@ -1,4 +1,4 @@
-import DomLocalStorageAdapter from '../DomLocalStorageAdapter';
+import { DomLocalStorageAdapter } from '../DomLocalStorageAdapter';
 
 const storeName = 'testStore';
 const options = { name: 'testDB', version: 1, keyPath: 'id', objectStores: [storeName] };

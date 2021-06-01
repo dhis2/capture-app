@@ -11,7 +11,7 @@ type State = {
     inFocus: boolean,
 };
 
-const getFocusHandler = () => (InnerComponent: React.ComponentType<any>) =>
+export const withFocusHandler = () => (InnerComponent: React.ComponentType<any>) =>
     class FocusHandlerHOC extends React.Component<Props, State> {
         inputInstance: HTMLInputElement;
         isMouseClick: boolean;
@@ -80,5 +80,3 @@ const getFocusHandler = () => (InnerComponent: React.ComponentType<any>) =>
             );
         }
     };
-
-export default getFocusHandler;

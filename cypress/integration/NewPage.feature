@@ -36,6 +36,12 @@ Feature: User creates a new entries from the registration page
     And you select the Malaria case registration program
     Then you see the registration form for the Malaria case registration
 
+  Scenario: Viewing section descriptions with organisation unit and event program Inpatient morbidity and mortality selected
+    Given you are on the default registration page
+    When you select org unit
+    And you select the Inpatient morbidity and mortality program
+    Then you see a description text for one section
+
   Scenario: Navigating to registration page without program selected
     Given you are in the main page with no selections made
     And you select org unit
@@ -151,6 +157,6 @@ Feature: User creates a new entries from the registration page
     Then you can see the first page of the results
 
   Scenario: New person in Tracker Program > Submitting without filling the form shows errors underneath the fields
-    Given you are in the WNCH / PNC program registration page
+    Given you are in the WNCH PNC program registration page
     And you click the save new submit button
     Then you see validation errors on the WHO RMNCH program registration page

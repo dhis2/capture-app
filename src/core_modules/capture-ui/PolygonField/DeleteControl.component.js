@@ -13,7 +13,7 @@ type Props = {
 }
 
 // $FlowFixMe[prop-missing] automated comment
-class DeleteControl extends MapControl<any, Props> {
+class DeleteControlPlain extends MapControl<any, Props> {
     UNSAFE_componentWillMount() {
         const deleteControl = L.control({ position: 'topright' });
         const text = i18n.t('Delete polygon');
@@ -62,4 +62,4 @@ class DeleteControl extends MapControl<any, Props> {
 }
 
 // $FlowFixMe[incompatible-call] automated comment
-export default withLeaflet(DeleteControl);
+export const DeleteControl = withLeaflet(DeleteControlPlain);

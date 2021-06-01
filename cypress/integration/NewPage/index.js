@@ -150,6 +150,19 @@ And('you select the Malaria case registration program', () => {
         .click();
 });
 
+Then('you see a description text for one section', () => {
+    cy.get('[data-test="registration-page-content"]')
+        .contains('General characteristics of the patient')
+        .should('exist');
+});
+
+When('you select the Inpatient morbidity and mortality program', () => {
+    cy.get('.Select')
+        .type('Inpatient mor');
+    cy.contains('Inpatient morbidity and mortality')
+        .click();
+});
+
 When('you see a dropdown button', () => {
     cy.get('[data-test="new-button"]')
         .contains('New')
@@ -419,7 +432,7 @@ And('you fill the Child programme registration form with a first name with value
         .blur();
 });
 
-And('you are in the WNCH / PNC program registration page', () => {
+And('you are in the WNCH PNC program registration page', () => {
     cy.visit('/#/new?programId=uy2gU8kT1jF&orgUnitId=DiszpKrYNg8');
 });
 

@@ -1,8 +1,7 @@
 // @flow
 import { moment } from 'capture-core-utils/moment';
 import { dataElementTypes } from '../metaData';
-
-import stringifyNumber from './common/stringifyNumber';
+import { stringifyNumber } from './common/stringifyNumber';
 
 type RangeValue = {
     from: any,

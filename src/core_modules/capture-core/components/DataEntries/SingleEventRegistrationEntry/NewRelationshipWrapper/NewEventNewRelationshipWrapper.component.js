@@ -3,9 +3,9 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
-import NewRelationship from '../../../Pages/NewRelationship/NewRelationship.container';
-import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
-import LinkButton from '../../../Buttons/LinkButton.component';
+import { NewRelationship } from '../../../Pages/NewRelationship/NewRelationship.container';
+import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
+import { LinkButton } from '../../../Buttons/LinkButton.component';
 
 
 const getStyles = theme => ({
@@ -42,7 +42,8 @@ const getStyles = theme => ({
 });
 
 type Props = {
-    onCancel: () => void,
+    onCancel: (dataEntryid: string) => void,
+    dataEntryKey: string,
     classes: {
         headerContainer: string,
         header: string,
@@ -122,7 +123,7 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
                     text={i18n.t('Leaving this page will discard the selections you made for a new relationship')}
                     confirmText={i18n.t('Yes, discard')}
                     cancelText={i18n.t('No, stay here')}
-                    onConfirm={this.props.onCancel}
+                    onConfirm={() => this.props.onCancel('relationship')}
                     open={!!this.state.discardDialogOpen}
                     onCancel={this.handleCancelDiscard}
                 />
@@ -131,4 +132,4 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(getStyles)(NewEventNewRelationshipWrapper);
+export const NewRelationshipWrapperComponent = withStyles(getStyles)(NewEventNewRelationshipWrapper);

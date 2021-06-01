@@ -1,5 +1,5 @@
 // @flow
-export default class WebWorker {
+export class WebWorker {
     constructor(worker: string) {
         const code = worker.toString();
         const blob = new Blob([`(${code})()`]);

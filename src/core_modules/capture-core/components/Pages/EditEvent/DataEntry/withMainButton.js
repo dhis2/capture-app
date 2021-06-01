@@ -48,7 +48,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
 
 const mapDispatchToProps = () => ({});
 
-export default () =>
+export const withMainButton = () =>
     (InnerComponent: React.ComponentType<any>) =>
 
         // $FlowFixMe[missing-annot] automated comment

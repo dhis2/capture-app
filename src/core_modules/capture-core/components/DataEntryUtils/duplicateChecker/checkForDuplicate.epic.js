@@ -6,7 +6,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import type { RenderFoundation } from '../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../converters';
-import getDataEntryKey from '../../DataEntry/common/getDataEntryKey';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { checkForDuplicateActionTypes, checkForDuplicateSuccess, checkForDuplicateError } from './checkForDuplicate.actions';
 
 const getSearchValues = (

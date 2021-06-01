@@ -5,8 +5,8 @@ import i18n from '@dhis2/d2-i18n';
 import { Paper } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Button } from '@dhis2/ui';
-import DataEntry from './DataEntry/DataEntry.container';
-import EventsList from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';
+import { DataEntry } from './DataEntry/DataEntry.container';
+import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';
 import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
@@ -55,7 +55,10 @@ const NewEventDataEntryWrapperPlain = ({
     return (
         <Paper className={classes.paper}>
             <div className={classes.title} >
-                ${i18n.t('New')} {titleText}
+                {i18n.t('New {{titleText}}', {
+                    titleText,
+                    interpolation: { escapeValue: false },
+                })}
             </div>
 
             <div className={classes.flexContainer}>

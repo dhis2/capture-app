@@ -1,2 +1,2 @@
 // @flow
-export { default as OptionSetFactory } from './OptionSetFactory';
+export { OptionSetFactory } from './OptionSetFactory';

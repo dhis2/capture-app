@@ -68,7 +68,7 @@ const fieldForTypes: FieldForTypes = {
     [dataElementTypes.UNKNOWN]: () => null,
 };
 
-export default function getDefaultFormField(metaData: DataElement, options: Object, context: Object) {
+export function getDefaultFormField(metaData: DataElement, options: Object, context: Object) {
     if (options.viewMode) {
         return getViewModeFieldConfig(metaData, options);
     }

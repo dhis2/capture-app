@@ -7,7 +7,7 @@ type Props = {
     className?: ?string,
 };
 
-const DividerHorizontal = (props: Props) => {
+export const DividerHorizontal = (props: Props) => {
     const { className, ...passOnProps } = props;
     const calculatedClassNames = classNames(defaultClasses.horizontal, props.className);
 
@@ -19,5 +19,3 @@ const DividerHorizontal = (props: Props) => {
         />
     );
 };
-
-export default DividerHorizontal;

@@ -6,8 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp';
 import { withStyles } from '@material-ui/core/styles';
-import Button from './ButtonOld.component';
-import ProgressButton from './ProgressButton.component';
+import { Button } from './ButtonOld.component';
+import { ProgressButton } from './ProgressButton.component';
 
 const styles = () => ({
     buttonsContainer: {
@@ -55,7 +55,7 @@ type State = {
     anchorElement: ?Object,
 }
 
-class MultiButton extends React.Component<Props, State> {
+class MultiButtonPlain extends React.Component<Props, State> {
     buttonInstance: ?Object;
     arrowInstance: ?Object;
     constructor(props) {
@@ -135,5 +135,4 @@ class MultiButton extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(MultiButton);
-
+export const MultiButton = withStyles(styles)(MultiButtonPlain);

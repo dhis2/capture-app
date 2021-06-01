@@ -31,7 +31,7 @@ const styles = () => ({
     },
 });
 
-class StickyOnScroll extends React.Component<Props> {
+class StickyOnScrollPlain extends React.Component<Props> {
     stickyContainer: any;
     scrollTimer: any;
     resizeTimer: any;
@@ -129,4 +129,4 @@ class StickyOnScroll extends React.Component<Props> {
     }
 }
 
-export default withStyles(styles)(StickyOnScroll);
+export const StickyOnScroll = withStyles(styles)(StickyOnScrollPlain);

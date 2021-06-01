@@ -30,7 +30,7 @@ type Props = {
     muiButtonRef: (muiButtonInstance: any) => void,
 };
 
-const LinkButton = (props: Props) => {
+const LinkButtonPlain = (props: Props) => {
     const { classes, children, muiClasses, muiButtonRef, className, ...passOnProps } = props;
     return (
         // $FlowFixMe[cannot-spread-inexact] automated comment
@@ -43,4 +43,4 @@ const LinkButton = (props: Props) => {
     );
 };
 
-export default withStyles(styles)(LinkButton);
+export const LinkButton = withStyles(styles)(LinkButtonPlain);

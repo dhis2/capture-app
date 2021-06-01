@@ -13,9 +13,9 @@ import {
     withDisabledFieldCalculation,
     withCustomElementContainer,
 } from '../internal';
-import ImageField from '../../../../FormFields/Image/D2Image.component';
+import { D2Image } from '../../../../FormFields/Image/D2Image.component';
 
-export default withGotoInterface()(
+export const ImageFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withDisabledFieldCalculation()(
@@ -25,7 +25,7 @@ export default withGotoInterface()(
                             withDisplayMessages()(
                                 withCustomElementContainer()(
                                     withInternalChangeHandler()(
-                                        ImageField,
+                                        D2Image,
                                     ),
                                 ),
                             ),

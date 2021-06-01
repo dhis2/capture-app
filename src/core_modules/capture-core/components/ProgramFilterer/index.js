@@ -1,2 +1,2 @@
 // @flow
-export { default as ProgramFilterer } from './ProgramFilterer.component';
+export { ProgramFilterer } from './ProgramFilterer.component';

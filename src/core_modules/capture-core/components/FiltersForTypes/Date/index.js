@@ -1,2 +1,2 @@
 // @flow
-export { default as DateFilter } from './DateFilterManager.component';
+export { DateFilterManager as DateFilter } from './DateFilterManager.component';

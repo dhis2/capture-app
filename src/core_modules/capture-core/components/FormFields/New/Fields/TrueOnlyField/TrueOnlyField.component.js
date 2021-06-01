@@ -24,7 +24,7 @@ type Props = {
     onBlur: (value: any, event: any) => void,
 };
 
-class TrueOnlyField extends React.Component<Props> {
+class TrueOnlyFieldPlain extends React.Component<Props> {
     render() {
         const { onBlur, ...passOnProps } = this.props;
         return (
@@ -37,4 +37,4 @@ class TrueOnlyField extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(TrueOnlyField);
+export const TrueOnlyField = withStyles(getStyles)(TrueOnlyFieldPlain);

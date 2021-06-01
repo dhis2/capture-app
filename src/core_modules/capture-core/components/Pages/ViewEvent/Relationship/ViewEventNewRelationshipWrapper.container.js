@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { eventCancelNewRelationship, requestAddEventRelationship } from './ViewEventRelationships.actions';
-import NewRelationshipWrapper from './ViewEventNewRelationshipWrapper.component';
+import { ViewEventNewRelationshipWrapperComponent } from './ViewEventNewRelationshipWrapper.component';
 import { makeRelationshipTypesSelector } from './ViewEventNewRelationshipWrapper.selectors';
 
 const makeMapStateToProps = () => {
@@ -31,4 +31,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(makeMapStateToProps, mapDispatchToProps)(NewRelationshipWrapper);
+export const ViewEventNewRelationshipWrapper = connect(makeMapStateToProps, mapDispatchToProps)(
+    ViewEventNewRelationshipWrapperComponent,
+);

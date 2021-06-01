@@ -93,4 +93,4 @@ class RulesValueConverter implements IConvertInputRulesValue {
     }
 }
 
-export default new RulesValueConverter();
+export const inputValueConverter = new RulesValueConverter();

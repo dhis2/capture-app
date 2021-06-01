@@ -1,7 +1,7 @@
 // @flow
-import cleanUpCommon from 'capture-core/cleanUp/cleanUp';
+import { cleanUpCommon } from 'capture-core/cleanUp/cleanUp';
 
-export default function addBeforeUnloadEventListener(store: ReduxStore) {
+export function addBeforeUnloadEventListener(store: ReduxStore) {
     window.addEventListener('beforeunload', async (e) => {
         cleanUpCommon(store);
 

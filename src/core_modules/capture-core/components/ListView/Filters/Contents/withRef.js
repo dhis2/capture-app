@@ -5,7 +5,7 @@ type Props = {
     filterTypeRef: (instance: any) => void,
 };
 
-export default () => (InnerComponent: React.ComponentType<any>) => (props: Props) => {
+export const withRef = () => (InnerComponent: React.ComponentType<any>) => (props: Props) => {
     const { filterTypeRef, ...passOnProps } = props;
     return (
         // $FlowFixMe[cannot-spread-inexact] automated comment

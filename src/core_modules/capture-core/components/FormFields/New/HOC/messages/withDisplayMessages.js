@@ -169,6 +169,6 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
-export default () =>
+export const withDisplayMessages = () =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(styles)(getDisplayMessagesHOC(InnerComponent));

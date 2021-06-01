@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { moment } from 'capture-core-utils/moment';
 import { convertMomentToDateFormatString } from '../../../utils/converters/date';
-import DateFilter from './DateFilter.component';
+import { DateFilter } from './DateFilter.component';
 import { mainOptionKeys } from './mainOptions';
 import { dateFilterTypes } from './constants';
 import type { DateFilterData } from './types';
@@ -17,7 +17,7 @@ type State = {
     value?: Value,
 };
 
-class DateFilterManager extends React.Component<Props, State> {
+export class DateFilterManager extends React.Component<Props, State> {
     static convertDateForEdit(rawValue: string) {
         const momentInstance = moment(rawValue);
         return convertMomentToDateFormatString(momentInstance);
@@ -68,5 +68,3 @@ class DateFilterManager extends React.Component<Props, State> {
         );
     }
 }
-
-export default DateFilterManager;

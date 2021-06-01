@@ -25,7 +25,7 @@ type Field = {
     }
 };
 
-export default () => (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
+export const withDivider = () => (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
     class DividerHOC extends React.Component<Props> {
         renderDivider = (index: number, total: number, field: Field) => {
             if ((field.props && field.props.hidden) || (index + 1) >= total) {

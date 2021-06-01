@@ -24,7 +24,7 @@ type Props = {
     onBlur: (value: any, event: any) => void,
 };
 
-class BooleanField extends React.Component<Props> {
+class BooleanFieldPlain extends React.Component<Props> {
     render() {
         const { onBlur, ...passOnProps } = this.props;
         return (
@@ -37,4 +37,4 @@ class BooleanField extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(BooleanField);
+export const BooleanField = withStyles(getStyles)(BooleanFieldPlain);

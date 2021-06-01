@@ -4,7 +4,7 @@ import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { PolygonFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
-const getPolygonField = (metaData: MetaDataElement) => {
+export const getPolygonFieldConfigForCustomForm = (metaData: MetaDataElement) => {
     const props = createProps({
         orientation: orientations.HORIZONTAL,
         shrinkDisabled: false,
@@ -15,5 +15,3 @@ const getPolygonField = (metaData: MetaDataElement) => {
         props,
     }, metaData);
 };
-
-export default getPolygonField;

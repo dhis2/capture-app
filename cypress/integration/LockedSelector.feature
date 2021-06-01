@@ -163,7 +163,7 @@ Feature: User uses the LockedSelector to navigate
 
   Scenario: Enrollment page > resetting the program
     Given you land on the enrollment page by having typed only the enrollmentId on the url
-    When you reset the program selection
+    When you wait to reset the program selection
     And you see message explaining you need to select a program
 
   Scenario: Enrollment page > resetting the org unit
@@ -173,7 +173,7 @@ Feature: User uses the LockedSelector to navigate
 
   Scenario: Enrollment page > resetting the enrollment
     Given you land on the enrollment page by having typed only the enrollmentId on the url
-    When you reset the enrollment selection
+    When you wait to reset the enrollment selection
     And you see message explaining you need to select an enrollment
 
   Scenario: Enrollment page > navigating using the locked selector

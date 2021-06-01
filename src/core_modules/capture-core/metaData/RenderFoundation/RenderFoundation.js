@@ -5,14 +5,14 @@ import { errorCreator } from 'capture-core-utils';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { ProgramRule } from '../../rules/engine';
 import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
-import type Section from './Section';
-import type CustomForm from './CustomForm';
-import type DataElement, { ConvertFn } from '../DataElement/DataElement';
+import type { Section } from './Section';
+import type { CustomForm } from './CustomForm';
+import type { DataElement, ConvertFn } from '../DataElement/DataElement';
 import type { Access } from '../Access';
 import { convertDataElementsValues } from '../helpers';
 import type { ValuesType } from '../helpers/DataElements/convertValues';
 
-export default class RenderFoundation {
+export class RenderFoundation {
     static errorMessages = {
         UNSUPPORTED_VALIDATION_STRATEGY: 'Tried to set an unsupported validation strategy',
     };

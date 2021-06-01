@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { OrgUnitField } from '../../FormFields/New';
+import { OrgUnitField as BasicOrgUnitField } from '../../FormFields/New';
 import { searchOrgUnits, clearOrgUnitsSearch } from './actions/orgUnitList.actions';
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
@@ -23,4 +23,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(OrgUnitField);
+export const OrgUnitField = connect(mapStateToProps, mapDispatchToProps)(BasicOrgUnitField);

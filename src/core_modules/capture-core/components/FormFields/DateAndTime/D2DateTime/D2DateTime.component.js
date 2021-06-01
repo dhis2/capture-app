@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 
-import D2Date from '../D2Date/D2Date.component';
-import D2TextField from '../../Generic/D2TextField.component';
+import { D2Date } from '../D2Date/D2Date.component';
+import { D2TextField } from '../../Generic/D2TextField.component';
 
 type Value = {
     date?: ?string,
@@ -51,7 +51,7 @@ const styles = theme => ({
     },
 });
 
-class D2DateTime extends Component<Props, State> {
+class D2DateTimePlain extends Component<Props, State> {
     handleTimeChange: (timeValue: string) => void;
     handleDateChange: (dateValue: string) => void;
     handleTimeBlur: (timeValue: string) => void;
@@ -179,4 +179,4 @@ class D2DateTime extends Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(D2DateTime);
+export const D2DateTime = withStyles(styles)(D2DateTimePlain);
