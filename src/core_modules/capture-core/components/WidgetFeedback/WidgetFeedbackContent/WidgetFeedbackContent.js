@@ -3,20 +3,24 @@
 import React, { type ComponentType } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import type { contentProps } from '../WidgetFeedback.types';
+import type { Props } from '../WidgetFeedback.types';
 
 const styles = {
     container: {
         padding: `0px ${spacersNum.dp16}px`,
     },
     unorderedList: {
-        paddingLeft: '20px',
+        paddingLeft: '15px',
+        marginTop: '0px',
         lineHeight: '1.375',
         fontSize: '14px',
         color: '#212934',
     },
     noFeedbackText: {
         color: '#6B7280',
+        paddingLeft: '15px',
+        fontSize: '14px',
+        marginTop: '0px',
     },
     listItem: {
         marginBottom: '5px',
@@ -26,31 +30,33 @@ const styles = {
     },
 };
 
-const WidgetFeedbackContentComponent = ({ feedbackDisplayText, feedbackKeyValuePair, classes }: contentProps) => {
+const WidgetFeedbackContentComponent = ({ displayText, displayKeyValue, classes }: Props) => {
+    if ((!displayText || displayText.length <= 0) && (!displayKeyValue || displayKeyValue.length <= 0)) {
+        return <p className={classes.noFeedbackText}>No feedback for this enrollment yet</p>;
+    }
 
     return (
         <div className={classes.container}>
-            {!feedbackDisplayText.length > 0 && !feedbackKeyValuePair.length > 0 ?
-                <p className={classes.noFeedbackText}>No feedback for this enrollment yet</p> : <ul className={classes.unorderedList}>
-                    {feedbackDisplayText && feedbackDisplayText.length > 0 ? feedbackDisplayText.map(item => (
+            <ul className={classes.unorderedList}>
+                {displayText && displayText.length > 0 ? displayText.map(item => (
+                    item.message && (
                         <li
                             className={classes.listItem}
-                            key={item.displayText.id}
+                            key={item.id}
                         >
-                            {item.displayText.message}
-                        </li>)) : null}
-                    {feedbackKeyValuePair && feedbackKeyValuePair.length > 0 ? feedbackKeyValuePair.map(item => (
+                            {item.message}
+                        </li>))) : null}
+                {displayKeyValue && displayKeyValue.length > 0 ? displayKeyValue.map(item => (
+                    item.key && item.value && (
                         <li
                             key={item.id}
                             className={classes.listItem}
                         >
-                            {item.displayKeyValuePair.key}: {item.displayKeyValuePair.value}
-                        </li>)) : null}
-                </ul>
-            }
-
+                            {item.key}: {item.value}
+                        </li>))) : null}
+            </ul>
         </div>
     );
 };
 
-export const WidgetFeedbackContent: ComponentType<$Diff<contentProps, CssClasses>> = withStyles(styles)(WidgetFeedbackContentComponent);
+export const WidgetFeedbackContent: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetFeedbackContentComponent);

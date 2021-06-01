@@ -5,9 +5,9 @@ import { Widget } from '../Widget';
 import type { Props } from './WidgetFeedback.types';
 import { WidgetFeedbackContent } from './WidgetFeedbackContent/WidgetFeedbackContent';
 
-export const WidgetFeedback = ({ classes }: Props) => {
+export const WidgetFeedback = ({ displayText, displayKeyValue, classes }: Props) => {
     const [openStatus, setOpenStatus] = useState(false);
-    const { feedbackDisplayText, feedbackKeyValuePair } = {};
+
     return (
         <div
             className={classes}
@@ -19,8 +19,8 @@ export const WidgetFeedback = ({ classes }: Props) => {
                 open={openStatus}
             >
                 <WidgetFeedbackContent
-                    feedbackDisplayText={feedbackDisplayText}
-                    feedbackKeyValuePair={feedbackKeyValuePair}
+                    displayText={displayText}
+                    displayKeyValue={displayKeyValue}
                 />
             </Widget>
         </div>
