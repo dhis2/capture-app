@@ -29,11 +29,6 @@ const getStyles = ({ typography }) => ({
         paddingBottom: spacersNum.dp16,
     },
 });
-const showError =
-    [
-        { id: 'asjdl', message: 'This enrollment has reported critical values. Review latest data values.' },
-        'It is suggested that an explanation is provided when the Apgar score is below 4',
-    ];
 
 export const EnrollmentPageDefaultPlain = ({
     program,
