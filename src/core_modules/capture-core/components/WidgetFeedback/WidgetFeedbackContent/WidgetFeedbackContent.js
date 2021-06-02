@@ -11,7 +11,7 @@ const styles = {
         padding: `0px ${spacersNum.dp16}px`,
     },
     unorderedList: {
-        paddingLeft: '15px',
+        paddingLeft: spacersNum.dp16,
         marginTop: '0px',
         lineHeight: '1.375',
         fontSize: '14px',
@@ -19,13 +19,13 @@ const styles = {
     },
     noFeedbackText: {
         color: colors.grey600,
-        paddingLeft: '15px',
+        paddingLeft: spacersNum.dp16,
         fontWeight: 400,
         fontSize: '14px',
         marginTop: '0px',
     },
     listItem: {
-        marginBottom: '5px',
+        marginBottom: spacersNum.dp4,
         '&::marker': {
             color: colors.grey500,
         },
@@ -34,30 +34,32 @@ const styles = {
 
 
 const WidgetFeedbackContentComponent = ({ displayText, displayKeyValue, classes }: Props) => {
-    if ((!displayText || displayText.length <= 0) && (!displayKeyValue || displayKeyValue.length <= 0)) {
+    if (!displayText?.length > 0 && !displayKeyValue?.length > 0) {
         return <p className={classes.noFeedbackText}>{i18n.t('No feedback for this enrollment yet')}</p>;
     }
 
     const renderText = () => (
-        displayText && displayText.length > 0 ? displayText.map(item => (
+        displayText?.map(item => (
             item.message && (
                 <li
                     className={classes.listItem}
                     key={item.id}
                 >
                     {item.message}
-                </li>))) : null
+                </li>
+            )))
     );
 
     const renderKeyValue = () => (
-        displayKeyValue && displayKeyValue.length > 0 ? displayKeyValue.map(item => (
+        displayKeyValue?.map(item => (
             item.key && item.value && (
                 <li
                     key={item.id}
                     className={classes.listItem}
                 >
                     {item.key}: {item.value}
-                </li>))) : null
+                </li>
+            )))
     );
 
     return (
