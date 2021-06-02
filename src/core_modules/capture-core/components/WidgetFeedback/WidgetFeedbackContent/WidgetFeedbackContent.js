@@ -34,7 +34,7 @@ const styles = {
 
 
 const WidgetFeedbackContentComponent = ({ displayText, displayKeyValue, classes }: Props) => {
-    if (!displayText?.length > 0 && !displayKeyValue?.length > 0) {
+    if (!displayText?.length && !displayKeyValue?.length) {
         return <p className={classes.noFeedbackText}>{i18n.t('No feedback for this enrollment yet')}</p>;
     }
 
