@@ -43,7 +43,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetStagesAndEvents stages={program.stages} />
             </div>
             <div className={classes.rightColumn}>
-                <WidgetError showError={showError} />
+                <WidgetError />
                 <WidgetProfile teiId={teiId} programId={program.id} />
                 <WidgetEnrollment
                     teiId={teiId}
