@@ -1,9 +1,10 @@
 // @flow
+
 import { colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import React from 'react';
 import type { ComponentType } from 'react';
-import type { contentTypes, renderListItemType } from './WidgetErrorContent.types';
+import type { contentTypes, renderObjectType, renderStringType } from './WidgetErrorContent.types';
 
 const styles = {
     widgetWrapper: {
@@ -28,7 +29,7 @@ const styles = {
     },
 };
 
-const RenderObjectItem = ({ rule, listItem }: renderListItemType) => (
+const RenderObjectItem = ({ rule, listItem }: renderObjectType) => (
     <li
         key={rule.id}
         className={listItem}
@@ -38,7 +39,7 @@ const RenderObjectItem = ({ rule, listItem }: renderListItemType) => (
 );
 
 
-const RenderStringItem = ({ rule, listItem, index }: renderListItemType) => (
+const RenderStringItem = ({ rule, listItem, index }: renderStringType) => (
     <li
         key={index}
         className={listItem}
