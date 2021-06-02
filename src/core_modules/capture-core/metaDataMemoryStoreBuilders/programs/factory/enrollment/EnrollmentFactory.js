@@ -147,8 +147,8 @@ export class EnrollmentFactory {
             cachedProgramSections.asyncForEach(async (programSection) => {
                 let trackedEntityAttributes;
                 if (cachedProgram.trackedEntityTypeId) {
-                    const TEFTLabel = this.cachedTrackedEntityTypes.get(cachedProgram.trackedEntityTypeId)?.displayName;
-                    section = await this._buildSection(trackedEntityAttributes, cachedProgram.trackedEntityTypeId, TEFTLabel, cachedProgram.trackedEntityTypeId);
+                    const trackedEntityTypeName = this.cachedTrackedEntityTypes.get(cachedProgram.trackedEntityTypeId)?.displayName;
+                    section = await this._buildSection(trackedEntityAttributes, cachedProgram.trackedEntityTypeId, trackedEntityTypeName, cachedProgram.trackedEntityTypeId);
                     section && enrollmentForm.addSection(section);
                 }
                 if (cachedProgramTrackedEntityAttributes &&
