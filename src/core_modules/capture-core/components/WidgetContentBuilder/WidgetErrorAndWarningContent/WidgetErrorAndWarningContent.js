@@ -3,28 +3,46 @@
 import React from 'react';
 import { colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import type { ComponentType } from 'react';
+import cx from 'classnames';
 import type { contentTypes, renderObjectType, renderStringType } from './WidgetErrorAndWarningContent.types';
 
 const styles = {
     widgetWrapper: {
-        backgroundColor: colors.red100,
         display: 'flex',
         flexDirection: 'column',
         padding: '10px 0',
+        '&.warning': {
+            backgroundColor: colors.yellow050,
+        },
+        '&.error': {
+            backgroundColor: colors.red100,
+        },
     },
     unorderedList: {
         paddingLeft: '15px',
         margin: '0px',
         lineHeight: '1.375',
         fontSize: '14px',
-        color: colors.gray900,
+        '&.warning': {
+            color: colors.grey900,
+        },
+        '&.error': {
+            color: colors.red200,
+        },
     },
     listItem: {
         padding: '5px',
-        '&::marker': {
-            content: '"!"',
-            color: colors.red800,
+        '&.error': {
+            '&::marker': {
+                content: '"!"',
+                color: colors.red800,
+            },
+        },
+        '&.warning': {
+            '&::marker': {
+                content: '"•"',
+                color: colors.yellow900,
+            },
         },
     },
 };
@@ -47,17 +65,34 @@ const RenderStringItem = ({ rule, listItem }: renderStringType) => (
     </li>
 );
 
+const widgetType = Object.freeze({
+    WARNING: 'warning',
+    ERROR: 'error',
+});
 
-const WidgetErrorAndWarningContentPlain = ({ widgetData, classes }: contentTypes) => {
+
+const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: contentTypes) => {
+    const warning = type === widgetType.WARNING;
+    const error = type === widgetType.ERROR;
     return (
-        <div className={classes.widgetWrapper}>
-            <ul className={classes.unorderedList}>
+        <div className={cx(classes.widgetWrapper, {
+            warning,
+            error,
+        })}
+        >
+            <ul className={cx(classes.unorderedList, {
+                warning,
+            })}
+            >
                 {widgetData && widgetData.map((rule, index) => {
                     if (typeof rule === 'string') {
                         return (
                             <RenderStringItem
                                 rule={rule}
-                                listItem={classes.listItem}
+                                listItem={cx(classes.listItem, {
+                                    warning,
+                                    error,
+                                })}
                                 key={index}
                             />
                         );
@@ -66,7 +101,10 @@ const WidgetErrorAndWarningContentPlain = ({ widgetData, classes }: contentTypes
                             <RenderObjectItem
                                 rule={rule}
                                 key={rule.id}
-                                listItem={classes.listItem}
+                                listItem={cx(classes.listItem, {
+                                    warning,
+                                    error,
+                                })}
                             />
                         );
                     }
@@ -77,4 +115,4 @@ const WidgetErrorAndWarningContentPlain = ({ widgetData, classes }: contentTypes
     );
 };
 
-export const WidgetErrorAndWarningContent: ComponentType<$Diff<contentTypes, CssClasses>> = withStyles(styles)(WidgetErrorAndWarningContentPlain);
+export const WidgetErrorAndWarningContent = withStyles(styles)(WidgetErrorAndWarningContentPlain);

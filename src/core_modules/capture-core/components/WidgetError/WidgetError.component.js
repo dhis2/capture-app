@@ -8,6 +8,7 @@ import { WidgetErrorAndWarningContent } from '../WidgetContentBuilder/WidgetErro
 
 export const WidgetError = ({ showError, classes }: Props) => {
     const [openStatus, setOpenStatus] = useState(true);
+    const widgetType = 'error';
 
     if (!showError || !showError.length) {
         return null;
@@ -24,7 +25,10 @@ export const WidgetError = ({ showError, classes }: Props) => {
                 onOpen={() => setOpenStatus(true)}
                 onClose={() => setOpenStatus(false)}
             >
-                <WidgetErrorAndWarningContent widgetData={showError} />
+                <WidgetErrorAndWarningContent
+                    widgetData={showError}
+                    type={widgetType}
+                />
             </Widget>
         </div>
     );
