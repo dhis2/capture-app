@@ -1,5 +1,5 @@
 // @flow
-import type { rule } from '../WidgetError.types';
+import type { rule } from '../../WidgetError/WidgetError.types';
 
 export type contentTypes = {|
     widgetData: Array<rule> | Array<string>,
@@ -14,6 +14,6 @@ export type renderObjectType = {|
 export type renderStringType = {|
     rule: string,
     listItem: string,
-    index: number,
+    index?: number,
 |}
 

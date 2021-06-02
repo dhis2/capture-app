@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../Widget';
 import type { Props } from './WidgetError.types';
-import { WidgetErrorContent } from './WidgetErrorContent/WidgetErrorContent';
+import { WidgetErrorAndWarningContent } from '../WidgetContentBuilder/WidgetErrorAndWarningContent/WidgetErrorAndWarningContent';
 
 
 export const WidgetError = ({ showError, classes }: Props) => {
     const [openStatus, setOpenStatus] = useState(true);
 
-    if (!showError || showError.length === 0) {
+    if (!showError || !showError.length) {
         return null;
     }
 
@@ -24,7 +24,7 @@ export const WidgetError = ({ showError, classes }: Props) => {
                 onOpen={() => setOpenStatus(true)}
                 onClose={() => setOpenStatus(false)}
             >
-                <WidgetErrorContent widgetData={showError} />
+                <WidgetErrorAndWarningContent widgetData={showError} />
             </Widget>
         </div>
     );
