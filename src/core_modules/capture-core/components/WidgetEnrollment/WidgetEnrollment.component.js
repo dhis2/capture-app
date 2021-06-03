@@ -47,7 +47,7 @@ export const WidgetEnrollmentPlain = ({
     refetch,
     error,
     loading,
-    callbackDelete,
+    onDelete,
 }: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
 
@@ -200,7 +200,7 @@ export const WidgetEnrollmentPlain = ({
                         <Actions
                             enrollment={enrollment}
                             refetch={refetch}
-                            callbackDelete={callbackDelete}
+                            onDelete={onDelete}
                         />
                     </div>
                 )}

@@ -17,8 +17,8 @@ const styles = {
 
 export const ActionsPlain = ({
     enrollment = {},
-    updateAction,
-    deleteAction,
+    onUpdate,
+    onDelete,
     classes,
 }: PlainProps) => (
     <>
@@ -32,20 +32,20 @@ export const ActionsPlain = ({
                     <FlyoutMenu dense maxWidth="250px">
                         <Complete
                             enrollment={enrollment}
-                            updateAction={updateAction}
+                            onUpdate={onUpdate}
                         />
                         <Followup
                             enrollment={enrollment}
-                            updateAction={updateAction}
+                            onUpdate={onUpdate}
                         />
                         <MenuDivider />
                         <Cancel
                             enrollment={enrollment}
-                            updateAction={updateAction}
+                            onUpdate={onUpdate}
                         />
                         <Delete
                             enrollment={enrollment}
-                            deleteAction={deleteAction}
+                            onDelete={onDelete}
                         />
                     </FlyoutMenu>
                 </span>

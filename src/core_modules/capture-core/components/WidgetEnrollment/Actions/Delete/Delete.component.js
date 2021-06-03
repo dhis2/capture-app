@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './delete.types';
 
-export const Delete = ({ enrollment, deleteAction }: Props) => {
+export const Delete = ({ enrollment, onDelete }: Props) => {
     const [toggle, setToggle] = useState(false);
 
     return (
@@ -46,7 +46,7 @@ export const Delete = ({ enrollment, deleteAction }: Props) => {
                             </Button>
                             <Button
                                 destructive
-                                onClick={() => deleteAction(enrollment)}
+                                onClick={() => onDelete(enrollment)}
                             >
                                 {i18n.t('Yes, delete enrollment.')}
                             </Button>

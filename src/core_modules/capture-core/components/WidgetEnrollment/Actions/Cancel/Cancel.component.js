@@ -5,13 +5,13 @@ import i18n from '@dhis2/d2-i18n';
 import type { Props } from './cancel.types';
 import { plainStatus } from '../../constants/status.const';
 
-export const Cancel = ({ enrollment, updateAction }: Props) =>
+export const Cancel = ({ enrollment, onUpdate }: Props) =>
     (enrollment.status === plainStatus.CANCELLED ? (
         <MenuItem
             dense
             dataTest="widget-enrollment-actions-reactivate"
             onClick={() =>
-                updateAction({
+                onUpdate({
                     ...enrollment,
                     status: plainStatus.ACTIVE,
                 })
@@ -24,7 +24,7 @@ export const Cancel = ({ enrollment, updateAction }: Props) =>
             dense
             dataTest="widget-enrollment-actions-cancel"
             onClick={() =>
-                updateAction({
+                onUpdate({
                     ...enrollment,
                     status: plainStatus.CANCELLED,
                 })

@@ -5,7 +5,7 @@ export type Props = {|
     teiId: string,
     enrollmentId: string,
     programId: string,
-    callbackDelete: () => void,
+    onDelete: () => void,
 |};
 
 export type PlainProps = {|
@@ -15,6 +15,6 @@ export type PlainProps = {|
     refetch: QueryRefetchFunction,
     error?: FetchError,
     loading: boolean,
-    callbackDelete: () => void,
+    onDelete: () => void,
     ...CssClasses,
 |};

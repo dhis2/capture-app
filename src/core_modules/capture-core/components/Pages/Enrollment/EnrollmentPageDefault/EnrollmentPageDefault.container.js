@@ -25,7 +25,7 @@ export const EnrollmentPageDefault = () => {
 
     const { program } = useProgramInfo(programId);
 
-    const callbackDelete = () => {
+    const onDelete = () => {
         history.push(
             `/enrollment?${urlArguments({ orgUnitId, programId, teiId })}`,
         );
@@ -36,7 +36,7 @@ export const EnrollmentPageDefault = () => {
             teiId={teiId}
             program={program}
             enrollmentId={enrollmentId}
-            callbackDelete={callbackDelete}
+            onDelete={onDelete}
         />
     );
 };

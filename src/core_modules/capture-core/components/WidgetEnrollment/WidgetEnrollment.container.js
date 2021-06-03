@@ -7,7 +7,7 @@ import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
 import type { Props } from './enrollment.types';
 
-export const WidgetEnrollment = ({ teiId, enrollmentId, programId, callbackDelete }: Props) => {
+export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete }: Props) => {
     const {
         error: errorEnrollment,
         enrollment,
@@ -24,7 +24,7 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId, callbackDelet
             refetch={refetch}
             ownerOrgUnit={{ id: ownerOrgUnit, displayName }}
             loading={!(enrollment && program && displayName)}
-            callbackDelete={callbackDelete}
+            onDelete={onDelete}
             error={
                 errorEnrollment ||
                 errorProgram ||

@@ -33,7 +33,7 @@ export const EnrollmentPageDefaultPlain = ({
     program,
     teiId,
     enrollmentId,
-    callbackDelete,
+    onDelete,
     classes,
 }: PlainProps) => (
     <>
@@ -48,7 +48,7 @@ export const EnrollmentPageDefaultPlain = ({
                     teiId={teiId}
                     enrollmentId={enrollmentId}
                     programId={program.id}
-                    callbackDelete={callbackDelete}
+                    onDelete={onDelete}
                 />
             </div>
         </div>

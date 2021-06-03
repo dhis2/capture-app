@@ -4,13 +4,13 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './followup.types';
 
-export const Followup = ({ enrollment, updateAction }: Props) =>
+export const Followup = ({ enrollment, onUpdate }: Props) =>
     (enrollment.followup ? (
         <MenuItem
             dense
             dataTest="widget-enrollment-actions-followup-remove"
             onClick={() =>
-                updateAction({
+                onUpdate({
                     ...enrollment,
                     followup: false,
                 })
@@ -23,7 +23,7 @@ export const Followup = ({ enrollment, updateAction }: Props) =>
             dense
             dataTest="widget-enrollment-actions-followup-mark"
             onClick={() =>
-                updateAction({
+                onUpdate({
                     ...enrollment,
                     followup: true,
                 })

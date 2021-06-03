@@ -5,13 +5,13 @@ import i18n from '@dhis2/d2-i18n';
 import type { Props } from './complete.types';
 import { plainStatus } from '../../constants/status.const';
 
-export const Complete = ({ enrollment, updateAction }: Props) =>
+export const Complete = ({ enrollment, onUpdate }: Props) =>
     (enrollment.status === plainStatus.COMPLETED ? (
         <MenuItem
             dense
             dataTest="widget-enrollment-actions-incomplete"
             onClick={() =>
-                updateAction({
+                onUpdate({
                     ...enrollment,
                     status: plainStatus.ACTIVE,
                 })
@@ -24,7 +24,7 @@ export const Complete = ({ enrollment, updateAction }: Props) =>
             dense
             dataTest="widget-enrollment-actions-complete"
             onClick={() =>
-                updateAction({
+                onUpdate({
                     ...enrollment,
                     status: plainStatus.COMPLETED,
                 })

@@ -2,5 +2,5 @@
 
 export type Props = {|
     enrollment: Object,
-    updateAction: (arg: Object) => void,
+    onUpdate: (arg: Object) => void,
 |};
