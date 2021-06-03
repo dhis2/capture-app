@@ -1,9 +1,9 @@
 // @flow
-import { Icon } from 'capture-core/metaData';
+import { Icon, Event } from 'capture-core/metaData';
 
 export type Props = {|
   ...CssClasses,
   title: string,
-  events: number,
+  events: Array<Event>,
   icon?: Icon,
 |}
