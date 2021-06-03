@@ -1,13 +1,13 @@
 name: "dhis2: pr preview"
 
 on:
-  push:
   pull_request:
+    types: [ labeled ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    if: ${{ github.event.label.name == 'preview' }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
