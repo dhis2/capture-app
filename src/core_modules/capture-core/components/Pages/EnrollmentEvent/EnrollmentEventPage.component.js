@@ -38,8 +38,8 @@ const EnrollmentEventPagePain = ({
             <EventDetails
                 eventAccess={eventAccess}
                 programStage={programStage}
-                hasName
-                hasIcon
+                shouldShowName
+                shouldShowIcon
             />
         ) : (
             <span> {i18n.t('We could not find the stage in the program') }</span>

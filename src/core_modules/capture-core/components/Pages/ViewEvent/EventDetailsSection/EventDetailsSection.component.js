@@ -41,8 +41,8 @@ type Props = {
     onOpenEditEvent: () => void,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
-    hasName: ?boolean,
-    hasIcon: ?boolean,
+    shouldShowName: ?boolean,
+    shouldShowIcon: ?boolean,
     classes: {
         container: string,
         content: string,
@@ -115,8 +115,8 @@ class EventDetailsSectionPlain extends Component<Props> {
         const {
             classes,
             programStage: { name, icon },
-            hasName,
-            hasIcon,
+            shouldShowName,
+            shouldShowIcon,
         } = this.props;
         return (
             <div className={classes.container}>
@@ -124,10 +124,10 @@ class EventDetailsSectionPlain extends Component<Props> {
                     header={
                         <ViewEventSectionHeader
                             text={
-                                hasName && name ? name : i18n.t('Event details')
+                                shouldShowName && name ? name : i18n.t('Event details')
                             }
                             icon={
-                                hasIcon && icon
+                                shouldShowIcon && icon
                                     ? () => (
                                         <NonBundledDhis2Icon
                                             name={icon.name}
