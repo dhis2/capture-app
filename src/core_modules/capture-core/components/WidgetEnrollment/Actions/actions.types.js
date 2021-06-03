@@ -11,6 +11,7 @@ export type PlainProps = {|
     enrollment: Object,
     onUpdate: (arg: Object) => void,
     onDelete: (arg: Object) => void,
+    loading: boolean,
     ...CssClasses,
 |};
 
