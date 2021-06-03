@@ -7,7 +7,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentEventPage.types';
 import { pageMode } from './EnrollmentEventPage.const';
 import { EventDetails } from '../ViewEvent/EventDetailsSection/EventDetailsSection.container';
-import { LoadingMaskElementCenter } from '../../LoadingMasks';
 
 const styles = ({ typography }) => ({
     page: {
@@ -43,7 +42,7 @@ const EnrollmentEventPagePain = ({
                 hasIcon
             />
         ) : (
-            <LoadingMaskElementCenter />
+            <span> {i18n.t('We could not find the stage in the program') }</span>
         )}
     </div>
 );
