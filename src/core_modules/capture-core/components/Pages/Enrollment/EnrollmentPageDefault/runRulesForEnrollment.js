@@ -98,10 +98,10 @@ export const runRulesForEnrollment = (input: InputRuleEnrollmentData) => {
         return runRulesForEnrollmentPage({
             program,
             orgUnit,
-            eventsData: getEventsDataFromEnrollment(enrollment, dataElements),
+            trackedEntityAttributes,
             dataElementsInProgram: dataElements,
             teiValues: teiAttributesValues,
-            trackedEntityAttributes,
+            eventsData: getEventsDataFromEnrollment(enrollment, dataElements),
             enrollmentData: getEnrollmentData(enrollment),
         });
     }
