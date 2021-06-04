@@ -1,1 +1,1 @@
-export { WidgetWarning } from './WidgetWarning.component'
+export { WidgetWarning } from './WidgetWarning.component';

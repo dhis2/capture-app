@@ -6,6 +6,7 @@ import type { widgetWarningTypes } from './WidgetWarning.types';
 
 export const WidgetWarning = ({ warning }: widgetWarningTypes) => {
     const [openStatus, setOpenStatus] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const widgetType = 'warning';
 
     if (!warning?.length) {
