@@ -1,16 +1,16 @@
 // @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Widget } from '../Widget';
+import { Widget } from '../../Widget';
 import type { Props } from './WidgetError.types';
-import { WidgetErrorAndWarningContent } from '../WidgetContentBuilder/WidgetErrorAndWarningContent/WidgetErrorAndWarningContent';
+import { WidgetErrorAndWarningContent } from '../content/WidgetErrorAndWarningContent';
 
 
-export const WidgetError = ({ showError, classes }: Props) => {
+export const WidgetError = ({ error, classes }: Props) => {
     const [openStatus, setOpenStatus] = useState(true);
     const widgetType = 'error';
 
-    if (!showError || !showError.length) {
+    if (!error?.length) {
         return null;
     }
 
@@ -26,7 +26,7 @@ export const WidgetError = ({ showError, classes }: Props) => {
                 onClose={() => setOpenStatus(false)}
             >
                 <WidgetErrorAndWarningContent
-                    widgetData={showError}
+                    widgetData={error}
                     type={widgetType}
                 />
             </Widget>

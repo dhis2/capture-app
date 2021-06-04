@@ -1,5 +1,5 @@
 // @flow
-import type { rule } from '../../WidgetError/WidgetError.types';
+import type { rule } from '../WidgetError/WidgetError.types';
 
 export type contentTypes = {|
     widgetData: Array<rule> | Array<string>,

@@ -5,6 +5,6 @@ export type rule = {|
 |}
 
 export type Props = {|
-    showError?: Array<rule> | Array<string>,
+    error?: Array<rule> | Array<string>,
     ...CssClasses
 |}

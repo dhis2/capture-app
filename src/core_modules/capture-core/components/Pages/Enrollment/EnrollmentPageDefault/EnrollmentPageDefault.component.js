@@ -6,7 +6,7 @@ import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
-import { WidgetError } from '../../../WidgetError';
+import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 
 const getStyles = ({ typography }) => ({
     columns: {

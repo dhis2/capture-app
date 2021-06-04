@@ -93,6 +93,7 @@ const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: conten
                                     warning,
                                     error,
                                 })}
+                                /* eslint-disable-next-line react/no-array-index-key */
                                 key={index}
                             />
                         );
