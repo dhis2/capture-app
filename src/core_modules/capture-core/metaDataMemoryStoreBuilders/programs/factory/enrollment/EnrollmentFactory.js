@@ -96,10 +96,15 @@ export class EnrollmentFactory {
         cachedProgramTrackedEntityTypeId: string,
     ) {
         const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId);
-        const trackedEntityTypeName = this.cachedTrackedEntityTypes.get(cachedProgramTrackedEntityTypeId)?.displayName;
+        const trackedEntityTypeName = this.cachedTrackedEntityTypes.get(cachedProgramTrackedEntityTypeId);
+
+        if (!trackedEntityTypeName.displayName) {
+            return null;
+        }
+
         const section = new Section((o) => {
             o.id = cachedProgramTrackedEntityTypeId;
-            o.name = trackedEntityTypeName || i18n.t('Feature type');
+            o.name = trackedEntityTypeName.displayName;
         });
 
         featureTypeField && section.addElement(featureTypeField);
