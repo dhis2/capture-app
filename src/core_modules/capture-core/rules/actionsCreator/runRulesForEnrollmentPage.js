@@ -2,7 +2,7 @@
 import { RulesEngine } from '../engine';
 import type { Program } from '../../metaData';
 import type {
-    EventsData,
+    EventsDataContainer,
     OrgUnit,
     DataElements,
     TEIValues,
@@ -15,7 +15,7 @@ import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets
 type RuleEnrollmentData = {
     program: Program,
     orgUnit: OrgUnit,
-    allEventsData: EventsData,
+    eventsData: EventsDataContainer,
     dataElementsInProgram: DataElements,
     teiValues: ?TEIValues,
     trackedEntityAttributes: ?TrackedEntityAttributes,
@@ -26,7 +26,7 @@ export default function runRulesForEnrollmentPage(data: RuleEnrollmentData) {
     const {
         program,
         orgUnit,
-        allEventsData,
+        eventsData,
         dataElementsInProgram,
         teiValues,
         trackedEntityAttributes,
@@ -41,7 +41,7 @@ export default function runRulesForEnrollmentPage(data: RuleEnrollmentData) {
     // returns an array of effects that need to take place in the UI.
     return RulesEngine.programRuleEffectsForEnrollment(
         { programRulesVariables, programRules, constants },
-        allEventsData,
+        eventsData,
         orgUnit,
         dataElementsInProgram,
         teiValues,

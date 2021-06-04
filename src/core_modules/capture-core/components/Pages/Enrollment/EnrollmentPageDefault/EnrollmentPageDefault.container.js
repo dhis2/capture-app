@@ -6,8 +6,8 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
-import { useEnrollmentsAndAttributes, useProgramMetadata } from '../hooks';
-import { runRulesForEnrollment } from '../runRulesForEnrollment';
+import { useEnrollmentsAndAttributes, useProgramMetadata } from './hooks';
+import { runRulesForEnrollment } from './runRulesForEnrollment';
 
 export const EnrollmentPageDefault = () => {
     const { enrollmentId, teiId, programId, orgUnitId } = useSelector(({
@@ -22,10 +22,10 @@ export const EnrollmentPageDefault = () => {
             programId: query.programId,
             orgUnitId: query.orgUnitId,
         }), shallowEqual);
-    const orgUnit = useSelector(({ organisationUnits }) => organisationUnits[orgUnitId], shallowEqual);
+    const orgUnit = useSelector(({ organisationUnits }) => organisationUnits[orgUnitId]);
 
     const { program } = useProgramInfo(programId);
-    const { error: enrollmentsError, enrollments, attributes } = useEnrollmentsAndAttributes(teiId);
+    const { error: enrollmentsError, enrollment, attributes } = useEnrollmentsAndAttributes(teiId, enrollmentId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
 
     if (programMetaDataError || enrollmentsError) {
@@ -34,12 +34,11 @@ export const EnrollmentPageDefault = () => {
 
     const [, setRuleEffects] = useState(undefined);
     useEffect(() => {
-        const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollments, attributes });
+        const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollment, attributes });
         if (effects) {
             setRuleEffects(effects);
         }
-    }, [orgUnit, program, programMetadata, enrollments, attributes]);
-
+    }, [orgUnit, program, programMetadata, enrollment, attributes]);
 
     return (
         <EnrollmentPageDefaultComponent

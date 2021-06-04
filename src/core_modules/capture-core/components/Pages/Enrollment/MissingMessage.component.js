@@ -10,7 +10,7 @@ import { scopeTypes } from '../../../metaData/helpers/constants';
 import { urlArguments } from '../../../utils/url';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { LinkButton } from '../../Buttons/LinkButton.component';
-import { useEnrollmentInfo } from './hooks/useEnrollmentInfo';
+import { useEnrollmentInfo } from './useEnrollmentInfo';
 
 export const missingStatuses = {
     TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED: 'TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED',

@@ -9,7 +9,7 @@ export const useProgramMetadata = (programId: string) => {
             id: programId,
             params: {
                 fields:
-                ['programStages[programStageDataElements[dataElement[id,valueType,optionSet[id,version]]'],
+                ['programStages[id,programStageDataElements[dataElement[id,valueType,optionSet[id,version]]'],
             },
         },
     }), [programId]));
