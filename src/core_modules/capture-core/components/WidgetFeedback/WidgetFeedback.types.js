@@ -12,7 +12,7 @@ export type filteredKeyValue = {|
 |}
 
 export type contentType = {|
-    feedback?: ?Array<string | filteredText | filteredKeyValue>,
+    widgetData?: ?Array<string | filteredText | filteredKeyValue>,
     ...CssClasses
 |}
 

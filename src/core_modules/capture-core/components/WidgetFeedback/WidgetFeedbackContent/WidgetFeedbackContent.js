@@ -68,7 +68,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, classes }: contentType) =>
     return (
         <div className={classes.container}>
             <ul className={classes.unorderedList}>
-                {widgetData.map((rule, index) => {
+                {widgetData.map((rule: any, index: number) => {
                     if (rule.key) {
                         return renderKeyValue(rule);
                     } else if (rule.message) {
@@ -83,4 +83,4 @@ const WidgetFeedbackContentComponent = ({ widgetData, classes }: contentType) =>
     );
 };
 
-export const WidgetFeedbackContent: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetFeedbackContentComponent);
+export const WidgetFeedbackContent: ComponentType<$Diff<contentType, CssClasses>> = withStyles(styles)(WidgetFeedbackContentComponent);
