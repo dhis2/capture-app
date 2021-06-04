@@ -1,7 +1,11 @@
 // @flow
 import { convertValue } from 'capture-core/converters/serverToClient';
 import runRulesForEnrollmentPage from 'capture-core/rules/actionsCreator/runRulesForEnrollmentPage';
+import { dataElementTypes } from '../../../../metaData';
 import type { InputRuleEnrollmentData } from './types/common.types';
+
+// $FlowFixMe
+const convertDate = (date: string): string => convertValue(date, dataElementTypes.DATE);
 
 const getDataElementsFromProgram = (data, eventsDataValues) => {
     if (!data?.programStages) { return {}; }
@@ -50,8 +54,8 @@ const getEventsDataFromEnrollment = (enrollment, dataElements) => {
         enrollmentId: event.enrollment,
         enrollmentStatus: event.enrollmentStatus,
         status: event.status,
-        eventDate: event.dueDate,
-        dueDate: event.dueDate,
+        eventDate: convertDate(event.dueDate),
+        dueDate: convertDate(event.dueDate),
         ...getEventValuesFromEvent(enrollment, event.event, dataElements),
     }));
 
@@ -65,8 +69,8 @@ const getEventsDataFromEnrollment = (enrollment, dataElements) => {
 
 
 const getEnrollmentData = enrollment => ({
-    enrollmentDate: enrollment.enrollmentDate,
-    incidentDate: enrollment.incidentDate,
+    enrollmentDate: convertDate(enrollment.enrollmentDate),
+    incidentDate: convertDate(enrollment.incidentDate),
     enrollmentId: enrollment.enrollment,
 });
 
