@@ -2,15 +2,15 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import {
-    Table,
-    Row,
-    Cell,
-    HeaderCell,
-    Head,
-    Body,
-} from 'capture-ui';
-import { colors, spacersNum } from '@dhis2/ui';
+import { colors,
+    spacersNum,
+    TableBody,
+    TableHead,
+    DataTable,
+    DataTableRow,
+    DataTableCell,
+    DataTableColumnHeader,
+} from '@dhis2/ui';
 import { formatValueForView, getValueByKeyFromEvent } from '../helpers';
 import { dataElementTypes } from '../../../../../metaData';
 import type { Props } from './stageDetail.types';
@@ -65,18 +65,18 @@ const StageDetailPlain = ({ events, data, classes }: Props) => {
         });
         const headerCells = [...defaultColumns, ...dataElementHeaders]
             .map(column => (
-                <HeaderCell
+                <DataTableColumnHeader
                     key={column.id}
                 >
                     {column.header}
-                </HeaderCell>
+                </DataTableColumnHeader>
             ));
         return (
-            <Row
+            <DataTableRow
                 className={classes.row}
             >
                 {headerCells}
-            </Row>
+            </DataTableRow>
         );
     }
 
@@ -85,39 +85,38 @@ const StageDetailPlain = ({ events, data, classes }: Props) => {
             .map((row, index) => {
                 const cells = row
                     .map(column => (
-                        <Cell
+                        <DataTableCell
                             key={column.id}
                         >
                             <div >
                                 {column.value}
                             </div>
-                        </Cell>
+                        </DataTableCell>
                     ));
 
                 return (
-                    <Row
+                    <DataTableRow
                         className={classes.row}
                         key={events[index].event}
                     >
                         {cells}
-                    </Row>
+                    </DataTableRow>
                 );
             });
     }
 
     return (
         <div className={classes.container}>
-            <Table
+            <DataTable
                 className={classes.table}
             >
-                <Head>
+                <TableHead>
                     {renderHeaderRow()}
-                </Head>
-                <Body>
+                </TableHead>
+                <TableBody>
                     {renderRows()}
-                </Body>
-            </Table>
-
+                </TableBody>
+            </DataTable>
         </div>
     );
 };
