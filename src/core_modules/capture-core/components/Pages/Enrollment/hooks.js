@@ -25,10 +25,8 @@ export const useEnrollmentInfo = (enrollmentId: string, programId: string) => {
 export const useFilteredWidgetData = (rules: Array<rulesProps>) => useMemo(() => {
     let showWarning = [];
     let showError = [];
-    let feedbackKeyValuePairs = [];
-    let feedbackDisplayText = [];
-    let indicatorKeyValue = [];
-    let indicatorDisplayText = [];
+    let feedback = [];
+    let indicator = [];
 
     const ruleTypes = Object.freeze({
         SHOWWARNING: 'SHOWWARNING',
@@ -56,36 +54,16 @@ export const useFilteredWidgetData = (rules: Array<rulesProps>) => useMemo(() =>
                 break;
             }
         } else if (rule.id === ruleIDs.feedback) {
-            switch (rule.type) {
-            case ruleTypes.DISPLAYKEYVALUEPAIRS:
-                feedbackKeyValuePairs = [...feedbackKeyValuePairs, rule.displayKeyValuePair];
-                break;
-            case ruleTypes.DISPLAYTEXT:
-                feedbackDisplayText = [...feedbackDisplayText, rule.displayText];
-                break;
-            default:
-                break;
-            }
+            feedback = [...feedback, rule?.displayText || rule?.displayKeyValuePair];
         } else if (rule.id === ruleIDs.indicators) {
-            switch (rule.type) {
-            case ruleTypes.DISPLAYKEYVALUEPAIRS:
-                indicatorKeyValue = [...indicatorKeyValue, rule.displayKeyValuePair];
-                break;
-            case ruleTypes.DISPLAYTEXT:
-                indicatorDisplayText = [...indicatorDisplayText, rule.displayText];
-                break;
-            default:
-                break;
-            }
+            indicator = [...indicator, rule?.displayText || rule?.displayKeyValuePair];
         }
     });
 
     return {
         showWarning,
         showError,
-        feedbackKeyValuePairs,
-        feedbackDisplayText,
-        indicatorDisplayText,
-        indicatorKeyValue,
+        feedback,
+        indicator,
     };
 }, [rules]);
