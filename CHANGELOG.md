@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/dhis2/capture-app/compare/v1.22.3...v1.23.0) (2021-06-04)
+
+
+### Features
+
+* [DHIS2-10943] enrollemnt actions ([#1708](https://github.com/dhis2/capture-app/issues/1708)) ([4ce5c91](https://github.com/dhis2/capture-app/commit/4ce5c919da965dda06339a0109192fd665f6a5d2))
+
 ## [1.22.3](https://github.com/dhis2/capture-app/compare/v1.22.2...v1.22.3) (2021-06-01)
 
 
