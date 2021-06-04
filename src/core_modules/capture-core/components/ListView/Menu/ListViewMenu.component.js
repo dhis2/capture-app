@@ -2,7 +2,7 @@
 import React, { useCallback, memo, type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { IconButton, Paper, MenuList, MenuItem, Divider } from '@material-ui/core';
-import { MoreHoriz } from '@material-ui/icons';
+import { IconMore24 } from '@dhis2/ui';
 import { MenuPopper } from '../../Popper/Popper.component';
 import type { Props } from './listViewMenu.types';
 
@@ -34,7 +34,7 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
             data-test="list-view-menu-button"
             onClick={togglePopper}
         >
-            <MoreHoriz />
+            <IconMore24 />
         </IconButton>
     ), []);
 

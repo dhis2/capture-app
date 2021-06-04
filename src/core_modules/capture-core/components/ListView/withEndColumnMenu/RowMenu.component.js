@@ -2,11 +2,11 @@
 import * as React from 'react';
 import { Manager, Popper, Reference } from 'react-popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import { IconMore24 } from '@dhis2/ui';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
-import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import IconButton from '@material-ui/core/IconButton';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props, State } from './rowMenu.types';
@@ -112,7 +112,7 @@ class Index extends React.Component<Props, State> {
                                         onClick={this.toggleMenu}
                                         className={classes.icon}
                                     >
-                                        <MoreHoriz />
+                                        <IconMore24 />
                                     </IconButton>
                                 </div>
                             );
