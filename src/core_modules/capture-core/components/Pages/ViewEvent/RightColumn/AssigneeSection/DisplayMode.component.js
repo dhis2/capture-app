@@ -2,7 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles, IconButton } from '@material-ui/core';
-import { Edit as EditIcon } from '@material-ui/icons';
+import { IconEdit24 } from '@dhis2/ui';
 import { Button } from '../../../../Buttons';
 
 const getStyles = () => ({
@@ -80,7 +80,7 @@ const DisplayModePlain = (props: Props) => {
                             onClick={onEdit}
                             className={classes.editButton}
                         >
-                            <EditIcon />
+                            <IconEdit24 />
                         </IconButton>
                     ) : null}
             </div>
