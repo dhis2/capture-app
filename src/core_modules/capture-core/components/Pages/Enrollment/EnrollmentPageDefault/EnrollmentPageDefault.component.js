@@ -6,6 +6,7 @@ import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
+import { WidgetWarning } from '../../../WidgetsErrorAndWarning/WidgetWarning';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -42,6 +43,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetStagesAndEvents stages={program.stages} />
             </div>
             <div className={classes.rightColumn}>
+                <WidgetWarning warning={['Test 1']} />
                 <WidgetProfile teiId={teiId} programId={program.id} />
                 <WidgetEnrollment
                     teiId={teiId}
