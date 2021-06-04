@@ -4,7 +4,7 @@ import React, { type ComponentType } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import type { Props } from '../WidgetFeedback.types';
+import type { filteredKeyValue, filteredText, Props } from '../WidgetFeedback.types';
 
 const styles = {
     container: {
@@ -33,40 +33,51 @@ const styles = {
 };
 
 
-const WidgetFeedbackContentComponent = ({ displayText, displayKeyValue, classes }: Props) => {
-    if (!displayText?.length && !displayKeyValue?.length) {
+const WidgetFeedbackContentComponent = ({ widgetData, classes }: Props) => {
+    if (!widgetData?.length) {
         return <p className={classes.noFeedbackText}>{i18n.t('No feedback for this enrollment yet')}</p>;
     }
 
-    const renderText = () => (
-        displayText?.map(item => (
-            item.message && (
-                <li
-                    className={classes.listItem}
-                    key={item.id}
-                >
-                    {item.message}
-                </li>
-            )))
+    const renderTextObject = (item: filteredText) => (
+        <li
+            className={classes.listItem}
+            key={item.id}
+        >
+            {item.message}
+        </li>
     );
 
-    const renderKeyValue = () => (
-        displayKeyValue?.map(item => (
-            item.key && item.value && (
-                <li
-                    key={item.id}
-                    className={classes.listItem}
-                >
-                    {item.key}: {item.value}
-                </li>
-            )))
+    const renderKeyValue = (item: filteredKeyValue) => (
+        <li
+            key={item.id}
+            className={classes.listItem}
+        >
+            {item.key}{item.value ? `: ${item.value}` : null}
+        </li>
+    );
+
+    const renderString = (item, index) => (
+        <li
+            key={index}
+            className={classes.listItem}
+        >
+            {item}
+        </li>
     );
 
     return (
         <div className={classes.container}>
             <ul className={classes.unorderedList}>
-                {renderText()}
-                {renderKeyValue()}
+                {widgetData.map((rule, index) => {
+                    if (rule.key) {
+                        return renderKeyValue(rule);
+                    } else if (rule.message) {
+                        return renderTextObject(rule);
+                    } else if (typeof rule === 'string') {
+                        return renderString(rule, index);
+                    }
+                    return null;
+                })}
             </ul>
         </div>
     );

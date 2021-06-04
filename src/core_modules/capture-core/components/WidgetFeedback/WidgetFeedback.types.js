@@ -1,18 +1,17 @@
 // @flow
 
-type filteredText = {|
+export type filteredText = {|
     id: string,
     message: string,
 |}
 
-type filteredKeyValue = {|
+export type filteredKeyValue = {|
     id: string,
     key: string,
     value: string,
 |}
 
 export type Props = {|
-    displayText?: Array<filteredText>,
-    displayKeyValue?: Array<filteredKeyValue>,
+    feedback?: ?Array<string | filteredText | filteredKeyValue>,
     ...CssClasses
 |}
