@@ -11,6 +11,11 @@ export type filteredKeyValue = {|
     value: string,
 |}
 
+export type contentType = {|
+    feedback?: ?Array<string | filteredText | filteredKeyValue>,
+    ...CssClasses
+|}
+
 export type Props = {|
     feedback?: ?Array<string | filteredText | filteredKeyValue>,
     ...CssClasses

@@ -4,7 +4,7 @@ import React, { type ComponentType } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import type { filteredKeyValue, filteredText, Props } from '../WidgetFeedback.types';
+import type { filteredKeyValue, filteredText, contentType } from '../WidgetFeedback.types';
 
 const styles = {
     container: {
@@ -33,7 +33,7 @@ const styles = {
 };
 
 
-const WidgetFeedbackContentComponent = ({ widgetData, classes }: Props) => {
+const WidgetFeedbackContentComponent = ({ widgetData, classes }: contentType) => {
     if (!widgetData?.length) {
         return <p className={classes.noFeedbackText}>{i18n.t('No feedback for this enrollment yet')}</p>;
     }
@@ -56,7 +56,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, classes }: Props) => {
         </li>
     );
 
-    const renderString = (item, index) => (
+    const renderString = (item: string, index: number) => (
         <li
             key={index}
             className={classes.listItem}
