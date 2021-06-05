@@ -2,8 +2,8 @@
 # Translators:
 # Antonia Bezenchek <antonia@informa.pro>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
-# Viktor Varland <viktor@dhis2.org>, 2021
 # phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # Hamza Assada <7amza.it@gmail.com>, 2021
 # 
 msgid ""
@@ -921,7 +921,7 @@ msgid "Mark incomplete"
 msgstr ""
 
 msgid "Delete enrollment"
-msgstr ""
+msgstr "الغِ التسجيل"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
@@ -929,7 +929,7 @@ msgid ""
 msgstr ""
 
 msgid "No, cancel"
-msgstr ""
+msgstr "لا، الغاء"
 
 msgid "Yes, delete enrollment."
 msgstr ""
@@ -938,7 +938,7 @@ msgid "Remove mark for follow-up"
 msgstr ""
 
 msgid "Mark for follow-up"
-msgstr ""
+msgstr "اشر من أجل الملحق"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
