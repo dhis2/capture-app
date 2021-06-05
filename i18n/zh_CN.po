@@ -903,7 +903,7 @@ msgid "Mark incomplete"
 msgstr ""
 
 msgid "Delete enrollment"
-msgstr ""
+msgstr "删除注册"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
@@ -911,7 +911,7 @@ msgid ""
 msgstr ""
 
 msgid "No, cancel"
-msgstr ""
+msgstr "不，取消"
 
 msgid "Yes, delete enrollment."
 msgstr ""
@@ -920,7 +920,7 @@ msgid "Remove mark for follow-up"
 msgstr ""
 
 msgid "Mark for follow-up"
-msgstr ""
+msgstr "后续标记"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""

@@ -900,7 +900,7 @@ msgid "Mark incomplete"
 msgstr ""
 
 msgid "Delete enrollment"
-msgstr ""
+msgstr "حذف شمولیت"
 
 msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
@@ -917,7 +917,7 @@ msgid "Remove mark for follow-up"
 msgstr ""
 
 msgid "Mark for follow-up"
-msgstr ""
+msgstr "نشانی برای پیگیری"
 
 msgid "Enrollment widget could not be loaded. Please try again later"
 msgstr ""
