@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/dhis2/capture-app/compare/v1.23.2...v1.24.0) (2021-06-07)
+
+
+### Features
+
+* [DHIS2-11200] enrollment view/edit event page ([#1750](https://github.com/dhis2/capture-app/issues/1750)) ([b11ac2c](https://github.com/dhis2/capture-app/commit/b11ac2c12beaeab48e548e953374af200c1a94f7))
+
 ## [1.23.2](https://github.com/dhis2/capture-app/compare/v1.23.1...v1.23.2) (2021-06-05)
 
 
