@@ -17,8 +17,15 @@ const styles = {
 };
 
 
-export const StagePlain = ({ stage: { name, icon, stageForm }, events, classes, className }: Props) => {
+export const StagePlain = (
+    { stage: { name, icon, stageForm },
+        events,
+        programStage,
+        classes,
+        className,
+    }: Props) => {
     const [open, setOpenStatus] = useState(true);
+
     return (<div className={cx(classes.overview, className)}>
         <Widget
             header={<StageOverview
@@ -31,7 +38,7 @@ export const StagePlain = ({ stage: { name, icon, stageForm }, events, classes, 
             onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
             open={open}
         >
-            { events.length > 0 && <StageDetail events={events} data={stageForm.sections.get('#MAIN#')?.elements} />}
+            { events.length > 0 && <StageDetail events={events} data={programStage?.programStageDataElements} />}
         </Widget>
 
     </div>);

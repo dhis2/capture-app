@@ -1,14 +1,14 @@
 // @flow
-import React, { useMemo } from 'react';
+import React from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { useDataQuery } from '@dhis2/app-runtime';
 // $FlowFixMe
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import { urlArguments } from '../../../../utils/url';
+import { useEnrollmentsAndAttributes, useProgramMetadata } from './hooks';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
 
 export const EnrollmentPageDefault = () => {
@@ -29,17 +29,11 @@ export const EnrollmentPageDefault = () => {
     );
 
     const { program } = useProgramInfo(programId);
-    const teiAttributesQuery = useMemo(() => ({
-        teiAttributes: {
-            resource: 'trackedEntityInstances',
-            id: teiId,
-            params: { fields: ['enrollments[*],attributes'] },
-        },
-    }), [teiId]);
-    const { data: teiAttributes, error: teiError } = useDataQuery(teiAttributesQuery);
+    const { error: enrollmentsError, enrollment } = useEnrollmentsAndAttributes(teiId, enrollmentId);
+    const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
 
-    if (teiError) {
-        log.error(errorCreator('Enrollment page could not be loaded')({ teiError }));
+    if (programMetaDataError || enrollmentsError) {
+        log.error(errorCreator('Enrollment page could not be loaded')({ programMetaDataError, enrollmentsError }));
     }
 
     const onDelete = () => {
@@ -53,7 +47,8 @@ export const EnrollmentPageDefault = () => {
         <EnrollmentPageDefaultComponent
             teiId={teiId}
             program={program}
-            events={teiAttributes?.teiAttributes?.enrollments?.[0].events ?? []}
+            programMetadata={programMetadata}
+            events={enrollment?.events ?? []}
             enrollmentId={enrollmentId}
             onDelete={onDelete}
         />

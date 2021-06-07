@@ -1,14 +1,15 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { convertValue as convertClientToView } from '../../../../converters/clientToView';
 import { convertValue as convertServerToClient } from '../../../../converters/serverToClient';
 import { statusTypes, dataElementTypes } from '../../../../metaData';
+import type { Event } from '../../types/common.types';
 
-// $FlowFixMe
-export const isEventOverdue = event => moment(event.dueDate).isSameOrBefore(new Date())
+export const isEventOverdue = (event: Event) => moment(event.dueDate).isSameOrBefore(new Date())
     && event.status === statusTypes.SCHEDULE;
 
-const getEventStatus = (event: any) => {
+const getEventStatus = (event: Event) => {
     if (isEventOverdue(event)) {
         return { value: statusTypes.OVERDUE };
     }
@@ -18,7 +19,7 @@ const getEventStatus = (event: any) => {
     return { value: event.status };
 };
 
-export const getValueByKeyFromEvent = (event: any, type: string) => {
+export const getValueByKeyFromEvent = (event: Event, type: string) => {
     switch (type) {
     case 'status':
         return getEventStatus(event);
@@ -29,3 +30,41 @@ export const getValueByKeyFromEvent = (event: any, type: string) => {
 
 export const formatValueForView = (data: any, type: $Keys<typeof dataElementTypes>) =>
     convertClientToView(convertServerToClient(data, type), type);
+
+export const generateDataTableFromEvent = (data: any, events: Array<Event>) => {
+    const dataSource = events.reduce((acc, currentEvent) => {
+        const keys = [
+            { id: 'status', type: dataElementTypes.STATUS },
+            { id: 'eventDate', type: dataElementTypes.DATE },
+            { id: 'orgUnitName', type: dataElementTypes.TEXT }];
+        const dataElementsInEvent = currentEvent.dataValues
+            .map(item => ({ id: item.dataElement,
+                value: formatValueForView(item.value,
+                    data.find(el => el.dataElement.id === item.dataElement).valueType),
+            }));
+
+        acc.push([
+            ...keys.map(key => ({
+                id: key.id,
+                value: formatValueForView(getValueByKeyFromEvent(currentEvent, key.id), key.type),
+            })),
+            ...dataElementsInEvent]);
+        return acc;
+    }, []);
+
+    return dataSource || [];
+};
+
+export const getHeaderColumn = (data: any, events: Array<Event>) => {
+    const defaultColumns = [
+        { id: 'status', header: i18n.t('Status') },
+        { id: 'eventDate', header: i18n.t('Report date') },
+        { id: 'orgUnitName', header: i18n.t('Registering unit'),
+        }];
+
+    const dataElementHeaders = events[0].dataValues.map((item) => {
+        const { dataElement } = data.find(el => el.dataElement.id === item.dataElement) ?? {};
+        return { id: item.dataElement, header: dataElement?.displayName };
+    });
+    return [...defaultColumns, ...dataElementHeaders];
+};

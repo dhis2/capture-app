@@ -1,6 +1,5 @@
 // @flow
 import React, { type ComponentType } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { colors,
     spacersNum,
@@ -11,8 +10,7 @@ import { colors,
     DataTableCell,
     DataTableColumnHeader,
 } from '@dhis2/ui';
-import { formatValueForView, getValueByKeyFromEvent } from '../helpers';
-import { dataElementTypes } from '../../../../../metaData';
+import { generateDataTableFromEvent, getHeaderColumn } from '../helpers';
 import type { Props } from './stageDetail.types';
 
 
@@ -32,38 +30,11 @@ const styles = {
         alignItems: 'center',
     },
 };
+
 const StageDetailPlain = ({ events, data, classes }: Props) => {
-    const defaultColumns = [
-        { id: 'status', header: i18n.t('Status') },
-        { id: 'eventDate', header: i18n.t('Report date') },
-        { id: 'orgUnitName', header: i18n.t('Registering unit'),
-        }];
-
-    const dataSource = events.reduce((acc, currentEvent) => {
-        const keys = [
-            { id: 'status', type: dataElementTypes.STATUS },
-            { id: 'eventDate', type: dataElementTypes.DATE },
-            { id: 'orgUnitName', type: dataElementTypes.TEXT }];
-        const dataElementsInEvent = currentEvent.dataValues
-            .map(item => ({ id: item.dataElement,
-                value: formatValueForView(item.value, data.get(item.dataElement).type),
-            }));
-
-        acc.push([
-            ...keys.map(key => ({
-                id: key.id,
-                value: formatValueForView(getValueByKeyFromEvent(currentEvent, key.id), key.type),
-            })),
-            ...dataElementsInEvent]);
-        return acc;
-    }, []);
-
+    console.log({ events });
     function renderHeaderRow() {
-        const dataElementHeaders = events[0].dataValues.map((item) => {
-            const dataElement = data.get(item.dataElement);
-            return { id: item.dataElement, header: dataElement.formName };
-        });
-        const headerCells = [...defaultColumns, ...dataElementHeaders]
+        const headerCells = getHeaderColumn(data, events)
             .map(column => (
                 <DataTableColumnHeader
                     key={column.id}
@@ -81,7 +52,7 @@ const StageDetailPlain = ({ events, data, classes }: Props) => {
     }
 
     function renderRows() {
-        return dataSource
+        return generateDataTableFromEvent(data, events)
             .map((row, index) => {
                 const cells = row
                     .map(column => (

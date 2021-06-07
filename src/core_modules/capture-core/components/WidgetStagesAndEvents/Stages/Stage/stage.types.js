@@ -1,10 +1,11 @@
 // @flow
-import type { ProgramStage } from '../../../../metaData';
-
+import type { ProgramStage } from 'capture-core/metaData';
+import type { Event } from '../../types/common.types';
 
 export type Props = {|
     stage: ProgramStage,
-    events: any[],
+    events: Array<Event>,
     className?: string,
+    programStage: any,
     ...CssClasses,
 |};

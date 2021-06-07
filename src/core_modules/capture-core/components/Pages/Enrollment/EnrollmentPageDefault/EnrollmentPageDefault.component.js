@@ -34,6 +34,7 @@ export const EnrollmentPageDefaultPlain = ({
     teiId,
     events,
     enrollmentId,
+    programMetadata,
     onDelete,
     classes,
 }: PlainProps) => (
@@ -42,6 +43,7 @@ export const EnrollmentPageDefaultPlain = ({
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
                 <WidgetStagesAndEvents
+                    programMetadata={programMetadata}
                     stages={program.stages}
                     events={events}
                 />
