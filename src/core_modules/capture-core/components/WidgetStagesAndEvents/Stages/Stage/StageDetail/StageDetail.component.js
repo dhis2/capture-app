@@ -1,16 +1,19 @@
 // @flow
 import React, { type ComponentType, useState } from 'react';
 import { withStyles } from '@material-ui/core';
+import i18n from '@dhis2/d2-i18n';
 import { colors,
     spacersNum,
-    TableBody,
-    TableHead,
+    DataTableBody,
+    DataTableHead,
+    DataTableFoot,
     DataTable,
     DataTableRow,
     DataTableCell,
     DataTableColumnHeader,
+    Button,
 } from '@dhis2/ui';
-import { computeDataFromEvent, computeHeaderColumn, sortDataFromEvent } from '../helpers';
+import { computeDataFromEvent, computeHeaderColumn, DEFAULT_NUMBER_OF_ROW, sortDataFromEvent } from '../helpers';
 import type { Props } from './stageDetail.types';
 
 
@@ -29,13 +32,18 @@ const styles = {
         backgroundColor: colors.grey200,
         alignItems: 'center',
     },
+    button: {
+        marginRight: spacersNum.dp8,
+    },
 };
 
-const StageDetailPlain = ({ events, data, classes }: Props) => {
+const StageDetailPlain = ({ events, eventName, data, classes }: Props) => {
+    const headerColumns = computeHeaderColumn(data, events);
     const [{ columnName, sortDirection }, setSortInstructions] = useState({
         columnName: '',
         sortDirection: '',
     });
+    const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
     const getSortDirection = id => (id === columnName ? sortDirection : 'default');
     const onSortIconClick = ({ name, direction }) => {
@@ -44,8 +52,9 @@ const StageDetailPlain = ({ events, data, classes }: Props) => {
             sortDirection: direction,
         });
     };
-    function renderHeaderRow() {
-        const headerCells = computeHeaderColumn(data, events)
+
+    function renderHeader() {
+        const headerCells = headerColumns
             .map(column => (
                 <DataTableColumnHeader
                     key={column.id}
@@ -95,17 +104,54 @@ const StageDetailPlain = ({ events, data, classes }: Props) => {
             });
     }
 
+    const renderFooter = () => {
+        const renderShowMoreButton = () => (events.length > DEFAULT_NUMBER_OF_ROW
+            && displayedRowNumber < events.length ? <Button
+                dataTest="show-more-button"
+                className={classes.button}
+                onClick={() => {
+                    const nextRowIndex = Math.min(events.length, displayedRowNumber + DEFAULT_NUMBER_OF_ROW);
+                    setDisplayedRowNumber(nextRowIndex);
+                }}
+            >{i18n.t('Show {{ rest }} more', { rest: events.length - displayedRowNumber })}</Button> : null);
+
+        const renderViewAllButton = () => (events.length > 1 ? <Button
+            dataTest="view-all-button"
+            className={classes.button}
+            onClick={() => {}}
+        >{i18n.t('View all {{ all }}', { all: events.length })}</Button> : null);
+
+        const renderCreateNewButton = () => (<Button
+            className={classes.button}
+            dataTest="create-new-button"
+            onClick={() => {}}
+        >{i18n.t('New {{ eventName }} event', { eventName })}</Button>);
+
+        return (
+            <DataTableRow>
+                <DataTableCell colSpan={`${headerColumns.length}`}>
+                    {renderShowMoreButton()}
+                    {renderViewAllButton()}
+                    {renderCreateNewButton()}
+                </DataTableCell>
+            </DataTableRow>
+        );
+    };
+
     return (
         <div className={classes.container}>
             <DataTable
                 className={classes.table}
             >
-                <TableHead>
-                    {renderHeaderRow()}
-                </TableHead>
-                <TableBody>
+                <DataTableHead>
+                    {renderHeader()}
+                </DataTableHead>
+                <DataTableBody>
                     {renderRows()}
-                </TableBody>
+                </DataTableBody>
+                <DataTableFoot>
+                    {renderFooter()}
+                </DataTableFoot>
             </DataTable>
         </div>
     );

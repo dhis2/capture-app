@@ -38,7 +38,11 @@ export const StagePlain = (
             onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
             open={open}
         >
-            { events.length > 0 && <StageDetail events={events} data={programStage?.programStageDataElements} />}
+            {events.length > 0 && <StageDetail
+                eventName={name}
+                events={events}
+                data={programStage?.programStageDataElements}
+            />}
         </Widget>
 
     </div>);

@@ -6,6 +6,8 @@ import { convertValue as convertServerToClient } from '../../../../converters/se
 import { statusTypes, dataElementTypes } from '../../../../metaData';
 import type { Event } from '../../types/common.types';
 
+export const DEFAULT_NUMBER_OF_ROW = 5;
+
 export const isEventOverdue = (event: Event) => moment(event.dueDate).isSameOrBefore(new Date())
     && event.status === statusTypes.SCHEDULE;
 
