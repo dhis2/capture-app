@@ -31,7 +31,19 @@ export const getValueByKeyFromEvent = (event: Event, type: string) => {
 export const formatValueForView = (data: any, type: $Keys<typeof dataElementTypes>) =>
     convertClientToView(convertServerToClient(data, type), type);
 
-export const generateDataTableFromEvent = (data: any, events: Array<Event>) => {
+export const sortDataFromEvent = (strA: any, strB: any, direction: string) => {
+    if (direction === 'asc') {
+        return strA < strB ? -1 : 1;
+    }
+
+    if (direction === 'desc') {
+        return strA < strB ? 1 : -1;
+    }
+
+    return 0;
+};
+
+export const computeDataFromEvent = (data: any, events: Array<Event>) => {
     const dataSource = events.reduce((acc, currentEvent) => {
         const keys = [
             { id: 'status', type: dataElementTypes.STATUS },
@@ -40,7 +52,7 @@ export const generateDataTableFromEvent = (data: any, events: Array<Event>) => {
         const dataElementsInEvent = currentEvent.dataValues
             .map(item => ({ id: item.dataElement,
                 value: formatValueForView(item.value,
-                    data.find(el => el.dataElement.id === item.dataElement).valueType),
+                    data?.find(el => el.dataElement.id === item.dataElement).valueType),
             }));
 
         acc.push([
@@ -55,16 +67,16 @@ export const generateDataTableFromEvent = (data: any, events: Array<Event>) => {
     return dataSource || [];
 };
 
-export const getHeaderColumn = (data: any, events: Array<Event>) => {
+export const computeHeaderColumn = (data: any, events: Array<Event>) => {
     const defaultColumns = [
-        { id: 'status', header: i18n.t('Status') },
-        { id: 'eventDate', header: i18n.t('Report date') },
-        { id: 'orgUnitName', header: i18n.t('Registering unit'),
+        { id: 'status', header: i18n.t('Status'), sortDirection: 'default' },
+        { id: 'eventDate', header: i18n.t('Report date'), sortDirection: 'default' },
+        { id: 'orgUnitName', header: i18n.t('Registering unit'), sortDirection: 'default',
         }];
 
     const dataElementHeaders = events[0].dataValues.map((item) => {
-        const { dataElement } = data.find(el => el.dataElement.id === item.dataElement) ?? {};
-        return { id: item.dataElement, header: dataElement?.displayName };
+        const { dataElement } = data?.find(el => el.dataElement.id === item.dataElement) ?? {};
+        return { id: item.dataElement, header: dataElement?.displayName, sortDirection: 'default' };
     });
     return [...defaultColumns, ...dataElementHeaders];
 };
