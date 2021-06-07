@@ -29,7 +29,14 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-export const EnrollmentPageDefaultPlain = ({ program, teiId, events, enrollmentId, classes }: PlainProps) => (
+export const EnrollmentPageDefaultPlain = ({
+    program,
+    teiId,
+    events,
+    enrollmentId,
+    onDelete,
+    classes,
+}: PlainProps) => (
     <>
         <div className={classes.title}>Enrollment Dashboard</div>
         <div className={classes.columns}>
@@ -45,6 +52,7 @@ export const EnrollmentPageDefaultPlain = ({ program, teiId, events, enrollmentI
                     teiId={teiId}
                     enrollmentId={enrollmentId}
                     programId={program.id}
+                    onDelete={onDelete}
                 />
             </div>
         </div>

@@ -6,6 +6,7 @@ export type Props = {|
     enrollmentId: string,
     teiId: string,
     events: any,
+    onDelete: () => void,
 |};
 
 export type PlainProps = {|
