@@ -35,7 +35,7 @@ const styles = {
 
 const WidgetFeedbackContentComponent = ({ widgetData, classes }: contentType) => {
     if (!widgetData?.length) {
-        return <p className={classes.noFeedbackText}>{i18n.t('No feedback for this enrollment yet')}</p>;
+        return <p data-test={'widget-content'} className={classes.noFeedbackText}>{i18n.t('No feedback for this enrollment yet')}</p>;
     }
 
     const renderTextObject = (item: filteredText) => (
@@ -66,7 +66,10 @@ const WidgetFeedbackContentComponent = ({ widgetData, classes }: contentType) =>
     );
 
     return (
-        <div className={classes.container}>
+        <div
+            data-test={'widget-content'}
+            className={classes.container}
+        >
             <ul className={classes.unorderedList}>
                 {widgetData.map((rule: any, index: number) => {
                     if (rule.key) {

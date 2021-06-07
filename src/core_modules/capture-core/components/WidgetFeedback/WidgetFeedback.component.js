@@ -11,6 +11,7 @@ export const WidgetFeedback = ({ feedback, classes }: Props) => {
     return (
         <div
             className={classes}
+            data-test={'feedback-widget'}
         >
             <Widget
                 header={i18n.t('Feedback')}
