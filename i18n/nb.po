@@ -655,6 +655,12 @@ msgstr "Opprett ny hendelse i dette programmet"
 msgid "View working list in this program."
 msgstr "Se arbeidsliste i dette programmet."
 
+msgid "Enrollment{{escape}} View Event"
+msgstr ""
+
+msgid "Enrollment{{escape}} Edit Event"
+msgstr ""
+
 msgid "Delete event"
 msgstr "Slett hendelse"
 
