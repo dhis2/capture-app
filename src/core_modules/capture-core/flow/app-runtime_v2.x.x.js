@@ -33,7 +33,7 @@ declare module '@dhis2/app-runtime' {
         variables?: QueryVariables
     |};
     declare type RefetchFunction<ReturnType> = (options?: RefetchOptions) => Promise<ReturnType>;
-    declare type QueryRefetchFunction = RefetchFunction<QueryResult>;
+    declare export type QueryRefetchFunction = RefetchFunction<QueryResult>;
 
     declare type FetchErrorTypeName = 'network' | 'unknown' | 'access' | 'aborted';
     declare type FetchErrorDetails = { message?: string };
@@ -69,15 +69,15 @@ declare module '@dhis2/app-runtime' {
     |};
     declare type UpdateMutation = {|
         ...ResourceQuery,
-        type: 'update' | 'replace',
-        id: string,
+        type: 'update' | 'replace' | 'delete',
+        id: string | (data: Object) => string,
         partial?: boolean,
         data: MutationData,
     |};
     declare type DeleteMutation = {|
         ...ResourceQuery,
         type: 'delete',
-        id: string,
+        id: string | (data: Object) => string,
     |};
     declare type Mutation = CreateMutation | UpdateMutation | DeleteMutation;
     declare type MutationOptions = {|
@@ -134,4 +134,6 @@ declare module '@dhis2/app-runtime' {
     |};
 
     declare export function useDataQuery(resourceQueries: ResourceQueries, queryOptions?: QueryOptions): QueryRenderInput;
+
+    declare export function useDataMutation(mutation: Mutation, mutationOptions?: QueryOptions): MutationRenderInput;
 }
