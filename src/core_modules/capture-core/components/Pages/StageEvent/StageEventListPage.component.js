@@ -8,7 +8,7 @@ import type { Props } from './StageEventListPage.types';
 import { StageEventListComponent } from './StageEventList/StageEventList.component';
 import { withErrorMessageHandler } from '../../../HOC';
 
-const getStyles = ({ }) => ({
+const getStyles = () => ({
     container: {
         padding: `${spacersNum.dp16}px ${spacersNum.dp24}px`,
     },

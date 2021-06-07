@@ -16,7 +16,7 @@ const getStyles = () => ({
     },
     title: {
         color: colors.grey900,
-        fontSize: 16,
+        fontSize: spacersNum.dp16,
         fontWeight: 500,
     },
 });
