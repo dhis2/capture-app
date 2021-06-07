@@ -53,27 +53,30 @@ export class CustomForm {
     // $FlowFixMe[missing-annot] automated comment
     transformNode = (node: Object, index: number, nodeToElementFn) => {
         if (node.name === 'input') {
-            const htmlElementId = node.attribs && node.attribs.id;
-            const matchResult = htmlElementId && /-[^-]+/.exec(htmlElementId);
-            if (matchResult) {
-                const id = matchResult[0].replace('-', '');
+            const htmlElementId = node.attribs && node.attribs.attributeid;
+            // const matchResult = htmlElementId && /-[^-]+/.exec(htmlElementId);
+
+            if (htmlElementId) {
                 const inputElement = nodeToElementFn(node, index);
+                const fullid = inputElement.props?.attributeid;
 
                 const style = inputElement.props && inputElement.props.style;
                 const className = inputElement.props && inputElement.props.className;
 
+
                 const customFormElementProps = {
-                    id: htmlElementId,
+                    id: fullid,
                     style,
                     className,
                 };
 
-                return React.createElement(
+                const element = React.createElement(
                     'FormField', {
                         customFormElementProps,
-                        id,
+                        id: htmlElementId,
                     },
                 );
+                return element;
             }
         }
         return undefined;
