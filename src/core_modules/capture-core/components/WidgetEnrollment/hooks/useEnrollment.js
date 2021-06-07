@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useEnrollment = (enrollmentId: string) => {
-    const { error, loading, data } = useDataQuery(
+    const { error, loading, data, refetch } = useDataQuery(
         useMemo(
             () => ({
                 enrollment: {
@@ -14,5 +14,5 @@ export const useEnrollment = (enrollmentId: string) => {
         ),
     );
 
-    return { error, enrollment: !loading && data?.enrollment };
+    return { error, refetch, enrollment: !loading && data?.enrollment };
 };
