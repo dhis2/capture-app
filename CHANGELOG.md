@@ -1,3 +1,31 @@
+## [1.23.2](https://github.com/dhis2/capture-app/compare/v1.23.1...v1.23.2) (2021-06-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([853bf4c](https://github.com/dhis2/capture-app/commit/853bf4c805cdc061c933cd961fb22a1512abfec2))
+
+## [1.23.1](https://github.com/dhis2/capture-app/compare/v1.23.0...v1.23.1) (2021-06-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5049da6](https://github.com/dhis2/capture-app/commit/5049da67adb0b3ac51cb27b169b9d8954df5dfd3))
+
+# [1.23.0](https://github.com/dhis2/capture-app/compare/v1.22.3...v1.23.0) (2021-06-04)
+
+
+### Features
+
+* [DHIS2-10943] enrollemnt actions ([#1708](https://github.com/dhis2/capture-app/issues/1708)) ([4ce5c91](https://github.com/dhis2/capture-app/commit/4ce5c919da965dda06339a0109192fd665f6a5d2))
+
+## [1.22.3](https://github.com/dhis2/capture-app/compare/v1.22.2...v1.22.3) (2021-06-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([215ccb7](https://github.com/dhis2/capture-app/commit/215ccb797b3d315adac95f2128299c9d05c539a6))
+
 ## [1.22.2](https://github.com/dhis2/capture-app/compare/v1.22.1...v1.22.2) (2021-05-25)
 
 
