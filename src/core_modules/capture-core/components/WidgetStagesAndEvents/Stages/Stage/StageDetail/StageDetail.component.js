@@ -32,7 +32,6 @@ const styles = {
 };
 
 const StageDetailPlain = ({ events, data, classes }: Props) => {
-    console.log({ events });
     function renderHeaderRow() {
         const headerCells = getHeaderColumn(data, events)
             .map(column => (

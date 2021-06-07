@@ -21,3 +21,13 @@ export type Event = {
     status: string,
     trackedEntityInstance: string
 }
+
+type ProgramStageDataElement = {
+    dataElements: Array<{id: string, valueType: string, displayName: string}>
+}
+
+export type ProgramStageData = {
+    id: string,
+    programStageDataElements: Array<ProgramStageDataElement>
+}
+

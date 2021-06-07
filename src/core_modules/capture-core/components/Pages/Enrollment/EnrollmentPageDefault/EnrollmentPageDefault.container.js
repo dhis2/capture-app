@@ -47,7 +47,7 @@ export const EnrollmentPageDefault = () => {
         <EnrollmentPageDefaultComponent
             teiId={teiId}
             program={program}
-            programMetadata={programMetadata}
+            programStages={programMetadata?.programStages}
             events={enrollment?.events ?? []}
             enrollmentId={enrollmentId}
             onDelete={onDelete}

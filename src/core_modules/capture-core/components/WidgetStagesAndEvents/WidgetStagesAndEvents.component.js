@@ -5,7 +5,7 @@ import { Widget } from '../Widget';
 import { Stages } from './Stages';
 import type { Props } from './stagesAndEvents.types';
 
-export const WidgetStagesAndEvents = ({ className, stages, programMetadata, events }: Props) => {
+export const WidgetStagesAndEvents = ({ className, stages, programStages, events }: Props) => {
     const [open, setOpenStatus] = useState(true);
     return (
         <div
@@ -19,7 +19,7 @@ export const WidgetStagesAndEvents = ({ className, stages, programMetadata, even
                 open={open}
             >
                 <Stages
-                    programMetadata={programMetadata}
+                    programStages={programStages}
                     stages={stages}
                     events={events}
                 />
