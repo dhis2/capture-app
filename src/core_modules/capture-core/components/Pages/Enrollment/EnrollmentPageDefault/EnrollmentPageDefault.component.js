@@ -33,6 +33,7 @@ export const EnrollmentPageDefaultPlain = ({
     program,
     teiId,
     enrollmentId,
+    onDelete,
     classes,
 }: PlainProps) => (
     <>
@@ -47,6 +48,7 @@ export const EnrollmentPageDefaultPlain = ({
                     teiId={teiId}
                     enrollmentId={enrollmentId}
                     programId={program.id}
+                    onDelete={onDelete}
                 />
             </div>
         </div>
