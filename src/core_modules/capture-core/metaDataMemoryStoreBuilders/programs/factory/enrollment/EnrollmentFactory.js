@@ -92,41 +92,71 @@ export class EnrollmentFactory {
         return DataElementFactory.buildtetFeatureType(featureType);
     }
 
-    async _buildSection(
-        cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
-        cachedProgramTrackedEntityTypeId: ?string,
-        cachedSectionCustomLabel: ?string,
-        cachedSectionCustomId: ?string,
+    async _buildTetFeatureTypeSection(
+        cachedProgramTrackedEntityTypeId: string,
     ) {
         const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId);
-        if ((!cachedProgramTrackedEntityAttributes ||
-            cachedProgramTrackedEntityAttributes.length <= 0) &&
-            !featureTypeField) {
+        const trackedEntityTypeName = this.cachedTrackedEntityTypes.get(cachedProgramTrackedEntityTypeId);
+
+        if (!trackedEntityTypeName?.displayName) {
             return null;
         }
 
-        let section;
-        if (cachedSectionCustomLabel && cachedSectionCustomId) {
-            section = new Section((o) => {
-                o.id = cachedSectionCustomId;
-                o.name = cachedSectionCustomLabel;
-            });
-        } else {
-            section = new Section((o) => {
-                o.id = Section.MAIN_SECTION_ID;
-                o.name = i18n.t('Profile');
-            });
-        }
-
+        const section = new Section((o) => {
+            o.id = cachedProgramTrackedEntityTypeId;
+            o.name = trackedEntityTypeName.displayName;
+        });
 
         featureTypeField && section.addElement(featureTypeField);
-        if (cachedProgramTrackedEntityAttributes && cachedProgramTrackedEntityAttributes.length > 0) {
-            // $FlowFixMe
-            await cachedProgramTrackedEntityAttributes.asyncForEach(async (ptea) => {
-                const element = await this.dataElementFactory.build(ptea);
-                element && section.addElement(element);
-            });
+        return section;
+    }
+
+    async _buildMainSection(
+        cachedProgramTrackedEntityAttributes?: ?Array<CachedProgramTrackedEntityAttribute>,
+        cachedProgramTrackedEntityTypeId?: ?string,
+    ) {
+        const section = new Section((o) => {
+            o.id = Section.MAIN_SECTION_ID;
+            o.name = i18n.t('Profile');
+        });
+
+        if (!cachedProgramTrackedEntityAttributes?.length) {
+            return null;
         }
+
+        if (cachedProgramTrackedEntityTypeId) {
+            const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId);
+            featureTypeField && section.addElement(featureTypeField);
+        }
+
+        // $FlowFixMe
+        await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
+            const element = await this.dataElementFactory.build(trackedEntityAttribute);
+            element && section.addElement(element);
+        });
+
+        return section;
+    }
+
+    async _buildSection(
+        cachedProgramTrackedEntityAttributes?: Array<CachedProgramTrackedEntityAttribute>,
+        cachedSectionCustomLabel: string,
+        cachedSectionCustomId: string,
+    ) {
+        if (!cachedProgramTrackedEntityAttributes?.length) {
+            return null;
+        }
+
+        const section = new Section((o) => {
+            o.id = cachedSectionCustomId;
+            o.name = cachedSectionCustomLabel;
+        });
+
+        // $FlowFixMe
+        await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
+            const element = await this.dataElementFactory.build(trackedEntityAttribute);
+            element && section.addElement(element);
+        });
 
         return section;
     }
@@ -134,34 +164,43 @@ export class EnrollmentFactory {
     async _buildEnrollmentForm(
         cachedProgram: CachedProgram,
         cachedProgramSections: ?Array<CachedProgramSection>,
-        cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
     ) {
+        const cachedProgramTrackedEntityAttributes = cachedProgram?.programTrackedEntityAttributes;
         const enrollmentForm = new RenderFoundation((o) => {
             o.featureType = EnrollmentFactory._getFeatureType(cachedProgram.featureType);
             o.name = cachedProgram.displayName;
         });
 
         let section;
-        if (cachedProgramSections && cachedProgramSections.length > 0) {
+        if (cachedProgramSections?.length) {
+            if (cachedProgram.trackedEntityTypeId) {
+                section = await this._buildTetFeatureTypeSection(cachedProgram.trackedEntityTypeId);
+                section && enrollmentForm.addSection(section);
+            }
+
             // $FlowFixMe
-            cachedProgramSections.asyncForEach(async (programSection) => {
-                let trackedEntityAttributes;
-                if (cachedProgram.trackedEntityTypeId) {
-                    const TEFTLabel = this.cachedTrackedEntityTypes.get(cachedProgram.trackedEntityTypeId)?.displayName;
-                    section = await this._buildSection(trackedEntityAttributes, cachedProgram.trackedEntityTypeId, TEFTLabel, cachedProgram.trackedEntityTypeId);
-                    section && enrollmentForm.addSection(section);
-                }
-                if (cachedProgramTrackedEntityAttributes &&
-                    cachedProgramTrackedEntityAttributes.length > 0) {
-                    trackedEntityAttributes = cachedProgramTrackedEntityAttributes
-                        .filter(trackedEntityAttribute => programSection.trackedEntityAttributes
-                            .includes(trackedEntityAttribute.trackedEntityAttributeId));
-                }
-                section = await this._buildSection(trackedEntityAttributes, null, programSection.displayFormName, programSection.id);
+            cachedProgramTrackedEntityAttributes && cachedProgramSections.asyncForEach(async (programSection) => {
+                const trackedEntityAttributes = cachedProgramTrackedEntityAttributes
+                    .filter(trackedEntityAttribute => programSection.trackedEntityAttributes
+                        .includes(trackedEntityAttribute.trackedEntityAttributeId));
+                section = await this._buildSection(trackedEntityAttributes, programSection.displayFormName, programSection.id);
                 section && enrollmentForm.addSection(section);
             });
         } else if (cachedProgram.dataEntryForm) {
             section = await this._buildSection(cachedProgram.programTrackedEntityAttributes);
+        } else {
+            section = await
+            this._buildMainSection(cachedProgramTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
+            section && enrollmentForm.addSection(section);
+        }
+
+
+        if (cachedProgram.dataEntryForm) {
+            if (!section) {
+                section = new Section((o) => {
+                    o.id = Section.MAIN_SECTION_ID;
+                });
+            }
             section.showContainer = false;
             const dataEntryForm = cachedProgram.dataEntryForm;
             dataEntryForm.htmlCode = "<h1 style=\"color:red;\">Teststyle</h1>\n" +
@@ -186,10 +225,6 @@ export class EnrollmentFactory {
                 log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
                     template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
             }
-        } else {
-            section = await
-            this._buildSection(cachedProgram.programTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
-            section && enrollmentForm.addSection(section);
         }
 
 
@@ -322,7 +357,7 @@ export class EnrollmentFactory {
             o.inputSearchGroups = this._buildInputSearchGroups(cachedProgram, programSearchGroups);
         });
 
-        enrollment.enrollmentForm = await this._buildEnrollmentForm(cachedProgram, cachedProgram.programSections, cachedProgram.programTrackedEntityAttributes);
+        enrollment.enrollmentForm = await this._buildEnrollmentForm(cachedProgram, cachedProgram.programSections);
         return enrollment;
     }
 }
