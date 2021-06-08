@@ -6,7 +6,6 @@ import type { WidgetNonCollapsibleProps, WidgetNonCollapsiblePropsPlain } from '
 
 const styles = {
     container: {
-        backgroundColor: colors.white,
         borderRadius: 3,
         borderStyle: 'solid',
         borderColor: colors.grey400,
@@ -33,6 +32,7 @@ const WidgetNonCollapsiblePlain = ({ header, children, color, classes }: WidgetN
         </div>
         <div
             data-test="widget-contents"
+            style={{ backgroundColor: color || colors.white }}
         >
             {children}
         </div>

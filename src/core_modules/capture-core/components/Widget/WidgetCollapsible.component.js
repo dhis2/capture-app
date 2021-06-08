@@ -8,7 +8,6 @@ import type { WidgetCollapsibleProps, WidgetCollapsiblePropsPlain } from './widg
 
 const styles = {
     headerContainer: {
-        backgroundColor: colors.white,
         borderRadius: 3,
         borderStyle: 'solid',
         borderColor: colors.grey400,
@@ -29,7 +28,6 @@ const styles = {
         color: colors.grey800,
     },
     children: {
-        backgroundColor: colors.white,
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
         borderBottomLeftRadius: 3,
@@ -132,6 +130,7 @@ const WidgetCollapsiblePlain = ({ header, open, onOpen, onClose, color, children
                 childrenVisible ? (
                     <div
                         data-test="widget-contents"
+                        style={{ backgroundColor: color || colors.white }}
                         className={cx(classes.children, {
                             open: animationsReady && open,
                             close: animationsReady && !open })}
