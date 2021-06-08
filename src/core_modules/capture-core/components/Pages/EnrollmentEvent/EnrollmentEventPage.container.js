@@ -23,12 +23,7 @@ export const EnrollmentEventPage = () => {
     const programStage = [...program.stages?.values()].find(
         item => item.id === stageId,
     );
-    const eventAccess = { read: true, write: true };
     return (
-        <EnrollmentEventPageComponent
-            mode={mode}
-            programStage={programStage}
-            eventAccess={eventAccess}
-        />
+        <EnrollmentEventPageComponent mode={mode} programStage={programStage} />
     );
 };

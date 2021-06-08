@@ -6,7 +6,7 @@ import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentEventPage.types';
 import { pageMode } from './EnrollmentEventPage.const';
-import { EventDetails } from '../ViewEvent/EventDetailsSection/EventDetailsSection.container';
+import { WidgetEventEdit } from '../../WidgetEventEdit/';
 
 const styles = ({ typography }) => ({
     page: {
@@ -21,7 +21,6 @@ const styles = ({ typography }) => ({
 const EnrollmentEventPagePain = ({
     mode,
     programStage,
-    eventAccess,
     classes,
 }) => (
     <div className={classes.page}>
@@ -35,14 +34,9 @@ const EnrollmentEventPagePain = ({
                 })}
         </div>
         {programStage ? (
-            <EventDetails
-                eventAccess={eventAccess}
-                programStage={programStage}
-                shouldShowName
-                shouldShowIcon
-            />
+            <WidgetEventEdit programStage={programStage} mode={mode} />
         ) : (
-            <span> {i18n.t('We could not find the stage in the program') }</span>
+            <span> {i18n.t('We could not find the stage in the program')}</span>
         )}
     </div>
 );
