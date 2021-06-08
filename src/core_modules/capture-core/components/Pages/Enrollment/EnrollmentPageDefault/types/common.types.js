@@ -61,7 +61,7 @@ type InputProgramMetadata = {
 
 type InputTrackedEntityAttributes = {
     value: string,
-    valueType: string,
+    valueType: $Keys<typeof dataElementTypes>,
     attribute: string,
     optionSet?: {
         id: string
