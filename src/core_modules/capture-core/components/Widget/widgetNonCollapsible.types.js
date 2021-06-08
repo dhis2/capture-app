@@ -4,7 +4,7 @@ import type { Node } from 'react';
 export type WidgetNonCollapsibleProps = {|
     header: Node,
     children: Node,
-    containerstyle?: ?{},
+    containerstyle?: ?Object,
 |};
 
 export type WidgetNonCollapsiblePropsPlain = {|
