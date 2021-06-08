@@ -33,7 +33,7 @@
         "Cypress": true
     },
     "rules": {
-      "indent": [2, 4],
+        "indent": [2, 4],
         "max-len": [
             1,
             120,
