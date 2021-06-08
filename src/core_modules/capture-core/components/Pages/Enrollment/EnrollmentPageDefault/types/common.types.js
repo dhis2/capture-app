@@ -62,7 +62,10 @@ type InputProgramMetadata = {
 type InputTrackedEntityAttributes = {
     value: string,
     valueType: string,
-    attribute: string
+    attribute: string,
+    optionSet?: {
+        id: string
+    }
 }
 
 export type InputRuleEnrollmentData = {

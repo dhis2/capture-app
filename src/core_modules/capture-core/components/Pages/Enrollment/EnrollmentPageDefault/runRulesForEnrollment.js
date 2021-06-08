@@ -95,7 +95,7 @@ export const runRulesForEnrollment = (input: InputRuleEnrollmentData) => {
         }, {});
 
         const teiAttributesValues = attributes?.reduce((acc, item) => {
-            acc[item.attribute] = convertValue(item.value, item.valutType);
+            acc[item.attribute] = convertValue(item.value, item.valueType);
             return acc;
         }, {});
 
