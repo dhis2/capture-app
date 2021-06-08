@@ -4,15 +4,15 @@ import { WidgetCollapsible } from './WidgetCollapsible.component';
 import { WidgetNonCollapsible } from './WidgetNonCollapsible.component';
 import type { Props } from './widget.types';
 
-export const Widget = ({ collapsible = true, className, ...passOnProps }: Props) => (
+export const Widget = ({ collapsible = true, ...passOnProps }: Props) => (
     collapsible ? (
-        <div className={className}>
+        <div>
             { /* $FlowFixMe */ }
             <WidgetCollapsible
                 {...passOnProps}
             />
         </div>) :
-        (<div className={className}>
+        (<div>
             { /* $FlowFixMe */ }
             <WidgetNonCollapsible
                 {...passOnProps}
