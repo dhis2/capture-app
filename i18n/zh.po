@@ -640,6 +640,9 @@ msgstr ""
 msgid "Enrollment{{escape}} Edit Event"
 msgstr ""
 
+msgid "We could not find the stage in the program"
+msgstr ""
+
 msgid "Delete event"
 msgstr "删除事件"
 
@@ -848,6 +851,9 @@ msgstr "搜索所有项目"
 
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
+
+msgid "Event details"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "

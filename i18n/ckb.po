@@ -651,6 +651,9 @@ msgstr ""
 msgid "Enrollment{{escape}} Edit Event"
 msgstr ""
 
+msgid "We could not find the stage in the program"
+msgstr ""
+
 msgid "Delete event"
 msgstr "حاڵەتەکە بسڕەوە"
 
@@ -859,6 +862,9 @@ msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
+
+msgid "Event details"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
