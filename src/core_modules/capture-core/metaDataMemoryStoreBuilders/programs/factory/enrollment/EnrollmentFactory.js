@@ -161,6 +161,31 @@ export class EnrollmentFactory {
         return section;
     }
 
+    async _buildCustomEnrollmentForm(
+        enrollmentForm: RenderFoundation,
+        dataEntryForm,
+        cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
+    ) {
+        let section = new Section((o) => {
+            o.id = Section.MAIN_SECTION_ID;
+        });
+
+        section.showContainer = false;
+
+        section = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
+        section && enrollmentForm.addSection(section);
+        try {
+            enrollmentForm.customForm = new CustomForm((o) => {
+                o.id = dataEntryForm.id;
+                o.data = dataEntryForm.htmlCode;
+            });
+        } catch (error) {
+            log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
+                template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
+        }
+        return enrollmentForm;
+    }
+
     async _buildEnrollmentForm(
         cachedProgram: CachedProgram,
         cachedProgramSections: ?Array<CachedProgramSection>,
@@ -172,7 +197,9 @@ export class EnrollmentFactory {
         });
 
         let section;
-        if (cachedProgramSections?.length) {
+        if (cachedProgram.dataEntryForm) {
+            await this._buildCustomEnrollmentForm(enrollmentForm, cachedProgram.dataEntryForm, cachedProgramTrackedEntityAttributes);
+        } else if (cachedProgramSections?.length) {
             if (cachedProgram.trackedEntityTypeId) {
                 section = await this._buildTetFeatureTypeSection(cachedProgram.trackedEntityTypeId);
                 section && enrollmentForm.addSection(section);
@@ -186,50 +213,10 @@ export class EnrollmentFactory {
                 section = await this._buildSection(trackedEntityAttributes, programSection.displayFormName, programSection.id);
                 section && enrollmentForm.addSection(section);
             });
-        } else if (cachedProgram.dataEntryForm) {
-            section = new Section((o) => {
-                o.id = Section.MAIN_SECTION_ID;
-            });
-
-            section.showContainer = false;
-            const dataEntryForm = cachedProgram.dataEntryForm;
-
-            section = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
-            section && enrollmentForm.addSection(section);
-            try {
-                enrollmentForm.customForm = new CustomForm((o) => {
-                    o.id = dataEntryForm.id;
-                    o.data = dataEntryForm.htmlCode;
-                });
-            } catch (error) {
-                log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
-                    template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
-            }
         } else {
-            section = await
-            this._buildMainSection(cachedProgramTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
+            await this._buildMainSection(cachedProgramTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
             section && enrollmentForm.addSection(section);
         }
-
-
-        // if (cachedProgram.dataEntryForm) {
-        //     if (!section) {
-        //         section = new Section((o) => {
-        //             o.id = Section.MAIN_SECTION_ID;
-        //         });
-        //     }
-        //     section.showContainer = false;
-        //     const dataEntryForm = cachedProgram.dataEntryForm;
-        //     try {
-        //         enrollmentForm.customForm = new CustomForm((o) => {
-        //             o.id = dataEntryForm.id;
-        //             o.data = dataEntryForm.htmlCode;
-        //         });
-        //     } catch (error) {
-        //         log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
-        //             template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
-        //     }
-        // }
         return enrollmentForm;
     }
 
