@@ -214,7 +214,7 @@ msgid "No write access"
 msgstr "Žádný přístup pro zápis"
 
 msgid "New {{titleText}}"
-msgstr ""
+msgstr "Nový {{titleText}}"
 
 msgid "Switch to form view"
 msgstr "Přepnout do formulářového zobrazení"
@@ -803,7 +803,7 @@ msgid "Back"
 msgstr "Zpět"
 
 msgid "Search for {{titleText}}"
-msgstr ""
+msgstr "Hledat {{titleText}}"
 
 msgid "Search for"
 msgstr "Hledat"
@@ -936,7 +936,7 @@ msgid "An error has occured. See log for details"
 msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
+msgstr "{{trackedEntityName}} v program{{escape}} {{programName}}"
 
 msgid "Program not found"
 msgstr "Program nebyl nalezen"
