@@ -7,12 +7,13 @@ import { pageMode } from './EnrollmentEventPage.const';
 import { EnrollmentEventPageComponent } from './EnrollmentEventPage.component';
 
 export const EnrollmentEventPage = () => {
-    const { programId, stageId } = useSelector(
+    const { eventId, programId, stageId } = useSelector(
         ({
             router: {
                 location: { query },
             },
         }) => ({
+            eventId: query.eventId,
             programId: query.programId,
             stageId: query.stageId,
         }),
@@ -24,6 +25,10 @@ export const EnrollmentEventPage = () => {
         item => item.id === stageId,
     );
     return (
-        <EnrollmentEventPageComponent mode={mode} programStage={programStage} />
+        <EnrollmentEventPageComponent
+            mode={mode}
+            programStage={programStage}
+            eventId={eventId}
+        />
     );
 };

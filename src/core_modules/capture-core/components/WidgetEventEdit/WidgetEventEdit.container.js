@@ -17,6 +17,9 @@ const styles = {
     name: {
         margin: `0 ${spacersNum.dp4}px`,
     },
+    form: {
+        padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
+    },
 };
 
 export const WidgetEventEditPlain = ({
@@ -43,11 +46,17 @@ export const WidgetEventEditPlain = ({
             onClose={() => {}}
             open
         >
-            {mode === pageMode.VIEW ? (
-                <ViewEventDataEntry formFoundation={programStage.stageForm} />
-            ) : (
-                <EditEventDataEntry formFoundation={programStage.stageForm} />
-            )}
+            <div className={classes.form}>
+                {mode === pageMode.VIEW ? (
+                    <ViewEventDataEntry
+                        formFoundation={programStage.stageForm}
+                    />
+                ) : (
+                    <EditEventDataEntry
+                        formFoundation={programStage.stageForm}
+                    />
+                )}
+            </div>
         </Widget>
     </div>
 );
