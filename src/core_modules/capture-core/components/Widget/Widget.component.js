@@ -11,9 +11,11 @@ export const Widget = ({ collapsible = true, className, ...passOnProps }: Props)
             <WidgetCollapsible
                 {...passOnProps}
             />
-        </div>) : (
-            // $FlowFixMe doesn't work due to destructering :(
+        </div>) :
+        (<div className={className}>
+            { /* $FlowFixMe */ }
             <WidgetNonCollapsible
                 {...passOnProps}
-            />)
+            />
+        </div>)
 );
