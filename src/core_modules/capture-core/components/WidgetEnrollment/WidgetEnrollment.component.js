@@ -16,11 +16,12 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
-import type { Props } from './enrollment.types';
+import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
 import { convertValue as convertValueServerToClient } from '../../converters/serverToClient';
 import { convertValue as convertValueClientToView } from '../../converters/clientToView';
 import { dataElementTypes } from '../../metaData';
+import { Actions } from './Actions';
 
 const styles = {
     icon: {
@@ -43,9 +44,11 @@ export const WidgetEnrollmentPlain = ({
     enrollment = {},
     program = {},
     ownerOrgUnit = {},
+    refetch,
     error,
     loading,
-}: Props) => {
+    onDelete,
+}: PlainProps) => {
     const [open, setOpenStatus] = useState(true);
 
     if (error) {
@@ -194,6 +197,11 @@ export const WidgetEnrollmentPlain = ({
                                 )}
                             </div>
                         )}
+                        <Actions
+                            enrollment={enrollment}
+                            refetch={refetch}
+                            onDelete={onDelete}
+                        />
                     </div>
                 )}
             </Widget>
@@ -201,5 +209,5 @@ export const WidgetEnrollmentPlain = ({
     );
 };
 
-export const WidgetEnrollment: ComponentType<$Diff<Props, CssClasses>> =
+export const WidgetEnrollment: ComponentType<$Diff<PlainProps, CssClasses>> =
     withStyles(styles)(WidgetEnrollmentPlain);
