@@ -46,11 +46,11 @@ const EnrollmentEventPagePain = ({ mode, programStage, eventId, classes }) => {
             <div className={classes.title}>
                 {mode === pageMode.VIEW
                     ? i18n.t('Enrollment{{escape}} View Event', {
-                          escape: ':',
-                      })
+                        escape: ':',
+                    })
                     : i18n.t('Enrollment{{escape}} Edit Event', {
-                          escape: ':',
-                      })}
+                        escape: ':',
+                    })}
             </div>
             {programStage ? (
                 <WidgetEventEdit programStage={programStage} mode={mode} />
