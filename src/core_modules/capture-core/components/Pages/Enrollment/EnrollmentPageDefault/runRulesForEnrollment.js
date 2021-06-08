@@ -22,7 +22,7 @@ const getDataElementsFromProgram = (data, eventsDataValues) => {
                     acc[id].optionSetId = optionSet.id;
                 }
                 if (value) {
-                    acc[id].value = convertValue(value, valueType);
+                    acc[id].value = value;
                 }
             });
             return acc;
@@ -31,15 +31,15 @@ const getDataElementsFromProgram = (data, eventsDataValues) => {
 
 const getEventValuesFromEvent = (enrollment, eventId, dataElements) => {
     const currentEvent = enrollment.events.find(item => item.event === eventId);
-    const eventValues = {};
     if (currentEvent) {
-        currentEvent.dataValues.forEach((dataValue) => {
-            const { dataElement } = dataValue;
-            eventValues[dataElement] = dataElements[dataElement].value;
-        });
+        return currentEvent.dataValues.reduce((acc, dataValue) => {
+            const { dataElement: id } = dataValue;
+            acc[id] = convertValue(dataElements[id].value, dataElements[id].valueType);
+            return acc;
+        }, {});
     }
 
-    return eventValues;
+    return {};
 };
 
 
@@ -60,7 +60,11 @@ const getEventsDataFromEnrollment = (enrollment, dataElements) => {
     }));
 
     const groupByProgramStageId = allEvents.reduce((acc, currentEvent) => {
-        acc[currentEvent.programStageId] = { ...currentEvent };
+        if (!acc[currentEvent.programStageId]) {
+            acc[currentEvent.programStageId] = [currentEvent];
+        } else {
+            acc[currentEvent.programStageId].push(currentEvent);
+        }
         return acc;
     }, {});
 
@@ -86,12 +90,12 @@ export const runRulesForEnrollment = (input: InputRuleEnrollmentData) => {
         const dataElements = getDataElementsFromProgram(programMetadata, dataValueList);
 
         const trackedEntityAttributes = attributes.reduce((acc, item) => {
-            acc[item.attribute] = { id: item.attribute, valueType: item.valueType };
+            acc[item.attribute] = { id: item.attribute, valueType: item.valueType, optionSetId: item.optionSet?.id };
             return acc;
         }, {});
 
         const teiAttributesValues = attributes?.reduce((acc, item) => {
-            acc[item.attribute] = item.value;
+            acc[item.attribute] = convertValue(item.value, item.valutType);
             return acc;
         }, {});
 

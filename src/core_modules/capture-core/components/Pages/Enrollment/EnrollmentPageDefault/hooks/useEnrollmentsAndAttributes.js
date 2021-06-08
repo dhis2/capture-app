@@ -4,7 +4,7 @@ import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useEnrollmentsAndAttributes = (teiId: string, enrollmentId: string) => {
     const { data, error, loading } = useDataQuery(useMemo(() => ({
-        teiAttributes: {
+        trackedEntityInstance: {
             resource: 'trackedEntityInstances',
             id: teiId,
             params: { fields: ['enrollments[*],attributes'] },
@@ -13,8 +13,8 @@ export const useEnrollmentsAndAttributes = (teiId: string, enrollmentId: string)
 
 
     return { error,
-        enrollment: !loading && data?.teiAttributes?.enrollments
+        enrollment: !loading && data?.trackedEntityInstance?.enrollments
             .find(enrollment => enrollment.enrollment === enrollmentId),
-        attributes: !loading && data?.teiAttributes?.attributes,
+        attributes: !loading && data?.trackedEntityInstance?.attributes,
     };
 };
