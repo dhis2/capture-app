@@ -633,6 +633,12 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "Enrollment{{escape}} View Event"
+msgstr ""
+
+msgid "Enrollment{{escape}} Edit Event"
+msgstr ""
+
 msgid "Delete event"
 msgstr "Hapus even"
 

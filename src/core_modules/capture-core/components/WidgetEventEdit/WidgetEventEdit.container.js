@@ -13,12 +13,13 @@ const styles = {
     header: {
         display: 'flex',
         alignItems: 'center',
+        padding: spacersNum.dp8,
     },
-    name: {
-        margin: `0 ${spacersNum.dp4}px`,
+    icon: {
+        paddingRight: spacersNum.dp8,
     },
     form: {
-        padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
+        padding: spacersNum.dp8,
     },
 };
 
@@ -32,14 +33,18 @@ export const WidgetEventEditPlain = ({
         <Widget
             header={
                 <div className={classes.header}>
-                    <NonBundledDhis2Icon
-                        name={icon?.name}
-                        color={icon?.color}
-                        width={30}
-                        height={30}
-                        cornerRadius={2}
-                    />
-                    <span className={classes.name}> {name} </span>
+                    {icon && (
+                        <div className={classes.icon}>
+                            <NonBundledDhis2Icon
+                                name={icon?.name}
+                                color={icon?.color}
+                                width={30}
+                                height={30}
+                                cornerRadius={2}
+                            />
+                        </div>
+                    )}
+                    <span> {name} </span>
                 </div>
             }
             onOpen={() => {}}

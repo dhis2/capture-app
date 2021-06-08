@@ -1,3 +1,17 @@
+## [1.24.1](https://github.com/dhis2/capture-app/compare/v1.24.0...v1.24.1) (2021-06-07)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b0f28b0](https://github.com/dhis2/capture-app/commit/b0f28b019d76a9f31c79949135e7b089437f0294))
+
+# [1.24.0](https://github.com/dhis2/capture-app/compare/v1.23.2...v1.24.0) (2021-06-07)
+
+
+### Features
+
+* [DHIS2-11200] enrollment view/edit event page ([#1750](https://github.com/dhis2/capture-app/issues/1750)) ([b11ac2c](https://github.com/dhis2/capture-app/commit/b11ac2c12beaeab48e548e953374af200c1a94f7))
+
 ## [1.23.2](https://github.com/dhis2/capture-app/compare/v1.23.1...v1.23.2) (2021-06-05)
 
 
