@@ -7,6 +7,7 @@ export type WidgetCollapsibleProps = {|
     open: boolean,
     onOpen: () => void,
     onClose: () => void,
+    containerstyle?: ?{}
 |};
 
 export type WidgetCollapsiblePropsPlain = {|

@@ -79,7 +79,7 @@ const styles = {
     },
 };
 
-const WidgetCollapsiblePlain = ({ header, open, onOpen, onClose, children, classes }: WidgetCollapsiblePropsPlain) => {
+const WidgetCollapsiblePlain = ({ header, open, onOpen, onClose, children, containerstyle, classes }: WidgetCollapsiblePropsPlain) => {
     const [childrenVisible, setChildrenVisibility] = useState(open); // controls whether children are rendered to the DOM
     const [animationsReady, setAnimationsReadyStatus] = useState(false);
     const [postEffectOpen, setPostEffectOpenStatus] = useState(open);
@@ -110,7 +110,7 @@ const WidgetCollapsiblePlain = ({ header, open, onOpen, onClose, children, class
 
     return (
         <div>
-            <div className={cx(classes.headerContainer, { childrenVisible })}>
+            <div className={cx(classes.headerContainer, { childrenVisible })} style={containerstyle}>
                 <div className={classes.header}>
                     {header}
                     <IconButton

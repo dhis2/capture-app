@@ -22,8 +22,8 @@ const styles = {
     },
 };
 
-const WidgetNonCollapsiblePlain = ({ header, children, classes }: WidgetNonCollapsiblePropsPlain) => (
-    <div className={classes.container}>
+const WidgetNonCollapsiblePlain = ({ header, children, containerstyle, classes }: WidgetNonCollapsiblePropsPlain) => (
+    <div className={classes.container} style={containerstyle}>
         <div
             className={classes.header}
             data-test="widget-header"
