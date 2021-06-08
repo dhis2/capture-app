@@ -9,7 +9,6 @@ import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.compon
 import { EditEventDataEntry } from './EditEventDataEntry/EditEventDataEntry.container';
 import { ViewEventDataEntry } from './ViewEventDataEntry/ViewEventDataEntry.container';
 import type { ProgramStage } from '../../../../metaData';
-import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -114,33 +113,11 @@ class EventDetailsSectionPlain extends Component<Props> {
     render() {
         const {
             classes,
-            programStage: { name, icon },
-            shouldShowName,
-            shouldShowIcon,
         } = this.props;
         return (
             <div className={classes.container}>
                 <ViewEventSection
-                    header={
-                        <ViewEventSectionHeader
-                            text={
-                                shouldShowName && name ? name : i18n.t('Event details')
-                            }
-                            icon={
-                                shouldShowIcon && icon
-                                    ? () => (
-                                        <NonBundledDhis2Icon
-                                            name={icon.name}
-                                            color={icon.color}
-                                            width={30}
-                                            height={30}
-                                            cornerRadius={2}
-                                        />
-                                    )
-                                    : InfoIcon
-                            }
-                        />
-                    }
+                    header={<ViewEventSectionHeader text={i18n.t('Event details')} icon={InfoIcon} />}
                 >
                     <div className={classes.content}>
                         {this.renderDataEntryContainer()}
