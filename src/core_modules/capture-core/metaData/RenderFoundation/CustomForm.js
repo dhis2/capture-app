@@ -54,7 +54,6 @@ export class CustomForm {
     transformNode = (node: Object, index: number, nodeToElementFn) => {
         if (node.name === 'input') {
             const htmlElementId = node.attribs && node.attribs.attributeid;
-            // const matchResult = htmlElementId && /-[^-]+/.exec(htmlElementId);
 
             if (htmlElementId) {
                 const inputElement = nodeToElementFn(node, index);
@@ -62,7 +61,6 @@ export class CustomForm {
 
                 const style = inputElement.props && inputElement.props.style;
                 const className = inputElement.props && inputElement.props.className;
-
 
                 const customFormElementProps = {
                     id: fullid,
