@@ -40,8 +40,6 @@ type Props = {
     onOpenEditEvent: () => void,
     programStage: ProgramStage,
     eventAccess: { read: boolean, write: boolean },
-    shouldShowName: ?boolean,
-    shouldShowIcon: ?boolean,
     classes: {
         container: string,
         content: string,
