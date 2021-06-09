@@ -114,7 +114,12 @@ const StageDetailPlain = ({ events, eventName, data, classes }: Props) => {
                     const nextRowIndex = Math.min(events.length, displayedRowNumber + DEFAULT_NUMBER_OF_ROW);
                     setDisplayedRowNumber(nextRowIndex);
                 }}
-            >{i18n.t('Show {{ rest }} more', { rest: events.length - displayedRowNumber })}</Button> : null);
+            >
+                {i18n.t('Show {{ rest }} more', {
+                    rest: Math.min(events.length - displayedRowNumber, DEFAULT_NUMBER_OF_ROW),
+                })}
+            </Button>
+            : null);
 
         const renderViewAllButton = () => (events.length > 1 ? <Button
             dataTest="view-all-button"

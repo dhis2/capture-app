@@ -26,7 +26,7 @@ export const StagePlain = (
     }: Props) => {
     const [open, setOpenStatus] = useState(true);
 
-    return (<div className={cx(classes.overview, className)}>
+    return (<div data-test="stage-content"className={cx(classes.overview, className)}>
         <Widget
             header={<StageOverview
                 title={name}

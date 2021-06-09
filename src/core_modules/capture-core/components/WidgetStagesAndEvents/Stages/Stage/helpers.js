@@ -54,7 +54,7 @@ export const computeDataFromEvent = (data: any, events: Array<Event>) => {
         const dataElementsInEvent = currentEvent.dataValues
             .map(item => ({ id: item.dataElement,
                 value: formatValueForView(item.value,
-                    data?.find(el => el.dataElement.id === item.dataElement).valueType),
+                    data?.find(el => el.dataElement.id === item.dataElement)?.valueType),
             }));
 
         acc.push([
