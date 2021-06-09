@@ -77,9 +77,7 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
         </Tooltip>
 
         <div className={classes.indicator}>
-            {totalEvents > 1
-                ? i18n.t('{{ totalEvents }} events', { totalEvents })
-                : i18n.t('1 event')}
+            {i18n.t('{{ totalEvents }} events', { totalEvents })}
         </div>
         {overdueEvents > 0 ? <div className={cx(classes.indicator, classes.warningIndicator)}>
             <div className={classes.indicatorIcon}>
