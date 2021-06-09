@@ -34,4 +34,4 @@ const WidgetFeedbackPlain = ({ feedback, classes }: Props) => {
     );
 };
 
-export const WidgetFeedback: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetFeedbackPlain)
+export const WidgetFeedback: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetFeedbackPlain);
