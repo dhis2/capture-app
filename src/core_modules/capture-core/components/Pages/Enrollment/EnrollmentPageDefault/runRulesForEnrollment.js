@@ -1,7 +1,7 @@
 // @flow
 import { convertValue } from 'capture-core/converters/serverToClient';
 import runRulesForEnrollmentPage from 'capture-core/rules/actionsCreator/runRulesForEnrollmentPage';
-import { dataElementTypes } from '../../../../metaData';
+import { dataElementTypes, TrackerProgram } from '../../../../metaData';
 import type { InputRuleEnrollmentData } from './types/common.types';
 
 // $FlowFixMe
@@ -90,13 +90,14 @@ export const runRulesForEnrollment = (input: InputRuleEnrollmentData) => {
         const dataElements = getDataElementsFromProgram(programMetadata, dataValueList);
 
         const trackedEntityAttributes = attributes.reduce((acc, item) => {
-            const programAttribute = program.attributes.find(attr => attr.id === item.attribute);
-
             acc[item.attribute] = {
                 id: item.attribute,
                 valueType: item.valueType,
-                optionSetId: programAttribute?.optionSet?.id,
             };
+            if (program instanceof TrackerProgram) {
+                const programAttribute = program.attributes.find(attr => attr.id === item.attribute);
+                acc[item.attribute].optionSetId = programAttribute?.optionSet?.id;
+            }
             return acc;
         }, {});
 
