@@ -95,7 +95,7 @@ export const runRulesForEnrollment = (input: InputRuleEnrollmentData) => {
             acc[item.attribute] = {
                 id: item.attribute,
                 valueType: item.valueType,
-                optionSetId: programAttribute.optionSet?.id,
+                optionSetId: programAttribute?.optionSet?.id,
             };
             return acc;
         }, {});
