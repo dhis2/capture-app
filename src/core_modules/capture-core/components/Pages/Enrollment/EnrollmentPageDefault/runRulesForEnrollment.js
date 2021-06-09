@@ -90,11 +90,17 @@ export const runRulesForEnrollment = (input: InputRuleEnrollmentData) => {
         const dataElements = getDataElementsFromProgram(programMetadata, dataValueList);
 
         const trackedEntityAttributes = attributes.reduce((acc, item) => {
-            acc[item.attribute] = { id: item.attribute, valueType: item.valueType, optionSetId: item.optionSet?.id };
+            const programAttribute = program.attributes.find(attr => attr.id === item.attribute);
+
+            acc[item.attribute] = {
+                id: item.attribute,
+                valueType: item.valueType,
+                optionSetId: programAttribute.optionSet?.id,
+            };
             return acc;
         }, {});
 
-        const teiAttributesValues = attributes?.reduce((acc, item) => {
+        const teiAttributesValues = attributes.reduce((acc, item) => {
             acc[item.attribute] = convertValue(item.value, item.valueType);
             return acc;
         }, {});
