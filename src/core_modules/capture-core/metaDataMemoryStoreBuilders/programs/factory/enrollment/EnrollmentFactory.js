@@ -98,7 +98,7 @@ export class EnrollmentFactory {
         const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId);
         const trackedEntityTypeName = this.cachedTrackedEntityTypes.get(cachedProgramTrackedEntityTypeId);
 
-        if (!trackedEntityTypeName?.displayName) {
+        if (!trackedEntityTypeName?.displayName || !featureTypeField) {
             return null;
         }
 
