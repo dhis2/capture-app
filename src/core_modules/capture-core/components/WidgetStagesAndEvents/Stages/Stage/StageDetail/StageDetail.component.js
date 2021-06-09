@@ -81,6 +81,7 @@ const StageDetailPlain = ({ events, eventName, data, classes }: Props) => {
                 const strB = b.find(cl => cl.id === columnName)?.value;
                 return sortDataFromEvent(strA, strB, sortDirection);
             })
+            .slice(0, displayedRowNumber)
             .map((row, index) => {
                 const cells = row
                     .map(column => (
