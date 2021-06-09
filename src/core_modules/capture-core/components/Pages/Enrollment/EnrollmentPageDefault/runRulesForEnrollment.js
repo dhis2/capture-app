@@ -7,22 +7,18 @@ import type { InputRuleEnrollmentData } from './types/common.types';
 // $FlowFixMe
 const convertDate = (date: string): string => convertValue(date, dataElementTypes.DATE);
 
-const getDataElementsFromProgram = (data, eventsDataValues) => {
+const getDataElementsFromProgram = (data) => {
     if (!data?.programStages) { return {}; }
     return data.programStages
         .reduce((acc, stage) => {
             stage.programStageDataElements.forEach((programStageDataElement) => {
                 const { id, valueType, optionSet } = programStageDataElement.dataElement;
-                const { value } = eventsDataValues.find(item => item.dataElement === id) || { };
                 acc[id] = {
                     id,
                     valueType,
                 };
                 if (optionSet) {
                     acc[id].optionSetId = optionSet.id;
-                }
-                if (value) {
-                    acc[id].value = value;
                 }
             });
             return acc;
@@ -33,8 +29,8 @@ const getEventValuesFromEvent = (enrollment, eventId, dataElements) => {
     const currentEvent = enrollment.events.find(item => item.event === eventId);
     if (currentEvent) {
         return currentEvent.dataValues.reduce((acc, dataValue) => {
-            const { dataElement: id } = dataValue;
-            acc[id] = convertValue(dataElements[id].value, dataElements[id].valueType);
+            const { dataElement: id, value } = dataValue;
+            acc[id] = convertValue(value, dataElements[id].valueType);
             return acc;
         }, {});
     }
@@ -78,16 +74,10 @@ const getEnrollmentData = enrollment => ({
     enrollmentId: enrollment.enrollment,
 });
 
-const flatDataValuesFromEvents = events => events.reduce((acc, currentEvent) => {
-    acc = [...acc, ...(currentEvent.dataValues)];
-    return acc;
-}, []);
-
 export const runRulesForEnrollment = (input: InputRuleEnrollmentData) => {
     const { orgUnit, program, programMetadata, enrollment, attributes } = input;
     if (orgUnit && program && programMetadata && attributes && enrollment) {
-        const dataValueList = flatDataValuesFromEvents(enrollment.events);
-        const dataElements = getDataElementsFromProgram(programMetadata, dataValueList);
+        const dataElements = getDataElementsFromProgram(programMetadata);
 
         const trackedEntityAttributes = attributes.reduce((acc, item) => {
             acc[item.attribute] = {
