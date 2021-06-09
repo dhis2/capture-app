@@ -34,13 +34,17 @@ export class CustomForm {
      *
      * @memberof CustomForm
      */
-    set data(html: string) {
-        const data = parseHtml(html, {
-            onTransform: this.transformNode,
+    setData(html: string, transformFunction: () => ?React.Element<'FormField'>) {
+        this._data = parseHtml(html, {
+            onTransform: transformFunction,
             allowScript: true,
         });
+    }
+
+    set data(data: Object) {
         this._data = data;
     }
+
     get data(): Data {
         return this._data;
     }
@@ -49,34 +53,4 @@ export class CustomForm {
      *
      * @memberof CustomForm
      */
-
-    // $FlowFixMe[missing-annot] automated comment
-    transformNode = (node: Object, index: number, nodeToElementFn) => {
-        if (node.name === 'input') {
-            const htmlElementId = node.attribs && node.attribs.attributeid;
-
-            if (htmlElementId) {
-                const inputElement = nodeToElementFn(node, index);
-                const fullid = inputElement.props?.attributeid;
-
-                const style = inputElement.props && inputElement.props.style;
-                const className = inputElement.props && inputElement.props.className;
-
-                const customFormElementProps = {
-                    id: fullid,
-                    style,
-                    className,
-                };
-
-                const element = React.createElement(
-                    'FormField', {
-                        customFormElementProps,
-                        id: htmlElementId,
-                    },
-                );
-                return element;
-            }
-        }
-        return undefined;
-    }
 }

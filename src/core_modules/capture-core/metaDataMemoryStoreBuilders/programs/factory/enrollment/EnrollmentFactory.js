@@ -2,30 +2,51 @@
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
+import React from 'react';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { errorCreator } from 'capture-core-utils';
 import type {
+    CachedDataEntryForm,
     CachedProgram,
-    CachedProgramTrackedEntityAttribute,
     CachedProgramSection,
+    CachedProgramTrackedEntityAttribute,
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
 } from '../../../../storageControllers/cache.types';
-import {
-    RenderFoundation,
-    Section,
-    Enrollment,
-    CustomForm,
-    InputSearchGroup,
-} from '../../../../metaData';
-import type {
-    TrackedEntityType,
-    SearchGroup,
-} from '../../../../metaData';
+import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
+import { CustomForm, Enrollment, InputSearchGroup, RenderFoundation, Section } from '../../../../metaData';
 import { DataElementFactory } from './DataElementFactory';
 import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
 import type { ConstructorInput } from './enrollmentFactory.types';
+
+const transformTrackerNode = (node: Object, index: number, nodeToElementFn) => {
+    if (node.name === 'input') {
+        const htmlElementId = node.attribs?.attributeid;
+
+        if (htmlElementId) {
+            // $FlowFixMe : nodeToElementFn set in class
+            const inputElement = nodeToElementFn(node, index);
+
+            const style = inputElement.props?.style;
+            const className = inputElement.props?.className;
+
+            const customFormElementProps = {
+                id: htmlElementId,
+                style,
+                className,
+            };
+
+            return React.createElement(
+                'FormField', {
+                    customFormElementProps,
+                    id: htmlElementId,
+                },
+            );
+        }
+    }
+    return undefined;
+};
 
 export class EnrollmentFactory {
     static errorMessages = {
@@ -115,7 +136,7 @@ export class EnrollmentFactory {
         cachedProgramTrackedEntityAttributes?: ?Array<CachedProgramTrackedEntityAttribute>,
         cachedProgramTrackedEntityTypeId?: ?string,
     ) {
-        let section = new Section((o) => {
+        const section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
             o.name = i18n.t('Profile');
         });
@@ -127,7 +148,7 @@ export class EnrollmentFactory {
             featureTypeField && section.addElement(featureTypeField);
         }
 
-        section = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
+        await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
         return section;
     }
 
@@ -152,20 +173,22 @@ export class EnrollmentFactory {
             return null;
         }
 
-        let section = new Section((o) => {
+        const section = new Section((o) => {
             o.id = cachedSectionCustomId;
             o.name = cachedSectionCustomLabel;
         });
 
-        section = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
+        await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
         return section;
     }
 
     async _buildCustomEnrollmentForm(
         enrollmentForm: RenderFoundation,
-        dataEntryForm,
-        cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
+        dataEntryForm: CachedDataEntryForm,
+        cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
     ) {
+        if (!cachedProgramTrackedEntityAttributes) { return null; }
+
         let section = new Section((o) => {
             o.id = Section.MAIN_SECTION_ID;
         });
@@ -177,8 +200,9 @@ export class EnrollmentFactory {
         try {
             enrollmentForm.customForm = new CustomForm((o) => {
                 o.id = dataEntryForm.id;
-                o.data = dataEntryForm.htmlCode;
             });
+            // $FlowFixMe : Require input from class
+            enrollmentForm.customForm.setData(dataEntryForm.htmlCode, transformTrackerNode);
         } catch (error) {
             log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
                 template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
@@ -214,7 +238,7 @@ export class EnrollmentFactory {
                 section && enrollmentForm.addSection(section);
             });
         } else {
-            await this._buildMainSection(cachedProgramTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
+            section = await this._buildMainSection(cachedProgramTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
             section && enrollmentForm.addSection(section);
         }
         return enrollmentForm;
