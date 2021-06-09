@@ -15,6 +15,8 @@ export const enrollmentPageActionTypes = {
 
     DEFAULT_VIEW: 'EnrollmentPage.DefaultView',
     MISSING_MESSAGE_VIEW: 'EnrollmentPage.MissingMessageView',
+
+    DELETE_ENROLLMENT: 'EnrollmentPage.DeleteEnrollment',
 };
 
 export const fetchEnrollmentPageInformation = () =>
@@ -47,3 +49,8 @@ export const openEnrollmentPage = ({ programId, orgUnitId, teiId, enrollmentId }
 
 export const cleanEnrollmentPage = () =>
     actionCreator(enrollmentPageActionTypes.PAGE_CLEAN)();
+
+export const deleteEnrollment = ({ enrollmentId }: { enrollmentId: string }) =>
+    actionCreator(enrollmentPageActionTypes.DELETE_ENROLLMENT)({
+        enrollmentId,
+    });
