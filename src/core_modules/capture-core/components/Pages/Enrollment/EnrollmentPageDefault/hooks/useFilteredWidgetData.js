@@ -10,7 +10,7 @@ type rulesProps = {
     displayKeyValuePair?: { id: string, key: string, value: string }
 }
 
-export const useFilteredWidgetData = (rulesEffects: Array<rulesProps>) => useMemo(() => {
+export const useFilteredWidgetData = (rulesEffects: ?Array<rulesProps>) => useMemo(() => {
     let warnings = [];
     let errors = [];
     let feedbacks = [];
