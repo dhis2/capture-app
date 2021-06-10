@@ -24,4 +24,4 @@ const WidgetErrorHeaderPlain = ({ classes }) => (
     </span>
 );
 
-export const WidgetErrorHeader: ComponentType<$Diff<CssClasses>> = withStyles(styles)(WidgetErrorHeaderPlain);
+export const WidgetErrorHeader = withStyles(styles)(WidgetErrorHeaderPlain);

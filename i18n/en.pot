@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-10T20:45:18.083Z\n"
-"PO-Revision-Date: 2021-06-10T20:45:18.083Z\n"
+"POT-Creation-Date: 2021-06-10T21:17:29.081Z\n"
+"PO-Revision-Date: 2021-06-10T21:17:29.081Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -943,6 +943,9 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
+msgid "Warning"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -950,9 +953,6 @@ msgid "Person Profile"
 msgstr ""
 
 msgid "Stages and Events"
-msgstr ""
-
-msgid "Warning"
 msgstr ""
 
 msgid "An error has occured. See log for details"
