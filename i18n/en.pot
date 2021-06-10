@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-10T07:41:22.474Z\n"
-"PO-Revision-Date: 2021-06-10T07:41:22.474Z\n"
+"POT-Creation-Date: 2021-06-10T11:02:51.238Z\n"
+"PO-Revision-Date: 2021-06-10T11:02:51.238Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -357,6 +357,9 @@ msgstr ""
 msgid "an error occurred loading working lists"
 msgstr ""
 
+msgid "Registered events"
+msgstr ""
+
 msgid "No events to display"
 msgstr ""
 
@@ -652,63 +655,6 @@ msgstr ""
 msgid "We could not find the stage in the program"
 msgstr ""
 
-msgid "Registered events"
-msgstr ""
-
-msgid "Enrollment status"
-msgstr ""
-
-msgid "Cancelled"
-msgstr ""
-
-msgid "Assigned to"
-msgstr ""
-
-msgid "Registering unit"
-msgstr ""
-
-msgid "Registration Date"
-msgstr ""
-
-msgid "Inactive"
-msgstr ""
-
-msgid "Working list could not be updated"
-msgstr ""
-
-msgid "Update view"
-msgstr ""
-
-msgid "Save current view..."
-msgstr ""
-
-msgid "Save current view as..."
-msgstr ""
-
-msgid "Delete view"
-msgstr ""
-
-msgid "Share view..."
-msgstr ""
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
-
-msgid "Confirm"
-msgstr ""
-
-msgid "Save As view"
-msgstr ""
-
-msgid "View name"
-msgstr ""
-
-msgid "Show Less"
-msgstr ""
-
-msgid "Show All"
-msgstr ""
-
 msgid "Choose a registering unit to start reporting"
 msgstr ""
 
@@ -884,6 +830,27 @@ msgstr ""
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Cancelled"
+msgstr ""
+
+msgid "Assigned to"
+msgstr ""
+
+msgid "Registering unit"
+msgstr ""
+
+msgid "Registration Date"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Working list could not be updated"
+msgstr ""
+
 msgid "To work with the selected program,"
 msgstr ""
 
@@ -953,6 +920,39 @@ msgid "Person Profile"
 msgstr ""
 
 msgid "Stages and Events"
+msgstr ""
+
+msgid "Update view"
+msgstr ""
+
+msgid "Save current view..."
+msgstr ""
+
+msgid "Save current view as..."
+msgstr ""
+
+msgid "Delete view"
+msgstr ""
+
+msgid "Share view..."
+msgstr ""
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Save As view"
+msgstr ""
+
+msgid "View name"
+msgstr ""
+
+msgid "Show Less"
+msgstr ""
+
+msgid "Show All"
 msgstr ""
 
 msgid "An error has occured. See log for details"
