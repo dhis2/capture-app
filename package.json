@@ -79,7 +79,7 @@
     "i18n:add": "d2-app-scripts i18n extract && git add ./i18n/"
   },
   "devDependencies": {
-    "@babel/plugin-transform-flow-strip-types": "^7.13.0",
+    "@babel/plugin-transform-flow-strip-types": "^7.14.5",
     "@dhis2/cli-app-scripts": "^4.0.9",
     "@dhis2/cli-helpers-engine": "^2.4.0",
     "@dhis2/cli-utils-cypress": "^7.0.1",
