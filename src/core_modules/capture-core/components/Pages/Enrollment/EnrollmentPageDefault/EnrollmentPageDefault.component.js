@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum } from '@dhis2/ui';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
-import { WidgetProfile } from '../../../WidgetProfile';
+import { WidgetProfile } from '../../../WidgetProfile/WidgetProfile.component';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 import { WidgetFeedback } from '../../../WidgetFeedback';
 
@@ -22,6 +22,9 @@ const getStyles = ({ typography }) => ({
         flexShrink: 1,
         paddingLeft: spacersNum.dp16,
         width: 360,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
     },
     title: {
         ...typography.title,
@@ -35,7 +38,7 @@ export const EnrollmentPageDefaultPlain = ({
     teiId,
     enrollmentId,
     onDelete,
-    ruleEffects,
+    widgetEffects,
     classes,
 }: PlainProps) => (
     <>
@@ -45,7 +48,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetStagesAndEvents stages={program.stages} />
             </div>
             <div className={classes.rightColumn}>
-                <WidgetFeedback feedback={ruleEffects?.feedbacks} />
+                <WidgetFeedback feedback={widgetEffects?.feedbacks} />
                 <WidgetProfile teiId={teiId} programId={program.id} />
                 <WidgetEnrollment
                     teiId={teiId}

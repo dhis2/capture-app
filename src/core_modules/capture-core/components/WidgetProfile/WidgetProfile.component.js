@@ -1,10 +1,9 @@
 // @flow
-import React, { type ComponentType, useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
 import { errorCreator } from 'capture-core-utils';
-import { withStyles } from '@material-ui/core';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
@@ -12,13 +11,7 @@ import { convertValue as convertClientToView } from '../../converters/clientToVi
 import { convertValue as convertServerToClient } from '../../converters/serverToClient';
 import type { Props } from './widgetProfile.types';
 
-const styles = {
-    profileWidgetWrapper: {
-        paddingBottom: '12px',
-    },
-
-};
-const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
+export const WidgetProfile = ({ classes, teiId, programId }: Props) => {
     const [open, setOpenStatus] = useState(true);
     const programsQuery = useMemo(() => ({
         programs: {
@@ -100,7 +93,6 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
     return (
         <div
             data-test="profile-widget"
-            className={classes.profileWidgetWrapper}
         >
             <Widget
                 header={i18n.t('Person Profile')}
@@ -113,6 +105,3 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
         </div>
     );
 };
-
-
-export const WidgetProfile: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ProfileWidgetPlain);

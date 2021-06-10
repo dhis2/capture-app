@@ -63,7 +63,7 @@ export const EnrollmentPageDefault = () => {
             program={program}
             enrollmentId={enrollmentId}
             onDelete={onDelete}
-            ruleEffects={outputEffects}
+            widgetEffects={outputEffects}
         />
     );
 };
