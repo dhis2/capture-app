@@ -1,10 +1,10 @@
 // @flow
 import React, { useState, useEffect } from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import { useEnrollmentsAndAttributes, useProgramMetadata } from './hooks';
@@ -58,6 +58,8 @@ export const EnrollmentPageDefault = () => {
         <EnrollmentPageDefaultComponent
             teiId={teiId}
             program={program}
+            programStages={programMetadata?.programStages}
+            events={enrollment?.events ?? []}
             enrollmentId={enrollmentId}
             onDelete={onDelete}
         />

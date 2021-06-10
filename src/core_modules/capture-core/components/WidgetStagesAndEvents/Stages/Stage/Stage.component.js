@@ -1,10 +1,13 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useState, useCallback } from 'react';
 import cx from 'classnames';
+
 import { withStyles } from '@material-ui/core';
 import { spacersNum } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';
+import { Widget } from '../../../Widget';
+import { StageDetail } from './StageDetail/StageDetail.component';
 
 const styles = {
     overview: {
@@ -14,13 +17,35 @@ const styles = {
 };
 
 
-export const StagePlain = ({ stage: { name, icon }, classes, className }: Props) => (
-    <div className={cx(classes.overview, className)}>
-        <StageOverview
-            title={name}
-            icon={icon}
-        />
-    </div>
-);
+export const StagePlain = (
+    { stage: { name, icon, stageForm },
+        events,
+        programStage,
+        classes,
+        className,
+    }: Props) => {
+    const [open, setOpenStatus] = useState(true);
+
+    return (<div data-test="stage-content"className={cx(classes.overview, className)}>
+        <Widget
+            header={<StageOverview
+                title={name}
+                icon={icon}
+                description={stageForm.description ?? ''}
+                events={events}
+            />}
+            onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
+            onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
+            open={open}
+        >
+            {events.length > 0 && <StageDetail
+                eventName={name}
+                events={events}
+                data={programStage?.programStageDataElements}
+            />}
+        </Widget>
+
+    </div>);
+};
 
 export const Stage: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(StagePlain);
