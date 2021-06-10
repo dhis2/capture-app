@@ -7,6 +7,7 @@ import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 import { WidgetWarning } from '../../../WidgetsErrorAndWarning/WidgetWarning';
+import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -36,6 +37,7 @@ export const EnrollmentPageDefaultPlain = ({
     enrollmentId,
     onDelete,
     classes,
+    widgetEffects,
 }: PlainProps) => (
     <>
         <div className={classes.title}>Enrollment Dashboard</div>
@@ -45,6 +47,7 @@ export const EnrollmentPageDefaultPlain = ({
             </div>
             <div className={classes.rightColumn}>
                 <WidgetWarning warning={['Test 1']} />
+                <WidgetError error={widgetEffects?.errors} />
                 <WidgetProfile teiId={teiId} programId={program.id} />
                 <WidgetEnrollment
                     teiId={teiId}

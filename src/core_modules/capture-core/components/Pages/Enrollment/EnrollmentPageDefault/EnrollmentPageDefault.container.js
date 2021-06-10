@@ -11,6 +11,7 @@ import { useEnrollmentsAndAttributes, useProgramMetadata } from './hooks';
 import { runRulesForEnrollment } from './runRulesForEnrollment';
 import { urlArguments } from '../../../../utils/url';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
+import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 
 
 export const EnrollmentPageDefault = () => {
@@ -39,7 +40,9 @@ export const EnrollmentPageDefault = () => {
         log.error(errorCreator('Enrollment page could not be loaded')({ programMetaDataError, enrollmentsError }));
     }
 
-    const [, setRuleEffects] = useState(undefined);
+    const [ruleEffects, setRuleEffects] = useState(undefined);
+    const outputEffects = useFilteredWidgetData(ruleEffects);
+
     useEffect(() => {
         const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollment, attributes });
         if (effects) {
@@ -60,6 +63,7 @@ export const EnrollmentPageDefault = () => {
             program={program}
             enrollmentId={enrollmentId}
             onDelete={onDelete}
+            widgetEffects={outputEffects}
         />
     );
 };
