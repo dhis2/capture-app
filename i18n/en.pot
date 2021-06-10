@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-03T09:10:27.661Z\n"
-"PO-Revision-Date: 2021-06-03T09:10:27.661Z\n"
+"POT-Creation-Date: 2021-06-10T07:41:22.474Z\n"
+"PO-Revision-Date: 2021-06-10T07:41:22.474Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -330,13 +330,37 @@ msgstr ""
 msgid "Sort"
 msgstr ""
 
+msgid "Delete event"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr ""
+
+msgid "Download as XML"
+msgstr ""
+
+msgid "Download as CSV"
+msgstr ""
+
+msgid "Download with current filters"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Download data..."
+msgstr ""
+
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
 msgid "No events to display"
 msgstr ""
 
 msgid "Data for offline list not present"
-msgstr ""
-
-msgid "Close"
 msgstr ""
 
 msgid "Please select the user"
@@ -628,30 +652,6 @@ msgstr ""
 msgid "We could not find the stage in the program"
 msgstr ""
 
-msgid "Delete event"
-msgstr ""
-
-msgid "Download as JSON"
-msgstr ""
-
-msgid "Download as XML"
-msgstr ""
-
-msgid "Download as CSV"
-msgstr ""
-
-msgid "Download with current filters"
-msgstr ""
-
-msgid "Download data..."
-msgstr ""
-
-msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "an error occurred loading working lists"
-msgstr ""
-
 msgid "Registered events"
 msgstr ""
 
@@ -829,6 +829,12 @@ msgid ""
 msgstr ""
 
 msgid "Search in all programs"
+msgstr ""
+
+msgid "events"
+msgstr ""
+
+msgid "event"
 msgstr ""
 
 msgid "You dont have access to edit this event"
