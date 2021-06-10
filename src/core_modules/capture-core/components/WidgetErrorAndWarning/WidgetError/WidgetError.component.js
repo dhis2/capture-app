@@ -1,13 +1,13 @@
 // @flow
-import React, { useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
+import React from 'react';
+import { colors } from '@dhis2/ui';
 import { Widget } from '../../Widget';
 import type { Props } from './WidgetError.types';
 import { WidgetErrorAndWarningContent } from '../content/WidgetErrorAndWarningContent';
+import { WidgetErrorHeader } from './WidgetErrorHeader';
 
 
 export const WidgetError = ({ error, classes }: Props) => {
-    const [openStatus, setOpenStatus] = useState(true);
     const widgetType = 'error';
 
     if (!error?.length) {
@@ -20,10 +20,9 @@ export const WidgetError = ({ error, classes }: Props) => {
             data-test={'error-widget'}
         >
             <Widget
-                header={i18n.t('Error')}
-                open={openStatus}
-                onOpen={() => setOpenStatus(true)}
-                onClose={() => setOpenStatus(false)}
+                header={<WidgetErrorHeader />}
+                noncollapsible
+                color={colors.red100}
             >
                 <WidgetErrorAndWarningContent
                     widgetData={error}

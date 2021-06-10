@@ -6,6 +6,7 @@ export type Props = {|
     enrollmentId: string,
     teiId: string,
     onDelete: () => void,
+    widgetEffects: Object,
 |};
 
 export type PlainProps = {|

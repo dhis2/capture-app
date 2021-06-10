@@ -36,6 +36,7 @@ export const EnrollmentPageDefaultPlain = ({
     enrollmentId,
     onDelete,
     classes,
+    widgetEffects,
 }: PlainProps) => (
     <>
         <div className={classes.title}>Enrollment Dashboard</div>
@@ -44,7 +45,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetStagesAndEvents stages={program.stages} />
             </div>
             <div className={classes.rightColumn}>
-                <WidgetError />
+                <WidgetError error={widgetEffects?.errors} />
                 <WidgetProfile teiId={teiId} programId={program.id} />
                 <WidgetEnrollment
                     teiId={teiId}
