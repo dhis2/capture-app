@@ -5,15 +5,14 @@ import { useOrganizationUnit } from './hooks/useOrganizationUnit';
 import { useTrackedEntityInstances } from './hooks/useTrackedEntityInstances';
 import { useEnrollment } from './hooks/useEnrollment';
 import { useProgram } from './hooks/useProgram';
+import type { Props } from './enrollment.types';
 
-type Props = {|
-    teiId: string,
-    enrollmentId: string,
-    programId: string,
-|};
-
-export const WidgetEnrollment = ({ teiId, enrollmentId, programId }: Props) => {
-    const { error: errorEnrollment, enrollment } = useEnrollment(enrollmentId);
+export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete }: Props) => {
+    const {
+        error: errorEnrollment,
+        enrollment,
+        refetch,
+    } = useEnrollment(enrollmentId);
     const { error: errorProgram, program } = useProgram(programId);
     const { error: errorOwnerOrgUnit, ownerOrgUnit } = useTrackedEntityInstances(teiId, programId);
     const { error: errorOrgUnit, displayName } = useOrganizationUnit(ownerOrgUnit);
@@ -22,8 +21,10 @@ export const WidgetEnrollment = ({ teiId, enrollmentId, programId }: Props) => {
         <WidgetEnrollmentComponent
             enrollment={enrollment}
             program={program}
+            refetch={refetch}
             ownerOrgUnit={{ id: ownerOrgUnit, displayName }}
             loading={!(enrollment && program && displayName)}
+            onDelete={onDelete}
             error={
                 errorEnrollment ||
                 errorProgram ||

@@ -11,3 +11,4 @@ export const useEnrollmentInfo = (enrollmentId: string, programId: string) => {
 
     return { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, tetId };
 };
+
