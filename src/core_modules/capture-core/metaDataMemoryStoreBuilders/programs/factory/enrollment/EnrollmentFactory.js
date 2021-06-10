@@ -19,34 +19,7 @@ import { DataElementFactory } from './DataElementFactory';
 import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
 import type { ConstructorInput } from './enrollmentFactory.types';
-
-const transformTrackerNode = (node: Object, index: number, nodeToElementFn) => {
-    if (node.name === 'input') {
-        const htmlElementId = node.attribs?.attributeid;
-
-        if (htmlElementId) {
-            // $FlowFixMe : nodeToElementFn set in class
-            const inputElement = nodeToElementFn(node, index);
-
-            const style = inputElement.props?.style;
-            const className = inputElement.props?.className;
-
-            const customFormElementProps = {
-                id: htmlElementId,
-                style,
-                className,
-            };
-
-            return React.createElement(
-                'FormField', {
-                    customFormElementProps,
-                    id: htmlElementId,
-                },
-            );
-        }
-    }
-    return undefined;
-};
+import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
 
 export class EnrollmentFactory {
     static errorMessages = {
@@ -194,6 +167,7 @@ export class EnrollmentFactory {
         });
 
         section.showContainer = false;
+        cachedProgramTrackedEntityAttributes = cachedProgramTrackedEntityAttributes.filter(attribute => attribute)
 
         section = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
         section && enrollmentForm.addSection(section);
