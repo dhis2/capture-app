@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-05-14T09:16:23.314Z\n"
+"POT-Creation-Date: 2021-06-03T09:10:27.661Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Tetum (Tetun) (https://www.transifex.com/hisp-uio/teams/100509/tet/)\n"
@@ -629,6 +629,15 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "Enrollment{{escape}} View Event"
+msgstr ""
+
+msgid "Enrollment{{escape}} Edit Event"
+msgstr ""
+
+msgid "We could not find the stage in the program"
+msgstr ""
+
 msgid "Delete event"
 msgstr ""
 
@@ -838,6 +847,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Event details"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -883,6 +895,41 @@ msgid "To work with the selected program,"
 msgstr ""
 
 msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Enrollment actions"
+msgstr ""
+
+msgid "We are processing your request."
+msgstr ""
+
+msgid "Reactivate"
+msgstr ""
+
+msgid "Mark as cancelled"
+msgstr ""
+
+msgid "Mark incomplete"
+msgstr ""
+
+msgid "Delete enrollment"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete this enrollment? This will permanently "
+"remove the current enrollment."
+msgstr ""
+
+msgid "No, cancel"
+msgstr ""
+
+msgid "Yes, delete enrollment."
+msgstr ""
+
+msgid "Remove mark for follow-up"
+msgstr ""
+
+msgid "Mark for follow-up"
 msgstr ""
 
 msgid "Enrollment widget could not be loaded. Please try again later"

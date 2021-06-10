@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useState, useMemo } from 'react';
+import React, { type ComponentType, useState, useMemo, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
@@ -55,14 +55,6 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
     const loading = programsLoading || trackedEntityInstancesLoading;
     const error = programsError || trackedEntityInstancesError;
 
-    if (loading) {
-        return <LoadingMaskElementCenter />;
-    }
-
-    if (error) {
-        log.error(errorCreator('Profile widget could not be loaded')({ error }));
-        return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
-    }
 
     const formatValue = (value, valueType) => {
         const convertToClientValue = convertServerToClient(value, valueType);
@@ -89,6 +81,21 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
             }, []);
     };
 
+    const renderProfile = () => {
+        if (loading) {
+            return <LoadingMaskElementCenter />;
+        }
+
+        if (error) {
+            log.error(errorCreator('Profile widget could not be loaded')({ error }));
+            return <span>{i18n.t('Profile widget could not be loaded. Please try again later')}</span>;
+        }
+
+        return (<FlatList
+            dataTest="profile-widget-flatlist"
+            list={mergeAttributes()}
+        />);
+    };
 
     return (
         <div
@@ -97,14 +104,11 @@ const ProfileWidgetPlain = ({ classes, teiId, programId }: Props) => {
         >
             <Widget
                 header={i18n.t('Person Profile')}
-                onOpen={() => setOpenStatus(true)}
-                onClose={() => setOpenStatus(false)}
+                onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
+                onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                <FlatList
-                    dataTest="profile-widget-flatlist"
-                    list={mergeAttributes()}
-                />
+                {renderProfile()}
             </Widget>
         </div>
     );

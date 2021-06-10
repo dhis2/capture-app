@@ -20,6 +20,7 @@ import type {
 const mapProcessTypeToIdentifierName = {
     [processTypes.EVENT]: 'dataElementId',
     [processTypes.TEI]: 'trackedEntityAttributeId',
+    [processTypes.ENROLLMENT]: 'enrollmentId',
 };
 
 type ConvertDataToBaseOutputValue = (value: any, valueType: string) => any;
