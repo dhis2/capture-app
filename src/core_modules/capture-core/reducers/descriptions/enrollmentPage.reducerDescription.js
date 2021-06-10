@@ -13,6 +13,7 @@ const {
     PAGE_CLEAN,
     DEFAULT_VIEW,
     MISSING_MESSAGE_VIEW,
+    DELETE_ENROLLMENT,
 } = enrollmentPageActionTypes;
 
 export const enrollmentPageDesc = createReducerDescription({
@@ -49,4 +50,12 @@ export const enrollmentPageDesc = createReducerDescription({
           enrollmentPageStatus: enrollmentPageStatuses.MISSING_SELECTIONS,
       }),
     [PAGE_CLEAN]: () => initialReducerValue,
+    [DELETE_ENROLLMENT]: (state, { payload: { enrollmentId } }) => ({
+        ...state,
+        enrollments: [
+            ...state.enrollments.filter(
+                item => item.enrollment !== enrollmentId,
+            ),
+        ],
+    }),
 }, 'enrollmentPage', initialReducerValue);
