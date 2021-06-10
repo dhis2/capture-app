@@ -658,6 +658,15 @@ msgstr "Ушбу дастурда янги ҳодиса/тадбирни яра�
 msgid "View working list in this program."
 msgstr "Ушбу дастурдаги ишчи рўйхатни кўриб чиқиш"
 
+msgid "Enrollment{{escape}} View Event"
+msgstr ""
+
+msgid "Enrollment{{escape}} Edit Event"
+msgstr ""
+
+msgid "We could not find the stage in the program"
+msgstr ""
+
 msgid "Delete event"
 msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
 
@@ -882,6 +891,9 @@ msgstr "Барча дастурларда қидириш"
 
 msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
+
+msgid "Event details"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "

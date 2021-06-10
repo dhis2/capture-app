@@ -21,6 +21,7 @@ import type {
     ProgramRule,
     RuleVariables,
     D2Functions,
+    EventsDataContainer,
 } from './rulesEngine.types';
 import { inputValueConverter } from './converters/inputValueConverter';
 import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
@@ -396,5 +397,37 @@ export class RulesEngine {
 
         const dhisFunctions = d2Functions(RulesEngine.dateUtils, RulesEngine.variableService(), variablesHash);
         return getProgramRuleEffects(dhisFunctions, programRules, dataElements, null, variablesHash, processTypes.EVENT);
+    }
+
+    static programRuleEffectsForEnrollment(
+        programRulesContainer: ProgramRulesContainer,
+        eventsData: EventsDataContainer,
+        selectedOrgUnit: OrgUnit,
+        dataElements: ?DataElements,
+        teiValues: ?TEIValues,
+        trackedEntityAttributes: ?TrackedEntityAttributes,
+        enrollmentData: ?Enrollment,
+        optionSets: OptionSets,
+    ): ?OutputEffects {
+        const { programRules, constants, programRulesVariables } = programRulesContainer;
+
+        const variablesHash = RulesEngine.variableService().getVariables(
+            { constants, programRulesVariables },
+            null,
+            eventsData,
+            dataElements,
+            trackedEntityAttributes,
+            teiValues,
+            enrollmentData,
+            selectedOrgUnit,
+            optionSets,
+        );
+
+        const dhisFunctions = d2Functions(RulesEngine.dateUtils, RulesEngine.variableService(), variablesHash);
+        return getProgramRuleEffects(
+            dhisFunctions, programRules,
+            dataElements, trackedEntityAttributes,
+            variablesHash, processTypes.ENROLLMENT,
+        );
     }
 }

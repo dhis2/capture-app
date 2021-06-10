@@ -653,6 +653,15 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "Enrollment{{escape}} View Event"
+msgstr ""
+
+msgid "Enrollment{{escape}} Edit Event"
+msgstr ""
+
+msgid "We could not find the stage in the program"
+msgstr ""
+
 msgid "Delete event"
 msgstr "Hodisa/tadbirni oʼchirib tashlash"
 
@@ -874,6 +883,9 @@ msgstr "Barcha dasturlarda qidirish"
 
 msgid "You dont have access to edit this event"
 msgstr "Ushbu hodisa/tadbirni tahrirlash huquqiga ega emassiz"
+
+msgid "Event details"
+msgstr ""
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "

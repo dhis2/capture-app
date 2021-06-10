@@ -628,6 +628,15 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "Enrollment{{escape}} View Event"
+msgstr ""
+
+msgid "Enrollment{{escape}} Edit Event"
+msgstr ""
+
+msgid "We could not find the stage in the program"
+msgstr ""
+
 msgid "Delete event"
 msgstr ""
 
@@ -835,6 +844,9 @@ msgid "Search in all programs"
 msgstr ""
 
 msgid "You dont have access to edit this event"
+msgstr ""
+
+msgid "Event details"
 msgstr ""
 
 msgid ""
