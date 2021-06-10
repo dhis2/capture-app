@@ -4,14 +4,12 @@ import type { WidgetNonCollapsibleProps } from './widgetNonCollapsible.types';
 
 type CollapsibleProps = {|
     ...WidgetCollapsibleProps,
-    color?: ?string,
-    collapsible?: true,
+    noncollapsible?: false,
 |};
 
 type NonCollapsibleProps = {|
     ...WidgetNonCollapsibleProps,
-    color?: ?string,
-    collapsible: false,
+    noncollapsible: true,
 |};
 
 export type Props = CollapsibleProps | NonCollapsibleProps;

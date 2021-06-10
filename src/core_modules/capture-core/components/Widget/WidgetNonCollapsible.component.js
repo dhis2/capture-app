@@ -21,18 +21,19 @@ const styles = {
     },
 };
 
-const WidgetNonCollapsiblePlain = ({ header, children, color, classes }: WidgetNonCollapsiblePropsPlain) => (
-    <div className={classes.container}>
+const WidgetNonCollapsiblePlain = ({ header, children, color = colors.white, classes }: WidgetNonCollapsiblePropsPlain) => (
+    <div
+        className={classes.container}
+        style={{ backgroundColor: color }}
+    >
         <div
             className={classes.header}
-            style={{ backgroundColor: color || colors.white }}
             data-test="widget-header"
         >
             {header}
         </div>
         <div
             data-test="widget-contents"
-            style={{ backgroundColor: color || colors.white }}
         >
             {children}
         </div>
