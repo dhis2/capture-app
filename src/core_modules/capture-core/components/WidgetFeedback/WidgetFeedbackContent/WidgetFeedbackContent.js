@@ -1,7 +1,7 @@
 // @flow
 
 import React, { type ComponentType } from 'react';
-import { spacersNum, colors } from '@dhis2/ui';
+import { spacers, spacersNum, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import type { filteredKeyValue, filteredText, contentType } from '../WidgetFeedback.types';
@@ -14,14 +14,14 @@ const styles = {
         paddingLeft: spacersNum.dp16,
         marginTop: '0px',
         lineHeight: '1.375',
-        fontSize: '14px',
+        fontSize: spacers.dp16,
         color: colors.grey900,
     },
     noFeedbackText: {
         color: colors.grey600,
         paddingLeft: spacersNum.dp16,
         fontWeight: 400,
-        fontSize: '14px',
+        fontSize: spacers.dp16,
         marginTop: '0px',
     },
     listItem: {
