@@ -16,7 +16,9 @@ const styles = {
         fontSize: spacers.dp16,
         fontWeight: 400,
         color: colors.grey900,
-        paddingInlineStart: spacers.dp16,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp12,
     },
     listItem: {
         '&.error': {
