@@ -1,8 +1,8 @@
 // @flow
-import type { Event } from '../../../types/common.types';
+import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents.js';
 
 export type Props = {|
-    events: Array<Event>,
+    events: Array<ApiTEIEvent>,
     data: any,
     eventName: string,
     ...CssClasses,

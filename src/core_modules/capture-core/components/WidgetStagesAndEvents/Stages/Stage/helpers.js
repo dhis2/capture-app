@@ -1,17 +1,17 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
+import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents.js';
 import { convertValue as convertClientToView } from '../../../../converters/clientToView';
 import { convertValue as convertServerToClient } from '../../../../converters/serverToClient';
 import { statusTypes, dataElementTypes } from '../../../../metaData';
-import type { Event } from '../../types/common.types';
 
 export const DEFAULT_NUMBER_OF_ROW = 5;
 
-export const isEventOverdue = (event: Event) => moment(event.dueDate).isSameOrBefore(new Date())
+export const isEventOverdue = (event: ApiTEIEvent) => moment(event.dueDate).isSameOrBefore(new Date())
     && event.status === statusTypes.SCHEDULE;
 
-const getEventStatus = (event: Event) => {
+const getEventStatus = (event: ApiTEIEvent) => {
     if (isEventOverdue(event)) {
         return { value: statusTypes.OVERDUE };
     }
@@ -21,7 +21,7 @@ const getEventStatus = (event: Event) => {
     return { value: event.status };
 };
 
-export const getValueByKeyFromEvent = (event: Event, type: string) => {
+export const getValueByKeyFromEvent = (event: ApiTEIEvent, type: string) => {
     switch (type) {
     case 'status':
         return getEventStatus(event);
@@ -45,7 +45,7 @@ export const sortDataFromEvent = (strA: any, strB: any, direction: string) => {
     return 0;
 };
 
-export const computeDataFromEvent = (data: any, events: Array<Event>) => {
+export const computeDataFromEvent = (data: any, events: Array<ApiTEIEvent>) => {
     const dataSource = events.reduce((acc, currentEvent) => {
         const keys = [
             { id: 'status', type: dataElementTypes.STATUS },
@@ -69,7 +69,7 @@ export const computeDataFromEvent = (data: any, events: Array<Event>) => {
     return dataSource || [];
 };
 
-export const computeHeaderColumn = (data: any, events: Array<Event>) => {
+export const computeHeaderColumn = (data: any, events: Array<ApiTEIEvent>) => {
     const defaultColumns = [
         { id: 'status', header: i18n.t('Status'), sortDirection: 'default' },
         { id: 'eventDate', header: i18n.t('Report date'), sortDirection: 'default' },

@@ -6,12 +6,12 @@ import { programCollection } from '../metaDataMemoryStores/programCollection/pro
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
 
-type ApiDataValue = {
+export type ApiDataValue = {
     dataElement: string,
     value: any
 };
 
-type ApiTEIEvent = {
+export type ApiTEIEvent = {
     event: string,
     program: string,
     programStage: string,
@@ -23,6 +23,7 @@ type ApiTEIEvent = {
     status: string,
     eventDate: string,
     dueDate: string,
+    lastUpdated: string,
     dataValues: Array<ApiDataValue>
 };
 
