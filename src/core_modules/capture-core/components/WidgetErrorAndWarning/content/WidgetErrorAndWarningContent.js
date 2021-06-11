@@ -1,36 +1,35 @@
 // @flow
 
 import React from 'react';
-import { spacers, colors } from '@dhis2/ui';
+import { spacers, colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
 import type { contentTypes, renderObjectType, renderStringType } from './WidgetErrorAndWarningContent.types';
 
 const styles = {
     widgetWrapper: {
-        paddingBottom: spacers.dp16,
+        padding: `0px ${spacersNum.dp16}px`,
     },
     unorderedList: {
-        margin: '0px',
-        padding: `0px ${spacers.dp24}`,
+        padding: `0px ${spacers.dp16}`,
         lineHeight: '1.375',
         fontSize: spacers.dp16,
         fontWeight: 400,
         color: colors.grey900,
+        paddingInlineStart: spacers.dp16,
     },
     listItem: {
-        padding: '6px',
         '&.error': {
+            listStyleType: '"!   "',
             '&::marker': {
-                content: '"!"',
                 color: colors.red800,
                 fontWeight: 700,
             },
         },
         '&.warning': {
             '&::marker': {
-                content: '"•"',
                 color: colors.yellow900,
+                fontWeight: 700,
             },
         },
     },
