@@ -1,6 +1,6 @@
 // @flow
 import type { Program } from 'capture-core/metaData';
-import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents.js';
+import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import type { ProgramStageData } from 'capture-core/components/WidgetStagesAndEvents/types/common.types';
 
 export type Props = {|

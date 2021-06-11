@@ -1,7 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
-import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents.js';
+import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import { convertValue as convertClientToView } from '../../../../converters/clientToView';
 import { convertValue as convertServerToClient } from '../../../../converters/serverToClient';
 import { statusTypes, dataElementTypes } from '../../../../metaData';

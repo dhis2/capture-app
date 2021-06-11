@@ -1,5 +1,5 @@
 // @flow
-import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents.js';
+import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import type { Icon } from '../../../../../metaData';
 
 export type Props = {|
