@@ -46,6 +46,7 @@ export const EnrollmentPageDefault = () => {
     useEffect(() => {
         const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollment, attributes });
         if (effects) {
+            // $FlowFixMe
             setRuleEffects(effects);
         }
     }, [orgUnit, program, programMetadata, enrollment, attributes]);
