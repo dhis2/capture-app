@@ -9,7 +9,6 @@ import {
 import { getDataEntryKey } from '../../components/DataEntry/common/getDataEntryKey';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
-import { enrollmentEventPageActionTypes } from '../../components/Pages/EnrollmentEvent/EnrollmentEventPage.actions';
 
 // cleans up data entries that start with dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {
@@ -48,18 +47,6 @@ export const dataEntriesDesc = createReducerDescription({
         };
         return newState;
     },
-    [enrollmentEventPageActionTypes.ADD_EVENT]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        const { event } = payload;
-        newState[event.dataEntryId] = {
-            ...newState[event.dataEntryId],
-            itemId: event.itemId,
-            ...event.extraProps,
-        };
-        return newState;
-    },
-
 }, 'dataEntries');
 
 export const dataEntriesUIDesc = createReducerDescription({

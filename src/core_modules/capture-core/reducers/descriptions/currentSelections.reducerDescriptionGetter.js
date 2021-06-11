@@ -18,6 +18,7 @@ import {
 } from '../../components/LockedSelector';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
+import { enrollmentEventPageActionTypes } from '../../components/WidgetEventEdit/WidgetEventEdit.actions';
 
 const setCategoryOption = (
     state: Object,
@@ -140,7 +141,34 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             categoriesMeta,
             complete: true,
         };
+        return newState;
+    },
+    [enrollmentEventPageActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const { eventContainer, categoriesData } = action.payload;
+        const event = eventContainer.event;
 
+        const categories = categoriesData ? categoriesData.reduce((acc, data) => {
+            acc[data.categoryId] = data.categoryOption.id;
+            return acc;
+        }, {}) : undefined;
+
+        const categoriesMeta = categoriesData ? categoriesData.reduce((acc, data) => {
+            acc[data.categoryId] = {
+                name: data.categoryOption.name,
+                writeAccess: data.categoryOption.writeAccess,
+            };
+            return acc;
+        }, {}) : undefined;
+
+        const newState = {
+            ...state,
+            programId: event.programId,
+            orgUnitId: event.orgUnitId,
+            categories,
+            categoriesMeta,
+            complete: true,
+        };
+        console.log(eventContainer);
         return newState;
     },
     [crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET]: (state, action) => {

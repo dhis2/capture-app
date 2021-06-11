@@ -5,5 +5,6 @@ export type Props = {|
     programStage: ?ProgramStage,
     mode: string,
     eventId: string,
+    onEdit: () => {},
     ...CssClasses,
 |};

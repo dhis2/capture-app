@@ -19,7 +19,7 @@ export const EnrollmentEventPage = () => {
         }),
         shallowEqual,
     );
-    const [mode] = useState(pageMode.VIEW);
+    const [mode, setMode] = useState(pageMode.VIEW);
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages?.values()].find(
         item => item.id === stageId,
@@ -29,6 +29,7 @@ export const EnrollmentEventPage = () => {
             mode={mode}
             programStage={programStage}
             eventId={eventId}
+            onEdit={() => setMode(pageMode.EDIT)}
         />
     );
 };
