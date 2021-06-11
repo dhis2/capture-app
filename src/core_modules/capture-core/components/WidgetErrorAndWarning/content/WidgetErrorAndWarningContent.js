@@ -12,6 +12,7 @@ const styles = {
     },
     unorderedList: {
         padding: `0px ${spacers.dp16}`,
+        marginTop: '0px',
         lineHeight: '1.375',
         fontSize: spacers.dp16,
         fontWeight: 400,
