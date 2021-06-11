@@ -864,7 +864,7 @@ msgid "You dont have access to edit this event"
 msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
 
 msgid "Event details"
-msgstr ""
+msgstr "دريذةي رووداوةكان"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
