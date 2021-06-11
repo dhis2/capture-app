@@ -42,7 +42,6 @@ export const EnrollmentPageDefault = () => {
 
     const [ruleEffects, setRuleEffects] = useState(undefined);
     const outputEffects = useFilteredWidgetData(ruleEffects);
-
     useEffect(() => {
         const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollment, attributes });
         if (effects) {
