@@ -1,41 +1,30 @@
 // @flow
 
 import React from 'react';
-import { colors } from '@dhis2/ui';
+import { spacers, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
 import type { contentTypes, renderObjectType, renderStringType } from './WidgetErrorAndWarningContent.types';
 
 const styles = {
     widgetWrapper: {
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '10px 0',
-        '&.warning': {
-            backgroundColor: colors.yellow050,
-        },
-        '&.error': {
-            backgroundColor: colors.red100,
-        },
+        paddingBottom: spacers.dp16,
     },
     unorderedList: {
-        paddingLeft: '15px',
         margin: '0px',
+        padding: `0px ${spacers.dp24}`,
         lineHeight: '1.375',
-        fontSize: '14px',
-        '&.warning': {
-            color: colors.grey900,
-        },
-        '&.error': {
-            color: colors.red200,
-        },
+        fontSize: spacers.dp16,
+        fontWeight: 400,
+        color: colors.grey900,
     },
     listItem: {
-        padding: '5px',
+        padding: '6px',
         '&.error': {
             '&::marker': {
                 content: '"!"',
                 color: colors.red800,
+                fontWeight: 700,
             },
         },
         '&.warning': {
@@ -77,15 +66,9 @@ const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: conten
     return (
         <div
             data-test={'widget-content'}
-            className={cx(classes.widgetWrapper, {
-                warning,
-                error,
-            })}
+            className={classes.widgetWrapper}
         >
-            <ul className={cx(classes.unorderedList, {
-                warning,
-            })}
-            >
+            <ul className={classes.unorderedList}>
                 {widgetData && widgetData.map((rule, index) => {
                     if (typeof rule === 'string') {
                         return (

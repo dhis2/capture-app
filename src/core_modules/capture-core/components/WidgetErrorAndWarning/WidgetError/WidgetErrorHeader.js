@@ -11,6 +11,7 @@ const styles = {
         alignItems: 'center',
         gap: '8px',
         color: colors.red800,
+        fontWeight: 500,
     },
     label: {
         margin: 0,
