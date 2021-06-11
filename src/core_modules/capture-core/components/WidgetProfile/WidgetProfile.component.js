@@ -11,7 +11,7 @@ import { convertValue as convertClientToView } from '../../converters/clientToVi
 import { convertValue as convertServerToClient } from '../../converters/serverToClient';
 import type { Props } from './widgetProfile.types';
 
-export const WidgetProfile = ({ classes, teiId, programId }: Props) => {
+export const WidgetProfile = ({ teiId, programId }: Props) => {
     const [open, setOpenStatus] = useState(true);
     const programsQuery = useMemo(() => ({
         programs: {
