@@ -9,6 +9,7 @@ import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetFeedback } from '../../../WidgetFeedback';
 import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
+import { WidgetIndicator } from '../../../WidgetIndicator';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -53,6 +54,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
                 <WidgetFeedback feedback={widgetEffects?.feedbacks} />
+                <WidgetIndicator indicators={widgetEffects?.indicators} />
                 <WidgetProfile teiId={teiId} programId={program.id} />
                 <WidgetEnrollment
                     teiId={teiId}

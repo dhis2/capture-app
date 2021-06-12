@@ -20,3 +20,7 @@ export type Props = {|
     feedback?: ?Array<string | filteredText | filteredKeyValue>,
     ...CssClasses
 |}
+
+export type IndicatorProps = {|
+    indicators?: ?Array<string | filteredText | filteredKeyValue>
+|}
