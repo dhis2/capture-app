@@ -878,7 +878,7 @@ msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
 
 msgid "Event details"
-msgstr ""
+msgstr "Podrobnosti události"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "

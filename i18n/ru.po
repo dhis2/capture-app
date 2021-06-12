@@ -876,7 +876,7 @@ msgid "You dont have access to edit this event"
 msgstr "У вас нет прав на исправление данного события"
 
 msgid "Event details"
-msgstr ""
+msgstr "Детали события"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "

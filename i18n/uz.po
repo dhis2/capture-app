@@ -893,7 +893,7 @@ msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
 
 msgid "Event details"
-msgstr ""
+msgstr "Ҳодиса/тадбир тафсилотлари"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
