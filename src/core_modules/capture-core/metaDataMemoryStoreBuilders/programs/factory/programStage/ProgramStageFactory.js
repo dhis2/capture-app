@@ -19,7 +19,7 @@ import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';
 import { DataElementFactory } from './DataElementFactory';
 import { RelationshipTypesFactory } from './RelationshipTypesFactory';
 import type { ConstructorInput, SectionSpecs } from './programStageFactory.types';
-import { transformEventNode, transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
+import { transformEventNode } from '../transformNodeFuntions/transformNodeFunctions';
 
 export class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
