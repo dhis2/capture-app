@@ -55,4 +55,4 @@ export const transformEventNode = (node: Object, index: number, nodeToElementFn:
         }
     }
     return undefined;
-}
+};
