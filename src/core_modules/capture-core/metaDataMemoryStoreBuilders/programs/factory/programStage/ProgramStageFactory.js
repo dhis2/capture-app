@@ -19,6 +19,7 @@ import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';
 import { DataElementFactory } from './DataElementFactory';
 import { RelationshipTypesFactory } from './RelationshipTypesFactory';
 import type { ConstructorInput, SectionSpecs } from './programStageFactory.types';
+import { transformEventNode, transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
 
 export class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
@@ -149,9 +150,9 @@ export class ProgramStageFactory {
                 stageForm.customForm = new CustomForm((o) => {
                     // $FlowFixMe
                     o.id = dataEntryForm.id;
-                    // $FlowFixMe
-                    o.data = dataEntryForm.htmlCode;
                 });
+                // $FlowFixMe : Require input from class
+                stageForm.customForm.setData(dataEntryForm.htmlCode, transformEventNode);
             } catch (error) {
                 log.error(errorCreator(ProgramStageFactory.CUSTOM_FORM_TEMPLATE_ERROR)(
                     // $FlowFixMe
