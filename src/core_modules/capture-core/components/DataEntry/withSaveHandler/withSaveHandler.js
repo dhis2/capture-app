@@ -29,15 +29,17 @@ type Props = {
     hasGeneralErrors: ?boolean,
     inProgressList: Array<string>,
     calculatedFoundation: RenderFoundation,
+    fieldsValidated: boolean,
 };
 
 type IsCompletingFn = (props: Props) => boolean;
 type FilterPropsFn = (props: Object) => Object;
-type GetFormFoundationFn = (props: Object) => ?RenderFoundation;
+type GetFormFoundationFn = (props: Object) => RenderFoundation;
 
 type State = {
     messagesDialogOpen: boolean,
     waitForPromisesDialogOpen: boolean,
+    waitForFieldValidations: boolean,
     saveType?: ?string,
 };
 
@@ -57,6 +59,7 @@ const getSaveHandler = (
             this.state = {
                 messagesDialogOpen: false,
                 waitForPromisesDialogOpen: false,
+                waitForFieldValidations: false,
             };
         }
 
@@ -65,10 +68,14 @@ const getSaveHandler = (
                 this.props.inProgressList.length === 0 &&
                 prevProps.inProgressList.length > 0
             ) {
-                this.validateAndSave(this.state.saveType);
-                // todo (eslint)
                 // eslint-disable-next-line react/no-did-update-set-state
-                this.setState({ waitForPromisesDialogOpen: false, saveType: null });
+                this.setState({ waitForPromisesDialogOpen: false, saveType: undefined });
+                this.validateAndSave(this.state.saveType);
+            } else if (this.state.waitForFieldValidations &&
+                this.props.fieldsValidated) {
+                // eslint-disable-next-line react/no-did-update-set-state
+                this.setState({ waitForFieldValidations: false, saveType: undefined });
+                this.validateAndSave(this.state.saveType);
             }
         }
 
@@ -150,11 +157,14 @@ const getSaveHandler = (
         }
 
         handleSaveAttempt = (saveType?: ?string) => {
-            if (this.props.inProgressList.length > 0) {
+            const { inProgressList, fieldsValidated } = this.props;
+            if (inProgressList.length) {
                 this.setState({ waitForPromisesDialogOpen: true, saveType });
-                return;
+            } else if (!fieldsValidated) {
+                this.setState({ waitForFieldValidations: true, saveType });
+            } else {
+                this.validateAndSave(saveType);
             }
-            this.validateAndSave(saveType);
         }
 
         handleSaveValidationOutcome(saveType?: ?string, isFormValid: boolean) {
@@ -269,7 +279,7 @@ const getSaveHandler = (
             const key = getDataEntryKey(props.id, itemId);
             const generalErrors = state.rulesEffectsGeneralErrors[key] && state.rulesEffectsGeneralErrors[key].error;
             const foundation = onGetFormFoundation ? onGetFormFoundation(props) : props.formFoundation;
-
+            const reduxSectionKeys = [...foundation.sections.values()].map(section => `${key}-${section.id}`);
             return {
                 itemId,
                 saveAttempted:
@@ -281,6 +291,8 @@ const getSaveHandler = (
                 hasGeneralErrors: (generalErrors && generalErrors.length > 0),
                 inProgressList: state.dataEntriesInProgressList[key] || [],
                 calculatedFoundation: foundation,
+                fieldsValidated: reduxSectionKeys
+                    .every(reduxSectionKey => state.formsSectionsFieldsUI[reduxSectionKey]),
             };
         };
 

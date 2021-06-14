@@ -1,3 +1,17 @@
+## [1.25.3](https://github.com/dhis2/capture-app/compare/v1.25.2...v1.25.3) (2021-06-12)
+
+
+### Bug Fixes
+
+* TECH-622 use 2.37 backend for tests ([cb2531f](https://github.com/dhis2/capture-app/commit/cb2531f692eebfe1ededd0aedc53b39754453749))
+
+## [1.25.2](https://github.com/dhis2/capture-app/compare/v1.25.1...v1.25.2) (2021-06-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9595717](https://github.com/dhis2/capture-app/commit/9595717352f637fbad2e3deb131fcfcf4c1ac05e))
+
 ## [1.25.1](https://github.com/dhis2/capture-app/compare/v1.25.0...v1.25.1) (2021-06-08)
 
 
