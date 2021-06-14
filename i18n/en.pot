@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-09T10:36:40.785Z\n"
-"PO-Revision-Date: 2021-06-09T10:36:40.785Z\n"
+"POT-Creation-Date: 2021-06-14T13:42:37.039Z\n"
+"PO-Revision-Date: 2021-06-14T13:42:37.039Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -949,7 +949,10 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "View all {{ all }}"
+msgid "Reset"
+msgstr ""
+
+msgid "Go to full {{ eventName }}"
 msgstr ""
 
 msgid "New {{ eventName }} event"

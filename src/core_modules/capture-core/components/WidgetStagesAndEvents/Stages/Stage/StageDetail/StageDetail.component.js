@@ -121,11 +121,17 @@ const StageDetailPlain = ({ events, eventName, data, classes }: Props) => {
             </Button>
             : null);
 
+        const renderResetButton = () => (displayedRowNumber > DEFAULT_NUMBER_OF_ROW ? <Button
+            dataTest="reset-button"
+            className={classes.button}
+            onClick={() => { setDisplayedRowNumber(DEFAULT_NUMBER_OF_ROW); }}
+        >{i18n.t('Reset')}</Button> : null);
+
         const renderViewAllButton = () => (events.length > 1 ? <Button
             dataTest="view-all-button"
             className={classes.button}
             onClick={() => {}}
-        >{i18n.t('View all {{ all }}', { all: events.length })}</Button> : null);
+        >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
 
         const renderCreateNewButton = () => (<Button
             className={classes.button}
@@ -139,6 +145,7 @@ const StageDetailPlain = ({ events, eventName, data, classes }: Props) => {
                     {renderShowMoreButton()}
                     {renderViewAllButton()}
                     {renderCreateNewButton()}
+                    {renderResetButton()}
                 </DataTableCell>
             </DataTableRow>
         );
