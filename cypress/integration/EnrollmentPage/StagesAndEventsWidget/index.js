@@ -76,3 +76,31 @@ Then('more events should be displayed', () => {
                 .find('[data-test="dhis2-uicore-datatablerow"]').should('have.length', 10);
         });
 });
+
+Then('reset button should be displayed', () => {
+    cy.get('[data-test="stages-and-events-widget"]').within(() => {
+        cy.get('[data-test="view-all-button"]').should('exist');
+        cy.get('[data-test="show-more-button"]').should('exist');
+        cy.get('[data-test="reset-button"]').should('exist');
+        cy.get('[data-test="create-new-button"]').should('exist');
+    });
+});
+
+And('you click reset button', () => {
+    cy.get('[data-test="stages-and-events-widget"]').within(() => {
+        cy.get('[data-test="reset-button"]').click();
+        cy.wait(100);
+    });
+});
+
+Then('there should be 5 rows in the table', () => {
+    cy.get('[data-test="stages-and-events-widget"]')
+        .find('[data-test="widget-contents"]')
+        .find('[data-test="stage-content"]')
+        .eq(2)
+        .within(() => {
+            cy.get('[data-test="dhis2-uicore-datatable"]').should('exist');
+            cy.get('[data-test="dhis2-uicore-tablebody"]')
+                .find('[data-test="dhis2-uicore-datatablerow"]').should('have.length', 5);
+        });
+});
