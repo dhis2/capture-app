@@ -196,6 +196,11 @@ export class EnrollmentFactory {
 
         let section;
         if (cachedProgram.dataEntryForm) {
+            if (cachedProgram.trackedEntityTypeId) {
+                section = await this._buildTetFeatureTypeSection(cachedProgram.trackedEntityTypeId);
+                section && enrollmentForm.addSection(section);
+            }
+
             await this._buildCustomEnrollmentForm(enrollmentForm, cachedProgram.dataEntryForm, cachedProgramTrackedEntityAttributes);
         } else if (cachedProgramSections?.length) {
             if (cachedProgram.trackedEntityTypeId) {
