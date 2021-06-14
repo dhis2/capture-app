@@ -2,7 +2,6 @@
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import React from 'react';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { errorCreator } from 'capture-core-utils';
 import type {
@@ -167,7 +166,6 @@ export class EnrollmentFactory {
         });
 
         section.showContainer = false;
-        cachedProgramTrackedEntityAttributes = cachedProgramTrackedEntityAttributes.filter(attribute => attribute)
 
         section = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
         section && enrollmentForm.addSection(section);
