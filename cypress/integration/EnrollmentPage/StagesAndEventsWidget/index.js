@@ -39,6 +39,18 @@ Then('you see the first 5 events in the table', () => {
     });
 });
 
+Then('you see the first 5 rows in Antenatal care visit event', () => {
+    cy.get('[data-test="stages-and-events-widget"]')
+        .find('[data-test="widget-contents"]')
+        .find('[data-test="stage-content"]')
+        .eq(2)
+        .within(() => {
+            cy.get('[data-test="dhis2-uicore-datatable"]').should('exist');
+            cy.get('[data-test="dhis2-uicore-tablebody"]')
+                .find('[data-test="dhis2-uicore-datatablerow"]').should('have.length', 5);
+        });
+});
+
 Then('you see buttons in the footer list', () => {
     cy.get('[data-test="stages-and-events-widget"]').within(() => {
         cy.get('[data-test="view-all-button"]').should('exist');
@@ -49,13 +61,18 @@ Then('you see buttons in the footer list', () => {
 
 When('you click show more button in stages&event list', () => {
     cy.get('[data-test="stages-and-events-widget"]').within(() => {
-        cy.get('[data-test="create-new-button"]').click();
+        cy.get('[data-test="show-more-button"]').click();
     });
 });
 
 Then('more events should be displayed', () => {
-    cy.get('[data-test="stages-and-events-widget"]').within(() => {
-        cy.get('[data-test="widget-contents"]').should('exist');
-        cy.get('[data-test="widget-content"]').find('[data-test="stage-content"]').should('have.length', 10);
-    });
+    cy.get('[data-test="stages-and-events-widget"]')
+        .find('[data-test="widget-contents"]')
+        .find('[data-test="stage-content"]')
+        .eq(2)
+        .within(() => {
+            cy.get('[data-test="dhis2-uicore-datatable"]').should('exist');
+            cy.get('[data-test="dhis2-uicore-tablebody"]')
+                .find('[data-test="dhis2-uicore-datatablerow"]').should('have.length', 10);
+        });
 });
