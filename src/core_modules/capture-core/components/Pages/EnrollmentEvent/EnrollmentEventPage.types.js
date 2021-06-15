@@ -1,10 +1,14 @@
 // @flow
 import type { ProgramStage } from '../../../metaData';
 
-export type Props = {|
+export type PlainProps = {|
     programStage: ?ProgramStage,
     mode: string,
-    eventId: string,
     onEdit: () => {},
     ...CssClasses,
+|};
+
+export type Props = {|
+    showEditEvent: ?boolean,
+    onOpenEditEvent: () => {},
 |};

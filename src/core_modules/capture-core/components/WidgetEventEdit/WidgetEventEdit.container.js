@@ -1,171 +1,109 @@
 // @flow
-import React, { useEffect } from 'react';
-import { batchActions } from 'redux-batched-actions';
-import { useDispatch } from 'react-redux';
+import React, { type ComponentType } from 'react';
+import i18n from '@dhis2/d2-i18n';
+import { withStyles } from '@material-ui/core';
+import {
+    spacersNum,
+    Button,
+    colors,
+    IconEdit24,
+    IconArrowLeft24,
+} from '@dhis2/ui';
+import { Widget } from '../Widget';
 import type { Props } from './widgetEventEdit.types';
-import { WidgetEventEdit as WidgetEventEditComponent } from './WidgetEventEdit.component';
-import { getEvent } from '../../events/eventRequests';
-import { getProgramAndStageFromEvent } from '../../metaData/helpers/getProgramAndStageFromEvent';
-import { getCategoriesDataFromEventAsync } from '../Pages/ViewEvent/epics/getCategoriesDataFromEvent';
-import {
-    loadViewEventDataEntry,
-    prerequisitesErrorLoadingViewEventDataEntry,
-} from '../Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
-import { openEventForEditInDataEntry } from '../Pages/EditEvent/DataEntry/editEventDataEntry.actions';
-import { showEditEventDataEntry } from '../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
-import {
-    viewEventFromUrl,
-    // eventFromUrlRetrieved,
-    eventFromUrlCouldNotBeRetrieved,
-} from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { eventFromUrlRetrieved } from './WidgetEventEdit.actions';
-import { orgUnitRetrievedOnUrlUpdate } from '../Pages/EditEvent/editEvent.actions';
-import { getApi } from '../../d2/d2Instance';
+import { EditEventDataEntry } from '../Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/';
+import { ViewEventDataEntry } from '../Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/';
+import { pageMode } from '../Pages/EnrollmentEvent/EnrollmentEventPage.const';
+import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 
-const getEventFromUrlEpic = async eventId => {
-    const prevProgramId = undefined;
-    return getEvent(eventId)
-        .then(eventContainer => {
-            console.log(eventContainer);
-            if (!eventContainer) {
-                return eventFromUrlCouldNotBeRetrieved(
-                    'Event could not be loaded. Are you sure it exists?',
-                );
-            }
-            return getCategoriesDataFromEventAsync(eventContainer.event).then(
-                categoriesData =>
-                    eventFromUrlRetrieved(
-                        eventContainer,
-                        prevProgramId,
-                        categoriesData,
-                    ),
-            );
-        })
-        .catch(() =>
-            eventFromUrlCouldNotBeRetrieved(
-                'Event could not be loaded. Are you sure it exists?',
-            ),
-        );
+const styles = {
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: spacersNum.dp8,
+    },
+    icon: {
+        paddingRight: spacersNum.dp8,
+    },
+    form: {
+        padding: spacersNum.dp8,
+    },
+    menu: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        background: colors.white,
+        borderTopLeftRadius: 3,
+        borderTopRightRadius: 3,
+        borderStyle: 'solid',
+        borderColor: colors.grey400,
+        borderWidth: 1,
+        borderBottomWidth: 0,
+    },
+    backButton: { margin: spacersNum.dp8 },
+    editButton: { margin: spacersNum.dp8 },
 };
 
-export const WidgetEventEdit = ({
-    mode,
+export const WidgetEventEditPlain = ({
+    classes,
     programStage,
-    eventId,
+    programStage: { name, icon },
+    mode,
     onEdit,
-}: Props) => {
-    const dispatch = useDispatch();
-
-    const loadViewEvent = async () => {
-        const eventContainer = await getEvent(eventId);
-        const metadataContainer = getProgramAndStageFromEvent(
-            eventContainer.event,
-        );
-        if (metadataContainer.error) {
-            dispatch(
-                prerequisitesErrorLoadingViewEventDataEntry(
-                    metadataContainer.error,
-                ),
-            );
-        }
-        const foundation = metadataContainer.stage.stageForm;
-        const program = metadataContainer.program;
-        const orgUnit = {
-            id: eventContainer.orgUnitId,
-            name: eventContainer.orgUnitName,
-        };
-        const actions = await loadViewEventDataEntry(
-            eventContainer,
-            orgUnit,
-            foundation,
-            program,
-        );
-
-        const getOrgUnitAction = await getApi()
-            .get(`organisationUnits/${eventContainer.event.orgUnitId}`)
-            .then(orgUnitObject =>
-                orgUnitRetrievedOnUrlUpdate(orgUnitObject, eventContainer),
-            )
-            .catch(error => {
-                console.log(error);
-            });
-
-        dispatch(
-            batchActions([
-                // getEventFromUrlEpic(eventId),
-                eventFromUrlRetrieved(eventContainer),
-                getOrgUnitAction,
-                viewEventFromUrl({
-                    nextProps: { viewEventId: eventId },
-                    nextPage: mode,
-                }),
-                ...actions,
-            ]),
-        );
-    };
-
-    const editViewEvent = async () => {
-        const eventContainer = await getEvent(eventId);
-        const dataEntryValues = {
-            complete: 'true',
-            eventDate: '2021-12-25',
-            geometry: null,
-        };
-        const formValues = {
-            GieVkTxp4HH: '100',
-            K6uUAvq500H: 'W42',
-            eMyVanycQSC: '2018-12-11',
-            fWIAEtYVEGk: 'MODDISCH',
-            msodh3rEMJa: '2018-12-25',
-            oZg33kd9taw: 'Female',
-            qrur9Dvnyt5: '72',
-            vV9UWAZohSf: '75',
-        };
-        const loadedValues = { eventContainer, dataEntryValues, formValues };
-        const metadataContainer = getProgramAndStageFromEvent(
-            eventContainer.event,
-        );
-        if (metadataContainer.error) {
-            dispatch(
-                prerequisitesErrorLoadingViewEventDataEntry(
-                    metadataContainer.error,
-                ),
-            );
-        }
-        const program = metadataContainer.program;
-        const foundation = metadataContainer.stage.stageForm;
-        const orgUnit = {
-            id: eventContainer.orgUnitId,
-            name: eventContainer.orgUnitName,
-        };
-
-        dispatch(
-            batchActions([
-                showEditEventDataEntry(),
-                ...openEventForEditInDataEntry(
-                    loadedValues,
-                    orgUnit,
-                    foundation,
-                    program,
-                ),
-            ]),
-        );
-    };
-
-    useEffect(() => {
-        loadViewEvent();
-    }, []);
-
-    const handleonEdit = async () => {
-        await editViewEvent();
-        onEdit();
-    };
-
-    return (
-        <WidgetEventEditComponent
-            programStage={programStage}
-            mode={mode}
-            onEdit={handleOnEdit}
-        />
-    );
-};
+}: Props) => (
+    <div data-test="widget-enrollment">
+        <div className={classes.menu}>
+            <Button
+                small
+                secondary
+                className={classes.backButton}
+                onClick={() => {}}
+            >
+                <IconArrowLeft24 /> {i18n.t('Back to all stages and events')}
+            </Button>
+            <Button
+                small
+                secondary
+                className={classes.editButton}
+                onClick={onEdit}
+            >
+                <IconEdit24 />
+                {i18n.t('Edit event')}
+            </Button>
+        </div>
+        <Widget
+            header={
+                <div className={classes.header}>
+                    {icon && (
+                        <div className={classes.icon}>
+                            <NonBundledDhis2Icon
+                                name={icon?.name}
+                                color={icon?.color}
+                                width={30}
+                                height={30}
+                                cornerRadius={2}
+                            />
+                        </div>
+                    )}
+                    <span> {name} </span>
+                </div>
+            }
+            onOpen={() => {}}
+            onClose={() => {}}
+            open
+        >
+            <div className={classes.form}>
+                {mode === pageMode.VIEW ? (
+                    <ViewEventDataEntry
+                        formFoundation={programStage.stageForm}
+                    />
+                ) : (
+                    <EditEventDataEntry
+                        formFoundation={programStage.stageForm}
+                    />
+                )}
+            </div>
+        </Widget>
+    </div>
+);
+export const WidgetEventEdit: ComponentType<$Diff<Props, CssClasses>> =
+    withStyles(styles)(WidgetEventEditPlain);

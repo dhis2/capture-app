@@ -14,6 +14,9 @@ import {
 import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
 import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
+import {
+    enrollmentEventPageActionTypes,
+} from '../../components/Pages/EnrollmentEvent/EnrollmentEventPage.actions';
 
 export const viewEventPageDesc = createReducerDescription({
     [viewEventActionTypes.VIEW_EVENT_FROM_URL]: (state, action) => {
@@ -94,7 +97,20 @@ export const viewEventPageDesc = createReducerDescription({
             ...state.eventDetailsSection,
         },
     }),
+    [enrollmentEventPageActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY]: state => ({
+        ...state,
+        eventDetailsSection: {
+            ...state.eventDetailsSection,
+        },
+    }),
     [viewEventDetailsActionTypes.SHOW_EDIT_EVENT_DATA_ENTRY]: state => ({
+        ...state,
+        eventDetailsSection: {
+            ...state.eventDetailsSection,
+            showEditEvent: true,
+        },
+    }),
+    [enrollmentEventPageActionTypes.SHOW_EDIT_EVENT_DATA_ENTRY]: state => ({
         ...state,
         eventDetailsSection: {
             ...state.eventDetailsSection,

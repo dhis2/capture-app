@@ -2,8 +2,16 @@
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const enrollmentEventPageActionTypes = {
-    ADD_EVENT: 'EnrollmentEventPage.AddEvent',
+    START_SHOW_EDIT_EVENT_DATA_ENTRY:
+        'EnrollmentEventPage.StartShowEditEventDataEntryForViewSingleEvent',
+    SHOW_EDIT_EVENT_DATA_ENTRY:
+        'EnrollmentEventPage.ShowEditEventDataEntryForViewSingleEvent',
 };
 
-export const addEvent = ({ event }) =>
-    actionCreator(enrollmentEventPageActionTypes.ADD_EVENT)({ event });
+export const startShowEditEventDataEntry = () =>
+    actionCreator(
+        enrollmentEventPageActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY,
+    )();
+
+export const showEditEventDataEntry = () =>
+    actionCreator(enrollmentEventPageActionTypes.SHOW_EDIT_EVENT_DATA_ENTRY)();
