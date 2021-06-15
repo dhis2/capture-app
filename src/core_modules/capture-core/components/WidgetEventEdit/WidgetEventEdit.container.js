@@ -2,13 +2,7 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import {
-    spacersNum,
-    Button,
-    colors,
-    IconEdit24,
-    IconArrowLeft24,
-} from '@dhis2/ui';
+import { spacersNum, Button, colors, IconEdit24 } from '@dhis2/ui';
 import { Widget } from '../Widget';
 import type { Props } from './widgetEventEdit.types';
 import { EditEventDataEntry } from '../Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/';
@@ -30,7 +24,7 @@ const styles = {
     },
     menu: {
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'end',
         background: colors.white,
         borderTopLeftRadius: 3,
         borderTopRightRadius: 3,
@@ -39,8 +33,7 @@ const styles = {
         borderWidth: 1,
         borderBottomWidth: 0,
     },
-    backButton: { margin: spacersNum.dp8 },
-    editButton: { margin: spacersNum.dp8 },
+    button: { margin: spacersNum.dp8 },
 };
 
 export const WidgetEventEditPlain = ({
@@ -52,20 +45,7 @@ export const WidgetEventEditPlain = ({
 }: Props) => (
     <div data-test="widget-enrollment">
         <div className={classes.menu}>
-            <Button
-                small
-                secondary
-                className={classes.backButton}
-                onClick={() => {}}
-            >
-                <IconArrowLeft24 /> {i18n.t('Back to all stages and events')}
-            </Button>
-            <Button
-                small
-                secondary
-                className={classes.editButton}
-                onClick={onEdit}
-            >
+            <Button small secondary className={classes.button} onClick={onEdit}>
                 <IconEdit24 />
                 {i18n.t('Edit event')}
             </Button>
