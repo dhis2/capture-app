@@ -40,8 +40,8 @@ const styles = {
 const StageDetailPlain = ({ events, eventName, data, classes }: Props) => {
     const headerColumns = computeHeaderColumn(data, events);
     const [{ columnName, sortDirection }, setSortInstructions] = useState({
-        columnName: '',
-        sortDirection: '',
+        columnName: 'eventDate',
+        sortDirection: 'desc',
     });
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
