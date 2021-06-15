@@ -18,17 +18,17 @@ import { DragDropListItem } from './DragDropListItem.component';
 type Props = {
     listItems: Array<Object>,
     handleUpdateListOrder: (sortedList: Array<Object>) => void,
-    handleToggle: (id: string) => void,
+    handleToggle: (id: string) => () => void,
 };
 
 export class DragDropList extends Component<Props> {
     moveListItem: (dragIndex: any, hoverIndex: any) => void;
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
         this.moveListItem = this.moveListItem.bind(this);
     }
 
-    moveListItem(dragIndex, hoverIndex) {
+    moveListItem(dragIndex: any, hoverIndex: any) {
         const { listItems } = this.props;
         const dragListItem = listItems[dragIndex];
         let sortedList = [];
