@@ -140,6 +140,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             categoriesMeta,
             complete: true,
         };
+
         return newState;
     },
     [crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET]: (state, action) => {

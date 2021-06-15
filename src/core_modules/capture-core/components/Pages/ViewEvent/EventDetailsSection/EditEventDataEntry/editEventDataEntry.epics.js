@@ -17,6 +17,10 @@ import {
     startSaveEditEventDataEntry,
     prerequisitesErrorLoadingEditEventDataEntry,
 } from './editEventDataEntry.actions';
+import {
+    enrollmentEventPageActionTypes,
+} from '../../../EnrollmentEvent/EnrollmentEventPage.actions';
+
 
 import {
     actionTypes as eventDetailsActionTypes,
@@ -30,7 +34,7 @@ import {
 
 export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
+        ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY, enrollmentEventPageActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
         map(() => {
             const state = store.value;
             const loadedValues = state.viewEventPage.loadedValues;

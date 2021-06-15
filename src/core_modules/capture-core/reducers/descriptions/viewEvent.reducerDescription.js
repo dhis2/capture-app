@@ -110,13 +110,6 @@ export const viewEventPageDesc = createReducerDescription({
             showEditEvent: true,
         },
     }),
-    [enrollmentEventPageActionTypes.SHOW_EDIT_EVENT_DATA_ENTRY]: state => ({
-        ...state,
-        eventDetailsSection: {
-            ...state.eventDetailsSection,
-            showEditEvent: true,
-        },
-    }),
     [editEventDataEntryActionTypes.CANCEL_EDIT_EVENT_DATA_ENTRY]: state => ({
         ...state,
         eventDetailsSection: {

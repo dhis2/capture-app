@@ -2,14 +2,10 @@
 import React from 'react';
 // $FlowFixMe
 import { connect, useSelector, shallowEqual } from 'react-redux';
-import { batchActions } from 'redux-batched-actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode } from './EnrollmentEventPage.const';
 import { EnrollmentEventPageComponent } from './EnrollmentEventPage.component';
-import {
-    startShowEditEventDataEntry,
-    showEditEventDataEntry,
-} from './EnrollmentEventPage.actions';
+import { startShowEditEventDataEntry } from './EnrollmentEventPage.actions';
 import type { Props } from './EnrollmentEventPage.types';
 
 export const EnrollmentEventPagePlain = ({
@@ -42,17 +38,12 @@ export const EnrollmentEventPagePlain = ({
 };
 
 const mapStateToProps = (state: ReduxState) => ({
-    showEditEvent: state.viewEventPage.eventDetailsSection?.showEditEvent,
+    showEditEvent: state.viewEventPage?.eventDetailsSection?.showEditEvent,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
     onOpenEditEvent: () => {
-        dispatch(
-            batchActions([
-                startShowEditEventDataEntry(),
-                showEditEventDataEntry(),
-            ]),
-        );
+        dispatch(startShowEditEventDataEntry());
     },
 });
 
