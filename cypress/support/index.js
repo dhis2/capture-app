@@ -1,4 +1,4 @@
-import '@dhis2/cypress-commands';
+import { enableAutoLogin, enableNetworkShim } from '@dhis2/cypress-commands';
 
 // Add additional support functions here
 import './helpers';
@@ -12,3 +12,5 @@ beforeEach(() => {
     */
     cy.clearCookies({ domain: null });
 });
+enableNetworkShim();
+enableAutoLogin();
