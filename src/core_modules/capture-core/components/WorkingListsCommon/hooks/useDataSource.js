@@ -1,7 +1,5 @@
 // @flow
 import { useMemo } from 'react';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import { typeof dataElementTypes } from '../../../metaData';
 import { convertClientToList } from '../../../converters';
 import type { DataSource } from '../../WorkingLists';
