@@ -4,7 +4,6 @@ import i18n from '@dhis2/d2-i18n';
 import {
     type ProgramStage,
     dataElementTypes as elementTypeKeys,
-    type Program, TrackerProgram, EventProgram,
 } from '../../../metaData';
 import { mainPropertyNames } from '../../../events/mainPropertyNames.const';
 import type {
