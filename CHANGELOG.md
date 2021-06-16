@@ -1,3 +1,31 @@
+## [1.25.3](https://github.com/dhis2/capture-app/compare/v1.25.2...v1.25.3) (2021-06-12)
+
+
+### Bug Fixes
+
+* TECH-622 use 2.37 backend for tests ([cb2531f](https://github.com/dhis2/capture-app/commit/cb2531f692eebfe1ededd0aedc53b39754453749))
+
+## [1.25.2](https://github.com/dhis2/capture-app/compare/v1.25.1...v1.25.2) (2021-06-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9595717](https://github.com/dhis2/capture-app/commit/9595717352f637fbad2e3deb131fcfcf4c1ac05e))
+
+## [1.25.1](https://github.com/dhis2/capture-app/compare/v1.25.0...v1.25.1) (2021-06-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([d5d4cce](https://github.com/dhis2/capture-app/commit/d5d4cce07837d3d701d5d63d9910ec5b3aae18b9))
+
+# [1.25.0](https://github.com/dhis2/capture-app/compare/v1.24.1...v1.25.0) (2021-06-08)
+
+
+### Features
+
+* [DHIS2-11207] add stage name and icon in the enrollment event page ([#1778](https://github.com/dhis2/capture-app/issues/1778)) ([a6a63cd](https://github.com/dhis2/capture-app/commit/a6a63cd751403a3354b5d657568e2e8322c80bbf))
+
 ## [1.24.1](https://github.com/dhis2/capture-app/compare/v1.24.0...v1.24.1) (2021-06-07)
 
 
