@@ -10,7 +10,8 @@ export const EventWorkingListsOfflineColumnSetup = ({
     customColumnOrder,
     ...passOnProps
 }: Props) => {
-    const defaultColumns = useDefaultColumnConfig(program);
+    const stage = program.stage;
+    const defaultColumns = useDefaultColumnConfig(stage);
     const columns = useColumns<EventWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const visibleColumns = useMemo(() => columns.filter(column => column.visible), [columns]);
 

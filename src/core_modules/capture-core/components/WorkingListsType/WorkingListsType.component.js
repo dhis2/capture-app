@@ -9,7 +9,7 @@ export const WorkingListsType = ({ programId, orgUnitId }: Props) => {
     const { programType } = useProgramInfo(programId);
     if (programType === programTypes.EVENT_PROGRAM) {
         return (
-            <EventWorkingListsInit programId={programId} />
+            <EventWorkingListsInit programId={programId} programStageId={'EventProgramStage'} />
         );
     }
 

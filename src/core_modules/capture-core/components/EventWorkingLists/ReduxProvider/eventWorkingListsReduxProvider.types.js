@@ -41,7 +41,8 @@ import type {
 
 export type Props = $ReadOnly<{|
     storeId: string,
-    programId: string
+    programId: string,
+    programStageId: string
 |}>;
 
 export type EventWorkingListsReduxOutputProps = {|
@@ -87,6 +88,7 @@ export type EventWorkingListsReduxOutputProps = {|
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
     program: EventProgram,
+    programStageId: string,
     recordsOrder?: RecordsOrder,
     rowsPerPage?: number,
     sortByDirection?: string,

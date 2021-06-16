@@ -6,7 +6,7 @@ import { DownloadDialog } from './DownloadDialog';
 import type { CustomMenuContents } from '../../WorkingLists';
 import type { Props } from './EventWorkingListsViewMenuSetup.types';
 
-export const EventWorkingListsViewMenuSetup = ({ downloadRequest, program, ...passOnProps }: Props) => {
+export const EventWorkingListsViewMenuSetup = ({ downloadRequest, program, programStageId, ...passOnProps }: Props) => {
     const [downloadDialogOpen, setDownloadDialogOpenStatus] = useState(false);
     const customListViewMenuContents: CustomMenuContents = useMemo(() => [{
         key: 'downloadData',
@@ -29,7 +29,7 @@ export const EventWorkingListsViewMenuSetup = ({ downloadRequest, program, ...pa
                 open={downloadDialogOpen}
                 onClose={handleCloseDialog}
                 request={downloadRequest}
-                programStageId={program.stage.id}
+                programStageId={programStageId}
             />
         </React.Fragment>
     );

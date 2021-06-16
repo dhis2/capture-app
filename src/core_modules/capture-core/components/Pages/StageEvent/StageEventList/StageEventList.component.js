@@ -5,6 +5,7 @@ import { colors } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { StageEventHeaderComponent } from './StageEventHeader/StageEventHeader.component';
 import type { Props } from './StageEventList.types';
+import { EventWorkingLists } from '../../../EventWorkingLists';
 
 const getStyles = () => ({
     wrapper: {
@@ -16,9 +17,10 @@ const getStyles = () => ({
     },
 });
 
-const StageEventListComponentPlain = ({ stage, classes }) => (<>
+const StageEventListComponentPlain = ({ stage, programId, classes }) => (<>
     <div data-test="stage-event-list" className={classes.wrapper}>
         <StageEventHeaderComponent title={stage.name} icon={stage.icon} events={[]} />
+        <EventWorkingLists storeId="stageEvents" programId={programId} programStageId={stage.id} />
     </div>
 </>);
 

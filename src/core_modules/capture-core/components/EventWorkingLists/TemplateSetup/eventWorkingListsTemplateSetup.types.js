@@ -1,5 +1,5 @@
 // @flow
-import type { EventProgram } from '../../../metaData';
+import type { Program } from '../../../metaData';
 import type {
     FiltersData,
     AddTemplate,
@@ -16,7 +16,7 @@ type ExtractedProps = $ReadOnly<{|
     columns: EventWorkingListsColumnConfigs,
     sortById?: string,
     sortByDirection?: string,
-    program: EventProgram,
+    program: Program,
     onAddTemplate: Function,
     onUpdateTemplate: Function,
     onDeleteTemplate: Function,
@@ -36,7 +36,7 @@ export type EventWorkingListsTemplateSetupOutputProps = {|
     columns: EventWorkingListsColumnConfigs,
     sortById?: string,
     sortByDirection?: string,
-    program: EventProgram,
+    program: Program,
     onAddTemplate: AddTemplate,
     onUpdateTemplate: UpdateTemplate,
     onDeleteTemplate: DeleteTemplate,

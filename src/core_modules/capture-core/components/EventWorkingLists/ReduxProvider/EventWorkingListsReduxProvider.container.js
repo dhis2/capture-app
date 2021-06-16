@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     openViewEventPage,
@@ -7,16 +7,16 @@ import {
 } from '../eventWorkingLists.actions';
 import { EventWorkingListsColumnSetup } from '../ColumnSetup';
 import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
-import { getEventProgramThrowIfNotFound } from '../../../metaData';
 import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './eventWorkingListsReduxProvider.types';
+import { useProgramInfo } from '../../../hooks/useProgramInfo';
 
-export const EventWorkingListsReduxProvider = ({ storeId, programId }: Props) => {
+export const EventWorkingListsReduxProvider = ({ storeId, programId, programStageId }: Props) => {
     const dispatch = useDispatch();
-    const program = useMemo(() => getEventProgramThrowIfNotFound(programId),
-        [programId]);
+    const { program } = useProgramInfo(programId);
 
-    const { currentTemplateId, templates, ...commonStateManagementRestProps } = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
+    const { currentTemplateId, templates, ...commonStateManagementRestProps }
+        = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
 
     const currentTemplate = currentTemplateId && templates &&
     templates.find(template => template.id === currentTemplateId);
@@ -40,6 +40,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, programId }: Props) =>
         <EventWorkingListsColumnSetup
             {...commonStateManagementRestProps}
             program={program}
+            programStageId={programStageId}
             currentTemplate={currentTemplate}
             templates={templates}
             lastIdDeleted={lastEventIdDeleted}

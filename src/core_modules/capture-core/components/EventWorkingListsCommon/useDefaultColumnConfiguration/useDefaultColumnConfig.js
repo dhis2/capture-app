@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import {
     type ProgramStage,
     dataElementTypes as elementTypeKeys,
-    type EventProgram,
+    type Program, TrackerProgram, EventProgram,
 } from '../../../metaData';
 import { mainPropertyNames } from '../../../events/mainPropertyNames.const';
 import type {
@@ -63,11 +63,8 @@ const getMetaDataConfig = (stage: ProgramStage): Array<MetadataColumnConfig> =>
             multiValueFilter: !!optionSet,
         }));
 
-export const useDefaultColumnConfig = (program: EventProgram): EventWorkingListsColumnConfigs =>
-    useMemo(() => {
-        const { stage } = program;
-        return [
-            ...getDefaultMainConfig(stage),
-            ...getMetaDataConfig(stage),
-        ];
-    }, [program]);
+export const useDefaultColumnConfig = (stage: ProgramStage): EventWorkingListsColumnConfigs =>
+    useMemo(() => [
+        ...getDefaultMainConfig(stage),
+        ...getMetaDataConfig(stage),
+    ], [stage]);

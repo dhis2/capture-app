@@ -17,5 +17,5 @@ export const StageEventListPage = () => {
     const { program } = useProgramInfo(programId);
     const programStage = program?.stages && program.stages.get(stageId);
 
-    return <StageEventListPageComponent programStage={programStage} />;
+    return <StageEventListPageComponent programStage={programStage} programId={programId} />;
 };
