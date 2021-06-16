@@ -848,7 +848,7 @@ msgid "You dont have access to edit this event"
 msgstr ""
 
 msgid "Event details"
-msgstr ""
+msgstr "ລາຍລະອຽດເຫດການ"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "

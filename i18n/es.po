@@ -900,7 +900,7 @@ msgid "You dont have access to edit this event"
 msgstr "No tienes acceso para editar este evento"
 
 msgid "Event details"
-msgstr ""
+msgstr "Detalles del evento"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
