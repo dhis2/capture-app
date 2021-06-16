@@ -1,16 +1,16 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2021
 # phil_dhis2, 2021
 # easylin <lin_xd@126.com>, 2021
 # 晓东 林 <13981924470@126.com>, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-06-03T09:10:27.661Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -640,6 +640,9 @@ msgstr ""
 msgid "Enrollment{{escape}} Edit Event"
 msgstr ""
 
+msgid "We could not find the stage in the program"
+msgstr ""
+
 msgid "Delete event"
 msgstr "删除事件"
 
@@ -848,6 +851,9 @@ msgstr "搜索所有项目"
 
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
+
+msgid "Event details"
+msgstr "事件详情"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
