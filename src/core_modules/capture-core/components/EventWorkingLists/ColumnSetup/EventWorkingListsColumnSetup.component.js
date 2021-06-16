@@ -39,7 +39,6 @@ export const EventWorkingListsColumnSetup = ({
 
     // $FlowFixMe
     const defaultColumns = useDefaultColumnConfig(programStage);
-
     const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView, orgUnitId);
     const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateList);
     const columns = useColumns<EventWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);

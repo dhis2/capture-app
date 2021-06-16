@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-10T11:02:51.238Z\n"
-"PO-Revision-Date: 2021-06-10T11:02:51.238Z\n"
+"POT-Creation-Date: 2021-06-16T11:37:28.529Z\n"
+"PO-Revision-Date: 2021-06-16T11:37:28.529Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -959,6 +959,18 @@ msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr ""
+
+msgid "Overdue"
+msgstr ""
+
+msgid "Skipped"
 msgstr ""
 
 msgid "Program not found"

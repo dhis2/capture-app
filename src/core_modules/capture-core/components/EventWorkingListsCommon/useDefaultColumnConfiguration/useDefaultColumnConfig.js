@@ -1,6 +1,6 @@
 // @flow
 import { useMemo } from 'react';
-import i18n from '@dhis2/d2-i18n';
+import { translatedStatusTypes } from 'capture-core/metaData/DataElement/statusTypes';
 import {
     type ProgramStage,
     dataElementTypes as elementTypeKeys,
@@ -11,6 +11,7 @@ import type {
     MetadataColumnConfig,
     EventWorkingListsColumnConfigs,
 } from '..';
+
 
 const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
     const baseFields = [{
@@ -25,10 +26,7 @@ const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {
         // $FlowFixMe[prop-missing] automated comment
         type: elementTypeKeys.TEXT,
         header: 'Status',
-        options: [
-            { text: i18n.t('Active'), value: 'ACTIVE' },
-            { text: i18n.t('Completed'), value: 'COMPLETED' },
-        ],
+        resolveValue: translatedStatusTypes,
     }];
 
     const optionalFields = [];

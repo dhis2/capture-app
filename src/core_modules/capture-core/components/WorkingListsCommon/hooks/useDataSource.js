@@ -25,22 +25,10 @@ export const useDataSource = (
         .map((eventRecord) => {
             const listRecord = columns
                 .filter(column => column.visible)
-                .reduce((acc, { id, options, type }) => {
+                .reduce((acc, { id, type, resolveValue }) => {
                     const clientValue = eventRecord[id];
-
-                    if (options) {
-                        // TODO: Need is equal comparer for types because `sourceValue` and `option` can be an object for example (for some data element types) and we can't do strict comparison.
-                        const option = options.find(o => o.value === clientValue);
-                        if (!option) {
-                            log.error(
-                                errorCreator(
-                                    'Missing value in options')(
-                                    { id, clientValue, options }),
-                            );
-                            acc[id] = convertClientToList(clientValue, type);
-                        } else {
-                            acc[id] = option.text;
-                        }
+                    if (resolveValue) {
+                        acc[id] = resolveValue()[clientValue];
                     } else {
                         acc[id] = convertClientToList(clientValue, type);
                     }
