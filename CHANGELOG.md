@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/dhis2/capture-app/compare/v1.25.3...v1.26.0) (2021-06-16)
+
+
+### Features
+
+* TECH-614 non collapsible Widget ([edc057e](https://github.com/dhis2/capture-app/commit/edc057eea004dec0b3630d7fdbe17e8214c1732a))
+
 ## [1.25.3](https://github.com/dhis2/capture-app/compare/v1.25.2...v1.25.3) (2021-06-12)
 
 
