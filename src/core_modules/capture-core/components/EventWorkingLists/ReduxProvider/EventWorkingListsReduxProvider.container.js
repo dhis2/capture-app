@@ -11,7 +11,7 @@ import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './eventWorkingListsReduxProvider.types';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 
-export const EventWorkingListsReduxProvider = ({ storeId, programId, programStageId }: Props) => {
+export const EventWorkingListsReduxProvider = ({ storeId, programId, programStageId, orgUnitId }: Props) => {
     const dispatch = useDispatch();
     const { program } = useProgramInfo(programId);
 
@@ -41,6 +41,7 @@ export const EventWorkingListsReduxProvider = ({ storeId, programId, programStag
             {...commonStateManagementRestProps}
             program={program}
             programStageId={programStageId}
+            orgUnitId={orgUnitId}
             currentTemplate={currentTemplate}
             templates={templates}
             lastIdDeleted={lastEventIdDeleted}

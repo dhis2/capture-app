@@ -17,10 +17,15 @@ const getStyles = () => ({
     },
 });
 
-const StageEventListComponentPlain = ({ stage, programId, classes }) => (<>
+const StageEventListComponentPlain = ({ stage, programId, orgUnitId, classes }) => (<>
     <div data-test="stage-event-list" className={classes.wrapper}>
         <StageEventHeaderComponent title={stage.name} icon={stage.icon} events={[]} />
-        <EventWorkingLists storeId="stageEvents" programId={programId} programStageId={stage.id} />
+        <EventWorkingLists
+            storeId="stageEvents"
+            programId={programId}
+            programStageId={stage.id}
+            orgUnitId={orgUnitId}
+        />
     </div>
 </>);
 

@@ -14,9 +14,9 @@ const getStyles = () => ({
     },
 });
 
-const StageEventListPagePlain = ({ classes, programId, programStage }) => (<>
+const StageEventListPagePlain = ({ classes, programId, programStage, orgUnitId }) => (<>
     <div data-test="stage-event-list-page-content" className={classes.container}>
-        <StageEventListComponent stage={programStage} programId={programId} />
+        <StageEventListComponent stage={programStage} programId={programId} orgUnitId={orgUnitId} />
     </div>
 </>);
 

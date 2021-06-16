@@ -4,5 +4,6 @@ import { ProgramStage } from 'capture-core/metaData';
 export type Props = {|
   ...CssClasses,
   programStage: ?ProgramStage,
-  programId: string
+  programId: string,
+  orgUnitId: string
 |}
