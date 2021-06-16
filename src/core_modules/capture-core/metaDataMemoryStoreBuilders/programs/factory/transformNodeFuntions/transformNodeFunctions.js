@@ -37,8 +37,8 @@ export const transformEventNode = (node: Object, index: number, nodeToElementFn:
             const id = matchResult[0].replace('-', '');
             const inputElement = nodeToElementFn(node, index);
 
-            const style = inputElement.props && inputElement.props.style;
-            const className = inputElement.props && inputElement.props.className;
+            const style = inputElement.props?.style;
+            const className = inputElement.props?.className;
 
             const customFormElementProps = {
                 id: htmlElementId,
