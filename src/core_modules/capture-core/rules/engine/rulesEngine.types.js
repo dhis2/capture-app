@@ -221,6 +221,7 @@ export interface IConvertInputRulesValue {
     convertPercentage(value: any): number | string;
     convertUrl(value: any): string;
     convertAge(value: any): number | string;
+    convertOrgUnit(value: any): string;
 }
 
 export interface IConvertOutputRulesEffectsValue {
@@ -242,6 +243,7 @@ export interface IConvertOutputRulesEffectsValue {
     convertPercentage(value: number): any;
     convertUrl(value: string): any;
     convertAge(value: string): any;
+    convertOrgUnit(value: any): string;
 }
 
 export type D2FunctionParameters = {
