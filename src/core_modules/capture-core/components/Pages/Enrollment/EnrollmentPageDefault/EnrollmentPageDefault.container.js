@@ -41,6 +41,7 @@ export const EnrollmentPageDefault = () => {
     }
 
     const [ruleEffects, setRuleEffects] = useState(undefined);
+    const [hideFeedbackWidget, setHideFeedbackWidget] = useState(false);
     const outputEffects = useFilteredWidgetData(ruleEffects);
     useEffect(() => {
         const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollment, attributes });
@@ -48,7 +49,12 @@ export const EnrollmentPageDefault = () => {
             // $FlowFixMe
             setRuleEffects(effects);
         }
+        const arr = program.programRules.map(item => item.programRuleActions
+            .map(rule => rule.location || null))
+            .flat();
+        setHideFeedbackWidget(!arr.includes('feedback'));
     }, [orgUnit, program, programMetadata, enrollment, attributes]);
+
 
     const onDelete = () => {
         history.push(
@@ -64,6 +70,7 @@ export const EnrollmentPageDefault = () => {
             enrollmentId={enrollmentId}
             onDelete={onDelete}
             widgetEffects={outputEffects}
+            hideFeedbackWidget={hideFeedbackWidget}
         />
     );
 };
