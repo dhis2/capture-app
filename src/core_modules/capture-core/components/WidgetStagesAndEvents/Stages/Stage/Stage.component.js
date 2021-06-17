@@ -25,7 +25,7 @@ export const StagePlain = (
         className,
     }: Props) => {
     const [open, setOpenStatus] = useState(true);
-
+    const { programStageDataElements } = programStage || {};
     return (<div data-test="stage-content"className={cx(classes.overview, className)}>
         <Widget
             header={<StageOverview
@@ -41,7 +41,7 @@ export const StagePlain = (
             {events.length > 0 && <StageDetail
                 eventName={name}
                 events={events}
-                data={programStage?.programStageDataElements}
+                data={programStageDataElements}
             />}
         </Widget>
 

@@ -13,7 +13,7 @@ import { colors,
     DataTableColumnHeader,
     Button,
 } from '@dhis2/ui';
-import { computeDataFromEvent, computeHeaderColumn, DEFAULT_NUMBER_OF_ROW, sortDataFromEvent } from '../helpers';
+import { useComputeDataFromEvent, useComputeHeaderColumn, DEFAULT_NUMBER_OF_ROW, sortDataFromEvent } from '../helpers';
 import type { Props } from './stageDetail.types';
 
 
@@ -38,7 +38,9 @@ const styles = {
 };
 
 const StageDetailPlain = ({ events, eventName, data, classes }: Props) => {
-    const headerColumns = computeHeaderColumn(data, events);
+    const headerColumns = useComputeHeaderColumn(data, events);
+    const dataSource = useComputeDataFromEvent(data, events, headerColumns);
+
     const [{ columnName, sortDirection }, setSortInstructions] = useState({
         columnName: 'eventDate',
         sortDirection: 'desc',
@@ -75,7 +77,7 @@ const StageDetailPlain = ({ events, eventName, data, classes }: Props) => {
     }
 
     function renderRows() {
-        return computeDataFromEvent(data, events)
+        return dataSource
             .sort((a, b) => {
                 const strA = a.find(cl => cl.id === columnName)?.value;
                 const strB = b.find(cl => cl.id === columnName)?.value;

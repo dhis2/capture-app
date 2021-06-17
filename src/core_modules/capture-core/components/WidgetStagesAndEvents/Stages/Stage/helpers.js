@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { Tag } from '@dhis2/ui';
@@ -58,40 +58,59 @@ function convertStatusForView(event: ApiTEIEvent) {
     );
 }
 
-export const computeDataFromEvent = (data: any, events: Array<ApiTEIEvent>) => {
-    const dataSource = events.reduce((acc, currentEvent) => {
-        const keys = [
-            { id: 'status', type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
+
+export const useComputeDataFromEvent = (data: any, events: Array<ApiTEIEvent>, headerColumns: Array<{id: string}>) => {
+    const dataSource = useMemo(() => events.reduce((acc, currentEvent) => {
+        const defaultKeys = [
+            { id: 'status', resolveValue: convertStatusForView },
             { id: 'eventDate', type: dataElementTypes.DATE },
             { id: 'orgUnitName', type: dataElementTypes.TEXT }];
-        const dataElementsInEvent = currentEvent.dataValues
-            .map(item => ({ id: item.dataElement,
-                value: formatValueForView(item.value,
-                    data?.find(el => el.dataElement.id === item.dataElement)?.valueType),
-            }));
+        const arr = [...defaultKeys, ...currentEvent.dataValues.map((item) => {
+            const { valueType } = data?.find(el => el.dataElement.id === item.dataElement)?.dataElement || {};
+            return {
+                id: item.dataElement,
+                type: valueType,
+                value: item.value,
+            };
+        })];
 
-        acc.push([
-            ...keys.map(key => ({
-                id: key.id,
-                value: formatValueForView(getValueByKeyFromEvent(currentEvent, key), key.type),
-            })),
-            ...dataElementsInEvent]);
+        const row = headerColumns.map(({ id }) => {
+            const { type, value, resolveValue } = (arr.find(i => i.id === id)) || {};
+            let displayValue;
+            if (value === undefined) {
+                displayValue = formatValueForView(getValueByKeyFromEvent(currentEvent, { id, resolveValue }), type);
+            } else {
+                displayValue = formatValueForView(value, type);
+            }
+            return { id, value: displayValue };
+        });
+        acc.push(row);
         return acc;
-    }, []);
-
+    }, []), [events, data, headerColumns]);
     return dataSource || [];
 };
 
-export const computeHeaderColumn = (data: any, events: Array<ApiTEIEvent>) => {
-    const defaultColumns = [
-        { id: 'status', header: i18n.t('Status'), sortDirection: 'default' },
-        { id: 'eventDate', header: i18n.t('Report date'), sortDirection: 'default' },
-        { id: 'orgUnitName', header: i18n.t('Registering unit'), sortDirection: 'default',
-        }];
+export const useComputeHeaderColumn = (data: any, events: Array<ApiTEIEvent>) => {
+    const headerColumns = useMemo(() => {
+        const defaultColumns = [
+            { id: 'status', header: i18n.t('Status'), sortDirection: 'default' },
+            { id: 'eventDate', header: i18n.t('Report date'), sortDirection: 'default' },
+            { id: 'orgUnitName', header: i18n.t('Registering unit'), sortDirection: 'default',
+            }];
+        const dataElementHeaders = events.reduce((acc, currEvent) => {
+            currEvent.dataValues.forEach((dataValue) => {
+                const { dataElement: id } = dataValue;
+                const { dataElement } = data?.find(el => el.dataElement.id === id) ?? {};
 
-    const dataElementHeaders = events[0].dataValues.map((item) => {
-        const { dataElement } = data?.find(el => el.dataElement.id === item.dataElement) ?? {};
-        return { id: item.dataElement, header: dataElement?.displayName, sortDirection: 'default' };
-    });
-    return [...defaultColumns, ...dataElementHeaders];
+                if (!acc.find(item => item.id === dataValue.dataElement)) {
+                    acc.push({ id, header: dataElement?.displayName, sortDirection: 'default' });
+                }
+            });
+            return acc;
+        }, []);
+        return [...defaultColumns, ...dataElementHeaders];
+    }, [data, events]);
+
+
+    return headerColumns;
 };
