@@ -49,10 +49,10 @@ export const EnrollmentPageDefault = () => {
             // $FlowFixMe
             setRuleEffects(effects);
         }
-        const arr = program.programRules.map(item => item.programRuleActions
+        const flattenedRuleActionLocations = program.programRules.map(item => item.programRuleActions
             .map(rule => rule.location || null))
             .flat();
-        setHideFeedbackWidget(!arr.includes('feedback'));
+        setHideFeedbackWidget(!flattenedRuleActionLocations.includes('feedback'));
     }, [orgUnit, program, programMetadata, enrollment, attributes]);
 
 
