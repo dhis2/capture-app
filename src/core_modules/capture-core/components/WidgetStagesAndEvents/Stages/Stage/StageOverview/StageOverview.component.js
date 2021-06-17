@@ -47,9 +47,9 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
     const totalEvents = events.length;
     const overdueEvents = events.filter(isEventOverdue).length;
     const scheduledEvents = events.filter(event => event.status === statusTypes.SCHEDULE).length;
+    const lastUpdated = Math.max.apply(null, events.map(e => new Date(e.lastUpdated)));
 
     return (<div className={classes.container}>
-
         {
             icon && (
                 <div className={classes.icon}>
@@ -92,7 +92,7 @@ export const StageOverviewPlain = ({ title, icon, description, events, classes }
             {i18n.t('{{ scheduledEvents }} scheduled', { scheduledEvents })}
         </div> : null }
         {events.length > 0 && <div className={cx(classes.smallText, classes.indicator)}>
-            {i18n.t('Last updated {{date}}', { date: moment(events[0].lastUpdated).fromNow() })}
+            {i18n.t('Last updated {{date}}', { date: moment(lastUpdated).fromNow() })}
         </div>}
     </div>);
 };

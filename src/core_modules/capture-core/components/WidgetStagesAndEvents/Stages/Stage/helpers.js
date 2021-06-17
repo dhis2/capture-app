@@ -1,10 +1,12 @@
 // @flow
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
+import { Tag } from '@dhis2/ui';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
-import { convertValue as convertClientToView } from '../../../../converters/clientToView';
+import { convertValue as convertClientToList } from '../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../converters/serverToClient';
-import { statusTypes, dataElementTypes } from '../../../../metaData';
+import { statusTypes, dataElementTypes, translatedStatusTypes } from '../../../../metaData';
 
 export const DEFAULT_NUMBER_OF_ROW = 5;
 
@@ -13,25 +15,24 @@ export const isEventOverdue = (event: ApiTEIEvent) => moment(event.dueDate).isSa
 
 const getEventStatus = (event: ApiTEIEvent) => {
     if (isEventOverdue(event)) {
-        return { value: statusTypes.OVERDUE };
+        return { status: statusTypes.OVERDUE };
     }
     if (event.status === statusTypes.SCHEDULE) {
-        return { value: statusTypes.SCHEDULE, options: moment(event.eventDate).from(new Date()) };
+        return { status: statusTypes.SCHEDULE, options: moment(event.eventDate).from(new Date()) };
     }
-    return { value: event.status };
+    return { status: event.status };
 };
 
-export const getValueByKeyFromEvent = (event: ApiTEIEvent, type: string) => {
-    switch (type) {
-    case 'status':
-        return getEventStatus(event);
-    default:
-        return event[type];
+export const getValueByKeyFromEvent = (event: ApiTEIEvent, { id, resolveValue }: Object) => {
+    if (resolveValue) {
+        return resolveValue(event);
     }
+
+    return event[id];
 };
 
 export const formatValueForView = (data: any, type: $Keys<typeof dataElementTypes>) =>
-    convertClientToView(convertServerToClient(data, type), type);
+    convertClientToList(convertServerToClient(data, type), type);
 
 export const sortDataFromEvent = (strA: any, strB: any, direction: string) => {
     if (direction === 'asc') {
@@ -45,10 +46,22 @@ export const sortDataFromEvent = (strA: any, strB: any, direction: string) => {
     return 0;
 };
 
+function convertStatusForView(event: ApiTEIEvent) {
+    const { status, options } = getEventStatus(event);
+    const isPositive = [statusTypes.COMPLETED].includes(status);
+    const isNegative = [statusTypes.OVERDUE].includes(status);
+
+    return (
+        <Tag negative={isNegative} positive={isPositive}>
+            {translatedStatusTypes(options)[status]}
+        </Tag>
+    );
+}
+
 export const computeDataFromEvent = (data: any, events: Array<ApiTEIEvent>) => {
     const dataSource = events.reduce((acc, currentEvent) => {
         const keys = [
-            { id: 'status', type: dataElementTypes.STATUS },
+            { id: 'status', type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
             { id: 'eventDate', type: dataElementTypes.DATE },
             { id: 'orgUnitName', type: dataElementTypes.TEXT }];
         const dataElementsInEvent = currentEvent.dataValues
@@ -60,7 +73,7 @@ export const computeDataFromEvent = (data: any, events: Array<ApiTEIEvent>) => {
         acc.push([
             ...keys.map(key => ({
                 id: key.id,
-                value: formatValueForView(getValueByKeyFromEvent(currentEvent, key.id), key.type),
+                value: formatValueForView(getValueByKeyFromEvent(currentEvent, key), key.type),
             })),
             ...dataElementsInEvent]);
         return acc;
