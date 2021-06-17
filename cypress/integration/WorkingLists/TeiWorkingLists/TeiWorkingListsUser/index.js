@@ -56,7 +56,7 @@ Then('the list should display teis with a completed enrollment', () => {
 
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
-        .should('have.length', 6)
+        .should('have.length', 5)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
