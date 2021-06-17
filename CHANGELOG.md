@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/dhis2/capture-app/compare/v1.26.1...v1.27.0) (2021-06-17)
+
+
+### Features
+
+* DHIS2-10759 Implement sections in enrollment form ([67d4ce6](https://github.com/dhis2/capture-app/commit/67d4ce6d40ed3b63e2bbb88b7f472f24812a4e35))
+
 ## [1.26.1](https://github.com/dhis2/capture-app/compare/v1.26.0...v1.26.1) (2021-06-17)
 
 
