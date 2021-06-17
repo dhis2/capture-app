@@ -12,15 +12,18 @@ import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import { getProgramAndStageFromEvent, getEventProgramThrowIfNotFound } from '../../../../../metaData';
+import { getProgramAndStageFromEvent, getProgramThrowIfNotFound } from '../../../../../metaData';
 import {
     getRulesActionsForEvent,
+    getRulesActionsForTEI,
     getCurrentClientValues,
     getCurrentClientMainData,
 
 } from '../../../../../rules/actionsCreator';
 import type { FieldData } from '../../../../../rules/actionsCreator';
 import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
+import { getStageFromEvent } from '../../../../../metaData/helpers/getStageFromEvent';
+import { EventProgram } from '../../../../../metaData/Program';
 
 export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
     action$.pipe(
@@ -49,28 +52,42 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const eventId = state.dataEntries[dataEntryId].eventId;
+    const event = state.events[eventId];
     const { programId } = state.currentSelections;
-    const eventProgram = getEventProgramThrowIfNotFound(programId);
+    const program = getProgramThrowIfNotFound(programId);
 
     const orgUnitId = state.currentSelections.orgUnitId;
     const orgUnit = state.organisationUnits[orgUnitId];
 
-    const foundation = eventProgram.stage.stageForm;
+    let rulesActions = [];
+    if (program instanceof EventProgram) {
+        const foundation = program.stage.stageForm;
+        const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
 
-    const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
+        let currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
+        currentEventMainData = { ...state.events[eventId], ...currentEventMainData };
+        const currentEventData = { ...currentEventValues, ...currentEventMainData };
 
-    let currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
-    currentEventMainData = { ...state.events[eventId], ...currentEventMainData };
-    const currentEventData = { ...currentEventValues, ...currentEventMainData };
-
-    const rulesActions = getRulesActionsForEvent(
-        eventProgram,
-        foundation,
-        formId,
-        orgUnit,
-        currentEventData,
-        [currentEventData],
-    );
+        rulesActions = getRulesActionsForEvent(
+            program,
+            foundation,
+            formId,
+            orgUnit,
+            currentEventData,
+            [currentEventData],
+        );
+    } else {
+        const stage = getStageFromEvent(event)?.stage;
+        const foundation = stage?.stageForm;
+        rulesActions = getRulesActionsForTEI(
+            program,
+            foundation,
+            formId,
+            orgUnit,
+            {},
+            {},
+        );
+    }
 
     return batchActions([
         ...rulesActions,

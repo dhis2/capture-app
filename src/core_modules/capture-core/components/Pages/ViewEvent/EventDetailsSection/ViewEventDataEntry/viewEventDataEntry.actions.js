@@ -5,10 +5,11 @@ import { viewEventIds } from '../eventDetails.actions';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../../../DataEntries';
 import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import { loadEditDataEntryAsync } from '../../../../DataEntry/templates/dataEntryLoadEdit.template';
-import { getRulesActionsForEvent } from '../../../../../rules/actionsCreator';
+import { getRulesActionsForEvent, getRulesActionsForTEI } from '../../../../../rules/actionsCreator';
 import { dataElementTypes } from '../../../../../metaData';
 import { convertClientToForm } from '../../../../../converters';
 import type { ClientEventContainer } from '../../../../../events/eventRequests';
+import { TrackerProgram } from '../../../../../metaData/Program';
 
 export const actionTypes = {
     VIEW_EVENT_DATA_ENTRY_LOADED: 'ViewEventDataEntryLoadedForViewSingleEvent',
@@ -58,16 +59,21 @@ export const loadViewEventDataEntry =
 
         // $FlowFixMe[cannot-spread-indexer] automated comment
         const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
-        return [
-            ...dataEntryActions,
-            ...getRulesActionsForEvent(
+
+        const rulesActions = program instanceof TrackerProgram
+            ? getRulesActionsForTEI(program, foundation, key, orgUnit, {}, {})
+            : getRulesActionsForEvent(
                 program,
                 foundation,
                 key,
                 orgUnit,
                 eventDataForRulesEngine,
                 [eventDataForRulesEngine],
-            ),
+            );
+
+        return [
+            ...dataEntryActions,
+            ...rulesActions,
             actionCreator(actionTypes.VIEW_EVENT_DATA_ENTRY_LOADED)({
                 loadedValues: { dataEntryValues, formValues, eventContainer },
                 // $FlowFixMe[prop-missing] automated comment

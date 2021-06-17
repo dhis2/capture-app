@@ -24,7 +24,7 @@ const styles = {
     },
     menu: {
         display: 'flex',
-        justifyContent: 'end',
+        justifyContent: 'flex-end',
         background: colors.white,
         borderTopLeftRadius: 3,
         borderTopRightRadius: 3,
@@ -45,7 +45,13 @@ export const WidgetEventEditPlain = ({
 }: Props) => (
     <div data-test="widget-enrollment">
         <div className={classes.menu}>
-            <Button small secondary className={classes.button} onClick={onEdit}>
+            <Button
+                small
+                secondary
+                className={classes.button}
+                onClick={onEdit}
+                data-test="widget-enrollment-edit-button"
+            >
                 <IconEdit24 />
                 {i18n.t('Edit event')}
             </Button>
@@ -67,9 +73,7 @@ export const WidgetEventEditPlain = ({
                     <span> {name} </span>
                 </div>
             }
-            onOpen={() => {}}
-            onClose={() => {}}
-            open
+            noncollapsible
         >
             <div className={classes.form}>
                 {mode === pageMode.VIEW ? (
