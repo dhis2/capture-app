@@ -7,7 +7,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
-import { useEnrollmentsAndAttributes, useProgramMetadata, useProgramStage } from './hooks';
+import { useEnrollmentsAndAttributes, useProgramMetadata, useProgramStages } from './hooks';
 import { runRulesForEnrollment } from './runRulesForEnrollment';
 import { urlArguments } from '../../../../utils/url';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
@@ -34,7 +34,8 @@ export const EnrollmentPageDefault = () => {
     const { program } = useProgramInfo(programId);
     const { error: enrollmentsError, enrollment, attributes } = useEnrollmentsAndAttributes(teiId, enrollmentId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
-    const stages = useProgramStage(program, programMetadata.programStages);
+    const stages = useProgramStages(program, programMetadata.programStages);
+
     if (programMetaDataError || enrollmentsError) {
         log.error(errorCreator('Enrollment page could not be loaded')({ programMetaDataError, enrollmentsError }));
     }

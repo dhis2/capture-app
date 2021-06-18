@@ -1,9 +1,9 @@
 import { useEnrollmentsAndAttributes } from './useEnrollmentsAndAttributes';
 import { useProgramMetadata } from './useProgramMetadata';
-import { useProgramStage } from './useProgramStage';
+import { useProgramStages } from './useProgramStages';
 
 export {
     useEnrollmentsAndAttributes,
     useProgramMetadata,
-    useProgramStage,
+    useProgramStages,
 };

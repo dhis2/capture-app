@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import type { apiProgramStage } from 'capture-core/metaDataStoreLoaders/programs/quickStoreOperations/types';
 import { Program } from '../../../../../metaData';
 
-export const useProgramStage = (program: Program, programStages: Array<apiProgramStage>) => {
+export const useProgramStages = (program: Program, programStages: Array<apiProgramStage>) => {
     const stages = [];
     if (program && programStages) {
         program.stages.forEach((item) => {
@@ -19,8 +19,10 @@ export const useProgramStage = (program: Program, programStages: Array<apiProgra
                     name,
                     icon,
                     description: stageForm.description,
-                    dataElements: programStageDataElements?.reduce((acc, curr) => {
-                        acc.push(curr.dataElement);
+                    dataElements: programStageDataElements?.reduce((acc, currentStageData) => {
+                        if (currentStageData.displayInReports) {
+                            acc.push(currentStageData.dataElement);
+                        }
                         return acc;
                     }, []),
                 });

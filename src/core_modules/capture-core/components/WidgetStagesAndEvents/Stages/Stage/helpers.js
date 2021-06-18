@@ -74,12 +74,15 @@ export const useComputeDataFromEvent =
             }));
 
             const otherFields = currentEvent.dataValues.map((item) => {
-                const { valueType } = data?.find(el => el.id === item.dataElement) || {};
-                return {
-                    id: item.dataElement,
-                    type: valueType,
-                    value: formatValueForView(item.value, valueType),
-                };
+                const dataInStage = data.find(el => el.id === item.dataElement);
+                if (dataInStage) {
+                    return {
+                        id: item.dataElement,
+                        type: dataInStage.valueType,
+                        value: formatValueForView(item.value, dataInStage.valueType),
+                    };
+                }
+                return {};
             });
             const allFields = [...predefinedFields, ...otherFields];
 
@@ -108,10 +111,11 @@ export const useComputeHeaderColumn = (data: Array<apiDataElement>, events: Arra
         const dataElementHeaders = events.reduce((acc, currEvent) => {
             currEvent.dataValues.forEach((dataValue) => {
                 const { dataElement: id } = dataValue;
-                const { displayName } = data?.find(el => el.id === id) ?? {};
-
-                if (!acc.find(item => item.id === dataValue.dataElement)) {
-                    acc.push({ id, header: displayName, sortDirection: 'default' });
+                const dataInStage = data.find(el => el.id === id);
+                if (dataInStage) {
+                    if (!acc.find(item => item.id === dataValue.dataElement)) {
+                        acc.push({ id, header: dataInStage.displayName, sortDirection: 'default' });
+                    }
                 }
             });
             return acc;
