@@ -1,12 +1,10 @@
 // @flow
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
-import type { ProgramStage } from 'capture-core/metaData';
-import type { ProgramStageData } from '../../types/common.types';
+import type { Stage } from '../../types/common.types';
 
 export type Props = {|
-    stage: ProgramStage,
+    stage: Stage,
     events: Array<ApiTEIEvent>,
-    programStage: ProgramStageData,
     className?: string,
     ...CssClasses,
 |};

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
-"PO-Revision-Date: 2021-06-04T06:44:29.878Z\n"
+"POT-Creation-Date: 2021-06-18T08:12:20.120Z\n"
+"PO-Revision-Date: 2021-06-18T08:12:20.120Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -583,6 +583,9 @@ msgid "There is an error while opening this enrollment. Please enter a valid url
 msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "Program stage not found"
 msgstr ""
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."

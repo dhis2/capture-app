@@ -17,35 +17,33 @@ const styles = {
 };
 
 
-export const StagePlain = (
-    { stage: { name, icon, stageForm },
-        events,
-        programStage,
-        classes,
-        className,
-    }: Props) => {
+export const StagePlain = ({ stage, events, classes, className }: Props) => {
     const [open, setOpenStatus] = useState(true);
-    const { programStageDataElements } = programStage || {};
-    return (<div data-test="stage-content"className={cx(classes.overview, className)}>
-        <Widget
-            header={<StageOverview
-                title={name}
-                icon={icon}
-                description={stageForm.description ?? ''}
-                events={events}
-            />}
-            onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
-            onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
-            open={open}
+    const { name, icon, description, dataElements } = stage;
+    return (
+        <div
+            data-test="stage-content"
+            className={cx(classes.overview, className)}
         >
-            {events.length > 0 && <StageDetail
-                eventName={name}
-                events={events}
-                data={programStageDataElements}
-            />}
-        </Widget>
-
-    </div>);
+            <Widget
+                header={<StageOverview
+                    title={name}
+                    icon={icon}
+                    description={description}
+                    events={events}
+                />}
+                onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
+                onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
+                open={open}
+            >
+                {events.length > 0 && <StageDetail
+                    eventName={name}
+                    events={events}
+                    data={dataElements}
+                />}
+            </Widget>
+        </div>
+    );
 };
 
 export const Stage: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(StagePlain);

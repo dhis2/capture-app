@@ -1,12 +1,12 @@
 // @flow
+import type { Icon } from 'capture-core/metaData';
+import type { apiDataElement } from 'capture-core/metaDataStoreLoaders/programs/quickStoreOperations/types';
 
 
-type ProgramStageDataElement = {
-    dataElements: Array<{id: string, valueType: string, displayName: string}>
-}
-
-export type ProgramStageData = {
+export type Stage = {
     id: string,
-    programStageDataElements: Array<ProgramStageDataElement>
+    name: string,
+    description: string,
+    icon?: Icon,
+    dataElements: Array<apiDataElement>
 }
-

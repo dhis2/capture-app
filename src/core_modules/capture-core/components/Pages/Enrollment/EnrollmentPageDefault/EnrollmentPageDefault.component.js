@@ -34,7 +34,7 @@ export const EnrollmentPageDefaultPlain = ({
     teiId,
     events,
     enrollmentId,
-    programStages,
+    stages,
     onDelete,
     classes,
 }: PlainProps) => (
@@ -43,8 +43,7 @@ export const EnrollmentPageDefaultPlain = ({
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
                 <WidgetStagesAndEvents
-                    programStages={programStages}
-                    stages={program.stages}
+                    stages={stages}
                     events={events}
                 />
             </div>
@@ -60,6 +59,7 @@ export const EnrollmentPageDefaultPlain = ({
         </div>
     </>
 );
+
 
 export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(
     getStyles,
