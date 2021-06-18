@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'react-addons-update';
 
 import Table from '@material-ui/core/Table';
@@ -18,17 +18,17 @@ import { DragDropListItem } from './DragDropListItem.component';
 type Props = {
     listItems: Array<Object>,
     handleUpdateListOrder: (sortedList: Array<Object>) => void,
-    handleToggle: (id: string) => void,
+    handleToggle: (id: string) => () => void,
 };
 
-class Index extends Component<Props> {
+export class DragDropList extends Component<Props> {
     moveListItem: (dragIndex: any, hoverIndex: any) => void;
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
         this.moveListItem = this.moveListItem.bind(this);
     }
 
-    moveListItem(dragIndex, hoverIndex) {
+    moveListItem(dragIndex: any, hoverIndex: any) {
         const { listItems } = this.props;
         const dragListItem = listItems[dragIndex];
         let sortedList = [];
@@ -46,28 +46,28 @@ class Index extends Component<Props> {
         const { listItems } = this.props;
 
         return (
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell colSpan={12}>{i18n.t('Column')}</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {listItems.map((item, i) => (
-                        <DragDropListItem
-                            key={item.id}
-                            index={i}
-                            id={item.id}
-                            text={item.header}
-                            moveListItem={this.moveListItem}
-                            handleToggle={this.props.handleToggle}
-                            visible={item.visible}
-                        />
-                    ))}
-                </TableBody>
-            </Table>
+            <DndProvider backend={HTML5Backend}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell colSpan={12}>{i18n.t('Column')}</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {listItems.map((item, i) => (
+                            <DragDropListItem
+                                key={item.id}
+                                index={i}
+                                id={item.id}
+                                text={item.header}
+                                moveListItem={this.moveListItem}
+                                handleToggle={this.props.handleToggle}
+                                visible={item.visible}
+                            />
+                        ))}
+                    </TableBody>
+                </Table>
+            </DndProvider>
         );
     }
 }
-
-export const DragDropList = DragDropContext(HTML5Backend)(Index);
