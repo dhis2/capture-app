@@ -1,3 +1,10 @@
+## [1.27.1](https://github.com/dhis2/capture-app/compare/v1.27.0...v1.27.1) (2021-06-18)
+
+
+### Bug Fixes
+
+* Cypress post upgrade ([0b5a782](https://github.com/dhis2/capture-app/commit/0b5a78236a14650c7aa105b9e88d81834d8b1652))
+
 # [1.27.0](https://github.com/dhis2/capture-app/compare/v1.26.1...v1.27.0) (2021-06-17)
 
 
