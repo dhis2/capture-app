@@ -62,7 +62,7 @@ function convertStatusForView(event: ApiTEIEvent) {
 export const useComputeDataFromEvent = (data: any, events: Array<ApiTEIEvent>, headerColumns: Array<{id: string}>) => {
     const dataSource = useMemo(() => events.reduce((acc, currentEvent) => {
         const predefinedFields = [
-            { id: 'status', type: undefined, resolveValue: convertStatusForView },
+            { id: 'status', type: dataElementTypes.UNKNOWN, resolveValue: convertStatusForView },
             { id: 'eventDate', type: dataElementTypes.DATE },
             { id: 'orgUnitName', type: dataElementTypes.TEXT }].map(field => ({
             ...field,
@@ -79,10 +79,8 @@ export const useComputeDataFromEvent = (data: any, events: Array<ApiTEIEvent>, h
         });
         const allFields = [...predefinedFields, ...otherFields];
 
-        const row = headerColumns.map((col) => {
-            const { id, value } = (allFields.find(f => f.id === col.id)) || {};
-            return { id, value };
-        });
+        // $FlowFixMe
+        const row = headerColumns.map(col => ({ ...allFields.find(f => f.id === col.id) }));
 
         acc.push(row);
         return acc;
