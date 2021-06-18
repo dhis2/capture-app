@@ -124,13 +124,13 @@ export const openEventForEditInDataEntry = (
         program instanceof TrackerProgram
             ? getRulesActionsForTEI(program, foundation, key, orgUnit, {}, {})
             : getRulesActionsForEvent(
-                  program,
-                  foundation,
-                  key,
-                  orgUnit,
-                  eventDataForRulesEngine,
-                  [eventDataForRulesEngine],
-              );
+                program,
+                foundation,
+                key,
+                orgUnit,
+                eventDataForRulesEngine,
+                [eventDataForRulesEngine],
+            );
 
     return [
         ...dataEntryActions,

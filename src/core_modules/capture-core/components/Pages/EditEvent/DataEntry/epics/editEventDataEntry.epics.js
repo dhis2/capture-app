@@ -79,13 +79,15 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
     } else {
         const stage = getStageFromEvent(event)?.stage;
         const foundation = stage?.stageForm;
+        const currentTEIValues = foundation ? getCurrentClientValues(state, foundation, formId, fieldData) : {};
+
         rulesActions = getRulesActionsForTEI(
             program,
             foundation,
             formId,
             orgUnit,
             {},
-            {},
+            currentTEIValues,
         );
     }
 
