@@ -15,12 +15,12 @@ export const isEventOverdue = (event: ApiTEIEvent) => moment(event.dueDate).isSa
 
 const getEventStatus = (event: ApiTEIEvent) => {
     if (isEventOverdue(event)) {
-        return { status: statusTypes.OVERDUE };
+        return { status: statusTypes.OVERDUE, options: undefined };
     }
     if (event.status === statusTypes.SCHEDULE) {
         return { status: statusTypes.SCHEDULE, options: moment(event.eventDate).from(new Date()) };
     }
-    return { status: event.status };
+    return { status: event.status, options: undefined };
 };
 
 export const getValueByKeyFromEvent = (event: ApiTEIEvent, { id, resolveValue }: Object) => {
@@ -61,29 +61,29 @@ function convertStatusForView(event: ApiTEIEvent) {
 
 export const useComputeDataFromEvent = (data: any, events: Array<ApiTEIEvent>, headerColumns: Array<{id: string}>) => {
     const dataSource = useMemo(() => events.reduce((acc, currentEvent) => {
-        const defaultKeys = [
-            { id: 'status', resolveValue: convertStatusForView },
+        const predefinedFields = [
+            { id: 'status', type: undefined, resolveValue: convertStatusForView },
             { id: 'eventDate', type: dataElementTypes.DATE },
-            { id: 'orgUnitName', type: dataElementTypes.TEXT }];
-        const arr = [...defaultKeys, ...currentEvent.dataValues.map((item) => {
+            { id: 'orgUnitName', type: dataElementTypes.TEXT }].map(field => ({
+            ...field,
+            value: formatValueForView(getValueByKeyFromEvent(currentEvent, field), field.type),
+        }));
+
+        const otherFields = currentEvent.dataValues.map((item) => {
             const { valueType } = data?.find(el => el.dataElement.id === item.dataElement)?.dataElement || {};
             return {
                 id: item.dataElement,
                 type: valueType,
-                value: item.value,
+                value: formatValueForView(item.value, valueType),
             };
-        })];
-
-        const row = headerColumns.map(({ id }) => {
-            const { type, value, resolveValue } = (arr.find(i => i.id === id)) || {};
-            let displayValue;
-            if (value === undefined) {
-                displayValue = formatValueForView(getValueByKeyFromEvent(currentEvent, { id, resolveValue }), type);
-            } else {
-                displayValue = formatValueForView(value, type);
-            }
-            return { id, value: displayValue };
         });
+        const allFields = [...predefinedFields, ...otherFields];
+
+        const row = headerColumns.map((col) => {
+            const { id, value } = (allFields.find(f => f.id === col.id)) || {};
+            return { id, value };
+        });
+
         acc.push(row);
         return acc;
     }, []), [events, data, headerColumns]);
