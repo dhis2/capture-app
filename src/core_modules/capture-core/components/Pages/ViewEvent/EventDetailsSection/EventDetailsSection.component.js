@@ -115,7 +115,7 @@ class EventDetailsSectionPlain extends Component<Props> {
         return (
             <div className={classes.container}>
                 <ViewEventSection
-                    header={<ViewEventSectionHeader text="Event details" icon={InfoIcon} />}
+                    header={<ViewEventSectionHeader text={i18n.t('Event details')} icon={InfoIcon} />}
                 >
                     <div className={classes.content}>
                         {this.renderDataEntryContainer()}

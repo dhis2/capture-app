@@ -1,10 +1,15 @@
 // @flow
+import type { WidgetCollapsibleProps } from './widgetCollapsible.types';
+import type { WidgetNonCollapsibleProps } from './widgetNonCollapsible.types';
 
-export type Props = {|
-    header: React$Node,
-    children: React$Node,
-    open: boolean,
-    onOpen: () => void,
-    onClose: () => void,
-    ...CssClasses,
+type CollapsibleProps = {|
+    ...WidgetCollapsibleProps,
+    noncollapsible?: false,
 |};
+
+type NonCollapsibleProps = {|
+    ...WidgetNonCollapsibleProps,
+    noncollapsible: true,
+|};
+
+export type Props = CollapsibleProps | NonCollapsibleProps;

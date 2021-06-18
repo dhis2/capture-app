@@ -10,5 +10,9 @@
   "experimentalFetchPolyfill": true,
   "retries": {
     "runMode": 3
+  },
+  "env": {
+    "dhis2DataTestPrefix": "capture-app",
+    "networkMode": "live"
   }
 }

@@ -1,5 +1,5 @@
 Cypress.Commands.add('buildApiUrl', (...urlParts) =>
-    [Cypress.env('DHIS2_BASE_URL'), 'api', ...urlParts]
+    [Cypress.env('dhis2BaseUrl'), 'api', ...urlParts]
         .map(part => part.replace(/(^\/)|(\/$)/, ''))
         .join('/'),
 );
@@ -13,7 +13,7 @@ Cypress.Commands.add(
             .should('contain', className),
 );
 
-Cypress.Commands.add('loginThroughForm', (username = 'DHIS2_USERNAME', password = 'DHIS2_PASSWORD') => {
+Cypress.Commands.add('loginThroughForm', (username = 'dhis2Username', password = 'dhis2Password') => {
     cy.visit('/').then(() => {
         cy.get('#j_username').type(Cypress.env(username));
         cy.get('#j_password').type(Cypress.env(password));

@@ -1,3 +1,101 @@
+## [1.27.1](https://github.com/dhis2/capture-app/compare/v1.27.0...v1.27.1) (2021-06-18)
+
+
+### Bug Fixes
+
+* Cypress post upgrade ([0b5a782](https://github.com/dhis2/capture-app/commit/0b5a78236a14650c7aa105b9e88d81834d8b1652))
+
+# [1.27.0](https://github.com/dhis2/capture-app/compare/v1.26.1...v1.27.0) (2021-06-17)
+
+
+### Features
+
+* DHIS2-10759 Implement sections in enrollment form ([67d4ce6](https://github.com/dhis2/capture-app/commit/67d4ce6d40ed3b63e2bbb88b7f472f24812a4e35))
+
+## [1.26.1](https://github.com/dhis2/capture-app/compare/v1.26.0...v1.26.1) (2021-06-17)
+
+
+### Bug Fixes
+
+* breaking changes from @dhis2/cli-utils-cypress v8 ([#1806](https://github.com/dhis2/capture-app/issues/1806)) ([43b6378](https://github.com/dhis2/capture-app/commit/43b637833606cbd81b82a035d19116d2ef6d0126))
+
+# [1.26.0](https://github.com/dhis2/capture-app/compare/v1.25.3...v1.26.0) (2021-06-16)
+
+
+### Features
+
+* TECH-614 non collapsible Widget ([edc057e](https://github.com/dhis2/capture-app/commit/edc057eea004dec0b3630d7fdbe17e8214c1732a))
+
+## [1.25.3](https://github.com/dhis2/capture-app/compare/v1.25.2...v1.25.3) (2021-06-12)
+
+
+### Bug Fixes
+
+* TECH-622 use 2.37 backend for tests ([cb2531f](https://github.com/dhis2/capture-app/commit/cb2531f692eebfe1ededd0aedc53b39754453749))
+
+## [1.25.2](https://github.com/dhis2/capture-app/compare/v1.25.1...v1.25.2) (2021-06-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9595717](https://github.com/dhis2/capture-app/commit/9595717352f637fbad2e3deb131fcfcf4c1ac05e))
+
+## [1.25.1](https://github.com/dhis2/capture-app/compare/v1.25.0...v1.25.1) (2021-06-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([d5d4cce](https://github.com/dhis2/capture-app/commit/d5d4cce07837d3d701d5d63d9910ec5b3aae18b9))
+
+# [1.25.0](https://github.com/dhis2/capture-app/compare/v1.24.1...v1.25.0) (2021-06-08)
+
+
+### Features
+
+* [DHIS2-11207] add stage name and icon in the enrollment event page ([#1778](https://github.com/dhis2/capture-app/issues/1778)) ([a6a63cd](https://github.com/dhis2/capture-app/commit/a6a63cd751403a3354b5d657568e2e8322c80bbf))
+
+## [1.24.1](https://github.com/dhis2/capture-app/compare/v1.24.0...v1.24.1) (2021-06-07)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b0f28b0](https://github.com/dhis2/capture-app/commit/b0f28b019d76a9f31c79949135e7b089437f0294))
+
+# [1.24.0](https://github.com/dhis2/capture-app/compare/v1.23.2...v1.24.0) (2021-06-07)
+
+
+### Features
+
+* [DHIS2-11200] enrollment view/edit event page ([#1750](https://github.com/dhis2/capture-app/issues/1750)) ([b11ac2c](https://github.com/dhis2/capture-app/commit/b11ac2c12beaeab48e548e953374af200c1a94f7))
+
+## [1.23.2](https://github.com/dhis2/capture-app/compare/v1.23.1...v1.23.2) (2021-06-05)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([853bf4c](https://github.com/dhis2/capture-app/commit/853bf4c805cdc061c933cd961fb22a1512abfec2))
+
+## [1.23.1](https://github.com/dhis2/capture-app/compare/v1.23.0...v1.23.1) (2021-06-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5049da6](https://github.com/dhis2/capture-app/commit/5049da67adb0b3ac51cb27b169b9d8954df5dfd3))
+
+# [1.23.0](https://github.com/dhis2/capture-app/compare/v1.22.3...v1.23.0) (2021-06-04)
+
+
+### Features
+
+* [DHIS2-10943] enrollemnt actions ([#1708](https://github.com/dhis2/capture-app/issues/1708)) ([4ce5c91](https://github.com/dhis2/capture-app/commit/4ce5c919da965dda06339a0109192fd665f6a5d2))
+
+## [1.22.3](https://github.com/dhis2/capture-app/compare/v1.22.2...v1.22.3) (2021-06-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([215ccb7](https://github.com/dhis2/capture-app/commit/215ccb797b3d315adac95f2128299c9d05c539a6))
+
 ## [1.22.2](https://github.com/dhis2/capture-app/compare/v1.22.1...v1.22.2) (2021-05-25)
 
 
