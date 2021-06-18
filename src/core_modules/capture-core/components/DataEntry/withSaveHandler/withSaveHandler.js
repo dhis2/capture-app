@@ -292,7 +292,11 @@ const getSaveHandler = (
                 inProgressList: state.dataEntriesInProgressList[key] || [],
                 calculatedFoundation: foundation,
                 fieldsValidated: reduxSectionKeys
-                    .every(reduxSectionKey => state.formsSectionsFieldsUI[reduxSectionKey]),
+                    .every((reduxSectionKey) => {
+                        const reduxSection = state.formsSectionsFieldsUI[reduxSectionKey];
+                        // $FlowFixMe
+                        return reduxSection && Object.values(reduxSection).every(({ valid }) => valid !== undefined);
+                    }),
             };
         };
 
