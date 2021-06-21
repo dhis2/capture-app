@@ -18,6 +18,7 @@ export type contentType = {|
 
 export type Props = {|
     feedback?: ?Array<string | filteredText | filteredKeyValue>,
+    hideWidget?: ?boolean,
     ...CssClasses
 |}
 
