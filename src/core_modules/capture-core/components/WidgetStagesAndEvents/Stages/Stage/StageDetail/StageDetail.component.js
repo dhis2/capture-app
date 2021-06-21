@@ -39,7 +39,13 @@ const styles = {
 
 const StageDetailPlain = ({ events, eventName, data, classes }: Props) => {
     const headerColumns = useComputeHeaderColumn(data, events);
-    const dataSource = useComputeDataFromEvent(data, events, headerColumns);
+    const { computeData, dataSource } = useComputeDataFromEvent(data, events, headerColumns);
+
+    React.useEffect(() => {
+        if (!dataSource?.length) {
+            computeData();
+        }
+    }, [dataSource, computeData]);
 
     const [{ columnName, sortDirection }, setSortInstructions] = useState({
         columnName: 'eventDate',
@@ -77,6 +83,9 @@ const StageDetailPlain = ({ events, eventName, data, classes }: Props) => {
     }
 
     function renderRows() {
+        if (!dataSource) {
+            return null;
+        }
         return dataSource
             .sort((a, b) => {
                 const strA = a.find(cl => cl.id === columnName)?.value;

@@ -8,6 +8,7 @@ import type { apiDataElement } from 'capture-core/metaDataStoreLoaders/programs/
 import { convertValue as convertClientToList } from '../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../converters/serverToClient';
 import { statusTypes, dataElementTypes, translatedStatusTypes } from '../../../../metaData';
+import { getEventDataWithSubValue } from './getEventDataWithSubValue';
 
 export const DEFAULT_NUMBER_OF_ROW = 5;
 
@@ -64,41 +65,51 @@ function convertStatusForView(event: ApiTEIEvent) {
 
 export const useComputeDataFromEvent =
     (data: Array<apiDataElement>, events: Array<ApiTEIEvent>, headerColumns: Array<{id: string}>) => {
-        const dataSource = useMemo(() => events.reduce((acc, currentEvent) => {
-            const predefinedFields = [
-                { id: 'status', type: dataElementTypes.UNKNOWN, resolveValue: convertStatusForView },
-                { id: 'eventDate', type: dataElementTypes.DATE },
-                { id: 'orgUnitName', type: dataElementTypes.TEXT }].map(field => ({
-                ...field,
-                value: formatValueForView(getValueByKeyFromEvent(currentEvent, field), field.type),
-            }));
+        const [dataSource, setDataSource] = React.useState([]);
+        const computeData = async () => {
+            const result = await events.reduce(async (acc, currentEvent) => {
+                const predefinedFields = [
+                    { id: 'status', type: dataElementTypes.UNKNOWN, resolveValue: convertStatusForView },
+                    { id: 'eventDate', type: dataElementTypes.DATE },
+                    { id: 'orgUnitName', type: dataElementTypes.TEXT }].map(field => ({
+                    ...field,
+                    value: formatValueForView(getValueByKeyFromEvent(currentEvent, field), field.type),
+                }));
 
-            const otherFields = currentEvent.dataValues.map((item) => {
-                const dataInStage = data.find(el => el.id === item.dataElement);
-                if (dataInStage) {
-                    return {
-                        id: item.dataElement,
-                        type: dataInStage.valueType,
-                        value: formatValueForView(item.value, dataInStage.valueType),
-                    };
-                }
-                return {};
-            });
-            const allFields = [...predefinedFields, ...otherFields];
+                const otherFields = await Promise.all(currentEvent.dataValues.map(async (item) => {
+                    const dataInStage = data.find(el => el.id === item.dataElement);
 
-            // $FlowFixMe
-            const row = headerColumns.map((col) => {
-                const fields = allFields.find(f => f.id === col.id);
-                if (fields) {
-                    return { ...fields };
-                }
-                return { id: col.id };
-            });
+                    if (dataInStage) {
+                        // $FlowFixMe
+                        const subValue = await getEventDataWithSubValue(dataInStage, item.value);
+                        return {
+                            id: item.dataElement,
+                            type: dataInStage.valueType,
+                            value: formatValueForView(subValue ?? item.value, dataInStage.valueType),
+                        };
+                    }
+                    return {};
+                }));
 
-            acc.push(row);
-            return acc;
-        }, []), [events, data, headerColumns]);
-        return dataSource || [];
+                const allFields = [...predefinedFields, ...otherFields];
+
+                // $FlowFixMe
+                const row = headerColumns.map((col) => {
+                    const fields = allFields.find(f => f.id === col.id);
+                    if (fields) {
+                        return { ...fields };
+                    }
+                    return { id: col.id };
+                });
+
+                (await acc).push(row);
+                return acc;
+            }, []);
+
+            setDataSource(result);
+        };
+
+        return { computeData, dataSource };
     };
 
 export const useComputeHeaderColumn = (data: Array<apiDataElement>, events: Array<ApiTEIEvent>) => {
