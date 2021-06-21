@@ -12,8 +12,17 @@ import type {
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
 } from '../../../../storageControllers/cache.types';
-import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
-import { CustomForm, Enrollment, InputSearchGroup, RenderFoundation, Section } from '../../../../metaData';
+import {
+    RenderFoundation,
+    Section,
+    Enrollment,
+    CustomForm,
+    InputSearchGroup,
+} from '../../../../metaData';
+import type {
+    TrackedEntityType,
+    SearchGroup,
+} from '../../../../metaData';
 import { DataElementFactory } from './DataElementFactory';
 import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
@@ -193,14 +202,7 @@ export class EnrollmentFactory {
         });
 
         let section;
-        if (cachedProgram.dataEntryForm) {
-            if (cachedProgram.trackedEntityTypeId) {
-                section = await this._buildTetFeatureTypeSection(cachedProgram.trackedEntityTypeId);
-                section && enrollmentForm.addSection(section);
-            }
-
-            await this._buildCustomEnrollmentForm(enrollmentForm, cachedProgram.dataEntryForm, cachedProgramTrackedEntityAttributes);
-        } else if (cachedProgramSections?.length) {
+        if (cachedProgramSections?.length) {
             if (cachedProgram.trackedEntityTypeId) {
                 section = await this._buildTetFeatureTypeSection(cachedProgram.trackedEntityTypeId);
                 section && enrollmentForm.addSection(section);
@@ -215,7 +217,8 @@ export class EnrollmentFactory {
                 section && enrollmentForm.addSection(section);
             });
         } else {
-            section = await this._buildMainSection(cachedProgramTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
+            section = await
+            this._buildMainSection(cachedProgramTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
             section && enrollmentForm.addSection(section);
         }
         return enrollmentForm;
