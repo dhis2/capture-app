@@ -41,16 +41,7 @@ export class CustomForm {
         });
     }
 
-    set data(data: Object) {
-        this._data = data;
-    }
-
     get data(): Data {
         return this._data;
     }
-    /**
-     * A callback function for react-html-parser replacing html elements of type input (with certain criteria) with a placeholder FormField React element.
-     *
-     * @memberof CustomForm
-     */
 }
