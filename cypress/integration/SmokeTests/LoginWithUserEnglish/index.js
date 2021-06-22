@@ -1,5 +1,5 @@
 beforeEach(() => {
-    cy.loginThroughForm('DHIS2_USERNAME_ENGLISH', 'DHIS2_PASSWORD_ENGLISH');
+    cy.loginThroughForm('dhis2UsernameEnglish', 'dhis2PasswordEnglish');
 });
 
 Given('you open the capture app', () => {
