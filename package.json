@@ -72,8 +72,8 @@
     "flow:check": "./node_modules/.bin/flow check ./src",
     "flow:addTypes": "flow-typed install",
     "lint": "npm run flow:check && npm run linter:check",
-    "cy:open": "d2-utils-cypress open --appStart 'yarn start:forCypress'",
-    "cy:run": "d2-utils-cypress run --appStart 'yarn start:forCypress'",
+    "cy:open": "concurrently --kill-others \"yarn start:forCypress\" \"wait-on 'http-get://localhost:3000' && cypress open\"",
+    "cy:run": "concurrently --kill-others \"yarn start:forCypress\" \"wait-on 'http-get://localhost:3000' && cypress run\"",
     "verifyCacheVersion": "node scripts/verifyCacheVersion.js",
     "postinstall": "husky install",
     "i18n:add": "d2-app-scripts i18n extract && git add ./i18n/"
@@ -83,9 +83,11 @@
     "@dhis2/cli-app-scripts": "^4.0.9",
     "@dhis2/cli-helpers-engine": "^3.0.0",
     "@dhis2/cli-utils-cypress": "^8.0.1",
-    "@dhis2/cypress-commands": "^7.0.1",
+    "@dhis2/cypress-commands": "^8.0.1",
+    "@dhis2/cypress-plugins": "^8.0.1",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "babel-eslint": "^10.1.0",
+    "concurrently": "^6.2.0",
     "docdash": "^1.2.0",
     "dotenv": "^10.0.0",
     "enzyme": "^3.11.0",
@@ -108,7 +110,8 @@
     "jsdoc": "^3.6.4",
     "jsdoc-babel": "^0.5.0",
     "jsdoc-export-default-interop": "^0.3.1",
-    "redux-devtools-extension": "^2.13.9"
+    "redux-devtools-extension": "^2.13.9",
+    "wait-on": "^5.3.0"
   },
   "browserslist": {
     "production": [
