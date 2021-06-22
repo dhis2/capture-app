@@ -5,13 +5,14 @@
 # Viktor Varland <viktor@dhis2.org>, 2020
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2020
 # Carwoto Sa'an <carwoto@gmail.com>, 2020
+# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-18T14:43:03.753Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Carwoto Sa'an <carwoto@gmail.com>, 2020\n"
+"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,76 +21,76 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Harap berikan tanggal yang valid"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Kolom untuk ditampilkan di tabel"
 
 msgid "Column"
 msgstr "Kolom"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "Nilai ini memvalidasi"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "Pembaruan bidang asinkron gagal"
 
 msgid "A value is required"
-msgstr ""
+msgstr "Nilai diperlukan"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Harap berikan nomor yang valid"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Harap berikan bilangan bulat yang valid"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "Berikan bilangan bulat positif positive"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Harap berikan nol atau bilangan bulat positif"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Harap berikan bilangan bulat negatif"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Tanggal di masa depan tidak diperbolehkan"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "Harap berikan tanggal dan waktu yang valid"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "Harap berikan waktu yang valid"
 
 msgid "Please provide a valid percentage"
-msgstr ""
+msgstr "Harap berikan persentase yang valid"
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Harap berikan url yang valid"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "Harap berikan alamat email yang valid"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "Harap berikan usia yang valid"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "Harap berikan nomor telepon yang valid"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "Harap berikan unit organisasi yang valid"
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "Harap berikan koordinat yang valid"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "Nilai ini sudah ada"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "\"Dari\" tidak boleh lebih besar dari \"Ke\""
 
 msgid "Checking..."
-msgstr ""
+msgstr "Memeriksa..."
 
 msgid "Area"
 msgstr "Area"
@@ -101,28 +102,30 @@ msgid "Enrollment"
 msgstr "Pendaftaran"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "Tanggal yang akan datang tidak diperbolehkan"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Terjadi kesalahan. Lihat log untuk detailnya"
 
 msgid "Cancel"
 msgstr "batal"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Perubahan yang belum disimpan"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
+"Meninggalkan halaman ini akan membuang perubahan yang Anda buat pada acara "
+"ini."
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "Ya, buang"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Tidak, tetap di sini"
 
 msgid "validation failed"
-msgstr ""
+msgstr "validasi gagal"
 
 msgid "Errors"
 msgstr "Kesalahan"
@@ -134,7 +137,7 @@ msgid "Indicators"
 msgstr "Indikator"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Peringatan"
 
 msgid "search group result could not be retrieved"
 msgstr ""
@@ -149,7 +152,7 @@ msgid "Abort"
 msgstr ""
 
 msgid "Back to form"
-msgstr ""
+msgstr "Kembali ke formulir"
 
 msgid "Save anyway"
 msgstr ""
@@ -200,7 +203,7 @@ msgid "Select user"
 msgstr ""
 
 msgid "to"
-msgstr ""
+msgstr "ke"
 
 msgid "From"
 msgstr "Dari"
@@ -257,7 +260,7 @@ msgid "Yes"
 msgstr "Ya"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/yyyy"
 
 msgid "Years"
 msgstr "Tahun"
@@ -308,7 +311,7 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
 msgstr ""
@@ -542,7 +545,7 @@ msgid "Create {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "Kemungkinan duplikasi ditemukan"
 
 msgid "An error occured loading possible duplicates"
 msgstr ""
@@ -569,7 +572,7 @@ msgid "Registration"
 msgstr "Pendaftaran"
 
 msgid "Review Duplicates"
-msgstr ""
+msgstr "Tinjau Duplikasi"
 
 msgid "Search results"
 msgstr ""
@@ -743,15 +746,17 @@ msgid ""
 msgstr ""
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Pilih satu atau lebih tanggal"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Pilih tanggal"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"Alasan yang memungkinkan untuk ini adalah browser atau mode (mis. mode "
+"pribadi) tidak didukung. Lihat log untuk detail."
 
 msgid "Compatibility mode"
 msgstr ""
