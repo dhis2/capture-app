@@ -1,3 +1,31 @@
+## [1.26.1](https://github.com/dhis2/capture-app/compare/v1.26.0...v1.26.1) (2021-06-17)
+
+
+### Bug Fixes
+
+* breaking changes from @dhis2/cli-utils-cypress v8 ([#1806](https://github.com/dhis2/capture-app/issues/1806)) ([43b6378](https://github.com/dhis2/capture-app/commit/43b637833606cbd81b82a035d19116d2ef6d0126))
+
+# [1.26.0](https://github.com/dhis2/capture-app/compare/v1.25.3...v1.26.0) (2021-06-16)
+
+
+### Features
+
+* TECH-614 non collapsible Widget ([edc057e](https://github.com/dhis2/capture-app/commit/edc057eea004dec0b3630d7fdbe17e8214c1732a))
+
+## [1.25.3](https://github.com/dhis2/capture-app/compare/v1.25.2...v1.25.3) (2021-06-12)
+
+
+### Bug Fixes
+
+* TECH-622 use 2.37 backend for tests ([cb2531f](https://github.com/dhis2/capture-app/commit/cb2531f692eebfe1ededd0aedc53b39754453749))
+
+## [1.25.2](https://github.com/dhis2/capture-app/compare/v1.25.1...v1.25.2) (2021-06-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9595717](https://github.com/dhis2/capture-app/commit/9595717352f637fbad2e3deb131fcfcf4c1ac05e))
+
 ## [1.25.1](https://github.com/dhis2/capture-app/compare/v1.25.0...v1.25.1) (2021-06-08)
 
 
