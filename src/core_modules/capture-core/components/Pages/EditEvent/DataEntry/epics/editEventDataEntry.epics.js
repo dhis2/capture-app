@@ -63,21 +63,23 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
 
     const foundation = stage?.stageForm;
     const currentEventValues = foundation ? getCurrentClientValues(state, foundation, formId, fieldData) : {};
-    let currentEventMainData = foundation ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) : {};
 
+    let currentEventMainData = foundation ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) : {};
     currentEventMainData = { ...state.events[eventId], ...currentEventMainData };
     const currentEventData = { ...currentEventValues, ...currentEventMainData };
 
+    const rulesActions = getRulesActionsForEvent(
+        program,
+        foundation,
+        formId,
+        orgUnit,
+        currentEventData,
+        [currentEventData],
+        stage,
+    );
+
     return batchActions([
-        ...getRulesActionsForEvent(
-            program,
-            foundation,
-            formId,
-            orgUnit,
-            currentEventData,
-            [currentEventData],
-            stage,
-        ),
+        ...rulesActions,
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     editEventDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
