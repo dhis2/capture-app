@@ -15,7 +15,6 @@ import {
 import { getProgramAndStageFromEvent, getProgramThrowIfNotFound } from '../../../../../metaData';
 import {
     getRulesActionsForEvent,
-    getRulesActionsForTEI,
     getCurrentClientValues,
     getCurrentClientMainData,
 
@@ -58,41 +57,27 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
 
     const orgUnitId = state.currentSelections.orgUnitId;
     const orgUnit = state.organisationUnits[orgUnitId];
+    const stage = program instanceof EventProgram
+        ? program.stage
+        : getStageFromEvent(event)?.stage;
 
-    let rulesActions = [];
-    if (program instanceof EventProgram) {
-        const foundation = program.stage.stageForm;
-        const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
+    const foundation = stage?.stageForm;
+    const currentEventValues = foundation ? getCurrentClientValues(state, foundation, formId, fieldData) : {};
+    let currentEventMainData = foundation ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) : {};
 
-        let currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
-        currentEventMainData = { ...state.events[eventId], ...currentEventMainData };
-        const currentEventData = { ...currentEventValues, ...currentEventMainData };
+    currentEventMainData = { ...state.events[eventId], ...currentEventMainData };
+    const currentEventData = { ...currentEventValues, ...currentEventMainData };
 
-        rulesActions = getRulesActionsForEvent(
+    return batchActions([
+        ...getRulesActionsForEvent(
             program,
             foundation,
             formId,
             orgUnit,
             currentEventData,
             [currentEventData],
-        );
-    } else {
-        const stage = getStageFromEvent(event)?.stage;
-        const foundation = stage?.stageForm;
-        const currentTEIValues = foundation ? getCurrentClientValues(state, foundation, formId, fieldData) : {};
-
-        rulesActions = getRulesActionsForTEI(
-            program,
-            foundation,
-            formId,
-            orgUnit,
-            {},
-            currentTEIValues,
-        );
-    }
-
-    return batchActions([
-        ...rulesActions,
+            stage,
+        ),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     editEventDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);

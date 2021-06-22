@@ -1,7 +1,7 @@
 // @flow
 import { actionCreator, actionPayloadAppender } from '../../../../actions/actions.utils';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import { getRulesActionsForEvent, getRulesActionsForTEI } from '../../../../rules/actionsCreator';
+import { getRulesActionsForEvent } from '../../../../rules/actionsCreator';
 import type { RenderFoundation, Program } from '../../../../metaData';
 import { effectMethods } from '../../../../trackerOffline';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
@@ -15,6 +15,7 @@ import { getDataEntryMeta, validateDataEntryValues } from '../../../DataEntry/ac
 import { loadEditDataEntry } from '../../../DataEntry/actions/dataEntry.actions';
 import { addFormData } from '../../../D2Form/actions/form.actions';
 import { EventProgram, TrackerProgram } from '../../../../metaData/Program';
+import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEvent';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',
@@ -118,23 +119,20 @@ export const openEventForEditInDataEntry = (
                 eventId: eventContainer.event.eventId,
             },
         );
-
     const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
-    const rulesActions =
-        program instanceof TrackerProgram
-            ? getRulesActionsForTEI(program, foundation, key, orgUnit, {}, {})
-            : getRulesActionsForEvent(
-                program,
-                foundation,
-                key,
-                orgUnit,
-                eventDataForRulesEngine,
-                [eventDataForRulesEngine],
-            );
+    const stage = program instanceof TrackerProgram ? getStageFromEvent(eventContainer.event)?.stage : undefined;
 
     return [
         ...dataEntryActions,
-        ...rulesActions,
+        ...getRulesActionsForEvent(
+            program,
+            foundation,
+            key,
+            orgUnit,
+            eventDataForRulesEngine,
+            [eventDataForRulesEngine],
+            stage,
+        ),
         actionCreator(actionTypes.OPEN_EVENT_FOR_EDIT_IN_DATA_ENTRY)(),
     ];
 };
