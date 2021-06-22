@@ -5,13 +5,14 @@
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,10 +21,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "Pilih satu atau lebih tanggal"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "Pilih tanggal"
 
 msgid "Today"
 msgstr "Hari ini"
@@ -32,6 +33,8 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"Alasan yang memungkinkan untuk ini adalah browser atau mode (mis. mode "
+"pribadi) tidak didukung. Lihat log untuk detail."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -324,7 +327,7 @@ msgid "Abort"
 msgstr ""
 
 msgid "Back to form"
-msgstr ""
+msgstr "Kembali ke formulir"
 
 msgid "Save anyway"
 msgstr ""
@@ -372,7 +375,7 @@ msgid "Select user"
 msgstr ""
 
 msgid "to"
-msgstr ""
+msgstr "ke"
 
 msgid "From"
 msgstr "Dari"
@@ -414,7 +417,7 @@ msgid "Yes"
 msgstr "Ya"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/yyyy"
 
 msgid "Years"
 msgstr "Tahun"
@@ -558,7 +561,7 @@ msgid "Selected"
 msgstr "Terpilih"
 
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 msgid "Offline"
 msgstr ""
@@ -731,6 +734,7 @@ msgstr ""
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
+"Anda juga dapat memilih program dari bilah atas dan membuat program itu "
 
 msgid "Save new"
 msgstr ""
@@ -776,7 +780,7 @@ msgid "Search {{name}}"
 msgstr ""
 
 msgid "Search by {{name}}"
-msgstr ""
+msgstr "Cari berdasarkan {{nama}}"
 
 msgid "Search by attributes"
 msgstr ""
@@ -793,6 +797,8 @@ msgstr "Cari tentang"
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
+"Anda juga dapat memilih program dari bilah atas dan mencari di program "
+"tersebut"
 
 msgid "No results found"
 msgstr "Tidak ada hasil ditemukan"
@@ -865,7 +871,7 @@ msgid "Feedbacks"
 msgstr ""
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "Kemungkinan duplikasi ditemukan"
 
 msgid "An error occurred loading possible duplicates"
 msgstr ""
