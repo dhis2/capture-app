@@ -8,8 +8,6 @@ import { WidgetFeedbackContent } from './WidgetFeedbackContent/WidgetFeedbackCon
 export const WidgetFeedback = ({ feedback, hideWidget = false }: Props) => {
     const [openStatus, setOpenStatus] = useState(true);
 
-    console.log(hideWidget);
-
     if (hideWidget) {
         return null;
     }

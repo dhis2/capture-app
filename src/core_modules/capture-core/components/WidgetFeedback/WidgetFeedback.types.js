@@ -3,12 +3,14 @@
 export type filteredText = {|
     id: string,
     message: string,
+    color?: ?string,
 |}
 
 export type filteredKeyValue = {|
     id: string,
     key: string,
     value: string,
+    color?: ?string,
 |}
 
 export type contentType = {|
