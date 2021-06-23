@@ -293,11 +293,11 @@ When('you select the working list called Events today', () => {
         .click();
 });
 
-When('you change the sharing settings', () => {
+When('you change the sharing settings', () =>
     // Making post requests using the old d2 library doesn't work for cypress tests atm
     // since the sharing dialog is posting using the d2 library, we will need to temporarily send the post request manually
     cy.buildApiUrl('sharing?type=eventFilter&id=CLBKvCKspBk')
-        .then((sharingUrl) => {
+        .then(sharingUrl =>
             cy.request('POST', sharingUrl, {
                 meta: {
                     allowPublicAccess: true,
@@ -337,9 +337,9 @@ When('you change the sharing settings', () => {
 
                 cy.contains('Close')
                     .click();
-            });
-        });
-});
+            }),
+        ),
+);
 
 When('you update the working list', () => {
     cy.get('[data-test="online-list-table"]')
