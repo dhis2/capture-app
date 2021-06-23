@@ -43,14 +43,13 @@ export const WidgetEventEditPlain = ({
     mode,
     onEdit,
 }: Props) => (
-    <div data-test="widget-enrollment">
+    <div data-test="widget-enrollment-event">
         <div className={classes.menu}>
             <Button
                 small
                 secondary
                 className={classes.button}
                 onClick={onEdit}
-                data-test="widget-enrollment-edit-button"
             >
                 <IconEdit24 />
                 {i18n.t('Edit event')}
