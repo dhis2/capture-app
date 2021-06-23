@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import { type Node } from 'react';
+import { type Node, type Element } from 'react';
 import { parseHtml } from 'react-html-parser-ultimate';
 
 type Data = {
@@ -34,7 +34,7 @@ export class CustomForm {
      *
      * @memberof CustomForm
      */
-    setData(html: string, transformFunction: (node: Object, index: number) => ?React.Element<'FormField'>) {
+    setData(html: string, transformFunction: (node: Object, index: number) => ?Element<'FormField'>) {
         this._data = parseHtml(html, {
             onTransform: transformFunction,
             allowScript: true,
