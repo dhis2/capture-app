@@ -116,7 +116,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
                 sectionMetaData={section}
                 validationStrategy={this.props.formFoundation.validationStrategy}
                 formId={this.getFormId()}
-                formBuilDderId={this.getFormBuilderId(section.id)}
+                formBuilderId={this.getFormBuilderId(section.id)}
                 sectionId={section.id}
                 {...passOnProps}
             />
