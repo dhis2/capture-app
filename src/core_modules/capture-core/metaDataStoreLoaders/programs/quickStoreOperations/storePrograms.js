@@ -27,6 +27,15 @@ const convert = (() => {
                 return accTranslationObject;
             }, {});
 
+    const convertProgramSections = apiProgramSections =>
+        (apiProgramSections ? apiProgramSections
+            .filter(apiProgramSection => apiProgramSection.displayFormName)
+            .map(apiProgramSection => ({
+                ...apiProgramSection,
+                trackedEntityAttributes: apiProgramSection.trackedEntityAttributes.map(te => te.id),
+            }))
+            .sort((a, b) => a.sortOrder - b.sortOrder) : []);
+
     const getProgramStageSections = apiSections => (apiSections ? sort(apiSections) : []);
 
     const getProgramStageDataElements = programStageDataElements =>
@@ -69,6 +78,7 @@ const convert = (() => {
                 trackedEntityType: undefined,
                 trackedEntityTypeId: apiProgram.trackedEntityType && apiProgram.trackedEntityType.id,
                 programStages: getProgramStages(apiProgram.programStages),
+                programSections: convertProgramSections(apiProgram.programSections),
                 programTrackedEntityAttributes:
                     getProgramTrackedEntityAttributes(apiProgram.programTrackedEntityAttributes),
             }));
@@ -86,6 +96,7 @@ const fieldsParam = 'id,version,displayName,displayShortName,description,program
 'programStages[id,access,autoGenerateEvent,openAfterEnrollment,generatedByEnrollmentDate,reportDateToUse,minDaysFromStart,displayName,description,executionDateLabel,formType,featureType,validationStrategy,enableUserAssignment,style,dataEntryForm[id,htmlCode],' +
 'programStageSections[id,displayName,displayDescription,sortOrder,dataElements[id]],programStageDataElements[compulsory,displayInReports,renderOptionsAsRadio,allowFutureDate,renderType[*],' +
 'dataElement[id,displayName,displayShortName,displayFormName,valueType,translations[*],description,optionSetValue,style,optionSet[id]]]],' +
+'programSections[id, displayFormName, sortOrder, trackedEntityAttributes],' +
 'programTrackedEntityAttributes[trackedEntityAttribute[id],displayInList,searchable,mandatory,renderOptionsAsRadio,allowFutureDate]';
 
 export const storePrograms = (programIds: Array<string>) => {
