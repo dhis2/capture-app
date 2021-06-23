@@ -6,7 +6,7 @@ import type { FieldConfigForType } from './configBase';
 
 const getBaseProps = ({ compulsory, disabled, unique }: MetaDataElement) => ({
     metaCompulsory: compulsory,
-    metaDisabled: disabled || (unique && unique.generatable),
+    metaDisabled: disabled || unique?.generatable,
 });
 
 export const createProps = (props?: ?Object, metaData: MetaDataElement) => ({

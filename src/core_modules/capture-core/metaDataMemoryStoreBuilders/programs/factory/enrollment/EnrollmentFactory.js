@@ -170,11 +170,11 @@ export class EnrollmentFactory {
         section = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
         section && enrollmentForm.addSection(section);
         try {
-            enrollmentForm.customForm = new CustomForm((o) => {
+            section.customForm = new CustomForm((o) => {
                 o.id = dataEntryForm.id;
             });
             // $FlowFixMe : Require input from class
-            enrollmentForm.customForm.setData(dataEntryForm.htmlCode, transformTrackerNode);
+            section.customForm.setData(dataEntryForm.htmlCode, transformTrackerNode);
         } catch (error) {
             log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
                 template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));

@@ -1,7 +1,11 @@
 // @flow
-import React from 'react';
+import React, { type Element } from 'react';
 
-export const transformTrackerNode = (node: Object, index: number, nodeToElementFn: (...args : Array<any>) => any) => {
+export const transformTrackerNode = (
+    node: Object,
+    index: number,
+    nodeToElementFn: (node: Object, index: number) => Element<'FormField'>,
+) => {
     if (node.name === 'input') {
         const htmlElementId = node.attribs?.attributeid;
 
@@ -24,15 +28,19 @@ export const transformTrackerNode = (node: Object, index: number, nodeToElementF
                 },
             );
         }
-        return null;
     }
     return undefined;
 };
 
-export const transformEventNode = (node: Object, index: number, nodeToElementFn: (...args : Array<any>) => any) => {
+export const transformEventNode = (
+    node: Object,
+    index: number,
+    nodeToElementFn: (node: Object, index: number) => Element<'FormField'>,
+) => {
     if (node.name === 'input') {
         const htmlElementId = node.attribs && node.attribs.id;
-        const matchResult = htmlElementId && /-[^-]+/.exec(htmlElementId);
+        const findAttributeID = /-[^-]+/;
+        const matchResult = htmlElementId && findAttributeID.exec(htmlElementId);
         if (matchResult) {
             const id = matchResult[0].replace('-', '');
             const inputElement = nodeToElementFn(node, index);

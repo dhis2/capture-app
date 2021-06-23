@@ -29,7 +29,6 @@ const convert = (() => {
 
     const convertProgramSections = apiProgramSections =>
         (apiProgramSections || [])
-            .filter(apiProgramSection => apiProgramSection.displayFormName)
             .map(apiProgramSection => ({
                 ...apiProgramSection,
                 trackedEntityAttributes: apiProgramSection.trackedEntityAttributes.map(te => te.id),

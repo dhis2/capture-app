@@ -26,7 +26,7 @@ export class CustomForm {
     set id(id: string) {
         this._id = id;
     }
-    get id() {
+    get id(): string {
         return this._id;
     }
     /**
@@ -34,7 +34,7 @@ export class CustomForm {
      *
      * @memberof CustomForm
      */
-    setData(html: string, transformFunction: () => ?React.Element<'FormField'>) {
+    setData(html: string, transformFunction: (node: Object, index: number) => ?React.Element<'FormField'>) {
         this._data = parseHtml(html, {
             onTransform: transformFunction,
             allowScript: true,

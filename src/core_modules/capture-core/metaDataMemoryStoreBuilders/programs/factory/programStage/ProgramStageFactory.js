@@ -147,12 +147,12 @@ export class ProgramStageFactory {
             stageForm.addSection(section);
             const dataEntryForm = cachedProgramStage.dataEntryForm;
             try {
-                stageForm.customForm = new CustomForm((o) => {
+                section.customForm = new CustomForm((o) => {
                     // $FlowFixMe
                     o.id = dataEntryForm.id;
                 });
                 // $FlowFixMe : Require input from class
-                stageForm.customForm.setData(dataEntryForm.htmlCode, transformEventNode);
+                section.customForm.setData(dataEntryForm.htmlCode, transformEventNode);
             } catch (error) {
                 log.error(errorCreator(ProgramStageFactory.CUSTOM_FORM_TEMPLATE_ERROR)(
                     // $FlowFixMe
