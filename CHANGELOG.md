@@ -1,3 +1,10 @@
+## [1.27.2](https://github.com/dhis2/capture-app/compare/v1.27.1...v1.27.2) (2021-06-23)
+
+
+### Bug Fixes
+
+* TeiWorkingListsUsers.feature rollback previous changes ([#1824](https://github.com/dhis2/capture-app/issues/1824)) ([0368a92](https://github.com/dhis2/capture-app/commit/0368a92839cd546b461c13396d78eae1db96de45))
+
 ## [1.27.1](https://github.com/dhis2/capture-app/compare/v1.27.0...v1.27.1) (2021-06-18)
 
 
