@@ -40,8 +40,9 @@ export const EnrollmentPageDefaultPlain = ({
     teiId,
     enrollmentId,
     onDelete,
-    classes,
     widgetEffects,
+    hideFeedbackWidget,
+    classes,
 }: PlainProps) => (
     <>
         <div className={classes.title}>Enrollment Dashboard</div>
@@ -52,7 +53,10 @@ export const EnrollmentPageDefaultPlain = ({
             <div className={classes.rightColumn}>
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
-                <WidgetFeedback feedback={widgetEffects?.feedbacks} />
+                <WidgetFeedback
+                    feedback={widgetEffects?.feedbacks}
+                    hideWidget={hideFeedbackWidget}
+                />
                 <WidgetProfile teiId={teiId} programId={program.id} />
                 <WidgetEnrollment
                     teiId={teiId}
