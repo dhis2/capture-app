@@ -43,11 +43,11 @@ const styles = {
     },
 };
 
-const WidgetIndicatorContentComponent = ({ widgetData, classes }: ContentType) => {
+const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: ContentType) => {
     if (!widgetData?.length) {
         return (
             <div className={classes.container}>
-                <p className={classes.noIndicatorText}>No indicator output for this enrollment yet</p>
+                <p className={classes.noIndicatorText}>{emptyText}</p>
             </div>);
     }
 

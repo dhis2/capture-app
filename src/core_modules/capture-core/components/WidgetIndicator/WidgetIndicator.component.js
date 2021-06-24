@@ -4,7 +4,7 @@ import { Widget } from '../Widget';
 import type { IndicatorProps } from '../WidgetFeedback/WidgetFeedback.types';
 import { WidgetIndicatorContent } from './WidgetIndicatorContent/WidgetIndicatorContent';
 
-export const WidgetIndicator = ({ indicators }: IndicatorProps) => {
+export const WidgetIndicator = ({ indicators, emptyText }: IndicatorProps) => {
     const [openStatus, setOpenStatus] = useState(true);
     return (
         <div>
@@ -14,7 +14,10 @@ export const WidgetIndicator = ({ indicators }: IndicatorProps) => {
                 onClose={() => setOpenStatus(false)}
                 onOpen={() => setOpenStatus(true)}
             >
-                <WidgetIndicatorContent widgetData={indicators} />
+                <WidgetIndicatorContent
+                    widgetData={indicators}
+                    emptyText={emptyText}
+                />
             </Widget>
         </div>
     );

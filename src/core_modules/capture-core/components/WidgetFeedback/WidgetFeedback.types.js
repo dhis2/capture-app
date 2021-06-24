@@ -26,5 +26,6 @@ export type Props = {|
 |}
 
 export type IndicatorProps = {|
-    indicators?: ?Array<string | FilteredText | FilteredKeyValue>
+    indicators?: ?Array<string | FilteredText | FilteredKeyValue>,
+    emptyText: string,
 |}

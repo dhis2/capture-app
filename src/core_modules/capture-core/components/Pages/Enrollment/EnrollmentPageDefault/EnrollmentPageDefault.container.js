@@ -50,13 +50,16 @@ export const EnrollmentPageDefault = () => {
         }
     }, [orgUnit, program, programMetadata, enrollment, attributes]);
 
-    const feedbackWidgetHidden = useMemo(() => {
-        const flattenedRuleActionLocations = program.programRules.map(item => item.programRuleActions
-            .map(rule => rule.location || null))
-            .flat();
+    const flatRuleActionLocations = useMemo(() => program.programRules.map(item => item.programRuleActions
+        .map(rule => rule.location || null))
+        .flat(), [program.programRules]);
 
-        return !flattenedRuleActionLocations.includes('feedback');
-    }, [program.programRules]);
+    const hideWidgets = useMemo(() => {
+        const hideWidgetObject = {};
+        hideWidgetObject.feedback = !flatRuleActionLocations.includes('feedback');
+        hideWidgetObject.indicator = !flatRuleActionLocations.includes('indicators');
+        return hideWidgetObject;
+    }, [flatRuleActionLocations]);
 
 
     const onDelete = () => {
@@ -73,7 +76,7 @@ export const EnrollmentPageDefault = () => {
             enrollmentId={enrollmentId}
             onDelete={onDelete}
             widgetEffects={outputEffects}
-            hideFeedbackWidget={feedbackWidgetHidden}
+            hideWidgets={hideWidgets}
         />
     );
 };

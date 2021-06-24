@@ -43,7 +43,7 @@ export const EnrollmentPageDefaultPlain = ({
     enrollmentId,
     onDelete,
     widgetEffects,
-    hideFeedbackWidget,
+    hideWidgets,
     classes,
 }: PlainProps) => (
     <>
@@ -55,8 +55,13 @@ export const EnrollmentPageDefaultPlain = ({
             <div className={classes.rightColumn}>
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
-                <WidgetIndicator indicators={widgetEffects?.indicators} />
-                {!hideFeedbackWidget && (
+                {!hideWidgets.indicator && (
+                    <WidgetIndicator
+                        indicators={widgetEffects?.indicators}
+                        emptyText={i18n.t('No indicator for this enrollment yet')}
+                    />
+                )}
+                {!hideWidgets.feedback && (
                     <WidgetFeedback
                         feedback={widgetEffects?.feedbacks}
                         emptyText={i18n.t('No feedback for this enrollment yet')}
