@@ -5,14 +5,14 @@
  */
 const packageDesc = require('../package');
 
-function verifyMajorCacheVersion(appVersion) {
-    if (!appVersion) {
+function verifyMajorCacheVersion(serverVersionAsString) {
+    if (!serverVersionAsString) {
         console.log('Version not specified');
         process.exit(1);
     }
 
-    const appMajorVersion = Number(appVersion.split('.')[0]);
-    if (Number.isNaN(appMajorVersion) || !Number.isSafeInteger(appMajorVersion) || appMajorVersion <= 30) {
+    const serverVersion = Number(serverVersionAsString);
+    if (Number.isNaN(serverVersion) || !Number.isSafeInteger(serverVersion) || serverVersion <= 30) {
         console.log('Invalid app version');
         process.exit(1);
     }
@@ -31,7 +31,7 @@ function verifyMinorCacheVersion(appCacheVersionAsString) {
     }
 }
 
-const appVersion = packageDesc.version;
+const serverVersion = packageDesc.serverVersion;
 const cacheVersion = packageDesc.cacheVersion;
-verifyMajorCacheVersion(appVersion);
+verifyMajorCacheVersion(serverVersion);
 verifyMinorCacheVersion(cacheVersion);
