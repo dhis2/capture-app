@@ -18,7 +18,7 @@ const StageEventListPlain = ({ stage }) => (<>
                 events={[]}
             />}
         >
-            <p>Feedback Placeholder Text</p>
+            <p>Stage event Placeholder Text</p>
         </Widget>
     </div>
 </>);
