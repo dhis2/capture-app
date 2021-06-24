@@ -1,3 +1,15 @@
+# [1.28.0](https://github.com/dhis2/capture-app/compare/v1.27.2...v1.28.0) (2021-06-24)
+
+
+### Bug Fixes
+
+* cache versioning ([2dec2c0](https://github.com/dhis2/capture-app/commit/2dec2c049720ac390380118e1079e98db2a22ba9))
+
+
+### Features
+
+* [DHIS2-11221] Program stage event list page with routing ([#1768](https://github.com/dhis2/capture-app/issues/1768)) ([004e62a](https://github.com/dhis2/capture-app/commit/004e62a165ed18a001c585835034aefbee4e4d19))
+
 ## [1.27.2](https://github.com/dhis2/capture-app/compare/v1.27.1...v1.27.2) (2021-06-23)
 
 
