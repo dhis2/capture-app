@@ -3,7 +3,7 @@ import React from 'react';
 import type { ComponentType } from 'react';
 import { colors } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { StageEventHeaderComponent } from './StageEventHeader/StageEventHeader.component';
+import { StageEventHeader } from './StageEventHeader/StageEventHeader.component';
 import type { Props } from './StageEventList.types';
 
 const getStyles = () => ({
@@ -16,12 +16,12 @@ const getStyles = () => ({
     },
 });
 
-const StageEventListComponentPlain = ({ stage, classes }) => (<>
+const StageEventListPlain = ({ stage, classes }) => (<>
     <div data-test="stage-event-list" className={classes.wrapper}>
-        <StageEventHeaderComponent title={stage.name} icon={stage.icon} events={[]} />
+        <StageEventHeader title={stage.name} icon={stage.icon} events={[]} />
     </div>
 </>);
 
-export const StageEventListComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(
+export const StageEventList: ComponentType<$Diff<Props, CssClasses>> = withStyles(
     getStyles,
-)(StageEventListComponentPlain);
+)(StageEventListPlain);

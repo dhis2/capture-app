@@ -21,7 +21,7 @@ const getStyles = () => ({
     },
 });
 
-const StageEventHeaderComponentPlain = ({ icon, title, events, classes }) => (<>
+const StageEventHeaderPlain = ({ icon, title, events, classes }) => (<>
     <div data-test="stage-event-header" className={classes.wrapper}>
         <div className={classes.icon}>{
             icon && (
@@ -44,6 +44,6 @@ const StageEventHeaderComponentPlain = ({ icon, title, events, classes }) => (<>
     </div>
 </>);
 
-export const StageEventHeaderComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(
+export const StageEventHeader: ComponentType<$Diff<Props, CssClasses>> = withStyles(
     getStyles,
-)(StageEventHeaderComponentPlain);
+)(StageEventHeaderPlain);
