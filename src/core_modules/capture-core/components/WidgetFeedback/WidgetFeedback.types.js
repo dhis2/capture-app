@@ -15,7 +15,7 @@ export type FilteredKeyValue = {|
 
 export type ContentType = {|
     widgetData?: ?Array<string | FilteredText | FilteredKeyValue>,
-    noFeedbackText: string,
+    emptyText: string,
     ...CssClasses
 |}
 

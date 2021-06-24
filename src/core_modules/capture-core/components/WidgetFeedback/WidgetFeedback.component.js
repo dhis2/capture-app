@@ -20,7 +20,7 @@ export const WidgetFeedback = ({ feedback, emptyText }: Props) => {
             >
                 <WidgetFeedbackContent
                     widgetData={feedback}
-                    noFeedbackText={emptyText}
+                    emptyText={emptyText}
                 />
             </Widget>
         </div>
