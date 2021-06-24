@@ -40,7 +40,7 @@ export const EnrollmentPageDefaultPlain = ({
     enrollmentId,
     onDelete,
     widgetEffects,
-    hideFeedbackWidget,
+    hideWidgets,
     classes,
 }: PlainProps) => (
     <>
@@ -50,7 +50,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetStagesAndEvents stages={program.stages} />
             </div>
             <div className={classes.rightColumn}>
-                {!hideFeedbackWidget && (
+                {!hideWidgets.feedback && (
                     <WidgetFeedback
                         feedback={widgetEffects?.feedbacks}
                         emptyText={i18n.t('No feedback for this enrollment yet')}
