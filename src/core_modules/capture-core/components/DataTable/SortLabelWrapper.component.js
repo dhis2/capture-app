@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import { IconArrowDown16, IconArrowUp16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
@@ -11,8 +10,6 @@ import { SortLabel, sortLabelDirections } from 'capture-ui';
 
 const styles = () => ({
     iconBase: {
-        width: '14px',
-        height: '14px',
         color: '#3a796f',
     },
     enabledIcon: {
@@ -30,22 +27,6 @@ type Props = {
 };
 
 class SortLabelWrapperPlain extends React.Component<Props> {
-    static getDirectionBasedIconValues(direction?: ?$Values<typeof sortLabelDirections>) {
-        if (direction === sortLabelDirections.ASC) {
-            return {
-                IconComponent: ArrowUpwardIcon,
-                dataTestValue: 'data-table-asc-sort-icon',
-                invertedDirection: sortLabelDirections.DESC,
-            };
-        }
-
-        return {
-            IconComponent: ArrowDownwardIcon,
-            dataTestValue: 'data-table-desc-sort-icon',
-            invertedDirection: sortLabelDirections.ASC,
-        };
-    }
-
     getIconClickHandler = (
         direction: $Values<typeof sortLabelDirections>,
         onSort: (direction: $Values<typeof sortLabelDirections>) => void) =>
@@ -61,16 +42,27 @@ class SortLabelWrapperPlain extends React.Component<Props> {
         const isDisabled = this.props.disabled;
         const classes = this.props.classes;
 
-        const { IconComponent, dataTestValue, invertedDirection } =
-             SortLabelWrapper.getDirectionBasedIconValues(direction);
+        const icon =
+            direction === sortLabelDirections.ASC ?
+                (<div
+                    className={isDisabled ? classes.iconBase : classNames(classes.iconBase, classes.enabledIcon)}
+                    role="button"
+                    tabIndex="0"
+                    onClick={this.getIconClickHandler(sortLabelDirections.DESC, onSort)}
+                    data-test="data-table-asc-sort-icon"
+                >
+                    <IconArrowUp16 />
+                </div>) :
+                (<div
+                    className={isDisabled ? classes.iconBase : classNames(classes.iconBase, classes.enabledIcon)}
+                    role="button"
+                    tabIndex="0"
+                    onClick={this.getIconClickHandler(sortLabelDirections.ASC, onSort)}
+                    data-test="data-table-desc-sort-icon"
 
-        const icon = (
-            <IconComponent
-                className={isDisabled ? classes.iconBase : classNames(classes.iconBase, classes.enabledIcon)}
-                onClick={this.getIconClickHandler(invertedDirection, onSort)}
-                data-test={dataTestValue}
-            />
-        );
+                >
+                    <IconArrowDown16 />
+                </div>);
 
         if (this.props.disabled) {
             return (
