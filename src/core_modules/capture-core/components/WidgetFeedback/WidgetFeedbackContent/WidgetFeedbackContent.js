@@ -2,7 +2,6 @@
 
 import React, { type ComponentType } from 'react';
 import { spacers, spacersNum, colors } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import type { FilteredKeyValue, FilteredText, ContentType } from '../WidgetFeedback.types';
 
