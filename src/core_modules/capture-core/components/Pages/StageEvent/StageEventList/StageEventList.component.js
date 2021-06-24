@@ -1,24 +1,25 @@
 // @flow
 import React from 'react';
 import type { ComponentType } from 'react';
-import { colors } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { StageEventHeader } from './StageEventHeader/StageEventHeader.component';
+import { Widget } from '../../../Widget';
 import type { Props } from './StageEventList.types';
 
-const getStyles = () => ({
-    wrapper: {
-        backgroundColor: colors.white,
-        borderRadius: 3,
-        borderStyle: 'solid',
-        borderColor: colors.grey400,
-        borderWidth: 1,
-    },
-});
+const getStyles = () => ({});
 
-const StageEventListPlain = ({ stage, classes }) => (<>
-    <div data-test="stage-event-list" className={classes.wrapper}>
-        <StageEventHeader title={stage.name} icon={stage.icon} events={[]} />
+const StageEventListPlain = ({ stage }) => (<>
+    <div data-test="stage-event-list" >
+        <Widget
+            noncollapsible
+            header={<StageEventHeader
+                title={stage.name}
+                icon={stage.icon}
+                events={[]}
+            />}
+        >
+            <p>Feedback Placeholder Text</p>
+        </Widget>
     </div>
 </>);
 
