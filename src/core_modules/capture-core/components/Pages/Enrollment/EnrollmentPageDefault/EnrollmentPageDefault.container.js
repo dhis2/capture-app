@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -41,7 +41,6 @@ export const EnrollmentPageDefault = () => {
     }
 
     const [ruleEffects, setRuleEffects] = useState(undefined);
-    const [hideFeedbackWidget, setHideFeedbackWidget] = useState(false);
     const outputEffects = useFilteredWidgetData(ruleEffects);
     useEffect(() => {
         const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollment, attributes });
@@ -49,11 +48,15 @@ export const EnrollmentPageDefault = () => {
             // $FlowFixMe
             setRuleEffects(effects);
         }
+    }, [orgUnit, program, programMetadata, enrollment, attributes]);
+
+    const feedbackWidgetHidden = useMemo(() => {
         const flattenedRuleActionLocations = program.programRules.map(item => item.programRuleActions
             .map(rule => rule.location || null))
             .flat();
-        setHideFeedbackWidget(!flattenedRuleActionLocations.includes('feedback'));
-    }, [orgUnit, program, programMetadata, enrollment, attributes]);
+
+        return !flattenedRuleActionLocations.includes('feedback');
+    }, [program.programRules]);
 
 
     const onDelete = () => {
@@ -70,7 +73,7 @@ export const EnrollmentPageDefault = () => {
             enrollmentId={enrollmentId}
             onDelete={onDelete}
             widgetEffects={outputEffects}
-            hideFeedbackWidget={hideFeedbackWidget}
+            hideFeedbackWidget={feedbackWidgetHidden}
         />
     );
 };

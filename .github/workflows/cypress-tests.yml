@@ -25,12 +25,11 @@ jobs:
           parallel: true
           group: e2e-chrome-parallel
           browser: chrome
-          start: 'yarn start'
+          start: 'yarn start:forCypress'
           wait-on: 'http://localhost:3000'
           # wait for 200 secs for the server to respond
           wait-on-timeout: 200
     env:
       CI: true
       CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
-      REACT_APP_DHIS2_BASE_URL: 'https://debug.dhis2.org/ca-test-2.37'
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

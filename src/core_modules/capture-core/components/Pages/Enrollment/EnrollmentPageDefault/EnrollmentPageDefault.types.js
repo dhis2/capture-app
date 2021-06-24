@@ -6,7 +6,7 @@ export type Props = {|
     enrollmentId: string,
     teiId: string,
     widgetEffects: ?Object,
-    hideFeedbackWidget?: ?boolean,
+    hideFeedbackWidget: ?boolean,
     onDelete: () => void,
     widgetEffects: Object,
 |};

@@ -2,9 +2,8 @@
 
 import React, { type ComponentType } from 'react';
 import { spacers, spacersNum, colors } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import type { filteredKeyValue, filteredText, contentType } from '../WidgetFeedback.types';
+import type { FilteredKeyValue, FilteredText, ContentType } from '../WidgetFeedback.types';
 
 const styles = {
     container: {
@@ -33,12 +32,12 @@ const styles = {
 };
 
 
-const WidgetFeedbackContentComponent = ({ widgetData, classes }: contentType) => {
+const WidgetFeedbackContentComponent = ({ widgetData, noFeedbackText, classes }: ContentType) => {
     if (!widgetData?.length) {
-        return <p data-test={'widget-content'} className={classes.noFeedbackText}>{i18n.t('No feedback for this enrollment yet')}</p>;
+        return <p data-test={'widget-content'} className={classes.noFeedbackText}>{noFeedbackText}</p>;
     }
 
-    const renderTextObject = (item: filteredText) => (
+    const renderTextObject = (item: FilteredText) => (
         <li
             className={classes.listItem}
             key={item.id}
@@ -47,7 +46,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, classes }: contentType) =>
         </li>
     );
 
-    const renderKeyValue = (item: filteredKeyValue) => (
+    const renderKeyValue = (item: FilteredKeyValue) => (
         <li
             key={item.id}
             className={classes.listItem}
@@ -86,4 +85,4 @@ const WidgetFeedbackContentComponent = ({ widgetData, classes }: contentType) =>
     );
 };
 
-export const WidgetFeedbackContent: ComponentType<$Diff<contentType, CssClasses>> = withStyles(styles)(WidgetFeedbackContentComponent);
+export const WidgetFeedbackContent: ComponentType<$Diff<ContentType, CssClasses>> = withStyles(styles)(WidgetFeedbackContentComponent);

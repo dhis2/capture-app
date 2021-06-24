@@ -1,26 +1,27 @@
 // @flow
 
-export type filteredText = {|
+export type FilteredText = {|
     id: string,
     message: string,
     color?: ?string,
 |}
 
-export type filteredKeyValue = {|
+export type FilteredKeyValue = {|
     id: string,
     key: string,
     value: string,
     color?: ?string,
 |}
 
-export type contentType = {|
-    widgetData?: ?Array<string | filteredText | filteredKeyValue>,
+export type ContentType = {|
+    widgetData?: ?Array<string | FilteredText | FilteredKeyValue>,
+    noFeedbackText: string,
     ...CssClasses
 |}
 
 export type Props = {|
-    feedback?: ?Array<string | filteredText | filteredKeyValue>,
-    hideWidget?: ?boolean,
+    feedback?: ?Array<string | FilteredText | FilteredKeyValue>,
+    emptyText: string,
     ...CssClasses
 |}
 
