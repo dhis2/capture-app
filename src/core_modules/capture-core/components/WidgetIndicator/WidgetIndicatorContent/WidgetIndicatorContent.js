@@ -4,7 +4,7 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { spacers, colors } from '@dhis2/ui';
 import cx from 'classnames';
-import type { contentType, filteredKeyValue, filteredText } from '../../WidgetFeedback/WidgetFeedback.types';
+import type { ContentType, FilteredKeyValue, FilteredText } from '../../WidgetFeedback/WidgetFeedback.types';
 
 const styles = {
     container: {
@@ -43,7 +43,7 @@ const styles = {
     },
 };
 
-const WidgetIndicatorContentComponent = ({ widgetData, classes }: contentType) => {
+const WidgetIndicatorContentComponent = ({ widgetData, classes }: ContentType) => {
     if (!widgetData?.length) {
         return (
             <div className={classes.container}>
@@ -64,7 +64,7 @@ const WidgetIndicatorContentComponent = ({ widgetData, classes }: contentType) =
         </div>
     );
 
-    const renderTextObject = (indicator: filteredText, isLastItem: boolean) => (
+    const renderTextObject = (indicator: FilteredText, isLastItem: boolean) => (
         <div
             key={indicator.id}
             className={cx(classes.indicatorRow, { isLastItem })}
@@ -74,7 +74,7 @@ const WidgetIndicatorContentComponent = ({ widgetData, classes }: contentType) =
         </div>
     );
 
-    const renderKeyValue = (indicator: filteredKeyValue, isLastItem: boolean) => (
+    const renderKeyValue = (indicator: FilteredKeyValue, isLastItem: boolean) => (
         <div
             key={indicator.id}
             className={cx(classes.indicatorRow, { isLastItem })}
@@ -107,4 +107,4 @@ const WidgetIndicatorContentComponent = ({ widgetData, classes }: contentType) =
     );
 };
 
-export const WidgetIndicatorContent: ComponentType<$Diff<contentType, CssClasses>> = withStyles(styles)(WidgetIndicatorContentComponent);
+export const WidgetIndicatorContent: ComponentType<$Diff<ContentType, CssClasses>> = withStyles(styles)(WidgetIndicatorContentComponent);
