@@ -140,67 +140,67 @@ msgid "Warnings"
 msgstr "Peringatan"
 
 msgid "search group result could not be retrieved"
-msgstr ""
+msgstr "hasil grup pencarian tidak dapat diambil"
 
 msgid "Complete"
 msgstr "Lengkap"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Peringatan ditemukan"
 
 msgid "Abort"
-msgstr ""
+msgstr "Menggugurkan"
 
 msgid "Back to form"
 msgstr "Kembali ke formulir"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "Tetap simpan"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "Kesalahan validasi dan peringatan"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "Kesalahan validasi"
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "Peringatan validasi"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "Beberapa operasi masih berjalan. Mohon tunggu.."
 
 msgid "Operations running"
-msgstr ""
+msgstr "Operasi berjalan"
 
 msgid "Sort"
 msgstr "Urutkan"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Tidak ada acara untuk ditampilkan"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Data untuk daftar offline tidak ada"
 
 msgid "Close"
 msgstr "Tutup"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "Silakan pilih pengguna"
 
 msgid "Search for user"
-msgstr ""
+msgstr "Cari pengguna"
 
 msgid "Me"
-msgstr ""
+msgstr "Saya"
 
 msgid "Anyone"
-msgstr ""
+msgstr "Siapa saja"
 
 msgid "None"
 msgstr "Tidak ada"
 
 msgid "Select user"
-msgstr ""
+msgstr "Pilih pengguna"
 
 msgid "to"
 msgstr "ke"
@@ -212,10 +212,10 @@ msgid "To"
 msgstr "Untuk"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "setelah atau sama dengan"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "sebelum atau sama dengan"
 
 msgid "Today"
 msgstr "Hari ini"
@@ -227,7 +227,7 @@ msgid "This month"
 msgstr "Bulan ini"
 
 msgid "This Year"
-msgstr ""
+msgstr "Tahun ini"
 
 msgid "Last week"
 msgstr "Minggu lalu"
@@ -239,7 +239,7 @@ msgid "Last 3 months"
 msgstr "3 bulan terakhir"
 
 msgid "Custom range"
-msgstr ""
+msgstr "Rentang khusus"
 
 msgid "Max"
 msgstr "Maks"
@@ -248,13 +248,13 @@ msgid "Min"
 msgstr "Min"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "lebih dari atau sama dengan"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "kurang dari atau sama dengan"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Berisi teks"
 
 msgid "Yes"
 msgstr "Ya"
@@ -272,7 +272,7 @@ msgid "Days"
 msgstr "Hari"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Mengunggah file"
 
 msgid "selected"
 msgstr "Terpilih"
@@ -281,16 +281,16 @@ msgid "Delete"
 msgstr "hapus"
 
 msgid "Select file"
-msgstr ""
+msgstr "Pilih file"
 
 msgid "No"
 msgstr "Tidak"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Mengunggah gambar"
 
 msgid "Select image"
-msgstr ""
+msgstr "Pilih gambar"
 
 msgid "Search"
 msgstr "Pencarian"
@@ -299,70 +299,70 @@ msgid "Clear"
 msgstr "Hapus"
 
 msgid "No results"
-msgstr ""
+msgstr "Tidak ada hasil"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "saran tidak dapat diambil"
 
 msgid "search for username"
-msgstr ""
+msgstr "cari nama pengguna"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Tidak ada item untuk ditampilkan"
 
 msgid "Online"
 msgstr "Online"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Menyinkronkan"
 
 msgid "Add comment"
-msgstr ""
+msgstr "Tambahkan komentar"
 
 msgid "You dont have access to write comments"
-msgstr ""
+msgstr "Anda tidak memiliki akses untuk menulis komentar"
 
 msgid "Write comment"
-msgstr ""
+msgstr "Tulis komentar"
 
 msgid "Basic info"
-msgstr ""
+msgstr "Info dasar"
 
 msgid "Status"
 msgstr "Status"
 
 msgid "Comments"
-msgstr ""
+msgstr "Komentar"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr ""
+msgstr "Silakan tambahkan atau batalkan komentar sebelum menyimpan acara"
 
 msgid "No write access"
-msgstr ""
+msgstr "Tidak ada akses tulis"
 
 msgid "Save"
 msgstr "Simpan"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Tampilkan semua acara"
 
 msgid "Edit event"
-msgstr ""
+msgstr "Sunting acara"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Acara tidak dapat dimuat. Apakah Anda yakin itu ada?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Acara tidak dapat dimuat"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Unit organisasi tidak dapat dimuat"
 
 msgid "View event info"
-msgstr ""
+msgstr "Lihat info acara"
 
 msgid "Delete event"
 msgstr "Hapus even"
@@ -371,10 +371,10 @@ msgid "Update"
 msgstr "perbarui"
 
 msgid "More filters"
-msgstr ""
+msgstr "Lebih banyak filter"
 
 msgid "Select columns"
-msgstr ""
+msgstr "Pilih kolom"
 
 msgid "Download as JSON"
 msgstr "Download dalam bentuk JSON"
@@ -386,16 +386,16 @@ msgid "Download as CSV"
 msgstr "Download dalam bentuk CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "Unduh dengan filter saat ini"
 
 msgid "Save filter as..."
-msgstr ""
+msgstr "Simpan filter sebagai..."
 
 msgid "Download as..."
-msgstr ""
+msgstr "Unduh sebagai..."
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Baris per halaman"
 
 msgid "Active"
 msgstr "Aktif"
@@ -404,57 +404,59 @@ msgid "Completed"
 msgstr "Selesai"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Tidak bisa mendapatkan unit organisasi"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Program tidak ada"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "Program yang dipilih tidak valid untuk mendaftarkan unit"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
+msgstr "Membuat {{TET}} baru di {{program}} di {{orgUnit}}"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Simpan dan tambahkan yang lain"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Simpan dan keluar"
 
 msgid "Finish"
-msgstr ""
+msgstr "Selesai"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Beralih ke tampilan formulir"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Beralih ke tampilan baris"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "{{TET}} baru"
 
 msgid "Working Lists"
-msgstr ""
+msgstr "Daftar Kerja"
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
 msgstr ""
+"Program dengan programid {{programId}} bukan program pelacak. Pendaftaran "
+"hanya dapat dilakukan di program tracker."
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
+msgstr "Program yang dipilih tidak valid untuk unit pendaftaran yang dipilih"
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Pengguna yang ditetapkan"
 
 msgid "Relationships"
 msgstr "Hubungan"
 
 msgid "Assignee"
-msgstr ""
+msgstr "penerima tugas"
 
 msgid "Saving to"
-msgstr ""
+msgstr "Menyimpan ke"
 
 msgid "in"
 msgstr "dalam"
@@ -463,101 +465,109 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Ini bukan program acara atau metadata rusak. Lihat log untuk detailnya."
 
 msgid "This event"
-msgstr ""
+msgstr "Acara ini"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
+"Hubungan tipe {{relationshipTypeName}} dengan {{entityName}} sudah ada"
 
 msgid "New event"
 msgstr "Event baru"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "Hubungan acara baru"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "Menambahkan hubungan ke acara."
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "Kembali ke acara tanpa menyimpan hubungan"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
+"Meninggalkan halaman ini akan membuang pilihan yang Anda buat untuk hubungan"
+" baru"
 
 msgid "events added"
-msgstr ""
+msgstr "acara ditambahkan"
 
 msgid "No events added"
-msgstr ""
+msgstr "Tidak ada acara yang ditambahkan"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "Pilih unit pendaftaran dan program di atas untuk memulai"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "Pilih program untuk memulai pelaporan"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "Pilih unit pendaftaran untuk mulai melaporkan"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "Pilih opsi kategori untuk mulai melaporkan"
 
 msgid "You dont have access to create an event in the current selections"
-msgstr ""
+msgstr "Anda tidak memiliki akses untuk membuat acara di pilihan saat ini"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
+"Ada duplikat (tetapi ada beberapa kesalahan, lihat log untuk detailnya"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
+"Item dengan {{attributeName}} ini sudah terdaftar, tetapi Anda tidak "
+"memiliki akses ke item tersebut"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "Anda telah mendaftarkan {{attributeName}} ini"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
 msgstr ""
+"{{trackedEntityTypeName}} dengan {{attributeName}} ini sudah terdaftar"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "Tampilkan {{trackedEntityTypeName}} terdaftar"
 
 msgid "Registered person"
-msgstr ""
+msgstr "Orang yang terdaftar"
 
 msgid "Link"
-msgstr ""
+msgstr "Tautan"
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "Kesalahan metadata. lihat log untuk detailnya"
 
 msgid "Review duplicates"
-msgstr ""
+msgstr "Tinjau duplikat"
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "Buat {{trackedEntityTypeName}} dan tautkan"
 
 msgid "Possible duplicates found"
 msgstr "Kemungkinan duplikasi ditemukan"
 
 msgid "An error occured loading possible duplicates"
-msgstr ""
+msgstr "Terjadi kesalahan saat memuat kemungkinan duplikat"
 
 msgid "Hide"
 msgstr "Sembunyikan"
 
 msgid "Save as new {{tetName}}"
-msgstr ""
+msgstr "Simpan sebagai {{tetName}} baru"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "Beberapa program sedang difilter."
 
 msgid "Show all"
 msgstr "Tampilkan semua"
@@ -575,93 +585,95 @@ msgid "Review Duplicates"
 msgstr "Tinjau Duplikasi"
 
 msgid "Search results"
-msgstr ""
+msgstr "Hasil Pencarian"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "{{trackedEntityTypeName}} tidak ditemukan."
 
 msgid "{{teiCount}} results found for"
-msgstr ""
+msgstr "{{teiCount}} hasil ditemukan untuk"
 
 msgid "New search"
-msgstr ""
+msgstr "Pencarian baru"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Edit pencarian"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "Tautan ke {{trackedEntityType}} yang ada"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "Buat {{trackedEntityType}} baru"
 
 msgid "Register"
 msgstr "Daftar"
 
 msgid "You dont have access to edit this event"
-msgstr ""
+msgstr "Anda tidak memiliki akses untuk mengedit acara ini"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
+"Meninggalkan halaman ini akan membuang semua pilihan yang Anda buat untuk "
+"hubungan baru"
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "Tidak ada yang ditugaskan untuk acara ini"
 
 msgid "Assign"
 msgstr "Daftarkan"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "Acara ditugaskan ke {{name}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "Umpan balik"
 
 msgid "New {{typeName}}"
-msgstr ""
+msgstr "{{typeName}} baru"
 
 msgid "New"
 msgstr "Baru"
 
 msgid "Start again"
-msgstr ""
+msgstr "Mulai lagi"
 
 msgid "Find"
 msgstr "Cari"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "Unit pendaftaran yang dipilih"
 
 msgid "Start Again"
-msgstr ""
+msgstr "Mulai lagi"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "Apakah Anda yakin? Semua data yang belum disimpan akan hilang."
 
 msgid "Accept"
 msgstr "Terima"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "Mendaftarkan Unit Organisasi"
 
 msgid "Select"
 msgstr "Pilih"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "Program yang Dipilih"
 
 msgid "Select program"
 msgstr "Pilih program"
 
 msgid "No programs available."
-msgstr ""
+msgstr "Tidak ada program yang tersedia."
 
 msgid "You dont have access to delete this relationship"
-msgstr ""
+msgstr "Anda tidak memiliki akses untuk menghapus hubungan ini"
 
 msgid "You dont have access to create any relationships"
-msgstr ""
+msgstr "Anda tidak memiliki akses untuk membuat hubungan apa pun"
 
 msgid "Add relationship"
 msgstr "Tambahkan hubungan"
@@ -670,40 +682,40 @@ msgid "Selected program"
 msgstr "Program yang dipilih"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "Telusuri {{uniqueAttrName}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "Cari berdasarkan atribut"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "Isi setidaknya {{minAttributesRequired}} atribut untuk mencari"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "Untuk bekerja dengan program yang dipilih,"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "buka aplikasi Tracker Capture"
 
 msgid "Program not found"
-msgstr ""
+msgstr "Program tidak ditemukan"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "Program bukan program pelacak"
 
 msgid "Profile"
 msgstr "Profil"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "Terjadi kesalahan saat menyimpan acara"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "Tidak dapat menyimpan acara. Lihat log untuk detailnya"
 
 msgid "Organisation unit search failed. See log for details"
-msgstr ""
+msgstr "Pencarian unit organisasi gagal. Lihat log untuk detailnya"
 
 msgid "tracked entity instance"
-msgstr ""
+msgstr "contoh entitas yang dilacak"
 
 msgid "Set coordinate"
 msgstr "Tentukan koordinat"
@@ -712,31 +724,31 @@ msgid "Date"
 msgstr "Tanggal"
 
 msgid "Time"
-msgstr ""
+msgstr "Waktu"
 
 msgid "From date"
 msgstr "Dari tanggal"
 
 msgid "From time"
-msgstr ""
+msgstr "Dari waktu"
 
 msgid "To date"
 msgstr "Ke tanggal"
 
 msgid "To time"
-msgstr ""
+msgstr "Untuk waktu"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "kesalahan yang ditemui selama validasi lapangan"
 
 msgid "error"
-msgstr ""
+msgstr "kesalahan"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "Hapus poligon"
 
 msgid "Set area"
-msgstr ""
+msgstr "Setel luas"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -744,6 +756,11 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"Anda membuka versi lain dari Aplikasi Capture di domain yang sama. Saat ini,"
+" Aplikasi Capture hanya mendukung menjalankan satu versi secara bersamaan "
+"(dalam domain yang sama). Harap segarkan halaman ini jika Anda ingin "
+"menggunakan versi ini lagi, tetapi perlu diketahui bahwa ini akan menutup "
+"versi lain."
 
 msgid "Choose one or more dates..."
 msgstr "Pilih satu atau lebih tanggal"
@@ -759,4 +776,4 @@ msgstr ""
 "pribadi) tidak didukung. Lihat log untuk detail."
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "Mode kompatibilitas"
