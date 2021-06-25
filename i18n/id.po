@@ -1,18 +1,19 @@
 # 
 # Translators:
+# Viktor Varland <viktor@dhis2.org>, 2019
 # phil_dhis2, 2019
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2020
 # Carwoto Sa'an <carwoto@gmail.com>, 2020
 # Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
+# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-06-16T15:06:59.453Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021\n"
+"Last-Translator: Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -152,7 +153,7 @@ msgid "Warnings found"
 msgstr "Peringatan ditemukan"
 
 msgid "Abort"
-msgstr "Menggugurkan"
+msgstr "Batalkan"
 
 msgid "Back to form"
 msgstr "Kembali ke formulir"
@@ -215,10 +216,10 @@ msgid "To"
 msgstr "Untuk"
 
 msgid "Max"
-msgstr "Maks"
+msgstr "Maksimal"
 
 msgid "Min"
-msgstr "Min"
+msgstr "Minimal"
 
 msgid "greater than or equal to"
 msgstr "lebih dari atau sama dengan"
@@ -305,7 +306,7 @@ msgid "Comments"
 msgstr "Komentar"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr "Silakan tambahkan atau batalkan komentar sebelum menyimpan acara"
+msgstr "Silakan tambahkan atau batalkan komentar sebelum menyimpan even"
 
 msgid "No write access"
 msgstr "Tidak ada akses tulis"
@@ -314,22 +315,22 @@ msgid "Save"
 msgstr "Simpan"
 
 msgid "Show all events"
-msgstr "Tampilkan semua acara"
+msgstr "Tampilkan semua even"
 
 msgid "Edit event"
-msgstr "Sunting acara"
+msgstr "Sunting even"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Acara tidak dapat dimuat. Apakah Anda yakin itu ada?"
+msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
 
 msgid "Event could not be loaded"
-msgstr "Acara tidak dapat dimuat"
+msgstr "Even tidak dapat dimuat"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Unit organisasi tidak dapat dimuat"
 
 msgid "View event info"
-msgstr "Lihat info acara"
+msgstr "Lihat info even"
 
 msgid "Delete event"
 msgstr "Hapus even"
@@ -405,10 +406,11 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Ini bukan program acara atau metadata rusak. Lihat log untuk detailnya."
+"Ini bukanlah even program atau metadata telah rusak. Lihat log untuk "
+"detailnya."
 
 msgid "This event"
-msgstr "Acara ini"
+msgstr "Even ini"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
@@ -420,13 +422,13 @@ msgid "New event"
 msgstr "Event baru"
 
 msgid "New event relationship"
-msgstr "Hubungan acara baru"
+msgstr "Hubungan even baru"
 
 msgid "Adding relationship to event."
-msgstr "Menambahkan hubungan ke acara."
+msgstr "Menambahkan hubungan ke even"
 
 msgid "Go back to event without saving relationship"
-msgstr "Kembali ke acara tanpa menyimpan hubungan"
+msgstr "Kembali ke even tanpa menyimpan hubungan"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -436,10 +438,10 @@ msgstr ""
 " baru"
 
 msgid "events added"
-msgstr "acara ditambahkan"
+msgstr "Even ditambahkan"
 
 msgid "No events added"
-msgstr "Tidak ada acara yang ditambahkan"
+msgstr "Tidak ada even yang ditambahkan"
 
 msgid "Select a registering unit and program above to get started"
 msgstr "Pilih unit pendaftaran dan program di atas untuk memulai"
@@ -454,7 +456,7 @@ msgid "Select a category option to start reporting"
 msgstr "Pilih opsi kategori untuk mulai melaporkan"
 
 msgid "You dont have access to create an event in the current selections"
-msgstr "Anda tidak memiliki akses untuk membuat acara di pilihan saat ini"
+msgstr "Anda tidak memiliki akses untuk membuat even di pilihan saat ini"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -498,7 +500,7 @@ msgid "Possible duplicates found"
 msgstr "Kemungkinan duplikasi ditemukan"
 
 msgid "An error occured loading possible duplicates"
-msgstr "Terjadi kesalahan saat memuat kemungkinan duplikat"
+msgstr "Terjadi kesalahan, kemungkinan memuat duplikat"
 
 msgid "Hide"
 msgstr "Sembunyikan"
@@ -546,7 +548,7 @@ msgid "Register"
 msgstr "Daftar"
 
 msgid "You dont have access to edit this event"
-msgstr "Anda tidak memiliki akses untuk mengedit acara ini"
+msgstr "Anda tidak memiliki akses untuk mengedit even ini"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -622,10 +624,10 @@ msgid "Profile"
 msgstr "Profil"
 
 msgid "Error saving event"
-msgstr "Terjadi kesalahan saat menyimpan acara"
+msgstr "Terjadi kesalahan saat menyimpan even"
 
 msgid "Could not save event. See log for details"
-msgstr "Tidak dapat menyimpan acara. Lihat log untuk detailnya"
+msgstr "Tidak dapat menyimpan even. Lihat log untuk detailnya"
 
 msgid "Organisation unit search failed. See log for details"
 msgstr "Pencarian unit organisasi gagal. Lihat log untuk detailnya"
@@ -652,7 +654,7 @@ msgid "To date"
 msgstr "Ke tanggal"
 
 msgid "To time"
-msgstr "Untuk waktu"
+msgstr "Ke waktu"
 
 msgid "error encountered during field validation"
 msgstr "kesalahan yang ditemui selama validasi lapangan"
@@ -674,7 +676,7 @@ msgid ""
 msgstr ""
 "Anda membuka versi lain dari Aplikasi Capture di domain yang sama. Saat ini,"
 " Aplikasi Capture hanya mendukung menjalankan satu versi secara bersamaan "
-"(dalam domain yang sama). Harap segarkan halaman ini jika Anda ingin "
+"(dalam domain yang sama). Harap refresh halaman ini jika Anda ingin "
 "menggunakan versi ini lagi, tetapi perlu diketahui bahwa ini akan menutup "
 "versi lain."
 
