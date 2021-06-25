@@ -45,7 +45,7 @@ msgid ""
 msgstr ""
 "Anda membuka versi lain dari Aplikasi Capture di domain yang sama. Saat ini,"
 " Aplikasi Capture hanya mendukung untuk menjalankan satu versi secara "
-"bersamaan (dalam domain yang sama). Harap segarkan halaman ini jika Anda "
+"bersamaan (dalam domain yang sama). Harap refresh halaman ini jika Anda "
 "ingin menggunakan versi ini lagi, tetapi perlu diketahui bahwa ini akan "
 "menutup versi lain."
 
@@ -144,7 +144,7 @@ msgstr "Perubahan belum disimpan"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
-"Meninggalkan halaman ini akan membuang perubahan yang Anda buat pada acara "
+"Meninggalkan halaman ini akan membuang perubahan yang Anda buat pada even "
 "ini."
 
 msgid "Yes, discard"
@@ -178,7 +178,7 @@ msgid "Warnings found"
 msgstr "Peringatan ditemukan"
 
 msgid "Abort"
-msgstr "Membatalkan"
+msgstr "Batalkan"
 
 msgid "Back to form"
 msgstr "Kembali ke formulir"
@@ -205,7 +205,7 @@ msgid "Sort"
 msgstr "Urutkan"
 
 msgid "No events to display"
-msgstr "Tidak ada acara untuk ditampilkan"
+msgstr "Tidak ada even untuk ditampilkan"
 
 msgid "Data for offline list not present"
 msgstr "Data untuk daftar offline tidak ada"
@@ -400,7 +400,7 @@ msgid "Write comment"
 msgstr "Tulis komentar"
 
 msgid "Complete event"
-msgstr "Acara lengkap"
+msgstr "Even lengkap"
 
 msgid "Basic info"
 msgstr "Info dasar"
@@ -436,7 +436,7 @@ msgid "Organisation unit could not be loaded"
 msgstr "Unit organisasi tidak dapat dimuat"
 
 msgid "View event info"
-msgstr "Lihat info acara"
+msgstr "Lihat info even"
 
 msgid "Delete event"
 msgstr "Hapus even"
@@ -523,7 +523,7 @@ msgid "an error occurred loading working lists"
 msgstr "terjadi kesalahan saat memuat daftar kerja"
 
 msgid "Registered events"
-msgstr "Acara terdaftar"
+msgstr "Even terdaftar"
 
 msgid "Active"
 msgstr "Aktif"
@@ -736,13 +736,13 @@ msgstr ""
 "hubungan baru"
 
 msgid "No one is assigned to this event"
-msgstr "Tidak ada yang ditugaskan untuk acara ini"
+msgstr "Tidak ada yang ditugaskan untuk even ini"
 
 msgid "Assign"
 msgstr "Daftarkan"
 
 msgid "Event assigned to {{name}}"
-msgstr "Acara ditugaskan ke {{name}}"
+msgstr "Even ditugaskan ke {{name}}"
 
 msgid "Feedbacks"
 msgstr "Umpan balik"
@@ -847,7 +847,7 @@ msgid "To time"
 msgstr "Ke waktu"
 
 msgid "error encountered during field validation"
-msgstr "kesalahan yang ditemui selama validasi lapangan"
+msgstr "kesalahan yang ditemui selama validasi bidang"
 
 msgid "error"
 msgstr "kesalahan"
