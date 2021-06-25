@@ -8,7 +8,7 @@ import type { apiDataElement } from 'capture-core/metaDataStoreLoaders/programs/
 import { convertValue as convertClientToList } from '../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../converters/serverToClient';
 import { statusTypes, dataElementTypes, translatedStatusTypes } from '../../../../metaData';
-import { getEventDataWithSubValue } from './getEventDataWithSubValue';
+import { getSubValues } from './getEventDataWithSubValue';
 
 export const DEFAULT_NUMBER_OF_ROW = 5;
 
@@ -66,47 +66,41 @@ function convertStatusForView(event: ApiTEIEvent) {
 export const useComputeDataFromEvent =
     (data: Array<apiDataElement>, events: Array<ApiTEIEvent>, headerColumns: Array<{id: string}>) => {
         const [dataSource, setDataSource] = React.useState([]);
+
         const computeData = async () => {
-            const result = await events.reduce(async (acc, currentEvent) => {
+            const eventsData = [];
+            // $FlowFixMe
+            for await (const event of events) {
+                const { event: eventId, dataValues } = event;
                 const predefinedFields = [
                     { id: 'status', type: dataElementTypes.UNKNOWN, resolveValue: convertStatusForView },
                     { id: 'eventDate', type: dataElementTypes.DATE },
                     { id: 'orgUnitName', type: dataElementTypes.TEXT }].map(field => ({
                     ...field,
-                    value: formatValueForView(getValueByKeyFromEvent(currentEvent, field), field.type),
+                    value: formatValueForView(getValueByKeyFromEvent(event, field), field.type),
                 }));
-
-                const otherFields = await Promise.all(currentEvent.dataValues.map(async (item) => {
-                    const dataInStage = data.find(el => el.id === item.dataElement);
-
-                    if (dataInStage) {
+                const allFields = await Promise.all(headerColumns.map(async (col) => {
+                    const prefinedField = predefinedFields.find(f => f.id === col.id);
+                    if (prefinedField) { return prefinedField; }
+                    const { dataElement: metaElementId, value } = dataValues.find(i => i.dataElement === col.id) ?? {};
+                    const { valueType } = data.find(el => el.id === metaElementId) ?? {};
+                    if (valueType) {
                         // $FlowFixMe
-                        const subValue = await getEventDataWithSubValue(dataInStage, item.value);
+                        const subValue = await getSubValues(
+                            eventId, valueType, { [metaElementId]: value },
+                        );
                         return {
-                            id: item.dataElement,
-                            type: dataInStage.valueType,
-                            value: formatValueForView(subValue ?? item.value, dataInStage.valueType),
+                            id: metaElementId,
+                            type: valueType,
+                            value: formatValueForView(subValue[metaElementId], valueType),
                         };
                     }
-                    return {};
+                    return { id: col.id, value: undefined };
                 }));
 
-                const allFields = [...predefinedFields, ...otherFields];
-
-                // $FlowFixMe
-                const row = headerColumns.map((col) => {
-                    const fields = allFields.find(f => f.id === col.id);
-                    if (fields) {
-                        return { ...fields };
-                    }
-                    return { id: col.id };
-                });
-
-                (await acc).push(row);
-                return acc;
-            }, []);
-
-            setDataSource(result);
+                eventsData.push(allFields);
+            }
+            setDataSource(eventsData);
         };
 
         return { computeData, dataSource };
