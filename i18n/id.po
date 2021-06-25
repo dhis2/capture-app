@@ -1,17 +1,18 @@
 # 
 # Translators:
+# Viktor Varland <viktor@dhis2.org>, 2019
 # phil_dhis2, 2019
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2020
-# Viktor Varland <viktor@dhis2.org>, 2020
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2020
 # Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
+# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T12:27:04.744Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021\n"
+"Last-Translator: Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,18 +30,18 @@ msgid "Cancel"
 msgstr "batal"
 
 msgid "Discard event?"
-msgstr "Hapus acara?"
+msgstr "Hapus even?"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
-"Meninggalkan halaman ini akan membuang perubahan yang Anda buat pada acara "
+"Meninggalkan halaman ini akan membuang perubahan yang Anda buat pada even "
 "ini."
 
 msgid "Discard"
 msgstr "Buang"
 
 msgid "Back to event"
-msgstr "Kembali ke acara"
+msgstr "Kembali ke even"
 
 msgid "Add comment"
 msgstr "Tambahkan komentar"
@@ -67,7 +68,7 @@ msgid "Warnings found"
 msgstr "Peringatan ditemukan"
 
 msgid "Abort"
-msgstr "Menggugurkan"
+msgstr "Batalkan"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr "Data Anda sedang diunggah. Mohon tunggu sampai pesan ini hilang"
@@ -85,7 +86,7 @@ msgid "Sort"
 msgstr "Urutkan"
 
 msgid "No events to display"
-msgstr "Tidak ada acara untuk ditampilkan"
+msgstr "Tidak ada even untuk ditampilkan"
 
 msgid "Data for offline list not present"
 msgstr "Data untuk daftar offline tidak ada"
@@ -118,10 +119,10 @@ msgid "To"
 msgstr "Untuk"
 
 msgid "Max"
-msgstr "Maks"
+msgstr "Maksimal"
 
 msgid "Min"
-msgstr "Min"
+msgstr "Minimal"
 
 msgid "greater than or equal to"
 msgstr "lebih dari atau sama dengan"
@@ -214,16 +215,16 @@ msgid "Please add or cancel comment before saving the event"
 msgstr "Silakan tambahkan atau batalkan komentar sebelum menyimpan acara"
 
 msgid "Show all events"
-msgstr "Tampilkan semua acara"
+msgstr "Tampilkan semua even"
 
 msgid "Edit event"
 msgstr "Sunting acara"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Acara tidak dapat dimuat. Apakah Anda yakin itu ada?"
+msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
 
 msgid "Event could not be loaded"
-msgstr "Acara tidak dapat dimuat"
+msgstr "Even tidak dapat dimuat"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Unit organisasi tidak dapat dimuat"
@@ -262,7 +263,8 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Ini bukan program acara atau metadata rusak. Lihat log untuk detailnya."
+"Ini bukanlah even program atau metadata telah rusak. Lihat log untuk "
+"detailnya."
 
 msgid "A value is required"
 msgstr "Nilai diperlukan"
@@ -277,10 +279,10 @@ msgid "Finish"
 msgstr "Selesai"
 
 msgid "events added"
-msgstr "acara ditambahkan"
+msgstr "Even ditambahkan"
 
 msgid "No events added"
-msgstr "Tidak ada acara yang ditambahkan"
+msgstr "Tidak ada even yang ditambahkan"
 
 msgid "Switch to form view"
 msgstr "Beralih ke tampilan formulir"
@@ -346,10 +348,10 @@ msgid "An error has occured. See log for details"
 msgstr "Terjadi kesalahan. Lihat log untuk detailnya"
 
 msgid "Error saving event"
-msgstr "Terjadi kesalahan saat menyimpan acara"
+msgstr "Terjadi kesalahan saat menyimpan even"
 
 msgid "Could not save event. See log for details"
-msgstr "Tidak dapat menyimpan acara. Lihat log untuk detailnya"
+msgstr "Tidak dapat menyimpan even. Lihat log untuk detailnya"
 
 msgid "Set coordinate"
 msgstr "Tentukan koordinat"
