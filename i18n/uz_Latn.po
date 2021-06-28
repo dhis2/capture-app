@@ -33,7 +33,7 @@ msgstr ""
 "oʼzgartirishlar saqlanmaydi."
 
 msgid "Discard"
-msgstr ""
+msgstr "Bekor qilish"
 
 msgid "Back to event"
 msgstr ""
