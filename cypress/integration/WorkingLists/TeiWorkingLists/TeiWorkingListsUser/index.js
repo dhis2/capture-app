@@ -50,13 +50,14 @@ Then('the list should display teis with a completed enrollment', () => {
     const names = [
         'Filona Ryder',
         'Gertrude Fjordsen',
+        'Frank Fjordsen',
         'Emma Johnson',
         'Alan Thompson',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
         .find('tr')
-        .should('have.length', 5)
+        .should('have.length', 6)
         .each(($teiRow, index) => {
             if (index) {
                 cy.wrap($teiRow)
@@ -125,7 +126,6 @@ Then('the assignee filter button should show that unassigned filter is in effect
 
 Then('the list should display teis with an active enrollment and unassinged events', () => {
     const names = [
-        'Frank',
         'Maria',
         'Joe',
         'Anthony',
@@ -140,6 +140,7 @@ Then('the list should display teis with an active enrollment and unassinged even
         'Wayne',
         'Johnny',
         'Donna',
+        'Sharon',
     ];
 
     cy.get('[data-test="tei-working-lists"]')
