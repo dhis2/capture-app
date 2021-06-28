@@ -67,7 +67,7 @@ const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: conten
     const error = type === widgetType.ERROR;
     return (
         <div
-            data-test={'widget-content'}
+            data-test="widget-content"
             className={classes.widgetWrapper}
         >
             <ul className={classes.unorderedList}>

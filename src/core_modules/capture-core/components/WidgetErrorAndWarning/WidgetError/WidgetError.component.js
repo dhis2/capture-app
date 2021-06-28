@@ -17,7 +17,7 @@ export const WidgetError = ({ error, classes }: Props) => {
     return (
         <div
             className={classes}
-            data-test={'error-widget'}
+            data-test="error-widget"
         >
             <Widget
                 header={<WidgetErrorHeader />}
