@@ -58,7 +58,7 @@ export const EnrollmentPageDefaultPlain = ({
                 {!hideWidgets.indicator && (
                     <WidgetIndicator
                         indicators={widgetEffects?.indicators}
-                        emptyText={i18n.t('No indicator for this enrollment yet')}
+                        emptyText={i18n.t('No indicator output for this enrollment yet')}
                     />
                 )}
                 {!hideWidgets.feedback && (
