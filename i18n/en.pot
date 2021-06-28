@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-11T09:56:57.081Z\n"
-"PO-Revision-Date: 2021-06-11T09:56:57.081Z\n"
+"POT-Creation-Date: 2021-06-24T07:52:28.588Z\n"
+"PO-Revision-Date: 2021-06-24T07:52:28.588Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -585,6 +585,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
@@ -944,9 +947,6 @@ msgid "Error"
 msgstr ""
 
 msgid "Warning"
-msgstr ""
-
-msgid "No feedback for this enrollment yet"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"

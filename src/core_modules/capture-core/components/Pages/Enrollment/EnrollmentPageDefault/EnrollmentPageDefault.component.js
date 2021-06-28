@@ -2,9 +2,10 @@
 import React, { type ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
-import { WidgetProfile } from '../../../WidgetProfile/WidgetProfile.component';
+import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetFeedback } from '../../../WidgetFeedback';
@@ -41,7 +42,7 @@ export const EnrollmentPageDefaultPlain = ({
     enrollmentId,
     onDelete,
     widgetEffects,
-    hideFeedbackWidget,
+    hideWidgets,
     classes,
 }: PlainProps) => (
     <>
@@ -53,10 +54,12 @@ export const EnrollmentPageDefaultPlain = ({
             <div className={classes.rightColumn}>
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
-                <WidgetFeedback
-                    feedback={widgetEffects?.feedbacks}
-                    hideWidget={hideFeedbackWidget}
-                />
+                {!hideWidgets.feedback && (
+                    <WidgetFeedback
+                        feedback={widgetEffects?.feedbacks}
+                        emptyText={i18n.t('No feedback for this enrollment yet')}
+                    />
+                )}
                 <WidgetProfile teiId={teiId} programId={program.id} />
                 <WidgetEnrollment
                     teiId={teiId}
