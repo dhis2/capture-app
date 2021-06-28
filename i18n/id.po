@@ -406,7 +406,7 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Ini bukanlah even program atau metadata telah rusak. Lihat log untuk "
+"Ini bukanlah event program atau metadata yang rusak. Lihat log untuk "
 "detailnya."
 
 msgid "This event"

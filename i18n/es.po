@@ -5,13 +5,14 @@
 # phil_dhis2, 2019
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
 # Alison Andrade <aandrade@ippfwhr.org>, 2021
+# drprabhjot, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-06-16T15:06:59.453Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Alison Andrade <aandrade@ippfwhr.org>, 2021\n"
+"Last-Translator: drprabhjot, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,7 +84,7 @@ msgid "Please provide valid coordinates"
 msgstr "Proporcione coordenadas válidas"
 
 msgid "Please provide a valid username"
-msgstr ""
+msgstr "Pro favor proporcione un nombre de usuario válido"
 
 msgid "This value already exists"
 msgstr "Este valor ya existe"
@@ -142,7 +143,7 @@ msgid "Warnings"
 msgstr "Advertencias"
 
 msgid "search group result could not be retrieved"
-msgstr ""
+msgstr "no se pudo recuperar el resultado del grupo de búsqueda"
 
 msgid "Complete"
 msgstr "Completo"
@@ -202,10 +203,10 @@ msgid "to"
 msgstr "a"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "después o igual a"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "antes o igual a"
 
 msgid "From"
 msgstr "De"
@@ -328,7 +329,7 @@ msgid "Organisation unit could not be loaded"
 msgstr "No se pudo cargar la unidad organizativa"
 
 msgid "View event info"
-msgstr ""
+msgstr "Ver información del evento"
 
 msgid "Delete event"
 msgstr "Eliminar evento"
@@ -355,10 +356,10 @@ msgid "Program doesn't exist"
 msgstr "El programa no existe"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "El programa seleccionado no es válido para registrar la unidad"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
+msgstr "Creando un nuevo {{TET}} en {{program}} en {{orgUnit}}"
 
 msgid "Save and add another"
 msgstr "Guardar y agregar otro"
@@ -376,15 +377,17 @@ msgid "Switch to row view"
 msgstr "Cambiar a la vista de filas"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "Nuevo {{TET}}"
 
 msgid "Working Lists"
-msgstr ""
+msgstr "Listas de trabajo"
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
 msgstr ""
+"El programa con programid {{programId}} no es un programa del rastreador. "
+"Las inscripciones solo se pueden realizar en programas del rastreador.."
 
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
@@ -442,19 +445,19 @@ msgid "No events added"
 msgstr "No se agregaron eventos"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "Seleccione una unidad de registro y un programa arriba para empezar"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "Seleccione un programa para empezar a informar"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "Seleccione una unidad de registro para empezar a informar"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "Seleccione una opción de categoría para empezar a informar"
 
 msgid "You dont have access to create an event in the current selections"
-msgstr ""
+msgstr "No tiene acceso para crear un evento en las selecciones actuales"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -490,22 +493,22 @@ msgid "Metadata error. see log for details"
 msgstr "Error de metadatos. ver registro para más detalles"
 
 msgid "Review Duplicates"
-msgstr ""
+msgstr "Revisar duplicados"
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "Crear {{trackedEntityTypeName}} y enlazar"
 
 msgid "Possible duplicates found"
 msgstr "Posibles duplicados encontrados"
 
 msgid "An error occured loading possible duplicates"
-msgstr ""
+msgstr "Se ha producido un error al cargar posibles duplicados"
 
 msgid "Hide"
 msgstr "Ocultar"
 
 msgid "Save as new {{tetName}}"
-msgstr ""
+msgstr "Guardar como nuevo {{tetName}}"
 
 msgid "Some programs are being filtered."
 msgstr "Se están filtrando algunos programas."
@@ -529,7 +532,7 @@ msgid "No {{trackedEntityTypeName}} found."
 msgstr "No se encontró {{trackedEntityTypeName}}."
 
 msgid "{{teiCount}} results found for"
-msgstr ""
+msgstr "Se encontraron {{teiCount}} resultados para"
 
 msgid "New search"
 msgstr "Nueva búsqueda"
@@ -560,13 +563,13 @@ msgid "Feedbacks"
 msgstr "Retroalimentaciones"
 
 msgid "New {{typeName}}"
-msgstr ""
+msgstr "Nuevo {{typeName}}"
 
 msgid "New"
 msgstr "Nuevo"
 
 msgid "Start again"
-msgstr ""
+msgstr "Empieza de nuevo"
 
 msgid "Find"
 msgstr "Encontrar"
@@ -584,7 +587,7 @@ msgid "Select"
 msgstr "Seleccionar"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "Programa seleccionado"
 
 msgid "Select program"
 msgstr "Seleccionar programa"
@@ -627,9 +630,12 @@ msgstr "Error al guardar el evento"
 
 msgid "Could not save event. See log for details"
 msgstr ""
+"No se pudo guardar el evento. Ver el registro de log para más detalles"
 
 msgid "Organisation unit search failed. See log for details"
 msgstr ""
+"Error en la búsqueda de la unidad organizativa. Ver registro de log para más"
+" detalles"
 
 msgid "tracked entity instance"
 msgstr "instancia de entidad rastreada"
