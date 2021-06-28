@@ -1,10 +1,10 @@
 // @flow
-export type rule = {|
+export type Rule = {|
     id: string,
     message: string,
 |}
 
 export type Props = {|
-    error?: Array<rule> | Array<string>,
+    error?: Array<Rule> | Array<string>,
     ...CssClasses
 |}

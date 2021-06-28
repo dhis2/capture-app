@@ -71,7 +71,7 @@ const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: conten
             className={classes.widgetWrapper}
         >
             <ul className={classes.unorderedList}>
-                {widgetData && widgetData.map((rule, index) => {
+                {widgetData?.map((rule, index) => {
                     if (typeof rule === 'string') {
                         return (
                             <RenderStringItem
