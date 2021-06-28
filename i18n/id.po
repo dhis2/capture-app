@@ -6,13 +6,14 @@
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
 # Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
+# Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-05-18T12:46:51.099Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021\n"
+"Last-Translator: Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,7 +116,7 @@ msgstr "Perubahan yang belum disimpan"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
-"Meninggalkan halaman ini akan membuang perubahan yang Anda buat pada acara "
+"Meninggalkan halaman ini akan membuang perubahan yang Anda buat pada even "
 "ini."
 
 msgid "Yes, discard"
@@ -149,7 +150,7 @@ msgid "Warnings found"
 msgstr "Peringatan ditemukan"
 
 msgid "Abort"
-msgstr "Menggugurkan"
+msgstr "Batalkan"
 
 msgid "Back to form"
 msgstr "Kembali ke formulir"
@@ -176,7 +177,7 @@ msgid "Sort"
 msgstr "Urutkan"
 
 msgid "No events to display"
-msgstr "Tidak ada acara untuk ditampilkan"
+msgstr "Tidak ada even untuk ditampilkan"
 
 msgid "Data for offline list not present"
 msgstr "Data untuk daftar offline tidak ada"
@@ -236,10 +237,10 @@ msgid "Custom range"
 msgstr "Rentang khusus"
 
 msgid "Max"
-msgstr "Maks"
+msgstr "Maksimal"
 
 msgid "Min"
-msgstr "Min"
+msgstr "Minimal"
 
 msgid "Contains text"
 msgstr "Berisi teks"
@@ -266,7 +267,7 @@ msgid "selected"
 msgstr "Terpilih"
 
 msgid "Delete"
-msgstr "hapus"
+msgstr "Hapus"
 
 msgid "Select file"
 msgstr "Pilih file"
@@ -317,7 +318,7 @@ msgid "Write comment"
 msgstr "Tulis komentar"
 
 msgid "Complete event"
-msgstr "Acara lengkap"
+msgstr "Even lengkap"
 
 msgid "Comments"
 msgstr "Komentar"
@@ -329,7 +330,7 @@ msgid "Status"
 msgstr "Status"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr "Silakan tambahkan atau batalkan komentar sebelum menyimpan acara"
+msgstr "Silakan tambahkan atau batalkan komentar sebelum menyimpan even"
 
 msgid "No write access"
 msgstr "Tidak ada akses tulis"
@@ -338,22 +339,22 @@ msgid "Save"
 msgstr "Simpan"
 
 msgid "Show all events"
-msgstr "Tampilkan semua acara"
+msgstr "Tampilkan semua even"
 
 msgid "Edit event"
-msgstr "Sunting acara"
+msgstr "Sunting even"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Acara tidak dapat dimuat. Apakah Anda yakin itu ada?"
+msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
 
 msgid "Event could not be loaded"
-msgstr "Acara tidak dapat dimuat"
+msgstr "Even tidak dapat dimuat"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Unit organisasi tidak dapat dimuat"
 
 msgid "View event info"
-msgstr "Lihat info acara"
+msgstr "Lihat info even"
 
 msgid "Delete event"
 msgstr "Hapus even"
@@ -440,7 +441,7 @@ msgid "an error occurred loading working lists"
 msgstr "terjadi kesalahan saat memuat daftar kerja"
 
 msgid "Registered events"
-msgstr "Acara terdaftar"
+msgstr "Even terdaftar"
 
 msgid "Active"
 msgstr "Aktif"
@@ -510,10 +511,11 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Ini bukan program acara atau metadata rusak. Lihat log untuk detailnya."
+"Ini bukanlah event program atau metadata yang rusak. Lihat log untuk "
+"detailnya."
 
 msgid "This event"
-msgstr "Acara ini"
+msgstr "Even ini"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
@@ -528,13 +530,13 @@ msgid "New event"
 msgstr "Event baru"
 
 msgid "New event relationship"
-msgstr "Hubungan acara baru"
+msgstr "Hubungan even baru"
 
 msgid "Adding relationship to event."
-msgstr "Menambahkan hubungan ke acara."
+msgstr "Menambahkan hubungan ke even."
 
 msgid "Go back to event without saving relationship"
-msgstr "Kembali ke acara tanpa menyimpan hubungan"
+msgstr "Kembali ke even tanpa menyimpan hubungan"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -544,10 +546,10 @@ msgstr ""
 " baru"
 
 msgid "events added"
-msgstr "acara ditambahkan"
+msgstr "Even ditambahkan"
 
 msgid "No events added"
-msgstr "Tidak ada acara yang ditambahkan"
+msgstr "Tidak ada even yang ditambahkan"
 
 msgid "Select a registering unit and program above to get started"
 msgstr "Pilih unit pendaftaran dan program di atas untuk memulai"
@@ -562,7 +564,7 @@ msgid "Select a category option to start reporting"
 msgstr "Pilih opsi kategori untuk mulai melaporkan"
 
 msgid "You dont have access to create an event in the current selections"
-msgstr "Anda tidak memiliki akses untuk membuat acara di pilihan saat ini"
+msgstr "Anda tidak memiliki akses untuk membuat even di pilihan saat ini"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
@@ -606,7 +608,7 @@ msgid "Possible duplicates found"
 msgstr "Kemungkinan duplikasi ditemukan"
 
 msgid "An error occured loading possible duplicates"
-msgstr "Terjadi kesalahan saat memuat kemungkinan duplikat"
+msgstr "Terjadi kesalahan, kemungkinan memuat duplikat"
 
 msgid "Hide"
 msgstr "Sembunyikan"
@@ -657,13 +659,13 @@ msgid "Register"
 msgstr "Daftar"
 
 msgid "You dont have access to edit this event"
-msgstr "Anda tidak memiliki akses untuk mengedit acara ini"
+msgstr "Anda tidak memiliki akses untuk mengedit even ini"
 
 msgid "Event details"
-msgstr "Detail acara"
+msgstr "Detail even"
 
 msgid "Event completed"
-msgstr "Acara selesai"
+msgstr "Even selesai"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -673,13 +675,13 @@ msgstr ""
 "hubungan baru"
 
 msgid "No one is assigned to this event"
-msgstr "Tidak ada yang ditugaskan untuk acara ini"
+msgstr "Tidak ada yang ditugaskan untuk even ini"
 
 msgid "Assign"
 msgstr "Daftarkan"
 
 msgid "Event assigned to {{name}}"
-msgstr "Acara ditugaskan ke {{name}}"
+msgstr "Even ditugaskan ke {{name}}"
 
 msgid "Feedbacks"
 msgstr "Umpan balik"
@@ -775,13 +777,13 @@ msgid "Profile"
 msgstr "Profil"
 
 msgid "Error saving event"
-msgstr "Terjadi kesalahan saat menyimpan acara"
+msgstr "Terjadi kesalahan saat menyimpan even"
 
 msgid "Could not save event. See log for details"
-msgstr "Tidak dapat menyimpan acara. Lihat log untuk detailnya"
+msgstr "Tidak dapat menyimpan even. Lihat log untuk detailnya"
 
 msgid "Could not delete event"
-msgstr "Tidak dapat menghapus acara"
+msgstr "Tidak dapat menghapus even"
 
 msgid "Could not save working list"
 msgstr "Tidak dapat menyimpan daftar kerja"
@@ -823,10 +825,10 @@ msgid "To date"
 msgstr "Ke tanggal"
 
 msgid "To time"
-msgstr "Untuk waktu"
+msgstr "Ke waktu"
 
 msgid "error encountered during field validation"
-msgstr "kesalahan yang ditemui selama validasi lapangan"
+msgstr "kesalahan yang ditemui selama validasi bidang"
 
 msgid "error"
 msgstr "kesalahan"

@@ -417,7 +417,7 @@ msgstr ""
 "Haqiqatdan ham '{{templateName}}' koʼrinishini oʼchirib tashlamoqchimisiz?"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Tasdiqlang"
 
 msgid "Save As view"
 msgstr "Ushbu koʼrinish sifatida saqlash"
