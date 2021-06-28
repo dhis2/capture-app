@@ -22,7 +22,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
-msgstr "Pilih satu atau lebih tanggal"
+msgstr "Pilih satu atau lebih pada tanggal"
 
 msgid "Choose a date..."
 msgstr "Pilih tanggal"
@@ -161,7 +161,7 @@ msgid "Search for user"
 msgstr "Cari pengguna"
 
 msgid "Complete event"
-msgstr "Acara lengkap"
+msgstr "Even lengkap"
 
 msgid "Basic info"
 msgstr "Info dasar"
@@ -422,10 +422,10 @@ msgid "Custom range"
 msgstr "Rentang khusus"
 
 msgid "Max"
-msgstr "Maks"
+msgstr "Maksimal"
 
 msgid "Min"
-msgstr "Min"
+msgstr "Minimal"
 
 msgid "Contains text"
 msgstr "Berisi teks"
