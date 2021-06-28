@@ -8,9 +8,12 @@ import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { Props } from './StageEventHeader.types';
 
 const getStyles = () => ({
-
+    wrapper: {
+        display: 'flex',
+        padding: `${spacersNum.dp12}px 17px`,
+    },
     icon: {
-        paddingRight: spacersNum.dp8,
+        paddingRight: 7,
     },
     title: {
         color: colors.grey900,
@@ -20,15 +23,15 @@ const getStyles = () => ({
 });
 
 const StageEventHeaderPlain = ({ icon, title, events, classes }) => (<>
-    <div data-test="stage-event-header" >
+    <div data-test="stage-event-header" className={classes.wrapper}>
         <div className={classes.icon}>{
             icon && (
                 <div className={classes.icon}>
                     <NonBundledDhis2Icon
                         name={icon.name}
                         color={icon.color}
-                        width={30}
-                        height={30}
+                        width={20}
+                        height={20}
                         cornerRadius={2}
                     />
                 </div>
