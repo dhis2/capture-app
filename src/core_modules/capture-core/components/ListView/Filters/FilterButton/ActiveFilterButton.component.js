@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { lighten } from '@material-ui/core/styles/colorManipulator';
 import createSvgIcon from '@material-ui/icons/utils/createSvgIcon';
 import Tooltip from '@material-ui/core/Tooltip';
 import i18n from '@dhis2/d2-i18n';
@@ -17,10 +16,10 @@ const ClearIcon = createSvgIcon(
 
 const getStyles = (theme: Theme) => ({
     button: {
-        backgroundColor: `${lighten(theme.palette.primary.light, 0.7)}!important`,
+        backgroundColor: 'rgb(184, 215, 243) !important',
     },
     hovered: {
-        backgroundColor: `${lighten(theme.palette.primary.light, 0.4)} !important`,
+        backgroundColor: 'rgb(114, 176, 231) !important',
     },
     clearIcon: {
         color: theme.palette.text.secondary,

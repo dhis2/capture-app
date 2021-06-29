@@ -16,7 +16,7 @@ const getStyles = (theme: Theme) => ({
         paddingLeft: theme.typography.pxToRem(5),
     },
     inactiveFilterButton: {
-        backgroundColor: theme.palette.grey[100],
+        backgroundColor: '#f5f5f5',
     },
     inactiveFilterButtonLabel: {
         textTransform: 'none',

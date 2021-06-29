@@ -64,7 +64,7 @@ const styles = theme => ({
         wordBreak: 'break-word',
     },
     checkIcon: {
-        color: theme.palette.success[700],
+        color: theme.palette.success.green600,
     },
     deleteButton: {
         color: theme.palette.error.main,
