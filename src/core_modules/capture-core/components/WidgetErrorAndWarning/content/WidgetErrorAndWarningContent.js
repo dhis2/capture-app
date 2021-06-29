@@ -4,7 +4,7 @@ import React from 'react';
 import { spacers, colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
-import type { contentTypes, renderObjectType, renderStringType } from './WidgetErrorAndWarningContent.types';
+import type { contentTypes, ObjectType, StringType } from './WidgetErrorAndWarningContent.types';
 import type { Rule } from '../WidgetError/WidgetError.types';
 import { widgetTypes } from './WidgetTypes';
 
@@ -40,7 +40,7 @@ const styles = {
     },
 };
 
-const RenderObjectItem = ({ rule, listItem }: renderObjectType) => (
+const ObjectItem = ({ rule, listItem }: ObjectType) => (
     <li
         key={rule.id}
         className={listItem}
@@ -50,7 +50,7 @@ const RenderObjectItem = ({ rule, listItem }: renderObjectType) => (
 );
 
 
-const RenderStringItem = ({ rule, listItem }: renderStringType) => (
+const StringItem = ({ rule, listItem }: StringType) => (
     <li
         className={listItem}
     >
@@ -71,7 +71,7 @@ const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: conten
                 {widgetData?.map((rule: Rule, index) => {
                     if (typeof rule === 'string') {
                         return (
-                            <RenderStringItem
+                            <StringItem
                                 rule={rule}
                                 listItem={cx(classes.listItem, {
                                     warning,
@@ -83,7 +83,7 @@ const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: conten
                         );
                     } else if (typeof rule === 'object') {
                         return (
-                            <RenderObjectItem
+                            <ObjectItem
                                 rule={rule}
                                 key={rule.id}
                                 listItem={cx(classes.listItem, {

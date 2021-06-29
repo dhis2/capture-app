@@ -7,12 +7,12 @@ export type contentTypes = {|
     ...CssClasses
 |}
 
-export type renderObjectType = {|
+export type ObjectType = {|
     rule: RuleObject,
     listItem: string,
 |}
 
-export type renderStringType = {|
+export type StringType = {|
     rule: string,
     listItem: string,
     index?: number,
