@@ -1,9 +1,8 @@
 // @flow
 import React, { type ComponentType, useState, useCallback } from 'react';
 import cx from 'classnames';
-
 import { withStyles } from '@material-ui/core';
-import { spacersNum } from '@dhis2/ui';
+import { spacersNum, colors } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';
 import { Widget } from '../../../Widget';
@@ -13,6 +12,7 @@ const styles = {
     overview: {
         marginLeft: spacersNum.dp16,
         marginRight: spacersNum.dp16,
+        borderTop: `1px solid ${colors.grey400}`,
     },
 };
 
@@ -32,6 +32,7 @@ export const StagePlain = ({ stage, events, classes, className }: Props) => {
                     description={description}
                     events={events}
                 />}
+                borderless
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
