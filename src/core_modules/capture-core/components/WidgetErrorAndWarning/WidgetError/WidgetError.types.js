@@ -2,9 +2,9 @@
 export type Rule = {|
     id: string,
     message: string,
-|}
+|} | string;
 
 export type Props = {|
-    error?: Array<Rule> | Array<string>,
+    error?: Array<Rule>,
     ...CssClasses
 |}
