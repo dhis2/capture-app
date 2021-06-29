@@ -1,3 +1,17 @@
+# [1.29.0](https://github.com/dhis2/capture-app/compare/v1.28.2...v1.29.0) (2021-06-29)
+
+
+### Features
+
+* added support for a borderless mode ([68002d5](https://github.com/dhis2/capture-app/commit/68002d5b1654c1521e2935dae2d3ffa22369fcb7))
+
+## [1.28.2](https://github.com/dhis2/capture-app/compare/v1.28.1...v1.28.2) (2021-06-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5eec7d3](https://github.com/dhis2/capture-app/commit/5eec7d383bc9bb3028c35800024ca0224d53fdb9))
+
 ## [1.28.1](https://github.com/dhis2/capture-app/compare/v1.28.0...v1.28.1) (2021-06-24)
 
 

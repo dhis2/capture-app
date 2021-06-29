@@ -17,6 +17,9 @@ const styles = {
             borderBottomLeftRadius: 0,
             borderBottomRightRadius: 0,
         },
+        '&.borderless': {
+            border: 'none',
+        },
     },
     header: {
         display: 'flex',
@@ -44,6 +47,9 @@ const styles = {
         '&.close': {
             animation: 'slideout 200ms normal forwards ease-in-out',
             transformOrigin: '100% 0%',
+        },
+        '&.borderless': {
+            border: 'none',
         },
     },
     toggleButton: {
@@ -77,7 +83,16 @@ const styles = {
     },
 };
 
-const WidgetCollapsiblePlain = ({ header, open, onOpen, onClose, color = colors.white, children, classes }: WidgetCollapsiblePropsPlain) => {
+const WidgetCollapsiblePlain = ({
+    header,
+    open,
+    onOpen,
+    onClose,
+    color = colors.white,
+    borderless = false,
+    children,
+    classes,
+}: WidgetCollapsiblePropsPlain) => {
     const [childrenVisible, setChildrenVisibility] = useState(open); // controls whether children are rendered to the DOM
     const [animationsReady, setAnimationsReadyStatus] = useState(false);
     const [postEffectOpen, setPostEffectOpenStatus] = useState(open);
@@ -107,10 +122,12 @@ const WidgetCollapsiblePlain = ({ header, open, onOpen, onClose, color = colors.
     }, [open, animationsReady]);
 
     return (
-        <div >
+        <div style={{ backgroundColor: color }}>
             <div
-                style={{ backgroundColor: color }}
-                className={cx(classes.headerContainer, { childrenVisible })}
+                className={cx(classes.headerContainer, {
+                    childrenVisible,
+                    borderless,
+                })}
             >
                 <div className={classes.header}>
                     {header}
@@ -130,10 +147,11 @@ const WidgetCollapsiblePlain = ({ header, open, onOpen, onClose, color = colors.
                 childrenVisible ? (
                     <div
                         data-test="widget-contents"
-                        style={{ backgroundColor: color || colors.white }}
                         className={cx(classes.children, {
                             open: animationsReady && open,
-                            close: animationsReady && !open })}
+                            close: animationsReady && !open,
+                            borderless,
+                        })}
                     >
                         {children}
                     </div>
