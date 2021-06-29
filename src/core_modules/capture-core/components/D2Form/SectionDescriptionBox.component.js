@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 
-import { IconInfo16 } from '@dhis2/ui';
+import { IconInfo16, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import type { Props, PlainProps } from './SectionDescriptionBox.types';
 
@@ -10,7 +10,7 @@ const styles = {
         display: 'flex',
         marginBottom: 8,
         marginRight: 15,
-        color: '#4A5768',
+        color: colors.grey700,
     },
     icon: {
         minWidth: 16,

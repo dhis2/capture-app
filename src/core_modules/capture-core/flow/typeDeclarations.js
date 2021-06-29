@@ -93,6 +93,7 @@ declare type Theme = {
             contrastText: string,
         },
         error: {
+            red200: string,
             lighter: string,
             light: string,
             main: string,
@@ -125,7 +126,11 @@ declare type Theme = {
             paper: string,
             default: string,
         },
-        divider: string,
+        divider: {
+            main: string,
+            lighter: string,
+            darker: string,
+        },
         dividerForm: string,
         accent: {
             lighter: string,
@@ -136,6 +141,10 @@ declare type Theme = {
         required: string,
         info: {
             main: string,
+        },
+        success: {
+            main: string,
+            green600: string,
         }
     },
     typography: {

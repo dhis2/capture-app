@@ -1,13 +1,11 @@
 // @flow
 import { createMuiTheme } from '@material-ui/core/styles';
-import red from '@material-ui/core/colors/red';
-import blue from '@material-ui/core/colors/blue';
-import yellow from '@material-ui/core/colors/yellow';
+import { colors } from '@dhis2/ui';
 
 const primary = {
     main: '#1976D2',
     dark: '#004BA0',
-    light: '#147cd7',
+    light: colors.blue600,
     lightest: '#EAF4FF',
 };
 
@@ -36,7 +34,7 @@ export const theme = createMuiTheme({
         },
         MuiCircularProgress: {
             colorPrimary: {
-                color: '#147cd7',
+                color: colors.blue600,
             },
         },
     },
@@ -46,26 +44,30 @@ export const theme = createMuiTheme({
     palette: {
         primary,
         secondary: {
-            main: '#00796B',
+            main: colors.teal600,
             dark: '#004C40',
             light: '#48A999',
-            lightest: '#B2DFDB',
+            lightest: colors.teal200,
         },
         error: {
+            red200: colors.red200,
             lighter: '#FBEAE5',
-            light: red[300],
+            light: colors.red300,
             main: '#E53935',
-            dark: red[700],
+            dark: colors.red500,
         },
         warning: {
-            ...yellow,
-            lighter: yellow[100],
-            light: yellow[300],
+            lighter: '#FFF9C4',
+            light: '#FFF176',
             main: '#F19C02',
-            dark: yellow[900],
+            dark: '#F57F17',
         },
         success: {
             main: '#3D9305',
+            green600: colors.green600,
+        },
+        green: {
+
         },
         info: {
             main: '#EAF4FF',
@@ -90,15 +92,21 @@ theme.typography.formFieldTitle = {
 theme.palette = {
     ...theme.palette,
     accent: {
-        lighter: blue[50],
-        light: blue[100],
-        main: blue[300],
-        dark: blue[500],
+        lighter: colors.blue100,
+        light: '#BBDEFB',
+        main: '#64b5F6',
+        dark: colors.blue500,
         contrastText: '#000000',
     },
     input: {
         bottomLine: 'rgba(0, 0, 0, 0.42)',
     },
     dividerForm: '#f2f4f5',
-    required: red[500],
+    divider: {
+        main: theme.palette.divider,
+        darker: 'rgba(0, 0, 0, 1)',
+        lighter: 'rgba(224, 224, 224, 1)',
+    },
+    required: colors.red400,
 };
+

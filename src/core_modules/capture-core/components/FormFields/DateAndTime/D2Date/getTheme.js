@@ -1,11 +1,9 @@
 // @flow
-import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
-
 export const getTheme = (theme: Theme) => ({
     accentColor: theme.palette.secondary.main,
     floatingNav: {
-        background: fade(darken(theme.palette.primary.dark, 0.6), 0.8),
-        chevron: lighten(theme.palette.secondary.light, 0.4),
+        background: 'rgba(0, 30, 64, 0.8)',
+        chevron: 'rgb(145, 203, 193)',
         color: 'white',
     },
     headerColor: theme.palette.primary.main,

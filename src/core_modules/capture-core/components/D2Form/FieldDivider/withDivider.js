@@ -15,7 +15,11 @@ type Props = {
     formHorizontal: boolean,
     classes: {
         dividerContainer: string,
-        divider: string,
+        divider: {
+            main: string,
+            lighter: string,
+            darker: string,
+        },
     }
 };
 

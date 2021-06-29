@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { TemplateSelectorChip } from './TemplateSelectorChip.component';
@@ -9,7 +8,7 @@ import { LinkButton } from '../../../Buttons/LinkButton.component';
 import type { WorkingListTemplates } from './workingLists.types';
 
 const getBorder = (theme: Theme) => {
-    const color = lighten(fade(theme.palette.divider, 1), 0.88);
+    const color = theme.palette.divider.lighter;
     return `${theme.typography.pxToRem(1)} solid ${color}`;
 };
 
