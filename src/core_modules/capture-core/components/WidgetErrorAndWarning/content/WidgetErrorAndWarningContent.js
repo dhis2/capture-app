@@ -81,7 +81,7 @@ const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: conten
                                 key={index}
                             />
                         );
-                    } else if (rule.message) {
+                    } else if (typeof rule === 'object') {
                         return (
                             <RenderObjectItem
                                 rule={rule}

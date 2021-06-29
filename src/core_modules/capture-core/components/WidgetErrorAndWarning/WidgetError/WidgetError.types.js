@@ -1,8 +1,10 @@
 // @flow
-export type Rule = {|
+export type RuleObject = {|
     id: string,
     message: string,
-|} | string;
+|}
+
+export type Rule = RuleObject | string;
 
 export type Props = {|
     error?: Array<Rule>,
