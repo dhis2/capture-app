@@ -1,6 +1,6 @@
 // @flow
 
-import { colors } from '@dhis2/ui';
+import { colors, spacers } from '@dhis2/ui';
 import { WarningRounded } from '@material-ui/icons';
 import i18n from '@dhis2/d2-i18n';
 import React from 'react';
@@ -10,7 +10,7 @@ const styles = {
     container: {
         display: 'flex',
         alignItems: 'center',
-        gap: '8px',
+        gap: spacers.dp8,
         color: colors.yellow900,
     },
     label: {
