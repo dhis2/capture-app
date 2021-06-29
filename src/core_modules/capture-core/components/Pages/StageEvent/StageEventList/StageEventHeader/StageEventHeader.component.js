@@ -10,10 +10,10 @@ import type { Props } from './StageEventHeader.types';
 const getStyles = () => ({
     wrapper: {
         display: 'flex',
-        padding: `${spacersNum.dp12}px 17px`,
+        padding: `${spacersNum.dp12}px ${spacersNum.dp16}px`,
     },
     icon: {
-        paddingRight: 7,
+        paddingRight: spacersNum.dp8,
     },
     title: {
         color: colors.grey900,
