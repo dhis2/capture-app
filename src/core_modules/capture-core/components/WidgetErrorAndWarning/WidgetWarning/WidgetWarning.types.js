@@ -1,5 +1,5 @@
 // @flow
-import { Rule } from '../WidgetError/WidgetError.types';
+import type { Rule } from '../WidgetError/WidgetError.types';
 
 export type Props = {|
     warning?: ?Array<Rule>,
