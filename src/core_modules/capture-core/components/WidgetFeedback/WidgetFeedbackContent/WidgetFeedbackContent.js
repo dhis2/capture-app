@@ -3,7 +3,7 @@
 import React, { type ComponentType } from 'react';
 import { spacers, spacersNum, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import type { FilteredKeyValue, FilteredText, ContentType } from '../WidgetFeedback.types';
+import type { FilteredKeyValue, FilteredText, ContentType, WidgetData } from '../WidgetFeedback.types';
 
 const styles = {
     container: {
@@ -70,11 +70,13 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
             className={classes.container}
         >
             <ul className={classes.unorderedList}>
-                {widgetData.map((rule: any, index: number) => {
-                    if (rule.key) {
-                        return renderKeyValue(rule);
-                    } else if (rule.message) {
-                        return renderTextObject(rule);
+                {widgetData.map((rule: WidgetData, index: number) => {
+                    if (typeof rule === 'object') {
+                        if (rule.key) {
+                            return renderKeyValue(rule);
+                        } else if (rule.message) {
+                            return renderTextObject(rule);
+                        }
                     } else if (typeof rule === 'string') {
                         return renderString(rule, index);
                     }
