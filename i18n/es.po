@@ -7,13 +7,14 @@
 # phil_dhis2, 2021
 # Alison Andrade <aandrade@ippfwhr.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# drprabhjot, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-03T09:10:27.661Z\n"
+"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: drprabhjot, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -667,13 +668,13 @@ msgid "View working list in this program."
 msgstr "Ver lista de trabajo en este programa."
 
 msgid "Enrollment{{escape}} View Event"
-msgstr ""
+msgstr "Inscripción {{escape}} Ver evento"
 
 msgid "Enrollment{{escape}} Edit Event"
-msgstr ""
+msgstr "Inscripción {{escape}} Editar evento"
 
 msgid "We could not find the stage in the program"
-msgstr ""
+msgstr "No pudimos encontrar la etapa en el programa."
 
 msgid "Delete event"
 msgstr "Eliminar evento"
@@ -952,19 +953,19 @@ msgid "open the Tracker Capture app"
 msgstr "abre la aplicación Captura del rastreador"
 
 msgid "Enrollment actions"
-msgstr ""
+msgstr "Acciones de inscripción"
 
 msgid "We are processing your request."
-msgstr ""
+msgstr "Estamos tramitando su solicitud."
 
 msgid "Reactivate"
-msgstr ""
+msgstr "Reactiva"
 
 msgid "Mark as cancelled"
-msgstr ""
+msgstr "Marca como cancelado"
 
 msgid "Mark incomplete"
-msgstr ""
+msgstr "Marca como incompleto"
 
 msgid "Delete enrollment"
 msgstr "Borrar inscripción"
@@ -973,15 +974,17 @@ msgid ""
 "Are you sure you want to delete this enrollment? This will permanently "
 "remove the current enrollment."
 msgstr ""
+"¿Está seguro de que desea eliminar esta inscripción? Esto eliminará "
+"permanentemente la inscripción actual."
 
 msgid "No, cancel"
-msgstr ""
+msgstr "No, cancela"
 
 msgid "Yes, delete enrollment."
-msgstr ""
+msgstr "Sí, elimine la inscripción."
 
 msgid "Remove mark for follow-up"
-msgstr ""
+msgstr "Elimina la marca para el seguimiento"
 
 msgid "Mark for follow-up"
 msgstr "Marcar para seguimiento"
