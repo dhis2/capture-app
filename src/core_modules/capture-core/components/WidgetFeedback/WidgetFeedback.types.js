@@ -11,8 +11,10 @@ export type FilteredKeyValue = {|
     value: string,
 |}
 
+export type WidgetData = string | FilteredText | FilteredKeyValue;
+
 export type ContentType = {|
-    widgetData?: ?Array<string | FilteredText | FilteredKeyValue>,
+    widgetData?: ?Array<WidgetData>,
     emptyText: string,
     ...CssClasses
 |}

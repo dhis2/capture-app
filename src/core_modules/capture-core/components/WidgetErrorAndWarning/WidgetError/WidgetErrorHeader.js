@@ -2,14 +2,14 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
 import { ErrorRounded } from '@material-ui/icons';
-import { colors } from '@dhis2/ui';
+import { spacers, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 
 const styles = {
     container: {
         display: 'flex',
         alignItems: 'center',
-        gap: '8px',
+        gap: spacers.dp8,
         color: colors.red800,
         fontWeight: 500,
     },

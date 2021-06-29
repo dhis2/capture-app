@@ -5,6 +5,8 @@ import { spacers, colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
 import type { contentTypes, renderObjectType, renderStringType } from './WidgetErrorAndWarningContent.types';
+import type { Rule } from '../WidgetError/WidgetError.types';
+import { widgetTypes } from './WidgetTypes';
 
 const styles = {
     widgetWrapper: {
@@ -56,22 +58,17 @@ const RenderStringItem = ({ rule, listItem }: renderStringType) => (
     </li>
 );
 
-const widgetType = Object.freeze({
-    WARNING: 'warning',
-    ERROR: 'error',
-});
-
 
 const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: contentTypes) => {
-    const warning = type === widgetType.WARNING;
-    const error = type === widgetType.ERROR;
+    const warning = type === widgetTypes.WARNING;
+    const error = type === widgetTypes.ERROR;
     return (
         <div
-            data-test={'widget-content'}
+            data-test="widget-content"
             className={classes.widgetWrapper}
         >
             <ul className={classes.unorderedList}>
-                {widgetData && widgetData.map((rule, index) => {
+                {widgetData?.map((rule: Rule, index) => {
                     if (typeof rule === 'string') {
                         return (
                             <RenderStringItem

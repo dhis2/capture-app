@@ -5,10 +5,11 @@ import { Widget } from '../../Widget';
 import type { Props } from './WidgetError.types';
 import { WidgetErrorAndWarningContent } from '../content/WidgetErrorAndWarningContent';
 import { WidgetErrorHeader } from './WidgetErrorHeader';
+import { widgetTypes } from '../content/WidgetTypes';
 
 
 export const WidgetError = ({ error, classes }: Props) => {
-    const widgetType = 'error';
+    const widgetType = widgetTypes.ERROR;
 
     if (!error?.length) {
         return null;
@@ -17,7 +18,7 @@ export const WidgetError = ({ error, classes }: Props) => {
     return (
         <div
             className={classes}
-            data-test={'error-widget'}
+            data-test="error-widget"
         >
             <Widget
                 header={<WidgetErrorHeader />}
