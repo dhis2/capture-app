@@ -1,10 +1,7 @@
 // @flow
-type rule = {
-    id: string,
-    message: string,
-}
+import { Rule } from '../WidgetError/WidgetError.types';
 
-export type widgetWarningTypes = {|
-    warning?: Array<rule> | Array<string>,
+export type Props = {|
+    warning?: ?Array<Rule>,
     ...CssClasses
 |}
