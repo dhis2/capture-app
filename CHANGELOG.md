@@ -1,3 +1,10 @@
+# [1.30.0](https://github.com/dhis2/capture-app/compare/v1.29.0...v1.30.0) (2021-06-30)
+
+
+### Features
+
+* [DHIS2-11222] create widget with title and icon ([#1772](https://github.com/dhis2/capture-app/issues/1772)) ([754ea36](https://github.com/dhis2/capture-app/commit/754ea36fd7782a3773194633c86e1c9746932b79))
+
 # [1.29.0](https://github.com/dhis2/capture-app/compare/v1.28.2...v1.29.0) (2021-06-29)
 
 
