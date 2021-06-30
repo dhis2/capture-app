@@ -8,6 +8,7 @@ export type WidgetCollapsibleProps = {|
     onOpen: () => void,
     onClose: () => void,
     color?: string,
+    borderless?: boolean,
 |};
 
 export type WidgetCollapsiblePropsPlain = {|
