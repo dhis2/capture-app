@@ -183,10 +183,11 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Ini bukan program acara atau metadata rusak. Lihat log untuk detailnya."
+"Ini bukanlah event program atau metadata yang rusak. Lihat log untuk "
+"detailnya."
 
 msgid "This event"
-msgstr "Acara ini"
+msgstr "Even ini"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
@@ -201,7 +202,7 @@ msgid "Completed"
 msgstr "Selesai"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr "Silakan tambahkan atau batalkan komentar sebelum menyimpan acara"
+msgstr "Silakan tambahkan atau batalkan komentar sebelum menyimpan even"
 
 msgid "Save and add another"
 msgstr "Simpan dan tambahkan yang lain"
@@ -225,19 +226,19 @@ msgid "Switch to row view"
 msgstr "Beralih ke tampilan baris"
 
 msgid "events added"
-msgstr "acara ditambahkan"
+msgstr "Even ditambahkan"
 
 msgid "No events added"
-msgstr "Tidak ada acara yang ditambahkan"
+msgstr "Tidak ada even yang ditambahkan"
 
 msgid "New event relationship"
-msgstr "Hubungan acara baru"
+msgstr "Hubungan even baru"
 
 msgid "Adding relationship to event."
-msgstr "Menambahkan hubungan ke acara."
+msgstr "Menambahkan hubungan ke even."
 
 msgid "Go back to event without saving relationship"
-msgstr "Kembali ke acara tanpa menyimpan hubungan"
+msgstr "Kembali ke even tanpa menyimpan hubungan"
 
 msgid "Unsaved changes"
 msgstr "Perubahan yang belum disimpan"
@@ -259,14 +260,14 @@ msgid "New event"
 msgstr "Event baru"
 
 msgid "You don't have access to create an event in the current selections"
-msgstr "Anda tidak memiliki akses untuk membuat acara di pilihan saat ini"
+msgstr "Anda tidak memiliki akses untuk membuat even di pilihan saat ini"
 
 msgid "Save"
 msgstr "Simpan"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
-"Meninggalkan halaman ini akan membuang perubahan yang Anda buat pada acara "
+"Meninggalkan halaman ini akan membuang perubahan yang Anda buat pada even "
 "ini."
 
 msgid "Saving a {{trackedEntityName}}"
@@ -362,7 +363,7 @@ msgid "Sort"
 msgstr "Urutkan"
 
 msgid "No events to display"
-msgstr "Tidak ada acara untuk ditampilkan"
+msgstr "Tidak ada even untuk ditampilkan"
 
 msgid "Data for offline list not present"
 msgstr "Data untuk daftar offline tidak ada"
@@ -416,10 +417,10 @@ msgid "Custom range"
 msgstr "Rentang khusus"
 
 msgid "Max"
-msgstr "Maks"
+msgstr "Maksimal"
 
 msgid "Min"
-msgstr "min"
+msgstr "minimal"
 
 msgid "Contains text"
 msgstr "Berisi teks"
@@ -593,16 +594,16 @@ msgid "Write comment"
 msgstr "Tulis komentar"
 
 msgid "Show all events"
-msgstr "Tampilkan semua acara"
+msgstr "Tampilkan semua even"
 
 msgid "Edit event"
-msgstr "Sunting acara"
+msgstr "Sunting even"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Acara tidak dapat dimuat. Apakah Anda yakin itu ada?"
+msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
 
 msgid "Event could not be loaded"
-msgstr "Acara tidak dapat dimuat"
+msgstr "Even tidak dapat dimuat"
 
 msgid "Organisation unit could not be loaded"
 msgstr "Unit organisasi tidak dapat dimuat"
@@ -654,19 +655,19 @@ msgid "Enroll a new {{selectedTetName}} in this program."
 msgstr "Daftarkan {{selectedTetName}} baru dalam program ini."
 
 msgid "{{programName}} is an event program and does not have enrollments."
-msgstr "{{programName}} adalah program acara dan tidak memiliki pendaftaran."
+msgstr "{{programName}} adalah program even dan tidak memiliki pendaftaran."
 
 msgid "Create a new event in this program."
-msgstr "Buat acara baru dalam program ini."
+msgstr "Buat even baru dalam program ini."
 
 msgid "View working list in this program."
 msgstr "Lihat daftar kerja dalam program ini."
 
 msgid "Enrollment{{escape}} View Event"
-msgstr "Pendaftaran{{escape}} Lihat Acara"
+msgstr "Pendaftaran{{escape}} Lihat Even"
 
 msgid "Enrollment{{escape}} Edit Event"
-msgstr "Pendaftaran{{escape}} Edit Acara"
+msgstr "Pendaftaran{{escape}} Edit Even"
 
 msgid "We could not find the stage in the program"
 msgstr "Kami tidak dapat menemukan panggung dalam program"
@@ -696,7 +697,7 @@ msgid "an error occurred loading working lists"
 msgstr "terjadi kesalahan saat memuat daftar kerja"
 
 msgid "Registered events"
-msgstr "Acara terdaftar"
+msgstr "Even terdaftar"
 
 msgid "Enrollment status"
 msgstr "Status pendaftaran"
@@ -891,10 +892,10 @@ msgid "Search in all programs"
 msgstr "Cari di semua program"
 
 msgid "You dont have access to edit this event"
-msgstr "Anda tidak memiliki akses untuk mengedit acara ini"
+msgstr "Anda tidak memiliki akses untuk mengedit even ini"
 
 msgid "Event details"
-msgstr "Detail acara"
+msgstr "Detail even"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -904,13 +905,13 @@ msgstr ""
 "hubungan baru"
 
 msgid "No one is assigned to this event"
-msgstr "Tidak ada yang ditugaskan untuk acara ini"
+msgstr "Tidak ada yang ditugaskan untuk even ini"
 
 msgid "Assign"
 msgstr "Daftarkan"
 
 msgid "Event assigned to {{name}}"
-msgstr "Acara ditugaskan ke {{name}}"
+msgstr "Even ditugaskan ke {{name}}"
 
 msgid "Feedbacks"
 msgstr "Umpan balik"
@@ -1010,7 +1011,7 @@ msgid "Person Profile"
 msgstr "Profil Orang"
 
 msgid "Stages and Events"
-msgstr "Tahapan dan Acara"
+msgstr "Tahapan dan Even"
 
 msgid "An error has occured. See log for details"
 msgstr "Terjadi kesalahan. Lihat log untuk detailnya"
@@ -1028,13 +1029,13 @@ msgid "Profile"
 msgstr "Profil"
 
 msgid "Error saving event"
-msgstr "Terjadi kesalahan saat menyimpan acara"
+msgstr "Terjadi kesalahan saat menyimpan even"
 
 msgid "Could not save event"
-msgstr "Tidak dapat menyimpan acara"
+msgstr "Tidak dapat menyimpan even"
 
 msgid "Could not delete event"
-msgstr "Tidak dapat menghapus acara"
+msgstr "Tidak dapat menghapus even"
 
 msgid "Could not save working list"
 msgstr "Tidak dapat menyimpan daftar kerja"
@@ -1079,7 +1080,7 @@ msgid "To date"
 msgstr "Ke tanggal"
 
 msgid "To time"
-msgstr "Untuk waktu"
+msgstr "Ke waktu"
 
 msgid "error encountered during field validation"
 msgstr "kesalahan yang ditemui selama validasi bidang"
