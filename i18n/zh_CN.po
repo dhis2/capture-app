@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
+"POT-Creation-Date: 2021-06-24T07:52:28.588Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -596,6 +596,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
@@ -845,6 +848,12 @@ msgstr "找不到您想要的结果？尝试使用type搜索所有项目"
 
 msgid "Search in all programs"
 msgstr "搜索所有项目"
+
+msgid "events"
+msgstr ""
+
+msgid "event"
+msgstr ""
 
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
