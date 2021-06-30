@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-18T08:12:20.120Z\n"
-"PO-Revision-Date: 2021-06-18T08:12:20.120Z\n"
+"POT-Creation-Date: 2021-06-30T10:54:22.135Z\n"
+"PO-Revision-Date: 2021-06-30T10:54:22.135Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -585,6 +585,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
 msgid "Program stage not found"
 msgstr ""
 
@@ -832,6 +835,12 @@ msgid ""
 msgstr ""
 
 msgid "Search in all programs"
+msgstr ""
+
+msgid "events"
+msgstr ""
+
+msgid "event"
 msgstr ""
 
 msgid "You dont have access to edit this event"
