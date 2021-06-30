@@ -22,7 +22,6 @@ export { SearchGroup } from './SearchGroup';
 export { InputSearchGroup } from './InputSearchGroup';
 export { TrackedEntityType, TeiRegistration } from './TrackedEntityType';
 export { SystemSettings } from './SystemSettings';
-export { Event } from './Event';
 // helpers
 export {
     getScopeFromScopeId,

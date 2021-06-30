@@ -5,7 +5,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum } from '@dhis2/ui';
 import { compose } from 'redux';
 import type { Props } from './StageEventListPage.types';
-import { StageEventListComponent } from './StageEventList/StageEventList.component';
+import { StageEventList } from './StageEventList/StageEventList.component';
 import { withErrorMessageHandler } from '../../../HOC';
 
 const getStyles = () => ({
@@ -14,9 +14,9 @@ const getStyles = () => ({
     },
 });
 
-const StageEventListPagePlain = ({ classes, programId, programStage, orgUnitId }) => (<>
+const StageEventListPagePlain = ({ classes, programStage }) => (<>
     <div data-test="stage-event-list-page-content" className={classes.container}>
-        <StageEventListComponent stage={programStage} programId={programId} orgUnitId={orgUnitId} />
+        <StageEventList stage={programStage} />
     </div>
 </>);
 

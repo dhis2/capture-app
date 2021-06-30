@@ -9,7 +9,8 @@ import type { Props } from './StageEventHeader.types';
 
 const getStyles = () => ({
     wrapper: {
-        padding: `${spacersNum.dp8}px ${spacersNum.dp12}px`,
+        display: 'flex',
+        padding: `${spacersNum.dp12}px ${spacersNum.dp16}px`,
     },
     icon: {
         paddingRight: spacersNum.dp8,
@@ -21,7 +22,7 @@ const getStyles = () => ({
     },
 });
 
-const StageEventHeaderComponentPlain = ({ icon, title, events, classes }) => (<>
+const StageEventHeaderPlain = ({ icon, title, events, classes }) => (<>
     <div data-test="stage-event-header" className={classes.wrapper}>
         <div className={classes.icon}>{
             icon && (
@@ -29,8 +30,8 @@ const StageEventHeaderComponentPlain = ({ icon, title, events, classes }) => (<>
                     <NonBundledDhis2Icon
                         name={icon.name}
                         color={icon.color}
-                        width={30}
-                        height={30}
+                        width={20}
+                        height={20}
                         cornerRadius={2}
                     />
                 </div>
@@ -44,6 +45,6 @@ const StageEventHeaderComponentPlain = ({ icon, title, events, classes }) => (<>
     </div>
 </>);
 
-export const StageEventHeaderComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(
+export const StageEventHeader: ComponentType<$Diff<Props, CssClasses>> = withStyles(
     getStyles,
-)(StageEventHeaderComponentPlain);
+)(StageEventHeaderPlain);

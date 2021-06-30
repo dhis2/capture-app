@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-03T09:10:27.661Z\n"
+"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -893,7 +893,7 @@ msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
 
 msgid "Event details"
-msgstr ""
+msgstr "Ҳодиса/тадбир тафсилотлари"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "

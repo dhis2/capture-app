@@ -5,8 +5,7 @@ import { mainStores } from './stores';
 const MAIN_STORAGE_KEY = 'dhis2ca';
 
 function getMajorCacheVersion() {
-    const appVersion = process.env.REACT_APP_VERSION;
-    const appMajorVersion = Number(appVersion.split('.')[0]);
+    const appMajorVersion = Number(process.env.REACT_APP_SERVER_VERSION);
     return (appMajorVersion - 30) * 1000;
 }
 
