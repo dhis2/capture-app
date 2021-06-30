@@ -837,6 +837,12 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
+msgid "events"
+msgstr ""
+
+msgid "event"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr ""
 
