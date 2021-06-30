@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/dhis2/capture-app/compare/v1.30.0...v1.31.0) (2021-06-30)
+
+
+### Features
+
+* DHIS2-10981 Feedback widget ([a8d5760](https://github.com/dhis2/capture-app/commit/a8d5760074745cbfef28680428aae3d3f7d1f39c))
+
 # [1.30.0](https://github.com/dhis2/capture-app/compare/v1.29.0...v1.30.0) (2021-06-30)
 
 
