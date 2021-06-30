@@ -8,7 +8,6 @@ import { NewPage } from 'capture-core/components/Pages/New';
 import { EnrollmentPage } from 'capture-core/components/Pages/Enrollment';
 import { StageEventListPage } from 'capture-core/components/Pages/StageEvent';
 import { EnrollmentEventPage } from 'capture-core/components/Pages/EnrollmentEvent';
-import { StageEventListPage } from 'capture-core/components/Pages/StageEvent';
 
 export const AppPages = () => (
     <Switch>
