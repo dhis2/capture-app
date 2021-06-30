@@ -20,8 +20,19 @@ export const useProgramStages = (program: Program, programStages: Array<apiProgr
                     icon,
                     description: stageForm.description,
                     dataElements: programStageDataElements?.reduce((acc, currentStageData) => {
-                        if (currentStageData.displayInReports) {
-                            acc.push(currentStageData.dataElement);
+                        const { displayInReports, dataElement } = currentStageData;
+                        if (displayInReports) {
+                            const options = dataElement.optionSet ?
+                                dataElement.optionSet.options.reduce((accOptions, option) => {
+                                    accOptions[option.code] = option.name;
+                                    return accOptions;
+                                }, {}) : undefined;
+                            acc.push({
+                                id: dataElement.id,
+                                name: dataElement.displayName,
+                                type: dataElement.valueType,
+                                options,
+                            });
                         }
                         return acc;
                     }, []),

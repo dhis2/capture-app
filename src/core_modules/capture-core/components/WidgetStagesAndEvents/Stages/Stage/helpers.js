@@ -83,16 +83,16 @@ export const useComputeDataFromEvent =
                     const prefinedField = predefinedFields.find(f => f.id === col.id);
                     if (prefinedField) { return prefinedField; }
                     const { dataElement: metaElementId, value } = dataValues.find(i => i.dataElement === col.id) ?? {};
-                    const { valueType } = data.find(el => el.id === metaElementId) ?? {};
-                    if (valueType) {
+                    const { type } = data.find(el => el.id === metaElementId) ?? {};
+                    if (type) {
                         // $FlowFixMe
                         const subValue = await getSubValues(
-                            eventId, valueType, { [metaElementId]: value },
+                            eventId, type, { [metaElementId]: value },
                         );
                         return {
                             id: metaElementId,
-                            type: valueType,
-                            value: formatValueForView(subValue[metaElementId], valueType),
+                            type,
+                            value: formatValueForView(subValue[metaElementId], type),
                         };
                     }
                     return { id: col.id, value: undefined };
@@ -119,7 +119,7 @@ export const useComputeHeaderColumn = (data: Array<apiDataElement>, events: Arra
                 const dataInStage = data.find(el => el.id === id);
                 if (dataInStage) {
                     if (!acc.find(item => item.id === dataValue.dataElement)) {
-                        acc.push({ id, header: dataInStage.displayName, sortDirection: 'default' });
+                        acc.push({ id, header: dataInStage.name, sortDirection: 'default' });
                     }
                 }
             });
