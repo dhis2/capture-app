@@ -8,6 +8,10 @@ type Data = {
     elements: Array<Node>,
 };
 
+type TransformFunction = (node: Object, index: number, nodeToElementFn: (node: Object, index: number)
+    => Element<'FormField'>)
+    => void | Element<'FormField'>;
+
 /**
  * Stores html as react elements
  *
@@ -34,7 +38,7 @@ export class CustomForm {
      *
      * @memberof CustomForm
      */
-    setData(html: string, transformFunction: (node: Object, index: number) => ?Element<'FormField'>) {
+    setData(html: string, transformFunction: TransformFunction) {
         this._data = parseHtml(html, {
             onTransform: transformFunction,
             allowScript: true,

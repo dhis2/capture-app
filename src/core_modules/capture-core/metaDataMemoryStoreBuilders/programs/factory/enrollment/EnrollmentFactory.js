@@ -173,7 +173,6 @@ export class EnrollmentFactory {
             section.customForm = new CustomForm((o) => {
                 o.id = dataEntryForm.id;
             });
-            // $FlowFixMe : Require input from class
             section.customForm.setData(dataEntryForm.htmlCode, transformTrackerNode);
         } catch (error) {
             log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
