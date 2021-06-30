@@ -37,9 +37,9 @@ const styles = {
     },
 };
 
-const StageDetailPlain = ({ events, eventName, data, classes }: Props) => {
-    const headerColumns = useComputeHeaderColumn(data, events);
-    const { computeData, dataSource } = useComputeDataFromEvent(data, events, headerColumns);
+const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) => {
+    const headerColumns = useComputeHeaderColumn(dataElements, events);
+    const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events, headerColumns);
 
     React.useEffect(() => {
         if (!dataSource?.length) {

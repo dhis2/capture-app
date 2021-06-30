@@ -1,10 +1,10 @@
 // @flow
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
-import type { apiDataElement } from 'capture-core/metaDataStoreLoaders/programs/quickStoreOperations/types';
+import type { StageDataElement } from '../../../types/common.types';
 
 export type Props = {|
     events: Array<ApiTEIEvent>,
-    data: Array<apiDataElement>,
+    dataElements: Array<StageDataElement>,
     eventName: string,
     ...CssClasses,
 |};

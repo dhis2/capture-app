@@ -40,7 +40,7 @@ export const StagePlain = ({ stage, events, classes, className }: Props) => {
                 {events.length > 0 && <StageDetail
                     eventName={name}
                     events={events}
-                    data={dataElements}
+                    dataElements={dataElements}
                 />}
             </Widget>
         </div>

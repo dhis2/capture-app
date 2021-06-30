@@ -4,11 +4,11 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { Tag } from '@dhis2/ui';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
-import type { apiDataElement } from 'capture-core/metaDataStoreLoaders/programs/quickStoreOperations/types';
 import { convertValue as convertClientToList } from '../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../converters/serverToClient';
 import { statusTypes, dataElementTypes, translatedStatusTypes } from '../../../../metaData';
 import { getSubValues } from './getEventDataWithSubValue';
+import type { StageDataElement } from '../../types/common.types';
 
 export const DEFAULT_NUMBER_OF_ROW = 5;
 
@@ -33,9 +33,9 @@ export const getValueByKeyFromEvent = (event: ApiTEIEvent, { id, resolveValue }:
     return event[id];
 };
 
-export const formatValueForView = (data: Array<apiDataElement>, type: string) =>
+export const formatValueForView = (dataElements: Array<StageDataElement>, type: string) =>
 // $FlowFixMe
-    convertClientToList(convertServerToClient(data, type), type);
+    convertClientToList(convertServerToClient(dataElements, type), type);
 
 
 export const sortDataFromEvent = (strA: any, strB: any, direction: string) => {
@@ -64,7 +64,7 @@ function convertStatusForView(event: ApiTEIEvent) {
 
 
 export const useComputeDataFromEvent =
-    (data: Array<apiDataElement>, events: Array<ApiTEIEvent>, headerColumns: Array<{id: string}>) => {
+    (dataElements: Array<StageDataElement>, events: Array<ApiTEIEvent>, headerColumns: Array<{id: string}>) => {
         const [dataSource, setDataSource] = React.useState([]);
 
         const computeData = async () => {
@@ -83,7 +83,7 @@ export const useComputeDataFromEvent =
                     const prefinedField = predefinedFields.find(f => f.id === col.id);
                     if (prefinedField) { return prefinedField; }
                     const { dataElement: metaElementId, value } = dataValues.find(i => i.dataElement === col.id) ?? {};
-                    const { type } = data.find(el => el.id === metaElementId) ?? {};
+                    const { type } = dataElements.find(el => el.id === metaElementId) ?? {};
                     if (type) {
                         // $FlowFixMe
                         const subValue = await getSubValues(
@@ -106,7 +106,7 @@ export const useComputeDataFromEvent =
         return { computeData, dataSource };
     };
 
-export const useComputeHeaderColumn = (data: Array<apiDataElement>, events: Array<ApiTEIEvent>) => {
+export const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, events: Array<ApiTEIEvent>) => {
     const headerColumns = useMemo(() => {
         const defaultColumns = [
             { id: 'status', header: i18n.t('Status'), sortDirection: 'default' },
@@ -116,7 +116,7 @@ export const useComputeHeaderColumn = (data: Array<apiDataElement>, events: Arra
         const dataElementHeaders = events.reduce((acc, currEvent) => {
             currEvent.dataValues.forEach((dataValue) => {
                 const { dataElement: id } = dataValue;
-                const dataInStage = data.find(el => el.id === id);
+                const dataInStage = dataElements.find(el => el.id === id);
                 if (dataInStage) {
                     if (!acc.find(item => item.id === dataValue.dataElement)) {
                         acc.push({ id, header: dataInStage.name, sortDirection: 'default' });
@@ -126,7 +126,7 @@ export const useComputeHeaderColumn = (data: Array<apiDataElement>, events: Arra
             return acc;
         }, []);
         return [...defaultColumns, ...dataElementHeaders];
-    }, [data, events]);
+    }, [dataElements, events]);
 
 
     return headerColumns;

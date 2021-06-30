@@ -23,7 +23,7 @@ export const useProgramStages = (program: Program, programStages: Array<apiProgr
                         const { displayInReports, dataElement } = currentStageData;
                         if (displayInReports) {
                             const options = dataElement.optionSet ?
-                                dataElement.optionSet.options.reduce((accOptions, option) => {
+                                dataElement.optionSet.options?.reduce((accOptions, option) => {
                                     accOptions[option.code] = option.name;
                                     return accOptions;
                                 }, {}) : undefined;
