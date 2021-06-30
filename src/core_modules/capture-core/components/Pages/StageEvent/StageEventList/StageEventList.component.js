@@ -2,14 +2,27 @@
 import React from 'react';
 import type { ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import type { Props } from '../StageEventListPage.types';
+import { StageEventHeader } from './StageEventHeader/StageEventHeader.component';
+import { Widget } from '../../../Widget';
+import type { Props } from './StageEventList.types';
 
 const getStyles = () => ({});
 
-const StageEventListComponentPlain = () => (<>
-    <div data-test="stage-event-list">Stages and Events</div>
+const StageEventListPlain = ({ stage }) => (<>
+    <div data-test="stage-event-list" >
+        <Widget
+            noncollapsible
+            header={<StageEventHeader
+                title={stage.name}
+                icon={stage.icon}
+                events={[]}
+            />}
+        >
+            <p>Stage event Placeholder Text</p>
+        </Widget>
+    </div>
 </>);
 
-export const StageEventListComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(
+export const StageEventList: ComponentType<$Diff<Props, CssClasses>> = withStyles(
     getStyles,
-)(StageEventListComponentPlain);
+)(StageEventListPlain);
