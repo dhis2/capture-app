@@ -5,15 +5,15 @@
 # Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
-# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
 # Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
+# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021\n"
+"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Choose one or more dates..."
-msgstr "Pilih satu atau lebih pada tanggal"
+msgstr "Pilih satu atau beberapa tanggal"
 
 msgid "Choose a date..."
 msgstr "Pilih tanggal"
@@ -34,8 +34,8 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
-"Alasan yang memungkinkan untuk ini adalah browser atau mode (mis. mode "
-"pribadi) tidak didukung. Lihat log untuk detail."
+"Alasan yang memungkinkan adalah browser atau mode (mis. mode privasi) tidak "
+"didukung. Lihat log untuk detail."
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -80,7 +80,7 @@ msgid "Please provide a valid integer"
 msgstr "Harap berikan bilangan bulat yang valid"
 
 msgid "Please provide a positive integer"
-msgstr "Berikan bilangan bulat positif positive"
+msgstr "Harap berikan bilangan bulat positif"
 
 msgid "Please provide zero or a positive integer"
 msgstr "Harap berikan nol atau bilangan bulat positif"
@@ -92,7 +92,7 @@ msgid "Please provide a valid date"
 msgstr "Harap berikan tanggal yang valid"
 
 msgid "A date in the future is not allowed"
-msgstr "Tanggal di masa depan tidak diperbolehkan"
+msgstr "Tanggal di masa depan tidak diperkenankan"
 
 msgid "Please provide a valid date and time"
 msgstr "Harap berikan tanggal dan waktu yang valid"
@@ -176,7 +176,7 @@ msgid "Relationships"
 msgstr "Hubungan"
 
 msgid "Assignee"
-msgstr "penerima tugas"
+msgstr "Penerima "
 
 msgid "Saving to"
 msgstr "Menyimpan ke"
@@ -185,11 +185,11 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
-"Ini bukanlah event program atau metadata yang rusak. Lihat log untuk "
+"Ini bukanlah even program atau metadata yang rusak. Lihat log untuk "
 "detailnya."
 
 msgid "This event"
-msgstr "even ini"
+msgstr "Even ini"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
@@ -222,10 +222,10 @@ msgid "No write access"
 msgstr "Tidak ada akses tulis"
 
 msgid "New {{titleText}}"
-msgstr "{{titleText}} baru"
+msgstr "Baru {{titleText}}"
 
 msgid "Switch to form view"
-msgstr "Beralih ke tampilan formulir"
+msgstr "Beralih ke tampilan borang"
 
 msgid "Switch to row view"
 msgstr "Beralih ke tampilan baris"
@@ -237,7 +237,7 @@ msgid "No events added"
 msgstr "Tidak ada even yang ditambahkan"
 
 msgid "New event relationship"
-msgstr "Event relationship baru"
+msgstr "Hubungan even baru"
 
 msgid "Adding relationship to event."
 msgstr "Menambahkan hubungan ke even."
@@ -285,14 +285,13 @@ msgid "enrollment"
 msgstr "pendaftaran"
 
 msgid "Enroll in a program by selecting a program from the top bar."
-msgstr "Mendaftar dalam program dengan memilih program dari bilah atas."
+msgstr "Mendaftar dalam program dengan memilih program dari bar atas."
 
 msgid "An error has occurred. See log for details"
-msgstr "Sebuah kesalahan telah terjadi. Lihat log untuk detailnya"
+msgstr "Sebuah kesalahan telah terjadi. Lihat log untuk detail"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr ""
-"Ada duplikat (tetapi ada beberapa kesalahan, lihat log untuk detailnya"
+msgstr "Ada duplikat (tetapi ada beberapa kesalahan, lihat log untuk detail"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
@@ -341,10 +340,10 @@ msgid "Warnings found"
 msgstr "Peringatan ditemukan"
 
 msgid "Abort"
-msgstr "Membatalkan"
+msgstr "Batalkan"
 
 msgid "Back to form"
-msgstr "Kembali ke formulir"
+msgstr "Kembali ke borang"
 
 msgid "Save anyway"
 msgstr "Tetap simpan"
@@ -620,7 +619,7 @@ msgstr ""
 "valid."
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
-msgstr "Pendaftaran dengan id \"{{enrollmentId}}\" tidak ada"
+msgstr "Pendaftaran dengan id \"{{enrollmentId}}\" tidak tersedia"
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
@@ -705,7 +704,7 @@ msgid "Registration Date"
 msgstr "tanggal registrasi"
 
 msgid "Inactive"
-msgstr "Inaktif"
+msgstr "Tidak aktif"
 
 msgid "Working list could not be updated"
 msgstr "Daftar kerja tidak dapat diperbarui"
@@ -761,7 +760,7 @@ msgstr "Buat untuk"
 msgid ""
 "You can also choose a program from the top bar and create in that program"
 msgstr ""
-"Anda juga dapat memilih program dari bilah atas dan membuat program itu "
+"Anda juga dapat memilih program dari bar atas dan membuat program itu "
 
 msgid "Save new"
 msgstr "Simpan baru"
@@ -825,7 +824,7 @@ msgstr "Cari tentang"
 msgid ""
 "You can also choose a program from the top bar and search in that program"
 msgstr ""
-"Anda juga dapat memilih program dari bilah atas dan mencari di program "
+"Anda juga dapat memilih program dari bar atas dan mencari di program "
 "tersebut"
 
 msgid "No results found"
@@ -842,7 +841,7 @@ msgid "Back to search"
 msgstr "Kembali ke pencarian"
 
 msgid "An error has occurred"
-msgstr "Sebuah kesalahan telah terjadi"
+msgstr "Terjadi kesalahan"
 
 msgid ""
 "There is a problem with this search, please change the search terms or try "
@@ -852,7 +851,7 @@ msgstr ""
 " lagi nanti. Untuk detail lebih lanjut, buka Tab Konsol dari Alat Pengembang"
 
 msgid "Too many results"
-msgstr "Terlalu banyak hasil"
+msgstr "Hasil terlalu banyak"
 
 msgid ""
 "This search returned too many results to show. Try changing search terms or "
@@ -863,7 +862,7 @@ msgstr ""
 "mempersempit hasil."
 
 msgid "Choose a type to start searching"
-msgstr "Pilih jenis untuk mulai mencari"
+msgstr "Pilih satu jenis untuk mulai mencari"
 
 msgid "View active enrollment"
 msgstr "Lihat pendaftaran aktif"
@@ -876,7 +875,7 @@ msgid ""
 "that use type "
 msgstr ""
 "Tidak menemukan hasil yang Anda cari? Coba cari semua program yang "
-"menggunakan type"
+"menggunakan jenis"
 
 msgid "Search in all programs"
 msgstr "Cari di semua program"
@@ -898,7 +897,7 @@ msgstr ""
 "hubungan baru"
 
 msgid "No one is assigned to this event"
-msgstr "Tidak ada yang ditugaskan untuk even ini"
+msgstr "Tida ada yang ditugaskan untuk even ini"
 
 msgid "Assign"
 msgstr "Daftarkan"
@@ -991,7 +990,7 @@ msgid "Error saving enrollment"
 msgstr "Terjadi kesalahan saat menyimpan pendaftaran"
 
 msgid "tracked entity instance"
-msgstr "contoh entitas yang dilacak"
+msgstr "contoh instance entitas"
 
 msgid "Latitude"
 msgstr "Lintang"
