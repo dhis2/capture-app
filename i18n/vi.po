@@ -876,7 +876,7 @@ msgid "Search in all programs"
 msgstr "Tìm kiếm trong tất cả các chương trình"
 
 msgid "events"
-msgstr ""
+msgstr "sự kiện"
 
 msgid "event"
 msgstr ""

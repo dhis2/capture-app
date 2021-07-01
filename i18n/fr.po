@@ -910,7 +910,7 @@ msgid "Search in all programs"
 msgstr "Rechercher dans tous les programmes"
 
 msgid "events"
-msgstr ""
+msgstr "événements"
 
 msgid "event"
 msgstr ""

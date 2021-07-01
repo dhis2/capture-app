@@ -850,7 +850,7 @@ msgid "Search in all programs"
 msgstr "搜索所有项目"
 
 msgid "events"
-msgstr ""
+msgstr "事件"
 
 msgid "event"
 msgstr ""

@@ -848,7 +848,7 @@ msgid "Search in all programs"
 msgstr ""
 
 msgid "events"
-msgstr ""
+msgstr "ព្រឹត្តិការណ៏"
 
 msgid "event"
 msgstr ""

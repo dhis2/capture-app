@@ -882,10 +882,10 @@ msgid "Search in all programs"
 msgstr "Søk i alle programmer"
 
 msgid "events"
-msgstr ""
+msgstr "hendelser"
 
 msgid "event"
-msgstr ""
+msgstr "hendelse"
 
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"

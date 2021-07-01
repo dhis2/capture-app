@@ -893,10 +893,10 @@ msgid "Search in all programs"
 msgstr "Барча дастурларда қидириш"
 
 msgid "events"
-msgstr ""
+msgstr "ҳодиса/тадбирлар"
 
 msgid "event"
-msgstr ""
+msgstr "ҳодиса/тадбир"
 
 msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"

@@ -878,10 +878,10 @@ msgid "Search in all programs"
 msgstr "Hledat ve všech programech"
 
 msgid "events"
-msgstr ""
+msgstr "události"
 
 msgid "event"
-msgstr ""
+msgstr "událost"
 
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
