@@ -5,6 +5,7 @@ export type WidgetNonCollapsibleProps = {|
     header: Node,
     children: Node,
     color?: string,
+    borderless?: boolean,
 |};
 
 export type WidgetNonCollapsiblePropsPlain = {|
