@@ -6,15 +6,15 @@ import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
 import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
 
-const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView, orgUnitId) =>
+const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView) =>
     useCallback((selectedTemplate: Object, context: Object, meta: Object) => {
         const columnsMetaForDataFetching: ColumnsMetaForDataFetching = new Map(
             defaultColumns
                 // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
-        onLoadView(selectedTemplate, { ...context, orgUnitId }, { ...meta, columnsMetaForDataFetching });
-    }, [onLoadView, defaultColumns, orgUnitId]);
+        onLoadView(selectedTemplate, { ...context }, { ...meta, columnsMetaForDataFetching });
+    }, [onLoadView, defaultColumns]);
 
 const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
     useCallback((queryArgs: Object, lastTransaction: number) => {
@@ -39,7 +39,7 @@ export const EventWorkingListsColumnSetup = ({
 
     // $FlowFixMe
     const defaultColumns = useDefaultColumnConfig(programStage);
-    const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView, orgUnitId);
+    const injectColumnMetaToLoadList = useInjectColumnMetaToLoadList(defaultColumns, onLoadView);
     const injectColumnMetaToUpdateList = useInjectColumnMetaToUpdateList(defaultColumns, onUpdateList);
     const columns = useColumns<EventWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
 
