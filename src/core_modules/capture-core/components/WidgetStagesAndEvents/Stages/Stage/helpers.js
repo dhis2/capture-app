@@ -113,16 +113,12 @@ export const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, ev
             { id: 'eventDate', header: i18n.t('Report date'), sortDirection: 'default' },
             { id: 'orgUnitName', header: i18n.t('Registering unit'), sortDirection: 'default',
             }];
-        const dataElementHeaders = events.reduce((acc, currEvent) => {
-            currEvent.dataValues.forEach((dataValue) => {
-                const { dataElement: id } = dataValue;
-                const dataInStage = dataElements.find(el => el.id === id);
-                if (dataInStage) {
-                    if (!acc.find(item => item.id === dataValue.dataElement)) {
-                        acc.push({ id, header: dataInStage.name, sortDirection: 'default' });
-                    }
-                }
-            });
+        const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
+            const { id, name } = currDataElement;
+            const eventDataElement = events.find(event => event.dataValues.find(el => el.dataElement === id));
+            if (eventDataElement && !acc.find(item => item.id === id)) {
+                acc.push({ id, header: name, sortDirection: 'default' });
+            }
             return acc;
         }, []);
         return [...defaultColumns, ...dataElementHeaders];
