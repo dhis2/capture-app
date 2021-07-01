@@ -1,3 +1,4 @@
+// @flow
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
