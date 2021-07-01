@@ -7,8 +7,3 @@ export type PlainProps = {|
     onEdit: () => {},
     ...CssClasses,
 |};
-
-export type Props = {|
-    showEditEvent: ?boolean,
-    onOpenEditEvent: () => {},
-|};
