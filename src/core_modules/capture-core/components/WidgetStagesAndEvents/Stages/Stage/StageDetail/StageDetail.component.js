@@ -13,7 +13,9 @@ import { colors,
     DataTableColumnHeader,
     Button,
 } from '@dhis2/ui';
-import { useComputeDataFromEvent, useComputeHeaderColumn, DEFAULT_NUMBER_OF_ROW, sortDataFromEvent } from '../helpers';
+import { sortDataFromEvent } from '../hooks/helpers';
+import { useComputeDataFromEvent, useComputeHeaderColumn } from '../hooks/useEventList';
+import { DEFAULT_NUMBER_OF_ROW } from '../hooks/constants';
 import type { Props } from './stageDetail.types';
 
 
