@@ -6,7 +6,6 @@ import isFunction from 'd2-utilizr/lib/isFunction';
 import type { ProgramRule } from '../../rules/engine';
 import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
 import type { Section } from './Section';
-import type { CustomForm } from './CustomForm';
 import type { DataElement, ConvertFn } from '../DataElement/DataElement';
 import type { Access } from '../Access';
 import { convertDataElementsValues } from '../helpers';
@@ -25,7 +24,7 @@ export class RenderFoundation {
     _sections: Map<string, Section>;
     _labels: { [key: string]: string };
     _programRules: Array<ProgramRule>;
-    _customForm: ?CustomForm;
+
     _featureType: string;
     _validationStrategy: $Values<typeof validationStrategies>;
 
@@ -81,13 +80,6 @@ export class RenderFoundation {
 
     get sections(): Map<string, Section> {
         return this._sections;
-    }
-
-    set customForm(customForm: CustomForm) {
-        this._customForm = customForm;
-    }
-    get customForm() {
-        return this._customForm;
     }
 
     set featureType(featureType: string) {
