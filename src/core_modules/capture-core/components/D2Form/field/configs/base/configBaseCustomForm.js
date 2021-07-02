@@ -4,8 +4,9 @@ import { getBaseConfigForField } from './configBase';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import type { FieldConfigForType } from './configBase';
 
-const getBaseProps = (metaData: MetaDataElement) => ({
-    metaCompulsory: metaData.compulsory,
+const getBaseProps = ({ compulsory, disabled, unique }: MetaDataElement) => ({
+    metaCompulsory: compulsory,
+    metaDisabled: disabled || unique?.generatable,
 });
 
 export const createProps = (props?: ?Object, metaData: MetaDataElement) => ({

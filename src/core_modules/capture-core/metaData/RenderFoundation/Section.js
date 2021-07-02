@@ -5,6 +5,7 @@
 import isFunction from 'd2-utilizr/lib/isFunction';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import type { DataElement } from '../DataElement';
+import type { CustomForm } from './CustomForm';
 
 export class Section {
     static MAIN_SECTION_ID = '#MAIN#';
@@ -21,6 +22,7 @@ export class Section {
     _collapsible: boolean;
     _elements: Map<string, DataElement>;
     _showContainer: boolean;
+    _customForm: ?CustomForm;
 
     constructor(initFn: (_this: Section) => void) {
         this._visible = true;
@@ -66,6 +68,13 @@ export class Section {
     }
     get visible(): boolean {
         return this._visible;
+    }
+
+    set customForm(customForm: CustomForm) {
+        this._customForm = customForm;
+    }
+    get customForm() {
+        return this._customForm;
     }
 
     set showContainer(showContainer: ?boolean) {
