@@ -8,6 +8,7 @@ import { convertValue as convertServerToClient } from '../../../../../converters
 import { statusTypes, translatedStatusTypes } from '../../../../../metaData';
 import { getSubValues } from '../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../types/common.types';
+import { SORT_DIRECTION } from './constants';
 
 const isEventOverdue = (event: ApiTEIEvent) => moment(event.dueDate).isSameOrBefore(new Date())
     && event.status === statusTypes.SCHEDULE;
@@ -36,11 +37,11 @@ const formatValueForView = (dataElements: Array<StageDataElement>, type: string)
 
 
 const sortDataFromEvent = (strA: any, strB: any, direction: string) => {
-    if (direction === 'asc') {
+    if (direction === SORT_DIRECTION.ASC) {
         return strA < strB ? -1 : 1;
     }
 
-    if (direction === 'desc') {
+    if (direction === SORT_DIRECTION.DESC) {
         return strA < strB ? 1 : -1;
     }
 

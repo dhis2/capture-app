@@ -15,7 +15,7 @@ import { colors,
 } from '@dhis2/ui';
 import { sortDataFromEvent } from '../hooks/helpers';
 import { useComputeDataFromEvent, useComputeHeaderColumn } from '../hooks/useEventList';
-import { DEFAULT_NUMBER_OF_ROW } from '../hooks/constants';
+import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from '../hooks/constants';
 import type { Props } from './stageDetail.types';
 
 
@@ -55,7 +55,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
     });
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
-    const getSortDirection = id => (id === columnName ? sortDirection : 'default');
+    const getSortDirection = id => (id === columnName ? sortDirection : SORT_DIRECTION.DEFAULT);
     const onSortIconClick = ({ name, direction }) => {
         setSortInstructions({
             columnName: name,
@@ -89,7 +89,9 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
             return null;
         }
         return dataSource
-            .sort((a, b) => sortDataFromEvent(a[columnName], b[columnName], sortDirection))
+            .sort((a, b) => // $FlowFixMe
+                sortDataFromEvent(a[columnName], b[columnName], sortDirection),
+            )
             .slice(0, displayedRowNumber)
             .map((row, index) => {
                 const cells = Object.keys(row)

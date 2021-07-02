@@ -11,6 +11,7 @@ import {
     getValueByKeyFromEvent,
     formatValueForView,
 } from './helpers';
+import { SORT_DIRECTION } from './constants';
 
 const baseKeys = [{ id: 'status' }, { id: 'eventDate' }, { id: 'orgUnitName' }];
 const basedFieldTypes = [
@@ -60,7 +61,7 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, events: A
             const { id, name } = currDataElement;
             const eventDataElement = events.find(event => event.dataValues.find(el => el.dataElement === id));
             if (eventDataElement && !acc.find(item => item.id === id)) {
-                acc.push({ id, header: name, sortDirection: 'default' });
+                acc.push({ id, header: name, sortDirection: SORT_DIRECTION.DEFAULT });
             }
             return acc;
         }, []);
