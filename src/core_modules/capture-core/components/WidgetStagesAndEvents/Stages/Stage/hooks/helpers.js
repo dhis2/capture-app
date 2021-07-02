@@ -70,28 +70,50 @@ const convertEventsToObject = (events: Array<ApiTEIEvent>) => events.reduce((acc
     return acc;
 }, []);
 
+const groupDataElementsByType = async (eventId, dataElements: Array<StageDataElement>, records: Object) => {
+    // $FlowFixMe
+    const dataElementsByType = dataElements.reduce((acc, dataElement) => {
+        const { id, type } = dataElement;
+        const value = records[id];
+
+        const currentItem = acc.find(item => item.type === dataElement.type);
+        if (!currentItem) {
+            acc.push({ type, ids: { [id]: value } });
+        } else {
+            currentItem.ids[id] = value;
+        }
+        return acc;
+    }, []);
+
+    for await (const item of dataElementsByType) {
+        item.ids = await getSubValues(eventId, item.type, item.ids);
+    }
+    return dataElementsByType;
+};
+
 const getAllFieldsWithValue = async (
     dataElements: Array<StageDataElement>,
     eventId: string,
     columns: Array<{id: string, isPredefined?: boolean }>,
     records: Object,
-) => Promise.all(columns
-    .filter(({ isPredefined }) => !isPredefined)
-    .map(async ({ id }) => {
-        const { type } = dataElements.find(el => el.id === id) ?? {};
-        if (type && records[id]) {
-        // $FlowFixMe
-            const subValue = await getSubValues(
-                eventId, type, { [id]: records[id] },
-            );
-            return {
-                id,
-                type,
-                value: formatValueForView(subValue[id], type),
-            };
-        }
-        return { id, value: undefined };
-    }));
+) => {
+    const dataElementsByType = await groupDataElementsByType(eventId, dataElements, records);
+
+    return Promise.all(columns
+        .filter(({ isPredefined }) => !isPredefined)
+        .map(async ({ id }) => {
+            const { type } = dataElements.find(el => el.id === id) ?? {};
+            if (type && records[id]) {
+                const value = dataElementsByType.find(item => item.type === type).ids[id];
+                return {
+                    id,
+                    type,
+                    value: formatValueForView(value, type),
+                };
+            }
+            return { id, value: undefined };
+        }));
+};
 
 
 export {

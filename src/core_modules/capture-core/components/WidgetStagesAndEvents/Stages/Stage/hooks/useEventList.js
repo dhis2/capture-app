@@ -45,7 +45,6 @@ const useComputeDataFromEvent =
                     value: formatValueForView(getValueByKeyFromEvent(event, field), field.type),
                 }));
                 const allFields = await getAllFieldsWithValue(dataElements, eventId, headerColumns, records);
-
                 eventsData.push([...predefinedFields, ...allFields]);
             }
             setDataSource(eventsData);
