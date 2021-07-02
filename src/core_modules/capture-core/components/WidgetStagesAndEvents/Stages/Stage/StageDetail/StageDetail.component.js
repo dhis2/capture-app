@@ -89,20 +89,16 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
             return null;
         }
         return dataSource
-            .sort((a, b) => {
-                const strA = a.find(cl => cl.id === columnName)?.value;
-                const strB = b.find(cl => cl.id === columnName)?.value;
-                return sortDataFromEvent(strA, strB, sortDirection);
-            })
+            .sort((a, b) => sortDataFromEvent(a[columnName], b[columnName], sortDirection))
             .slice(0, displayedRowNumber)
             .map((row, index) => {
-                const cells = row
-                    .map(column => (
+                const cells = Object.keys(row)
+                    .map(id => (
                         <DataTableCell
-                            key={column.id}
+                            key={id}
                         >
                             <div >
-                                {column.value}
+                                {row[id]}
                             </div>
                         </DataTableCell>
                     ));

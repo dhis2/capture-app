@@ -99,20 +99,18 @@ const getAllFieldsWithValue = async (
 ) => {
     const dataElementsByType = await groupDataElementsByType(eventId, dataElements, records);
 
-    return Promise.all(columns
+    return columns
         .filter(({ isPredefined }) => !isPredefined)
-        .map(async ({ id }) => {
+        .reduce((acc, { id }) => {
             const { type } = dataElements.find(el => el.id === id) ?? {};
             if (type && records[id]) {
                 const value = dataElementsByType.find(item => item.type === type).ids[id];
-                return {
-                    id,
-                    type,
-                    value: formatValueForView(value, type),
-                };
+                acc[id] = formatValueForView(value, type);
+            } else {
+                acc[id] = undefined;
             }
-            return { id, value: undefined };
-        }));
+            return acc;
+        }, {});
 };
 
 

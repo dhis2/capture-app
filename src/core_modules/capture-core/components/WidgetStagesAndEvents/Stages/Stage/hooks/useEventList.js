@@ -40,12 +40,13 @@ const useComputeDataFromEvent =
             // $FlowFixMe
             for await (const eventObject of eventsObject) {
                 const { id: eventId, records, event } = eventObject;
-                const predefinedFields = baseFields.map(field => ({
-                    ...field,
-                    value: formatValueForView(getValueByKeyFromEvent(event, field), field.type),
-                }));
+                const predefinedFields = baseFields.reduce((acc, field) => {
+                    acc[field.id] = formatValueForView(getValueByKeyFromEvent(event, field), field.type);
+                    return acc;
+                }, {});
+
                 const allFields = await getAllFieldsWithValue(dataElements, eventId, headerColumns, records);
-                eventsData.push([...predefinedFields, ...allFields]);
+                eventsData.push({ ...predefinedFields, ...allFields });
             }
             setDataSource(eventsData);
         };
