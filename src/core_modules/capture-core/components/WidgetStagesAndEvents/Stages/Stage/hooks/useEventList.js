@@ -20,9 +20,9 @@ const basedFieldTypes = [
     { type: dataElementTypes.TEXT },
 ];
 const baseColumnHeaders = [
-    { header: i18n.t('Status'), sortDirection: 'default', isPredefined: true },
-    { header: i18n.t('Report date'), sortDirection: 'default', isPredefined: true },
-    { header: i18n.t('Registering unit'), sortDirection: 'default', isPredefined: true,
+    { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
+    { header: i18n.t('Report date'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
+    { header: i18n.t('Registering unit'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true,
     }];
 
 const baseFields = baseKeys.map((key, index) => ({ ...key, ...basedFieldTypes[index] }));
