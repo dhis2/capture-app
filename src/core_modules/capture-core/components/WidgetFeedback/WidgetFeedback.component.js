@@ -10,7 +10,7 @@ export const WidgetFeedback = ({ feedback, emptyText }: Props) => {
 
     return (
         <div
-            data-test={'feedback-widget'}
+            data-test="feedback-widget"
         >
             <Widget
                 header={i18n.t('Feedback')}
