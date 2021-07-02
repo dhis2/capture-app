@@ -949,6 +949,9 @@ msgstr ""
 msgid "Last updated {{date}}"
 msgstr ""
 
+msgid "Error"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 

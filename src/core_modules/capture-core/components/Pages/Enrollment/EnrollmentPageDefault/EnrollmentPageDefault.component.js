@@ -8,6 +8,7 @@ import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 import { WidgetFeedback } from '../../../WidgetFeedback';
+import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -50,6 +51,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetStagesAndEvents stages={program.stages} />
             </div>
             <div className={classes.rightColumn}>
+                <WidgetError error={widgetEffects?.errors} />
                 {!hideWidgets.feedback && (
                     <WidgetFeedback
                         feedback={widgetEffects?.feedbacks}
