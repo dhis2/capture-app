@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-24T07:52:28.588Z\n"
+"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -610,6 +610,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
@@ -978,6 +981,12 @@ msgid "Owned by {{ownerOrgUnit}}"
 msgstr ""
 
 msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Warning"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
