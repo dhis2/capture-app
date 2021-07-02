@@ -1,5 +1,5 @@
 // @flow
-import type { EventProgram } from '../../../metaData';
+import type { Program } from '../../../metaData';
 import type {
     CancelLoadTemplates,
     CancelLoadView,
@@ -88,7 +88,7 @@ export type EventWorkingListsReduxOutputProps = {|
     onUpdateList: UpdateList,
     onUpdateTemplate: UpdateTemplate,
     orgUnitId: string,
-    program: EventProgram,
+    program: Program,
     programStageId: string,
     recordsOrder?: RecordsOrder,
     rowsPerPage?: number,

@@ -13,7 +13,7 @@ const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView) =>
                 // $FlowFixMe
                 .map(({ id, type, apiName, isMainProperty }) => [id, { id, type, apiName, isMainProperty }]),
         );
-        onLoadView(selectedTemplate, { ...context }, { ...meta, columnsMetaForDataFetching });
+        onLoadView(selectedTemplate, context, { ...meta, columnsMetaForDataFetching });
     }, [onLoadView, defaultColumns]);
 
 const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
@@ -29,7 +29,6 @@ const useInjectColumnMetaToUpdateList = (defaultColumns, onUpdateList) =>
 export const EventWorkingListsColumnSetup = ({
     program,
     programStageId,
-    orgUnitId,
     customColumnOrder,
     onLoadView,
     onUpdateList,
@@ -48,7 +47,6 @@ export const EventWorkingListsColumnSetup = ({
             {...passOnProps}
             program={program}
             programStageId={programStageId}
-            orgUnitId={orgUnitId}
             columns={columns}
             defaultColumns={defaultColumns}
             onLoadView={injectColumnMetaToLoadList}
