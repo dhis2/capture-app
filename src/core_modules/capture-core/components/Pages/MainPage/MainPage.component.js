@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { WorkingListsType } from '../../WorkingListsType';
+import { WorkingListsType } from './WorkingListsType';
 import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
 import type { Props } from './mainPage.types';
 
