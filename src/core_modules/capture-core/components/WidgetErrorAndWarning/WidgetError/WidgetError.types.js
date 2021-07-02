@@ -1,12 +1,7 @@
 // @flow
-export type RuleObject = {|
-    id: string,
-    message: string,
-|}
-
-export type Rule = RuleObject | string;
+import type { Message } from '../content/WidgetErrorAndWarningContent.types';
 
 export type Props = {|
-    error?: Array<Rule>,
+    error?: Array<Message>,
     ...CssClasses
 |}
