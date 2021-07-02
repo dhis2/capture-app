@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from '../../../capture-core-utils';
-import { RulesEngine } from 'capture-core-utils/rulesEngine';
+import { rulesEngine } from '../rulesEngine';
 import { TrackerProgram } from '../../metaData';
 import type { DataElement, RenderFoundation } from '../../metaData';
 import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
@@ -123,11 +123,14 @@ export function runRulesForTEI(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return RulesEngine.programRuleEffectsForTEI(
+        return rulesEngine.getProgramRuleEffects(
             { programRulesVariables, programRules, constants },
-            enrollmentData,
-            teiValues,
+            null,
+            null,
+            null,
             trackedEntityAttributes,
+            teiValues,
+            enrollmentData,
             orgUnit,
             // $FlowFixMe[prop-missing] automated comment
             optionSets,

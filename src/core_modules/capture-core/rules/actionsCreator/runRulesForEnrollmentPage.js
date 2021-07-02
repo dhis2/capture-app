@@ -1,5 +1,5 @@
 // @flow
-import { RulesEngine } from 'capture-core-utils/rulesEngine';
+import { rulesEngine } from '../rulesEngine';
 import type { Program } from '../../metaData';
 import type {
     EventsDataContainer,
@@ -22,7 +22,7 @@ type RuleEnrollmentData = {
     enrollmentData: ?Enrollment,
 }
 
-export default function runRulesForEnrollmentPage(data: RuleEnrollmentData) {
+export function runRulesForEnrollmentPage(data: RuleEnrollmentData) {
     const {
         program,
         orgUnit,
@@ -39,14 +39,15 @@ export default function runRulesForEnrollmentPage(data: RuleEnrollmentData) {
     const optionSets = optionSetStore.get();
 
     // returns an array of effects that need to take place in the UI.
-    return RulesEngine.programRuleEffectsForEnrollment(
+    return rulesEngine.getProgramRuleEffects(
         { programRulesVariables, programRules, constants },
+        null,
         eventsData,
-        orgUnit,
         dataElementsInProgram,
         teiValues,
         trackedEntityAttributes,
         enrollmentData,
+        orgUnit,
         // $FlowFixMe[prop-missing] automated comment
         optionSets,
     );

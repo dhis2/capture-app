@@ -1,4 +1,6 @@
 // @flow
+import log from 'loglevel';
+import isString from 'd2-utilizr/lib/isString';
 import { mapTypeToInterfaceFnName } from '../../typeToInterfaceFnName.const';
 import { processTypes } from './processTypes.const';
 import { effectActions } from '../../effectActions.const';
@@ -16,14 +18,13 @@ import type {
     CompulsoryEffect,
     OutputEffect,
 } from '../../rulesEngine.types';
+import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable'
 
 const mapProcessTypeToIdentifierName = {
     [processTypes.EVENT]: 'dataElementId',
     [processTypes.TEI]: 'trackedEntityAttributeId',
     [processTypes.ENROLLMENT]: 'enrollmentId',
 };
-
-type ConvertDataToBaseOutputValue = (value: any, valueType: string) => any;
 
 const sanitiseFalsy = (value) => {
     if (value) {
@@ -35,22 +36,19 @@ const sanitiseFalsy = (value) => {
     return '';
 };
 
+type BaseValueType = number | ?string | boolean;
+
 export function getRulesEffectsProcessor(
-    onConvertDataToBaseOutputValue: ConvertDataToBaseOutputValue,
-    rulesEffectsValueConverters: IConvertOutputRulesEffectsValue,
+    outputConverters: IConvertOutputRulesEffectsValue,
 ) {
-    function convertBaseValueToOutputValue(baseValue: any, valueType: string) {
+    function convertNormalizedValueToOutputValue(normalizedValue: BaseValueType, valueType: string) {
         let outputValue;
-        if (baseValue || baseValue === 0 || baseValue === false) {
-            const converterName = mapTypeToInterfaceFnName[valueType];
-
-            // $FlowFixMe[prop-missing] automated comment
-            outputValue = rulesEffectsValueConverters[converterName] ?
-
-                // $FlowFixMe[incompatible-use] automated comment
-                rulesEffectsValueConverters[converterName](baseValue) :
-                baseValue;
+        if (normalizedValue || normalizedValue === 0 || normalizedValue === false) {
+            const converterName: string = mapTypeToInterfaceFnName[valueType];
+            // $FlowExpectedError
+            outputValue = outputConverter[converterName](normalizedValue);
         } else {
+            // $FlowExpectedError
             outputValue = baseValue;
         }
         return outputValue;
@@ -74,8 +72,8 @@ export function getRulesEffectsProcessor(
             trackedEntityAttributes[effect[processIdName]];
 
         const valueType = element.valueType;
-        const baseValue = onConvertDataToBaseOutputValue(effect.data, valueType);
-        const outputValue = convertBaseValueToOutputValue(baseValue, valueType);
+        const normalizedValue = normalizeRuleVariable(effect.data, valueType);
+        const outputValue = convertNormalizedValueToOutputValue(normalizedValue, valueType);
 
         return {
             type: effectActions.ASSIGN_VALUE,
@@ -281,7 +279,7 @@ export function getRulesEffectsProcessor(
         if (effects) {
             return effects
                 .filter(({ action }) => mapActionsToProcessor[action])
-                .map(effect => mapActionsToProcessor[effect.action](
+                .flatMap(effect => mapActionsToProcessor[effect.action](
                     effect,
                     processIdName,
                     processType,

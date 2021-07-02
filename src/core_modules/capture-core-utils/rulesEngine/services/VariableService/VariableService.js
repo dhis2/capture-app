@@ -4,9 +4,9 @@ import { OptionSetHelper } from '../../helpers/OptionSetHelper';
 import { typeKeys } from '../../typeKeys.const';
 import { variablePrefixes } from './variablePrefixes.const';
 import { getDateUtils } from '../../commonUtils/dateUtils';
-import { momentConverter } from 'capture-core/rules/converters/momentConverter';
 
 import type {
+    ProgramRulesContainer,
     ProgramRuleVariable,
     EventData,
     EventsDataContainer,
@@ -16,10 +16,12 @@ import type {
     TrackedEntityAttribute,
     TrackedEntityAttributes,
     Enrollment,
-    Constants,
     OrgUnit,
     RuleVariable,
     TEIValues,
+    Constants,
+    IMomentConverter,
+    IConvertInputRulesValue,
 } from '../../rulesEngine.types';
 
 type SourceData = {
@@ -66,12 +68,17 @@ export class VariableService {
             OptionSetHelper.getName(optionSets[trackedEntityAttributes[trackedEntityAttributeId].optionSetId].options, value)
             : value;
     }
-    static dateUtils = getDateUtils(momentConverter);
+
+    static dateUtils: any;
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
-    constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any) {
+    constructor(
+        onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+        momentConverter: IMomentConverter
+    ) {
         this.onProcessValue = onProcessValue;
+        VariableService.dateUtils = getDateUtils(momentConverter);
 
         this.mapSourceTypeToGetterFn = {
             [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: this.getVariableForCurrentEvent,
@@ -84,7 +91,7 @@ export class VariableService {
     }
 
     getVariables(
-        programRulesContainer: { constants?: ?Constants, programRulesVariables: ?Array<ProgramRuleVariable>},
+        programRulesContainer: ProgramRulesContainer,
         executingEvent: ?EventData,
         eventsContainer: ?EventsDataContainer,
         dataElements: ?DataElements,

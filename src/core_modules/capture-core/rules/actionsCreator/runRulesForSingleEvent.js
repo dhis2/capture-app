@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import { RulesEngine } from 'capture-core-utils/rulesEngine';
+import { rulesEngine } from '../rulesEngine';
 import { errorCreator } from '../../../capture-core-utils';
 import type { Program, RenderFoundation, DataElement } from '../../metaData';
 import { EventProgram } from '../../metaData';
@@ -117,10 +117,14 @@ export function runRulesForSingleEvent(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return RulesEngine.programRuleEffectsForEvent(
+        return rulesEngine.getProgramRuleEffects(
             { programRulesVariables, programRules, constants },
-            { currentEvent, allEvents },
+            currentEvent,
+            allEvents,
             dataElementsInProgram,
+            null,
+            null,
+            null,
             orgUnit,
             // $FlowFixMe[prop-missing] automated comment
             optionSets,
