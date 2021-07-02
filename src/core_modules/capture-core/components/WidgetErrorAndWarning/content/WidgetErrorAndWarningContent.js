@@ -4,8 +4,7 @@ import React from 'react';
 import { spacers, colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
-import type { contentTypes, ObjectType, StringType } from './WidgetErrorAndWarningContent.types';
-import type { Rule } from '../WidgetError/WidgetError.types';
+import type { contentTypes, ObjectType, StringType, Message } from './WidgetErrorAndWarningContent.types';
 import { widgetTypes } from './WidgetTypes';
 
 const styles = {
@@ -50,11 +49,11 @@ const ObjectItem = ({ rule, listItem }: ObjectType) => (
 );
 
 
-const StringItem = ({ rule, listItem }: StringType) => (
+const StringItem = ({ message, listItem }: StringType) => (
     <li
         className={listItem}
     >
-        {rule}
+        {message}
     </li>
 );
 
@@ -68,11 +67,11 @@ const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: conten
             className={classes.widgetWrapper}
         >
             <ul className={classes.unorderedList}>
-                {widgetData?.map((rule: Rule, index) => {
-                    if (typeof rule === 'string') {
+                {widgetData?.map((message: Message, index) => {
+                    if (typeof message === 'string') {
                         return (
                             <StringItem
-                                rule={rule}
+                                message={message}
                                 listItem={cx(classes.listItem, {
                                     warning,
                                     error,
@@ -81,11 +80,11 @@ const WidgetErrorAndWarningContentPlain = ({ widgetData, type, classes }: conten
                                 key={index}
                             />
                         );
-                    } else if (typeof rule === 'object') {
+                    } else if (typeof message === 'object') {
                         return (
                             <ObjectItem
-                                rule={rule}
-                                key={rule.id}
+                                rule={message}
+                                key={message.id}
                                 listItem={cx(classes.listItem, {
                                     warning,
                                     error,

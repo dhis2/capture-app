@@ -1,19 +1,24 @@
 // @flow
-import type { Rule, RuleObject } from '../WidgetError/WidgetError.types';
+export type MessageObject = {|
+    id: string,
+    message: string,
+|}
+
+export type Message = MessageObject | string;
 
 export type contentTypes = {|
-    widgetData: Array<Rule> | Array<string>,
+    widgetData: Array<Message> | Array<string>,
     type: string,
     ...CssClasses
 |}
 
 export type ObjectType = {|
-    rule: RuleObject,
+    rule: MessageObject,
     listItem: string,
 |}
 
 export type StringType = {|
-    rule: string,
+    message: string,
     listItem: string,
     index?: number,
 |}
