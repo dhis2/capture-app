@@ -13,7 +13,7 @@ import { colors,
     DataTableColumnHeader,
     Button,
 } from '@dhis2/ui';
-import { sortDataFromEvent } from '../hooks/helpers';
+import { sortDataFromEvent } from '../hooks/sortFuntions';
 import { useComputeDataFromEvent, useComputeHeaderColumn } from '../hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from '../hooks/constants';
 import type { Props } from './stageDetail.types';
@@ -51,7 +51,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
 
     const [{ columnName, sortDirection }, setSortInstructions] = useState({
         columnName: 'eventDate',
-        sortDirection: 'desc',
+        sortDirection: SORT_DIRECTION.DESC,
     });
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
@@ -89,9 +89,11 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
             return null;
         }
         return dataSource
-            .sort((a, b) => // $FlowFixMe
-                sortDataFromEvent(a[columnName], b[columnName], sortDirection),
-            )
+            .sort((a, b) => {
+                const { type } = headerColumns.find(col => col.id === columnName) || {};
+                // $FlowFixMe
+                return sortDataFromEvent(a[columnName], b[columnName], type, sortDirection);
+            })
             .slice(0, displayedRowNumber)
             .map((row, index) => {
                 const cells = Object.keys(row)
