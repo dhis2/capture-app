@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/dhis2/capture-app/compare/v1.32.0...v1.33.0) (2021-07-02)
+
+
+### Features
+
+* DHIS2-11212 Indicator Widget ([f4c6568](https://github.com/dhis2/capture-app/commit/f4c656879cca5204626d522791df52098bdd55d0))
+
 # [1.32.0](https://github.com/dhis2/capture-app/compare/v1.31.1...v1.32.0) (2021-07-02)
 
 
