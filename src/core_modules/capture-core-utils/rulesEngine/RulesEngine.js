@@ -23,10 +23,10 @@ import type {
     D2Functions,
     EventsDataContainer,
 } from './rulesEngine.types';
-import { inputValueConverter } from './converters/inputValueConverter';
+import { inputValueConverter } from 'capture-core/rules/converters/inputValueConverter';
 import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
-import { rulesEffectsValueConverter } from './converters/rulesEffectsValueConverter';
-import { momentConverter } from './converters/momentConverter';
+import { rulesEffectsValueConverter } from 'capture-core/rules/converters/rulesEffectsValueConverter';
+import { momentConverter } from 'capture-core/rules/converters/momentConverter';
 import { effectActions } from './effectActions.const';
 import { typeKeys } from './typeKeys.const';
 import { trimQuotes } from './commonUtils/trimQuotes';

@@ -3,7 +3,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { ProgramRule } from '../../rules/engine';
+import type { ProgramRule } from 'capture-core-utils/rulesEngine';
 import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
 import type { Section } from './Section';
 import type { CustomForm } from './CustomForm';

@@ -14,7 +14,7 @@ import type {
     OrgUnit,
     EventData,
     EventsData,
-} from '../engine';
+} from 'capture-core-utils/rulesEngine';
 
 
 function getRulesActions(

@@ -4,7 +4,7 @@ import { OptionSetHelper } from '../../helpers/OptionSetHelper';
 import { typeKeys } from '../../typeKeys.const';
 import { variablePrefixes } from './variablePrefixes.const';
 import { getDateUtils } from '../../commonUtils/dateUtils';
-import { momentConverter } from '../../converters/momentConverter';
+import { momentConverter } from 'capture-core/rules/converters/momentConverter';
 
 import type {
     ProgramRuleVariable,

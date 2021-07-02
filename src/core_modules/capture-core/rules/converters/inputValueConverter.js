@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 import { parseNumber } from 'capture-core-utils/parsers';
 import { moment } from 'capture-core-utils/moment';
-import type { IConvertInputRulesValue } from '../rulesEngine.types';
+import type { IConvertInputRulesValue } from 'capture-core-utils/rulesEngine/rulesEngine.types';
 
 const dateMomentFormat = 'YYYY-MM-DD';
 

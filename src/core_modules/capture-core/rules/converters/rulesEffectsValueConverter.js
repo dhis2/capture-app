@@ -1,8 +1,8 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 import moment from 'moment';
-import { convertMomentToDateFormatString } from '../../../utils/converters/date';
-import type { IConvertOutputRulesEffectsValue } from '../rulesEngine.types';
+import { convertMomentToDateFormatString } from '../../utils/converters/date';
+import type { IConvertOutputRulesEffectsValue } from 'capture-core-utils/rulesEngine/rulesEngine.types';
 
 const dateMomentFormat = 'YYYY-MM-DD';
 

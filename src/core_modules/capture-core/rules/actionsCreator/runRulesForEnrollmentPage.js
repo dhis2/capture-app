@@ -1,5 +1,5 @@
 // @flow
-import { RulesEngine } from '../engine';
+import { RulesEngine } from 'capture-core-utils/rulesEngine';
 import type { Program } from '../../metaData';
 import type {
     EventsDataContainer,
@@ -8,7 +8,7 @@ import type {
     TEIValues,
     Enrollment,
     TrackedEntityAttributes,
-} from '../engine';
+} from 'capture-core-utils/rulesEngine';
 import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
 import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
 
