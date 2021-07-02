@@ -7,6 +7,7 @@ import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
+import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetFeedback } from '../../../WidgetFeedback';
 import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 
@@ -52,6 +53,7 @@ export const EnrollmentPageDefaultPlain = ({
             </div>
             <div className={classes.rightColumn}>
                 <WidgetError error={widgetEffects?.errors} />
+                <WidgetWarning warning={widgetEffects?.warnings} />
                 {!hideWidgets.feedback && (
                     <WidgetFeedback
                         feedback={widgetEffects?.feedbacks}

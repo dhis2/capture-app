@@ -952,6 +952,9 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
+msgid "Warning"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
