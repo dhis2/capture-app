@@ -95,7 +95,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
             key={section.id}
             innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
             sectionMetaData={section}
-            customForm={this.props.formFoundation.customForm}
+            customForm={section.customForm}
             validationStrategy={this.props.formFoundation.validationStrategy}
             formId={this.getFormId()}
             formBuilderId={this.getFormBuilderId(section.id)}
@@ -106,13 +106,14 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
     renderVertical = (section: Section, passOnProps: any, classes: Object) => (
         <div
             data-test="d2-form-component"
-            className={this.props.formFoundation.customForm ? classes.containerCustomForm : ''}
+            className={section.customForm ? classes.containerCustomForm : ''}
             key={section.id}
         >
             <D2SectionContainer
-                innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
+                innerRef={(sectionInstance) => {
+                    this.setSectionInstance(sectionInstance, section.id);
+                }}
                 sectionMetaData={section}
-                customForm={this.props.formFoundation.customForm}
                 validationStrategy={this.props.formFoundation.validationStrategy}
                 formId={this.getFormId()}
                 formBuilderId={this.getFormBuilderId(section.id)}

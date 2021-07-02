@@ -1,7 +1,7 @@
 // @flow
-import type { Rule } from '../WidgetError/WidgetError.types';
+import type { Message } from '../content/WidgetErrorAndWarningContent.types';
 
 export type Props = {|
-    warning?: ?Array<Rule>,
+    warning?: ?Array<Message>,
     ...CssClasses
 |}
