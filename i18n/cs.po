@@ -1000,10 +1000,10 @@ msgid "Last updated {{date}}"
 msgstr "Poslední aktualizace {{date}}"
 
 msgid "Error"
-msgstr ""
+msgstr "Chyba"
 
 msgid "Warning"
-msgstr ""
+msgstr "Varování"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"

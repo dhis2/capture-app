@@ -965,10 +965,10 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 msgid "Warning"
-msgstr ""
+msgstr "Warning"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
