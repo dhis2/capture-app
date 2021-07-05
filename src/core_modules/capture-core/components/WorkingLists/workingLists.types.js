@@ -71,7 +71,7 @@ export type CancelUpdateList = () => void;
 export type DeleteTemplate = (template: WorkingListTemplate) => void;
 export type LoadView = (
     template: WorkingListTemplate,
-    meta: {| programId: string, orgUnitId: string, categories?: Categories |}) => void;
+    meta: {| programId: string, orgUnitId: string, categories?: Categories, programStageId?: string |}) => void;
 export type LoadTemplates = (programId: string) => void;
 export type SelectTemplate = (templateId: string) => void;
 export type UnloadingContext = () => void;
@@ -197,6 +197,7 @@ export type InterfaceProps = $ReadOnly<{|
     onUpdateTemplate?: UpdateTemplate,
     orgUnitId: string,
     programId: string,
+    programStageId: string,
     rowIdKey: string,
     rowsPerPage?: number,
     sortByDirection?: string,

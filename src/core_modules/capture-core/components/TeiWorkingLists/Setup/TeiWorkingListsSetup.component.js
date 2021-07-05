@@ -197,6 +197,7 @@ export const TeiWorkingListsSetup = ({
             onLoadView={useInjectDataFetchingMetaToLoadList(defaultColumns, filtersOnly, onLoadView)}
             onUpdateList={useInjectDataFetchingMetaToUpdateList(defaultColumns, filtersOnly, onUpdateList)}
             programId={program.id}
+            programStageId=""
             rowIdKey="id"
             currentViewHasTemplateChanges={viewHasChanges}
             filters={filters}
