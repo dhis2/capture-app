@@ -1,11 +1,10 @@
 // @flow
 import React from 'react';
 // $FlowFixMe
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode } from './EnrollmentEventPage.const';
 import { EnrollmentEventPageComponent } from './EnrollmentEventPage.component';
-import { startShowEditEventDataEntry } from './EnrollmentEventPage.actions';
 
 export const EnrollmentEventPage = () => {
     const { programId, stageId } = useSelector(
@@ -20,7 +19,6 @@ export const EnrollmentEventPage = () => {
         shallowEqual,
     );
     const { program } = useProgramInfo(programId);
-    const dispatch = useDispatch();
     const showEditEvent = useSelector(
         ({ viewEventPage }) =>
             viewEventPage?.eventDetailsSection?.showEditEvent,
@@ -33,7 +31,6 @@ export const EnrollmentEventPage = () => {
         <EnrollmentEventPageComponent
             mode={showEditEvent ? pageMode.EDIT : pageMode.VIEW}
             programStage={programStage}
-            onEdit={() => dispatch(startShowEditEventDataEntry())}
         />
     );
 };

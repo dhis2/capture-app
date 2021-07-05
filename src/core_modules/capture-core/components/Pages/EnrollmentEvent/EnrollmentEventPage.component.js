@@ -21,7 +21,6 @@ const styles = ({ typography }) => ({
 const EnrollmentEventPagePain = ({
     mode,
     programStage,
-    onEdit,
     classes,
 }: PlainProps) => (
     <div className={classes.page}>
@@ -35,11 +34,7 @@ const EnrollmentEventPagePain = ({
                 })}
         </div>
         {programStage ? (
-            <WidgetEventEdit
-                programStage={programStage}
-                mode={mode}
-                onEdit={onEdit}
-            />
+            <WidgetEventEdit programStage={programStage} mode={mode} />
         ) : (
             <span>{i18n.t('We could not find the stage in the program')}</span>
         )}
