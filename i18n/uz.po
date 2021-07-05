@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
+"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -616,6 +616,12 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "\"{{enrollmentId}}\" идентификатори билан қайд қилиш имконсиз"
 
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 "{{teiDisplayName}} бир неча дастурларда қайд этилган. Дастурни танланг."
@@ -889,6 +895,12 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Барча дастурларда қидириш"
 
+msgid "events"
+msgstr "ҳодиса/тадбирлар"
+
+msgid "event"
+msgstr "ҳодиса/тадбир"
+
 msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
 
@@ -1000,6 +1012,12 @@ msgstr " {{orgUnitName}} эгалиги асосида"
 
 msgid "Last updated {{date}}"
 msgstr " {{date}}да охирги марта янгиланган"
+
+msgid "Error"
+msgstr ""
+
+msgid "Warning"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

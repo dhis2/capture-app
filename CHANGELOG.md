@@ -1,3 +1,32 @@
+## [1.33.1](https://github.com/dhis2/capture-app/compare/v1.33.0...v1.33.1) (2021-07-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b53b57b](https://github.com/dhis2/capture-app/commit/b53b57ba0423f70e312fd5d2feb43502f2ddb44d))
+
+# [1.33.0](https://github.com/dhis2/capture-app/compare/v1.32.0...v1.33.0) (2021-07-02)
+
+
+### Features
+
+* DHIS2-11212 Indicator Widget ([f4c6568](https://github.com/dhis2/capture-app/commit/f4c656879cca5204626d522791df52098bdd55d0))
+
+# [1.32.0](https://github.com/dhis2/capture-app/compare/v1.31.1...v1.32.0) (2021-07-02)
+
+
+### Features
+
+* DHIS2-11044 ErrorWidget ([072dc04](https://github.com/dhis2/capture-app/commit/072dc048e89e8d7609473e80f7f8b2cc9393aeaf))
+* DHIS2-11236 Warning Widget ([e60fb1e](https://github.com/dhis2/capture-app/commit/e60fb1e9b5d0bf82eacaa089d9fcf649972f1c4c))
+
+## [1.31.1](https://github.com/dhis2/capture-app/compare/v1.31.0...v1.31.1) (2021-07-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([63dce6d](https://github.com/dhis2/capture-app/commit/63dce6db73cefd74b6e30c935c873abd35833c89))
+
 # [1.31.0](https://github.com/dhis2/capture-app/compare/v1.30.0...v1.31.0) (2021-06-30)
 
 

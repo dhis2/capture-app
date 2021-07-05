@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 
@@ -25,8 +24,8 @@ const styles = theme => ({
     },
     container: {
         borderColor: theme.palette.type === 'light'
-            ? lighten(fade(theme.palette.divider, 1), 0.88)
-            : darken(fade(theme.palette.divider, 1), 0.8),
+            ? theme.palette.dividerLighter
+            : theme.palette.dividerDarker,
         borderWidth: '1px',
         borderStyle: 'solid',
     },
@@ -49,8 +48,8 @@ const styles = theme => ({
             paddingRight: theme.spacing.unit * 3,
         },
         borderBottomColor: theme.palette.type === 'light'
-            ? lighten(fade(theme.palette.divider, 1), 0.88)
-            : darken(fade(theme.palette.divider, 1), 0.8),
+            ? theme.palette.dividerLighter
+            : theme.palette.dividerDarker,
     },
     bodyCell: {
         fontSize: theme.typography.pxToRem(13),

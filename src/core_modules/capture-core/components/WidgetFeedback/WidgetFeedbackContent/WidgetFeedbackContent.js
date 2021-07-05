@@ -34,7 +34,7 @@ const styles = {
 
 const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: ContentType) => {
     if (!widgetData?.length) {
-        return <p data-test={'widget-content'} className={classes.noFeedbackText}>{emptyText}</p>;
+        return <p data-test="widget-content" className={classes.noFeedbackText}>{emptyText}</p>;
     }
 
     const renderTextObject = (item: FilteredText) => (
@@ -66,7 +66,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
 
     return (
         <div
-            data-test={'widget-content'}
+            data-test="widget-content"
             className={classes.container}
         >
             <ul className={classes.unorderedList}>
