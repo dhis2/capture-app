@@ -609,6 +609,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
@@ -914,6 +917,12 @@ msgid "Owned by {{ownerOrgUnit}}"
 msgstr ""
 
 msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Warning"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"

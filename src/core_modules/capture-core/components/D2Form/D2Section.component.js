@@ -68,6 +68,7 @@ class D2SectionPlain extends React.PureComponent<Props> {
                 <D2SectionFields
                     ref={(instance) => { this.sectionFieldsInstance = instance; }}
                     fieldsMetaData={sectionMetaData.elements}
+                    customForm={sectionMetaData.customForm}
                     {...passOnProps}
                 />
             );
