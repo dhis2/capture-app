@@ -1,6 +1,6 @@
 // @flow
 import { useMemo } from 'react';
-import { translatedStatusTypes } from 'capture-core/metaData/DataElement/statusTypes';
+import { translatedStatusTypes } from 'capture-core/events/statusTypes';
 import i18n from '@dhis2/d2-i18n';
 import {
     type ProgramStage,
