@@ -25,7 +25,7 @@ type Props = {
 const styles = (theme: Theme) => ({
     listItem: {
         display: 'flex',
-        backgroundColor: theme.palette.grey[100],
+        backgroundColor: '#f5f5f5',
         paddingLeft: theme.typography.pxToRem(10),
         marginTop: theme.typography.pxToRem(8),
     },
