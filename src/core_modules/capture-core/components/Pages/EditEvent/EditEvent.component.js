@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 
 import { withStyles } from '@material-ui/core/styles';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import { IconChevronLeft24 } from '@dhis2/ui';
 import { EditEventDataEntry } from './DataEntry/EditEventDataEntry.container';
 import { Button } from '../../Buttons/Button.component';
 import type { CancelButtonComponent } from '../../DataEntry/CancelButton.component';
@@ -64,7 +64,7 @@ class EditEventPlain extends Component<Props> {
         return (
             <div className={classes.container}>
                 <Button className={classes.showAllEvents} variant="raised" onClick={this.handleGoBackToAllEvents}>
-                    <ChevronLeft />
+                    <IconChevronLeft24 />
                     {i18n.t('Show all events')}
                 </Button>
                 <Paper

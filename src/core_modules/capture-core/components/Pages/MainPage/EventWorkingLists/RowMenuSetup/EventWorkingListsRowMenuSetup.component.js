@@ -2,15 +2,12 @@
 import React, { useMemo, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import Delete from '@material-ui/icons/Delete';
+import { IconDelete24, colors } from '@dhis2/ui';
 import { EventWorkingListsUpdateTrigger } from '../UpdateTrigger';
 import type { CustomRowMenuContents } from '../../WorkingLists';
 import type { Props } from './eventWorkingListsRowMenuSetup.types';
 
-const getStyles = (theme: Theme) => ({
-    deleteIcon: {
-        fill: theme.palette.error.main,
-    },
+const getStyles = () => ({
     deleteContainer: {
         display: 'flex',
     },
@@ -25,11 +22,11 @@ export const EventWorkingListsRowMenuSetupPlain = ({ onDeleteEvent, classes, ...
                 data-test="delete-event-button"
                 className={classes.deleteContainer}
             >
-                <Delete className={classes.deleteIcon} />
+                <IconDelete24 color={colors.red400} />
                 {i18n.t('Delete event')}
             </span>
         ),
-    }], [onDeleteEvent, classes.deleteIcon, classes.deleteContainer]);
+    }], [onDeleteEvent, classes.deleteContainer]);
 
     return (
         <EventWorkingListsUpdateTrigger

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
-import ClearIcon from '@material-ui/icons/Clear';
+import { IconCross24 } from '@dhis2/ui';
 import IconButton from '@material-ui/core/IconButton';
 import { AddLocationIcon } from '../Icons';
 import { CoordinateInput } from '../internal/CoordinateInput/CoordinateInput.component';
@@ -247,8 +247,8 @@ export class CoordinateField extends React.Component<Props, State> {
         const clearIconClass = shrinkDisabled ? defaultClasses.clearIcon : defaultClasses.clearIconWithMargin;
         return (
             <div className={clearIconClass}>
-                <IconButton style={{ height: 42, width: 42, borderRadius: 0, padding: 0 }} disabled={!!disabled}>
-                    <ClearIcon onClick={this.handleClear} />
+                <IconButton style={{ height: 42, width: 42, borderRadius: 0, padding: 0 }} disabled={!!disabled} onClick={this.handleClear}>
+                    <IconCross24 />
                 </IconButton>
             </div>
 

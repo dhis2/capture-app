@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import Warning from '@material-ui/icons/Warning';
+import { IconWarningFilled16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
@@ -86,7 +86,7 @@ const getWarningOutput = () =>
                     {visibleItems && visibleItems.length > 0 &&
                     <Card className={classes.card}>
                         <div className={classes.header}>
-                            <Warning />
+                            <IconWarningFilled16 />
                             <div className={classes.headerText}>
                                 {i18n.t('Warnings')}
                             </div>

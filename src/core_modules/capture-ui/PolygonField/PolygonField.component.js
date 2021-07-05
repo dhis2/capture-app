@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import MapIcon from '@material-ui/icons/Map';
-import CheckIcon from '@material-ui/icons/Check';
+import { IconCheckmark24, IconLocation16, colors } from '@dhis2/ui';
 import L from 'leaflet';
 import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
@@ -213,11 +212,18 @@ export class PolygonField extends React.Component<Props, State> {
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.statusContainer}>
-                    <MapIcon className={defaultClasses.mapIcon} onClick={this.openMap} />
+                    <div className={defaultClasses.mapIcon} onClick={this.openMap} role="button" tabIndex="0" >
+                        <IconLocation16 />
+                    </div>
                     <div className={defaultClasses.statusText}>
                         {hasValue ? 'Polygon captured' : 'No polygon captured'}
                     </div>
-                    { hasValue && <CheckIcon className={defaultClasses.checkIcon} color="primary" /> }
+                    { hasValue && (
+                        <span className={defaultClasses.checkIcon}>
+                            <IconCheckmark24 color={colors.blue600} />
+                        </span>
+                    )
+                    }
                 </div>
                 {this.renderMapDialog()}
             </div>
