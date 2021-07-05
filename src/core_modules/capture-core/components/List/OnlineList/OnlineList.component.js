@@ -3,7 +3,6 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
-import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import {
     Table,
@@ -44,8 +43,8 @@ const getStyles = (theme: Theme) => ({
             paddingRight: theme.spacing.unit * 3,
         },
         borderBottomColor: theme.palette.type === 'light'
-            ? lighten(fade(theme.palette.divider, 1), 0.88)
-            : darken(fade(theme.palette.divider, 1), 0.8),
+            ? theme.palette.dividerLighter
+            : theme.palette.dividerDarker,
     },
     bodyCell: {
         fontSize: theme.typography.pxToRem(13),

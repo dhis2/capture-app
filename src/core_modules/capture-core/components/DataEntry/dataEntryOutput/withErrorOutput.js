@@ -26,7 +26,7 @@ type Props = {
 const styles = (theme: Theme) => ({
     card: {
         padding: theme.typography.pxToRem(10),
-        backgroundColor: theme.palette.error[100],
+        backgroundColor: theme.palette.error.red200,
         borderRadius: theme.typography.pxToRem(5),
     },
     list: {

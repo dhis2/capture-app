@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-03T09:10:27.661Z\n"
+"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -618,6 +618,12 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
@@ -702,7 +708,7 @@ msgid "Registering unit"
 msgstr "Roʼyxatga olish muassasasi"
 
 msgid "Registration Date"
-msgstr ""
+msgstr "Roʼyxatga olingan sana"
 
 msgid "Inactive"
 msgstr "Faol emas"
@@ -730,7 +736,7 @@ msgstr ""
 "Haqiqatdan ham '{{templateName}}' koʼrinishini oʼchirib tashlamoqchimisiz?"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Tasdiqlang"
 
 msgid "Save As view"
 msgstr "Ushbu koʼrinish sifatida saqlash"
@@ -881,6 +887,12 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Barcha dasturlarda qidirish"
 
+msgid "events"
+msgstr ""
+
+msgid "event"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr "Ushbu hodisa/tadbirni tahrirlash huquqiga ega emassiz"
 
@@ -991,6 +1003,12 @@ msgid "Owned by {{ownerOrgUnit}}"
 msgstr ""
 
 msgid "Last updated {{date}}"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Warning"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"

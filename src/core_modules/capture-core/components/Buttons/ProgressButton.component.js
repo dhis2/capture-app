@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
+import { colors } from '@dhis2/ui';
 
 import { Button } from './ButtonOld.component';
 import { LoadingMaskForButton } from '../LoadingMasks';
@@ -15,7 +15,7 @@ const styles = () => ({
         left: '50%',
         top: '50%',
         transform: 'translate(-50% ,-50%)',
-        color: green[600],
+        color: colors.green500,
     },
 });
 

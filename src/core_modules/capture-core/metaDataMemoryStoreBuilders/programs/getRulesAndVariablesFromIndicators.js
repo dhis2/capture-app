@@ -13,6 +13,7 @@ export type CachedProgramIndicator = {
     filter?: ?string,
     programId: string,
     shortName: string,
+    style?: ?{ color?: ?string },
 };
 
 const staticReplacements = [
@@ -151,6 +152,7 @@ function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator
         data: programIndicator.expression,
         programRuleActionType: 'DISPLAYKEYVALUEPAIR',
         location: 'indicators',
+        style: programIndicator.style || null,
     };
 
     // $FlowFixMe[prop-missing] automated comment

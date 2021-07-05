@@ -93,6 +93,7 @@ declare type Theme = {
             contrastText: string,
         },
         error: {
+            red200: string,
             lighter: string,
             light: string,
             main: string,
@@ -126,6 +127,8 @@ declare type Theme = {
             default: string,
         },
         divider: string,
+        dividerDarker: string,
+        dividerLighter: string,
         dividerForm: string,
         accent: {
             lighter: string,
@@ -136,6 +139,10 @@ declare type Theme = {
         required: string,
         info: {
             main: string,
+        },
+        success: {
+            main: string,
+            green600: string,
         }
     },
     typography: {
@@ -191,6 +198,7 @@ declare class process {
         NODE_ENV: string,
         NODE_PATH: string,
         REACT_APP_CACHE_VERSION: string,
+        REACT_APP_SERVER_VERSION: string,
         REACT_APP_VERSION: string,
         REACT_APP_DHIS2_API_VERSION: string,
     }

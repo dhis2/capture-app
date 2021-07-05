@@ -5,27 +5,20 @@ import i18n from '@dhis2/d2-i18n';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { errorCreator } from 'capture-core-utils';
 import type {
+    CachedDataEntryForm,
     CachedProgram,
-    CachedProgramTrackedEntityAttribute,
     CachedProgramSection,
+    CachedProgramTrackedEntityAttribute,
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
 } from '../../../../storageControllers/cache.types';
-import {
-    RenderFoundation,
-    Section,
-    Enrollment,
-    CustomForm,
-    InputSearchGroup,
-} from '../../../../metaData';
-import type {
-    TrackedEntityType,
-    SearchGroup,
-} from '../../../../metaData';
+import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
+import { CustomForm, Enrollment, InputSearchGroup, RenderFoundation, Section } from '../../../../metaData';
 import { DataElementFactory } from './DataElementFactory';
 import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
 import type { ConstructorInput } from './enrollmentFactory.types';
+import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
 
 export class EnrollmentFactory {
     static errorMessages = {
@@ -96,15 +89,15 @@ export class EnrollmentFactory {
         cachedProgramTrackedEntityTypeId: string,
     ) {
         const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId);
-        const trackedEntityTypeName = this.cachedTrackedEntityTypes.get(cachedProgramTrackedEntityTypeId);
+        const trackedEntityType = this.cachedTrackedEntityTypes.get(cachedProgramTrackedEntityTypeId);
 
-        if (!trackedEntityTypeName?.displayName || !featureTypeField) {
+        if (!featureTypeField) {
             return null;
         }
 
         const section = new Section((o) => {
             o.id = cachedProgramTrackedEntityTypeId;
-            o.name = trackedEntityTypeName.displayName;
+            o.name = trackedEntityType?.displayName || '';
         });
 
         featureTypeField && section.addElement(featureTypeField);
@@ -120,21 +113,26 @@ export class EnrollmentFactory {
             o.name = i18n.t('Profile');
         });
 
-        if (!cachedProgramTrackedEntityAttributes?.length) {
-            return null;
-        }
+        if (!cachedProgramTrackedEntityAttributes?.length) { return null; }
 
         if (cachedProgramTrackedEntityTypeId) {
             const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId);
             featureTypeField && section.addElement(featureTypeField);
         }
 
+        await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
+        return section;
+    }
+
+    async _buildElementsForSection(
+        cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
+        section: Section,
+    ) {
         // $FlowFixMe
         await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
             const element = await this.dataElementFactory.build(trackedEntityAttribute);
             element && section.addElement(element);
         });
-
         return section;
     }
 
@@ -152,13 +150,35 @@ export class EnrollmentFactory {
             o.name = cachedSectionCustomLabel;
         });
 
-        // $FlowFixMe
-        await cachedProgramTrackedEntityAttributes.asyncForEach(async (trackedEntityAttribute) => {
-            const element = await this.dataElementFactory.build(trackedEntityAttribute);
-            element && section.addElement(element);
+        await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
+        return section;
+    }
+
+    async _buildCustomEnrollmentForm(
+        enrollmentForm: RenderFoundation,
+        dataEntryForm: CachedDataEntryForm,
+        cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
+    ) {
+        if (!cachedProgramTrackedEntityAttributes) { return null; }
+
+        let section = new Section((o) => {
+            o.id = Section.MAIN_SECTION_ID;
         });
 
-        return section;
+        section.showContainer = false;
+
+        section = await this._buildElementsForSection(cachedProgramTrackedEntityAttributes, section);
+        section && enrollmentForm.addSection(section);
+        try {
+            section.customForm = new CustomForm((o) => {
+                o.id = dataEntryForm.id;
+            });
+            section.customForm.setData(dataEntryForm.htmlCode, transformTrackerNode);
+        } catch (error) {
+            log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
+                template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
+        }
+        return enrollmentForm;
     }
 
     async _buildEnrollmentForm(
@@ -172,7 +192,14 @@ export class EnrollmentFactory {
         });
 
         let section;
-        if (cachedProgramSections?.length) {
+        if (cachedProgram.dataEntryForm) {
+            if (cachedProgram.trackedEntityTypeId) {
+                section = await this._buildTetFeatureTypeSection(cachedProgram.trackedEntityTypeId);
+                section && enrollmentForm.addSection(section);
+            }
+
+            await this._buildCustomEnrollmentForm(enrollmentForm, cachedProgram.dataEntryForm, cachedProgramTrackedEntityAttributes);
+        } else if (cachedProgramSections?.length) {
             if (cachedProgram.trackedEntityTypeId) {
                 section = await this._buildTetFeatureTypeSection(cachedProgram.trackedEntityTypeId);
                 section && enrollmentForm.addSection(section);
@@ -187,29 +214,8 @@ export class EnrollmentFactory {
                 section && enrollmentForm.addSection(section);
             });
         } else {
-            section = await
-            this._buildMainSection(cachedProgramTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
+            section = await this._buildMainSection(cachedProgramTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
             section && enrollmentForm.addSection(section);
-        }
-
-
-        if (cachedProgram.dataEntryForm) {
-            if (!section) {
-                section = new Section((o) => {
-                    o.id = Section.MAIN_SECTION_ID;
-                });
-            }
-            section.showContainer = false;
-            const dataEntryForm = cachedProgram.dataEntryForm;
-            try {
-                enrollmentForm.customForm = new CustomForm((o) => {
-                    o.id = dataEntryForm.id;
-                    o.data = dataEntryForm.htmlCode;
-                });
-            } catch (error) {
-                log.error(errorCreator(EnrollmentFactory.errorMessages.CUSTOM_FORM_TEMPLATE_ERROR)({
-                    template: dataEntryForm.htmlCode, error, method: 'buildEnrollment' }));
-            }
         }
         return enrollmentForm;
     }

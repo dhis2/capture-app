@@ -1,3 +1,86 @@
+## [1.33.1](https://github.com/dhis2/capture-app/compare/v1.33.0...v1.33.1) (2021-07-02)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b53b57b](https://github.com/dhis2/capture-app/commit/b53b57ba0423f70e312fd5d2feb43502f2ddb44d))
+
+# [1.33.0](https://github.com/dhis2/capture-app/compare/v1.32.0...v1.33.0) (2021-07-02)
+
+
+### Features
+
+* DHIS2-11212 Indicator Widget ([f4c6568](https://github.com/dhis2/capture-app/commit/f4c656879cca5204626d522791df52098bdd55d0))
+
+# [1.32.0](https://github.com/dhis2/capture-app/compare/v1.31.1...v1.32.0) (2021-07-02)
+
+
+### Features
+
+* DHIS2-11044 ErrorWidget ([072dc04](https://github.com/dhis2/capture-app/commit/072dc048e89e8d7609473e80f7f8b2cc9393aeaf))
+* DHIS2-11236 Warning Widget ([e60fb1e](https://github.com/dhis2/capture-app/commit/e60fb1e9b5d0bf82eacaa089d9fcf649972f1c4c))
+
+## [1.31.1](https://github.com/dhis2/capture-app/compare/v1.31.0...v1.31.1) (2021-07-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([63dce6d](https://github.com/dhis2/capture-app/commit/63dce6db73cefd74b6e30c935c873abd35833c89))
+
+# [1.31.0](https://github.com/dhis2/capture-app/compare/v1.30.0...v1.31.0) (2021-06-30)
+
+
+### Features
+
+* DHIS2-10981 Feedback widget ([a8d5760](https://github.com/dhis2/capture-app/commit/a8d5760074745cbfef28680428aae3d3f7d1f39c))
+
+# [1.30.0](https://github.com/dhis2/capture-app/compare/v1.29.0...v1.30.0) (2021-06-30)
+
+
+### Features
+
+* [DHIS2-11222] create widget with title and icon ([#1772](https://github.com/dhis2/capture-app/issues/1772)) ([754ea36](https://github.com/dhis2/capture-app/commit/754ea36fd7782a3773194633c86e1c9746932b79))
+
+# [1.29.0](https://github.com/dhis2/capture-app/compare/v1.28.2...v1.29.0) (2021-06-29)
+
+
+### Features
+
+* added support for a borderless mode ([68002d5](https://github.com/dhis2/capture-app/commit/68002d5b1654c1521e2935dae2d3ffa22369fcb7))
+
+## [1.28.2](https://github.com/dhis2/capture-app/compare/v1.28.1...v1.28.2) (2021-06-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([5eec7d3](https://github.com/dhis2/capture-app/commit/5eec7d383bc9bb3028c35800024ca0224d53fdb9))
+
+## [1.28.1](https://github.com/dhis2/capture-app/compare/v1.28.0...v1.28.1) (2021-06-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c5f32ad](https://github.com/dhis2/capture-app/commit/c5f32ad71ea011b7b3d653d72be9801240204111))
+
+# [1.28.0](https://github.com/dhis2/capture-app/compare/v1.27.2...v1.28.0) (2021-06-24)
+
+
+### Bug Fixes
+
+* cache versioning ([2dec2c0](https://github.com/dhis2/capture-app/commit/2dec2c049720ac390380118e1079e98db2a22ba9))
+
+
+### Features
+
+* [DHIS2-11221] Program stage event list page with routing ([#1768](https://github.com/dhis2/capture-app/issues/1768)) ([004e62a](https://github.com/dhis2/capture-app/commit/004e62a165ed18a001c585835034aefbee4e4d19))
+
+## [1.27.2](https://github.com/dhis2/capture-app/compare/v1.27.1...v1.27.2) (2021-06-23)
+
+
+### Bug Fixes
+
+* TeiWorkingListsUsers.feature rollback previous changes ([#1824](https://github.com/dhis2/capture-app/issues/1824)) ([0368a92](https://github.com/dhis2/capture-app/commit/0368a92839cd546b461c13396d78eae1db96de45))
+
 ## [1.27.1](https://github.com/dhis2/capture-app/compare/v1.27.0...v1.27.1) (2021-06-18)
 
 

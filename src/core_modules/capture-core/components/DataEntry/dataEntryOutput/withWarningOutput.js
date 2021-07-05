@@ -41,7 +41,7 @@ const styles = theme => ({
     card: {
         borderRadius: theme.typography.pxToRem(5),
         padding: theme.typography.pxToRem(10),
-        backgroundColor: theme.palette.warning[100],
+        backgroundColor: theme.palette.warning.lighter,
     },
 
 });
