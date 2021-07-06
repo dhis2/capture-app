@@ -5,6 +5,8 @@ import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPage.types';
+import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
+import { Widget } from '../../Widget';
 
 const styles = ({ typography }) => ({
     container: {
@@ -17,12 +19,36 @@ const styles = ({ typography }) => ({
 });
 
 const EnrollmentAddEventPagePain = ({
+    icon,
+    name,
     classes,
 }) => (
     <div className={classes.container}>
         <div className={classes.title}>
             {i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}
         </div>
+        <div>
+            <Widget
+                header={
+                    <div className={classes.header}>
+                        {icon && (
+                            <div className={classes.icon}>
+                                <NonBundledDhis2Icon
+                                    name={icon?.name}
+                                    color={icon?.color}
+                                    width={30}
+                                    height={30}
+                                    cornerRadius={2}
+                                />
+                            </div>
+                        )}
+                        <span> {name} </span>
+                    </div>
+                }
+                noncollapsible
+            />
+        </div>
+
     </div>
 );
 
