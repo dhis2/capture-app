@@ -11,7 +11,7 @@ import type { ListViewConfigMenuContentOutputProps } from '../ListViewConfigMenu
 type ExtractedProps = {|
     currentTemplate: WorkingListTemplate,
     programId: string,
-    programStageId: string,
+    programStageId?: string,
 |};
 
 type RestProps = $Rest<ListViewConfigMenuContentOutputProps, ExtractedProps>;

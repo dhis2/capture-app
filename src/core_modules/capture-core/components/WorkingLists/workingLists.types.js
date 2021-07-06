@@ -197,7 +197,6 @@ export type InterfaceProps = $ReadOnly<{|
     onUpdateTemplate?: UpdateTemplate,
     orgUnitId: string,
     programId: string,
-    programStageId: string,
     rowIdKey: string,
     rowsPerPage?: number,
     sortByDirection?: string,
@@ -208,6 +207,7 @@ export type InterfaceProps = $ReadOnly<{|
     updating: boolean,
     updatingWithDialog: boolean,
     viewPreloaded?: boolean,
+    programStageId?: string
 |}>;
 
 export type WorkingListsOutputProps = InterfaceProps;
