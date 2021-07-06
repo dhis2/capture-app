@@ -1,3 +1,10 @@
+## [1.33.2](https://github.com/dhis2/capture-app/compare/v1.33.1...v1.33.2) (2021-07-06)
+
+
+### Bug Fixes
+
+* [DHIS2-10981] KeyValue bug ([5ff60a9](https://github.com/dhis2/capture-app/commit/5ff60a9ce3b91394a4155de1fb0dcb9b04953c7d))
+
 ## [1.33.1](https://github.com/dhis2/capture-app/compare/v1.33.0...v1.33.1) (2021-07-02)
 
 
