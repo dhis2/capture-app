@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import TextField from '@material-ui/core/TextField';
-import ClearIcon from '@material-ui/icons/Clear';
+import { IconCross16 } from '@dhis2/ui';
 import { D2Date } from '../DateAndTime/D2Date/D2Date.component';
 
 type Props = {
@@ -219,10 +219,14 @@ export class AgeField extends Component<Props> {
                       onBlur={this.updateDate}
                       onChange={this.onDaysChange}
                   />
-                  <ClearIcon
+                  <div
                       style={clearIconStyle}
                       onClick={this.onClear}
-                  />
+                      role="button"
+                      tabIndex="0"
+                  >
+                      <IconCross16 />
+                  </div>
               </div>
           </div>
       );

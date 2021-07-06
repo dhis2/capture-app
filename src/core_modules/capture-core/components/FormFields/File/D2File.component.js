@@ -1,5 +1,5 @@
 // @flow
-import CheckIcon from '@material-ui/icons/Check';
+import { IconCheckmark24, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
@@ -19,7 +19,6 @@ type Props = {
         innerContainer: string,
         horizontalSelectedFileTextContainer: string,
         verticalSelectedFileTextContainer: string,
-        checkIcon: string,
         deleteButton: string,
         input: string,
         horizontalLink: string,
@@ -62,9 +61,6 @@ const styles = theme => ({
         flexDirection: 'column',
         alignItems: 'flex-start',
         wordBreak: 'break-word',
-    },
-    checkIcon: {
-        color: theme.palette.success[700],
     },
     deleteButton: {
         color: theme.palette.error.main,
@@ -149,7 +145,7 @@ class D2FilePlain extends Component<Props> {
                             return (
                                 <div className={containerClass}>
                                     <div className={selectedFileTextContainerClass}>
-                                        <CheckIcon className={classes.checkIcon} />
+                                        <IconCheckmark24 color={colors.green600} />
                                         <a
                                             className={!isVertical && classes.horizontalLink}
                                             target="_blank"

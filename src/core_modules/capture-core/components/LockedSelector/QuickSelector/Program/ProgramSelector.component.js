@@ -6,10 +6,9 @@ import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
-import ClearIcon from '@material-ui/icons/Clear';
 import Grid from '@material-ui/core/Grid';
 import i18n from '@dhis2/d2-i18n';
-import { colors } from '@dhis2/ui';
+import { colors, IconCross24 } from '@dhis2/ui';
 import { programCollection } from '../../../../metaDataMemoryStores';
 import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { ProgramList } from './ProgramList';
@@ -109,10 +108,6 @@ const styles = (theme: Theme) => ({
         width: 20,
         height: 20,
         padding: 0,
-    },
-    selectedButtonIcon: {
-        width: 20,
-        height: 20,
     },
     programsHiddenText: {
         fontSize: 12,
@@ -252,7 +247,7 @@ class ProgramSelectorPlain extends Component<Props> {
                         </div>
                     </div>
                     <IconButton data-test="reset-selection-button" className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
-                        <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                        <IconCross24 />
                     </IconButton>
                 </div>
             </React.Fragment>
@@ -282,7 +277,7 @@ class ProgramSelectorPlain extends Component<Props> {
                                                     <div className={classes.selectedText}>
                                                         <div className={classes.selectedCategoryNameContainer}>{selectedCategories[category.id].name}</div>
                                                         <IconButton data-test="reset-selection-button" className={classes.selectedButton} onClick={() => this.handleResetCategoryOption(category.id)}>
-                                                            <ClearIcon className={classes.selectedButtonIcon} />
+                                                            <IconCross24 />
                                                         </IconButton>
                                                     </div>
                                                 );
@@ -305,7 +300,7 @@ class ProgramSelectorPlain extends Component<Props> {
         }
 
         return (
-            <Paper square elevation={0} className={this.props.classes.selectedPaper}>
+            <Paper square elevation={0} className={this.props.classes.selectedPaper} data-test="program-selector-container">
                 {this.renderSelectedProgram(selectedProgram)}
             </Paper>
         );

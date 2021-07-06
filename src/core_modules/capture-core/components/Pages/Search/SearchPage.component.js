@@ -5,7 +5,6 @@ import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import { useLocation } from 'react-router';
 import {
     Modal,
@@ -15,6 +14,7 @@ import {
     ButtonStrip,
     Button,
     NoticeBox,
+    IconChevronLeft24,
 } from '@dhis2/ui';
 import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './SearchPage.types';
@@ -142,7 +142,7 @@ const Index = ({
                     className={classes.backButton}
                     onClick={navigateToMainPage}
                 >
-                    <ChevronLeft />
+                    <IconChevronLeft24 />
                     {i18n.t('Back')}
                 </Button>
 

@@ -1,23 +1,17 @@
 // @flow
 import React, { type ComponentType, type Node } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import { IconInfo16, colors } from '@dhis2/ui';
 import Grid from '@material-ui/core/Grid';
-import { colors } from '@dhis2/ui';
 
-const InfoOutlinedIconWithStyles = withStyles({
-    root: {
-        fontSize: 14,
-        color: colors.grey800,
-        transformBox: 'view-box',
-        position: 'relative',
-        top: '2px',
-    },
-})(InfoOutlinedIcon);
 
 type OwnProps = {| children: string | Node |}
 
 const styles = () => ({
+    icon: {
+        position: 'relative',
+        top: '2px',
+    },
     container: {
         marginTop: 12,
         marginBottom: 12,
@@ -34,7 +28,9 @@ const styles = () => ({
 const InfoIconTextPlain = ({ classes, children }) => (
     <Grid container direction="row" alignItems="center" className={classes.container}>
         <Grid item>
-            <InfoOutlinedIconWithStyles />
+            <span className={classes.icon}>
+                <IconInfo16 color={colors.grey800} />
+            </span>
         </Grid>
         <Grid item className={classes.text}>
             {children}

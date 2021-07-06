@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-import ClearIcon from '@material-ui/icons/Clear';
+import { IconCross16 } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { RelationshipType } from '../../../../metaData';
 import type { SelectedRelationshipType } from '../newRelationship.types';
@@ -76,9 +76,9 @@ class RelationshipTypeSelectorPlain extends React.Component<Props> {
         const { classes, onDeselectRelationshipType } = this.props;
         return (
             <div className={classNames(classes.relationshipType, classes.relationshipTypeSelected)}>
-                <div className={classes.relationshipTypeSelectedText}>
+                <div className={classes.relationshipTypeSelectedText} onClick={onDeselectRelationshipType} role="button" tabIndex="0">
                     <div>{selectedRelationshipType.name}</div>
-                    <ClearIcon fontSize="small" onClick={onDeselectRelationshipType} />
+                    <IconCross16 />
                 </div>
             </div>
         );

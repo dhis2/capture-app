@@ -167,14 +167,15 @@ Then('main page page url is valid', () => {
 });
 
 When('you remove the program selection', () => {
-    cy.get('button')
-        .find('[class*=ProgramSelector]')
-        .click();
+    cy.get('[data-test="program-selector-container"]').within(() => {
+        cy.get('[data-test="reset-selection-button"]').eq(0).click();
+    });
 });
 
 When('you remove the org unit selection', () => {
-    cy.get('button')
-        .find('[class*=OrgUnitSelector]').click();
+    cy.get('[data-test="org-unit-selector-container"]').within(() => {
+        cy.get('[data-test="reset-selection-button"]').eq(0).click();
+    });
 });
 
 Then('you should be taken to the main page with only org unit selected', () => {
