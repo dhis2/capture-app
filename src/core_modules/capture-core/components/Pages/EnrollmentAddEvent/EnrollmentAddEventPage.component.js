@@ -10,9 +10,6 @@ const styles = ({ typography }) => ({
     container: {
         padding: '16px 24px 16px 24px',
     },
-    page: {
-        margin: spacersNum.dp16,
-    },
     title: {
         ...typography.title,
         margin: `${spacersNum.dp16}px 0`,
@@ -23,12 +20,9 @@ const EnrollmentAddEventPagePain = ({
     classes,
 }) => (
     <div className={classes.container}>
-
         <div className={classes.title}>
             {i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}
         </div>
-        <div className={classes.columns} />
-
     </div>
 );
 

@@ -1,7 +1,8 @@
 // @flow
+import type { Icon } from 'capture-core/metaData';
 
 export type Props = {|
-    programId: string,
-    orgUnitId: string,
+    icon?: Icon,
+    name?: string,
     ...CssClasses,
 |};
