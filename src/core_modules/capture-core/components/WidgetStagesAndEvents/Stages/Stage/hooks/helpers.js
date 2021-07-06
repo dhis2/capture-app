@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { Tag } from '@dhis2/ui';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import { convertValue as convertClientToList } from '../../../../../converters/clientToList';
@@ -105,8 +107,17 @@ const getAllFieldsWithValue = async (
             const { type, options } = dataElements.find(el => el.id === id) ?? {};
             if (type && records[id]) {
                 const value = dataElementsByType.find(item => item.type === type).ids[id];
-                if (options && options[value]) {
-                    acc[id] = options[value];
+                if (options) {
+                    if (options[value]) {
+                        acc[id] = options[value];
+                    } else {
+                        log.error(
+                            errorCreator(
+                                'Missing value in options')(
+                                { id, value, options }),
+                        );
+                        acc[id] = formatValueForView(value, type);
+                    }
                 } else {
                     acc[id] = formatValueForView(value, type);
                 }
