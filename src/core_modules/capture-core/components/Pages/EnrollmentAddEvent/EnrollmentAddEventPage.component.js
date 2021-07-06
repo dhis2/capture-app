@@ -12,6 +12,14 @@ const styles = ({ typography }) => ({
     container: {
         padding: '16px 24px 16px 24px',
     },
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: spacersNum.dp8,
+    },
+    icon: {
+        paddingRight: spacersNum.dp8,
+    },
     title: {
         ...typography.title,
         margin: `${spacersNum.dp16}px 0`,
@@ -23,7 +31,10 @@ const EnrollmentAddEventPagePain = ({
     name,
     classes,
 }) => (
-    <div className={classes.container}>
+    <div
+        className={classes.container}
+        data-test="add-event-enrollment-page-content"
+    >
         <div className={classes.title}>
             {i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}
         </div>
