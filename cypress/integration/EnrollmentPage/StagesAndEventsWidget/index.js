@@ -31,7 +31,7 @@ Then('the stages and events widget should be closed', () => {
         });
 });
 
-Then('you see the first 5 events in the table', () => {
+And('you see the first 5 events in the table', () => {
     cy.get('[data-test="stages-and-events-widget"]').within(() => {
         cy.get('[data-test="widget-contents"]').should('exist');
         cy.get('[data-test="widget-contents"]').find('[data-test="stage-content"]').should('have.length', 5);
@@ -39,7 +39,7 @@ Then('you see the first 5 events in the table', () => {
     });
 });
 
-Then('you see the first 5 rows in Antenatal care visit event', () => {
+And('you see the first 5 rows in Antenatal care visit event', () => {
     cy.get('[data-test="stages-and-events-widget"]')
         .find('[data-test="widget-contents"]')
         .find('[data-test="stage-content"]')
@@ -51,7 +51,7 @@ Then('you see the first 5 rows in Antenatal care visit event', () => {
         });
 });
 
-Then('you see buttons in the footer list', () => {
+And('you see buttons in the footer list', () => {
     cy.get('[data-test="stages-and-events-widget"]').within(() => {
         cy.get('[data-test="view-all-button"]').should('exist');
         cy.get('[data-test="show-more-button"]').should('exist');
@@ -102,5 +102,71 @@ Then('there should be 5 rows in the table', () => {
             cy.get('[data-test="dhis2-uicore-datatable"]').should('exist');
             cy.get('[data-test="dhis2-uicore-tablebody"]')
                 .find('[data-test="dhis2-uicore-datatablerow"]').should('have.length', 5);
+        });
+});
+
+Then('the default list should be displayed', () => {
+    const rows = [
+        '2020-07-13|Bumbeh MCHP',
+        '2020-07-12|Bumbeh MCHP',
+        '2020-07-11|Bumbeh MCHP',
+        '2020-07-10|Bumbeh MCHP',
+        '2020-07-09|Bumbeh MCHP',
+    ];
+    cy.get('[data-test="stages-and-events-widget"]')
+        .find('[data-test="widget-contents"]')
+        .find('[data-test="stage-content"]')
+        .eq(2)
+        .find('tbody')
+        .find('tr')
+        .should('have.length', 5)
+        .each(($row, index) => {
+            cy.wrap($row).contains(rows[index].split('|')[0])
+                .should('exist');
+
+            cy.wrap($row).contains(rows[index].split('|')[1])
+                .should('exist');
+        });
+});
+
+When(/^you sort list asc by (.*)$/, (columnName) => {
+    cy.get('[data-test="stages-and-events-widget"]')
+        .find('[data-test="widget-contents"]')
+        .find('[data-test="stage-content"]')
+        .eq(2)
+        .find('thead')
+        .find('th')
+        .within(() => {
+            cy.contains(columnName)
+                .find('button')
+                .click();
+            cy.wait(100);
+            cy.contains(columnName)
+                .find('button')
+                .click();
+        });
+});
+
+Then('the sorted list by Report date asc should be displayed', () => {
+    const rows = [
+        '2020-02-27|Bumbeh MCHP',
+        '2020-04-13|Bumbeh MCHP',
+        '2020-05-17|Bumbeh MCHP',
+        '2020-05-19|Bumbeh MCHP',
+        '2020-07-06|Bumbeh MCHP',
+    ];
+    cy.get('[data-test="stages-and-events-widget"]')
+        .find('[data-test="widget-contents"]')
+        .find('[data-test="stage-content"]')
+        .eq(2)
+        .find('tbody')
+        .find('tr')
+        .should('have.length', 5)
+        .each(($row, index) => {
+            cy.wrap($row).contains(rows[index].split('|')[0])
+                .should('exist');
+
+            cy.wrap($row).contains(rows[index].split('|')[1])
+                .should('exist');
         });
 });

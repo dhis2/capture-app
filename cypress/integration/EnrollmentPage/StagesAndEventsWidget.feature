@@ -17,18 +17,26 @@ Feature: User interacts with Stages and Events Widget
 
     Scenario: User can view the list of events
         Given you open the enrollment page which has multiples events and stages
-        Then you see the first 5 events in the table
-        Then you see the first 5 rows in Antenatal care visit event
-        Then you see buttons in the footer list
+        Then the default list should be displayed
+        And you see the first 5 events in the table
+        And you see the first 5 rows in Antenatal care visit event
+        And you see buttons in the footer list
 
     Scenario: User can view more events
         Given you open the enrollment page which has multiples events and stages
         When you click show more button in stages&event list
         Then more events should be displayed
-        Then reset button should be displayed
+        And reset button should be displayed
 
     Scenario: User can reset events
         Given you open the enrollment page which has multiples events and stages
         When you click show more button in stages&event list
         And you click reset button
         Then there should be 5 rows in the table
+
+    Scenario: User can sort the list of events
+        Given you open the enrollment page which has multiples events and stages
+        Then the default list should be displayed
+        When you sort list asc by Report date
+        Then the sorted list by Report date asc should be displayed
+
