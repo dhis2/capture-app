@@ -11,6 +11,7 @@ import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetFeedback } from '../../../WidgetFeedback';
 import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
+import { WidgetManagements } from '../../../WidgetManagements';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -20,6 +21,9 @@ const getStyles = ({ typography }) => ({
         flexGrow: 3,
         flexShrink: 1,
         width: 872,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
     },
     rightColumn: {
         flexGrow: 1,
@@ -51,6 +55,7 @@ export const EnrollmentPageDefaultPlain = ({
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
                 <WidgetStagesAndEvents stages={program.stages} />
+                <WidgetManagements />
             </div>
             <div className={classes.rightColumn}>
                 <WidgetError error={widgetEffects?.errors} />
