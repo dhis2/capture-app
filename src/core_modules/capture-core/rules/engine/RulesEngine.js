@@ -306,6 +306,7 @@ function getProgramRuleEffects(
                         optionGroupId,
                         optionId,
                         content,
+                        style,
                     }) => {
                     let ruleEffectData;
                     if (actionData) {
@@ -328,6 +329,7 @@ function getProgramRuleEffects(
                         optionGroupId,
                         optionId,
                         content,
+                        style,
                     };
                 });
             }

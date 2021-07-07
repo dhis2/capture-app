@@ -7,7 +7,10 @@ import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
+import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetFeedback } from '../../../WidgetFeedback';
+import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
+import { WidgetIndicator } from '../../../WidgetIndicator';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -55,6 +58,14 @@ export const EnrollmentPageDefaultPlain = ({
                 />
             </div>
             <div className={classes.rightColumn}>
+                <WidgetError error={widgetEffects?.errors} />
+                <WidgetWarning warning={widgetEffects?.warnings} />
+                {!hideWidgets.indicator && (
+                    <WidgetIndicator
+                        indicators={widgetEffects?.indicators}
+                        emptyText={i18n.t('No indicator output for this enrollment yet')}
+                    />
+                )}
                 {!hideWidgets.feedback && (
                     <WidgetFeedback
                         feedback={widgetEffects?.feedbacks}
