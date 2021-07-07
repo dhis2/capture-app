@@ -966,7 +966,7 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "កំហុសបច្ចេកទេស"
 
 msgid "Warning"
 msgstr ""

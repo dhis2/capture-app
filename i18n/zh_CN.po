@@ -968,10 +968,10 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

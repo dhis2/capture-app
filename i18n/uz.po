@@ -1014,10 +1014,10 @@ msgid "Last updated {{date}}"
 msgstr " {{date}}да охирги марта янгиланган"
 
 msgid "Error"
-msgstr ""
+msgstr "Хатолик"
 
 msgid "Warning"
-msgstr ""
+msgstr "Огоҳлантириш"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
