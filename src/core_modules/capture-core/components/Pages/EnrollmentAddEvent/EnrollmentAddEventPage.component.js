@@ -27,41 +27,46 @@ const styles = ({ typography }) => ({
 });
 
 const EnrollmentAddEventPagePain = ({
-    icon,
-    name,
+    programStage,
     classes,
-}) => (
-    <div
-        className={classes.container}
-        data-test="add-event-enrollment-page-content"
-    >
-        <div className={classes.title}>
-            {i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}
-        </div>
-        <div>
-            <Widget
-                header={
-                    <div className={classes.header}>
-                        {icon && (
-                            <div className={classes.icon}>
-                                <NonBundledDhis2Icon
-                                    name={icon?.name}
-                                    color={icon?.color}
-                                    width={30}
-                                    height={30}
-                                    cornerRadius={2}
-                                />
-                            </div>
-                        )}
-                        <span> {name} </span>
-                    </div>
-                }
-                noncollapsible
-            />
-        </div>
+}) => {
+    const { icon, stageForm } = programStage;
 
-    </div>
-);
+    return (
+        <div
+            className={classes.container}
+            data-test="add-event-enrollment-page-content"
+        >
+            <div className={classes.title}>
+                {i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}
+            </div>
+            <div>
+                <Widget
+                    header={
+                        <div className={classes.header}>
+                            {icon && (
+                                <div className={classes.icon}>
+                                    <NonBundledDhis2Icon
+                                        name={icon?.name}
+                                        color={icon?.color}
+                                        width={30}
+                                        height={30}
+                                        cornerRadius={2}
+                                    />
+                                </div>
+                            )}
+                            <span> {stageForm.name} </span>
+                        </div>
+                    }
+                    noncollapsible
+                >
+                    [event details]
+                </Widget>
+            </div>
+
+        </div>
+    );
+};
 
 export const EnrollmentAddEventPageComponent: ComponentType<
     $Diff<Props, CssClasses>,

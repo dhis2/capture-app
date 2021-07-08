@@ -23,6 +23,6 @@ export const EnrollmentAddEventPage = () => {
         return <span>[program stage placeholder]</span>;
     }
     return (
-        <EnrollmentAddEventPageComponent icon={programStage.icon} name={programStage.stageForm.name} />
+        <EnrollmentAddEventPageComponent programStage={programStage} />
     );
 };
