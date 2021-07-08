@@ -39,7 +39,7 @@ const sortForTypes = {
     [dataElementTypes.TRUE_ONLY]: sortText,
     [dataElementTypes.DATE]: sortTime,
     [dataElementTypes.DATETIME]: sortTime,
-    [dataElementTypes.TIME]: sortText,
+    [dataElementTypes.TIME]: sortTime,
     [dataElementTypes.PERCENTAGE]: sortText,
     [dataElementTypes.URL]: sortText,
     [dataElementTypes.AGE]: sortText,
