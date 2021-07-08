@@ -304,6 +304,7 @@ export class RulesEngine {
                             optionGroupId,
                             optionId,
                             content,
+                            style,
                         }) => {
                         let ruleEffectData;
                         if (actionData) {
@@ -331,6 +332,7 @@ export class RulesEngine {
                             optionGroupId,
                             optionId,
                             content,
+                            style,
                         };
                     });
                 }

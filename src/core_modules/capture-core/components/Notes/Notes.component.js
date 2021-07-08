@@ -52,7 +52,7 @@ const styles = theme => ({
         fontWeight: 'bold',
     },
     noteItemDate: {
-        color: theme.palette.grey[600],
+        color: '#757575',
     },
     notesList: {
         padding: 0,

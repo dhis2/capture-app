@@ -3,11 +3,12 @@ import type { ContextInput } from './context.types';
 
 let context;
 
-export const provideContext = async ({
-    onQueryApi,
-    storageController,
-    storeNames,
-}: ContextInput,
+export const provideContext = async (
+    {
+        onQueryApi,
+        storageController,
+        storeNames,
+    }: ContextInput,
     callback: Function) => {
     context = {
         onQueryApi,

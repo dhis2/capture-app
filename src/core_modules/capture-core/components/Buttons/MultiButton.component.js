@@ -3,8 +3,7 @@ import * as React from 'react';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUp from '@material-ui/icons/ArrowDropUp';
+import { IconChevronDown24, IconChevronUp24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { Button } from './ButtonOld.component';
 import { ProgressButton } from './ProgressButton.component';
@@ -111,7 +110,7 @@ class MultiButtonPlain extends React.Component<Props, State> {
                     </div>
                     <div ref={(arrowInstance) => { this.arrowInstance = arrowInstance; }}>
                         <Button onClick={this.toggleMenu} className={classes.arrowButton} variant={variant} color={color} {...arrowButtonProps}>
-                            {this.state.menuOpen ? <ArrowDropUp /> : <ArrowDropDown /> }
+                            {this.state.menuOpen ? <IconChevronUp24 /> : <IconChevronDown24 /> }
                         </Button>
                     </div>
 

@@ -9,7 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
-import ClearIcon from '@material-ui/icons/Clear';
+import { IconCross24 } from '@dhis2/ui';
 import { Button } from '../../Buttons';
 import { OrgUnitField } from './OrgUnitField.container';
 
@@ -48,10 +48,6 @@ const styles = (theme: Theme) => ({
         width: 20,
         height: 20,
         padding: 0,
-    },
-    selectedButtonIcon: {
-        width: 20,
-        height: 20,
     },
     selectedItemContainer: {
         display: 'flex',
@@ -125,14 +121,14 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
         // If orgUnit is set in Redux state.
         if (this.props.selectedOrgUnitId) {
             return (
-                <div>
+                <div data-test="org-unit-selector-container">
                     <Paper square elevation={0} className={this.props.classes.selectedPaper}>
                         <h4 className={this.props.classes.title}>{ i18n.t('Selected registering unit') }</h4>
                         <div className={this.props.classes.selectedItemContainer}>
                             <div>{this.props.selectedOrgUnit.name}</div>
                             <div className={this.props.classes.selectedItemClear}>
                                 <IconButton data-test="reset-selection-button" className={this.props.classes.selectedButton} onClick={() => this.props.onReset()}>
-                                    <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                                    <IconCross24 />
                                 </IconButton>
                             </div>
                         </div>

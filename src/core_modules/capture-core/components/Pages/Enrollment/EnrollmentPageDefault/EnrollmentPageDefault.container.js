@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -11,6 +11,7 @@ import { useEnrollmentsAndAttributes, useProgramMetadata } from './hooks';
 import { runRulesForEnrollment } from './runRulesForEnrollment';
 import { urlArguments } from '../../../../utils/url';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
+import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 
 
 export const EnrollmentPageDefault = () => {
@@ -39,13 +40,27 @@ export const EnrollmentPageDefault = () => {
         log.error(errorCreator('Enrollment page could not be loaded')({ programMetaDataError, enrollmentsError }));
     }
 
-    const [, setRuleEffects] = useState(undefined);
+    const [ruleEffects, setRuleEffects] = useState(undefined);
+    const outputEffects = useFilteredWidgetData(ruleEffects);
     useEffect(() => {
         const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollment, attributes });
         if (effects) {
+            // $FlowFixMe
             setRuleEffects(effects);
         }
     }, [orgUnit, program, programMetadata, enrollment, attributes]);
+
+    const flatRuleActionLocations = useMemo(() => program.programRules.map(item => item.programRuleActions
+        .map(rule => rule.location || null))
+        .flat(), [program.programRules]);
+
+    const hideWidgets = useMemo(() => {
+        const hideWidgetObject = {};
+        hideWidgetObject.feedback = !flatRuleActionLocations.includes('feedback');
+        hideWidgetObject.indicator = !flatRuleActionLocations.includes('indicators');
+        return hideWidgetObject;
+    }, [flatRuleActionLocations]);
+
 
     const onDelete = () => {
         history.push(
@@ -60,6 +75,8 @@ export const EnrollmentPageDefault = () => {
             program={program}
             enrollmentId={enrollmentId}
             onDelete={onDelete}
+            widgetEffects={outputEffects}
+            hideWidgets={hideWidgets}
         />
     );
 };

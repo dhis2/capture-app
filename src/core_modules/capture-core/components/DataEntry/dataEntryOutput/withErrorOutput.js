@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import Error from '@material-ui/icons/Error';
+import { IconErrorFilled16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
@@ -26,7 +26,7 @@ type Props = {
 const styles = (theme: Theme) => ({
     card: {
         padding: theme.typography.pxToRem(10),
-        backgroundColor: theme.palette.error[100],
+        backgroundColor: theme.palette.error.red200,
         borderRadius: theme.typography.pxToRem(5),
     },
     list: {
@@ -92,7 +92,7 @@ const getErrorOutput = () =>
                     {visibleItems && visibleItems.length > 0 &&
                     <Card className={classes.card}>
                         <div className={classes.header}>
-                            <Error />
+                            <IconErrorFilled16 />
                             <div className={classes.headerText}>
                                 {i18n.t('Errors')}
                             </div>

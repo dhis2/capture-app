@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { fade } from '@material-ui/core/styles/colorManipulator';
 import { colors } from '@dhis2/ui';
 import { TrueOnlyField as UITrueOnlyField } from 'capture-ui';
 
@@ -16,7 +15,7 @@ const getStyles = (theme: Theme) => ({
         fill: 'rgba(0,0,0,0.30)',
     },
     focusSelected: {
-        backgroundColor: fade(theme.palette.secondary.main, 0.4),
+        backgroundColor: 'rgba(0, 121, 107, 0.4)',
     },
 });
 

@@ -2,10 +2,15 @@
 import React, { type ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { spacersNum } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
+import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
+import { WidgetFeedback } from '../../../WidgetFeedback';
+import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
+import { WidgetIndicator } from '../../../WidgetIndicator';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -21,6 +26,9 @@ const getStyles = ({ typography }) => ({
         flexShrink: 1,
         paddingLeft: spacersNum.dp16,
         width: 360,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
     },
     title: {
         ...typography.title,
@@ -34,6 +42,8 @@ export const EnrollmentPageDefaultPlain = ({
     teiId,
     enrollmentId,
     onDelete,
+    widgetEffects,
+    hideWidgets,
     classes,
 }: PlainProps) => (
     <>
@@ -43,6 +53,20 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetStagesAndEvents stages={program.stages} />
             </div>
             <div className={classes.rightColumn}>
+                <WidgetError error={widgetEffects?.errors} />
+                <WidgetWarning warning={widgetEffects?.warnings} />
+                {!hideWidgets.indicator && (
+                    <WidgetIndicator
+                        indicators={widgetEffects?.indicators}
+                        emptyText={i18n.t('No indicator output for this enrollment yet')}
+                    />
+                )}
+                {!hideWidgets.feedback && (
+                    <WidgetFeedback
+                        feedback={widgetEffects?.feedbacks}
+                        emptyText={i18n.t('No feedback for this enrollment yet')}
+                    />
+                )}
                 <WidgetProfile teiId={teiId} programId={program.id} />
                 <WidgetEnrollment
                     teiId={teiId}

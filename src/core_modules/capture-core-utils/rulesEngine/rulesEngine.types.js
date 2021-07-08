@@ -44,6 +44,7 @@ export type ProgramRuleEffect = {
     optionId: ?string,
     content: string,
     data: ?string,
+    style?: ?Object,
 };
 
 export type ProgramRuleAction = {
@@ -59,6 +60,7 @@ export type ProgramRuleAction = {
     programRuleVariableId?: ?string,
     optionGroupId: ?string,
     optionId: ?string,
+    style?: ?Object,
 };
 
 export type ProgramRule = {

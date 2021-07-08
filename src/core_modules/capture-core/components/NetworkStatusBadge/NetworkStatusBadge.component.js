@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
-
 import React, { PureComponent } from 'react';
-
-import Sync from '@material-ui/icons/Sync';
+import { IconSynk16 } from '@dhis2/ui';
 import Grow from '@material-ui/core/Grow';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'capture-core-utils/moment/momentResolver';
@@ -106,7 +104,9 @@ class LeftSection extends PureComponent {
         if (props.status && props.syncList.length > 0) {
             content = (
                 <div className={props.classes.flex}>
-                    <Sync className={props.classes.icon} />
+                    <span className={props.classes.icon} >
+                        <IconSynk16 />
+                    </span>
                     <p className={props.classes.text}>{i18n.t('Syncing')}</p>
                 </div>
             );
