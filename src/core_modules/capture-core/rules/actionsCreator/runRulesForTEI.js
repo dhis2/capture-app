@@ -128,8 +128,8 @@ export function runRulesForTEI(
             null,
             null,
             null,
-            trackedEntityAttributes,
             teiValues,
+            trackedEntityAttributes,
             enrollmentData,
             orgUnit,
             // $FlowFixMe[prop-missing] automated comment
