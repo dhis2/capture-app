@@ -46,40 +46,46 @@ export function getRulesEffectsProcessor(
             .map(processor);
     }
 
-    function createWarningEffect(
+    function createErrorDetectionEffect(
         effect: ProgramRuleEffect,
-        type: $Values<typeof effectActions>): WarningEffect {
-        return applyToExistingIds(effect, (idName: string): MessageEffect => ({
+        type: $Values<typeof effectActions>): any {
+        const result = applyToExistingIds(effect, (idName: string): MessageEffect => ({
             type,
             id: effect[idName],
             message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
-        })) ||
-        {
+        }));
+        return result.length !== 0 ? result : {
             type,
             id: 'general',
-            warning: {
-                id: effect.id,
-                message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
-            },
         };
+    }
+
+    function createWarningEffect(
+        effect: ProgramRuleEffect,
+        type: $Values<typeof effectActions>): WarningEffect {
+        const result = createErrorDetectionEffect(effect, type);
+        if (Array.isArray(result)) {
+            return result;
+        }
+        result.warning = {
+            id: effect.id,
+            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+        };
+        return result;
     }
 
     function createErrorEffect(
         effect: ProgramRuleEffect,
         type: $Values<typeof effectActions>): ErrorEffect {
-        return applyToExistingIds(effect, (idName: string): MessageEffect => ({
-            type,
-            id: effect[idName],
+        const result = createErrorDetectionEffect(effect, type);
+        if (Array.isArray(result)) {
+            return result;
+        }
+        result.error = {
+            id: effect.id,
             message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
-        })) ||
-        {
-            type,
-            id: 'general',
-            error: {
-                id: effect.id,
-                message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
-            },
         };
+        return result;
     }
 
     function convertNormalizedValueToOutputValue(normalizedValue: BaseValueType, valueType: string) {
