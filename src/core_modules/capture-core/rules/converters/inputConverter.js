@@ -90,22 +90,22 @@ class RulesValueConverter implements IConvertInputRulesValue {
     }
 
     convertTrackerAssociate(value: any): string {
-        log.warn('convertTrackerAssociate not implemented');
+        log.warn('convertTrackerAssociate not implemented', value);
         return '';
     }
 
     convertUserName(value: any): string {
-        log.warn('convertUserName not implemented');
+        log.warn('convertUserName not implemented', value);
         return '';
     }
 
     convertCoordinate(value: any): string {
-        log.warn('convertCoordinate not implemented');
+        log.warn('convertCoordinate not implemented', value);
         return '';
     }
 
     convertOrganisationUnit(value: any): string {
-        log.warn('convertOrganisationUnit not implemented');
+        log.warn('convertOrganisationUnit not implemented', value);
         return '';
     }
 
@@ -118,12 +118,12 @@ class RulesValueConverter implements IConvertInputRulesValue {
     }
 
     convertFile(value: any): string {
-        log.warn('convertFile not implemented');
+        log.warn('convertFile not implemented', value);
         return '';
     }
 
     convertImage(value: any): string {
-        log.warn('convertImage not implemented');
+        log.warn('convertImage not implemented', value);
         return '';
     }
 }

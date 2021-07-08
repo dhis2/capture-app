@@ -21,7 +21,6 @@ import type {
     TEIValues,
     Constants,
     IMomentConverter,
-    IConvertInputRulesValue,
 } from '../../rulesEngine.types';
 
 type SourceData = {
@@ -75,7 +74,7 @@ export class VariableService {
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
     constructor(
         onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
-        momentConverter: IMomentConverter
+        momentConverter: IMomentConverter,
     ) {
         this.onProcessValue = onProcessValue;
         VariableService.dateUtils = getDateUtils(momentConverter);

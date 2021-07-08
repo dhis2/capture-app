@@ -1,4 +1,4 @@
-import { RulesEngine } from '../index';
+import { rulesEngine } from '../rulesEngine';
 
 test('TEI rules engine effects with functions and effects', () => {
     // given
@@ -12,11 +12,14 @@ test('TEI rules engine effects with functions and effects', () => {
     const enrollmentData = { enrollmentDate: '2020-05-14T22:00:00.000Z' };
 
     // when
-    const rulesEffects = RulesEngine.programRuleEffectsForTEI(
+    const rulesEffects = rulesEngine.getProgramRuleEffects(
         { programRulesVariables, programRules, constants },
-        enrollmentData,
-        teiValues,
+        null,
+        null,
+        null,
         trackedEntityAttributes,
+        teiValues,
+        enrollmentData,
         orgUnit,
         optionSet,
     );

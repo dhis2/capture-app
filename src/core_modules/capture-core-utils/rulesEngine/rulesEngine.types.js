@@ -281,18 +281,18 @@ export type D2Functions = {
     'd2:countIfValue': D2FunctionParameters,
     'd2:countIfZeroPos': D2FunctionParameters,
     'd2:hasValue': D2FunctionParameters,
-    //d2:zpvc(<object>, <object>, ...)
+    // d2:zpvc(<object>, <object>, ...)
     'd2:validatePattern': D2FunctionParameters,
     'd2:left': D2FunctionParameters,
     'd2:right': D2FunctionParameters,
     'd2:substring': D2FunctionParameters,
     'd2:split': D2FunctionParameters,
     'd2:length': D2FunctionParameters,
-    //d2:inOrgUnitGroup(<orgunit_group_code>)
-    //d2:hasUserRole(<user_role>)
+    // d2:inOrgUnitGroup(<orgunit_group_code>)
+    // d2:hasUserRole(<user_role>)
     'd2:zScoreWFA': D2FunctionParameters,
-    //d2:zScoreHFA(<ageInMonth>, <height>, <gender>)
-    //d2:zScoreWFH(<height>, <weight>, <gender>)
+    // d2:zScoreHFA(<ageInMonth>, <height>, <gender>)
+    // d2:zScoreWFH(<height>, <weight>, <gender>)
 
     // Functions that are not available in program rule expressions
     'd2:lastEventDate': D2FunctionParameters,

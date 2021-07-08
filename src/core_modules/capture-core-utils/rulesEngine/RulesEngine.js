@@ -17,7 +17,6 @@ import type {
     TrackedEntityAttributes,
     Enrollment,
     TEIValues,
-    ProgramRule,
     RuleVariables,
     EventsDataContainer,
     IMomentConverter,
@@ -28,46 +27,38 @@ import type {
 import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
 import { effectActions } from './effectActions.const';
 import { trimQuotes } from './commonUtils/trimQuotes';
-import { normalizeRuleVariable } from './commonUtils/normalizeRuleVariable'
+import { normalizeRuleVariable } from './commonUtils/normalizeRuleVariable';
 
 /**
  * We update the variables hash so that the next rule can use the updated values.
- * @param content
- * @param action
+ * @param variableToAssign
  * @param data
  * @param variablesHash
  */
-function updateVariableHashWhenActionIsAssignValue(content: string, action: string, data: any, variablesHash: RuleVariables) {
+function updateVariableHashWhenActionIsAssignValue(variableToAssign: string, data: any, variablesHash: RuleVariables) {
+    const variableHash = variablesHash[variableToAssign];
 
-    // Must be rewritten to handle up to three simultaneous assignments
-
-    if (action === effectActions.ASSIGN_VALUE && content) {
-        const variableToAssign = content.replace('#{', '').replace('A{', '').replace('}', '');
-        const variableHash = variablesHash[variableToAssign];
-
-        if (!variableHash) {
-            // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
-            log.warn(`Variable ${variableToAssign} was not defined.`);
-        } else {
-            // buildAssignVariable
-            // todo according to types this must be a bug
-            // $FlowFixMe[prop-missing] automated comment
-            const { valueType } = variableHash;
-            let variableValue = normalizeRuleVariable(data, valueType);
-            if (variableValue && isString(variableValue)) {
-                variableValue = `'${variableValue}'`;
-            }
-
-            variablesHash[variableToAssign] = {
-                ...variablesHash[variableToAssign],
-                variableValue,
-                variableType: valueType,
-                hasValue: true,
-                variableEventDate: '',
-                variablePrefix: variableHash.variablePrefix || '#',
-                allValues: [variableValue],
-            };
+    if (!variableHash) {
+        // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
+        log.warn(`Variable ${variableToAssign} was not defined.`);
+    } else {
+        // buildAssignVariable
+        // todo according to types this must be a bug
+        const { variableType } = variableHash;
+        let variableValue = normalizeRuleVariable(data, variableType);
+        if (variableValue && isString(variableValue)) {
+            variableValue = `'${variableValue}'`;
         }
+
+        variablesHash[variableToAssign] = {
+            ...variablesHash[variableToAssign],
+            variableValue,
+            variableType,
+            hasValue: true,
+            variableEventDate: '',
+            variablePrefix: variableHash.variablePrefix || '#',
+            allValues: [variableValue],
+        };
     }
 }
 
@@ -206,7 +197,6 @@ const replaceVariablesWithValues = (expression: string, variablesHash: RuleVaria
 };
 
 export class RulesEngine {
-
     inputConverter: IConvertInputRulesValue;
     outputConverter: IConvertOutputRulesEffectsValue;
     variableService: VariableService;
@@ -215,8 +205,8 @@ export class RulesEngine {
     constructor(
         inputConverter: IConvertInputRulesValue,
         outputConverter: IConvertOutputRulesEffectsValue,
-        momentConverter: IMomentConverter
-    ){
+        momentConverter: IMomentConverter,
+    ) {
         this.inputConverter = inputConverter;
         this.outputConverter = outputConverter;
         const valueProcessor = new ValueProcessor(inputConverter);
@@ -247,7 +237,6 @@ export class RulesEngine {
         selectedOrgUnit: OrgUnit,
         optionSets: OptionSets,
     ): ?OutputEffects {
-
         const variablesHash = this.variableService.getVariables(
             programRulesContainer,
             currentEvent,
@@ -309,6 +298,7 @@ export class RulesEngine {
                             location,
                             dataElementId,
                             trackedEntityAttributeId,
+                            programRuleVariableId,
                             programStageId,
                             programStageSectionId,
                             optionGroupId,
@@ -322,7 +312,12 @@ export class RulesEngine {
                             ruleEffectData = trimQuotes(evaluatedRuleEffectData);
                         }
 
-                        updateVariableHashWhenActionIsAssignValue(content, action, ruleEffectData, variablesHash);
+                        if (action === effectActions.ASSIGN_VALUE) {
+                            [dataElementId, trackedEntityAttributeId, programRuleVariableId]
+                                .filter(idString => idString)
+                                // $FlowExpectedError (doesn't recognise that the filter transforms ?string into string)
+                                .map(idString => updateVariableHashWhenActionIsAssignValue(idString, ruleEffectData, variablesHash));
+                        }
 
                         return {
                             data: ruleEffectData,
@@ -344,6 +339,6 @@ export class RulesEngine {
             .filter(ruleEffects => ruleEffects);
 
         const processRulesEffects = getRulesEffectsProcessor(this.outputConverter);
-        return processRulesEffects(effects, processType, dataElements, trackedEntityAttributes);
+        return processRulesEffects(effects, dataElements, trackedEntityAttributes);
     }
 }

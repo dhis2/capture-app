@@ -8,8 +8,7 @@ export const provideContext = async ({
     storageController,
     storeNames,
 }: ContextInput,
-callback: Function,
-) => {
+    callback: Function) => {
     context = {
         onQueryApi,
         storageController,

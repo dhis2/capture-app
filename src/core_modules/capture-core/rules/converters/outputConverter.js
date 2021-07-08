@@ -2,8 +2,8 @@
 /* eslint-disable class-methods-use-this */
 import log from 'loglevel';
 import moment from 'moment';
-import { convertMomentToDateFormatString } from '../../utils/converters/date';
 import type { IConvertOutputRulesEffectsValue } from 'capture-core-utils/rulesEngine/rulesEngine.types';
+import { convertMomentToDateFormatString } from '../../utils/converters/date';
 
 const dateMomentFormat = 'YYYY-MM-DD';
 
@@ -82,22 +82,22 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
     }
 
     convertTrackerAssociate(value: string): any {
-        log.warn('convertTrackerAssociate not implemented');
+        log.warn('convertTrackerAssociate not implemented', value);
         return '';
     }
 
     convertUserName(value: string): any {
-        log.warn('convertUserName not implemented');
+        log.warn('convertUserName not implemented', value);
         return '';
     }
-    
+
     convertCoordinate(value: string): any {
-        log.warn('convertCoordinate not implemented');
+        log.warn('convertCoordinate not implemented', value);
         return '';
     }
-    
+
     convertOrganisationUnit(value: string): any {
-        log.warn('convertOrganisationUnit not implemented');
+        log.warn('convertOrganisationUnit not implemented', value);
         return '';
     }
 
@@ -126,12 +126,12 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
     }
 
     convertFile(value: string): any {
-        log.warn('convertFile not implemented');
+        log.warn('convertFile not implemented', value);
         return '';
     }
 
     convertImage(value: string): any {
-        log.warn('convertImage not implemented');
+        log.warn('convertImage not implemented', value);
         return '';
     }
 }

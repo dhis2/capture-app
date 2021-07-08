@@ -2,11 +2,7 @@
 /**
  * @module rulesEngineActionsCreator
  */
-import type { Program, RenderFoundation, TrackerProgram } from '../../metaData';
-import { runRulesForSingleEvent } from './runRulesForSingleEvent';
-import { runRulesForTEI } from './runRulesForTEI';
-import { postProcessRulesEffects } from './postProcessRulesEffects';
-import { updateRulesEffects } from './rulesEngine.actions';
+
 import type {
     OutputEffects,
     Enrollment,
@@ -15,7 +11,11 @@ import type {
     EventData,
     EventsData,
 } from 'capture-core-utils/rulesEngine';
-
+import type { Program, RenderFoundation, TrackerProgram } from '../../metaData';
+import { runRulesForSingleEvent } from './runRulesForSingleEvent';
+import { runRulesForTEI } from './runRulesForTEI';
+import { postProcessRulesEffects } from './postProcessRulesEffects';
+import { updateRulesEffects } from './rulesEngine.actions';
 
 function getRulesActions(
     rulesEffects: ?OutputEffects,

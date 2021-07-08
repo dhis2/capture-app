@@ -1,6 +1,4 @@
 // @flow
-import { rulesEngine } from '../rulesEngine';
-import type { Program } from '../../metaData';
 import type {
     EventsDataContainer,
     OrgUnit,
@@ -9,6 +7,8 @@ import type {
     Enrollment,
     TrackedEntityAttributes,
 } from 'capture-core-utils/rulesEngine';
+import { rulesEngine } from '../rulesEngine';
+import type { Program } from '../../metaData';
 import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
 import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
 

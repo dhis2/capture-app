@@ -1,4 +1,4 @@
-//@flow
+// @flow
 import log from 'loglevel';
 import isString from 'd2-utilizr/lib/isString';
 import { typeKeys } from '../typeKeys.const';
@@ -17,9 +17,7 @@ export const normalizeRuleVariable = (data: any, valueType: string) => {
         return numberRepresentation;
     };
 
-    const convertString = (stringRepresentation: number | string) => {
-        return stringRepresentation.toString();
-    }
+    const convertString = (stringRepresentation: number | string): string => stringRepresentation.toString();
 
     const ruleEffectDataConvertersByType = {
         [typeKeys.BOOLEAN]: (value) => {

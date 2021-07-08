@@ -1,13 +1,12 @@
 // @flow
-import log from 'loglevel';
-import isString from 'd2-utilizr/lib/isString';
 import { mapTypeToInterfaceFnName } from '../../typeToInterfaceFnName.const';
-import { processTypes } from './processTypes.const';
 import { effectActions } from '../../effectActions.const';
 
 import type {
     ProgramRuleEffect,
+    DataElement,
     DataElements,
+    TrackedEntityAttribute,
     TrackedEntityAttributes,
     IConvertOutputRulesEffectsValue,
     AssignOutputEffect,
@@ -18,13 +17,7 @@ import type {
     CompulsoryEffect,
     OutputEffect,
 } from '../../rulesEngine.types';
-import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable'
-
-const mapProcessTypeToIdentifierName = {
-    [processTypes.EVENT]: 'dataElementId',
-    [processTypes.TEI]: 'trackedEntityAttributeId',
-    [processTypes.ENROLLMENT]: 'enrollmentId',
-};
+import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable';
 
 const sanitiseFalsy = (value) => {
     if (value) {
@@ -37,143 +30,124 @@ const sanitiseFalsy = (value) => {
 };
 
 type BaseValueType = number | ?string | boolean;
+type WarningEffect = Array<MessageEffect> | GeneralWarningEffect;
+type ErrorEffect = Array<MessageEffect> | GeneralErrorEffect;
 
 export function getRulesEffectsProcessor(
     outputConverters: IConvertOutputRulesEffectsValue,
 ) {
+    const idNames = ['dataElementId', 'trackedEntityAttributeId'];
+
+    function applyToExistingIds(
+        effect: ProgramRuleEffect,
+        processor: (string) => ?any): any {
+        return idNames
+            .filter(idName => effect[idName])
+            .map(processor);
+    }
+
+    function createWarningEffect(
+        effect: ProgramRuleEffect,
+        type: $Values<typeof effectActions>): WarningEffect {
+        return applyToExistingIds(effect, (idName: string): MessageEffect => ({
+            type,
+            id: effect[idName],
+            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+        })) ||
+        {
+            type,
+            id: 'general',
+            warning: {
+                id: effect.id,
+                message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            },
+        };
+    }
+
+    function createErrorEffect(
+        effect: ProgramRuleEffect,
+        type: $Values<typeof effectActions>): ErrorEffect {
+        return applyToExistingIds(effect, (idName: string): MessageEffect => ({
+            type,
+            id: effect[idName],
+            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+        })) ||
+        {
+            type,
+            id: 'general',
+            error: {
+                id: effect.id,
+                message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+            },
+        };
+    }
+
     function convertNormalizedValueToOutputValue(normalizedValue: BaseValueType, valueType: string) {
         let outputValue;
         if (normalizedValue || normalizedValue === 0 || normalizedValue === false) {
             const converterName: string = mapTypeToInterfaceFnName[valueType];
             // $FlowExpectedError
-            outputValue = outputConverter[converterName](normalizedValue);
+            outputValue = outputConverters[converterName](normalizedValue);
         } else {
-            // $FlowExpectedError
-            outputValue = baseValue;
+            outputValue = normalizedValue;
         }
         return outputValue;
     }
 
-    function processAssignValue(
+    function createAssignValueEffect(
         effect: ProgramRuleEffect,
-        processIdName: string,
-        processType: $Values<typeof processTypes>,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes): ?AssignOutputEffect {
-        if (!effect[processIdName]) {
-            return null;
-        }
-        const element = processType === processTypes.EVENT ?
-
-            // $FlowFixMe[incompatible-use] automated comment
-            dataElements[effect[processIdName]] :
-
-            // $FlowFixMe[incompatible-use] automated comment
-            trackedEntityAttributes[effect[processIdName]];
-
-        const valueType = element.valueType;
-        const normalizedValue = normalizeRuleVariable(effect.data, valueType);
-        const outputValue = convertNormalizedValueToOutputValue(normalizedValue, valueType);
+        element: DataElement | TrackedEntityAttribute): AssignOutputEffect {
+        const normalizedValue = normalizeRuleVariable(effect.data, element.valueType);
+        const outputValue = convertNormalizedValueToOutputValue(normalizedValue, element.valueType);
 
         return {
             type: effectActions.ASSIGN_VALUE,
-            id: effect[processIdName],
+            id: element.id,
             value: outputValue,
         };
     }
 
-    function processHideField(effect: ProgramRuleEffect, processIdName: string): ?HideOutputEffect {
-        if (!effect[processIdName]) {
-            return null;
-        }
-
-        return {
-            type: effectActions.HIDE_FIELD,
-            id: effect[processIdName],
-        };
-    }
-
-    function processShowError(effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralErrorEffect {
-        if (!effect[processIdName]) {
-            return {
-                type: effectActions.SHOW_ERROR,
-                id: 'general',
-                error: {
-                    id: effect.id,
-                    message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
-                },
-            };
-        }
-
-        return {
-            type: effectActions.SHOW_ERROR,
-            id: effect[processIdName],
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
-        };
-    }
-
-    function processShowWarning(
-        effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralWarningEffect {
-        if (!effect[processIdName]) {
-            return {
-                type: effectActions.SHOW_WARNING,
-                id: 'general',
-                warning: { id: effect.id, message: `${effect.content} ${sanitiseFalsy(effect.data)}` },
-            };
-        }
-
-        return {
-            type: effectActions.SHOW_WARNING,
-            id: effect[processIdName],
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
-        };
-    }
-
-    function processShowErrorOnComplete(
-        effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralErrorEffect {
-        if (!effect[processIdName]) {
-            return {
-                type: effectActions.SHOW_ERROR_ONCOMPLETE,
-                id: 'general',
-                error: {
-                    id: effect.id,
-                    message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
-                },
-            };
-        }
-
-        return {
-            type: effectActions.SHOW_ERROR_ONCOMPLETE,
-            id: effect[processIdName],
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
-        };
-    }
-
-    function processShowWarningOnComplete(
-        effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralWarningEffect {
-        if (!effect[processIdName]) {
-            return {
-                type: effectActions.SHOW_WARNING_ONCOMPLETE,
-                id: 'general',
-                warning: {
-                    id: effect.id,
-                    message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
-                },
-            };
-        }
-
-        return {
-            type: effectActions.SHOW_WARNING_ONCOMPLETE,
-            id: effect[processIdName],
-            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
-        };
-    }
-
-    function processHideSection(
+    function processAssignValue(
         effect: ProgramRuleEffect,
-        processIdName: string,
-        processType: $Values<typeof processTypes>): ?HideOutputEffect {
-        if (processType !== processTypes.EVENT || !effect.programStageSectionId) {
+        dataElements: ?DataElements,
+        trackedEntityAttributes: ?TrackedEntityAttributes): Array<AssignOutputEffect> {
+        const effects = [];
+        if (dataElements && effect.dataElementId && dataElements[effect.dataElementId]) {
+            effects.push(createAssignValueEffect(effect, dataElements[effect.dataElementId]));
+        }
+        if (trackedEntityAttributes && effect.trackedEntityAttributeId && trackedEntityAttributes[effect.trackedEntityAttributeId]) {
+            effects.push(createAssignValueEffect(effect, trackedEntityAttributes[effect.trackedEntityAttributeId]));
+        }
+        return effects;
+    }
+
+    function processHideField(effect: ProgramRuleEffect): Array<HideOutputEffect> {
+        return applyToExistingIds(effect, (idName: string): HideOutputEffect => ({
+            type: effectActions.HIDE_FIELD,
+            id: effect[idName],
+        }));
+    }
+
+    function processShowError(effect: ProgramRuleEffect): ErrorEffect {
+        return createErrorEffect(effect, effectActions.SHOW_ERROR);
+    }
+
+    function processShowWarning(effect: ProgramRuleEffect): WarningEffect {
+        return createWarningEffect(effect, effectActions.SHOW_WARNING);
+    }
+
+    function processShowErrorOnComplete(effect: ProgramRuleEffect): ErrorEffect {
+        return createErrorEffect(effect, effectActions.SHOW_ERROR_ONCOMPLETE);
+    }
+
+    function processShowWarningOnComplete(effect: ProgramRuleEffect): WarningEffect {
+        return createWarningEffect(effect, effectActions.SHOW_WARNING_ONCOMPLETE);
+    }
+
+    function processHideSection(effect: ProgramRuleEffect): ?HideOutputEffect {
+        // Why must processType be of type EVENT?
+        // if (processType !== processTypes.EVENT || !effect.programStageSectionId) {
+        if (!effect.programStageSectionId) {
             return null;
         }
 
@@ -183,15 +157,11 @@ export function getRulesEffectsProcessor(
         };
     }
 
-    function processMakeCompulsory(effect: ProgramRuleEffect, processIdName: string): ?CompulsoryEffect {
-        if (!effect[processIdName]) {
-            return null;
-        }
-
-        return {
+    function processMakeCompulsory(effect: ProgramRuleEffect): ?Array<CompulsoryEffect> {
+        return applyToExistingIds(effect, (idName: string): CompulsoryEffect => ({
             type: effectActions.MAKE_COMPULSORY,
-            id: effect[processIdName],
-        };
+            id: effect[idName],
+        }));
     }
 
     function processDisplayText(effect: ProgramRuleEffect): ?any {
@@ -217,40 +187,28 @@ export function getRulesEffectsProcessor(
         };
     }
 
-    function processHideOptionGroup(effect: ProgramRuleEffect, processIdName: string): ?any {
-        if (!effect[processIdName]) {
-            return null;
-        }
-
-        return {
+    function processHideOptionGroup(effect: ProgramRuleEffect): ?any {
+        return applyToExistingIds(effect, (idName: string) => ({
             type: effectActions.HIDE_OPTION_GROUP,
-            id: effect[processIdName],
+            id: effect[idName],
             optionGroupId: effect.optionGroupId,
-        };
+        }));
     }
 
-    function processHideOption(effect: ProgramRuleEffect, processIdName: string): ?any {
-        if (!effect[processIdName]) {
-            return null;
-        }
-
-        return {
+    function processHideOption(effect: ProgramRuleEffect): ?any {
+        return applyToExistingIds(effect, (idName: string) => ({
             type: effectActions.HIDE_OPTION,
-            id: effect[processIdName],
+            id: effect[idName],
             optionId: effect.optionId,
-        };
+        }));
     }
 
-    function processShowOptionGroup(effect: ProgramRuleEffect, processIdName: string): ?any {
-        if (!effect[processIdName]) {
-            return null;
-        }
-
-        return {
+    function processShowOptionGroup(effect: ProgramRuleEffect): ?any {
+        return applyToExistingIds(effect, (idName: string) => ({
             type: effectActions.SHOW_OPTION_GROUP,
-            id: effect[processIdName],
+            id: effect[idName],
             optionGroupId: effect.optionGroupId,
-        };
+        }));
     }
 
     const mapActionsToProcessor = {
@@ -271,22 +229,17 @@ export function getRulesEffectsProcessor(
 
     function processRulesEffects(
         effects: ?Array<ProgramRuleEffect>,
-        processType: $Values<typeof processTypes>,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes): ?Array<OutputEffect> {
-        const processIdName = mapProcessTypeToIdentifierName[processType];
-
         if (effects) {
             return effects
                 .filter(({ action }) => mapActionsToProcessor[action])
                 .flatMap(effect => mapActionsToProcessor[effect.action](
                     effect,
-                    processIdName,
-                    processType,
                     dataElements,
                     trackedEntityAttributes,
                 ))
-                // when mapActionsToProcessor function returns `null` we filter those value out.
+            // when mapActionsToProcessor function returns `null` we filter those value out.
                 .filter(keepTruthyValues => keepTruthyValues);
         }
         return null;

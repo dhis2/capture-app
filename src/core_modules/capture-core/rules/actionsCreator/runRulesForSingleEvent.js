@@ -1,17 +1,17 @@
 // @flow
 import log from 'loglevel';
-import { rulesEngine } from '../rulesEngine';
-import { errorCreator } from '../../../capture-core-utils';
-import type { Program, RenderFoundation, DataElement } from '../../metaData';
-import { EventProgram } from '../../metaData';
-import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
-import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
 import type {
     DataElement as DataElementForRulesEngine,
     EventsData,
     EventData,
     OrgUnit,
 } from 'capture-core-utils/rulesEngine';
+import { rulesEngine } from '../rulesEngine';
+import { errorCreator } from '../../../capture-core-utils';
+import type { Program, RenderFoundation, DataElement } from '../../metaData';
+import { EventProgram } from '../../metaData';
+import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
+import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
 
 const errorMessages = {
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
