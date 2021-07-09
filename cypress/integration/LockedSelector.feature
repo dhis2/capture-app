@@ -139,7 +139,7 @@ Feature: User uses the LockedSelector to navigate
   Scenario Outline: Enrollment page > Landing on the page with url
     Given you land on the enrollment page by having typed the <url>
     Then you see the following <message>
-    And you can see on the locked selector the following <state>
+    And you can see on the scope selector the following <state>
 
     Examples:
         | url | state | message |
@@ -156,34 +156,34 @@ Feature: User uses the LockedSelector to navigate
       | /#/enrollment?programId=qDkgAbB5Jlk&teiId=fhFQhO0xILJ                                                 | teiAndMalariaProgram | Carlos Cruz is a person and cannot be enrolled in the Malaria case diagnosis, treatment and investigation. Choose another program that allows person enrollment. Enroll a new malaria entity in this program.|
       | /#/enrollment?programId=lxAQ7Zs9VYR&teiId=fhFQhO0xILJ                                                 | teiAndEventProgram   | Antenatal care visit is an event program and does not have enrollments. |
 
-  # Scenario: Enrollment page > resetting the tei
-  #  Given you land on the enrollment page by having typed only the enrollmentId on the url
-  #  When you reset the tei selection
-  #  And you navigated to the main page
+  Scenario: Enrollment page > resetting the tei
+   Given you land on the enrollment page by having typed only the enrollmentId on the url
+   When you reset the tei selection
+   And you navigated to the main page
 
-  # Scenario: Enrollment page > resetting the program
-  #  Given you land on the enrollment page by having typed only the enrollmentId on the url
-  #  When you wait to reset the program selection
-  #  And you see message explaining you need to select a program
+  Scenario: Enrollment page > resetting the program
+   Given you land on the enrollment page by having typed only the enrollmentId on the url
+   When you reset the program selection
+   And you see message explaining you need to select a program
 
-  # Scenario: Enrollment page > resetting the org unit
-  #  Given you land on the enrollment page by having typed only the enrollmentId on the url
-  #  When you reset the org unit selection
-  #  And you see the enrollment page but there is no org unit id in the url
+  Scenario: Enrollment page > resetting the org unit
+   Given you land on the enrollment page by having typed only the enrollmentId on the url
+   When you reset the org unit selection
+   And you see the enrollment page but there is no org unit id in the url
 
-  # Scenario: Enrollment page > resetting the enrollment
-  #  Given you land on the enrollment page by having typed only the enrollmentId on the url
-  #  When you wait to reset the enrollment selection
-  #  And you see message explaining you need to select an enrollment
+  Scenario: Enrollment page > resetting the enrollment
+   Given you land on the enrollment page by having typed only the enrollmentId on the url
+   When you reset the enrollment selection
+   And you see message explaining you need to select an enrollment
 
-  # Scenario: Enrollment page > navigating using the locked selector
-  #  Given you land on the enrollment page by having typed only the enrollmentId on the url
-  #  When you reset the program selection
-  #  And you select the MNCH PNC program
-  #  Then you see message explaining there are no enrollments for this program
-  #  When you reset the program selection
-  #  And you select the Antenatal care visit
-  #  Then you see message explaining this is an Event program
-  #  When you reset the program selection
-  #  And you select the Child Programme
-  #  And you see the enrollment page
+  Scenario: Enrollment page > navigating using the scope selector
+   Given you land on the enrollment page by having typed only the enrollmentId on the url
+   When you reset the program selection
+   And you select the MNCH PNC program
+   Then you see message explaining there are no enrollments for this program
+   When you reset the program selection
+   And you select the Antenatal care visit
+   Then you see message explaining this is an Event program
+   When you reset the program selection
+   And you select the Child Programme
+   And you see the enrollment page

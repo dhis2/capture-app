@@ -160,6 +160,11 @@ import {
     setEnrollmentSelectionEpic,
     resetEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
+
+import {
+    fetchOrgUnitEpic as scopeFetchOrgUnitEpic,
+} from '../core_modules/capture-core/components/ScopeSelector';
+
 import {
     setTrackedEntityTypeIdOnUrlEpic,
 } from '../core_modules/capture-core/components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.epics';
@@ -289,6 +294,7 @@ export const epics = combineEpics(
     resetOrgUnitId,
     resetProgramIdEpic,
     fetchOrgUnitEpic,
+    scopeFetchOrgUnitEpic,
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,

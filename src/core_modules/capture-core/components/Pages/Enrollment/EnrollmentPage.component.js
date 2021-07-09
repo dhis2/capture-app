@@ -3,7 +3,19 @@ import React from 'react';
 import type { ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { compose } from 'redux';
-import { ScopeSelector } from '../../ScopeSelector';
+import i18n from '@dhis2/d2-i18n';
+import Grid from '@material-ui/core/Grid';
+import {
+    ScopeSelector,
+    useSetProgramId,
+    useSetOrgUnitId,
+    useSetEnrollmentId,
+    useResetProgramId,
+    useResetOrgUnitId,
+    useResetTeiId,
+    useResetEnrollmentId,
+} from '../../ScopeSelector';
+import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import type { Props } from './EnrollmentPage.types';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { LoadingMaskForPage } from '../../LoadingMasks/LoadingMaskForPage.component';
@@ -23,33 +35,86 @@ const getStyles = ({ typography }) => ({
     },
 });
 
-const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
-    <ScopeSelector pageToPush="enrollment" />
+const EnrollmentPagePlain = ({
+    classes,
+    programId,
+    orgUnitId,
+    enrollmentId,
+    trackedEntityName,
+    teiDisplayName,
+    enrollmentPageStatus,
+    enrollmentsAsOptions,
+}) => {
+    const { setProgramId } = useSetProgramId();
+    const { setOrgUnitId } = useSetOrgUnitId();
+    const { setEnrollmentId } = useSetEnrollmentId();
 
-    <div data-test="enrollment-page-content" className={classes.container} >
+    const { resetProgramId } = useResetProgramId();
+    const { resetOrgUnitId } = useResetOrgUnitId();
+    const { resetEnrollmentId } = useResetEnrollmentId();
+    const { resetTeiId } = useResetTeiId('');
 
-        {
-            enrollmentPageStatus === enrollmentPageStatuses.MISSING_SELECTIONS &&
-                <MissingMessage />
-        }
+    return (
+        <>
+            <ScopeSelector
+                selectedProgramId={programId}
+                selectedOrgUnitId={orgUnitId}
+                onSetProgramId={id => setProgramId('enrollment', id)}
+                onSetOrgUnit={id => setOrgUnitId('enrollment', id)}
+                onResetProgramId={() => resetProgramId('enrollment')}
+                onResetOrgUnitId={() => resetOrgUnitId('enrollment')}
+            >
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready={trackedEntityName && teiDisplayName}
+                        onClear={() => resetTeiId()}
+                        options={[
+                            {
+                                label: teiDisplayName,
+                                value: 'alwaysPreselected',
+                            },
+                        ]}
+                        selectedValue="alwaysPreselected"
+                        title={trackedEntityName}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready
+                        onClear={() => resetEnrollmentId('enrollment')}
+                        onSelect={id => setEnrollmentId('enrollment', id)}
+                        options={enrollmentsAsOptions}
+                        selectedValue={enrollmentId}
+                        title={i18n.t('Enrollment')}
+                    />
+                </Grid>
+            </ScopeSelector>
 
-        {
-            enrollmentPageStatus === enrollmentPageStatuses.DEFAULT && (
-                <EnrollmentPageDefault />
-            )
-        }
+            <div
+                data-test="enrollment-page-content"
+                className={classes.container}
+            >
+                {enrollmentPageStatus ===
+                    enrollmentPageStatuses.MISSING_SELECTIONS && (
+                    <MissingMessage />
+                )}
 
-        {
-            enrollmentPageStatus === enrollmentPageStatuses.LOADING &&
-                <div className={classes.loadingMask}>
-                    <LoadingMaskForPage />
-                </div>
-        }
-    </div>
-</>);
+                {enrollmentPageStatus === enrollmentPageStatuses.DEFAULT && (
+                    <EnrollmentPageDefault />
+                )}
+
+                {enrollmentPageStatus === enrollmentPageStatuses.LOADING && (
+                    <div className={classes.loadingMask}>
+                        <LoadingMaskForPage />
+                    </div>
+                )}
+            </div>
+        </>
+    );
+};
 
 export const EnrollmentPageComponent: ComponentType<$Diff<Props, CssClasses>> =
-  compose(
-      withErrorMessageHandler(),
-      withStyles(getStyles),
-  )(EnrollmentPagePlain);
+    compose(
+        withErrorMessageHandler(),
+        withStyles(getStyles),
+    )(EnrollmentPagePlain);

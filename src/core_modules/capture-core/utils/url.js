@@ -66,5 +66,17 @@ export const deriveUrlQueries = (state: Object) => {
     };
 };
 
+export const getUrlQueries = () => {
+    const split = window.location.href.split('?');
+    const searchParams = new URLSearchParams(split && split[1]);
+
+    return {
+        programId: searchParams.get('programId') || '',
+        orgUnitId: searchParams.get('orgUnitId') || '',
+        teiId: searchParams.get('teiId') || '',
+        enrollmentId: searchParams.get('enrollmentId') || '',
+    };
+};
+
 export const pageFetchesOrgUnitUsingTheOldWay = (page: string, pages: Object = pageKeys): boolean =>
     Object.values(pages).includes(page);
