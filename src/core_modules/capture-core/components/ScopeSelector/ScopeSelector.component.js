@@ -2,7 +2,7 @@
 import React, { Component, type ComponentType } from 'react';
 import { compose } from 'redux';
 import i18n from '@dhis2/d2-i18n';
-import { QuickSelector } from './QuickSelector/QuickSelector.container';
+import { QuickSelector } from './QuickSelector/QuickSelector.component';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 import type { Props, State } from './ScopeSelector.types';
 import { withLoadingIndicator } from '../../HOC';
@@ -135,7 +135,7 @@ class ScopeSelectorClass extends Component<Props, State> {
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
         return (
-            <div data-test={'locked-selector'}>
+            <div data-test={'scope-selector'}>
                 <QuickSelector
                     onSetOrgUnit={onSetOrgUnit}
                     onSetProgramId={onSetProgramId}
@@ -149,7 +149,12 @@ class ScopeSelectorClass extends Component<Props, State> {
                     onNewClickWithoutProgramId={this.handleOpenNewRegistrationPageWithoutProgramId}
                     onFindClick={this.handleOpenSearchPage}
                     onFindClickWithoutProgramId={this.handleOpenSearchPageWithoutProgramId}
-                />
+                    selectedOrgUnitId={this.props.selectedOrgUnitId}
+                    selectedProgramId={this.props.selectedProgramId}
+                    selectedOrgUnit={this.props.selectedOrgUnit}
+                >
+                    {this.props.children}
+                </QuickSelector>
                 <ConfirmDialog
                     onConfirm={this.handleAcceptStartAgain}
                     open={this.state.openStartAgainWarning}
