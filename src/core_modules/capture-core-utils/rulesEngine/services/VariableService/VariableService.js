@@ -6,7 +6,6 @@ import { variablePrefixes } from './variablePrefixes.const';
 import { getDateUtils } from '../../commonUtils/dateUtils';
 
 import type {
-    ProgramRulesContainer,
     ProgramRuleVariable,
     EventData,
     EventsDataContainer,
@@ -20,6 +19,7 @@ import type {
     RuleVariable,
     TEIValues,
     Constants,
+    RulesEngineInput,
     IMomentConverter,
 } from '../../rulesEngine.types';
 
@@ -89,17 +89,17 @@ export class VariableService {
         };
     }
 
-    getVariables(
-        programRulesContainer: ProgramRulesContainer,
-        executingEvent: ?EventData,
-        eventsContainer: ?EventsDataContainer,
-        dataElements: ?DataElements,
-        selectedEntity: ?TEIValues,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
-        selectedEnrollment: ?Enrollment,
-        selectedOrgUnit: OrgUnit,
-        optionSets: OptionSets,
-    ) {
+    getVariables({
+        programRulesContainer,
+        currentEvent: executingEvent,
+        eventsContainer,
+        dataElements,
+        selectedEntity,
+        trackedEntityAttributes,
+        selectedEnrollment,
+        selectedOrgUnit,
+        optionSets,
+    }: RulesEngineInput) {
         const programVariables = programRulesContainer.programRulesVariables || [];
         const sourceData = {
             executingEvent,

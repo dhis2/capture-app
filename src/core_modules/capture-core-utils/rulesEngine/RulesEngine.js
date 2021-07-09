@@ -9,16 +9,8 @@ import { getDateUtils } from './commonUtils/dateUtils';
 import { d2Functions } from './d2Functions';
 import type {
     OutputEffects,
-    ProgramRulesContainer,
-    EventData,
-    DataElements,
-    OrgUnit,
-    OptionSets,
-    TrackedEntityAttributes,
-    Enrollment,
-    TEIValues,
     RuleVariables,
-    EventsDataContainer,
+    RulesEngineInput,
     IMomentConverter,
     IConvertInputRulesValue,
     IConvertOutputRulesEffectsValue,
@@ -226,18 +218,19 @@ export class RulesEngine {
     * @param {*} selectedOrgUnit selected OrgUnit
     * @param {*} optionSets all option sets
     */
-    getProgramRuleEffects(
-        programRulesContainer: ProgramRulesContainer,
-        currentEvent: ?EventData,
-        eventsContainer: ?EventsDataContainer,
-        dataElements: ?DataElements,
-        selectedEntity: ?TEIValues,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
-        selectedEnrollment: ?Enrollment,
-        selectedOrgUnit: OrgUnit,
-        optionSets: OptionSets,
-    ): ?OutputEffects {
-        const variablesHash = this.variableService.getVariables(
+
+    getProgramRuleEffects({
+        programRulesContainer,
+        currentEvent,
+        eventsContainer,
+        dataElements,
+        selectedEntity,
+        trackedEntityAttributes,
+        selectedEnrollment,
+        selectedOrgUnit,
+        optionSets,
+    }: RulesEngineInput): ?OutputEffects {
+        const variablesHash = this.variableService.getVariables({
             programRulesContainer,
             currentEvent,
             eventsContainer,
@@ -247,7 +240,7 @@ export class RulesEngine {
             selectedEnrollment,
             selectedOrgUnit,
             optionSets,
-        );
+        });
 
         const dhisFunctions = d2Functions(this.dateUtils, this.variableService, variablesHash);
         const programRules = programRulesContainer.programRules;

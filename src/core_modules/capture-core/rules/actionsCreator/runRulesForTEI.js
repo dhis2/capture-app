@@ -13,6 +13,7 @@ import { TrackerProgram } from '../../metaData';
 import type { DataElement, RenderFoundation } from '../../metaData';
 import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
 import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
+import { convertOptionSetsToRulesEngineFormat } from '../converters/optionSetsConverter';
 
 const errorMessages = {
     PROGRAM_MISSING_OR_INVALID: 'Program is missing or is invalid',
@@ -95,7 +96,7 @@ function prepare(
         }
 
         const trackedEntityAttributes = getTrackedEntityAttributes(program);
-        const optionSets = optionSetStore.get();
+        const optionSets = convertOptionSetsToRulesEngineFormat(optionSetStore.get());
 
 
         return { optionSets, trackedEntityAttributes, programRulesVariables, programRules, constants };
@@ -123,18 +124,17 @@ export function runRulesForTEI(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.getProgramRuleEffects(
-            { programRulesVariables, programRules, constants },
-            null,
-            null,
-            null,
-            teiValues,
+        return rulesEngine.getProgramRuleEffects({
+            programRulesContainer: { programRulesVariables, programRules, constants },
+            currentEvent: null,
+            eventsContainer: null,
+            dataElements: null,
+            selectedEntity: teiValues,
             trackedEntityAttributes,
-            enrollmentData,
-            orgUnit,
-            // $FlowFixMe[prop-missing] automated comment
+            selectedEnrollment: enrollmentData,
+            selectedOrgUnit: orgUnit,
             optionSets,
-        );
+        });
     }
     return null;
 }

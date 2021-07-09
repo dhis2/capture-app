@@ -12,6 +12,7 @@ import type { Program, RenderFoundation, DataElement } from '../../metaData';
 import { EventProgram } from '../../metaData';
 import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
 import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
+import { convertOptionSetsToRulesEngineFormat } from '../converters/optionSetsConverter';
 
 const errorMessages = {
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
@@ -83,7 +84,7 @@ function prepare(
     }
 
     const constants = constantsStore.get();
-    const optionSets = optionSetStore.get();
+    const optionSets = convertOptionSetsToRulesEngineFormat(optionSetStore.get());
     const dataElementsInProgram = getDataElements(program);
     const allEvents = getEventsData(allEventsData);
 
@@ -117,18 +118,17 @@ export function runRulesForSingleEvent(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.getProgramRuleEffects(
-            { programRulesVariables, programRules, constants },
+        return rulesEngine.getProgramRuleEffects({
+            programRulesContainer: { programRulesVariables, programRules, constants },
             currentEvent,
-            allEvents,
-            dataElementsInProgram,
-            null,
-            null,
-            null,
-            orgUnit,
-            // $FlowFixMe[prop-missing] automated comment
+            eventsContainer: allEvents,
+            dataElements: dataElementsInProgram,
+            selectedEntity: null,
+            trackedEntityAttributes: null,
+            selectedEnrollment: null,
+            selectedOrgUnit: orgUnit,
             optionSets,
-        );
+        });
     }
     return null;
 }

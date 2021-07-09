@@ -11,6 +11,7 @@ import { rulesEngine } from '../rulesEngine';
 import type { Program } from '../../metaData';
 import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
 import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
+import { convertOptionSetsToRulesEngineFormat } from '../converters/optionSetsConverter';
 
 type RuleEnrollmentData = {
     program: Program,
@@ -36,19 +37,18 @@ export function runRulesForEnrollmentPage(data: RuleEnrollmentData) {
     const programRules = [...program.programRules];
 
     const constants = constantsStore.get();
-    const optionSets = optionSetStore.get();
+    const optionSets = convertOptionSetsToRulesEngineFormat(optionSetStore.get());
 
     // returns an array of effects that need to take place in the UI.
-    return rulesEngine.getProgramRuleEffects(
-        { programRulesVariables, programRules, constants },
-        null,
-        eventsData,
-        dataElementsInProgram,
-        teiValues,
+    return rulesEngine.getProgramRuleEffects({
+        programRulesContainer: { programRulesVariables, programRules, constants },
+        currentEvent: null,
+        eventsContainer: eventsData,
+        dataElements: dataElementsInProgram,
+        selectedEntity: teiValues,
         trackedEntityAttributes,
-        enrollmentData,
-        orgUnit,
-        // $FlowFixMe[prop-missing] automated comment
+        selectedEnrollment: enrollmentData,
+        selectedOrgUnit: orgUnit,
         optionSets,
-    );
+    });
 }

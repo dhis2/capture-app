@@ -87,9 +87,9 @@ export type ProgramRuleVariable = {
 };
 
 type Option = {
+    id: string,
     code: string,
     displayName: string,
-    id: string,
 };
 
 export type OptionSet = {
@@ -99,7 +99,7 @@ export type OptionSet = {
 };
 
 export type OptionSets = {
-    [id: string]: OptionSet
+    [id: string]: OptionSet,
 }
 
 type Constant = {
@@ -187,6 +187,18 @@ export type OrgUnit = {
     id: string,
     name: string,
 };
+
+export type RulesEngineInput = {|
+    programRulesContainer: ProgramRulesContainer,
+    currentEvent: ?EventData,
+    eventsContainer: ?EventsDataContainer,
+    dataElements: ?DataElements,
+    selectedEntity: ?TEIValues,
+    trackedEntityAttributes: ?TrackedEntityAttributes,
+    selectedEnrollment: ?Enrollment,
+    selectedOrgUnit: OrgUnit,
+    optionSets: OptionSets,
+|}
 
 export type DateUtils = {
     getToday: () => string,
