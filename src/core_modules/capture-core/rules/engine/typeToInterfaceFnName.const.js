@@ -20,4 +20,5 @@ export const mapTypeToInterfaceFnName = {
     [typeKeys.PERCENTAGE]: 'convertPercentage',
     [typeKeys.URL]: 'convertUrl',
     [typeKeys.AGE]: 'convertAge',
+    [typeKeys.ORGANISATION_UNIT]: 'convertOrgUnit',
 };
