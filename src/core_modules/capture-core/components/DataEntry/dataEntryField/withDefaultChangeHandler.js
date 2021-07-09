@@ -14,7 +14,6 @@ export const withDefaultChangeHandler = () =>
     (InnerComponent: React.ComponentType<any>) =>
         (class DefaultFieldChangeHandler extends React.Component<Props, State> {
             handleChange: (value: any) => void;
-
             constructor(props: Props) {
                 super(props);
                 this.handleChange = this.handleChange.bind(this);
@@ -22,10 +21,11 @@ export const withDefaultChangeHandler = () =>
                 this.state = { value };
             }
 
-            UNSAFE_componentWillReceiveProps(nextProps: Props) {
-                if (nextProps.value !== this.props.value) {
+            componentDidUpdate(prevProps: Props) {
+                if (prevProps.value !== this.props.value) {
+                    // eslint-disable-next-line react/no-did-update-set-state
                     this.setState({
-                        value: nextProps.value,
+                        value: this.props.value,
                     });
                 }
             }

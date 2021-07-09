@@ -100,6 +100,7 @@ class NotesPlain extends React.Component<Props, State> {
     static defaultProps = {
         entityAccess: { read: true, write: true },
     }
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -108,11 +109,12 @@ class NotesPlain extends React.Component<Props, State> {
         };
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.value !== this.props.value
+    componentDidUpdate(prevProps: Props) {
+        if (prevProps.value !== this.props.value
             || this.props.value !== this.state.value) {
+            // eslint-disable-next-line react/no-did-update-set-state
             this.setState({
-                value: nextProps.value,
+                value: this.props.value,
             });
         }
     }

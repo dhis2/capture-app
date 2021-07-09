@@ -22,13 +22,16 @@ export const withInternalChangeHandler = () =>
                 this.state = { value };
             }
 
-            UNSAFE_componentWillReceiveProps(nextProps: Props) {
-                if (nextProps.value !== this.props.value) {
+            componentDidUpdate(prevProps: Props) {
+                if (prevProps.value !== this.props.value) {
+                    // todo (eslint)
+                    // eslint-disable-next-line react/no-did-update-set-state
                     this.setState({
-                        value: nextProps.value,
+                        value: this.props.value,
                     });
                 }
             }
+
 
             handleChange(value: any) {
                 this.setState({

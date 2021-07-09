@@ -45,10 +45,11 @@ class ViewEventSectionPlain extends React.Component<Props, State> {
         };
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.collapsed !== this.props.collapsed) {
+    componentDidUpdate(prevProps: Props) {
+        if (prevProps.collapsed !== this.props.collapsed) {
+            // eslint-disable-next-line react/no-did-update-set-state
             this.setState({
-                collapsed: nextProps.collapsed,
+                collapsed: this.props.collapsed,
             });
         }
     }

@@ -40,19 +40,17 @@ class TextEditorPlain extends React.Component<Props, State> {
     static defaultProps = {
         format: 'html',
     }
+
     constructor(props: Props) {
         super(props);
         this.state = {
             editorValue: RichTextEditor.createEmptyValue(),
         };
-    }
-
-    UNSAFE_componentWillMount() {
         this.updateStateFromProps(this.props);
     }
 
-    UNSAFE_componentWillReceiveProps(newProps) {
-        this.updateStateFromProps(newProps);
+    componentDidUpdate() {
+        this.updateStateFromProps(this.props);
     }
 
     updateStateFromProps = (props) => {

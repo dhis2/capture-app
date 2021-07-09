@@ -17,27 +17,28 @@ type State = {
  * @class DebounceField
  */
 export class DebounceField extends React.Component<Props, State> {
-    debouncer: Function;
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            value: this.props.value || '',
-        };
+     debouncer: Function;
+     constructor(props: Props) {
+         super(props);
+         this.state = {
+             value: this.props.value || '',
+         };
 
-        this.debouncer = debounce(this.handleDebounced, 500);
-    }
+         this.debouncer = debounce(this.handleDebounced, 500);
+     }
 
-    UNSAFE_componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.value !== this.props.value) {
-            this.setState({
-                value: nextProps.value || '',
-            });
-        }
-    }
+     componentDidUpdate(prevProps: Props) {
+         if (prevProps.value !== this.props.value) {
+             // eslint-disable-next-line react/no-did-update-set-state
+             this.setState({
+                 value: this.props.value || '',
+             });
+         }
+     }
 
-    componentWillUnmount() {
-        this.debouncer.cancel();
-    }
+     componentWillUnmount() {
+         this.debouncer.cancel();
+     }
 
     handleDebounced = (event: SyntheticEvent<HTMLInputElement>) => {
         this.props.onDebounced(event);

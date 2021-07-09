@@ -151,9 +151,9 @@ class OptionsSelectVirtualizedPlain extends Component<Props, State> {
         };
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.optionSet !== this.props.optionSet) {
-            this.options = this.buildOptions(nextProps.optionSet);
+    componentDidUpdate(prevProps: Props) {
+        if (prevProps.optionSet !== this.props.optionSet) {
+            this.options = this.buildOptions(this.props.optionSet);
         }
     }
 
