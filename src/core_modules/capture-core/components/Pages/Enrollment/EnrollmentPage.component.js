@@ -52,7 +52,7 @@ const EnrollmentPagePlain = ({
     const { resetProgramId } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
     const { resetEnrollmentId } = useResetEnrollmentId();
-    const { resetTeiId } = useResetTeiId('');
+    const { resetTeiId } = useResetTeiId();
 
     return (
         <>

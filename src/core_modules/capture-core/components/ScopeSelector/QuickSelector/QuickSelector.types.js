@@ -1,6 +1,5 @@
 // @flow
-
-import * as React from 'react';
+import type { Node } from 'react';
 
 export type Props = {
     selectedOrgUnitId: string,
@@ -20,5 +19,5 @@ export type Props = {
     onNewClickWithoutProgramId: () => void,
     onFindClick: () => void,
     onFindClickWithoutProgramId: () => void,
-    children: React.Node,
+    children: Node,
 };

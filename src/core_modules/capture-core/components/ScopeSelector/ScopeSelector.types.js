@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import type { Node } from 'react';
 
 export type OwnProps = $ReadOnly<{|
   isUserInteractionInProgress?: boolean,
@@ -12,7 +12,7 @@ export type OwnProps = $ReadOnly<{|
   onResetProgramId: () => void,
   onSetOrgUnit: (id: string, orgUnit: Object) => void,
   onResetOrgUnitId: () => void,
-  children: React.Node,
+  children: Node,
 |}>
 
 export type PropsFromRedux = $ReadOnly<{|
