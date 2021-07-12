@@ -6,6 +6,7 @@ import { useDataQuery } from '@dhis2/app-runtime';
 import { saveEnrollment } from '../../EnrollmentPage.actions';
 
 export const useEnrollment = (teiId: string) => {
+    const dispatch = useDispatch();
     const { enrollmentId } = useSelector(
         ({
             router: {
@@ -15,9 +16,7 @@ export const useEnrollment = (teiId: string) => {
         shallowEqual,
     );
     const enrollmentStored = useSelector(
-        ({ enrollmentSite }) => ({
-            enrollmentSite,
-        }),
+        ({ enrollmentSite }) => ({ enrollmentSite }),
         shallowEqual,
     ).enrollmentSite;
     const { data, error, loading, refetch, called } = useDataQuery(
@@ -31,25 +30,24 @@ export const useEnrollment = (teiId: string) => {
             }),
             [teiId],
         ),
-        {
-            lazy: true,
-        },
+        { lazy: true },
     );
-    const dispatch = useDispatch();
+
     const fechedEnrollment =
         !loading &&
         data?.trackedEntityInstance?.enrollments.find(
             enrollment => enrollment.enrollment === enrollmentId,
         );
 
-    if (
-        !called &&
-        (!enrollmentStored || enrollmentStored.enrollment !== enrollmentId)
-    ) {
-        refetch();
-    }
-    if (called && fechedEnrollment && !enrollmentStored.enrollment) {
-        dispatch(saveEnrollment(fechedEnrollment));
+    // no enrollment data exists in the Redux store or the enrollment id from the Redux store doesn't match the enrollment id from the url.
+    const shouldFetchAndSave =
+        !enrollmentStored || enrollmentStored.enrollment !== enrollmentId;
+    if (shouldFetchAndSave) {
+        if (!called) {
+            refetch();
+        } else {
+            fechedEnrollment && dispatch(saveEnrollment(fechedEnrollment));
+        }
     }
 
     return {
