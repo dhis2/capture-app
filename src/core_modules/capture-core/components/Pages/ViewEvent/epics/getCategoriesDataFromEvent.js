@@ -10,12 +10,12 @@ function getCategoryOptionsAsync(optionIds: string) {
             fields: 'id,displayName,categories~pluck,access',
             filter: `id:in:[${optionIds}]`,
         })
-        .then(response => response?.categoryOptions);
+        .then(response => response && response.categoryOptions);
 }
 
 
 export async function getCategoriesDataFromEventAsync(event: CaptureClientEvent): Promise<?Array<Object>> {
-    const optionIdsFromEvent = event.attributeCategoryOptions?.replace(/;/g, ',');
+    const optionIdsFromEvent = event.attributeCategoryOptions && event.attributeCategoryOptions.replace(/;/g, ',');
     if (!optionIdsFromEvent) {
         return null;
     }
