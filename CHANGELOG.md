@@ -1,3 +1,10 @@
+# [1.34.0](https://github.com/dhis2/capture-app/compare/v1.33.4...v1.34.0) (2021-07-13)
+
+
+### Features
+
+* [TECH-643] create custom hook for fetching and storing enrollment data to Redux ([#1887](https://github.com/dhis2/capture-app/issues/1887)) ([2743493](https://github.com/dhis2/capture-app/commit/27434937ed9f3bab8bb803c4093c07c02b686238))
+
 ## [1.33.4](https://github.com/dhis2/capture-app/compare/v1.33.3...v1.33.4) (2021-07-13)
 
 
