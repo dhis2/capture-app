@@ -3,18 +3,18 @@ import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
-import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import {
     startAsyncUpdateFieldForEditEvent,
     startRunRulesOnUpdateForEditSingleEvent,
     requestAddNoteForEditSingleEvent,
     batchActionTypes,
-} from '../../../EditEvent/DataEntry/editEventDataEntry.actions';
-import { type RenderFoundation } from '../../../../../metaData';
+} from '../../Pages/EditEvent/DataEntry/editEventDataEntry.actions';
+import { type RenderFoundation } from '../../../metaData';
 
 import {
     setCurrentDataEntry, startRunRulesPostUpdateField,
-} from '../../../../DataEntry/actions/dataEntry.actions';
+} from '../../DataEntry/actions/dataEntry.actions';
 
 import {
     requestSaveEditEventDataEntry,
@@ -23,7 +23,7 @@ import {
 
 import {
     viewEventIds,
-} from '../eventDetails.actions';
+} from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 
 const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};

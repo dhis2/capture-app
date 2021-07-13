@@ -1,14 +1,14 @@
 // @flow
-import { actionCreator } from '../../../../../actions/actions.utils';
-import type { RenderFoundation, Program } from '../../../../../metaData';
-import { viewEventIds } from '../eventDetails.actions';
-import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../../../DataEntries';
-import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
-import { loadEditDataEntryAsync } from '../../../../DataEntry/templates/dataEntryLoadEdit.template';
-import { getRulesActionsForEvent } from '../../../../../rules/actionsCreator';
-import { dataElementTypes } from '../../../../../metaData';
-import { convertClientToForm } from '../../../../../converters';
-import type { ClientEventContainer } from '../../../../../events/eventRequests';
+import { actionCreator } from '../../../actions/actions.utils';
+import type { RenderFoundation, Program } from '../../../metaData';
+import { viewEventIds } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
+import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
+import { loadEditDataEntryAsync } from '../../DataEntry/templates/dataEntryLoadEdit.template';
+import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
+import { dataElementTypes } from '../../../metaData';
+import { convertClientToForm } from '../../../converters';
+import type { ClientEventContainer } from '../../../events/eventRequests';
 
 export const actionTypes = {
     VIEW_EVENT_DATA_ENTRY_LOADED: 'ViewEventDataEntryLoadedForViewSingleEvent',

@@ -4,12 +4,12 @@ import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { moment } from 'capture-core-utils/moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
-import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
-import { getProgramAndStageFromEvent } from '../../../../../metaData';
-import { openEventForEditInDataEntry } from '../../../EditEvent/DataEntry/editEventDataEntry.actions';
-import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
-import { convertDataEntryToClientValues } from '../../../../DataEntry/common/convertDataEntryToClientValues';
-import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
+import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
+import { getProgramAndStageFromEvent } from '../../../metaData';
+import { openEventForEditInDataEntry } from '../../Pages/EditEvent/DataEntry/editEventDataEntry.actions';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
+import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
+import { convertMainEventClientToServer } from '../../../events/mainConverters';
 
 import {
     actionTypes,
@@ -21,11 +21,11 @@ import {
 import {
     actionTypes as eventDetailsActionTypes,
     showEditEventDataEntry,
-} from '../eventDetails.actions';
+} from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 
 import {
     updateEventContainer,
-} from '../../ViewEventComponent/viewEvent.actions';
+} from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 
 
 export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>

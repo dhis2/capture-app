@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { getEventDateValidatorContainers } from '../../../EditEvent/DataEntry/fieldValidators/eventDate.validatorContainersGetter';
-import type { RenderFoundation } from '../../../../../metaData';
-import { withMainButton } from '../../../EditEvent/DataEntry/withMainButton';
-import { withFilterProps } from '../../../../FormFields/New/HOC/withFilterProps';
+import { getEventDateValidatorContainers } from '../../Pages/EditEvent/DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import type { RenderFoundation } from '../../../metaData';
+import { withMainButton } from '../../Pages/EditEvent/DataEntry/withMainButton';
+import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
 
 import {
     DataEntry,
@@ -16,7 +16,7 @@ import {
     placements,
     withCleanUp,
     withBrowserBackWarning,
-} from '../../../../../components/DataEntry';
+} from '../../../components/DataEntry';
 import {
     withInternalChangeHandler,
     withLabel,
@@ -29,10 +29,10 @@ import {
     withDisplayMessages,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
-} from '../../../../FormFields/New';
+} from '../../FormFields/New';
 
-import { inMemoryFileStore } from '../../../../DataEntry/file/inMemoryFileStore';
-import labelTypeClasses from '../../../EditEvent/DataEntry/dataEntryFieldLabels.module.css';
+import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import labelTypeClasses from '../../Pages/EditEvent/DataEntry/dataEntryFieldLabels.module.css';
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
