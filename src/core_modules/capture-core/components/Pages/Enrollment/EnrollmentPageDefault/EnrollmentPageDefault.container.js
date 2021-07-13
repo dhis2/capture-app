@@ -7,7 +7,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
-import { useEnrollmentsAndAttributes, useProgramMetadata } from './hooks';
+import { useEnrollment, useTeiAttributes, useProgramMetadata } from './hooks';
 import { runRulesForEnrollment } from './runRulesForEnrollment';
 import { urlArguments } from '../../../../utils/url';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
@@ -33,20 +33,23 @@ export const EnrollmentPageDefault = () => {
 
 
     const { program } = useProgramInfo(programId);
-    const { error: enrollmentsError, enrollment, attributes } = useEnrollmentsAndAttributes(teiId, enrollmentId);
+    const { error: teiAttributesError, attributes } = useTeiAttributes(teiId);
+    const { error: enrollmentsError, enrollment } = useEnrollment(teiId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
 
-    if (programMetaDataError || enrollmentsError) {
-        log.error(errorCreator('Enrollment page could not be loaded')({ programMetaDataError, enrollmentsError }));
+    if (programMetaDataError || enrollmentsError || teiAttributesError) {
+        log.error(errorCreator('Enrollment page could not be loaded')({ programMetaDataError, enrollmentsError, teiAttributesError }));
     }
 
     const [ruleEffects, setRuleEffects] = useState(undefined);
     const outputEffects = useFilteredWidgetData(ruleEffects);
     useEffect(() => {
-        const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollment, attributes });
-        if (effects) {
-            // $FlowFixMe
-            setRuleEffects(effects);
+        if (enrollment && enrollment.enrollment) {
+            const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollment, attributes });
+            if (effects) {
+                // $FlowFixMe
+                setRuleEffects(effects);
+            }
         }
     }, [orgUnit, program, programMetadata, enrollment, attributes]);
 
