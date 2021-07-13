@@ -1,7 +1,7 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "1.33.3",
+  "version": "1.33.4",
   "cacheVersion": "1",
   "serverVersion": "37",
   "private": false,
@@ -86,7 +86,7 @@
     "@dhis2/cli-utils-cypress": "^8.0.1",
     "@dhis2/cypress-commands": "^8.0.1",
     "@dhis2/cypress-plugins": "^8.0.1",
-    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
     "babel-eslint": "^10.1.0",
     "concurrently": "^6.2.0",
     "docdash": "^1.2.0",
