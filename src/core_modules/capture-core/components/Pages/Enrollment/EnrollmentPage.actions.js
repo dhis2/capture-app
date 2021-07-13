@@ -18,7 +18,7 @@ export const enrollmentPageActionTypes = {
     MISSING_MESSAGE_VIEW: 'EnrollmentPage.MissingMessageView',
 
     DELETE_ENROLLMENT: 'EnrollmentPage.DeleteEnrollment',
-    SAVE_ENROLLMENT: 'EnrollmentPage.SaveEnrollment',
+    SET_ENROLLMENT: 'EnrollmentPage.SetEnrollment',
 };
 
 export const fetchEnrollmentPageInformation = () =>
@@ -57,5 +57,5 @@ export const deleteEnrollment = ({ enrollmentId }: { enrollmentId: string }) =>
         enrollmentId,
     });
 
-export const saveEnrollment = (enrollmentSite: EnrollmentData) =>
-    actionCreator(enrollmentPageActionTypes.SAVE_ENROLLMENT)({ enrollmentSite });
+export const setEnrollment = (enrollmentSite: EnrollmentData) =>
+    actionCreator(enrollmentPageActionTypes.SET_ENROLLMENT)({ enrollmentSite });

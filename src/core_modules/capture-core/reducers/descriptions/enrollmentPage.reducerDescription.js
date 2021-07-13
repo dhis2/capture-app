@@ -14,7 +14,7 @@ const {
     DEFAULT_VIEW,
     MISSING_MESSAGE_VIEW,
     DELETE_ENROLLMENT,
-    SAVE_ENROLLMENT,
+    SET_ENROLLMENT,
 } = enrollmentPageActionTypes;
 
 export const enrollmentPageDesc = createReducerDescription({
@@ -62,7 +62,7 @@ export const enrollmentPageDesc = createReducerDescription({
 }, 'enrollmentPage', initialReducerValue);
 
 export const enrollmentDesc = createReducerDescription({
-    [SAVE_ENROLLMENT]: (state, { payload: { enrollmentSite } }) => ({
+    [SET_ENROLLMENT]: (state, { payload: { enrollmentSite } }) => ({
         ...state,
         ...enrollmentSite,
     }),

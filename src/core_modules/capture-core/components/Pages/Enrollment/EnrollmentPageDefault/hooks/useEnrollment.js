@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useDataQuery } from '@dhis2/app-runtime';
-import { saveEnrollment } from '../../EnrollmentPage.actions';
+import { setEnrollment } from '../../EnrollmentPage.actions';
 
 export const useEnrollment = (teiId: string) => {
     const dispatch = useDispatch();
@@ -42,11 +42,12 @@ export const useEnrollment = (teiId: string) => {
     // no enrollment data exists in the Redux store or the enrollment id from the Redux store doesn't match the enrollment id from the url.
     const shouldFetchAndSave =
         !enrollmentStored || enrollmentStored.enrollment !== enrollmentId;
+
     if (shouldFetchAndSave) {
         if (!called) {
             refetch();
         } else {
-            fechedEnrollment && dispatch(saveEnrollment(fechedEnrollment));
+            fechedEnrollment && dispatch(setEnrollment(fechedEnrollment));
         }
     }
 
