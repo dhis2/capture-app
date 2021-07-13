@@ -26,7 +26,8 @@ const baseColumnHeaders = [
     }];
 
 const baseFields = baseKeys.map((key, index) => ({ ...key, ...basedFieldTypes[index] }));
-const baseColumns = baseKeys.map((key, index) => ({ ...key, ...baseColumnHeaders[index] }));
+// $FlowFixMe
+const baseColumns = baseFields.map((key, index) => ({ ...key, ...baseColumnHeaders[index] }));
 
 const useComputeDataFromEvent =
     (
@@ -58,10 +59,10 @@ const useComputeDataFromEvent =
 const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, events: Array<ApiTEIEvent>) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
-            const { id, name } = currDataElement;
+            const { id, name, type } = currDataElement;
             const eventDataElement = events.find(event => event.dataValues.find(el => el.dataElement === id));
             if (eventDataElement && !acc.find(item => item.id === id)) {
-                acc.push({ id, header: name, sortDirection: SORT_DIRECTION.DEFAULT });
+                acc.push({ id, header: name, type, sortDirection: SORT_DIRECTION.DEFAULT });
             }
             return acc;
         }, []);
