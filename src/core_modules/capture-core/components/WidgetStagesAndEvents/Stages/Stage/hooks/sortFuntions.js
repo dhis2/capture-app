@@ -5,6 +5,22 @@ import { moment } from 'capture-core-utils/moment';
 import { dataElementTypes } from '../../../../../metaData';
 import { SORT_DIRECTION } from './constants';
 
+const sortNumber = (strA: string, strB: string, direction: string) => {
+    const numA = Number(strA);
+    const numB = Number(strB);
+    if (!strA) {
+        return 1;
+    } else if (!strB) {
+        return -1;
+    } else if (direction === SORT_DIRECTION.ASC) {
+        return numA < numB ? -1 : 1;
+    } else if (direction === SORT_DIRECTION.DESC) {
+        return numA < numB ? 1 : -1;
+    }
+
+    return 0;
+};
+
 const sortText = (strA: string, strB: string, direction: string) => {
     if (direction === SORT_DIRECTION.ASC) {
         return strA < strB ? -1 : 1;
@@ -30,11 +46,11 @@ const sortForTypes = {
     [dataElementTypes.TEXT]: sortText,
     [dataElementTypes.PHONE_NUMBER]: sortText,
     [dataElementTypes.LONG_TEXT]: sortText,
-    [dataElementTypes.NUMBER]: sortText,
-    [dataElementTypes.INTEGER]: sortText,
-    [dataElementTypes.INTEGER_POSITIVE]: sortText,
-    [dataElementTypes.INTEGER_NEGATIVE]: sortText,
-    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: sortText,
+    [dataElementTypes.NUMBER]: sortNumber,
+    [dataElementTypes.INTEGER]: sortNumber,
+    [dataElementTypes.INTEGER_POSITIVE]: sortNumber,
+    [dataElementTypes.INTEGER_NEGATIVE]: sortNumber,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: sortNumber,
     [dataElementTypes.BOOLEAN]: sortText,
     [dataElementTypes.TRUE_ONLY]: sortText,
     [dataElementTypes.DATE]: sortTime,
