@@ -37,7 +37,7 @@ import {
     openEditEventInDataEntryEpic,
     runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
     runRulesOnUpdateFieldForEditSingleEventEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventDataEntry.epics';
+} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/editEventDataEntry.epics';
 import {
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
@@ -60,15 +60,15 @@ import {
 import {
     saveEditEventEpic,
     saveEditEventLocationChangeEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/saveEditSingleEvent.epics';
+} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/saveEditSingleEvent.epics';
 import {
     cancelEditEventEpic,
     cancelEditEventLocationChangeEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/cancelEditSingleEvent.epics';
+} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/cancelEditSingleEvent.epics';
 import {
     addNoteForEditSingleEventEpic,
     removeNoteForEditSingleEventEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/addNoteForEditSingleEvent.epics';
+} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/addNoteForEditSingleEvent.epics';
 import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';

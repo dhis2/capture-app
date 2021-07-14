@@ -9,7 +9,7 @@ import {
     startRunRulesOnUpdateForEditSingleEvent,
     requestAddNoteForEditSingleEvent,
     batchActionTypes,
-} from '../../Pages/EditEvent/DataEntry/editEventDataEntry.actions';
+} from '../DataEntry/editEventDataEntry.actions';
 import { type RenderFoundation } from '../../../metaData';
 
 import {

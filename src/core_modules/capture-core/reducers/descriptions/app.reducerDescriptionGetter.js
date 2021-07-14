@@ -9,7 +9,7 @@ import { actionTypes as editEventActionTypes } from '../../components/Pages/View
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
-} from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
+} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
 import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as setCurrentSelectionsActionTypes,

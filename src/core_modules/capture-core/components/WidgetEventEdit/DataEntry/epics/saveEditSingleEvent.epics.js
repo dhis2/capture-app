@@ -9,10 +9,10 @@ import {
     startSaveEditEventAfterReturnedToMainPage,
 } from '../editEventDataEntry.actions';
 
-import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
-import { convertDataEntryToClientValues } from '../../../../DataEntry/common/convertDataEntryToClientValues';
-import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
-import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
+import { convertDataEntryToClientValues } from '../../../DataEntry/common/convertDataEntryToClientValues';
+import { convertValue as convertToServerValue } from '../../../../converters/clientToServer';
+import { convertMainEventClientToServer } from '../../../../events/mainConverters';
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

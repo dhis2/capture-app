@@ -4,8 +4,8 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import { moment } from 'capture-core-utils/moment/momentResolver';
-import { convertValue as convertListValue } from '../../../../../converters/clientToList';
-import { dataElementTypes } from '../../../../../metaData';
+import { convertValue as convertListValue } from '../../../../converters/clientToList';
+import { dataElementTypes } from '../../../../metaData';
 import {
     actionTypes as editEventDataEntryActionTypes,
     batchActionTypes as editEventDataEntryBatchActionTypes,
@@ -15,13 +15,13 @@ import {
 import {
     addEventNote,
     removeEventNote,
-} from '../../../ViewEvent/ViewEventComponent/editEvent.actions';
+} from '../../../Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 
 import {
     addNote,
     removeNote,
-} from '../../../../DataEntry/actions/dataEntry.actions';
-import { getCurrentUser } from '../../../../../d2/d2Instance';
+} from '../../../DataEntry/actions/dataEntry.actions';
+import { getCurrentUser } from '../../../../d2/d2Instance';
 
 export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
