@@ -5,7 +5,7 @@ import { batchActions } from 'redux-batched-actions';
 import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as editEventActionTypes,
-} from '../../editEvent.actions';
+} from '../../../ViewEvent/ViewEventComponent/editEvent.actions';
 import {
     openEventForEditInDataEntry,
     prerequisitesErrorOpeningEventForEditInDataEntry,

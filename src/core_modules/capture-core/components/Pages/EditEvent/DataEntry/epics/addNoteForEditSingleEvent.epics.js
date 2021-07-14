@@ -15,7 +15,7 @@ import {
 import {
     addEventNote,
     removeEventNote,
-} from '../../editEvent.actions';
+} from '../../../ViewEvent/ViewEventComponent/editEvent.actions';
 
 import {
     addNote,

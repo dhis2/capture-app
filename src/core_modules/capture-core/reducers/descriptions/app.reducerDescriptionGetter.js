@@ -5,7 +5,7 @@ import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
 } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
-import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
+import { actionTypes as editEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,

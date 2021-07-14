@@ -32,7 +32,7 @@ import {
 import {
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
-} from 'capture-core/components/Pages/EditEvent/editEvent.epics';
+} from 'capture-core/components/Pages/ViewEvent/epics/editEvent.epics';
 import {
     openEditEventInDataEntryEpic,
     runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
