@@ -1,3 +1,17 @@
+## [1.34.1](https://github.com/dhis2/capture-app/compare/v1.34.0...v1.34.1) (2021-07-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([0d17205](https://github.com/dhis2/capture-app/commit/0d17205b0632b81c29fa7e4f32e19a87383348a8))
+
+# [1.34.0](https://github.com/dhis2/capture-app/compare/v1.33.4...v1.34.0) (2021-07-13)
+
+
+### Features
+
+* [TECH-643] create custom hook for fetching and storing enrollment data to Redux ([#1887](https://github.com/dhis2/capture-app/issues/1887)) ([2743493](https://github.com/dhis2/capture-app/commit/27434937ed9f3bab8bb803c4093c07c02b686238))
+
 ## [1.33.4](https://github.com/dhis2/capture-app/compare/v1.33.3...v1.33.4) (2021-07-13)
 
 
