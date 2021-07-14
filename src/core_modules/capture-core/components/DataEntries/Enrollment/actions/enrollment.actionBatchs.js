@@ -4,7 +4,7 @@ import { batchActions } from 'redux-batched-actions';
 import type {
     Enrollment,
     TEIValues,
-} from '../../../../rules/engine';
+} from 'capture-core-utils/rulesEngine';
 import { getRulesActionsForTEI } from '../../../../rules/actionsCreator';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import type { TrackerProgram, RenderFoundation } from '../../../../metaData';

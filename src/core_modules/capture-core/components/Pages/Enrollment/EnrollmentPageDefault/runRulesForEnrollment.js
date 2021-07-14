@@ -1,6 +1,6 @@
 // @flow
 import { convertValue } from 'capture-core/converters/serverToClient';
-import runRulesForEnrollmentPage from 'capture-core/rules/actionsCreator/runRulesForEnrollmentPage';
+import { runRulesForEnrollmentPage } from 'capture-core/rules/actionsCreator/runRulesForEnrollmentPage';
 import { dataElementTypes, TrackerProgram } from '../../../../metaData';
 import type { InputRuleEnrollmentData } from './types/common.types';
 

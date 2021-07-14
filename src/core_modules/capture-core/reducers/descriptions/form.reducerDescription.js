@@ -1,6 +1,6 @@
 // @flow
-import { effectActions } from '../../rules/engine';
-import type { OutputEffect } from '../../rules/engine';
+import { effectActions } from 'capture-core-utils/rulesEngine';
+import type { OutputEffect } from 'capture-core-utils/rulesEngine';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';

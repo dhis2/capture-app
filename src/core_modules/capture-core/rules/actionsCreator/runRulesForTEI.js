@@ -1,18 +1,19 @@
 // @flow
 import log from 'loglevel';
-import { errorCreator } from '../../../capture-core-utils';
-import { RulesEngine } from '../engine';
-import { TrackerProgram } from '../../metaData';
-import type { DataElement, RenderFoundation } from '../../metaData';
-import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
-import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
-
 import type {
     ProgramRulesContainer,
     TrackedEntityAttribute as TrackedEntityAttributeForRulesEngine,
     Enrollment,
     TEIValues,
-} from '../engine';
+} from 'capture-core-utils/rulesEngine';
+
+import { errorCreator } from '../../../capture-core-utils';
+import { rulesEngine } from '../rulesEngine';
+import { TrackerProgram } from '../../metaData';
+import type { DataElement, RenderFoundation } from '../../metaData';
+import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
+import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
+import { convertOptionSetsToRulesEngineFormat } from '../converters/optionSetsConverter';
 
 const errorMessages = {
     PROGRAM_MISSING_OR_INVALID: 'Program is missing or is invalid',
@@ -95,7 +96,7 @@ function prepare(
         }
 
         const trackedEntityAttributes = getTrackedEntityAttributes(program);
-        const optionSets = optionSetStore.get();
+        const optionSets = convertOptionSetsToRulesEngineFormat(optionSetStore.get());
 
 
         return { optionSets, trackedEntityAttributes, programRulesVariables, programRules, constants };
@@ -123,15 +124,17 @@ export function runRulesForTEI(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return RulesEngine.programRuleEffectsForTEI(
-            { programRulesVariables, programRules, constants },
-            enrollmentData,
-            teiValues,
+        return rulesEngine.getProgramRuleEffects({
+            programRulesContainer: { programRulesVariables, programRules, constants },
+            currentEvent: null,
+            eventsContainer: null,
+            dataElements: null,
+            selectedEntity: teiValues,
             trackedEntityAttributes,
-            orgUnit,
-            // $FlowFixMe[prop-missing] automated comment
+            selectedEnrollment: enrollmentData,
+            selectedOrgUnit: orgUnit,
             optionSets,
-        );
+        });
     }
     return null;
 }

@@ -1,4 +1,4 @@
-import { RulesEngine } from '../index';
+import { rulesEngine } from '../rulesEngine';
 
 describe('Event Event rules engine', () => {
     // these variables are shared between each test
@@ -34,12 +34,15 @@ describe('Event Event rules engine', () => {
                 allEvents: { all: [events], byStage: {} },
             };
 
-
             // when
-            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+            const rulesEffects = rulesEngine.getProgramRuleEffects(
                 { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
+                currentEvent,
+                allEvents,
                 dataElementsInProgram,
+                null,
+                null,
+                null,
                 orgUnit,
                 optionSet,
             );
@@ -68,10 +71,14 @@ describe('Event Event rules engine', () => {
 
 
             // when
-            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+            const rulesEffects = rulesEngine.getProgramRuleEffects(
                 { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
+                currentEvent,
+                allEvents,
                 dataElementsInProgram,
+                null,
+                null,
+                null,
                 orgUnit,
                 optionSet,
             );
@@ -114,10 +121,14 @@ describe('Event rules engine', () => {
 
 
             // when
-            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+            const rulesEffects = rulesEngine.getProgramRuleEffects(
                 { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
+                currentEvent,
+                allEvents,
                 dataElementsInProgram,
+                null,
+                null,
+                null,
                 orgUnit,
                 optionSet,
             );
@@ -170,10 +181,14 @@ describe('Event rules engine', () => {
 
 
             // when
-            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+            const rulesEffects = rulesEngine.getProgramRuleEffects(
                 { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
+                currentEvent,
+                allEvents,
                 dataElementsInProgram,
+                null,
+                null,
+                null,
                 orgUnit,
                 optionSet,
             );
@@ -390,10 +405,14 @@ describe('Event rules engine', () => {
 
 
             // when
-            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+            const rulesEffects = rulesEngine.getProgramRuleEffects(
                 { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
+                currentEvent,
+                allEvents,
                 dataElementsInProgram,
+                null,
+                null,
+                null,
                 orgUnit,
                 optionSet,
             );
@@ -524,10 +543,14 @@ describe('Event rules engine effects with functions and effects', () => {
 
 
             // when
-            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+            const rulesEffects = rulesEngine.getProgramRuleEffects(
                 { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
+                currentEvent,
+                allEvents,
                 dataElementsInProgram,
+                null,
+                null,
+                null,
                 orgUnit,
                 optionSet,
             );
@@ -552,10 +575,14 @@ describe('Event rules engine effects with functions and effects', () => {
     describe('where z-score take place', () => {
         test('with given values', () => {
             // when
-            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+            const rulesEffects = rulesEngine.getProgramRuleEffects(
                 { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
+                currentEvent,
+                allEvents,
                 dataElementsInProgram,
+                null,
+                null,
+                null,
                 orgUnit,
                 optionSet,
             );
@@ -633,10 +660,14 @@ describe('Event rules engine', () => {
     ])('where assign actions are triggered', (programRules, expected) => {
         test(`with given value(s): ${JSON.stringify(programRules)}`, () => {
             // when
-            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+            const rulesEffects = rulesEngine.getProgramRuleEffects(
                 { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
+                currentEvent,
+                allEvents,
                 dataElementsInProgram,
+                null,
+                null,
+                null,
                 orgUnit,
                 optionSet,
             );

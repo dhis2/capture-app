@@ -17,7 +17,7 @@ export type HideOutputEffect = OutputEffect & {
 };
 
 export type MessageEffect = OutputEffect & {
-     message: string,
+    message: string,
 };
 
 export type GeneralErrorEffect = OutputEffect & {
@@ -57,6 +57,7 @@ export type ProgramRuleAction = {
     programStageId?: ?string,
     programStageSectionId?: ?string,
     trackedEntityAttributeId?: ?string,
+    programRuleVariableId?: ?string,
     optionGroupId: ?string,
     optionId: ?string,
     style?: ?Object,
@@ -64,8 +65,8 @@ export type ProgramRuleAction = {
 
 export type ProgramRule = {
     id: string,
-    name: string;
-    priority: number;
+    name: string,
+    priority: number,
     condition: string,
     description?: ?string,
     displayName: string,
@@ -86,9 +87,9 @@ export type ProgramRuleVariable = {
 };
 
 type Option = {
+    id: string,
     code: string,
     displayName: string,
-    id: string,
 };
 
 export type OptionSet = {
@@ -98,7 +99,7 @@ export type OptionSet = {
 };
 
 export type OptionSets = {
-    [id: string]: OptionSet
+    [id: string]: OptionSet,
 }
 
 type Constant = {
@@ -187,6 +188,18 @@ export type OrgUnit = {
     name: string,
 };
 
+export type RulesEngineInput = {|
+    programRulesContainer: ProgramRulesContainer,
+    currentEvent: ?EventData,
+    eventsContainer: ?EventsDataContainer,
+    dataElements: ?DataElements,
+    selectedEntity: ?TEIValues,
+    trackedEntityAttributes: ?TrackedEntityAttributes,
+    selectedEnrollment: ?Enrollment,
+    selectedOrgUnit: OrgUnit,
+    optionSets: OptionSets,
+|}
+
 export type DateUtils = {
     getToday: () => string,
     daysBetween: (firstRulesDate: string, secondRulesDate: string) => string,
@@ -210,19 +223,26 @@ export interface IConvertInputRulesValue {
     convertLetter(value: any): string;
     convertPhoneNumber(value: any): string;
     convertEmail(value: any): string;
-    convertBoolean(value: any): boolean | string;
-    convertTrueOnly(value: any): boolean | string;
+    convertBoolean(value: any): boolean | string;   // Yes/No
+    convertTrueOnly(value: any): boolean | string;  // Yes Only
     convertDate(value: any): string;
     convertDateTime(value: any): string;
     convertTime(value: any): string;
     convertNumber(value: any): number | string;
+    convertUnitInterval(value: any): number | string;
+    convertPercentage(value: any): number | string;
     convertInteger(value: any): number | string;
     convertIntegerPositive(value: any): number | string;
     convertIntegerNegative(value: any): number | string;
     convertIntegerZeroOrPositive(value: any): number | string;
-    convertPercentage(value: any): number | string;
-    convertUrl(value: any): string;
+    convertTrackerAssociate(value: any): string;
+    convertUserName(value: any): string;
+    convertCoordinate(value: any): string;
+    convertOrganisationUnit(value: any): string;
     convertAge(value: any): number | string;
+    convertUrl(value: any): string;
+    convertFile(value: any): string;
+    convertImage(value: any): string;
 }
 
 export interface IConvertOutputRulesEffectsValue {
@@ -231,19 +251,26 @@ export interface IConvertOutputRulesEffectsValue {
     convertLetter(value: string): any;
     convertPhoneNumber(value: string): any;
     convertEmail(value: string): any;
-    convertBoolean(value: boolean): any;
-    convertTrueOnly(value: boolean): any;
+    convertBoolean(value: boolean): any;   // Yes/No
+    convertTrueOnly(value: boolean): any;  // Yes Only
     convertDate(value: string): any;
     convertDateTime(value: string): any;
     convertTime(value: string): any;
     convertNumber(value: number): any;
+    convertUnitInterval(value: number): any;
+    convertPercentage(value: number): any;
     convertInteger(value: number): any;
     convertIntegerPositive(value: number): any;
     convertIntegerNegative(value: number): any;
     convertIntegerZeroOrPositive(value: number): any;
-    convertPercentage(value: number): any;
+    convertTrackerAssociate(value: string): any;
+    convertUserName(value: string): any;
+    convertCoordinate(value: string): any;
+    convertOrganisationUnit(value: string): any;
     convertUrl(value: string): any;
     convertAge(value: string): any;
+    convertFile(value: string): any;
+    convertImage(value: string): any;
 }
 
 export type D2FunctionParameters = {
@@ -252,34 +279,39 @@ export type D2FunctionParameters = {
     dhisFunction: any
 }
 export type D2Functions = {
+    'd2:ceil': D2FunctionParameters,
+    'd2:floor': D2FunctionParameters,
+    'd2:round': D2FunctionParameters,
+    'd2:modulus': D2FunctionParameters,
+    'd2:zing': D2FunctionParameters,
+    'd2:oizp': D2FunctionParameters,
     'd2:concatenate': D2FunctionParameters,
     'd2:daysBetween': D2FunctionParameters,
     'd2:weeksBetween': D2FunctionParameters,
     'd2:monthsBetween': D2FunctionParameters,
     'd2:yearsBetween': D2FunctionParameters,
-    'd2:floor': D2FunctionParameters,
-    'd2:modulus': D2FunctionParameters,
     'd2:addDays': D2FunctionParameters,
-    'd2:zing': D2FunctionParameters,
-    'd2:oizp': D2FunctionParameters,
     'd2:count': D2FunctionParameters,
-    'd2:countIfZeroPos': D2FunctionParameters,
     'd2:countIfValue': D2FunctionParameters,
-    'd2:ceil': D2FunctionParameters,
-    'd2:round': D2FunctionParameters,
+    'd2:countIfZeroPos': D2FunctionParameters,
     'd2:hasValue': D2FunctionParameters,
-    'd2:lastEventDate': D2FunctionParameters,
+    // d2:zpvc(<object>, <object>, ...)
     'd2:validatePattern': D2FunctionParameters,
-    'd2:addControlDigits': D2FunctionParameters,
-    'd2:checkControlDigits': D2FunctionParameters,
-    'd2:round': D2FunctionParameters,
-    'd2:lastEventDate': D2FunctionParameters,
     'd2:left': D2FunctionParameters,
     'd2:right': D2FunctionParameters,
     'd2:substring': D2FunctionParameters,
     'd2:split': D2FunctionParameters,
-    'd2:zScoreWFA': D2FunctionParameters,
     'd2:length': D2FunctionParameters,
+    // d2:inOrgUnitGroup(<orgunit_group_code>)
+    // d2:hasUserRole(<user_role>)
+    'd2:zScoreWFA': D2FunctionParameters,
+    // d2:zScoreHFA(<ageInMonth>, <height>, <gender>)
+    // d2:zScoreWFH(<height>, <weight>, <gender>)
+
+    // Functions that are not available in program rule expressions
+    'd2:lastEventDate': D2FunctionParameters,
+    'd2:addControlDigits': D2FunctionParameters,
+    'd2:checkControlDigits': D2FunctionParameters,
 }
 
 export type Flag = {

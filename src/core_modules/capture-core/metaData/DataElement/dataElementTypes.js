@@ -34,4 +34,3 @@ export const dataElementTypes = {
     ASSIGNEE: 'ASSIGNEE',
     UNKNOWN: 'UNKNOWN',
 };
-
