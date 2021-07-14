@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import ArrowDownwardIcon from '@material-ui/icons/KeyboardArrowDown';
-import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
+import { IconChevronDown16, IconChevronUp16 } from '@dhis2/ui';
 
 import { Manager, Popper, Reference } from 'react-popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -21,7 +20,7 @@ const getStyles = (theme: Theme) => ({
         paddingLeft: theme.typography.pxToRem(5),
     },
     restMenuButton: {
-        backgroundColor: theme.palette.grey[100],
+        backgroundColor: '#f5f5f5',
     },
     restMenuButtonLabel: {
         textTransform: 'none',
@@ -152,10 +151,15 @@ class FilterRestMenuPlain extends React.Component<Props, State> {
                                         onClick={this.handleMenuButtonClick}
                                     >
                                         {i18n.t('More filters')}
-                                        {this.state.filterSelectorOpen ?
-                                            <ArrowUpwardIcon className={classes.icon} /> :
-                                            <ArrowDownwardIcon className={classes.icon} />
-                                        }
+                                        {this.state.filterSelectorOpen ? (
+                                            <span className={classes.icon}>
+                                                <IconChevronUp16 />
+                                            </span>
+                                        ) : (
+                                            <span className={classes.icon}>
+                                                <IconChevronDown16 />
+                                            </span>
+                                        )}
                                     </Button>
                                 </div>
                             );

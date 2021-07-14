@@ -4,8 +4,7 @@ import React from 'react';
 import moment from 'moment';
 import type { ComponentType } from 'react';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
-import DoneIcon from '@material-ui/icons/Done';
-import { colors, Tag } from '@dhis2/ui';
+import { colors, Tag, IconCheckmark16 } from '@dhis2/ui';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
@@ -65,6 +64,10 @@ const getStyles = (theme: Theme) => ({
     },
     buttonMargin: {
         marginTop: theme.typography.pxToRem(8),
+    },
+    checkIcon: {
+        position: 'relative',
+        top: '-2px',
     },
 });
 
@@ -178,14 +181,9 @@ const CardListItemIndex = ({
                                             dataTest="dhis2-uicore-tag"
                                             positive
                                             icon={
-                                                <DoneIcon
-                                                    style={{
-                                                        transformBox: 'view-box',
-                                                        fontSize: 14,
-                                                        position: 'relative',
-                                                        top: '-1px',
-                                                    }}
-                                                />
+                                                <span className={classes.checkIcon}>
+                                                    <IconCheckmark16 />
+                                                </span>
                                             }
                                         >
                                             {i18n.t('Enrolled')}
@@ -199,14 +197,9 @@ const CardListItemIndex = ({
                                               dataTest="dhis2-uicore-tag"
                                               neutral
                                               icon={
-                                                  <DoneIcon
-                                                      style={{
-                                                          transformBox: 'view-box',
-                                                          fontSize: 14,
-                                                          position: 'relative',
-                                                          top: '-1px',
-                                                      }}
-                                                  />
+                                                  <span className={classes.checkIcon}>
+                                                      <IconCheckmark16 />
+                                                  </span>
                                               }
                                           >
                                               {i18n.t('Previously enrolled')}

@@ -1,16 +1,16 @@
 # 
 # Translators:
-# phil_dhis2, 2021
 # Wanda <wanda@frontlineaids.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Nadiia <semchuk@aph.org.ua>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-24T07:52:28.588Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Nadiia <semchuk@aph.org.ua>, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -596,6 +596,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
@@ -632,6 +635,9 @@ msgid "Create a new event in this program."
 msgstr ""
 
 msgid "View working list in this program."
+msgstr ""
+
+msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
@@ -963,6 +969,12 @@ msgstr ""
 
 msgid "Last updated {{date}}"
 msgstr ""
+
+msgid "Error"
+msgstr "Помилка"
+
+msgid "Warning"
+msgstr "Попередження"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

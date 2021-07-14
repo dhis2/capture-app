@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-24T07:52:28.588Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -616,6 +616,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "\"{{enrollmentId}}\" идентификатори билан қайд қилиш имконсиз"
 
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
@@ -660,6 +663,9 @@ msgstr "Ушбу дастурда янги ҳодиса/тадбирни яра�
 
 msgid "View working list in this program."
 msgstr "Ушбу дастурдаги ишчи рўйхатни кўриб чиқиш"
+
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
@@ -1009,6 +1015,12 @@ msgstr " {{orgUnitName}} эгалиги асосида"
 
 msgid "Last updated {{date}}"
 msgstr " {{date}}да охирги марта янгиланган"
+
+msgid "Error"
+msgstr "Хатолик"
+
+msgid "Warning"
+msgstr "Огоҳлантириш"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

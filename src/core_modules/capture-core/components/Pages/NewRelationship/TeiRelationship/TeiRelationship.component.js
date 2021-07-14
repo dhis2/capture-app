@@ -2,11 +2,9 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import SearchIcon from '@material-ui/icons/Search';
-import AddIcon from '@material-ui/icons/AddCircleOutline';
+import { Button, IconSearch24, IconAdd24, spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { SelectedRelationshipType } from '../newRelationship.types';
-import { Button } from '../../../Buttons/Button.component';
 import { RegisterTei } from '../RegisterTei';
 import { TeiSearch } from '../../../TeiSearch/TeiSearch.container';
 import { TeiRelationshipSearchResults } from './SearchResults/TeiRelationshipSearchResults.component';
@@ -37,8 +35,6 @@ const getStyles = theme => ({
         display: 'flex',
     },
     button: {
-        height: theme.typography.pxToRem(150),
-        width: theme.typography.pxToRem(250),
         margin: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
         display: 'flex',
@@ -48,8 +44,7 @@ const getStyles = theme => ({
         backgroundColor: theme.palette.grey.lighter,
     },
     buttonIcon: {
-        flexGrow: 1,
-        fontSize: theme.typography.pxToRem(80),
+        marginRight: spacersNum.dp8,
     },
 });
 
@@ -93,12 +88,13 @@ class TeiRelationshipPlain extends React.Component<Props> {
                 className={classes.modeSelectionsContainer}
             >
                 <div className={classes.button}>
-                    <SearchIcon fontSize="large" className={classes.buttonIcon} />
                     <Button
+                        large
                         dataTest="find-relationship-button"
                         color="primary"
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_SEARCH)}
                     >
+                        <span className={classes.buttonIcon}> <IconSearch24 /> </span>
                         {i18n.t(
                             'Link to an existing {{trackedEntityType}}',
                             { trackedEntityType: trackedEntityTypeName },
@@ -106,12 +102,13 @@ class TeiRelationshipPlain extends React.Component<Props> {
                     </Button>
                 </div>
                 <div className={classes.button}>
-                    <AddIcon className={classes.buttonIcon} />
                     <Button
+                        large
                         dataTest="create-relationship-button"
                         color="primary"
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_REGISTER)}
                     >
+                        <span className={classes.buttonIcon}> <IconAdd24 /> </span>
                         {i18n.t('Create new {{trackedEntityType}}', { trackedEntityType: trackedEntityTypeName })}
                     </Button>
                 </div>

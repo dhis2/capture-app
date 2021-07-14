@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
-import ArrowDownwardIcon from '@material-ui/icons/KeyboardArrowDown';
-import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
+import { IconChevronDown16, IconChevronUp16 } from '@dhis2/ui';
 import { Button } from '../../../Buttons';
 import { ActiveFilterButton } from './ActiveFilterButton.component';
 import { FilterSelectorContents } from '../Contents';
@@ -16,7 +15,7 @@ const getStyles = (theme: Theme) => ({
         paddingLeft: theme.typography.pxToRem(5),
     },
     inactiveFilterButton: {
-        backgroundColor: theme.palette.grey[100],
+        backgroundColor: '#f5f5f5',
     },
     inactiveFilterButtonLabel: {
         textTransform: 'none',
@@ -125,9 +124,15 @@ class FilterButtonMainPlain extends Component<Props, State> {
     renderWithAppliedFilter() {
         const { selectorVisible, classes, title, buttonText } = this.props;
 
-        const arrowIconElement = selectorVisible ?
-            <ArrowUpwardIcon className={classes.icon} /> :
-            <ArrowDownwardIcon className={classes.icon} />;
+        const arrowIconElement = selectorVisible ? (
+            <span className={classes.icon}>
+                <IconChevronUp16 />
+            </span>
+        ) : (
+            <span className={classes.icon}>
+                <IconChevronDown16 />
+            </span>
+        );
 
         return (
             <ActiveFilterButton
@@ -150,10 +155,15 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 onClick={this.openFilterSelector}
             >
                 {title}
-                {selectorVisible ?
-                    <ArrowUpwardIcon className={classes.icon} /> :
-                    <ArrowDownwardIcon className={classes.icon} />
-                }
+                {selectorVisible ? (
+                    <span className={classes.icon}>
+                        <IconChevronUp16 />
+                    </span>
+                ) : (
+                    <span className={classes.icon}>
+                        <IconChevronDown16 />
+                    </span>
+                )}
             </Button>
         );
     }

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Link as LinkIcon } from '@material-ui/icons';
+import { IconLink24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
@@ -54,7 +54,7 @@ class RelationshipsSectionPlain extends React.Component<Props> {
         count = ready ? count : null;
         return (
             <ViewEventSectionHeader
-                icon={LinkIcon}
+                icon={IconLink24}
                 text={headerText}
                 badgeClass={classes.badge}
                 badgeCount={count}

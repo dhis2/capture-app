@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-24T07:52:28.588Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -608,6 +608,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Zápis s ID \"{{enrollmentId}}\" neexistuje"
 
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
@@ -651,6 +654,9 @@ msgstr "Vytvořte novou událost v tomto programu."
 
 msgid "View working list in this program."
 msgstr "Zobrazit pracovní seznam v tomto programu."
+
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Zobrazit událost Enrollment{{escape}}"
@@ -995,6 +1001,12 @@ msgstr "Vlastník: {{ownerOrgUnit}}"
 
 msgid "Last updated {{date}}"
 msgstr "Poslední aktualizace {{date}}"
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Warning"
+msgstr "Varování"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"
