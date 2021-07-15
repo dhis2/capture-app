@@ -15,7 +15,7 @@ function getCategoryOptionsAsync(optionIds: string) {
 
 
 export async function getCategoriesDataFromEventAsync(event: CaptureClientEvent): Promise<?Array<Object>> {
-    const optionIdsFromEvent = event.attributeCategoryOptions;
+    const optionIdsFromEvent = event.attributeCategoryOptions && event.attributeCategoryOptions.replace(/;/g, ',');
     if (!optionIdsFromEvent) {
         return null;
     }
