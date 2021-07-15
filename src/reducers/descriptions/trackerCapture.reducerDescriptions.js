@@ -73,7 +73,8 @@ import { currentSelectionsReducerDesc } from './currentSelections.reducerDescrip
 import { feedbackDesc } from './feedback.reducerDescription';
 import { activePageDesc } from '../../core_modules/capture-core/reducers/descriptions/activePage.reducerDescription';
 import { searchPageDesc } from '../../core_modules/capture-core/reducers/descriptions/searchPage.reducerDescription';
-import { enrollmentPageDesc, enrollmentDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentPage.reducerDescription';
+import { enrollmentPageDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentPage.reducerDescription';
+import { enrollmentDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollment.reducerDescription';
 import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
 import { possibleDuplicatesDesc } from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
 
