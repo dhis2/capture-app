@@ -3,7 +3,7 @@ import React, { type ComponentType, useCallback, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
-import ClearIcon from '@material-ui/icons/Clear';
+import { IconCross24 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import Select from 'react-virtualized-select';
 import { compose } from 'redux';
@@ -38,10 +38,6 @@ const styles = (theme: Theme) => ({
         width: 20,
         height: 20,
         padding: 0,
-    },
-    selectedButtonIcon: {
-        width: 20,
-        height: 20,
     },
     selectedItemContainer: {
         display: 'flex',
@@ -106,7 +102,7 @@ const SingleLockedSelectPlain =
 
                           <div className={classes.selectedItemClear}>
                               <IconButton data-test="reset-selection-button" className={classes.selectedButton} onClick={handleOnClear}>
-                                  <ClearIcon className={classes.selectedButtonIcon} />
+                                  <IconCross24 />
                               </IconButton>
                           </div>
                       </div>

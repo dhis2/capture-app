@@ -1,5 +1,5 @@
 // @flow
-import CheckIcon from '@material-ui/icons/Check';
+import { IconCheckmark24, colors } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
@@ -20,7 +20,6 @@ type Props = {
         verticalContainer: string,
         innerContainer: string,
         selectedImageTextContainer: string,
-        checkIcon: string,
         deleteButton: string,
         input: string,
         image: string,
@@ -62,9 +61,6 @@ const styles = theme => ({
         flexDirection: 'column',
         alignItems: 'flex-start',
         wordBreak: 'break-word',
-    },
-    checkIcon: {
-        color: theme.palette.success.green600,
     },
     deleteButton: {
         color: theme.palette.error.main,
@@ -162,7 +158,7 @@ class D2ImagePlain extends Component<Props> {
                                         </div>
                                     }
                                     <div className={selectedImageTextContainerClass}>
-                                        <CheckIcon className={classes.checkIcon} />
+                                        <IconCheckmark24 color={colors.green600} />
                                         {!isVertical ?
                                             value.name :
                                             <a

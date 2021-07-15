@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import IconButton from '@material-ui/core/IconButton';
-import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
+import { IconChevronDown24, IconChevronUp24 } from '@dhis2/ui';
 
 const styles = theme => ({
     container: {
@@ -90,7 +90,7 @@ class SectionHeaderSimplePlain extends Component<Props> {
                                         title={this.props.isCollapsed ? 'Åpne' : 'Lukk'}
                                         onClick={this.handleChangeCollapse}
                                     >
-                                        {this.props.isCollapsed ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
+                                        {this.props.isCollapsed ? <IconChevronDown24 /> : <IconChevronUp24 />}
                                     </IconButton>
                                 );
                             }

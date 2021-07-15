@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { IconButton, Tooltip } from '@material-ui/core';
-import { Settings as SettingsIcon } from '@material-ui/icons';
+import { IconSettings24 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { ColumnSelectorDialog } from './ColumnSelectorDialog.component';
 import type { Columns } from '../types';
@@ -53,7 +53,7 @@ export class ColumnSelector extends React.PureComponent<Props, State> {
                     <IconButton
                         onClick={this.openDialog}
                     >
-                        <SettingsIcon />
+                        <IconSettings24 />
                     </IconButton>
                 </Tooltip>
                 <ColumnSelectorDialog

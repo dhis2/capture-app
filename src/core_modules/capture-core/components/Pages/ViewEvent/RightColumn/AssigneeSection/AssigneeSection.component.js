@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { AssignmentInd as AssignmentIcon } from '@material-ui/icons';
+import { IconUser24 } from '@dhis2/ui';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Contents } from './Contents.component';
@@ -24,7 +24,7 @@ const loadingIndicatorStyle = {
 export class AssigneeSectionComponent extends React.Component<Props> {
     renderHeader = () => (
         <ViewEventSectionHeader
-            icon={AssignmentIcon}
+            icon={IconUser24}
             text={i18n.t('Assignee')}
         />
     )

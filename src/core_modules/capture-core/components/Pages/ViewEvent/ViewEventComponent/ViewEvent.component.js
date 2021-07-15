@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import { IconChevronLeft24 } from '@dhis2/ui';
 import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
 import { Button } from '../../../Buttons/Button.component';
 import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
@@ -65,7 +65,7 @@ class ViewEventPlain extends Component<Props> {
         return (
             <div className={classes.container}>
                 <Button className={classes.showAllEvents} variant="raised" onClick={this.handleGoBackToAllEvents}>
-                    <ChevronLeft />
+                    <IconChevronLeft24 />
                     {i18n.t('Show all events')}
                 </Button>
                 <div className={classes.contentContainer}>

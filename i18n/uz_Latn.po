@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -659,6 +659,9 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
+
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
 
@@ -1006,10 +1009,10 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "Xatolik"
 
 msgid "Warning"
-msgstr ""
+msgstr "Ogohlantirish"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
