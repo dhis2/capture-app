@@ -37,6 +37,7 @@ export {
     getEventProgramThrowIfNotFound,
     getEventProgramEventAccess,
     getScopeInfo,
+    getProgramThrowIfNotFound,
     programTypes,
     scopeTypes,
 } from './helpers';

@@ -1,10 +1,9 @@
 // @flow
 import isArray from 'd2-utilizr/lib/isArray';
 import { getApi } from '../d2/d2Instance';
-import { EventProgram } from '../metaData';
+import { EventProgram, getProgramThrowIfNotFound } from '../metaData';
 import type { RelationshipType } from '../metaData';
 import { convertServerRelationshipToClient } from './convertServerToClient';
-import { programCollection } from '../metaDataMemoryStores';
 
 async function getRelationships(queryParams: Object, relationshipTypes: Array<RelationshipType>) {
     const api = getApi();
@@ -13,7 +12,7 @@ async function getRelationships(queryParams: Object, relationshipTypes: Array<Re
 }
 
 export function getRelationshipsForEvent(eventId: string, programId: string, programStageId: string) {
-    const program = programCollection.get(programId);
+    const program = getProgramThrowIfNotFound(programId);
     const stage = program instanceof EventProgram ? program.stage : program.getStage(programStageId);
     const relationshipTypes = stage?.relationshipTypes || [];
     return getRelationships({ event: eventId }, relationshipTypes);
