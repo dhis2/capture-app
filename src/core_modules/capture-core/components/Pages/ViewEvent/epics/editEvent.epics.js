@@ -4,16 +4,16 @@ import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
-import { getErrorMessageAndDetails } from '../../../utils/errors/getErrorMessageAndDetails';
-import { getApi } from '../../../d2';
+import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
+import { getApi } from '../../../../d2';
 import {
     actionTypes as editEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,
     eventFromUrlRetrieved,
     orgUnitRetrievedOnUrlUpdate,
     orgUnitCouldNotBeRetrievedOnUrlUpdate,
-} from './editEvent.actions';
-import { getEvent } from '../../../events/eventRequests';
+} from '../ViewEventComponent/editEvent.actions';
+import { getEvent } from '../../../../events/eventRequests';
 
 export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -45,7 +45,8 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
         ofType(editEventActionTypes.EVENT_FROM_URL_RETRIEVED),
         switchMap((action) => {
             const eventContainer = action.payload.eventContainer;
-            return getApi().get(`organisationUnits/${eventContainer.event.orgUnitId}`)
+            return getApi()
+                .get(`organisationUnits/${eventContainer.event.orgUnitId}`)
                 .then(orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer))
                 .catch((error) => {
                     const { message, details } = getErrorMessageAndDetails(error);
