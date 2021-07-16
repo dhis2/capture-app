@@ -22,7 +22,7 @@ export const actionTypes = {
 
 export const viewEventFromUrl = (data: Object) =>
     actionCreator(actionTypes.VIEW_EVENT_FROM_URL)({
-        eventId: data.nextProps.viewEventId,
+        eventId: data.nextProps.viewEventId || data.nextProps.eventId,
         page: data.nextPage,
     });
 

@@ -7,6 +7,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPage.types';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { Widget } from '../../Widget';
+import { ViewEventDataEntry } from '../ViewEvent/EventDetailsSection/ViewEventDataEntry/';
+
 
 const styles = ({ typography }) => ({
     container: {
@@ -60,7 +62,9 @@ const EnrollmentAddEventPagePain = ({
                     }
                     noncollapsible
                 >
-                    [event details]
+                    <ViewEventDataEntry
+                        formFoundation={programStage.stageForm}
+                    />
                 </Widget>
             </div>
 
