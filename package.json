@@ -1,7 +1,7 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "1.34.1",
+  "version": "1.34.2",
   "cacheVersion": "1",
   "serverVersion": "37",
   "private": false,
@@ -13,7 +13,7 @@
     "@dhis2/d2-ui-org-unit-tree": "^7.3.1",
     "@dhis2/d2-ui-rich-text": "^7.3.1",
     "@dhis2/d2-ui-sharing-dialog": "^7.3.1",
-    "@dhis2/ui": "^6.10.5",
+    "@dhis2/ui": "^6.10.6",
     "@joakim_sm/react-infinite-calendar": "^2.4.2",
     "@material-ui/core": "3.9.4",
     "@material-ui/icons": "3",

@@ -24,9 +24,6 @@ export const orgUnitRetrievedOnUrlUpdate = (orgUnit: Object, eventContainer: Obj
 export const orgUnitCouldNotBeRetrievedOnUrlUpdate = (eventContainer: Object) =>
     actionCreator(actionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE)({ eventContainer });
 
-export const startOpenEventForEditInDataEntry = (eventContainer: Object, orgUnit: Object) =>
-    actionCreator(actionTypes.START_OPEN_EVENT_FOR_EDIT)({ eventContainer, orgUnit });
-
 export const addEventNote = (eventId: string, note: Object) =>
     actionCreator(actionTypes.ADD_EVENT_NOTE)({ eventId, note });
 

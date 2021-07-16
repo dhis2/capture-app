@@ -7,8 +7,8 @@ import i18n from '@dhis2/d2-i18n';
 import type { Props } from './widgetEventEdit.types';
 import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
 import { Widget } from '../Widget';
-import { EditEventDataEntry } from '../Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/';
-import { ViewEventDataEntry } from '../Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/';
+import { EditEventDataEntry } from './EditEventDataEntry/';
+import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { pageMode } from '../Pages/EnrollmentEvent/EnrollmentEventPage.const';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 

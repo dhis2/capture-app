@@ -7,10 +7,10 @@ import {
 } from '../../components/Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 import {
     actionTypes as viewEventDataEntryActionTypes,
-} from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
+} from '../../components/WidgetEventEdit/ViewEventDataEntry/viewEventDataEntry.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
-} from '../../components/Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/editEventDataEntry.actions';
+} from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
 import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
 import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';

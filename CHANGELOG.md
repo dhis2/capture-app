@@ -1,3 +1,10 @@
+## [1.34.2](https://github.com/dhis2/capture-app/compare/v1.34.1...v1.34.2) (2021-07-15)
+
+
+### Bug Fixes
+
+* DHIS2-10330 Formatted category options api-call to work with multiple options ([554732b](https://github.com/dhis2/capture-app/commit/554732b0a913c483c4337e8df7f8372795373439))
+
 ## [1.34.1](https://github.com/dhis2/capture-app/compare/v1.34.0...v1.34.1) (2021-07-14)
 
 
