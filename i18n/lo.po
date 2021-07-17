@@ -436,7 +436,7 @@ msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "ບໍ່"
+msgstr "ບໍ່ແມ່ນ"
 
 msgid "Uploading image"
 msgstr ""
