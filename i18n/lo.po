@@ -225,7 +225,7 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "ແມ່ນ"
+msgstr "ມີ"
 
 msgid "mm/dd/yyyy"
 msgstr ""
@@ -252,7 +252,7 @@ msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "ບໍ່"
+msgstr "ບໍ່ມີ"
 
 msgid "Uploading image"
 msgstr ""
