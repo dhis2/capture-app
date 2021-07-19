@@ -1,10 +1,10 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getProgramFromProgramIdThrowIfNotFound } from '../getProgramFromProgramIdThrowIfNotFound';
-import { EventProgram } from '../../Program';
+import { getProgramFromProgramIdThrowIfNotFound } from './getProgramFromProgramIdThrowIfNotFound';
+import { EventProgram } from '../Program';
 
-export function getEventProgramEventAccess(
+export function getProgramEventAccess(
     programId: string,
     categoriesMeta: ?{ [categoryId: string]: { writeAccess: boolean } },
     programStageId: ?string,

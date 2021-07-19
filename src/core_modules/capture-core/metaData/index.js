@@ -35,7 +35,7 @@ export {
     getTrackedEntityTypeThrowIfNotFound,
     convertDataElementsValues,
     getEventProgramThrowIfNotFound,
-    getEventProgramEventAccess,
+    getProgramEventAccess,
     getScopeInfo,
     programTypes,
     scopeTypes,

@@ -1,7 +1,7 @@
 // @flow
 
 import { createSelector } from 'reselect';
-import { getEventProgramEventAccess } from '../../../metaData';
+import { getProgramEventAccess } from '../../../metaData';
 
 
 const programIdSelector = state => state.currentSelections.programId;
@@ -14,5 +14,5 @@ export const makeEventAccessSelector = () => createSelector(
     categoriesMetaSelector,
     programStageIdSelector,
     (programId: string, categoriesMeta: ?Object, programStageId: ?string) =>
-        programId && getEventProgramEventAccess(programId, categoriesMeta, programStageId));
+        programId && getProgramEventAccess(programId, categoriesMeta, programStageId));
 
