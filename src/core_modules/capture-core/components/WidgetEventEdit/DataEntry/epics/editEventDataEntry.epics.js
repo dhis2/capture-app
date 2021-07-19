@@ -16,7 +16,7 @@ import {
     getProgramAndStageFromEvent,
     getProgramThrowIfNotFound,
     getStageFromEvent,
-    EventProgram } from '../../../../../metaData';
+    EventProgram } from '../../../../metaData';
 import {
     getRulesActionsForEvent,
     getCurrentClientValues,

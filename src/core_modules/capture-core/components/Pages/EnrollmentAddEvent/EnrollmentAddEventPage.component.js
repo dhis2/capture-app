@@ -4,10 +4,10 @@ import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { EditEventDataEntry } from '../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
 import type { Props } from './EnrollmentAddEventPage.types';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { Widget } from '../../Widget';
-import { EditEventDataEntry } from '../ViewEvent/EventDetailsSection/EditEventDataEntry/';
 
 
 const styles = ({ typography }) => ({
@@ -62,9 +62,7 @@ const EnrollmentAddEventPagePain = ({
                     }
                     noncollapsible
                 >
-                    <EditEventDataEntry
-                        formFoundation={programStage.stageForm}
-                    />
+                    <EditEventDataEntry formFoundation={programStage.stageForm} />
                 </Widget>
             </div>
 
