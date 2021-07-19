@@ -76,7 +76,9 @@ const EnrollmentAddEventPagePain = ({
                         }
                         noncollapsible
                     >
-                        <EditEventDataEntry formFoundation={programStage.stageForm} />
+                        <div data-test="edit-event-form">
+                            <EditEventDataEntry formFoundation={programStage.stageForm} />
+                        </div>
                     </Widget>
                 </div>
                 <div className={classes.rightColumn}> [right column placeholder]</div>

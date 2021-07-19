@@ -18,3 +18,10 @@ And(/^you see the widget header (.*)$/, (name) => {
             cy.contains(name).should('exist');
         });
 });
+
+And('you see the add event form details', () => {
+    cy.get('[data-test="add-event-enrollment-page-content"]')
+        .within(() => {
+            cy.get('[data-test="edit-event-form"]').should('exist');
+        });
+});
