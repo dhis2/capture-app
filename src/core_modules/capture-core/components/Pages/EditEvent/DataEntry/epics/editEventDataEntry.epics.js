@@ -12,7 +12,11 @@ import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import { getProgramAndStageFromEvent, getEventProgramThrowIfNotFound } from '../../../../../metaData';
+import {
+    getProgramAndStageFromEvent,
+    getProgramThrowIfNotFound,
+    getStageFromEvent,
+    EventProgram } from '../../../../../metaData';
 import {
     getRulesActionsForEvent,
     getCurrentClientValues,
@@ -49,27 +53,29 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const eventId = state.dataEntries[dataEntryId].eventId;
+    const event = state.events[eventId];
     const { programId } = state.currentSelections;
-    const eventProgram = getEventProgramThrowIfNotFound(programId);
+    const program = getProgramThrowIfNotFound(programId);
 
     const orgUnitId = state.currentSelections.orgUnitId;
     const orgUnit = state.organisationUnits[orgUnitId];
+    const stage = program instanceof EventProgram ? program.stage : getStageFromEvent(event)?.stage;
 
-    const foundation = eventProgram.stage.stageForm;
+    const foundation = stage?.stageForm;
+    const currentEventValues = foundation ? getCurrentClientValues(state, foundation, formId, fieldData) : {};
 
-    const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
-
-    let currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
+    let currentEventMainData = foundation ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) : {};
     currentEventMainData = { ...state.events[eventId], ...currentEventMainData };
     const currentEventData = { ...currentEventValues, ...currentEventMainData };
 
     const rulesActions = getRulesActionsForEvent(
-        eventProgram,
+        program,
         foundation,
         formId,
         orgUnit,
         currentEventData,
         [currentEventData],
+        stage,
     );
 
     return batchActions([

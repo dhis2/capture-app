@@ -2,7 +2,7 @@
 /**
  * @module rulesEngineActionsCreator
  */
-import type { Program, RenderFoundation, TrackerProgram } from '../../metaData';
+import type { Program, ProgramStage, RenderFoundation, TrackerProgram } from '../../metaData';
 import { runRulesForSingleEvent } from './runRulesForSingleEvent';
 import { runRulesForTEI } from './runRulesForTEI';
 import { postProcessRulesEffects } from './postProcessRulesEffects';
@@ -33,6 +33,7 @@ export function getRulesActionsForEvent(
     orgUnit: OrgUnit,
     currentEvent: EventData = {},
     allEventsData: EventsData = [],
+    stage: ?ProgramStage,
 ) {
     const rulesEffects = runRulesForSingleEvent(
         program,
@@ -40,6 +41,7 @@ export function getRulesActionsForEvent(
         orgUnit,
         currentEvent,
         allEventsData,
+        stage,
     );
     return getRulesActions(rulesEffects, foundation, formId);
 }
