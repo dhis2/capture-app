@@ -20,8 +20,26 @@ And(/^you see the widget header (.*)$/, (name) => {
 });
 
 And('you see the add event form details', () => {
+    const eventData = [
+        'MCH Apgar Score',
+        'MCH Apgar comment',
+        'MCH Weight (g)',
+        'MCH ARV at birth',
+        'MCH BCG dose',
+        'MCH OPV dose',
+        'MCH Infant Feeding',
+        'Birth certificate',
+    ];
+
     cy.get('[data-test="add-event-enrollment-page-content"]')
         .within(() => {
-            cy.get('[data-test="edit-event-form"]').should('exist');
+            cy.get('[data-test="edit-event-form"]')
+                .find('[data-test^=form-field-]')
+                .should('have.length', 8)
+                .each(($row, index) => {
+                    cy.wrap($row)
+                        .contains(eventData[index])
+                        .should('exist');
+                });
         });
 });
