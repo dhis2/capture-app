@@ -4,6 +4,7 @@ import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { SingleEventRegistrationEntry } from 'capture-core/components/DataEntries';
 import type { Props } from './EnrollmentAddEventPage.types';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
 import { Widget } from '../../Widget';
@@ -60,8 +61,13 @@ const EnrollmentAddEventPagePain = ({
                     }
                     noncollapsible
                 >
-                    [event details]
+                    <div data-test="edit-event-form">
+                        <SingleEventRegistrationEntry
+                            id="singleEvent"
+                        />
+                    </div>
                 </Widget>
+
             </div>
 
         </div>

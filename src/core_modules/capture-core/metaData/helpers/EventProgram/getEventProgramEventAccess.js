@@ -1,12 +1,25 @@
 // @flow
-import { getEventProgramThrowIfNotFound } from './getEventProgramThrowIfNotFound';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import { getProgramFromProgramIdThrowIfNotFound } from '../getProgramFromProgramIdThrowIfNotFound';
+import { EventProgram } from '../../Program';
 
 export function getEventProgramEventAccess(
     programId: string,
     categoriesMeta: ?{ [categoryId: string]: { writeAccess: boolean } },
+    programStageId: ?string,
 ) {
-    const program = getEventProgramThrowIfNotFound(programId);
-    const stage = program.stage;
+    const program = getProgramFromProgramIdThrowIfNotFound(programId);
+    let stage;
+    if (program instanceof EventProgram) {
+        stage = program.stage;
+    } else if (programStageId) {
+        stage = program.getStage(programStageId);
+    }
+    if (!stage) {
+        log.error(errorCreator('stage not found')({ programId, programStageId }));
+        return null;
+    }
     const access = {
         read: stage.stageForm.access.data.read,
         write: stage.stageForm.access.data.write,
