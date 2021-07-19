@@ -592,22 +592,6 @@ msgstr "Fikr yozish huquqiga ega emassiz"
 msgid "Write comment"
 msgstr "Fikr yozing"
 
-msgid "Show all events"
-msgstr "Barcha hodisa/tadbirlarni koʼrsatish"
-
-msgid "Edit event"
-msgstr "Hodisa/tadbirni tahrirlang"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
-"Hodisa/tadbirni yuklab boʼlmadi. Uning mavjudligiga ishonchingiz komilmi?"
-
-msgid "Event could not be loaded"
-msgstr "Hodisa/tadbirni yuklab boʼlmadi"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
@@ -899,6 +883,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "Ushbu hodisa/tadbirni tahrirlash huquqiga ega emassiz"
 
+msgid "Edit event"
+msgstr "Hodisa/tadbirni tahrirlang"
+
 msgid "Event details"
 msgstr ""
 
@@ -920,6 +907,19 @@ msgstr "Hodisa/tadbir {{name}} ga biriktirildi"
 
 msgid "Feedbacks"
 msgstr "Qayta aloqalar"
+
+msgid "Show all events"
+msgstr "Barcha hodisa/tadbirlarni koʼrsatish"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+"Hodisa/tadbirni yuklab boʼlmadi. Uning mavjudligiga ishonchingiz komilmi?"
+
+msgid "Event could not be loaded"
+msgstr "Hodisa/tadbirni yuklab boʼlmadi"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Tashkiliy boʼlimni yuklab boʼlmadi"
 
 msgid "Possible duplicates found"
 msgstr "Boʼlishi mumkin boʼlgan nusxalar topildi"

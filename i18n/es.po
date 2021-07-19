@@ -598,21 +598,6 @@ msgstr "No tienes acceso para escribir comentarios"
 msgid "Write comment"
 msgstr "Escribir comentario"
 
-msgid "Show all events"
-msgstr "Mostrar todos los eventos"
-
-msgid "Edit event"
-msgstr "Editar evento"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
-
-msgid "Event could not be loaded"
-msgstr "No se pudo cargar el evento"
-
-msgid "Organisation unit could not be loaded"
-msgstr "No se pudo cargar la unidad organizativa"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "La instancia de entidad rastreada con el ID \"{{teiId}}\" no existe"
 
@@ -915,6 +900,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "No tienes acceso para editar este evento"
 
+msgid "Edit event"
+msgstr "Editar evento"
+
 msgid "Event details"
 msgstr "Detalles del evento"
 
@@ -936,6 +924,18 @@ msgstr "Evento asignado a {{name}}"
 
 msgid "Feedbacks"
 msgstr "Retroalimentaciones"
+
+msgid "Show all events"
+msgstr "Mostrar todos los eventos"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
+
+msgid "Event could not be loaded"
+msgstr "No se pudo cargar el evento"
+
+msgid "Organisation unit could not be loaded"
+msgstr "No se pudo cargar la unidad organizativa"
 
 msgid "Possible duplicates found"
 msgstr "Posibles duplicados encontrados"

@@ -573,21 +573,6 @@ msgstr "你没有权限写备注"
 msgid "Write comment"
 msgstr "写备注"
 
-msgid "Show all events"
-msgstr "显示所有事件"
-
-msgid "Edit event"
-msgstr "编辑事件"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "事件不能载入"
-
-msgid "Event could not be loaded"
-msgstr "事件不能载入"
-
-msgid "Organisation unit could not be loaded"
-msgstr "机构不能载入"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "ID为“ {{teiId}}”的跟踪实体实例不存在"
 
@@ -867,6 +852,9 @@ msgstr "事件"
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
+msgid "Edit event"
+msgstr "编辑事件"
+
 msgid "Event details"
 msgstr "事件详情"
 
@@ -886,6 +874,18 @@ msgstr "事件被分配到  {{name}}"
 
 msgid "Feedbacks"
 msgstr "反馈"
+
+msgid "Show all events"
+msgstr "显示所有事件"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "事件不能载入"
+
+msgid "Event could not be loaded"
+msgstr "事件不能载入"
+
+msgid "Organisation unit could not be loaded"
+msgstr "机构不能载入"
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"

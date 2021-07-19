@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { ViewEventDataEntryComponent } from './ViewEventDataEntry.component';
-import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 
 
 const mapStateToProps = (state: ReduxState) => {

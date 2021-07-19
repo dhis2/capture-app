@@ -10,17 +10,17 @@ import {
     withDataEntryField,
     withDataEntryFieldIfApplicable,
     withBrowserBackWarning,
-} from '../../../../../components/DataEntry';
+} from '../../../components/DataEntry';
 
-import { type RenderFoundation, DataElement, dataElementTypes } from '../../../../../metaData';
-import { convertFormToClient, convertClientToView } from '../../../../../converters';
+import { type RenderFoundation, DataElement, dataElementTypes } from '../../../metaData';
+import { convertFormToClient, convertClientToView } from '../../../converters';
 
 import {
     withLabel,
     withDefaultFieldContainer,
     ViewModeField,
     withFilterProps,
-} from '../../../../FormFields/New';
+} from '../../FormFields/New';
 import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
