@@ -6,9 +6,6 @@ import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
 
 export const EnrollmentAddEventPage = () => {
-    const currentScopeId: string =
-        useSelector(({ currentSelections }) => currentSelections.programId || currentSelections.trackedEntityTypeId);
-
     const { programId, stageId } = useSelector(
         ({
             router: {
@@ -26,6 +23,6 @@ export const EnrollmentAddEventPage = () => {
         return <span>[program stage placeholder]</span>;
     }
     return (
-        <EnrollmentAddEventPageComponent programStage={programStage} currentScopeId={currentScopeId} />
+        <EnrollmentAddEventPageComponent programStage={programStage} programId={programId} />
     );
 };

@@ -3,6 +3,6 @@ import { ProgramStage } from '../../../metaData';
 
 export type Props = {|
     programStage: ProgramStage,
-    currentScopeId: string,
+    programId: string,
     ...CssClasses,
 |};
