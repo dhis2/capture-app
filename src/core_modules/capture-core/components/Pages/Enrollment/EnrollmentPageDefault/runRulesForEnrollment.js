@@ -79,7 +79,6 @@ export const runRulesForEnrollment = (input: InputRuleEnrollmentData) => {
     if (orgUnit && program && programMetadata && attributes && enrollment) {
         const dataElements = getDataElementsFromProgram(programMetadata);
 
-
         const trackedEntityAttributes = attributes.reduce((acc, item) => {
             acc[item.attribute] = {
                 id: item.attribute,
