@@ -26,7 +26,7 @@ export const EnrollmentAddEventPage = () => {
         }),
         shallowEqual,
     );
-    const outputEffects = useWidgetDataFromStore();
+    const outputEffects = useWidgetDataFromStore('singleEvent-newEvent');
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages.values()].find(item => item.id === stageId);
 

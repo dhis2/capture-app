@@ -2,20 +2,20 @@
 // $FlowFixMe
 import { shallowEqual, useSelector } from 'react-redux';
 
-export const useWidgetDataFromStore = () => useSelector(({
+export const useWidgetDataFromStore = (reducerName: string) => useSelector(({
     rulesEffectsFeedback,
     rulesEffectsIndicators,
     rulesEffectsGeneralWarnings,
     rulesEffectsGeneralErrors,
 }) => ({
     feedbacks: [
-        ...rulesEffectsFeedback['singleEvent-newEvent']?.displayTexts || [],
-        ...rulesEffectsFeedback['singleEvent-newEvent']?.displayKeyValuePairs || [],
+        ...rulesEffectsFeedback[reducerName]?.displayTexts || [],
+        ...rulesEffectsFeedback[reducerName]?.displayKeyValuePairs || [],
     ],
     indicators: [
-        ...rulesEffectsIndicators['singleEvent-newEvent']?.displayTexts || [],
-        ...rulesEffectsIndicators['singleEvent-newEvent']?.displayKeyValuePairs || [],
+        ...rulesEffectsIndicators[reducerName]?.displayTexts || [],
+        ...rulesEffectsIndicators[reducerName]?.displayKeyValuePairs || [],
     ],
-    errors: rulesEffectsGeneralWarnings['singleEvent-newEvent']?.warning,
-    warnings: rulesEffectsGeneralErrors['singleEvent-newEvent']?.error,
+    errors: rulesEffectsGeneralWarnings[reducerName]?.warning,
+    warnings: rulesEffectsGeneralErrors[reducerName]?.error,
 }), shallowEqual);
