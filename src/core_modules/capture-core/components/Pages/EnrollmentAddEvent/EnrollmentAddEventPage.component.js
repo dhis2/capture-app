@@ -96,11 +96,11 @@ const EnrollmentAddEventPagePain = ({
                     <WidgetError error={widgetEffects?.errors} />
                     <WidgetWarning warning={widgetEffects?.warnings} />
                     <WidgetFeedback
-                        emptyText={'There are no feedbacks'}
+                        emptyText={i18n.t('There are no feedbacks')}
                         feedback={widgetEffects?.feedbacks}
                     />
                     <WidgetIndicator
-                        emptyText={'There are no indicators for this program stage'}
+                        emptyText={i18n.t('There are no indicators for this program stage')}
                         indicators={widgetEffects?.indicators}
                     />
                     <WidgetProfile
