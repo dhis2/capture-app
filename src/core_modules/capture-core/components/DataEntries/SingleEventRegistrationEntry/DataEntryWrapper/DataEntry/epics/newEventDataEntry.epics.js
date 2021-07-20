@@ -174,9 +174,9 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const programId = state.currentSelections.programId;
-    const programStageId = state.router.location.query.stageId;
+    const stageId = state.router.location.query.stageId;
 
-    const metadataContainer = getProgramAndStageForProgram(programId, programStageId);
+    const metadataContainer = getProgramAndStageForProgram(programId, stageId);
 
     const orgUnitId = state.currentSelections.orgUnitId;
     const orgUnit = state.organisationUnits[orgUnitId];
