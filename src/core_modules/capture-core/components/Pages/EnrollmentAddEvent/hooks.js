@@ -2,7 +2,7 @@
 // $FlowFixMe
 import { shallowEqual, useSelector } from 'react-redux';
 
-export const useStoredWidgetDataFromStore = () => useSelector(({
+export const useWidgetDataFromStore = () => useSelector(({
     rulesEffectsFeedback,
     rulesEffectsIndicators,
     rulesEffectsGeneralWarnings,

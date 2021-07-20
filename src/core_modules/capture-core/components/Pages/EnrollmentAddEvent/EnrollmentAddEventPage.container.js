@@ -7,7 +7,7 @@ import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
 import { urlArguments } from '../../../utils/url';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
-import { useStoredWidgetDataFromStore } from './hooks';
+import { useWidgetDataFromStore } from './hooks';
 
 export const EnrollmentAddEventPage = () => {
     const history = useHistory();
@@ -26,7 +26,7 @@ export const EnrollmentAddEventPage = () => {
         }),
         shallowEqual,
     );
-    const outputEffects = useStoredWidgetDataFromStore();
+    const outputEffects = useWidgetDataFromStore();
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages.values()].find(item => item.id === stageId);
 
