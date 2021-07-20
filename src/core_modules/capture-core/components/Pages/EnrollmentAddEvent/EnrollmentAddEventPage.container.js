@@ -23,6 +23,6 @@ export const EnrollmentAddEventPage = () => {
         return <span>[program stage placeholder]</span>;
     }
     return (
-        <EnrollmentAddEventPageComponent programStage={programStage} programId={programId} />
+        <EnrollmentAddEventPageComponent programStage={programStage} />
     );
 };

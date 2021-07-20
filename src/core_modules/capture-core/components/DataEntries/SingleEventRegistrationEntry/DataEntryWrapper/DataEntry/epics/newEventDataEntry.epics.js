@@ -20,8 +20,7 @@ import {
     getCurrentClientMainData,
     getRulesActionsForEvent,
 } from '../../../../../../rules/actionsCreator';
-import { getProgramAndStageForEventProgram } from
-    '../../../../../../metaData/helpers/EventProgram/getProgramAndStageForEventProgram';
+import { getProgramAndStageForProgram } from '../../../../../../metaData/helpers';
 import {
     getDefaultMainConfig as getDefaultMainColumnConfig,
     getMetaDataConfig as getColumnMetaDataConfig,
@@ -52,16 +51,11 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
         map(() => {
             const state = store.value;
             const programId = state.currentSelections.programId;
-
-            // cancel if tracker program
-            const program = getProgramFromProgramIdThrowIfNotFound(programId);
-            if (program instanceof TrackerProgram) {
-                return cancelOpenNewEventInDataEntry();
-            }
+            const programStageId = state.router.location.query.stageId;
 
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
-            const metadataContainer = getProgramAndStageForEventProgram(programId);
+            const metadataContainer = getProgramAndStageForProgram(programId, programStageId);
             if (metadataContainer.error) {
                 log.error(
                     errorCreator(
@@ -110,15 +104,11 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                 return cancelOpenNewEventInDataEntry();
             }
             const programId = state.currentSelections.programId;
-            // cancel if tracker program
-            const program = getProgramFromProgramIdThrowIfNotFound(programId);
-            if (program instanceof TrackerProgram) {
-                return cancelOpenNewEventInDataEntry();
-            }
+            const programStageId = state.router.location.query.stageId;
 
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
-            const metadataContainer = getProgramAndStageForEventProgram(programId);
+            const metadataContainer = getProgramAndStageForProgram(programId, programStageId);
             if (metadataContainer.error) {
                 log.error(
                     errorCreator(
@@ -184,7 +174,9 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const programId = state.currentSelections.programId;
-    const metadataContainer = getProgramAndStageForEventProgram(programId);
+    const programStageId = state.router.location.query.stageId;
+
+    const metadataContainer = getProgramAndStageForProgram(programId, programStageId);
 
     const orgUnitId = state.currentSelections.orgUnitId;
     const orgUnit = state.organisationUnits[orgUnitId];

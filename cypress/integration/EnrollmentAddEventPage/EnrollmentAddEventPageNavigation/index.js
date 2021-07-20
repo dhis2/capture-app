@@ -20,24 +20,25 @@ And(/^you see the widget header (.*)$/, (name) => {
 });
 
 And('you see the add event form details', () => {
-    const data = [
-        'First name',
-        'Last name',
-        'Gender',
-        'Unique ID',
+    const eventData = [
+        'MCH Apgar Score',
+        'MCH Apgar comment',
+        'MCH Weight (g)',
+        'MCH ARV at birth',
+        'MCH BCG dose',
+        'MCH OPV dose',
+        'MCH Infant Feeding',
+        'Birth certificate',
     ];
 
     cy.get('[data-test="add-event-enrollment-page-content"]')
         .within(() => {
-            cy.get('[data-test="dataentry-field-enrollmentDate"]').contains('Date of enrollment');
-            cy.get('[data-test="dataentry-field-incidentDate"]').contains('Date of birth');
-            cy.get('[data-test="dataentry-field-geometry"]').contains('Coordinate');
             cy.get('[data-test="add-event-form"]')
                 .find('[data-test^=form-field-]')
-                .should('have.length', 4)
+                .should('have.length', 8)
                 .each(($row, index) => {
                     cy.wrap($row)
-                        .contains(data[index])
+                        .contains(eventData[index])
                         .should('exist');
                 });
         });

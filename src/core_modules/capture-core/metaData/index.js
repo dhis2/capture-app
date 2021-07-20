@@ -28,7 +28,7 @@ export {
     getScopeFromScopeId,
     getProgramAndStageFromEvent,
     getStageFromEvent,
-    getProgramAndStageForEventProgram,
+    getProgramAndStageForProgram,
     getStageForEventProgram,
     getProgramFromProgramIdThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
