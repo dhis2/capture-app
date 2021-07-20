@@ -47,7 +47,6 @@ export const enrollmentDesc = createReducerDescription(
                         dataToRollback,
                         ...dataToCommit
                     } = event;
-                    console.log(pendingApiResponse);
                     return dataToCommit;
                 }
                 return event;
