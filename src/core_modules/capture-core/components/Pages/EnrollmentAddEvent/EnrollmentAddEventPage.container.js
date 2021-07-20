@@ -7,6 +7,7 @@ import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
 import { urlArguments } from '../../../utils/url';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
+import { useStoredWidgetDataFromStore } from './hooks';
 
 export const EnrollmentAddEventPage = () => {
     const history = useHistory();
@@ -25,6 +26,7 @@ export const EnrollmentAddEventPage = () => {
         }),
         shallowEqual,
     );
+    const outputEffects = useStoredWidgetDataFromStore();
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages.values()].find(item => item.id === stageId);
 
@@ -46,7 +48,7 @@ export const EnrollmentAddEventPage = () => {
             enrollmentId={enrollmentId}
             onDelete={onDelete}
             programStage={programStage}
-            widgetEffects={{}}
+            widgetEffects={outputEffects}
         />
     );
 };
