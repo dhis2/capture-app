@@ -21,11 +21,9 @@ const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-
 const makeMapStateToProps = () => {
     const eventAccessSelector = makeEventAccessSelector();
     // $FlowFixMe[not-an-object] automated comment
-    return (state: ReduxState, { id }) => ({
-        ready: state.dataEntries[id],
+    return (state: ReduxState, { id }) => ({ ready: state.dataEntries[id],
         showAddRelationship: !!state.newEventPage.showAddRelationship,
-        eventAccess: eventAccessSelector(state),
-    });
+        eventAccess: eventAccessSelector(state) });
 };
 
 const mapDispatchToProps = () => ({
