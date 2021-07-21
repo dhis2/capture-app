@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # phil_dhis2, 2021
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2021\n"
+"Last-Translator: Thuy Nguyen <thuynguyen@hispvietnam.org>, 2021\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -403,7 +403,7 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "ແມ່ນ"
+msgstr "ມີ"
 
 msgid "mm/dd/yyyy"
 msgstr ""
@@ -430,7 +430,7 @@ msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "ບໍ່"
+msgstr "ບໍ່ມີ"
 
 msgid "Uploading image"
 msgstr ""
@@ -568,21 +568,6 @@ msgid "You dont have access to write comments"
 msgstr ""
 
 msgid "Write comment"
-msgstr ""
-
-msgid "Show all events"
-msgstr ""
-
-msgid "Edit event"
-msgstr ""
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
-
-msgid "Event could not be loaded"
-msgstr ""
-
-msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
@@ -863,6 +848,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Edit event"
+msgstr ""
+
 msgid "Event details"
 msgstr "ລາຍລະອຽດເຫດການ"
 
@@ -881,6 +869,18 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
+msgstr ""
+
+msgid "Show all events"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+
+msgid "Event could not be loaded"
+msgstr ""
+
+msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "Possible duplicates found"
