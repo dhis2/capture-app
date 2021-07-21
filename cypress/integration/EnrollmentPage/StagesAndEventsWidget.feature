@@ -40,3 +40,8 @@ Feature: User interacts with Stages and Events Widget
         When you sort list asc by Report date
         Then the sorted list by Report date asc should be displayed
 
+    Scenario: User can navigate to the event edit page
+        Given you open the enrollment page which has multiples events and stages
+        When the user clicks on an event
+        Then you see the following Enrollment: View Event
+        And you see the following Antenatal care visit

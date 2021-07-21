@@ -39,7 +39,7 @@ const styles = {
     },
 };
 
-const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) => {
+const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventClick }: Props) => {
     const headerColumns = useComputeHeaderColumn(dataElements, events);
     const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events, headerColumns);
 
@@ -100,6 +100,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
                     .map(id => (
                         <DataTableCell
                             key={id}
+                            onClick={() => onEventClick(events[index].event, events[index].programStage)}
                         >
                             <div >
                                 {row[id]}

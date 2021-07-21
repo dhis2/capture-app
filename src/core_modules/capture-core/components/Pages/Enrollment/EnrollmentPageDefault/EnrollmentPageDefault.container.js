@@ -75,6 +75,12 @@ export const EnrollmentPageDefault = () => {
         dispatch(deleteEnrollment({ enrollmentId }));
     };
 
+    const onEventClick = (eventId: string, stageId: string) => {
+        history.push(
+            `/enrollmentEventEdit?${urlArguments({ orgUnitId, programId, teiId, enrollmentId, eventId, stageId })}`,
+        );
+    };
+
     return (
         <EnrollmentPageDefaultComponent
             teiId={teiId}
@@ -85,6 +91,7 @@ export const EnrollmentPageDefault = () => {
             onDelete={onDelete}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
+            onEventClick={onEventClick}
         />
     );
 };
