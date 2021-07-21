@@ -593,21 +593,6 @@ msgstr "Anda tidak memiliki akses untuk menulis komentar"
 msgid "Write comment"
 msgstr "Tulis komentar"
 
-msgid "Show all events"
-msgstr "Tampilkan semua even"
-
-msgid "Edit event"
-msgstr "Sunting even"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
-
-msgid "Event could not be loaded"
-msgstr "Even tidak dapat dimuat"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Unit organisasi tidak dapat dimuat"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance entitas terlacak dengan id \"{{teiId}}\" tidak ada"
 
@@ -909,6 +894,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "Anda tidak memiliki akses untuk mengedit even ini"
 
+msgid "Edit event"
+msgstr "Sunting even"
+
 msgid "Event details"
 msgstr "Detail even"
 
@@ -930,6 +918,18 @@ msgstr "Even ditugaskan ke {{name}}"
 
 msgid "Feedbacks"
 msgstr "Umpan balik"
+
+msgid "Show all events"
+msgstr "Tampilkan semua even"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
+
+msgid "Event could not be loaded"
+msgstr "Even tidak dapat dimuat"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Unit organisasi tidak dapat dimuat"
 
 msgid "Possible duplicates found"
 msgstr "Kemungkinan duplikat ditemukan"

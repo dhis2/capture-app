@@ -585,21 +585,6 @@ msgstr "Bạn không có quyền viết bình luận"
 msgid "Write comment"
 msgstr "Viết bình luận"
 
-msgid "Show all events"
-msgstr "Hiện tất cả sự kiện"
-
-msgid "Edit event"
-msgstr "Sửa sự kiện"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Không thể tải sự kiện. Bạn có chắc nó tồn tại?"
-
-msgid "Event could not be loaded"
-msgstr "Không thể tải sự kiện"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Không thể tải đơn vị"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
@@ -890,6 +875,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "Bạn không có quyền truy cập để chỉnh sửa sự kiện này"
 
+msgid "Edit event"
+msgstr "Sửa sự kiện"
+
 msgid "Event details"
 msgstr "Chi tiết sự kiện"
 
@@ -911,6 +899,18 @@ msgstr "Sự kiện được chỉ định cho {{name}}"
 
 msgid "Feedbacks"
 msgstr "Phản hồi"
+
+msgid "Show all events"
+msgstr "Hiện tất cả sự kiện"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Không thể tải sự kiện. Bạn có chắc nó tồn tại?"
+
+msgid "Event could not be loaded"
+msgstr "Không thể tải sự kiện"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Không thể tải đơn vị"
 
 msgid "Possible duplicates found"
 msgstr "Có thể tìm thấy các bản sao"
