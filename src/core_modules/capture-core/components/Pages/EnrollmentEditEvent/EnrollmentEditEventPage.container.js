@@ -3,10 +3,10 @@ import React from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual } from 'react-redux';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
-import { pageMode } from './EnrollmentEventPage.const';
-import { EnrollmentEventPageComponent } from './EnrollmentEventPage.component';
+import { pageMode } from './EnrollmentEditEventPage.const';
+import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 
-export const EnrollmentEventPage = () => {
+export const EnrollmentEditEventPage = () => {
     const { programId, stageId } = useSelector(
         ({
             router: {
@@ -28,7 +28,7 @@ export const EnrollmentEventPage = () => {
     );
 
     return (
-        <EnrollmentEventPageComponent
+        <EnrollmentEditEventPageComponent
             mode={showEditEvent ? pageMode.EDIT : pageMode.VIEW}
             programStage={programStage}
         />

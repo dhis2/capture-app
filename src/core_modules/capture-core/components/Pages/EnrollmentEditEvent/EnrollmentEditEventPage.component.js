@@ -4,8 +4,8 @@ import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
-import type { PlainProps } from './EnrollmentEventPage.types';
-import { pageMode } from './EnrollmentEventPage.const';
+import type { PlainProps } from './EnrollmentEditEventPage.types';
+import { pageMode } from './EnrollmentEditEventPage.const';
 import { WidgetEventEdit } from '../../WidgetEventEdit/';
 
 const styles = ({ typography }) => ({
@@ -18,7 +18,7 @@ const styles = ({ typography }) => ({
     },
 });
 
-const EnrollmentEventPagePain = ({
+const EnrollmentEditEventPagePain = ({
     mode,
     programStage,
     classes,
@@ -40,6 +40,7 @@ const EnrollmentEventPagePain = ({
         )}
     </div>
 );
-export const EnrollmentEventPageComponent: ComponentType<
+
+export const EnrollmentEditEventPageComponent: ComponentType<
     $Diff<PlainProps, CssClasses>,
-> = withStyles(styles)(EnrollmentEventPagePain);
+> = withStyles(styles)(EnrollmentEditEventPagePain);

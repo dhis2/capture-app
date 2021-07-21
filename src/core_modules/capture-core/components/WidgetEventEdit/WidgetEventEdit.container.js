@@ -9,7 +9,7 @@ import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
-import { pageMode } from '../Pages/EnrollmentEvent/EnrollmentEventPage.const';
+import { pageMode } from '../Pages/EnrollmentEditEvent/EnrollmentEditEventPage.const';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 
 const styles = {
