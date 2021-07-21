@@ -2,23 +2,21 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { DataEntry } from '../../../../components/DataEntry/DataEntry.container';
-import { withCancelButton } from '../../../../components/DataEntry/withCancelButton';
-import { withDataEntryField } from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
-import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
-import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
-import { type RenderFoundation } from '../../../../metaData';
-import { withDataEntryFieldIfApplicable } from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
-import { withMainButton } from './withMainButton';
-import { withFilterProps } from '../../../FormFields/New/HOC/withFilterProps';
-import { withDataEntryNotesHandler } from '../../../../components/DataEntry/dataEntryNotes/withDataEntryNotesHandler';
-import { Notes } from '../../../Notes/Notes.component';
+import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import type { RenderFoundation } from '../../../metaData';
+import { withMainButton } from '../DataEntry/withMainButton';
+import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
 
 import {
+    DataEntry,
     withSaveHandler,
+    withCancelButton,
+    withDataEntryField,
+    withDataEntryFieldIfApplicable,
     placements,
     withCleanUp,
-} from '../../../../components/DataEntry';
+    withBrowserBackWarning,
+} from '../../../components/DataEntry';
 import {
     withInternalChangeHandler,
     withLabel,
@@ -31,19 +29,13 @@ import {
     withDisplayMessages,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
-} from '../../../FormFields/New';
+} from '../../FormFields/New';
 
-import { inMemoryFileStore } from '../../../DataEntry/file/inMemoryFileStore';
-import { withIndicatorOutput } from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
-import { withFeedbackOutput } from '../../../DataEntry/dataEntryOutput/withFeedbackOutput';
-import { withErrorOutput } from '../../../DataEntry/dataEntryOutput/withErrorOutput';
-import { withWarningOutput } from '../../../DataEntry/dataEntryOutput/withWarningOutput';
-import { withBrowserBackWarning } from '../../../DataEntry/withBrowserBackWarning';
-import labelTypeClasses from './dataEntryFieldLabels.module.css';
+import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
-        padding: theme.typography.pxToRem(8),
     },
     fieldLabelMediaBased: {
         [theme.breakpoints.down(523)]: {
@@ -55,7 +47,6 @@ const getStyles = (theme: Theme) => ({
 const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
-    COMMENTS: 'COMMENTS',
 };
 
 const overrideMessagePropNames = {
@@ -248,37 +239,6 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
-const buildNotesSettingsFn = () => {
-    const noteComponent =
-        withCalculateMessages(overrideMessagePropNames)(
-            withDefaultFieldContainer()(
-                withDefaultShouldUpdateInterface()(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(withDataEntryNotesHandler()(Notes)),
-                    ),
-                ),
-            ),
-        );
-    const notesSettings = {
-        getComponent: () => noteComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
-            id: 'comments',
-            label: 'Comments',
-            onAddNote: props.onAddNote,
-            dataEntryId: props.id,
-            readonly: !props.formFoundation.access.data.write,
-        }),
-        getPropName: () => 'note',
-        getValidatorContainers: () => getNoteValidatorContainers(),
-        getMeta: () => ({
-            placement: placements.BOTTOM,
-            section: dataEntrySectionNames.COMMENTS,
-        }),
-    };
-
-    return notesSettings;
-};
-
 const saveHandlerConfig = {
     onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
     onFilterProps: (props: Object) => {
@@ -290,12 +250,7 @@ const saveHandlerConfig = {
 const CleanUpHOC = withCleanUp()(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
-const NotesField = withDataEntryField(buildNotesSettingsFn())(ReportDateField);
-const FeedbackOutput = withFeedbackOutput()(NotesField);
-const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
-const WarningOutput = withWarningOutput()(IndicatorOutput);
-const ErrorOutput = withErrorOutput()(WarningOutput);
-const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ErrorOutput));
+const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ReportDateField));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
 const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
@@ -328,10 +283,6 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Status'),
     },
-    [dataEntrySectionNames.COMMENTS]: {
-        placement: placements.BOTTOM,
-        name: i18n.t('Comments'),
-    },
 };
 
 class EditEventDataEntryPlain extends Component<Props> {
@@ -356,20 +307,17 @@ class EditEventDataEntryPlain extends Component<Props> {
             ...passOnProps
         } = this.props;
         return (
-            <div className={classes.dataEntryContainer}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <DataEntryWrapper
-                    id={'singleEvent'}
-                    onUpdateFormField={onUpdateField}
-                    onUpdateFormFieldAsync={onStartAsyncUpdateField}
-                    fieldOptions={this.fieldOptions}
-                    dataEntrySections={this.dataEntrySections}
-                    {...passOnProps}
-                />
-            </div>
+            // $FlowFixMe[cannot-spread-inexact] automated comment
+            <DataEntryWrapper
+                id={'singleEvent'}
+                onUpdateFormField={onUpdateField}
+                onUpdateFormFieldAsync={onStartAsyncUpdateField}
+                fieldOptions={this.fieldOptions}
+                dataEntrySections={this.dataEntrySections}
+                {...passOnProps}
+            />
         );
     }
 }
-
 
 export const EditEventDataEntryComponent = withStyles(getStyles)(EditEventDataEntryPlain);

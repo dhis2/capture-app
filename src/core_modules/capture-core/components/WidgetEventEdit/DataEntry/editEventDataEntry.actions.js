@@ -1,19 +1,19 @@
 // @flow
-import { actionCreator, actionPayloadAppender } from '../../../../actions/actions.utils';
-import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import { getRulesActionsForEvent } from '../../../../rules/actionsCreator';
-import type { RenderFoundation, Program } from '../../../../metaData';
-import { effectMethods } from '../../../../trackerOffline';
+import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
+import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
+import type { RenderFoundation, Program } from '../../../metaData';
+import { effectMethods } from '../../../trackerOffline';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
 import {
     getConvertGeometryIn,
     convertGeometryOut,
     convertStatusIn,
     convertStatusOut,
-} from '../../../DataEntries';
-import { getDataEntryMeta, validateDataEntryValues } from '../../../DataEntry/actions/dataEntryLoad.utils';
-import { loadEditDataEntry } from '../../../DataEntry/actions/dataEntry.actions';
-import { addFormData } from '../../../D2Form/actions/form.actions';
+} from '../../DataEntries';
+import { getDataEntryMeta, validateDataEntryValues } from '../../DataEntry/actions/dataEntryLoad.utils';
+import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
+import { addFormData } from '../../D2Form/actions/form.actions';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',

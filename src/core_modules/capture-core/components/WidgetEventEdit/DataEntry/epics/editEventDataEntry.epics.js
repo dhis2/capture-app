@@ -2,25 +2,25 @@
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
+import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as editEventActionTypes,
-} from '../../editEvent.actions';
+} from '../../../Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 import {
     openEventForEditInDataEntry,
     prerequisitesErrorOpeningEventForEditInDataEntry,
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import { getProgramAndStageFromEvent, getEventProgramThrowIfNotFound } from '../../../../../metaData';
+import { getProgramAndStageFromEvent, getEventProgramThrowIfNotFound } from '../../../../metaData';
 import {
     getRulesActionsForEvent,
     getCurrentClientValues,
     getCurrentClientMainData,
 
-} from '../../../../../rules/actionsCreator';
-import type { FieldData } from '../../../../../rules/actionsCreator';
-import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
+} from '../../../../rules/actionsCreator';
+import type { FieldData } from '../../../../rules/actionsCreator';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 
 export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
     action$.pipe(

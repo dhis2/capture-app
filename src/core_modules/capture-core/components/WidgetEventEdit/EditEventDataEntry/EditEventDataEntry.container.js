@@ -1,54 +1,41 @@
 // @flow
 import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
 import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
-import { withLoadingIndicator } from '../../../../HOC/withLoadingIndicator';
-import { withErrorMessageHandler } from '../../../../HOC/withErrorMessageHandler';
-import { programCollection } from '../../../../metaDataMemoryStores/programCollection/programCollection';
+import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import {
     startAsyncUpdateFieldForEditEvent,
     startRunRulesOnUpdateForEditSingleEvent,
-    requestSaveReturnToMainPage,
-    startCancelSaveReturnToMainPage,
     requestAddNoteForEditSingleEvent,
     batchActionTypes,
+} from '../DataEntry/editEventDataEntry.actions';
+import { type RenderFoundation } from '../../../metaData';
+
+import {
+    setCurrentDataEntry, startRunRulesPostUpdateField,
+} from '../../DataEntry/actions/dataEntry.actions';
+
+import {
+    requestSaveEditEventDataEntry,
+    cancelEditEventDataEntry,
 } from './editEventDataEntry.actions';
-import { startRunRulesPostUpdateField } from '../../../DataEntry';
-import { type RenderFoundation } from '../../../../metaData';
 
-const getFormFoundation = (state: ReduxState) => {
-    const programId = state.currentSelections.programId;
-    const program = programCollection.get(programId);
-    if (!program) {
-        log.error(errorCreator('programId not found')({ method: 'getFormFoundation' }));
-        return null;
-    }
+import {
+    viewEventIds,
+} from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 
-
-    // $FlowFixMe[prop-missing] automated comment
-    const stage = program.stage;
-    if (!stage) {
-        log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
-        return null;
-    }
-
-    return stage.stageForm;
+const mapStateToProps = (state: ReduxState) => {
+    const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
+    return {
+        ready: !state.activePage.isDataEntryLoading && !eventDetailsSection.loading,
+    };
 };
-
-const mapStateToProps = (state: ReduxState) => ({
-    formFoundation: getFormFoundation(state),
-    ready: !state.editEventPage.dataEntryIsLoading,
-    error: state.editEventPage.dataEntryLoadError,
-});
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
     onUpdateDataEntryField: (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();
-
         dispatch(batchActions([
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
@@ -87,16 +74,18 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
-        dispatch(requestSaveReturnToMainPage(eventId, dataEntryId, formFoundation));
+        dispatch(requestSaveEditEventDataEntry(eventId, dataEntryId, formFoundation));
     },
     onCancel: () => {
         window.scrollTo(0, 0);
-        dispatch(startCancelSaveReturnToMainPage());
+        dispatch(batchActions([
+            cancelEditEventDataEntry(),
+            setCurrentDataEntry(viewEventIds.dataEntryId, viewEventIds.itemId),
+        ]));
     },
 });
 
-// $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
 export const EditEventDataEntry = connect(mapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(withErrorMessageHandler()(EditEventDataEntryComponent)),
+    withLoadingIndicator()(EditEventDataEntryComponent),
 );

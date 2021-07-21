@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core';
 import { spacersNum } from '@dhis2/ui';
 import { Widget } from '../Widget';
 import type { Props } from './widgetEventEdit.types';
-import { EditEventDataEntry } from '../Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/';
-import { ViewEventDataEntry } from '../Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/';
+import { EditEventDataEntry } from './EditEventDataEntry/';
+import { ViewEventDataEntry } from './ViewEventDataEntry/';
 import { pageMode } from '../Pages/EnrollmentEvent/EnrollmentEventPage.const';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 

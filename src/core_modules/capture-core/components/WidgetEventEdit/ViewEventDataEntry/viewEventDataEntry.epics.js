@@ -18,8 +18,8 @@ import {
 
 import {
     actionTypes as viewEventPageActionTypes,
-} from '../../ViewEventComponent/viewEvent.actions';
-import { getProgramAndStageFromEvent } from '../../../../../metaData';
+} from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { getProgramAndStageFromEvent } from '../../../metaData';
 
 export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
     action$.pipe(
