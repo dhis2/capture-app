@@ -7,6 +7,8 @@ export {
     dataElementTypes,
     Unique as DataElementUnique,
     uniqueScope as dataElementUniqueScope,
+    statusTypes,
+    translatedStatusTypes,
 } from './DataElement';
 export { Icon } from './Icon';
 export {

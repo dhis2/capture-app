@@ -6,6 +6,7 @@ import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
 
+
 function convertDateForView(rawValue: string): string {
     const momentDate = moment(rawValue);
     return convertMomentToDateFormatString(momentDate);
@@ -41,6 +42,7 @@ function convertResourceForView(clientValue: FileClientValue) {
         </a>
     );
 }
+
 
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,

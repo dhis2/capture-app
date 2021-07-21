@@ -576,6 +576,9 @@ msgstr ""
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
@@ -967,6 +970,30 @@ msgstr ""
 msgid "Person Profile"
 msgstr ""
 
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
+msgid "Report date"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr ""
 
@@ -974,6 +1001,18 @@ msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr ""
+
+msgid "Overdue"
+msgstr ""
+
+msgid "Skipped"
 msgstr ""
 
 msgid "Program not found"
