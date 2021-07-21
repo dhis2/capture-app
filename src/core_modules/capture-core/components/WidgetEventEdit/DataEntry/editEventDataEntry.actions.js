@@ -14,6 +14,8 @@ import {
 import { getDataEntryMeta, validateDataEntryValues } from '../../DataEntry/actions/dataEntryLoad.utils';
 import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { addFormData } from '../../D2Form/actions/form.actions';
+import { EventProgram, TrackerProgram } from '../../../metaData/Program';
+import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',
@@ -80,7 +82,7 @@ export const openEventForEditInDataEntry = (
     },
     orgUnit: Object,
     foundation: RenderFoundation,
-    program: Program,
+    program: Program | EventProgram | TrackerProgram,
 ) => {
     const dataEntryId = editEventIds.dataEntryId;
     const itemId = editEventIds.itemId;
@@ -117,8 +119,9 @@ export const openEventForEditInDataEntry = (
                 eventId: eventContainer.event.eventId,
             },
         );
-
     const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
+    const stage = program instanceof TrackerProgram ? getStageFromEvent(eventContainer.event)?.stage : undefined;
+
     return [
         ...dataEntryActions,
         ...getRulesActionsForEvent(
@@ -128,6 +131,7 @@ export const openEventForEditInDataEntry = (
             orgUnit,
             eventDataForRulesEngine,
             [eventDataForRulesEngine],
+            stage,
         ),
         actionCreator(actionTypes.OPEN_EVENT_FOR_EDIT_IN_DATA_ENTRY)(),
     ];

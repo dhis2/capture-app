@@ -9,6 +9,8 @@ import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
 import { dataElementTypes } from '../../../metaData';
 import { convertClientToForm } from '../../../converters';
 import type { ClientEventContainer } from '../../../events/eventRequests';
+import { TrackerProgram } from '../../../metaData/Program';
+import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 
 export const actionTypes = {
     VIEW_EVENT_DATA_ENTRY_LOADED: 'ViewEventDataEntryLoadedForViewSingleEvent',
@@ -58,6 +60,8 @@ export const loadViewEventDataEntry =
 
         // $FlowFixMe[cannot-spread-indexer] automated comment
         const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
+        const stage = program instanceof TrackerProgram ? getStageFromEvent(eventContainer.event)?.stage : undefined;
+
         return [
             ...dataEntryActions,
             ...getRulesActionsForEvent(
@@ -67,6 +71,7 @@ export const loadViewEventDataEntry =
                 orgUnit,
                 eventDataForRulesEngine,
                 [eventDataForRulesEngine],
+                stage,
             ),
             actionCreator(actionTypes.VIEW_EVENT_DATA_ENTRY_LOADED)({
                 loadedValues: { dataEntryValues, formValues, eventContainer },

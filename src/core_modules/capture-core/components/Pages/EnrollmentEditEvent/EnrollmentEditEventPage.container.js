@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual } from 'react-redux';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
@@ -18,12 +18,19 @@ export const EnrollmentEditEventPage = () => {
         }),
         shallowEqual,
     );
-    const [mode] = useState(pageMode.VIEW);
     const { program } = useProgramInfo(programId);
+    const showEditEvent = useSelector(
+        ({ viewEventPage }) =>
+            viewEventPage?.eventDetailsSection?.showEditEvent,
+    );
     const programStage = [...program.stages?.values()].find(
         item => item.id === stageId,
     );
+
     return (
-        <EnrollmentEditEventPageComponent mode={mode} programStage={programStage} />
+        <EnrollmentEditEventPageComponent
+            mode={showEditEvent ? pageMode.EDIT : pageMode.VIEW}
+            programStage={programStage}
+        />
     );
 };

@@ -15,3 +15,4 @@ export { getScopeFromScopeId } from './getScopeFromScopeId';
 export { programTypes, scopeTypes } from './constants';
 export { getAttributesFromScopeId } from './getAttributesFromScopeId';
 export { getScopeInfo } from './getScopeInfo';
+export { getProgramThrowIfNotFound } from './getProgramThrowIfNotFound';
