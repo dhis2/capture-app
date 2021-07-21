@@ -27,6 +27,7 @@ const styles = {
     row: {
         maxWidth: '100%',
         whiteSpace: 'nowrap',
+        cursor: 'pointer',
     },
     container: {
         display: 'flex',
@@ -41,7 +42,7 @@ const styles = {
     },
 };
 
-const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) => {
+const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventClick }: Props) => {
     const defaultSortState = {
         columnName: 'eventDate',
         sortDirection: SORT_DIRECTION.DESC,
@@ -105,6 +106,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
             .map((row, index) => {
                 const cells = headerColumns.map(({ id }) => (<DataTableCell
                     key={id}
+                    onClick={() => onEventClick(events[index].event, events[index].programStage)}
                 >
                     <div>
                         { // $FlowFixMe

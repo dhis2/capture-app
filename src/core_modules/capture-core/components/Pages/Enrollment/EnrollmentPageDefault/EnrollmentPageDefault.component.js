@@ -47,6 +47,7 @@ export const EnrollmentPageDefaultPlain = ({
     widgetEffects,
     hideWidgets,
     classes,
+    onEventClick,
 }: PlainProps) => (
     <>
         <div className={classes.title}>Enrollment Dashboard</div>
@@ -55,6 +56,7 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetStagesAndEvents
                     stages={stages}
                     events={events}
+                    onEventClick={onEventClick}
                 />
             </div>
             <div className={classes.rightColumn}>
