@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-02T15:44:27.650Z\n"
-"PO-Revision-Date: 2021-07-02T15:44:27.650Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
+"PO-Revision-Date: 2021-07-06T09:57:52.624Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -585,21 +585,6 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
-msgid "Show all events"
-msgstr ""
-
-msgid "Edit event"
-msgstr ""
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
-
-msgid "Event could not be loaded"
-msgstr ""
-
-msgid "Organisation unit could not be loaded"
-msgstr ""
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
@@ -647,6 +632,9 @@ msgid "Create a new event in this program."
 msgstr ""
 
 msgid "View working list in this program."
+msgstr ""
+
+msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
@@ -792,6 +780,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Edit event"
+msgstr ""
+
 msgid "Event details"
 msgstr ""
 
@@ -810,6 +801,18 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
+msgstr ""
+
+msgid "Show all events"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+
+msgid "Event could not be loaded"
+msgstr ""
+
+msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "Possible duplicates found"

@@ -5,11 +5,13 @@ import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
 } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import { eventWorkingListsActionTypes } from '../../components/EventWorkingLists';
-import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
-import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { actionTypes as editEventActionTypes }
+    from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
+import { actionTypes as viewEventActionTypes }
+    from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
-} from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
+} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
 import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as setCurrentSelectionsActionTypes,

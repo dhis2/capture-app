@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -588,21 +588,6 @@ msgstr "Фикр ёзиш ҳуқуқига эга эмассиз"
 msgid "Write comment"
 msgstr "Фикр ёзинг"
 
-msgid "Show all events"
-msgstr "Барча ҳодиса/тадбирларни кўрсатиш"
-
-msgid "Edit event"
-msgstr "Ҳодиса/тадбирни таҳрирланг"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Ҳодиса/тадбирни юклаб бўлмади. Унинг мавжудлигига ишончингиз комилми?"
-
-msgid "Event could not be loaded"
-msgstr "Ҳодиса/тадбирни юклаб бўлмади"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Ташкилий бўлимни юклаб бўлмади"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 "\"{{teiId}}\" идентификатори билан кузатувдаги объект намунаси мавжуд эмас"
@@ -663,6 +648,9 @@ msgstr "Ушбу дастурда янги ҳодиса/тадбирни яра�
 
 msgid "View working list in this program."
 msgstr "Ушбу дастурдаги ишчи рўйхатни кўриб чиқиш"
+
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
@@ -904,6 +892,9 @@ msgstr "ҳодиса/тадбир"
 msgid "You dont have access to edit this event"
 msgstr "Ушбу ҳодиса/тадбирни таҳрирлаш ҳуқуқига эга эмассиз"
 
+msgid "Edit event"
+msgstr "Ҳодиса/тадбирни таҳрирланг"
+
 msgid "Event details"
 msgstr "Ҳодиса/тадбир тафсилотлари"
 
@@ -925,6 +916,18 @@ msgstr "Ҳодиса/тадбир {{name}} га бириктирилди"
 
 msgid "Feedbacks"
 msgstr "Қайта алоқалар"
+
+msgid "Show all events"
+msgstr "Барча ҳодиса/тадбирларни кўрсатиш"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Ҳодиса/тадбирни юклаб бўлмади. Унинг мавжудлигига ишончингиз комилми?"
+
+msgid "Event could not be loaded"
+msgstr "Ҳодиса/тадбирни юклаб бўлмади"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Ташкилий бўлимни юклаб бўлмади"
 
 msgid "Possible duplicates found"
 msgstr "Бўлиши мумкин бўлган нусхалар топилди"
@@ -1014,10 +1017,10 @@ msgid "Last updated {{date}}"
 msgstr " {{date}}да охирги марта янгиланган"
 
 msgid "Error"
-msgstr ""
+msgstr "Хатолик"
 
 msgid "Warning"
-msgstr ""
+msgstr "Огоҳлантириш"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

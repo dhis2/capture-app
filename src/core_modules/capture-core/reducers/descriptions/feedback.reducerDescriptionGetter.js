@@ -14,7 +14,7 @@ import {
 } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import {
     actionTypes as editEventDataEntryActionTypes,
-} from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
+} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
 import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
 import {
     actionTypes as viewEventNewRelationshipActionTypes,

@@ -3,17 +3,17 @@
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
 # Bram Piot <bram.piot@gmail.com>, 2020
 # Yayra Gomado <ygomado@hispwca.org>, 2021
-# phil_dhis2, 2021
 # Yao Selom Saka <ysaka@hispwca.org>, 2021
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -603,21 +603,6 @@ msgstr "Vous n'avez pas accès aux commentaires"
 msgid "Write comment"
 msgstr "Ecrire commentaire"
 
-msgid "Show all events"
-msgstr "Afficher tous les événements"
-
-msgid "Edit event"
-msgstr "Modifier un événement"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "L'événement n'a pas pu être chargé. Etes-vous sûr qu'il existe ?"
-
-msgid "Event could not be loaded"
-msgstr "L'événement n'a pas pu être chargé"
-
-msgid "Organisation unit could not be loaded"
-msgstr "L'unité d'organisation n'a pas pu être chargée"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "L'entité suivie avec id \"{{teiId}}\" n'existe pas"
 
@@ -680,6 +665,9 @@ msgstr "Créez un nouvel événement dans ce programme."
 
 msgid "View working list in this program."
 msgstr "Afficher la liste de travail dans ce programme."
+
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
@@ -921,6 +909,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "Vous n'êtes pas autorisé à modifier cet événement"
 
+msgid "Edit event"
+msgstr "Modifier un événement"
+
 msgid "Event details"
 msgstr "Détails de l'évènement"
 
@@ -941,6 +932,18 @@ msgstr "Événement attribué à {{nom}}"
 
 msgid "Feedbacks"
 msgstr "Feedbacks"
+
+msgid "Show all events"
+msgstr "Afficher tous les événements"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "L'événement n'a pas pu être chargé. Etes-vous sûr qu'il existe ?"
+
+msgid "Event could not be loaded"
+msgstr "L'événement n'a pas pu être chargé"
+
+msgid "Organisation unit could not be loaded"
+msgstr "L'unité d'organisation n'a pas pu être chargée"
 
 msgid "Possible duplicates found"
 msgstr "Doublons éventuellement détectés"
@@ -1031,10 +1034,10 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 msgid "Warning"
-msgstr ""
+msgstr "Attention"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

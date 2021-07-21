@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -571,21 +571,6 @@ msgstr "你没有权限写备注"
 msgid "Write comment"
 msgstr "写备注"
 
-msgid "Show all events"
-msgstr "显示所有事件"
-
-msgid "Edit event"
-msgstr "编辑事件"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "事件不能载入"
-
-msgid "Event could not be loaded"
-msgstr "事件不能载入"
-
-msgid "Organisation unit could not be loaded"
-msgstr "机构不能载入"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
@@ -635,6 +620,9 @@ msgid "Create a new event in this program."
 msgstr ""
 
 msgid "View working list in this program."
+msgstr ""
+
+msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
@@ -861,6 +849,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "你没有访问该事件的权限"
 
+msgid "Edit event"
+msgstr "编辑事件"
+
 msgid "Event details"
 msgstr ""
 
@@ -880,6 +871,18 @@ msgstr "事件被分配到  {{name}}"
 
 msgid "Feedbacks"
 msgstr "反馈"
+
+msgid "Show all events"
+msgstr "显示所有事件"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "事件不能载入"
+
+msgid "Event could not be loaded"
+msgstr "事件不能载入"
+
+msgid "Organisation unit could not be loaded"
+msgstr "机构不能载入"
 
 msgid "Possible duplicates found"
 msgstr "发现可能的重复"
@@ -968,10 +971,10 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

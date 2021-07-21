@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -572,21 +572,6 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
-msgid "Show all events"
-msgstr ""
-
-msgid "Edit event"
-msgstr ""
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
-
-msgid "Event could not be loaded"
-msgstr ""
-
-msgid "Organisation unit could not be loaded"
-msgstr ""
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
@@ -636,6 +621,9 @@ msgid "Create a new event in this program."
 msgstr ""
 
 msgid "View working list in this program."
+msgstr ""
+
+msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
@@ -862,6 +850,9 @@ msgstr "Evento"
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Edit event"
+msgstr ""
+
 msgid "Event details"
 msgstr "Detalhes de evento"
 
@@ -880,6 +871,18 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
+msgstr ""
+
+msgid "Show all events"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+
+msgid "Event could not be loaded"
+msgstr ""
+
+msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "Possible duplicates found"
