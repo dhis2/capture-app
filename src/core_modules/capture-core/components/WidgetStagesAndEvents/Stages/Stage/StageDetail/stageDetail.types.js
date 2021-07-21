@@ -6,6 +6,7 @@ export type Props = {|
     events: Array<ApiTEIEvent>,
     dataElements: Array<StageDataElement>,
     eventName: string,
+    onEventClick: (eventId: string, stageId: string) => void,
     ...CssClasses,
 |};
 

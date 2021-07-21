@@ -170,3 +170,7 @@ Then('the sorted list by Report date asc should be displayed', () => {
                 .should('exist');
         });
 });
+
+When(/^the user clicks on an event$/, () => {
+    cy.get('[data-test="stages-and-events-widget"]').find('[data-test="dhis2-uicore-datatablecell"]').eq(4).click();
+});

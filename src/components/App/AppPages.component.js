@@ -16,7 +16,7 @@ export const AppPages = () => (
         <Route path="/search" component={SearchPage} />
         <Route path="/new" component={NewPage} />
         <Route path="/enrollment/stageEvents" component={StageEventListPage} />
-        <Route path="/enrollment/event/edit" component={EnrollmentEventPage} />
+        <Route path="/enrollmentEventEdit" component={EnrollmentEventPage} />
         <Route path="/enrollmentEventNew" component={EnrollmentAddEventPage} />
         <Route path="/enrollment" component={EnrollmentPage} />
         <Route path="/:keys" component={MainPage} />

@@ -10,7 +10,7 @@ const styles = {
         marginBottom: spacersNum.dp16,
     },
 };
-export const StagesPlain = ({ stages, events, classes }: Props) => (
+export const StagesPlain = ({ stages, events, classes, onEventClick }: Props) => (
     <>
         {
             stages
@@ -20,6 +20,7 @@ export const StagesPlain = ({ stages, events, classes }: Props) => (
                         key={stage.id}
                         stage={stage}
                         className={classes.stage}
+                        onEventClick={onEventClick}
                     />
                 ))
         }
