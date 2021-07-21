@@ -27,7 +27,7 @@ import {
     initializeNewRelationship,
 } from '../../NewRelationship/newRelationship.actions';
 import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
-import { eventWorkingListsActionTypes } from '../../../Pages/MainPage/EventWorkingLists';
+import { eventWorkingListsActionTypes } from '../../../EventWorkingLists';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
