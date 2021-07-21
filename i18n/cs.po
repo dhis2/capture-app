@@ -582,21 +582,6 @@ msgstr "Nemáte přístup k psaní komentářů"
 msgid "Write comment"
 msgstr "Napsat komentář"
 
-msgid "Show all events"
-msgstr "Zobrazit všechny události"
-
-msgid "Edit event"
-msgstr "Upravit událost"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Událost se nepodařilo načíst. Jste si jisti, že existuje?"
-
-msgid "Event could not be loaded"
-msgstr "Událost se nepodařilo načíst"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Organizační jednotku se nepodařilo načíst"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance trasované entity s ID \"{{teiId}}\" neexistuje"
 
@@ -892,6 +877,9 @@ msgstr "událost"
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
 
+msgid "Edit event"
+msgstr "Upravit událost"
+
 msgid "Event details"
 msgstr "Podrobnosti události"
 
@@ -913,6 +901,18 @@ msgstr "Událost přiřazená uživateli {{name}}"
 
 msgid "Feedbacks"
 msgstr "Zpětná vazba"
+
+msgid "Show all events"
+msgstr "Zobrazit všechny události"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Událost se nepodařilo načíst. Jste si jisti, že existuje?"
+
+msgid "Event could not be loaded"
+msgstr "Událost se nepodařilo načíst"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Organizační jednotku se nepodařilo načíst"
 
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"

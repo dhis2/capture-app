@@ -1,3 +1,24 @@
+## [1.34.4](https://github.com/dhis2/capture-app/compare/v1.34.3...v1.34.4) (2021-07-19)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([525037e](https://github.com/dhis2/capture-app/commit/525037e98fd3d4ab76fcede2e731c92c685e6862))
+
+## [1.34.3](https://github.com/dhis2/capture-app/compare/v1.34.2...v1.34.3) (2021-07-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7dfb36b](https://github.com/dhis2/capture-app/commit/7dfb36b2859bb74841a78491bb6f8e31bf0d4bae))
+
+## [1.34.2](https://github.com/dhis2/capture-app/compare/v1.34.1...v1.34.2) (2021-07-15)
+
+
+### Bug Fixes
+
+* DHIS2-10330 Formatted category options api-call to work with multiple options ([554732b](https://github.com/dhis2/capture-app/commit/554732b0a913c483c4337e8df7f8372795373439))
+
 ## [1.34.1](https://github.com/dhis2/capture-app/compare/v1.34.0...v1.34.1) (2021-07-14)
 
 
