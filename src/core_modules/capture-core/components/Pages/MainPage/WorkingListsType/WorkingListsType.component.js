@@ -6,10 +6,15 @@ import { TeiWorkingLists } from '../../../TeiWorkingLists';
 import type { Props } from './workingListsType.types';
 
 export const WorkingListsType = ({ programId, orgUnitId }: Props) => {
-    const { programType } = useProgramInfo(programId);
+    const { program, programType } = useProgramInfo(programId);
     if (programType === programTypes.EVENT_PROGRAM) {
+        const programStageId = [...program.stages.keys()][0];
         return (
-            <EventWorkingListsInit programId={programId} programStageId={'EventProgramStage'} orgUnitId={orgUnitId} />
+            <EventWorkingListsInit
+                programId={programId}
+                programStageId={programStageId}
+                orgUnitId={orgUnitId}
+            />
         );
     }
 

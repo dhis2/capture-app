@@ -21,7 +21,7 @@ export const initEventListEpic = (action$: InputObservable) =>
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
             const { selectedTemplate, columnsMetaForDataFetching, categoryCombinationId, storeId } = action.payload;
-            const { programId, orgUnitId, categories, lastTransaction } = action.payload.context;
+            const { programId, orgUnitId, categories, lastTransaction, programStageId } = action.payload.context;
             const eventQueryCriteria = selectedTemplate.nextCriteria || selectedTemplate.criteria;
             const initialPromise =
                 initEventWorkingListAsync(
@@ -30,6 +30,7 @@ export const initEventListEpic = (action$: InputObservable) =>
                             programId,
                             orgUnitId,
                             categories,
+                            programStageId,
                         },
                         columnsMetaForDataFetching,
                         categoryCombinationId,

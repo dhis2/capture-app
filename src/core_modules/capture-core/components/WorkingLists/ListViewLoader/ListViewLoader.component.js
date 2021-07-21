@@ -33,6 +33,7 @@ const useCalculateTriggerLoad = ({
 
 const useLoadView = ({
     programId,
+    programStageId,
     orgUnitId,
     categories,
     loadedViewContext,
@@ -49,6 +50,7 @@ const useLoadView = ({
 
     const triggerLoad = useCalculateTriggerLoad({
         programId,
+        programStageId,
         orgUnitId,
         categories,
         loadedViewContext,
@@ -70,7 +72,7 @@ const useLoadView = ({
 
         if (triggerLoad) {
             onLoadView(currentTemplate,
-                { programId, orgUnitId, categories },
+                { programId, programStageId, orgUnitId, categories },
             );
         }
         return () => cancelLoadViewIfApplicable();
@@ -79,6 +81,7 @@ const useLoadView = ({
         onLoadView,
         currentTemplate,
         programId,
+        programStageId,
         orgUnitId,
         categories,
         cancelLoadViewIfApplicable,
@@ -101,6 +104,7 @@ export const ListViewLoader = memo<Props>((props: Props) => {
     const {
         currentTemplate,
         programId,
+        programStageId,
         ...passOnProps
     } = props;
 
@@ -108,7 +112,6 @@ export const ListViewLoader = memo<Props>((props: Props) => {
     if (!context) {
         throw Error('missing ListViewLoaderContext');
     }
-
     const {
         sortById,
         sortByDirection,
@@ -125,9 +128,9 @@ export const ListViewLoader = memo<Props>((props: Props) => {
         loadedViewContext,
         viewPreloaded,
     } = context;
-
     const { triggerLoad, viewLoadedOnFirstRun } = useLoadView({
         programId,
+        programStageId,
         orgUnitId,
         categories,
         loadedViewContext,
