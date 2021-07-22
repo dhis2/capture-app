@@ -8,11 +8,7 @@ const styles = {
 
 };
 
-const WidgetManagementsContainer = () => {
-    return (
-        <WidgetManagementsComponent />
-    );
-};
+const WidgetManagementsContainer = () => <WidgetManagementsComponent />;
 
 export const WidgetManagements: ComponentType<$Diff<Props, CssClasses>> =
     withStyles(styles)(WidgetManagementsContainer);
