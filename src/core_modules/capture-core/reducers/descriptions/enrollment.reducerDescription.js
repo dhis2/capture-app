@@ -1,27 +1,30 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { enrollmentActionTypes } from '../../components/Pages/actions/enrollment.actions';
+import { convertMainProperties } from '../../events/getEnrollmentEvents';
 
 const initialReducerValue = {};
-const {
-    SET_ENROLLMENT,
-    UPDATE_ENROLLMENT_EVENTS,
-    ROLLBACK_ENROLLMENT_EVENT,
-    COMMIT_ENROLLMENT_EVENT,
-} = enrollmentActionTypes;
+const { SET_ENROLLMENT, UPDATE_ENROLLMENT_EVENTS, ROLLBACK_ENROLLMENT_EVENT, COMMIT_ENROLLMENT_EVENT } =
+    enrollmentActionTypes;
 
 export const enrollmentDesc = createReducerDescription(
     {
-        [SET_ENROLLMENT]: (state, { payload: { enrollmentSite } }) => ({
-            ...state,
-            ...enrollmentSite,
-        }),
-        [UPDATE_ENROLLMENT_EVENTS]: (
-            state,
-            { payload: { eventId, eventData } },
-        ) => {
+        [SET_ENROLLMENT]: (state, { payload: { enrollmentSite } }) => {
+            const convertedEvents = enrollmentSite.events.reduce(
+                (accEvents, apiEvent) => [...accEvents, convertMainProperties(apiEvent)],
+                [],
+            );
+            const { events, ...data } = enrollmentSite;
+            const convertedEnrollmentSite = { ...data, events: convertedEvents };
+
+            return {
+                ...state,
+                ...convertedEnrollmentSite,
+            };
+        },
+        [UPDATE_ENROLLMENT_EVENTS]: (state, { payload: { eventId, eventData } }) => {
             const events = state.events.map(event =>
-                (event.event === eventId
+                (event.eventId === eventId
                     ? {
                         ...eventData,
                         pendingApiResponse: true,
@@ -33,20 +36,14 @@ export const enrollmentDesc = createReducerDescription(
             return { ...state, events };
         },
         [ROLLBACK_ENROLLMENT_EVENT]: (state, { payload: { eventId } }) => {
-            const events = state.events.map(event =>
-                (event.event === eventId ? event.dataToRollback : event),
-            );
+            const events = state.events.map(event => (event.eventId === eventId ? event.dataToRollback : event));
 
             return { ...state, events };
         },
         [COMMIT_ENROLLMENT_EVENT]: (state, { payload: { eventId } }) => {
             const events = state.events.map((event) => {
-                if (event.event === eventId) {
-                    const {
-                        pendingApiResponse,
-                        dataToRollback,
-                        ...dataToCommit
-                    } = event;
+                if (event.eventId === eventId) {
+                    const { pendingApiResponse, dataToRollback, ...dataToCommit } = event;
                     return dataToCommit;
                 }
                 return event;
