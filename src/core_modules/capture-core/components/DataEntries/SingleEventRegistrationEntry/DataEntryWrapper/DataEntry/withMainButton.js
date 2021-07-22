@@ -6,7 +6,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { newEventSaveTypes } from './newEventSaveTypes';
 import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import { type RenderFoundation } from '../../../../../metaData';
-import { SimpleSplitButton } from '../../../../Buttons';
+import { SimpleSplitButton, Button } from '../../../../Buttons';
 import { getDataEntryHasChanges } from '../../getNewEventDataEntryHasChanges';
 
 type Props = {
@@ -18,6 +18,7 @@ type Props = {
     formFoundation: RenderFoundation,
     finalInProgress?: ?boolean,
     hasRecentlyAddedEvents?: ?boolean,
+    isCreateNew?: ?boolean,
 };
 
 const buttonTypes = {
@@ -40,6 +41,11 @@ const buttonDefinitions = {
         key: buttonTypes.FINISH,
         text: i18n.t('Finish'),
         onClick: () => { props.onCancel(); },
+    }),
+    [buttonTypes.SAVEWITHOUTCOMPLETING]: (props: Props) => ({
+        key: buttonTypes.SAVEWITHOUTCOMPLETING,
+        text: i18n.t('Save without completing'),
+        onClick: () => { console.log('Save without completing'); },
     }),
 };
 
@@ -90,15 +96,37 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             );
         }
 
+        renderCreateNewButton = () => {
+            const { text, ...buttonProps } = this.getButtonDefinition(buttonTypes.SAVEWITHOUTCOMPLETING);
+            return (
+                <div data-test="creat-new-button">
+                    <Button
+                        {...buttonProps}
+                    >
+                        {text}
+                    </Button>
+                </div>);
+        }
+
         render() {
-            const { saveTypes, dataEntryHasChanges, hasRecentlyAddedEvents, onSave, finalInProgress, ...passOnProps } = this.props;
+            const {
+                saveTypes,
+                dataEntryHasChanges,
+                hasRecentlyAddedEvents,
+                isCreateNew,
+                formHorizontal,
+                onSave,
+                finalInProgress,
+                ...passOnProps
+            } = this.props;
             const hasWriteAccess = this.props.formFoundation.access.data.write;
-            const buttons = this.props.formHorizontal ?
+            const buttons = formHorizontal ?
                 this.getFormHorizontalButtons(dataEntryHasChanges, hasRecentlyAddedEvents) :
                 this.getFormVerticalButtons(dataEntryHasChanges, hasRecentlyAddedEvents, saveTypes);
-
             // $FlowFixMe[extra-arg] automated comment
-            const mainButton = this.renderMultiButton(buttons, hasWriteAccess, finalInProgress);
+            const mainButton = isCreateNew ?
+                this.renderCreateNewButton() :
+                this.renderMultiButton(buttons, hasWriteAccess);
             return (
                 // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
@@ -116,11 +144,13 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     const key = getDataEntryKey(props.id, itemId);
     const dataEntryHasChanges = getDataEntryHasChanges(state);
     const hasRecentlyAddedEvents = state.recentlyAddedEvents && Object.keys(state.recentlyAddedEvents).length > 0;
+    const isCreateNew = state.router.location.pathname === '/enrollmentEventNew';
     return {
         saveTypes: state.newEventPage.saveTypes,
         finalInProgress: state.dataEntriesUI[key] && state.dataEntriesUI[key].finalInProgress,
         dataEntryHasChanges,
         hasRecentlyAddedEvents,
+        isCreateNew,
     };
 };
 

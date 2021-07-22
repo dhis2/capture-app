@@ -46,6 +46,7 @@ import { withDataEntryFieldIfApplicable } from '../../../../DataEntry/dataEntryF
 import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
 import { withTransformPropName } from '../../../../../HOC';
 import { InfoIconText } from '../../../../InfoIconText';
+import { withCompleteButton } from '../../../../DataEntry/withCompleteButton';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -418,7 +419,9 @@ const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
-const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
+const CompletableDataEntry = withCompleteButton()(SaveableDataEntry);
+const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CompletableDataEntry);
+
 
 type Props = {
     formFoundation: RenderFoundation,
