@@ -42,6 +42,7 @@ const buttonDefinitions = {
         text: i18n.t('Finish'),
         onClick: () => { props.onCancel(); },
     }),
+    // $FlowFixMe
     [buttonTypes.SAVEWITHOUTCOMPLETING]: (props: Props) => ({
         key: buttonTypes.SAVEWITHOUTCOMPLETING,
         text: i18n.t('Save without completing'),
