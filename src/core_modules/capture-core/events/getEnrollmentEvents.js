@@ -47,7 +47,7 @@ const mapEventInputKeyToOutputKey = {
     enrollment: 'enrollmentId',
 };
 
-export function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
+function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
     return Object
         .keys(apiEvent)
         .reduce((accEvent, inputKey) => {
