@@ -427,10 +427,12 @@ type Props = {
     formFoundation: RenderFoundation,
     programName: string,
     orgUnitName: string,
+    stageName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: Object,
     onSetSaveTypes: (saveTypes: ?Array<$Values<typeof newEventSaveTypes>>) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSaveEvent: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     onCancel: () => void,
@@ -516,13 +518,16 @@ class NewEventDataEntry extends Component<Props> {
             this.props.onSaveAndAddAnother(itemId, dataEntryId, formFoundation);
         } else if (saveType === newEventSaveTypes.SAVEANDEXIT) {
             this.props.onSave(itemId, dataEntryId, formFoundation);
+        } else if (saveType === newEventSaveTypes.SAVEWITHOUTCOMPLETING) {
+            this.props.onSaveEvent(itemId, dataEntryId, formFoundation);
         }
     }
 
     getSavingText() {
-        const { classes, orgUnitName, programName } = this.props;
+        const { classes, orgUnitName, programName, stageName } = this.props;
         const firstPart = `${i18n.t('Saving to')} `;
-        const secondPart = ` ${i18n.t('in')} `;
+        const secondPart = ` ${i18n.t('for')} `;
+        const thirdPart = ` ${i18n.t('in')} `;
 
         return (
             <span>
@@ -530,9 +535,13 @@ class NewEventDataEntry extends Component<Props> {
                 <span
                     className={classes.savingContextNames}
                 >
-                    {programName}
+                    {stageName}
                 </span>
                 {secondPart}
+                <span className={classes.savingContextNames}>
+                    {programName}
+                </span>
+                {thirdPart}
                 <span
                     className={classes.savingContextNames}
                 >

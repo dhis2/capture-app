@@ -41,6 +41,9 @@ export const actionTypes = {
     TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED: 'TeiForNewEventRelationshipSaved',
     SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS_TEI: 'SaveFailedForNewEventRelationshipTei',
     SCROLLED_TO_RELATIONSHIPS: 'NewEventScrolledToRelationships',
+    REQUEST_SAVE_NEW_EVENT: 'RequestSaveNewEvent',
+    START_SAVE_NEW_EVENT: 'StartSavenewEvent',
+    SAVE_FAILED_FOR_NEW_EVENT: 'SaveFailedForNewEvent',
 };
 
 export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Object}) =>
@@ -120,6 +123,13 @@ export const addNewEventNote = (itemId: string, dataEntryId: string, note: strin
 
 export const requestSaveNewEventAddAnother = (eventId: string, dataEntryId: string, formFoundation: Object) =>
     actionCreator(actionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER)({
+        eventId,
+        dataEntryId,
+        formFoundation,
+    }, { skipLogging: ['formFoundation'] });
+
+export const requestSaveNewEvent = (eventId: string, dataEntryId: string, formFoundation: Object) =>
+    actionCreator(actionTypes.REQUEST_SAVE_NEW_EVENT)({
         eventId,
         dataEntryId,
         formFoundation,
