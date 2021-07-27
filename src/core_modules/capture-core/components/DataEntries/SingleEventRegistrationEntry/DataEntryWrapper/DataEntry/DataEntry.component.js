@@ -432,7 +432,7 @@ type Props = {
     onStartAsyncUpdateField: Object,
     onSetSaveTypes: (saveTypes: ?Array<$Values<typeof newEventSaveTypes>>) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
-    onSaveEvent: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSaveEventInStage: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     onCancel: () => void,
@@ -519,7 +519,7 @@ class NewEventDataEntry extends Component<Props> {
         } else if (saveType === newEventSaveTypes.SAVEANDEXIT) {
             this.props.onSave(itemId, dataEntryId, formFoundation);
         } else if (saveType === newEventSaveTypes.SAVEWITHOUTCOMPLETING) {
-            this.props.onSaveEvent(itemId, dataEntryId, formFoundation);
+            this.props.onSaveEventInStage(itemId, dataEntryId, formFoundation);
         }
     }
 

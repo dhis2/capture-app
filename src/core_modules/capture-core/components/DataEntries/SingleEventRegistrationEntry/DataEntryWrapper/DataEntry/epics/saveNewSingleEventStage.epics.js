@@ -1,21 +1,13 @@
 // @flow
-import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
+import { push } from 'connected-react-router';
 import { map } from 'rxjs/operators';
-import uuid from 'd2-utilizr/lib/uuid';
-import { moment } from 'capture-core-utils/moment/momentResolver';
 import {
     actionTypes as newEventDataEntryActionTypes,
-    batchActionTypes as newEventDataEntryBatchActionTypes,
-    startSaveNewEventAddAnother,
+    startSaveNewEventAndReturnToList,
 } from '../actions/dataEntry.actions';
 
 import {
-    newRecentlyAddedEvent,
-} from '../../RecentlyAddedEventsList/recentlyAddedEventsList.actions';
-
-import {
-    prependListItem,
     removeListItem,
 } from '../../RecentlyAddedEventsList';
 
@@ -25,7 +17,7 @@ import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.co
 
 export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT),
+        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map((action) => {
             const state = store.value;
             const { dataEntryId, eventId, formFoundation } = action.payload;
@@ -35,25 +27,25 @@ export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStor
                 = getNewEventClientValues(state, dataEntryKey, formFoundation);
             const serverData =
                 getAddEventEnrollmentServerData(state, formFoundation, formClientValues, mainDataClientValues);
-            const clientEvent = {
-                ...mainDataClientValues,
-                eventId: uuid(),
-                programId: state.currentSelections.programId,
-                programStageId: formFoundation.id,
-                orgUnitId: state.currentSelections.orgUnitId,
-            };
-            const clientEventValues = { ...formClientValues, created: moment().toISOString() };
+
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
-            return batchActions([
-                startSaveNewEventAddAnother(serverData, relationshipData, state.currentSelections, clientEvent.eventId),
-                newRecentlyAddedEvent(clientEvent, clientEventValues),
-                prependListItem(listId, clientEvent.eventId),
-            ], newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH);
+            return startSaveNewEventAndReturnToList(serverData, relationshipData, state.currentSelections);
         }));
+
+export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.pipe(
+        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
+        map(() => {
+            const state = store.value;
+            const { enrollmentId, programId, orgUnitId, teiId } = state.router.location.query;
+
+            return push(`/enrollment?programId=${programId}&orgUnitId=${orgUnitId}&teiId=${teiId}&enrollmentId=${enrollmentId}`);
+        }));
+
 
 export const saveNewEventStageFailedEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT),
+        ofType(newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_IN_STAGE),
         map((action) => {
             const clientId = action.meta.clientId;
             return removeListItem(listId, clientId);

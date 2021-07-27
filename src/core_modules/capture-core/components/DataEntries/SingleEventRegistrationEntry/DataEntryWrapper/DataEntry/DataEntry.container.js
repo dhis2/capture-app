@@ -16,7 +16,7 @@ import {
     addNewEventNote,
     newEventOpenNewRelationship,
     scrolledToRelationships,
-    requestSaveNewEvent,
+    requestSaveNewEventInStage,
 } from './actions/dataEntry.actions';
 import {
     makeProgramNameSelector,
@@ -106,9 +106,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onScrollToRelationships: () => {
         dispatch(scrolledToRelationships());
     },
-    onSaveEvent: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+    onSaveEventInStage: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
-        dispatch(requestSaveNewEvent(eventId, dataEntryId, formFoundation));
+        dispatch(requestSaveNewEventInStage(eventId, dataEntryId, formFoundation));
     },
 });
 

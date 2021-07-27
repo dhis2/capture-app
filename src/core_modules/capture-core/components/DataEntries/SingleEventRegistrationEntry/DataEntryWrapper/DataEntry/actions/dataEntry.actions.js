@@ -10,6 +10,7 @@ export const batchActionTypes = {
     RESET_DATA_ENTRY_ACTIONS_BATCH: 'ResetDataEntryForNewEventActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForNewSingleEventActionsBatch',
     SAVE_NEW_EVENT_ADD_ANOTHER_BATCH: 'SaveNewEventAddAnotherBatch',
+    SAVE_NEW_EVENT_IN_STAGE_BATCH: 'SaveNewEventInStageBatch',
 };
 
 export const actionTypes = {
@@ -41,9 +42,10 @@ export const actionTypes = {
     TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED: 'TeiForNewEventRelationshipSaved',
     SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS_TEI: 'SaveFailedForNewEventRelationshipTei',
     SCROLLED_TO_RELATIONSHIPS: 'NewEventScrolledToRelationships',
-    REQUEST_SAVE_NEW_EVENT: 'RequestSaveNewEvent',
-    START_SAVE_NEW_EVENT: 'StartSavenewEvent',
-    SAVE_FAILED_FOR_NEW_EVENT: 'SaveFailedForNewEvent',
+    REQUEST_SAVE_NEW_EVENT_IN_STAGE: 'RequestSaveNewEventInStage',
+    START_SAVE_NEW_EVENT_AND_RETURN_TO_LIST: 'StartSaveNewEventAndReturnToList',
+    SAVE_FAILED_FOR_NEW_EVENT_IN_STAGE: 'SaveFailedForNewEventInStage',
+    NEW_EVENT_SAVED_AFTER_RETURN_TO_LIST: 'NewEventSavedAfterReturnToList',
 };
 
 export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Object}) =>
@@ -128,8 +130,8 @@ export const requestSaveNewEventAddAnother = (eventId: string, dataEntryId: stri
         formFoundation,
     }, { skipLogging: ['formFoundation'] });
 
-export const requestSaveNewEvent = (eventId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.REQUEST_SAVE_NEW_EVENT)({
+export const requestSaveNewEventInStage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
+    actionCreator(actionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE)({
         eventId,
         dataEntryId,
         formFoundation,
@@ -157,8 +159,31 @@ export const startSaveNewEventAddAnother =
     });
 };
 
+export const startSaveNewEventAndReturnToList =
+(
+    serverData: Object,
+    relationshipData: ?Object,
+    selections: Object,
+) => {
+    const actionType = actionTypes.START_SAVE_NEW_EVENT_AND_RETURN_TO_LIST;
+
+    return actionCreator(actionTypes.START_SAVE_NEW_EVENT_AND_RETURN_TO_LIST)({ selections }, {
+        offline: {
+            effect: {
+                url: 'events',
+                method: effectMethods.POST,
+                data: serverData,
+            },
+            commit: { type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS, meta: { selections, relationshipData, triggerAction: actionType } },
+            rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_IN_STAGE, meta: { selections } },
+        },
+    });
+};
 export const newEventSavedAddAnother = (selections: Object) =>
     actionCreator(actionTypes.NEW_EVENT_SAVED_ADD_ANOTHER)(null, { selections });
+
+export const newEventReturnToList = (selections: Object) =>
+    actionCreator(actionTypes.NEW_EVENT_SAVED_AFTER_RETURN_TO_LIST)(null, { selections });
 
 export const startAsyncUpdateFieldForNewEvent = (
     innerAction: ReduxAction<any, any>,

@@ -14,6 +14,7 @@ import {
     saveNewEventAddAnotherFailedEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,
+    saveNewEventInStageLocationChangeEpic,
     addNoteForNewSingleEventEpic,
     openRelationshipForNewSingleEventEpic,
     addRelationshipForNewSingleEventEpic,
@@ -322,4 +323,5 @@ export const epics = combineEpics(
     checkForDuplicateEpic,
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,
+    saveNewEventInStageLocationChangeEpic,
 );

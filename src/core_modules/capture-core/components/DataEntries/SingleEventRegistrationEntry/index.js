@@ -31,6 +31,7 @@ export {
 export {
     saveNewEventStageEpic,
     saveNewEventStageFailedEpic,
+    saveNewEventInStageLocationChangeEpic,
 } from './DataEntryWrapper/DataEntry/epics/saveNewSingleEventStage.epics';
 export {
     addNoteForNewSingleEventEpic,
