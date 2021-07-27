@@ -51,7 +51,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
             key={item.id}
             className={classes.listItem}
         >
-            {item.key}{item.value ? `: ${item.value}` : null}
+            {item.key}{item.key && item.value ? ': ' : null}{item.value}
         </li>
     );
 
@@ -72,7 +72,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
             <ul className={classes.unorderedList}>
                 {widgetData.map((rule: WidgetData, index: number) => {
                     if (typeof rule === 'object') {
-                        if (rule.key) {
+                        if (rule.key || rule.value) {
                             return renderKeyValue(rule);
                         } else if (rule.message) {
                             return renderTextObject(rule);

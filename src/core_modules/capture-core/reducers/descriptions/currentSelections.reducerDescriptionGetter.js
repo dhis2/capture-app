@@ -6,7 +6,7 @@ import {
 } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import {
     actionTypes as editEventActionTypes,
-} from '../../components/Pages/EditEvent/editEvent.actions';
+} from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 import {
     actionTypes as viewEventActionTypes,
 } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';

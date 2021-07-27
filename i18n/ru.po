@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -593,21 +593,6 @@ msgstr "У вас не достаточно прав для написания �
 msgid "Write comment"
 msgstr "Написать комментарий"
 
-msgid "Show all events"
-msgstr "Показать все события"
-
-msgid "Edit event"
-msgstr "Редактировать событие"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Событие не может быть загружена. Вы уверены что событие существует?"
-
-msgid "Event could not be loaded"
-msgstr "Событие не может быть загружено"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Не могу загрузить Организационную единицу"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
@@ -657,6 +642,9 @@ msgid "Create a new event in this program."
 msgstr ""
 
 msgid "View working list in this program."
+msgstr ""
+
+msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
@@ -887,6 +875,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "У вас нет прав на исправление данного события"
 
+msgid "Edit event"
+msgstr "Редактировать событие"
+
 msgid "Event details"
 msgstr "Детали события"
 
@@ -908,6 +899,18 @@ msgstr "Событие назначен: {{name}}"
 
 msgid "Feedbacks"
 msgstr "Отзывы"
+
+msgid "Show all events"
+msgstr "Показать все события"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Событие не может быть загружена. Вы уверены что событие существует?"
+
+msgid "Event could not be loaded"
+msgstr "Событие не может быть загружено"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Не могу загрузить Организационную единицу"
 
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты"
@@ -997,10 +1000,10 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "Ошибка"
 
 msgid "Warning"
-msgstr ""
+msgstr "Предупреждение"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
