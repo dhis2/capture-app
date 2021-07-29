@@ -20,7 +20,6 @@ import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reduc
 type Props = {
     classes: Object,
     eventId: string,
-    isCreateNew: boolean,
     event: CaptureClientEvent,
     onCompleteEvent: (eventId: string, id: string) => void,
     onCompleteValidationFailed: (eventId: string, id: string) => void,
@@ -197,6 +196,9 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
             } = this.props;
             const options = optionFn ? optionFn(this.props) : {};
 
+            if (!eventId) {
+                return null;
+            }
 
             return (
                 <div>
@@ -204,7 +206,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                         completeButton={
-                            (eventId || isCreateNew) && <ProgressButton
+                            <ProgressButton
                                 variant="raised"
                                 onClick={this.handleCompletionAttempt}
                                 color={options.color || 'primary'}
@@ -246,11 +248,9 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
 const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     const eventId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].eventId;
     const key = getDataEntryKey(props.id, eventId);
-    const isCreateNew = state.router.location.pathname === '/enrollmentEventNew';
 
     return {
         eventId,
-        isCreateNew,
         event: eventId && state.events[eventId],
         completionAttempted:
             state.dataEntriesUI &&
