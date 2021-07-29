@@ -43,12 +43,18 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
     };
 };
 
-export const getAddEventEnrollmentServerData = (state: ReduxState, formFoundation: RenderFoundation, formClientValues: Object, mainDataClientValues: Object) => {
+export const getAddEventEnrollmentServerData = (state: ReduxState,
+    formFoundation: RenderFoundation,
+    formClientValues: Object,
+    mainDataClientValues: Object,
+    completed?: boolean,
+) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
     const { teiId, enrollmentId, programId, orgUnitId } = state.router.location.query;
+
     if (!mainDataServerValues.status) {
-        mainDataServerValues.status = 'ACTIVE';
+        mainDataServerValues.status = completed ? 'ACTIVE' : 'COMPLETED';
     }
     if (mainDataServerValues.status === 'COMPLETED') {
         mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());

@@ -130,11 +130,12 @@ export const requestSaveNewEventAddAnother = (eventId: string, dataEntryId: stri
         formFoundation,
     }, { skipLogging: ['formFoundation'] });
 
-export const requestSaveNewEventInStage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
+export const requestSaveNewEventInStage = (eventId: string, dataEntryId: string, formFoundation: Object, completed?: boolean) =>
     actionCreator(actionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE)({
         eventId,
         dataEntryId,
         formFoundation,
+        completed,
     }, { skipLogging: ['formFoundation'] });
 
 export const startSaveNewEventAddAnother =

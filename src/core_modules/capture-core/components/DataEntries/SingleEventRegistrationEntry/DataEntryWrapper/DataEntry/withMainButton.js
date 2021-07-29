@@ -47,6 +47,11 @@ const buttonDefinitions = {
         text: i18n.t('Save without completing'),
         onClick: () => { props.onSave(newEventSaveTypes.SAVEWITHOUTCOMPLETING); },
     }),
+    [buttonTypes.SAVEANDCOMPLETE]: (props: Props) => ({
+        key: buttonTypes.SAVEANDCOMPLETE,
+        text: i18n.t('Complete'),
+        onClick: () => { props.onSave(newEventSaveTypes.SAVEANDCOMPLETE); },
+    }),
 };
 
 const getMainButton = (InnerComponent: React.ComponentType<any>) =>
@@ -108,6 +113,18 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 </div>);
         }
 
+        renderCompleteButton = () => {
+            const { text, ...buttonProps } = this.getButtonDefinition(buttonTypes.SAVEANDCOMPLETE);
+            return (
+                <Button
+                    {...buttonProps}
+                    primary
+                >
+                    {text}
+                </Button>
+            );
+        }
+
         render() {
             const {
                 saveTypes,
@@ -127,12 +144,14 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             const mainButton = isCreateNew ?
                 this.renderCreateNewButton() :
                 this.renderMultiButton(buttons, hasWriteAccess);
+            const completeButton = isCreateNew ? this.renderCompleteButton() : null;
             return (
                 // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     // $FlowFixMe[prop-missing] automated comment
                     ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     mainButton={mainButton}
+                    completeButton={completeButton}
                     {...passOnProps}
                 />
             );

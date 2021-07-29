@@ -46,7 +46,6 @@ import { withDataEntryFieldIfApplicable } from '../../../../DataEntry/dataEntryF
 import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
 import { withTransformPropName } from '../../../../../HOC';
 import { InfoIconText } from '../../../../InfoIconText';
-import { withCompleteButton } from '../../../../DataEntry/withCompleteButton';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -419,8 +418,7 @@ const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
-const CompletableDataEntry = withCompleteButton()(SaveableDataEntry);
-const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CompletableDataEntry);
+const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
 
 
 type Props = {
@@ -432,7 +430,7 @@ type Props = {
     onStartAsyncUpdateField: Object,
     onSetSaveTypes: (saveTypes: ?Array<$Values<typeof newEventSaveTypes>>) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
-    onSaveEventInStage: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSaveEventInStage: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => void,
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     onCancel: () => void,
@@ -520,6 +518,8 @@ class NewEventDataEntry extends Component<Props> {
             this.props.onSave(itemId, dataEntryId, formFoundation);
         } else if (saveType === newEventSaveTypes.SAVEWITHOUTCOMPLETING) {
             this.props.onSaveEventInStage(itemId, dataEntryId, formFoundation);
+        } else if (saveType === newEventSaveTypes.SAVEANDCOMPLETE) {
+            this.props.onSaveEventInStage(itemId, dataEntryId, formFoundation, true);
         }
     }
 

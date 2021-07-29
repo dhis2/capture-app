@@ -20,13 +20,13 @@ export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStor
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map((action) => {
             const state = store.value;
-            const { dataEntryId, eventId, formFoundation } = action.payload;
+            const { dataEntryId, eventId, formFoundation, completed } = action.payload;
             const dataEntryKey = getDataEntryKey(dataEntryId, eventId);
 
             const { formClientValues, mainDataClientValues }
                 = getNewEventClientValues(state, dataEntryKey, formFoundation);
             const serverData =
-                getAddEventEnrollmentServerData(state, formFoundation, formClientValues, mainDataClientValues);
+                getAddEventEnrollmentServerData(state, formFoundation, formClientValues, mainDataClientValues, completed);
 
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return startSaveNewEventAndReturnToList(serverData, relationshipData, state.currentSelections);

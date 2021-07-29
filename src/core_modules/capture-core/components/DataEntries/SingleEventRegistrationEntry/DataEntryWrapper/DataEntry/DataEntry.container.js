@@ -106,10 +106,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onScrollToRelationships: () => {
         dispatch(scrolledToRelationships());
     },
-    onSaveEventInStage: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
-        window.scrollTo(0, 0);
-        dispatch(requestSaveNewEventInStage(eventId, dataEntryId, formFoundation));
-    },
+    onSaveEventInStage:
+        (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => {
+            window.scrollTo(0, 0);
+            dispatch(requestSaveNewEventInStage(eventId, dataEntryId, formFoundation, completed));
+        },
 });
 
 // $FlowFixMe[missing-annot] automated comment
