@@ -9,7 +9,7 @@ type DataValue = {
     value: string | number
 }
 
-type Event = {
+export type Event = {
     dataValues: Array<DataValue>,
     deleted: boolean,
     dueDate: string,

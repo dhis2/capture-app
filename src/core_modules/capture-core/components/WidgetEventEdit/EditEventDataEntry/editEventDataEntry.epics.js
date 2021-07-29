@@ -52,7 +52,7 @@ export const loadEditEventDataEntryEpic = (action$: InputObservable, store: Redu
 
             return batchActions([
                 showEditEventDataEntry(),
-                ...openEventForEditInDataEntry(loadedValues, orgUnit, foundation, program),
+                ...openEventForEditInDataEntry(loadedValues, orgUnit, foundation, program, state.enrollmentSite?.events),
             ]);
         }));
 
