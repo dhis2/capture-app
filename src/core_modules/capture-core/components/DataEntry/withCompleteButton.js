@@ -187,7 +187,6 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
         render() {
             const {
                 eventId,
-                isCreateNew,
                 onCompleteEvent,
                 onCompleteValidationFailed,
                 onCompleteAbort,
