@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-20T07:00:58.119Z\n"
-"PO-Revision-Date: 2021-07-20T07:00:58.119Z\n"
+"POT-Creation-Date: 2021-07-29T06:36:22.185Z\n"
+"PO-Revision-Date: 2021-07-29T06:36:22.185Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -158,6 +158,9 @@ msgstr ""
 msgid "Saving to"
 msgstr ""
 
+msgid "for"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -187,6 +190,12 @@ msgid "Save and exit"
 msgstr ""
 
 msgid "Finish"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
+msgid "Complete"
 msgstr ""
 
 msgid "No write access"
@@ -295,9 +304,6 @@ msgid "Indicators"
 msgstr ""
 
 msgid "Warnings"
-msgstr ""
-
-msgid "Complete"
 msgstr ""
 
 msgid "Warnings found"

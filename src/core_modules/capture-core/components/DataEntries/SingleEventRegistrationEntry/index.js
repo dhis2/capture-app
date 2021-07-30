@@ -28,7 +28,11 @@ export {
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
 } from './DataEntryWrapper/DataEntry/epics/saveNewSingleEventAddAnother.epics';
-
+export {
+    saveNewEventStageEpic,
+    saveNewEventStageFailedEpic,
+    saveNewEventInStageLocationChangeEpic,
+} from './DataEntryWrapper/DataEntry/epics/saveNewSingleEventStage.epics';
 export {
     addNoteForNewSingleEventEpic,
 } from './DataEntryWrapper/DataEntry/epics/addNoteForNewSingleEvent.epics';

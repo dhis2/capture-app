@@ -12,6 +12,9 @@ import {
     saveNewEventLocationChangeEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
+    saveNewEventStageEpic,
+    saveNewEventStageFailedEpic,
+    saveNewEventInStageLocationChangeEpic,
     addNoteForNewSingleEventEpic,
     openRelationshipForNewSingleEventEpic,
     addRelationshipForNewSingleEventEpic,
@@ -318,4 +321,7 @@ export const epics = combineEpics(
     resetEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
     checkForDuplicateEpic,
+    saveNewEventStageEpic,
+    saveNewEventStageFailedEpic,
+    saveNewEventInStageLocationChangeEpic,
 );

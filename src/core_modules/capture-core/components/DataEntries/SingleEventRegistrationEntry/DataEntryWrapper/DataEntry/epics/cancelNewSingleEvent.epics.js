@@ -44,6 +44,10 @@ export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store
         ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
             const state = store.value;
+            if (state.router.location.pathname === '/enrollmentEventNew') {
+                const { enrollmentId } = state.router.location.query;
+                return push(`/enrollment?enrollmentId=${enrollmentId}`);
+            }
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
