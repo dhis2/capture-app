@@ -1,7 +1,7 @@
 // @flow
 
 export type Props = {|
-
+    enrollmentId: string,
 |}
 
 type Notes = {|

@@ -1,67 +1,52 @@
 // @flow
-import React from 'react';
-import { DataTableCell, DataTableRow } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
-import { ManagementPriority } from '../ManagementCells/ManagementPriority';
+import React, { useState } from 'react';
+import { DataTableRow } from '@dhis2/ui';
+import { ManagementPriority } from '../ManagementComponents/ManagementPriority';
 import type { Management } from '../WidgetManagements.types';
-import { ManagementStatus } from '../ManagementCells/ManagementStatus';
-import { ManagementTitle } from '../ManagementCells/ManagementTitle';
-import { ManagementStatuses } from '../ManagementObjects';
-import { ManagementGenerationDate } from '../ManagementCells/ManagementGenerationDate';
-import { ManagementNotes } from '../ManagementCells/ManagementNotes';
-import { ManagementActionCell } from '../ManagementCells/ManagementActionCell';
-
-const styles = {
-    Selector: {
-        padding: '5px 8px',
-        border: '1px solid #CECECEFF',
-        cursor: 'pointer',
-        '&:hover': {
-            backgroundColor: '#eeeeee',
-        },
-    },
-};
+import { ManagementStatus } from '../ManagementComponents/ManagementStatus';
+import { ManagementTitle } from '../ManagementComponents/ManagementTitle';
+import { ManagementStatuses } from '../WidgetManagement.const';
+import { ManagementGenerationDate } from '../ManagementComponents/ManagementGenerationDate';
+import { ManagementNotes } from '../ManagementComponents/Notes/ManagementNotes';
+import { ManagementActionCell } from '../ManagementComponents/ManagementActionCell';
+import { ManagementExpandedContent } from '../ManagementComponents/ManagementExpandedContent/ManagementExpandedContent';
 
 type Props = {|
     management: Management,
     ...CssClasses
 |}
 
-const ManagementRowPlain = ({ management, classes }: Props) => {
-    const performed = management.status === ManagementStatuses.completed;
+export const ManagementRow = ({ management }: Props) => {
+    const [expanded, setExpanded] = useState(false);
+    const status = ManagementStatuses[management.status.toLowerCase()];
+
+    const onExpandToggle = () => setExpanded(prevState => !prevState);
 
     return (
         <DataTableRow
-            expandableContent={<div>Test</div>}
+            expandableContent={<ManagementExpandedContent management={management} />}
+            expanded={expanded}
+            onExpandToggle={onExpandToggle}
         >
             <ManagementStatus status={management.status} />
-
             <ManagementTitle
                 displayName={management.displayName}
-                performed={performed}
+                status={status}
                 reason={management.reason}
             />
-
-            <DataTableCell width={'5%'}>
-                <div style={{ display: 'flex' }}>
-                    <div className={classes.Selector} style={{ borderRadius: '8px 0 0 8px' }}>Yes</div>
-                    <div className={classes.Selector} style={{ borderRadius: '0 8px 8px 0' }}>No</div>
-                </div>
-            </DataTableCell>
-
             <ManagementGenerationDate
                 generationdate={management.generationdate}
-                performed={performed}
+                status={status}
             />
-
-            <ManagementPriority priority={management.priority} />
-
-            <ManagementNotes showIcon={!!management?.notes?.length} />
-
-            <ManagementActionCell />
+            <ManagementPriority
+                priority={management.priority}
+            />
+            <ManagementNotes
+                showIcon={!!management?.notes?.length}
+            />
+            <ManagementActionCell
+                status={status}
+            />
         </DataTableRow>
     );
 };
-
-export const ManagementRow = withStyles(styles)(ManagementRowPlain);
-

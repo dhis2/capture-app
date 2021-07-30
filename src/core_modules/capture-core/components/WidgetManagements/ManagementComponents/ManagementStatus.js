@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { DataTableCell, Tag } from '@dhis2/ui';
-import { ManagementStatuses } from '../ManagementObjects';
+import { ManagementStatuses } from '../WidgetManagement.const';
 
 type Props = {|
     status: ?string
@@ -18,7 +18,7 @@ export const ManagementStatus = ({ status }: Props) => {
     return (
         <DataTableCell>
             <Tag
-                neutral={statusStringFromObject === ManagementStatuses.open || statusStringFromObject === ManagementStatuses.suggested}
+                neutral={statusStringFromObject === ManagementStatuses.open}
                 positive={statusStringFromObject === ManagementStatuses.performed}
                 negative={statusStringFromObject === ManagementStatuses.notperformed}
             >

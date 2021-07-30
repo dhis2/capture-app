@@ -55,7 +55,7 @@ export const EnrollmentPageDefaultPlain = ({
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
                 <WidgetStagesAndEvents stages={program.stages} />
-                <WidgetManagements />
+                <WidgetManagements enrollmentId={enrollmentId} />
             </div>
             <div className={classes.rightColumn}>
                 <WidgetError error={widgetEffects?.errors} />

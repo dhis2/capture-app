@@ -8,7 +8,7 @@ type Props = {|
 
 export const ManagementPriority = ({ priority }: Props) => {
     if (!priority) {
-        return <DataTableCell width={'5%'} />;
+        return <DataTableCell />;
     }
 
     const lowerCasePriority = priority.toLowerCase();
@@ -20,7 +20,7 @@ export const ManagementPriority = ({ priority }: Props) => {
     });
 
     return (
-        <DataTableCell width={'5%'}>
+        <DataTableCell align={'center'}>
             <Tag
                 negative={priorities[lowerCasePriority] === priorities.critical}
                 neutral={priorities[lowerCasePriority] === priorities.low}

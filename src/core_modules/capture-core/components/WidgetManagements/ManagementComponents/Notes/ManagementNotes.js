@@ -1,6 +1,10 @@
 // @flow
 import React from 'react';
-import { DataTableCell, IconMessages16 } from '@dhis2/ui';
+import {
+    DataTableCell,
+    IconMessages16,
+} from '@dhis2/ui';
+import { IconButton } from '../../../../../capture-ui';
 
 type Props = {|
     showIcon: boolean,
@@ -12,10 +16,10 @@ export const ManagementNotes = ({ showIcon }: Props) => {
     }
 
     return (
-        <DataTableCell align={'center'} width={'5%'}>
-            <span style={{ cursor: 'pointer' }}>
+        <DataTableCell align={'center'}>
+            <IconButton onClick={() => {}}>
                 <IconMessages16 />
-            </span>
+            </IconButton>
         </DataTableCell>
     );
 };

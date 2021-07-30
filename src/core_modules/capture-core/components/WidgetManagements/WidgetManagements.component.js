@@ -4,16 +4,20 @@ import { withStyles } from '@material-ui/core';
 import {
     spacersNum,
     DataTable,
-    TableHead,
-    DataTableRow,
-    DataTableColumnHeader,
+    DataTableHead,
+    DataTableBody,
 } from '@dhis2/ui';
 import { Widget } from '../Widget';
 import { ManagementRow } from './ManagementRow';
+import { ManagementsHeader } from './ManagementComponents/Header/ManagementsHeader';
+import { ManagementStatusFilter } from './ManagementComponents/ManagementStatusFilter/ManagementStatusFilter';
 
 const styles = {
     container: {
         padding: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '10px',
     },
     ManagementsActions: {
         padding: '8px 12px 2px 12px',
@@ -43,17 +47,17 @@ const managements = [
     },
     {
         id: 'asdkjas',
-        status: 'Performed',
+        status: 'performed',
         displayName: 'Prescribe folic acid for three months',
         reason: 'Patient shows signs of high diastolic blood pressure',
         performed: true,
         generationdate: '2021-07-03T23:47:14.517',
         priority: 'Low',
-        notes: [{ id: 'odmt1ehd0', comment: 'Can you double check the blood levels?' }],
+        notes: [],
     },
     {
         id: 'safpj',
-        status: 'Suggested',
+        status: 'notperformed',
         displayName: 'Referral to clinic for blood test on folic acid levels after 3 months',
         reason: 'It is suggested that an explanation is provided when the Apgar score is below 4',
         performed: false,
@@ -64,7 +68,7 @@ const managements = [
 
 ];
 
-const WidgetManagementsComponentPlain = ({ classes }) => {
+const WidgetManagementsComponentPlain = ({ filterStatus, handleFilterChange, classes }) => {
     const [openState, setOpenState] = useState(true);
 
     return (
@@ -75,39 +79,22 @@ const WidgetManagementsComponentPlain = ({ classes }) => {
             onClose={useCallback(() => setOpenState(false), [setOpenState])}
         >
             <div className={classes.container}>
+                <ManagementStatusFilter
+                    filterStatus={filterStatus}
+                    handleFilterChange={handleFilterChange}
+                />
                 <DataTable>
-                    <TableHead>
-                        <DataTableRow>
-                            <DataTableColumnHeader />
-                            <DataTableColumnHeader>
-                                Status
-                            </DataTableColumnHeader>
-                            <DataTableColumnHeader >
-                                Management
-                            </DataTableColumnHeader>
-                            <DataTableColumnHeader align={'center'}>
-                                Performed
-                            </DataTableColumnHeader>
-                            <DataTableColumnHeader align={'center'}>
-                                Generation date
-                            </DataTableColumnHeader>
-                            <DataTableColumnHeader >
-                                Priority
-                            </DataTableColumnHeader>
-                            <DataTableColumnHeader align={'center'}>
-                                Notes
-                            </DataTableColumnHeader>
-                            <DataTableColumnHeader>
-                                Actions
-                            </DataTableColumnHeader>
-                        </DataTableRow>
-                    </TableHead>
-                    {managements.map(management => (
-                        <ManagementRow
-                            management={management}
-                            key={management.id}
-                        />
-                    ))}
+                    <DataTableHead>
+                        <ManagementsHeader />
+                    </DataTableHead>
+                    <DataTableBody>
+                        {managements.map(management => (
+                            <ManagementRow
+                                management={management}
+                                key={management.id}
+                            />
+                        ))}
+                    </DataTableBody>
                 </DataTable>
             </div>
         </Widget>
