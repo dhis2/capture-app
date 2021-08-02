@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { CircularLoader } from '@dhis2/ui';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import {
@@ -17,7 +18,6 @@ import {
 import { SortLabelWrapper } from '../../DataTable/SortLabelWrapper.component';
 import { dataElementTypes } from '../../../metaData';
 import type { OptionSet } from '../../../metaData';
-import { LoadingMask } from '../../LoadingMasks';
 
 
 const getStyles = (theme: Theme) => ({
@@ -216,7 +216,7 @@ class Index extends React.Component<Props> {
                         colSpan={columnsCount}
                         className={classNames(classes.cell, classes.bodyCell, classes.loadingCell)}
                     >
-                        <LoadingMask />
+                        <CircularLoader />
                     </Cell>
                 </Row>
             ) : this.renderRows(visibleColumns, columnsCount);
