@@ -8,7 +8,7 @@ import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.comp
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 
 export const EnrollmentEditEventPage = () => {
-    const { programId, stageId } = useSelector(
+    const { programId, stageId, teiId, enrollmentId } = useSelector(
         ({
             router: {
                 location: { query },
@@ -16,6 +16,8 @@ export const EnrollmentEditEventPage = () => {
         }) => ({
             programId: query.programId,
             stageId: query.stageId,
+            teiId: query.teiId,
+            enrollmentId: query.enrollmentId,
         }),
         shallowEqual,
     );
@@ -34,6 +36,9 @@ export const EnrollmentEditEventPage = () => {
             mode={showEditEvent ? pageMode.EDIT : pageMode.VIEW}
             programStage={programStage}
             widgetEffects={outputEffects}
+            teiId={teiId}
+            enrollmentId={enrollmentId}
+            programId={programId}
         />
     );
 };

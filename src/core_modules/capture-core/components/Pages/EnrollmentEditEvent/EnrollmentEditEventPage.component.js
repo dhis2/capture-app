@@ -11,6 +11,8 @@ import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
 import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetFeedback } from '../../WidgetFeedback';
 import { WidgetIndicator } from '../../WidgetIndicator';
+import { WidgetProfile } from '../../WidgetProfile';
+import { WidgetEnrollment } from '../../WidgetEnrollment';
 
 const styles = ({ typography }) => ({
     page: {
@@ -42,6 +44,9 @@ const styles = ({ typography }) => ({
 const EnrollmentEditEventPagePain = ({
     mode,
     programStage,
+    teiId,
+    enrollmentId,
+    programId,
     widgetEffects,
     classes,
 }: PlainProps) => (
@@ -68,6 +73,16 @@ const EnrollmentEditEventPagePain = ({
                 <WidgetWarning warning={widgetEffects.warnings} />
                 <WidgetFeedback emptyText={'There are no feedbacks'} feedback={widgetEffects.feedbacks} />
                 <WidgetIndicator emptyText={'There are no indicators'} indicators={widgetEffects.indicators} />
+                <WidgetProfile
+                    teiId={teiId}
+                    programId={programId}
+                />
+                <WidgetEnrollment
+                    teiId={teiId}
+                    enrollmentId={enrollmentId}
+                    programId={programId}
+                    onDelete={() => {}}
+                />
             </div>
         </div>
     </div>

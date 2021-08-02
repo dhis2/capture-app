@@ -5,6 +5,9 @@ import type { WidgetEffects } from '../Enrollment/EnrollmentPageDefault/Enrollme
 export type PlainProps = {|
     programStage: ?ProgramStage,
     widgetEffects: WidgetEffects,
+    teiId: string,
+    enrollmentId: string,
+    programId: string,
     mode: string,
     ...CssClasses,
 |};
