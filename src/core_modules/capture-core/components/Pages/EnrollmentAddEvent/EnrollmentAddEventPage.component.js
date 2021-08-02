@@ -33,14 +33,6 @@ const styles = ({ typography }) => ({
         flexDirection: 'column',
         gap: '12px',
     },
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: spacersNum.dp8,
-    },
-    icon: {
-        paddingRight: spacersNum.dp8,
-    },
     title: {
         ...typography.title,
         margin: `${spacersNum.dp16}px 0`,
@@ -66,12 +58,9 @@ const EnrollmentAddEventPagePain = ({
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
                 <div
-                    className={classes.container}
+                    className={classes.addEventContainer}
                     data-test="add-event-enrollment-page-content"
                 >
-                    <div className={classes.title}>
-                        {i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}
-                    </div>
                     <div>
                         <WidgetAddEvent
                             programStage={programStage}
@@ -83,11 +72,11 @@ const EnrollmentAddEventPagePain = ({
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
                 <WidgetFeedback
-                    emptyText={i18n.t('There are no feedbacks')}
+                    emptyText={i18n.t('There are no feedbacks for this event')}
                     feedback={widgetEffects?.feedbacks}
                 />
                 <WidgetIndicator
-                    emptyText={i18n.t('There are no indicators for this program stage')}
+                    emptyText={i18n.t('There are no indicators for this event')}
                     indicators={widgetEffects?.indicators}
                 />
                 <WidgetProfile

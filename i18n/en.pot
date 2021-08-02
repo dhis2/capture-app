@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-29T06:36:22.185Z\n"
-"PO-Revision-Date: 2021-07-29T06:36:22.185Z\n"
+"POT-Creation-Date: 2021-07-30T12:46:27.111Z\n"
+"PO-Revision-Date: 2021-07-30T12:46:27.111Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -619,10 +619,10 @@ msgstr ""
 msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
-msgid "There are no feedbacks"
+msgid "There are no feedbacks for this event"
 msgstr ""
 
-msgid "There are no indicators for this program stage"
+msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
