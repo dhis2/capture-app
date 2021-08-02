@@ -8,7 +8,7 @@ type HideWidgets = {|
     indicator: boolean,
 |}
 
-type WidgetEffects = {|
+export type WidgetEffects = {|
     feedbacks?: ?Array<WidgetData>,
     warnings?: ?Array<Message>,
     errors?: ?Array<Message>,

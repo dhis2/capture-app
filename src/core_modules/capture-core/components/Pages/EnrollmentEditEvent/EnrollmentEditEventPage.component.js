@@ -7,10 +7,31 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
 import { pageMode } from './EnrollmentEditEventPage.const';
 import { WidgetEventEdit } from '../../WidgetEventEdit/';
+import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
+import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
+import { WidgetFeedback } from '../../WidgetFeedback';
+import { WidgetIndicator } from '../../WidgetIndicator';
 
 const styles = ({ typography }) => ({
     page: {
         margin: spacersNum.dp16,
+    },
+    columns: {
+        display: 'flex',
+    },
+    leftColumn: {
+        flexGrow: 3,
+        flexShrink: 1,
+        width: 872,
+    },
+    rightColumn: {
+        flexGrow: 1,
+        flexShrink: 1,
+        paddingLeft: spacersNum.dp16,
+        width: 360,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
     },
     title: {
         ...typography.title,
@@ -21,6 +42,7 @@ const styles = ({ typography }) => ({
 const EnrollmentEditEventPagePain = ({
     mode,
     programStage,
+    widgetEffects,
     classes,
 }: PlainProps) => (
     <div className={classes.page}>
@@ -33,11 +55,21 @@ const EnrollmentEditEventPagePain = ({
                     escape: ':',
                 })}
         </div>
-        {programStage ? (
-            <WidgetEventEdit programStage={programStage} mode={mode} />
-        ) : (
-            <span>{i18n.t('We could not find the stage in the program')}</span>
-        )}
+        <div className={classes.columns}>
+            <div className={classes.leftColumn}>
+                {programStage ? (
+                    <WidgetEventEdit programStage={programStage} mode={mode} />
+                ) : (
+                    <span>{i18n.t('We could not find the stage in the program')}</span>
+                )}
+            </div>
+            <div className={classes.rightColumn}>
+                <WidgetError error={widgetEffects.errors} />
+                <WidgetWarning warning={widgetEffects.warnings} />
+                <WidgetFeedback emptyText={'There are no feedbacks'} feedback={widgetEffects.feedbacks} />
+                <WidgetIndicator emptyText={'There are no indicators'} indicators={widgetEffects.indicators} />
+            </div>
+        </div>
     </div>
 );
 
