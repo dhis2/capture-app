@@ -6,6 +6,7 @@ import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode } from './EnrollmentEditEventPage.const';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
+import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 
 export const EnrollmentEditEventPage = () => {
     const { programId, stageId, teiId, enrollmentId } = useSelector(
@@ -29,13 +30,16 @@ export const EnrollmentEditEventPage = () => {
     const programStage = [...program.stages?.values()].find(
         item => item.id === stageId,
     );
-    const outputEffects = useWidgetDataFromStore('singleEvent-editEvent');
+    const mode = showEditEvent ? pageMode.EDIT : pageMode.VIEW;
+    const outputEffects = useWidgetDataFromStore(`singleEvent-${mode}`);
+    const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     return (
         <EnrollmentEditEventPageComponent
-            mode={showEditEvent ? pageMode.EDIT : pageMode.VIEW}
+            mode={mode}
             programStage={programStage}
             widgetEffects={outputEffects}
+            hideWidgets={hideWidgets}
             teiId={teiId}
             enrollmentId={enrollmentId}
             programId={programId}

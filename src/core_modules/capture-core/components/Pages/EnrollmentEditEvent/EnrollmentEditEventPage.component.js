@@ -48,6 +48,7 @@ const EnrollmentEditEventPagePain = ({
     enrollmentId,
     programId,
     widgetEffects,
+    hideWidgets,
     classes,
 }: PlainProps) => (
     <div className={classes.page}>
@@ -71,8 +72,18 @@ const EnrollmentEditEventPagePain = ({
             <div className={classes.rightColumn}>
                 <WidgetError error={widgetEffects.errors} />
                 <WidgetWarning warning={widgetEffects.warnings} />
-                <WidgetFeedback emptyText={'There are no feedbacks'} feedback={widgetEffects.feedbacks} />
-                <WidgetIndicator emptyText={'There are no indicators'} indicators={widgetEffects.indicators} />
+                {!hideWidgets.feedback && (
+                    <WidgetFeedback
+                        emptyText={i18n.t('There are no feedback for this event')}
+                        feedback={widgetEffects.feedbacks}
+                    />
+                )}
+                {!hideWidgets.indicator && (
+                    <WidgetIndicator
+                        emptyText={i18n.t('There are no indicators for this event')}
+                        indicators={widgetEffects.indicators}
+                    />
+                )}
                 <WidgetProfile
                     teiId={teiId}
                     programId={programId}
