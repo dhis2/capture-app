@@ -10,5 +10,6 @@ export type PlainProps = {|
     enrollmentId: string,
     programId: string,
     mode: string,
+    onDelete: () => void,
     ...CssClasses,
 |};

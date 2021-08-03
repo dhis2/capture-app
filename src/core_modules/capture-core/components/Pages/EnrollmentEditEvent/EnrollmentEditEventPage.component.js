@@ -49,6 +49,7 @@ const EnrollmentEditEventPagePain = ({
     programId,
     widgetEffects,
     hideWidgets,
+    onDelete,
     classes,
 }: PlainProps) => (
     <div className={classes.page}>
@@ -92,7 +93,7 @@ const EnrollmentEditEventPagePain = ({
                     teiId={teiId}
                     enrollmentId={enrollmentId}
                     programId={programId}
-                    onDelete={() => {}}
+                    onDelete={onDelete}
                 />
             </div>
         </div>

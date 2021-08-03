@@ -1,15 +1,20 @@
 // @flow
 import React from 'react';
 // $FlowFixMe
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode } from './EnrollmentEditEventPage.const';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
+import { urlArguments } from '../../../utils/url';
+import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 
 export const EnrollmentEditEventPage = () => {
-    const { programId, stageId, teiId, enrollmentId } = useSelector(
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const { programId, stageId, teiId, enrollmentId, orgUnitId } = useSelector(
         ({
             router: {
                 location: { query },
@@ -18,6 +23,7 @@ export const EnrollmentEditEventPage = () => {
             programId: query.programId,
             stageId: query.stageId,
             teiId: query.teiId,
+            orgUnitId: query.orgUnitId,
             enrollmentId: query.enrollmentId,
         }),
         shallowEqual,
@@ -34,6 +40,13 @@ export const EnrollmentEditEventPage = () => {
     const outputEffects = useWidgetDataFromStore(`singleEvent-${mode}`);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
+    const onDelete = () => {
+        history.push(
+            `/enrollment?${urlArguments({ orgUnitId, programId, teiId })}`,
+        );
+        dispatch(deleteEnrollment({ enrollmentId }));
+    };
+
     return (
         <EnrollmentEditEventPageComponent
             mode={mode}
@@ -43,6 +56,7 @@ export const EnrollmentEditEventPage = () => {
             teiId={teiId}
             enrollmentId={enrollmentId}
             programId={programId}
+            onDelete={onDelete}
         />
     );
 };
