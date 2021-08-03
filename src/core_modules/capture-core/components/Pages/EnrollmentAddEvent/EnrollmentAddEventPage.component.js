@@ -40,13 +40,14 @@ const styles = ({ typography }) => ({
 });
 
 const EnrollmentAddEventPagePain = ({
-    program,
+    programId,
     programStage,
     classes,
     enrollmentId,
     onDelete,
     teiId,
     widgetEffects,
+    hideWidgets,
 }) => (
     <div
         className={classes.container}
@@ -71,22 +72,26 @@ const EnrollmentAddEventPagePain = ({
             <div className={classes.rightColumn}>
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
-                <WidgetFeedback
-                    emptyText={i18n.t('There are no feedbacks for this event')}
-                    feedback={widgetEffects?.feedbacks}
-                />
-                <WidgetIndicator
-                    emptyText={i18n.t('There are no indicators for this event')}
-                    indicators={widgetEffects?.indicators}
-                />
+                {!hideWidgets.feedback && (
+                    <WidgetFeedback
+                        emptyText={i18n.t('There are no feedbacks for this event')}
+                        feedback={widgetEffects?.feedbacks}
+                    />
+                )}
+                {!hideWidgets.indicator && (
+                    <WidgetIndicator
+                        emptyText={i18n.t('There are no indicators for this event')}
+                        indicators={widgetEffects?.indicators}
+                    />
+                )}
                 <WidgetProfile
                     teiId={teiId}
-                    programId={program.id}
+                    programId={programId}
                 />
                 <WidgetEnrollment
                     teiId={teiId}
                     enrollmentId={enrollmentId}
-                    programId={program.id}
+                    programId={programId}
                     onDelete={onDelete}
                 />
             </div>

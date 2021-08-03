@@ -3,7 +3,7 @@ import type { Program } from '../../../../metaData';
 import type { Message } from '../../../WidgetErrorAndWarning/content/WidgetErrorAndWarningContent.types';
 import type { WidgetData } from '../../../WidgetFeedback/WidgetFeedback.types';
 
-type HideWidgets = {|
+export type HideWidgets = {|
     feedback: boolean,
     indicator: boolean,
 |}

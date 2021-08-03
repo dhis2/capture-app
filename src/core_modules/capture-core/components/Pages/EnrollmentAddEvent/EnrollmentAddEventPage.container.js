@@ -8,6 +8,7 @@ import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.compon
 import { urlArguments } from '../../../utils/url';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { useWidgetDataFromStore } from './hooks';
+import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 
 export const EnrollmentAddEventPage = () => {
     const history = useHistory();
@@ -26,9 +27,10 @@ export const EnrollmentAddEventPage = () => {
         }),
         shallowEqual,
     );
-    const outputEffects = useWidgetDataFromStore('singleEvent-newEvent');
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages.values()].find(item => item.id === stageId);
+    const outputEffects = useWidgetDataFromStore('singleEvent-newEvent');
+    const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     if (!programStage) {
         return <span>[program stage placeholder]</span>;
@@ -43,12 +45,13 @@ export const EnrollmentAddEventPage = () => {
 
     return (
         <EnrollmentAddEventPageComponent
-            program={program}
+            programId={program.id}
             teiId={teiId}
             enrollmentId={enrollmentId}
             onDelete={onDelete}
             programStage={programStage}
             widgetEffects={outputEffects}
+            hideWidgets={hideWidgets}
         />
     );
 };
