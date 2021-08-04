@@ -1,6 +1,6 @@
 // @flow
 
-import { ProgramStage } from '../../metaData';
+import type { ProgramStage } from '../../metaData';
 
 export type Props = {|
     programStage: ProgramStage,
