@@ -29,7 +29,7 @@ export class TextFilterManager extends React.Component<Props, State> {
         this.setState({
             value,
         });
-        this.props.handleCommitValue();
+        this.props.handleCommitValue && this.props.handleCommitValue();
     }
 
     render() {
