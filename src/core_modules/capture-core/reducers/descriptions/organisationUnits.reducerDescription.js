@@ -1,6 +1,6 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
+import { actionTypes as editEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { actionTypes as setOrgUnitActionTypes } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import { lockedSelectorActionTypes } from '../../components/LockedSelector/LockedSelector.actions';

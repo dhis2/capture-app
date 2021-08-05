@@ -1,15 +1,7 @@
 // @flow
 import React from 'react';
-import { LoadingMask } from './LoadingMask.component';
+import { CircularLoader } from '@dhis2/ui';
 
-type Props = {
-
-};
-
-export const LoadingMaskForButton = (props: Props) => (
-    // $FlowFixMe[cannot-spread-inexact] automated comment
-    <LoadingMask
-        size={24}
-        {...props}
-    />
+export const LoadingMaskForButton = () => (
+    <CircularLoader small />
 );

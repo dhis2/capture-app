@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
-import { Info as InfoIcon } from '@material-ui/icons';
+import { IconInfoFilled24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
@@ -42,7 +42,7 @@ class IndicatorsSectionPlain extends React.Component<Props> {
         const classes = this.props.classes;
         return (
             <ViewEventSectionHeader
-                icon={InfoIcon}
+                icon={IconInfoFilled24}
                 text={headerText}
                 badgeClass={classes.badge}
                 badgeCount={count}

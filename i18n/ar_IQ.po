@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -579,21 +579,6 @@ msgstr "ليس لديك حق الوصول إلى كتابة التعليقات"
 msgid "Write comment"
 msgstr "اكتب تعليقاً"
 
-msgid "Show all events"
-msgstr "عرض جميع الأحداث"
-
-msgid "Edit event"
-msgstr "تعديل الحدث"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "لا يمكن تحميل الحدث. هل أنت متأكد أنه موجود؟"
-
-msgid "Event could not be loaded"
-msgstr "تعذر تحميل الحدث"
-
-msgid "Organisation unit could not be loaded"
-msgstr "تعذر تحميل الوحدة التنظيمية"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
@@ -602,6 +587,12 @@ msgid ""
 msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
+msgstr ""
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
 msgstr ""
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
@@ -637,6 +628,9 @@ msgid "Create a new event in this program."
 msgstr ""
 
 msgid "View working list in this program."
+msgstr ""
+
+msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
@@ -854,8 +848,17 @@ msgstr ""
 msgid "Search in all programs"
 msgstr ""
 
+msgid "events"
+msgstr ""
+
+msgid "event"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
+
+msgid "Edit event"
+msgstr "تعديل الحدث"
 
 msgid "Event details"
 msgstr ""
@@ -876,6 +879,18 @@ msgstr "تم تعيين الحدث إلى {{name}}"
 
 msgid "Feedbacks"
 msgstr "تغذيات راجعة"
+
+msgid "Show all events"
+msgstr "عرض جميع الأحداث"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "لا يمكن تحميل الحدث. هل أنت متأكد أنه موجود؟"
+
+msgid "Event could not be loaded"
+msgstr "تعذر تحميل الحدث"
+
+msgid "Organisation unit could not be loaded"
+msgstr "تعذر تحميل الوحدة التنظيمية"
 
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
@@ -962,6 +977,12 @@ msgstr ""
 
 msgid "Last updated {{date}}"
 msgstr ""
+
+msgid "Error"
+msgstr "خطأ"
+
+msgid "Warning"
+msgstr "تحذير"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

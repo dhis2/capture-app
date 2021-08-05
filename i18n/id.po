@@ -1,20 +1,20 @@
 # 
 # Translators:
-# phil_dhis2, 2019
 # Carwoto Sa'an <carwoto@gmail.com>, 2020
-# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # Farida Sibuea <farida_sibuea@yahoo.com>, 2021
 # Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
 # Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
+# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -593,21 +593,6 @@ msgstr "Anda tidak memiliki akses untuk menulis komentar"
 msgid "Write comment"
 msgstr "Tulis komentar"
 
-msgid "Show all events"
-msgstr "Tampilkan semua even"
-
-msgid "Edit event"
-msgstr "Sunting even"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
-
-msgid "Event could not be loaded"
-msgstr "Even tidak dapat dimuat"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Unit organisasi tidak dapat dimuat"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance entitas terlacak dengan id \"{{teiId}}\" tidak ada"
 
@@ -619,6 +604,12 @@ msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Pendaftaran dengan id \"{{enrollmentId}}\" tidak ada"
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
@@ -662,6 +653,9 @@ msgstr "Buat even baru dalam program ini."
 
 msgid "View working list in this program."
 msgstr "Lihat daftar kerja dalam program ini."
+
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Pendaftaran{{escape}} Lihat Even"
@@ -891,8 +885,17 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Cari di semua program"
 
+msgid "events"
+msgstr "Even"
+
+msgid "event"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr "Anda tidak memiliki akses untuk mengedit even ini"
+
+msgid "Edit event"
+msgstr "Sunting even"
 
 msgid "Event details"
 msgstr "Detail even"
@@ -915,6 +918,18 @@ msgstr "Even ditugaskan ke {{name}}"
 
 msgid "Feedbacks"
 msgstr "Umpan balik"
+
+msgid "Show all events"
+msgstr "Tampilkan semua even"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
+
+msgid "Event could not be loaded"
+msgstr "Even tidak dapat dimuat"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Unit organisasi tidak dapat dimuat"
 
 msgid "Possible duplicates found"
 msgstr "Kemungkinan duplikat ditemukan"
@@ -1003,6 +1018,12 @@ msgstr "Dimiliki oleh {{ownerOrgUnit}}"
 
 msgid "Last updated {{date}}"
 msgstr "Terakhir diperbarui {{date}}"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Warning"
+msgstr "Peringatan"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profil tidak dapat dimuat. Silakan coba lagi nanti"

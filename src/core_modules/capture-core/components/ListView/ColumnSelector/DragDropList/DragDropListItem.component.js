@@ -4,7 +4,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 
 import TableCell from '@material-ui/core/TableCell';
 import Checkbox from '@material-ui/core/Checkbox';
-import ReorderIcon from '@material-ui/icons/Reorder';
+import { IconReorder24 } from '@dhis2/ui';
 
 type Props = {
     id: string,
@@ -74,7 +74,9 @@ class Index extends Component<Props> {
                     {text}
                 </TableCell>
                 <TableCell>
-                    <ReorderIcon style={{ float: 'right' }} />
+                    <span style={{ float: 'right' }}>
+                        <IconReorder24 />
+                    </span>
                 </TableCell>
             </tr>,
         ));

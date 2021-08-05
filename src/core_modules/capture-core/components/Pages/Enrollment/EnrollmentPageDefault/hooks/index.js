@@ -1,7 +1,5 @@
-import { useEnrollmentsAndAttributes } from './useEnrollmentsAndAttributes';
+import { useEnrollment } from './useEnrollment';
+import { useTeiAttributes } from './useTeiAttributes';
 import { useProgramMetadata } from './useProgramMetadata';
 
-export {
-    useEnrollmentsAndAttributes,
-    useProgramMetadata,
-};
+export { useEnrollment, useProgramMetadata, useTeiAttributes };

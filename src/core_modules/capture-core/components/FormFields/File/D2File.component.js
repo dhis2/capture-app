@@ -1,12 +1,11 @@
 // @flow
-import CheckIcon from '@material-ui/icons/Check';
+import { IconCheckmark24, colors, CircularLoader } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
 import { Button } from '../../Buttons/Button.component';
 import { getApi } from '../../../d2/d2Instance';
-import { LoadingMask } from '../../LoadingMasks';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 
@@ -19,7 +18,6 @@ type Props = {
         innerContainer: string,
         horizontalSelectedFileTextContainer: string,
         verticalSelectedFileTextContainer: string,
-        checkIcon: string,
         deleteButton: string,
         input: string,
         horizontalLink: string,
@@ -62,9 +60,6 @@ const styles = theme => ({
         flexDirection: 'column',
         alignItems: 'flex-start',
         wordBreak: 'break-word',
-    },
-    checkIcon: {
-        color: theme.palette.success[700],
     },
     deleteButton: {
         color: theme.palette.error.main,
@@ -141,7 +136,7 @@ class D2FilePlain extends Component<Props> {
                             return (
                                 <div className={containerClass}>
                                     <div className={classes.innerContainer}>
-                                        <LoadingMask />
+                                        <CircularLoader />
                                     </div>
                                     <div className={classes.innerContainer}>{i18n.t('Uploading file')}</div>
                                 </div>);
@@ -149,7 +144,7 @@ class D2FilePlain extends Component<Props> {
                             return (
                                 <div className={containerClass}>
                                     <div className={selectedFileTextContainerClass}>
-                                        <CheckIcon className={classes.checkIcon} />
+                                        <IconCheckmark24 color={colors.green600} />
                                         <a
                                             className={!isVertical && classes.horizontalLink}
                                             target="_blank"

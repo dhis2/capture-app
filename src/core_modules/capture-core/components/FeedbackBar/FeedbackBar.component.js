@@ -7,14 +7,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import { IconCross24 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import { Button } from '../Buttons';
 
 const styles = theme => ({
     closeButton: {
-        width: theme.spacing.unit * 4,
         height: theme.spacing.unit * 4,
     },
     actionContainer: {
@@ -83,7 +82,7 @@ class Index extends React.Component<Props> {
                     className={classes.closeButton}
                     onClick={this.handleClose}
                 >
-                    <CloseIcon />
+                    <IconCross24 />
                 </IconButton>
             </span>
         );

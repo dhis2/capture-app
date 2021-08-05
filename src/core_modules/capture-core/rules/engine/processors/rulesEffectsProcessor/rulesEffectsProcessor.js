@@ -203,6 +203,7 @@ export function getRulesEffectsProcessor(
             displayText: {
                 id: effect.id,
                 message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
+                ...effect.style,
             },
         };
     }
@@ -215,6 +216,7 @@ export function getRulesEffectsProcessor(
                 id: effect.id,
                 key: effect.content,
                 value: effect.data,
+                ...effect.style,
             },
         };
     }

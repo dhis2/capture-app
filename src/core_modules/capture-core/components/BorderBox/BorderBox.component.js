@@ -14,7 +14,7 @@ const styles = (theme: Theme) => ({
     borderBox: {
         borderRadius: theme.typography.pxToRem(6),
         borderWidth: theme.typography.pxToRem(2),
-        borderColor: theme.palette.grey[300],
+        borderColor: '#e0e0e0',
         borderStyle: 'solid',
     },
 });

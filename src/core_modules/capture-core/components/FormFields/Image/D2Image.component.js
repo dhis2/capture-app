@@ -1,5 +1,5 @@
 // @flow
-import CheckIcon from '@material-ui/icons/Check';
+import { IconCheckmark24, colors, CircularLoader } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
@@ -7,7 +7,6 @@ import { orientations } from 'capture-ui';
 import { Button } from '../../Buttons/Button.component';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { getApi } from '../../../d2/d2Instance';
-import { LoadingMask } from '../../LoadingMasks';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 
 
@@ -20,7 +19,6 @@ type Props = {
         verticalContainer: string,
         innerContainer: string,
         selectedImageTextContainer: string,
-        checkIcon: string,
         deleteButton: string,
         input: string,
         image: string,
@@ -62,9 +60,6 @@ const styles = theme => ({
         flexDirection: 'column',
         alignItems: 'flex-start',
         wordBreak: 'break-word',
-    },
-    checkIcon: {
-        color: theme.palette.success[700],
     },
     deleteButton: {
         color: theme.palette.error.main,
@@ -143,7 +138,7 @@ class D2ImagePlain extends Component<Props> {
                             return (
                                 <div className={containerClass}>
                                     <div className={classes.innerContainer}>
-                                        <LoadingMask />
+                                        <CircularLoader />
                                     </div>
                                     <div className={classes.innerContainer}>{i18n.t('Uploading image')}</div>
                                 </div>);
@@ -162,7 +157,7 @@ class D2ImagePlain extends Component<Props> {
                                         </div>
                                     }
                                     <div className={selectedImageTextContainerClass}>
-                                        <CheckIcon className={classes.checkIcon} />
+                                        <IconCheckmark24 color={colors.green600} />
                                         {!isVertical ?
                                             value.name :
                                             <a

@@ -4,17 +4,17 @@
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
 # ericbp <ericbarredap@gmail.com>, 2021
-# phil_dhis2, 2021
 # Alison Andrade <aandrade@ippfwhr.org>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # drprabhjot, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: drprabhjot, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -598,21 +598,6 @@ msgstr "No tienes acceso para escribir comentarios"
 msgid "Write comment"
 msgstr "Escribir comentario"
 
-msgid "Show all events"
-msgstr "Mostrar todos los eventos"
-
-msgid "Edit event"
-msgstr "Editar evento"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
-
-msgid "Event could not be loaded"
-msgstr "No se pudo cargar el evento"
-
-msgid "Organisation unit could not be loaded"
-msgstr "No se pudo cargar la unidad organizativa"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "La instancia de entidad rastreada con el ID \"{{teiId}}\" no existe"
 
@@ -623,6 +608,12 @@ msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "La inscripción con el ID \"{{enrollmentId}}\" no existe"
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
@@ -666,6 +657,9 @@ msgstr "Crea un nuevo evento en este programa."
 
 msgid "View working list in this program."
 msgstr "Ver lista de trabajo en este programa."
+
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Inscripción {{escape}} Ver evento"
@@ -897,8 +891,17 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Buscar en todos los programas"
 
+msgid "events"
+msgstr "Eventos"
+
+msgid "event"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr "No tienes acceso para editar este evento"
+
+msgid "Edit event"
+msgstr "Editar evento"
 
 msgid "Event details"
 msgstr "Detalles del evento"
@@ -921,6 +924,18 @@ msgstr "Evento asignado a {{name}}"
 
 msgid "Feedbacks"
 msgstr "Retroalimentaciones"
+
+msgid "Show all events"
+msgstr "Mostrar todos los eventos"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
+
+msgid "Event could not be loaded"
+msgstr "No se pudo cargar el evento"
+
+msgid "Organisation unit could not be loaded"
+msgstr "No se pudo cargar la unidad organizativa"
 
 msgid "Possible duplicates found"
 msgstr "Posibles duplicados encontrados"
@@ -1011,6 +1026,12 @@ msgstr "Propiedad de {{ownerOrgUnit}}"
 
 msgid "Last updated {{date}}"
 msgstr "Última actualización {{date}}"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Warning"
+msgstr "Advertencia"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

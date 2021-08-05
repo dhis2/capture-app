@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -582,21 +582,6 @@ msgstr "Nemáte přístup k psaní komentářů"
 msgid "Write comment"
 msgstr "Napsat komentář"
 
-msgid "Show all events"
-msgstr "Zobrazit všechny události"
-
-msgid "Edit event"
-msgstr "Upravit událost"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Událost se nepodařilo načíst. Jste si jisti, že existuje?"
-
-msgid "Event could not be loaded"
-msgstr "Událost se nepodařilo načíst"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Organizační jednotku se nepodařilo načíst"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance trasované entity s ID \"{{teiId}}\" neexistuje"
 
@@ -607,6 +592,12 @@ msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Zápis s ID \"{{enrollmentId}}\" neexistuje"
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr "{{teiDisplayName}} je zapsán do několika programů. Vyberte program."
@@ -648,6 +639,9 @@ msgstr "Vytvořte novou událost v tomto programu."
 
 msgid "View working list in this program."
 msgstr "Zobrazit pracovní seznam v tomto programu."
+
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Zobrazit událost Enrollment{{escape}}"
@@ -874,8 +868,17 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Hledat ve všech programech"
 
+msgid "events"
+msgstr "události"
+
+msgid "event"
+msgstr "událost"
+
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
+
+msgid "Edit event"
+msgstr "Upravit událost"
 
 msgid "Event details"
 msgstr "Podrobnosti události"
@@ -898,6 +901,18 @@ msgstr "Událost přiřazená uživateli {{name}}"
 
 msgid "Feedbacks"
 msgstr "Zpětná vazba"
+
+msgid "Show all events"
+msgstr "Zobrazit všechny události"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Událost se nepodařilo načíst. Jste si jisti, že existuje?"
+
+msgid "Event could not be loaded"
+msgstr "Událost se nepodařilo načíst"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Organizační jednotku se nepodařilo načíst"
 
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
@@ -986,6 +1001,12 @@ msgstr "Vlastník: {{ownerOrgUnit}}"
 
 msgid "Last updated {{date}}"
 msgstr "Poslední aktualizace {{date}}"
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Warning"
+msgstr "Varování"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"

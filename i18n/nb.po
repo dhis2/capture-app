@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
+"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -587,21 +587,6 @@ msgstr "Du har ikke tilgang til å skrive kommentarer"
 msgid "Write comment"
 msgstr "Skriv kommentar"
 
-msgid "Show all events"
-msgstr "Vis alle hendelser"
-
-msgid "Edit event"
-msgstr "Rediger hendelse"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den finnes?"
-
-msgid "Event could not be loaded"
-msgstr "Hendelse kunne ikke lastes inn"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Organisasjonsenhet kunne ikke lastes inn"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Sporet enhetsforekomst med id \"{{teiId}}\"  eksisterer ikke"
 
@@ -613,6 +598,12 @@ msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Registrering med ID-en \"{{enrollmentId}}\" eksisterer ikke"
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr "{{teiDisplayName}} er registrert i flere programmer. Velg et program."
@@ -654,6 +645,9 @@ msgstr "Opprett ny hendelse i dette programmet"
 
 msgid "View working list in this program."
 msgstr "Se arbeidsliste i dette programmet."
+
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
@@ -878,8 +872,17 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Søk i alle programmer"
 
+msgid "events"
+msgstr "hendelser"
+
+msgid "event"
+msgstr "hendelse"
+
 msgid "You dont have access to edit this event"
 msgstr "Du har ikke tilgang til å redigere denne hendelsen"
+
+msgid "Edit event"
+msgstr "Rediger hendelse"
 
 msgid "Event details"
 msgstr "Hendelsesdetaljer"
@@ -902,6 +905,18 @@ msgstr "Hendelse er tildelt til {{name}}"
 
 msgid "Feedbacks"
 msgstr "Tilbakemeldinger"
+
+msgid "Show all events"
+msgstr "Vis alle hendelser"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den finnes?"
+
+msgid "Event could not be loaded"
+msgstr "Hendelse kunne ikke lastes inn"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Organisasjonsenhet kunne ikke lastes inn"
 
 msgid "Possible duplicates found"
 msgstr "Mulige duplikater funnet"
@@ -988,6 +1003,12 @@ msgstr ""
 
 msgid "Last updated {{date}}"
 msgstr ""
+
+msgid "Error"
+msgstr "Feil"
+
+msgid "Warning"
+msgstr "Advarsel"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

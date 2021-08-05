@@ -28,7 +28,6 @@ export type DispatchersFromRedux = $ReadOnly<{|
   onResetCategoryOption: (categoryId: string) => void,
   onResetAllCategoryOptions: () => void,
   onStartAgain: () => void,
-
 |}>
 
 

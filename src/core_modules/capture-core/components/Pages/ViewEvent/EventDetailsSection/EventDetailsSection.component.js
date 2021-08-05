@@ -1,13 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { Info as InfoIcon } from '@material-ui/icons';
 import { withStyles, Tooltip } from '@material-ui/core/';
+import { IconFileDocument24 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../Buttons/Button.component';
 import { ViewEventSection } from '../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
-import { EditEventDataEntry } from './EditEventDataEntry/EditEventDataEntry.container';
-import { ViewEventDataEntry } from './ViewEventDataEntry/ViewEventDataEntry.container';
+import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
+import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
 import type { ProgramStage } from '../../../../metaData';
 
 const getStyles = (theme: Theme) => ({
@@ -115,7 +115,7 @@ class EventDetailsSectionPlain extends Component<Props> {
         return (
             <div className={classes.container}>
                 <ViewEventSection
-                    header={<ViewEventSectionHeader text={i18n.t('Event details')} icon={InfoIcon} />}
+                    header={<ViewEventSectionHeader text={i18n.t('Event details')} icon={IconFileDocument24} />}
                 >
                     <div className={classes.content}>
                         {this.renderDataEntryContainer()}

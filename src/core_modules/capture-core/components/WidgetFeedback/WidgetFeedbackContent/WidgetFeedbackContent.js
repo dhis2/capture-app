@@ -34,7 +34,7 @@ const styles = {
 
 const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: ContentType) => {
     if (!widgetData?.length) {
-        return <p data-test={'widget-content'} className={classes.noFeedbackText}>{emptyText}</p>;
+        return <p data-test="widget-content" className={classes.noFeedbackText}>{emptyText}</p>;
     }
 
     const renderTextObject = (item: FilteredText) => (
@@ -51,7 +51,7 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
             key={item.id}
             className={classes.listItem}
         >
-            {item.key}{item.value ? `: ${item.value}` : null}
+            {item.key}{item.key && item.value ? ': ' : null}{item.value}
         </li>
     );
 
@@ -66,13 +66,13 @@ const WidgetFeedbackContentComponent = ({ widgetData, emptyText, classes }: Cont
 
     return (
         <div
-            data-test={'widget-content'}
+            data-test="widget-content"
             className={classes.container}
         >
             <ul className={classes.unorderedList}>
                 {widgetData.map((rule: WidgetData, index: number) => {
                     if (typeof rule === 'object') {
-                        if (rule.key) {
+                        if (rule.key || rule.value) {
                             return renderKeyValue(rule);
                         } else if (rule.message) {
                             return renderTextObject(rule);

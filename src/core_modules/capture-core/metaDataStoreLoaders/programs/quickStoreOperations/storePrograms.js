@@ -28,13 +28,12 @@ const convert = (() => {
             }, {});
 
     const convertProgramSections = apiProgramSections =>
-        (apiProgramSections ? apiProgramSections
-            .filter(apiProgramSection => apiProgramSection.displayFormName)
+        (apiProgramSections || [])
             .map(apiProgramSection => ({
                 ...apiProgramSection,
                 trackedEntityAttributes: apiProgramSection.trackedEntityAttributes.map(te => te.id),
             }))
-            .sort((a, b) => a.sortOrder - b.sortOrder) : []);
+            .sort((a, b) => a.sortOrder - b.sortOrder);
 
     const getProgramStageSections = apiSections => (apiSections ? sort(apiSections) : []);
 

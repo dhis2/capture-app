@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { CircularLoader } from '@dhis2/ui';
 import classNames from 'classnames';
-import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import {
     Table,
@@ -18,7 +18,6 @@ import {
 import { SortLabelWrapper } from '../../DataTable/SortLabelWrapper.component';
 import { dataElementTypes } from '../../../metaData';
 import type { OptionSet } from '../../../metaData';
-import { LoadingMask } from '../../LoadingMasks';
 
 
 const getStyles = (theme: Theme) => ({
@@ -44,8 +43,8 @@ const getStyles = (theme: Theme) => ({
             paddingRight: theme.spacing.unit * 3,
         },
         borderBottomColor: theme.palette.type === 'light'
-            ? lighten(fade(theme.palette.divider, 1), 0.88)
-            : darken(fade(theme.palette.divider, 1), 0.8),
+            ? theme.palette.dividerLighter
+            : theme.palette.dividerDarker,
     },
     bodyCell: {
         fontSize: theme.typography.pxToRem(13),
@@ -217,7 +216,7 @@ class Index extends React.Component<Props> {
                         colSpan={columnsCount}
                         className={classNames(classes.cell, classes.bodyCell, classes.loadingCell)}
                     >
-                        <LoadingMask />
+                        <CircularLoader />
                     </Cell>
                 </Row>
             ) : this.renderRows(visibleColumns, columnsCount);
