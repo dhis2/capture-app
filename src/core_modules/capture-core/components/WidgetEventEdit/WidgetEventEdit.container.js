@@ -1,6 +1,6 @@
 // @flow
 import React, { type ComponentType } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { spacersNum, Button, colors, IconEdit24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
@@ -42,9 +42,9 @@ export const WidgetEventEditPlain = ({
     classes,
     programStage,
     programStage: { name, icon },
-    mode,
 }: Props) => {
     const dispatch = useDispatch();
+    const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent) ? pageMode.EDIT : pageMode.VIEW;
 
     return (
         <div data-test="widget-enrollment-event">
@@ -79,7 +79,7 @@ export const WidgetEventEditPlain = ({
                 noncollapsible
             >
                 <div className={classes.form}>
-                    {mode === pageMode.VIEW ? (
+                    {showEditEvent === pageMode.VIEW ? (
                         <ViewEventDataEntry
                             formFoundation={programStage.stageForm}
                         />

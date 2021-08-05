@@ -19,13 +19,8 @@ export const EnrollmentEditEventPage = () => {
         shallowEqual,
     );
     const { program } = useProgramInfo(programId);
-    const showEditEvent = useSelector(
-        ({ viewEventPage }) =>
-            viewEventPage?.eventDetailsSection?.showEditEvent,
-    );
-    const programStage = [...program.stages?.values()].find(
-        item => item.id === stageId,
-    );
+    const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
+    const programStage = [...program.stages?.values()].find(item => item.id === stageId);
 
     return (
         <EnrollmentEditEventPageComponent
