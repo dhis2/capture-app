@@ -41,7 +41,7 @@ const subValueGetterByElementType = {
 };
 
 
-export async function getSubValues(eventId: string, type: any, values?: ?Object) {
+export async function getSubValues(type: any, values?: ?Object) {
     if (!values) {
         return null;
     }

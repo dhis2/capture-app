@@ -13,9 +13,9 @@ import { colors,
     DataTableColumnHeader,
     Button,
 } from '@dhis2/ui';
-import { sortDataFromEvent } from '../hooks/sortFuntions';
-import { useComputeDataFromEvent, useComputeHeaderColumn } from '../hooks/useEventList';
-import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from '../hooks/constants';
+import { sortDataFromEvent } from './hooks/sortFuntions';
+import { useComputeDataFromEvent, useComputeHeaderColumn } from './hooks/useEventList';
+import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import type { Props } from './stageDetail.types';
 
 
@@ -42,8 +42,8 @@ const styles = {
 };
 
 const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) => {
-    const headerColumns = useComputeHeaderColumn(dataElements, events);
-    const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events, headerColumns);
+    const headerColumns = useComputeHeaderColumn(dataElements);
+    const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events);
 
     React.useEffect(() => {
         if (!dataSource?.length) {

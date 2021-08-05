@@ -2,14 +2,14 @@
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
-import { dataElementTypes } from '../../../../../metaData';
-import type { StageDataElement } from '../../../types/common.types';
+import { dataElementTypes } from '../../../../../../metaData';
+import type { StageDataElement } from '../../../../types/common.types';
 import {
     convertStatusForView,
-    convertEventsToObject,
     getAllFieldsWithValue,
     getValueByKeyFromEvent,
     formatValueForView,
+    mergeRecordsByType,
 } from './helpers';
 import { SORT_DIRECTION } from './constants';
 
@@ -29,46 +29,39 @@ const baseFields = baseKeys.map((key, index) => ({ ...key, ...basedFieldTypes[in
 // $FlowFixMe
 const baseColumns = baseFields.map((key, index) => ({ ...key, ...baseColumnHeaders[index] }));
 
-const useComputeDataFromEvent =
-    (
-        dataElements: Array<StageDataElement>,
-        events: Array<ApiTEIEvent>,
-        headerColumns: Array<{id: string, isPredefined?: boolean}>,
-    ) => {
-        const [dataSource, setDataSource] = React.useState([]);
-        const eventsObject = convertEventsToObject(events);
-        const computeData = async () => {
-            const eventsData = [];
-            // $FlowFixMe
-            for await (const eventObject of eventsObject) {
-                const { id: eventId, records, event } = eventObject;
-                const predefinedFields = baseFields.reduce((acc, field) => {
-                    acc[field.id] = formatValueForView(getValueByKeyFromEvent(event, field), field.type);
-                    return acc;
-                }, {});
+const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: Array<ApiTEIEvent>) => {
+    const [dataSource, setDataSource] = React.useState([]);
 
-                const allFields = await getAllFieldsWithValue(dataElements, eventId, headerColumns, records);
-                eventsData.push({ ...predefinedFields, ...allFields });
-            }
-            setDataSource(eventsData);
-        };
+    const computeData = async () => {
+        const dataElementsByType = await mergeRecordsByType(events, dataElements);
+        const eventsData = [];
+        // $FlowFixMe
+        for (const event of events) {
+            const predefinedFields = baseFields.reduce((acc, field) => {
+                acc[field.id] = formatValueForView(getValueByKeyFromEvent(event, field), field.type);
+                return acc;
+            }, {});
 
-        return { computeData, dataSource };
+            const allFields = getAllFieldsWithValue(dataElements, dataElementsByType);
+            eventsData.push({ ...predefinedFields, ...allFields });
+        }
+        setDataSource(eventsData);
     };
 
-const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, events: Array<ApiTEIEvent>) => {
+    return { computeData, dataSource };
+};
+
+const useComputeHeaderColumn = (dataElements: Array<StageDataElement>) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, type } = currDataElement;
-            const eventDataElement = events.find(event => event.dataValues.find(el => el.dataElement === id));
-            if (eventDataElement && !acc.find(item => item.id === id)) {
+            if (!acc.find(item => item.id === id)) {
                 acc.push({ id, header: name, type, sortDirection: SORT_DIRECTION.DEFAULT });
             }
             return acc;
         }, []);
         return [...baseColumns, ...dataElementHeaders];
-    }, [dataElements, events]);
-
+    }, [dataElements]);
 
     return headerColumns;
 };

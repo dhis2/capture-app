@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { moment } from 'capture-core-utils/moment';
-import { dataElementTypes } from '../../../../../metaData';
+import { dataElementTypes } from '../../../../../../metaData';
 import { SORT_DIRECTION } from './constants';
 
 const sortNumber = (strA: string, strB: string, direction: string) => {

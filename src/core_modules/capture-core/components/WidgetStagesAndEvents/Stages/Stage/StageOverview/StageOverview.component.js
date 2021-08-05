@@ -8,7 +8,7 @@ import moment from 'moment';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import { statusTypes } from '../../../../../metaData';
 import type { Props } from './stageOverview.types';
-import { isEventOverdue } from '../hooks/helpers';
+import { isEventOverdue } from '../StageDetail/hooks/helpers';
 
 const styles = {
     container: {
