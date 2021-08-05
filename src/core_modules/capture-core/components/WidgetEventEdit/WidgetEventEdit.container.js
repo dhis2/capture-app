@@ -44,7 +44,7 @@ export const WidgetEventEditPlain = ({
     programStage: { name, icon },
 }: Props) => {
     const dispatch = useDispatch();
-    const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent) ? pageMode.EDIT : pageMode.VIEW;
+    const currentPageMode = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent) ? pageMode.EDIT : pageMode.VIEW;
 
     return (
         <div data-test="widget-enrollment-event">
@@ -79,7 +79,7 @@ export const WidgetEventEditPlain = ({
                 noncollapsible
             >
                 <div className={classes.form}>
-                    {showEditEvent === pageMode.VIEW ? (
+                    {currentPageMode === pageMode.VIEW ? (
                         <ViewEventDataEntry
                             formFoundation={programStage.stageForm}
                         />
