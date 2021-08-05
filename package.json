@@ -5,8 +5,11 @@
   "cacheVersion": "1",
   "serverVersion": "37",
   "private": false,
+  "resolutions": {
+      "@dhis2/app-runtime": "2.9.0-beta.4"
+  },
   "dependencies": {
-    "@dhis2/app-runtime": "^2.8.0",
+    "@dhis2/app-runtime": "^2.9.0-beta.4",
     "@dhis2/d2-i18n": "^1.1.0",
     "@dhis2/d2-icons": "^1.0.1",
     "@dhis2/d2-ui-app": "^2.0.0",
@@ -81,7 +84,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-flow-strip-types": "^7.14.5",
-    "@dhis2/cli-app-scripts": "^4.0.9",
+    "@dhis2/cli-app-scripts": "^7.1.1",
     "@dhis2/cli-helpers-engine": "^3.0.0",
     "@dhis2/cli-utils-cypress": "^8.0.1",
     "@dhis2/cypress-commands": "^8.0.1",
