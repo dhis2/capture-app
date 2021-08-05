@@ -11,6 +11,7 @@ import type { Value } from './DateFilter.component';
 type Props = {
     filter: ?DateFilterData,
     filterTypeRef: Function,
+    handleCommitValue: () => void,
 };
 
 type State = {
@@ -52,6 +53,7 @@ export class DateFilterManager extends React.Component<Props, State> {
         this.setState({
             value,
         });
+        this.props.handleCommitValue && this.props.handleCommitValue();
     }
 
     render() {

@@ -6,6 +6,7 @@ import type { TextFilterData } from './types';
 type Props = {
     filter: ?TextFilterData,
     filterTypeRef: Function,
+    handleCommitValue: () => void,
 };
 
 type State = {
@@ -28,6 +29,7 @@ export class TextFilterManager extends React.Component<Props, State> {
         this.setState({
             value,
         });
+        this.props.handleCommitValue();
     }
 
     render() {
