@@ -1,12 +1,8 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import { Tag } from '@dhis2/ui';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
-import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
-import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
 import { statusTypes, translatedStatusTypes } from '../../../../../../metaData';
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
@@ -31,10 +27,6 @@ const getValueByKeyFromEvent = (event: ApiTEIEvent, { id, resolveValue }: Object
 
     return event[id];
 };
-
-const formatValueForView = (dataElements: Array<StageDataElement>, type: string) =>
-// $FlowFixMe
-    convertClientToList(convertServerToClient(dataElements, type), type);
 
 
 const convertStatusForView = (event: ApiTEIEvent) => {
@@ -74,40 +66,12 @@ const mergeRecordsByType = async (events: Array<ApiTEIEvent>, dataElements: Arra
     return dataElementsByType;
 };
 
-const getAllFieldsWithValue = (
-    dataElements: Array<StageDataElement>,
-    dataElementsByType: Array<{type: string, ids: Object}>,
-) => dataElements
-    .reduce((acc, { id, type, options }) => {
-        const value = dataElementsByType.find(item => item.type === type)?.ids?.[id];
-        if (type && value) {
-            if (options) {
-                if (options[value]) {
-                    acc[id] = options[value];
-                } else {
-                    log.error(
-                        errorCreator(
-                            'Missing value in options')(
-                            { id, value, options }),
-                    );
-                    acc[id] = formatValueForView(value, type);
-                }
-            } else {
-                acc[id] = formatValueForView(value, type);
-            }
-        } else {
-            acc[id] = undefined;
-        }
-        return acc;
-    }, {});
-
 
 export {
     isEventOverdue,
     getEventStatus,
-    getAllFieldsWithValue,
     convertStatusForView,
     getValueByKeyFromEvent,
-    formatValueForView,
+
     mergeRecordsByType,
 };

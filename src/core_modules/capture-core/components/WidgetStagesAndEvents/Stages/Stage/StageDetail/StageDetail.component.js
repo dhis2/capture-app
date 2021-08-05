@@ -14,7 +14,7 @@ import { colors,
     Button,
 } from '@dhis2/ui';
 import { sortDataFromEvent } from './hooks/sortFuntions';
-import { useComputeDataFromEvent, useComputeHeaderColumn } from './hooks/useEventList';
+import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import type { Props } from './stageDetail.types';
 
@@ -97,17 +97,18 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
                 return sortDataFromEvent(a[columnName], b[columnName], type, sortDirection);
             })
             .slice(0, displayedRowNumber)
+            .map(row => formatRowForView(row, dataElements))
             .map((row, index) => {
-                const cells = Object.keys(row)
-                    .map(id => (
-                        <DataTableCell
-                            key={id}
-                        >
-                            <div >
-                                {row[id]}
-                            </div>
-                        </DataTableCell>
-                    ));
+                const cells = headerColumns.map(({ id }) => (<DataTableCell
+                    key={id}
+                >
+                    <div>
+                        { // $FlowFixMe
+                            row[id]
+                        }
+                    </div>
+                </DataTableCell>));
+
 
                 return (
                     <DataTableRow

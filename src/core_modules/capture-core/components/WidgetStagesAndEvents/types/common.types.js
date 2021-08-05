@@ -1,5 +1,6 @@
 // @flow
 import type { Icon } from 'capture-core/metaData';
+import { dataElementTypes } from '../../../metaData';
 
 type StageOptions = {
     [code: string]: string;
@@ -7,7 +8,7 @@ type StageOptions = {
 export type StageDataElement = {
     id: string,
     name: string,
-    type: string,
+    type: $Keys<typeof dataElementTypes>,
     options: Array<StageOptions>
 }
 
