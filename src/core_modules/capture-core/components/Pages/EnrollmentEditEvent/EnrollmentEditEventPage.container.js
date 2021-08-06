@@ -24,7 +24,7 @@ export const EnrollmentEditEventPage = () => {
     const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
     const programStage = [...program.stages?.values()].find(item => item.id === stageId);
     useEnrollment(teiId);
-    
+
     return (
         <EnrollmentEditEventPageComponent
             mode={showEditEvent ? pageMode.EDIT : pageMode.VIEW}
