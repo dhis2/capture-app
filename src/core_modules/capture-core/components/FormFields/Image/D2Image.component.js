@@ -1,5 +1,5 @@
 // @flow
-import { IconCheckmark24, colors } from '@dhis2/ui';
+import { IconCheckmark24, colors, CircularLoader } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
@@ -7,7 +7,6 @@ import { orientations } from 'capture-ui';
 import { Button } from '../../Buttons/Button.component';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { getApi } from '../../../d2/d2Instance';
-import { LoadingMask } from '../../LoadingMasks';
 import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 
 
@@ -139,7 +138,7 @@ class D2ImagePlain extends Component<Props> {
                             return (
                                 <div className={containerClass}>
                                     <div className={classes.innerContainer}>
-                                        <LoadingMask />
+                                        <CircularLoader />
                                     </div>
                                     <div className={classes.innerContainer}>{i18n.t('Uploading image')}</div>
                                 </div>);

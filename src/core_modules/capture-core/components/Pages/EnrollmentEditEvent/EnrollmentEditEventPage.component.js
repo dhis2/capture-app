@@ -65,7 +65,7 @@ const EnrollmentEditEventPagePain = ({
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
                 {programStage ? (
-                    <WidgetEventEdit programStage={programStage} mode={mode} />
+                    <WidgetEventEdit programStage={programStage} />
                 ) : (
                     <span>{i18n.t('We could not find the stage in the program')}</span>
                 )}
