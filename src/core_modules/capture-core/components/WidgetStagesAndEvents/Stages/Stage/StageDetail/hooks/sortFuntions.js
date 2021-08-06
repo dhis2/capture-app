@@ -41,6 +41,8 @@ const sortTime = (timeA: string, timeB: string, direction: string) => {
     return 0;
 };
 
+const sortOrgUnit = (orgA: Object, orgB: Object, direction: string) => sortText(orgA.name, orgB.name, direction);
+
 const sortForTypes = {
     [dataElementTypes.EMAIL]: sortText,
     [dataElementTypes.TEXT]: sortText,
@@ -59,12 +61,12 @@ const sortForTypes = {
     [dataElementTypes.PERCENTAGE]: sortText,
     [dataElementTypes.URL]: sortText,
     [dataElementTypes.AGE]: sortText,
-    [dataElementTypes.ORGANISATION_UNIT]: sortText,
-    [dataElementTypes.COORDINATE]: sortText,
-    [dataElementTypes.POLYGON]: sortText,
+    [dataElementTypes.ORGANISATION_UNIT]: sortOrgUnit,
     [dataElementTypes.USERNAME]: sortText,
-    [dataElementTypes.FILE_RESOURCE]: sortText,
-    [dataElementTypes.IMAGE]: sortText,
+    [dataElementTypes.COORDINATE]: () => null,
+    [dataElementTypes.POLYGON]: () => null,
+    [dataElementTypes.FILE_RESOURCE]: () => null,
+    [dataElementTypes.IMAGE]: () => null,
     [dataElementTypes.UNKNOWN]: () => null,
 };
 
