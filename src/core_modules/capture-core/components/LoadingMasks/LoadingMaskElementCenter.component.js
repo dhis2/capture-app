@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { LoadingMask } from './LoadingMask.component';
+import { CircularLoader } from '@dhis2/ui';
 
 const styles = () => ({
     container: {
@@ -19,18 +19,16 @@ type Props = {
     containerStyle?: ?Object,
 };
 
-const LoadingMaskForPagePlain = (props: Props) => {
-    const { containerStyle, classes, ...passOnProps } = props;
+const LoadingMaskElementCenterPlain = (props: Props) => {
+    const { containerStyle, classes } = props;
     return (
         <div
             className={classes.container}
             style={containerStyle}
         >
-            <LoadingMask
-                {...passOnProps}
-            />
+            <CircularLoader />
         </div>
     );
 };
 
-export const LoadingMaskElementCenter = withStyles(styles)(LoadingMaskForPagePlain);
+export const LoadingMaskElementCenter = withStyles(styles)(LoadingMaskElementCenterPlain);

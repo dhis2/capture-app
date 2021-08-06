@@ -1,9 +1,8 @@
 // @flow
 import React, { Component } from 'react';
+import { CircularLoader } from '@dhis2/ui';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import { LoadingMask } from './LoadingMask.component';
-
 
 type Props = {
 };
@@ -15,7 +14,7 @@ export class DialogLoadingMask extends Component<Props> {
                 open
             >
                 <DialogContent>
-                    <LoadingMask />
+                    <CircularLoader />
                 </DialogContent>
             </Dialog>
         );
