@@ -2,6 +2,10 @@ beforeEach(() => {
     cy.loginThroughForm();
 });
 
+Given(/^you land on the enrollment (.*) page by having typed (.*)$/, (_, url) => {
+    cy.visit(url);
+});
+
 Then(/^you see the following (.*)$/, (message) => {
     cy.contains(message);
 });
