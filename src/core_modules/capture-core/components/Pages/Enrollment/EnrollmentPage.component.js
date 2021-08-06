@@ -3,7 +3,7 @@ import React from 'react';
 import type { ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { compose } from 'redux';
-import { LockedSelector } from '../../LockedSelector';
+import { ScopeSelector } from '../../ScopeSelector';
 import type { Props } from './EnrollmentPage.types';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { LoadingMaskForPage } from '../../LoadingMasks/LoadingMaskForPage.component';
@@ -24,7 +24,7 @@ const getStyles = ({ typography }) => ({
 });
 
 const EnrollmentPagePlain = ({ classes, enrollmentPageStatus }) => (<>
-    <LockedSelector pageToPush="enrollment" />
+    <ScopeSelector pageToPush="enrollment" />
 
     <div data-test="enrollment-page-content" className={classes.container} >
 

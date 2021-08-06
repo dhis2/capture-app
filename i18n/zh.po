@@ -626,7 +626,7 @@ msgid "View working list in this program."
 msgstr "查看此项目中的工作清单。"
 
 msgid "Enrollment{{escape}} New Event"
-msgstr ""
+msgstr "登记{{escape}}新事件"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "注册{{escape}} 查看事件"
