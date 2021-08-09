@@ -59,15 +59,15 @@ const EnrollmentPagePlain = ({
             <ScopeSelector
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
-                onSetProgramId={id => setProgramId('enrollment', id)}
-                onSetOrgUnit={id => setOrgUnitId('enrollment', id)}
-                onResetProgramId={() => resetProgramId('enrollment')}
-                onResetOrgUnitId={() => resetOrgUnitId('enrollment')}
+                onSetProgramId={id => setProgramId(id)}
+                onSetOrgUnit={id => setOrgUnitId(id)}
+                onResetProgramId={() => resetProgramId()}
+                onResetOrgUnitId={() => resetOrgUnitId()}
             >
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                     <SingleLockedSelect
                         ready={trackedEntityName && teiDisplayName}
-                        onClear={() => resetTeiId()}
+                        onClear={() => resetTeiId('/')}
                         options={[
                             {
                                 label: teiDisplayName,
@@ -81,8 +81,8 @@ const EnrollmentPagePlain = ({
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                     <SingleLockedSelect
                         ready
-                        onClear={() => resetEnrollmentId('enrollment')}
-                        onSelect={id => setEnrollmentId('enrollment', id)}
+                        onClear={() => resetEnrollmentId()}
+                        onSelect={id => setEnrollmentId(id)}
                         options={enrollmentsAsOptions}
                         selectedValue={enrollmentId}
                         title={i18n.t('Enrollment')}
