@@ -13,8 +13,8 @@ const StageEventListPlain = ({ stage }) => (<>
         <Widget
             noncollapsible
             header={<StageEventHeader
-                title={stage.name}
-                icon={stage.icon}
+                title={stage?.name}
+                icon={stage?.icon}
                 events={[]}
             />}
         >

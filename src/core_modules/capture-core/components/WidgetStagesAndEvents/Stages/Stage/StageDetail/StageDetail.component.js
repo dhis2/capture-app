@@ -1,7 +1,10 @@
 // @flow
 import React, { type ComponentType, useState } from 'react';
 import { withStyles } from '@material-ui/core';
+import { useHistory } from 'react-router';
 import i18n from '@dhis2/d2-i18n';
+// $FlowFixMe
+import { useSelector, shallowEqual } from 'react-redux';
 import { colors,
     spacersNum,
     DataTableBody,
@@ -14,6 +17,7 @@ import { colors,
     Button,
 } from '@dhis2/ui';
 import { sortDataFromEvent } from './hooks/sortFuntions';
+import { urlArguments } from '../../../../../utils/url';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import type { Props } from './stageDetail.types';
@@ -41,7 +45,20 @@ const styles = {
     },
 };
 
-const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) => {
+const StageDetailPlain = ({ stageId, events, eventName, dataElements, classes }: Props) => {
+    const history = useHistory();
+    const { enrollmentId, programId, teiId, orgUnitId } = useSelector(
+        ({
+            router: {
+                location: { query },
+            },
+        },
+        ) => (
+            { enrollmentId: query.enrollmentId,
+                teiId: query.teiId,
+                programId: query.programId,
+                orgUnitId: query.orgUnitId,
+            }), shallowEqual);
     const headerColumns = useComputeHeaderColumn(dataElements);
     const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events);
 
@@ -63,6 +80,18 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
             columnName: name,
             sortDirection: direction,
         });
+    };
+
+    const handleViewAll = () => {
+        history.push(
+            `/enrollment/stageEvents?${urlArguments({ orgUnitId, programId, stageId })}`,
+        );
+    };
+
+    const handleCreateNew = () => {
+        history.push(
+            `/enrollmentEventNew?${urlArguments({ orgUnitId, programId, teiId, enrollmentId, stageId })}`,
+        );
     };
 
     function renderHeader() {
@@ -121,7 +150,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
             });
     }
 
-    const renderFooter = () => {
+    function renderFooter() {
         const renderShowMoreButton = () => (events.length > DEFAULT_NUMBER_OF_ROW
             && displayedRowNumber < events.length ? <Button
                 dataTest="show-more-button"
@@ -146,13 +175,13 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
         const renderViewAllButton = () => (events.length > 1 ? <Button
             dataTest="view-all-button"
             className={classes.button}
-            onClick={() => {}}
+            onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
 
         const renderCreateNewButton = () => (<Button
             className={classes.button}
             dataTest="create-new-button"
-            onClick={() => {}}
+            onClick={handleCreateNew}
         >{i18n.t('New {{ eventName }} event', { eventName })}</Button>);
 
         return (
@@ -165,7 +194,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
                 </DataTableCell>
             </DataTableRow>
         );
-    };
+    }
 
     return (
         <div className={classes.container}>
