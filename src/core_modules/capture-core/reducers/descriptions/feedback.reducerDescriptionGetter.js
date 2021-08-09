@@ -21,8 +21,8 @@ import {
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
-import { eventWorkingListsActionTypes } from '../../components/EventWorkingLists';
-import { workingListsCommonActionTypes } from '../../components/WorkingListsCommon';
+import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
+import { workingListsCommonActionTypes } from '../../components/WorkingLists/WorkingListsCommon';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 

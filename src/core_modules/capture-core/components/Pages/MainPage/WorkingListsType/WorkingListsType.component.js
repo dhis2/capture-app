@@ -2,7 +2,7 @@
 import React from 'react';
 import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import { EventWorkingListsInit } from '../EventWorkingListsInit';
-import { TeiWorkingLists } from '../../../TeiWorkingLists';
+import { TeiWorkingLists } from '../../../WorkingLists/TeiWorkingLists';
 import type { Props } from './workingListsType.types';
 
 export const WorkingListsType = ({ programId, orgUnitId }: Props) => {

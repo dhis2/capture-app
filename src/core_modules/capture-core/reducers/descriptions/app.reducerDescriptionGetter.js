@@ -4,7 +4,7 @@ import type { Updaters } from '../../trackerRedux/trackerReducer';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
 } from '../../components/DataEntries/SingleEventRegistrationEntry';
-import { eventWorkingListsActionTypes } from '../../components/EventWorkingLists';
+import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
 import { actionTypes as editEventActionTypes }
     from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 import { actionTypes as viewEventActionTypes }

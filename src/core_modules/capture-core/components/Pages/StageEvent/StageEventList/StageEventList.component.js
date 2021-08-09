@@ -5,7 +5,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { StageEventHeader } from './StageEventHeader/StageEventHeader.component';
 import { Widget } from '../../../Widget';
 import type { Props } from './StageEventList.types';
-import { EventWorkingLists } from '../../../EventWorkingLists';
+import { EventWorkingLists } from '../../../WorkingLists/EventWorkingLists';
 
 
 const getStyles = () => ({});

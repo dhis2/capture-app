@@ -1,8 +1,8 @@
 // @flow
 import { moment } from 'capture-core-utils/moment';
 import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
-import { workingListsCommonActionTypes } from '../../../components/WorkingListsCommon';
-import { eventWorkingListsActionTypes } from '../../../components/EventWorkingLists';
+import { workingListsCommonActionTypes } from '../../../components/WorkingLists/WorkingListsCommon';
+import { eventWorkingListsActionTypes } from '../../../components/WorkingLists/EventWorkingLists';
 import { recentlyAddedEventsActionTypes } from '../../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList';
 
 export const workingListsListRecordsDesc = createReducerDescription({

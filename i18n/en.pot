@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
-"PO-Revision-Date: 2021-07-06T09:57:52.624Z\n"
+"POT-Creation-Date: 2021-08-09T15:44:53.934Z\n"
+"PO-Revision-Date: 2021-08-09T15:44:53.935Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -330,37 +330,13 @@ msgstr ""
 msgid "Sort"
 msgstr ""
 
-msgid "Delete event"
-msgstr ""
-
-msgid "Download as JSON"
-msgstr ""
-
-msgid "Download as XML"
-msgstr ""
-
-msgid "Download as CSV"
-msgstr ""
-
-msgid "Download with current filters"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "Download data..."
-msgstr ""
-
-msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "an error occurred loading working lists"
-msgstr ""
-
 msgid "No events to display"
 msgstr ""
 
 msgid "Data for offline list not present"
+msgstr ""
+
+msgid "Close"
 msgstr ""
 
 msgid "Please select the user"
@@ -839,27 +815,6 @@ msgstr ""
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
-msgid "Enrollment status"
-msgstr ""
-
-msgid "Cancelled"
-msgstr ""
-
-msgid "Assigned to"
-msgstr ""
-
-msgid "Registering unit"
-msgstr ""
-
-msgid "Registration Date"
-msgstr ""
-
-msgid "Inactive"
-msgstr ""
-
-msgid "Working list could not be updated"
-msgstr ""
-
 msgid "To work with the selected program,"
 msgstr ""
 
@@ -922,6 +877,9 @@ msgstr ""
 msgid "Last updated {{date}}"
 msgstr ""
 
+msgid "Cancelled"
+msgstr ""
+
 msgid "Error"
 msgstr ""
 
@@ -935,6 +893,48 @@ msgid "Person Profile"
 msgstr ""
 
 msgid "Stages and Events"
+msgstr ""
+
+msgid "Delete event"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr ""
+
+msgid "Download as XML"
+msgstr ""
+
+msgid "Download as CSV"
+msgstr ""
+
+msgid "Download with current filters"
+msgstr ""
+
+msgid "Download data..."
+msgstr ""
+
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Assigned to"
+msgstr ""
+
+msgid "Registering unit"
+msgstr ""
+
+msgid "Registration Date"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Working list could not be updated"
 msgstr ""
 
 msgid "Update view"
