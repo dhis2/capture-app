@@ -11,7 +11,7 @@ import { convertValue as convertServerToClient } from '../../../../../../convert
 import {
     convertStatusForView,
     getValueByKeyFromEvent,
-    mergeRecordsByType,
+    groupRecordsByType,
 } from './helpers';
 import { SORT_DIRECTION } from './constants';
 
@@ -32,11 +32,13 @@ const baseFields = baseKeys.map((key, index) => ({ ...key, ...basedFieldTypes[in
 const baseColumns = baseFields.map((key, index) => ({ ...key, ...baseColumnHeaders[index] }));
 
 const getAllFieldsWithValue = (
+    eventId: string,
     dataElements: Array<StageDataElement>,
-    dataElementsByType: Array<{type: string, ids: Object}>,
+    dataElementsByType: Array<{type: string, eventId: string, ids: Object}>,
 ) => dataElements
     .reduce((acc, { id, type, options }) => {
-        const value = dataElementsByType.find(item => item.type === type)?.ids?.[id];
+        const value = dataElementsByType
+            .find(item => item.type === type && item.eventId === eventId)?.ids?.[id];
         if (type && value) {
             if (options) {
                 if (options[value]) {
@@ -61,16 +63,15 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
     const [dataSource, setDataSource] = React.useState([]);
 
     const computeData = async () => {
-        const dataElementsByType = await mergeRecordsByType(events, dataElements);
+        const dataElementsByType = await groupRecordsByType(events, dataElements);
         const eventsData = [];
-        // $FlowFixMe
         for (const event of events) {
             const predefinedFields = baseFields.reduce((acc, field) => {
                 acc[field.id] = convertServerToClient(getValueByKeyFromEvent(event, field), field.type);
                 return acc;
             }, {});
 
-            const allFields = getAllFieldsWithValue(dataElements, dataElementsByType);
+            const allFields = getAllFieldsWithValue(event.event, dataElements, dataElementsByType);
             eventsData.push({ ...predefinedFields, ...allFields });
         }
         setDataSource(eventsData);

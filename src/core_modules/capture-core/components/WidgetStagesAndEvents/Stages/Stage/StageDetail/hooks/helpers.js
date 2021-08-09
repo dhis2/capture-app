@@ -41,18 +41,16 @@ const convertStatusForView = (event: ApiTEIEvent) => {
     );
 };
 
-const mergeRecordsByType = async (events: Array<ApiTEIEvent>, dataElements: Array<StageDataElement>) => {
+const groupRecordsByType = async (events: Array<ApiTEIEvent>, dataElements: Array<StageDataElement>) => {
     // $FlowFixMe
     const dataElementsByType = events.reduce((acc, event) => {
         event.dataValues.forEach((dataValue) => {
             const { dataElement: id, value } = dataValue;
             const { type } = dataElements.find(el => el.id === id) || {};
-            if (!type) {
-                return;
-            }
-            const currentItem = acc.find(item => item.type === type);
+            if (!type) { return; }
+            const currentItem = acc.find(item => item.type === type && item.eventId === event.event);
             if (!currentItem) {
-                acc.push({ type, ids: { [id]: value } });
+                acc.push({ type, eventId: event.event, ids: { [id]: value } });
             } else {
                 currentItem.ids[id] = value;
             }
@@ -72,6 +70,5 @@ export {
     getEventStatus,
     convertStatusForView,
     getValueByKeyFromEvent,
-
-    mergeRecordsByType,
+    groupRecordsByType,
 };
