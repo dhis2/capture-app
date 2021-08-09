@@ -4,7 +4,6 @@ import { actionTypes as editEventActionTypes } from '../../components/Pages/View
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { actionTypes as setOrgUnitActionTypes } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import { lockedSelectorActionTypes } from '../../components/LockedSelector/LockedSelector.actions';
-import { scopeSelectorActionTypes } from '../../components/ScopeSelector/ScopeSelector.actions';
 import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
 import { set as setStoreRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { actionTypes as initActionTypes } from '../../init/init.actions';
@@ -36,10 +35,6 @@ export const organisationUnitDesc = createReducerDescription({
     [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, action) => ({
         ...state,
         [action.payload.orgUnit.id]: action.payload.orgUnit,
-    }),
-    [scopeSelectorActionTypes.FETCH_ORG_UNIT_SUCCESS]: (state, action) => ({
-        ...state,
-        [action.payload.id]: action.payload,
     }),
 }, 'organisationUnits');
 

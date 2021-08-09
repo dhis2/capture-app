@@ -7,3 +7,5 @@ export { useResetOrgUnitId } from './useResetOrgUnitId';
 export { useResetTeiId } from './useResetTeiId';
 export { useResetEnrollmentId } from './useResetEnrollmentId';
 export { useReset } from './useReset';
+
+export { useOrganizationUnit } from './useOrganizationUnit';

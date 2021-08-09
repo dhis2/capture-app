@@ -1,9 +1,7 @@
 // @flow
 export {
     scopeSelectorActionTypes,
-    updateSelectionsFromUrl,
 } from './ScopeSelector.actions';
-export { fetchOrgUnitEpic } from './ScopeSelector.epics';
 export {
     useSetProgramId,
     useSetOrgUnitId,
