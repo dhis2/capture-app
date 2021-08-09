@@ -1,5 +1,5 @@
 // @flow
-import type { WorkingListTemplate, SelectTemplate } from '../../../workingLists.types';
+import type { WorkingListTemplate, SelectTemplate } from '../../../WorkingLists/workingLists.types';
 
 export type Props = $ReadOnly<{|
     currentTemplate?: WorkingListTemplate,

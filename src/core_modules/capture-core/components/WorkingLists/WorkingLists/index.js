@@ -28,7 +28,7 @@ export type {
     Sort,
     StickyFilters,
     UpdateFilter,
-} from '../ListView';
+} from '../../ListView';
 export type {
     AddTemplate,
     CancelLoadTemplates,

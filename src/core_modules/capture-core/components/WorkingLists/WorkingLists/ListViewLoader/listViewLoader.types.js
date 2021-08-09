@@ -5,7 +5,7 @@ import type {
     UpdateList,
     WorkingListTemplate,
 } from '../workingLists.types';
-import type { FiltersData } from '../../ListView';
+import type { FiltersData } from '../../../ListView';
 import type { ListViewConfigMenuContentOutputProps } from '../ListViewConfigMenuContent';
 
 type ExtractedProps = {|

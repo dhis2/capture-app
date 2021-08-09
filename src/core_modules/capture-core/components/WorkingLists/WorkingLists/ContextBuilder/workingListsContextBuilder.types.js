@@ -15,7 +15,7 @@ import type {
     WorkingListTemplates,
     WorkingListTemplate,
     WorkingListsOutputProps,
-} from '../../workingLists.types';
+} from '../../WorkingLists/workingLists.types';
 import type {
     ChangePage,
     ChangeRowsPerPage,

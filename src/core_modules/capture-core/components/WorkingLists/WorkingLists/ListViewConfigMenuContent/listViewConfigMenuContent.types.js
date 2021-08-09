@@ -1,6 +1,6 @@
 // @flow
 import type { WorkingListTemplate, AddTemplate, UpdateTemplate, DeleteTemplate, SetTemplateSharingSettings } from '../workingLists.types';
-import type { CustomMenuContents } from '../../ListView';
+import type { CustomMenuContents } from '../../../ListView';
 import type { ListViewConfigOutputProps } from '../ListViewConfig';
 
 type ExtractedProps = {|

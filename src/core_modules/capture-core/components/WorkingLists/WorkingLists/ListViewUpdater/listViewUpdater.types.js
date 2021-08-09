@@ -1,6 +1,6 @@
 // @flow
 import type { Categories, UpdateList } from '../workingLists.types';
-import type { FiltersData } from '../../ListView';
+import type { FiltersData } from '../../../ListView';
 import type { ListViewLoaderOutputProps } from '../ListViewLoader';
 
 type ExtractedProps = {|

@@ -3,7 +3,7 @@ import type {
     AddTemplate,
     DeleteTemplate,
     UpdateTemplate,
-} from '../../../workingLists.types';
+} from '../../../WorkingLists/workingLists.types';
 
 export type Props = $ReadOnly<{|
     currentViewHasTemplateChanges?: boolean,

@@ -6,7 +6,7 @@ import type {
     CancelLoadView,
     Categories,
     LoadedViewContext,
-} from '../../../workingLists.types';
+} from '../../../WorkingLists/workingLists.types';
 import type {
     FiltersData,
 } from '../../../../ListView';

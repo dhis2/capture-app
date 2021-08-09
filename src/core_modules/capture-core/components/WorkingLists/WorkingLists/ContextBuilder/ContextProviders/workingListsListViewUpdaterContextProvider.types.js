@@ -1,7 +1,7 @@
 // @flow
 import type {
     CancelUpdateList,
-} from '../../../workingLists.types';
+} from '../../../WorkingLists/workingLists.types';
 
 export type Props = $ReadOnly<{|
     rowsPerPage?: number,
