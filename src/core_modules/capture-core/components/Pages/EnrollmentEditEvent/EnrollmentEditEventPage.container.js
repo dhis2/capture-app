@@ -36,8 +36,8 @@ export const EnrollmentEditEventPage = () => {
     const programStage = [...program.stages?.values()].find(
         item => item.id === stageId,
     );
-    const mode = showEditEvent ? pageMode.EDIT : pageMode.VIEW;
-    const outputEffects = useWidgetDataFromStore(`singleEvent-${mode}`);
+    const currentPageMode = showEditEvent ? pageMode.EDIT : pageMode.VIEW;
+    const outputEffects = useWidgetDataFromStore(`singleEvent-${currentPageMode}`);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDelete = () => {
@@ -49,7 +49,7 @@ export const EnrollmentEditEventPage = () => {
 
     return (
         <EnrollmentEditEventPageComponent
-            mode={mode}
+            mode={currentPageMode}
             programStage={programStage}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
