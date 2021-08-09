@@ -1,5 +1,7 @@
 // @flow
 import { useMemo } from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { typeof dataElementTypes } from '../../../metaData';
 import { convertClientToList } from '../../../converters';
 import type { DataSource } from '../../WorkingLists';
@@ -23,10 +25,23 @@ export const useDataSource = (
         .map((eventRecord) => {
             const listRecord = columns
                 .filter(column => column.visible)
-                .reduce((acc, { id, type, resolveValue }) => {
+                .reduce((acc, { id, type, options, resolveValue }) => {
                     const clientValue = eventRecord[id];
                     if (resolveValue) {
                         acc[id] = resolveValue()[clientValue];
+                    } else if (options) {
+                        // TODO: Need is equal comparer for types because `sourceValue` and `option` can be an object for example (for some data element types) and we can't do strict comparison.
+                        const option = options.find(o => o.value === clientValue);
+                        if (!option) {
+                            log.error(
+                                errorCreator(
+                                    'Missing value in options')(
+                                    { id, clientValue, options }),
+                            );
+                            acc[id] = convertClientToList(clientValue, type);
+                        } else {
+                            acc[id] = option.text;
+                        }
                     } else {
                         acc[id] = convertClientToList(clientValue, type);
                     }
