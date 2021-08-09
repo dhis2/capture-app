@@ -42,6 +42,10 @@ const styles = {
 };
 
 const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) => {
+    const defaultSortState = {
+        columnName: 'eventDate',
+        sortDirection: SORT_DIRECTION.DESC,
+    };
     const headerColumns = useComputeHeaderColumn(dataElements);
     const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events);
 
@@ -51,10 +55,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
         }
     }, [dataSource, computeData]);
 
-    const [{ columnName, sortDirection }, setSortInstructions] = useState({
-        columnName: 'eventDate',
-        sortDirection: SORT_DIRECTION.DESC,
-    });
+    const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
     const getSortDirection = id => (id === columnName ? sortDirection : SORT_DIRECTION.DEFAULT);
@@ -92,6 +93,9 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
         }
         return dataSource
             .sort((a, b) => {
+                if (sortDirection === SORT_DIRECTION.DEFAULT) {
+                    setSortInstructions(defaultSortState);
+                }
                 const { type } = headerColumns.find(col => col.id === columnName) || {};
                 // $FlowFixMe
                 return sortDataFromEvent(a[columnName], b[columnName], type, sortDirection);
