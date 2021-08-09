@@ -15,8 +15,8 @@ const StageEventListPlain = ({ stage, programId, orgUnitId }) => (<>
         <Widget
             noncollapsible
             header={<StageEventHeader
-                title={stage.name}
-                icon={stage.icon}
+                title={stage?.name}
+                icon={stage?.icon}
                 events={[]}
             />}
         >

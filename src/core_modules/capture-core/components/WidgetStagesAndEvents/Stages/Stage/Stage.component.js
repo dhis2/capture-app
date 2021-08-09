@@ -19,7 +19,7 @@ const styles = {
 
 export const StagePlain = ({ stage, events, classes, className }: Props) => {
     const [open, setOpenStatus] = useState(true);
-    const { name, icon, description, dataElements } = stage;
+    const { id, name, icon, description, dataElements } = stage;
     return (
         <div
             data-test="stage-content"
@@ -38,6 +38,7 @@ export const StagePlain = ({ stage, events, classes, className }: Props) => {
                 open={open}
             >
                 {events.length > 0 && <StageDetail
+                    stageId={id}
                     eventName={name}
                     events={events}
                     dataElements={dataElements}
