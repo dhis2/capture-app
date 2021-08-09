@@ -93,7 +93,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
         }
         return dataSource
             .sort((a, b) => {
-                if (sortDirection === SORT_DIRECTION.DEFAULT) {
+                if (sortDirection === SORT_DIRECTION.DEFAULT && columnName !== defaultSortState.columnName) {
                     setSortInstructions(defaultSortState);
                 }
                 const { type } = headerColumns.find(col => col.id === columnName) || {};
