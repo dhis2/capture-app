@@ -30,9 +30,9 @@ const styles = {
     },
     container: {
         display: 'flex',
-        padding: spacersNum.dp8,
         marginRight: spacersNum.dp16,
         marginLeft: spacersNum.dp16,
+        marginBottom: spacersNum.dp16,
         backgroundColor: colors.grey200,
         alignItems: 'center',
     },

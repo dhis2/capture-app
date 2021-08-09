@@ -22,10 +22,13 @@ const sortNumber = (strA: string, strB: string, direction: string) => {
 };
 
 const sortText = (strA: string, strB: string, direction: string) => {
-    if (direction === SORT_DIRECTION.ASC) {
+    if (strA === undefined) {
+        return 1;
+    } else if (strB === undefined) {
+        return -1;
+    } else if (direction === SORT_DIRECTION.ASC) {
         return strA < strB ? -1 : 1;
-    }
-    if (direction === SORT_DIRECTION.DESC) {
+    } else if (direction === SORT_DIRECTION.DESC) {
         return strA < strB ? 1 : -1;
     }
     return 0;
