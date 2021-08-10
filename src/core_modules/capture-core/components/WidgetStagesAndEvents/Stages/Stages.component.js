@@ -1,15 +1,10 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
-import { spacersNum } from '@dhis2/ui';
 import { Stage } from './Stage';
 import type { Props } from './stages.types';
 
-const styles = {
-    stage: {
-        marginBottom: spacersNum.dp16,
-    },
-};
+const styles = {};
 export const StagesPlain = ({ stages, events, classes }: Props) => (
     <>
         {

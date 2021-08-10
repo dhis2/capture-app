@@ -66,13 +66,14 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
         const dataElementsByType = await groupRecordsByType(events, dataElements);
         const eventsData = [];
         for (const event of events) {
+            const eventId = event.event;
             const predefinedFields = baseFields.reduce((acc, field) => {
                 acc[field.id] = convertServerToClient(getValueByKeyFromEvent(event, field), field.type);
                 return acc;
             }, {});
 
-            const allFields = getAllFieldsWithValue(event.event, dataElements, dataElementsByType);
-            eventsData.push({ ...predefinedFields, ...allFields });
+            const allFields = getAllFieldsWithValue(eventId, dataElements, dataElementsByType);
+            eventsData.push({ id: eventId, ...predefinedFields, ...allFields });
         }
         setDataSource(eventsData);
     };

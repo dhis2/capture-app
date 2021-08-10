@@ -5,10 +5,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { StageEventHeader } from './StageEventHeader/StageEventHeader.component';
 import { Widget } from '../../../Widget';
 import type { Props } from './StageEventList.types';
+import { EventWorkingLists } from '../../../WorkingLists/EventWorkingLists';
+
 
 const getStyles = () => ({});
 
-const StageEventListPlain = ({ stage }) => (<>
+const StageEventListPlain = ({ stage, programId, orgUnitId }) => (<>
     <div data-test="stage-event-list" >
         <Widget
             noncollapsible
@@ -18,7 +20,12 @@ const StageEventListPlain = ({ stage }) => (<>
                 events={[]}
             />}
         >
-            <p>Stage event Placeholder Text</p>
+            <EventWorkingLists
+                storeId="stageEvents"
+                programId={programId}
+                programStageId={stage.id}
+                orgUnitId={orgUnitId}
+            />
         </Widget>
     </div>
 </>);

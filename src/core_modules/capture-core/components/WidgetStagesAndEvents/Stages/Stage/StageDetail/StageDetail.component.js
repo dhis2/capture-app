@@ -24,28 +24,25 @@ import type { Props } from './stageDetail.types';
 
 
 const styles = {
-    table: {
-        display: 'block',
-        overflowX: 'auto',
-    },
     row: {
         maxWidth: '100%',
         whiteSpace: 'nowrap',
     },
     container: {
         display: 'flex',
-        padding: spacersNum.dp8,
         marginRight: spacersNum.dp16,
         marginLeft: spacersNum.dp16,
+        marginBottom: spacersNum.dp16,
         backgroundColor: colors.grey200,
         alignItems: 'center',
+        overflowX: 'auto',
     },
     button: {
         marginRight: spacersNum.dp8,
     },
 };
 
-const StageDetailPlain = ({ stageId, events, eventName, dataElements, classes }: Props) => {
+const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) => {
     const history = useHistory();
     const { enrollmentId, programId, teiId, orgUnitId } = useSelector(
         ({
@@ -59,6 +56,10 @@ const StageDetailPlain = ({ stageId, events, eventName, dataElements, classes }:
                 programId: query.programId,
                 orgUnitId: query.orgUnitId,
             }), shallowEqual);
+    const defaultSortState = {
+        columnName: 'eventDate',
+        sortDirection: SORT_DIRECTION.DESC,
+    };
     const headerColumns = useComputeHeaderColumn(dataElements);
     const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events);
 
@@ -68,18 +69,19 @@ const StageDetailPlain = ({ stageId, events, eventName, dataElements, classes }:
         }
     }, [dataSource, computeData]);
 
-    const [{ columnName, sortDirection }, setSortInstructions] = useState({
-        columnName: 'eventDate',
-        sortDirection: SORT_DIRECTION.DESC,
-    });
+    const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
     const getSortDirection = id => (id === columnName ? sortDirection : SORT_DIRECTION.DEFAULT);
     const onSortIconClick = ({ name, direction }) => {
-        setSortInstructions({
-            columnName: name,
-            sortDirection: direction,
-        });
+        if (direction === SORT_DIRECTION.DEFAULT && name !== defaultSortState.columnName) {
+            setSortInstructions(defaultSortState);
+        } else {
+            setSortInstructions({
+                columnName: name,
+                sortDirection: direction,
+            });
+        }
     };
 
     const handleViewAll = () => {

@@ -13,7 +13,6 @@ import { isEventOverdue } from '../StageDetail/hooks/helpers';
 const styles = {
     container: {
         display: 'flex',
-        padding: spacersNum.dp8,
         alignItems: 'center',
     },
     icon: {
@@ -25,7 +24,7 @@ const styles = {
         paddingRight: spacersNum.dp12,
     },
     title: {
-        fontSize: 18,
+        fontSize: 14,
         lineHeight: 1.556,
         fontWeight: 500,
         color: colors.grey900,
@@ -40,7 +39,7 @@ const styles = {
         color: colors.red500,
     },
     smallText: {
-        fontSize: 13,
+        fontSize: 12,
     },
 };
 export const StageOverviewPlain = ({ title, icon, description, events, classes }: Props) => {

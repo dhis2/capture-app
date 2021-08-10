@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { withLoadingIndicator } from '../../../../../HOC';
-import { EventWorkingLists } from '../../EventWorkingLists';
+import { EventWorkingLists } from '../../../../WorkingLists/EventWorkingLists';
 import type { Props } from './eventWorkingListsInitRunningMutationsHandler.types';
 
 const EventWorkingListsWithLoadingIndicator = withLoadingIndicator()(EventWorkingLists);
