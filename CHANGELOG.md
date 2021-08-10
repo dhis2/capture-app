@@ -1,3 +1,10 @@
+# [1.37.0](https://github.com/dhis2/capture-app/compare/v1.36.0...v1.37.0) (2021-08-10)
+
+
+### Features
+
+* [DHIS2-10222] Stages & Events ([#1788](https://github.com/dhis2/capture-app/issues/1788)) ([5240082](https://github.com/dhis2/capture-app/commit/52400826d2077ab113cbf99f299e2aa7106d9610)), closes [#1870](https://github.com/dhis2/capture-app/issues/1870) [#1875](https://github.com/dhis2/capture-app/issues/1875)
+
 # [1.36.0](https://github.com/dhis2/capture-app/compare/v1.35.1...v1.36.0) (2021-08-10)
 
 
