@@ -20,10 +20,6 @@ import type { Props } from './stageDetail.types';
 
 
 const styles = {
-    table: {
-        display: 'block',
-        overflowX: 'auto',
-    },
     row: {
         maxWidth: '100%',
         whiteSpace: 'nowrap',
