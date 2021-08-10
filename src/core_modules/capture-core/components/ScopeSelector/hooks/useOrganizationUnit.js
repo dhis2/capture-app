@@ -21,12 +21,12 @@ export const useOrganizationUnit = () => {
         },
     );
 
-    const referchOrganizationUnit = (ownerOrgUnit: string) => {
+    const refetchOrganisationUnit = (ownerOrgUnit: string) => {
         refetch({ variables: { ownerOrgUnit } });
     };
 
     return {
         displayName: !loading && data?.organisationUnits?.displayName,
-        referchOrganizationUnit,
+        refetchOrganisationUnit,
     };
 };

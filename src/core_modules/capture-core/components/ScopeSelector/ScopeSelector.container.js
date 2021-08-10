@@ -41,14 +41,14 @@ export const ScopeSelector: ComponentType<OwnProps> =
       const dispatch = useDispatch();
       const { reset } = useReset();
       const { resetProgramId } = useResetProgramId();
-      const { referchOrganizationUnit, displayName: selectedOrgUnitName } = useOrganizationUnit();
+      const { refetchOrganisationUnit, displayName: selectedOrgUnitName } = useOrganizationUnit();
       const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: selectedOrgUnitName, id: selectedOrgUnitId });
 
       useEffect(() => {
           const missName = !selectedOrgUnit.name;
           const hasDifferentId = selectedOrgUnit.id !== selectedOrgUnitId;
 
-          selectedOrgUnitId && (hasDifferentId || missName) && referchOrganizationUnit(selectedOrgUnitId);
+          selectedOrgUnitId && (hasDifferentId || missName) && refetchOrganisationUnit(selectedOrgUnitId);
       },
       [selectedOrgUnitId]); // eslint-disable-line react-hooks/exhaustive-deps
 
