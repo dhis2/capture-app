@@ -42,7 +42,7 @@ const styles = {
     },
 };
 
-const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) => {
+const StageDetailPlain = ({ events, eventName, stageId, dataElements, classes }: Props) => {
     const history = useHistory();
     const { enrollmentId, programId, teiId, orgUnitId } = useSelector(
         ({
