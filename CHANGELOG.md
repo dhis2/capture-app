@@ -1,3 +1,17 @@
+# [1.35.0](https://github.com/dhis2/capture-app/compare/v1.34.5...v1.35.0) (2021-08-06)
+
+
+### Features
+
+* [DHIS2-11208] Enrolment event form using the view/edit single event component ([#1803](https://github.com/dhis2/capture-app/issues/1803)) ([2bc5d2d](https://github.com/dhis2/capture-app/commit/2bc5d2d8659c6e7249888cbed4852a1a67492b3c))
+
+## [1.34.5](https://github.com/dhis2/capture-app/compare/v1.34.4...v1.34.5) (2021-07-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([eafe60f](https://github.com/dhis2/capture-app/commit/eafe60fb83f99dfcd6849b0bebdb39611048a2ab))
+
 ## [1.34.4](https://github.com/dhis2/capture-app/compare/v1.34.3...v1.34.4) (2021-07-19)
 
 

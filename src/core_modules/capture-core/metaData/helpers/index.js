@@ -15,3 +15,4 @@ export { getAttributesFromScopeId } from './getAttributesFromScopeId';
 export { getScopeInfo } from './getScopeInfo';
 export { getProgramEventAccess } from './getProgramEventAccess';
 export { getProgramAndStageForProgram } from './getProgramAndStageForProgram';
+export { getProgramThrowIfNotFound } from './getProgramThrowIfNotFound';

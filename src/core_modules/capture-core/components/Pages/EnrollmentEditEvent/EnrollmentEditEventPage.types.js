@@ -1,7 +1,7 @@
 // @flow
 import type { ProgramStage } from '../../../metaData';
 
-export type Props = {|
+export type PlainProps = {|
     programStage: ?ProgramStage,
     mode: string,
     ...CssClasses,

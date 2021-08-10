@@ -4,8 +4,8 @@ import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
-import type { Props } from './EnrollmentEventPage.types';
-import { pageMode } from './EnrollmentEventPage.const';
+import type { PlainProps } from './EnrollmentEditEventPage.types';
+import { pageMode } from './EnrollmentEditEventPage.const';
 import { WidgetEventEdit } from '../../WidgetEventEdit/';
 
 const styles = ({ typography }) => ({
@@ -18,11 +18,11 @@ const styles = ({ typography }) => ({
     },
 });
 
-const EnrollmentEventPagePain = ({
+const EnrollmentEditEventPagePain = ({
     mode,
     programStage,
     classes,
-}) => (
+}: PlainProps) => (
     <div className={classes.page}>
         <div className={classes.title}>
             {mode === pageMode.VIEW
@@ -34,13 +34,13 @@ const EnrollmentEventPagePain = ({
                 })}
         </div>
         {programStage ? (
-            <WidgetEventEdit programStage={programStage} mode={mode} />
+            <WidgetEventEdit programStage={programStage} />
         ) : (
-            <span> {i18n.t('We could not find the stage in the program')}</span>
+            <span>{i18n.t('We could not find the stage in the program')}</span>
         )}
     </div>
 );
 
-export const EnrollmentEventPageComponent: ComponentType<
-    $Diff<Props, CssClasses>,
-> = withStyles(styles)(EnrollmentEventPagePain);
+export const EnrollmentEditEventPageComponent: ComponentType<
+    $Diff<PlainProps, CssClasses>,
+> = withStyles(styles)(EnrollmentEditEventPagePain);
