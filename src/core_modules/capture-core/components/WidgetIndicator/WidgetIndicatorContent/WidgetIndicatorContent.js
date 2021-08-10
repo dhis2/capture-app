@@ -4,7 +4,12 @@ import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
 import { spacers, colors } from '@dhis2/ui';
 import cx from 'classnames';
-import type { ContentType, FilteredKeyValue, FilteredText } from '../../WidgetFeedback/WidgetFeedback.types';
+import type {
+    ContentType,
+    FilteredKeyValue,
+    FilteredText,
+} from '../../WidgetFeedback/WidgetFeedback.types';
+import { sortIndicatorsFn } from './sortIndicatorsFn';
 
 const styles = {
     container: {
@@ -50,6 +55,7 @@ const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Con
                 <p className={classes.noIndicatorText}>{emptyText}</p>
             </div>);
     }
+    const sortedWidgetData = widgetData.sort(sortIndicatorsFn);
 
     const renderLegend = color => (
         <div className={classes.legendBullet} style={{ backgroundColor: color }} />
@@ -92,7 +98,7 @@ const WidgetIndicatorContentComponent = ({ widgetData, emptyText, classes }: Con
 
     return (
         <div className={classes.container}>
-            {widgetData.map((action: any, index: number) => {
+            {sortedWidgetData.map((action: any, index: number) => {
                 const isLast = (index + 1) === widgetData.length;
                 if (action.key) {
                     return renderKeyValue(action, isLast);
