@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/dhis2/capture-app/compare/v1.35.1...v1.36.0) (2021-08-10)
+
+
+### Features
+
+*  [DHIS2-11573] Sort indicators alphabetically in indicator widget ([cc79744](https://github.com/dhis2/capture-app/commit/cc79744f07e449af862dc20af811dc1d629ce26e))
+
 ## [1.35.1](https://github.com/dhis2/capture-app/compare/v1.35.0...v1.35.1) (2021-08-10)
 
 
