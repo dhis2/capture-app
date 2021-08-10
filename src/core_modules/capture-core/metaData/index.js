@@ -41,4 +41,5 @@ export {
     getScopeInfo,
     programTypes,
     scopeTypes,
+    getProgramThrowIfNotFound,
 } from './helpers';
