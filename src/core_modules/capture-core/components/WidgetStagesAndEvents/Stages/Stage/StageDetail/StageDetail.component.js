@@ -20,10 +20,6 @@ import type { Props } from './stageDetail.types';
 
 
 const styles = {
-    table: {
-        display: 'block',
-        overflowX: 'auto',
-    },
     row: {
         maxWidth: '100%',
         whiteSpace: 'nowrap',
@@ -35,6 +31,7 @@ const styles = {
         marginBottom: spacersNum.dp16,
         backgroundColor: colors.grey200,
         alignItems: 'center',
+        overflowX: 'auto',
     },
     button: {
         marginRight: spacersNum.dp8,
@@ -60,10 +57,14 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
 
     const getSortDirection = id => (id === columnName ? sortDirection : SORT_DIRECTION.DEFAULT);
     const onSortIconClick = ({ name, direction }) => {
-        setSortInstructions({
-            columnName: name,
-            sortDirection: direction,
-        });
+        if (direction === SORT_DIRECTION.DEFAULT && name !== defaultSortState.columnName) {
+            setSortInstructions(defaultSortState);
+        } else {
+            setSortInstructions({
+                columnName: name,
+                sortDirection: direction,
+            });
+        }
     };
 
     function renderHeader() {
@@ -93,9 +94,6 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
         }
         return dataSource
             .sort((a, b) => {
-                if (sortDirection === SORT_DIRECTION.DEFAULT && columnName !== defaultSortState.columnName) {
-                    setSortInstructions(defaultSortState);
-                }
                 const { type } = headerColumns.find(col => col.id === columnName) || {};
                 // $FlowFixMe
                 return sortDataFromEvent(a[columnName], b[columnName], type, sortDirection);
