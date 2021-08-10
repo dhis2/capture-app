@@ -103,10 +103,10 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventCli
             })
             .slice(0, displayedRowNumber)
             .map(row => formatRowForView(row, dataElements))
-            .map((row, index) => {
+            .map((row: Object, index: number) => {
                 const cells = headerColumns.map(({ id }) => (<DataTableCell
                     key={id}
-                    onClick={() => onEventClick(events[index].event, events[index].programStage)}
+                    onClick={() => onEventClick(row.id, events[index].programStage)}
                 >
                     <div>
                         { // $FlowFixMe
