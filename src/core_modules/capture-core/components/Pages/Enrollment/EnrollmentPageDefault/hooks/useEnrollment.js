@@ -1,5 +1,5 @@
 // @flow
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useDataQuery } from '@dhis2/app-runtime';
@@ -43,13 +43,15 @@ export const useEnrollment = (teiId: string) => {
     const shouldFetchAndSave =
         !enrollmentStored || enrollmentStored.enrollment !== enrollmentId;
 
-    if (shouldFetchAndSave) {
-        if (!called) {
-            refetch();
-        } else {
-            fechedEnrollment && dispatch(setEnrollment(fechedEnrollment));
+    useEffect(() => {
+        if (shouldFetchAndSave) {
+            if (!called) {
+                refetch();
+            } else {
+                fechedEnrollment && dispatch(setEnrollment(fechedEnrollment));
+            }
         }
-    }
+    }, [shouldFetchAndSave, fechedEnrollment, called, refetch, dispatch]);
 
     return {
         error,
