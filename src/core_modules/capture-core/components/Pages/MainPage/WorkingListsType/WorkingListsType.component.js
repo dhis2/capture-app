@@ -2,19 +2,23 @@
 import React from 'react';
 import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import { EventWorkingListsInit } from '../EventWorkingListsInit';
-import { TeiWorkingLists } from '../TeiWorkingLists';
+import { TeiWorkingLists } from '../../../WorkingLists/TeiWorkingLists';
 import type { Props } from './workingListsType.types';
 
-export const WorkingListsType = ({ programId }: Props) => {
-    const { programType } = useProgramInfo(programId);
-
+export const WorkingListsType = ({ programId, orgUnitId }: Props) => {
+    const { program, programType } = useProgramInfo(programId);
     if (programType === programTypes.EVENT_PROGRAM) {
+        const programStageId = [...program.stages.keys()][0];
         return (
-            <EventWorkingListsInit />
+            <EventWorkingListsInit
+                programId={programId}
+                programStageId={programStageId}
+                orgUnitId={orgUnitId}
+            />
         );
     }
 
     return (
-        <TeiWorkingLists />
+        <TeiWorkingLists programId={programId} orgUnitId={orgUnitId} />
     );
 };
