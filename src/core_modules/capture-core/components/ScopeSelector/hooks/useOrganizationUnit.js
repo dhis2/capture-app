@@ -3,12 +3,12 @@ import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useOrganizationUnit = () => {
-    const { loading, data, refetch } = useDataQuery(
+    const { data, refetch } = useDataQuery(
         useMemo(
             () => ({
                 organisationUnits: {
                     resource: 'organisationUnits',
-                    id: ({ variables: { ownerOrgUnit: id } }) => id,
+                    id: ({ variables: { selectedOrgUnitId: id } }) => id,
                     params: {
                         fields: ['displayName'],
                     },
@@ -21,12 +21,8 @@ export const useOrganizationUnit = () => {
         },
     );
 
-    const refetchOrganisationUnit = (ownerOrgUnit: string) => {
-        refetch({ variables: { ownerOrgUnit } });
-    };
-
     return {
-        displayName: !loading && data?.organisationUnits?.displayName,
-        refetchOrganisationUnit,
+        displayName: data?.organisationUnits?.displayName,
+        refetch,
     };
 };

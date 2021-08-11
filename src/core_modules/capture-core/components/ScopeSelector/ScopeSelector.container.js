@@ -41,21 +41,22 @@ export const ScopeSelector: ComponentType<OwnProps> =
       const dispatch = useDispatch();
       const { reset } = useReset();
       const { resetProgramId } = useResetProgramId();
-      const { refetchOrganisationUnit, displayName: selectedOrgUnitName } = useOrganizationUnit();
-      const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: selectedOrgUnitName, id: selectedOrgUnitId });
+      const { refetch: refetchOrganisationUnit, displayName } = useOrganizationUnit();
+      const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: displayName, id: selectedOrgUnitId });
 
       useEffect(() => {
           const missName = !selectedOrgUnit.name;
           const hasDifferentId = selectedOrgUnit.id !== selectedOrgUnitId;
 
-          selectedOrgUnitId && (hasDifferentId || missName) && refetchOrganisationUnit(selectedOrgUnitId);
+          hasDifferentId && setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, id: selectedOrgUnitId }));
+          selectedOrgUnitId && (hasDifferentId || missName) && refetchOrganisationUnit({ variables: { selectedOrgUnitId } });
       },
-      [selectedOrgUnitId]); // eslint-disable-line react-hooks/exhaustive-deps
+      [selectedOrgUnitId, selectedOrgUnit, refetchOrganisationUnit, setSelectedOrgUnit]);
 
       useEffect(() => {
-          setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, name: selectedOrgUnitName }));
+          displayName && setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, name: displayName }));
       },
-      [selectedOrgUnitName, setSelectedOrgUnit]);
+      [displayName, setSelectedOrgUnit]);
 
       const handleSetOrgUnit = (orgUnitId, orgUnitObject) => {
           setSelectedOrgUnit(orgUnitObject);
@@ -143,7 +144,7 @@ export const ScopeSelector: ComponentType<OwnProps> =
       const lockedSelectorLoads: string =
         useSelector(({ activePage }) => activePage.lockedSelectorLoads);
 
-      const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnit);
+      const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnit.name);
 
       return (
           <ScopeSelectorComponent
