@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-04T15:15:37.559Z\n"
-"PO-Revision-Date: 2021-08-04T15:15:37.559Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"PO-Revision-Date: 2021-08-10T17:41:20.926Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -623,6 +623,12 @@ msgid "Enrollment{{escape}} Edit Event"
 msgstr ""
 
 msgid "We could not find the stage in the program"
+msgstr ""
+
+msgid "There are no feedback for this event"
+msgstr ""
+
+msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "Registered events"

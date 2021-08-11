@@ -1,11 +1,3 @@
-beforeEach(() => {
-    cy.loginThroughForm();
-});
-
-Given('you open the enrollment page', () => {
-    cy.visit('#/enrollment?enrollmentId=kcX0O3juDAH');
-});
-
 When('you click the enrollment widget toggle open close button', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-open-close-toggle-button"]').click();
@@ -28,7 +20,7 @@ Then('the user sees the enrollment date', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-icon-calendar"]').should('exist');
         cy.get('[data-test="widget-enrollment-enrollment-date"]')
-            .contains('Date of enrollment 2021-02-20')
+            .contains('Date of enrollment 2021-08-01')
             .should('exist');
     });
 });
@@ -36,7 +28,7 @@ Then('the user sees the enrollment date', () => {
 Then('the user sees the incident date', () => {
     cy.get('[data-test="widget-enrollment"]').within(() => {
         cy.get('[data-test="widget-enrollment-incident-date"]')
-            .contains('Date of birth 2021-02-20')
+            .contains('Date of birth 2021-08-01')
             .should('exist');
     });
 });
@@ -75,7 +67,7 @@ When('the user opens the enrollment actions menu', () => {
     });
     cy.intercept({
         method: 'PUT',
-        url: '**/enrollments/kcX0O3juDAH',
+        url: '**/enrollments/wBU0RAsYjKE',
     }).as('putEnrollment');
 });
 
