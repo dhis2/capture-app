@@ -895,6 +895,9 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -1019,18 +1022,6 @@ msgid "Skipped"
 msgstr ""
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
-
-msgid "Scheduled{{ escape }} due {{ time }}"
-msgstr ""
-
-msgid "Scheduled"
-msgstr ""
-
-msgid "Overdue"
-msgstr ""
-
-msgid "Skipped"
 msgstr ""
 
 msgid "Program not found"

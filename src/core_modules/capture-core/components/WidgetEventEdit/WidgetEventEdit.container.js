@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { spacersNum, Button, colors, IconEdit24 } from '@dhis2/ui';
+import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import type { Props } from './widgetEventEdit.types';
@@ -26,7 +26,7 @@ const styles = {
     },
     menu: {
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         background: colors.white,
         borderTopLeftRadius: 3,
         borderTopRightRadius: 3,
@@ -42,6 +42,7 @@ export const WidgetEventEditPlain = ({
     classes,
     programStage,
     programStage: { name, icon },
+    onGoBack,
 }: Props) => {
     const dispatch = useDispatch();
     const currentPageMode = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent) ? pageMode.EDIT : pageMode.VIEW;
@@ -49,6 +50,12 @@ export const WidgetEventEditPlain = ({
     return (
         <div data-test="widget-enrollment-event">
             <div className={classes.menu}>
+                <Button small secondary className={classes.button} onClick={onGoBack}>
+                    <IconArrowLeft24 />
+
+                    {i18n.t('Back to all stages and events')}
+                </Button>
+
                 <Button
                     small
                     secondary

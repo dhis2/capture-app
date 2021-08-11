@@ -41,16 +41,16 @@ export const EnrollmentEditEventPage = () => {
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDelete = () => {
-        history.push(
-            `/enrollment?${urlArguments({ orgUnitId, programId, teiId })}`,
-        );
+        history.push(`/enrollment?${urlArguments({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
     };
+    const onGoBack = () => history.push(`/enrollment?${urlArguments({ orgUnitId, programId, teiId, enrollmentId })}`);
 
     return (
         <EnrollmentEditEventPageComponent
             mode={currentPageMode}
             programStage={programStage}
+            onGoBack={onGoBack}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             teiId={teiId}
