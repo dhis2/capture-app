@@ -22,7 +22,6 @@ export const EnrollmentEditEventPage = () => {
             },
         }) => ({
             programId: query.programId,
-            teiId: query.teiId,
             stageId: query.stageId,
             teiId: query.teiId,
             orgUnitId: query.orgUnitId,
