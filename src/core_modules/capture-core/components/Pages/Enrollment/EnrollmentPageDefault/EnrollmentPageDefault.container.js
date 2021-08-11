@@ -9,7 +9,6 @@ import { useHistory } from 'react-router';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import {
-    useEnrollment,
     useTeiAttributes,
     useProgramMetadata,
     useHideWidgetByRuleLocations,
