@@ -1,3 +1,31 @@
+## [1.37.1](https://github.com/dhis2/capture-app/compare/v1.37.0...v1.37.1) (2021-08-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([81898f1](https://github.com/dhis2/capture-app/commit/81898f1655b9a5de7d340032e28cfe86f5e85bd8))
+
+# [1.37.0](https://github.com/dhis2/capture-app/compare/v1.36.0...v1.37.0) (2021-08-10)
+
+
+### Features
+
+* [DHIS2-10222] Stages & Events ([#1788](https://github.com/dhis2/capture-app/issues/1788)) ([5240082](https://github.com/dhis2/capture-app/commit/52400826d2077ab113cbf99f299e2aa7106d9610)), closes [#1870](https://github.com/dhis2/capture-app/issues/1870) [#1875](https://github.com/dhis2/capture-app/issues/1875)
+
+# [1.36.0](https://github.com/dhis2/capture-app/compare/v1.35.1...v1.36.0) (2021-08-10)
+
+
+### Features
+
+*  [DHIS2-11573] Sort indicators alphabetically in indicator widget ([cc79744](https://github.com/dhis2/capture-app/commit/cc79744f07e449af862dc20af811dc1d629ce26e))
+
+## [1.35.1](https://github.com/dhis2/capture-app/compare/v1.35.0...v1.35.1) (2021-08-10)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([d3b53d7](https://github.com/dhis2/capture-app/commit/d3b53d7e67d32a1e3db60b9e9b056d681f8f3a5e))
+
 # [1.35.0](https://github.com/dhis2/capture-app/compare/v1.34.5...v1.35.0) (2021-08-06)
 
 
