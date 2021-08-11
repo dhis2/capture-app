@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -587,6 +587,9 @@ msgstr ""
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
@@ -634,86 +637,14 @@ msgstr ""
 msgid "We could not find the stage in the program"
 msgstr ""
 
-msgid "Delete event"
-msgstr "删除事件"
+msgid "There are no feedback for this event"
+msgstr ""
 
-msgid "Download as JSON"
-msgstr "下载为JSON"
-
-msgid "Download as XML"
-msgstr "下载为xml"
-
-msgid "Download as CSV"
-msgstr "获取CSV格式报表"
-
-msgid "Download with current filters"
-msgstr "随着过滤器下载"
-
-msgid "Download data..."
-msgstr "下载数据"
-
-msgid "Working list could not be loaded"
-msgstr "工作列表不能载入"
-
-msgid "an error occurred loading working lists"
-msgstr "载入工作列表发生错误"
+msgid "There are no indicators for this event"
+msgstr ""
 
 msgid "Registered events"
 msgstr "登记的事件"
-
-msgid "Enrollment status"
-msgstr "登记状态"
-
-msgid "Cancelled"
-msgstr "已取消"
-
-msgid "Assigned to"
-msgstr "指派到"
-
-msgid "Registering unit"
-msgstr "注册机构"
-
-msgid "Registration Date"
-msgstr ""
-
-msgid "Inactive"
-msgstr "闲置"
-
-msgid "Working list could not be updated"
-msgstr ""
-
-msgid "Update view"
-msgstr "更新视图"
-
-msgid "Save current view..."
-msgstr "保存当前视图"
-
-msgid "Save current view as..."
-msgstr "另存当前视图为"
-
-msgid "Delete view"
-msgstr "删除视图"
-
-msgid "Share view..."
-msgstr "分享视图"
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "你真想删除  '{{templateName}}'  视图"
-
-msgid "Confirm"
-msgstr "确认"
-
-msgid "Save As view"
-msgstr "另存视图为"
-
-msgid "View name"
-msgstr "视图名称"
-
-msgid "Show Less"
-msgstr "显示较少<br>"
-
-msgid "Show All"
-msgstr "显示全部"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "选择一个注册机构开始填报"
@@ -970,6 +901,9 @@ msgstr ""
 msgid "Last updated {{date}}"
 msgstr ""
 
+msgid "Cancelled"
+msgstr "已取消"
+
 msgid "Error"
 msgstr "错误"
 
@@ -982,11 +916,122 @@ msgstr ""
 msgid "Person Profile"
 msgstr ""
 
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset"
+msgstr "复位"
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Report date"
+msgstr "报表日期"
+
+msgid "Registering unit"
+msgstr "注册机构"
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Delete event"
+msgstr "删除事件"
+
+msgid "Download as JSON"
+msgstr "下载为JSON"
+
+msgid "Download as XML"
+msgstr "下载为xml"
+
+msgid "Download as CSV"
+msgstr "获取CSV格式报表"
+
+msgid "Download with current filters"
+msgstr "随着过滤器下载"
+
+msgid "Download data..."
+msgstr "下载数据"
+
+msgid "Working list could not be loaded"
+msgstr "工作列表不能载入"
+
+msgid "an error occurred loading working lists"
+msgstr "载入工作列表发生错误"
+
+msgid "Enrollment status"
+msgstr "登记状态"
+
+msgid "Assigned to"
+msgstr "指派到"
+
+msgid "Registration Date"
+msgstr ""
+
+msgid "Inactive"
+msgstr "闲置"
+
+msgid "Working list could not be updated"
+msgstr ""
+
+msgid "Update view"
+msgstr "更新视图"
+
+msgid "Save current view..."
+msgstr "保存当前视图"
+
+msgid "Save current view as..."
+msgstr "另存当前视图为"
+
+msgid "Delete view"
+msgstr "删除视图"
+
+msgid "Share view..."
+msgstr "分享视图"
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr "你真想删除  '{{templateName}}'  视图"
+
+msgid "Confirm"
+msgstr "确认"
+
+msgid "Save As view"
+msgstr "另存视图为"
+
+msgid "View name"
+msgstr "视图名称"
+
+msgid "Show Less"
+msgstr "显示较少<br>"
+
+msgid "Show All"
+msgstr "显示全部"
+
 msgid "An error has occured. See log for details"
 msgstr "发生错误。查看日志以获取详细信息"
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "已经调度"
+
+msgid "Overdue"
+msgstr "过期"
+
+msgid "Skipped"
+msgstr "跳过"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
