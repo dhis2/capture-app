@@ -27,26 +27,26 @@ import {
     updateTemplateEpic,
     addTemplateEpic,
     deleteTemplateEpic,
-} from 'capture-core/components/Pages/MainPage/EventWorkingLists';
+} from 'capture-core/components/WorkingLists/EventWorkingLists';
 
 import {
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
-} from 'capture-core/components/Pages/EditEvent/editEvent.epics';
+} from 'capture-core/components/Pages/ViewEvent/epics/editEvent.epics';
 import {
     openEditEventInDataEntryEpic,
     runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
     runRulesOnUpdateFieldForEditSingleEventEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventDataEntry.epics';
+} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/editEventDataEntry.epics';
 import {
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
-} from 'capture-core/components/Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/editEventDataEntry.epics';
+} from 'capture-core/components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.epics';
 
 import {
     loadViewEventDataEntryEpic,
-} from 'capture-core/components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.epics';
+} from 'capture-core/components/WidgetEventEdit/ViewEventDataEntry/viewEventDataEntry.epics';
 import {
     getEventOpeningFromEventListEpic,
     getEventFromUrlEpic as getViewEventFromUrlEpic,
@@ -60,15 +60,15 @@ import {
 import {
     saveEditEventEpic,
     saveEditEventLocationChangeEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/saveEditSingleEvent.epics';
+} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/saveEditSingleEvent.epics';
 import {
     cancelEditEventEpic,
     cancelEditEventLocationChangeEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/cancelEditSingleEvent.epics';
+} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/cancelEditSingleEvent.epics';
 import {
     addNoteForEditSingleEventEpic,
     removeNoteForEditSingleEventEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/addNoteForEditSingleEvent.epics';
+} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/addNoteForEditSingleEvent.epics';
 import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';
@@ -90,7 +90,7 @@ import {
 } from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
-} from 'capture-core/components/Pages/MainPage/WorkingListsCommon';
+} from 'capture-core/components/WorkingLists/WorkingListsCommon';
 import {
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,
@@ -176,7 +176,7 @@ import {
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
-import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/Pages/MainPage/TeiWorkingLists';
+import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
 import {
     startNewEnrollmentDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';

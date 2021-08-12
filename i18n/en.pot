@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
-"PO-Revision-Date: 2021-06-28T11:26:08.991Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"PO-Revision-Date: 2021-08-10T17:41:20.926Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -561,21 +561,6 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
-msgid "Show all events"
-msgstr ""
-
-msgid "Edit event"
-msgstr ""
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
-
-msgid "Event could not be loaded"
-msgstr ""
-
-msgid "Organisation unit could not be loaded"
-msgstr ""
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
@@ -589,6 +574,9 @@ msgid "No indicator output for this enrollment yet"
 msgstr ""
 
 msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "Program stage not found"
 msgstr ""
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
@@ -625,6 +613,9 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
+
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
 
@@ -634,85 +625,13 @@ msgstr ""
 msgid "We could not find the stage in the program"
 msgstr ""
 
-msgid "Delete event"
+msgid "There are no feedback for this event"
 msgstr ""
 
-msgid "Download as JSON"
-msgstr ""
-
-msgid "Download as XML"
-msgstr ""
-
-msgid "Download as CSV"
-msgstr ""
-
-msgid "Download with current filters"
-msgstr ""
-
-msgid "Download data..."
-msgstr ""
-
-msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "an error occurred loading working lists"
+msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "Registered events"
-msgstr ""
-
-msgid "Enrollment status"
-msgstr ""
-
-msgid "Cancelled"
-msgstr ""
-
-msgid "Assigned to"
-msgstr ""
-
-msgid "Registering unit"
-msgstr ""
-
-msgid "Registration Date"
-msgstr ""
-
-msgid "Inactive"
-msgstr ""
-
-msgid "Working list could not be updated"
-msgstr ""
-
-msgid "Update view"
-msgstr ""
-
-msgid "Save current view..."
-msgstr ""
-
-msgid "Save current view as..."
-msgstr ""
-
-msgid "Delete view"
-msgstr ""
-
-msgid "Share view..."
-msgstr ""
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
-
-msgid "Confirm"
-msgstr ""
-
-msgid "Save As view"
-msgstr ""
-
-msgid "View name"
-msgstr ""
-
-msgid "Show Less"
-msgstr ""
-
-msgid "Show All"
 msgstr ""
 
 msgid "Choose a registering unit to start reporting"
@@ -846,6 +765,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr ""
 
+msgid "Edit event"
+msgstr ""
+
 msgid "Event details"
 msgstr ""
 
@@ -864,6 +786,18 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
+msgstr ""
+
+msgid "Show all events"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+
+msgid "Event could not be loaded"
+msgstr ""
+
+msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -952,6 +886,9 @@ msgstr ""
 msgid "Last updated {{date}}"
 msgstr ""
 
+msgid "Cancelled"
+msgstr ""
+
 msgid "Error"
 msgstr ""
 
@@ -964,10 +901,121 @@ msgstr ""
 msgid "Person Profile"
 msgstr ""
 
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Report date"
+msgstr ""
+
+msgid "Registering unit"
+msgstr ""
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Delete event"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr ""
+
+msgid "Download as XML"
+msgstr ""
+
+msgid "Download as CSV"
+msgstr ""
+
+msgid "Download with current filters"
+msgstr ""
+
+msgid "Download data..."
+msgstr ""
+
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Assigned to"
+msgstr ""
+
+msgid "Registration Date"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Working list could not be updated"
+msgstr ""
+
+msgid "Update view"
+msgstr ""
+
+msgid "Save current view..."
+msgstr ""
+
+msgid "Save current view as..."
+msgstr ""
+
+msgid "Delete view"
+msgstr ""
+
+msgid "Share view..."
+msgstr ""
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Save As view"
+msgstr ""
+
+msgid "View name"
+msgstr ""
+
+msgid "Show Less"
+msgstr ""
+
+msgid "Show All"
+msgstr ""
+
 msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr ""
+
+msgid "Overdue"
+msgstr ""
+
+msgid "Skipped"
 msgstr ""
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"

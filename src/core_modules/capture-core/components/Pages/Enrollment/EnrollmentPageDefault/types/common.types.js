@@ -26,7 +26,7 @@ type Event = {
     trackedEntityInstance: string
 }
 
-type EnrollmentData = {
+export type EnrollmentData = {
     created: string,
     createdAtClient: string,
     deleted: boolean,

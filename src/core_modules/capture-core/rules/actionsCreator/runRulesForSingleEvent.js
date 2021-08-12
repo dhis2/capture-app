@@ -8,7 +8,7 @@ import type {
 } from 'capture-core-utils/rulesEngine';
 import { rulesEngine } from '../rulesEngine';
 import { errorCreator } from '../../../capture-core-utils';
-import type { Program, RenderFoundation, DataElement } from '../../metaData';
+import type { Program, RenderFoundation, DataElement, ProgramStage } from '../../metaData';
 import { EventProgram } from '../../metaData';
 import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
 import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
@@ -18,9 +18,9 @@ const errorMessages = {
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
 };
 
-function getEventDataElements(eventProgram: EventProgram): Array<DataElement> {
-    return eventProgram.stage ?
-        Array.from(eventProgram.stage.stageForm.sections.values()).reduce((accElements, section) =>
+function getEventDataElements(stage: ?ProgramStage): Array<DataElement> {
+    return stage ?
+        Array.from(stage.stageForm.sections.values()).reduce((accElements, section) =>
             [...accElements, ...Array.from(section.elements.values())], []) :
         [];
 }
@@ -37,12 +37,8 @@ function getRulesEngineDataElementsAsObject(
     }, {});
 }
 
-function getDataElements(program: Program) {
-    let dataElements: Array<DataElement> = [];
-
-    if (program instanceof EventProgram) {
-        dataElements = getEventDataElements(program);
-    }
+function getDataElements(program: Program, stage: ?ProgramStage) {
+    const dataElements: Array<DataElement> = getEventDataElements(program instanceof EventProgram ? program.stage : stage);
 
     return getRulesEngineDataElementsAsObject(dataElements);
 }
@@ -68,6 +64,7 @@ function prepare(
     program: ?Program,
     foundation: ?RenderFoundation,
     allEventsData: ?EventsData,
+    stage: ?ProgramStage,
 ) {
     if (!program || !foundation) {
         log.error(errorCreator(errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
@@ -85,7 +82,7 @@ function prepare(
 
     const constants = constantsStore.get();
     const optionSets = convertOptionSetsToRulesEngineFormat(optionSetStore.get());
-    const dataElementsInProgram = getDataElements(program);
+    const dataElementsInProgram = getDataElements(program, stage);
     const allEvents = getEventsData(allEventsData);
 
     return {
@@ -104,8 +101,9 @@ export function runRulesForSingleEvent(
     orgUnit: OrgUnit,
     currentEvent: EventData,
     allEventsData: EventsData,
+    stage: ?ProgramStage,
 ) {
-    const data = prepare(program, foundation, allEventsData);
+    const data = prepare(program, foundation, allEventsData, stage);
 
     if (data) {
         const {

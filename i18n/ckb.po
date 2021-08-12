@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Antonia Bezenchek <antonia@informa.pro>, 2021\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -586,21 +586,6 @@ msgstr "مافی ئەوەت نیە کە کۆمێنت بنووسیت"
 msgid "Write comment"
 msgstr "کۆمێنت بنووسە"
 
-msgid "Show all events"
-msgstr "هەموو حاڵەتەکان پیشان بدە"
-
-msgid "Edit event"
-msgstr "حاڵەتەکە دەستکاری بکە"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "حاڵەتەکە نەتواندرا پیشان بدرێت، ئایا دڵنیای کە بوونی هەیە؟"
-
-msgid "Event could not be loaded"
-msgstr "حاڵەتەکە نەتواندرا بهێندرێت"
-
-msgid "Organisation unit could not be loaded"
-msgstr "ئۆرگانیزەیشن یونتەکە نەتواندرا بهێندرێت"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
@@ -615,6 +600,9 @@ msgid "No indicator output for this enrollment yet"
 msgstr ""
 
 msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "Program stage not found"
 msgstr ""
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
@@ -652,6 +640,9 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
+
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
 
@@ -661,86 +652,14 @@ msgstr ""
 msgid "We could not find the stage in the program"
 msgstr ""
 
-msgid "Delete event"
-msgstr "حاڵەتەکە بسڕەوە"
+msgid "There are no feedback for this event"
+msgstr ""
 
-msgid "Download as JSON"
-msgstr "دایبەزێنە وەکو JSON"
-
-msgid "Download as XML"
-msgstr "دایبەزێنە وەکو XML"
-
-msgid "Download as CSV"
-msgstr "دایبەزێنە وەکو CSV"
-
-msgid "Download with current filters"
-msgstr "دایبەزێنە لەگەڵ فیلتەرەکان"
-
-msgid "Download data..."
-msgstr "زانیاریەکان دابەزێنە"
-
-msgid "Working list could not be loaded"
-msgstr "لیستی کارکردن نەتواندرا بهێندرێت"
-
-msgid "an error occurred loading working lists"
-msgstr "هەڵەیەک ڕوویدا لە هێنانی  لیستی کارکردن"
+msgid "There are no indicators for this event"
+msgstr ""
 
 msgid "Registered events"
 msgstr "حالەتە تۆمارکراوەکان"
-
-msgid "Enrollment status"
-msgstr ""
-
-msgid "Cancelled"
-msgstr ""
-
-msgid "Assigned to"
-msgstr ""
-
-msgid "Registering unit"
-msgstr "تؤمار كردني يةكة"
-
-msgid "Registration Date"
-msgstr ""
-
-msgid "Inactive"
-msgstr ""
-
-msgid "Working list could not be updated"
-msgstr ""
-
-msgid "Update view"
-msgstr "پیشاندان نوێبکەوە"
-
-msgid "Save current view..."
-msgstr "پیشاندانەکەی ئێستا تۆمار بکە"
-
-msgid "Save current view as..."
-msgstr "پیشاندانەکەی ئێستا تۆمار بکە وەکو"
-
-msgid "Delete view"
-msgstr "پیشاندانەکە بسڕەوە"
-
-msgid "Share view..."
-msgstr "پیشاندانەکە شەیر بکە"
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "دەتەوێ پیشاندانی '{{templateName}}'  بسڕیتەوە"
-
-msgid "Confirm"
-msgstr "دووپاتکردنەوە"
-
-msgid "Save As view"
-msgstr "پیشاندانەکە تۆماربکە"
-
-msgid "View name"
-msgstr "ناو پیشان بدە"
-
-msgid "Show Less"
-msgstr "کەمتر پیشان بدە"
-
-msgid "Show All"
-msgstr "هەموو پیشان بدە"
 
 msgid "Choose a registering unit to start reporting"
 msgstr ""
@@ -876,6 +795,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
 
+msgid "Edit event"
+msgstr "حاڵەتەکە دەستکاری بکە"
+
 msgid "Event details"
 msgstr "دريذةي رووداوةكان"
 
@@ -897,6 +819,18 @@ msgstr "حاڵەتەکە ڕاپسێردراوە بە  {{name}}"
 
 msgid "Feedbacks"
 msgstr "بۆچوونەکان"
+
+msgid "Show all events"
+msgstr "هەموو حاڵەتەکان پیشان بدە"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "حاڵەتەکە نەتواندرا پیشان بدرێت، ئایا دڵنیای کە بوونی هەیە؟"
+
+msgid "Event could not be loaded"
+msgstr "حاڵەتەکە نەتواندرا بهێندرێت"
+
+msgid "Organisation unit could not be loaded"
+msgstr "ئۆرگانیزەیشن یونتەکە نەتواندرا بهێندرێت"
 
 msgid "Possible duplicates found"
 msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
@@ -984,6 +918,9 @@ msgstr ""
 msgid "Last updated {{date}}"
 msgstr ""
 
+msgid "Cancelled"
+msgstr ""
+
 msgid "Error"
 msgstr "هەڵە"
 
@@ -996,11 +933,122 @@ msgstr ""
 msgid "Person Profile"
 msgstr ""
 
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Report date"
+msgstr ""
+
+msgid "Registering unit"
+msgstr "تؤمار كردني يةكة"
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Delete event"
+msgstr "حاڵەتەکە بسڕەوە"
+
+msgid "Download as JSON"
+msgstr "دایبەزێنە وەکو JSON"
+
+msgid "Download as XML"
+msgstr "دایبەزێنە وەکو XML"
+
+msgid "Download as CSV"
+msgstr "دایبەزێنە وەکو CSV"
+
+msgid "Download with current filters"
+msgstr "دایبەزێنە لەگەڵ فیلتەرەکان"
+
+msgid "Download data..."
+msgstr "زانیاریەکان دابەزێنە"
+
+msgid "Working list could not be loaded"
+msgstr "لیستی کارکردن نەتواندرا بهێندرێت"
+
+msgid "an error occurred loading working lists"
+msgstr "هەڵەیەک ڕوویدا لە هێنانی  لیستی کارکردن"
+
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Assigned to"
+msgstr ""
+
+msgid "Registration Date"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Working list could not be updated"
+msgstr ""
+
+msgid "Update view"
+msgstr "پیشاندان نوێبکەوە"
+
+msgid "Save current view..."
+msgstr "پیشاندانەکەی ئێستا تۆمار بکە"
+
+msgid "Save current view as..."
+msgstr "پیشاندانەکەی ئێستا تۆمار بکە وەکو"
+
+msgid "Delete view"
+msgstr "پیشاندانەکە بسڕەوە"
+
+msgid "Share view..."
+msgstr "پیشاندانەکە شەیر بکە"
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr "دەتەوێ پیشاندانی '{{templateName}}'  بسڕیتەوە"
+
+msgid "Confirm"
+msgstr "دووپاتکردنەوە"
+
+msgid "Save As view"
+msgstr "پیشاندانەکە تۆماربکە"
+
+msgid "View name"
+msgstr "ناو پیشان بدە"
+
+msgid "Show Less"
+msgstr "کەمتر پیشان بدە"
+
+msgid "Show All"
+msgstr "هەموو پیشان بدە"
+
 msgid "An error has occured. See log for details"
 msgstr "هەڵەیک ڕوویدا، تکایە سەیری لۆگ فایل بکە بۆ وردەکاری زیاتر"
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr ""
+
+msgid "Overdue"
+msgstr ""
+
+msgid "Skipped"
+msgstr ""
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""

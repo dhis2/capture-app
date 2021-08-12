@@ -7,13 +7,16 @@ import {
 } from '../../components/Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 import {
     actionTypes as viewEventDataEntryActionTypes,
-} from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
+} from '../../components/WidgetEventEdit/ViewEventDataEntry/viewEventDataEntry.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
-} from '../../components/Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/editEventDataEntry.actions';
+} from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
 import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
-import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
+import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
+import {
+    actionTypes as widgetEventEditActionTypes,
+} from '../../components/WidgetEventEdit/WidgetEventEdit.actions';
 
 export const viewEventPageDesc = createReducerDescription({
     [viewEventActionTypes.VIEW_EVENT_FROM_URL]: (state, action) => {
@@ -89,6 +92,12 @@ export const viewEventPageDesc = createReducerDescription({
         },
     }),
     [viewEventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY]: state => ({
+        ...state,
+        eventDetailsSection: {
+            ...state.eventDetailsSection,
+        },
+    }),
+    [widgetEventEditActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY]: state => ({
         ...state,
         eventDetailsSection: {
             ...state.eventDetailsSection,

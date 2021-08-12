@@ -41,7 +41,7 @@ export const loadRelationshipsForViewEventEpic = (action$: InputObservable) =>
         switchMap((action) => {
             // Load event relationships
             const event = action.payload.eventContainer.event;
-            return getRelationshipsForEvent(event.eventId, event.programId)
+            return getRelationshipsForEvent(event.eventId, event.programId, event.programStageId)
                 .then(relationships => batchActions([
                     eventRelationshipsLoaded(),
                     setRelationships(relationshipKey, relationships || []),
