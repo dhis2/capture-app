@@ -1,12 +1,11 @@
 // @flow
 import React, { type ComponentType } from 'react';
-import { SingleEventRegistrationEntry }
-    from 'capture-core/components/DataEntries';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { Widget } from '../Widget';
 import type { Props } from './WidgetAddEvent.types';
+import { AddEventDataEntryComponent } from './AddEventDataEntry.component';
 
 const styles = () => ({
     header: {
@@ -44,8 +43,9 @@ const WidgetAddEventPlain = ({ programStage, classes }: Props) => {
 
         >
             <div data-test="add-event-form">
-                <SingleEventRegistrationEntry
-                    id="singleEvent"
+                <AddEventDataEntryComponent
+                    stage={programStage}
+                    formFoundation={stageForm}
                 />
             </div>
         </Widget>
