@@ -97,6 +97,7 @@ export type InterfaceProps = $ReadOnly<{|
     stickyFilters: StickyFilters,
     updating: boolean,
     updatingWithDialog: boolean,
+    programStageId?: string
 |}>;
 
 export type ListViewPassOnProps = $ReadOnly<{|

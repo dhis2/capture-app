@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -607,6 +607,9 @@ msgstr ""
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 "{{teiDisplayName}} бир неча дастурларда қайд этилган. Дастурни танланг."
@@ -661,86 +664,14 @@ msgstr ""
 msgid "We could not find the stage in the program"
 msgstr ""
 
-msgid "Delete event"
-msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
+msgid "There are no feedback for this event"
+msgstr ""
 
-msgid "Download as JSON"
-msgstr "JSON сифатида юклаш"
-
-msgid "Download as XML"
-msgstr "XML сифатида юклаш"
-
-msgid "Download as CSV"
-msgstr "CSV сифатида юкланг"
-
-msgid "Download with current filters"
-msgstr "Жорий фильтрлар асосида юклаш"
-
-msgid "Download data..."
-msgstr "Маълумотларни юклаб олиш ..."
-
-msgid "Working list could not be loaded"
-msgstr "Ишчи рўйхатни юклаб бўлмади"
-
-msgid "an error occurred loading working lists"
-msgstr "ишчи рўйхатни юклашда хатолик юз берди"
+msgid "There are no indicators for this event"
+msgstr ""
 
 msgid "Registered events"
 msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
-
-msgid "Enrollment status"
-msgstr "Рўйхатга олиш ҳолати"
-
-msgid "Cancelled"
-msgstr "Бекор қилинди"
-
-msgid "Assigned to"
-msgstr "Тайинланган"
-
-msgid "Registering unit"
-msgstr "Рўйхатга олиш муассасаси"
-
-msgid "Registration Date"
-msgstr "Рўйхатга олинган сана"
-
-msgid "Inactive"
-msgstr "Фаол эмас"
-
-msgid "Working list could not be updated"
-msgstr "Ишчи рўйхатни янгилаб бўлмади"
-
-msgid "Update view"
-msgstr "Янгиланган кўриниш"
-
-msgid "Save current view..."
-msgstr "Жорий кўринишни сақлаш ..."
-
-msgid "Save current view as..."
-msgstr "Ушбу жорий кўриниш сифатида сақлаш"
-
-msgid "Delete view"
-msgstr "Кўздан кечиришни ўчириб ташлаш"
-
-msgid "Share view..."
-msgstr "Кўриниш билан бўлишиш ..."
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Ҳақиқатдан ҳам '{{templateName}}' кўринишини ўчириб ташламоқчимисиз?"
-
-msgid "Confirm"
-msgstr "Тасдиқланг"
-
-msgid "Save As view"
-msgstr "Ушбу кўриниш сифатида сақлаш"
-
-msgid "View name"
-msgstr "Исмини кўриш"
-
-msgid "Show Less"
-msgstr "Камроқ кўрсатиш"
-
-msgid "Show All"
-msgstr "Барчасини кўрсатиш"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Хисобот бошлаш учун рўйхатдан ўтишни танланг"
@@ -1016,6 +947,9 @@ msgstr " {{orgUnitName}} эгалиги асосида"
 msgid "Last updated {{date}}"
 msgstr " {{date}}да охирги марта янгиланган"
 
+msgid "Cancelled"
+msgstr "Бекор қилинди"
+
 msgid "Error"
 msgstr "Хатолик"
 
@@ -1029,11 +963,122 @@ msgstr ""
 msgid "Person Profile"
 msgstr "Шахс профили"
 
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset"
+msgstr "Қайта кўриб чиқиб янгилаш"
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Report date"
+msgstr "Ҳисобот санаси"
+
+msgid "Registering unit"
+msgstr "Рўйхатга олиш муассасаси"
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr "Босқичлар ва Ҳодиса/тадбирлар"
 
+msgid "Delete event"
+msgstr "Ҳодиса/тадбирни ўчириб ташлаш"
+
+msgid "Download as JSON"
+msgstr "JSON сифатида юклаш"
+
+msgid "Download as XML"
+msgstr "XML сифатида юклаш"
+
+msgid "Download as CSV"
+msgstr "CSV сифатида юкланг"
+
+msgid "Download with current filters"
+msgstr "Жорий фильтрлар асосида юклаш"
+
+msgid "Download data..."
+msgstr "Маълумотларни юклаб олиш ..."
+
+msgid "Working list could not be loaded"
+msgstr "Ишчи рўйхатни юклаб бўлмади"
+
+msgid "an error occurred loading working lists"
+msgstr "ишчи рўйхатни юклашда хатолик юз берди"
+
+msgid "Enrollment status"
+msgstr "Рўйхатга олиш ҳолати"
+
+msgid "Assigned to"
+msgstr "Тайинланган"
+
+msgid "Registration Date"
+msgstr "Рўйхатга олинган сана"
+
+msgid "Inactive"
+msgstr "Фаол эмас"
+
+msgid "Working list could not be updated"
+msgstr "Ишчи рўйхатни янгилаб бўлмади"
+
+msgid "Update view"
+msgstr "Янгиланган кўриниш"
+
+msgid "Save current view..."
+msgstr "Жорий кўринишни сақлаш ..."
+
+msgid "Save current view as..."
+msgstr "Ушбу жорий кўриниш сифатида сақлаш"
+
+msgid "Delete view"
+msgstr "Кўздан кечиришни ўчириб ташлаш"
+
+msgid "Share view..."
+msgstr "Кўриниш билан бўлишиш ..."
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr "Ҳақиқатдан ҳам '{{templateName}}' кўринишини ўчириб ташламоқчимисиз?"
+
+msgid "Confirm"
+msgstr "Тасдиқланг"
+
+msgid "Save As view"
+msgstr "Ушбу кўриниш сифатида сақлаш"
+
+msgid "View name"
+msgstr "Исмини кўриш"
+
+msgid "Show Less"
+msgstr "Камроқ кўрсатиш"
+
+msgid "Show All"
+msgstr "Барчасини кўрсатиш"
+
 msgid "An error has occured. See log for details"
 msgstr "Хатолик юз берди. Тафсилотларни журналдан кўринг."
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Режа бўйича"
+
+msgid "Overdue"
+msgstr "Муддат ўтган"
+
+msgid "Skipped"
+msgstr "Ўтказиб юборилди"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{escape}} {{programName}} дастурида {{trackedEntityName}} "

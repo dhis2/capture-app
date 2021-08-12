@@ -5,8 +5,9 @@ import {
     actionTypes as viewEventActionTypes,
     actionTypes as viewEventPageActionTypes,
 } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { actionTypes as viewEventDataEntryActionTypes } from '../../components/WidgetEventEdit/ViewEventDataEntry/viewEventDataEntry.actions';
-import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
+import { actionTypes as viewEventDataEntryActionTypes }
+    from '../../components/WidgetEventEdit/ViewEventDataEntry/viewEventDataEntry.actions';
+import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 export const activePageDesc = createReducerDescription({
