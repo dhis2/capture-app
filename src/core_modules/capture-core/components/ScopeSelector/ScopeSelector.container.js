@@ -48,10 +48,9 @@ export const ScopeSelector: ComponentType<OwnProps> =
           const missName = !selectedOrgUnit.name;
           const hasDifferentId = selectedOrgUnit.id !== selectedOrgUnitId;
 
-          hasDifferentId && setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, id: selectedOrgUnitId }));
           selectedOrgUnitId && (hasDifferentId || missName) && refetchOrganisationUnit({ variables: { selectedOrgUnitId } });
       },
-      [selectedOrgUnitId, selectedOrgUnit, refetchOrganisationUnit, setSelectedOrgUnit]);
+      [selectedOrgUnitId]); // eslint-disable-line react-hooks/exhaustive-deps
 
       useEffect(() => {
           displayName && setSelectedOrgUnit(prevSelectedOrgUnit => ({ ...prevSelectedOrgUnit, name: displayName }));
