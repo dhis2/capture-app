@@ -10,6 +10,7 @@ import type {
     OutputEffects,
     RuleVariables,
     RulesEngineInput,
+    EventData,
     IConvertInputRulesValue,
     IConvertOutputRulesEffectsValue,
     IDateUtils,
@@ -242,16 +243,9 @@ export class RulesEngine {
 
         // Sort the event arrays from earliest to latest registration
         if (eventsContainer) {
-            const compareEvents = (first, second) => {
-                const diff = this.dateUtils.daysBetween(second.eventDate, first.eventDate);
-                if (diff < 0) {
-                    return -1;
-                }
-                if (diff > 0) {
-                    return 1;
-                }
-                return 0;
-            };
+            const compareEvents = (first: EventData, second: EventData): number => (
+                this.dateUtils.compareDates(first.eventDate, second.eventDate)
+            );
             eventsContainer.all.sort(compareEvents);
             if (eventsContainer.byStage) {
                 for (const programStageId of Object.keys(eventsContainer.byStage)) {

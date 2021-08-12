@@ -46,6 +46,16 @@ class DateUtils implements IDateUtils {
         const newRulesDate = momentToRulesDate(newDateMoment);
         return `'${newRulesDate}'`;
     }
+    compareDates(firstRulesDate: string, secondRulesDate: string): number {
+        const diff = dateUtils.daysBetween(secondRulesDate, firstRulesDate);
+        if (diff < 0) {
+            return -1;
+        }
+        if (diff > 0) {
+            return 1;
+        }
+        return 0;
+    }
 }
 
 export const dateUtils = new DateUtils();

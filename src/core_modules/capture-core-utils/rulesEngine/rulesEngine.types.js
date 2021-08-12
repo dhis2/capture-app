@@ -208,6 +208,7 @@ export interface IDateUtils {
     weeksBetween(firstRulesDate: string, secondRulesDate: string): number;
     monthsBetween(firstRulesDate: string, secondRulesDate: string): number;
     yearsBetween(firstRulesDate: string, secondRulesDate: string): number;
+    compareDates(firstRulesDate: string, secondRulesDate: string): number;
     addDays(rulesDate: string, daysToAdd: string): string;
 }
 
