@@ -346,7 +346,7 @@ export class VariableService {
 
         const allValues = stageEvents
             .map(event =>
-                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets)
+                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets),
             )
             .filter(value => !!value || value === false || value === 0);
 
@@ -474,7 +474,6 @@ export class VariableService {
     getContextVariables(sourceData: SourceData): RuleVariables {
         let variables = {};
 
-        // TODO: need to build some kind of date service and change this codeline
         variables.current_date = this.buildVariable(
             VariableService.dateUtils.getToday(),
             typeKeys.DATE, {

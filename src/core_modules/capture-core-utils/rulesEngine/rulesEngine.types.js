@@ -209,7 +209,7 @@ export interface IDateUtils {
     monthsBetween(firstRulesDate: string, secondRulesDate: string): number;
     yearsBetween(firstRulesDate: string, secondRulesDate: string): number;
     addDays(rulesDate: string, daysToAdd: string): string;
-};
+}
 
 export interface IConvertInputRulesValue {
     convertText(value: any): string;
