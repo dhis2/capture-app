@@ -27,17 +27,17 @@ class DateUtils implements IDateUtils {
         const todayMoment = moment();
         return this.momentToRulesDate(todayMoment);
     }
-    daysBetween(firstRulesDate: string, secondRulesDate: string): string {
-        return this.between('days', firstRulesDate, secondRulesDate).toString();
+    daysBetween(firstRulesDate: string, secondRulesDate: string): number {
+        return this.between('days', firstRulesDate, secondRulesDate);
     }
-    weeksBetween(firstRulesDate: string, secondRulesDate: string): string {
-        return this.between('weeks', firstRulesDate, secondRulesDate).toString();
+    weeksBetween(firstRulesDate: string, secondRulesDate: string): number {
+        return this.between('weeks', firstRulesDate, secondRulesDate);
     }
-    monthsBetween(firstRulesDate: string, secondRulesDate: string): string {
-        return this.between('months', firstRulesDate, secondRulesDate).toString();
+    monthsBetween(firstRulesDate: string, secondRulesDate: string): number {
+        return this.between('months', firstRulesDate, secondRulesDate);
     }
-    yearsBetween(firstRulesDate: string, secondRulesDate: string): string {
-        return this.between('years', firstRulesDate, secondRulesDate).toString();
+    yearsBetween(firstRulesDate: string, secondRulesDate: string): number {
+        return this.between('years', firstRulesDate, secondRulesDate);
     }
     addDays(rulesDate: string, daysToAdd: string): string {
         const rulesDateTrimmed = trimQuotes(rulesDate);

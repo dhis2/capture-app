@@ -204,10 +204,10 @@ export type Translator = (value: string) => string;
 
 export interface IDateUtils {
     getToday(): string;
-    daysBetween(firstRulesDate: string, secondRulesDate: string): string;
-    weeksBetween(firstRulesDate: string, secondRulesDate: string): string;
-    monthsBetween(firstRulesDate: string, secondRulesDate: string): string;
-    yearsBetween(firstRulesDate: string, secondRulesDate: string): string;
+    daysBetween(firstRulesDate: string, secondRulesDate: string): number;
+    weeksBetween(firstRulesDate: string, secondRulesDate: string): number;
+    monthsBetween(firstRulesDate: string, secondRulesDate: string): number;
+    yearsBetween(firstRulesDate: string, secondRulesDate: string): number;
     addDays(rulesDate: string, daysToAdd: string): string;
 };
 
