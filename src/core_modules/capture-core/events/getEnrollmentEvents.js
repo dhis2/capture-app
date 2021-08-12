@@ -23,6 +23,7 @@ export type ApiTEIEvent = {
     status: string,
     eventDate: string,
     dueDate: string,
+    lastUpdated: string,
     dataValues: Array<ApiDataValue>
 };
 

@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
-# Viktor Varland <viktor@dhis2.org>, 2021
 # Wanda <wanda@frontlineaids.org>, 2021
 # phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-28T11:26:08.991Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2021\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -593,21 +593,6 @@ msgstr "У вас не достаточно прав для написания �
 msgid "Write comment"
 msgstr "Написать комментарий"
 
-msgid "Show all events"
-msgstr "Показать все события"
-
-msgid "Edit event"
-msgstr "Редактировать событие"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Событие не может быть загружена. Вы уверены что событие существует?"
-
-msgid "Event could not be loaded"
-msgstr "Событие не может быть загружено"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Не могу загрузить Организационную единицу"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr ""
 
@@ -622,6 +607,9 @@ msgid "No indicator output for this enrollment yet"
 msgstr ""
 
 msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "Program stage not found"
 msgstr ""
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
@@ -659,6 +647,9 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
+
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
 
@@ -668,86 +659,14 @@ msgstr ""
 msgid "We could not find the stage in the program"
 msgstr ""
 
-msgid "Delete event"
-msgstr "Удалить событие"
+msgid "There are no feedback for this event"
+msgstr ""
 
-msgid "Download as JSON"
-msgstr "Скачать как JSON"
-
-msgid "Download as XML"
-msgstr "Скачать как XML"
-
-msgid "Download as CSV"
-msgstr "Загрузить в формате CSV"
-
-msgid "Download with current filters"
-msgstr "Загрузить с текущими фильрами"
-
-msgid "Download data..."
-msgstr "Загрузка данных..."
-
-msgid "Working list could not be loaded"
-msgstr "Не могу загрузить Рабочий список "
-
-msgid "an error occurred loading working lists"
-msgstr "Произошла ошибка во время загрузки Рабочих списков"
+msgid "There are no indicators for this event"
+msgstr ""
 
 msgid "Registered events"
 msgstr "Зарегистрированные события"
-
-msgid "Enrollment status"
-msgstr "Статус регистрации"
-
-msgid "Cancelled"
-msgstr "Отмененный"
-
-msgid "Assigned to"
-msgstr "закреплено за"
-
-msgid "Registering unit"
-msgstr "Регистрирующая единица"
-
-msgid "Registration Date"
-msgstr "Дата регистрации"
-
-msgid "Inactive"
-msgstr "Неактивный"
-
-msgid "Working list could not be updated"
-msgstr ""
-
-msgid "Update view"
-msgstr "Обновить вид"
-
-msgid "Save current view..."
-msgstr "Сохранить текущий вид"
-
-msgid "Save current view as..."
-msgstr "Сохранить текущий вид как..."
-
-msgid "Delete view"
-msgstr "Удалить вид"
-
-msgid "Share view..."
-msgstr "Дать доступ к виду..."
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Вы действительно хотите удалить вид '{{templateName}}'?"
-
-msgid "Confirm"
-msgstr "Подтвердить"
-
-msgid "Save As view"
-msgstr "Сохранить как вид"
-
-msgid "View name"
-msgstr "Просмотр названия"
-
-msgid "Show Less"
-msgstr "Покажи поменьше"
-
-msgid "Show All"
-msgstr "Показать все"
 
 msgid "Choose a registering unit to start reporting"
 msgstr ""
@@ -887,6 +806,9 @@ msgstr ""
 msgid "You dont have access to edit this event"
 msgstr "У вас нет прав на исправление данного события"
 
+msgid "Edit event"
+msgstr "Редактировать событие"
+
 msgid "Event details"
 msgstr "Детали события"
 
@@ -908,6 +830,18 @@ msgstr "Событие назначен: {{name}}"
 
 msgid "Feedbacks"
 msgstr "Отзывы"
+
+msgid "Show all events"
+msgstr "Показать все события"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Событие не может быть загружена. Вы уверены что событие существует?"
+
+msgid "Event could not be loaded"
+msgstr "Событие не может быть загружено"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Не могу загрузить Организационную единицу"
 
 msgid "Possible duplicates found"
 msgstr "Найдены возможные дубликаты"
@@ -996,6 +930,9 @@ msgstr ""
 msgid "Last updated {{date}}"
 msgstr ""
 
+msgid "Cancelled"
+msgstr "Отмененный"
+
 msgid "Error"
 msgstr "Ошибка"
 
@@ -1008,11 +945,122 @@ msgstr ""
 msgid "Person Profile"
 msgstr ""
 
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset"
+msgstr "Перезагрузить"
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Report date"
+msgstr "Дата отчета"
+
+msgid "Registering unit"
+msgstr "Регистрирующая единица"
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Delete event"
+msgstr "Удалить событие"
+
+msgid "Download as JSON"
+msgstr "Скачать как JSON"
+
+msgid "Download as XML"
+msgstr "Скачать как XML"
+
+msgid "Download as CSV"
+msgstr "Загрузить в формате CSV"
+
+msgid "Download with current filters"
+msgstr "Загрузить с текущими фильрами"
+
+msgid "Download data..."
+msgstr "Загрузка данных..."
+
+msgid "Working list could not be loaded"
+msgstr "Не могу загрузить Рабочий список "
+
+msgid "an error occurred loading working lists"
+msgstr "Произошла ошибка во время загрузки Рабочих списков"
+
+msgid "Enrollment status"
+msgstr "Статус регистрации"
+
+msgid "Assigned to"
+msgstr "закреплено за"
+
+msgid "Registration Date"
+msgstr "Дата регистрации"
+
+msgid "Inactive"
+msgstr "Неактивный"
+
+msgid "Working list could not be updated"
+msgstr ""
+
+msgid "Update view"
+msgstr "Обновить вид"
+
+msgid "Save current view..."
+msgstr "Сохранить текущий вид"
+
+msgid "Save current view as..."
+msgstr "Сохранить текущий вид как..."
+
+msgid "Delete view"
+msgstr "Удалить вид"
+
+msgid "Share view..."
+msgstr "Дать доступ к виду..."
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr "Вы действительно хотите удалить вид '{{templateName}}'?"
+
+msgid "Confirm"
+msgstr "Подтвердить"
+
+msgid "Save As view"
+msgstr "Сохранить как вид"
+
+msgid "View name"
+msgstr "Просмотр названия"
+
+msgid "Show Less"
+msgstr "Покажи поменьше"
+
+msgid "Show All"
+msgstr "Показать все"
+
 msgid "An error has occured. See log for details"
 msgstr "Произошла ошибка. Смотрите подробности в лог-файле"
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Запланировано"
+
+msgid "Overdue"
+msgstr "Просроченный"
+
+msgid "Skipped"
+msgstr "Пропущенный"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""

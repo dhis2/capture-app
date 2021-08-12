@@ -1,8 +1,9 @@
 // @flow
 import React, { useCallback, memo, type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { IconButton, Paper, MenuList, MenuItem, Divider } from '@material-ui/core';
-import { IconMore24 } from '@dhis2/ui';
+import { Divider, IconMore24 } from '@dhis2/ui';
+import { IconButton, Paper, MenuList, MenuItem } from '@material-ui/core';
+
 import { MenuPopper } from '../../Popper/Popper.component';
 import type { Props } from './listViewMenu.types';
 
@@ -46,7 +47,7 @@ const ListViewMenuPlain = ({ customMenuContents = [], classes }: Props) => {
                         <>
                             <Divider
                                 key={`${content.key}divider`}
-                                data-test={`subheader-divider-${content.key}`}
+                                dataTest={`subheader-divider-${content.key}`}
                                 className={classes.subHeaderDivider}
                             />,
                             <div

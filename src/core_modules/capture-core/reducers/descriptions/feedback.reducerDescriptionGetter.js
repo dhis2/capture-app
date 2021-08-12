@@ -14,15 +14,15 @@ import {
 } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import {
     actionTypes as editEventDataEntryActionTypes,
-} from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
+} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
 import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
 import {
     actionTypes as viewEventNewRelationshipActionTypes,
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
-import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
-import { workingListsCommonActionTypes } from '../../components/Pages/MainPage/WorkingListsCommon';
+import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
+import { workingListsCommonActionTypes } from '../../components/WorkingLists/WorkingListsCommon';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
 
