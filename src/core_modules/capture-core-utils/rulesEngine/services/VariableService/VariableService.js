@@ -16,6 +16,7 @@ import type {
     Enrollment,
     OrgUnit,
     RuleVariable,
+    RuleVariables,
     TEIValues,
     Constants,
     RulesEngineInput,
@@ -67,7 +68,7 @@ export class VariableService {
             : value;
     }
 
-    static dateUtils: any;
+    static dateUtils: IDateUtils;
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
@@ -345,7 +346,7 @@ export class VariableService {
 
         const allValues = stageEvents
             .map(event =>
-                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets),
+                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets)
             )
             .filter(value => !!value || value === false || value === 0);
 
@@ -470,7 +471,7 @@ export class VariableService {
         );
     }
 
-    getContextVariables(sourceData: SourceData): { [key: string]: RuleVariable } {
+    getContextVariables(sourceData: SourceData): RuleVariables {
         let variables = {};
 
         // TODO: need to build some kind of date service and change this codeline
