@@ -200,22 +200,16 @@ export type RulesEngineInput = {|
     optionSets: OptionSets,
 |}
 
-export type DateUtils = {
-    getToday: () => string,
-    daysBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    weeksBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    monthsBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    yearsBetween: (firstRulesDate: string, secondRulesDate: string) => string,
-    addDays: (rulesDate: string, daysToAdd: string) => string,
-};
-
 export type Translator = (value: string) => string;
 
-export type Moment = Object;
-export interface IMomentConverter {
-    rulesDateToMoment(rulesEngineValue: string): Moment;
-    momentToRulesDate(momentValue: Moment): string;
-}
+export interface IDateUtils {
+    getToday(): string;
+    daysBetween(firstRulesDate: string, secondRulesDate: string): string;
+    weeksBetween(firstRulesDate: string, secondRulesDate: string): string;
+    monthsBetween(firstRulesDate: string, secondRulesDate: string): string;
+    yearsBetween(firstRulesDate: string, secondRulesDate: string): string;
+    addDays(rulesDate: string, daysToAdd: string): string;
+};
 
 export interface IConvertInputRulesValue {
     convertText(value: any): string;
