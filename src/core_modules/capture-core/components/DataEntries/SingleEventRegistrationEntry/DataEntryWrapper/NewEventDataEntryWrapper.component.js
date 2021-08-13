@@ -51,6 +51,15 @@ const NewEventDataEntryWrapperPlain = ({
 }: Props) => {
     const { id: programId } = useCurrentProgramInfo();
     const titleText = useScopeTitleText(programId);
+    const checkIfCustomForm = () => {
+        let isCustom = false;
+        if (!formFoundation?.sections) { return isCustom; }
+        formFoundation.sections.forEach((section) => {
+            section.customForm ? isCustom = true : null;
+        });
+        return isCustom;
+    };
+    const isCustomForm = checkIfCustomForm();
 
     return (
         <Paper className={classes.paper}>
@@ -64,7 +73,7 @@ const NewEventDataEntryWrapperPlain = ({
             <div className={classes.flexContainer}>
                 <div className={classes.flexEnd}>
                     {
-                        !formFoundation || formFoundation.customForm ?
+                        isCustomForm ?
                             null
                             :
                             <Button

@@ -1,5 +1,6 @@
 // @flow
 import { actionCreator } from '../../../actions/actions.utils';
+import type { EnrollmentData } from './EnrollmentPageDefault/types/common.types';
 
 export const enrollmentPageActionTypes = {
     INFORMATION_FETCH: 'EnrollmentPage.Fetch',
@@ -17,6 +18,7 @@ export const enrollmentPageActionTypes = {
     MISSING_MESSAGE_VIEW: 'EnrollmentPage.MissingMessageView',
 
     DELETE_ENROLLMENT: 'EnrollmentPage.DeleteEnrollment',
+    SET_ENROLLMENT: 'EnrollmentPage.SetEnrollment',
 };
 
 export const fetchEnrollmentPageInformation = () =>
@@ -54,3 +56,6 @@ export const deleteEnrollment = ({ enrollmentId }: { enrollmentId: string }) =>
     actionCreator(enrollmentPageActionTypes.DELETE_ENROLLMENT)({
         enrollmentId,
     });
+
+export const setEnrollment = (enrollmentSite: EnrollmentData) =>
+    actionCreator(enrollmentPageActionTypes.SET_ENROLLMENT)({ enrollmentSite });

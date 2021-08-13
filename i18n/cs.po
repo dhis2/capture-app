@@ -1,13 +1,13 @@
 # 
 # Translators:
-# trendspotter, 2021
+# trendspotter <jirka.p@volny.cz>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: trendspotter, 2021\n"
+"Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -582,21 +582,6 @@ msgstr "Nemáte přístup k psaní komentářů"
 msgid "Write comment"
 msgstr "Napsat komentář"
 
-msgid "Show all events"
-msgstr "Zobrazit všechny události"
-
-msgid "Edit event"
-msgstr "Upravit událost"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Událost se nepodařilo načíst. Jste si jisti, že existuje?"
-
-msgid "Event could not be loaded"
-msgstr "Událost se nepodařilo načíst"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Organizační jednotku se nepodařilo načíst"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance trasované entity s ID \"{{teiId}}\" neexistuje"
 
@@ -607,6 +592,15 @@ msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Zápis s ID \"{{enrollmentId}}\" neexistuje"
+
+msgid "No indicator output for this enrollment yet"
+msgstr "Pro tento zápis zatím neexistuje žádný indikátorový výstup"
+
+msgid "No feedback for this enrollment yet"
+msgstr "K tomuto zápisu zatím není žádná zpětná vazba"
+
+msgid "Program stage not found"
+msgstr "Fáze programu nenalezena"
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr "{{teiDisplayName}} je zapsán do několika programů. Vyberte program."
@@ -649,6 +643,9 @@ msgstr "Vytvořte novou událost v tomto programu."
 msgid "View working list in this program."
 msgstr "Zobrazit pracovní seznam v tomto programu."
 
+msgid "Enrollment{{escape}} New Event"
+msgstr "Zápis{{escape}} Nová událost"
+
 msgid "Enrollment{{escape}} View Event"
 msgstr "Zobrazit událost Enrollment{{escape}}"
 
@@ -656,88 +653,16 @@ msgid "Enrollment{{escape}} Edit Event"
 msgstr "Upravit událost Enrollment{{escape}}"
 
 msgid "We could not find the stage in the program"
-msgstr ""
+msgstr "V programu jsme nenašli fázi"
 
-msgid "Delete event"
-msgstr "Smazat událost"
+msgid "There are no feedback for this event"
+msgstr "K této události není žádná zpětná vazba"
 
-msgid "Download as JSON"
-msgstr "Stáhnout jako JSON"
-
-msgid "Download as XML"
-msgstr "Stáhnout jako XML"
-
-msgid "Download as CSV"
-msgstr "Stáhnout jako CSV"
-
-msgid "Download with current filters"
-msgstr "Stáhnout s aktuálními filtry"
-
-msgid "Download data..."
-msgstr "Stáhnout data ..."
-
-msgid "Working list could not be loaded"
-msgstr "Pracovní seznam nelze načíst"
-
-msgid "an error occurred loading working lists"
-msgstr "při načítání pracovních seznamů došlo k chybě"
+msgid "There are no indicators for this event"
+msgstr "Pro tuto událost neexistují žádné ukazatele"
 
 msgid "Registered events"
 msgstr "Registrované události"
-
-msgid "Enrollment status"
-msgstr "Stav zápisu"
-
-msgid "Cancelled"
-msgstr "Zrušeno"
-
-msgid "Assigned to"
-msgstr "Přiřazen k"
-
-msgid "Registering unit"
-msgstr "Registrační jednotka"
-
-msgid "Registration Date"
-msgstr "Datum registrace"
-
-msgid "Inactive"
-msgstr "Neaktivní"
-
-msgid "Working list could not be updated"
-msgstr "Pracovní seznam nelze aktualizovat"
-
-msgid "Update view"
-msgstr "Aktualizovat zobrazení"
-
-msgid "Save current view..."
-msgstr "Uložit aktuální zobrazení ..."
-
-msgid "Save current view as..."
-msgstr "Uložit aktuální zobrazení jako ..."
-
-msgid "Delete view"
-msgstr "Odstranit zobrazení"
-
-msgid "Share view..."
-msgstr "Sdílet zobrazení..."
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Opravdu chcete smazat zobrazení  '{{templateName}}'?"
-
-msgid "Confirm"
-msgstr "Potvrdit"
-
-msgid "Save As view"
-msgstr "Uložit jako zobrazení"
-
-msgid "View name"
-msgstr "Název zobrazení"
-
-msgid "Show Less"
-msgstr "Ukázat méně"
-
-msgid "Show All"
-msgstr "Ukázat vše"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Vyberte registraci jednotky a začněte hlásit"
@@ -874,8 +799,17 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Hledat ve všech programech"
 
+msgid "events"
+msgstr "události"
+
+msgid "event"
+msgstr "událost"
+
 msgid "You dont have access to edit this event"
 msgstr "K úpravě této události nemáte přístup"
+
+msgid "Edit event"
+msgstr "Upravit událost"
 
 msgid "Event details"
 msgstr "Podrobnosti události"
@@ -898,6 +832,18 @@ msgstr "Událost přiřazená uživateli {{name}}"
 
 msgid "Feedbacks"
 msgstr "Zpětná vazba"
+
+msgid "Show all events"
+msgstr "Zobrazit všechny události"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Událost se nepodařilo načíst. Jste si jisti, že existuje?"
+
+msgid "Event could not be loaded"
+msgstr "Událost se nepodařilo načíst"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Organizační jednotku se nepodařilo načíst"
 
 msgid "Possible duplicates found"
 msgstr "Byly nalezeny možné duplikáty"
@@ -987,17 +933,137 @@ msgstr "Vlastník: {{ownerOrgUnit}}"
 msgid "Last updated {{date}}"
 msgstr "Poslední aktualizace {{date}}"
 
+msgid "Cancelled"
+msgstr "Zrušeno"
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Warning"
+msgstr "Varování"
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"
 
 msgid "Person Profile"
 msgstr "Osobní profil"
 
+msgid "Show {{ rest }} more"
+msgstr "Zobrazit {{rest}} více"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Go to full {{ eventName }}"
+msgstr "Přejít na celou {{ eventName }}"
+
+msgid "New {{ eventName }} event"
+msgstr "Nová událost {{ eventName }}"
+
+msgid "Report date"
+msgstr "Datum zprávy"
+
+msgid "Registering unit"
+msgstr "Registrační jednotka"
+
+msgid "{{ totalEvents }} events"
+msgstr "{{ totalEvents }} událostí"
+
+msgid "{{ overdueEvents }} overdue"
+msgstr "{{ overdueEvents }} vypršelo"
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr "{{ scheduledEvents }} naplánováno"
+
 msgid "Stages and Events"
 msgstr "Fáze a události"
 
+msgid "Delete event"
+msgstr "Smazat událost"
+
+msgid "Download as JSON"
+msgstr "Stáhnout jako JSON"
+
+msgid "Download as XML"
+msgstr "Stáhnout jako XML"
+
+msgid "Download as CSV"
+msgstr "Stáhnout jako CSV"
+
+msgid "Download with current filters"
+msgstr "Stáhnout s aktuálními filtry"
+
+msgid "Download data..."
+msgstr "Stáhnout data ..."
+
+msgid "Working list could not be loaded"
+msgstr "Pracovní seznam nelze načíst"
+
+msgid "an error occurred loading working lists"
+msgstr "při načítání pracovních seznamů došlo k chybě"
+
+msgid "Enrollment status"
+msgstr "Stav zápisu"
+
+msgid "Assigned to"
+msgstr "Přiřazen k"
+
+msgid "Registration Date"
+msgstr "Datum registrace"
+
+msgid "Inactive"
+msgstr "Neaktivní"
+
+msgid "Working list could not be updated"
+msgstr "Pracovní seznam nelze aktualizovat"
+
+msgid "Update view"
+msgstr "Aktualizovat zobrazení"
+
+msgid "Save current view..."
+msgstr "Uložit aktuální zobrazení ..."
+
+msgid "Save current view as..."
+msgstr "Uložit aktuální zobrazení jako ..."
+
+msgid "Delete view"
+msgstr "Odstranit zobrazení"
+
+msgid "Share view..."
+msgstr "Sdílet zobrazení..."
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr "Opravdu chcete smazat zobrazení  '{{templateName}}'?"
+
+msgid "Confirm"
+msgstr "Potvrdit"
+
+msgid "Save As view"
+msgstr "Uložit jako zobrazení"
+
+msgid "View name"
+msgstr "Název zobrazení"
+
+msgid "Show Less"
+msgstr "Ukázat méně"
+
+msgid "Show All"
+msgstr "Ukázat vše"
+
 msgid "An error has occured. See log for details"
 msgstr "Vyskytla se chyba. Podrobnosti najdete v protokolu"
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr "Naplánováno na {{escape}} kvůli {{time}}"
+
+msgid "Scheduled"
+msgstr "Naplánováno"
+
+msgid "Overdue"
+msgstr "Po termínu"
+
+msgid "Skipped"
+msgstr "Přeskočeno"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} v program{{escape}} {{programName}}"

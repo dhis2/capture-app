@@ -167,14 +167,15 @@ Then('main page page url is valid', () => {
 });
 
 When('you remove the program selection', () => {
-    cy.get('button')
-        .find('[class*=ProgramSelector]')
-        .click();
+    cy.get('[data-test="program-selector-container"]').within(() => {
+        cy.get('[data-test="reset-selection-button"]').eq(0).click();
+    });
 });
 
 When('you remove the org unit selection', () => {
-    cy.get('button')
-        .find('[class*=OrgUnitSelector]').click();
+    cy.get('[data-test="org-unit-selector-container"]').within(() => {
+        cy.get('[data-test="reset-selection-button"]').eq(0).click();
+    });
 });
 
 Then('you should be taken to the main page with only org unit selected', () => {
@@ -240,12 +241,18 @@ const lockedSelectorCases = {
     error: [],
 };
 
+const scopeSelectorCases = lockedSelectorCases;
+
 Given(/^you land on the enrollment page by having typed the (.*)$/, (url) => {
     cy.visit(url);
 });
 
 Then(/^you can see on the locked selector the following (.*)$/, (state) => {
     lockedSelectorCases[state].map(selection => cy.get('[data-test="locked-selector"]').contains(selection));
+});
+
+Then(/^you can see on the scope selector the following (.*)$/, (state) => {
+    scopeSelectorCases[state].map(selection => cy.get('[data-test="scope-selector"]').contains(selection));
 });
 
 Then(/^you see the following (.*)$/, (message) => {
@@ -297,23 +304,11 @@ And('you see the enrollment page', () => {
         .contains('Enrollment Dashboard');
 });
 
-And('you wait to reset the enrollment selection', () => {
-    cy.get('[data-test="enrollment-page-content"]')
-        .contains('Person Profile');
+And('you reset the enrollment selection', () => {
     cy.get('[data-test="reset-selection-button"]')
-        .should('have.length.greaterThan', 2);
+        .should('have.length.greaterThan', 3);
     cy.get('[data-test="reset-selection-button"]')
         .eq(3)
-        .click();
-});
-
-And('you wait to reset the program selection', () => {
-    cy.get('[data-test="enrollment-page-content"]')
-        .contains('Person Profile');
-    cy.get('[data-test="reset-selection-button"]')
-        .should('have.length.greaterThan', 2);
-    cy.get('[data-test="reset-selection-button"]')
-        .eq(0)
         .click();
 });
 

@@ -3,11 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { compose } from 'redux';
 import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Paper from '@material-ui/core/Paper/Paper';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import { useLocation } from 'react-router';
-import {
+import { CircularLoader,
     Modal,
     ModalTitle,
     ModalContent,
@@ -15,12 +11,16 @@ import {
     ButtonStrip,
     Button,
     NoticeBox,
+    IconChevronLeft24,
 } from '@dhis2/ui';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Paper from '@material-ui/core/Paper/Paper';
+import { useLocation } from 'react-router';
+
 import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
-import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
 import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
@@ -142,7 +142,7 @@ const Index = ({
                     className={classes.backButton}
                     onClick={navigateToMainPage}
                 >
-                    <ChevronLeft />
+                    <IconChevronLeft24 />
                     {i18n.t('Back')}
                 </Button>
 
@@ -198,7 +198,7 @@ const Index = ({
                         {
                             searchStatus === searchPageStatus.LOADING &&
                             <div className={classes.loadingMask}>
-                                <LoadingMask />
+                                <CircularLoader />
                             </div>
                         }
 

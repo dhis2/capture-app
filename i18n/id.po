@@ -1,20 +1,20 @@
 # 
 # Translators:
-# phil_dhis2, 2019
-# Carwoto Sa'an <carwoto@gmail.com>, 2020
-# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # Farida Sibuea <farida_sibuea@yahoo.com>, 2021
-# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
 # Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2021
+# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2021
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
+# Carwoto Sa'an <carwoto@gmail.com>, 2021
+# Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Yusuf Setiawan <mohammadyusufsetiawan@gmail.com>, 2021\n"
+"Last-Translator: Untoro Dwi Raharjo <untoro.dwi.raharjo@mail.ugm.ac.id>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -593,21 +593,6 @@ msgstr "Anda tidak memiliki akses untuk menulis komentar"
 msgid "Write comment"
 msgstr "Tulis komentar"
 
-msgid "Show all events"
-msgstr "Tampilkan semua even"
-
-msgid "Edit event"
-msgstr "Sunting even"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
-
-msgid "Event could not be loaded"
-msgstr "Even tidak dapat dimuat"
-
-msgid "Organisation unit could not be loaded"
-msgstr "Unit organisasi tidak dapat dimuat"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "Instance entitas terlacak dengan id \"{{teiId}}\" tidak ada"
 
@@ -619,6 +604,15 @@ msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Pendaftaran dengan id \"{{enrollmentId}}\" tidak ada"
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "Program stage not found"
+msgstr ""
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
@@ -663,6 +657,9 @@ msgstr "Buat even baru dalam program ini."
 msgid "View working list in this program."
 msgstr "Lihat daftar kerja dalam program ini."
 
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
+
 msgid "Enrollment{{escape}} View Event"
 msgstr "Pendaftaran{{escape}} Lihat Even"
 
@@ -672,86 +669,14 @@ msgstr "Pendaftaran{{escape}} Edit Even"
 msgid "We could not find the stage in the program"
 msgstr "Kami tidak dapat menemukan panggung dalam program"
 
-msgid "Delete event"
-msgstr "Hapus even"
+msgid "There are no feedback for this event"
+msgstr ""
 
-msgid "Download as JSON"
-msgstr "Download dalam bentuk JSON"
-
-msgid "Download as XML"
-msgstr "Download dalam bentuk XML"
-
-msgid "Download as CSV"
-msgstr "Download dalam bentuk CSV"
-
-msgid "Download with current filters"
-msgstr "Unduh dengan filter saat ini"
-
-msgid "Download data..."
-msgstr "Unduh data..."
-
-msgid "Working list could not be loaded"
-msgstr "Daftar kerja tidak dapat dimuat"
-
-msgid "an error occurred loading working lists"
-msgstr "terjadi kesalahan saat memuat daftar kerja"
+msgid "There are no indicators for this event"
+msgstr ""
 
 msgid "Registered events"
 msgstr "Even terdaftar"
-
-msgid "Enrollment status"
-msgstr "Status pendaftaran"
-
-msgid "Cancelled"
-msgstr "Dibatalkan"
-
-msgid "Assigned to"
-msgstr "Ditugaskan pada"
-
-msgid "Registering unit"
-msgstr "Unit pendaftaran"
-
-msgid "Registration Date"
-msgstr "tanggal registrasi"
-
-msgid "Inactive"
-msgstr "Inaktif"
-
-msgid "Working list could not be updated"
-msgstr "Daftar kerja tidak dapat diperbarui"
-
-msgid "Update view"
-msgstr "Perbarui tampilan"
-
-msgid "Save current view..."
-msgstr "Simpan tampilan saat ini..."
-
-msgid "Save current view as..."
-msgstr "Simpan tampilan saat ini sebagai..."
-
-msgid "Delete view"
-msgstr "Hapus tampilan"
-
-msgid "Share view..."
-msgstr "Bagikan tampilan..."
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Yakin ingin menghapus tampilan '{{templateName}}'?"
-
-msgid "Confirm"
-msgstr "Konfirmasi"
-
-msgid "Save As view"
-msgstr "Simpan Sebagai tampilan"
-
-msgid "View name"
-msgstr "Tampilkan nama"
-
-msgid "Show Less"
-msgstr "Tampilkan Lebih Sedikit"
-
-msgid "Show All"
-msgstr "Tunjukkan semua"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Pilih unit pendaftaran untuk memulai pelaporan"
@@ -891,8 +816,17 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Cari di semua program"
 
+msgid "events"
+msgstr "Even"
+
+msgid "event"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr "Anda tidak memiliki akses untuk mengedit even ini"
+
+msgid "Edit event"
+msgstr "Sunting even"
 
 msgid "Event details"
 msgstr "Detail even"
@@ -915,6 +849,18 @@ msgstr "Even ditugaskan ke {{name}}"
 
 msgid "Feedbacks"
 msgstr "Umpan balik"
+
+msgid "Show all events"
+msgstr "Tampilkan semua even"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Even tidak dapat dimuat. Apakah Anda yakin itu ada?"
+
+msgid "Event could not be loaded"
+msgstr "Even tidak dapat dimuat"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Unit organisasi tidak dapat dimuat"
 
 msgid "Possible duplicates found"
 msgstr "Kemungkinan duplikat ditemukan"
@@ -1004,17 +950,137 @@ msgstr "Dimiliki oleh {{ownerOrgUnit}}"
 msgid "Last updated {{date}}"
 msgstr "Terakhir diperbarui {{date}}"
 
+msgid "Cancelled"
+msgstr "Dibatalkan"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Warning"
+msgstr "Peringatan"
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profil tidak dapat dimuat. Silakan coba lagi nanti"
 
 msgid "Person Profile"
 msgstr "Profil Orang"
 
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Report date"
+msgstr "Tanggal pelaporan"
+
+msgid "Registering unit"
+msgstr "Unit pendaftaran"
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr "Tahapan dan Even"
 
+msgid "Delete event"
+msgstr "Hapus even"
+
+msgid "Download as JSON"
+msgstr "Download dalam bentuk JSON"
+
+msgid "Download as XML"
+msgstr "Download dalam bentuk XML"
+
+msgid "Download as CSV"
+msgstr "Download dalam bentuk CSV"
+
+msgid "Download with current filters"
+msgstr "Unduh dengan filter saat ini"
+
+msgid "Download data..."
+msgstr "Unduh data..."
+
+msgid "Working list could not be loaded"
+msgstr "Daftar kerja tidak dapat dimuat"
+
+msgid "an error occurred loading working lists"
+msgstr "terjadi kesalahan saat memuat daftar kerja"
+
+msgid "Enrollment status"
+msgstr "Status pendaftaran"
+
+msgid "Assigned to"
+msgstr "Ditugaskan pada"
+
+msgid "Registration Date"
+msgstr "tanggal registrasi"
+
+msgid "Inactive"
+msgstr "Inaktif"
+
+msgid "Working list could not be updated"
+msgstr "Daftar kerja tidak dapat diperbarui"
+
+msgid "Update view"
+msgstr "Perbarui tampilan"
+
+msgid "Save current view..."
+msgstr "Simpan tampilan saat ini..."
+
+msgid "Save current view as..."
+msgstr "Simpan tampilan saat ini sebagai..."
+
+msgid "Delete view"
+msgstr "Hapus tampilan"
+
+msgid "Share view..."
+msgstr "Bagikan tampilan..."
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr "Yakin ingin menghapus tampilan '{{templateName}}'?"
+
+msgid "Confirm"
+msgstr "Konfirmasi"
+
+msgid "Save As view"
+msgstr "Simpan Sebagai tampilan"
+
+msgid "View name"
+msgstr "Tampilkan nama"
+
+msgid "Show Less"
+msgstr "Tampilkan Lebih Sedikit"
+
+msgid "Show All"
+msgstr "Tunjukkan semua"
+
 msgid "An error has occured. See log for details"
 msgstr "Terjadi kesalahan. Lihat log untuk detailnya"
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Terjadwal"
+
+msgid "Overdue"
+msgstr "Lewat waktu"
+
+msgid "Skipped"
+msgstr "Dilewati"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} dalam program{{escape}} {{programName}}"

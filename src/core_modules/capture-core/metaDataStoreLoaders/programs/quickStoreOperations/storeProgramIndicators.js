@@ -13,7 +13,7 @@ const convert = (response) => {
         }));
 };
 
-const fieldsParam = 'id,displayName,code,shortName,displayInForm,expression,' +
+const fieldsParam = 'id,displayName,code,shortName,style,displayInForm,expression,' +
 'displayDescription,description,filter,program[id]';
 
 export const storeProgramIndicators = async (programIds: Array<string>) => {

@@ -7,7 +7,10 @@ import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { WidgetProfile } from '../../../WidgetProfile';
 import type { Props, PlainProps } from './EnrollmentPageDefault.types';
+import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetFeedback } from '../../../WidgetFeedback';
+import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
+import { WidgetIndicator } from '../../../WidgetIndicator';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -37,7 +40,9 @@ const getStyles = ({ typography }) => ({
 export const EnrollmentPageDefaultPlain = ({
     program,
     teiId,
+    events,
     enrollmentId,
+    stages,
     onDelete,
     widgetEffects,
     hideWidgets,
@@ -47,9 +52,20 @@ export const EnrollmentPageDefaultPlain = ({
         <div className={classes.title}>Enrollment Dashboard</div>
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
-                <WidgetStagesAndEvents stages={program.stages} />
+                <WidgetStagesAndEvents
+                    stages={stages}
+                    events={events}
+                />
             </div>
             <div className={classes.rightColumn}>
+                <WidgetError error={widgetEffects?.errors} />
+                <WidgetWarning warning={widgetEffects?.warnings} />
+                {!hideWidgets.indicator && (
+                    <WidgetIndicator
+                        indicators={widgetEffects?.indicators}
+                        emptyText={i18n.t('No indicator output for this enrollment yet')}
+                    />
+                )}
                 {!hideWidgets.feedback && (
                     <WidgetFeedback
                         feedback={widgetEffects?.feedbacks}
@@ -67,6 +83,7 @@ export const EnrollmentPageDefaultPlain = ({
         </div>
     </>
 );
+
 
 export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(
     getStyles,

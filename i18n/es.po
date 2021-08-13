@@ -1,20 +1,20 @@
 # 
 # Translators:
-# Marta Vila <marta@dhis2.org>, 2019
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
 # ericbp <ericbarredap@gmail.com>, 2021
-# phil_dhis2, 2021
 # Alison Andrade <aandrade@ippfwhr.org>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # drprabhjot, 2021
+# phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
+# Marta Vila <marta@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-06-04T06:44:29.878Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: drprabhjot, 2021\n"
+"Last-Translator: Marta Vila <marta@dhis2.org>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -598,21 +598,6 @@ msgstr "No tienes acceso para escribir comentarios"
 msgid "Write comment"
 msgstr "Escribir comentario"
 
-msgid "Show all events"
-msgstr "Mostrar todos los eventos"
-
-msgid "Edit event"
-msgstr "Editar evento"
-
-msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
-
-msgid "Event could not be loaded"
-msgstr "No se pudo cargar el evento"
-
-msgid "Organisation unit could not be loaded"
-msgstr "No se pudo cargar la unidad organizativa"
-
 msgid "Tracked entity instance with id \"{{teiId}}\" does not exist"
 msgstr "La instancia de entidad rastreada con el ID \"{{teiId}}\" no existe"
 
@@ -623,6 +608,15 @@ msgstr ""
 
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "La inscripción con el ID \"{{enrollmentId}}\" no existe"
+
+msgid "No indicator output for this enrollment yet"
+msgstr ""
+
+msgid "No feedback for this enrollment yet"
+msgstr ""
+
+msgid "Program stage not found"
+msgstr ""
 
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
@@ -667,6 +661,9 @@ msgstr "Crea un nuevo evento en este programa."
 msgid "View working list in this program."
 msgstr "Ver lista de trabajo en este programa."
 
+msgid "Enrollment{{escape}} New Event"
+msgstr ""
+
 msgid "Enrollment{{escape}} View Event"
 msgstr "Inscripción {{escape}} Ver evento"
 
@@ -676,86 +673,14 @@ msgstr "Inscripción {{escape}} Editar evento"
 msgid "We could not find the stage in the program"
 msgstr "No pudimos encontrar la etapa en el programa."
 
-msgid "Delete event"
-msgstr "Eliminar evento"
+msgid "There are no feedback for this event"
+msgstr ""
 
-msgid "Download as JSON"
-msgstr "Descargar como JSON"
-
-msgid "Download as XML"
-msgstr "Descargar como XML"
-
-msgid "Download as CSV"
-msgstr "Descargar como CSV"
-
-msgid "Download with current filters"
-msgstr "Descargar con filtros actuales"
-
-msgid "Download data..."
-msgstr "Descargar datos"
-
-msgid "Working list could not be loaded"
-msgstr "No se pudo cargar la lista de trabajo"
-
-msgid "an error occurred loading working lists"
-msgstr "se produjo un error al cargar listas de trabajo"
+msgid "There are no indicators for this event"
+msgstr ""
 
 msgid "Registered events"
 msgstr "Eventos registrados"
-
-msgid "Enrollment status"
-msgstr "Estado de la inscripción."
-
-msgid "Cancelled"
-msgstr "Cancelar"
-
-msgid "Assigned to"
-msgstr "Asignado a"
-
-msgid "Registering unit"
-msgstr "Unidad de registro"
-
-msgid "Registration Date"
-msgstr "Fecha de registro"
-
-msgid "Inactive"
-msgstr "Inactivo"
-
-msgid "Working list could not be updated"
-msgstr "No se pudo actualizar la lista de trabajo"
-
-msgid "Update view"
-msgstr "Actualizar vista"
-
-msgid "Save current view..."
-msgstr "Guardar la vista actual..."
-
-msgid "Save current view as..."
-msgstr "Guardar la vista actual como..."
-
-msgid "Delete view"
-msgstr "Eliminar vista"
-
-msgid "Share view..."
-msgstr "Compartir vista..."
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "¿Realmente desea eliminar la vista '{{templateName}}'?"
-
-msgid "Confirm"
-msgstr "Confirmar"
-
-msgid "Save As view"
-msgstr "Guardar como vista"
-
-msgid "View name"
-msgstr "Ver nombre"
-
-msgid "Show Less"
-msgstr "Mostrar menos"
-
-msgid "Show All"
-msgstr "Mostrar todo"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Elija una unidad de registro para comenzar a informar"
@@ -897,8 +822,17 @@ msgstr ""
 msgid "Search in all programs"
 msgstr "Buscar en todos los programas"
 
+msgid "events"
+msgstr "Eventos"
+
+msgid "event"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr "No tienes acceso para editar este evento"
+
+msgid "Edit event"
+msgstr "Editar evento"
 
 msgid "Event details"
 msgstr "Detalles del evento"
@@ -921,6 +855,18 @@ msgstr "Evento asignado a {{name}}"
 
 msgid "Feedbacks"
 msgstr "Retroalimentaciones"
+
+msgid "Show all events"
+msgstr "Mostrar todos los eventos"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "No se pudo cargar el evento. ¿Está seguro de que existe?"
+
+msgid "Event could not be loaded"
+msgstr "No se pudo cargar el evento"
+
+msgid "Organisation unit could not be loaded"
+msgstr "No se pudo cargar la unidad organizativa"
 
 msgid "Possible duplicates found"
 msgstr "Posibles duplicados encontrados"
@@ -1012,6 +958,15 @@ msgstr "Propiedad de {{ownerOrgUnit}}"
 msgid "Last updated {{date}}"
 msgstr "Última actualización {{date}}"
 
+msgid "Cancelled"
+msgstr "Cancelar"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Warning"
+msgstr "Advertencia"
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 "No se pudo cargar el widget de perfil. Por favor, inténtelo de nuevo más "
@@ -1020,11 +975,122 @@ msgstr ""
 msgid "Person Profile"
 msgstr "Perfil de la persona"
 
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset"
+msgstr "Reajustar"
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Report date"
+msgstr "Fecha de reporte"
+
+msgid "Registering unit"
+msgstr "Unidad de registro"
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr "Etapas y eventos"
 
+msgid "Delete event"
+msgstr "Eliminar evento"
+
+msgid "Download as JSON"
+msgstr "Descargar como JSON"
+
+msgid "Download as XML"
+msgstr "Descargar como XML"
+
+msgid "Download as CSV"
+msgstr "Descargar como CSV"
+
+msgid "Download with current filters"
+msgstr "Descargar con filtros actuales"
+
+msgid "Download data..."
+msgstr "Descargar datos"
+
+msgid "Working list could not be loaded"
+msgstr "No se pudo cargar la lista de trabajo"
+
+msgid "an error occurred loading working lists"
+msgstr "se produjo un error al cargar listas de trabajo"
+
+msgid "Enrollment status"
+msgstr "Estado de la inscripción."
+
+msgid "Assigned to"
+msgstr "Asignado a"
+
+msgid "Registration Date"
+msgstr "Fecha de registro"
+
+msgid "Inactive"
+msgstr "Inactivo"
+
+msgid "Working list could not be updated"
+msgstr "No se pudo actualizar la lista de trabajo"
+
+msgid "Update view"
+msgstr "Actualizar vista"
+
+msgid "Save current view..."
+msgstr "Guardar la vista actual..."
+
+msgid "Save current view as..."
+msgstr "Guardar la vista actual como..."
+
+msgid "Delete view"
+msgstr "Eliminar vista"
+
+msgid "Share view..."
+msgstr "Compartir vista..."
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr "¿Realmente desea eliminar la vista '{{templateName}}'?"
+
+msgid "Confirm"
+msgstr "Confirmar"
+
+msgid "Save As view"
+msgstr "Guardar como vista"
+
+msgid "View name"
+msgstr "Ver nombre"
+
+msgid "Show Less"
+msgstr "Mostrar menos"
+
+msgid "Show All"
+msgstr "Mostrar todo"
+
 msgid "An error has occured. See log for details"
 msgstr "Se ha producido un error. Ver registro para más detalles"
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Planificado"
+
+msgid "Overdue"
+msgstr "Atrasado"
+
+msgid "Skipped"
+msgstr "Omitido"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} en el programa {{escape}} {{programName}}"

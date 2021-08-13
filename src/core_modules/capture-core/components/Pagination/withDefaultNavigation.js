@@ -6,10 +6,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import IconButton from '@material-ui/core/IconButton';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
+import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
 
 const styles = (theme: Theme) => ({
     root: {
@@ -17,6 +14,41 @@ const styles = (theme: Theme) => ({
         color: theme.palette.text.secondary,
     },
 });
+
+const FirstPageIcon = () => (
+    <svg
+        className="MuiSvgIcon-root-1474"
+        focusable="false"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        role="presentation"
+        width="24"
+        height="24"
+        fill="currentColor"
+    >
+        <path
+            d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"
+            fill="currentColor"
+        />
+        <path fill="none" d="M24 24H0V0h24v24z" />
+    </svg>
+);
+
+const LastPageIcon = () => (
+    <svg
+        className="MuiSvgIcon-root-280"
+        focusable="false"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        role="presentation"
+        width="24"
+        height="24"
+        fill="currentColor"
+    >
+        <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z" />
+        <path fill="none" d="M0 0h24v24H0V0z" />
+    </svg>
+);
 
 type Props = {
     nextPageButtonDisabled: boolean,
@@ -62,7 +94,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         disabled={currentPage <= 1}
                         aria-label="Previous Page"
                     >
-                        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                        {theme.direction === 'rtl' ? <IconChevronRight24 /> : <IconChevronLeft24 />}
                     </IconButton>
                     <IconButton
                         data-test={'search-pagination-next-page'}
@@ -70,7 +102,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         disabled={nextPageButtonDisabled}
                         aria-label="Next Page"
                     >
-                        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                        {theme.direction === 'rtl' ? <IconChevronLeft24 /> : <IconChevronRight24 />}
                     </IconButton>
                 </div>
             );

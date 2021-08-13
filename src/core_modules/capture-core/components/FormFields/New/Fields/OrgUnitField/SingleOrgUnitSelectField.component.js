@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { withStyles, IconButton } from '@material-ui/core';
-import { Clear as ClearIcon } from '@material-ui/icons';
+import { IconCross24 } from '@dhis2/ui';
 import { OrgUnitField } from './OrgUnitField.component';
 
 const getStyles = (theme: Theme) => ({
@@ -14,10 +14,6 @@ const getStyles = (theme: Theme) => ({
         height: theme.typography.pxToRem(44),
         width: theme.typography.pxToRem(44),
         marginLeft: theme.typography.pxToRem(10),
-    },
-    clearSelectedOrgUnitIcon: {
-        height: theme.typography.pxToRem(20),
-        width: theme.typography.pxToRem(20),
     },
     selectedOrgUnitText: {
         marginRight: theme.typography.pxToRem(20),
@@ -38,7 +34,6 @@ type Props = {
         selectedOrgUnitContainer: string,
         clearSelectedOrgUnitButton: string,
         clearSelectedOrgUnitButtonDisabled: string,
-        clearSelectedOrgUnitIcon: string,
         selectedOrgUnitText: string,
     }
 }
@@ -56,7 +51,7 @@ class SingleOrgUnitSelectFieldPlain extends React.Component<Props> {
                     className={buttonClass}
                     onClick={this.onDeselectOrgUnit}
                 >
-                    <ClearIcon className={classes.clearSelectedOrgUnitIcon} />
+                    <IconCross24 />
                 </IconButton>
             </div>
         );
