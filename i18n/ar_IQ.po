@@ -1033,13 +1033,13 @@ msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Scheduled"
-msgstr ""
+msgstr "تمت جدولته"
 
 msgid "Overdue"
-msgstr ""
+msgstr "متأخر"
 
 msgid "Skipped"
-msgstr ""
+msgstr "تم التخطي"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""

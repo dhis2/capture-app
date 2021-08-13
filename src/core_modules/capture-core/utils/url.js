@@ -1,7 +1,7 @@
 // @flow
 import { pageKeys } from '../components/App/withAppUrlSync';
 
-type Url = {|
+type Url = {
     programId?: string,
     orgUnitId?: string,
     trackedEntityTypeId?: string,
@@ -9,7 +9,7 @@ type Url = {|
     enrollmentId?: string,
     stageId?: string,
     eventId?: string,
-|}
+}
 
 export const urlArguments = ({
     programId,
@@ -74,6 +74,17 @@ export const deriveUrlQueries = (state: Object) => {
         teiId,
         enrollmentId,
     };
+};
+
+export const getUrlQueries = (): Url => {
+    const split = window.location.href.split('?');
+    const searchParams = new URLSearchParams(split && split[1]);
+    let searchParamsObject: Url = {};
+
+    for (const [key, value] of searchParams.entries()) {
+        searchParamsObject = { ...searchParamsObject, [key]: value };
+    }
+    return searchParamsObject;
 };
 
 export const pageFetchesOrgUnitUsingTheOldWay = (page: string, pages: Object = pageKeys): boolean =>

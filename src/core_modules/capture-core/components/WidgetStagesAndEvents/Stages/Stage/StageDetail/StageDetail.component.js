@@ -102,7 +102,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventCli
             .slice(0, displayedRowNumber)
             .map(row => formatRowForView(row, dataElements))
             .map((row: Object, index: number) => {
-                const dataTableProgramStage = event[0].programStage;
+                const dataTableProgramStage = events[0].programStage;
 
                 const cells = headerColumns.map(({ id }) => (<DataTableCell
                     key={id}

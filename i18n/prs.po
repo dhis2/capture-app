@@ -917,7 +917,7 @@ msgid "Show {{ rest }} more"
 msgstr ""
 
 msgid "Reset"
-msgstr ""
+msgstr "مرتب سازی مجدد"
 
 msgid "Go to full {{ eventName }}"
 msgstr ""
@@ -926,7 +926,7 @@ msgid "New {{ eventName }} event"
 msgstr ""
 
 msgid "Report date"
-msgstr ""
+msgstr "تاریخ گزارش"
 
 msgid "Registering unit"
 msgstr "بخش ثبت نام"
@@ -1022,13 +1022,13 @@ msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Scheduled"
-msgstr ""
+msgstr "زمان بندی شده"
 
 msgid "Overdue"
-msgstr ""
+msgstr "گذشته از موعد"
 
 msgid "Skipped"
-msgstr ""
+msgstr "اسکیپ شده"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
