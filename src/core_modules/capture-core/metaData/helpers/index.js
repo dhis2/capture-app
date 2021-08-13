@@ -2,6 +2,8 @@
 export {
     getStageForEventProgram,
     getEventProgramThrowIfNotFound,
+    getProgramAndStageForEventProgram,
+    getEventProgramEventAccess,
 } from './EventProgram';
 export { getTrackerProgramThrowIfNotFound } from './trackerProgram/getTrackerProgramThrowIfNotFound';
 export { getProgramAndStageFromEvent } from './getProgramAndStageFromEvent';

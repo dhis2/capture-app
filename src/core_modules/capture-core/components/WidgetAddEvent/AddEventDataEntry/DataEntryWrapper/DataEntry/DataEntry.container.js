@@ -7,7 +7,7 @@ import { DataEntryComponent } from './DataEntry.component';
 import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import {
     startAsyncUpdateFieldForNewEvent,
-    startRunRulesOnUpdateForNewSingleEvent,
+    startRunRulesOnUpdateForAddEvent,
     requestSaveNewEventAndReturnToMainPage,
     cancelNewEventAndReturnToMainPage,
     batchActionTypes,
@@ -51,8 +51,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(batchActions([
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForNewSingleEvent({ ...innerAction.payload, uid }),
-        ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
+            startRunRulesOnUpdateForAddEvent({ ...innerAction.payload, uid }),
+        ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH));
     },
     onUpdateField: (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
@@ -61,8 +61,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(batchActions([
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            startRunRulesOnUpdateForNewSingleEvent({ ...innerAction.payload, uid }),
-        ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
+            startRunRulesOnUpdateForAddEvent({ ...innerAction.payload, uid }),
+        ], batchActionTypes.UPDATE_FIELD_ADD_EVENT_ACTION_BATCH));
     },
     onStartAsyncUpdateField: (
         innerAction: ReduxAction<any, any>,
@@ -74,8 +74,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             return batchActions([
                 successInnerAction,
                 startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-                startRunRulesOnUpdateForNewSingleEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid }),
-            ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH);
+                startRunRulesOnUpdateForAddEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid }),
+            ], batchActionTypes.UPDATE_FIELD_ADD_EVENT_ACTION_BATCH);
         };
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
