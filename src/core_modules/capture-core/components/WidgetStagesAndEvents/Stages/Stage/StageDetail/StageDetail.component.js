@@ -1,10 +1,8 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useState, useCallback } from 'react';
 import { withStyles } from '@material-ui/core';
-import { useHistory } from 'react-router';
 import i18n from '@dhis2/d2-i18n';
 // $FlowFixMe
-import { useSelector, shallowEqual } from 'react-redux';
 import { colors,
     spacersNum,
     DataTableBody,
@@ -17,7 +15,6 @@ import { colors,
     Button,
 } from '@dhis2/ui';
 import { sortDataFromEvent } from './hooks/sortFuntions';
-import { urlArguments } from '../../../../../utils/url';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import type { Props } from './stageDetail.types';
@@ -42,20 +39,7 @@ const styles = {
     },
 };
 
-const StageDetailPlain = ({ events, eventName, stageId, dataElements, classes }: Props) => {
-    const history = useHistory();
-    const { enrollmentId, programId, teiId, orgUnitId } = useSelector(
-        ({
-            router: {
-                location: { query },
-            },
-        },
-        ) => (
-            { enrollmentId: query.enrollmentId,
-                teiId: query.teiId,
-                programId: query.programId,
-                orgUnitId: query.orgUnitId,
-            }), shallowEqual);
+const StageDetailPlain = ({ events, eventName, stageId, dataElements, onViewAll, onCreateNew, classes }: Props) => {
     const defaultSortState = {
         columnName: 'eventDate',
         sortDirection: SORT_DIRECTION.DESC,
@@ -84,17 +68,13 @@ const StageDetailPlain = ({ events, eventName, stageId, dataElements, classes }:
         }
     };
 
-    const handleViewAll = () => {
-        history.push(
-            `/enrollment/stageEvents?${urlArguments({ orgUnitId, programId, stageId })}`,
-        );
-    };
+    const handleViewAll = useCallback(() => {
+        onViewAll(stageId);
+    }, [onViewAll, stageId]);
 
-    const handleCreateNew = () => {
-        history.push(
-            `/enrollmentEventNew?${urlArguments({ orgUnitId, programId, teiId, enrollmentId, stageId })}`,
-        );
-    };
+    const handleCreateNew = useCallback(() => {
+        onCreateNew(stageId);
+    }, [onCreateNew, stageId]);
 
     function renderHeader() {
         const headerCells = headerColumns

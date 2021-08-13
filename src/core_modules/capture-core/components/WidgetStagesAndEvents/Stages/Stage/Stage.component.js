@@ -17,7 +17,7 @@ const styles = {
 };
 
 
-export const StagePlain = ({ stage, events, classes, className }: Props) => {
+export const StagePlain = ({ stage, events, classes, className, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements } = stage;
     return (
@@ -42,6 +42,7 @@ export const StagePlain = ({ stage, events, classes, className }: Props) => {
                     eventName={name}
                     events={events}
                     dataElements={dataElements}
+                    {...passOnProps}
                 />}
             </Widget>
         </div>

@@ -8,7 +8,7 @@ type Url = {
     teiId?: string,
     enrollmentId?: string,
     stageId?: string
-|}
+}
 
 export const urlArguments = ({
     programId,
