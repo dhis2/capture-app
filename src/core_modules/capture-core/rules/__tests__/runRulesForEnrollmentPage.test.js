@@ -1,4 +1,4 @@
-import { runRulesForEnrollmentPage } from '../../actionsCreator/runRulesForEnrollmentPage';
+import { runRulesForEnrollmentPage } from '../actionsCreator/runRulesForEnrollmentPage';
 
 describe('Enrollment Page Rule Engines', () => {
     const allEvents = { all: [
