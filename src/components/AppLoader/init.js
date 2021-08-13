@@ -51,8 +51,9 @@ function setMomentLocaleAsync(locale: string) {
     }
 
     return new Promise((resolve) => {
+        const path = `moment/locale/${locale}`;
         // $FlowFixMe[unsupported-syntax] automated comment
-        import(`moment/locale/${locale}`)
+        import(path)
             .then(() => {
                 moment.locale(locale);
                 log.info(`got moment locale config for ${locale}`);
@@ -69,8 +70,9 @@ function setMomentLocaleAsync(locale: string) {
 
 function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any, firstDayOfWeek: number) {
     return new Promise((resolve, reject) => {
+        const path = `date-fns/locale/${locale}`;
         // $FlowFixMe[unsupported-syntax] automated comment
-        import(`date-fns/locale/${locale}`)
+        import(path)
             .then((dateFnLocale) => {
                 const localeData: LocaleDataType = {
                     dateFnsLocale: dateFnLocale,
