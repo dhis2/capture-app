@@ -52,7 +52,6 @@ export const WidgetEventEditPlain = ({
             <div className={classes.menu}>
                 <Button small secondary className={classes.button} onClick={onGoBack}>
                     <IconArrowLeft24 />
-
                     {i18n.t('Back to all stages and events')}
                 </Button>
 

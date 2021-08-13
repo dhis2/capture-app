@@ -10,12 +10,8 @@ Given('you open the enrollment page which has multiples events and stages', () =
     cy.visit('#/enrollment?enrollmentId=ek4WWAgXX5i');
 });
 
-When(/^the user clicks the first event$/, () => {
-    cy.get('[data-test="stages-and-events-widget"]').find('[data-test="dhis2-uicore-datatablecell"]').eq(4).click();
-});
-
-When(/^the user clicks the second event$/, () => {
-    cy.get('[data-test="stages-and-events-widget"]').find('[data-test="dhis2-uicore-datatablecell"]').eq(10).click();
+When(/^the user clicks the event with the report date (.*)$/, (date) => {
+    cy.contains(date).click();
 });
 
 When(/^the user clicks the "Back to all stages and events" button/, () =>
