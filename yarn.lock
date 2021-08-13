@@ -3824,6 +3824,11 @@
   resolved "https://registry.yarnpkg.com/@react-dnd/shallowequal/-/shallowequal-2.0.0.tgz#a3031eb54129f2c66b2753f8404266ec7bf67f0a"
   integrity sha512-Pc/AFTdwZwEKJxFJvlxrSmGe/di+aAOBn60sremrpLo6VI/6cmiUYNNwlI5KNYttg7uypzA3ILPMPgxB2GYZEg==
 
+"@react-leaflet/core@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@react-leaflet/core/-/core-1.1.0.tgz#389b2b373f1da4caeb3c4cf6f33d84561c58d504"
+  integrity sha512-zFxMHgfjCi7khRVB7o7H8NoJl36NaezvfcaeEurVXx22lAGHFlTHiSuLOGA4tOiHj+Ep+Lo3uwUGJ3YM9BGkHg==
+
 "@redux-offline/redux-offline@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@redux-offline/redux-offline/-/redux-offline-2.6.0.tgz#4db5d81b89ab0372115134e1671c9389e8d3d8e1"
@@ -8956,6 +8961,11 @@ fake-indexeddb@^3.1.3:
     realistic-structured-clone "^2.0.1"
     setimmediate "^1.0.5"
 
+fast-deep-equal@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
+  integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
+
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
@@ -12357,10 +12367,10 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
-lodash-es@^4.17.10, lodash-es@^4.17.4:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
-  integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
+lodash-es@^4.17.15, lodash-es@^4.17.4:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+  integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
 
 lodash._reinterpolate@^3.0.0, lodash._reinterpolate@~3.0.0:
   version "3.0.0"
@@ -15320,11 +15330,13 @@ react-jss@^10.7.1:
     theming "^3.3.0"
     tiny-warning "^1.0.2"
 
-react-leaflet-draw@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/react-leaflet-draw/-/react-leaflet-draw-0.19.0.tgz#95de33054016db27e171f8f8f646f6bad17106f3"
+react-leaflet-draw@^0.19.8:
+  version "0.19.8"
+  resolved "https://registry.yarnpkg.com/react-leaflet-draw/-/react-leaflet-draw-0.19.8.tgz#5590635ea18b0d7dbaf18c0214cb8606da2189ff"
+  integrity sha512-6e3KhDov++6QKR80ixohzZdESlqSiloYspZklT1qY5oxIOYmF+/Io830Yyd0RvUEMFCt6GirszalLrzuL2GP6A==
   dependencies:
-    lodash-es "^4.17.10"
+    fast-deep-equal "^2.0.1"
+    lodash-es "^4.17.15"
 
 react-leaflet-search-unpolyfilled@^0.1.0:
   version "0.1.0"
