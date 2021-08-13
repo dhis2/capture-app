@@ -21,17 +21,7 @@ import {
     getRulesActionsForEvent,
 } from '../../../../../../rules/actionsCreator';
 import { getProgramAndStageForProgram } from '../../../../../../metaData/helpers';
-import {
-    getDefaultMainConfig as getDefaultMainColumnConfig,
-    getMetaDataConfig as getColumnMetaDataConfig,
-} from './defaultColumnConfiguration';
-import type {
-    FieldData,
-} from '../../../../../../rules/actionsCreator';
-
-import { getStageForEventProgram } from '../../../../../../metaData/helpers/EventProgram/getStageForEventProgram';
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
-import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
 
@@ -119,51 +109,6 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                 batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
             );
         }));
-
-export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(
-            lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN,
-            lockedSelectorActionTypes.CATEGORY_OPTION_SET,
-            lockedSelectorActionTypes.PROGRAM_ID_SET,
-            crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE,
-        ),
-        filter(() => {
-            const { app: { page } } = store.value;
-            return page === 'new';
-        }),
-        filter((action) => {
-            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATE and the underlying action is not SET_ORG_UNIT or FROM_URL_CURRENT_SELECTIONS_VALID
-            const type = action.type;
-            if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATE) {
-                const triggeringActionType = action.payload && action.payload.triggeringActionType;
-                if (![lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID, lockedSelectorActionTypes.ORG_UNIT_ID_SET]
-                    .includes(triggeringActionType)) {
-                    return false;
-                }
-            }
-
-            // cancel if selections are incomplete
-            const state = store.value;
-            if (!state.currentSelections.complete) {
-                return false;
-            }
-
-            // cancel if tracker program
-            const programId = state.currentSelections.programId;
-            const program = getProgramFromProgramIdThrowIfNotFound(programId);
-            return !(program instanceof TrackerProgram);
-        }),
-        map(() => {
-            const state = store.value;
-            const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
-            const stageContainer = getStageForEventProgram(state.currentSelections.programId);
-            // $FlowFixMe[incompatible-call] automated comment
-            // $FlowFixMe[incompatible-use] automated comment
-            const columnConfig = [...getDefaultMainColumnConfig(stageContainer.stage), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];
-            return resetList(listId, columnConfig, newEventsMeta, state.currentSelections);
-        }));
-
 
 const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
     const state = store.value;

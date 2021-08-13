@@ -14,7 +14,6 @@ export { cancelNewEventEpic, cancelNewEventLocationChangeEpic }
 export {
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
-    resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
     runRulesOnUpdateDataEntryFieldForSingleEventEpic,
     runRulesOnUpdateFieldForSingleEventEpic,
 } from './DataEntryWrapper/DataEntry/epics/newEventDataEntry.epics';

@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Paper } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { DataEntry } from './DataEntry/DataEntry.container';
-import type { ProgramStage, RenderFoundation } from '../../../metaData';
+import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
 import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
 
