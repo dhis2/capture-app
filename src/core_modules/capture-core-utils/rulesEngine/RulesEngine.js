@@ -5,16 +5,15 @@ import isDefined from 'd2-utilizr/lib/isDefined';
 import { VariableService } from './services/VariableService/VariableService';
 import { ValueProcessor } from './processors/ValueProcessor';
 import { executeExpression } from './services/executionService';
-import { getDateUtils } from './commonUtils/dateUtils';
 import { d2Functions } from './d2Functions';
 import type {
     OutputEffects,
     RuleVariables,
     RulesEngineInput,
-    IMomentConverter,
+    EventData,
     IConvertInputRulesValue,
     IConvertOutputRulesEffectsValue,
-    DateUtils,
+    IDateUtils,
 } from './rulesEngine.types';
 import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
 import { effectActions } from './effectActions.const';
@@ -192,18 +191,18 @@ export class RulesEngine {
     inputConverter: IConvertInputRulesValue;
     outputConverter: IConvertOutputRulesEffectsValue;
     variableService: VariableService;
-    dateUtils: DateUtils;
+    dateUtils: IDateUtils;
 
     constructor(
         inputConverter: IConvertInputRulesValue,
         outputConverter: IConvertOutputRulesEffectsValue,
-        momentConverter: IMomentConverter,
+        dateUtils: IDateUtils,
     ) {
         this.inputConverter = inputConverter;
         this.outputConverter = outputConverter;
         const valueProcessor = new ValueProcessor(inputConverter);
-        this.variableService = new VariableService(valueProcessor.processValue, momentConverter);
-        this.dateUtils = getDateUtils(momentConverter);
+        this.variableService = new VariableService(valueProcessor.processValue, dateUtils);
+        this.dateUtils = dateUtils;
     }
 
     /**
@@ -241,6 +240,19 @@ export class RulesEngine {
             selectedOrgUnit,
             optionSets,
         });
+
+        // Sort the event arrays from earliest to latest registration
+        if (eventsContainer) {
+            const compareEvents = (first: EventData, second: EventData): number => (
+                this.dateUtils.compareDates(first.eventDate, second.eventDate)
+            );
+            eventsContainer.all.sort(compareEvents);
+            if (eventsContainer.byStage) {
+                for (const programStageId of Object.keys(eventsContainer.byStage)) {
+                    eventsContainer.byStage[programStageId].sort(compareEvents);
+                }
+            }
+        }
 
         const dhisFunctions = d2Functions(this.dateUtils, this.variableService, variablesHash);
         const programRules = programRulesContainer.programRules;

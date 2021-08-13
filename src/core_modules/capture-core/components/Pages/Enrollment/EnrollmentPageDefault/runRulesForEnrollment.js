@@ -50,7 +50,7 @@ const getEventsDataFromEnrollment = (enrollment, dataElements) => {
         enrollmentId: event.enrollment,
         enrollmentStatus: event.enrollmentStatus,
         status: event.status,
-        eventDate: convertDate(event.dueDate),
+        eventDate: convertDate(event.eventDate),
         dueDate: convertDate(event.dueDate),
         ...getEventValuesFromEvent(enrollment, event.event, dataElements),
     }));

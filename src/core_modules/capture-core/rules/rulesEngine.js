@@ -3,7 +3,7 @@ import { RulesEngine } from 'capture-core-utils/rulesEngine/RulesEngine';
 import {
     inputConverter,
     outputConverter,
-    momentConverter,
+    dateUtils,
 } from './converters';
 
-export const rulesEngine = new RulesEngine(inputConverter, outputConverter, momentConverter);
+export const rulesEngine = new RulesEngine(inputConverter, outputConverter, dateUtils);

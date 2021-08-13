@@ -3,7 +3,6 @@ import log from 'loglevel';
 import { OptionSetHelper } from '../../helpers/OptionSetHelper';
 import { typeKeys } from '../../typeKeys.const';
 import { variablePrefixes } from './variablePrefixes.const';
-import { getDateUtils } from '../../commonUtils/dateUtils';
 
 import type {
     ProgramRuleVariable,
@@ -17,10 +16,11 @@ import type {
     Enrollment,
     OrgUnit,
     RuleVariable,
+    RuleVariables,
     TEIValues,
     Constants,
     RulesEngineInput,
-    IMomentConverter,
+    IDateUtils,
 } from '../../rulesEngine.types';
 
 type SourceData = {
@@ -68,16 +68,16 @@ export class VariableService {
             : value;
     }
 
-    static dateUtils: any;
+    static dateUtils: IDateUtils;
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
     constructor(
         onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
-        momentConverter: IMomentConverter,
+        dateUtils: IDateUtils,
     ) {
         this.onProcessValue = onProcessValue;
-        VariableService.dateUtils = getDateUtils(momentConverter);
+        VariableService.dateUtils = dateUtils;
 
         this.mapSourceTypeToGetterFn = {
             [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: this.getVariableForCurrentEvent,
@@ -471,10 +471,9 @@ export class VariableService {
         );
     }
 
-    getContextVariables(sourceData: SourceData): { [key: string]: RuleVariable } {
+    getContextVariables(sourceData: SourceData): RuleVariables {
         let variables = {};
 
-        // TODO: need to build some kind of date service and change this codeline
         variables.current_date = this.buildVariable(
             VariableService.dateUtils.getToday(),
             typeKeys.DATE, {
