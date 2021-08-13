@@ -17,5 +17,6 @@ export type Stage = {
     name: string,
     description: string,
     icon?: Icon,
-    dataElements: Array<StageDataElement>
+    dataElements: Array<StageDataElement>,
+    hideDueDate?: boolean
 }

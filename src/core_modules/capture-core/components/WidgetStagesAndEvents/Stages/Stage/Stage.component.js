@@ -19,7 +19,7 @@ const styles = {
 
 export const StagePlain = ({ stage, events, classes, className }: Props) => {
     const [open, setOpenStatus] = useState(true);
-    const { name, icon, description, dataElements } = stage;
+    const { name, icon, description, dataElements, hideDueDate } = stage;
     return (
         <div
             data-test="stage-content"
@@ -41,6 +41,7 @@ export const StagePlain = ({ stage, events, classes, className }: Props) => {
                     eventName={name}
                     events={events}
                     dataElements={dataElements}
+                    hideDueDate={hideDueDate}
                 />}
             </Widget>
         </div>
