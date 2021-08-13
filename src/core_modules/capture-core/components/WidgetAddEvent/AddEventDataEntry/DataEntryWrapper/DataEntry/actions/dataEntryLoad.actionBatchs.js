@@ -63,7 +63,7 @@ export const openNewEventInDataEntry =
         return [
             ...dataEntryActions,
             ...rulesActions,
-            actionCreator(actionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY)(),
+            actionCreator(actionTypes.OPEN_ADD_EVENT_IN_DATA_ENTRY)(),
         ];
     };
 

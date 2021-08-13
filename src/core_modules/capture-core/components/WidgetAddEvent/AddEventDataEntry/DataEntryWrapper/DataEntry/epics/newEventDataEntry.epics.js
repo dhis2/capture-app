@@ -35,7 +35,7 @@ const errorMessages = {
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH),
+        ofType(newEventDataEntryBatchActionTypes.SAVE_ADD_EVENT_ADD_ANOTHER_BATCH),
         map(() => {
             const state = store.value;
             const programId = state.currentSelections.programId;
@@ -109,7 +109,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 
                 // $FlowFixMe[incompatible-call] automated comment
                 [...openNewEventInDataEntry(metadataContainer.program, foundation, orgUnit)],
-                batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
+                batchActionTypes.OPEN_ADD_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
             );
         }));
 
@@ -161,7 +161,7 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
 
 export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
+        ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
@@ -171,7 +171,7 @@ export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputO
 
 export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
+        ofType(batchActionTypes.UPDATE_FIELD_ADD_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {

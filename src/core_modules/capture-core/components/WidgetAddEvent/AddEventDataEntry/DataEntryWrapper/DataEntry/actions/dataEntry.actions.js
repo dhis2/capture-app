@@ -30,7 +30,7 @@ export const actionTypes = {
     SAVE_FAILED_FOR_ADD_EVENT_ADD_ANOTHER: 'SaveFailedForNewEventAddAnother',
     SET_ADD_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes',
     RESET_DATA_ENTRY: 'ResetDataEntryForNewEvent',
-    ADD_ADD_EVENT_NOTE: 'AddNewEventNote',
+    ADD_EVENT_NOTE: 'AddEventNote',
     ADD_EVENT_OPEN_NEW_RELATIONSHIP: 'NewEventOpenNewRelationship',
     SAVE_ADD_EVENT_RELATIONSHIPS_IF_EXISTS: 'SaveNewEventRelationshipsIfExists',
     START_SAVE_ADD_EVENT_RELATIONSHIPS: 'StartSaveNewEventRelationships',
@@ -116,7 +116,7 @@ export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<newEventSaveTy
     actionCreator(actionTypes.SET_ADD_EVENT_SAVE_TYPES)({ saveTypes: newSaveTypes });
 
 export const addNewEventNote = (itemId: string, dataEntryId: string, note: string) =>
-    actionCreator(actionTypes.ADD_ADD_EVENT_NOTE)({ itemId, dataEntryId, note });
+    actionCreator(actionTypes.ADD_EVENT_NOTE)({ itemId, dataEntryId, note });
 
 export const requestSaveNewEventAddAnother = (eventId: string, dataEntryId: string, formFoundation: Object) =>
     actionCreator(actionTypes.REQUEST_SAVE_ADD_EVENT_ADD_ANOTHER)({

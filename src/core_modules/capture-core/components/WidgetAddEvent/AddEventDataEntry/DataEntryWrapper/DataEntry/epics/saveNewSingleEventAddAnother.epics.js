@@ -14,7 +14,7 @@ import { getNewEventServerData, getNewEventClientValues } from './getConvertedNe
 
 export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER),
+        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_ADD_EVENT_ADD_ANOTHER),
         map((action) => {
             const state = store.value;
             const payload = action.payload;
@@ -34,6 +34,6 @@ export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: Redu
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return batchActions([
                 startSaveNewEventAddAnother(serverData, relationshipData, state.currentSelections, clientEvent.eventId),
-            ], newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH);
+            ], newEventDataEntryBatchActionTypes.SAVE_ADD_EVENT_ADD_ANOTHER_BATCH);
         }));
 

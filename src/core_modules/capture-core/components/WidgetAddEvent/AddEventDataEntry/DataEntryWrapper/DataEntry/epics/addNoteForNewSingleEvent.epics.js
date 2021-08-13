@@ -16,7 +16,7 @@ import { getCurrentUser } from '../../../../../../d2/d2Instance';
 
 export const addNoteForNewSingleEventEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(newEventDataEntryActionTypes.ADD_NEW_EVENT_NOTE),
+        ofType(newEventDataEntryActionTypes.ADD_EVENT_NOTE),
         map((action) => {
             const payload = action.payload;
             // $FlowFixMe[prop-missing] automated comment
