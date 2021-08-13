@@ -2,20 +2,22 @@
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { DataEntry as DataEntryContainer } from 'capture-core/components/DataEntry/DataEntry.container';
-import { withCancelButton } from 'capture-core/components/DataEntry/withCancelButton';
-import { withDataEntryField } from 'capture-core/components/DataEntry/dataEntryField/withDataEntryField';
-import { withDataEntryNotesHandler } from 'capture-core/components/DataEntry/dataEntryNotes/withDataEntryNotesHandler';
-import { Notes } from 'capture-core/components/Notes/Notes.component';
-import { withDataEntryRelationshipsHandler }
-    from 'capture-core/components/DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
-import { Relationships } from 'capture-core/components/Relationships/Relationships.component';
-import { type RenderFoundation } from 'capture-core/metaData';
+import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
+import { withCancelButton } from '../../../../DataEntry/withCancelButton';
+import { withDataEntryField } from '../../../../DataEntry/dataEntryField/withDataEntryField';
+import { withDataEntryNotesHandler } from '../../../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
+import { Notes } from '../../../../Notes/Notes.component';
+import { withDataEntryRelationshipsHandler } from '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
+import { Relationships } from '../../../../Relationships/Relationships.component';
+import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import { type RenderFoundation } from '../../../../../metaData';
+import { withMainButton } from './withMainButton';
+import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
 import {
     withSaveHandler,
     placements,
     withCleanUp,
-} from 'capture-core/components/DataEntry';
+} from '../../../../DataEntry';
 import {
     withInternalChangeHandler,
     withLabel,
@@ -30,20 +32,15 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
     orientations,
-} from 'capture-core/components/FormFields/New';
-import { inMemoryFileStore } from 'capture-core/components/DataEntry/file/inMemoryFileStore';
-import { withDataEntryFieldIfApplicable }
-    from 'capture-core/components/DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
-import { withTransformPropName } from 'capture-core/HOC';
-
-import { getEventDateValidatorContainers }
-    from 'capture-core/components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/fieldValidators/eventDate.validatorContainersGetter';
-import { makeWritableRelationshipTypesSelector } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/dataEntry.selectors';
-import { newEventSaveTypes } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/newEventSaveTypes';
-import labelTypeClasses from 'capture-core/components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/dataEntryFieldLabels.module.css';
-import { Assignee } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/Assignee';
-import { withMainButton } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/withMainButton';
-import { getNoteValidatorContainers } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/DataEntry/fieldValidators/note.validatorContainersGetter';
+} from '../../../../FormFields/New';
+import { Assignee } from './Assignee';
+import { inMemoryFileStore } from '../../../../DataEntry/file/inMemoryFileStore';
+import { newEventSaveTypes } from './newEventSaveTypes';
+import labelTypeClasses from './dataEntryFieldLabels.module.css';
+import { withDataEntryFieldIfApplicable } from '../../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
+import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
+import { withTransformPropName } from '../../../../../HOC';
+import { InfoIconText } from '../../../../InfoIconText';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -283,7 +280,7 @@ const buildCompleteFieldSettingsFn = () => {
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.STATUS,
         }),
-        getPassOnFieldData: () => false,
+        getPassOnFieldData: () => true,
     };
 
     return completeSettings;
@@ -479,9 +476,9 @@ class NewEventDataEntry extends Component<Props> {
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
-    // UNSAFE_componentWillMount() {
-    //     this.props.onSetSaveTypes(null);
-    // }
+    UNSAFE_componentWillMount() {
+        this.props.onSetSaveTypes(null);
+    }
 
     componentDidMount() {
         if (this.relationshipsInstance && this.props.recentlyAddedRelationshipId) {
@@ -501,7 +498,10 @@ class NewEventDataEntry extends Component<Props> {
 
     handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => {
         if (saveType === newEventSaveTypes.SAVEANDADDANOTHER) {
-            this.props.onSetSaveTypes([newEventSaveTypes.SAVEANDADDANOTHER, newEventSaveTypes.SAVEANDEXIT]);
+            if (!this.props.formHorizontal) {
+                this.props.onSetSaveTypes([newEventSaveTypes.SAVEANDADDANOTHER, newEventSaveTypes.SAVEANDEXIT]);
+            }
+            this.props.onSaveAndAddAnother(itemId, dataEntryId, formFoundation);
         } else if (saveType === newEventSaveTypes.SAVEANDEXIT) {
             this.props.onSave(itemId, dataEntryId, formFoundation);
         }
@@ -529,6 +529,18 @@ class NewEventDataEntry extends Component<Props> {
             </span>
         );
     }
+    renderHorizontal = () => {
+        const classes = this.props.classes;
+        return (
+            <div
+                className={classes.horizontal}
+            >
+                {this.renderContent()}
+            </div>
+        );
+    }
+
+    renderVertical = () => (<div>{this.renderContent()}</div>);
 
     renderContent = () => {
         const {
@@ -544,18 +556,23 @@ class NewEventDataEntry extends Component<Props> {
             ...passOnProps
         } = this.props;
         return (
-            <div data-test="data-entry-container">
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <WrappedDataEntry
-                    id={'singleEvent'}
-                    onUpdateFormField={onUpdateField}
-                    onUpdateFormFieldAsync={onStartAsyncUpdateField}
-                    onSave={this.handleSave}
-                    fieldOptions={this.fieldOptions}
-                    dataEntrySections={this.dataEntrySections}
-                    relationshipsRef={this.setRelationshipsInstance}
-                    {...passOnProps}
-                />
+            <div>
+                <div data-test="data-entry-container">
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                    <WrappedDataEntry
+                        id={'singleEvent'}
+                        onUpdateFormField={onUpdateField}
+                        onUpdateFormFieldAsync={onStartAsyncUpdateField}
+                        onSave={this.handleSave}
+                        fieldOptions={this.fieldOptions}
+                        dataEntrySections={this.dataEntrySections}
+                        relationshipsRef={this.setRelationshipsInstance}
+                        {...passOnProps}
+                    />
+                </div>
+                <InfoIconText>
+                    {this.getSavingText()}
+                </InfoIconText>
             </div>
         );
     }
@@ -563,10 +580,12 @@ class NewEventDataEntry extends Component<Props> {
 
     render() {
         return (
-            <div>{this.renderContent()}</div>
+            <div>
+                {this.props.formHorizontal ? this.renderHorizontal() : this.renderVertical()}
+            </div>
         );
     }
 }
 
 
-export const AddEventDataEntryComponent = withStyles(getStyles)(withTheme()(NewEventDataEntry));
+export const DataEntryComponent = withStyles(getStyles)(withTheme()(NewEventDataEntry));

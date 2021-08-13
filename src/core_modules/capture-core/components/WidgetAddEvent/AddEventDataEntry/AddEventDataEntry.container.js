@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { compose } from 'redux';
-import { SingleEventRegistrationEntryComponent } from './SingleEventRegistrationEntry.component';
+import { AddEventDataEntryComponent } from './AddEventDataEntry.component';
 import { withBrowserBackWarning } from '../../../HOC/withBrowserBackWarning';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
-import { makeEventAccessSelector } from './SingleEventRegistrationEntry.selectors';
+import { makeEventAccessSelector } from './AddEventDataEntry.selectors';
 import { withLoadingIndicator } from '../../../HOC';
 
 const dialogConfig = {
@@ -21,19 +21,16 @@ const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-
 const makeMapStateToProps = () => {
     const eventAccessSelector = makeEventAccessSelector();
     // $FlowFixMe[not-an-object] automated comment
-    return (state: ReduxState, { id }) => ({
-        ready: state.dataEntries[id],
-        showAddRelationship: !!state.newEventPage.showAddRelationship,
-        eventAccess: eventAccessSelector(state),
-    });
+    return (state: ReduxState, { id }) => ({ ready: state.dataEntries[id],
+        eventAccess: eventAccessSelector(state) });
 };
 
 const mapDispatchToProps = () => ({
 });
 
-export const SingleEventRegistrationEntry: ComponentType<{| id: string |}> =
+export const AddEventDataEntry: ComponentType<{| id: string |}> =
   compose(
       connect(makeMapStateToProps, mapDispatchToProps),
       withLoadingIndicator(),
       withBrowserBackWarning(dialogConfig, inEffect),
-  )(SingleEventRegistrationEntryComponent);
+  )(AddEventDataEntryComponent);
