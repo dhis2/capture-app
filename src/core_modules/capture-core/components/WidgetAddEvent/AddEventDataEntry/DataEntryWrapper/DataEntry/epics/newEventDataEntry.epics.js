@@ -24,6 +24,9 @@ import { getProgramAndStageForProgram } from '../../../../../../metaData/helpers
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
+import type {
+    FieldData,
+} from '../../../../../../rules/actionsCreator';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
