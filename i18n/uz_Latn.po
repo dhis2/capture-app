@@ -966,7 +966,7 @@ msgid "New {{ eventName }} event"
 msgstr ""
 
 msgid "Report date"
-msgstr ""
+msgstr "Hisobot sanasi"
 
 msgid "Registering unit"
 msgstr "Roʼyxatga olish muassasasi"
@@ -1063,13 +1063,13 @@ msgid "Scheduled{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Scheduled"
-msgstr ""
+msgstr "Reja boʼyicha"
 
 msgid "Overdue"
-msgstr ""
+msgstr "Muddat oʼtgan"
 
 msgid "Skipped"
-msgstr ""
+msgstr "Oʼtkazib yuborildi"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""

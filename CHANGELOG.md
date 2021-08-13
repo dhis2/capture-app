@@ -1,3 +1,23 @@
+# [1.38.0](https://github.com/dhis2/capture-app/compare/v1.37.2...v1.38.0) (2021-08-13)
+
+
+### Bug Fixes
+
+* show error and warning widgets ([56b1539](https://github.com/dhis2/capture-app/commit/56b1539d677f4dc1e4f4b8137cc2e0c89df807d7))
+* wrong parameter order ([e8fe5ef](https://github.com/dhis2/capture-app/commit/e8fe5ef6d262f0c98405c65b8bdb597807c5fa84))
+
+
+### Features
+
+* [TECH-620]: sort rules engine events by date ([#1970](https://github.com/dhis2/capture-app/issues/1970)) ([b21d189](https://github.com/dhis2/capture-app/commit/b21d189b0e2372a34a44e084ead0ae157d42608f))
+
+## [1.37.2](https://github.com/dhis2/capture-app/compare/v1.37.1...v1.37.2) (2021-08-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b9da318](https://github.com/dhis2/capture-app/commit/b9da31866b9fd845082a6c731827adb1aedddce0))
+
 ## [1.37.1](https://github.com/dhis2/capture-app/compare/v1.37.0...v1.37.1) (2021-08-11)
 
 
