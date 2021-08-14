@@ -35,12 +35,13 @@ import {
 } from '../../../../FormFields/New';
 import { Assignee } from './Assignee';
 import { inMemoryFileStore } from '../../../../DataEntry/file/inMemoryFileStore';
-import { newEventSaveTypes } from './newEventSaveTypes';
+import { addEventSaveTypes } from './addEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
 import { withTransformPropName } from '../../../../../HOC';
 import { InfoIconText } from '../../../../InfoIconText';
+import { withCompleteButton } from './withCompleteButton';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -408,7 +409,8 @@ const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipFiel
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(ReportDateField);
-const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
+const CompletableDataEntry = withCompleteButton()(CancelableDataEntry);
+const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CompletableDataEntry));
 const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
 
 type Props = {
@@ -417,7 +419,7 @@ type Props = {
     orgUnitName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: Object,
-    onSetSaveTypes: (saveTypes: ?Array<$Values<typeof newEventSaveTypes>>) => void,
+    onSetSaveTypes: (saveTypes: ?Array<$Values<typeof addEventSaveTypes>>) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
@@ -497,30 +499,29 @@ class NewEventDataEntry extends Component<Props> {
     }
 
     handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => {
-        if (saveType === newEventSaveTypes.SAVEANDADDANOTHER) {
-            if (!this.props.formHorizontal) {
-                this.props.onSetSaveTypes([newEventSaveTypes.SAVEANDADDANOTHER, newEventSaveTypes.SAVEANDEXIT]);
-            }
-            this.props.onSaveAndAddAnother(itemId, dataEntryId, formFoundation);
-        } else if (saveType === newEventSaveTypes.SAVEANDEXIT) {
+        if (saveType === addEventSaveTypes.SAVEWITHOUTCOMPLETING) {
             this.props.onSave(itemId, dataEntryId, formFoundation);
         }
     }
 
     getSavingText() {
-        const { classes, orgUnitName, programName } = this.props;
+        const { classes, orgUnitName, programName, stage } = this.props;
         const firstPart = `${i18n.t('Saving to')} `;
-        const secondPart = ` ${i18n.t('in')} `;
-
+        const secondPart = ` ${i18n.t('for')} `;
+        const thirdPart = ` ${i18n.t('in')} `;
         return (
             <span>
                 {firstPart}
                 <span
                     className={classes.savingContextNames}
                 >
-                    {programName}
+                    {stage.name}
                 </span>
                 {secondPart}
+                <span className={classes.savingContextNames}>
+                    {programName}
+                </span>
+                {thirdPart}
                 <span
                     className={classes.savingContextNames}
                 >
@@ -529,20 +530,8 @@ class NewEventDataEntry extends Component<Props> {
             </span>
         );
     }
-    renderHorizontal = () => {
-        const classes = this.props.classes;
-        return (
-            <div
-                className={classes.horizontal}
-            >
-                {this.renderContent()}
-            </div>
-        );
-    }
 
-    renderVertical = () => (<div>{this.renderContent()}</div>);
-
-    renderContent = () => {
+    render() {
         const {
             onUpdateField,
             onStartAsyncUpdateField,
@@ -573,15 +562,6 @@ class NewEventDataEntry extends Component<Props> {
                 <InfoIconText>
                     {this.getSavingText()}
                 </InfoIconText>
-            </div>
-        );
-    }
-
-
-    render() {
-        return (
-            <div>
-                {this.props.formHorizontal ? this.renderHorizontal() : this.renderVertical()}
             </div>
         );
     }

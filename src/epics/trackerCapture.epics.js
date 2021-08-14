@@ -197,6 +197,10 @@ import {
     startFetchingTeiFromTeiIdEpic,
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
+import {
+    cancelAddEventEpic,
+    cancelAddEventLocationChangeEpic,
+} from '../core_modules/capture-core/components/WidgetAddEvent/AddEventDataEntry';
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -318,4 +322,6 @@ export const epics = combineEpics(
     resetEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
     checkForDuplicateEpic,
+    cancelAddEventEpic,
+    cancelAddEventLocationChangeEpic,
 );

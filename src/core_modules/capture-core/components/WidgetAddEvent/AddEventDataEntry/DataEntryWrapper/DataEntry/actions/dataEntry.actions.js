@@ -17,7 +17,7 @@ export const actionTypes = {
     START_RUN_RULES_ON_UPDATE: 'StartRunRulesOnUpdateForAddEvent',
     REQUEST_SAVE_RETURN_TO_MAIN_PAGE: 'RequestSaveReturnToMainPageForAddEvent',
     START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE: 'StartSaveAfterReturnedToMainPage',
-    START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE: 'StartCancelSaveReturnToMainPageForAddEvent',
+    START_CANCEL_SAVE_RETURN_TO_OVERVIEW_PAGE: 'StartCancelSaveReturnToOverviewPageForAddEvent',
     CANCEL_SAVE_NO_WORKING_LIST_UPDATE_NEEDED: 'CancelSaveNoWorkingListUpdateNeededForSingleEvent',
     CANCEL_SAVE_UPDATE_WORKING_LIST: 'CancelSaveUpdateWorkingListForSingleNewEvent',
     ADD_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE: 'SingleNewEventSavedAfterReturnedToMainPage',
@@ -97,8 +97,8 @@ export const startSaveTeiForNewEventRelationship = (teiPayload: Object, selectio
     });
 
 
-export const cancelNewEventAndReturnToMainPage = () =>
-    actionCreator(actionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)();
+export const cancelAddEventAndReturnToOverviewPage = () =>
+    actionCreator(actionTypes.START_CANCEL_SAVE_RETURN_TO_OVERVIEW_PAGE)();
 
 export const cancelNewEventNoWorkingListUpdateNeeded = () =>
     actionCreator(actionTypes.CANCEL_SAVE_NO_WORKING_LIST_UPDATE_NEEDED)();

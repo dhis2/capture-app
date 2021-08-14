@@ -9,7 +9,7 @@ export {
 } from './DataEntryWrapper/newEventDataEntryWrapper.actions';
 
 // epics
-export { cancelNewEventEpic, cancelNewEventLocationChangeEpic }
+export { cancelAddEventEpic, cancelAddEventLocationChangeEpic }
     from './DataEntryWrapper/DataEntry/epics/cancelNewSingleEvent.epics';
 export {
     resetDataEntryForNewEventEpic,

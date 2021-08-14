@@ -11,9 +11,9 @@ import {
 
 import { isSelectionsEqual } from '../../../../../App/isSelectionsEqual';
 
-export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const cancelAddEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
+        ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_OVERVIEW_PAGE),
         map(() => {
             const state = store.value;
             if (!state.offline.online) {
@@ -39,12 +39,11 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
             return cancelNewEventNoWorkingListUpdateNeeded();
         }));
 
-export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const cancelAddEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
+        ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_OVERVIEW_PAGE),
         map(() => {
             const state = store.value;
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
-            return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
+            const { programId, orgUnitId, enrollmentId } = state.router.location.query;
+            return push(`/enrollment?enrollment=${programId}&orgUnitId=${orgUnitId}&enrollmentId=${enrollmentId}`);
         }));

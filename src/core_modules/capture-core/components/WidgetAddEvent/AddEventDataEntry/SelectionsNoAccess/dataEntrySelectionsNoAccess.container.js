@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { DataEntrySelectionsNoAccess } from './dataEntrySelectionsNoAccess.component';
 import {
-    cancelNewEventAndReturnToMainPage,
+    cancelAddEventAndReturnToOverviewPage,
 } from '../DataEntryWrapper/DataEntry/actions/dataEntry.actions';
 
 const mapStateToProps = () => ({
@@ -10,7 +10,7 @@ const mapStateToProps = () => ({
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onCancel: () => {
-        dispatch(cancelNewEventAndReturnToMainPage());
+        dispatch(cancelAddEventAndReturnToOverviewPage());
     },
 });
 

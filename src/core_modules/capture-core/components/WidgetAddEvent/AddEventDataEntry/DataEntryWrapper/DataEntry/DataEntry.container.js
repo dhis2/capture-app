@@ -9,7 +9,7 @@ import {
     startAsyncUpdateFieldForNewEvent,
     startRunRulesOnUpdateForAddEvent,
     requestSaveNewEventAndReturnToMainPage,
-    cancelNewEventAndReturnToMainPage,
+    cancelAddEventAndReturnToOverviewPage,
     batchActionTypes,
     requestSaveNewEventAddAnother,
     setNewEventSaveTypes,
@@ -96,7 +96,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onCancel: () => {
         window.scrollTo(0, 0);
-        dispatch(cancelNewEventAndReturnToMainPage());
+        dispatch(cancelAddEventAndReturnToOverviewPage());
     },
     onOpenAddRelationship: (eventId: string, dataEntryId: string) => {
         dispatch(newEventOpenNewRelationship(eventId, dataEntryId));
