@@ -20,26 +20,41 @@ const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
     };
 };
 
-export const getNewEventServerData = (state: ReduxState, formFoundation: RenderFoundation, formClientValues: Object, mainDataClientValues: Object) => {
+export const getAddEventEnrollmentServerData = (state: ReduxState,
+    formFoundation: RenderFoundation,
+    formClientValues: Object,
+    mainDataClientValues: Object,
+    completed?: boolean,
+) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
+    const { teiId, enrollmentId, programId, orgUnitId } = state.router.location.query;
 
+    if (!mainDataServerValues.status) {
+        mainDataServerValues.status = completed ? 'ACTIVE' : 'COMPLETED';
+    }
     if (mainDataServerValues.status === 'COMPLETED') {
         mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
     }
 
     return {
-        ...mainDataServerValues,
-        program: state.currentSelections.programId,
-        programStage: formFoundation.id,
-        orgUnit: state.currentSelections.orgUnitId,
-        ...getApiCategoriesArgument(state.currentSelections.categories),
-        dataValues: Object
-            .keys(formServerValues)
-            .map(key => ({
-                dataElement: key,
-                value: formServerValues[key],
-            })),
+        events: [
+            {
+                ...mainDataServerValues,
+                program: programId,
+                programStage: formFoundation.id,
+                orgUnit: orgUnitId,
+                trackedEntityInstance: teiId,
+                enrollment: enrollmentId,
+                ...getApiCategoriesArgument(state.currentSelections.categories),
+                dataValues: Object
+                    .keys(formServerValues)
+                    .map(key => ({
+                        dataElement: key,
+                        value: formServerValues[key],
+                    })),
+            },
+        ],
     };
 };
 

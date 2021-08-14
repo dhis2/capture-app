@@ -10,7 +10,7 @@ import {
 } from '../actions/dataEntry.actions';
 
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
-import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
+import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 
 export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -23,7 +23,7 @@ export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: Redu
 
             const { formClientValues, mainDataClientValues } = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
-            const serverData = getNewEventServerData(state, formFoundation, formClientValues, mainDataClientValues);
+            const serverData = getAddEventEnrollmentServerData(state, formFoundation, formClientValues, mainDataClientValues);
             const clientEvent = {
                 ...mainDataClientValues,
                 eventId: uuid(),
