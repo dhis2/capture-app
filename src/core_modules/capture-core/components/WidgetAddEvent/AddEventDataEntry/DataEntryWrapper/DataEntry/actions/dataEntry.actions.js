@@ -15,7 +15,7 @@ export const batchActionTypes = {
 export const actionTypes = {
     OPEN_ADD_EVENT_IN_DATA_ENTRY: 'OpenNewEventInDataEntry',
     START_RUN_RULES_ON_UPDATE: 'StartRunRulesOnUpdateForAddEvent',
-    REQUEST_SAVE_RETURN_TO_MAIN_PAGE: 'RequestSaveReturnToMainPageForAddEvent',
+    REQUEST_SAVE_RETURN_TO_OVERVIEW_PAGE: 'RequestSaveReturnToOverviewPageForAddEvent',
     START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE: 'StartSaveAfterReturnedToMainPage',
     START_CANCEL_SAVE_RETURN_TO_OVERVIEW_PAGE: 'StartCancelSaveReturnToOverviewPageForAddEvent',
     CANCEL_SAVE_NO_WORKING_LIST_UPDATE_NEEDED: 'CancelSaveNoWorkingListUpdateNeededForSingleEvent',
@@ -46,8 +46,8 @@ export const actionTypes = {
 export const startRunRulesOnUpdateForAddEvent = (actionData: { payload: Object}) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
-export const requestSaveNewEventAndReturnToMainPage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)(
+export const requestSaveAddEventAndReturnToOverviewPage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
+    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_OVERVIEW_PAGE)(
         { eventId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] },
     );
 

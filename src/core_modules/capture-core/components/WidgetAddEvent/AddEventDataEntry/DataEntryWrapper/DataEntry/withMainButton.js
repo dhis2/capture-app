@@ -8,7 +8,7 @@ import { type RenderFoundation } from '../../../../../metaData';
 import { getDataEntryHasChanges } from '../../getNewEventDataEntryHasChanges';
 
 type Props = {
-    onSave: (saveType: $Values<typeof newEventSaveTypes>) => void,
+    onSave: () => void,
     onCancel: () => void,
     saveTypes: Array<string>,
     formHorizontal?: ?boolean,
@@ -21,7 +21,7 @@ type Props = {
 
 const getMainButton = (InnerComponent: React.ComponentType<any>) =>
     class MainButtonHOC extends React.Component<Props> {
-        renderButton = () => <Button onClick={this.props.onSave}>{i18n.t('Save without completing')}</Button>
+        renderButton = () => (<Button onClick={this.props.onSave}>{i18n.t('Save without completing')}</Button>)
 
         render() {
             const { saveTypes, dataEntryHasChanges, hasRecentlyAddedEvents, onSave, finalInProgress, ...passOnProps } = this.props;

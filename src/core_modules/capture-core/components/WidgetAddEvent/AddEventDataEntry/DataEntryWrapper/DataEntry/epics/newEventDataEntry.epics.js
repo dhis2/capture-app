@@ -113,7 +113,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             );
         }));
 
-const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
+const runRulesForAddEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const programId = state.currentSelections.programId;
@@ -159,17 +159,17 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
     );
 };
 
-export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const runRulesOnUpdateDataEntryFieldForAddEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH),
         map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
         map((action) => {
             const { dataEntryId, itemId, uid } = action.payload;
-            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid);
+            return runRulesForAddEvent(store, dataEntryId, itemId, uid);
         }));
 
-export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const runRulesOnUpdateFieldForAddEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(batchActionTypes.UPDATE_FIELD_ADD_EVENT_ACTION_BATCH),
         map(actionBatch =>

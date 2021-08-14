@@ -8,7 +8,7 @@ import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import {
     startAsyncUpdateFieldForNewEvent,
     startRunRulesOnUpdateForAddEvent,
-    requestSaveNewEventAndReturnToMainPage,
+    requestSaveAddEventAndReturnToOverviewPage,
     cancelAddEventAndReturnToOverviewPage,
     batchActionTypes,
     requestSaveNewEventAddAnother,
@@ -83,7 +83,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
-        dispatch(requestSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
+        dispatch(requestSaveAddEventAndReturnToOverviewPage(eventId, dataEntryId, formFoundation));
     },
     onAddNote: (itemId: string, dataEntryId: string, note: string) => {
         dispatch(addNewEventNote(itemId, dataEntryId, note));

@@ -200,6 +200,10 @@ import {
 import {
     cancelAddEventEpic,
     cancelAddEventLocationChangeEpic,
+    runRulesOnUpdateDataEntryFieldForAddEventEpic,
+    runRulesOnUpdateFieldForAddEventEpic,
+    saveAddEventEpic,
+    saveAddEventLocationChangeEpic,
 } from '../core_modules/capture-core/components/WidgetAddEvent/AddEventDataEntry';
 
 export const epics = combineEpics(
@@ -324,4 +328,8 @@ export const epics = combineEpics(
     checkForDuplicateEpic,
     cancelAddEventEpic,
     cancelAddEventLocationChangeEpic,
+    runRulesOnUpdateDataEntryFieldForAddEventEpic,
+    runRulesOnUpdateFieldForAddEventEpic,
+    saveAddEventEpic,
+    saveAddEventLocationChangeEpic,
 );

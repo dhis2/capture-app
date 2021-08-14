@@ -10,9 +10,9 @@ import {
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 
-export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveAddEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
+        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_OVERVIEW_PAGE),
         map((action) => {
             const state = store.value;
             const payload = action.payload;
@@ -25,12 +25,11 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
             return startSaveNewEventAfterReturnedToMainPage(serverData, relationshipData, state.currentSelections);
         }));
 
-export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveAddEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
+        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_OVERVIEW_PAGE),
         map(() => {
             const state = store.value;
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
-            return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
+            const { programId, orgUnitId, enrollmentId } = state.router.location.query;
+            return push(`/enrollment?programId=${programId}&orgUnitId=${orgUnitId}&enrollmentId=${enrollmentId}`);
         }));

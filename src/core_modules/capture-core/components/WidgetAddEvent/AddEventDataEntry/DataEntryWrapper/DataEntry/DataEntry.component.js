@@ -35,7 +35,7 @@ import {
 } from '../../../../FormFields/New';
 import { Assignee } from './Assignee';
 import { inMemoryFileStore } from '../../../../DataEntry/file/inMemoryFileStore';
-import { addEventSaveTypes } from './addEventSaveTypes';
+import { addEventSaveTypes } from './newEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
@@ -499,9 +499,7 @@ class NewEventDataEntry extends Component<Props> {
     }
 
     handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => {
-        if (saveType === addEventSaveTypes.SAVEWITHOUTCOMPLETING) {
-            this.props.onSave(itemId, dataEntryId, formFoundation);
-        }
+        this.props.onSave(itemId, dataEntryId, formFoundation);
     }
 
     getSavingText() {
