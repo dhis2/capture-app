@@ -375,7 +375,7 @@ const buildRelationshipsSettingsFn = () => {
             onOpenAddRelationship: props.onOpenAddRelationship,
             writableRelationshipTypes: writableRelationshipTypesSelector(props),
             fromEntity: 'PROGRAM_STAGE_INSTANCE',
-            currentEntityId: 'newEvent',
+            currentEntityId: 'addEvent',
         }),
         getValidatorContainers: () => [],
         getPropName: () => 'relationship',
@@ -420,8 +420,7 @@ type Props = {
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: Object,
     onSetSaveTypes: (saveTypes: ?Array<$Values<typeof addEventSaveTypes>>) => void,
-    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
-    onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => void,
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     onCancel: () => void,
     classes: {
@@ -498,8 +497,8 @@ class NewEventDataEntry extends Component<Props> {
         this.relationshipsInstance = instance;
     }
 
-    handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => {
-        this.props.onSave(itemId, dataEntryId, formFoundation);
+    handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => {
+        this.props.onSave(itemId, dataEntryId, formFoundation, completed);
     }
 
     getSavingText() {
@@ -538,7 +537,6 @@ class NewEventDataEntry extends Component<Props> {
             classes,
             onSave,
             onSetSaveTypes,
-            onSaveAndAddAnother,
             theme,
             ...passOnProps
         } = this.props;

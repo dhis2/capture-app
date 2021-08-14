@@ -84,7 +84,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         ),
         filter(() => {
             const { app: { page } } = store.value;
-            return ['new', 'enrollmentEventNew'].includes(page);
+            return page === 'new';
         }),
         filter((action) => {
             const type = action.type;

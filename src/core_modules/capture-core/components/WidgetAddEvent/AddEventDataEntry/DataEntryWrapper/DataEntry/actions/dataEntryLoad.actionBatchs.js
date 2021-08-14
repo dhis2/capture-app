@@ -11,7 +11,7 @@ import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.va
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 
 const dataEntryId = 'singleEvent';
-const itemId = 'newEvent';
+const itemId = 'addEvent';
 const formId = getDataEntryKey(dataEntryId, itemId);
 
 type DataEntryPropsToInclude = Array<Object>;

@@ -8,7 +8,7 @@ import {
 } from '../actions/dataEntry.actions';
 
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
-import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
+import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 
 export const saveAddEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -20,7 +20,7 @@ export const saveAddEventEpic = (action$: InputObservable, store: ReduxStore) =>
             const formFoundation = payload.formFoundation;
             const { formClientValues, mainDataClientValues } = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
-            const serverData = getNewEventServerData(state, formFoundation, formClientValues, mainDataClientValues);
+            const serverData = getAddEventEnrollmentServerData(state, formFoundation, formClientValues, mainDataClientValues);
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return startSaveNewEventAfterReturnedToMainPage(serverData, relationshipData, state.currentSelections);
         }));

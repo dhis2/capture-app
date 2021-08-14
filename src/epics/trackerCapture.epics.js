@@ -204,6 +204,7 @@ import {
     runRulesOnUpdateFieldForAddEventEpic,
     saveAddEventEpic,
     saveAddEventLocationChangeEpic,
+    openAddEventInDataEntryEpic,
 } from '../core_modules/capture-core/components/WidgetAddEvent/AddEventDataEntry';
 
 export const epics = combineEpics(
@@ -332,4 +333,5 @@ export const epics = combineEpics(
     runRulesOnUpdateFieldForAddEventEpic,
     saveAddEventEpic,
     saveAddEventLocationChangeEpic,
+    openAddEventInDataEntryEpic,
 );

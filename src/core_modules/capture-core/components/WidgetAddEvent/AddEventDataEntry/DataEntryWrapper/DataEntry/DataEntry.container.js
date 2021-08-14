@@ -11,7 +11,6 @@ import {
     requestSaveAddEventAndReturnToOverviewPage,
     cancelAddEventAndReturnToOverviewPage,
     batchActionTypes,
-    requestSaveNewEventAddAnother,
     setNewEventSaveTypes,
     addNewEventNote,
     newEventOpenNewRelationship,
@@ -81,18 +80,15 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
         dispatch(startAsyncUpdateFieldForNewEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
-    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => {
         window.scrollTo(0, 0);
-        dispatch(requestSaveAddEventAndReturnToOverviewPage(eventId, dataEntryId, formFoundation));
+        dispatch(requestSaveAddEventAndReturnToOverviewPage(eventId, dataEntryId, formFoundation, completed));
     },
     onAddNote: (itemId: string, dataEntryId: string, note: string) => {
         dispatch(addNewEventNote(itemId, dataEntryId, note));
     },
     onSetSaveTypes: (newSaveTypes: ?Array<$Values<newEventSaveTypes>>) => {
         dispatch(setNewEventSaveTypes(newSaveTypes));
-    },
-    onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
-        dispatch(requestSaveNewEventAddAnother(eventId, dataEntryId, formFoundation));
     },
     onCancel: () => {
         window.scrollTo(0, 0);

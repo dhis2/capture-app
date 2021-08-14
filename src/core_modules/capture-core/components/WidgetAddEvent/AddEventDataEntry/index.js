@@ -13,10 +13,10 @@ export { cancelAddEventEpic, cancelAddEventLocationChangeEpic }
     from './DataEntryWrapper/DataEntry/epics/cancelNewSingleEvent.epics';
 export {
     resetDataEntryForNewEventEpic,
-    openNewEventInDataEntryEpic,
+    openAddEventInDataEntryEpic,
     runRulesOnUpdateDataEntryFieldForAddEventEpic,
     runRulesOnUpdateFieldForAddEventEpic,
-} from './DataEntryWrapper/DataEntry/epics/newEventDataEntry.epics';
+} from './DataEntryWrapper/DataEntry/epics/addEventDataEntry.epics';
 export {
     saveAddEventEpic,
     saveAddEventLocationChangeEpic,

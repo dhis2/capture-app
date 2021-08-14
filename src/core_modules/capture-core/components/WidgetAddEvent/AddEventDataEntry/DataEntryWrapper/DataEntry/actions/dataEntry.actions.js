@@ -6,7 +6,7 @@ import typeof { newEventSaveTypes } from '../newEventSaveTypes';
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForAddEventActionsBatch',
     UPDATE_FIELD_ADD_EVENT_ACTION_BATCH: 'UpdateFieldForAddEventActionsBatch',
-    OPEN_ADD_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenNewEventInDataEntryActionsBatch',
+    OPEN_ADD_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenAddEventInDataEntryActionsBatch',
     RESET_DATA_ENTRY_ACTIONS_BATCH: 'ResetDataEntryForNewEventActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForAddEventActionsBatch',
     SAVE_ADD_EVENT_ADD_ANOTHER_BATCH: 'SaveNewEventAddAnotherBatch',

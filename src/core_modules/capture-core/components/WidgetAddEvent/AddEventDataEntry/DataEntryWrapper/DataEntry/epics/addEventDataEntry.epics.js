@@ -62,7 +62,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
         }));
 
 
-export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+export const openAddEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN,
@@ -72,7 +72,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         ),
         filter(() => {
             const { app: { page } } = store.value;
-            return ['new', 'enrollmentEventNew'].includes(page);
+            return page === 'enrollmentEventNew';
         }),
         filter((action) => {
             const type = action.type;
@@ -101,7 +101,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                 log.error(
                     errorCreator(
                         errorMessages.PROGRAM_OR_STAGE_NOT_FOUND)(
-                        { method: 'openNewEventInDataEntryEpic' }),
+                        { method: 'openAddEventInDataEntryEpic' }),
                 );
             }
             const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
