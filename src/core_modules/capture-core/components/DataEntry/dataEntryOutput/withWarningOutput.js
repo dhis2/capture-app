@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
 import { IconWarningFilled16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -56,9 +55,7 @@ const getWarningOutput = () =>
                             key={item.id}
                             className={classes.listItem}
                         >
-                            <Typography variant="body1">
-                                {item.message}
-                            </Typography>
+                            <p>{item.message}</p>
                         </li>
                     ),
                     )}
