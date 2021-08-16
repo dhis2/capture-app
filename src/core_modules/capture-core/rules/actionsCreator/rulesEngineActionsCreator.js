@@ -2,6 +2,7 @@
 /**
  * @module rulesEngineActionsCreator
  */
+
 import type {
     OutputEffects,
     Enrollment,

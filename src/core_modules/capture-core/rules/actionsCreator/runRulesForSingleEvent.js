@@ -1,6 +1,5 @@
 // @flow
 import log from 'loglevel';
-
 import type {
     DataElement as DataElementForRulesEngine,
     EventsData,
