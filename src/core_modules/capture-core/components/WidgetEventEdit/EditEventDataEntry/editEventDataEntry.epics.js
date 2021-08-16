@@ -10,7 +10,7 @@ import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.act
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 import { convertMainEventClientToServer } from '../../../events/mainConverters';
-import { commitEnrollmentEvent, updateEnrollmentEvents, rollbackEnrollmentEvent, enrollmentActionTypes } from '../../Pages/actions/enrollment.actions';
+import { commitEnrollmentEvent, updateEnrollmentEvents, rollbackEnrollmentEvent, enrollmentActionTypes } from '../../Pages/common/EnrollmentOverviewDomain/enrollment.actions';
 import { TrackerProgram } from '../../../metaData/Program';
 
 import {

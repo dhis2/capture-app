@@ -2,8 +2,8 @@
 import React from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { useEnrollment } from 'capture-core/hooks/useEnrollment';
 import { useHistory } from 'react-router';
+import { useEnrollment } from '../common/EnrollmentOverviewDomain/useEnrollment';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode } from './EnrollmentEditEventPage.const';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';

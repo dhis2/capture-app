@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useDataQuery } from '@dhis2/app-runtime';
-import { setEnrollment } from '../components/Pages/actions/enrollment.actions';
+import { setEnrollment } from './enrollment.actions';
 
 export const useEnrollment = (teiId: string) => {
     const dispatch = useDispatch();
