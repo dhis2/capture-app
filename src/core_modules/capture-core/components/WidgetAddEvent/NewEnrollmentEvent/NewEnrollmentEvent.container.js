@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { compose } from 'redux';
-import { AddEventDataEntryComponent } from './AddEventDataEntry.component';
+import { NewEnrollmentEventComponent } from './NewEnrollmentEvent.component';
 import { withBrowserBackWarning } from '../../../HOC/withBrowserBackWarning';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
-import { makeEventAccessSelector } from './AddEventDataEntry.selectors';
+import { makeEventAccessSelector } from './NewEnrollmentEvent.selectors';
 import { withLoadingIndicator } from '../../../HOC';
 
 const dialogConfig = {
@@ -16,7 +16,7 @@ const dialogConfig = {
     cancelText: i18n.t('No, stay here'),
 };
 
-const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
+const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-addEvent') || state.newEventPage.showAddRelationship;
 
 const makeMapStateToProps = () => {
     const eventAccessSelector = makeEventAccessSelector();
@@ -28,9 +28,9 @@ const makeMapStateToProps = () => {
 const mapDispatchToProps = () => ({
 });
 
-export const AddEventDataEntry: ComponentType<{| id: string |}> =
+export const NewEnrollmentEvent: ComponentType<{| id: string |}> =
   compose(
       connect(makeMapStateToProps, mapDispatchToProps),
       withLoadingIndicator(),
       withBrowserBackWarning(dialogConfig, inEffect),
-  )(AddEventDataEntryComponent);
+  )(NewEnrollmentEventComponent);

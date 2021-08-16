@@ -30,5 +30,5 @@ export {
 } from './DataEntryWrapper/DataEntry/epics/addNoteForAddEvent.epics';
 
 export {
-    AddEventDataEntry,
-} from './AddEventDataEntry.container';
+    NewEnrollmentEvent,
+} from './NewEnrollmentEvent.container';

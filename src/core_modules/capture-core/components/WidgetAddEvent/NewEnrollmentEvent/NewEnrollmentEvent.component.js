@@ -10,7 +10,7 @@ type Props = {|
     |},
 |};
 
-export const AddEventDataEntryComponent = ({ eventAccess }: Props) => {
+export const NewEnrollmentEventComponent = ({ eventAccess }: Props) => {
     if (!eventAccess.write) {
         return (
             <SelectionsNoAccess />

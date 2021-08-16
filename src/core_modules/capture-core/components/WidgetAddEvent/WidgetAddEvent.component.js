@@ -5,7 +5,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 import { Widget } from '../Widget';
 import type { Props } from './WidgetAddEvent.types';
-import { AddEventDataEntry } from './AddEventDataEntry';
+import { NewEnrollmentEvent } from './NewEnrollmentEvent';
 
 const styles = () => ({
     header: {
@@ -43,7 +43,7 @@ const WidgetAddEventPlain = ({ programStage, classes }: Props) => {
 
         >
             <div data-test="add-event-form">
-                <AddEventDataEntry
+                <NewEnrollmentEvent
                     id="singleEvent"
                 />
             </div>

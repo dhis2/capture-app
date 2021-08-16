@@ -205,7 +205,7 @@ import {
     saveAddEventEpic,
     saveAddEventLocationChangeEpic,
     openAddEventInDataEntryEpic,
-} from '../core_modules/capture-core/components/WidgetAddEvent/AddEventDataEntry';
+} from '../core_modules/capture-core/components/WidgetAddEvent/NewEnrollmentEvent';
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
