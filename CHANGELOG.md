@@ -1,3 +1,10 @@
+# [1.39.0](https://github.com/dhis2/capture-app/compare/v1.38.0...v1.39.0) (2021-08-16)
+
+
+### Features
+
+* [TECH-633] Update event in redux after edit ([#1917](https://github.com/dhis2/capture-app/issues/1917)) ([cdb8a5c](https://github.com/dhis2/capture-app/commit/cdb8a5ceeeff00afa83323845a283855b31fe61e))
+
 # [1.38.0](https://github.com/dhis2/capture-app/compare/v1.37.2...v1.38.0) (2021-08-13)
 
 
