@@ -6,3 +6,4 @@ export {
     Unique,
     scopes as uniqueScope,
 } from './Unique';
+export { statusTypes, translatedStatusTypes } from './statusTypes';

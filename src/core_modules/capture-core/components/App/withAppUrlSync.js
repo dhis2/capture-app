@@ -26,6 +26,7 @@ export const pageKeys = {
     SEARCH: 'search',
     NEW: 'new',
     ENROLLMENT_EVENT_NEW: 'enrollmentEventNew',
+    ENROLLMENT_EVENT: 'enrollmentEventEdit',
 };
 
 const programIdParameter = {
@@ -54,6 +55,7 @@ const updaterForPages = {
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
     [pageKeys.ENROLLMENT_EVENT_NEW]: updateSelectionsFromUrl,
+    [pageKeys.ENROLLMENT_EVENT]: viewEventFromUrl,
 };
 
 /**

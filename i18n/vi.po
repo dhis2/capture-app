@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # phil_dhis2, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2021\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -601,6 +601,9 @@ msgstr ""
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
@@ -648,86 +651,14 @@ msgstr ""
 msgid "We could not find the stage in the program"
 msgstr ""
 
-msgid "Delete event"
-msgstr "Xóa sự kiện"
+msgid "There are no feedback for this event"
+msgstr ""
 
-msgid "Download as JSON"
-msgstr "Tải về dạng JSON"
-
-msgid "Download as XML"
-msgstr "Tải về dạng XML"
-
-msgid "Download as CSV"
-msgstr "Tải xuống với CSV"
-
-msgid "Download with current filters"
-msgstr "Tải xuống với các bộ lọc hiện tại"
-
-msgid "Download data..."
-msgstr "Tải xuống dữ liệu ..."
-
-msgid "Working list could not be loaded"
-msgstr "Không thể tải danh sách làm việc"
-
-msgid "an error occurred loading working lists"
-msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
+msgid "There are no indicators for this event"
+msgstr ""
 
 msgid "Registered events"
 msgstr "Sự kiện đã đăng ký"
-
-msgid "Enrollment status"
-msgstr "Trạng thái đăng ký"
-
-msgid "Cancelled"
-msgstr "Đã hủy"
-
-msgid "Assigned to"
-msgstr "Đã gán cho"
-
-msgid "Registering unit"
-msgstr "Đơn Vị đăng ký"
-
-msgid "Registration Date"
-msgstr "Ngày đăng ký"
-
-msgid "Inactive"
-msgstr "Không kích hoạt"
-
-msgid "Working list could not be updated"
-msgstr "Không thể cập nhật danh sách làm việc"
-
-msgid "Update view"
-msgstr "Cập nhật chế độ xem"
-
-msgid "Save current view..."
-msgstr "Lưu chế độ xem hiện tại ..."
-
-msgid "Save current view as..."
-msgstr "Lưu chế độ xem hiện tại dưới dạng ..."
-
-msgid "Delete view"
-msgstr "Xóa chế độ xem"
-
-msgid "Share view..."
-msgstr "Chia sẻ chế độ xem ..."
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Bạn có thực sự muốn xóa chế độ xem '{{templateName}}' không?"
-
-msgid "Confirm"
-msgstr "Xác nhận"
-
-msgid "Save As view"
-msgstr "Lưu dưới dạng xem"
-
-msgid "View name"
-msgstr "Xem tên"
-
-msgid "Show Less"
-msgstr "Hiện ít hơn"
-
-msgid "Show All"
-msgstr "Hiển thị tất cả"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Chọn một đơn vị đăng ký để bắt đầu báo cáo"
@@ -998,6 +929,9 @@ msgstr ""
 msgid "Last updated {{date}}"
 msgstr ""
 
+msgid "Cancelled"
+msgstr "Đã hủy"
+
 msgid "Error"
 msgstr "Lỗi"
 
@@ -1010,11 +944,122 @@ msgstr ""
 msgid "Person Profile"
 msgstr ""
 
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset"
+msgstr "Phục hồi"
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Report date"
+msgstr "Ngày báo cáo"
+
+msgid "Registering unit"
+msgstr "Đơn Vị đăng ký"
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Delete event"
+msgstr "Xóa sự kiện"
+
+msgid "Download as JSON"
+msgstr "Tải về dạng JSON"
+
+msgid "Download as XML"
+msgstr "Tải về dạng XML"
+
+msgid "Download as CSV"
+msgstr "Tải xuống với CSV"
+
+msgid "Download with current filters"
+msgstr "Tải xuống với các bộ lọc hiện tại"
+
+msgid "Download data..."
+msgstr "Tải xuống dữ liệu ..."
+
+msgid "Working list could not be loaded"
+msgstr "Không thể tải danh sách làm việc"
+
+msgid "an error occurred loading working lists"
+msgstr "đã xảy ra lỗi khi tải danh sách làm việc"
+
+msgid "Enrollment status"
+msgstr "Trạng thái đăng ký"
+
+msgid "Assigned to"
+msgstr "Đã gán cho"
+
+msgid "Registration Date"
+msgstr "Ngày đăng ký"
+
+msgid "Inactive"
+msgstr "Không kích hoạt"
+
+msgid "Working list could not be updated"
+msgstr "Không thể cập nhật danh sách làm việc"
+
+msgid "Update view"
+msgstr "Cập nhật chế độ xem"
+
+msgid "Save current view..."
+msgstr "Lưu chế độ xem hiện tại ..."
+
+msgid "Save current view as..."
+msgstr "Lưu chế độ xem hiện tại dưới dạng ..."
+
+msgid "Delete view"
+msgstr "Xóa chế độ xem"
+
+msgid "Share view..."
+msgstr "Chia sẻ chế độ xem ..."
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr "Bạn có thực sự muốn xóa chế độ xem '{{templateName}}' không?"
+
+msgid "Confirm"
+msgstr "Xác nhận"
+
+msgid "Save As view"
+msgstr "Lưu dưới dạng xem"
+
+msgid "View name"
+msgstr "Xem tên"
+
+msgid "Show Less"
+msgstr "Hiện ít hơn"
+
+msgid "Show All"
+msgstr "Hiển thị tất cả"
+
 msgid "An error has occured. See log for details"
 msgstr "Có lỗi. Xem log để biết thêm chi tiết."
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Đã xếp lịch"
+
+msgid "Overdue"
+msgstr "Quá hạn"
+
+msgid "Skipped"
+msgstr "Đã bỏ qua"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""

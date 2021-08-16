@@ -30,7 +30,7 @@ import {
     updateTemplateEpic,
     addTemplateEpic,
     deleteTemplateEpic,
-} from 'capture-core/components/Pages/MainPage/EventWorkingLists';
+} from 'capture-core/components/WorkingLists/EventWorkingLists';
 
 import {
     getEventFromUrlEpic,
@@ -93,7 +93,7 @@ import {
 } from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
-} from 'capture-core/components/Pages/MainPage/WorkingListsCommon';
+} from 'capture-core/components/WorkingLists/WorkingListsCommon';
 import {
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,
@@ -163,6 +163,7 @@ import {
     setEnrollmentSelectionEpic,
     resetEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
+
 import {
     setTrackedEntityTypeIdOnUrlEpic,
 } from '../core_modules/capture-core/components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.epics';
@@ -179,7 +180,7 @@ import {
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
-import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/Pages/MainPage/TeiWorkingLists';
+import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
 import {
     startNewEnrollmentDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';

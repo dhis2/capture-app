@@ -66,6 +66,15 @@ type apiProgramSections = {
     trackedEntityAttributes: Array<{ id: string }>
 }
 
+type apiOption = {
+    code: string,
+    name: string
+}
+type apiOptionSet = {
+    id: string,
+    options?: ?Array<apiOption>
+}
+
 type apiDataElement = {
     id: string,
     displayName: string,
@@ -76,10 +85,10 @@ type apiDataElement = {
     description?: ?string,
     optionSetValue: boolean,
     style: apiStyle,
-    optionSet: { id: string },
+    optionSet: apiOptionSet,
 };
 
-type apiProgramStageDataElement = {
+export type apiProgramStageDataElement = {
     compulsory: boolean,
     displayInReports: boolean,
     renderOptionsAsRadio: boolean,
@@ -87,7 +96,7 @@ type apiProgramStageDataElement = {
     dataElement: apiDataElement,
 };
 
-type apiProgramStage = {
+export type apiProgramStage = {
     id: string,
     access: apiAccess,
     displayName: string,

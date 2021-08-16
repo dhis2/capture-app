@@ -1,5 +1,7 @@
 // @flow
-import type { Program } from '../../../../metaData';
+import type { Program } from 'capture-core/metaData';
+import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
+import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/common.types';
 import type { Message } from '../../../WidgetErrorAndWarning/content/WidgetErrorAndWarningContent.types';
 import type { WidgetData } from '../../../WidgetFeedback/WidgetFeedback.types';
 
@@ -19,6 +21,8 @@ export type Props = {|
     program: Program,
     enrollmentId: string,
     teiId: string,
+    events: Array<ApiTEIEvent>,
+    stages: Array<Stage>,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
     onDelete: () => void,
