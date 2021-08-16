@@ -21,9 +21,6 @@ export {
     saveAddEventEpic,
     saveAddEventLocationChangeEpic,
 } from './DataEntryWrapper/DataEntry/epics/saveAddEvent.epics';
-export {
-    saveNewEventAddAnotherEpic,
-} from './DataEntryWrapper/DataEntry/epics/saveAddEventAddAnother.epics';
 
 export {
     addNoteForAddEventEpic,

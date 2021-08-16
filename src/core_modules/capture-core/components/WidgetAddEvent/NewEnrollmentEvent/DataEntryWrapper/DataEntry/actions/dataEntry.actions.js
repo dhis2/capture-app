@@ -9,7 +9,6 @@ export const batchActionTypes = {
     OPEN_ADD_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenAddEventInDataEntryActionsBatch',
     RESET_DATA_ENTRY_ACTIONS_BATCH: 'ResetDataEntryForNewEventActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForAddEventActionsBatch',
-    SAVE_ADD_EVENT_ADD_ANOTHER_BATCH: 'SaveNewEventAddAnotherBatch',
 };
 
 export const actionTypes = {
@@ -24,10 +23,6 @@ export const actionTypes = {
     SAVE_FAILED_FOR_ADD_EVENT_AFTER_RETURNED_TO_MAIN_PAGE: 'SaveFailedForAddEventAfterReturnedToMainPage',
     ADD_EVENT_IN_DATAENTRY_OPENING_CANCEL: 'NewEventInDataEntryOpeningCancel',
     START_ASYNC_UPDATE_FIELD_FOR_ADD_EVENT: 'StartAsyncUpdateFieldForNewEvent',
-    REQUEST_SAVE_ADD_EVENT_ADD_ANOTHER: 'RequestSaveNewEventAddAnother',
-    START_SAVE_ADD_EVENT_ADD_ANOTHER: 'startSaveNewEventAddAnother',
-    ADD_EVENT_SAVED_ADD_ANOTHER: 'NewEventSavedAddAnother',
-    SAVE_FAILED_FOR_ADD_EVENT_ADD_ANOTHER: 'SaveFailedForNewEventAddAnother',
     SET_ADD_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes',
     RESET_DATA_ENTRY: 'ResetDataEntryForNewEvent',
     ADD_EVENT_NOTE: 'AddEventNote',
@@ -117,38 +112,6 @@ export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<addEventSaveTy
 
 export const addNewEventNote = (itemId: string, dataEntryId: string, note: string) =>
     actionCreator(actionTypes.ADD_EVENT_NOTE)({ itemId, dataEntryId, note });
-
-export const requestSaveNewEventAddAnother = (eventId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.REQUEST_SAVE_ADD_EVENT_ADD_ANOTHER)({
-        eventId,
-        dataEntryId,
-        formFoundation,
-    }, { skipLogging: ['formFoundation'] });
-
-export const startSaveNewEventAddAnother =
-(
-    serverData: Object,
-    relationshipData: ?Object,
-    selections: Object,
-    clientId: string,
-) => {
-    const actionType = actionTypes.START_SAVE_ADD_EVENT_ADD_ANOTHER;
-    return actionCreator(actionTypes.START_SAVE_ADD_EVENT_ADD_ANOTHER)({ selections }, {
-        offline: {
-            effect: {
-                url: 'events',
-                method: effectMethods.POST,
-                data: serverData,
-                clientId,
-            },
-            commit: { type: actionTypes.SAVE_ADD_EVENT_RELATIONSHIPS_IF_EXISTS, meta: { selections, relationshipData, triggerAction: actionType } },
-            rollback: { type: actionTypes.SAVE_FAILED_FOR_ADD_EVENT_ADD_ANOTHER, meta: { selections, clientId } },
-        },
-    });
-};
-
-export const newEventSavedAddAnother = (selections: Object) =>
-    actionCreator(actionTypes.ADD_EVENT_SAVED_ADD_ANOTHER)(null, { selections });
 
 export const startAsyncUpdateFieldForNewEvent = (
     innerAction: ReduxAction<any, any>,
