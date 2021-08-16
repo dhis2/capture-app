@@ -1,17 +1,19 @@
 // @flow
 import log from 'loglevel';
-import { RulesEngine } from '../engine';
-import { errorCreator } from '../../../capture-core-utils';
-import type { Program, RenderFoundation, DataElement, ProgramStage } from '../../metaData';
-import { EventProgram } from '../../metaData';
-import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
-import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
+
 import type {
     DataElement as DataElementForRulesEngine,
     EventsData,
     EventData,
     OrgUnit,
-} from '../engine';
+} from 'capture-core-utils/rulesEngine';
+import { rulesEngine } from '../rulesEngine';
+import { errorCreator } from '../../../capture-core-utils';
+import type { Program, RenderFoundation, DataElement, ProgramStage } from '../../metaData';
+import { EventProgram } from '../../metaData';
+import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
+import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
+import { convertOptionSetsToRulesEngineFormat } from '../converters/optionSetsConverter';
 
 const errorMessages = {
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
@@ -80,7 +82,7 @@ function prepare(
     }
 
     const constants = constantsStore.get();
-    const optionSets = optionSetStore.get();
+    const optionSets = convertOptionSetsToRulesEngineFormat(optionSetStore.get());
     const dataElementsInProgram = getDataElements(program, stage);
     const allEvents = getEventsData(allEventsData);
 
@@ -115,14 +117,17 @@ export function runRulesForSingleEvent(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return RulesEngine.programRuleEffectsForEvent(
-            { programRulesVariables, programRules, constants },
-            { currentEvent, allEvents },
-            dataElementsInProgram,
-            orgUnit,
-            // $FlowFixMe[prop-missing] automated comment
+        return rulesEngine.getProgramRuleEffects({
+            programRulesContainer: { programRulesVariables, programRules, constants },
+            currentEvent,
+            eventsContainer: allEvents,
+            dataElements: dataElementsInProgram,
+            selectedEntity: null,
+            trackedEntityAttributes: null,
+            selectedEnrollment: null,
+            selectedOrgUnit: orgUnit,
             optionSets,
-        );
+        });
     }
     return null;
 }

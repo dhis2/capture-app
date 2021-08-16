@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -595,6 +595,9 @@ msgstr ""
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
@@ -642,86 +645,14 @@ msgstr ""
 msgid "We could not find the stage in the program"
 msgstr ""
 
-msgid "Delete event"
-msgstr "حذف الحدث"
+msgid "There are no feedback for this event"
+msgstr ""
 
-msgid "Download as JSON"
-msgstr "تنزيل كملف JSON"
-
-msgid "Download as XML"
-msgstr "تنزيل كملف XML"
-
-msgid "Download as CSV"
-msgstr "تنزيل كملف CSV"
-
-msgid "Download with current filters"
-msgstr "تنزيل مع اعتماد عوامل التصفية الحالية"
-
-msgid "Download data..."
-msgstr "تنزيل البيانات"
-
-msgid "Working list could not be loaded"
-msgstr "تعذر تحميل قائمة العمل"
-
-msgid "an error occurred loading working lists"
-msgstr "حدث خطأ اثناء تحميل قوائم العمل"
+msgid "There are no indicators for this event"
+msgstr ""
 
 msgid "Registered events"
 msgstr "الأحداث المسجلة"
-
-msgid "Enrollment status"
-msgstr ""
-
-msgid "Cancelled"
-msgstr "تم الإلغاء"
-
-msgid "Assigned to"
-msgstr ""
-
-msgid "Registering unit"
-msgstr ""
-
-msgid "Registration Date"
-msgstr ""
-
-msgid "Inactive"
-msgstr ""
-
-msgid "Working list could not be updated"
-msgstr ""
-
-msgid "Update view"
-msgstr "تحديث العرض"
-
-msgid "Save current view..."
-msgstr "حفظ العرض الحالي"
-
-msgid "Save current view as..."
-msgstr "حفظ العرض الحالي بإسم..."
-
-msgid "Delete view"
-msgstr "حذف العرض"
-
-msgid "Share view..."
-msgstr "مشاركة العرض..."
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "هل تريد بالتأكيد حذف الـ '{{templateName}}' view؟"
-
-msgid "Confirm"
-msgstr "تأكيد"
-
-msgid "Save As view"
-msgstr "حفظ كـ view"
-
-msgid "View name"
-msgstr "عرض الاسم"
-
-msgid "Show Less"
-msgstr "إظهار أقل"
-
-msgid "Show All"
-msgstr "إظهار الكل"
 
 msgid "Choose a registering unit to start reporting"
 msgstr ""
@@ -978,6 +909,9 @@ msgstr ""
 msgid "Last updated {{date}}"
 msgstr ""
 
+msgid "Cancelled"
+msgstr "تم الإلغاء"
+
 msgid "Error"
 msgstr "خطأ"
 
@@ -990,11 +924,122 @@ msgstr ""
 msgid "Person Profile"
 msgstr ""
 
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Report date"
+msgstr ""
+
+msgid "Registering unit"
+msgstr ""
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr ""
 
+msgid "Delete event"
+msgstr "حذف الحدث"
+
+msgid "Download as JSON"
+msgstr "تنزيل كملف JSON"
+
+msgid "Download as XML"
+msgstr "تنزيل كملف XML"
+
+msgid "Download as CSV"
+msgstr "تنزيل كملف CSV"
+
+msgid "Download with current filters"
+msgstr "تنزيل مع اعتماد عوامل التصفية الحالية"
+
+msgid "Download data..."
+msgstr "تنزيل البيانات"
+
+msgid "Working list could not be loaded"
+msgstr "تعذر تحميل قائمة العمل"
+
+msgid "an error occurred loading working lists"
+msgstr "حدث خطأ اثناء تحميل قوائم العمل"
+
+msgid "Enrollment status"
+msgstr ""
+
+msgid "Assigned to"
+msgstr ""
+
+msgid "Registration Date"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Working list could not be updated"
+msgstr ""
+
+msgid "Update view"
+msgstr "تحديث العرض"
+
+msgid "Save current view..."
+msgstr "حفظ العرض الحالي"
+
+msgid "Save current view as..."
+msgstr "حفظ العرض الحالي بإسم..."
+
+msgid "Delete view"
+msgstr "حذف العرض"
+
+msgid "Share view..."
+msgstr "مشاركة العرض..."
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr "هل تريد بالتأكيد حذف الـ '{{templateName}}' view؟"
+
+msgid "Confirm"
+msgstr "تأكيد"
+
+msgid "Save As view"
+msgstr "حفظ كـ view"
+
+msgid "View name"
+msgstr "عرض الاسم"
+
+msgid "Show Less"
+msgstr "إظهار أقل"
+
+msgid "Show All"
+msgstr "إظهار الكل"
+
 msgid "An error has occured. See log for details"
 msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "تمت جدولته"
+
+msgid "Overdue"
+msgstr "متأخر"
+
+msgid "Skipped"
+msgstr "تم التخطي"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""

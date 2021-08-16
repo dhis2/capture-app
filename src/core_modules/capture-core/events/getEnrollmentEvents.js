@@ -1,11 +1,12 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import type { EventsData, EventData } from 'capture-core-utils/rulesEngine/rulesEngine.types';
 import { getApi } from '../d2/d2Instance';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
-import type { EventsData, EventData } from '../rules/engine/';
+
 import type { Event } from '../components/Pages/Enrollment/EnrollmentPageDefault/types/common.types';
 
 export type ApiDataValue = {
@@ -25,6 +26,7 @@ export type ApiTEIEvent = {
     status: string,
     eventDate: string,
     dueDate: string,
+    lastUpdated: string,
     dataValues: Array<ApiDataValue>
 };
 
