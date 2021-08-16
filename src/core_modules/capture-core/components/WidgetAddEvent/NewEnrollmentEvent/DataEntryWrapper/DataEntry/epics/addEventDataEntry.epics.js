@@ -7,13 +7,11 @@ import { errorCreator } from 'capture-core-utils';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,
-    batchActionTypes as newEventDataEntryBatchActionTypes,
     cancelOpenNewEventInDataEntry,
     batchActionTypes,
 } from '../actions/dataEntry.actions';
 import {
     openNewEventInDataEntry,
-    resetDataEntry,
 } from '../actions/dataEntryLoad.actionBatchs';
 import {
     getCurrentClientValues,
@@ -31,35 +29,6 @@ import type {
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
 };
-
-
-export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(newEventDataEntryBatchActionTypes.SAVE_ADD_EVENT_ADD_ANOTHER_BATCH),
-        map(() => {
-            const state = store.value;
-            const programId = state.currentSelections.programId;
-            const programStageId = state.router.location.query.stageId;
-
-            const orgUnitId = state.currentSelections.orgUnitId;
-            const orgUnit = state.organisationUnits[orgUnitId];
-            const metadataContainer = getProgramAndStageForProgram(programId, programStageId);
-            if (metadataContainer.error) {
-                log.error(
-                    errorCreator(
-                        errorMessages.PROGRAM_OR_STAGE_NOT_FOUND)(
-                        { method: 'resetDataEntryForNewEventEpic' }),
-                );
-            }
-
-            const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
-            return batchActions(
-
-                // $FlowFixMe[incompatible-call] automated comment
-                [...resetDataEntry(metadataContainer.program, foundation, orgUnit)],
-                batchActionTypes.RESET_DATA_ENTRY_ACTIONS_BATCH,
-            );
-        }));
 
 
 export const openAddEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
