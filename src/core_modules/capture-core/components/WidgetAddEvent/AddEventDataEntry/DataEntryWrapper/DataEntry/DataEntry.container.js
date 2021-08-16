@@ -22,7 +22,7 @@ import {
 import { type RenderFoundation } from '../../../../../metaData';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { withErrorMessageHandler } from '../../../../../HOC/withErrorMessageHandler';
-import typeof { newEventSaveTypes } from './newEventSaveTypes';
+import typeof { addEventSaveTypes } from './addEventSaveTypes';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -87,7 +87,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onAddNote: (itemId: string, dataEntryId: string, note: string) => {
         dispatch(addNewEventNote(itemId, dataEntryId, note));
     },
-    onSetSaveTypes: (newSaveTypes: ?Array<$Values<newEventSaveTypes>>) => {
+    onSetSaveTypes: (newSaveTypes: ?Array<$Values<addEventSaveTypes>>) => {
         dispatch(setNewEventSaveTypes(newSaveTypes));
     },
     onCancel: () => {

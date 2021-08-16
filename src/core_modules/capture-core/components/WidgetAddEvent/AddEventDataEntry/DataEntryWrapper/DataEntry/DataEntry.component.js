@@ -10,7 +10,7 @@ import { Notes } from '../../../../Notes/Notes.component';
 import { withDataEntryRelationshipsHandler } from '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
 import { Relationships } from '../../../../Relationships/Relationships.component';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
-import { type RenderFoundation } from '../../../../../metaData';
+import { type RenderFoundation, type ProgramStage } from '../../../../../metaData';
 import { withMainButton } from './withMainButton';
 import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
 import {
@@ -412,6 +412,7 @@ const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(Ca
 const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
 
 type Props = {
+    stage: ProgramStage,
     formFoundation: RenderFoundation,
     programName: string,
     orgUnitName: string,

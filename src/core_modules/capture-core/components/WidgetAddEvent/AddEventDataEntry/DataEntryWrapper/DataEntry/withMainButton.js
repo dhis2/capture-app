@@ -48,7 +48,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            const { saveTypes, dataEntryHasChanges, hasRecentlyAddedEvents, onSave, onComplete, finalInProgress, ...passOnProps } = this.props;
+            const { saveTypes, dataEntryHasChanges, hasRecentlyAddedEvents, onSave, finalInProgress, ...passOnProps } = this.props;
 
             const mainButton = this.renderButton(addEventSaveTypes.SAVE_WITHOUT_COMPLETING);
             const completeButton = this.renderButton(addEventSaveTypes.COMPLETE);

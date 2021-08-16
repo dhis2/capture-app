@@ -181,5 +181,5 @@ export const runRulesOnUpdateFieldForAddEventEpic = (action$: InputObservable, s
                 value,
                 valid: uiState.valid,
             };
-            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, fieldData);
+            return runRulesForAddEvent(store, dataEntryId, itemId, uid, fieldData);
         }));

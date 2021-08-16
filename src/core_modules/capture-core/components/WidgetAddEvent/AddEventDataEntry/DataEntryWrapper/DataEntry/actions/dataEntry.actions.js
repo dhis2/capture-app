@@ -1,7 +1,7 @@
 // @flow
 import { actionCreator, actionPayloadAppender } from '../../../../../../actions/actions.utils';
 import { effectMethods } from '../../../../../../trackerOffline';
-import typeof { newEventSaveTypes } from '../newEventSaveTypes';
+import typeof { addEventSaveTypes } from '../addEventSaveTypes';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForAddEventActionsBatch',
@@ -112,7 +112,7 @@ export const cancelNewEventInitializeWorkingLists = () =>
 export const cancelOpenNewEventInDataEntry = () =>
     actionCreator(actionTypes.ADD_EVENT_IN_DATAENTRY_OPENING_CANCEL)();
 
-export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<newEventSaveTypes>>) =>
+export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<addEventSaveTypes>>) =>
     actionCreator(actionTypes.SET_ADD_EVENT_SAVE_TYPES)({ saveTypes: newSaveTypes });
 
 export const addNewEventNote = (itemId: string, dataEntryId: string, note: string) =>
