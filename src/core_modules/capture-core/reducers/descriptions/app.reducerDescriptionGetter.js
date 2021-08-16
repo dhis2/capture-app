@@ -19,6 +19,9 @@ import {
 import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
+import {
+    scopeSelectorActionTypes,
+} from '../../components/ScopeSelector';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 
@@ -129,6 +132,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         page: 'new',
         locationSwitchInProgress: true,
     }),
+    [scopeSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
+        ...state,
+        page: 'new',
+        locationSwitchInProgress: true,
+    }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
         locationSwitchInProgress: true,
@@ -151,6 +159,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         locationSwitchInProgress: true,
     }),
     [lockedSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
+        ...state,
+        page: 'search',
+        locationSwitchInProgress: true,
+    }),
+    [scopeSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
         ...state,
         page: 'search',
         locationSwitchInProgress: true,

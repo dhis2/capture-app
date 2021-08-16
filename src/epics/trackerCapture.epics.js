@@ -161,6 +161,7 @@ import {
     setEnrollmentSelectionEpic,
     resetEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
+
 import {
     setTrackedEntityTypeIdOnUrlEpic,
 } from '../core_modules/capture-core/components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.epics';
