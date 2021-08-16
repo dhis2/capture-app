@@ -8,7 +8,7 @@ import {
 } from '../actions/dataEntry.actions';
 
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
-import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
+import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getConvertedAddEvent';
 
 export const saveAddEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

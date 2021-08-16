@@ -14,7 +14,7 @@ import {
 } from '../../../../../DataEntry/actions/dataEntry.actions';
 import { getCurrentUser } from '../../../../../../d2/d2Instance';
 
-export const addNoteForNewSingleEventEpic = (action$: InputObservable) =>
+export const addNoteForAddEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.ADD_EVENT_NOTE),
         map((action) => {

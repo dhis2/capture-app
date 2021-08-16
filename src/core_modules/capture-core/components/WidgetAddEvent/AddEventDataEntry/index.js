@@ -10,7 +10,7 @@ export {
 
 // epics
 export { cancelAddEventEpic, cancelAddEventLocationChangeEpic }
-    from './DataEntryWrapper/DataEntry/epics/cancelNewSingleEvent.epics';
+    from './DataEntryWrapper/DataEntry/epics/cancelAddEvent.epics';
 export {
     resetDataEntryForNewEventEpic,
     openAddEventInDataEntryEpic,
@@ -20,14 +20,14 @@ export {
 export {
     saveAddEventEpic,
     saveAddEventLocationChangeEpic,
-} from './DataEntryWrapper/DataEntry/epics/saveAddSingleEvent.epics';
+} from './DataEntryWrapper/DataEntry/epics/saveAddEvent.epics';
 export {
     saveNewEventAddAnotherEpic,
-} from './DataEntryWrapper/DataEntry/epics/saveAddSingleEventAddAnother.epics';
+} from './DataEntryWrapper/DataEntry/epics/saveAddEventAddAnother.epics';
 
 export {
-    addNoteForNewSingleEventEpic,
-} from './DataEntryWrapper/DataEntry/epics/addNoteForNewSingleEvent.epics';
+    addNoteForAddEventEpic,
+} from './DataEntryWrapper/DataEntry/epics/addNoteForAddEvent.epics';
 
 export {
     AddEventDataEntry,
