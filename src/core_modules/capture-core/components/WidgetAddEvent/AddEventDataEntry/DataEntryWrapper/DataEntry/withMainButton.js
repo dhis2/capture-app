@@ -3,12 +3,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import { type RenderFoundation } from '../../../../../metaData';
 import { getDataEntryHasChanges } from '../../getNewEventDataEntryHasChanges';
-import { getStageFromEvent } from '../../../../../metaData/helpers/getStageFromEvent';
 import { addEventSaveTypes } from './addEventSaveTypes';
 
 
