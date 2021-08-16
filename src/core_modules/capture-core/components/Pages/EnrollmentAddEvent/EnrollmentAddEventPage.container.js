@@ -29,7 +29,7 @@ export const EnrollmentAddEventPage = () => {
     );
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages.values()].find(item => item.id === stageId);
-    const outputEffects = useWidgetDataFromStore('singleEvent-newEvent');
+    const outputEffects = useWidgetDataFromStore('singleEvent-addEvent');
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     if (!programStage) {
