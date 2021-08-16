@@ -1,3 +1,10 @@
+# [1.40.0](https://github.com/dhis2/capture-app/compare/v1.39.0...v1.40.0) (2021-08-16)
+
+
+### Features
+
+*  [TECH-632] Invoked the rules engine with the correct enrollment events data ([#1928](https://github.com/dhis2/capture-app/issues/1928)) ([1727d16](https://github.com/dhis2/capture-app/commit/1727d1635bcb621d3d27aa590b97b792063f8c30))
+
 # [1.39.0](https://github.com/dhis2/capture-app/compare/v1.38.0...v1.39.0) (2021-08-16)
 
 
