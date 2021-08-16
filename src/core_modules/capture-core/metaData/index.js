@@ -41,4 +41,6 @@ export {
     programTypes,
     scopeTypes,
     getProgramThrowIfNotFound,
+    getProgramAndStageForEventProgram,
+    getEventProgramEventAccess,
 } from './helpers';

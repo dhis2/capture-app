@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { compose } from 'redux';
-import { SingleEventRegistrationEntryComponent } from './SingleEventRegistrationEntry.component';
+import { NewEnrollmentEventComponent } from './NewEnrollmentEvent.component';
 import { withBrowserBackWarning } from '../../../HOC/withBrowserBackWarning';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
-import { makeEventAccessSelector } from './SingleEventRegistrationEntry.selectors';
+import { makeEventAccessSelector } from './NewEnrollmentEvent.selectors';
 import { withLoadingIndicator } from '../../../HOC';
 
 const dialogConfig = {
@@ -16,24 +16,21 @@ const dialogConfig = {
     cancelText: i18n.t('No, stay here'),
 };
 
-const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
+const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-addEvent') || state.newEventPage.showAddRelationship;
 
 const makeMapStateToProps = () => {
     const eventAccessSelector = makeEventAccessSelector();
     // $FlowFixMe[not-an-object] automated comment
-    return (state: ReduxState, { id }) => ({
-        ready: state.dataEntries[id],
-        showAddRelationship: !!state.newEventPage.showAddRelationship,
-        eventAccess: eventAccessSelector(state),
-    });
+    return (state: ReduxState, { id }) => ({ ready: state.dataEntries[id],
+        eventAccess: eventAccessSelector(state) });
 };
 
 const mapDispatchToProps = () => ({
 });
 
-export const SingleEventRegistrationEntry: ComponentType<{| id: string |}> =
+export const NewEnrollmentEvent: ComponentType<{| id: string |}> =
   compose(
       connect(makeMapStateToProps, mapDispatchToProps),
       withLoadingIndicator(),
       withBrowserBackWarning(dialogConfig, inEffect),
-  )(SingleEventRegistrationEntryComponent);
+  )(NewEnrollmentEventComponent);
