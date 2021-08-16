@@ -31,7 +31,7 @@ export const getAddEventEnrollmentServerData = (state: ReduxState,
     const { teiId, enrollmentId, programId, orgUnitId } = state.router.location.query;
 
     if (!mainDataServerValues.status) {
-        mainDataServerValues.status = completed ? 'ACTIVE' : 'COMPLETED';
+        mainDataServerValues.status = completed ? 'COMPLETED' : 'ACTIVE';
     }
     if (mainDataServerValues.status === 'COMPLETED') {
         mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());

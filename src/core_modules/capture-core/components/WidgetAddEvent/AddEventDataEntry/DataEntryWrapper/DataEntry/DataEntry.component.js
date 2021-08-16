@@ -35,13 +35,12 @@ import {
 } from '../../../../FormFields/New';
 import { Assignee } from './Assignee';
 import { inMemoryFileStore } from '../../../../DataEntry/file/inMemoryFileStore';
-import { addEventSaveTypes } from './newEventSaveTypes';
+import { addEventSaveTypes } from './addEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import { withDataEntryFieldIfApplicable } from '../../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
 import { withTransformPropName } from '../../../../../HOC';
 import { InfoIconText } from '../../../../InfoIconText';
-import { withCompleteButton } from './withCompleteButton';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -409,8 +408,7 @@ const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipFiel
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(ReportDateField);
-const CompletableDataEntry = withCompleteButton()(CancelableDataEntry);
-const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CompletableDataEntry));
+const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
 const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
 
 type Props = {
@@ -497,8 +495,12 @@ class NewEventDataEntry extends Component<Props> {
         this.relationshipsInstance = instance;
     }
 
-    handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => {
-        this.props.onSave(itemId, dataEntryId, formFoundation, completed);
+    handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, type: $Values<typeof addEventSaveTypes>) => {
+        if (type === addEventSaveTypes.COMPLETE) {
+            this.props.onSave(itemId, dataEntryId, formFoundation, true);
+        } else {
+            this.props.onSave(itemId, dataEntryId, formFoundation);
+        }
     }
 
     getSavingText() {

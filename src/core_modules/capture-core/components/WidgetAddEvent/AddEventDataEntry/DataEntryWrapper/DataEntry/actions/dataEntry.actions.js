@@ -46,9 +46,9 @@ export const actionTypes = {
 export const startRunRulesOnUpdateForAddEvent = (actionData: { payload: Object}) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
-export const requestSaveAddEventAndReturnToOverviewPage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
+export const requestSaveAddEventAndReturnToOverviewPage = (eventId: string, dataEntryId: string, formFoundation: Object, completed?: boolean) =>
     actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_OVERVIEW_PAGE)(
-        { eventId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] },
+        { eventId, dataEntryId, formFoundation, completed }, { skipLogging: ['formFoundation'] },
     );
 
 export const newEventSavedAfterReturnedToMainPage = (selections: Object) =>
