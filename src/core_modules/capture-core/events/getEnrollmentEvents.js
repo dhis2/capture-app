@@ -1,10 +1,13 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import type { EventsData, EventData } from 'capture-core-utils/rulesEngine/rulesEngine.types';
 import { getApi } from '../d2/d2Instance';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
+
+import type { Event } from '../components/Pages/Enrollment/EnrollmentPageDefault/types/common.types';
 
 export type ApiDataValue = {
     dataElement: string,
@@ -30,6 +33,7 @@ export type ApiTEIEvent = {
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
     STAGE_NOT_FOUND: 'Stage not found',
+    STAGE_FORM_NOT_FOUND: 'Stage form not found',
 };
 
 function getValuesById(apiDataValues: Array<ApiDataValue>) {
@@ -48,7 +52,29 @@ const mapEventInputKeyToOutputKey = {
     enrollment: 'enrollmentId',
 };
 
-function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
+function convertDataValues(apiEvent: Event) {
+    const programMetaData = programCollection.get(apiEvent.program);
+    if (!programMetaData) {
+        log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ fn: 'convertDataValues', apiEvent }));
+        return null;
+    }
+    const stageMetaData = programMetaData.getStage(apiEvent.programStage);
+    if (!stageMetaData) {
+        log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ fn: 'convertDataValues', apiEvent }));
+        return null;
+    }
+    const stageForm = stageMetaData.stageForm;
+    if (!stageForm) {
+        log.error(errorCreator(errorMessages.STAGE_FORM_NOT_FOUND)({ fn: 'convertDataValues', apiEvent }));
+        return null;
+    }
+
+    const dataValuesById = getValuesById(apiEvent.dataValues);
+    const convertedDataValues = stageForm.convertValues && stageForm.convertValues(dataValuesById, convertValue);
+    return convertedDataValues;
+}
+
+function convertMainProperties(apiEvent: ApiTEIEvent | Event): (CaptureClientEvent & EventData) {
     return Object
         .keys(apiEvent)
         .reduce((accEvent, inputKey) => {
@@ -117,3 +143,14 @@ export async function getEnrollmentEvents() {
         return accEvents;
     }, []);
 }
+
+export const prepareEnrollmentEventsForRulesEngine = (currentEvent: EventData, apiEvents: Array<Event>): EventsData =>
+    apiEvents.reduce(
+        (accEvents, apiEvent) => [
+            ...accEvents,
+            currentEvent.eventId === apiEvent.event
+                ? currentEvent
+                : { ...convertMainProperties(apiEvent), ...convertDataValues(apiEvent) },
+        ],
+        [],
+    );
