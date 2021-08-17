@@ -24,6 +24,7 @@ import {
 } from '../../components/ScopeSelector';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -66,6 +67,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [enrollmentPageActionTypes.PAGE_OPEN]: (state) => {
+        const newState = { ...state };
+        newState.page = null;
         return newState;
     },
     [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: (state) => {
