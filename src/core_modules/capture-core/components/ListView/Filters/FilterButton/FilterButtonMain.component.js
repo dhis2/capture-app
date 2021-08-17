@@ -86,6 +86,10 @@ class FilterButtonMainPlain extends Component<Props, State> {
         onSetVisibleSelector(undefined);
     }
 
+    onClose = () => {
+        this.handleFilterUpdate(null);
+    }
+
     handleFilterUpdate = (data: ?FilterData) => {
         const { itemId, onUpdateFilter, onClearFilter } = this.props;
         if (data == null) {
@@ -111,7 +115,7 @@ class FilterButtonMainPlain extends Component<Props, State> {
                 multiValueFilter={multiValueFilter}
                 id={id}
                 onUpdate={this.handleFilterUpdate}
-                onClose={this.closeFilterSelector}
+                onClose={this.onClose}
                 filterValue={filterValue}
             />
         );

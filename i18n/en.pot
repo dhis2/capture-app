@@ -459,7 +459,10 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-msgid "Apply"
+msgid "Update"
+msgstr ""
+
+msgid "Reset filter"
 msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
