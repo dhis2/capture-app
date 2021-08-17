@@ -16,22 +16,22 @@ export const d2Functions = (dateUtils, variableService, variablesHash) => ({
     'd2:daysBetween': {
         name: 'd2:daysBetween',
         parameters: 2,
-        dhisFunction: params => dateUtils.daysBetween(params[0], params[1]),
+        dhisFunction: params => dateUtils.daysBetween(params[0], params[1]).toString(),
     },
     'd2:weeksBetween': {
         name: 'd2:weeksBetween',
         parameters: 2,
-        dhisFunction: params => dateUtils.weeksBetween(params[0], params[1]),
+        dhisFunction: params => dateUtils.weeksBetween(params[0], params[1]).toString(),
     },
     'd2:monthsBetween': {
         name: 'd2:monthsBetween',
         parameters: 2,
-        dhisFunction: params => dateUtils.monthsBetween(params[0], params[1]),
+        dhisFunction: params => dateUtils.monthsBetween(params[0], params[1]).toString(),
     },
     'd2:yearsBetween': {
         name: 'd2:yearsBetween',
         parameters: 2,
-        dhisFunction: params => dateUtils.yearsBetween(params[0], params[1]),
+        dhisFunction: params => dateUtils.yearsBetween(params[0], params[1]).toString(),
     },
     'd2:floor': {
         name: 'd2:floor',

@@ -1,6 +1,6 @@
 // @flow
 import { convertValue } from 'capture-core/converters/serverToClient';
-import runRulesForEnrollmentPage from 'capture-core/rules/actionsCreator/runRulesForEnrollmentPage';
+import { runRulesForEnrollmentPage } from 'capture-core/rules/actionsCreator/runRulesForEnrollmentPage';
 import { dataElementTypes, TrackerProgram } from '../../../../metaData';
 import type { InputRuleEnrollmentData } from './types/common.types';
 
@@ -50,7 +50,7 @@ const getEventsDataFromEnrollment = (enrollment, dataElements) => {
         enrollmentId: event.enrollment,
         enrollmentStatus: event.enrollmentStatus,
         status: event.status,
-        eventDate: convertDate(event.dueDate),
+        eventDate: convertDate(event.eventDate),
         dueDate: convertDate(event.dueDate),
         ...getEventValuesFromEvent(enrollment, event.event, dataElements),
     }));

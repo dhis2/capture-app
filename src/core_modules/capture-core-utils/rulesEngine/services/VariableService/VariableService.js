@@ -3,8 +3,6 @@ import log from 'loglevel';
 import { OptionSetHelper } from '../../helpers/OptionSetHelper';
 import { typeKeys } from '../../typeKeys.const';
 import { variablePrefixes } from './variablePrefixes.const';
-import { getDateUtils } from '../../commonUtils/dateUtils';
-import { momentConverter } from '../../converters/momentConverter';
 
 import type {
     ProgramRuleVariable,
@@ -16,10 +14,13 @@ import type {
     TrackedEntityAttribute,
     TrackedEntityAttributes,
     Enrollment,
-    Constants,
     OrgUnit,
     RuleVariable,
+    RuleVariables,
     TEIValues,
+    Constants,
+    RulesEngineInput,
+    IDateUtils,
 } from '../../rulesEngine.types';
 
 type SourceData = {
@@ -66,12 +67,17 @@ export class VariableService {
             OptionSetHelper.getName(optionSets[trackedEntityAttributes[trackedEntityAttributeId].optionSetId].options, value)
             : value;
     }
-    static dateUtils = getDateUtils(momentConverter);
+
+    static dateUtils: IDateUtils;
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
-    constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any) {
+    constructor(
+        onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any,
+        dateUtils: IDateUtils,
+    ) {
         this.onProcessValue = onProcessValue;
+        VariableService.dateUtils = dateUtils;
 
         this.mapSourceTypeToGetterFn = {
             [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: this.getVariableForCurrentEvent,
@@ -83,24 +89,24 @@ export class VariableService {
         };
     }
 
-    getVariables(
-        programRulesContainer: { constants?: ?Constants, programRulesVariables: ?Array<ProgramRuleVariable>},
-        executingEvent: ?EventData,
-        eventsContainer: ?EventsDataContainer,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
-        selectedEntity: ?TEIValues,
-        selectedEnrollment: ?Enrollment,
-        selectedOrgUnit: OrgUnit,
-        optionSets: OptionSets,
-    ) {
+    getVariables({
+        programRulesContainer,
+        currentEvent: executingEvent,
+        eventsContainer,
+        dataElements,
+        selectedEntity,
+        trackedEntityAttributes,
+        selectedEnrollment,
+        selectedOrgUnit,
+        optionSets,
+    }: RulesEngineInput) {
         const programVariables = programRulesContainer.programRulesVariables || [];
         const sourceData = {
             executingEvent,
             eventsContainer,
             dataElements,
-            trackedEntityAttributes,
             selectedEntity,
+            trackedEntityAttributes,
             selectedEnrollment,
             optionSets,
             selectedOrgUnit,
@@ -465,10 +471,9 @@ export class VariableService {
         );
     }
 
-    getContextVariables(sourceData: SourceData): { [key: string]: RuleVariable } {
+    getContextVariables(sourceData: SourceData): RuleVariables {
         let variables = {};
 
-        // TODO: need to build some kind of date service and change this codeline
         variables.current_date = this.buildVariable(
             VariableService.dateUtils.getToday(),
             typeKeys.DATE, {

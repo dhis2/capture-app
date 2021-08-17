@@ -5,10 +5,10 @@ import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { useEnrollment } from '../../common/EnrollmentOverviewDomain/useEnrollment';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import {
-    useEnrollment,
     useTeiAttributes,
     useProgramMetadata,
     useHideWidgetByRuleLocations,

@@ -11,13 +11,15 @@ import type { QuickStoreMandatory, QuickStoreOptions } from './IOUtils.types';
  * @param {string} storeName: the name of the store supplied to the storageController
  * @param {Options} options
  */
-export const quickStore = async ({
-    query: querySpecification,
-    storeName,
-    convertQueryResponse,
-}: QuickStoreMandatory, {
-    queryVariables,
-}: QuickStoreOptions = {}) => {
+export const quickStore = async (
+    {
+        query: querySpecification,
+        storeName,
+        convertQueryResponse,
+    }: QuickStoreMandatory,
+    {
+        queryVariables,
+    }: QuickStoreOptions = {}) => {
     const { storageController } = getContext();
     const rawResponse = await query(querySpecification, queryVariables);
     const convertedData = convertQueryResponse(rawResponse);

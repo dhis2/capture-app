@@ -1,8 +1,9 @@
 // @flow
 /* eslint-disable class-methods-use-this */
+import log from 'loglevel';
 import { parseNumber } from 'capture-core-utils/parsers';
 import { moment } from 'capture-core-utils/moment';
-import type { IConvertInputRulesValue } from '../rulesEngine.types';
+import type { IConvertInputRulesValue } from 'capture-core-utils/rulesEngine/rulesEngine.types';
 
 const dateMomentFormat = 'YYYY-MM-DD';
 
@@ -56,6 +57,22 @@ class RulesValueConverter implements IConvertInputRulesValue {
         return value || 0;
     }
 
+    convertUnitInterval(value: number | ''): number {
+        return value || 0;
+    }
+
+    convertPercentage(value: string): number {
+        if (!value) {
+            return 0;
+        }
+        const numberValue = parseNumber(value);
+        if (isNaN(numberValue)) {
+            return 0;
+        }
+
+        return numberValue / 100;
+    }
+
     convertInteger(value: number | ''): number {
         return value || 0;
     }
@@ -72,25 +89,43 @@ class RulesValueConverter implements IConvertInputRulesValue {
         return value || 0;
     }
 
-    convertPercentage(value: string): number {
-        if (!value) {
-            return 0;
-        }
-        const numberValue = parseNumber(value);
-        if (isNaN(numberValue)) {
-            return 0;
-        }
+    convertTrackerAssociate(value: any): string {
+        log.warn('convertTrackerAssociate not implemented', value);
+        return '';
+    }
 
-        return numberValue / 100;
+    convertUserName(value: any): string {
+        log.warn('convertUserName not implemented', value);
+        return '';
+    }
+
+    convertCoordinate(value: any): string {
+        log.warn('convertCoordinate not implemented', value);
+        return '';
+    }
+
+    convertOrganisationUnit(value: any): string {
+        log.warn('convertOrganisationUnit not implemented', value);
+        return '';
+    }
+
+    convertAge(value: any): string {
+        return this.convertDate(value);
     }
 
     convertUrl(value: any): string {
         return value || '';
     }
 
-    convertAge(value: any): string {
-        return this.convertDate(value);
+    convertFile(value: any): string {
+        log.warn('convertFile not implemented', value);
+        return '';
+    }
+
+    convertImage(value: any): string {
+        log.warn('convertImage not implemented', value);
+        return '';
     }
 }
 
-export const inputValueConverter = new RulesValueConverter();
+export const inputConverter = new RulesValueConverter();
