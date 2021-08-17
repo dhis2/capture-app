@@ -469,8 +469,11 @@ msgstr "表中显示的列"
 msgid "Column"
 msgstr "列"
 
-msgid "Apply"
-msgstr "应用"
+msgid "Update"
+msgstr ""
+
+msgid "Reset filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} 到 {{toDate}}"
@@ -909,6 +912,9 @@ msgstr "错误"
 
 msgid "Warning"
 msgstr "警告"
+
+msgid "Back to all stages and events"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

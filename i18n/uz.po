@@ -486,8 +486,11 @@ msgstr "Жадвалда кўрсатиладиган устунлар"
 msgid "Column"
 msgstr "Устун"
 
-msgid "Apply"
-msgstr "Мурожаат қилиш"
+msgid "Update"
+msgstr ""
+
+msgid "Reset filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} дан {{toDate}} га"
@@ -955,6 +958,9 @@ msgstr "Хатолик"
 
 msgid "Warning"
 msgstr "Огоҳлантириш"
+
+msgid "Back to all stages and events"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

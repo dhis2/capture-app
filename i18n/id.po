@@ -491,8 +491,11 @@ msgstr "Kolom untuk ditampilkan di tabel"
 msgid "Column"
 msgstr "Kolom"
 
-msgid "Apply"
-msgstr "Menerapkan"
+msgid "Update"
+msgstr "Perbarui"
+
+msgid "Reset filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} hingga {{toDate}}"
@@ -958,6 +961,9 @@ msgstr "Error"
 
 msgid "Warning"
 msgstr "Peringatan"
+
+msgid "Back to all stages and events"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profil tidak dapat dimuat. Silakan coba lagi nanti"

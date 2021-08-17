@@ -468,8 +468,11 @@ msgstr ""
 msgid "Column"
 msgstr "ຖັນ"
 
-msgid "Apply"
-msgstr "ນຳໃຊ້"
+msgid "Update"
+msgstr ""
+
+msgid "Reset filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -908,6 +911,9 @@ msgstr "ເກີດການຜິດພາດ"
 
 msgid "Warning"
 msgstr "ແຈ້ງເຕືອນ"
+
+msgid "Back to all stages and events"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

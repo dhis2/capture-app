@@ -477,7 +477,10 @@ msgstr "الأعمدة التي سيتم عرضها في الجدول"
 msgid "Column"
 msgstr "العمود"
 
-msgid "Apply"
+msgid "Update"
+msgstr "تحديث"
+
+msgid "Reset filter"
 msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
@@ -917,6 +920,9 @@ msgstr "خطأ"
 
 msgid "Warning"
 msgstr "تحذير"
+
+msgid "Back to all stages and events"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""

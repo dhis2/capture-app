@@ -1,15 +1,15 @@
 # 
 # Translators:
-# KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Antonia Bezenchek <antonia@informa.pro>, 2021
+# KRG HIS <antonia.bezenchek@informa.pro>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Antonia Bezenchek <antonia@informa.pro>, 2021\n"
+"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -484,7 +484,10 @@ msgstr "ستونەکانی دەتەوێ دەربکەوێ لە خشتەکە"
 msgid "Column"
 msgstr "ستوون"
 
-msgid "Apply"
+msgid "Update"
+msgstr "نوێ کردنەوە"
+
+msgid "Reset filter"
 msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
@@ -925,6 +928,9 @@ msgid "Error"
 msgstr "هەڵە"
 
 msgid "Warning"
+msgstr ""
+
+msgid "Back to all stages and events"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
