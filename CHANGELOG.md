@@ -1,3 +1,10 @@
+## [1.41.1](https://github.com/dhis2/capture-app/compare/v1.41.0...v1.41.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* [TECH-643] useEffect to keep the sideEffects out of the render method ([#1959](https://github.com/dhis2/capture-app/issues/1959)) ([1a680d0](https://github.com/dhis2/capture-app/commit/1a680d06bc18bfa156a7106e5187f0111070fce4))
+
 # [1.41.0](https://github.com/dhis2/capture-app/compare/v1.40.0...v1.41.0) (2021-08-17)
 
 
