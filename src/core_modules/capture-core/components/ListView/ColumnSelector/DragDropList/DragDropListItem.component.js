@@ -1,10 +1,16 @@
 // @flow
 import React, { Component } from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
-
+import { Checkbox, IconReorder24, spacersNum } from '@dhis2/ui';
 import TableCell from '@material-ui/core/TableCell';
-import Checkbox from '@material-ui/core/Checkbox';
-import { IconReorder24 } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = () => ({
+    checkbox: {
+        marginTop: spacersNum.dp12,
+        marginBottom: spacersNum.dp12,
+    },
+});
 
 type Props = {
     id: string,
@@ -14,6 +20,9 @@ type Props = {
     isDragging: () => void,
     connectDragSource: (any) => void,
     connectDropTarget: (any) => void,
+    classes: {
+        checkbox: string,
+    }
 };
 
 const style = {
@@ -65,13 +74,14 @@ class Index extends Component<Props> {
             <tr key={this.props.id} tabIndex={-1} style={{ ...style, opacity }}>
                 <TableCell component="th" scope="row">
                     <Checkbox
-                        color={'primary'}
                         checked={this.props.visible}
                         tabIndex={-1}
-                        disableRipple
-                        onClick={this.props.handleToggle(this.props.id)}
+                        onChange={this.props.handleToggle(this.props.id)}
+                        label={text}
+                        className={this.props.classes.checkbox}
+                        valid
+                        dense
                     />
-                    {text}
                 </TableCell>
                 <TableCell>
                     <span style={{ float: 'right' }}>
@@ -83,7 +93,7 @@ class Index extends Component<Props> {
     }
 }
 
-export const DragDropListItem =
+export const DragDropListItemPlain =
     DragSource(
         ItemTypes.LISTITEM,
         cardSource,
@@ -93,3 +103,5 @@ export const DragDropListItem =
         cardTarget,
         connect => ({ connectDropTarget: connect.dropTarget() }),
     )(Index));
+
+export const DragDropListItem = withStyles(styles)(DragDropListItemPlain);

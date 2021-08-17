@@ -6,6 +6,7 @@ import type { AssigneeFilterData } from './types';
 type Props = {
     filter: ?AssigneeFilterData,
     filterTypeRef: ?Function,
+    handleCommitValue: () => void,
 };
 
 type State = {
@@ -38,6 +39,7 @@ export class AssigneeFilterManager extends React.Component<Props, State> {
         this.setState({
             value,
         });
+        this.props.handleCommitValue && this.props.handleCommitValue();
     }
 
     render() {

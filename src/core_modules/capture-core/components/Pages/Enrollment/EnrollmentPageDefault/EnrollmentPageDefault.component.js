@@ -40,17 +40,24 @@ const getStyles = ({ typography }) => ({
 export const EnrollmentPageDefaultPlain = ({
     program,
     teiId,
+    events,
     enrollmentId,
+    stages,
     onDelete,
     widgetEffects,
     hideWidgets,
     classes,
+    onEventClick,
 }: PlainProps) => (
     <>
         <div className={classes.title}>Enrollment Dashboard</div>
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
-                <WidgetStagesAndEvents stages={program.stages} />
+                <WidgetStagesAndEvents
+                    stages={stages}
+                    events={events}
+                    onEventClick={onEventClick}
+                />
             </div>
             <div className={classes.rightColumn}>
                 <WidgetError error={widgetEffects?.errors} />
@@ -78,6 +85,7 @@ export const EnrollmentPageDefaultPlain = ({
         </div>
     </>
 );
+
 
 export const EnrollmentPageDefaultComponent: ComponentType<Props> = withStyles(
     getStyles,

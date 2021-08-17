@@ -42,6 +42,7 @@ import {
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
+    saveEditedEventSucceededEpic,
 } from 'capture-core/components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.epics';
 
 import {
@@ -160,6 +161,7 @@ import {
     setEnrollmentSelectionEpic,
     resetEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
+
 import {
     setTrackedEntityTypeIdOnUrlEpic,
 } from '../core_modules/capture-core/components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.epics';
@@ -280,6 +282,7 @@ export const epics = combineEpics(
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
+    saveEditedEventSucceededEpic,
     openNewRelationshipRegisterTeiEpic,
     loadSearchGroupDuplicatesForReviewEpic,
     teiForNewEventRelationshipSavedEpic,

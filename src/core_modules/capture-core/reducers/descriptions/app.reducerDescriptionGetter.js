@@ -19,8 +19,12 @@ import {
 import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
+import {
+    scopeSelectorActionTypes,
+} from '../../components/ScopeSelector';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -63,6 +67,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [enrollmentPageActionTypes.PAGE_OPEN]: (state) => {
+        const newState = { ...state };
+        newState.page = null;
         return newState;
     },
     [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: (state) => {
@@ -129,6 +138,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         page: 'new',
         locationSwitchInProgress: true,
     }),
+    [scopeSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
+        ...state,
+        page: 'new',
+        locationSwitchInProgress: true,
+    }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
         locationSwitchInProgress: true,
@@ -151,6 +165,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         locationSwitchInProgress: true,
     }),
     [lockedSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
+        ...state,
+        page: 'search',
+        locationSwitchInProgress: true,
+    }),
+    [scopeSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
         ...state,
         page: 'search',
         locationSwitchInProgress: true,

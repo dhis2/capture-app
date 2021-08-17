@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-09T15:44:53.934Z\n"
-"PO-Revision-Date: 2021-08-09T15:44:53.935Z\n"
+"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"PO-Revision-Date: 2021-08-10T17:41:20.926Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -459,7 +459,10 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-msgid "Apply"
+msgid "Update"
+msgstr ""
+
+msgid "Reset filter"
 msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
@@ -576,6 +579,9 @@ msgstr ""
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
@@ -620,6 +626,12 @@ msgid "Enrollment{{escape}} Edit Event"
 msgstr ""
 
 msgid "We could not find the stage in the program"
+msgstr ""
+
+msgid "There are no feedback for this event"
+msgstr ""
+
+msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "Registered events"
@@ -886,10 +898,40 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
+msgstr ""
+
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Report date"
+msgstr ""
+
+msgid "Registering unit"
+msgstr ""
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
 msgstr ""
 
 msgid "Stages and Events"
@@ -923,9 +965,6 @@ msgid "Enrollment status"
 msgstr ""
 
 msgid "Assigned to"
-msgstr ""
-
-msgid "Registering unit"
 msgstr ""
 
 msgid "Registration Date"

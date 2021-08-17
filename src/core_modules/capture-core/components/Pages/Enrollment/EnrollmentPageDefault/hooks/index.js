@@ -1,5 +1,6 @@
-import { useEnrollment } from './useEnrollment';
 import { useTeiAttributes } from './useTeiAttributes';
 import { useProgramMetadata } from './useProgramMetadata';
+import { useHideWidgetByRuleLocations } from './useHideWidgetByRuleLocations';
+import { useProgramStages } from './useProgramStages';
 
-export { useEnrollment, useProgramMetadata, useTeiAttributes };
+export { useProgramMetadata, useTeiAttributes, useHideWidgetByRuleLocations, useProgramStages };

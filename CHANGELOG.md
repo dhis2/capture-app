@@ -1,3 +1,58 @@
+# [1.41.0](https://github.com/dhis2/capture-app/compare/v1.40.0...v1.41.0) (2021-08-17)
+
+
+### Features
+
+* [DHIS2-11402] navigate back and forward between the enrollment page and the enrollment event edit page ([#1955](https://github.com/dhis2/capture-app/issues/1955)) ([93a189f](https://github.com/dhis2/capture-app/commit/93a189f1f31befd67b583f6804bb3f8f6ba57345))
+
+# [1.40.0](https://github.com/dhis2/capture-app/compare/v1.39.0...v1.40.0) (2021-08-16)
+
+
+### Features
+
+*  [TECH-632] Invoked the rules engine with the correct enrollment events data ([#1928](https://github.com/dhis2/capture-app/issues/1928)) ([1727d16](https://github.com/dhis2/capture-app/commit/1727d1635bcb621d3d27aa590b97b792063f8c30))
+
+# [1.39.0](https://github.com/dhis2/capture-app/compare/v1.38.0...v1.39.0) (2021-08-16)
+
+
+### Features
+
+* [TECH-633] Update event in redux after edit ([#1917](https://github.com/dhis2/capture-app/issues/1917)) ([cdb8a5c](https://github.com/dhis2/capture-app/commit/cdb8a5ceeeff00afa83323845a283855b31fe61e))
+
+# [1.38.0](https://github.com/dhis2/capture-app/compare/v1.37.2...v1.38.0) (2021-08-13)
+
+
+### Bug Fixes
+
+* show error and warning widgets ([56b1539](https://github.com/dhis2/capture-app/commit/56b1539d677f4dc1e4f4b8137cc2e0c89df807d7))
+* wrong parameter order ([e8fe5ef](https://github.com/dhis2/capture-app/commit/e8fe5ef6d262f0c98405c65b8bdb597807c5fa84))
+
+
+### Features
+
+* [TECH-620]: sort rules engine events by date ([#1970](https://github.com/dhis2/capture-app/issues/1970)) ([b21d189](https://github.com/dhis2/capture-app/commit/b21d189b0e2372a34a44e084ead0ae157d42608f))
+
+## [1.37.2](https://github.com/dhis2/capture-app/compare/v1.37.1...v1.37.2) (2021-08-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b9da318](https://github.com/dhis2/capture-app/commit/b9da31866b9fd845082a6c731827adb1aedddce0))
+
+## [1.37.1](https://github.com/dhis2/capture-app/compare/v1.37.0...v1.37.1) (2021-08-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([81898f1](https://github.com/dhis2/capture-app/commit/81898f1655b9a5de7d340032e28cfe86f5e85bd8))
+
+# [1.37.0](https://github.com/dhis2/capture-app/compare/v1.36.0...v1.37.0) (2021-08-10)
+
+
+### Features
+
+* [DHIS2-10222] Stages & Events ([#1788](https://github.com/dhis2/capture-app/issues/1788)) ([5240082](https://github.com/dhis2/capture-app/commit/52400826d2077ab113cbf99f299e2aa7106d9610)), closes [#1870](https://github.com/dhis2/capture-app/issues/1870) [#1875](https://github.com/dhis2/capture-app/issues/1875)
+
 # [1.36.0](https://github.com/dhis2/capture-app/compare/v1.35.1...v1.36.0) (2021-08-10)
 
 

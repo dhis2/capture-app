@@ -1,5 +1,5 @@
 // @flow
-import type { OrgUnit } from 'capture-core/rules/engine';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import type { Program } from 'capture-core/metaData';
 import { dataElementTypes } from 'capture-core/metaData';
 
@@ -9,7 +9,7 @@ type DataValue = {
     value: string | number
 }
 
-type Event = {
+export type Event = {
     dataValues: Array<DataValue>,
     deleted: boolean,
     dueDate: string,

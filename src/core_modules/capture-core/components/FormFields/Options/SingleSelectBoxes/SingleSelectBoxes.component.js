@@ -1,14 +1,11 @@
 // @flow
 /* eslint-disable react/no-array-index-key */
 import React, { Component, type ComponentType } from 'react';
-import Checkbox from '@material-ui/core/Checkbox';  // using custom checkboxes because RadioButton can not be deselected
 import FormControl from '@material-ui/core/FormControl';
+import { Radio, colors, spacersNum } from '@dhis2/ui';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
-import { colors } from '@dhis2/ui';
-import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from 'capture-ui/Icons';
 import { singleOrientations } from './singleSelectBoxes.const';
 import type { Props } from './singleSelectBoxes.types';
 
@@ -19,6 +16,10 @@ const styles = ({ typography, palette }) => ({
     },
     iconDeselected: {
         fill: colors.grey700,
+    },
+    checkbox: {
+        marginTop: spacersNum.dp8,
+        marginBottom: spacersNum.dp16,
     },
 });
 
@@ -41,30 +42,24 @@ class SingleSelectBoxesPlain extends Component<Props> {
         };
     }
 
-    getBoxes(passOnProps: ?Object) {
+    getBoxes() {
         const { options, classes } = this.props;
         return options.map(({ text, value }, index: number) => (
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        onChange={
-                            (e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, value); }
-                        }
-                        checked={this.isChecked(value)}
-                        icon={<SingleSelectionUncheckedIcon className={classes.iconDeselected} />}
-                        checkedIcon={<SingleSelectionCheckedIcon className={classes.iconSelected} />}
-                        disableRipple
-                        {...passOnProps}
-                    />
-                }
-                label={text}
+            <Radio
                 key={index}
+                checked={this.isChecked(value)}
+                label={text}
+                name={`singleSelectBoxes-${index}`}
+                onChange={(e: Object) => { this.handleOptionChange(e, value); }}
+                value={value}
+                className={classes.checkbox}
+                dense
             />
         ));
     }
 
-    handleOptionChange(e: Object, isChecked: boolean, value: any) {
-        this.handleSingleSelectUpdate(isChecked, value);
+    handleOptionChange(e: Object, value: any) {
+        this.handleSingleSelectUpdate(e.checked, value);
     }
 
     handleSingleSelectUpdate(isChecked: boolean, value: any) {
@@ -87,42 +82,31 @@ class SingleSelectBoxesPlain extends Component<Props> {
         return !!(this.checkedValues && this.checkedValues.has(value));
     }
 
-    renderHorizontal(passOnProps: ?Object) {
+    renderHorizontal() {
         return (
             <FormGroup row>
-                {this.getBoxes(passOnProps)}
+                {this.getBoxes()}
             </FormGroup>
         );
     }
 
-    renderVertical(passOnProps: ?Object) {
+    renderVertical() {
         return (
             <FormGroup>
-                {this.getBoxes(passOnProps)}
+                {this.getBoxes()}
             </FormGroup>
         );
     }
 
-    renderBoxes(passOnProps: ?Object) {
+    renderBoxes() {
         const orientation = this.props.orientation;
         return orientation === singleOrientations.VERTICAL ?
-            this.renderVertical(passOnProps) :
-            this.renderHorizontal(passOnProps);
+            this.renderVertical() :
+            this.renderHorizontal();
     }
 
     render() {
-        const {
-            onBlur,
-            options,
-            label,
-            nullable,
-            value,
-            orientation,
-            required,
-            classes,
-            style,
-            ...passOnProps
-        } = this.props;  // eslint-disable-line no-unused-vars
+        const { label, required } = this.props;
 
         this.setCheckedStatusForBoxes();
 
@@ -147,7 +131,7 @@ class SingleSelectBoxesPlain extends Component<Props> {
                             );
                         })()
                     }
-                    {this.renderBoxes(passOnProps)}
+                    {this.renderBoxes()}
                 </FormControl>
             </div>
         );

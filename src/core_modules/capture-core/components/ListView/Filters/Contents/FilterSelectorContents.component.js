@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo, type ComponentType } from 'react';
+import React, { useMemo, useState, type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
 import { withButtons } from './withButtons';
@@ -38,6 +38,7 @@ const selectorContentsForTypes = {
 };
 
 const useContents = ({ filterValue, classes, type, options, multiValueFilter, ...passOnProps }) => {
+    const [disabledUpdate, setUpdateDisabled] = useState(true);
     const [FilterContents, ofTypeOptionSet] = useMemo(() => {
         if (options && options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS) {
             return [OptionSetFilterWithButtons, true];
@@ -54,6 +55,9 @@ const useContents = ({ filterValue, classes, type, options, multiValueFilter, ..
                 filter={filterValue}
                 options={options}
                 singleSelect={!multiValueFilter}
+                handleCommitValue={() => setUpdateDisabled(false)}
+                disabledUpdate={disabledUpdate}
+                disabledReset={filterValue === undefined}
             />
         );
     }
@@ -63,6 +67,9 @@ const useContents = ({ filterValue, classes, type, options, multiValueFilter, ..
             {...passOnProps}
             filter={filterValue}
             type={type}
+            handleCommitValue={() => setUpdateDisabled(false)}
+            disabledUpdate={disabledUpdate}
+            disabledReset={filterValue === undefined}
         />
     );
 };
