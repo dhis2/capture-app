@@ -1,3 +1,10 @@
+# [1.41.0](https://github.com/dhis2/capture-app/compare/v1.40.0...v1.41.0) (2021-08-17)
+
+
+### Features
+
+* [DHIS2-11402] navigate back and forward between the enrollment page and the enrollment event edit page ([#1955](https://github.com/dhis2/capture-app/issues/1955)) ([93a189f](https://github.com/dhis2/capture-app/commit/93a189f1f31befd67b583f6804bb3f8f6ba57345))
+
 # [1.40.0](https://github.com/dhis2/capture-app/compare/v1.39.0...v1.40.0) (2021-08-16)
 
 
