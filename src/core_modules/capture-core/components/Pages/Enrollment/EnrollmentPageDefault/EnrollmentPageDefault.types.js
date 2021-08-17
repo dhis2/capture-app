@@ -27,7 +27,8 @@ export type Props = {|
     hideWidgets: HideWidgets,
     onDelete: () => void,
     onViewAll: (stageId: string) => void,
-    onCreateNew: (stageId: string) => void
+    onCreateNew: (stageId: string) => void,
+    onEventClick: (eventId: string, stageId: string) => void,
 |};
 
 export type PlainProps = {|

@@ -7,6 +7,7 @@ type Props = {
     filter: ?OptionSetFilterData,
     filterTypeRef: Function,
     singleSelect?: ?boolean,
+    handleCommitValue: () => void,
 };
 
 type State = {
@@ -33,6 +34,7 @@ export class OptionSetFilterManager extends React.Component<Props, State> {
         this.setState({
             value,
         });
+        this.props.handleCommitValue && this.props.handleCommitValue();
     }
 
     render() {

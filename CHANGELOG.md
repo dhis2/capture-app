@@ -1,3 +1,24 @@
+# [1.41.0](https://github.com/dhis2/capture-app/compare/v1.40.0...v1.41.0) (2021-08-17)
+
+
+### Features
+
+* [DHIS2-11402] navigate back and forward between the enrollment page and the enrollment event edit page ([#1955](https://github.com/dhis2/capture-app/issues/1955)) ([93a189f](https://github.com/dhis2/capture-app/commit/93a189f1f31befd67b583f6804bb3f8f6ba57345))
+
+# [1.40.0](https://github.com/dhis2/capture-app/compare/v1.39.0...v1.40.0) (2021-08-16)
+
+
+### Features
+
+*  [TECH-632] Invoked the rules engine with the correct enrollment events data ([#1928](https://github.com/dhis2/capture-app/issues/1928)) ([1727d16](https://github.com/dhis2/capture-app/commit/1727d1635bcb621d3d27aa590b97b792063f8c30))
+
+# [1.39.0](https://github.com/dhis2/capture-app/compare/v1.38.0...v1.39.0) (2021-08-16)
+
+
+### Features
+
+* [TECH-633] Update event in redux after edit ([#1917](https://github.com/dhis2/capture-app/issues/1917)) ([cdb8a5c](https://github.com/dhis2/capture-app/commit/cdb8a5ceeeff00afa83323845a283855b31fe61e))
+
 # [1.38.0](https://github.com/dhis2/capture-app/compare/v1.37.2...v1.38.0) (2021-08-13)
 
 

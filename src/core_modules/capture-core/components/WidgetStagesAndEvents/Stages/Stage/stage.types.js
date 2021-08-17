@@ -6,6 +6,7 @@ type ExtractedProps = {|
     stage: Stage,
     events: Array<ApiTEIEvent>,
     className?: string,
+    onEventClick: (eventId: string, stageId: string) => void,
     ...CssClasses,
 |};
 

@@ -12,7 +12,7 @@ When(/^the user clicks on the edit button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(0)
+        .eq(1)
         .click(),
 );
 
@@ -20,7 +20,7 @@ When(/^the user clicks on the save button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(2)
+        .eq(3)
         .click(),
 );
 
@@ -28,7 +28,7 @@ When(/^the user clicks on the cancel button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(2)
+        .eq(3)
         .click(),
 );
 

@@ -6,6 +6,7 @@ import type { TrueOnlyFilterData } from './types';
 type Props = {
     filter: ?TrueOnlyFilterData,
     filterTypeRef: ?Function,
+    handleCommitValue: () => void,
 };
 
 type State = {
@@ -28,6 +29,7 @@ export class TrueOnlyFilterManager extends React.Component<Props, State> {
         this.setState({
             value,
         });
+        this.props.handleCommitValue && this.props.handleCommitValue();
     }
 
     render() {
