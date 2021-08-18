@@ -19,3 +19,9 @@ export type Stage = {
     icon?: Icon,
     dataElements: Array<StageDataElement>
 }
+
+export type StageCommonProps = {|
+    onViewAll: (stageId: string) => void,
+    onCreateNew: (stageId: string) => void,
+    onEventClick: (eventId: string, stageId: string) => void
+|}

@@ -1,7 +1,8 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useState, useCallback } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
+// $FlowFixMe
 import { colors,
     spacersNum,
     DataTableBody,
@@ -39,7 +40,7 @@ const styles = {
     },
 };
 
-const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventClick }: Props) => {
+const StageDetailPlain = ({ events, eventName, stageId, dataElements, onEventClick, onViewAll, onCreateNew, classes }: Props) => {
     const defaultSortState = {
         columnName: 'eventDate',
         sortDirection: SORT_DIRECTION.DESC,
@@ -67,6 +68,14 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventCli
             });
         }
     };
+
+    const handleViewAll = useCallback(() => {
+        onViewAll(stageId);
+    }, [onViewAll, stageId]);
+
+    const handleCreateNew = useCallback(() => {
+        onCreateNew(stageId);
+    }, [onCreateNew, stageId]);
 
     function renderHeader() {
         const headerCells = headerColumns
@@ -127,7 +136,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventCli
             });
     }
 
-    const renderFooter = () => {
+    function renderFooter() {
         const renderShowMoreButton = () => (events.length > DEFAULT_NUMBER_OF_ROW
             && displayedRowNumber < events.length ? <Button
                 dataTest="show-more-button"
@@ -152,13 +161,13 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventCli
         const renderViewAllButton = () => (events.length > 1 ? <Button
             dataTest="view-all-button"
             className={classes.button}
-            onClick={() => {}}
+            onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
 
         const renderCreateNewButton = () => (<Button
             className={classes.button}
             dataTest="create-new-button"
-            onClick={() => {}}
+            onClick={handleCreateNew}
         >{i18n.t('New {{ eventName }} event', { eventName })}</Button>);
 
         return (
@@ -171,7 +180,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventCli
                 </DataTableCell>
             </DataTableRow>
         );
-    };
+    }
 
     return (
         <div className={classes.container}>

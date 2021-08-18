@@ -44,6 +44,8 @@ export const EnrollmentPageDefaultPlain = ({
     enrollmentId,
     stages,
     onDelete,
+    onViewAll,
+    onCreateNew,
     widgetEffects,
     hideWidgets,
     classes,
@@ -56,6 +58,8 @@ export const EnrollmentPageDefaultPlain = ({
                 <WidgetStagesAndEvents
                     stages={stages}
                     events={events}
+                    onViewAll={onViewAll}
+                    onCreateNew={onCreateNew}
                     onEventClick={onEventClick}
                 />
             </div>
