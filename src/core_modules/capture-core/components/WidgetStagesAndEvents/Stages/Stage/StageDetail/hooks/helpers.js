@@ -1,7 +1,5 @@
 // @flow
-import React from 'react';
 import moment from 'moment';
-import { Tag } from '@dhis2/ui';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import { statusTypes, translatedStatusTypes } from '../../../../../../metaData';
 import { getSubValues } from '../../getEventDataWithSubValue';
@@ -33,12 +31,12 @@ const convertStatusForView = (event: ApiTEIEvent) => {
     const { status, options } = getEventStatus(event);
     const isPositive = [statusTypes.COMPLETED].includes(status);
     const isNegative = [statusTypes.OVERDUE].includes(status);
-
-    return (
-        <Tag negative={isNegative} positive={isPositive}>
-            {translatedStatusTypes(options)[status]}
-        </Tag>
-    );
+    return {
+        isNegative,
+        isPositive,
+        text: translatedStatusTypes(options)[status],
+        status,
+    };
 };
 
 const groupRecordsByType = async (events: Array<ApiTEIEvent>, dataElements: Array<StageDataElement>) => {
