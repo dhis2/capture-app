@@ -1,3 +1,52 @@
+# [1.42.0](https://github.com/dhis2/capture-app/compare/v1.41.1...v1.42.0) (2021-08-18)
+
+
+### Features
+
+* [DHIS2-11572] implement navigation from overview page ([#1944](https://github.com/dhis2/capture-app/issues/1944)) ([84ee081](https://github.com/dhis2/capture-app/commit/84ee0812b42e8f31599e5ec3364cba28fd364017)), closes [#1870](https://github.com/dhis2/capture-app/issues/1870) [#1875](https://github.com/dhis2/capture-app/issues/1875)
+* [DHIS2-11594] implement comments in stages&events page ([#1971](https://github.com/dhis2/capture-app/issues/1971)) ([13996b9](https://github.com/dhis2/capture-app/commit/13996b9d89092d75aa19cf2ac8c40f15b3f334da))
+
+## [1.41.1](https://github.com/dhis2/capture-app/compare/v1.41.0...v1.41.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* [TECH-643] useEffect to keep the sideEffects out of the render method ([#1959](https://github.com/dhis2/capture-app/issues/1959)) ([1a680d0](https://github.com/dhis2/capture-app/commit/1a680d06bc18bfa156a7106e5187f0111070fce4))
+
+# [1.41.0](https://github.com/dhis2/capture-app/compare/v1.40.0...v1.41.0) (2021-08-17)
+
+
+### Features
+
+* [DHIS2-11402] navigate back and forward between the enrollment page and the enrollment event edit page ([#1955](https://github.com/dhis2/capture-app/issues/1955)) ([93a189f](https://github.com/dhis2/capture-app/commit/93a189f1f31befd67b583f6804bb3f8f6ba57345))
+
+# [1.40.0](https://github.com/dhis2/capture-app/compare/v1.39.0...v1.40.0) (2021-08-16)
+
+
+### Features
+
+*  [TECH-632] Invoked the rules engine with the correct enrollment events data ([#1928](https://github.com/dhis2/capture-app/issues/1928)) ([1727d16](https://github.com/dhis2/capture-app/commit/1727d1635bcb621d3d27aa590b97b792063f8c30))
+
+# [1.39.0](https://github.com/dhis2/capture-app/compare/v1.38.0...v1.39.0) (2021-08-16)
+
+
+### Features
+
+* [TECH-633] Update event in redux after edit ([#1917](https://github.com/dhis2/capture-app/issues/1917)) ([cdb8a5c](https://github.com/dhis2/capture-app/commit/cdb8a5ceeeff00afa83323845a283855b31fe61e))
+
+# [1.38.0](https://github.com/dhis2/capture-app/compare/v1.37.2...v1.38.0) (2021-08-13)
+
+
+### Bug Fixes
+
+* show error and warning widgets ([56b1539](https://github.com/dhis2/capture-app/commit/56b1539d677f4dc1e4f4b8137cc2e0c89df807d7))
+* wrong parameter order ([e8fe5ef](https://github.com/dhis2/capture-app/commit/e8fe5ef6d262f0c98405c65b8bdb597807c5fa84))
+
+
+### Features
+
+* [TECH-620]: sort rules engine events by date ([#1970](https://github.com/dhis2/capture-app/issues/1970)) ([b21d189](https://github.com/dhis2/capture-app/commit/b21d189b0e2372a34a44e084ead0ae157d42608f))
+
 ## [1.37.2](https://github.com/dhis2/capture-app/compare/v1.37.1...v1.37.2) (2021-08-12)
 
 

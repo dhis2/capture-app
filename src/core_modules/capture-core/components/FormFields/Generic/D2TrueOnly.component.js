@@ -1,15 +1,16 @@
 // @flow
 import React, { Component } from 'react';
-import Switch from '@material-ui/core/Switch';
-import Checkbox from '@material-ui/core/Checkbox';
+import { Checkbox, Switch, spacersNum } from '@dhis2/ui';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     label: theme.typography.formFieldTitle,
+    checkbox: {
+        marginTop: spacersNum.dp12,
+        marginBottom: spacersNum.dp12,
+    },
 });
 
 type Props = {
@@ -19,6 +20,7 @@ type Props = {
     required?: ?boolean,
     classes: {
         label: string,
+        checkbox: string,
     },
     style?: ?Object,
     useSwitch?: ?boolean,
@@ -26,7 +28,7 @@ type Props = {
 };
 
 class D2TrueOnlyPlain extends Component<Props> {
-    handleChange: (e: Object, checked: boolean) => void;
+    handleChange: (e: Object) => void;
     materialUIContainerInstance: ?HTMLDivElement;
     labelClasses: Object;
 
@@ -43,9 +45,10 @@ class D2TrueOnlyPlain extends Component<Props> {
         };
     }
 
-    handleChange(e: Object, checked: boolean) {
+    handleChange(e: Object) {
         let value;
-        if (checked) {
+
+        if (e.checked) {
             value = 'true';
         } else {
             value = null;
@@ -55,8 +58,8 @@ class D2TrueOnlyPlain extends Component<Props> {
     }
 
     render() {
-        const { onBlur, value, label, required, classes, style, useSwitch, useValueLabel, ...passOnProps } = this.props;
-        const SelectComponent = useSwitch ? Switch : Checkbox;
+        const { value, label, required, classes, style, useSwitch, useValueLabel } = this.props;
+
         return (
             <div
                 ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
@@ -83,18 +86,10 @@ class D2TrueOnlyPlain extends Component<Props> {
                             );
                         })()
                     }
-                    <FormGroup>
-                        <FormControlLabel
-                            label={useValueLabel ? label : ''}
-                            control={
-                                <SelectComponent
-                                    {...passOnProps}
-                                    onChange={this.handleChange}
-                                    checked={!!value}
-                                />
-                            }
-                        />
-                    </FormGroup>
+                    {useSwitch ?
+                        <Switch checked={!!value} label={useValueLabel ? label : ''} onChange={this.handleChange} value={value} dense className={classes.checkbox} /> :
+                        <Checkbox checked={!!value} label={useValueLabel ? label : ''} onChange={this.handleChange} value={value} dense className={classes.checkbox} />
+                    }
                 </FormControl>
             </div>
         );

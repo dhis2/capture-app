@@ -1,7 +1,8 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useState, useCallback } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
+// $FlowFixMe
 import { colors,
     spacersNum,
     DataTableBody,
@@ -23,6 +24,7 @@ const styles = {
     row: {
         maxWidth: '100%',
         whiteSpace: 'nowrap',
+        cursor: 'pointer',
     },
     container: {
         display: 'flex',
@@ -38,7 +40,17 @@ const styles = {
     },
 };
 
-const StageDetailPlain = ({ events, eventName, dataElements, hideDueDate = false, classes }: Props) => {
+const StageDetailPlain = (props: Props) => {
+    const {
+        events,
+        eventName,
+        stageId,
+        dataElements,
+        hideDueDate = false,
+        onEventClick,
+        onViewAll,
+        onCreateNew,
+        classes } = props;
     const defaultSortState = {
         columnName: 'eventDate',
         sortDirection: SORT_DIRECTION.DESC,
@@ -66,6 +78,14 @@ const StageDetailPlain = ({ events, eventName, dataElements, hideDueDate = false
             });
         }
     };
+
+    const handleViewAll = useCallback(() => {
+        onViewAll(stageId);
+    }, [onViewAll, stageId]);
+
+    const handleCreateNew = useCallback(() => {
+        onCreateNew(stageId);
+    }, [onCreateNew, stageId]);
 
     function renderHeader() {
         const headerCells = headerColumns
@@ -100,9 +120,12 @@ const StageDetailPlain = ({ events, eventName, dataElements, hideDueDate = false
             })
             .slice(0, displayedRowNumber)
             .map(row => formatRowForView(row, dataElements))
-            .map((row, index) => {
+            .map((row: Object, index: number) => {
+                const dataTableProgramStage = events[0].programStage;
+
                 const cells = headerColumns.map(({ id }) => (<DataTableCell
                     key={id}
+                    onClick={() => onEventClick(row.id, dataTableProgramStage)}
                 >
                     <div>
                         { // $FlowFixMe
@@ -123,7 +146,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, hideDueDate = false
             });
     }
 
-    const renderFooter = () => {
+    function renderFooter() {
         const renderShowMoreButton = () => (events.length > DEFAULT_NUMBER_OF_ROW
             && displayedRowNumber < events.length ? <Button
                 dataTest="show-more-button"
@@ -148,13 +171,13 @@ const StageDetailPlain = ({ events, eventName, dataElements, hideDueDate = false
         const renderViewAllButton = () => (events.length > 1 ? <Button
             dataTest="view-all-button"
             className={classes.button}
-            onClick={() => {}}
+            onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
 
         const renderCreateNewButton = () => (<Button
             className={classes.button}
             dataTest="create-new-button"
-            onClick={() => {}}
+            onClick={handleCreateNew}
         >{i18n.t('New {{ eventName }} event', { eventName })}</Button>);
 
         return (
@@ -167,7 +190,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, hideDueDate = false
                 </DataTableCell>
             </DataTableRow>
         );
-    };
+    }
 
     return (
         <div className={classes.container}>

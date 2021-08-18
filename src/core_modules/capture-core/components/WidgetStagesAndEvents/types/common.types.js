@@ -20,3 +20,9 @@ export type Stage = {
     dataElements: Array<StageDataElement>,
     hideDueDate?: boolean
 }
+
+export type StageCommonProps = {|
+    onViewAll: (stageId: string) => void,
+    onCreateNew: (stageId: string) => void,
+    onEventClick: (eventId: string, stageId: string) => void
+|}
