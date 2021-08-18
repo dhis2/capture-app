@@ -6,7 +6,7 @@ import {
     type TrackerProgram,
 } from '../../../../metaData';
 import type { Props } from './teiWorkingListsSetup.types';
-import { WorkingLists } from '../../WorkingLists';
+import { WorkingListsBase } from '../../WorkingListsBase';
 import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
@@ -187,7 +187,7 @@ export const TeiWorkingListsSetup = ({
     });
 
     return (
-        <WorkingLists
+        <WorkingListsBase
             {...passOnProps}
             currentTemplate={useCurrentTemplate(templates, currentTemplateId)}
             templates={templates}
