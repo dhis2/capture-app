@@ -6,7 +6,7 @@ import { dataElementTypes } from '../../../../../../metaData';
 import { SORT_DIRECTION } from './constants';
 
 
-const sortNumber = (clientValueA: Object, clientValueB: Object, direction: string, options?: Object) => {
+const sortNumber = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
     const numA = Number(clientValueA);
     const numB = Number(clientValueB);
     const { eventDateA, eventDateB } = options;
@@ -31,7 +31,7 @@ const sortNumber = (clientValueA: Object, clientValueB: Object, direction: strin
     return 0;
 };
 
-const sortText = (clientValueA: Object, clientValueB: Object, direction: string, options?: Object) => {
+const sortText = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
     const { eventDateA, eventDateB } = options;
     if (clientValueA === undefined) {
         return 1;
@@ -53,7 +53,7 @@ const sortText = (clientValueA: Object, clientValueB: Object, direction: string,
     return 0;
 };
 
-const sortTime = (clientValueA: Object, clientValueB: Object, direction: string, options?: Object) => {
+const sortTime = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
     const { eventDateA, eventDateB } = options;
     // most recent dates first
     if (direction === SORT_DIRECTION.DESC) {
@@ -73,10 +73,10 @@ const sortTime = (clientValueA: Object, clientValueB: Object, direction: string,
     return 0;
 };
 
-const sortOrgUnit = (clientValueA: Object, clientValueB: Object, direction: string, options?: Object) => sortText(clientValueA.name, clientValueB.name, direction, options);
+const sortOrgUnit = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => sortText(clientValueA.name, clientValueB.name, direction, options);
 
 // desc: Scheduled -> Active -> Completed -> Skipped
-const sortStatus = (clientValueA: Object, clientValueB: Object, direction: string, options?: Object) => {
+const sortStatus = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
     const { eventDateA, eventDateB, dueDateA, dueDateB } = options;
     const descOrder = ['Scheduled', 'Active', 'Completed', 'Skipped'];
 
