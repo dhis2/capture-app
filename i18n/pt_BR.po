@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-13T06:15:54.116Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
@@ -469,7 +469,7 @@ msgid "Column"
 msgstr "Coluna"
 
 msgid "Update"
-msgstr ""
+msgstr "Actualizar"
 
 msgid "Reset filter"
 msgstr ""
@@ -938,6 +938,9 @@ msgstr "Data do relatório"
 
 msgid "Registering unit"
 msgstr ""
+
+msgid "Due date"
+msgstr "Data de vencimento"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
