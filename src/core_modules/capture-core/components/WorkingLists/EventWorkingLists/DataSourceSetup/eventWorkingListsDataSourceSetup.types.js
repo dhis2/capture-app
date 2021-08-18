@@ -1,5 +1,5 @@
 // @flow
-import type { DataSource } from '../../WorkingLists';
+import type { DataSource } from '../../WorkingListsBase';
 import type { EventRecords, EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { CurrentViewChangesResolverOutputProps } from '../CurrentViewChangesResolver';
 
