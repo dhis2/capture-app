@@ -11,6 +11,11 @@ const sortNumber = (clientValueA: Object, clientValueB: Object, direction: strin
     const numB = Number(clientValueB);
     const { eventDateA, eventDateB } = options;
 
+    if (!numA) {
+        return 1;
+    } else if (!numB) {
+        return -1;
+    }
     if (direction === SORT_DIRECTION.DESC) {
         if (numA !== numB) {
             return numA - numB;
@@ -28,7 +33,11 @@ const sortNumber = (clientValueA: Object, clientValueB: Object, direction: strin
 
 const sortText = (clientValueA: Object, clientValueB: Object, direction: string, options?: Object) => {
     const { eventDateA, eventDateB } = options;
-
+    if (clientValueA === undefined) {
+        return 1;
+    } else if (clientValueB === undefined) {
+        return -1;
+    }
     if (direction === SORT_DIRECTION.DESC) {
         if (clientValueA !== clientValueB) {
             return clientValueA - clientValueB;
@@ -40,6 +49,7 @@ const sortText = (clientValueA: Object, clientValueB: Object, direction: string,
         }
         return moment(eventDateB).unix() - moment(eventDateA).unix();
     }
+
     return 0;
 };
 
