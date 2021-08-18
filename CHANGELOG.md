@@ -1,3 +1,11 @@
+# [1.42.0](https://github.com/dhis2/capture-app/compare/v1.41.1...v1.42.0) (2021-08-18)
+
+
+### Features
+
+* [DHIS2-11572] implement navigation from overview page ([#1944](https://github.com/dhis2/capture-app/issues/1944)) ([84ee081](https://github.com/dhis2/capture-app/commit/84ee0812b42e8f31599e5ec3364cba28fd364017)), closes [#1870](https://github.com/dhis2/capture-app/issues/1870) [#1875](https://github.com/dhis2/capture-app/issues/1875)
+* [DHIS2-11594] implement comments in stages&events page ([#1971](https://github.com/dhis2/capture-app/issues/1971)) ([13996b9](https://github.com/dhis2/capture-app/commit/13996b9d89092d75aa19cf2ac8c40f15b3f334da))
+
 ## [1.41.1](https://github.com/dhis2/capture-app/compare/v1.41.0...v1.41.1) (2021-08-17)
 
 
