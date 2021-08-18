@@ -1,3 +1,10 @@
+# [1.43.0](https://github.com/dhis2/capture-app/compare/v1.42.0...v1.43.0) (2021-08-18)
+
+
+### Features
+
+* [DHIS2-11593] display due date column based on condition ([#1972](https://github.com/dhis2/capture-app/issues/1972)) ([8ff563c](https://github.com/dhis2/capture-app/commit/8ff563cec8f1c396af843e2cbbe8b7a3895a573e))
+
 # [1.42.0](https://github.com/dhis2/capture-app/compare/v1.41.1...v1.42.0) (2021-08-18)
 
 
