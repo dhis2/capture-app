@@ -16,18 +16,23 @@ import {
 } from './helpers';
 import { SORT_DIRECTION } from './constants';
 
-const baseKeys = [{ id: 'status' }, { id: 'eventDate' }, { id: 'orgUnitName' }, { id: 'comments' }];
+const baseKeys = [{ id: 'status' }, { id: 'eventDate' }, { id: 'orgUnitName' }, { id: 'dueDate' }, { id: 'comments' }];
 const basedFieldTypes = [
     { type: dataElementTypes.UNKNOWN, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.TEXT },
+    { type: dataElementTypes.DATE },
     { type: dataElementTypes.UNKNOWN, resolveValue: convertCommentForView },
 ];
 const baseColumnHeaders = [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: i18n.t('Report date'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: i18n.t('Registering unit'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
-    { header: '', sortDirection: null, isPredefined: true }];
+    {
+        header: i18n.t('Due date'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true,
+    },
+    { header: '', sortDirection: null, isPredefined: true },
+];
 
 const baseFields = baseKeys.map((key, index) => ({ ...key, ...basedFieldTypes[index] }));
 // $FlowFixMe
@@ -83,7 +88,7 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
     return { computeData, dataSource };
 };
 
-const useComputeHeaderColumn = (dataElements: Array<StageDataElement>) => {
+const useComputeHeaderColumn = (dataElements: Array<StageDataElement>, hideDueDate: boolean) => {
     const headerColumns = useMemo(() => {
         const dataElementHeaders = dataElements.reduce((acc, currDataElement) => {
             const { id, name, type } = currDataElement;
@@ -92,8 +97,10 @@ const useComputeHeaderColumn = (dataElements: Array<StageDataElement>) => {
             }
             return acc;
         }, []);
-        return [...baseColumns, ...dataElementHeaders];
-    }, [dataElements]);
+        return [
+            ...baseColumns.filter(col => (hideDueDate ? col.id !== 'dueDate' : true)),
+            ...dataElementHeaders];
+    }, [dataElements, hideDueDate]);
 
     return headerColumns;
 };

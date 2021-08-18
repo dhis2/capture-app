@@ -6,6 +6,7 @@ import type { StageDataElement, StageCommonProps } from '../../../types/common.t
     events: Array<ApiTEIEvent>,
     dataElements: Array<StageDataElement>,
     eventName: string,
+    hideDueDate?: boolean,
     stageId: string,
     ...CssClasses,
 |};

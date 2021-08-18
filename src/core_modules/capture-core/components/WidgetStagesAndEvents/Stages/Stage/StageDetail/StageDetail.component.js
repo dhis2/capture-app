@@ -40,12 +40,22 @@ const styles = {
     },
 };
 
-const StageDetailPlain = ({ events, eventName, stageId, dataElements, onEventClick, onViewAll, onCreateNew, classes }: Props) => {
+const StageDetailPlain = (props: Props) => {
+    const {
+        events,
+        eventName,
+        stageId,
+        dataElements,
+        hideDueDate = false,
+        onEventClick,
+        onViewAll,
+        onCreateNew,
+        classes } = props;
     const defaultSortState = {
         columnName: 'eventDate',
         sortDirection: SORT_DIRECTION.DESC,
     };
-    const headerColumns = useComputeHeaderColumn(dataElements);
+    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate);
     const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events);
 
     React.useEffect(() => {
