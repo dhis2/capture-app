@@ -10,22 +10,24 @@ import { convertValue as convertClientToList } from '../../../../../../converter
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
 import {
     convertStatusForView,
+    convertCommentForView,
     getValueByKeyFromEvent,
     groupRecordsByType,
 } from './helpers';
 import { SORT_DIRECTION } from './constants';
 
-const baseKeys = [{ id: 'status' }, { id: 'eventDate' }, { id: 'orgUnitName' }];
+const baseKeys = [{ id: 'status' }, { id: 'eventDate' }, { id: 'orgUnitName' }, { id: 'comments' }];
 const basedFieldTypes = [
     { type: dataElementTypes.UNKNOWN, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.TEXT },
+    { type: dataElementTypes.UNKNOWN, resolveValue: convertCommentForView },
 ];
 const baseColumnHeaders = [
     { header: i18n.t('Status'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
     { header: i18n.t('Report date'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
-    { header: i18n.t('Registering unit'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true,
-    }];
+    { header: i18n.t('Registering unit'), sortDirection: SORT_DIRECTION.DEFAULT, isPredefined: true },
+    { header: '', sortDirection: null, isPredefined: true }];
 
 const baseFields = baseKeys.map((key, index) => ({ ...key, ...basedFieldTypes[index] }));
 // $FlowFixMe

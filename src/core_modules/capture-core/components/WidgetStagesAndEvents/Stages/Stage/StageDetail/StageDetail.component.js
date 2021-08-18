@@ -57,7 +57,7 @@ const StageDetailPlain = ({ events, eventName, stageId, dataElements, onEventCli
     const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
-    const getSortDirection = id => (id === columnName ? sortDirection : SORT_DIRECTION.DEFAULT);
+    const getSortDirection = column => (column.id === columnName ? sortDirection : column.sortDirection);
     const onSortIconClick = ({ name, direction }) => {
         if (direction === SORT_DIRECTION.DEFAULT && name !== defaultSortState.columnName) {
             setSortInstructions(defaultSortState);
@@ -83,7 +83,7 @@ const StageDetailPlain = ({ events, eventName, stageId, dataElements, onEventCli
                 <DataTableColumnHeader
                     key={column.id}
                     name={column.id}
-                    sortDirection={getSortDirection(column.id)}
+                    sortDirection={getSortDirection(column)}
                     onSortIconClick={onSortIconClick}
                 >
                     {column.header}
