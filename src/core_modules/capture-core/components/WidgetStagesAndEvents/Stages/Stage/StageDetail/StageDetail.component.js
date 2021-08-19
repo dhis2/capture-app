@@ -149,6 +149,8 @@ const StageDetailPlain = (props: Props) => {
     function renderFooter() {
         const renderShowMoreButton = () => (events.length > DEFAULT_NUMBER_OF_ROW
             && displayedRowNumber < events.length ? <Button
+                secondary
+                small
                 dataTest="show-more-button"
                 className={classes.button}
                 onClick={() => {
@@ -163,18 +165,25 @@ const StageDetailPlain = (props: Props) => {
             : null);
 
         const renderResetButton = () => (displayedRowNumber > DEFAULT_NUMBER_OF_ROW ? <Button
+
+            secondary
+            small
             dataTest="reset-button"
             className={classes.button}
             onClick={() => { setDisplayedRowNumber(DEFAULT_NUMBER_OF_ROW); }}
-        >{i18n.t('Reset')}</Button> : null);
+        >{i18n.t('Reset list')}</Button> : null);
 
         const renderViewAllButton = () => (events.length > 1 ? <Button
+            secondary
+            small
             dataTest="view-all-button"
             className={classes.button}
             onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
 
         const renderCreateNewButton = () => (<Button
+            secondary
+            small
             className={classes.button}
             dataTest="create-new-button"
             onClick={handleCreateNew}
