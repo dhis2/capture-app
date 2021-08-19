@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-13T06:15:54.116Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Persian (Afghanistan) (https://www.transifex.com/hisp-uio/teams/100509/fa_AF/)\n"
@@ -466,8 +466,11 @@ msgstr ""
 msgid "Column"
 msgstr "ستون"
 
-msgid "Apply"
-msgstr "درخواست"
+msgid "Update"
+msgstr "تجدید"
+
+msgid "Reset filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -907,6 +910,9 @@ msgstr "خطا"
 msgid "Warning"
 msgstr "هشدار\\:"
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -930,6 +936,9 @@ msgstr "تاریخ گزارش"
 
 msgid "Registering unit"
 msgstr "بخش ثبت نام"
+
+msgid "Due date"
+msgstr "موعد مقرر"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
