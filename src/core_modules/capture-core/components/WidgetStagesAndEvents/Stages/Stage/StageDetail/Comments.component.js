@@ -19,12 +19,12 @@ const styles = {
     },
 };
 export const CommentsPlain = ({ event, classes }: Props) => {
-    const nbComments = event.notes?.length;
+    const commentsCount = event.notes?.length;
 
     return (
-        nbComments ? <div className={classes.wrapper}>
+        commentsCount ? <div className={classes.wrapper}>
             <IconMessages16 />
-            <span className={classes.text}>{nbComments}</span>
+            <span className={classes.text}>{commentsCount}</span>
         </div> : null
     );
 };
