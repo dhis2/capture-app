@@ -940,7 +940,7 @@ msgid "Registering unit"
 msgstr "ສະຖານທີ່ລົງທະບຽນ"
 
 msgid "Due date"
-msgstr ""
+msgstr "ວັນທີຕ້ອງແລ້ວ"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

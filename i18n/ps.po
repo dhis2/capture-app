@@ -939,7 +939,7 @@ msgid "Registering unit"
 msgstr "د ثبتولو واحد"
 
 msgid "Due date"
-msgstr ""
+msgstr "ټاکلې نېټه"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

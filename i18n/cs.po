@@ -973,7 +973,7 @@ msgid "Registering unit"
 msgstr "Registrační jednotka"
 
 msgid "Due date"
-msgstr ""
+msgstr "Datum vypršení"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} událostí"
