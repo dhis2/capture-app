@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import moment from 'moment';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import { statusTypes, translatedStatusTypes } from '../../../../../../metaData';
