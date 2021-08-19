@@ -1,7 +1,8 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useState, useCallback } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
+// $FlowFixMe
 import { colors,
     spacersNum,
     DataTableBody,
@@ -23,6 +24,7 @@ const styles = {
     row: {
         maxWidth: '100%',
         whiteSpace: 'nowrap',
+        cursor: 'pointer',
     },
     container: {
         display: 'flex',
@@ -38,12 +40,22 @@ const styles = {
     },
 };
 
-const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) => {
+const StageDetailPlain = (props: Props) => {
+    const {
+        events,
+        eventName,
+        stageId,
+        dataElements,
+        hideDueDate = false,
+        onEventClick,
+        onViewAll,
+        onCreateNew,
+        classes } = props;
     const defaultSortState = {
         columnName: 'status',
         sortDirection: SORT_DIRECTION.DESC,
     };
-    const headerColumns = useComputeHeaderColumn(dataElements);
+    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate);
     const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events);
 
     React.useEffect(() => {
@@ -55,7 +67,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
     const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
-    const getSortDirection = id => (id === columnName ? sortDirection : SORT_DIRECTION.DEFAULT);
+    const getSortDirection = column => (column.id === columnName ? sortDirection : column.sortDirection);
     const onSortIconClick = ({ name, direction }) => {
         if (direction === SORT_DIRECTION.DEFAULT && name !== defaultSortState.columnName) {
             setSortInstructions(defaultSortState);
@@ -67,13 +79,21 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
         }
     };
 
+    const handleViewAll = useCallback(() => {
+        onViewAll(stageId);
+    }, [onViewAll, stageId]);
+
+    const handleCreateNew = useCallback(() => {
+        onCreateNew(stageId);
+    }, [onCreateNew, stageId]);
+
     function renderHeader() {
         const headerCells = headerColumns
             .map(column => (
                 <DataTableColumnHeader
                     key={column.id}
                     name={column.id}
-                    sortDirection={getSortDirection(column.id)}
+                    sortDirection={getSortDirection(column)}
                     onSortIconClick={onSortIconClick}
                 >
                     {column.header}
@@ -100,9 +120,12 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
             })
             .slice(0, displayedRowNumber)
             .map(row => formatRowForView(row, dataElements))
-            .map((row, index) => {
+            .map((row: Object, index: number) => {
+                const dataTableProgramStage = events[0].programStage;
+
                 const cells = headerColumns.map(({ id }) => (<DataTableCell
                     key={id}
+                    onClick={() => onEventClick(row.id, dataTableProgramStage)}
                 >
                     <div>
                         { // $FlowFixMe
@@ -123,7 +146,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
             });
     }
 
-    const renderFooter = () => {
+    function renderFooter() {
         const renderShowMoreButton = () => (events.length > DEFAULT_NUMBER_OF_ROW
             && displayedRowNumber < events.length ? <Button
                 dataTest="show-more-button"
@@ -148,13 +171,13 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
         const renderViewAllButton = () => (events.length > 1 ? <Button
             dataTest="view-all-button"
             className={classes.button}
-            onClick={() => {}}
+            onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
 
         const renderCreateNewButton = () => (<Button
             className={classes.button}
             dataTest="create-new-button"
-            onClick={() => {}}
+            onClick={handleCreateNew}
         >{i18n.t('New {{ eventName }} event', { eventName })}</Button>);
 
         return (
@@ -167,7 +190,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes }: Props) =
                 </DataTableCell>
             </DataTableRow>
         );
-    };
+    }
 
     return (
         <div className={classes.container}>

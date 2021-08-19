@@ -16,6 +16,8 @@ import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { EventProgram, TrackerProgram } from '../../../metaData/Program';
 import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
+import type { Event } from '../../Pages/Enrollment/EnrollmentPageDefault/types/common.types';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',
@@ -83,6 +85,7 @@ export const openEventForEditInDataEntry = (
     orgUnit: Object,
     foundation: RenderFoundation,
     program: Program | EventProgram | TrackerProgram,
+    allEvents?: ?Array<Event>,
 ) => {
     const dataEntryId = editEventIds.dataEntryId;
     const itemId = editEventIds.itemId;
@@ -121,6 +124,9 @@ export const openEventForEditInDataEntry = (
         );
     const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
     const stage = program instanceof TrackerProgram ? getStageFromEvent(eventContainer.event)?.stage : undefined;
+    const allEventsData = program instanceof EventProgram || !allEvents
+        ? [eventDataForRulesEngine]
+        : [...prepareEnrollmentEventsForRulesEngine(eventDataForRulesEngine, allEvents)];
 
     return [
         ...dataEntryActions,
@@ -130,7 +136,7 @@ export const openEventForEditInDataEntry = (
             key,
             orgUnit,
             eventDataForRulesEngine,
-            [eventDataForRulesEngine],
+            allEventsData,
             stage,
         ),
         actionCreator(actionTypes.OPEN_EVENT_FOR_EDIT_IN_DATA_ENTRY)(),

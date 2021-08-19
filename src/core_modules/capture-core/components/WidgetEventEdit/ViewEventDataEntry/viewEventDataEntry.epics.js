@@ -52,6 +52,7 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
             return viewEventPage.eventId === eventId && !viewEventPage.showEditEvent;
         }),
         switchMap((action) => {
+            const state = store.value;
             const eventContainer = action.payload.eventContainer;
             const orgUnit = action.payload.orgUnit;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
@@ -60,7 +61,7 @@ export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
             }
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
-            return from(loadViewEventDataEntry(eventContainer, orgUnit, foundation, program))
+            return from(loadViewEventDataEntry(eventContainer, orgUnit, foundation, program, state.enrollmentSite?.events))
                 .pipe(
                     map(item => batchActions(item)),
                 );

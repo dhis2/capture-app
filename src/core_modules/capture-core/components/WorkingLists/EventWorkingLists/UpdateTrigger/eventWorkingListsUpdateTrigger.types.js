@@ -1,5 +1,5 @@
 // @flow
-import type { LoadView, UpdateList } from '../../WorkingLists';
+import type { LoadView, UpdateList } from '../../WorkingListsBase';
 import type { EventWorkingListsRowMenuSetupOutputProps } from '../RowMenuSetup';
 
 type ExtractedProps = $ReadOnly<{|

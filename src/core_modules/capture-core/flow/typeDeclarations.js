@@ -168,13 +168,6 @@ declare type Theme = {
             lineHeight: string,
             color: string,
         },
-        body2: {
-            fontSize: string,
-            fontWeight: number,
-            fontFamily: string,
-            lineHeight: string,
-            color: string,
-        },
         fontWeightMedium: number,
     },
     spacing: {

@@ -24,7 +24,7 @@ import type {
     UnloadingContext,
     UpdateFilter,
     WorkingListTemplate,
-} from '../../WorkingLists';
+} from '../../WorkingListsBase';
 import type {
     AddTemplate,
     DeleteTemplate,

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
-"PO-Revision-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-13T06:15:54.116Z\n"
+"PO-Revision-Date: 2021-08-13T06:15:54.116Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -459,7 +459,10 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-msgid "Apply"
+msgid "Update"
+msgstr ""
+
+msgid "Reset filter"
 msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
@@ -895,6 +898,9 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -917,6 +923,9 @@ msgid "Report date"
 msgstr ""
 
 msgid "Registering unit"
+msgstr ""
+
+msgid "Due date"
 msgstr ""
 
 msgid "{{ totalEvents }} events"

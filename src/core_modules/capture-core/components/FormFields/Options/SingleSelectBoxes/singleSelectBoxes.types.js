@@ -13,6 +13,7 @@ export type Props = {
         label: string,
         iconSelected: string,
         iconDeselected: string,
+        checkbox: string,
     },
     style?: ?Object,
 };
