@@ -13,6 +13,7 @@ import { colors,
     DataTableCell,
     DataTableColumnHeader,
     Button,
+    IconAdd24,
 } from '@dhis2/ui';
 import { sortDataFromEvent } from './hooks/sortFuntions';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
@@ -37,6 +38,14 @@ const styles = {
     },
     button: {
         marginRight: spacersNum.dp8,
+    },
+    icon: {
+        position: 'absolute',
+        left: spacersNum.dp8,
+        top: '1px',
+    },
+    label: {
+        paddingLeft: spacersNum.dp32,
     },
 };
 
@@ -149,8 +158,8 @@ const StageDetailPlain = (props: Props) => {
     function renderFooter() {
         const renderShowMoreButton = () => (events.length > DEFAULT_NUMBER_OF_ROW
             && displayedRowNumber < events.length ? <Button
-                secondary
                 small
+                secondary
                 dataTest="show-more-button"
                 className={classes.button}
                 onClick={() => {
@@ -165,29 +174,33 @@ const StageDetailPlain = (props: Props) => {
             : null);
 
         const renderResetButton = () => (displayedRowNumber > DEFAULT_NUMBER_OF_ROW ? <Button
-
-            secondary
             small
+            secondary
             dataTest="reset-button"
             className={classes.button}
             onClick={() => { setDisplayedRowNumber(DEFAULT_NUMBER_OF_ROW); }}
         >{i18n.t('Reset list')}</Button> : null);
 
         const renderViewAllButton = () => (events.length > 1 ? <Button
-            secondary
             small
+            secondary
             dataTest="view-all-button"
             className={classes.button}
             onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
 
         const renderCreateNewButton = () => (<Button
-            secondary
             small
+            secondary
             className={classes.button}
             dataTest="create-new-button"
             onClick={handleCreateNew}
-        >{i18n.t('New {{ eventName }} event', { eventName })}</Button>);
+        >
+            <div className={classes.icon}><IconAdd24 /></div>
+            <div className={classes.label}>
+                {i18n.t('New {{ eventName }} event', { eventName })}
+            </div>
+        </Button>);
 
         return (
             <DataTableRow>
