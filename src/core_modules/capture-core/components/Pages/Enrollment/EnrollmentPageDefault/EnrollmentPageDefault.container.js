@@ -69,6 +69,17 @@ export const EnrollmentPageDefault = () => {
         dispatch(deleteEnrollment({ enrollmentId }));
     };
 
+    const onViewAll = (stageId) => {
+        history.push(
+            `/enrollment/stageEvents?${urlArguments({ orgUnitId, programId, stageId })}`);
+    };
+
+    const onCreateNew = (stageId) => {
+        history.push(
+            `/enrollmentEventNew?${urlArguments({ orgUnitId, programId, teiId, enrollmentId, stageId })}`,
+        );
+    };
+
     const onEventClick = (eventId: string, stageId: string) => {
         history.push(`/enrollmentEventEdit?${urlArguments({ orgUnitId, programId, teiId, enrollmentId, eventId, stageId })}`);
     };
@@ -81,6 +92,8 @@ export const EnrollmentPageDefault = () => {
             events={enrollment?.events ?? []}
             enrollmentId={enrollmentId}
             onDelete={onDelete}
+            onViewAll={onViewAll}
+            onCreateNew={onCreateNew}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             onEventClick={onEventClick}

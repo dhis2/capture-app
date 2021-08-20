@@ -6,6 +6,7 @@ import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import { statusTypes, translatedStatusTypes } from '../../../../../../metaData';
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
+import { Comments } from '../Comments.component';
 
 const isEventOverdue = (event: ApiTEIEvent) => moment(event.dueDate).isSameOrBefore(new Date())
     && event.status === statusTypes.SCHEDULE;
@@ -41,6 +42,8 @@ const convertStatusForView = (event: ApiTEIEvent) => {
     );
 };
 
+const convertCommentForView = (event: ApiTEIEvent) => <Comments event={event} />;
+
 const groupRecordsByType = async (events: Array<ApiTEIEvent>, dataElements: Array<StageDataElement>) => {
     // $FlowFixMe
     const dataElementsByType = events.reduce((acc, event) => {
@@ -69,6 +72,7 @@ export {
     isEventOverdue,
     getEventStatus,
     convertStatusForView,
+    convertCommentForView,
     getValueByKeyFromEvent,
     groupRecordsByType,
 };

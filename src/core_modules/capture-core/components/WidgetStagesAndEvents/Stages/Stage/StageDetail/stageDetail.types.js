@@ -1,12 +1,18 @@
 // @flow
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
-import type { StageDataElement } from '../../../types/common.types';
+import type { StageDataElement, StageCommonProps } from '../../../types/common.types';
 
-export type Props = {|
+ type ExtractedProps = {|
     events: Array<ApiTEIEvent>,
     dataElements: Array<StageDataElement>,
     eventName: string,
-    onEventClick: (eventId: string, stageId: string) => void,
+    hideDueDate?: boolean,
+    stageId: string,
     ...CssClasses,
 |};
+
+export type Props = {|
+    ...ExtractedProps,
+    ...StageCommonProps,
+|}
 

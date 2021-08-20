@@ -5,7 +5,7 @@ import { Widget } from '../Widget';
 import { Stages } from './Stages';
 import type { Props } from './stagesAndEvents.types';
 
-export const WidgetStagesAndEvents = ({ className, stages, events, onEventClick }: Props) => {
+export const WidgetStagesAndEvents = ({ className, stages, events, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
     return (
         <div
@@ -21,7 +21,7 @@ export const WidgetStagesAndEvents = ({ className, stages, events, onEventClick 
                 <Stages
                     stages={stages}
                     events={events}
-                    onEventClick={onEventClick}
+                    {...passOnProps}
                 />
             </Widget>
         </div>

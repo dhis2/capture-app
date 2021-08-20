@@ -5,7 +5,7 @@ import { Stage } from './Stage';
 import type { Props } from './stages.types';
 
 const styles = {};
-export const StagesPlain = ({ stages, events, classes, onEventClick }: Props) => (
+export const StagesPlain = ({ stages, events, classes, ...passOnProps }: Props) => (
     <>
         {
             stages
@@ -15,7 +15,7 @@ export const StagesPlain = ({ stages, events, classes, onEventClick }: Props) =>
                         key={stage.id}
                         stage={stage}
                         className={classes.stage}
-                        onEventClick={onEventClick}
+                        {...passOnProps}
                     />
                 ))
         }

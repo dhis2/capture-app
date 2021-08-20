@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-13T06:15:54.116Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -480,8 +480,11 @@ msgstr "Sloupce k zobrazení v tabulce"
 msgid "Column"
 msgstr "Sloupec"
 
-msgid "Apply"
-msgstr "Použít"
+msgid "Update"
+msgstr "Aktualizovat"
+
+msgid "Reset filter"
+msgstr "Reset filtru"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} do {{toDate}}"
@@ -942,6 +945,9 @@ msgstr "Chyba"
 msgid "Warning"
 msgstr "Varování"
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"
 
@@ -965,6 +971,9 @@ msgstr "Datum zprávy"
 
 msgid "Registering unit"
 msgstr "Registrační jednotka"
+
+msgid "Due date"
+msgstr "Datum vypršení"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} událostí"

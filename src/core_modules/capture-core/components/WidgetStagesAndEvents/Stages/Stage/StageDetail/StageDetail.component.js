@@ -1,7 +1,8 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useState, useCallback } from 'react';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
+// $FlowFixMe
 import { colors,
     spacersNum,
     DataTableBody,
@@ -12,6 +13,7 @@ import { colors,
     DataTableCell,
     DataTableColumnHeader,
     Button,
+    IconAdd24,
 } from '@dhis2/ui';
 import { sortDataFromEvent } from './hooks/sortFuntions';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
@@ -37,14 +39,32 @@ const styles = {
     button: {
         marginRight: spacersNum.dp8,
     },
+    icon: {
+        position: 'absolute',
+        left: spacersNum.dp8,
+        top: '1px',
+    },
+    label: {
+        paddingLeft: spacersNum.dp32,
+    },
 };
 
-const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventClick }: Props) => {
+const StageDetailPlain = (props: Props) => {
+    const {
+        events,
+        eventName,
+        stageId,
+        dataElements,
+        hideDueDate = false,
+        onEventClick,
+        onViewAll,
+        onCreateNew,
+        classes } = props;
     const defaultSortState = {
         columnName: 'eventDate',
         sortDirection: SORT_DIRECTION.DESC,
     };
-    const headerColumns = useComputeHeaderColumn(dataElements);
+    const headerColumns = useComputeHeaderColumn(dataElements, hideDueDate);
     const { computeData, dataSource } = useComputeDataFromEvent(dataElements, events);
 
     React.useEffect(() => {
@@ -56,7 +76,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventCli
     const [{ columnName, sortDirection }, setSortInstructions] = useState(defaultSortState);
     const [displayedRowNumber, setDisplayedRowNumber] = useState(DEFAULT_NUMBER_OF_ROW);
 
-    const getSortDirection = id => (id === columnName ? sortDirection : SORT_DIRECTION.DEFAULT);
+    const getSortDirection = column => (column.id === columnName ? sortDirection : column.sortDirection);
     const onSortIconClick = ({ name, direction }) => {
         if (direction === SORT_DIRECTION.DEFAULT && name !== defaultSortState.columnName) {
             setSortInstructions(defaultSortState);
@@ -68,13 +88,21 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventCli
         }
     };
 
+    const handleViewAll = useCallback(() => {
+        onViewAll(stageId);
+    }, [onViewAll, stageId]);
+
+    const handleCreateNew = useCallback(() => {
+        onCreateNew(stageId);
+    }, [onCreateNew, stageId]);
+
     function renderHeader() {
         const headerCells = headerColumns
             .map(column => (
                 <DataTableColumnHeader
                     key={column.id}
                     name={column.id}
-                    sortDirection={getSortDirection(column.id)}
+                    sortDirection={getSortDirection(column)}
                     onSortIconClick={onSortIconClick}
                 >
                     {column.header}
@@ -127,9 +155,11 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventCli
             });
     }
 
-    const renderFooter = () => {
+    function renderFooter() {
         const renderShowMoreButton = () => (events.length > DEFAULT_NUMBER_OF_ROW
             && displayedRowNumber < events.length ? <Button
+                small
+                secondary
                 dataTest="show-more-button"
                 className={classes.button}
                 onClick={() => {
@@ -144,22 +174,33 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventCli
             : null);
 
         const renderResetButton = () => (displayedRowNumber > DEFAULT_NUMBER_OF_ROW ? <Button
+            small
+            secondary
             dataTest="reset-button"
             className={classes.button}
             onClick={() => { setDisplayedRowNumber(DEFAULT_NUMBER_OF_ROW); }}
         >{i18n.t('Reset')}</Button> : null);
 
         const renderViewAllButton = () => (events.length > 1 ? <Button
+            small
+            secondary
             dataTest="view-all-button"
             className={classes.button}
-            onClick={() => {}}
+            onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
 
         const renderCreateNewButton = () => (<Button
+            small
+            secondary
             className={classes.button}
             dataTest="create-new-button"
-            onClick={() => {}}
-        >{i18n.t('New {{ eventName }} event', { eventName })}</Button>);
+            onClick={handleCreateNew}
+        >
+            <div className={classes.icon}><IconAdd24 /></div>
+            <div className={classes.label}>
+                {i18n.t('New {{ eventName }} event', { eventName })}
+            </div>
+        </Button>);
 
         return (
             <DataTableRow>
@@ -171,7 +212,7 @@ const StageDetailPlain = ({ events, eventName, dataElements, classes, onEventCli
                 </DataTableCell>
             </DataTableRow>
         );
-    };
+    }
 
     return (
         <div className={classes.container}>

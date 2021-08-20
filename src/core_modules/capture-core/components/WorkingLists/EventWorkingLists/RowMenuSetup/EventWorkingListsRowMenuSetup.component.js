@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import { IconDelete24, colors } from '@dhis2/ui';
 import { EventWorkingListsUpdateTrigger } from '../UpdateTrigger';
-import type { CustomRowMenuContents } from '../../WorkingLists';
+import type { CustomRowMenuContents } from '../../WorkingListsBase';
 import type { Props } from './eventWorkingListsRowMenuSetup.types';
 
 const getStyles = () => ({
