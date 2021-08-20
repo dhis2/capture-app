@@ -1,3 +1,10 @@
+# [1.44.0](https://github.com/dhis2/capture-app/compare/v1.43.2...v1.44.0) (2021-08-20)
+
+
+### Features
+
+* [DHIS2-11615] add plus icon on new event button ([#1991](https://github.com/dhis2/capture-app/issues/1991)) ([64507c1](https://github.com/dhis2/capture-app/commit/64507c1cb7b7e654322cf455940f4598a5cbd90a))
+
 ## [1.43.2](https://github.com/dhis2/capture-app/compare/v1.43.1...v1.43.2) (2021-08-20)
 
 
