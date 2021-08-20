@@ -941,7 +941,7 @@ msgid "Registering unit"
 msgstr "注册机构"
 
 msgid "Due date"
-msgstr ""
+msgstr "到期日"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
