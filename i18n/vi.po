@@ -969,7 +969,7 @@ msgid "Registering unit"
 msgstr "Đơn Vị đăng ký"
 
 msgid "Due date"
-msgstr ""
+msgstr "Ngày đến hạn"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
