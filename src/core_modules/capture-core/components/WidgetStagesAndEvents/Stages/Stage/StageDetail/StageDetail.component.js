@@ -179,7 +179,7 @@ const StageDetailPlain = (props: Props) => {
             dataTest="reset-button"
             className={classes.button}
             onClick={() => { setDisplayedRowNumber(DEFAULT_NUMBER_OF_ROW); }}
-        >{i18n.t('Reset')}</Button> : null);
+        >{i18n.t('Reset list')}</Button> : null);
 
         const renderViewAllButton = () => (events.length > 1 ? <Button
             small
