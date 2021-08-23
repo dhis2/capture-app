@@ -12,5 +12,6 @@ export type PlainProps = {|
     mode: string,
     onDelete: () => void,
     onGoBack: () => void,
+    orgUnitId: string,
     ...CssClasses,
 |};
