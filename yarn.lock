@@ -3198,10 +3198,10 @@
   dependencies:
     jscodeshift "^0.11.0"
 
-"@dhis2/cypress-plugins@^8.0.1":
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/@dhis2/cypress-plugins/-/cypress-plugins-8.0.1.tgz#e1b88342b51ff54d2b6806d0a2eeb0876f7e8f8b"
-  integrity sha512-s5IcJ6fiVsU5HCyqcorNlvdnO27KE0pcYOGtummZGPBFk1lIpuv1lZlWbQzkCN8gFFT7eKl5+uRs2DzW7I6JwA==
+"@dhis2/cypress-plugins@^8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@dhis2/cypress-plugins/-/cypress-plugins-8.0.2.tgz#76c45d1813c3b61c288ccb75eeed2b182b0230d9"
+  integrity sha512-AfYDPUGAtHFH8rifKlCBrev1cocspnsFXfLgYtrDvUvLjqe3SEeTyxF9/7F/A22H12bi+Vca6jeqLEcyi3Iyrg==
 
 "@dhis2/d2-i18n@^1.0.5", "@dhis2/d2-i18n@^1.1.0":
   version "1.1.0"
