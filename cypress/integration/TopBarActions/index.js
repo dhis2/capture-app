@@ -4,6 +4,15 @@ beforeEach(() => {
     cy.loginThroughForm();
 });
 
-Given(/^you land on the enrollment page by having typed the (.*)$/, (url) => {
+Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);
+});
+
+When(/^the user clicks on the edit button/, () =>
+    cy.get('[data-test="widget-enrollment-event"]').find('[data-test="dhis2-uicore-button"]').eq(1).click(),
+);
+
+Then('the user sees the warning popup', () => {
+    cy.contains('Unsaved changes');
+    cy.contains('Leaving this page will discard the changes you made to this event.');
 });

@@ -30,13 +30,8 @@ export const EnrollmentEditEventPage = () => {
         shallowEqual,
     );
     const { program } = useProgramInfo(programId);
-    const showEditEvent = useSelector(
-        ({ viewEventPage }) =>
-            viewEventPage?.eventDetailsSection?.showEditEvent,
-    );
-    const programStage = [...program.stages?.values()].find(
-        item => item.id === stageId,
-    );
+    const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
+    const programStage = [...program.stages?.values()].find(item => item.id === stageId);
     const currentPageMode = showEditEvent ? pageMode.EDIT : pageMode.VIEW;
     const outputEffects = useWidgetDataFromStore(`singleEvent-${currentPageMode}`);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
@@ -59,6 +54,7 @@ export const EnrollmentEditEventPage = () => {
             enrollmentId={enrollmentId}
             programId={programId}
             onDelete={onDelete}
+            orgUnitId={orgUnitId}
         />
     );
 };
