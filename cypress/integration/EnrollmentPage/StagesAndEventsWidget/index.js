@@ -194,3 +194,11 @@ When(/^you click New (.*)$/, (stageName) => {
 Then('you should navigate to Add new page', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ`);
 });
+
+
+Then(/^you should see the disabled button (.*)$/, (stageName) => {
+    cy.get('[data-test="stages-and-events-widget"]').within(() => {
+        cy.get('[data-test="create-new-button"]').contains(stageName).should('exist');
+        cy.get('[data-test="create-new-button"]').contains(stageName).should('be.disabled');
+    });
+});

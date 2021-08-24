@@ -49,3 +49,7 @@ Feature: User interacts with Stages and Events Widget
         Given you open the enrollment page which has multiples events and stages
         When you click New Antenatal care visit event
         Then you should navigate to Add new page
+
+    Scenario: User can not go to Add new page if stage is not repeatable and there is event in the stage
+        Given you open the enrollment page which has multiples events and stages
+        Then you should see the disabled button New Care at birth event
