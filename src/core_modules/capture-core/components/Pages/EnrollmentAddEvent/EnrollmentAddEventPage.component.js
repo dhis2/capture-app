@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPage.types';
-import { WidgetAddEvent } from '../../WidgetAddEvent';
+import { WidgetEnrollmentEventNew } from '../../WidgetEnrollmentEventNew';
 
 const styles = ({ typography }) => ({
     container: {
@@ -17,9 +17,9 @@ const styles = ({ typography }) => ({
 });
 
 const EnrollmentAddEventPagePain = ({
-    programStage,
     classes,
-}) => (
+    ...passOnProps // needs destructering when introducing scope selector
+}: Props) => (
     <div
         className={classes.container}
         data-test="add-event-enrollment-page-content"
@@ -28,8 +28,8 @@ const EnrollmentAddEventPagePain = ({
             {i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}
         </div>
         <div>
-            <WidgetAddEvent
-                programStage={programStage}
+            <WidgetEnrollmentEventNew
+                {...passOnProps}
             />
         </div>
     </div>

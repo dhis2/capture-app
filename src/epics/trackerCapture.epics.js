@@ -200,14 +200,15 @@ import {
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
 import {
-    cancelAddEventEpic,
-    cancelAddEventLocationChangeEpic,
-    runRulesOnUpdateDataEntryFieldForAddEventEpic,
-    runRulesOnUpdateFieldForAddEventEpic,
-    saveAddEventEpic,
-    saveAddEventLocationChangeEpic,
-    openAddEventInDataEntryEpic,
-} from '../core_modules/capture-core/components/WidgetAddEvent/NewEnrollmentEvent';
+    runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
+    runRulesOnUpdateFieldForNewEnrollmentEventEpic,
+    saveNewEnrollmentEventEpic,
+    addNoteForNewEnrollmentEventEpic,
+} from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
+import {
+    saveAddEnrollmentEventLocationChangeEpic,
+    cancelAddEnrollmentEventLocationChangeEpic,
+} from '../core_modules/capture-core/components/Pages/EnrollmentAddEvent';
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -330,11 +331,10 @@ export const epics = combineEpics(
     resetEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
     checkForDuplicateEpic,
-    cancelAddEventEpic,
-    cancelAddEventLocationChangeEpic,
-    runRulesOnUpdateDataEntryFieldForAddEventEpic,
-    runRulesOnUpdateFieldForAddEventEpic,
-    saveAddEventEpic,
-    saveAddEventLocationChangeEpic,
-    openAddEventInDataEntryEpic,
+    runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
+    runRulesOnUpdateFieldForNewEnrollmentEventEpic,
+    saveNewEnrollmentEventEpic,
+    saveAddEnrollmentEventLocationChangeEpic,
+    cancelAddEnrollmentEventLocationChangeEpic,
+    addNoteForNewEnrollmentEventEpic,
 );
