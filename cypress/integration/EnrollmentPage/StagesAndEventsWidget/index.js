@@ -201,11 +201,13 @@ Given(/^you open the enrollment page by typing (.*)$/, url =>
 
 Then(/^you should see the disabled button (.*)$/, (stageName) => {
     cy.get('[data-test="stages-and-events-widget"]').within(() => {
-        cy.wait(100);
-
         cy.get('[data-test="create-new-button"]')
             .contains(stageName)
-            .should('exist')
+            .should('exist');
+        cy.get('[data-test="create-new-button"]')
+            .contains(stageName)
+            .parent()
+            .parent()
             .should('be.disabled');
     });
 });
