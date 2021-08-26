@@ -2,7 +2,7 @@
 import { actionCreator } from '../../../../actions/actions.utils';
 import type {
     SharingSettings,
-} from '../../WorkingLists';
+} from '../../WorkingListsBase';
 
 
 export const workingListsCommonActionTypes = {

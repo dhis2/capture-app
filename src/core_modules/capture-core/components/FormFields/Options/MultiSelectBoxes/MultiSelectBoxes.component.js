@@ -1,16 +1,19 @@
 // @flow
 /* eslint-disable react/no-array-index-key */
 import React, { Component, type ComponentType } from 'react';
-import Checkbox from '@material-ui/core/Checkbox';
+import { Checkbox, spacersNum } from '@dhis2/ui';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
 import { multiOrientations } from './multiSelectBoxes.const';
 
 const styles = theme => ({
     label: theme.typography.formFieldTitle,
+    checkbox: {
+        marginTop: spacersNum.dp8,
+        marginBottom: spacersNum.dp16,
+    },
 });
 
 type Props = {
@@ -22,9 +25,8 @@ type Props = {
     required?: ?boolean,
     classes: {
         label: string,
-    },
-    style?: ?Object,
-    passOnClasses?: ?Object,
+        checkbox: string,
+    }
 };
 
 class MultiSelectBoxesPlain extends Component<Props> {
@@ -46,28 +48,24 @@ class MultiSelectBoxesPlain extends Component<Props> {
         };
     }
 
-    getBoxes(passOnProps: Object) {
-        const { options } = this.props;
+    getBoxes() {
+        const { options, classes } = this.props;
         return options.map(({ text, value }, index: number) => (
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        onChange={
-                            (e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, value); }
-                        }
-                        checked={this.isChecked(value)}
-                        {...passOnProps}
-                        disableRipple
-                    />
-                }
-                label={text}
+            <Checkbox
                 key={index}
+                checked={this.isChecked(value)}
+                label={text}
+                name={`multiSelectBoxes-${index}`}
+                onChange={(e: Object) => { this.handleOptionChange(e, value); }}
+                value={value}
+                className={classes.checkbox}
+                dense
             />
         ));
     }
 
-    handleOptionChange(e: Object, isChecked: boolean, value: any) {
-        this.handleSelectUpdate(isChecked, value);
+    handleOptionChange(e: Object, value: any) {
+        this.handleSelectUpdate(e.checked, value);
     }
 
     handleSelectUpdate(isChecked: boolean, value: any) {
@@ -111,29 +109,29 @@ class MultiSelectBoxesPlain extends Component<Props> {
         return !!(this.checkedValues && this.checkedValues.has(value));
     }
 
-    renderHorizontal(passOnProps: Object) {
+    renderHorizontal() {
         return (
             <FormGroup row>
-                {this.getBoxes(passOnProps)}
+                {this.getBoxes()}
             </FormGroup>
         );
     }
 
-    renderVertical(passOnProps: Object) {
+    renderVertical() {
         return (
             <FormGroup>
-                {this.getBoxes(passOnProps)}
+                {this.getBoxes()}
             </FormGroup>
         );
     }
 
-    renderCheckboxes(passOnProps: Object) {
+    renderCheckboxes() {
         const orientation = this.props.orientation;
-        return orientation === multiOrientations.VERTICAL ? this.renderVertical(passOnProps) : this.renderHorizontal(passOnProps);
+        return orientation === multiOrientations.VERTICAL ? this.renderVertical() : this.renderHorizontal();
     }
 
     render() {
-        const { onBlur, options, label, value, orientation, required, classes, style, passOnClasses, ...passOnProps } = this.props;  // eslint-disable-line no-unused-vars
+        const { label, required } = this.props;
 
         this.setCheckedStatusForBoxes();
 
@@ -158,7 +156,7 @@ class MultiSelectBoxesPlain extends Component<Props> {
                             );
                         })()
                     }
-                    {this.renderCheckboxes({ ...passOnProps, classes: passOnClasses })}
+                    {this.renderCheckboxes()}
                 </FormControl>
             </div>
         );

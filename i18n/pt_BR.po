@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
@@ -468,7 +468,10 @@ msgstr ""
 msgid "Column"
 msgstr "Coluna"
 
-msgid "Apply"
+msgid "Update"
+msgstr "Actualizar"
+
+msgid "Reset filter"
 msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
@@ -909,6 +912,9 @@ msgstr "Erro"
 msgid "Warning"
 msgstr "Advertência"
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -918,8 +924,8 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset"
-msgstr "Refazer"
+msgid "Reset list"
+msgstr ""
 
 msgid "Go to full {{ eventName }}"
 msgstr ""
@@ -932,6 +938,9 @@ msgstr "Data do relatório"
 
 msgid "Registering unit"
 msgstr ""
+
+msgid "Due date"
+msgstr "Data de vencimento"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

@@ -19,11 +19,12 @@ import {
     getCurrentClientMainData,
 } from '../../../../rules/actionsCreator';
 import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEvent';
-import { EventProgram } from '../../../../metaData/Program';
+import { EventProgram, TrackerProgram } from '../../../../metaData/Program';
 import type { FieldData } from '../../../../rules/actionsCreator';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/getEnrollmentEvents';
 
-export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
+export const openEditEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
             editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -31,6 +32,7 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
             editEventActionTypes.START_OPEN_EVENT_FOR_EDIT,
         ),
         map((action) => {
+            const state = store.value;
             const eventContainer = action.payload.eventContainer;
             const orgUnit = action.payload.orgUnit;
 
@@ -42,7 +44,7 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
             const program = metadataContainer.program;
 
 
-            return batchActions(openEventForEditInDataEntry(eventContainer, orgUnit, foundation, program));
+            return batchActions(openEventForEditInDataEntry(eventContainer, orgUnit, foundation, program, state.enrollmentSite?.events));
         }));
 
 
@@ -66,6 +68,10 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
     let currentEventMainData = foundation ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) : {};
     currentEventMainData = { ...state.events[eventId], ...currentEventMainData };
     const currentEventData = { ...currentEventValues, ...currentEventMainData };
+    const allEvents = state.enrollmentSite?.events;
+    const allEventsData = program instanceof TrackerProgram && allEvents
+        ? [...prepareEnrollmentEventsForRulesEngine(currentEventData, allEvents)]
+        : [currentEventData];
 
     const rulesActions = getRulesActionsForEvent(
         program,
@@ -73,7 +79,7 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
         formId,
         orgUnit,
         currentEventData,
-        [currentEventData],
+        allEventsData,
         stage,
     );
 

@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { typeof dataElementTypes } from '../../../../../metaData';
-import { filterTypesObject, type FiltersData } from '../../../WorkingLists';
+import { filterTypesObject, type FiltersData } from '../../../WorkingListsBase';
 import {
     convertText,
     convertDate,

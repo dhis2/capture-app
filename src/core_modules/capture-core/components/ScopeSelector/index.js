@@ -1,21 +1,15 @@
 // @flow
 export {
-    lockedSelectorBatchActionTypes,
-    lockedSelectorActionTypes,
-    updateSelectionsFromUrl,
+    scopeSelectorActionTypes,
 } from './ScopeSelector.actions';
 export {
-    validateSelectionsBasedOnUrlUpdateEpic,
-    setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
-    getOrgUnitDataBasedOnUrlUpdateEpic,
-    setOrgUnitIdEpic,
-    setProgramIdEpic,
-    startAgainEpic,
-    setEnrollmentSelectionEpic,
-    resetProgramIdEpic,
-    resetOrgUnitId,
-    fetchOrgUnitEpic,
-    resetTeiSelectionEpic,
-    resetEnrollmentSelectionEpic,
-} from './ScopeSelector.epics';
+    useSetProgramId,
+    useSetOrgUnitId,
+    useSetEnrollmentId,
+    useResetProgramId,
+    useResetOrgUnitId,
+    useResetTeiId,
+    useResetEnrollmentId,
+    useReset,
+} from './hooks';
 export { ScopeSelector } from './ScopeSelector.container';
