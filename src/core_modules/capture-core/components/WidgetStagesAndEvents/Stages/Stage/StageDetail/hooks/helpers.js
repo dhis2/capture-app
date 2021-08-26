@@ -4,6 +4,7 @@ import moment from 'moment';
 import { Tag } from '@dhis2/ui';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import { statusTypes, translatedStatusTypes } from '../../../../../../metaData';
+import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
 import { Comments } from '../Comments.component';
@@ -12,11 +13,21 @@ const isEventOverdue = (event: ApiTEIEvent) => moment(event.dueDate).isSameOrBef
     && event.status === statusTypes.SCHEDULE;
 
 const getEventStatus = (event: ApiTEIEvent) => {
+    const today = new Date();
+    const dueDate = moment(event.dueDate);
+    const dueDateFromNow = dueDate.from(today);
     if (isEventOverdue(event)) {
-        return { status: statusTypes.OVERDUE, options: undefined };
+        return { status: statusTypes.OVERDUE, options: dueDateFromNow };
     }
     if (event.status === statusTypes.SCHEDULE) {
-        return { status: statusTypes.SCHEDULE, options: moment(event.eventDate).from(new Date()) };
+        if (!event.dueDate) {
+            return { status: statusTypes.SCHEDULE, options: undefined };
+        }
+        const daysUntilDueDate = dueDate.diff(today, 'days');
+        if (daysUntilDueDate < 14) {
+            return { status: statusTypes.SCHEDULE, options: dueDateFromNow };
+        }
+        return { status: statusTypes.SCHEDULE, options: convertMomentToDateFormatString(dueDate) };
     }
     return { status: event.status, options: undefined };
 };

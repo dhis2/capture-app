@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
-"PO-Revision-Date: 2021-08-19T14:13:43.362Z\n"
+"POT-Creation-Date: 2021-08-26T10:47:56.189Z\n"
+"PO-Revision-Date: 2021-08-26T10:47:56.189Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -1028,6 +1028,9 @@ msgid "Skipped"
 msgstr ""
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Program not found"
