@@ -8,7 +8,7 @@ export type OwnProps = $ReadOnly<{|
   pageToPush?: string,
   selectedOrgUnitId: string,
   selectedProgramId: string,
-  onSetProgramId: (id: string) => void,
+  onSetProgramId?: (id: string) => void,
   onResetProgramId: () => void,
   onSetOrgUnit: (id: string, orgUnit: Object) => void,
   onResetOrgUnitId: () => void,

@@ -4,6 +4,7 @@ import React from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useEnrollment } from '../common/EnrollmentOverviewDomain/useEnrollment';
+import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode } from './EnrollmentEditEventPage.const';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
@@ -11,11 +12,15 @@ import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { urlArguments } from '../../../utils/url';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
+import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
+import { getScopeInfo } from '../../../metaData';
+import { convertValue } from '../../../converters/clientToView';
+import { dataElementTypes } from '../../../metaData/DataElement';
 
 export const EnrollmentEditEventPage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { programId, stageId, teiId, enrollmentId, orgUnitId } = useSelector(
+    const { programId, stageId, teiId, enrollmentId, orgUnitId, eventId } = useSelector(
         ({
             router: {
                 location: { query },
@@ -26,17 +31,13 @@ export const EnrollmentEditEventPage = () => {
             teiId: query.teiId,
             orgUnitId: query.orgUnitId,
             enrollmentId: query.enrollmentId,
+            eventId: query.eventId,
         }),
         shallowEqual,
     );
     const { program } = useProgramInfo(programId);
-    const showEditEvent = useSelector(
-        ({ viewEventPage }) =>
-            viewEventPage?.eventDetailsSection?.showEditEvent,
-    );
-    const programStage = [...program.stages?.values()].find(
-        item => item.id === stageId,
-    );
+    const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
+    const programStage = [...program.stages?.values()].find(item => item.id === stageId);
     const currentPageMode = showEditEvent ? pageMode.EDIT : pageMode.VIEW;
     const outputEffects = useWidgetDataFromStore(`singleEvent-${currentPageMode}`);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
@@ -46,7 +47,14 @@ export const EnrollmentEditEventPage = () => {
         dispatch(deleteEnrollment({ enrollmentId }));
     };
     const onGoBack = () => history.push(`/enrollment?${urlArguments({ orgUnitId, programId, teiId, enrollmentId })}`);
-    useEnrollment(teiId);
+    const enrollmentSite = useEnrollment(teiId).enrollment;
+    const { teiDisplayName } = useTeiDisplayName(teiId, programId);
+    const { trackedEntityName } = getScopeInfo(enrollmentSite.trackedEntityType);
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite], programId);
+    const event = enrollmentSite?.events?.find(item => item.event === eventId);
+    const eventDataConvertValue = convertValue(event?.eventDate, dataElementTypes.DATETIME);
+    const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
+
 
     return (
         <EnrollmentEditEventPageComponent
@@ -57,8 +65,13 @@ export const EnrollmentEditEventPage = () => {
             hideWidgets={hideWidgets}
             teiId={teiId}
             enrollmentId={enrollmentId}
+            enrollmentsAsOptions={enrollmentsAsOptions}
+            teiDisplayName={teiDisplayName}
+            trackedEntityName={trackedEntityName}
             programId={programId}
             onDelete={onDelete}
+            orgUnitId={orgUnitId}
+            eventDate={eventDate}
         />
     );
 };
