@@ -23,12 +23,35 @@ EnrollmentPage
 
 ### Variables name
 
-1. The pattern is `camelCase`. The exceptions are global constants and acronyms (eg HTML, DOM, DHIS2 etc) which should be in `UPPERCASE`. 
+1. The pattern is `camelCase`. The exceptions are:
+    - global constants and acronyms pattern is `UPPERCASE`.
+    - redux action type pattern is `NOUN_VERB` with the present tense. For example: TEMPLATE_ADD: 'TemplateAdd'.
 2. Use concise, human-readable, semantic names. It shouldn't be necessary to add a comment for additional documentation to the variable. 
-3. Avoid abbreviation if the length is smaller than 25 characters.  
+3. Avoid abbreviation if the length is smaller than 25 characters. 
+4. Give meaningful names to variables inside functional methods (map, forEach, reduce, every, some, ...). For example: 
+```
+// not good
+options.map(o => /* do something */)
+
+// better
+options.map(option => /* do something */)
+```
+5. Give meaningful names to variables when initialise new object instance. For example: 
+```
+// not good
+new DataElement((o) => {
+    o.id = 'something';
+})
+
+// better
+new DataElement((element) => {
+    element.id = 'something';
+})
+```
 
 ### Functions name
 
 1. The pattern is `camelCase`  
-2. Name each function as `<verb><Noun>`. Every function is an action, so the name should contain at least one verb as a prefix. This verb as prefix can be anything (e.g. get, fetch, push, apply, calculate, compute, post).  
-3. Avoid duplicate names for exported functions. Functions with identical names create a lot of confusion. Consider what is the difference between the functions and reflect it in the function name. 
+2. For system functions use the pattern `<verb><Noun>`. Every function is an action, so the name should contain at least one verb as a prefix. This verb as prefix can be anything (e.g. get, fetch, push, apply, calculate, compute, post). 
+3. For user interaction functions use the pattern `<on><Verb>`. For example: `onUpdateValue`, `onExitSearch`, `onClick` etc.
+4. Avoid duplicate names for exported functions. Functions with identical names create a lot of confusion. Consider what is the difference between the functions and reflect it in the function name. 
