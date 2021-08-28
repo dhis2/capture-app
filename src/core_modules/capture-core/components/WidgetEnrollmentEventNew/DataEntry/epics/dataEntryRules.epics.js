@@ -58,6 +58,7 @@ const runRulesForNewEvent = (
             orgUnit,
             currentEventData,
             [currentEventData],
+            metadataContainer.stage,
         );
     }
 
