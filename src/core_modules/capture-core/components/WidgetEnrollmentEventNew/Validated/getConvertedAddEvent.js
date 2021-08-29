@@ -6,29 +6,27 @@ import { convertValue as convertToServerValue } from '../../../converters/client
 import { convertMainEventClientToServer } from '../../../events/mainConverters';
 import { type RenderFoundation } from '../../../metaData';
 
-const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
-    if (!categories) {
-        return null;
-    }
-
-    return {
-        attributeCategoryOptions: Object
-            .keys(categories)
-
-            .map(key => categories[key])
-            .join(';'),
-    };
-};
-
-export const getAddEventEnrollmentServerData = (state: ReduxState,
+export const getAddEventEnrollmentServerData = ({
+    formFoundation,
+    formClientValues,
+    mainDataClientValues,
+    programId,
+    orgUnitId,
+    teiId,
+    enrollmentId,
+    completed,
+}: {
     formFoundation: RenderFoundation,
     formClientValues: Object,
     mainDataClientValues: Object,
+    programId: string,
+    orgUnitId: string,
+    teiId: string,
+    enrollmentId: string,
     completed?: boolean,
-) => {
+}) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
-    const { teiId, enrollmentId, programId, orgUnitId } = state.router.location.query;
 
     if (!mainDataServerValues.status) {
         mainDataServerValues.status = completed ? 'COMPLETED' : 'ACTIVE';
@@ -46,7 +44,6 @@ export const getAddEventEnrollmentServerData = (state: ReduxState,
                 orgUnit: orgUnitId,
                 trackedEntityInstance: teiId,
                 enrollment: enrollmentId,
-                ...getApiCategoriesArgument(state.currentSelections.categories),
                 dataValues: Object
                     .keys(formServerValues)
                     .map(key => ({

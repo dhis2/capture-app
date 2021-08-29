@@ -1,11 +1,9 @@
 // @flow
-import { of } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import {
     newEventWidgetActionTypes,
     saveEvent,
-    saveEventCallbackAction,
 } from './validated.actions';
 
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
@@ -14,19 +12,37 @@ import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getC
 export const saveNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(newEventWidgetActionTypes.EVENT_SAVE_REQUEST),
-        mergeMap((action) => {
+        map((action) => {
             const state = store.value;
-            const { formFoundation, dataEntryId, eventId, completed, onSaveActionType } = action.payload;
+            const {
+                formFoundation,
+                dataEntryId,
+                eventId,
+                completed,
+                programId,
+                orgUnitId,
+                teiId,
+                enrollmentId,
+                onSaveExternal,
+                onSaveSuccessActionType,
+                onSaveErrorActionType,
+            } = action.payload;
+
             const dataEntryKey = getDataEntryKey(dataEntryId, eventId);
             const { formClientValues, mainDataClientValues }
                 = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
-            const serverData = getAddEventEnrollmentServerData(state, formFoundation, formClientValues, mainDataClientValues, completed);
-            const relationshipData = state.dataEntriesRelationships[dataEntryKey];
+            const serverData = getAddEventEnrollmentServerData({
+                formFoundation,
+                formClientValues,
+                mainDataClientValues,
+                programId,
+                orgUnitId,
+                teiId,
+                enrollmentId,
+                completed,
+            });
 
-            const saveEventAction = saveEvent(serverData, relationshipData, state.currentSelections);
-
-            return onSaveActionType ?
-                of(saveEventAction, saveEventCallbackAction(onSaveActionType, serverData)) :
-                of(saveEventAction);
+            onSaveExternal && onSaveExternal(serverData);
+            return saveEvent(serverData, onSaveSuccessActionType, onSaveErrorActionType);
         }));

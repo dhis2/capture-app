@@ -205,10 +205,6 @@ import {
     saveNewEnrollmentEventEpic,
     addNoteForNewEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
-import {
-    saveAddEnrollmentEventLocationChangeEpic,
-    cancelAddEnrollmentEventLocationChangeEpic,
-} from '../core_modules/capture-core/components/Pages/EnrollmentAddEvent';
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -334,7 +330,5 @@ export const epics = combineEpics(
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,
-    saveAddEnrollmentEventLocationChangeEpic,
-    cancelAddEnrollmentEventLocationChangeEpic,
     addNoteForNewEnrollmentEventEpic,
 );

@@ -2,7 +2,10 @@
 import React, { useCallback } from 'react';
 // $FlowFixMe
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { addEnrollmentEventPageActionTypes, cancelSaveEvent } from './enrollmentAddEventPage.actions';
+import {
+    addEnrollmentEventPageActionTypes,
+    navigateToEnrollmentPage,
+} from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
 
@@ -23,9 +26,14 @@ export const EnrollmentAddEventPage = () => {
     );
 
     const dispatch = useDispatch();
+
     const handleCancel = useCallback(() => {
-        dispatch(cancelSaveEvent());
-    }, [dispatch]);
+        dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
+    }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
+
+    const handleSave = useCallback(() => {
+        dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
+    }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
     // TODO: Validate query params
     const { program } = useProgramInfo(programId);
@@ -43,8 +51,9 @@ export const EnrollmentAddEventPage = () => {
             enrollmentId={enrollmentId}
             orgUnitId={orgUnitId}
             teiId={teiId}
-            onSaveActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE}
+            onSave={handleSave}
             onSaveSuccessActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS}
+            onSaveErrorActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR}
             onCancel={handleCancel}
         />
     );

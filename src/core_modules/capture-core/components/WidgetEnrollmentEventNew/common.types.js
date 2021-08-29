@@ -5,3 +5,5 @@ export type OrgUnit = {
     name: string,
     code: string,
 };
+
+export type ExternalSaveHandler = (eventServerValues: Object) => void;

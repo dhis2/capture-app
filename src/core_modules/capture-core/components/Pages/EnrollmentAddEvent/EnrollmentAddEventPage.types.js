@@ -1,4 +1,5 @@
 // @flow
+import type { ExternalSaveHandler } from '../../WidgetEnrollmentEventNew';
 
 export type Props = {|
     programId: string,
@@ -6,8 +7,9 @@ export type Props = {|
     orgUnitId: string,
     teiId: string,
     enrollmentId: string,
-    onSaveActionType: string,
+    onSave: ExternalSaveHandler,
     onSaveSuccessActionType: string,
+    onSaveErrorActionType: string,
     onCancel: () => void,
     ...CssClasses,
 |};

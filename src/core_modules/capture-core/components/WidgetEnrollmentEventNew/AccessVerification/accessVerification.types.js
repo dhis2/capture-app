@@ -1,5 +1,6 @@
 // @flow
 import { type ProgramStage, type RenderFoundation, type TrackerProgram } from '../../../metaData';
+import type { ExternalSaveHandler } from '../common.types';
 
 export type ContainerProps = {|
     program: TrackerProgram,
@@ -8,8 +9,9 @@ export type ContainerProps = {|
     teiId: string,
     enrollmentId: string,
     orgUnitId: string,
-    onSaveActionType?: string,
+    onSaveExternal?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,
+    onSaveErrorActionType?: string,
     onCancel?: () => void,
 |};
 

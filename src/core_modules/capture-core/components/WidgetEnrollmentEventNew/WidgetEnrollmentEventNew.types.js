@@ -1,4 +1,5 @@
 // @flow
+import type { ExternalSaveHandler } from './common.types';
 
 export type WidgetProps = {|
     programId: string,
@@ -6,7 +7,8 @@ export type WidgetProps = {|
     teiId: string,
     enrollmentId: string,
     orgUnitId: string,
-    onSaveActionType?: string,
+    onSave?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,
+    onSaveErrorActionType?: string,
     onCancel?: () => void,
 |};

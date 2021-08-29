@@ -14,8 +14,9 @@ const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 export const Validated = ({
     program,
     formFoundation,
-    onSaveActionType,
+    onSaveExternal,
     onSaveSuccessActionType,
+    onSaveErrorActionType,
     orgUnitId,
     teiId,
     enrollmentId,
@@ -40,11 +41,24 @@ export const Validated = ({
             dataEntryId: dataEntryIdArgument,
             formFoundation: formFoundationArgument,
             completed,
+            programId: program.id,
+            orgUnitId,
             teiId,
             enrollmentId,
-            onSaveActionType,
+            onSaveExternal,
+            onSaveSuccessActionType,
+            onSaveErrorActionType,
         }));
-    }, [dispatch, onSaveActionType, teiId, enrollmentId]);
+    }, [
+        dispatch,
+        program.id,
+        orgUnitId,
+        teiId,
+        enrollmentId,
+        onSaveExternal,
+        onSaveSuccessActionType,
+        onSaveErrorActionType,
+    ]);
 
     if (error) {
         return (

@@ -1,6 +1,7 @@
 // @flow
 import { actionCreator } from '../../../actions/actions.utils';
 import { effectMethods } from '../../../trackerOffline';
+import type { ExternalSaveHandler } from '../common.types';
 
 export const newEventWidgetActionTypes = {
     RULES_ON_UPDATE_EXECUTE: 'NewEvent.ExecuteRulesOnUpdate',
@@ -15,43 +16,50 @@ export const requestSaveEvent = ({
     eventId,
     dataEntryId,
     formFoundation,
+    programId,
+    orgUnitId,
     teiId,
     enrollmentId,
     completed,
-    onSaveActionType,
+    onSaveExternal,
+    onSaveSuccessActionType,
+    onSaveErrorActionType,
 }: {
     eventId: string,
     dataEntryId: string,
     formFoundation: Object,
+    programId: string,
+    orgUnitId: string,
     teiId: string,
     enrollmentId: string,
     completed?: boolean,
-    onSaveActionType?: string,
+    onSaveExternal?: ExternalSaveHandler,
+    onSaveSuccessActionType?: string,
+    onSaveErrorActionType?: string,
 }) =>
     actionCreator(newEventWidgetActionTypes.EVENT_SAVE_REQUEST)({
         eventId,
         dataEntryId,
         formFoundation,
+        programId,
+        orgUnitId,
         teiId,
         enrollmentId,
         completed,
-        onSaveActionType,
+        onSaveExternal,
+        onSaveSuccessActionType,
+        onSaveErrorActionType,
     }, { skipLogging: ['formFoundation'] });
 
-export const saveEvent = (serverData: Object, relationshipData: ?Object, selections: Object) => {
-    const actionType = newEventWidgetActionTypes.EVENT_SAVE;
-    return actionCreator(actionType)({ selections }, {
+export const saveEvent = (serverData: Object, onSaveSuccessActionType?: string, onSaveErrorActionType?: string) =>
+    actionCreator(newEventWidgetActionTypes.EVENT_SAVE)({}, {
         offline: {
             effect: {
                 url: 'events',
                 method: effectMethods.POST,
                 data: serverData,
             },
-            commit: { type: newEventWidgetActionTypes.EVENT_SAVE_SUCCESS, meta: { selections, relationshipData, triggerAction: actionType } },
-            rollback: { type: newEventWidgetActionTypes.EVENT_SAVE_ERROR, meta: { selections } },
+            commit: onSaveSuccessActionType && { type: onSaveSuccessActionType, meta: { serverData } },
+            rollback: onSaveErrorActionType && { type: onSaveErrorActionType, meta: { serverData } },
         },
     });
-};
-
-export const saveEventCallbackAction = (onSaveActionType: string, serverData: Object) =>
-    actionCreator(onSaveActionType)({ serverData });
