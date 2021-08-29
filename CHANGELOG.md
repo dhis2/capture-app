@@ -1,3 +1,10 @@
+# [1.45.0](https://github.com/dhis2/capture-app/compare/v1.44.3...v1.45.0) (2021-08-29)
+
+
+### Features
+
+* [DHIS2-11393] Add event - display form ([4d951a0](https://github.com/dhis2/capture-app/commit/4d951a0a024ef8591005dc7e0fd85316821fb0c2))
+
 ## [1.44.3](https://github.com/dhis2/capture-app/compare/v1.44.2...v1.44.3) (2021-08-25)
 
 
