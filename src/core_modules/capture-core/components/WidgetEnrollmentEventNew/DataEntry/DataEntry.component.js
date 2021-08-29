@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import { compose } from 'redux';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
@@ -18,7 +19,6 @@ import {
     withLabel,
     withFocusSaver,
     DateField,
-    TrueOnlyField,
     CoordinateField,
     PolygonField,
     withCalculateMessages,
@@ -235,46 +235,6 @@ const buildGeometrySettingsFn = () => ({
     }),
 });
 
-const buildCompleteFieldSettingsFn = () => {
-    const completeComponent =
-        withCalculateMessages(overrideMessagePropNames)(
-            withFocusSaver()(
-                withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(TrueOnlyField),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
-    const completeSettings = {
-        getComponent: () => completeComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
-            label: 'Complete event',
-            id: 'complete',
-        }),
-        getPropName: () => 'complete',
-        getValidatorContainers: () => [
-        ],
-        getMeta: () => ({
-            placement: placements.BOTTOM,
-            section: dataEntrySectionNames.STATUS,
-        }),
-        getPassOnFieldData: () => true,
-    };
-
-    return completeSettings;
-};
-
 const buildNotesSettingsFn = () => {
     const noteComponent =
         withCalculateMessages(overrideMessagePropNames)(
@@ -343,13 +303,14 @@ const dataEntryFilterProps = (props: Object) => {
     return passOnProps;
 };
 
-
-const CleanUpHOC = withCleanUp()(withFilterProps(dataEntryFilterProps)(DataEntryContainer));
-const AssigneeField = withDataEntryFieldIfApplicable(buildAssigneeSettingsFn())(CleanUpHOC);
-const CommentField = withDataEntryField(buildNotesSettingsFn())(AssigneeField);
-const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
-const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
+const WrappedDataEntry = compose(
+    withDataEntryField(buildReportDateSettingsFn()),
+    withDataEntryFieldIfApplicable(buildGeometrySettingsFn()),
+    withDataEntryField(buildNotesSettingsFn()),
+    withDataEntryFieldIfApplicable(buildAssigneeSettingsFn()),
+    withCleanUp(),
+    withFilterProps(dataEntryFilterProps),
+)(DataEntryContainer);
 
 type Props = {
     id: string,

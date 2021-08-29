@@ -1,6 +1,6 @@
 // @flow
 
-import { convertGeometryOut, convertStatusIn, convertStatusOut } from 'capture-core/components/DataEntries/converters';
+import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { getRulesActionsForEvent } from '../../../../rules/actionsCreator';
@@ -30,17 +30,6 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
         type: 'TEXT',
         validatorContainers: getNoteValidatorContainers(),
         clientIgnore: true,
-    },
-    {
-        id: 'relationship',
-        type: 'TEXT',
-        clientIgnore: true,
-    },
-    {
-        clientId: 'status',
-        dataEntryId: 'complete',
-        onConvertIn: convertStatusIn,
-        onConvertOut: convertStatusOut,
     },
     {
         id: 'assignee',
