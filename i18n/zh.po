@@ -851,6 +851,12 @@ msgstr "基于选择的项目工作"
 msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访APP"
 
+msgid "for"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "注册操作"
 

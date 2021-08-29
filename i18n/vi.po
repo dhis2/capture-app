@@ -876,6 +876,12 @@ msgstr "Để làm việc với chương trình đã chọn,"
 msgid "open the Tracker Capture app"
 msgstr "mở ứng dụng Tracker Capture"
 
+msgid "for"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 

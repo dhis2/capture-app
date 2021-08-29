@@ -849,6 +849,12 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "for"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 
