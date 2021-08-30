@@ -2,6 +2,7 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
+import { useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPage.types';
@@ -14,6 +15,7 @@ import {
     useResetOrgUnitId,
 } from '../../ScopeSelector';
 import { TopBarActions } from '../../TopBarActions';
+import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 const styles = ({ typography }) => ({
     container: {
@@ -28,9 +30,10 @@ const styles = ({ typography }) => ({
 const EnrollmentAddEventPagePain = ({ programStage, programId, orgUnitId, classes }) => {
     const { setProgramId } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
-
     const { resetProgramId } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
+    const isUserInteractionInProgress = useSelector(state => dataEntryHasChanges(state, 'singleEvent-addEvent'));
+
     return (
         <>
             <ScopeSelector
@@ -45,7 +48,7 @@ const EnrollmentAddEventPagePain = ({ programStage, programId, orgUnitId, classe
                     <TopBarActions
                         selectedProgramId={programId}
                         selectedOrgUnitId={orgUnitId}
-                        // isUserInteractionInProgress={blocked by DHIS2-11393 and DHIS2-11399}
+                        isUserInteractionInProgress={isUserInteractionInProgress}
                     />
                 </Grid>
             </ScopeSelector>

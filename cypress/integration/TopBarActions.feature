@@ -73,28 +73,35 @@ Feature: User uses the TopBarActions to navigate
 
     Scenario: Enrollment Event New page > The user searchs for a tei inside the same program
         Given you land on a enrollment page domain by having typed #/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
+        And the user see the following text: Clear selections
         When the user clicks the element containing the text: Search
         And the user clicks the element containing the text: Search for a person in WHO RMNCH Tracker
         Then the current url is /#/search?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy
 
     Scenario: Enrollment Event New page > You go to the search page without a program selected
         Given you land on a enrollment page domain by having typed #/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
+        And the user see the following text: Clear selections
         When the user clicks the element containing the text: Search
         And the user clicks the element containing the text: Search...
         Then the current url is /#/search?orgUnitId=DwpbWkiqjMy
 
     Scenario: Enrollment Event New page > You go to the new page without a program selected
         Given you land on a enrollment page domain by having typed #/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
+        And the user see the following text: Clear selections
         When the user clicks the element containing the text: New
         And the user clicks the element containing the text: New...
         Then the current url is /#/new?orgUnitId=DwpbWkiqjMy
 
     Scenario: Enrollment Event New page > You go to the new page inside the same program
         Given you land on a enrollment page domain by having typed #/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
+        And the user see the following text: Clear selections
         When the user clicks the element containing the text: New
         And the user clicks the element containing the text: New person in WHO RMNCH Tracker
         Then the current url is /#/new?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy
 
-    # TODO blocked by DHIS2-11393 && DHIS2-11399
-    # Scenario: Enrollment Event New page > When the user performs any actions in edit mood a popup warning message will appear.
-    #     Given you land on a enrollment page domain by having typed #enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
+    Scenario: Enrollment Event New page > When the user performs any actions after it interacts with the form a popup warning message will appear.
+        Given you land on a enrollment page domain by having typed #enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
+        And the user see the following text: Clear selections
+        When the user set the WHOMCH Gestational age at visit to 23
+        When the user clicks the element containing the text: Clear selections
+        Then the user sees the warning popup
