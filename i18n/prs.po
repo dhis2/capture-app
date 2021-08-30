@@ -846,7 +846,7 @@ msgid "open the Tracker Capture app"
 msgstr ""
 
 msgid "for"
-msgstr ""
+msgstr "برای"
 
 msgid "Save without completing"
 msgstr ""

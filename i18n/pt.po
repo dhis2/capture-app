@@ -850,7 +850,7 @@ msgid "open the Tracker Capture app"
 msgstr ""
 
 msgid "for"
-msgstr ""
+msgstr "Para"
 
 msgid "Save without completing"
 msgstr ""
