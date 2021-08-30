@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-13T06:15:54.116Z\n"
+"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -925,8 +925,8 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset"
-msgstr "复位"
+msgid "Reset list"
+msgstr ""
 
 msgid "Go to full {{ eventName }}"
 msgstr ""
@@ -941,7 +941,7 @@ msgid "Registering unit"
 msgstr "注册机构"
 
 msgid "Due date"
-msgstr ""
+msgstr "到期日"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

@@ -839,6 +839,12 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "for"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -916,7 +922,7 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset"
+msgid "Reset list"
 msgstr ""
 
 msgid "Go to full {{ eventName }}"
