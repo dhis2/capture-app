@@ -416,7 +416,7 @@ class DataEntryPlain extends Component<Props> {
         } = this.props;
         return (
             <div>
-                <div data-test="data-entry-container">
+                <div data-test="new-enrollment-event-form">
                     {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <WrappedDataEntry
                         id={id}
