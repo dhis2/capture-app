@@ -87,7 +87,6 @@ const SingleLockedSelectPlain =
   }: Props) => {
       const [selected, toggleSelected] = useState((Boolean(selectedValue)));
       const [openStartAgainWarning, setOpenStartAgainWarning] = useState(false);
-      const dontShowWarning = () => !isUserInteractionInProgress;
 
       const handleClose = () => {
           setOpenStartAgainWarning(false);
@@ -99,7 +98,7 @@ const SingleLockedSelectPlain =
       };
 
       const handleOnClear = () => {
-          if (dontShowWarning()) {
+          if (!isUserInteractionInProgress) {
               toggleSelected(false);
               onClear && onClear();
               return;
