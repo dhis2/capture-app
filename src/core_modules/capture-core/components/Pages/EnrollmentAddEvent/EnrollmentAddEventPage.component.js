@@ -2,9 +2,20 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
+import { useSelector } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPage.types';
 import { WidgetAddEvent } from '../../WidgetAddEvent';
+import {
+    ScopeSelector,
+    useSetProgramId,
+    useSetOrgUnitId,
+    useResetProgramId,
+    useResetOrgUnitId,
+} from '../../ScopeSelector';
+import { TopBarActions } from '../../TopBarActions';
+import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 const styles = ({ typography }) => ({
     container: {
@@ -16,25 +27,40 @@ const styles = ({ typography }) => ({
     },
 });
 
-const EnrollmentAddEventPagePain = ({
-    programStage,
-    classes,
-}) => (
-    <div
-        className={classes.container}
-        data-test="add-event-enrollment-page-content"
-    >
-        <div className={classes.title}>
-            {i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}
-        </div>
-        <div>
-            <WidgetAddEvent
-                programStage={programStage}
-            />
-        </div>
-    </div>
-);
+const EnrollmentAddEventPagePain = ({ programStage, programId, orgUnitId, classes }) => {
+    const { setProgramId } = useSetProgramId();
+    const { setOrgUnitId } = useSetOrgUnitId();
+    const { resetProgramId } = useResetProgramId();
+    const { resetOrgUnitId } = useResetOrgUnitId();
+    const isUserInteractionInProgress = useSelector(state => dataEntryHasChanges(state, 'singleEvent-addEvent'));
 
-export const EnrollmentAddEventPageComponent: ComponentType<
-    $Diff<Props, CssClasses>,
-> = withStyles(styles)(EnrollmentAddEventPagePain);
+    return (
+        <>
+            <ScopeSelector
+                selectedProgramId={programId}
+                selectedOrgUnitId={orgUnitId}
+                onSetProgramId={id => setProgramId(id)}
+                onSetOrgUnit={id => setOrgUnitId(id)}
+                onResetProgramId={() => resetProgramId()}
+                onResetOrgUnitId={() => resetOrgUnitId()}
+            >
+                <Grid item xs={12} sm={6} md={6} lg={2}>
+                    <TopBarActions
+                        selectedProgramId={programId}
+                        selectedOrgUnitId={orgUnitId}
+                        isUserInteractionInProgress={isUserInteractionInProgress}
+                    />
+                </Grid>
+            </ScopeSelector>
+            <div className={classes.container} data-test="add-event-enrollment-page-content">
+                <div className={classes.title}>{i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}</div>
+                <div>
+                    <WidgetAddEvent programStage={programStage} />
+                </div>
+            </div>
+        </>
+    );
+};
+
+export const EnrollmentAddEventPageComponent: ComponentType<$Diff<Props, CssClasses>> =
+    withStyles(styles)(EnrollmentAddEventPagePain);

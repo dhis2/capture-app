@@ -6,7 +6,7 @@ import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
 
 export const EnrollmentAddEventPage = () => {
-    const { programId, stageId } = useSelector(
+    const { programId, stageId, orgUnitId } = useSelector(
         ({
             router: {
                 location: { query },
@@ -14,6 +14,7 @@ export const EnrollmentAddEventPage = () => {
         }) => ({
             programId: query.programId,
             stageId: query.stageId,
+            orgUnitId: query.orgUnitId,
         }),
         shallowEqual,
     );
@@ -22,7 +23,5 @@ export const EnrollmentAddEventPage = () => {
     if (!programStage) {
         return <span>[program stage placeholder]</span>;
     }
-    return (
-        <EnrollmentAddEventPageComponent programStage={programStage} />
-    );
+    return <EnrollmentAddEventPageComponent programStage={programStage} programId={programId} orgUnitId={orgUnitId} />;
 };
