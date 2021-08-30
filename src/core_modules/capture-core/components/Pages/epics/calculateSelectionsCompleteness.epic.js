@@ -12,7 +12,7 @@ import { pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
 type CurrentSelectionsState = {
     programId?: ?string,
     orgUnitId?: ?string,
-    showassigned: boolean,
+    showaccesible: boolean,
     categories?: ?Object,
     categoryCheckInProgress?: ?boolean,
 };

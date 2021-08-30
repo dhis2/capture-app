@@ -3,6 +3,7 @@ import React, { useEffect, useMemo } from 'react';
 // $FlowFixMe
 import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { MainPageComponent } from './MainPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
@@ -33,11 +34,13 @@ const MainPageContainer = () => {
         currentSelectionsComplete,
         programId,
         orgUnitId,
+        categories,
     } = useSelector(
         ({ currentSelections }) => ({
             currentSelectionsComplete: currentSelections.complete,
             programId: currentSelections.programId,
             orgUnitId: currentSelections.orgUnitId,
+            categories: currentSelections.categories,
         }),
         shallowEqual,
     );
@@ -50,6 +53,17 @@ const MainPageContainer = () => {
         .push(`/?${urlArguments({ programId })}&all`);
 
     const MainPageStatus = useMemo(() => {
+        const selectedProgram = programId && programCollection.get(programId);
+        if (selectedProgram?.categoryCombination) {
+            if (!categories) return MainPageStatuses.SHOW_WORKING_LIST;
+            const programCategories = Array.from(selectedProgram.categoryCombination.categories.values());
+
+            if (programCategories.some(category => !categories || !categories[category.id])) {
+                return MainPageStatuses.WITHOUT_PROGRAM_CATEGORY_SELECTED;
+            }
+            return MainPageStatuses.SHOW_WORKING_LIST;
+        }
+
         if (currentSelectionsComplete || (programId && showAllAccessible)) {
             return MainPageStatuses.SHOW_WORKING_LIST;
         } else if (programId && !orgUnitId) {
@@ -57,7 +71,7 @@ const MainPageContainer = () => {
         }
         return MainPageStatuses.DEFAULT;
     },
-    [currentSelectionsComplete, orgUnitId, programId, showAllAccessible]);
+    [categories, currentSelectionsComplete, orgUnitId, programId, showAllAccessible]);
 
     return (
         <MainPageComponent
