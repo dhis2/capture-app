@@ -67,7 +67,12 @@ const CardListButton = (({ teiId, orgUnitId }) => {
         <Button
             small
             dataTest="view-dashboard-button"
-            onClick={() => navigateToTrackedEntityDashboard(teiId, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
+            onClick={() => navigateToTrackedEntityDashboard({
+                teiId,
+                orgUnitId,
+                scopeSearchParam,
+                currentUrl: `${pathname}${search}`,
+            })}
         >
             {i18n.t('View dashboard')}
         </Button>

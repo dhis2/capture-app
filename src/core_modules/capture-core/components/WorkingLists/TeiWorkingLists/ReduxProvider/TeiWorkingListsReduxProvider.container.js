@@ -21,6 +21,7 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
         onUpdateTemplate,
         onDeleteTemplate,
         onSetTemplateSharingSettings,
+        records,
         ...commonStateManagementProps
     } = useWorkingListsCommonStateManagement(storeId, TEI_WORKING_LISTS_TYPE, program);
     const dispatch = useDispatch();
@@ -33,13 +34,14 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
 
     const { pathname, search } = useLocation();
     const onSelectListRow = useCallback(({ id }) => {
-        navigateToTrackedEntityDashboard(
-            id,
+        navigateToTrackedEntityDashboard({
+            teiId: id,
             orgUnitId,
-            `program=${programId}`,
-            `${pathname}${search}`,
-        );
-    }, [orgUnitId, programId, pathname, search]);
+            scopeSearchParam: `program=${programId}`,
+            currentUrl: `${pathname}${search}`,
+            trackedEntityInstance: records[id],
+        });
+    }, [orgUnitId, programId, pathname, search, records]);
 
     return (
         <TeiWorkingListsSetup
@@ -47,6 +49,7 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
             onSelectListRow={onSelectListRow}
             onLoadTemplates={onLoadTemplates}
             program={program}
+            records={records}
             orgUnitId={orgUnitId}
         />
     );

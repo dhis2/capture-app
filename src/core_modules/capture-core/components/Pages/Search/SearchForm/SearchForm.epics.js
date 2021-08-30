@@ -38,7 +38,12 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam, curren
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId } } = searchResults[0];
 
-                navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, currentUrl);
+                navigateToTrackedEntityDashboard({
+                    teiId: id,
+                    orgUnitId,
+                    scopeSearchParam,
+                    currentUrl,
+                });
                 return empty();
             }
             return of(showEmptyResultsViewOnSearchPage());

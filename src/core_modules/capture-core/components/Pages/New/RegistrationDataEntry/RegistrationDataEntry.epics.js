@@ -113,12 +113,12 @@ export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputO
                 router: { location: { pathname, search } },
             } = store.value;
 
-            navigateToTrackedEntityDashboard(
-                reference,
+            navigateToTrackedEntityDashboard({
+                teiId: reference,
                 orgUnitId,
-                `${scopeTypes.TRACKED_ENTITY_TYPE.toLowerCase()}=${trackedEntityTypeId}`,
-                `${pathname}${search}`,
-            );
+                scopeSearchParam: `${scopeTypes.TRACKED_ENTITY_TYPE.toLowerCase()}=${trackedEntityTypeId}`,
+                currentUrl: `${pathname}${search}`,
+            });
             return empty();
         }),
     );
@@ -164,12 +164,12 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (a
                 router: { location: { pathname, search } },
             } = store.value;
 
-            navigateToTrackedEntityDashboard(
-                reference,
+            navigateToTrackedEntityDashboard({
+                teiId: reference,
                 orgUnitId,
-                `program=${programId}`,
-                `${pathname}${search}`,
-            );
+                scopeSearchParam: `program=${programId}`,
+                currentUrl: `${pathname}${search}`,
+            });
             return empty();
         }),
     );

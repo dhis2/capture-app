@@ -66,7 +66,7 @@ filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
     page,
     pageSize,
     ou,
-    ouMode: 'SELECTED',
+    ouMode: ou ? 'SELECTED' : 'ACCESSIBLE',
     program,
 });
 

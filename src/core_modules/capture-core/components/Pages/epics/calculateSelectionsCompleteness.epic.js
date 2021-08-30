@@ -12,6 +12,7 @@ import { pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
 type CurrentSelectionsState = {
     programId?: ?string,
     orgUnitId?: ?string,
+    showassigned: boolean,
     categories?: ?Object,
     categoryCheckInProgress?: ?boolean,
 };
@@ -41,6 +42,7 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
             lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,
+            crossPageActionTypes.UPDATE_SHOW_ACCESSIBLE_STATUS,
         ),
         filter(() => {
             const { pathname } = store.value.router.location;

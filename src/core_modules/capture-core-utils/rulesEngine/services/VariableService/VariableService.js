@@ -574,7 +574,7 @@ export class VariableService {
         const variables = {};
         variables.orgunit_code = this.buildVariable(
             // $FlowFixMe[prop-missing] automated comment
-            orgUnit.code,
+            orgUnit?.code,
             typeKeys.TEXT, {
                 variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
             },
