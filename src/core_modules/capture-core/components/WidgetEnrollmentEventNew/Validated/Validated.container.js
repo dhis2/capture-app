@@ -26,7 +26,7 @@ export const Validated = ({
     const itemId = 'newEvent';
 
     const { error, orgUnit } = useOrganisationUnit(orgUnitId);
-    const ready = useLifecycle(program, formFoundation, orgUnit, dataEntryId);
+    const ready = useLifecycle(program, formFoundation, orgUnit, dataEntryId, itemId);
 
     const dispatch = useDispatch();
     const handleSave = useCallback((

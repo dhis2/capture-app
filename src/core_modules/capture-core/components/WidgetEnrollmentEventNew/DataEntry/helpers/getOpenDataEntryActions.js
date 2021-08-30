@@ -8,10 +8,6 @@ import type { RenderFoundation, TrackerProgram } from '../../../../metaData';
 import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 
-const dataEntryId = 'enrollmentEvent'; // TODO: Get rid of!
-const itemId = 'addEvent';
-const formId = getDataEntryKey(dataEntryId, itemId);
-
 type DataEntryPropsToInclude = Array<Object>;
 
 const dataEntryPropsToInclude: DataEntryPropsToInclude = [
@@ -37,9 +33,9 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 ];
 
 export const getOpenDataEntryActions =
-    (program: TrackerProgram, foundation: RenderFoundation, orgUnit: Object) => {
+    (program: TrackerProgram, foundation: RenderFoundation, orgUnit: Object, dataEntryId: string, itemId: string) => {
         const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
-
+        const formId = getDataEntryKey(dataEntryId, itemId);
         const rulesActions = getRulesActionsForEvent(
             program,
             foundation,

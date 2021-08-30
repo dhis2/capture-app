@@ -11,6 +11,7 @@ export const useLifecycle = (
     formFoundation: RenderFoundation,
     orgUnit?: OrgUnit,
     dataEntryId: string,
+    itemId: string,
 ) => {
     const [ready, setReadyState] = useState(false);
     const dispatch = useDispatch();
@@ -18,10 +19,10 @@ export const useLifecycle = (
     useEffect(() => {
         if (orgUnit) {
             dispatch(batchActions([
-                ...getOpenDataEntryActions(program, formFoundation, orgUnit),
+                ...getOpenDataEntryActions(program, formFoundation, orgUnit, dataEntryId, itemId),
             ]));
         }
-    }, [dispatch, program, formFoundation, orgUnit]);
+    }, [dispatch, program, formFoundation, orgUnit, dataEntryId, itemId]);
 
     // temporary logic until we clean up the data from the redux store
     const readyTrigger = useSelector(({ dataEntries }) => dataEntries[dataEntryId]);
