@@ -1,6 +1,6 @@
 // @flow
 import type { ProgramStage, RenderFoundation, TrackerProgram } from '../../../metaData';
-import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
+import { typeof addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import type { OrgUnit, ExternalSaveHandler } from '../common.types';
 
 export type ContainerProps = {|
@@ -24,7 +24,7 @@ export type Props = {|
     ready: boolean,
     id: string,
     itemId: string,
-    onSave: (saveType: $Keys<typeof addEventSaveTypes>) => void,
+    onSave: (saveType: $Keys<addEventSaveTypes>) => void,
     onCancel: () => void,
     formRef: (formInstance: any) => void,
     dataEntryFieldRef: (instance: any, id: string) => void,
