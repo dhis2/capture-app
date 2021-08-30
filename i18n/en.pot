@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-30T13:36:30.930Z\n"
-"PO-Revision-Date: 2021-08-30T13:36:30.930Z\n"
+"POT-Creation-Date: 2021-08-27T08:45:38.480Z\n"
+"PO-Revision-Date: 2021-08-27T08:45:38.480Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -616,13 +616,13 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
-msgid "Enrollment{{escape}} New Event"
-msgstr ""
-
 msgid "stage"
 msgstr ""
 
 msgid "date of visit"
+msgstr ""
+
+msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"

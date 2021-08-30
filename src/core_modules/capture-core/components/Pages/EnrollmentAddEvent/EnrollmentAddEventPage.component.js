@@ -2,9 +2,23 @@
 import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
+import { useSelector } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPage.types';
 import { WidgetAddEvent } from '../../WidgetAddEvent';
+import {
+    ScopeSelector,
+    useSetOrgUnitId,
+    useResetProgramId,
+    useResetOrgUnitId,
+    useResetTeiId,
+    useResetEnrollmentId,
+    useResetStageId,
+    useResetEventId,
+} from '../../ScopeSelector';
+import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
+import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 const styles = ({ typography }) => ({
     container: {
@@ -18,23 +32,98 @@ const styles = ({ typography }) => ({
 
 const EnrollmentAddEventPagePain = ({
     programStage,
+    programId,
+    orgUnitId,
+    enrollmentId,
+    enrollmentsAsOptions,
+    trackedEntityName,
+    teiDisplayName,
     classes,
-}) => (
-    <div
-        className={classes.container}
-        data-test="add-event-enrollment-page-content"
-    >
-        <div className={classes.title}>
-            {i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}
-        </div>
-        <div>
-            <WidgetAddEvent
-                programStage={programStage}
-            />
-        </div>
-    </div>
-);
+}) => {
+    const { setOrgUnitId } = useSetOrgUnitId();
+    const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
+    const { resetOrgUnitId } = useResetOrgUnitId();
+    const { resetEnrollmentId } = useResetEnrollmentId();
+    const { resetTeiId } = useResetTeiId();
+    const { resetStageId } = useResetStageId();
+    const { resetEventId } = useResetEventId();
+    const isUserInteractionInProgress = useSelector(state => dataEntryHasChanges(state, 'singleEvent-addEvent'));
 
-export const EnrollmentAddEventPageComponent: ComponentType<
-    $Diff<Props, CssClasses>,
-> = withStyles(styles)(EnrollmentAddEventPagePain);
+    return (
+        <>
+            <ScopeSelector
+                selectedProgramId={programId}
+                selectedOrgUnitId={orgUnitId}
+                onSetOrgUnit={id => setOrgUnitId(id)}
+                onResetProgramId={() => resetProgramIdAndEnrollmentContext('enrollment')}
+                onResetOrgUnitId={() => resetOrgUnitId()}
+                isUserInteractionInProgress={isUserInteractionInProgress}
+            >
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready
+                        onClear={() => resetTeiId('/')}
+                        options={[
+                            {
+                                label: teiDisplayName,
+                                value: 'alwaysPreselected',
+                            },
+                        ]}
+                        selectedValue="alwaysPreselected"
+                        title={trackedEntityName}
+                        isUserInteractionInProgress={isUserInteractionInProgress}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready
+                        onClear={() => resetEnrollmentId('enrollment')}
+                        options={enrollmentsAsOptions}
+                        selectedValue={enrollmentId}
+                        title={i18n.t('Enrollment')}
+                        isUserInteractionInProgress={isUserInteractionInProgress}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready
+                        onClear={() => resetStageId('enrollment')}
+                        options={[
+                            {
+                                label: programStage?.name || '',
+                                value: 'alwaysPreselected',
+                            },
+                        ]}
+                        selectedValue="alwaysPreselected"
+                        title={i18n.t('stage')}
+                        isUserInteractionInProgress={isUserInteractionInProgress}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready
+                        onClear={() => resetEventId('enrollment')}
+                        options={[
+                            {
+                                label: '-',
+                                value: 'alwaysPreselected',
+                            },
+                        ]}
+                        selectedValue="alwaysPreselected"
+                        title={i18n.t('date of visit')}
+                        isUserInteractionInProgress={isUserInteractionInProgress}
+                    />
+                </Grid>
+            </ScopeSelector>
+            <div className={classes.container} data-test="add-event-enrollment-page-content">
+                <div className={classes.title}>{i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}</div>
+                <div>
+                    <WidgetAddEvent programStage={programStage} />
+                </div>
+            </div>
+        </>
+    );
+};
+
+export const EnrollmentAddEventPageComponent: ComponentType<$Diff<Props, CssClasses>> =
+    withStyles(styles)(EnrollmentAddEventPagePain);
