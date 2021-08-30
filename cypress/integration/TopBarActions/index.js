@@ -16,3 +16,6 @@ Then('the user sees the warning popup', () => {
     cy.contains('Unsaved changes');
     cy.contains('Leaving this page will discard the changes you made to this event.');
 });
+Given(/^you land on the enrollment page by having typed the (.*)$/, (url) => {
+    cy.visit(url);
+});
