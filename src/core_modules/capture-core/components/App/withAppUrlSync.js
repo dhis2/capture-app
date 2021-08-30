@@ -25,6 +25,7 @@ export const pageKeys = {
     VIEW_EVENT: 'viewEvent',
     SEARCH: 'search',
     NEW: 'new',
+    ENROLLMENT_EVENT_NEW: 'enrollmentEventNew',
     ENROLLMENT_EVENT: 'enrollmentEventEdit',
 };
 
@@ -53,6 +54,7 @@ const updaterForPages = {
     [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.NEW]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
+    [pageKeys.ENROLLMENT_EVENT_NEW]: updateSelectionsFromUrl,
     [pageKeys.ENROLLMENT_EVENT]: viewEventFromUrl,
 };
 
