@@ -45,6 +45,7 @@ import {
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
+    saveEditedEventSucceededEpic,
 } from 'capture-core/components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.epics';
 
 import {
@@ -293,6 +294,7 @@ export const epics = combineEpics(
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
+    saveEditedEventSucceededEpic,
     openNewRelationshipRegisterTeiEpic,
     loadSearchGroupDuplicatesForReviewEpic,
     teiForNewEventRelationshipSavedEpic,

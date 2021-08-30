@@ -677,3 +677,78 @@ describe('Event rules engine', () => {
         });
     });
 });
+
+describe('Event rules engine with data elements source from previous events', () => {
+    const dataElementsInProgram = { M4HEOoEFTAT: { id: 'M4HEOoEFTAT', valueType: 'NUMBER' }, cfWdmSsAutR: { id: 'cfWdmSsAutR', valueType: 'LONG_TEXT' }, oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' } };
+    const programRules = [{ id: 'COWZsHgOS14', condition: '#{previousSystolicBloodPressure} > 10', programId: 'WSGAb5XwJ3Y', programRuleActions: [{ id: 'vAOqJbWXAQL', content: 'There needs to be a comment on why the blood pressure is high', dataElementId: 'cfWdmSsAutR', programRuleActionType: 'HIDEFIELD' }] }];
+    const programRulesVariables = [{ dataElementId: 'cfWdmSsAutR', displayName: 'systolicBloodPressureComment', id: 'RdteyhDklSt', programId: 'WSGAb5XwJ3Y', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { programRuleVariableSourceType: 'DATAELEMENT_PREVIOUS_EVENT', dataElementId: 'M4HEOoEFTAT', displayName: 'previousSystolicBloodPressure', id: 'gOjmVaNKbXR', programId: 'WSGAb5XwJ3Y', programStageId: 'edqlbukwRfQ', useNameForOptionSet: true }];
+    const orgUnit = { id: 'OI0BQUurVFS', name: 'Bumban MCHP' };
+    const optionSet = {};
+    const currentEvent = { oZg33kd9taw: 'Male', eventId: 'jXWTkJgb03b' };
+
+    describe.each([
+        [
+            { M4HEOoEFTAT: 9 },
+            [],
+        ],
+        [
+            { M4HEOoEFTAT: 12 },
+            [{ id: 'cfWdmSsAutR', type: 'HIDEFIELD' }],
+        ],
+    ])('where a field is hidden based on the previous values', (events, expected) => {
+        test(`and given value(s): ${JSON.stringify(events)}`, () => {
+            // given
+            const allEvents = { all: [events, currentEvent], byStage: {} };
+
+            // when
+            const rulesEffects = rulesEngine.programRuleEffectsForEvent(
+                { programRulesVariables, programRules },
+                { currentEvent, allEvents },
+                dataElementsInProgram,
+                orgUnit,
+                optionSet,
+            );
+
+            // then
+            expect(rulesEffects).toEqual(expected);
+        });
+    });
+});
+
+describe('Event rules engine with data elements source from the newest event program stage', () => {
+    const dataElementsInProgram = { cH37ymMQ5QW: { id: 'cH37ymMQ5QW', valueType: 'LONG_TEXT', optionSetId: undefined }, V5PR8Kw8ZnC: { id: 'V5PR8Kw8ZnC', valueType: 'TEXT', optionSetId: 'C3F7ypzeLiS' } };
+    const programRules = [{ condition: "d2:hasValue('currentProgranancyOutcome')", id: 'f9lFZgtArTG', programId: 'WSGAb5XwJ3Y', programRuleActions: [{ id: 'fevFGQ1U2Z7', programRuleActionType: 'HIDEFIELD', dataElementId: 'cH37ymMQ5QW' }] }];
+    const programRulesVariables = [{ dataElementId: 'V5PR8Kw8ZnC', displayName: 'currentProgranancyOutcome', id: 'dVU6XcAVtpw', programId: 'WSGAb5XwJ3Y', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE', programStageId: 'PFDfvmGpsR3', useNameForOptionSet: true }, { dataElementId: 'cH37ymMQ5QW', displayName: 'pregnancyOutcomeComment', id: 'XvsfzjozNzV', programId: 'WSGAb5XwJ3Y', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', programStageId: 'PFDfvmGpsR3', useNameForOptionSet: true }];
+    const orgUnit = { id: 'OI0BQUurVFS', name: 'Bumban MCHP' };
+    const optionSet = { C3F7ypzeLiS: { displayName: 'Pregnancy outcome', id: 'C3F7ypzeLiS', options: [{ id: 'PPd9Ch1kJhG', displayName: 'Live birth', code: '1' }, { id: 'gQuVrCDl0zI', displayName: 'Stillbirth', code: '0' }, { id: 'Vh0ZLdC5dWK', displayName: 'Termination of pregnancy', code: '2' }] } };
+
+    describe.each([
+        [
+            { V5PR8Kw8ZnC: '2' },
+            { PFDfvmGpsR3: [{ eventId: 'azEw8F5toaM', V5PR8Kw8ZnC: null }] },
+            [],
+        ],
+        [
+            { V5PR8Kw8ZnC: null },
+            { PFDfvmGpsR3: [{ eventId: 'azEw8F5toaM', V5PR8Kw8ZnC: '2' }] },
+            [{ id: 'cH37ymMQ5QW', type: 'HIDEFIELD' }],
+        ],
+    ])('where a field is hidden based on the newest values in the program stage', (events, byStage, expected) => {
+        test(`and given value(s): ${JSON.stringify(events)}`, () => {
+            // given
+            const allEvents = { all: [events], byStage };
+
+            // when
+            const rulesEffects = rulesEngine.programRuleEffectsForEvent(
+                { programRulesVariables, programRules },
+                { allEvents },
+                dataElementsInProgram,
+                orgUnit,
+                optionSet,
+            );
+
+            // then
+            expect(rulesEffects).toEqual(expected);
+        });
+    });
+});

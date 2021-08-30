@@ -3,7 +3,7 @@ import React, { useState, useMemo, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { EventWorkingListsRowMenuSetup } from '../RowMenuSetup';
 import { DownloadDialog } from './DownloadDialog';
-import type { CustomMenuContents } from '../../WorkingLists';
+import type { CustomMenuContents } from '../../WorkingListsBase';
 import type { Props } from './EventWorkingListsViewMenuSetup.types';
 
 export const EventWorkingListsViewMenuSetup = ({ downloadRequest, program, programStageId, ...passOnProps }: Props) => {

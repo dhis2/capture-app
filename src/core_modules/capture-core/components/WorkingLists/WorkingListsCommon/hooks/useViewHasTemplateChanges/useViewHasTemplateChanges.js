@@ -1,6 +1,6 @@
 // @flow
 import { useMemo } from 'react';
-import { areFiltersEqual } from '../../../WorkingLists';
+import { areFiltersEqual } from '../../../WorkingListsBase';
 import type { Input, InitialViewConfigComputed, CurrentViewConfig } from './useViewHasTemplateChanges.types';
 
 const isCurrentViewModified = ({

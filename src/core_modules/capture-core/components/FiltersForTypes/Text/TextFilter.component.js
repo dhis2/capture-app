@@ -33,12 +33,17 @@ export class TextFilter extends Component<Props> implements UpdatableFilterConte
         this.props.onCommitValue(value);
     }
 
+    handleChange = (value: string) => {
+        this.props.onCommitValue(value);
+    }
+
     render() {
         const { value } = this.props;
         return (
             /* $FlowSuppress: Flow not working 100% with HOCs */
             // $FlowFixMe[prop-missing] automated comment
             <Input
+                onChange={this.handleChange}
                 onBlur={this.handleBlur}
                 onEnterKey={this.handleEnterKey}
                 value={value}

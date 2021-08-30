@@ -7,7 +7,7 @@ import type {
 } from '../../../types';
 import type {
     OptionSetFilterData,
-} from '../../../../WorkingLists';
+} from '../../../../WorkingListsBase';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
 

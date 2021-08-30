@@ -5,16 +5,16 @@
 # ericbp <ericbarredap@gmail.com>, 2021
 # Alison Andrade <aandrade@ippfwhr.org>, 2021
 # drprabhjot, 2021
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Marta Vila <marta@dhis2.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Marta Vila <marta@dhis2.org>, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -494,8 +494,11 @@ msgstr "Columnas para mostrar en la tabla"
 msgid "Column"
 msgstr "Columna"
 
-msgid "Apply"
-msgstr "Aplicar"
+msgid "Update"
+msgstr "Actualizar"
+
+msgid "Reset filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} a {{toDate}}"
@@ -967,6 +970,9 @@ msgstr "Error"
 msgid "Warning"
 msgstr "Advertencia"
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 "No se pudo cargar el widget de perfil. Por favor, inténtelo de nuevo más "
@@ -978,8 +984,8 @@ msgstr "Perfil de la persona"
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset"
-msgstr "Reajustar"
+msgid "Reset list"
+msgstr ""
 
 msgid "Go to full {{ eventName }}"
 msgstr ""
@@ -992,6 +998,9 @@ msgstr "Fecha de reporte"
 
 msgid "Registering unit"
 msgstr "Unidad de registro"
+
+msgid "Due date"
+msgstr "Fecha de vencimiento"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

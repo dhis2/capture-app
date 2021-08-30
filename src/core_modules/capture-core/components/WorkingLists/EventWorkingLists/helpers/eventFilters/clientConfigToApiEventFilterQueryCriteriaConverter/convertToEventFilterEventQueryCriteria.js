@@ -13,7 +13,7 @@ import {
     type BooleanFilterData,
     type TextFilterData,
     type NumericFilterData,
-} from '../../../../WorkingLists';
+} from '../../../../WorkingListsBase';
 import type {
     ApiDataFilterNumeric,
     ApiDataFilterText,

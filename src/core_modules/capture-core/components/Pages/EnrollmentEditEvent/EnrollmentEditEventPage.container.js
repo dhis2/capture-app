@@ -3,6 +3,7 @@ import React from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { useEnrollment } from '../common/EnrollmentOverviewDomain/useEnrollment';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode } from './EnrollmentEditEventPage.const';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
@@ -41,16 +42,17 @@ export const EnrollmentEditEventPage = () => {
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDelete = () => {
-        history.push(
-            `/enrollment?${urlArguments({ orgUnitId, programId, teiId })}`,
-        );
+        history.push(`/enrollment?${urlArguments({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
     };
+    const onGoBack = () => history.push(`/enrollment?${urlArguments({ orgUnitId, programId, teiId, enrollmentId })}`);
+    useEnrollment(teiId);
 
     return (
         <EnrollmentEditEventPageComponent
             mode={currentPageMode}
             programStage={programStage}
+            onGoBack={onGoBack}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
             teiId={teiId}

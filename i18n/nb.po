@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2021
+# Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -485,8 +485,11 @@ msgstr "Kolonner som skal vises i tabellen"
 msgid "Column"
 msgstr "Kolonne"
 
-msgid "Apply"
-msgstr "Bruk"
+msgid "Update"
+msgstr "Oppdater"
+
+msgid "Reset filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} til {{toDate}}"
@@ -944,6 +947,9 @@ msgstr "Feil"
 msgid "Warning"
 msgstr "Advarsel"
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -953,8 +959,8 @@ msgstr "Personprofil"
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset"
-msgstr "Resett"
+msgid "Reset list"
+msgstr ""
 
 msgid "Go to full {{ eventName }}"
 msgstr ""
@@ -967,6 +973,9 @@ msgstr "Rapporteringsdato"
 
 msgid "Registering unit"
 msgstr "Registreringsenhet"
+
+msgid "Due date"
+msgstr "Forfallsdato"
 
 msgid "{{ totalEvents }} events"
 msgstr ""
