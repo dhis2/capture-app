@@ -6,7 +6,7 @@ import { spacersNum } from '@dhis2/ui';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
-import { pageMode } from './EnrollmentEditEventPage.const';
+import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
 import { WidgetEventEdit } from '../../WidgetEventEdit/';
 import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
 import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
@@ -24,7 +24,6 @@ import {
     useResetStageId,
     useResetEventId,
 } from '../../ScopeSelector';
-
 import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 
 const styles = ({ typography }) => ({
@@ -70,6 +69,7 @@ const EnrollmentEditEventPagePain = ({
     onGoBack,
     orgUnitId,
     eventDate,
+    pageStatus,
 }: PlainProps) => {
     const { setOrgUnitId } = useSetOrgUnitId();
 
@@ -93,7 +93,7 @@ const EnrollmentEditEventPagePain = ({
             >
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                     <SingleLockedSelect
-                        ready
+                        ready={pageStatus !== pageStatuses.MISSING_DATA}
                         onClear={() => resetTeiId('/')}
                         options={[
                             {
@@ -108,7 +108,7 @@ const EnrollmentEditEventPagePain = ({
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                     <SingleLockedSelect
-                        ready
+                        ready={pageStatus !== pageStatuses.MISSING_DATA}
                         onClear={() => resetEnrollmentId('enrollment')}
                         options={enrollmentsAsOptions}
                         selectedValue={enrollmentId}
@@ -118,7 +118,7 @@ const EnrollmentEditEventPagePain = ({
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                     <SingleLockedSelect
-                        ready
+                        ready={pageStatus !== pageStatuses.MISSING_DATA}
                         onClear={() => resetStageId('enrollment')}
                         options={[
                             {
@@ -133,7 +133,7 @@ const EnrollmentEditEventPagePain = ({
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                     <SingleLockedSelect
-                        ready
+                        ready={pageStatus !== pageStatuses.MISSING_DATA}
                         onClear={() => resetEventId('enrollment')}
                         options={[
                             {
@@ -155,10 +155,11 @@ const EnrollmentEditEventPagePain = ({
                 </div>
                 <div className={classes.columns}>
                     <div className={classes.leftColumn}>
-                        {programStage ? (
+                        {pageStatus === pageStatuses.DEFAULT && programStage && (
                             <WidgetEventEdit programStage={programStage} onGoBack={onGoBack} />
-                        ) : (
-                            <span>{i18n.t('We could not find the stage in the program')}</span>
+                        )}
+                        {pageStatus === pageStatuses.MISSING_DATA && (
+                            <span>{i18n.t('The enrollment event data could not be found')}</span>
                         )}
                     </div>
                     <div className={classes.rightColumn}>

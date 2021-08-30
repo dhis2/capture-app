@@ -1,12 +1,12 @@
 // @flow
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useEnrollment } from '../common/EnrollmentOverviewDomain/useEnrollment';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
-import { pageMode } from './EnrollmentEditEventPage.const';
+import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
@@ -18,6 +18,7 @@ import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 
 export const EnrollmentEditEventPage = () => {
+    const [pageStatus, setPageStatus] = useState(pageStatuses.DEFAULT);
     const history = useHistory();
     const dispatch = useDispatch();
     const { programId, stageId, teiId, enrollmentId, orgUnitId, eventId } = useSelector(
@@ -49,16 +50,21 @@ export const EnrollmentEditEventPage = () => {
     const onGoBack = () => history.push(`/enrollment?${urlArguments({ orgUnitId, programId, teiId, enrollmentId })}`);
     const enrollmentSite = useEnrollment(teiId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
-    const { trackedEntityName } = getScopeInfo(enrollmentSite.trackedEntityType);
-    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite], programId);
+    const { trackedEntityName } = getScopeInfo(enrollmentSite?.trackedEntityType);
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDataConvertValue = convertValue(event?.eventDate, dataElementTypes.DATETIME);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
-
+    useEffect(() => {
+        enrollmentSite && teiDisplayName && trackedEntityName && programStage && event
+            ? setPageStatus(pageStatuses.DEFAULT)
+            : setPageStatus(pageStatuses.MISSING_DATA);
+    }, [enrollmentSite, teiDisplayName, trackedEntityName, programStage, event]);
 
     return (
         <EnrollmentEditEventPageComponent
             mode={currentPageMode}
+            pageStatus={pageStatus}
             programStage={programStage}
             onGoBack={onGoBack}
             widgetEffects={outputEffects}
