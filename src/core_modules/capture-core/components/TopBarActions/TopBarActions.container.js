@@ -30,55 +30,54 @@ export const TopBarActions = ({
     const dispatch = useDispatch();
     const { reset } = useReset();
     const { setOrgUnitId } = useSetOrgUnitId();
-    const dontShowWarning = () => !isUserInteractionInProgress;
 
     const handleClose = () => {
         setOpenStartAgainWarning(false);
     };
 
     const handleOpenStartAgainWarning = () => {
-        if (dontShowWarning()) {
+        if (isUserInteractionInProgress) {
+            setOpenStartAgainWarning(true);
+        } else {
             dispatch(resetAllCategoryOptionsFromScopeSelector());
             reset();
-            return;
         }
-        setOpenStartAgainWarning(true);
     };
 
     const openNewRegistrationPage = () => {
-        if (dontShowWarning()) {
+        if (isUserInteractionInProgress) {
+            setOpenStartAgainWarning(true);
+        } else {
             dispatch(openNewRegistrationPageFromScopeSelector());
-            return;
         }
-        setOpenStartAgainWarning(true);
     };
 
     const handleOpenNewRegistrationPageWithoutProgramId = () => {
-        if (dontShowWarning()) {
+        if (isUserInteractionInProgress) {
+            setOpenStartAgainWarning(true);
+        } else {
             const actions = [resetProgramIdBase(), openNewRegistrationPageFromScopeSelector()];
             dispatch(resetProgramIdBatchAction(actions));
             setOrgUnitId(selectedOrgUnitId, 'new', false);
-            return;
         }
-        setOpenStartAgainWarning(true);
     };
 
     const handleOpenSearchPage = () => {
-        if (dontShowWarning()) {
+        if (isUserInteractionInProgress) {
+            setOpenStartAgainWarning(true);
+        } else {
             dispatch(openSearchPageFromScopeSelector());
-            return;
         }
-        setOpenStartAgainWarning(true);
     };
 
     const handleOpenSearchPageWithoutProgramId = () => {
-        if (dontShowWarning()) {
+        if (isUserInteractionInProgress) {
+            setOpenStartAgainWarning(true);
+        } else {
             const actions = [resetProgramIdBase(), openSearchPageFromScopeSelector(), ...customActionsOnProgramIdReset];
             dispatch(resetProgramIdBatchAction(actions));
             setOrgUnitId(selectedOrgUnitId, 'search', false);
-            return;
         }
-        setOpenStartAgainWarning(true);
     };
 
     const handleAcceptStartAgain = () => {
