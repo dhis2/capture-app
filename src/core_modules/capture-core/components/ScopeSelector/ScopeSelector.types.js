@@ -20,14 +20,9 @@ export type PropsFromRedux = $ReadOnly<{|
 |}>
 
 export type DispatchersFromRedux = $ReadOnly<{|
-  onOpenNewEventPage: () => void,
-  onOpenNewRegistrationPageWithoutProgramId: Function,
-  onOpenSearchPage: () => void,
-  onOpenSearchPageWithoutProgramId: () => void,
   onSetCategoryOption: (categoryId: string, categoryOptionId: string) => void,
   onResetCategoryOption: (categoryId: string) => void,
   onResetAllCategoryOptions: () => void,
-  onStartAgain: () => void,
 |}>
 
 
@@ -42,10 +37,8 @@ export type Props = {|
 
 
 export type State = {|
-  openStartAgainWarning: boolean;
   openOrgUnitWarning: boolean;
   openProgramWarning: ?Object;
   openCatComboWarning: boolean;
   categoryIdToReset: string;
-  openNewEventWarning: boolean;
 |};
