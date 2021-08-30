@@ -1,3 +1,31 @@
+# [1.45.0](https://github.com/dhis2/capture-app/compare/v1.44.3...v1.45.0) (2021-08-29)
+
+
+### Features
+
+* [DHIS2-11393] Add event - display form ([4d951a0](https://github.com/dhis2/capture-app/commit/4d951a0a024ef8591005dc7e0fd85316821fb0c2))
+
+## [1.44.3](https://github.com/dhis2/capture-app/compare/v1.44.2...v1.44.3) (2021-08-25)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([11e2f7d](https://github.com/dhis2/capture-app/commit/11e2f7d8bf4a1f62664b39a9243e0c36124ac426))
+
+## [1.44.2](https://github.com/dhis2/capture-app/compare/v1.44.1...v1.44.2) (2021-08-24)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([b6d34c8](https://github.com/dhis2/capture-app/commit/b6d34c890519cbc1cf6286f51a76283880792c8e))
+
+## [1.44.1](https://github.com/dhis2/capture-app/compare/v1.44.0...v1.44.1) (2021-08-23)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([3c0c860](https://github.com/dhis2/capture-app/commit/3c0c860d04b6b1fbd057cd5350d0d77565f0d03a))
+
 # [1.44.0](https://github.com/dhis2/capture-app/compare/v1.43.2...v1.44.0) (2021-08-20)
 
 
