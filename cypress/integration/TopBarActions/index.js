@@ -4,7 +4,7 @@ beforeEach(() => {
     cy.loginThroughForm();
 });
 
-Given(/^you land on a enrollment page domain by having typed (.*)$/, url => {
+Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.visit(url);
 });
 
@@ -18,5 +18,7 @@ Then('the user sees the warning popup', () => {
 });
 
 When(/^the user set the WHOMCH Gestational age at visit to (.*)/, score =>
-    cy.get('[data-test="add-event-form"]').find('[data-test="capture-ui-input"]').eq(1).clear().type(score).blur(),
+    cy.get('[data-test="add-event-form"]').find('[data-test="capture-ui-input"]').eq(1).clear()
+        .type(score)
+        .blur(),
 );
