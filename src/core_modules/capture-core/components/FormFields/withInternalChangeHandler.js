@@ -34,6 +34,7 @@ export const withInternalChangeHandler = () =>
                 this.setState({
                     value,
                 });
+                this.props.onChange && this.props.onChange(value);
             }
 
             render() {

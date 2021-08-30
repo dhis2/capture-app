@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
@@ -32,6 +31,11 @@ const styles = (theme: Theme) => ({
     },
     keyValuePairKey: {
         flexGrow: 1,
+        margin: 0,
+    },
+    keyValue: {
+        margin: 0,
+        fontSize: '0.875rem',
     },
     card: {
         padding: theme.typography.pxToRem(10),
@@ -51,9 +55,7 @@ const getFeedbackOutput = () =>
                             className={classes.listItem}
                             button={false}
                         >
-                            <Typography variant="body1">
-                                {item.message}
-                            </Typography>
+                            <p className={classes.keyValuePairKey}> {item.message} </p>
                         </ListItem>
                     ),
                     )}
@@ -64,13 +66,8 @@ const getFeedbackOutput = () =>
                             className={classes.listItem}
                             button={false}
                         >
-                            <Typography variant="body1" className={classes.keyValuePairKey}>
-                                {item.key}
-                            </Typography>
-                            <Typography variant="body2">
-                                {item.value}
-                            </Typography>
-
+                            <p className={classes.keyValuePairKey}> {item.key} </p>
+                            <p className={classes.keyValue}> {item.value} </p>
                         </ListItem>
                     ),
                     )}

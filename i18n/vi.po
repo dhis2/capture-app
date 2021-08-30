@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2021
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -483,8 +483,11 @@ msgstr "Cột hiển thị trong bảng"
 msgid "Column"
 msgstr "Cột"
 
-msgid "Apply"
-msgstr "Áp dụng"
+msgid "Update"
+msgstr "Cập nhật"
+
+msgid "Reset filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} đến {{toDate}}"
@@ -938,6 +941,9 @@ msgstr "Lỗi"
 msgid "Warning"
 msgstr "Cảnh báo"
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -947,8 +953,8 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset"
-msgstr "Phục hồi"
+msgid "Reset list"
+msgstr ""
 
 msgid "Go to full {{ eventName }}"
 msgstr ""
@@ -961,6 +967,9 @@ msgstr "Ngày báo cáo"
 
 msgid "Registering unit"
 msgstr "Đơn Vị đăng ký"
+
+msgid "Due date"
+msgstr "Ngày đến hạn"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

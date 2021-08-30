@@ -6,6 +6,7 @@ import type { BooleanFilterData } from './types';
 type Props = {
     filter: ?BooleanFilterData,
     filterTypeRef: Function,
+    handleCommitValue: () => void,
 };
 
 type State = {
@@ -34,6 +35,7 @@ export class BooleanFilterManager extends React.Component<Props, State> {
         this.setState({
             value,
         });
+        this.props.handleCommitValue && this.props.handleCommitValue();
     }
 
     render() {

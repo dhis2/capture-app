@@ -22,7 +22,7 @@ import type {
     StickyFilters,
     UnloadingContext,
     UpdateFilter,
-} from '../../WorkingLists';
+} from '../../WorkingListsBase';
 import type {
     CustomColumnOrder,
     RecordsOrder,

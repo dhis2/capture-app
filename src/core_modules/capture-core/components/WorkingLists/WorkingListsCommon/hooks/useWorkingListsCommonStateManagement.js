@@ -41,7 +41,7 @@ import type {
     SharingSettings,
     Sort,
     UpdateFilter,
-} from '../../WorkingLists';
+} from '../../WorkingListsBase';
 import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '..';
 
 const useTemplates = (

@@ -11,5 +11,6 @@ export type PlainProps = {|
     programId: string,
     mode: string,
     onDelete: () => void,
+    onGoBack: () => void,
     ...CssClasses,
 |};

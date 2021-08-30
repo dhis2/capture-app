@@ -6,7 +6,7 @@ import type {
     UpdateTemplate,
     DeleteTemplate,
     WorkingListTemplates,
-} from '../../WorkingLists';
+} from '../../WorkingListsBase';
 import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { EventWorkingListsTemplates } from '../types';
 import type { EventWorkingListsDataSourceSetupOutputProps } from '../DataSourceSetup';
