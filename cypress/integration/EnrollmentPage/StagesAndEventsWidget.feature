@@ -53,3 +53,9 @@ Feature: User interacts with Stages and Events Widget
     Scenario: User can not go to Add new page if stage is not repeatable and there is event in the stage
         Given you open the enrollment page by typing #enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8
         Then you should see the disabled button New Birth event
+        Then you should navigate to Add new page #/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
+
+    Scenario: User can go to Add new page by clicking New event in stage even if there is no event
+        Given you open the enrollment page which has multiples events and stages
+        When you click New Care at birth event
+        Then you should navigate to Add new page #/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=PFDfvmGpsR3

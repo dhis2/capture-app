@@ -885,6 +885,12 @@ msgstr "Tanlangan dastur bilan ishlash uchun,"
 msgid "open the Tracker Capture app"
 msgstr "Kuzatuv-Nazorat dasturini oching"
 
+msgid "for"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 
