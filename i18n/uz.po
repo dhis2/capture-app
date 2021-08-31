@@ -893,6 +893,12 @@ msgstr "Танланган дастур билан ишлаш учун,"
 msgid "open the Tracker Capture app"
 msgstr "Кузатув-Назорат дастурини очинг"
 
+msgid "for"
+msgstr "учун"
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 

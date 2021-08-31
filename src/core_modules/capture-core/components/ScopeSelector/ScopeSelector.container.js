@@ -6,14 +6,11 @@ import {
     setCategoryOptionFromScopeSelector,
     resetCategoryOptionFromScopeSelector,
     resetAllCategoryOptionsFromScopeSelector,
-    openNewRegistrationPageFromScopeSelector,
-    openSearchPageFromScopeSelector,
     resetProgramIdBatchAction,
     resetOrgUnitIdBatchAction,
 } from './ScopeSelector.actions';
-import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import type { OwnProps } from './ScopeSelector.types';
-import { useReset, useResetProgramId, useOrganizationUnit } from './hooks';
+import { useOrganizationUnit } from './hooks';
 
 
 const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName) => {
@@ -39,8 +36,6 @@ export const ScopeSelector: ComponentType<OwnProps> =
       children,
   }) => {
       const dispatch = useDispatch();
-      const { reset } = useReset();
-      const { resetProgramId } = useResetProgramId();
       const { refetch: refetchOrganisationUnit, displayName } = useOrganizationUnit();
       const [selectedOrgUnit, setSelectedOrgUnit] = useState({ name: displayName, id: selectedOrgUnitId });
 
@@ -80,47 +75,6 @@ export const ScopeSelector: ComponentType<OwnProps> =
           },
           [dispatch]);
 
-      const dispatchOnOpenNewEventPage = useCallback(
-          () => {
-              dispatch(openNewRegistrationPageFromScopeSelector());
-          },
-          [dispatch]);
-
-      const dispatchOnOpenNewRegistrationPageWithoutProgramId = useCallback(
-          () => {
-              const actions = [
-                  resetProgramIdBase(),
-                  openNewRegistrationPageFromScopeSelector(),
-              ];
-              dispatch(resetProgramIdBatchAction(actions));
-              resetProgramId('new');
-          },
-          [dispatch, resetProgramId]);
-
-      const dispatchOnOpenSearchPage = useCallback(
-          () => {
-              dispatch(openSearchPageFromScopeSelector());
-          },
-          [dispatch]);
-
-      const dispatchOnOpenSearchPageWithoutProgramId = useCallback(
-          () => {
-              const actions = [
-                  resetProgramIdBase(),
-                  openSearchPageFromScopeSelector(),
-                  ...customActionsOnProgramIdReset,
-              ];
-              dispatch(resetProgramIdBatchAction(actions));
-              resetProgramId('search');
-          },
-          [customActionsOnProgramIdReset, dispatch, resetProgramId]);
-
-      const dispatchOnStartAgain = useCallback(
-          () => {
-              dispatch(resetAllCategoryOptionsFromScopeSelector());
-              reset();
-          }, [dispatch, reset]);
-
       const dispatchOnResetOrgUnitId = useCallback(
           () => {
               dispatch(resetOrgUnitIdBatchAction(customActionsOnOrgUnitIdReset));
@@ -147,11 +101,6 @@ export const ScopeSelector: ComponentType<OwnProps> =
 
       return (
           <ScopeSelectorComponent
-              onStartAgain={dispatchOnStartAgain}
-              onOpenSearchPageWithoutProgramId={dispatchOnOpenSearchPageWithoutProgramId}
-              onOpenSearchPage={dispatchOnOpenSearchPage}
-              onOpenNewRegistrationPageWithoutProgramId={dispatchOnOpenNewRegistrationPageWithoutProgramId}
-              onOpenNewEventPage={dispatchOnOpenNewEventPage}
               onResetProgramId={dispatchOnResetProgramId}
               onResetOrgUnitId={dispatchOnResetOrgUnitId}
               onResetAllCategoryOptions={dispatchOnResetAllCategoryOptions}

@@ -1,14 +1,19 @@
 // @flow
-import { ProgramStage } from '../../../metaData';
-import type { WidgetEffects, HideWidgets } from '../Enrollment/EnrollmentPageDefault/EnrollmentPageDefault.types';
+import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
+import type { ExternalSaveHandler } from '../../WidgetEnrollmentEventNew';
 
 export type Props = {|
     programId: string,
-    programStage: ProgramStage,
-    widgetEffects: ?WidgetEffects,
-    hideWidgets: HideWidgets,
+    stageId: string,
+    orgUnitId: string,
     teiId: string,
     enrollmentId: string,
+    onSave: ExternalSaveHandler,
+    onSaveSuccessActionType: string,
+    onSaveErrorActionType: string,
+    onCancel: () => void,
     onDelete: () => void,
+    widgetEffects: ?WidgetEffects,
+    hideWidgets: HideWidgets,
     ...CssClasses,
 |};
