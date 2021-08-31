@@ -1,3 +1,10 @@
+# [1.46.0](https://github.com/dhis2/capture-app/compare/v1.45.1...v1.46.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11652] show the add button for empty event stage ([#2014](https://github.com/dhis2/capture-app/issues/2014)) ([9b0838b](https://github.com/dhis2/capture-app/commit/9b0838b1bca93f3bfc84dcfdc50492e73085f131))
+
 ## [1.45.1](https://github.com/dhis2/capture-app/compare/v1.45.0...v1.45.1) (2021-08-31)
 
 
