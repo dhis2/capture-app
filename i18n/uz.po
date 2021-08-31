@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -486,8 +486,11 @@ msgstr "Жадвалда кўрсатиладиган устунлар"
 msgid "Column"
 msgstr "Устун"
 
-msgid "Apply"
-msgstr "Мурожаат қилиш"
+msgid "Update"
+msgstr "Янгилаш"
+
+msgid "Reset filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} дан {{toDate}} га"
@@ -890,6 +893,12 @@ msgstr "Танланган дастур билан ишлаш учун,"
 msgid "open the Tracker Capture app"
 msgstr "Кузатув-Назорат дастурини очинг"
 
+msgid "for"
+msgstr "учун"
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -956,6 +965,9 @@ msgstr "Хатолик"
 msgid "Warning"
 msgstr "Огоҳлантириш"
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 "Профила виджетини юклаб бўлмади. Илтимос, кейинроқ қайта уриниб кўринг"
@@ -966,8 +978,8 @@ msgstr "Шахс профили"
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset"
-msgstr "Қайта кўриб чиқиб янгилаш"
+msgid "Reset list"
+msgstr ""
 
 msgid "Go to full {{ eventName }}"
 msgstr ""
@@ -980,6 +992,9 @@ msgstr "Ҳисобот санаси"
 
 msgid "Registering unit"
 msgstr "Рўйхатга олиш муассасаси"
+
+msgid "Due date"
+msgstr "Муддати"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

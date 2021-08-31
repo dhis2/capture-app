@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Danish (https://www.transifex.com/hisp-uio/teams/100509/da/)\n"
@@ -466,7 +466,10 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-msgid "Apply"
+msgid "Update"
+msgstr "Update"
+
+msgid "Reset filter"
 msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
@@ -842,6 +845,12 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "for"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -907,6 +916,9 @@ msgstr "Error"
 msgid "Warning"
 msgstr "Warning"
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -916,7 +928,7 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset"
+msgid "Reset list"
 msgstr ""
 
 msgid "Go to full {{ eventName }}"
@@ -930,6 +942,9 @@ msgstr ""
 
 msgid "Registering unit"
 msgstr ""
+
+msgid "Due date"
+msgstr "Due date"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

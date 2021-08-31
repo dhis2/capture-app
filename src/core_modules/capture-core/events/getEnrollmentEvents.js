@@ -27,7 +27,8 @@ export type ApiTEIEvent = {
     eventDate: string,
     dueDate: string,
     lastUpdated: string,
-    dataValues: Array<ApiDataValue>
+    dataValues: Array<ApiDataValue>,
+    notes?: Array<Object>
 };
 
 const errorMessages = {

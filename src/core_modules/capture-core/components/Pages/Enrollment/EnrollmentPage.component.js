@@ -15,6 +15,7 @@ import {
     useResetTeiId,
     useResetEnrollmentId,
 } from '../../ScopeSelector';
+import { TopBarActions } from '../../TopBarActions';
 import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import type { Props } from './EnrollmentPage.types';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
@@ -87,6 +88,9 @@ const EnrollmentPagePlain = ({
                         selectedValue={enrollmentId}
                         title={i18n.t('Enrollment')}
                     />
+                </Grid>
+                <Grid item xs={12} sm={6} md={6} lg={2}>
+                    <TopBarActions selectedProgramId={programId} selectedOrgUnitId={orgUnitId} />
                 </Grid>
             </ScopeSelector>
 

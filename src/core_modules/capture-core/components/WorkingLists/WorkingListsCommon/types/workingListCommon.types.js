@@ -1,5 +1,5 @@
 // @flow
-import type { FiltersData } from '../../WorkingLists';
+import type { FiltersData } from '../../WorkingListsBase';
 
 export type RecordsOrder = Array<string>;
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Khmer (https://www.transifex.com/hisp-uio/teams/100509/km/)\n"
@@ -467,7 +467,10 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-msgid "Apply"
+msgid "Update"
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព"
+
+msgid "Reset filter"
 msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
@@ -843,6 +846,12 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "for"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -908,6 +917,9 @@ msgstr "កំហុសបច្ចេកទេស"
 msgid "Warning"
 msgstr ""
 
+msgid "Back to all stages and events"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -917,7 +929,7 @@ msgstr ""
 msgid "Show {{ rest }} more"
 msgstr ""
 
-msgid "Reset"
+msgid "Reset list"
 msgstr ""
 
 msgid "Go to full {{ eventName }}"
@@ -931,6 +943,9 @@ msgstr "ថ្ងៃខែឆ្នាំរាយការណ៏"
 
 msgid "Registering unit"
 msgstr ""
+
+msgid "Due date"
+msgstr "កាលបរិច្ឆេទកំណត់"
 
 msgid "{{ totalEvents }} events"
 msgstr ""

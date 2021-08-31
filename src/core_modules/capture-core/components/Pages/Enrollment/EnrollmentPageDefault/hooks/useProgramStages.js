@@ -10,7 +10,7 @@ export const useProgramStages = (program: Program, programStages: Array<apiProgr
     if (program && programStages) {
         program.stages.forEach((item) => {
             const { id, name, icon, stageForm } = item;
-            const { programStageDataElements } = programStages.find(p => p.id === id) || {};
+            const { hideDueDate, programStageDataElements, repeatable } = programStages.find(p => p.id === id) || {};
             if (!programStageDataElements) {
                 log.error(errorCreator(i18n.t('Program stage not found'))(id));
             } else {
@@ -18,6 +18,8 @@ export const useProgramStages = (program: Program, programStages: Array<apiProgr
                     id,
                     name,
                     icon,
+                    hideDueDate,
+                    repeatable,
                     description: stageForm.description,
                     dataElements: programStageDataElements?.reduce((acc, currentStageData) => {
                         const { displayInReports, dataElement } = currentStageData;

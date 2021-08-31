@@ -149,11 +149,11 @@ When(/^you sort list asc by (.*)$/, (columnName) => {
 
 Then('the sorted list by Report date asc should be displayed', () => {
     const rows = [
-        '2020-02-27|Bumbeh MCHP',
-        '2020-04-13|Bumbeh MCHP',
-        '2020-05-17|Bumbeh MCHP',
-        '2020-05-19|Bumbeh MCHP',
-        '2020-07-06|Bumbeh MCHP',
+        '2020-07-13|Bumbeh MCHP',
+        '2020-07-12|Bumbeh MCHP',
+        '2020-07-11|Bumbeh MCHP',
+        '2020-07-10|Bumbeh MCHP',
+        '2020-07-09|Bumbeh MCHP',
     ];
     cy.get('[data-test="stages-and-events-widget"]')
         .find('[data-test="widget-contents"]')
@@ -169,4 +169,45 @@ Then('the sorted list by Report date asc should be displayed', () => {
             cy.wrap($row).contains(rows[index].split('|')[1])
                 .should('exist');
         });
+});
+
+When(/^you click button Go to full (.*)$/, (stageName) => {
+    cy.get('[data-test="stages-and-events-widget"]').within(() => {
+        cy.get('[data-test="view-all-button"]').contains(stageName).should('exist');
+        cy.get('[data-test="view-all-button"]').contains(stageName).click();
+        cy.wait(100);
+    });
+});
+
+Then('you should navigate to Program Stage list page', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment/stageEvents?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&stageId=edqlbukwRfQ`);
+});
+
+When(/^you click New (.*)$/, (stageName) => {
+    cy.get('[data-test="stages-and-events-widget"]').within(() => {
+        cy.get('[data-test="create-new-button"]').contains(stageName).should('exist');
+        cy.get('[data-test="create-new-button"]').contains(stageName).click();
+        cy.wait(100);
+    });
+});
+
+Then(/^you should navigate to Add new page (.*)$/, (url) => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/${url}`);
+});
+
+Given(/^you open the enrollment page by typing (.*)$/, url =>
+    cy.visit(url),
+);
+
+Then(/^you should see the disabled button (.*)$/, (stageName) => {
+    cy.get('[data-test="stages-and-events-widget"]').within(() => {
+        cy.get('[data-test="create-new-button"]')
+            .contains(stageName)
+            .should('exist');
+        cy.get('[data-test="create-new-button"]')
+            .contains(stageName)
+            .parent()
+            .parent()
+            .should('be.disabled');
+    });
 });

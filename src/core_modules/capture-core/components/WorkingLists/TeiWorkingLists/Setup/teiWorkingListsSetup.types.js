@@ -7,7 +7,7 @@ import type {
     UpdateList,
     InitialViewConfig,
 } from '../../WorkingListsCommon';
-import type { FiltersData } from '../../WorkingLists';
+import type { FiltersData } from '../../WorkingListsBase';
 import type { LoadTeiView, TeiRecords } from '../types';
 
 type ExtractedProps = $ReadOnly<{|

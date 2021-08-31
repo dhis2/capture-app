@@ -1,16 +1,16 @@
 # 
 # Translators:
-# phil_dhis2, 2021
-# Viktor Varland <viktor@dhis2.org>, 2021
 # 晓东 林 <13981924470@126.com>, 2021
+# phil_dhis2, 2021
 # easylin <lin_xd@126.com>, 2021
+# Viktor Varland <viktor@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-10T17:41:20.926Z\n"
+"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2021\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -471,8 +471,11 @@ msgstr "表中显示的列"
 msgid "Column"
 msgstr "列"
 
-msgid "Apply"
-msgstr "应用"
+msgid "Update"
+msgstr "更新"
+
+msgid "Reset filter"
+msgstr "重置过滤器"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} 到 {{toDate}}"
@@ -848,6 +851,12 @@ msgstr "基于选择的项目工作"
 msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访APP"
 
+msgid "for"
+msgstr "对"
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "注册操作"
 
@@ -913,6 +922,9 @@ msgstr "错误"
 msgid "Warning"
 msgstr "警告"
 
+msgid "Back to all stages and events"
+msgstr "回到所有阶段和事件"
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "无法加载个人资料窗口小部件。请稍后再试"
 
@@ -922,8 +934,8 @@ msgstr "人物简介"
 msgid "Show {{ rest }} more"
 msgstr "显示 {{ rest}} 更多"
 
-msgid "Reset"
-msgstr "复位"
+msgid "Reset list"
+msgstr "重置列表"
 
 msgid "Go to full {{ eventName }}"
 msgstr "转到完整的{{ eventName }}"
@@ -936,6 +948,9 @@ msgstr "报告日期"
 
 msgid "Registering unit"
 msgstr "注册机构"
+
+msgid "Due date"
+msgstr "到期日期"
 
 msgid "{{ totalEvents }} events"
 msgstr "{{ totalEvents }} 个事件"

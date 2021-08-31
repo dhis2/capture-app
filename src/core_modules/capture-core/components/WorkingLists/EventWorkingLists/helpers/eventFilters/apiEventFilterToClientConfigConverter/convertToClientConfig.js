@@ -15,7 +15,7 @@ import {
     type TrueOnlyFilterData,
     type TextFilterData,
     type NumericFilterData,
-} from '../../../../WorkingLists';
+} from '../../../../WorkingListsBase';
 import type {
     ApiDataFilter,
     ApiDataFilterNumeric,

@@ -64,12 +64,24 @@ export const EnrollmentPageDefault = () => {
 
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
-
     const onDelete = () => {
-        history.push(
-            `/enrollment?${urlArguments({ orgUnitId, programId, teiId })}`,
-        );
+        history.push(`/enrollment?${urlArguments({ orgUnitId, programId, teiId })}`);
         dispatch(deleteEnrollment({ enrollmentId }));
+    };
+
+    const onViewAll = (stageId) => {
+        history.push(
+            `/enrollment/stageEvents?${urlArguments({ orgUnitId, programId, stageId })}`);
+    };
+
+    const onCreateNew = (stageId) => {
+        history.push(
+            `/enrollmentEventNew?${urlArguments({ orgUnitId, programId, teiId, enrollmentId, stageId })}`,
+        );
+    };
+
+    const onEventClick = (eventId: string, stageId: string) => {
+        history.push(`/enrollmentEventEdit?${urlArguments({ orgUnitId, programId, teiId, enrollmentId, eventId, stageId })}`);
     };
 
     return (
@@ -80,8 +92,11 @@ export const EnrollmentPageDefault = () => {
             events={enrollment?.events ?? []}
             enrollmentId={enrollmentId}
             onDelete={onDelete}
+            onViewAll={onViewAll}
+            onCreateNew={onCreateNew}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
+            onEventClick={onEventClick}
         />
     );
 };

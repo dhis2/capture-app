@@ -109,6 +109,8 @@ export type apiProgramStage = {
     dataEntryForm?: ?apiDataEntryForm,
     programStageSections?: ?Array<apiProgramStageSections>,
     programStageDataElements?: ?Array<apiProgramStageDataElement>,
+    hideDueDate?: boolean,
+    repeatable?: boolean
 };
 
 type apiProgramTrackedEntityAttribute = {
