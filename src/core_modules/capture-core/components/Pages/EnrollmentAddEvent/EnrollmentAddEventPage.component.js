@@ -52,7 +52,7 @@ const EnrollmentAddEventPagePain = ({
     const { resetTeiId } = useResetTeiId();
     const { resetStageId } = useResetStageId();
     const { resetEventId } = useResetEventId();
-    const isUserInteractionInProgress = useSelector(state => dataEntryHasChanges(state, 'singleEvent-addEvent'));
+    const isUserInteractionInProgress = useSelector(state => dataEntryHasChanges(state, 'enrollmentEvent-newEvent'));
 
     return (
         <>
