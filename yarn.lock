@@ -3056,35 +3056,35 @@
     "@dhis2/ui-widgets" "^2.1.1"
     moment "^2.24.0"
 
-"@dhis2/app-runtime@^2.0.4", "@dhis2/app-runtime@^2.9.2":
-  version "2.9.2"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-2.9.2.tgz#b24174ac1a3f0ce695cd60919d90cd6be11ea59d"
-  integrity sha512-Cgy6CQjpdTaV/DFy8IyQPg8tuZztHqyfiaydEZhfikyPCaaS5W+t9X6QN7Tswj3e/U4giEJEU4way4aK2+sWww==
+"@dhis2/app-runtime@^2.0.4", "@dhis2/app-runtime@^2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-2.10.0.tgz#aed04bad08c9746785a82ef2fee9bdf129562ed7"
+  integrity sha512-Ru0evrw57MrruYPJ/IXoUlnEX7pjVBJNk4UsADGZWTRVKZWhl/vKuUG5qfaeodC+hC1yaK/B3ZfLWrYP9mnLAA==
   dependencies:
-    "@dhis2/app-service-alerts" "2.9.2"
-    "@dhis2/app-service-config" "2.9.2"
-    "@dhis2/app-service-data" "2.9.2"
-    "@dhis2/app-service-offline" "2.9.2"
+    "@dhis2/app-service-alerts" "2.10.0"
+    "@dhis2/app-service-config" "2.10.0"
+    "@dhis2/app-service-data" "2.10.0"
+    "@dhis2/app-service-offline" "2.10.0"
 
-"@dhis2/app-service-alerts@2.9.2":
-  version "2.9.2"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-service-alerts/-/app-service-alerts-2.9.2.tgz#c8bdd71d4426c356f3cf5456191a5ddca7e6db67"
-  integrity sha512-avCV8GiolYKfiw/Mez8OF9qWWwnzcjS558bAQssVJrnOdYrnjK8r6pJmS6BszCt54rpZVAneR/SGkwKfpxUauQ==
+"@dhis2/app-service-alerts@2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-alerts/-/app-service-alerts-2.10.0.tgz#bff8da00dcdb7616f35a125d23c4b8ba8ad4a4ca"
+  integrity sha512-GCJLDNojjPegoDycZgK8uIh8uEFkGq98chEYJNUNFwh7Nk/0gEp97k7bfbZLqHvA4ZgXqNbR53UWParXdCd3kg==
 
-"@dhis2/app-service-config@2.9.2":
-  version "2.9.2"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-service-config/-/app-service-config-2.9.2.tgz#08ccf8f449933ce4bb638724e467ee0984a8671e"
-  integrity sha512-YhtcpVUwOlRsT/rNhJZTwUnwixsdlv1tg6VtKyykrvCpuoU9qWO6BaSq3yygArApOvQBYMZHTnonDKSc5qK8fg==
+"@dhis2/app-service-config@2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-config/-/app-service-config-2.10.0.tgz#528cd7eddc279724cc09d55bea83c2a3b02c6019"
+  integrity sha512-/cBc0BFcShD6Y8N422ql/Qq7XE6Er/0r+wIY6CAeRG6/hcfc3YsvFgynTiB9yCuk/lcP8V5CJ1bNspdAMusXRQ==
 
-"@dhis2/app-service-data@2.9.2":
-  version "2.9.2"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-service-data/-/app-service-data-2.9.2.tgz#c048d896f5b620326284bc4ee3d10924f3153b82"
-  integrity sha512-SRqrewTFNFP58pqfJrMoHZWapMsdjRyx5OCsYeDO8XWF3N+gyYsFrQlBOah3tXGeOY0AhE4Pwji9W9ycpam0sA==
+"@dhis2/app-service-data@2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-data/-/app-service-data-2.10.0.tgz#8d56c93b75ffafb99eebfbcc84016a29d4d80a24"
+  integrity sha512-uKXJxZBH6Rx0spdiSDkWppOfhCbMcRMYOYBkAYhYBOJ94jghDPgJjDcvnaoXtvOqO0u/atfOFW+6T9UnfQQvDw==
 
-"@dhis2/app-service-offline@2.9.2":
-  version "2.9.2"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-service-offline/-/app-service-offline-2.9.2.tgz#345eb009fcb9b665a9399f7d1a9ee315760a09d4"
-  integrity sha512-5V5mcGLb/HjnFKj1/WT2UMHIuNtOkA0XS0dwUqBPfVeCPjkk2itiRsCe59alosu4/cH6veasHadKPNLEm6Y5Mw==
+"@dhis2/app-service-offline@2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-offline/-/app-service-offline-2.10.0.tgz#a41e58db8e3850f9b5ef4ee9e52be3eae597a3bd"
+  integrity sha512-rAItDkCSkBIZl7cqCHjw/zm3VtJCxAj7NSV76FqsqCULZrz2T21agfC/0sznKrMovF/GS5NLVZtKZdcGPagjvA==
   dependencies:
     lodash "^4.17.21"
 
