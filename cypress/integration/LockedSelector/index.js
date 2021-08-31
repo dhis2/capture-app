@@ -4,6 +4,11 @@ beforeEach(() => {
     cy.loginThroughForm();
 });
 
+Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
+    cy.visit(url);
+    cy.get('[data-test="scope-selector"]').contains('Selected person');
+});
+
 When('you click the "New" button to add a new event', () => {
     cy.get('[data-test="new-event-button"]')
         .click();
@@ -245,7 +250,6 @@ const scopeSelectorCases = lockedSelectorCases;
 
 Given(/^you land on the enrollment page by having typed the (.*)$/, (url) => {
     cy.visit(url);
-    cy.get('[data-test="scope-selector"]').contains('Selected person');
 });
 
 Then(/^you can see on the locked selector the following (.*)$/, (state) => {
