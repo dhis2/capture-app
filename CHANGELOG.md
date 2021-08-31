@@ -1,3 +1,10 @@
+# [1.48.0](https://github.com/dhis2/capture-app/compare/v1.47.0...v1.48.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11576] improve sorting function ([#2009](https://github.com/dhis2/capture-app/issues/2009)) ([d7aa476](https://github.com/dhis2/capture-app/commit/d7aa4767d72285aba2b78bdde8e30a949e5bda8d))
+
 # [1.47.0](https://github.com/dhis2/capture-app/compare/v1.46.0...v1.47.0) (2021-08-31)
 
 
