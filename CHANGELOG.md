@@ -1,3 +1,71 @@
+# [1.52.0](https://github.com/dhis2/capture-app/compare/v1.51.0...v1.52.0) (2021-08-31)
+
+
+### Features
+
+* Widgets in Add Event Page ([cd9e0e4](https://github.com/dhis2/capture-app/commit/cd9e0e40404c4027656dd35b120166876057e3d6))
+
+# [1.51.0](https://github.com/dhis2/capture-app/compare/v1.50.0...v1.51.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11201][DHIS2-11390] add TopBarActions in the EnrollmentEventEdit page and EnrollmentEventNew ([#2027](https://github.com/dhis2/capture-app/issues/2027)) ([96c3c9e](https://github.com/dhis2/capture-app/commit/96c3c9ed26097b89ebd99a24efccdc53d5fee84a))
+
+# [1.50.0](https://github.com/dhis2/capture-app/compare/v1.49.1...v1.50.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11199][DHIS2-11389] add ScopeSelector in EnrollemntEventEdit page & EnrollemntEventNew page ([#2022](https://github.com/dhis2/capture-app/issues/2022)) ([895114c](https://github.com/dhis2/capture-app/commit/895114c02cc527933eb91ca1da4acf87f21ea1c8))
+
+## [1.49.1](https://github.com/dhis2/capture-app/compare/v1.49.0...v1.49.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* [TECH-663] restructure/clean new enrollment event page ([40fbbf9](https://github.com/dhis2/capture-app/commit/40fbbf9325ff3c8da9ee392cef489d95e16bbe89))
+
+# [1.49.0](https://github.com/dhis2/capture-app/compare/v1.48.0...v1.49.0) (2021-08-31)
+
+
+### Bug Fixes
+
+* rules engine unit tests ([#2028](https://github.com/dhis2/capture-app/issues/2028)) ([5a3c283](https://github.com/dhis2/capture-app/commit/5a3c2836a32ef8bdd053d24480dee8d49e9ac0da))
+
+
+### Features
+
+* [DHIS2-11630] visualize due date in status tag ([#2024](https://github.com/dhis2/capture-app/issues/2024)) ([5b5b246](https://github.com/dhis2/capture-app/commit/5b5b246a58e3e27a9f7b8bd4a726bb135a7432a0))
+
+# [1.48.0](https://github.com/dhis2/capture-app/compare/v1.47.0...v1.48.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11576] improve sorting function ([#2009](https://github.com/dhis2/capture-app/issues/2009)) ([d7aa476](https://github.com/dhis2/capture-app/commit/d7aa4767d72285aba2b78bdde8e30a949e5bda8d))
+
+# [1.47.0](https://github.com/dhis2/capture-app/compare/v1.46.0...v1.47.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11631] Prevent adding event if stage is not repeatable and there is already event ([#2010](https://github.com/dhis2/capture-app/issues/2010)) ([a4bf5a2](https://github.com/dhis2/capture-app/commit/a4bf5a2599f0bd033983677082901bb058074d5c))
+
+# [1.46.0](https://github.com/dhis2/capture-app/compare/v1.45.1...v1.46.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11652] show the add button for empty event stage ([#2014](https://github.com/dhis2/capture-app/issues/2014)) ([9b0838b](https://github.com/dhis2/capture-app/commit/9b0838b1bca93f3bfc84dcfdc50492e73085f131))
+
+## [1.45.1](https://github.com/dhis2/capture-app/compare/v1.45.0...v1.45.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7abc5ba](https://github.com/dhis2/capture-app/commit/7abc5ba47a607a1fa268803170a1175d9a3a15f7))
+
 # [1.45.0](https://github.com/dhis2/capture-app/compare/v1.44.3...v1.45.0) (2021-08-29)
 
 

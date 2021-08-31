@@ -18,7 +18,8 @@ export type Stage = {
     description: string,
     icon?: Icon,
     dataElements: Array<StageDataElement>,
-    hideDueDate?: boolean
+    hideDueDate?: boolean,
+    repeatable?: boolean
 }
 
 export type StageCommonProps = {|

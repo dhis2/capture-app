@@ -1,19 +1,11 @@
 // @flow
 import React, { Component, type ComponentType } from 'react';
 import { compose } from 'redux';
-import i18n from '@dhis2/d2-i18n';
 import { QuickSelector } from './QuickSelector/QuickSelector.container';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
+import { defaultDialogProps } from '../Dialogs/ConfirmDialog.constants';
 import type { Props, State } from './LockedSelector.types';
 import { withLoadingIndicator } from '../../HOC';
-
-const defaultDialogProps = {
-    header: i18n.t('Unsaved changes'),
-    text: i18n.t('Leaving this page will discard the changes you made to this event.'),
-    confirmText: i18n.t('Yes, discard'),
-    cancelText: i18n.t('No, stay here'),
-};
-
 
 class LockedSelectorClass extends Component<Props, State> {
     constructor(props: Props) {

@@ -149,11 +149,11 @@ When(/^you sort list asc by (.*)$/, (columnName) => {
 
 Then('the sorted list by Report date asc should be displayed', () => {
     const rows = [
-        '2020-02-27|Bumbeh MCHP',
-        '2020-04-13|Bumbeh MCHP',
-        '2020-05-17|Bumbeh MCHP',
-        '2020-05-19|Bumbeh MCHP',
-        '2020-07-06|Bumbeh MCHP',
+        '2020-07-13|Bumbeh MCHP',
+        '2020-07-12|Bumbeh MCHP',
+        '2020-07-11|Bumbeh MCHP',
+        '2020-07-10|Bumbeh MCHP',
+        '2020-07-09|Bumbeh MCHP',
     ];
     cy.get('[data-test="stages-and-events-widget"]')
         .find('[data-test="widget-contents"]')
@@ -191,6 +191,23 @@ When(/^you click New (.*)$/, (stageName) => {
     });
 });
 
-Then('you should navigate to Add new page', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ`);
+Then(/^you should navigate to Add new page (.*)$/, (url) => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/${url}`);
+});
+
+Given(/^you open the enrollment page by typing (.*)$/, url =>
+    cy.visit(url),
+);
+
+Then(/^you should see the disabled button (.*)$/, (stageName) => {
+    cy.get('[data-test="stages-and-events-widget"]').within(() => {
+        cy.get('[data-test="create-new-button"]')
+            .contains(stageName)
+            .should('exist');
+        cy.get('[data-test="create-new-button"]')
+            .contains(stageName)
+            .parent()
+            .parent()
+            .should('be.disabled');
+    });
 });

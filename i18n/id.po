@@ -895,6 +895,12 @@ msgstr "Untuk bekerja dengan program yang dipilih,"
 msgid "open the Tracker Capture app"
 msgstr "buka aplikasi Tracker Capture"
 
+msgid "for"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "Tindakan pendaftaran"
 

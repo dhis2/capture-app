@@ -7,7 +7,9 @@ import { WidgetIndicatorContent } from './WidgetIndicatorContent/WidgetIndicator
 export const WidgetIndicator = ({ indicators, emptyText }: IndicatorProps) => {
     const [openStatus, setOpenStatus] = useState(true);
     return (
-        <div>
+        <div
+            data-test="indicator-widget"
+        >
             <Widget
                 header={'Indicators'}
                 open={openStatus}

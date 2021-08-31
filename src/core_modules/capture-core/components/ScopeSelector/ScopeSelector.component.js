@@ -1,75 +1,25 @@
 // @flow
 import React, { Component, type ComponentType } from 'react';
 import { compose } from 'redux';
-import i18n from '@dhis2/d2-i18n';
 import { QuickSelector } from './QuickSelector/QuickSelector.component';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
+import { defaultDialogProps } from '../Dialogs/ConfirmDialog.constants';
 import type { Props, State } from './ScopeSelector.types';
 import { withLoadingIndicator } from '../../HOC';
-
-const defaultDialogProps = {
-    header: i18n.t('Unsaved changes'),
-    text: i18n.t('Leaving this page will discard the changes you made to this event.'),
-    confirmText: i18n.t('Yes, discard'),
-    cancelText: i18n.t('No, stay here'),
-};
-
 
 class ScopeSelectorClass extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
         this.state = {
-            openStartAgainWarning: false,
             openOrgUnitWarning: false,
             openProgramWarning: null,
             openCatComboWarning: false,
             categoryIdToReset: '',
-            openNewEventWarning: false,
         };
     }
 
     dontShowWarning = () => !this.props.isUserInteractionInProgress;
-
-    handleOpenStartAgainWarning=() => {
-        if (this.dontShowWarning()) {
-            this.props.onStartAgain();
-            return;
-        }
-        this.setState({ openStartAgainWarning: true });
-    }
-
-    openNewRegistrationPage = () => {
-        if (this.props.isUserInteractionInProgress) {
-            this.setState({ openStartAgainWarning: true });
-            return;
-        }
-        this.props.onOpenNewEventPage();
-    }
-
-    handleOpenNewRegistrationPageWithoutProgramId = () => {
-        if (this.dontShowWarning()) {
-            this.props.onOpenNewRegistrationPageWithoutProgramId();
-            return;
-        }
-        this.setState({ openStartAgainWarning: true });
-    }
-
-    handleOpenSearchPage = () => {
-        if (this.dontShowWarning()) {
-            this.props.onOpenSearchPage();
-            return;
-        }
-        this.setState({ openStartAgainWarning: true });
-    }
-
-    handleOpenSearchPageWithoutProgramId = () => {
-        if (this.dontShowWarning()) {
-            this.props.onOpenSearchPageWithoutProgramId();
-            return;
-        }
-        this.setState({ openStartAgainWarning: true });
-    }
 
     handleOpenOrgUnitWarning = () => {
         if (this.dontShowWarning()) {
@@ -97,17 +47,10 @@ class ScopeSelectorClass extends Component<Props, State> {
 
     handleClose = () => {
         this.setState({
-            openStartAgainWarning: false,
             openOrgUnitWarning: false,
             openProgramWarning: null,
             openCatComboWarning: false,
-            openNewEventWarning: false,
         });
-    }
-
-    handleAcceptStartAgain = () => {
-        this.props.onStartAgain();
-        this.handleClose();
     }
 
     handleAcceptOrgUnit = () => {
@@ -127,11 +70,6 @@ class ScopeSelectorClass extends Component<Props, State> {
         this.handleClose();
     }
 
-    handleAcceptNew = () => {
-        this.props.onOpenNewEventPage();
-        this.handleClose();
-    }
-
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
         return (
@@ -144,23 +82,12 @@ class ScopeSelectorClass extends Component<Props, State> {
                     onResetOrgUnitId={this.handleOpenOrgUnitWarning}
                     onResetProgramId={this.handleOpenProgramWarning}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
-                    onStartAgain={this.handleOpenStartAgainWarning}
-                    onNewClick={this.openNewRegistrationPage}
-                    onNewClickWithoutProgramId={this.handleOpenNewRegistrationPageWithoutProgramId}
-                    onFindClick={this.handleOpenSearchPage}
-                    onFindClickWithoutProgramId={this.handleOpenSearchPageWithoutProgramId}
                     selectedOrgUnitId={this.props.selectedOrgUnitId}
                     selectedProgramId={this.props.selectedProgramId}
                     selectedOrgUnit={this.props.selectedOrgUnit}
                 >
                     {this.props.children}
                 </QuickSelector>
-                <ConfirmDialog
-                    onConfirm={this.handleAcceptStartAgain}
-                    open={this.state.openStartAgainWarning}
-                    onCancel={this.handleClose}
-                    {...defaultDialogProps}
-                />
                 <ConfirmDialog
                     onConfirm={this.handleAcceptOrgUnit}
                     open={this.state.openOrgUnitWarning}
@@ -176,12 +103,6 @@ class ScopeSelectorClass extends Component<Props, State> {
                 <ConfirmDialog
                     onConfirm={this.handleAcceptCatCombo}
                     open={this.state.openCatComboWarning}
-                    onCancel={this.handleClose}
-                    {...defaultDialogProps}
-                />
-                <ConfirmDialog
-                    onConfirm={this.handleAcceptNew}
-                    open={this.state.openNewEventWarning}
                     onCancel={this.handleClose}
                     {...defaultDialogProps}
                 />

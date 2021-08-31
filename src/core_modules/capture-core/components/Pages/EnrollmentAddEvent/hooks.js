@@ -16,6 +16,6 @@ export const useWidgetDataFromStore = (reducerName: string) => useSelector(({
         ...rulesEffectsIndicators[reducerName]?.displayTexts || [],
         ...rulesEffectsIndicators[reducerName]?.displayKeyValuePairs || [],
     ],
-    errors: rulesEffectsGeneralWarnings[reducerName]?.warning,
-    warnings: rulesEffectsGeneralErrors[reducerName]?.error,
+    warnings: rulesEffectsGeneralWarnings[reducerName]?.warning,
+    errors: rulesEffectsGeneralErrors[reducerName]?.error,
 }), shallowEqual);

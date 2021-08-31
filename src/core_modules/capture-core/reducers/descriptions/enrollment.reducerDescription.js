@@ -20,7 +20,7 @@ export const enrollmentDesc = createReducerDescription(
             state,
             { payload: { eventId, eventData } },
         ) => {
-            const events = state.events.map(event =>
+            const events = state.events?.map(event =>
                 (event.event === eventId
                     ? {
                         ...eventData,
@@ -33,14 +33,14 @@ export const enrollmentDesc = createReducerDescription(
             return { ...state, events };
         },
         [ROLLBACK_ENROLLMENT_EVENT]: (state, { payload: { eventId } }) => {
-            const events = state.events.map(event =>
+            const events = state.events?.map(event =>
                 (event.event === eventId ? event.dataToRollback : event),
             );
 
             return { ...state, events };
         },
         [COMMIT_ENROLLMENT_EVENT]: (state, { payload: { eventId } }) => {
-            const events = state.events.map((event) => {
+            const events = state.events?.map((event) => {
                 if (event.event === eventId) {
                     const {
                         pendingApiResponse,
