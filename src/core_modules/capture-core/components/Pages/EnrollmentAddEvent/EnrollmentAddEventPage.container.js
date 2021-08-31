@@ -36,6 +36,7 @@ export const EnrollmentAddEventPage = () => {
     }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
     // TODO: Validate query params
+    // Ticket: https://jira.dhis2.org/browse/TECH-669
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages.values()].find(item => item.id === stageId);
     if (!programStage) {
@@ -43,6 +44,7 @@ export const EnrollmentAddEventPage = () => {
     }
 
     // TODO: Get data from enrollment collection for the rules engine
+    // Ticket: https://jira.dhis2.org/browse/TECH-635
 
     return (
         <EnrollmentAddEventPageComponent

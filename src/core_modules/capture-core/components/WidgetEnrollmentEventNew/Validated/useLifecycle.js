@@ -24,7 +24,8 @@ export const useLifecycle = (
         }
     }, [dispatch, program, formFoundation, orgUnit, dataEntryId, itemId]);
 
-    // temporary logic until we clean up the data from the redux store
+    // TODO: This is temporary logic until we clean up the data from the redux store
+    // Ticket: https://jira.dhis2.org/browse/TECH-668
     const readyTrigger = useSelector(({ dataEntries }) => dataEntries[dataEntryId]);
     const mounting = useRef(true);
     useEffect(() => {
