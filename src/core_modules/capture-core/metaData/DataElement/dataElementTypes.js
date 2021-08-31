@@ -32,5 +32,6 @@ export const dataElementTypes = {
     POLYGON: 'POLYGON',
     USERNAME: 'USERNAME',
     ASSIGNEE: 'ASSIGNEE',
+    STATUS: 'STATUS',
     UNKNOWN: 'UNKNOWN',
 };

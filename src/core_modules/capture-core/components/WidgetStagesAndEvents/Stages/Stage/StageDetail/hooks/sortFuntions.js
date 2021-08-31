@@ -5,46 +5,128 @@ import { moment } from 'capture-core-utils/moment';
 import { dataElementTypes } from '../../../../../../metaData';
 import { SORT_DIRECTION } from './constants';
 
-const sortNumber = (strA: string, strB: string, direction: string) => {
-    const numA = Number(strA);
-    const numB = Number(strB);
-    if (!strA) {
+
+const sortNumber = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
+    const numA = Number(clientValueA);
+    const numB = Number(clientValueB);
+    const { eventDateA, eventDateB } = options;
+
+    if (!numA) {
         return 1;
-    } else if (!strB) {
+    } else if (!numB) {
         return -1;
-    } else if (direction === SORT_DIRECTION.ASC) {
-        return numA < numB ? -1 : 1;
-    } else if (direction === SORT_DIRECTION.DESC) {
-        return numA < numB ? 1 : -1;
-    }
-
-    return 0;
-};
-
-const sortText = (strA: string, strB: string, direction: string) => {
-    if (strA === undefined) {
-        return 1;
-    } else if (strB === undefined) {
-        return -1;
-    } else if (direction === SORT_DIRECTION.ASC) {
-        return strA < strB ? -1 : 1;
-    } else if (direction === SORT_DIRECTION.DESC) {
-        return strA < strB ? 1 : -1;
-    }
-    return 0;
-};
-
-const sortTime = (timeA: string, timeB: string, direction: string) => {
-    if (direction === SORT_DIRECTION.ASC) {
-        return moment(timeA).unix() - moment(timeB).unix();
     }
     if (direction === SORT_DIRECTION.DESC) {
-        return moment(timeB).unix() - moment(timeA).unix();
+        if (numA !== numB) {
+            return numA - numB;
+        }
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
+    } else if (direction === SORT_DIRECTION.ASC) {
+        if (numA !== numB) {
+            return numB - numA;
+        }
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
     }
+
     return 0;
 };
 
-const sortOrgUnit = (orgA: Object, orgB: Object, direction: string) => sortText(orgA.name, orgB.name, direction);
+const sortText = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
+    const { eventDateA, eventDateB } = options;
+    if (clientValueA === undefined) {
+        return 1;
+    } else if (clientValueB === undefined) {
+        return -1;
+    }
+    if (direction === SORT_DIRECTION.DESC) {
+        if (clientValueA !== clientValueB) {
+            return clientValueA - clientValueB;
+        }
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
+    } else if (direction === SORT_DIRECTION.ASC) {
+        if (clientValueA !== clientValueB) {
+            return clientValueB - clientValueA;
+        }
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
+    }
+
+    return 0;
+};
+
+const sortTime = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
+    const { eventDateA, eventDateB } = options;
+    // most recent dates first
+    if (direction === SORT_DIRECTION.DESC) {
+        if (clientValueA !== clientValueB) {
+            return moment(clientValueB).unix() - moment(clientValueA).unix();
+        }
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
+    }
+
+    if (direction === SORT_DIRECTION.ASC) {
+        if (clientValueA !== clientValueB) {
+            return moment(clientValueA).unix() - moment(clientValueB).unix();
+        }
+        return moment(eventDateA).unix() - moment(eventDateB).unix();
+    }
+
+    return 0;
+};
+
+const sortOrgUnit = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => sortText(clientValueA.name, clientValueB.name, direction, options);
+
+// desc: Scheduled -> Active -> Completed -> Skipped
+const sortStatus = (clientValueA: Object, clientValueB: Object, direction: string, options: Object) => {
+    const { eventDateA, eventDateB, dueDateA, dueDateB } = options;
+    const descOrder = ['Scheduled', 'Active', 'Completed', 'Skipped'];
+
+    if (direction === SORT_DIRECTION.DESC) {
+        if (clientValueA.text !== clientValueB.text) {
+            return descOrder.indexOf(clientValueA.text) - descOrder.indexOf(clientValueB.text);
+        }
+
+        if (clientValueA.text === 'Scheduled') {
+            return moment(dueDateB).unix() - moment(dueDateA).unix();
+        }
+
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
+    }
+
+    if (direction === SORT_DIRECTION.ASC) {
+        if (clientValueA.text !== clientValueB.text) {
+            return descOrder.indexOf(clientValueB.text) - descOrder.indexOf(clientValueA.text);
+        }
+
+        if (clientValueA.text === 'Scheduled') {
+            return moment(dueDateB).unix() - moment(dueDateA).unix();
+        }
+
+        return moment(eventDateB).unix() - moment(eventDateA).unix();
+    }
+
+
+    return 0;
+};
+
+const sortDataFromEvent = ({ dataA, dataB, type, columnName, direction }: Object) => {
+    if (!type) {
+        log.error(errorCreator('Type is not defined')({ dataA, dataB }));
+    }
+    const clientValueA = dataA[columnName];
+    const clientValueB = dataB[columnName];
+    const options = {
+        eventDateA: dataA.eventDate,
+        eventDateB: dataB.eventDate,
+        dueDateA: dataA.dueDate,
+        dueDateB: dataB.dueDate,
+    };
+    return sortForTypes[type](clientValueA, clientValueB, direction, options);
+};
+
+export {
+    sortDataFromEvent,
+};
+
 
 const sortForTypes = {
     [dataElementTypes.EMAIL]: sortText,
@@ -66,21 +148,10 @@ const sortForTypes = {
     [dataElementTypes.AGE]: sortText,
     [dataElementTypes.ORGANISATION_UNIT]: sortOrgUnit,
     [dataElementTypes.USERNAME]: sortText,
+    [dataElementTypes.STATUS]: sortStatus,
     [dataElementTypes.COORDINATE]: () => null,
     [dataElementTypes.POLYGON]: () => null,
     [dataElementTypes.FILE_RESOURCE]: () => null,
     [dataElementTypes.IMAGE]: () => null,
     [dataElementTypes.UNKNOWN]: () => null,
-};
-
-
-const sortDataFromEvent = (dataA: any, dataB: any, type: string, direction: string) => {
-    if (!type) {
-        log.error(errorCreator('Type is not defined')({ dataA, dataB }));
-    }
-    return sortForTypes[type](dataA, dataB, direction);
-};
-
-export {
-    sortDataFromEvent,
 };
