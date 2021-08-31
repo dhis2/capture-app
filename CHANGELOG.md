@@ -1,3 +1,10 @@
+# [1.50.0](https://github.com/dhis2/capture-app/compare/v1.49.1...v1.50.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11199][DHIS2-11389] add ScopeSelector in EnrollemntEventEdit page & EnrollemntEventNew page ([#2022](https://github.com/dhis2/capture-app/issues/2022)) ([895114c](https://github.com/dhis2/capture-app/commit/895114c02cc527933eb91ca1da4acf87f21ea1c8))
+
 ## [1.49.1](https://github.com/dhis2/capture-app/compare/v1.49.0...v1.49.1) (2021-08-31)
 
 
