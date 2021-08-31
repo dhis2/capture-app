@@ -2,8 +2,10 @@
 import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { WorkingListsType } from './WorkingListsType';
-import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
+import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './mainPage.types';
+import { MainPageStatuses } from './MainPage.constants';
+import { WithoutOrgUnitSelectedMessage } from './WithoutOrgUnitSelectedMessage/WithoutOrgUnitSelectedMessage';
 
 const getStyles = () => ({
     listContainer: {
@@ -11,15 +13,25 @@ const getStyles = () => ({
     },
 });
 
-const MainPagePlain = ({ currentSelectionsComplete, classes, ...passOnProps }: Props) => (
+const MainPagePlain = ({ MainPageStatus, setShowAccessible, programId, classes, ...passOnProps }: Props) => (
     <>
         <LockedSelector />
         {
-            !currentSelectionsComplete ? null : (
+            MainPageStatus === MainPageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
+                <WithoutOrgUnitSelectedMessage
+                    programId={programId}
+                    setShowAccessible={setShowAccessible}
+                />
+            )
+        }
+        {
+            MainPageStatus === MainPageStatuses.SHOW_WORKING_LIST && (
                 <div
                     className={classes.listContainer}
+                    data-test={'main-page-working-list'}
                 >
                     <WorkingListsType
+                        programId={programId}
                         {...passOnProps}
                     />
                 </div>
