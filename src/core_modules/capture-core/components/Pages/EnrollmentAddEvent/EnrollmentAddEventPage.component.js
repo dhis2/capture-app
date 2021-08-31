@@ -42,8 +42,6 @@ const EnrollmentAddEventPagePain = ({
     teiDisplayName,
     classes,
     pageStatus,
-    onSetOrgUnit,
-    onResetOrgUnitId,
 }) => {
     const { setOrgUnitId } = useSetOrgUnitId();
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
@@ -59,15 +57,9 @@ const EnrollmentAddEventPagePain = ({
             <ScopeSelector
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
-                onSetOrgUnit={(id) => {
-                    setOrgUnitId(id);
-                    onSetOrgUnit(pageStatuses.DEFAULT);
-                }}
+                onSetOrgUnit={id => setOrgUnitId(id)}
                 onResetProgramId={() => resetProgramIdAndEnrollmentContext('enrollment')}
-                onResetOrgUnitId={() => {
-                    resetOrgUnitId();
-                    onResetOrgUnitId(pageStatuses.WITHOUT_ORG_UNIT_SELECTED);
-                }}
+                onResetOrgUnitId={() => resetOrgUnitId()}
                 isUserInteractionInProgress={isUserInteractionInProgress}
             >
                 <Grid item xs={12} sm={6} md={4} lg={2}>

@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -18,7 +18,6 @@ import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
 
 export const EnrollmentEditEventPage = () => {
-    const [pageStatus, setPageStatus] = useState(pageStatuses.DEFAULT);
     const history = useHistory();
     const dispatch = useDispatch();
     const { programId, stageId, teiId, enrollmentId, orgUnitId, eventId } = useSelector(
@@ -55,11 +54,13 @@ export const EnrollmentEditEventPage = () => {
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDataConvertValue = convertValue(event?.eventDate, dataElementTypes.DATETIME);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
-    useEffect(() => {
+
+    let pageStatus = pageStatuses.MISSING_DATA;
+    if (orgUnitId) {
         enrollmentSite && teiDisplayName && trackedEntityName && programStage && event
-            ? setPageStatus(pageStatuses.DEFAULT)
-            : setPageStatus(pageStatuses.MISSING_DATA);
-    }, [enrollmentSite, teiDisplayName, trackedEntityName, programStage, event]);
+            ? (pageStatus = pageStatuses.DEFAULT)
+            : (pageStatus = pageStatuses.MISSING_DATA);
+    } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
 
     return (
         <EnrollmentEditEventPageComponent

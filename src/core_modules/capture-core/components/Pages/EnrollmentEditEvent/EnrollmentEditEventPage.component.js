@@ -25,6 +25,7 @@ import {
     useResetEventId,
 } from '../../ScopeSelector';
 import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 
 const styles = ({ typography }) => ({
     page: {
@@ -162,6 +163,11 @@ const EnrollmentEditEventPagePain = ({
                         )}
                         {pageStatus === pageStatuses.MISSING_DATA && (
                             <span>{i18n.t('The enrollment event data could not be found')}</span>
+                        )}
+                        {pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
+                            <IncompleteSelectionsMessage>
+                                {i18n.t('Choose a registering unit to start reporting')}
+                            </IncompleteSelectionsMessage>
                         )}
                     </div>
                     <div className={classes.rightColumn}>
