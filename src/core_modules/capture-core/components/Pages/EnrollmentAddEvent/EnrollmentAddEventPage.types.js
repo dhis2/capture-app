@@ -9,5 +9,8 @@ export type Props = {|
     trackedEntityName: string,
     teiDisplayName: string,
     enrollmentsAsOptions: Array<Object>,
+    pageStatus: string,
+    onSetOrgUnit: (status: string) => void,
+    onResetOrgUnitId: (status: string) => void,
     ...CssClasses,
 |};

@@ -19,6 +19,8 @@ import {
 } from '../../ScopeSelector';
 import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { pageStatuses } from './EnrollmentAddEventPage.constants';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 
 const styles = ({ typography }) => ({
     container: {
@@ -39,6 +41,9 @@ const EnrollmentAddEventPagePain = ({
     trackedEntityName,
     teiDisplayName,
     classes,
+    pageStatus,
+    onSetOrgUnit,
+    onResetOrgUnitId,
 }) => {
     const { setOrgUnitId } = useSetOrgUnitId();
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
@@ -54,14 +59,20 @@ const EnrollmentAddEventPagePain = ({
             <ScopeSelector
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
-                onSetOrgUnit={id => setOrgUnitId(id)}
+                onSetOrgUnit={(id) => {
+                    setOrgUnitId(id);
+                    onSetOrgUnit(pageStatuses.DEFAULT);
+                }}
                 onResetProgramId={() => resetProgramIdAndEnrollmentContext('enrollment')}
-                onResetOrgUnitId={() => resetOrgUnitId()}
+                onResetOrgUnitId={() => {
+                    resetOrgUnitId();
+                    onResetOrgUnitId(pageStatuses.WITHOUT_ORG_UNIT_SELECTED);
+                }}
                 isUserInteractionInProgress={isUserInteractionInProgress}
             >
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                     <SingleLockedSelect
-                        ready
+                        ready={pageStatus !== pageStatuses.MISSING_DATA}
                         onClear={() => resetTeiId('/')}
                         options={[
                             {
@@ -76,7 +87,7 @@ const EnrollmentAddEventPagePain = ({
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                     <SingleLockedSelect
-                        ready
+                        ready={pageStatus !== pageStatuses.MISSING_DATA}
                         onClear={() => resetEnrollmentId('enrollment')}
                         options={enrollmentsAsOptions}
                         selectedValue={enrollmentId}
@@ -86,7 +97,7 @@ const EnrollmentAddEventPagePain = ({
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                     <SingleLockedSelect
-                        ready
+                        ready={pageStatus !== pageStatuses.MISSING_DATA}
                         onClear={() => resetStageId('enrollment')}
                         options={[
                             {
@@ -101,7 +112,7 @@ const EnrollmentAddEventPagePain = ({
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                     <SingleLockedSelect
-                        ready
+                        ready={pageStatus !== pageStatuses.MISSING_DATA}
                         onClear={() => resetEventId('enrollment')}
                         options={[
                             {
@@ -118,7 +129,15 @@ const EnrollmentAddEventPagePain = ({
             <div className={classes.container} data-test="add-event-enrollment-page-content">
                 <div className={classes.title}>{i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}</div>
                 <div>
-                    <WidgetAddEvent programStage={programStage} />
+                    {pageStatus === pageStatuses.DEFAULT && <WidgetAddEvent programStage={programStage} />}
+                    {pageStatus === pageStatuses.MISSING_DATA && (
+                        <span>{i18n.t('The enrollment event data could not be found')}</span>
+                    )}
+                    {pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
+                        <IncompleteSelectionsMessage>
+                            {i18n.t('Choose a registering unit to start reporting')}
+                        </IncompleteSelectionsMessage>
+                    )}
                 </div>
             </div>
         </>

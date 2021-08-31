@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-27T08:45:38.480Z\n"
-"PO-Revision-Date: 2021-08-27T08:45:38.480Z\n"
+"POT-Creation-Date: 2021-08-30T16:35:43.039Z\n"
+"PO-Revision-Date: 2021-08-30T16:35:43.039Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -625,6 +625,12 @@ msgstr ""
 msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
+msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
+msgstr ""
+
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
 
@@ -641,9 +647,6 @@ msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "Registered events"
-msgstr ""
-
-msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
