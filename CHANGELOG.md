@@ -1,3 +1,10 @@
+# [1.53.0](https://github.com/dhis2/capture-app/compare/v1.52.0...v1.53.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11467] List records in program regardless of OrgUnit ([8d7f418](https://github.com/dhis2/capture-app/commit/8d7f418b94fdc91c673b96cd7757f578999c0afd))
+
 # [1.52.0](https://github.com/dhis2/capture-app/compare/v1.51.0...v1.52.0) (2021-08-31)
 
 
