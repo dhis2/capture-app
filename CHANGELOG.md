@@ -1,3 +1,10 @@
+# [1.51.0](https://github.com/dhis2/capture-app/compare/v1.50.0...v1.51.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11201][DHIS2-11390] add TopBarActions in the EnrollmentEventEdit page and EnrollmentEventNew ([#2027](https://github.com/dhis2/capture-app/issues/2027)) ([96c3c9e](https://github.com/dhis2/capture-app/commit/96c3c9ed26097b89ebd99a24efccdc53d5fee84a))
+
 # [1.50.0](https://github.com/dhis2/capture-app/compare/v1.49.1...v1.50.0) (2021-08-31)
 
 
