@@ -26,6 +26,7 @@ import {
 } from '../../ScopeSelector';
 import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import { TopBarActions } from '../../TopBarActions';
 
 const styles = ({ typography }) => ({
     page: {
@@ -149,6 +150,13 @@ const EnrollmentEditEventPagePain = ({
                         />
                     </Grid>
                 )}
+                <Grid item xs={12} sm={6} md={6} lg={2}>
+                    <TopBarActions
+                        selectedProgramId={programId}
+                        selectedOrgUnitId={orgUnitId}
+                        isUserInteractionInProgress={mode === pageMode.EDIT}
+                    />
+                </Grid>
             </ScopeSelector>
             <div className={classes.page}>
                 <div className={classes.title}>

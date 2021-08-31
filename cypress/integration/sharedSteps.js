@@ -132,3 +132,7 @@ Then(/^the user clicks the element containing the text: (.*)$/, (text) => {
 Then(/^the current url is (.*)$/, (url) => {
     cy.url().should('eq', `${Cypress.config().baseUrl}${url}`);
 });
+
+Then(/^the user ?(.*) see the following text: (.*)$/, (not, message) =>
+    cy.contains(message).should(not ? 'not.exist' : 'exist'),
+);

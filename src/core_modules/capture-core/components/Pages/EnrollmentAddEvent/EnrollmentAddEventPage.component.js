@@ -21,6 +21,7 @@ import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges'
 import { pageStatuses } from './EnrollmentAddEventPage.constants';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetEnrollmentEventNew } from '../../WidgetEnrollmentEventNew';
+import { TopBarActions } from '../../TopBarActions';
 
 const styles = ({ typography }) => ({
     container: {
@@ -116,6 +117,13 @@ const EnrollmentAddEventPagePain = ({
                         ]}
                         selectedValue="alwaysPreselected"
                         title={programStage.stageForm.getLabel('eventDate')}
+                        isUserInteractionInProgress={isUserInteractionInProgress}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={6} lg={2}>
+                    <TopBarActions
+                        selectedProgramId={programId}
+                        selectedOrgUnitId={orgUnitId}
                         isUserInteractionInProgress={isUserInteractionInProgress}
                     />
                 </Grid>
