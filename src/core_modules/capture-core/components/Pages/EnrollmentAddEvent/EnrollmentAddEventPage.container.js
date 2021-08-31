@@ -2,7 +2,10 @@
 import React, { useCallback } from 'react';
 // $FlowFixMe
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
+import {
+    addEnrollmentEventPageActionTypes,
+    navigateToEnrollmentPage,
+} from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
 import { useEnrollment } from '../common/EnrollmentOverviewDomain/useEnrollment';
@@ -71,7 +74,6 @@ export const EnrollmentAddEventPage = () => {
             trackedEntityName={trackedEntityName}
             enrollmentId={enrollmentId}
             pageStatus={pageStatus}
-            enrollmentId={enrollmentId}
             teiId={teiId}
             onSave={handleSave}
             onSaveSuccessActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS}
