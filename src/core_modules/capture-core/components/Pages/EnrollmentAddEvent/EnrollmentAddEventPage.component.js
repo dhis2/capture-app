@@ -121,7 +121,7 @@ const EnrollmentAddEventPagePain = ({
                             },
                         ]}
                         selectedValue="alwaysPreselected"
-                        title={i18n.t('date of visit')}
+                        title={programStage.stageForm.getLabel('eventDate')}
                         isUserInteractionInProgress={isUserInteractionInProgress}
                     />
                 </Grid>

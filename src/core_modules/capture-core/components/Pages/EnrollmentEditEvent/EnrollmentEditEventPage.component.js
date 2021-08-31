@@ -131,21 +131,23 @@ const EnrollmentEditEventPagePain = ({
                         isUserInteractionInProgress={isUserInteractionInProgress}
                     />
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                    <SingleLockedSelect
-                        ready={pageStatus !== pageStatuses.MISSING_DATA}
-                        onClear={() => resetEventId('enrollment')}
-                        options={[
-                            {
-                                label: eventDate || '',
-                                value: 'alwaysPreselected',
-                            },
-                        ]}
-                        selectedValue="alwaysPreselected"
-                        title={i18n.t('date of visit')}
-                        isUserInteractionInProgress={isUserInteractionInProgress}
-                    />
-                </Grid>
+                {programStage && (
+                    <Grid item xs={12} sm={6} md={4} lg={2}>
+                        <SingleLockedSelect
+                            ready={pageStatus !== pageStatuses.MISSING_DATA}
+                            onClear={() => resetEventId('enrollment')}
+                            options={[
+                                {
+                                    label: eventDate || '',
+                                    value: 'alwaysPreselected',
+                                },
+                            ]}
+                            selectedValue="alwaysPreselected"
+                            title={programStage.stageForm.getLabel('eventDate')}
+                            isUserInteractionInProgress={isUserInteractionInProgress}
+                        />
+                    </Grid>
+                )}
             </ScopeSelector>
             <div className={classes.page}>
                 <div className={classes.title}>
