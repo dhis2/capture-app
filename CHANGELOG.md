@@ -1,3 +1,10 @@
+# [1.52.0](https://github.com/dhis2/capture-app/compare/v1.51.0...v1.52.0) (2021-08-31)
+
+
+### Features
+
+* Widgets in Add Event Page ([cd9e0e4](https://github.com/dhis2/capture-app/commit/cd9e0e40404c4027656dd35b120166876057e3d6))
+
 # [1.51.0](https://github.com/dhis2/capture-app/compare/v1.50.0...v1.51.0) (2021-08-31)
 
 
