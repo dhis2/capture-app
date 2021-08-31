@@ -1,3 +1,50 @@
+## [1.49.1](https://github.com/dhis2/capture-app/compare/v1.49.0...v1.49.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* [TECH-663] restructure/clean new enrollment event page ([40fbbf9](https://github.com/dhis2/capture-app/commit/40fbbf9325ff3c8da9ee392cef489d95e16bbe89))
+
+# [1.49.0](https://github.com/dhis2/capture-app/compare/v1.48.0...v1.49.0) (2021-08-31)
+
+
+### Bug Fixes
+
+* rules engine unit tests ([#2028](https://github.com/dhis2/capture-app/issues/2028)) ([5a3c283](https://github.com/dhis2/capture-app/commit/5a3c2836a32ef8bdd053d24480dee8d49e9ac0da))
+
+
+### Features
+
+* [DHIS2-11630] visualize due date in status tag ([#2024](https://github.com/dhis2/capture-app/issues/2024)) ([5b5b246](https://github.com/dhis2/capture-app/commit/5b5b246a58e3e27a9f7b8bd4a726bb135a7432a0))
+
+# [1.48.0](https://github.com/dhis2/capture-app/compare/v1.47.0...v1.48.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11576] improve sorting function ([#2009](https://github.com/dhis2/capture-app/issues/2009)) ([d7aa476](https://github.com/dhis2/capture-app/commit/d7aa4767d72285aba2b78bdde8e30a949e5bda8d))
+
+# [1.47.0](https://github.com/dhis2/capture-app/compare/v1.46.0...v1.47.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11631] Prevent adding event if stage is not repeatable and there is already event ([#2010](https://github.com/dhis2/capture-app/issues/2010)) ([a4bf5a2](https://github.com/dhis2/capture-app/commit/a4bf5a2599f0bd033983677082901bb058074d5c))
+
+# [1.46.0](https://github.com/dhis2/capture-app/compare/v1.45.1...v1.46.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11652] show the add button for empty event stage ([#2014](https://github.com/dhis2/capture-app/issues/2014)) ([9b0838b](https://github.com/dhis2/capture-app/commit/9b0838b1bca93f3bfc84dcfdc50492e73085f131))
+
+## [1.45.1](https://github.com/dhis2/capture-app/compare/v1.45.0...v1.45.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7abc5ba](https://github.com/dhis2/capture-app/commit/7abc5ba47a607a1fa268803170a1175d9a3a15f7))
+
 # [1.45.0](https://github.com/dhis2/capture-app/compare/v1.44.3...v1.45.0) (2021-08-29)
 
 

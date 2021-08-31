@@ -59,7 +59,8 @@ describe('Enrollment Page Rule Engines', () => {
                             programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM',
                             useNameForOptionSet: true,
                         },
-                        { dataElementId: 'a3kGcGDCuk6',
+                        {
+                            dataElementId: 'a3kGcGDCuk6',
                             displayName: 'apgarscore',
                             id: 'g2GooOydipB',
                             programId: 'IpHINAT79UW',
@@ -101,12 +102,6 @@ describe('Enrollment Page Rule Engines', () => {
                     message: 'undefined 1222',
                 } }],
         ],
-        [
-            {
-                program: null,
-            },
-            null,
-        ],
     ])('where the default values', ({
         program,
         dataElementsInProgram,
@@ -117,7 +112,7 @@ describe('Enrollment Page Rule Engines', () => {
             const rulesEffects = runRulesForEnrollmentPage({
                 program,
                 orgUnit,
-                allEventsData: allEvents,
+                eventsData: allEvents,
                 dataElementsInProgram,
                 teiValues,
                 trackedEntityAttributes,

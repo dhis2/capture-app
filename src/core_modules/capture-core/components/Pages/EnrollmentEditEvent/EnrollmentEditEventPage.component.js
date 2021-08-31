@@ -6,7 +6,7 @@ import { spacersNum } from '@dhis2/ui';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
-import { pageMode } from './EnrollmentEditEventPage.const';
+import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
 import { WidgetEventEdit } from '../../WidgetEventEdit/';
 import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
 import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
@@ -16,11 +16,16 @@ import { WidgetProfile } from '../../WidgetProfile';
 import { WidgetEnrollment } from '../../WidgetEnrollment';
 import {
     ScopeSelector,
-    useSetProgramId,
     useSetOrgUnitId,
     useResetProgramId,
     useResetOrgUnitId,
+    useResetTeiId,
+    useResetEnrollmentId,
+    useResetStageId,
+    useResetEventId,
 } from '../../ScopeSelector';
+import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { TopBarActions } from '../../TopBarActions';
 
 const styles = ({ typography }) => ({
@@ -56,29 +61,94 @@ const EnrollmentEditEventPagePain = ({
     teiId,
     enrollmentId,
     programId,
+    enrollmentsAsOptions,
+    trackedEntityName,
+    teiDisplayName,
     widgetEffects,
     hideWidgets,
     onDelete,
     classes,
     onGoBack,
     orgUnitId,
+    eventDate,
+    pageStatus,
 }: PlainProps) => {
-    const { setProgramId } = useSetProgramId();
     const { setOrgUnitId } = useSetOrgUnitId();
 
-    const { resetProgramId } = useResetProgramId();
+    const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
+    const { resetEnrollmentId } = useResetEnrollmentId();
+    const { resetTeiId } = useResetTeiId();
+    const { resetStageId } = useResetStageId();
+    const { resetEventId } = useResetEventId();
+    const isUserInteractionInProgress = mode === pageMode.EDIT;
 
     return (
         <>
             <ScopeSelector
                 selectedProgramId={programId}
                 selectedOrgUnitId={orgUnitId}
-                onSetProgramId={id => setProgramId(id)}
                 onSetOrgUnit={id => setOrgUnitId(id)}
-                onResetProgramId={() => resetProgramId()}
+                onResetProgramId={() => resetProgramIdAndEnrollmentContext('enrollment')}
                 onResetOrgUnitId={() => resetOrgUnitId()}
-            >
+                isUserInteractionInProgress={isUserInteractionInProgress}>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready={pageStatus !== pageStatuses.MISSING_DATA}
+                        onClear={() => resetTeiId('/')}
+                        options={[
+                            {
+                                label: teiDisplayName,
+                                value: 'alwaysPreselected',
+                            },
+                        ]}
+                        selectedValue="alwaysPreselected"
+                        title={trackedEntityName}
+                        isUserInteractionInProgress={isUserInteractionInProgress}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready={pageStatus !== pageStatuses.MISSING_DATA}
+                        onClear={() => resetEnrollmentId('enrollment')}
+                        options={enrollmentsAsOptions}
+                        selectedValue={enrollmentId}
+                        title={i18n.t('Enrollment')}
+                        isUserInteractionInProgress={isUserInteractionInProgress}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready={pageStatus !== pageStatuses.MISSING_DATA}
+                        onClear={() => resetStageId('enrollment')}
+                        options={[
+                            {
+                                label: programStage?.name || '',
+                                value: 'alwaysPreselected',
+                            },
+                        ]}
+                        selectedValue="alwaysPreselected"
+                        title={i18n.t('stage')}
+                        isUserInteractionInProgress={isUserInteractionInProgress}
+                    />
+                </Grid>
+                {programStage && (
+                    <Grid item xs={12} sm={6} md={4} lg={2}>
+                        <SingleLockedSelect
+                            ready={pageStatus !== pageStatuses.MISSING_DATA}
+                            onClear={() => resetEventId('enrollment')}
+                            options={[
+                                {
+                                    label: eventDate || '',
+                                    value: 'alwaysPreselected',
+                                },
+                            ]}
+                            selectedValue="alwaysPreselected"
+                            title={programStage.stageForm.getLabel('eventDate')}
+                            isUserInteractionInProgress={isUserInteractionInProgress}
+                        />
+                    </Grid>
+                )}
                 <Grid item xs={12} sm={6} md={6} lg={2}>
                     <TopBarActions
                         selectedProgramId={programId}
@@ -95,10 +165,16 @@ const EnrollmentEditEventPagePain = ({
                 </div>
                 <div className={classes.columns}>
                     <div className={classes.leftColumn}>
-                        {programStage ? (
+                        {pageStatus === pageStatuses.DEFAULT && programStage && (
                             <WidgetEventEdit programStage={programStage} onGoBack={onGoBack} />
-                        ) : (
-                            <span>{i18n.t('We could not find the stage in the program')}</span>
+                        )}
+                        {pageStatus === pageStatuses.MISSING_DATA && (
+                            <span>{i18n.t('The enrollment event data could not be found')}</span>
+                        )}
+                        {pageStatus === pageStatuses.WITHOUT_ORG_UNIT_SELECTED && (
+                            <IncompleteSelectionsMessage>
+                                {i18n.t('Choose a registering unit to start reporting')}
+                            </IncompleteSelectionsMessage>
                         )}
                     </div>
                     <div className={classes.rightColumn}>

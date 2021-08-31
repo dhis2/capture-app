@@ -18,7 +18,7 @@ import { SORT_DIRECTION } from './constants';
 
 const baseKeys = [{ id: 'status' }, { id: 'eventDate' }, { id: 'orgUnitName' }, { id: 'dueDate' }, { id: 'comments' }];
 const basedFieldTypes = [
-    { type: dataElementTypes.UNKNOWN, resolveValue: convertStatusForView },
+    { type: dataElementTypes.STATUS, resolveValue: convertStatusForView },
     { type: dataElementTypes.DATE },
     { type: dataElementTypes.TEXT },
     { type: dataElementTypes.DATE },
