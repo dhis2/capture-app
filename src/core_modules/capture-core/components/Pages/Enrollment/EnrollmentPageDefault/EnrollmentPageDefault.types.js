@@ -2,20 +2,7 @@
 import type { Program } from 'capture-core/metaData';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/common.types';
-import type { Message } from '../../../WidgetErrorAndWarning/content/WidgetErrorAndWarningContent.types';
-import type { WidgetData } from '../../../WidgetFeedback/WidgetFeedback.types';
-
-export type HideWidgets = {|
-    feedback: boolean,
-    indicator: boolean,
-|}
-
-export type WidgetEffects = {|
-    feedbacks?: ?Array<WidgetData>,
-    warnings?: ?Array<Message>,
-    errors?: ?Array<Message>,
-    indicators?: ?Array<WidgetData>
-|}
+import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 
 export type Props = {|
     program: Program,
