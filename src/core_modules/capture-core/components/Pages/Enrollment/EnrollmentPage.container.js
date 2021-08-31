@@ -16,18 +16,7 @@ import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { getScopeInfo } from '../../../metaData';
-import { convertValue } from '../../../converters/clientToView';
-import { dataElementTypes } from '../../../metaData/DataElement';
-
-const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
-    enrollments
-        .filter(({ program }) => program === selectedProgramId)
-        .map(({ created, enrollment }) => (
-            {
-                label: convertValue(created, dataElementTypes.DATETIME),
-                value: enrollment,
-            }
-        ));
+import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
