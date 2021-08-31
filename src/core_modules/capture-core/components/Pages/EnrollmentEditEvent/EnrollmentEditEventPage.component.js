@@ -91,7 +91,8 @@ const EnrollmentEditEventPagePain = ({
                 onSetOrgUnit={id => setOrgUnitId(id)}
                 onResetProgramId={() => resetProgramIdAndEnrollmentContext('enrollment')}
                 onResetOrgUnitId={() => resetOrgUnitId()}
-                isUserInteractionInProgress={isUserInteractionInProgress}>
+                isUserInteractionInProgress={isUserInteractionInProgress}
+            >
                 <Grid item xs={12} sm={6} md={4} lg={2}>
                     <SingleLockedSelect
                         ready={pageStatus !== pageStatuses.MISSING_DATA}

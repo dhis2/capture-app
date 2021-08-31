@@ -18,7 +18,7 @@ Then('the user sees the warning popup', () => {
 });
 
 When(/^the user set the WHOMCH Gestational age at visit to (.*)/, score =>
-    cy.get('[data-test="add-event-form"]').find('[data-test="capture-ui-input"]').eq(1).clear()
+    cy.get('[data-test="new-enrollment-event-form"]').find('[data-test="capture-ui-input"]').eq(1).clear()
         .type(score)
         .blur(),
 );
