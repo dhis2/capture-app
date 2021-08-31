@@ -1,3 +1,10 @@
+# [1.47.0](https://github.com/dhis2/capture-app/compare/v1.46.0...v1.47.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11631] Prevent adding event if stage is not repeatable and there is already event ([#2010](https://github.com/dhis2/capture-app/issues/2010)) ([a4bf5a2](https://github.com/dhis2/capture-app/commit/a4bf5a2599f0bd033983677082901bb058074d5c))
+
 # [1.46.0](https://github.com/dhis2/capture-app/compare/v1.45.1...v1.46.0) (2021-08-31)
 
 

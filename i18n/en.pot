@@ -934,6 +934,9 @@ msgstr ""
 msgid "Go to full {{ eventName }}"
 msgstr ""
 
+msgid "This stage can only have one event"
+msgstr ""
+
 msgid "New {{ eventName }} event"
 msgstr ""
 
