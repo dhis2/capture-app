@@ -1042,6 +1042,9 @@ msgstr ""
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
 
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
+
 msgid "Program not found"
 msgstr ""
 
