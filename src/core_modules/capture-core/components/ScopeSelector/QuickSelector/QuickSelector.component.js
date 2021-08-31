@@ -8,7 +8,6 @@ import { colors } from '@dhis2/ui';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { ProgramSelector } from './Program/ProgramSelector.component';
 import { OrgUnitSelector } from './OrgUnitSelector.component';
-import { ActionButtons } from './ActionButtons.component';
 import type { Props } from './QuickSelector.types';
 
 const styles = ({ palette }) => ({
@@ -72,17 +71,6 @@ class QuickSelectorPlain extends Component<Props> {
                         />
                     </Grid>
                     {this.props.children}
-                    <Grid item xs={12} sm={width * 3} md={width * 2} lg={2} >
-                        <ActionButtons
-                            selectedProgramId={this.props.selectedProgramId}
-                            onStartAgainClick={this.props.onStartAgain}
-                            onFindClick={this.props.onFindClick}
-                            onFindClickWithoutProgramId={this.props.onFindClickWithoutProgramId}
-                            onNewClick={this.props.onNewClick}
-                            onNewClickWithoutProgramId={this.props.onNewClickWithoutProgramId}
-                            showResetButton={!!(this.props.selectedProgramId || this.props.selectedOrgUnitId)}
-                        />
-                    </Grid>
                 </Grid>
             </Paper>
         );

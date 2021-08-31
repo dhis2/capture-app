@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-26T10:47:56.189Z\n"
-"PO-Revision-Date: 2021-08-26T10:47:56.189Z\n"
+"POT-Creation-Date: 2021-08-25T06:32:20.380Z\n"
+"PO-Revision-Date: 2021-08-25T06:32:20.380Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -833,6 +833,12 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "for"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -905,6 +911,9 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
+msgstr ""
+
+msgid "New {{ eventName }} event"
 msgstr ""
 
 msgid "Show {{ rest }} more"

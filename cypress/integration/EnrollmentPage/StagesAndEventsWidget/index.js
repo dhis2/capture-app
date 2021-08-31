@@ -191,6 +191,6 @@ When(/^you click New (.*)$/, (stageName) => {
     });
 });
 
-Then('you should navigate to Add new page', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ`);
+Then(/^you should navigate to Add new page (.*)$/, (url) => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/${url}`);
 });
