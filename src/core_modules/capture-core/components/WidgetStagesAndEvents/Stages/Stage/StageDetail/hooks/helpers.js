@@ -13,17 +13,20 @@ const isEventOverdue = (event: ApiTEIEvent) => moment(event.dueDate).isSameOrBef
     && event.status === statusTypes.SCHEDULE;
 
 const getEventStatus = (event: ApiTEIEvent) => {
-    const today = new Date();
+    const today = moment();
     const dueDate = moment(event.dueDate);
     const dueDateFromNow = dueDate.from(today);
+    const daysUntilDueDate = dueDate.diff(today, 'days');
+
     if (isEventOverdue(event)) {
-        return { status: statusTypes.OVERDUE, options: dueDateFromNow };
+        return { status: statusTypes.OVERDUE, options: daysUntilDueDate ? dueDateFromNow : undefined };
     }
+
     if (event.status === statusTypes.SCHEDULE) {
-        if (!event.dueDate) {
+        if (!event.dueDate || !daysUntilDueDate) {
             return { status: statusTypes.SCHEDULE, options: undefined };
         }
-        const daysUntilDueDate = dueDate.diff(today, 'days');
+
         if (daysUntilDueDate < 14) {
             return { status: statusTypes.SCHEDULE, options: dueDateFromNow };
         }
