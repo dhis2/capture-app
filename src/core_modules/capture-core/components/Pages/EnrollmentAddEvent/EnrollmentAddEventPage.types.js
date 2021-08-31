@@ -1,21 +1,25 @@
 // @flow
-import type { ProgramStage } from '../../../metaData';
+import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
 import type { ExternalSaveHandler } from '../../WidgetEnrollmentEventNew';
 
 export type Props = {|
-    programStage: ProgramStage,
-    trackedEntityName: string,
-    teiDisplayName: string,
-    enrollmentsAsOptions: Array<Object>,
-    pageStatus: string,
     programId: string,
     stageId: string,
     orgUnitId: string,
     teiId: string,
     enrollmentId: string,
+    stageName: string,
+    teiDisplayName: string,
+    trackedEntityName: string,
+    enrollmentsAsOptions: Array<Object>,
+    eventDateLabel: string,
+    pageStatus: string,
     onSave: ExternalSaveHandler,
     onSaveSuccessActionType: string,
     onSaveErrorActionType: string,
     onCancel: () => void,
+    onDelete: () => void,
+    widgetEffects: ?WidgetEffects,
+    hideWidgets: HideWidgets,
     ...CssClasses,
 |};

@@ -6,6 +6,12 @@ import { useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPage.types';
+import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
+import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
+import { WidgetFeedback } from '../../WidgetFeedback';
+import { WidgetIndicator } from '../../WidgetIndicator';
+import { WidgetProfile } from '../../WidgetProfile';
+import { WidgetEnrollment } from '../../WidgetEnrollment';
 import {
     ScopeSelector,
     useSetOrgUnitId,
@@ -27,6 +33,23 @@ const styles = ({ typography }) => ({
     container: {
         padding: '16px 24px 16px 24px',
     },
+    columns: {
+        display: 'flex',
+    },
+    leftColumn: {
+        flexGrow: 3,
+        flexShrink: 1,
+        width: 872,
+    },
+    rightColumn: {
+        flexGrow: 1,
+        flexShrink: 1,
+        paddingLeft: spacersNum.dp16,
+        width: 360,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
+    },
     title: {
         ...typography.title,
         margin: `${spacersNum.dp16}px 0`,
@@ -34,18 +57,23 @@ const styles = ({ typography }) => ({
 });
 
 const EnrollmentAddEventPagePain = ({
-    programStage,
-    stageId,
     programId,
+    stageId,
     orgUnitId,
+    teiId,
     enrollmentId,
-    enrollmentsAsOptions,
+    stageName,
     trackedEntityName,
     teiDisplayName,
-    classes,
-    teiId,
+    enrollmentsAsOptions,
+    eventDateLabel,
     pageStatus,
-}) => {
+    widgetEffects,
+    hideWidgets,
+    onDelete,
+    classes,
+    ...passOnProps
+}: Props) => {
     const { setOrgUnitId } = useSetOrgUnitId();
     const { resetProgramIdAndEnrollmentContext } = useResetProgramId();
     const { resetOrgUnitId } = useResetOrgUnitId();
@@ -96,7 +124,7 @@ const EnrollmentAddEventPagePain = ({
                         onClear={() => resetStageId('enrollment')}
                         options={[
                             {
-                                label: programStage?.name || '',
+                                label: stageName,
                                 value: 'alwaysPreselected',
                             },
                         ]}
@@ -116,7 +144,7 @@ const EnrollmentAddEventPagePain = ({
                             },
                         ]}
                         selectedValue="alwaysPreselected"
-                        title={programStage.stageForm.getLabel('eventDate')}
+                        title={eventDateLabel}
                         isUserInteractionInProgress={isUserInteractionInProgress}
                     />
                 </Grid>
@@ -132,13 +160,59 @@ const EnrollmentAddEventPagePain = ({
                 <div className={classes.title}>{i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}</div>
                 <div>
                     {pageStatus === pageStatuses.DEFAULT && (
-                        <WidgetEnrollmentEventNew
-                            enrollmentId={enrollmentId}
-                            orgUnitId={orgUnitId}
-                            programId={programId}
-                            stageId={stageId}
-                            teiId={teiId}
-                        />
+                        <div
+                            className={classes.container}
+                            data-test="add-event-enrollment-page-content"
+                        >
+                            <div className={classes.title}>
+                                {i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}
+                            </div>
+                            <div className={classes.columns}>
+                                <div className={classes.leftColumn}>
+                                    <div
+                                        className={classes.addEventContainer}
+                                        data-test="add-event-enrollment-page-content"
+                                    >
+                                        <div>
+                                            <WidgetEnrollmentEventNew
+                                                {...passOnProps}
+                                                programId={programId}
+                                                stageId={stageId}
+                                                orgUnitId={orgUnitId}
+                                                teiId={teiId}
+                                                enrollmentId={enrollmentId}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={classes.rightColumn}>
+                                    <WidgetError error={widgetEffects?.errors} />
+                                    <WidgetWarning warning={widgetEffects?.warnings} />
+                                    {!hideWidgets.feedback && (
+                                        <WidgetFeedback
+                                            emptyText={i18n.t('There are no feedbacks for this event')}
+                                            feedback={widgetEffects?.feedbacks}
+                                        />
+                                    )}
+                                    {!hideWidgets.indicator && (
+                                        <WidgetIndicator
+                                            emptyText={i18n.t('There are no indicators for this event')}
+                                            indicators={widgetEffects?.indicators}
+                                        />
+                                    )}
+                                    <WidgetProfile
+                                        teiId={teiId}
+                                        programId={programId}
+                                    />
+                                    <WidgetEnrollment
+                                        teiId={teiId}
+                                        enrollmentId={enrollmentId}
+                                        programId={programId}
+                                        onDelete={onDelete}
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     )}
                     {pageStatus === pageStatuses.MISSING_DATA && (
                         <span>{i18n.t('The enrollment event data could not be found')}</span>

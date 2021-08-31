@@ -420,14 +420,17 @@ const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
 const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
 
+
 type Props = {
     formFoundation: RenderFoundation,
     programName: string,
     orgUnitName: string,
+    stageName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: Object,
     onSetSaveTypes: (saveTypes: ?Array<$Values<typeof newEventSaveTypes>>) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSaveEventInStage: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => void,
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     onCancel: () => void,
@@ -443,6 +446,7 @@ type Props = {
     theme: Theme,
     formHorizontal: ?boolean,
     recentlyAddedRelationshipId?: ?string,
+    isAddEventInStage: boolean,
 };
 type DataEntrySection = {
     placement: $Values<typeof placements>,
@@ -513,30 +517,55 @@ class NewEventDataEntry extends Component<Props> {
             this.props.onSaveAndAddAnother(itemId, dataEntryId, formFoundation);
         } else if (saveType === newEventSaveTypes.SAVEANDEXIT) {
             this.props.onSave(itemId, dataEntryId, formFoundation);
+        } else if (saveType === newEventSaveTypes.SAVEWITHOUTCOMPLETING) {
+            this.props.onSaveEventInStage(itemId, dataEntryId, formFoundation);
+        } else if (saveType === newEventSaveTypes.SAVEANDCOMPLETE) {
+            this.props.onSaveEventInStage(itemId, dataEntryId, formFoundation, true);
         }
     }
 
     getSavingText() {
-        const { classes, orgUnitName, programName } = this.props;
+        const { classes, orgUnitName, programName, stageName, isAddEventInStage } = this.props;
         const firstPart = `${i18n.t('Saving to')} `;
-        const secondPart = ` ${i18n.t('in')} `;
+        const secondPart = ` ${i18n.t('for')} `;
+        const thirdPart = ` ${i18n.t('in')} `;
 
-        return (
-            <span>
-                {firstPart}
-                <span
-                    className={classes.savingContextNames}
-                >
-                    {programName}
+        if (isAddEventInStage) {
+            return (
+                <span>
+                    {firstPart}
+                    <span
+                        className={classes.savingContextNames}
+                    >
+                        {stageName}
+                    </span>
+                    {secondPart}
+                    <span className={classes.savingContextNames}>
+                        {programName}
+                    </span>
+                    {thirdPart}
+                    <span
+                        className={classes.savingContextNames}
+                    >
+                        {orgUnitName}
+                    </span>
                 </span>
-                {secondPart}
-                <span
-                    className={classes.savingContextNames}
-                >
-                    {orgUnitName}
-                </span>
+            );
+        }
+        return (<span>
+            {firstPart}
+            <span
+                className={classes.savingContextNames}
+            >
+                {programName}
             </span>
-        );
+            {thirdPart}
+            <span
+                className={classes.savingContextNames}
+            >
+                {orgUnitName}
+            </span>
+        </span>);
     }
     renderHorizontal = () => {
         const classes = this.props.classes;

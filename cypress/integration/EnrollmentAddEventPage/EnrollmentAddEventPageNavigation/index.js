@@ -2,7 +2,7 @@ beforeEach(() => {
     cy.loginThroughForm();
 });
 
-Given(/^you land on the enrollment add event page by having typed (.*)$/, (url) => {
+Given(/^you land on the enrollment (.*) page by having typed (.*)$/, (_, url) => {
     cy.visit(url);
 });
 

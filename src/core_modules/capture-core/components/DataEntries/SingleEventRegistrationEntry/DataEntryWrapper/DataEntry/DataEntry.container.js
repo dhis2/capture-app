@@ -16,6 +16,7 @@ import {
     addNewEventNote,
     newEventOpenNewRelationship,
     scrolledToRelationships,
+    requestSaveNewEventInStage,
 } from './actions/dataEntry.actions';
 import {
     makeProgramNameSelector,
@@ -28,15 +29,19 @@ import typeof { newEventSaveTypes } from './newEventSaveTypes';
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
 
-    const mapStateToProps = (state: ReduxState, props: Object) => ({
-        recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
-        ready: !state.activePage.isDataEntryLoading,
-        error: !props.formFoundation ?
-            i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
-        programName: programNameSelector(state),
-        orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] &&
+    const mapStateToProps = (state: ReduxState, props: Object) => {
+        const isAddEventInStage = state.router.location.query.pathname === '/enrollmentEventNew';
+
+        return { recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
+            ready: !state.activePage.isDataEntryLoading,
+            error: !props.formFoundation ?
+                i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
+            programName: programNameSelector(state),
+            orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] &&
           state.organisationUnits[state.currentSelections.orgUnitId].name,
-    });
+            stageName: props.stage?.name,
+            isAddEventInStage };
+    };
 
 
     // $FlowFixMe[not-an-object] automated comment
@@ -104,6 +109,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onScrollToRelationships: () => {
         dispatch(scrolledToRelationships());
     },
+    onSaveEventInStage:
+        (eventId: string, dataEntryId: string, formFoundation: RenderFoundation, completed?: boolean) => {
+            window.scrollTo(0, 0);
+            dispatch(requestSaveNewEventInStage(eventId, dataEntryId, formFoundation, completed));
+        },
 });
 
 // $FlowFixMe[missing-annot] automated comment
