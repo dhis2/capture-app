@@ -1,21 +1,19 @@
 // @flow
 import React, { useCallback } from 'react';
+import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { useHistory } from 'react-router';
 import {
     addEnrollmentEventPageActionTypes,
     navigateToEnrollmentPage,
 } from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
-import { urlArguments } from '../../../utils/url';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { useWidgetDataFromStore } from './hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 
 export const EnrollmentAddEventPage = () => {
-    const history = useHistory();
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useSelector(
         ({
             router: {
@@ -42,11 +40,11 @@ export const EnrollmentAddEventPage = () => {
     }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleDelete = useCallback(() => {
-        history.push(
-            `/enrollment?${urlArguments({ orgUnitId, programId, teiId })}`,
-        );
-        dispatch(deleteEnrollment({ enrollmentId }));
-    }, [dispatch, history, programId, orgUnitId, teiId, enrollmentId]);
+        dispatch(batchActions([
+            deleteEnrollment({ enrollmentId }),
+            navigateToEnrollmentPage(programId, orgUnitId, teiId),
+        ]));
+    }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
     // TODO: Validate query params
     // Ticket: https://jira.dhis2.org/browse/TECH-669
