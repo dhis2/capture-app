@@ -1,8 +1,9 @@
 // @flow
 import React, { type ComponentType, useState, useCallback } from 'react';
 import cx from 'classnames';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
-import { spacersNum, colors } from '@dhis2/ui';
+import { spacersNum, colors, IconAdd24, Button } from '@dhis2/ui';
 import { StageOverview } from './StageOverview';
 import type { Props } from './stage.types';
 import { Widget } from '../../../Widget';
@@ -14,10 +15,20 @@ const styles = {
         marginRight: spacersNum.dp16,
         borderTop: `1px solid ${colors.grey400}`,
     },
+    button: {
+        margin: `0 ${spacersNum.dp16}px ${spacersNum.dp16}px ${spacersNum.dp16}px`,
+    },
+    buttonRow: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    label: {
+        paddingLeft: spacersNum.dp8,
+    },
 };
 
 
-export const StagePlain = ({ stage, events, classes, className, ...passOnProps }: Props) => {
+export const StagePlain = ({ stage, events, classes, className, onCreateNew, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
     const { id, name, icon, description, dataElements, hideDueDate } = stage;
     return (
@@ -37,14 +48,28 @@ export const StagePlain = ({ stage, events, classes, className, ...passOnProps }
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
             >
-                {events.length > 0 && <StageDetail
+                {events.length > 0 ? <StageDetail
                     stageId={id}
                     eventName={name}
                     events={events}
                     dataElements={dataElements}
                     hideDueDate={hideDueDate}
+                    onCreateNew={onCreateNew}
                     {...passOnProps}
-                />}
+                /> : <Button
+                    small
+                    secondary
+                    className={classes.button}
+                    dataTest="create-new-button"
+                    onClick={() => onCreateNew(id)}
+                >
+                    <div className={classes.buttonRow}>
+                        <div className={classes.icon}><IconAdd24 /></div>
+                        <div className={classes.label}>
+                            {i18n.t('New {{ eventName }} event', { eventName: name })}
+                        </div>
+                    </div>
+                </Button>}
             </Widget>
         </div>
     );

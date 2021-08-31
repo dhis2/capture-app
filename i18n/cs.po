@@ -878,6 +878,12 @@ msgstr "Chcete-li pracovat s vybraným programem,"
 msgid "open the Tracker Capture app"
 msgstr "otevřít aplikaci Tracker Capture"
 
+msgid "for"
+msgstr "pro"
+
+msgid "Save without completing"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr "Akce zápisu"
 

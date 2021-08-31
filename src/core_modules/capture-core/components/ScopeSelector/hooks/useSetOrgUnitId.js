@@ -7,9 +7,11 @@ export const useSetOrgUnitId = () => {
     const history = useHistory();
     const pathname: string = useSelector(({ router: { location } }) => location.pathname);
 
-    const setOrgUnitId = (orgUnitId: string, pageToPush: string = pathname) => {
+    const setOrgUnitId = (orgUnitId: string, pageToPush: string = pathname, withRestOfQueries?: ?boolean = true) => {
         const restOfQueries = getUrlQueries();
-        history.push(`${pageToPush}?${urlArguments({ ...restOfQueries, orgUnitId })}`);
+        withRestOfQueries
+            ? history.push(`${pageToPush}?${urlArguments({ ...restOfQueries, orgUnitId })}`)
+            : history.push(`${pageToPush}?${urlArguments({ orgUnitId })}`);
     };
 
     return { setOrgUnitId };

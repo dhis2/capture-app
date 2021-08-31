@@ -1,3 +1,17 @@
+# [1.46.0](https://github.com/dhis2/capture-app/compare/v1.45.1...v1.46.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11652] show the add button for empty event stage ([#2014](https://github.com/dhis2/capture-app/issues/2014)) ([9b0838b](https://github.com/dhis2/capture-app/commit/9b0838b1bca93f3bfc84dcfdc50492e73085f131))
+
+## [1.45.1](https://github.com/dhis2/capture-app/compare/v1.45.0...v1.45.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([7abc5ba](https://github.com/dhis2/capture-app/commit/7abc5ba47a607a1fa268803170a1175d9a3a15f7))
+
 # [1.45.0](https://github.com/dhis2/capture-app/compare/v1.44.3...v1.45.0) (2021-08-29)
 
 
