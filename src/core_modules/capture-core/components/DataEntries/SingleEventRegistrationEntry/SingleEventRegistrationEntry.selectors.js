@@ -14,4 +14,4 @@ export const makeEventAccessSelector = () => createSelector(
     categoriesMetaSelector,
     programStageIdSelector,
     (programId: string, categoriesMeta: ?Object, programStageId: ?string) =>
-        programId && getProgramEventAccess(programId, categoriesMeta, programStageId));
+        programId && getProgramEventAccess(programId, programStageId, categoriesMeta));

@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { moment } from 'capture-core-utils/moment';
+import { Tag } from '@dhis2/ui';
 import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
@@ -57,6 +58,15 @@ function convertNumberRangeForDisplay(clientValue) {
     );
 }
 
+function convertStatusForDisplay(clientValue: Object) {
+    const { isNegative, isPositive, text } = clientValue;
+    return (
+        <Tag negative={isNegative} positive={isPositive}>
+            {text}
+        </Tag>
+    );
+}
+
 const valueConvertersForType = {
     [dataElementTypes.NUMBER]: stringifyNumber,
     [dataElementTypes.INTEGER]: stringifyNumber,
@@ -76,6 +86,7 @@ const valueConvertersForType = {
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
     [dataElementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
     [dataElementTypes.NUMBER_RANGE]: convertNumberRangeForDisplay,
+    [dataElementTypes.STATUS]: convertStatusForDisplay,
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>, dataElement?: ?DataElement) {

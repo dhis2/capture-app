@@ -836,12 +836,6 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
-msgid "for"
-msgstr ""
-
-msgid "Save without completing"
-msgstr ""
-
 msgid "Enrollment actions"
 msgstr ""
 
@@ -899,6 +893,15 @@ msgid "Last updated {{date}}"
 msgstr ""
 
 msgid "Cancelled"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr ""
+
+msgid "program or stage is invalid"
 msgstr ""
 
 msgid "Error"
@@ -1040,6 +1043,9 @@ msgid "Skipped"
 msgstr ""
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Program not found"

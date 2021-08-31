@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { Props } from './EnrollmentAddEventPage.types';
-import { WidgetAddEvent } from '../../WidgetAddEvent';
 import {
     ScopeSelector,
     useSetOrgUnitId,
@@ -21,6 +20,7 @@ import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLock
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import { pageStatuses } from './EnrollmentAddEventPage.constants';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import { WidgetEnrollmentEventNew } from '../../WidgetEnrollmentEventNew';
 
 const styles = ({ typography }) => ({
     container: {
@@ -34,6 +34,7 @@ const styles = ({ typography }) => ({
 
 const EnrollmentAddEventPagePain = ({
     programStage,
+    stageId,
     programId,
     orgUnitId,
     enrollmentId,
@@ -41,6 +42,7 @@ const EnrollmentAddEventPagePain = ({
     trackedEntityName,
     teiDisplayName,
     classes,
+    teiId,
     pageStatus,
 }) => {
     const { setOrgUnitId } = useSetOrgUnitId();
@@ -121,7 +123,15 @@ const EnrollmentAddEventPagePain = ({
             <div className={classes.container} data-test="add-event-enrollment-page-content">
                 <div className={classes.title}>{i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}</div>
                 <div>
-                    {pageStatus === pageStatuses.DEFAULT && <WidgetAddEvent programStage={programStage} />}
+                    {pageStatus === pageStatuses.DEFAULT && (
+                        <WidgetEnrollmentEventNew
+                            enrollmentId={enrollmentId}
+                            orgUnitId={orgUnitId}
+                            programId={programId}
+                            stageId={stageId}
+                            teiId={teiId}
+                        />
+                    )}
                     {pageStatus === pageStatuses.MISSING_DATA && (
                         <span>{i18n.t('The enrollment event data could not be found')}</span>
                     )}

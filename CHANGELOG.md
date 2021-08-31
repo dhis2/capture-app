@@ -1,3 +1,22 @@
+# [1.49.0](https://github.com/dhis2/capture-app/compare/v1.48.0...v1.49.0) (2021-08-31)
+
+
+### Bug Fixes
+
+* rules engine unit tests ([#2028](https://github.com/dhis2/capture-app/issues/2028)) ([5a3c283](https://github.com/dhis2/capture-app/commit/5a3c2836a32ef8bdd053d24480dee8d49e9ac0da))
+
+
+### Features
+
+* [DHIS2-11630] visualize due date in status tag ([#2024](https://github.com/dhis2/capture-app/issues/2024)) ([5b5b246](https://github.com/dhis2/capture-app/commit/5b5b246a58e3e27a9f7b8bd4a726bb135a7432a0))
+
+# [1.48.0](https://github.com/dhis2/capture-app/compare/v1.47.0...v1.48.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11576] improve sorting function ([#2009](https://github.com/dhis2/capture-app/issues/2009)) ([d7aa476](https://github.com/dhis2/capture-app/commit/d7aa4767d72285aba2b78bdde8e30a949e5bda8d))
+
 # [1.47.0](https://github.com/dhis2/capture-app/compare/v1.46.0...v1.47.0) (2021-08-31)
 
 

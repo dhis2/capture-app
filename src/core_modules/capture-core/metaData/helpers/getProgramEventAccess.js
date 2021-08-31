@@ -6,8 +6,8 @@ import { EventProgram } from '../Program';
 
 export function getProgramEventAccess(
     programId: string,
-    categoriesMeta: ?{ [categoryId: string]: { writeAccess: boolean } },
     programStageId: ?string,
+    categoriesMeta: ?{ [categoryId: string]: { writeAccess: boolean } },
 ) {
     const program = getProgramFromProgramIdThrowIfNotFound(programId);
     let stage;
