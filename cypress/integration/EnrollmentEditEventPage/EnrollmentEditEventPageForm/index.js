@@ -1,11 +1,9 @@
+import '../../sharedSteps';
+
 beforeEach(() => cy.loginThroughForm());
 
 Given(/^the user lands on the enrollment event page by having typed (.*)$/, url =>
     cy.visit(url),
-);
-
-Then(/^the user ?(.*) see the following text: (.*)$/, (not, message) =>
-    cy.contains(message).should(not ? 'not.exist' : 'exist'),
 );
 
 When(/^the user clicks on the edit button/, () =>

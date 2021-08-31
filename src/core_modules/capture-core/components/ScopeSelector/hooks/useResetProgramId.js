@@ -12,5 +12,10 @@ export const useResetProgramId = () => {
         history.push(`${pageToPush}?${urlArguments({ ...restOfQueries })}`);
     };
 
-    return { resetProgramId };
+    const resetProgramIdAndEnrollmentContext = (pageToPush: string = pathname) => {
+        const { programId, enrollmentId, stageId, eventId, ...restOfQueries } = getUrlQueries();
+        history.push(`${pageToPush}?${urlArguments({ ...restOfQueries })}`);
+    };
+
+    return { resetProgramId, resetProgramIdAndEnrollmentContext };
 };

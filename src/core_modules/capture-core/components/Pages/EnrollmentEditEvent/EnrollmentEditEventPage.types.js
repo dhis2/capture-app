@@ -10,7 +10,13 @@ export type PlainProps = {|
     enrollmentId: string,
     programId: string,
     mode: string,
+    orgUnitId: string,
+    trackedEntityName: string,
+    teiDisplayName: string,
+    eventDate?: string,
+    enrollmentsAsOptions: Array<Object>,
     onDelete: () => void,
     onGoBack: () => void,
+    pageStatus: string,
     ...CssClasses,
 |};

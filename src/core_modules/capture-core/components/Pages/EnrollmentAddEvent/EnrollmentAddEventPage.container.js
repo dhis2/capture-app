@@ -12,6 +12,11 @@ import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.compon
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { useWidgetDataFromStore } from './hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
+import { useEnrollment } from '../common/EnrollmentOverviewDomain/useEnrollment';
+import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
+import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
+import { getScopeInfo } from '../../../metaData';
+import { pageStatuses } from './EnrollmentAddEventPage.constants';
 
 export const EnrollmentAddEventPage = () => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useSelector(
@@ -52,6 +57,17 @@ export const EnrollmentAddEventPage = () => {
     const programStage = [...program.stages.values()].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore('singleEvent-addEvent');
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
+    const enrollmentSite = useEnrollment(teiId).enrollment;
+    const { teiDisplayName } = useTeiDisplayName(teiId, programId);
+    const { trackedEntityName } = getScopeInfo(enrollmentSite?.trackedEntityType);
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);
+
+    let pageStatus = pageStatuses.MISSING_DATA;
+    if (orgUnitId) {
+        enrollmentSite && teiDisplayName && trackedEntityName
+            ? (pageStatus = pageStatuses.DEFAULT)
+            : (pageStatus = pageStatuses.MISSING_DATA);
+    } else pageStatus = pageStatuses.WITHOUT_ORG_UNIT_SELECTED;
 
     if (!programStage) {
         return <span>[program stage placeholder]</span>;
@@ -64,9 +80,15 @@ export const EnrollmentAddEventPage = () => {
         <EnrollmentAddEventPageComponent
             programId={programId}
             stageId={stageId}
-            enrollmentId={enrollmentId}
             orgUnitId={orgUnitId}
             teiId={teiId}
+            enrollmentId={enrollmentId}
+            stageName={programStage.name}
+            teiDisplayName={teiDisplayName}
+            trackedEntityName={trackedEntityName}
+            enrollmentsAsOptions={enrollmentsAsOptions}
+            eventDateLabel={programStage.stageForm.getLabel('eventDate')}
+            pageStatus={pageStatus}
             onSave={handleSave}
             onSaveSuccessActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS}
             onSaveErrorActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR}
