@@ -6,7 +6,7 @@
   "serverVersion": "37",
   "private": false,
   "dependencies": {
-    "@dhis2/app-runtime": "^2.9.2",
+    "@dhis2/app-runtime": "^2.10.0",
     "@dhis2/d2-i18n": "^1.1.0",
     "@dhis2/d2-icons": "^1.0.1",
     "@dhis2/d2-ui-app": "^2.0.0",
@@ -99,7 +99,7 @@
     "eslint-config-react-app": "^6.0.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-import-resolver-webpack": "^0.13.1",
-    "eslint-plugin-flowtype": "^5.9.0",
+    "eslint-plugin-flowtype": "^5.9.1",
     "eslint-plugin-import": "2.24.2",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-prettier": "^3.4.1",
