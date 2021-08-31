@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
+"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -170,6 +170,9 @@ msgstr "分配者"
 msgid "Saving to"
 msgstr "保存到"
 
+msgid "for"
+msgstr "对"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -200,6 +203,12 @@ msgstr "保存后退出"
 
 msgid "Finish"
 msgstr "结束"
+
+msgid "Save without completing"
+msgstr ""
+
+msgid "Complete"
+msgstr "完成"
 
 msgid "No write access"
 msgstr "无写权限"
@@ -251,9 +260,6 @@ msgstr "您无权在当前选择中创建活动"
 msgid "Save"
 msgstr "保存"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr "离开此页面将放弃您对此事件所做的更改。"
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "保存{{trackedEntityName}}"
 
@@ -294,6 +300,9 @@ msgstr "注册的人"
 msgid "Link"
 msgstr "链接"
 
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr "离开此页面将放弃您对此事件所做的更改。"
+
 msgid "validation failed"
 msgstr "验证失败"
 
@@ -308,9 +317,6 @@ msgstr "指标"
 
 msgid "Warnings"
 msgstr "错误"
-
-msgid "Complete"
-msgstr "完成"
 
 msgid "Warnings found"
 msgstr "发现警告"
@@ -631,8 +637,23 @@ msgstr "在此项目中创建一个新事件。"
 msgid "View working list in this program."
 msgstr "查看此项目中的工作清单。"
 
+msgid "stage"
+msgstr ""
+
 msgid "Enrollment{{escape}} New Event"
 msgstr "登记{{escape}}新事件"
+
+msgid "There are no feedbacks for this event"
+msgstr ""
+
+msgid "There are no indicators for this event"
+msgstr "此事件没有指标"
+
+msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
+msgstr "选择一个注册机构开始填报"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "注册{{escape}} 查看事件"
@@ -640,20 +661,17 @@ msgstr "注册{{escape}} 查看事件"
 msgid "Enrollment{{escape}} Edit Event"
 msgstr "注册{{escape}} 编辑事件"
 
-msgid "We could not find the stage in the program"
-msgstr "我们在节目中找不到舞台"
-
 msgid "There are no feedback for this event"
 msgstr "本次活动暂无反馈"
-
-msgid "There are no indicators for this event"
-msgstr "此事件没有指标"
 
 msgid "Registered events"
 msgstr "登记的事件"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "选择一个注册机构开始填报"
+msgid "Or see all records accessible to you in {{program}} "
+msgstr ""
+
+msgid "Or see all events accessible to you in {{program}}"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
@@ -851,12 +869,6 @@ msgstr "基于选择的项目工作"
 msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访APP"
 
-msgid "for"
-msgstr "对"
-
-msgid "Save without completing"
-msgstr ""
-
 msgid "Enrollment actions"
 msgstr "注册操作"
 
@@ -916,6 +928,12 @@ msgstr "最近更新的{{date}}"
 msgid "Cancelled"
 msgstr "已取消"
 
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr ""
+
+msgid "program or stage is invalid"
+msgstr ""
+
 msgid "Error"
 msgstr "错误"
 
@@ -931,6 +949,9 @@ msgstr "无法加载个人资料窗口小部件。请稍后再试"
 msgid "Person Profile"
 msgstr "人物简介"
 
+msgid "New {{ eventName }} event"
+msgstr "新的 {{ eventName }} 事件"
+
 msgid "Show {{ rest }} more"
 msgstr "显示 {{ rest}} 更多"
 
@@ -940,8 +961,8 @@ msgstr "重置列表"
 msgid "Go to full {{ eventName }}"
 msgstr "转到完整的{{ eventName }}"
 
-msgid "New {{ eventName }} event"
-msgstr "新的 {{ eventName }} 事件"
+msgid "This stage can only have one event"
+msgstr ""
 
 msgid "Report date"
 msgstr "报告日期"
@@ -1053,6 +1074,9 @@ msgstr "跳过"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}中的{{trackedEntityName}}"
+
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "没有发现项目"
