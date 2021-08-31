@@ -1,3 +1,10 @@
+## [1.49.1](https://github.com/dhis2/capture-app/compare/v1.49.0...v1.49.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* [TECH-663] restructure/clean new enrollment event page ([40fbbf9](https://github.com/dhis2/capture-app/commit/40fbbf9325ff3c8da9ee392cef489d95e16bbe89))
+
 # [1.49.0](https://github.com/dhis2/capture-app/compare/v1.48.0...v1.49.0) (2021-08-31)
 
 
