@@ -1,6 +1,6 @@
 // @flow
 import React, { type ComponentType, useState, useCallback } from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Tooltip } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 // $FlowFixMe
 import { colors,
@@ -56,6 +56,7 @@ const StageDetailPlain = (props: Props) => {
         stageId,
         dataElements,
         hideDueDate = false,
+        repeatable = false,
         onEventClick,
         onViewAll,
         onCreateNew,
@@ -189,18 +190,29 @@ const StageDetailPlain = (props: Props) => {
             onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
 
-        const renderCreateNewButton = () => (<Button
-            small
-            secondary
-            className={classes.button}
-            dataTest="create-new-button"
-            onClick={handleCreateNew}
-        >
-            <div className={classes.icon}><IconAdd24 /></div>
-            <div className={classes.label}>
-                {i18n.t('New {{ eventName }} event', { eventName })}
-            </div>
-        </Button>);
+        const renderCreateNewButton = () => {
+            const shouldDisableCreateNew = !repeatable && events.length > 0;
+
+            return (<Button
+                small
+                secondary
+                disabled={shouldDisableCreateNew}
+                className={classes.button}
+                dataTest="create-new-button"
+                onClick={handleCreateNew}
+            >
+                <Tooltip
+                    title={shouldDisableCreateNew ? i18n.t('This stage can only have one event') : ''}
+                >
+                    <div>
+                        <div className={classes.icon}><IconAdd24 /></div>
+                        <div className={classes.label}>
+                            {i18n.t('New {{ eventName }} event', { eventName })}
+                        </div>
+                    </div>
+                </Tooltip>
+            </Button>);
+        };
 
         return (
             <DataTableRow>

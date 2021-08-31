@@ -30,7 +30,7 @@ const styles = {
 
 export const StagePlain = ({ stage, events, classes, className, onCreateNew, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
-    const { id, name, icon, description, dataElements, hideDueDate } = stage;
+    const { id, name, icon, description, dataElements, hideDueDate, repeatable } = stage;
     return (
         <div
             data-test="stage-content"
@@ -54,6 +54,7 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, ...
                     events={events}
                     dataElements={dataElements}
                     hideDueDate={hideDueDate}
+                    repeatable={repeatable}
                     onCreateNew={onCreateNew}
                     {...passOnProps}
                 /> : <Button
