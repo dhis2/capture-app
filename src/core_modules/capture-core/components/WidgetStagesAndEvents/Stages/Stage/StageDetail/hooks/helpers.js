@@ -12,7 +12,7 @@ const isEventOverdue = (event: ApiTEIEvent) => moment(event.dueDate).isSameOrBef
     && event.status === statusTypes.SCHEDULE;
 
 const getEventStatus = (event: ApiTEIEvent) => {
-    const today = moment();
+    const today = moment().startOf('day');
     const dueDate = moment(event.dueDate);
     const dueDateFromNow = dueDate.from(today);
     const daysUntilDueDate = dueDate.diff(today, 'days');
