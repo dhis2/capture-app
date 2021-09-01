@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
+"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -171,6 +171,9 @@ msgstr "المحال إليه"
 msgid "Saving to"
 msgstr "حفظ إلى"
 
+msgid "for"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -204,6 +207,12 @@ msgstr "حفظ وخروج"
 
 msgid "Finish"
 msgstr "إنهاء"
+
+msgid "Save without completing"
+msgstr ""
+
+msgid "Complete"
+msgstr "مكتمل"
 
 msgid "No write access"
 msgstr "لا توجد صلاحية الوصول للكتابة"
@@ -255,10 +264,6 @@ msgstr ""
 msgid "Save"
 msgstr "حفظ"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"ستؤدي مغادرة هذه الصفحة إلى تجاهل التغييرات التي أجريتها على هذا الحدث."
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
 
@@ -300,6 +305,10 @@ msgstr "الشخص المسجل"
 msgid "Link"
 msgstr "ربط"
 
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"ستؤدي مغادرة هذه الصفحة إلى تجاهل التغييرات التي أجريتها على هذا الحدث."
+
 msgid "validation failed"
 msgstr "فشل التحقق من الصحة"
 
@@ -314,9 +323,6 @@ msgstr "المؤشرات"
 
 msgid "Warnings"
 msgstr "تحذيرات"
-
-msgid "Complete"
-msgstr "مكتمل"
 
 msgid "Warnings found"
 msgstr "تم العثور على إشعارات تحذيرية"
@@ -636,7 +642,22 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "stage"
+msgstr ""
+
 msgid "Enrollment{{escape}} New Event"
+msgstr ""
+
+msgid "There are no feedbacks for this event"
+msgstr ""
+
+msgid "There are no indicators for this event"
+msgstr ""
+
+msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
@@ -645,19 +666,16 @@ msgstr ""
 msgid "Enrollment{{escape}} Edit Event"
 msgstr ""
 
-msgid "We could not find the stage in the program"
-msgstr ""
-
 msgid "There are no feedback for this event"
-msgstr ""
-
-msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "Registered events"
 msgstr "الأحداث المسجلة"
 
-msgid "Choose a registering unit to start reporting"
+msgid "Or see all records accessible to you in {{program}} "
+msgstr ""
+
+msgid "Or see all events accessible to you in {{program}}"
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
@@ -856,12 +874,6 @@ msgstr "للعمل مع البرنامج المحدد"
 msgid "open the Tracker Capture app"
 msgstr "فتح برنامج التتبع والإلتقاط"
 
-msgid "for"
-msgstr ""
-
-msgid "Save without completing"
-msgstr ""
-
 msgid "Enrollment actions"
 msgstr ""
 
@@ -921,6 +933,12 @@ msgstr ""
 msgid "Cancelled"
 msgstr "تم الإلغاء"
 
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr ""
+
+msgid "program or stage is invalid"
+msgstr ""
+
 msgid "Error"
 msgstr "خطأ"
 
@@ -936,6 +954,9 @@ msgstr ""
 msgid "Person Profile"
 msgstr ""
 
+msgid "New {{ eventName }} event"
+msgstr ""
+
 msgid "Show {{ rest }} more"
 msgstr ""
 
@@ -945,7 +966,7 @@ msgstr ""
 msgid "Go to full {{ eventName }}"
 msgstr ""
 
-msgid "New {{ eventName }} event"
+msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Report date"
@@ -1057,6 +1078,9 @@ msgid "Skipped"
 msgstr "تم التخطي"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
+msgstr ""
+
+msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Program not found"
