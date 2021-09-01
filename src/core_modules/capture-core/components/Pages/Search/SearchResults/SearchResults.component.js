@@ -73,7 +73,12 @@ const CardListButtons = withStyles(buttonStyles)(
                 <Button
                     small
                     dataTest="view-dashboard-button"
-                    onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
+                    onClick={() => navigateToTrackedEntityDashboard({
+                        teiId: id,
+                        orgUnitId,
+                        scopeSearchParam,
+                        currentUrl: `${pathname}${search}`,
+                    })}
                 >
                     {i18n.t('View dashboard')}
                 </Button>
@@ -83,7 +88,12 @@ const CardListButtons = withStyles(buttonStyles)(
                         small
                         className={classes.buttonMargin}
                         dataTest="view-active-enrollment-button"
-                        onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
+                        onClick={() => navigateToTrackedEntityDashboard({
+                            teiId: id,
+                            orgUnitId,
+                            scopeSearchParam,
+                            currentUrl: `${pathname}${search}`,
+                        })}
                     >
                         {i18n.t('View active enrollment')}
                     </Button>
@@ -94,7 +104,12 @@ const CardListButtons = withStyles(buttonStyles)(
                         small
                         className={classes.buttonMargin}
                         dataTest="re-enrollment-button"
-                        onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
+                        onClick={() => navigateToTrackedEntityDashboard({
+                            teiId: id,
+                            orgUnitId,
+                            scopeSearchParam,
+                            currentUrl: `${pathname}${search}`,
+                        })}
                     >
                         {i18n.t('Re-enroll')} {programName && `${i18n.t('in')} ${programName}`}
                     </Button>

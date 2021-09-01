@@ -1,3 +1,57 @@
+## [1.53.1](https://github.com/dhis2/capture-app/compare/v1.53.0...v1.53.1) (2021-09-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([24ca2c7](https://github.com/dhis2/capture-app/commit/24ca2c7742d8fe952a62170265c4a39680eaab7e))
+
+# [1.53.0](https://github.com/dhis2/capture-app/compare/v1.52.0...v1.53.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11467] List records in program regardless of OrgUnit ([8d7f418](https://github.com/dhis2/capture-app/commit/8d7f418b94fdc91c673b96cd7757f578999c0afd))
+
+# [1.52.0](https://github.com/dhis2/capture-app/compare/v1.51.0...v1.52.0) (2021-08-31)
+
+
+### Features
+
+* Widgets in Add Event Page ([cd9e0e4](https://github.com/dhis2/capture-app/commit/cd9e0e40404c4027656dd35b120166876057e3d6))
+
+# [1.51.0](https://github.com/dhis2/capture-app/compare/v1.50.0...v1.51.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11201][DHIS2-11390] add TopBarActions in the EnrollmentEventEdit page and EnrollmentEventNew ([#2027](https://github.com/dhis2/capture-app/issues/2027)) ([96c3c9e](https://github.com/dhis2/capture-app/commit/96c3c9ed26097b89ebd99a24efccdc53d5fee84a))
+
+# [1.50.0](https://github.com/dhis2/capture-app/compare/v1.49.1...v1.50.0) (2021-08-31)
+
+
+### Features
+
+* [DHIS2-11199][DHIS2-11389] add ScopeSelector in EnrollemntEventEdit page & EnrollemntEventNew page ([#2022](https://github.com/dhis2/capture-app/issues/2022)) ([895114c](https://github.com/dhis2/capture-app/commit/895114c02cc527933eb91ca1da4acf87f21ea1c8))
+
+## [1.49.1](https://github.com/dhis2/capture-app/compare/v1.49.0...v1.49.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* [TECH-663] restructure/clean new enrollment event page ([40fbbf9](https://github.com/dhis2/capture-app/commit/40fbbf9325ff3c8da9ee392cef489d95e16bbe89))
+
+# [1.49.0](https://github.com/dhis2/capture-app/compare/v1.48.0...v1.49.0) (2021-08-31)
+
+
+### Bug Fixes
+
+* rules engine unit tests ([#2028](https://github.com/dhis2/capture-app/issues/2028)) ([5a3c283](https://github.com/dhis2/capture-app/commit/5a3c2836a32ef8bdd053d24480dee8d49e9ac0da))
+
+
+### Features
+
+* [DHIS2-11630] visualize due date in status tag ([#2024](https://github.com/dhis2/capture-app/issues/2024)) ([5b5b246](https://github.com/dhis2/capture-app/commit/5b5b246a58e3e27a9f7b8bd4a726bb135a7432a0))
+
 # [1.48.0](https://github.com/dhis2/capture-app/compare/v1.47.0...v1.48.0) (2021-08-31)
 
 

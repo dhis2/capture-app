@@ -4,6 +4,11 @@ beforeEach(() => {
     cy.loginThroughForm();
 });
 
+Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
+    cy.visit(url);
+    cy.get('[data-test="scope-selector"]').contains('Selected person');
+});
+
 When('you click the "New" button to add a new event', () => {
     cy.get('[data-test="new-event-button"]')
         .click();
@@ -278,7 +283,7 @@ And('you navigated to the main page', () => {
 });
 
 And('you see message explaining you need to select a program', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
+    cy.url().should('include', `${Cypress.config().baseUrl}/#/enrollment?orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ`);
     cy.get('[data-test="enrollment-page-content"]')
         .contains('Carlos Cruz is enrolled in multiple programs. Choose a program.');
 });
@@ -298,6 +303,16 @@ And('you see the enrollment page but there is no org unit id in the url', () => 
         .contains('Enrollment Dashboard');
 });
 
+And('you see the enrollment event Edit page but there is no org unit id in the url', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventEdit?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR`);
+    cy.contains('Enrollment: View Event');
+});
+
+And('you see the enrollment event New page but there is no org unit id in the url', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR`);
+    cy.contains('Enrollment: New Event');
+});
+
 And('you see the enrollment page', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
     cy.get('[data-test="enrollment-page-content"]')
@@ -309,6 +324,22 @@ And('you reset the enrollment selection', () => {
         .should('have.length.greaterThan', 3);
     cy.get('[data-test="reset-selection-button"]')
         .eq(3)
+        .click();
+});
+
+And('you reset the stage selection', () => {
+    cy.get('[data-test="reset-selection-button"]')
+        .should('have.length.greaterThan', 4);
+    cy.get('[data-test="reset-selection-button"]')
+        .eq(4)
+        .click();
+});
+
+And('you reset the event selection', () => {
+    cy.get('[data-test="reset-selection-button"]')
+        .should('have.length.greaterThan', 5);
+    cy.get('[data-test="reset-selection-button"]')
+        .eq(5)
         .click();
 });
 

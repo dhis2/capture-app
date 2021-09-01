@@ -2,7 +2,7 @@ beforeEach(() => {
     cy.loginThroughForm();
 });
 
-Given(/^you land on the enrollment add event page by having typed (.*)$/, (url) => {
+Given(/^you land on the enrollment (.*) page by having typed (.*)$/, (_, url) => {
     cy.visit(url);
 });
 
@@ -33,7 +33,7 @@ And('you see the add event form details', () => {
 
     cy.get('[data-test="add-event-enrollment-page-content"]')
         .within(() => {
-            cy.get('[data-test="add-event-form"]')
+            cy.get('[data-test="new-enrollment-event-form"]')
                 .find('[data-test^=form-field-]')
                 .should('have.length', 8)
                 .each(($row, index) => {

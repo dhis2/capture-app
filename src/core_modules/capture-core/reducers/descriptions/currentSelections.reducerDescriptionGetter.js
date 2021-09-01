@@ -58,6 +58,13 @@ const resetCategoryOption = (state: Object, categoryId: string) => {
     const newCategories = deleteKeyFromObject(categoryId, categories);
     const newCategoriesMeta = deleteKeyFromObject(categoryId, categoriesMeta);
 
+    if (!Object.keys(newCategories).length && !Object.keys(newCategoriesMeta).length) {
+        const nextState = { ...state };
+        delete nextState.categories;
+        delete nextState.categoriesMeta;
+        nextState.complete = false;
+        return nextState;
+    }
     return {
         ...state,
         categories: newCategories,
@@ -163,13 +170,20 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         ...state,
         categoryCheckInProgress: false,
     }),
+    [crossPageActionTypes.UPDATE_SHOW_ACCESSIBLE_STATUS]: (state, action) => {
+        const { newStatus } = action.payload;
+        return {
+            ...state,
+            showaccessible: newStatus,
+        };
+    },
     [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, { payload: { orgUnitId } }) => ({
         ...state,
         orgUnitId,
     }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
-        orgUnitId: null,
+        orgUnitId: undefined,
         complete: false,
     }),
     [lockedSelectorActionTypes.FROM_URL_UPDATE]: (state, action) => {
@@ -225,5 +239,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     }),
 }, 'currentSelections', {
     complete: false,
+    showaccessible: false,
     categoryCheckInProgress: false,
 });

@@ -1,7 +1,5 @@
 // @flow
-export {
-    scopeSelectorActionTypes,
-} from './ScopeSelector.actions';
+export { scopeSelectorActionTypes } from './ScopeSelector.actions';
 export {
     useSetProgramId,
     useSetOrgUnitId,
@@ -10,6 +8,9 @@ export {
     useResetOrgUnitId,
     useResetTeiId,
     useResetEnrollmentId,
+    useResetEventId,
+    useResetStageId,
     useReset,
 } from './hooks';
 export { ScopeSelector } from './ScopeSelector.container';
+export { buildEnrollmentsAsOptions } from './ScopeSelector.utils';

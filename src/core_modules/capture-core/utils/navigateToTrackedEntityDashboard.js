@@ -1,6 +1,26 @@
+// @flow
 import { config } from 'd2';
+import type { TeiRecords } from '../components/WorkingLists/TeiWorkingLists/types';
 
-export const navigateToTrackedEntityDashboard = (teiId, orgUnitId, scopeSearchParam, currentUrl) => {
+type Props = {|
+    teiId: string,
+    orgUnitId: string,
+    scopeSearchParam: string,
+    currentUrl: string,
+    trackedEntityInstance?: ?TeiRecords
+|}
+
+export const navigateToTrackedEntityDashboard = ({
+    teiId,
+    orgUnitId,
+    scopeSearchParam,
+    currentUrl,
+    trackedEntityInstance,
+}: Props) => {
+    if (!orgUnitId && trackedEntityInstance) {
+        orgUnitId = trackedEntityInstance?.regUnit.id;
+    }
+
     const { baseUrl } = config;
     const instanceBaseUrl = baseUrl.split('/api')[0];
     const base64Url = btoa(`/dhis-web-capture/#${currentUrl}`);

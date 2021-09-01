@@ -15,7 +15,6 @@ export function convertDataEntryValuesToClientValues(
     if (!dataEntryValues) {
         return null;
     }
-
     const eventValues = Object
         .keys(dataEntryValues)
         // eslint-disable-next-line complexity

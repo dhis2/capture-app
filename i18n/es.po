@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
+"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -180,6 +180,9 @@ msgstr "Cesionario"
 msgid "Saving to"
 msgstr "Guardando a"
 
+msgid "for"
+msgstr "para"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -213,6 +216,12 @@ msgstr "Guardar y salir"
 
 msgid "Finish"
 msgstr "Acabar"
+
+msgid "Save without completing"
+msgstr ""
+
+msgid "Complete"
+msgstr "Completo"
 
 msgid "No write access"
 msgstr "Sin acceso de escritura"
@@ -266,11 +275,6 @@ msgstr "No tiene acceso para crear un evento en las selecciones actuales"
 msgid "Save"
 msgstr "Guardar"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Al salir de esta página, se descartarán los cambios que realizó en este "
-"evento."
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Guardando un {{trackedEntityName}}"
 
@@ -317,6 +321,11 @@ msgstr "Persona registrada"
 msgid "Link"
 msgstr "Enlace"
 
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Al salir de esta página, se descartarán los cambios que realizó en este "
+"evento."
+
 msgid "validation failed"
 msgstr "Validación fallida"
 
@@ -331,9 +340,6 @@ msgstr "Indicadores"
 
 msgid "Warnings"
 msgstr "Advertencias"
-
-msgid "Complete"
-msgstr "Completo"
 
 msgid "Warnings found"
 msgstr "Advertencias encontradas"
@@ -664,8 +670,23 @@ msgstr "Crea un nuevo evento en este programa."
 msgid "View working list in this program."
 msgstr "Ver lista de trabajo en este programa."
 
+msgid "stage"
+msgstr ""
+
 msgid "Enrollment{{escape}} New Event"
 msgstr ""
+
+msgid "There are no feedbacks for this event"
+msgstr ""
+
+msgid "There are no indicators for this event"
+msgstr ""
+
+msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
+msgstr "Elija una unidad de registro para comenzar a informar"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr "Inscripción {{escape}} Ver evento"
@@ -673,20 +694,17 @@ msgstr "Inscripción {{escape}} Ver evento"
 msgid "Enrollment{{escape}} Edit Event"
 msgstr "Inscripción {{escape}} Editar evento"
 
-msgid "We could not find the stage in the program"
-msgstr "No pudimos encontrar la etapa en el programa."
-
 msgid "There are no feedback for this event"
-msgstr ""
-
-msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "Registered events"
 msgstr "Eventos registrados"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Elija una unidad de registro para comenzar a informar"
+msgid "Or see all records accessible to you in {{program}} "
+msgstr ""
+
+msgid "Or see all events accessible to you in {{program}}"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Elija los {{missingCategories}} para comenzar a informar"
@@ -901,12 +919,6 @@ msgstr "Para trabajar con el programa seleccionado,"
 msgid "open the Tracker Capture app"
 msgstr "abre la aplicación Captura del rastreador"
 
-msgid "for"
-msgstr "para"
-
-msgid "Save without completing"
-msgstr ""
-
 msgid "Enrollment actions"
 msgstr "Acciones de inscripción"
 
@@ -970,6 +982,12 @@ msgstr "Última actualización {{date}}"
 msgid "Cancelled"
 msgstr "Cancelar"
 
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr ""
+
+msgid "program or stage is invalid"
+msgstr ""
+
 msgid "Error"
 msgstr "Error"
 
@@ -987,6 +1005,9 @@ msgstr ""
 msgid "Person Profile"
 msgstr "Perfil de la persona"
 
+msgid "New {{ eventName }} event"
+msgstr ""
+
 msgid "Show {{ rest }} more"
 msgstr ""
 
@@ -996,7 +1017,7 @@ msgstr ""
 msgid "Go to full {{ eventName }}"
 msgstr ""
 
-msgid "New {{ eventName }} event"
+msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Report date"
@@ -1109,6 +1130,9 @@ msgstr "Omitido"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} en el programa {{escape}} {{programName}}"
+
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Programa no encontrado"

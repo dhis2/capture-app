@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-25T06:32:20.380Z\n"
-"PO-Revision-Date: 2021-08-25T06:32:20.380Z\n"
+"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
+"PO-Revision-Date: 2021-08-31T17:57:56.526Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -158,6 +158,9 @@ msgstr ""
 msgid "Saving to"
 msgstr ""
 
+msgid "for"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -187,6 +190,12 @@ msgid "Save and exit"
 msgstr ""
 
 msgid "Finish"
+msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
+msgid "Complete"
 msgstr ""
 
 msgid "No write access"
@@ -239,9 +248,6 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
 
@@ -282,6 +288,9 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
 msgid "validation failed"
 msgstr ""
 
@@ -295,9 +304,6 @@ msgid "Indicators"
 msgstr ""
 
 msgid "Warnings"
-msgstr ""
-
-msgid "Complete"
 msgstr ""
 
 msgid "Warnings found"
@@ -616,7 +622,22 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
+msgid "stage"
+msgstr ""
+
 msgid "Enrollment{{escape}} New Event"
+msgstr ""
+
+msgid "There are no feedbacks for this event"
+msgstr ""
+
+msgid "There are no indicators for this event"
+msgstr ""
+
+msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
@@ -625,19 +646,16 @@ msgstr ""
 msgid "Enrollment{{escape}} Edit Event"
 msgstr ""
 
-msgid "We could not find the stage in the program"
-msgstr ""
-
 msgid "There are no feedback for this event"
-msgstr ""
-
-msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "Registered events"
 msgstr ""
 
-msgid "Choose a registering unit to start reporting"
+msgid "Or see all records accessible to you in {{program}} "
+msgstr ""
+
+msgid "Or see all events accessible to you in {{program}}"
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
@@ -833,12 +851,6 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
-msgid "for"
-msgstr ""
-
-msgid "Save without completing"
-msgstr ""
-
 msgid "Enrollment actions"
 msgstr ""
 
@@ -898,6 +910,12 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr ""
+
+msgid "program or stage is invalid"
+msgstr ""
+
 msgid "Error"
 msgstr ""
 
@@ -926,9 +944,6 @@ msgid "Go to full {{ eventName }}"
 msgstr ""
 
 msgid "This stage can only have one event"
-msgstr ""
-
-msgid "New {{ eventName }} event"
 msgstr ""
 
 msgid "Report date"

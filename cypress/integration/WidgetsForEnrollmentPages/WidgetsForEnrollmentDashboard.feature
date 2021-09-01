@@ -1,6 +1,6 @@
 Feature: The user interacts with the widgets on the enrollment dashboard
 
-    # Scenarios linked to the enrollment dashboard
+    # Scenarios linked to the enrollment add event
       Scenario: The profile widget can be closed on the enrollment dashboard
         Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
         And you see the widget with data-test profile-widget

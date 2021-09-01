@@ -8,6 +8,8 @@ import i18n from '@dhis2/d2-i18n';
 import Select from 'react-virtualized-select';
 import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
+import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
+import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
 
 const styles = (theme: Theme) => ({
     paper: {
@@ -60,6 +62,7 @@ const styles = (theme: Theme) => ({
 });
 
 type Props = {|
+    isUserInteractionInProgress?: boolean,
     options: Array<{|label: string, value: any, |}>,
     onClear?: () => void,
     onSelect?: (value: string) => void,
@@ -80,12 +83,27 @@ const SingleLockedSelectPlain =
       selectedValue,
       options,
       classes,
+      isUserInteractionInProgress,
   }: Props) => {
       const [selected, toggleSelected] = useState((Boolean(selectedValue)));
+      const [openStartAgainWarning, setOpenStartAgainWarning] = useState(false);
 
-      const handleOnClear = () => {
+      const handleClose = () => {
+          setOpenStartAgainWarning(false);
+      };
+      const handleConfirm = () => {
+          handleClose();
           toggleSelected(false);
           onClear && onClear();
+      };
+
+      const handleOnClear = () => {
+          if (!isUserInteractionInProgress) {
+              toggleSelected(false);
+              onClear && onClear();
+              return;
+          }
+          setOpenStartAgainWarning(true);
       };
       const handleOnSelect = useCallback(({ value }) => {
           toggleSelected(true);
@@ -124,6 +142,12 @@ const SingleLockedSelectPlain =
                       </Paper>
                   </div>
           }
+          <ConfirmDialog
+              onConfirm={handleConfirm}
+              open={openStartAgainWarning}
+              onCancel={handleClose}
+              {...defaultDialogProps}
+          />
       </>);
   };
 

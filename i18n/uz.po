@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
+"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -171,6 +171,9 @@ msgstr "Ваколат берилган шахс"
 msgid "Saving to"
 msgstr "...да сақлаш"
 
+msgid "for"
+msgstr "учун"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -205,6 +208,12 @@ msgstr "Сақлаш ва чиқиш"
 
 msgid "Finish"
 msgstr "Тугатиш"
+
+msgid "Save without completing"
+msgstr ""
+
+msgid "Complete"
+msgstr "Тўлдириш"
 
 msgid "No write access"
 msgstr "Ёзув киритиш учун рухсат йўқ"
@@ -258,11 +267,6 @@ msgstr "Ҳозирги танловларда ҳодиса/тадбир ярат
 msgid "Save"
 msgstr "Сақлаш"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Агарда ушбу саҳифани тарк этсангиз, ҳодиса/тадбир бўйича киритган барча "
-"ўзгартиришлар сақланмайди."
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "{{trackedEntityName}} сақланмоқда"
 
@@ -309,6 +313,11 @@ msgstr "Рўйхатдан ўтган шахс"
 msgid "Link"
 msgstr "Ҳавола"
 
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Агарда ушбу саҳифани тарк этсангиз, ҳодиса/тадбир бўйича киритган барча "
+"ўзгартиришлар сақланмайди."
+
 msgid "validation failed"
 msgstr "Тасдиқлаш амалга ошмади"
 
@@ -323,9 +332,6 @@ msgstr "Индикаторлар"
 
 msgid "Warnings"
 msgstr "Огоҳлантиришлар"
-
-msgid "Complete"
-msgstr "Тўлдириш"
 
 msgid "Warnings found"
 msgstr "Огоҳлантиришлар топилди"
@@ -655,8 +661,23 @@ msgstr "Ушбу дастурда янги ҳодиса/тадбирни яра�
 msgid "View working list in this program."
 msgstr "Ушбу дастурдаги ишчи рўйхатни кўриб чиқиш"
 
+msgid "stage"
+msgstr ""
+
 msgid "Enrollment{{escape}} New Event"
 msgstr ""
+
+msgid "There are no feedbacks for this event"
+msgstr ""
+
+msgid "There are no indicators for this event"
+msgstr ""
+
+msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
+msgstr "Хисобот бошлаш учун рўйхатдан ўтишни танланг"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
@@ -664,20 +685,17 @@ msgstr ""
 msgid "Enrollment{{escape}} Edit Event"
 msgstr ""
 
-msgid "We could not find the stage in the program"
-msgstr ""
-
 msgid "There are no feedback for this event"
-msgstr ""
-
-msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "Registered events"
 msgstr "Рўйхатдан ўтган ҳодиса/тадбирлар"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Хисобот бошлаш учун рўйхатдан ўтишни танланг"
+msgid "Or see all records accessible to you in {{program}} "
+msgstr ""
+
+msgid "Or see all events accessible to you in {{program}}"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Ҳисоботни бошлаш учун {{missingCategories}} ни танланг"
@@ -893,12 +911,6 @@ msgstr "Танланган дастур билан ишлаш учун,"
 msgid "open the Tracker Capture app"
 msgstr "Кузатув-Назорат дастурини очинг"
 
-msgid "for"
-msgstr "учун"
-
-msgid "Save without completing"
-msgstr ""
-
 msgid "Enrollment actions"
 msgstr ""
 
@@ -959,6 +971,12 @@ msgstr " {{date}}да охирги марта янгиланган"
 msgid "Cancelled"
 msgstr "Бекор қилинди"
 
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr ""
+
+msgid "program or stage is invalid"
+msgstr ""
+
 msgid "Error"
 msgstr "Хатолик"
 
@@ -975,6 +993,9 @@ msgstr ""
 msgid "Person Profile"
 msgstr "Шахс профили"
 
+msgid "New {{ eventName }} event"
+msgstr ""
+
 msgid "Show {{ rest }} more"
 msgstr ""
 
@@ -984,7 +1005,7 @@ msgstr ""
 msgid "Go to full {{ eventName }}"
 msgstr ""
 
-msgid "New {{ eventName }} event"
+msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Report date"
@@ -1097,6 +1118,9 @@ msgstr "Ўтказиб юборилди"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{escape}} {{programName}} дастурида {{trackedEntityName}} "
+
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Дастур топилмади"

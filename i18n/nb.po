@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-19T14:13:43.362Z\n"
+"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -173,6 +173,9 @@ msgstr "Tildelt programbruker"
 msgid "Saving to"
 msgstr "Lagrer til"
 
+msgid "for"
+msgstr "for"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -205,6 +208,12 @@ msgid "Save and exit"
 msgstr "Lagre og avslutt"
 
 msgid "Finish"
+msgstr "Fullfør"
+
+msgid "Save without completing"
+msgstr ""
+
+msgid "Complete"
 msgstr "Fullfør"
 
 msgid "No write access"
@@ -259,11 +268,6 @@ msgstr "Du har ikke tilgang til å lage en hendelse i gjeldende valg"
 msgid "Save"
 msgstr "Lagre"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
-"denne hendelsen."
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Lagrer en {{trackedEntityName}}"
 
@@ -308,6 +312,11 @@ msgstr "Registrert person"
 msgid "Link"
 msgstr "Link"
 
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
+"denne hendelsen."
+
 msgid "validation failed"
 msgstr "validering mislyktes"
 
@@ -322,9 +331,6 @@ msgstr "Indikatorer"
 
 msgid "Warnings"
 msgstr "Advarsler"
-
-msgid "Complete"
-msgstr "Fullfør"
 
 msgid "Warnings found"
 msgstr "Advarsler funnet"
@@ -652,8 +658,23 @@ msgstr "Opprett ny hendelse i dette programmet"
 msgid "View working list in this program."
 msgstr "Se arbeidsliste i dette programmet."
 
+msgid "stage"
+msgstr ""
+
 msgid "Enrollment{{escape}} New Event"
 msgstr ""
+
+msgid "There are no feedbacks for this event"
+msgstr ""
+
+msgid "There are no indicators for this event"
+msgstr ""
+
+msgid "The enrollment event data could not be found"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
+msgstr "Velg en registreringsenhet for å starte rapportering"
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
@@ -661,20 +682,17 @@ msgstr ""
 msgid "Enrollment{{escape}} Edit Event"
 msgstr ""
 
-msgid "We could not find the stage in the program"
-msgstr ""
-
 msgid "There are no feedback for this event"
-msgstr ""
-
-msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "Registered events"
 msgstr "Registrerte hendelser"
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Velg en registreringsenhet for å starte rapportering"
+msgid "Or see all records accessible to you in {{program}} "
+msgstr ""
+
+msgid "Or see all events accessible to you in {{program}}"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Velg {{missingCategories}} for å starte rapportering"
@@ -882,12 +900,6 @@ msgstr "For å jobbe med det valgte programmet,"
 msgid "open the Tracker Capture app"
 msgstr "åpne Tracker Capture app"
 
-msgid "for"
-msgstr "for"
-
-msgid "Save without completing"
-msgstr ""
-
 msgid "Enrollment actions"
 msgstr ""
 
@@ -947,6 +959,12 @@ msgstr ""
 msgid "Cancelled"
 msgstr "Kansellert"
 
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr ""
+
+msgid "program or stage is invalid"
+msgstr ""
+
 msgid "Error"
 msgstr "Feil"
 
@@ -962,6 +980,9 @@ msgstr ""
 msgid "Person Profile"
 msgstr "Personprofil"
 
+msgid "New {{ eventName }} event"
+msgstr ""
+
 msgid "Show {{ rest }} more"
 msgstr ""
 
@@ -971,7 +992,7 @@ msgstr ""
 msgid "Go to full {{ eventName }}"
 msgstr ""
 
-msgid "New {{ eventName }} event"
+msgid "This stage can only have one event"
 msgstr ""
 
 msgid "Report date"
@@ -1084,6 +1105,9 @@ msgstr "Hoppet over"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} i program{{escape}} {{programName}}"
+
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
 
 msgid "Program not found"
 msgstr "Program ble ikke funnet"
