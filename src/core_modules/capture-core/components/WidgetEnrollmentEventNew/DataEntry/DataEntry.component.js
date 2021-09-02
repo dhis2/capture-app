@@ -415,20 +415,18 @@ class DataEntryPlain extends Component<Props> {
             ...passOnProps
         } = this.props;
         return (
-            <div>
-                <div data-test="new-enrollment-event-form">
-                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                    <WrappedDataEntry
-                        id={id}
-                        onUpdateFormField={onUpdateField}
-                        onUpdateFormFieldAsync={onStartAsyncUpdateField}
-                        onSave={this.handleSave}
-                        fieldOptions={this.fieldOptions}
-                        dataEntrySections={this.dataEntrySections}
-                        relationshipsRef={this.setRelationshipsInstance}
-                        {...passOnProps}
-                    />
-                </div>
+            <div data-test="new-enrollment-event-form">
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                <WrappedDataEntry
+                    id={id}
+                    onUpdateFormField={onUpdateField}
+                    onUpdateFormFieldAsync={onStartAsyncUpdateField}
+                    onSave={this.handleSave}
+                    fieldOptions={this.fieldOptions}
+                    dataEntrySections={this.dataEntrySections}
+                    relationshipsRef={this.setRelationshipsInstance}
+                    {...passOnProps}
+                />
             </div>
         );
     }

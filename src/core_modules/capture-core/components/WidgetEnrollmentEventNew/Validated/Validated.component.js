@@ -10,6 +10,9 @@ import { SavingText } from '../SavingText';
 import type { Props } from './validated.types';
 
 const styles = () => ({
+    wrapper: {
+        paddingLeft: spacersNum.dp16,
+    },
     header: {
         display: 'flex',
         alignItems: 'center',
@@ -55,7 +58,7 @@ const ValidatedPlain = ({
             }
         >
             {ready && (
-                <>
+                <div className={classes.wrapper}>
                     <DataEntry
                         {...passOnProps}
                         stage={stage}
@@ -73,7 +76,7 @@ const ValidatedPlain = ({
                         stageName={stage.name}
                         orgUnitName={orgUnit.name}
                     />
-                </>
+                </div>
             )}
         </Widget>
     );

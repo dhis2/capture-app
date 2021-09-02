@@ -160,57 +160,47 @@ const EnrollmentAddEventPagePain = ({
                 <div className={classes.title}>{i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}</div>
                 <div>
                     {pageStatus === pageStatuses.DEFAULT && (
-                        <div
-                            className={classes.container}
-                            data-test="add-event-enrollment-page-content"
-                        >
-                            <div className={classes.title}>
-                                {i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}
-                            </div>
-                            <div className={classes.columns}>
-                                <div className={classes.leftColumn}>
-                                    <div
-                                        className={classes.addEventContainer}
-                                        data-test="add-event-enrollment-page-content"
-                                    >
-                                        <div>
-                                            <WidgetEnrollmentEventNew
-                                                {...passOnProps}
-                                                programId={programId}
-                                                stageId={stageId}
-                                                orgUnitId={orgUnitId}
-                                                teiId={teiId}
-                                                enrollmentId={enrollmentId}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className={classes.rightColumn}>
-                                    <WidgetError error={widgetEffects?.errors} />
-                                    <WidgetWarning warning={widgetEffects?.warnings} />
-                                    {!hideWidgets.feedback && (
-                                        <WidgetFeedback
-                                            emptyText={i18n.t('There are no feedbacks for this event')}
-                                            feedback={widgetEffects?.feedbacks}
-                                        />
-                                    )}
-                                    {!hideWidgets.indicator && (
-                                        <WidgetIndicator
-                                            emptyText={i18n.t('There are no indicators for this event')}
-                                            indicators={widgetEffects?.indicators}
-                                        />
-                                    )}
-                                    <WidgetProfile
-                                        teiId={teiId}
+                        <div className={classes.columns}>
+                            <div className={classes.leftColumn}>
+                                <div
+                                    className={classes.addEventContainer}
+                                    data-test="add-event-enrollment-page-content"
+                                >
+                                    <WidgetEnrollmentEventNew
+                                        {...passOnProps}
                                         programId={programId}
-                                    />
-                                    <WidgetEnrollment
+                                        stageId={stageId}
+                                        orgUnitId={orgUnitId}
                                         teiId={teiId}
                                         enrollmentId={enrollmentId}
-                                        programId={programId}
-                                        onDelete={onDelete}
                                     />
                                 </div>
+                            </div>
+                            <div className={classes.rightColumn}>
+                                <WidgetError error={widgetEffects?.errors} />
+                                <WidgetWarning warning={widgetEffects?.warnings} />
+                                {!hideWidgets.feedback && (
+                                    <WidgetFeedback
+                                        emptyText={i18n.t('There are no feedbacks for this event')}
+                                        feedback={widgetEffects?.feedbacks}
+                                    />
+                                )}
+                                {!hideWidgets.indicator && (
+                                    <WidgetIndicator
+                                        emptyText={i18n.t('There are no indicators for this event')}
+                                        indicators={widgetEffects?.indicators}
+                                    />
+                                )}
+                                <WidgetProfile
+                                    teiId={teiId}
+                                    programId={programId}
+                                />
+                                <WidgetEnrollment
+                                    teiId={teiId}
+                                    enrollmentId={enrollmentId}
+                                    programId={programId}
+                                    onDelete={onDelete}
+                                />
                             </div>
                         </div>
                     )}
