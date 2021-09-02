@@ -1,3 +1,11 @@
+## [1.53.2](https://github.com/dhis2/capture-app/compare/v1.53.1...v1.53.2) (2021-09-02)
+
+
+### Bug Fixes
+
+* [DHIS2-11694] remove duplicate header and add padding ([#2051](https://github.com/dhis2/capture-app/issues/2051)) ([a00af5b](https://github.com/dhis2/capture-app/commit/a00af5b56da16a638575c9116deaf2ebf618974e))
+* [DHIS2-11695] set today start of day in status tag ([#2052](https://github.com/dhis2/capture-app/issues/2052)) ([4a90655](https://github.com/dhis2/capture-app/commit/4a9065556b6e769f64492517267f0b7bfebf10bc))
+
 ## [1.53.1](https://github.com/dhis2/capture-app/compare/v1.53.0...v1.53.1) (2021-09-01)
 
 
