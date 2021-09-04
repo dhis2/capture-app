@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2021\n"
 "Language-Team: Uzbek (Latin) (https://www.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgid "Choose a date..."
 msgstr "Sanani tanlang ..."
 
 msgid "Today"
-msgstr "Bugun"
+msgstr "бугун"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
@@ -45,7 +45,7 @@ msgstr ""
 " yopilishini unutmang."
 
 msgid "Organisation unit"
-msgstr "Tashkiliy birlik"
+msgstr "Ташкилий бирлик"
 
 msgid "Date of enrollment"
 msgstr "Roʼyxatga kiritilgan sana"
@@ -144,7 +144,7 @@ msgid "in"
 msgstr "ichida"
 
 msgid "Cancel"
-msgstr "Bekor qilish"
+msgstr "Бекор қилиш"
 
 msgid "Metadata error. see log for details"
 msgstr "MetaMaʼlumotda xatolik. Tafsilotlar uchun jurnalga qarang."
@@ -197,7 +197,7 @@ msgid "Active"
 msgstr "Faol"
 
 msgid "Completed"
-msgstr "Toʼldirildi"
+msgstr "bajarildi"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -216,7 +216,7 @@ msgid "Save without completing"
 msgstr ""
 
 msgid "Complete"
-msgstr "Toʼldirish"
+msgstr "Bajarildi"
 
 msgid "No write access"
 msgstr "Yozuv kiritish uchun ruxsat yoʼq"
@@ -262,7 +262,7 @@ msgid "No, stay here"
 msgstr "Yoʼq, sahifada qolish"
 
 msgid "New event"
-msgstr "Yangi hodisa"
+msgstr "Yangi tadbir"
 
 msgid "You don't have access to create an event in the current selections"
 msgstr ""
@@ -328,10 +328,10 @@ msgid "Errors"
 msgstr "Xatoliklar"
 
 msgid "Feedback"
-msgstr "Qayta aloqa"
+msgstr "Fikr-mulohaza"
 
 msgid "Indicators"
-msgstr "Indikatorlar"
+msgstr "Koʼrsatgichlar"
 
 msgid "Warnings"
 msgstr "Ogohlantirishlar"
@@ -385,7 +385,7 @@ msgid "Anyone"
 msgstr "Kimdir"
 
 msgid "None"
-msgstr "Yoʼq"
+msgstr "Йўқ"
 
 msgid "Select user"
 msgstr "Foydalanuvchini tanlang"
@@ -400,37 +400,37 @@ msgid "To"
 msgstr "Kimga"
 
 msgid "This week"
-msgstr "Ushbu hafta"
+msgstr "Ушбу ҳафта"
 
 msgid "This month"
-msgstr "Ushbu oy"
+msgstr "Ушбу ой"
 
 msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr "Oxirgi hafta"
+msgstr "Охирги ҳафта"
 
 msgid "Last month"
-msgstr "Oxirgi oy"
+msgstr "Охирги ой"
 
 msgid "Last 3 months"
-msgstr "Oxirgi 3 oy"
+msgstr "Охирги 3 ой"
 
 msgid "Custom range"
 msgstr "Maxsus diapazon"
 
 msgid "Max"
-msgstr "Maksimum"
+msgstr "Максимум"
 
 msgid "Min"
-msgstr "Minimum"
+msgstr "Минимум"
 
 msgid "Contains text"
 msgstr "Matnni oʼz ichiga oladi"
 
 msgid "Yes"
-msgstr "Ha"
+msgstr "Ҳа"
 
 msgid "mm/dd/yyyy"
 msgstr "kun/oy/yil"
@@ -457,7 +457,7 @@ msgid "Select file"
 msgstr "Faylni tanlash"
 
 msgid "No"
-msgstr "Yoʼq"
+msgstr "Йўқ"
 
 msgid "Uploading image"
 msgstr "Rasm yuklanmoqda"
@@ -469,7 +469,7 @@ msgid "Search"
 msgstr "Izlash"
 
 msgid "Clear"
-msgstr "Tozalash"
+msgstr "Аниқ"
 
 msgid "No results"
 msgstr "Natija yoʼq"
@@ -560,10 +560,10 @@ msgid "Registering Organisation Unit"
 msgstr "Tanlangan boʼlim roʼyxatdan oʼtkazilmoqda"
 
 msgid "Select"
-msgstr "Tanlang"
+msgstr "Танланг"
 
 msgid "Program"
-msgstr "Programma"
+msgstr "Dastur"
 
 msgid "No programs available."
 msgstr "Hech qanday dastur mavjud emas."
@@ -1020,7 +1020,7 @@ msgid "Stages and Events"
 msgstr ""
 
 msgid "Delete event"
-msgstr "Hodisa/tadbirni oʼchirib tashlash"
+msgstr "Hodisa/Tadbirni oʼchirib tashlash"
 
 msgid "Download as JSON"
 msgstr "JSON sifatida yuklash"
@@ -1044,7 +1044,7 @@ msgid "an error occurred loading working lists"
 msgstr "ishchi roʼyxatni yuklashda xatolik yuz berdi"
 
 msgid "Enrollment status"
-msgstr "Roʼyxatga olish holati"
+msgstr "roʼyxatga olish holati"
 
 msgid "Assigned to"
 msgstr ""

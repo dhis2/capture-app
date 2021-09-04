@@ -1,16 +1,16 @@
 # 
 # Translators:
-# Ulanbek Abakirov <ulans@mail.ru>, 2020
 # phil_dhis2, 2021
-# Wanda <wanda@frontlineaids.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# Wanda <wanda@frontlineaids.org>, 2021
+# Ulanbek Abakirov <ulans@mail.ru>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"PO-Revision-Date: 2021-09-03 23:31+0000\n"
+"Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -410,13 +410,13 @@ msgid "This Year"
 msgstr "Текущий год"
 
 msgid "Last week"
-msgstr "Последняя неделя"
+msgstr "Прошлая неделя"
 
 msgid "Last month"
 msgstr "Последний месяц"
 
 msgid "Last 3 months"
-msgstr "Последние 3 месяца"
+msgstr "Прошлые 3 месяца"
 
 msgid "Custom range"
 msgstr "Пользовательский интервал"
@@ -494,7 +494,7 @@ msgid "Columns to show in table"
 msgstr "Столбы, для показа в таблице"
 
 msgid "Column"
-msgstr "Столбец"
+msgstr "Столбчатая"
 
 msgid "Update"
 msgstr "Обновить"
@@ -564,7 +564,7 @@ msgid "Select"
 msgstr "Выбрать"
 
 msgid "Program"
-msgstr "Программа"
+msgstr "Program"
 
 msgid "No programs available."
 msgstr "Нет доступных программ"
@@ -588,7 +588,7 @@ msgid "Online"
 msgstr "Онлайн"
 
 msgid "Offline"
-msgstr "Оффлайн"
+msgstr "Офлайн"
 
 msgid "Syncing"
 msgstr "Синхронизирую..."
@@ -1144,7 +1144,7 @@ msgid "tracked entity instance"
 msgstr "Элемент отслеживаемого объекта"
 
 msgid "Set coordinate"
-msgstr "Выставить координату"
+msgstr "Задать координату"
 
 msgid "Page {{currentPage}}"
 msgstr "Страница {{currentPage}}"

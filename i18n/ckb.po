@@ -1,5 +1,6 @@
 # 
 # Translators:
+# Asos <aso.rezaiy@gmail.com>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Antonia Bezenchek <antonia@informa.pro>, 2021
 # KRG HIS <antonia.bezenchek@informa.pro>, 2021
@@ -8,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2021\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
 "MIME-Version: 1.0\n"
@@ -318,7 +319,7 @@ msgid "validation failed"
 msgstr "سەلماندنەکە سەرکەوتوونەبوو"
 
 msgid "Errors"
-msgstr "هەڵەکان"
+msgstr "هەڵە"
 
 msgid "Feedback"
 msgstr "ڕاووبۆچون"

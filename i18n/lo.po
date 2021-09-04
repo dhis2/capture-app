@@ -1,15 +1,15 @@
 # 
 # Translators:
-# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2021
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"PO-Revision-Date: 2021-09-03 23:31+0000\n"
+"Last-Translator: Thuy Nguyen <thuynguyen@hispvietnam.org>, 2021\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -138,7 +138,7 @@ msgid "in"
 msgstr "in"
 
 msgid "Cancel"
-msgstr "ຍົກເລີກ"
+msgstr "Cancel"
 
 msgid "Metadata error. see log for details"
 msgstr ""
@@ -400,10 +400,10 @@ msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr "ຄ່າໃຫ່ຍສຸດ"
+msgstr "ຄ່າສູງສຸດ"
 
 msgid "Min"
-msgstr "ຄ່າຕໍ່າສຸດ"
+msgstr "ຄ່ານ້ອຍສຸດ"
 
 msgid "Contains text"
 msgstr ""
@@ -532,7 +532,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr "​ການ​ຮັບ​ຮອງ"
+msgstr "ຍອມຮັບ"
 
 msgid "Registering Organisation Unit"
 msgstr ""
@@ -541,7 +541,7 @@ msgid "Select"
 msgstr "ເລືອກ"
 
 msgid "Program"
-msgstr "ສາຍງານ"
+msgstr "Program"
 
 msgid "No programs available."
 msgstr ""
@@ -792,7 +792,7 @@ msgid "Search in all programs"
 msgstr ""
 
 msgid "events"
-msgstr "ກໍລະນີ"
+msgstr "ເຫດການ"
 
 msgid "event"
 msgstr ""
