@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, useState, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { withFocusSaver } from 'capture-ui';
@@ -13,12 +13,7 @@ const FocusTextField = withFocusSaver()(TextField);
 
 type Props = {
     notes: Array<Object>,
-    newNoteValue: string,
-    onEdit: () => void,
     handleAddNote: (text: string) => void,
-    handleChange: (text: string) => void,
-    onCancel: () => void,
-    onNewNoteEditorBlur: () => void,
     ...CssClasses
 }
 
@@ -58,18 +53,37 @@ const styles = {
     rightColumn: {
         paddingLeft: spacersNum.dp8,
     },
+    newCommentButtonContainer: {
+        paddingTop: spacersNum.dp8,
+    },
+    addCommentContainer: {
+        marginRight: spacersNum.dp8,
+    },
 };
 
 const CommentSectionPlain = ({
     notes,
-    newNoteValue,
-    onEdit,
     handleAddNote,
-    handleChange,
-    onCancel,
-    onNewNoteEditorBlur,
     classes,
 }: Props) => {
+    const [isEditing, setEditing] = useState(false);
+    const [newNoteValue, setNewNoteValue] = useState('');
+
+    const handleChange = useCallback((value) => {
+        setEditing(true);
+        setNewNoteValue(value);
+    }, []);
+
+    const onCancel = useCallback(() => {
+        setNewNoteValue('');
+        setEditing(false);
+    }, []);
+
+    const onAddNote = useCallback(() => {
+        handleAddNote(newNoteValue);
+        setNewNoteValue('');
+    }, [handleAddNote, newNoteValue]);
+
     const CommentItem = ({ value, lastUpdated, lastUpdatedBy }) => (<div className={cx(classes.item)}>
         <div className={classes.avatar} /> {/* TODO: add avatar */}
         <div className={classes.rightColumn}>
@@ -90,18 +104,21 @@ const CommentSectionPlain = ({
 
     return (
         <div className={classes.wrapper}>
-            {notes.map(note => <CommentItem key={note.note} {...note} />)}
-            <Editor onEdit={onEdit}>
+            {notes
+                .sort((a, b) => moment(a.lastUpdated).valueOf() - moment(b.lastUpdated).valueOf())
+                .map(note => <CommentItem key={note.note} {...note} />)
+            }
+            <Editor>
                 <FocusTextField
-                    onBlur={onNewNoteEditorBlur}
+                    placeholder={i18n.t('Write a comment about this event')}
                     onChange={handleChange}
                     value={newNoteValue}
                     data-test="comment-textfield"
                 />
             </Editor>
-            <div className={classes.newCommentButtonContainer} data-test="comment-buttons-container">
+            {isEditing && <div className={classes.newCommentButtonContainer} data-test="comment-buttons-container">
                 <Button
-                    onClick={() => handleAddNote(newNoteValue)}
+                    onClick={onAddNote}
                     className={classes.addCommentContainer}
                     primary
                 >
@@ -112,7 +129,7 @@ const CommentSectionPlain = ({
                 >
                     {i18n.t('Cancel')}
                 </Button>
-            </div>
+            </div>}
         </div>);
 };
 
