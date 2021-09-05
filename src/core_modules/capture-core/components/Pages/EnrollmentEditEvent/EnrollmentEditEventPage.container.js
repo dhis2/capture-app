@@ -39,7 +39,8 @@ export const EnrollmentEditEventPage = () => {
     const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
     const programStage = [...program.stages?.values()].find(item => item.id === stageId);
     const currentPageMode = showEditEvent ? pageMode.EDIT : pageMode.VIEW;
-    const outputEffects = useWidgetDataFromStore(`singleEvent-${currentPageMode}`);
+    const dataEntryKey = `singleEvent-${currentPageMode}`;
+    const outputEffects = useWidgetDataFromStore(dataEntryKey);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDelete = () => {
@@ -54,7 +55,6 @@ export const EnrollmentEditEventPage = () => {
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDataConvertValue = convertValue(event?.eventDate, dataElementTypes.DATETIME);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
-    const eventNotes = event?.notes ?? [];
 
     let pageStatus = pageStatuses.MISSING_DATA;
     if (orgUnitId) {
@@ -80,7 +80,6 @@ export const EnrollmentEditEventPage = () => {
             onDelete={onDelete}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
-            eventNotes={eventNotes}
         />
     );
 };

@@ -1,6 +1,7 @@
 // @flow
 
 export type Props = {|
-    notes: Array<Object>,
+    itemId: string,
+    dataEntryId: string,
     ...CssClasses
 |};
