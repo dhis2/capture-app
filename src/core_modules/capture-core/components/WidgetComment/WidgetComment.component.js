@@ -1,12 +1,12 @@
 // @flow
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Chip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../Widget';
 import type { Props } from './WidgetComment.types';
 import { CommentSection } from './CommentSection/CommentSection';
 import { requestAddNoteForEvent } from './WidgetComment.actions';
-
 
 export const WidgetComment = ({ itemId, dataEntryId, ...passOnProps }: Props) => {
     const dispatch = useDispatch();
@@ -22,7 +22,12 @@ export const WidgetComment = ({ itemId, dataEntryId, ...passOnProps }: Props) =>
             data-test="comment-widget"
         >
             <Widget
-                header={i18n.t('Comments about this event')}
+                header={<>
+                    <span>{i18n.t('Comments about this event')}</span>
+                    {notes.length ? <Chip dense>
+                        {notes.length}
+                    </Chip> : null}
+                </>}
                 onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
                 onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
                 open={open}
