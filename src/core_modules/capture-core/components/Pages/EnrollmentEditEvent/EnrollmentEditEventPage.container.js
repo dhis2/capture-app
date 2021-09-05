@@ -54,6 +54,7 @@ export const EnrollmentEditEventPage = () => {
     const event = enrollmentSite?.events?.find(item => item.event === eventId);
     const eventDataConvertValue = convertValue(event?.eventDate, dataElementTypes.DATETIME);
     const eventDate = eventDataConvertValue ? eventDataConvertValue.toString() : '';
+    const eventNotes = event?.notes ?? [];
 
     let pageStatus = pageStatuses.MISSING_DATA;
     if (orgUnitId) {
@@ -79,6 +80,7 @@ export const EnrollmentEditEventPage = () => {
             onDelete={onDelete}
             orgUnitId={orgUnitId}
             eventDate={eventDate}
+            eventNotes={eventNotes}
         />
     );
 };

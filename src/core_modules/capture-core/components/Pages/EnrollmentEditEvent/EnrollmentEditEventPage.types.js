@@ -15,6 +15,7 @@ export type PlainProps = {|
     teiDisplayName: string,
     eventDate?: string,
     enrollmentsAsOptions: Array<Object>,
+    eventNotes: Array<Object>,
     onDelete: () => void,
     onGoBack: () => void,
     pageStatus: string,

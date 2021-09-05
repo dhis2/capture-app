@@ -27,6 +27,7 @@ import {
 import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { TopBarActions } from '../../TopBarActions';
+import { WidgetComment } from '../../WidgetComment';
 
 const styles = ({ typography }) => ({
     page: {
@@ -71,6 +72,7 @@ const EnrollmentEditEventPagePain = ({
     onGoBack,
     orgUnitId,
     eventDate,
+    eventNotes,
     pageStatus,
 }: PlainProps) => {
     const { setOrgUnitId } = useSetOrgUnitId();
@@ -179,6 +181,7 @@ const EnrollmentEditEventPagePain = ({
                         )}
                     </div>
                     <div className={classes.rightColumn}>
+                        <WidgetComment notes={eventNotes} />
                         <WidgetError error={widgetEffects.errors} />
                         <WidgetWarning warning={widgetEffects.warnings} />
                         {!hideWidgets.feedback && (
