@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Chip } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../Widget';
-import type { Props } from './WidgetComment.types';
+import type { Props } from './WidgetEventComment.types';
 import { CommentSection } from './CommentSection/CommentSection';
-import { requestAddNoteForEvent } from './WidgetComment.actions';
+import { requestAddNoteForEvent } from './WidgetEventComment.actions';
 
-export const WidgetComment = ({ itemId, dataEntryId, ...passOnProps }: Props) => {
+export const WidgetEventComment = ({ itemId, dataEntryId, ...passOnProps }: Props) => {
     const dispatch = useDispatch();
     const [open, setOpenStatus] = useState(true);
     const notes = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[`${dataEntryId}-${itemId}`] ?? []);

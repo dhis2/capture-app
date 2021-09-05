@@ -6,7 +6,7 @@ import uuid from 'd2-utilizr/lib/uuid';
 import { moment } from 'capture-core-utils/moment/momentResolver';
 import { convertValue as convertListValue } from '../../converters/clientToList';
 import { dataElementTypes } from '../../metaData';
-import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetComment.actions';
+import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventComment.actions';
 
 import {
     addEventNote,

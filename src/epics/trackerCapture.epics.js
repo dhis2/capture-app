@@ -72,7 +72,7 @@ import {
 import {
     addNoteForEventEpic,
     removeNoteForEventEpic,
-} from 'capture-core/components/WidgetComment/WidgetComment.epics';
+} from 'capture-core/components/WidgetEventComment/WidgetEventComment.epics';
 import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';
