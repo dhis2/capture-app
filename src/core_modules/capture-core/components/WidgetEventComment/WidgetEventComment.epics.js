@@ -21,7 +21,7 @@ import { getCurrentUser } from '../../d2/d2Instance';
 
 export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(actionTypes.REQUEST_ADD_NOTE),
+        ofType(actionTypes.REQUEST_ADD_NOTE_FOR_EVENT),
         map((action) => {
             const state = store.value;
             const payload = action.payload;
@@ -61,16 +61,16 @@ export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore)
                 startAddNoteForEvent(eventId, serverData, state.currentSelections, saveContext),
                 addNote(payload.dataEntryId, payload.itemId, formNote),
                 addEventNote(eventId, clientNote),
-            ], batchActionTypes.ADD_NOTE_BATCH);
+            ], batchActionTypes.ADD_NOTE_BATCH_FOR_EVENT);
         }));
 
 export const removeNoteForEventEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(actionTypes.ADD_NOTE_FAILED),
+        ofType(actionTypes.ADD_NOTE_FAILED_FOR_EVENT),
         map((action) => {
             const context = action.meta.context;
             return batchActions([
                 removeNote(context.dataEntryId, context.itemId, context.noteClientId),
                 removeEventNote(context.eventId, context.noteClientId),
-            ], batchActionTypes.REMOVE_NOTE_BATCH);
+            ], batchActionTypes.REMOVE_NOTE_BATCH_FOR_EVENT);
         }));
