@@ -1,6 +1,7 @@
 // @flow
 import { mapTypeToInterfaceFnName } from '../../typeToInterfaceFnName.const';
 import { effectActions } from '../../effectActions.const';
+import { idNames } from '../../idNames.const';
 
 import type {
     ProgramRuleEffect,
@@ -15,7 +16,7 @@ import type {
     GeneralErrorEffect,
     GeneralWarningEffect,
     CompulsoryEffect,
-    OutputEffect,
+    OutputEffects,
 } from '../../rulesEngine.types';
 import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable';
 
@@ -36,12 +37,12 @@ type ErrorEffect = Array<MessageEffect> | GeneralErrorEffect;
 export function getRulesEffectsProcessor(
     outputConverters: IConvertOutputRulesEffectsValue,
 ) {
-    const idNames = ['dataElementId', 'trackedEntityAttributeId'];
+    const idNamesArray = [idNames.DATA_ELEMENT_ID, idNames.TRACKED_ENTITY_ATTRIBUTE_ID];
 
     function applyToExistingIds(
         effect: ProgramRuleEffect,
         processor: (string) => ?any): any {
-        return idNames
+        return idNamesArray
             .filter(idName => effect[idName])
             .map(processor);
     }
@@ -52,6 +53,7 @@ export function getRulesEffectsProcessor(
         const result = applyToExistingIds(effect, (idName: string): MessageEffect => ({
             type,
             id: effect[idName],
+            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
             message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
         }));
         return result.length !== 0 ? result : {
@@ -131,6 +133,7 @@ export function getRulesEffectsProcessor(
         return applyToExistingIds(effect, (idName: string): HideOutputEffect => ({
             type: effectActions.HIDE_FIELD,
             id: effect[idName],
+            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
         }));
     }
 
@@ -167,6 +170,7 @@ export function getRulesEffectsProcessor(
         return applyToExistingIds(effect, (idName: string): CompulsoryEffect => ({
             type: effectActions.MAKE_COMPULSORY,
             id: effect[idName],
+            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
         }));
     }
 
@@ -199,6 +203,7 @@ export function getRulesEffectsProcessor(
         return applyToExistingIds(effect, (idName: string) => ({
             type: effectActions.HIDE_OPTION_GROUP,
             id: effect[idName],
+            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
             optionGroupId: effect.optionGroupId,
         }));
     }
@@ -207,6 +212,7 @@ export function getRulesEffectsProcessor(
         return applyToExistingIds(effect, (idName: string) => ({
             type: effectActions.HIDE_OPTION,
             id: effect[idName],
+            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
             optionId: effect.optionId,
         }));
     }
@@ -215,6 +221,7 @@ export function getRulesEffectsProcessor(
         return applyToExistingIds(effect, (idName: string) => ({
             type: effectActions.SHOW_OPTION_GROUP,
             id: effect[idName],
+            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
             optionGroupId: effect.optionGroupId,
         }));
     }
@@ -238,7 +245,7 @@ export function getRulesEffectsProcessor(
     function processRulesEffects(
         effects: ?Array<ProgramRuleEffect>,
         dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes): ?Array<OutputEffect> {
+        trackedEntityAttributes: ?TrackedEntityAttributes): OutputEffects {
         if (effects) {
             return effects
                 .filter(({ action }) => mapActionsToProcessor[action])
@@ -250,7 +257,7 @@ export function getRulesEffectsProcessor(
             // when mapActionsToProcessor function returns `null` we filter those value out.
                 .filter(keepTruthyValues => keepTruthyValues);
         }
-        return null;
+        return [];
     }
 
     return processRulesEffects;

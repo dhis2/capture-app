@@ -4,6 +4,7 @@ import { typeof effectActions } from './effectActions.const';
 export type OutputEffect = {
     type: $Values<effectActions>,
     id: string,
+    isDataElementId?: boolean, // false => TEAid, undefined => neither
 };
 
 export type OutputEffects = Array<OutputEffect>;
