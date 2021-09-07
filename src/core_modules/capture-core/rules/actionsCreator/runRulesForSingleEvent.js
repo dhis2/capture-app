@@ -5,6 +5,7 @@ import type {
     EventsData,
     EventData,
     OrgUnit,
+    OutputEffects,
 } from 'capture-core-utils/rulesEngine';
 import { rulesEngine } from '../rulesEngine';
 import { errorCreator } from '../../../capture-core-utils';
@@ -102,7 +103,7 @@ export function runRulesForSingleEvent(
     currentEvent: EventData,
     allEventsData: EventsData,
     stage: ?ProgramStage,
-) {
+): ?OutputEffects {
     const data = prepare(program, foundation, allEventsData, stage);
 
     if (data) {
@@ -126,8 +127,7 @@ export function runRulesForSingleEvent(
             selectedEnrollment: null,
             selectedOrgUnit: orgUnit,
             optionSets,
-        });
+        }).filter(effect => typeof effect.isDataElementId === undefined || effect.isDataElementId);
     }
     return null;
 }
-

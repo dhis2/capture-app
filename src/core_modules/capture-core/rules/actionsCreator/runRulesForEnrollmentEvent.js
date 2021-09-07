@@ -7,6 +7,7 @@ import type {
     Enrollment,
     TrackedEntityAttributes,
     OutputEffects,
+    EventData,
 } from 'capture-core-utils/rulesEngine';
 import { rulesEngine } from '../rulesEngine';
 import type { Program } from '../../metaData';
@@ -17,6 +18,7 @@ import { convertOptionSetsToRulesEngineFormat } from '../converters/optionSetsCo
 type RuleEnrollmentData = {
     program: Program,
     orgUnit: OrgUnit,
+    currentEvent: EventData,
     eventsData: EventsDataContainer,
     dataElementsInProgram: DataElements,
     teiValues: ?TEIValues,
@@ -28,6 +30,7 @@ export function runRulesForEnrollmentPage(data: RuleEnrollmentData): OutputEffec
     const {
         program,
         orgUnit,
+        currentEvent,
         eventsData,
         dataElementsInProgram,
         teiValues,
@@ -43,7 +46,7 @@ export function runRulesForEnrollmentPage(data: RuleEnrollmentData): OutputEffec
     // returns an array of effects that need to take place in the UI.
     return rulesEngine.getProgramRuleEffects({
         programRulesContainer: { programRulesVariables, programRules, constants },
-        currentEvent: null,
+        currentEvent,
         eventsContainer: eventsData,
         dataElements: dataElementsInProgram,
         selectedEntity: teiValues,
@@ -51,5 +54,5 @@ export function runRulesForEnrollmentPage(data: RuleEnrollmentData): OutputEffec
         selectedEnrollment: enrollmentData,
         selectedOrgUnit: orgUnit,
         optionSets,
-    }).filter(effect => !effect.isDataElementId);
+    }).filter(effect => typeof effect.isDataElementId === undefined || effect.isDataElementId);
 }
