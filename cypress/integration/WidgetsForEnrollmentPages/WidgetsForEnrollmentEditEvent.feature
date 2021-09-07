@@ -89,7 +89,7 @@ Feature: The user interacts with the widgets on the enrollment edit event
     Then the user sees the delete enrollment modal
 
   Scenario: User can add note on edit event page
-    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
+    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
     Then the enrollment widget should be loaded
     When you fill in the comment: new test comment
     Then list should contain the new comment: new test comment
