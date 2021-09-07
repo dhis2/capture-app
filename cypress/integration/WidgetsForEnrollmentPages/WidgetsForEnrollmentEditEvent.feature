@@ -1,6 +1,6 @@
 Feature: The user interacts with the widgets on the enrollment edit event
 
-    # Scenarios linked to the enrollment edit event
+  # Scenarios linked to the enrollment edit event
   Scenario: The profile widget can be closed on the enrollment edit event
     Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
     And you see the widget with data-test profile-widget
@@ -87,3 +87,9 @@ Feature: The user interacts with the widgets on the enrollment edit event
     When the user opens the enrollment actions menu
     And the user clicks on the delete action
     Then the user sees the delete enrollment modal
+
+  Scenario: User can add note on edit event page
+    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
+    Then the enrollment widget should be loaded
+    When you fill in the comment: new test comment
+    Then list should contain the new comment: new test comment

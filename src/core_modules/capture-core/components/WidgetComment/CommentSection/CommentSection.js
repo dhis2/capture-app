@@ -84,22 +84,24 @@ const CommentSectionPlain = ({
         setNewNoteValue('');
     }, [handleAddNote, newNoteValue]);
 
-    const CommentItem = ({ value, lastUpdated, lastUpdatedBy }) => (<div className={cx(classes.item)}>
-        <div className={classes.avatar} /> {/* TODO: add avatar */}
-        <div className={classes.rightColumn}>
-            <div className={classes.header}>
-                {lastUpdatedBy && <span className={cx(classes.headerText, classes.name)}>
-                    {lastUpdatedBy.firstName} {' '} {lastUpdatedBy.surname}
-                </span>}
-                <span className={cx(classes.headerText, classes.lastUpdated)}>
-                    {moment(lastUpdated).fromNow()}
-                </span>
-            </div>
-            <div className={classes.body}>
-                <Parser>{value}</Parser>
+    const CommentItem = ({ value, lastUpdated, lastUpdatedBy }) => (
+        <div data-test="comment-item" className={cx(classes.item)}>
+            <div className={classes.avatar} /> {/* TODO: add avatar */}
+            <div className={classes.rightColumn}>
+                <div className={classes.header}>
+                    {lastUpdatedBy && <span className={cx(classes.headerText, classes.name)}>
+                        {lastUpdatedBy.firstName} {' '} {lastUpdatedBy.surname}
+                    </span>}
+                    <span className={cx(classes.headerText, classes.lastUpdated)}>
+                        {moment(lastUpdated).fromNow()}
+                    </span>
+                </div>
+                <div className={classes.body}>
+                    <Parser>{value}</Parser>
+                </div>
             </div>
         </div>
-    </div>);
+    );
 
 
     return (
@@ -118,6 +120,7 @@ const CommentSectionPlain = ({
             </Editor>
             {isEditing && <div className={classes.newCommentButtonContainer} data-test="comment-buttons-container">
                 <Button
+                    dataTest="add-note-btn"
                     onClick={onAddNote}
                     className={classes.addCommentContainer}
                     primary
@@ -125,6 +128,7 @@ const CommentSectionPlain = ({
                     {i18n.t('Add comment')}
                 </Button>
                 <Button
+                    dataTest="cancel-note-btn"
                     onClick={onCancel}
                 >
                     {i18n.t('Cancel')}
