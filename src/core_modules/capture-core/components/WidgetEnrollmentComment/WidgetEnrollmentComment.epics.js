@@ -43,6 +43,6 @@ export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxS
             return batchActions([
                 startAddNoteForEnrollment(enrollmentId, serverData, state.currentSelections, saveContext),
                 addEnrollmentNote(enrollmentId, clientNote),
-            ], batchActionTypes.ADD_NOTE_BATCH_FOR_EVENT);
+            ], batchActionTypes.ADD_NOTE_BATCH_FOR_ENROLLMENT);
         }));
 
