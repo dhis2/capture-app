@@ -3274,6 +3274,17 @@
     material-ui "^0.20.0"
     rxjs "^5.5.7"
 
+"@dhis2/d2-ui-core@7.3.3":
+  version "7.3.3"
+  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-core/-/d2-ui-core-7.3.3.tgz#305dd9d4a1fe65672ace305c530230dfe7f89030"
+  integrity sha512-/LFTo83ym7Nwirj+Ecq5OO/Fpy8OrANOUQQGRqpwdW24h0Qm77WTZRPmpaNMg/c3eMhMBVtQbcwKlqE+hDSGOQ==
+  dependencies:
+    babel-runtime "^6.26.0"
+    d2 "~31.7"
+    lodash "^4.17.10"
+    material-ui "^0.20.0"
+    rxjs "^5.5.7"
+
 "@dhis2/d2-ui-core@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-core/-/d2-ui-core-1.4.0.tgz#123d071e507c862f2c0c316ff0bda052a676c262"
@@ -3283,12 +3294,12 @@
     lodash "^4.17.10"
     material-ui "^0.20.0"
 
-"@dhis2/d2-ui-org-unit-tree@^7.3.2":
-  version "7.3.2"
-  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-org-unit-tree/-/d2-ui-org-unit-tree-7.3.2.tgz#557265b3960fc4815882eb220ac2a7f55bb39ca3"
-  integrity sha512-13Yk/sqZ4OkcnDyFKdECt6hIY9my1IZHdAheMIoeUkjDShUpLkAA9AtagcA910HeNj+x1AeZLjsdPc92bOlw+w==
+"@dhis2/d2-ui-org-unit-tree@^7.3.3":
+  version "7.3.3"
+  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-org-unit-tree/-/d2-ui-org-unit-tree-7.3.3.tgz#86fe4c37468fa845b2a6fe893fef74e1efdfb889"
+  integrity sha512-NqbvAd+Zik1KD2AjoZYhz0ejSJg/7wstdS9pUpF9a/KwS1bCi9teTIEkSYC7ntzlRccfA5Ae2VyK7bG7Tzpesg==
   dependencies:
-    "@dhis2/d2-ui-core" "7.3.2"
+    "@dhis2/d2-ui-core" "7.3.3"
     "@material-ui/core" "^3.3.1"
     babel-runtime "^6.26.0"
     prop-types "^15.5.10"
