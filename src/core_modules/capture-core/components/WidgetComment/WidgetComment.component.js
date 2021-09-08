@@ -11,12 +11,12 @@ export const WidgetComment = ({ notes, onAddNote, ...passOnProps }: Props) => {
 
     return (
         <Widget
-            header={<>
+            header={<div>
                 <span>{i18n.t('Comments about this event')}</span>
                 {notes.length ? <Chip dense>
                     {notes.length}
                 </Chip> : null}
-            </>}
+            </div>}
             onOpen={useCallback(() => setOpenStatus(true), [setOpenStatus])}
             onClose={useCallback(() => setOpenStatus(false), [setOpenStatus])}
             open={open}
