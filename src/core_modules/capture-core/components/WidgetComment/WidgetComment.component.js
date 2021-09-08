@@ -1,18 +1,17 @@
 // @flow
 import React, { useState, useCallback } from 'react';
 import { Chip } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../Widget';
 import type { Props } from './WidgetComment.types';
 import { CommentSection } from './CommentSection/CommentSection';
 
-export const WidgetComment = ({ notes, onAddNote, ...passOnProps }: Props) => {
+export const WidgetComment = ({ title, notes, onAddNote, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
 
     return (
         <Widget
             header={<>
-                <span>{i18n.t('Comments about this event')}</span>
+                <span>{title}</span>
                 {notes.length ? <Chip dense>
                     {notes.length}
                 </Chip> : null}

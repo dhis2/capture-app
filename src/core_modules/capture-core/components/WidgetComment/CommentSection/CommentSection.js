@@ -14,6 +14,7 @@ const FocusTextField = withFocusSaver()(TextField);
 type Props = {
     notes: Array<Object>,
     handleAddNote: (text: string) => void,
+    placeholder: string,
     ...CssClasses
 }
 
@@ -62,6 +63,7 @@ const styles = {
 };
 
 const CommentSectionPlain = ({
+    placeholder,
     notes,
     handleAddNote,
     classes,
@@ -112,7 +114,7 @@ const CommentSectionPlain = ({
             }
             <Editor>
                 <FocusTextField
-                    placeholder={i18n.t('Write a comment about this event')}
+                    placeholder={placeholder}
                     onChange={handleChange}
                     value={newNoteValue}
                     data-test="comment-textfield"
