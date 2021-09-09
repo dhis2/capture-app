@@ -117,7 +117,7 @@ export function runRulesForSingleEvent(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.getProgramRuleEffects({
+        const effects = rulesEngine.getProgramRuleEffects({
             programRulesContainer: { programRulesVariables, programRules, constants },
             currentEvent,
             eventsContainer: allEvents,
@@ -127,7 +127,10 @@ export function runRulesForSingleEvent(
             selectedEnrollment: null,
             selectedOrgUnit: orgUnit,
             optionSets,
-        }).filter(effect => typeof effect.isDataElementId === undefined || effect.isDataElementId);
+        });
+        effects.filter(effect => typeof effect.isDataElementId === undefined || effect.isDataElementId);
+
+        return (effects.length > 0) ? effects : null;
     }
     return null;
 }

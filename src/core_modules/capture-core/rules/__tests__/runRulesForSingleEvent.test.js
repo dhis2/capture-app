@@ -15,7 +15,7 @@ describe('rules engine', () => {
                 },
                 foundation: { programRules: [] },
             },
-            [{ id: 'vANAXwtLwcT', message: 'Hemoglobin value lower than normal ', type: 'SHOWWARNING' }, { id: 'Ok9OQpitjQr', type: 'HIDEFIELD' }],
+            [{ id: 'vANAXwtLwcT', isDataElementId: true, message: 'Hemoglobin value lower than normal ', type: 'SHOWWARNING' }, { id: 'Ok9OQpitjQr', isDataElementId: true, type: 'HIDEFIELD' }],
         ],
         [
             {
@@ -37,7 +37,7 @@ describe('rules engine', () => {
                 },
                 foundation: { programRules: [] },
             },
-            [{ id: 'PAvRSZQyYjR', type: 'HIDESECTION' }, { id: 'TIpDZhpNkmS', type: 'HIDESECTION' }, { id: 'YpzV7H2BA6C', type: 'HIDESECTION' }],
+            [{ id: 'PAvRSZQyYjR', type: 'HIDESECTION' },{ id: 'TIpDZhpNkmS', type: 'HIDESECTION' }, { id: 'YpzV7H2BA6C', type: 'HIDESECTION' }],
         ],
         [
             {

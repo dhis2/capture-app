@@ -125,7 +125,7 @@ export function runRulesForTEI(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.getProgramRuleEffects({
+        const effects = rulesEngine.getProgramRuleEffects({
             programRulesContainer: { programRulesVariables, programRules, constants },
             currentEvent: null,
             eventsContainer: null,
@@ -136,6 +136,8 @@ export function runRulesForTEI(
             selectedOrgUnit: orgUnit,
             optionSets,
         }).filter(effect => !effect.isDataElementId);
+
+        return (effects.length > 0) ? effects : null;
     }
     return null;
 }

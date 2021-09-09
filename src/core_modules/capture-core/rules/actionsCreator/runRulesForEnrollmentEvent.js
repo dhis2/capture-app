@@ -26,7 +26,7 @@ type RuleEnrollmentData = {
     enrollmentData: ?Enrollment,
 }
 
-export function runRulesForEnrollmentPage(data: RuleEnrollmentData): OutputEffects {
+export function runRulesForEnrollmentEvent(data: RuleEnrollmentData): ?OutputEffects {
     const {
         program,
         orgUnit,
@@ -44,7 +44,7 @@ export function runRulesForEnrollmentPage(data: RuleEnrollmentData): OutputEffec
     const optionSets = convertOptionSetsToRulesEngineFormat(optionSetStore.get());
 
     // returns an array of effects that need to take place in the UI.
-    return rulesEngine.getProgramRuleEffects({
+    const effects = rulesEngine.getProgramRuleEffects({
         programRulesContainer: { programRulesVariables, programRules, constants },
         currentEvent,
         eventsContainer: eventsData,
@@ -54,5 +54,8 @@ export function runRulesForEnrollmentPage(data: RuleEnrollmentData): OutputEffec
         selectedEnrollment: enrollmentData,
         selectedOrgUnit: orgUnit,
         optionSets,
-    }).filter(effect => typeof effect.isDataElementId === undefined || effect.isDataElementId);
+    });
+    effects.filter(effect => typeof effect.isDataElementId === undefined || effect.isDataElementId);
+
+    return (effects.length > 0) ? effects : null;
 }
