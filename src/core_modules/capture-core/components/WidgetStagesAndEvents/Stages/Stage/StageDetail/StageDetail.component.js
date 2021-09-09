@@ -104,7 +104,7 @@ const StageDetailPlain = (props: Props) => {
                     key={column.id}
                     name={column.id}
                     sortDirection={getSortDirection(column)}
-                    onSortIconClick={onSortIconClick}
+                    onSortIconClick={column.sortDirection && onSortIconClick}
                 >
                     {column.header}
                 </DataTableColumnHeader>
