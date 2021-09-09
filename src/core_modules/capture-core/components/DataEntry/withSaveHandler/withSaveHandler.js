@@ -20,7 +20,7 @@ type Props = {
     classes: Object,
     formFoundation: RenderFoundation,
     itemId: string,
-    onSave: (itemId: string, id: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
+    onSave: (itemId: string, id: string, formFoundation: RenderFoundation, completed?: ?boolean) => void,
     onSaveValidationFailed: (itemId: string, id: string) => void,
     onSaveAbort: (itemId: string, id: string) => void,
     saveAttempted?: ?boolean,
@@ -194,7 +194,8 @@ const getSaveHandler = (
             if (saveType === addEventSaveTypes.COMPLETE && ((errors && errors.length > 0) || (warnings && warnings.length > 0))) {
                 this.showMessagesPopup(saveType);
             } else {
-                onSave(itemId, id, calculatedFoundation, saveType);
+                const completed = saveType === addEventSaveTypes.COMPLETE;
+                onSave(itemId, id, calculatedFoundation, completed);
             }
         }
 
