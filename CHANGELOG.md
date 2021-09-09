@@ -1,3 +1,10 @@
+## [1.53.3](https://github.com/dhis2/capture-app/compare/v1.53.2...v1.53.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* Fix sorting error on comment column ([d7acab3](https://github.com/dhis2/capture-app/commit/d7acab3c608435897bd103c79711184dca553bf2))
+
 ## [1.53.2](https://github.com/dhis2/capture-app/compare/v1.53.1...v1.53.2) (2021-09-02)
 
 
