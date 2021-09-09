@@ -1,11 +1,11 @@
 // @flow
 import React from 'react';
 import type { ComponentType } from 'react';
-import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { StageEventHeader } from './StageEventHeader/StageEventHeader.component';
 import { Widget } from '../../../Widget';
 import type { Props } from './StageEventList.types';
+import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import { EventWorkingLists } from '../../../WorkingLists/EventWorkingLists';
 import { TeiWorkingLists } from '../../../WorkingLists/TeiWorkingLists';
 
@@ -15,6 +15,12 @@ const storeId = 'stageEvents';
 const StageEventListPlain = ({ stage, programId, ...passOnProps }) => {
     const { programType } = useProgramInfo(programId);
 
+    const workingListProps = {
+        storeId,
+        programId,
+        programStageId: stage.id,
+        ...passOnProps,
+    };
     return (<>
         <div data-test="stage-event-list" >
             <Widget
@@ -26,16 +32,10 @@ const StageEventListPlain = ({ stage, programId, ...passOnProps }) => {
                 />}
             >
                 {programType === programTypes.EVENT_PROGRAM && <EventWorkingLists
-                    storeId={storeId}
-                    programId={programId}
-                    programStageId={stage.id}
-                    {...passOnProps}
+                    {...workingListProps}
                 />}
                 {programType === programTypes.TRACKER_PROGRAM && <TeiWorkingLists
-                    storeId={storeId}
-                    programId={programId}
-                    programStageId={stage.id}
-                    {...passOnProps}
+                    {...workingListProps}
                 />}
             </Widget>
         </div>
