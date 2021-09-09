@@ -20,6 +20,10 @@ const getEventStatus = (event: ApiTEIEvent) => {
     if (isEventOverdue(event)) {
         return { status: statusTypes.OVERDUE, options: daysUntilDueDate ? dueDateFromNow : undefined };
     }
+    // DHIS2-11576: VISITED status is treated as ACTIVE
+    if (event.status === 'VISITED') {
+        return { status: statusTypes.ACTIVE, options: undefined };
+    }
 
     if (event.status === statusTypes.SCHEDULE) {
         if (!event.dueDate || !daysUntilDueDate) {
@@ -50,7 +54,7 @@ const convertStatusForView = (event: ApiTEIEvent) => {
     return {
         isNegative,
         isPositive,
-        text: translatedStatusTypes(options)[status],
+        text: translatedStatusTypes(options)[status] ?? event.status,
         status,
     };
 };
