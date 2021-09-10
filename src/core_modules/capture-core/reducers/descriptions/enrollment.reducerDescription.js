@@ -6,8 +6,11 @@ const initialReducerValue = {};
 const {
     SET_ENROLLMENT,
     UPDATE_ENROLLMENT_EVENTS,
+    UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID,
     ROLLBACK_ENROLLMENT_EVENT,
+    ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID,
     COMMIT_ENROLLMENT_EVENT,
+    COMMIT_ENROLLMENT_EVENT_WITHOUT_ID,
 } = enrollmentActionTypes;
 
 export const enrollmentDesc = createReducerDescription(
@@ -52,6 +55,27 @@ export const enrollmentDesc = createReducerDescription(
                 return event;
             });
 
+            return { ...state, events };
+        },
+        [UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID]: (
+            state,
+            { payload: { eventData, uid } },
+        ) => {
+            const events = [...state.events, { ...eventData, uid, pendingApiResponse: true }];
+            return { ...state, events };
+        },
+        [ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID]: (state, { payload: { uid } }) => {
+            const events = state.events?.filter(event => (event.uid !== uid));
+            return { ...state, events };
+        },
+        [COMMIT_ENROLLMENT_EVENT_WITHOUT_ID]: (state, { payload: { eventId, uid } }) => {
+            const events = state.events?.map((event) => {
+                if (event.uid === uid) {
+                    const { pendingApiResponse, uid: uidToRemove, ...dataToCommit } = event;
+                    return { ...dataToCommit, event: eventId };
+                }
+                return event;
+            });
             return { ...state, events };
         },
     },

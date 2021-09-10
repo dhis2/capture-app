@@ -206,6 +206,8 @@ import {
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,
+    saveNewEventSucceededEpic,
+    rollbackNewEventSucceededEpic,
     addNoteForNewEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
 
@@ -336,5 +338,7 @@ export const epics = combineEpics(
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,
+    saveNewEventSucceededEpic,
+    rollbackNewEventSucceededEpic,
     addNoteForNewEnrollmentEventEpic,
 );
