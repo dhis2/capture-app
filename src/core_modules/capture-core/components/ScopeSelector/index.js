@@ -13,4 +13,5 @@ export {
     useReset,
 } from './hooks';
 export { ScopeSelector } from './ScopeSelector.container';
+export { SingleLockedSelect } from './QuickSelector/SingleLockedSelect.component';
 export { buildEnrollmentsAsOptions } from './ScopeSelector.utils';

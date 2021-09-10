@@ -1,11 +1,10 @@
 // @flow
-import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import React, { type ComponentType } from 'react';
 import { IconMessages16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 
 type Props = {|
-    event: ApiTEIEvent,
+    event: ApiEnrollmentEvent,
     ...CssClasses,
 |};
 

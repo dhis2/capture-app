@@ -1,7 +1,6 @@
 // @flow
 import type { ProgramStage, RenderFoundation } from '../../../metaData';
-import type { OrgUnit } from '../common.types';
-
+import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../common.types';
 
 export type ContainerProps = {|
     stage: ProgramStage,
@@ -11,6 +10,7 @@ export type ContainerProps = {|
     itemId: string,
     formRef: (formInstance: any) => void,
     dataEntryFieldRef: (instance: any, id: string) => void,
+    rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
 |};
 
 export type Props = $Diff<ContainerProps, {| orgUnit: OrgUnit |}>;
