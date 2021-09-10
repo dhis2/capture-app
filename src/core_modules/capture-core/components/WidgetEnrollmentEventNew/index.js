@@ -6,4 +6,4 @@ export {
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
 } from './DataEntry';
 export { saveNewEnrollmentEventEpic } from './Validated';
-export type { ExternalSaveHandler } from './common.types';
+export type { ExternalSaveHandler, RulesExecutionDependencies } from './common.types';

@@ -25,4 +25,3 @@ export const translatedStatusTypes = (options?: string) => ({
     }) : i18n.t('Overdue'),
     [statusTypes.SKIPPED]: i18n.t('Skipped'),
 });
-

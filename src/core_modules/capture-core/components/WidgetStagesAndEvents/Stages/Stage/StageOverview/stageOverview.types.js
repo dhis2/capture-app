@@ -1,10 +1,9 @@
 // @flow
-import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import type { Icon } from '../../../../../metaData';
 
 export type Props = {|
     title: string,
-    events: Array<ApiTEIEvent>,
+    events: Array<ApiEnrollmentEvent>,
     icon?: Icon,
     description?: string,
     ...CssClasses,

@@ -70,7 +70,7 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
     const currentEventData = { ...currentEventValues, ...currentEventMainData };
     const allEvents = state.enrollmentSite?.events;
     const allEventsData = program instanceof TrackerProgram && allEvents
-        ? [...prepareEnrollmentEventsForRulesEngine(currentEventData, allEvents)]
+        ? [...prepareEnrollmentEventsForRulesEngine(allEvents, currentEventData)]
         : [currentEventData];
 
     const rulesActions = getRulesActionsForEvent(

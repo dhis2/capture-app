@@ -10,7 +10,12 @@ import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.act
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 import { convertMainEventClientToServer } from '../../../events/mainConverters';
-import { commitEnrollmentEvent, updateEnrollmentEvents, rollbackEnrollmentEvent, enrollmentActionTypes } from '../../Pages/common/EnrollmentOverviewDomain/enrollment.actions';
+import {
+    commitEnrollmentEvent,
+    updateEnrollmentEvents,
+    rollbackEnrollmentEvent,
+    enrollmentSiteActionTypes,
+} from '../../Pages/common/EnrollmentOverviewDomain';
 import { TrackerProgram } from '../../../metaData/Program';
 
 import {
@@ -119,7 +124,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                 return batchActions([
                     updateEventContainer(eventContainer, orgUnit),
                     updateEnrollmentEvents(eventId, serverData),
-                    startSaveEditEventDataEntry(eventId, serverData, state.currentSelections, enrollmentActionTypes.COMMIT_ENROLLMENT_EVENT, enrollmentActionTypes.ROLLBACK_ENROLLMENT_EVENT),
+                    startSaveEditEventDataEntry(eventId, serverData, state.currentSelections, enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT, enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT),
                 ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
             }
             return batchActions([
@@ -133,7 +138,7 @@ export const saveEditedEventSucceededEpic = (action$: InputObservable) =>
         ofType(actionTypes.EDIT_EVENT_DATA_ENTRY_SAVED),
         map((action) => {
             const meta = action.meta;
-            if (meta.triggerAction === enrollmentActionTypes.COMMIT_ENROLLMENT_EVENT) {
+            if (meta.triggerAction === enrollmentSiteActionTypes.COMMIT_ENROLLMENT_EVENT) {
                 return commitEnrollmentEvent(meta.eventId);
             }
             return null;
@@ -157,7 +162,7 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
             let actions = [updateEventContainer(eventContainer, orgUnit)];
 
-            if (meta.triggerAction === enrollmentActionTypes.ROLLBACK_ENROLLMENT_EVENT) {
+            if (meta.triggerAction === enrollmentSiteActionTypes.ROLLBACK_ENROLLMENT_EVENT) {
                 actions = [...actions, rollbackEnrollmentEvent(eventContainer.event.eventId)];
             }
             return batchActions(actions);

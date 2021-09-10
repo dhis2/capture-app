@@ -15,7 +15,7 @@ import {
 import typeof { addEventSaveTypes } from './addEventSaveTypes';
 import type { ContainerProps } from './dataEntry.types';
 
-export const DataEntry = ({ orgUnit, ...passOnProps }: ContainerProps) => {
+export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, ...passOnProps }: ContainerProps) => {
     const dispatch = useDispatch();
 
     const onUpdateDataEntryField = useCallback((innerAction: ReduxAction<any, any>) => {
@@ -25,9 +25,9 @@ export const DataEntry = ({ orgUnit, ...passOnProps }: ContainerProps) => {
         dispatch(batchActions([
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            executeRulesOnUpdateForNewEvent({ ...innerAction.payload, uid, orgUnit }),
+            executeRulesOnUpdateForNewEvent({ ...innerAction.payload, uid, orgUnit, rulesExecutionDependenciesClientFormatted }),
         ], newEventWidgetDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH));
-    }, [dispatch, orgUnit]);
+    }, [dispatch, orgUnit, rulesExecutionDependenciesClientFormatted]);
 
     const onUpdateField = useCallback((innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
@@ -36,9 +36,9 @@ export const DataEntry = ({ orgUnit, ...passOnProps }: ContainerProps) => {
         dispatch(batchActions([
             innerAction,
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-            executeRulesOnUpdateForNewEvent({ ...innerAction.payload, uid, orgUnit }),
+            executeRulesOnUpdateForNewEvent({ ...innerAction.payload, uid, orgUnit, rulesExecutionDependenciesClientFormatted }),
         ], newEventWidgetDataEntryBatchActionTypes.FIELD_UPDATE_BATCH));
-    }, [dispatch, orgUnit]);
+    }, [dispatch, orgUnit, rulesExecutionDependenciesClientFormatted]);
 
     const onStartAsyncUpdateField = useCallback((
         innerAction: ReduxAction<any, any>,
@@ -50,13 +50,13 @@ export const DataEntry = ({ orgUnit, ...passOnProps }: ContainerProps) => {
             return batchActions([
                 successInnerAction,
                 startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-                executeRulesOnUpdateForNewEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid, orgUnit }),
+                executeRulesOnUpdateForNewEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid, orgUnit, rulesExecutionDependenciesClientFormatted }),
             ], newEventWidgetDataEntryBatchActionTypes.FIELD_UPDATE_BATCH);
         };
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
         dispatch(startAsyncUpdateFieldForNewEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
-    }, [dispatch, orgUnit]);
+    }, [dispatch, orgUnit, rulesExecutionDependenciesClientFormatted]);
 
     const onAddNote = useCallback((itemId: string, dataEntryId: string, note: string) => {
         dispatch(addNewEventNote(itemId, dataEntryId, note));

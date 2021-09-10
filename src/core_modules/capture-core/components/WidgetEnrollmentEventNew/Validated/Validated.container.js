@@ -5,6 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
 import { useOrganisationUnit } from './useOrganisationUnit';
+import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
 import { ValidatedComponent } from './Validated.component';
 import { requestSaveEvent } from './validated.actions';
 import type { ContainerProps } from './validated.types';
@@ -20,13 +21,24 @@ export const Validated = ({
     orgUnitId,
     teiId,
     enrollmentId,
+    rulesExecutionDependencies,
     ...passOnProps
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
 
     const { error, orgUnit } = useOrganisationUnit(orgUnitId);
-    const ready = useLifecycle(program, formFoundation, orgUnit, dataEntryId, itemId);
+    const rulesExecutionDependenciesClientFormatted =
+        useClientFormattedRulesExecutionDependencies(rulesExecutionDependencies, program);
+    const ready = useLifecycle({
+        program,
+        formFoundation,
+        orgUnit,
+        dataEntryId,
+        itemId,
+        // $FlowFixMe Investigate
+        rulesExecutionDependenciesClientFormatted,
+    });
 
     const dispatch = useDispatch();
     const handleSave = useCallback((
@@ -78,6 +90,7 @@ export const Validated = ({
             onSave={handleSave}
             programName={program.name}
             orgUnit={orgUnit}
+            rulesExecutionDependenciesClientFormatted={rulesExecutionDependenciesClientFormatted}
         />
     );
 };

@@ -12,12 +12,13 @@ import {
     getCurrentClientValues,
     getCurrentClientMainData,
     getRulesActionsForEvent,
+    getRulesActionsForEnrollmentEvent,
 } from '../../../../rules/actionsCreator';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import type {
     FieldData,
 } from '../../../../rules/actionsCreator';
-import type { OrgUnit } from '../../common.types';
+import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../../common.types';
 
 const runRulesForNewEvent = (
     store: ReduxStore,
@@ -25,6 +26,7 @@ const runRulesForNewEvent = (
     itemId: string,
     uid: string,
     orgUnit: OrgUnit,
+    { events, attributeValues, enrollmentData }: RulesExecutionDependenciesClientFormatted,
     fieldData?: ?FieldData,
 ) => {
     const state = store.value;
@@ -51,15 +53,19 @@ const runRulesForNewEvent = (
         const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
         const currentEventData = { ...currentEventValues, ...currentEventMainData, programStageId };
 
-        rulesActions = getRulesActionsForEvent(
-            metadataContainer.program,
+        rulesActions = getRulesActionsForEnrollmentEvent({
+            // $FlowFixMe
+            program: metadataContainer.program,
             foundation,
             formId,
             orgUnit,
-            currentEventData,
-            [currentEventData],
-            metadataContainer.stage,
-        );
+            currentEvent: currentEventData,
+            // $FlowFixMe
+            eventsData: events,
+            attributeValues,
+            // $FlowFixMe
+            enrollmentData,
+        });
     }
 
     return batchActions([
@@ -74,23 +80,50 @@ export const runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic = (action$:
     action$.pipe(
         ofType(newEventWidgetDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH),
         map(actionBatch =>
-            actionBatch.payload.find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
+            actionBatch.payload
+                .find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
         map((action) => {
-            const { dataEntryId, itemId, uid, orgUnit } = action.payload;
-            return runRulesForNewEvent(store, dataEntryId, itemId, uid, orgUnit);
+            const { dataEntryId, itemId, uid, orgUnit, rulesExecutionDependenciesClientFormatted } = action.payload;
+            return runRulesForNewEvent(
+                store,
+                dataEntryId,
+                itemId,
+                uid,
+                orgUnit,
+                rulesExecutionDependenciesClientFormatted,
+            );
         }));
 
 export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(newEventWidgetDataEntryBatchActionTypes.FIELD_UPDATE_BATCH),
         map(actionBatch =>
-            actionBatch.payload.find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
+            actionBatch.payload
+                .find(action => action.type === newEventWidgetDataEntryActionTypes.RULES_ON_UPDATE_EXECUTE)),
         map((action) => {
-            const { dataEntryId, itemId, uid, elementId, value, uiState, orgUnit } = action.payload;
+            const {
+                dataEntryId,
+                itemId,
+                uid,
+                elementId,
+                value,
+                uiState,
+                orgUnit,
+                rulesExecutionDependenciesClientFormatted,
+            } = action.payload;
+
             const fieldData: FieldData = {
                 elementId,
                 value,
                 valid: uiState.valid,
             };
-            return runRulesForNewEvent(store, dataEntryId, itemId, uid, orgUnit, fieldData);
+            return runRulesForNewEvent(
+                store,
+                dataEntryId,
+                itemId,
+                uid,
+                orgUnit,
+                rulesExecutionDependenciesClientFormatted,
+                fieldData,
+            );
         }));

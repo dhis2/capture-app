@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import { dataElementTypes } from '../../../../../../metaData';
 import type { StageDataElement } from '../../../../types/common.types';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
@@ -66,7 +65,7 @@ const getAllFieldsWithValue = (
     }, {});
 
 
-const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: Array<ApiTEIEvent>) => {
+const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: Array<ApiEnrollmentEvent>) => {
     const [dataSource, setDataSource] = React.useState([]);
 
     const computeData = async () => {
