@@ -2,7 +2,7 @@
 import React from 'react';
 import moment from 'moment';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
-import { statusTypes, translatedStatusTypes } from '../../../../../../metaData';
+import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
 import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
@@ -54,7 +54,7 @@ const convertStatusForView = (event: ApiTEIEvent) => {
     return {
         isNegative,
         isPositive,
-        text: translatedStatusTypes(options)[status] ?? event.status,
+        text: translatedStatusTypes(options)[status],
         status,
     };
 };
