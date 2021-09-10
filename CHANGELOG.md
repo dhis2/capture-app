@@ -1,3 +1,10 @@
+## [1.53.4](https://github.com/dhis2/capture-app/compare/v1.53.3...v1.53.4) (2021-09-10)
+
+
+### Bug Fixes
+
+* [DHIS2-11482] disable flaky Cypress test cases ([#2076](https://github.com/dhis2/capture-app/issues/2076)) ([398285e](https://github.com/dhis2/capture-app/commit/398285ef1a3eb28ad66e212f2ced984e4e831e95))
+
 ## [1.53.3](https://github.com/dhis2/capture-app/compare/v1.53.2...v1.53.3) (2021-09-09)
 
 
