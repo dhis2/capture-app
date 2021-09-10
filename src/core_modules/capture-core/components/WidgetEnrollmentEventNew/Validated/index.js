@@ -3,5 +3,5 @@ export { Validated } from './Validated.container';
 export {
     saveNewEnrollmentEventEpic,
     saveNewEventSucceededEpic,
-    rollbackNewEventSucceededEpic,
+    saveNewEventFailedEpic,
 } from './validated.epics';

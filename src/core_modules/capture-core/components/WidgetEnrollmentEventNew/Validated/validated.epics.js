@@ -25,7 +25,7 @@ export const saveNewEventSucceededEpic = (action$: InputObservable) =>
         }),
     );
 
-export const rollbackNewEventSucceededEpic = (action$: InputObservable) =>
+export const saveNewEventFailedEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR),
         map((action) => {
@@ -55,11 +55,8 @@ export const saveNewEnrollmentEventEpic = (action$: InputObservable, store: Redu
             } = action.payload;
 
             const dataEntryKey = getDataEntryKey(dataEntryId, eventId);
-            const { formClientValues, mainDataClientValues } = getNewEventClientValues(
-                state,
-                dataEntryKey,
-                formFoundation,
-            );
+            const { formClientValues, mainDataClientValues }
+                = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
             const serverData = getAddEventEnrollmentServerData({
                 formFoundation,
