@@ -1,3 +1,10 @@
+## [1.53.5](https://github.com/dhis2/capture-app/compare/v1.53.4...v1.53.5) (2021-09-10)
+
+
+### Bug Fixes
+
+* [DHIS2-11733] fix program stage list for tracker program ([#2080](https://github.com/dhis2/capture-app/issues/2080)) ([90dbff3](https://github.com/dhis2/capture-app/commit/90dbff3c6278209784d1c2e9438f576a77984da4))
+
 ## [1.53.4](https://github.com/dhis2/capture-app/compare/v1.53.3...v1.53.4) (2021-09-10)
 
 
