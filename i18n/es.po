@@ -1,20 +1,21 @@
 # 
 # Translators:
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
-# Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
-# ericbp <ericbarredap@gmail.com>, 2021
-# Alison Andrade <aandrade@ippfwhr.org>, 2021
-# drprabhjot, 2021
-# Marta Vila <marta@dhis2.org>, 2021
+# Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2021
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# Marta Vila <marta@dhis2.org>, 2021
+# Pablo Pajuelo Cabezas <ppajuelo@quadram.mobi>, 2021
+# ericbp <ericbarredap@gmail.com>, 2021
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
+# Alison Andrade <aandrade@ippfwhr.org>, 2021
+# drprabhjot, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"PO-Revision-Date: 2021-09-03 23:31+0000\n"
+"Last-Translator: drprabhjot, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,10 +107,10 @@ msgid "Please provide a valid percentage"
 msgstr "Proporcione un porcentaje válido"
 
 msgid "Please provide a valid url"
-msgstr "Proporcione una URL válida"
+msgstr "Proporcione un enlace válido."
 
 msgid "Please provide a valid email address"
-msgstr "Por favor ingrese una dirección de correo electrónico válida"
+msgstr "Por favor proporcione un correo electrónico válido"
 
 msgid "Please provide a valid age"
 msgstr "Proporcione una edad válida"
@@ -221,7 +222,7 @@ msgid "Save without completing"
 msgstr ""
 
 msgid "Complete"
-msgstr "Completo"
+msgstr "Completar"
 
 msgid "No write access"
 msgstr "Sin acceso de escritura"
@@ -435,7 +436,7 @@ msgid "Contains text"
 msgstr "Contiene texto"
 
 msgid "Yes"
-msgstr "Si"
+msgstr "Sí"
 
 msgid "mm/dd/yyyy"
 msgstr "mm / dd / aaaa"
@@ -456,7 +457,7 @@ msgid "selected"
 msgstr "seleccionado"
 
 msgid "Delete"
-msgstr "Borrar"
+msgstr "Eliminar"
 
 msgid "Select file"
 msgstr "Seleccionar archivos"

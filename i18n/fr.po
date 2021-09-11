@@ -1,19 +1,20 @@
 # 
 # Translators:
-# Karoline Tufte Lien <karoline@dhis2.org>, 2020
-# Yayra Gomado <ygomado@hispwca.org>, 2021
-# Yao Selom Saka <ysaka@hispwca.org>, 2021
-# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
-# Bram Piot <bram.piot@gmail.com>, 2021
+# Edem Kossi <ekossi@hispwca.org>, 2021
 # phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# Karoline Tufte Lien <karoline@dhis2.org>, 2021
+# Bram Piot <bram.piot@gmail.com>, 2021
+# Yao Selom Saka <ysaka@hispwca.org>, 2021
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2021
+# Yayra Gomado <ygomado@hispwca.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"PO-Revision-Date: 2021-09-03 23:31+0000\n"
+"Last-Translator: Yayra Gomado <ygomado@hispwca.org>, 2021\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -329,7 +330,7 @@ msgstr "Lien"
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "En quittant cette page, les modifications apportées à cet événement seront "
-"annulées."
+"supprimées."
 
 msgid "validation failed"
 msgstr "validation échouée"
@@ -413,7 +414,7 @@ msgid "This week"
 msgstr "Cette semaine"
 
 msgid "This month"
-msgstr "Ce mois-ci"
+msgstr "Ce mois"
 
 msgid "This Year"
 msgstr "Cette année"
@@ -862,7 +863,7 @@ msgid "You dont have access to edit this event"
 msgstr "Vous n'êtes pas autorisé à modifier cet événement"
 
 msgid "Edit event"
-msgstr "Modifier un événement"
+msgstr "Modifier l'événement"
 
 msgid "Event details"
 msgstr "Détails de l'évènement"
@@ -1052,7 +1053,7 @@ msgid "Download as JSON"
 msgstr "Télécharger en JSON"
 
 msgid "Download as XML"
-msgstr "Download as XML"
+msgstr "Télécharger en XML"
 
 msgid "Download as CSV"
 msgstr "Télécharger en CSV"
@@ -1094,13 +1095,13 @@ msgid "Save current view as..."
 msgstr "Enregistrer la vue actuelle sous..."
 
 msgid "Delete view"
-msgstr "Supprimer une vue"
+msgstr "Supprimer la vue"
 
 msgid "Share view..."
-msgstr "Partager une vue..."
+msgstr "Partager la vue..."
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Souhaitez-vous vraiment supprimer la vue '{{nom du modèle}' ?"
+msgstr "Souhaitez-vous vraiment supprimer la vue '{{nom du modèle}}' ?"
 
 msgid "Confirm"
 msgstr "Confirmer"

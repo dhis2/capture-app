@@ -1,6 +1,6 @@
 # 
 # Translators:
-# phil_dhis2, 2020
+# phil_dhis2, 2021
 # Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2021
 # 
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -190,7 +190,7 @@ msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
-"Relasjon av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
+"Forhold av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
 
 msgid "Active"
 msgstr "Aktiv"
@@ -284,7 +284,7 @@ msgid "An error has occurred. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
+msgstr "Et duplikat finnes (men det var noen feil, se logg for detaljer)"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
@@ -489,7 +489,7 @@ msgid "Columns to show in table"
 msgstr "Kolonner som skal vises i tabellen"
 
 msgid "Column"
-msgstr "Kolonne"
+msgstr "Stolpe"
 
 msgid "Update"
 msgstr "Oppdater"
