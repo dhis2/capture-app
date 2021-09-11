@@ -1,3 +1,10 @@
+## [1.53.6](https://github.com/dhis2/capture-app/compare/v1.53.5...v1.53.6) (2021-09-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e99da58](https://github.com/dhis2/capture-app/commit/e99da58e21dab7349b2bc41b11f76ec9f0185a6e))
+
 ## [1.53.5](https://github.com/dhis2/capture-app/compare/v1.53.4...v1.53.5) (2021-09-10)
 
 
