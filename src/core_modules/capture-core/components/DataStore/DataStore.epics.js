@@ -1,7 +1,7 @@
 // @flow
-
 import { ofType } from 'redux-observable';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, catchError } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 import { fetchDataStore } from './DataStore.actions';
 import { getApi } from '../../d2';
 import type { UseNewDashboard } from './DataStore.actions';
@@ -13,7 +13,12 @@ function getDataStoreFromApi() {
         .get('dataStore/capture/useNewDashboard');
 }
 
-export const dataStoreEpic = (action$: InputObservable) =>
+const getUserDataStoreFromApi = () => {
+    const api = getApi();
+    return api.get('userDataStore/capture/useNewDashboard');
+};
+
+export const fetchDataStoreEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             appStartActionTypes.APP_LOAD_SUCESS,
@@ -21,6 +26,20 @@ export const dataStoreEpic = (action$: InputObservable) =>
         mergeMap(async () => {
             const apiDataStore: UseNewDashboard = await getDataStoreFromApi();
             // $FlowFixMe
-            return fetchDataStore(apiDataStore);
+            return fetchDataStore({ dataStore: apiDataStore });
         }),
+        catchError(() => EMPTY),
+    );
+
+export const fetchUserDataStoreEpic = (action$: InputObservable) =>
+    action$.pipe(
+        ofType(
+            appStartActionTypes.APP_LOAD_SUCESS,
+        ),
+        mergeMap(async () => {
+            const apiUserDataStore: UseNewDashboard = await getUserDataStoreFromApi();
+            // $FlowFixMe
+            return fetchDataStore({ userDataStore: apiUserDataStore });
+        }),
+        catchError(() => EMPTY),
     );

@@ -1,13 +1,12 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router';
-import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
 import { TeiWorkingListsSetup } from '../Setup';
 import { useWorkingListsCommonStateManagement, fetchTemplatesSuccess, fetchTemplates } from '../../WorkingListsCommon';
 import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { TEI_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './teiWorkingListsReduxProvider.types';
+import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 
 export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: Props) => {
     const program = useTrackerProgram(programId);
@@ -31,17 +30,11 @@ export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: 
         dispatch(fetchTemplatesSuccess([], 'default', storeId));
     }, [dispatch, programId, storeId]);
 
-
-    const { pathname, search } = useLocation();
-    const onSelectListRow = useCallback(({ id }) => {
-        navigateToTrackedEntityDashboard({
-            teiId: id,
-            orgUnitId,
-            scopeSearchParam: `program=${programId}`,
-            currentUrl: `${pathname}${search}`,
-            trackedEntityInstance: records[id],
-        });
-    }, [orgUnitId, programId, pathname, search, records]);
+    const onSelectListRow = useCallback(({ id }) => dispatch(navigateToEnrollmentOverview({
+        teiId: id,
+        programId,
+        orgUnitId,
+    })), [dispatch, orgUnitId, programId]);
 
     return (
         <TeiWorkingListsSetup
