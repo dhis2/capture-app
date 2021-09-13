@@ -1,3 +1,10 @@
+## [1.53.9](https://github.com/dhis2/capture-app/compare/v1.53.8...v1.53.9) (2021-09-13)
+
+
+### Bug Fixes
+
+* [DHIS2-11669][DHIS2-11746] save new enrollment event validation & statuses ([#2062](https://github.com/dhis2/capture-app/issues/2062)) ([814bd3c](https://github.com/dhis2/capture-app/commit/814bd3c5a33c70b22747c446e9ebaa1742eda3c1))
+
 ## [1.53.8](https://github.com/dhis2/capture-app/compare/v1.53.7...v1.53.8) (2021-09-13)
 
 
