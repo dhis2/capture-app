@@ -18,6 +18,11 @@ export const translatedStatusTypes = (options?: string) => ({
         interpolation: { escapeValue: false },
     }) : i18n.t('Scheduled'),
     [statusTypes.COMPLETED]: i18n.t('Completed'),
-    [statusTypes.OVERDUE]: i18n.t('Overdue'),
+    [statusTypes.OVERDUE]: options ? i18n.t('Overdue{{ escape }} due {{ time }}', {
+        time: options,
+        escape: ':',
+        interpolation: { escapeValue: false },
+    }) : i18n.t('Overdue'),
     [statusTypes.SKIPPED]: i18n.t('Skipped'),
 });
+

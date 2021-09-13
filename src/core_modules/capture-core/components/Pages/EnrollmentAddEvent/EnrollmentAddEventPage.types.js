@@ -21,5 +21,6 @@ export type Props = {|
     onDelete: () => void,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
+    widgetReducerName: string,
     ...CssClasses,
 |};
