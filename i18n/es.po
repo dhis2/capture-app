@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
+"POT-Creation-Date: 2021-09-10T08:48:48.827Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -1122,6 +1122,9 @@ msgstr ""
 msgid "Scheduled"
 msgstr "Planificado"
 
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
+
 msgid "Overdue"
 msgstr "Atrasado"
 
@@ -1130,9 +1133,6 @@ msgstr "Omitido"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} en el programa {{escape}} {{programName}}"
-
-msgid "Overdue{{ escape }} due {{ time }}"
-msgstr ""
 
 msgid "Program not found"
 msgstr "Programa no encontrado"
@@ -1169,6 +1169,9 @@ msgstr "Error al guardar la instancia de la entidad rastreada"
 
 msgid "Error saving enrollment"
 msgstr "Error al guardar la inscripción"
+
+msgid "Error saving the enrollment event"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "instancia de entidad rastreada"
