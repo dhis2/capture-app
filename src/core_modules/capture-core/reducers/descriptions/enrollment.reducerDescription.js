@@ -80,6 +80,8 @@ export const enrollmentDesc = createReducerDescription(
             });
             return { ...state, events };
         },
+        [enrollmentNoteActionTypes.ADD_ENROLLMENT_NOTE]:
+        (state, { payload: { note } }) => ({ ...state, notes: [...state.notes, note] }),
     },
     'enrollmentSite',
     initialReducerValue,

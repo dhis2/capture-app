@@ -19,6 +19,7 @@ export const WidgetEnrollmentComment = () => {
             <WidgetComment
                 title={i18n.t('Comments about this enrollment')}
                 placeholder={i18n.t('Write a comment about this enrollment')}
+                emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
                 notes={notes}
                 onAddNote={onAddNote}
             />

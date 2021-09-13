@@ -77,6 +77,7 @@ const styles = {
 
 const CommentSectionPlain = ({
     placeholder,
+    emptyNoteMessage,
     notes,
     handleAddNote,
     classes,
@@ -129,14 +130,14 @@ const CommentSectionPlain = ({
                 }
                 {notes.length === 0 &&
                     <div className={classes.emptyNotes}>
-                        {i18n.t('This event doesn\'t have any notes yet')}
+                        {emptyNoteMessage}
                     </div>}
             </div>
 
             <div className={classes.editor}>
                 <Editor>
                     <FocusTextField
-                        placeholder={i18n.t('Write a comment about this event')}
+                        placeholder={placeholder}
                         onChange={handleChange}
                         value={newNoteValue}
                         data-test="comment-textfield"

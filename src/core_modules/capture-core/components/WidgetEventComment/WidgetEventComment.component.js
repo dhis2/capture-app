@@ -19,6 +19,7 @@ export const WidgetEventComment = ({ itemId, dataEntryId }: Props) => {
             <WidgetComment
                 title={i18n.t('Comments about this event')}
                 placeholder={i18n.t('Write a comment about this event')}
+                emptyNoteMessage={i18n.t('This event doesn\'t have any notes')}
                 notes={notes}
                 onAddNote={onAddNote}
             /></div>
