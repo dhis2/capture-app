@@ -18,8 +18,8 @@ const dialogConfig = {
     cancelText: i18n.t('No, stay here'),
 };
 
-const inEffect = (state: ReduxState) =>
-    dataEntryHasChanges(state, 'enrollmentEvent-newEvent') || state.newEventPage.showAddRelationship;
+const inEffect = (state: ReduxState, ownProps) =>
+    dataEntryHasChanges(state, ownProps.widgetReducerName) || state.newEventPage.showAddRelationship;
 
 const makeMapStateToProps = () => {
     const eventAccessSelector = makeEventAccessSelector();

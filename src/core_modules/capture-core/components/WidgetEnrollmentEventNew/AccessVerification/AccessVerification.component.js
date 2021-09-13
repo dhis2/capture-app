@@ -14,6 +14,7 @@ export const AccessVerificationComponent = ({ eventAccess, onCancel, ...passOnPr
     }
 
     return (
+        // $FlowFixMe
         <Validated
             {...passOnProps}
             onCancel={onCancel}
