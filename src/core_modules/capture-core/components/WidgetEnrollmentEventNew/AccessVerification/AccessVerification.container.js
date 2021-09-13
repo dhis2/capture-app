@@ -19,7 +19,7 @@ const dialogConfig = {
 };
 
 const inEffect = (state: ReduxState) =>
-    dataEntryHasChanges(state, 'singleEvent-addEvent') || state.newEventPage.showAddRelationship;
+    dataEntryHasChanges(state, 'enrollmentEvent-newEvent') || state.newEventPage.showAddRelationship;
 
 const makeMapStateToProps = () => {
     const eventAccessSelector = makeEventAccessSelector();
