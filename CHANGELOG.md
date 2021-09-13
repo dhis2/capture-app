@@ -1,3 +1,10 @@
+## [1.53.7](https://github.com/dhis2/capture-app/compare/v1.53.6...v1.53.7) (2021-09-13)
+
+
+### Bug Fixes
+
+* [DHIS-11745][TECH-634] Update the enrollments collection when saving new event ([#2083](https://github.com/dhis2/capture-app/issues/2083)) ([cfea20c](https://github.com/dhis2/capture-app/commit/cfea20cb6fb05825a4480c65cf5850c22b059a7a))
+
 ## [1.53.6](https://github.com/dhis2/capture-app/compare/v1.53.5...v1.53.6) (2021-09-11)
 
 
