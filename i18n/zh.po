@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
+"POT-Creation-Date: 2021-09-10T08:48:48.827Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -1066,6 +1066,9 @@ msgstr "调度{{escape }}到期{{ time }}"
 msgid "Scheduled"
 msgstr "已经调度"
 
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr "逾期{{escape }}到期{{time }}"
+
 msgid "Overdue"
 msgstr "逾期"
 
@@ -1074,9 +1077,6 @@ msgstr "跳过"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "项目{{escape}} {{programName}}中的{{trackedEntityName}}"
-
-msgid "Overdue{{ escape }} due {{ time }}"
-msgstr "逾期{{escape }}到期{{time }}"
 
 msgid "Program not found"
 msgstr "没有发现项目"
@@ -1113,6 +1113,9 @@ msgstr "保存跟踪的实体实例时出错"
 
 msgid "Error saving enrollment"
 msgstr "保存注册时出错"
+
+msgid "Error saving the enrollment event"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
