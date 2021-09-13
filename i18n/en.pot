@@ -1096,6 +1096,9 @@ msgstr ""
 msgid "Error saving enrollment"
 msgstr ""
 
+msgid "Error saving the enrollment event"
+msgstr ""
+
 msgid "tracked entity instance"
 msgstr ""
 
