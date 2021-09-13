@@ -15,6 +15,7 @@ type Props = {
     notes: Array<Object>,
     handleAddNote: (text: string) => void,
     placeholder: string,
+    emptyNoteMessage: string,
     ...CssClasses
 }
 
