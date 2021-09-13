@@ -1,3 +1,10 @@
+## [1.53.8](https://github.com/dhis2/capture-app/compare/v1.53.7...v1.53.8) (2021-09-13)
+
+
+### Bug Fixes
+
+* [DHIS2] Change reducer name in widgets-hook ([c85f0f0](https://github.com/dhis2/capture-app/commit/c85f0f03ec9e400437b5a92e97aed5eb2346f148))
+
 ## [1.53.7](https://github.com/dhis2/capture-app/compare/v1.53.6...v1.53.7) (2021-09-13)
 
 
