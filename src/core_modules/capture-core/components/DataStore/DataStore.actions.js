@@ -9,5 +9,5 @@ export type UseNewDashboard = {|
     [key: string]: string,
 |}
 
-export const fetchDataStore = (dataStore: UseNewDashboard) =>
-    actionCreator(actionTypes.FETCH_DATA_STORE)({ dataStore });
+export const fetchDataStore = ({ dataStore, userDataStore }: UseNewDashboard) =>
+    actionCreator(actionTypes.FETCH_DATA_STORE)({ dataStore, userDataStore });

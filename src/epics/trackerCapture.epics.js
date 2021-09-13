@@ -23,6 +23,9 @@ import {
     teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry';
 import {
+    navigateToEnrollmentOverviewEpic,
+} from 'capture-core/actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.epics';
+import {
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
@@ -33,7 +36,8 @@ import {
 } from 'capture-core/components/WorkingLists/EventWorkingLists';
 
 import {
-    dataStoreEpic,
+    fetchDataStoreEpic,
+    fetchUserDataStoreEpic,
 } from 'capture-core/components/DataStore/DataStore.epics';
 
 import {
@@ -219,7 +223,8 @@ export const epics = combineEpics(
     calculateSelectionsCompletenessEpic,
     triggerLoadCoreEpic,
     loadCoreEpic,
-    dataStoreEpic,
+    fetchDataStoreEpic,
+    fetchUserDataStoreEpic,
     loadAppEpic,
     loadCoreFailedEpic,
     initEventListEpic,
@@ -342,4 +347,5 @@ export const epics = combineEpics(
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,
     addNoteForNewEnrollmentEventEpic,
+    navigateToEnrollmentOverviewEpic,
 );

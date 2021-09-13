@@ -5,8 +5,14 @@ import { actionTypes as dataStoreActionTypes } from '../../components/DataStore/
 export const dataStoreDesc = createReducerDescription({
     [dataStoreActionTypes.FETCH_DATA_STORE]: (state, action) => {
         const newState = { ...state };
-        newState.dataStore = action.payload?.dataStore;
-        newState.userDataStore = action.payload?.userDataStore;
+        action.payload.dataStore && (
+            newState.dataStore = action.payload?.dataStore
+        );
+
+        action.payload.userDataStore && (
+            newState.userDataStore = action.payload?.userDataStore
+        );
+
         return newState;
     },
 }, 'useNewDashboard', {
