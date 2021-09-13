@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-06T05:27:23.147Z\n"
-"PO-Revision-Date: 2021-09-06T05:27:23.147Z\n"
+"POT-Creation-Date: 2021-09-10T08:48:48.827Z\n"
+"PO-Revision-Date: 2021-09-10T08:48:48.828Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -1054,6 +1054,9 @@ msgstr ""
 msgid "Scheduled"
 msgstr ""
 
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
+
 msgid "Overdue"
 msgstr ""
 
@@ -1061,9 +1064,6 @@ msgid "Skipped"
 msgstr ""
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
-
-msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Program not found"
@@ -1100,6 +1100,9 @@ msgid "Error saving tracked entity instance"
 msgstr ""
 
 msgid "Error saving enrollment"
+msgstr ""
+
+msgid "Error saving the enrollment event"
 msgstr ""
 
 msgid "tracked entity instance"

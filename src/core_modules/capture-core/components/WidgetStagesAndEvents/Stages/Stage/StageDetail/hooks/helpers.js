@@ -2,7 +2,7 @@
 import React from 'react';
 import moment from 'moment';
 import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
-import { statusTypes, translatedStatusTypes } from '../../../../../../metaData';
+import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
 import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
@@ -19,6 +19,10 @@ const getEventStatus = (event: ApiTEIEvent) => {
 
     if (isEventOverdue(event)) {
         return { status: statusTypes.OVERDUE, options: daysUntilDueDate ? dueDateFromNow : undefined };
+    }
+    // DHIS2-11576: VISITED status is treated as ACTIVE
+    if (event.status === 'VISITED') {
+        return { status: statusTypes.ACTIVE, options: undefined };
     }
 
     if (event.status === statusTypes.SCHEDULE) {

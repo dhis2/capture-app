@@ -208,7 +208,7 @@ msgid "Finish"
 msgstr "Dokončit"
 
 msgid "Save without completing"
-msgstr ""
+msgstr "Uložit bez dokončení"
 
 msgid "Complete"
 msgstr "Dokončit"
@@ -653,19 +653,19 @@ msgid "View working list in this program."
 msgstr "Zobrazit pracovní seznam v tomto programu."
 
 msgid "stage"
-msgstr ""
+msgstr "fáze"
 
 msgid "Enrollment{{escape}} New Event"
 msgstr "Zápis{{escape}} Nová událost"
 
 msgid "There are no feedbacks for this event"
-msgstr ""
+msgstr "Pro tuto událost neexistují žádné zpětné vazby"
 
 msgid "There are no indicators for this event"
 msgstr "Pro tuto událost neexistují žádné ukazatele"
 
 msgid "The enrollment event data could not be found"
-msgstr ""
+msgstr "Data zápisu události nebyla nalezena"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "Vyberte registraci jednotky a začněte hlásit"
@@ -683,10 +683,10 @@ msgid "Registered events"
 msgstr "Registrované události"
 
 msgid "Or see all records accessible to you in {{program}} "
-msgstr ""
+msgstr "Nebo zobrazit všechny záznamy, které máte k dispozici v {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
-msgstr ""
+msgstr "Nebo zobrazit všechny události, které máte k dispozici v {{program}}"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Chcete-li zahájit vytváření hlášení, vyberte {{missingCategories}}"
@@ -958,10 +958,10 @@ msgid "Cancelled"
 msgstr "Zrušeno"
 
 msgid "organisation unit could not be retrieved. Please try again later."
-msgstr ""
+msgstr "organizační jednotku nelze načíst. Zkuste to znovu později."
 
 msgid "program or stage is invalid"
-msgstr ""
+msgstr "program nebo fáze je neplatná"
 
 msgid "Error"
 msgstr "Chyba"
@@ -985,13 +985,13 @@ msgid "Show {{ rest }} more"
 msgstr "Zobrazit {{rest}} více"
 
 msgid "Reset list"
-msgstr ""
+msgstr "Resetovat seznam"
 
 msgid "Go to full {{ eventName }}"
 msgstr "Přejít na celou {{ eventName }}"
 
 msgid "This stage can only have one event"
-msgstr ""
+msgstr "Tato fáze může mít pouze jednu událost"
 
 msgid "Report date"
 msgstr "Datum zprávy"
@@ -1105,7 +1105,7 @@ msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} v program{{escape}} {{programName}}"
 
 msgid "Overdue{{ escape }} due {{ time }}"
-msgstr ""
+msgstr "Po termínu {{escape}} kvůli {{time}}"
 
 msgid "Program not found"
 msgstr "Program nebyl nalezen"

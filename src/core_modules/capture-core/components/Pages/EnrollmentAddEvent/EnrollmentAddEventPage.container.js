@@ -51,11 +51,13 @@ export const EnrollmentAddEventPage = () => {
         ]));
     }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
+    const widgetReducerName = 'enrollmentEvent-newEvent';
+
     // TODO: Validate query params
     // Ticket: https://jira.dhis2.org/browse/TECH-669
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages.values()].find(item => item.id === stageId);
-    const outputEffects = useWidgetDataFromStore('singleEvent-addEvent');
+    const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
     const enrollmentSite = useEnrollment(teiId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
@@ -96,6 +98,7 @@ export const EnrollmentAddEventPage = () => {
             onDelete={handleDelete}
             widgetEffects={outputEffects}
             hideWidgets={hideWidgets}
+            widgetReducerName={widgetReducerName}
         />
     );
 };

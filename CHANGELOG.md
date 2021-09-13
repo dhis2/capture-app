@@ -1,3 +1,45 @@
+## [1.53.8](https://github.com/dhis2/capture-app/compare/v1.53.7...v1.53.8) (2021-09-13)
+
+
+### Bug Fixes
+
+* [DHIS2] Change reducer name in widgets-hook ([c85f0f0](https://github.com/dhis2/capture-app/commit/c85f0f03ec9e400437b5a92e97aed5eb2346f148))
+
+## [1.53.7](https://github.com/dhis2/capture-app/compare/v1.53.6...v1.53.7) (2021-09-13)
+
+
+### Bug Fixes
+
+* [DHIS-11745][TECH-634] Update the enrollments collection when saving new event ([#2083](https://github.com/dhis2/capture-app/issues/2083)) ([cfea20c](https://github.com/dhis2/capture-app/commit/cfea20cb6fb05825a4480c65cf5850c22b059a7a))
+
+## [1.53.6](https://github.com/dhis2/capture-app/compare/v1.53.5...v1.53.6) (2021-09-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e99da58](https://github.com/dhis2/capture-app/commit/e99da58e21dab7349b2bc41b11f76ec9f0185a6e))
+
+## [1.53.5](https://github.com/dhis2/capture-app/compare/v1.53.4...v1.53.5) (2021-09-10)
+
+
+### Bug Fixes
+
+* [DHIS2-11733] fix program stage list for tracker program ([#2080](https://github.com/dhis2/capture-app/issues/2080)) ([90dbff3](https://github.com/dhis2/capture-app/commit/90dbff3c6278209784d1c2e9438f576a77984da4))
+
+## [1.53.4](https://github.com/dhis2/capture-app/compare/v1.53.3...v1.53.4) (2021-09-10)
+
+
+### Bug Fixes
+
+* [DHIS2-11482] disable flaky Cypress test cases ([#2076](https://github.com/dhis2/capture-app/issues/2076)) ([398285e](https://github.com/dhis2/capture-app/commit/398285ef1a3eb28ad66e212f2ced984e4e831e95))
+
+## [1.53.3](https://github.com/dhis2/capture-app/compare/v1.53.2...v1.53.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* Fix sorting error on comment column ([d7acab3](https://github.com/dhis2/capture-app/commit/d7acab3c608435897bd103c79711184dca553bf2))
+
 ## [1.53.2](https://github.com/dhis2/capture-app/compare/v1.53.1...v1.53.2) (2021-09-02)
 
 
