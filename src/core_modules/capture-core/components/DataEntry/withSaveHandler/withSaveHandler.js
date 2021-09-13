@@ -190,7 +190,6 @@ const getSaveHandler = (
         }
 
         handleSave = (saveType?: ?string) => {
-            console.log('handleSave', saveType);
             const { onSave, itemId, id, calculatedFoundation, warnings, errors } = this.props;
             if (saveType === addEventSaveTypes.COMPLETE && ((errors && errors.length > 0) || (warnings && warnings.length > 0))) {
                 this.showMessagesPopup(saveType);
