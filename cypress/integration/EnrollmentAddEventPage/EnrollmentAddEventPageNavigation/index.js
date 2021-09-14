@@ -22,7 +22,6 @@ And(/^you see the widget header (.*)$/, (name) => {
 And('you see the add event form details', () => {
     const eventData = [
         'MCH Apgar Score',
-        'MCH Apgar comment',
         'MCH Weight (g)',
         'MCH ARV at birth',
         'MCH BCG dose',
