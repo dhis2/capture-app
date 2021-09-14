@@ -78,9 +78,9 @@ import {
     cancelEditEventLocationChangeEpic,
 } from 'capture-core/components/WidgetEventEdit/DataEntry/epics/cancelEditSingleEvent.epics';
 import {
-    addNoteForEditSingleEventEpic,
-    removeNoteForEditSingleEventEpic,
-} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/addNoteForEditSingleEvent.epics';
+    addNoteForEventEpic,
+    removeNoteForEventEpic,
+} from 'capture-core/components/WidgetEventComment/WidgetEventComment.epics';
 import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';
@@ -256,9 +256,9 @@ export const epics = combineEpics(
     saveEditEventEpic,
     cancelEditEventLocationChangeEpic,
     cancelEditEventEpic,
-    addNoteForEditSingleEventEpic,
+    addNoteForEventEpic,
     addNoteForNewSingleEventEpic,
-    removeNoteForEditSingleEventEpic,
+    removeNoteForEventEpic,
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
     goingOnlineEpic,
