@@ -148,15 +148,15 @@ const CommentSectionPlain = ({
 
             {isEditing && <div className={classes.newCommentButtonContainer} data-test="comment-buttons-container">
                 <Button
-                    dataTest="add-note-btn"
+                    dataTest="add-comment-btn"
                     onClick={onAddComment}
                     className={classes.addCommentContainer}
                     primary
                 >
-                    {i18n.t('Save note')}
+                    {i18n.t('Save comment')}
                 </Button>
                 <Button
-                    dataTest="cancel-note-btn"
+                    dataTest="cancel-comment-btn"
                     onClick={onCancel}
                 >
                     {i18n.t('Cancel')}

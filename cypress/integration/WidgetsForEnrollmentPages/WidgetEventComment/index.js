@@ -8,8 +8,8 @@ When(/^you fill in the comment: (.*)$/, (comment) => {
         cy.get('[data-test="comment-textfield"]').type(comment);
         cy.wait(100);
 
-        cy.get('[data-test="add-note-btn"]').should('exist');
-        cy.get('[data-test="add-note-btn"]').click();
+        cy.get('[data-test="add-comment-btn"]').should('exist');
+        cy.get('[data-test="add-comment-btn"]').click();
     });
 });
 
