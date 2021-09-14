@@ -4,7 +4,7 @@ import { mergeMap, catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { fetchDataStore } from './DataStore.actions';
 import { getApi } from '../../d2';
-import type { UseNewDashboard } from './DataStore.actions';
+import { type UseNewDashboard } from './DataStore.types';
 import { appStartActionTypes } from '../../../../components/AppStart';
 
 function getDataStoreFromApi() {

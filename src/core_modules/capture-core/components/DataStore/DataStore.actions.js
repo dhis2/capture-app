@@ -1,13 +1,7 @@
 // @flow
 import { actionCreator } from '../../actions/actions.utils';
+import { type UseNewDashboard, actionTypes as DataStoreActionTypes } from './DataStore.types';
 
-export const actionTypes = {
-    FETCH_DATA_STORE: 'useNewDashboard.FetchDataStore',
-};
-
-export type UseNewDashboard = {|
-    [key: string]: string,
-|}
 
 export const fetchDataStore = ({ dataStore, userDataStore }: UseNewDashboard) =>
-    actionCreator(actionTypes.FETCH_DATA_STORE)({ dataStore, userDataStore });
+    actionCreator(DataStoreActionTypes.FETCH_DATA_STORE)({ dataStore, userDataStore });
