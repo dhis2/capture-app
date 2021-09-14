@@ -7,7 +7,6 @@ import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import {
     startAsyncUpdateFieldForEditEvent,
     startRunRulesOnUpdateForEditSingleEvent,
-    requestAddNoteForEditSingleEvent,
     batchActionTypes,
 } from '../DataEntry/editEventDataEntry.actions';
 import { type RenderFoundation } from '../../../metaData';
@@ -51,9 +50,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
             startRunRulesPostUpdateField(dataEntryId, itemId, uid),
             startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid }),
         ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
-    },
-    onAddNote: (itemId: string, dataEntryId: string, note: string) => {
-        dispatch(requestAddNoteForEditSingleEvent(itemId, dataEntryId, note));
     },
     onStartAsyncUpdateField: (
         innerAction: ReduxAction<any, any>,
