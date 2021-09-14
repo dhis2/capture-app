@@ -179,7 +179,7 @@ export const getEventListData = async (
     const mainColumns = getMainColumns(columnsMetaForDataFetching);
     // Remove programStageId from the API if program is single event
     if (queryArgs?.programStageId === 'EventProgramStage') {
-        queryArgs.programStageId = undefined;
+        delete queryArgs.programStageId;
     }
 
     const { eventContainers, pagingData, request } =
