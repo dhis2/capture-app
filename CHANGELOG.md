@@ -1,3 +1,10 @@
+# [1.55.0](https://github.com/dhis2/capture-app/compare/v1.54.0...v1.55.0) (2021-09-14)
+
+
+### Features
+
+* [DHIS2-11632] Widget enrollment comment ([#2088](https://github.com/dhis2/capture-app/issues/2088)) ([8dbf20e](https://github.com/dhis2/capture-app/commit/8dbf20eabad8521c19d5613ca10e915ee3e8177b))
+
 # [1.54.0](https://github.com/dhis2/capture-app/compare/v1.53.12...v1.54.0) (2021-09-14)
 
 
