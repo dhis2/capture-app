@@ -141,6 +141,7 @@ import {
     saveNoteForViewEventFailedEpic,
 } from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
 
+import { addNoteForEnrollmentEpic } from 'capture-core/components/WidgetEnrollmentComment/WidgetEnrollmentComment.epics';
 import {
     openNewRelationshipRegisterTeiEpic,
     loadSearchGroupDuplicatesForReviewEpic,
@@ -351,5 +352,6 @@ export const epics = combineEpics(
     saveNewEventSucceededEpic,
     saveNewEventFailedEpic,
     addNoteForNewEnrollmentEventEpic,
+    addNoteForEnrollmentEpic,
     navigateToEnrollmentOverviewEpic,
 );

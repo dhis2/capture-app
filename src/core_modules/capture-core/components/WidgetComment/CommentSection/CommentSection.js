@@ -14,6 +14,8 @@ const FocusTextField = withFocusSaver()(TextField);
 type Props = {
     comments: Array<Object>,
     handleAddComment: (text: string) => void,
+    placeholder: string,
+    emptyCommentMessage: string,
     ...CssClasses
 }
 
@@ -75,6 +77,8 @@ const styles = {
 };
 
 const CommentSectionPlain = ({
+    placeholder,
+    emptyCommentMessage,
     comments,
     handleAddComment,
     classes,
@@ -126,15 +130,15 @@ const CommentSectionPlain = ({
                     .map(comment => <CommentItem key={comment.note} {...comment} />)
                 }
                 {comments.length === 0 &&
-                    <div className={classes.emptyComments}>
-                        {i18n.t('This event doesn\'t have any comments yet')}
+                    <div className={classes.emptyNotes}>
+                        {emptyCommentMessage}
                     </div>}
             </div>
 
             <div className={classes.editor}>
                 <Editor>
                     <FocusTextField
-                        placeholder={i18n.t('Write a comment about this event')}
+                        placeholder={placeholder}
                         onChange={handleChange}
                         value={newCommentValue}
                         data-test="comment-textfield"

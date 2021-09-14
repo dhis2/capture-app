@@ -1,6 +1,8 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { enrollmentActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain/enrollment.actions';
+import { actionTypes as enrollmentNoteActionTypes }
+    from '../../components/WidgetEnrollmentComment/WidgetEnrollmentComment.actions';
 
 const initialReducerValue = {};
 const {
@@ -78,6 +80,8 @@ export const enrollmentDesc = createReducerDescription(
             });
             return { ...state, events };
         },
+        [enrollmentNoteActionTypes.ADD_ENROLLMENT_NOTE]:
+        (state, { payload: { note } }) => ({ ...state, notes: [...state.notes, note] }),
     },
     'enrollmentSite',
     initialReducerValue,
