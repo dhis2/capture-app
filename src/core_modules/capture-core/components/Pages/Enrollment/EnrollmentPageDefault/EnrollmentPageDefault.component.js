@@ -11,6 +11,7 @@ import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetFeedback } from '../../../WidgetFeedback';
 import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
+import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -64,6 +65,7 @@ export const EnrollmentPageDefaultPlain = ({
                 />
             </div>
             <div className={classes.rightColumn}>
+                <WidgetEnrollmentComment />
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
                 {!hideWidgets.indicator && (
