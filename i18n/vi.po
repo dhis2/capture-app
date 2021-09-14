@@ -1,15 +1,15 @@
 # 
 # Translators:
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-09-10T08:48:48.827Z\n"
+"POT-Creation-Date: 2021-09-14T16:18:15.837Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
-"Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -894,6 +894,9 @@ msgstr "Để làm việc với chương trình đã chọn,"
 msgid "open the Tracker Capture app"
 msgstr "mở ứng dụng Tracker Capture"
 
+msgid "Save comment"
+msgstr "Lưu chú thích"
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -953,6 +956,15 @@ msgstr ""
 msgid "Cancelled"
 msgstr "Đã hủy"
 
+msgid "Comments about this enrollment"
+msgstr ""
+
+msgid "Write a comment about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any comments"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -964,6 +976,15 @@ msgstr "Lỗi"
 
 msgid "Warning"
 msgstr "Cảnh báo"
+
+msgid "Comments about this event"
+msgstr ""
+
+msgid "Write a comment about this event"
+msgstr ""
+
+msgid "This event doesn't have any comments"
+msgstr ""
 
 msgid "Back to all stages and events"
 msgstr ""
