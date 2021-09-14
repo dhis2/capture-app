@@ -8,6 +8,7 @@ import {
     actionTypes as NavigateToEnrollmentOverviewActionTypes,
 } from './navigateToEnrollmentOverview.actions';
 import { urlArguments } from '../../utils/url';
+import { scopeHierarchyTypes } from './navigateToEnrollmentOverview.constants';
 
 export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) => action$.pipe(
     ofType(
@@ -47,7 +48,7 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         } = store.value.router.location.query;
 
         const instanceBaseUrl = baseUrl.split('/api')[0];
-        const scopeHierarchy = queryProgramId ? 'PROGRAM' : 'TRACKED_ENTITY_TYPE';
+        const scopeHierarchy = queryProgramId ? scopeHierarchyTypes.PROGRAM : scopeHierarchyTypes.TRACKED_ENTITY_TYPE;
         const selectedScopeId = queryTrackedEntityTypeId || queryProgramId;
         const scopeSearchParam = `${scopeHierarchy.toLowerCase()}=${selectedScopeId}`;
         const base64Url = btoa(`/dhis-web-capture/#${pathname}${search}`);
