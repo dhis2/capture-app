@@ -39,6 +39,7 @@ const styles = {
     button: {
         marginRight: spacersNum.dp8,
     },
+    hidenButton: { display: 'none !important' },
     icon: {
         position: 'absolute',
         left: spacersNum.dp8,
@@ -104,7 +105,7 @@ const StageDetailPlain = (props: Props) => {
                     key={column.id}
                     name={column.id}
                     sortDirection={getSortDirection(column)}
-                    onSortIconClick={onSortIconClick}
+                    onSortIconClick={column.sortDirection && onSortIconClick}
                 >
                     {column.header}
                 </DataTableColumnHeader>
@@ -186,7 +187,7 @@ const StageDetailPlain = (props: Props) => {
             small
             secondary
             dataTest="view-all-button"
-            className={classes.button}
+            className={classes.hidenButton} // DHIS2-11733: hide the button until the page is fully implemented
             onClick={handleViewAll}
         >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
 

@@ -18,5 +18,6 @@ export type Props = {|
     rulesExecutionDependencies: Object,
     pageFailure: boolean,
     ready: boolean,
+    widgetReducerName: string,
     ...CssClasses,
 |};

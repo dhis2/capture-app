@@ -10,6 +10,7 @@ import { ValidatedComponent } from './Validated.component';
 import { requestSaveEvent } from './validated.actions';
 import type { ContainerProps } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
+import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 export const Validated = ({
@@ -45,9 +46,10 @@ export const Validated = ({
         eventId: string,
         dataEntryIdArgument: string,
         formFoundationArgument: RenderFoundation,
-        completed?: boolean,
+        saveType?: ?string,
     ) => {
         window.scrollTo(0, 0);
+        const completed = saveType === addEventSaveTypes.COMPLETE;
         dispatch(requestSaveEvent({
             eventId,
             dataEntryId: dataEntryIdArgument,

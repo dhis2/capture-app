@@ -49,12 +49,14 @@ export const EnrollmentAddEventPage = () => {
         ]));
     }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
+    const widgetReducerName = 'enrollmentEvent-newEvent';
+
     // TODO: Validate query params
     // This includes prechecking that we got a valid program stage and move the program stage logic in this file to useEnrollmentAddEventTopBar
     // Ticket: https://jira.dhis2.org/browse/TECH-669
     const { program } = useProgramInfo(programId);
     const programStage = [...program.stages.values()].find(item => item.id === stageId);
-    const outputEffects = useWidgetDataFromStore('singleEvent-addEvent');
+    const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
     const {
         enrollment,
@@ -126,6 +128,7 @@ export const EnrollmentAddEventPage = () => {
                 onDelete={handleDelete}
                 widgetEffects={outputEffects}
                 hideWidgets={hideWidgets}
+                widgetReducerName={widgetReducerName}
                 rulesExecutionDependencies={rulesExecutionDependencies}
                 pageFailure={Boolean(commonDataError)}
                 ready={Boolean(enrollment)}

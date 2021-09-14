@@ -60,6 +60,10 @@ import {
     teiSearchDesc,
 } from 'capture-core/reducers/descriptions/teiSearch.reducerDescription';
 
+import {
+    dataStoreDesc,
+} from 'capture-core/reducers/descriptions/dataStore.reducerDescription';
+
 import { notesDesc } from 'capture-core/reducers/descriptions/notes.reducerDescription';
 import { relationshipsDesc } from 'capture-core/reducers/descriptions/relationships.reducerDescription';
 import {
@@ -128,6 +132,7 @@ export const reducerDescriptions = [
     ruleEffectsOptionsVisibilityDesc,
     searchPageDesc,
     teiSearchDesc,
+    dataStoreDesc,
     viewEventPageDesc,
     workingListsDesc,
     workingListsMetaDesc,
