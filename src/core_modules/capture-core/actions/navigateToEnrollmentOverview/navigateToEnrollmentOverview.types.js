@@ -6,3 +6,4 @@ export type NavigateToEnrollmentOverviewProps = {|
     orgUnitId?: string,
     enrollmentId?: string,
 |}
+
