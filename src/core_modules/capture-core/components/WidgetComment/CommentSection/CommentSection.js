@@ -12,10 +12,10 @@ import { TextField } from '../../FormFields/New';
 const FocusTextField = withFocusSaver()(TextField);
 
 type Props = {
-    notes: Array<Object>,
-    handleAddNote: (text: string) => void,
+    comments: Array<Object>,
+    handleAddComment: (text: string) => void,
     placeholder: string,
-    emptyNoteMessage: string,
+    emptyCommentMessage: string,
     ...CssClasses
 }
 
@@ -78,29 +78,29 @@ const styles = {
 
 const CommentSectionPlain = ({
     placeholder,
-    emptyNoteMessage,
-    notes,
-    handleAddNote,
+    emptyCommentMessage,
+    comments,
+    handleAddComment,
     classes,
 }: Props) => {
     const [isEditing, setEditing] = useState(false);
-    const [newNoteValue, setNewNoteValue] = useState('');
+    const [newCommentValue, setNewCommentValue] = useState('');
 
     const handleChange = useCallback((value) => {
         setEditing(true);
-        setNewNoteValue(value);
+        setNewCommentValue(value);
     }, []);
 
     const onCancel = useCallback(() => {
-        setNewNoteValue('');
+        setNewCommentValue('');
         setEditing(false);
     }, []);
 
-    const onAddNote = useCallback(() => {
-        handleAddNote(newNoteValue);
-        setNewNoteValue('');
+    const onAddComment = useCallback(() => {
+        handleAddComment(newCommentValue);
+        setNewCommentValue('');
         setEditing(false);
-    }, [handleAddNote, newNoteValue]);
+    }, [handleAddComment, newCommentValue]);
 
     const CommentItem = ({ value, lastUpdated, lastUpdatedBy }) => (
         <div data-test="comment-item" className={cx(classes.item)}>
@@ -125,13 +125,13 @@ const CommentSectionPlain = ({
     return (
         <div className={classes.wrapper}>
             <div className={classes.notesWrapper}>
-                {notes
+                {comments
                     .sort((a, b) => moment(a.lastUpdated).valueOf() - moment(b.lastUpdated).valueOf())
                     .map(note => <CommentItem key={note.note} {...note} />)
                 }
-                {notes.length === 0 &&
+                {comments.length === 0 &&
                     <div className={classes.emptyNotes}>
-                        {emptyNoteMessage}
+                        {emptyCommentMessage}
                     </div>}
             </div>
 
@@ -140,7 +140,7 @@ const CommentSectionPlain = ({
                     <FocusTextField
                         placeholder={placeholder}
                         onChange={handleChange}
-                        value={newNoteValue}
+                        value={newCommentValue}
                         data-test="comment-textfield"
                     />
                 </Editor>
@@ -149,7 +149,7 @@ const CommentSectionPlain = ({
             {isEditing && <div className={classes.newCommentButtonContainer} data-test="comment-buttons-container">
                 <Button
                     dataTest="add-note-btn"
-                    onClick={onAddNote}
+                    onClick={onAddComment}
                     className={classes.addCommentContainer}
                     primary
                 >

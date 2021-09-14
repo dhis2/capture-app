@@ -3,8 +3,8 @@
 export type Props = {|
     title: string,
     placeholder: string,
-    emptyNoteMessage: string,
-    notes: Array<Object>,
-    onAddNote: (note: string) => void,
+    emptyCommentMessage: string,
+    comments: Array<Object>,
+    onAddComment: (comment: string) => void,
     ...CssClasses
 |};

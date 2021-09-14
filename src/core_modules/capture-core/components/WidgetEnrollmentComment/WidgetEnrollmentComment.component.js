@@ -10,8 +10,8 @@ export const WidgetEnrollmentComment = () => {
     const enrollmentId = useSelector(({ router }) => router.location.query.enrollmentId);
     const notes = useSelector(({ enrollmentSite }) => enrollmentSite?.notes ?? []);
 
-    const onAddNote = (newNoteValue) => {
-        dispatch(requestAddNoteForEnrollment(enrollmentId, newNoteValue));
+    const onAddComment = (newCommentValue) => {
+        dispatch(requestAddNoteForEnrollment(enrollmentId, newCommentValue));
     };
 
     return (
@@ -19,9 +19,9 @@ export const WidgetEnrollmentComment = () => {
             <WidgetComment
                 title={i18n.t('Comments about this enrollment')}
                 placeholder={i18n.t('Write a comment about this enrollment')}
-                emptyNoteMessage={i18n.t('This enrollment doesn\'t have any notes')}
-                notes={notes}
-                onAddNote={onAddNote}
+                emptyCommentMessage={i18n.t('This enrollment doesn\'t have any comments')}
+                comments={notes}
+                onAddComment={onAddComment}
             />
         </div>
     );
