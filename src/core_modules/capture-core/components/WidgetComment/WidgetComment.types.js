@@ -1,7 +1,7 @@
 // @flow
 
 export type Props = {|
-    notes: Array<Object>,
-    onAddNote: (note: string) => void,
+    comments: Array<Object>,
+    onAddComment: (note: string) => void,
     ...CssClasses
 |};

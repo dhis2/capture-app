@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-13T11:28:24.035Z\n"
-"PO-Revision-Date: 2021-09-13T11:28:24.035Z\n"
+"POT-Creation-Date: 2021-09-14T14:06:26.030Z\n"
+"PO-Revision-Date: 2021-09-14T14:06:26.030Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -851,13 +851,13 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
-msgid "This event doesn't have any notes yet"
+msgid "This event doesn't have any comments yet"
 msgstr ""
 
 msgid "Write a comment about this event"
 msgstr ""
 
-msgid "Save note"
+msgid "Save comment"
 msgstr ""
 
 msgid "Comments about this event"

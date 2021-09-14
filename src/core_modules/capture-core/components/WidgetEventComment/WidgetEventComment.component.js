@@ -9,11 +9,11 @@ export const WidgetEventComment = ({ itemId, dataEntryId }: Props) => {
     const dispatch = useDispatch();
     const notes = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[`${dataEntryId}-${itemId}`] ?? []);
 
-    const onAddNote = (newNoteValue) => {
-        dispatch(requestAddNoteForEvent(itemId, dataEntryId, newNoteValue));
+    const onAddComment = (newCommentValue) => {
+        dispatch(requestAddNoteForEvent(itemId, dataEntryId, newCommentValue));
     };
 
     return (
-        <div data-test="event-comment-widget"><WidgetComment notes={notes} onAddNote={onAddNote} /></div>
+        <div data-test="event-comment-widget"><WidgetComment comments={notes} onAddComment={onAddComment} /></div>
     );
 };
