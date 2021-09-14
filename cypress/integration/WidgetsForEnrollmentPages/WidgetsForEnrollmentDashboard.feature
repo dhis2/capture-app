@@ -35,6 +35,7 @@ Feature: The user interacts with the widgets on the enrollment dashboard
     And the user sees the owner organisation unit
     And the user sees the last update date
 
+  # TODO DHIS2-11482 - The test cases related with enrollment status edit are flaky. Move them to unit tests.
   # Scenario: User can modify the enrollment from Active to Complete
   #   Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
   #   And the enrollment widget should be opened
