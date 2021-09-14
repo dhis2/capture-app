@@ -11,4 +11,5 @@ export type WidgetProps = {|
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
     onCancel?: () => void,
+    widgetReducerName: string
 |};

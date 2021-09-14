@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
+"POT-Creation-Date: 2021-09-10T08:48:48.827Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -1112,6 +1112,9 @@ msgstr ""
 msgid "Scheduled"
 msgstr "Terjadwal"
 
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
+
 msgid "Overdue"
 msgstr "Lewat waktu"
 
@@ -1120,9 +1123,6 @@ msgstr "Dilewati"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} dalam program{{escape}} {{programName}}"
-
-msgid "Overdue{{ escape }} due {{ time }}"
-msgstr ""
 
 msgid "Program not found"
 msgstr "Program tidak ditemukan"
@@ -1159,6 +1159,9 @@ msgstr "Terjadi kesalahan saat menyimpan instance entitas yang dilacak"
 
 msgid "Error saving enrollment"
 msgstr "Terjadi kesalahan saat menyimpan pendaftaran"
+
+msgid "Error saving the enrollment event"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "contoh entitas yang dilacak"

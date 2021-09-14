@@ -5,8 +5,8 @@ import { withStyles, Tooltip } from '@material-ui/core';
 import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
+import { statusTypes } from 'capture-core/events/statusTypes';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
-import { statusTypes } from '../../../../../metaData';
 import type { Props } from './stageOverview.types';
 import { isEventOverdue } from '../StageDetail/hooks/helpers';
 

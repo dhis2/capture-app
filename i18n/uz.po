@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
+"POT-Creation-Date: 2021-09-10T08:48:48.827Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -1110,6 +1110,9 @@ msgstr ""
 msgid "Scheduled"
 msgstr "Режа бўйича"
 
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
+
 msgid "Overdue"
 msgstr "Муддат ўтган"
 
@@ -1118,9 +1121,6 @@ msgstr "Ўтказиб юборилди"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{escape}} {{programName}} дастурида {{trackedEntityName}} "
-
-msgid "Overdue{{ escape }} due {{ time }}"
-msgstr ""
 
 msgid "Program not found"
 msgstr "Дастур топилмади"
@@ -1157,6 +1157,9 @@ msgstr "Кузатувдаги шахс нусхаларини сақлашда 
 
 msgid "Error saving enrollment"
 msgstr "Қайдни сақлашда хатолик юзага келди"
+
+msgid "Error saving the enrollment event"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "кузатилаётган объект намунаси"
