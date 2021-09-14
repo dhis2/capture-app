@@ -37,14 +37,14 @@ const styles = {
         marginRight: spacersNum.dp16,
         paddingBottom: spacersNum.dp24,
     },
-    notesWrapper: {
+    commentsWrapper: {
         maxHeight: 500,
         overflowY: 'scroll',
     },
     editor: {
         paddingTop: spacersNum.dp16,
     },
-    emptyNotes: {
+    emptyComments: {
         fontSize: 14,
         color: colors.grey600,
     },
@@ -124,10 +124,10 @@ const CommentSectionPlain = ({
 
     return (
         <div className={classes.wrapper}>
-            <div className={classes.notesWrapper}>
+            <div className={classes.commentsWrapper}>
                 {comments
                     .sort((a, b) => moment(a.lastUpdated).valueOf() - moment(b.lastUpdated).valueOf())
-                    .map(note => <CommentItem key={note.note} {...note} />)
+                    .map(comment => <CommentItem key={comment.note} {...comment} />)
                 }
                 {comments.length === 0 &&
                     <div className={classes.emptyNotes}>

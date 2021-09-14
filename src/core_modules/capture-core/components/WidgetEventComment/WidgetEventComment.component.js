@@ -22,6 +22,7 @@ export const WidgetEventComment = ({ itemId, dataEntryId }: Props) => {
                 emptyNoteMessage={i18n.t('This event doesn\'t have any comments')}
                 comments={notes}
                 onAddComment={onAddComment}
-            /></div>
+            />
+        </div>
     );
 };
