@@ -69,9 +69,13 @@ export const saveNewEnrollmentEventEpic = (action$: InputObservable, store: Redu
                 completed,
             });
 
+            const orgUnit = serverData.events[0]?.orgUnit || '';
+            const orgUnitName = state.organisationUnits[orgUnit]?.name || '';
+            const eventData = { ...serverData.events[0], orgUnitName };
+
             onSaveExternal && onSaveExternal(serverData);
             return batchActions([
-                updateEnrollmentEventsWithoutId(uid, serverData.events[0]),
+                updateEnrollmentEventsWithoutId(uid, eventData),
                 saveEvent(serverData, onSaveSuccessActionType, onSaveErrorActionType, uid),
             ]);
         }),
