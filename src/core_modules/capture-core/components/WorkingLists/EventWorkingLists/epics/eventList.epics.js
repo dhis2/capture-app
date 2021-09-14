@@ -31,6 +31,7 @@ export const initEventListEpic = (action$: InputObservable) =>
                             orgUnitId,
                             categories,
                             programStageId,
+                            ouMode: orgUnitId ? undefined : 'ACCESSIBLE',
                         },
                         columnsMetaForDataFetching,
                         categoryCombinationId,
@@ -54,6 +55,7 @@ export const updateEventListEpic = (action$: InputObservable) =>
         filter(({ payload: { workingListsType } }) => workingListsType === SINGLE_EVENT_WORKING_LISTS_TYPE),
         concatMap((action) => {
             const { queryArgs, columnsMetaForDataFetching, categoryCombinationId, storeId } = action.payload;
+            !queryArgs?.orgUnitId && (queryArgs.ouMode = 'ACCESSIBLE');
             const updatePromise = updateEventWorkingListAsync(queryArgs, { columnsMetaForDataFetching, categoryCombinationId, storeId });
             return from(updatePromise).pipe(
                 takeUntil(

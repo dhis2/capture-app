@@ -177,6 +177,11 @@ export const getEventListData = async (
     categoryCombinationId?: ?string,
 ) => {
     const mainColumns = getMainColumns(columnsMetaForDataFetching);
+    // Remove programStageId from the API if program is single event
+    if (queryArgs?.programStageId === 'EventProgramStage') {
+        delete queryArgs.programStageId;
+    }
+
     const { eventContainers, pagingData, request } =
         await getEvents(createApiQueryArgs(queryArgs, mainColumns, categoryCombinationId));
 

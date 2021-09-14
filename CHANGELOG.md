@@ -1,3 +1,32 @@
+## [1.53.12](https://github.com/dhis2/capture-app/compare/v1.53.11...v1.53.12) (2021-09-14)
+
+
+### Bug Fixes
+
+* Add the ouMode=ACCESSIBLE to api if orgUnit is not selected. ([d93687f](https://github.com/dhis2/capture-app/commit/d93687f145af4b589241c4123768842dff890322))
+* Remove ProgramStageId from api if program is single event ([6db572b](https://github.com/dhis2/capture-app/commit/6db572b422f4c7475000c6ad3fa15311e72d0660))
+
+## [1.53.11](https://github.com/dhis2/capture-app/compare/v1.53.10...v1.53.11) (2021-09-14)
+
+
+### Bug Fixes
+
+* add orgUnitName to the new enrollment event in Redux ([#2095](https://github.com/dhis2/capture-app/issues/2095)) ([b004b4c](https://github.com/dhis2/capture-app/commit/b004b4c19f642cf76491e6e30f8f9fa7ad4d4a47))
+
+## [1.53.10](https://github.com/dhis2/capture-app/compare/v1.53.9...v1.53.10) (2021-09-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9aa6978](https://github.com/dhis2/capture-app/commit/9aa697892bfa4849f0356e5016345ca01392c4ef))
+
+## [1.53.9](https://github.com/dhis2/capture-app/compare/v1.53.8...v1.53.9) (2021-09-13)
+
+
+### Bug Fixes
+
+* [DHIS2-11669][DHIS2-11746] save new enrollment event validation & statuses ([#2062](https://github.com/dhis2/capture-app/issues/2062)) ([814bd3c](https://github.com/dhis2/capture-app/commit/814bd3c5a33c70b22747c446e9ebaa1742eda3c1))
+
 ## [1.53.8](https://github.com/dhis2/capture-app/compare/v1.53.7...v1.53.8) (2021-09-13)
 
 
