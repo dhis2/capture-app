@@ -53,74 +53,76 @@ const EnrollmentAddEventPagePain = ({
     ready,
     classes,
     ...passOnProps
-}: Props) => {
-    if (pageFailure) {
-        return (
-            <div>
-                {i18n.t('There was an error loading the page')}
-            </div>
-        );
-    } else if (!orgUnitId) {
-        return (
-            <IncompleteSelectionsMessage>
-                {i18n.t('Choose a registering unit to start reporting')}
-            </IncompleteSelectionsMessage>
-        );
-    } else if (!ready) {
-        return null;
-    }
+}: Props) => (
+    <div className={classes.container} data-test="add-event-enrollment-page-content">
+        <div className={classes.title}>{i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}</div>
+        {(() => {
+            if (pageFailure) {
+                return (
+                    <div>
+                        {i18n.t('There was an error loading the page')}
+                    </div>
+                );
+            } else if (!orgUnitId) {
+                return (
+                    <IncompleteSelectionsMessage>
+                        {i18n.t('Choose a registering unit to start reporting')}
+                    </IncompleteSelectionsMessage>
+                );
+            } else if (!ready) {
+                return null;
+            }
 
-    return (
-        <div className={classes.container} data-test="add-event-enrollment-page-content">
-            <div className={classes.title}>{i18n.t('Enrollment{{escape}} New Event', { escape: ':' })}</div>
-            <div>
-                <div className={classes.columns}>
-                    <div className={classes.leftColumn}>
-                        <div
-                            className={classes.addEventContainer}
-                            data-test="add-event-enrollment-page-content"
-                        >
-                            <WidgetEnrollmentEventNew
-                                {...passOnProps}
+            return (
+                <div>
+                    <div className={classes.columns}>
+                        <div className={classes.leftColumn}>
+                            <div
+                                className={classes.addEventContainer}
+                                data-test="add-event-enrollment-page-content"
+                            >
+                                <WidgetEnrollmentEventNew
+                                    {...passOnProps}
+                                    programId={programId}
+                                    stageId={stageId}
+                                    orgUnitId={orgUnitId}
+                                    teiId={teiId}
+                                    enrollmentId={enrollmentId}
+                                />
+                            </div>
+                        </div>
+                        <div className={classes.rightColumn}>
+                            <WidgetError error={widgetEffects?.errors} />
+                            <WidgetWarning warning={widgetEffects?.warnings} />
+                            {!hideWidgets.feedback && (
+                                <WidgetFeedback
+                                    emptyText={i18n.t('There are no feedbacks for this event')}
+                                    feedback={widgetEffects?.feedbacks}
+                                />
+                            )}
+                            {!hideWidgets.indicator && (
+                                <WidgetIndicator
+                                    emptyText={i18n.t('There are no indicators for this event')}
+                                    indicators={widgetEffects?.indicators}
+                                />
+                            )}
+                            <WidgetProfile
+                                teiId={teiId}
                                 programId={programId}
-                                stageId={stageId}
-                                orgUnitId={orgUnitId}
+                            />
+                            <WidgetEnrollment
                                 teiId={teiId}
                                 enrollmentId={enrollmentId}
+                                programId={programId}
+                                onDelete={onDelete}
                             />
                         </div>
                     </div>
-                    <div className={classes.rightColumn}>
-                        <WidgetError error={widgetEffects?.errors} />
-                        <WidgetWarning warning={widgetEffects?.warnings} />
-                        {!hideWidgets.feedback && (
-                            <WidgetFeedback
-                                emptyText={i18n.t('There are no feedbacks for this event')}
-                                feedback={widgetEffects?.feedbacks}
-                            />
-                        )}
-                        {!hideWidgets.indicator && (
-                            <WidgetIndicator
-                                emptyText={i18n.t('There are no indicators for this event')}
-                                indicators={widgetEffects?.indicators}
-                            />
-                        )}
-                        <WidgetProfile
-                            teiId={teiId}
-                            programId={programId}
-                        />
-                        <WidgetEnrollment
-                            teiId={teiId}
-                            enrollmentId={enrollmentId}
-                            programId={programId}
-                            onDelete={onDelete}
-                        />
-                    </div>
                 </div>
-            </div>
-        </div>
-    );
-};
+            );
+        })()}
+    </div>
+);
 
 export const EnrollmentAddEventPageComponent: ComponentType<$Diff<Props, CssClasses>> =
     withStyles(styles)(EnrollmentAddEventPagePain);

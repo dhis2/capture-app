@@ -100,8 +100,8 @@ Feature: User uses the TopBarActions to navigate
         Then the current url is /#/new?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy
 
     Scenario: Enrollment Event New page > When the user performs any actions after it interacts with the form a popup warning message will appear.
-        Given you land on a enrollment page domain by having typed #enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
+        Given you land on a enrollment page domain by having typed #/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
         And the user see the following text: Clear selections
-        When the user set the WHOMCH Gestational age at visit to 23
+        When the user set the WHOMCH Gestational age at visit to 55
         When the user clicks the element containing the text: Clear selections
         Then the user sees the warning popup

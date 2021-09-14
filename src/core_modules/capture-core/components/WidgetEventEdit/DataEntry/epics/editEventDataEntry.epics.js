@@ -44,7 +44,7 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable, store: Re
             const program = metadataContainer.program;
 
 
-            return batchActions(openEventForEditInDataEntry(eventContainer, orgUnit, foundation, program, state.enrollmentSite?.events));
+            return batchActions(openEventForEditInDataEntry(eventContainer, orgUnit, foundation, program, state.enrollmentDomain.enrollment?.events));
         }));
 
 
@@ -68,7 +68,7 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
     let currentEventMainData = foundation ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) : {};
     currentEventMainData = { ...state.events[eventId], ...currentEventMainData };
     const currentEventData = { ...currentEventValues, ...currentEventMainData };
-    const allEvents = state.enrollmentSite?.events;
+    const allEvents = state.enrollmentDomain.enrollments?.events;
     const allEventsData = program instanceof TrackerProgram && allEvents
         ? [...prepareEnrollmentEventsForRulesEngine(allEvents, currentEventData)]
         : [currentEventData];
