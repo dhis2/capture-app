@@ -2,6 +2,6 @@
 
 export type Props = {|
     comments: Array<Object>,
-    onAddComment: (note: string) => void,
+    onAddComment: (comment: string) => void,
     ...CssClasses
 |};
