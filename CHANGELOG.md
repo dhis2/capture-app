@@ -1,3 +1,10 @@
+# [1.54.0](https://github.com/dhis2/capture-app/compare/v1.53.12...v1.54.0) (2021-09-14)
+
+
+### Features
+
+* [DHIS2-11616] Widget Event Comment ([#2067](https://github.com/dhis2/capture-app/issues/2067)) ([3feb1ec](https://github.com/dhis2/capture-app/commit/3feb1eca286c91e471aafd1e1b8ebcc0f6477086))
+
 ## [1.53.12](https://github.com/dhis2/capture-app/compare/v1.53.11...v1.53.12) (2021-09-14)
 
 
