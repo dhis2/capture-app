@@ -1,3 +1,11 @@
+## [1.53.12](https://github.com/dhis2/capture-app/compare/v1.53.11...v1.53.12) (2021-09-14)
+
+
+### Bug Fixes
+
+* Add the ouMode=ACCESSIBLE to api if orgUnit is not selected. ([d93687f](https://github.com/dhis2/capture-app/commit/d93687f145af4b589241c4123768842dff890322))
+* Remove ProgramStageId from api if program is single event ([6db572b](https://github.com/dhis2/capture-app/commit/6db572b422f4c7475000c6ad3fa15311e72d0660))
+
 ## [1.53.11](https://github.com/dhis2/capture-app/compare/v1.53.10...v1.53.11) (2021-09-14)
 
 
