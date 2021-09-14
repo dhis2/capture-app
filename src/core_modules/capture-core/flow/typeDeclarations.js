@@ -205,4 +205,8 @@ declare type ApiUtils = {|
     querySingleResource: QuerySingleResource,
     mutate: DataEngineMutate,
     absoluteApiPath: string,
+    history?: {
+        push: () => void,
+        ...PassOnProps,
+    },
 |};

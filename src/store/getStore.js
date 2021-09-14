@@ -41,6 +41,7 @@ export function getStore(
         persistOptions: getPersistOptions(),
     });
 
+    apiUtils.history = history;
     const epicMiddleware = createEpicMiddleware({
         dependencies: apiUtils,
     });
