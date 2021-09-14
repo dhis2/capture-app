@@ -1,3 +1,10 @@
+## [1.53.11](https://github.com/dhis2/capture-app/compare/v1.53.10...v1.53.11) (2021-09-14)
+
+
+### Bug Fixes
+
+* add orgUnitName to the new enrollment event in Redux ([#2095](https://github.com/dhis2/capture-app/issues/2095)) ([b004b4c](https://github.com/dhis2/capture-app/commit/b004b4c19f642cf76491e6e30f8f9fa7ad4d4a47))
+
 ## [1.53.10](https://github.com/dhis2/capture-app/compare/v1.53.9...v1.53.10) (2021-09-14)
 
 
