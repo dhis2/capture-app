@@ -83,7 +83,13 @@ export const enrollmentDomainDesc = createReducerDescription(
             return { ...state, events };
         },
         [enrollmentNoteActionTypes.ADD_ENROLLMENT_NOTE]:
-        (state, { payload: { note } }) => ({ ...state, notes: [...state.notes, note] }),
+        (state, { payload: { note } }) => ({
+            ...state,
+            enrollment: {
+                ...state.enrollment,
+                notes: [...state.enrollment.notes, note],
+            },
+        }),
     },
     'enrollmentDomain',
     initialReducerValue,
