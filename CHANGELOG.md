@@ -1,3 +1,14 @@
+## [1.55.2](https://github.com/dhis2/capture-app/compare/v1.55.1...v1.55.2) (2021-09-15)
+
+
+### Bug Fixes
+
+* [TECH-635] New enrollment event rules execution ([8319472](https://github.com/dhis2/capture-app/commit/8319472a13cce48df6bdcbdd5db06166b816c36d))
+* minor ([77432f1](https://github.com/dhis2/capture-app/commit/77432f13a46d04dcaec68798fcd2ab87ab1105f0))
+* quick fix tests ([3875b1e](https://github.com/dhis2/capture-app/commit/3875b1e07f1e641ec78646b43ed8bb98104c4257))
+* quick fix tests follow up ([f786a44](https://github.com/dhis2/capture-app/commit/f786a445a5f95b1da3f43e86e89f70dcbfcee30d))
+* test ([590f77b](https://github.com/dhis2/capture-app/commit/590f77b16f250bb6ee5483c7f546ca84c5299c37))
+
 ## [1.55.1](https://github.com/dhis2/capture-app/compare/v1.55.0...v1.55.1) (2021-09-15)
 
 
