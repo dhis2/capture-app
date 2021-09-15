@@ -8,7 +8,7 @@ import { WidgetComment } from '../WidgetComment';
 export const WidgetEnrollmentComment = () => {
     const dispatch = useDispatch();
     const enrollmentId = useSelector(({ router }) => router.location.query.enrollmentId);
-    const notes = useSelector(({ enrollmentSite }) => enrollmentSite?.notes ?? []);
+    const comments = useSelector(({ enrollmentSite }) => enrollmentSite?.notes ?? []);
 
     const onAddComment = (newCommentValue) => {
         dispatch(requestAddNoteForEnrollment(enrollmentId, newCommentValue));
@@ -20,7 +20,7 @@ export const WidgetEnrollmentComment = () => {
                 title={i18n.t('Comments about this enrollment')}
                 placeholder={i18n.t('Write a comment about this enrollment')}
                 emptyCommentMessage={i18n.t('This enrollment doesn\'t have any comments')}
-                comments={notes}
+                comments={comments}
                 onAddComment={onAddComment}
             />
         </div>

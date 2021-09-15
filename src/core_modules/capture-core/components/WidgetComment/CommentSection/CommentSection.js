@@ -130,7 +130,7 @@ const CommentSectionPlain = ({
                     .map(comment => <CommentItem key={comment.note} {...comment} />)
                 }
                 {comments.length === 0 &&
-                    <div className={classes.emptyNotes}>
+                    <div className={classes.emptyComments}>
                         {emptyCommentMessage}
                     </div>}
             </div>
