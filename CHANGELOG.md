@@ -1,3 +1,10 @@
+## [1.55.3](https://github.com/dhis2/capture-app/compare/v1.55.2...v1.55.3) (2021-09-15)
+
+
+### Bug Fixes
+
+* [DHIS2-11783] fetch orgUnit if none present ([#2109](https://github.com/dhis2/capture-app/issues/2109)) ([e7daf13](https://github.com/dhis2/capture-app/commit/e7daf133d29b4a4d6fc3285387d8dee1fa40d262))
+
 ## [1.55.2](https://github.com/dhis2/capture-app/compare/v1.55.1...v1.55.2) (2021-09-15)
 
 
