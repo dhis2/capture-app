@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-09-14T16:18:15.837Z\n"
+"POT-Creation-Date: 2021-09-14T23:04:57.863Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -679,11 +679,14 @@ msgstr "Créez un nouvel événement dans ce programme."
 msgid "View working list in this program."
 msgstr "Afficher la liste de travail dans ce programme."
 
-msgid "stage"
-msgstr ""
-
 msgid "Enrollment{{escape}} New Event"
 msgstr ""
+
+msgid "There was an error loading the page"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
+msgstr "Sélectionnez une unité d'enregistrement pour commencer un rapport"
 
 msgid "There are no feedbacks for this event"
 msgstr ""
@@ -691,16 +694,19 @@ msgstr ""
 msgid "There are no indicators for this event"
 msgstr ""
 
-msgid "The enrollment event data could not be found"
+msgid "program stage is invalid"
 msgstr ""
 
-msgid "Choose a registering unit to start reporting"
-msgstr "Sélectionnez une unité d'enregistrement pour commencer un rapport"
+msgid "stage"
+msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} Edit Event"
+msgstr ""
+
+msgid "The enrollment event data could not be found"
 msgstr ""
 
 msgid "There are no feedback for this event"
