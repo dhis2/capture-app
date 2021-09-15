@@ -1,15 +1,15 @@
 # 
 # Translators:
 # Oscar Mesones Lapouble <oscar.lapouble@gmail.com>, 2021
-# phil_dhis2, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-09-14T16:18:15.837Z\n"
+"POT-Creation-Date: 2021-09-14T23:04:57.863Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/hisp-uio/teams/100509/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -633,10 +633,13 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
-msgid "stage"
+msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
-msgid "Enrollment{{escape}} New Event"
+msgid "There was an error loading the page"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "There are no feedbacks for this event"
@@ -645,16 +648,19 @@ msgstr ""
 msgid "There are no indicators for this event"
 msgstr ""
 
-msgid "The enrollment event data could not be found"
+msgid "program stage is invalid"
 msgstr ""
 
-msgid "Choose a registering unit to start reporting"
+msgid "stage"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} Edit Event"
+msgstr ""
+
+msgid "The enrollment event data could not be found"
 msgstr ""
 
 msgid "There are no feedback for this event"
@@ -866,7 +872,7 @@ msgid "open the Tracker Capture app"
 msgstr ""
 
 msgid "Save comment"
-msgstr ""
+msgstr "Grave comentário"
 
 msgid "Enrollment actions"
 msgstr ""
