@@ -5,7 +5,7 @@ import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { useEnrollment } from '../../common/EnrollmentOverviewDomain/useEnrollment';
+import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import {
@@ -40,7 +40,7 @@ export const EnrollmentPageDefault = () => {
 
     const { program } = useProgramInfo(programId);
     const { error: teiAttributesError, attributes } = useTeiAttributes(teiId);
-    const { error: enrollmentsError, enrollment } = useEnrollment(teiId);
+    const { error: enrollmentsError, enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata.programStages);
 

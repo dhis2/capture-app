@@ -64,7 +64,7 @@ export const loadViewEventDataEntry =
         const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
         const stage = program instanceof TrackerProgram ? getStageFromEvent(eventContainer.event)?.stage : undefined;
         const allEventsData = program instanceof TrackerProgram && allEvents
-            ? [...prepareEnrollmentEventsForRulesEngine(eventDataForRulesEngine, allEvents)]
+            ? [...prepareEnrollmentEventsForRulesEngine(allEvents, eventDataForRulesEngine)]
             : [eventDataForRulesEngine];
 
         return [
