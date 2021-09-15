@@ -8,7 +8,7 @@ import { WidgetComment } from '../WidgetComment';
 
 export const WidgetEventComment = ({ itemId, dataEntryId }: Props) => {
     const dispatch = useDispatch();
-    const notes = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[`${dataEntryId}-${itemId}`] ?? []);
+    const comments = useSelector(({ dataEntriesNotes }) => dataEntriesNotes[`${dataEntryId}-${itemId}`] ?? []);
 
     const onAddComment = (newCommentValue) => {
         dispatch(requestAddNoteForEvent(itemId, dataEntryId, newCommentValue));
@@ -19,8 +19,8 @@ export const WidgetEventComment = ({ itemId, dataEntryId }: Props) => {
             <WidgetComment
                 title={i18n.t('Comments about this event')}
                 placeholder={i18n.t('Write a comment about this event')}
-                emptyNoteMessage={i18n.t('This event doesn\'t have any comments')}
-                comments={notes}
+                emptyCommentMessage={i18n.t('This event doesn\'t have any comments')}
+                comments={comments}
                 onAddComment={onAddComment}
             />
         </div>
