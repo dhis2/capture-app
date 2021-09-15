@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-09-10T08:48:48.827Z\n"
+"POT-Creation-Date: 2021-09-14T16:18:15.837Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -895,6 +895,9 @@ msgstr "Работать с выбранной программой"
 msgid "open the Tracker Capture app"
 msgstr "Открыть приложение \"Отслеживание объектов\""
 
+msgid "Save comment"
+msgstr ""
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -954,6 +957,15 @@ msgstr ""
 msgid "Cancelled"
 msgstr "Отмененный"
 
+msgid "Comments about this enrollment"
+msgstr ""
+
+msgid "Write a comment about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any comments"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -965,6 +977,15 @@ msgstr "Ошибка"
 
 msgid "Warning"
 msgstr "Предупреждение"
+
+msgid "Comments about this event"
+msgstr ""
+
+msgid "Write a comment about this event"
+msgstr ""
+
+msgid "This event doesn't have any comments"
+msgstr ""
 
 msgid "Back to all stages and events"
 msgstr ""
