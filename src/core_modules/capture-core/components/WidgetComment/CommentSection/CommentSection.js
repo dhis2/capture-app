@@ -127,7 +127,7 @@ const CommentSectionPlain = ({
             <div className={classes.commentsWrapper}>
                 {comments
                     .sort((a, b) => moment(a.lastUpdated).valueOf() - moment(b.lastUpdated).valueOf())
-                    .map(comment => <CommentItem key={comment.note} {...comment} />)
+                    .map(comment => <CommentItem key={`comment-item-${comment.note}-`} {...comment} />)
                 }
                 {comments.length === 0 &&
                     <div className={classes.emptyComments}>
