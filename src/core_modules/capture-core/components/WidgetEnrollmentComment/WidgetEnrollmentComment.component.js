@@ -8,7 +8,7 @@ import { WidgetComment } from '../WidgetComment';
 export const WidgetEnrollmentComment = () => {
     const dispatch = useDispatch();
     const enrollmentId = useSelector(({ router }) => router.location.query.enrollmentId);
-    const comments = useSelector(({ enrollmentSite }) => enrollmentSite?.notes ?? []);
+    const comments = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment?.notes ?? []);
 
     const onAddComment = (newCommentValue) => {
         dispatch(requestAddNoteForEnrollment(enrollmentId, newCommentValue));

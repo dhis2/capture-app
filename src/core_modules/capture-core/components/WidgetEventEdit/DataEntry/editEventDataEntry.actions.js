@@ -120,7 +120,7 @@ export const openEventForEditInDataEntry = (
     const stage = program instanceof TrackerProgram ? getStageFromEvent(eventContainer.event)?.stage : undefined;
     const allEventsData = program instanceof EventProgram || !allEvents
         ? [eventDataForRulesEngine]
-        : [...prepareEnrollmentEventsForRulesEngine(eventDataForRulesEngine, allEvents)];
+        : [...prepareEnrollmentEventsForRulesEngine(allEvents, eventDataForRulesEngine)];
 
     return [
         ...dataEntryActions,

@@ -2,9 +2,6 @@
 
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
-import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import { getRulesActionsForEvent } from '../../../../rules/actionsCreator';
-import type { RenderFoundation, TrackerProgram } from '../../../../metaData';
 import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 
@@ -33,18 +30,5 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 ];
 
 export const getOpenDataEntryActions =
-    (program: TrackerProgram, foundation: RenderFoundation, orgUnit: Object, dataEntryId: string, itemId: string) => {
-        const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
-        const formId = getDataEntryKey(dataEntryId, itemId);
-        const rulesActions = getRulesActionsForEvent(
-            program,
-            foundation,
-            formId,
-            orgUnit,
-        );
-
-        return [
-            ...dataEntryActions,
-            ...rulesActions,
-        ];
-    };
+    (dataEntryId: string, itemId: string) =>
+        loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);

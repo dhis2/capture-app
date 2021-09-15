@@ -7,30 +7,6 @@ import { programCollection } from '../metaDataMemoryStores/programCollection/pro
 import { convertValue } from '../converters/serverToClient';
 import { dataElementTypes } from '../metaData';
 
-import type { Event } from '../components/Pages/Enrollment/EnrollmentPageDefault/types/common.types';
-
-export type ApiDataValue = {
-    dataElement: string,
-    value: any
-};
-
-export type ApiTEIEvent = {
-    event: string,
-    program: string,
-    programStage: string,
-    orgUnit: string,
-    orgUnitName: string,
-    trackedEntityInstance?: string,
-    enrollment?: string,
-    enrollmentStatus?: string,
-    status: string,
-    eventDate: string,
-    dueDate: string,
-    lastUpdated: string,
-    dataValues: Array<ApiDataValue>,
-    notes?: Array<Object>
-};
-
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
     STAGE_NOT_FOUND: 'Stage not found',
@@ -53,7 +29,7 @@ const mapEventInputKeyToOutputKey = {
     enrollment: 'enrollmentId',
 };
 
-function convertDataValues(apiEvent: Event) {
+function convertDataValues(apiEvent: ApiEnrollmentEvent) {
     const programMetaData = programCollection.get(apiEvent.program);
     if (!programMetaData) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ fn: 'convertDataValues', apiEvent }));
@@ -75,7 +51,7 @@ function convertDataValues(apiEvent: Event) {
     return convertedDataValues;
 }
 
-function convertMainProperties(apiEvent: ApiTEIEvent | Event): (CaptureClientEvent & EventData) {
+function convertMainProperties(apiEvent: ApiEnrollmentEvent): (CaptureClientEvent & EventData) {
     return Object
         .keys(apiEvent)
         .reduce((accEvent, inputKey) => {
@@ -100,7 +76,7 @@ function convertMainProperties(apiEvent: ApiTEIEvent | Event): (CaptureClientEve
         }, {});
 }
 
-function convertToClientEvent(event: ApiTEIEvent) {
+function convertToClientEvent(event: ApiEnrollmentEvent) {
     const programMetaData = programCollection.get(event.program);
     if (!programMetaData) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ fn: 'convertToClientEvent', event }));
@@ -145,13 +121,10 @@ export async function getEnrollmentEvents() {
     }, []);
 }
 
-export const prepareEnrollmentEventsForRulesEngine = (currentEvent: EventData, apiEvents: Array<Event>): EventsData =>
-    apiEvents.reduce(
-        (accEvents, apiEvent) => [
-            ...accEvents,
-            currentEvent.eventId === apiEvent.event
+export const prepareEnrollmentEventsForRulesEngine =
+    (apiEvents: Array<ApiEnrollmentEvent>, currentEvent?: EventData): EventsData =>
+        apiEvents
+            .map(apiEvent => (currentEvent && currentEvent.eventId === apiEvent.event
                 ? currentEvent
-                : { ...convertMainProperties(apiEvent), ...convertDataValues(apiEvent) },
-        ],
-        [],
-    );
+                : { ...convertMainProperties(apiEvent), ...convertDataValues(apiEvent) }),
+            );
