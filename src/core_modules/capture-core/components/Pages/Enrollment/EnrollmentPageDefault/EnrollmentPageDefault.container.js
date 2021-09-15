@@ -13,6 +13,7 @@ import {
     useProgramMetadata,
     useHideWidgetByRuleLocations,
     useProgramStages,
+    useOrganisationUnit,
 } from './hooks';
 import { runRulesForEnrollment } from './runRulesForEnrollment';
 import { urlArguments } from '../../../../utils/url';
@@ -35,8 +36,7 @@ export const EnrollmentPageDefault = () => {
                 programId: query.programId,
                 orgUnitId: query.orgUnitId,
             }), shallowEqual);
-    const orgUnit = useSelector(({ organisationUnits }) => organisationUnits[orgUnitId]);
-
+    const { orgUnit } = useOrganisationUnit(orgUnitId);
 
     const { program } = useProgramInfo(programId);
     const { error: teiAttributesError, attributes } = useTeiAttributes(teiId);
