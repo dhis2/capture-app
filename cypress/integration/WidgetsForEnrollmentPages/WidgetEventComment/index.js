@@ -2,6 +2,14 @@ Then('the enrollment widget should be loaded', () => {
     cy.contains('The enrollment event data could not be found').should('not.exist');
 });
 
+When('you click edit mode', () => {
+    cy.get('[data-test="widget-enrollment-event"]').within(() => {
+        cy.get('[data-test="dhis2-uicore-button"]')
+            .contains('Edit event')
+            .click();
+        cy.wait(100);
+    });
+});
 
 When(/^you fill in the comment: (.*)$/, (comment) => {
     cy.get('[data-test="event-comment-widget"]').within(() => {
