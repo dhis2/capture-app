@@ -5,7 +5,7 @@ import { getScopeFromScopeId } from './getScopeFromScopeId';
 import { scopeTypes } from './constants';
 import type { Scope } from './getScopeFromScopeId';
 
-export const getScopeInfo = (scopeId: string) => {
+export const getScopeInfo = (scopeId: ?string) => {
     const scope = getScopeFromScopeId(scopeId);
     return deriveInfoFromScope(scope);
 };

@@ -1,23 +1,27 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { enrollmentActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain/enrollment.actions';
+import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
+import { actionTypes as enrollmentNoteActionTypes }
+    from '../../components/WidgetEnrollmentComment/WidgetEnrollmentComment.actions';
 
 const initialReducerValue = {};
 const {
-    SET_ENROLLMENT,
+    COMMON_ENROLLMENT_SITE_DATA_SET,
     UPDATE_ENROLLMENT_EVENTS,
     UPDATE_ENROLLMENT_EVENTS_WITHOUT_ID,
     ROLLBACK_ENROLLMENT_EVENT,
     ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID,
     COMMIT_ENROLLMENT_EVENT,
     COMMIT_ENROLLMENT_EVENT_WITHOUT_ID,
-} = enrollmentActionTypes;
+} = enrollmentSiteActionTypes;
 
-export const enrollmentDesc = createReducerDescription(
+export const enrollmentDomainDesc = createReducerDescription(
     {
-        [SET_ENROLLMENT]: (state, { payload: { enrollmentSite } }) => ({
+        [COMMON_ENROLLMENT_SITE_DATA_SET]: (state, { payload: { enrollment, attributeValues } }) => ({
             ...state,
-            ...enrollmentSite,
+            enrollment,
+            attributeValues,
+            enrollmentId: enrollment.enrollment,
         }),
         [UPDATE_ENROLLMENT_EVENTS]: (
             state,
@@ -78,7 +82,15 @@ export const enrollmentDesc = createReducerDescription(
             });
             return { ...state, events };
         },
+        [enrollmentNoteActionTypes.ADD_ENROLLMENT_NOTE]:
+        (state, { payload: { note } }) => ({
+            ...state,
+            enrollment: {
+                ...state.enrollment,
+                notes: [...state.enrollment.notes, note],
+            },
+        }),
     },
-    'enrollmentSite',
+    'enrollmentDomain',
     initialReducerValue,
 );

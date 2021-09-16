@@ -27,6 +27,7 @@ import {
 import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { TopBarActions } from '../../TopBarActions';
+import { WidgetEventComment } from '../../WidgetEventComment';
 
 const styles = ({ typography }) => ({
     page: {
@@ -179,6 +180,7 @@ const EnrollmentEditEventPagePain = ({
                         )}
                     </div>
                     <div className={classes.rightColumn}>
+                        <WidgetEventComment itemId={mode} dataEntryId="singleEvent" />
                         <WidgetError error={widgetEffects.errors} />
                         <WidgetWarning warning={widgetEffects.warnings} />
                         {!hideWidgets.feedback && (

@@ -17,8 +17,8 @@ Then('the user sees the warning popup', () => {
     cy.contains('Leaving this page will discard the changes you made to this event.');
 });
 
-When(/^the user set the WHOMCH Gestational age at visit to (.*)/, score =>
-    cy.get('[data-test="new-enrollment-event-form"]').find('[data-test="capture-ui-input"]').eq(1).clear()
+When(/^the user set the WHOMCH Diastolic blood pressure to (.*)/, score =>
+    cy.get('[data-test="new-enrollment-event-form"]').find('[data-test="capture-ui-input"]').eq(6).clear()
         .type(score)
         .blur(),
 );

@@ -22,29 +22,29 @@ import {
     getTrackerProgramThrowIfNotFound,
     type DataElement,
 } from '../../../../metaData';
-import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
 import { PAGINATION } from '../SearchPage.constants';
 import { urlArguments } from '../../../../utils/url';
+import {
+    navigateToEnrollmentOverview,
+} from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
     return [`${fieldId}:eq:${formValues[fieldId]}`];
 };
 
-const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam, currentUrl) =>
+const searchViaUniqueIdStream = (queryArgs, attributes, programId) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
         flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId } } = searchResults[0];
 
-                navigateToTrackedEntityDashboard({
+                return of(navigateToEnrollmentOverview({
                     teiId: id,
                     orgUnitId,
-                    scopeSearchParam,
-                    currentUrl,
-                });
-                return empty();
+                    programId,
+                }));
             }
             return of(showEmptyResultsViewOnSearchPage());
         }),
@@ -107,7 +107,6 @@ export const searchViaUniqueIdOnScopeProgramEpic: Epic = (action$, store) =>
         flatMap(({ payload: { formId, programId } }) => {
             const {
                 formsValues,
-                router: { location: { pathname, search } },
             } = store.value;
             const queryArgs = {
                 filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
@@ -121,8 +120,7 @@ export const searchViaUniqueIdOnScopeProgramEpic: Epic = (action$, store) =>
             return searchViaUniqueIdStream(
                 queryArgs,
                 attributes,
-                `program=${programId}`,
-                `${pathname}${search}`,
+                programId,
             );
         }),
     );
@@ -134,7 +132,6 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic: Epic = (action$, sto
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
             const {
                 formsValues,
-                router: { location: { pathname, search } },
             } = store.value;
             const queryArgs = {
                 filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
@@ -148,8 +145,6 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic: Epic = (action$, sto
             return searchViaUniqueIdStream(
                 queryArgs,
                 attributes,
-                `trackedEntityType=${trackedEntityTypeId}`,
-                `${pathname}${search}`,
             );
         }),
     );

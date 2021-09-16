@@ -1,17 +1,16 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
-import type { ApiTEIEvent } from 'capture-core/events/getEnrollmentEvents';
 import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
 import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 import { getSubValues } from '../../getEventDataWithSubValue';
 import type { StageDataElement } from '../../../../types/common.types';
 import { Comments } from '../Comments.component';
 
-const isEventOverdue = (event: ApiTEIEvent) => moment(event.dueDate).isSameOrBefore(new Date())
+const isEventOverdue = (event: ApiEnrollmentEvent) => moment(event.dueDate).isSameOrBefore(new Date())
     && event.status === statusTypes.SCHEDULE;
 
-const getEventStatus = (event: ApiTEIEvent) => {
+const getEventStatus = (event: ApiEnrollmentEvent) => {
     const today = moment().startOf('day');
     const dueDate = moment(event.dueDate);
     const dueDateFromNow = dueDate.from(today);
@@ -38,7 +37,7 @@ const getEventStatus = (event: ApiTEIEvent) => {
     return { status: event.status, options: undefined };
 };
 
-const getValueByKeyFromEvent = (event: ApiTEIEvent, { id, resolveValue }: Object) => {
+const getValueByKeyFromEvent = (event: ApiEnrollmentEvent, { id, resolveValue }: Object) => {
     if (resolveValue) {
         return resolveValue(event);
     }
@@ -47,7 +46,7 @@ const getValueByKeyFromEvent = (event: ApiTEIEvent, { id, resolveValue }: Object
 };
 
 
-const convertStatusForView = (event: ApiTEIEvent) => {
+const convertStatusForView = (event: ApiEnrollmentEvent) => {
     const { status, options } = getEventStatus(event);
     const isPositive = [statusTypes.COMPLETED].includes(status);
     const isNegative = [statusTypes.OVERDUE].includes(status);
@@ -59,9 +58,9 @@ const convertStatusForView = (event: ApiTEIEvent) => {
     };
 };
 
-const convertCommentForView = (event: ApiTEIEvent) => <Comments event={event} />;
+const convertCommentForView = (event: ApiEnrollmentEvent) => <Comments event={event} />;
 
-const groupRecordsByType = async (events: Array<ApiTEIEvent>, dataElements: Array<StageDataElement>) => {
+const groupRecordsByType = async (events: Array<ApiEnrollmentEvent>, dataElements: Array<StageDataElement>) => {
     // $FlowFixMe
     const dataElementsByType = events.reduce((acc, event) => {
         event.dataValues.forEach((dataValue) => {
@@ -77,7 +76,7 @@ const groupRecordsByType = async (events: Array<ApiTEIEvent>, dataElements: Arra
         });
         return acc;
     }, []);
-
+    // $FlowFixMe
     for await (const item of dataElementsByType) {
         item.ids = await getSubValues(item.type, item.ids);
     }
