@@ -4,7 +4,7 @@
 
 ### Folders name 
 
-1. Avoid duplicate names. Folders with identical names create a lot of confusion. Consider what is the difference between the folders and reflect it in the folder name. Consider using versioning if it is a refactor.  
+1. Folders should not have the exact name as their folder parent.  
 
 ### Files name
 
@@ -25,10 +25,15 @@ EnrollmentPage
 
 1. The pattern is `camelCase`. The exceptions are:
     - global constants and acronyms pattern is `UPPERCASE`.
-    - redux action type pattern is `NOUN_VERB` with the present tense. For example: TEMPLATE_ADD: 'TemplateAdd'.
 2. Use concise, human-readable, semantic names. It shouldn't be necessary to add a comment for additional documentation to the variable. 
 3. Avoid abbreviation if the length is smaller than 25 characters. 
-4. Give meaningful names to variables inside functional methods (map, forEach, reduce, every, some, ...). For example: 
+4. Use a unique name for the `actionTypes` object, e.g. `eventWorkingListsActionTypes`. This will make it easy to figure out where the actions are used (and really simplify a potential refactor). Prefix the actionType, i.e [Domain].[ActionType] (for example: EventWorkingLists.AddTemplate). 
+```
+const eventWorkingListsActionTypes = {
+    ADD_TEMPLATE: EventWorkingLists.AddTemplate,
+}
+```
+5. Give meaningful names to variables inside functional methods (map, forEach, reduce, every, some, ...). For example: 
 ```
 // not good
 options.map(o => /* do something */)
@@ -36,7 +41,7 @@ options.map(o => /* do something */)
 // better
 options.map(option => /* do something */)
 ```
-5. Give meaningful names to variables when initialise new object instance. For example: 
+6. Give meaningful names to variables when initialise new object instance. For example: 
 ```
 // not good
 new DataElement((o) => {
