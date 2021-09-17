@@ -1,7 +1,3 @@
 // @flow
 export { Validated } from './Validated.container';
-export {
-    saveNewEnrollmentEventEpic,
-    saveNewEventSucceededEpic,
-    saveNewEventFailedEpic,
-} from './validated.epics';
+export { saveNewEnrollmentEventEpic } from './validated.epics';

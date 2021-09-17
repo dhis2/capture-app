@@ -79,7 +79,7 @@ const useComputeDataFromEvent = (dataElements: Array<StageDataElement>, events: 
             }, {});
 
             const allFields = getAllFieldsWithValue(eventId, dataElements, dataElementsByType);
-            eventsData.push({ id: eventId, ...predefinedFields, ...allFields });
+            eventsData.push({ id: eventId, pendingApiResponse: event.pendingApiResponse, ...predefinedFields, ...allFields });
         }
         setDataSource(eventsData);
     };
