@@ -28,8 +28,7 @@ import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTr
 import { PAGINATION } from '../SearchPage.constants';
 import { urlArguments } from '../../../../utils/url';
 import { dataElementConvertFunctions } from './SearchFormElementConverter/SearchFormElementConverter';
-import { pipe as pipeD2 } from '../../../../../capture-core-utils';
-import { convertClientToServer, convertFormToClient } from '../../../../converters';
+
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
@@ -63,9 +62,8 @@ const getFiltersForAttributesSearchQuery = (formValues, attributes) => Object.ke
         const dataElement = attributes.find(attribute => attribute.id === fieldId);
         if (formValues[fieldId] && dataElement) {
             const dataElementType = dataElementTypes[dataElement.type];
-            const serverValue = dataElement.convertValue(formValues[fieldId], pipeD2(convertFormToClient, convertClientToServer));
             // $FlowFixMe - Function does not require arguments if unsupported type
-            return dataElementConvertFunctions[dataElementType](serverValue, dataElement);
+            return dataElementConvertFunctions[dataElementType](formValues[fieldId], dataElement);
         }
         return null;
     });
