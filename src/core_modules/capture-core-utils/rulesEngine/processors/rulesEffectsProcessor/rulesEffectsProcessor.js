@@ -39,21 +39,24 @@ export function getRulesEffectsProcessor(
 ) {
     const idNamesArray = [idNames.DATA_ELEMENT_ID, idNames.TRACKED_ENTITY_ATTRIBUTE_ID];
 
-    function applyToExistingIds(
+    function createEffectsWithExistingIds(
         effect: ProgramRuleEffect,
-        processor: (string) => ?any): any {
+        getOutputEffect: () => any): any {
         return idNamesArray
             .filter(idName => effect[idName])
-            .map(processor);
+            .map(idName => {
+                const outputEffect = getOutputEffect();
+                outputEffect.id = effect[idName];
+                outputEffect.isDataElementId = idName === idNames.DATA_ELEMENT_ID;
+                return outputEffect;
+            });
     }
 
     function createErrorDetectionEffect(
         effect: ProgramRuleEffect,
         type: $Values<typeof effectActions>): any {
-        const result = applyToExistingIds(effect, (idName: string): MessageEffect => ({
+        const result = createEffectsWithExistingIds(effect, (): any => ({
             type,
-            id: effect[idName],
-            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
             message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
         }));
         return result.length !== 0 ? result : {
@@ -130,10 +133,8 @@ export function getRulesEffectsProcessor(
     }
 
     function processHideField(effect: ProgramRuleEffect): Array<HideOutputEffect> {
-        return applyToExistingIds(effect, (idName: string): HideOutputEffect => ({
+        return createEffectsWithExistingIds(effect, () => ({
             type: effectActions.HIDE_FIELD,
-            id: effect[idName],
-            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
         }));
     }
 
@@ -154,8 +155,6 @@ export function getRulesEffectsProcessor(
     }
 
     function processHideSection(effect: ProgramRuleEffect): ?HideOutputEffect {
-        // Why must processType be of type EVENT?
-        // if (processType !== processTypes.EVENT || !effect.programStageSectionId) {
         if (!effect.programStageSectionId) {
             return null;
         }
@@ -166,15 +165,13 @@ export function getRulesEffectsProcessor(
         };
     }
 
-    function processMakeCompulsory(effect: ProgramRuleEffect): ?Array<CompulsoryEffect> {
-        return applyToExistingIds(effect, (idName: string): CompulsoryEffect => ({
+    function processMakeCompulsory(effect: ProgramRuleEffect): Array<CompulsoryEffect> {
+        return createEffectsWithExistingIds(effect, () => ({
             type: effectActions.MAKE_COMPULSORY,
-            id: effect[idName],
-            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
         }));
     }
 
-    function processDisplayText(effect: ProgramRuleEffect): ?any {
+    function processDisplayText(effect: ProgramRuleEffect): any {
         return {
             type: effectActions.DISPLAY_TEXT,
             id: effect.location,
@@ -186,7 +183,7 @@ export function getRulesEffectsProcessor(
         };
     }
 
-    function processDisplayKeyValuePair(effect: ProgramRuleEffect): ?any {
+    function processDisplayKeyValuePair(effect: ProgramRuleEffect): any {
         return {
             type: effectActions.DISPLAY_KEY_VALUE_PAIR,
             id: effect.location,
@@ -199,29 +196,23 @@ export function getRulesEffectsProcessor(
         };
     }
 
-    function processHideOptionGroup(effect: ProgramRuleEffect): ?any {
-        return applyToExistingIds(effect, (idName: string) => ({
+    function processHideOptionGroup(effect: ProgramRuleEffect): any {
+        return createEffectsWithExistingIds(effect, () => ({
             type: effectActions.HIDE_OPTION_GROUP,
-            id: effect[idName],
-            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
             optionGroupId: effect.optionGroupId,
         }));
     }
 
-    function processHideOption(effect: ProgramRuleEffect): ?any {
-        return applyToExistingIds(effect, (idName: string) => ({
+    function processHideOption(effect: ProgramRuleEffect): any {
+        return createEffectsWithExistingIds(effect, () => ({
             type: effectActions.HIDE_OPTION,
-            id: effect[idName],
-            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
             optionId: effect.optionId,
         }));
     }
 
-    function processShowOptionGroup(effect: ProgramRuleEffect): ?any {
-        return applyToExistingIds(effect, (idName: string) => ({
+    function processShowOptionGroup(effect: ProgramRuleEffect): any {
+        return createEffectsWithExistingIds(effect, () => ({
             type: effectActions.SHOW_OPTION_GROUP,
-            id: effect[idName],
-            isDataElementId: idName === idNames.DATA_ELEMENT_ID,
             optionGroupId: effect.optionGroupId,
         }));
     }
