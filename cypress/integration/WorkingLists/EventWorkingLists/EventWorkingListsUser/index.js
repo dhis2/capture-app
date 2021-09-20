@@ -106,7 +106,7 @@ Then('the list should display active events that are assigned to anyone', () => 
 
 When('you set the age filter to 10-20', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Age in years')
+        .contains('Age (years)')
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
@@ -416,7 +416,7 @@ When('you set the date of admission filter', () => {
             cy.contains('More filters')
                 .click();
 
-            cy.contains('Admission Date')
+            cy.contains('Date of admission')
                 .click();
         });
 

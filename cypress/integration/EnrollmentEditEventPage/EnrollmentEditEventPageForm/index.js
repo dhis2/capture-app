@@ -50,7 +50,7 @@ When(/^the user changes the gender to (.*)/, gender =>
         .click(),
 );
 
-When(/^the user sets WHOMCH Plurality assessed to (.*)/, text =>
+When(/^the user sets Plurality assessed to (.*)/, text =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .get('[data-test="virtualized-select"]')

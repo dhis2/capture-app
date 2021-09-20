@@ -118,7 +118,7 @@ Then('active events that are assigned to anyone should be retrieved from the api
 
 When('you set the age filter to 10-20', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Age in years')
+        .contains('Age (years)')
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
