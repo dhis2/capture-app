@@ -44,7 +44,7 @@ export function getRulesEffectsProcessor(
         getOutputEffect: () => any): any {
         return idNamesArray
             .filter(idName => effect[idName])
-            .map(idName => {
+            .map((idName) => {
                 const outputEffect = getOutputEffect();
                 outputEffect.id = effect[idName];
                 outputEffect.isDataElementId = idName === idNames.DATA_ELEMENT_ID;

@@ -37,7 +37,7 @@ describe('rules engine', () => {
                 },
                 foundation: { programRules: [] },
             },
-            [{ id: 'PAvRSZQyYjR', type: 'HIDESECTION' },{ id: 'TIpDZhpNkmS', type: 'HIDESECTION' }, { id: 'YpzV7H2BA6C', type: 'HIDESECTION' }],
+            [{ id: 'PAvRSZQyYjR', type: 'HIDESECTION' }, { id: 'TIpDZhpNkmS', type: 'HIDESECTION' }, { id: 'YpzV7H2BA6C', type: 'HIDESECTION' }],
         ],
         [
             {
