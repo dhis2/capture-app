@@ -128,7 +128,7 @@ export function runRulesForSingleEvent(
             selectedOrgUnit: orgUnit,
             optionSets,
         });
-        effects.filter(effect => typeof effect.isDataElementId === undefined || effect.isDataElementId);
+        effects.filter(effect => typeof effect.isDataElementId === 'undefined' || effect.isDataElementId);
 
         return (effects.length > 0) ? effects : null;
     }
