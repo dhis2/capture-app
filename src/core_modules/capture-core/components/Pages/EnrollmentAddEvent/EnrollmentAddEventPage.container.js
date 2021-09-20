@@ -37,7 +37,7 @@ export const EnrollmentAddEventPage = () => {
 
     const handleSave = useCallback(
         (data, uid) => {
-            uid && dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
+            dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
             dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
         },
         [dispatch, programId, orgUnitId, teiId, enrollmentId],

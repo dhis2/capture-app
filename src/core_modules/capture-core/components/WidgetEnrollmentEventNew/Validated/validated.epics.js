@@ -20,6 +20,7 @@ export const saveNewEnrollmentEventEpic = (action$: InputObservable, store: Redu
                 completed,
                 programId,
                 orgUnitId,
+                orgUnitName,
                 teiId,
                 enrollmentId,
                 onSaveExternal,
@@ -37,10 +38,10 @@ export const saveNewEnrollmentEventEpic = (action$: InputObservable, store: Redu
                 mainDataClientValues,
                 programId,
                 orgUnitId,
+                orgUnitName,
                 teiId,
                 enrollmentId,
                 completed,
-                organisationUnits: state.organisationUnits,
             });
 
             onSaveExternal && onSaveExternal(serverData, uid);
