@@ -15,8 +15,8 @@ const convertString = (formValues: string, dataElement: DataElement) => {
 
 const convertRange = (formValues: FormValues, dataElement: DataElement) => {
     const { from, to } = formValues;
-    if (from && to) {
-        return `${dataElement.id}:ge:${from}:le:${to}`;
+    if (from || to) {
+        return `${dataElement.id}${from && `:ge:${from}`}${to && `:le:${to}`}`;
     }
     return null;
 };
@@ -38,9 +38,9 @@ const convertFile = (formValues: FormValues, dataElement: DataElement) => {
 
 const convertBoolean = (formValues: string, dataElement: DataElement) => `${dataElement.id}:eq:${formValues}`;
 
-const unsupportedType = (formValues: FormValues, dataElement: DataElement) => `${dataElement.id}`;
+const unsupportedType = () => null;
 
-export const dataElementConvertFunctions = Object.freeze({
+export const dataElementConvertFunctions = {
     TEXT: convertString,
     LONG_TEXT: convertString,
     NUMBER: convertRange,
@@ -71,7 +71,8 @@ export const dataElementConvertFunctions = Object.freeze({
     AGE: convertAge,
     COORDINATE: unsupportedType,
     POLYGON: unsupportedType,
+    STATUS: unsupportedType,
     USERNAME: convertString,
     ASSIGNEE: convertString,
     UNKNOWN: unsupportedType,
-});
+};

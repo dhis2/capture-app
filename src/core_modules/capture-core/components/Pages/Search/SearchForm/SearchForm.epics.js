@@ -14,7 +14,9 @@ import {
     showSuccessResultsViewOnSearchPage,
     showTooManyResultsViewOnSearchPage,
 } from '../SearchPage.actions';
-import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
+import {
+    getTrackedEntityInstances,
+} from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
     type DataElement,
     dataElementTypes,
@@ -28,6 +30,8 @@ import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { dataElementConvertFunctions } from './SearchFormElementConverter/SearchFormElementConverter';
+import { pipe as pipeD2 } from '../../../../../capture-core-utils';
+import { convertClientToServer, convertFormToClient } from '../../../../converters';
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
@@ -64,7 +68,9 @@ const getFiltersForAttributesSearchQuery = (formValues, attributes) => Object.ke
         const dataElement = attributes.find(attribute => attribute.id === fieldId);
         if (formValues[fieldId] && dataElement) {
             const dataElementType = dataElementTypes[dataElement.type];
-            return dataElementConvertFunctions[dataElementType](formValues[fieldId], dataElement);
+            const serverValue = dataElement.convertValue(formValues[fieldId], pipeD2(convertFormToClient, convertClientToServer));
+            // $FlowFixMe - Function does not require arguments if unsupported type
+            return dataElementConvertFunctions[dataElementType](serverValue, dataElement);
         }
         return null;
     });
