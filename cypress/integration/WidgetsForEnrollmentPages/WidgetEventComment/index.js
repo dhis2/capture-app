@@ -3,12 +3,10 @@ Then('the enrollment widget should be loaded', () => {
 });
 
 When('you click edit mode', () => {
-    cy.get('[data-test="widget-enrollment-event"]').within(() => {
-        cy.get('[data-test="dhis2-uicore-button"]')
-            .contains('Edit event')
-            .click();
-        cy.wait(100);
-    });
+    cy.get('[data-test="dhis2-uicore-button"]')
+        .contains('Edit event')
+        .click();
+    cy.contains('Enrollment: Edit Event').should('exist');
 });
 
 When(/^you fill in the comment: (.*)$/, (comment) => {
