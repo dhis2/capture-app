@@ -60,6 +60,10 @@ import {
     teiSearchDesc,
 } from 'capture-core/reducers/descriptions/teiSearch.reducerDescription';
 
+import {
+    dataStoreDesc,
+} from 'capture-core/reducers/descriptions/dataStore.reducerDescription';
+
 import { notesDesc } from 'capture-core/reducers/descriptions/notes.reducerDescription';
 import { relationshipsDesc } from 'capture-core/reducers/descriptions/relationships.reducerDescription';
 import {
@@ -74,7 +78,7 @@ import { feedbackDesc } from './feedback.reducerDescription';
 import { activePageDesc } from '../../core_modules/capture-core/reducers/descriptions/activePage.reducerDescription';
 import { searchPageDesc } from '../../core_modules/capture-core/reducers/descriptions/searchPage.reducerDescription';
 import { enrollmentPageDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentPage.reducerDescription';
-import { enrollmentDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollment.reducerDescription';
+import { enrollmentDomainDesc } from '../../core_modules/capture-core/reducers/descriptions/enrollmentDomain.reducerDescription';
 import { newPageDesc } from '../../core_modules/capture-core/reducers/descriptions/newPage.reducerDescription';
 import { possibleDuplicatesDesc } from '../../core_modules/capture-core/reducers/descriptions/possibleDuplicates.reducerDescription';
 
@@ -84,7 +88,7 @@ export const reducerDescriptions = [
     currentSelectionsReducerDesc,
     editEventPageDesc,
     enrollmentPageDesc,
-    enrollmentDesc,
+    enrollmentDomainDesc,
     eventsDesc,
     eventsValuesDesc,
     dataEntriesDesc,
@@ -128,6 +132,7 @@ export const reducerDescriptions = [
     ruleEffectsOptionsVisibilityDesc,
     searchPageDesc,
     teiSearchDesc,
+    dataStoreDesc,
     viewEventPageDesc,
     workingListsDesc,
     workingListsMetaDesc,

@@ -5,10 +5,12 @@ import i18n from '@dhis2/d2-i18n';
 import { withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
 import { useOrganisationUnit } from './useOrganisationUnit';
+import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
 import { ValidatedComponent } from './Validated.component';
 import { requestSaveEvent } from './validated.actions';
 import type { ContainerProps } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
+import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 export const Validated = ({
@@ -20,22 +22,34 @@ export const Validated = ({
     orgUnitId,
     teiId,
     enrollmentId,
+    rulesExecutionDependencies,
     ...passOnProps
 }: ContainerProps) => {
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
 
     const { error, orgUnit } = useOrganisationUnit(orgUnitId);
-    const ready = useLifecycle(program, formFoundation, orgUnit, dataEntryId, itemId);
+    const rulesExecutionDependenciesClientFormatted =
+        useClientFormattedRulesExecutionDependencies(rulesExecutionDependencies, program);
+    const ready = useLifecycle({
+        program,
+        formFoundation,
+        orgUnit,
+        dataEntryId,
+        itemId,
+        // $FlowFixMe Investigate
+        rulesExecutionDependenciesClientFormatted,
+    });
 
     const dispatch = useDispatch();
     const handleSave = useCallback((
         eventId: string,
         dataEntryIdArgument: string,
         formFoundationArgument: RenderFoundation,
-        completed?: boolean,
+        saveType?: ?string,
     ) => {
         window.scrollTo(0, 0);
+        const completed = saveType === addEventSaveTypes.COMPLETE;
         dispatch(requestSaveEvent({
             eventId,
             dataEntryId: dataEntryIdArgument,
@@ -78,6 +92,7 @@ export const Validated = ({
             onSave={handleSave}
             programName={program.name}
             orgUnit={orgUnit}
+            rulesExecutionDependenciesClientFormatted={rulesExecutionDependenciesClientFormatted}
         />
     );
 };

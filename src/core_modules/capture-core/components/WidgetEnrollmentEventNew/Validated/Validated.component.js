@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { memo, type ComponentType } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { NonBundledDhis2Icon } from '../../NonBundledDhis2Icon';
@@ -84,4 +84,5 @@ const ValidatedPlain = ({
 
 export const ValidatedComponent: ComponentType<
     $Diff<Props, CssClasses>,
-> = withStyles(styles)(ValidatedPlain);
+> = withStyles(styles)(memo(ValidatedPlain));
+// Adding memo because the lifecycle method in Validated.container grabs the entire state object.

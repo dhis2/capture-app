@@ -23,6 +23,9 @@ import {
     teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry';
 import {
+    navigateToEnrollmentOverviewEpic,
+} from 'capture-core/actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.epics';
+import {
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
@@ -31,6 +34,11 @@ import {
     addTemplateEpic,
     deleteTemplateEpic,
 } from 'capture-core/components/WorkingLists/EventWorkingLists';
+
+import {
+    fetchDataStoreEpic,
+    fetchUserDataStoreEpic,
+} from 'capture-core/components/DataStore/DataStore.epics';
 
 import {
     getEventFromUrlEpic,
@@ -70,9 +78,9 @@ import {
     cancelEditEventLocationChangeEpic,
 } from 'capture-core/components/WidgetEventEdit/DataEntry/epics/cancelEditSingleEvent.epics';
 import {
-    addNoteForEditSingleEventEpic,
-    removeNoteForEditSingleEventEpic,
-} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/addNoteForEditSingleEvent.epics';
+    addNoteForEventEpic,
+    removeNoteForEventEpic,
+} from 'capture-core/components/WidgetEventComment/WidgetEventComment.epics';
 import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';
@@ -133,6 +141,7 @@ import {
     saveNoteForViewEventFailedEpic,
 } from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
 
+import { addNoteForEnrollmentEpic } from 'capture-core/components/WidgetEnrollmentComment/WidgetEnrollmentComment.epics';
 import {
     openNewRelationshipRegisterTeiEpic,
     loadSearchGroupDuplicatesForReviewEpic,
@@ -206,6 +215,8 @@ import {
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,
+    saveNewEventSucceededEpic,
+    saveNewEventFailedEpic,
     addNoteForNewEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
 
@@ -215,6 +226,8 @@ export const epics = combineEpics(
     calculateSelectionsCompletenessEpic,
     triggerLoadCoreEpic,
     loadCoreEpic,
+    fetchDataStoreEpic,
+    fetchUserDataStoreEpic,
     loadAppEpic,
     loadCoreFailedEpic,
     initEventListEpic,
@@ -244,9 +257,9 @@ export const epics = combineEpics(
     saveEditEventEpic,
     cancelEditEventLocationChangeEpic,
     cancelEditEventEpic,
-    addNoteForEditSingleEventEpic,
+    addNoteForEventEpic,
     addNoteForNewSingleEventEpic,
-    removeNoteForEditSingleEventEpic,
+    removeNoteForEventEpic,
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
     goingOnlineEpic,
@@ -336,5 +349,9 @@ export const epics = combineEpics(
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,
+    saveNewEventSucceededEpic,
+    saveNewEventFailedEpic,
     addNoteForNewEnrollmentEventEpic,
+    addNoteForEnrollmentEpic,
+    navigateToEnrollmentOverviewEpic,
 );

@@ -1,3 +1,127 @@
+## [1.55.5](https://github.com/dhis2/capture-app/compare/v1.55.4...v1.55.5) (2021-09-17)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6ab4065](https://github.com/dhis2/capture-app/commit/6ab40654b7cf343e301330d21d7c9a775ebe67f4))
+
+## [1.55.4](https://github.com/dhis2/capture-app/compare/v1.55.3...v1.55.4) (2021-09-16)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([24fe1a5](https://github.com/dhis2/capture-app/commit/24fe1a5a5b9c67d503b4bc0a929484115c64cbb8))
+
+## [1.55.3](https://github.com/dhis2/capture-app/compare/v1.55.2...v1.55.3) (2021-09-15)
+
+
+### Bug Fixes
+
+* [DHIS2-11783] fetch orgUnit if none present ([#2109](https://github.com/dhis2/capture-app/issues/2109)) ([e7daf13](https://github.com/dhis2/capture-app/commit/e7daf133d29b4a4d6fc3285387d8dee1fa40d262))
+
+## [1.55.2](https://github.com/dhis2/capture-app/compare/v1.55.1...v1.55.2) (2021-09-15)
+
+
+### Bug Fixes
+
+* [TECH-635] New enrollment event rules execution ([8319472](https://github.com/dhis2/capture-app/commit/8319472a13cce48df6bdcbdd5db06166b816c36d))
+* minor ([77432f1](https://github.com/dhis2/capture-app/commit/77432f13a46d04dcaec68798fcd2ab87ab1105f0))
+* quick fix tests ([3875b1e](https://github.com/dhis2/capture-app/commit/3875b1e07f1e641ec78646b43ed8bb98104c4257))
+* quick fix tests follow up ([f786a44](https://github.com/dhis2/capture-app/commit/f786a445a5f95b1da3f43e86e89f70dcbfcee30d))
+* test ([590f77b](https://github.com/dhis2/capture-app/commit/590f77b16f250bb6ee5483c7f546ca84c5299c37))
+
+## [1.55.1](https://github.com/dhis2/capture-app/compare/v1.55.0...v1.55.1) (2021-09-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([c16b832](https://github.com/dhis2/capture-app/commit/c16b832bc0107811509b592cd30833a1c14ebeeb))
+
+# [1.55.0](https://github.com/dhis2/capture-app/compare/v1.54.0...v1.55.0) (2021-09-14)
+
+
+### Features
+
+* [DHIS2-11632] Widget enrollment comment ([#2088](https://github.com/dhis2/capture-app/issues/2088)) ([8dbf20e](https://github.com/dhis2/capture-app/commit/8dbf20eabad8521c19d5613ca10e915ee3e8177b))
+
+# [1.54.0](https://github.com/dhis2/capture-app/compare/v1.53.12...v1.54.0) (2021-09-14)
+
+
+### Features
+
+* [DHIS2-11616] Widget Event Comment ([#2067](https://github.com/dhis2/capture-app/issues/2067)) ([3feb1ec](https://github.com/dhis2/capture-app/commit/3feb1eca286c91e471aafd1e1b8ebcc0f6477086))
+
+## [1.53.12](https://github.com/dhis2/capture-app/compare/v1.53.11...v1.53.12) (2021-09-14)
+
+
+### Bug Fixes
+
+* Add the ouMode=ACCESSIBLE to api if orgUnit is not selected. ([d93687f](https://github.com/dhis2/capture-app/commit/d93687f145af4b589241c4123768842dff890322))
+* Remove ProgramStageId from api if program is single event ([6db572b](https://github.com/dhis2/capture-app/commit/6db572b422f4c7475000c6ad3fa15311e72d0660))
+
+## [1.53.11](https://github.com/dhis2/capture-app/compare/v1.53.10...v1.53.11) (2021-09-14)
+
+
+### Bug Fixes
+
+* add orgUnitName to the new enrollment event in Redux ([#2095](https://github.com/dhis2/capture-app/issues/2095)) ([b004b4c](https://github.com/dhis2/capture-app/commit/b004b4c19f642cf76491e6e30f8f9fa7ad4d4a47))
+
+## [1.53.10](https://github.com/dhis2/capture-app/compare/v1.53.9...v1.53.10) (2021-09-14)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([9aa6978](https://github.com/dhis2/capture-app/commit/9aa697892bfa4849f0356e5016345ca01392c4ef))
+
+## [1.53.9](https://github.com/dhis2/capture-app/compare/v1.53.8...v1.53.9) (2021-09-13)
+
+
+### Bug Fixes
+
+* [DHIS2-11669][DHIS2-11746] save new enrollment event validation & statuses ([#2062](https://github.com/dhis2/capture-app/issues/2062)) ([814bd3c](https://github.com/dhis2/capture-app/commit/814bd3c5a33c70b22747c446e9ebaa1742eda3c1))
+
+## [1.53.8](https://github.com/dhis2/capture-app/compare/v1.53.7...v1.53.8) (2021-09-13)
+
+
+### Bug Fixes
+
+* [DHIS2] Change reducer name in widgets-hook ([c85f0f0](https://github.com/dhis2/capture-app/commit/c85f0f03ec9e400437b5a92e97aed5eb2346f148))
+
+## [1.53.7](https://github.com/dhis2/capture-app/compare/v1.53.6...v1.53.7) (2021-09-13)
+
+
+### Bug Fixes
+
+* [DHIS-11745][TECH-634] Update the enrollments collection when saving new event ([#2083](https://github.com/dhis2/capture-app/issues/2083)) ([cfea20c](https://github.com/dhis2/capture-app/commit/cfea20cb6fb05825a4480c65cf5850c22b059a7a))
+
+## [1.53.6](https://github.com/dhis2/capture-app/compare/v1.53.5...v1.53.6) (2021-09-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e99da58](https://github.com/dhis2/capture-app/commit/e99da58e21dab7349b2bc41b11f76ec9f0185a6e))
+
+## [1.53.5](https://github.com/dhis2/capture-app/compare/v1.53.4...v1.53.5) (2021-09-10)
+
+
+### Bug Fixes
+
+* [DHIS2-11733] fix program stage list for tracker program ([#2080](https://github.com/dhis2/capture-app/issues/2080)) ([90dbff3](https://github.com/dhis2/capture-app/commit/90dbff3c6278209784d1c2e9438f576a77984da4))
+
+## [1.53.4](https://github.com/dhis2/capture-app/compare/v1.53.3...v1.53.4) (2021-09-10)
+
+
+### Bug Fixes
+
+* [DHIS2-11482] disable flaky Cypress test cases ([#2076](https://github.com/dhis2/capture-app/issues/2076)) ([398285e](https://github.com/dhis2/capture-app/commit/398285ef1a3eb28ad66e212f2ced984e4e831e95))
+
+## [1.53.3](https://github.com/dhis2/capture-app/compare/v1.53.2...v1.53.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* Fix sorting error on comment column ([d7acab3](https://github.com/dhis2/capture-app/commit/d7acab3c608435897bd103c79711184dca553bf2))
+
 ## [1.53.2](https://github.com/dhis2/capture-app/compare/v1.53.1...v1.53.2) (2021-09-02)
 
 
