@@ -431,7 +431,7 @@ When('you set the date of admission filter', () => {
                         .type('2018-12-31');
                 });
 
-            cy.contains('Apply')
+            cy.contains('Update')
                 .click();
         });
 });

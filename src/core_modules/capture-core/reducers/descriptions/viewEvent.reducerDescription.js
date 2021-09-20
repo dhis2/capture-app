@@ -13,7 +13,7 @@ import {
 } from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
 import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
 import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
-import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
+import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
 import {
     actionTypes as widgetEventEditActionTypes,
 } from '../../components/WidgetEventEdit/WidgetEventEdit.actions';

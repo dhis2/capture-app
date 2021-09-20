@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import { searchPageActionTypes } from './SearchPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
+import { topBarActionsActionTypes } from '../../TopBarActions';
 import { deriveUrlQueries, urlArguments } from '../../../utils/url';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -17,7 +18,7 @@ export const navigateBackToMainPageEpic = (action$: InputObservable, store: Redu
 
 export const openSearchPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(lockedSelectorActionTypes.SEARCH_PAGE_OPEN),
+        ofType(lockedSelectorActionTypes.SEARCH_PAGE_OPEN, topBarActionsActionTypes.SEARCH_PAGE_OPEN),
         map(() => {
             const { programId, orgUnitId } = deriveUrlQueries(store.value);
             return push(`/search?${urlArguments({ programId, orgUnitId })}`);

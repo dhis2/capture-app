@@ -18,6 +18,7 @@ import {
     startSaveNewEventRelationships,
     newEventSavedAfterReturnedToMainPage,
     newEventSavedAddAnother,
+    newEventReturnToList,
     startSaveTeiForNewEventRelationship,
     actionTypes as newEventDataEntryActionTypes,
 } from '../actions/dataEntry.actions';
@@ -129,6 +130,9 @@ export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable) 
             if (meta.triggerAction === newEventDataEntryActionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER) {
                 return newEventSavedAddAnother(meta.selections);
             }
+            if (meta.triggerAction === newEventDataEntryActionTypes.START_SAVE_NEW_EVENT_AND_RETURN_TO_LIST) {
+                return newEventReturnToList(meta.selections);
+            }
 
             return null;
         }));
@@ -147,6 +151,9 @@ export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable) =
             }
             if (meta.triggerAction === newEventDataEntryActionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER) {
                 return newEventSavedAddAnother(meta.selections);
+            }
+            if (meta.triggerAction === newEventDataEntryActionTypes.START_SAVE_NEW_EVENT_AND_RETURN_TO_LIST) {
+                return newEventReturnToList(meta.selections);
             }
             return null;
         }));

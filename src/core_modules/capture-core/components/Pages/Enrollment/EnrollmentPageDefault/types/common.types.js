@@ -1,17 +1,17 @@
 // @flow
-import type { OrgUnit } from 'capture-core/rules/engine';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import type { Program } from 'capture-core/metaData';
 import { dataElementTypes } from 'capture-core/metaData';
 
 
 type DataValue = {
     dataElement: string,
-    value: string | number
+    value: string,
 }
 
-type Event = {
+export type Event = {|
     dataValues: Array<DataValue>,
-    deleted: boolean,
+    deleted?: boolean,
     dueDate: string,
     enrollment: string,
     enrollmentStatus: string,
@@ -23,8 +23,9 @@ type Event = {
     program: string,
     programStage: string,
     status: string,
-    trackedEntityInstance: string
-}
+    trackedEntityInstance: string,
+    notes?: Array<Object>,
+|};
 
 export type EnrollmentData = {
     created: string,

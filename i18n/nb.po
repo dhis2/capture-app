@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # Caroline Hesthagen Holen <caroline@devotta.no>, 2021
+# Karoline Tufte Lien <karoline@dhis2.org>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
+"POT-Creation-Date: 2021-09-14T23:04:57.863Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <caroline@devotta.no>, 2021\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -173,6 +173,9 @@ msgstr "Tildelt programbruker"
 msgid "Saving to"
 msgstr "Lagrer til"
 
+msgid "for"
+msgstr "for"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -205,6 +208,12 @@ msgid "Save and exit"
 msgstr "Lagre og avslutt"
 
 msgid "Finish"
+msgstr "Fullfør"
+
+msgid "Save without completing"
+msgstr ""
+
+msgid "Complete"
 msgstr "Fullfør"
 
 msgid "No write access"
@@ -259,11 +268,6 @@ msgstr "Du har ikke tilgang til å lage en hendelse i gjeldende valg"
 msgid "Save"
 msgstr "Lagre"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-"Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
-"denne hendelsen."
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr "Lagrer en {{trackedEntityName}}"
 
@@ -308,6 +312,11 @@ msgstr "Registrert person"
 msgid "Link"
 msgstr "Link"
 
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
+"denne hendelsen."
+
 msgid "validation failed"
 msgstr "validering mislyktes"
 
@@ -322,9 +331,6 @@ msgstr "Indikatorer"
 
 msgid "Warnings"
 msgstr "Advarsler"
-
-msgid "Complete"
-msgstr "Fullfør"
 
 msgid "Warnings found"
 msgstr "Advarsler funnet"
@@ -485,8 +491,11 @@ msgstr "Kolonner som skal vises i tabellen"
 msgid "Column"
 msgstr "Kolonne"
 
-msgid "Apply"
-msgstr "Bruk"
+msgid "Update"
+msgstr "Oppdater"
+
+msgid "Reset filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr "{{fromDate}} til {{toDate}}"
@@ -605,6 +614,9 @@ msgstr ""
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr "{{teiDisplayName}} er registrert i flere programmer. Velg et program."
 
@@ -649,98 +661,44 @@ msgstr "Se arbeidsliste i dette programmet."
 msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
+msgid "There was an error loading the page"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
+msgstr "Velg en registreringsenhet for å starte rapportering"
+
+msgid "There are no feedbacks for this event"
+msgstr ""
+
+msgid "There are no indicators for this event"
+msgstr ""
+
+msgid "program stage is invalid"
+msgstr ""
+
+msgid "stage"
+msgstr ""
+
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} Edit Event"
 msgstr ""
 
-msgid "We could not find the stage in the program"
+msgid "The enrollment event data could not be found"
 msgstr ""
 
-msgid "Delete event"
-msgstr "Slett hendelse"
-
-msgid "Download as JSON"
-msgstr "Last ned i JSON format"
-
-msgid "Download as XML"
-msgstr "Last ned i XML format"
-
-msgid "Download as CSV"
-msgstr "Last ned i CSV format"
-
-msgid "Download with current filters"
-msgstr "Last ned med gjeldende filtre"
-
-msgid "Download data..."
-msgstr "Last ned data..."
-
-msgid "Working list could not be loaded"
-msgstr "Arbeidslisten kunne ikke lastes inn"
-
-msgid "an error occurred loading working lists"
-msgstr "en feil oppstod ved lasting av arbeidslister"
+msgid "There are no feedback for this event"
+msgstr ""
 
 msgid "Registered events"
 msgstr "Registrerte hendelser"
 
-msgid "Enrollment status"
-msgstr "Registreringsstatus"
+msgid "Or see all records accessible to you in {{program}} "
+msgstr ""
 
-msgid "Cancelled"
-msgstr "Kansellert"
-
-msgid "Assigned to"
-msgstr "Tildelt til"
-
-msgid "Registering unit"
-msgstr "Registreringsenhet"
-
-msgid "Registration Date"
-msgstr "Innregistreringsdato"
-
-msgid "Inactive"
-msgstr "Inaktiv"
-
-msgid "Working list could not be updated"
-msgstr "Arbeidslisten kunne ikke oppdateres"
-
-msgid "Update view"
-msgstr "Oppdater visning"
-
-msgid "Save current view..."
-msgstr "Lagre gjeldende visning..."
-
-msgid "Save current view as..."
-msgstr "Lagre gjeldende visning som..."
-
-msgid "Delete view"
-msgstr "Slett visning"
-
-msgid "Share view..."
-msgstr "Del visning ..."
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr "Vil du virkelig slette visningen '{{templateName}}'?"
-
-msgid "Confirm"
-msgstr "Bekreft"
-
-msgid "Save As view"
-msgstr "Lagre som visning"
-
-msgid "View name"
-msgstr "Vis navn"
-
-msgid "Show Less"
-msgstr "Vis mindre"
-
-msgid "Show All"
-msgstr "Vis alle"
-
-msgid "Choose a registering unit to start reporting"
-msgstr "Velg en registreringsenhet for å starte rapportering"
+msgid "Or see all events accessible to you in {{program}}"
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Velg {{missingCategories}} for å starte rapportering"
@@ -948,6 +906,9 @@ msgstr "For å jobbe med det valgte programmet,"
 msgid "open the Tracker Capture app"
 msgstr "åpne Tracker Capture app"
 
+msgid "Save comment"
+msgstr "Lagre kommentar"
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -1004,11 +965,41 @@ msgstr ""
 msgid "Last updated {{date}}"
 msgstr ""
 
+msgid "Cancelled"
+msgstr "Kansellert"
+
+msgid "Comments about this enrollment"
+msgstr ""
+
+msgid "Write a comment about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any comments"
+msgstr ""
+
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr ""
+
+msgid "program or stage is invalid"
+msgstr ""
+
 msgid "Error"
 msgstr "Feil"
 
 msgid "Warning"
 msgstr "Advarsel"
+
+msgid "Comments about this event"
+msgstr ""
+
+msgid "Write a comment about this event"
+msgstr ""
+
+msgid "This event doesn't have any comments"
+msgstr ""
+
+msgid "Back to all stages and events"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
@@ -1016,11 +1007,131 @@ msgstr ""
 msgid "Person Profile"
 msgstr "Personprofil"
 
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset list"
+msgstr ""
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr ""
+
+msgid "Report date"
+msgstr "Rapporteringsdato"
+
+msgid "Registering unit"
+msgstr "Registreringsenhet"
+
+msgid "Due date"
+msgstr "Forfallsdato"
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
 msgid "Stages and Events"
 msgstr "Faser og hendelser"
 
+msgid "Delete event"
+msgstr "Slett hendelse"
+
+msgid "Download as JSON"
+msgstr "Last ned i JSON format"
+
+msgid "Download as XML"
+msgstr "Last ned i XML format"
+
+msgid "Download as CSV"
+msgstr "Last ned i CSV format"
+
+msgid "Download with current filters"
+msgstr "Last ned med gjeldende filtre"
+
+msgid "Download data..."
+msgstr "Last ned data..."
+
+msgid "Working list could not be loaded"
+msgstr "Arbeidslisten kunne ikke lastes inn"
+
+msgid "an error occurred loading working lists"
+msgstr "en feil oppstod ved lasting av arbeidslister"
+
+msgid "Enrollment status"
+msgstr "Registreringsstatus"
+
+msgid "Assigned to"
+msgstr "Tildelt til"
+
+msgid "Registration Date"
+msgstr "Innregistreringsdato"
+
+msgid "Inactive"
+msgstr "Inaktiv"
+
+msgid "Working list could not be updated"
+msgstr "Arbeidslisten kunne ikke oppdateres"
+
+msgid "Update view"
+msgstr "Oppdater visning"
+
+msgid "Save current view..."
+msgstr "Lagre gjeldende visning..."
+
+msgid "Save current view as..."
+msgstr "Lagre gjeldende visning som..."
+
+msgid "Delete view"
+msgstr "Slett visning"
+
+msgid "Share view..."
+msgstr "Del visning ..."
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr "Vil du virkelig slette visningen '{{templateName}}'?"
+
+msgid "Confirm"
+msgstr "Bekreft"
+
+msgid "Save As view"
+msgstr "Lagre som visning"
+
+msgid "View name"
+msgstr "Vis navn"
+
+msgid "Show Less"
+msgstr "Vis mindre"
+
+msgid "Show All"
+msgstr "Vis alle"
+
 msgid "An error has occured. See log for details"
 msgstr "Det har oppstått en feil. Se logg for detaljer"
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Planlagt"
+
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Overdue"
+msgstr "Forfalt"
+
+msgid "Skipped"
+msgstr "Hoppet over"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr "{{trackedEntityName}} i program{{escape}} {{programName}}"
@@ -1060,6 +1171,9 @@ msgstr "Feil ved lagring av sporet enhetsforekomst"
 
 msgid "Error saving enrollment"
 msgstr "Feil ved lagring av registrering"
+
+msgid "Error saving the enrollment event"
+msgstr ""
 
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"

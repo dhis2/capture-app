@@ -139,7 +139,7 @@ Feature: User uses the LockedSelector to navigate
   Scenario Outline: Enrollment page > Landing on the page with url
     Given you land on the enrollment page by having typed the <url>
     Then you see the following <message>
-    And you can see on the locked selector the following <state>
+    And you can see on the scope selector the following <state>
 
     Examples:
         | url | state | message |
@@ -156,34 +156,96 @@ Feature: User uses the LockedSelector to navigate
       | /#/enrollment?programId=qDkgAbB5Jlk&teiId=fhFQhO0xILJ                                                 | teiAndMalariaProgram | Carlos Cruz is a person and cannot be enrolled in the Malaria case diagnosis, treatment and investigation. Choose another program that allows person enrollment. Enroll a new malaria entity in this program.|
       | /#/enrollment?programId=lxAQ7Zs9VYR&teiId=fhFQhO0xILJ                                                 | teiAndEventProgram   | Antenatal care visit is an event program and does not have enrollments. |
 
-  # Scenario: Enrollment page > resetting the tei
-  #  Given you land on the enrollment page by having typed only the enrollmentId on the url
-  #  When you reset the tei selection
-  #  And you navigated to the main page
+  Scenario: Enrollment page > resetting the tei
+   Given you land on the enrollment page by having typed only the enrollmentId on the url
+   When you reset the tei selection
+   And you navigated to the main page
 
-  # Scenario: Enrollment page > resetting the program
-  #  Given you land on the enrollment page by having typed only the enrollmentId on the url
-  #  When you wait to reset the program selection
-  #  And you see message explaining you need to select a program
+  Scenario: Enrollment page > resetting the program
+   Given you land on the enrollment page by having typed only the enrollmentId on the url
+   When you reset the program selection
+   And you see message explaining you need to select a program
 
-  # Scenario: Enrollment page > resetting the org unit
-  #  Given you land on the enrollment page by having typed only the enrollmentId on the url
-  #  When you reset the org unit selection
-  #  And you see the enrollment page but there is no org unit id in the url
+  Scenario: Enrollment page > resetting the org unit
+   Given you land on the enrollment page by having typed only the enrollmentId on the url
+   When you reset the org unit selection
+   And you see the enrollment page but there is no org unit id in the url
 
-  # Scenario: Enrollment page > resetting the enrollment
-  #  Given you land on the enrollment page by having typed only the enrollmentId on the url
-  #  When you wait to reset the enrollment selection
-  #  And you see message explaining you need to select an enrollment
+  Scenario: Enrollment page > resetting the enrollment
+   Given you land on the enrollment page by having typed only the enrollmentId on the url
+   When you reset the enrollment selection
+   And you see message explaining you need to select an enrollment
 
-  # Scenario: Enrollment page > navigating using the locked selector
-  #  Given you land on the enrollment page by having typed only the enrollmentId on the url
-  #  When you reset the program selection
-  #  And you select the MNCH PNC program
-  #  Then you see message explaining there are no enrollments for this program
-  #  When you reset the program selection
-  #  And you select the Antenatal care visit
-  #  Then you see message explaining this is an Event program
-  #  When you reset the program selection
-  #  And you select the Child Programme
-  #  And you see the enrollment page
+  Scenario: Enrollment page > navigating using the scope selector
+   Given you land on the enrollment page by having typed only the enrollmentId on the url
+   When you reset the program selection
+   And you select the MNCH PNC program
+   Then you see message explaining there are no enrollments for this program
+   When you reset the program selection
+   And you select the Antenatal care visit
+   Then you see message explaining this is an Event program
+   When you reset the program selection
+   And you select the Child Programme
+   And you see the enrollment page
+
+  #Enrollment event edit page
+  Scenario: Enrollment event edit page > resetting the tei
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=pybd813kIWx&enrollmentId=FS085BEkJo2&eventId=kNn9HkRjk1c&stageId=A03MvHHogjR
+    When you reset the tei selection
+    Then you navigated to the main page
+
+  Scenario: Enrollment event edit page > resetting the program
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    When you reset the program selection
+    Then you see message explaining you need to select a program
+
+  Scenario: Enrollment event edit page > resetting the org unit
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    When you reset the org unit selection
+    Then you see the enrollment event Edit page but there is no org unit id in the url
+
+  Scenario: Enrollment event edit page > resetting the enrollment
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    When you reset the enrollment selection
+    Then you see message explaining you need to select an enrollment
+
+  Scenario: Enrollment event edit page > resetting the event
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    When you reset the stage selection
+    Then you see the enrollment page
+
+  Scenario: Enrollment event edit page > resetting the stage
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    When you reset the event selection
+    Then you see the enrollment page
+
+  # Enrollment event new page
+  Scenario: Enrollment event new page > resetting the tei
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=pybd813kIWx&enrollmentId=FS085BEkJo2&stageId=A03MvHHogjR
+    When you reset the tei selection
+    Then you navigated to the main page
+
+  Scenario: Enrollment event new page > resetting the program
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
+    When you reset the program selection
+    Then you see message explaining you need to select a program
+
+  Scenario: Enrollment event new page > resetting the org unit
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
+    When you reset the org unit selection
+    Then you see the enrollment event New page but there is no org unit id in the url
+
+  Scenario: Enrollment event new page > resetting the enrollment
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
+    When you reset the enrollment selection
+    Then you see message explaining you need to select an enrollment
+
+  Scenario: Enrollment event new page > resetting the event
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
+    When you reset the stage selection
+    Then you see the enrollment page
+
+  Scenario: Enrollment event new page > resetting the stage
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
+    When you reset the event selection
+    Then you see the enrollment page

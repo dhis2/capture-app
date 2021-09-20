@@ -21,10 +21,11 @@ import {
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
-import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
-import { workingListsCommonActionTypes } from '../../components/Pages/MainPage/WorkingListsCommon';
+import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
+import { workingListsCommonActionTypes } from '../../components/WorkingLists/WorkingListsCommon';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
+import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?Node) {
     const newState = [...state];
@@ -126,5 +127,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, i18n.t('Error saving tracked entity instance')),
     [registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Error saving enrollment')),
+    [enrollmentSiteActionTypes.SAVE_FAILED]: state =>
+        addErrorFeedback(state, i18n.t('Error saving the enrollment event')),
 }, 'feedbacks', []);
 

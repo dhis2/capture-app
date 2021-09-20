@@ -18,6 +18,8 @@ const getStyles = (theme: Theme) => ({
 type Props = {
     onUpdate: (data: ?Object, commitValue?: any) => void,
     onClose: () => void,
+    disabledReset: boolean,
+    disabledUpdate: boolean,
     classes: {
         buttonsContainer: string,
         firstButtonContainer: string,
@@ -66,7 +68,7 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            const { onUpdate, onClose, classes, ...passOnProps } = this.props; //eslint-disable-line
+            const { onUpdate, onClose, classes, disabledUpdate, disabledReset, ...passOnProps } = this.props;
 
             return (
                 <React.Fragment>
@@ -89,8 +91,9 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
                                 muiButtonRef={this.setUpdateButtonInstance}
                                 primary
                                 onClick={this.handleUpdateClick}
+                                disabled={disabledUpdate}
                             >
-                                {i18n.t('Apply')}
+                                {i18n.t('Update')}
                             </Button>
                         </div>
                         <Button
@@ -98,8 +101,9 @@ export const withButtons = () => (InnerComponent: React.ComponentType<any>) =>
                             muiButtonRef={this.setCloseButtonInstance}
                             secondary
                             onClick={onClose}
+                            disabled={disabledReset}
                         >
-                            {i18n.t('Cancel')}
+                            {i18n.t('Reset filter')}
                         </Button>
                     </div>
                 </React.Fragment>

@@ -27,7 +27,7 @@ import {
     initializeNewRelationship,
 } from '../../NewRelationship/newRelationship.actions';
 import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
-import { eventWorkingListsActionTypes } from '../../../Pages/MainPage/EventWorkingLists';
+import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -141,6 +141,10 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
             const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
+            const showaccessible = state.currentSelections.showaccessible;
+            if (showaccessible && !orgUnitId) {
+                return push(`/?programId=${programId}&all`);
+            }
             return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
         }));
 

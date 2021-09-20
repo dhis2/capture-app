@@ -16,13 +16,13 @@ import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { EventProgram, TrackerProgram } from '../../../metaData/Program';
 import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
+import type { Event } from '../../Pages/Enrollment/EnrollmentPageDefault/types/common.types';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',
     UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForEditSingleEventActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForEditSingleEventActionsBatch',
-    ADD_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH: 'AddNoteForEditSingleEventBatch',
-    REMOVE_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH: 'RemoveNoteForEditSingleEventBatch',
 };
 
 export const actionTypes = {
@@ -36,10 +36,6 @@ export const actionTypes = {
     START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE: 'CancelUpdateForSingleEventReturnToMainPage',
     NO_WORKING_LIST_UPDATE_NEEDED_AFTER_CANCEL_UPDATE: 'NoWorkingListUpdateNeededAfterEventUpdateCancelled',
     UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE: 'UpdateWorkingListAfterEventUpdateCancelled',
-    REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT: 'RequestAddNoteForEditSingleEvent',
-    START_ADD_NOTE_FOR_EDIT_SINGLE_EVENT: 'StartAddNoteForEditSingleEvent',
-    NOTE_ADDED_FOR_EDIT_SINGLE_EVENT: 'NoteAddedForEditSingleEvent',
-    ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT: 'AddNoteFailedForEditSingleEvent',
 };
 
 export const editEventIds = {
@@ -83,6 +79,7 @@ export const openEventForEditInDataEntry = (
     orgUnit: Object,
     foundation: RenderFoundation,
     program: Program | EventProgram | TrackerProgram,
+    allEvents?: ?Array<Event>,
 ) => {
     const dataEntryId = editEventIds.dataEntryId;
     const itemId = editEventIds.itemId;
@@ -121,6 +118,9 @@ export const openEventForEditInDataEntry = (
         );
     const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
     const stage = program instanceof TrackerProgram ? getStageFromEvent(eventContainer.event)?.stage : undefined;
+    const allEventsData = program instanceof EventProgram || !allEvents
+        ? [eventDataForRulesEngine]
+        : [...prepareEnrollmentEventsForRulesEngine(allEvents, eventDataForRulesEngine)];
 
     return [
         ...dataEntryActions,
@@ -130,7 +130,7 @@ export const openEventForEditInDataEntry = (
             key,
             orgUnit,
             eventDataForRulesEngine,
-            [eventDataForRulesEngine],
+            allEventsData,
             stage,
         ),
         actionCreator(actionTypes.OPEN_EVENT_FOR_EDIT_IN_DATA_ENTRY)(),
@@ -175,18 +175,3 @@ export const startAsyncUpdateFieldForEditEvent = (
 ) =>
     actionPayloadAppender(innerAction)({ onSuccess, onError });
 
-export const requestAddNoteForEditSingleEvent = (itemId: string, dataEntryId: string, note: string) =>
-    actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT)({ itemId, dataEntryId, note });
-
-export const startAddNoteForEditSingleEvent = (eventId: string, serverData: Object, selections: Object, context: Object) =>
-    actionCreator(actionTypes.START_ADD_NOTE_FOR_EDIT_SINGLE_EVENT)({ selections, context }, {
-        offline: {
-            effect: {
-                url: `events/${eventId}/note`,
-                method: effectMethods.POST,
-                data: serverData,
-            },
-            commit: { type: actionTypes.NOTE_ADDED_FOR_EDIT_SINGLE_EVENT, meta: { selections, context } },
-            rollback: { type: actionTypes.ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT, meta: { selections, context } },
-        },
-    });

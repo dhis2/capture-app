@@ -4,9 +4,11 @@ import type { Updaters } from '../../trackerRedux/trackerReducer';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
 } from '../../components/DataEntries/SingleEventRegistrationEntry';
-import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
-import { actionTypes as editEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
-import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
+import { actionTypes as editEventActionTypes }
+    from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
+import { actionTypes as viewEventActionTypes }
+    from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
@@ -17,8 +19,10 @@ import {
 import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
+import { topBarActionsActionTypes } from '../../components/TopBarActions';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -61,6 +65,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [enrollmentPageActionTypes.PAGE_OPEN]: (state) => {
+        const newState = { ...state };
+        newState.page = null;
         return newState;
     },
     [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: (state) => {
@@ -127,6 +136,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         page: 'new',
         locationSwitchInProgress: true,
     }),
+    [topBarActionsActionTypes.NEW_REGISTRATION_PAGE_OPEN]: state => ({
+        ...state,
+        page: 'new',
+        locationSwitchInProgress: true,
+    }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
         locationSwitchInProgress: true,
@@ -149,6 +163,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         locationSwitchInProgress: true,
     }),
     [lockedSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
+        ...state,
+        page: 'search',
+        locationSwitchInProgress: true,
+    }),
+    [topBarActionsActionTypes.SEARCH_PAGE_OPEN]: state => ({
         ...state,
         page: 'search',
         locationSwitchInProgress: true,

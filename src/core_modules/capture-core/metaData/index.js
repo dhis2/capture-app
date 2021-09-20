@@ -22,22 +22,23 @@ export { SearchGroup } from './SearchGroup';
 export { InputSearchGroup } from './InputSearchGroup';
 export { TrackedEntityType, TeiRegistration } from './TrackedEntityType';
 export { SystemSettings } from './SystemSettings';
-
 // helpers
 export {
     getScopeFromScopeId,
     getProgramAndStageFromEvent,
     getStageFromEvent,
-    getProgramAndStageForEventProgram,
+    getProgramAndStageForProgram,
     getStageForEventProgram,
     getProgramFromProgramIdThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
     convertDataElementsValues,
     getEventProgramThrowIfNotFound,
-    getEventProgramEventAccess,
+    getProgramEventAccess,
     getScopeInfo,
     programTypes,
     scopeTypes,
     getProgramThrowIfNotFound,
+    getProgramAndStageForEventProgram,
+    getEventProgramEventAccess,
 } from './helpers';

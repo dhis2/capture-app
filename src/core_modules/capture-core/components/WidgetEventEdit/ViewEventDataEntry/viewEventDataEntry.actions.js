@@ -11,6 +11,8 @@ import { convertClientToForm } from '../../../converters';
 import type { ClientEventContainer } from '../../../events/eventRequests';
 import { TrackerProgram } from '../../../metaData/Program';
 import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import type { Event } from '../../Pages/Enrollment/EnrollmentPageDefault/types/common.types';
 
 export const actionTypes = {
     VIEW_EVENT_DATA_ENTRY_LOADED: 'ViewEventDataEntryLoadedForViewSingleEvent',
@@ -22,7 +24,7 @@ function getAssignee(clientAssignee: ?Object) {
 }
 
 export const loadViewEventDataEntry =
-    async (eventContainer: ClientEventContainer, orgUnit: Object, foundation: RenderFoundation, program: Program) => {
+    async (eventContainer: ClientEventContainer, orgUnit: Object, foundation: RenderFoundation, program: Program, allEvents?: ?Array<Event>) => {
         const dataEntryId = viewEventIds.dataEntryId;
         const itemId = viewEventIds.itemId;
         const dataEntryPropsToInclude = [
@@ -61,6 +63,9 @@ export const loadViewEventDataEntry =
         // $FlowFixMe[cannot-spread-indexer] automated comment
         const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
         const stage = program instanceof TrackerProgram ? getStageFromEvent(eventContainer.event)?.stage : undefined;
+        const allEventsData = program instanceof TrackerProgram && allEvents
+            ? [...prepareEnrollmentEventsForRulesEngine(allEvents, eventDataForRulesEngine)]
+            : [eventDataForRulesEngine];
 
         return [
             ...dataEntryActions,
@@ -70,7 +75,7 @@ export const loadViewEventDataEntry =
                 key,
                 orgUnit,
                 eventDataForRulesEngine,
-                [eventDataForRulesEngine],
+                allEventsData,
                 stage,
             ),
             actionCreator(actionTypes.VIEW_EVENT_DATA_ENTRY_LOADED)({

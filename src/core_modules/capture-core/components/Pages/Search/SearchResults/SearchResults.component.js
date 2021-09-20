@@ -4,16 +4,18 @@ import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Pagination } from 'capture-ui';
 import { Button, colors } from '@dhis2/ui';
-import { useLocation } from 'react-router';
+import { useDispatch } from 'react-redux';
 import { CardList } from '../../../CardList';
 import { withNavigation } from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.constants';
 import type { Props } from './SearchResults.types';
-import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
 import { availableCardListButtonState, enrollmentTypes } from '../../../CardList/CardList.constants';
 import { SearchResultsHeader } from '../../../SearchResultsHeader';
 import { ResultsPageSizeContext } from '../../shared-contexts';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
+import {
+    navigateToEnrollmentOverview,
+} from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -43,7 +45,6 @@ const buttonStyles = (theme: Theme) => ({
 const CardListButtons = withStyles(buttonStyles)(
     ({
         currentSearchScopeId,
-        currentSearchScopeType,
         id,
         orgUnitId,
         enrollmentType,
@@ -62,18 +63,20 @@ const CardListButtons = withStyles(buttonStyles)(
                   return availableCardListButtonState.DONT_SHOW_BUTTON;
               }
           };
+        const dispatch = useDispatch();
 
         const navigationButtonsState = deriveNavigationButtonState(enrollmentType);
-
-        const scopeSearchParam = `${currentSearchScopeType.toLowerCase()}=${currentSearchScopeId}`;
-        const { pathname, search } = useLocation();
 
         return (
             <>
                 <Button
                     small
                     dataTest="view-dashboard-button"
-                    onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
+                    onClick={() => dispatch(navigateToEnrollmentOverview({
+                        teiId: id,
+                        programId: currentSearchScopeId,
+                        orgUnitId,
+                    }))}
                 >
                     {i18n.t('View dashboard')}
                 </Button>
@@ -83,7 +86,11 @@ const CardListButtons = withStyles(buttonStyles)(
                         small
                         className={classes.buttonMargin}
                         dataTest="view-active-enrollment-button"
-                        onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
+                        onClick={() => dispatch(navigateToEnrollmentOverview({
+                            teiId: id,
+                            programId: currentSearchScopeId,
+                            orgUnitId,
+                        }))}
                     >
                         {i18n.t('View active enrollment')}
                     </Button>
@@ -94,7 +101,11 @@ const CardListButtons = withStyles(buttonStyles)(
                         small
                         className={classes.buttonMargin}
                         dataTest="re-enrollment-button"
-                        onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam, `${pathname}${search}`)}
+                        onClick={() => dispatch(navigateToEnrollmentOverview({
+                            teiId: id,
+                            programId: currentSearchScopeId,
+                            orgUnitId,
+                        }))}
                     >
                         {i18n.t('Re-enroll')} {programName && `${i18n.t('in')} ${programName}`}
                     </Button>

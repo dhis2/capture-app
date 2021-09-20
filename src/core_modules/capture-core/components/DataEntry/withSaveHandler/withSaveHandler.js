@@ -14,6 +14,7 @@ import { getDataEntryKey } from '../common/getDataEntryKey';
 import { type RenderFoundation } from '../../../metaData';
 import { MessagesDialogContents } from './MessagesDialogContents';
 import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
+import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 
 type Props = {
     classes: Object,
@@ -184,18 +185,17 @@ const getSaveHandler = (
         }
 
         handleSaveDialog = () => {
-            this.handleSave(this.state.saveType);
+            this.handleSave(addEventSaveTypes.SAVE_WITHOUT_COMPLETING);
             this.setState({ messagesDialogOpen: false });
         }
 
         handleSave = (saveType?: ?string) => {
-            const { onSave, itemId, id, calculatedFoundation } = this.props;
-            onSave(
-                itemId,
-                id,
-                calculatedFoundation,
-                saveType,
-            );
+            const { onSave, itemId, id, calculatedFoundation, warnings, errors } = this.props;
+            if (saveType === addEventSaveTypes.COMPLETE && ((errors && errors.length > 0) || (warnings && warnings.length > 0))) {
+                this.showMessagesPopup(saveType);
+            } else {
+                onSave(itemId, id, calculatedFoundation, saveType);
+            }
         }
 
         getDialogWaitForUploadContents = () => (

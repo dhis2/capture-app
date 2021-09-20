@@ -1,8 +1,15 @@
 // @flow
-import type { ProgramStage } from '../../../../metaData';
+import type { Stage, StageCommonProps } from '../../types/common.types';
 
-export type Props = {|
-    stage: ProgramStage,
+type ExtractedProps = {|
+    stage: Stage,
+    events: Array<ApiEnrollmentEvent>,
     className?: string,
+    onEventClick: (eventId: string, stageId: string) => void,
     ...CssClasses,
 |};
+
+export type Props = {|
+    ...ExtractedProps,
+    ...StageCommonProps
+|}

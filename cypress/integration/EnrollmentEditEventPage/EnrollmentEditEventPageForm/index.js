@@ -1,18 +1,16 @@
+import '../../sharedSteps';
+
 beforeEach(() => cy.loginThroughForm());
 
 Given(/^the user lands on the enrollment event page by having typed (.*)$/, url =>
     cy.visit(url),
 );
 
-Then(/^the user ?(.*) see the following text: (.*)$/, (not, message) =>
-    cy.contains(message).should(not ? 'not.exist' : 'exist'),
-);
-
 When(/^the user clicks on the edit button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(0)
+        .eq(1)
         .click(),
 );
 
@@ -20,7 +18,7 @@ When(/^the user clicks on the save button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(2)
+        .eq(3)
         .click(),
 );
 
@@ -28,7 +26,7 @@ When(/^the user clicks on the cancel button/, () =>
     cy
         .get('[data-test="widget-enrollment-event"]')
         .find('[data-test="dhis2-uicore-button"]')
-        .eq(2)
+        .eq(3)
         .click(),
 );
 

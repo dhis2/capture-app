@@ -15,6 +15,8 @@ import { scopeTypes } from '../../../metaData/helpers/constants';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
+import { getScopeInfo } from '../../../metaData';
+import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
@@ -77,14 +79,23 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     useComponentLifecycle();
 
     const dispatch = useDispatch();
-    const selectedTeiId: string =
-      useSelector(({ router: { location: { query } } }) => query.teiId);
+    const { programId, orgUnitId, enrollmentId } = useSelector(
+        ({ router: { location: { query } } }) => ({
+            teiId: query.teiId,
+            programId: query.programId,
+            orgUnitId: query.orgUnitId,
+            enrollmentId: query.enrollmentId,
+        }),
+        shallowEqual,
+    );
+    const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
+    const { trackedEntityName } = getScopeInfo(tetId);
+    const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
 
     useEffect(() => {
         dispatch(fetchEnrollmentPageInformation());
     },
     [
-        selectedTeiId,
         dispatch,
     ]);
 
@@ -94,6 +105,12 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     return (
         <EnrollmentPageComponent
             error={error}
+            programId={programId}
+            orgUnitId={orgUnitId}
+            enrollmentId={enrollmentId}
+            teiDisplayName={teiDisplayName}
+            trackedEntityName={trackedEntityName}
+            enrollmentsAsOptions={enrollmentsAsOptions}
             enrollmentPageStatus={useComputedEnrollmentPageStatus()}
         />
     );

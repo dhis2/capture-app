@@ -1,15 +1,17 @@
 // @flow
 import { ofType } from 'redux-observable';
 import { flatMap, map } from 'rxjs/operators';
-import { empty } from 'rxjs';
+import { of } from 'rxjs';
 import moment from 'moment';
 import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,
     saveNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
-import { navigateToTrackedEntityDashboard } from '../../../../utils/navigateToTrackedEntityDashboard';
-import { getTrackerProgramThrowIfNotFound, scopeTypes } from '../../../../metaData';
+import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
+import {
+    navigateToEnrollmentOverview,
+} from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 
 
 const geometryType = (key) => {
@@ -109,17 +111,13 @@ export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputO
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_COMPLETED),
         flatMap(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
             const {
-                currentSelections: { orgUnitId, trackedEntityTypeId },
-                router: { location: { pathname, search } },
+                currentSelections: { orgUnitId },
             } = store.value;
 
-            navigateToTrackedEntityDashboard(
-                reference,
+            return of(navigateToEnrollmentOverview({
+                teiId: reference,
                 orgUnitId,
-                `${scopeTypes.TRACKED_ENTITY_TYPE.toLowerCase()}=${trackedEntityTypeId}`,
-                `${pathname}${search}`,
-            );
-            return empty();
+            }));
         }),
     );
 
@@ -161,15 +159,12 @@ export const completeSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (a
         flatMap(({ payload: { response: { importSummaries: [{ reference }] } } }) => {
             const {
                 currentSelections: { orgUnitId, programId },
-                router: { location: { pathname, search } },
             } = store.value;
 
-            navigateToTrackedEntityDashboard(
-                reference,
+            return of(navigateToEnrollmentOverview({
+                teiId: reference,
                 orgUnitId,
-                `program=${programId}`,
-                `${pathname}${search}`,
-            );
-            return empty();
+                programId,
+            }));
         }),
     );

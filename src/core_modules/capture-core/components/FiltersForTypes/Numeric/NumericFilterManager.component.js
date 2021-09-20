@@ -6,6 +6,7 @@ import type { NumericFilterData } from './types';
 type Props = {
     filter: ?NumericFilterData,
     filterTypeRef: ?Function,
+    handleCommitValue: () => void,
 };
 
 type State = {
@@ -35,6 +36,7 @@ export class NumericFilterManager extends React.Component<Props, State> {
         this.setState({
             value,
         });
+        this.props.handleCommitValue && this.props.handleCommitValue();
     }
 
     render() {

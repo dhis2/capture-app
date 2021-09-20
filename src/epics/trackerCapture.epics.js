@@ -12,6 +12,9 @@ import {
     saveNewEventLocationChangeEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
+    saveNewEventStageEpic,
+    saveNewEventStageFailedEpic,
+    saveNewEventInStageLocationChangeEpic,
     addNoteForNewSingleEventEpic,
     openRelationshipForNewSingleEventEpic,
     addRelationshipForNewSingleEventEpic,
@@ -20,6 +23,9 @@ import {
     teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry';
 import {
+    navigateToEnrollmentOverviewEpic,
+} from 'capture-core/actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.epics';
+import {
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
@@ -27,7 +33,12 @@ import {
     updateTemplateEpic,
     addTemplateEpic,
     deleteTemplateEpic,
-} from 'capture-core/components/Pages/MainPage/EventWorkingLists';
+} from 'capture-core/components/WorkingLists/EventWorkingLists';
+
+import {
+    fetchDataStoreEpic,
+    fetchUserDataStoreEpic,
+} from 'capture-core/components/DataStore/DataStore.epics';
 
 import {
     getEventFromUrlEpic,
@@ -42,6 +53,7 @@ import {
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
+    saveEditedEventSucceededEpic,
 } from 'capture-core/components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.epics';
 
 import {
@@ -66,9 +78,9 @@ import {
     cancelEditEventLocationChangeEpic,
 } from 'capture-core/components/WidgetEventEdit/DataEntry/epics/cancelEditSingleEvent.epics';
 import {
-    addNoteForEditSingleEventEpic,
-    removeNoteForEditSingleEventEpic,
-} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/addNoteForEditSingleEvent.epics';
+    addNoteForEventEpic,
+    removeNoteForEventEpic,
+} from 'capture-core/components/WidgetEventComment/WidgetEventComment.epics';
 import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';
@@ -90,7 +102,7 @@ import {
 } from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
-} from 'capture-core/components/Pages/MainPage/WorkingListsCommon';
+} from 'capture-core/components/WorkingLists/WorkingListsCommon';
 import {
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,
@@ -129,6 +141,7 @@ import {
     saveNoteForViewEventFailedEpic,
 } from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
 
+import { addNoteForEnrollmentEpic } from 'capture-core/components/WidgetEnrollmentComment/WidgetEnrollmentComment.epics';
 import {
     openNewRelationshipRegisterTeiEpic,
     loadSearchGroupDuplicatesForReviewEpic,
@@ -160,6 +173,7 @@ import {
     setEnrollmentSelectionEpic,
     resetEnrollmentSelectionEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
+
 import {
     setTrackedEntityTypeIdOnUrlEpic,
 } from '../core_modules/capture-core/components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.epics';
@@ -176,7 +190,7 @@ import {
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
-import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/Pages/MainPage/TeiWorkingLists';
+import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
 import {
     startNewEnrollmentDataEntrySelfInitialisationEpic,
 } from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';
@@ -197,6 +211,14 @@ import {
     startFetchingTeiFromTeiIdEpic,
     openEnrollmentPageEpic,
 } from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
+import {
+    runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
+    runRulesOnUpdateFieldForNewEnrollmentEventEpic,
+    saveNewEnrollmentEventEpic,
+    saveNewEventSucceededEpic,
+    saveNewEventFailedEpic,
+    addNoteForNewEnrollmentEventEpic,
+} from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -204,6 +226,8 @@ export const epics = combineEpics(
     calculateSelectionsCompletenessEpic,
     triggerLoadCoreEpic,
     loadCoreEpic,
+    fetchDataStoreEpic,
+    fetchUserDataStoreEpic,
     loadAppEpic,
     loadCoreFailedEpic,
     initEventListEpic,
@@ -233,9 +257,9 @@ export const epics = combineEpics(
     saveEditEventEpic,
     cancelEditEventLocationChangeEpic,
     cancelEditEventEpic,
-    addNoteForEditSingleEventEpic,
+    addNoteForEventEpic,
     addNoteForNewSingleEventEpic,
-    removeNoteForEditSingleEventEpic,
+    removeNoteForEventEpic,
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
     goingOnlineEpic,
@@ -280,6 +304,7 @@ export const epics = combineEpics(
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
+    saveEditedEventSucceededEpic,
     openNewRelationshipRegisterTeiEpic,
     loadSearchGroupDuplicatesForReviewEpic,
     teiForNewEventRelationshipSavedEpic,
@@ -318,4 +343,15 @@ export const epics = combineEpics(
     resetEnrollmentSelectionEpic,
     openEnrollmentPageEpic,
     checkForDuplicateEpic,
+    saveNewEventStageEpic,
+    saveNewEventStageFailedEpic,
+    saveNewEventInStageLocationChangeEpic,
+    runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
+    runRulesOnUpdateFieldForNewEnrollmentEventEpic,
+    saveNewEnrollmentEventEpic,
+    saveNewEventSucceededEpic,
+    saveNewEventFailedEpic,
+    addNoteForNewEnrollmentEventEpic,
+    addNoteForEnrollmentEpic,
+    navigateToEnrollmentOverviewEpic,
 );

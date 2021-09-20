@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-07-06T09:57:52.624Z\n"
+"POT-Creation-Date: 2021-09-14T23:04:57.863Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Persian (Afghanistan) (https://www.transifex.com/hisp-uio/teams/100509/fa_AF/)\n"
@@ -165,6 +165,9 @@ msgstr ""
 msgid "Saving to"
 msgstr ""
 
+msgid "for"
+msgstr "برای"
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -195,6 +198,12 @@ msgstr ""
 
 msgid "Finish"
 msgstr ""
+
+msgid "Save without completing"
+msgstr ""
+
+msgid "Complete"
+msgstr "تکمیل"
 
 msgid "No write access"
 msgstr ""
@@ -246,9 +255,6 @@ msgstr ""
 msgid "Save"
 msgstr "ذخیره"
 
-msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
-
 msgid "Saving a {{trackedEntityName}}"
 msgstr ""
 
@@ -289,6 +295,9 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
 msgid "validation failed"
 msgstr ""
 
@@ -303,9 +312,6 @@ msgstr "شاخص ها"
 
 msgid "Warnings"
 msgstr ""
-
-msgid "Complete"
-msgstr "تکمیل"
 
 msgid "Warnings found"
 msgstr ""
@@ -466,8 +472,11 @@ msgstr ""
 msgid "Column"
 msgstr "ستون"
 
-msgid "Apply"
-msgstr "درخواست"
+msgid "Update"
+msgstr "تجدید"
+
+msgid "Reset filter"
+msgstr ""
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -584,6 +593,9 @@ msgstr ""
 msgid "No feedback for this enrollment yet"
 msgstr ""
 
+msgid "Program stage not found"
+msgstr ""
+
 msgid "{{teiDisplayName}} is enrolled in multiple programs. Choose a program."
 msgstr ""
 
@@ -622,97 +634,43 @@ msgstr ""
 msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
+msgid "There was an error loading the page"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
+msgstr ""
+
+msgid "There are no feedbacks for this event"
+msgstr ""
+
+msgid "There are no indicators for this event"
+msgstr ""
+
+msgid "program stage is invalid"
+msgstr ""
+
+msgid "stage"
+msgstr ""
+
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} Edit Event"
 msgstr ""
 
-msgid "We could not find the stage in the program"
+msgid "The enrollment event data could not be found"
 msgstr ""
 
-msgid "Delete event"
-msgstr ""
-
-msgid "Download as JSON"
-msgstr "داونلود به فارمت JSON"
-
-msgid "Download as XML"
-msgstr "داونلود به فارمت XML"
-
-msgid "Download as CSV"
-msgstr "داونلود به فارمت سی اس وی"
-
-msgid "Download with current filters"
-msgstr ""
-
-msgid "Download data..."
-msgstr ""
-
-msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "an error occurred loading working lists"
+msgid "There are no feedback for this event"
 msgstr ""
 
 msgid "Registered events"
 msgstr "رویداد های ثبت شده"
 
-msgid "Enrollment status"
-msgstr "تاریخ ثبت نام"
-
-msgid "Cancelled"
+msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
 
-msgid "Assigned to"
-msgstr "تعین شده"
-
-msgid "Registering unit"
-msgstr "بخش ثبت نام"
-
-msgid "Registration Date"
-msgstr "تاریخ ثبت و راجستر"
-
-msgid "Inactive"
-msgstr "غیر فعال"
-
-msgid "Working list could not be updated"
-msgstr ""
-
-msgid "Update view"
-msgstr ""
-
-msgid "Save current view..."
-msgstr ""
-
-msgid "Save current view as..."
-msgstr ""
-
-msgid "Delete view"
-msgstr ""
-
-msgid "Share view..."
-msgstr ""
-
-msgid "Do you really want to delete the '{{templateName}}' view?"
-msgstr ""
-
-msgid "Confirm"
-msgstr "تائید"
-
-msgid "Save As view"
-msgstr ""
-
-msgid "View name"
-msgstr "اسم نمایش"
-
-msgid "Show Less"
-msgstr ""
-
-msgid "Show All"
-msgstr ""
-
-msgid "Choose a registering unit to start reporting"
+msgid "Or see all events accessible to you in {{program}}"
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
@@ -911,6 +869,9 @@ msgstr ""
 msgid "open the Tracker Capture app"
 msgstr ""
 
+msgid "Save comment"
+msgstr "ذخیره نظریه"
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -967,11 +928,41 @@ msgstr ""
 msgid "Last updated {{date}}"
 msgstr ""
 
+msgid "Cancelled"
+msgstr ""
+
+msgid "Comments about this enrollment"
+msgstr ""
+
+msgid "Write a comment about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any comments"
+msgstr ""
+
+msgid "organisation unit could not be retrieved. Please try again later."
+msgstr ""
+
+msgid "program or stage is invalid"
+msgstr ""
+
 msgid "Error"
 msgstr "خطا"
 
 msgid "Warning"
 msgstr "هشدار\\:"
+
+msgid "Comments about this event"
+msgstr ""
+
+msgid "Write a comment about this event"
+msgstr ""
+
+msgid "This event doesn't have any comments"
+msgstr ""
+
+msgid "Back to all stages and events"
+msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
@@ -979,11 +970,131 @@ msgstr ""
 msgid "Person Profile"
 msgstr ""
 
+msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "Show {{ rest }} more"
+msgstr ""
+
+msgid "Reset list"
+msgstr ""
+
+msgid "Go to full {{ eventName }}"
+msgstr ""
+
+msgid "This stage can only have one event"
+msgstr ""
+
+msgid "Report date"
+msgstr "تاریخ گزارش"
+
+msgid "Registering unit"
+msgstr "بخش ثبت نام"
+
+msgid "Due date"
+msgstr "موعد مقرر"
+
+msgid "{{ totalEvents }} events"
+msgstr ""
+
+msgid "{{ overdueEvents }} overdue"
+msgstr ""
+
+msgid "{{ scheduledEvents }} scheduled"
+msgstr ""
+
 msgid "Stages and Events"
+msgstr ""
+
+msgid "Delete event"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr "داونلود به فارمت JSON"
+
+msgid "Download as XML"
+msgstr "داونلود به فارمت XML"
+
+msgid "Download as CSV"
+msgstr "داونلود به فارمت سی اس وی"
+
+msgid "Download with current filters"
+msgstr ""
+
+msgid "Download data..."
+msgstr ""
+
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Enrollment status"
+msgstr "تاریخ ثبت نام"
+
+msgid "Assigned to"
+msgstr "تعین شده"
+
+msgid "Registration Date"
+msgstr "تاریخ ثبت و راجستر"
+
+msgid "Inactive"
+msgstr "غیر فعال"
+
+msgid "Working list could not be updated"
+msgstr ""
+
+msgid "Update view"
+msgstr ""
+
+msgid "Save current view..."
+msgstr ""
+
+msgid "Save current view as..."
+msgstr ""
+
+msgid "Delete view"
+msgstr ""
+
+msgid "Share view..."
+msgstr ""
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr ""
+
+msgid "Confirm"
+msgstr "تائید"
+
+msgid "Save As view"
+msgstr ""
+
+msgid "View name"
+msgstr "اسم نمایش"
+
+msgid "Show Less"
+msgstr ""
+
+msgid "Show All"
 msgstr ""
 
 msgid "An error has occured. See log for details"
 msgstr ""
+
+msgid "Scheduled{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "زمان بندی شده"
+
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
+
+msgid "Overdue"
+msgstr "گذشته از موعد"
+
+msgid "Skipped"
+msgstr "اسکیپ شده"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
 msgstr ""
@@ -1022,6 +1133,9 @@ msgid "Error saving tracked entity instance"
 msgstr ""
 
 msgid "Error saving enrollment"
+msgstr ""
+
+msgid "Error saving the enrollment event"
 msgstr ""
 
 msgid "tracked entity instance"

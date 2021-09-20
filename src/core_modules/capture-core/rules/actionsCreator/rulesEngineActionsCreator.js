@@ -2,11 +2,7 @@
 /**
  * @module rulesEngineActionsCreator
  */
-import type { Program, RenderFoundation, TrackerProgram, ProgramStage } from '../../metaData';
-import { runRulesForSingleEvent } from './runRulesForSingleEvent';
-import { runRulesForTEI } from './runRulesForTEI';
-import { postProcessRulesEffects } from './postProcessRulesEffects';
-import { updateRulesEffects } from './rulesEngine.actions';
+
 import type {
     OutputEffects,
     Enrollment,
@@ -14,8 +10,13 @@ import type {
     OrgUnit,
     EventData,
     EventsData,
-} from '../engine';
-
+} from 'capture-core-utils/rulesEngine';
+import type { Program, RenderFoundation, TrackerProgram, ProgramStage } from '../../metaData';
+import { runRulesForSingleEvent } from './runRulesForSingleEvent';
+import { runRulesForTEI } from './runRulesForTEI';
+import { runRulesForEnrollmentEvent } from './runRulesForEnrollmentEvent';
+import { postProcessRulesEffects } from './postProcessRulesEffects';
+import { updateRulesEffects } from './rulesEngine.actions';
 
 function getRulesActions(
     rulesEffects: ?OutputEffects,
@@ -45,6 +46,37 @@ export function getRulesActionsForEvent(
     );
     return getRulesActions(rulesEffects, foundation, formId);
 }
+
+export const getRulesActionsForEnrollmentEvent = ({
+    program,
+    foundation,
+    formId,
+    orgUnit,
+    currentEvent,
+    eventsData,
+    attributeValues,
+    enrollmentData,
+}: {
+    program: TrackerProgram,
+    foundation: RenderFoundation,
+    formId: string,
+    orgUnit: OrgUnit,
+    currentEvent: EventData,
+    eventsData: EventsData,
+    attributeValues: TEIValues,
+    enrollmentData: Enrollment,
+}) => {
+    const rulesEffects = runRulesForEnrollmentEvent({
+        program,
+        foundation,
+        orgUnit,
+        currentEvent,
+        eventsData,
+        attributeValues,
+        enrollmentData,
+    });
+    return getRulesActions(rulesEffects, foundation, formId);
+};
 
 export function getRulesActionsForTEI(
     program: ?TrackerProgram,

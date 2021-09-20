@@ -5,9 +5,8 @@ import { Widget } from '../Widget';
 import { Stages } from './Stages';
 import type { Props } from './stagesAndEvents.types';
 
-export const WidgetStagesAndEvents = ({ className, stages }: Props) => {
+export const WidgetStagesAndEvents = ({ className, stages, events, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);
-
     return (
         <div
             data-test="stages-and-events-widget"
@@ -21,6 +20,8 @@ export const WidgetStagesAndEvents = ({ className, stages }: Props) => {
             >
                 <Stages
                     stages={stages}
+                    events={events}
+                    {...passOnProps}
                 />
             </Widget>
         </div>
