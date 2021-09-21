@@ -27,6 +27,9 @@ const styles = {
         whiteSpace: 'nowrap',
         cursor: 'pointer',
     },
+    rowDisabled: {
+        cursor: 'none',
+    },
     container: {
         display: 'flex',
         marginRight: spacersNum.dp16,
@@ -131,12 +134,12 @@ const StageDetailPlain = (props: Props) => {
             })
             .slice(0, displayedRowNumber)
             .map(row => formatRowForView(row, dataElements))
-            .map((row: Object, index: number) => {
+            .map((row: Object) => {
                 const dataTableProgramStage = events[0].programStage;
 
                 const cells = headerColumns.map(({ id }) => (<DataTableCell
                     key={id}
-                    onClick={() => onEventClick(row.id, dataTableProgramStage)}
+                    onClick={() => !row.pendingApiResponse && onEventClick(row.id, dataTableProgramStage)}
                 >
                     <div>
                         { // $FlowFixMe
@@ -148,8 +151,8 @@ const StageDetailPlain = (props: Props) => {
 
                 return (
                     <DataTableRow
-                        className={classes.row}
-                        key={events[index].event}
+                        className={!row.pendingApiResponse ? classes.row : classes.rowDisabled}
+                        key={row.id}
                     >
                         {cells}
                     </DataTableRow>
