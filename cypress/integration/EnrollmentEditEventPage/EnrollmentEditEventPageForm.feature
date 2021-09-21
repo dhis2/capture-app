@@ -8,16 +8,16 @@ And the user see the following text: Report date
 And the user see the following text: 2021-02-27 
 And the user see the following text: Apgar Score 
 And the user see the following text: 11 
-And the user see the following text: MCH Apgar comment 
-And the user see the following text: MCH Weight (g) 
+And the user see the following text: Apgar comment 
+And the user see the following text: Weight (g) 
 And the user see the following text: 3843 
-And the user see the following text: MCH ARV at birth
+And the user see the following text: ARV at birth
 And the user see the following text: NVP only
-And the user see the following text: MCH BCG dose
+And the user see the following text: BCG dose
 And the user see the following text: No 
-And the user see the following text: MCH OPV dose
+And the user see the following text: OPV dose
 And the user see the following text: Dose 1 
-And the user see the following text: MCH Infant Feeding
+And the user see the following text: Infant Feeding
 And the user see the following text: Replacement
 And the user see the following text: Birth certificate
 And the user see the following text: Status 
