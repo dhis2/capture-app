@@ -106,7 +106,7 @@ Then('the list should display active events that are assigned to anyone', () => 
 
 When('you set the age filter to 10-20', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Age in years')
+        .contains('Age (years)')
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
@@ -120,7 +120,7 @@ When('you set the age filter to 10-20', () => {
 
 Then('the age filter button should show that the filter is in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Age in years: 10 to 20')
+        .contains('Age (years): 10 to 20')
         .should('exist');
 });
 
@@ -416,7 +416,7 @@ When('you set the date of admission filter', () => {
             cy.contains('More filters')
                 .click();
 
-            cy.contains('Admission Date')
+            cy.contains('Date of admission')
                 .click();
         });
 
@@ -468,7 +468,7 @@ When('you open the dateFilterWorkingList', () => {
 
 Then('the admission filter should be in effect', () => {
     cy.get('[data-test="event-working-lists"]')
-        .contains('Admission Date: 2018-01...')
+        .contains('Date of admission: 2018-01...')
         .click();
 
     cy.get('[data-test="list-view-filter-contents"]')
