@@ -21,12 +21,12 @@ And(/^you see the widget header (.*)$/, (name) => {
 
 And('you see the add event form details', () => {
     const fields = [
-        'MCH Apgar Score',
-        'MCH Weight (g)',
-        'MCH ARV at birth',
-        'MCH BCG dose',
-        'MCH OPV dose',
-        'MCH Infant Feeding',
+        'Apgar Score',
+        'Weight (g)',
+        'ARV at birth',
+        'BCG dose',
+        'OPV dose',
+        'Infant Feeding',
         'Birth certificate',
     ];
 
