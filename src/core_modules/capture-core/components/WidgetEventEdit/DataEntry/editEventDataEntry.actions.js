@@ -11,7 +11,9 @@ import {
     convertStatusIn,
     convertStatusOut,
 } from '../../DataEntries';
-import { getDataEntryMeta, validateDataEntryValues } from '../../DataEntry/actions/dataEntryLoad.utils';
+import {
+    getDataEntryMeta, validateDataEntryValues, getDataEntryNotes,
+} from '../../DataEntry/actions/dataEntryLoad.utils';
 import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { EventProgram, TrackerProgram } from '../../../metaData/Program';
@@ -49,9 +51,10 @@ function getLoadActions(
     dataEntryValues: Object,
     formValues: Object,
     dataEntryPropsToInclude: Array<Object>,
-    formFoundation: RenderFoundation,
+    clientValuesForDataEntry: Object,
     extraProps: { [key: string]: any },
 ) {
+    const dataEntryNotes = getDataEntryNotes(clientValuesForDataEntry);
     const key = getDataEntryKey(dataEntryId, itemId);
     const dataEntryMeta = getDataEntryMeta(dataEntryPropsToInclude);
     const dataEntryUI = validateDataEntryValues(dataEntryValues, dataEntryPropsToInclude);
@@ -65,6 +68,7 @@ function getLoadActions(
             dataEntryValues,
             extraProps,
             dataEntryUI,
+            dataEntryNotes,
         }),
         addFormData(key, formValues),
     ];
@@ -111,7 +115,7 @@ export const openEventForEditInDataEntry = (
             dataEntryValues,
             formValues,
             dataEntryPropsToInclude,
-            foundation,
+            eventContainer.event,
             {
                 eventId: eventContainer.event.eventId,
             },
