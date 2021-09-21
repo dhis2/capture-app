@@ -4,17 +4,14 @@ import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import {
-    addEnrollmentEventPageActionTypes,
-    navigateToEnrollmentPage,
-} from './enrollmentAddEventPage.actions';
+import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { useWidgetDataFromStore } from './hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
-import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
+import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../common/EnrollmentOverviewDomain';
 
 export const EnrollmentAddEventPage = () => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useSelector(
@@ -38,9 +35,13 @@ export const EnrollmentAddEventPage = () => {
         dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
     }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
-    const handleSave = useCallback(() => {
-        dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
-    }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
+    const handleSave = useCallback(
+        (data, uid) => {
+            dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
+            dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
+        },
+        [dispatch, programId, orgUnitId, teiId, enrollmentId],
+    );
 
     const handleDelete = useCallback(() => {
         dispatch(batchActions([

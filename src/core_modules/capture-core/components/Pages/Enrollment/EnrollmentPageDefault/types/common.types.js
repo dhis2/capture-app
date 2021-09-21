@@ -25,6 +25,7 @@ export type Event = {|
     status: string,
     trackedEntityInstance: string,
     notes?: Array<Object>,
+    pendingApiResponse?: ?boolean,
 |};
 
 export type EnrollmentData = {
