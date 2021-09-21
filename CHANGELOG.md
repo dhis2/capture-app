@@ -1,3 +1,10 @@
+## [1.55.7](https://github.com/dhis2/capture-app/compare/v1.55.6...v1.55.7) (2021-09-21)
+
+
+### Bug Fixes
+
+* [DHIS2-11745][DHIS2-11797] add missing data & save event app crash ([#2119](https://github.com/dhis2/capture-app/issues/2119)) ([2124976](https://github.com/dhis2/capture-app/commit/21249761496627de755cbd121584b325e10146ff))
+
 ## [1.55.6](https://github.com/dhis2/capture-app/compare/v1.55.5...v1.55.6) (2021-09-21)
 
 
