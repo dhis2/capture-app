@@ -1,3 +1,10 @@
+## [1.55.8](https://github.com/dhis2/capture-app/compare/v1.55.7...v1.55.8) (2021-09-22)
+
+
+### Bug Fixes
+
+* [DHIS2-11814][DHIS2-11822] add fallback for tei missing name ([#2135](https://github.com/dhis2/capture-app/issues/2135)) ([c2376b2](https://github.com/dhis2/capture-app/commit/c2376b2aac209e442d39f96f185876d8fad6ed3f))
+
 ## [1.55.7](https://github.com/dhis2/capture-app/compare/v1.55.6...v1.55.7) (2021-09-21)
 
 
