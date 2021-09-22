@@ -15,7 +15,7 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         NavigateToEnrollmentOverviewActionTypes.NAVIGATE_TO_ENROLLMENT_OVERVIEW,
     ),
     switchMap((action) => {
-        const { teiId, programId, orgUnitId, enrollmentId } = action.payload;
+        const { teiId, programId, orgUnitId, enrollmentId = 'AUTO' } = action.payload;
         const { dataStore, userDataStore } = store.value.useNewDashboard;
 
         const pushHistoryToEnrollmentDashboard = () => {

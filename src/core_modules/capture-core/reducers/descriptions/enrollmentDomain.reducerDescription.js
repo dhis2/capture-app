@@ -21,7 +21,7 @@ export const enrollmentDomainDesc = createReducerDescription(
             ...state,
             enrollment,
             attributeValues,
-            enrollmentId: enrollment.enrollment,
+            enrollmentId: enrollment?.enrollment,
         }),
         [UPDATE_ENROLLMENT_EVENTS]: (
             state,

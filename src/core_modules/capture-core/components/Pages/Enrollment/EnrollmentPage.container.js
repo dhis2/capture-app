@@ -17,6 +17,7 @@ import { useEnrollmentInfo } from './useEnrollmentInfo';
 import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 import { getScopeInfo } from '../../../metaData';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
+import { setEnrollmentSelection } from '../../LockedSelector/LockedSelector.actions';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
@@ -28,11 +29,12 @@ const useComponentLifecycle = () => {
         }), shallowEqual);
 
     const { scopeType } = useScopeInfo(programId);
-    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId } = useEnrollmentInfo(enrollmentId, programId);
+    const { programHasEnrollments, enrollmentsOnProgramContainEnrollmentId, autoEnrollmentId } = useEnrollmentInfo(enrollmentId, programId);
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
-
-        if (selectedProgramIsTracker && programHasEnrollments && enrollmentsOnProgramContainEnrollmentId) {
+        if (enrollmentId === 'AUTO' && autoEnrollmentId) {
+            dispatch(setEnrollmentSelection({ enrollmentId: autoEnrollmentId }));
+        } else if (selectedProgramIsTracker && programHasEnrollments && enrollmentsOnProgramContainEnrollmentId) {
             dispatch(showDefaultViewOnEnrollmentPage());
         } else {
             dispatch(showMissingMessageViewOnEnrollmentPage());
@@ -43,6 +45,8 @@ const useComponentLifecycle = () => {
         enrollmentsOnProgramContainEnrollmentId,
         programHasEnrollments,
         scopeType,
+        enrollmentId,
+        autoEnrollmentId,
     ]);
 
     useEffect(() => () => dispatch(cleanEnrollmentPage()), [dispatch, teiId]);
