@@ -24,13 +24,13 @@ const mainConfig: Array<MainColumnConfig> = [{
     type: dataElementTypes.DATE,
     header: i18n.t('Registration Date'),
     apiName: 'created',
-    filterDisabled: true,
+    filterHidden: true,
 }, {
     id: 'inactive',
     visible: false,
     type: dataElementTypes.BOOLEAN,
     header: i18n.t('Inactive'),
-    filterDisabled: true,
+    filterHidden: true,
 }]
     .map(field => ({
         ...field,
