@@ -236,8 +236,8 @@ export type D2Functions = {
     // d2:inOrgUnitGroup(<orgunit_group_code>)
     // d2:hasUserRole(<user_role>)
     'd2:zScoreWFA': D2FunctionParameters,
-    // d2:zScoreHFA(<ageInMonth>, <height>, <gender>)
-    // d2:zScoreWFH(<height>, <weight>, <gender>)
+    'd2:zScoreHFA': D2FunctionParameters,
+    'd2:zScoreWFH': D2FunctionParameters,
 
     // Functions that are not available in program rule expressions
     'd2:lastEventDate': D2FunctionParameters,
