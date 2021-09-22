@@ -188,6 +188,10 @@ Feature: User uses the LockedSelector to navigate
    And you select the Child Programme
    And you see the enrollment page
 
+  Scenario: Enrollment page > Fallback for tei missing name
+    Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollment?enrollment?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8&teiId=dNpxRu1mWG5
+    Then you see the tei id on the scope selector
+
   #Enrollment event edit page
   Scenario: Enrollment event edit page > resetting the tei
     Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=pybd813kIWx&enrollmentId=FS085BEkJo2&eventId=kNn9HkRjk1c&stageId=A03MvHHogjR
@@ -218,6 +222,10 @@ Feature: User uses the LockedSelector to navigate
     Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
     When you reset the event selection
     Then you see the enrollment page
+  
+    Scenario: Enrollment event edit page > Fallback for tei missing name
+    Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollmentEventEdit?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8&teiId=dNpxRu1mWG5&enrollmentId=V8uPJuhvlL7&eventId=rBjxtO8npTb&stageId=CWaAcQYKVpq
+    Then you see the tei id on the scope selector
 
   # Enrollment event new page
   Scenario: Enrollment event new page > resetting the tei
@@ -249,3 +257,7 @@ Feature: User uses the LockedSelector to navigate
     Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
     When you reset the event selection
     Then you see the enrollment page
+
+  Scenario: Enrollment event new page > Fallback for tei missing name
+    Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollmentEventNew?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8&teiId=dNpxRu1mWG5&enrollmentId=V8uPJuhvlL7&stageId=CWaAcQYKVpq
+    Then you see the tei id on the scope selector
