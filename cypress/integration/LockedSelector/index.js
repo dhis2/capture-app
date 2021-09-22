@@ -9,6 +9,11 @@ Given(/^you land on a enrollment page domain by having typed (.*)$/, (url) => {
     cy.get('[data-test="scope-selector"]').contains('Selected person');
 });
 
+Given(/^you land on a enrollment page domain in Malaria focus investigation by having typed (.*)$/, (url) => {
+    cy.visit(url);
+    cy.get('[data-test="scope-selector"]').contains('Selected focus area');
+});
+
 When('you click the "New" button to add a new event', () => {
     cy.get('[data-test="new-event-button"]')
         .click();
@@ -389,3 +394,6 @@ Then('you can see message on the locked selector', () => {
         .contains('Show all');
 });
 
+Then('you see the tei id on the scope selector', () => {
+    cy.get('[data-test="scope-selector"]').contains('dNpxRu1mWG5');
+});
