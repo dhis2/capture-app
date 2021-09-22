@@ -37,22 +37,23 @@ const mainConfig: Array<MainColumnConfig> = [{
         mainProperty: true,
     }));
 
-const getMetaDataConfig = (attributes: Array<DataElement>): Array<MetadataColumnConfig> =>
+const getMetaDataConfig = (attributes: Array<DataElement>, orgUnitId: ?string): Array<MetadataColumnConfig> =>
     attributes
-        .map(({ id, displayInReports, type, name, optionSet }) => ({
+        .map(({ id, displayInReports, type, name, optionSet, searchable, unique }) => ({
             id,
             visible: displayInReports,
             type,
             header: name,
             options: optionSet && optionSet.options.map(({ text, value }) => ({ text, value })),
             multiValueFilter: !!optionSet,
+            filterHidden: !(orgUnitId || (searchable || unique)),
         }));
 
-export const useDefaultColumnConfig = (program: TrackerProgram): TeiWorkingListsColumnConfigs =>
+export const useDefaultColumnConfig = (program: TrackerProgram, orgUnitId: ?string): TeiWorkingListsColumnConfigs =>
     useMemo(() => {
         const { attributes } = program;
         return [
             ...mainConfig,
-            ...getMetaDataConfig(attributes),
+            ...getMetaDataConfig(attributes, orgUnitId),
         ];
-    }, [program]);
+    }, [orgUnitId, program]);
