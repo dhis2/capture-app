@@ -33,7 +33,7 @@ const fetchTeiStream = (teiId, querySingleResource) =>
         .pipe(
             map(({ attributes, enrollments, trackedEntityType }) => {
                 const enrollmentsSortedByDate = sortByDate(enrollments);
-                const teiDisplayName = deriveTeiName(attributes, trackedEntityType);
+                const teiDisplayName = deriveTeiName(attributes, trackedEntityType, teiId);
 
                 return successfulFetchingEnrollmentPageInformationFromUrl({
                     teiDisplayName,
