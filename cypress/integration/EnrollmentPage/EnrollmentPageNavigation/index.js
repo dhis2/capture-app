@@ -77,3 +77,13 @@ And('you choose to enroll a person by clicking the link button', () => {
     cy.contains('Enroll Carlos Cruz in this program.')
         .click();
 });
+
+When(/^you enter enrollment page by typing: (.*)$/, (url) => {
+    cy.visit(url);
+});
+
+
+Then(/^you should be redirect to (.*)$/, (expectedUrl) => {
+    cy.url()
+        .should('eq', `${Cypress.config().baseUrl}/${expectedUrl}`);
+});
