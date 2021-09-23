@@ -21,6 +21,7 @@ declare type ApiEnrollmentEvent = {|
     dataValues: Array<ApiDataValue>,
     notes?: Array<Object>,
     deleted?: boolean,
+    pendingApiResponse?: ?boolean,
 |};
 
 type ApiAttributeValues = {

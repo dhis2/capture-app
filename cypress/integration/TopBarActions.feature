@@ -60,7 +60,7 @@ Feature: User uses the TopBarActions to navigate
 
     Scenario: Enrollment Event edit page > When the user performs any actions in edit mood a popup warning message will appear.
         Given you land on a enrollment page domain by having typed #enrollmentEventEdit?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ&eventId=KNbStF7YTon  
-        And the user see the following text: WHOMCH Gestational age at visit
+        And the user see the following text: Gestational age at visit
         When the user clicks on the edit button
         And the user see the following text: Enrollment: Edit Event
         When the user clicks the element containing the text: Clear selections

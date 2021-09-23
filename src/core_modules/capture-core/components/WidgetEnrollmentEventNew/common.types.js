@@ -6,7 +6,7 @@ export type OrgUnit = {
     code: string,
 };
 
-export type ExternalSaveHandler = (eventServerValues: Object) => void;
+export type ExternalSaveHandler = (eventServerValues: Object, uid: string) => void;
 
 export type AttributeValueServerFormatted = {|
     id: string,

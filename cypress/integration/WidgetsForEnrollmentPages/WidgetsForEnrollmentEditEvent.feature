@@ -35,7 +35,7 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And the user sees the owner organisation unit
     And the user sees the last update date
 
-  # TODO DHIS2-11482 - The test cases related with enrollment status edit are flaky. Move them to unit tests. 
+  # TODO DHIS2-11482 - The test cases related with enrollment status edit are flaky. Move them to unit tests.
   # Scenario: User can modify the enrollment from Active to Complete
   #   Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
   #   And the enrollment widget should be opened
@@ -89,8 +89,14 @@ Feature: The user interacts with the widgets on the enrollment edit event
     And the user clicks on the delete action
     Then the user sees the delete enrollment modal
 
-  Scenario: User can add note on edit event page
+  Scenario: User can add note on edit event page view mode
     Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
     Then the enrollment widget should be loaded
     When you fill in the comment: new test comment
+    Then list should contain the new comment: new test comment
+
+  Scenario: User can see note on edit event page edit mode
+    Given you land on the enrollment edit event page by having typed #/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    Then the enrollment widget should be loaded
+    When you click edit mode
     Then list should contain the new comment: new test comment

@@ -1,3 +1,25 @@
+## [1.55.8](https://github.com/dhis2/capture-app/compare/v1.55.7...v1.55.8) (2021-09-22)
+
+
+### Bug Fixes
+
+* [DHIS2-11814][DHIS2-11822] add fallback for tei missing name ([#2135](https://github.com/dhis2/capture-app/issues/2135)) ([c2376b2](https://github.com/dhis2/capture-app/commit/c2376b2aac209e442d39f96f185876d8fad6ed3f))
+
+## [1.55.7](https://github.com/dhis2/capture-app/compare/v1.55.6...v1.55.7) (2021-09-21)
+
+
+### Bug Fixes
+
+* [DHIS2-11745][DHIS2-11797] add missing data & save event app crash ([#2119](https://github.com/dhis2/capture-app/issues/2119)) ([2124976](https://github.com/dhis2/capture-app/commit/21249761496627de755cbd121584b325e10146ff))
+
+## [1.55.6](https://github.com/dhis2/capture-app/compare/v1.55.5...v1.55.6) (2021-09-21)
+
+
+### Bug Fixes
+
+* [DHIS2-11791] widget comments don't show in edit mode ([#2115](https://github.com/dhis2/capture-app/issues/2115)) ([1a44fcc](https://github.com/dhis2/capture-app/commit/1a44fccd64d4a6692a0f169fb1e725f4e37290ca))
+* [TECH-687] change cypress instance & metadata ([#2127](https://github.com/dhis2/capture-app/issues/2127)) ([b29a38c](https://github.com/dhis2/capture-app/commit/b29a38cbe206634a55a6e5f42be607f3114f5f46))
+
 ## [1.55.5](https://github.com/dhis2/capture-app/compare/v1.55.4...v1.55.5) (2021-09-17)
 
 
