@@ -19,7 +19,9 @@ import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCh
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>
-        {i18n.t('Saving a {{trackedEntityName}}', { trackedEntityName })} <b>{i18n.t('without')}</b> {i18n.t('enrollment')}
+        {i18n.t('Saving a {{trackedEntityName}}', {
+            trackedEntityName, interpolation: { escapeValue: false } })
+        } <b>{i18n.t('without')}</b> {i18n.t('enrollment')}
         {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.{' '}
         {i18n.t('Enroll in a program by selecting a program from the top bar.')}
     </>);

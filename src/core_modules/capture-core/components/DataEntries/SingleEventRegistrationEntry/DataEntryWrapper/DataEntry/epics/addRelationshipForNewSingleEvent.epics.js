@@ -79,6 +79,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
                     {
                         entityName: newRelationship.to.name,
                         relationshipTypeName: newRelationship.relationshipType.name,
+                        interpolation: { escapeValue: false },
                     },
                 );
                 return relationshipAlreadyExists(dataEntryId, itemId, message);
