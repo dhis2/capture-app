@@ -145,6 +145,7 @@ export const WidgetEnrollmentPlain = ({
                             </span>
                             {i18n.t('Started at {{orgUnitName}}', {
                                 orgUnitName: enrollment.orgUnitName,
+                                interpolation: { escapeValue: false },
                             })}
                         </div>
 
