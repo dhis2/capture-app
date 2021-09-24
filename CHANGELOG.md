@@ -1,3 +1,10 @@
+## [1.55.10](https://github.com/dhis2/capture-app/compare/v1.55.9...v1.55.10) (2021-09-24)
+
+
+### Bug Fixes
+
+* [DHIS2-11795] - Hide Non-searchable filters when in ACCESSIBLE-mode ([c58fada](https://github.com/dhis2/capture-app/commit/c58fada2caf581ad9d85ca26426be9ebe88277f2))
+
 ## [1.55.9](https://github.com/dhis2/capture-app/compare/v1.55.8...v1.55.9) (2021-09-24)
 
 
