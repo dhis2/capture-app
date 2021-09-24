@@ -1,3 +1,10 @@
+## [1.55.9](https://github.com/dhis2/capture-app/compare/v1.55.8...v1.55.9) (2021-09-24)
+
+
+### Bug Fixes
+
+* [DHIS2-11832] escape special characters in i18n ([#2137](https://github.com/dhis2/capture-app/issues/2137)) ([69d6e07](https://github.com/dhis2/capture-app/commit/69d6e071ae5ae20393326be54d2986ad8cfb65cb))
+
 ## [1.55.8](https://github.com/dhis2/capture-app/compare/v1.55.7...v1.55.8) (2021-09-22)
 
 
