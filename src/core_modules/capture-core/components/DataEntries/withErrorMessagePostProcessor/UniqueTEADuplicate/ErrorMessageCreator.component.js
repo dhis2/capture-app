@@ -69,7 +69,9 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
             <div>
                 {i18n.t(
                     'A {{trackedEntityTypeName}} with this {{attributeName}} is already registered',
-                    { trackedEntityTypeName: trackedEntityTypeNameLC, attributeName: attributeNameLC },
+                    { trackedEntityTypeName: trackedEntityTypeNameLC,
+                        attributeName: attributeNameLC,
+                        interpolation: { escapeValue: false } },
                 )}
             </div>
         );
@@ -87,7 +89,7 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
                 <div>
                     {i18n.t(
                         'A {{trackedEntityTypeName}} with this {{attributeName}} is already registered',
-                        { trackedEntityTypeName: trackedEntityTypeNameLC, attributeName: attributeNameLC },
+                        { trackedEntityTypeName: trackedEntityTypeNameLC, attributeName: attributeNameLC, interpolation: { escapeValue: false } },
                     )}
                 </div>
                 <div>
@@ -97,7 +99,7 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
                     >
                         {i18n.t(
                             'Show registered {{trackedEntityTypeName}}',
-                            { trackedEntityTypeName: trackedEntityTypeNameLC },
+                            { trackedEntityTypeName: trackedEntityTypeNameLC, interpolation: { escapeValue: false } },
                         )}
                     </LinkButton>
                 </div>

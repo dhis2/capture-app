@@ -25,7 +25,9 @@ const RelationshipTrackedEntityInstancePlain =
               id={DATA_ENTRY_ID}
               teiRegistrationMetadata={teiRegistrationMetadata}
               selectedScopeId={teiRegistrationMetadata.form.id}
-              saveButtonText={i18n.t('Save new {{trackedEntityTypeName}} and link', { trackedEntityTypeName: trackedEntityTypeNameLC })}
+              saveButtonText={i18n.t('Save new {{trackedEntityTypeName}} and link', {
+                  trackedEntityTypeName: trackedEntityTypeNameLC, interpolation: { escapeValue: false },
+              })}
               fieldOptions={fieldOptions}
               onSave={onSave}
               duplicatesReviewPageSize={duplicatesReviewPageSize}
