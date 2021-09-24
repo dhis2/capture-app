@@ -1,3 +1,10 @@
+## [1.55.11](https://github.com/dhis2/capture-app/compare/v1.55.10...v1.55.11) (2021-09-24)
+
+
+### Bug Fixes
+
+* [DHIS2-11838] react-leaflet-draw rollback ([320ca91](https://github.com/dhis2/capture-app/commit/320ca91c24c8a29ab429806bf65f7c4f4792933e))
+
 ## [1.55.10](https://github.com/dhis2/capture-app/compare/v1.55.9...v1.55.10) (2021-09-24)
 
 
