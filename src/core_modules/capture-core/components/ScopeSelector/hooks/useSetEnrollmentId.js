@@ -9,7 +9,7 @@ export const useSetEnrollmentId = () => {
 
     const setEnrollmentId = (enrollmentId: string, pageToPush: string = pathname) => {
         const { programId, orgUnitId, teiId } = getUrlQueries();
-        history.push(
+        history.replace(
             `${pageToPush}?${urlArguments({
                 programId,
                 orgUnitId,
