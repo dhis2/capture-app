@@ -30,7 +30,7 @@ const getEventValuesFromEvent = (enrollment, eventId, dataElements) => {
     if (currentEvent) {
         return currentEvent.dataValues.reduce((acc, dataValue) => {
             const { dataElement: id, value } = dataValue;
-            acc[id] = convertValue(value, dataElements[id].valueType);
+            acc[id] = convertValue(value, dataElements[id]?.valueType);
             return acc;
         }, {});
     }

@@ -89,18 +89,23 @@ function postProcessAssignEffects(
     }, {});
 }
 
-function buildEffectsHierarchy(effects: Array<OutputEffect>) {
+function buildEffectsHierarchy(effects: Array<OutputEffect>, foundation: RenderFoundation) {
+    const formDataElements = foundation.getElements();
+
     return effects.reduce((accEffectsObject, effect) => {
         const actionType = effect.type;
         accEffectsObject[actionType] = accEffectsObject[actionType] || {};
 
         const id = effect.id;
+        const isDataElementInForm = formDataElements.find(dataElement => dataElement.id === id);
 
-        // $FlowFixMe[incompatible-use] automated comment
-        accEffectsObject[actionType][id] = accEffectsObject[actionType][id] || [];
+        if (isDataElementInForm) {
+            // $FlowFixMe[incompatible-use] automated comment
+            accEffectsObject[actionType][id] = accEffectsObject[actionType][id] || [];
 
-        // $FlowFixMe[incompatible-use] automated comment
-        accEffectsObject[actionType][id].push(effect);
+            // $FlowFixMe[incompatible-use] automated comment
+            accEffectsObject[actionType][id].push(effect);
+        }
         return accEffectsObject;
     }, {});
 }
@@ -174,7 +179,7 @@ export function postProcessRulesEffects(
         return null;
     }
 
-    const effectsHierarchy = buildEffectsHierarchy(rulesEffects);
+    const effectsHierarchy = buildEffectsHierarchy(rulesEffects, foundation);
 
     effectsHierarchy[effectActions.HIDE_FIELD] =
         filterFieldsHideEffects(
