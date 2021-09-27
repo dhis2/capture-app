@@ -7,7 +7,8 @@ import type { Props } from './savingText.types';
 export const SavingText = ({ orgUnitName, stageName, programName }: Props) => (
     <InfoIconText>
         <span>
-            {i18n.t(`Saving to ${stageName} for ${programName} in ${orgUnitName}`)}
+            {i18n.t(`Saving to ${stageName} for ${programName} in ${orgUnitName}`,
+                { interpolation: { escapeValue: false } })}
         </span>
     </InfoIconText>
 );

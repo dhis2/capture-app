@@ -35,6 +35,7 @@ const styles = (theme: Theme) => ({
     selectedPaper: {
         backgroundColor: theme.palette.grey.lighter,
         padding: 8,
+        height: '100%',
     },
     selectedButton: {
         width: 20,

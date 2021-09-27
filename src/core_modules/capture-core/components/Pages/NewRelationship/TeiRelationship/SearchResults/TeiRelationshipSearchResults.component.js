@@ -91,7 +91,9 @@ class TeiRelationshipSearchResultsPlain extends React.Component<Props> {
                     currentProgramId={selectedProgramId}
                     items={teis}
                     dataElements={attributes}
-                    noItemsText={i18n.t('No {{trackedEntityTypeName}} found.', { trackedEntityTypeName })}
+                    noItemsText={i18n.t('No {{trackedEntityTypeName}} found.', {
+                        trackedEntityTypeName, interpolation: { escapeValue: false },
+                    })}
                     renderCustomCardActions={({ item }) =>
                         <CardListButton teiId={item.id} handleOnClick={() => this.onAddRelationship(item)} />
                     }

@@ -76,7 +76,9 @@ const ActionButtonsPlain = ({
                             >
                                 <MenuItem
                                     dataTest="new-menuitem-one"
-                                    label={i18n.t('New {{trackedEntityName}} in {{programName}}', { trackedEntityName, programName })}
+                                    label={i18n.t('New {{trackedEntityName}} in {{programName}}', {
+                                        trackedEntityName, programName, interpolation: { escapeValue: false },
+                                    })}
                                     onClick={onNewClick}
                                 />
                                 <MenuItem
@@ -115,7 +117,9 @@ const ActionButtonsPlain = ({
                             >
                                 <MenuItem
                                     dataTest="find-menuitem-one"
-                                    label={i18n.t('Search for a {{trackedEntityName}} in {{programName}}', { trackedEntityName, programName })}
+                                    label={i18n.t('Search for a {{trackedEntityName}} in {{programName}}', {
+                                        trackedEntityName, programName, interpolation: { escapeValue: false },
+                                    })}
                                     onClick={onFindClick}
                                 />
                                 <MenuItem

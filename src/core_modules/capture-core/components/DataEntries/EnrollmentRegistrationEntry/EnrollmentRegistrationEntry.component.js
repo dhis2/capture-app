@@ -29,7 +29,9 @@ const styles = ({ typography }) => ({
 
 const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string) =>
     (<>
-        {i18n.t('Saving a {{trackedEntityName}} in', { trackedEntityName })} <b>{programName}</b>
+        {i18n.t('Saving a {{trackedEntityName}} in', {
+            trackedEntityName, interpolation: { escapeValue: false } })
+        } <b>{programName}</b>
         {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.
     </>);
 
