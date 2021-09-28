@@ -182,6 +182,7 @@ export class DataElementFactory {
         dataElement.displayInReports = cachedProgramTrackedEntityAttribute.displayInList;
         dataElement.disabled = false;
         dataElement.type = cachedTrackedEntityAttribute.valueType;
+        dataElement.searchable = cachedProgramTrackedEntityAttribute.searchable;
 
         if (cachedTrackedEntityAttribute.unique) {
             dataElement.unique = DataElementFactory._buildDataElementUnique(dataElement, cachedTrackedEntityAttribute);

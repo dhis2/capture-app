@@ -192,7 +192,7 @@ const StageDetailPlain = (props: Props) => {
             dataTest="view-all-button"
             className={classes.hidenButton} // DHIS2-11733: hide the button until the page is fully implemented
             onClick={handleViewAll}
-        >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
+        >{i18n.t('Go to full {{ eventName }}', { eventName, interpolation: { escapeValue: false } })}</Button> : null);
 
         const renderCreateNewButton = () => {
             const shouldDisableCreateNew = !repeatable && events.length > 0;
@@ -211,7 +211,7 @@ const StageDetailPlain = (props: Props) => {
                     <div>
                         <div className={classes.icon}><IconAdd24 /></div>
                         <div className={classes.label}>
-                            {i18n.t('New {{ eventName }} event', { eventName })}
+                            {i18n.t('New {{ eventName }} event', { eventName, interpolation: { escapeValue: false } })}
                         </div>
                     </div>
                 </Tooltip>

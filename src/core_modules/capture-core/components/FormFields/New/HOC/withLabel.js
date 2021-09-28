@@ -107,7 +107,7 @@ export const withLabel = (hocParams?: ?HOCParams) => (InnerComponent: React.Comp
             <NonBundledDhis2Icon
                 name={icon.name}
                 color={icon.color}
-                alternativeText={i18n.t('Icon for {{field}}', { field: label || '' })}
+                alternativeText={i18n.t('Icon for {{field}}', { field: label || '', interpolation: { escapeValue: false } })}
                 cornerRadius={2}
                 width={22}
                 height={22}

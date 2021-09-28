@@ -67,7 +67,7 @@ export const StagePlain = ({ stage, events, classes, className, onCreateNew, ...
                     <div className={classes.buttonRow}>
                         <div className={classes.icon}><IconAdd24 /></div>
                         <div className={classes.label}>
-                            {i18n.t('New {{ eventName }} event', { eventName: name })}
+                            {i18n.t('New {{ eventName }} event', { eventName: name, interpolation: { escapeValue: false } })}
                         </div>
                     </div>
                 </Button>}

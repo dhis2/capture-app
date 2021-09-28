@@ -1,3 +1,31 @@
+## [1.55.11](https://github.com/dhis2/capture-app/compare/v1.55.10...v1.55.11) (2021-09-24)
+
+
+### Bug Fixes
+
+* [DHIS2-11838] react-leaflet-draw rollback ([320ca91](https://github.com/dhis2/capture-app/commit/320ca91c24c8a29ab429806bf65f7c4f4792933e))
+
+## [1.55.10](https://github.com/dhis2/capture-app/compare/v1.55.9...v1.55.10) (2021-09-24)
+
+
+### Bug Fixes
+
+* [DHIS2-11795] - Hide Non-searchable filters when in ACCESSIBLE-mode ([c58fada](https://github.com/dhis2/capture-app/commit/c58fada2caf581ad9d85ca26426be9ebe88277f2))
+
+## [1.55.9](https://github.com/dhis2/capture-app/compare/v1.55.8...v1.55.9) (2021-09-24)
+
+
+### Bug Fixes
+
+* [DHIS2-11832] escape special characters in i18n ([#2137](https://github.com/dhis2/capture-app/issues/2137)) ([69d6e07](https://github.com/dhis2/capture-app/commit/69d6e071ae5ae20393326be54d2986ad8cfb65cb))
+
+## [1.55.8](https://github.com/dhis2/capture-app/compare/v1.55.7...v1.55.8) (2021-09-22)
+
+
+### Bug Fixes
+
+* [DHIS2-11814][DHIS2-11822] add fallback for tei missing name ([#2135](https://github.com/dhis2/capture-app/issues/2135)) ([c2376b2](https://github.com/dhis2/capture-app/commit/c2376b2aac209e442d39f96f185876d8fad6ed3f))
+
 ## [1.55.7](https://github.com/dhis2/capture-app/compare/v1.55.6...v1.55.7) (2021-09-21)
 
 

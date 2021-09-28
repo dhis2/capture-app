@@ -171,9 +171,10 @@ export const TeiWorkingListsSetup = ({
     filters,
     sortById,
     sortByDirection,
+    orgUnitId,
     ...passOnProps
 }: Props) => {
-    const defaultColumns = useDefaultColumnConfig(program);
+    const defaultColumns = useDefaultColumnConfig(program, orgUnitId);
     const columns = useColumns<TeiWorkingListsColumnConfigs>(customColumnOrder, defaultColumns);
     const filtersOnly = useFiltersOnly(program);
     const templates = useStaticTemplates();
@@ -198,6 +199,7 @@ export const TeiWorkingListsSetup = ({
             onUpdateList={useInjectDataFetchingMetaToUpdateList(defaultColumns, filtersOnly, onUpdateList)}
             programId={program.id}
             rowIdKey="id"
+            orgUnitId={orgUnitId}
             currentViewHasTemplateChanges={viewHasChanges}
             filters={filters}
             sortById={sortById}
