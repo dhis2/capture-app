@@ -11,7 +11,8 @@ const derivedFilterKeyword = (dataElement) => {
 };
 
 const convertString = (formValues: string, dataElement: DataElement) => {
-    const convertedString = formValues.replace(/\s/g, '');
+    const sanitizedString = formValues.replace(/\s/g, '');
+    const convertedString = (dataElement.convertValue(sanitizedString, pipeD2(convertFormToClient, convertClientToServer)));
     return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${convertedString}`;
 };
 
@@ -28,7 +29,8 @@ const convertRange = (formValues: FormValues, dataElement: DataElement) => {
 
 const convertOrgUnit = (formValues: FormValues, dataElement: DataElement) => {
     const { id } = formValues;
-    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${id}`;
+    const convertedId = (dataElement.convertValue(id, pipeD2(convertFormToClient, convertClientToServer)));
+    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${convertedId}`;
 };
 
 const convertAge = (formValues: FormValues, dataElement: DataElement) => {
@@ -39,10 +41,14 @@ const convertAge = (formValues: FormValues, dataElement: DataElement) => {
 
 const convertFile = (formValues: FormValues, dataElement: DataElement) => {
     const { name } = formValues;
-    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${name}`;
+    const convertedFileName = (dataElement.convertValue(name, pipeD2(convertFormToClient, convertClientToServer)));
+    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${convertedFileName}`;
 };
 
-const convertBoolean = (formValues: string, dataElement: DataElement) => `${dataElement.id}:eq:${formValues}`;
+const convertBoolean = (formValues: string, dataElement: DataElement) => {
+    const convertedBool = (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
+    return `${dataElement.id}:eq:${convertedBool}`;
+};
 
 const unsupportedType = () => null;
 
