@@ -32,8 +32,7 @@ export const convertToClientTeis = (apiTeis: ApiTeis, columnsMetaForDataFetching
                     acc[id] = value;
                     return acc;
                 }, {});
-
-            tei.programOwners && (record.ownerOrgUnit = tei.programOwners[0]?.ownerOrgUnit);
+            tei.programOwners && (record.programOwners = tei.programOwners);
 
             return {
                 id: tei.trackedEntityInstance,

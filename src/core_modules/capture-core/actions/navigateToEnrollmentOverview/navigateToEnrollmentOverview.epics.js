@@ -53,7 +53,10 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         const scopeSearchParam = `${scopeHierarchy.toLowerCase()}=${selectedScopeId}`;
         const base64Url = btoa(`/dhis-web-capture/#${pathname}${search}`);
         let ownerOrgUnitId;
-        !orgUnitId && (ownerOrgUnitId = store.value.workingListsListRecords?.teiList[teiId]?.ownerOrgUnit);
+        !orgUnitId && (
+            ownerOrgUnitId = store.value.workingListsListRecords?.teiList[teiId]?.programOwners
+                .find(programOwner => programOwner.program === programId)?.ownerOrgUnit
+        );
 
         setTimeout(() => {
             window.location.href = `${instanceBaseUrl}/dhis-web-tracker-capture/#/dashboard?tei=${teiId}&ou=${orgUnitId || ownerOrgUnitId}&${scopeSearchParam}&returnUrl=${base64Url}`;
