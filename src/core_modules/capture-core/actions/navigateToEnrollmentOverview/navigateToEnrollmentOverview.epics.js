@@ -54,8 +54,7 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         const base64Url = btoa(`/dhis-web-capture/#${pathname}${search}`);
         let ownerOrgUnitId;
         !orgUnitId && (
-            ownerOrgUnitId = store.value.workingListsListRecords?.teiList[teiId]?.programOwners
-                .find(programOwner => programOwner.program === programId)?.ownerOrgUnit
+            ownerOrgUnitId = store.value.workingListsListRecords?.teiList[teiId]?.programOwners[programId]?.ownerOrgUnit
         );
 
         setTimeout(() => {
