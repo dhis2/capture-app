@@ -68,7 +68,7 @@ filtersOnlyMetaForDataFetching: TeiFiltersOnlyMetaForDataFetching,
     ou,
     ouMode: ou ? 'SELECTED' : 'ACCESSIBLE',
     program,
-    fields: ':all,programOwners[ownerOrgUnit]',
+    fields: ':all,programOwners[ownerOrgUnit,program]',
 });
 
 export const getTeiListData = async (

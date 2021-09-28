@@ -11,6 +11,7 @@ export type ApiTei = {
     attributes?: ApiTeiAttributes,
     programOwners?: Array<{
         ownerOrgUnit: string,
+        program: string,
     }>,
 };
 export type ApiTeis = Array<ApiTei>;
