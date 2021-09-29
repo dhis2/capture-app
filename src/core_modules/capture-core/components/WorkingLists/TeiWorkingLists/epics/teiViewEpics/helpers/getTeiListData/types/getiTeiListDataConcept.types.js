@@ -9,6 +9,10 @@ export type ApiTeiAttributes = Array<{
 export type ApiTei = {
     trackedEntityInstance: string,
     attributes?: ApiTeiAttributes,
+    programOwners?: Array<{
+        ownerOrgUnit: string,
+        program: string,
+    }>,
 };
 export type ApiTeis = Array<ApiTei>;
 
