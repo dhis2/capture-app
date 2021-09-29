@@ -1,3 +1,10 @@
+## [1.55.12](https://github.com/dhis2/capture-app/compare/v1.55.11...v1.55.12) (2021-09-29)
+
+
+### Bug Fixes
+
+* [DHIS2-11850] Tracker fails to load when opening TEI without orgUnit ([02f6b10](https://github.com/dhis2/capture-app/commit/02f6b1055c166539e25c494b65184367c3ceac07))
+
 ## [1.55.11](https://github.com/dhis2/capture-app/compare/v1.55.10...v1.55.11) (2021-09-24)
 
 
