@@ -109,7 +109,9 @@ class TeiRelationshipPlain extends React.Component<Props> {
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_REGISTER)}
                     >
                         <span className={classes.buttonIcon}> <IconAdd24 /> </span>
-                        {i18n.t('Create new {{trackedEntityType}}', { trackedEntityType: trackedEntityTypeName })}
+                        {i18n.t('Create new {{trackedEntityType}}', {
+                            trackedEntityType: trackedEntityTypeName, interpolation: { escapeValue: false },
+                        })}
                     </Button>
                 </div>
             </div>
