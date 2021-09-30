@@ -107,14 +107,19 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('{{teiDisplayName}} is enrolled in multiple programs. Choose a program.', { teiDisplayName })}
+                {i18n.t('{{teiDisplayName}} is enrolled in multiple programs. Choose a program.', {
+                    teiDisplayName, interpolation: { escapeValue: false },
+                })}
             </IncompleteSelectionsMessage>
         }
 
         {
             missingStatus === missingStatuses.MISSING_PROGRAM_CATEGORIES_SELECTION &&
             <IncompleteSelectionsMessage>
-                {i18n.t('{{programName}} has categories. Choose all categories to view dashboard.', { programName })}
+                {i18n.t('{{programName}} has categories. Choose all categories to view dashboard.', {
+                    programName,
+                    interpolation: { escapeValue: false },
+                })}
             </IncompleteSelectionsMessage>
         }
 
@@ -130,7 +135,9 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
             missingStatus === missingStatuses.TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t('{{teiDisplayName}} is not enrolled in this program.', { teiDisplayName })}
+                    {i18n.t('{{teiDisplayName}} is not enrolled in this program.', {
+                        teiDisplayName, interpolation: { escapeValue: false },
+                    })}
                     <div>
 
                         <LinkButton
@@ -148,13 +155,17 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
             missingStatus === missingStatuses.TRACKER_PROGRAM_OF_DIFFERENT_TYPE_SELECTED &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} enrollment. ', { teiDisplayName, programName, tetName })}
+                    {i18n.t('{{teiDisplayName}} is a {{tetName}} and cannot be enrolled in the {{programName}}. Choose another program that allows {{tetName}} enrollment. ', {
+                        teiDisplayName, programName, tetName, interpolation: { escapeValue: false },
+                    })}
                     <div>
                         <LinkButton
                             className={classes.link}
                             onClick={navigateToProgramRegistrationPage}
                         >
-                            {i18n.t('Enroll a new {{selectedTetName}} in this program.', { selectedTetName })}
+                            {i18n.t('Enroll a new {{selectedTetName}} in this program.', {
+                                selectedTetName, interpolation: { escapeValue: false },
+                            })}
                         </LinkButton>
                     </div>
                 </div>
@@ -165,7 +176,9 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
             missingStatus === missingStatuses.EVENT_PROGRAM_SELECTED &&
             <IncompleteSelectionsMessage>
                 <div className={classes.lineHeight}>
-                    {i18n.t('{{programName}} is an event program and does not have enrollments.', { programName })}
+                    {i18n.t('{{programName}} is an event program and does not have enrollments.', {
+                        programName, interpolation: { escapeValue: false },
+                    })}
                     <div>
                         <LinkButton
                             className={classes.link}

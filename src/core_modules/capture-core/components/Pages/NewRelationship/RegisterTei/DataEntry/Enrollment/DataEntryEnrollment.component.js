@@ -26,7 +26,10 @@ const NewEnrollmentRelationshipPlain =
               id={DATA_ENTRY_ID}
               enrollmentMetadata={enrollmentMetadata}
               selectedScopeId={programId}
-              saveButtonText={i18n.t('Save new {{trackedEntityTypeName}} and link', { trackedEntityTypeName: trackedEntityTypeNameLC })}
+              saveButtonText={i18n.t('Save new {{trackedEntityTypeName}} and link', {
+                  trackedEntityTypeName: trackedEntityTypeNameLC,
+                  interpolation: { escapeValue: false },
+              })}
               fieldOptions={fieldOptions}
               onSave={onSave}
               duplicatesReviewPageSize={duplicatesReviewPageSize}
