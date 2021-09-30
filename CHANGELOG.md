@@ -1,3 +1,10 @@
+## [1.55.13](https://github.com/dhis2/capture-app/compare/v1.55.12...v1.55.13) (2021-09-30)
+
+
+### Bug Fixes
+
+* [DHIS2-11832] fix more special characters ([#2158](https://github.com/dhis2/capture-app/issues/2158)) ([6879d61](https://github.com/dhis2/capture-app/commit/6879d61eda17220c5972a19c31eee8fc13947be0))
+
 ## [1.55.12](https://github.com/dhis2/capture-app/compare/v1.55.11...v1.55.12) (2021-09-29)
 
 
