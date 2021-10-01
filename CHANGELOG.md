@@ -1,3 +1,10 @@
+# [1.56.0](https://github.com/dhis2/capture-app/compare/v1.55.13...v1.56.0) (2021-10-01)
+
+
+### Features
+
+* rules engine support for "enrollment event" page ([e1ad203](https://github.com/dhis2/capture-app/commit/e1ad20340c68ef00a79a4e97abcf74b66c7b6326))
+
 ## [1.55.13](https://github.com/dhis2/capture-app/compare/v1.55.12...v1.55.13) (2021-09-30)
 
 
