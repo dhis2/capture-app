@@ -83,7 +83,7 @@ const EnrollmentPagePlain = ({
                     <SingleLockedSelect
                         ready
                         onClear={() => resetEnrollmentId()}
-                        onSelect={id => setEnrollmentId(id)}
+                        onSelect={id => setEnrollmentId({ enrollmentId: id})}
                         options={enrollmentsAsOptions}
                         selectedValue={enrollmentId}
                         title={i18n.t('Enrollment')}

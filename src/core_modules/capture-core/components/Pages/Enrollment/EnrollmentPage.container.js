@@ -34,7 +34,7 @@ const useComponentLifecycle = () => {
     useEffect(() => {
         const selectedProgramIsTracker = programId && scopeType === scopeTypes.TRACKER_PROGRAM;
         if (enrollmentId === 'AUTO' && autoEnrollmentId) {
-            setEnrollmentId(autoEnrollmentId);
+            setEnrollmentId({ enrollmentId: autoEnrollmentId, shouldReplaceHistory: true });
         } else if (selectedProgramIsTracker && programHasEnrollments && enrollmentsOnProgramContainEnrollmentId) {
             dispatch(showDefaultViewOnEnrollmentPage());
         } else {
