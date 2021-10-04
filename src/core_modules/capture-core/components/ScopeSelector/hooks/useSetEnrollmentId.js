@@ -10,12 +10,12 @@ export const useSetEnrollmentId = () => {
     const setEnrollmentId = ({ enrollmentId, pageToPush = pathname, shouldReplaceHistory }: Object) => {
         const { programId, orgUnitId, teiId } = getUrlQueries();
         const url = `${pageToPush}?${urlArguments({
-                programId,
-                orgUnitId,
-                teiId,
-                enrollmentId,
-            })}`
-        shouldReplaceHistory ? history.replace(url) : history.push(url)
+            programId,
+            orgUnitId,
+            teiId,
+            enrollmentId,
+        })}`;
+        shouldReplaceHistory ? history.replace(url) : history.push(url);
     };
 
     return { setEnrollmentId };
