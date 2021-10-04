@@ -1,4 +1,4 @@
 // @flow
 export { RulesEngine } from './RulesEngine';
-export { effectActions } from './effectActions.const';
+export { effectActions, rulesEngineEffectScopes } from './constants';
 export * from './rulesEngine.types';

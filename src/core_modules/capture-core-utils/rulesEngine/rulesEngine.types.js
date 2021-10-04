@@ -1,10 +1,10 @@
 // @flow
-import { typeof effectActions } from './effectActions.const';
+import { typeof effectActions, typeof rulesEngineEffectScopes } from './constants';
 
 export type OutputEffect = {
     type: $Values<effectActions>,
     id: string,
-    isDataElementId?: boolean, // false => TEAid, undefined => neither
+    scope?: $Values<rulesEngineEffectScopes>,
 };
 
 export type OutputEffects = Array<OutputEffect>;
