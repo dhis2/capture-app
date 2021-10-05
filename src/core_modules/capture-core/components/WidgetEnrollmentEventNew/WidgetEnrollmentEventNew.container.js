@@ -9,11 +9,15 @@ import { AccessVerification } from './AccessVerification';
 import type { WidgetProps } from './WidgetEnrollmentEventNew.types';
 import { tabMode } from './WidgetEnrollmentEventNew.constants';
 import { SwitchTabWarning } from './SwitchTabWarning';
+import { ScheduleWidget } from './ScheduleWidget';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
 
 const styles = () => ({
     wrapper: {
         background: colors.white,
+    },
+    innerWrapper: {
+        padding: `0 ${spacersNum.dp16}px`,
     },
     header: {
         display: 'flex',
@@ -28,7 +32,7 @@ const styles = () => ({
 
 const WidgetEnrollmentEventNewPlain = ({ programId, stageId, onSave, classes, ...passOnProps }: WidgetProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const [mode, setMode] = useState(tabMode.REPORT);
+    const [mode, setMode] = useState(tabMode.SCHEDULE);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
 
@@ -80,16 +84,20 @@ const WidgetEnrollmentEventNewPlain = ({ programId, stageId, onSave, classes, ..
             </div>
             }
         >
-            <TabBar dataTest="new-event-tab-bar">
-                {tabs.map(tab => <Tab key={`tab-${tab.label}`} {...tab}>{tab.label}</Tab>)}
-            </TabBar>
-            {mode === tabMode.REPORT && <AccessVerification
-                {...passOnProps}
-                stage={stage}
-                formFoundation={formFoundation}
-                program={program}
-                onSaveExternal={onSave}
-            />}
+            <div className={classes.innerWrapper}>
+                <TabBar dataTest="new-event-tab-bar">
+                    {tabs.map(tab => <Tab key={`tab-${tab.label}`} {...tab}>{tab.label}</Tab>)}
+                </TabBar>
+                {mode === tabMode.REPORT && <AccessVerification
+                    {...passOnProps}
+                    stage={stage}
+                    formFoundation={formFoundation}
+                    program={program}
+                    onSaveExternal={onSave}
+                />}
+                {mode === tabMode.SCHEDULE && <ScheduleWidget />}
+            </div>
+
             <SwitchTabWarning
                 open={isWarningVisible}
                 onClose={() => setWarningVisible(false)}
