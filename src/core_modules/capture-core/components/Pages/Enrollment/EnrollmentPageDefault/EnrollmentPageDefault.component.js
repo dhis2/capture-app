@@ -81,12 +81,12 @@ export const EnrollmentPageDefaultPlain = ({
                     />
                 )}
                 <WidgetProfile teiId={teiId} programId={program.id} />
-                <WidgetEnrollment
+                {enrollmentId !== 'AUTO' && <WidgetEnrollment
                     teiId={teiId}
                     enrollmentId={enrollmentId}
                     programId={program.id}
                     onDelete={onDelete}
-                />
+                />}
             </div>
         </div>
     </>
