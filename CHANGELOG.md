@@ -1,3 +1,10 @@
+# [1.58.0](https://github.com/dhis2/capture-app/compare/v1.57.0...v1.58.0) (2021-10-05)
+
+
+### Features
+
+* [DHIS2-11806] New org unit tree ([#2152](https://github.com/dhis2/capture-app/issues/2152)) ([4fe7796](https://github.com/dhis2/capture-app/commit/4fe779639daaed224c1158c8b294da76bde4dbca))
+
 # [1.57.0](https://github.com/dhis2/capture-app/compare/v1.56.1...v1.57.0) (2021-10-05)
 
 
