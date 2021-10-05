@@ -11,6 +11,7 @@ import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetFeedback } from '../../../WidgetFeedback';
 import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
+import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -65,6 +66,7 @@ export const EnrollmentPageDefaultPlain = ({
                 />
             </div>
             <div className={classes.rightColumn}>
+                <WidgetEnrollmentComment />
                 <WidgetError error={widgetEffects?.errors} />
                 <WidgetWarning warning={widgetEffects?.warnings} />
                 {!hideWidgets.indicator && (
@@ -80,12 +82,12 @@ export const EnrollmentPageDefaultPlain = ({
                     />
                 )}
                 <WidgetProfile teiId={teiId} programId={program.id} showEdit orgUnitId={orgUnitId} />
-                <WidgetEnrollment
+                {enrollmentId !== 'AUTO' && <WidgetEnrollment
                     teiId={teiId}
                     enrollmentId={enrollmentId}
                     programId={program.id}
                     onDelete={onDelete}
-                />
+                />}
             </div>
         </div>
     </>

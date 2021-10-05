@@ -33,7 +33,7 @@ const fetchTeiStream = (teiId, querySingleResource) =>
         .pipe(
             map(({ attributes, enrollments, trackedEntityType }) => {
                 const enrollmentsSortedByDate = sortByDate(enrollments);
-                const teiDisplayName = deriveTeiName(attributes, trackedEntityType);
+                const teiDisplayName = deriveTeiName(attributes, trackedEntityType, teiId);
 
                 return successfulFetchingEnrollmentPageInformationFromUrl({
                     teiDisplayName,
@@ -67,8 +67,15 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_ENROLLMENT_ID_FETCH),
         flatMap(() => {
-            const { query: { enrollmentId } } = store.value.router.location;
-
+            const { query: { enrollmentId, programId, orgUnitId, teiId } } = store.value.router.location;
+            if (enrollmentId === 'AUTO') {
+                return of(openEnrollmentPage({
+                    programId,
+                    orgUnitId,
+                    teiId,
+                    enrollmentId,
+                }));
+            }
             return from(querySingleResource({ resource: 'enrollments', id: enrollmentId }))
                 .pipe(
                     map(({ trackedEntityInstance, program, orgUnit }) =>

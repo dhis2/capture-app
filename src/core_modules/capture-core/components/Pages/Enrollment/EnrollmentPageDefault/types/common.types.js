@@ -6,12 +6,12 @@ import { dataElementTypes } from 'capture-core/metaData';
 
 type DataValue = {
     dataElement: string,
-    value: string | number
+    value: string,
 }
 
-export type Event = {
+export type Event = {|
     dataValues: Array<DataValue>,
-    deleted: boolean,
+    deleted?: boolean,
     dueDate: string,
     enrollment: string,
     enrollmentStatus: string,
@@ -23,8 +23,10 @@ export type Event = {
     program: string,
     programStage: string,
     status: string,
-    trackedEntityInstance: string
-}
+    trackedEntityInstance: string,
+    notes?: Array<Object>,
+    pendingApiResponse?: ?boolean,
+|};
 
 export type EnrollmentData = {
     created: string,

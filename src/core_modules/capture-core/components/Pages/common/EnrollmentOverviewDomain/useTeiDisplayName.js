@@ -2,15 +2,36 @@
 import { useMemo, useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import { getAttributesFromScopeId } from '../../../../metaData/helpers';
+import type { DataElement } from '../../../../metaData/DataElement';
 
-export const deriveTeiName = (attributes: Array<any>, trackedEntityType: string) => {
-    const tetAttributes = getAttributesFromScopeId(trackedEntityType);
-    const [firstId, secondId] = tetAttributes.filter(({ displayInReports }) => displayInReports).map(({ id }) => id);
-
+const getAttributesValues = (attributes, firstId, secondId) => {
     const firstValue = attributes.find(({ attribute }) => attribute === firstId)?.value || '';
     const secondValue = attributes.find(({ attribute }) => attribute === secondId)?.value || '';
 
-    return `${firstValue}${firstValue && ' '}${secondValue}`;
+    return firstValue || secondValue ? `${firstValue}${firstValue && ' '}${secondValue}` : '';
+};
+
+const getTetAttributesDisplayInReports = (attributes: Array<any>, tetAttributes: Array<DataElement>) => {
+    const [firstId, secondId] = tetAttributes.filter(({ displayInReports }) => displayInReports).map(({ id }) => id);
+    return getAttributesValues(attributes, firstId, secondId);
+};
+
+const getTetAttributes = (attributes: Array<any>, tetAttributes: Array<DataElement>) => {
+    const [firstId, secondId] = tetAttributes.map(({ id }) => id);
+    return getAttributesValues(attributes, firstId, secondId);
+};
+
+export const deriveTeiName = (attributes: Array<any>, trackedEntityType: string, teiId: string) => {
+    const tetAttributes = getAttributesFromScopeId(trackedEntityType);
+    const teiNameDisplayInReports = getTetAttributesDisplayInReports(attributes, tetAttributes);
+
+    if (teiNameDisplayInReports) return teiNameDisplayInReports;
+
+    const teiName = getTetAttributes(attributes, tetAttributes);
+
+    if (teiName) return teiName;
+
+    return teiId;
 };
 
 export const useTeiDisplayName = (teiId: string, programId: string) => {
@@ -32,10 +53,14 @@ export const useTeiDisplayName = (teiId: string, programId: string) => {
     useEffect(() => {
         if (data?.trackedEntityInstances?.attributes && data?.trackedEntityInstances?.trackedEntityType) {
             setTeiDisplayName(
-                deriveTeiName(data.trackedEntityInstances.attributes, data.trackedEntityInstances.trackedEntityType),
+                deriveTeiName(
+                    data.trackedEntityInstances.attributes,
+                    data.trackedEntityInstances.trackedEntityType,
+                    teiId,
+                ),
             );
         }
-    }, [data?.trackedEntityInstances]);
+    }, [data?.trackedEntityInstances, teiId]);
 
     return {
         error,

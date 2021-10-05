@@ -1,3 +1,4 @@
+
 beforeEach(() => {
     cy.loginThroughForm();
 });
@@ -20,26 +21,22 @@ And(/^you see the widget header (.*)$/, (name) => {
 });
 
 And('you see the add event form details', () => {
-    const eventData = [
-        'MCH Apgar Score',
-        'MCH Apgar comment',
-        'MCH Weight (g)',
-        'MCH ARV at birth',
-        'MCH BCG dose',
-        'MCH OPV dose',
-        'MCH Infant Feeding',
+    const fields = [
+        'Apgar Score',
+        'Weight (g)',
+        'ARV at birth',
+        'BCG dose',
+        'OPV dose',
+        'Infant Feeding',
         'Birth certificate',
     ];
 
     cy.get('[data-test="add-event-enrollment-page-content"]')
         .within(() => {
-            cy.get('[data-test="new-enrollment-event-form"]')
-                .find('[data-test^=form-field-]')
-                .should('have.length', 8)
-                .each(($row, index) => {
-                    cy.wrap($row)
-                        .contains(eventData[index])
-                        .should('exist');
-                });
+            fields.forEach((field) => {
+                cy.get('[data-test="new-enrollment-event-form"]')
+                    .contains(field)
+                    .should('exist');
+            });
         });
 });

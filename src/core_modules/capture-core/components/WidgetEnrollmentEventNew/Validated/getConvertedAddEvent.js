@@ -12,6 +12,7 @@ export const getAddEventEnrollmentServerData = ({
     mainDataClientValues,
     programId,
     orgUnitId,
+    orgUnitName,
     teiId,
     enrollmentId,
     completed,
@@ -21,6 +22,7 @@ export const getAddEventEnrollmentServerData = ({
     mainDataClientValues: Object,
     programId: string,
     orgUnitId: string,
+    orgUnitName: string,
     teiId: string,
     enrollmentId: string,
     completed?: boolean,
@@ -44,6 +46,8 @@ export const getAddEventEnrollmentServerData = ({
                 orgUnit: orgUnitId,
                 trackedEntityInstance: teiId,
                 enrollment: enrollmentId,
+                dueDate: mainDataServerValues.eventDate,
+                orgUnitName,
                 dataValues: Object
                     .keys(formServerValues)
                     .map(key => ({

@@ -47,7 +47,9 @@ const DialogButtons = ({ onCancel, onSave, trackedEntityName }) => (
                 onClick={onSave}
                 primary
             >
-                {i18n.t('Save as new {{trackedEntityName}}', { trackedEntityName })}
+                {i18n.t('Save as new {{trackedEntityName}}', {
+                    trackedEntityName, interpolation: { escapeValue: false },
+                })}
             </Button>
         </div>
     </>

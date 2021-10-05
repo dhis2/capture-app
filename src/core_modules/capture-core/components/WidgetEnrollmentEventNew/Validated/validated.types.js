@@ -1,7 +1,12 @@
 // @flow
 import type { ProgramStage, RenderFoundation, TrackerProgram } from '../../../metaData';
 import { typeof addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
-import type { OrgUnit, ExternalSaveHandler } from '../common.types';
+import type {
+    OrgUnit,
+    ExternalSaveHandler,
+    RulesExecutionDependencies,
+    RulesExecutionDependenciesClientFormatted,
+} from '../common.types';
 
 export type ContainerProps = {|
     program: TrackerProgram,
@@ -10,6 +15,7 @@ export type ContainerProps = {|
     teiId: string,
     enrollmentId: string,
     orgUnitId: string,
+    rulesExecutionDependencies: RulesExecutionDependencies,
     onSaveExternal?: ExternalSaveHandler,
     onSaveSuccessActionType?: string,
     onSaveErrorActionType?: string,
@@ -28,5 +34,6 @@ export type Props = {|
     onCancel: () => void,
     formRef: (formInstance: any) => void,
     dataEntryFieldRef: (instance: any, id: string) => void,
+    rulesExecutionDependenciesClientFormatted: RulesExecutionDependenciesClientFormatted,
     ...CssClasses,
 |};

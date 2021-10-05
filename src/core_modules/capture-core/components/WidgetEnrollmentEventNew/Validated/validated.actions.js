@@ -18,6 +18,7 @@ export const requestSaveEvent = ({
     formFoundation,
     programId,
     orgUnitId,
+    orgUnitName,
     teiId,
     enrollmentId,
     completed,
@@ -30,6 +31,7 @@ export const requestSaveEvent = ({
     formFoundation: Object,
     programId: string,
     orgUnitId: string,
+    orgUnitName: string,
     teiId: string,
     enrollmentId: string,
     completed?: boolean,
@@ -43,6 +45,7 @@ export const requestSaveEvent = ({
         formFoundation,
         programId,
         orgUnitId,
+        orgUnitName,
         teiId,
         enrollmentId,
         completed,
@@ -51,7 +54,7 @@ export const requestSaveEvent = ({
         onSaveErrorActionType,
     }, { skipLogging: ['formFoundation'] });
 
-export const saveEvent = (serverData: Object, onSaveSuccessActionType?: string, onSaveErrorActionType?: string) =>
+export const saveEvent = (serverData: Object, onSaveSuccessActionType?: string, onSaveErrorActionType?: string, uid: string) =>
     actionCreator(newEventWidgetActionTypes.EVENT_SAVE)({}, {
         offline: {
             effect: {
@@ -59,7 +62,7 @@ export const saveEvent = (serverData: Object, onSaveSuccessActionType?: string, 
                 method: effectMethods.POST,
                 data: serverData,
             },
-            commit: onSaveSuccessActionType && { type: onSaveSuccessActionType, meta: { serverData } },
-            rollback: onSaveErrorActionType && { type: onSaveErrorActionType, meta: { serverData } },
+            commit: onSaveSuccessActionType && { type: onSaveSuccessActionType, meta: { serverData, uid } },
+            rollback: onSaveErrorActionType && { type: onSaveErrorActionType, meta: { serverData, uid } },
         },
     });

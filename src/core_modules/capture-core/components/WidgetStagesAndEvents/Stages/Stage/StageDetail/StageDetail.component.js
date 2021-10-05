@@ -27,6 +27,9 @@ const styles = {
         whiteSpace: 'nowrap',
         cursor: 'pointer',
     },
+    rowDisabled: {
+        cursor: 'none',
+    },
     container: {
         display: 'flex',
         marginRight: spacersNum.dp16,
@@ -39,6 +42,7 @@ const styles = {
     button: {
         marginRight: spacersNum.dp8,
     },
+    hidenButton: { display: 'none !important' },
     icon: {
         position: 'absolute',
         left: spacersNum.dp8,
@@ -104,7 +108,7 @@ const StageDetailPlain = (props: Props) => {
                     key={column.id}
                     name={column.id}
                     sortDirection={getSortDirection(column)}
-                    onSortIconClick={onSortIconClick}
+                    onSortIconClick={column.sortDirection && onSortIconClick}
                 >
                     {column.header}
                 </DataTableColumnHeader>
@@ -130,12 +134,12 @@ const StageDetailPlain = (props: Props) => {
             })
             .slice(0, displayedRowNumber)
             .map(row => formatRowForView(row, dataElements))
-            .map((row: Object, index: number) => {
+            .map((row: Object) => {
                 const dataTableProgramStage = events[0].programStage;
 
                 const cells = headerColumns.map(({ id }) => (<DataTableCell
                     key={id}
-                    onClick={() => onEventClick(row.id, dataTableProgramStage)}
+                    onClick={() => !row.pendingApiResponse && onEventClick(row.id, dataTableProgramStage)}
                 >
                     <div>
                         { // $FlowFixMe
@@ -147,8 +151,8 @@ const StageDetailPlain = (props: Props) => {
 
                 return (
                     <DataTableRow
-                        className={classes.row}
-                        key={events[index].event}
+                        className={!row.pendingApiResponse ? classes.row : classes.rowDisabled}
+                        key={row.id}
                     >
                         {cells}
                     </DataTableRow>
@@ -186,9 +190,9 @@ const StageDetailPlain = (props: Props) => {
             small
             secondary
             dataTest="view-all-button"
-            className={classes.button}
+            className={classes.hidenButton} // DHIS2-11733: hide the button until the page is fully implemented
             onClick={handleViewAll}
-        >{i18n.t('Go to full {{ eventName }}', { eventName })}</Button> : null);
+        >{i18n.t('Go to full {{ eventName }}', { eventName, interpolation: { escapeValue: false } })}</Button> : null);
 
         const renderCreateNewButton = () => {
             const shouldDisableCreateNew = !repeatable && events.length > 0;
@@ -207,7 +211,7 @@ const StageDetailPlain = (props: Props) => {
                     <div>
                         <div className={classes.icon}><IconAdd24 /></div>
                         <div className={classes.label}>
-                            {i18n.t('New {{ eventName }} event', { eventName })}
+                            {i18n.t('New {{ eventName }} event', { eventName, interpolation: { escapeValue: false } })}
                         </div>
                     </div>
                 </Tooltip>

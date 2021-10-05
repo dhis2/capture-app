@@ -8,3 +8,4 @@ export {
 export { addNoteForNewEnrollmentEventEpic } from './epics/dataEntryNote.epics';
 
 export { getOpenDataEntryActions } from './helpers/getOpenDataEntryActions';
+export { getRulesActions } from './helpers/getRulesActions';

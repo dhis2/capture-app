@@ -3,7 +3,7 @@ import React from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { useEnrollment } from '../common/EnrollmentOverviewDomain/useEnrollment';
+import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
@@ -39,7 +39,8 @@ export const EnrollmentEditEventPage = () => {
     const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
     const programStage = [...program.stages?.values()].find(item => item.id === stageId);
     const currentPageMode = showEditEvent ? pageMode.EDIT : pageMode.VIEW;
-    const outputEffects = useWidgetDataFromStore(`singleEvent-${currentPageMode}`);
+    const dataEntryKey = `singleEvent-${currentPageMode}`;
+    const outputEffects = useWidgetDataFromStore(dataEntryKey);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDelete = () => {
@@ -47,7 +48,7 @@ export const EnrollmentEditEventPage = () => {
         dispatch(deleteEnrollment({ enrollmentId }));
     };
     const onGoBack = () => history.push(`/enrollment?${urlArguments({ orgUnitId, programId, teiId, enrollmentId })}`);
-    const enrollmentSite = useEnrollment(teiId).enrollment;
+    const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     const { trackedEntityName } = getScopeInfo(enrollmentSite?.trackedEntityType);
     const enrollmentsAsOptions = buildEnrollmentsAsOptions([enrollmentSite || {}], programId);

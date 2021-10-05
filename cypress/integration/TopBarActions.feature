@@ -60,7 +60,7 @@ Feature: User uses the TopBarActions to navigate
 
     Scenario: Enrollment Event edit page > When the user performs any actions in edit mood a popup warning message will appear.
         Given you land on a enrollment page domain by having typed #enrollmentEventEdit?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ&eventId=KNbStF7YTon  
-        And the user see the following text: WHOMCH Gestational age at visit
+        And the user see the following text: Gestational age at visit
         When the user clicks on the edit button
         And the user see the following text: Enrollment: Edit Event
         When the user clicks the element containing the text: Clear selections
@@ -100,8 +100,8 @@ Feature: User uses the TopBarActions to navigate
         Then the current url is /#/new?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy
 
     Scenario: Enrollment Event New page > When the user performs any actions after it interacts with the form a popup warning message will appear.
-        Given you land on a enrollment page domain by having typed #enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
+        Given you land on a enrollment page domain by having typed #/enrollmentEventNew?programId=WSGAb5XwJ3Y&orgUnitId=DwpbWkiqjMy&teiId=yFcOhsM1Yoa&enrollmentId=ek4WWAgXX5i&stageId=edqlbukwRfQ
         And the user see the following text: Clear selections
-        When the user set the WHOMCH Gestational age at visit to 23
+        When the user set the WHOMCH Diastolic blood pressure to 55
         When the user clicks the element containing the text: Clear selections
         Then the user sees the warning popup

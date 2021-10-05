@@ -1,14 +1,14 @@
 // @flow
 
 export type Props = {
-    selectedProgramId: string,
-    selectedOrgUnitId: string,
+    selectedProgramId?: string,
+    selectedOrgUnitId?: string,
     isUserInteractionInProgress?: boolean,
     customActionsOnProgramIdReset?: Array<any>,
 };
 
 export type PlainProps = {
-    selectedProgramId: string,
+    selectedProgramId?: string,
     onStartAgainClick: () => void,
     onNewClick: () => void,
     onNewClickWithoutProgramId: () => void,

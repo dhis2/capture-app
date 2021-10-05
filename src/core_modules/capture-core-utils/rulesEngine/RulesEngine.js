@@ -228,7 +228,7 @@ export class RulesEngine {
         selectedEnrollment,
         selectedOrgUnit,
         optionSets,
-    }: RulesEngineInput): ?OutputEffects {
+    }: RulesEngineInput): OutputEffects {
         const variablesHash = this.variableService.getVariables({
             programRulesContainer,
             currentEvent,
@@ -258,7 +258,7 @@ export class RulesEngine {
         const programRules = programRulesContainer.programRules;
 
         if (!programRules) {
-            return null;
+            return [];
         }
 
         const effects = programRules

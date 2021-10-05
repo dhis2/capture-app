@@ -1,16 +1,16 @@
 # 
 # Translators:
 # Ulanbek Abakirov <ulans@mail.ru>, 2020
-# phil_dhis2, 2021
 # Wanda <wanda@frontlineaids.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
+# phil_dhis2, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
+"POT-Creation-Date: 2021-09-14T23:04:57.863Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
+"Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -656,10 +656,13 @@ msgstr ""
 msgid "View working list in this program."
 msgstr ""
 
-msgid "stage"
+msgid "Enrollment{{escape}} New Event"
 msgstr ""
 
-msgid "Enrollment{{escape}} New Event"
+msgid "There was an error loading the page"
+msgstr ""
+
+msgid "Choose a registering unit to start reporting"
 msgstr ""
 
 msgid "There are no feedbacks for this event"
@@ -668,16 +671,19 @@ msgstr ""
 msgid "There are no indicators for this event"
 msgstr ""
 
-msgid "The enrollment event data could not be found"
+msgid "program stage is invalid"
 msgstr ""
 
-msgid "Choose a registering unit to start reporting"
+msgid "stage"
 msgstr ""
 
 msgid "Enrollment{{escape}} View Event"
 msgstr ""
 
 msgid "Enrollment{{escape}} Edit Event"
+msgstr ""
+
+msgid "The enrollment event data could not be found"
 msgstr ""
 
 msgid "There are no feedback for this event"
@@ -895,6 +901,9 @@ msgstr "Работать с выбранной программой"
 msgid "open the Tracker Capture app"
 msgstr "Открыть приложение \"Отслеживание объектов\""
 
+msgid "Save comment"
+msgstr "Сохранить комментарий"
+
 msgid "Enrollment actions"
 msgstr ""
 
@@ -954,6 +963,15 @@ msgstr ""
 msgid "Cancelled"
 msgstr "Отмененный"
 
+msgid "Comments about this enrollment"
+msgstr ""
+
+msgid "Write a comment about this enrollment"
+msgstr ""
+
+msgid "This enrollment doesn't have any comments"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -965,6 +983,15 @@ msgstr "Ошибка"
 
 msgid "Warning"
 msgstr "Предупреждение"
+
+msgid "Comments about this event"
+msgstr ""
+
+msgid "Write a comment about this event"
+msgstr ""
+
+msgid "This event doesn't have any comments"
+msgstr ""
 
 msgid "Back to all stages and events"
 msgstr ""
@@ -1092,6 +1119,9 @@ msgstr ""
 msgid "Scheduled"
 msgstr "Запланировано"
 
+msgid "Overdue{{ escape }} due {{ time }}"
+msgstr ""
+
 msgid "Overdue"
 msgstr "Просроченный"
 
@@ -1099,9 +1129,6 @@ msgid "Skipped"
 msgstr "Пропущенный"
 
 msgid "{{trackedEntityName}} in program{{escape}} {{programName}}"
-msgstr ""
-
-msgid "Overdue{{ escape }} due {{ time }}"
 msgstr ""
 
 msgid "Program not found"
@@ -1138,6 +1165,9 @@ msgid "Error saving tracked entity instance"
 msgstr ""
 
 msgid "Error saving enrollment"
+msgstr ""
+
+msgid "Error saving the enrollment event"
 msgstr ""
 
 msgid "tracked entity instance"

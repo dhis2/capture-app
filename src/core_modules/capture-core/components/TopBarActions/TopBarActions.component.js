@@ -64,6 +64,7 @@ const ActionButtonsPlain = ({
                                 label={i18n.t('New {{trackedEntityName}} in {{programName}}', {
                                     trackedEntityName,
                                     programName,
+                                    interpolation: { escapeValue: false },
                                 })}
                                 onClick={onNewClick}
                             />
@@ -102,6 +103,7 @@ const ActionButtonsPlain = ({
                                 label={i18n.t('Search for a {{trackedEntityName}} in {{programName}}', {
                                     trackedEntityName,
                                     programName,
+                                    interpolation: { escapeValue: false },
                                 })}
                                 onClick={onFindClick}
                             />
