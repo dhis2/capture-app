@@ -1,3 +1,10 @@
+# [1.57.0](https://github.com/dhis2/capture-app/compare/v1.56.1...v1.57.0) (2021-10-05)
+
+
+### Features
+
+* [DHIS2-11830] implement auto select enrollment ([#2138](https://github.com/dhis2/capture-app/issues/2138)) ([7d58190](https://github.com/dhis2/capture-app/commit/7d58190fa9901859de7af23384b88ede320c394e))
+
 ## [1.56.1](https://github.com/dhis2/capture-app/compare/v1.56.0...v1.56.1) (2021-10-04)
 
 
