@@ -9,9 +9,16 @@ const objToMap = (object: any) => {
     return map;
 };
 
+const asyncForEach = async function (callback) {
+    for (let index = 0; index < this.length; index++) {
+        // eslint-disable-next-line no-await-in-loop
+        await callback(this[index], index, this);
+    }
+};
+
 const convertProgramForEnrollmentFactory = (program) => {
-    const { programTrackedEntityAttributes } = program;
-    const convertedProgramTrackedEntityAttributes = programTrackedEntityAttributes.map(programAttribute => ({
+    const { programTrackedEntityAttributes, programStages } = program;
+    let convertedProgramTrackedEntityAttributes = programTrackedEntityAttributes.map(programAttribute => ({
         allowFutureDate: programAttribute.allowFutureDate,
         displayInList: programAttribute.displayInList,
         mandatory: programAttribute.mandatory,
@@ -19,8 +26,23 @@ const convertProgramForEnrollmentFactory = (program) => {
         searchable: programAttribute.searchable,
         trackedEntityAttributeId: programAttribute.trackedEntityAttribute && programAttribute.trackedEntityAttribute.id,
     }));
+    let convertedProgramStages = programStages;
 
-    return { ...program, programTrackedEntityAttributes: convertedProgramTrackedEntityAttributes };
+    if (!programTrackedEntityAttributes.asyncForEach || !programStages.asyncForEach) {
+        convertedProgramTrackedEntityAttributes = [...convertedProgramTrackedEntityAttributes, asyncForEach];
+
+        convertedProgramStages = programStages.map(programStage => ({
+            ...programStage,
+            programStageDataElements: { ...programStage.programStageDataElements, asyncForEach },
+        }));
+        convertedProgramStages = [...convertedProgramStages, asyncForEach];
+    }
+
+    return {
+        ...program,
+        programTrackedEntityAttributes: convertedProgramTrackedEntityAttributes,
+        programStages: convertedProgramStages,
+    };
 };
 
 export const buildForm = async (

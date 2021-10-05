@@ -17,7 +17,6 @@ Feature: The user interacts with the widgets on the enrollment dashboard
   Scenario: The profile edit modal widget can be closed and reopened on the enrollment dashboard
     Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
     And you see the widget with data-test profile-widget
-    And the profile details should be displayed
     When the user clicks the element containing the text: Edit
     Then the user sees the edit profile modal
     When the user clicks the element containing the text: Cancel without saving
