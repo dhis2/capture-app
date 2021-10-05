@@ -12,6 +12,7 @@ export type Props = {|
     stages: Array<Stage>,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,
+    orgUnitId: string,
     onDelete: () => void,
     onViewAll: (stageId: string) => void,
     onCreateNew: (stageId: string) => void,

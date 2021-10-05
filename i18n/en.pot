@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-08-31T17:57:56.526Z\n"
-"PO-Revision-Date: 2021-08-31T17:57:56.526Z\n"
+"POT-Creation-Date: 2021-10-01T12:03:55.053Z\n"
+"PO-Revision-Date: 2021-10-01T12:03:55.053Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -925,10 +925,25 @@ msgstr ""
 msgid "Back to all stages and events"
 msgstr ""
 
+msgid ""
+"Change information about this {{trackedEntityName}} here. To change "
+"information about this enrollment, use the Edit button in the in the "
+"Enrollment box on this dashboard"
+msgstr ""
+
+msgid "Cancel without saving"
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
+msgstr ""
+
+msgid "Edit"
 msgstr ""
 
 msgid "New {{ eventName }} event"

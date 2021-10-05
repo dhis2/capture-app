@@ -87,6 +87,7 @@ export const EnrollmentPageDefault = () => {
     return (
         <EnrollmentPageDefaultComponent
             teiId={teiId}
+            orgUnitId={orgUnitId}
             program={program}
             stages={stages}
             events={enrollment?.events ?? []}

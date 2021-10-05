@@ -40,6 +40,7 @@ const getStyles = ({ typography }) => ({
 export const EnrollmentPageDefaultPlain = ({
     program,
     teiId,
+    orgUnitId,
     events,
     enrollmentId,
     stages,
@@ -78,7 +79,7 @@ export const EnrollmentPageDefaultPlain = ({
                         emptyText={i18n.t('No feedback for this enrollment yet')}
                     />
                 )}
-                <WidgetProfile teiId={teiId} programId={program.id} />
+                <WidgetProfile teiId={teiId} programId={program.id} showEdit orgUnitId={orgUnitId} />
                 <WidgetEnrollment
                     teiId={teiId}
                     enrollmentId={enrollmentId}

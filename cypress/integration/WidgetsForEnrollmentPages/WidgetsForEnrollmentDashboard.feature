@@ -1,6 +1,6 @@
 Feature: The user interacts with the widgets on the enrollment dashboard
 
-    # Scenarios linked to the enrollment add event
+    Scenarios linked to the enrollment dashboard
       Scenario: The profile widget can be closed on the enrollment dashboard
         Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
         And you see the widget with data-test profile-widget
@@ -13,6 +13,14 @@ Feature: The user interacts with the widgets on the enrollment dashboard
         When you click the widget toggle open close button with data-test profile-widget
         And you click the widget toggle open close button with data-test profile-widget
         Then the profile details should be displayed
+
+      Scenario: The profile edit modal widget can be closed and reopened on the enrollment dashboard
+        Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
+        And you see the widget with data-test profile-widget
+        And the profile details should be displayed
+        When the user clicks the element containing the text: Edit
+        Then the user sees the edit profile modal
+        When the user clicks the element containing the text: Cancel without saving
 
       Scenario: User can close the Enrollment Widget
         Given you land on the enrollment dashboard page by having typed #/enrollment?enrollmentId=wBU0RAsYjKE
