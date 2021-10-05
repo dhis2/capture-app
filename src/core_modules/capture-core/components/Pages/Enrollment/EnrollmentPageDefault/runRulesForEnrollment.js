@@ -36,7 +36,7 @@ const getEventValuesFromEvent = (enrollment, eventId, dataElements) => {
             if (!dataElements[id] || !dataElements[id].valueType) {
                 log.error(
                     errorCreator(
-                        'Event value not found')({ id }),
+                        'Metadata not found for data value')({ id }),
                 );
                 return acc;
             }
