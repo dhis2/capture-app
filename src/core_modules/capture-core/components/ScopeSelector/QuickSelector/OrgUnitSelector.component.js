@@ -112,7 +112,7 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
         this.setState({ open: false });
     }
 
-    handleClick(event, selectedOu) {
+    handleClick(selectedOu) {
         const orgUnitObject = { id: selectedOu.id, name: selectedOu.displayName, code: selectedOu.code };
         this.props.handleClickOrgUnit(selectedOu.id, orgUnitObject);
     }

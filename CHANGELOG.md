@@ -1,3 +1,45 @@
+# [1.58.0](https://github.com/dhis2/capture-app/compare/v1.57.0...v1.58.0) (2021-10-05)
+
+
+### Features
+
+* [DHIS2-11806] New org unit tree ([#2152](https://github.com/dhis2/capture-app/issues/2152)) ([4fe7796](https://github.com/dhis2/capture-app/commit/4fe779639daaed224c1158c8b294da76bde4dbca))
+
+# [1.57.0](https://github.com/dhis2/capture-app/compare/v1.56.1...v1.57.0) (2021-10-05)
+
+
+### Features
+
+* [DHIS2-11830] implement auto select enrollment ([#2138](https://github.com/dhis2/capture-app/issues/2138)) ([7d58190](https://github.com/dhis2/capture-app/commit/7d58190fa9901859de7af23384b88ede320c394e))
+
+## [1.56.1](https://github.com/dhis2/capture-app/compare/v1.56.0...v1.56.1) (2021-10-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4f9c8d1](https://github.com/dhis2/capture-app/commit/4f9c8d1e5376a4a214b45b3ebdb2da9da593e67e))
+
+# [1.56.0](https://github.com/dhis2/capture-app/compare/v1.55.13...v1.56.0) (2021-10-01)
+
+
+### Features
+
+* rules engine support for "enrollment event" page ([e1ad203](https://github.com/dhis2/capture-app/commit/e1ad20340c68ef00a79a4e97abcf74b66c7b6326))
+
+## [1.55.13](https://github.com/dhis2/capture-app/compare/v1.55.12...v1.55.13) (2021-09-30)
+
+
+### Bug Fixes
+
+* [DHIS2-11832] fix more special characters ([#2158](https://github.com/dhis2/capture-app/issues/2158)) ([6879d61](https://github.com/dhis2/capture-app/commit/6879d61eda17220c5972a19c31eee8fc13947be0))
+
+## [1.55.12](https://github.com/dhis2/capture-app/compare/v1.55.11...v1.55.12) (2021-09-29)
+
+
+### Bug Fixes
+
+* [DHIS2-11850] Tracker fails to load when opening TEI without orgUnit ([02f6b10](https://github.com/dhis2/capture-app/commit/02f6b1055c166539e25c494b65184367c3ceac07))
+
 ## [1.55.11](https://github.com/dhis2/capture-app/compare/v1.55.10...v1.55.11) (2021-09-24)
 
 
