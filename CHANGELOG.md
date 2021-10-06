@@ -1,3 +1,10 @@
+## [1.58.2](https://github.com/dhis2/capture-app/compare/v1.58.1...v1.58.2) (2021-10-06)
+
+
+### Bug Fixes
+
+* [DHIS2-11084] Refactor search form value converters of TEA ([#1987](https://github.com/dhis2/capture-app/issues/1987)) ([3549d48](https://github.com/dhis2/capture-app/commit/3549d48c1ead16a67163cd3822e2b24b31f3680d))
+
 ## [1.58.1](https://github.com/dhis2/capture-app/compare/v1.58.0...v1.58.1) (2021-10-06)
 
 
