@@ -15,7 +15,7 @@ describe('rules engine', () => {
                 },
                 foundation: { programRules: [] },
             },
-            [{ id: 'vANAXwtLwcT', message: 'Hemoglobin value lower than normal ', type: 'SHOWWARNING' }, { id: 'Ok9OQpitjQr', type: 'HIDEFIELD' }],
+            [{ id: 'vANAXwtLwcT', isDataElementId: true, message: 'Hemoglobin value lower than normal ', type: 'SHOWWARNING' }, { id: 'Ok9OQpitjQr', isDataElementId: true, type: 'HIDEFIELD' }],
         ],
         [
             {

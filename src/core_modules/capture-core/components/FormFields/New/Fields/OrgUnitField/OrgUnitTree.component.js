@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { OrgUnitTreeMultipleRoots as D2OrgUnitTree } from '@dhis2/d2-ui-org-unit-tree';
+import { OrganisationUnitTree } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 
@@ -33,7 +33,7 @@ class OrgUnitTreePlain extends React.Component<Props> {
     }
 
     render() {
-        const { roots, classes, treeKey, onSelectClick, ...passOnProps } = this.props;
+        const { roots, classes, treeKey, onSelectClick } = this.props;
 
         if (!roots) {
             return null;
@@ -41,14 +41,12 @@ class OrgUnitTreePlain extends React.Component<Props> {
 
         return (
             <div className={classes.orgunitTree}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <D2OrgUnitTree
+                <OrganisationUnitTree
                     key={treeKey}
-                    roots={roots}
+                    roots={roots.map(item => item.id)}
                     initiallyExpanded={this.getExpandedItems()}
-                    hideCheckboxes
-                    onSelectClick={onSelectClick}
-                    {...passOnProps}
+                    singleSelection
+                    onChange={onSelectClick}
                 />
             </div>
         );
