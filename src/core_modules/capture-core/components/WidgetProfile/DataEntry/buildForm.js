@@ -28,9 +28,11 @@ const convertProgramForEnrollmentFactory = (program) => {
     }));
     let convertedProgramStages = programStages;
 
-    if (!programTrackedEntityAttributes.asyncForEach || !programStages.asyncForEach) {
+    if (!convertedProgramTrackedEntityAttributes.asyncForEach) {
         convertedProgramTrackedEntityAttributes = [...convertedProgramTrackedEntityAttributes, asyncForEach];
+    }
 
+    if (!convertedProgramStages.asyncForEach) {
         convertedProgramStages = programStages.map(programStage => ({
             ...programStage,
             programStageDataElements: { ...programStage.programStageDataElements, asyncForEach },
