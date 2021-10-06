@@ -9,6 +9,7 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { DateField } from 'capture-core/components/FormFields/New';
 import { DataSection } from '../../DataSection';
+import { BottomText, textMode } from '../BottomText';
 import type { Props } from './scheduleWidget.types';
 
 
@@ -17,7 +18,7 @@ const styles = () => ({
         padding: `${spacersNum.dp16}px 0`,
     },
 });
-const ScheduleWidgetPlain = ({ classes }: Props) => {
+const ScheduleWidgetPlain = ({ stage, program, classes }: Props) => {
     const [scheduleDate, setScheduleDate] = useState();
 
     return (<div className={classes.wrapper}>
@@ -30,7 +31,7 @@ const ScheduleWidgetPlain = ({ classes }: Props) => {
                         label: i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } }),
                         children: <DateField
                             value={scheduleDate}
-                            // calendarMaxMoment={moment()}
+                            calendarMinMoment={moment()}
                             width="100%"
                             calendarWidth={350}
                             onSetFocus={() => {}}
@@ -39,6 +40,12 @@ const ScheduleWidgetPlain = ({ classes }: Props) => {
                             onBlur={(e) => { setScheduleDate(e); }}
                         />,
                     }]}
+            />
+            <BottomText
+                programName={program.name}
+                stageName={stage.name}
+                orgUnitName={undefined}
+                mode={textMode.SAVE}
             />
         </Grid>
 

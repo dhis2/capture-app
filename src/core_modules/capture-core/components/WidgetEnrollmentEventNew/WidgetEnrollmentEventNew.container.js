@@ -95,7 +95,7 @@ const WidgetEnrollmentEventNewPlain = ({ programId, stageId, onSave, classes, ..
                     program={program}
                     onSaveExternal={onSave}
                 />}
-                {mode === tabMode.SCHEDULE && <ScheduleWidget />}
+                {mode === tabMode.SCHEDULE && <ScheduleWidget stage={stage} program={program} />}
             </div>
 
             <SwitchTabWarning
