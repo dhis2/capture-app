@@ -1,3 +1,10 @@
+## [1.58.1](https://github.com/dhis2/capture-app/compare/v1.58.0...v1.58.1) (2021-10-06)
+
+
+### Bug Fixes
+
+* [DHIS2-11815] check if data element exists ([#2157](https://github.com/dhis2/capture-app/issues/2157)) ([9448c2e](https://github.com/dhis2/capture-app/commit/9448c2e527aa69e607e08080ce09a9e9e8f0e8b5))
+
 # [1.58.0](https://github.com/dhis2/capture-app/compare/v1.57.0...v1.58.0) (2021-10-05)
 
 
