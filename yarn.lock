@@ -3230,10 +3230,10 @@
     fs-extra "^8.1.0"
     jscodeshift "^0.11.0"
 
-"@dhis2/cypress-commands@^8.0.3":
-  version "8.0.3"
-  resolved "https://registry.yarnpkg.com/@dhis2/cypress-commands/-/cypress-commands-8.0.3.tgz#fc0c10f0823e496a426a8b4a6e42f8184e5ac725"
-  integrity sha512-B9dXp/Lu9GP1DmI4aSSxOuk/YUMLxQirG/760tCqqkJQ/ludaOkQVhnj3HWQUbQrWvrYMeQm3bMtlVd+56M61w==
+"@dhis2/cypress-commands@^8.0.4":
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/@dhis2/cypress-commands/-/cypress-commands-8.0.4.tgz#27c0da91bec78e4c9e470f2d867ac98b61b546eb"
+  integrity sha512-Pm0cjexhdR9kl4a75gVZRaJ42IXwgVgDgem/i93tLV1N2CNonIVM8yiwB8f+oX9rg4Nj2yLc2vILjTkgn1Rpaw==
   dependencies:
     jscodeshift "^0.11.0"
 
