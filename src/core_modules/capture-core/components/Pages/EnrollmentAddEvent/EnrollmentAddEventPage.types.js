@@ -9,6 +9,7 @@ export type Props = {|
     teiId: string,
     enrollmentId: string,
     onSave: ExternalSaveHandler,
+    dataEntryHasChanges: boolean,
     onSaveSuccessActionType: string,
     onSaveErrorActionType: string,
     onCancel: () => void,

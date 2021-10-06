@@ -12,6 +12,7 @@ import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { useWidgetDataFromStore } from './hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../common/EnrollmentOverviewDomain';
+import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 export const EnrollmentAddEventPage = () => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useSelector(
@@ -51,6 +52,8 @@ export const EnrollmentAddEventPage = () => {
     }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
+
+    const dataEntryHasChanges = useSelector(state => getDataEntryHasChanges(state, widgetReducerName));
 
     // TODO: Validate query params
     // This includes prechecking that we got a valid program stage and move the program stage logic in this file to useEnrollmentAddEventTopBar
@@ -94,6 +97,7 @@ export const EnrollmentAddEventPage = () => {
         return <div>{i18n.t('program stage is invalid')}</div>;
     }
 
+
     return (
         <>
             <EnrollmentAddEventTopBar
@@ -133,6 +137,7 @@ export const EnrollmentAddEventPage = () => {
                 rulesExecutionDependencies={rulesExecutionDependencies}
                 pageFailure={Boolean(commonDataError)}
                 ready={Boolean(enrollment)}
+                dataEntryHasChanges={dataEntryHasChanges}
             />
         </>
     );
