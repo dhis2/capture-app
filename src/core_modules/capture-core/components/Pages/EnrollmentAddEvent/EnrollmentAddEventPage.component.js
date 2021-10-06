@@ -12,6 +12,7 @@ import { WidgetProfile } from '../../WidgetProfile';
 import { WidgetEnrollment } from '../../WidgetEnrollment';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { WidgetEnrollmentEventNew } from '../../WidgetEnrollmentEventNew';
+import { WidgetProgramStageSelector } from '../../WidgetProgramStageSelector';
 
 const styles = ({ typography }) => ({
     container: {
@@ -81,14 +82,23 @@ const EnrollmentAddEventPagePain = ({
                                 className={classes.addEventContainer}
                                 data-test="add-event-enrollment-page-content"
                             >
-                                <WidgetEnrollmentEventNew
-                                    {...passOnProps}
-                                    programId={programId}
-                                    stageId={stageId}
-                                    orgUnitId={orgUnitId}
-                                    teiId={teiId}
-                                    enrollmentId={enrollmentId}
-                                />
+                                {!stageId ?
+                                    <WidgetProgramStageSelector
+                                        programId={programId}
+                                        orgUnitId={orgUnitId}
+                                        teiId={teiId}
+                                        enrollmentId={enrollmentId}
+                                    />
+                                    :
+                                    <WidgetEnrollmentEventNew
+                                        {...passOnProps}
+                                        programId={programId}
+                                        stageId={stageId}
+                                        orgUnitId={orgUnitId}
+                                        teiId={teiId}
+                                        enrollmentId={enrollmentId}
+                                    />
+                                }
                             </div>
                         </div>
                         <div className={classes.rightColumn}>
