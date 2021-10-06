@@ -21,7 +21,7 @@ const ScheduleWidgetPlain = ({ classes }: Props) => {
     const [scheduleDate, setScheduleDate] = useState();
 
     return (<div className={classes.wrapper}>
-        <Grid item xs={12} sm={8} md={10} lg={8}>
+        <Grid item xs={12} sm={12} md={10} lg={10}>
             <DataSection
                 dataTest="schedule-section"
                 sectionName={i18n.t('Schedule info')}
@@ -31,7 +31,7 @@ const ScheduleWidgetPlain = ({ classes }: Props) => {
                         children: <DateField
                             value={scheduleDate}
                             // calendarMaxMoment={moment()}
-                            width={350}
+                            width="100%"
                             calendarWidth={350}
                             onSetFocus={() => {}}
                             onFocus={() => { }}
