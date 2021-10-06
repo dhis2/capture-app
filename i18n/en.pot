@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-10-05T12:05:35.638Z\n"
-"PO-Revision-Date: 2021-10-05T12:05:35.638Z\n"
+"POT-Creation-Date: 2021-10-06T07:22:43.640Z\n"
+"PO-Revision-Date: 2021-10-06T07:22:43.640Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -929,6 +929,9 @@ msgid "This enrollment doesn't have any comments"
 msgstr ""
 
 msgid "Schedule info"
+msgstr ""
+
+msgid "Schedule date / Due date"
 msgstr ""
 
 msgid "Are you sure ?"
