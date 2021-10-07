@@ -1,16 +1,16 @@
-
-
 // @flow
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType, useState, useMemo } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { DateField } from 'capture-core/components/FormFields/New';
-import { DataSection } from '../../DataSection';
-import { BottomText, textMode } from '../BottomText';
-import type { Props } from './scheduleWidget.types';
+import { DataSection } from '../DataSection';
+import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
+import { BottomText, textMode } from '../WidgetEnrollmentEventNew/BottomText';
+import { useOrganisationUnit } from '../WidgetEnrollmentEventNew/Validated/useOrganisationUnit';
+import type { Props } from './widgetEventSchedule.types';
 
 
 const styles = () => ({
@@ -18,9 +18,17 @@ const styles = () => ({
         padding: `${spacersNum.dp16}px 0`,
     },
 });
-const ScheduleWidgetPlain = ({ stage, program, classes }: Props) => {
+const WidgetEventSchedulePlain = ({ stageId, programId, orgUnitId, classes }: Props) => {
     const [scheduleDate, setScheduleDate] = useState();
-
+    const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
+    const { orgUnit } = useOrganisationUnit(orgUnitId);
+    if (!program || !stage || !(program instanceof TrackerProgram)) {
+        return (
+            <div>
+                {i18n.t('program or stage is invalid')};
+            </div>
+        );
+    }
     return (<div className={classes.wrapper}>
         <Grid item xs={12} sm={12} md={10} lg={10}>
             <DataSection
@@ -44,7 +52,7 @@ const ScheduleWidgetPlain = ({ stage, program, classes }: Props) => {
             <BottomText
                 programName={program.name}
                 stageName={stage.name}
-                orgUnitName={undefined}
+                orgUnitName={orgUnit?.name || ''}
                 mode={textMode.SAVE}
             />
         </Grid>
@@ -53,4 +61,4 @@ const ScheduleWidgetPlain = ({ stage, program, classes }: Props) => {
 }
 ;
 
-export const ScheduleWidget: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(ScheduleWidgetPlain);
+export const WidgetEventSchedule: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetEventSchedulePlain);

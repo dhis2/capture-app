@@ -10,6 +10,7 @@ import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
 import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from '../../../WidgetStageHeader';
 import type { Props } from './newEventWorkspace.types';
+import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
 
 
 const styles = () => ({
@@ -76,6 +77,7 @@ const NewEventWorkspacePlain = ({
                         enrollmentId={enrollmentId}
                         {...passOnProps}
                     />}
+                    {mode === tabMode.SCHEDULE && <WidgetEventSchedule programId={programId} stageId={stageId} orgUnitId={orgUnitId} />}
                 </div>
             </Widget>
             <ConfirmDialog
