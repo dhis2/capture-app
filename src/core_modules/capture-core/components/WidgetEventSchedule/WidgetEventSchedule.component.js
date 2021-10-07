@@ -1,13 +1,13 @@
 // @flow
-import React, { type ComponentType, useState, useMemo } from 'react';
+import React, { type ComponentType, useMemo } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
-import moment from 'moment';
-import { DateField } from 'capture-core/components/FormFields/New';
 import { DataSection } from '../DataSection';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
+import { ScheduleButtons } from './ScheduleButtons';
+import { ScheduleDate } from './ScheduleDate';
 import { BottomText, textMode } from '../WidgetEnrollmentEventNew/BottomText';
 import { useOrganisationUnit } from '../WidgetEnrollmentEventNew/Validated/useOrganisationUnit';
 import type { Props } from './widgetEventSchedule.types';
@@ -19,7 +19,6 @@ const styles = () => ({
     },
 });
 const WidgetEventSchedulePlain = ({ stageId, programId, orgUnitId, classes }: Props) => {
-    const [scheduleDate, setScheduleDate] = useState();
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
     const { orgUnit } = useOrganisationUnit(orgUnitId);
     if (!program || !stage || !(program instanceof TrackerProgram)) {
@@ -37,18 +36,10 @@ const WidgetEventSchedulePlain = ({ stageId, programId, orgUnitId, classes }: Pr
                 fields={[
                     {
                         label: i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } }),
-                        children: <DateField
-                            value={scheduleDate}
-                            calendarMinMoment={moment()}
-                            width="100%"
-                            calendarWidth={350}
-                            onSetFocus={() => {}}
-                            onFocus={() => { }}
-                            onRemoveFocus={() => { }}
-                            onBlur={(e) => { setScheduleDate(e); }}
-                        />,
+                        children: <ScheduleDate />,
                     }]}
             />
+            <ScheduleButtons onCancel={() => {}} onSchedule={() => {}} />
             <BottomText
                 programName={program.name}
                 stageName={stage.name}
