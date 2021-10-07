@@ -1,6 +1,6 @@
 // @flow
-import React, { useMemo, type ComponentType, useState, useRef } from 'react';
-import { TabBar, Tab, spacersNum, colors } from '@dhis2/ui';
+import React, { type ComponentType, useState, useRef } from 'react';
+import { TabBar, Tab } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { tabMode } from './newEventWorkspace.constants';

@@ -3,8 +3,8 @@ import React, { useMemo, type ComponentType } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
-import type { Props } from './WidgetStageHeader.types';
 import { getProgramAndStageForProgram } from '../../metaData';
+import type { Props } from './widgetStageHeader.types';
 
 const styles = () => ({
     wrapper: {
