@@ -201,7 +201,9 @@ const SearchFormIndex = ({
                                     header={
                                         <SectionHeaderSimple
                                             containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
-                                            title={i18n.t('Search {{name}}', { name })}
+                                            title={i18n.t('Search {{name}}', {
+                                                name, interpolation: { escapeValue: false },
+                                            })}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
                                             isCollapsed={isSearchSectionCollapsed}
@@ -230,7 +232,9 @@ const SearchFormIndex = ({
                                                 formId,
                                             )}
                                         >
-                                            {i18n.t('Search by {{name}}', { name })}
+                                            {i18n.t('Search by {{name}}', {
+                                                name, interpolation: { escapeValue: false },
+                                            })}
                                         </Button>
                                     </div>
                                 </Section>

@@ -79,7 +79,7 @@ export const runRulesForEnrollmentEvent = ({
 
 
     // returns an array of effects that need to take place in the UI.
-    return rulesEngine.getProgramRuleEffects({
+    const effects = rulesEngine.getProgramRuleEffects({
         programRulesContainer: { programRulesVariables, programRules, constants },
         currentEvent,
         eventsContainer,
@@ -90,4 +90,7 @@ export const runRulesForEnrollmentEvent = ({
         selectedOrgUnit: orgUnit,
         optionSets,
     });
+    effects.filter(effect => typeof effect.isDataElementId === 'undefined' || effect.isDataElementId);
+
+    return (effects.length > 0) ? effects : null;
 };

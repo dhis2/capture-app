@@ -13,5 +13,4 @@ export type WidgetProps = {|
     onSaveErrorActionType?: string,
     onCancel?: () => void,
     widgetReducerName: string,
-    ...CssClasses,
 |};

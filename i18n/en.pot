@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-10-06T07:22:43.640Z\n"
-"PO-Revision-Date: 2021-10-06T07:22:43.640Z\n"
+"POT-Creation-Date: 2021-10-07T05:54:35.185Z\n"
+"PO-Revision-Date: 2021-10-07T05:54:35.185Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -932,12 +932,6 @@ msgid "Schedule info"
 msgstr ""
 
 msgid "Schedule date / Due date"
-msgstr ""
-
-msgid "Are you sure ?"
-msgstr ""
-
-msgid "Current data will be lost if you switch tab before saving it"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."
