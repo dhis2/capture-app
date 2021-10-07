@@ -94,4 +94,3 @@ const NewEventWorkspacePlain = ({
 export const NewEventWorkspace: ComponentType<
     $Diff<Props, CssClasses>,
 > = withStyles(styles)(NewEventWorkspacePlain);
-// Adding memo because the lifecycle method in Validated.container grabs the entire state object.
