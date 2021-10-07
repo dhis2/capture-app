@@ -641,7 +641,7 @@ msgid "Enrollment{{escape}} New Event"
 msgstr "登记{{escape}}新事件"
 
 msgid "There was an error loading the page"
-msgstr ""
+msgstr "加载页面时出错"
 
 msgid "Choose a registering unit to start reporting"
 msgstr "选择一个注册机构开始填报"
@@ -941,7 +941,7 @@ msgid "Comments about this enrollment"
 msgstr "关于本次注册的评论"
 
 msgid "Write a comment about this enrollment"
-msgstr ""
+msgstr "写一篇关于这个注册登记的评论"
 
 msgid "This enrollment doesn't have any comments"
 msgstr "本次注册没有任何评论"
