@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { OptionSetHelper } from '../../helpers/OptionSetHelper';
-import { typeKeys } from '../../typeKeys.const';
+import { typeKeys } from '../../constants';
 import { variablePrefixes } from './variablePrefixes.const';
 
 import type {

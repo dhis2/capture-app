@@ -51,7 +51,7 @@ export function runRulesForEnrollmentPage(data: RuleEnrollmentData): ?OutputEffe
         selectedEnrollment: enrollmentData,
         selectedOrgUnit: orgUnit,
         optionSets,
-    }).filter(effect => !effect.isDataElementId);
+    });
 
     return (effects.length > 0) ? effects : null;
 }
