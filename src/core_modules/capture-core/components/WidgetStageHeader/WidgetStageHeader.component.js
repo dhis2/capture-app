@@ -1,9 +1,8 @@
 // @flow
-import React, { useMemo, type ComponentType } from 'react';
+import React, { type ComponentType } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
-import { getProgramAndStageForProgram } from '../../metaData';
 import type { Props } from './widgetStageHeader.types';
 
 const styles = () => ({
@@ -21,29 +20,24 @@ const styles = () => ({
 });
 
 const WidgetStageHeaderPlain = ({
-    stageId,
-    programId,
+    stage,
     classes,
-}: Props) => {
-    const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-
-    return (
-        <div className={classes.header}>
-            {stage?.icon && (
-                <div className={classes.icon}>
-                    <NonBundledDhis2Icon
-                        name={stage?.icon?.name}
-                        color={stage?.icon?.color}
-                        width={30}
-                        height={30}
-                        cornerRadius={2}
-                    />
-                </div>
-            )}
-            <span>{stage?.name}</span>
-        </div>
-    );
-};
+}: Props) => (
+    <div className={classes.header}>
+        {stage?.icon && (
+            <div className={classes.icon}>
+                <NonBundledDhis2Icon
+                    name={stage?.icon?.name}
+                    color={stage?.icon?.color}
+                    width={30}
+                    height={30}
+                    cornerRadius={2}
+                />
+            </div>
+        )}
+        <span>{stage?.name}</span>
+    </div>
+);
 
 export const WidgetStageHeader: ComponentType<
     $Diff<Props, CssClasses>,

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-09-30T05:44:26.420Z\n"
-"PO-Revision-Date: 2021-09-30T05:44:26.420Z\n"
+"POT-Creation-Date: 2021-10-07T05:43:06.864Z\n"
+"PO-Revision-Date: 2021-10-07T05:43:06.864Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -926,12 +926,6 @@ msgid "Write a comment about this enrollment"
 msgstr ""
 
 msgid "This enrollment doesn't have any comments"
-msgstr ""
-
-msgid "Are you sure ?"
-msgstr ""
-
-msgid "Current data will be lost if you switch tab before saving it"
 msgstr ""
 
 msgid "organisation unit could not be retrieved. Please try again later."

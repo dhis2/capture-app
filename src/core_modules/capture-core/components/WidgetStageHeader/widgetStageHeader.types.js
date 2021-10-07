@@ -1,7 +1,6 @@
 // @flow
 
 export type Props = {|
-    stageId: string,
-    programId: string,
+    stage: Object,
     ...CssClasses
 |};

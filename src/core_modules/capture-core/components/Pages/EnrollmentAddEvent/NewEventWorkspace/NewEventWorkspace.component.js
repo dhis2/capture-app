@@ -1,9 +1,10 @@
 // @flow
-import React, { type ComponentType, useState, useRef } from 'react';
-import { TabBar, Tab } from '@dhis2/ui';
+import React, { type ComponentType, useState, useRef, useMemo } from 'react';
+import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { tabMode } from './newEventWorkspace.constants';
+import { getProgramAndStageForProgram } from '../../../../metaData';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
 import { Widget } from '../../../Widget';
@@ -11,7 +12,11 @@ import { WidgetStageHeader } from '../../../WidgetStageHeader';
 import type { Props } from './newEventWorkspace.types';
 
 
-const styles = () => ({});
+const styles = () => ({
+    innerWrapper: {
+        padding: `0 ${spacersNum.dp16}px`,
+    },
+});
 
 const NewEventWorkspacePlain = ({
     stageId,
@@ -20,11 +25,13 @@ const NewEventWorkspacePlain = ({
     teiId,
     enrollmentId,
     dataEntryHasChanges,
+    classes,
     ...passOnProps
 }: Props) => {
     const [mode, setMode] = useState(tabMode.REPORT);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
+    const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
 
     const onHandleSwitchTab = (newMode) => {
         if (dataEntryHasChanges) {
@@ -52,20 +59,23 @@ const NewEventWorkspacePlain = ({
             <Widget
                 noncollapsible
                 header={
-                    <WidgetStageHeader stageId={stageId} programId={programId} />
+                    <WidgetStageHeader stage={stage} />
                 }
             >
-                <TabBar dataTest="new-event-tab-bar">
-                    {tabs.map(tab => <Tab key={`tab-${tab.label}`} {...tab}>{tab.label}</Tab>)}
-                </TabBar>
-                {mode === tabMode.REPORT && <WidgetEnrollmentEventNew
-                    programId={programId}
-                    stageId={stageId}
-                    orgUnitId={orgUnitId}
-                    teiId={teiId}
-                    enrollmentId={enrollmentId}
-                    {...passOnProps}
-                />}
+                <div className={classes.innerWrapper}>
+                    <TabBar dataTest="new-event-tab-bar">
+                        {tabs.map(tab => <Tab key={`tab-${tab.label}`} {...tab}>{tab.label}</Tab>)}
+                    </TabBar>
+                    {mode === tabMode.REPORT && <WidgetEnrollmentEventNew
+                        programId={programId}
+                        stageId={stageId}
+                        orgUnitId={orgUnitId}
+                        teiId={teiId}
+                        enrollmentId={enrollmentId}
+                        {...passOnProps}
+                    />}
+                </div>
+
             </Widget>
             <ConfirmDialog
                 header={i18n.t('Unsaved changes')}
