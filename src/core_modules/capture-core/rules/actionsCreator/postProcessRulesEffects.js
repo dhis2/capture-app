@@ -175,8 +175,8 @@ export function postProcessRulesEffects(
     }
 
     const elementsById = foundation.getElementsById();
-    const scopeFilteredRulesEffects = rulesEffects.filter(({ scope, id }) =>
-        !scope || elementsById[id]);
+    const scopeFilteredRulesEffects = rulesEffects.filter(({ targetDataType, id }) =>
+        !targetDataType || elementsById[id]);
 
     const effectsHierarchy = buildEffectsHierarchy(scopeFilteredRulesEffects);
 

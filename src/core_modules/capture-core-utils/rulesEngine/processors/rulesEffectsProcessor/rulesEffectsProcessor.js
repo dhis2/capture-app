@@ -1,5 +1,5 @@
 // @flow
-import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectScopes } from '../../constants';
+import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes } from '../../constants';
 
 import type {
     ProgramRuleEffect,
@@ -45,9 +45,9 @@ export function getRulesEffectsProcessor(
             .map((idName) => {
                 const outputEffect = getOutputEffect();
                 outputEffect.id = effect[idName];
-                outputEffect.scope = idName === idNames.DATA_ELEMENT_ID ?
-                    rulesEngineEffectScopes.DATA_ELEMENT :
-                    rulesEngineEffectScopes.TRACKED_ENTITY_ATTRIBUTE;
+                outputEffect.targetDataType = idName === idNames.DATA_ELEMENT_ID ?
+                    rulesEngineEffectTargetDataTypes.DATA_ELEMENT :
+                    rulesEngineEffectTargetDataTypes.TRACKED_ENTITY_ATTRIBUTE;
                 return outputEffect;
             });
     }
