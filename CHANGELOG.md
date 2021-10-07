@@ -1,3 +1,10 @@
+## [1.58.4](https://github.com/dhis2/capture-app/compare/v1.58.3...v1.58.4) (2021-10-07)
+
+
+### Bug Fixes
+
+* [DHIS2-11797] Prevent out of scope effects to trigger ([ae97e29](https://github.com/dhis2/capture-app/commit/ae97e29906c419defcf05253c3c82833ade8bc66))
+
 ## [1.58.3](https://github.com/dhis2/capture-app/compare/v1.58.2...v1.58.3) (2021-10-07)
 
 
