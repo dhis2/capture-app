@@ -14,4 +14,5 @@ export type Props = {|
     onSaveSuccessActionType: string,
     onSaveErrorActionType: string,
     onCancel: () => void,
+    ...CssClasses
 |};

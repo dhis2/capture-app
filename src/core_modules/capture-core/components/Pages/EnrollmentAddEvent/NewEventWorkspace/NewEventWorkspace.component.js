@@ -41,6 +41,7 @@ const NewEventWorkspacePlain = ({
             setMode(newMode);
         }
     };
+
     const tabs = [{
         label: 'Report',
         selected: mode === tabMode.REPORT,
@@ -54,6 +55,7 @@ const NewEventWorkspacePlain = ({
         dataTest: 'new-event-schedule-tab',
         key: 'schedule-tab',
     }];
+
     return (
         <>
             <Widget
@@ -75,7 +77,6 @@ const NewEventWorkspacePlain = ({
                         {...passOnProps}
                     />}
                 </div>
-
             </Widget>
             <ConfirmDialog
                 header={i18n.t('Unsaved changes')}
