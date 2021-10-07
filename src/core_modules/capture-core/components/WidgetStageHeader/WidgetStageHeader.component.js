@@ -42,4 +42,3 @@ const WidgetStageHeaderPlain = ({
 export const WidgetStageHeader: ComponentType<
     $Diff<Props, CssClasses>,
 > = withStyles(styles)(WidgetStageHeaderPlain);
-// Adding memo because the lifecycle method in Validated.container grabs the entire state object.
