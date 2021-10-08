@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-10-06T07:59:04.903Z\n"
-"PO-Revision-Date: 2021-10-06T07:59:04.903Z\n"
+"POT-Creation-Date: 2021-10-08T19:52:59.290Z\n"
+"PO-Revision-Date: 2021-10-08T19:52:59.290Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -953,6 +953,12 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
+msgstr ""
+
+msgid "Stage is non-repeatable"
+msgstr ""
+
+msgid "Cancel without saving"
 msgstr ""
 
 msgid "Choose a stage for a new event"
