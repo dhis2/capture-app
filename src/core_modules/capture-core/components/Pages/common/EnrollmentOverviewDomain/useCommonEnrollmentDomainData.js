@@ -40,7 +40,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
     const fetchedEnrollmentData = {
         reference: data,
         enrollment: data?.trackedEntityInstance?.enrollments
-        ?.find(enrollment => enrollment.enrollment === enrollmentId),
+            ?.find(enrollment => enrollment.enrollment === enrollmentId),
         attributeValues: data?.trackedEntityInstance?.attributes,
     };
 

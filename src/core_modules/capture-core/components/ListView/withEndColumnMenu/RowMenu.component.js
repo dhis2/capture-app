@@ -31,7 +31,7 @@ const styles = theme => ({
 });
 
 class Index extends React.Component<Props, State> {
-    managerRef: (instance: any) => void;
+    managerRef: any;
     menuReferenceInstance: ?HTMLDivElement;
 
     constructor(props: Props) {
