@@ -3,7 +3,7 @@ import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Button, spacersNum } from '@dhis2/ui';
-import type { InputProps, Props } from './scheduleButtons.types';
+import type { Props } from './scheduleButtons.types';
 
 const styles = {
     container: {
@@ -35,4 +35,4 @@ const ScheduleButtonsPlain = ({ onSchedule, onCancel, classes }: Props) => (
     </div>
 );
 
-export const ScheduleButtons: ComponentType<InputProps> = (withStyles(styles)(ScheduleButtonsPlain));
+export const ScheduleButtons: ComponentType<Props> = (withStyles(styles)(ScheduleButtonsPlain));

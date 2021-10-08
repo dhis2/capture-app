@@ -4,7 +4,7 @@ import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useScheduleDateConfig = (stageId: string) => {
     const { data, error, loading } = useDataQuery(useMemo(() => ({
-        programStageSchedule: {
+        programStageScheduleConfig: {
             resource: 'programStages',
             id: stageId,
             params: {
@@ -16,5 +16,5 @@ export const useScheduleDateConfig = (stageId: string) => {
 
 
     return { error,
-        programStageSchedule: !loading && data.programStageSchedule };
+        programStageScheduleConfig: !loading && data.programStageScheduleConfig };
 };

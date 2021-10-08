@@ -17,36 +17,16 @@ const styles = {
         width: 'fit-content',
         padding: 4,
     },
-    fieldWrapper: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: spacersNum.dp8,
-    },
-    fieldLabel: {
-        color: colors.grey900,
-        flexGrow: 0,
-        flexShrink: 0,
-        paddingRight: spacersNum.dp32,
-        paddingLeft: spacersNum.dp8,
-    },
-    fieldChildren: {
-        flexGrow: 1,
-        flexShrink: 0,
-    },
+
 };
 
-const DataSectionPlain = ({ sectionName, fields, classes, dataTest }: Props) => (
+const DataSectionPlain = ({ sectionName, children, classes, dataTest }: Props) => (
     <div
         data-test={dataTest}
         className={classes.sectionWrapper}
     >
         <div className={classes.sectionHeader}>{sectionName}</div>
-        {fields.map(field => (<div className={classes.fieldWrapper} key={field.label}>
-            <div className={classes.fieldLabel}>{field.label}</div>
-            <div className={classes.fieldChildren}>{field.children}</div>
-        </div>))}
+        {children}
     </div>
 );
 

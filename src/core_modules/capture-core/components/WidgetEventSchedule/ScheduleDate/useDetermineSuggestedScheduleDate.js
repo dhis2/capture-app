@@ -1,8 +1,7 @@
 // @flow
 import moment from 'moment';
 
-const sortByDate = (events = []) => events.sort((a, b) =>
-    moment.utc(b.eventDate).diff(moment.utc(a.eventDate)));
+const sortByDate = (a, b) => moment.utc(b.eventDate).diff(moment.utc(a.eventDate));
 
 const getNextScheduleDate = (id, eventData) => {
     const possibleNextScheduleValues = eventData.reduce((acc, event) => {
@@ -22,8 +21,14 @@ const getScheduleDateByStandardInterval = (stageId, standardInterval, eventData)
     return moment(eventsInStage[0].eventDate).add(standardInterval, 'days').format();
 };
 
-export const useDetermineScheduleDate = ({ programStageSchedule, enrollmentDate, incidentDate, eventData }) => {
-    if (!programStageSchedule) { return undefined; }
+export const useDetermineSuggestedScheduleDate = ({
+    programStageScheduleConfig,
+    programConfig,
+    enrollmentDate,
+    incidentDate,
+    eventData,
+}) => {
+    if (!programStageScheduleConfig) { return undefined; }
 
     const {
         id,
@@ -31,14 +36,14 @@ export const useDetermineScheduleDate = ({ programStageSchedule, enrollmentDate,
         standardInterval,
         generatedByEnrollmentDate,
         minDaysFromStart,
-    } = programStageSchedule;
+    } = programStageScheduleConfig;
 
     let suggestedScheduleDate;
     if (nextScheduleDate?.id) {
         suggestedScheduleDate = getNextScheduleDate(nextScheduleDate.id, eventData);
     } else if (standardInterval) {
         suggestedScheduleDate = getScheduleDateByStandardInterval(id, standardInterval, eventData);
-    } else if (generatedByEnrollmentDate) {
+    } else if (generatedByEnrollmentDate || !programConfig.displayIncidentDate) {
         suggestedScheduleDate = moment(enrollmentDate).add(minDaysFromStart, 'days').format();
     } else {
         suggestedScheduleDate = moment(incidentDate).add(minDaysFromStart, 'days').format();

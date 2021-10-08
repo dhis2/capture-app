@@ -1,12 +1,13 @@
 // @flow
-import React, { type ComponentType, useState, useMemo } from 'react';
+import React, { type ComponentType, useState } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
-import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
-import { useScheduleDateConfig } from './useScheduleDateConfig';
 import { DateField } from 'capture-core/components/FormFields/New';
-import { useDetermineScheduleDate } from './useDetermineScheduleDate';
+import { useScheduleDateConfig } from './useScheduleDateConfig';
+import { useDetermineSuggestedScheduleDate } from './useDetermineSuggestedScheduleDate';
+import { useProgramConfig } from './useProgramConfig';
+import { InfoBox } from '../InfoBox';
 
 const styles = {
     container: {
@@ -18,24 +19,32 @@ const styles = {
     },
 };
 
-const ScheduleDatePlain = ({ stageId, enrollmentDate, incidentDate, eventData, classes }: Props) => {
+const ScheduleDatePlain = ({ stageId, programId, enrollmentDate, incidentDate, eventData, classes }: Props) => {
     const [scheduleDate, setScheduleDate] = useState();
-    const { programStageSchedule } = useScheduleDateConfig(stageId);
-    const suggestedScheduleDate = useDetermineScheduleDate({ programStageSchedule, enrollmentDate, incidentDate, eventData });
+    const { programStageScheduleConfig } = useScheduleDateConfig(stageId);
+    const { programConfig } = useProgramConfig(programId);
+    const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
+        programStageScheduleConfig, programConfig, enrollmentDate, incidentDate, eventData,
+    });
 
-    console.log({ suggestedScheduleDate });
-    return (<div className={classes.container}>
-        <DateField
-            value={scheduleDate}
-            calendarMinMoment={moment()}
-            width="100%"
-            calendarWidth={350}
-            onSetFocus={() => {}}
-            onFocus={() => { }}
-            onRemoveFocus={() => { }}
-            onBlur={(e) => { setScheduleDate(e); }}
-        />
-    </div>);
+    console.log({ suggestedScheduleDate, scheduleDate });
+    return (<>
+        <div className={classes.container}>
+            <DateField
+                value={scheduleDate}
+                calendarMinMoment={moment()}
+                width="100%"
+                calendarWidth={350}
+                onSetFocus={() => {}}
+                onFocus={() => { }}
+                onRemoveFocus={() => { }}
+                onBlur={(e) => { setScheduleDate(e); }}
+            />
+
+        </div>
+        <InfoBox scheduleDate={scheduleDate} suggestedScheduleDate={suggestedScheduleDate} />
+    </>
+    );
 };
 
 export const ScheduleDate: ComponentType<$Diff<Props, CssClasses>> = (withStyles(styles)(ScheduleDatePlain));

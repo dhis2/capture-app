@@ -1,7 +1,6 @@
 // @flow
 import React, { type ComponentType, useMemo } from 'react';
-import { spacersNum } from '@dhis2/ui';
-import Grid from '@material-ui/core/Grid';
+import { spacersNum, colors } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import { DataSection } from '../DataSection';
@@ -16,8 +15,28 @@ import type { Props } from './widgetEventSchedule.types';
 const styles = () => ({
     wrapper: {
         padding: `${spacersNum.dp16}px 0`,
+        maxWidth: '55.75rem',
+    },
+    fieldWrapper: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        padding: spacersNum.dp8,
+    },
+    fieldLabel: {
+        color: colors.grey900,
+        flexGrow: 0,
+        flexShrink: 0,
+        paddingTop: spacersNum.dp16,
+        paddingRight: spacersNum.dp32,
+        paddingLeft: spacersNum.dp8,
+    },
+    fieldContent: {
+        flexGrow: 1,
+        flexShrink: 0,
     },
 });
+
 const WidgetEventSchedulePlain = ({ stageId, programId, orgUnitId, classes, ...passOnProps }: Props) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
 
@@ -30,24 +49,29 @@ const WidgetEventSchedulePlain = ({ stageId, programId, orgUnitId, classes, ...p
         );
     }
     return (<div className={classes.wrapper}>
-        <Grid item xs={12} sm={12} md={10} lg={10}>
-            <DataSection
-                dataTest="schedule-section"
-                sectionName={i18n.t('Schedule info')}
-                fields={[
-                    {
-                        label: i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } }),
-                        children: <ScheduleDate programId={programId} stageId={stageId} {...passOnProps} />,
-                    }]}
-            />
-            <ScheduleButtons onCancel={() => {}} onSchedule={() => {}} />
-            <BottomText
-                programName={program.name}
-                stageName={stage.name}
-                orgUnitName={orgUnit?.name || ''}
-                mode={textMode.SAVE}
-            />
-        </Grid>
+
+        <DataSection
+            dataTest="schedule-section"
+            sectionName={i18n.t('Schedule info')}
+        >
+            <div className={classes.fieldWrapper}>
+                <div className={classes.fieldLabel}>
+                    {i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } })}
+                </div>
+                <div className={classes.fieldContent}>
+                    <ScheduleDate programId={programId} stageId={stageId} {...passOnProps} />
+                </div>
+            </div>
+        </DataSection>
+
+        <ScheduleButtons onCancel={() => {}} onSchedule={() => {}} />
+        <BottomText
+            programName={program.name}
+            stageName={stage.name}
+            orgUnitName={orgUnit?.name || ''}
+            mode={textMode.SAVE}
+        />
+
 
     </div>);
 }
