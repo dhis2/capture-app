@@ -52,4 +52,4 @@ const InfoBoxPlain = ({ scheduleDate, suggestedScheduleDate, classes }: Props) =
     );
 };
 
-export const InfoBox: ComponentType<Props> = (withStyles(styles)(InfoBoxPlain));
+export const InfoBox: ComponentType<$Diff<Props, CssClasses>> = (withStyles(styles)(InfoBoxPlain));

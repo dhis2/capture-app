@@ -1,7 +1,7 @@
 // @flow
 
 export type Props = {|
-    scheduleDate: string,
-    suggestedScheduleDate: string,
+    scheduleDate?: ?string,
+    suggestedScheduleDate?: ?string,
     ...CssClasses,
 |};

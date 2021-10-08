@@ -8,6 +8,7 @@ import { useScheduleDateConfig } from './useScheduleDateConfig';
 import { useDetermineSuggestedScheduleDate } from './useDetermineSuggestedScheduleDate';
 import { useProgramConfig } from './useProgramConfig';
 import { InfoBox } from '../InfoBox';
+import type { Props } from './scheduleDate.types';
 
 const styles = {
     container: {

@@ -27,7 +27,7 @@ export const useDetermineSuggestedScheduleDate = ({
     enrollmentDate,
     incidentDate,
     eventData,
-}) => {
+}: Object) => {
     if (!programStageScheduleConfig) { return undefined; }
 
     const {

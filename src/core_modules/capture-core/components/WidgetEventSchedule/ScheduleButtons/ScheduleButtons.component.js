@@ -35,4 +35,4 @@ const ScheduleButtonsPlain = ({ onSchedule, onCancel, classes }: Props) => (
     </div>
 );
 
-export const ScheduleButtons: ComponentType<Props> = (withStyles(styles)(ScheduleButtonsPlain));
+export const ScheduleButtons: ComponentType<$Diff<Props, CssClasses>> = (withStyles(styles)(ScheduleButtonsPlain));
