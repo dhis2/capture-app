@@ -4,6 +4,7 @@ import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
+import { useScheduleDate } from './useScheduleDate';
 import { DateField } from 'capture-core/components/FormFields/New';
 
 const styles = {
@@ -16,9 +17,10 @@ const styles = {
     },
 };
 
-const ScheduleDatePlain = ({ classes }: Props) => {
+const ScheduleDatePlain = ({ programId, stageId, classes }: Props) => {
     const [scheduleDate, setScheduleDate] = useState();
-
+    const { programStageSchedule } = useScheduleDate(stageId);
+    console.log({ programStageSchedule });
     return (<div className={classes.container}>
         <DateField
             value={scheduleDate}
