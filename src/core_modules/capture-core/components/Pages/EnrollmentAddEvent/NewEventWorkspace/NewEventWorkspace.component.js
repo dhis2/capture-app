@@ -2,6 +2,7 @@
 import React, { type ComponentType, useState, useRef, useMemo } from 'react';
 import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { useSelector } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { tabMode } from './newEventWorkspace.constants';
 import { getProgramAndStageForProgram } from '../../../../metaData';
@@ -30,6 +31,7 @@ const NewEventWorkspacePlain = ({
     ...passOnProps
 }: Props) => {
     const [mode, setMode] = useState(tabMode.REPORT);
+    const { events, enrollmentDate, incidentDate } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
@@ -77,7 +79,14 @@ const NewEventWorkspacePlain = ({
                         enrollmentId={enrollmentId}
                         {...passOnProps}
                     />}
-                    {mode === tabMode.SCHEDULE && <WidgetEventSchedule programId={programId} stageId={stageId} orgUnitId={orgUnitId} />}
+                    {mode === tabMode.SCHEDULE && <WidgetEventSchedule
+                        programId={programId}
+                        stageId={stageId}
+                        orgUnitId={orgUnitId}
+                        eventData={events}
+                        enrollmentDate={enrollmentDate}
+                        incidentDate={incidentDate}
+                    />}
                 </div>
             </Widget>
             <ConfirmDialog

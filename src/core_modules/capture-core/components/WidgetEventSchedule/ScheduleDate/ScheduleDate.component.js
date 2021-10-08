@@ -4,8 +4,9 @@ import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
-import { useScheduleDate } from './useScheduleDate';
+import { useScheduleDateConfig } from './useScheduleDateConfig';
 import { DateField } from 'capture-core/components/FormFields/New';
+import { useDetermineScheduleDate } from './useDetermineScheduleDate';
 
 const styles = {
     container: {
@@ -17,10 +18,12 @@ const styles = {
     },
 };
 
-const ScheduleDatePlain = ({ programId, stageId, classes }: Props) => {
+const ScheduleDatePlain = ({ stageId, enrollmentDate, incidentDate, eventData, classes }: Props) => {
     const [scheduleDate, setScheduleDate] = useState();
-    const { programStageSchedule } = useScheduleDate(stageId);
-    console.log({ programStageSchedule });
+    const { programStageSchedule } = useScheduleDateConfig(stageId);
+    const suggestedScheduleDate = useDetermineScheduleDate({ programStageSchedule, enrollmentDate, incidentDate, eventData });
+
+    console.log({ suggestedScheduleDate });
     return (<div className={classes.container}>
         <DateField
             value={scheduleDate}

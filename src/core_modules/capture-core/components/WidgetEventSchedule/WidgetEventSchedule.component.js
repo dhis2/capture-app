@@ -18,7 +18,7 @@ const styles = () => ({
         padding: `${spacersNum.dp16}px 0`,
     },
 });
-const WidgetEventSchedulePlain = ({ stageId, programId, orgUnitId, classes }: Props) => {
+const WidgetEventSchedulePlain = ({ stageId, programId, orgUnitId, classes, ...passOnProps }: Props) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
 
     const { orgUnit } = useOrganisationUnit(orgUnitId);
@@ -37,7 +37,7 @@ const WidgetEventSchedulePlain = ({ stageId, programId, orgUnitId, classes }: Pr
                 fields={[
                     {
                         label: i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } }),
-                        children: <ScheduleDate programId={programId} stageId={stageId} />,
+                        children: <ScheduleDate programId={programId} stageId={stageId} {...passOnProps} />,
                     }]}
             />
             <ScheduleButtons onCancel={() => {}} onSchedule={() => {}} />
