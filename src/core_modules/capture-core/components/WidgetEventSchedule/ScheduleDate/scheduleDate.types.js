@@ -6,5 +6,6 @@ export type Props = {|
     enrollmentDate: string,
     incidentDate: string,
     eventData: Array<Object>,
+    orgUnit: Object,
     ...CssClasses,
 |};

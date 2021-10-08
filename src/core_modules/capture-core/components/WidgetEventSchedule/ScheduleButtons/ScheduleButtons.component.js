@@ -8,7 +8,7 @@ import type { Props } from './scheduleButtons.types';
 const styles = {
     container: {
         display: 'flex',
-        marginTop: spacersNum.dp4,
+        marginTop: spacersNum.dp24,
     },
     button: {
         paddingRight: spacersNum.dp16,

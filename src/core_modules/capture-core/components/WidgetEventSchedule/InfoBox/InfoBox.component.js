@@ -24,9 +24,12 @@ const styles = {
         fontWeight: 500,
         paddingBottom: spacersNum.dp16,
     },
+    textLine: {
+        lineHeight: '20px',
+    },
 };
 
-const InfoBoxPlain = ({ scheduleDate, suggestedScheduleDate, classes }: Props) => {
+const InfoBoxPlain = ({ scheduleDate, suggestedScheduleDate, eventCountInOrgUnit, orgUnitName, classes }: Props) => {
     if (!scheduleDate || !suggestedScheduleDate) { return null; }
     const differenceScheduleDateAndSuggestedDate = moment(scheduleDate).diff(moment(suggestedScheduleDate), 'days');
 
@@ -37,9 +40,9 @@ const InfoBoxPlain = ({ scheduleDate, suggestedScheduleDate, classes }: Props) =
             </div>
             <div className={classes.textBox}>
                 <div className={classes.textBold}>{i18n.t('Schedule date info')}</div>
-                {scheduleDate === suggestedScheduleDate ?
+                <div className={classes.textLine}>{scheduleDate === suggestedScheduleDate ?
                     i18n.t(`This date is the the auto-suggested date based on the intervals defined, 
-                    it can be adjusted if needed`)
+                    it can be adjusted if needed.`)
                     :
                     i18n.t('This date is {{difference}} days {{position}} the auto-suggested date.',
                         {
@@ -47,6 +50,16 @@ const InfoBoxPlain = ({ scheduleDate, suggestedScheduleDate, classes }: Props) =
                             difference: Math.abs(differenceScheduleDateAndSuggestedDate),
                         })
                 }
+                </div>
+                <div className={classes.textLine}>
+                    {i18n.t('There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on this day.', {
+                        eventCountInOrgUnit,
+                        orgUnitName,
+                        interpolation: {
+                            escape: false,
+                        },
+                    })}
+                </div>
             </div>
         </div>
     );

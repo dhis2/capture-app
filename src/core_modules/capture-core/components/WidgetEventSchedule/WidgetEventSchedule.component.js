@@ -59,7 +59,12 @@ const WidgetEventSchedulePlain = ({ stageId, programId, orgUnitId, classes, ...p
                     {i18n.t('Schedule date / Due date', { interpolation: { escapeValue: false } })}
                 </div>
                 <div className={classes.fieldContent}>
-                    <ScheduleDate programId={programId} stageId={stageId} {...passOnProps} />
+                    <ScheduleDate
+                        programId={programId}
+                        stageId={stageId}
+                        orgUnit={{ id: orgUnitId, ...orgUnit }}
+                        {...passOnProps}
+                    />
                 </div>
             </div>
         </DataSection>

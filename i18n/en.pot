@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-10-08T11:39:05.182Z\n"
-"PO-Revision-Date: 2021-10-08T11:39:05.182Z\n"
+"POT-Creation-Date: 2021-10-08T15:01:18.715Z\n"
+"PO-Revision-Date: 2021-10-08T15:01:18.715Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -957,10 +957,15 @@ msgstr ""
 
 msgid ""
 "This date is the the auto-suggested date based on the intervals defined, \n"
-"                    it can be adjusted if needed"
+"                    it can be adjusted if needed."
 msgstr ""
 
 msgid "This date is {{difference}} days {{position}} the auto-suggested date."
+msgstr ""
+
+msgid ""
+"There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
+"this day."
 msgstr ""
 
 msgid "Schedule"

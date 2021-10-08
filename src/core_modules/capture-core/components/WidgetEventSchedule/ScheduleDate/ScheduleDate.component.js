@@ -7,6 +7,7 @@ import { DateField } from 'capture-core/components/FormFields/New';
 import { useScheduleDateConfig } from './useScheduleDateConfig';
 import { useDetermineSuggestedScheduleDate } from './useDetermineSuggestedScheduleDate';
 import { useProgramConfig } from './useProgramConfig';
+import { useEventsInOrgUnit } from './useEventsInOrgUnit';
 import { InfoBox } from '../InfoBox';
 import type { Props } from './scheduleDate.types';
 
@@ -20,15 +21,16 @@ const styles = {
     },
 };
 
-const ScheduleDatePlain = ({ stageId, programId, enrollmentDate, incidentDate, eventData, classes }: Props) => {
+const ScheduleDatePlain = ({
+    stageId, programId, orgUnit, classes, ...passOnProps }: Props) => {
     const [scheduleDate, setScheduleDate] = useState();
     const { programStageScheduleConfig } = useScheduleDateConfig(stageId);
     const { programConfig } = useProgramConfig(programId);
+    const { events } = useEventsInOrgUnit(orgUnit.id);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
-        programStageScheduleConfig, programConfig, enrollmentDate, incidentDate, eventData,
+        programStageScheduleConfig, programConfig, ...passOnProps,
     });
 
-    console.log({ suggestedScheduleDate, scheduleDate });
     return (<>
         <div className={classes.container}>
             <DateField
@@ -43,7 +45,12 @@ const ScheduleDatePlain = ({ stageId, programId, enrollmentDate, incidentDate, e
             />
 
         </div>
-        <InfoBox scheduleDate={scheduleDate} suggestedScheduleDate={suggestedScheduleDate} />
+        <InfoBox
+            scheduleDate={scheduleDate}
+            suggestedScheduleDate={suggestedScheduleDate}
+            eventCountInOrgUnit={events.filter(event => moment(event.dueDate).format('YYYY-MM-DD') === scheduleDate).length}
+            orgUnitName={orgUnit?.name}
+        />
     </>
     );
 };
