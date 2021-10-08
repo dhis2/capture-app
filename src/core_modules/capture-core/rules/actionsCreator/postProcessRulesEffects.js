@@ -174,7 +174,11 @@ export function postProcessRulesEffects(
         return null;
     }
 
-    const effectsHierarchy = buildEffectsHierarchy(rulesEffects);
+    const elementsById = foundation.getElementsById();
+    const scopeFilteredRulesEffects = rulesEffects.filter(({ targetDataType, id }) =>
+        !targetDataType || elementsById[id]);
+
+    const effectsHierarchy = buildEffectsHierarchy(scopeFilteredRulesEffects);
 
     effectsHierarchy[effectActions.HIDE_FIELD] =
         filterFieldsHideEffects(
