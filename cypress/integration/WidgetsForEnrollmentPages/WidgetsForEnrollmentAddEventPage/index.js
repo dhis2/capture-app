@@ -23,10 +23,6 @@ When(/you click switch tab to (.*)/, (tabName) => {
     cy.get('[data-test="new-event-tab-bar"]').get('button').contains(tabName).click();
 });
 
-Then('you should see warning dialog', () => {
-    cy.get('div[role="dialog"]')
-        .contains('Current data will be lost if you switch tab before saving it')
-        .should('exist');
-
-    cy.get('div[role="dialog"]').contains('Yes, discard').click();
+Then('you should see Schedule tab', () => {
+    cy.get('[data-test="new-event-schedule-tab"]').should('have.class', 'selected');
 });

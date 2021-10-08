@@ -94,4 +94,4 @@ Feature: The user interacts with the widgets on the enrollment add event page
     Then the enrollment widget should be opened
     Then you should see tabs: Report,Schedule
     When you click switch tab to Schedule
-    Then you should see warning dialog
+    Then you should see Schedule tab
