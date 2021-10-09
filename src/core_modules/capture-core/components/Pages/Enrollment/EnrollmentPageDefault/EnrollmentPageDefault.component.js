@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { spacersNum } from '@dhis2/ui';
+import { spacersNum, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
@@ -12,6 +12,7 @@ import { WidgetFeedback } from '../../../WidgetFeedback';
 import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
+import { WidgetEnrollmentQuickActions } from '../../../WidgetEnrollmentQuickActions';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -21,6 +22,9 @@ const getStyles = ({ typography }) => ({
         flexGrow: 3,
         flexShrink: 1,
         width: 872,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: spacers.dp16,
     },
     rightColumn: {
         flexGrow: 1,
@@ -29,7 +33,7 @@ const getStyles = ({ typography }) => ({
         width: 360,
         display: 'flex',
         flexDirection: 'column',
-        gap: '12px',
+        gap: spacers.dp16,
     },
     title: {
         ...typography.title,
@@ -56,6 +60,11 @@ export const EnrollmentPageDefaultPlain = ({
         <div className={classes.title}>Enrollment Dashboard</div>
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
+                <WidgetEnrollmentQuickActions
+                    teiId={teiId}
+                    enrollmentId={enrollmentId}
+                    programId={program.id}
+                />
                 <WidgetStagesAndEvents
                     stages={stages}
                     events={events}
