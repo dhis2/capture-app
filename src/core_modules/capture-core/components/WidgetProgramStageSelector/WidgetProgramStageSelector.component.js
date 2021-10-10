@@ -44,6 +44,7 @@ const WidgetProgramStageSelectorComponentPlain = ({ programStages, onProgramStag
                         secondary
                         disabled={disableStage}
                         onClick={() => onProgramStageUpdate(programStage.id)}
+                        dataTest={'program-stage-selector-button'}
                     >
                         <Tooltip
                             title={disableStage ? i18n.t('Stage is non-repeatable') : ''}
