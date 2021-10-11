@@ -83,7 +83,9 @@ const NewEventWorkspacePlain = ({
                         programId={programId}
                         stageId={stageId}
                         orgUnitId={orgUnitId}
+                        teiId={teiId}
                         eventData={events}
+                        enrollmentId={enrollmentId}
                         enrollmentDate={enrollmentDate}
                         incidentDate={incidentDate}
                     />}

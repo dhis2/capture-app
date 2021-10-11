@@ -1,3 +1,3 @@
 // @flow
 
-export { WidgetEventSchedule } from './WidgetEventSchedule.component';
+export { WidgetEventSchedule } from './WidgetEventSchedule.container';

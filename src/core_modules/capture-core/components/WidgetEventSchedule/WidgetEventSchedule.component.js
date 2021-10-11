@@ -1,14 +1,12 @@
 // @flow
-import React, { type ComponentType, useMemo } from 'react';
+import React, { type ComponentType } from 'react';
 import { spacersNum, colors } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import { DataSection } from '../DataSection';
-import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
 import { ScheduleButtons } from './ScheduleButtons';
 import { ScheduleDate } from './ScheduleDate';
 import { BottomText, textMode } from '../WidgetEnrollmentEventNew/BottomText';
-import { useOrganisationUnit } from '../WidgetEnrollmentEventNew/Validated/useOrganisationUnit';
 import type { Props } from './widgetEventSchedule.types';
 
 
@@ -37,19 +35,10 @@ const styles = () => ({
     },
 });
 
-const WidgetEventSchedulePlain = ({ stageId, programId, orgUnitId, classes, ...passOnProps }: Props) => {
-    const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-
-    const { orgUnit } = useOrganisationUnit(orgUnitId);
-    if (!program || !stage || !(program instanceof TrackerProgram)) {
-        return (
-            <div>
-                {i18n.t('program or stage is invalid')};
-            </div>
-        );
-    }
-    return (<div className={classes.wrapper}>
-
+const WidgetEventSchedulePlain = ({
+    stageId, programId, programName, stageName, orgUnit, onSchedule, classes, ...passOnProps
+}: Props) => (
+    <div className={classes.wrapper}>
         <DataSection
             dataTest="schedule-section"
             sectionName={i18n.t('Schedule info')}
@@ -62,24 +51,20 @@ const WidgetEventSchedulePlain = ({ stageId, programId, orgUnitId, classes, ...p
                     <ScheduleDate
                         programId={programId}
                         stageId={stageId}
-                        orgUnit={{ id: orgUnitId, ...orgUnit }}
+                        orgUnit={orgUnit}
                         {...passOnProps}
                     />
                 </div>
             </div>
         </DataSection>
-
-        <ScheduleButtons onCancel={() => {}} onSchedule={() => {}} />
+        <ScheduleButtons onCancel={() => {}} onSchedule={onSchedule} />
         <BottomText
-            programName={program.name}
-            stageName={stage.name}
+            programName={programName}
+            stageName={stageName}
             orgUnitName={orgUnit?.name || ''}
             mode={textMode.SAVE}
         />
+    </div>
+);
 
-
-    </div>);
-}
-;
-
-export const WidgetEventSchedule: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetEventSchedulePlain);
+export const WidgetEventScheduleComponent: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(WidgetEventSchedulePlain);

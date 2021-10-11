@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
+import React, { type ComponentType } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import moment from 'moment';
@@ -22,8 +22,7 @@ const styles = {
 };
 
 const ScheduleDatePlain = ({
-    stageId, programId, orgUnit, classes, ...passOnProps }: Props) => {
-    const [scheduleDate, setScheduleDate] = useState();
+    stageId, scheduleDate, setScheduleDate, programId, orgUnit, classes, ...passOnProps }: Props) => {
     const { programStageScheduleConfig } = useScheduleDateConfig(stageId);
     const { programConfig } = useProgramConfig(programId);
     const { events } = useEventsInOrgUnit(orgUnit.id);
