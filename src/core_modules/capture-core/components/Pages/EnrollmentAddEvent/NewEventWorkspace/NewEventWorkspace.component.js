@@ -2,6 +2,7 @@
 import React, { type ComponentType, useState, useRef, useMemo } from 'react';
 import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { useSelector } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { tabMode } from './newEventWorkspace.constants';
 import { getProgramAndStageForProgram } from '../../../../metaData';
@@ -28,7 +29,8 @@ const NewEventWorkspacePlain = ({
     classes,
     ...passOnProps
 }: Props) => {
-    const [mode, setMode] = useState(tabMode.REPORT);
+    const selectedTab = useSelector(({ router: { location } }) => location.query.tab);
+    const [mode, setMode] = useState(selectedTab ?? tabMode.REPORT);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
