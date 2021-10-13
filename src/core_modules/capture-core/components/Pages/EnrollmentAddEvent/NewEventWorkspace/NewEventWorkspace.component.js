@@ -9,7 +9,7 @@ import { getProgramAndStageForProgram } from '../../../../metaData';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
 import { Widget } from '../../../Widget';
-import { WidgetStageHeader } from '../../../WidgetStageHeader';
+import { WidgetStageHeader } from './WidgetStageHeader';
 import type { Props } from './newEventWorkspace.types';
 
 
