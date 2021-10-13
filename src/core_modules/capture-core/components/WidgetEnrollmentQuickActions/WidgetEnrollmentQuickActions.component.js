@@ -63,6 +63,7 @@ const WidgetEnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
         >
             <div
                 className={classes.contentContainer}
+                data-test={'quick-action-button-container'}
             >
                 <QuickActionButton
                     icon={<IconAdd24 />}
