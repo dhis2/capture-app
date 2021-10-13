@@ -1,8 +1,8 @@
 // @flow
-
 import React, { type Element } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { Button, spacers } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
+import { Tooltip, withStyles } from '@material-ui/core';
 
 const styles = {
     button: {
@@ -17,18 +17,24 @@ type Props = {|
     label: string,
     onClickAction: () => void,
     dataTest?: string,
+    disable?: ?boolean,
     ...CssClasses,
 |}
 
-const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, classes }: Props) => (
+const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disable, classes }: Props) => (
     <Button
-        onClick={() => onClickAction()}
+        onClick={onClickAction}
         dataTest={dataTest}
+        disabled={disable}
     >
-        <div className={classes.button}>
-            {icon}
-            {label}
-        </div>
+        <Tooltip
+            title={disable ? i18n.t('No available program stages') : ''}
+        >
+            <div className={classes.button}>
+                {icon}
+                {label}
+            </div>
+        </Tooltip>
     </Button>
 );
 

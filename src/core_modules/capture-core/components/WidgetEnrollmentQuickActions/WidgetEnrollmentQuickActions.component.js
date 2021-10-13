@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 // $FlowFixMe
 import { shallowEqual, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
@@ -13,14 +13,14 @@ import { urlArguments } from '../../utils/url';
 
 const styles = {
     contentContainer: {
-        padding: `5px ${spacers.dp16} ${spacers.dp24} ${spacers.dp16}`,
+        padding: `0 ${spacers.dp16} ${spacers.dp24} ${spacers.dp16}`,
         display: 'flex',
         gap: spacers.dp8,
     },
 
 };
 
-const WidgetEnrollmentQuickActionsComponent = ({ classes }) => {
+const WidgetEnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
     const [open, setOpen] = useState(true);
     const history = useHistory();
     const { enrollmentId, programId, teiId, orgUnitId } = useSelector(
@@ -30,11 +30,25 @@ const WidgetEnrollmentQuickActionsComponent = ({ classes }) => {
             },
         },
         ) => (
-            { enrollmentId: query.enrollmentId,
+            {
+                enrollmentId: query.enrollmentId,
                 teiId: query.teiId,
                 programId: query.programId,
                 orgUnitId: query.orgUnitId,
             }), shallowEqual);
+
+    const programStages = useMemo(() => stages.map((stage) => {
+        stage.eventCount = (events
+                ?.filter(event => event.programStage === stage.id)
+                ?.length
+        );
+        return stage;
+    }), [events, stages]);
+
+    const availableStage = useMemo(
+        () => programStages.every(programStage =>
+            (!programStage.repeatable && programStage.eventCount > 0),
+        ), [programStages]);
 
     const onNavigationFromQuickActions = (tab: string) => {
         history.push(`/enrollmentEventNew?${urlArguments({ programId, teiId, enrollmentId, orgUnitId })}&tab=${tab}`);
@@ -53,8 +67,9 @@ const WidgetEnrollmentQuickActionsComponent = ({ classes }) => {
                 <QuickActionButton
                     icon={<IconAdd24 />}
                     label={i18n.t('New Event')}
-                    onClickAction={() => onNavigationFromQuickActions(QuickActionTabTypes.NEW)}
-                    dataTest={'quick-action-button-new'}
+                    onClickAction={() => onNavigationFromQuickActions(QuickActionTabTypes.REPORT)}
+                    dataTest={'quick-action-button-report'}
+                    disable={availableStage}
                 />
 
                 <QuickActionButton
@@ -62,6 +77,7 @@ const WidgetEnrollmentQuickActionsComponent = ({ classes }) => {
                     label={i18n.t('Schedule an event')}
                     onClickAction={() => onNavigationFromQuickActions(QuickActionTabTypes.SCHEDULE)}
                     dataTest={'quick-action-button-schedule'}
+                    disable={availableStage}
                 />
 
                 <QuickActionButton
@@ -69,6 +85,7 @@ const WidgetEnrollmentQuickActionsComponent = ({ classes }) => {
                     label={i18n.t('Make referral')}
                     onClickAction={() => onNavigationFromQuickActions(QuickActionTabTypes.REFER)}
                     dataTest={'quick-action-button-refer'}
+                    disable={availableStage}
                 />
             </div>
         </Widget>

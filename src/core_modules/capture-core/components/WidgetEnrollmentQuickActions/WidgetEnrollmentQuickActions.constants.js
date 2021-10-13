@@ -1,7 +1,7 @@
 // @flow
 
 export const QuickActionTabTypes = Object.freeze({
-    NEW: 'NEW',
+    REPORT: 'REPORT',
     REFER: 'REFER',
     SCHEDULE: 'SCHEDULE',
 });
