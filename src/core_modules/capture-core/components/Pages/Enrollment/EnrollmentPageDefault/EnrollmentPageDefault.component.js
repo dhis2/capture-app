@@ -60,11 +60,7 @@ export const EnrollmentPageDefaultPlain = ({
         <div className={classes.title}>Enrollment Dashboard</div>
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
-                <WidgetEnrollmentQuickActions
-                    teiId={teiId}
-                    enrollmentId={enrollmentId}
-                    programId={program.id}
-                />
+                <WidgetEnrollmentQuickActions />
                 <WidgetStagesAndEvents
                     stages={stages}
                     events={events}

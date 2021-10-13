@@ -16,12 +16,14 @@ type Props = {|
     icon: Element<any>,
     label: string,
     onClickAction: () => void,
+    dataTest?: string,
     ...CssClasses,
 |}
 
-const QuickActionButtonPlain = ({ icon, label, onClickAction, classes }: Props) => (
+const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, classes }: Props) => (
     <Button
         onClick={() => onClickAction()}
+        dataTest={dataTest}
     >
         <div className={classes.button}>
             {icon}
