@@ -16,7 +16,7 @@ import type {
     IDateUtils,
 } from './rulesEngine.types';
 import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
-import { effectActions } from './effectActions.const';
+import { effectActions } from './constants';
 import { trimQuotes } from './commonUtils/trimQuotes';
 import { normalizeRuleVariable } from './commonUtils/normalizeRuleVariable';
 

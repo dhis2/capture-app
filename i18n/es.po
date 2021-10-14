@@ -4,7 +4,7 @@
 # Sergio Valenzuela <sergio.valenzuela@ehas.org>, 2020
 # ericbp <ericbarredap@gmail.com>, 2021
 # Alison Andrade <aandrade@ippfwhr.org>, 2021
-# drprabhjot, 2021
+# Prabhjot Singh, 2021
 # Marta Vila <marta@dhis2.org>, 2021
 # Viktor Varland <viktor@dhis2.org>, 2021
 # phil_dhis2, 2021
