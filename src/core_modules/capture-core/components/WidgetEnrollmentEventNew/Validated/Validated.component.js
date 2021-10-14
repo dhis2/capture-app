@@ -5,7 +5,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';
-import { BottomText, textMode } from '../BottomText';
+import { SavingText } from '../SavingText';
 import type { Props } from './validated.types';
 
 const styles = () => ({
@@ -47,11 +47,10 @@ const ValidatedPlain = ({
                     onCancel={onCancel}
                     id={id}
                 />
-                <BottomText
+                <SavingText
                     programName={programName}
                     stageName={stage.name}
                     orgUnitName={orgUnit.name}
-                    mode={textMode.SAVE}
                 />
             </div>
         )}

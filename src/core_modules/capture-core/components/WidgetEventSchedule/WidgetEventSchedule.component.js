@@ -6,7 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import { DataSection } from '../DataSection';
 import { ScheduleButtons } from './ScheduleButtons';
 import { ScheduleDate } from './ScheduleDate';
-import { BottomText, textMode } from '../WidgetEnrollmentEventNew/BottomText';
+import { SavingText } from './SavingText';
 import type { Props } from './widgetEventSchedule.types';
 
 
@@ -58,11 +58,10 @@ const WidgetEventSchedulePlain = ({
             </div>
         </DataSection>
         <ScheduleButtons onCancel={() => {}} onSchedule={onSchedule} />
-        <BottomText
+        <SavingText
             programName={programName}
             stageName={stageName}
             orgUnitName={orgUnit?.name || ''}
-            mode={textMode.SAVE}
         />
     </div>
 );
