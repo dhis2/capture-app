@@ -44,20 +44,6 @@ const NewEventWorkspacePlain = ({
         }
     };
 
-    const tabs = [{
-        label: 'Report',
-        selected: mode === tabMode.REPORT,
-        onClick: () => onHandleSwitchTab(tabMode.REPORT),
-        dataTest: 'new-event-report-tab',
-        key: 'report-tab',
-    }, {
-        label: 'Schedule',
-        selected: mode === tabMode.SCHEDULE,
-        onClick: () => onHandleSwitchTab(tabMode.SCHEDULE),
-        dataTest: 'new-event-schedule-tab',
-        key: 'schedule-tab',
-    }];
-
     return (
         <>
             <Widget
@@ -68,7 +54,24 @@ const NewEventWorkspacePlain = ({
             >
                 <div className={classes.innerWrapper}>
                     <TabBar dataTest="new-event-tab-bar">
-                        {tabs.map(tab => <Tab key={`tab-${tab.label}`} {...tab}>{tab.label}</Tab>)}
+                        <Tab
+                            key="report-tab"
+                            selected={mode === tabMode.REPORT}
+                            onClick={() => onHandleSwitchTab(tabMode.REPORT)}
+                            dataTest="new-event-report-tab"
+                        >{i18n.t('Report')}</Tab>
+                        <Tab
+                            key="schedule-tab"
+                            selected={mode === tabMode.SCHEDULE}
+                            onClick={() => onHandleSwitchTab(tabMode.SCHEDULE)}
+                            dataTest="new-event-schedule-tab"
+                        >{i18n.t('Schedule')}</Tab>
+                        <Tab
+                            key="refer-tab"
+                            selected={mode === tabMode.REFER}
+                            onClick={() => onHandleSwitchTab(tabMode.REFER)}
+                            dataTest="new-event-refer-tab"
+                        >{i18n.t('Refer')}</Tab>
                     </TabBar>
                     {mode === tabMode.REPORT && <WidgetEnrollmentEventNew
                         programId={programId}
