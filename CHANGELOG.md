@@ -1,3 +1,10 @@
+## [1.58.5](https://github.com/dhis2/capture-app/compare/v1.58.4...v1.58.5) (2021-10-14)
+
+
+### Bug Fixes
+
+* [TECH-700] add query params for events ([#2199](https://github.com/dhis2/capture-app/issues/2199)) ([64f9015](https://github.com/dhis2/capture-app/commit/64f90152a458ecc72800ce0c59721a4e6989a83d))
+
 ## [1.58.4](https://github.com/dhis2/capture-app/compare/v1.58.3...v1.58.4) (2021-10-07)
 
 
