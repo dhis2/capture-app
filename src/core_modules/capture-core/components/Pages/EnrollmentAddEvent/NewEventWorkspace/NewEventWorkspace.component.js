@@ -31,6 +31,7 @@ const NewEventWorkspacePlain = ({
     ...passOnProps
 }: Props) => {
     const selectedTab = useSelector(({ router: { location } }) => location.query.tab);
+    const { events, enrollmentDate, incidentDate } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const [mode, setMode] = useState(selectedTab ?? tabMode.REPORT);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
