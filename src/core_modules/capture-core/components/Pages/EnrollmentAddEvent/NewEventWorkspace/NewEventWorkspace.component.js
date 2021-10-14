@@ -9,9 +9,9 @@ import { getProgramAndStageForProgram } from '../../../../metaData';
 import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
 import { Widget } from '../../../Widget';
-import { WidgetStageHeader } from '../../../WidgetStageHeader';
-import type { Props } from './newEventWorkspace.types';
+import { WidgetStageHeader } from './WidgetStageHeader';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
+import type { Props } from './newEventWorkspace.types';
 
 
 const styles = () => ({
@@ -30,8 +30,8 @@ const NewEventWorkspacePlain = ({
     classes,
     ...passOnProps
 }: Props) => {
-    const [mode, setMode] = useState(tabMode.REPORT);
-    const { events, enrollmentDate, incidentDate } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
+    const selectedTab = useSelector(({ router: { location } }) => location.query.tab);
+    const [mode, setMode] = useState(selectedTab ?? tabMode.REPORT);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
     const { stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
@@ -45,20 +45,6 @@ const NewEventWorkspacePlain = ({
         }
     };
 
-    const tabs = [{
-        label: 'Report',
-        selected: mode === tabMode.REPORT,
-        onClick: () => onHandleSwitchTab(tabMode.REPORT),
-        dataTest: 'new-event-report-tab',
-        key: 'report-tab',
-    }, {
-        label: 'Schedule',
-        selected: mode === tabMode.SCHEDULE,
-        onClick: () => onHandleSwitchTab(tabMode.SCHEDULE),
-        dataTest: 'new-event-schedule-tab',
-        key: 'schedule-tab',
-    }];
-
     return (
         <>
             <Widget
@@ -69,7 +55,24 @@ const NewEventWorkspacePlain = ({
             >
                 <div className={classes.innerWrapper}>
                     <TabBar dataTest="new-event-tab-bar">
-                        {tabs.map(tab => <Tab key={`tab-${tab.label}`} {...tab}>{tab.label}</Tab>)}
+                        <Tab
+                            key="report-tab"
+                            selected={mode === tabMode.REPORT}
+                            onClick={() => onHandleSwitchTab(tabMode.REPORT)}
+                            dataTest="new-event-report-tab"
+                        >{i18n.t('Report')}</Tab>
+                        <Tab
+                            key="schedule-tab"
+                            selected={mode === tabMode.SCHEDULE}
+                            onClick={() => onHandleSwitchTab(tabMode.SCHEDULE)}
+                            dataTest="new-event-schedule-tab"
+                        >{i18n.t('Schedule')}</Tab>
+                        <Tab
+                            key="refer-tab"
+                            selected={mode === tabMode.REFER}
+                            onClick={() => onHandleSwitchTab(tabMode.REFER)}
+                            dataTest="new-event-refer-tab"
+                        >{i18n.t('Refer')}</Tab>
                     </TabBar>
                     {mode === tabMode.REPORT && <WidgetEnrollmentEventNew
                         programId={programId}
