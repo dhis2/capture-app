@@ -1,3 +1,10 @@
+# [1.59.0](https://github.com/dhis2/capture-app/compare/v1.58.5...v1.59.0) (2021-10-14)
+
+
+### Features
+
+* [DHIS2-11617] Implement switch tab in add event page ([#2165](https://github.com/dhis2/capture-app/issues/2165)) ([9a6a66b](https://github.com/dhis2/capture-app/commit/9a6a66b3c0a7576aaebf5e2429278d3a942a8502))
+
 ## [1.58.5](https://github.com/dhis2/capture-app/compare/v1.58.4...v1.58.5) (2021-10-14)
 
 
