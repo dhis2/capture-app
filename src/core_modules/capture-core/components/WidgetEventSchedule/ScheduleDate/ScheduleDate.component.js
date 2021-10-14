@@ -4,9 +4,9 @@ import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import moment from 'moment';
 import { DateField } from 'capture-core/components/FormFields/New';
-import { useScheduleDateConfig } from './useScheduleDateConfig';
+import { useScheduleConfigFromProgramStage } from './useScheduleConfigFromProgramStage';
 import { useDetermineSuggestedScheduleDate } from './useDetermineSuggestedScheduleDate';
-import { useProgramConfig } from './useProgramConfig';
+import { useScheduleConfigFromProgram } from './useScheduleConfigFromProgram';
 import { useEventsInOrgUnit } from './useEventsInOrgUnit';
 import { InfoBox } from '../InfoBox';
 import type { Props } from './scheduleDate.types';
@@ -23,8 +23,8 @@ const styles = {
 
 const ScheduleDatePlain = ({
     stageId, scheduleDate, setScheduleDate, programId, orgUnit, classes, ...passOnProps }: Props) => {
-    const { programStageScheduleConfig } = useScheduleDateConfig(stageId);
-    const { programConfig } = useProgramConfig(programId);
+    const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
+    const { programConfig } = useScheduleConfigFromProgram(programId);
     const { events } = useEventsInOrgUnit(orgUnit.id);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, ...passOnProps,

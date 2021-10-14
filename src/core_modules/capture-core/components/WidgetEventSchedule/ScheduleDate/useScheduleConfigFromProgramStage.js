@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 
-export const useScheduleDateConfig = (stageId: string) => {
+export const useScheduleConfigFromProgramStage = (stageId: string) => {
     const { data, error, loading } = useDataQuery(useMemo(() => ({
         programStageScheduleConfig: {
             resource: 'programStages',
