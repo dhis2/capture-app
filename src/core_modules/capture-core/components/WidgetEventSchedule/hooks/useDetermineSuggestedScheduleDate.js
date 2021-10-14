@@ -1,21 +1,23 @@
 // @flow
 import moment from 'moment';
 
-const sortByDate = (a, b) => moment.utc(b.eventDate).diff(moment.utc(a.eventDate));
+const sortByMostRecentDate = (a, b) => moment.utc(a.eventDate).diff(moment.utc(b.eventDate));
 
 const getNextScheduleDate = (id, eventData) => {
     const possibleNextScheduleValues = eventData.reduce((acc, event) => {
         event.dataValues.forEach((item) => {
-            if (item.dataElement === id) { acc.push(item); }
+            if (item.dataElement === id && item.value !== null) {
+                acc.push({ ...item, eventDate: event.eventDate });
+            }
         });
         return acc;
-    }, []).sort(sortByDate);
+    }, []).sort(sortByMostRecentDate);
     if (!possibleNextScheduleValues.length) { return undefined; }
     return possibleNextScheduleValues[0].value;
 };
 
 const getScheduleDateByStandardInterval = (stageId, standardInterval, eventData) => {
-    const eventsInStage = eventData.filter(event => event.programStage === stageId).sort(sortByDate);
+    const eventsInStage = eventData.filter(event => event.programStage === stageId).sort(sortByMostRecentDate);
     if (!eventsInStage.length) { return undefined; }
 
     return moment(eventsInStage[0].eventDate).add(standardInterval, 'days').format();
