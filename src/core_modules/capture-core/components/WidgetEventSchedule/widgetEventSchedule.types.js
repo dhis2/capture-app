@@ -21,6 +21,8 @@ export type Props = {|
    stageName: string,
    programName: string,
    scheduleDate?: ?string,
+   suggestedScheduleDate?: ?string,
+   eventCountInOrgUnit: number,
    onSchedule: () => Promise<void>,
    setScheduleDate: (date: string) => void,
    ...CssClasses
