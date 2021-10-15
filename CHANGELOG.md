@@ -1,3 +1,73 @@
+## [1.59.1](https://github.com/dhis2/capture-app/compare/v1.59.0...v1.59.1) (2021-10-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e6d5e32](https://github.com/dhis2/capture-app/commit/e6d5e3255985e761a75e371c1bcaff6ba71dabc5))
+
+# [1.59.0](https://github.com/dhis2/capture-app/compare/v1.58.5...v1.59.0) (2021-10-14)
+
+
+### Features
+
+* [DHIS2-11617] Implement switch tab in add event page ([#2165](https://github.com/dhis2/capture-app/issues/2165)) ([9a6a66b](https://github.com/dhis2/capture-app/commit/9a6a66b3c0a7576aaebf5e2429278d3a942a8502))
+
+## [1.58.5](https://github.com/dhis2/capture-app/compare/v1.58.4...v1.58.5) (2021-10-14)
+
+
+### Bug Fixes
+
+* [TECH-700] add query params for events ([#2199](https://github.com/dhis2/capture-app/issues/2199)) ([64f9015](https://github.com/dhis2/capture-app/commit/64f90152a458ecc72800ce0c59721a4e6989a83d))
+
+## [1.58.4](https://github.com/dhis2/capture-app/compare/v1.58.3...v1.58.4) (2021-10-07)
+
+
+### Bug Fixes
+
+* [DHIS2-11797] Prevent out of scope effects to trigger ([ae97e29](https://github.com/dhis2/capture-app/commit/ae97e29906c419defcf05253c3c82833ade8bc66))
+
+## [1.58.3](https://github.com/dhis2/capture-app/compare/v1.58.2...v1.58.3) (2021-10-07)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([398e8e9](https://github.com/dhis2/capture-app/commit/398e8e93904707d5739515b1d94970ea76c19cca))
+
+## [1.58.2](https://github.com/dhis2/capture-app/compare/v1.58.1...v1.58.2) (2021-10-06)
+
+
+### Bug Fixes
+
+* [DHIS2-11084] Refactor search form value converters of TEA ([#1987](https://github.com/dhis2/capture-app/issues/1987)) ([3549d48](https://github.com/dhis2/capture-app/commit/3549d48c1ead16a67163cd3822e2b24b31f3680d))
+
+## [1.58.1](https://github.com/dhis2/capture-app/compare/v1.58.0...v1.58.1) (2021-10-06)
+
+
+### Bug Fixes
+
+* [DHIS2-11815] check if data element exists ([#2157](https://github.com/dhis2/capture-app/issues/2157)) ([9448c2e](https://github.com/dhis2/capture-app/commit/9448c2e527aa69e607e08080ce09a9e9e8f0e8b5))
+
+# [1.58.0](https://github.com/dhis2/capture-app/compare/v1.57.0...v1.58.0) (2021-10-05)
+
+
+### Features
+
+* [DHIS2-11806] New org unit tree ([#2152](https://github.com/dhis2/capture-app/issues/2152)) ([4fe7796](https://github.com/dhis2/capture-app/commit/4fe779639daaed224c1158c8b294da76bde4dbca))
+
+# [1.57.0](https://github.com/dhis2/capture-app/compare/v1.56.1...v1.57.0) (2021-10-05)
+
+
+### Features
+
+* [DHIS2-11830] implement auto select enrollment ([#2138](https://github.com/dhis2/capture-app/issues/2138)) ([7d58190](https://github.com/dhis2/capture-app/commit/7d58190fa9901859de7af23384b88ede320c394e))
+
+## [1.56.1](https://github.com/dhis2/capture-app/compare/v1.56.0...v1.56.1) (2021-10-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4f9c8d1](https://github.com/dhis2/capture-app/commit/4f9c8d1e5376a4a214b45b3ebdb2da9da593e67e))
+
 # [1.56.0](https://github.com/dhis2/capture-app/compare/v1.55.13...v1.56.0) (2021-10-01)
 
 

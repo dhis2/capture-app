@@ -1,3 +1,4 @@
+import { rulesEngineEffectTargetDataTypes } from 'capture-core-utils/rulesEngine';
 import { runRulesForSingleEvent } from '../actionsCreator/runRulesForSingleEvent';
 
 describe('rules engine', () => {
@@ -15,7 +16,7 @@ describe('rules engine', () => {
                 },
                 foundation: { programRules: [] },
             },
-            [{ id: 'vANAXwtLwcT', isDataElementId: true, message: 'Hemoglobin value lower than normal ', type: 'SHOWWARNING' }, { id: 'Ok9OQpitjQr', isDataElementId: true, type: 'HIDEFIELD' }],
+            [{ id: 'vANAXwtLwcT', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, message: 'Hemoglobin value lower than normal ', type: 'SHOWWARNING' }, { id: 'Ok9OQpitjQr', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' }],
         ],
         [
             {
