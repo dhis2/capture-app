@@ -1,6 +1,8 @@
 // @flow
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+// $FlowFixMe
+import { shallowEqual, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import log from 'loglevel';
 import { WidgetProgramStageSelectorComponent } from './WidgetProgramStageSelector.component';
@@ -19,6 +21,17 @@ export const WidgetProgramStageSelector = ({ programId, orgUnitId, teiId, enroll
     const { error: enrollmentsError, enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const stages = useProgramStages(program, programMetadata.programStages);
 
+    const { tab } = useSelector(
+        ({
+            router: {
+                location: { query },
+            },
+        }) => ({
+            tab: query.tab,
+        }),
+        shallowEqual,
+    );
+
     if (programMetaDataError || enrollmentsError) {
         log.error(errorCreator('Enrollment page could not be loaded')({
             programMetaDataError,
@@ -35,7 +48,7 @@ export const WidgetProgramStageSelector = ({ programId, orgUnitId, teiId, enroll
     }), [enrollment?.events, stages]);
 
     const onSelectProgramStage = (newStageId) => {
-        history.push(`enrollmentEventNew?${urlArguments({ programId, orgUnitId, teiId, enrollmentId, stageId: newStageId })}`);
+        history.push(`enrollmentEventNew?${urlArguments({ programId, orgUnitId, teiId, enrollmentId, stageId: newStageId })}&tab=${tab}`);
     };
 
     const onCancel = () => history.push(`enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
