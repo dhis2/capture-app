@@ -30,7 +30,7 @@ const styles = {
     },
 };
 
-const WidgetProgramStageSelectorComponentPlain = ({ programStages, onProgramStageUpdate, onCancel, classes }) => (
+const WidgetProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStage, onCancel, classes }) => (
     <div className={classes.container}>
         {programStages.map((programStage) => {
             const disableStage = !programStage.repeatable && programStage.eventCount > 0;
@@ -43,7 +43,7 @@ const WidgetProgramStageSelectorComponentPlain = ({ programStages, onProgramStag
                         big
                         secondary
                         disabled={disableStage}
-                        onClick={() => onProgramStageUpdate(programStage.id)}
+                        onClick={() => onSelectProgramStage(programStage.id)}
                         dataTest={'program-stage-selector-button'}
                     >
                         <Tooltip

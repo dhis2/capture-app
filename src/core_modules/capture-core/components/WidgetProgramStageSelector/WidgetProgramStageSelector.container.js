@@ -34,7 +34,7 @@ export const WidgetProgramStageSelector = ({ programId, orgUnitId, teiId, enroll
         return stage;
     }), [enrollment?.events, stages]);
 
-    const onUpdateProgramStage = (newStageId) => {
+    const onSelectProgramStage = (newStageId) => {
         history.push(`enrollmentEventNew?${urlArguments({ programId, orgUnitId, teiId, enrollmentId, stageId: newStageId })}`);
     };
 
@@ -47,7 +47,7 @@ export const WidgetProgramStageSelector = ({ programId, orgUnitId, teiId, enroll
             >
                 <WidgetProgramStageSelectorComponent
                     programStages={programStages}
-                    onProgramStageUpdate={onUpdateProgramStage}
+                    onSelectProgramStage={onSelectProgramStage}
                     onCancel={onCancel}
                 />
             </Widget>
