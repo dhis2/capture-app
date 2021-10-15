@@ -8,8 +8,8 @@ import { spacers, IconAdd24, IconCalendar24, IconArrowRightMulti24 } from '@dhis
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
-import { QuickActionTabTypes } from './WidgetEnrollmentQuickActions.constants';
 import { urlArguments } from '../../utils/url';
+import { tabMode } from '../Pages/EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
 
 const styles = {
     contentContainer: {
@@ -68,7 +68,7 @@ const WidgetEnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
                 <QuickActionButton
                     icon={<IconAdd24 />}
                     label={i18n.t('New Event')}
-                    onClickAction={() => onNavigationFromQuickActions(QuickActionTabTypes.REPORT)}
+                    onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                     dataTest={'quick-action-button-report'}
                     disable={availableStage}
                 />
@@ -76,7 +76,7 @@ const WidgetEnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
                 <QuickActionButton
                     icon={<IconCalendar24 />}
                     label={i18n.t('Schedule an event')}
-                    onClickAction={() => onNavigationFromQuickActions(QuickActionTabTypes.SCHEDULE)}
+                    onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                     dataTest={'quick-action-button-schedule'}
                     disable={availableStage}
                 />
@@ -84,7 +84,7 @@ const WidgetEnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
                 <QuickActionButton
                     icon={<IconArrowRightMulti24 />}
                     label={i18n.t('Make referral')}
-                    onClickAction={() => onNavigationFromQuickActions(QuickActionTabTypes.REFER)}
+                    onClickAction={() => onNavigationFromQuickActions(tabMode.REFER)}
                     dataTest={'quick-action-button-refer'}
                     disable={availableStage}
                 />
