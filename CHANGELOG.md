@@ -1,3 +1,10 @@
+## [1.59.2](https://github.com/dhis2/capture-app/compare/v1.59.1...v1.59.2) (2021-10-18)
+
+
+### Bug Fixes
+
+* [DHIS2-12002] fix switch to row view ([#2205](https://github.com/dhis2/capture-app/issues/2205)) ([328da01](https://github.com/dhis2/capture-app/commit/328da018cdcb2bd01e68194c09da2d0c513f1576))
+
 ## [1.59.1](https://github.com/dhis2/capture-app/compare/v1.59.0...v1.59.1) (2021-10-15)
 
 
