@@ -62,6 +62,7 @@ export const WidgetEventSchedule = ({
             notes: [],
         }] });
     };
+    const onAddComment = () => {};
 
     useEffect(() => { refetchEventsInOrgUnit(); }, [orgUnitId]);// eslint-disable-line react-hooks/exhaustive-deps
     if (!program || !stage || !(program instanceof TrackerProgram)) {
@@ -83,6 +84,7 @@ export const WidgetEventSchedule = ({
             suggestedScheduleDate={suggestedScheduleDate}
             setScheduleDate={setScheduleDate}
             onSchedule={onHandleSchedule}
+            onAddComment={onAddComment}
             eventCountInOrgUnit={eventCountInOrgUnit}
             orgUnit={orgUnit}
             {...passOnProps}
