@@ -7,16 +7,15 @@ import { EnrollmentAddEventPage } from './EnrollmentAddEventPage.container';
 
 
 export const EnrollmentAddEventDefaultPage: ComponentType<{||}> = () => {
-    const { teiId, programId, orgUnitId, enrollmentId } = useSelector(
+    const { teiId, programId, enrollmentId } = useSelector(
         ({ router: { location: { query } } }) => ({
             teiId: query.teiId,
             programId: query.programId,
-            orgUnitId: query.orgUnitId,
             enrollmentId: query.enrollmentId,
         }),
         shallowEqual,
     );
-    const ready = programId && orgUnitId && enrollmentId && teiId;
+    const ready = programId && enrollmentId && teiId;
 
 
     return (
