@@ -62,7 +62,18 @@ export const WidgetEventSchedule = ({
             notes: [],
         }] });
     };
-    const onAddComment = () => {};
+    const onAddComment = async (comment) => {
+        await mutate({ events: [{
+            dataValues: [],
+            trackedEntityInstance: teiId,
+            orgUnit: orgUnitId,
+            enrollment: enrollmentId,
+            program: programId,
+            programStage: stageId,
+            status: 'SCHEDULE',
+            notes: [{ value: comment }],
+        }] });
+    };
 
     useEffect(() => { refetchEventsInOrgUnit(); }, [orgUnitId]);// eslint-disable-line react-hooks/exhaustive-deps
     if (!program || !stage || !(program instanceof TrackerProgram)) {

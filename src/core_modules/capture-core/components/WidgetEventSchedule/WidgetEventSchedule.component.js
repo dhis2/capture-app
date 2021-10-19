@@ -27,8 +27,7 @@ const styles = () => ({
         flexGrow: 0,
         flexShrink: 0,
         paddingTop: spacersNum.dp16,
-        paddingRight: spacersNum.dp32,
-        paddingLeft: spacersNum.dp8,
+        paddingRight: spacersNum.dp16,
     },
     fieldContent: {
         flexGrow: 1,
@@ -64,6 +63,7 @@ const WidgetEventSchedulePlain = ({
         >
             <CommentSection
                 comments={[]}
+                placeholder={i18n.t('Write a comment about this scheduled event')}
                 handleAddComment={onAddComment}
             />
         </DataSection>

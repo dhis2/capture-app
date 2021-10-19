@@ -8,7 +8,7 @@ import type { Props } from './infoBox.types';
 
 const styles = {
     infoBox: {
-        maxWidth: '40.75rem',
+        maxWidth: '41.25rem',
         display: 'flex',
         borderRadius: 3,
         border: `1px solid ${colors.blue200}`,

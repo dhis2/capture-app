@@ -25,5 +25,6 @@ export type Props = {|
    eventCountInOrgUnit: number,
    onSchedule: () => Promise<void>,
    setScheduleDate: (date: string) => void,
+   onAddComment: () => Promise<void>,
    ...CssClasses
 |};

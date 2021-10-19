@@ -27,7 +27,7 @@ const ScheduleDatePlain = ({
 }: Props) => (<>
     <div className={classes.container}>
         <DateField
-            value={scheduleDate}
+            value={moment(scheduleDate).format('YYYY-MM-DD')}
             calendarMinMoment={moment()}
             width="100%"
             calendarWidth={350}
