@@ -43,9 +43,11 @@ export const useDetermineSuggestedScheduleDate = ({
     let suggestedScheduleDate;
     if (nextScheduleDate?.id) {
         suggestedScheduleDate = getSuggestedDateByNextScheduleDate(nextScheduleDate.id, eventData);
-    } else if (standardInterval && !suggestedScheduleDate) {
+    }
+    if (standardInterval && !suggestedScheduleDate) {
         suggestedScheduleDate = getSuggestedDateByStandardInterval(id, standardInterval, eventData);
-    } else if ((generatedByEnrollmentDate || !programConfig.displayIncidentDate) && !suggestedScheduleDate) {
+    }
+    if ((generatedByEnrollmentDate || !programConfig.displayIncidentDate) && !suggestedScheduleDate) {
         suggestedScheduleDate = moment(enrollmentDate).add(minDaysFromStart, 'days').format();
     } else {
         suggestedScheduleDate = moment(incidentDate).add(minDaysFromStart, 'days').format();

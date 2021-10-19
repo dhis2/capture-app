@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
 import i18n from '@dhis2/d2-i18n';
 import { useDataMutation } from '@dhis2/app-runtime';
@@ -35,11 +35,12 @@ export const WidgetEventSchedule = ({
     const { orgUnit } = useOrganisationUnit(orgUnitId);
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
-    const { events, refetch: refetchEventsInOrgUnit } = useEventsInOrgUnit(orgUnitId);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, ...passOnProps,
     });
     const [scheduleDate, setScheduleDate] = useState(suggestedScheduleDate);
+    const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
+
     const [mutate] = useDataMutation(scheduleEventMutation, {
         onComplete: () => {
             history.push(`/enrollment?${urlArguments({ orgUnitId, programId, stageId, enrollmentId })}`);
@@ -63,7 +64,6 @@ export const WidgetEventSchedule = ({
         }] });
     };
 
-    useEffect(() => { refetchEventsInOrgUnit(); }, [orgUnitId]);// eslint-disable-line react-hooks/exhaustive-deps
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
             <div>
