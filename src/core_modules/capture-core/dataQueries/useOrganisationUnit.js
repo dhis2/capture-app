@@ -2,9 +2,9 @@
 import { useMemo, useEffect, useState } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
 import log from 'loglevel';
-import { errorCreator } from '../../../../capture-core-utils';
+import { errorCreator } from '../../capture-core-utils';
 
-export const useOrganisationUnit = (orgUnitId: string) => {
+export const useOrganisationUnit = (orgUnitId: string, fields: string) => {
     const [orgUnit, setOrgUnit] = useState();
     const { error, loading, data, refetch, called } = useDataQuery(
         useMemo(
@@ -13,11 +13,11 @@ export const useOrganisationUnit = (orgUnitId: string) => {
                     resource: 'organisationUnits',
                     id: ({ variables: { orgUnitId: id } }) => id,
                     params: {
-                        fields: ['displayName, code'],
+                        fields,
                     },
                 },
             }),
-            [],
+            [fields],
         ), {
             lazy: true,
         },

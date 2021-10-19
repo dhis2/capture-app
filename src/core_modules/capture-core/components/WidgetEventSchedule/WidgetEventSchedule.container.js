@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { useDataMutation } from '@dhis2/app-runtime';
 import moment from 'moment';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
-import { useOrganisationUnit } from '../WidgetEnrollmentEventNew/Validated/useOrganisationUnit';
+import { useOrganisationUnit } from '../../dataQueries';
 import type { ContainerProps } from './widgetEventSchedule.types';
 import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
 import { urlArguments } from '../../utils/url';
@@ -32,7 +32,7 @@ export const WidgetEventSchedule = ({
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
     const history = useHistory();
-    const { orgUnit } = useOrganisationUnit(orgUnitId);
+    const { orgUnit } = useOrganisationUnit(orgUnitId, 'displayName');
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
