@@ -23,6 +23,11 @@ const getSuggestedDateByStandardInterval = (stageId, standardInterval, eventData
     return moment(eventsInStage[0].eventDate).add(standardInterval, 'days').format();
 };
 
+/* eslint-disable complexity */
+/**
+ * Based on this docs https://docs.google.com/document/d/1I9-xc1oA95cWb64MHmIJXTHXQnxzi1SJ3RUmiuzSh78/edit#heading=h.6omlcjr0bk5n
+ * to determine the suggested schedule date
+ */
 export const useDetermineSuggestedScheduleDate = ({
     programStageScheduleConfig,
     programConfig,
@@ -41,15 +46,20 @@ export const useDetermineSuggestedScheduleDate = ({
     } = programStageScheduleConfig;
 
     let suggestedScheduleDate;
+
     if (nextScheduleDate?.id) {
         suggestedScheduleDate = getSuggestedDateByNextScheduleDate(nextScheduleDate.id, eventData);
     }
     if (standardInterval && !suggestedScheduleDate) {
         suggestedScheduleDate = getSuggestedDateByStandardInterval(id, standardInterval, eventData);
     }
-    if ((generatedByEnrollmentDate || !programConfig.displayIncidentDate) && !suggestedScheduleDate) {
+    if (generatedByEnrollmentDate && !suggestedScheduleDate) {
         suggestedScheduleDate = moment(enrollmentDate).add(minDaysFromStart, 'days').format();
-    } else {
+    }
+    if (programConfig.displayIncidentDate && !suggestedScheduleDate) {
+        suggestedScheduleDate = moment(incidentDate).add(minDaysFromStart, 'days').format();
+    }
+    if (!suggestedScheduleDate) {
         suggestedScheduleDate = moment(incidentDate).add(minDaysFromStart, 'days').format();
     }
     return suggestedScheduleDate;
