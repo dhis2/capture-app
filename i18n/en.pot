@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-10-15T12:51:42.550Z\n"
-"PO-Revision-Date: 2021-10-15T12:51:42.550Z\n"
+"POT-Creation-Date: 2021-10-20T21:06:47.650Z\n"
+"PO-Revision-Date: 2021-10-20T21:06:47.650Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -971,6 +971,9 @@ msgid "Cancel without saving"
 msgstr ""
 
 msgid "Choose a stage for a new event"
+msgstr ""
+
+msgid "Program Stages could not be loaded"
 msgstr ""
 
 msgid "New {{ eventName }} event"
