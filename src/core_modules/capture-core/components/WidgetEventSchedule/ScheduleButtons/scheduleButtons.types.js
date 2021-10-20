@@ -1,7 +1,8 @@
 // @flow
 
 export type Props = {|
-    onSchedule: () => Promise<void>,
+    hasChanges: boolean,
+    onSchedule: () => void,
     onCancel: () => void,
     ...CssClasses,
 |};

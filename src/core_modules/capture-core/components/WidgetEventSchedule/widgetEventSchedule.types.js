@@ -23,7 +23,8 @@ export type Props = {|
    scheduleDate?: ?string,
    suggestedScheduleDate?: ?string,
    eventCountInOrgUnit: number,
-   onSchedule: () => Promise<void>,
+   onSchedule: () => void,
+   onCancel: () => void,
    setScheduleDate: (date: string) => void,
    ...CssClasses
 |};

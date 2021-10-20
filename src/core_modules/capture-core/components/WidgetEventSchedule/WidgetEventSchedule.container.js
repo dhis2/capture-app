@@ -1,26 +1,20 @@
 // @flow
-import React, { useMemo, useState } from 'react';
-import { useHistory } from 'react-router';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { useDataMutation } from '@dhis2/app-runtime';
 import moment from 'moment';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
 import { useOrganisationUnit } from '../../dataQueries';
 import type { ContainerProps } from './widgetEventSchedule.types';
 import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
-import { urlArguments } from '../../utils/url';
 import {
     useScheduleConfigFromProgramStage,
     useDetermineSuggestedScheduleDate,
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
 } from './hooks';
+import { requestScheduleEvent, navigateToEnrollmentPage } from './WidgetEventSchedule.actions';
 
-const scheduleEventMutation = {
-    resource: 'events',
-    type: 'create',
-    data: events => events,
-};
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -31,7 +25,7 @@ export const WidgetEventSchedule = ({
     ...passOnProps
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const history = useHistory();
+    const dispatch = useDispatch();
     const { orgUnit } = useOrganisationUnit(orgUnitId, 'displayName');
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
@@ -41,27 +35,33 @@ export const WidgetEventSchedule = ({
     const [scheduleDate, setScheduleDate] = useState(suggestedScheduleDate);
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
 
-    const [mutate] = useDataMutation(scheduleEventMutation, {
-        onComplete: () => {
-            history.push(`/enrollment?${urlArguments({ orgUnitId, programId, stageId, enrollmentId })}`);
-        },
-    });
     const eventCountInOrgUnit = events
         .filter(event => moment(event.dueDate).format('YYYY-MM-DD') === scheduleDate).length;
 
-    const onHandleSchedule = async () => {
-        if (!scheduleDate) { return; }
-        await mutate({ events: [{
-            dueDate: scheduleDate,
-            dataValues: [],
-            trackedEntityInstance: teiId,
-            orgUnit: orgUnitId,
-            enrollment: enrollmentId,
-            program: programId,
-            programStage: stageId,
-            status: 'SCHEDULE',
-            notes: [],
-        }] });
+    useEffect(() => {
+        if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
+    }, [suggestedScheduleDate]); // eslint-disable-line
+
+    const onHandleSchedule = useCallback(() => {
+        dispatch(requestScheduleEvent({
+            scheduleDate,
+            programId,
+            orgUnitId,
+            stageId,
+            teiId,
+            enrollmentId,
+        }));
+    }, [
+        dispatch,
+        scheduleDate,
+        programId,
+        orgUnitId,
+        stageId,
+        teiId,
+        enrollmentId,
+    ]);
+    const onCancel = () => {
+        dispatch(navigateToEnrollmentPage(programId, orgUnitId, stageId, enrollmentId));
     };
 
     if (!program || !stage || !(program instanceof TrackerProgram)) {
@@ -79,10 +79,11 @@ export const WidgetEventSchedule = ({
             stageName={stage.name}
             programId={programId}
             programName={program.name}
-            scheduleDate={scheduleDate ?? suggestedScheduleDate}
+            scheduleDate={scheduleDate}
             suggestedScheduleDate={suggestedScheduleDate}
             setScheduleDate={setScheduleDate}
             onSchedule={onHandleSchedule}
+            onCancel={onCancel}
             eventCountInOrgUnit={eventCountInOrgUnit}
             orgUnit={orgUnit}
             {...passOnProps}

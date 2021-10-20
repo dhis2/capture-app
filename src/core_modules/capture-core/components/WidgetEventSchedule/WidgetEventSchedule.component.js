@@ -36,7 +36,17 @@ const styles = () => ({
 });
 
 const WidgetEventSchedulePlain = ({
-    stageId, programId, programName, stageName, orgUnit, onSchedule, classes, ...passOnProps
+    stageId,
+    programId,
+    programName,
+    stageName,
+    orgUnit,
+    onCancel,
+    onSchedule,
+    classes,
+    scheduleDate,
+    suggestedScheduleDate,
+    ...passOnProps
 }: Props) => (
     <div className={classes.wrapper}>
         <DataSection
@@ -52,12 +62,18 @@ const WidgetEventSchedulePlain = ({
                         programId={programId}
                         stageId={stageId}
                         orgUnit={orgUnit}
+                        scheduleDate={scheduleDate}
+                        suggestedScheduleDate={suggestedScheduleDate}
                         {...passOnProps}
                     />
                 </div>
             </div>
         </DataSection>
-        <ScheduleButtons onCancel={() => {}} onSchedule={onSchedule} />
+        <ScheduleButtons
+            hasChanges={scheduleDate !== suggestedScheduleDate}
+            onCancel={onCancel}
+            onSchedule={onSchedule}
+        />
         <ScheduleText
             programName={programName}
             stageName={stageName}
