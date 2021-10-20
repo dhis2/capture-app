@@ -92,6 +92,6 @@ Feature: The user interacts with the widgets on the enrollment add event page
   Scenario: User switch tab in add event page
     Given you land on the enrollment add event page by having typed #/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE&stageId=A03MvHHogjR
     Then the enrollment widget should be opened
-    Then you should see tabs: Report,Schedule
+    Then you should see tabs: Report,Schedule,Refer
     When you click switch tab to Schedule
     Then you should see Schedule tab
