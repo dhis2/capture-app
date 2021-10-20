@@ -5,16 +5,16 @@ import i18n from '@dhis2/d2-i18n';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import log from 'loglevel';
-import { WidgetProgramStageSelectorComponent } from './WidgetProgramStageSelector.component';
-import { Widget } from '../Widget';
-import { urlArguments } from '../../utils/url';
-import { errorCreator } from '../../../capture-core-utils';
-import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOverviewDomain';
-import type { Props } from './WidgetProgramStageSelector.types';
-import { useProgramFromIndexedDB } from '../../utils/cachedData/useProgramFromIndexedDB';
+import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
+import { Widget } from '../../../Widget';
+import { urlArguments } from '../../../../utils/url';
+import { errorCreator } from '../../../../../capture-core-utils';
+import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
+import type { Props } from './ProgramStageSelector.types';
+import { useProgramFromIndexedDB } from '../../../../utils/cachedData/useProgramFromIndexedDB';
 
 
-export const WidgetProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
+export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const history = useHistory();
     const { error: enrollmentsError, enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const {
@@ -67,7 +67,7 @@ export const WidgetProgramStageSelector = ({ programId, orgUnitId, teiId, enroll
                     header={i18n.t('Choose a stage for a new event')}
                     noncollapsible
                 >
-                    <WidgetProgramStageSelectorComponent
+                    <ProgramStageSelectorComponent
                         programStages={programStages || []}
                         onSelectProgramStage={onSelectProgramStage}
                         onCancel={onCancel}

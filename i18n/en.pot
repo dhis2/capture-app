@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-10-20T21:06:47.650Z\n"
-"PO-Revision-Date: 2021-10-20T21:06:47.650Z\n"
+"POT-Creation-Date: 2021-10-20T21:27:31.632Z\n"
+"PO-Revision-Date: 2021-10-20T21:27:31.632Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -646,6 +646,18 @@ msgstr ""
 msgid "Refer"
 msgstr ""
 
+msgid "You can’t add any more events in this program"
+msgstr ""
+
+msgid "Cancel without saving"
+msgstr ""
+
+msgid "Choose a stage for a new event"
+msgstr ""
+
+msgid "Program Stages could not be loaded"
+msgstr ""
+
 msgid "stage"
 msgstr ""
 
@@ -962,18 +974,6 @@ msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
 msgid "Person Profile"
-msgstr ""
-
-msgid "You can’t add any more events in this program"
-msgstr ""
-
-msgid "Cancel without saving"
-msgstr ""
-
-msgid "Choose a stage for a new event"
-msgstr ""
-
-msgid "Program Stages could not be loaded"
 msgstr ""
 
 msgid "New {{ eventName }} event"

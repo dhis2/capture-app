@@ -11,7 +11,7 @@ import { WidgetIndicator } from '../../WidgetIndicator';
 import { WidgetProfile } from '../../WidgetProfile';
 import { WidgetEnrollment } from '../../WidgetEnrollment';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { WidgetProgramStageSelector } from '../../WidgetProgramStageSelector';
+import { ProgramStageSelector } from './ProgramStageSelector';
 import { NewEventWorkspace } from './NewEventWorkspace';
 
 const styles = ({ typography }) => ({
@@ -82,7 +82,7 @@ const EnrollmentAddEventPagePain = ({
                             data-test="add-event-enrollment-page-content"
                         >
                             {!stageId ?
-                                <WidgetProgramStageSelector
+                                <ProgramStageSelector
                                     programId={programId}
                                     orgUnitId={orgUnitId}
                                     teiId={teiId}

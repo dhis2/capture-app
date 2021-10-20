@@ -3,7 +3,7 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles, Tooltip } from '@material-ui/core';
-import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
+import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
 const styles = {
     container: {
@@ -30,7 +30,7 @@ const styles = {
     },
 };
 
-const WidgetProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStage, onCancel, classes }) => (
+const ProgramStageSelectorComponentPlain = ({ programStages, onSelectProgramStage, onCancel, classes }) => (
     <div className={classes.container}>
         {programStages.map((programStage) => {
             const disableStage = !programStage.repeatable && programStage.eventCount > 0;
@@ -78,4 +78,4 @@ const WidgetProgramStageSelectorComponentPlain = ({ programStages, onSelectProgr
     </div>
 );
 
-export const WidgetProgramStageSelectorComponent = withStyles(styles)(WidgetProgramStageSelectorComponentPlain);
+export const ProgramStageSelectorComponent = withStyles(styles)(ProgramStageSelectorComponentPlain);
