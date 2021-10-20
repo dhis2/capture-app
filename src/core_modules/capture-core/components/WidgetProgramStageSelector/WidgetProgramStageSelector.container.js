@@ -8,18 +8,20 @@ import log from 'loglevel';
 import { WidgetProgramStageSelectorComponent } from './WidgetProgramStageSelector.component';
 import { Widget } from '../Widget';
 import { urlArguments } from '../../utils/url';
-import { useProgramMetadata, useProgramStages } from '../Pages/Enrollment/EnrollmentPageDefault/hooks';
 import { errorCreator } from '../../../capture-core-utils';
-import { useProgramInfo } from '../../hooks/useProgramInfo';
 import { useCommonEnrollmentDomainData } from '../Pages/common/EnrollmentOverviewDomain';
 import type { Props } from './WidgetProgramStageSelector.types';
+import { useProgramFromIndexedDB } from '../../utils/cachedData/useProgramFromIndexedDB';
+
 
 export const WidgetProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const history = useHistory();
-    const { program } = useProgramInfo(programId);
-    const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const { error: enrollmentsError, enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
-    const stages = useProgramStages(program, programMetadata.programStages);
+    const {
+        loading: programLoading,
+        error: programError,
+        program,
+    } = useProgramFromIndexedDB(programId);
 
     const { tab } = useSelector(
         ({
@@ -32,38 +34,46 @@ export const WidgetProgramStageSelector = ({ programId, orgUnitId, teiId, enroll
         shallowEqual,
     );
 
-    if (programMetaDataError || enrollmentsError) {
+    if (enrollmentsError || programError) {
         log.error(errorCreator('Enrollment page could not be loaded')({
-            programMetaDataError,
             enrollmentsError,
+            programError,
         }));
     }
 
-    const programStages = useMemo(() => stages.map((stage) => {
-        stage.eventCount = (enrollment?.events
-            ?.filter(event => event.programStage === stage.id)
-            ?.length
-        );
-        return stage;
-    }), [enrollment?.events, stages]);
+    const programStages = useMemo(() => !programLoading && program?.programStages?.reduce((accStage, currentStage) => {
+        accStage.push({
+            id: currentStage.id,
+            eventCount: (enrollment?.events
+                ?.filter(event => event.programStage === currentStage.id)
+                ?.length
+            ),
+            displayName: currentStage.displayName,
+            style: currentStage.style,
+            repeatable: currentStage.repeatable,
+        });
+        return accStage;
+    }, []), [enrollment?.events, program?.programStages, programLoading]);
 
     const onSelectProgramStage = (newStageId) => {
-        history.push(`enrollmentEventNew?${urlArguments({ programId, orgUnitId, teiId, enrollmentId, stageId: newStageId })}&tab=${tab}`);
+        history.push(`enrollmentEventNew?${urlArguments({ programId, orgUnitId, teiId, enrollmentId, stageId: newStageId, tab })}`);
     };
 
     const onCancel = () => history.push(`enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
     return (
         <>
-            <Widget
-                header={i18n.t('Choose a stage for a new event')}
-                noncollapsible
-            >
-                <WidgetProgramStageSelectorComponent
-                    programStages={programStages}
-                    onSelectProgramStage={onSelectProgramStage}
-                    onCancel={onCancel}
-                />
-            </Widget>
+            {program ?
+                <Widget
+                    header={i18n.t('Choose a stage for a new event')}
+                    noncollapsible
+                >
+                    <WidgetProgramStageSelectorComponent
+                        programStages={programStages || []}
+                        onSelectProgramStage={onSelectProgramStage}
+                        onCancel={onCancel}
+                    />
+                </Widget>
+                : i18n.t('Program Stages could not be loaded')}
         </>
     );
 };

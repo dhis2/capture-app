@@ -55,12 +55,12 @@ const WidgetProgramStageSelectorComponentPlain = ({ programStages, onSelectProgr
                                 <NonBundledDhis2Icon
                                     width={22}
                                     height={22}
-                                    name={programStage.icon?.name || 'clinical_fe_outline'}
-                                    color={programStage.icon?.color || '#e0e0e0'}
-                                    alternativeText={programStage.name}
+                                    name={programStage.style?.icon || 'clinical_fe_outline'}
+                                    color={programStage.style?.color || '#e0e0e0'}
+                                    alternativeText={programStage.displayName}
                                     cornerRadius={2}
                                 />
-                                {programStage.name}
+                                {programStage.displayName}
                             </div>
                         </Tooltip>
                     </Button>
