@@ -1,13 +1,17 @@
 // @flow
 import moment from 'moment';
+import { convertServerToClient, convertClientToForm } from '../../../converters';
+import { dataElementTypes } from '../../../metaData';
 
-const sortByMostRecentDate = (a, b) => moment.utc(a.eventDate).diff(moment.utc(b.eventDate));
+const convertDate = (date): any => convertServerToClient(date, dataElementTypes.DATE);
+
+const sortByMostRecentDate = (a, b) => moment.utc(b.eventDate).diff(moment.utc(a.eventDate));
 
 const getSuggestedDateByNextScheduleDate = (id, eventData) => {
     const possibleNextScheduleValues = eventData.reduce((acc, event) => {
         event.dataValues.forEach((item) => {
             if (item.dataElement === id && item.value !== null) {
-                acc.push({ ...item, eventDate: event.eventDate });
+                acc.push({ ...item, eventDate: convertDate(event.eventDate) });
             }
         });
         return acc;
@@ -16,11 +20,13 @@ const getSuggestedDateByNextScheduleDate = (id, eventData) => {
     return possibleNextScheduleValues[0].value;
 };
 
-const getSuggestedDateByStandardInterval = (stageId, standardInterval, eventData) => {
-    const eventsInStage = eventData.filter(event => event.programStage === stageId).sort(sortByMostRecentDate);
-    if (!eventsInStage.length) { return undefined; }
+const getSuggestedDateByStandardInterval = (standardInterval, eventData) => {
+    const events = eventData
+        .map(event => ({ eventDate: convertDate(event.eventDate) }))
+        .sort(sortByMostRecentDate);
+    if (!events.length) { return undefined; }
 
-    return moment(eventsInStage[0].eventDate).add(standardInterval, 'days').format();
+    return moment(events[0].eventDate).add(standardInterval, 'days').format();
 };
 
 /* eslint-disable complexity */
@@ -28,39 +34,51 @@ const getSuggestedDateByStandardInterval = (stageId, standardInterval, eventData
  * Based on this docs https://docs.google.com/document/d/1I9-xc1oA95cWb64MHmIJXTHXQnxzi1SJ3RUmiuzSh78/edit#heading=h.6omlcjr0bk5n
  * to determine the suggested schedule date
  */
+type Props = {
+    programStageScheduleConfig: {
+        nextScheduleDate?: {
+            id: string
+        },
+        standardInterval?: ?number,
+        generatedByEnrollmentDate?: ?boolean,
+        minDaysFromStart: number
+    },
+    programConfig: {
+        displayIncidentDate?: boolean
+    },
+    enrollmentDate: string,
+    incidentDate: string,
+    eventData: Array<Object>
+}
 export const useDetermineSuggestedScheduleDate = ({
     programStageScheduleConfig,
     programConfig,
     enrollmentDate,
     incidentDate,
     eventData,
-}: Object) => {
+}: Props) => {
     if (!programStageScheduleConfig) { return undefined; }
 
     const {
-        id,
         nextScheduleDate,
         standardInterval,
         generatedByEnrollmentDate,
         minDaysFromStart,
     } = programStageScheduleConfig;
-
-    let suggestedScheduleDate;
-
-    if (nextScheduleDate?.id) {
-        suggestedScheduleDate = getSuggestedDateByNextScheduleDate(nextScheduleDate.id, eventData);
-    }
-    if (standardInterval && !suggestedScheduleDate) {
-        suggestedScheduleDate = getSuggestedDateByStandardInterval(id, standardInterval, eventData);
-    }
-    if (generatedByEnrollmentDate && !suggestedScheduleDate) {
-        suggestedScheduleDate = moment(enrollmentDate).add(minDaysFromStart, 'days').format();
-    }
-    if (programConfig.displayIncidentDate && !suggestedScheduleDate) {
-        suggestedScheduleDate = moment(incidentDate).add(minDaysFromStart, 'days').format();
-    }
-    if (!suggestedScheduleDate) {
-        suggestedScheduleDate = moment(incidentDate).add(minDaysFromStart, 'days').format();
-    }
-    return suggestedScheduleDate;
+    const scheduleDateComputeSteps = [
+        () => nextScheduleDate?.id && getSuggestedDateByNextScheduleDate(nextScheduleDate.id, eventData),
+        () => standardInterval && getSuggestedDateByStandardInterval(standardInterval, eventData),
+        () => {
+            let suggestedScheduleDate;
+            if (generatedByEnrollmentDate || !programConfig.displayIncidentDate) {
+                suggestedScheduleDate = moment(enrollmentDate).add(minDaysFromStart, 'days').format();
+            } else {
+                suggestedScheduleDate = moment(incidentDate).add(minDaysFromStart, 'days').format();
+            }
+            return suggestedScheduleDate;
+        },
+    ];
+    return scheduleDateComputeSteps.reduce((currentScheduleDate, computeScheduleDate) =>
+        (!currentScheduleDate ? computeScheduleDate() : convertClientToForm(currentScheduleDate, dataElementTypes.DATE))
+    , undefined);
 };
