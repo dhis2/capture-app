@@ -39,7 +39,7 @@ const WidgetEnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
         ), [programStages]);
 
     const onNavigationFromQuickActions = (tab: string) => {
-        history.push(`/enrollmentEventNew?${urlArguments({ programId, teiId, enrollmentId, orgUnitId })}&tab=${tab}`);
+        history.push(`/enrollmentEventNew?${urlArguments({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
     };
 
     return (
