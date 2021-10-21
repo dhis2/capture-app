@@ -1,15 +1,15 @@
 // @flow
 import React, { useState, useMemo } from 'react';
 // $FlowFixMe
-import { shallowEqual, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { spacers, IconAdd24, IconCalendar24, IconArrowRightMulti24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
 import { urlArguments } from '../../utils/url';
 import { tabMode } from '../Pages/EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
+import { useLocationQuery } from '../../utils/routing';
 
 const styles = {
     contentContainer: {
@@ -23,19 +23,7 @@ const styles = {
 const WidgetEnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
     const [open, setOpen] = useState(true);
     const history = useHistory();
-    const { enrollmentId, programId, teiId, orgUnitId } = useSelector(
-        ({
-            router: {
-                location: { query },
-            },
-        },
-        ) => (
-            {
-                enrollmentId: query.enrollmentId,
-                teiId: query.teiId,
-                programId: query.programId,
-                orgUnitId: query.orgUnitId,
-            }), shallowEqual);
+    const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
 
     const programStages = useMemo(() => stages.map((stage) => {
         stage.eventCount = (events
