@@ -28,7 +28,6 @@ const ScheduleDatePlain = ({
     <div className={classes.container}>
         <DateField
             value={moment(scheduleDate).format('YYYY-MM-DD')}
-            calendarMinMoment={moment()}
             width="100%"
             calendarWidth={350}
             onSetFocus={() => {}}

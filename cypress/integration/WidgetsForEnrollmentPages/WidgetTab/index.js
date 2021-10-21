@@ -18,3 +18,9 @@ When(/you click switch tab to (.*)/, (tabName) => {
 Then('you should see Schedule tab', () => {
     cy.get('[data-test="new-event-schedule-tab"]').should('have.class', 'selected');
 });
+
+And(/you should see suggested date: (.*)/, (date) => {
+    cy.get('[data-test="schedule-section"]').within(() => {
+        cy.get('[data-test="capture-ui-input"]').should('have.value', date);
+    });
+});
