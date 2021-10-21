@@ -2,7 +2,8 @@
 import React, { useCallback, useMemo } from 'react';
 import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocationQuery } from '../../../utils/routing';
 import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
@@ -16,20 +17,7 @@ import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 export const EnrollmentAddEventPage = () => {
-    const { programId, stageId, orgUnitId, teiId, enrollmentId } = useSelector(
-        ({
-            router: {
-                location: { query },
-            },
-        }) => ({
-            programId: query.programId,
-            stageId: query.stageId,
-            orgUnitId: query.orgUnitId,
-            teiId: query.teiId,
-            enrollmentId: query.enrollmentId,
-        }),
-        shallowEqual,
-    );
+    const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
     const dispatch = useDispatch();
 
