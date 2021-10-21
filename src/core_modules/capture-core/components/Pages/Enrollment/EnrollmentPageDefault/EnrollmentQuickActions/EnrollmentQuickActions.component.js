@@ -5,11 +5,11 @@ import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router-dom';
 import { spacers, IconAdd24, IconCalendar24, IconArrowRightMulti24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { Widget } from '../Widget';
+import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
-import { urlArguments } from '../../utils/url';
-import { tabMode } from '../Pages/EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
-import { useLocationQuery } from '../../utils/routing';
+import { urlArguments } from '../../../../../utils/url';
+import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
+import { useLocationQuery } from '../../../../../utils/routing';
 
 const styles = {
     contentContainer: {
@@ -20,7 +20,7 @@ const styles = {
 
 };
 
-const WidgetEnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
+const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
     const [open, setOpen] = useState(true);
     const history = useHistory();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
@@ -81,4 +81,4 @@ const WidgetEnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
     );
 };
 
-export const WidgetEnrollmentQuickActions = withStyles(styles)(WidgetEnrollmentQuickActionsComponent);
+export const EnrollmentQuickActions = withStyles(styles)(EnrollmentQuickActionsComponent);

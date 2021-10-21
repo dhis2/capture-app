@@ -12,7 +12,7 @@ import { WidgetFeedback } from '../../../WidgetFeedback';
 import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
-import { WidgetEnrollmentQuickActions } from '../../../WidgetEnrollmentQuickActions';
+import { EnrollmentQuickActions } from './EnrollmentQuickActions';
 
 const getStyles = ({ typography }) => ({
     columns: {
@@ -60,7 +60,7 @@ export const EnrollmentPageDefaultPlain = ({
         <div className={classes.title}>Enrollment Dashboard</div>
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
-                <WidgetEnrollmentQuickActions
+                <EnrollmentQuickActions
                     stages={stages}
                     events={events}
                 />
