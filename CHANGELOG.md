@@ -1,3 +1,10 @@
+## [1.59.3](https://github.com/dhis2/capture-app/compare/v1.59.2...v1.59.3) (2021-10-21)
+
+
+### Bug Fixes
+
+* [DHIS2-11986] use react-router location in new enrollment event page ([53d08ba](https://github.com/dhis2/capture-app/commit/53d08ba89450e38aaaf19f85929595922b2de23c))
+
 ## [1.59.2](https://github.com/dhis2/capture-app/compare/v1.59.1...v1.59.2) (2021-10-18)
 
 
