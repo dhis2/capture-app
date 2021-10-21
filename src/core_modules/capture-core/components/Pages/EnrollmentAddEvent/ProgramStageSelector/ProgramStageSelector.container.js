@@ -1,9 +1,7 @@
 // @flow
 import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-// $FlowFixMe
-import { shallowEqual, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import log from 'loglevel';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
 import { Widget } from '../../../Widget';
@@ -12,10 +10,12 @@ import { errorCreator } from '../../../../../capture-core-utils';
 import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedData/useProgramFromIndexedDB';
+import { useLocationQuery } from '../../../../utils/routing';
 
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
     const history = useHistory();
+    const { tab } = useLocationQuery();
     const { error: enrollmentsError, enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const {
         loading: programLoading,
@@ -23,16 +23,6 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         program,
     } = useProgramFromIndexedDB(programId);
 
-    const { tab } = useSelector(
-        ({
-            router: {
-                location: { query },
-            },
-        }) => ({
-            tab: query.tab,
-        }),
-        shallowEqual,
-    );
 
     if (enrollmentsError || programError) {
         log.error(errorCreator('Enrollment page could not be loaded')({
