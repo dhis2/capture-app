@@ -6,3 +6,4 @@ Feature: The user interacts with the widgets Schedule tab
         Then you choose a schedule date
         When you click cancel in Schedule tab
         Then you should see confirm dialog
+        Then you should navigate to overview page
