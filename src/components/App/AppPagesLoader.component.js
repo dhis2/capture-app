@@ -1,6 +1,6 @@
 // @flow
 import { compose } from 'redux';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { withAppUrlSync } from 'capture-core/components/App';
 import { withUrlSync } from 'capture-core/components/UrlSync';
 import { withD2InContext, withStateBoundLoadingIndicator } from 'capture-core/HOC';

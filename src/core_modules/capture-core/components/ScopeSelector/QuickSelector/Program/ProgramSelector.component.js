@@ -2,7 +2,7 @@
 
 import React, { Component, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
