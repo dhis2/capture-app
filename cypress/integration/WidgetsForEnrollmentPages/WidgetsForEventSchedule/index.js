@@ -30,6 +30,3 @@ Then('you should see confirm dialog', () => {
         .contains('Yes, discard').click({ force: true }); // Add {force:true} to disable the error due to layer parent has css display: none
 });
 
-Then('you should navigate to overview page', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8&teiId=EaOyKGOIGRp&enrollmentId=wBU0RAsYjKE"`);
-});

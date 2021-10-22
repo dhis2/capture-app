@@ -9,6 +9,7 @@ export type ContainerProps = {|
    orgUnitId: string,
    teiId: string,
    enrollmentId: string,
+   onCancel: () => void
 |};
 
 export type Props = {|

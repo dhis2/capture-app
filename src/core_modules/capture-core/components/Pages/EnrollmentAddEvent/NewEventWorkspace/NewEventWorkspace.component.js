@@ -27,6 +27,7 @@ const NewEventWorkspacePlain = ({
     teiId,
     enrollmentId,
     dataEntryHasChanges,
+    onCancel,
     classes,
     ...passOnProps
 }: Props) => {
@@ -81,6 +82,7 @@ const NewEventWorkspacePlain = ({
                         orgUnitId={orgUnitId}
                         teiId={teiId}
                         enrollmentId={enrollmentId}
+                        onCancel={onCancel}
                         {...passOnProps}
                     />}
                     {mode === tabMode.SCHEDULE && <WidgetEventSchedule
@@ -92,6 +94,7 @@ const NewEventWorkspacePlain = ({
                         enrollmentId={enrollmentId}
                         enrollmentDate={enrollmentDate}
                         incidentDate={incidentDate}
+                        onCancel={onCancel}
                     />}
                 </div>
             </Widget>

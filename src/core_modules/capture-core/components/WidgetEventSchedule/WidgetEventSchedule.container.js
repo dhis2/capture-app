@@ -13,7 +13,7 @@ import {
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
 } from './hooks';
-import { requestScheduleEvent, navigateToEnrollmentPage } from './WidgetEventSchedule.actions';
+import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 
 
 export const WidgetEventSchedule = ({
@@ -60,9 +60,6 @@ export const WidgetEventSchedule = ({
         teiId,
         enrollmentId,
     ]);
-    const onCancel = () => {
-        dispatch(navigateToEnrollmentPage(programId, orgUnitId, stageId, enrollmentId));
-    };
 
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
@@ -83,7 +80,6 @@ export const WidgetEventSchedule = ({
             suggestedScheduleDate={suggestedScheduleDate}
             setScheduleDate={setScheduleDate}
             onSchedule={onHandleSchedule}
-            onCancel={onCancel}
             eventCountInOrgUnit={eventCountInOrgUnit}
             orgUnit={orgUnit}
             {...passOnProps}
