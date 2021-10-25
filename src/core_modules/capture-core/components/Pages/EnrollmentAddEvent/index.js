@@ -1,5 +1,5 @@
 // @flow
-export { EnrollmentAddEventDefaultPage } from './EnrollmentAddEventDefaultPage.container';
+export { EnrollmentAddEventPage } from './EnrollmentAddEventPage.container';
 export {
     saveNewEventFailedEpic,
     saveNewEventSucceededEpic,

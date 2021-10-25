@@ -1,6 +1,6 @@
 // @flow
-import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
-import type { ExternalSaveHandler } from '../../WidgetEnrollmentEventNew';
+import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
+import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
 
 export type Props = {|
     programId: string,

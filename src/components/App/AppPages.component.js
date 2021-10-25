@@ -8,7 +8,7 @@ import { NewPage } from 'capture-core/components/Pages/New';
 import { EnrollmentPage } from 'capture-core/components/Pages/Enrollment';
 import { StageEventListPage } from 'capture-core/components/Pages/StageEvent';
 import { EnrollmentEditEventPage } from 'capture-core/components/Pages/EnrollmentEditEvent';
-import { EnrollmentAddEventDefaultPage } from 'capture-core/components/Pages/EnrollmentAddEvent';
+import { EnrollmentAddEventPage } from 'capture-core/components/Pages/EnrollmentAddEvent';
 
 export const AppPages = () => (
     <Switch>
@@ -17,7 +17,7 @@ export const AppPages = () => (
         <Route path="/new" component={NewPage} />
         <Route path="/enrollment/stageEvents" component={StageEventListPage} />
         <Route path="/enrollmentEventEdit" component={EnrollmentEditEventPage} />
-        <Route path="/enrollmentEventNew" component={EnrollmentAddEventDefaultPage} />
+        <Route path="/enrollmentEventNew" component={EnrollmentAddEventPage} />
         <Route path="/enrollment" component={EnrollmentPage} />
         <Route path="/:keys" component={MainPage} />
         <Route path="/" component={MainPage} />

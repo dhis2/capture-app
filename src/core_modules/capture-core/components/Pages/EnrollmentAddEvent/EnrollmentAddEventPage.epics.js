@@ -3,12 +3,12 @@ import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
 import { map } from 'rxjs/operators';
 
-import { addEnrollmentEventPageActionTypes } from './enrollmentAddEventPage.actions';
+import { addEnrollmentEventPageActionTypes } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import {
     commitEnrollmentEventWithoutId,
     rollbackEnrollmentEventWithoutId,
     saveFailed,
-} from '../../Pages/common/EnrollmentOverviewDomain/enrollment.actions';
+} from '../common/EnrollmentOverviewDomain/enrollment.actions';
 
 export const saveNewEventSucceededEpic = (action$: InputObservable) =>
     action$.pipe(

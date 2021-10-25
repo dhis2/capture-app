@@ -3,15 +3,15 @@ import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
-import type { Props } from './EnrollmentAddEventPage.types';
-import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
-import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
-import { WidgetFeedback } from '../../WidgetFeedback';
-import { WidgetIndicator } from '../../WidgetIndicator';
-import { WidgetProfile } from '../../WidgetProfile';
-import { WidgetEnrollment } from '../../WidgetEnrollment';
-import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { NewEventWorkspace } from './NewEventWorkspace';
+import type { Props } from './EnrollmentAddEventPageDefault.types';
+import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
+import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
+import { WidgetFeedback } from '../../../WidgetFeedback';
+import { WidgetIndicator } from '../../../WidgetIndicator';
+import { WidgetProfile } from '../../../WidgetProfile';
+import { WidgetEnrollment } from '../../../WidgetEnrollment';
+import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
+import { NewEventWorkspace } from '../NewEventWorkspace';
 
 const styles = ({ typography }) => ({
     container: {
@@ -122,5 +122,5 @@ const EnrollmentAddEventPagePain = ({
     })()}
 </div>);
 
-export const EnrollmentAddEventPageComponent: ComponentType<$Diff<Props, CssClasses>> =
+export const EnrollmentAddEventPageDefaultComponent: ComponentType<$Diff<Props, CssClasses>> =
     withStyles(styles)(EnrollmentAddEventPagePain);
