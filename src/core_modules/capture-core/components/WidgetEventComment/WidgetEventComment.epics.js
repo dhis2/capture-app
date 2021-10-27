@@ -3,7 +3,7 @@ import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
-import { moment } from 'capture-core-utils/moment/momentResolver';
+import moment from 'moment';
 import { convertValue as convertListValue } from '../../converters/clientToList';
 import { dataElementTypes } from '../../metaData';
 import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventComment.actions';
