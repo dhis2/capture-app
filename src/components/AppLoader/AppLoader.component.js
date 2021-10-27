@@ -46,7 +46,6 @@ export const AppLoader = (props: Props) => {
                 absoluteApiPath,
             );
             const history = createHistory();
-            // $FlowFixMe
             const store = getStore(
                 history, {
                     querySingleResource,
