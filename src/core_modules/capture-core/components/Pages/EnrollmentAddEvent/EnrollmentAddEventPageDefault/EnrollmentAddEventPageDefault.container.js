@@ -15,7 +15,7 @@ import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 
-export const EnrollmentAddEventPageDefault = () => {
+export const EnrollmentAddEventPageDefault = ({ enrollment, attributeValues, commonDataError }) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
     const dispatch = useDispatch();
@@ -50,11 +50,7 @@ export const EnrollmentAddEventPageDefault = () => {
     const programStage = [...program.stages.values()].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
-    const {
-        enrollment,
-        attributeValues,
-        error: commonDataError,
-    } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+
 
     const rulesExecutionDependencies = useMemo(() => ({
         events: enrollment?.events,
