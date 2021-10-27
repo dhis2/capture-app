@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
@@ -19,23 +19,13 @@ import { runRulesForEnrollment } from './runRulesForEnrollment';
 import { urlArguments } from '../../../../utils/url';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
+import { useLocationQuery } from '../../../../utils/routing';
 
 
 export const EnrollmentPageDefault = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { enrollmentId, programId, teiId, orgUnitId } = useSelector(
-        ({
-            router: {
-                location: { query },
-            },
-        },
-        ) => (
-            { enrollmentId: query.enrollmentId,
-                teiId: query.teiId,
-                programId: query.programId,
-                orgUnitId: query.orgUnitId,
-            }), shallowEqual);
+    const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit } = useOrganisationUnit(orgUnitId);
 
     const { program } = useProgramInfo(programId);

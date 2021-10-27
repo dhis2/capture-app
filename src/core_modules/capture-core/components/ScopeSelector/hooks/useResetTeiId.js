@@ -1,11 +1,10 @@
 // @flow
-import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import { urlArguments, getUrlQueries } from '../../../utils/url';
 
 export const useResetTeiId = () => {
     const history = useHistory();
-    const pathname: string = useSelector(({ router: { location } }) => location.pathname);
+    const { pathname }: string = useLocation();
 
     const resetTeiId = (pageToPush: string = pathname) => {
         const { programId, orgUnitId } = getUrlQueries();

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 // $FlowFixMe
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
@@ -16,25 +16,12 @@ import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { getScopeInfo } from '../../../metaData';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
+import { useLocationQuery } from '../../../utils/routing';
 
 export const EnrollmentEditEventPage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { programId, stageId, teiId, enrollmentId, orgUnitId, eventId } = useSelector(
-        ({
-            router: {
-                location: { query },
-            },
-        }) => ({
-            programId: query.programId,
-            stageId: query.stageId,
-            teiId: query.teiId,
-            orgUnitId: query.orgUnitId,
-            enrollmentId: query.enrollmentId,
-            eventId: query.eventId,
-        }),
-        shallowEqual,
-    );
+    const { programId, stageId, teiId, enrollmentId, orgUnitId, eventId } = useLocationQuery();
     const { program } = useProgramInfo(programId);
     const showEditEvent = useSelector(({ viewEventPage }) => viewEventPage?.eventDetailsSection?.showEditEvent);
     const programStage = [...program.stages?.values()].find(item => item.id === stageId);

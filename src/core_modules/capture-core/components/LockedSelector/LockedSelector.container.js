@@ -19,6 +19,7 @@ import {
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import type { OwnProps } from './LockedSelector.types';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
+import { useLocationQuery } from '../../utils/routing';
 
 const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, organisationUnits) => {
     // because we want the orgUnit to be fetched and stored
@@ -30,28 +31,33 @@ const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, organisationUni
     return !lockedSelectorLoads;
 };
 
-const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string, pathname: string } =>
-    useSelector(({
+const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string, pathname: string } => {
+    const { pathname } = useLocation();
+    const {
+        storeProgramId,
+        storeOrgUnitId,
+    } = useSelector(({
         currentSelections: {
-            programId: selectedProgramId,
-            orgUnitId: selectedOrgUnitId,
-        },
-        router: {
-            location: {
-                query: {
-                    programId: routerProgramId,
-                    orgUnitId: routerOrgUnitId,
-                },
-                pathname,
-            },
+            programId,
+            orgUnitId,
         },
     }) =>
         ({
-            selectedProgramId: routerProgramId || selectedProgramId,
-            selectedOrgUnitId: routerOrgUnitId || selectedOrgUnitId,
-            pathname,
+            storeProgramId: programId,
+            storeOrgUnitId: orgUnitId,
         }),
     );
+    const { orgUnitId, programId } = useLocationQuery();
+
+    const selectedProgramId = programId || storeProgramId;
+    const selectedOrgUnitId = orgUnitId || storeOrgUnitId;
+
+    return {
+        selectedProgramId,
+        selectedOrgUnitId,
+        pathname,
+    };
+};
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
