@@ -1,8 +1,7 @@
 // @flow
-import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
-
+import { map, switchMap } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 import {
     actionTypes as editEventDataEntryActionTypes,
     noWorkingListUpdateNeededAfterUpdateCancelled,
@@ -10,6 +9,8 @@ import {
 } from '../editEventDataEntry.actions';
 
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
+import { deriveURLParamsFromHistory } from '../../../../utils/routing';
+import { urlArguments } from '../../../../utils/url';
 
 export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -32,12 +33,11 @@ export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore)
             return noWorkingListUpdateNeededAfterUpdateCancelled();
         }));
 
-export const cancelEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const cancelEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
     action$.pipe(
         ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
-        map(() => {
-            const state = store.value;
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
-            return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
+        switchMap(() => {
+            const { programId, orgUnitId } = deriveURLParamsFromHistory(history);
+            history.push(`/?${urlArguments({ programId, orgUnitId })}`);
+            return EMPTY;
         }));

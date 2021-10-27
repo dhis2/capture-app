@@ -1,7 +1,7 @@
 // @flow
-import { push } from 'connected-react-router';
+import { EMPTY } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { moment } from 'capture-core-utils/moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import {
@@ -13,6 +13,8 @@ import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { convertDataEntryToClientValues } from '../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../events/mainConverters';
+import { deriveURLParamsFromHistory } from '../../../../utils/routing';
+import { urlArguments } from '../../../../utils/url';
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -57,12 +59,11 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
             return startSaveEditEventAfterReturnedToMainPage(eventId, serverData, state.currentSelections);
         }));
 
-export const saveEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveEditEventLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }) =>
     action$.pipe(
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
-        map(() => {
-            const state = store.value;
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
-            return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
+        switchMap(() => {
+            const { programId, orgUnitId } = deriveURLParamsFromHistory(history);
+            history.push(`/?${urlArguments({ programId, orgUnitId })}`);
+            return EMPTY;
         }));

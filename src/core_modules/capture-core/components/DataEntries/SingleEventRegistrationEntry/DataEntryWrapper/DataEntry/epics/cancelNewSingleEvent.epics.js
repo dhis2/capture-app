@@ -1,7 +1,7 @@
 // @flow
-import { push } from 'connected-react-router';
+import { EMPTY } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import {
     actionTypes as newEventDataEntryActionTypes,
     cancelNewEventNoWorkingListUpdateNeeded,
@@ -10,6 +10,8 @@ import {
 } from '../actions/dataEntry.actions';
 
 import { isSelectionsEqual } from '../../../../../App/isSelectionsEqual';
+import { deriveURLParamsFromHistory } from '../../../../../../utils/routing';
+import { urlArguments } from '../../../../../../utils/url';
 
 export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -39,16 +41,17 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
             return cancelNewEventNoWorkingListUpdateNeeded();
         }));
 
-export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
-        map(() => {
-            const state = store.value;
-            if (state.router.location.pathname === '/enrollmentEventNew') {
-                const { enrollmentId } = state.router.location.query;
-                return push(`/enrollment?enrollmentId=${enrollmentId}`);
+        switchMap(() => {
+            const { pathname } = history.location;
+            const { enrollmentId, programId, orgUnitId } = deriveURLParamsFromHistory(history);
+
+            if (pathname === '/enrollmentEventNew') {
+                history.push(`/enrollment${urlArguments({ enrollmentId })}`);
+                return EMPTY;
             }
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
-            return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
+            history.push(`/?${urlArguments({ programId, orgUnitId })}`);
+            return EMPTY;
         }));

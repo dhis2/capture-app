@@ -1,8 +1,8 @@
 // @flow
 import log from 'loglevel';
 import { ofType } from 'redux-observable';
+import { EMPTY } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { push } from 'connected-react-router';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../../../../d2';
@@ -98,10 +98,13 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
                 });
         }));
 
-export const openViewPageLocationChangeEpic = (action$: InputObservable) =>
+export const openViewPageLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        map(({ payload: { eventId } }) => push(`/viewEvent?viewEventId=${eventId}`)));
+        switchMap(({ payload: { eventId } }) => {
+            history.push(`/viewEvent?viewEventId=${eventId}`);
+            return EMPTY;
+        }));
 
 export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -134,18 +137,22 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
             return noWorkingListUpdateNeededOnBackToMainPage();
         }));
 
-export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
-        map(() => {
+        switchMap(() => {
+            // TODO - This should probably be replaced by URL args
             const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             const showaccessible = state.currentSelections.showaccessible;
+            // const { programId, orgUnitId, showaccessible } = deriveURLParamsFromHistory(history);
             if (showaccessible && !orgUnitId) {
-                return push(`/?programId=${programId}&all`);
+                history.push(`/?programId=${programId}&all`);
+                return EMPTY;
             }
-            return push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
+            history.push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
+            return EMPTY;
         }));
 
 export const openAddRelationshipForViewEventEpic = (action$: InputObservable) =>

@@ -1,9 +1,8 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { push } from 'connected-react-router';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
-import { concat, from, of } from 'rxjs';
+import { from, of } from 'rxjs';
 import moment from 'moment';
 import {
     enrollmentPageActionTypes,
@@ -16,6 +15,7 @@ import {
 } from './EnrollmentPage.actions';
 import { urlArguments } from '../../../utils/url';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
+import { deriveURLParamsFromHistory } from '../../../utils/routing';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
@@ -104,25 +104,21 @@ export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: R
         }),
     );
 
-export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.PAGE_OPEN),
         flatMap(({ payload: { enrollmentId, programId, orgUnitId, teiId } }) => {
             const {
-                query: {
-                    enrollmentId: queryEnrollment,
-                    orgUnitId: queryOrgUnitId,
-                    programId: queryProgramId,
-                    teiId: queryTeiId,
-                },
-            } = store.value.router.location;
+                enrollmentId: queryEnrollment,
+                orgUnitId: queryOrgUnitId,
+                programId: queryProgramId,
+                teiId: queryTeiId,
+            } = deriveURLParamsFromHistory(history);
             const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
 
             if (!urlCompleted) {
-                return concat(
-                    of(push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`)),
-                    fetchTeiStream(teiId, querySingleResource),
-                );
+                history.push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
+                return fetchTeiStream(teiId, querySingleResource);
             }
             return fetchTeiStream(teiId, querySingleResource);
         },

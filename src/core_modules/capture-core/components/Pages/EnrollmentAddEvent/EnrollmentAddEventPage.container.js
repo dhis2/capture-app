@@ -3,9 +3,10 @@ import React, { useCallback, useMemo } from 'react';
 import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import i18n from '@dhis2/d2-i18n';
 import { useLocationQuery } from '../../../utils/routing';
-import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
+import { addEnrollmentEventPageActionTypes } from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
@@ -14,30 +15,34 @@ import { useWidgetDataFromStore } from './hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { urlArguments } from '../../../utils/url';
 
 export const EnrollmentAddEventPage = () => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
-
+    const history = useHistory();
     const dispatch = useDispatch();
 
+    const navigateToEnrollmentPage = useCallback(() =>
+        history.push(
+            `/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`,
+        ), [enrollmentId, history, orgUnitId, programId, teiId]);
+
     const handleCancel = useCallback(() => {
-        dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
-    }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
+        navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId);
+    }, [navigateToEnrollmentPage, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
         (data, uid) => {
             dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
-            dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
+            navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId);
         },
-        [dispatch, programId, orgUnitId, teiId, enrollmentId],
+        [dispatch, navigateToEnrollmentPage, programId, orgUnitId, teiId, enrollmentId],
     );
 
     const handleDelete = useCallback(() => {
-        dispatch(batchActions([
-            deleteEnrollment({ enrollmentId }),
-            navigateToEnrollmentPage(programId, orgUnitId, teiId),
-        ]));
-    }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
+        dispatch(deleteEnrollment({ enrollmentId }));
+        navigateToEnrollmentPage(programId, orgUnitId, teiId);
+    }, [dispatch, enrollmentId, navigateToEnrollmentPage, programId, orgUnitId, teiId]);
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
