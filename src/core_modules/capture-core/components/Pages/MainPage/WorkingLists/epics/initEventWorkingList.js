@@ -29,6 +29,7 @@ export const initEventWorkingListAsync = async (
     const { columnOrder, ...queryArgsPart } = listConfig;
     const queryArgsSource = {
         ...queryArgsPart,
+        fields: 'dataValues,eventDate,event,status,orgUnit,program,programType,lastUpdated,created,assignedUser,assignedUserDisplayName,assignedUserUsername',
         ...commonQueryData,
     };
 
