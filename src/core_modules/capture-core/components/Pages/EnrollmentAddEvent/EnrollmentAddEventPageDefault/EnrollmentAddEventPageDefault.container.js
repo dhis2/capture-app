@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { useLocationQuery } from '../../../../utils/routing';
 import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './EnrollmentAddEventPageDefault.actions';
-import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
 import { deleteEnrollment } from '../../Enrollment/EnrollmentPage.actions';
@@ -14,6 +13,7 @@ import { useWidgetDataFromStore } from '../hooks';
 import { useHideWidgetByRuleLocations } from '../../Enrollment/EnrollmentPageDefault/hooks';
 import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
+import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 
 export const EnrollmentAddEventPageDefault = () => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();

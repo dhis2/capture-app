@@ -1,6 +1,7 @@
 // @flow
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
+import { Program } from '../../../../metaData';
 
 export type Props = {|
     programId: string,
@@ -22,3 +23,7 @@ export type Props = {|
     widgetReducerName: string,
     ...CssClasses,
 |};
+
+export type ContainerProps = {|
+    program: Program,
+|}
