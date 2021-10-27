@@ -27,7 +27,7 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
             return startSaveNewEventAfterReturnedToMainPage(serverData, relationshipData, state.currentSelections);
         }));
 
-export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         switchMap(() => {

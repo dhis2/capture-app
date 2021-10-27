@@ -1,6 +1,5 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
-import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -28,21 +27,21 @@ export const EnrollmentAddEventPage = () => {
         ), [enrollmentId, history, orgUnitId, programId, teiId]);
 
     const handleCancel = useCallback(() => {
-        navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId);
-    }, [navigateToEnrollmentPage, programId, orgUnitId, teiId, enrollmentId]);
+        navigateToEnrollmentPage();
+    }, [navigateToEnrollmentPage]);
 
     const handleSave = useCallback(
         (data, uid) => {
             dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
-            navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId);
+            navigateToEnrollmentPage();
         },
-        [dispatch, navigateToEnrollmentPage, programId, orgUnitId, teiId, enrollmentId],
+        [dispatch, navigateToEnrollmentPage],
     );
 
     const handleDelete = useCallback(() => {
         dispatch(deleteEnrollment({ enrollmentId }));
-        navigateToEnrollmentPage(programId, orgUnitId, teiId);
-    }, [dispatch, enrollmentId, navigateToEnrollmentPage, programId, orgUnitId, teiId]);
+        navigateToEnrollmentPage();
+    }, [dispatch, enrollmentId, navigateToEnrollmentPage]);
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 

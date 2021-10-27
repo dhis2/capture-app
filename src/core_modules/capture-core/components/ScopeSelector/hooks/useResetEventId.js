@@ -4,7 +4,7 @@ import { urlArguments, getUrlQueries } from '../../../utils/url';
 
 export const useResetEventId = () => {
     const history = useHistory();
-    const { pathname }: string = useLocation();
+    const { pathname } = useLocation();
 
     const resetEventId = (pageToPush: string = pathname) => {
         const { programId, orgUnitId, teiId, enrollmentId } = getUrlQueries();

@@ -24,7 +24,7 @@ import { useLocationQuery } from '../../../../utils/routing';
 
 const EmptyPrograms = ({ classes, handleResetOrgUnit }) => {
     const { push } = useHistory();
-    const { pathname }: string = useLocation();
+    const { pathname } = useLocation();
     const { enrollmentId, teiId, orgUnitId } = useLocationQuery();
 
 

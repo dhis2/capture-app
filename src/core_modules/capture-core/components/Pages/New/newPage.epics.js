@@ -7,7 +7,7 @@ import { topBarActionsActionTypes } from '../../TopBarActions/TopBarActions.acti
 import { urlArguments } from '../../../utils/url';
 import { deriveURLParamsFromHistory } from '../../../utils/routing';
 
-export const openNewRegistrationPageFromLockedSelectorEpic = (action$: InputObservable, _: ReduxStore, { history }) =>
+export const openNewRegistrationPageFromLockedSelectorEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN, topBarActionsActionTypes.NEW_REGISTRATION_PAGE_OPEN),
         switchMap(() => {

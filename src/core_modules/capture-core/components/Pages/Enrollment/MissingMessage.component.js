@@ -66,7 +66,7 @@ const useNavigations = () => {
     const history = useHistory();
     const { tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
 
-    const { programId, orgUnitId }: string = useLocationQuery();
+    const { programId, orgUnitId } = useLocationQuery();
     const navigateToProgramRegistrationPage = () =>
         history.push(`/new?${urlArguments({ programId, orgUnitId })}`);
     const navigateToEventWorkingList = () =>
@@ -89,7 +89,7 @@ export const MissingMessage = withStyles(getStyles)(({ classes }) => {
     const { navigateToProgramRegistrationPage, navigateToEventWorkingList } = useNavigations();
     const { missingStatus } = useMissingStatus();
     const { teiDisplayName, tetId } = useSelector(({ enrollmentPage }) => enrollmentPage);
-    const { programId }: string = useLocationQuery();
+    const { programId } = useLocationQuery();
 
     const { trackedEntityName: tetName } = useScopeInfo(tetId);
     const { programName, trackedEntityName: selectedTetName } = useScopeInfo(programId);

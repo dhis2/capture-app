@@ -201,11 +201,17 @@ declare type CssClasses = {|
     +classes: Object,
 |};
 
+declare type ApiUtilsWithoutHistory = {|
+    querySingleResource: QuerySingleResource,
+    mutate: DataEngineMutate,
+    absoluteApiPath: string,
+|}
+
 declare type ApiUtils = {|
     querySingleResource: QuerySingleResource,
     mutate: DataEngineMutate,
     absoluteApiPath: string,
-    history?: {
+    history: {
         push: () => void,
         ...PassOnProps,
     },

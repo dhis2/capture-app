@@ -1,7 +1,7 @@
 // @flow
 import { pageKeys } from '../components/App/withAppUrlSync';
 
-type Url = {
+export type Url = {
     programId?: string,
     orgUnitId?: string,
     trackedEntityTypeId?: string,

@@ -59,7 +59,7 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
             return startSaveEditEventAfterReturnedToMainPage(eventId, serverData, state.currentSelections);
         }));
 
-export const saveEditEventLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }) =>
+export const saveEditEventLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         switchMap(() => {

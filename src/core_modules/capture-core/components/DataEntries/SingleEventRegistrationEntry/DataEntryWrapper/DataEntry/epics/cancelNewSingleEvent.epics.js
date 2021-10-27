@@ -41,7 +41,7 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
             return cancelNewEventNoWorkingListUpdateNeeded();
         }));
 
-export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         switchMap(() => {

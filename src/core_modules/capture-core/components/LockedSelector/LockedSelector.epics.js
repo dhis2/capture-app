@@ -26,7 +26,7 @@ const derivePayloadFromAction = (batchPayload, actionType) => {
 
 const orgUnitsQuery = id => ({ resource: 'organisationUnits', id });
 
-export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
         switchMap(({ payload: { orgUnitId, pageToPush } }) => {
@@ -45,7 +45,7 @@ export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore, { 
             return EMPTY;
         }));
 
-export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH),
         switchMap(({ payload: batchPayload }) => {
@@ -56,7 +56,7 @@ export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore, { hi
             return EMPTY;
         }));
 
-export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.PROGRAM_ID_SET),
         switchMap(({ payload: { programId, pageToPush } }) => {
@@ -66,7 +66,7 @@ export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore, { 
             return EMPTY;
         }));
 
-export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH),
         switchMap(({ payload: batchPayload }) => {
@@ -78,7 +78,7 @@ export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore, 
         }),
     );
 
-export const startAgainEpic = (action$: InputObservable, store, { history }) =>
+export const startAgainEpic = (action$: InputObservable, store: InputObservable, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.AGAIN_START),
         switchMap(() => {
@@ -160,7 +160,7 @@ export const fetchOrgUnitEpic = (
         catchError(() => of(errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')))),
     );
 
-export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.TEI_SELECTION_RESET),
         switchMap(() => {
@@ -182,7 +182,7 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
         }),
     );
 
-export const resetEnrollmentSelectionEpic = (action$: InputObservable, _: ReduxStore, { history }) =>
+export const resetEnrollmentSelectionEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET),
         switchMap(() => {

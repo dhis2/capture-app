@@ -34,7 +34,7 @@ export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStor
             return startSaveNewEventAndReturnToList(serverData, relationshipData, state.currentSelections);
         }));
 
-export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         switchMap(() => {

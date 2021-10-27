@@ -18,7 +18,7 @@ import { epics } from '../epics/trackerCapture.epics';
 
 export function getStore(
     history: BrowserHistory | HashHistory,
-    apiUtils: ApiUtils,
+    apiUtils: ApiUtilsWithoutHistory,
     onRehydrated: () => void) {
     const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptions);
 
@@ -41,9 +41,8 @@ export function getStore(
         persistOptions: getPersistOptions(),
     });
 
-    apiUtils.history = history;
     const epicMiddleware = createEpicMiddleware({
-        dependencies: apiUtils,
+        dependencies: { history, ...apiUtils },
     });
 
     const middleware = [epicMiddleware, routerMiddleware(history), offlineMiddleware];

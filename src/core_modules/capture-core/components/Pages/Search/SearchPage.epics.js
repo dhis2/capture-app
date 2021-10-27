@@ -8,7 +8,7 @@ import { topBarActionsActionTypes } from '../../TopBarActions';
 import { urlArguments } from '../../../utils/url';
 import { deriveURLParamsFromHistory } from '../../../utils/routing';
 
-export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE),
         switchMap(() => {
@@ -18,7 +18,7 @@ export const navigateBackToMainPageEpic = (action$: InputObservable, store: Redu
         }),
     );
 
-export const openSearchPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const openSearchPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.SEARCH_PAGE_OPEN, topBarActionsActionTypes.SEARCH_PAGE_OPEN),
         switchMap(() => {

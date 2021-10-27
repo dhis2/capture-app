@@ -5,7 +5,7 @@ import { EMPTY } from 'rxjs';
 import { trackedEntityTypeSelectorActionTypes } from './TrackedEntityTypeSelector.actions';
 import { urlArguments } from '../../utils/url';
 
-export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(trackedEntityTypeSelectorActionTypes.TRACKED_ENTITY_TYPE_ID_ON_URL_SET),
         switchMap(({ payload: { trackedEntityTypeId } }) => {

@@ -98,7 +98,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
                 });
         }));
 
-export const openViewPageLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }) =>
+export const openViewPageLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
         switchMap(({ payload: { eventId } }) => {
@@ -137,7 +137,7 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
             return noWorkingListUpdateNeededOnBackToMainPage();
         }));
 
-export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }) =>
+export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
         switchMap(() => {

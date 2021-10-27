@@ -274,7 +274,7 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
         }),
     );
 
-export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { history }) =>
+export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED),
         switchMap(({ payload: { orgUnitId, trackedEntityTypeId } }) => {
