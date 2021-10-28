@@ -14,11 +14,9 @@ const getStyles = () => ({});
 const storeId = 'stageEvents';
 const StageEventListPlain = ({ stage, programId, ...passOnProps }) => {
     const { programType } = useProgramInfo(programId);
-
     const workingListProps = {
         storeId,
         programId,
-        programStageId: stage.id,
         ...passOnProps,
     };
     return (<>

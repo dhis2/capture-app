@@ -42,7 +42,7 @@ const styles = {
     button: {
         marginRight: spacersNum.dp8,
     },
-    hidenButton: { display: 'none !important' },
+    // hidenButton: { display: 'none !important' },
     icon: {
         position: 'absolute',
         left: spacersNum.dp8,

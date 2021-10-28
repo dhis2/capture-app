@@ -11,10 +11,10 @@ import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 import type { Props } from './eventWorkingListsReduxProvider.types';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 
-export const EventWorkingListsReduxProvider = ({ storeId, programId, programStageId, orgUnitId }: Props) => {
+export const EventWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: Props) => {
     const dispatch = useDispatch();
     const { program } = useProgramInfo(programId);
-
+    const programStageId = [...program.stages.keys()][0];
     const { currentTemplateId, templates, ...commonStateManagementRestProps }
         = useWorkingListsCommonStateManagement(storeId, SINGLE_EVENT_WORKING_LISTS_TYPE, program);
 
