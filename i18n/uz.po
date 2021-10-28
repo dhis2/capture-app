@@ -680,10 +680,10 @@ msgid "program stage is invalid"
 msgstr ""
 
 msgid "Report"
-msgstr ""
+msgstr "Ҳисобот"
 
 msgid "Schedule"
-msgstr ""
+msgstr "Режа"
 
 msgid "Refer"
 msgstr ""
