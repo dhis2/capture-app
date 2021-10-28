@@ -24,6 +24,7 @@ const getSourceQueryArgsForUpdateWorkingList = (
         programId,
         orgUnitId,
         categories,
+        fields: 'dataValues,eventDate,event,status,orgUnit,program,programType,lastUpdated,created,assignedUser,assignedUserDisplayName,assignedUserUsername',
         ...sourceQueryArgsPart,
     };
 };
