@@ -31,37 +31,9 @@ const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, organisationUni
     return !lockedSelectorLoads;
 };
 
-const useUrlQueries = (): { selectedProgramId: string, selectedOrgUnitId: string, pathname: string } => {
-    const { pathname } = useLocation();
-    const {
-        storeProgramId,
-        storeOrgUnitId,
-    } = useSelector(({
-        currentSelections: {
-            programId,
-            orgUnitId,
-        },
-    }) =>
-        ({
-            storeProgramId: programId,
-            storeOrgUnitId: orgUnitId,
-        }),
-    );
-    const { orgUnitId, programId } = useLocationQuery();
-
-    const selectedProgramId = programId || storeProgramId;
-    const selectedOrgUnitId = orgUnitId || storeOrgUnitId;
-
-    return {
-        selectedProgramId,
-        selectedOrgUnitId,
-        pathname,
-    };
-};
-
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();
-    const { selectedOrgUnitId } = useUrlQueries();
+    const { orgUnitId: selectedOrgUnitId } = useLocationQuery();
     const { pathname } = useLocation();
     const pageFetchesOrgUnit = !pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
 
@@ -165,7 +137,8 @@ export const LockedSelector: ComponentType<OwnProps> =
           },
           [pageToPush, customActionsOnProgramIdReset, dispatch]);
 
-      const { selectedOrgUnitId, selectedProgramId } = useUrlQueries();
+      const { selectedOrgUnitId, selectedProgramId } = useLocationQuery();
+
 
       const lockedSelectorLoads: string =
         useSelector(({ activePage }) => activePage.lockedSelectorLoads);
