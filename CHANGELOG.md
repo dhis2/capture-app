@@ -1,3 +1,52 @@
+## [1.59.4](https://github.com/dhis2/capture-app/compare/v1.59.3...v1.59.4) (2021-10-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8b3dcaf](https://github.com/dhis2/capture-app/commit/8b3dcafbd63290ced76bb9c65a40865fd51405f2))
+
+## [1.59.3](https://github.com/dhis2/capture-app/compare/v1.59.2...v1.59.3) (2021-10-21)
+
+
+### Bug Fixes
+
+* [DHIS2-11986] use react-router location in new enrollment event page ([53d08ba](https://github.com/dhis2/capture-app/commit/53d08ba89450e38aaaf19f85929595922b2de23c))
+
+## [1.59.2](https://github.com/dhis2/capture-app/compare/v1.59.1...v1.59.2) (2021-10-18)
+
+
+### Bug Fixes
+
+* [DHIS2-12002] fix switch to row view ([#2205](https://github.com/dhis2/capture-app/issues/2205)) ([328da01](https://github.com/dhis2/capture-app/commit/328da018cdcb2bd01e68194c09da2d0c513f1576))
+
+## [1.59.1](https://github.com/dhis2/capture-app/compare/v1.59.0...v1.59.1) (2021-10-15)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([e6d5e32](https://github.com/dhis2/capture-app/commit/e6d5e3255985e761a75e371c1bcaff6ba71dabc5))
+
+# [1.59.0](https://github.com/dhis2/capture-app/compare/v1.58.5...v1.59.0) (2021-10-14)
+
+
+### Features
+
+* [DHIS2-11617] Implement switch tab in add event page ([#2165](https://github.com/dhis2/capture-app/issues/2165)) ([9a6a66b](https://github.com/dhis2/capture-app/commit/9a6a66b3c0a7576aaebf5e2429278d3a942a8502))
+
+## [1.58.5](https://github.com/dhis2/capture-app/compare/v1.58.4...v1.58.5) (2021-10-14)
+
+
+### Bug Fixes
+
+* [TECH-700] add query params for events ([#2199](https://github.com/dhis2/capture-app/issues/2199)) ([64f9015](https://github.com/dhis2/capture-app/commit/64f90152a458ecc72800ce0c59721a4e6989a83d))
+
+## [1.58.4](https://github.com/dhis2/capture-app/compare/v1.58.3...v1.58.4) (2021-10-07)
+
+
+### Bug Fixes
+
+* [DHIS2-11797] Prevent out of scope effects to trigger ([ae97e29](https://github.com/dhis2/capture-app/commit/ae97e29906c419defcf05253c3c82833ade8bc66))
+
 ## [1.58.3](https://github.com/dhis2/capture-app/compare/v1.58.2...v1.58.3) (2021-10-07)
 
 

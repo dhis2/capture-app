@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
 import { ViewEventPage } from 'capture-core/components/Pages/ViewEvent';
 import { MainPage } from 'capture-core/components/Pages/MainPage';
 import { SearchPage } from 'capture-core/components/Pages/Search';

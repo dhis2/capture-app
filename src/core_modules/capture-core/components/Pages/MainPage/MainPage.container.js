@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo } from 'react';
 // $FlowFixMe
 import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { MainPageComponent } from './MainPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
