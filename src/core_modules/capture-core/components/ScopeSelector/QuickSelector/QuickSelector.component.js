@@ -44,7 +44,6 @@ class QuickSelectorPlain extends Component<Props> {
 
     render() {
         const { width, programSelectorWidth } = this.calculateColumnWidths();
-
         return (
             <Paper className={this.props.classes.paper}>
                 <Grid container spacing={0}>
@@ -62,7 +61,7 @@ class QuickSelectorPlain extends Component<Props> {
                             onResetOrgUnit={this.props.onResetOrgUnitId}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={width * 3} md={width * 2} lg={width} className={this.props.classes.orgUnitSelector}>
+                    <Grid item xs={12} sm={width * 3} md={width * 2} lg={width * 1.5} className={this.props.classes.orgUnitSelector}>
                         <OrgUnitSelector
                             selectedOrgUnitId={this.props.selectedOrgUnitId}
                             handleClickOrgUnit={this.props.onSetOrgUnit}
