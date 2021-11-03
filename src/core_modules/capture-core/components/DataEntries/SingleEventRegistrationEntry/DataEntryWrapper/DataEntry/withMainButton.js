@@ -152,6 +152,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                     ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     mainButton={mainButton}
                     completeButton={completeButton}
+                    formHorizontal={formHorizontal}
                     {...passOnProps}
                 />
             );

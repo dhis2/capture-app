@@ -2,7 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 import { getDataEntryKey } from './common/getDataEntryKey';

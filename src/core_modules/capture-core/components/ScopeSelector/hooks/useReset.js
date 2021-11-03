@@ -1,5 +1,5 @@
 // @flow
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 export const useReset = () => {
     const history = useHistory();
