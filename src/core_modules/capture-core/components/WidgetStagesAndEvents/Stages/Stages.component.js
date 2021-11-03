@@ -1,8 +1,10 @@
 // @flow
 import React, { type ComponentType } from 'react';
+import { compose } from 'redux';
 import { withStyles } from '@material-ui/core';
 import { Stage } from './Stage';
 import type { Props } from './stages.types';
+import { withLoadingIndicator } from '../../../HOC';
 
 const styles = {};
 export const StagesPlain = ({ stages, events, classes, ...passOnProps }: Props) => (
@@ -22,4 +24,4 @@ export const StagesPlain = ({ stages, events, classes, ...passOnProps }: Props) 
     </>
 );
 
-export const Stages: ComponentType<$Diff<Props, CssClasses>> = withStyles(styles)(StagesPlain);
+export const Stages: ComponentType<$Diff<Props, CssClasses>> = compose(withLoadingIndicator(), withStyles(styles))(StagesPlain);
