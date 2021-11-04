@@ -72,7 +72,7 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, trackedEntityType, onC
                     <ModalContent>
                         {i18n.t(
                             'Change information about this {{trackedEntityName}} here. To change information about this enrollment, use the Edit button in the in the Enrollment box on this dashboard',
-                            { trackedEntityName },
+                            { trackedEntityName, interpolation: { escapeValue: false } },
                         )}
                         <DataEntry
                             id={dataEntryId}
@@ -93,6 +93,7 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, trackedEntityType, onC
                             <Button onClick={onCancel} secondary>
                                 {i18n.t('Cancel without saving')}
                             </Button>
+                            {/* TODO - https://jira.dhis2.org/browse/DHIS2-10950 */}
                             <Button onClick={() => {}} primary>
                                 {i18n.t('Save changes')}
                             </Button>
