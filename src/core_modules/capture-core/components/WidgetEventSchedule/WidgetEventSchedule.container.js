@@ -62,17 +62,8 @@ export const WidgetEventSchedule = ({
             notes: [],
         }] });
     };
-    const onAddComment = async (comment) => {
-        await mutate({ events: [{
-            dataValues: [],
-            trackedEntityInstance: teiId,
-            orgUnit: orgUnitId,
-            enrollment: enrollmentId,
-            program: programId,
-            programStage: stageId,
-            status: 'SCHEDULE',
-            notes: [{ value: comment }],
-        }] });
+    const onAddComment = () => {
+        // TODO add the comment function in DHIS2-11864
     };
 
     useEffect(() => { refetchEventsInOrgUnit(); }, [orgUnitId]);// eslint-disable-line react-hooks/exhaustive-deps
