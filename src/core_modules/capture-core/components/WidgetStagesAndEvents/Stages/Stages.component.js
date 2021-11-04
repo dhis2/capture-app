@@ -8,7 +8,7 @@ import { withLoadingIndicator } from '../../../HOC';
 
 const styles = {};
 export const StagesPlain = ({ stages, events, ready, classes, ...passOnProps }: Props) => (
-    ready && <>
+    ready ? <>
         {
             stages
                 .map(stage => (
@@ -22,7 +22,6 @@ export const StagesPlain = ({ stages, events, ready, classes, ...passOnProps }: 
                     />
                 ))
         }
-    </>
-);
+    </> : null);
 
 export const Stages: ComponentType<$Diff<Props, CssClasses>> = compose(withLoadingIndicator(), withStyles(styles))(StagesPlain);
