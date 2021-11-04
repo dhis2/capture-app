@@ -7,14 +7,14 @@ import type { Props } from './stages.types';
 import { withLoadingIndicator } from '../../../HOC';
 
 const styles = {};
-export const StagesPlain = ({ stages, events, ready, classes, ...passOnProps }: Props) => (
-    ready ? <>
+export const StagesPlain = ({ stages, events, classes, ...passOnProps }: Props) => (
+    <>
         {
             stages
                 .map(stage => (
                     <Stage
                         // $FlowFixMe
-                        events={events.filter(event => event.programStage === stage.id)}
+                        events={events?.filter(event => event.programStage === stage.id)}
                         key={stage.id}
                         stage={stage}
                         className={classes.stage}
@@ -22,6 +22,7 @@ export const StagesPlain = ({ stages, events, ready, classes, ...passOnProps }: 
                     />
                 ))
         }
-    </> : null);
+    </>
+);
 
 export const Stages: ComponentType<$Diff<Props, CssClasses>> = compose(withLoadingIndicator(), withStyles(styles))(StagesPlain);
