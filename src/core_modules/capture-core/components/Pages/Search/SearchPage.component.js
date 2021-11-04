@@ -15,7 +15,7 @@ import { CircularLoader,
 } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 import { LockedSelector } from '../../LockedSelector';
 import type { ContainerProps, Props } from './SearchPage.types';

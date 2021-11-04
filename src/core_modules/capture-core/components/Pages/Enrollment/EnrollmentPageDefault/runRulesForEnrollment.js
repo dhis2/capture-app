@@ -1,4 +1,6 @@
 // @flow
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { convertValue } from 'capture-core/converters/serverToClient';
 import { runRulesForEnrollmentPage } from 'capture-core/rules/actionsCreator/runRulesForEnrollmentPage';
 import { dataElementTypes, TrackerProgram } from '../../../../metaData';
@@ -30,6 +32,15 @@ const getEventValuesFromEvent = (enrollment, eventId, dataElements) => {
     if (currentEvent) {
         return currentEvent.dataValues.reduce((acc, dataValue) => {
             const { dataElement: id, value } = dataValue;
+
+            if (!dataElements[id] || !dataElements[id].valueType) {
+                log.error(
+                    errorCreator(
+                        'Metadata not found for data value')({ id }),
+                );
+                return acc;
+            }
+
             acc[id] = convertValue(value, dataElements[id].valueType);
             return acc;
         }, {});

@@ -2,8 +2,9 @@
 import React, { useCallback, useMemo } from 'react';
 import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
+import { useLocationQuery } from '../../../utils/routing';
 import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
@@ -12,22 +13,10 @@ import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { useWidgetDataFromStore } from './hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../common/EnrollmentOverviewDomain';
+import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 export const EnrollmentAddEventPage = () => {
-    const { programId, stageId, orgUnitId, teiId, enrollmentId } = useSelector(
-        ({
-            router: {
-                location: { query },
-            },
-        }) => ({
-            programId: query.programId,
-            stageId: query.stageId,
-            orgUnitId: query.orgUnitId,
-            teiId: query.teiId,
-            enrollmentId: query.enrollmentId,
-        }),
-        shallowEqual,
-    );
+    const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
     const dispatch = useDispatch();
 
@@ -51,6 +40,8 @@ export const EnrollmentAddEventPage = () => {
     }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
+
+    const dataEntryHasChanges = useSelector(state => getDataEntryHasChanges(state, widgetReducerName));
 
     // TODO: Validate query params
     // This includes prechecking that we got a valid program stage and move the program stage logic in this file to useEnrollmentAddEventTopBar
@@ -94,6 +85,7 @@ export const EnrollmentAddEventPage = () => {
         return <div>{i18n.t('program stage is invalid')}</div>;
     }
 
+
     return (
         <>
             <EnrollmentAddEventTopBar
@@ -133,6 +125,7 @@ export const EnrollmentAddEventPage = () => {
                 rulesExecutionDependencies={rulesExecutionDependencies}
                 pageFailure={Boolean(commonDataError)}
                 ready={Boolean(enrollment)}
+                dataEntryHasChanges={dataEntryHasChanges}
             />
         </>
     );
