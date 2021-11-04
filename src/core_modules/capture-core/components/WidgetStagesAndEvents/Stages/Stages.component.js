@@ -7,13 +7,14 @@ import type { Props } from './stages.types';
 import { withLoadingIndicator } from '../../../HOC';
 
 const styles = {};
-export const StagesPlain = ({ stages, events, classes, ...passOnProps }: Props) => (
-    <>
+export const StagesPlain = ({ stages, events, ready, classes, ...passOnProps }: Props) => (
+    ready && <>
         {
             stages
                 .map(stage => (
                     <Stage
-                        events={events?.filter(event => event.programStage === stage.id)}
+                        // $FlowFixMe
+                        events={events.filter(event => event.programStage === stage.id)}
                         key={stage.id}
                         stage={stage}
                         className={classes.stage}

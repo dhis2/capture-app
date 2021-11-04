@@ -41,7 +41,6 @@ const getStyles = ({ typography }) => ({
 export const EnrollmentPageDefaultPlain = ({
     program,
     teiId,
-    isEventWidgetReady,
     events,
     enrollmentId,
     stages,
@@ -58,7 +57,6 @@ export const EnrollmentPageDefaultPlain = ({
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
                 <WidgetStagesAndEvents
-                    ready={isEventWidgetReady}
                     stages={stages}
                     events={events}
                     onViewAll={onViewAll}

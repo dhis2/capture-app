@@ -4,11 +4,10 @@ import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 
 export type Props = {|
-    isEventWidgetReady: boolean,
     program: Program,
     enrollmentId: string,
     teiId: string,
-    events: Array<ApiEnrollmentEvent>,
+    events: ?Array<ApiEnrollmentEvent>,
     stages: Array<Stage>,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,

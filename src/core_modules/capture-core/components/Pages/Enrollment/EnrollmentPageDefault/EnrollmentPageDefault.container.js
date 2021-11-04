@@ -40,7 +40,7 @@ export const EnrollmentPageDefault = () => {
 
     const { program } = useProgramInfo(programId);
     const { error: teiAttributesError, attributes } = useTeiAttributes(teiId);
-    const { error: enrollmentsError, enrollment, loading: enrollmentLoading } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+    const { error: enrollmentsError, enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
     const stages = useProgramStages(program, programMetadata.programStages);
 
@@ -86,11 +86,10 @@ export const EnrollmentPageDefault = () => {
 
     return (
         <EnrollmentPageDefaultComponent
-            isEventWidgetReady={!enrollmentLoading}
             teiId={teiId}
             program={program}
             stages={stages}
-            events={enrollment?.events ?? []}
+            events={enrollment?.events}
             enrollmentId={enrollmentId}
             onDelete={onDelete}
             onViewAll={onViewAll}

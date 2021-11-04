@@ -14,7 +14,7 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         attributeValues: storedAttributeValues,
     } = useSelector(({ enrollmentDomain }) => enrollmentDomain);
 
-    const { data, error, loading, refetch } = useDataQuery(
+    const { data, error, refetch } = useDataQuery(
         useMemo(
             () => ({
                 trackedEntityInstance: {
@@ -66,7 +66,6 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
 
     return {
         error,
-        loading,
         ...inEffectData,
     };
 };
