@@ -38,7 +38,7 @@ export const WidgetEventSchedule = ({
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, ...passOnProps,
     });
-    const [scheduleDate, setScheduleDate] = useState(suggestedScheduleDate);
+    const [scheduleDate, setScheduleDate] = useState();
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
 
     const [mutate] = useDataMutation(scheduleEventMutation, {
@@ -64,6 +64,12 @@ export const WidgetEventSchedule = ({
         }] });
     };
 
+    React.useEffect(() => {
+        if (suggestedScheduleDate && !scheduleDate) {
+            setScheduleDate(suggestedScheduleDate);
+        }
+    }, [scheduleDate, suggestedScheduleDate]);
+
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
             <div>
@@ -79,7 +85,7 @@ export const WidgetEventSchedule = ({
             stageName={stage.name}
             programId={programId}
             programName={program.name}
-            scheduleDate={scheduleDate ?? suggestedScheduleDate}
+            scheduleDate={scheduleDate}
             suggestedScheduleDate={suggestedScheduleDate}
             setScheduleDate={setScheduleDate}
             onSchedule={onHandleSchedule}
