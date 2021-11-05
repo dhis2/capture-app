@@ -5,11 +5,12 @@ import { map } from 'rxjs/operators';
 import { scheduleEventWidgetActionTypes, scheduleEvent, navigateToEnrollmentPage } from './WidgetEventSchedule.actions';
 
 
-export const scheduleNewEnrollmentEventEpic = (action$: InputObservable) =>
+export const scheduleNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST),
         map((action) => {
             const uid = uuid();
+            const state = store.value;
             const {
                 scheduleDate,
                 programId,
@@ -29,7 +30,7 @@ export const scheduleNewEnrollmentEventEpic = (action$: InputObservable) =>
                 program: programId,
                 programStage: stageId,
                 status: 'SCHEDULE',
-                notes: [],
+                notes: state.events?.scheduleEvent?.notes ?? [],
             }] };
 
             return scheduleEvent(serverData, uid, { orgUnitId, programId, stageId, enrollmentId });

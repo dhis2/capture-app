@@ -5,6 +5,7 @@ import { actionCreator } from '../../actions/actions.utils';
 import { effectMethods } from '../../trackerOffline';
 
 export const scheduleEventWidgetActionTypes = {
+    START_EVENT_SCHEDULE: 'ScheduleEvent.StartEditingScheduleEvent',
     EVENT_SCHEDULE_REQUEST: 'ScheduleEvent.RequestScheduleEvent',
     EVENT_SCHEDULE: 'ScheduleEvent.ScheduleEvent',
     EVENT_SCHEDULE_SUCCESS: 'ScheduleEvent.ScheduleEventSuccess',
@@ -51,3 +52,8 @@ export const scheduleEvent = (serverData: Object, uid: string, payload: Object) 
 
 export const navigateToEnrollmentPage = (programId: string, orgUnitId: string, stageId: string, enrollmentId?: string) =>
     push(`/enrollment?${urlArguments({ orgUnitId, programId, stageId, enrollmentId })}`);
+
+export const addScheduleEventNote = (comment: string) =>
+    actionCreator(scheduleEventWidgetActionTypes.EVENT_NOTE_ADD)({ note: { value: comment } });
+
+export const startEditingScheduleEvent = () => actionCreator(scheduleEventWidgetActionTypes.START_EVENT_SCHEDULE)();

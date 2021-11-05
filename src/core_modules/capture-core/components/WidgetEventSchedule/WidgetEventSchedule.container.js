@@ -13,7 +13,7 @@ import {
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
 } from './hooks';
-import { requestScheduleEvent } from './WidgetEventSchedule.actions';
+import { requestScheduleEvent, startEditingScheduleEvent } from './WidgetEventSchedule.actions';
 
 
 export const WidgetEventSchedule = ({
@@ -37,6 +37,10 @@ export const WidgetEventSchedule = ({
 
     const eventCountInOrgUnit = events
         .filter(event => moment(event.dueDate).format('YYYY-MM-DD') === scheduleDate).length;
+
+    useEffect(() => {
+        dispatch(startEditingScheduleEvent());
+    }, []); // eslint-disable-line
 
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
