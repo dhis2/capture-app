@@ -19,6 +19,7 @@ export const useProgramFromIndexedDB = (programId: string) => {
             })
             .catch((e) => {
                 setError(e);
+                setLoading(false);
             });
     }, [programId]);
 
