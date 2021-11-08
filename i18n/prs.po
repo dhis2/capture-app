@@ -650,10 +650,10 @@ msgid "program stage is invalid"
 msgstr ""
 
 msgid "Report"
-msgstr ""
+msgstr "گزارش"
 
 msgid "Schedule"
-msgstr ""
+msgstr "تقسیم اوقات"
 
 msgid "Refer"
 msgstr ""

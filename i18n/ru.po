@@ -675,10 +675,10 @@ msgid "program stage is invalid"
 msgstr ""
 
 msgid "Report"
-msgstr ""
+msgstr "Отчет"
 
 msgid "Schedule"
-msgstr ""
+msgstr "Расписание"
 
 msgid "Refer"
 msgstr ""

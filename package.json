@@ -1,7 +1,7 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "1.59.3",
+  "version": "1.59.4",
   "cacheVersion": "1",
   "serverVersion": "37",
   "private": false,
@@ -58,7 +58,7 @@
     "redux-logger": "^3.0.6",
     "redux-observable": "^2.0.0",
     "reselect": "^3.0.1",
-    "rxjs": "^7.3.1",
+    "rxjs": "^7.4.0",
     "typeface-roboto": "^0.0.75",
     "uuid": "^3.3.2"
   },
