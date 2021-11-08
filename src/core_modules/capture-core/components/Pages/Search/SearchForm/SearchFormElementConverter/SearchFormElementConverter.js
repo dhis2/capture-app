@@ -29,13 +29,13 @@ const convertRange = (formValues: FormValues, dataElement: DataElement) => {
 
 const convertOrgUnit = (formValues: FormValues, dataElement: DataElement) => {
     const { id } = formValues;
-    const convertedId = (dataElement.convertValue(id, pipeD2(convertFormToClient, convertClientToServer)));
-    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${convertedId}`;
+    // const convertedId = (dataElement.convertValue(id, pipeD2(convertFormToClient, convertClientToServer)));
+    return `${dataElement.id}:${derivedFilterKeyword(dataElement)}:${id}`;
 };
 
 const convertAge = (formValues: FormValues, dataElement: DataElement) => {
     const { date } = formValues;
-    const convertedAge = date && (dataElement.convertValue(date, pipeD2(convertFormToClient, convertClientToServer)));
+    const convertedAge = date && (dataElement.convertValue(formValues, pipeD2(convertFormToClient, convertClientToServer)));
     return `${dataElement.id}:eq:${convertedAge}`;
 };
 

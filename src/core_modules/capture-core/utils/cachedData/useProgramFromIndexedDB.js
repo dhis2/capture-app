@@ -1,5 +1,5 @@
 // @flow
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
     getCachedSingleResourceFromKeyAsync,
 } from '../../metaDataMemoryStoreBuilders/baseBuilder/singleResourceFromKeyGetter';
@@ -9,7 +9,7 @@ import { userStores } from '../../storageControllers/stores';
 export const useProgramFromIndexedDB = (programId: string) => {
     const [cachedProgram, setCachedProgram] = useState();
     const [loading, setLoading] = useState(true);
-    const error = useRef();
+    const [error, setError] = useState();
 
     useMemo(() => {
         getCachedSingleResourceFromKeyAsync(userStores.PROGRAMS, programId)
@@ -18,13 +18,13 @@ export const useProgramFromIndexedDB = (programId: string) => {
                 setLoading(false);
             })
             .catch((e) => {
-                error.current = e;
+                setError(e);
             });
     }, [programId]);
 
     return {
         loading,
-        error: error.current,
+        error,
         program: cachedProgram,
     };
 };
