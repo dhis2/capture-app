@@ -40,11 +40,11 @@ export const WidgetEventSchedule = ({
 
     useEffect(() => {
         dispatch(startEditingScheduleEvent());
-    }, []); // eslint-disable-line
+    }, [dispatch]);
 
     useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
-    }, [suggestedScheduleDate]); // eslint-disable-line
+    }, [suggestedScheduleDate, scheduleDate]);
 
     const onHandleSchedule = useCallback(() => {
         dispatch(requestScheduleEvent({
