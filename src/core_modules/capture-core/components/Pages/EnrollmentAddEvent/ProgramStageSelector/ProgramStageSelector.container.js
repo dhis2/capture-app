@@ -5,12 +5,11 @@ import { useHistory } from 'react-router-dom';
 import log from 'loglevel';
 import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
 import { Widget } from '../../../Widget';
-import { urlArguments } from '../../../../utils/url';
 import { errorCreator } from '../../../../../capture-core-utils';
 import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedData/useProgramFromIndexedDB';
-import { useLocationQuery } from '../../../../utils/routing';
+import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
 
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
@@ -45,11 +44,19 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
         return accStage;
     }, []), [enrollment?.events, program?.programStages, programLoading]);
 
-    const onSelectProgramStage = (newStageId) => {
-        history.push(`enrollmentEventNew?${urlArguments({ programId, orgUnitId, teiId, enrollmentId, stageId: newStageId, tab })}`);
-    };
+    const onSelectProgramStage = (newStageId: string) =>
+        history.push(`enrollmentEventNew?${buildUrlQueryString({
+            programId,
+            orgUnitId,
+            teiId,
+            enrollmentId,
+            stageId: newStageId,
+            tab,
+        })}`);
 
-    const onCancel = () => history.push(`enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
+    const onCancel = () =>
+        history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+
     return (
         <>
             {program ?
