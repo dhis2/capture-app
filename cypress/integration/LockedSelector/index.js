@@ -318,6 +318,11 @@ And('you see the enrollment event New page but there is no org unit id in the ur
     cy.contains('Enrollment: New Event');
 });
 
+And('you see the enrollment event New page but there is no stage id in the url', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
+    cy.contains('Enrollment: New Event');
+});
+
 And('you see the enrollment page', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
     cy.get('[data-test="enrollment-page-content"]')
