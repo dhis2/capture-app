@@ -56,7 +56,7 @@ const WithoutOrgUnitSelectedMessagePlain = ({ programId, setShowAccessible, clas
         >
             <IncompleteSelectionsMessage>
                 <div className={classes.incompleteMessageContent}>
-                    <span>Please select an organisation unit.</span>
+                    <span>{i18n.t('Please select an organisation unit.')}</span>
                     <button
                         className={classes.incompleteMessageButton}
                         onClick={() => setShowAccessible()}
