@@ -1,5 +1,5 @@
 // @flow
-import { ProgramFactory } from '../../../metaDataMemoryStoreBuilders/programs/factory/program/ProgramFactory';
+import { EnrollmentFactory } from './factory';
 
 const objToMap = (object: any) => {
     const map = new Map<string, any>();
@@ -52,24 +52,20 @@ export const buildForm = async (
     optionSets: any,
     trackedEntityTypes: any,
     programAPI: any,
-    setProgram: (program: any) => void,
+    setEnrollment: (enrollment: any) => void,
 ) => {
     const cachedTrackedEntityAttributes: Map<string, any> = objToMap(trackedEntityAttributes);
     const cachedOptionSets: Map<string, any> = objToMap(optionSets);
     const cachedTrackedEntityTypes: Map<string, any> = objToMap(trackedEntityTypes);
     const trackedEntityTypeCollection: Map<string, any> = objToMap(trackedEntityTypes);
-    const cachedRelationshipTypes = [];
-    const cachedCategories = {};
 
-    const programFactory = new ProgramFactory(
-        cachedOptionSets,
-        cachedRelationshipTypes,
+    const enrollmentFactory = new EnrollmentFactory({
         cachedTrackedEntityAttributes,
+        cachedOptionSets,
         cachedTrackedEntityTypes,
-        cachedCategories,
         trackedEntityTypeCollection,
-    );
-
-    const programBuilt = await programFactory.build(convertProgramForEnrollmentFactory(programAPI));
-    setProgram(programBuilt);
+    });
+    const cachedProgram = convertProgramForEnrollmentFactory(programAPI);
+    const enrollment = await enrollmentFactory.build(cachedProgram);
+    setEnrollment(enrollment);
 };

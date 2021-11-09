@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-10-14T05:38:33.109Z\n"
-"PO-Revision-Date: 2021-10-14T05:38:33.109Z\n"
+"POT-Creation-Date: 2021-11-08T10:28:52.433Z\n"
+"PO-Revision-Date: 2021-11-08T10:28:52.433Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -973,6 +973,9 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
+msgid "Profile"
+msgstr ""
+
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr ""
 
@@ -1115,9 +1118,6 @@ msgid "Program not found"
 msgstr ""
 
 msgid "Program is not a tracker program"
-msgstr ""
-
-msgid "Profile"
 msgstr ""
 
 msgid "Error saving event"

@@ -6,63 +6,44 @@ import { useDispatch } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import type { Props } from './dataEntry.types';
 import { DataEntry } from '../../DataEntry';
-import { useTrackedEntityTypes, useTrackedEntityAttributes, useOptionSets } from './hooks';
-import { getOpenDataEntryActions } from './getOpenDataEntryActions';
+import { getOpenDataEntryActions, getRulesActions } from './actions';
 import { enrollmentUpdateFieldBatch, enrollmentUpdateDataEntryFieldBatch } from '../../DataEntries';
 import { buildForm } from './buildForm';
 
-export const DataEntryProfile = ({ programAPI, orgUnitId, trackedEntityType, onCancel, toggleEditModal }: Props) => {
-    const { trackedEntityTypes, loading: loadingTrackedEntityTypes } = useTrackedEntityTypes();
-    const { trackedEntityAttributes, loading: loadingTrackedEntityAttributes } = useTrackedEntityAttributes();
-    const { optionSets, loading: loadingOptionSets } = useOptionSets();
+export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditModal }: Props) => {
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
     const dispatch = useDispatch();
     const orgUnit: Object = useMemo(() => ({ id: orgUnitId }), [orgUnitId]);
-    const [program, setProgram] = useState<any>({});
-    const trackedEntityName = useMemo(
-        () =>
-            (!loadingTrackedEntityTypes &&
-                trackedEntityTypes?.find(item => item.id === trackedEntityType)?.displayName) ||
-            '',
-        [loadingTrackedEntityTypes, trackedEntityTypes, trackedEntityType],
-    );
+    const [enrollment, setEnrollment] = useState<any>({});
+    const trackedEntityName = useMemo(() => programAPI?.trackedEntityType?.displayName || '', [programAPI]);
 
     useEffect(() => {
-        if (
-            !loadingTrackedEntityTypes &&
-            !loadingTrackedEntityAttributes &&
-            !loadingOptionSets &&
-            Object.entries(program).length === 0
-        ) {
-            buildForm(trackedEntityAttributes, optionSets, trackedEntityTypes, programAPI, setProgram);
+        if (Object.entries(enrollment).length === 0) {
+            const trackedEntityTypes = [programAPI.trackedEntityType];
+            const trackedEntityAttributes = programAPI.programTrackedEntityAttributes.reduce(
+                (acc, currentValue) => [...acc, currentValue.trackedEntityAttribute],
+                [],
+            );
+            const optionSets = trackedEntityAttributes.reduce(
+                (acc, currentValue) => (currentValue.optionSet ? [...acc, currentValue.optionSet] : acc),
+                [],
+            );
+
+            buildForm(trackedEntityAttributes, optionSets, trackedEntityTypes, programAPI, setEnrollment);
         }
-    }, [
-        programAPI,
-        program,
-        loadingTrackedEntityAttributes,
-        loadingTrackedEntityTypes,
-        loadingOptionSets,
-        trackedEntityTypes,
-        trackedEntityAttributes,
-        optionSets,
-    ]);
+    }, [programAPI, enrollment]);
 
     useEffect(() => {
-        if (program && Object.entries(program).length > 0) {
+        if (enrollment && Object.entries(enrollment).length > 0) {
             dispatch(
                 batchActions([
-                    ...getOpenDataEntryActions(
-                        program,
-                        program.enrollment.enrollmentForm,
-                        orgUnit,
-                        dataEntryId,
-                        itemId,
-                    ),
+                    ...getOpenDataEntryActions(orgUnit, dataEntryId, itemId),
+                    ...getRulesActions(enrollment.enrollmentForm, orgUnit, dataEntryId, itemId),
                 ]),
             );
         }
-    }, [dispatch, program, orgUnit]);
+    }, [dispatch, enrollment, orgUnit]);
 
     return (
         <div>
@@ -76,7 +57,7 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, trackedEntityType, onC
                         )}
                         <DataEntry
                             id={dataEntryId}
-                            formFoundation={program?.enrollment?.enrollmentForm}
+                            formFoundation={enrollment?.enrollmentForm}
                             onUpdateFormField={(...args: Array<any>) =>
                                 dispatch(enrollmentUpdateFieldBatch(...args, programAPI.id, orgUnit))
                             }

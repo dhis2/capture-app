@@ -4,6 +4,5 @@ export type Props = {|
     programAPI: any,
     orgUnitId: string,
     toggleEditModal: boolean,
-    onCancel: () => void,
-    trackedEntityType: string,
+    onCancel: () => void
 |};

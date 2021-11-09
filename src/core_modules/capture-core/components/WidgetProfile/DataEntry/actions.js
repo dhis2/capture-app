@@ -4,7 +4,7 @@ import { convertGeometryOut } from 'capture-core/components/DataEntries/converte
 import { loadNewDataEntry } from '../../DataEntry/actions/dataEntryLoadNew.actions';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
-import type { RenderFoundation, TrackerProgram } from '../../../metaData';
+import type { RenderFoundation } from '../../../metaData';
 
 type DataEntryPropsToInclude = Array<Object>;
 
@@ -19,16 +19,12 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     },
 ];
 
-export const getOpenDataEntryActions = (
-    program: TrackerProgram,
-    foundation: RenderFoundation,
-    orgUnit: Object,
-    dataEntryId: string,
-    itemId: string,
-) => {
-    const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
-    const formId = getDataEntryKey(dataEntryId, itemId);
-    const rulesActions = getRulesActionsForEvent(program, foundation, formId, orgUnit);
+export const getOpenDataEntryActions = (orgUnit: Object, dataEntryId: string, itemId: string) =>
+    loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
 
-    return [...dataEntryActions, ...rulesActions];
+export const getRulesActions = (foundation: RenderFoundation, orgUnit: Object, dataEntryId: string, itemId: string) => {
+    const formId = getDataEntryKey(dataEntryId, itemId);
+    // TODO  DHIS2-11878 apply the programRules
+    // $FlowFixMe[incompatible-call]
+    return getRulesActionsForEvent({ programRules: [] }, foundation, formId, orgUnit);
 };
