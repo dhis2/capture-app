@@ -1,5 +1,5 @@
 // @flow
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertDataEntryToClientValues } from '../../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../../converters/clientToServer';

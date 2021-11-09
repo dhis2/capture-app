@@ -1,5 +1,5 @@
 // @flow
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { dataElementTypes } from '../../../../../../../metaData';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
