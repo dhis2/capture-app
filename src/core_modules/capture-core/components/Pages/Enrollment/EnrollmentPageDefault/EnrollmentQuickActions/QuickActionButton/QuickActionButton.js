@@ -1,8 +1,9 @@
 // @flow
-import React, { type Element } from 'react';
+import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers } from '@dhis2/ui';
 import { Tooltip, withStyles } from '@material-ui/core';
+import type { QuickActionButtonTypes } from './QuickActionButton.types';
 
 const styles = {
     button: {
@@ -12,16 +13,7 @@ const styles = {
     },
 };
 
-type Props = {|
-    icon: Element<any>,
-    label: string,
-    onClickAction: () => void,
-    dataTest?: string,
-    disable?: ?boolean,
-    ...CssClasses,
-|}
-
-const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disable, classes }: Props) => (
+const QuickActionButtonPlain = ({ icon, label, onClickAction, dataTest, disable, classes }: QuickActionButtonTypes) => (
     <Button
         onClick={onClickAction}
         dataTest={dataTest}

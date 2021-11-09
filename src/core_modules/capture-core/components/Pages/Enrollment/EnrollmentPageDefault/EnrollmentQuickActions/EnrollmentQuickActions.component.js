@@ -25,18 +25,19 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
     const history = useHistory();
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
 
-    const programStages = useMemo(() => stages.map((stage) => {
-        stage.eventCount = (events
+    const stagesWithEventCount = useMemo(() => stages.map((stage) => {
+        const mutatedStage = { ...stage };
+        mutatedStage.eventCount = (events
                 ?.filter(event => event.programStage === stage.id)
                 ?.length
         );
-        return stage;
+        return mutatedStage;
     }), [events, stages]);
 
-    const availableStage = useMemo(
-        () => programStages.every(programStage =>
+    const noStageAvailable = useMemo(
+        () => stagesWithEventCount.every(programStage =>
             (!programStage.repeatable && programStage.eventCount > 0),
-        ), [programStages]);
+        ), [stagesWithEventCount]);
 
     const onNavigationFromQuickActions = (tab: string) => {
         history.push(`/enrollmentEventNew?${urlArguments({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
@@ -58,7 +59,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
                     label={i18n.t('New Event')}
                     onClickAction={() => onNavigationFromQuickActions(tabMode.REPORT)}
                     dataTest={'quick-action-button-report'}
-                    disable={availableStage}
+                    disable={noStageAvailable}
                 />
 
                 <QuickActionButton
@@ -66,7 +67,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
                     label={i18n.t('Schedule an event')}
                     onClickAction={() => onNavigationFromQuickActions(tabMode.SCHEDULE)}
                     dataTest={'quick-action-button-schedule'}
-                    disable={availableStage}
+                    disable={noStageAvailable}
                 />
 
                 <QuickActionButton
@@ -74,7 +75,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
                     label={i18n.t('Make referral')}
                     onClickAction={() => onNavigationFromQuickActions(tabMode.REFER)}
                     dataTest={'quick-action-button-refer'}
-                    disable={availableStage}
+                    disable={noStageAvailable}
                 />
             </div>
         </Widget>
