@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { useHistory } from 'react-router-dom';
 import log from 'loglevel';
@@ -23,12 +23,14 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
     } = useProgramFromIndexedDB(programId);
 
 
-    if (enrollmentsError || programError) {
-        log.error(errorCreator('Enrollment page could not be loaded')({
-            enrollmentsError,
-            programError,
-        }));
-    }
+    useEffect(() => {
+        if (enrollmentsError || programError) {
+            log.error(errorCreator('Enrollment page could not be loaded')({
+                enrollmentsError,
+                programError,
+            }));
+        }
+    }, [enrollmentsError, programError]);
 
     const programStages = useMemo(() => !programLoading && program?.programStages?.reduce((accStage, currentStage) => {
         accStage.push({
