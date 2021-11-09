@@ -123,7 +123,9 @@ const NewPagePlain = ({
 
                                 return (
                                     <IncompleteSelectionsMessage>
-                                        {i18n.t('Choose the {{missingCategories}} to start reporting', { missingCategories })}
+                                        {i18n.t('Choose the {{missingCategories}} to start reporting', {
+                                            missingCategories, interpolation: { escapeValue: false },
+                                        })}
                                     </IncompleteSelectionsMessage>
                                 );
                             })()

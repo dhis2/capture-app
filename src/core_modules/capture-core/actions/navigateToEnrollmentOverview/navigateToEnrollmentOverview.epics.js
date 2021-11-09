@@ -15,7 +15,7 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         NavigateToEnrollmentOverviewActionTypes.NAVIGATE_TO_ENROLLMENT_OVERVIEW,
     ),
     switchMap((action) => {
-        const { teiId, programId, orgUnitId, enrollmentId } = action.payload;
+        const { teiId, programId, orgUnitId, enrollmentId = 'AUTO' } = action.payload;
         const { dataStore, userDataStore } = store.value.useNewDashboard;
 
         const pushHistoryToEnrollmentDashboard = () => {
@@ -52,9 +52,13 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         const selectedScopeId = queryTrackedEntityTypeId || queryProgramId;
         const scopeSearchParam = `${scopeHierarchy.toLowerCase()}=${selectedScopeId}`;
         const base64Url = btoa(`/dhis-web-capture/#${pathname}${search}`);
+        let ownerOrgUnitId;
+        !orgUnitId && (
+            ownerOrgUnitId = store.value.workingListsListRecords?.teiList[teiId]?.programOwners[programId]?.ownerOrgUnit
+        );
 
         setTimeout(() => {
-            window.location.href = `${instanceBaseUrl}/dhis-web-tracker-capture/#/dashboard?tei=${teiId}&ou=${orgUnitId}&${scopeSearchParam}&returnUrl=${base64Url}`;
+            window.location.href = `${instanceBaseUrl}/dhis-web-tracker-capture/#/dashboard?tei=${teiId}&ou=${orgUnitId || ownerOrgUnitId}&${scopeSearchParam}&returnUrl=${base64Url}`;
         }, 50);
 
         return EMPTY;

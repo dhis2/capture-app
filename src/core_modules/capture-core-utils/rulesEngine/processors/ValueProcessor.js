@@ -3,8 +3,7 @@ import log from 'loglevel';
 import isString from 'd2-utilizr/lib/isString';
 // TODO: add some kind of errorcreator to d2 before moving
 import { errorCreator } from 'capture-core-utils/errorCreator';
-import typeof { typeKeys } from '../typeKeys.const';
-import { mapTypeToInterfaceFnName } from '../typeToInterfaceFnName.const';
+import { mapTypeToInterfaceFnName, typeof typeKeys } from '../constants';
 import { trimQuotes } from '../commonUtils/trimQuotes';
 
 import type { IConvertInputRulesValue } from '../rulesEngine.types';

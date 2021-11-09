@@ -1,6 +1,6 @@
 // @flow
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import React, { useCallback } from 'react';
 import type { ComponentType } from 'react';
 import { NewPageComponent } from './NewPage.component';

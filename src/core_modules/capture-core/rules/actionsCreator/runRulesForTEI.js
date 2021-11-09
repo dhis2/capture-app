@@ -5,6 +5,7 @@ import type {
     TrackedEntityAttribute as TrackedEntityAttributeForRulesEngine,
     Enrollment,
     TEIValues,
+    OutputEffects,
 } from 'capture-core-utils/rulesEngine';
 
 import { errorCreator } from '../../../capture-core-utils';
@@ -111,7 +112,7 @@ export function runRulesForTEI(
     enrollmentData: ?Enrollment,
     teiValues: ?TEIValues,
 
-) {
+): ?OutputEffects {
     const data = prepare(program, foundation);
 
     if (data) {
@@ -124,7 +125,7 @@ export function runRulesForTEI(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.getProgramRuleEffects({
+        const effects = rulesEngine.getProgramRuleEffects({
             programRulesContainer: { programRulesVariables, programRules, constants },
             currentEvent: null,
             eventsContainer: null,
@@ -135,6 +136,8 @@ export function runRulesForTEI(
             selectedOrgUnit: orgUnit,
             optionSets,
         });
+
+        return (effects.length > 0) ? effects : null;
     }
     return null;
 }

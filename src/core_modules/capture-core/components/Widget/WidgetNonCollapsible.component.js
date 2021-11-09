@@ -11,6 +11,9 @@ const styles = {
         borderStyle: 'solid',
         borderColor: colors.grey400,
         borderWidth: 1,
+        '&.borderless': {
+            border: 'none',
+        },
     },
     header: {
         display: 'flex',
