@@ -1,4 +1,5 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
 import { Widget } from '../Widget';
 import type { IndicatorProps } from '../WidgetFeedback/WidgetFeedback.types';
@@ -11,7 +12,7 @@ export const WidgetIndicator = ({ indicators, emptyText }: IndicatorProps) => {
             data-test="indicator-widget"
         >
             <Widget
-                header={'Indicators'}
+                header={i18n.t('Indicators')}
                 open={openStatus}
                 onClose={() => setOpenStatus(false)}
                 onOpen={() => setOpenStatus(true)}
