@@ -58,8 +58,7 @@ And('you click find', () => {
 });
 
 Then('there should be a modal popping up', () => {
-    cy.get('[data-test="dhis2-uicore-modal"]')
-        .contains('No results found')
+    cy.contains('[data-test="dhis2-uicore-modal"]', 'No results found')
         .should('exist');
 });
 

@@ -57,7 +57,7 @@ export const EnrollmentPageDefaultPlain = ({
     onEventClick,
 }: PlainProps) => (
     <>
-        <div className={classes.title}>Enrollment Dashboard</div>
+        <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
                 <EnrollmentQuickActions
