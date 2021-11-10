@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-09-14T23:04:57.863Z\n"
+"POT-Creation-Date: 2021-10-14T05:38:33.109Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -669,6 +669,15 @@ msgstr "Pro tuto událost neexistují žádné ukazatele"
 
 msgid "program stage is invalid"
 msgstr "fáze programu je neplatná"
+
+msgid "Report"
+msgstr "Zpráva"
+
+msgid "Schedule"
+msgstr "Plán"
+
+msgid "Refer"
+msgstr "Odkazovat"
 
 msgid "stage"
 msgstr "fáze"
