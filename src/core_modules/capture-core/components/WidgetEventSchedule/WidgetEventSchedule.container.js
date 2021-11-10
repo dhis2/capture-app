@@ -32,7 +32,7 @@ export const WidgetEventSchedule = ({
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, ...passOnProps,
     });
-    const [scheduleDate, setScheduleDate] = useState();
+    const [scheduleDate, setScheduleDate] = useState('');
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
 
     const eventCountInOrgUnit = events
