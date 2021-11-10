@@ -14,23 +14,13 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditMo
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
     const dispatch = useDispatch();
-    const orgUnit: Object = useMemo(() => ({ id: orgUnitId }), [orgUnitId]);
     const [enrollment, setEnrollment] = useState<any>({});
+    const orgUnit: Object = useMemo(() => ({ id: orgUnitId }), [orgUnitId]);
     const trackedEntityName = useMemo(() => programAPI?.trackedEntityType?.displayName || '', [programAPI]);
 
     useEffect(() => {
         if (Object.entries(enrollment).length === 0) {
-            const trackedEntityTypes = [programAPI.trackedEntityType];
-            const trackedEntityAttributes = programAPI.programTrackedEntityAttributes.reduce(
-                (acc, currentValue) => [...acc, currentValue.trackedEntityAttribute],
-                [],
-            );
-            const optionSets = trackedEntityAttributes.reduce(
-                (acc, currentValue) => (currentValue.optionSet ? [...acc, currentValue.optionSet] : acc),
-                [],
-            );
-
-            buildForm(trackedEntityAttributes, optionSets, trackedEntityTypes, programAPI, setEnrollment);
+            buildForm(programAPI, setEnrollment);
         }
     }, [programAPI, enrollment]);
 

@@ -47,13 +47,17 @@ const convertProgramForEnrollmentFactory = (program) => {
     };
 };
 
-export const buildForm = async (
-    trackedEntityAttributes: any,
-    optionSets: any,
-    trackedEntityTypes: any,
-    programAPI: any,
-    setEnrollment: (enrollment: any) => void,
-) => {
+export const buildForm = async (programAPI: any, setEnrollment: (enrollment: any) => void) => {
+    const trackedEntityTypes = [programAPI.trackedEntityType];
+    const trackedEntityAttributes = programAPI.programTrackedEntityAttributes.reduce(
+        (acc, currentValue) => [...acc, currentValue.trackedEntityAttribute],
+        [],
+    );
+    const optionSets = trackedEntityAttributes.reduce(
+        (acc, currentValue) => (currentValue.optionSet ? [...acc, currentValue.optionSet] : acc),
+        [],
+    );
+
     const cachedTrackedEntityAttributes: Map<string, any> = objToMap(trackedEntityAttributes);
     const cachedOptionSets: Map<string, any> = objToMap(optionSets);
     const cachedTrackedEntityTypes: Map<string, any> = objToMap(trackedEntityTypes);
