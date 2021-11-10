@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, useState, useRef, useMemo, useEffect } from 'react';
+import React, { type ComponentType, useState, useRef, useMemo } from 'react';
 import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useSelector } from 'react-redux';
