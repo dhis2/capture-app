@@ -14,7 +14,7 @@ import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrati
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
-import { urlArguments } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
@@ -57,9 +57,9 @@ const TeiRegistrationEntryPlain =
           const url =
             scopeType === scopeTypes.TRACKER_PROGRAM
                 ?
-                urlArguments({ programId: selectedScopeId, orgUnitId: orgUnit.id })
+                buildUrlQueryString({ programId: selectedScopeId, orgUnitId: orgUnit.id })
                 :
-                urlArguments({ orgUnitId: orgUnit.id });
+                buildUrlQueryString({ orgUnitId: orgUnit.id });
           return push(`/?${url}`);
       };
 
