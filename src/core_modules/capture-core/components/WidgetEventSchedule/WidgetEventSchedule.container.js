@@ -1,6 +1,6 @@
 // @flow
 import React, { useMemo, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import i18n from '@dhis2/d2-i18n';
 import { useDataMutation } from '@dhis2/app-runtime';
 import moment from 'moment';
