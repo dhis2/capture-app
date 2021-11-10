@@ -14,16 +14,15 @@ export const EnrollmentAddEventPage: ComponentType<{||}> = () => {
         attributeValues,
         error: commonDataError,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
-
     const ready = (programId && enrollmentId && teiId);
     const pageIsInvalid = !loading && !error && !validIds?.every(({ valid }) => valid);
 
-    if (pageIsInvalid || !enrollment) {
+    if (pageIsInvalid) {
         return 'Page is not valid';
     }
 
     return (
-        ready && !loading && !pageIsInvalid ? <EnrollmentAddEventPageDefault
+        ready && !loading ? <EnrollmentAddEventPageDefault
             enrollment={enrollment}
             attributeValues={attributeValues}
             commonDataError={commonDataError}

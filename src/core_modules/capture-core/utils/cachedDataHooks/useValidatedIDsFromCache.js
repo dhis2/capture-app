@@ -1,5 +1,5 @@
 // @flow
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { containsKeyInStorageAsync } from '../../MetaDataStoreUtils/MetaDataStoreUtils';
 import { userStores } from '../../storageControllers/stores';
 
@@ -15,7 +15,7 @@ const IdTypes = Object.freeze({
 export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
     const [valid, setValid] = useState();
     const [loading, setLoading] = useState(true);
-    const error = useRef();
+    const [error, setError] = useState();
 
     const getPromises = useCallback(() => {
         const promises = [];
@@ -40,7 +40,7 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
                 setLoading(false);
             })
             .catch((e) => {
-                error.current = e;
+                setError(e);
                 setLoading(false);
             });
     }, [programId, orgUnitId]);
@@ -53,6 +53,6 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
     return {
         valid,
         loading,
-        error: error.current,
+        error,
     };
 };
