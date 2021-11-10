@@ -1,7 +1,7 @@
 // @flow
 import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
-import { moment } from 'capture-core-utils/moment/momentResolver';
+import moment from 'moment';
 import { parseDate } from '../../../../utils/converters/date';
 
 const isValidEnrollmentDate = (value: string, isFutureDateAllowed: boolean) => {

@@ -1,3 +1,10 @@
+## [1.59.5](https://github.com/dhis2/capture-app/compare/v1.59.4...v1.59.5) (2021-11-09)
+
+
+### Bug Fixes
+
+* [DHIS2-12077] fix i18n string ([#2232](https://github.com/dhis2/capture-app/issues/2232)) ([d3cfe91](https://github.com/dhis2/capture-app/commit/d3cfe91f49aa4144fa7516b8eacdc8731608a8d5))
+
 ## [1.59.4](https://github.com/dhis2/capture-app/compare/v1.59.3...v1.59.4) (2021-10-28)
 
 
