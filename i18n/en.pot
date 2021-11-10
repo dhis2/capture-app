@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-10-14T05:38:33.109Z\n"
-"PO-Revision-Date: 2021-10-14T05:38:33.109Z\n"
+"POT-Creation-Date: 2021-10-19T07:38:45.660Z\n"
+"PO-Revision-Date: 2021-10-19T07:38:45.660Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -977,13 +977,16 @@ msgid ""
 "this day."
 msgstr ""
 
-msgid "Schedule"
-msgstr ""
-
 msgid "Schedule info"
 msgstr ""
 
 msgid "Schedule date / Due date"
+msgstr ""
+
+msgid "Event comments"
+msgstr ""
+
+msgid "Write a comment about this scheduled event"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"

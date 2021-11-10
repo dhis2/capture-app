@@ -63,6 +63,9 @@ export const WidgetEventSchedule = ({
             notes: [],
         }] });
     };
+    const onAddComment = () => {
+        // TODO add the comment function in DHIS2-11864
+    };
 
     React.useEffect(() => {
         if (suggestedScheduleDate && !scheduleDate) {
@@ -89,6 +92,7 @@ export const WidgetEventSchedule = ({
             suggestedScheduleDate={suggestedScheduleDate}
             setScheduleDate={setScheduleDate}
             onSchedule={onHandleSchedule}
+            onAddComment={onAddComment}
             eventCountInOrgUnit={eventCountInOrgUnit}
             orgUnit={orgUnit}
             {...passOnProps}
