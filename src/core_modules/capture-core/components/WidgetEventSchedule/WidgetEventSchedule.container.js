@@ -1,6 +1,7 @@
 // @flow
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
 import { useOrganisationUnit } from '../../dataQueries';

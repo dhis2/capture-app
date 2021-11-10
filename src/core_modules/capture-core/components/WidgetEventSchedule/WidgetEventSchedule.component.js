@@ -43,6 +43,7 @@ const WidgetEventSchedulePlain = ({
     orgUnit,
     onCancel,
     onSchedule,
+    onAddComment,
     classes,
     scheduleDate,
     suggestedScheduleDate,
@@ -68,6 +69,16 @@ const WidgetEventSchedulePlain = ({
                     />
                 </div>
             </div>
+        </DataSection>
+        <DataSection
+            dataTest="comment-section"
+            sectionName={i18n.t('Event comments')}
+        >
+            <CommentSection
+                comments={[]}
+                placeholder={i18n.t('Write a comment about this scheduled event')}
+                handleAddComment={onAddComment}
+            />
         </DataSection>
         <ScheduleButtons
             hasChanges={scheduleDate !== suggestedScheduleDate}
