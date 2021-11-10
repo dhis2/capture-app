@@ -1,3 +1,24 @@
+## [1.59.6](https://github.com/dhis2/capture-app/compare/v1.59.5...v1.59.6) (2021-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-11084] - Bug in TE-Attribute search ([#2236](https://github.com/dhis2/capture-app/issues/2236)) ([27828d4](https://github.com/dhis2/capture-app/commit/27828d4a1e3f88c3a1ac774d0aded27a5c2a1812))
+
+## [1.59.5](https://github.com/dhis2/capture-app/compare/v1.59.4...v1.59.5) (2021-11-09)
+
+
+### Bug Fixes
+
+* [DHIS2-12077] fix i18n string ([#2232](https://github.com/dhis2/capture-app/issues/2232)) ([d3cfe91](https://github.com/dhis2/capture-app/commit/d3cfe91f49aa4144fa7516b8eacdc8731608a8d5))
+
+## [1.59.4](https://github.com/dhis2/capture-app/compare/v1.59.3...v1.59.4) (2021-10-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8b3dcaf](https://github.com/dhis2/capture-app/commit/8b3dcafbd63290ced76bb9c65a40865fd51405f2))
+
 ## [1.59.3](https://github.com/dhis2/capture-app/compare/v1.59.2...v1.59.3) (2021-10-21)
 
 
