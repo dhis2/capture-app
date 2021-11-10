@@ -2,7 +2,7 @@
 import { ofType } from 'redux-observable';
 import uuid from 'uuid/v4';
 import { map } from 'rxjs/operators';
-import { scheduleEventWidgetActionTypes, scheduleEvent, navigateToEnrollmentPage } from './WidgetEventSchedule.actions';
+import { scheduleEventWidgetActionTypes, scheduleEvent } from './WidgetEventSchedule.actions';
 
 
 export const scheduleNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -18,6 +18,9 @@ export const scheduleNewEnrollmentEventEpic = (action$: InputObservable, store: 
                 stageId,
                 teiId,
                 enrollmentId,
+                onSaveExternal,
+                onSaveSuccessActionType,
+                onSaveErrorActionType,
             } = action.payload;
 
 
@@ -33,24 +36,8 @@ export const scheduleNewEnrollmentEventEpic = (action$: InputObservable, store: 
                 notes: state.events?.scheduleEvent?.notes ?? [],
             }] };
 
-            return scheduleEvent(serverData, uid, { orgUnitId, programId, stageId, enrollmentId });
+            onSaveExternal && onSaveExternal(serverData, uid, onSaveSuccessActionType, onSaveErrorActionType);
+            return scheduleEvent(serverData, uid);
         }),
     );
 
-export const scheduleNewEventSucceededEpic = (action$: InputObservable) =>
-    action$.pipe(
-        ofType(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_SUCCESS),
-        map((action) => {
-            const { orgUnitId, programId, enrollmentId, stageId } = action.meta.payload;
-            return navigateToEnrollmentPage(programId, orgUnitId, stageId, enrollmentId);
-        }),
-    );
-
-export const scheduleNewEventFailedEpic = (action$: InputObservable) =>
-    action$.pipe(
-        ofType(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_ERROR),
-        map((action) => {
-            const { orgUnitId, programId, enrollmentId, stageId } = action.meta.payload;
-            return navigateToEnrollmentPage(programId, orgUnitId, stageId, enrollmentId);
-        }),
-    );

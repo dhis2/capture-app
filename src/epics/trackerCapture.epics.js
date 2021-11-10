@@ -223,8 +223,6 @@ import {
 } from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
 import {
     scheduleNewEnrollmentEventEpic,
-    scheduleNewEventFailedEpic,
-    scheduleNewEventSucceededEpic,
 } from '../core_modules/capture-core/components/WidgetEventSchedule';
 
 export const epics = combineEpics(
@@ -362,6 +360,4 @@ export const epics = combineEpics(
     addNoteForEnrollmentEpic,
     navigateToEnrollmentOverviewEpic,
     scheduleNewEnrollmentEventEpic,
-    scheduleNewEventFailedEpic,
-    scheduleNewEventSucceededEpic,
 );

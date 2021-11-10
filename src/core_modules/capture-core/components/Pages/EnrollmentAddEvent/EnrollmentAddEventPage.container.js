@@ -5,7 +5,7 @@ import { batchActions } from 'redux-batched-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { useLocationQuery } from '../../../utils/routing';
-import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
+import { navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
@@ -115,8 +115,6 @@ export const EnrollmentAddEventPage = () => {
                 teiId={teiId}
                 enrollmentId={enrollmentId}
                 onSave={handleSave}
-                onSaveSuccessActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS}
-                onSaveErrorActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR}
                 onCancel={handleCancel}
                 onDelete={handleDelete}
                 widgetEffects={outputEffects}

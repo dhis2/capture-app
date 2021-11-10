@@ -13,7 +13,7 @@ import {
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
 } from './hooks';
-import { requestScheduleEvent, startEditingScheduleEvent } from './WidgetEventSchedule.actions';
+import { requestScheduleEvent, addScheduleEventNote } from './WidgetEventSchedule.actions';
 
 
 export const WidgetEventSchedule = ({
@@ -22,6 +22,9 @@ export const WidgetEventSchedule = ({
     stageId,
     programId,
     orgUnitId,
+    onSave,
+    onSaveSuccessActionType,
+    onSaveErrorActionType,
     ...passOnProps
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
@@ -39,10 +42,6 @@ export const WidgetEventSchedule = ({
         .filter(event => moment(event.dueDate).format('YYYY-MM-DD') === scheduleDate).length;
 
     useEffect(() => {
-        dispatch(startEditingScheduleEvent());
-    }, [dispatch]);
-
-    useEffect(() => {
         if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
     }, [suggestedScheduleDate, scheduleDate]);
 
@@ -54,6 +53,9 @@ export const WidgetEventSchedule = ({
             stageId,
             teiId,
             enrollmentId,
+            onSaveExternal: onSave,
+            onSaveSuccessActionType,
+            onSaveErrorActionType,
         }));
     }, [
         dispatch,
@@ -63,17 +65,21 @@ export const WidgetEventSchedule = ({
         stageId,
         teiId,
         enrollmentId,
+        onSave,
+        onSaveSuccessActionType,
+        onSaveErrorActionType,
     ]);
-
-    const onAddComment = () => {
-        // TODO add the comment function in DHIS2-11864
-    };
 
     React.useEffect(() => {
         if (suggestedScheduleDate && !scheduleDate) {
             setScheduleDate(suggestedScheduleDate);
         }
     }, [scheduleDate, suggestedScheduleDate]);
+
+
+    const onAddComment = useCallback((comment) => {
+        dispatch(addScheduleEventNote(comment));
+    }, [dispatch]);
 
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
@@ -82,7 +88,6 @@ export const WidgetEventSchedule = ({
             </div>
         );
     }
-
 
     return (
         <WidgetEventScheduleComponent
