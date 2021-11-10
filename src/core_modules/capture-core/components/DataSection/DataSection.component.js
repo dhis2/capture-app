@@ -1,6 +1,6 @@
 // @flow
 import React, { type ComponentType } from 'react';
-import { colors } from '@dhis2/ui';
+import { colors, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import type { Props } from './dataSection.type';
 
@@ -9,6 +9,7 @@ const styles = {
     sectionWrapper: {
         border: `1px solid ${colors.grey300}`,
         borderRadius: '3px',
+        marginBottom: spacersNum.dp16,
     },
     sectionHeader: {
         backgroundColor: colors.grey300,

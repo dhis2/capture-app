@@ -1,6 +1,5 @@
 // @flow
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
@@ -32,7 +31,7 @@ export const WidgetEventSchedule = ({
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, ...passOnProps,
     });
-    const [scheduleDate, setScheduleDate] = useState(suggestedScheduleDate);
+    const [scheduleDate, setScheduleDate] = useState();
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
 
     const eventCountInOrgUnit = events
@@ -65,6 +64,16 @@ export const WidgetEventSchedule = ({
         enrollmentId,
     ]);
 
+    const onAddComment = () => {
+        // TODO add the comment function in DHIS2-11864
+    };
+
+    React.useEffect(() => {
+        if (suggestedScheduleDate && !scheduleDate) {
+            setScheduleDate(suggestedScheduleDate);
+        }
+    }, [scheduleDate, suggestedScheduleDate]);
+
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
             <div>
@@ -84,6 +93,7 @@ export const WidgetEventSchedule = ({
             suggestedScheduleDate={suggestedScheduleDate}
             setScheduleDate={setScheduleDate}
             onSchedule={onHandleSchedule}
+            onAddComment={onAddComment}
             eventCountInOrgUnit={eventCountInOrgUnit}
             orgUnit={orgUnit}
             {...passOnProps}

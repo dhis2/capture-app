@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-10-14T05:38:33.109Z\n"
-"PO-Revision-Date: 2021-10-14T05:38:33.109Z\n"
+"POT-Creation-Date: 2021-11-10T06:03:48.309Z\n"
+"PO-Revision-Date: 2021-11-10T06:03:48.309Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -579,6 +579,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
+msgid "Enrollment Dashboard"
+msgstr ""
+
 msgid "No indicator output for this enrollment yet"
 msgstr ""
 
@@ -671,6 +674,9 @@ msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
 
 msgid "Or see all events accessible to you in {{program}}"
+msgstr ""
+
+msgid "Please select an organisation unit."
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
@@ -937,6 +943,9 @@ msgstr ""
 msgid "This enrollment doesn't have any comments"
 msgstr ""
 
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -958,6 +967,9 @@ msgstr ""
 msgid "This event doesn't have any comments"
 msgstr ""
 
+msgid "Event completed"
+msgstr ""
+
 msgid "Back to all stages and events"
 msgstr ""
 
@@ -975,9 +987,6 @@ msgstr ""
 msgid ""
 "There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
 "this day."
-msgstr ""
-
-msgid "Schedule"
 msgstr ""
 
 msgid "Schedule info"

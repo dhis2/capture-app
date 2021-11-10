@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';

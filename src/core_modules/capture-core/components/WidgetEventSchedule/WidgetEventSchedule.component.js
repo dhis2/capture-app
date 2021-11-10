@@ -1,33 +1,33 @@
 // @flow
 import React, { type ComponentType } from 'react';
-import { spacersNum, colors } from '@dhis2/ui';
+import { spacersNum, spacers, colors } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import { DataSection } from '../DataSection';
 import { ScheduleButtons } from './ScheduleButtons';
 import { ScheduleDate } from './ScheduleDate';
 import { ScheduleText } from './ScheduleText';
+import { CommentSection } from '../WidgetComment';
 import type { Props } from './widgetEventSchedule.types';
 
 
 const styles = () => ({
     wrapper: {
-        padding: `${spacersNum.dp16}px 0`,
+        padding: `${spacers.dp16} 0`,
         maxWidth: '55.75rem',
     },
     fieldWrapper: {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-        padding: spacersNum.dp8,
+        padding: `${spacers.dp8}  ${spacers.dp16}`,
     },
     fieldLabel: {
         color: colors.grey900,
         flexGrow: 0,
         flexShrink: 0,
         paddingTop: spacersNum.dp16,
-        paddingRight: spacersNum.dp32,
-        paddingLeft: spacersNum.dp8,
+        paddingRight: spacersNum.dp16,
     },
     fieldContent: {
         flexGrow: 1,

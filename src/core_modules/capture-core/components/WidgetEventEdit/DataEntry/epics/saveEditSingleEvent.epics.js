@@ -2,7 +2,7 @@
 import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import {
     actionTypes as editEventDataEntryActionTypes,

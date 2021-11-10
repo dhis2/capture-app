@@ -1,5 +1,5 @@
 // @flow
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { urlArguments, getUrlQueries } from '../../../utils/url';
 

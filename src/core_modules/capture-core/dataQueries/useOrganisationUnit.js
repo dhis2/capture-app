@@ -40,6 +40,7 @@ export const useOrganisationUnit = (orgUnitId: string, fields: string) => {
                     id: orgUnitId,
                     name: data?.organisationUnits?.displayName,
                     code: data?.organisationUnits?.code,
+                    ...data,
                 },
         );
     }, [orgUnitId, data, loading, called, error]);

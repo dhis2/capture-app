@@ -27,5 +27,6 @@ export type Props = {|
    onSchedule: () => void,
    onCancel: () => void,
    setScheduleDate: (date: string) => void,
+   onAddComment: () => void,
    ...CssClasses
 |};

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-09-14T23:04:57.863Z\n"
+"POT-Creation-Date: 2021-10-14T05:38:33.109Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -672,6 +672,15 @@ msgid "There are no indicators for this event"
 msgstr ""
 
 msgid "program stage is invalid"
+msgstr ""
+
+msgid "Report"
+msgstr "Отчет"
+
+msgid "Schedule"
+msgstr "Расписание"
+
+msgid "Refer"
 msgstr ""
 
 msgid "stage"
