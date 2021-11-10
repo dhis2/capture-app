@@ -109,6 +109,9 @@
     "jsdoc-export-default-interop": "^0.3.1",
     "redux-devtools-extension": "^2.13.2"
   },
+  "resolutions": {
+      "@babel/preset-react": "7.9.1"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
