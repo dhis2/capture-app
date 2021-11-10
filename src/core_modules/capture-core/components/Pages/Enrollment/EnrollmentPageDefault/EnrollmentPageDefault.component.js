@@ -53,7 +53,7 @@ export const EnrollmentPageDefaultPlain = ({
     onEventClick,
 }: PlainProps) => (
     <>
-        <div className={classes.title}>Enrollment Dashboard</div>
+        <div className={classes.title}>{i18n.t('Enrollment Dashboard')}</div>
         <div className={classes.columns}>
             <div className={classes.leftColumn}>
                 <WidgetStagesAndEvents
@@ -81,12 +81,12 @@ export const EnrollmentPageDefaultPlain = ({
                     />
                 )}
                 <WidgetProfile teiId={teiId} programId={program.id} />
-                <WidgetEnrollment
+                {enrollmentId !== 'AUTO' && <WidgetEnrollment
                     teiId={teiId}
                     enrollmentId={enrollmentId}
                     programId={program.id}
                     onDelete={onDelete}
-                />
+                />}
             </div>
         </div>
     </>

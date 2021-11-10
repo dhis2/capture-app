@@ -4,7 +4,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';

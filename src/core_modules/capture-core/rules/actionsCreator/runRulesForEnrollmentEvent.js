@@ -5,6 +5,7 @@ import type {
     OrgUnit,
     TEIValues,
     Enrollment,
+    OutputEffects,
 } from 'capture-core-utils/rulesEngine';
 import { rulesEngine } from '../rulesEngine';
 import type { DataElement, RenderFoundation, TrackerProgram } from '../../metaData';
@@ -79,7 +80,7 @@ export const runRulesForEnrollmentEvent = ({
 
 
     // returns an array of effects that need to take place in the UI.
-    return rulesEngine.getProgramRuleEffects({
+    const effects: OutputEffects = rulesEngine.getProgramRuleEffects({
         programRulesContainer: { programRulesVariables, programRules, constants },
         currentEvent,
         eventsContainer,
@@ -90,4 +91,6 @@ export const runRulesForEnrollmentEvent = ({
         selectedOrgUnit: orgUnit,
         optionSets,
     });
+
+    return (effects.length > 0) ? effects : null;
 };

@@ -5,6 +5,7 @@ import type {
     EventsData,
     EventData,
     OrgUnit,
+    OutputEffects,
 } from 'capture-core-utils/rulesEngine';
 import { rulesEngine } from '../rulesEngine';
 import { errorCreator } from '../../../capture-core-utils';
@@ -102,7 +103,7 @@ export function runRulesForSingleEvent(
     currentEvent: EventData,
     allEventsData: EventsData,
     stage: ?ProgramStage,
-) {
+): ?OutputEffects {
     const data = prepare(program, foundation, allEventsData, stage);
 
     if (data) {
@@ -116,7 +117,7 @@ export function runRulesForSingleEvent(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.getProgramRuleEffects({
+        const effects = rulesEngine.getProgramRuleEffects({
             programRulesContainer: { programRulesVariables, programRules, constants },
             currentEvent,
             eventsContainer: allEvents,
@@ -127,7 +128,8 @@ export function runRulesForSingleEvent(
             selectedOrgUnit: orgUnit,
             optionSets,
         });
+
+        return (effects.length > 0) ? effects : null;
     }
     return null;
 }
-
