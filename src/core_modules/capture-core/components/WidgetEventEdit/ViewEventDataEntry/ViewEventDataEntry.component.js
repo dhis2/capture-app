@@ -110,9 +110,9 @@ const viewModeComponent = withDefaultFieldContainer()(
 );
 
 const buildReportDateSettingsFn = () => {
-    const dataElement = new DataElement((data) => {
-        data.id = 'eventDate';
-        data.type = dataElementTypes.DATE;
+    const dataElement = new DataElement((o) => {
+        o.id = 'eventDate';
+        o.type = dataElementTypes.DATE;
     });
 
     const reportDateSettings = {
@@ -164,9 +164,9 @@ const buildGeometrySettingsFn = () => ({
 });
 
 const buildCompleteFieldSettingsFn = () => {
-    const dataElement = new DataElement((data) => {
-        data.id = 'complete';
-        data.type = dataElementTypes.BOOLEAN;
+    const dataElement = new DataElement((o) => {
+        o.id = 'complete';
+        o.type = dataElementTypes.BOOLEAN;
     });
 
     const completeSettings = {

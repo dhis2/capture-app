@@ -32,14 +32,14 @@ export class DataElementFactory {
     };
 
     static buildtetFeatureType(featureType: 'POINT' | 'POLYGON') {
-        const dataElement = new DataElement((o) => {
-            o.id = `FEATURETYPE_${featureType}`;
-            o.name = featureType === 'POINT' ? i18n.t('Coordinate') : i18n.t('Area');
-            o.formName = o.name;
-            o.compulsory = false;
-            o.displayInForms = true;
-            o.disabled = false;
-            o.type = featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
+        const dataElement = new DataElement((dataEntry) => {
+            dataEntry.id = `FEATURETYPE_${featureType}`;
+            dataEntry.name = featureType === 'POINT' ? i18n.t('Coordinate') : i18n.t('Area');
+            dataEntry.formName = dataEntry.name;
+            dataEntry.compulsory = false;
+            dataEntry.displayInForms = true;
+            dataEntry.disabled = false;
+            dataEntry.type = featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
         });
         return dataElement;
     }
