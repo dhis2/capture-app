@@ -29,7 +29,7 @@ export const useEventsInOrgUnit = (orgUnitId: string, selectedDate: string) => {
         if (orgUnitId && selectedDate) {
             refetch({ variables: { orgUnitId, selectedDate } });
         }
-    }, [orgUnitId, selectedDate]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [refetch, orgUnitId, selectedDate]);
 
     return { error, events: !loading && data ? data.events.events : [] };
 };
