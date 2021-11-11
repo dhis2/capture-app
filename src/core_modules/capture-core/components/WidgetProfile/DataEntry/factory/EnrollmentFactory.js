@@ -70,7 +70,7 @@ export class EnrollmentFactory {
         }
 
         // $FlowFixMe
-        return DataElementFactory.buildtetFeatureType(featureType);
+        return DataElementFactory.buildTetFeatureType(featureType);
     }
 
     async _buildTetFeatureTypeSection(cachedProgramTrackedEntityTypeId: string) {

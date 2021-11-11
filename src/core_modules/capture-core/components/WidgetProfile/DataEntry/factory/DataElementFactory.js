@@ -31,7 +31,7 @@ export class DataElementFactory {
             'TrackedEntityAttributeId missing from programTrackedEntityAttribute or trackedEntityAttribute not found',
     };
 
-    static buildtetFeatureType(featureType: 'POINT' | 'POLYGON') {
+    static buildTetFeatureType(featureType: 'POINT' | 'POLYGON') {
         const dataElement = new DataElement((dataEntry) => {
             dataEntry.id = `FEATURETYPE_${featureType}`;
             dataEntry.name = featureType === 'POINT' ? i18n.t('Coordinate') : i18n.t('Area');
@@ -48,12 +48,12 @@ export class DataElementFactory {
         dataElement: DataElement,
         cachedTrackedEntityAttribute: CachedTrackedEntityAttribute,
     ) {
-        return new DataElementUnique((o) => {
-            o.scope = cachedTrackedEntityAttribute.orgunitScope
+        return new DataElementUnique((dataEntry) => {
+            dataEntry.scope = cachedTrackedEntityAttribute.orgunitScope
                 ? dataElementUniqueScope.ORGANISATION_UNIT
                 : dataElementUniqueScope.ENTIRE_SYSTEM;
 
-            o.onValidate = (value: any, contextProps: Object = {}) => {
+            dataEntry.onValidate = (value: any, contextProps: Object = {}) => {
                 const serverValue = pipe(convertFormToClient, convertClientToServer)(
                     value,
                     cachedTrackedEntityAttribute.valueType,
@@ -75,7 +75,7 @@ export class DataElementFactory {
                 }
 
                 let requestPromise;
-                if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
+                if (dataEntry.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                     const orgUnitId = contextProps.orgUnitId;
                     requestPromise = getApi().get('trackedEntityInstances', {
                         program: contextProps.programId,
@@ -105,7 +105,7 @@ export class DataElementFactory {
             };
 
             if (cachedTrackedEntityAttribute.pattern) {
-                o.generatable = !!cachedTrackedEntityAttribute.pattern;
+                dataEntry.generatable = !!cachedTrackedEntityAttribute.pattern;
             }
         });
     }
