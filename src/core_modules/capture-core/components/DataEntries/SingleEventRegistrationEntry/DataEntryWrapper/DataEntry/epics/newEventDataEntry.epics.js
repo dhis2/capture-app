@@ -39,19 +39,20 @@ import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
+import { deriveURLParamsFromHistory } from '../../../../../../utils/routing';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
 };
 
 
-export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH),
         map(() => {
             const state = store.value;
             const programId = state.currentSelections.programId;
-            const programStageId = state.router.location.query.stageId;
+            const { stageId: programStageId } = deriveURLParamsFromHistory(history);
 
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
@@ -74,7 +75,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
         }));
 
 
-export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN,
@@ -104,7 +105,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                 return cancelOpenNewEventInDataEntry();
             }
             const programId = state.currentSelections.programId;
-            const programStageId = state.router.location.query.stageId;
+            const { stageId: programStageId } = deriveURLParamsFromHistory(history);
 
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
@@ -170,11 +171,18 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         }));
 
 
-const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
+const runRulesForNewSingleEvent = (
+    store: ReduxStore,
+    dataEntryId: string,
+    itemId: string,
+    uid: string,
+    history: Object,
+    fieldData?: ?FieldData,
+) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const programId = state.currentSelections.programId;
-    const stageId = state.router.location.query.stageId;
+    const { stageId } = deriveURLParamsFromHistory(history);
 
     const metadataContainer = getProgramAndStageForProgram(programId, stageId);
 

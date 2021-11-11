@@ -1,5 +1,6 @@
 // @flow
 import { pageKeys } from '../components/App/withAppUrlSync';
+import { deriveURLParamsFromHistory } from './routing';
 
 export type Url = {
     programId?: string,
@@ -45,24 +46,22 @@ export const urlArguments = ({
     return argArray.join('&');
 };
 
-export const deriveUrlQueries = (state: Object) => {
+export const deriveUrlQueries = (state: Object, history: Object) => {
     const {
         currentSelections: {
             programId: selectedProgramId,
             orgUnitId: selectedOrgUnitId,
             trackedEntityTypeId: selectedTet,
         },
-        router: {
-            location: {
-                query: {
-                    programId: routerProgramId,
-                    orgUnitId: routerOrgUnitId,
-                    trackedEntityTypeId: routerTet,
-                    teiId,
-                    enrollmentId,
-                },
-            } },
     } = state;
+    const {
+        programId: routerProgramId,
+        orgUnitId: routerOrgUnitId,
+        trackedEntityTypeId: routerTet,
+        teiId,
+        enrollmentId,
+    } = deriveURLParamsFromHistory(history);
+
     const programId = routerProgramId || selectedProgramId;
     const orgUnitId = routerOrgUnitId || selectedOrgUnitId;
     const trackedEntityTypeId = routerTet || selectedTet;
@@ -75,6 +74,8 @@ export const deriveUrlQueries = (state: Object) => {
         enrollmentId,
     };
 };
+
+export const getLocationPathname = () => window.location.pathname;
 
 export const getUrlQueries = (): Url => {
     const split = window.location.href.split('?');

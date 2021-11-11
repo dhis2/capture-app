@@ -30,7 +30,7 @@ export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore, { 
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
         switchMap(({ payload: { orgUnitId, pageToPush } }) => {
-            const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
+            const { programId, ...restOfQueries } = deriveUrlQueries(store.value, history);
 
             if (programId) {
                 const programContainsOrgUnitId = programCollection.get(programId)?.organisationUnits[orgUnitId];
@@ -50,7 +50,7 @@ export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore, { hi
         ofType(lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH),
         switchMap(({ payload: batchPayload }) => {
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.ORG_UNIT_ID_RESET);
-            const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value);
+            const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value, history);
 
             history.push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`);
             return EMPTY;
@@ -60,7 +60,7 @@ export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore, { 
     action$.pipe(
         ofType(lockedSelectorActionTypes.PROGRAM_ID_SET),
         switchMap(({ payload: { programId, pageToPush } }) => {
-            const queries = deriveUrlQueries(store.value);
+            const queries = deriveUrlQueries(store.value, history);
 
             history.push(`/${pageToPush}?${urlArguments({ ...queries, programId })}`);
             return EMPTY;
@@ -71,7 +71,7 @@ export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore, 
         ofType(lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH),
         switchMap(({ payload: batchPayload }) => {
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.PROGRAM_ID_RESET);
-            const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
+            const { programId, ...restOfQueries } = deriveUrlQueries(store.value, history);
 
             history.push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`);
             return EMPTY;

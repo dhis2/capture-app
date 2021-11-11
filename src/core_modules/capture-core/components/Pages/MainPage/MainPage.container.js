@@ -9,6 +9,7 @@ import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { urlArguments } from '../../../utils/url';
 import { MainPageStatuses } from './MainPage.constants';
+import { useLocationQuery } from '../../../utils/routing';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
@@ -19,16 +20,8 @@ const MainPageContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const { showAllAccessible } = useSelector(
-        ({
-            router: {
-                location: {
-                    query,
-                },
-            },
-        }) => ({
-            showAllAccessible: query.hasOwnProperty('all'),
-        }));
+    const { all } = useLocationQuery();
+    const showAllAccessible = all !== undefined;
 
     const {
         currentSelectionsComplete,

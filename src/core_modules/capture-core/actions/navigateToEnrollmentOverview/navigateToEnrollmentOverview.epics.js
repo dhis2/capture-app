@@ -9,8 +9,9 @@ import {
 } from './navigateToEnrollmentOverview.actions';
 import { urlArguments } from '../../utils/url';
 import { scopeHierarchyTypes } from './navigateToEnrollmentOverview.constants';
+import { deriveURLParamsFromHistory } from '../../utils/routing';
 
-export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) => action$.pipe(
+export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) => action$.pipe(
     ofType(
         NavigateToEnrollmentOverviewActionTypes.NAVIGATE_TO_ENROLLMENT_OVERVIEW,
     ),
@@ -19,7 +20,7 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         const { dataStore, userDataStore } = store.value.useNewDashboard;
 
         const pushHistoryToEnrollmentDashboard = () => {
-            dependencies.history.push(`/enrollment?${urlArguments({
+            history.push(`/enrollment?${urlArguments({
                 teiId,
                 programId,
                 orgUnitId,
@@ -41,11 +42,11 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
 
         // TODO This will be removed when the link between capture and tracker capture is not relevant
         const { baseUrl } = config;
-        const { search, pathname } = dependencies.history.location;
+        const { search, pathname } = history.location;
         const {
             programId: queryProgramId,
             trackedEntityTypeId: queryTrackedEntityTypeId,
-        } = store.value.router.location.query;
+        } = deriveURLParamsFromHistory(history);
 
         const instanceBaseUrl = baseUrl.split('/api')[0];
         const scopeHierarchy = queryProgramId ? scopeHierarchyTypes.PROGRAM : scopeHierarchyTypes.TRACKED_ENTITY_TYPE;

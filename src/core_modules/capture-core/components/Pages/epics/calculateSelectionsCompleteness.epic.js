@@ -34,7 +34,7 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
     return true;
 };
 
-export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore) =>
+export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.PROGRAM_ID_SET,
@@ -45,7 +45,7 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
             crossPageActionTypes.UPDATE_SHOW_ACCESSIBLE_STATUS,
         ),
         filter(() => {
-            const { pathname } = store.value.router.location;
+            const { pathname } = history.location;
             return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
         map((action) => {

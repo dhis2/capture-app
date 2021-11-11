@@ -47,11 +47,11 @@ const fetchTeiStream = (teiId, querySingleResource) =>
             }),
         );
 
-export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
+export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_FETCH),
         map(() => {
-            const { query: { enrollmentId, teiId } } = store.value.router.location;
+            const { enrollmentId, teiId } = deriveURLParamsFromHistory(history);
 
             if (enrollmentId) {
                 return startFetchingTeiFromEnrollmentId();
@@ -63,11 +63,11 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
         }),
     );
 
-export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_ENROLLMENT_ID_FETCH),
         flatMap(() => {
-            const { query: { enrollmentId, programId, orgUnitId, teiId } } = store.value.router.location;
+            const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromHistory(history);
             if (enrollmentId === 'AUTO') {
                 return of(openEnrollmentPage({
                     programId,
@@ -94,11 +94,11 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
         }),
     );
 
-export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
+export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH),
         flatMap(() => {
-            const { query: { teiId } } = store.value.router.location;
+            const { teiId } = deriveURLParamsFromHistory(history);
 
             return fetchTeiStream(teiId, querySingleResource);
         }),

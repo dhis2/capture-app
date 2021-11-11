@@ -17,7 +17,7 @@ import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.co
 import { deriveURLParamsFromHistory } from '../../../../../../utils/routing';
 import { urlArguments } from '../../../../../../utils/url';
 
-export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map((action) => {
@@ -28,7 +28,7 @@ export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStor
             const { formClientValues, mainDataClientValues }
                 = getNewEventClientValues(state, dataEntryKey, formFoundation);
             const serverData =
-                getAddEventEnrollmentServerData(state, formFoundation, formClientValues, mainDataClientValues, completed);
+                getAddEventEnrollmentServerData(state, formFoundation, formClientValues, mainDataClientValues, history, completed);
 
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return startSaveNewEventAndReturnToList(serverData, relationshipData, state.currentSelections);

@@ -9,7 +9,7 @@ import {
     resetTeiSelection,
     setEnrollmentSelection,
 } from '../LockedSelector.actions';
-import { getUrlQueries } from '../../../utils/url';
+import { getLocationPathname, getUrlQueries } from '../../../utils/url';
 import { getScopeInfo } from '../../../metaData';
 
 const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
@@ -24,9 +24,9 @@ const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
 
 const mapStateToProps = (state: Object) => {
     const { orgUnitId, programId, enrollmentId } = getUrlQueries();
+    const pathname = getLocationPathname();
     // TODO - Remove the currentSelections & pathname link
     const {
-        router: { location: { pathname } },
         currentSelections: { categoriesMeta },
         organisationUnits,
         enrollmentPage: { enrollments, teiDisplayName, tetId },
