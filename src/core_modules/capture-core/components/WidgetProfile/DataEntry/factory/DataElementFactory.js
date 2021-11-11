@@ -117,7 +117,6 @@ export class DataElementFactory {
         this.optionSetFactory = new OptionSetFactory(cachedOptionSets);
     }
 
-    // eslint-disable-next-line complexity
     async _setBaseProperties(
         dataElement: DataElement,
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
