@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { typeof dataElementTypes } from '../../../../../../metaData';
 import { getApiOptionSetFilter } from './optionSet';
 

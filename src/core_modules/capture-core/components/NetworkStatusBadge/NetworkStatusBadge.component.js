@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { IconSynk16 } from '@dhis2/ui';
 import Grow from '@material-ui/core/Grow';
 import { withStyles } from '@material-ui/core/styles';
-import moment from 'capture-core-utils/moment/momentResolver';
+import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
 
 const styles = () => ({

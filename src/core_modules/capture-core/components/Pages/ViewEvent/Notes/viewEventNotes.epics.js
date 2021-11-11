@@ -4,7 +4,7 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { getCurrentUser } from 'capture-core/d2/d2Instance';
 import uuid from 'd2-utilizr/lib/uuid';
-import { moment } from 'capture-core-utils/moment/momentResolver';
+import moment from 'moment';
 import { convertValue as convertListValue } from '../../../../converters/clientToList';
 import { dataElementTypes } from '../../../../metaData';
 import {

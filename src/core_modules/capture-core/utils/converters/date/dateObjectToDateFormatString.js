@@ -1,5 +1,5 @@
 // @flow
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { systemSettingsStore } from '../../../metaDataMemoryStores';
 
 /**
