@@ -1,3 +1,10 @@
+## [1.59.7](https://github.com/dhis2/capture-app/compare/v1.59.6...v1.59.7) (2021-11-11)
+
+
+### Bug Fixes
+
+* prevent sending empty data values to the api ([4a2aaaa](https://github.com/dhis2/capture-app/commit/4a2aaaa731b34df546cdbf7e94f091c290f3e04a))
+
 ## [1.59.6](https://github.com/dhis2/capture-app/compare/v1.59.5...v1.59.6) (2021-11-10)
 
 
