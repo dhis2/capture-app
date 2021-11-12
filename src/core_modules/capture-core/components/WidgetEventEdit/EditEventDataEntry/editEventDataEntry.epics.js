@@ -111,7 +111,8 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                     .map(key => ({
                         dataElement: key,
                         value: formServerValues[key],
-                    })),
+                    }))
+                    .filter(({ value }) => value != null),
             };
 
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);

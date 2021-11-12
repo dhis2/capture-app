@@ -17,7 +17,7 @@ type State = {
 }
 
 export class MenuPopper extends React.Component<Props, State> {
-    managerRef: (instance: any) => void;
+    managerRef: any;
     menuReferenceInstance: ?HTMLDivElement;
 
     static defaultProps = {

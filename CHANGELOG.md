@@ -1,3 +1,17 @@
+## [1.59.7](https://github.com/dhis2/capture-app/compare/v1.59.6...v1.59.7) (2021-11-11)
+
+
+### Bug Fixes
+
+* prevent sending empty data values to the api ([4a2aaaa](https://github.com/dhis2/capture-app/commit/4a2aaaa731b34df546cdbf7e94f091c290f3e04a))
+
+## [1.59.6](https://github.com/dhis2/capture-app/compare/v1.59.5...v1.59.6) (2021-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-11084] - Bug in TE-Attribute search ([#2236](https://github.com/dhis2/capture-app/issues/2236)) ([27828d4](https://github.com/dhis2/capture-app/commit/27828d4a1e3f88c3a1ac774d0aded27a5c2a1812))
+
 ## [1.59.5](https://github.com/dhis2/capture-app/compare/v1.59.4...v1.59.5) (2021-11-09)
 
 
