@@ -1,3 +1,17 @@
+# [1.60.0](https://github.com/dhis2/capture-app/compare/v1.59.7...v1.60.0) (2021-11-12)
+
+
+### Features
+
+* [DHIS2-11862] implement schedule info ([#2196](https://github.com/dhis2/capture-app/issues/2196)) ([6331591](https://github.com/dhis2/capture-app/commit/6331591cd545158958fcca65d005e8aea626bff8)), closes [#2211](https://github.com/dhis2/capture-app/issues/2211)
+
+## [1.59.7](https://github.com/dhis2/capture-app/compare/v1.59.6...v1.59.7) (2021-11-11)
+
+
+### Bug Fixes
+
+* prevent sending empty data values to the api ([4a2aaaa](https://github.com/dhis2/capture-app/commit/4a2aaaa731b34df546cdbf7e94f091c290f3e04a))
+
 ## [1.59.6](https://github.com/dhis2/capture-app/compare/v1.59.5...v1.59.6) (2021-11-10)
 
 

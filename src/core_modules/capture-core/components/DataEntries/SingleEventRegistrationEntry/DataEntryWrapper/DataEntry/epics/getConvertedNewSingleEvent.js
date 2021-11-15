@@ -39,7 +39,8 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
             .map(key => ({
                 dataElement: key,
                 value: formServerValues[key],
-            })),
+            }))
+            .filter(({ value }) => value != null),
     };
 };
 
