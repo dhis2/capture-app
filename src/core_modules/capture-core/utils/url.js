@@ -9,6 +9,7 @@ type Url = {
     enrollmentId?: string,
     stageId?: string,
     eventId?: string,
+    tab?: string,
 }
 
 export const deriveUrlQueries = (state: Object) => {

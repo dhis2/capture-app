@@ -251,12 +251,12 @@ Feature: User uses the LockedSelector to navigate
   Scenario: Enrollment event new page > resetting the event
     Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
     When you reset the stage selection
-    Then you see the enrollment page
+    Then you see the enrollment event New page but there is no stage id in the url
 
   Scenario: Enrollment event new page > resetting the stage
     Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
     When you reset the event selection
-    Then you see the enrollment page
+    Then you see the enrollment event New page but there is no stage id in the url
 
   Scenario: Enrollment event new page > Fallback for tei missing name
     Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollmentEventNew?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8&teiId=dNpxRu1mWG5&enrollmentId=V8uPJuhvlL7&stageId=CWaAcQYKVpq

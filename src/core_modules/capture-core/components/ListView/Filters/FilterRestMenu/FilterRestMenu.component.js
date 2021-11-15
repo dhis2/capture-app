@@ -62,7 +62,7 @@ type State = {
 class FilterRestMenuPlain extends React.Component<Props, State> {
     menuClasses: Object;
     menuItemClasses: Object;
-    managerRef: (instance: any) => void;
+    managerRef: any;
     menuReferenceInstance: ?HTMLDivElement;
     constructor(props: Props) {
         super(props);

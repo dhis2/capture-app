@@ -11,6 +11,7 @@ import { WidgetIndicator } from '../../WidgetIndicator';
 import { WidgetProfile } from '../../WidgetProfile';
 import { WidgetEnrollment } from '../../WidgetEnrollment';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import { ProgramStageSelector } from './ProgramStageSelector';
 import { NewEventWorkspace } from './NewEventWorkspace';
 
 const styles = ({ typography }) => ({
@@ -80,14 +81,23 @@ const EnrollmentAddEventPagePain = ({
                             className={classes.addEventContainer}
                             data-test="add-event-enrollment-page-content"
                         >
-                            <NewEventWorkspace
-                                teiId={teiId}
-                                enrollmentId={enrollmentId}
-                                programId={programId}
-                                orgUnitId={orgUnitId}
-                                stageId={stageId}
-                                {...passOnProps}
-                            />
+                            {!stageId ?
+                                <ProgramStageSelector
+                                    programId={programId}
+                                    orgUnitId={orgUnitId}
+                                    teiId={teiId}
+                                    enrollmentId={enrollmentId}
+                                />
+                                :
+                                <NewEventWorkspace
+                                    {...passOnProps}
+                                    programId={programId}
+                                    stageId={stageId}
+                                    orgUnitId={orgUnitId}
+                                    teiId={teiId}
+                                    enrollmentId={enrollmentId}
+                                />
+                            }
                         </div>
                     </div>
                     <div className={classes.rightColumn}>
