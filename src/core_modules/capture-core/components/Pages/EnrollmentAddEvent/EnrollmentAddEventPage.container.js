@@ -3,7 +3,6 @@ import React, { useCallback, useMemo } from 'react';
 import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
-import i18n from '@dhis2/d2-i18n';
 import { useLocationQuery } from '../../../utils/routing';
 import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
@@ -11,7 +10,9 @@ import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar'
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { useWidgetDataFromStore } from './hooks';
-import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
+import {
+    useHideWidgetByRuleLocations,
+} from '../Enrollment/EnrollmentPageDefault/hooks';
 import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
@@ -47,7 +48,7 @@ export const EnrollmentAddEventPage = () => {
     // This includes prechecking that we got a valid program stage and move the program stage logic in this file to useEnrollmentAddEventTopBar
     // Ticket: https://jira.dhis2.org/browse/TECH-669
     const { program } = useProgramInfo(programId);
-    const programStage = [...program.stages.values()].find(item => item.id === stageId);
+    const selectedProgramStage = [...program.stages.values()].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
     const {
@@ -81,11 +82,6 @@ export const EnrollmentAddEventPage = () => {
         userInteractionInProgress,
     } = useEnrollmentAddEventTopBar(teiId, programId, enrollment);
 
-    if (!programStage) {
-        return <div>{i18n.t('program stage is invalid')}</div>;
-    }
-
-
     return (
         <>
             <EnrollmentAddEventTopBar
@@ -94,8 +90,8 @@ export const EnrollmentAddEventPage = () => {
                 enrollmentId={enrollmentId}
                 teiDisplayName={teiDisplayName}
                 trackedEntityName={trackedEntityName}
-                stageName={programStage.name}
-                eventDateLabel={programStage.stageForm.getLabel('eventDate')}
+                stageName={selectedProgramStage?.stageForm.name}
+                eventDateLabel={selectedProgramStage?.stageForm.getLabel('eventDate')}
                 enrollmentsAsOptions={enrollmentsAsOptions}
                 onSetOrgUnitId={handleSetOrgUnitId}
                 onResetOrgUnitId={handleResetOrgUnitId}
