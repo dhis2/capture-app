@@ -1,5 +1,5 @@
 // @flow
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { parseNumber } from 'capture-core-utils/parsers';
 import { dataElementTypes } from '../../../../../../metaData';
 

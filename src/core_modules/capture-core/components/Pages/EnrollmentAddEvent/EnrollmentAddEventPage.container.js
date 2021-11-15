@@ -51,7 +51,7 @@ export const EnrollmentAddEventPage = () => {
     // This includes prechecking that we got a valid program stage and move the program stage logic in this file to useEnrollmentAddEventTopBar
     // Ticket: https://jira.dhis2.org/browse/TECH-669
     const { program } = useProgramInfo(programId);
-    const programStage = [...program.stages.values()].find(item => item.id === stageId);
+    const selectedProgramStage = [...program.stages.values()].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
     const {
@@ -85,11 +85,6 @@ export const EnrollmentAddEventPage = () => {
         userInteractionInProgress,
     } = useEnrollmentAddEventTopBar(teiId, programId, enrollment);
 
-    if (!programStage) {
-        return <div>{i18n.t('program stage is invalid')}</div>;
-    }
-
-
     return (
         <>
             <EnrollmentAddEventTopBar
@@ -98,8 +93,8 @@ export const EnrollmentAddEventPage = () => {
                 enrollmentId={enrollmentId}
                 teiDisplayName={teiDisplayName}
                 trackedEntityName={trackedEntityName}
-                stageName={programStage.name}
-                eventDateLabel={programStage.stageForm.getLabel('eventDate')}
+                stageName={selectedProgramStage?.stageForm.name}
+                eventDateLabel={selectedProgramStage?.stageForm.getLabel('eventDate')}
                 enrollmentsAsOptions={enrollmentsAsOptions}
                 onSetOrgUnitId={handleSetOrgUnitId}
                 onResetOrgUnitId={handleResetOrgUnitId}

@@ -58,36 +58,40 @@ export const EnrollmentAddEventTopBar = ({
                 isUserInteractionInProgress={userInteractionInProgress}
             />
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={2}>
-            <SingleLockedSelect
-                ready
-                onClear={() => onResetStageId()}
-                options={[
-                    {
-                        label: stageName,
-                        value: 'alwaysPreselected',
-                    },
-                ]}
-                selectedValue="alwaysPreselected"
-                title={i18n.t('stage')}
-                isUserInteractionInProgress={userInteractionInProgress}
-            />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={2}>
-            <SingleLockedSelect
-                ready
-                onClear={() => onResetEventId()}
-                options={[
-                    {
-                        label: '-',
-                        value: 'alwaysPreselected',
-                    },
-                ]}
-                selectedValue="alwaysPreselected"
-                title={eventDateLabel}
-                isUserInteractionInProgress={userInteractionInProgress}
-            />
-        </Grid>
+        {stageName && (
+            <>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready
+                        onClear={() => onResetStageId()}
+                        options={[
+                            {
+                                label: stageName,
+                                value: 'alwaysPreselected',
+                            },
+                        ]}
+                        selectedValue="alwaysPreselected"
+                        title={i18n.t('stage')}
+                        isUserInteractionInProgress={userInteractionInProgress}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                    <SingleLockedSelect
+                        ready
+                        onClear={() => onResetEventId()}
+                        options={[
+                            {
+                                label: '-',
+                                value: 'alwaysPreselected',
+                            },
+                        ]}
+                        selectedValue="alwaysPreselected"
+                        title={eventDateLabel || ''}
+                        isUserInteractionInProgress={userInteractionInProgress}
+                    />
+                </Grid>
+            </>
+        )}
         <Grid item xs={12} sm={6} md={6} lg={2}>
             <TopBarActions
                 selectedProgramId={programId}

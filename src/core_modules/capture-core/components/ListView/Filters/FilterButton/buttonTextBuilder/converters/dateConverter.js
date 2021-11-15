@@ -1,7 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { pipe } from 'capture-core-utils';
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 import type { DateFilterData, AbsoluteDateFilterData } from '../../../../../FiltersForTypes';
 

@@ -1,6 +1,6 @@
 // @flow
 import { createSelector } from 'reselect';
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 
 import type {

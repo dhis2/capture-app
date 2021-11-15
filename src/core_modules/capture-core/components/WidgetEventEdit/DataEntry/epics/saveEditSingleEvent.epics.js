@@ -2,7 +2,7 @@
 import { EMPTY } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import {
     actionTypes as editEventDataEntryActionTypes,

@@ -2,6 +2,7 @@
 import React, { type ComponentType, useState, useRef, useMemo } from 'react';
 import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { useSelector } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { tabMode } from './newEventWorkspace.constants';
 import { getProgramAndStageForProgram } from '../../../../metaData';
@@ -9,6 +10,7 @@ import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
 import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
+import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
 import type { Props } from './newEventWorkspace.types';
 import { useLocationQuery } from '../../../../utils/routing';
 
@@ -30,6 +32,7 @@ const NewEventWorkspacePlain = ({
     ...passOnProps
 }: Props) => {
     const { tab } = useLocationQuery();
+    const { events, enrollmentDate, incidentDate } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const [mode, setMode] = useState(tab ?? tabMode.REPORT);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
@@ -80,6 +83,16 @@ const NewEventWorkspacePlain = ({
                         teiId={teiId}
                         enrollmentId={enrollmentId}
                         {...passOnProps}
+                    />}
+                    {mode === tabMode.SCHEDULE && <WidgetEventSchedule
+                        programId={programId}
+                        stageId={stageId}
+                        orgUnitId={orgUnitId}
+                        teiId={teiId}
+                        eventData={events}
+                        enrollmentId={enrollmentId}
+                        enrollmentDate={enrollmentDate}
+                        incidentDate={incidentDate}
                     />}
                 </div>
             </Widget>

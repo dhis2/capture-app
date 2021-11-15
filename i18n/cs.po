@@ -677,7 +677,7 @@ msgid "Schedule"
 msgstr "Plán"
 
 msgid "Refer"
-msgstr ""
+msgstr "Odkazovat"
 
 msgid "stage"
 msgstr "fáze"

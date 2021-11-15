@@ -10,6 +10,7 @@ export type Url = {
     enrollmentId?: string,
     stageId?: string,
     eventId?: string,
+    tab?: string,
 }
 
 export const urlArguments = ({
@@ -20,6 +21,7 @@ export const urlArguments = ({
     enrollmentId,
     stageId,
     eventId,
+    tab,
 }: Url): string => {
     const argArray = [];
     if (programId) {
@@ -41,6 +43,9 @@ export const urlArguments = ({
     }
     if (stageId) {
         argArray.push(`stageId=${stageId}`);
+    }
+    if (tab) {
+        argArray.push(`tab=${tab}`);
     }
 
     return argArray.join('&');

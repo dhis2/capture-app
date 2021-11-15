@@ -1,3 +1,45 @@
+# [1.61.0](https://github.com/dhis2/capture-app/compare/v1.60.0...v1.61.0) (2021-11-15)
+
+
+### Features
+
+* [DHIS2-11952] New Event - Program Stage selection list ([#2180](https://github.com/dhis2/capture-app/issues/2180)) ([ab4636a](https://github.com/dhis2/capture-app/commit/ab4636af5729bbd4b03eceb31979dd5b4011631b))
+
+# [1.60.0](https://github.com/dhis2/capture-app/compare/v1.59.7...v1.60.0) (2021-11-12)
+
+
+### Features
+
+* [DHIS2-11862] implement schedule info ([#2196](https://github.com/dhis2/capture-app/issues/2196)) ([6331591](https://github.com/dhis2/capture-app/commit/6331591cd545158958fcca65d005e8aea626bff8)), closes [#2211](https://github.com/dhis2/capture-app/issues/2211)
+
+## [1.59.7](https://github.com/dhis2/capture-app/compare/v1.59.6...v1.59.7) (2021-11-11)
+
+
+### Bug Fixes
+
+* prevent sending empty data values to the api ([4a2aaaa](https://github.com/dhis2/capture-app/commit/4a2aaaa731b34df546cdbf7e94f091c290f3e04a))
+
+## [1.59.6](https://github.com/dhis2/capture-app/compare/v1.59.5...v1.59.6) (2021-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-11084] - Bug in TE-Attribute search ([#2236](https://github.com/dhis2/capture-app/issues/2236)) ([27828d4](https://github.com/dhis2/capture-app/commit/27828d4a1e3f88c3a1ac774d0aded27a5c2a1812))
+
+## [1.59.5](https://github.com/dhis2/capture-app/compare/v1.59.4...v1.59.5) (2021-11-09)
+
+
+### Bug Fixes
+
+* [DHIS2-12077] fix i18n string ([#2232](https://github.com/dhis2/capture-app/issues/2232)) ([d3cfe91](https://github.com/dhis2/capture-app/commit/d3cfe91f49aa4144fa7516b8eacdc8731608a8d5))
+
+## [1.59.4](https://github.com/dhis2/capture-app/compare/v1.59.3...v1.59.4) (2021-10-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([8b3dcaf](https://github.com/dhis2/capture-app/commit/8b3dcafbd63290ced76bb9c65a40865fd51405f2))
+
 ## [1.59.3](https://github.com/dhis2/capture-app/compare/v1.59.2...v1.59.3) (2021-10-21)
 
 
