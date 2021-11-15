@@ -22,7 +22,11 @@ const urlTemplate = [
 export const buildUrlQueryString = (queryArgs: { [id: string]: ?string }) =>
     Object
         .entries(queryArgs)
-        .sort((a, b) => urlTemplate.indexOf(a[0]) - urlTemplate.indexOf(b[0]))
+        .sort((a, b) => {
+            if (b && (urlTemplate.indexOf(b) === -1)) return 1;
+            if (a && (urlTemplate.indexOf(a) === -1)) return -1;
+            return urlTemplate.indexOf(a[0]) - urlTemplate.indexOf(b[0]);
+        })
         .reduce((searchParams, [key, value]) => {
             // $FlowFixMe
             value && searchParams.append(key, value);
