@@ -640,9 +640,6 @@ msgstr ""
 msgid "There are no indicators for this event"
 msgstr ""
 
-msgid "program stage is invalid"
-msgstr ""
-
 msgid "Report"
 msgstr ""
 
@@ -650,6 +647,18 @@ msgid "Schedule"
 msgstr ""
 
 msgid "Refer"
+msgstr ""
+
+msgid "You can’t add any more events in this program"
+msgstr ""
+
+msgid "Cancel without saving"
+msgstr ""
+
+msgid "Choose a stage for a new event"
+msgstr ""
+
+msgid "Program Stages could not be loaded"
 msgstr ""
 
 msgid "stage"
