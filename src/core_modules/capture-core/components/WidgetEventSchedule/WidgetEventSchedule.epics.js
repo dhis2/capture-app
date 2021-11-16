@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { scheduleEventWidgetActionTypes, scheduleEvent } from './WidgetEventSchedule.actions';
 
 
-export const scheduleNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const scheduleNewEnrollmentEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST),
         map((action) => {
