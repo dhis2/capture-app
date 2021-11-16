@@ -27,13 +27,9 @@ const styles = ({ typography }) => ({
     },
 });
 
-const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string) =>
-    (<>
-        {i18n.t('Saving a {{trackedEntityName}} in', {
-            trackedEntityName, interpolation: { escapeValue: false } })
-        } <b>{programName}</b>
-        {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.
-    </>);
+const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string) => (<span>
+    {i18n.t('Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}', { trackedEntityName, programName, orgUnitName, interpolation: { escapeValue: false } })}
+</span>);
 
 
 const EnrollmentRegistrationEntryPlain =
