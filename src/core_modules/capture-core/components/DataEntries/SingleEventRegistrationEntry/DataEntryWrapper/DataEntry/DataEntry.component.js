@@ -539,7 +539,7 @@ class NewEventDataEntry extends Component<Props> {
                 { orgUnitName, programName, interpolation: { escapeValue: false } })}
         </span>);
     }
-    
+
     renderHorizontal = () => {
         const classes = this.props.classes;
         return (
