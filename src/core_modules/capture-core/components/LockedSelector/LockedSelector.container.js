@@ -137,7 +137,7 @@ export const LockedSelector: ComponentType<OwnProps> =
           },
           [pageToPush, customActionsOnProgramIdReset, dispatch]);
 
-      const { selectedOrgUnitId, selectedProgramId } = useLocationQuery();
+      const { orgUnitId: selectedOrgUnitId, programId: selectedProgramId } = useLocationQuery();
 
 
       const lockedSelectorLoads: string =
