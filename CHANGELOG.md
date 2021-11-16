@@ -1,3 +1,10 @@
+## [1.61.1](https://github.com/dhis2/capture-app/compare/v1.61.0...v1.61.1) (2021-11-16)
+
+
+### Bug Fixes
+
+* refetch dependency causing infinite loop ([3fc4a52](https://github.com/dhis2/capture-app/commit/3fc4a521c7b52f9f8b18ccea2b324cbb5dcf2079))
+
 # [1.61.0](https://github.com/dhis2/capture-app/compare/v1.60.0...v1.61.0) (2021-11-15)
 
 
