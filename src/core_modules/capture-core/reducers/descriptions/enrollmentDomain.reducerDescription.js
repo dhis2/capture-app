@@ -67,7 +67,7 @@ export const enrollmentDomainDesc = createReducerDescription(
         ) => {
             const events = [...state.enrollment.events, { ...eventData, uid, pendingApiResponse: true }];
 
-            return { ...state, enrollment: { ...state.enrollment, events } };
+            return { ...state, enrollment: { ...state.enrollment, events }, enrollmentId: undefined };
         },
         [ROLLBACK_ENROLLMENT_EVENT_WITHOUT_ID]: (state, { payload: { uid } }) => {
             const events = state.enrollment.events.filter(event => (event.uid !== uid));
