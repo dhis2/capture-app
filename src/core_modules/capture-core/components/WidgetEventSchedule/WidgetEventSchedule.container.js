@@ -81,7 +81,7 @@ export const WidgetEventSchedule = ({
 
 
     const onAddComment = (comment) => {
-        setComments([...comments, {value: comment}])
+        setComments([...comments, { value: comment }]);
     };
 
 
