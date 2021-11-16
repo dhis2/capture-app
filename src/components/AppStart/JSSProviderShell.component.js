@@ -13,7 +13,6 @@ insertionPoint.setAttribute('id', 'jss-insertion-point');
 document.head.appendChild(insertionPoint);
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
-// $FlowFixMe
 jss.options.insertionPoint = insertionPoint;
 
 type Props = {
