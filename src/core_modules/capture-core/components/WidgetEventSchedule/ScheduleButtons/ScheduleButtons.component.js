@@ -23,7 +23,7 @@ const ScheduleButtonsPlain = ({ hasChanges, onSchedule, onCancel, classes }: Pro
     return (<div className={classes.container}>
         <div className={classes.button}>
             <Button
-                onClick={() => onSchedule()}
+                onClick={onSchedule}
                 primary
             >
                 {i18n.t('Schedule')}
