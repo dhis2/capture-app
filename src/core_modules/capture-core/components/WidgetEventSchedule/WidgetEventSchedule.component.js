@@ -47,6 +47,7 @@ const WidgetEventSchedulePlain = ({
     classes,
     scheduleDate,
     suggestedScheduleDate,
+    comments,
     ...passOnProps
 }: Props) => (
     <div className={classes.wrapper}>
@@ -75,7 +76,7 @@ const WidgetEventSchedulePlain = ({
             sectionName={i18n.t('Event comments')}
         >
             <CommentSection
-                comments={[]}
+                comments={comments}
                 placeholder={i18n.t('Write a comment about this scheduled event')}
                 handleAddComment={onAddComment}
             />

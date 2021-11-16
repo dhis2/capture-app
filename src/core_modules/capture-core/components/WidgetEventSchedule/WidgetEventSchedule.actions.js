@@ -3,14 +3,13 @@ import { actionCreator } from '../../actions/actions.utils';
 import { effectMethods } from '../../trackerOffline';
 
 export const scheduleEventWidgetActionTypes = {
-    START_EVENT_SCHEDULE: 'ScheduleEvent.StartEditingScheduleEvent',
     EVENT_SCHEDULE_REQUEST: 'ScheduleEvent.RequestScheduleEvent',
     EVENT_SCHEDULE: 'ScheduleEvent.ScheduleEvent',
-    EVENT_NOTE_ADD: 'ScheduleEvent.AddEventNote',
 };
 
 export const requestScheduleEvent = ({
     scheduleDate,
+    comments,
     programId,
     orgUnitId,
     stageId,
@@ -21,6 +20,7 @@ export const requestScheduleEvent = ({
     onSaveErrorActionType,
 }: {
     scheduleDate: string,
+    comments: Array<{value: string}>,
     programId: string,
     orgUnitId: string,
     stageId: string,
@@ -32,6 +32,7 @@ export const requestScheduleEvent = ({
 }) =>
     actionCreator(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST)({
         scheduleDate,
+        comments,
         programId,
         orgUnitId,
         stageId,
@@ -59,8 +60,3 @@ export const scheduleEvent = (
             rollback: { type: onSaveErrorActionType, meta: { serverData, uid } },
         },
     });
-
-export const addScheduleEventNote = (comment: string) =>
-    actionCreator(scheduleEventWidgetActionTypes.EVENT_NOTE_ADD)({ note: { value: comment } });
-
-export const startEditingScheduleEvent = () => actionCreator(scheduleEventWidgetActionTypes.START_EVENT_SCHEDULE)();

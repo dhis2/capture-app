@@ -10,9 +10,9 @@ export const scheduleNewEnrollmentEventEpic = (action$: InputObservable, store: 
         ofType(scheduleEventWidgetActionTypes.EVENT_SCHEDULE_REQUEST),
         map((action) => {
             const uid = uuid();
-            const state = store.value;
             const {
                 scheduleDate,
+                comments,
                 programId,
                 orgUnitId,
                 stageId,
@@ -33,7 +33,7 @@ export const scheduleNewEnrollmentEventEpic = (action$: InputObservable, store: 
                 program: programId,
                 programStage: stageId,
                 status: 'SCHEDULE',
-                notes: state.events?.scheduleEvent?.notes ?? [],
+                notes: comments ?? [],
             }] };
 
             onSaveExternal && onSaveExternal(serverData, uid, onSaveSuccessActionType, onSaveErrorActionType);

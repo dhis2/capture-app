@@ -27,6 +27,7 @@ export type Props = {|
    scheduleDate?: ?string,
    suggestedScheduleDate?: ?string,
    eventCountInOrgUnit: number,
+   comments: Array<{value: string}>,
    onSchedule: () => void,
    onCancel: () => void,
    setScheduleDate: (date: string) => void,

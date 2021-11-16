@@ -5,7 +5,6 @@ import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/
 import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { scheduleEventWidgetActionTypes } from '../../components/WidgetEventSchedule/WidgetEventSchedule.actions';
 
 export const eventsDesc = createReducerDescription({
     [enrollmentActionTypes.ENROLLMENT_LOADED]: (state, action) => {
@@ -64,19 +63,6 @@ export const eventsDesc = createReducerDescription({
         if (newState[payload.eventId]) {
             newState[payload.eventId].notes = state[payload.eventId].notes.filter(n => n.clientId !== payload.noteClientId);
         }
-        return newState;
-    },
-    [scheduleEventWidgetActionTypes.START_EVENT_SCHEDULE]: (state) => {
-        const newState = { ...state };
-        const dataEntryId = 'scheduleEvent';
-        newState[dataEntryId] = { notes: [] };
-        return newState;
-    },
-    [scheduleEventWidgetActionTypes.EVENT_NOTE_ADD]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        const dataEntryId = 'scheduleEvent';
-        newState[dataEntryId].notes = [...newState[dataEntryId].notes, payload.note];
         return newState;
     },
 }, 'events', {});

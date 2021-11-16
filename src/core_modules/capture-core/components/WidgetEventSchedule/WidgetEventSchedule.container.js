@@ -13,7 +13,7 @@ import {
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
 } from './hooks';
-import { requestScheduleEvent, addScheduleEventNote } from './WidgetEventSchedule.actions';
+import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 
 
 export const WidgetEventSchedule = ({
@@ -36,6 +36,7 @@ export const WidgetEventSchedule = ({
         programStageScheduleConfig, programConfig, ...passOnProps,
     });
     const [scheduleDate, setScheduleDate] = useState('');
+    const [comments, setComments] = useState([]);
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
 
     const eventCountInOrgUnit = events
@@ -48,6 +49,7 @@ export const WidgetEventSchedule = ({
     const onHandleSchedule = useCallback(() => {
         dispatch(requestScheduleEvent({
             scheduleDate,
+            comments,
             programId,
             orgUnitId,
             stageId,
@@ -60,6 +62,7 @@ export const WidgetEventSchedule = ({
     }, [
         dispatch,
         scheduleDate,
+        comments,
         programId,
         orgUnitId,
         stageId,
@@ -77,9 +80,10 @@ export const WidgetEventSchedule = ({
     }, [scheduleDate, suggestedScheduleDate]);
 
 
-    const onAddComment = useCallback((comment) => {
-        dispatch(addScheduleEventNote(comment));
-    }, [dispatch]);
+    const onAddComment = (comment) => {
+        setComments([...comments, {value: comment}])
+    };
+
 
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
@@ -102,6 +106,7 @@ export const WidgetEventSchedule = ({
             onAddComment={onAddComment}
             eventCountInOrgUnit={eventCountInOrgUnit}
             orgUnit={orgUnit}
+            comments={comments}
             {...passOnProps}
         />
 
