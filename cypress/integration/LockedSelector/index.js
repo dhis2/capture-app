@@ -217,7 +217,7 @@ Then('you navigated to the search page without a program being selected', () => 
 });
 
 Then('you are navigated to the search page with the same org unit and program Child Programme', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/search?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/search?orgUnitId=DiszpKrYNg8&programId=IpHINAT79UW`);
 });
 
 Then('there should be visible a title with Child Program', () => {
@@ -288,7 +288,6 @@ And('you navigated to the main page', () => {
 });
 
 And('you see message explaining you need to select a program', () => {
-    cy.url().should('include', `${Cypress.config().baseUrl}/#/enrollment?enrollmentId=gPDueU02tn8&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ`);
     cy.get('[data-test="enrollment-page-content"]')
         .contains('Carlos Cruz is enrolled in multiple programs. Choose a program.');
 });
@@ -303,13 +302,13 @@ And('you reset the org unit selection', () => {
 });
 
 And('you see the enrollment page but there is no org unit id in the url', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventEdit?enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&programId=IpHINAT79UW&stageId=A03MvHHogjR&teiId=fhFQhO0xILJ`);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?enrollmentId=gPDueU02tn8&programId=IpHINAT79UW&teiId=fhFQhO0xILJ`);
     cy.get('[data-test="enrollment-page-content"]')
         .contains('Enrollment Dashboard');
 });
 
 And('you see the enrollment event Edit page but there is no org unit id in the url', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventEdit?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR&eventId=lQQyjR73hHk`);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventEdit?enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&programId=IpHINAT79UW&stageId=A03MvHHogjR&teiId=fhFQhO0xILJ`);
     cy.contains('Enrollment: View Event');
 });
 
