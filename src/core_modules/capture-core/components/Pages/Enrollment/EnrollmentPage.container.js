@@ -86,7 +86,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     useComponentLifecycle();
 
     const dispatch = useDispatch();
-    const { programId, orgUnitId, enrollmentId } = useSelector(
+    const { programId, orgUnitId, enrollmentId, teiId } = useSelector(
         ({ router: { location: { query } } }) => ({
             teiId: query.teiId,
             programId: query.programId,
@@ -104,6 +104,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     },
     [
         dispatch,
+        teiId,
     ]);
 
     const error: boolean =
