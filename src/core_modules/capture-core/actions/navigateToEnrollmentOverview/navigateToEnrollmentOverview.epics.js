@@ -7,7 +7,7 @@ import { config } from 'd2';
 import {
     actionTypes as NavigateToEnrollmentOverviewActionTypes,
 } from './navigateToEnrollmentOverview.actions';
-import { urlArguments } from '../../utils/url';
+import { buildUrlQueryString } from '../../utils/routing';
 import { scopeHierarchyTypes } from './navigateToEnrollmentOverview.constants';
 
 export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) => action$.pipe(
@@ -19,7 +19,7 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         const { dataStore, userDataStore } = store.value.useNewDashboard;
 
         const pushHistoryToEnrollmentDashboard = () => {
-            dependencies.history.push(`/enrollment?${urlArguments({
+            dependencies.history.push(`/enrollment?${buildUrlQueryString({
                 teiId,
                 programId,
                 orgUnitId,

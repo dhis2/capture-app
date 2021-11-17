@@ -10,6 +10,7 @@ import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
 import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
+import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
 import type { Props } from './newEventWorkspace.types';
 
 
@@ -30,6 +31,7 @@ const NewEventWorkspacePlain = ({
     ...passOnProps
 }: Props) => {
     const selectedTab = useSelector(({ router: { location } }) => location.query.tab);
+    const { events, enrollmentDate, incidentDate } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const [mode, setMode] = useState(selectedTab ?? tabMode.REPORT);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
@@ -80,6 +82,16 @@ const NewEventWorkspacePlain = ({
                         teiId={teiId}
                         enrollmentId={enrollmentId}
                         {...passOnProps}
+                    />}
+                    {mode === tabMode.SCHEDULE && <WidgetEventSchedule
+                        programId={programId}
+                        stageId={stageId}
+                        orgUnitId={orgUnitId}
+                        teiId={teiId}
+                        eventData={events}
+                        enrollmentId={enrollmentId}
+                        enrollmentDate={enrollmentDate}
+                        incidentDate={incidentDate}
                     />}
                 </div>
             </Widget>

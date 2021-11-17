@@ -16,7 +16,8 @@ import {
     completeUrlUpdate,
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
-import { deriveUrlQueries, pageFetchesOrgUnitUsingTheOldWay, urlArguments } from '../../utils/url';
+import { deriveUrlQueries, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
+import { buildUrlQueryString } from '../../utils/routing';
 
 const derivePayloadFromAction = (batchPayload, actionType) => {
     // $FlowFixMe
@@ -35,11 +36,11 @@ export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore) =>
             if (programId) {
                 const programContainsOrgUnitId = programCollection.get(programId)?.organisationUnits[orgUnitId];
                 if (orgUnitId && !programContainsOrgUnitId) {
-                    return push(`/${pageToPush}?${urlArguments({ ...restOfQueries, orgUnitId })}`);
+                    return push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, orgUnitId })}`);
                 }
             }
 
-            return push(`/${pageToPush}?${urlArguments({ ...restOfQueries, programId, orgUnitId })}`);
+            return push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId, orgUnitId })}`);
         }));
 
 export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore) =>
@@ -49,7 +50,7 @@ export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore) =>
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.ORG_UNIT_ID_RESET);
             const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            return push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`);
+            return push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
         }));
 
 export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -58,7 +59,7 @@ export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
         map(({ payload: { programId, pageToPush } }) => {
             const queries = deriveUrlQueries(store.value);
 
-            return push(`/${pageToPush}?${urlArguments({ ...queries, programId })}`);
+            return push(`/${pageToPush}?${buildUrlQueryString({ ...queries, programId })}`);
         }));
 
 export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -68,7 +69,7 @@ export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore) 
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.PROGRAM_ID_RESET);
             const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            return push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`);
+            return push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
         }),
     );
 
@@ -157,7 +158,7 @@ export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStor
         map(() => {
             const { query: { programId, orgUnitId } } = store.value.router.location;
 
-            return push(`/?${urlArguments({ programId, orgUnitId })}`);
+            return push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
         }),
     );
 
@@ -167,7 +168,7 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
         map(({ payload: { enrollmentId } }) => {
             const { query: { programId, orgUnitId, teiId } } = store.value.router.location;
 
-            return push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
+            return push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
         }),
     );
 
@@ -176,6 +177,6 @@ export const resetEnrollmentSelectionEpic = (action$: InputObservable, store: Re
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET),
         map(() => {
             const { query: { orgUnitId, programId, teiId } } = store.value.router.location;
-            return push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId })}`);
+            return push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
         }),
     );
