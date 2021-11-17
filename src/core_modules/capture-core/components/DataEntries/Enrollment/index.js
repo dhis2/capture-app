@@ -9,8 +9,6 @@ export {
 export {
     batchActionTypes as enrollmentBatchActionTypes,
     runRulesOnUpdateFieldBatch,
-    updateFieldBatch as enrollmentUpdateFieldBatch,
-    updateDataEntryFieldBatch as enrollmentUpdateDataEntryFieldBatch,
 } from './actions/enrollment.actionBatchs';
 export { buildServerData } from './helpers/buildServerData';
 export {

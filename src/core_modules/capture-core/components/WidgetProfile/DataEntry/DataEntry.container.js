@@ -4,36 +4,45 @@ import { Modal, ModalTitle, ModalContent, ModalActions, ButtonStrip, Button } fr
 import i18n from '@dhis2/d2-i18n';
 import { useDispatch } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import { NoticeBoxes } from './NoticeBoxes.container';
 import type { Props } from './dataEntry.types';
 import { DataEntry } from '../../DataEntry';
 import { getOpenDataEntryActions, getRulesActions } from './actions';
-import { enrollmentUpdateFieldBatch, enrollmentUpdateDataEntryFieldBatch } from '../../DataEntries';
-import { buildForm } from './buildForm';
+import { useProgramRules } from './hooks';
+import { updateFieldBatch, updateDataEntryFieldBatch } from './actions.batchs';
+import { buildProgram } from './buildForm';
 
 export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditModal }: Props) => {
+    const { programRules, loading: loadingProgramRules } = useProgramRules(programAPI.id);
+
     const dataEntryId = 'trackedEntityProfile';
     const itemId = 'edit';
     const dispatch = useDispatch();
-    const [enrollment, setEnrollment] = useState<any>({});
+    const [program, setProgram] = useState<any>({});
+    const [startUpdate, setStartUpdate] = useState(false);
     const orgUnit: Object = useMemo(() => ({ id: orgUnitId }), [orgUnitId]);
     const trackedEntityName = useMemo(() => programAPI?.trackedEntityType?.displayName || '', [programAPI]);
 
     useEffect(() => {
-        if (Object.entries(enrollment).length === 0) {
-            buildForm(programAPI, setEnrollment);
+        if (!loadingProgramRules && Object.entries(program).length === 0) {
+            buildProgram({
+                programAPI,
+                setProgram,
+                programRules,
+            });
         }
-    }, [programAPI, enrollment]);
+    }, [programAPI, program, loadingProgramRules, programRules]);
 
     useEffect(() => {
-        if (enrollment && Object.entries(enrollment).length > 0) {
+        if (program && Object.entries(program).length > 0) {
             dispatch(
                 batchActions([
                     ...getOpenDataEntryActions(orgUnit, dataEntryId, itemId),
-                    ...getRulesActions(enrollment.enrollmentForm, orgUnit, dataEntryId, itemId),
+                    ...getRulesActions(program, orgUnit, dataEntryId, itemId),
                 ]),
             );
         }
-    }, [dispatch, enrollment, orgUnit]);
+    }, [dispatch, program, orgUnit]);
 
     return (
         <div>
@@ -47,25 +56,25 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditMo
                         )}
                         <DataEntry
                             id={dataEntryId}
-                            formFoundation={enrollment?.enrollmentForm}
+                            formFoundation={program.enrollment?.enrollmentForm}
                             onUpdateFormField={(...args: Array<any>) =>
-                                dispatch(enrollmentUpdateFieldBatch(...args, programAPI.id, orgUnit))
+                                dispatch(updateFieldBatch(...args, program, orgUnit))
                             }
                             onUpdateDataEntryField={(...args: Array<any>) =>
-                                dispatch(enrollmentUpdateDataEntryFieldBatch(...args, programAPI.id, orgUnit))
+                                dispatch(updateDataEntryFieldBatch(...args, program, orgUnit))
                             }
                             onUpdateFormFieldAsync={() => {}}
                             onGetValidationContext={() => {}}
                             saveAttempted={undefined}
                         />
+                        <NoticeBoxes dataEntryId={dataEntryId} itemId={itemId} onComplete={startUpdate} />
                     </ModalContent>
                     <ModalActions>
                         <ButtonStrip end>
                             <Button onClick={onCancel} secondary>
                                 {i18n.t('Cancel without saving')}
                             </Button>
-                            {/* TODO - https://jira.dhis2.org/browse/DHIS2-10950 */}
-                            <Button onClick={() => {}} primary>
+                            <Button onClick={() => setStartUpdate(true)} primary>
                                 {i18n.t('Save changes')}
                             </Button>
                         </ButtonStrip>
