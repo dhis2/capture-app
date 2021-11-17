@@ -8,13 +8,13 @@ import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
 import { useOrganisationUnit } from '../../dataQueries';
 import type { ContainerProps } from './widgetEventSchedule.types';
 import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
-import { urlArguments } from '../../utils/url';
 import {
     useScheduleConfigFromProgramStage,
     useDetermineSuggestedScheduleDate,
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
 } from './hooks';
+import { buildUrlQueryString } from '../../utils/routing';
 
 const scheduleEventMutation = {
     resource: 'events',
@@ -43,7 +43,7 @@ export const WidgetEventSchedule = ({
 
     const [mutate] = useDataMutation(scheduleEventMutation, {
         onComplete: () => {
-            history.push(`/enrollment?${urlArguments({ orgUnitId, programId, stageId, enrollmentId })}`);
+            history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, stageId, enrollmentId })}`);
         },
     });
     const eventCountInOrgUnit = events

@@ -30,8 +30,8 @@ export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, en
     );
     const handleResetEnrollmentId = useCallback(() => resetEnrollmentId('enrollment'), [resetEnrollmentId]);
     const handleResetTeiId = useCallback(() => resetTeiId('/'), [resetTeiId]);
-    const handleResetStageId = useCallback(() => resetStageId('enrollment'), [resetStageId]);
-    const handleResetEventId = useCallback(() => resetEventId('enrollment'), [resetEventId]);
+    const handleResetStageId = useCallback(() => resetStageId('enrollmentEventNew'), [resetStageId]);
+    const handleResetEventId = useCallback(() => resetEventId('enrollmentEventNew'), [resetEventId]);
 
     const { teiDisplayName, error: teiDisplayNameError } = useTeiDisplayName(teiId, programId);
     const { trackedEntityName } = enrollment ?
