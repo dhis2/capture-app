@@ -25,7 +25,7 @@ import {
     scopeTypes,
 } from '../../../../metaData';
 import { PAGINATION } from '../SearchPage.constants';
-import { urlArguments } from '../../../../utils/url';
+import { buildUrlQueryString } from '../../../../utils/routing';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
@@ -280,7 +280,7 @@ export const fallbackPushPageEpic = (action$: InputObservable) =>
         ofType(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED),
         map(({ payload: { orgUnitId, trackedEntityTypeId } }) => push({
             pathname: '/search',
-            search: `?${urlArguments({ orgUnitId, trackedEntityTypeId })}`,
+            search: `?${buildUrlQueryString({ orgUnitId, trackedEntityTypeId })}`,
             state: { fallback: true },
         })),
     );
