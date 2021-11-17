@@ -6,8 +6,6 @@ export {
     enrollmentBatchActionTypes,
     runRulesOnEnrollmentFieldUpdateEpic,
     runRulesOnEnrollmentDataEntryFieldUpdateEpic,
-    enrollmentUpdateFieldBatch,
-    enrollmentUpdateDataEntryFieldBatch,
 } from './Enrollment';
 export {
     openDataEntryForNewTeiBatchAsync,

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
-"PO-Revision-Date: 2021-11-04T12:22:50.798Z\n"
+"POT-Creation-Date: 2021-11-16T08:56:46.802Z\n"
+"PO-Revision-Date: 2021-11-16T08:56:46.802Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -983,6 +983,12 @@ msgid "Cancel without saving"
 msgstr ""
 
 msgid "Save changes"
+msgstr ""
+
+msgid "There are errors in this form"
+msgstr ""
+
+msgid "There are warnings in this form"
 msgstr ""
 
 msgid "Profile"
