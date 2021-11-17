@@ -28,7 +28,8 @@ const styles = {
         cursor: 'pointer',
     },
     rowDisabled: {
-        cursor: 'none',
+        cursor: 'not-allowed',
+        opacity: 0.5,
     },
     container: {
         display: 'flex',
@@ -141,11 +142,15 @@ const StageDetailPlain = (props: Props) => {
                     key={id}
                     onClick={() => !row.pendingApiResponse && onEventClick(row.id, dataTableProgramStage)}
                 >
-                    <div>
-                        { // $FlowFixMe
-                            row[id]
-                        }
-                    </div>
+                    <Tooltip
+                        title={row.pendingApiResponse ? i18n.t('This event is not yet preserved and cannot be edited') : ''}
+                    >
+                        <div>
+                            { // $FlowFixMe
+                                row[id]
+                            }
+                        </div>
+                    </Tooltip>
                 </DataTableCell>));
 
 
