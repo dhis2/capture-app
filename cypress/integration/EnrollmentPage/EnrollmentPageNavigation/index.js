@@ -87,3 +87,57 @@ Then(/^you should be redirect to (.*)$/, (expectedUrl) => {
     cy.url()
         .should('eq', `${Cypress.config().baseUrl}/${expectedUrl}`);
 });
+
+Given('you land on the enrollment page by having typed only the enrollmentId in the url', () => {
+    cy.visit('/#/enrollment?enrollmentId=gPDueU02tn8');
+    cy.get('[data-test="enrollment-page-content"]')
+        .contains('Enrollment Dashboard');
+    cy.contains('[data-test="scope-selector"]', 'Carlos Cruz');
+    cy.contains('[data-test="scope-selector"]', 'Taninahun (Malen) CHP');
+    cy.contains('1 events');
+});
+
+When('you reset the tei selection', () => {
+    cy.contains('[data-test="single-locked-select"]', 'Carlos Cruz')
+        .find('[data-test="reset-selection-button"]')
+        .click();
+});
+
+Then('you are navigated to the main page', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh`);
+});
+When('you reset the program selection', () => {
+    cy.contains('[data-test="program-selector-container"]', 'Child Programme')
+        .find('[data-test="reset-selection-button"]')
+        .click();
+});
+
+Then('you see message explaining you need to select a program', () => {
+    cy.url().should('not.include', 'programId');
+    cy.get('[data-test="enrollment-page-content"]')
+        .contains('Carlos Cruz is enrolled in multiple programs. Choose a program.');
+});
+
+When('you reset the org unit selection', () => {
+    cy.contains('[data-test="org-unit-selector"]', 'Taninahun (Malen) CHP')
+        .find('[data-test="reset-selection-button"]')
+        .click();
+});
+
+Then('you see the enrollment page but there is no org unit id in the url', () => {
+    cy.url().should('not.include', 'orgUnitId');
+    cy.get('[data-test="enrollment-page-content"]')
+        .contains('Enrollment Dashboard');
+});
+
+When('you reset the enrollment selection', () => {
+    cy.contains('[data-test="single-locked-select"]', '2018-08-07 15:47')
+        .find('[data-test="reset-selection-button"]')
+        .click();
+});
+
+Then('you see message explaining you need to select an enrollment', () => {
+    cy.url().should('not.include', 'enrollmentId');
+    cy.get('[data-test="enrollment-page-content"]')
+        .contains('There are multiple enrollments for this program. Choose an enrollment to view the dashboard.');
+});

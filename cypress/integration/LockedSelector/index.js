@@ -302,12 +302,6 @@ And('you reset the org unit selection', () => {
         .click();
 });
 
-And('you see the enrollment page but there is no org unit id in the url', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollment?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8`);
-    cy.get('[data-test="enrollment-page-content"]')
-        .contains('Enrollment Dashboard');
-});
-
 And('you see the enrollment event Edit page but there is no org unit id in the url', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/enrollmentEventEdit?programId=IpHINAT79UW&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR`);
     cy.contains('Enrollment: View Event');
