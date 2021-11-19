@@ -17,8 +17,9 @@ export const registrationFormActionTypes = {
 export const startSavingNewTrackedEntityInstance = () =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START)();
 
-export const saveNewTrackedEntityInstance = candidateForRegistration =>
-    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE)(
+export const saveNewTrackedEntityInstance = (candidateForRegistration) => {
+    console.log(candidateForRegistration);
+    return actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE)(
         { ...candidateForRegistration },
         {
             offline: {
@@ -33,17 +34,20 @@ export const saveNewTrackedEntityInstance = candidateForRegistration =>
                 rollback: {
                     type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_FAILED,
                 },
-
             },
         },
     );
+};
 
 // with enrollment
 export const startSavingNewTrackedEntityInstanceWithEnrollment = () =>
     actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START)();
 
-export const saveNewTrackedEntityInstanceWithEnrollment = candidateForRegistration =>
-    actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE)({ ...candidateForRegistration },
+export const saveNewTrackedEntityInstanceWithEnrollment = (candidateForRegistration) => {
+    console.log(candidateForRegistration);
+    // debugger;
+    return actionCreator(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE)(
+        { ...candidateForRegistration },
         {
             offline: {
                 effect: {
@@ -58,4 +62,6 @@ export const saveNewTrackedEntityInstanceWithEnrollment = candidateForRegistrati
                     type: registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_FAILED,
                 },
             },
-        });
+        },
+    );
+};

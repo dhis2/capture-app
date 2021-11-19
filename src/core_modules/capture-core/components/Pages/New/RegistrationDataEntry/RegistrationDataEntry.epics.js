@@ -41,7 +41,7 @@ const standardGeoJson = (geometry) => {
 const deriveAttributesFromFormValues = (formValues = {}) =>
     Object.keys(formValues)
         .filter(key => !geometryType(key))
-        .map(key => ({ attribute: key, value: formValues[key] }));
+        .map(key => ({ attribute: key, value: typeof formValues[key] === 'object' ? formValues[key]?.id : formValues[key] }));
 
 const deriveGeometryFromFormValues = (formValues = {}) =>
     Object.keys(formValues)
