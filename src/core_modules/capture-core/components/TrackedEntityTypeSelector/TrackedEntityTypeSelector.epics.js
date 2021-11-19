@@ -3,7 +3,7 @@ import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { trackedEntityTypeSelectorActionTypes } from './TrackedEntityTypeSelector.actions';
-import { urlArguments } from '../../utils/url';
+import { buildUrlQueryString } from '../../utils/routing';
 
 export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -11,7 +11,7 @@ export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store:
         map(({ payload: { trackedEntityTypeId } }) => {
             const { currentSelections: { orgUnitId }, app: { page: currentPage } } = store.value;
 
-            return push(`/${currentPage}?${urlArguments({ trackedEntityTypeId, orgUnitId })}`);
+            return push(`/${currentPage}?${buildUrlQueryString({ trackedEntityTypeId, orgUnitId })}`);
         }),
     );
 

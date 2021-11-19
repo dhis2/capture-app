@@ -12,44 +12,6 @@ type Url = {
     tab?: string,
 }
 
-export const urlArguments = ({
-    programId,
-    orgUnitId,
-    trackedEntityTypeId,
-    teiId,
-    enrollmentId,
-    stageId,
-    eventId,
-    tab,
-}: Url): string => {
-    const argArray = [];
-    if (programId) {
-        argArray.push(`programId=${programId}`);
-    } else if (trackedEntityTypeId) {
-        argArray.push(`trackedEntityTypeId=${trackedEntityTypeId}`);
-    }
-    if (orgUnitId) {
-        argArray.push(`orgUnitId=${orgUnitId}`);
-    }
-    if (teiId) {
-        argArray.push(`teiId=${teiId}`);
-    }
-    if (enrollmentId) {
-        argArray.push(`enrollmentId=${enrollmentId}`);
-    }
-    if (eventId) {
-        argArray.push(`eventId=${eventId}`);
-    }
-    if (stageId) {
-        argArray.push(`stageId=${stageId}`);
-    }
-    if (tab) {
-        argArray.push(`tab=${tab}`);
-    }
-
-    return argArray.join('&');
-};
-
 export const deriveUrlQueries = (state: Object) => {
     const {
         currentSelections: {
