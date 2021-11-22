@@ -13,6 +13,7 @@ import {
     updateEventListCancel,
     cleanSkipInitAddingTemplate,
     unloadingContext,
+    setTemplateSharingSettings,
 } from './workingLists.actions';
 import WorkingListsContextBuilder from './WorkingListsContextBuilder.component';
 
@@ -56,6 +57,7 @@ type DispatchProps = {|
     onDeleteTemplate: Function,
     onCleanSkipInitAddingTemplate: Function,
     onUnloadingContext: Function,
+    onSetTemplateSharingSettings: Function
 |};
 
 type Props = {
@@ -107,6 +109,7 @@ const mapDispatchToProps: MapDispatchToPropsFactory = (dispatch: ReduxDispatch) 
         onDeleteTemplate: basicDispatcher(deleteTemplate),
         onCleanSkipInitAddingTemplate: basicDispatcher(cleanSkipInitAddingTemplate),
         onUnloadingContext: basicDispatcher(unloadingContext),
+        onSetTemplateSharingSettings: basicDispatcher(setTemplateSharingSettings),
     };
 };
 

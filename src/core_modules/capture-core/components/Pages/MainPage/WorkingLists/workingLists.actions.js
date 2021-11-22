@@ -1,5 +1,6 @@
 // @flow
 import { actionCreator } from '../../../../actions/actions.utils';
+import type { SharingSettings } from './workingLists.types';
 
 export const actionTypes = {
     DATA_PRE_CLEAN: 'EventWorkingListsDataPreClean',
@@ -30,6 +31,7 @@ export const actionTypes = {
     EVENT_DELETE_SUCCESS: 'EventWorkingListsEventListEventDeleteSuccess',
     EVENT_DELETE_ERROR: 'EventWorkingListsEventListEventDeleteError',
     CONTEXT_UNLOADING: 'EventWorkingListsContextUnloading',
+    TEMPLATE_SHARING_SETTINGS_SET: 'WorkingListsTemplateSharingSettingsSet',
 };
 
 export const batchActionTypes = {
@@ -119,3 +121,6 @@ export const deleteEventError =
     () => actionCreator(actionTypes.EVENT_DELETE_ERROR)();
 
 export const unloadingContext = (listId: string) => actionCreator(actionTypes.CONTEXT_UNLOADING)({ listId });
+
+export const setTemplateSharingSettings = (sharingSettings: SharingSettings, templateId: string, listId: string) =>
+    actionCreator(actionTypes.TEMPLATE_SHARING_SETTINGS_SET)({ sharingSettings, templateId, listId });

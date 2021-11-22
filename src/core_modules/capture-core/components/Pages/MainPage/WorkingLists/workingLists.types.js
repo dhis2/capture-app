@@ -117,3 +117,19 @@ export type ColumnConfig = {
     isMainProperty?: ?boolean,
     apiName?: ?string,
 };
+
+export type SharingSettings = {|
+    externalAccess: boolean,
+    publicAccess: string,
+    userAccesses: Array<{
+        id: string,
+        name: string,
+        access: string,
+    }>,
+    userGroupAccesses: Array<{
+        id: string,
+        name: string,
+        access: string,
+    }>,
+|};
+export type SetTemplateSharingSettings = (sharingSettings: SharingSettings, templateId: string) => void;
