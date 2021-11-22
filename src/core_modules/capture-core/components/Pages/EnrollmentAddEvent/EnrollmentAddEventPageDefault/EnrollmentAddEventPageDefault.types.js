@@ -1,7 +1,6 @@
 // @flow
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 import type { ExternalSaveHandler } from '../../../WidgetEnrollmentEventNew';
-import { Program } from '../../../../metaData';
 
 export type Props = {|
     programId: string,
@@ -25,5 +24,7 @@ export type Props = {|
 |};
 
 export type ContainerProps = {|
-    program: Program,
+    enrollment: ?Object,
+    attributeValues: ?Object,
+    commonDataError: boolean,
 |}

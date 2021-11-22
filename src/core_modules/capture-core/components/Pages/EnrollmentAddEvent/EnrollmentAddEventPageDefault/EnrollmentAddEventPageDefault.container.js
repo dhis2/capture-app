@@ -6,16 +6,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { useLocationQuery } from '../../../../utils/routing';
 import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './EnrollmentAddEventPageDefault.actions';
+import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from '../TopBar';
 import { EnrollmentAddEventPageDefaultComponent } from './EnrollmentAddEventPageDefault.component';
 import { deleteEnrollment } from '../../Enrollment/EnrollmentPage.actions';
 import { useWidgetDataFromStore } from '../hooks';
-import { useHideWidgetByRuleLocations } from '../../Enrollment/EnrollmentPageDefault/hooks';
-import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../../common/EnrollmentOverviewDomain';
+import {
+    useHideWidgetByRuleLocations,
+} from '../../Enrollment/EnrollmentPageDefault/hooks';
+import { updateEnrollmentEventsWithoutId } from '../../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
-import { useProgramInfo } from '../../../../hooks/useProgramInfo';
+import type { ContainerProps } from './EnrollmentAddEventPageDefault.types';
 
-export const EnrollmentAddEventPageDefault = ({ enrollment, attributeValues, commonDataError }) => {
+export const EnrollmentAddEventPageDefault = ({
+    enrollment,
+    attributeValues,
+    commonDataError,
+}: ContainerProps) => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
     const dispatch = useDispatch();
@@ -42,15 +49,10 @@ export const EnrollmentAddEventPageDefault = ({ enrollment, attributeValues, com
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
     const dataEntryHasChanges = useSelector(state => getDataEntryHasChanges(state, widgetReducerName));
-
-    // TODO: Validate query params
-    // This includes prechecking that we got a valid program stage and move the program stage logic in this file to useEnrollmentAddEventTopBar
-    // Ticket: https://jira.dhis2.org/browse/TECH-669
     const { program } = useProgramInfo(programId);
-    const programStage = [...program.stages.values()].find(item => item.id === stageId);
+    const selectedProgramStage = [...program.stages.values()].find(item => item.id === stageId);
     const outputEffects = useWidgetDataFromStore(widgetReducerName);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
-
 
     const rulesExecutionDependencies = useMemo(() => ({
         events: enrollment?.events,
@@ -77,10 +79,9 @@ export const EnrollmentAddEventPageDefault = ({ enrollment, attributeValues, com
         userInteractionInProgress,
     } = useEnrollmentAddEventTopBar(teiId, programId, enrollment);
 
-    if (!programStage) {
-        return <div>{i18n.t('program stage is invalid')}</div>;
+    if (stageId && !selectedProgramStage) {
+        return <p style={{ color: 'red' }}>{i18n.t('Program stage is invalid')}</p>;
     }
-
 
     return (
         <>
@@ -90,8 +91,8 @@ export const EnrollmentAddEventPageDefault = ({ enrollment, attributeValues, com
                 enrollmentId={enrollmentId}
                 teiDisplayName={teiDisplayName}
                 trackedEntityName={trackedEntityName}
-                stageName={programStage.name}
-                eventDateLabel={programStage.stageForm.getLabel('eventDate')}
+                stageName={selectedProgramStage?.stageForm.name}
+                eventDateLabel={selectedProgramStage?.stageForm.getLabel('eventDate')}
                 enrollmentsAsOptions={enrollmentsAsOptions}
                 onSetOrgUnitId={handleSetOrgUnitId}
                 onResetOrgUnitId={handleResetOrgUnitId}
@@ -102,7 +103,7 @@ export const EnrollmentAddEventPageDefault = ({ enrollment, attributeValues, com
                 onResetEventId={handleResetEventId}
                 userInteractionInProgress={userInteractionInProgress}
                 teiSelectorFailure={teiSelectorFailure}
-                enrollmentSelectorFailure={Boolean(commonDataError)}
+                enrollmentSelectorFailure={commonDataError}
             />
             <EnrollmentAddEventPageDefaultComponent
                 programId={programId}
@@ -119,7 +120,7 @@ export const EnrollmentAddEventPageDefault = ({ enrollment, attributeValues, com
                 hideWidgets={hideWidgets}
                 widgetReducerName={widgetReducerName}
                 rulesExecutionDependencies={rulesExecutionDependencies}
-                pageFailure={Boolean(commonDataError)}
+                pageFailure={commonDataError}
                 ready={Boolean(enrollment)}
                 dataEntryHasChanges={dataEntryHasChanges}
             />

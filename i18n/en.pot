@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-11-17T13:31:52.996Z\n"
-"PO-Revision-Date: 2021-11-17T13:31:52.996Z\n"
+"POT-Creation-Date: 2021-11-22T20:25:54.907Z\n"
+"PO-Revision-Date: 2021-11-22T20:25:54.907Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -645,6 +645,12 @@ msgstr "Create a new event in this program."
 msgid "View working list in this program."
 msgstr "View working list in this program."
 
+msgid "Page is missing required values from URL"
+msgstr "Page is missing required values from URL"
+
+msgid "There was an error opening the Page"
+msgstr "There was an error opening the Page"
+
 msgid "Enrollment{{escape}} New Event"
 msgstr "Enrollment{{escape}} New Event"
 
@@ -660,8 +666,8 @@ msgstr "There are no feedbacks for this event"
 msgid "There are no indicators for this event"
 msgstr "There are no indicators for this event"
 
-msgid "program stage is invalid"
-msgstr "program stage is invalid"
+msgid "Program stage is invalid"
+msgstr "Program stage is invalid"
 
 msgid "Report"
 msgstr "Report"

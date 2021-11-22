@@ -11,7 +11,7 @@ import { WidgetIndicator } from '../../../WidgetIndicator';
 import { WidgetProfile } from '../../../WidgetProfile';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
-import { ProgramStageSelector } from './ProgramStageSelector';
+import { ProgramStageSelector } from '../ProgramStageSelector';
 import { NewEventWorkspace } from '../NewEventWorkspace';
 
 const styles = ({ typography }) => ({

@@ -1,15 +1,19 @@
 // @flow
-import { useCallback, useEffect, useState } from 'react';
-import { containsKeyInStorageAsync } from '../../MetaDataStoreUtils/MetaDataStoreUtils';
+import { useCallback, useLayoutEffect, useState } from 'react';
+import {
+    containsKeyInStorageAsync,
+    getCachedSingleResourceFromKeyAsync,
+} from '../../MetaDataStoreUtils/MetaDataStoreUtils';
 import { userStores } from '../../storageControllers/stores';
 
 type Props = {|
-    programId?: string,
+    programId: string,
     orgUnitId?: string,
 |}
 
 const IdTypes = Object.freeze({
     PROGRAM: 'programId',
+    ORG_UNIT: 'orgUnitId',
 });
 
 export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
@@ -18,6 +22,7 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
     const [error, setError] = useState();
 
     const getPromises = useCallback(() => {
+        setLoading(true);
         const promises = [];
         const keys = [];
         if (programId) {
@@ -25,18 +30,22 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
             promises.push(containsKeyInStorageAsync(userStores.PROGRAMS, programId));
         }
         if (orgUnitId) {
-            promises.push(containsKeyInStorageAsync(userStores.ORGANISATION_UNITS_BY_PROGRAM, orgUnitId));
+            keys.push({ id: orgUnitId, type: IdTypes.ORG_UNIT });
+            promises.push(getCachedSingleResourceFromKeyAsync(userStores.ORGANISATION_UNITS_BY_PROGRAM, programId));
         }
 
         Promise.all(promises)
             .then((adapterResponses) => {
+                if (orgUnitId) {
+                    adapterResponses[1] = adapterResponses[1]?.organisationUnits[orgUnitId];
+                }
                 // $FlowFixMe - Missing declaration for U
-                const isValidObjects = keys.map(({ id, type }, index) => ({
+                const adapterResponseObjects = keys.map(({ id, type }, index) => ({
                     id,
                     valid: adapterResponses[index],
                     type,
                 }));
-                setValid(isValidObjects);
+                setValid(adapterResponseObjects);
                 setLoading(false);
             })
             .catch((e) => {
@@ -45,14 +54,17 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
             });
     }, [programId, orgUnitId]);
 
-    useEffect(() => {
-        setLoading(true);
+    useLayoutEffect(() => {
         getPromises();
     }, [programId, orgUnitId, getPromises]);
 
-    return {
+    return !loading ? {
         valid,
-        loading,
         error,
+        loading,
+    } : {
+        valid: undefined,
+        error: undefined,
+        loading,
     };
 };
