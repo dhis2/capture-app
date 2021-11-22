@@ -13,14 +13,31 @@ export const getEventFilters = async (programId: string) => {
         'eventFilters',
         {
             filter: `program:eq:${programId}`,
-            fields: 'id, displayName,eventQueryCriteria,access',
+            fields: 'id,displayName,eventQueryCriteria,access,externalAccess,publicAccess,user[id,username],userAccesses[id,access],userGroupAccesses[id,access]',
         },
     );
     const configs = apiRes && apiRes.eventFilters ? apiRes.eventFilters : [];
     const processedConfigs: Array<Object> = configs
-        .map(c => ({
-            ...c,
-            name: c.displayName,
+        .map(({
+            id,
+            displayName: name,
+            eventQueryCriteria,
+            access,
+            externalAccess,
+            publicAccess,
+            user,
+            userAccesses,
+            userGroupAccesses,
+        }) => ({
+            id,
+            name,
+            eventQueryCriteria,
+            access,
+            externalAccess,
+            publicAccess,
+            user,
+            userAccesses,
+            userGroupAccesses,
         }));
 
     return processedConfigs;

@@ -17,7 +17,7 @@ type Props = {
 
 const TemplateSelectorChip = (props: Props) => {
     const { template, currentTemplateId, onSelectTemplate, ...passOnProps } = props;
-    const { displayName, id } = template;
+    const { name, id } = template;
 
     const selectTemplateHandler = React.useCallback(() => {
         onSelectTemplate(template);
@@ -34,7 +34,7 @@ const TemplateSelectorChip = (props: Props) => {
         >
             <TemplateSelectorChipContent
                 {...passOnProps}
-                text={displayName}
+                text={name}
                 isSelectedTemplate={id === currentTemplateId}
             />
         </Chip>
