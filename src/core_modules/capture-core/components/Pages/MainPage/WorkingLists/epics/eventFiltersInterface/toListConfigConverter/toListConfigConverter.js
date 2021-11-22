@@ -50,7 +50,7 @@ const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterD
 });
 
 const getDateFilter = ({ dateFilter }: ApiDataFilterDate): DateFilterData => {
-    if (dateFilter.type === apiDateFilterTypes.RELATIVE) {
+    if (dateFilter.type === dateFilterTypes.RELATIVE) {
         return {
             type: dateFilter.type,
             period: dateFilter.period,
