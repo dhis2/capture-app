@@ -57,38 +57,35 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                 programId,
                 listId,
             } = action.payload;
-
+            const {
+                id,
+                name,
+                externalAccess,
+                publicAccess,
+                user,
+                userGroupAccesses,
+                userAccesses,
+            } = template;
             const eventFilterData = {
-                name: template.name,
+                name,
                 program: programId,
                 eventQueryCriteria,
+                externalAccess,
+                publicAccess,
+                user,
+                userGroupAccesses,
+                userAccesses,
             };
 
             const api = getApi();
 
             const requestPromise = api
-                .update(`eventFilters/${template.id}`, eventFilterData)
-                .then(() => api
-                    .post(`sharing?type=eventFilter&id=${template.id}`, {
-                        object: {
-                            publicAccess: '--------',
-                            externalAccess: false,
-                        },
-                    })
-                    .catch((error) => {
-                        log.error(
-                            errorCreator('could not set sharing settings for template')({
-                                error,
-                                eventFilterData,
-                                templateId: template.id,
-                            }),
-                        );
-                    }))
+                .update(`eventFilters/${id}`, eventFilterData)
                 .then(() => {
                     const isActiveTemplate =
-                        store.getState().workingListsTemplates[listId].selectedTemplateId === template.id;
+            store.value.workingListsTemplates[listId].selectedTemplateId === id;
                     return updateTemplateSuccess(
-                        template.id,
+                        id,
                         eventQueryCriteria, {
                             listId,
                             isActiveTemplate,
@@ -102,26 +99,29 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                         }),
                     );
                     const isActiveTemplate =
-                        store.getState().workingListsTemplates[listId].selectedTemplateId === template.id;
+            store.value.workingListsTemplates[listId].selectedTemplateId === id;
                     return updateTemplateError(
-                        template.id,
+                        id,
                         eventQueryCriteria, {
                             listId,
                             isActiveTemplate,
                         });
                 });
 
-            return fromPromise(requestPromise)
-                .takeUntil(
-                    action$
-                        .ofType(actionTypes.TEMPLATE_UPDATE)
-                        .filter(cancelAction => cancelAction.payload.template.id === template.id),
-                )
-                .takeUntil(
-                    action$
-                        .ofType(actionTypes.CONTEXT_UNLOADING)
-                        .filter(cancelAction => cancelAction.payload.listId === listId),
-                );
+            return from(requestPromise).pipe(
+                takeUntil(
+                    action$.pipe(
+                        ofType(actionTypes.TEMPLATE_UPDATE),
+                        filter(cancelAction => cancelAction.payload.template.id === id),
+                    ),
+                ),
+                takeUntil(
+                    action$.pipe(
+                        ofType(actionTypes.CONTEXT_UNLOADING),
+                        filter(cancelAction => cancelAction.payload.listId === listId),
+                    ),
+                ),
+            );
         });
 
 export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>

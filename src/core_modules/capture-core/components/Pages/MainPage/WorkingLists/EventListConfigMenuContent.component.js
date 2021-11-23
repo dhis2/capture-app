@@ -83,7 +83,8 @@ const EventListConfigMenuContent = (props: Props) => {
     const getSaveItem = useCallback(() => ({
         key: 'save',
         clickHandler: () => {
-            templateMaintenanceInstance.current.updateTemplateHandler();
+            // $FlowFixMe[incompatible-use] automated comment
+            templateMaintenanceInstance.current.handleUpdateTemplate();
         },
         element: i18n.t('Update view'),
     }), []);
