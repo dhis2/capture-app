@@ -84,7 +84,7 @@ const EventListConfigMenuContent = (props: Props) => {
         key: 'save',
         clickHandler: () => {
             // $FlowFixMe[incompatible-use] automated comment
-            templateMaintenanceInstance.current.updateTemplateHandler();
+            templateMaintenanceInstance.current.handleUpdateTemplate();
         },
         element: i18n.t('Update view'),
     }), []);
