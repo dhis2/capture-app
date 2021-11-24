@@ -113,7 +113,12 @@ Feature: User creates a new entries from the registration page
     Then you can see the second page of the results
     When you click the previous page button
     Then you can see the first page of the results
-
+    
+  Scenario: New person > Editing coordinates
+    Given you are in Person registration in Child program
+    When you edit the latitude and longtitude
+    Then you should be able to see the edited fields
+    
 ### New person in Tracker Program
 
   Scenario: New person in Tracker Program > Submitting the form with empty visit date throws validation error

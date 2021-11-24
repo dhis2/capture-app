@@ -345,6 +345,24 @@ Then('you submit the form again from the duplicates modal', () => {
         .click();
 });
 
+Given('you are in Person registration in Child program', () => {
+    cy.visit('/#/new?programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8');
+});
+
+When('you edit the latitude and longtitude', () => {
+    cy.get('[data-test="dataentry-field-geometry"]').within(() => {
+        cy.get('[data-test="capture-ui-input"]').eq(0).type('123').blur();
+        cy.get('[data-test="capture-ui-input"]').eq(1).type('456').blur();
+    });
+});
+
+Then('you should be able to see the edited fields', () => {
+    cy.get('[data-test="dataentry-field-geometry"]').within(() => {
+        cy.get('[data-test="capture-ui-input"]').eq(0).should('have.value', '123.000000');
+        cy.get('[data-test="capture-ui-input"]').eq(1).should('have.value', '456.000000');
+    });
+});
+
 // New person in WHO RMNCH Tracker
 And('you are in the WHO RMNCH program registration page', () => {
     cy.visit('/#/new?programId=WSGAb5XwJ3Y&orgUnitId=DiszpKrYNg8');
