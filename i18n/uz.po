@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-09-14T23:04:57.863Z\n"
+"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: Ibatov <ibatovk@who.int>, 2021\n"
 "Language-Team: Uzbek (Cyrillic) (https://www.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
@@ -610,6 +610,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "\"{{enrollmentId}}\" идентификатори билан қайд қилиш имконсиз"
 
+msgid "Enrollment Dashboard"
+msgstr ""
+
 msgid "No indicator output for this enrollment yet"
 msgstr ""
 
@@ -701,6 +704,9 @@ msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
 
 msgid "Or see all events accessible to you in {{program}}"
+msgstr ""
+
+msgid "Please select an organisation unit."
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
@@ -989,6 +995,9 @@ msgstr ""
 msgid "This enrollment doesn't have any comments"
 msgstr ""
 
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1009,6 +1018,9 @@ msgstr ""
 
 msgid "This event doesn't have any comments"
 msgstr ""
+
+msgid "Event completed"
+msgstr "Ҳодиса/тадбир якунланди"
 
 msgid "Back to all stages and events"
 msgstr ""

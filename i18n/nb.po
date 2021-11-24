@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-09-14T23:04:57.863Z\n"
+"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -608,6 +608,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Registrering med ID-en \"{{enrollmentId}}\" eksisterer ikke"
 
+msgid "Enrollment Dashboard"
+msgstr ""
+
 msgid "No indicator output for this enrollment yet"
 msgstr "Ingen indikatorresultat for denne registreringen enda"
 
@@ -699,6 +702,9 @@ msgstr "Eller se alle opptegnelser som er tilgjengelige for deg i {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr "Eller se alle hendelser som er tilgjengelige for deg i {{program}}"
+
+msgid "Please select an organisation unit."
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Velg {{missingCategories}} for å starte rapportering"
@@ -979,6 +985,9 @@ msgstr "Skriv en kommentar om denne registreringen"
 msgid "This enrollment doesn't have any comments"
 msgstr "Denne registreringen har ingen kommentarer"
 
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisasjonsenheten kunne ikke hentes. Prøv igjen senere."
 
@@ -999,6 +1008,9 @@ msgstr "Skriv en kommentar om denne hendelsen"
 
 msgid "This event doesn't have any comments"
 msgstr "Denne hendelsen har ingen kommentarer"
+
+msgid "Event completed"
+msgstr "Hendelse fullført"
 
 msgid "Back to all stages and events"
 msgstr "Tilbake til alle faser og hendelser"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-09-14T23:04:57.863Z\n"
+"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -602,6 +602,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Zápis s ID \"{{enrollmentId}}\" neexistuje"
 
+msgid "Enrollment Dashboard"
+msgstr ""
+
 msgid "No indicator output for this enrollment yet"
 msgstr "Pro tento zápis zatím neexistuje žádný indikátorový výstup"
 
@@ -693,6 +696,9 @@ msgstr "Nebo zobrazit všechny záznamy, které máte k dispozici v {{program}}"
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr "Nebo zobrazit všechny události, které máte k dispozici v {{program}}"
+
+msgid "Please select an organisation unit."
+msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Chcete-li zahájit vytváření hlášení, vyberte {{missingCategories}}"
@@ -975,6 +981,9 @@ msgstr "Napište komentář k tomuto zápisu"
 msgid "This enrollment doesn't have any comments"
 msgstr "Tento zápis nemá žádné komentáře"
 
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organizační jednotku nelze načíst. Zkuste to znovu později."
 
@@ -995,6 +1004,9 @@ msgstr "Napište komentář k této události"
 
 msgid "This event doesn't have any comments"
 msgstr "Tato událost nemá žádné komentáře"
+
+msgid "Event completed"
+msgstr ""
 
 msgid "Back to all stages and events"
 msgstr "Zpět ke všem fázím a událostem"
