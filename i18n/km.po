@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-10-19T07:38:45.660Z\n"
+"POT-Creation-Date: 2021-11-15T15:28:19.564Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Khmer (https://www.transifex.com/hisp-uio/teams/100509/km/)\n"
@@ -130,10 +130,7 @@ msgstr ""
 msgid "A future date is not allowed"
 msgstr ""
 
-msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
-
-msgid "in"
+msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Cancel"
@@ -163,10 +160,10 @@ msgstr "ទំនាក់ទំនង"
 msgid "Assignee"
 msgstr ""
 
-msgid "Saving to"
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
 
-msgid "for"
+msgid "Saving to {{programName}} in {{orgUnitName}}"
 msgstr ""
 
 msgid ""
@@ -263,6 +260,9 @@ msgid "without"
 msgstr ""
 
 msgid "enrollment"
+msgstr ""
+
+msgid "in"
 msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
@@ -965,9 +965,6 @@ msgstr ""
 msgid "This enrollment doesn't have any comments"
 msgstr ""
 
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1009,6 +1006,10 @@ msgstr ""
 msgid ""
 "There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
 "this day."
+msgstr ""
+
+msgid ""
+"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
 
 msgid "Schedule info"

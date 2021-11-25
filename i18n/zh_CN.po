@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-10-19T07:38:45.660Z\n"
+"POT-Creation-Date: 2021-11-15T15:28:19.564Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -132,11 +132,8 @@ msgstr "注册"
 msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
 
-msgid "Saving a {{trackedEntityName}} in"
-msgstr "将{{trackedEntityName}}保存在"
-
-msgid "in"
-msgstr " 在"
+msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Cancel"
 msgstr "取消"
@@ -165,11 +162,11 @@ msgstr "关系"
 msgid "Assignee"
 msgstr "分配者"
 
-msgid "Saving to"
-msgstr "保存到"
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
 
-msgid "for"
-msgstr "对"
+msgid "Saving to {{programName}} in {{orgUnitName}}"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -266,6 +263,9 @@ msgstr "没有"
 
 msgid "enrollment"
 msgstr "注册"
+
+msgid "in"
+msgstr " 在"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "通过从顶部栏中选择一个项目来注册"
@@ -967,9 +967,6 @@ msgstr ""
 msgid "This enrollment doesn't have any comments"
 msgstr ""
 
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1011,6 +1008,10 @@ msgstr ""
 msgid ""
 "There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
 "this day."
+msgstr ""
+
+msgid ""
+"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
 
 msgid "Schedule info"

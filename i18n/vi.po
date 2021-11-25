@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-10-19T07:38:45.660Z\n"
+"POT-Creation-Date: 2021-11-15T15:28:19.564Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -137,11 +137,8 @@ msgstr "Đăng ký"
 msgid "A future date is not allowed"
 msgstr "Ngày tương lai không được phép"
 
-msgid "Saving a {{trackedEntityName}} in"
-msgstr "Đang lưu {{trackedEntityName}} trong"
-
-msgid "in"
-msgstr "trong"
+msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
+msgstr ""
 
 msgid "Cancel"
 msgstr "Hủy"
@@ -170,11 +167,11 @@ msgstr "Mối quan hệ"
 msgid "Assignee"
 msgstr "Người nhận"
 
-msgid "Saving to"
-msgstr "Đang lưu vào"
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
 
-msgid "for"
-msgstr "cho"
+msgid "Saving to {{programName}} in {{orgUnitName}}"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -275,6 +272,9 @@ msgstr "không có"
 
 msgid "enrollment"
 msgstr "đăng ký"
+
+msgid "in"
+msgstr "trong"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr ""
@@ -995,9 +995,6 @@ msgstr ""
 msgid "This enrollment doesn't have any comments"
 msgstr ""
 
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr ""
 
@@ -1039,6 +1036,10 @@ msgstr ""
 msgid ""
 "There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
 "this day."
+msgstr ""
+
+msgid ""
+"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
 
 msgid "Schedule info"
