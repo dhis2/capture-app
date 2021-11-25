@@ -15,7 +15,6 @@ import {
 } from './hooks';
 import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 
-
 export const WidgetEventSchedule = ({
     enrollmentId,
     teiId,

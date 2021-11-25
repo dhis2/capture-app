@@ -14,7 +14,7 @@ import {
     startFetchingTeiFromEnrollmentId,
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
-import { urlArguments } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
@@ -120,7 +120,7 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
 
             if (!urlCompleted) {
                 return concat(
-                    of(push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`)),
+                    of(push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`)),
                     fetchTeiStream(teiId, querySingleResource),
                 );
             }
