@@ -37,8 +37,8 @@ type State = {
 }
 
 const coordinateKeys = {
-    LATITUDE: i18n.t('Latitude'),
-    LONGITUDE: i18n.t('Longitude'),
+    LATITUDE: 'latitude',
+    LONGITUDE: 'longitude',
 };
 
 export default class D2Coordinate extends React.Component<Props, State> {
@@ -211,7 +211,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
-                label="Latitude"
+                label={i18n.t('Latitude')}
                 value={value && value.latitude}
                 classes={passOnClasses}
                 className={defaultClasses.latitudeTextInput}
@@ -230,7 +230,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
             // $FlowFixMe[cannot-spread-inexact] automated comment
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
-                label="Longitude"
+                label={i18n.t('Longitude')}
                 value={value && value.longitude}
                 className={defaultClasses.longitudeTextInput}
                 classes={passOnClasses}
