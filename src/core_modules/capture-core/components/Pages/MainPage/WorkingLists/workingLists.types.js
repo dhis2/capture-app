@@ -62,7 +62,7 @@ export type ApiDataFilterDateRelative = {|
     period: string,
 |}
 
-export type ApiDataFilterDate = ApiDataFilterDateAbsolute | ApiDataFilterDateRelative;
+export type ApiDataFilterDate = { dateFilter: ApiDataFilterDateAbsolute | ApiDataFilterDateRelative };
 
 export const assigneeFilterModes = Object.freeze({
     PROVIDED: 'PROVIDED',
