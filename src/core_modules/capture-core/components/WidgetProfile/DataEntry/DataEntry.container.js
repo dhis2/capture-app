@@ -10,7 +10,8 @@ import { DataEntry } from '../../DataEntry';
 import { getOpenDataEntryActions, getRulesActions } from './actions';
 import { useProgramRules } from './hooks';
 import { updateFieldBatch, updateDataEntryFieldBatch } from './actions.batchs';
-import { buildProgram } from './buildForm';
+import { buildRules } from './ProgramRules';
+import { buildFormFoundation } from './FormFoundation';
 
 export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditModal }: Props) => {
     const { programRules, loading: loadingProgramRules } = useProgramRules(programAPI.id);
@@ -19,13 +20,15 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditMo
     const itemId = 'edit';
     const dispatch = useDispatch();
     const [program, setProgram] = useState<any>({});
+    const [formFoundation, setFormFoundation] = useState<any>({});
     const [startUpdate, setStartUpdate] = useState(false);
     const orgUnit: Object = useMemo(() => ({ id: orgUnitId }), [orgUnitId]);
     const trackedEntityName = useMemo(() => programAPI?.trackedEntityType?.displayName || '', [programAPI]);
 
     useEffect(() => {
         if (!loadingProgramRules && Object.entries(program).length === 0) {
-            buildProgram({
+            buildFormFoundation(programAPI, setFormFoundation);
+            buildRules({
                 programAPI,
                 setProgram,
                 programRules,
@@ -56,7 +59,7 @@ export const DataEntryProfile = ({ programAPI, orgUnitId, onCancel, toggleEditMo
                         )}
                         <DataEntry
                             id={dataEntryId}
-                            formFoundation={program.enrollment?.enrollmentForm}
+                            formFoundation={formFoundation}
                             onUpdateFormField={(...args: Array<any>) =>
                                 dispatch(updateFieldBatch(...args, program, orgUnit))
                             }

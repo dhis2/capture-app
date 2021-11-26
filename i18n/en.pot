@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-11-17T14:29:59.998Z\n"
-"PO-Revision-Date: 2021-11-17T14:29:59.998Z\n"
+"POT-Creation-Date: 2021-11-25T10:38:16.696Z\n"
+"PO-Revision-Date: 2021-11-25T10:38:16.696Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -1058,14 +1058,14 @@ msgstr ""
 msgid "Save changes"
 msgstr "Save changes"
 
+msgid "Profile"
+msgstr "Profile"
+
 msgid "There are errors in this form"
 msgstr "There are errors in this form"
 
 msgid "There are warnings in this form"
 msgstr "There are warnings in this form"
-
-msgid "Profile"
-msgstr "Profile"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profile widget could not be loaded. Please try again later"
