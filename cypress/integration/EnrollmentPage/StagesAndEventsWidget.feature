@@ -15,12 +15,12 @@ Feature: User interacts with Stages and Events Widget
         And you click the stages and events widget toggle open close button
         Then the program stages should be displayed
 
-    Scenario: User can view the list of events
-        Given you open the enrollment page which has multiples events and stages
-        Then the default list should be displayed
-        And you see the first 5 events in the table
-        And you see the first 5 rows in Antenatal care visit event
-        And you see buttons in the footer list
+    # Scenario: User can view the list of events
+    #   Given you open the enrollment page which has multiples events and stages
+    #   Then the default list should be displayed
+    #   And you see the first 5 events in the table
+    #    And you see the first 5 rows in Antenatal care visit event
+    #    And you see buttons in the footer list
 
     Scenario: User can view more events
         Given you open the enrollment page which has multiples events and stages
