@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
-import { urlArguments } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
@@ -68,11 +68,11 @@ const useNavigations = () => {
 
     const { programId, orgUnitId } = useLocationQuery();
     const navigateToProgramRegistrationPage = () =>
-        history.push(`/new?${urlArguments({ programId, orgUnitId })}`);
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToEventWorkingList = () =>
-        history.push(`/?${urlArguments({ programId, orgUnitId })}`);
+        history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
     const navigateToTetRegistrationPage = () =>
-        history.push(`/new?${urlArguments({ programId, orgUnitId, trackedEntityTypeId: tetId })}`);
+        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId: tetId })}`);
 
     return { navigateToProgramRegistrationPage, navigateToEventWorkingList, navigateToTetRegistrationPage };
 };

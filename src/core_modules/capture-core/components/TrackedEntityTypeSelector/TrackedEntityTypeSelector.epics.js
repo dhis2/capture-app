@@ -3,7 +3,7 @@ import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { trackedEntityTypeSelectorActionTypes } from './TrackedEntityTypeSelector.actions';
-import { urlArguments } from '../../utils/url';
+import { buildUrlQueryString } from '../../utils/routing';
 
 export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
@@ -11,7 +11,7 @@ export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store:
         switchMap(({ payload: { trackedEntityTypeId } }) => {
             const { currentSelections: { orgUnitId }, app: { page: currentPage } } = store.value;
 
-            history.push(`/${currentPage}?${urlArguments({ trackedEntityTypeId, orgUnitId })}`);
+            history.push(`/${currentPage}?${buildUrlQueryString({ trackedEntityTypeId, orgUnitId })}`);
             return EMPTY;
         }),
     );

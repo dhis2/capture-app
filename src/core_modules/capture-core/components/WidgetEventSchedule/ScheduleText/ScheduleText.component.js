@@ -6,7 +6,7 @@ import type { Props } from './scheduleText.types';
 
 export const ScheduleText = ({ orgUnitName, stageName, programName }: Props) => (<InfoIconText>
     <span>
-        { i18n.t(`Scheduling an event in ${stageName} for ${programName} in ${orgUnitName}`,
-            { interpolation: { escapeValue: false } })}
+        { i18n.t('Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}',
+            orgUnitName, stageName, programName, { interpolation: { escapeValue: false } })}
     </span>
 </InfoIconText>);

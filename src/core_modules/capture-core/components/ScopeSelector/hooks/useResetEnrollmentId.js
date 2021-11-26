@@ -1,6 +1,7 @@
 // @flow
 import { useHistory, useLocation } from 'react-router-dom';
-import { urlArguments, getUrlQueries } from '../../../utils/url';
+import { getUrlQueries } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 
 export const useResetEnrollmentId = () => {
     const history = useHistory();
@@ -8,7 +9,7 @@ export const useResetEnrollmentId = () => {
 
     const resetEnrollmentId = (pageToPush: string = pathname) => {
         const { programId, orgUnitId, teiId } = getUrlQueries();
-        history.push(`${pageToPush}?${urlArguments({ programId, orgUnitId, teiId })}`);
+        history.push(`${pageToPush}?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
     };
 
     return { resetEnrollmentId };

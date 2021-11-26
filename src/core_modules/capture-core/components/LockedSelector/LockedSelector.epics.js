@@ -17,6 +17,7 @@ import {
 import { programCollection } from '../../metaDataMemoryStores';
 import { deriveUrlQueries, pageFetchesOrgUnitUsingTheOldWay, urlArguments } from '../../utils/url';
 import { deriveURLParamsFromHistory } from '../../utils/routing';
+import { buildUrlQueryString } from '../../utils/routing';
 
 const derivePayloadFromAction = (batchPayload, actionType) => {
     // $FlowFixMe
@@ -35,13 +36,12 @@ export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore, { 
             if (programId) {
                 const programContainsOrgUnitId = programCollection.get(programId)?.organisationUnits[orgUnitId];
                 if (orgUnitId && !programContainsOrgUnitId) {
-                    history.push(`/${pageToPush}?${urlArguments({ ...restOfQueries, orgUnitId })}`);
+                    history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, orgUnitId })}`);
                     return EMPTY;
                 }
             }
 
-
-            history.push(`/${pageToPush}?${urlArguments({ ...restOfQueries, programId, orgUnitId })}`);
+            history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId, orgUnitId })}`);
             return EMPTY;
         }));
 
@@ -52,7 +52,7 @@ export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore, { hi
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.ORG_UNIT_ID_RESET);
             const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value, history);
 
-            history.push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`);
+            history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
             return EMPTY;
         }));
 
@@ -62,7 +62,7 @@ export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore, { 
         switchMap(({ payload: { programId, pageToPush } }) => {
             const queries = deriveUrlQueries(store.value, history);
 
-            history.push(`/${pageToPush}?${urlArguments({ ...queries, programId })}`);
+            history.push(`/${pageToPush}?${buildUrlQueryString({ ...queries, programId })}`);
             return EMPTY;
         }));
 
@@ -73,7 +73,7 @@ export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore, 
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.PROGRAM_ID_RESET);
             const { programId, ...restOfQueries } = deriveUrlQueries(store.value, history);
 
-            history.push(`/${pageToPush}?${urlArguments({ ...restOfQueries })}`);
+            history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
             return EMPTY;
         }),
     );
@@ -166,7 +166,7 @@ export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStor
         switchMap(() => {
             const { programId, orgUnitId } = deriveURLParamsFromHistory(history);
 
-            history.push(`/?${urlArguments({ programId, orgUnitId })}`);
+            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return EMPTY;
         }),
     );
@@ -177,7 +177,7 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
         switchMap(({ payload: { enrollmentId } }) => {
             const { programId, orgUnitId, teiId } = deriveURLParamsFromHistory(history);
 
-            history.push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
+            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
             return EMPTY;
         }),
     );
@@ -187,7 +187,7 @@ export const resetEnrollmentSelectionEpic = (action$: InputObservable, _: ReduxS
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET),
         switchMap(() => {
             const { orgUnitId, programId, teiId } = deriveURLParamsFromHistory(history);
-            history.push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId })}`);
+            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
             return EMPTY;
         }),
     );

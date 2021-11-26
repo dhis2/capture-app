@@ -1,3 +1,17 @@
+## [1.61.2](https://github.com/dhis2/capture-app/compare/v1.61.1...v1.61.2) (2021-11-17)
+
+
+### Bug Fixes
+
+* [DHIS2-12122] fix overdue condition ([#2256](https://github.com/dhis2/capture-app/issues/2256)) ([42c70ac](https://github.com/dhis2/capture-app/commit/42c70acec49d457c3f9fef76211b6dcf93a831bd))
+
+## [1.61.1](https://github.com/dhis2/capture-app/compare/v1.61.0...v1.61.1) (2021-11-16)
+
+
+### Bug Fixes
+
+* refetch dependency causing infinite loop ([3fc4a52](https://github.com/dhis2/capture-app/commit/3fc4a521c7b52f9f8b18ccea2b324cbb5dcf2079))
+
 # [1.61.0](https://github.com/dhis2/capture-app/compare/v1.60.0...v1.61.0) (2021-11-15)
 
 

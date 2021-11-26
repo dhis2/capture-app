@@ -24,7 +24,7 @@ import {
     scopeTypes,
 } from '../../../../metaData';
 import { PAGINATION } from '../SearchPage.constants';
-import { urlArguments } from '../../../../utils/url';
+import { buildUrlQueryString } from '../../../../utils/routing';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
@@ -278,7 +278,7 @@ export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { 
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED),
         switchMap(({ payload: { orgUnitId, trackedEntityTypeId } }) => {
-            history.push(`/search?${urlArguments({ orgUnitId, trackedEntityTypeId })}`);
+            history.push(`/search?${buildUrlQueryString({ orgUnitId, trackedEntityTypeId })}`);
             return EMPTY;
         }),
     );

@@ -10,7 +10,7 @@ import {
     showMessageToSelectProgramCategoryOnNewPage,
 } from './NewPage.actions';
 import { typeof newPageStatuses } from './NewPage.constants';
-import { urlArguments } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
@@ -77,7 +77,7 @@ export const NewPage: ComponentType<{||}> = () => {
     const { id: orgUnitId } = useCurrentOrgUnitInfo();
     const { id: programId } = useCurrentProgramInfo();
     const handleMainPageNavigation = () => {
-        history.push(`/?${urlArguments({ orgUnitId, programId })}`);
+        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
     };
 
     const writeAccess = useUserWriteAccess(currentScopeId);

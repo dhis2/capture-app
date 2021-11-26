@@ -13,7 +13,7 @@ import {
     startFetchingTeiFromEnrollmentId,
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
-import { urlArguments } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import { deriveURLParamsFromHistory } from '../../../utils/routing';
 
@@ -117,7 +117,7 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
             const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
 
             if (!urlCompleted) {
-                history.push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
+                history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
                 return fetchTeiStream(teiId, querySingleResource);
             }
             return fetchTeiStream(teiId, querySingleResource);

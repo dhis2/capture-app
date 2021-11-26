@@ -204,7 +204,7 @@ Feature: User uses the LockedSelector to navigate
     Then you see message explaining you need to select a program
 
   Scenario: Enrollment event edit page > resetting the org unit
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR&eventId=lQQyjR73hHk
     When you reset the org unit selection
     Then you see the enrollment event Edit page but there is no org unit id in the url
 

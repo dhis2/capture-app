@@ -1,6 +1,7 @@
 // @flow
 import { useHistory, useLocation } from 'react-router-dom';
-import { urlArguments, getUrlQueries } from '../../../utils/url';
+import { getUrlQueries } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 
 export const useResetTeiId = () => {
     const history = useHistory();
@@ -8,7 +9,7 @@ export const useResetTeiId = () => {
 
     const resetTeiId = (pageToPush: string = pathname) => {
         const { programId, orgUnitId } = getUrlQueries();
-        history.push(`${pageToPush}?${urlArguments({ programId, orgUnitId })}`);
+        history.push(`${pageToPush}?${buildUrlQueryString({ programId, orgUnitId })}`);
     };
 
     return { resetTeiId };
