@@ -1,3 +1,10 @@
+# [1.62.0](https://github.com/dhis2/capture-app/compare/v1.61.3...v1.62.0) (2021-11-26)
+
+
+### Features
+
+* [DHIS2-11864] Schedule event using redux ([#2216](https://github.com/dhis2/capture-app/issues/2216)) ([cf049b4](https://github.com/dhis2/capture-app/commit/cf049b4e12ea316b3b5d6ee1cc5c913813b87550)), closes [#2211](https://github.com/dhis2/capture-app/issues/2211)
+
 ## [1.61.3](https://github.com/dhis2/capture-app/compare/v1.61.2...v1.61.3) (2021-11-26)
 
 
