@@ -1,3 +1,10 @@
+## [1.61.3](https://github.com/dhis2/capture-app/compare/v1.61.2...v1.61.3) (2021-11-26)
+
+
+### Bug Fixes
+
+* [DHIS2-12134] fetching logic in common enrollment hook ([fe82c00](https://github.com/dhis2/capture-app/commit/fe82c00308e2dab74c23488038de6c2d32007d3d))
+
 ## [1.61.2](https://github.com/dhis2/capture-app/compare/v1.61.1...v1.61.2) (2021-11-17)
 
 
