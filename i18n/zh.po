@@ -135,7 +135,7 @@ msgid "A future date is not allowed"
 msgstr "将来的日期不允许"
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
-msgstr ""
+msgstr "在 {{orgUnitName}} 的 {{programName}} 中保存 {{trackedEntityName}}。"
 
 msgid "Cancel"
 msgstr "取消"
@@ -165,10 +165,10 @@ msgid "Assignee"
 msgstr "分配者"
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "为 {{orgUnitName}} 中的 {{programName}} 保存到 {{stageName}}"
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "保存到 {{orgUnitName}} 中的 {{programName}}"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -593,7 +593,7 @@ msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "ID为“ {{enrollmentId}}”的注册不存在"
 
 msgid "Enrollment Dashboard"
-msgstr ""
+msgstr "注册仪表板"
 
 msgid "No indicator output for this enrollment yet"
 msgstr "此注册尚无指标输出"
@@ -665,16 +665,16 @@ msgid "Refer"
 msgstr "转诊"
 
 msgid "You can’t add any more events in this program"
-msgstr ""
+msgstr "您无法在此程序中添加更多事件"
 
 msgid "Cancel without saving"
-msgstr ""
+msgstr "取消而不保存"
 
 msgid "Choose a stage for a new event"
-msgstr ""
+msgstr "为新活动选择一个舞台"
 
 msgid "Program Stages could not be loaded"
-msgstr ""
+msgstr "无法加载程序阶段"
 
 msgid "stage"
 msgstr "阶段"
@@ -701,7 +701,7 @@ msgid "Or see all events accessible to you in {{program}}"
 msgstr "或者在{{program}}中查看您可以访问的所有事件"
 
 msgid "Please select an organisation unit."
-msgstr ""
+msgstr "请选择一个组织单位。"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
@@ -998,36 +998,38 @@ msgid "Back to all stages and events"
 msgstr "回到所有阶段和事件"
 
 msgid "Schedule date info"
-msgstr ""
+msgstr "预定日期信息"
 
 msgid ""
 "This date is the the auto-suggested date based on the intervals defined, \n"
 "                    it can be adjusted if needed."
 msgstr ""
+"此日期是根据定义的间隔自动建议的日期，\n"
+"                    如果需要，可以对其进行调整。"
 
 msgid "This date is {{difference}} days {{position}} the auto-suggested date."
-msgstr ""
+msgstr "此日期是自动建议的日期 {{difference}} 天 {{position}}。"
 
 msgid ""
 "There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
 "this day."
-msgstr ""
+msgstr "这一天在 {{orgUnitName}} 有 {{eventCountInOrgUnit}} 安排的活动。"
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "为 {{orgUnitName}} 中的 {{programName}} 在 {{stageName}} 安排活动"
 
 msgid "Schedule info"
-msgstr ""
+msgstr "日程信息"
 
 msgid "Schedule date / Due date"
-msgstr ""
+msgstr "计划日期/截止日期"
 
 msgid "Event comments"
-msgstr ""
+msgstr "事件评论、注释"
 
 msgid "Write a comment about this scheduled event"
-msgstr ""
+msgstr "写一篇关于这个预定事件的评论"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "无法加载个人资料窗口小部件。请稍后再试"

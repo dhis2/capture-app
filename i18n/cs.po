@@ -136,7 +136,7 @@ msgid "A future date is not allowed"
 msgstr "Budoucí datum není povoleno"
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
-msgstr ""
+msgstr "Ukládání {{trackedEntityName}} v {{programName}} v {{orgUnitName}}."
 
 msgid "Cancel"
 msgstr "Zrušit"
@@ -166,10 +166,10 @@ msgid "Assignee"
 msgstr "Přiřazený"
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Ukládání do {{stageName}} pro {{programName}} v {{orgUnitName}}"
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Ukládání do {{programName}} v {{orgUnitName}}"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -603,7 +603,7 @@ msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Zápis s ID \"{{enrollmentId}}\" neexistuje"
 
 msgid "Enrollment Dashboard"
-msgstr ""
+msgstr "Ovládací panel zápisu"
 
 msgid "No indicator output for this enrollment yet"
 msgstr "Pro tento zápis zatím neexistuje žádný indikátorový výstup"
@@ -680,16 +680,16 @@ msgid "Refer"
 msgstr "Odkazovat"
 
 msgid "You can’t add any more events in this program"
-msgstr ""
+msgstr "Do tohoto programu nemůžete přidávat žádné další události"
 
 msgid "Cancel without saving"
-msgstr ""
+msgstr "Zrušit bez uložení"
 
 msgid "Choose a stage for a new event"
-msgstr ""
+msgstr "Vyberte scénu pro novou událost"
 
 msgid "Program Stages could not be loaded"
-msgstr ""
+msgstr "Program Stages nelze načíst"
 
 msgid "stage"
 msgstr "fáze"
@@ -716,7 +716,7 @@ msgid "Or see all events accessible to you in {{program}}"
 msgstr "Nebo zobrazit všechny události, které máte k dispozici v {{program}}"
 
 msgid "Please select an organisation unit."
-msgstr ""
+msgstr "Vyberte organizační jednotku."
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Chcete-li zahájit vytváření hlášení, vyberte {{missingCategories}}"
@@ -1027,36 +1027,42 @@ msgid "Back to all stages and events"
 msgstr "Zpět ke všem fázím a událostem"
 
 msgid "Schedule date info"
-msgstr ""
+msgstr "Informace o termínu"
 
 msgid ""
 "This date is the the auto-suggested date based on the intervals defined, \n"
 "                    it can be adjusted if needed."
 msgstr ""
+"Toto datum je automaticky navrhované datum na základě definovaných intervalů,\n"
+"                    v případě potřeby lze upravit."
 
 msgid "This date is {{difference}} days {{position}} the auto-suggested date."
 msgstr ""
+"Toto datum je {{difference}} dní {{position}} automaticky navrhované datum."
 
 msgid ""
 "There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
 "this day."
 msgstr ""
+"Na tento den jsou v {{orgUnitName}} naplánované události: "
+"{{eventCountInOrgUnit}}."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
+"Plánování události v {{stageName}} pro {{programName}} v {{orgUnitName}}"
 
 msgid "Schedule info"
-msgstr ""
+msgstr "Informace o rozvrhu"
 
 msgid "Schedule date / Due date"
-msgstr ""
+msgstr "Datum plánu / Datum konce platnosti"
 
 msgid "Event comments"
-msgstr ""
+msgstr "Komentáře k události"
 
 msgid "Write a comment about this scheduled event"
-msgstr ""
+msgstr "Napište komentář k této plánované akci"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Widget profilu nelze načíst. Prosím zkuste to znovu později"
