@@ -17,9 +17,8 @@ import type { Program } from '../../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
-import { buildUrlQueryString } from '../../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
-import { useLocationQuery } from '../../../../utils/routing';
 
 const EmptyPrograms = ({ classes, handleResetOrgUnit }) => {
     const { push } = useHistory();

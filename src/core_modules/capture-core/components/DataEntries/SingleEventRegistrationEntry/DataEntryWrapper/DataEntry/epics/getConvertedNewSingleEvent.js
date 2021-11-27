@@ -54,7 +54,7 @@ export const getAddEventEnrollmentServerData = (state: ReduxState,
 ) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
-    const { teiId, enrollmentId, programId, orgUnitId } = deriveURLParamsFromLocation(history);
+    const { teiId, enrollmentId, programId, orgUnitId } = deriveURLParamsFromLocation();
 
     if (!mainDataServerValues.status) {
         mainDataServerValues.status = completed ? 'ACTIVE' : 'COMPLETED';

@@ -31,7 +31,7 @@ export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore, { 
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
         map(({ payload: { orgUnitId, pageToPush } }) => {
-            const { programId, ...restOfQueries } = deriveUrlQueries(store.value, history);
+            const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
             if (programId) {
                 const programContainsOrgUnitId = programCollection.get(programId)?.organisationUnits[orgUnitId];
@@ -50,7 +50,7 @@ export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore, { hi
         ofType(lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH),
         map(({ payload: batchPayload }) => {
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.ORG_UNIT_ID_RESET);
-            const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value, history);
+            const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value);
 
             history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
             return resetLocationChange();
@@ -60,7 +60,7 @@ export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore, { 
     action$.pipe(
         ofType(lockedSelectorActionTypes.PROGRAM_ID_SET),
         map(({ payload: { programId, pageToPush } }) => {
-            const queries = deriveUrlQueries(store.value, history);
+            const queries = deriveUrlQueries(store.value);
 
             history.push(`/${pageToPush}?${buildUrlQueryString({ ...queries, programId })}`);
             return resetLocationChange();
@@ -71,7 +71,7 @@ export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore, 
         ofType(lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH),
         map(({ payload: batchPayload }) => {
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.PROGRAM_ID_RESET);
-            const { programId, ...restOfQueries } = deriveUrlQueries(store.value, history);
+            const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
             history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
             return resetLocationChange();
@@ -128,7 +128,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable,
             return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
         map(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation(history);
+            const { programId, orgUnitId } = deriveURLParamsFromLocation();
 
             if (programId) {
                 const program = programCollection.get(programId);
@@ -164,7 +164,7 @@ export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStor
     action$.pipe(
         ofType(lockedSelectorActionTypes.TEI_SELECTION_RESET),
         map(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation(history);
+            const { programId, orgUnitId } = deriveURLParamsFromLocation();
 
             history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();
@@ -175,7 +175,7 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
     action$.pipe(
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_SET),
         map(({ payload: { enrollmentId } }) => {
-            const { programId, orgUnitId, teiId } = deriveURLParamsFromLocation(history);
+            const { programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
 
             history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
             return resetLocationChange();
@@ -186,7 +186,7 @@ export const resetEnrollmentSelectionEpic = (action$: InputObservable, _: ReduxS
     action$.pipe(
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET),
         map(() => {
-            const { orgUnitId, programId, teiId } = deriveURLParamsFromLocation(history);
+            const { orgUnitId, programId, teiId } = deriveURLParamsFromLocation();
             history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
             return resetLocationChange();
         }),

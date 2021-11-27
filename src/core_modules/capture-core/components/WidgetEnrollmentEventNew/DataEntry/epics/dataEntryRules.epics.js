@@ -33,7 +33,7 @@ const runRulesForNewEvent = (
 ) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
-    const { programId, stageId } = deriveURLParamsFromLocation(history);
+    const { programId, stageId } = deriveURLParamsFromLocation();
 
     const metadataContainer = getProgramAndStageForProgram(programId, stageId);
 

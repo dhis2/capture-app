@@ -16,10 +16,9 @@ import {
     useOrganisationUnit,
 } from './hooks';
 import { runRulesForEnrollment } from './runRulesForEnrollment';
-import { buildUrlQueryString } from '../../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
-import { useLocationQuery } from '../../../../utils/routing';
 
 
 export const EnrollmentPageDefault = () => {

@@ -13,7 +13,7 @@ export type Url = {
     tab?: string,
 }
 
-export const deriveUrlQueries = (state: Object, history: Object) => {
+export const deriveUrlQueries = (state: Object) => {
     const {
         currentSelections: {
             programId: selectedProgramId,
@@ -27,7 +27,7 @@ export const deriveUrlQueries = (state: Object, history: Object) => {
         trackedEntityTypeId: routerTet,
         teiId,
         enrollmentId,
-    } = deriveURLParamsFromLocation(history);
+    } = deriveURLParamsFromLocation();
 
     const programId = routerProgramId || selectedProgramId;
     const orgUnitId = routerOrgUnitId || selectedOrgUnitId;

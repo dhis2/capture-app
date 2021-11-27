@@ -37,7 +37,7 @@ export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, 
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map(() => {
-            const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromLocation(history);
+            const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
             history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
             return resetLocationChange();
         }));

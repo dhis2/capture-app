@@ -21,7 +21,7 @@ export const openSearchPageLocationChangeEpic = (action$: InputObservable, store
     action$.pipe(
         ofType(lockedSelectorActionTypes.SEARCH_PAGE_OPEN, topBarActionsActionTypes.SEARCH_PAGE_OPEN),
         map(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation(history);
+            const { programId, orgUnitId } = deriveURLParamsFromLocation();
             history.push(`/search?${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();
         }));

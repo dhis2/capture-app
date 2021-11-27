@@ -62,7 +62,7 @@ export const saveEditEventLocationChangeEpic = (action$: InputObservable, _: Red
     action$.pipe(
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromLocation(history);
+            const { programId, orgUnitId } = deriveURLParamsFromLocation();
             history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();
         }));

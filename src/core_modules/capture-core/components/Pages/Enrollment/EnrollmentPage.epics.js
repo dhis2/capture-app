@@ -46,11 +46,11 @@ const fetchTeiStream = (teiId, querySingleResource) =>
             }),
         );
 
-export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_FETCH),
         map(() => {
-            const { enrollmentId, teiId } = deriveURLParamsFromLocation(history);
+            const { enrollmentId, teiId } = deriveURLParamsFromLocation();
 
             if (enrollmentId) {
                 return startFetchingTeiFromEnrollmentId();
@@ -62,11 +62,11 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
         }),
     );
 
-export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
+export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_ENROLLMENT_ID_FETCH),
         flatMap(() => {
-            const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromLocation(history);
+            const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
             if (enrollmentId === 'AUTO') {
                 return of(openEnrollmentPage({
                     programId,
@@ -93,11 +93,11 @@ export const startFetchingTeiFromEnrollmentIdEpic = (action$: InputObservable, s
         }),
     );
 
-export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource, history }: ApiUtils) =>
+export const startFetchingTeiFromTeiIdEpic = (action$: InputObservable, store: ReduxStore, { querySingleResource }: ApiUtils) =>
     action$.pipe(
         ofType(enrollmentPageActionTypes.INFORMATION_USING_TEI_ID_FETCH),
         flatMap(() => {
-            const { teiId } = deriveURLParamsFromLocation(history);
+            const { teiId } = deriveURLParamsFromLocation();
 
             return fetchTeiStream(teiId, querySingleResource);
         }),
@@ -112,7 +112,7 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
                 orgUnitId: queryOrgUnitId,
                 programId: queryProgramId,
                 teiId: queryTeiId,
-            } = deriveURLParamsFromLocation(history);
+            } = deriveURLParamsFromLocation();
             const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
 
             if (!urlCompleted) {

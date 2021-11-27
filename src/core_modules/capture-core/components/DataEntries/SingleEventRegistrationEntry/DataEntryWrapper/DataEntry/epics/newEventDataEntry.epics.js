@@ -46,13 +46,13 @@ const errorMessages = {
 };
 
 
-export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH),
         map(() => {
             const state = store.value;
             const programId = state.currentSelections.programId;
-            const { stageId: programStageId } = deriveURLParamsFromLocation(history);
+            const { stageId: programStageId } = deriveURLParamsFromLocation();
 
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
@@ -75,7 +75,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
         }));
 
 
-export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN,
@@ -105,7 +105,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                 return cancelOpenNewEventInDataEntry();
             }
             const programId = state.currentSelections.programId;
-            const { stageId: programStageId } = deriveURLParamsFromLocation(history);
+            const { stageId: programStageId } = deriveURLParamsFromLocation();
 
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
@@ -182,7 +182,7 @@ const runRulesForNewSingleEvent = (
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const programId = state.currentSelections.programId;
-    const { stageId } = deriveURLParamsFromLocation(history);
+    const { stageId } = deriveURLParamsFromLocation();
 
     const metadataContainer = getProgramAndStageForProgram(programId, stageId);
 

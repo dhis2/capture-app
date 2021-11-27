@@ -10,7 +10,7 @@ export const openNewRegistrationPageFromLockedSelectorEpic = (action$: InputObse
     action$.pipe(
         ofType(lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN, topBarActionsActionTypes.NEW_REGISTRATION_PAGE_OPEN),
         map(() => {
-            const { orgUnitId, programId } = deriveURLParamsFromLocation(history);
+            const { orgUnitId, programId } = deriveURLParamsFromLocation();
             history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();
         }));

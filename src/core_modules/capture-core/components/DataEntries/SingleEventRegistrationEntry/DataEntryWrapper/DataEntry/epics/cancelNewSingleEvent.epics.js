@@ -45,7 +45,7 @@ export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store
         ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
             const { pathname } = history.location;
-            const { enrollmentId, programId, orgUnitId } = deriveURLParamsFromLocation(history);
+            const { enrollmentId, programId, orgUnitId } = deriveURLParamsFromLocation();
 
             if (pathname === '/enrollmentEventNew') {
                 history.push(`/enrollment${buildUrlQueryString({ enrollmentId })}`);

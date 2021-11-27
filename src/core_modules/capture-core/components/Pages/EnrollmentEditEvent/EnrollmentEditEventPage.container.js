@@ -10,13 +10,12 @@ import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
 import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
-import { buildUrlQueryString } from '../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { getScopeInfo } from '../../../metaData';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
-import { useLocationQuery } from '../../../utils/routing';
 
 export const EnrollmentEditEventPage = () => {
     const history = useHistory();

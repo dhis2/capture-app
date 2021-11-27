@@ -45,7 +45,7 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         const {
             programId: queryProgramId,
             trackedEntityTypeId: queryTrackedEntityTypeId,
-        } = deriveURLParamsFromLocation(history);
+        } = deriveURLParamsFromLocation();
 
         const instanceBaseUrl = baseUrl.split('/api')[0];
         const scopeHierarchy = queryProgramId ? scopeHierarchyTypes.PROGRAM : scopeHierarchyTypes.TRACKED_ENTITY_TYPE;
