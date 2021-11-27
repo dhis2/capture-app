@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-11-24T08:26:37.113Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Thuy Nguyen <thuynguyen@hispvietnam.org>, 2021\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
@@ -946,14 +946,14 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr ""
 
+msgid "Set coordinate"
+msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
+
 msgid "Latitude"
 msgstr "ເສັ້ນແວ້ງ"
 
 msgid "Longitude"
 msgstr "ເສັ້ນຂະໜານ"
-
-msgid "Set coordinate"
-msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
 
 msgid "Page {{currentPage}}"
 msgstr ""

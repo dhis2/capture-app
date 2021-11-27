@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-11-24T08:26:37.113Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -981,14 +981,14 @@ msgstr "Feil ved lagring av registrering"
 msgid "tracked entity instance"
 msgstr "Sporet enhetforekomst"
 
+msgid "Set coordinate"
+msgstr "Sett koordinater"
+
 msgid "Latitude"
 msgstr "Breddegrad"
 
 msgid "Longitude"
 msgstr "Lengdegrad"
-
-msgid "Set coordinate"
-msgstr "Sett koordinater"
 
 msgid "Page {{currentPage}}"
 msgstr "Side {{currentPage}}"

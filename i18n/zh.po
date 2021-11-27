@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-11-24T08:26:37.113Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -950,14 +950,14 @@ msgstr "保存注册时出错"
 msgid "tracked entity instance"
 msgstr "跟踪的实体实例"
 
+msgid "Set coordinate"
+msgstr "设置坐标"
+
 msgid "Latitude"
 msgstr "维度"
 
 msgid "Longitude"
 msgstr "经度"
-
-msgid "Set coordinate"
-msgstr "设置坐标"
 
 msgid "Page {{currentPage}}"
 msgstr "第{{currentPage}}页"

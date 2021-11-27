@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-11-24T08:26:37.113Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
@@ -976,14 +976,14 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr "Элемент отслеживаемого объекта"
 
+msgid "Set coordinate"
+msgstr "Задать координату"
+
 msgid "Latitude"
 msgstr "Широта"
 
 msgid "Longitude"
 msgstr "Долгота"
-
-msgid "Set coordinate"
-msgstr "Задать координату"
 
 msgid "Page {{currentPage}}"
 msgstr "Страница {{currentPage}}"

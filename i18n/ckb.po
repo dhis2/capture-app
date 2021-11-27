@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-04-30T12:14:22.957Z\n"
+"POT-Creation-Date: 2021-11-24T08:26:37.113Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -963,14 +963,14 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr "نمونەی یەکەی بەدواداچوون"
 
+msgid "Set coordinate"
+msgstr "هێڵی درێژی و پانی دیاریبکە"
+
 msgid "Latitude"
 msgstr ""
 
 msgid "Longitude"
 msgstr ""
-
-msgid "Set coordinate"
-msgstr "هێڵی درێژی و پانی دیاریبکە"
 
 msgid "Page {{currentPage}}"
 msgstr ""
