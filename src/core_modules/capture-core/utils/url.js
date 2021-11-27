@@ -1,6 +1,6 @@
 // @flow
 import { pageKeys } from '../components/App/withAppUrlSync';
-import { deriveURLParamsFromHistory } from './routing';
+import { deriveURLParamsFromLocation } from './routing';
 
 export type Url = {
     programId?: string,
@@ -27,7 +27,7 @@ export const deriveUrlQueries = (state: Object, history: Object) => {
         trackedEntityTypeId: routerTet,
         teiId,
         enrollmentId,
-    } = deriveURLParamsFromHistory(history);
+    } = deriveURLParamsFromLocation(history);
 
     const programId = routerProgramId || selectedProgramId;
     const orgUnitId = routerOrgUnitId || selectedOrgUnitId;

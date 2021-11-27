@@ -39,7 +39,7 @@ import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
-import { deriveURLParamsFromHistory } from '../../../../../../utils/routing';
+import { deriveURLParamsFromLocation } from '../../../../../../utils/routing';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
@@ -52,7 +52,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
         map(() => {
             const state = store.value;
             const programId = state.currentSelections.programId;
-            const { stageId: programStageId } = deriveURLParamsFromHistory(history);
+            const { stageId: programStageId } = deriveURLParamsFromLocation(history);
 
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
@@ -105,7 +105,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                 return cancelOpenNewEventInDataEntry();
             }
             const programId = state.currentSelections.programId;
-            const { stageId: programStageId } = deriveURLParamsFromHistory(history);
+            const { stageId: programStageId } = deriveURLParamsFromLocation(history);
 
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
@@ -182,7 +182,7 @@ const runRulesForNewSingleEvent = (
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const programId = state.currentSelections.programId;
-    const { stageId } = deriveURLParamsFromHistory(history);
+    const { stageId } = deriveURLParamsFromLocation(history);
 
     const metadataContainer = getProgramAndStageForProgram(programId, stageId);
 

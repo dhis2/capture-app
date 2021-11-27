@@ -10,7 +10,7 @@ import {
     showMessageToSelectProgramCategoryOnNewPage,
 } from './NewPage.actions';
 import { typeof newPageStatuses } from './NewPage.constants';
-import { buildUrlQueryString } from '../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
@@ -42,6 +42,7 @@ const useUserWriteAccess = (scopeId) => {
 export const NewPage: ComponentType<{||}> = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { orgUnitId: queryOrgUnitId } = useLocationQuery();
 
     const dispatchShowMessageToSelectOrgUnitOnNewPage = useCallback(
         () => { dispatch(showMessageToSelectOrgUnitOnNewPage()); },
@@ -68,8 +69,7 @@ export const NewPage: ComponentType<{||}> = () => {
     // the selection is incomplete we want the user to see a specific message
     const { missingCategories, programSelectionIsIncomplete } = useMissingCategoriesInProgramSelection();
 
-    const orgUnitSelectionIncomplete: boolean =
-      useSelector(({ currentSelections: { orgUnitId, complete }, router: { location: { query } } }) => !(query.orgUnitId || orgUnitId) && !complete);
+    const orgUnitSelectionIncomplete: boolean = useSelector(({ currentSelections: { orgUnitId, complete } }) => !(queryOrgUnitId || orgUnitId) && !complete);
 
     const newPageStatus: $Keys<newPageStatuses> =
         useSelector(({ newPage }) => newPage.newPageStatus);

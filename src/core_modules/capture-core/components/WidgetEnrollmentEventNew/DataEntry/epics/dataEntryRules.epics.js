@@ -19,7 +19,7 @@ import type {
     FieldData,
 } from '../../../../rules/actionsCreator';
 import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../../common.types';
-import { deriveURLParamsFromHistory } from '../../../../utils/routing';
+import { deriveURLParamsFromLocation } from '../../../../utils/routing';
 
 const runRulesForNewEvent = (
     store: ReduxStore,
@@ -33,7 +33,7 @@ const runRulesForNewEvent = (
 ) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
-    const { programId, stageId } = deriveURLParamsFromHistory(history);
+    const { programId, stageId } = deriveURLParamsFromLocation(history);
 
     const metadataContainer = getProgramAndStageForProgram(programId, stageId);
 

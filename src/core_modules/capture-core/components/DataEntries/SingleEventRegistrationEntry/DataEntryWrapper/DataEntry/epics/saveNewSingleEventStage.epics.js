@@ -1,7 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { map, switchMap } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
+import { map } from 'rxjs/operators';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAndReturnToList,
@@ -14,8 +13,8 @@ import {
 import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
-import { deriveURLParamsFromHistory } from '../../../../../../utils/routing';
-import { urlArguments } from '../../../../../../utils/url';
+import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../../../utils/routing';
+import { resetLocationChange } from '../../../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
@@ -37,10 +36,10 @@ export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStor
 export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
-        switchMap(() => {
-            const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromHistory(history);
-            history.push(`/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`);
-            return EMPTY;
+        map(() => {
+            const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromLocation(history);
+            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+            return resetLocationChange();
         }));
 
 

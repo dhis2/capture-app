@@ -1,18 +1,18 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { switchMap } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { trackedEntityTypeSelectorActionTypes } from './TrackedEntityTypeSelector.actions';
 import { buildUrlQueryString } from '../../utils/routing';
+import { resetLocationChange } from '../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(trackedEntityTypeSelectorActionTypes.TRACKED_ENTITY_TYPE_ID_ON_URL_SET),
-        switchMap(({ payload: { trackedEntityTypeId } }) => {
+        map(({ payload: { trackedEntityTypeId } }) => {
             const { currentSelections: { orgUnitId }, app: { page: currentPage } } = store.value;
 
             history.push(`/${currentPage}?${buildUrlQueryString({ trackedEntityTypeId, orgUnitId })}`);
-            return EMPTY;
+            return resetLocationChange();
         }),
     );
 

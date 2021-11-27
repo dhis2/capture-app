@@ -1,7 +1,7 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { catchError, flatMap, map, startWith, switchMap } from 'rxjs/operators';
-import { concat, empty, from, of, EMPTY } from 'rxjs';
+import { catchError, flatMap, map, startWith } from 'rxjs/operators';
+import { concat, empty, from, of } from 'rxjs';
 import {
     searchPageActionTypes,
     fallbackPushPage,
@@ -29,6 +29,7 @@ import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { dataElementConvertFunctions } from './SearchFormElementConverter/SearchFormElementConverter';
+import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
@@ -277,8 +278,8 @@ export const fallbackSearchEpic: Epic = (action$: InputObservable) =>
 export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED),
-        switchMap(({ payload: { orgUnitId, trackedEntityTypeId } }) => {
+        map(({ payload: { orgUnitId, trackedEntityTypeId } }) => {
             history.push(`/search?${buildUrlQueryString({ orgUnitId, trackedEntityTypeId })}`);
-            return EMPTY;
+            return resetLocationChange();
         }),
     );

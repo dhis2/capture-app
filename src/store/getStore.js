@@ -40,7 +40,7 @@ export function getStore(
     });
 
     const epicMiddleware = createEpicMiddleware({
-        dependencies: { history, ...apiUtils },
+        dependencies: { ...apiUtils, history },
     });
 
     const middleware = [epicMiddleware, offlineMiddleware];

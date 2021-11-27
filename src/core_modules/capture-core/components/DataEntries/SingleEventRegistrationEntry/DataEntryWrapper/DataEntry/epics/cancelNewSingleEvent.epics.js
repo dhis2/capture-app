@@ -1,7 +1,6 @@
 // @flow
-import { EMPTY } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import {
     actionTypes as newEventDataEntryActionTypes,
     cancelNewEventNoWorkingListUpdateNeeded,
@@ -10,8 +9,8 @@ import {
 } from '../actions/dataEntry.actions';
 
 import { isSelectionsEqual } from '../../../../../App/isSelectionsEqual';
-import { deriveURLParamsFromHistory } from '../../../../../../utils/routing';
-import { urlArguments } from '../../../../../../utils/url';
+import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../../../utils/routing';
+import { resetLocationChange } from '../../../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -44,14 +43,14 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
 export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
-        switchMap(() => {
+        map(() => {
             const { pathname } = history.location;
-            const { enrollmentId, programId, orgUnitId } = deriveURLParamsFromHistory(history);
+            const { enrollmentId, programId, orgUnitId } = deriveURLParamsFromLocation(history);
 
             if (pathname === '/enrollmentEventNew') {
-                history.push(`/enrollment${urlArguments({ enrollmentId })}`);
-                return EMPTY;
+                history.push(`/enrollment${buildUrlQueryString({ enrollmentId })}`);
+                return resetLocationChange();
             }
-            history.push(`/?${urlArguments({ programId, orgUnitId })}`);
-            return EMPTY;
+            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            return resetLocationChange();
         }));

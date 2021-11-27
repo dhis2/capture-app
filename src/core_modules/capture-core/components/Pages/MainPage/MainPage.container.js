@@ -7,9 +7,8 @@ import { programCollection } from 'capture-core/metaDataMemoryStores/programColl
 import { MainPageComponent } from './MainPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
-import { buildUrlQueryString } from '../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
-import { useLocationQuery } from '../../../utils/routing';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
@@ -19,7 +18,6 @@ const mapStateToProps = (state: ReduxState) => ({
 const MainPageContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-
     const { all } = useLocationQuery();
     const showAllAccessible = all !== undefined;
 

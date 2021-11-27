@@ -3,8 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import i18n from '@dhis2/d2-i18n';
-import { useLocationQuery } from '../../../utils/routing';
+import { useLocationQuery, buildUrlQueryString } from '../../../utils/routing';
 import { addEnrollmentEventPageActionTypes } from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
@@ -14,7 +13,6 @@ import { useWidgetDataFromStore } from './hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
-import { urlArguments } from '../../../utils/url';
 
 export const EnrollmentAddEventPage = () => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
@@ -23,7 +21,7 @@ export const EnrollmentAddEventPage = () => {
 
     const navigateToEnrollmentPage = useCallback(() =>
         history.push(
-            `/enrollment?${urlArguments({ programId, orgUnitId, teiId, enrollmentId })}`,
+            `/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`,
         ), [enrollmentId, history, orgUnitId, programId, teiId]);
 
     const handleCancel = useCallback(() => {

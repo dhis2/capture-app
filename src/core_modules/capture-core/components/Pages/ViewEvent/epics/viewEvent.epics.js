@@ -1,7 +1,6 @@
 // @flow
 import log from 'loglevel';
 import { ofType } from 'redux-observable';
-import { EMPTY } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -28,6 +27,7 @@ import {
 } from '../../NewRelationship/newRelationship.actions';
 import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
+import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -101,9 +101,9 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
 export const openViewPageLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN),
-        switchMap(({ payload: { eventId } }) => {
+        map(({ payload: { eventId } }) => {
             history.push(`/viewEvent?viewEventId=${eventId}`);
-            return EMPTY;
+            return resetLocationChange();
         }));
 
 export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -140,7 +140,7 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
 export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
-        switchMap(() => {
+        map(() => {
             // TODO - This should probably be replaced by URL args
             const state = store.value;
             const programId = state.currentSelections.programId;
@@ -149,10 +149,10 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
             // const { programId, orgUnitId, showaccessible } = deriveURLParamsFromHistory(history);
             if (showaccessible && !orgUnitId) {
                 history.push(`/?programId=${programId}&all`);
-                return EMPTY;
+                return resetLocationChange();
             }
             history.push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
-            return EMPTY;
+            return resetLocationChange();
         }));
 
 export const openAddRelationshipForViewEventEpic = (action$: InputObservable) =>

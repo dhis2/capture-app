@@ -1,7 +1,6 @@
 // @flow
-import { EMPTY } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import {
@@ -13,8 +12,8 @@ import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { convertDataEntryToClientValues } from '../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../events/mainConverters';
-import { deriveURLParamsFromHistory } from '../../../../utils/routing';
-import { urlArguments } from '../../../../utils/url';
+import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../utils/routing';
+import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -62,8 +61,8 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
 export const saveEditEventLocationChangeEpic = (action$: InputObservable, _: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
-        switchMap(() => {
-            const { programId, orgUnitId } = deriveURLParamsFromHistory(history);
-            history.push(`/?${urlArguments({ programId, orgUnitId })}`);
-            return EMPTY;
+        map(() => {
+            const { programId, orgUnitId } = deriveURLParamsFromLocation(history);
+            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            return resetLocationChange();
         }));

@@ -1,4 +1,4 @@
 // @flow
 export { useLocationQuery } from './useLocationQuery';
-export { deriveURLParamsFromHistory } from './deriveURLParamsFromHistory';
+export { deriveURLParamsFromLocation } from './deriveURLParamsFromLocation';
 export { buildUrlQueryString } from './buildUrlQueryString';
