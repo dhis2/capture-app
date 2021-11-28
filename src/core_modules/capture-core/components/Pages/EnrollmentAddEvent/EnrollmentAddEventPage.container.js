@@ -1,10 +1,10 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
+import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { useLocationQuery, buildUrlQueryString } from '../../../utils/routing';
-import { addEnrollmentEventPageActionTypes } from './enrollmentAddEventPage.actions';
+import { useLocationQuery } from '../../../utils/routing';
+import { navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
@@ -16,30 +16,26 @@ import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/c
 
 export const EnrollmentAddEventPage = () => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
-    const history = useHistory();
     const dispatch = useDispatch();
 
-    const navigateToEnrollmentPage = useCallback(() =>
-        history.push(
-            `/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`,
-        ), [enrollmentId, history, orgUnitId, programId, teiId]);
-
     const handleCancel = useCallback(() => {
-        navigateToEnrollmentPage();
-    }, [navigateToEnrollmentPage]);
+        dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
+    }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
         (data, uid) => {
             dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
-            navigateToEnrollmentPage();
+            dispatch(navigateToEnrollmentPage(programId, orgUnitId, teiId, enrollmentId));
         },
-        [dispatch, navigateToEnrollmentPage],
+        [dispatch, programId, orgUnitId, teiId, enrollmentId],
     );
 
     const handleDelete = useCallback(() => {
-        dispatch(deleteEnrollment({ enrollmentId }));
-        navigateToEnrollmentPage();
-    }, [dispatch, enrollmentId, navigateToEnrollmentPage]);
+        dispatch(batchActions([
+            deleteEnrollment({ enrollmentId }),
+            navigateToEnrollmentPage(programId, orgUnitId, teiId),
+        ]));
+    }, [dispatch, programId, orgUnitId, teiId, enrollmentId]);
 
     const widgetReducerName = 'enrollmentEvent-newEvent';
 
@@ -112,8 +108,6 @@ export const EnrollmentAddEventPage = () => {
                 teiId={teiId}
                 enrollmentId={enrollmentId}
                 onSave={handleSave}
-                onSaveSuccessActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS}
-                onSaveErrorActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR}
                 onCancel={handleCancel}
                 onDelete={handleDelete}
                 widgetEffects={outputEffects}

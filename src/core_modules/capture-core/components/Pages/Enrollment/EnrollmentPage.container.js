@@ -77,7 +77,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     useComponentLifecycle();
 
     const dispatch = useDispatch();
-    const { programId, orgUnitId, enrollmentId } = useLocationQuery();
+    const { programId, orgUnitId, enrollmentId, teiId } = useLocationQuery();
     const { tetId, enrollments, teiDisplayName } = useSelector(({ enrollmentPage }) => enrollmentPage);
     const { trackedEntityName } = getScopeInfo(tetId);
     const enrollmentsAsOptions = buildEnrollmentsAsOptions(enrollments, programId);
@@ -87,6 +87,7 @@ export const EnrollmentPage: ComponentType<{||}> = () => {
     },
     [
         dispatch,
+        teiId,
     ]);
 
     const error: boolean =

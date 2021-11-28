@@ -1,3 +1,24 @@
+## [1.62.1](https://github.com/dhis2/capture-app/compare/v1.62.0...v1.62.1) (2021-11-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1c39027](https://github.com/dhis2/capture-app/commit/1c3902746326aede4df48062ece31be43816a4fd))
+
+# [1.62.0](https://github.com/dhis2/capture-app/compare/v1.61.3...v1.62.0) (2021-11-26)
+
+
+### Features
+
+* [DHIS2-11864] Schedule event using redux ([#2216](https://github.com/dhis2/capture-app/issues/2216)) ([cf049b4](https://github.com/dhis2/capture-app/commit/cf049b4e12ea316b3b5d6ee1cc5c913813b87550)), closes [#2211](https://github.com/dhis2/capture-app/issues/2211)
+
+## [1.61.3](https://github.com/dhis2/capture-app/compare/v1.61.2...v1.61.3) (2021-11-26)
+
+
+### Bug Fixes
+
+* [DHIS2-12134] fetching logic in common enrollment hook ([fe82c00](https://github.com/dhis2/capture-app/commit/fe82c00308e2dab74c23488038de6c2d32007d3d))
+
 ## [1.61.2](https://github.com/dhis2/capture-app/compare/v1.61.1...v1.61.2) (2021-11-17)
 
 
