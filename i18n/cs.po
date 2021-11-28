@@ -603,7 +603,7 @@ msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Zápis s ID \"{{enrollmentId}}\" neexistuje"
 
 msgid "Enrollment Dashboard"
-msgstr ""
+msgstr "Ovládací panel zápisu"
 
 msgid "No indicator output for this enrollment yet"
 msgstr "Pro tento zápis zatím neexistuje žádný indikátorový výstup"
@@ -698,7 +698,7 @@ msgid "Or see all events accessible to you in {{program}}"
 msgstr "Nebo zobrazit všechny události, které máte k dispozici v {{program}}"
 
 msgid "Please select an organisation unit."
-msgstr ""
+msgstr "Vyberte organizační jednotku."
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Chcete-li zahájit vytváření hlášení, vyberte {{missingCategories}}"
@@ -982,7 +982,7 @@ msgid "This enrollment doesn't have any comments"
 msgstr "Tento zápis nemá žádné komentáře"
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Ukládání do {{stageName}} pro {{programName}} v {{orgUnitName}}"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organizační jednotku nelze načíst. Zkuste to znovu později."

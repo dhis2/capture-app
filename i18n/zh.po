@@ -593,7 +593,7 @@ msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "ID 为“{{enrollmentId}}”的注册不存在"
 
 msgid "Enrollment Dashboard"
-msgstr ""
+msgstr "注册仪表板"
 
 msgid "No indicator output for this enrollment yet"
 msgstr "此注册尚无指标输出"
@@ -683,7 +683,7 @@ msgid "Or see all events accessible to you in {{program}}"
 msgstr "或者在{{program}}中查看您可以访问的所有事件"
 
 msgid "Please select an organisation unit."
-msgstr ""
+msgstr "请选择一个组织单位。"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
@@ -953,7 +953,7 @@ msgid "This enrollment doesn't have any comments"
 msgstr "本次注册没有任何评论"
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "为 {{orgUnitName}} 中的 {{programName}} 保存到 {{stageName}}"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "无法检索组织机构。请稍后再试。"
