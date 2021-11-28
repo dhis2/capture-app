@@ -137,8 +137,11 @@ export const LockedSelector: ComponentType<OwnProps> =
           },
           [pageToPush, customActionsOnProgramIdReset, dispatch]);
 
-      const { orgUnitId: selectedOrgUnitId, programId: selectedProgramId } = useLocationQuery();
-
+      const { orgUnitId: urlOrgUnit, programId: urlProgramId } = useLocationQuery();
+      const { orgUnitId, programId } = useSelector(({ currentSelections }) => ({
+          orgUnitId: urlOrgUnit || currentSelections.orgUnitId,
+          programId: urlProgramId || currentSelections.programId,
+      }));
 
       const lockedSelectorLoads: string =
         useSelector(({ activePage }) => activePage.lockedSelectorLoads);
@@ -147,7 +150,7 @@ export const LockedSelector: ComponentType<OwnProps> =
       const organisationUnits: Object =
         useSelector(({ organisationUnits: orgUnits }) => orgUnits);
 
-      const ready = deriveReadiness(lockedSelectorLoads, selectedOrgUnitId, organisationUnits);
+      const ready = deriveReadiness(lockedSelectorLoads, orgUnitId, organisationUnits);
 
       useComponentLifecycle();
 
@@ -165,8 +168,8 @@ export const LockedSelector: ComponentType<OwnProps> =
               onSetCategoryOption={dispatchOnSetCategoryOption}
               onSetProgramId={dispatchOnSetProgramId}
               onSetOrgUnit={dispatchOnSetOrgUnit}
-              selectedOrgUnitId={selectedOrgUnitId}
-              selectedProgramId={selectedProgramId}
+              selectedOrgUnitId={orgUnitId}
+              selectedProgramId={programId}
               isUserInteractionInProgress={isUserInteractionInProgress}
               ready={ready}
           />

@@ -8,6 +8,7 @@ import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import { type RenderFoundation } from '../../../../../metaData';
 import { SimpleSplitButton, Button } from '../../../../Buttons';
 import { getDataEntryHasChanges } from '../../getNewEventDataEntryHasChanges';
+import { getLocationPathname } from '../../../../../utils/url';
 
 type Props = {
     onSave: (saveType: $Values<typeof newEventSaveTypes>) => void,
@@ -164,7 +165,7 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     const key = getDataEntryKey(props.id, itemId);
     const dataEntryHasChanges = getDataEntryHasChanges(state);
     const hasRecentlyAddedEvents = state.recentlyAddedEvents && Object.keys(state.recentlyAddedEvents).length > 0;
-    const isCreateNew = state.router.location.pathname === '/enrollmentEventNew';
+    const isCreateNew = getLocationPathname() === '/enrollmentEventNew';
     return {
         saveTypes: state.newEventPage.saveTypes,
         finalInProgress: state.dataEntriesUI[key] && state.dataEntriesUI[key].finalInProgress,
