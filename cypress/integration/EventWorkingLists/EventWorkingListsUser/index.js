@@ -123,6 +123,9 @@ Then('your newly defined sharing settings should still be present', () => {
                     externalAccess: false,
                 },
             });
+        });
+});
+
 Given('you open the main page with Ngelehun and Inpatient morbidity and mortality context', () => {
     cy.visit('#/?programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8');
 });
