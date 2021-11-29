@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { FlatList } from 'capture-ui';
@@ -9,17 +9,19 @@ import { Widget } from '../Widget';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { convertValue as convertClientToView } from '../../converters/clientToView';
 import { convertValue as convertServerToClient } from '../../converters/serverToClient';
+import { subValueGetterByElementType } from './getSubValueForTei';
 import type { Props } from './widgetProfile.types';
 
 export const WidgetProfile = ({ teiId, programId }: Props) => {
     const [open, setOpenStatus] = useState(true);
+    const [listAttributes, setListAttributes] = useState([]);
     const programsQuery = useMemo(() => ({
         programs: {
             resource: 'programs',
             id: programId,
             params: {
                 fields:
-                ['programTrackedEntityAttributes[id,displayInList,trackedEntityAttribute[id,displayName,valueType]]'],
+                ['programTrackedEntityAttributes[id,displayInList,trackedEntityAttribute[id,displayName,valueType,optionSet[id,options[code,name]]]'],
             },
         },
     }), [programId]);
@@ -54,25 +56,46 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
         return convertClientToView(convertToClientValue, valueType);
     };
 
-    const mergeAttributes = () => {
-        const { programs: { programTrackedEntityAttributes } } = programsData;
-        const { trackedEntityInstances: { attributes } } = trackedEntityInstancesData;
 
-        return programTrackedEntityAttributes
-            .filter(item => item.displayInList)
-            .reduce((acc, curr) => {
-                const foundAttribute = attributes
-                    .find(item => item.attribute === curr.trackedEntityAttribute.id);
+    useEffect(() => {
+        const getListAttributes = async () => {
+            if (programsData && trackedEntityInstancesData) {
+                const { programs: { programTrackedEntityAttributes } } = programsData;
+                const { trackedEntityInstances: { attributes } } = trackedEntityInstancesData;
 
-                acc.push({
-                    reactKey: curr.trackedEntityAttribute.id,
-                    key: curr.trackedEntityAttribute.displayName,
-                    value: formatValue(foundAttribute?.value, foundAttribute?.valueType),
-                });
+                setListAttributes(
+                    await programTrackedEntityAttributes
+                        .filter(item => item.displayInList)
+                        .reduce(async (promisedAcc, { trackedEntityAttribute: { id, displayName, optionSet } }) => {
+                            const foundAttribute = attributes
+                                .find(item => item.attribute === id);
+                            let value;
+                            if (foundAttribute) {
+                                if (optionSet && optionSet.id) {
+                                    const selectedOption = optionSet.options.find(option => option.code === foundAttribute.value);
+                                    value = selectedOption && selectedOption.name;
+                                } else if (subValueGetterByElementType[foundAttribute.valueType]) {
+                                    value = await subValueGetterByElementType[foundAttribute.valueType](foundAttribute.value);
+                                } else {
+                                    value = formatValue(foundAttribute.value, foundAttribute.valueType);
+                                }
+                            }
 
-                return acc;
-            }, []);
-    };
+                            const acc = await promisedAcc;
+
+                            return [...acc, {
+                                reactKey: id,
+                                key: displayName,
+                                value,
+                            }];
+                        }, Promise.resolve([])),
+                );
+            }
+        };
+
+        getListAttributes();
+    }, [programsData, trackedEntityInstancesData]);
+
 
     const renderProfile = () => {
         if (loading) {
@@ -86,7 +109,7 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
 
         return (<FlatList
             dataTest="profile-widget-flatlist"
-            list={mergeAttributes()}
+            list={listAttributes}
         />);
     };
 
