@@ -221,6 +221,9 @@ import {
     saveNewEnrollmentEventEpic,
     addNoteForNewEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
+import {
+    scheduleNewEnrollmentEventEpic,
+} from '../core_modules/capture-core/components/WidgetEventSchedule';
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -356,4 +359,5 @@ export const epics = combineEpics(
     addNoteForNewEnrollmentEventEpic,
     addNoteForEnrollmentEpic,
     navigateToEnrollmentOverviewEpic,
+    scheduleNewEnrollmentEventEpic,
 );

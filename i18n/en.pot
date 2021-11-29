@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-11-17T15:55:40.649Z\n"
-"PO-Revision-Date: 2021-11-17T15:55:40.649Z\n"
+"POT-Creation-Date: 2021-11-29T08:49:07.532Z\n"
+"PO-Revision-Date: 2021-11-29T08:49:07.532Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -128,11 +128,8 @@ msgstr "Enrollment"
 msgid "A future date is not allowed"
 msgstr "A future date is not allowed"
 
-msgid "Saving a {{trackedEntityName}} in"
-msgstr "Saving a {{trackedEntityName}} in"
-
-msgid "in"
-msgstr "in"
+msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
+msgstr "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -161,11 +158,11 @@ msgstr "Relationships"
 msgid "Assignee"
 msgstr "Assignee"
 
-msgid "Saving to"
-msgstr "Saving to"
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 
-msgid "for"
-msgstr "for"
+msgid "Saving to {{programName}} in {{orgUnitName}}"
+msgstr "Saving to {{programName}} in {{orgUnitName}}"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -268,6 +265,9 @@ msgstr "without"
 
 msgid "enrollment"
 msgstr "enrollment"
+
+msgid "in"
+msgstr "in"
 
 msgid "Enroll in a program by selecting a program from the top bar."
 msgstr "Enroll in a program by selecting a program from the top bar."
@@ -984,9 +984,6 @@ msgstr "Write a comment about this enrollment"
 msgid "This enrollment doesn't have any comments"
 msgstr "This enrollment doesn't have any comments"
 
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
 
@@ -1033,6 +1030,9 @@ msgid ""
 msgstr ""
 "There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
 "this day."
+
+msgid "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 
 msgid "Schedule info"
 msgstr "Schedule info"
