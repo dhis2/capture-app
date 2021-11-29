@@ -44,6 +44,26 @@ const TemplateMaintenance = (props: Props, ref) => {
         ...passOnProps
     } = props;
 
+    const handleTemplateHandler = React.useCallback(() => {
+        onUpdateTemplate(currentTemplate, {
+            filters,
+            sortById,
+            sortByDirection,
+            columnOrder,
+            defaultConfig,
+            listId,
+        });
+    }, [
+        onUpdateTemplate,
+        currentTemplate,
+        filters,
+        sortById,
+        sortByDirection,
+        columnOrder,
+        defaultConfig,
+        listId,
+    ]);
+
     const handleUpdateTemplate = useCallback(() => {
         onUpdateTemplate(currentTemplate, {
             filters,
@@ -90,7 +110,7 @@ const TemplateMaintenance = (props: Props, ref) => {
             <NewTemplateDialog
                 {...passOnProps}
                 open={mode === dialogModes.NEW}
-                onSaveTemplate={onAddTemplate}
+                onSaveTemplate={handleTemplateHandler}
             />
             <DeleteConfirmationDialog
                 {...passOnProps}
