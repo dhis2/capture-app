@@ -12,7 +12,10 @@ import {
 
 export const saveNewEventSucceededEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS),
+        ofType(
+            addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS,
+            addEnrollmentEventPageActionTypes.EVENT_SCHEDULE_SUCCESS,
+        ),
         map((action) => {
             const meta = action.meta;
             const eventId = action.payload.response.importSummaries[0].reference;
@@ -22,7 +25,10 @@ export const saveNewEventSucceededEpic = (action$: InputObservable) =>
 
 export const saveNewEventFailedEpic = (action$: InputObservable) =>
     action$.pipe(
-        ofType(addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR),
+        ofType(
+            addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR,
+            addEnrollmentEventPageActionTypes.EVENT_SCHEDULE_ERROR,
+        ),
         map((action) => {
             const meta = action.meta;
             return batchActions([saveFailed(), rollbackEnrollmentEventWithoutId(meta.uid)]);

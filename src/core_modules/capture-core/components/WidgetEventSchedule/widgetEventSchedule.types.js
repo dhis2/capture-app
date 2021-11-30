@@ -9,6 +9,10 @@ export type ContainerProps = {|
    orgUnitId: string,
    teiId: string,
    enrollmentId: string,
+   onSave: (eventServerValues: Object, uid: string) => void,
+   onSaveSuccessActionType: string,
+   onSaveErrorActionType: string,
+   onCancel: () => void,
 |};
 
 export type Props = {|
@@ -23,8 +27,10 @@ export type Props = {|
    scheduleDate?: ?string,
    suggestedScheduleDate?: ?string,
    eventCountInOrgUnit: number,
-   onSchedule: () => Promise<void>,
+   comments: Array<{value: string}>,
+   onSchedule: () => void,
+   onCancel: () => void,
    setScheduleDate: (date: string) => void,
-   onAddComment: () => void,
+   onAddComment: (comment: string) => void,
    ...CssClasses
 |};
