@@ -609,7 +609,7 @@ msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Registrering med ID-en \"{{enrollmentId}}\" eksisterer ikke"
 
 msgid "Enrollment Dashboard"
-msgstr ""
+msgstr "Registreringsdashbord"
 
 msgid "No indicator output for this enrollment yet"
 msgstr "Ingen indikatorresultat for denne registreringen enda"
@@ -704,7 +704,7 @@ msgid "Or see all events accessible to you in {{program}}"
 msgstr "Eller se alle hendelser som er tilgjengelige for deg i {{program}}"
 
 msgid "Please select an organisation unit."
-msgstr ""
+msgstr "Vennligst velg en organisasjonsenhet"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Velg {{missingCategories}} for å starte rapportering"
@@ -986,7 +986,7 @@ msgid "This enrollment doesn't have any comments"
 msgstr "Denne registreringen har ingen kommentarer"
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Lagrer i {{stageName}} for {{programName}} i {{orgUnitName}}"
 
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisasjonsenheten kunne ikke hentes. Prøv igjen senere."
