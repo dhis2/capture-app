@@ -7,7 +7,7 @@ import {
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
-import { pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
+import { getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
 
 type CurrentSelectionsState = {
     programId?: ?string,
@@ -34,7 +34,7 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
     return true;
 };
 
-export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.PROGRAM_ID_SET,
@@ -45,7 +45,7 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
             crossPageActionTypes.UPDATE_SHOW_ACCESSIBLE_STATUS,
         ),
         filter(() => {
-            const { pathname } = history.location;
+            const pathname = getLocationPathname();
             return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
         map((action) => {

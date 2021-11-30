@@ -11,6 +11,7 @@ import {
 import { isSelectionsEqual } from '../../../../../App/isSelectionsEqual';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../../../utils/routing';
 import { resetLocationChange } from '../../../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { getLocationPathname } from '../../../../../../utils/url';
 
 export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -44,7 +45,7 @@ export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store
     action$.pipe(
         ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const { pathname } = history.location;
+            const pathname = getLocationPathname();
             const { enrollmentId, programId, orgUnitId } = deriveURLParamsFromLocation();
 
             if (pathname === '/enrollmentEventNew') {

@@ -1,20 +1,21 @@
 // @flow
 
 import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 import { config } from 'd2';
 import {
     actionTypes as NavigateToEnrollmentOverviewActionTypes,
 } from './navigateToEnrollmentOverview.actions';
 import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../utils/routing';
 import { scopeHierarchyTypes } from './navigateToEnrollmentOverview.constants';
-import { resetLocationChange } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { getLocationPathname, getLocationSearch } from '../../utils/url';
 
 export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) => action$.pipe(
     ofType(
         NavigateToEnrollmentOverviewActionTypes.NAVIGATE_TO_ENROLLMENT_OVERVIEW,
     ),
-    map((action) => {
+    switchMap((action) => {
         const { teiId, programId, orgUnitId, enrollmentId = 'AUTO' } = action.payload;
         const { dataStore, userDataStore } = store.value.useNewDashboard;
 
@@ -30,18 +31,19 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         if (dataStore || userDataStore) {
             if (userDataStore?.[programId]) {
                 pushHistoryToEnrollmentDashboard();
-                return resetLocationChange();
+                return EMPTY;
             }
 
             if (userDataStore?.[programId] !== false && dataStore?.[programId]) {
                 pushHistoryToEnrollmentDashboard();
-                return resetLocationChange();
+                return EMPTY;
             }
         }
 
         // TODO This will be removed when the link between capture and tracker capture is not relevant
         const { baseUrl } = config;
-        const { search, pathname } = history.location;
+        const pathname = getLocationPathname();
+        const search = getLocationSearch();
         const {
             programId: queryProgramId,
             trackedEntityTypeId: queryTrackedEntityTypeId,
@@ -61,6 +63,6 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
             window.location.href = `${instanceBaseUrl}/dhis-web-tracker-capture/#/dashboard?tei=${teiId}&ou=${orgUnitId || ownerOrgUnitId}&${scopeSearchParam}&returnUrl=${base64Url}`;
         }, 50);
 
-        return resetLocationChange();
+        return EMPTY;
     }),
 );
