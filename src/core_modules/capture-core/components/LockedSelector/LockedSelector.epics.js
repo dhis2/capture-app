@@ -30,60 +30,71 @@ const orgUnitsQuery = id => ({ resource: 'organisationUnits', id });
 export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
-        map(({ payload: { orgUnitId, pageToPush } }) => {
+        switchMap(({ payload: { orgUnitId, pageToPush } }) => {
             const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
             if (programId) {
                 const programContainsOrgUnitId = programCollection.get(programId)?.organisationUnits[orgUnitId];
                 if (orgUnitId && !programContainsOrgUnitId) {
                     history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, orgUnitId })}`);
-                    return resetLocationChange();
+                    return new Promise((resolve) => {
+                        setTimeout(() => resolve(resetLocationChange()), 0);
+                    });
                 }
             }
-
             history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId, orgUnitId })}`);
-            return resetLocationChange();
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }));
 
 export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH),
-        map(({ payload: batchPayload }) => {
+        switchMap(({ payload: batchPayload }) => {
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.ORG_UNIT_ID_RESET);
             const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value);
 
             history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
-            return resetLocationChange();
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }));
 
 export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.PROGRAM_ID_SET),
-        map(({ payload: { programId, pageToPush } }) => {
+        switchMap(({ payload: { programId, pageToPush } }) => {
             const queries = deriveUrlQueries(store.value);
 
             history.push(`/${pageToPush}?${buildUrlQueryString({ ...queries, programId })}`);
-            return resetLocationChange();
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }));
 
 export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH),
-        map(({ payload: batchPayload }) => {
+        switchMap(({ payload: batchPayload }) => {
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.PROGRAM_ID_RESET);
             const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
             history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
-            return resetLocationChange();
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }),
     );
 
 export const startAgainEpic = (action$: InputObservable, store: InputObservable, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.AGAIN_START),
-        map(() => {
+        switchMap(() => {
             history.push('/');
-            return resetLocationChange();
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }));
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (
@@ -163,11 +174,13 @@ export const fetchOrgUnitEpic = (
 export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.TEI_SELECTION_RESET),
-        map(() => {
+        switchMap(() => {
             const { programId, orgUnitId } = deriveURLParamsFromLocation();
 
             history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
-            return resetLocationChange();
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(resetLocationChange()), 0);
+            });
         }),
     );
 

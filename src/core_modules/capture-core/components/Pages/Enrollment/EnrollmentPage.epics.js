@@ -51,7 +51,6 @@ export const fetchEnrollmentPageInformationFromUrlEpic = (action$: InputObservab
         ofType(enrollmentPageActionTypes.INFORMATION_FETCH),
         map(() => {
             const { enrollmentId, teiId } = deriveURLParamsFromLocation();
-
             if (enrollmentId) {
                 return startFetchingTeiFromEnrollmentId();
             } else if (teiId) {
