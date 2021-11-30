@@ -1,2 +1,3 @@
 // @flow
-export { buildRules } from './buildRules';
+export { buildRulesContainer } from './rulesContainer';
+export { getRulesActionsForTEI } from './getRulesActionsForTEI';

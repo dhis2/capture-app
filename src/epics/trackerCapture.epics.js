@@ -151,10 +151,6 @@ import {
     runRulesOnEnrollmentFieldUpdateEpic,
     runRulesOnEnrollmentDataEntryFieldUpdateEpic,
 } from 'capture-core/components/DataEntries';
-import {
-    runRulesOnProfileFieldUpdateEpic,
-    runRulesOnProfileDataEntryFieldUpdateEpic,
-} from 'capture-core/components/WidgetProfile';
 import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
 
 import { loadCoreEpic } from 'capture-core/init';
@@ -360,6 +356,4 @@ export const epics = combineEpics(
     addNoteForNewEnrollmentEventEpic,
     addNoteForEnrollmentEpic,
     navigateToEnrollmentOverviewEpic,
-    runRulesOnProfileFieldUpdateEpic,
-    runRulesOnProfileDataEntryFieldUpdateEpic,
 );

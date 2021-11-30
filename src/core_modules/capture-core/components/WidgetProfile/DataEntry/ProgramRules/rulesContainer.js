@@ -1,15 +1,16 @@
 // @flow
+import type { ProgramRulesContainer } from 'capture-core-utils/rulesEngine';
 import { getTrackedEntityAttributeId, getProgramId, getProgramRuleActions } from '../FormFoundation';
-import { buildFormFoundation } from '../FormFoundation/RenderFoundation';
-import { TrackerProgram } from '../../../../metaData';
 import { getRulesAndVariablesFromProgramIndicators } from '../../../../metaDataMemoryStoreBuilders/programs/getRulesAndVariablesFromIndicators';
 
 const addProgramVariables = (program, programRuleVariables) => {
-    program.programRuleVariables = programRuleVariables.map(programRulesVariable => ({
-        ...programRulesVariable,
-        programId: getProgramId(programRulesVariable),
-        trackedEntityAttributeId: getTrackedEntityAttributeId(programRulesVariable),
-    }));
+    program.programRulesVariables = programRuleVariables
+        .filter(programRulesVariable => programRulesVariable.programRuleVariableSourceType === 'TEI_ATTRIBUTE')
+        .map(programRulesVariable => ({
+            ...programRulesVariable,
+            programId: getProgramId(programRulesVariable),
+            trackedEntityAttributeId: getTrackedEntityAttributeId(programRulesVariable),
+        }));
 };
 
 const addProgramRules = (program, programRules) => {
@@ -23,8 +24,9 @@ const addProgramRules = (program, programRules) => {
     const rulesByStage = filteredProgramRules
         .filter(rule => rule.programStageId)
         .reduce((accRulesByStage, programRule) => {
-            accRulesByStage[programRule.programStageId] = accRulesByStage[programRule.programStageId] || [];
-            accRulesByStage[programRule.programStageId].push(programRule);
+            const programStageId = programRule.programStageId || '';
+            accRulesByStage[programStageId] = accRulesByStage[programStageId] || [];
+            accRulesByStage[programStageId].push(programRule);
             return accRulesByStage;
         }, {});
 
@@ -47,37 +49,32 @@ const addRulesAndVariablesFromProgramIndicators = (program, programIndicators) =
     const { rules, variables } = getRulesAndVariablesFromProgramIndicators(indicators, program.id);
 
     if (variables) {
-        program.programRuleVariables = [...program.programRuleVariables, ...variables];
+        program.programRulesVariables = [...program.programRulesVariables, ...variables];
     }
     if (rules) {
         program.programRules = [...program.programRules, ...rules];
     }
 };
 
-export const buildRules = async ({
-    programRules,
+export const buildRulesContainer = async ({
     programAPI,
-    setProgram,
+    programRules,
+    constants,
+    setRulesContainer,
 }: {
-    programRules: any,
     programAPI: any,
-    setProgram: (enrollment: any) => void,
+    programRules: Array<any>,
+    constants: Array<any>,
+    setRulesContainer: (rulesContainer: ProgramRulesContainer) => void,
 }) => {
-    const formFoundation = await buildFormFoundation(programAPI);
-
-    const program = new TrackerProgram((trackerProgram) => {
-        trackerProgram.id = programAPI.id;
-        trackerProgram.access = programAPI.access;
-        trackerProgram.name = programAPI.displayName;
-        trackerProgram.shortName = programAPI.displayShortName;
-        trackerProgram.trackedEntityType = programAPI.trackedEntityType;
-        trackerProgram.enrollment = { enrollmentForm: formFoundation };
-    });
-
     const { programRuleVariables, programIndicators } = programAPI;
-    programRuleVariables && addProgramVariables(program, programRuleVariables);
-    programRules && addProgramRules(program, programRules);
-    programIndicators && addRulesAndVariablesFromProgramIndicators(program, programIndicators);
+    const rulesContainer = {};
 
-    setProgram(program);
+    programRuleVariables && addProgramVariables(rulesContainer, programRuleVariables);
+    programRules && addProgramRules(rulesContainer, programRules);
+    programIndicators && addRulesAndVariablesFromProgramIndicators(rulesContainer, programIndicators);
+
+    rulesContainer.constants = constants;
+
+    setRulesContainer(rulesContainer);
 };

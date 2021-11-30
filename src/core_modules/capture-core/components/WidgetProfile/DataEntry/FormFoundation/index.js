@@ -9,4 +9,5 @@ export {
     getOptionId,
     getProgramId,
     getProgramRuleActions,
+    getOptionSetId,
 } from './convertors';

@@ -1,17 +1,26 @@
 // @flow
+import uuid from 'uuid/v4';
+import { batchActions } from 'redux-batched-actions';
+import type {
+    OrgUnit,
+    TrackedEntityAttributes,
+    OptionSets,
+    ProgramRulesContainer,
+} from 'capture-core-utils/rulesEngine';
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
-import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
+import type { RenderFoundation } from '../../../metaData';
+import type { FieldData } from '../../../rules/actionsCreator';
+import { getCurrentClientValues, getCurrentClientMainData } from '../../../rules/actionsCreator';
 import { loadNewDataEntry } from '../../DataEntry/actions/dataEntryLoadNew.actions';
-import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
-import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
+import { rulesExecutedPostUpdateField } from '../../DataEntry/actions/dataEntry.actions';
+import { startRunRulesPostUpdateField } from '../../DataEntry';
+import { getRulesActionsForTEI } from './ProgramRules';
 
-export const actionTypes = {
-    START_RUN_RULES_ON_UPDATE: 'StartRunRulesOnUpdateForNewProfile',
+const batchActionTypes = {
+    UPDATE_FIELD_PROFILE_ACTION_BATCH: 'UpdateFieldProfileActionBatch',
+    OPEN_DATA_ENTRY_PROFILE_ACTION_BATCH: 'OpenDataEntryProfileActionBatch',
 };
-
-type DataEntryPropsToInclude = Array<Object>;
-
-const dataEntryPropsToInclude: DataEntryPropsToInclude = [
+const dataEntryPropsToInclude: Array<Object> = [
     {
         clientId: 'geometry',
         dataEntryId: 'geometry',
@@ -22,19 +31,77 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     },
 ];
 
-export const startRunRulesOnUpdateForNewProfile = (payload: any, uid: string, orgUnit: any, program: any) =>
-    actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)({ innerPayload: payload, uid, orgUnit, program });
-
-export const startAsyncUpdateFieldForNewProfile = (
-    innerAction: ReduxAction<any, any>,
-    onSuccess: Function,
-    onError: Function,
-) => actionPayloadAppender(innerAction)({ onSuccess, onError });
-
-export const getOpenDataEntryActions = (orgUnit: any, dataEntryId: string, itemId: string) =>
-    loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
-
-export const getRulesActions = (program: any, orgUnit: any, dataEntryId: string, itemId: string) => {
-    const formId = getDataEntryKey(dataEntryId, itemId);
-    return getRulesActionsForEvent(program, program.enrollment.foundation, formId, orgUnit);
+type Context = {
+    orgUnit: OrgUnit,
+    trackedEntityAttributes: ?TrackedEntityAttributes,
+    optionSets: OptionSets,
+    rulesContainer: ProgramRulesContainer,
+    formFoundation: RenderFoundation,
+    state: ReduxState,
 };
+
+export const getUpdateFieldActions = (context: Context, innerAction: ReduxAction<any, any>) => {
+    const uid = uuid();
+    const { orgUnit, trackedEntityAttributes, optionSets, rulesContainer, formFoundation, state } = context;
+    const { dataEntryId, itemId, elementId, value, uiState } = innerAction.payload || {};
+    const fieldData: FieldData = {
+        elementId,
+        value,
+        valid: uiState.valid,
+    };
+    const formId = `${dataEntryId}-${itemId}`;
+    const currentTEIValues = getCurrentClientValues(state, formFoundation, formId, fieldData);
+    const currentEnrollmentValues = getCurrentClientMainData(state, itemId, dataEntryId, formFoundation);
+    const rulesActions = getRulesActionsForTEI({
+        foundation: formFoundation,
+        formId,
+        orgUnit,
+        enrollmentData: currentEnrollmentValues,
+        teiValues: currentTEIValues,
+        trackedEntityAttributes,
+        optionSets,
+        rulesContainer,
+    });
+
+    return batchActions(
+        [
+            innerAction,
+            ...rulesActions,
+            rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+            startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+        ],
+        batchActionTypes.UPDATE_FIELD_PROFILE_ACTION_BATCH,
+    );
+};
+
+export const getOpenDataEntryActions = ({
+    orgUnit,
+    dataEntryId,
+    itemId,
+    foundation,
+    trackedEntityAttributes,
+    optionSets,
+    rulesContainer,
+}: {
+    orgUnit: OrgUnit,
+    dataEntryId: string,
+    itemId: string,
+    foundation: ?RenderFoundation,
+    trackedEntityAttributes: ?TrackedEntityAttributes,
+    optionSets: OptionSets,
+    rulesContainer: ProgramRulesContainer,
+}) =>
+    batchActions(
+        [
+            ...loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude),
+            ...getRulesActionsForTEI({
+                foundation,
+                formId: `${dataEntryId}-${itemId}`,
+                orgUnit,
+                trackedEntityAttributes,
+                optionSets,
+                rulesContainer,
+            }),
+        ],
+        batchActionTypes.OPEN_DATA_ENTRY_PROFILE_ACTION_BATCH,
+    );
