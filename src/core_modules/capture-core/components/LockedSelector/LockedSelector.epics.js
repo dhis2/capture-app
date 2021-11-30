@@ -15,7 +15,7 @@ import {
     completeUrlUpdate,
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
-import { deriveUrlQueries, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
+import { deriveUrlQueries, getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../utils/routing';
 import { resetLocationChange } from './QuickSelector/actions/QuickSelector.actions';
 
@@ -127,7 +127,7 @@ export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable
         filter(action => !action.payload.nextProps.orgUnitId),
         map(() => setEmptyOrgUnitBasedOnUrl()));
 
-export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
+export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.FROM_URL_UPDATE_COMPLETE,
@@ -135,7 +135,7 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable,
             lockedSelectorActionTypes.EMPTY_ORG_UNIT_SET,
         ),
         filter(() => {
-            const { pathname } = history.location;
+            const pathname = getLocationPathname();
             return pageFetchesOrgUnitUsingTheOldWay(pathname.substring(1));
         }),
         map(() => {
