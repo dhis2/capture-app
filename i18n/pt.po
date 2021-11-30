@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-15T15:28:19.564Z\n"
+"POT-Creation-Date: 2021-11-29T08:49:07.532Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -1034,6 +1034,9 @@ msgid "Person Profile"
 msgstr ""
 
 msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "This event is not yet preserved and cannot be edited"
 msgstr ""
 
 msgid "Show {{ rest }} more"

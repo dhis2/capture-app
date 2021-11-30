@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-15T15:28:19.564Z\n"
+"POT-Creation-Date: 2021-11-29T08:49:07.532Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -138,7 +138,7 @@ msgid "A future date is not allowed"
 msgstr "En fremtidig dato er ikke tillatt"
 
 msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
-msgstr ""
+msgstr "Lagrer {{trackedEntityName}} i {{programName}} i {{orgUnitName}}."
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -168,10 +168,10 @@ msgid "Assignee"
 msgstr "Tildelt programbruker"
 
 msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Lagrer i {{stageName}} for {{programName}} i {{orgUnitName}}"
 
 msgid "Saving to {{programName}} in {{orgUnitName}}"
-msgstr ""
+msgstr "Lagrer i {{programName}} i {{orgUnitName}}"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -609,7 +609,7 @@ msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "Registrering med ID-en \"{{enrollmentId}}\" eksisterer ikke"
 
 msgid "Enrollment Dashboard"
-msgstr ""
+msgstr "Registreringsdashbord"
 
 msgid "No indicator output for this enrollment yet"
 msgstr "Ingen indikatorresultat for denne registreringen enda"
@@ -686,16 +686,16 @@ msgid "Refer"
 msgstr "Henvis"
 
 msgid "You can’t add any more events in this program"
-msgstr ""
+msgstr "Du kan ikke legge til flere hendelser i dette programmet"
 
 msgid "Cancel without saving"
-msgstr ""
+msgstr "Avbryt uten å lagre"
 
 msgid "Choose a stage for a new event"
-msgstr ""
+msgstr "Velg fase for ny hendelse"
 
 msgid "Program Stages could not be loaded"
-msgstr ""
+msgstr "Programfaser kunne ikke lastes inn"
 
 msgid "stage"
 msgstr "fase"
@@ -722,7 +722,7 @@ msgid "Or see all events accessible to you in {{program}}"
 msgstr "Eller se alle hendelser som er tilgjengelige for deg i {{program}}"
 
 msgid "Please select an organisation unit."
-msgstr ""
+msgstr "Vennligst velg en organisasjonsenhet"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Velg {{missingCategories}} for å starte rapportering"
@@ -1031,36 +1031,43 @@ msgid "Back to all stages and events"
 msgstr "Tilbake til alle faser og hendelser"
 
 msgid "Schedule date info"
-msgstr ""
+msgstr "Informasjon for planlagt dato"
 
 msgid ""
 "This date is the the auto-suggested date based on the intervals defined, \n"
 "                    it can be adjusted if needed."
 msgstr ""
+"Denne datoen er den automatisk foreslåtte datoen basert på intervallene som er definert, \n"
+"                   den kan justeres om nødvendig."
 
 msgid "This date is {{difference}} days {{position}} the auto-suggested date."
 msgstr ""
+"Denne datoen er {{difference}} dager {{position}} den automatisk foreslåtte "
+"datoen."
 
 msgid ""
 "There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
 "this day."
 msgstr ""
+"Det er {{eventCountInOrgUnit}} planlagte hendelser i {{orgUnitName}} denne "
+"dagen."
 
 msgid ""
 "Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
+"Planlegger en hendelse i {{stageName}} for {{programName}} i {{orgUnitName}}"
 
 msgid "Schedule info"
-msgstr ""
+msgstr "Tidsplaninformasjon"
 
 msgid "Schedule date / Due date"
-msgstr ""
+msgstr "Planlagt dato / Forfallsdato"
 
 msgid "Event comments"
-msgstr ""
+msgstr "Hendelseskommentarer"
 
 msgid "Write a comment about this scheduled event"
-msgstr ""
+msgstr "Skriv en kommentar om denne planlagte hendelsen"
 
 msgid "Profile widget could not be loaded. Please try again later"
 msgstr "Profil -widgeten kunne ikke lastes inn. Prøv igjen senere"
@@ -1070,6 +1077,9 @@ msgstr "Personprofil"
 
 msgid "New {{ eventName }} event"
 msgstr "Ny {{ eventName }} hendelse"
+
+msgid "This event is not yet preserved and cannot be edited"
+msgstr ""
 
 msgid "Show {{ rest }} more"
 msgstr "Vis {{ rest }} flere"
