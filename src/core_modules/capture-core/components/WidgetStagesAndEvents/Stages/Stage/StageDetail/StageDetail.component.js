@@ -11,10 +11,10 @@ import { colors,
     DataTableColumnHeader,
     Button,
     IconAdd24,
+    Tooltip,
 } from '@dhis2/ui';
-import { withStyles, Tooltip } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import React, { type ComponentType, useState, useCallback } from 'react';
-// $FlowFixMe
 import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 import { sortDataFromEvent } from './hooks/sortFuntions';
 import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
@@ -28,7 +28,8 @@ const styles = {
         cursor: 'pointer',
     },
     rowDisabled: {
-        cursor: 'none',
+        cursor: 'not-allowed',
+        opacity: 0.5,
     },
     container: {
         display: 'flex',
@@ -137,16 +138,32 @@ const StageDetailPlain = (props: Props) => {
             .map((row: Object) => {
                 const dataTableProgramStage = events[0].programStage;
 
-                const cells = headerColumns.map(({ id }) => (<DataTableCell
-                    key={id}
-                    onClick={() => !row.pendingApiResponse && onEventClick(row.id, dataTableProgramStage)}
-                >
-                    <div>
-                        { // $FlowFixMe
-                            row[id]
-                        }
-                    </div>
-                </DataTableCell>));
+                const cells = headerColumns.map(({ id }) => (
+                    <Tooltip
+                        content={i18n.t('This event is not yet preserved and cannot be edited')}
+                        closeDelay={50}
+                    >
+                        {({ onMouseOver, onMouseOut, ref }) => (
+                            <DataTableCell
+                                key={id}
+                                onClick={() => !row.pendingApiResponse && onEventClick(row.id, dataTableProgramStage)}
+                                ref={(tableCell) => {
+                                    if (tableCell && row.pendingApiResponse) {
+                                        tableCell.onmouseover = onMouseOver;
+                                        tableCell.onmouseout = onMouseOut;
+                                        ref.current = tableCell;
+                                    }
+                                }}
+                            >
+                                <div>
+                                    { // $FlowFixMe
+                                        row[id]
+                                    }
+                                </div>
+                            </DataTableCell>
+                        )}
+                    </Tooltip>
+                ));
 
 
                 return (

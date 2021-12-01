@@ -1,6 +1,6 @@
 // @flow
 import { useDataQuery } from '@dhis2/app-runtime';
-import { useMemo, useEffect } from 'react';
+import { useEffect } from 'react';
 // $FlowFixMe
 import { useSelector, useDispatch } from 'react-redux';
 import { setCommonEnrollmentSiteData } from './enrollment.actions';
@@ -14,28 +14,18 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         attributeValues: storedAttributeValues,
     } = useSelector(({ enrollmentDomain }) => enrollmentDomain);
 
-    const { data, error, refetch } = useDataQuery(
-        useMemo(
-            () => ({
-                trackedEntityInstance: {
-                    resource: 'trackedEntityInstances',
-                    id: teiId,
-                    params: {
-                        program: programId,
-                        fields: ['enrollments[*],attributes'],
-                    },
-                },
+    const { data, error, refetch } = useDataQuery({
+        trackedEntityInstance: {
+            resource: 'trackedEntityInstances',
+            id: ({ variables: { teiId: updatedTeiId } }) => updatedTeiId,
+            params: ({ variables: { programId: updatedProgramId } }) => ({
+                program: updatedProgramId,
+                fields: ['enrollments[*],attributes'],
             }),
-            [teiId, programId],
-        ),
-        { lazy: true },
-    );
-
-    useEffect(() => {
-        if (storedEnrollmentId !== enrollmentId) {
-            refetch();
-        }
-    }, [refetch, storedEnrollmentId, enrollmentId]);
+        },
+    }, {
+        lazy: true,
+    });
 
     const fetchedEnrollmentData = {
         reference: data,
@@ -58,6 +48,12 @@ export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: strin
         fetchedEnrollmentData.enrollment,
         fetchedEnrollmentData.attributeValues,
     ]);
+
+    useEffect(() => {
+        if (storedEnrollmentId !== enrollmentId) {
+            refetch({ variables: { teiId, programId } });
+        }
+    }, [refetch, storedEnrollmentId, enrollmentId, teiId, programId]);
 
     const inEffectData = enrollmentId === storedEnrollmentId ? {
         enrollment: storedEnrollment,

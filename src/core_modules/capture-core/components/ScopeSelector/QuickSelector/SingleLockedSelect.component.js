@@ -113,7 +113,7 @@ const SingleLockedSelectPlain =
       [onSelect]);
 
       const { label } = options.find((({ value }) => value === selectedValue)) || {};
-      return (<>
+      return (<span data-test="single-locked-select">
           {
               selected && label ?
                   <Paper square elevation={0} className={classes.selectedPaper}>
@@ -149,7 +149,7 @@ const SingleLockedSelectPlain =
               onCancel={handleClose}
               {...defaultDialogProps}
           />
-      </>);
+      </span>);
   };
 
 export const SingleLockedSelect: ComponentType<$Diff<Props & ReadyProp, CssClasses>>

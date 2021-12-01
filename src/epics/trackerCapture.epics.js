@@ -215,6 +215,9 @@ import {
     saveNewEnrollmentEventEpic,
     addNoteForNewEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
+import {
+    scheduleNewEnrollmentEventEpic,
+} from '../core_modules/capture-core/components/WidgetEventSchedule';
 import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
 
 export const epics = combineEpics(
@@ -351,4 +354,5 @@ export const epics = combineEpics(
     addNoteForNewEnrollmentEventEpic,
     addNoteForEnrollmentEpic,
     navigateToEnrollmentOverviewEpic,
+    scheduleNewEnrollmentEventEpic,
 );

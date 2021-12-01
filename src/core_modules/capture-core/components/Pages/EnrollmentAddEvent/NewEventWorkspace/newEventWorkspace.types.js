@@ -11,8 +11,6 @@ export type Props = {|
     widgetReducerName: string,
     rulesExecutionDependencies: Object,
     onSave: ExternalSaveHandler,
-    onSaveSuccessActionType: string,
-    onSaveErrorActionType: string,
     onCancel: () => void,
     ...CssClasses
 |};

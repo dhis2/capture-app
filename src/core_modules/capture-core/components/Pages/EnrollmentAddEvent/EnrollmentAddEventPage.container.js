@@ -11,7 +11,7 @@ import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
 import {
     useHideWidgetByRuleLocations,
 } from '../Enrollment/EnrollmentPageDefault/hooks';
-import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
+import { navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
 import { useWidgetDataFromStore } from './hooks';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
@@ -111,8 +111,6 @@ export const EnrollmentAddEventPage = () => {
                 teiId={teiId}
                 enrollmentId={enrollmentId}
                 onSave={handleSave}
-                onSaveSuccessActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS}
-                onSaveErrorActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR}
                 onCancel={handleCancel}
                 onDelete={handleDelete}
                 widgetEffects={outputEffects}
