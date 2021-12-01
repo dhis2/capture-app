@@ -1,7 +1,7 @@
 // @flow
-import { withStyles, withTheme } from '@material-ui/core/styles';
-import { DateTimeField as UIDateTimeField } from 'capture-ui';
 import * as React from 'react';
+import { DateTimeField as UIDateTimeField } from 'capture-ui';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 import { withCalendarProps } from '../../../HOC/withCalendarProps';
 
 const getStyles = (theme: Theme) => ({

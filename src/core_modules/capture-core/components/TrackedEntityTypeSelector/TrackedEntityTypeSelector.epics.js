@@ -1,7 +1,7 @@
 // @flow
-import { push } from 'connected-react-router';
-import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
+import { push } from 'connected-react-router';
 import { buildUrlQueryString } from '../../utils/routing';
 import { trackedEntityTypeSelectorActionTypes } from './TrackedEntityTypeSelector.actions';
 

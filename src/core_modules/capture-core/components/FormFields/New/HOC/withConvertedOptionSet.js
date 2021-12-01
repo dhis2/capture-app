@@ -1,9 +1,9 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
 import * as React from 'react';
-import { convertValue } from '../../../../converters/clientToForm';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { type OptionSet } from '../../../../metaData';
+import { convertValue } from '../../../../converters/clientToForm';
 
 type Props = {
     optionSet: OptionSet

@@ -1,5 +1,4 @@
 // @flow
-import { typeof dataElementTypes } from '../../../metaData';
 import type {
     CustomMenuContents,
     CustomRowMenuContents,
@@ -16,6 +15,7 @@ import type {
     SelectRow,
     Sort,
 } from '../../ListView';
+import { typeof dataElementTypes } from '../../../metaData';
 
 export type WorkingListTemplate = {
     id: string,

@@ -1,8 +1,8 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { IconSettings24 } from '@dhis2/ui';
-import { IconButton, Tooltip } from '@material-ui/core';
 import * as React from 'react';
+import { IconButton, Tooltip } from '@material-ui/core';
+import { IconSettings24 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import type { Columns } from '../types';
 import { ColumnSelectorDialog } from './ColumnSelectorDialog.component';
 

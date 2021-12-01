@@ -1,7 +1,7 @@
 // @flow
-import * as React from 'react';
-import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
+import { connect } from 'react-redux';
+import * as React from 'react';
 import { fieldIsValidating, fieldsValidated, startUpdateFieldAsync } from './actions';
 
 type Props = {

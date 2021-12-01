@@ -1,6 +1,6 @@
 // @flow
-import type { QuerySingleResource } from '../../../../../../../utils/api';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
+import type { QuerySingleResource } from '../../../../../../../utils/api';
 
 export type InputMeta = {|
     columnsMetaForDataFetching: TeiColumnsMetaForDataFetching,

@@ -1,12 +1,12 @@
 // @flow
 import { useMemo } from 'react';
-import { convertServerToClient } from '../../../converters';
-import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
-import { dataElementTypes, type TrackerProgram } from '../../../metaData';
 import type {
     RulesExecutionDependencies,
     AttributeValuesClientFormatted,
 } from '../common.types';
+import { dataElementTypes, type TrackerProgram } from '../../../metaData';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import { convertServerToClient } from '../../../converters';
 
 const prepareAttributesForRulesEngine =
     (attributeValues, program: TrackerProgram): AttributeValuesClientFormatted => attributeValues

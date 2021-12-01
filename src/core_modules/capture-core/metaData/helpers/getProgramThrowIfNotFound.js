@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
-import { programCollection } from '../../metaDataMemoryStores';
+import { errorCreator } from 'capture-core-utils';
+import i18n from '@dhis2/d2-i18n';
 import { EventProgram, TrackerProgram } from '../Program';
+import { programCollection } from '../../metaDataMemoryStores';
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',

@@ -1,6 +1,6 @@
 // @flow
-import PropTypes from 'prop-types';
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { getD2 } from '../d2/d2Instance';
 
 export const withD2InContext =

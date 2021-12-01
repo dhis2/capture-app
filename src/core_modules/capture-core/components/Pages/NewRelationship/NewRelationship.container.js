@@ -1,13 +1,13 @@
 // @flow
 import { connect } from 'react-redux';
+import type { SelectedRelationshipType } from './newRelationship.types';
+import { NewRelationshipComponent } from './NewRelationship.component';
 import {
     selectRelationshipType,
     deselectRelationshipType,
     selectFindMode,
     initializeNewRelationship,
 } from './newRelationship.actions';
-import { NewRelationshipComponent } from './NewRelationship.component';
-import type { SelectedRelationshipType } from './newRelationship.types';
 
 const mapStateToProps = (state: ReduxState) => ({
     selectedRelationshipType: state.newRelationship.selectedRelationshipType,

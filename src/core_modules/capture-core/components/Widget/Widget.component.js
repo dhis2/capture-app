@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import type { Props } from './widget.types';
-import { WidgetCollapsible } from './WidgetCollapsible.component';
 import { WidgetNonCollapsible } from './WidgetNonCollapsible.component';
+import { WidgetCollapsible } from './WidgetCollapsible.component';
+import type { Props } from './widget.types';
 
 export const Widget = ({ noncollapsible = false, ...passOnProps }: Props) => (
     !noncollapsible ? (

@@ -1,10 +1,10 @@
 // @flow
 import React, { memo, useCallback, useContext, useEffect, useRef } from 'react';
-import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
-import { ListViewUpdater } from '../ListViewUpdater';
 import { ListViewLoaderContext } from '../workingListsBase.context';
-import type { Props } from './listViewLoader.types';
+import { ListViewUpdater } from '../ListViewUpdater';
+import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
 import { useIsContextInSync } from './useIsContextInSync';
+import type { Props } from './listViewLoader.types';
 
 const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
     withLoadingIndicator(() => ({ margin: 10 }))(ListViewUpdater));

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { TrueOnlyFilter } from './TrueOnlyFilter.component';
 import type { TrueOnlyFilterData } from './types';
+import { TrueOnlyFilter } from './TrueOnlyFilter.component';
 
 type Props = {
     filter: ?TrueOnlyFilterData,

@@ -1,9 +1,9 @@
 // @flow
+import { getD2, getCurrentUser } from '../d2/d2Instance';
 import {
     set as setStoreRoots,
     get as getStoreRoots,
 } from '../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import { getD2, getCurrentUser } from '../d2/d2Instance';
 import { loadOrgUnitCaptureRootsSuccess, loadOrgUnitSearchRootsSuccess } from './init.actions';
 
 const defaultFields = 'id,displayName,path,publicAccess,access,lastUpdated,children[id,displayName,publicAccess,access,path,children::isNotEmpty]';

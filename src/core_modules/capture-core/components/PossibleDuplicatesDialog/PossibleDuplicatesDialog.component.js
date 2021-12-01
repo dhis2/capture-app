@@ -1,8 +1,8 @@
 // @flow
-import { withStyles } from '@material-ui/core';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import * as React from 'react';
+import DialogActions from '@material-ui/core/DialogActions';
+import Dialog from '@material-ui/core/Dialog';
+import { withStyles } from '@material-ui/core';
 import type { RenderCustomCardActions } from '../CardList/CardList.types';
 import { ReviewDialogContents } from './ReviewDialogContents/ReviewDialogContents.container';
 

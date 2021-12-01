@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
-import { TeiWorkingLists } from '../../../WorkingLists/TeiWorkingLists';
 import { EventWorkingListsInit } from '../EventWorkingListsInit';
+import { TeiWorkingLists } from '../../../WorkingLists/TeiWorkingLists';
+import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import type { Props } from './workingListsType.types';
 
 export const WorkingListsType = ({ programId, orgUnitId }: Props) => {

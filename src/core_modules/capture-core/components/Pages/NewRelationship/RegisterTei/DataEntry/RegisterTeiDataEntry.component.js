@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { DataEntryEnrollment } from './Enrollment';
 import { DataEntryTrackedEntityInstance } from './TrackedEntityInstance';
+import { DataEntryEnrollment } from './Enrollment';
 
 type Props = {
     showDataEntry: boolean,

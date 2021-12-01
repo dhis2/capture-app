@@ -1,10 +1,10 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
-import { withFocusSaver } from '../../HOC/withFocusSaver';
-import { withShrinkLabel } from '../../HOC/withShrinkLabel';
-import { InnerMessage } from '../../internal/InnerMessage/InnerMessage.component';
+import i18n from '@dhis2/d2-i18n';
 import { DateField } from '../DateField/Date.component';
+import { InnerMessage } from '../../internal/InnerMessage/InnerMessage.component';
+import { withShrinkLabel } from '../../HOC/withShrinkLabel';
+import { withFocusSaver } from '../../HOC/withFocusSaver';
 import defaultClasses from './dateRangeField.module.css';
 
 

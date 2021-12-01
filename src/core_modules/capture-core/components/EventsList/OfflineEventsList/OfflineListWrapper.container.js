@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import { isSelectionsEqual } from '../../App/isSelectionsEqual';
 import { createOfflineListWrapper } from '../../List';
+import { isSelectionsEqual } from '../../App/isSelectionsEqual';
 import { OfflineListContainerCreator } from './OfflineList.containerCreator';
 
 const mapStateToProps = (state: ReduxState, props: Object) => {

@@ -1,17 +1,17 @@
 // @flow
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import { type HashHistory } from 'history';
 import React, { useState, useRef, useCallback } from 'react';
+import { type HashHistory } from 'history';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 // eslint-disable-next-line import/extensions
 import 'typeface-roboto';
-import { theme } from '../../styles/uiTheme';
-import { App } from '../App';
 import { AppLoader } from '../AppLoader';
-import { loadApp } from './appStart.actions';
-import { CacheExpired } from './CacheExpired.component';
-import { JSSProviderShell } from './JSSProviderShell.component';
+import { App } from '../App';
+import { theme } from '../../styles/uiTheme';
 import { addBeforeUnloadEventListener } from './unload';
+import { JSSProviderShell } from './JSSProviderShell.component';
+import { CacheExpired } from './CacheExpired.component';
+import { loadApp } from './appStart.actions';
 
 export const AppStart = () => {
     const [ready, setReadyStatus] = useState(false);

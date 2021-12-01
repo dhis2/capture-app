@@ -1,6 +1,7 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles';
 import React, { useMemo, useState, type ComponentType } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
 import {
     TextFilter,
     NumericFilter,
@@ -10,9 +11,8 @@ import {
     DateFilter,
     OptionSetFilter,
 } from '../../../FiltersForTypes';
-import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS, filterTypesObject } from '../filters.const';
-import type { Props } from './filterSelectorContents.types';
 import { withButtons } from './withButtons';
+import type { Props } from './filterSelectorContents.types';
 
 const getStyles = (theme: Theme) => ({
     container: {

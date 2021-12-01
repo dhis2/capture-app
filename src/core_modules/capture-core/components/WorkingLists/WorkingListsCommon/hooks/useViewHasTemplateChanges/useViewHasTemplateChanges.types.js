@@ -1,6 +1,6 @@
 // @flow
-import type { FiltersData } from '../../../WorkingListsBase';
 import type { InitialViewConfig } from '../../types';
+import type { FiltersData } from '../../../WorkingListsBase';
 
 type Column = {|
     id: string,

@@ -1,6 +1,6 @@
 // @flow
-import moment from 'moment';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));

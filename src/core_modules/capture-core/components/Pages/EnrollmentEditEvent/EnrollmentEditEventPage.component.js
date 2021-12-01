@@ -1,11 +1,20 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { spacersNum } from '@dhis2/ui';
-import Grid from '@material-ui/core/Grid';
-import withStyles from '@material-ui/core/styles/withStyles';
 import type { ComponentType } from 'react';
 import React from 'react';
-import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Grid from '@material-ui/core/Grid';
+import { spacersNum } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
+import { WidgetProfile } from '../../WidgetProfile';
+import { WidgetIndicator } from '../../WidgetIndicator';
+import { WidgetFeedback } from '../../WidgetFeedback';
+import { WidgetEventEdit } from '../../WidgetEventEdit/';
+import { WidgetEventComment } from '../../WidgetEventComment';
+import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
+import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
+import { WidgetEnrollment } from '../../WidgetEnrollment';
+import { TopBarActions } from '../../TopBarActions';
+import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import {
     ScopeSelector,
     useSetOrgUnitId,
@@ -16,18 +25,9 @@ import {
     useResetStageId,
     useResetEventId,
 } from '../../ScopeSelector';
-import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
-import { TopBarActions } from '../../TopBarActions';
-import { WidgetEnrollment } from '../../WidgetEnrollment';
-import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
-import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
-import { WidgetEventComment } from '../../WidgetEventComment';
-import { WidgetEventEdit } from '../../WidgetEventEdit/';
-import { WidgetFeedback } from '../../WidgetFeedback';
-import { WidgetIndicator } from '../../WidgetIndicator';
-import { WidgetProfile } from '../../WidgetProfile';
-import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import type { PlainProps } from './EnrollmentEditEventPage.types';
+import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
 
 const styles = ({ typography }) => ({
     page: {

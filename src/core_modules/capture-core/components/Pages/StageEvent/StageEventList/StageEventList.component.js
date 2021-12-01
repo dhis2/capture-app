@@ -1,13 +1,13 @@
 // @flow
-import withStyles from '@material-ui/core/styles/withStyles';
 import React from 'react';
 import type { ComponentType } from 'react';
-import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
-import { Widget } from '../../../Widget';
-import { EventWorkingLists } from '../../../WorkingLists/EventWorkingLists';
+import withStyles from '@material-ui/core/styles/withStyles';
 import { TeiWorkingLists } from '../../../WorkingLists/TeiWorkingLists';
-import { StageEventHeader } from './StageEventHeader/StageEventHeader.component';
+import { EventWorkingLists } from '../../../WorkingLists/EventWorkingLists';
+import { Widget } from '../../../Widget';
+import { useProgramInfo, programTypes } from '../../../../hooks/useProgramInfo';
 import type { Props } from './StageEventList.types';
+import { StageEventHeader } from './StageEventHeader/StageEventHeader.component';
 
 const getStyles = () => ({});
 

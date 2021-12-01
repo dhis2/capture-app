@@ -1,8 +1,8 @@
 // @flow
-import classNames from 'classnames';
 import * as React from 'react';
-import { directions, placements } from './sortLabel.const';
+import classNames from 'classnames';
 import defaultClasses from './table.module.css';
+import { directions, placements } from './sortLabel.const';
 
 type Props = {
     children?: ?React.Node,

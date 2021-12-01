@@ -1,12 +1,12 @@
 // @flow
-import { useConfig } from '@dhis2/app-runtime';
-import i18n from '@dhis2/d2-i18n';
-import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
-import { buildUrl } from 'capture-core-utils';
 import React, { useCallback } from 'react';
-import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../metaData';
+import { buildUrl } from 'capture-core-utils';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import i18n from '@dhis2/d2-i18n';
+import { useConfig } from '@dhis2/app-runtime';
 import { systemSettingsStore } from '../../metaDataMemoryStores';
+import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../metaData';
 
 const getStyles = () => ({
     container: {

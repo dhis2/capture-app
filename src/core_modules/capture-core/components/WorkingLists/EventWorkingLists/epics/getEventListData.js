@@ -1,6 +1,6 @@
 // @flow
-import { getEvents } from '../../../../events/eventRequests';
 import type { ColumnsMetaForDataFetching } from '../types';
+import { getEvents } from '../../../../events/eventRequests';
 
 type InputQueryArgs = {
     [key: string]: any,

@@ -1,11 +1,11 @@
 // @flow
-import { push } from 'connected-react-router';
-import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { buildUrlQueryString } from '../../../utils/routing';
-import { deriveUrlQueries } from '../../../utils/url';
-import { lockedSelectorActionTypes } from '../../LockedSelector/LockedSelector.actions';
+import { ofType } from 'redux-observable';
+import { push } from 'connected-react-router';
 import { topBarActionsActionTypes } from '../../TopBarActions/TopBarActions.actions';
+import { lockedSelectorActionTypes } from '../../LockedSelector/LockedSelector.actions';
+import { deriveUrlQueries } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 
 export const openNewRegistrationPageFromLockedSelectorEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

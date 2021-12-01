@@ -1,5 +1,6 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
+import React, { type ComponentType, useState, useCallback } from 'react';
+import { withStyles } from '@material-ui/core';
 import { colors,
     spacersNum,
     DataTableBody,
@@ -13,12 +14,11 @@ import { colors,
     IconAdd24,
     Tooltip,
 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
-import React, { type ComponentType, useState, useCallback } from 'react';
-import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
-import { sortDataFromEvent } from './hooks/sortFuntions';
-import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
+import i18n from '@dhis2/d2-i18n';
 import type { Props } from './stageDetail.types';
+import { useComputeDataFromEvent, useComputeHeaderColumn, formatRowForView } from './hooks/useEventList';
+import { sortDataFromEvent } from './hooks/sortFuntions';
+import { DEFAULT_NUMBER_OF_ROW, SORT_DIRECTION } from './hooks/constants';
 
 
 const styles = {

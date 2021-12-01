@@ -1,9 +1,9 @@
 // @flow
-import { useCallback, useContext } from 'react';
 import { useDispatch } from 'react-redux';
-import { useCurrentOrgUnitInfo } from '../../hooks/useCurrentOrgUnitInfo';
-import { useScopeInfo } from '../../hooks/useScopeInfo';
+import { useCallback, useContext } from 'react';
 import { ResultsPageSizeContext } from '../Pages/shared-contexts';
+import { useScopeInfo } from '../../hooks/useScopeInfo';
+import { useCurrentOrgUnitInfo } from '../../hooks/useCurrentOrgUnitInfo';
 import { changePage, reviewDuplicates } from './possibleDuplicatesDialog.actions';
 
 export const useDuplicates = (dataEntryId: string, selectedScopeId: string) => {

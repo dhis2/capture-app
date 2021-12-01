@@ -1,8 +1,8 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { IconEdit24 } from '@dhis2/ui';
-import { withStyles, IconButton } from '@material-ui/core';
 import * as React from 'react';
+import { withStyles, IconButton } from '@material-ui/core';
+import { IconEdit24 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../../Buttons';
 
 const getStyles = () => ({

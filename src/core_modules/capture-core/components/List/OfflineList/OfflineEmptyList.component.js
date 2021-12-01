@@ -1,7 +1,7 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
 
 const getStyles = theme => ({
     container: {

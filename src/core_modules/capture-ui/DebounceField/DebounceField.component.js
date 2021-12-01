@@ -1,6 +1,6 @@
 // @flow
-import { debounce } from 'lodash';
 import * as React from 'react';
+import { debounce } from 'lodash';
 import { TextInput } from '../internal/TextInput/TextInput.component';
 
 type Props = {

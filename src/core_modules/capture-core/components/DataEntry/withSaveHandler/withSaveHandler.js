@@ -1,20 +1,20 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
-import * as React from 'react';
 import { connect } from 'react-redux';
-import { type RenderFoundation } from '../../../metaData';
-import { validationStrategies } from '../../../metaData/RenderFoundation/renderFoundation.const';
-import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
-import { saveValidationFailed, saveAbort } from '../actions/dataEntry.actions';
+import * as React from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogContent from '@material-ui/core/DialogContent';
+import Dialog from '@material-ui/core/Dialog';
+import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
-import { MessagesDialogContents } from './MessagesDialogContents';
+import { saveValidationFailed, saveAbort } from '../actions/dataEntry.actions';
+import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { validationStrategies } from '../../../metaData/RenderFoundation/renderFoundation.const';
+import { type RenderFoundation } from '../../../metaData';
 import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
+import { MessagesDialogContents } from './MessagesDialogContents';
 
 type Props = {
     classes: Object,

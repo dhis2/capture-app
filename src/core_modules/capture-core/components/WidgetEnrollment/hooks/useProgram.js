@@ -1,6 +1,6 @@
 // @flow
-import { useDataQuery } from '@dhis2/app-runtime';
 import { useMemo } from 'react';
+import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useProgram = (programId: string) => {
     const { error, loading, data } = useDataQuery(

@@ -1,13 +1,9 @@
 // @flow
-import isDefined from 'd2-utilizr/lib/isDefined';
-import isString from 'd2-utilizr/lib/isString';
 import log from 'loglevel';
-import { normalizeRuleVariable } from './commonUtils/normalizeRuleVariable';
-import { trimQuotes } from './commonUtils/trimQuotes';
-import { effectActions } from './constants';
-import { d2Functions } from './d2Functions';
-import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
-import { ValueProcessor } from './processors/ValueProcessor';
+import isString from 'd2-utilizr/lib/isString';
+import isDefined from 'd2-utilizr/lib/isDefined';
+import { VariableService } from './services/VariableService/VariableService';
+import { executeExpression } from './services/executionService';
 import type {
     OutputEffects,
     RuleVariables,
@@ -17,8 +13,12 @@ import type {
     IConvertOutputRulesEffectsValue,
     IDateUtils,
 } from './rulesEngine.types';
-import { executeExpression } from './services/executionService';
-import { VariableService } from './services/VariableService/VariableService';
+import { ValueProcessor } from './processors/ValueProcessor';
+import { getRulesEffectsProcessor } from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
+import { d2Functions } from './d2Functions';
+import { effectActions } from './constants';
+import { trimQuotes } from './commonUtils/trimQuotes';
+import { normalizeRuleVariable } from './commonUtils/normalizeRuleVariable';
 
 /**
  * We update the variables hash so that the next rule can use the updated values.

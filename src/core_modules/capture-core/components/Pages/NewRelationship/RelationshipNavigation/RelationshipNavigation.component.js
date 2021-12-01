@@ -1,10 +1,10 @@
 // @flow
 
-import I18n from '@dhis2/d2-i18n';
 import * as React from 'react';
-import { LinkButton } from '../../../Buttons/LinkButton.component';
-import { typeof findModes, findModeDisplayNames } from '../findModes';
+import I18n from '@dhis2/d2-i18n';
 import type { SelectedRelationshipType } from '../newRelationship.types';
+import { typeof findModes, findModeDisplayNames } from '../findModes';
+import { LinkButton } from '../../../Buttons/LinkButton.component';
 
 
 type Props = {

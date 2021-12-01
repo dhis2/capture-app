@@ -1,11 +1,11 @@
 // @flow
-import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
-import moment from 'moment';
 import React from 'react';
-import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
-import type { StageDataElement } from '../../../../types/common.types';
-import { getSubValues } from '../../getEventDataWithSubValue';
+import moment from 'moment';
+import { statusTypes, translatedStatusTypes } from 'capture-core/events/statusTypes';
 import { Comments } from '../Comments.component';
+import { getSubValues } from '../../getEventDataWithSubValue';
+import type { StageDataElement } from '../../../../types/common.types';
+import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 
 const isEventOverdue = (event: ApiEnrollmentEvent) => moment(event.dueDate).isBefore(moment().startOf('day'))
     && event.status === statusTypes.SCHEDULE;

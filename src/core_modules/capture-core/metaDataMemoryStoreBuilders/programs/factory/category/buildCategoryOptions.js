@@ -1,8 +1,8 @@
 // @flow
 /* eslint-disable no-await-in-loop */
 import { MemoryAdapter } from 'capture-core-utils/storage';
-import { getUserStorageController } from '../../../../storageControllers';
 import { userStores } from '../../../../storageControllers/stores';
+import { getUserStorageController } from '../../../../storageControllers';
 
 type Predicate = (categoryOption: Object) => boolean;
 type Project = (caegoryOption: Object) => any;

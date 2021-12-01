@@ -1,12 +1,12 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
-import { SelectionBoxes, orientations } from '../../FormFields/New';
-import { UserField } from '../../FormFields/UserField';
+import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
 import type { UpdatableFilterContent } from '../types';
-import { getAssigneeFilterData } from './assigneeFilterDataGetter';
+import { UserField } from '../../FormFields/UserField';
+import { SelectionBoxes, orientations } from '../../FormFields/New';
 import { getModeOptions, modeKeys } from './modeOptions';
+import { getAssigneeFilterData } from './assigneeFilterDataGetter';
 
 const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {

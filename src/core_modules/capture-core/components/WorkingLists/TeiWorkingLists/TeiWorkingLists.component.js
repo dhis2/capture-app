@@ -1,9 +1,9 @@
 // @flow
-import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
 import React, { type ComponentType } from 'react';
-import { TeiWorkingListsReduxProvider } from './ReduxProvider';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import type { Props } from './teiWorkingLists.types';
+import { TeiWorkingListsReduxProvider } from './ReduxProvider';
 
 const getStyles = ({ typography }) => ({
     listContainer: {

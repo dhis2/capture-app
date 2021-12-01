@@ -1,15 +1,15 @@
 // @flow
-import * as React from 'react';
 import { connect } from 'react-redux';
+import * as React from 'react';
 import {
     get as getOrgUnitRoots,
     set as setOrgUnitRoots,
 } from '../../../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import { getOrgUnitRootsKey } from './getOrgUnitRootsKey';
 import {
     requestFilterFormFieldOrgUnits,
     resetFormFieldOrgUnitsFilter,
 } from './orgUnitFieldForForms.actions';
+import { getOrgUnitRootsKey } from './getOrgUnitRootsKey';
 
 type Props = {
     formId: string,

@@ -1,7 +1,7 @@
 // @flow
-import { useDataQuery } from '@dhis2/app-runtime';
-import log from 'loglevel';
 import { useMemo, useEffect, useState } from 'react';
+import log from 'loglevel';
+import { useDataQuery } from '@dhis2/app-runtime';
 import { errorCreator } from '../../capture-core-utils';
 
 export const useOrganisationUnit = (orgUnitId: string, fields: string) => {

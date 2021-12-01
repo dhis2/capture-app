@@ -1,6 +1,6 @@
 // @flow
-import { typeof dataElementTypes } from '../../../../metaData';
 import type { Categories } from '../../WorkingListsBase';
+import { typeof dataElementTypes } from '../../../../metaData';
 
 type TeiRecord = {| [id: string]: any |};
 

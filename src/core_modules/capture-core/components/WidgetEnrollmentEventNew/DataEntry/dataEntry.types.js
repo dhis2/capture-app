@@ -1,6 +1,6 @@
 // @flow
-import type { ProgramStage, RenderFoundation } from '../../../metaData';
 import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../common.types';
+import type { ProgramStage, RenderFoundation } from '../../../metaData';
 
 export type ContainerProps = {|
     stage: ProgramStage,

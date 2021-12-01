@@ -1,15 +1,15 @@
 // @flow
-import { pipe as pipeD2 } from 'capture-core-utils';
-import { ofType } from 'redux-observable';
-import { of, from } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { convertFormToClient, convertClientToServer } from '../../converters';
+import { of, from } from 'rxjs';
+import { ofType } from 'redux-observable';
+import { pipe as pipeD2 } from 'capture-core-utils';
+import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
+import { getTrackedEntityInstances } from '../../trackedEntityInstances/trackedEntityInstanceRequests';
+import { getAttributesFromScopeId } from '../../metaData/helpers';
 import {
     scopeTypes, getScopeFromScopeId, EventProgram, TrackerProgram, TrackedEntityType,
 } from '../../metaData';
-import { getAttributesFromScopeId } from '../../metaData/helpers';
-import { getTrackedEntityInstances } from '../../trackedEntityInstances/trackedEntityInstanceRequests';
-import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
+import { convertFormToClient, convertClientToServer } from '../../converters';
 import {
     actionTypes,
     duplicatesForReviewRetrievalSuccess,

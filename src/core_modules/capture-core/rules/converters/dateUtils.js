@@ -1,9 +1,9 @@
 // @flow
 /* eslint-disable class-methods-use-this */
-import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
-import { trimQuotes } from 'capture-core-utils/rulesEngine/commonUtils/trimQuotes';
-import type { IDateUtils } from 'capture-core-utils/rulesEngine/rulesEngine.types';
 import moment from 'moment';
+import type { IDateUtils } from 'capture-core-utils/rulesEngine/rulesEngine.types';
+import { trimQuotes } from 'capture-core-utils/rulesEngine/commonUtils/trimQuotes';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 
 const momentFormat = 'YYYY-MM-DD';
 

@@ -1,14 +1,14 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { IconFileDocument24 } from '@dhis2/ui';
-import { withStyles, Tooltip } from '@material-ui/core/';
 import React, { Component } from 'react';
-import type { ProgramStage } from '../../../../metaData';
-import { Button } from '../../../Buttons/Button.component';
-import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
-import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
-import { ViewEventSection } from '../Section/ViewEventSection.component';
+import { withStyles, Tooltip } from '@material-ui/core/';
+import { IconFileDocument24 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { ViewEventSectionHeader } from '../Section/ViewEventSectionHeader.component';
+import { ViewEventSection } from '../Section/ViewEventSection.component';
+import { ViewEventDataEntry } from '../../../WidgetEventEdit/ViewEventDataEntry/ViewEventDataEntry.container';
+import { EditEventDataEntry } from '../../../WidgetEventEdit/EditEventDataEntry/EditEventDataEntry.container';
+import { Button } from '../../../Buttons/Button.component';
+import type { ProgramStage } from '../../../../metaData';
 
 const getStyles = (theme: Theme) => ({
     container: {

@@ -1,12 +1,12 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import Grid from '@material-ui/core/Grid';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { compose } from 'redux';
 import React from 'react';
 import type { ComponentType } from 'react';
-import { compose } from 'redux';
-import { withErrorMessageHandler } from '../../../HOC';
-import { LoadingMaskForPage } from '../../LoadingMasks/LoadingMaskForPage.component';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Grid from '@material-ui/core/Grid';
+import i18n from '@dhis2/d2-i18n';
+import { TopBarActions } from '../../TopBarActions';
+import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
 import {
     ScopeSelector,
     useSetProgramId,
@@ -17,12 +17,12 @@ import {
     useResetTeiId,
     useResetEnrollmentId,
 } from '../../ScopeSelector';
-import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
-import { TopBarActions } from '../../TopBarActions';
-import { enrollmentPageStatuses } from './EnrollmentPage.constants';
-import type { Props } from './EnrollmentPage.types';
-import { EnrollmentPageDefault } from './EnrollmentPageDefault';
+import { LoadingMaskForPage } from '../../LoadingMasks/LoadingMaskForPage.component';
+import { withErrorMessageHandler } from '../../../HOC';
 import { MissingMessage } from './MissingMessage.component';
+import { EnrollmentPageDefault } from './EnrollmentPageDefault';
+import type { Props } from './EnrollmentPage.types';
+import { enrollmentPageStatuses } from './EnrollmentPage.constants';
 
 const getStyles = ({ typography }) => ({
     container: {

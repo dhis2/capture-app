@@ -1,5 +1,9 @@
 // @flow
-import { D2File } from '../../../../FormFields/File/D2File.component';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+    withCustomElementContainer,
+} from '../internal';
 import {
     withGotoInterface,
     withHideCompatibility,
@@ -9,11 +13,7 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from '../../../../FormFields/New';
-import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-    withCustomElementContainer,
-} from '../internal';
+import { D2File } from '../../../../FormFields/File/D2File.component';
 
 export const FileResourceFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(

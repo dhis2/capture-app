@@ -1,5 +1,10 @@
 // @flow
 import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+} from '../internal';
+import labelTypeClasses from '../../buildField.module.css';
+import {
     withGotoInterface,
     withHideCompatibility,
     withDefaultShouldUpdateInterface,
@@ -11,11 +16,6 @@ import {
     withFilterProps,
     SingleOrgUnitSelectField,
 } from '../../../../FormFields/New';
-import labelTypeClasses from '../../buildField.module.css';
-import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-} from '../internal';
 import { withFormFieldOrgUnitsHandler } from './withFormFieldOrgUnitsHandler';
 
 const getFilteredProps = (props: Object) => {

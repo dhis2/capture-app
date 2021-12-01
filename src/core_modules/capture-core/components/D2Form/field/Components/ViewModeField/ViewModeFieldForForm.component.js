@@ -1,11 +1,11 @@
 // @flow
+import labelTypeClasses from '../../buildField.module.css';
 import {
     withDefaultFieldContainer,
     withLabel,
     withFilterProps,
     ViewModeField,
 } from '../../../../FormFields/New';
-import labelTypeClasses from '../../buildField.module.css';
 
 
 const getFilteredProps = (props: Object) => {

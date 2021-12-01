@@ -1,7 +1,7 @@
 // @flow
-import { colors, spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
 import React, { type ComponentType } from 'react';
+import { withStyles } from '@material-ui/core';
+import { colors, spacersNum } from '@dhis2/ui';
 import type { Props } from './dataSection.type';
 
 

@@ -1,11 +1,11 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
 import React, { Component } from 'react';
+import classNames from 'classnames';
+import i18n from '@dhis2/d2-i18n';
 
-import { orientations } from '../../constants/orientations.const';
-import { DateTimeDate } from '../../internal/DateTimeInput/DateTimeDate.component';
 import { DateTimeTime } from '../../internal/DateTimeInput/DateTimeTime.component';
+import { DateTimeDate } from '../../internal/DateTimeInput/DateTimeDate.component';
+import { orientations } from '../../constants/orientations.const';
 import defaultClasses from './dateTime.module.css';
 
 type Value = {

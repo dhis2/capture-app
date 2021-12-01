@@ -1,18 +1,7 @@
 // @flow
-import { errorCreator, pipe } from 'capture-core-utils';
-import log from 'loglevel';
 import moment from 'moment';
-import { typeof dataElementTypes } from '../../../../../../metaData';
-
-import {
-    filterTypesObject,
-    dateFilterTypes,
-    type AssigneeFilterData,
-    type DateFilterData,
-    type BooleanFilterData,
-    type TextFilterData,
-    type NumericFilterData,
-} from '../../../../WorkingListsBase';
+import log from 'loglevel';
+import { errorCreator, pipe } from 'capture-core-utils';
 import type {
     ApiDataFilterNumeric,
     ApiDataFilterText,
@@ -22,6 +11,17 @@ import type {
     ApiDataFilterAssignee,
     ApiEventQueryCriteria,
 } from '../../../types';
+import {
+    filterTypesObject,
+    dateFilterTypes,
+    type AssigneeFilterData,
+    type DateFilterData,
+    type BooleanFilterData,
+    type TextFilterData,
+    type NumericFilterData,
+} from '../../../../WorkingListsBase';
+import { typeof dataElementTypes } from '../../../../../../metaData';
+
 import { getApiOptionSetFilter } from './optionSet';
 
 type ColumnForConverterBase = {|

@@ -1,14 +1,14 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import i18n from '@dhis2/d2-i18n';
+import type { ApiEventQueryCriteria, CommonQueryData, ClientConfig, ColumnsMetaForDataFetching } from '../types';
+import { convertToClientConfig } from '../helpers/eventFilters';
 import {
     initListViewSuccess,
     initListViewError,
     buildFilterQueryArgs,
 } from '../../WorkingListsCommon';
-import { convertToClientConfig } from '../helpers/eventFilters';
-import type { ApiEventQueryCriteria, CommonQueryData, ClientConfig, ColumnsMetaForDataFetching } from '../types';
 import { getEventListData } from './getEventListData';
 
 const errorMessages = {

@@ -1,8 +1,8 @@
 // @flow
 import React, { useMemo, memo } from 'react';
-import { buildButtonText } from './buttonTextBuilder';
-import { FilterButtonMain } from './FilterButtonMain.component';
 import type { Props } from './filterButtonTextBuilder.types';
+import { FilterButtonMain } from './FilterButtonMain.component';
+import { buildButtonText } from './buttonTextBuilder';
 
 export const FilterButtonTextBuilder = memo<Props>(({ filterValue, type, options, ...passOnProps }: Props) => {
     const buttonText = useMemo(() => {

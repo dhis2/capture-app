@@ -1,11 +1,11 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles';
 import React, { type ComponentType } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import { LockedSelector } from '../../LockedSelector';
-import { MainPageStatuses } from './MainPage.constants';
-import type { Props } from './mainPage.types';
-import { WithoutOrgUnitSelectedMessage } from './WithoutOrgUnitSelectedMessage/WithoutOrgUnitSelectedMessage';
 import { WorkingListsType } from './WorkingListsType';
+import { WithoutOrgUnitSelectedMessage } from './WithoutOrgUnitSelectedMessage/WithoutOrgUnitSelectedMessage';
+import type { Props } from './mainPage.types';
+import { MainPageStatuses } from './MainPage.constants';
 
 const getStyles = () => ({
     listContainer: {

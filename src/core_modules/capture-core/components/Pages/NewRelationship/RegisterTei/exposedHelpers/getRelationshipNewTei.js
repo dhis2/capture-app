@@ -1,17 +1,17 @@
 // @flow
-import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
-import uuid from 'd2-utilizr/src/uuid';
 import moment from 'moment';
-import { convertFormToClient, convertClientToServer } from '../../../../../converters';
+import uuid from 'd2-utilizr/src/uuid';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
+import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
+import { convertDataEntryValuesToClientValues } from '../../../../DataEntry/common/convertDataEntryValuesToClientValues';
+import { getDisplayName } from '../../../../../trackedEntityInstances/getDisplayName';
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
     type RenderFoundation,
 } from '../../../../../metaData';
-import { getDisplayName } from '../../../../../trackedEntityInstances/getDisplayName';
-import { convertDataEntryValuesToClientValues } from '../../../../DataEntry/common/convertDataEntryValuesToClientValues';
-import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
+import { convertFormToClient, convertClientToServer } from '../../../../../converters';
 
 function getTrackerProgramMetadata(programId: string) {
     const program = getTrackerProgramThrowIfNotFound(programId);

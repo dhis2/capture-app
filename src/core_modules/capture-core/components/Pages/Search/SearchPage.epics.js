@@ -1,11 +1,11 @@
 // @flow
-import { push } from 'connected-react-router';
-import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { buildUrlQueryString } from '../../../utils/routing';
-import { deriveUrlQueries } from '../../../utils/url';
-import { lockedSelectorActionTypes } from '../../LockedSelector';
+import { ofType } from 'redux-observable';
+import { push } from 'connected-react-router';
 import { topBarActionsActionTypes } from '../../TopBarActions';
+import { lockedSelectorActionTypes } from '../../LockedSelector';
+import { deriveUrlQueries } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 import { searchPageActionTypes } from './SearchPage.actions';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>

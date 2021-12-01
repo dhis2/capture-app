@@ -1,7 +1,7 @@
 // @flow
-import { useDataQuery } from '@dhis2/app-runtime';
-import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
+import { useDataQuery } from '@dhis2/app-runtime';
 
 export const useOrganisationUnit = (orgUnitId: string) => {
     const orgUnit = useSelector(({ organisationUnits }) => organisationUnits[orgUnitId]);

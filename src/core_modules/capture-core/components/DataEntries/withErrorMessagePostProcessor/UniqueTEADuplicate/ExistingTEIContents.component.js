@@ -1,12 +1,12 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import React from 'react';
-import { Button } from '../../../Buttons';
-import { CardList } from '../../../CardList';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+import i18n from '@dhis2/d2-i18n';
 import type { CardDataElementsInformation } from '../../../Pages/Search/SearchResults/SearchResults.types';
+import { CardList } from '../../../CardList';
+import { Button } from '../../../Buttons';
 
 type Props = {
     attributeValues: {[id: string]: any},

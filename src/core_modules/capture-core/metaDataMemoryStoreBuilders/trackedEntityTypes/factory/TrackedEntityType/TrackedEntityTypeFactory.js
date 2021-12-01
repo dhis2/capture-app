@@ -1,9 +1,6 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import {
-    TrackedEntityType,
-} from '../../../../metaData';
-import type { DataElement } from '../../../../metaData';
+import { SearchGroupFactory } from '../../../common/factory';
 import type
 {
     CachedTrackedEntityType,
@@ -12,9 +9,12 @@ import type
     CachedTrackedEntityAttribute,
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
-import { SearchGroupFactory } from '../../../common/factory';
-import { DataElementFactory } from './DataElementFactory';
+import {
+    TrackedEntityType,
+} from '../../../../metaData';
+import type { DataElement } from '../../../../metaData';
 import { TeiRegistrationFactory } from './TeiRegistrationFactory';
+import { DataElementFactory } from './DataElementFactory';
 
 export class TrackedEntityTypeFactory {
     static translationPropertyNames = {

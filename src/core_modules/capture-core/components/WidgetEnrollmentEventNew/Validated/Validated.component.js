@@ -1,11 +1,11 @@
 // @flow
-import { spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
 import React, { memo, type ComponentType } from 'react';
-import { Widget } from '../../Widget';
-import { DataEntry } from '../DataEntry';
-import { FinishButtons } from '../FinishButtons';
+import withStyles from '@material-ui/core/styles/withStyles';
+import { spacersNum } from '@dhis2/ui';
 import { SavingText } from '../SavingText';
+import { FinishButtons } from '../FinishButtons';
+import { DataEntry } from '../DataEntry';
+import { Widget } from '../../Widget';
 import type { Props } from './validated.types';
 
 const styles = () => ({

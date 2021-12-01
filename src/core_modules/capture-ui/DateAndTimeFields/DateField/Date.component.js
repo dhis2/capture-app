@@ -1,9 +1,9 @@
 // @flow
 import React, { createRef } from 'react';
-import { DateInput } from '../../internal/DateInput/DateInput.component';
 import { lowerCaseFirstLetter } from '../../internal/utils/string/lowerCaseFirstLetter';
-import { DateCalendar } from './DateCalendar.component';
+import { DateInput } from '../../internal/DateInput/DateInput.component';
 import { DatePopup } from './DatePopup.component';
+import { DateCalendar } from './DateCalendar.component';
 
 type Props = {
     value: ?string,

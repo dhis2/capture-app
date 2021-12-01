@@ -1,6 +1,6 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
+import i18n from '@dhis2/d2-i18n';
 import { parseDate } from '../../converters/date';
 
 export const isValidNonFutureDate = (value: string) => {

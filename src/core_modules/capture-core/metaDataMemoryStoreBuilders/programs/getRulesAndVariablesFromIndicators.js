@@ -1,6 +1,6 @@
 // @flow
-import type { ProgramRule, ProgramRuleAction, ProgramRuleVariable } from 'capture-core-utils/rulesEngine';
 import isString from 'd2-utilizr/lib/isString';
+import type { ProgramRule, ProgramRuleAction, ProgramRuleVariable } from 'capture-core-utils/rulesEngine';
 
 
 export type CachedProgramIndicator = {

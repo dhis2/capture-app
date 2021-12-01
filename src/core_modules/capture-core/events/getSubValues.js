@@ -1,10 +1,10 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
-import { config } from 'd2';
-import isDefined from 'd2-utilizr/lib/isDefined';
 import log from 'loglevel';
-import { getD2, getApi } from '../d2/d2Instance';
+import isDefined from 'd2-utilizr/lib/isDefined';
+import { config } from 'd2';
+import { errorCreator } from 'capture-core-utils';
 import { type RenderFoundation, dataElementTypes } from '../metaData';
+import { getD2, getApi } from '../d2/d2Instance';
 
 const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 

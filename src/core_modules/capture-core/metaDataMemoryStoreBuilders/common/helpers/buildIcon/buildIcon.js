@@ -1,8 +1,8 @@
 // @flow
-import { Icon } from '../../../../metaData';
 import type {
     CachedStyle,
 } from '../../../../storageControllers/cache.types';
+import { Icon } from '../../../../metaData';
 
 export const buildIcon = (cachedStyle?: ?CachedStyle) => {
     const { color, icon: name } = cachedStyle || {};

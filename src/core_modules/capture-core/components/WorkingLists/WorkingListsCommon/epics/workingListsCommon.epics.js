@@ -1,6 +1,6 @@
 // @flow
-import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
 import { workingListsCommonActionTypes, setStickyFiltersAfterColumnSorting } from '../actions';
 
 export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObservable, store: ReduxStore) =>

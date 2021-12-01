@@ -1,6 +1,6 @@
 // @flow
-import Dialog from '@material-ui/core/Dialog';
 import React from 'react';
+import Dialog from '@material-ui/core/Dialog';
 import { ExistingTEILoader } from './ExistingTEILoader.container';
 
 type Props = {

@@ -1,10 +1,10 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 
-import { withStyles } from '@material-ui/core/styles';
-import { debounce } from 'lodash';
-import * as React from 'react';
 import VirtualizedSelect from 'react-virtualized-select';
+import * as React from 'react';
+import { debounce } from 'lodash';
+import { withStyles } from '@material-ui/core/styles';
 
 import 'react-select/dist/react-select.css';
 import 'react-virtualized/styles.css';

@@ -1,20 +1,12 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
 
-import {
-    DataEntry,
-    withSaveHandler,
-    withCancelButton,
-    withDataEntryField,
-    withDataEntryFieldIfApplicable,
-    placements,
-    withCleanUp,
-    withBrowserBackWarning,
-} from '../../../components/DataEntry';
-import type { RenderFoundation } from '../../../metaData';
-import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import { withMainButton } from '../DataEntry/withMainButton';
+import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
+import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
+import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
 import {
     withInternalChangeHandler,
     withLabel,
@@ -28,11 +20,19 @@ import {
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
 } from '../../FormFields/New';
+import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import type { RenderFoundation } from '../../../metaData';
+import {
+    DataEntry,
+    withSaveHandler,
+    withCancelButton,
+    withDataEntryField,
+    withDataEntryFieldIfApplicable,
+    placements,
+    withCleanUp,
+    withBrowserBackWarning,
+} from '../../../components/DataEntry';
 
-import { withFilterProps } from '../../FormFields/New/HOC/withFilterProps';
-import labelTypeClasses from '../DataEntry/dataEntryFieldLabels.module.css';
-import { getEventDateValidatorContainers } from '../DataEntry/fieldValidators/eventDate.validatorContainersGetter';
-import { withMainButton } from '../DataEntry/withMainButton';
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {

@@ -1,6 +1,6 @@
 // @flow
-import type { QuerySingleResource } from '../../../../../../utils/api';
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching, TeiWorkingListsTemplate } from '../../../types';
+import type { QuerySingleResource } from '../../../../../../utils/api';
 
 export type Input = {|
     programId: string,

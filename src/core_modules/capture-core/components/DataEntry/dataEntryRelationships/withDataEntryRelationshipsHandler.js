@@ -1,10 +1,10 @@
 // @flow
-import * as React from 'react';
 import { connect } from 'react-redux';
+import * as React from 'react';
+import { getDataEntryKey } from '../common/getDataEntryKey';
 import {
     removeRelationship,
 } from '../actions/dataEntry.actions';
-import { getDataEntryKey } from '../common/getDataEntryKey';
 
 type Props = {
     itemId: string,

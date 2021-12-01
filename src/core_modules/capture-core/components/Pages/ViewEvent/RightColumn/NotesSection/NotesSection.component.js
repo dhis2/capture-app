@@ -1,14 +1,14 @@
 // @flow
 
-import i18n from '@dhis2/d2-i18n';
-import { IconMessages24 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
 import * as React from 'react';
-import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
-import type { ProgramStage } from '../../../../../metaData';
-import { Notes } from '../../../../Notes/Notes.component';
-import { ViewEventSection } from '../../Section/ViewEventSection.component';
+import { withStyles } from '@material-ui/core/styles';
+import { IconMessages24 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
+import { ViewEventSection } from '../../Section/ViewEventSection.component';
+import { Notes } from '../../../../Notes/Notes.component';
+import type { ProgramStage } from '../../../../../metaData';
+import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
 

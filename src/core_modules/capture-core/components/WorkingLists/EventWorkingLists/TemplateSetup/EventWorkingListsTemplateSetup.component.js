@@ -1,8 +1,8 @@
 // @flow
-import React, { useMemo } from 'react';
 import uuid from 'uuid/v4';
-import { convertToEventFilterEventQueryCriteria } from '../helpers/eventFilters';
+import React, { useMemo } from 'react';
 import { EventWorkingListsViewMenuSetup } from '../ViewMenuSetup';
+import { convertToEventFilterEventQueryCriteria } from '../helpers/eventFilters';
 import type { Props } from './eventWorkingListsTemplateSetup.types';
 
 const useWorkingListsTemplates = templates => useMemo(() =>

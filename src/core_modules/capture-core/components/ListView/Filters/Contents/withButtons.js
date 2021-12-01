@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
 import * as React from 'react';
-import { Button } from '../../../Buttons';
+import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
 import type { UpdatableFilterContent } from '../../../FiltersForTypes';
+import { Button } from '../../../Buttons';
 
 const getStyles = (theme: Theme) => ({
     buttonsContainer: {

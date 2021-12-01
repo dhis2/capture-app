@@ -1,11 +1,11 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withTheme } from '@material-ui/core';
 import React from 'react';
-import { TeiRegistrationEntry } from '../../../../../DataEntries';
+import { withTheme } from '@material-ui/core';
+import i18n from '@dhis2/d2-i18n';
 import { DATA_ENTRY_ID } from '../../registerTei.const';
-import type { Props } from './dataEntryTrackedEntityInstance.types';
+import { TeiRegistrationEntry } from '../../../../../DataEntries';
 import teiClasses from './trackedEntityInstance.module.css';
+import type { Props } from './dataEntryTrackedEntityInstance.types';
 
 const RelationshipTrackedEntityInstancePlain =
   ({

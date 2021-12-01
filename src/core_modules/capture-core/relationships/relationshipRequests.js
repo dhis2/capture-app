@@ -1,8 +1,8 @@
 // @flow
 import isArray from 'd2-utilizr/lib/isArray';
-import { getApi } from '../d2/d2Instance';
 import { getProgramThrowIfNotFound, EventProgram } from '../metaData';
 import type { RelationshipType } from '../metaData';
+import { getApi } from '../d2/d2Instance';
 
 import { convertServerRelationshipToClient } from './convertServerToClient';
 

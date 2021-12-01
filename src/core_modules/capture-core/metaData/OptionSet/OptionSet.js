@@ -1,13 +1,13 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import { errorCreator } from 'capture-core-utils';
-import isArray from 'd2-utilizr/lib/isArray';
 import log from 'loglevel';
-import type { DataElement } from '../DataElement';
+import isArray from 'd2-utilizr/lib/isArray';
+import { errorCreator } from 'capture-core-utils';
 import type { ConvertFn } from '../DataElement/DataElement';
-import type { Option, Value } from './Option';
-import type { OptionGroup } from './OptionGroup';
+import type { DataElement } from '../DataElement';
 import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
+import type { OptionGroup } from './OptionGroup';
+import type { Option, Value } from './Option';
 
 export class OptionSet {
     static errorMessages = {

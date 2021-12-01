@@ -1,8 +1,8 @@
 // @flow
-import type { DataElement as MetaDataElement } from '../../../../../metaData';
-import { orientations } from '../../../../FormFields/New';
-import { BooleanFieldForForm } from '../../Components';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
+import { BooleanFieldForForm } from '../../Components';
+import { orientations } from '../../../../FormFields/New';
+import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
 export const getBooleanFieldConfig = (metaData: MetaDataElement, options: Object) => {
     const props = createProps({

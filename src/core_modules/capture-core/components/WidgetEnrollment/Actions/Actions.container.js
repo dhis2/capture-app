@@ -1,8 +1,8 @@
 // @flow
-import { useDataMutation } from '@dhis2/app-runtime';
 import React from 'react';
-import { ActionsComponent } from './Actions.component';
+import { useDataMutation } from '@dhis2/app-runtime';
 import type { Props } from './actions.types';
+import { ActionsComponent } from './Actions.component';
 
 const enrollmentUpdate = {
     resource: 'enrollments',

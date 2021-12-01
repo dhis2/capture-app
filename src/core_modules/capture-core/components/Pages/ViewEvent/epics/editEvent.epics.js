@@ -1,12 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
-import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
-import { getApi } from '../../../../d2';
-import { getEvent } from '../../../../events/eventRequests';
-import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
+import { ofType } from 'redux-observable';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import i18n from '@dhis2/d2-i18n';
 import {
     actionTypes as editEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,
@@ -14,6 +11,9 @@ import {
     orgUnitRetrievedOnUrlUpdate,
     orgUnitCouldNotBeRetrievedOnUrlUpdate,
 } from '../ViewEventComponent/editEvent.actions';
+import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
+import { getEvent } from '../../../../events/eventRequests';
+import { getApi } from '../../../../d2';
 
 export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

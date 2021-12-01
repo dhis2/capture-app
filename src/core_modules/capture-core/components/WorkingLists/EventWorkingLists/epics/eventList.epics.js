@@ -1,19 +1,19 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
-import { ofType } from 'redux-observable';
-import { from } from 'rxjs';
 import { takeUntil, filter, concatMap } from 'rxjs/operators';
-import { getApi } from '../../../../d2';
-import { workingListsCommonActionTypes } from '../../WorkingListsCommon';
-import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
+import { from } from 'rxjs';
+import { ofType } from 'redux-observable';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import {
     actionTypes,
     deleteEventError,
     deleteEventSuccess,
 } from '../eventWorkingLists.actions';
-import { initEventWorkingListAsync } from './initEventWorkingList';
+import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
+import { workingListsCommonActionTypes } from '../../WorkingListsCommon';
+import { getApi } from '../../../../d2';
 import { updateEventWorkingListAsync } from './updateEventWorkingList';
+import { initEventWorkingListAsync } from './initEventWorkingList';
 
 export const initEventListEpic = (action$: InputObservable) =>
     action$.pipe(

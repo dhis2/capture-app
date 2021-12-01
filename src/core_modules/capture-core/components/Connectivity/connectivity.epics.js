@@ -1,7 +1,7 @@
 // @flow
-import { batchActions } from 'redux-batched-actions';
-import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
+import { batchActions } from 'redux-batched-actions';
 
 import { getEventListOnReconnect, goingOnlineExecuted, batchActionTypes } from './connectivity.actions';
 

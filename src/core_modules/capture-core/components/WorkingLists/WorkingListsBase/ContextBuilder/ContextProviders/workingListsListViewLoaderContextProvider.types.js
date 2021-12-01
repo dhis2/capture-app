@@ -1,8 +1,5 @@
 // @flow
 import type {
-    FiltersData,
-} from '../../../../ListView';
-import type {
     ColumnConfigs,
     LoadView,
     UpdateList,
@@ -10,6 +7,9 @@ import type {
     Categories,
     LoadedViewContext,
 } from '../../workingListsBase.types';
+import type {
+    FiltersData,
+} from '../../../../ListView';
 
 export type Props = $ReadOnly<{|
     sortById?: string,

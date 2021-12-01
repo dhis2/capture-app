@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
-import { Button } from '../../../Buttons/Button.component';
+import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
 import { NoWriteAccessMessage } from '../../../NoWriteAccessMessage';
+import { Button } from '../../../Buttons/Button.component';
 
 const getStyles = (theme: Theme) => ({
     contents: {

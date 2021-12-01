@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
-import { ViewEventNewRelationshipWrapperComponent } from './ViewEventNewRelationshipWrapper.component';
-import { makeRelationshipTypesSelector } from './ViewEventNewRelationshipWrapper.selectors';
 import { eventCancelNewRelationship, requestAddEventRelationship } from './ViewEventRelationships.actions';
+import { makeRelationshipTypesSelector } from './ViewEventNewRelationshipWrapper.selectors';
+import { ViewEventNewRelationshipWrapperComponent } from './ViewEventNewRelationshipWrapper.component';
 
 const makeMapStateToProps = () => {
     const relationshipTypesSelector = makeRelationshipTypesSelector();

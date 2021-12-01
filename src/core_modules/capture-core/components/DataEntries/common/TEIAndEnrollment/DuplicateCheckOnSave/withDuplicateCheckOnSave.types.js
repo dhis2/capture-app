@@ -1,7 +1,7 @@
 // @flow
 import type { Node } from 'react';
-import type { Enrollment, TeiRegistration } from '../../../../../metaData';
 import type { RenderCustomCardActions } from '../../../../CardList';
+import type { Enrollment, TeiRegistration } from '../../../../../metaData';
 import type { SaveForDuplicateCheck } from './types';
 
 export type Props = {

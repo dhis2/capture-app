@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { colors, spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
 import React from 'react';
 import type { ComponentType } from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
+import { colors, spacersNum } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 import type { Props } from './StageEventHeader.types';
 

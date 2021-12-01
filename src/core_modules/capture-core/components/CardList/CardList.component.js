@@ -1,11 +1,11 @@
 // @flow
-import { withStyles } from '@material-ui/core';
 import React from 'react';
 import type { ComponentType } from 'react';
+import { withStyles } from '@material-ui/core';
 import type { CardDataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.types';
-import { makeElementsContainerSelector } from './CardList.selectors';
-import type { ListItem, RenderCustomCardActions } from './CardList.types';
 import { CardListItem } from './CardListItem.component';
+import type { ListItem, RenderCustomCardActions } from './CardList.types';
+import { makeElementsContainerSelector } from './CardList.selectors';
 
 type OwnProps = $ReadOnly<{|
     dataElements: CardDataElementsInformation,

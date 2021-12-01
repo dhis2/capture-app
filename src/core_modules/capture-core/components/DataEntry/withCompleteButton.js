@@ -1,21 +1,21 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
-import * as React from 'react';
 import { connect } from 'react-redux';
-import { getStageFromEvent } from '../../metaData/helpers/getStageFromEvent';
-import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
-import { Button } from '../Buttons/Button.component';
+import * as React from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+import Dialog from '@material-ui/core/Dialog';
+import i18n from '@dhis2/d2-i18n';
 import { ProgressButton } from '../Buttons/ProgressButton.component';
-import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
-import { getDataEntryKey } from './common/getDataEntryKey';
+import { Button } from '../Buttons/Button.component';
+import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
+import { getStageFromEvent } from '../../metaData/helpers/getStageFromEvent';
 import { DataEntryComponent } from './DataEntry.component';
+import { getDataEntryKey } from './common/getDataEntryKey';
+import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
 
 type Props = {
     classes: Object,

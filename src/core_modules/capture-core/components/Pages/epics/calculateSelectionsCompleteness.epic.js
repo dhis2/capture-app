@@ -1,13 +1,13 @@
 // @flow
-import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import { ofType } from 'redux-observable';
 import { filter, map } from 'rxjs/operators';
-import { pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
-import { lockedSelectorActionTypes } from '../../LockedSelector';
+import { ofType } from 'redux-observable';
+import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import {
     calculateSelectionsCompleteness,
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
+import { lockedSelectorActionTypes } from '../../LockedSelector';
+import { pageFetchesOrgUnitUsingTheOldWay } from '../../../utils/url';
 
 type CurrentSelectionsState = {
     programId?: ?string,

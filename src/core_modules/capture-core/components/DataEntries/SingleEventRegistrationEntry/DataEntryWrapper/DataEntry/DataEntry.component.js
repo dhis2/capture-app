@@ -1,25 +1,10 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles, withTheme } from '@material-ui/core/styles';
 import React, { Component } from 'react';
-import { withTransformPropName } from '../../../../../HOC';
-import { type RenderFoundation } from '../../../../../metaData';
-import {
-    withSaveHandler,
-    placements,
-    withCleanUp,
-} from '../../../../DataEntry';
-import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
-import { withDataEntryField } from '../../../../DataEntry/dataEntryField/withDataEntryField';
-import { withDataEntryFieldIfApplicable } from '../../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
-import { withDataEntryNotesHandler } from '../../../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
-import { withErrorOutput } from '../../../../DataEntry/dataEntryOutput/withErrorOutput';
-import { withFeedbackOutput } from '../../../../DataEntry/dataEntryOutput/withFeedbackOutput';
-import { withIndicatorOutput } from '../../../../DataEntry/dataEntryOutput/withIndicatorOutput';
-import { withWarningOutput } from '../../../../DataEntry/dataEntryOutput/withWarningOutput';
-import { withDataEntryRelationshipsHandler } from '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
-import { inMemoryFileStore } from '../../../../DataEntry/file/inMemoryFileStore';
-import { withCancelButton } from '../../../../DataEntry/withCancelButton';
+import { withStyles, withTheme } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
+import { Relationships } from '../../../../Relationships/Relationships.component';
+import { Notes } from '../../../../Notes/Notes.component';
+import { InfoIconText } from '../../../../InfoIconText';
 import {
     withInternalChangeHandler,
     withLabel,
@@ -35,17 +20,32 @@ import {
     withDefaultShouldUpdateInterface,
     orientations,
 } from '../../../../FormFields/New';
-import { InfoIconText } from '../../../../InfoIconText';
-import { Notes } from '../../../../Notes/Notes.component';
-import { Relationships } from '../../../../Relationships/Relationships.component';
-import { Assignee } from './Assignee';
-import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
-import labelTypeClasses from './dataEntryFieldLabels.module.css';
-import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
-import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
-
-import { newEventSaveTypes } from './newEventSaveTypes';
+import { withCancelButton } from '../../../../DataEntry/withCancelButton';
+import { inMemoryFileStore } from '../../../../DataEntry/file/inMemoryFileStore';
+import { withDataEntryRelationshipsHandler } from '../../../../DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
+import { withWarningOutput } from '../../../../DataEntry/dataEntryOutput/withWarningOutput';
+import { withIndicatorOutput } from '../../../../DataEntry/dataEntryOutput/withIndicatorOutput';
+import { withFeedbackOutput } from '../../../../DataEntry/dataEntryOutput/withFeedbackOutput';
+import { withErrorOutput } from '../../../../DataEntry/dataEntryOutput/withErrorOutput';
+import { withDataEntryNotesHandler } from '../../../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
+import { withDataEntryFieldIfApplicable } from '../../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
+import { withDataEntryField } from '../../../../DataEntry/dataEntryField/withDataEntryField';
+import { DataEntry as DataEntryContainer } from '../../../../DataEntry/DataEntry.container';
+import {
+    withSaveHandler,
+    placements,
+    withCleanUp,
+} from '../../../../DataEntry';
+import { type RenderFoundation } from '../../../../../metaData';
+import { withTransformPropName } from '../../../../../HOC';
 import { withMainButton } from './withMainButton';
+import { newEventSaveTypes } from './newEventSaveTypes';
+import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
+import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import labelTypeClasses from './dataEntryFieldLabels.module.css';
+import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
+import { Assignee } from './Assignee';
+
 
 const getStyles = theme => ({
     savingContextContainer: {

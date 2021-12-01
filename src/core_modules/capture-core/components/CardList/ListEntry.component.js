@@ -1,9 +1,9 @@
 // @flow
-import { colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
 import React, { type ComponentType } from 'react';
-import { convertValue } from '../../converters/clientToView';
+import { withStyles } from '@material-ui/core';
+import { colors } from '@dhis2/ui';
 import { dataElementTypes } from '../../metaData';
+import { convertValue } from '../../converters/clientToView';
 
 type Props = {|
   name: string,

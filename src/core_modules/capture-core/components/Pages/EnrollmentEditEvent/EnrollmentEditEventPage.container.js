@@ -1,21 +1,21 @@
 // @flow
-import React from 'react';
+import { useHistory } from 'react-router-dom';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { convertValue } from '../../../converters/clientToView';
-import { useProgramInfo } from '../../../hooks/useProgramInfo';
-import { getScopeInfo } from '../../../metaData';
-import { dataElementTypes } from '../../../metaData/DataElement';
-import { buildUrlQueryString } from '../../../utils/routing';
-import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
-import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
-import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
-import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
-import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
+import React from 'react';
 import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
-import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
+import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
+import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
+import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
+import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
+import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
+import { buildUrlQueryString } from '../../../utils/routing';
+import { dataElementTypes } from '../../../metaData/DataElement';
+import { getScopeInfo } from '../../../metaData';
+import { useProgramInfo } from '../../../hooks/useProgramInfo';
+import { convertValue } from '../../../converters/clientToView';
 import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
+import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
 
 export const EnrollmentEditEventPage = () => {
     const history = useHistory();

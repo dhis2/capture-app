@@ -1,15 +1,15 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { IconCheckmark24, IconLocation16, colors } from '@dhis2/ui';
-import L from 'leaflet';
-import * as React from 'react';
-import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
-import { EditControl } from 'react-leaflet-draw';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
+import { EditControl } from 'react-leaflet-draw';
+import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
+import * as React from 'react';
+import L from 'leaflet';
+import { IconCheckmark24, IconLocation16, colors } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import './styles.css';
 import { Button } from '../Buttons/Button.component';
-import { DeleteControl } from './DeleteControl.component';
 import defaultClasses from './polygonField.module.css';
+import { DeleteControl } from './DeleteControl.component';
 
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 

@@ -7,12 +7,7 @@
             "presets": ["@babel/preset-react"]
         }
     },
-    "extends": [
-        "airbnb",
-        "plugin:flowtype/recommended",
-        "plugin:react-hooks/recommended",
-        "react-app"
-    ],
+    "extends": ["airbnb", "plugin:flowtype/recommended", "plugin:react-hooks/recommended", "react-app"],
     "plugins": ["flowtype"],
     "env": {
         "browser": true,
@@ -83,11 +78,7 @@
         "import/no-extraneous-dependencies": [
             "error",
             {
-                "devDependencies": [
-                    "**/*.test.js",
-                    "/cypress/**",
-                    "**/startAppForCypress.js"
-                ],
+                "devDependencies": ["**/*.test.js", "/cypress/**", "**/startAppForCypress.js"],
                 "optionalDependencies": false,
                 "peerDependencies": true
             }
@@ -95,13 +86,7 @@
         "react/sort-comp": [
             2,
             {
-                "order": [
-                    "static-methods",
-                    "type-annotations",
-                    "lifecycle",
-                    "everything-else",
-                    "render"
-                ],
+                "order": ["static-methods", "type-annotations", "lifecycle", "everything-else", "render"],
                 "groups": {
                     "lifecycle": [
                         "displayName",
@@ -132,15 +117,16 @@
             "error",
             {
                 "properties": "never",
-                "allow": [
-                    "UNSAFE_componentWillMount",
-                    "UNSAFE_componentWillReceiveProps",
-                    "UNSAFE_componentWillUpdate"
-                ]
+                "allow": ["UNSAFE_componentWillMount", "UNSAFE_componentWillReceiveProps", "UNSAFE_componentWillUpdate"]
             }
         ],
         "import/extensions": ["error", "never"],
-        "import/order": ["error", {"alphabetize": {"order": "asc", "caseInsensitive": true}}]
+        "import/order": [
+            "error",
+            {
+                "alphabetize": { "order": "desc", "caseInsensitive": true }
+            }
+        ]
     },
     "settings": {
         "import/resolver": {

@@ -1,6 +1,6 @@
 // @flow
-import type { LoadView, UpdateList } from '../../WorkingListsBase';
 import type { EventWorkingListsRowMenuSetupOutputProps } from '../RowMenuSetup';
+import type { LoadView, UpdateList } from '../../WorkingListsBase';
 
 type ExtractedProps = $ReadOnly<{|
     lastTransaction: number,

@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { get as getOrgUnitRoots } from '../orgUnitRoots.store';
-import { orgUnitFieldScopes } from './scopes.const';
 import { withInternalFilterHandler } from './withInternalFilterHandler';
+import { orgUnitFieldScopes } from './scopes.const';
 
 type Props = {
     scope: $Values<typeof orgUnitFieldScopes>,

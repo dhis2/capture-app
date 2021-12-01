@@ -1,17 +1,17 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
-import type { FormBuilder, FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
-import log from 'loglevel';
 import React, { Component } from 'react';
-import type { DataElement, CustomForm } from '../../metaData';
-import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
+import log from 'loglevel';
+import type { FormBuilder, FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
+import { errorCreator } from 'capture-core-utils';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
-import { withCustomForm } from './D2CustomForm/withCustomForm';
-import { buildField } from './field/buildField';
-import { validatorTypes } from './field/validators/constants';
-import { withAlternateBackgroundColors } from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
-import { withDivider } from './FieldDivider/withDivider';
+import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
+import type { DataElement, CustomForm } from '../../metaData';
 import { FormBuilderContainer } from './FormBuilder.container';
+import { withDivider } from './FieldDivider/withDivider';
+import { withAlternateBackgroundColors } from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
+import { validatorTypes } from './field/validators/constants';
+import { buildField } from './field/buildField';
+import { withCustomForm } from './D2CustomForm/withCustomForm';
 
 const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
 type FormsValues = {

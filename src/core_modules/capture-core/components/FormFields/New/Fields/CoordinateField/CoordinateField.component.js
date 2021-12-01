@@ -1,9 +1,9 @@
 // @flow
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import withStyles from '@material-ui/core/styles/withStyles';
-import { CoordinateField as UICoordinateField } from 'capture-ui';
 import * as React from 'react';
+import { CoordinateField as UICoordinateField } from 'capture-ui';
+import withStyles from '@material-ui/core/styles/withStyles';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 import { typeof orientations } from '../../../New';
 
 const getStyles = (theme: Theme) => ({

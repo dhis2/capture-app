@@ -1,5 +1,10 @@
 // @flow
 import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+} from '../internal';
+import labelTypeClasses from '../../buildField.module.css';
+import {
     VirtualizedSelectField,
     withSelectTranslations,
     withGotoInterface,
@@ -12,13 +17,8 @@ import {
     withDisplayMessages,
     withFilterProps,
 } from '../../../../FormFields/New';
-import labelTypeClasses from '../../buildField.module.css';
-import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-} from '../internal';
-import { withOptionsIconElement } from './withOptionsIconElement';
 import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
+import { withOptionsIconElement } from './withOptionsIconElement';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;

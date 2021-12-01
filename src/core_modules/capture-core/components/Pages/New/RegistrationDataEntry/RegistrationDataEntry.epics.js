@@ -1,12 +1,12 @@
 // @flow
-import moment from 'moment';
-import { ofType } from 'redux-observable';
-import { of } from 'rxjs';
 import { flatMap, map } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { ofType } from 'redux-observable';
+import moment from 'moment';
+import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import {
     registrationFormActionTypes,
     saveNewTrackedEntityInstance,

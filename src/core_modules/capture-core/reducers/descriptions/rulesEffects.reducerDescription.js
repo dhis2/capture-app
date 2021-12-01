@@ -5,8 +5,8 @@ import type {
     GeneralErrorEffect,
     GeneralWarningEffect,
 } from 'capture-core-utils/rulesEngine';
-import { actionTypes } from '../../rules/actionsCreator';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
+import { actionTypes } from '../../rules/actionsCreator';
 
 export const messageStateKeys = {
     ERROR: 'error',

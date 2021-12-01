@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
-import { withFocusSaver } from '../../HOC/withFocusSaver';
-import { InnerMessage } from '../../internal/InnerMessage/InnerMessage.component';
+import i18n from '@dhis2/d2-i18n';
 import { DateTimeField } from '../DateTimeField/DateTime.component';
+import { InnerMessage } from '../../internal/InnerMessage/InnerMessage.component';
+import { withFocusSaver } from '../../HOC/withFocusSaver';
 import defaultClasses from './dateTimeRangeField.module.css';
 
 const RangeInputField = withFocusSaver()(DateTimeField);

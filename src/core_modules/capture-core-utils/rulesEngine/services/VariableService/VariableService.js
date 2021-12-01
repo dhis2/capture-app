@@ -1,7 +1,5 @@
 // @flow
 import log from 'loglevel';
-import { typeKeys } from '../../constants';
-import { OptionSetHelper } from '../../helpers/OptionSetHelper';
 import type {
     ProgramRuleVariable,
     EventData,
@@ -20,6 +18,8 @@ import type {
     RulesEngineInput,
     IDateUtils,
 } from '../../rulesEngine.types';
+import { OptionSetHelper } from '../../helpers/OptionSetHelper';
+import { typeKeys } from '../../constants';
 import { variablePrefixes } from './variablePrefixes.const';
 
 

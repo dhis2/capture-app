@@ -1,8 +1,8 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
-import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
+import i18n from '@dhis2/d2-i18n';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
+import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 
 type Props = {
     onEnterKey: (value: ?string) => void,

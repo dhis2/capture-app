@@ -1,8 +1,8 @@
 /* eslint-disable no-await-in-loop */
 // @flow
 import { chunk } from 'capture-core-utils';
-import { getContext } from '../context';
 import { query } from '../IOUtils';
+import { getContext } from '../context';
 
 type QueryVariables = {
     page: number,

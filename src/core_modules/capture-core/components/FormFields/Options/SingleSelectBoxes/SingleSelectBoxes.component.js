@@ -1,13 +1,13 @@
 // @flow
 /* eslint-disable react/no-array-index-key */
-import { Radio, colors, spacersNum } from '@dhis2/ui';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormLabel from '@material-ui/core/FormLabel';
-import { withStyles } from '@material-ui/core/styles';
 import React, { Component, type ComponentType } from 'react';
-import { singleOrientations } from './singleSelectBoxes.const';
+import { withStyles } from '@material-ui/core/styles';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import { Radio, colors, spacersNum } from '@dhis2/ui';
 import type { Props } from './singleSelectBoxes.types';
+import { singleOrientations } from './singleSelectBoxes.const';
 
 const styles = ({ typography, palette }) => ({
     label: typography.formFieldTitle,

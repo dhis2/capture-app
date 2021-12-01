@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
 import React, { useState, useRef, useCallback, useMemo, type ComponentType } from 'react';
-import { ListViewLoader } from '../ListViewLoader';
+import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
 import { TemplateMaintenance, dialogModes } from '../TemplateMaintenance';
+import { ListViewLoader } from '../ListViewLoader';
 import type { Props } from './listViewConfigMenuContent.types';
 
 const getStyles = (theme: Theme) => ({

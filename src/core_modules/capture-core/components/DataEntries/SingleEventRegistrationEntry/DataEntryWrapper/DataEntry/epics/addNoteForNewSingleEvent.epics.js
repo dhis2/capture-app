@@ -1,17 +1,17 @@
 // @flow
-import uuid from 'd2-utilizr/lib/uuid';
-import moment from 'moment';
-import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { convertValue as convertListValue } from '../../../../../../converters/clientToList';
-import { getCurrentUser } from '../../../../../../d2/d2Instance';
-import { dataElementTypes } from '../../../../../../metaData';
-import {
-    addNote,
-} from '../../../../../DataEntry/actions/dataEntry.actions';
+import { ofType } from 'redux-observable';
+import moment from 'moment';
+import uuid from 'd2-utilizr/lib/uuid';
 import {
     actionTypes as newEventDataEntryActionTypes,
 } from '../actions/dataEntry.actions';
+import {
+    addNote,
+} from '../../../../../DataEntry/actions/dataEntry.actions';
+import { dataElementTypes } from '../../../../../../metaData';
+import { getCurrentUser } from '../../../../../../d2/d2Instance';
+import { convertValue as convertListValue } from '../../../../../../converters/clientToList';
 
 
 export const addNoteForNewSingleEventEpic = (action$: InputObservable) =>

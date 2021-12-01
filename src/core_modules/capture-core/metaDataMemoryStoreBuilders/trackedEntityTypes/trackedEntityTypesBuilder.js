@@ -1,7 +1,7 @@
 // @flow
 import { trackedEntityTypesCollection } from '../../metaDataMemoryStores';
-import { TrackedEntityTypeFactory } from './factory';
 import type { BuildTrackedEntityTypesInput } from './trackedEntityTypesBuilder.types';
+import { TrackedEntityTypeFactory } from './factory';
 
 export async function buildTrackedEntityTypes({
     cachedTrackedEntityTypes,

@@ -1,11 +1,11 @@
 // @flow
-import { withStyles } from '@material-ui/core';
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
 import React, { type ComponentType } from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import { withStyles } from '@material-ui/core';
 import { type Section } from '../../metaData';
-import type { Props, PropsForPureComponent } from './D2Form.types';
 import { D2SectionContainer } from './D2Section.container';
+import type { Props, PropsForPureComponent } from './D2Form.types';
 
 export const styles = () => ({
     containerCustomForm: {

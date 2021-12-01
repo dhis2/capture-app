@@ -1,7 +1,7 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
 import * as React from 'react';
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme: Theme) => ({
     base: {

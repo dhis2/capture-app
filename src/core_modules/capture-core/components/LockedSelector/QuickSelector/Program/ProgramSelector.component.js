@@ -1,23 +1,23 @@
 // @flow
 
-import i18n from '@dhis2/d2-i18n';
-import { colors, IconCross24 } from '@dhis2/ui';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
-import React, { Component, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import type { Program } from '../../../../metaData';
-import { programCollection } from '../../../../metaDataMemoryStores';
-import { buildUrlQueryString } from '../../../../utils/routing';
-import { LinkButton } from '../../../Buttons/LinkButton.component';
-import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
+import { useSelector } from 'react-redux';
+import React, { Component, useEffect } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import Grid from '@material-ui/core/Grid';
+import { colors, IconCross24 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
-import { CategorySelector } from './CategorySelector.component';
+import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
+import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import { LinkButton } from '../../../Buttons/LinkButton.component';
+import { buildUrlQueryString } from '../../../../utils/routing';
+import { programCollection } from '../../../../metaDataMemoryStores';
+import type { Program } from '../../../../metaData';
 import { ProgramList } from './ProgramList';
+import { CategorySelector } from './CategorySelector.component';
 import './programSelector.css';
 
 const EmptyPrograms = ({ classes, handleResetOrgUnit }) => {

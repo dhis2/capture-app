@@ -1,6 +1,6 @@
 // @flow
-import { isValidTime } from 'capture-core-utils/validators/form';
 import moment from 'moment';
+import { isValidTime } from 'capture-core-utils/validators/form';
 /**
  *
  * @export

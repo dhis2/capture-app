@@ -1,7 +1,7 @@
 // @flow
 import moment from 'moment';
-import { dataElementTypes } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
+import { dataElementTypes } from '../metaData';
 
 import { stringifyNumber } from './common/stringifyNumber';
 

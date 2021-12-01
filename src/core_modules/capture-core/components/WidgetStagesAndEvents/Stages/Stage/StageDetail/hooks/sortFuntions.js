@@ -1,7 +1,7 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
 import moment from 'moment';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../../../metaData';
 import { SORT_DIRECTION } from './constants';
 

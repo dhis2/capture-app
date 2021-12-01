@@ -1,10 +1,10 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { Button, colors, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
 import React, { type ComponentType } from 'react';
-import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { withStyles } from '@material-ui/core/styles';
+import { Button, colors, DropdownButton, FlyoutMenu, MenuItem } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { scopeTypes } from '../../../metaData';
+import { useScopeInfo } from '../../../hooks/useScopeInfo';
 
 
 const styles = ({ typography }) => ({

@@ -1,16 +1,16 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import { useMemo } from 'react';
-import {
-    dataElementTypes,
-    type TrackerProgram,
-    type DataElement,
-} from '../../../../metaData';
+import i18n from '@dhis2/d2-i18n';
 import type {
     MainColumnConfig,
     MetadataColumnConfig,
     TeiWorkingListsColumnConfigs,
 } from '../types';
+import {
+    dataElementTypes,
+    type TrackerProgram,
+    type DataElement,
+} from '../../../../metaData';
 
 const mainConfig: Array<MainColumnConfig> = [{
     id: 'regUnit',

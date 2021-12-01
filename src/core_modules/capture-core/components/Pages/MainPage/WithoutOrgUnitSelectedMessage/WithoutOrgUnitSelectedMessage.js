@@ -1,11 +1,11 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
 import React, { useMemo } from 'react';
-import { useProgramInfo } from '../../../../hooks/useProgramInfo';
-import { programTypes } from '../../../../metaData';
+import { withStyles } from '@material-ui/core';
+import { colors } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { IncompleteSelectionsMessage } from '../../../IncompleteSelectionsMessage';
+import { programTypes } from '../../../../metaData';
+import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 
 const styles = {
     incompleteMessageContainer: {

@@ -1,8 +1,8 @@
 // @flow
-import { colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
-import { BooleanField as UIBooleanField } from 'capture-ui';
 import * as React from 'react';
+import { BooleanField as UIBooleanField } from 'capture-ui';
+import { withStyles } from '@material-ui/core/styles';
+import { colors } from '@dhis2/ui';
 
 const getStyles = (theme: Theme) => ({
     iconSelected: {

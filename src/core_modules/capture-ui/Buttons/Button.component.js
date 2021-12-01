@@ -1,6 +1,6 @@
 // @flow
-import MuiButton from '@material-ui/core/Button';
 import * as React from 'react';
+import MuiButton from '@material-ui/core/Button';
 
 
 const buttonKinds = {

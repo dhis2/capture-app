@@ -1,6 +1,6 @@
 // @flow
-import type { Options } from '../../../FiltersForTypes';
 import { typeof filterTypesObject } from '../filters.const';
+import type { Options } from '../../../FiltersForTypes';
 
 export type Props = {|
     'data-test': string,

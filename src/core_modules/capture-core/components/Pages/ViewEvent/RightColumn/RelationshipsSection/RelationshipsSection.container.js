@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import { requestDeleteEventRelationship } from '../../Relationship/ViewEventRelationships.actions';
 import { openAddRelationship } from '../../ViewEventComponent/viewEvent.actions';
+import { requestDeleteEventRelationship } from '../../Relationship/ViewEventRelationships.actions';
 import { RelationshipsSectionComponent } from './RelationshipsSection.component';
 
 const mapStateToProps = (state: ReduxState) => {

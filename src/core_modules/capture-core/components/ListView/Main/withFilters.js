@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { Filters } from '../Filters';
 import type { Columns, FiltersOnly } from '../types';
+import { Filters } from '../Filters';
 
 type Props = {
     columns: Columns,

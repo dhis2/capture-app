@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
-import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
-import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import { EnrollmentDataEntryComponent } from './EnrollmentDataEntry.component';
+import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
+import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 
 const mapStateToProps = () => ({});
 

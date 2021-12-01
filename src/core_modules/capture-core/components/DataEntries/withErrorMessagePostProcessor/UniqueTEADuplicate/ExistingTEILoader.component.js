@@ -1,10 +1,10 @@
 // @flow
-import { makeCancelablePromise } from 'capture-core-utils';
 import React from 'react';
-import { getApi } from '../../../../d2/d2Instance';
+import { makeCancelablePromise } from 'capture-core-utils';
 import { withLoadingIndicator } from '../../../../HOC/withLoadingIndicator';
-import { ExistingTEIContents } from './ExistingTEIContents.container';
+import { getApi } from '../../../../d2/d2Instance';
 import type { ErrorData } from './uniqueTEADuplicate.types';
+import { ExistingTEIContents } from './ExistingTEIContents.container';
 
 const LoadingInddicatorWrappedContents = withLoadingIndicator()(ExistingTEIContents);
 

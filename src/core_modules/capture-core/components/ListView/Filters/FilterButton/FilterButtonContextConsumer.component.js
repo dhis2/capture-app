@@ -3,8 +3,8 @@ import React, { useContext } from 'react';
 import {
     FilterValuesContext,
 } from '../../listView.context';
-import type { Props } from './filterButtonContextConsumer.types';
 import { FilterButtonTextBuilder } from './FilterButtonTextBuilder.component';
+import type { Props } from './filterButtonContextConsumer.types';
 
 export const FilterButtonContextConsumer = ({ itemId, ...passOnProps }: Props) => {
     const filterValues = useContext(FilterValuesContext);

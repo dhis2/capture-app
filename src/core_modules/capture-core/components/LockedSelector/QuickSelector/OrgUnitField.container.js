@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import { OrgUnitField as BasicOrgUnitField } from '../../FormFields/New';
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
+import { OrgUnitField as BasicOrgUnitField } from '../../FormFields/New';
 import { searchOrgUnits, clearOrgUnitsSearch } from './actions/orgUnitList.actions';
 
 const mapStateToProps = (state: ReduxState) => {

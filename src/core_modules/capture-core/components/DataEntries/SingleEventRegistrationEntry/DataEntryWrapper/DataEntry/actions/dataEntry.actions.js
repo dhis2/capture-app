@@ -1,7 +1,7 @@
 // @flow
-import { actionCreator, actionPayloadAppender } from '../../../../../../actions/actions.utils';
-import { effectMethods } from '../../../../../../trackerOffline';
 import typeof { newEventSaveTypes } from '../newEventSaveTypes';
+import { effectMethods } from '../../../../../../trackerOffline';
+import { actionCreator, actionPayloadAppender } from '../../../../../../actions/actions.utils';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForNewSingleEventActionsBatch',

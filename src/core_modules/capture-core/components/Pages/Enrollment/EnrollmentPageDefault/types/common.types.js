@@ -1,7 +1,7 @@
 // @flow
-import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 import type { Program } from 'capture-core/metaData';
 import { dataElementTypes } from 'capture-core/metaData';
+import type { OrgUnit } from 'capture-core-utils/rulesEngine';
 
 
 type DataValue = {

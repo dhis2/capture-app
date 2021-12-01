@@ -1,9 +1,9 @@
 // @flow
-import moment from 'moment';
 import React, { Component } from 'react';
-import typeof { orientations } from '../../constants/orientations.const';
-import { DateField } from '../../DateAndTimeFields/DateField/Date.component';
+import moment from 'moment';
 import { withFocusSaver } from '../../HOC/withFocusSaver';
+import { DateField } from '../../DateAndTimeFields/DateField/Date.component';
+import typeof { orientations } from '../../constants/orientations.const';
 
 type Props = {
     value: ?string,

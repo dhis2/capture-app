@@ -1,8 +1,8 @@
 // @flow
-import { actionCreator } from '../../../actions/actions.utils';
-import type { RenderFoundation } from '../../../metaData';
-import { addFormData } from '../../D2Form/actions/form.actions';
 import { getDataEntryKey } from '../common/getDataEntryKey';
+import { addFormData } from '../../D2Form/actions/form.actions';
+import type { RenderFoundation } from '../../../metaData';
+import { actionCreator } from '../../../actions/actions.utils';
 import { getDataEntryMeta, getDataEntryValues, getFormValues, validateDataEntryValues, getDataEntryNotes } from './dataEntryLoad.utils';
 
 import type { DataEntryPropToInclude } from './dataEntryLoad.utils';

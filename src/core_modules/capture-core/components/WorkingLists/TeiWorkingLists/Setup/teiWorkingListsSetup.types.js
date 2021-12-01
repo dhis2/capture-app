@@ -1,14 +1,14 @@
 // @flow
-import type { TrackerProgram } from '../../../../metaData';
-import type { FiltersData } from '../../WorkingListsBase';
+import type { LoadTeiView, TeiRecords } from '../types';
+import type { TeiWorkingListsReduxOutputProps } from '../ReduxProvider';
 import type {
     CustomColumnOrder,
     RecordsOrder,
     UpdateList,
     InitialViewConfig,
 } from '../../WorkingListsCommon';
-import type { TeiWorkingListsReduxOutputProps } from '../ReduxProvider';
-import type { LoadTeiView, TeiRecords } from '../types';
+import type { FiltersData } from '../../WorkingListsBase';
+import type { TrackerProgram } from '../../../../metaData';
 
 type ExtractedProps = $ReadOnly<{|
     customColumnOrder?: CustomColumnOrder,

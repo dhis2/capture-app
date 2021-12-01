@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
-import { type Access, TrackerProgram } from '../metaData';
 import { programCollection } from '../metaDataMemoryStores';
+import { type Access, TrackerProgram } from '../metaData';
 
 type TrackedEntityTypesWithCorrelatedPrograms = $Exact<$ReadOnly<{
     [elementId: string]: {|

@@ -1,5 +1,9 @@
 // @flow
 import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+} from '../internal';
+import {
     SelectionBoxes,
     withGotoInterface,
     withHideCompatibility,
@@ -8,10 +12,6 @@ import {
     withCalculateMessages,
     withDisplayMessages,
 } from '../../../../FormFields/New';
-import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-} from '../internal';
 import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
 export const OptionSetBoxesFieldForCustomForm = withGotoInterface()(

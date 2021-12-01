@@ -1,19 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles, withTheme } from '@material-ui/core/styles';
-import React, { Component } from 'react';
 import { compose } from 'redux';
-import { withTransformPropName } from '../../../HOC';
-import { type RenderFoundation, type ProgramStage } from '../../../metaData';
-import {
-    placements,
-    withCleanUp,
-} from '../../DataEntry';
-import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
-import { withDataEntryField } from '../../DataEntry/dataEntryField/withDataEntryField';
-import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
-import { withDataEntryNotesHandler } from '../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
-import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import React, { Component } from 'react';
+import { withStyles, withTheme } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
+import { Notes } from '../../Notes/Notes.component';
 import {
     withInternalChangeHandler,
     withLabel,
@@ -28,12 +18,22 @@ import {
     withDefaultShouldUpdateInterface,
     orientations,
 } from '../../FormFields/New';
-import { Notes } from '../../Notes/Notes.component';
-import { addEventSaveTypes } from './addEventSaveTypes';
-import { Assignee } from './Assignee';
-import labelTypeClasses from './dataEntryFieldLabels.module.css';
-import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import { withDataEntryNotesHandler } from '../../DataEntry/dataEntryNotes/withDataEntryNotesHandler';
+import { withDataEntryFieldIfApplicable } from '../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
+import { withDataEntryField } from '../../DataEntry/dataEntryField/withDataEntryField';
+import { DataEntry as DataEntryContainer } from '../../DataEntry/DataEntry.container';
+import {
+    placements,
+    withCleanUp,
+} from '../../DataEntry';
+import { type RenderFoundation, type ProgramStage } from '../../../metaData';
+import { withTransformPropName } from '../../../HOC';
 import { getNoteValidatorContainers } from './fieldValidators/note.validatorContainersGetter';
+import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import labelTypeClasses from './dataEntryFieldLabels.module.css';
+import { Assignee } from './Assignee';
+import { addEventSaveTypes } from './addEventSaveTypes';
 
 const getStyles = theme => ({
     savingContextContainer: {

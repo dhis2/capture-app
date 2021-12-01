@@ -1,8 +1,8 @@
 // @flow
 import moment from 'moment';
-import type { DateDataElement } from '../../../../../metaData';
-import { DateFieldForForm } from '../../Components';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
+import { DateFieldForForm } from '../../Components';
+import type { DateDataElement } from '../../../../../metaData';
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
 

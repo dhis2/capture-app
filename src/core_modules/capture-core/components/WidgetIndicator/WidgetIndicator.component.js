@@ -1,8 +1,8 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import React, { useState } from 'react';
-import { Widget } from '../Widget';
+import i18n from '@dhis2/d2-i18n';
 import type { IndicatorProps } from '../WidgetFeedback/WidgetFeedback.types';
+import { Widget } from '../Widget';
 import { WidgetIndicatorContent } from './WidgetIndicatorContent/WidgetIndicatorContent';
 
 export const WidgetIndicator = ({ indicators, emptyText }: IndicatorProps) => {

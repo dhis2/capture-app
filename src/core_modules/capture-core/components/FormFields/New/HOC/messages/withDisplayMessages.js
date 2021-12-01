@@ -1,9 +1,9 @@
 // @flow
-import { CircularLoader } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import isObject from 'd2-utilizr/lib/isObject';
 import * as React from 'react';
+import isObject from 'd2-utilizr/lib/isObject';
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
+import { CircularLoader } from '@dhis2/ui';
 
 const styles = (theme: Theme) => ({
     base: {

@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import { SearchSuggestion } from './SearchSuggestion.component';
-import defaultClasses from './searchSuggestions.module.css';
-import { SearchSuggestionsUp } from './SearchSuggestionsUp.component';
 import type { User } from './types';
+import { SearchSuggestionsUp } from './SearchSuggestionsUp.component';
+import defaultClasses from './searchSuggestions.module.css';
+import { SearchSuggestion } from './SearchSuggestion.component';
 
 type Props = {
     suggestions: Array<User>,

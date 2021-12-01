@@ -1,13 +1,13 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
-import i18n from '@dhis2/d2-i18n';
 import React from 'react';
-import type { TeiRegistration } from '../../../metaData';
+import i18n from '@dhis2/d2-i18n';
 import {
     DataEntry,
     withBrowserBackWarning,
     inMemoryFileStore,
 } from '../../DataEntry';
+import type { TeiRegistration } from '../../../metaData';
 
 type FinalTeiDataEntryProps = {
     teiRegistrationMetadata: TeiRegistration,

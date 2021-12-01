@@ -1,14 +1,14 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
 import React, { type ComponentType } from 'react';
-import { SearchGroup } from '../../metaData';
-import { ResultsPageSizeContext } from '../Pages/shared-contexts';
+import withStyles from '@material-ui/core/styles/withStyles';
+import i18n from '@dhis2/d2-i18n';
 import { Section, SectionHeaderSimple } from '../Section';
-import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSelector.container';
-import type { Props } from './TeiSearch.types';
-import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
+import { ResultsPageSizeContext } from '../Pages/shared-contexts';
+import { SearchGroup } from '../../metaData';
 import { TeiSearchResults } from './TeiSearchResults/TeiSearchResults.container';
+import { TeiSearchForm } from './TeiSearchForm/TeiSearchForm.container';
+import type { Props } from './TeiSearch.types';
+import { SearchProgramSelector } from './SearchProgramSelector/SearchProgramSelector.container';
 
 const getStyles = (theme: Theme) => ({
     container: {

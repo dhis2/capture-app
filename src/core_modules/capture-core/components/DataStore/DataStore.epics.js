@@ -1,11 +1,11 @@
 // @flow
-import { ofType } from 'redux-observable';
-import { EMPTY } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
-import { appStartActionTypes } from '../../../../components/AppStart';
+import { EMPTY } from 'rxjs';
+import { ofType } from 'redux-observable';
 import { getApi } from '../../d2';
-import { fetchDataStore } from './DataStore.actions';
+import { appStartActionTypes } from '../../../../components/AppStart';
 import { type UseNewDashboard } from './DataStore.types';
+import { fetchDataStore } from './DataStore.actions';
 
 function getDataStoreFromApi() {
     const api = getApi();

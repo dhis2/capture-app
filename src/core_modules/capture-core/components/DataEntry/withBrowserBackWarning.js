@@ -1,12 +1,12 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import * as React from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
-import { dataEntryHasChanges as getDataEntryHasChanges } from './common/dataEntryHasChanges';
 import { getDataEntryKey } from './common/getDataEntryKey';
+import { dataEntryHasChanges as getDataEntryHasChanges } from './common/dataEntryHasChanges';
 
 type Props = {
     dataEntryHasChanges: boolean,

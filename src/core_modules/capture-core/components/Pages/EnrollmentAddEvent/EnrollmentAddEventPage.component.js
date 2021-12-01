@@ -1,18 +1,18 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
 import React, { type ComponentType } from 'react';
-import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { WidgetEnrollment } from '../../WidgetEnrollment';
-import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
-import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
-import { WidgetFeedback } from '../../WidgetFeedback';
-import { WidgetIndicator } from '../../WidgetIndicator';
+import withStyles from '@material-ui/core/styles/withStyles';
+import { spacersNum } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { WidgetProfile } from '../../WidgetProfile';
-import type { Props } from './EnrollmentAddEventPage.types';
-import { NewEventWorkspace } from './NewEventWorkspace';
+import { WidgetIndicator } from '../../WidgetIndicator';
+import { WidgetFeedback } from '../../WidgetFeedback';
+import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
+import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
+import { WidgetEnrollment } from '../../WidgetEnrollment';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { ProgramStageSelector } from './ProgramStageSelector';
+import { NewEventWorkspace } from './NewEventWorkspace';
+import type { Props } from './EnrollmentAddEventPage.types';
 
 const styles = ({ typography }) => ({
     container: {

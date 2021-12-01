@@ -1,7 +1,7 @@
 // @flow
 import { chunk } from 'capture-core-utils';
-import { queryTrackedEntityTypesOutline } from './queries';
 import { storeTrackedEntityTypes } from './quickStoreOperations';
+import { queryTrackedEntityTypesOutline } from './queries';
 
 const loadTrackedEntityTypesBatch = async (idBatch: Array<string>) => {
     const { convertedData: loadedTrackedEntityTypes = [] } = await storeTrackedEntityTypes(idBatch);

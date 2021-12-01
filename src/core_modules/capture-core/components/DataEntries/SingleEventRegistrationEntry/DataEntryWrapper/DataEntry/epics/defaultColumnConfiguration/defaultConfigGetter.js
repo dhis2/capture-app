@@ -1,6 +1,5 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { mainPropertyNames } from '../../../../../../../events/mainPropertyNames.const';
 import {
     dataElementTypes as elementTypeKeys,
 } from '../../../../../../../metaData';
@@ -8,6 +7,7 @@ import type {
     RenderFoundation,
     ProgramStage,
 } from '../../../../../../../metaData';
+import { mainPropertyNames } from '../../../../../../../events/mainPropertyNames.const';
 
 export const getDefaultMainConfig = (stage: ProgramStage) => {
     const baseFields = [

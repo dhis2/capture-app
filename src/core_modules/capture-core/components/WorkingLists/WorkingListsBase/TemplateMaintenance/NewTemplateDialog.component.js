@@ -1,6 +1,6 @@
 // @flow
-import { Dialog } from '@material-ui/core';
 import * as React from 'react';
+import { Dialog } from '@material-ui/core';
 import { NewTemplateContents } from './NewTemplateContents.component';
 
 type Props = {

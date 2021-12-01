@@ -1,13 +1,13 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { Button } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
 import React, { type ComponentType, useContext, useEffect, useMemo, useState } from 'react';
-import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
-import { D2Form } from '../../../D2Form';
-import { Section, SectionHeaderSimple } from '../../../Section';
-import { ResultsPageSizeContext } from '../../shared-contexts';
+import { withStyles } from '@material-ui/core';
+import { Button } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { searchScopes } from '../SearchPage.constants';
+import { ResultsPageSizeContext } from '../../shared-contexts';
+import { Section, SectionHeaderSimple } from '../../../Section';
+import { D2Form } from '../../../D2Form';
+import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
 import type { Props } from './SearchForm.types';
 
 const getStyles = (theme: Theme) => ({

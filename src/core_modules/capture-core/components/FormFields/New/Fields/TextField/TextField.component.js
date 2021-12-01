@@ -1,7 +1,7 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles';
-import { TextField as UITextField } from 'capture-ui';
 import React, { Component } from 'react';
+import { TextField as UITextField } from 'capture-ui';
+import { withStyles } from '@material-ui/core/styles';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {

@@ -1,9 +1,9 @@
 // @flow
-import { Checkbox, Switch, spacersNum } from '@dhis2/ui';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import { Checkbox, Switch, spacersNum } from '@dhis2/ui';
 
 const styles = theme => ({
     label: theme.typography.formFieldTitle,

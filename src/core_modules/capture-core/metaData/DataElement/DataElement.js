@@ -2,14 +2,14 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-syntax */
-import { errorCreator } from 'capture-core-utils';
-import isArray from 'd2-utilizr/lib/isArray';
-import isFunction from 'd2-utilizr/lib/isFunction';
 import log from 'loglevel';
-import type { Icon } from '../Icon/Icon';
+import isFunction from 'd2-utilizr/lib/isFunction';
+import isArray from 'd2-utilizr/lib/isArray';
+import { errorCreator } from 'capture-core-utils';
 import { OptionSet } from '../OptionSet/OptionSet';
-import { dataElementTypes } from './dataElementTypes';
+import type { Icon } from '../Icon/Icon';
 import type { Unique } from './Unique';
+import { dataElementTypes } from './dataElementTypes';
 
 // eslint-disable-next-line no-use-before-define
 export type ConvertFn = (value: any, type: $Keys<typeof dataElementTypes>, element: DataElement) => any;

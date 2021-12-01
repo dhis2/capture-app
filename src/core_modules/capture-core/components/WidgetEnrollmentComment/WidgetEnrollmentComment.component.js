@@ -1,7 +1,7 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { WidgetComment } from '../WidgetComment';
 import { requestAddNoteForEnrollment } from './WidgetEnrollmentComment.actions';
 

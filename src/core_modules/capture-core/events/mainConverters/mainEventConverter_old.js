@@ -1,6 +1,6 @@
 // @flow
-import { dataElementTypes } from '../../metaData';
 import { eventStatusElement } from '../eventStatusElement';
+import { dataElementTypes } from '../../metaData';
 
 type ConverterFn = (type: $Keys<typeof dataElementTypes>, value: any) => any;
 

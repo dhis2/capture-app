@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import { ExistingTEIContentsComponent } from './ExistingTEIContents.component';
 import { makeDataElementsSelector, makeGetClientValuesSelector } from './existingTEIContents.selectors';
+import { ExistingTEIContentsComponent } from './ExistingTEIContents.component';
 
 const makeMapStateToProps = () => {
     const dataElementsSelector = makeDataElementsSelector();

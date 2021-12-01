@@ -1,8 +1,8 @@
 // @flow
-import { Chip } from '@dhis2/ui';
 import * as React from 'react';
-import { TemplateSelectorChipContent } from './TemplateSelectorChipContent.component';
+import { Chip } from '@dhis2/ui';
 import type { WorkingListTemplate } from './workingListsBase.types';
+import { TemplateSelectorChipContent } from './TemplateSelectorChipContent.component';
 
 type PassOnProps = {
     currentListIsModified: boolean,

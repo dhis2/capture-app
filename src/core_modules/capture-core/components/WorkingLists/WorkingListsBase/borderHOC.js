@@ -1,6 +1,6 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles';
 import * as React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 
 const getBorder = (theme: Theme) => {
     const color = theme.palette.dividerLighter;

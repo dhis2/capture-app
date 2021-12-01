@@ -1,7 +1,7 @@
 // @flow
-import { Chip } from '@dhis2/ui';
-import { TextField } from 'capture-ui';
 import * as React from 'react';
+import { TextField } from 'capture-ui';
+import { Chip } from '@dhis2/ui';
 import defaultClasses from './selected.module.css';
 
 type Props = {

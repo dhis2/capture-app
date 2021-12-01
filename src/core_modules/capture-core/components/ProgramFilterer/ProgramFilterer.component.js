@@ -1,8 +1,8 @@
 // @flow
-import { pipe } from 'capture-core-utils';
 import * as React from 'react';
-import type { Program } from '../../metaData';
+import { pipe } from 'capture-core-utils';
 import { programCollection } from '../../metaDataMemoryStores';
+import type { Program } from '../../metaData';
 
 type Props = {
     orgUnitIds: ?Array<string>,

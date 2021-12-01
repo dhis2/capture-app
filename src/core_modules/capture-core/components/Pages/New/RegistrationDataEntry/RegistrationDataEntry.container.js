@@ -1,14 +1,14 @@
 // @flow
-import React, { useCallback, type ComponentType, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cleanUpDataEntry } from '../NewPage.actions';
+import React, { useCallback, type ComponentType, useEffect } from 'react';
 import { NEW_RELATIONSHIP_EVENT_DATA_ENTRY_ID, NEW_SINGLE_EVENT_DATA_ENTRY_ID, NEW_TEI_DATA_ENTRY_ID } from '../NewPage.component';
+import { cleanUpDataEntry } from '../NewPage.actions';
+import type { OwnProps } from './RegistrationDataEntry.types';
+import { RegistrationDataEntryComponent } from './RegistrationDataEntry.component';
 import {
     startSavingNewTrackedEntityInstance,
     startSavingNewTrackedEntityInstanceWithEnrollment,
 } from './RegistrationDataEntry.actions';
-import { RegistrationDataEntryComponent } from './RegistrationDataEntry.component';
-import type { OwnProps } from './RegistrationDataEntry.types';
 
 export const RegistrationDataEntry: ComponentType<OwnProps>
   = ({ selectedScopeId, dataEntryId, setScopeId }) => {

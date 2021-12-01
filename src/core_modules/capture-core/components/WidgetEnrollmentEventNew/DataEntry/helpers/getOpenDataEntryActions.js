@@ -1,9 +1,9 @@
 // @flow
 
 import { convertGeometryOut } from 'capture-core/components/DataEntries/converters';
-import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
-import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
 import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
+import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
+import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 
 type DataEntryPropsToInclude = Array<Object>;
 

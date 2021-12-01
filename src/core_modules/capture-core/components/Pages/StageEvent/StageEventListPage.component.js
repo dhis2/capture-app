@@ -1,12 +1,12 @@
 // @flow
-import { spacersNum } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { compose } from 'redux';
 import React from 'react';
 import type { ComponentType } from 'react';
-import { compose } from 'redux';
+import withStyles from '@material-ui/core/styles/withStyles';
+import { spacersNum } from '@dhis2/ui';
 import { withErrorMessageHandler } from '../../../HOC';
-import { StageEventList } from './StageEventList/StageEventList.component';
 import type { Props } from './StageEventListPage.types';
+import { StageEventList } from './StageEventList/StageEventList.component';
 
 const getStyles = () => ({
     container: {

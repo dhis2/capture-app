@@ -1,9 +1,9 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
-import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
-import log from 'loglevel';
-import * as React from 'react';
 import { walk, kinds } from 'react-transform-tree';
+import * as React from 'react';
+import log from 'loglevel';
+import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
+import { errorCreator } from 'capture-core-utils';
 import { CustomForm } from '../../../metaData';
 
 type Props = {

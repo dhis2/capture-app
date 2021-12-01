@@ -1,10 +1,10 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
-import { convertValue } from '../converters/serverToClient';
-import { getApi } from '../d2/d2Instance';
-import { dataElementTypes } from '../metaData';
+import { errorCreator } from 'capture-core-utils';
 import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
+import { dataElementTypes } from '../metaData';
+import { getApi } from '../d2/d2Instance';
+import { convertValue } from '../converters/serverToClient';
 import { getSubValues } from './getSubValues';
 
 type ApiDataValue = {

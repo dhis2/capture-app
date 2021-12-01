@@ -1,23 +1,23 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import uuid from 'd2-utilizr/lib/uuid';
-import { batchActions } from 'redux-batched-actions';
-import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
+import { batchActions } from 'redux-batched-actions';
+import uuid from 'd2-utilizr/lib/uuid';
+import i18n from '@dhis2/d2-i18n';
 import {
-    convertClientRelationshipToServer,
-    getRelationshipsForEvent,
-} from '../../../../relationships';
+    actionTypes as viewEventActionTypes,
+} from '../ViewEventComponent/viewEvent.actions';
+import { getRelationshipNewTei } from '../../NewRelationship/RegisterTei';
 import {
     addRelationship,
     removeRelationship,
     updateRelationship,
     setRelationships,
 } from '../../../Relationships/relationships.actions';
-import { getRelationshipNewTei } from '../../NewRelationship/RegisterTei';
 import {
-    actionTypes as viewEventActionTypes,
-} from '../ViewEventComponent/viewEvent.actions';
+    convertClientRelationshipToServer,
+    getRelationshipsForEvent,
+} from '../../../../relationships';
 
 import {
     actionTypes as viewEventRelationshipsActionTypes,

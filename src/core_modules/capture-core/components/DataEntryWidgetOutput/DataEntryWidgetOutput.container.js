@@ -1,8 +1,8 @@
 // @flow
-import React, { type ComponentType } from 'react';
 import { connect } from 'react-redux';
-import type { RenderCustomCardActions } from '../CardList/CardList.types';
+import React, { type ComponentType } from 'react';
 import { getDataEntryKey } from '../DataEntry/common/getDataEntryKey';
+import type { RenderCustomCardActions } from '../CardList/CardList.types';
 import { DataEntryWidgetOutputComponent } from './DataEntryWidgetOutput.component';
 
 type OwnProps = {|

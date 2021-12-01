@@ -1,9 +1,9 @@
 // @flow
-import moment from 'moment';
 import React from 'react';
-import { MinimalCoordinates } from '../components/MinimalCoordinates';
-import { dataElementTypes, type DataElement } from '../metaData';
+import moment from 'moment';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
+import { dataElementTypes, type DataElement } from '../metaData';
+import { MinimalCoordinates } from '../components/MinimalCoordinates';
 import { stringifyNumber } from './common/stringifyNumber';
 
 

@@ -1,9 +1,9 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles';
-import { Pagination } from 'capture-ui';
 import React, { type ComponentType } from 'react';
-import { withNavigation } from '../../Pagination/withDefaultNavigation';
+import { Pagination } from 'capture-ui';
+import { withStyles } from '@material-ui/core/styles';
 import { useDuplicates } from '../useDuplicates';
+import { withNavigation } from '../../Pagination/withDefaultNavigation';
 import type { Props } from './ReviewDialogContentsPager.types';
 
 const Pager = withNavigation()(Pagination);

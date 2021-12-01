@@ -1,10 +1,10 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
 import { useMemo } from 'react';
-import { convertClientToList } from '../../../../converters';
-import { typeof dataElementTypes } from '../../../../metaData';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import type { DataSource } from '../../WorkingListsBase';
+import { typeof dataElementTypes } from '../../../../metaData';
+import { convertClientToList } from '../../../../converters';
 
 export const useDataSource = (
     records?: { [string]: any },

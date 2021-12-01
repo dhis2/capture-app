@@ -1,14 +1,14 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import i18n from '@dhis2/d2-i18n';
 import {
     initListViewSuccess,
     initListViewError,
     buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
-import { getTeiListData } from './getTeiListData';
 import type { Input } from './initTeiWorkingListsView.types';
+import { getTeiListData } from './getTeiListData';
 
 const getClientFilters = (criteria = {}) => {
     // Build logic later when we actually have some non static templates

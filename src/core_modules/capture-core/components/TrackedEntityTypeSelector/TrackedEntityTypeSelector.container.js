@@ -1,9 +1,9 @@
 // @flow
-import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { setTrackedEntityTypeIdOnUrl } from './TrackedEntityTypeSelector.actions';
-import { TrackedEntityTypeSelectorComponent } from './TrackedEntityTypeSelector.component';
+import React, { useCallback } from 'react';
 import type { OwnProps } from './TrackedEntityTypeSelector.types';
+import { TrackedEntityTypeSelectorComponent } from './TrackedEntityTypeSelector.component';
+import { setTrackedEntityTypeIdOnUrl } from './TrackedEntityTypeSelector.actions';
 
 export const TrackedEntityTypeSelector = ({ onSelect, accessNeeded = 'read', headerText, footerText }: OwnProps) => {
     const dispatch = useDispatch();

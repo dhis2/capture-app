@@ -1,11 +1,11 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
-import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/rulesEngine';
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { Access } from '../Access';
-import type{ CategoryCombination } from '../CategoryCombinations';
+import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/rulesEngine';
 import type { Icon } from '../Icon';
+import type{ CategoryCombination } from '../CategoryCombinations';
+import type { Access } from '../Access';
 import type { ProgramStage } from './ProgramStage';
 
 export class Program {

@@ -1,10 +1,10 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
-import L from 'leaflet';
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { MapControl, withLeaflet } from 'react-leaflet';
+import ReactDOM from 'react-dom';
+import React from 'react';
+import L from 'leaflet';
+import classNames from 'classnames';
+import i18n from '@dhis2/d2-i18n';
 
 type Props = {
     position?: any,

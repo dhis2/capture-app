@@ -1,6 +1,6 @@
 // @flow
-import type { FilterData, Options } from '../../../FiltersForTypes';
 import { typeof filterTypesObject } from '../filters.const';
+import type { FilterData, Options } from '../../../FiltersForTypes';
 
 type PassOnProps = $ReadOnly<{|
     id: string,

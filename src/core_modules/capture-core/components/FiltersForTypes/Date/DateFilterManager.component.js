@@ -1,12 +1,12 @@
 // @flow
-import moment from 'moment';
 import * as React from 'react';
+import moment from 'moment';
 import { convertMomentToDateFormatString } from '../../../utils/converters/date';
-import { dateFilterTypes } from './constants';
+import type { DateFilterData } from './types';
+import { mainOptionKeys } from './mainOptions';
 import { DateFilter } from './DateFilter.component';
 import type { Value } from './DateFilter.component';
-import { mainOptionKeys } from './mainOptions';
-import type { DateFilterData } from './types';
+import { dateFilterTypes } from './constants';
 
 type Props = {
     filter: ?DateFilterData,

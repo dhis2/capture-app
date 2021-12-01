@@ -1,6 +1,6 @@
 // @flow
-import { convertClientToServer } from '../../converters';
 import { dataElementTypes } from '../../metaData';
+import { convertClientToServer } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
 
 export function convertMainEventClientToServer(event: Object) {

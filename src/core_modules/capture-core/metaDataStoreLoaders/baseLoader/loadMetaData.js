@@ -1,9 +1,9 @@
 // @flow
-import { getUserStorageController } from '../../storageControllers';
-import { userStores } from '../../storageControllers/stores';
-import type { QuerySingleResource } from '../../utils/api';
-import { provideContext } from '../context';
 import { upkeepUserCaches } from '../maintenance';
+import { provideContext } from '../context';
+import type { QuerySingleResource } from '../../utils/api';
+import { userStores } from '../../storageControllers/stores';
+import { getUserStorageController } from '../../storageControllers';
 import { loadMetaDataInternal } from './loadMetaDataInternal';
 
 export const loadMetaData = async (onQueryApi: QuerySingleResource) => {

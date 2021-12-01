@@ -1,6 +1,6 @@
 // @flow
-import { getContext } from '../../context';
 import { quickStore } from '../../IOUtils';
+import { getContext } from '../../context';
 
 const convert = (() => {
     const getTrackedEntityTypeAttribute = (trackedEntityTypeAttribute) => {

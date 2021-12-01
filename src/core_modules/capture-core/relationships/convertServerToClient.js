@@ -1,8 +1,8 @@
 // @flow
+import { getDisplayName } from '../trackedEntityInstances/getDisplayName';
+import { programCollection } from '../metaDataMemoryStores';
 import type { RelationshipType } from '../metaData';
 import { getTrackedEntityTypeThrowIfNotFound } from '../metaData';
-import { programCollection } from '../metaDataMemoryStores';
-import { getDisplayName } from '../trackedEntityInstances/getDisplayName';
 
 const getClientConstraintByType = {
     TRACKED_ENTITY_INSTANCE: (constraint, relationshipConstraint) => {

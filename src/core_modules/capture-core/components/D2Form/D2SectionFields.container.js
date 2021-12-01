@@ -1,7 +1,5 @@
 // @flow
 import { connect } from 'react-redux';
-import { updateField } from './D2SectionFields.actions';
-import { D2SectionFieldsComponent } from './D2SectionFields.component';
 import {
     makeGetSectionValues,
     makeGetHiddenFieldsValues,
@@ -9,6 +7,8 @@ import {
     makeGetCompulsory,
     makeGetDisabled,
 } from './D2SectionFields.selectors';
+import { D2SectionFieldsComponent } from './D2SectionFields.component';
+import { updateField } from './D2SectionFields.actions';
 
 const makeMapStateToProps = () => {
     const getSectionValues = makeGetSectionValues();

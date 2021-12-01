@@ -1,10 +1,10 @@
 // @flow
-import { IconCross16 } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
-import classNames from 'classnames';
 import * as React from 'react';
-import type { RelationshipType } from '../../../../metaData';
+import classNames from 'classnames';
+import withStyles from '@material-ui/core/styles/withStyles';
+import { IconCross16 } from '@dhis2/ui';
 import type { SelectedRelationshipType } from '../newRelationship.types';
+import type { RelationshipType } from '../../../../metaData';
 
 type Props = {
     relationshipTypes: ?Array<RelationshipType>,

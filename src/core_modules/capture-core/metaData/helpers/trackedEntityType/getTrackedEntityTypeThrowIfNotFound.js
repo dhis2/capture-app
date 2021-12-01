@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
-import { trackedEntityTypesCollection } from '../../../metaDataMemoryStores';
+import { errorCreator } from 'capture-core-utils';
+import i18n from '@dhis2/d2-i18n';
 import type { TrackedEntityType } from '../../TrackedEntityType';
+import { trackedEntityTypesCollection } from '../../../metaDataMemoryStores';
 
 const errorMessages = {
     TRACKED_ENTITY_TYPE_NOT_FOUND: 'Tracked entity type not found',

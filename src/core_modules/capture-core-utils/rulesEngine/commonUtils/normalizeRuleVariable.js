@@ -1,6 +1,6 @@
 // @flow
-import isString from 'd2-utilizr/lib/isString';
 import log from 'loglevel';
+import isString from 'd2-utilizr/lib/isString';
 import { typeKeys } from '../constants';
 
 // Turns the internal representation of a program rule variable into its "canonical" format

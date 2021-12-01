@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
 import React from 'react';
-import { convertValue } from '../../converters/clientToList';
+import { withStyles } from '@material-ui/core';
+import i18n from '@dhis2/d2-i18n';
 import type { CurrentSearchTerms } from '../Pages/Search/SearchForm/SearchForm.types';
+import { convertValue } from '../../converters/clientToList';
 
 const styles = (theme: Theme) => ({
     topSection: {

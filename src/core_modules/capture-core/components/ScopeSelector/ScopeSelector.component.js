@@ -1,11 +1,11 @@
 // @flow
-import React, { Component, type ComponentType } from 'react';
 import { compose } from 'redux';
-import { withLoadingIndicator } from '../../HOC';
-import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
+import React, { Component, type ComponentType } from 'react';
 import { defaultDialogProps } from '../Dialogs/ConfirmDialog.constants';
-import { QuickSelector } from './QuickSelector/QuickSelector.component';
+import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
+import { withLoadingIndicator } from '../../HOC';
 import type { Props, State } from './ScopeSelector.types';
+import { QuickSelector } from './QuickSelector/QuickSelector.component';
 
 class ScopeSelectorClass extends Component<Props, State> {
     constructor(props: Props) {

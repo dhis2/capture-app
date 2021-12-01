@@ -1,6 +1,11 @@
 // @flow
 import type { ComponentType } from 'react';
 import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+} from '../../internal';
+import labelTypeClasses from '../../../buildField.module.css';
+import {
     withGotoInterface,
     withHideCompatibility,
     withDefaultShouldUpdateInterface,
@@ -12,11 +17,6 @@ import {
     withFilterProps,
     withInternalChangeHandler,
 } from '../../../../../FormFields/New';
-import labelTypeClasses from '../../../buildField.module.css';
-import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-} from '../../internal';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;

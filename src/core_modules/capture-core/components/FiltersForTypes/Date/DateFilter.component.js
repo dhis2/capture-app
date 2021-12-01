@@ -1,22 +1,22 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
 import React, { Component } from 'react';
-import { dataElementTypes } from '../../../metaData';
-import { Option } from '../../../metaData/OptionSet/Option';
-import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
-import { parseDate } from '../../../utils/converters/date';
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
+import type { UpdatableFilterContent } from '../types';
+import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes';
 import {
     isValidDate,
 } from '../../../utils/validators/form';
-import { SelectBoxes, orientations } from '../../FormFields/Options/SelectBoxes';
+import { parseDate } from '../../../utils/converters/date';
+import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
+import { Option } from '../../../metaData/OptionSet/Option';
+import { dataElementTypes } from '../../../metaData';
 
-import type { UpdatableFilterContent } from '../types';
-import { getDateFilterData } from './dateFilterDataGetter';
-import { FromDateFilter } from './From.component';
-import { mainOptionKeys, mainOptionTranslatedTexts } from './mainOptions';
 import { ToDateFilter } from './To.component';
+import { mainOptionKeys, mainOptionTranslatedTexts } from './mainOptions';
+import { FromDateFilter } from './From.component';
+import { getDateFilterData } from './dateFilterDataGetter';
 import './calendarFilterStyles.css';
 
 const getStyles = (theme: Theme) => ({

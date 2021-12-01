@@ -1,15 +1,15 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
-import { errorCreator } from 'capture-core-utils';
-import classNames from 'classnames';
-import log from 'loglevel';
 import * as React from 'react';
-import type { SearchGroup } from '../../../metaData';
-import { Button } from '../../Buttons/Button.component';
-import { D2Form } from '../../D2Form';
-import { withGotoInterface } from '../../FormFields/New';
+import log from 'loglevel';
+import classNames from 'classnames';
+import { errorCreator } from 'capture-core-utils';
+import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
 import { SearchOrgUnitSelector } from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
+import { withGotoInterface } from '../../FormFields/New';
+import { D2Form } from '../../D2Form';
+import { Button } from '../../Buttons/Button.component';
+import type { SearchGroup } from '../../../metaData';
 
 const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 

@@ -1,6 +1,6 @@
 // @flow
-import classNames from 'classnames';
 import * as React from 'react';
+import classNames from 'classnames';
 import defaultClasses from './selectField.module.css';
 
 type Props = {

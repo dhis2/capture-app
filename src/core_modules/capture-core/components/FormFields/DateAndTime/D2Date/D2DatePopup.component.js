@@ -1,6 +1,6 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles';
 import * as React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import { anchorPositions, modes, absoluteDirections } from './d2DatePopup.const';
 
 const getStyles = () => ({

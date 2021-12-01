@@ -1,12 +1,12 @@
 // @flow
-import type { ComponentType } from 'react';
-import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
-import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram, startFallbackSearch } from '../SearchPage.actions';
+import { connect } from 'react-redux';
+import type { ComponentType } from 'react';
 import { searchScopes, PAGINATION } from '../SearchPage.constants';
-import { SearchResultsComponent } from './SearchResults.component';
+import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram, startFallbackSearch } from '../SearchPage.actions';
+import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
 import type { Props, PropsFromRedux, DispatchersFromRedux, OwnProps } from './SearchResults.types';
+import { SearchResultsComponent } from './SearchResults.component';
 
 const getCurrentScope = (scopeId: string, scopeType: $Keys<typeof searchScopes>) => {
     if (!scopeId) {

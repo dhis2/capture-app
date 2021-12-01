@@ -1,10 +1,10 @@
 // @flow
 import React, { useMemo } from 'react';
 
-import { MultiSelectBoxes, multiOrientations } from '../MultiSelectBoxes';
 import { SingleSelectBoxes, singleOrientations } from '../SingleSelectBoxes';
-import { orientations } from './selectBoxes.const';
+import { MultiSelectBoxes, multiOrientations } from '../MultiSelectBoxes';
 import type { Props, Options } from './selectBoxes.types';
+import { orientations } from './selectBoxes.const';
 
 
 export const SelectBoxes = (props: Props) => {

@@ -2,8 +2,8 @@
 /**
  * @namespace UrlSync
  */
-import { parse, type QueryParameters } from 'query-string';
 import * as React from 'react';
+import { parse, type QueryParameters } from 'query-string';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 
 type Props = {

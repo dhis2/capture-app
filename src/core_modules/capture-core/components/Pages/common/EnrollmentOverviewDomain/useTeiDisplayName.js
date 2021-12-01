@@ -1,8 +1,8 @@
 // @flow
-import { useDataQuery } from '@dhis2/app-runtime';
 import { useMemo, useEffect, useState } from 'react';
-import type { DataElement } from '../../../../metaData/DataElement';
+import { useDataQuery } from '@dhis2/app-runtime';
 import { getAttributesFromScopeId } from '../../../../metaData/helpers';
+import type { DataElement } from '../../../../metaData/DataElement';
 
 const getAttributesValues = (attributes, firstId, secondId) => {
     const firstValue = attributes.find(({ attribute }) => attribute === firstId)?.value || '';

@@ -1,8 +1,8 @@
 // @flow
-import type { ListItem, RenderCustomCardActions } from '../../CardList/CardList.types';
 import type {
     CardDataElementsInformation,
 } from '../../Pages/Search/SearchResults/SearchResults.types';
+import type { ListItem, RenderCustomCardActions } from '../../CardList/CardList.types';
 
 export type OwnProps = {|
     renderCardActions?: RenderCustomCardActions,

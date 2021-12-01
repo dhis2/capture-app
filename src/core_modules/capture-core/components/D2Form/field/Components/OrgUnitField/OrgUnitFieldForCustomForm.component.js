@@ -1,5 +1,11 @@
 // @flow
 import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+    withCustomElementContainer,
+} from '../internal';
+import { OrgUnitTree } from '../../../../FormFields/OrgUnitTree/OrgUnitTree.component';
+import {
     withGotoInterface,
     withHideCompatibility,
     withDefaultShouldUpdateInterface,
@@ -7,12 +13,6 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from '../../../../FormFields/New';
-import { OrgUnitTree } from '../../../../FormFields/OrgUnitTree/OrgUnitTree.component';
-import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-    withCustomElementContainer,
-} from '../internal';
 
 export const OrgUnitFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(

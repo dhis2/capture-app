@@ -1,6 +1,6 @@
 // @flow
-import { actionCreator } from '../../../../actions/actions.utils';
 import { effectMethods } from '../../../../trackerOffline';
+import { actionCreator } from '../../../../actions/actions.utils';
 
 export const batchActionTypes = {
     LOAD_EVENT_RELATIONSHIPS_BATCH: 'LoadEventRelationshipsBatch',

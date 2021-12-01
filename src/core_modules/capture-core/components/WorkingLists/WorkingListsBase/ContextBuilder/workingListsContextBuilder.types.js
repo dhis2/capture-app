@@ -1,19 +1,5 @@
 // @flow
 import type {
-    ChangePage,
-    ChangeRowsPerPage,
-    ClearFilter,
-    DataSource,
-    CustomRowMenuContents,
-    FiltersData,
-    SelectRestMenuItem,
-    SelectRow,
-    SetColumnOrder,
-    Sort,
-    StickyFilters,
-    UpdateFilter,
-} from '../../../ListView';
-import type {
     AddTemplate,
     CancelLoadView,
     CancelUpdateList,
@@ -30,6 +16,20 @@ import type {
     WorkingListTemplate,
     WorkingListsOutputProps,
 } from '../workingListsBase.types';
+import type {
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
+    DataSource,
+    CustomRowMenuContents,
+    FiltersData,
+    SelectRestMenuItem,
+    SelectRow,
+    SetColumnOrder,
+    Sort,
+    StickyFilters,
+    UpdateFilter,
+} from '../../../ListView';
 
 type ExtractedProps = $ReadOnly<{|
     categories?: Categories,

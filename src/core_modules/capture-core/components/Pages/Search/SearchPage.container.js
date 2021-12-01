@@ -1,13 +1,13 @@
 // @flow
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, useMemo, useEffect } from 'react';
 import type { ComponentType } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useCurrentTrackedEntityTypeId } from '../../../hooks/useCurrentTrackedEntityTypeId';
 import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
-import { cleanSearchRelatedData, navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
-import { SearchPageComponent } from './SearchPage.component';
-import { searchScopes } from './SearchPage.constants';
+import { useCurrentTrackedEntityTypeId } from '../../../hooks/useCurrentTrackedEntityTypeId';
 import type { AvailableSearchOptions } from './SearchPage.types';
+import { searchScopes } from './SearchPage.constants';
+import { SearchPageComponent } from './SearchPage.component';
+import { cleanSearchRelatedData, navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
 
 const buildSearchOption = (id, name, searchGroups, searchScope, type) => ({
     searchOptionId: id,

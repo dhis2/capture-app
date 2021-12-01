@@ -1,9 +1,9 @@
 // @flow
 import type { TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../../../../types';
-import { convertToClientTeis } from './convertToClientTeis';
-import type { InputMeta } from './getTeiListData.types';
-import { getTeisWithSubvalues } from './getTeisWithSubvalues';
 import type { RawQueryArgs, RawFilterQueryArgs } from './types';
+import { getTeisWithSubvalues } from './getTeisWithSubvalues';
+import type { InputMeta } from './getTeiListData.types';
+import { convertToClientTeis } from './convertToClientTeis';
 
 const getApiFilterQueryArgs = (
     filters?: RawFilterQueryArgs = {},

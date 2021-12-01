@@ -1,9 +1,9 @@
 // @flow
-import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
+import { JssProvider } from 'react-jss';
+import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { create } from 'jss';
-import React from 'react';
-import { JssProvider } from 'react-jss';
+import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 
 // Change the insertion point for jss styles.
 // For this app the insertion point should be below the css.

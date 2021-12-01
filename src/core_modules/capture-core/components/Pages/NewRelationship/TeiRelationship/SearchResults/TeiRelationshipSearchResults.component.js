@@ -1,17 +1,17 @@
 // @flow
 
-import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
-import { Pagination } from 'capture-ui';
 import React, { type ComponentType } from 'react';
-import { type SearchGroup } from '../../../../../metaData';
-import { Button } from '../../../../Buttons/Button.component';
-import { CardList } from '../../../../CardList';
-import type { ListItem } from '../../../../CardList/CardList.types';
-import { withNavigation } from '../../../../Pagination/withDefaultNavigation';
-import { SearchResultsHeader } from '../../../../SearchResultsHeader';
-import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';
+import { Pagination } from 'capture-ui';
+import { withStyles } from '@material-ui/core';
+import i18n from '@dhis2/d2-i18n';
 import { ResultsPageSizeContext } from '../../../shared-contexts';
+import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';
+import { SearchResultsHeader } from '../../../../SearchResultsHeader';
+import { withNavigation } from '../../../../Pagination/withDefaultNavigation';
+import type { ListItem } from '../../../../CardList/CardList.types';
+import { CardList } from '../../../../CardList';
+import { Button } from '../../../../Buttons/Button.component';
+import { type SearchGroup } from '../../../../../metaData';
 import { makeAttributesSelector } from './teiRelationshipSearchResults.selectors';
 
 const SearchResultsPager = withNavigation()(Pagination);

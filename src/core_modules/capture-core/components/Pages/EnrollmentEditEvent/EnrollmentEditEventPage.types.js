@@ -1,6 +1,6 @@
 // @flow
-import type { ProgramStage } from '../../../metaData';
 import type { WidgetEffects, HideWidgets } from '../common/EnrollmentOverviewDomain';
+import type { ProgramStage } from '../../../metaData';
 
 export type PlainProps = {|
     programStage: ?ProgramStage,

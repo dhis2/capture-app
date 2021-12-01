@@ -1,12 +1,29 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
-import { batchActions } from 'redux-batched-actions';
-import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
-import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
-import { getProgramAndStageForProgram } from '../../../../../../metaData/helpers';
-import { getStageForEventProgram } from '../../../../../../metaData/helpers/EventProgram/getStageForEventProgram';
+import { ofType } from 'redux-observable';
+import { batchActions } from 'redux-batched-actions';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import {
+    openNewEventInDataEntry,
+    resetDataEntry,
+} from '../actions/dataEntryLoad.actionBatchs';
+import {
+    actionTypes as newEventDataEntryActionTypes,
+    batchActionTypes as newEventDataEntryBatchActionTypes,
+    cancelOpenNewEventInDataEntry,
+    batchActionTypes,
+} from '../actions/dataEntry.actions';
+import {
+    listId,
+} from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
+import {
+    resetList,
+} from '../../RecentlyAddedEventsList';
+import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
+import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
+import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
@@ -15,26 +32,9 @@ import {
 import type {
     FieldData,
 } from '../../../../../../rules/actionsCreator';
-import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
-import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
-import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
-import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
-import {
-    resetList,
-} from '../../RecentlyAddedEventsList';
-import {
-    listId,
-} from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
-import {
-    actionTypes as newEventDataEntryActionTypes,
-    batchActionTypes as newEventDataEntryBatchActionTypes,
-    cancelOpenNewEventInDataEntry,
-    batchActionTypes,
-} from '../actions/dataEntry.actions';
-import {
-    openNewEventInDataEntry,
-    resetDataEntry,
-} from '../actions/dataEntryLoad.actionBatchs';
+import { getStageForEventProgram } from '../../../../../../metaData/helpers/EventProgram/getStageForEventProgram';
+import { getProgramAndStageForProgram } from '../../../../../../metaData/helpers';
+import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
 import {
     getDefaultMainConfig as getDefaultMainColumnConfig,
     getMetaDataConfig as getColumnMetaDataConfig,

@@ -1,15 +1,16 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
-import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { useProgramInfo } from '../../../../hooks/useProgramInfo';
-import { buildUrlQueryString } from '../../../../utils/routing';
-import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
+import React, { useState, useEffect } from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
-import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
+import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
+import { buildUrlQueryString } from '../../../../utils/routing';
+import { useProgramInfo } from '../../../../hooks/useProgramInfo';
+import { runRulesForEnrollment } from './runRulesForEnrollment';
+import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
 import {
     useTeiAttributes,
     useProgramMetadata,
@@ -17,8 +18,7 @@ import {
     useProgramStages,
     useOrganisationUnit,
 } from './hooks';
-import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
-import { runRulesForEnrollment } from './runRulesForEnrollment';
+import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 
 
 export const EnrollmentPageDefault = () => {

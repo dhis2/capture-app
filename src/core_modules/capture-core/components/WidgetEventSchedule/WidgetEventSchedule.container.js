@@ -1,19 +1,19 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import moment from 'moment';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useOrganisationUnit } from '../../dataQueries';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import moment from 'moment';
+import i18n from '@dhis2/d2-i18n';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
+import { useOrganisationUnit } from '../../dataQueries';
+import type { ContainerProps } from './widgetEventSchedule.types';
+import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
+import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 import {
     useScheduleConfigFromProgramStage,
     useDetermineSuggestedScheduleDate,
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
 } from './hooks';
-import { requestScheduleEvent } from './WidgetEventSchedule.actions';
-import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
-import type { ContainerProps } from './widgetEventSchedule.types';
 
 export const WidgetEventSchedule = ({
     enrollmentId,

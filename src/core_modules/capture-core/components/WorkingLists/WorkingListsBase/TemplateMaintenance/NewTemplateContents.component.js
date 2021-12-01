@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { colors } from '@dhis2/ui';
-import { DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 import * as React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import { DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
+import { colors } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { Button } from '../../../Buttons/Button.component';
 import { NewTemplateTextField } from './NewTemplateTextField.component';
 

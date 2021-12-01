@@ -1,10 +1,10 @@
 // @flow
-import { type ComponentType } from 'react';
-import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { type ComponentType } from 'react';
 import { withLoadingIndicator } from '../../../HOC';
-import { TeiSearchResultsComponent } from './TeiSearchResults.component';
 import type { OwnProps, Props } from './TeiSearchResults.types';
+import { TeiSearchResultsComponent } from './TeiSearchResults.component';
 
 const mapStateToProps = (state: ReduxState, props: OwnProps) => {
     const currentTeiSearch = state.teiSearch[props.id] || {};

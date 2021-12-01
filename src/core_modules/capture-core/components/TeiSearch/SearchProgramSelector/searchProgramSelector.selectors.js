@@ -1,7 +1,7 @@
 // @flow
 import { createSelector } from 'reselect';
-import { TrackerProgram } from '../../../metaData';
 import { programCollection } from '../../../metaDataMemoryStores';
+import { TrackerProgram } from '../../../metaData';
 
 const trackedEntityTypeIdSelector = (state, props) => state.teiSearch[props.searchId].selectedTrackedEntityTypeId;
 

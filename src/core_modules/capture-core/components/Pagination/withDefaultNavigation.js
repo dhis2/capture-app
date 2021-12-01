@@ -2,10 +2,10 @@
 /**
  * @namespace Pagination
  */
-import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
-import IconButton from '@material-ui/core/IconButton';
-import { withStyles } from '@material-ui/core/styles';
 import * as React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import { IconChevronLeft24, IconChevronRight24 } from '@dhis2/ui';
 
 
 const styles = (theme: Theme) => ({

@@ -1,8 +1,7 @@
 // @flow
-import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { getScopeInfo } from '../../../../metaData';
-import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
+import { useCallback } from 'react';
+import { useTeiDisplayName } from '../../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import {
     useSetOrgUnitId,
     useResetProgramId,
@@ -13,7 +12,8 @@ import {
     useResetEventId,
     buildEnrollmentsAsOptions,
 } from '../../../ScopeSelector';
-import { useTeiDisplayName } from '../../common/EnrollmentOverviewDomain/useTeiDisplayName';
+import { dataEntryHasChanges } from '../../../DataEntry/common/dataEntryHasChanges';
+import { getScopeInfo } from '../../../../metaData';
 
 export const useEnrollmentAddEventTopBar = (teiId: string, programId: string, enrollment?: Object) => {
     const { setOrgUnitId } = useSetOrgUnitId();

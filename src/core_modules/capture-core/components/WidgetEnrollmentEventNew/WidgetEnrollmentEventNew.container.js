@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import React, { useMemo } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
-import { AccessVerification } from './AccessVerification';
 import type { WidgetProps } from './WidgetEnrollmentEventNew.types';
+import { AccessVerification } from './AccessVerification';
 
 export const WidgetEnrollmentEventNew = ({ programId, stageId, onSave, ...passOnProps }: WidgetProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);

@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { pipe } from 'capture-core-utils';
 import moment from 'moment';
-import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
+import { pipe } from 'capture-core-utils';
+import i18n from '@dhis2/d2-i18n';
 import type { DateFilterData, AbsoluteDateFilterData } from '../../../../../FiltersForTypes';
+import { convertMomentToDateFormatString } from '../../../../../../utils/converters/date';
 
 const periods = {
     TODAY: 'TODAY',

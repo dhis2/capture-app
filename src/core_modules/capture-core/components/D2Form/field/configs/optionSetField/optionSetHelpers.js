@@ -1,8 +1,8 @@
 // @flow
-import { pipe, errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
-import { convertValue } from '../../../../../converters/clientToForm';
+import { pipe, errorCreator } from 'capture-core-utils';
 import type { OptionSet } from '../../../../../metaData';
+import { convertValue } from '../../../../../converters/clientToForm';
 
 const errorMessages = {
     DATAELEMENT_MISSING: 'DataElement missing',

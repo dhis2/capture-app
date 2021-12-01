@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { Validated } from '../Validated';
-import type { Props } from './accessVerification.types';
 import { NoAccess } from './NoAccess.component';
+import type { Props } from './accessVerification.types';
 
 export const AccessVerificationComponent = ({ eventAccess, onCancel, ...passOnProps }: Props) => {
     if (!eventAccess.write) {

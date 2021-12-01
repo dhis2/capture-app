@@ -1,7 +1,7 @@
 // @flow
-import { IconMessages16 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
 import React, { type ComponentType } from 'react';
+import { withStyles } from '@material-ui/core';
+import { IconMessages16 } from '@dhis2/ui';
 
 type Props = {|
     event: ApiEnrollmentEvent,

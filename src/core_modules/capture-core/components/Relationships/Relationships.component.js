@@ -1,12 +1,12 @@
 // @flow
 
-import i18n from '@dhis2/d2-i18n';
-import { IconArrowRight16, IconCross24 } from '@dhis2/ui';
-import { IconButton, withStyles, Tooltip } from '@material-ui/core';
-import classNames from 'classnames';
 import * as React from 'react';
-import type { RelationshipType } from '../../metaData';
+import classNames from 'classnames';
+import { IconButton, withStyles, Tooltip } from '@material-ui/core';
+import { IconArrowRight16, IconCross24 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { Button } from '../Buttons';
+import type { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
 
 const getStyles = (theme: Theme) => ({

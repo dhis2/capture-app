@@ -1,8 +1,8 @@
 // @flow
-import { IconCross24 } from '@dhis2/ui';
-import { withStyles, IconButton } from '@material-ui/core';
-import classNames from 'classnames';
 import * as React from 'react';
+import classNames from 'classnames';
+import { withStyles, IconButton } from '@material-ui/core';
+import { IconCross24 } from '@dhis2/ui';
 import { OrgUnitField } from './OrgUnitField.component';
 
 const getStyles = (theme: Theme) => ({

@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
 import React, { useState, useCallback } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { Widget } from '../Widget';
-import { Stages } from './Stages';
 import type { Props } from './stagesAndEvents.types';
+import { Stages } from './Stages';
 
 export const WidgetStagesAndEvents = ({ className, stages, events, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { OptionSetFilter } from './OptionSetFilter.component';
 import type { OptionSetFilterData } from './types';
+import { OptionSetFilter } from './OptionSetFilter.component';
 
 type Props = {
     filter: ?OptionSetFilterData,

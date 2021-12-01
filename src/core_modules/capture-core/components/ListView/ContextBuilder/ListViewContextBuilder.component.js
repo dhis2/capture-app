@@ -1,10 +1,10 @@
 // @flow
 import React, { useMemo } from 'react';
+import { ListViewMain } from '../Main';
 import {
     FilterValuesContext,
     PaginationContext,
 } from '../listView.context';
-import { ListViewMain } from '../Main';
 import type { Props } from './listViewContextBuilder.types';
 
 export const ListViewContextBuilder = ({

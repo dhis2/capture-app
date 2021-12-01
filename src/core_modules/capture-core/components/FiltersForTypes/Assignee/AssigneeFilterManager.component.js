@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { AssigneeFilter } from './AssigneeFilter.component';
 import type { AssigneeFilterData } from './types';
+import { AssigneeFilter } from './AssigneeFilter.component';
 
 type Props = {
     filter: ?AssigneeFilterData,

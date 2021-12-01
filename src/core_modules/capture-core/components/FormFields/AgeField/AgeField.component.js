@@ -1,9 +1,9 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { IconCross16 } from '@dhis2/ui';
-import TextField from '@material-ui/core/TextField';
-import moment from 'moment';
 import React, { Component } from 'react';
+import moment from 'moment';
+import TextField from '@material-ui/core/TextField';
+import { IconCross16 } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { D2Date } from '../DateAndTime/D2Date/D2Date.component';
 
 type Props = {

@@ -1,8 +1,8 @@
 // @flow
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { Access } from '../Access';
-import type { DataElement } from '../DataElement';
 import type { SearchGroup } from '../SearchGroup';
+import type { DataElement } from '../DataElement';
+import type { Access } from '../Access';
 import type { TeiRegistration } from './TeiRegistration';
 
 /* eslint-disable no-underscore-dangle */

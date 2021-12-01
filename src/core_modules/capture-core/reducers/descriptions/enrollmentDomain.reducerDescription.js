@@ -1,8 +1,8 @@
 // @flow
-import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as enrollmentNoteActionTypes }
     from '../../components/WidgetEnrollmentComment/WidgetEnrollmentComment.actions';
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
+import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
 
 const initialReducerValue = {};
 const {

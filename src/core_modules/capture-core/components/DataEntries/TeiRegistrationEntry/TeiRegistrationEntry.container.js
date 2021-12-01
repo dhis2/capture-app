@@ -1,14 +1,14 @@
 // @flow
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 import type { ComponentType } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes } from '../../../metaData';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
-import { startNewTeiDataEntryInitialisation } from './TeiRegistrationEntry.actions';
-import { TeiRegistrationEntryComponent } from './TeiRegistrationEntry.component';
+import { scopeTypes } from '../../../metaData';
+import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import type { OwnProps } from './TeiRegistrationEntry.types';
+import { TeiRegistrationEntryComponent } from './TeiRegistrationEntry.component';
+import { startNewTeiDataEntryInitialisation } from './TeiRegistrationEntry.actions';
 
 const useInitialiseTeiRegistration = (selectedScopeId, dataEntryId) => {
     const dispatch = useDispatch();

@@ -1,13 +1,13 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
-import { RenderFoundation, TrackerProgram } from '../../../../metaData';
-import { getRulesActionsForTEI } from '../../../../rules/actionsCreator';
-import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
-import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
-import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
-import { convertGeometryOut } from '../../converters';
 import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer } from '../fieldValidators';
+import { convertGeometryOut } from '../../converters';
+import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
+import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
+import { convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
+import { getRulesActionsForTEI } from '../../../../rules/actionsCreator';
+import { RenderFoundation, TrackerProgram } from '../../../../metaData';
 import { openDataEntryForNewEnrollment } from './open.actions';
 
 const itemId = 'newEnrollment';

@@ -1,9 +1,9 @@
 // @flow
-import { Chip } from '@dhis2/ui';
 import React, { useState, useCallback } from 'react';
+import { Chip } from '@dhis2/ui';
 import { Widget } from '../Widget';
-import { CommentSection } from './CommentSection/CommentSection';
 import type { Props } from './WidgetComment.types';
+import { CommentSection } from './CommentSection/CommentSection';
 
 export const WidgetComment = ({ title, comments, onAddComment, ...passOnProps }: Props) => {
     const [open, setOpenStatus] = useState(true);

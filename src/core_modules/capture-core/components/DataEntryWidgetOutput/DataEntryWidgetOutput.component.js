@@ -1,12 +1,12 @@
 
 // @flow
-import { withStyles } from '@material-ui/core/styles';
 import * as React from 'react';
-import { FeedbacksSection } from '../Pages/ViewEvent/RightColumn/FeedbacksSection/FeedbacksSection.container';
-import { IndicatorsSection } from '../Pages/ViewEvent/RightColumn/IndicatorsSection/IndicatorsSection.container';
+import { withStyles } from '@material-ui/core/styles';
 import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
-import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
+import { IndicatorsSection } from '../Pages/ViewEvent/RightColumn/IndicatorsSection/IndicatorsSection.container';
+import { FeedbacksSection } from '../Pages/ViewEvent/RightColumn/FeedbacksSection/FeedbacksSection.container';
 import { WarningsSection } from './WarningsSection/WaningsSection.container';
+import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
 
 type Props = {
     onLink: (teiId: string, values: Object) => void,

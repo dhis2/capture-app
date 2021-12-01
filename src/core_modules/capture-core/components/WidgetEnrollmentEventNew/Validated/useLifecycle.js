@@ -1,10 +1,10 @@
 // @flow
-import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
-import type { TrackerProgram, RenderFoundation } from '../../../metaData';
-import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../common.types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
 import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
+import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../common.types';
+import type { TrackerProgram, RenderFoundation } from '../../../metaData';
 
 export const useLifecycle = ({
     program,

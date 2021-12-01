@@ -1,7 +1,7 @@
 // @flow
 import { createSelector } from 'reselect';
-import { type ProgramStage } from '../../../../../metaData';
 import { programCollection } from '../../../../../metaDataMemoryStores/programCollection/programCollection';
+import { type ProgramStage } from '../../../../../metaData';
 
 const programIdSelector = state => state.currentSelections.programId;
 

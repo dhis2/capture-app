@@ -1,6 +1,6 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import classNames from 'classnames';
 import {
     isValidNumber,
     isValidInteger,
@@ -8,14 +8,14 @@ import {
     isValidNegativeInteger,
     isValidZeroOrPositiveInteger,
 } from 'capture-core-utils/validators/form';
-import classNames from 'classnames';
-import React, { Component } from 'react';
-import { dataElementTypes } from '../../../metaData';
-import type { D2TextField } from '../../FormFields/Generic/D2TextField.component';
+import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
 import type { UpdatableFilterContent } from '../types';
-import { MaxNumericFilter } from './Max.component';
-import { MinNumericFilter } from './Min.component';
+import type { D2TextField } from '../../FormFields/Generic/D2TextField.component';
+import { dataElementTypes } from '../../../metaData';
 import { getNumericFilterData } from './numericFilterDataGetter';
+import { MinNumericFilter } from './Min.component';
+import { MaxNumericFilter } from './Max.component';
 
 const getStyles = (theme: Theme) => ({
     container: {

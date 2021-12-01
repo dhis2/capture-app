@@ -1,10 +1,10 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { Button, spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
 import React, { type ComponentType } from 'react';
-import { withCancelButton } from '../../DataEntry/withCancelButton';
+import { withStyles } from '@material-ui/core';
+import { Button, spacersNum } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
 import { addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
+import { withCancelButton } from '../../DataEntry/withCancelButton';
 import type { InputProps, Props } from './finishButtons.types';
 
 const styles = {

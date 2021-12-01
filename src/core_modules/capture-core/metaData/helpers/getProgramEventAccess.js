@@ -1,6 +1,6 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { EventProgram } from '../Program';
 import { getProgramFromProgramIdThrowIfNotFound } from './getProgramFromProgramIdThrowIfNotFound';
 

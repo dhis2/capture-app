@@ -1,14 +1,14 @@
 // @flow
-import { ofType } from 'redux-observable';
 import { switchMap } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
 
-import { getUserStorageController } from '../../../storageControllers';
-import { userStores } from '../../../storageControllers/stores';
-import { lockedSelectorActionTypes } from '../../LockedSelector';
 import {
     resetCategoriesAfterSettingOrgUnit,
     skipCategoriesResetAfterSettingOrgUnit,
 } from '../actions/crossPage.actions';
+import { lockedSelectorActionTypes } from '../../LockedSelector';
+import { userStores } from '../../../storageControllers/stores';
+import { getUserStorageController } from '../../../storageControllers';
 
 
 async function isOptionAssociatedWithOrganisationUnit(categoryOptionId: string, orgUnitId: string) {

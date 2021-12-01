@@ -1,22 +1,22 @@
 // @flow
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
+import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
 import {
-    actionTypes as viewEventDetailsActionTypes,
-} from '../../components/Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
-import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
-import { actionTypes as viewEventRelationshipsActionTypes } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
-import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
-import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import {
-    actionTypes as editEventDataEntryActionTypes,
-} from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
+    actionTypes as widgetEventEditActionTypes,
+} from '../../components/WidgetEventEdit/WidgetEventEdit.actions';
 import {
     actionTypes as viewEventDataEntryActionTypes,
 } from '../../components/WidgetEventEdit/ViewEventDataEntry/viewEventDataEntry.actions';
 import {
-    actionTypes as widgetEventEditActionTypes,
-} from '../../components/WidgetEventEdit/WidgetEventEdit.actions';
-import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
+    actionTypes as editEventDataEntryActionTypes,
+} from '../../components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.actions';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
+import { actionTypes as viewEventRelationshipsActionTypes } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
+import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
+import {
+    actionTypes as viewEventDetailsActionTypes,
+} from '../../components/Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 
 export const viewEventPageDesc = createReducerDescription({
     [viewEventActionTypes.VIEW_EVENT_FROM_URL]: (state, action) => {

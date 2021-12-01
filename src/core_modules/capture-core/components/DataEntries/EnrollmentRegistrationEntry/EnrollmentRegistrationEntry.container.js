@@ -1,14 +1,14 @@
 // @flow
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 import type { ComponentType } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { scopeTypes } from '../../../metaData';
 import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
-import { startNewEnrollmentDataEntryInitialisation } from './EnrollmentRegistrationEntry.actions';
-import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
+import { scopeTypes } from '../../../metaData';
+import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import type { OwnProps } from './EnrollmentRegistrationEntry.types';
+import { EnrollmentRegistrationEntryComponent } from './EnrollmentRegistrationEntry.component';
+import { startNewEnrollmentDataEntryInitialisation } from './EnrollmentRegistrationEntry.actions';
 
 const useInitialiseEnrollmentRegistration = (selectedScopeId, dataEntryId) => {
     const dispatch = useDispatch();

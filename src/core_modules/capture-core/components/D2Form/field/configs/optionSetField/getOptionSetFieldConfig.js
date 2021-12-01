@@ -1,9 +1,9 @@
 // @flow
-import type { DataElement, OptionSet } from '../../../../../metaData';
-import { inputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
-import { orientations } from '../../../../FormFields/New';
-import { OptionSetSelectFieldForForm, OptionSetBoxesFieldForForm } from '../../Components';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
+import { OptionSetSelectFieldForForm, OptionSetBoxesFieldForForm } from '../../Components';
+import { orientations } from '../../../../FormFields/New';
+import { inputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
+import type { DataElement, OptionSet } from '../../../../../metaData';
 import { getOptionsForRadioButtons, getOptionsForSelect } from './optionSetHelpers';
 
 const mapInputTypeToPropsGetterFn = {

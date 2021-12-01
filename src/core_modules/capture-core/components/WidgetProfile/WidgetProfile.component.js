@@ -1,14 +1,14 @@
 // @flow
-import { useDataQuery } from '@dhis2/app-runtime';
-import i18n from '@dhis2/d2-i18n';
-import { errorCreator } from 'capture-core-utils';
-import { FlatList } from 'capture-ui';
-import log from 'loglevel';
 import React, { useState, useMemo, useCallback } from 'react';
-import { convertValue as convertClientToView } from '../../converters/clientToView';
-import { convertValue as convertServerToClient } from '../../converters/serverToClient';
-import { LoadingMaskElementCenter } from '../LoadingMasks';
+import log from 'loglevel';
+import { FlatList } from 'capture-ui';
+import { errorCreator } from 'capture-core-utils';
+import i18n from '@dhis2/d2-i18n';
+import { useDataQuery } from '@dhis2/app-runtime';
 import { Widget } from '../Widget';
+import { LoadingMaskElementCenter } from '../LoadingMasks';
+import { convertValue as convertServerToClient } from '../../converters/serverToClient';
+import { convertValue as convertClientToView } from '../../converters/clientToView';
 import type { Props } from './widgetProfile.types';
 
 export const WidgetProfile = ({ teiId, programId }: Props) => {

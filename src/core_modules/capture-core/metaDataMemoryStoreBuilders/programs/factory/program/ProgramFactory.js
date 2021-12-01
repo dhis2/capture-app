@@ -2,13 +2,14 @@
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
 import {
-    EventProgram,
-    TrackerProgram,
-    CategoryCombination,
-    type TrackedEntityType,
-    type Category,
-} from '../../../../metaData';
-import { getUserStorageController } from '../../../../storageControllers';
+    ProgramStageFactory,
+} from '../programStage';
+import { DataElementFactory } from '../enrollment/DataElementFactory';
+import { EnrollmentFactory } from '../enrollment';
+import { CategoryFactory } from '../category';
+import { buildIcon } from '../../../common/helpers';
+import { SearchGroupFactory } from '../../../common/factory';
+import { userStores } from '../../../../storageControllers/stores';
 import type
 {
     CachedProgramStage,
@@ -22,15 +23,14 @@ import type
     CachedTrackedEntityType,
     CachedProgramTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
-import { userStores } from '../../../../storageControllers/stores';
-import { SearchGroupFactory } from '../../../common/factory';
-import { buildIcon } from '../../../common/helpers';
-import { CategoryFactory } from '../category';
-import { EnrollmentFactory } from '../enrollment';
-import { DataElementFactory } from '../enrollment/DataElementFactory';
+import { getUserStorageController } from '../../../../storageControllers';
 import {
-    ProgramStageFactory,
-} from '../programStage';
+    EventProgram,
+    TrackerProgram,
+    CategoryCombination,
+    type TrackedEntityType,
+    type Category,
+} from '../../../../metaData';
 
 
 export class ProgramFactory {

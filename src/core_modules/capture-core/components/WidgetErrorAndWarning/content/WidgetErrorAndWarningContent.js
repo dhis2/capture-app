@@ -1,11 +1,11 @@
 // @flow
 
-import { spacers, colors, spacersNum } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
-import cx from 'classnames';
 import React from 'react';
-import type { contentTypes, ObjectType, StringType, Message } from './WidgetErrorAndWarningContent.types';
+import cx from 'classnames';
+import { withStyles } from '@material-ui/core';
+import { spacers, colors, spacersNum } from '@dhis2/ui';
 import { widgetTypes } from './WidgetTypes';
+import type { contentTypes, ObjectType, StringType, Message } from './WidgetErrorAndWarningContent.types';
 
 const styles = {
     widgetWrapper: {

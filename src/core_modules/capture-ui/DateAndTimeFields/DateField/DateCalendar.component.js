@@ -1,8 +1,8 @@
 // @flow
 /* eslint-disable class-methods-use-this */
-import InfiniteCalendar from '@joakim_sm/react-infinite-calendar';
-import moment from 'moment';
 import React, { Component } from 'react';
+import moment from 'moment';
+import InfiniteCalendar from '@joakim_sm/react-infinite-calendar';
 import '@joakim_sm/react-infinite-calendar/styles.css';
 import './customStyles.css';
 

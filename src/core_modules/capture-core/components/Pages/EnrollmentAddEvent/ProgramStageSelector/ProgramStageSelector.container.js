@@ -1,15 +1,15 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import log from 'loglevel';
-import React, { useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
-import { errorCreator } from '../../../../../capture-core-utils';
-import { useProgramFromIndexedDB } from '../../../../utils/cachedData/useProgramFromIndexedDB';
-import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
-import { Widget } from '../../../Widget';
+import React, { useEffect, useMemo } from 'react';
+import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
-import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
+import { Widget } from '../../../Widget';
+import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
+import { useProgramFromIndexedDB } from '../../../../utils/cachedData/useProgramFromIndexedDB';
+import { errorCreator } from '../../../../../capture-core-utils';
 import type { Props } from './ProgramStageSelector.types';
+import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
 
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {

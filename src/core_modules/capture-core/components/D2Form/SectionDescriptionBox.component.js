@@ -1,8 +1,8 @@
 // @flow
 
-import { IconInfo16, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
 import React, { type ComponentType } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import { IconInfo16, colors } from '@dhis2/ui';
 import type { Props, PlainProps } from './SectionDescriptionBox.types';
 
 const styles = {

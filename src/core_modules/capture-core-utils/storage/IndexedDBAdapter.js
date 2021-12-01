@@ -1,5 +1,5 @@
-import isDefined from 'd2-utilizr/lib/isDefined';
 import log from 'loglevel';
+import isDefined from 'd2-utilizr/lib/isDefined';
 import { errorCreator } from '../errorCreator';
 
 export class IndexedDBAdapter {

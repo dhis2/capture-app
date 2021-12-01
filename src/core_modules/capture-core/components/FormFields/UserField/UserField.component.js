@@ -1,9 +1,9 @@
 // @flow
-import { withStyles } from '@material-ui/core/styles';
 import * as React from 'react';
-import { Selected } from './Selected.component';
-import type { User } from './types';
+import { withStyles } from '@material-ui/core/styles';
 import { UserSearch } from './UserSearch.component';
+import type { User } from './types';
+import { Selected } from './Selected.component';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {

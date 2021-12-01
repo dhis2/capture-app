@@ -1,8 +1,8 @@
 // @flow
+import { createReducerDescription } from '../../trackerRedux';
 import {
     actionTypes as notesActionTypes,
 } from '../../components/Notes/notes.actions';
-import { createReducerDescription } from '../../trackerRedux';
 
 
 export const notesDesc = createReducerDescription({

@@ -1,7 +1,7 @@
 import indexedDB from 'fake-indexeddb';
-import { availableAdapters } from '../availableAdapters';
-import { IndexedDBAdapter } from '../IndexedDBAdapter';
 import { StorageController } from '../StorageController';
+import { IndexedDBAdapter } from '../IndexedDBAdapter';
+import { availableAdapters } from '../availableAdapters';
 import '../../extensions/asyncForEachArray';
 
 IndexedDBAdapter.indexedDB = indexedDB;

@@ -1,8 +1,8 @@
 // @flow
-import { useConfig } from '@dhis2/app-runtime';
-import { buildUrl } from 'capture-core-utils';
-import { NonBundledIcon } from 'capture-ui';
 import React from 'react';
+import { NonBundledIcon } from 'capture-ui';
+import { buildUrl } from 'capture-core-utils';
+import { useConfig } from '@dhis2/app-runtime';
 import type { Props } from './nonBundledDhis2Icon.types';
 
 export const NonBundledDhis2Icon = ({ name, alternativeText = name, ...passOnProps }: Props) => {

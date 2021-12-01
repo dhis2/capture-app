@@ -1,14 +1,14 @@
 // @flow
-import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import React, { useEffect, useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 // $FlowFixMe
 import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import { buildUrlQueryString } from '../../../utils/routing';
+import React, { useEffect, useMemo } from 'react';
+import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
-import { MainPageComponent } from './MainPage.component';
+import { buildUrlQueryString } from '../../../utils/routing';
+import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { MainPageStatuses } from './MainPage.constants';
+import { MainPageComponent } from './MainPage.component';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this

@@ -1,7 +1,7 @@
 // @flow
-import { ofType } from 'redux-observable';
-import { map } from 'rxjs/operators';
 import uuid from 'uuid/v4';
+import { map } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
 import { scheduleEventWidgetActionTypes, scheduleEvent } from './WidgetEventSchedule.actions';
 
 

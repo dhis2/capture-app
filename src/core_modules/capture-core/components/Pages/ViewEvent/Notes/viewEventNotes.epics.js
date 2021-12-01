@@ -1,20 +1,20 @@
 // @flow
-import { getCurrentUser } from 'capture-core/d2/d2Instance';
-import uuid from 'd2-utilizr/lib/uuid';
-import moment from 'moment';
-import { batchActions } from 'redux-batched-actions';
-import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { convertValue as convertListValue } from '../../../../converters/clientToList';
-import { dataElementTypes } from '../../../../metaData';
+import { ofType } from 'redux-observable';
+import { batchActions } from 'redux-batched-actions';
+import moment from 'moment';
+import uuid from 'd2-utilizr/lib/uuid';
+import { getCurrentUser } from 'capture-core/d2/d2Instance';
+import {
+    actionTypes as viewEventActionTypes,
+} from '../ViewEventComponent/viewEvent.actions';
 import {
     addNote,
     removeNote,
     setNotes,
 } from '../../../Notes/notes.actions';
-import {
-    actionTypes as viewEventActionTypes,
-} from '../ViewEventComponent/viewEvent.actions';
+import { dataElementTypes } from '../../../../metaData';
+import { convertValue as convertListValue } from '../../../../converters/clientToList';
 import {
     actionTypes as viewEventNotesActionTypes,
     batchActionTypes as viewEventNotesBatchActionTypes,

@@ -1,8 +1,8 @@
 // @flow
-import type { DataElement as MetaDataElement } from '../../../../../metaData';
-import { orientations } from '../../../../FormFields/New';
-import { CoordinateFieldForCustomForm } from '../../Components';
 import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
+import { CoordinateFieldForCustomForm } from '../../Components';
+import { orientations } from '../../../../FormFields/New';
+import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
 export const getCoordinateFieldConfigForCustomForm = (metaData: MetaDataElement) => {
     const props = createProps({

@@ -1,9 +1,8 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
-import { typeof dataElementTypes } from '../../../../../metaData';
+import { errorCreator } from 'capture-core-utils';
 import { filterTypesObject, type FiltersData } from '../../../WorkingListsBase';
-import type { BuildFilterQueryArgsMeta } from './buildFilterQueryArgs.types';
+import { typeof dataElementTypes } from '../../../../../metaData';
 import {
     convertText,
     convertDate,
@@ -13,6 +12,7 @@ import {
     convertNumeric,
     convertTrueOnly,
 } from './filterConverters';
+import type { BuildFilterQueryArgsMeta } from './buildFilterQueryArgs.types';
 
 const mappersForTypes: { [string]: Function } = {
     [filterTypesObject.TEXT]: convertText,

@@ -1,6 +1,6 @@
 // @flow
-import type { TemplatesLoaderOutputProps } from '../TemplatesLoader';
 import type { WorkingListTemplates, WorkingListTemplate } from '../workingListsBase.types';
+import type { TemplatesLoaderOutputProps } from '../TemplatesLoader';
 
 type ExtractedProps = {|
     templates?: WorkingListTemplates,

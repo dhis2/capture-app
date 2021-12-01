@@ -1,14 +1,14 @@
 // @flow
+import React, { useMemo, type ComponentType } from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
 import {
     SingleSelect,
     SingleSelectOption,
 } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
-import React, { useMemo, type ComponentType } from 'react';
-import { useCurrentTrackedEntityTypeId } from '../../hooks/useCurrentTrackedEntityTypeId';
-import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
-import { scopeTypes } from '../../metaData';
 import { InfoIconText } from '../InfoIconText';
+import { scopeTypes } from '../../metaData';
+import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
+import { useCurrentTrackedEntityTypeId } from '../../hooks/useCurrentTrackedEntityTypeId';
 import type { Props } from './TrackedEntityTypeSelector.types';
 
 const styles = ({ typography }) => ({

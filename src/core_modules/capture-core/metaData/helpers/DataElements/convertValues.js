@@ -1,10 +1,10 @@
 // @flow
-import { errorCreator } from 'capture-core-utils';
-import isArray from 'd2-utilizr/lib/isArray';
-import isObject from 'd2-utilizr/lib/isObject';
 import log from 'loglevel';
-import type { DataElement } from '../../DataElement';
+import isObject from 'd2-utilizr/lib/isObject';
+import isArray from 'd2-utilizr/lib/isArray';
+import { errorCreator } from 'capture-core-utils';
 import type { ConvertFn } from '../../DataElement/DataElement';
+import type { DataElement } from '../../DataElement';
 
 export type ValuesType = { [key: string]: any };
 

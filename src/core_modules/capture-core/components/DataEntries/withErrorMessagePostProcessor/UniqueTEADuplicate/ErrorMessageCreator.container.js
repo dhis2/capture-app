@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import { UniqueTEADuplicate } from './ErrorMessageCreator.component';
 import { makeTETSelector, makeAttributeNameSelector } from './ErrorMessageCreator.selectors';
+import { UniqueTEADuplicate } from './ErrorMessageCreator.component';
 
 const makeMapStateToProps = () => {
     const TETSelector = makeTETSelector();

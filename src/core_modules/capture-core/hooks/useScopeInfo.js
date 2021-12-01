@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
-import { getScopeFromScopeId } from '../metaData';
 import { deriveInfoFromScope } from '../metaData/helpers/getScopeInfo';
+import { getScopeFromScopeId } from '../metaData';
 
 export function useScopeInfo(scopeId: ?string) {
     const scope = useMemo(() => getScopeFromScopeId(scopeId),

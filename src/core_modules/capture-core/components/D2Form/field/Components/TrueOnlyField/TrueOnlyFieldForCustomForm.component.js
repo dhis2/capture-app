@@ -1,5 +1,10 @@
 // @flow
 import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+    withCustomElementContainer,
+} from '../internal';
+import {
     TrueOnlyField,
     withGotoInterface,
     withHideCompatibility,
@@ -8,11 +13,6 @@ import {
     withCalculateMessages,
     withDisplayMessages,
 } from '../../../../FormFields/New';
-import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-    withCustomElementContainer,
-} from '../internal';
 
 export const TrueOnlyFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(

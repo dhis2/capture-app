@@ -1,12 +1,12 @@
 // @flow
-import { set as setOrgUnitRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import {
-    actionTypes as teiSearchActionTypes,
-} from '../../components/TeiSearch/actions/teiSearch.actions';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import {
     actionTypes as teiSearchOrgUnitActionTypes,
 } from '../../components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.actions';
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
+import {
+    actionTypes as teiSearchActionTypes,
+} from '../../components/TeiSearch/actions/teiSearch.actions';
+import { set as setOrgUnitRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
 
 export const teiSearchDesc = createReducerDescription({

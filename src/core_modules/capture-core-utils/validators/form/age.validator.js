@@ -1,6 +1,6 @@
 // @flow
-import { isValidDate } from './date.validator';
 import { isValidZeroOrPositiveInteger } from './integerZeroOrPositive.validator';
+import { isValidDate } from './date.validator';
 /**
  *
  * @export

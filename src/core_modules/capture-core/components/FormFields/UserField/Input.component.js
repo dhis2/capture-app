@@ -1,7 +1,7 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { DebounceField, withTextFieldFocusHandler, withFocusSaver } from 'capture-ui';
 import * as React from 'react';
+import { DebounceField, withTextFieldFocusHandler, withFocusSaver } from 'capture-ui';
+import i18n from '@dhis2/d2-i18n';
 import { SearchContext } from './Search.context';
 
 const FocusableDebounceField = withFocusSaver()(withTextFieldFocusHandler()(DebounceField));

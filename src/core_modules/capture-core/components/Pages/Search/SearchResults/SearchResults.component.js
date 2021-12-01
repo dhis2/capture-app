@@ -1,20 +1,20 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import { Button, colors } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core';
-import { Pagination } from 'capture-ui';
-import React, { type ComponentType, useContext } from 'react';
 import { useDispatch } from 'react-redux';
+import React, { type ComponentType, useContext } from 'react';
+import { Pagination } from 'capture-ui';
+import { withStyles } from '@material-ui/core';
+import { Button, colors } from '@dhis2/ui';
+import i18n from '@dhis2/d2-i18n';
+import { searchScopes } from '../SearchPage.constants';
+import { ResultsPageSizeContext } from '../../shared-contexts';
+import { SearchResultsHeader } from '../../../SearchResultsHeader';
+import { withNavigation } from '../../../Pagination/withDefaultNavigation';
+import { availableCardListButtonState, enrollmentTypes } from '../../../CardList/CardList.constants';
+import { CardList } from '../../../CardList';
+import { useScopeInfo } from '../../../../hooks/useScopeInfo';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import { CardList } from '../../../CardList';
-import { availableCardListButtonState, enrollmentTypes } from '../../../CardList/CardList.constants';
-import { withNavigation } from '../../../Pagination/withDefaultNavigation';
-import { SearchResultsHeader } from '../../../SearchResultsHeader';
-import { ResultsPageSizeContext } from '../../shared-contexts';
-import { searchScopes } from '../SearchPage.constants';
 import type { Props } from './SearchResults.types';
 
 const SearchPagination = withNavigation()(Pagination);

@@ -1,18 +1,18 @@
 // @flow
-import { actionCreator } from '../../../actions/actions.utils';
-import { convertClientToForm } from '../../../converters';
-import type { ClientEventContainer } from '../../../events/eventRequests';
-import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import { viewEventIds } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
+import type { Event } from '../../Pages/Enrollment/EnrollmentPageDefault/types/common.types';
+import { loadEditDataEntryAsync } from '../../DataEntry/templates/dataEntryLoadEdit.template';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
+import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
+import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
+import { TrackerProgram } from '../../../metaData/Program';
+import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 import { dataElementTypes } from '../../../metaData';
 import type { RenderFoundation, Program } from '../../../metaData';
-import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
-import { TrackerProgram } from '../../../metaData/Program';
-import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
-import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
-import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
-import { loadEditDataEntryAsync } from '../../DataEntry/templates/dataEntryLoadEdit.template';
-import type { Event } from '../../Pages/Enrollment/EnrollmentPageDefault/types/common.types';
-import { viewEventIds } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import type { ClientEventContainer } from '../../../events/eventRequests';
+import { convertClientToForm } from '../../../converters';
+import { actionCreator } from '../../../actions/actions.utils';
 
 export const actionTypes = {
     VIEW_EVENT_DATA_ENTRY_LOADED: 'ViewEventDataEntryLoadedForViewSingleEvent',
