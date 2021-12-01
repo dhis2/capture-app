@@ -11,7 +11,7 @@ import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
 import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
-import { addEnrollmentEventPageActionTypes } from '../enrollmentAddEventPage.actions';
+import { addEnrollmentEventPageDefaultActionTypes } from '../EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import type { Props } from './newEventWorkspace.types';
 
 const styles = () => ({
@@ -83,8 +83,8 @@ const NewEventWorkspacePlain = ({
                         orgUnitId={orgUnitId}
                         teiId={teiId}
                         enrollmentId={enrollmentId}
-                        onSaveSuccessActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS}
-                        onSaveErrorActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR}
+                        onSaveSuccessActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS}
+                        onSaveErrorActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR}
                         onSave={onSave}
                         onCancel={onCancel}
                         {...passOnProps}
@@ -98,8 +98,8 @@ const NewEventWorkspacePlain = ({
                         enrollmentId={enrollmentId}
                         enrollmentDate={enrollmentDate}
                         incidentDate={incidentDate}
-                        onSaveSuccessActionType={addEnrollmentEventPageActionTypes.EVENT_SCHEDULE_SUCCESS}
-                        onSaveErrorActionType={addEnrollmentEventPageActionTypes.EVENT_SCHEDULE_ERROR}
+                        onSaveSuccessActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_SUCCESS}
+                        onSaveErrorActionType={addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR}
                         onSave={onSave}
                         onCancel={onCancel}
                     />}

@@ -1,5 +1,5 @@
 // @flow
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
     containsKeyInStorageAsync,
     getCachedSingleResourceFromKeyAsync,
@@ -17,12 +17,11 @@ const IdTypes = Object.freeze({
 });
 
 export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
-    const [valid, setValid] = useState();
+    const [valid, setValid] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState();
 
     const getPromises = useCallback(() => {
-        setLoading(true);
         const promises = [];
         const keys = [];
         if (programId) {
@@ -54,17 +53,17 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
             });
     }, [programId, orgUnitId]);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         getPromises();
     }, [programId, orgUnitId, getPromises]);
 
-    return !loading ? {
+    const inEffectData = !loading && (programId === valid[0]?.id) && (orgUnitId === valid[1]?.id) ? {
         valid,
         error,
-        loading,
     } : {
-        valid: undefined,
+        valid: [],
         error: undefined,
-        loading,
     };
+
+    return { ...inEffectData, loading };
 };

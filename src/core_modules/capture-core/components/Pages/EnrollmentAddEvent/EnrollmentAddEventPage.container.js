@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import type { ComponentType } from 'react';
 import { EnrollmentAddEventPageDefault } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.container';
@@ -19,29 +19,40 @@ export const EnrollmentAddEventPage: ComponentType<{||}> = () => {
         attributeValues,
         error: commonDataError,
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
-
-    let pageStatus = EnrollmentAddEventPageStatuses.DEFAULT;
     const pageIsInvalid = (validIds && !validIds?.every(({ valid }) => valid)) || commonDataError || validatedIdsError;
-    (!programId || !enrollmentId || !teiId) && (pageStatus = EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES);
-    pageIsInvalid && (pageStatus = EnrollmentAddEventPageStatuses.PAGE_INVALID);
-    !validIds && (pageStatus = EnrollmentAddEventPageStatuses.LOADING);
+    const pageStatus = useMemo(() => {
+        if (!programId || !enrollmentId || !teiId) return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
+        if (pageIsInvalid && validIds[0]?.valid && !validIds[1]?.valid) return EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID;
+        if (pageIsInvalid && !validIds[0]?.valid) return EnrollmentAddEventPageStatuses.PROGRAM_INVALID;
+        if (pageIsInvalid) return EnrollmentAddEventPageStatuses.PAGE_INVALID;
+        if (!validIds?.length) return EnrollmentAddEventPageStatuses.LOADING;
+        return EnrollmentAddEventPageStatuses.DEFAULT;
+    }, [enrollmentId, pageIsInvalid, programId, teiId, validIds]);
 
     switch (pageStatus) {
     case EnrollmentAddEventPageStatuses.LOADING:
         return <LoadingMaskForPage />;
     case EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES:
         return (
-            <p
-                style={{ color: 'red' }}
-            >
+            <p style={{ color: 'red' }}>
                 {i18n.t('Page is missing required values from URL')}
+            </p>
+        );
+    case EnrollmentAddEventPageStatuses.PROGRAM_INVALID:
+        return (
+            <p style={{ color: 'red' }}>
+                {i18n.t('Program is not valid')}
+            </p>
+        );
+    case EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID:
+        return (
+            <p style={{ color: 'red' }}>
+                {i18n.t('Org unit is not valid with current program')}
             </p>
         );
     case EnrollmentAddEventPageStatuses.PAGE_INVALID:
         return (
-            <p
-                style={{ color: 'red' }}
-            >
+            <p style={{ color: 'red' }}>
                 {i18n.t('There was an error opening the Page')}
             </p>
         );
@@ -54,6 +65,10 @@ export const EnrollmentAddEventPage: ComponentType<{||}> = () => {
             />
         );
     default:
-        return null;
+        return (
+            <p style={{ color: 'red' }}>
+                {i18n.t('There was an error opening the Page')}
+            </p>
+        );
     }
 };

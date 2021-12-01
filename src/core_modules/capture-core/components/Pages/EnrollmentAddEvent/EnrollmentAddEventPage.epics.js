@@ -2,8 +2,9 @@
 import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
 import { map } from 'rxjs/operators';
-
-import { addEnrollmentEventPageActionTypes } from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
+import {
+    addEnrollmentEventPageDefaultActionTypes,
+} from './EnrollmentAddEventPageDefault/EnrollmentAddEventPageDefault.actions';
 import {
     commitEnrollmentEventWithoutId,
     rollbackEnrollmentEventWithoutId,
@@ -13,8 +14,8 @@ import {
 export const saveNewEventSucceededEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
-            addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS,
-            addEnrollmentEventPageActionTypes.EVENT_SCHEDULE_SUCCESS,
+            addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_SUCCESS,
+            addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_SUCCESS,
         ),
         map((action) => {
             const meta = action.meta;
@@ -26,8 +27,8 @@ export const saveNewEventSucceededEpic = (action$: InputObservable) =>
 export const saveNewEventFailedEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
-            addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR,
-            addEnrollmentEventPageActionTypes.EVENT_SCHEDULE_ERROR,
+            addEnrollmentEventPageDefaultActionTypes.EVENT_SAVE_ERROR,
+            addEnrollmentEventPageDefaultActionTypes.EVENT_SCHEDULE_ERROR,
         ),
         map((action) => {
             const meta = action.meta;
