@@ -90,7 +90,7 @@ export const EnrollmentPageDefault = () => {
             orgUnitId={orgUnitId}
             program={program}
             stages={stages}
-            events={enrollment?.events ?? []}
+            events={enrollment?.events}
             enrollmentId={enrollmentId}
             onDelete={onDelete}
             onViewAll={onViewAll}
