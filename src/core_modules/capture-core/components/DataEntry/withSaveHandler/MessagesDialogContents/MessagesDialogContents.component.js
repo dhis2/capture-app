@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
+import { validationStrategies } from '../../../../metaData/RenderFoundation/renderFoundation.const';
 import { ErrorAndWarningDialog } from './ErrorAndWarningDialog.component';
 import { ErrorDialog } from './ErrorDialog.component';
 import { WarningDialog } from './WarningDialog.component';
 
-import { validationStrategies } from '../../../../metaData/RenderFoundation/renderFoundation.const';
 
 type Props = {
     open: boolean,

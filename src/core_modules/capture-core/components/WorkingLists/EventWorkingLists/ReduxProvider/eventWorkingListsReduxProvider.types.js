@@ -1,5 +1,6 @@
 // @flow
 import type { Program } from '../../../../metaData';
+import type { EventRecords } from '../../EventWorkingListsCommon';
 import type {
     CancelLoadTemplates,
     CancelLoadView,
@@ -34,7 +35,6 @@ import type {
     CustomColumnOrder,
     InitialViewConfig,
 } from '../../WorkingListsCommon';
-import type { EventRecords } from '../../EventWorkingListsCommon';
 import type {
     EventWorkingListsTemplates,
 } from '../types';

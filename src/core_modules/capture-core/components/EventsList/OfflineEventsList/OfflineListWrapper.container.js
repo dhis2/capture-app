@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
+import { isSelectionsEqual } from '../../App/isSelectionsEqual';
 import { createOfflineListWrapper } from '../../List';
 import { OfflineListContainerCreator } from './OfflineList.containerCreator';
-import { isSelectionsEqual } from '../../App/isSelectionsEqual';
 
 const mapStateToProps = (state: ReduxState, props: Object) => {
     const listSelections = state.workingListsContext[props.listId];

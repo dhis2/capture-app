@@ -1,8 +1,8 @@
 // @flow
-import { query } from './query';
 import { getContext } from '../context';
 
 import type { QuickStoreMandatory, QuickStoreOptions } from './IOUtils.types';
+import { query } from './query';
 
 /**
  * Queries the Api, converts the result using the callback and then stores it all in the selected storage.

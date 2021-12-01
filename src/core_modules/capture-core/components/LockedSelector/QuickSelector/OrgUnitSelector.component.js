@@ -1,15 +1,15 @@
 // @flow
-import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import { IconCross24 } from '@dhis2/ui';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
-import { IconCross24 } from '@dhis2/ui';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
 import { Button } from '../../Buttons';
 import { OrgUnitField } from './OrgUnitField.container';
 

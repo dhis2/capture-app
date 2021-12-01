@@ -1,8 +1,8 @@
 // @flow
-import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
 import { Button, spacersNum } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import React, { type ComponentType } from 'react';
 import type { Props } from './scheduleButtons.types';
 
 const styles = {

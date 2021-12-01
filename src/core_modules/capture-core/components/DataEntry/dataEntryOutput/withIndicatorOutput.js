@@ -1,11 +1,11 @@
 // @flow
-import * as React from 'react';
-import { connect } from 'react-redux';
+import i18n from '@dhis2/d2-i18n';
 import Card from '@material-ui/core/Card';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { withStyles } from '@material-ui/core/styles';
-import i18n from '@dhis2/d2-i18n';
+import * as React from 'react';
+import { connect } from 'react-redux';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 

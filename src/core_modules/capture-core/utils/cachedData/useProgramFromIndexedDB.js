@@ -1,9 +1,9 @@
 // @flow
 import { useMemo, useState } from 'react';
+import { userStores } from '../../storageControllers/stores';
 import {
     getCachedSingleResourceFromKeyAsync,
 } from './helpers/singleResourceFromKeyGetter';
-import { userStores } from '../../storageControllers/stores';
 
 
 export const useProgramFromIndexedDB = (programId: string) => {

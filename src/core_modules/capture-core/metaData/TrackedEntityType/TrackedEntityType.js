@@ -1,9 +1,9 @@
 // @flow
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { SearchGroup } from '../SearchGroup';
-import type { DataElement } from '../DataElement';
-import type { TeiRegistration } from './TeiRegistration';
 import type { Access } from '../Access';
+import type { DataElement } from '../DataElement';
+import type { SearchGroup } from '../SearchGroup';
+import type { TeiRegistration } from './TeiRegistration';
 
 /* eslint-disable no-underscore-dangle */
 export class TrackedEntityType {

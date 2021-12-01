@@ -1,9 +1,9 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
-import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
-import { openDataEntryForNewTei } from './open.actions';
-import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
 import { RenderFoundation } from '../../../../metaData';
+import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
+import { getGeneratedUniqueValuesAsync } from '../../common/TEIAndEnrollment';
+import { openDataEntryForNewTei } from './open.actions';
 
 const itemId = 'newTei';
 

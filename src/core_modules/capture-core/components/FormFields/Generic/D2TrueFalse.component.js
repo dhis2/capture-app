@@ -1,10 +1,10 @@
 // @flow
-import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import React, { Component } from 'react';
 
-import { SelectBoxes } from '../Options/SelectBoxes';
-import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
 import { Option } from '../../../metaData/OptionSet/Option';
+import { OptionSet } from '../../../metaData/OptionSet/OptionSet';
+import { SelectBoxes } from '../Options/SelectBoxes';
 
 type Props = {
     allowMultiple?: boolean,

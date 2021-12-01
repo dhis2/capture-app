@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
-import { IconCross16, IconUndo16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import type { Props } from './cancel.types';
+import { IconCross16, IconUndo16, MenuItem } from '@dhis2/ui';
+import React from 'react';
 import { plainStatus } from '../../constants/status.const';
+import type { Props } from './cancel.types';
 
 export const Cancel = ({ enrollment, onUpdate }: Props) =>
     (enrollment.status === plainStatus.CANCELLED ? (

@@ -1,16 +1,16 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import i18n from '@dhis2/d2-i18n';
-import { withSaveHandler } from '../../DataEntry';
-import { useLifecycle } from './useLifecycle';
 import { useOrganisationUnit } from '../../../dataQueries';
-import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
-import { ValidatedComponent } from './Validated.component';
-import { requestSaveEvent } from './validated.actions';
-import type { ContainerProps } from './validated.types';
 import type { RenderFoundation } from '../../../metaData';
+import { withSaveHandler } from '../../DataEntry';
 import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
+import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
+import { useLifecycle } from './useLifecycle';
+import { requestSaveEvent } from './validated.actions';
+import { ValidatedComponent } from './Validated.component';
+import type { ContainerProps } from './validated.types';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 export const Validated = ({

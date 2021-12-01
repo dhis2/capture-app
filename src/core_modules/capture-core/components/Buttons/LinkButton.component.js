@@ -1,7 +1,7 @@
 // @flow
-import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import * as React from 'react';
 
 const styles = (theme: Theme) => ({
     button: {

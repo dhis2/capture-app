@@ -2,9 +2,9 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
-import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
 import type { TrackerProgram, RenderFoundation } from '../../../metaData';
 import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../common.types';
+import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
 
 export const useLifecycle = ({
     program,

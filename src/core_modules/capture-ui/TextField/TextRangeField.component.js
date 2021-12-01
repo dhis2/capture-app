@@ -1,14 +1,14 @@
 // @flow
 
-import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import * as React from 'react';
 
 import { withFocusSaver } from '../HOC/withFocusSaver';
 import { withShrinkLabel } from '../HOC/withShrinkLabel';
-import { withTextFieldFocusHandler } from '../internal/TextInput/withFocusHandler';
-import { TextInput } from '../internal/TextInput/TextInput.component';
-import defaultClasses from './textRangeField.module.css';
 import { InnerMessage } from '../internal/InnerMessage/InnerMessage.component';
+import { TextInput } from '../internal/TextInput/TextInput.component';
+import { withTextFieldFocusHandler } from '../internal/TextInput/withFocusHandler';
+import defaultClasses from './textRangeField.module.css';
 
 const RangeInputField = withFocusSaver()(withShrinkLabel()(withTextFieldFocusHandler()(TextInput)));
 

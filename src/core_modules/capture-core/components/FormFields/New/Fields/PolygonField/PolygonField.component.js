@@ -1,8 +1,8 @@
 // @flow
-import * as React from 'react';
+import { Dialog, DialogTitle } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { PolygonField as UIPolygonField } from 'capture-ui';
-import { Dialog, DialogTitle } from '@material-ui/core';
+import * as React from 'react';
 import { typeof orientations } from '../../../New';
 
 const getStyles = (theme: Theme) => ({

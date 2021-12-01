@@ -1,6 +1,6 @@
 // @flow
-import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import React, { type ComponentType } from 'react';
 import { IncompleteSelectionsMessage } from '../IncompleteSelectionsMessage';
 
 const styles = () => ({

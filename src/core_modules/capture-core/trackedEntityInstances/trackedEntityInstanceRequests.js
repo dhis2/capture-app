@@ -1,8 +1,8 @@
 // @flow
 
+import { convertValue } from '../converters/serverToClient';
 import { getApi } from '../d2/d2Instance';
 import { convertDataElementsValues } from '../metaData';
-import { convertValue } from '../converters/serverToClient';
 import { getSubValues } from './getSubValues';
 
 type ApiTeiAttribute = {

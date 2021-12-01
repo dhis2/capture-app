@@ -1,10 +1,30 @@
 // @flow
+import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
+import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
-import { batchActions } from 'redux-batched-actions';
-import { errorCreator } from 'capture-core-utils';
+import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
+import { getProgramAndStageForProgram } from '../../../../../../metaData/helpers';
+import { getStageForEventProgram } from '../../../../../../metaData/helpers/EventProgram/getStageForEventProgram';
+import {
+    getCurrentClientValues,
+    getCurrentClientMainData,
+    getRulesActionsForEvent,
+} from '../../../../../../rules/actionsCreator';
+import type {
+    FieldData,
+} from '../../../../../../rules/actionsCreator';
 import { rulesExecutedPostUpdateField } from '../../../../../DataEntry/actions/dataEntry.actions';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
+import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
+import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
+import {
+    resetList,
+} from '../../RecentlyAddedEventsList';
+import {
+    listId,
+} from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,
@@ -16,29 +36,9 @@ import {
     resetDataEntry,
 } from '../actions/dataEntryLoad.actionBatchs';
 import {
-    getCurrentClientValues,
-    getCurrentClientMainData,
-    getRulesActionsForEvent,
-} from '../../../../../../rules/actionsCreator';
-import { getProgramAndStageForProgram } from '../../../../../../metaData/helpers';
-import {
     getDefaultMainConfig as getDefaultMainColumnConfig,
     getMetaDataConfig as getColumnMetaDataConfig,
 } from './defaultColumnConfiguration';
-import {
-    resetList,
-} from '../../RecentlyAddedEventsList';
-import type {
-    FieldData,
-} from '../../../../../../rules/actionsCreator';
-import {
-    listId,
-} from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
-import { getStageForEventProgram } from '../../../../../../metaData/helpers/EventProgram/getStageForEventProgram';
-import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
-import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../../metaData';
-import { actionTypes as crossPageActionTypes } from '../../../../../Pages/actions/crossPage.actions';
-import { lockedSelectorActionTypes } from '../../../../../LockedSelector/LockedSelector.actions';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',

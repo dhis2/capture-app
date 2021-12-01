@@ -5,8 +5,8 @@ Starts the app using environment variables from .env.cypress / .env.cypress.loca
 
 const fs = require('fs');
 const path = require('path');
-const dotenv = require('dotenv');
 const { exec } = require('@dhis2/cli-helpers-engine');
+const dotenv = require('dotenv');
 
 const CONFIG_NAME_BASE = '.env.cypress';
 

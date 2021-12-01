@@ -1,10 +1,10 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
+import { IconErrorFilled16 } from '@dhis2/ui';
+import Card from '@material-ui/core/Card';
+import { withStyles } from '@material-ui/core/styles';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Card from '@material-ui/core/Card';
-import { IconErrorFilled16 } from '@dhis2/ui';
-import { withStyles } from '@material-ui/core/styles';
-import i18n from '@dhis2/d2-i18n';
 import { getDataEntryKey } from '../common/getDataEntryKey';
 import { withDataEntryOutput } from './withDataEntryOutput';
 

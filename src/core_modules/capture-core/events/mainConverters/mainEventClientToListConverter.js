@@ -1,8 +1,8 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { convertClientToList } from '../../converters';
-import { convertMainEvent } from './mainEventConverter';
 import { dataElementTypes } from '../../metaData';
+import { convertMainEvent } from './mainEventConverter';
 
 export function convertMainEventClientToList(event: Object) {
     // eslint-disable-next-line complexity

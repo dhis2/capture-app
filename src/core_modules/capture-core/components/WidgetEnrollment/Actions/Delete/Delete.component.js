@@ -1,4 +1,5 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import {
     IconDelete16,
     MenuItem,
@@ -10,7 +11,6 @@ import {
     Button,
 } from '@dhis2/ui';
 import React, { useState } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import type { Props } from './delete.types';
 
 export const Delete = ({ enrollment, onDelete }: Props) => {

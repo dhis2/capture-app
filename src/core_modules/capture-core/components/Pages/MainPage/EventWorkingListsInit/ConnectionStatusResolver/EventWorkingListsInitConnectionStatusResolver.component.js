@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { EventWorkingListsInitHeader } from '../Header';
 import { EventWorkingListsOffline } from '../../../../WorkingLists/EventWorkingListsOffline';
+import { EventWorkingListsInitHeader } from '../Header';
 import { EventWorkingListsInitRunningMutationsHandler } from '../RunningMutationsHandler';
 import type { Props } from './eventWorkingListsInitConnectionStatusResolver.types';
 

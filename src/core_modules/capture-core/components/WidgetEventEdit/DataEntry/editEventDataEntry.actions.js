@@ -1,25 +1,25 @@
 // @flow
 import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
-import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
-import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
 import type { RenderFoundation, Program } from '../../../metaData';
+import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
+import { EventProgram, TrackerProgram } from '../../../metaData/Program';
+import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
 import { effectMethods } from '../../../trackerOffline';
-import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
+import { addFormData } from '../../D2Form/actions/form.actions';
 import {
     getConvertGeometryIn,
     convertGeometryOut,
     convertStatusIn,
     convertStatusOut,
 } from '../../DataEntries';
+import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
 import {
     getDataEntryMeta, validateDataEntryValues, getDataEntryNotes,
 } from '../../DataEntry/actions/dataEntryLoad.utils';
-import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
-import { addFormData } from '../../D2Form/actions/form.actions';
-import { EventProgram, TrackerProgram } from '../../../metaData/Program';
-import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import type { Event } from '../../Pages/Enrollment/EnrollmentPageDefault/types/common.types';
-import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',

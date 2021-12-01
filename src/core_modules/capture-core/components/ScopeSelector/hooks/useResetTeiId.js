@@ -1,8 +1,8 @@
 // @flow
-import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getUrlQueries } from '../../../utils/url';
+import { useHistory } from 'react-router-dom';
 import { buildUrlQueryString } from '../../../utils/routing';
+import { getUrlQueries } from '../../../utils/url';
 
 export const useResetTeiId = () => {
     const history = useHistory();

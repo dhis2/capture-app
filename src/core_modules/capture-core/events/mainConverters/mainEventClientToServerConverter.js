@@ -1,7 +1,7 @@
 // @flow
 import { convertClientToServer } from '../../converters';
-import { convertMainEvent } from './mainEventConverter';
 import { dataElementTypes } from '../../metaData';
+import { convertMainEvent } from './mainEventConverter';
 
 export function convertMainEventClientToServer(event: Object) {
     const mapClientKeyToServerKey = {

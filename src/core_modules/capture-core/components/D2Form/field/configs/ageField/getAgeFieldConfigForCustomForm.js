@@ -1,8 +1,8 @@
 // @flow
-import { orientations } from '../../../../FormFields/New';
-import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
-import { AgeFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import { orientations } from '../../../../FormFields/New';
+import { AgeFieldForCustomForm } from '../../Components';
+import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 
 export const getAgeFieldConfigForCustomForm = (metaData: MetaDataElement) => {
     const props = createProps({

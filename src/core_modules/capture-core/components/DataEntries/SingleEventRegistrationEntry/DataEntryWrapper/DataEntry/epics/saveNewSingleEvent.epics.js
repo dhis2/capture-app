@@ -2,12 +2,12 @@
 import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAfterReturnedToMainPage,
 } from '../actions/dataEntry.actions';
 
-import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>

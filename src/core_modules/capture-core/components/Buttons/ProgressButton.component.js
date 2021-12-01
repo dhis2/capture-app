@@ -1,10 +1,10 @@
 // @flow
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
+import * as React from 'react';
 
-import { Button } from './ButtonOld.component';
 import { LoadingMaskForButton } from '../LoadingMasks';
+import { Button } from './ButtonOld.component';
 
 const styles = () => ({
     wrapper: {

@@ -1,10 +1,12 @@
 // @flow
-import { ofType } from 'redux-observable';
-import { push } from 'connected-react-router';
-import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
-import { concat, from, of } from 'rxjs';
+import { push } from 'connected-react-router';
 import moment from 'moment';
+import { ofType } from 'redux-observable';
+import { concat, from, of } from 'rxjs';
+import { catchError, flatMap, map, startWith } from 'rxjs/operators';
+import { buildUrlQueryString } from '../../../utils/routing';
+import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import {
     enrollmentPageActionTypes,
     showErrorViewOnEnrollmentPage,
@@ -14,8 +16,6 @@ import {
     startFetchingTeiFromEnrollmentId,
     startFetchingTeiFromTeiId,
 } from './EnrollmentPage.actions';
-import { buildUrlQueryString } from '../../../utils/routing';
-import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));

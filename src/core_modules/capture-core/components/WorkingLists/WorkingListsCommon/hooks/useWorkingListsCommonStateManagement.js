@@ -3,6 +3,25 @@
 import { useMemo, useCallback } from 'react';
 // $FlowFixMe
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '..';
+import type { Program } from '../../../../metaData';
+import type {
+    CancelLoadTemplates,
+    CancelLoadView,
+    CancelUpdateList,
+    ChangePage,
+    ChangeRowsPerPage,
+    ClearFilter,
+    LoadTemplates,
+    LoadView,
+    SelectRestMenuItem,
+    SelectTemplate,
+    SetColumnOrder,
+    SetTemplateSharingSettings,
+    SharingSettings,
+    Sort,
+    UpdateFilter,
+} from '../../WorkingListsBase';
 import {
     selectTemplate,
     addTemplate,
@@ -24,25 +43,6 @@ import {
     changeRowsPerPage,
     setTemplateSharingSettings,
 } from '../actions';
-import type { Program } from '../../../../metaData';
-import type {
-    CancelLoadTemplates,
-    CancelLoadView,
-    CancelUpdateList,
-    ChangePage,
-    ChangeRowsPerPage,
-    ClearFilter,
-    LoadTemplates,
-    LoadView,
-    SelectRestMenuItem,
-    SelectTemplate,
-    SetColumnOrder,
-    SetTemplateSharingSettings,
-    SharingSettings,
-    Sort,
-    UpdateFilter,
-} from '../../WorkingListsBase';
-import type { AddTemplate, DeleteTemplate, UpdateTemplate, UpdateList } from '..';
 
 const useTemplates = (
     dispatch: ReduxDispatch,

@@ -1,8 +1,8 @@
 // @flow
 import { pipe } from 'capture-core-utils';
-import { convertDataTypeValueToRequest } from './basicDataTypeConverters';
 import { typeof dataElementTypes } from '../../../../../../../metaData';
 import type { OptionSetFilterData } from '../../../../../../ListView';
+import { convertDataTypeValueToRequest } from './basicDataTypeConverters';
 
 export function convertOptionSet(
     sourceValue: OptionSetFilterData,

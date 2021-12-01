@@ -1,7 +1,7 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 import { enrollmentPageStatuses } from '../../components/Pages/Enrollment/EnrollmentPage.constants';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 const initialReducerValue = {
     enrollmentPageStatus: null,

@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import { NotesSectionComponent } from './NotesSection.component';
 import { requestSaveEventNote, updateEventNoteField } from '../../Notes/viewEventNotes.actions';
+import { NotesSectionComponent } from './NotesSection.component';
 
 const mapStateToProps = (state: ReduxState) => {
     const notesSection = state.viewEventPage.notesSection || {};

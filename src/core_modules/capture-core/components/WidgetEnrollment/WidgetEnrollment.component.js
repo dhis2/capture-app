@@ -1,8 +1,5 @@
 // @flow
-import React, { useState, useCallback, type ComponentType } from 'react';
-import moment from 'moment';
-import { errorCreator } from 'capture-core-utils';
-import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import {
     IconClock16,
     IconDimensionOrgUnit16,
@@ -12,16 +9,19 @@ import {
     Tag,
     spacersNum,
 } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
+import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
+import moment from 'moment';
+import React, { useState, useCallback, type ComponentType } from 'react';
+import { convertValue as convertValueClientToView } from '../../converters/clientToView';
+import { convertValue as convertValueServerToClient } from '../../converters/serverToClient';
+import { dataElementTypes } from '../../metaData';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { Widget } from '../Widget';
+import { Actions } from './Actions';
 import type { PlainProps } from './enrollment.types';
 import { Status } from './Status';
-import { convertValue as convertValueServerToClient } from '../../converters/serverToClient';
-import { convertValue as convertValueClientToView } from '../../converters/clientToView';
-import { dataElementTypes } from '../../metaData';
-import { Actions } from './Actions';
 
 const styles = {
     icon: {

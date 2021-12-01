@@ -1,15 +1,15 @@
 // @flow
+import { loadCategories } from '../categories';
+import { loadOptionSets } from '../optionSets';
+import { loadPrograms } from '../programs';
+import { loadTrackedEntityAttributes } from '../trackedEntityAttributes';
+import { loadTrackedEntityTypes } from '../trackedEntityTypes';
 import {
     storeConstants,
     storeOrgUnitLevels,
     storeRelationshipTypes,
     storeOrgUnitGroups,
 } from './quickStoreOperations';
-import { loadPrograms } from '../programs';
-import { loadTrackedEntityTypes } from '../trackedEntityTypes';
-import { loadTrackedEntityAttributes } from '../trackedEntityAttributes';
-import { loadCategories } from '../categories';
-import { loadOptionSets } from '../optionSets';
 
 const loadCoreMetaData = () =>
     Promise.all(

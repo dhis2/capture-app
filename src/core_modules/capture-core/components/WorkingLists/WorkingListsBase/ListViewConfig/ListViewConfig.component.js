@@ -1,7 +1,7 @@
 // @flow
 import React, { useContext } from 'react';
-import { ListViewConfigContext } from '../workingListsBase.context';
 import { ListViewConfigMenuContent } from '../ListViewConfigMenuContent';
+import { ListViewConfigContext } from '../workingListsBase.context';
 import type { Props } from './listViewConfig.types';
 
 export const ListViewConfig = (props: Props) => {

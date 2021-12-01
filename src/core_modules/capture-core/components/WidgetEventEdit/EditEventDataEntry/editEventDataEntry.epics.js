@@ -1,42 +1,39 @@
 // @flow
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
+import moment from 'moment';
+import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
-import { batchActions } from 'redux-batched-actions';
-import moment from 'moment';
-import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
-import { getProgramAndStageFromEvent } from '../../../metaData';
-import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
-import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
-import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 import { convertMainEventClientToServer } from '../../../events/mainConverters';
+import { getProgramAndStageFromEvent } from '../../../metaData';
+import { TrackerProgram } from '../../../metaData/Program';
+import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
     commitEnrollmentEvent,
     updateEnrollmentEvents,
     rollbackEnrollmentEvent,
     enrollmentSiteActionTypes,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { TrackerProgram } from '../../../metaData/Program';
+import {
+    actionTypes as eventDetailsActionTypes,
+    showEditEventDataEntry,
+} from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
+import {
+    updateEventContainer,
+} from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
 
+import {
+    actionTypes as widgetEventEditActionTypes,
+} from '../WidgetEventEdit.actions';
 import {
     actionTypes,
     batchActionTypes,
     startSaveEditEventDataEntry,
     prerequisitesErrorLoadingEditEventDataEntry,
 } from './editEventDataEntry.actions';
-import {
-    actionTypes as widgetEventEditActionTypes,
-} from '../WidgetEventEdit.actions';
-
-
-import {
-    actionTypes as eventDetailsActionTypes,
-    showEditEventDataEntry,
-} from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
-
-import {
-    updateEventContainer,
-} from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 
 
 export const loadEditEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>

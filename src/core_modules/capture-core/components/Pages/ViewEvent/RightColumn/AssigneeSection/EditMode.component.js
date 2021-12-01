@@ -1,9 +1,9 @@
 // @flow
-import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import { UserSearch } from '../../../../FormFields/UserField/UserSearch.component';
+import * as React from 'react';
 import { Button } from '../../../../Buttons';
+import { UserSearch } from '../../../../FormFields/UserField/UserSearch.component';
 
 const getStyles = () => ({
     container: {

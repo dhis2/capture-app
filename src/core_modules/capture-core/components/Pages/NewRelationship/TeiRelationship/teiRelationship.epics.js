@@ -3,16 +3,11 @@
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
-import {
-    batchActionTypes,
-} from './teiRelationship.actions';
+
 
 import {
-    actionTypes as newRelationshipActionTypes,
-    setSearching,
-    unsetSearching,
-} from '../newRelationship.actions';
-
+    addFormData,
+} from '../../../D2Form/actions/form.actions';
 import {
     actionTypes as teiSearchActionTypes,
     initializeTeiSearch,
@@ -20,11 +15,16 @@ import {
 
 import { getSearchFormId } from '../../../TeiSearch/getSearchFormId';
 
-import {
-    addFormData,
-} from '../../../D2Form/actions/form.actions';
 
 import { getSearchGroups } from '../../../TeiSearch/getSearchGroups';
+import {
+    actionTypes as newRelationshipActionTypes,
+    setSearching,
+    unsetSearching,
+} from '../newRelationship.actions';
+import {
+    batchActionTypes,
+} from './teiRelationship.actions';
 
 const searchId = 'relationshipTeiSearch';
 

@@ -1,5 +1,5 @@
-import { createReducerDescription } from '../../trackerRedux';
 import { searchGroupDuplicateActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
+import { createReducerDescription } from '../../trackerRedux';
 
 export const possibleDuplicatesDesc = createReducerDescription({
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW]: state => ({

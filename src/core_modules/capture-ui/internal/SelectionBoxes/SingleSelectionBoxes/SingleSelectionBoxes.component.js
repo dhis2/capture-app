@@ -1,12 +1,12 @@
 // @flow
-import * as React from 'react';
 import classNames from 'classnames';
+import * as React from 'react';
+import { orientations } from '../../../constants/orientations.const';
 import { SingleSelectionCheckedIcon, SingleSelectionUncheckedIcon } from '../../../Icons';
+import type { OptionRendererInputData, OptionsArray, OptionRenderer } from '../selectBoxes.types';
 import { SingleSelectBox } from './SingleSelectBox/SingleSelectBox.component';
 import { withFocusHandler } from './SingleSelectBox/withFocusHandler';
-import { orientations } from '../../../constants/orientations.const';
 import defaultClasses from './singleSelectionBoxes.module.css';
-import type { OptionRendererInputData, OptionsArray, OptionRenderer } from '../selectBoxes.types';
 
 const SingleSelectBoxWrapped = withFocusHandler()(SingleSelectBox);
 

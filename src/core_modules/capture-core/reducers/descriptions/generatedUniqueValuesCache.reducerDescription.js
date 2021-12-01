@@ -1,5 +1,4 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux';
 import {
     openActionTypes as enrollmentOpenActionTypes,
 } from '../../components/DataEntries/Enrollment';
@@ -14,6 +13,7 @@ import {
 import {
     actionTypes as viewEventRelationshipsActionTypes,
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
+import { createReducerDescription } from '../../trackerRedux';
 
 export const generatedUniqueValuesCacheDesc = createReducerDescription({
     [enrollmentOpenActionTypes.DATA_ENTRY_NEW_ENROLLMENT_OPEN]: (state, action) => {

@@ -1,16 +1,16 @@
 // @flow
 
 import { connect } from 'react-redux';
-import { QuickSelectorComponent } from './QuickSelector.component';
 import { convertValue } from '../../../converters/clientToView';
+import { getScopeInfo } from '../../../metaData';
 import { dataElementTypes } from '../../../metaData/DataElement';
+import { deriveUrlQueries } from '../../../utils/url';
 import {
     resetEnrollmentSelection,
     resetTeiSelection,
     setEnrollmentSelection,
 } from '../LockedSelector.actions';
-import { deriveUrlQueries } from '../../../utils/url';
-import { getScopeInfo } from '../../../metaData';
+import { QuickSelectorComponent } from './QuickSelector.component';
 
 const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
     enrollments

@@ -1,12 +1,12 @@
 // @flow
 import type {
-    CachedOption,
-    CachedOptionSet,
-} from 'capture-core/storageControllers/cache.types';
-import type {
     OptionSet,
     OptionSets,
 } from 'capture-core-utils/rulesEngine/rulesEngine.types';
+import type {
+    CachedOption,
+    CachedOptionSet,
+} from 'capture-core/storageControllers/cache.types';
 
 function convertOptionSet(optionSet: CachedOptionSet): OptionSet {
     const options = optionSet.options.map((option: CachedOption) => ({

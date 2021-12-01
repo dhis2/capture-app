@@ -1,8 +1,8 @@
 // @flow
-import * as React from 'react';
 import classNames from 'classnames';
-import defaultClasses from './singleSelectBox.module.css';
+import * as React from 'react';
 import type { OptionRendererInputData } from '../../selectBoxes.types';
+import defaultClasses from './singleSelectBox.module.css';
 
 type Props = {
     optionData: OptionRendererInputData,

@@ -3,9 +3,6 @@
 import {
     TrackedEntityType,
 } from '../../../../metaData';
-import { DataElementFactory } from './DataElementFactory';
-import { TeiRegistrationFactory } from './TeiRegistrationFactory';
-import { SearchGroupFactory } from '../../../common/factory';
 import type { DataElement } from '../../../../metaData';
 import type
 {
@@ -15,6 +12,9 @@ import type
     CachedTrackedEntityAttribute,
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
+import { SearchGroupFactory } from '../../../common/factory';
+import { DataElementFactory } from './DataElementFactory';
+import { TeiRegistrationFactory } from './TeiRegistrationFactory';
 
 export class TrackedEntityTypeFactory {
     static translationPropertyNames = {

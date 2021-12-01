@@ -1,8 +1,8 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { RenderFoundation } from '../../RenderFoundation';
 import type { InputSearchGroup } from '../../InputSearchGroup';
+import type { RenderFoundation } from '../../RenderFoundation';
 import type { TrackedEntityType } from '../../TrackedEntityType';
 
 export class TeiRegistration {

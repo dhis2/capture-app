@@ -1,7 +1,7 @@
 // @flow
 import type { EventProgram } from '../../../../metaData';
-import type { RecordsOrder, CustomColumnOrder } from '../../WorkingListsCommon';
 import type { EventRecords } from '../../EventWorkingListsCommon';
+import type { RecordsOrder, CustomColumnOrder } from '../../WorkingListsCommon';
 
 export type Props = $ReadOnly<{|
     storeId: string,

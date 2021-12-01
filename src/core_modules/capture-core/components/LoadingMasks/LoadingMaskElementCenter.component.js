@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { CircularLoader } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
 
 const styles = () => ({
     container: {

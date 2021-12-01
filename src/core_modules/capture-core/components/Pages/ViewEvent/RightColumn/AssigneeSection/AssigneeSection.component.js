@@ -1,13 +1,13 @@
 // @flow
 
-import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconUser24 } from '@dhis2/ui';
+import * as React from 'react';
+import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { type ProgramStage } from '../../../../../metaData';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Contents } from './Contents.component';
-import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
-import { type ProgramStage } from '../../../../../metaData';
 
 const LoadingContents = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Contents);
 

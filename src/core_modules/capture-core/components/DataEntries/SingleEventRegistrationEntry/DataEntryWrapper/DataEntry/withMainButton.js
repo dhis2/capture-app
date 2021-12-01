@@ -1,13 +1,13 @@
 // @flow
-import * as React from 'react';
-import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import Tooltip from '@material-ui/core/Tooltip';
-import { newEventSaveTypes } from './newEventSaveTypes';
-import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
+import * as React from 'react';
+import { connect } from 'react-redux';
 import { type RenderFoundation } from '../../../../../metaData';
 import { SimpleSplitButton, Button } from '../../../../Buttons';
+import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';
 import { getDataEntryHasChanges } from '../../getNewEventDataEntryHasChanges';
+import { newEventSaveTypes } from './newEventSaveTypes';
 
 type Props = {
     onSave: (saveType: $Values<typeof newEventSaveTypes>) => void,

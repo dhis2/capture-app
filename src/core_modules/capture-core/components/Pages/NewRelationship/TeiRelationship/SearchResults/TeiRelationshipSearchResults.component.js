@@ -1,18 +1,18 @@
 // @flow
 
-import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
-import { withNavigation } from '../../../../Pagination/withDefaultNavigation';
-import { Button } from '../../../../Buttons/Button.component';
-import { makeAttributesSelector } from './teiRelationshipSearchResults.selectors';
-import { CardList } from '../../../../CardList';
-import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';
-import { SearchResultsHeader } from '../../../../SearchResultsHeader';
+import React, { type ComponentType } from 'react';
 import { type SearchGroup } from '../../../../../metaData';
-import { ResultsPageSizeContext } from '../../../shared-contexts';
+import { Button } from '../../../../Buttons/Button.component';
+import { CardList } from '../../../../CardList';
 import type { ListItem } from '../../../../CardList/CardList.types';
+import { withNavigation } from '../../../../Pagination/withDefaultNavigation';
+import { SearchResultsHeader } from '../../../../SearchResultsHeader';
+import type { CurrentSearchTerms } from '../../../Search/SearchForm/SearchForm.types';
+import { ResultsPageSizeContext } from '../../../shared-contexts';
+import { makeAttributesSelector } from './teiRelationshipSearchResults.selectors';
 
 const SearchResultsPager = withNavigation()(Pagination);
 

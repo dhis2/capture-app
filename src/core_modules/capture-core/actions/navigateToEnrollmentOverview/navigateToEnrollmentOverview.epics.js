@@ -1,13 +1,13 @@
 // @flow
 
-import { ofType } from 'redux-observable';
-import { switchMap } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
 import { config } from 'd2';
+import { ofType } from 'redux-observable';
+import { EMPTY } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { buildUrlQueryString } from '../../utils/routing';
 import {
     actionTypes as NavigateToEnrollmentOverviewActionTypes,
 } from './navigateToEnrollmentOverview.actions';
-import { buildUrlQueryString } from '../../utils/routing';
 import { scopeHierarchyTypes } from './navigateToEnrollmentOverview.constants';
 
 export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store: ReduxStore, dependencies: any) => action$.pipe(

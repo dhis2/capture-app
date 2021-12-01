@@ -1,9 +1,9 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import { IconCheckmark16, MenuItem } from '@dhis2/ui';
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
-import type { Props } from './complete.types';
 import { plainStatus } from '../../constants/status.const';
+import type { Props } from './complete.types';
 
 export const Complete = ({ enrollment, onUpdate }: Props) =>
     (enrollment.status === plainStatus.COMPLETED ? (

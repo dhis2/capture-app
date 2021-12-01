@@ -1,12 +1,12 @@
 // @flow
+import uuid from 'd2-utilizr/lib/uuid';
+import moment from 'moment';
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import uuid from 'd2-utilizr/lib/uuid';
-import moment from 'moment';
+import { getCurrentUser } from '../../d2/d2Instance';
 import { actionTypes, batchActionTypes, startAddNoteForEnrollment, addEnrollmentNote }
     from './WidgetEnrollmentComment.actions';
-import { getCurrentUser } from '../../d2/d2Instance';
 
 export const addNoteForEnrollmentEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

@@ -1,6 +1,6 @@
 // @flow
-import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
+import React, { type ComponentType } from 'react';
 import { Stage } from './Stage';
 import type { Props } from './stages.types';
 

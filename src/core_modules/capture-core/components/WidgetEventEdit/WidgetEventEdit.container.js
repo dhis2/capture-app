@@ -1,16 +1,16 @@
 // @flow
-import React, { type ComponentType } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import i18n from '@dhis2/d2-i18n';
 import { spacersNum, Button, colors, IconEdit24, IconArrowLeft24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import i18n from '@dhis2/d2-i18n';
-import type { Props } from './widgetEventEdit.types';
-import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
+import React, { type ComponentType } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
+import { pageMode } from '../Pages/EnrollmentEditEvent/EnrollmentEditEventPage.constants';
 import { Widget } from '../Widget';
 import { EditEventDataEntry } from './EditEventDataEntry/';
 import { ViewEventDataEntry } from './ViewEventDataEntry/';
-import { pageMode } from '../Pages/EnrollmentEditEvent/EnrollmentEditEventPage.constants';
-import { NonBundledDhis2Icon } from '../NonBundledDhis2Icon';
+import { startShowEditEventDataEntry } from './WidgetEventEdit.actions';
+import type { Props } from './widgetEventEdit.types';
 
 const styles = {
     header: {

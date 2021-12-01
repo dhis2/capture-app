@@ -1,6 +1,6 @@
 // @flow
-import type { FilterButtonOutputProps } from './filterButton.types';
 import type { FilterData } from '../../../FiltersForTypes';
+import type { FilterButtonOutputProps } from './filterButton.types';
 
 export type ExtractedProps = $ReadOnly<{|
     itemId: string,

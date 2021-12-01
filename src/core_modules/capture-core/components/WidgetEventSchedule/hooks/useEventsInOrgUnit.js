@@ -1,6 +1,6 @@
 // @flow
-import { useMemo, useEffect } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+import { useMemo, useEffect } from 'react';
 
 export const useEventsInOrgUnit = (orgUnitId: string, selectedDate: string) => {
     const { data, error, loading, refetch } = useDataQuery(

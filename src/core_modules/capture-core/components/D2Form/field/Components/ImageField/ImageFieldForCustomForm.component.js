@@ -1,4 +1,5 @@
 // @flow
+import { D2Image } from '../../../../FormFields/Image/D2Image.component';
 import {
     withGotoInterface,
     withHideCompatibility,
@@ -13,7 +14,6 @@ import {
     withDisabledFieldCalculation,
     withCustomElementContainer,
 } from '../internal';
-import { D2Image } from '../../../../FormFields/Image/D2Image.component';
 
 export const ImageFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(

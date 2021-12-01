@@ -1,22 +1,22 @@
 // @flow
-import React, { type ComponentType } from 'react';
-import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
-import { compose } from 'redux';
+import React, { type ComponentType } from 'react';
 import { useHistory } from 'react-router-dom';
+import { compose } from 'redux';
+import { withLoadingIndicator } from '../../../HOC';
+import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
-import { EnrollmentDataEntry } from '../Enrollment';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
-import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
-import { withSaveHandler } from '../../DataEntry';
-import { withLoadingIndicator } from '../../../HOC';
-import { InfoIconText } from '../../InfoIconText';
-import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
+import { withSaveHandler } from '../../DataEntry';
+import { InfoIconText } from '../../InfoIconText';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
+import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
+import { EnrollmentDataEntry } from '../Enrollment';
+import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
 
 const styles = ({ typography }) => ({
     marginTop: {

@@ -1,10 +1,10 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
     dataEntryWrapperActionTypes as newEventDataEntryWrapperActionTypes,
     newRelationshipActionTypes as newEventNewRelationshipActionTypes,
 } from '../../components/DataEntries/SingleEventRegistrationEntry';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 export const newEventPageDesc = createReducerDescription({
     [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: (state) => {

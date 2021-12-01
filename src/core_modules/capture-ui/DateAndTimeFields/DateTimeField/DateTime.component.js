@@ -1,12 +1,12 @@
 // @flow
-import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
-import defaultClasses from './dateTime.module.css';
+import React, { Component } from 'react';
 
 import { orientations } from '../../constants/orientations.const';
 import { DateTimeDate } from '../../internal/DateTimeInput/DateTimeDate.component';
 import { DateTimeTime } from '../../internal/DateTimeInput/DateTimeTime.component';
+import defaultClasses from './dateTime.module.css';
 
 type Value = {
     date?: ?string,

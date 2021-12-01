@@ -1,27 +1,26 @@
 // @flow
+import uuid from 'd2-utilizr/lib/uuid';
+import moment from 'moment';
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import uuid from 'd2-utilizr/lib/uuid';
-import moment from 'moment';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
+import {
+    prependListItem,
+    removeListItem,
+} from '../../RecentlyAddedEventsList';
+import {
+    newRecentlyAddedEvent,
+} from '../../RecentlyAddedEventsList/recentlyAddedEventsList.actions';
+import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,
     startSaveNewEventAddAnother,
 } from '../actions/dataEntry.actions';
 
-import {
-    newRecentlyAddedEvent,
-} from '../../RecentlyAddedEventsList/recentlyAddedEventsList.actions';
 
-import {
-    prependListItem,
-    removeListItem,
-} from '../../RecentlyAddedEventsList';
-
-import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
-import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 
 export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

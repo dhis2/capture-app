@@ -1,7 +1,7 @@
 // @flow
-import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
-import { TextRangeFieldForForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import { TextRangeFieldForForm } from '../../Components';
+import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 
 export const getTextRangeFieldConfig = (metaData: MetaDataElement, options: Object, extraProps?: ?Object) => {
     const props = createProps({

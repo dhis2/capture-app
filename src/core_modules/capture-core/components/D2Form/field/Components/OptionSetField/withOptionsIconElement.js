@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import * as React from 'react';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
 
 const getStyles = () => ({

@@ -1,10 +1,10 @@
 // @flow
-import React, { useMemo, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
 import { IconDelete24, colors } from '@dhis2/ui';
-import { EventWorkingListsUpdateTrigger } from '../UpdateTrigger';
+import { withStyles } from '@material-ui/core/styles';
+import React, { useMemo, type ComponentType } from 'react';
 import type { CustomRowMenuContents } from '../../WorkingListsBase';
+import { EventWorkingListsUpdateTrigger } from '../UpdateTrigger';
 import type { Props } from './eventWorkingListsRowMenuSetup.types';
 
 const getStyles = () => ({

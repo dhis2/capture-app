@@ -1,9 +1,9 @@
 // @flow
 /* eslint-disable class-methods-use-this */
-import React, { Component } from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
 import InfiniteCalendar from '@joakim_sm/react-infinite-calendar';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 import { capitalizeFirstLetter } from 'capture-core-utils/string';
+import React, { Component } from 'react';
 import '@joakim_sm/react-infinite-calendar/styles.css';
 import './customStyles.css';
 import { parseDate, convertDateObjectToDateFormatString } from '../../../../utils/converters/date';

@@ -5,8 +5,8 @@
 
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { Icon } from '../Icon';
-import type { RenderFoundation } from '../RenderFoundation';
 import type { RelationshipType } from '../RelationshipType';
+import type { RenderFoundation } from '../RenderFoundation';
 
 export class ProgramStage {
     _id: string;

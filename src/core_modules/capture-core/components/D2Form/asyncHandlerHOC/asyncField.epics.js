@@ -1,10 +1,10 @@
 // @flow
-import log from 'loglevel';
-import { concatMap } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
-
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
+import { ofType } from 'redux-observable';
+import { concatMap } from 'rxjs/operators';
+
 import { getErrorMessageAndDetails } from '../../../utils/errors/getErrorMessageAndDetails';
 import {
     actionTypes,

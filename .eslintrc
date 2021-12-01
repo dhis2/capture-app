@@ -139,7 +139,8 @@
                 ]
             }
         ],
-        "import/extensions": ["error", "never"]
+        "import/extensions": ["error", "never"],
+        "import/order": ["error", {"alphabetize": {"order": "asc", "caseInsensitive": true}}]
     },
     "settings": {
         "import/resolver": {

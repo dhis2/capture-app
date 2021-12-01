@@ -1,8 +1,8 @@
 // @flow
 import { pipe } from 'capture-core-utils';
-import type { Enrollment, RenderFoundation } from '../../../../metaData';
-import { convertValue as convertFormToClient } from '../../../../converters/formToClient';
 import { convertValue as convertClientToServer } from '../../../../converters/clientToServer';
+import { convertValue as convertFormToClient } from '../../../../converters/formToClient';
+import type { Enrollment, RenderFoundation } from '../../../../metaData';
 
 type Selections = {
     programId: string,

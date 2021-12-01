@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
-import { Grid } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
+import { Grid } from '@material-ui/core';
+import React from 'react';
 import { ScopeSelector, SingleLockedSelect } from '../../../ScopeSelector';
 import { TopBarActions } from '../../../TopBarActions';
 import type { Props } from './topBar.types';

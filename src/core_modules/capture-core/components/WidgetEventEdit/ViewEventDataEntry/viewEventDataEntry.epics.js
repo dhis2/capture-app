@@ -1,12 +1,16 @@
 // @flow
-import { batchActions } from 'redux-batched-actions';
-import { ofType } from 'redux-observable';
-import { from, of } from 'rxjs';
-import { map, filter, switchMap } from 'rxjs/operators';
 import {
     filterByInnerAction,
     mapToInnerAction,
 } from 'capture-core-utils/epics';
+import { batchActions } from 'redux-batched-actions';
+import { ofType } from 'redux-observable';
+import { from, of } from 'rxjs';
+import { map, filter, switchMap } from 'rxjs/operators';
+import { getProgramAndStageFromEvent } from '../../../metaData';
+import {
+    actionTypes as viewEventPageActionTypes,
+} from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
 } from '../EditEventDataEntry/editEventDataEntry.actions';
@@ -16,10 +20,6 @@ import {
     prerequisitesErrorLoadingViewEventDataEntry,
 } from './viewEventDataEntry.actions';
 
-import {
-    actionTypes as viewEventPageActionTypes,
-} from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { getProgramAndStageFromEvent } from '../../../metaData';
 
 export const loadViewEventDataEntryEpic: Epic = (action$, store) =>
     action$.pipe(

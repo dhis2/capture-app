@@ -1,8 +1,8 @@
 // @flow
 
-import * as React from 'react';
-import { withStyles, IconButton, Paper } from '@material-ui/core';
 import { IconChevronDown24, IconChevronUp24 } from '@dhis2/ui';
+import { withStyles, IconButton, Paper } from '@material-ui/core';
+import * as React from 'react';
 
 const getStyles = (theme: Theme) => ({
     container: {

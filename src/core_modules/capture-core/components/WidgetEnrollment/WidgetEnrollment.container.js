@@ -1,11 +1,11 @@
 // @flow
 import React from 'react';
-import { WidgetEnrollment as WidgetEnrollmentComponent } from './WidgetEnrollment.component';
-import { useOrganizationUnit } from './hooks/useOrganizationUnit';
-import { useTrackedEntityInstances } from './hooks/useTrackedEntityInstances';
-import { useEnrollment } from './hooks/useEnrollment';
-import { useProgram } from './hooks/useProgram';
 import type { Props } from './enrollment.types';
+import { useEnrollment } from './hooks/useEnrollment';
+import { useOrganizationUnit } from './hooks/useOrganizationUnit';
+import { useProgram } from './hooks/useProgram';
+import { useTrackedEntityInstances } from './hooks/useTrackedEntityInstances';
+import { WidgetEnrollment as WidgetEnrollmentComponent } from './WidgetEnrollment.component';
 
 export const WidgetEnrollment = ({ teiId, enrollmentId, programId, onDelete }: Props) => {
     const {

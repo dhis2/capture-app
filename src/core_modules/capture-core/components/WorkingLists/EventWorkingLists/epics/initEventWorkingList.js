@@ -1,15 +1,15 @@
 // @flow
-import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import { convertToClientConfig } from '../helpers/eventFilters';
-import { getEventListData } from './getEventListData';
+import log from 'loglevel';
 import {
     initListViewSuccess,
     initListViewError,
     buildFilterQueryArgs,
 } from '../../WorkingListsCommon';
+import { convertToClientConfig } from '../helpers/eventFilters';
 import type { ApiEventQueryCriteria, CommonQueryData, ClientConfig, ColumnsMetaForDataFetching } from '../types';
+import { getEventListData } from './getEventListData';
 
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',

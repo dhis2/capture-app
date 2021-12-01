@@ -1,19 +1,11 @@
 // @flow
-import React from 'react';
-import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
-import type { PlainProps } from './EnrollmentEditEventPage.types';
-import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
-import { WidgetEventEdit } from '../../WidgetEventEdit/';
-import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
-import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
-import { WidgetFeedback } from '../../WidgetFeedback';
-import { WidgetIndicator } from '../../WidgetIndicator';
-import { WidgetProfile } from '../../WidgetProfile';
-import { WidgetEnrollment } from '../../WidgetEnrollment';
+import type { ComponentType } from 'react';
+import React from 'react';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import {
     ScopeSelector,
     useSetOrgUnitId,
@@ -25,9 +17,17 @@ import {
     useResetEventId,
 } from '../../ScopeSelector';
 import { SingleLockedSelect } from '../../ScopeSelector/QuickSelector/SingleLockedSelect.component';
-import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { TopBarActions } from '../../TopBarActions';
+import { WidgetEnrollment } from '../../WidgetEnrollment';
+import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
+import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetEventComment } from '../../WidgetEventComment';
+import { WidgetEventEdit } from '../../WidgetEventEdit/';
+import { WidgetFeedback } from '../../WidgetFeedback';
+import { WidgetIndicator } from '../../WidgetIndicator';
+import { WidgetProfile } from '../../WidgetProfile';
+import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
+import type { PlainProps } from './EnrollmentEditEventPage.types';
 
 const styles = ({ typography }) => ({
     page: {

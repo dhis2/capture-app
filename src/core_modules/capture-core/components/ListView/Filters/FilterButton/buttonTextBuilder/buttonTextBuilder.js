@@ -1,4 +1,7 @@
 // @flow
+import { isEqual } from '../../../../../utils/valueEqualityChecker';
+import type { OptionSetFilterData, FilterData, Options } from '../../../../FiltersForTypes';
+import { filterTypesObject } from '../../filters.const';
 import {
     convertText,
     convertDate,
@@ -7,9 +10,6 @@ import {
     convertNumeric,
     convertTrueOnly,
 } from './converters';
-import { isEqual } from '../../../../../utils/valueEqualityChecker';
-import type { OptionSetFilterData, FilterData, Options } from '../../../../FiltersForTypes';
-import { filterTypesObject } from '../../filters.const';
 
 const convertersForTypes = {
     [filterTypesObject.TEXT]: convertText,

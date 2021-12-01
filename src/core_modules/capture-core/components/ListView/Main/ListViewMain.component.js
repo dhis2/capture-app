@@ -1,14 +1,14 @@
 // @flow
-import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { withFilters } from './withFilters';
-import { ListPagination } from '../Pagination';
-import { ColumnSelector } from '../ColumnSelector';
-import { withEndColumnMenu } from '../withEndColumnMenu';
-import { DialogLoadingMask } from '../../LoadingMasks/DialogLoadingMask.component';
+import * as React from 'react';
 import { OnlineList } from '../../List';
+import { DialogLoadingMask } from '../../LoadingMasks/DialogLoadingMask.component';
+import { ColumnSelector } from '../ColumnSelector';
 import { ListViewMenu } from '../Menu';
+import { ListPagination } from '../Pagination';
+import { withEndColumnMenu } from '../withEndColumnMenu';
 import type { Props } from './listViewMain.types';
+import { withFilters } from './withFilters';
 
 const ListWithEndColumnMenu = withEndColumnMenu()(OnlineList);
 

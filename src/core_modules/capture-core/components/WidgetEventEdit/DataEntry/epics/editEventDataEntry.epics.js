@@ -1,8 +1,19 @@
 // @flow
+import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { batchActions } from 'redux-batched-actions';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/getEnrollmentEvents';
+import { getProgramAndStageFromEvent, getProgramThrowIfNotFound } from '../../../../metaData';
+import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEvent';
+import { EventProgram, TrackerProgram } from '../../../../metaData/Program';
+import {
+    getRulesActionsForEvent,
+    getCurrentClientValues,
+    getCurrentClientMainData,
+} from '../../../../rules/actionsCreator';
+import type { FieldData } from '../../../../rules/actionsCreator';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     actionTypes as editEventActionTypes,
 } from '../../../Pages/ViewEvent/ViewEventComponent/editEvent.actions';
@@ -12,17 +23,6 @@ import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import { getProgramAndStageFromEvent, getProgramThrowIfNotFound } from '../../../../metaData';
-import {
-    getRulesActionsForEvent,
-    getCurrentClientValues,
-    getCurrentClientMainData,
-} from '../../../../rules/actionsCreator';
-import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEvent';
-import { EventProgram, TrackerProgram } from '../../../../metaData/Program';
-import type { FieldData } from '../../../../rules/actionsCreator';
-import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/getEnrollmentEvents';
 
 export const openEditEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

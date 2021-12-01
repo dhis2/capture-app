@@ -1,6 +1,6 @@
 // @flow
-import { useMemo } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+import { useMemo } from 'react';
 
 export const useScheduleConfigFromProgramStage = (stageId: string) => {
     const { data, error, loading } = useDataQuery(useMemo(() => ({

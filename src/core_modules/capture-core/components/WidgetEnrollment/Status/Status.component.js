@@ -1,7 +1,7 @@
 // @flow
-import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
 import { Tag, spacersNum } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import React, { type ComponentType } from 'react';
 import { plainStatus, translatedStatus } from '../constants/status.const';
 
 import type { Props } from './status.types';

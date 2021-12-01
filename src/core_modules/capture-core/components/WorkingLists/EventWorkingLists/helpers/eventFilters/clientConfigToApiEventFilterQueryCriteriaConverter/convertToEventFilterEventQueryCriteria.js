@@ -1,9 +1,8 @@
 // @flow
-import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
+import log from 'loglevel';
 import moment from 'moment';
 import { typeof dataElementTypes } from '../../../../../../metaData';
-import { getApiOptionSetFilter } from './optionSet';
 
 import {
     filterTypesObject,
@@ -23,6 +22,7 @@ import type {
     ApiDataFilterAssignee,
     ApiEventQueryCriteria,
 } from '../../../types';
+import { getApiOptionSetFilter } from './optionSet';
 
 type ColumnForConverterBase = {|
     id: string,

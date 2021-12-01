@@ -1,7 +1,7 @@
 // @flow
-import type { Categories, UpdateList } from '../workingListsBase.types';
 import type { FiltersData } from '../../../ListView';
 import type { ListViewLoaderOutputProps } from '../ListViewLoader';
+import type { Categories, UpdateList } from '../workingListsBase.types';
 
 type ExtractedProps = {|
     filters: FiltersData,

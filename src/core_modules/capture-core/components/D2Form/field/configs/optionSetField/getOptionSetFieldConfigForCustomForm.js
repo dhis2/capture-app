@@ -1,10 +1,10 @@
 // @flow
-import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
-import { OptionSetSelectFieldForCustomForm, OptionSetBoxesFieldForCustomForm } from '../../Components';
-import { getOptionsForRadioButtons, getOptionsForSelect } from './optionSetHelpers';
-import { orientations } from '../../../../FormFields/New';
-import { inputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
 import type { DataElement, OptionSet } from '../../../../../metaData';
+import { inputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
+import { orientations } from '../../../../FormFields/New';
+import { OptionSetSelectFieldForCustomForm, OptionSetBoxesFieldForCustomForm } from '../../Components';
+import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
+import { getOptionsForRadioButtons, getOptionsForSelect } from './optionSetHelpers';
 
 const mapInputTypeToPropsGetterFn = {
     [inputTypes.DROPDOWN]: (metaData: DataElement) => ({

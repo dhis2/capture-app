@@ -2,8 +2,8 @@
 import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { trackedEntityTypeSelectorActionTypes } from './TrackedEntityTypeSelector.actions';
 import { buildUrlQueryString } from '../../utils/routing';
+import { trackedEntityTypeSelectorActionTypes } from './TrackedEntityTypeSelector.actions';
 
 export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

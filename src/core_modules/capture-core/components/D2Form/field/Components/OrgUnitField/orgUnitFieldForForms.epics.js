@@ -1,14 +1,15 @@
 // @flow
-import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { getD2 } from 'capture-core/d2/d2Instance';
+import isArray from 'd2-utilizr/lib/isArray';
+import log from 'loglevel';
+import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
 import { map, concatMap, takeUntil, filter } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
-import isArray from 'd2-utilizr/lib/isArray';
-import { errorCreator } from 'capture-core-utils';
+import { set as setStoreRoots } from '../../../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
+import { actionTypes as formActionTypes } from '../../../actions/form.actions';
 import { getOrgUnitRootsKey } from './getOrgUnitRootsKey';
 
-import { actionTypes as formActionTypes } from '../../../actions/form.actions';
 
 import {
     actionTypes,
@@ -16,7 +17,6 @@ import {
     filteredFormFieldOrgUnitsRetrieved,
 } from './orgUnitFieldForForms.actions';
 
-import { set as setStoreRoots } from '../../../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
 const FILTER_RETRIEVE_ERROR = 'Filter form field org units failed';
 

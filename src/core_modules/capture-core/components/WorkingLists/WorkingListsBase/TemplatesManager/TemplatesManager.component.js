@@ -1,11 +1,11 @@
 // @flow
-import React, { useContext, type ComponentType } from 'react';
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
+import React, { useContext, type ComponentType } from 'react';
+import { withBorder } from '../borderHOC';
 import { ListViewConfig } from '../ListViewConfig';
 import { TemplateSelector } from '../TemplateSelector.component';
 import { ManagerContext } from '../workingListsBase.context';
-import { withBorder } from '../borderHOC';
 import type {
     WorkingListTemplate,
 } from '../workingListsBase.types';

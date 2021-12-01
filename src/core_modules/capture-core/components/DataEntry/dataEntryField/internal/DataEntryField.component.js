@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { updateField } from '../../actions/dataEntry.actions';
-import { getValidationError } from './dataEntryField.utils';
 import { getDataEntryKey } from '../../common/getDataEntryKey';
+import { getValidationError } from './dataEntryField.utils';
 import type { ValidatorContainer } from './dataEntryField.utils';
 
 type ValueMetaInput = {

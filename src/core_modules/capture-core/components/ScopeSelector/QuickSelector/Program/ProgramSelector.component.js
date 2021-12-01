@@ -1,26 +1,25 @@
 // @flow
 
-import React, { Component, useEffect } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import ClearIcon from '@material-ui/icons/Clear';
-import Grid from '@material-ui/core/Grid';
 import i18n from '@dhis2/d2-i18n';
 import { colors } from '@dhis2/ui';
-import { programCollection } from '../../../../metaDataMemoryStores';
-import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import { ProgramList } from './ProgramList';
-import { CategorySelector } from './CategorySelector.component';
-
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import ClearIcon from '@material-ui/icons/Clear';
+import React, { Component, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import type { Program } from '../../../../metaData';
-import { resetProgramIdBase } from '../actions/QuickSelector.actions';
+import { programCollection } from '../../../../metaDataMemoryStores';
 import './programSelector.css';
-import { LinkButton } from '../../../Buttons/LinkButton.component';
 import { buildUrlQueryString } from '../../../../utils/routing';
+import { LinkButton } from '../../../Buttons/LinkButton.component';
+import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
+import { resetProgramIdBase } from '../actions/QuickSelector.actions';
+import { CategorySelector } from './CategorySelector.component';
+import { ProgramList } from './ProgramList';
 
 const EmptyPrograms = ({ classes, handleResetOrgUnit }) => {
     const { push } = useHistory();

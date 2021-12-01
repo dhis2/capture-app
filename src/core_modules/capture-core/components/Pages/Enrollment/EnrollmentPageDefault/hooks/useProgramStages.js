@@ -1,8 +1,8 @@
 // @flow
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
+import { errorCreator } from 'capture-core-utils';
 import type { apiProgramStage } from 'capture-core/metaDataStoreLoaders/programs/quickStoreOperations/types';
+import log from 'loglevel';
 import { Program } from '../../../../../metaData';
 
 export const useProgramStages = (program: Program, programStages: Array<apiProgramStage>) => {

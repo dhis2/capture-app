@@ -1,15 +1,15 @@
 // @flow
-import React, { Component } from 'react';
-import { isValidPositiveInteger } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
-import classNames from 'classnames';
-import IconButton from '@material-ui/core/IconButton';
 import { IconCross24 } from '@dhis2/ui';
-import { AgeNumberInput } from '../internal/AgeInput/AgeNumberInput.component';
-import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
-import defaultClasses from './ageField.module.css';
+import IconButton from '@material-ui/core/IconButton';
+import { isValidPositiveInteger } from 'capture-core-utils/validators/form';
+import classNames from 'classnames';
+import React, { Component } from 'react';
 import { orientations } from '../constants/orientations.const';
 import { withInternalChangeHandler } from '../HOC/withInternalChangeHandler';
+import { AgeDateInput } from '../internal/AgeInput/AgeDateInput.component';
+import { AgeNumberInput } from '../internal/AgeInput/AgeNumberInput.component';
+import defaultClasses from './ageField.module.css';
 
 type AgeValues = {
     date?: ?string,

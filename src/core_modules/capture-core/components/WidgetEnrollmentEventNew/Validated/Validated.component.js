@@ -1,7 +1,7 @@
 // @flow
-import React, { memo, type ComponentType } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
+import React, { memo, type ComponentType } from 'react';
 import { Widget } from '../../Widget';
 import { DataEntry } from '../DataEntry';
 import { FinishButtons } from '../FinishButtons';

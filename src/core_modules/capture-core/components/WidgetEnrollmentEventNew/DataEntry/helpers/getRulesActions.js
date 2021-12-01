@@ -1,11 +1,11 @@
 // @flow
-import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
+import type { RenderFoundation, TrackerProgram } from '../../../../metaData';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
     getRulesActionsForEnrollmentEvent,
 } from '../../../../rules/actionsCreator';
-import type { RenderFoundation, TrackerProgram } from '../../../../metaData';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import type { OrgUnit, EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
 
 export const getRulesActions = ({

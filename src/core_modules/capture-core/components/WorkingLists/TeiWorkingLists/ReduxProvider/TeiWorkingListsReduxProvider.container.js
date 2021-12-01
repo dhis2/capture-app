@@ -1,12 +1,12 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { TeiWorkingListsSetup } from '../Setup';
-import { useWorkingListsCommonStateManagement, fetchTemplatesSuccess, fetchTemplates } from '../../WorkingListsCommon';
-import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
-import { TEI_WORKING_LISTS_TYPE } from '../constants';
-import type { Props } from './teiWorkingListsReduxProvider.types';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
+import { useWorkingListsCommonStateManagement, fetchTemplatesSuccess, fetchTemplates } from '../../WorkingListsCommon';
+import { TEI_WORKING_LISTS_TYPE } from '../constants';
+import { TeiWorkingListsSetup } from '../Setup';
+import type { Props } from './teiWorkingListsReduxProvider.types';
 
 export const TeiWorkingListsReduxProvider = ({ storeId, programId, orgUnitId }: Props) => {
     const program = useTrackerProgram(programId);

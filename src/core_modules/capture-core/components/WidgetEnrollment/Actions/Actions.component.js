@@ -1,14 +1,14 @@
 // @flow
-import { DropdownButton, FlyoutMenu, MenuDivider, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { DropdownButton, FlyoutMenu, MenuDivider, spacersNum } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
 import React, { type ComponentType } from 'react';
+import { LoadingMaskForButton } from '../../LoadingMasks';
+import type { PlainProps } from './actions.types';
 import { Cancel } from './Cancel';
 import { Complete } from './Complete';
 import { Delete } from './Delete';
 import { Followup } from './Followup';
-import type { PlainProps } from './actions.types';
-import { LoadingMaskForButton } from '../../LoadingMasks';
 
 const styles = {
     actions: {

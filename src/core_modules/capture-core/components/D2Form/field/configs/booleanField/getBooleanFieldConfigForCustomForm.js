@@ -1,8 +1,8 @@
 // @flow
-import { orientations } from '../../../../FormFields/New';
-import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
-import { BooleanFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import { orientations } from '../../../../FormFields/New';
+import { BooleanFieldForCustomForm } from '../../Components';
+import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 
 export const getBooleanFieldConfigForCustomForm = (metaData: MetaDataElement) => {
     const props = createProps({

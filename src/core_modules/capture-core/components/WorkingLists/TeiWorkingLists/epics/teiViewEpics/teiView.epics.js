@@ -1,6 +1,6 @@
 // @flow
-import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
+import { from } from 'rxjs';
 import { takeUntil, filter, concatMap } from 'rxjs/operators';
 import { workingListsCommonActionTypes } from '../../../WorkingListsCommon';
 import { TEI_WORKING_LISTS_TYPE } from '../../constants';

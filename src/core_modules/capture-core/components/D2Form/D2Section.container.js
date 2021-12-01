@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import { D2Section } from './D2Section.component';
 import type { Section as MetaDataSection } from '../../metaData';
+import { D2Section } from './D2Section.component';
 
 const mapStateToProps = (state: Object, props: { sectionMetaData: MetaDataSection, formId: string }) => ({
     isHidden: !!(

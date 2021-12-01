@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
-import ReactDOM from 'react-dom';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import L from 'leaflet';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { MapControl, withLeaflet } from 'react-leaflet';
 
 type Props = {

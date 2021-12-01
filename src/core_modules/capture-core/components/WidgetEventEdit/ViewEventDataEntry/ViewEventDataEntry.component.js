@@ -1,8 +1,8 @@
 // @flow
-import React, { Component } from 'react';
-import { pipe } from 'capture-core-utils';
-import { withStyles } from '@material-ui/core/';
 import i18n from '@dhis2/d2-i18n';
+import { withStyles } from '@material-ui/core/';
+import { pipe } from 'capture-core-utils';
+import React, { Component } from 'react';
 import {
     placements,
     withCleanUp,
@@ -12,8 +12,8 @@ import {
     withBrowserBackWarning,
 } from '../../../components/DataEntry';
 
-import { type RenderFoundation, DataElement, dataElementTypes } from '../../../metaData';
 import { convertFormToClient, convertClientToView } from '../../../converters';
+import { type RenderFoundation, DataElement, dataElementTypes } from '../../../metaData';
 
 import {
     withLabel,

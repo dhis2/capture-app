@@ -1,8 +1,8 @@
 // @flow
-import { orientations } from '../../../../FormFields/New';
-import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
-import { ImageFieldForForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import { orientations } from '../../../../FormFields/New';
+import { ImageFieldForForm } from '../../Components';
+import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 
 export const getImageFieldConfig = (metaData: MetaDataElement, options: Object) => {
     const props = createProps({

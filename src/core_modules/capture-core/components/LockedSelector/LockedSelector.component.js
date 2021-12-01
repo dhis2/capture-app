@@ -1,11 +1,11 @@
 // @flow
 import React, { Component, type ComponentType } from 'react';
 import { compose } from 'redux';
-import { QuickSelector } from './QuickSelector/QuickSelector.container';
+import { withLoadingIndicator } from '../../HOC';
 import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 import { defaultDialogProps } from '../Dialogs/ConfirmDialog.constants';
 import type { Props, State } from './LockedSelector.types';
-import { withLoadingIndicator } from '../../HOC';
+import { QuickSelector } from './QuickSelector/QuickSelector.container';
 
 class LockedSelectorClass extends Component<Props, State> {
     constructor(props: Props) {

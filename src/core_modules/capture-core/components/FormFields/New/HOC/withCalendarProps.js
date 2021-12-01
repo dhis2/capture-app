@@ -1,9 +1,9 @@
 // @flow
-import * as React from 'react';
 import { capitalizeFirstLetter } from 'capture-core-utils/string';
+import * as React from 'react';
 import { parseDate, convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
-import { getCalendarTheme } from '../Fields/DateAndTimeFields/getCalendarTheme';
 import { CurrentLocaleData } from '../../../../utils/localeData/CurrentLocaleData';
+import { getCalendarTheme } from '../Fields/DateAndTimeFields/getCalendarTheme';
 
 type Props = {
     theme: Object,

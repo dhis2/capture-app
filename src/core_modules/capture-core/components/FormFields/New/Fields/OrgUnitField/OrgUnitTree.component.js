@@ -1,7 +1,7 @@
 // @flow
-import * as React from 'react';
 import { OrganisationUnitTree } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
+import * as React from 'react';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 
 const getStyles = () => ({

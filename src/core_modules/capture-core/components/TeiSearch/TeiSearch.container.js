@@ -1,7 +1,6 @@
 // @flow
 import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
-import { TeiSearchComponent } from './TeiSearch.component';
 import {
     requestSearchTei,
     searchFormValidationFailed,
@@ -10,6 +9,7 @@ import {
     teiSearchResultsChangePage,
     setOpenSearchGroupSection,
 } from './actions/teiSearch.actions';
+import { TeiSearchComponent } from './TeiSearch.component';
 import { makeSearchGroupsSelector } from './teiSearch.selectors';
 import type { Props, OwnProps } from './TeiSearch.types';
 

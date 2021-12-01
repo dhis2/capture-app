@@ -1,10 +1,10 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import i18n from '@dhis2/d2-i18n';
-import type { Props } from './WidgetEventComment.types';
-import { requestAddNoteForEvent } from './WidgetEventComment.actions';
 import { WidgetComment } from '../WidgetComment';
+import { requestAddNoteForEvent } from './WidgetEventComment.actions';
+import type { Props } from './WidgetEventComment.types';
 
 export const WidgetEventComment = ({ itemId, dataEntryId }: Props) => {
     const dispatch = useDispatch();

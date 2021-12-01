@@ -1,7 +1,7 @@
 // @flow
-import React, { useCallback, type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import D2UISharingDialog from '@dhis2/d2-ui-sharing-dialog';
+import { withStyles } from '@material-ui/core/styles';
+import React, { useCallback, type ComponentType } from 'react';
 import { getD2 } from '../../../../d2';
 import type { Props } from './sharingDialog.types';
 

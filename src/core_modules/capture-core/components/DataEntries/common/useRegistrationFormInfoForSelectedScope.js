@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
-import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
 import { scopeTypes } from '../../../metaData';
 import type { RegistrationFormMetadata } from './types';
 

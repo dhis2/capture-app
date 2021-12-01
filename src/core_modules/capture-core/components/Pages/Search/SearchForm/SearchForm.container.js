@@ -1,9 +1,8 @@
 // @flow
-import { connect } from 'react-redux';
-import type { ComponentType } from 'react';
 import { isObject, isString } from 'd2-utilizr/src';
-import { SearchFormComponent } from './SearchForm.component';
-import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
+import type { ComponentType } from 'react';
+import { connect } from 'react-redux';
+import { addFormData, removeFormData } from '../../../D2Form/actions/form.actions';
 import {
     saveCurrentSearchInfo,
     searchViaAttributesOnScopeProgram,
@@ -11,7 +10,8 @@ import {
     searchViaUniqueIdOnScopeProgram,
     searchViaUniqueIdOnScopeTrackedEntityType,
 } from '../SearchPage.actions';
-import { addFormData, removeFormData } from '../../../D2Form/actions/form.actions';
+import { SearchFormComponent } from './SearchForm.component';
+import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
 
 const isValueContainingCharacter = (value: any) => {
     if (!value) {

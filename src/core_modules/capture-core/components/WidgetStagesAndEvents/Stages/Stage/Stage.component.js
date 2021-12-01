@@ -1,13 +1,13 @@
 // @flow
-import React, { type ComponentType, useState, useCallback } from 'react';
-import cx from 'classnames';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
 import { spacersNum, colors, IconAdd24, Button } from '@dhis2/ui';
-import { StageOverview } from './StageOverview';
-import type { Props } from './stage.types';
+import { withStyles } from '@material-ui/core';
+import cx from 'classnames';
+import React, { type ComponentType, useState, useCallback } from 'react';
 import { Widget } from '../../../Widget';
+import type { Props } from './stage.types';
 import { StageDetail } from './StageDetail/StageDetail.component';
+import { StageOverview } from './StageOverview';
 
 const styles = {
     overview: {

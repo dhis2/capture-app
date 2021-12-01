@@ -1,14 +1,14 @@
 // @flow
-import uuid from 'd2-utilizr/src/uuid';
-import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import uuid from 'd2-utilizr/src/uuid';
+import moment from 'moment';
+import { convertFormToClient, convertClientToServer } from '../../../../../converters';
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
     type RenderFoundation,
 } from '../../../../../metaData';
-import { convertFormToClient, convertClientToServer } from '../../../../../converters';
 import { getDisplayName } from '../../../../../trackedEntityInstances/getDisplayName';
 import { convertDataEntryValuesToClientValues } from '../../../../DataEntry/common/convertDataEntryValuesToClientValues';
 import { getDataEntryKey } from '../../../../DataEntry/common/getDataEntryKey';

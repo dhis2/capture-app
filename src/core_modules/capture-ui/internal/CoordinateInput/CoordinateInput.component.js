@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import { TextInput } from '../TextInput/TextInput.component';
-import { withShrinkLabel } from '../../HOC/withShrinkLabel';
 import { withFocusSaver } from '../../HOC/withFocusSaver';
+import { withShrinkLabel } from '../../HOC/withShrinkLabel';
 import { withTextFieldFocusHandler } from '../../internal/TextInput/withFocusHandler';
+import { TextInput } from '../TextInput/TextInput.component';
 
 
 type Props = {

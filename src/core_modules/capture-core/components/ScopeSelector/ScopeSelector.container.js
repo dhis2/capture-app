@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType, useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ScopeSelectorComponent } from './ScopeSelector.component';
+import { useOrganizationUnit } from './hooks';
 import {
     setCategoryOptionFromScopeSelector,
     resetCategoryOptionFromScopeSelector,
@@ -9,8 +9,8 @@ import {
     resetProgramIdBatchAction,
     resetOrgUnitIdBatchAction,
 } from './ScopeSelector.actions';
+import { ScopeSelectorComponent } from './ScopeSelector.component';
 import type { OwnProps } from './ScopeSelector.types';
-import { useOrganizationUnit } from './hooks';
 
 
 const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, selectedOrgUnitName) => {

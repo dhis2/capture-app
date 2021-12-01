@@ -1,21 +1,21 @@
 // @flow
-import React, { type ComponentType } from 'react';
-import { compose } from 'redux';
-import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { Button } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core';
+import React, { type ComponentType } from 'react';
 import { useHistory } from 'react-router-dom';
+import { compose } from 'redux';
+import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
-import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import type { Props, PlainProps } from './TeiRegistrationEntry.types';
-import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
+import { buildUrlQueryString } from '../../../utils/routing';
 import { withSaveHandler } from '../../DataEntry';
 import { InfoIconText } from '../../InfoIconText';
-import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
-import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
+import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
+import { TrackedEntityInstanceDataEntry } from '../TrackedEntityInstance';
+import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
+import type { Props, PlainProps } from './TeiRegistrationEntry.types';
 
 const translatedTextWithStylesForTei = (trackedEntityName, orgUnitName) =>
     (<>

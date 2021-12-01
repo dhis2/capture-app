@@ -1,9 +1,9 @@
 // @flow
-import { useMemo } from 'react';
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { typeof dataElementTypes } from '../../../../metaData';
+import log from 'loglevel';
+import { useMemo } from 'react';
 import { convertClientToList } from '../../../../converters';
+import { typeof dataElementTypes } from '../../../../metaData';
 import type { DataSource } from '../../WorkingListsBase';
 
 export const useDataSource = (

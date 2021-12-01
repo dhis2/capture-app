@@ -1,8 +1,8 @@
 // @flow
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getProgramFromProgramIdThrowIfNotFound } from './getProgramFromProgramIdThrowIfNotFound';
+import log from 'loglevel';
 import { EventProgram } from '../Program';
+import { getProgramFromProgramIdThrowIfNotFound } from './getProgramFromProgramIdThrowIfNotFound';
 
 export function getProgramEventAccess(
     programId: string,

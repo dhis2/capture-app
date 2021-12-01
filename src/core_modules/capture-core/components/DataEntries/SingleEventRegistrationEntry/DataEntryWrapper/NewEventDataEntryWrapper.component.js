@@ -1,15 +1,15 @@
 // @flow
 
-import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { Button } from '@dhis2/ui';
 import { Paper } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Button } from '@dhis2/ui';
+import * as React from 'react';
+import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
+import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
+import type { ProgramStage, RenderFoundation } from '../../../../metaData';
 import { DataEntry } from './DataEntry/DataEntry.container';
 import { EventsList } from './RecentlyAddedEventsList/RecentlyAddedEventsList.container';
-import type { ProgramStage, RenderFoundation } from '../../../../metaData';
-import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
-import { useCurrentProgramInfo } from '../../../../hooks/useCurrentProgramInfo';
 
 const getStyles = ({ typography }) => ({
     flexContainer: {

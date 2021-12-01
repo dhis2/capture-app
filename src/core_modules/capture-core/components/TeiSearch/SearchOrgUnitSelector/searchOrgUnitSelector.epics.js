@@ -1,11 +1,12 @@
 // @flow
-import log from 'loglevel';
-import isArray from 'd2-utilizr/lib/isArray';
-import { from } from 'rxjs';
-import { getD2 } from 'capture-core/d2/d2Instance';
 import { errorCreator } from 'capture-core-utils';
+import { getD2 } from 'capture-core/d2/d2Instance';
+import isArray from 'd2-utilizr/lib/isArray';
+import log from 'loglevel';
 import { ofType } from 'redux-observable';
+import { from } from 'rxjs';
 import { map, concatMap, takeUntil, filter } from 'rxjs/operators';
+import { set as setStoreRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import {
     actionTypes as teiSearchActionTypes,
 } from '../actions/teiSearch.actions';
@@ -16,7 +17,6 @@ import {
     filteredOrgUnitsRetrieved,
 } from './searchOrgUnitSelector.actions';
 
-import { set as setStoreRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
 const RETRIEVE_ERROR = 'Could not retrieve registering unit list';
 

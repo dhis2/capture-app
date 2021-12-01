@@ -1,8 +1,8 @@
 // @flow
 import { EventProgram, TrackerProgram } from '../Program';
 import { TrackedEntityType } from '../TrackedEntityType';
-import { getScopeFromScopeId } from './getScopeFromScopeId';
 import { scopeTypes } from './constants';
+import { getScopeFromScopeId } from './getScopeFromScopeId';
 import type { Scope } from './getScopeFromScopeId';
 
 export const getScopeInfo = (scopeId: ?string) => {

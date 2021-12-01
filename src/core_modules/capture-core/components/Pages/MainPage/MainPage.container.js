@@ -1,13 +1,13 @@
 // @flow
+import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import React, { useEffect, useMemo } from 'react';
 // $FlowFixMe
 import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import { MainPageComponent } from './MainPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { buildUrlQueryString } from '../../../utils/routing';
+import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
+import { MainPageComponent } from './MainPage.component';
 import { MainPageStatuses } from './MainPage.constants';
 
 const mapStateToProps = (state: ReduxState) => ({

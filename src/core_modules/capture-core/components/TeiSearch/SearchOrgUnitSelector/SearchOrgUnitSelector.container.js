@@ -1,12 +1,12 @@
 // @flow
 import { connect } from 'react-redux';
+import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import {
     setOrgUnitScope,
     setOrgUnit,
     requestFilterOrgUnits,
     clearOrgUnitsFilter,
 } from './searchOrgUnitSelector.actions';
-import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { SearchOrgUnitSelectorRefHandler } from './SearchOrgUnitSelectorRefHandler.component';
 
 const mapStateToProps = (state: ReduxState, props: Object) => {

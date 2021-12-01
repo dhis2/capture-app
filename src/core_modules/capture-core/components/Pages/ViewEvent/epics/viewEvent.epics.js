@@ -1,14 +1,19 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
+import { errorCreator } from 'capture-core-utils';
+import { push } from 'connected-react-router';
 import log from 'loglevel';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
-import { push } from 'connected-react-router';
-import i18n from '@dhis2/d2-i18n';
-import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../../../../d2';
-import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
+import { getEvent } from '../../../../events/eventRequests';
 import { getErrorMessageAndDetails } from '../../../../utils/errors/getErrorMessageAndDetails';
+import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
 
+import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
+import {
+    initializeNewRelationship,
+} from '../../NewRelationship/newRelationship.actions';
 import {
     actionTypes as viewEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,
@@ -22,12 +27,7 @@ import {
     openViewEventPageFailed,
     initializeWorkingListsOnBackToMainPage,
 } from '../ViewEventComponent/viewEvent.actions';
-import { getEvent } from '../../../../events/eventRequests';
-import {
-    initializeNewRelationship,
-} from '../../NewRelationship/newRelationship.actions';
 import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
-import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

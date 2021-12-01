@@ -1,19 +1,19 @@
 // @flow
-import React, { type ComponentType, useContext, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui';
 import { Grid, Paper, withStyles } from '@material-ui/core';
-import type { Props } from './RegistrationDataEntry.types';
-import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
-import { scopeTypes } from '../../../../metaData';
-import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
-import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
-import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
-import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
-import { ResultsPageSizeContext } from '../../shared-contexts';
+import React, { type ComponentType, useContext, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { useScopeInfo } from '../../../../hooks/useScopeInfo';
+import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
+import { scopeTypes } from '../../../../metaData';
+import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
+import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
+import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
+import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
+import { ResultsPageSizeContext } from '../../shared-contexts';
+import type { Props } from './RegistrationDataEntry.types';
 
 const getStyles = ({ typography }) => ({
     paper: {

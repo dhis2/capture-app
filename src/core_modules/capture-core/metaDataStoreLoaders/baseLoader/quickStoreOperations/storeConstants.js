@@ -1,6 +1,6 @@
 // @flow
-import { quickStoreRecursively } from '../../IOUtils';
 import { getContext } from '../../context';
+import { quickStoreRecursively } from '../../IOUtils';
 
 export const storeConstants = () => {
     const query = {

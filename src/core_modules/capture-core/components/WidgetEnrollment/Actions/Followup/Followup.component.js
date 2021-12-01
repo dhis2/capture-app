@@ -1,7 +1,7 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import { IconFlag16, MenuItem } from '@dhis2/ui';
 import React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import type { Props } from './followup.types';
 
 export const Followup = ({ enrollment, onUpdate }: Props) =>

@@ -1,19 +1,19 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import log from 'loglevel';
-import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import { errorCreator } from 'capture-core-utils';
+import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
+import log from 'loglevel';
+import { convertOptionSetValue } from '../../../../converters/serverToClient';
+import { OptionSet, Option, optionSetInputTypes as inputTypes } from '../../../../metaData';
+import type { DataElement } from '../../../../metaData';
+import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
 import type {
     CachedOptionSet,
     CachedOptionGroup,
     CachedOptionSetTranslation,
     CachedOptionTranslation,
 } from '../../../../storageControllers/cache.types';
-import { OptionSet, Option, optionSetInputTypes as inputTypes } from '../../../../metaData';
-import type { DataElement } from '../../../../metaData';
-import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import { buildIcon } from '../../../common/helpers';
-import { OptionGroup } from '../../../../metaData/OptionSet/OptionGroup';
 
 export class OptionSetFactory {
     static OPTION_SET_NOT_FOUND = 'Optionset not found';

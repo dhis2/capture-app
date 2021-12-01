@@ -1,22 +1,22 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { pipe, errorCreator } from 'capture-core-utils';
-import type {
-    CachedAttributeTranslation,
-    CachedTrackedEntityTypeAttribute,
-    CachedTrackedEntityAttribute,
-} from '../../../../storageControllers/cache.types';
+import log from 'loglevel';
+import { convertFormToClient, convertClientToServer } from '../../../../converters';
+import { getApi } from '../../../../d2/d2Instance';
 import {
     DataElement,
     DataElementUnique,
     dataElementUniqueScope,
     dataElementTypes,
 } from '../../../../metaData';
+import type {
+    CachedAttributeTranslation,
+    CachedTrackedEntityTypeAttribute,
+    CachedTrackedEntityAttribute,
+} from '../../../../storageControllers/cache.types';
 import { OptionSetFactory } from '../../../common/factory';
-import { convertFormToClient, convertClientToServer } from '../../../../converters';
-import { getApi } from '../../../../d2/d2Instance';
 import type { ConstructorInput } from './dataElementFactory.types';
 
 export class DataElementFactory {

@@ -1,10 +1,10 @@
 // @flow
 // TODO: rewrite this component!!
-import React, { PureComponent, type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
-import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import { Button } from '@dhis2/ui';
+import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import React, { PureComponent, type ComponentType } from 'react';
 import { getApi } from '../../../../../d2/d2Instance';
 import type { Props } from './downloadDialog.types';
 

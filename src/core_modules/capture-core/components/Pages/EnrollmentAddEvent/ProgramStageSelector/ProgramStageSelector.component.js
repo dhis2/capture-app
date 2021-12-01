@@ -1,8 +1,8 @@
 // @flow
-import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, spacers, spacersNum } from '@dhis2/ui';
 import { withStyles, Tooltip } from '@material-ui/core';
+import React from 'react';
 import { NonBundledDhis2Icon } from '../../../NonBundledDhis2Icon';
 
 const styles = {

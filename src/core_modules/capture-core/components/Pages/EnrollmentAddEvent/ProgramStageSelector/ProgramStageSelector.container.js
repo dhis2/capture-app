@@ -1,15 +1,15 @@
 // @flow
-import React, { useEffect, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useHistory } from 'react-router-dom';
 import log from 'loglevel';
-import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
-import { Widget } from '../../../Widget';
+import React, { useEffect, useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 import { errorCreator } from '../../../../../capture-core-utils';
-import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
-import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedData/useProgramFromIndexedDB';
 import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
+import { Widget } from '../../../Widget';
+import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
+import { ProgramStageSelectorComponent } from './ProgramStageSelector.component';
+import type { Props } from './ProgramStageSelector.types';
 
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {

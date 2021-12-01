@@ -1,17 +1,17 @@
 // @flow
-import React, { type ComponentType } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import { spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
+import { spacersNum } from '@dhis2/ui';
+import withStyles from '@material-ui/core/styles/withStyles';
+import React, { type ComponentType } from 'react';
 import { WidgetEnrollment } from '../../../WidgetEnrollment';
-import { WidgetProfile } from '../../../WidgetProfile';
-import type { Props, PlainProps } from './EnrollmentPageDefault.types';
+import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
+import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetWarning } from '../../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetFeedback } from '../../../WidgetFeedback';
-import { WidgetError } from '../../../WidgetErrorAndWarning/WidgetError';
 import { WidgetIndicator } from '../../../WidgetIndicator';
-import { WidgetEnrollmentComment } from '../../../WidgetEnrollmentComment';
+import { WidgetProfile } from '../../../WidgetProfile';
+import { WidgetStagesAndEvents } from '../../../WidgetStagesAndEvents';
+import type { Props, PlainProps } from './EnrollmentPageDefault.types';
 
 const getStyles = ({ typography }) => ({
     columns: {

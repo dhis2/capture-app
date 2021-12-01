@@ -1,18 +1,18 @@
 // @flow
 
-import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button, IconSearch24, IconAdd24, spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
+import * as React from 'react';
+import type { TrackedEntityType } from '../../../../metaData';
+import { getDisplayName } from '../../../../trackedEntityInstances/getDisplayName';
+import { TeiSearch } from '../../../TeiSearch/TeiSearch.container';
+import { ResultsPageSizeContext } from '../../shared-contexts';
+import { findModes } from '../findModes';
 import type { SelectedRelationshipType } from '../newRelationship.types';
 import { RegisterTei } from '../RegisterTei';
-import { TeiSearch } from '../../../TeiSearch/TeiSearch.container';
 import { TeiRelationshipSearchResults } from './SearchResults/TeiRelationshipSearchResults.component';
 import { makeTrackedEntityTypeSelector } from './teiRelationship.selectors';
-import type { TrackedEntityType } from '../../../../metaData';
-import { findModes } from '../findModes';
-import { getDisplayName } from '../../../../trackedEntityInstances/getDisplayName';
-import { ResultsPageSizeContext } from '../../shared-contexts';
 
 
 type Props = {

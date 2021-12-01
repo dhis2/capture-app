@@ -1,10 +1,10 @@
 // @flow
-import React, { type ComponentType, useCallback, useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import ClearIcon from '@material-ui/icons/Clear';
 import i18n from '@dhis2/d2-i18n';
+import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import ClearIcon from '@material-ui/icons/Clear';
+import React, { type ComponentType, useCallback, useState } from 'react';
 import Select from 'react-virtualized-select';
 import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';

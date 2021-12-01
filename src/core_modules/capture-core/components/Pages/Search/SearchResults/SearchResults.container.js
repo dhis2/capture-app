@@ -2,11 +2,11 @@
 import type { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
+import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram, startFallbackSearch } from '../SearchPage.actions';
+import { searchScopes, PAGINATION } from '../SearchPage.constants';
 import { SearchResultsComponent } from './SearchResults.component';
 import type { Props, PropsFromRedux, DispatchersFromRedux, OwnProps } from './SearchResults.types';
-import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram, startFallbackSearch } from '../SearchPage.actions';
-import { getTrackedEntityTypeThrowIfNotFound, getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
-import { searchScopes, PAGINATION } from '../SearchPage.constants';
 
 const getCurrentScope = (scopeId: string, scopeType: $Keys<typeof searchScopes>) => {
     if (!scopeId) {

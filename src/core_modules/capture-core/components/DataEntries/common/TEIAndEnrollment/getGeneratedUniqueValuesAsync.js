@@ -1,6 +1,6 @@
 // @flow
-import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
+import log from 'loglevel';
 import moment from 'moment';
 import { convertServerToClient, convertClientToForm } from '../../../../converters';
 import { getApi } from '../../../../d2/d2Instance';

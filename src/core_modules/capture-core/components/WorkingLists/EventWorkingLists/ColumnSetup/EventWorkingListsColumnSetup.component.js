@@ -1,10 +1,10 @@
 // @flow
 import React, { useCallback } from 'react';
-import { useColumns } from '../../WorkingListsCommon';
 import { useDefaultColumnConfig, type EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
+import { useColumns } from '../../WorkingListsCommon';
 import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
-import type { Props } from './eventWorkingListsColumnSetup.types';
 import type { ColumnsMetaForDataFetching } from '../types';
+import type { Props } from './eventWorkingListsColumnSetup.types';
 
 const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView) =>
     useCallback((selectedTemplate: Object, context: Object, meta: Object) => {

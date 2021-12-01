@@ -1,15 +1,15 @@
 // @flow
-import * as React from 'react';
-import SnackBar from '@material-ui/core/Snackbar';
+import i18n from '@dhis2/d2-i18n';
+import { IconCross24 } from '@dhis2/ui';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import { IconCross24 } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
+import SnackBar from '@material-ui/core/Snackbar';
+import { withStyles } from '@material-ui/core/styles';
 import isDefined from 'd2-utilizr/lib/isDefined';
+import * as React from 'react';
 import { Button } from '../Buttons';
 
 const styles = theme => ({

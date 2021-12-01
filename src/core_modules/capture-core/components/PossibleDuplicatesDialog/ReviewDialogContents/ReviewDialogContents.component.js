@@ -1,13 +1,13 @@
 // @flow
-import React, { type ComponentType, useContext } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
-import i18n from '@dhis2/d2-i18n';
+import React, { type ComponentType, useContext } from 'react';
 import { CardList } from '../../CardList';
-import { ReviewDialogContentsPager } from './ReviewDialogContentsPager.container';
 import { ResultsPageSizeContext } from '../../Pages/shared-contexts';
 import type { Props } from './ReviewDialogContents.types';
+import { ReviewDialogContentsPager } from './ReviewDialogContentsPager.container';
 
 const getStyles = (theme: Theme) => ({
     linkButtonContainer: {

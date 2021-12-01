@@ -1,7 +1,7 @@
 // @flow
-import { mainOptionKeys } from './mainOptions';
 import { parseDate } from '../../../utils/converters/date';
 import { dateFilterTypes } from './constants';
+import { mainOptionKeys } from './mainOptions';
 import { type AbsoluteDateFilterData } from './types';
 
 type Value = {

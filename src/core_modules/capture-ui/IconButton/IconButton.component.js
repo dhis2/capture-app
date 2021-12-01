@@ -1,6 +1,6 @@
 // @flow
-import React, { useCallback } from 'react';
 import cx from 'classnames';
+import React, { useCallback } from 'react';
 import classes from './iconButton.module.css';
 import type { Props } from './iconButton.types';
 

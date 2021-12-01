@@ -1,14 +1,14 @@
 // @flow
 import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
-import { NewEventDataEntryWrapperComponent } from './NewEventDataEntryWrapper.component';
+import { getDataEntryHasChanges } from '../getNewEventDataEntryHasChanges';
 import {
     setNewEventFormLayoutDirection,
 } from './newEventDataEntryWrapper.actions';
+import { NewEventDataEntryWrapperComponent } from './NewEventDataEntryWrapper.component';
 import {
     makeStageSelector,
 } from './newEventDataEntryWrapper.selectors';
-import { getDataEntryHasChanges } from '../getNewEventDataEntryHasChanges';
 
 
 const makeMapStateToProps = () => {

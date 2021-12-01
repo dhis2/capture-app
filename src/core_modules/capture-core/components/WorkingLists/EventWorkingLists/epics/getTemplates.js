@@ -1,6 +1,6 @@
 // @flow
-import { getApiEventFilters } from '../helpers/eventFilters';
 import type { QuerySingleResource } from '../../../../utils/api/api.types';
+import { getApiEventFilters } from '../helpers/eventFilters';
 import type { EventWorkingListsTemplates } from '../types';
 
 export const getTemplates = (programId: string, querySingleResource: QuerySingleResource): Promise<{ templates: EventWorkingListsTemplates, defaultTemplateId: string}> =>

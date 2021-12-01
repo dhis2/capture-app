@@ -1,15 +1,15 @@
 // @flow
-import React, { useCallback, useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import React, { useCallback, useMemo } from 'react';
 import {
     dataElementTypes,
     type TrackerProgram,
 } from '../../../../metaData';
-import type { Props } from './teiWorkingListsSetup.types';
 import { WorkingListsBase } from '../../WorkingListsBase';
-import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 import { useColumns, useDataSource, useViewHasTemplateChanges } from '../../WorkingListsCommon';
 import type { TeiWorkingListsColumnConfigs, TeiColumnsMetaForDataFetching, TeiFiltersOnlyMetaForDataFetching } from '../types';
+import type { Props } from './teiWorkingListsSetup.types';
+import { useDefaultColumnConfig } from './useDefaultColumnConfig';
 
 const useCurrentTemplate = (templates, currentTemplateId) => useMemo(() =>
     (currentTemplateId && templates.find(template => template.id === currentTemplateId)) || templates[0],

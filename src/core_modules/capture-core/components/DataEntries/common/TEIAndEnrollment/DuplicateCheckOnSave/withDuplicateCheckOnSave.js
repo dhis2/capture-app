@@ -2,8 +2,8 @@
 import React, { type ComponentType, useMemo } from 'react';
 import { scopeTypes, type Enrollment, type TeiRegistration } from '../../../../../metaData';
 import { PossibleDuplicatesDialog } from '../../../../PossibleDuplicatesDialog';
-import { useDuplicateCheckerOnSaveReduxProvider } from './useDuplicateCheckerOnSaveReduxProvider';
 import { useDuplicateCheckerOnSave } from './useDuplicateCheckerOnSave';
+import { useDuplicateCheckerOnSaveReduxProvider } from './useDuplicateCheckerOnSaveReduxProvider';
 import type { Props } from './withDuplicateCheckOnSave.types';
 
 const getMetadataInfo = (enrollmentMetadata, teiRegistrationMetadata): { metadata?: Enrollment | TeiRegistration, scopeType: string, passOnMetadata: Object } => {

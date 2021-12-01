@@ -1,13 +1,13 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import { type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import i18n from '@dhis2/d2-i18n';
-import { ReviewDialogContentsComponent } from './ReviewDialogContents.component';
-import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { withErrorMessageHandler } from '../../../HOC/withErrorMessageHandler';
-import type { Props, OwnProps } from './ReviewDialogContents.types';
+import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
 import { getAttributesFromScopeId } from '../../../metaData/helpers';
+import { ReviewDialogContentsComponent } from './ReviewDialogContents.component';
+import type { Props, OwnProps } from './ReviewDialogContents.types';
 
 const buildDataElements = (scopeId) => {
     const currentSearchScopeDataElements = getAttributesFromScopeId(scopeId);

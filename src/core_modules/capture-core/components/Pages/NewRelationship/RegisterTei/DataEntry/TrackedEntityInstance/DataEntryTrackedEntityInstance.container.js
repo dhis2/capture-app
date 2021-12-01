@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import { makeTeiRegistrationMetadataSelector } from './tei.selectors';
 import { RelationshipTrackedEntityInstance } from './DataEntryTrackedEntityInstance.component';
+import { makeTeiRegistrationMetadataSelector } from './tei.selectors';
 
 const makeMapStateToProps = () => {
     const teiRegistrationMetadataSelector = makeTeiRegistrationMetadataSelector();

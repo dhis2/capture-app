@@ -1,5 +1,4 @@
 // @flow
-import { typeof dialogModes } from './dialogModes';
 import type {
     WorkingListTemplate,
     SetTemplateSharingSettings,
@@ -7,6 +6,7 @@ import type {
     UpdateTemplate,
     DeleteTemplate,
 } from '../workingListsBase.types';
+import { typeof dialogModes } from './dialogModes';
 
 export type PassOnProps = {
     onClose: () => void,

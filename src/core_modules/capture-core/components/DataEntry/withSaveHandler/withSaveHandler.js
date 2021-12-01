@@ -1,20 +1,20 @@
 // @flow
-import * as React from 'react';
-import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { connect } from 'react-redux';
-import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { type RenderFoundation } from '../../../metaData';
 import { validationStrategies } from '../../../metaData/RenderFoundation/renderFoundation.const';
+import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 import { saveValidationFailed, saveAbort } from '../actions/dataEntry.actions';
 import { getDataEntryKey } from '../common/getDataEntryKey';
-import { type RenderFoundation } from '../../../metaData';
 import { MessagesDialogContents } from './MessagesDialogContents';
 import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
-import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 
 type Props = {
     classes: Object,

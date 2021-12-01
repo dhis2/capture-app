@@ -1,8 +1,8 @@
 // @flow
-import * as React from 'react';
-import classNames from 'classnames';
 import { IconCross16 } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
+import classNames from 'classnames';
+import * as React from 'react';
 import type { RelationshipType } from '../../../../metaData';
 import type { SelectedRelationshipType } from '../newRelationship.types';
 

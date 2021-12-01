@@ -2,8 +2,11 @@
 import i18n from '@dhis2/d2-i18n';
 import { push } from 'connected-react-router';
 import { ofType } from 'redux-observable';
-import { catchError, filter, flatMap, map, startWith, switchMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
+import { catchError, filter, flatMap, map, startWith, switchMap } from 'rxjs/operators';
+import { programCollection } from '../../metaDataMemoryStores';
+import { buildUrlQueryString } from '../../utils/routing';
+import { deriveUrlQueries, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
 import {
     lockedSelectorActionTypes,
     lockedSelectorBatchActionTypes,
@@ -15,9 +18,6 @@ import {
     startLoading,
     completeUrlUpdate,
 } from './LockedSelector.actions';
-import { programCollection } from '../../metaDataMemoryStores';
-import { deriveUrlQueries, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
-import { buildUrlQueryString } from '../../utils/routing';
 
 const derivePayloadFromAction = (batchPayload, actionType) => {
     // $FlowFixMe

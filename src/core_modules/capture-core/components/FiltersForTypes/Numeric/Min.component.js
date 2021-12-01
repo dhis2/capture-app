@@ -1,6 +1,6 @@
 // @flow
-import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import React, { Component } from 'react';
 import { D2TextField } from '../../FormFields/Generic/D2TextField.component';
 import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 

@@ -1,10 +1,10 @@
 // @flow
-import { buildPrograms } from '../programs/buildPrograms';
+import { userStores as stores } from '../../storageControllers/stores';
 import { buildConstants } from '../constants/constantsBuilder';
 import { buildOptionSets } from '../optionSets/optionSetsBuilder';
+import { buildPrograms } from '../programs/buildPrograms';
 import { buildTrackedEntityTypes } from '../trackedEntityTypes/trackedEntityTypesBuilder';
 import { getCommonPrerequisitesAsync } from './commonPrerequisitesGetter';
-import { userStores as stores } from '../../storageControllers/stores';
 
 export async function buildMetaDataAsync(locale: string) {
     const {

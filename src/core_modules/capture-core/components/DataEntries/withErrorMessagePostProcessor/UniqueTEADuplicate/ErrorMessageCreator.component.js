@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
 import type { TrackedEntityType } from '../../../../metaData';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
 import type { ErrorData } from './uniqueTEADuplicate.types';

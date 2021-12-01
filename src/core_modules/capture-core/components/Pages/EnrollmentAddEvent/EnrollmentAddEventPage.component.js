@@ -1,18 +1,18 @@
 // @flow
-import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
-import type { Props } from './EnrollmentAddEventPage.types';
+import React, { type ComponentType } from 'react';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import { WidgetEnrollment } from '../../WidgetEnrollment';
 import { WidgetError } from '../../WidgetErrorAndWarning/WidgetError';
 import { WidgetWarning } from '../../WidgetErrorAndWarning/WidgetWarning';
 import { WidgetFeedback } from '../../WidgetFeedback';
 import { WidgetIndicator } from '../../WidgetIndicator';
 import { WidgetProfile } from '../../WidgetProfile';
-import { WidgetEnrollment } from '../../WidgetEnrollment';
-import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { ProgramStageSelector } from './ProgramStageSelector';
+import type { Props } from './EnrollmentAddEventPage.types';
 import { NewEventWorkspace } from './NewEventWorkspace';
+import { ProgramStageSelector } from './ProgramStageSelector';
 
 const styles = ({ typography }) => ({
     container: {

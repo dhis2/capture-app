@@ -1,9 +1,13 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { errorCreator } from 'capture-core-utils';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import log from 'loglevel';
+import { getApi } from '../../../../d2/d2Instance';
+import { CustomForm, Enrollment, InputSearchGroup, RenderFoundation, Section } from '../../../../metaData';
+import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
+import { DataElement } from '../../../../metaData/DataElement';
 import type {
     CachedDataEntryForm,
     CachedProgram,
@@ -12,13 +16,9 @@ import type {
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
 } from '../../../../storageControllers/cache.types';
-import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
-import { CustomForm, Enrollment, InputSearchGroup, RenderFoundation, Section } from '../../../../metaData';
-import { DataElementFactory } from './DataElementFactory';
-import { getApi } from '../../../../d2/d2Instance';
-import { DataElement } from '../../../../metaData/DataElement';
-import type { ConstructorInput } from './enrollmentFactory.types';
 import { transformTrackerNode } from '../transformNodeFuntions/transformNodeFunctions';
+import { DataElementFactory } from './DataElementFactory';
+import type { ConstructorInput } from './enrollmentFactory.types';
 
 export class EnrollmentFactory {
     static errorMessages = {

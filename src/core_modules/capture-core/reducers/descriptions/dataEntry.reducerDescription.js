@@ -1,6 +1,6 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
+import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import {
     mainActionTypes as actionTypes,
     loadNewActionTypes,
@@ -8,7 +8,7 @@ import {
 } from '../../components/DataEntry';
 import { getDataEntryKey } from '../../components/DataEntry/common/getDataEntryKey';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
-import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 // cleans up data entries that start with dataEntryId
 const cleanUp = (state, { payload: { dataEntryId } }) => {

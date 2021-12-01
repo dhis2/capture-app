@@ -3,11 +3,11 @@ import moment from 'moment';
 import { dataElementTypes } from '../../../../../../metaData';
 
 import type {
-    ApiDataFilterOptionSet,
-} from '../../../types';
-import type {
     OptionSetFilterData,
 } from '../../../../WorkingListsBase';
+import type {
+    ApiDataFilterOptionSet,
+} from '../../../types';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
 

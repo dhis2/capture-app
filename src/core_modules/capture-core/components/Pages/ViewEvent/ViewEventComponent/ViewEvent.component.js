@@ -1,12 +1,12 @@
 // @flow
-import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
 import { IconChevronLeft24 } from '@dhis2/ui';
-import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
-import { Button } from '../../../Buttons/Button.component';
-import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
+import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
 import type { ProgramStage } from '../../../../metaData';
+import { Button } from '../../../Buttons/Button.component';
+import { EventDetails } from '../EventDetailsSection/EventDetailsSection.container';
+import { RightColumnWrapper } from '../RightColumn/RightColumnWrapper.component';
 
 
 const getStyles = (theme: Theme) => ({

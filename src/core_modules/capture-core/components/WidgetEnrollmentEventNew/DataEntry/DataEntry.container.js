@@ -1,9 +1,8 @@
 // @flow
 import React, { useCallback } from 'react';
-import uuid from 'uuid/v4';
 import { useDispatch } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
-import { DataEntryComponent } from './DataEntry.component';
+import uuid from 'uuid/v4';
 import { startRunRulesPostUpdateField } from '../../DataEntry';
 import {
     startAsyncUpdateFieldForNewEvent,
@@ -13,6 +12,7 @@ import {
     addNewEventNote,
 } from './actions/dataEntry.actions';
 import typeof { addEventSaveTypes } from './addEventSaveTypes';
+import { DataEntryComponent } from './DataEntry.component';
 import type { ContainerProps } from './dataEntry.types';
 
 export const DataEntry = ({ orgUnit, rulesExecutionDependenciesClientFormatted, ...passOnProps }: ContainerProps) => {

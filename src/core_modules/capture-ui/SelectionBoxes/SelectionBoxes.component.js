@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 
+import { orientations } from '../constants/orientations.const';
 import { MultiSelectionsBoxes } from '../internal/SelectionBoxes/MultiSelectionsBoxes/MultiSelectionsBoxes.component';
 import { SingleSelectionBoxes } from '../internal/SelectionBoxes/SingleSelectionBoxes/SingleSelectionBoxes.component';
 
-import { orientations } from '../constants/orientations.const';
 
 type Props = {
     multiSelect?: ?boolean,

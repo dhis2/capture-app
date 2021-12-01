@@ -1,9 +1,9 @@
 // @flow
 import { connect } from 'react-redux';
-import { DataEntrySelectionsNoAccess } from './dataEntrySelectionsNoAccess.component';
 import {
     cancelNewEventAndReturnToMainPage,
 } from '../DataEntryWrapper/DataEntry/actions/dataEntry.actions';
+import { DataEntrySelectionsNoAccess } from './dataEntrySelectionsNoAccess.component';
 
 const mapStateToProps = () => ({
 });

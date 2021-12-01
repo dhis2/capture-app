@@ -11,11 +11,11 @@ import {
     withDisplayMessages,
     withFilterProps,
 } from '../../../../FormFields/New';
+import labelTypeClasses from '../../buildField.module.css';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
 } from '../internal';
-import labelTypeClasses from '../../buildField.module.css';
 import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
 const getFilteredProps = (props: Object) => {

@@ -1,11 +1,11 @@
 // @flow
 import type { QueryParameters, QueryVariables } from '@dhis2/app-runtime';
-import { query } from './query';
 import type {
     ApiQuery,
     ConvertQueryResponseFn,
     QueryRecursivelyOptions,
 } from './IOUtils.types';
+import { query } from './query';
 
 type Variables = {
     page: number,

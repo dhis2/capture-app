@@ -1,7 +1,7 @@
 // @flow
-import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
 import { trackedEntityTypesCollection } from '../../../metaDataMemoryStores';
 import type { TrackedEntityType } from '../../TrackedEntityType';
 

@@ -1,7 +1,7 @@
 // @flow
-import { dataElementTypes } from '../metaData';
 import { convertValue as convertToServerValue } from '../converters/clientToServer';
 import { convertValue as convertToClientValue } from '../converters/serverToClient';
+import { dataElementTypes } from '../metaData';
 
 type ConverterFn = (type: $Keys<typeof dataElementTypes>, value: any) => any;
 

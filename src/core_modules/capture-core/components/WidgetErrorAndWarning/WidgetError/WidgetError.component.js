@@ -1,11 +1,11 @@
 // @flow
-import React from 'react';
 import { colors } from '@dhis2/ui';
+import React from 'react';
 import { Widget } from '../../Widget';
-import type { Props } from './WidgetError.types';
 import { WidgetErrorAndWarningContent } from '../content/WidgetErrorAndWarningContent';
-import { WidgetErrorHeader } from './WidgetErrorHeader';
 import { widgetTypes } from '../content/WidgetTypes';
+import type { Props } from './WidgetError.types';
+import { WidgetErrorHeader } from './WidgetErrorHeader';
 
 
 export const WidgetError = ({ error, classes }: Props) => {

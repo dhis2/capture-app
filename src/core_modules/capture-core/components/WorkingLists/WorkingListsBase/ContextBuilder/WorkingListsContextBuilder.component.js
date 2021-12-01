@@ -1,5 +1,6 @@
 // @flow
 import React, { useMemo, useRef, useEffect } from 'react';
+import { TemplatesLoader } from '../TemplatesLoader';
 import {
     WorkingListsManagerContextProvider,
     WorkingListsListViewConfigContextProvider,
@@ -7,7 +8,6 @@ import {
     WorkingListsListViewUpdaterContextProvider,
     WorkingListsListViewBuilderContextProvider,
 } from './ContextProviders';
-import { TemplatesLoader } from '../TemplatesLoader';
 import type { Props } from './workingListsContextBuilder.types';
 
 

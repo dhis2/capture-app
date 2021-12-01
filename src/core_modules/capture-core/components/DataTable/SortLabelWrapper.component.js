@@ -1,12 +1,12 @@
 // @flow
-import * as React from 'react';
-import Tooltip from '@material-ui/core/Tooltip';
+import i18n from '@dhis2/d2-i18n';
 import { IconArrowDown16, IconArrowUp16 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
+import { SortLabel, sortLabelDirections } from 'capture-ui';
 import classNames from 'classnames';
 
-import i18n from '@dhis2/d2-i18n';
-import { SortLabel, sortLabelDirections } from 'capture-ui';
+import * as React from 'react';
 
 const styles = () => ({
     iconBase: {

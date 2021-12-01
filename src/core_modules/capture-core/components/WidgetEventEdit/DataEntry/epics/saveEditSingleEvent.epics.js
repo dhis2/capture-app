@@ -1,18 +1,18 @@
 // @flow
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { push } from 'connected-react-router';
+import moment from 'moment';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import moment from 'moment';
-import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
+
+import { convertValue as convertToServerValue } from '../../../../converters/clientToServer';
+import { convertMainEventClientToServer } from '../../../../events/mainConverters';
+import { convertDataEntryToClientValues } from '../../../DataEntry/common/convertDataEntryToClientValues';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     actionTypes as editEventDataEntryActionTypes,
     startSaveEditEventAfterReturnedToMainPage,
 } from '../editEventDataEntry.actions';
-
-import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import { convertDataEntryToClientValues } from '../../../DataEntry/common/convertDataEntryToClientValues';
-import { convertValue as convertToServerValue } from '../../../../converters/clientToServer';
-import { convertMainEventClientToServer } from '../../../../events/mainConverters';
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

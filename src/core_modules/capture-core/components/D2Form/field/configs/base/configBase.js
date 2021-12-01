@@ -1,8 +1,8 @@
 // @flow
-import { type ComponentType } from 'react';
 import type { ValidatorContainer } from 'capture-ui/FormBuilder/FormBuilder.component';
-import { getValidators } from '../../validators';
+import { type ComponentType } from 'react';
 import type { DataElement } from '../../../../../metaData';
+import { getValidators } from '../../validators';
 
 export type FieldConfigForType = {
     component: ComponentType<any>,

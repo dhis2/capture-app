@@ -9,16 +9,6 @@ import {
     type Category,
 } from '../../../../metaData';
 import { getUserStorageController } from '../../../../storageControllers';
-import { userStores } from '../../../../storageControllers/stores';
-import { SearchGroupFactory } from '../../../common/factory';
-import { buildIcon } from '../../../common/helpers';
-import { EnrollmentFactory } from '../enrollment';
-import { DataElementFactory } from '../enrollment/DataElementFactory';
-import {
-    ProgramStageFactory,
-} from '../programStage';
-import { CategoryFactory } from '../category';
-
 import type
 {
     CachedProgramStage,
@@ -32,6 +22,16 @@ import type
     CachedTrackedEntityType,
     CachedProgramTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
+import { userStores } from '../../../../storageControllers/stores';
+import { SearchGroupFactory } from '../../../common/factory';
+import { buildIcon } from '../../../common/helpers';
+import { CategoryFactory } from '../category';
+import { EnrollmentFactory } from '../enrollment';
+import { DataElementFactory } from '../enrollment/DataElementFactory';
+import {
+    ProgramStageFactory,
+} from '../programStage';
+
 
 export class ProgramFactory {
     programStageFactory: ProgramStageFactory;

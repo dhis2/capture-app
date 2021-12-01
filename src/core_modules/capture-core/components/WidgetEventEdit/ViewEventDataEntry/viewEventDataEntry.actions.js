@@ -1,18 +1,18 @@
 // @flow
 import { actionCreator } from '../../../actions/actions.utils';
+import { convertClientToForm } from '../../../converters';
+import type { ClientEventContainer } from '../../../events/eventRequests';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import { dataElementTypes } from '../../../metaData';
 import type { RenderFoundation, Program } from '../../../metaData';
-import { viewEventIds } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
+import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
+import { TrackerProgram } from '../../../metaData/Program';
+import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../DataEntries';
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { loadEditDataEntryAsync } from '../../DataEntry/templates/dataEntryLoadEdit.template';
-import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
-import { dataElementTypes } from '../../../metaData';
-import { convertClientToForm } from '../../../converters';
-import type { ClientEventContainer } from '../../../events/eventRequests';
-import { TrackerProgram } from '../../../metaData/Program';
-import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
-import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
 import type { Event } from '../../Pages/Enrollment/EnrollmentPageDefault/types/common.types';
+import { viewEventIds } from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 
 export const actionTypes = {
     VIEW_EVENT_DATA_ENTRY_LOADED: 'ViewEventDataEntryLoadedForViewSingleEvent',

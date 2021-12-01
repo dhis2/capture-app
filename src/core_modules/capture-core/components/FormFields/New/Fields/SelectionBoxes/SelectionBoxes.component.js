@@ -1,8 +1,8 @@
 // @flow
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
 import { SelectionBoxes as UISelectionBoxes } from 'capture-ui';
+import * as React from 'react';
 
 const getStyles = (theme: Theme) => ({
     iconSelected: {

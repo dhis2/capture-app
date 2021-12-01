@@ -1,8 +1,8 @@
 // @flow
 import { useMemo } from 'react';
-import { dataElementTypes, type TrackerProgram } from '../../../metaData';
 import { convertServerToClient } from '../../../converters';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import { dataElementTypes, type TrackerProgram } from '../../../metaData';
 import type {
     RulesExecutionDependencies,
     AttributeValuesClientFormatted,

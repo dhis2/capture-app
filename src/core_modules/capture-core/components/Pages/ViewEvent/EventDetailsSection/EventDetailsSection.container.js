@@ -1,9 +1,9 @@
 // @flow
 import { connect } from 'react-redux';
-import { EventDetailsSection } from './EventDetailsSection.component';
 import {
     startShowEditEventDataEntry,
 } from './eventDetails.actions';
+import { EventDetailsSection } from './EventDetailsSection.component';
 
 const mapStateToProps = (state: ReduxState) => ({
     showEditEvent: state.viewEventPage.eventDetailsSection && state.viewEventPage.eventDetailsSection.showEditEvent,

@@ -1,10 +1,10 @@
 // @flow
-import React from 'react';
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { useProgramInfo } from 'capture-core/hooks/useProgramInfo';
+import log from 'loglevel';
+import React from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual } from 'react-redux';
-import { useProgramInfo } from 'capture-core/hooks/useProgramInfo';
 import { StageEventListPageComponent } from './StageEventListPage.component';
 
 export const StageEventListPage = () => {

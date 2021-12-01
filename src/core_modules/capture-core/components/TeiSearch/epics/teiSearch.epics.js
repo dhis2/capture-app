@@ -1,15 +1,19 @@
 // @flow
 import isArray from 'd2-utilizr/src/isArray';
-import { from, of } from 'rxjs';
-import { ofType } from 'redux-observable';
-import { map, takeUntil, switchMap, filter, catchError } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { convertValue as convertToClient } from '../../../converters/formToClient';
+import { ofType } from 'redux-observable';
+import { from, of } from 'rxjs';
+import { map, takeUntil, switchMap, filter, catchError } from 'rxjs/operators';
 import { convertValue as convertToServer } from '../../../converters/clientToServer';
+import { convertValue as convertToClient } from '../../../converters/formToClient';
 import {
-    convertValue as convertToFilters,
-    convertValueToEqual as convertToUniqueFilters,
-} from '../serverToFilters';
+    getTrackerProgramThrowIfNotFound as getTrackerProgram,
+    getTrackedEntityTypeThrowIfNotFound as getTrackedEntityType,
+} from '../../../metaData';
+import { getTrackedEntityInstances } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
+import {
+    addFormData,
+} from '../../D2Form/actions/form.actions';
 import {
     actionTypes,
     batchActionTypes,
@@ -17,20 +21,16 @@ import {
     searchTeiFailed,
     setProgramAndTrackedEntityType,
 } from '../actions/teiSearch.actions';
+import { getSearchFormId } from '../getSearchFormId';
+import { getSearchGroups } from '../getSearchGroups';
 import {
     actionTypes as programSelectorActionTypes,
 } from '../SearchProgramSelector/searchProgramSelector.actions';
-import { getSearchGroups } from '../getSearchGroups';
-import { getTrackedEntityInstances } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
+import {
+    convertValue as convertToFilters,
+    convertValueToEqual as convertToUniqueFilters,
+} from '../serverToFilters';
 
-import {
-    addFormData,
-} from '../../D2Form/actions/form.actions';
-import {
-    getTrackerProgramThrowIfNotFound as getTrackerProgram,
-    getTrackedEntityTypeThrowIfNotFound as getTrackedEntityType,
-} from '../../../metaData';
-import { getSearchFormId } from '../getSearchFormId';
 
 const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) =>
     (orgUnitScope !== 'ACCESSIBLE' ?

@@ -1,13 +1,20 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import uuid from 'd2-utilizr/lib/uuid';
+import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import i18n from '@dhis2/d2-i18n';
-import { batchActions } from 'redux-batched-actions';
 
+import { convertClientRelationshipToServer } from '../../../../../../relationships/convertClientToServer';
+import {
+    addRelationship,
+    relationshipAlreadyExists,
+} from '../../../../../DataEntry/actions/dataEntry.actions';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 import {
     initializeNewRelationship,
 } from '../../../../../Pages/NewRelationship/newRelationship.actions';
+import { getRelationshipNewTei } from '../../../../../Pages/NewRelationship/RegisterTei';
 import {
     recentlyAddedRelationship,
     actionTypes as newEventNewRelationshipActionTypes,
@@ -23,13 +30,6 @@ import {
     actionTypes as newEventDataEntryActionTypes,
 } from '../actions/dataEntry.actions';
 
-import {
-    addRelationship,
-    relationshipAlreadyExists,
-} from '../../../../../DataEntry/actions/dataEntry.actions';
-import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
-import { convertClientRelationshipToServer } from '../../../../../../relationships/convertClientToServer';
-import { getRelationshipNewTei } from '../../../../../Pages/NewRelationship/RegisterTei';
 
 const dataEntryId = 'singleEvent';
 const itemId = 'newEvent';

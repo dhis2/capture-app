@@ -1,9 +1,9 @@
 // @flow
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { DataEntryComponent } from './DataEntry.component';
-import { updateFormField } from './actions/dataEntry.actions';
 import { withLoadingIndicator } from '../../HOC';
+import { updateFormField } from './actions/dataEntry.actions';
+import { DataEntryComponent } from './DataEntry.component';
 
 const mapStateToProps = (state: Object, props: { id: string }) => ({
     itemId: state.dataEntries[props.id] && state.dataEntries[props.id].itemId,

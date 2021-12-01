@@ -1,6 +1,6 @@
 // @flow
-import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import React, { useMemo } from 'react';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
 import { AccessVerification } from './AccessVerification';
 import type { WidgetProps } from './WidgetEnrollmentEventNew.types';

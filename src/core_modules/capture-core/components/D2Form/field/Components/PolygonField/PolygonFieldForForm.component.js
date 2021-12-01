@@ -13,11 +13,11 @@ import {
     withInternalChangeHandler,
     withStyledContainer,
 } from '../../../../FormFields/New';
+import labelTypeClasses from '../../buildField.module.css';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
 } from '../internal';
-import labelTypeClasses from '../../buildField.module.css';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;

@@ -1,20 +1,20 @@
 // @flow
+import { useDataMutation } from '@dhis2/app-runtime';
+import i18n from '@dhis2/d2-i18n';
+import moment from 'moment';
 import React, { useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import i18n from '@dhis2/d2-i18n';
-import { useDataMutation } from '@dhis2/app-runtime';
-import moment from 'moment';
-import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
 import { useOrganisationUnit } from '../../dataQueries';
-import type { ContainerProps } from './widgetEventSchedule.types';
-import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
+import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
+import { buildUrlQueryString } from '../../utils/routing';
 import {
     useScheduleConfigFromProgramStage,
     useDetermineSuggestedScheduleDate,
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
 } from './hooks';
-import { buildUrlQueryString } from '../../utils/routing';
+import { WidgetEventScheduleComponent } from './WidgetEventSchedule.component';
+import type { ContainerProps } from './widgetEventSchedule.types';
 
 const scheduleEventMutation = {
     resource: 'events',

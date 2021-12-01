@@ -3,19 +3,19 @@ import React from 'react';
 // $FlowFixMe
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { convertValue } from '../../../converters/clientToView';
+import { useProgramInfo } from '../../../hooks/useProgramInfo';
+import { getScopeInfo } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData/DataElement';
+import { buildUrlQueryString } from '../../../utils/routing';
+import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { useCommonEnrollmentDomainData } from '../common/EnrollmentOverviewDomain';
 import { useTeiDisplayName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
-import { useProgramInfo } from '../../../hooks/useProgramInfo';
-import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
-import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
-import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
-import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
-import { buildUrlQueryString } from '../../../utils/routing';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
-import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
-import { getScopeInfo } from '../../../metaData';
-import { convertValue } from '../../../converters/clientToView';
-import { dataElementTypes } from '../../../metaData/DataElement';
+import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
+import { useWidgetDataFromStore } from '../EnrollmentAddEvent/hooks';
+import { EnrollmentEditEventPageComponent } from './EnrollmentEditEventPage.component';
+import { pageMode, pageStatuses } from './EnrollmentEditEventPage.constants';
 
 export const EnrollmentEditEventPage = () => {
     const history = useHistory();

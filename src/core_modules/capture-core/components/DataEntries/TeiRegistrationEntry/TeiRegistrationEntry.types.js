@@ -1,8 +1,8 @@
 // @flow
 import type { Node } from 'react';
-import type { RegistrationFormMetadata } from '../common/types';
 import type { RenderCustomCardActions } from '../../CardList';
 import type { SaveForDuplicateCheck } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
+import type { RegistrationFormMetadata } from '../common/types';
 
 export type OwnProps = $ReadOnly<{|
   id: string,

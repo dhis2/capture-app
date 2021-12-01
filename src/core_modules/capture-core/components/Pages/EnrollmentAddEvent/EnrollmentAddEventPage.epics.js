@@ -1,14 +1,14 @@
 // @flow
-import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
+import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 
-import { addEnrollmentEventPageActionTypes } from './enrollmentAddEventPage.actions';
 import {
     commitEnrollmentEventWithoutId,
     rollbackEnrollmentEventWithoutId,
     saveFailed,
 } from '../../Pages/common/EnrollmentOverviewDomain/enrollment.actions';
+import { addEnrollmentEventPageActionTypes } from './enrollmentAddEventPage.actions';
 
 export const saveNewEventSucceededEpic = (action$: InputObservable) =>
     action$.pipe(

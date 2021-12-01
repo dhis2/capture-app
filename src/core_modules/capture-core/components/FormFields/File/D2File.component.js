@@ -1,13 +1,13 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import { IconCheckmark24, colors, CircularLoader } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
-import React, { Component } from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
-import { Button } from '../../Buttons/Button.component';
+import React, { Component } from 'react';
 import { getApi } from '../../../d2/d2Instance';
-import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
+import { Button } from '../../Buttons/Button.component';
 import { LinkButton } from '../../Buttons/LinkButton.component';
+import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 
 type Props = {
     value: ?{ value: string, name: string, url?: ?string },

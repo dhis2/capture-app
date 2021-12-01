@@ -1,5 +1,4 @@
 // @flow
-import log from 'loglevel';
 import type {
     DataElement as DataElementForRulesEngine,
     EventsData,
@@ -7,13 +6,14 @@ import type {
     OrgUnit,
     OutputEffects,
 } from 'capture-core-utils/rulesEngine';
-import { rulesEngine } from '../rulesEngine';
+import log from 'loglevel';
 import { errorCreator } from '../../../capture-core-utils';
 import type { Program, RenderFoundation, DataElement, ProgramStage } from '../../metaData';
 import { EventProgram } from '../../metaData';
 import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
 import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
 import { convertOptionSetsToRulesEngineFormat } from '../converters/optionSetsConverter';
+import { rulesEngine } from '../rulesEngine';
 
 const errorMessages = {
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',

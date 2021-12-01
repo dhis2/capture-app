@@ -1,7 +1,7 @@
 // @flow
-import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import React, { Component } from 'react';
 
 const styles = theme => ({
     container: {

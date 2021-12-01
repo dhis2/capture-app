@@ -1,7 +1,7 @@
 // @flow
 import { actionCreator } from '../../../actions/actions.utils';
-import type { SelectedRelationshipType } from './newRelationship.types';
 import { typeof findModes } from './findModes';
+import type { SelectedRelationshipType } from './newRelationship.types';
 
 export const actionTypes = {
     INITIALIZE_NEW_RELATIONSHIP: 'InitializeNewRelationship',

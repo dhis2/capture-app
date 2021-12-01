@@ -1,11 +1,11 @@
 // @flow
-import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { AgeField as UIAgeField } from 'capture-ui';
 import moment from 'moment';
-import { withCalendarProps } from '../../HOC/withCalendarProps';
-import { parseDate, convertMomentToDateFormatString } from '../../../../../utils/converters/date';
+import * as React from 'react';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
+import { parseDate, convertMomentToDateFormatString } from '../../../../../utils/converters/date';
+import { withCalendarProps } from '../../HOC/withCalendarProps';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {

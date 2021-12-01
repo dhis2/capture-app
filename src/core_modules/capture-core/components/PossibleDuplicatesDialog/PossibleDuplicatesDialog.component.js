@@ -1,10 +1,10 @@
 // @flow
-import * as React from 'react';
 import { withStyles } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import { ReviewDialogContents } from './ReviewDialogContents/ReviewDialogContents.container';
+import * as React from 'react';
 import type { RenderCustomCardActions } from '../CardList/CardList.types';
+import { ReviewDialogContents } from './ReviewDialogContents/ReviewDialogContents.container';
 
 type Props = {|
     dataEntryId: string,

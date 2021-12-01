@@ -1,9 +1,9 @@
 // @flow
-import React, { type ComponentType } from 'react';
 import { spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
-import moment from 'moment';
 import { DateField } from 'capture-core/components/FormFields/New';
+import moment from 'moment';
+import React, { type ComponentType } from 'react';
 import { InfoBox } from '../InfoBox';
 import type { Props } from './scheduleDate.types';
 

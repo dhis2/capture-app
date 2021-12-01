@@ -1,9 +1,9 @@
 // @flow
-import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { DateField as UIDateField } from 'capture-ui';
-import { withCalendarProps } from '../../../HOC/withCalendarProps';
+import * as React from 'react';
 import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
+import { withCalendarProps } from '../../../HOC/withCalendarProps';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {

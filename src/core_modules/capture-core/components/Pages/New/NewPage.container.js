@@ -1,21 +1,21 @@
 // @flow
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import React, { useCallback } from 'react';
 import type { ComponentType } from 'react';
-import { NewPageComponent } from './NewPage.component';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
+import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
+import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
+import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
+import { buildUrlQueryString } from '../../../utils/routing';
+import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import {
     showMessageToSelectOrgUnitOnNewPage,
     showDefaultViewOnNewPage,
     showMessageToSelectProgramCategoryOnNewPage,
 } from './NewPage.actions';
+import { NewPageComponent } from './NewPage.component';
 import { typeof newPageStatuses } from './NewPage.constants';
-import { buildUrlQueryString } from '../../../utils/routing';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
-import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
-import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
-import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
-import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 const useUserWriteAccess = (scopeId) => {
     const scope = getScopeFromScopeId(scopeId);

@@ -1,9 +1,9 @@
 // @flow
-import React, { useState, useEffect, useRef, type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
-import cx from 'classnames';
 import { colors, spacersNum, IconChevronUp24 } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
 import { IconButton } from 'capture-ui';
+import cx from 'classnames';
+import React, { useState, useEffect, useRef, type ComponentType } from 'react';
 import type { WidgetCollapsibleProps, WidgetCollapsiblePropsPlain } from './widgetCollapsible.types';
 
 const styles = {

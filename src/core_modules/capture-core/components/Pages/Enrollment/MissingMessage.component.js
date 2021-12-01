@@ -1,15 +1,15 @@
 // @flow
-import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
+import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData/helpers/constants';
 import { buildUrlQueryString } from '../../../utils/routing';
-import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { LinkButton } from '../../Buttons/LinkButton.component';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
 
 export const missingStatuses = {

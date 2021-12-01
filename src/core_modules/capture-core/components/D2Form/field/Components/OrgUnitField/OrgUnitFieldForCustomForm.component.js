@@ -1,5 +1,4 @@
 // @flow
-import { OrgUnitTree } from '../../../../FormFields/OrgUnitTree/OrgUnitTree.component';
 import {
     withGotoInterface,
     withHideCompatibility,
@@ -8,6 +7,7 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from '../../../../FormFields/New';
+import { OrgUnitTree } from '../../../../FormFields/OrgUnitTree/OrgUnitTree.component';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,

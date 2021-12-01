@@ -1,11 +1,11 @@
 // @flow
+import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import { createSelector } from 'reselect';
-import { errorCreator } from 'capture-core-utils';
 import { dataElementTypes } from '../../../../../../../metaData';
-import type { TeiColumnsMetaForDataFetchingArray, ClientTeis } from './types';
-import type { SubvalueKeysByType, SubvaluesByType, GetTeisWithSubvaluesPlainInner } from './getTeisWithSubvalues.types';
 import type { QuerySingleResource } from '../../../../../../../utils/api';
+import type { SubvalueKeysByType, SubvaluesByType, GetTeisWithSubvaluesPlainInner } from './getTeisWithSubvalues.types';
+import type { TeiColumnsMetaForDataFetchingArray, ClientTeis } from './types';
 
 const getTeisWithSubvaluesPlain = (querySingleResource: QuerySingleResource, absoluteApiPath: string) => {
     const getImageOrFileResourceSubvalue = async (keys: Array<string>) => {

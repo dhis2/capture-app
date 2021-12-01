@@ -1,10 +1,10 @@
 // @flow
-import log from 'loglevel';
-import isString from 'd2-utilizr/lib/isString';
-// TODO: add some kind of errorcreator to d2 before moving
 import { errorCreator } from 'capture-core-utils/errorCreator';
-import { mapTypeToInterfaceFnName, typeof typeKeys } from '../constants';
+import isString from 'd2-utilizr/lib/isString';
+import log from 'loglevel';
+// TODO: add some kind of errorcreator to d2 before moving
 import { trimQuotes } from '../commonUtils/trimQuotes';
+import { mapTypeToInterfaceFnName, typeof typeKeys } from '../constants';
 
 import type { IConvertInputRulesValue } from '../rulesEngine.types';
 

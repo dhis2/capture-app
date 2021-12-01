@@ -12,12 +12,12 @@ import {
     withFilterProps,
     withInternalChangeHandler,
 } from '../../../../FormFields/New';
+import { UserField } from '../../../../FormFields/UserField/UserField.component';
+import labelTypeClasses from '../../buildField.module.css';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
 } from '../internal';
-import labelTypeClasses from '../../buildField.module.css';
-import { UserField } from '../../../../FormFields/UserField/UserField.component';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;

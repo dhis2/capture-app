@@ -1,6 +1,5 @@
 // @flow
 import { withTransformPropName } from '../../../../../HOC';
-import { UserField } from '../../../../FormFields/UserField/UserField.component';
 import {
     withGotoInterface,
     withHideCompatibility,
@@ -10,6 +9,7 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from '../../../../FormFields/New';
+import { UserField } from '../../../../FormFields/UserField/UserField.component';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,

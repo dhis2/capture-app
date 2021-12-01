@@ -1,6 +1,6 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux';
 import { lockedSelectorActionTypes } from '../../components/LockedSelector/LockedSelector.actions';
+import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
 import {
     actionTypes as viewEventActionTypes,
     actionTypes as viewEventPageActionTypes,
@@ -8,7 +8,7 @@ import {
 import { actionTypes as viewEventDataEntryActionTypes }
     from '../../components/WidgetEventEdit/ViewEventDataEntry/viewEventDataEntry.actions';
 import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
-import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
+import { createReducerDescription } from '../../trackerRedux';
 
 export const activePageDesc = createReducerDescription({
     [lockedSelectorActionTypes.FROM_URL_CURRENT_SELECTIONS_VALID]: state => ({

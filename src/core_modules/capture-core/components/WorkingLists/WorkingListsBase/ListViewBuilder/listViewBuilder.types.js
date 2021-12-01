@@ -1,7 +1,7 @@
 // @flow
-import type { ColumnConfigs } from '../workingListsBase.types';
 import type { CustomMenuContents, StickyFilters } from '../../../ListView';
 import type { ListViewUpdaterOutputProps } from '../ListViewUpdater';
+import type { ColumnConfigs } from '../workingListsBase.types';
 
 type ExtractedProps = {|
     columns: ColumnConfigs,

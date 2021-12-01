@@ -1,18 +1,18 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import React from 'react';
-import moment from 'moment';
-import type { ComponentType } from 'react';
-import { Avatar, Grid, withStyles } from '@material-ui/core';
 import { colors, Tag, IconCheckmark16 } from '@dhis2/ui';
+import { Avatar, Grid, withStyles } from '@material-ui/core';
+import moment from 'moment';
+import React from 'react';
+import type { ComponentType } from 'react';
+import { dataElementTypes } from '../../metaData';
 import type {
     CardDataElementsInformation,
     CardProfileImageElementInformation,
 } from '../Pages/Search/SearchResults/SearchResults.types';
 import { enrollmentTypes } from './CardList.constants';
-import { ListEntry } from './ListEntry.component';
-import { dataElementTypes } from '../../metaData';
 import type { ListItem, RenderCustomCardActions } from './CardList.types';
+import { ListEntry } from './ListEntry.component';
 
 type OwnProps = $ReadOnly<{|
     item: ListItem,

@@ -3,8 +3,8 @@ import React, { memo, useCallback, useContext, useEffect, useRef } from 'react';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
 import { ListViewUpdater } from '../ListViewUpdater';
 import { ListViewLoaderContext } from '../workingListsBase.context';
-import { useIsContextInSync } from './useIsContextInSync';
 import type { Props } from './listViewLoader.types';
+import { useIsContextInSync } from './useIsContextInSync';
 
 const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
     withLoadingIndicator(() => ({ margin: 10 }))(ListViewUpdater));

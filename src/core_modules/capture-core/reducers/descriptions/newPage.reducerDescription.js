@@ -1,7 +1,7 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
 import { newPageStatuses } from '../../components/Pages/New/NewPage.constants';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 type NewPageState = {
     newPageStatus: $Keys<typeof newPageStatuses>

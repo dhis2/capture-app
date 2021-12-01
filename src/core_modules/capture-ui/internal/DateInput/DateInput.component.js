@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { withTextFieldFocusHandler } from '../TextInput/withFocusHandler';
 import { TextInput } from '../TextInput/TextInput.component';
+import { withTextFieldFocusHandler } from '../TextInput/withFocusHandler';
 
 type Props = {
     onBlur: (value: any) => void,

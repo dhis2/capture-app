@@ -1,12 +1,8 @@
 // @flow
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
 import moment from 'moment';
-import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration';
 import { getApi } from '../../../../../../d2/d2Instance';
-import { getOptionSetFilter } from './optionSet';
-import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
-
 import {
     filterTypesObject,
     type AssigneeFilterData,
@@ -16,6 +12,8 @@ import {
     type TextFilterData,
     type NumericFilterData,
 } from '../../../../WorkingListsBase';
+import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
+
 import type {
     ApiDataFilter,
     ApiDataFilterNumeric,
@@ -26,6 +24,8 @@ import type {
     ColumnsMetaForDataFetching,
     ClientConfig,
 } from '../../../types';
+import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration';
+import { getOptionSetFilter } from './optionSet';
 
 const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
     const value = filter.like;

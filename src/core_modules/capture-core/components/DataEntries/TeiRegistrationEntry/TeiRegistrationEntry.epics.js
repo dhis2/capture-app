@@ -1,14 +1,14 @@
 // @flow
-import { ofType } from 'redux-observable';
-import { pluck, switchMap } from 'rxjs/operators';
-import { empty, from } from 'rxjs';
+import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
-import i18n from '@dhis2/d2-i18n';
-import { teiRegistrationEntryActionTypes } from './TeiRegistrationEntry.actions';
-import { openDataEntryForNewTeiBatchAsync } from '../TrackedEntityInstance';
+import { ofType } from 'redux-observable';
+import { empty, from } from 'rxjs';
+import { pluck, switchMap } from 'rxjs/operators';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../metaData/helpers';
 import { openDataEntryFailed } from '../../Pages/NewRelationship/RegisterTei/DataEntry/RegisterTeiDataEntry.actions';
+import { openDataEntryForNewTeiBatchAsync } from '../TrackedEntityInstance';
+import { teiRegistrationEntryActionTypes } from './TeiRegistrationEntry.actions';
 
 export const startNewTeiDataEntrySelfInitialisationEpic = (action$: InputObservable) =>
     action$.pipe(

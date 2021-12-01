@@ -1,12 +1,12 @@
 // @flow
+import type { FiltersData } from '../../../ListView';
+import type { ListViewConfigMenuContentOutputProps } from '../ListViewConfigMenuContent';
 import type {
     ColumnConfigs,
     Categories,
     UpdateList,
     WorkingListTemplate,
 } from '../workingListsBase.types';
-import type { FiltersData } from '../../../ListView';
-import type { ListViewConfigMenuContentOutputProps } from '../ListViewConfigMenuContent';
 
 type ExtractedProps = {|
     currentTemplate: WorkingListTemplate,

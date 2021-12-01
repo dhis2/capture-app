@@ -1,6 +1,6 @@
 // @flow
-import { quickStore } from '../../IOUtils';
 import { getContext } from '../../context';
+import { quickStore } from '../../IOUtils';
 import type { apiProgramsResponse } from './types';
 
 const convert = (() => {

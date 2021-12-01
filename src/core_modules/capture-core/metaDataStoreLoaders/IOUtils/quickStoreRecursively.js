@@ -1,5 +1,4 @@
 // @flow
-import { quickStore } from './quickStore';
 import type {
     ApiQuery,
     StoreName,
@@ -7,6 +6,7 @@ import type {
     QuickStoreRecursivelyOptions,
     ConvertQueryResponseFn,
 } from './IOUtils.types';
+import { quickStore } from './quickStore';
 import type {
     QueryVariables,
     RecursiveQuery,

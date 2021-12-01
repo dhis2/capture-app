@@ -1,7 +1,7 @@
 // @flow
-import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
-import { UserNameFieldForCustomForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import { UserNameFieldForCustomForm } from '../../Components';
+import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 
 export const getUserNameFieldConfigForCustomForm = (metaData: MetaDataElement) => {
     const props = createProps({

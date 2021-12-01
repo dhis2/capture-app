@@ -1,10 +1,10 @@
+const path = require('path');
 const {
     chromeAllowXSiteCookies,
     cucumberPreprocessor,
 } = require('@dhis2/cypress-plugins');
 
 const getCypressEnvVariables = require('./getCypressEnvVariables');
-const path = require('path');
 
 module.exports = (on, config) => {
     chromeAllowXSiteCookies(on);

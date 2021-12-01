@@ -1,12 +1,12 @@
 // @flow
 import type { ProgramStage, RenderFoundation, TrackerProgram } from '../../../metaData';
-import { typeof addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 import type {
     OrgUnit,
     ExternalSaveHandler,
     RulesExecutionDependencies,
     RulesExecutionDependenciesClientFormatted,
 } from '../common.types';
+import { typeof addEventSaveTypes } from '../DataEntry/addEventSaveTypes';
 
 export type ContainerProps = {|
     program: TrackerProgram,

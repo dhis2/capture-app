@@ -1,7 +1,7 @@
 // @flow
+import { programCollection, trackedEntityTypesCollection } from '../../metaDataMemoryStores';
 import { EventProgram, TrackerProgram } from '../Program';
 import { TrackedEntityType } from '../TrackedEntityType';
-import { programCollection, trackedEntityTypesCollection } from '../../metaDataMemoryStores';
 
 export type Scope = (EventProgram | TrackerProgram | TrackedEntityType)
 

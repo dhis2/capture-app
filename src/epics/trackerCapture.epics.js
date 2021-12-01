@@ -1,5 +1,24 @@
 // @flow
-import { combineEpics } from 'redux-observable';
+import {
+    navigateToEnrollmentOverviewEpic,
+} from 'capture-core/actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.epics';
+
+
+import {
+    goingOnlineEpic,
+} from 'capture-core/components/Connectivity/connectivity.epics';
+import {
+    asyncUpdateFieldEpic,
+} from 'capture-core/components/D2Form';
+import {
+    filterFormFieldOrgUnitsEpic,
+} from 'capture-core/components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.epics';
+
+
+import {
+    runRulesOnEnrollmentFieldUpdateEpic,
+    runRulesOnEnrollmentDataEntryFieldUpdateEpic,
+} from 'capture-core/components/DataEntries';
 import {
     cancelNewEventEpic,
     cancelNewEventLocationChangeEpic,
@@ -22,43 +41,42 @@ import {
     saveNewEventRelationshipFinishedEpic,
     teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/DataEntries/SingleEventRegistrationEntry';
-import {
-    navigateToEnrollmentOverviewEpic,
-} from 'capture-core/actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.epics';
-import {
-    initEventListEpic,
-    updateEventListEpic,
-    retrieveTemplatesEpic,
-    requestDeleteEventEpic,
-    updateTemplateEpic,
-    addTemplateEpic,
-    deleteTemplateEpic,
-} from 'capture-core/components/WorkingLists/EventWorkingLists';
 
+
+import { checkForDuplicateEpic } from 'capture-core/components/DataEntryUtils';
 import {
     fetchDataStoreEpic,
     fetchUserDataStoreEpic,
 } from 'capture-core/components/DataStore/DataStore.epics';
-
+import {
+    searchRegisteringUnitListEpic,
+    showRegisteringUnitListIndicatorEpic,
+} from 'capture-core/components/LockedSelector/QuickSelector';
+import {
+    networkMonitorStatusEpic,
+} from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
+import {
+    calculateSelectionsCompletenessEpic,
+} from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
+import {
+    resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
+} from 'capture-core/components/Pages/epics/resetCategoriesAfterSettingOrgUnitIfApplicable.epic';
+import {
+    resetProgramAfterSettingOrgUnitIfApplicableEpic,
+} from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
+import {
+    openNewRelationshipRegisterTeiEpic,
+    loadSearchGroupDuplicatesForReviewEpic,
+} from 'capture-core/components/Pages/NewRelationship/RegisterTei';
+import {
+    openRelationshipTeiSearchEpic,
+    requestRelationshipTeiSearchEpic,
+    TeiRelationshipNewOrEditSearchEpic,
+} from 'capture-core/components/Pages/NewRelationship/TeiRelationship/teiRelationship.epics';
 import {
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
 } from 'capture-core/components/Pages/ViewEvent/epics/editEvent.epics';
-import {
-    openEditEventInDataEntryEpic,
-    runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
-    runRulesOnUpdateFieldForEditSingleEventEpic,
-} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/editEventDataEntry.epics';
-import {
-    loadEditEventDataEntryEpic,
-    saveEditedEventEpic,
-    saveEditedEventFailedEpic,
-    saveEditedEventSucceededEpic,
-} from 'capture-core/components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.epics';
-
-import {
-    loadViewEventDataEntryEpic,
-} from 'capture-core/components/WidgetEventEdit/ViewEventDataEntry/viewEventDataEntry.epics';
 import {
     getEventOpeningFromEventListEpic,
     getEventFromUrlEpic as getViewEventFromUrlEpic,
@@ -68,63 +86,11 @@ import {
     backToMainPageLocationChangeEpic,
     openAddRelationshipForViewEventEpic,
 } from 'capture-core/components/Pages/ViewEvent/epics/viewEvent.epics';
-
 import {
-    saveEditEventEpic,
-    saveEditEventLocationChangeEpic,
-} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/saveEditSingleEvent.epics';
-import {
-    cancelEditEventEpic,
-    cancelEditEventLocationChangeEpic,
-} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/cancelEditSingleEvent.epics';
-import {
-    addNoteForEventEpic,
-    removeNoteForEventEpic,
-} from 'capture-core/components/WidgetEventComment/WidgetEventComment.epics';
-import {
-    goingOnlineEpic,
-} from 'capture-core/components/Connectivity/connectivity.epics';
-import {
-    networkMonitorStatusEpic,
-} from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
-import {
-    searchRegisteringUnitListEpic,
-    showRegisteringUnitListIndicatorEpic,
-} from 'capture-core/components/LockedSelector/QuickSelector';
-import {
-    resetProgramAfterSettingOrgUnitIfApplicableEpic,
-} from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
-import {
-    resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
-} from 'capture-core/components/Pages/epics/resetCategoriesAfterSettingOrgUnitIfApplicable.epic';
-import {
-    calculateSelectionsCompletenessEpic,
-} from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
-import {
-    includeFiltersWithValueAfterColumnSortingEpic,
-} from 'capture-core/components/WorkingLists/WorkingListsCommon';
-import {
-    openRelationshipTeiSearchEpic,
-    requestRelationshipTeiSearchEpic,
-    TeiRelationshipNewOrEditSearchEpic,
-} from 'capture-core/components/Pages/NewRelationship/TeiRelationship/teiRelationship.epics';
-import {
-    teiSearchEpic,
-    teiSearchSetProgramEpic,
-    teiNewSearchEpic,
-    teiSearchChangePageEpic,
-} from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
-import {
-    asyncUpdateFieldEpic,
-} from 'capture-core/components/D2Form';
-import {
-    filterFormFieldOrgUnitsEpic,
-} from 'capture-core/components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.epics';
-
-import {
-    teiSearchFilterOrgUnitsEpic,
-} from 'capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
-
+    loadNotesForViewEventEpic,
+    addNoteForViewEventEpic,
+    saveNoteForViewEventFailedEpic,
+} from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
 import {
     loadRelationshipsForViewEventEpic,
     addRelationshipForViewEventEpic,
@@ -134,31 +100,67 @@ import {
     saveRelationshipAfterSavingTeiForViewEventEpic,
     handleViewEventRelationshipSaveTeiFailedEpic,
 } from 'capture-core/components/Pages/ViewEvent/Relationship/ViewEventRelationships.epics';
-
+import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
 import {
-    loadNotesForViewEventEpic,
-    addNoteForViewEventEpic,
-    saveNoteForViewEventFailedEpic,
-} from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
-
+    teiSearchEpic,
+    teiSearchSetProgramEpic,
+    teiNewSearchEpic,
+    teiSearchChangePageEpic,
+} from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
+import {
+    teiSearchFilterOrgUnitsEpic,
+} from 'capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
 import { addNoteForEnrollmentEpic } from 'capture-core/components/WidgetEnrollmentComment/WidgetEnrollmentComment.epics';
 import {
-    openNewRelationshipRegisterTeiEpic,
-    loadSearchGroupDuplicatesForReviewEpic,
-} from 'capture-core/components/Pages/NewRelationship/RegisterTei';
-
+    addNoteForEventEpic,
+    removeNoteForEventEpic,
+} from 'capture-core/components/WidgetEventComment/WidgetEventComment.epics';
 import {
-    runRulesOnEnrollmentFieldUpdateEpic,
-    runRulesOnEnrollmentDataEntryFieldUpdateEpic,
-} from 'capture-core/components/DataEntries';
-import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
-
+    cancelEditEventEpic,
+    cancelEditEventLocationChangeEpic,
+} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/cancelEditSingleEvent.epics';
+import {
+    openEditEventInDataEntryEpic,
+    runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
+    runRulesOnUpdateFieldForEditSingleEventEpic,
+} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/editEventDataEntry.epics';
+import {
+    saveEditEventEpic,
+    saveEditEventLocationChangeEpic,
+} from 'capture-core/components/WidgetEventEdit/DataEntry/epics/saveEditSingleEvent.epics';
+import {
+    loadEditEventDataEntryEpic,
+    saveEditedEventEpic,
+    saveEditedEventFailedEpic,
+    saveEditedEventSucceededEpic,
+} from 'capture-core/components/WidgetEventEdit/EditEventDataEntry/editEventDataEntry.epics';
+import {
+    loadViewEventDataEntryEpic,
+} from 'capture-core/components/WidgetEventEdit/ViewEventDataEntry/viewEventDataEntry.epics';
+import {
+    initEventListEpic,
+    updateEventListEpic,
+    retrieveTemplatesEpic,
+    requestDeleteEventEpic,
+    updateTemplateEpic,
+    addTemplateEpic,
+    deleteTemplateEpic,
+} from 'capture-core/components/WorkingLists/EventWorkingLists';
+import {
+    includeFiltersWithValueAfterColumnSortingEpic,
+} from 'capture-core/components/WorkingLists/WorkingListsCommon';
 import { loadCoreEpic } from 'capture-core/init';
-
-import { checkForDuplicateEpic } from 'capture-core/components/DataEntryUtils';
+import { combineEpics } from 'redux-observable';
 
 import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../components/AppStart';
 
+
+import {
+    startNewEnrollmentDataEntrySelfInitialisationEpic,
+} from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';
+import {
+    startNewTeiDataEntrySelfInitialisationEpic,
+} from '../core_modules/capture-core/components/DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.epics';
 import {
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
@@ -175,8 +177,22 @@ import {
 } from '../core_modules/capture-core/components/LockedSelector';
 
 import {
-    setTrackedEntityTypeIdOnUrlEpic,
-} from '../core_modules/capture-core/components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.epics';
+    fetchEnrollmentPageInformationFromUrlEpic,
+    startFetchingTeiFromEnrollmentIdEpic,
+    startFetchingTeiFromTeiIdEpic,
+    openEnrollmentPageEpic,
+} from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
+import {
+    saveNewEventSucceededEpic,
+    saveNewEventFailedEpic,
+} from '../core_modules/capture-core/components/Pages/EnrollmentAddEvent/EnrollmentAddEventPage.epics';
+import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
+import {
+    completeSavingNewTrackedEntityInstanceEpic,
+    completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
+    startSavingNewTrackedEntityInstanceEpic,
+    startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
+} from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
 import {
     searchViaUniqueIdOnScopeProgramEpic,
     searchViaUniqueIdOnScopeTrackedEntityTypeEpic,
@@ -190,37 +206,16 @@ import {
     navigateBackToMainPageEpic,
     openSearchPageLocationChangeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
-import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
 import {
-    startNewEnrollmentDataEntrySelfInitialisationEpic,
-} from '../core_modules/capture-core/components/DataEntries/EnrollmentRegistrationEntry/EnrollmentRegistrationEntry.epics';
-import {
-    startNewTeiDataEntrySelfInitialisationEpic,
-} from '../core_modules/capture-core/components/DataEntries/TeiRegistrationEntry/TeiRegistrationEntry.epics';
-import {
-    completeSavingNewTrackedEntityInstanceEpic,
-    completeSavingNewTrackedEntityInstanceWithEnrollmentEpic,
-    startSavingNewTrackedEntityInstanceEpic,
-    startSavingNewTrackedEntityInstanceWithEnrollmentEpic,
-} from '../core_modules/capture-core/components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.epics';
-import { openNewRegistrationPageFromLockedSelectorEpic } from '../core_modules/capture-core/components/Pages/New/newPage.epics';
-
-import {
-    fetchEnrollmentPageInformationFromUrlEpic,
-    startFetchingTeiFromEnrollmentIdEpic,
-    startFetchingTeiFromTeiIdEpic,
-    openEnrollmentPageEpic,
-} from '../core_modules/capture-core/components/Pages/Enrollment/EnrollmentPage.epics';
-import {
-    saveNewEventSucceededEpic,
-    saveNewEventFailedEpic,
-} from '../core_modules/capture-core/components/Pages/EnrollmentAddEvent/EnrollmentAddEventPage.epics';
+    setTrackedEntityTypeIdOnUrlEpic,
+} from '../core_modules/capture-core/components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.epics';
 import {
     runRulesOnUpdateDataEntryFieldForNewEnrollmentEventEpic,
     runRulesOnUpdateFieldForNewEnrollmentEventEpic,
     saveNewEnrollmentEventEpic,
     addNoteForNewEnrollmentEventEpic,
 } from '../core_modules/capture-core/components/WidgetEnrollmentEventNew';
+import { initTeiViewEpic, updateTeiListEpic } from '../core_modules/capture-core/components/WorkingLists/TeiWorkingLists';
 
 export const epics = combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,

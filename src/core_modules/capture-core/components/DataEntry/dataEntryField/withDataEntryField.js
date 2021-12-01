@@ -1,14 +1,14 @@
 // @flow
+import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
+import { getDataEntryKey } from '../common/getDataEntryKey';
 import { placements } from '../constants/placements.const';
 import { DataEntryField } from './internal/DataEntryField.component';
-import { getDataEntryKey } from '../common/getDataEntryKey';
+import type { ValidatorContainer } from './internal/dataEntryField.utils';
 import { makeReselectComponentProps } from './withDataEntryField.selectors';
 
-import type { ValidatorContainer } from './internal/dataEntryField.utils';
 
 type FieldContainer = {
     field: React.Element<any>,

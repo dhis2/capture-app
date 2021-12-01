@@ -1,20 +1,20 @@
 // @flow
 import React, { useCallback, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocationQuery } from '../../../utils/routing';
-import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
-import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
-import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
+import { useLocationQuery } from '../../../utils/routing';
+import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../common/EnrollmentOverviewDomain';
 import { deleteEnrollment } from '../Enrollment/EnrollmentPage.actions';
-import { useWidgetDataFromStore } from './hooks';
 import {
     useHideWidgetByRuleLocations,
 } from '../Enrollment/EnrollmentPageDefault/hooks';
-import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../common/EnrollmentOverviewDomain';
-import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
+import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
+import { useWidgetDataFromStore } from './hooks';
+import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
 
 export const EnrollmentAddEventPage = () => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();

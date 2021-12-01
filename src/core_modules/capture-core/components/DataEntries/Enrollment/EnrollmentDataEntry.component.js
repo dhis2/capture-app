@@ -1,8 +1,9 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
-import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
+import React from 'react';
+import { type Enrollment } from '../../../metaData';
 import {
     DataEntry,
     placements,
@@ -26,13 +27,12 @@ import {
     orientations,
 } from '../../FormFields/New';
 
+import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
 import labelTypeClasses from './fieldLabels.module.css';
 import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
-import { sectionKeysForEnrollmentDataEntry } from './constants/sectionKeys.const';
-import { type Enrollment } from '../../../metaData';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',

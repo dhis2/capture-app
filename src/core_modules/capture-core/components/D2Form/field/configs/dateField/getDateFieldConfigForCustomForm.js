@@ -1,8 +1,8 @@
 // @flow
 import moment from 'moment';
-import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
-import { DateFieldForCustomForm } from '../../Components';
 import type { DateDataElement } from '../../../../../metaData';
+import { DateFieldForCustomForm } from '../../Components';
+import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 
 export const getDateFieldConfigForCustomForm = (metaData: DateDataElement) => {
     const props = createProps({

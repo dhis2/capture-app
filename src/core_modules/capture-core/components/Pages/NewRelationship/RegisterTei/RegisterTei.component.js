@@ -1,15 +1,15 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
+import { withStyles } from '@material-ui/core/styles';
 import React, { type ComponentType, useContext, useCallback } from 'react';
 import { compose } from 'redux';
-import { withStyles } from '@material-ui/core/styles';
-import i18n from '@dhis2/d2-i18n';
+import { withErrorMessageHandler } from '../../../../HOC';
 import { Button } from '../../../Buttons';
-import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
-import { RegistrationSection } from './RegistrationSection';
 import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
 import { ResultsPageSizeContext } from '../../shared-contexts';
+import { RegisterTeiDataEntry } from './DataEntry/RegisterTeiDataEntry.container';
 import type { Props } from './RegisterTei.types';
-import { withErrorMessageHandler } from '../../../../HOC';
+import { RegistrationSection } from './RegistrationSection';
 
 const getStyles = () => ({
     container: {

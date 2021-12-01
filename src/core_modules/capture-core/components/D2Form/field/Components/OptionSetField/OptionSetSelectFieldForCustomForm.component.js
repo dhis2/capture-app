@@ -14,8 +14,8 @@ import {
     withDisabledFieldCalculation,
     withCustomElementContainer,
 } from '../internal';
-import { withOptionsIconElement } from './withOptionsIconElement';
 import customFormStyles from './optionSetSelectFieldForCustomForm.module.css';
+import { withOptionsIconElement } from './withOptionsIconElement';
 import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;

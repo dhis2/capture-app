@@ -1,16 +1,16 @@
 // @flow
 
-import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconLink24 } from '@dhis2/ui';
 import { withStyles } from '@material-ui/core/styles';
+import * as React from 'react';
+import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { type ProgramStage } from '../../../../../metaData';
+import { Relationships } from '../../../../Relationships/Relationships.component';
+import type { Entity } from '../../../../Relationships/relationships.types';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
 import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
-import { Relationships } from '../../../../Relationships/Relationships.component';
-import { type ProgramStage } from '../../../../../metaData';
-import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
 import { ConnectedEntity } from './ConnectedEntity';
-import type { Entity } from '../../../../Relationships/relationships.types';
 
 const LoadingRelationships =
     withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);

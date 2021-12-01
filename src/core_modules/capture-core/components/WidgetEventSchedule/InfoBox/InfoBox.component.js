@@ -1,9 +1,9 @@
 // @flow
-import React, { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
 import { IconInfo24, spacersNum, colors } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
 import moment from 'moment';
+import React, { type ComponentType } from 'react';
 import type { Props } from './infoBox.types';
 
 const styles = {

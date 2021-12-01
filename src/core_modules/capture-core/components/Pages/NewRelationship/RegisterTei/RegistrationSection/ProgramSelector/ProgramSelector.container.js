@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import { ProgramSelectorComponent } from './ProgramSelector.component';
 import { changeProgram, clearProgramFilter } from '../registrationSection.actions';
+import { ProgramSelectorComponent } from './ProgramSelector.component';
 
 const mapStateToProps = (state: ReduxState) => ({
     orgUnitIds: state.newRelationshipRegisterTei.orgUnit ? [state.newRelationshipRegisterTei.orgUnit.id] : null,

@@ -1,13 +1,13 @@
 // @flow
-import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import { getTeiListData } from './getTeiListData';
+import log from 'loglevel';
 import {
     updateListSuccess,
     updateListError,
     buildFilterQueryArgs,
 } from '../../../../WorkingListsCommon';
+import { getTeiListData } from './getTeiListData';
 import type { Input } from './updateTeiWorkingListsRecords.types';
 
 export const updateTeiWorkingListsRecords = ({

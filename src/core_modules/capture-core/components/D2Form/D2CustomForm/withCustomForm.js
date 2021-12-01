@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
+import type { CustomForm as MetadataCustomForm } from '../../../metaData';
 import { D2CustomForm } from './D2CustomForm.component';
 
-import type { CustomForm as MetadataCustomForm } from '../../../metaData';
 
 type Props = {
     customForm: MetadataCustomForm,

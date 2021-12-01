@@ -1,7 +1,4 @@
 // @flow
-import React, { useState, useEffect } from 'react';
-import { compose } from 'redux';
-import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { CircularLoader,
     Modal,
@@ -13,22 +10,25 @@ import { CircularLoader,
     NoticeBox,
     IconChevronLeft24,
 } from '@dhis2/ui';
-import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
+import withStyles from '@material-ui/core/styles/withStyles';
+import type { ComponentType } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { compose } from 'redux';
 
-import { LockedSelector } from '../../LockedSelector';
-import type { ContainerProps, Props } from './SearchPage.types';
-import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
-import { SearchForm } from './SearchForm';
-import { SearchResults } from './SearchResults/SearchResults.container';
-import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { searchScopes } from './SearchPage.constants';
-import { ResultsPageSizeContext } from '../shared-contexts';
 import { useScopeTitleText } from '../../../hooks/useScopeTitleText';
+import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import { LockedSelector } from '../../LockedSelector';
+import { TrackedEntityTypeSelector } from '../../TrackedEntityTypeSelector';
+import { ResultsPageSizeContext } from '../shared-contexts';
+import { SearchForm } from './SearchForm';
 import { cleanFallbackRelatedData } from './SearchPage.actions';
+import { searchScopes } from './SearchPage.constants';
+import type { ContainerProps, Props } from './SearchPage.types';
+import { SearchResults } from './SearchResults/SearchResults.container';
 
 const getStyles = (theme: Theme) => ({
     maxWidth: {

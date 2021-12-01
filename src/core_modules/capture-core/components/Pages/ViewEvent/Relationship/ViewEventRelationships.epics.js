@@ -1,15 +1,20 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
+import uuid from 'd2-utilizr/lib/uuid';
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map, switchMap } from 'rxjs/operators';
-import i18n from '@dhis2/d2-i18n';
-import uuid from 'd2-utilizr/lib/uuid';
+import {
+    convertClientRelationshipToServer,
+    getRelationshipsForEvent,
+} from '../../../../relationships';
 import {
     addRelationship,
     removeRelationship,
     updateRelationship,
     setRelationships,
 } from '../../../Relationships/relationships.actions';
+import { getRelationshipNewTei } from '../../NewRelationship/RegisterTei';
 import {
     actionTypes as viewEventActionTypes,
 } from '../ViewEventComponent/viewEvent.actions';
@@ -23,11 +28,6 @@ import {
     eventRelationshipsLoaded,
     saveEventRelationshipNewTei,
 } from './ViewEventRelationships.actions';
-import {
-    convertClientRelationshipToServer,
-    getRelationshipsForEvent,
-} from '../../../../relationships';
-import { getRelationshipNewTei } from '../../NewRelationship/RegisterTei';
 
 const relationshipKey = 'viewEvent';
 

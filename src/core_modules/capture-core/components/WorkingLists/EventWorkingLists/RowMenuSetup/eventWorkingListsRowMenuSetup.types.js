@@ -1,6 +1,6 @@
 // @flow
-import type { EventWorkingListsViewMenuSetupOutputProps } from '../ViewMenuSetup';
 import type { CustomRowMenuContents } from '../../WorkingListsBase';
+import type { EventWorkingListsViewMenuSetupOutputProps } from '../ViewMenuSetup';
 
 type ExtractedProps = $ReadOnly<{|
     onDeleteEvent: Function,

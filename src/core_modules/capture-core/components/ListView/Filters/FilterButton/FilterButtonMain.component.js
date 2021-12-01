@@ -1,13 +1,13 @@
 // @flow
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Popover from '@material-ui/core/Popover';
 import { IconChevronDown16, IconChevronUp16 } from '@dhis2/ui';
+import Popover from '@material-ui/core/Popover';
+import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
 import { Button } from '../../../Buttons';
-import { ActiveFilterButton } from './ActiveFilterButton.component';
-import { FilterSelectorContents } from '../Contents';
-import type { UpdateFilter, ClearFilter } from '../../types';
 import type { FilterData, Options } from '../../../FiltersForTypes';
+import type { UpdateFilter, ClearFilter } from '../../types';
+import { FilterSelectorContents } from '../Contents';
+import { ActiveFilterButton } from './ActiveFilterButton.component';
 
 const getStyles = (theme: Theme) => ({
     icon: {

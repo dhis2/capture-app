@@ -1,17 +1,17 @@
 // @flow
-import React, { type ComponentType, useState, useRef, useMemo } from 'react';
-import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { useSelector } from 'react-redux';
+import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { tabMode } from './newEventWorkspace.constants';
+import React, { type ComponentType, useState, useRef, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { getProgramAndStageForProgram } from '../../../../metaData';
-import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
 import { Widget } from '../../../Widget';
-import { WidgetStageHeader } from './WidgetStageHeader';
+import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
+import { tabMode } from './newEventWorkspace.constants';
 import type { Props } from './newEventWorkspace.types';
+import { WidgetStageHeader } from './WidgetStageHeader';
 
 
 const styles = () => ({

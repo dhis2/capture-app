@@ -1,6 +1,6 @@
 // @flow
-import isString from 'd2-utilizr/lib/isString';
 import isObject from 'd2-utilizr/lib/isObject';
+import isString from 'd2-utilizr/lib/isString';
 
 export function getErrorMessageAndDetails(error: any) {
     if (!error) {

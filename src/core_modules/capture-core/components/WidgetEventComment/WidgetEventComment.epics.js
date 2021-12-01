@@ -1,23 +1,22 @@
 // @flow
+import uuid from 'd2-utilizr/lib/uuid';
+import moment from 'moment';
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import uuid from 'd2-utilizr/lib/uuid';
-import moment from 'moment';
 import { convertValue as convertListValue } from '../../converters/clientToList';
+import { getCurrentUser } from '../../d2/d2Instance';
 import { dataElementTypes } from '../../metaData';
-import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventComment.actions';
-
-import {
-    addEventNote,
-    removeEventNote,
-} from '../Pages/ViewEvent/ViewEventComponent/editEvent.actions';
-
 import {
     addNote,
     removeNote,
 } from '../DataEntry/actions/dataEntry.actions';
-import { getCurrentUser } from '../../d2/d2Instance';
+import {
+    addEventNote,
+    removeEventNote,
+} from '../Pages/ViewEvent/ViewEventComponent/editEvent.actions';
+import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventComment.actions';
+
 
 export const addNoteForEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

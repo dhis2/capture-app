@@ -1,6 +1,6 @@
 // @flow
-import isString from 'd2-utilizr/lib/isString';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
+import isString from 'd2-utilizr/lib/isString';
 import { dataElementTypes } from '../metaData';
 import { parseDate } from '../utils/converters/date';
 

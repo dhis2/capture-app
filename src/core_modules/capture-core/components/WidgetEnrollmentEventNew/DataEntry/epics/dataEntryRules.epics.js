@@ -1,24 +1,24 @@
 // @flow
+import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { batchActions } from 'redux-batched-actions';
 import { getProgramAndStageForProgram } from '../../../../metaData/helpers';
-import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
-import {
-    newEventWidgetDataEntryActionTypes,
-    newEventWidgetDataEntryBatchActionTypes,
-} from '../actions/dataEntry.actions';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
     getRulesActionsForEvent,
     getRulesActionsForEnrollmentEvent,
 } from '../../../../rules/actionsCreator';
-import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import type {
     FieldData,
 } from '../../../../rules/actionsCreator';
+import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../../common.types';
+import {
+    newEventWidgetDataEntryActionTypes,
+    newEventWidgetDataEntryBatchActionTypes,
+} from '../actions/dataEntry.actions';
 
 const runRulesForNewEvent = (
     store: ReduxStore,

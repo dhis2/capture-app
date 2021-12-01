@@ -1,11 +1,11 @@
 // @flow
 import { ofType } from 'redux-observable';
-import uuid from 'uuid/v4';
 import { map } from 'rxjs/operators';
-import { newEventWidgetActionTypes, saveEvent } from './validated.actions';
+import uuid from 'uuid/v4';
 
 import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getConvertedAddEvent';
+import { newEventWidgetActionTypes, saveEvent } from './validated.actions';
 
 export const saveNewEnrollmentEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

@@ -1,9 +1,9 @@
 // @flow
+import { typeof dataElementTypes } from '../../../../metaData';
+import type { ListItem } from '../../../CardList/CardList.types';
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 import { typeof searchScopes } from '../SearchPage.constants';
-import { typeof dataElementTypes } from '../../../../metaData';
 import type { AvailableSearchOptions } from '../SearchPage.types';
-import type { ListItem } from '../../../CardList/CardList.types';
 
 export type CardDataElementsInformation = Array<{| id: string, name: string, type: $Values<dataElementTypes> |}>
 

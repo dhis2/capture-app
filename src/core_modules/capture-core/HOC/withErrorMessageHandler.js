@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import * as React from 'react';
 
 const getStyles = (theme: Theme) => ({
     errorContainer: {

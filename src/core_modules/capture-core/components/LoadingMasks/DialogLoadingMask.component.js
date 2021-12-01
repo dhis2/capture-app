@@ -1,8 +1,8 @@
 // @flow
-import React, { Component } from 'react';
 import { CircularLoader } from '@dhis2/ui';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
+import React, { Component } from 'react';
 
 type Props = {
 };

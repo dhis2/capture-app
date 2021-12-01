@@ -1,19 +1,19 @@
 // @flow
-import React, { useMemo } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { dataElementTypes } from '../../../../../../metaData';
-import type { StageDataElement } from '../../../../types/common.types';
+import log from 'loglevel';
+import React, { useMemo } from 'react';
 import { convertValue as convertClientToList } from '../../../../../../converters/clientToList';
 import { convertValue as convertServerToClient } from '../../../../../../converters/serverToClient';
+import { dataElementTypes } from '../../../../../../metaData';
+import type { StageDataElement } from '../../../../types/common.types';
+import { SORT_DIRECTION } from './constants';
 import {
     convertStatusForView,
     convertCommentForView,
     getValueByKeyFromEvent,
     groupRecordsByType,
 } from './helpers';
-import { SORT_DIRECTION } from './constants';
 
 const baseKeys = [{ id: 'status' }, { id: 'eventDate' }, { id: 'orgUnitName' }, { id: 'dueDate' }, { id: 'comments' }];
 const basedFieldTypes = [

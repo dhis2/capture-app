@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
 import {
     List,
@@ -8,8 +8,8 @@ import {
     Tooltip,
     withStyles,
 } from '@material-ui/core';
-import i18n from '@dhis2/d2-i18n';
 import { withFocusSaver } from 'capture-ui';
+import * as React from 'react';
 import { Button } from '../Buttons';
 import { TextField } from '../FormFields/New';
 import type { Note } from './notes.types';

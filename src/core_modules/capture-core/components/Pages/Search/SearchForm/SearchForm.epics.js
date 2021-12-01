@@ -1,8 +1,22 @@
 // @flow
-import { ofType } from 'redux-observable';
-import { catchError, flatMap, map, startWith } from 'rxjs/operators';
-import { concat, empty, from, of } from 'rxjs';
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { concat, empty, from, of } from 'rxjs';
+import { catchError, flatMap, map, startWith } from 'rxjs/operators';
+import {
+    navigateToEnrollmentOverview,
+} from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import {
+    type DataElement,
+    dataElementTypes,
+    getTrackedEntityTypeThrowIfNotFound,
+    getTrackerProgramThrowIfNotFound,
+    scopeTypes,
+} from '../../../../metaData';
+import {
+    getTrackedEntityInstances,
+} from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
+import { buildUrlQueryString } from '../../../../utils/routing';
 import {
     searchPageActionTypes,
     fallbackPushPage,
@@ -14,21 +28,7 @@ import {
     showSuccessResultsViewOnSearchPage,
     showTooManyResultsViewOnSearchPage,
 } from '../SearchPage.actions';
-import {
-    getTrackedEntityInstances,
-} from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
-import {
-    type DataElement,
-    dataElementTypes,
-    getTrackedEntityTypeThrowIfNotFound,
-    getTrackerProgramThrowIfNotFound,
-    scopeTypes,
-} from '../../../../metaData';
 import { PAGINATION } from '../SearchPage.constants';
-import { buildUrlQueryString } from '../../../../utils/routing';
-import {
-    navigateToEnrollmentOverview,
-} from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { dataElementConvertFunctions } from './SearchFormElementConverter/SearchFormElementConverter';
 
 

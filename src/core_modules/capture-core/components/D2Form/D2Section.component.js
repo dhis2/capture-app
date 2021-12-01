@@ -1,10 +1,10 @@
 // @flow
-import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { Section as MetaDataSection } from '../../metaData';
 import { Section } from '../Section/Section.component';
 import { SectionHeaderSimple } from '../Section/SectionHeaderSimple.component';
 import { D2SectionFields } from './D2SectionFields.container';
-import { Section as MetaDataSection } from '../../metaData';
 import { SectionDescriptionBox } from './SectionDescriptionBox.component';
 
 const getStyles = theme => ({

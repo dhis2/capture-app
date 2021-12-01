@@ -1,6 +1,6 @@
 // @flow
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
 import { createSelector } from 'reselect';
 import type { TrackedEntityType } from '../../../../../../metaData';
 import { getTrackedEntityTypeThrowIfNotFound } from '../../../../../../metaData';

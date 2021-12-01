@@ -1,14 +1,14 @@
 // @flow
+import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-import { errorCreator } from 'capture-core-utils';
-import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
-import { actionTypes } from '../actions/enrollment.actions';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../metaData';
 import { getCurrentClientValues, getCurrentClientMainData } from '../../../../rules/actionsCreator';
 import type { FieldData } from '../../../../rules/actionsCreator';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
+import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
+import { actionTypes } from '../actions/enrollment.actions';
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',

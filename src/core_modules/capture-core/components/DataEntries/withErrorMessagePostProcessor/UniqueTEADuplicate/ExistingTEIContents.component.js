@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogActions from '@material-ui/core/DialogActions';
+import React from 'react';
 import { Button } from '../../../Buttons';
 import { CardList } from '../../../CardList';
 import type { CardDataElementsInformation } from '../../../Pages/Search/SearchResults/SearchResults.types';

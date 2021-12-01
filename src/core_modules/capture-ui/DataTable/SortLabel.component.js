@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react';
 import classNames from 'classnames';
+import * as React from 'react';
 import { directions, placements } from './sortLabel.const';
 import defaultClasses from './table.module.css';
 
