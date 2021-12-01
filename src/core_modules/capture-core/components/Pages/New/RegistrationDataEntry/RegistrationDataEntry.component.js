@@ -1,18 +1,18 @@
 // @flow
-import { useDispatch } from 'react-redux';
-import React, { type ComponentType, useContext, useCallback } from 'react';
-import { Grid, Paper, withStyles } from '@material-ui/core';
-import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { ResultsPageSizeContext } from '../../shared-contexts';
-import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
-import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
-import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
-import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
-import { scopeTypes } from '../../../../metaData';
-import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
-import { useScopeInfo } from '../../../../hooks/useScopeInfo';
+import { Button } from '@dhis2/ui';
+import { Grid, Paper, withStyles } from '@material-ui/core';
+import React, { type ComponentType, useContext, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { navigateToEnrollmentOverview } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
+import { useScopeInfo } from '../../../../hooks/useScopeInfo';
+import { useScopeTitleText } from '../../../../hooks/useScopeTitleText';
+import { scopeTypes } from '../../../../metaData';
+import { EnrollmentRegistrationEntry, TeiRegistrationEntry, SingleEventRegistrationEntry } from '../../../DataEntries';
+import { useRegistrationFormInfoForSelectedScope } from '../../../DataEntries/common/useRegistrationFormInfoForSelectedScope';
+import { DataEntryWidgetOutput } from '../../../DataEntryWidgetOutput/DataEntryWidgetOutput.container';
+import { TrackedEntityTypeSelector } from '../../../TrackedEntityTypeSelector';
+import { ResultsPageSizeContext } from '../../shared-contexts';
 import type { Props } from './RegistrationDataEntry.types';
 
 const getStyles = ({ typography }) => ({

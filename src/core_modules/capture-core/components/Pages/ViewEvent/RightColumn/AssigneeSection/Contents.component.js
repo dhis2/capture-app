@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { EditMode } from './EditMode.component';
 import { DisplayMode } from './DisplayMode.component';
+import { EditMode } from './EditMode.component';
 
 type Props = {
     onSet: (user: Object) => void,

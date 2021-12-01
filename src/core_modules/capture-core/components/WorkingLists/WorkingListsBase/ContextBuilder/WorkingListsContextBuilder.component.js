@@ -1,7 +1,6 @@
 // @flow
 import React, { useMemo, useRef, useEffect } from 'react';
 import { TemplatesLoader } from '../TemplatesLoader';
-import type { Props } from './workingListsContextBuilder.types';
 import {
     WorkingListsManagerContextProvider,
     WorkingListsListViewConfigContextProvider,
@@ -9,6 +8,7 @@ import {
     WorkingListsListViewUpdaterContextProvider,
     WorkingListsListViewBuilderContextProvider,
 } from './ContextProviders';
+import type { Props } from './workingListsContextBuilder.types';
 
 
 export const WorkingListsContextBuilder = (props: Props) => {

@@ -1,8 +1,8 @@
 // @flow
-import { connect } from 'react-redux';
 import * as React from 'react';
-import { getDataEntryKey } from '../../common/getDataEntryKey';
+import { connect } from 'react-redux';
 import { updateField } from '../../actions/dataEntry.actions';
+import { getDataEntryKey } from '../../common/getDataEntryKey';
 import { getValidationError } from './dataEntryField.utils';
 import type { ValidatorContainer } from './dataEntryField.utils';
 

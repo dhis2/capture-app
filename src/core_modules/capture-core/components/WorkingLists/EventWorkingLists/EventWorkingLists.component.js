@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { EventWorkingListsReduxProvider } from './ReduxProvider';
 import type { Props } from './EventWorkingLists.types';
+import { EventWorkingListsReduxProvider } from './ReduxProvider';
 
 export const EventWorkingLists = ({ storeId, programId, programStageId, orgUnitId }: Props) => (
     <div data-test="event-working-lists">

@@ -1,28 +1,28 @@
 // @flow
-import type { Updaters } from '../../trackerRedux/trackerReducer';
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
+import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 import {
-    actionTypes as editEventDataEntryActionTypes,
-} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
-import { topBarActionsActionTypes } from '../../components/TopBarActions';
-import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
-import { actionTypes as viewEventActionTypes }
-    from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { actionTypes as editEventActionTypes }
-    from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
-import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
-import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
-import {
-    actionTypes as setCurrentSelectionsActionTypes,
-} from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
+    dataEntryActionTypes as newEventDataEntryActionTypes,
+} from '../../components/DataEntries/SingleEventRegistrationEntry';
 import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
 import {
-    dataEntryActionTypes as newEventDataEntryActionTypes,
-} from '../../components/DataEntries/SingleEventRegistrationEntry';
-import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
+    actionTypes as setCurrentSelectionsActionTypes,
+} from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { enrollmentPageActionTypes } from '../../components/Pages/Enrollment/EnrollmentPage.actions';
+import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import { actionTypes as editEventActionTypes }
+    from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
+import { actionTypes as viewEventActionTypes }
+    from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
+import { topBarActionsActionTypes } from '../../components/TopBarActions';
+import {
+    actionTypes as editEventDataEntryActionTypes,
+} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
+import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
+import type { Updaters } from '../../trackerRedux/trackerReducer';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';

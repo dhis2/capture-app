@@ -2,8 +2,8 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-syntax */
-import isFunction from 'd2-utilizr/lib/isFunction';
 import isDefined from 'd2-utilizr/lib/isDefined';
+import isFunction from 'd2-utilizr/lib/isFunction';
 import type { DataElement } from '../DataElement';
 import type { CustomForm } from './CustomForm';
 

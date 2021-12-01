@@ -1,17 +1,12 @@
 // @flow
-import uuid from 'uuid/v4';
-import { batchActions } from 'redux-batched-actions';
-import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { startRunRulesPostUpdateField } from '../../../../DataEntry';
-import { type RenderFoundation } from '../../../../../metaData';
-import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { connect } from 'react-redux';
+import { batchActions } from 'redux-batched-actions';
+import uuid from 'uuid/v4';
 import { withErrorMessageHandler } from '../../../../../HOC/withErrorMessageHandler';
-import typeof { newEventSaveTypes } from './newEventSaveTypes';
-import {
-    makeProgramNameSelector,
-} from './dataEntry.selectors';
-import { DataEntryComponent } from './DataEntry.component';
+import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { type RenderFoundation } from '../../../../../metaData';
+import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import {
     startAsyncUpdateFieldForNewEvent,
     startRunRulesOnUpdateForNewSingleEvent,
@@ -25,6 +20,11 @@ import {
     scrolledToRelationships,
     requestSaveNewEventInStage,
 } from './actions/dataEntry.actions';
+import { DataEntryComponent } from './DataEntry.component';
+import {
+    makeProgramNameSelector,
+} from './dataEntry.selectors';
+import typeof { newEventSaveTypes } from './newEventSaveTypes';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();

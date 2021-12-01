@@ -1,12 +1,12 @@
 // @flow
-import log from 'loglevel';
-import isString from 'd2-utilizr/lib/isString';
 import { errorCreator } from 'capture-core-utils/errorCreator';
+import isString from 'd2-utilizr/lib/isString';
+import log from 'loglevel';
 // TODO: add some kind of errorcreator to d2 before moving
-import type { IConvertInputRulesValue } from '../rulesEngine.types';
-import { mapTypeToInterfaceFnName, typeof typeKeys } from '../constants';
 import { trimQuotes } from '../commonUtils/trimQuotes';
+import { mapTypeToInterfaceFnName, typeof typeKeys } from '../constants';
 
+import type { IConvertInputRulesValue } from '../rulesEngine.types';
 
 export class ValueProcessor {
     static errorMessages = {

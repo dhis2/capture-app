@@ -1,9 +1,9 @@
 // @flow
-import { useSelector } from 'react-redux';
 import React, { useMemo } from 'react';
-import { EventWorkingListsOfflineColumnSetup } from '../ColumnSetup';
-import { useWorkingListsCommonStateManagementOffline } from '../../WorkingListsCommon';
+import { useSelector } from 'react-redux';
 import { getEventProgramThrowIfNotFound } from '../../../../metaData';
+import { useWorkingListsCommonStateManagementOffline } from '../../WorkingListsCommon';
+import { EventWorkingListsOfflineColumnSetup } from '../ColumnSetup';
 import type { Props } from './EventWorkingListsReduxOffline.types';
 
 export const EventWorkingListsReduxOffline = ({ storeId }: Props) => {

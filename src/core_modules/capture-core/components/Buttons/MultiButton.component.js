@@ -1,12 +1,12 @@
 // @flow
 
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import { IconChevronDown24, IconChevronUp24 } from '@dhis2/ui';
-import { ProgressButton } from './ProgressButton.component';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { withStyles } from '@material-ui/core/styles';
+import * as React from 'react';
 import { Button } from './ButtonOld.component';
+import { ProgressButton } from './ProgressButton.component';
 
 const styles = () => ({
     buttonsContainer: {

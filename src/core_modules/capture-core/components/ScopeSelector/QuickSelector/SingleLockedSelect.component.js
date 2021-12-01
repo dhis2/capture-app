@@ -1,15 +1,15 @@
 // @flow
-import { compose } from 'redux';
-import Select from 'react-virtualized-select';
-import React, { type ComponentType, useCallback, useState } from 'react';
-import ClearIcon from '@material-ui/icons/Clear';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
 import i18n from '@dhis2/d2-i18n';
-import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
-import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
+import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import ClearIcon from '@material-ui/icons/Clear';
+import React, { type ComponentType, useCallback, useState } from 'react';
+import Select from 'react-virtualized-select';
+import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
+import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
+import { defaultDialogProps } from '../../Dialogs/ConfirmDialog.constants';
 
 const styles = (theme: Theme) => ({
     paper: {

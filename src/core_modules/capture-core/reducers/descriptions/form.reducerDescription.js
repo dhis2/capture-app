@@ -1,21 +1,21 @@
 // @flow
 import { effectActions } from 'capture-core-utils/rulesEngine';
 import type { OutputEffect } from 'capture-core-utils/rulesEngine';
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes as rulesEffectsActionTypes } from '../../rules/actionsCreator';
-import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
+import { asyncHandlerActionTypes } from '../../components/D2Form';
+import { actionTypes as loaderActionTypes } from '../../components/D2Form/actions/form.actions';
+import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
+import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
+import { getOrgUnitRootsKey } from '../../components/D2Form/field/Components/OrgUnitField/getOrgUnitRootsKey';
+import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
+import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/formBuilder.actions';
+import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
+import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import {
     set as setStoreRoots,
 } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
-import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
-import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/formBuilder.actions';
-import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
-import { getOrgUnitRootsKey } from '../../components/D2Form/field/Components/OrgUnitField/getOrgUnitRootsKey';
-import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
-import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
-import { actionTypes as loaderActionTypes } from '../../components/D2Form/actions/form.actions';
-import { asyncHandlerActionTypes } from '../../components/D2Form';
+import { newPageActionTypes } from '../../components/Pages/New/NewPage.actions';
+import { actionTypes as rulesEffectsActionTypes } from '../../rules/actionsCreator';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 const removeFormData = (state, { payload: { formId } }) => {
     const remainingKeys = Object.keys(state).filter(key => !key.includes(formId));

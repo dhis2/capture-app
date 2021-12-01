@@ -1,6 +1,6 @@
 // @flow
-import React, { Component } from 'react';
-import classNames from 'classnames';
+import i18n from '@dhis2/d2-i18n';
+import { withStyles } from '@material-ui/core/styles';
 import {
     Table,
     Row,
@@ -11,11 +11,11 @@ import {
     sortLabelDirections,
     sorLabelPlacements,
 } from 'capture-ui';
-import { withStyles } from '@material-ui/core/styles';
-import i18n from '@dhis2/d2-i18n';
+import classNames from 'classnames';
 
-import { SortLabelWrapper } from '../../DataTable/SortLabelWrapper.component';
+import React, { Component } from 'react';
 import { dataElementTypes } from '../../../metaData';
+import { SortLabelWrapper } from '../../DataTable/SortLabelWrapper.component';
 
 const styles = theme => ({
     loaderContainer: {

@@ -1,9 +1,9 @@
 // @flow
-import { concatMap } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
-import { actionTypes, loadCoreFailed } from './init.actions';
-import { loadCoreSuccessBatch } from './init.actionBatches';
+import { concatMap } from 'rxjs/operators';
 import { getOrgUnitRootsActions } from './getOrgUnitRootsActions';
+import { loadCoreSuccessBatch } from './init.actionBatches';
+import { actionTypes, loadCoreFailed } from './init.actions';
 
 export const loadCoreEpic = (action$: InputObservable) =>
     action$.pipe(

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { EventWorkingListsDataSourceSetup } from '../DataSourceSetup';
 import { useViewHasTemplateChanges } from '../../WorkingListsCommon';
+import { EventWorkingListsDataSourceSetup } from '../DataSourceSetup';
 import type { Props } from './currentViewChangesResolver.types';
 
 export const CurrentViewChangesResolver = ({

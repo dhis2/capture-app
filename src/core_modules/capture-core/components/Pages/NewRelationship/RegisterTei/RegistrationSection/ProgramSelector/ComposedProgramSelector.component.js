@@ -1,9 +1,10 @@
 // @flow
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { ProgramFilterer } from '../../../../../ProgramFilterer';
-import { NonBundledDhis2Icon } from '../../../../../NonBundledDhis2Icon';
+import { withStyles } from '@material-ui/core/styles';
+import * as React from 'react';
+import type { Program } from '../../../../../../metaData';
+import { TrackerProgram } from '../../../../../../metaData';
+import { LinkButton } from '../../../../../Buttons/LinkButton.component';
 import {
     VirtualizedSelectField,
     withSelectTranslations,
@@ -12,9 +13,8 @@ import {
     withLabel,
     withFilterProps,
 } from '../../../../../FormFields/New';
-import { LinkButton } from '../../../../../Buttons/LinkButton.component';
-import type { Program } from '../../../../../../metaData';
-import { TrackerProgram } from '../../../../../../metaData';
+import { NonBundledDhis2Icon } from '../../../../../NonBundledDhis2Icon';
+import { ProgramFilterer } from '../../../../../ProgramFilterer';
 
 const getStyles = (theme: Theme) => ({
     iconContainer: {

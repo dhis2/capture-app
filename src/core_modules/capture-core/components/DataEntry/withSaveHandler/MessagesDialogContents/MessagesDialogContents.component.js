@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
 import { validationStrategies } from '../../../../metaData/RenderFoundation/renderFoundation.const';
-import { WarningDialog } from './WarningDialog.component';
-import { ErrorDialog } from './ErrorDialog.component';
 import { ErrorAndWarningDialog } from './ErrorAndWarningDialog.component';
+import { ErrorDialog } from './ErrorDialog.component';
+import { WarningDialog } from './WarningDialog.component';
 
 
 type Props = {

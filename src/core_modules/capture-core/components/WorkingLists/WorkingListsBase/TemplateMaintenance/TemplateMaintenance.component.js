@@ -1,12 +1,12 @@
 // @flow
 import React, { useCallback, useImperativeHandle, forwardRef } from 'react';
 import type { SharingSettings } from '../workingListsBase.types';
-import type { Props } from './templateMaintenance.types';
-import { SharingDialog } from './SharingDialog.component';
-import { NewTemplateDialog } from './NewTemplateDialog.component';
-import { ExistingTemplateDialog } from './ExistingTemplateDialog.component';
-import { dialogModes } from './dialogModes';
 import { DeleteConfirmationDialog } from './DeleteConfirmationDialog.component';
+import { dialogModes } from './dialogModes';
+import { ExistingTemplateDialog } from './ExistingTemplateDialog.component';
+import { NewTemplateDialog } from './NewTemplateDialog.component';
+import { SharingDialog } from './SharingDialog.component';
+import type { Props } from './templateMaintenance.types';
 
 const TemplateMaintenancePlain = (props: Props, ref) => {
     const {

@@ -1,6 +1,6 @@
 // @flow
-import { effectMethods } from '../../trackerOffline';
 import { actionCreator } from '../../actions/actions.utils';
+import { effectMethods } from '../../trackerOffline';
 
 export const actionTypes = {
     REQUEST_ADD_NOTE_FOR_ENROLLMENT: 'RequestAddNoteForEnrollment',

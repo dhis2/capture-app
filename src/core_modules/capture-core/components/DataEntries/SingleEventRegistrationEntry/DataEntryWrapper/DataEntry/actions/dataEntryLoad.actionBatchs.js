@@ -1,12 +1,12 @@
 // @flow
-import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
-import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
-import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../../index';
-import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
-import { loadNewDataEntry } from '../../../../../DataEntry/actions/dataEntryLoadNew.actions';
-import { getRulesActionsForEvent } from '../../../../../../rules/actionsCreator';
-import type { RenderFoundation, EventProgram } from '../../../../../../metaData';
 import { actionCreator } from '../../../../../../actions/actions.utils';
+import type { RenderFoundation, EventProgram } from '../../../../../../metaData';
+import { getRulesActionsForEvent } from '../../../../../../rules/actionsCreator';
+import { loadNewDataEntry } from '../../../../../DataEntry/actions/dataEntryLoadNew.actions';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
+import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../../index';
+import { getEventDateValidatorContainers } from '../fieldValidators/eventDate.validatorContainersGetter';
+import { getNoteValidatorContainers } from '../fieldValidators/note.validatorContainersGetter';
 import { actionTypes } from './dataEntry.actions';
 
 const dataEntryId = 'singleEvent';

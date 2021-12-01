@@ -1,12 +1,12 @@
 // @flow
-import * as React from 'react';
-import log from 'loglevel';
-import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
-import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
-import type { Category as CategoryMetadata } from '../../../../metaData';
+import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
+import log from 'loglevel';
+import * as React from 'react';
 import { withLoadingIndicator } from '../../../../HOC/withLoadingIndicator';
+import type { Category as CategoryMetadata } from '../../../../metaData';
+import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
+import { OptionsSelectVirtualized } from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { makeOnSelectSelector } from './categorySelector.selectors';
 
 const VirtualizedSelectLoadingIndicatorHOC =

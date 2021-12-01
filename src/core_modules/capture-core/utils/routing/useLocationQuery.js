@@ -1,6 +1,6 @@
 // @flow
-import { useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const useLocationQuery = (): { [key: string]: string } => {
     const search = useLocation().search;

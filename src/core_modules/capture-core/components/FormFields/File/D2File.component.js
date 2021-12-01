@@ -1,13 +1,13 @@
 // @flow
-import React, { Component } from 'react';
-import { orientations } from 'capture-ui';
-import { withStyles } from '@material-ui/core/styles';
-import { IconCheckmark24, colors, CircularLoader } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
-import { LinkButton } from '../../Buttons/LinkButton.component';
-import { Button } from '../../Buttons/Button.component';
+import { IconCheckmark24, colors, CircularLoader } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
+import { orientations } from 'capture-ui';
+import React, { Component } from 'react';
 import { getApi } from '../../../d2/d2Instance';
+import { Button } from '../../Buttons/Button.component';
+import { LinkButton } from '../../Buttons/LinkButton.component';
+import { inMemoryFileStore } from '../../DataEntry/file/inMemoryFileStore';
 
 type Props = {
     value: ?{ value: string, name: string, url?: ?string },

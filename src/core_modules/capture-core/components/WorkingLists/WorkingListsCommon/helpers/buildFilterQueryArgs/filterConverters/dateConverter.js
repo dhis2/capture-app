@@ -1,7 +1,7 @@
 // @flow
-import { createSelector } from 'reselect';
-import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
+import moment from 'moment';
+import { createSelector } from 'reselect';
 
 import type {
     DateFilterData,

@@ -1,7 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { dataElementTypes } from '../../metaData';
 import { convertClientToList } from '../../converters';
+import { dataElementTypes } from '../../metaData';
 import { convertMainEvent } from './mainEventConverter';
 
 export function convertMainEventClientToList(event: Object) {

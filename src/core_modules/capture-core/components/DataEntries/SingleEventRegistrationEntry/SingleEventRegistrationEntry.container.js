@@ -1,13 +1,13 @@
 // @flow
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { type ComponentType } from 'react';
-import { defaultDialogProps as dialogConfig } from '../../Dialogs/ConfirmDialog.constants';
-import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
-import { withBrowserBackWarning } from '../../../HOC/withBrowserBackWarning';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
-import { makeEventAccessSelector } from './SingleEventRegistrationEntry.selectors';
+import { withBrowserBackWarning } from '../../../HOC/withBrowserBackWarning';
+import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { defaultDialogProps as dialogConfig } from '../../Dialogs/ConfirmDialog.constants';
 import { SingleEventRegistrationEntryComponent } from './SingleEventRegistrationEntry.component';
+import { makeEventAccessSelector } from './SingleEventRegistrationEntry.selectors';
 
 const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
 

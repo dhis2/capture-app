@@ -1,12 +1,12 @@
 // @flow
 import { chunk, pipe } from 'capture-core-utils';
 import { getContext } from '../context';
+import { loadRulesCentricMetadata } from './loadRulesCentricMetadata';
+import { queryProgramsOutline } from './queries';
 import {
     storePrograms,
     storeOrganisationUnitsByProgram,
 } from './quickStoreOperations';
-import { queryProgramsOutline } from './queries';
-import { loadRulesCentricMetadata } from './loadRulesCentricMetadata';
 
 const getCachedProgramsOutline = () => {
     const { storageController, storeNames } = getContext();

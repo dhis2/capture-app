@@ -1,7 +1,7 @@
 // @flow
-import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
-import { DateRangeFieldForForm } from '../../Components';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import { DateRangeFieldForForm } from '../../Components';
+import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
 

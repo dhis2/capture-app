@@ -1,18 +1,18 @@
 // @flow
-import { filter, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { ofType } from 'redux-observable';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
-import {
-    actionTypes as newRelationshipActionTypes,
-} from '../newRelationship.actions';
-import { findModes } from '../findModes';
+import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
+import { ofType } from 'redux-observable';
+import { of } from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
 import {
     getTrackerProgramThrowIfNotFound,
     type TrackerProgram,
 } from '../../../../metaData';
+import { findModes } from '../findModes';
+import {
+    actionTypes as newRelationshipActionTypes,
+} from '../newRelationship.actions';
 import {
     initializeRegisterTei,
     initializeRegisterTeiFailed,

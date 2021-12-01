@@ -1,19 +1,19 @@
 // @flow
-import { compose } from 'redux';
+import i18n from '@dhis2/d2-i18n';
+import { Button } from '@dhis2/ui';
+import withStyles from '@material-ui/core/styles/withStyles';
 import type { ComponentType } from 'react';
 import React, { useEffect, useState } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import { Button } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
-import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
-import { LockedSelector } from '../../LockedSelector';
-import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
-import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { compose } from 'redux';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import { RegistrationDataEntry } from './RegistrationDataEntry';
-import type { ContainerProps, Props } from './NewPage.types';
-import { newPageStatuses } from './NewPage.constants';
+import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
+import { LockedSelector } from '../../LockedSelector';
+import { NoWriteAccessMessage } from '../../NoWriteAccessMessage';
 import { cleanUpDataEntry } from './NewPage.actions';
+import { newPageStatuses } from './NewPage.constants';
+import type { ContainerProps, Props } from './NewPage.types';
+import { RegistrationDataEntry } from './RegistrationDataEntry';
 
 const getStyles = () => ({
     container: {

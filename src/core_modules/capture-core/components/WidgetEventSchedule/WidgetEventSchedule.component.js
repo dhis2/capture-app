@@ -1,14 +1,14 @@
 // @flow
-import React, { type ComponentType } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import { spacersNum, spacers, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { CommentSection } from '../WidgetComment';
+import { spacersNum, spacers, colors } from '@dhis2/ui';
+import withStyles from '@material-ui/core/styles/withStyles';
+import React, { type ComponentType } from 'react';
 import { DataSection } from '../DataSection';
-import type { Props } from './widgetEventSchedule.types';
-import { ScheduleText } from './ScheduleText';
-import { ScheduleDate } from './ScheduleDate';
+import { CommentSection } from '../WidgetComment';
 import { ScheduleButtons } from './ScheduleButtons';
+import { ScheduleDate } from './ScheduleDate';
+import { ScheduleText } from './ScheduleText';
+import type { Props } from './widgetEventSchedule.types';
 
 
 const styles = () => ({

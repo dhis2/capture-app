@@ -1,6 +1,6 @@
 // @flow
-import { typeof filterTypesObject } from '../filters.const';
 import type { FilterData, Options } from '../../../FiltersForTypes';
+import { typeof filterTypesObject } from '../filters.const';
 import type { FilterButtonContextConsumerOutputProps } from './filterButtonContextConsumer.types';
 
 type ExtractedProps = $ReadOnly<{|

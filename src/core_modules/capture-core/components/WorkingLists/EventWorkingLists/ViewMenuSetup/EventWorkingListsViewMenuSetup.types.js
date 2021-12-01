@@ -1,7 +1,7 @@
 // @flow
-import type { EventWorkingListsTemplateSetupOutputProps } from '../TemplateSetup';
-import type { CustomMenuContents } from '../../WorkingListsBase';
 import type { Program } from '../../../../metaData';
+import type { CustomMenuContents } from '../../WorkingListsBase';
+import type { EventWorkingListsTemplateSetupOutputProps } from '../TemplateSetup';
 
 type ExtractedProps = $ReadOnly<{|
     downloadRequest: { url: string, queryParams: ?Object },

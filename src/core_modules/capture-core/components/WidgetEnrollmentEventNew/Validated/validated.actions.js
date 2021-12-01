@@ -1,7 +1,7 @@
 // @flow
-import type { ExternalSaveHandler } from '../common.types';
-import { effectMethods } from '../../../trackerOffline';
 import { actionCreator } from '../../../actions/actions.utils';
+import { effectMethods } from '../../../trackerOffline';
+import type { ExternalSaveHandler } from '../common.types';
 
 export const newEventWidgetActionTypes = {
     RULES_ON_UPDATE_EXECUTE: 'NewEvent.ExecuteRulesOnUpdate',

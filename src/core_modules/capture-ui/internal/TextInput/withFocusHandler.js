@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react';
 import classNames from 'classnames';
+import * as React from 'react';
 import defaultClasses from './textInput.module.css';
 
 type Props = {

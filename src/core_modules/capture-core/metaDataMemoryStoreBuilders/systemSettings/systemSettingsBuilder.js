@@ -1,8 +1,8 @@
 // @flow
-import { mainStores } from '../../storageControllers/stores';
-import { getMainStorageController } from '../../storageControllers';
-import { systemSettingsStore } from '../../metaDataMemoryStores';
 import { SystemSettings } from '../../metaData';
+import { systemSettingsStore } from '../../metaDataMemoryStores';
+import { getMainStorageController } from '../../storageControllers';
+import { mainStores } from '../../storageControllers/stores';
 
 async function getSystemSettingsFromStore() {
     const storageController = getMainStorageController();

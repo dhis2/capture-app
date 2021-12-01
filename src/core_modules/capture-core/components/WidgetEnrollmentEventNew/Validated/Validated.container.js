@@ -1,16 +1,16 @@
 // @flow
-import { useDispatch } from 'react-redux';
-import React, { useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
-import { withSaveHandler } from '../../DataEntry';
-import type { RenderFoundation } from '../../../metaData';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { useOrganisationUnit } from '../../../dataQueries';
-import type { ContainerProps } from './validated.types';
-import { ValidatedComponent } from './Validated.component';
-import { requestSaveEvent } from './validated.actions';
-import { useLifecycle } from './useLifecycle';
+import type { RenderFoundation } from '../../../metaData';
+import { withSaveHandler } from '../../DataEntry';
+import { addEventSaveTypes } from '../../WidgetEnrollmentEventNew/DataEntry/addEventSaveTypes';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
+import { useLifecycle } from './useLifecycle';
+import { requestSaveEvent } from './validated.actions';
+import { ValidatedComponent } from './Validated.component';
+import type { ContainerProps } from './validated.types';
 
 const SaveHandlerHOC = withSaveHandler()(ValidatedComponent);
 export const Validated = ({

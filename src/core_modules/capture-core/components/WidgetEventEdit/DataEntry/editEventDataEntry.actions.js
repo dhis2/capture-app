@@ -1,24 +1,24 @@
 // @flow
-import type { Event } from '../../Pages/Enrollment/EnrollmentPageDefault/types/common.types';
-import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
-import {
-    getDataEntryMeta, validateDataEntryValues, getDataEntryNotes,
-} from '../../DataEntry/actions/dataEntryLoad.utils';
-import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
+import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
+import type { RenderFoundation, Program } from '../../../metaData';
+import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
+import { EventProgram, TrackerProgram } from '../../../metaData/Program';
+import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
+import { effectMethods } from '../../../trackerOffline';
+import { addFormData } from '../../D2Form/actions/form.actions';
 import {
     getConvertGeometryIn,
     convertGeometryOut,
     convertStatusIn,
     convertStatusOut,
 } from '../../DataEntries';
-import { addFormData } from '../../D2Form/actions/form.actions';
-import { effectMethods } from '../../../trackerOffline';
-import { getRulesActionsForEvent } from '../../../rules/actionsCreator';
-import { EventProgram, TrackerProgram } from '../../../metaData/Program';
-import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
-import type { RenderFoundation, Program } from '../../../metaData';
-import { prepareEnrollmentEventsForRulesEngine } from '../../../events/getEnrollmentEvents';
-import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
+import { loadEditDataEntry } from '../../DataEntry/actions/dataEntry.actions';
+import {
+    getDataEntryMeta, validateDataEntryValues, getDataEntryNotes,
+} from '../../DataEntry/actions/dataEntryLoad.utils';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
+import type { Event } from '../../Pages/Enrollment/EnrollmentPageDefault/types/common.types';
 import { getEventDateValidatorContainers } from './fieldValidators/eventDate.validatorContainersGetter';
 
 export const batchActionTypes = {

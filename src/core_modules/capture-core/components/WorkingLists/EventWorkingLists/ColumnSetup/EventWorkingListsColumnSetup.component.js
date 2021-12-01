@@ -1,9 +1,9 @@
 // @flow
 import React, { useCallback } from 'react';
-import type { ColumnsMetaForDataFetching } from '../types';
-import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
-import { useColumns } from '../../WorkingListsCommon';
 import { useDefaultColumnConfig, type EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
+import { useColumns } from '../../WorkingListsCommon';
+import { CurrentViewChangesResolver } from '../CurrentViewChangesResolver';
+import type { ColumnsMetaForDataFetching } from '../types';
 import type { Props } from './eventWorkingListsColumnSetup.types';
 
 const useInjectColumnMetaToLoadList = (defaultColumns, onLoadView) =>

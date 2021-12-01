@@ -1,6 +1,6 @@
 // @flow
-import { connect } from 'react-redux';
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { type OptionGroup } from '../../../../../metaData';
 import { makeGetOptionsVisibility } from './rulesOptionsVisibility.selectors';
 

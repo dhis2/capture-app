@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
-import { IconCheckmark16, MenuItem } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { IconCheckmark16, MenuItem } from '@dhis2/ui';
+import React from 'react';
 import { plainStatus } from '../../constants/status.const';
 import type { Props } from './complete.types';
 

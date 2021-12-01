@@ -1,9 +1,9 @@
 // @flow
-import { takeUntil, filter, concatMap } from 'rxjs/operators';
-import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { TEI_WORKING_LISTS_TYPE } from '../../constants';
+import { from } from 'rxjs';
+import { takeUntil, filter, concatMap } from 'rxjs/operators';
 import { workingListsCommonActionTypes } from '../../../WorkingListsCommon';
+import { TEI_WORKING_LISTS_TYPE } from '../../constants';
 import { initTeiWorkingListsView, updateTeiWorkingListsRecords } from './helpers';
 
 export const initTeiViewEpic = (

@@ -1,11 +1,11 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable class-methods-use-this */
+import { RelationshipType } from '../../../../metaData';
 import type {
     CachedRelationshipType,
     CachedRelationshipConstraint,
 } from '../../../../storageControllers/cache.types';
-import { RelationshipType } from '../../../../metaData';
 
 export class RelationshipTypesFactory {
     static RELATIONSHIP_ENTITY_NAME = 'PROGRAM_STAGE_INSTANCE';

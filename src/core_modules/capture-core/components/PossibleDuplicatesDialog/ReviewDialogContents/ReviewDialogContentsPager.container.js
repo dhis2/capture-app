@@ -1,8 +1,8 @@
 // @flow
-import { connect } from 'react-redux';
 import { type ComponentType } from 'react';
-import type { Props, OwnProps } from './ReviewDialogContentsPager.types';
+import { connect } from 'react-redux';
 import { ReviewDialogContentsPagerComponent } from './ReviewDialogContentsPager.component';
+import type { Props, OwnProps } from './ReviewDialogContentsPager.types';
 
 const mapStateToProps = (state: ReduxState) => ({
     currentPage: state.possibleDuplicates.currentPage,

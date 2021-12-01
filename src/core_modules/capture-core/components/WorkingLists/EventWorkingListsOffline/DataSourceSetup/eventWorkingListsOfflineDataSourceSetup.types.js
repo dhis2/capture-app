@@ -1,7 +1,7 @@
 // @flow
-import type { EventWorkingListsOfflineColumnSetupOutputProps } from '../ColumnSetup';
-import type { EventRecords, EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
 import type { DataSource } from '../../../List';
+import type { EventRecords, EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
+import type { EventWorkingListsOfflineColumnSetupOutputProps } from '../ColumnSetup';
 
 type ExtractedProps = $ReadOnly<{|
     eventRecords?: EventRecords,

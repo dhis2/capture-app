@@ -1,5 +1,5 @@
 // @flow
-import isString from 'd2-utilizr/lib/isString';
+import i18n from '@dhis2/d2-i18n';
 import {
     hasValue,
     isValidEmail,
@@ -15,7 +15,8 @@ import {
     isValidOrgUnit,
     isValidCoordinate,
 } from 'capture-core-utils/validators/form';
-import i18n from '@dhis2/d2-i18n';
+import isString from 'd2-utilizr/lib/isString';
+import { dataElementTypes, type DateDataElement, type DataElement } from '../../../../metaData';
 import {
     isValidAge,
     isValidDate,
@@ -26,7 +27,6 @@ import {
     getDateTimeRangeValidator,
     getTimeRangeValidator,
 } from '../../../../utils/validators/form';
-import { dataElementTypes, type DateDataElement, type DataElement } from '../../../../metaData';
 import { validatorTypes } from './constants';
 
 type Validator = (value: any) => Promise<boolean> | boolean | { valid: boolean, errorMessage?: any};

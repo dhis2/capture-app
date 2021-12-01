@@ -1,6 +1,6 @@
 // @flow
-import moment from 'moment';
 import { parseNumber, parseTime } from 'capture-core-utils/parsers';
+import moment from 'moment';
 import { dataElementTypes } from '../metaData';
 
 function convertTime(d2Value: string) {

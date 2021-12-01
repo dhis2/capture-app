@@ -1,12 +1,12 @@
 // @flow
-import React, { memo } from 'react';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import { withStyles } from '@material-ui/core/styles';
+import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
+import React, { memo } from 'react';
 import type { Column, StickyFilters, FiltersOnly } from '../types';
-import { filterTypesObject } from './filters.const';
-import { FilterRestMenu } from './FilterRestMenu/FilterRestMenu.component';
 import { FilterButton } from './FilterButton';
+import { FilterRestMenu } from './FilterRestMenu/FilterRestMenu.component';
+import { filterTypesObject } from './filters.const';
 
 const getStyles = (theme: Theme) => ({
     filterButtonContainer: {

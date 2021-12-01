@@ -1,6 +1,6 @@
 // @flow
-import type { WidgetData } from '../../../WidgetFeedback/WidgetFeedback.types';
 import type { Message } from '../../../WidgetErrorAndWarning/content/WidgetErrorAndWarningContent.types';
+import type { WidgetData } from '../../../WidgetFeedback/WidgetFeedback.types';
 
 export type HideWidgets = {|
     feedback: boolean,

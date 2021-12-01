@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
-import { getDataEntryKey } from './common/getDataEntryKey';
-import { dataEntryHasChanges } from './common/dataEntryHasChanges';
 import { CancelButtonComponent } from './CancelButton.component';
+import { dataEntryHasChanges } from './common/dataEntryHasChanges';
+import { getDataEntryKey } from './common/getDataEntryKey';
 
 const mapStateToProps = (state: ReduxState, props: {id: string}) => {
     const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;

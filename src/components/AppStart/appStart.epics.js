@@ -1,9 +1,9 @@
 // @flow
-import { map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
-import log from 'loglevel';
-import { loadCore, actionTypes as coreActionTypes, batchActionTypes as coreBatchActionTypes } from 'capture-core/init';
 import { errorCreator } from 'capture-core-utils';
+import { loadCore, actionTypes as coreActionTypes, batchActionTypes as coreBatchActionTypes } from 'capture-core/init';
+import log from 'loglevel';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import { loadAppSuccess, loadAppFailed, appStartActionTypes } from './appStart.actions';
 
 export const triggerLoadCoreEpic = (action$: InputObservable) =>

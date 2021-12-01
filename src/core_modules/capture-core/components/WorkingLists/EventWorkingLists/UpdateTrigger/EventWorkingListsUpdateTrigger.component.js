@@ -1,6 +1,6 @@
 // @flow
-import React, { useCallback } from 'react';
 import moment from 'moment';
+import React, { useCallback } from 'react';
 import { WorkingListsBase } from '../../WorkingListsBase';
 import type { Props } from './eventWorkingListsUpdateTrigger.types';
 

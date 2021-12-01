@@ -1,13 +1,11 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 
-import log from 'loglevel';
-import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
-import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
 import { errorCreator } from 'capture-core-utils';
-import { transformEventNode } from '../transformNodeFuntions/transformNodeFunctions';
-import { buildIcon } from '../../../common/helpers';
-import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';
+import { capitalizeFirstLetter } from 'capture-core-utils/string/capitalizeFirstLetter';
+import { camelCaseUppercaseString } from 'capture-core-utils/string/getCamelCaseFromUppercase';
+import log from 'loglevel';
+import { Section, ProgramStage, RenderFoundation, CustomForm } from '../../../../metaData';
 import type {
     CachedProgramStageDataElement,
     CachedSectionDataElements,
@@ -16,10 +14,12 @@ import type {
     CachedProgramStageDataElementsAsObject,
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
-import { Section, ProgramStage, RenderFoundation, CustomForm } from '../../../../metaData';
-import { RelationshipTypesFactory } from './RelationshipTypesFactory';
-import type { ConstructorInput, SectionSpecs } from './programStageFactory.types';
+import { isNonEmptyArray } from '../../../../utils/isNonEmptyArray';
+import { buildIcon } from '../../../common/helpers';
+import { transformEventNode } from '../transformNodeFuntions/transformNodeFunctions';
 import { DataElementFactory } from './DataElementFactory';
+import type { ConstructorInput, SectionSpecs } from './programStageFactory.types';
+import { RelationshipTypesFactory } from './RelationshipTypesFactory';
 
 export class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';

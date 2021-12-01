@@ -1,8 +1,8 @@
 // @flow
 
-import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
 import { spacers, spacersNum, colors } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import React, { type ComponentType } from 'react';
 import type { FilteredKeyValue, FilteredText, ContentType, WidgetData } from '../WidgetFeedback.types';
 
 const styles = {

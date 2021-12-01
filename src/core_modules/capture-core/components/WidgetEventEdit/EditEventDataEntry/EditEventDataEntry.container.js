@@ -1,27 +1,28 @@
 // @flow
-import uuid from 'uuid/v4';
-import { batchActions } from 'redux-batched-actions';
 import { connect } from 'react-redux';
+import { batchActions } from 'redux-batched-actions';
+import uuid from 'uuid/v4';
+import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
+import { type RenderFoundation } from '../../../metaData';
+
+import {
+    setCurrentDataEntry, startRunRulesPostUpdateField,
+} from '../../DataEntry/actions/dataEntry.actions';
+
+
+import {
+    viewEventIds,
+} from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
 import {
     startAsyncUpdateFieldForEditEvent,
     startRunRulesOnUpdateForEditSingleEvent,
     batchActionTypes,
 } from '../DataEntry/editEventDataEntry.actions';
 import {
-    viewEventIds,
-} from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
-import {
-    setCurrentDataEntry, startRunRulesPostUpdateField,
-} from '../../DataEntry/actions/dataEntry.actions';
-import { type RenderFoundation } from '../../../metaData';
-import { withLoadingIndicator } from '../../../HOC/withLoadingIndicator';
-
-
-import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
-import {
     requestSaveEditEventDataEntry,
     cancelEditEventDataEntry,
 } from './editEventDataEntry.actions';
+import { EditEventDataEntryComponent } from './EditEventDataEntry.component';
 
 const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};

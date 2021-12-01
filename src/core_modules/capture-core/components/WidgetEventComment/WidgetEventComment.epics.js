@@ -1,20 +1,20 @@
 // @flow
-import { map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
-import { batchActions } from 'redux-batched-actions';
-import moment from 'moment';
 import uuid from 'd2-utilizr/lib/uuid';
-import {
-    addEventNote,
-    removeEventNote,
-} from '../Pages/ViewEvent/ViewEventComponent/editEvent.actions';
+import moment from 'moment';
+import { batchActions } from 'redux-batched-actions';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
+import { convertValue as convertListValue } from '../../converters/clientToList';
+import { getCurrentUser } from '../../d2/d2Instance';
+import { dataElementTypes } from '../../metaData';
 import {
     addNote,
     removeNote,
 } from '../DataEntry/actions/dataEntry.actions';
-import { dataElementTypes } from '../../metaData';
-import { getCurrentUser } from '../../d2/d2Instance';
-import { convertValue as convertListValue } from '../../converters/clientToList';
+import {
+    addEventNote,
+    removeEventNote,
+} from '../Pages/ViewEvent/ViewEventComponent/editEvent.actions';
 import { actionTypes, batchActionTypes, startAddNoteForEvent } from './WidgetEventComment.actions';
 
 

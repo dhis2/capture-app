@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import { EventWorkingListsInitRunningMutationsHandler } from '../RunningMutationsHandler';
-import { EventWorkingListsInitHeader } from '../Header';
 import { EventWorkingListsOffline } from '../../../../WorkingLists/EventWorkingListsOffline';
+import { EventWorkingListsInitHeader } from '../Header';
+import { EventWorkingListsInitRunningMutationsHandler } from '../RunningMutationsHandler';
 import type { Props } from './eventWorkingListsInitConnectionStatusResolver.types';
 
 export const EventWorkingListsInitConnectionStatusResolver = ({ isOnline, storeId, ...passOnProps }: Props) => (

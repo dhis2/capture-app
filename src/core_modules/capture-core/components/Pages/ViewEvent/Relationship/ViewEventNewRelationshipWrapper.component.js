@@ -1,11 +1,11 @@
 // @flow
-import * as React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Paper from '@material-ui/core/Paper';
 import i18n from '@dhis2/d2-i18n';
-import { NewRelationship } from '../../NewRelationship/NewRelationship.container';
-import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
+import Paper from '@material-ui/core/Paper';
+import withStyles from '@material-ui/core/styles/withStyles';
+import * as React from 'react';
 import { LinkButton } from '../../../Buttons/LinkButton.component';
+import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
+import { NewRelationship } from '../../NewRelationship/NewRelationship.container';
 
 
 const getStyles = theme => ({

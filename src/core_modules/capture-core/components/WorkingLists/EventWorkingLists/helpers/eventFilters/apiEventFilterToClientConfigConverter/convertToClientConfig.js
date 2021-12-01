@@ -1,8 +1,19 @@
 // @flow
-import moment from 'moment';
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration';
+import log from 'loglevel';
+import moment from 'moment';
+import { getApi } from '../../../../../../d2/d2Instance';
+import {
+    filterTypesObject,
+    type AssigneeFilterData,
+    type DateFilterData,
+    type BooleanFilterData,
+    type TrueOnlyFilterData,
+    type TextFilterData,
+    type NumericFilterData,
+} from '../../../../WorkingListsBase';
+import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
+
 import type {
     ApiDataFilter,
     ApiDataFilterNumeric,
@@ -13,18 +24,7 @@ import type {
     ColumnsMetaForDataFetching,
     ClientConfig,
 } from '../../../types';
-import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
-import {
-    filterTypesObject,
-    type AssigneeFilterData,
-    type DateFilterData,
-    type BooleanFilterData,
-    type TrueOnlyFilterData,
-    type TextFilterData,
-    type NumericFilterData,
-} from '../../../../WorkingListsBase';
-import { getApi } from '../../../../../../d2/d2Instance';
-
+import { getCustomColumnsConfiguration } from '../getCustomColumnsConfiguration';
 import { getOptionSetFilter } from './optionSet';
 
 const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {

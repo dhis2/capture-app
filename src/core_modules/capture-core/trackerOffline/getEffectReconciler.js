@@ -1,6 +1,6 @@
 // @flow
-import type { OfflineEffect } from './trackerOffline.types';
 import { effectMethods } from './trackerOffline.const';
+import type { OfflineEffect } from './trackerOffline.types';
 
 export const getEffectReconciler = (() => {
     const mutateTypeForMethods = {

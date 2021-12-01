@@ -1,10 +1,10 @@
 // @flow
 
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { actionTypes as editEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
-import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
+import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
+import { actionTypes as editEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 export const eventsDesc = createReducerDescription({
     [enrollmentActionTypes.ENROLLMENT_LOADED]: (state, action) => {

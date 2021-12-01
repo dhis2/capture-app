@@ -1,12 +1,12 @@
 // @flow
-import * as React from 'react';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import { withStyles } from '@material-ui/core';
-import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { Button } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import * as React from 'react';
 
 type Props = {
     errors: Array<{key: string, name: ?string, error: string }>,

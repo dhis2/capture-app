@@ -1,6 +1,6 @@
 // @flow
-import { dataElementTypes } from '../../../metaData';
 import { convertValue } from '../../../converters/clientToServer';
+import { dataElementTypes } from '../../../metaData';
 
 const mapEventClientKeyToServerKey = {
     eventId: 'event',

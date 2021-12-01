@@ -1,10 +1,10 @@
 // @flow
-import { compose } from 'redux';
-import React, { type ComponentType } from 'react';
 import { withStyles } from '@material-ui/core';
+import React, { type ComponentType } from 'react';
+import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
-import type { Props } from './stages.types';
 import { Stage } from './Stage';
+import type { Props } from './stages.types';
 
 const styles = {};
 export const StagesPlain = ({ stages, events, classes, ...passOnProps }: Props) => (

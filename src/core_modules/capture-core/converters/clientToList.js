@@ -1,10 +1,10 @@
 // @flow
-import React from 'react';
-import moment from 'moment';
 import { Tag } from '@dhis2/ui';
-import { convertMomentToDateFormatString } from '../utils/converters/date';
-import { dataElementTypes, type DataElement } from '../metaData';
+import moment from 'moment';
+import React from 'react';
 import { MinimalCoordinates } from '../components/MinimalCoordinates';
+import { dataElementTypes, type DataElement } from '../metaData';
+import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
 
 function convertDateForListDisplay(rawValue: string): string {

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import type { BooleanFilterData } from './types';
 import { BooleanFilter } from './BooleanFilter.component';
+import type { BooleanFilterData } from './types';
 
 type Props = {
     filter: ?BooleanFilterData,

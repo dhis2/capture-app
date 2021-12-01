@@ -1,17 +1,17 @@
 // @flow
-import { map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
-import moment from 'moment';
 import uuid from 'd2-utilizr/lib/uuid';
-import {
-    newEventWidgetDataEntryActionTypes,
-} from '../actions/dataEntry.actions';
+import moment from 'moment';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
+import { convertValue as convertListValue } from '../../../../converters/clientToList';
+import { getCurrentUser } from '../../../../d2/d2Instance';
+import { dataElementTypes } from '../../../../metaData';
 import {
     addNote,
 } from '../../../DataEntry/actions/dataEntry.actions';
-import { dataElementTypes } from '../../../../metaData';
-import { getCurrentUser } from '../../../../d2/d2Instance';
-import { convertValue as convertListValue } from '../../../../converters/clientToList';
+import {
+    newEventWidgetDataEntryActionTypes,
+} from '../actions/dataEntry.actions';
 
 
 export const addNoteForNewEnrollmentEventEpic = (action$: InputObservable) =>

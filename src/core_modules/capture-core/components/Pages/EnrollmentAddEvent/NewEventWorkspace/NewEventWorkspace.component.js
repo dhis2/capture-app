@@ -1,18 +1,18 @@
 // @flow
-import { useSelector } from 'react-redux';
-import React, { type ComponentType, useState, useRef, useMemo } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import { TabBar, Tab, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { addEnrollmentEventPageActionTypes } from '../enrollmentAddEventPage.actions';
-import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
-import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
-import { Widget } from '../../../Widget';
-import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
+import { TabBar, Tab, spacersNum } from '@dhis2/ui';
+import withStyles from '@material-ui/core/styles/withStyles';
+import React, { type ComponentType, useState, useRef, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { getProgramAndStageForProgram } from '../../../../metaData';
-import { WidgetStageHeader } from './WidgetStageHeader';
-import type { Props } from './newEventWorkspace.types';
+import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
+import { Widget } from '../../../Widget';
+import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
+import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
+import { addEnrollmentEventPageActionTypes } from '../enrollmentAddEventPage.actions';
 import { tabMode } from './newEventWorkspace.constants';
+import type { Props } from './newEventWorkspace.types';
+import { WidgetStageHeader } from './WidgetStageHeader';
 
 const styles = () => ({
     innerWrapper: {

@@ -1,10 +1,10 @@
 // @flow
-import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
-import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
-import { type RenderFoundation } from '../../../metaData';
-import { convertMainEventClientToServer } from '../../../events/mainConverters';
+import moment from 'moment';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
+import { convertMainEventClientToServer } from '../../../events/mainConverters';
+import { type RenderFoundation } from '../../../metaData';
+import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
 
 export const getAddEventEnrollmentServerData = ({
     formFoundation,

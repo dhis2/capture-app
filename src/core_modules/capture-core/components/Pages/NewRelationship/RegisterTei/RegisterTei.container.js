@@ -1,9 +1,9 @@
 // @flow
-import { useSelector } from 'react-redux';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
-import type { OwnProps } from './RegisterTei.types';
 import { RegisterTeiComponent } from './RegisterTei.component';
+import type { OwnProps } from './RegisterTei.types';
 
 const useNewRelationshipScopeId = (): string =>
     useSelector(

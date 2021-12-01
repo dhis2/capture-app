@@ -1,6 +1,6 @@
 // @flow
-import type { WidgetNonCollapsibleProps } from './widgetNonCollapsible.types';
 import type { WidgetCollapsibleProps } from './widgetCollapsible.types';
+import type { WidgetNonCollapsibleProps } from './widgetNonCollapsible.types';
 
 type CollapsibleProps = {|
     ...WidgetCollapsibleProps,

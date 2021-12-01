@@ -1,12 +1,12 @@
 // @flow
-import { connect } from 'react-redux';
-import * as React from 'react';
 import { parse, type QueryParameters } from 'query-string';
-import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
-import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { updateSelectionsFromUrl } from '../LockedSelector';
-import { LoadingMaskForPage } from '../LoadingMasks';
+import * as React from 'react';
+import { connect } from 'react-redux';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
+import { LoadingMaskForPage } from '../LoadingMasks';
+import { updateSelectionsFromUrl } from '../LockedSelector';
+import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
 import { paramsSelector } from './appSync.selectors';
 
 type Props = {

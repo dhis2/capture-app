@@ -1,5 +1,5 @@
-import { createReducerDescription } from '../../trackerRedux';
 import { actionTypes as dataStoreActionTypes } from '../../components/DataStore/DataStore.types';
+import { createReducerDescription } from '../../trackerRedux';
 
 
 export const dataStoreDesc = createReducerDescription({

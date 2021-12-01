@@ -1,9 +1,9 @@
 
 // @flow
-import React from 'react';
-import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
-import { FeedbackBar } from 'capture-core/components/FeedbackBar';
 import { withStyles } from '@material-ui/core/styles';
+import { FeedbackBar } from 'capture-core/components/FeedbackBar';
+import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
+import React from 'react';
 import { AppPagesLoader } from './AppPagesLoader.component';
 
 const getStyles = theme => ({

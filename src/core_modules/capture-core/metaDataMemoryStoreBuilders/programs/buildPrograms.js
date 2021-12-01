@@ -1,7 +1,9 @@
 // @flow
-import { typeof StorageController } from 'capture-core-utils/storage';
 import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/rulesEngine';
-import { userStores as stores } from '../../storageControllers/stores';
+import { typeof StorageController } from 'capture-core-utils/storage';
+import type { TrackedEntityType, EventProgram, TrackerProgram } from '../../metaData';
+import { programCollection } from '../../metaDataMemoryStores';
+import { getUserStorageController } from '../../storageControllers';
 import type {
     CachedProgram,
     CachedOptionSet,
@@ -10,13 +12,11 @@ import type {
     CachedTrackedEntityType,
     CachedCategory,
 } from '../../storageControllers/cache.types';
-import { getUserStorageController } from '../../storageControllers';
-import { programCollection } from '../../metaDataMemoryStores';
-import type { TrackedEntityType, EventProgram, TrackerProgram } from '../../metaData';
+import { userStores as stores } from '../../storageControllers/stores';
+import type { BuildProgramsInput } from './buildPrograms.types';
+import { ProgramFactory } from './factory';
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 import { getRulesAndVariablesFromProgramIndicators } from './getRulesAndVariablesFromIndicators';
-import { ProgramFactory } from './factory';
-import type { BuildProgramsInput } from './buildPrograms.types';
 
 
 function getPrograms(storageController: StorageController, storeName: string): Promise<Array<Object>> {

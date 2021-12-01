@@ -1,11 +1,10 @@
 // @flow
-import { concatMap, filter, takeUntil } from 'rxjs/operators';
-import { from } from 'rxjs';
-import { ofType } from 'redux-observable';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
-import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
+import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
+import { ofType } from 'redux-observable';
+import { from } from 'rxjs';
+import { concatMap, filter, takeUntil } from 'rxjs/operators';
 import {
     workingListsCommonActionTypes,
     fetchTemplatesSuccess,
@@ -17,6 +16,7 @@ import {
     deleteTemplateSuccess,
     deleteTemplateError,
 } from '../../WorkingListsCommon';
+import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 import { getTemplates } from './getTemplates';
 
 export const retrieveTemplatesEpic = (

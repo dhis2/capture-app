@@ -1,7 +1,7 @@
 // @flow
-import { map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
 import { OFFLINE_STATUS_CHANGED } from '@redux-offline/redux-offline/lib/constants';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import { networkStatusChange } from './NetworkStatusBadge.actions';
 
 

@@ -1,14 +1,14 @@
 // @flow
-import { map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
+import { isSelectionsEqual } from '../../../../../App/isSelectionsEqual';
 import {
     actionTypes as newEventDataEntryActionTypes,
     cancelNewEventNoWorkingListUpdateNeeded,
     cancelNewEventUpdateWorkingList,
     cancelNewEventInitializeWorkingLists,
 } from '../actions/dataEntry.actions';
-import { isSelectionsEqual } from '../../../../../App/isSelectionsEqual';
 
 
 export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) =>

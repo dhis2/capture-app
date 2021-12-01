@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
-import { makeProgramOptionsSelector } from './searchProgramSelector.selectors';
-import { SearchProgramSelectorComponent } from './SearchProgramSelector.component';
 import { startSetProgram } from './searchProgramSelector.actions';
+import { SearchProgramSelectorComponent } from './SearchProgramSelector.component';
+import { makeProgramOptionsSelector } from './searchProgramSelector.selectors';
 
 const makeMapStateToProps = () => {
     const getProgramOptions = makeProgramOptionsSelector();

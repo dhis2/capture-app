@@ -1,17 +1,17 @@
 // @flow
 
-import React, { Component } from 'react';
-import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { colors } from '@dhis2/ui';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import React, { Component } from 'react';
 
-import { SingleLockedSelect } from './SingleLockedSelect.component';
-import { ProgramSelector } from './Program/ProgramSelector.component';
-import { OrgUnitSelector } from './OrgUnitSelector.component';
 import { ActionButtons } from './ActionButtons.component';
+import { OrgUnitSelector } from './OrgUnitSelector.component';
+import { ProgramSelector } from './Program/ProgramSelector.component';
+import { SingleLockedSelect } from './SingleLockedSelect.component';
 
 const styles = ({ palette }) => ({
     paper: {

@@ -1,8 +1,8 @@
 // @flow
 import type { Node } from 'react';
-import type { SaveForEnrollmentAndTeiRegistration } from '../../../../../DataEntries';
-import type { RenderCustomCardActions } from '../../../../../CardList';
 import type { Enrollment } from '../../../../../../metaData';
+import type { RenderCustomCardActions } from '../../../../../CardList';
+import type { SaveForEnrollmentAndTeiRegistration } from '../../../../../DataEntries';
 
 export type Props = {|
     theme: Theme,

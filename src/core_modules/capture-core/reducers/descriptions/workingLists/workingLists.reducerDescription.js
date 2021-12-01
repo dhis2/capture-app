@@ -1,9 +1,9 @@
 // @flow
 import moment from 'moment';
-import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
-import { workingListsCommonActionTypes } from '../../../components/WorkingLists/WorkingListsCommon';
-import { eventWorkingListsActionTypes } from '../../../components/WorkingLists/EventWorkingLists';
 import { recentlyAddedEventsActionTypes } from '../../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList';
+import { eventWorkingListsActionTypes } from '../../../components/WorkingLists/EventWorkingLists';
+import { workingListsCommonActionTypes } from '../../../components/WorkingLists/WorkingListsCommon';
+import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
 
 export const workingListsListRecordsDesc = createReducerDescription({
     [workingListsCommonActionTypes.LIST_VIEW_INIT_SUCCESS]: (state, { payload: { storeId, recordContainers } }) => ({

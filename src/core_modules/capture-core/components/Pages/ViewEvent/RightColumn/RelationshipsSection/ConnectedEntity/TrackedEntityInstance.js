@@ -1,7 +1,7 @@
 // @flow
-import React, { useCallback } from 'react';
-import { buildUrl } from 'capture-core-utils';
 import { useConfig } from '@dhis2/app-runtime';
+import { buildUrl } from 'capture-core-utils';
+import React, { useCallback } from 'react';
 import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
 
 type Props = {

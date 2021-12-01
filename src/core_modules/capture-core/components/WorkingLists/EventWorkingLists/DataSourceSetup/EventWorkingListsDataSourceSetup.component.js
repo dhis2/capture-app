@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { EventWorkingListsTemplateSetup } from '../TemplateSetup';
 import { useDataSource } from '../../WorkingListsCommon';
+import { EventWorkingListsTemplateSetup } from '../TemplateSetup';
 import type { Props } from './eventWorkingListsDataSourceSetup.types';
 
 export const EventWorkingListsDataSourceSetup = ({

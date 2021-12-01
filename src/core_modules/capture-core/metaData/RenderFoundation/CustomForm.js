@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import { parseHtml } from 'react-html-parser-ultimate';
 import { type Node, type Element } from 'react';
+import { parseHtml } from 'react-html-parser-ultimate';
 
 type Data = {
     scripts: Array<string>,

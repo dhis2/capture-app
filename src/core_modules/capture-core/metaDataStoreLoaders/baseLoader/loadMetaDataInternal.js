@@ -1,9 +1,9 @@
 // @flow
-import { loadTrackedEntityTypes } from '../trackedEntityTypes';
-import { loadTrackedEntityAttributes } from '../trackedEntityAttributes';
-import { loadPrograms } from '../programs';
-import { loadOptionSets } from '../optionSets';
 import { loadCategories } from '../categories';
+import { loadOptionSets } from '../optionSets';
+import { loadPrograms } from '../programs';
+import { loadTrackedEntityAttributes } from '../trackedEntityAttributes';
+import { loadTrackedEntityTypes } from '../trackedEntityTypes';
 import {
     storeConstants,
     storeOrgUnitLevels,

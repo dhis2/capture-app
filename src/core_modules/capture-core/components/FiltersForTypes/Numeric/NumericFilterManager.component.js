@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import type { NumericFilterData } from './types';
 import { NumericFilter } from './NumericFilter.component';
+import type { NumericFilterData } from './types';
 
 type Props = {
     filter: ?NumericFilterData,

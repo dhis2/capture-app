@@ -1,7 +1,7 @@
 // @flow
 import React, { useMemo } from 'react';
-import type { Props } from './nonBundledIcon.types';
 import classes from './nonBundledIcon.module.css';
+import type { Props } from './nonBundledIcon.types';
 
 export const NonBundledIcon = ({
     source,

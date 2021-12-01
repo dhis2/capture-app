@@ -1,18 +1,18 @@
 // @flow
-import { Manager, Popper, Reference } from 'react-popper';
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
-import Grow from '@material-ui/core/Grow';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { IconChevronDown16, IconChevronUp16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { IconChevronDown16, IconChevronUp16 } from '@dhis2/ui';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
 
-import type { Column } from '../../types';
+import { Manager, Popper, Reference } from 'react-popper';
 import { Button } from '../../../Buttons/Button.component';
 
+import type { Column } from '../../types';
 
 const getStyles = (theme: Theme) => ({
     icon: {

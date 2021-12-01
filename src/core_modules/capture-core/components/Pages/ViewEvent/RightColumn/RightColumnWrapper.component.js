@@ -1,14 +1,14 @@
 
 // @flow
-import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { WarningsSection } from './WarningsSection/WarningsSection.container';
-import { RelationshipsSection } from './RelationshipsSection/RelationshipsSection.container';
-import { NotesSection } from './NotesSection/NotesSection.container';
-import { IndicatorsSection } from './IndicatorsSection/IndicatorsSection.container';
-import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container';
-import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
+import * as React from 'react';
 import { AssigneeSection } from './AssigneeSection/AssigneeSection.container';
+import { ErrorsSection } from './ErrorsSection/ErrorsSection.container';
+import { FeedbacksSection } from './FeedbacksSection/FeedbacksSection.container';
+import { IndicatorsSection } from './IndicatorsSection/IndicatorsSection.container';
+import { NotesSection } from './NotesSection/NotesSection.container';
+import { RelationshipsSection } from './RelationshipsSection/RelationshipsSection.container';
+import { WarningsSection } from './WarningsSection/WarningsSection.container';
 
 type Props = {
     classes: {

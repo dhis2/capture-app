@@ -1,4 +1,7 @@
 // @flow
+import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable';
+import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes } from '../../constants';
+
 import type {
     ProgramRuleEffect,
     DataElement,
@@ -14,9 +17,6 @@ import type {
     CompulsoryEffect,
     OutputEffects,
 } from '../../rulesEngine.types';
-import { mapTypeToInterfaceFnName, effectActions, idNames, rulesEngineEffectTargetDataTypes } from '../../constants';
-import { normalizeRuleVariable } from '../../commonUtils/normalizeRuleVariable';
-
 
 const sanitiseFalsy = (value) => {
     if (value) {

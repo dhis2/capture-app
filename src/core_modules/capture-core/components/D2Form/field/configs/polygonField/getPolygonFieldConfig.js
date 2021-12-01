@@ -1,8 +1,8 @@
 // @flow
-import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
-import { PolygonFieldForForm } from '../../Components';
-import { orientations } from '../../../../FormFields/New';
 import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import { orientations } from '../../../../FormFields/New';
+import { PolygonFieldForForm } from '../../Components';
+import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 
 export const getPolygonFieldConfig = (metaData: MetaDataElement, options: Object) => {
     const props = createProps({

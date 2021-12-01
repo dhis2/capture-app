@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import { AssigneeSectionComponent } from './AssigneeSection.component';
 import { setAssignee } from './assigneeSection.actions';
+import { AssigneeSectionComponent } from './AssigneeSection.component';
 
 const mapStateToProps = (state: ReduxState) => {
     const assigneeSection = state.viewEventPage.assigneeSection || {};

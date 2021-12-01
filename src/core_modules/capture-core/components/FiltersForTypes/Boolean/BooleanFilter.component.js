@@ -1,9 +1,9 @@
 // @flow
-import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import type { UpdatableFilterContent } from '../types';
-import { orientations } from '../../FormFields/Options/SelectBoxes'; // TODO: Refactor
+import React, { Component } from 'react';
 import { D2TrueFalse } from '../../FormFields/Generic/D2TrueFalse.component';
+import { orientations } from '../../FormFields/Options/SelectBoxes'; // TODO: Refactor
+import type { UpdatableFilterContent } from '../types';
 import { getBooleanFilterData } from './booleanFilterDataGetter';
 
 const getStyles = (theme: Theme) => ({

@@ -1,6 +1,6 @@
 // @flow
-import { typeof userStores } from '../../storageControllers/stores';
 import { getUserStorageController } from '../../storageControllers';
+import { typeof userStores } from '../../storageControllers/stores';
 
 function arrayToMap(array: Array<Object>) {
     return array.reduce((accMap, item) => {

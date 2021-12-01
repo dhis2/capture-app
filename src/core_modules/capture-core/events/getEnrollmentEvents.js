@@ -1,11 +1,11 @@
 // @flow
-import log from 'loglevel';
-import type { EventsData, EventData } from 'capture-core-utils/rulesEngine/rulesEngine.types';
 import { errorCreator } from 'capture-core-utils';
-import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
-import { dataElementTypes } from '../metaData';
-import { getApi } from '../d2/d2Instance';
+import type { EventsData, EventData } from 'capture-core-utils/rulesEngine/rulesEngine.types';
+import log from 'loglevel';
 import { convertValue } from '../converters/serverToClient';
+import { getApi } from '../d2/d2Instance';
+import { dataElementTypes } from '../metaData';
+import { programCollection } from '../metaDataMemoryStores/programCollection/programCollection';
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',

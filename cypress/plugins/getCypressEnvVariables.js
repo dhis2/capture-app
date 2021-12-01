@@ -2,8 +2,8 @@
 Retrieves Cypress environment variables from .env.cypress / .env.cypress.local
 */
 
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
 const dotenv = require('dotenv');
 
 module.exports = function getCypressEnvVariables(config) {

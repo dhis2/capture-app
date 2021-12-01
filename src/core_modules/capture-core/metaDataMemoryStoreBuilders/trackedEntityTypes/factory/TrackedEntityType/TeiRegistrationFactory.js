@@ -1,12 +1,9 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
-import type {
-    CachedTrackedEntityType,
-    CachedTrackedEntityAttribute,
-} from '../../../../storageControllers/cache.types';
+import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
+import { getApi } from '../../../../d2/d2Instance';
 import {
     RenderFoundation,
     Section,
@@ -15,9 +12,12 @@ import {
     DataElement,
 } from '../../../../metaData';
 import type { SearchGroup, TrackedEntityType } from '../../../../metaData';
-import { getApi } from '../../../../d2/d2Instance';
-import type { ConstructorInput } from './teiRegistrationFactory.types';
+import type {
+    CachedTrackedEntityType,
+    CachedTrackedEntityAttribute,
+} from '../../../../storageControllers/cache.types';
 import { DataElementFactory } from './DataElementFactory';
+import type { ConstructorInput } from './teiRegistrationFactory.types';
 
 export class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {

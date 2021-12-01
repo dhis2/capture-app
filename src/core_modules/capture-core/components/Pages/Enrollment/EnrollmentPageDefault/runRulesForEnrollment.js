@@ -1,8 +1,8 @@
 // @flow
-import log from 'loglevel';
-import { runRulesForEnrollmentPage } from 'capture-core/rules/actionsCreator/runRulesForEnrollmentPage';
-import { convertValue } from 'capture-core/converters/serverToClient';
 import { errorCreator } from 'capture-core-utils';
+import { convertValue } from 'capture-core/converters/serverToClient';
+import { runRulesForEnrollmentPage } from 'capture-core/rules/actionsCreator/runRulesForEnrollmentPage';
+import log from 'loglevel';
 import { dataElementTypes, TrackerProgram } from '../../../../metaData';
 import type { InputRuleEnrollmentData } from './types/common.types';
 

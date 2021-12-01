@@ -1,22 +1,22 @@
 // @flow
-// $FlowFixMe
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import React, { useEffect, useMemo } from 'react';
 import type { ComponentType } from 'react';
-import { buildEnrollmentsAsOptions, useSetEnrollmentId } from '../../ScopeSelector';
-import { scopeTypes } from '../../../metaData/helpers/constants';
-import { getScopeInfo } from '../../../metaData';
+// $FlowFixMe
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { useEnrollmentInfo } from './useEnrollmentInfo';
-import type { EnrollmentPageStatus } from './EnrollmentPage.types';
-import { enrollmentPageStatuses } from './EnrollmentPage.constants';
-import { EnrollmentPageComponent } from './EnrollmentPage.component';
+import { getScopeInfo } from '../../../metaData';
+import { scopeTypes } from '../../../metaData/helpers/constants';
+import { buildEnrollmentsAsOptions, useSetEnrollmentId } from '../../ScopeSelector';
 import {
     cleanEnrollmentPage,
     fetchEnrollmentPageInformation,
     showDefaultViewOnEnrollmentPage,
     showMissingMessageViewOnEnrollmentPage,
 } from './EnrollmentPage.actions';
+import { EnrollmentPageComponent } from './EnrollmentPage.component';
+import { enrollmentPageStatuses } from './EnrollmentPage.constants';
+import type { EnrollmentPageStatus } from './EnrollmentPage.types';
+import { useEnrollmentInfo } from './useEnrollmentInfo';
 
 const useComponentLifecycle = () => {
     const dispatch = useDispatch();

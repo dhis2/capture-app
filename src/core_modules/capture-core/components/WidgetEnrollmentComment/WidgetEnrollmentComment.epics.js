@@ -1,9 +1,9 @@
 // @flow
-import { map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
-import { batchActions } from 'redux-batched-actions';
-import moment from 'moment';
 import uuid from 'd2-utilizr/lib/uuid';
+import moment from 'moment';
+import { batchActions } from 'redux-batched-actions';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import { getCurrentUser } from '../../d2/d2Instance';
 import { actionTypes, batchActionTypes, startAddNoteForEnrollment, addEnrollmentNote }
     from './WidgetEnrollmentComment.actions';

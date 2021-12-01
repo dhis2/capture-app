@@ -1,12 +1,12 @@
 // @flow
-import { catchError, flatMap, map, startWith } from 'rxjs/operators';
-import { concat, from, of } from 'rxjs';
-import { ofType } from 'redux-observable';
-import moment from 'moment';
-import { push } from 'connected-react-router';
 import i18n from '@dhis2/d2-i18n';
-import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
+import { push } from 'connected-react-router';
+import moment from 'moment';
+import { ofType } from 'redux-observable';
+import { concat, from, of } from 'rxjs';
+import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { buildUrlQueryString } from '../../../utils/routing';
+import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
 import {
     enrollmentPageActionTypes,
     showErrorViewOnEnrollmentPage,

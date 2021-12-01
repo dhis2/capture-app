@@ -1,14 +1,14 @@
 // @flow
-import uuid from 'uuid/v4';
-import { batchActions } from 'redux-batched-actions';
 import type {
     Enrollment,
     TEIValues,
 } from 'capture-core-utils/rulesEngine';
-import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
-import { startRunRulesPostUpdateField } from '../../../DataEntry';
-import { getRulesActionsForTEI } from '../../../../rules/actionsCreator';
+import { batchActions } from 'redux-batched-actions';
+import uuid from 'uuid/v4';
 import type { TrackerProgram, RenderFoundation } from '../../../../metaData';
+import { getRulesActionsForTEI } from '../../../../rules/actionsCreator';
+import { startRunRulesPostUpdateField } from '../../../DataEntry';
+import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import { startRunRulesOnUpdateForNewEnrollment } from './enrollment.actions';
 
 export const batchActionTypes = {

@@ -1,12 +1,12 @@
 // @flow
 
-import * as React from 'react';
-import { IconUser24 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
-import { ViewEventSection } from '../../Section/ViewEventSection.component';
-import { type ProgramStage } from '../../../../../metaData';
+import { IconUser24 } from '@dhis2/ui';
+import * as React from 'react';
 import { withLoadingIndicator } from '../../../../../HOC/withLoadingIndicator';
+import { type ProgramStage } from '../../../../../metaData';
+import { ViewEventSection } from '../../Section/ViewEventSection.component';
+import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 import { Contents } from './Contents.component';
 
 const LoadingContents = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Contents);

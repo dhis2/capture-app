@@ -1,8 +1,8 @@
 // @flow
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { useDataQuery } from '@dhis2/app-runtime';
+import { useEffect } from 'react';
 // $FlowFixMe
+import { useSelector, useDispatch } from 'react-redux';
 import { setCommonEnrollmentSiteData } from './enrollment.actions';
 
 export const useCommonEnrollmentDomainData = (teiId: string, enrollmentId: string, programId: string) => {

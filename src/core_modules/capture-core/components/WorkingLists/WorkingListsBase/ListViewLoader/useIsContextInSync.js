@@ -1,7 +1,7 @@
 // @flow
 import { useMemo } from 'react';
-import type { Categories } from '../workingListsBase.types';
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
+import type { Categories } from '../workingListsBase.types';
 
 export const useIsContextInSync = (
     programId: string,

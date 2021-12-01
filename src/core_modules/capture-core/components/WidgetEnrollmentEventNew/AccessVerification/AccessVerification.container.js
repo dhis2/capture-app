@@ -1,15 +1,15 @@
 // @flow
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { type ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { type ComponentType } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withBrowserBackWarning } from '../../../HOC/withBrowserBackWarning';
-import type { ContainerProps } from './accessVerification.types';
-import { makeEventAccessSelector } from './accessVerification.selectors';
+import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 import {
     AccessVerificationComponent,
 } from './AccessVerification.component';
+import { makeEventAccessSelector } from './accessVerification.selectors';
+import type { ContainerProps } from './accessVerification.types';
 
 const dialogConfig = {
     header: i18n.t('Unsaved changes'),

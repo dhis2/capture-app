@@ -1,10 +1,10 @@
 // @flow
-import moment from 'moment';
-import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
-import type { RenderFoundation } from '../../../../metaData';
-import { getApi } from '../../../../d2/d2Instance';
+import log from 'loglevel';
+import moment from 'moment';
 import { convertServerToClient, convertClientToForm } from '../../../../converters';
+import { getApi } from '../../../../d2/d2Instance';
+import type { RenderFoundation } from '../../../../metaData';
 
 type StaticPatternValues = {
     orgUnitCode: string,

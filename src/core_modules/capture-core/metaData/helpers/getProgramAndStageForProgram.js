@@ -1,9 +1,9 @@
 // @flow
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
-import { EventProgram } from '../Program';
+import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
 import { programCollection } from '../../metaDataMemoryStores/programCollection/programCollection';
+import { EventProgram } from '../Program';
 
 
 const errorMessages = {

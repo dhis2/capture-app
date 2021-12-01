@@ -1,10 +1,5 @@
 // @flow
-import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-} from '../internal';
-import labelTypeClasses from '../../buildField.module.css';
-import { UserField } from '../../../../FormFields/UserField/UserField.component';
+import { withTransformPropName } from '../../../../../HOC';
 import {
     withGotoInterface,
     withHideCompatibility,
@@ -17,7 +12,12 @@ import {
     withFilterProps,
     withInternalChangeHandler,
 } from '../../../../FormFields/New';
-import { withTransformPropName } from '../../../../../HOC';
+import { UserField } from '../../../../FormFields/UserField/UserField.component';
+import labelTypeClasses from '../../buildField.module.css';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+} from '../internal';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;

@@ -1,10 +1,10 @@
 // @flow
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import type { ComponentType } from 'react';
-import type { Props, PropsFromRedux, OwnProps } from './D2Form.types';
-import { D2FormComponent } from './D2Form.component';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withAsyncHandler } from './asyncHandlerHOC';
+import { D2FormComponent } from './D2Form.component';
+import type { Props, PropsFromRedux, OwnProps } from './D2Form.types';
 
 const mapStateToProps = (state: ReduxState, ownProps: OwnProps): PropsFromRedux => {
     const { forms } = state;

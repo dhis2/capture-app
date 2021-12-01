@@ -1,11 +1,11 @@
 // @flow
 
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { IconWarningFilled24 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
+import { IconWarningFilled24 } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
+import * as React from 'react';
 import { ViewEventSection } from '../../Section/ViewEventSection.component';
+import { ViewEventSectionHeader } from '../../Section/ViewEventSectionHeader.component';
 
 
 type Props = {

@@ -1,7 +1,7 @@
 // @flow
-import { map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 
 import {
     commitEnrollmentEventWithoutId,

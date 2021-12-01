@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { RegUnitSelector } from './RegUnitSelector';
 import { ProgramSelector } from './ProgramSelector';
+import { RegUnitSelector } from './RegUnitSelector';
 
 export const SectionContents = () => (
     <>

@@ -1,18 +1,18 @@
 // @flow
-import { map, switchMap, takeUntil } from 'rxjs/operators';
-import { from } from 'rxjs';
-import { ofType } from 'redux-observable';
-import log from 'loglevel';
-import { getD2 } from 'capture-core/d2/d2Instance';
 import { errorCreator } from 'capture-core-utils';
+import { getD2 } from 'capture-core/d2/d2Instance';
+import log from 'loglevel';
+import { ofType } from 'redux-observable';
+import { from } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { LOADING_INDICATOR_TIMEOUT } from '../../../../constants';
+import { set as setStoreRoots } from '../../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import {
     actionTypes as orgUnitListActions,
     setSearchRoots,
     setSearchRootsFailed,
     showLoadingIndicator,
 } from '../actions/orgUnitList.actions';
-import { set as setStoreRoots } from '../../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import { LOADING_INDICATOR_TIMEOUT } from '../../../../constants';
 
 const RETRIEVE_ERROR = 'Could not retrieve registering unit list';
 

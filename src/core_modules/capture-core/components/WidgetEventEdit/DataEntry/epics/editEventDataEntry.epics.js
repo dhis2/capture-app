@@ -1,28 +1,28 @@
 // @flow
-import { map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
-import {
-    openEventForEditInDataEntry,
-    prerequisitesErrorOpeningEventForEditInDataEntry,
-    batchActionTypes as editEventDataEntryBatchActionTypes,
-    actionTypes as editEventDataEntryActionTypes,
-} from '../editEventDataEntry.actions';
-import {
-    actionTypes as editEventActionTypes,
-} from '../../../Pages/ViewEvent/ViewEventComponent/editEvent.actions';
-import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
+import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/getEnrollmentEvents';
+import { getProgramAndStageFromEvent, getProgramThrowIfNotFound } from '../../../../metaData';
+import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEvent';
+import { EventProgram, TrackerProgram } from '../../../../metaData/Program';
 import {
     getRulesActionsForEvent,
     getCurrentClientValues,
     getCurrentClientMainData,
 } from '../../../../rules/actionsCreator';
 import type { FieldData } from '../../../../rules/actionsCreator';
-import { EventProgram, TrackerProgram } from '../../../../metaData/Program';
-import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEvent';
-import { getProgramAndStageFromEvent, getProgramThrowIfNotFound } from '../../../../metaData';
-import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/getEnrollmentEvents';
+import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
+import {
+    actionTypes as editEventActionTypes,
+} from '../../../Pages/ViewEvent/ViewEventComponent/editEvent.actions';
+import {
+    openEventForEditInDataEntry,
+    prerequisitesErrorOpeningEventForEditInDataEntry,
+    batchActionTypes as editEventDataEntryBatchActionTypes,
+    actionTypes as editEventDataEntryActionTypes,
+} from '../editEventDataEntry.actions';
 
 export const openEditEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(

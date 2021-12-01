@@ -1,11 +1,11 @@
 // @flow
-import React from 'react';
 import { colors } from '@dhis2/ui';
-import { widgetTypes } from '../content/WidgetTypes';
-import { WidgetErrorAndWarningContent } from '../content/WidgetErrorAndWarningContent';
+import React from 'react';
 import { Widget } from '../../Widget';
-import { WidgetWarningHeader } from './WidgetWarningHeader';
+import { WidgetErrorAndWarningContent } from '../content/WidgetErrorAndWarningContent';
+import { widgetTypes } from '../content/WidgetTypes';
 import type { Props } from './WidgetWarning.types';
+import { WidgetWarningHeader } from './WidgetWarningHeader';
 
 export const WidgetWarning = ({ warning }: Props) => {
     const widgetType = widgetTypes.WARNING;

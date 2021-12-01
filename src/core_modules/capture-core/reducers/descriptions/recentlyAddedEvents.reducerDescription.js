@@ -1,12 +1,12 @@
 // @flow
 
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import {
-    listId,
-} from '../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 import {
     recentlyAddedEventsActionTypes,
 } from '../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList';
+import {
+    listId,
+} from '../../components/DataEntries/SingleEventRegistrationEntry/DataEntryWrapper/RecentlyAddedEventsList/RecentlyAddedEventsList.const';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 
 export const recentlyAddedEventsDesc = createReducerDescription({

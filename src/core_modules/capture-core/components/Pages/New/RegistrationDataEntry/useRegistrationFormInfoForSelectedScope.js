@@ -1,8 +1,8 @@
 // @flow
 import { useMemo } from 'react';
-import { scopeTypes } from '../../../../metaData';
-import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
 import { useScopeInfo } from '../../../../hooks/useScopeInfo';
+import { useTrackedEntityTypesWithCorrelatedPrograms } from '../../../../hooks/useTrackedEntityTypesWithCorrelatedPrograms';
+import { scopeTypes } from '../../../../metaData';
 
 type RegistrationOptions = $ReadOnly<{|
   [elementId: string]: {|

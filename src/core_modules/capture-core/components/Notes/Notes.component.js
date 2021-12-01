@@ -1,17 +1,17 @@
 // @flow
 
-import * as React from 'react';
-import { withFocusSaver } from 'capture-ui';
+import i18n from '@dhis2/d2-i18n';
+import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
 import {
     List,
     ListItem,
     Tooltip,
     withStyles,
 } from '@material-ui/core';
-import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
-import i18n from '@dhis2/d2-i18n';
-import { TextField } from '../FormFields/New';
+import { withFocusSaver } from 'capture-ui';
+import * as React from 'react';
 import { Button } from '../Buttons';
+import { TextField } from '../FormFields/New';
 import type { Note } from './notes.types';
 
 

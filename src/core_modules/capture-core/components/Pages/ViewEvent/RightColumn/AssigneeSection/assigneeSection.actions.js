@@ -1,7 +1,7 @@
 // @flow
 
-import { effectMethods } from '../../../../../trackerOffline';
 import { actionCreator } from '../../../../../actions/actions.utils';
+import { effectMethods } from '../../../../../trackerOffline';
 
 export const actionTypes = {
     VIEW_EVENT_ASSIGNEE_SET: 'ViewEventAssigneeSet',

@@ -1,14 +1,8 @@
 // @flow
-import { map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
-import {
-    newEventWidgetDataEntryActionTypes,
-    newEventWidgetDataEntryBatchActionTypes,
-} from '../actions/dataEntry.actions';
-import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../../common.types';
-import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
+import { getProgramAndStageForProgram } from '../../../../metaData/helpers';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
@@ -18,7 +12,13 @@ import {
 import type {
     FieldData,
 } from '../../../../rules/actionsCreator';
-import { getProgramAndStageForProgram } from '../../../../metaData/helpers';
+import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
+import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../../common.types';
+import {
+    newEventWidgetDataEntryActionTypes,
+    newEventWidgetDataEntryBatchActionTypes,
+} from '../actions/dataEntry.actions';
 
 const runRulesForNewEvent = (
     store: ReduxStore,

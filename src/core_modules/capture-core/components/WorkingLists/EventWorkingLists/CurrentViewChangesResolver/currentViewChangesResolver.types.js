@@ -1,8 +1,8 @@
 // @flow
-import type { EventWorkingListsColumnSetupOutputProps } from '../ColumnSetup';
-import type { InitialViewConfig } from '../../WorkingListsCommon';
-import type { FiltersData } from '../../WorkingListsBase';
 import type { EventWorkingListsColumnConfigs } from '../../EventWorkingListsCommon';
+import type { FiltersData } from '../../WorkingListsBase';
+import type { InitialViewConfig } from '../../WorkingListsCommon';
+import type { EventWorkingListsColumnSetupOutputProps } from '../ColumnSetup';
 
 type ExtractedProps = {|
     filters?: FiltersData,

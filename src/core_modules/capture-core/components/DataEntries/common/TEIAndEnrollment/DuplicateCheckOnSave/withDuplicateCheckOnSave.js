@@ -1,10 +1,10 @@
 // @flow
 import React, { type ComponentType, useMemo } from 'react';
-import { PossibleDuplicatesDialog } from '../../../../PossibleDuplicatesDialog';
 import { scopeTypes, type Enrollment, type TeiRegistration } from '../../../../../metaData';
-import type { Props } from './withDuplicateCheckOnSave.types';
-import { useDuplicateCheckerOnSaveReduxProvider } from './useDuplicateCheckerOnSaveReduxProvider';
+import { PossibleDuplicatesDialog } from '../../../../PossibleDuplicatesDialog';
 import { useDuplicateCheckerOnSave } from './useDuplicateCheckerOnSave';
+import { useDuplicateCheckerOnSaveReduxProvider } from './useDuplicateCheckerOnSaveReduxProvider';
+import type { Props } from './withDuplicateCheckOnSave.types';
 
 const getMetadataInfo = (enrollmentMetadata, teiRegistrationMetadata): { metadata?: Enrollment | TeiRegistration, scopeType: string, passOnMetadata: Object } => {
     if (enrollmentMetadata) {

@@ -1,10 +1,10 @@
-import { connect } from 'react-redux';
-import React, { PureComponent } from 'react';
-import moment from 'moment';
-import { withStyles } from '@material-ui/core/styles';
-import Grow from '@material-ui/core/Grow';
-import { IconSynk16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { IconSynk16 } from '@dhis2/ui';
+import Grow from '@material-ui/core/Grow';
+import { withStyles } from '@material-ui/core/styles';
+import moment from 'moment';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 
 const styles = () => ({
     offlineIcon: {

@@ -1,11 +1,11 @@
 // @flow
 /* eslint-disable react/no-array-index-key */
-import React, { Component, type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControl from '@material-ui/core/FormControl';
 import { Checkbox, spacersNum } from '@dhis2/ui';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormLabel from '@material-ui/core/FormLabel';
+import { withStyles } from '@material-ui/core/styles';
+import React, { Component, type ComponentType } from 'react';
 import { multiOrientations } from './multiSelectBoxes.const';
 
 const styles = theme => ({

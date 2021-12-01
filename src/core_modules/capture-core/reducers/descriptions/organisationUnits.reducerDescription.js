@@ -1,12 +1,12 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes as initActionTypes } from '../../init/init.actions';
-import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import { actionTypes as editEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
-import { actionTypes as setOrgUnitActionTypes } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
-import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
-import { lockedSelectorActionTypes } from '../../components/LockedSelector/LockedSelector.actions';
 import { set as setStoreRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
+import { lockedSelectorActionTypes } from '../../components/LockedSelector/LockedSelector.actions';
+import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
+import { actionTypes as setOrgUnitActionTypes } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { actionTypes as editEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { actionTypes as initActionTypes } from '../../init/init.actions';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 export const organisationUnitDesc = createReducerDescription({
     [editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state, action) => {

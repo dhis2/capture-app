@@ -1,6 +1,6 @@
 // @flow
-import type { ExternalSaveHandler, RulesExecutionDependencies } from '../common.types';
 import { type ProgramStage, type RenderFoundation, type TrackerProgram } from '../../../metaData';
+import type { ExternalSaveHandler, RulesExecutionDependencies } from '../common.types';
 
 export type ContainerProps = {|
     program: TrackerProgram,

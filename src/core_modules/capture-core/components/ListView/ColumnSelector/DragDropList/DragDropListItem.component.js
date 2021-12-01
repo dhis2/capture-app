@@ -1,9 +1,9 @@
 // @flow
-import { DragSource, DropTarget } from 'react-dnd';
-import React, { Component } from 'react';
-import TableCell from '@material-ui/core/TableCell';
-import { withStyles } from '@material-ui/core/styles';
 import { Checkbox, IconReorder24, spacersNum } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
+import TableCell from '@material-ui/core/TableCell';
+import React, { Component } from 'react';
+import { DragSource, DropTarget } from 'react-dnd';
 
 const styles = () => ({
     checkbox: {

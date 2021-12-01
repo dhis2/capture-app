@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
-import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
+import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
 
 export class StorageController {

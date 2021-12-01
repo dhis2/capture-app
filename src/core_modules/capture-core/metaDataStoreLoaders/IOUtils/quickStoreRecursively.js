@@ -1,17 +1,17 @@
 // @flow
 import type {
-    QueryVariables,
-    RecursiveQuery,
-    QuickStoreIterationOptions,
-} from './quickStoreRecursively.types';
-import { quickStore } from './quickStore';
-import type {
     ApiQuery,
     StoreName,
     QuickStoreRecursivelyMandatory,
     QuickStoreRecursivelyOptions,
     ConvertQueryResponseFn,
 } from './IOUtils.types';
+import { quickStore } from './quickStore';
+import type {
+    QueryVariables,
+    RecursiveQuery,
+    QuickStoreIterationOptions,
+} from './quickStoreRecursively.types';
 
 const quickStoreIteration = async (
     recursiveQuery: RecursiveQuery,

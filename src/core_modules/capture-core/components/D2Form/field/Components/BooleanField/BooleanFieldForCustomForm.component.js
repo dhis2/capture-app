@@ -1,10 +1,5 @@
 // @flow
 import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-    withCustomElementContainer,
-} from '../internal';
-import {
     BooleanField,
     withGotoInterface,
     withHideCompatibility,
@@ -13,6 +8,11 @@ import {
     withCalculateMessages,
     withDisplayMessages,
 } from '../../../../FormFields/New';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+    withCustomElementContainer,
+} from '../internal';
 
 export const BooleanFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(

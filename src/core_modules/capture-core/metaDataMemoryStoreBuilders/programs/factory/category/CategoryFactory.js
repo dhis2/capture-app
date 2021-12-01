@@ -1,15 +1,15 @@
 // @flow
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import log from 'loglevel';
+import {
+    Category,
+} from '../../../../metaData';
+
 import type
 {
     ProgramCachedCategory,
     CachedCategory,
 } from '../../../../storageControllers/cache.types';
-import {
-    Category,
-} from '../../../../metaData';
-
 
 export class CategoryFactory {
     cachedCategories: {[categoryId: string]: CachedCategory};

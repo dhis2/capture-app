@@ -1,11 +1,11 @@
 // @flow
-import { map, filter } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import { ofType } from 'redux-observable';
+import { map, filter } from 'rxjs/operators';
+import { lockedSelectorActionTypes } from '../../LockedSelector';
 import {
     resetProgramIdBase,
 } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
-import { lockedSelectorActionTypes } from '../../LockedSelector';
 
 const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
     if (!currentlySelectedProgramId) {

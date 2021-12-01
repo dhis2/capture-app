@@ -1,8 +1,8 @@
 // @flow
 import { pipe } from 'capture-core-utils';
-import { ViewModeFieldForForm } from '../../Components';
-import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import { convertFormToClient, convertClientToView } from '../../../../../converters';
+import type { DataElement as MetaDataElement } from '../../../../../metaData';
+import { ViewModeFieldForForm } from '../../Components';
 
 const convertFn = pipe(convertFormToClient, convertClientToView);
 

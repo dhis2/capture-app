@@ -1,14 +1,14 @@
 // @flow
 import { connect } from 'react-redux';
-import { viewEventIds } from '../EventDetailsSection/eventDetails.actions';
-import { editEventIds } from '../../../WidgetEventEdit/DataEntry/editEventDataEntry.actions';
-import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { withErrorMessageHandler } from '../../../../HOC/withErrorMessageHandler';
-import { makeProgramStageSelector, makeEventAccessSelector } from './viewEvent.selectors';
-import { ViewEventComponent } from './ViewEvent.component';
+import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
+import { editEventIds } from '../../../WidgetEventEdit/DataEntry/editEventDataEntry.actions';
+import { viewEventIds } from '../EventDetailsSection/eventDetails.actions';
 import {
     startGoBackToMainPage,
 } from './viewEvent.actions';
+import { ViewEventComponent } from './ViewEvent.component';
+import { makeProgramStageSelector, makeEventAccessSelector } from './viewEvent.selectors';
 
 
 const makeMapStateToProps = () => {

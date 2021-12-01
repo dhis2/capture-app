@@ -1,16 +1,16 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { buildIcon } from '../../../common/helpers';
-import { OptionSetFactory } from '../../../common/factory';
+import log from 'loglevel';
+import { DataElement, DateDataElement, dataElementTypes } from '../../../../metaData';
 import type {
     CachedDataElement,
     CachedProgramStageDataElement,
     CachedOptionSet,
 
 } from '../../../../storageControllers/cache.types';
-import { DataElement, DateDataElement, dataElementTypes } from '../../../../metaData';
+import { OptionSetFactory } from '../../../common/factory';
+import { buildIcon } from '../../../common/helpers';
 
 export class DataElementFactory {
     static propertyNames = {

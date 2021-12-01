@@ -1,13 +1,13 @@
 // @flow
-import React, { type ComponentType } from 'react';
-import moment from 'moment';
-import cx from 'classnames';
-import { statusTypes } from 'capture-core/events/statusTypes';
-import { withStyles, Tooltip } from '@material-ui/core';
-import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16 } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { isEventOverdue } from '../StageDetail/hooks/helpers';
+import { colors, spacersNum, IconInfo16, IconWarning16, IconCalendar16 } from '@dhis2/ui';
+import { withStyles, Tooltip } from '@material-ui/core';
+import { statusTypes } from 'capture-core/events/statusTypes';
+import cx from 'classnames';
+import moment from 'moment';
+import React, { type ComponentType } from 'react';
 import { NonBundledDhis2Icon } from '../../../../NonBundledDhis2Icon';
+import { isEventOverdue } from '../StageDetail/hooks/helpers';
 import type { Props } from './stageOverview.types';
 
 const styles = {

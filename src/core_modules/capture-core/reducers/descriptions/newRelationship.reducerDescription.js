@@ -1,13 +1,13 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
+import {
+    actionTypes as newRelationshipActionTypes,
+} from '../../components/Pages/NewRelationship/newRelationship.actions';
 import {
     registrationSectionActionTypes,
     dataEntryActionTypes,
     actionTypes as registerTeiActionTypes,
 } from '../../components/Pages/NewRelationship/RegisterTei';
-import {
-    actionTypes as newRelationshipActionTypes,
-} from '../../components/Pages/NewRelationship/newRelationship.actions';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 export const newRelationshipDesc = createReducerDescription({
     [newRelationshipActionTypes.INITIALIZE_NEW_RELATIONSHIP]: () => ({}),

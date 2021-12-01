@@ -12,11 +12,11 @@ import type {
     EventsData,
 } from 'capture-core-utils/rulesEngine';
 import type { Program, RenderFoundation, TrackerProgram, ProgramStage } from '../../metaData';
-import { runRulesForTEI } from './runRulesForTEI';
-import { runRulesForSingleEvent } from './runRulesForSingleEvent';
-import { runRulesForEnrollmentEvent } from './runRulesForEnrollmentEvent';
-import { updateRulesEffects } from './rulesEngine.actions';
 import { postProcessRulesEffects } from './postProcessRulesEffects';
+import { updateRulesEffects } from './rulesEngine.actions';
+import { runRulesForEnrollmentEvent } from './runRulesForEnrollmentEvent';
+import { runRulesForSingleEvent } from './runRulesForSingleEvent';
+import { runRulesForTEI } from './runRulesForTEI';
 
 function getRulesActions(
     rulesEffects: ?OutputEffects,

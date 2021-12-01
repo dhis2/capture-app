@@ -1,10 +1,10 @@
 // @flow
 
-import React from 'react';
-import { WarningRounded } from '@material-ui/icons';
-import { withStyles } from '@material-ui/core';
-import { colors, spacers } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { colors, spacers } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import { WarningRounded } from '@material-ui/icons';
+import React from 'react';
 
 const styles = {
     container: {

@@ -1,10 +1,10 @@
 // @flow
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import type { UpdatableFilterContent } from '../types';
-import { orientations } from '../../FormFields/Options/SelectBoxes';  // TODO: Refactor
+import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
 import { D2TrueOnly } from '../../FormFields/Generic/D2TrueOnly.component';
+import { orientations } from '../../FormFields/Options/SelectBoxes';  // TODO: Refactor
+import type { UpdatableFilterContent } from '../types';
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 
 const getStyles = (theme: Theme) => ({

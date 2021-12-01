@@ -1,8 +1,8 @@
 // @flow
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData';
+import log from 'loglevel';
 import { getApi } from '../../../../d2/d2Instance';
+import { getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData';
 
 function getCategoryOptionsAsync(optionIds: string) {
     return getApi()

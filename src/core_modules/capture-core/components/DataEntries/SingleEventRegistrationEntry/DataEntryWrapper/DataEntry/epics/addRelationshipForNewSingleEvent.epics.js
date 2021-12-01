@@ -1,9 +1,25 @@
 // @flow
-import { map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
-import { batchActions } from 'redux-batched-actions';
-import uuid from 'd2-utilizr/lib/uuid';
 import i18n from '@dhis2/d2-i18n';
+import uuid from 'd2-utilizr/lib/uuid';
+import { batchActions } from 'redux-batched-actions';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
+
+import { convertClientRelationshipToServer } from '../../../../../../relationships/convertClientToServer';
+import {
+    addRelationship,
+    relationshipAlreadyExists,
+} from '../../../../../DataEntry/actions/dataEntry.actions';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
+import {
+    initializeNewRelationship,
+} from '../../../../../Pages/NewRelationship/newRelationship.actions';
+import { getRelationshipNewTei } from '../../../../../Pages/NewRelationship/RegisterTei';
+import {
+    recentlyAddedRelationship,
+    actionTypes as newEventNewRelationshipActionTypes,
+    batchActionTypes as newEventNewRelationshipBatchActionTypes,
+} from '../../../NewRelationshipWrapper/NewEventNewRelationshipWrapper.actions';
 
 import {
     startSaveNewEventRelationships,
@@ -13,21 +29,6 @@ import {
     startSaveTeiForNewEventRelationship,
     actionTypes as newEventDataEntryActionTypes,
 } from '../actions/dataEntry.actions';
-import {
-    recentlyAddedRelationship,
-    actionTypes as newEventNewRelationshipActionTypes,
-    batchActionTypes as newEventNewRelationshipBatchActionTypes,
-} from '../../../NewRelationshipWrapper/NewEventNewRelationshipWrapper.actions';
-import { getRelationshipNewTei } from '../../../../../Pages/NewRelationship/RegisterTei';
-import {
-    initializeNewRelationship,
-} from '../../../../../Pages/NewRelationship/newRelationship.actions';
-import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
-import {
-    addRelationship,
-    relationshipAlreadyExists,
-} from '../../../../../DataEntry/actions/dataEntry.actions';
-import { convertClientRelationshipToServer } from '../../../../../../relationships/convertClientToServer';
 
 
 const dataEntryId = 'singleEvent';

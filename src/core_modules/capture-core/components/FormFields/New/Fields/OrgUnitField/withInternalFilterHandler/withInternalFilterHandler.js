@@ -1,8 +1,8 @@
 // @flow
-import * as React from 'react';
-import log from 'loglevel';
-import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
 import { makeCancelablePromise, errorCreator } from 'capture-core-utils';
+import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
+import log from 'loglevel';
+import * as React from 'react';
 import { getD2 } from '../../../../../../d2/d2Instance';
 import { orgUnitFieldScopes } from './scopes.const';
 

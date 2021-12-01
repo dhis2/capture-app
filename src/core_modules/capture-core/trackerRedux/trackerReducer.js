@@ -1,8 +1,8 @@
 // @flow
-import type { Reducer } from 'redux';
-import log from 'loglevel';
-import isDefined from 'd2-utilizr/lib/isDefined';
 import isArray from 'd2-utilizr/lib/isArray';
+import isDefined from 'd2-utilizr/lib/isDefined';
+import log from 'loglevel';
+import type { Reducer } from 'redux';
 
 import { environments } from '../constants/environments';
 

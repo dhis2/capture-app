@@ -1,8 +1,8 @@
 // @flow
-import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
+import log from 'loglevel';
+import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
+import { convertValue } from '../../../converters/clientToList';
 import {
     getStageForEventProgram,
     OptionSet,
@@ -11,7 +11,7 @@ import {
     typeof dataElementTypes,
 } from '../../../metaData';
 import type { RenderFoundation } from '../../../metaData';
-import { convertValue } from '../../../converters/clientToList';
+import { getStageFromEvent } from '../../../metaData/helpers/getStageFromEvent';
 
 type EventContainer = {
     event: CaptureClientEvent,

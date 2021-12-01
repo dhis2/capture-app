@@ -1,8 +1,8 @@
 // @flow
-import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
+import * as React from 'react';
 import { Button } from '../Buttons';
+import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
 
 type Props = {
     dataEntryHasChanges: boolean,

@@ -1,12 +1,12 @@
 // @flow
-import { catchError, concatMap, takeUntil, filter, map } from 'rxjs/operators';
-import { from, of } from 'rxjs';
-import { ofType } from 'redux-observable';
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
-import type { RenderFoundation } from '../../../metaData';
+import log from 'loglevel';
+import { ofType } from 'redux-observable';
+import { from, of } from 'rxjs';
+import { catchError, concatMap, takeUntil, filter, map } from 'rxjs/operators';
 import { convertFormToClient, convertClientToServer } from '../../../converters';
+import type { RenderFoundation } from '../../../metaData';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import { checkForDuplicateActionTypes, checkForDuplicateSuccess, checkForDuplicateError } from './checkForDuplicate.actions';
 
 const getSearchValues = (

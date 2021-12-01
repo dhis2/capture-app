@@ -1,11 +1,11 @@
 // @flow
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import { withStyles } from '@material-ui/core/styles';
+import * as React from 'react';
 import { LinkButton } from '../../Buttons/LinkButton.component';
-import type { WorkingListTemplates } from './workingListsBase.types';
-import { TemplateSelectorChip } from './TemplateSelectorChip.component';
 import { CaptureScrollHeight } from './CaptureScrollHeight.component';
+import { TemplateSelectorChip } from './TemplateSelectorChip.component';
+import type { WorkingListTemplates } from './workingListsBase.types';
 
 const getBorder = (theme: Theme) => {
     const color = theme.palette.dividerLighter;

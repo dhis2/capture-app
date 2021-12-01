@@ -1,13 +1,13 @@
 // @flow
 import moment from 'moment';
-import type {
-    ApiDataFilterOptionSet,
-} from '../../../types';
+import { dataElementTypes } from '../../../../../../metaData';
+
 import type {
     OptionSetFilterData,
 } from '../../../../WorkingListsBase';
-import { dataElementTypes } from '../../../../../../metaData';
-
+import type {
+    ApiDataFilterOptionSet,
+} from '../../../types';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
 

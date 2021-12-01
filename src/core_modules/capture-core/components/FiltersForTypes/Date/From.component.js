@@ -1,9 +1,9 @@
 // @flow
-import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
-import { modes, absoluteDirections } from '../../FormFields/DateAndTime/D2Date/d2DatePopup.const';
+import React, { Component } from 'react';
 import { D2Date } from '../../FormFields/DateAndTime/D2Date/D2Date.component';
+import { modes, absoluteDirections } from '../../FormFields/DateAndTime/D2Date/d2DatePopup.const';
+import { withInternalChangeHandler } from '../../FormFields/withInternalChangeHandler';
 
 type Props = {
     value: ?string,

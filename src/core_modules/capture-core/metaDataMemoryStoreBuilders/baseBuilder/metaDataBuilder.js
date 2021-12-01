@@ -1,9 +1,9 @@
 // @flow
-import { buildTrackedEntityTypes } from '../trackedEntityTypes/trackedEntityTypesBuilder';
-import { buildPrograms } from '../programs/buildPrograms';
-import { buildOptionSets } from '../optionSets/optionSetsBuilder';
-import { buildConstants } from '../constants/constantsBuilder';
 import { userStores as stores } from '../../storageControllers/stores';
+import { buildConstants } from '../constants/constantsBuilder';
+import { buildOptionSets } from '../optionSets/optionSetsBuilder';
+import { buildPrograms } from '../programs/buildPrograms';
+import { buildTrackedEntityTypes } from '../trackedEntityTypes/trackedEntityTypesBuilder';
 import { getCommonPrerequisitesAsync } from './commonPrerequisitesGetter';
 
 export async function buildMetaDataAsync(locale: string) {

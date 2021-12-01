@@ -1,10 +1,5 @@
 // @flow
-import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-    withCustomElementContainer,
-} from '../internal';
-import { UserField } from '../../../../FormFields/UserField/UserField.component';
+import { withTransformPropName } from '../../../../../HOC';
 import {
     withGotoInterface,
     withHideCompatibility,
@@ -14,7 +9,12 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from '../../../../FormFields/New';
-import { withTransformPropName } from '../../../../../HOC';
+import { UserField } from '../../../../FormFields/UserField/UserField.component';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+    withCustomElementContainer,
+} from '../internal';
 import customFormStyles from './userNameFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;

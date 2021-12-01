@@ -1,31 +1,31 @@
 // @flow
-import type { Node } from 'react';
-import log from 'loglevel';
-import isString from 'd2-utilizr/lib/isString';
-import isObject from 'd2-utilizr/lib/isObject';
-import { errorCreator } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
-import type { Updaters } from '../../trackerRedux/trackerReducer';
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { workingListsCommonActionTypes } from '../../components/WorkingLists/WorkingListsCommon';
-import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
-import {
-    actionTypes as editEventDataEntryActionTypes,
-} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
-import {
-    actionTypes as viewEventNewRelationshipActionTypes,
-} from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
-import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
-import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
-import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
-import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
-import { actionTypes as feedbackActionTypes } from '../../components/FeedbackBar/actions/feedback.actions';
-import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
+import { errorCreator } from 'capture-core-utils';
+import isObject from 'd2-utilizr/lib/isObject';
+import isString from 'd2-utilizr/lib/isString';
+import log from 'loglevel';
+import type { Node } from 'react';
+import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
+import { asyncHandlerActionTypes } from '../../components/D2Form';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
 } from '../../components/DataEntries/SingleEventRegistrationEntry';
-import { asyncHandlerActionTypes } from '../../components/D2Form';
-import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
+import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
+import { actionTypes as feedbackActionTypes } from '../../components/FeedbackBar/actions/feedback.actions';
+import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
+import { enrollmentSiteActionTypes } from '../../components/Pages/common/EnrollmentOverviewDomain';
+import { registrationFormActionTypes } from '../../components/Pages/New/RegistrationDataEntry/RegistrationDataEntry.actions';
+import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
+import {
+    actionTypes as viewEventNewRelationshipActionTypes,
+} from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
+import {
+    actionTypes as editEventDataEntryActionTypes,
+} from '../../components/WidgetEventEdit/DataEntry/editEventDataEntry.actions';
+import { eventWorkingListsActionTypes } from '../../components/WorkingLists/EventWorkingLists';
+import { workingListsCommonActionTypes } from '../../components/WorkingLists/WorkingListsCommon';
+import type { Updaters } from '../../trackerRedux/trackerReducer';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?Node) {
     const newState = [...state];

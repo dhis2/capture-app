@@ -1,12 +1,12 @@
 // @flow
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import type { ColumnsMetaForDataFetching } from '../types';
+import log from 'loglevel';
 import {
     updateListSuccess,
     updateListError,
     buildFilterQueryArgs,
 } from '../../WorkingListsCommon';
+import type { ColumnsMetaForDataFetching } from '../types';
 import { getEventListData } from './getEventListData';
 
 

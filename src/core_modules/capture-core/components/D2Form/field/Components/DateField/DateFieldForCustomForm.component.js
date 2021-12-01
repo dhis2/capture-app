@@ -1,10 +1,5 @@
 // @flow
 import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-    withCustomElementContainer,
-} from '../internal';
-import {
     DateField,
     withGotoInterface,
     withHideCompatibility,
@@ -14,6 +9,11 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from '../../../../FormFields/New';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+    withCustomElementContainer,
+} from '../internal';
 
 export const DateFieldForCustomForm = withGotoInterface()(
     withHideCompatibility()(

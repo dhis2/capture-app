@@ -2,10 +2,10 @@
 import * as React from 'react';
 import './rowsPerPage.css';
 
+import { withTranslations } from '../FormFields/Options/SelectVirtualized/withTranslations';
 import { OptionsSelectVirtualized } from '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import type { VirtualizedOptionConfig } from
     '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import { withTranslations } from '../FormFields/Options/SelectVirtualized/withTranslations';
 
 const OptionsSelectWithTranslations = withTranslations()(OptionsSelectVirtualized);
 

@@ -1,8 +1,8 @@
 // @flow
-import React, { type ComponentType } from 'react';
-import cx from 'classnames';
-import { withStyles } from '@material-ui/core';
 import { colors, spacersNum } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import cx from 'classnames';
+import React, { type ComponentType } from 'react';
 import type { Props } from './flatList.types';
 
 

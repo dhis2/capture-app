@@ -1,26 +1,27 @@
 // @flow
 
-import { map, filter } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
+import { ofType } from 'redux-observable';
+import { map, filter } from 'rxjs/operators';
 
 
+import {
+    addFormData,
+} from '../../../D2Form/actions/form.actions';
+import {
+    actionTypes as teiSearchActionTypes,
+    initializeTeiSearch,
+} from '../../../TeiSearch/actions/teiSearch.actions';
+
+import { getSearchFormId } from '../../../TeiSearch/getSearchFormId';
+
+
+import { getSearchGroups } from '../../../TeiSearch/getSearchGroups';
 import {
     actionTypes as newRelationshipActionTypes,
     setSearching,
     unsetSearching,
 } from '../newRelationship.actions';
-import { getSearchGroups } from '../../../TeiSearch/getSearchGroups';
-import { getSearchFormId } from '../../../TeiSearch/getSearchFormId';
-import {
-    actionTypes as teiSearchActionTypes,
-    initializeTeiSearch,
-} from '../../../TeiSearch/actions/teiSearch.actions';
-import {
-    addFormData,
-} from '../../../D2Form/actions/form.actions';
-
-
 import {
     batchActionTypes,
 } from './teiRelationship.actions';

@@ -1,5 +1,5 @@
-import { dataElementTypes } from '../../metaData/DataElement';
 import { convertValue } from '../../converters/clientToView';
+import { dataElementTypes } from '../../metaData/DataElement';
 
 export const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>
     enrollments

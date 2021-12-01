@@ -1,7 +1,7 @@
 // @flow
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
+import * as React from 'react';
 
 import { LoadingMaskForButton } from '../LoadingMasks';
 import { Button } from './ButtonOld.component';

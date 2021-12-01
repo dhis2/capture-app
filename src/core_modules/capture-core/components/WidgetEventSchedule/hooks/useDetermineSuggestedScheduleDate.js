@@ -1,7 +1,7 @@
 // @flow
 import moment from 'moment';
-import { dataElementTypes } from '../../../metaData';
 import { convertServerToClient, convertClientToForm } from '../../../converters';
+import { dataElementTypes } from '../../../metaData';
 
 const convertDate = (date): any => convertServerToClient(date, dataElementTypes.DATE);
 

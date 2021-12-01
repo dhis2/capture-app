@@ -1,20 +1,19 @@
 // @flow
-import { createEpicMiddleware } from 'redux-observable';
-import { createLogger } from 'redux-logger';
+import { createOffline } from '@redux-offline/redux-offline';
+import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
+import { environments } from 'capture-core/constants/environments';
+import { getEffectReconciler, shouldDiscard, queueConfig } from 'capture-core/trackerOffline';
+import { buildReducersFromDescriptions } from 'capture-core/trackerRedux/trackerReducer';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import type { BrowserHistory, HashHistory } from 'history';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { enableBatching } from 'redux-batched-actions';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import { enableBatching } from 'redux-batched-actions';
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import type { BrowserHistory, HashHistory } from 'history';
-import { connectRouter, routerMiddleware } from 'connected-react-router';
-import { buildReducersFromDescriptions } from 'capture-core/trackerRedux/trackerReducer';
-import { getEffectReconciler, shouldDiscard, queueConfig } from 'capture-core/trackerOffline';
-import { environments } from 'capture-core/constants/environments';
-import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
-import { createOffline } from '@redux-offline/redux-offline';
-
-import { reducerDescriptions } from '../reducers/descriptions/trackerCapture.reducerDescriptions';
+import { createLogger } from 'redux-logger';
+import { createEpicMiddleware } from 'redux-observable';
 import { epics } from '../epics/trackerCapture.epics';
+import { reducerDescriptions } from '../reducers/descriptions/trackerCapture.reducerDescriptions';
 import { getPersistOptions } from './persist/persistOptionsGetter';
 
 export function getStore(

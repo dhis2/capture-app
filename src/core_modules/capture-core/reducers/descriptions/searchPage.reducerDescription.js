@@ -1,6 +1,6 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 export const searchPageStatus = {
     INITIAL: 'INITIAL',

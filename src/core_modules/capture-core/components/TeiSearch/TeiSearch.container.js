@@ -1,9 +1,6 @@
 // @flow
-import { connect } from 'react-redux';
 import { type ComponentType } from 'react';
-import type { Props, OwnProps } from './TeiSearch.types';
-import { makeSearchGroupsSelector } from './teiSearch.selectors';
-import { TeiSearchComponent } from './TeiSearch.component';
+import { connect } from 'react-redux';
 import {
     requestSearchTei,
     searchFormValidationFailed,
@@ -12,6 +9,9 @@ import {
     teiSearchResultsChangePage,
     setOpenSearchGroupSection,
 } from './actions/teiSearch.actions';
+import { TeiSearchComponent } from './TeiSearch.component';
+import { makeSearchGroupsSelector } from './teiSearch.selectors';
+import type { Props, OwnProps } from './TeiSearch.types';
 
 const makeMapStateToProps = () => {
     const searchGroupsSelector = makeSearchGroupsSelector();

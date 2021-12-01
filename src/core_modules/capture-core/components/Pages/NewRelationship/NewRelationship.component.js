@@ -1,10 +1,10 @@
 // @flow
-import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { TeiRelationship } from './TeiRelationship/TeiRelationship.component';
-import { RelationshipTypeSelector } from './RelationshipTypeSelector/RelationshipTypeSelector.component';
-import { RelationshipNavigation } from './RelationshipNavigation/RelationshipNavigation.container';
+import * as React from 'react';
 import type { SelectedRelationshipType } from './newRelationship.types';
+import { RelationshipNavigation } from './RelationshipNavigation/RelationshipNavigation.container';
+import { RelationshipTypeSelector } from './RelationshipTypeSelector/RelationshipTypeSelector.component';
+import { TeiRelationship } from './TeiRelationship/TeiRelationship.component';
 
 
 type Props = {

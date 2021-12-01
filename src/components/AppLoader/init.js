@@ -1,18 +1,18 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
-import moment from 'moment';
-import log from 'loglevel';
-import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2';
+import i18n from '@dhis2/d2-i18n';
+import { environments } from 'capture-core/constants/environments';
+import { setD2 } from 'capture-core/d2/d2Instance';
+
+import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
+import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoaders';
+import { initControllersAsync } from 'capture-core/storageControllers';
+import { DisplayException } from 'capture-core/utils/exceptions';
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 import { CurrentLocaleData } from 'capture-core/utils/localeData/CurrentLocaleData';
-import { DisplayException } from 'capture-core/utils/exceptions';
-import { initControllersAsync } from 'capture-core/storageControllers';
-import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoaders';
-import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
-import { setD2 } from 'capture-core/d2/d2Instance';
-import { environments } from 'capture-core/constants/environments';
-import i18n from '@dhis2/d2-i18n';
-
+import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2';
+import log from 'loglevel';
+import moment from 'moment';
 
 function setLogLevel() {
     const levels = {

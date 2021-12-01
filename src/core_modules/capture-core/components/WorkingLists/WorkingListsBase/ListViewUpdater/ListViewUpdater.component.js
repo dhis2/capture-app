@@ -1,10 +1,10 @@
 // @flow
-import React, { useEffect, useRef, useContext } from 'react';
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { ListViewUpdaterContext } from '../workingListsBase.context';
-import { areFiltersEqual } from '../utils';
+import log from 'loglevel';
+import React, { useEffect, useRef, useContext } from 'react';
 import { ListViewBuilder } from '../ListViewBuilder';
+import { areFiltersEqual } from '../utils';
+import { ListViewUpdaterContext } from '../workingListsBase.context';
 import type { Props } from './listViewUpdater.types';
 
 const useUpdateListMemoize = (value) => {

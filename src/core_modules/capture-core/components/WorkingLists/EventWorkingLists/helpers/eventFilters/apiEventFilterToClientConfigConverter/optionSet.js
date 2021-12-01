@@ -1,13 +1,14 @@
 // @flow
-import moment from 'moment';
 import { parseNumber } from 'capture-core-utils/parsers';
-import type {
-    ApiDataFilterOptionSet,
-} from '../../../types';
+import moment from 'moment';
+import { dataElementTypes } from '../../../../../../metaData';
+
 import type {
     OptionSetFilterData,
 } from '../../../../../ListView';
-import { dataElementTypes } from '../../../../../../metaData';
+import type {
+    ApiDataFilterOptionSet,
+} from '../../../types';
 
 
 const converterByType = {

@@ -2,8 +2,8 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { ProgramStage } from './ProgramStage';
 import { Program } from './Program';
+import type { ProgramStage } from './ProgramStage';
 
 export class EventProgram extends Program {
     static EVENT_PROGRAM_STAGE_KEY = 'EventProgramStage';

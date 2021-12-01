@@ -1,11 +1,11 @@
 // @flow
-import * as React from 'react';
-import classNames from 'classnames';
-import parse from 'autosuggest-highlight/parse';
 import MenuItem from '@material-ui/core/MenuItem';
-import type { User } from './types';
-import defaultClasses from './searchSuggestion.module.css';
+import parse from 'autosuggest-highlight/parse';
+import classNames from 'classnames';
+import * as React from 'react';
 import { SearchContext } from './Search.context';
+import defaultClasses from './searchSuggestion.module.css';
+import type { User } from './types';
 
 type Props = {
     user: User,

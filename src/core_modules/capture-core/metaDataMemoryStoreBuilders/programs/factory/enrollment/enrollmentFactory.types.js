@@ -1,13 +1,13 @@
 // @flow
 import type {
+    TrackedEntityType,
+} from '../../../../metaData';
+
+import type {
     CachedOptionSet,
     CachedTrackedEntityAttribute,
     CachedTrackedEntityType,
 } from '../../../../storageControllers/cache.types';
-import type {
-    TrackedEntityType,
-} from '../../../../metaData';
-
 
 export type ConstructorInput = {|
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,

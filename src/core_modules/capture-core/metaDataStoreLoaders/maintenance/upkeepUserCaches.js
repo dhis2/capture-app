@@ -1,9 +1,9 @@
 // @flow
-import log from 'loglevel';
-import { StorageController, DomLocalStorageAdapter } from 'capture-core-utils/storage';
 import { errorCreator } from 'capture-core-utils/errorCreator';
-import { mainStores } from '../../storageControllers/stores';
+import { StorageController, DomLocalStorageAdapter } from 'capture-core-utils/storage';
+import log from 'loglevel';
 import { getMainStorageController, getUserStorageController } from '../../storageControllers';
+import { mainStores } from '../../storageControllers/stores';
 
 const ACCESS_HISTORY_KEY = 'accessHistory';
 const cacheKeepCount = {

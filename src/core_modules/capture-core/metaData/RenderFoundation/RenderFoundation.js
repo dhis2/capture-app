@@ -1,15 +1,15 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import log from 'loglevel';
-import isFunction from 'd2-utilizr/lib/isFunction';
-import type { ProgramRule } from 'capture-core-utils/rulesEngine';
 import { errorCreator } from 'capture-core-utils';
-import type { ValuesType } from '../helpers/DataElements/convertValues';
-import { convertDataElementsValues } from '../helpers';
-import type { DataElement, ConvertFn } from '../DataElement/DataElement';
+import type { ProgramRule } from 'capture-core-utils/rulesEngine';
+import isFunction from 'd2-utilizr/lib/isFunction';
+import log from 'loglevel';
 import type { Access } from '../Access';
-import type { Section } from './Section';
+import type { DataElement, ConvertFn } from '../DataElement/DataElement';
+import { convertDataElementsValues } from '../helpers';
+import type { ValuesType } from '../helpers/DataElements/convertValues';
 import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
+import type { Section } from './Section';
 
 export class RenderFoundation {
     static errorMessages = {

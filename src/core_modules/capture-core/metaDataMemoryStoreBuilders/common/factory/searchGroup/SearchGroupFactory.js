@@ -1,12 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { OptionSetFactory } from '../optionSet';
-import type {
-    CachedAttributeTranslation,
-    CachedTrackedEntityAttribute,
-} from '../../../../storageControllers/cache.types';
+import log from 'loglevel';
 import {
     RenderFoundation,
     Section,
@@ -14,6 +9,11 @@ import {
     DataElement,
     dataElementTypes,
 } from '../../../../metaData';
+import type {
+    CachedAttributeTranslation,
+    CachedTrackedEntityAttribute,
+} from '../../../../storageControllers/cache.types';
+import { OptionSetFactory } from '../optionSet';
 import type { ConstructorInput, InputSearchAttribute, SearchAttribute } from './searchGroupFactory.types';
 
 const translationPropertyNames = {

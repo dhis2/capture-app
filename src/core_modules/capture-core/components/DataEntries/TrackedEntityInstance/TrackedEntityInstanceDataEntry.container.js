@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
-import { PreTeiDataEntry } from './TrackedEntityInstanceDataEntry.component';
-import { startAsyncUpdateFieldForNewTei } from './actions/tei.actions';
 import { updateFieldBatch, asyncUpdateSuccessBatch } from './actions/tei.actionBatches';
+import { startAsyncUpdateFieldForNewTei } from './actions/tei.actions';
+import { PreTeiDataEntry } from './TrackedEntityInstanceDataEntry.component';
 
 const mapStateToProps = () => ({});
 

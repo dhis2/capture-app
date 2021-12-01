@@ -1,14 +1,16 @@
 // @flow
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { DndProvider } from 'react-dnd';
-import update from 'react-addons-update';
-import React, { Component } from 'react';
-import TableRow from '@material-ui/core/TableRow';
-import TableHead from '@material-ui/core/TableHead';
-import TableCell from '@material-ui/core/TableCell';
-import TableBody from '@material-ui/core/TableBody';
-import Table from '@material-ui/core/Table';
 import i18n from '@dhis2/d2-i18n';
+import Table from '@material-ui/core/Table';
+
+
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import React, { Component } from 'react';
+import update from 'react-addons-update';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 
 import { DragDropListItem } from './DragDropListItem.component';

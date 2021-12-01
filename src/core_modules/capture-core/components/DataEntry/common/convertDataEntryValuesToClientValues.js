@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-new-func */
-import type { RenderFoundation } from '../../../metaData';
 import { convertValue } from '../../../converters/formToClient';
+import type { RenderFoundation } from '../../../metaData';
 
 // $FlowSuppress
 // $FlowFixMe[prop-missing] automated comment

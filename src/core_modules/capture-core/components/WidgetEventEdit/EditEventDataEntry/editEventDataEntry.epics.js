@@ -1,33 +1,33 @@
 // @flow
-import { map, filter } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
-import { batchActions } from 'redux-batched-actions';
-import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
-import {
-    actionTypes as widgetEventEditActionTypes,
-} from '../WidgetEventEdit.actions';
-import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
-import {
-    updateEventContainer,
-} from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import {
-    actionTypes as eventDetailsActionTypes,
-    showEditEventDataEntry,
-} from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
+import moment from 'moment';
+import { batchActions } from 'redux-batched-actions';
+import { ofType } from 'redux-observable';
+import { map, filter } from 'rxjs/operators';
+import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
+import { convertMainEventClientToServer } from '../../../events/mainConverters';
+import { getProgramAndStageFromEvent } from '../../../metaData';
+import { TrackerProgram } from '../../../metaData/Program';
+import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
+import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
 import {
     commitEnrollmentEvent,
     updateEnrollmentEvents,
     rollbackEnrollmentEvent,
     enrollmentSiteActionTypes,
 } from '../../Pages/common/EnrollmentOverviewDomain';
-import { getDataEntryKey } from '../../DataEntry/common/getDataEntryKey';
-import { convertDataEntryToClientValues } from '../../DataEntry/common/convertDataEntryToClientValues';
-import { TrackerProgram } from '../../../metaData/Program';
-import { getProgramAndStageFromEvent } from '../../../metaData';
-import { convertMainEventClientToServer } from '../../../events/mainConverters';
-import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
+import {
+    actionTypes as eventDetailsActionTypes,
+    showEditEventDataEntry,
+} from '../../Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
+import {
+    updateEventContainer,
+} from '../../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { openEventForEditInDataEntry } from '../DataEntry/editEventDataEntry.actions';
 
+import {
+    actionTypes as widgetEventEditActionTypes,
+} from '../WidgetEventEdit.actions';
 import {
     actionTypes,
     batchActionTypes,

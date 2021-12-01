@@ -1,11 +1,8 @@
 // @flow
-import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import React, { type ComponentType, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
-import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
-import type { OwnProps } from './LockedSelector.types';
-import { LockedSelectorComponent } from './LockedSelector.component';
 import {
     setOrgUnitFromLockedSelector,
     setProgramIdFromLockedSelector,
@@ -19,6 +16,9 @@ import {
     startAgainBatchAction,
     resetOrgUnitIdBatchAction,
 } from './LockedSelector.actions';
+import { LockedSelectorComponent } from './LockedSelector.component';
+import type { OwnProps } from './LockedSelector.types';
+import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 
 const deriveReadiness = (lockedSelectorLoads, selectedOrgUnitId, organisationUnits) => {
     // because we want the orgUnit to be fetched and stored

@@ -1,8 +1,8 @@
 // @flow
-import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { SelectionBoxes } from '../SelectionBoxes/SelectionBoxes.component';
+import React, { Component } from 'react';
 import type { OptionRendererInputData } from '../internal/SelectionBoxes/selectBoxes.types';
+import { SelectionBoxes } from '../SelectionBoxes/SelectionBoxes.component';
 
 type Props = {
     allowMultiple?: boolean,

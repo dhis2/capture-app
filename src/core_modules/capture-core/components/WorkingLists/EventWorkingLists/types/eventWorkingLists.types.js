@@ -1,6 +1,6 @@
 // @flow
-import type { CustomColumnOrder } from '../../WorkingListsCommon';
 import { typeof dataElementTypes } from '../../../../metaData';
+import type { CustomColumnOrder } from '../../WorkingListsCommon';
 
 export type ColumnMetaForDataFetching = {
     id: string,

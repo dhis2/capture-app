@@ -1,10 +1,5 @@
 // @flow
 import {
-    withRequiredFieldCalculation,
-    withDisabledFieldCalculation,
-    withCustomElementContainer,
-} from '../internal';
-import {
     VirtualizedSelectField,
     withSelectTranslations,
     withGotoInterface,
@@ -14,9 +9,14 @@ import {
     withCalculateMessages,
     withDisplayMessages,
 } from '../../../../FormFields/New';
-import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
-import { withOptionsIconElement } from './withOptionsIconElement';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+    withCustomElementContainer,
+} from '../internal';
 import customFormStyles from './optionSetSelectFieldForCustomForm.module.css';
+import { withOptionsIconElement } from './withOptionsIconElement';
+import { withRulesOptionVisibilityHandler } from './withRulesOptionVisibilityHandler';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 

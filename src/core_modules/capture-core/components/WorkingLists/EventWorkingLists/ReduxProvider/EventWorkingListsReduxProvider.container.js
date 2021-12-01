@@ -1,14 +1,14 @@
 // @flow
-import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useProgramInfo } from '../../../../hooks/useProgramInfo';
+import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
+import { EventWorkingListsColumnSetup } from '../ColumnSetup';
+import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
 import {
     openViewEventPage,
     requestDeleteEvent,
 } from '../eventWorkingLists.actions';
-import { SINGLE_EVENT_WORKING_LISTS_TYPE } from '../constants';
-import { EventWorkingListsColumnSetup } from '../ColumnSetup';
-import { useWorkingListsCommonStateManagement } from '../../WorkingListsCommon';
-import { useProgramInfo } from '../../../../hooks/useProgramInfo';
 import type { Props } from './eventWorkingListsReduxProvider.types';
 
 export const EventWorkingListsReduxProvider = ({ storeId, programId, programStageId, orgUnitId }: Props) => {

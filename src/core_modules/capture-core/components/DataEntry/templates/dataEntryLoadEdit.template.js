@@ -1,11 +1,11 @@
 // @flow
-import { getDataEntryKey } from '../common/getDataEntryKey';
-import { getDataEntryMeta, getDataEntryValues, getFormValues, validateDataEntryValues, getDataEntryNotes } from '../actions/dataEntryLoad.utils';
-import type { DataEntryPropToInclude } from '../actions/dataEntryLoad.utils';
-import { loadEditDataEntry } from '../actions/dataEntry.actions';
-import { addFormData } from '../../D2Form/actions/form.actions';
 import type { RenderFoundation } from '../../../metaData';
+import { addFormData } from '../../D2Form/actions/form.actions';
+import { loadEditDataEntry } from '../actions/dataEntry.actions';
+import { getDataEntryMeta, getDataEntryValues, getFormValues, validateDataEntryValues, getDataEntryNotes } from '../actions/dataEntryLoad.utils';
 
+import type { DataEntryPropToInclude } from '../actions/dataEntryLoad.utils';
+import { getDataEntryKey } from '../common/getDataEntryKey';
 
 // eslint-disable-next-line complexity
 export async function loadEditDataEntryAsync(

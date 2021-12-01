@@ -1,8 +1,8 @@
 
 // @flow
-import * as React from 'react';
-import classNames from 'classnames';
 import { Chip, withStyles } from '@material-ui/core';
+import classNames from 'classnames';
+import * as React from 'react';
 
 
 const getStyles = (theme: Theme) => ({

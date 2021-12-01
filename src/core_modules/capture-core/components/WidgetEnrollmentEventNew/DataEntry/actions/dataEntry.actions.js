@@ -1,6 +1,6 @@
 // @flow
-import typeof { addEventSaveTypes } from '../addEventSaveTypes';
 import { actionCreator, actionPayloadAppender } from '../../../../actions/actions.utils';
+import typeof { addEventSaveTypes } from '../addEventSaveTypes';
 
 export const newEventWidgetDataEntryBatchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_ADD_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForAddEventActionsBatch',

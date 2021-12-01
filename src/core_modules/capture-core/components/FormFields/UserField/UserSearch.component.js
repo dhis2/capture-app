@@ -1,13 +1,13 @@
 // @flow
-import uuid from 'uuid/v4';
-import * as React from 'react';
-import { makeCancelablePromise } from 'capture-core-utils';
 import i18n from '@dhis2/d2-i18n';
+import { makeCancelablePromise } from 'capture-core-utils';
+import * as React from 'react';
+import uuid from 'uuid/v4';
 import { getApi } from '../../../d2/d2Instance';
-import type { User } from './types';
-import { SearchSuggestions } from './SearchSuggestions.component';
-import { SearchContext } from './Search.context';
 import { Input } from './Input.component';
+import { SearchContext } from './Search.context';
+import { SearchSuggestions } from './SearchSuggestions.component';
+import type { User } from './types';
 
 type Props = {
     onSet: (user: User) => void,

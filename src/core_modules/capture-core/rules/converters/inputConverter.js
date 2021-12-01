@@ -1,9 +1,9 @@
 // @flow
 /* eslint-disable class-methods-use-this */
-import moment from 'moment';
-import log from 'loglevel';
-import type { IConvertInputRulesValue } from 'capture-core-utils/rulesEngine/rulesEngine.types';
 import { parseNumber } from 'capture-core-utils/parsers';
+import type { IConvertInputRulesValue } from 'capture-core-utils/rulesEngine/rulesEngine.types';
+import log from 'loglevel';
+import moment from 'moment';
 
 const dateMomentFormat = 'YYYY-MM-DD';
 

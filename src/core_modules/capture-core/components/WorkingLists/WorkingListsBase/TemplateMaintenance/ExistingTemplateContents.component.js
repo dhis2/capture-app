@@ -1,8 +1,8 @@
 // @flow
-import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
+import { DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import * as React from 'react';
 import { Button } from '../../../Buttons/Button.component';
 
 const getStyles = () => ({

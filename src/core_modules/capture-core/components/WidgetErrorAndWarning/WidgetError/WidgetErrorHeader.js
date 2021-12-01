@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
-import { ErrorRounded } from '@material-ui/icons';
-import { withStyles } from '@material-ui/core';
-import { spacers, colors } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { spacers, colors } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import { ErrorRounded } from '@material-ui/icons';
+import React from 'react';
 
 const styles = {
     container: {

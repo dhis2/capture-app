@@ -1,17 +1,17 @@
 // @flow
-import { useMemo } from 'react';
-import { translatedStatusTypes } from 'capture-core/events/statusTypes';
 import i18n from '@dhis2/d2-i18n';
-import {
-    type ProgramStage,
-    dataElementTypes as elementTypeKeys,
-} from '../../../../metaData';
-import { mainPropertyNames } from '../../../../events/mainPropertyNames.const';
+import { translatedStatusTypes } from 'capture-core/events/statusTypes';
+import { useMemo } from 'react';
 import type {
     MainColumnConfig,
     MetadataColumnConfig,
     EventWorkingListsColumnConfigs,
 } from '..';
+import { mainPropertyNames } from '../../../../events/mainPropertyNames.const';
+import {
+    type ProgramStage,
+    dataElementTypes as elementTypeKeys,
+} from '../../../../metaData';
 
 
 const getDefaultMainConfig = (stage: ProgramStage): Array<MainColumnConfig> => {

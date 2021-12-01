@@ -1,7 +1,8 @@
 // @flow
 
-import * as React from 'react';
-import classNames from 'classnames';
+import i18n from '@dhis2/d2-i18n';
+import { CircularLoader } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
 import {
     Table,
     Head,
@@ -12,12 +13,11 @@ import {
     sortLabelDirections,
     sorLabelPlacements,
 } from 'capture-ui';
-import { withStyles } from '@material-ui/core/styles';
-import { CircularLoader } from '@dhis2/ui';
-import i18n from '@dhis2/d2-i18n';
-import { SortLabelWrapper } from '../../DataTable/SortLabelWrapper.component';
+import classNames from 'classnames';
+import * as React from 'react';
 import { dataElementTypes } from '../../../metaData';
 import type { OptionSet } from '../../../metaData';
+import { SortLabelWrapper } from '../../DataTable/SortLabelWrapper.component';
 
 
 const getStyles = (theme: Theme) => ({

@@ -1,13 +1,13 @@
 // @flow
-import React, { useCallback, useMemo, useEffect } from 'react';
-import log from 'loglevel';
-import { createHashHistory as createHistory, type HashHistory } from 'history';
-import { DisplayException } from 'capture-core/utils/exceptions';
-import { makeQuerySingleResource } from 'capture-core/utils/api';
-import { environments } from 'capture-core/constants';
-import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
-import { buildUrl } from 'capture-core-utils';
 import { useDataEngine } from '@dhis2/app-runtime';
+import { buildUrl } from 'capture-core-utils';
+import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
+import { environments } from 'capture-core/constants';
+import { makeQuerySingleResource } from 'capture-core/utils/api';
+import { DisplayException } from 'capture-core/utils/exceptions';
+import { createHashHistory as createHistory, type HashHistory } from 'history';
+import log from 'loglevel';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import { getStore } from '../../store/getStore';
 import { initializeAsync } from './init';
 

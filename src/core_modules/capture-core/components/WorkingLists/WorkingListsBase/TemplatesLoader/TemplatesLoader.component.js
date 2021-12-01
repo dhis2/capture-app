@@ -1,7 +1,7 @@
 // @flow
 import React, { memo, useCallback, useEffect, useRef } from 'react';
-import { TemplatesManager } from '../TemplatesManager';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
+import { TemplatesManager } from '../TemplatesManager';
 import type { Props } from './templatesLoader.types';
 
 const TemplatesManangerWithLoadingIndicator = withErrorMessageHandler()(

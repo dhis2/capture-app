@@ -1,14 +1,14 @@
 // @flow
 
-import React, { Component } from 'react';
-import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import { colors } from '@dhis2/ui';
-import type { Props } from './QuickSelector.types';
-import { ProgramSelector } from './Program/ProgramSelector.component';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import React, { Component } from 'react';
 import { OrgUnitSelector } from './OrgUnitSelector.component';
+import { ProgramSelector } from './Program/ProgramSelector.component';
+import type { Props } from './QuickSelector.types';
 
 const styles = ({ palette }) => ({
     paper: {

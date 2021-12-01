@@ -1,6 +1,6 @@
 // @flow
-import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withErrorMessageHandler } from '../../../../../HOC/withErrorMessageHandler';
 import { RegisterTeiDataEntryComponent } from './RegisterTeiDataEntry.component';
 

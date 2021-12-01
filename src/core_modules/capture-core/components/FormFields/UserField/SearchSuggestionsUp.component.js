@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import defaultClasses from './searchSuggestionsUp.module.css';
 import { SearchContext } from './Search.context';
+import defaultClasses from './searchSuggestionsUp.module.css';
 
 type Props = {
     children: React.Node,

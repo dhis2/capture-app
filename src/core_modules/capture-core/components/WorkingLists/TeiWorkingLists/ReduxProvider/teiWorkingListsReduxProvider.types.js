@@ -1,11 +1,5 @@
 // @flow
-import type { TeiWorkingListsTemplates, TeiRecords } from '../types';
-import type {
-    CustomColumnOrder,
-    RecordsOrder,
-    UpdateList,
-    InitialViewConfig,
-} from '../../WorkingListsCommon';
+import type { TrackerProgram } from '../../../../metaData';
 import type {
     CancelLoadTemplates,
     CancelLoadView,
@@ -29,7 +23,13 @@ import type {
     UnloadingContext,
     UpdateFilter,
 } from '../../WorkingListsBase';
-import type { TrackerProgram } from '../../../../metaData';
+import type {
+    CustomColumnOrder,
+    RecordsOrder,
+    UpdateList,
+    InitialViewConfig,
+} from '../../WorkingListsCommon';
+import type { TeiWorkingListsTemplates, TeiRecords } from '../types';
 
 export type Props = $ReadOnly<{|
     storeId: string,

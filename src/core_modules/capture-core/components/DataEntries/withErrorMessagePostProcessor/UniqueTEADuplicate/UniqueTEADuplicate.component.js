@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import type { ErrorData } from './uniqueTEADuplicate.types';
-import { ExistingTEIDialog } from './ExistingTEIDialog.component';
 import { ErrorMessageCreator } from './ErrorMessageCreator.container';
+import { ExistingTEIDialog } from './ExistingTEIDialog.component';
+import type { ErrorData } from './uniqueTEADuplicate.types';
 
 type Props = {
     id: string,

@@ -1,7 +1,7 @@
 // @flow
-import { mainStores } from '../../storageControllers/stores';
-import { getMainStorageController } from '../../storageControllers';
 import { getD2 } from '../../d2';
+import { getMainStorageController } from '../../storageControllers';
+import { mainStores } from '../../storageControllers/stores';
 
 function isLangRTL(code) {
     const langs = ['ar', 'fa', 'ur'];

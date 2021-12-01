@@ -1,10 +1,10 @@
 // @flow
-import { connect } from 'react-redux';
 import { type ComponentType } from 'react';
+import { connect } from 'react-redux';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import { makeRelationshipTypesSelector } from './NewEventNewRelationshipWrapper.selectors';
-import { NewRelationshipWrapperComponent } from './NewEventNewRelationshipWrapper.component';
 import { newEventCancelNewRelationship, addNewEventRelationship } from './NewEventNewRelationshipWrapper.actions';
+import { NewRelationshipWrapperComponent } from './NewEventNewRelationshipWrapper.component';
+import { makeRelationshipTypesSelector } from './NewEventNewRelationshipWrapper.selectors';
 
 const makeMapStateToProps = () => {
     const relationshipTypesSelector = makeRelationshipTypesSelector();

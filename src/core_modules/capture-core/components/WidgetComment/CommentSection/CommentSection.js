@@ -1,12 +1,12 @@
 // @flow
-import React, { type ComponentType, useState, useCallback } from 'react';
-import moment from 'moment';
-import cx from 'classnames';
-import { withFocusSaver } from 'capture-ui';
-import { withStyles } from '@material-ui/core';
-import { colors, spacersNum, Button } from '@dhis2/ui';
-import { Parser, Editor } from '@dhis2/d2-ui-rich-text';
 import i18n from '@dhis2/d2-i18n';
+import { Parser, Editor } from '@dhis2/d2-ui-rich-text';
+import { colors, spacersNum, Button } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import { withFocusSaver } from 'capture-ui';
+import cx from 'classnames';
+import moment from 'moment';
+import React, { type ComponentType, useState, useCallback } from 'react';
 import { TextField } from '../../FormFields/New';
 
 const FocusTextField = withFocusSaver()(TextField);

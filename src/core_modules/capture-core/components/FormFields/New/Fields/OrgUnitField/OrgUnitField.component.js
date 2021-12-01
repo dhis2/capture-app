@@ -1,8 +1,8 @@
 // @flow
-import * as React from 'react';
-import { DebounceField } from 'capture-ui';
-import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import { withStyles } from '@material-ui/core/styles';
+import { DebounceField } from 'capture-ui';
+import * as React from 'react';
 import { OrgUnitTree } from './OrgUnitTree.component';
 
 const getStyles = () => ({

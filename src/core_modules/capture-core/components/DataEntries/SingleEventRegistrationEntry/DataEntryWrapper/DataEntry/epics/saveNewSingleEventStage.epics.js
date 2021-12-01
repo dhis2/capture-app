@@ -1,16 +1,16 @@
 // @flow
-import { map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
+import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
+import {
+    removeListItem,
+} from '../../RecentlyAddedEventsList';
+import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAndReturnToList,
 } from '../actions/dataEntry.actions';
-import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
-import {
-    removeListItem,
-} from '../../RecentlyAddedEventsList';
-import { getDataEntryKey } from '../../../../../DataEntry/common/getDataEntryKey';
 
 
 import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';

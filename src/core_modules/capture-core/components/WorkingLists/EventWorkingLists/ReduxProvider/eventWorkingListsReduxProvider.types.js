@@ -1,16 +1,6 @@
 // @flow
-import type {
-    EventWorkingListsTemplates,
-} from '../types';
-import type {
-    AddTemplate,
-    DeleteTemplate,
-    UpdateTemplate,
-    UpdateList,
-    RecordsOrder,
-    CustomColumnOrder,
-    InitialViewConfig,
-} from '../../WorkingListsCommon';
+import type { Program } from '../../../../metaData';
+import type { EventRecords } from '../../EventWorkingListsCommon';
 import type {
     CancelLoadTemplates,
     CancelLoadView,
@@ -36,8 +26,18 @@ import type {
     UpdateFilter,
     WorkingListTemplate,
 } from '../../WorkingListsBase';
-import type { EventRecords } from '../../EventWorkingListsCommon';
-import type { Program } from '../../../../metaData';
+import type {
+    AddTemplate,
+    DeleteTemplate,
+    UpdateTemplate,
+    UpdateList,
+    RecordsOrder,
+    CustomColumnOrder,
+    InitialViewConfig,
+} from '../../WorkingListsCommon';
+import type {
+    EventWorkingListsTemplates,
+} from '../types';
 
 export type Props = $ReadOnly<{|
     storeId: string,

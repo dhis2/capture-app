@@ -7,11 +7,11 @@ import type {
     Enrollment,
     OutputEffects,
 } from 'capture-core-utils/rulesEngine';
-import { rulesEngine } from '../rulesEngine';
-import { convertOptionSetsToRulesEngineFormat } from '../converters/optionSetsConverter';
-import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
-import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
 import type { DataElement, RenderFoundation, TrackerProgram } from '../../metaData';
+import { constantsStore } from '../../metaDataMemoryStores/constants/constants.store';
+import { optionSetStore } from '../../metaDataMemoryStores/optionSets/optionSets.store';
+import { convertOptionSetsToRulesEngineFormat } from '../converters/optionSetsConverter';
+import { rulesEngine } from '../rulesEngine';
 
 type RuleEnrollmentData = {|
     program: TrackerProgram,

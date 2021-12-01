@@ -1,8 +1,8 @@
 // @flow
-import React, { type ComponentType, useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { Button, spacersNum } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { Button, spacersNum } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core/styles';
+import React, { type ComponentType, useState } from 'react';
 import { ConfirmDialog } from '../../Dialogs/ConfirmDialog.component';
 import type { Props } from './scheduleButtons.types';
 

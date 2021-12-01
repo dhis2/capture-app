@@ -1,8 +1,8 @@
 // @flow
-import { formatterOptions } from './format.const';
-import { capitalizeFirstLetterInWords } from './capitalizeFirstLetterInWords';
-import { capitalizeFirstLetter } from './capitalizeFirstLetter';
 import { capitalize } from './capitalize';
+import { capitalizeFirstLetter } from './capitalizeFirstLetter';
+import { capitalizeFirstLetterInWords } from './capitalizeFirstLetterInWords';
+import { formatterOptions } from './format.const';
 
 const mapOptionsToFormatters = {
     [formatterOptions.CAPITALIZE]: capitalize,

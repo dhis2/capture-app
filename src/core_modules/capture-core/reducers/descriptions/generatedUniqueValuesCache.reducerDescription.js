@@ -1,18 +1,19 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux';
-import {
-    actionTypes as viewEventRelationshipsActionTypes,
-} from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
-import {
-    mainActionTypes as dataEntryActionTypes,
-} from '../../components/DataEntry';
-import {
-    openActionTypes as teiOpenActionTypes,
-} from '../../components/DataEntries/TrackedEntityInstance';
 import {
     openActionTypes as enrollmentOpenActionTypes,
 } from '../../components/DataEntries/Enrollment';
+import {
+    openActionTypes as teiOpenActionTypes,
+} from '../../components/DataEntries/TrackedEntityInstance';
 
+import {
+    mainActionTypes as dataEntryActionTypes,
+} from '../../components/DataEntry';
+
+import {
+    actionTypes as viewEventRelationshipsActionTypes,
+} from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
+import { createReducerDescription } from '../../trackerRedux';
 
 export const generatedUniqueValuesCacheDesc = createReducerDescription({
     [enrollmentOpenActionTypes.DATA_ENTRY_NEW_ENROLLMENT_OPEN]: (state, action) => {

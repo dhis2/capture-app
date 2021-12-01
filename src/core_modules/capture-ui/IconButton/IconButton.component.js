@@ -1,8 +1,8 @@
 // @flow
-import React, { useCallback } from 'react';
 import cx from 'classnames';
-import type { Props } from './iconButton.types';
+import React, { useCallback } from 'react';
 import classes from './iconButton.module.css';
+import type { Props } from './iconButton.types';
 
 export const IconButton = ({ children, className, dataTest, onClick, ...passOnProps }: Props) => {
     const handleKeyDown = useCallback((event: SyntheticKeyboardEvent<HTMLSpanElement>) => {

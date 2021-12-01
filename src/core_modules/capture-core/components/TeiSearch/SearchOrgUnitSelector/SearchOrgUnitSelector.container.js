@@ -1,13 +1,13 @@
 // @flow
 import { connect } from 'react-redux';
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import { SearchOrgUnitSelectorRefHandler } from './SearchOrgUnitSelectorRefHandler.component';
 import {
     setOrgUnitScope,
     setOrgUnit,
     requestFilterOrgUnits,
     clearOrgUnitsFilter,
 } from './searchOrgUnitSelector.actions';
+import { SearchOrgUnitSelectorRefHandler } from './SearchOrgUnitSelectorRefHandler.component';
 
 const mapStateToProps = (state: ReduxState, props: Object) => {
     const searchId = props.searchId;

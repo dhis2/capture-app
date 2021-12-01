@@ -1,11 +1,11 @@
 // @flow
-import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import {
     Pagination,
 } from 'capture-ui';
-import i18n from '@dhis2/d2-i18n';
-import { withRowsPerPageSelector } from '../../Pagination/withRowsPerPageSelector';
+import * as React from 'react';
 import { withNavigation } from '../../Pagination/withDefaultNavigation';
+import { withRowsPerPageSelector } from '../../Pagination/withRowsPerPageSelector';
 import type { Props } from './listPaginationMain.types';
 
 const PaginationWrapped = withRowsPerPageSelector()(withNavigation()(Pagination));

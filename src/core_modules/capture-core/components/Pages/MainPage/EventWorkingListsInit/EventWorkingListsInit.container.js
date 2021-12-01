@@ -1,8 +1,8 @@
 // @flow
-import { useSelector } from 'react-redux';
 import React from 'react';
-import type { Props } from './EventWorkingListsInit.container.type';
+import { useSelector } from 'react-redux';
 import { EventWorkingListsInitConnectionStatusResolver } from './ConnectionStatusResolver';
+import type { Props } from './EventWorkingListsInit.container.type';
 
 export const EventWorkingListsInit = ({ ...passOnProps }: Props) => {
     const isOnline = useSelector(({ offline: { online }, app: { goingOnlineInProgress } }) =>

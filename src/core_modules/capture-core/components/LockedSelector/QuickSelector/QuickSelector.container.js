@@ -1,15 +1,15 @@
 // @flow
 
 import { connect } from 'react-redux';
+import { convertValue } from '../../../converters/clientToView';
+import { getScopeInfo } from '../../../metaData';
+import { dataElementTypes } from '../../../metaData/DataElement';
+import { deriveUrlQueries } from '../../../utils/url';
 import {
     resetEnrollmentSelection,
     resetTeiSelection,
     setEnrollmentSelection,
 } from '../LockedSelector.actions';
-import { deriveUrlQueries } from '../../../utils/url';
-import { dataElementTypes } from '../../../metaData/DataElement';
-import { getScopeInfo } from '../../../metaData';
-import { convertValue } from '../../../converters/clientToView';
 import { QuickSelectorComponent } from './QuickSelector.component';
 
 const buildEnrollmentsAsOptions = (enrollments = [], selectedProgramId) =>

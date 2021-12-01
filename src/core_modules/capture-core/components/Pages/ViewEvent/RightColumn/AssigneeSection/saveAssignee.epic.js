@@ -1,9 +1,9 @@
 // @flow
-import { map } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
-import { getEventProgramThrowIfNotFound } from '../../../../../metaData';
-import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
+import { map } from 'rxjs/operators';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
+import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
+import { getEventProgramThrowIfNotFound } from '../../../../../metaData';
 import { actionTypes, saveAssignee } from './assigneeSection.actions';
 
 export const saveAssigneeEpic = (action$: InputObservable, store: ReduxStore) =>

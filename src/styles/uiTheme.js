@@ -1,6 +1,6 @@
 // @flow
-import { createMuiTheme } from '@material-ui/core/styles';
 import { colors } from '@dhis2/ui';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 const primary = {
     main: '#1976D2',

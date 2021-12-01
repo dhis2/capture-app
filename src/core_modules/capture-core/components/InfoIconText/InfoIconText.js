@@ -1,8 +1,8 @@
 // @flow
-import React, { type ComponentType, type Node } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Grid from '@material-ui/core/Grid';
 import { IconInfo16, colors } from '@dhis2/ui';
+import Grid from '@material-ui/core/Grid';
+import withStyles from '@material-ui/core/styles/withStyles';
+import React, { type ComponentType, type Node } from 'react';
 
 
 type OwnProps = {| children: string | Node |}

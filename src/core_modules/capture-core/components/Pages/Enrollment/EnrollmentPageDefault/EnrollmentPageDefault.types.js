@@ -1,6 +1,6 @@
 // @flow
-import type { Program } from 'capture-core/metaData';
 import type { Stage } from 'capture-core/components/WidgetStagesAndEvents/types/common.types';
+import type { Program } from 'capture-core/metaData';
 import type { WidgetEffects, HideWidgets } from '../../common/EnrollmentOverviewDomain';
 
 export type Props = {|

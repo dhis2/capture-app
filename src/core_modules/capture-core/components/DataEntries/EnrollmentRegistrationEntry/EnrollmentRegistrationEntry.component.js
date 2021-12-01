@@ -1,21 +1,21 @@
 // @flow
-import { compose } from 'redux';
-import { useHistory } from 'react-router-dom';
-import React, { type ComponentType } from 'react';
-import { withStyles } from '@material-ui/core';
-import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
-import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
-import { EnrollmentDataEntry } from '../Enrollment';
-import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
-import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
-import { InfoIconText } from '../../InfoIconText';
-import { withSaveHandler } from '../../DataEntry';
-import { buildUrlQueryString } from '../../../utils/routing';
-import { scopeTypes } from '../../../metaData';
-import { useScopeInfo } from '../../../hooks/useScopeInfo';
-import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
+import { Button } from '@dhis2/ui';
+import { withStyles } from '@material-ui/core';
+import React, { type ComponentType } from 'react';
+import { useHistory } from 'react-router-dom';
+import { compose } from 'redux';
 import { withLoadingIndicator } from '../../../HOC';
+import { useCurrentOrgUnitInfo } from '../../../hooks/useCurrentOrgUnitInfo';
+import { useScopeInfo } from '../../../hooks/useScopeInfo';
+import { scopeTypes } from '../../../metaData';
+import { buildUrlQueryString } from '../../../utils/routing';
+import { withSaveHandler } from '../../DataEntry';
+import { InfoIconText } from '../../InfoIconText';
+import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
+import { useRegistrationFormInfoForSelectedScope } from '../common/useRegistrationFormInfoForSelectedScope';
+import { EnrollmentDataEntry } from '../Enrollment';
+import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import type { Props, PlainProps } from './EnrollmentRegistrationEntry.types';
 
 const styles = ({ typography }) => ({

@@ -1,17 +1,17 @@
 // @flow
-import { useDispatch } from 'react-redux';
-import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
+import { useReset, useSetOrgUnitId } from '../ScopeSelector/hooks';
+import { resetProgramIdBase } from '../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
 import {
     resetAllCategoryOptionsFromScopeSelector,
     resetProgramIdBatchAction,
 } from '../ScopeSelector/ScopeSelector.actions';
-import { resetProgramIdBase } from '../ScopeSelector/QuickSelector/actions/QuickSelector.actions';
-import { useReset, useSetOrgUnitId } from '../ScopeSelector/hooks';
-import { ConfirmDialog } from '../Dialogs/ConfirmDialog.component';
-import type { Props } from './TopBarActions.types';
-import { ActionButtons } from './TopBarActions.component';
 import { openNewRegistrationPageFromScopeSelector, openSearchPageFromScopeSelector } from './TopBarActions.actions';
+import { ActionButtons } from './TopBarActions.component';
+import type { Props } from './TopBarActions.types';
 
 const defaultDialogProps = {
     header: i18n.t('Unsaved changes'),

@@ -1,14 +1,14 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
-import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
-import { SectionHeaderSimple } from '../Section/SectionHeaderSimple.component';
-import { Section } from '../Section/Section.component';
-import { D2Form } from '../D2Form';
+import * as React from 'react';
 import type { RenderFoundation } from '../../metaData';
-import { placements } from './constants/placements.const';
+import { D2Form } from '../D2Form';
+import { Section } from '../Section/Section.component';
+import { SectionHeaderSimple } from '../Section/SectionHeaderSimple.component';
+import { StickyOnScroll } from '../Sticky/StickyOnScroll.component';
 import { getDataEntryKey } from './common/getDataEntryKey';
+import { placements } from './constants/placements.const';
 
 const styles = theme => ({
     loadingContainer: {

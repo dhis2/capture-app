@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { OfflineList } from './OfflineList.component';
 import { OfflineEmptyList } from './OfflineEmptyList.component';
+import { OfflineList } from './OfflineList.component';
 
 type Props = {
     hasData: boolean,

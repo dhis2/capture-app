@@ -1,8 +1,8 @@
 // @flow
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import {
     actionTypes as relationshipActionTypes,
 } from '../../components/Relationships/relationships.actions';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 export const relationshipsDesc = createReducerDescription({
     [relationshipActionTypes.SET_RELATIONSHIPS]: (state, action) => ({

@@ -1,11 +1,11 @@
 // @flow
-import React from 'react';
-import { withTheme } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import { DATA_ENTRY_ID } from '../../registerTei.const';
+import { withTheme } from '@material-ui/core/styles';
+import React from 'react';
 import { EnrollmentRegistrationEntry } from '../../../../../DataEntries';
-import enrollmentClasses from './enrollment.module.css';
+import { DATA_ENTRY_ID } from '../../registerTei.const';
 import type { Props } from './dataEntryEnrollment.types';
+import enrollmentClasses from './enrollment.module.css';
 
 const NewEnrollmentRelationshipPlain =
   ({

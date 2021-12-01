@@ -1,23 +1,23 @@
 // @flow
-import type { Updaters } from '../../trackerRedux/trackerReducer';
-import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
 import {
-    actionTypes as viewEventActionTypes,
-} from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import {
-    actionTypes as editEventActionTypes,
-} from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
-import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
-import {
-    actionTypes as crossPageActionTypes,
-} from '../../components/Pages/actions/crossPage.actions';
+    lockedSelectorActionTypes,
+} from '../../components/LockedSelector';
 import {
     actionTypes as quickSelectorActionTypes,
 } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import {
-    lockedSelectorActionTypes,
-} from '../../components/LockedSelector';
+    actionTypes as crossPageActionTypes,
+} from '../../components/Pages/actions/crossPage.actions';
+import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
+import {
+    actionTypes as editEventActionTypes,
+} from '../../components/Pages/ViewEvent/ViewEventComponent/editEvent.actions';
+import {
+    actionTypes as viewEventActionTypes,
+} from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { trackedEntityTypeSelectorActionTypes } from '../../components/TrackedEntityTypeSelector/TrackedEntityTypeSelector.actions';
+import type { Updaters } from '../../trackerRedux/trackerReducer';
+import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 const setCategoryOption = (
     state: Object,
