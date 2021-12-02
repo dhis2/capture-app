@@ -7,7 +7,7 @@ export type Props = {|
     program: Program,
     enrollmentId: string,
     teiId: string,
-    events: Array<ApiEnrollmentEvent>,
+    events: ?Array<ApiEnrollmentEvent>,
     stages: Array<Stage>,
     widgetEffects: ?WidgetEffects,
     hideWidgets: HideWidgets,

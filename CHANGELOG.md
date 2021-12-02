@@ -1,3 +1,80 @@
+## [1.62.2](https://github.com/dhis2/capture-app/compare/v1.62.1...v1.62.2) (2021-11-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a120ef7](https://github.com/dhis2/capture-app/commit/a120ef7250a4367147f9f603aab7ed64b015eb38))
+
+## [1.62.1](https://github.com/dhis2/capture-app/compare/v1.62.0...v1.62.1) (2021-11-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1c39027](https://github.com/dhis2/capture-app/commit/1c3902746326aede4df48062ece31be43816a4fd))
+
+# [1.62.0](https://github.com/dhis2/capture-app/compare/v1.61.3...v1.62.0) (2021-11-26)
+
+
+### Features
+
+* [DHIS2-11864] Schedule event using redux ([#2216](https://github.com/dhis2/capture-app/issues/2216)) ([cf049b4](https://github.com/dhis2/capture-app/commit/cf049b4e12ea316b3b5d6ee1cc5c913813b87550)), closes [#2211](https://github.com/dhis2/capture-app/issues/2211)
+
+## [1.61.3](https://github.com/dhis2/capture-app/compare/v1.61.2...v1.61.3) (2021-11-26)
+
+
+### Bug Fixes
+
+* [DHIS2-12134] fetching logic in common enrollment hook ([fe82c00](https://github.com/dhis2/capture-app/commit/fe82c00308e2dab74c23488038de6c2d32007d3d))
+
+## [1.61.2](https://github.com/dhis2/capture-app/compare/v1.61.1...v1.61.2) (2021-11-17)
+
+
+### Bug Fixes
+
+* [DHIS2-12122] fix overdue condition ([#2256](https://github.com/dhis2/capture-app/issues/2256)) ([42c70ac](https://github.com/dhis2/capture-app/commit/42c70acec49d457c3f9fef76211b6dcf93a831bd))
+
+## [1.61.1](https://github.com/dhis2/capture-app/compare/v1.61.0...v1.61.1) (2021-11-16)
+
+
+### Bug Fixes
+
+* refetch dependency causing infinite loop ([3fc4a52](https://github.com/dhis2/capture-app/commit/3fc4a521c7b52f9f8b18ccea2b324cbb5dcf2079))
+
+# [1.61.0](https://github.com/dhis2/capture-app/compare/v1.60.0...v1.61.0) (2021-11-15)
+
+
+### Features
+
+* [DHIS2-11952] New Event - Program Stage selection list ([#2180](https://github.com/dhis2/capture-app/issues/2180)) ([ab4636a](https://github.com/dhis2/capture-app/commit/ab4636af5729bbd4b03eceb31979dd5b4011631b))
+
+# [1.60.0](https://github.com/dhis2/capture-app/compare/v1.59.7...v1.60.0) (2021-11-12)
+
+
+### Features
+
+* [DHIS2-11862] implement schedule info ([#2196](https://github.com/dhis2/capture-app/issues/2196)) ([6331591](https://github.com/dhis2/capture-app/commit/6331591cd545158958fcca65d005e8aea626bff8)), closes [#2211](https://github.com/dhis2/capture-app/issues/2211)
+
+## [1.59.7](https://github.com/dhis2/capture-app/compare/v1.59.6...v1.59.7) (2021-11-11)
+
+
+### Bug Fixes
+
+* prevent sending empty data values to the api ([4a2aaaa](https://github.com/dhis2/capture-app/commit/4a2aaaa731b34df546cdbf7e94f091c290f3e04a))
+
+## [1.59.6](https://github.com/dhis2/capture-app/compare/v1.59.5...v1.59.6) (2021-11-10)
+
+
+### Bug Fixes
+
+* [DHIS2-11084] - Bug in TE-Attribute search ([#2236](https://github.com/dhis2/capture-app/issues/2236)) ([27828d4](https://github.com/dhis2/capture-app/commit/27828d4a1e3f88c3a1ac774d0aded27a5c2a1812))
+
+## [1.59.5](https://github.com/dhis2/capture-app/compare/v1.59.4...v1.59.5) (2021-11-09)
+
+
+### Bug Fixes
+
+* [DHIS2-12077] fix i18n string ([#2232](https://github.com/dhis2/capture-app/issues/2232)) ([d3cfe91](https://github.com/dhis2/capture-app/commit/d3cfe91f49aa4144fa7516b8eacdc8731608a8d5))
+
 ## [1.59.4](https://github.com/dhis2/capture-app/compare/v1.59.3...v1.59.4) (2021-10-28)
 
 

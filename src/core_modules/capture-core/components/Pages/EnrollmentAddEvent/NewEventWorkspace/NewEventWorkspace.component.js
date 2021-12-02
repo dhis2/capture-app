@@ -10,8 +10,9 @@ import { WidgetEnrollmentEventNew } from '../../../WidgetEnrollmentEventNew';
 import { ConfirmDialog } from '../../../Dialogs/ConfirmDialog.component';
 import { Widget } from '../../../Widget';
 import { WidgetStageHeader } from './WidgetStageHeader';
+import { WidgetEventSchedule } from '../../../WidgetEventSchedule';
+import { addEnrollmentEventPageActionTypes } from '../enrollmentAddEventPage.actions';
 import type { Props } from './newEventWorkspace.types';
-
 
 const styles = () => ({
     innerWrapper: {
@@ -26,10 +27,13 @@ const NewEventWorkspacePlain = ({
     teiId,
     enrollmentId,
     dataEntryHasChanges,
+    onCancel,
+    onSave,
     classes,
     ...passOnProps
 }: Props) => {
     const selectedTab = useSelector(({ router: { location } }) => location.query.tab);
+    const { events, enrollmentDate, incidentDate } = useSelector(({ enrollmentDomain }) => enrollmentDomain?.enrollment);
     const [mode, setMode] = useState(selectedTab ?? tabMode.REPORT);
     const [isWarningVisible, setWarningVisible] = useState(false);
     const tempMode = useRef(undefined);
@@ -79,7 +83,25 @@ const NewEventWorkspacePlain = ({
                         orgUnitId={orgUnitId}
                         teiId={teiId}
                         enrollmentId={enrollmentId}
+                        onSaveSuccessActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS}
+                        onSaveErrorActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR}
+                        onSave={onSave}
+                        onCancel={onCancel}
                         {...passOnProps}
+                    />}
+                    {mode === tabMode.SCHEDULE && <WidgetEventSchedule
+                        programId={programId}
+                        stageId={stageId}
+                        orgUnitId={orgUnitId}
+                        teiId={teiId}
+                        eventData={events}
+                        enrollmentId={enrollmentId}
+                        enrollmentDate={enrollmentDate}
+                        incidentDate={incidentDate}
+                        onSaveSuccessActionType={addEnrollmentEventPageActionTypes.EVENT_SCHEDULE_SUCCESS}
+                        onSaveErrorActionType={addEnrollmentEventPageActionTypes.EVENT_SCHEDULE_ERROR}
+                        onSave={onSave}
+                        onCancel={onCancel}
                     />}
                 </div>
             </Widget>

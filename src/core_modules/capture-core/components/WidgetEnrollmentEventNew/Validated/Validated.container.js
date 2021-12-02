@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { withSaveHandler } from '../../DataEntry';
 import { useLifecycle } from './useLifecycle';
-import { useOrganisationUnit } from './useOrganisationUnit';
+import { useOrganisationUnit } from '../../../dataQueries';
 import { useClientFormattedRulesExecutionDependencies } from './useClientFormattedRulesExecutionDependencies';
 import { ValidatedComponent } from './Validated.component';
 import { requestSaveEvent } from './validated.actions';
@@ -28,7 +28,7 @@ export const Validated = ({
     const dataEntryId = 'enrollmentEvent';
     const itemId = 'newEvent';
 
-    const { error, orgUnit } = useOrganisationUnit(orgUnitId);
+    const { error, orgUnit } = useOrganisationUnit(orgUnitId, 'displayName, code');
     const rulesExecutionDependenciesClientFormatted =
         useClientFormattedRulesExecutionDependencies(rulesExecutionDependencies, program);
     const ready = useLifecycle({
