@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getApplicableRuleEffectsForTrackerProgram RulesEngine called with computed arguments from getApplicableRuleEffectsForTrackerProgram 1`] = `
+Object {
+  "currentEvent": Object {
+    "da1Id": "currentEventText",
+    "dueDate": "2021-05-31T09:51:38.134",
+    "enrollmentId": "vVtmDlsu3me",
+    "enrollmentStatus": "ACTIVE",
+    "eventDate": "2021-05-31T00:00:00.000",
+    "eventId": "BxGzDJK3JqN",
+    "orgUnitId": "DiszpKrYNg8",
+    "orgUnitName": "Ngelehun CHC",
+    "programId": "IpHINAT79UW",
+    "programStageId": "A03MvHHogjR",
+    "status": "ACTIVE",
+    "trackedEntityInstanceId": "vCGpQAWG17I",
+  },
+  "dataElements": Object {
+    "da1Id": Object {
+      "id": "da1Id",
+      "optionSetId": undefined,
+      "valueType": "TEXT",
+    },
+  },
+  "optionSets": Object {
+    "0": Object {
+      "displayName": undefined,
+      "id": "optionSet1",
+      "options": Array [],
+    },
+  },
+  "otherEvents": Array [
+    Object {
+      "da1Id": "otherEventText",
+      "dueDate": "2021-05-31T09:51:38.134",
+      "enrollmentId": "vVtmDlsu3me",
+      "enrollmentStatus": "ACTIVE",
+      "eventDate": "2021-05-31T00:00:00.000",
+      "eventId": "BxGzDJK3JqN",
+      "orgUnitId": "DiszpKrYNg8",
+      "orgUnitName": "Ngelehun CHC",
+      "programId": "IpHINAT79UW",
+      "programStageId": "A03MvHHogjR",
+      "status": "ACTIVE",
+      "trackedEntityInstanceId": "vCGpQAWG17I",
+    },
+  ],
+  "programRulesContainer": Object {
+    "constants": Array [
+      Object {
+        "id": "constantId1",
+        "value": "1",
+      },
+    ],
+    "programRuleVariables": Array [
+      Object {
+        "dataElementId": "UXz7xuGCEhU",
+        "displayName": "Test",
+        "id": "PUQZWgmQ0jx",
+        "programId": "IpHINAT79UW",
+        "programRuleVariableSourceType": "DATAELEMENT_NEWEST_EVENT_PROGRAM",
+        "useNameForOptionSet": true,
+      },
+      Object {
+        "dataElementId": "H6uSAMO5WLD",
+        "displayName": "apgarcomment",
+        "id": "aKpfPKSRQnv",
+        "programId": "IpHINAT79UW",
+        "programRuleVariableSourceType": "DATAELEMENT_NEWEST_EVENT_PROGRAM",
+        "useNameForOptionSet": true,
+      },
+      Object {
+        "dataElementId": "a3kGcGDCuk6",
+        "displayName": "apgarscore",
+        "id": "g2GooOydipB",
+        "programId": "IpHINAT79UW",
+        "programRuleVariableSourceType": "DATAELEMENT_NEWEST_EVENT_PROGRAM",
+        "useNameForOptionSet": true,
+      },
+    ],
+    "programRules": Array [
+      Object {
+        "condition": "true",
+        "displayName": "TestRule",
+        "id": "JJDQxgHuuL2",
+        "programId": "IpHINAT79UW",
+        "programRuleActions": Array [
+          Object {
+            "data": "#{Test}",
+            "id": "CQaifjkoFEU",
+            "location": "feedback",
+            "programRuleActionType": "DISPLAYTEXT",
+          },
+        ],
+      },
+      Object {
+        "condition": "true",
+        "displayName": "rule1",
+        "id": "rule1Id",
+        "name": "rule1",
+        "priority": 1,
+        "programId": "IpHINAT79UW",
+        "programRuleActions": Array [],
+        "programStageId": "st1Id",
+      },
+    ],
+  },
+  "selectedEnrollment": Object {
+    "enrollmentDate": "2021-05-31T00:00:00.000",
+    "enrollmentId": "vVtmDlsu3me",
+    "incidentDate": "2021-05-31T00:00:00.000",
+  },
+  "selectedEntity": Object {
+    "lZGmxYbs96q": "1995-12-17T03:24:00",
+    "lZGmxYbs97q": 5,
+    "zDhUuAYrxNC": "someTextValue",
+  },
+  "selectedOrgUnit": Object {
+    "code": "Ngelehun CHC",
+    "id": "DiszpKrYNg8",
+  },
+  "trackedEntityAttributes": Object {
+    "lZGmxYbs96q": Object {
+      "id": "lZGmxYbs96q",
+      "optionSetId": undefined,
+      "valueType": "DATE",
+    },
+    "lZGmxYbs97q": Object {
+      "id": "lZGmxYbs97q",
+      "optionSetId": undefined,
+      "valueType": "NUMBER",
+    },
+    "w75KJ2mc4zz": Object {
+      "id": "w75KJ2mc4zz",
+      "optionSetId": undefined,
+      "valueType": "ORGANISATION_UNIT",
+    },
+    "zDhUuAYrxNC": Object {
+      "id": "zDhUuAYrxNC",
+      "optionSetId": undefined,
+      "valueType": "TEXT",
+    },
+  },
+}
+`;

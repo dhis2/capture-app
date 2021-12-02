@@ -1,4 +1,5 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
@@ -14,13 +15,15 @@ import {
 } from '../editEventDataEntry.actions';
 import { getProgramAndStageFromEvent, getProgramThrowIfNotFound } from '../../../../metaData';
 import {
-    getRulesActionsForEvent,
     getCurrentClientValues,
     getCurrentClientMainData,
-} from '../../../../rules/actionsCreator';
+    getApplicableRuleEffectsForEventProgram,
+    getApplicableRuleEffectsForTrackerProgram,
+    updateRulesEffects,
+    type FieldData,
+} from '../../../../rules';
 import { getStageFromEvent } from '../../../../metaData/helpers/getStageFromEvent';
 import { EventProgram, TrackerProgram } from '../../../../metaData/Program';
-import type { FieldData } from '../../../../rules/actionsCreator';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import { prepareEnrollmentEventsForRulesEngine } from '../../../../events/getEnrollmentEvents';
 
@@ -47,44 +50,51 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable, store: Re
             return batchActions(openEventForEditInDataEntry(eventContainer, orgUnit, foundation, program, state.enrollmentDomain.enrollment?.events));
         }));
 
-
 const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const eventId = state.dataEntries[dataEntryId].eventId;
-    const event = state.events[eventId];
-    const { programId } = state.currentSelections;
+    const event = state.events[eventId];  // TODO: Refactor
+    const { programId } = state.currentSelections; // TODO: Refactor
     const program = getProgramThrowIfNotFound(programId);
 
     const orgUnitId = state.currentSelections.orgUnitId;
-    const orgUnit = state.organisationUnits[orgUnitId];
+    const orgUnit = state.organisationUnits[orgUnitId]; // TODO: Refactor
     const stage = program instanceof EventProgram
         ? program.stage
         : getStageFromEvent(event)?.stage;
 
-    const foundation = stage?.stageForm;
+    if (!stage) {
+        throw Error(i18n.t('stage not found in rules execution'));
+    }
+
+    const foundation = stage.stageForm;
     const currentEventValues = foundation ? getCurrentClientValues(state, foundation, formId, fieldData) : {};
+    const currentEventMainData = foundation ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) : {};
+    // $FlowFixMe
+    const currentEvent = { ...currentEventValues, ...currentEventMainData };
 
-    let currentEventMainData = foundation ? getCurrentClientMainData(state, itemId, dataEntryId, foundation) : {};
-    currentEventMainData = { ...state.events[eventId], ...currentEventMainData };
-    const currentEventData = { ...currentEventValues, ...currentEventMainData };
-    const allEvents = state.enrollmentDomain.enrollments?.events;
-    const allEventsData = program instanceof TrackerProgram && allEvents
-        ? [...prepareEnrollmentEventsForRulesEngine(allEvents, currentEventData)]
-        : [currentEventData];
-
-    const rulesActions = getRulesActionsForEvent(
-        program,
-        foundation,
-        formId,
-        orgUnit,
-        currentEventData,
-        allEventsData,
-        stage,
-    );
+    let effects;
+    if (program instanceof TrackerProgram) {
+        const otherEvents = state.enrollmentDomain.enrollments?.events;
+        // TODO: Add attributeValues & enrollmentData
+        effects = getApplicableRuleEffectsForTrackerProgram({
+            program,
+            stage,
+            orgUnit,
+            currentEvent,
+            otherEvents: otherEvents ? prepareEnrollmentEventsForRulesEngine(otherEvents) : undefined,
+        });
+    } else {
+        effects = getApplicableRuleEffectsForEventProgram({
+            program,
+            orgUnit,
+            currentEvent,
+        });
+    }
 
     return batchActions([
-        ...rulesActions,
+        updateRulesEffects(effects, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     editEventDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);

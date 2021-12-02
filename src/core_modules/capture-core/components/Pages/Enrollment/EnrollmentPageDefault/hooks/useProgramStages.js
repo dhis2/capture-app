@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import type { apiProgramStage } from 'capture-core/metaDataStoreLoaders/programs/quickStoreOperations/types';
 import { Program } from '../../../../../metaData';
 
-export const useProgramStages = (program: Program, programStages: Array<apiProgramStage>) => {
+export const useProgramStages = (program: Program, programStages?: Array<apiProgramStage>) => {
     const stages = [];
     if (program && programStages) {
         program.stages.forEach((item) => {

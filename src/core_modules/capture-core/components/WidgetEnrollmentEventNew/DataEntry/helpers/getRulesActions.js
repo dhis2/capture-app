@@ -3,14 +3,16 @@ import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
-    getRulesActionsForEnrollmentEvent,
-} from '../../../../rules/actionsCreator';
-import type { RenderFoundation, TrackerProgram } from '../../../../metaData';
+    getApplicableRuleEffectsForTrackerProgram,
+    updateRulesEffects,
+} from '../../../../rules';
+import type { RenderFoundation, TrackerProgram, ProgramStage } from '../../../../metaData';
 import type { OrgUnit, EnrollmentEvents, AttributeValuesClientFormatted, EnrollmentData } from '../../common.types';
 
 export const getRulesActions = ({
     state, // temporary
     program,
+    stage,
     formFoundation,
     dataEntryId,
     itemId,
@@ -21,6 +23,7 @@ export const getRulesActions = ({
 }: {
     state: ReduxState,
     program: TrackerProgram,
+    stage: ProgramStage,
     formFoundation: RenderFoundation,
     dataEntryId: string,
     itemId: string,
@@ -35,21 +38,15 @@ export const getRulesActions = ({
     const dataEntryValuesClient = getCurrentClientMainData(state, itemId, dataEntryId, formFoundation);
     const eventDataClient = { ...formValuesClient, ...dataEntryValuesClient, programStageId: formFoundation.id };
 
-    const allEventsDataClient = [
-        eventDataClient,
-        ...eventsRulesDependency,
-    ];
-
-    return getRulesActionsForEnrollmentEvent({
+    const effects = getApplicableRuleEffectsForTrackerProgram({
         program,
-        foundation: formFoundation,
-        formId,
+        stage,
         orgUnit,
         currentEvent: eventDataClient,
-        // $FlowFixMe Candidate for Typescript reasoning!! can not cast from stricter to less strict type
-        eventsData: allEventsDataClient,
+        otherEvents: eventsRulesDependency,
         attributeValues: attributesValuesRulesDependency,
-        // $FlowFixMe Candidate for Typescript reasoning!! can not cast from stricter to less strict type
         enrollmentData: enrollmentDataRulesDependency,
     });
+
+    return updateRulesEffects(effects, formId);
 };
