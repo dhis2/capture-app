@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-09-14T23:04:57.863Z\n"
+"POT-Creation-Date: 2021-11-04T12:22:50.798Z\n"
 "PO-Revision-Date: 2021-09-03 23:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2021\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -592,6 +592,9 @@ msgstr "打开此注册时出错。请输入有效网址。"
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr "ID 为“{{enrollmentId}}”的注册不存在"
 
+msgid "Enrollment Dashboard"
+msgstr "注册仪表板"
+
 msgid "No indicator output for this enrollment yet"
 msgstr "此注册尚无指标输出"
 
@@ -678,6 +681,9 @@ msgstr "或者在{{program}}中查看您可以访问的所有记录"
 
 msgid "Or see all events accessible to you in {{program}}"
 msgstr "或者在{{program}}中查看您可以访问的所有事件"
+
+msgid "Please select an organisation unit."
+msgstr "请选择一个组织单位。"
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "选择{{missingCategories}}开始报告"
@@ -946,6 +952,9 @@ msgstr "写一篇关于这个注册登记的评论"
 msgid "This enrollment doesn't have any comments"
 msgstr "本次注册没有任何评论"
 
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr "为 {{orgUnitName}} 中的 {{programName}} 保存到 {{stageName}}"
+
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "无法检索组织机构。请稍后再试。"
 
@@ -966,6 +975,9 @@ msgstr "写一篇关于该事件的评论"
 
 msgid "This event doesn't have any comments"
 msgstr "此事件没有任何评论"
+
+msgid "Event completed"
+msgstr "事件完成"
 
 msgid "Back to all stages and events"
 msgstr "回到所有阶段和事件"

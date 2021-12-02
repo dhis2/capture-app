@@ -53,7 +53,8 @@ export const getAddEventEnrollmentServerData = ({
                     .map(key => ({
                         dataElement: key,
                         value: formServerValues[key],
-                    })),
+                    }))
+                    .filter(({ value }) => value != null),
             },
         ],
     };

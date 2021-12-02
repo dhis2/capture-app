@@ -70,7 +70,7 @@ function setMomentLocaleAsync(locale: string) {
 function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any, firstDayOfWeek: number) {
     return new Promise((resolve, reject) => {
         // $FlowFixMe[unsupported-syntax] automated comment
-        import(`date-fns/locale/${locale}`)
+        import(`date-fns/locale/${locale}/index.js`)
             .then((dateFnLocale) => {
                 const localeData: LocaleDataType = {
                     dateFnsLocale: dateFnLocale,
@@ -91,7 +91,7 @@ function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any,
             }).catch(() => {
                 log.error(`could not get date-fns locale config for ${locale}, fallback to en`);
 
-                import('date-fns/locale/en')
+                import('date-fns/locale/en/index.js') // eslint-disable-line
                     .then((dateFnLocale) => {
                         const localeData: LocaleDataType = {
                             dateFnsLocale: dateFnLocale,
