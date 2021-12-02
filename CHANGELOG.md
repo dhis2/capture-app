@@ -1,3 +1,10 @@
+## [1.62.3](https://github.com/dhis2/capture-app/compare/v1.62.2...v1.62.3) (2021-12-02)
+
+
+### Bug Fixes
+
+* [DHIS2-12112] add missing programStage rules ([ac15dac](https://github.com/dhis2/capture-app/commit/ac15dac0bac5c32e9b149c0aaeea3e7464901d22))
+
 ## [1.62.2](https://github.com/dhis2/capture-app/compare/v1.62.1...v1.62.2) (2021-11-30)
 
 
