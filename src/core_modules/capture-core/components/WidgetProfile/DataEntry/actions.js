@@ -15,6 +15,7 @@ import { loadNewDataEntry } from '../../DataEntry/actions/dataEntryLoadNew.actio
 import { rulesExecutedPostUpdateField } from '../../DataEntry/actions/dataEntry.actions';
 import { startRunRulesPostUpdateField } from '../../DataEntry';
 import { getRulesActionsForTEI } from './ProgramRules';
+import { addFormData } from '../../D2Form/actions/form.actions';
 
 const batchActionTypes = {
     UPDATE_FIELD_PROFILE_ACTION_BATCH: 'UpdateFieldProfileActionBatch',
@@ -82,6 +83,7 @@ export const getOpenDataEntryActions = ({
     trackedEntityAttributes,
     optionSets,
     rulesContainer,
+    formValues,
 }: {
     orgUnit: OrgUnit,
     dataEntryId: string,
@@ -90,10 +92,12 @@ export const getOpenDataEntryActions = ({
     trackedEntityAttributes: ?TrackedEntityAttributes,
     optionSets: OptionSets,
     rulesContainer: ProgramRulesContainer,
+    formValues: { [key: string]: any },
 }) =>
     batchActions(
         [
             ...loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude),
+            addFormData(`${dataEntryId}-${itemId}`, formValues),
             ...getRulesActionsForTEI({
                 foundation,
                 formId: `${dataEntryId}-${itemId}`,
