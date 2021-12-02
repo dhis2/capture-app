@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-11-29T08:49:07.532Z\n"
-"PO-Revision-Date: 2021-11-29T08:49:07.532Z\n"
+"POT-Creation-Date: 2021-12-02T13:26:20.780Z\n"
+"PO-Revision-Date: 2021-12-02T13:26:20.780Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -142,6 +142,9 @@ msgstr "Assigned user"
 
 msgid "Search for user"
 msgstr "Search for user"
+
+msgid "Complete event"
+msgstr "Complete event"
 
 msgid "Basic info"
 msgstr "Basic info"
@@ -598,9 +601,6 @@ msgstr "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgid "Enrollment Dashboard"
 msgstr "Enrollment Dashboard"
 
-msgid "Enrollment Dashboard"
-msgstr ""
-
 msgid "No indicator output for this enrollment yet"
 msgstr "No indicator output for this enrollment yet"
 
@@ -710,9 +710,6 @@ msgstr "Or see all events accessible to you in {{program}}"
 
 msgid "Please select an organisation unit."
 msgstr "Please select an organisation unit."
-
-msgid "Please select an organisation unit."
-msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
 msgstr "Choose the {{missingCategories}} to start reporting"
@@ -990,9 +987,6 @@ msgstr "Write a comment about this enrollment"
 msgid "This enrollment doesn't have any comments"
 msgstr "This enrollment doesn't have any comments"
 
-msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
-msgstr ""
-
 msgid "organisation unit could not be retrieved. Please try again later."
 msgstr "organisation unit could not be retrieved. Please try again later."
 
@@ -1016,9 +1010,6 @@ msgstr "This event doesn't have any comments"
 
 msgid "Event completed"
 msgstr "Event completed"
-
-msgid "Event completed"
-msgstr ""
 
 msgid "Back to all stages and events"
 msgstr "Back to all stages and events"
