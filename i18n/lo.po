@@ -147,7 +147,7 @@ msgid "Search for user"
 msgstr ""
 
 msgid "Complete event"
-msgstr ""
+msgstr "Complete event"
 
 msgid "Basic info"
 msgstr ""
