@@ -11,45 +11,46 @@ type Props = {|
     orgUnitId?: string,
 |}
 
-const IdTypes = Object.freeze({
-    PROGRAM: 'programId',
-    ORG_UNIT: 'orgUnitId',
+export const IdTypes = Object.freeze({
+    PROGRAM_ID: 'programId',
+    ORG_UNIT_ID: 'orgUnitId',
 });
 
 export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
-    const [valid, setValid] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [valid, setValid] = useState({
+        [IdTypes.PROGRAM_ID]: undefined,
+        [IdTypes.ORG_UNIT_ID]: undefined,
+    });
     const [error, setError] = useState();
 
     const getPromises = useCallback(() => {
         const promises = [];
         const keys = [];
         if (programId) {
-            keys.push({ id: programId, type: IdTypes.PROGRAM });
+            keys.push({ id: programId, type: IdTypes.PROGRAM_ID, convert: value => value });
             promises.push(containsKeyInStorageAsync(userStores.PROGRAMS, programId));
         }
+
         if (orgUnitId) {
-            keys.push({ id: orgUnitId, type: IdTypes.ORG_UNIT });
+            keys.push({ id: orgUnitId, type: IdTypes.ORG_UNIT_ID, convert: value => !!value?.organisationUnits[orgUnitId] });
             promises.push(getCachedSingleResourceFromKeyAsync(userStores.ORGANISATION_UNITS_BY_PROGRAM, programId));
         }
 
         Promise.all(promises)
             .then((adapterResponses) => {
-                if (orgUnitId) {
-                    adapterResponses[1] = adapterResponses[1]?.organisationUnits[orgUnitId];
-                }
                 // $FlowFixMe - Missing declaration for U
-                const adapterResponseObjects = keys.map(({ id, type }, index) => ({
-                    id,
-                    valid: adapterResponses[index],
-                    type,
-                }));
+                const adapterResponseObjects = keys.reduce((acc, { id, type, convert }, index) => {
+                    acc[type] = {
+                        id,
+                        valid: convert(adapterResponses[index]),
+                        type,
+                    };
+                    return acc;
+                }, {});
                 setValid(adapterResponseObjects);
-                setLoading(false);
             })
             .catch((e) => {
                 setError(e);
-                setLoading(false);
             });
     }, [programId, orgUnitId]);
 
@@ -57,13 +58,16 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
         getPromises();
     }, [programId, orgUnitId, getPromises]);
 
-    const inEffectData = !loading && (programId === valid[0]?.id) && (orgUnitId === valid[1]?.id) ? {
+    const inEffectData = (programId === valid[IdTypes.PROGRAM_ID]?.id) && (orgUnitId === valid[IdTypes.ORG_UNIT_ID]?.id) ? {
         valid,
         error,
     } : {
-        valid: [],
+        valid: {
+            [IdTypes.PROGRAM_ID]: undefined,
+            [IdTypes.ORG_UNIT_ID]: undefined,
+        },
         error: undefined,
     };
 
-    return { ...inEffectData, loading };
+    return { ...inEffectData };
 };
