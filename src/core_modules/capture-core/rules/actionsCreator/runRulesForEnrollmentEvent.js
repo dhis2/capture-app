@@ -54,6 +54,11 @@ const createEventsContainer = (eventsData: EventsData) => {
     return { all: eventsData, byStage: eventsDataByStage };
 };
 
+const getRulesMetadata = (programRuleVariables, programRules, programStageRules) => ({
+    programRulesVariables: programRuleVariables,
+    programRules: [...programRules, ...programStageRules || []],
+});
+
 export const runRulesForEnrollmentEvent = ({
     program,
     foundation,
@@ -63,11 +68,11 @@ export const runRulesForEnrollmentEvent = ({
     attributeValues,
     enrollmentData,
 }: RuleEnrollmentData) => {
-    const {
-        programRuleVariables: programRulesVariables,
-        programRules,
-    } = program;
-
+    const { programRules, programRulesVariables } = getRulesMetadata(
+        program.programRuleVariables,
+        program.programRules,
+        program.stages.get(foundation.id)?.programRules,
+    );
     if (!programRules || !programRules.length) {
         return null;
     }

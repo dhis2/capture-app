@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-11-15T15:28:19.564Z\n"
-"PO-Revision-Date: 2021-11-15T15:28:19.564Z\n"
+"POT-Creation-Date: 2021-12-02T13:26:20.780Z\n"
+"PO-Revision-Date: 2021-12-02T13:26:20.780Z\n"
 
 msgid "Choose one or more dates..."
 msgstr "Choose one or more dates..."
@@ -142,6 +142,9 @@ msgstr "Assigned user"
 
 msgid "Search for user"
 msgstr "Search for user"
+
+msgid "Complete event"
+msgstr "Complete event"
 
 msgid "Basic info"
 msgstr "Basic info"
@@ -1054,6 +1057,9 @@ msgstr "Person Profile"
 
 msgid "New {{ eventName }} event"
 msgstr "New {{ eventName }} event"
+
+msgid "This event is not yet preserved and cannot be edited"
+msgstr "This event is not yet preserved and cannot be edited"
 
 msgid "Show {{ rest }} more"
 msgstr "Show {{ rest }} more"
