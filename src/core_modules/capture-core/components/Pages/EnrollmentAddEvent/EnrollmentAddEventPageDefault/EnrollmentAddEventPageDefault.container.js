@@ -4,6 +4,7 @@ import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
 import { useDispatch, useSelector } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
+import { NoticeBox } from '@dhis2/ui';
 import { useLocationQuery } from '../../../../utils/routing';
 import { navigateToEnrollmentPage } from './EnrollmentAddEventPageDefault.actions';
 import { useProgramInfo } from '../../../../hooks/useProgramInfo';
@@ -80,7 +81,14 @@ export const EnrollmentAddEventPageDefault = ({
     } = useEnrollmentAddEventTopBar(teiId, programId, enrollment);
 
     if (stageId && !selectedProgramStage) {
-        return <p style={{ color: 'red' }}>{i18n.t('Program stage is invalid')}</p>;
+        return (
+            <NoticeBox
+                error
+                title={'An error has occurred'}
+            >
+                {i18n.t('Program stage is invalid')}
+            </NoticeBox>
+        );
     }
 
     return (
