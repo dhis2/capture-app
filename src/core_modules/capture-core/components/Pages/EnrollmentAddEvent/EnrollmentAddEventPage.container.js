@@ -24,7 +24,7 @@ const styles = {
 
 const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     const { teiId, programId, orgUnitId, enrollmentId } = useLocationQuery();
-    const { valid: validIds, error: validatedIdsError } = useValidatedIDsFromCache({ programId, orgUnitId });
+    const { valid: validIds, loading, error: validatedIdsError } = useValidatedIDsFromCache({ programId, orgUnitId });
     const {
         enrollment,
         attributeValues,
@@ -32,15 +32,25 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
     } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
 
     // $FlowFixMe
-    const pageIsInvalid = (!Object.values(validIds)?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
+    const pageIsInvalid = (!loading && !Object.values(validIds)?.every(Id => Id?.valid)) || commonDataError || validatedIdsError;
     const pageStatus = useMemo(() => {
-        if (!programId || !enrollmentId || !teiId) return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
-        if (pageIsInvalid && validIds[IdTypes.PROGRAM_ID]?.valid && !validIds[IdTypes.ORG_UNIT_ID]?.valid) return EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID;
-        if (pageIsInvalid && !validIds[IdTypes.PROGRAM_ID]?.valid) return EnrollmentAddEventPageStatuses.PROGRAM_INVALID;
-        if (pageIsInvalid) return EnrollmentAddEventPageStatuses.PAGE_INVALID;
-        if (!validIds?.programId) return EnrollmentAddEventPageStatuses.LOADING;
+        if (!programId || !enrollmentId || !teiId) {
+            return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
+        }
+        if (pageIsInvalid && validIds[IdTypes.PROGRAM_ID]?.valid && !validIds[IdTypes.ORG_UNIT_ID]?.valid) {
+            return EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID;
+        }
+        if (pageIsInvalid && !validIds[IdTypes.PROGRAM_ID]?.valid) {
+            return EnrollmentAddEventPageStatuses.PROGRAM_INVALID;
+        }
+        if (pageIsInvalid) {
+            return EnrollmentAddEventPageStatuses.PAGE_INVALID;
+        }
+        if (loading) {
+            return EnrollmentAddEventPageStatuses.LOADING;
+        }
         return EnrollmentAddEventPageStatuses.DEFAULT;
-    }, [enrollmentId, pageIsInvalid, programId, teiId, validIds]);
+    }, [enrollmentId, loading, pageIsInvalid, programId, teiId, validIds]);
 
     if (pageStatus === EnrollmentAddEventPageStatuses.LOADING) {
         return <LoadingMaskForPage />;

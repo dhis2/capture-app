@@ -60,12 +60,14 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
 
     const inEffectData = (programId === valid[IdTypes.PROGRAM_ID]?.id) && (orgUnitId === valid[IdTypes.ORG_UNIT_ID]?.id) ? {
         valid,
+        loading: false,
         error,
     } : {
         valid: {
             [IdTypes.PROGRAM_ID]: undefined,
             [IdTypes.ORG_UNIT_ID]: undefined,
         },
+        loading: true,
         error: undefined,
     };
 
