@@ -1,3 +1,10 @@
+## [1.62.6](https://github.com/dhis2/capture-app/compare/v1.62.5...v1.62.6) (2021-12-06)
+
+
+### Bug Fixes
+
+* [DHIS2-11864] fix schedule text ([#2312](https://github.com/dhis2/capture-app/issues/2312)) ([3a34dac](https://github.com/dhis2/capture-app/commit/3a34dac3861ab6e7c68941562b1a3a4d529a9374))
+
 ## [1.62.5](https://github.com/dhis2/capture-app/compare/v1.62.4...v1.62.5) (2021-12-04)
 
 
