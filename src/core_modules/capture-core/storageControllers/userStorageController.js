@@ -44,6 +44,9 @@ const storeSpecificCreateActions = {
     [userStores.PROGRAM_INDICATORS]: (objectStore) => {
         objectStore.createIndex('programId', 'programId');
     },
+    [userStores.ORGANISATION_UNIT_GROUPS]: (objectStore) => {
+        objectStore.createIndex('organisationUnitId', 'organisationUnitIds', { multiEntry: true });
+    },
 };
 
 export async function initUserControllerAsync(mainStorageController: typeof StorageController) {

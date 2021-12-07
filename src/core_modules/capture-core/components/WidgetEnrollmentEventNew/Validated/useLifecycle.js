@@ -1,7 +1,9 @@
 // @flow
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useOrgUnitGroups } from 'capture-core/hooks/useOrgUnitGroups';
 import { batchActions } from 'redux-batched-actions';
+import type { OrgUnit as EngineOrgUnit } from 'capture-core-utils/rulesEngine';
 import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
 import type { TrackerProgram, ProgramStage, RenderFoundation } from '../../../metaData';
 import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../common.types';
@@ -42,12 +44,19 @@ export const useLifecycle = ({
     const orgUnitRef = useRef();
     const enrollmentDataRef = useRef();
 
+    const orgUnitGroups = useOrgUnitGroups(orgUnit ? orgUnit.id : null);
+
     // TODO: Getting the entire state object is bad and this needs to be refactored.
     // The problem is the helper methods that take the entire state object.
     // Refactor the helper methods (getCurrentClientValues, getCurrentClientMainData in rules/actionsCreator) to be more explicit with the arguments.
     const state = useSelector(stateArg => stateArg);
     useEffect(() => {
-        if (orgUnit) {
+        if (orgUnit && orgUnitGroups) {
+            const engineFormattedOrgUnit: EngineOrgUnit = {
+                id: orgUnit.id,
+                name: orgUnit.name,
+                groups: orgUnitGroups,
+            };
             dispatch(batchActions([
                 getRulesActions({
                     state,
@@ -56,7 +65,7 @@ export const useLifecycle = ({
                     formFoundation,
                     dataEntryId,
                     itemId,
-                    orgUnit,
+                    orgUnit: engineFormattedOrgUnit,
                     eventsRulesDependency,
                     attributesValuesRulesDependency,
                     enrollmentDataRulesDependency,
@@ -72,6 +81,7 @@ export const useLifecycle = ({
     }, [
         dispatch,
         orgUnit,
+        orgUnitGroups,
         eventsRulesDependency,
         attributesValuesRulesDependency,
         program,

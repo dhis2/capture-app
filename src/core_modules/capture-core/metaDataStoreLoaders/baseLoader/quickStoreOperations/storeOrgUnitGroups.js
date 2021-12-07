@@ -18,7 +18,7 @@ export const storeOrgUnitGroups = () => {
     const query = {
         resource: 'organisationUnitGroups',
         params: {
-            fields: 'id,name,organisationUnits[id]',
+            fields: 'id,name,code,organisationUnits[id]',
         },
     };
 

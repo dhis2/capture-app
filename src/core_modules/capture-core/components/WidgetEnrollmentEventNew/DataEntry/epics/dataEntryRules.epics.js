@@ -17,7 +17,7 @@ import {
     type FieldData,
 } from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../../common.types';
+import type { RulesExecutionDependenciesClientFormatted } from '../../common.types';
 import { deriveURLParamsFromLocation } from '../../../../utils/routing';
 
 const runRulesForNewEvent = (
@@ -112,7 +112,6 @@ export const runRulesOnUpdateFieldForNewEnrollmentEventEpic = (action$: InputObs
                 itemId,
                 uid,
                 orgUnit,
-                history,
                 rulesExecutionDependenciesClientFormatted,
                 fieldData,
             );
