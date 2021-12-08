@@ -83,7 +83,7 @@
     "i18n:add": "d2-app-scripts i18n extract && git add ./i18n/"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.8",
+    "@babel/core": "^7.16.0",
     "@babel/eslint-parser": "^7.16.3",
     "@babel/plugin-transform-flow-strip-types": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
