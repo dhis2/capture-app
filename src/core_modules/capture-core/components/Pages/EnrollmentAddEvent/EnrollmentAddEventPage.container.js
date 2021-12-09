@@ -37,9 +37,11 @@ const EnrollmentAddEventPagePlain = ({ classes }: Props) => {
         if (!programId || !enrollmentId || !teiId) {
             return EnrollmentAddEventPageStatuses.MISSING_REQUIRED_VALUES;
         }
+        // $FlowFixMe[prop-missing]
         if (pageIsInvalid && validIds[IdTypes.PROGRAM_ID]?.valid && !validIds[IdTypes.ORG_UNIT_ID]?.valid) {
             return EnrollmentAddEventPageStatuses.ORG_UNIT_INVALID;
         }
+        // $FlowFixMe[prop-missing]
         if (pageIsInvalid && !validIds[IdTypes.PROGRAM_ID]?.valid) {
             return EnrollmentAddEventPageStatuses.PROGRAM_INVALID;
         }

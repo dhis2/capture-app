@@ -25,26 +25,23 @@ export const useValidatedIDsFromCache = ({ programId, orgUnitId }: Props) => {
 
     const getPromises = useCallback(() => {
         const promises = [];
-        const keys = [];
         if (programId) {
-            keys.push({ id: programId, type: IdTypes.PROGRAM_ID, convert: value => value });
-            promises.push(containsKeyInStorageAsync(userStores.PROGRAMS, programId));
+            promises.push(containsKeyInStorageAsync(userStores.PROGRAMS, programId, { id: programId, type: IdTypes.PROGRAM_ID, convert: value => value }));
         }
 
         if (orgUnitId) {
-            keys.push({ id: orgUnitId, type: IdTypes.ORG_UNIT_ID, convert: value => !!value?.organisationUnits[orgUnitId] });
-            promises.push(getCachedSingleResourceFromKeyAsync(userStores.ORGANISATION_UNITS_BY_PROGRAM, programId));
+            promises.push(getCachedSingleResourceFromKeyAsync(userStores.ORGANISATION_UNITS_BY_PROGRAM, programId, { id: orgUnitId, type: IdTypes.ORG_UNIT_ID, convert: value => !!value?.organisationUnits[orgUnitId] }));
         }
 
         Promise.all(promises)
             .then((adapterResponses) => {
-                // $FlowFixMe - Missing declaration for U
-                const adapterResponseObjects = keys.reduce((acc, { id, type, convert }, index) => {
-                    acc[type] = {
-                        id,
-                        valid: convert(adapterResponses[index]),
-                        type,
-                    };
+                const adapterResponseObjects = adapterResponses.reduce((acc, { id, type, convert, response }) => {
+                    acc = { ...acc,
+                        [type]: {
+                            id,
+                            valid: convert && convert(response),
+                            type,
+                        } };
                     return acc;
                 }, {});
                 setValid(adapterResponseObjects);

@@ -14,7 +14,7 @@ export const useProgramFromIndexedDB = (programId: string) => {
     useMemo(() => {
         getCachedSingleResourceFromKeyAsync(userStores.PROGRAMS, programId)
             .then((singleProgram) => {
-                setCachedProgram(singleProgram);
+                setCachedProgram(singleProgram?.response);
                 setLoading(false);
             })
             .catch((e) => {
