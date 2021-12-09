@@ -56,7 +56,7 @@ const DialogButtons = ({ onCancel, onSave }) => (
     </>
 );
 
-const CardListButton = (({ teiId, orgUnitId }) => {
+const CardListButton = (({ teiId, orgUnitId, programId }) => {
     const dispatch = useDispatch();
 
     return (
@@ -66,7 +66,9 @@ const CardListButton = (({ teiId, orgUnitId }) => {
             onClick={() => dispatch(navigateToEnrollmentOverview({
                 teiId,
                 orgUnitId,
-            }))}
+                programId,
+            }))
+            }
         >
             {i18n.t('View dashboard')}
         </Button>
@@ -102,6 +104,7 @@ const RegistrationDataEntryPlain = ({
         <CardListButton
             teiId={item.id}
             orgUnitId={item.tei.orgUnit}
+            programId={item.tei.programOwners[0].program}
         />
     ), []);
 
