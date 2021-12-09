@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-15T15:28:19.564Z\n"
+"POT-Creation-Date: 2021-12-02T13:26:20.780Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: phil_dhis2, 2021\n"
 "Language-Team: Tetum (Tetun) (https://www.transifex.com/hisp-uio/teams/100509/tet/)\n"
@@ -143,6 +143,9 @@ msgid "Assigned user"
 msgstr ""
 
 msgid "Search for user"
+msgstr ""
+
+msgid "Complete event"
 msgstr ""
 
 msgid "Basic info"
@@ -1031,6 +1034,9 @@ msgid "Person Profile"
 msgstr ""
 
 msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "This event is not yet preserved and cannot be edited"
 msgstr ""
 
 msgid "Show {{ rest }} more"

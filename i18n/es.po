@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-11-15T15:28:19.564Z\n"
+"POT-Creation-Date: 2021-12-02T13:26:20.780Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Prabhjot Singh, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -159,6 +159,9 @@ msgstr "Usuario asignado"
 
 msgid "Search for user"
 msgstr "Buscar usuario"
+
+msgid "Complete event"
+msgstr "Completar el evento"
 
 msgid "Basic info"
 msgstr "Información básica"
@@ -1093,6 +1096,9 @@ msgid "Person Profile"
 msgstr "Perfil de la persona"
 
 msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "This event is not yet preserved and cannot be edited"
 msgstr ""
 
 msgid "Show {{ rest }} more"
