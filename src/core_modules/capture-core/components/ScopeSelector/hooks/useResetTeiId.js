@@ -9,7 +9,7 @@ export const useResetTeiId = () => {
 
     const resetTeiId = (pageToPush: string = pathname) => {
         const { programId, orgUnitId } = getUrlQueries();
-        history.push(`${pageToPush}?${buildUrlQueryString({ programId, orgUnitId })}`);
+        history.push(buildUrlQueryString(pageToPush, { programId, orgUnitId }));
     };
 
     return { resetTeiId };

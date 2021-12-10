@@ -9,17 +9,18 @@ import { EnrollmentPage } from 'capture-core/components/Pages/Enrollment';
 import { StageEventListPage } from 'capture-core/components/Pages/StageEvent';
 import { EnrollmentEditEventPage } from 'capture-core/components/Pages/EnrollmentEditEvent';
 import { EnrollmentAddEventPage } from 'capture-core/components/Pages/EnrollmentAddEvent';
+import { pathnames } from '../../core_modules/capture-core/utils/url';
 
 export const AppPages = () => (
     <Switch>
-        <Route path="/viewEvent" component={ViewEventPage} />
-        <Route path="/search" component={SearchPage} />
-        <Route path="/new" component={NewPage} />
-        <Route path="/enrollment/stageEvents" component={StageEventListPage} />
-        <Route path="/enrollmentEventEdit" component={EnrollmentEditEventPage} />
-        <Route path="/enrollmentEventNew" component={EnrollmentAddEventPage} />
-        <Route path="/enrollment" component={EnrollmentPage} />
-        <Route path="/:keys" component={MainPage} />
-        <Route path="/" component={MainPage} />
+        <Route path={pathnames.VIEW_EVENT} component={ViewEventPage} />
+        <Route path={pathnames.SEARCH} component={SearchPage} />
+        <Route path={pathnames.NEW} component={NewPage} />
+        <Route path={pathnames.ENROLLMENT_STAGE_EVENTS} component={StageEventListPage} />
+        <Route path={pathnames.ENROLLMENT_EVENT_EDIT} component={EnrollmentEditEventPage} />
+        <Route path={pathnames.ENROLLMENT_EVENT_NEW} component={EnrollmentAddEventPage} />
+        <Route path={pathnames.ENROLLMENT} component={EnrollmentPage} />
+        <Route path={pathnames.MAIN_PAGE_KEYS} component={MainPage} />
+        <Route path={pathnames.MAIN_PAGE} component={MainPage} />
     </Switch>
 );

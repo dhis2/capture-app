@@ -9,7 +9,7 @@ export const useSetProgramId = () => {
 
     const setProgramId = (programId: string, pageToPush: string = pathname) => {
         const restOfQueries = getUrlQueries();
-        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId })}`);
+        history.push(buildUrlQueryString(pageToPush, { ...restOfQueries, programId }));
     };
 
     return { setProgramId };

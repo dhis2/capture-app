@@ -9,7 +9,7 @@ import {
 } from './navigateToEnrollmentOverview.actions';
 import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../utils/routing';
 import { scopeHierarchyTypes } from './navigateToEnrollmentOverview.constants';
-import { getLocationPathname, getLocationSearch } from '../../utils/url';
+import { getLocationPathname, getLocationSearch, pathnames } from '../../utils/url';
 
 export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) => action$.pipe(
     ofType(
@@ -20,12 +20,12 @@ export const navigateToEnrollmentOverviewEpic = (action$: InputObservable, store
         const { dataStore, userDataStore } = store.value.useNewDashboard;
 
         const pushHistoryToEnrollmentDashboard = () => {
-            history.push(`/enrollment?${buildUrlQueryString({
+            history.push(buildUrlQueryString(pathnames.ENROLLMENT, {
                 teiId,
                 programId,
                 orgUnitId,
                 enrollmentId,
-            })}`);
+            }));
         };
 
         if (dataStore || userDataStore) {

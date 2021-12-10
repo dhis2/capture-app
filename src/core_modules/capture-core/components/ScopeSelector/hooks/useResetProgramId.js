@@ -9,12 +9,12 @@ export const useResetProgramId = () => {
 
     const resetProgramId = (pageToPush: string = pathname) => {
         const { programId, ...restOfQueries } = getUrlQueries();
-        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+        history.push(buildUrlQueryString(pageToPush, { ...restOfQueries }));
     };
 
     const resetProgramIdAndEnrollmentContext = (pageToPush: string = pathname) => {
         const { programId, enrollmentId, stageId, eventId, ...restOfQueries } = getUrlQueries();
-        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+        history.push(buildUrlQueryString(pageToPush, { ...restOfQueries }));
     };
 
     return { resetProgramId, resetProgramIdAndEnrollmentContext };

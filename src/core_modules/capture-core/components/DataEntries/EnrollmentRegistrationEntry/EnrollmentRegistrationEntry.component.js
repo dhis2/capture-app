@@ -17,6 +17,7 @@ import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
 import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
+import { pathnames } from '../../../utils/url';
 
 const styles = ({ typography }) => ({
     marginTop: {
@@ -53,10 +54,10 @@ const EnrollmentRegistrationEntryPlain =
           const url =
             scopeType === scopeTypes.TRACKER_PROGRAM
                 ?
-                buildUrlQueryString({ programId: selectedScopeId, orgUnitId: orgUnit.id })
+                buildUrlQueryString(pathnames.MAIN_PAGE, { programId: selectedScopeId, orgUnitId: orgUnit.id })
                 :
-                buildUrlQueryString({ orgUnitId: orgUnit.id });
-          return push(`/?${url}`);
+                buildUrlQueryString(pathnames.MAIN_PAGE, { orgUnitId: orgUnit.id });
+          return push(url);
       };
 
       return (

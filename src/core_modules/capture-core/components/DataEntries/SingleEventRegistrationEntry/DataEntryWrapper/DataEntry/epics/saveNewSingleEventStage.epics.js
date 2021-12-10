@@ -15,6 +15,7 @@ import { getAddEventEnrollmentServerData, getNewEventClientValues } from './getC
 import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../../../utils/routing';
 import { resetLocationChange } from '../../../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { pathnames } from '../../../../../../utils/url';
 
 export const saveNewEventStageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
@@ -38,7 +39,7 @@ export const saveNewEventInStageLocationChangeEpic = (action$: InputObservable, 
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_IN_STAGE),
         map(() => {
             const { enrollmentId, programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
-            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+            history.push(buildUrlQueryString(pathnames.ENROLLMENT, { programId, orgUnitId, teiId, enrollmentId }));
             return resetLocationChange();
         }));
 

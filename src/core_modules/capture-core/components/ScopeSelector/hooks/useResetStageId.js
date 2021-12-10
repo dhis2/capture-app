@@ -9,7 +9,7 @@ export const useResetStageId = () => {
 
     const resetStageId = (pageToPush: string = pathname) => {
         const { programId, orgUnitId, teiId, enrollmentId } = getUrlQueries();
-        history.push(`${pageToPush}?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+        history.push(buildUrlQueryString(pageToPush, { programId, orgUnitId, teiId, enrollmentId }));
     };
 
     return { resetStageId };

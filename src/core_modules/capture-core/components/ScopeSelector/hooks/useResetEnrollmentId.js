@@ -9,7 +9,7 @@ export const useResetEnrollmentId = () => {
 
     const resetEnrollmentId = (pageToPush: string = pathname) => {
         const { programId, orgUnitId, teiId } = getUrlQueries();
-        history.push(`${pageToPush}?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+        history.push(buildUrlQueryString(pageToPush, { programId, orgUnitId, teiId }));
     };
 
     return { resetEnrollmentId };

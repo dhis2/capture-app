@@ -15,6 +15,7 @@ import {
 } from './EnrollmentPage.actions';
 import { buildUrlQueryString, deriveURLParamsFromLocation } from '../../../utils/routing';
 import { deriveTeiName } from '../common/EnrollmentOverviewDomain/useTeiDisplayName';
+import { pathnames } from '../../../utils/url';
 
 const sortByDate = (enrollments = []) => enrollments.sort((a, b) =>
     moment.utc(b.enrollmentDate).diff(moment.utc(a.enrollmentDate)));
@@ -115,7 +116,7 @@ export const openEnrollmentPageEpic = (action$: InputObservable, store: ReduxSto
             const urlCompleted = Boolean(queryEnrollment && queryOrgUnitId && queryProgramId && queryTeiId);
 
             if (!urlCompleted) {
-                history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+                history.push(buildUrlQueryString(pathnames.ENROLLMENT, { programId, orgUnitId, teiId, enrollmentId }));
                 return fetchTeiStream(teiId, querySingleResource);
             }
             return fetchTeiStream(teiId, querySingleResource);

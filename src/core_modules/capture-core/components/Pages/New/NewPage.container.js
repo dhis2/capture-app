@@ -16,6 +16,7 @@ import { useCurrentProgramInfo } from '../../../hooks/useCurrentProgramInfo';
 import { getScopeFromScopeId, TrackerProgram, TrackedEntityType } from '../../../metaData';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { dataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { pathnames } from '../../../utils/url';
 
 const useUserWriteAccess = (scopeId) => {
     const scope = getScopeFromScopeId(scopeId);
@@ -77,7 +78,7 @@ export const NewPage: ComponentType<{||}> = () => {
     const { id: orgUnitId } = useCurrentOrgUnitInfo();
     const { id: programId } = useCurrentProgramInfo();
     const handleMainPageNavigation = () => {
-        history.push(`/?${buildUrlQueryString({ orgUnitId, programId })}`);
+        history.push(buildUrlQueryString(pathnames.MAIN_PAGE, { orgUnitId, programId }));
     };
 
     const writeAccess = useUserWriteAccess(currentScopeId);

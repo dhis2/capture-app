@@ -10,6 +10,7 @@ import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDo
 import type { Props } from './ProgramStageSelector.types';
 import { useProgramFromIndexedDB } from '../../../../utils/cachedData/useProgramFromIndexedDB';
 import { useLocationQuery, buildUrlQueryString } from '../../../../utils/routing';
+import { pathnames } from '../../../../utils/url';
 
 
 export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId }: Props) => {
@@ -47,17 +48,17 @@ export const ProgramStageSelector = ({ programId, orgUnitId, teiId, enrollmentId
     }, []), [enrollment?.events, program?.programStages, programLoading]);
 
     const onSelectProgramStage = (newStageId: string) =>
-        history.push(`enrollmentEventNew?${buildUrlQueryString({
+        history.push(buildUrlQueryString(pathnames.ENROLLMENT_EVENT_NEW, {
             programId,
             orgUnitId,
             teiId,
             enrollmentId,
             stageId: newStageId,
             tab,
-        })}`);
+        }));
 
     const onCancel = () =>
-        history.push(`enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+        history.push(buildUrlQueryString(pathnames.ENROLLMENT, { programId, orgUnitId, teiId, enrollmentId }));
 
     return (
         <>

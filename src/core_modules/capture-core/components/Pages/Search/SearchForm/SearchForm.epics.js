@@ -29,6 +29,7 @@ import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
 import { dataElementConvertFunctions } from './SearchFormElementConverter/SearchFormElementConverter';
+import { pathnames } from '../../../../utils/url';
 
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
@@ -278,7 +279,7 @@ export const fallbackPushPageEpic = (action$: InputObservable, _: ReduxStore, { 
     action$.pipe(
         ofType(searchPageActionTypes.FALLBACK_SEARCH_COMPLETED),
         switchMap(({ payload: { orgUnitId, trackedEntityTypeId } }) => {
-            history.push(`/search?${buildUrlQueryString({ orgUnitId, trackedEntityTypeId })}`);
+            history.push(buildUrlQueryString(pathnames.SEARCH, { orgUnitId, trackedEntityTypeId }));
             return EMPTY;
         }),
     );

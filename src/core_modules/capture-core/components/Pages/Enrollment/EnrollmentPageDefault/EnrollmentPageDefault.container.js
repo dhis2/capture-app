@@ -19,6 +19,7 @@ import { runRulesForEnrollment } from './runRulesForEnrollment';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
+import { pathnames } from '../../../../utils/url';
 
 
 export const EnrollmentPageDefault = () => {
@@ -54,23 +55,20 @@ export const EnrollmentPageDefault = () => {
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDelete = () => {
-        history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
+        history.push(buildUrlQueryString(pathnames.ENROLLMENT, { orgUnitId, programId, teiId }));
         dispatch(deleteEnrollment({ enrollmentId }));
     };
 
     const onViewAll = (stageId) => {
-        history.push(
-            `/enrollment/stageEvents?${buildUrlQueryString({ orgUnitId, programId, stageId })}`);
+        history.push(buildUrlQueryString(pathnames.ENROLLMENT_STAGE_EVENTS, { orgUnitId, programId, stageId }));
     };
 
     const onCreateNew = (stageId) => {
-        history.push(
-            `/enrollmentEventNew?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId, stageId })}`,
-        );
+        history.push(buildUrlQueryString(pathnames.ENROLLMENT_EVENT_NEW, { orgUnitId, programId, teiId, enrollmentId, stageId }));
     };
 
     const onEventClick = (eventId: string, stageId: string) => {
-        history.push(`/enrollmentEventEdit?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId, eventId, stageId })}`);
+        history.push(buildUrlQueryString(pathnames.ENROLLMENT_EVENT_EDIT, { orgUnitId, programId, teiId, enrollmentId, eventId, stageId }));
     };
 
     return (

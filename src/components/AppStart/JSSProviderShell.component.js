@@ -13,6 +13,8 @@ insertionPoint.setAttribute('id', 'jss-insertion-point');
 document.head.appendChild(insertionPoint);
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
+// TODO - Remove FlowFixMe before merge
+// $FlowFixMe - Comment this out for push
 jss.options.insertionPoint = insertionPoint;
 
 type Props = {

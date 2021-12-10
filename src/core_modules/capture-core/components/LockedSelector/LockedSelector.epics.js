@@ -15,7 +15,7 @@ import {
     completeUrlUpdate,
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
-import { deriveUrlQueries, getLocationPathname, pageFetchesOrgUnitUsingTheOldWay } from '../../utils/url';
+import { deriveUrlQueries, getLocationPathname, pageFetchesOrgUnitUsingTheOldWay, pathnames } from '../../utils/url';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../utils/routing';
 import { resetLocationChange } from './QuickSelector/actions/QuickSelector.actions';
 
@@ -36,13 +36,13 @@ export const setOrgUnitIdEpic = (action$: InputObservable, store: ReduxStore, { 
             if (programId) {
                 const programContainsOrgUnitId = programCollection.get(programId)?.organisationUnits[orgUnitId];
                 if (orgUnitId && !programContainsOrgUnitId) {
-                    history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, orgUnitId })}`);
+                    history.push(buildUrlQueryString(pageToPush, { ...restOfQueries, orgUnitId }));
                     return new Promise((resolve) => {
                         setTimeout(() => resolve(resetLocationChange()), 0);
                     });
                 }
             }
-            history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId, orgUnitId })}`);
+            history.push(buildUrlQueryString(pageToPush, { ...restOfQueries, programId, orgUnitId }));
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
             });
@@ -55,7 +55,7 @@ export const resetOrgUnitId = (action$: InputObservable, store: ReduxStore, { hi
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.ORG_UNIT_ID_RESET);
             const { orgUnitId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+            history.push(buildUrlQueryString(pageToPush, { ...restOfQueries }));
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
             });
@@ -67,7 +67,7 @@ export const setProgramIdEpic = (action$: InputObservable, store: ReduxStore, { 
         switchMap(({ payload: { programId, pageToPush } }) => {
             const queries = deriveUrlQueries(store.value);
 
-            history.push(`/${pageToPush}?${buildUrlQueryString({ ...queries, programId })}`);
+            history.push(buildUrlQueryString(pageToPush, { ...queries, programId }));
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
             });
@@ -80,7 +80,7 @@ export const resetProgramIdEpic = (action$: InputObservable, store: ReduxStore, 
             const { pageToPush } = derivePayloadFromAction(batchPayload, lockedSelectorActionTypes.PROGRAM_ID_RESET);
             const { programId, ...restOfQueries } = deriveUrlQueries(store.value);
 
-            history.push(`/${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+            history.push(buildUrlQueryString(pageToPush, { ...restOfQueries }));
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
             });
@@ -177,7 +177,7 @@ export const resetTeiSelectionEpic = (action$: InputObservable, store: ReduxStor
         switchMap(() => {
             const { programId, orgUnitId } = deriveURLParamsFromLocation();
 
-            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            history.push(buildUrlQueryString(pathnames.MAIN_PAGE, { programId, orgUnitId }));
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
             });
@@ -190,7 +190,7 @@ export const setEnrollmentSelectionEpic = (action$: InputObservable, store: Redu
         map(({ payload: { enrollmentId } }) => {
             const { programId, orgUnitId, teiId } = deriveURLParamsFromLocation();
 
-            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId, enrollmentId })}`);
+            history.push(buildUrlQueryString(pathnames.ENROLLMENT, { programId, orgUnitId, teiId, enrollmentId }));
             return resetLocationChange();
         }),
     );
@@ -200,7 +200,7 @@ export const resetEnrollmentSelectionEpic = (action$: InputObservable, _: ReduxS
         ofType(lockedSelectorActionTypes.ENROLLMENT_SELECTION_RESET),
         map(() => {
             const { orgUnitId, programId, teiId } = deriveURLParamsFromLocation();
-            history.push(`/enrollment?${buildUrlQueryString({ programId, orgUnitId, teiId })}`);
+            history.push(buildUrlQueryString(pathnames.ENROLLMENT, { programId, orgUnitId, teiId }));
             return resetLocationChange();
         }),
     );

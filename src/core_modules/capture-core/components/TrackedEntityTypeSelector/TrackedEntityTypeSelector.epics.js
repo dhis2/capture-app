@@ -11,7 +11,7 @@ export const setTrackedEntityTypeIdOnUrlEpic = (action$: InputObservable, store:
         map(({ payload: { trackedEntityTypeId } }) => {
             const { currentSelections: { orgUnitId }, app: { page: currentPage } } = store.value;
 
-            history.push(`/${currentPage}?${buildUrlQueryString({ trackedEntityTypeId, orgUnitId })}`);
+            history.push(`/${buildUrlQueryString(currentPage, { trackedEntityTypeId, orgUnitId })}`);
             return resetLocationChange();
         }),
     );

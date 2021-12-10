@@ -10,8 +10,8 @@ export const useSetOrgUnitId = () => {
     const setOrgUnitId = (orgUnitId: string, pageToPush: string = pathname, withRestOfQueries?: ?boolean = true) => {
         const restOfQueries = getUrlQueries();
         withRestOfQueries
-            ? history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, orgUnitId })}`)
-            : history.push(`${pageToPush}?${buildUrlQueryString({ orgUnitId })}`);
+            ? history.push(buildUrlQueryString(pageToPush, { ...restOfQueries, orgUnitId }))
+            : history.push(buildUrlQueryString(pageToPush, { orgUnitId }));
     };
 
     return { setOrgUnitId };

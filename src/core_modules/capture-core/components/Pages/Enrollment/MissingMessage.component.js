@@ -11,6 +11,7 @@ import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
+import { pathnames } from '../../../utils/url';
 
 export const missingStatuses = {
     TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED: 'TRACKER_PROGRAM_WITH_ZERO_ENROLLMENTS_SELECTED',
@@ -67,11 +68,11 @@ const useNavigations = () => {
 
     const { programId, orgUnitId } = useLocationQuery();
     const navigateToProgramRegistrationPage = () =>
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
+        history.push(buildUrlQueryString(pathnames.NEW, { programId, orgUnitId }));
     const navigateToEventWorkingList = () =>
-        history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+        history.push(buildUrlQueryString(pathnames.MAIN_PAGE, { programId, orgUnitId }));
     const navigateToTetRegistrationPage = () =>
-        history.push(`/new?${buildUrlQueryString({ programId, orgUnitId, trackedEntityTypeId: tetId })}`);
+        history.push(buildUrlQueryString(pathnames.NEW, { programId, orgUnitId, trackedEntityTypeId: tetId }));
 
     return { navigateToProgramRegistrationPage, navigateToEventWorkingList, navigateToTetRegistrationPage };
 };

@@ -29,7 +29,7 @@ const EmptyPrograms = ({ classes, handleResetOrgUnit }) => {
 
     useEffect(() => {
         const navigateToEventRegistrationPage = () => {
-            push(`${pathname}?${buildUrlQueryString({ enrollmentId, teiId, orgUnitId })}`);
+            push(buildUrlQueryString(pathname, { enrollmentId, teiId, orgUnitId }));
         };
 
         navigateToEventRegistrationPage();

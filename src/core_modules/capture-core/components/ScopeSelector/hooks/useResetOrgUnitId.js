@@ -9,7 +9,7 @@ export const useResetOrgUnitId = () => {
 
     const resetOrgUnitId = (pageToPush: string = pathname) => {
         const { orgUnitId, ...restOfQueries } = getUrlQueries();
-        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries })}`);
+        history.push(buildUrlQueryString(pageToPush, { ...restOfQueries }));
     };
 
     return { resetOrgUnitId };

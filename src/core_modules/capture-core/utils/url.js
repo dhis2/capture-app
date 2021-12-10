@@ -13,6 +13,18 @@ export type Url = {
     tab?: string,
 }
 
+export const pathnames = Object.freeze({
+    VIEW_EVENT: '/viewEvent',
+    SEARCH: '/search',
+    NEW: '/new',
+    ENROLLMENT_EVENT_EDIT: '/enrollmentEventEdit',
+    ENROLLMENT_EVENT_NEW: '/enrollmentEventNew',
+    ENROLLMENT: '/enrollment',
+    ENROLLMENT_STAGE_EVENTS: '/enrollment/stageEvents',
+    MAIN_PAGE: '/',
+    MAIN_PAGE_KEYS: '/:keys',
+});
+
 export const deriveUrlQueries = (state: Object) => {
     const {
         currentSelections: {

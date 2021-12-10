@@ -14,6 +14,7 @@ import { convertValue as convertToServerValue } from '../../../../converters/cli
 import { convertMainEventClientToServer } from '../../../../events/mainConverters';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../utils/routing';
 import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { pathnames } from '../../../../utils/url';
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -63,6 +64,6 @@ export const saveEditEventLocationChangeEpic = (action$: InputObservable, _: Red
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
             const { programId, orgUnitId } = deriveURLParamsFromLocation();
-            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            history.push(buildUrlQueryString(pathnames.MAIN_PAGE, { programId, orgUnitId }));
             return resetLocationChange();
         }));

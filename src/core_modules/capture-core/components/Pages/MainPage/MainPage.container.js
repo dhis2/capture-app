@@ -9,6 +9,7 @@ import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
 import { buildUrlQueryString, useLocationQuery } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
+import { pathnames } from '../../../utils/url';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.activePage.selectionsError && state.activePage.selectionsError.error, // TODO: Should probably remove this
@@ -41,7 +42,7 @@ const MainPageContainer = () => {
     }, [showAllAccessible, dispatch]);
 
     const setShowAccessible = () => history
-        .push(`/?${buildUrlQueryString({ programId })}&all`);
+        .push(`${buildUrlQueryString(pathnames.MAIN_PAGE, { programId })}&all`);
 
     const MainPageStatus = useMemo(() => {
         const selectedProgram = programId && programCollection.get(programId);

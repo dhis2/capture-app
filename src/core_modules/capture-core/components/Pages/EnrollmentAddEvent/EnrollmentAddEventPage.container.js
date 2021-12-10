@@ -12,6 +12,7 @@ import { useWidgetDataFromStore } from './hooks';
 import { useHideWidgetByRuleLocations } from '../Enrollment/EnrollmentPageDefault/hooks';
 import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '../common/EnrollmentOverviewDomain';
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
+import { pathnames } from '../../../utils/url';
 
 export const EnrollmentAddEventPage = () => {
     const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
@@ -19,12 +20,12 @@ export const EnrollmentAddEventPage = () => {
     const dispatch = useDispatch();
 
     const handleCancel = useCallback(() => {
-        history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
+        history.push(buildUrlQueryString(pathnames.ENROLLMENT, { orgUnitId, programId, teiId, enrollmentId }));
     }, [history, orgUnitId, programId, teiId, enrollmentId]);
 
     const handleSave = useCallback(
         (data, uid) => {
-            history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
+            history.push(buildUrlQueryString(pathnames.ENROLLMENT, { orgUnitId, programId, teiId, enrollmentId }));
             dispatch(updateEnrollmentEventsWithoutId(uid, data.events[0]));
         },
         [history, orgUnitId, programId, teiId, enrollmentId, dispatch],
@@ -32,7 +33,7 @@ export const EnrollmentAddEventPage = () => {
 
     const handleDelete = useCallback(() => {
         dispatch(deleteEnrollment({ enrollmentId }));
-        history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
+        history.push(buildUrlQueryString(pathnames.ENROLLMENT, { orgUnitId, programId, teiId, enrollmentId }));
     }, [dispatch, enrollmentId, history, orgUnitId, programId, teiId]);
 
     const widgetReducerName = 'enrollmentEvent-newEvent';

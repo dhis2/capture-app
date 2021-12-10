@@ -10,6 +10,7 @@ import {
 import { isSelectionsEqual } from '../../../App/isSelectionsEqual';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../../utils/routing';
 import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { pathnames } from '../../../../utils/url';
 
 export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -37,6 +38,6 @@ export const cancelEditEventLocationChangeEpic = (action$: InputObservable, stor
         ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
             const { programId, orgUnitId } = deriveURLParamsFromLocation();
-            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            history.push(buildUrlQueryString(pathnames.MAIN_PAGE, { programId, orgUnitId }));
             return resetLocationChange();
         }));

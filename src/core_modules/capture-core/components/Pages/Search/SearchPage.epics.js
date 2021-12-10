@@ -6,13 +6,14 @@ import { lockedSelectorActionTypes } from '../../LockedSelector';
 import { topBarActionsActionTypes } from '../../TopBarActions';
 import { deriveURLParamsFromLocation, buildUrlQueryString } from '../../../utils/routing';
 import { resetLocationChange } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { pathnames } from '../../../utils/url';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore, { history }: ApiUtils) =>
     action$.pipe(
         ofType(searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE),
         switchMap(() => {
             const { currentSelections: { programId, orgUnitId } } = store.value;
-            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
+            history.push(buildUrlQueryString(pathnames.MAIN_PAGE, { programId, orgUnitId }));
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
             });
@@ -24,7 +25,7 @@ export const openSearchPageLocationChangeEpic = (action$: InputObservable, store
         ofType(lockedSelectorActionTypes.SEARCH_PAGE_OPEN, topBarActionsActionTypes.SEARCH_PAGE_OPEN),
         switchMap(() => {
             const { programId, orgUnitId } = deriveURLParamsFromLocation();
-            history.push(`/search?${buildUrlQueryString({ programId, orgUnitId })}`);
+            history.push(buildUrlQueryString(pathnames.SEARCH, { programId, orgUnitId }));
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
             });

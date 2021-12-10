@@ -16,6 +16,7 @@ import { buildEnrollmentsAsOptions } from '../../ScopeSelector';
 import { getScopeInfo } from '../../../metaData';
 import { convertValue } from '../../../converters/clientToView';
 import { dataElementTypes } from '../../../metaData/DataElement';
+import { pathnames } from '../../../utils/url';
 
 export const EnrollmentEditEventPage = () => {
     const history = useHistory();
@@ -30,10 +31,10 @@ export const EnrollmentEditEventPage = () => {
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDelete = () => {
-        history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId })}`);
+        history.push(buildUrlQueryString(pathnames.ENROLLMENT, { orgUnitId, programId, teiId }));
         dispatch(deleteEnrollment({ enrollmentId }));
     };
-    const onGoBack = () => history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, teiId, enrollmentId })}`);
+    const onGoBack = () => history.push(buildUrlQueryString(pathnames.ENROLLMENT, { orgUnitId, programId, teiId, enrollmentId }));
     const enrollmentSite = useCommonEnrollmentDomainData(teiId, enrollmentId, programId).enrollment;
     const { teiDisplayName } = useTeiDisplayName(teiId, programId);
     const { trackedEntityName } = getScopeInfo(enrollmentSite?.trackedEntityType);
