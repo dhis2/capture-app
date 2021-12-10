@@ -91,7 +91,7 @@ export const startAgainEpic = (action$: InputObservable, store: InputObservable,
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.AGAIN_START),
         switchMap(() => {
-            history.push('/');
+            history.push(pathnames.MAIN_PAGE);
             return new Promise((resolve) => {
                 setTimeout(() => resolve(resetLocationChange()), 0);
             });

@@ -47,7 +47,7 @@ export const LockedSelector: ComponentType<OwnProps> =
   ({
       customActionsOnProgramIdReset = [],
       customActionsOnOrgUnitIdReset = [],
-      pageToPush = '',
+      pageToPush = '/',
       isUserInteractionInProgress = false,
   }) => {
       const dispatch = useDispatch();
