@@ -62,34 +62,33 @@ export const WidgetProfile = ({ teiId, programId }: Props) => {
             if (programsData && trackedEntityInstancesData) {
                 const { programs: { programTrackedEntityAttributes } } = programsData;
                 const { trackedEntityInstances: { attributes } } = trackedEntityInstancesData;
-
-                setListAttributes(
-                    await programTrackedEntityAttributes
-                        .filter(item => item.displayInList)
-                        .reduce(async (promisedAcc, { trackedEntityAttribute: { id, displayName, optionSet } }) => {
-                            const foundAttribute = attributes
-                                .find(item => item.attribute === id);
-                            let value;
-                            if (foundAttribute) {
-                                if (optionSet && optionSet.id) {
-                                    const selectedOption = optionSet.options.find(option => option.code === foundAttribute.value);
-                                    value = selectedOption && selectedOption.name;
-                                } else if (subValueGetterByElementType[foundAttribute.valueType]) {
-                                    value = await subValueGetterByElementType[foundAttribute.valueType](foundAttribute.value);
-                                } else {
-                                    value = formatValue(foundAttribute.value, foundAttribute.valueType);
-                                }
+                const computedAttributes = await programTrackedEntityAttributes
+                    .filter(item => item.displayInList)
+                    .reduce(async (promisedAcc, { trackedEntityAttribute: { id, displayName, optionSet } }) => {
+                        const foundAttribute = attributes
+                            .find(item => item.attribute === id);
+                        let value;
+                        if (foundAttribute) {
+                            if (optionSet && optionSet.id) {
+                                const selectedOption = optionSet.options.find(option => option.code === foundAttribute.value);
+                                value = selectedOption && selectedOption.name;
+                            } else if (subValueGetterByElementType[foundAttribute.valueType]) {
+                                value = await subValueGetterByElementType[foundAttribute.valueType](foundAttribute.value);
+                            } else {
+                                value = formatValue(foundAttribute.value, foundAttribute.valueType);
                             }
+                        }
 
-                            const acc = await promisedAcc;
+                        const acc = await promisedAcc;
 
-                            return [...acc, {
-                                reactKey: id,
-                                key: displayName,
-                                value,
-                            }];
-                        }, Promise.resolve([])),
-                );
+                        return [...acc, {
+                            reactKey: id,
+                            key: displayName,
+                            value,
+                        }];
+                    }, Promise.resolve([]));
+
+                setListAttributes(computedAttributes);
             }
         };
 
