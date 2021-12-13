@@ -1,3 +1,10 @@
+## [1.62.10](https://github.com/dhis2/capture-app/compare/v1.62.9...v1.62.10) (2021-12-13)
+
+
+### Bug Fixes
+
+* [DHIS2-11862] verify if eventDate exists ([#2331](https://github.com/dhis2/capture-app/issues/2331)) ([a1c3cd9](https://github.com/dhis2/capture-app/commit/a1c3cd90d0f691984a2baba9172693a92ccc5bf6))
+
 ## [1.62.9](https://github.com/dhis2/capture-app/compare/v1.62.8...v1.62.9) (2021-12-12)
 
 
