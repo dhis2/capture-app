@@ -54,12 +54,12 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
     const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const eventId = state.dataEntries[dataEntryId].eventId;
-    const event = state.events[eventId];  // TODO: Refactor
-    const { programId } = state.currentSelections; // TODO: Refactor
+    const event = state.events[eventId];
+    const { programId } = state.currentSelections; // TODO: Refactor as part of TECH-599. We should remove currentSelections as part of that task. This component is also being used in edit enrollment event so removing this will also make chagnes necessary for that page.
     const program = getProgramThrowIfNotFound(programId);
 
     const orgUnitId = state.currentSelections.orgUnitId;
-    const orgUnit = state.organisationUnits[orgUnitId]; // TODO: Refactor
+    const orgUnit = state.organisationUnits[orgUnitId]; // TODO: Refactor. Might fail in some situations. Part of TECH-893.
     const stage = program instanceof EventProgram
         ? program.stage
         : getStageFromEvent(event)?.stage;
