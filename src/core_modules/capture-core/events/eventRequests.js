@@ -22,7 +22,7 @@ type ApiTEIEvent = {
     enrollment?: string,
     enrollmentStatus?: string,
     status: string,
-    eventDate: string,
+    occuredAt: string,
     dueDate: string,
     completedDate: string,
     dataValues: Array<ApiDataValue>,
@@ -147,13 +147,13 @@ export async function getEvent(eventId: string): Promise<?ClientEventContainer> 
 export async function getEvents(queryParams: Object) {
     const api = getApi();
     const req = {
-        url: 'events',
+        url: 'tracker/events',
         queryParams,
     };
     const apiRes = await api
         .get(req.url, { ...req.queryParams });
 
-    const eventContainers = apiRes && apiRes.events ? await apiRes.events.reduce(async (accEventsPromise, apiEvent) => {
+    const eventContainers = apiRes && apiRes.instances ? await apiRes.instances.reduce(async (accEventsPromise, apiEvent) => {
         const accEvents = await accEventsPromise;
         const eventContainer = await convertToClientEvent(apiEvent);
         if (eventContainer) {
