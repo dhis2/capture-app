@@ -275,7 +275,7 @@ const buildCompleteFieldSettingsFn = () => {
     const completeSettings = {
         getComponent: () => completeComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
-            label: 'Complete event',
+            label: i18n.t('Complete event'),
             id: 'complete',
         }),
         getPropName: () => 'complete',
@@ -525,48 +525,21 @@ class NewEventDataEntry extends Component<Props> {
     }
 
     getSavingText() {
-        const { classes, orgUnitName, programName, stageName, isAddEventInStage } = this.props;
-        const firstPart = `${i18n.t('Saving to')} `;
-        const secondPart = ` ${i18n.t('for')} `;
-        const thirdPart = ` ${i18n.t('in')} `;
+        const { orgUnitName, programName, stageName, isAddEventInStage } = this.props;
 
         if (isAddEventInStage) {
-            return (
-                <span>
-                    {firstPart}
-                    <span
-                        className={classes.savingContextNames}
-                    >
-                        {stageName}
-                    </span>
-                    {secondPart}
-                    <span className={classes.savingContextNames}>
-                        {programName}
-                    </span>
-                    {thirdPart}
-                    <span
-                        className={classes.savingContextNames}
-                    >
-                        {orgUnitName}
-                    </span>
-                </span>
-            );
+            return (<span>
+                {i18n.t('Saving to {{stageName}} for {{programName}} in {{orgUnitName}}',
+                    { orgUnitName, stageName, programName, interpolation: { escapeValue: false } })}
+            </span>);
         }
+
         return (<span>
-            {firstPart}
-            <span
-                className={classes.savingContextNames}
-            >
-                {programName}
-            </span>
-            {thirdPart}
-            <span
-                className={classes.savingContextNames}
-            >
-                {orgUnitName}
-            </span>
+            {i18n.t('Saving to {{programName}} in {{orgUnitName}}',
+                { orgUnitName, programName, interpolation: { escapeValue: false } })}
         </span>);
     }
+
     renderHorizontal = () => {
         const classes = this.props.classes;
         return (

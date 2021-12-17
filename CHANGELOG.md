@@ -1,3 +1,87 @@
+## [1.62.10](https://github.com/dhis2/capture-app/compare/v1.62.9...v1.62.10) (2021-12-13)
+
+
+### Bug Fixes
+
+* [DHIS2-11862] verify if eventDate exists ([#2331](https://github.com/dhis2/capture-app/issues/2331)) ([a1c3cd9](https://github.com/dhis2/capture-app/commit/a1c3cd90d0f691984a2baba9172693a92ccc5bf6))
+
+## [1.62.9](https://github.com/dhis2/capture-app/compare/v1.62.8...v1.62.9) (2021-12-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([dabcf67](https://github.com/dhis2/capture-app/commit/dabcf679579b352a0ef48eb7285e429448f11d69))
+
+## [1.62.8](https://github.com/dhis2/capture-app/compare/v1.62.7...v1.62.8) (2021-12-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4f29f70](https://github.com/dhis2/capture-app/commit/4f29f707f6a8c1f608353ade910425c27381439c))
+
+## [1.62.7](https://github.com/dhis2/capture-app/compare/v1.62.6...v1.62.7) (2021-12-07)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([2579b16](https://github.com/dhis2/capture-app/commit/2579b16a88ee1484323dd220cfea4ee5ee7b818c))
+
+## [1.62.6](https://github.com/dhis2/capture-app/compare/v1.62.5...v1.62.6) (2021-12-06)
+
+
+### Bug Fixes
+
+* [DHIS2-11864] fix schedule text ([#2312](https://github.com/dhis2/capture-app/issues/2312)) ([3a34dac](https://github.com/dhis2/capture-app/commit/3a34dac3861ab6e7c68941562b1a3a4d529a9374))
+
+## [1.62.5](https://github.com/dhis2/capture-app/compare/v1.62.4...v1.62.5) (2021-12-04)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([6a06cb2](https://github.com/dhis2/capture-app/commit/6a06cb2c78bf4006103ab1c798fcca437f7b9e58))
+
+## [1.62.4](https://github.com/dhis2/capture-app/compare/v1.62.3...v1.62.4) (2021-12-03)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([84cc90d](https://github.com/dhis2/capture-app/commit/84cc90d872cac40640d623655ef526c43c79a39e))
+
+## [1.62.3](https://github.com/dhis2/capture-app/compare/v1.62.2...v1.62.3) (2021-12-02)
+
+
+### Bug Fixes
+
+* [DHIS2-12112] add missing programStage rules ([ac15dac](https://github.com/dhis2/capture-app/commit/ac15dac0bac5c32e9b149c0aaeea3e7464901d22))
+
+## [1.62.2](https://github.com/dhis2/capture-app/compare/v1.62.1...v1.62.2) (2021-11-30)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([a120ef7](https://github.com/dhis2/capture-app/commit/a120ef7250a4367147f9f603aab7ed64b015eb38))
+
+## [1.62.1](https://github.com/dhis2/capture-app/compare/v1.62.0...v1.62.1) (2021-11-28)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([1c39027](https://github.com/dhis2/capture-app/commit/1c3902746326aede4df48062ece31be43816a4fd))
+
+# [1.62.0](https://github.com/dhis2/capture-app/compare/v1.61.3...v1.62.0) (2021-11-26)
+
+
+### Features
+
+* [DHIS2-11864] Schedule event using redux ([#2216](https://github.com/dhis2/capture-app/issues/2216)) ([cf049b4](https://github.com/dhis2/capture-app/commit/cf049b4e12ea316b3b5d6ee1cc5c913813b87550)), closes [#2211](https://github.com/dhis2/capture-app/issues/2211)
+
+## [1.61.3](https://github.com/dhis2/capture-app/compare/v1.61.2...v1.61.3) (2021-11-26)
+
+
+### Bug Fixes
+
+* [DHIS2-12134] fetching logic in common enrollment hook ([fe82c00](https://github.com/dhis2/capture-app/commit/fe82c00308e2dab74c23488038de6c2d32007d3d))
+
 ## [1.61.2](https://github.com/dhis2/capture-app/compare/v1.61.1...v1.61.2) (2021-11-17)
 
 

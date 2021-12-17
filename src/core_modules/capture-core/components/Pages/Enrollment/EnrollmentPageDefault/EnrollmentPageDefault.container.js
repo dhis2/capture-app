@@ -89,7 +89,7 @@ export const EnrollmentPageDefault = () => {
             teiId={teiId}
             program={program}
             stages={stages}
-            events={enrollment?.events ?? []}
+            events={enrollment?.events}
             enrollmentId={enrollmentId}
             onDelete={onDelete}
             onViewAll={onViewAll}

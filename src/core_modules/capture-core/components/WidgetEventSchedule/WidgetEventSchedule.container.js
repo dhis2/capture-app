@@ -1,8 +1,7 @@
 // @flow
-import React, { useMemo, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useDataMutation } from '@dhis2/app-runtime';
+import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { getProgramAndStageForProgram, TrackerProgram } from '../../metaData';
 import { useOrganisationUnit } from '../../dataQueries';
@@ -14,13 +13,7 @@ import {
     useEventsInOrgUnit,
     useScheduleConfigFromProgram,
 } from './hooks';
-import { buildUrlQueryString } from '../../utils/routing';
-
-const scheduleEventMutation = {
-    resource: 'events',
-    type: 'create',
-    data: events => events,
-};
+import { requestScheduleEvent } from './WidgetEventSchedule.actions';
 
 export const WidgetEventSchedule = ({
     enrollmentId,
@@ -28,50 +21,68 @@ export const WidgetEventSchedule = ({
     stageId,
     programId,
     orgUnitId,
+    onSave,
+    onSaveSuccessActionType,
+    onSaveErrorActionType,
     ...passOnProps
 }: ContainerProps) => {
     const { program, stage } = useMemo(() => getProgramAndStageForProgram(programId, stageId), [programId, stageId]);
-    const history = useHistory();
+    const dispatch = useDispatch();
     const { orgUnit } = useOrganisationUnit(orgUnitId, 'displayName');
     const { programStageScheduleConfig } = useScheduleConfigFromProgramStage(stageId);
     const { programConfig } = useScheduleConfigFromProgram(programId);
     const suggestedScheduleDate = useDetermineSuggestedScheduleDate({
         programStageScheduleConfig, programConfig, ...passOnProps,
     });
-    const [scheduleDate, setScheduleDate] = useState();
+    const [scheduleDate, setScheduleDate] = useState('');
+    const [comments, setComments] = useState([]);
     const { events } = useEventsInOrgUnit(orgUnitId, scheduleDate);
 
-    const [mutate] = useDataMutation(scheduleEventMutation, {
-        onComplete: () => {
-            history.push(`/enrollment?${buildUrlQueryString({ orgUnitId, programId, stageId, enrollmentId })}`);
-        },
-    });
     const eventCountInOrgUnit = events
         .filter(event => moment(event.dueDate).format('YYYY-MM-DD') === scheduleDate).length;
 
-    const onHandleSchedule = async () => {
-        if (!scheduleDate) { return; }
-        await mutate({ events: [{
-            dueDate: scheduleDate,
-            dataValues: [],
-            trackedEntityInstance: teiId,
-            orgUnit: orgUnitId,
-            enrollment: enrollmentId,
-            program: programId,
-            programStage: stageId,
-            status: 'SCHEDULE',
-            notes: [],
-        }] });
-    };
-    const onAddComment = () => {
-        // TODO add the comment function in DHIS2-11864
-    };
+    useEffect(() => {
+        if (!scheduleDate && suggestedScheduleDate) { setScheduleDate(suggestedScheduleDate); }
+    }, [suggestedScheduleDate, scheduleDate]);
+
+    const onHandleSchedule = useCallback(() => {
+        dispatch(requestScheduleEvent({
+            scheduleDate,
+            comments,
+            programId,
+            orgUnitId,
+            stageId,
+            teiId,
+            enrollmentId,
+            onSaveExternal: onSave,
+            onSaveSuccessActionType,
+            onSaveErrorActionType,
+        }));
+    }, [
+        dispatch,
+        scheduleDate,
+        comments,
+        programId,
+        orgUnitId,
+        stageId,
+        teiId,
+        enrollmentId,
+        onSave,
+        onSaveSuccessActionType,
+        onSaveErrorActionType,
+    ]);
 
     React.useEffect(() => {
         if (suggestedScheduleDate && !scheduleDate) {
             setScheduleDate(suggestedScheduleDate);
         }
     }, [scheduleDate, suggestedScheduleDate]);
+
+
+    const onAddComment = (comment) => {
+        setComments([...comments, { value: comment }]);
+    };
+
 
     if (!program || !stage || !(program instanceof TrackerProgram)) {
         return (
@@ -80,7 +91,6 @@ export const WidgetEventSchedule = ({
             </div>
         );
     }
-
 
     return (
         <WidgetEventScheduleComponent
@@ -95,6 +105,7 @@ export const WidgetEventSchedule = ({
             onAddComment={onAddComment}
             eventCountInOrgUnit={eventCountInOrgUnit}
             orgUnit={orgUnit}
+            comments={comments}
             {...passOnProps}
         />
 

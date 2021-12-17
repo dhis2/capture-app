@@ -36,7 +36,19 @@ const styles = () => ({
 });
 
 const WidgetEventSchedulePlain = ({
-    stageId, programId, programName, stageName, orgUnit, onSchedule, onAddComment, classes, ...passOnProps
+    stageId,
+    programId,
+    programName,
+    stageName,
+    orgUnit,
+    onCancel,
+    onSchedule,
+    onAddComment,
+    classes,
+    scheduleDate,
+    suggestedScheduleDate,
+    comments,
+    ...passOnProps
 }: Props) => (
     <div className={classes.wrapper}>
         <DataSection
@@ -52,6 +64,8 @@ const WidgetEventSchedulePlain = ({
                         programId={programId}
                         stageId={stageId}
                         orgUnit={orgUnit}
+                        scheduleDate={scheduleDate}
+                        suggestedScheduleDate={suggestedScheduleDate}
                         {...passOnProps}
                     />
                 </div>
@@ -62,12 +76,16 @@ const WidgetEventSchedulePlain = ({
             sectionName={i18n.t('Event comments')}
         >
             <CommentSection
-                comments={[]}
+                comments={comments}
                 placeholder={i18n.t('Write a comment about this scheduled event')}
                 handleAddComment={onAddComment}
             />
         </DataSection>
-        <ScheduleButtons onCancel={() => {}} onSchedule={onSchedule} />
+        <ScheduleButtons
+            hasChanges={scheduleDate !== suggestedScheduleDate}
+            onCancel={onCancel}
+            onSchedule={onSchedule}
+        />
         <ScheduleText
             programName={programName}
             stageName={stageName}

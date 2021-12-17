@@ -74,9 +74,7 @@ function prepare(
         return null;
     }
 
-    const { programRuleVariables } = program;
-    const programRules = [...program.programRules, ...foundation.programRules];
-
+    const { programRuleVariables, programRules } = program;
     if (!programRules || programRules.length === 0) {
         return null;
     }
