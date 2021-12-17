@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-12-02T13:26:20.780Z\n"
+"POT-Creation-Date: 2021-12-07T16:17:10.207Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -1022,6 +1022,9 @@ msgstr "Napište komentář k této události"
 
 msgid "This event doesn't have any comments"
 msgstr "Tato událost nemá žádné komentáře"
+
+msgid "stage not found in rules execution"
+msgstr ""
 
 msgid "Event completed"
 msgstr "Událost dokončena"
