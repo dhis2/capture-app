@@ -10,8 +10,6 @@ export type Props = {|
     enrollmentId: string,
     onSave: ExternalSaveHandler,
     dataEntryHasChanges: boolean,
-    onSaveSuccessActionType: string,
-    onSaveErrorActionType: string,
     onCancel: () => void,
     onDelete: () => void,
     widgetEffects: ?WidgetEffects,

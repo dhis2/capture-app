@@ -9,13 +9,13 @@ export type StageDataElement = {
     id: string,
     name: string,
     type: $Keys<typeof dataElementTypes>,
-    options: Array<StageOptions>
+    options?: StageOptions,
 }
 
 export type Stage = {
     id: string,
     name: string,
-    description: string,
+    description?: ?string,
     icon?: Icon,
     dataElements: Array<StageDataElement>,
     hideDueDate?: boolean,
@@ -23,7 +23,32 @@ export type Stage = {
 }
 
 export type StageCommonProps = {|
+    ready?: boolean,
     onViewAll: (stageId: string) => void,
     onCreateNew: (stageId: string) => void,
     onEventClick: (eventId: string, stageId: string) => void
 |}
+
+export type DataValue = {
+    dataElement: string,
+    value: string,
+}
+
+export type Event = {|
+    dataValues: Array<DataValue>,
+    deleted?: boolean,
+    dueDate: string,
+    enrollment: string,
+    enrollmentStatus: string,
+    event: string,
+    eventDate: string,
+    lastUpdated: string,
+    orgUnit: string,
+    orgUnitName: string,
+    program: string,
+    programStage: string,
+    status: 'ACTIVE' | 'VISITED' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED',
+    trackedEntityInstance: string,
+    notes?: Array<Object>,
+    pendingApiResponse?: ?boolean,
+|};

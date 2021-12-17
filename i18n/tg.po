@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-10-14T05:38:33.109Z\n"
+"POT-Creation-Date: 2021-12-02T13:26:20.780Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2021\n"
 "Language-Team: Tajik (https://www.transifex.com/hisp-uio/teams/100509/tg/)\n"
@@ -130,10 +130,7 @@ msgstr ""
 msgid "A future date is not allowed"
 msgstr ""
 
-msgid "Saving a {{trackedEntityName}} in"
-msgstr ""
-
-msgid "in"
+msgid "Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}."
 msgstr ""
 
 msgid "Cancel"
@@ -147,6 +144,9 @@ msgstr ""
 
 msgid "Search for user"
 msgstr ""
+
+msgid "Complete event"
+msgstr "Рӯйдоди анҷомёфта"
 
 msgid "Basic info"
 msgstr ""
@@ -163,11 +163,11 @@ msgstr ""
 msgid "Assignee"
 msgstr ""
 
-msgid "Saving to"
+msgid "Saving to {{stageName}} for {{programName}} in {{orgUnitName}}"
 msgstr ""
 
-msgid "for"
-msgstr "Барои"
+msgid "Saving to {{programName}} in {{orgUnitName}}"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -263,6 +263,9 @@ msgid "without"
 msgstr ""
 
 msgid "enrollment"
+msgstr ""
+
+msgid "in"
 msgstr ""
 
 msgid "Enroll in a program by selecting a program from the top bar."
@@ -588,6 +591,9 @@ msgstr ""
 msgid "Enrollment with id \"{{enrollmentId}}\" does not exist"
 msgstr ""
 
+msgid "Enrollment Dashboard"
+msgstr ""
+
 msgid "No indicator output for this enrollment yet"
 msgstr ""
 
@@ -647,9 +653,6 @@ msgstr ""
 msgid "There are no indicators for this event"
 msgstr ""
 
-msgid "program stage is invalid"
-msgstr ""
-
 msgid "Report"
 msgstr "Ҳисобот"
 
@@ -657,6 +660,18 @@ msgid "Schedule"
 msgstr "Ҷадвал"
 
 msgid "Refer"
+msgstr ""
+
+msgid "You can’t add any more events in this program"
+msgstr ""
+
+msgid "Cancel without saving"
+msgstr ""
+
+msgid "Choose a stage for a new event"
+msgstr ""
+
+msgid "Program Stages could not be loaded"
 msgstr ""
 
 msgid "stage"
@@ -681,6 +696,9 @@ msgid "Or see all records accessible to you in {{program}} "
 msgstr ""
 
 msgid "Or see all events accessible to you in {{program}}"
+msgstr ""
+
+msgid "Please select an organisation unit."
 msgstr ""
 
 msgid "Choose the {{missingCategories}} to start reporting"
@@ -971,7 +989,42 @@ msgstr ""
 msgid "This event doesn't have any comments"
 msgstr ""
 
+msgid "Event completed"
+msgstr ""
+
 msgid "Back to all stages and events"
+msgstr ""
+
+msgid "Schedule date info"
+msgstr ""
+
+msgid ""
+"This date is the the auto-suggested date based on the intervals defined, \n"
+"                    it can be adjusted if needed."
+msgstr ""
+
+msgid "This date is {{difference}} days {{position}} the auto-suggested date."
+msgstr ""
+
+msgid ""
+"There are {{eventCountInOrgUnit}} scheduled events in {{orgUnitName}} on "
+"this day."
+msgstr ""
+
+msgid ""
+"Scheduling an event in {{stageName}} for {{programName}} in {{orgUnitName}}"
+msgstr ""
+
+msgid "Schedule info"
+msgstr ""
+
+msgid "Schedule date / Due date"
+msgstr ""
+
+msgid "Event comments"
+msgstr ""
+
+msgid "Write a comment about this scheduled event"
 msgstr ""
 
 msgid "Profile widget could not be loaded. Please try again later"
@@ -981,6 +1034,9 @@ msgid "Person Profile"
 msgstr ""
 
 msgid "New {{ eventName }} event"
+msgstr ""
+
+msgid "This event is not yet preserved and cannot be edited"
 msgstr ""
 
 msgid "Show {{ rest }} more"

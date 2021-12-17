@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
+import i18n from '@dhis2/d2-i18n';
 import { dataElementTypes, type DataElement } from '../metaData';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import { stringifyNumber } from './common/stringifyNumber';
@@ -53,8 +54,8 @@ const valueConvertersForType = {
     [dataElementTypes.DATE]: convertDateForView,
     [dataElementTypes.DATETIME]: convertDateTimeForView,
     [dataElementTypes.TIME]: convertTimeForView,
-    [dataElementTypes.TRUE_ONLY]: () => 'Yes',
-    [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
+    [dataElementTypes.TRUE_ONLY]: () => i18n.t('Yes'),
+    [dataElementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? i18n.t('Yes') : i18n.t('No')),
     [dataElementTypes.COORDINATE]: MinimalCoordinates,
     [dataElementTypes.AGE]: convertDateForView,
     [dataElementTypes.FILE_RESOURCE]: convertResourceForView,

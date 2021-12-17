@@ -156,26 +156,6 @@ Feature: User uses the LockedSelector to navigate
       | /#/enrollment?programId=qDkgAbB5Jlk&teiId=fhFQhO0xILJ                                                 | teiAndMalariaProgram | Carlos Cruz is a person and cannot be enrolled in the Malaria case diagnosis, treatment and investigation. Choose another program that allows person enrollment. Enroll a new malaria entity in this program.|
       | /#/enrollment?programId=lxAQ7Zs9VYR&teiId=fhFQhO0xILJ                                                 | teiAndEventProgram   | Antenatal care visit is an event program and does not have enrollments. |
 
-  Scenario: Enrollment page > resetting the tei
-   Given you land on the enrollment page by having typed only the enrollmentId on the url
-   When you reset the tei selection
-   And you navigated to the main page
-
-  Scenario: Enrollment page > resetting the program
-   Given you land on the enrollment page by having typed only the enrollmentId on the url
-   When you reset the program selection
-   And you see message explaining you need to select a program
-
-  Scenario: Enrollment page > resetting the org unit
-   Given you land on the enrollment page by having typed only the enrollmentId on the url
-   When you reset the org unit selection
-   And you see the enrollment page but there is no org unit id in the url
-
-  Scenario: Enrollment page > resetting the enrollment
-   Given you land on the enrollment page by having typed only the enrollmentId on the url
-   When you reset the enrollment selection
-   And you see message explaining you need to select an enrollment
-
   Scenario: Enrollment page > navigating using the scope selector
    Given you land on the enrollment page by having typed only the enrollmentId on the url
    When you reset the program selection
@@ -204,7 +184,7 @@ Feature: User uses the LockedSelector to navigate
     Then you see message explaining you need to select a program
 
   Scenario: Enrollment event edit page > resetting the org unit
-    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
+    Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR&eventId=lQQyjR73hHk
     When you reset the org unit selection
     Then you see the enrollment event Edit page but there is no org unit id in the url
 
@@ -222,7 +202,7 @@ Feature: User uses the LockedSelector to navigate
     Given you land on a enrollment page domain by having typed /#/enrollmentEventEdit?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&eventId=lQQyjR73hHk&stageId=A03MvHHogjR
     When you reset the event selection
     Then you see the enrollment page
-  
+
     Scenario: Enrollment event edit page > Fallback for tei missing name
     Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollmentEventEdit?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8&teiId=dNpxRu1mWG5&enrollmentId=V8uPJuhvlL7&eventId=rBjxtO8npTb&stageId=CWaAcQYKVpq
     Then you see the tei id on the scope selector
@@ -251,12 +231,12 @@ Feature: User uses the LockedSelector to navigate
   Scenario: Enrollment event new page > resetting the event
     Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
     When you reset the stage selection
-    Then you see the enrollment page
+    Then you see the enrollment event New page but there is no stage id in the url
 
   Scenario: Enrollment event new page > resetting the stage
     Given you land on a enrollment page domain by having typed /#/enrollmentEventNew?programId=IpHINAT79UW&orgUnitId=UgYg0YW7ZIh&teiId=fhFQhO0xILJ&enrollmentId=gPDueU02tn8&stageId=A03MvHHogjR
     When you reset the event selection
-    Then you see the enrollment page
+    Then you see the enrollment event New page but there is no stage id in the url
 
   Scenario: Enrollment event new page > Fallback for tei missing name
     Given you land on a enrollment page domain in Malaria focus investigation by having typed /#/enrollmentEventNew?programId=M3xtLkYBlKI&orgUnitId=DiszpKrYNg8&teiId=dNpxRu1mWG5&enrollmentId=V8uPJuhvlL7&stageId=CWaAcQYKVpq

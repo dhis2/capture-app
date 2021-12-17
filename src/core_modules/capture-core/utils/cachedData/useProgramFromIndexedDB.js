@@ -2,7 +2,7 @@
 import { useMemo, useState } from 'react';
 import {
     getCachedSingleResourceFromKeyAsync,
-} from '../../metaDataMemoryStoreBuilders/baseBuilder/singleResourceFromKeyGetter';
+} from './helpers/singleResourceFromKeyGetter';
 import { userStores } from '../../storageControllers/stores';
 
 
