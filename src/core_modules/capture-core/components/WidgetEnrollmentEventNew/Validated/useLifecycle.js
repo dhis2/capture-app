@@ -3,11 +3,12 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import { getOpenDataEntryActions, getRulesActions } from '../DataEntry';
-import type { TrackerProgram, RenderFoundation } from '../../../metaData';
+import type { TrackerProgram, ProgramStage, RenderFoundation } from '../../../metaData';
 import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../common.types';
 
 export const useLifecycle = ({
     program,
+    stage,
     formFoundation,
     orgUnit,
     dataEntryId,
@@ -19,6 +20,7 @@ export const useLifecycle = ({
     },
 }: {
     program: TrackerProgram,
+    stage: ProgramStage,
     formFoundation: RenderFoundation,
     orgUnit?: OrgUnit,
     dataEntryId: string,
@@ -47,9 +49,10 @@ export const useLifecycle = ({
     useEffect(() => {
         if (orgUnit) {
             dispatch(batchActions([
-                ...getRulesActions({
+                getRulesActions({
                     state,
                     program,
+                    stage,
                     formFoundation,
                     dataEntryId,
                     itemId,
@@ -72,7 +75,7 @@ export const useLifecycle = ({
         eventsRulesDependency,
         attributesValuesRulesDependency,
         program,
-        formFoundation,
+        stage,
         dataEntryId,
         itemId,
     ]);

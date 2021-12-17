@@ -6,7 +6,7 @@ describe('Event Event rules engine', () => {
     const constants = [{ id: 'Gfd3ppDfq8E', displayName: 'Commodity ordering overhead', value: 5 }, { id: 'bCqvfPR02Im', displayName: 'Pi', value: 3.14 }];
     const dataElementsInProgram = { sWoqcoByYmD: { id: 'sWoqcoByYmD', valueType: 'BOOLEAN' }, Ok9OQpitjQr: { id: 'Ok9OQpitjQr', valueType: 'BOOLEAN' }, vANAXwtLwcT: { id: 'vANAXwtLwcT', valueType: 'NUMBER' } };
     const programRules = [{ id: 'GC4gpdoSD4r', condition: '#{hemoglobin} < 9', description: 'Show warning if hemoglobin is dangerously low', displayName: 'Hemoglobin warning', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'suS9GnraCx1', content: 'Hemoglobin value lower than normal', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWWARNING' }] }, { id: 'dahuKlP7jR2', condition: '#{hemoglobin} > 99', description: 'Show error for hemoglobin value higher than 99', displayName: 'Show error for high hemoglobin value', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'UUwZWS8uirn', content: 'The hemoglobin value cannot be above 99', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWERROR' }] }, { id: 'xOe5qCzRS0Y', condition: '!#{womanSmoking} ', description: 'Hide smoking cessation councelling dataelement unless patient is smoking', displayName: 'Hide smoking cessation councelling', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'hwgyO59SSxu', dataElementId: 'Ok9OQpitjQr', programRuleActionType: 'HIDEFIELD' }] }];
-    const programRulesVariables = [{ id: 'Z92dJO9gIje', dataElementId: 'sWoqcoByYmD', displayName: 'womanSmoking', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'omrL0gtPpDL', dataElementId: 'vANAXwtLwcT', displayName: 'hemoglobin', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }];
+    const programRuleVariables = [{ id: 'Z92dJO9gIje', dataElementId: 'sWoqcoByYmD', displayName: 'womanSmoking', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'omrL0gtPpDL', dataElementId: 'vANAXwtLwcT', displayName: 'hemoglobin', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }];
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
     const optionSets = {};
 
@@ -27,25 +27,16 @@ describe('Event Event rules engine', () => {
             { vANAXwtLwcT: 100 },
             [{ id: 'vANAXwtLwcT', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, message: 'The hemoglobin value cannot be above 99 ', type: 'SHOWERROR' }, { id: 'Ok9OQpitjQr', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' }],
         ],
-    ])('where value needs to >= 9 and <= 99', (events, expected) => {
-        test(`and given value(s): ${JSON.stringify(events)}`, () => {
-            // given
-            const { currentEvent, allEvents } = {
-                currentEvent: events,
-                allEvents: { all: [events], byStage: {} },
-            };
-
-            // when
+    ])('where value needs to >= 9 and <= 99', (currentEvent, expected) => {
+        test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
             const rulesEffects = rulesEngine.getProgramRuleEffects({
-                programRulesContainer: { programRulesVariables, programRules, constants },
+                programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
-                eventsContainer: allEvents,
                 dataElements: dataElementsInProgram,
                 selectedOrgUnit: orgUnit,
                 optionSets,
             });
 
-            // then
             expect(rulesEffects).toEqual(expected);
         });
     });
@@ -59,26 +50,16 @@ describe('Event Event rules engine', () => {
             { sWoqcoByYmD: false },
             [{ id: 'vANAXwtLwcT', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, message: 'Hemoglobin value lower than normal ', type: 'SHOWWARNING' }, { id: 'Ok9OQpitjQr', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' }],
         ],
-    ])('where field is hidden regarding a boolean value', (events, expected) => {
-        test(`and given value(s): ${JSON.stringify(events)}`, () => {
-            // given
-            const { currentEvent, allEvents } = {
-                currentEvent: events,
-                allEvents: { all: [events], byStage: {} },
-            };
-
-
-            // when
+    ])('where field is hidden regarding a boolean value', (currentEvent, expected) => {
+        test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
             const rulesEffects = rulesEngine.getProgramRuleEffects({
-                programRulesContainer: { programRulesVariables, programRules, constants },
+                programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
-                eventsContainer: allEvents,
                 dataElements: dataElementsInProgram,
                 selectedOrgUnit: orgUnit,
                 optionSets,
             });
 
-            // then
             expect(rulesEffects).toEqual(expected);
         });
     });
@@ -89,7 +70,7 @@ describe('Event rules engine', () => {
     const constants = [{ id: 'Gfd3ppDfq8E', displayName: 'Commodity ordering overhead', value: 5 }, { id: 'bCqvfPR02Im', displayName: 'Pi', value: 3.14 }];
     const dataElementsInProgram = { oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' }, SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'BOOLEAN', optionSetId: undefined }, qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'INTEGER', optionSetId: undefined }, GieVkTxp4HH: { id: 'GieVkTxp4HH', valueType: 'NUMBER', optionSetId: undefined }, vV9UWAZohSf: { id: 'vV9UWAZohSf', valueType: 'INTEGER_POSITIVE', optionSetId: undefined }, eMyVanycQSC: { id: 'eMyVanycQSC', valueType: 'DATE', optionSetId: undefined }, K6uUAvq500H: { id: 'K6uUAvq500H', valueType: 'TEXT', optionSetId: 'eUZ79clX7y1' }, msodh3rEMJa: { id: 'msodh3rEMJa', valueType: 'DATE', optionSetId: undefined }, S33cRBsnXPo: { id: 'S33cRBsnXPo', valueType: 'ORGANISATION_UNIT', optionSetId: undefined }, fWIAEtYVEGk: { id: 'fWIAEtYVEGk', valueType: 'TEXT', optionSetId: 'iDFPKpFTiVw' }, ulD2zW0TIy2: { id: 'ulD2zW0TIy2', valueType: 'FILE_RESOURCE' } };
     const programRules = [{ id: 'fd3wL1quxGb', condition: "#{gender} == 'Male'", description: 'Hide pregnant if gender is male', displayName: 'Hide pregnant if gender is male', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'IrmpncBsypT', dataElementId: 'SWfdB5lX0fk', programRuleActionType: 'HIDEFIELD', programStageSectionId: 'd7ZILSbPgYh' }] }, { id: 'x7PaHGvgWY2', condition: 'true', description: 'Body Mass Index. Weight in kg / height in m square.', displayName: 'BMI', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'x7PaHGvgWY2', content: 'BMI', data: '#{Zj7UnCAulEk.vV9UWAZohSf}/((#{Zj7UnCAulEk.GieVkTxp4HH}/100)*(#{Zj7UnCAulEk.GieVkTxp4HH}/100))', programRuleActionType: 'DISPLAYKEYVALUEPAIR', location: 'indicators' }] }];
-    const programRulesVariables = [{ id: 'RycV5uDi66i', dataElementId: 'qrur9Dvnyt5', displayName: 'age', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'zINGRka3g9N', dataElementId: 'oZg33kd9taw', displayName: 'gender', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'Zj7UnCAulEk.vV9UWAZohSf', displayName: 'Zj7UnCAulEk.vV9UWAZohSf', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'vV9UWAZohSf', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }];
+    const programRuleVariables = [{ id: 'RycV5uDi66i', dataElementId: 'qrur9Dvnyt5', displayName: 'age', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'zINGRka3g9N', dataElementId: 'oZg33kd9taw', displayName: 'gender', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'Zj7UnCAulEk.vV9UWAZohSf', displayName: 'Zj7UnCAulEk.vV9UWAZohSf', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'vV9UWAZohSf', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }];
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
     const optionSets = { pC3N9N77UmT: { id: 'pC3N9N77UmT', displayName: 'Gender', version: 0, valueType: 'TEXT', options: [{ id: 'rBvjJYbMCVx', displayName: 'Male', code: 'Male', translations: [] }, { id: 'Mnp3oXrpAbK', displayName: 'Female', code: 'Female', translations: [] }] } };
 
@@ -106,26 +87,16 @@ describe('Event rules engine', () => {
             { oZg33kd9taw: null, SWfdB5lX0fk: null },
             [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: NaN }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
-    ])('where field is hidden regarding the gender of the event', (events, expected) => {
-        test(`and given value(s): ${JSON.stringify(events)}`, () => {
-            // given
-            const { currentEvent, allEvents } = {
-                currentEvent: events,
-                allEvents: { all: [events], byStage: {} },
-            };
-
-
-            // when
+    ])('where field is hidden regarding the gender of the event', (currentEvent, expected) => {
+        test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
             const rulesEffects = rulesEngine.getProgramRuleEffects({
-                programRulesContainer: { programRulesVariables, programRules, constants },
+                programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
-                eventsContainer: allEvents,
                 dataElements: dataElementsInProgram,
                 selectedOrgUnit: orgUnit,
                 optionSets,
             });
 
-            // then
             expect(rulesEffects).toEqual(expected);
         });
     });
@@ -163,26 +134,16 @@ describe('Event rules engine', () => {
             { qrur9Dvnyt5: 40, GieVkTxp4HH: 180, vV9UWAZohSf: 85 },
             [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: 26.234567901234566 }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
         ],
-    ])('where BMI is calculated', (events, expected) => {
-        test(`and given value(s): ${JSON.stringify(events)}`, () => {
-            // given
-            const { currentEvent, allEvents } = {
-                currentEvent: events,
-                allEvents: { all: [events], byStage: {} },
-            };
-
-
-            // when
+    ])('where BMI is calculated', (currentEvent, expected) => {
+        test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
             const rulesEffects = rulesEngine.getProgramRuleEffects({
-                programRulesContainer: { programRulesVariables, programRules, constants },
+                programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
-                eventsContainer: allEvents,
                 dataElements: dataElementsInProgram,
                 selectedOrgUnit: orgUnit,
                 optionSets,
             });
 
-            // then
             expect(rulesEffects).toEqual(expected);
         });
     });
@@ -193,7 +154,7 @@ describe('Event rules engine', () => {
     const constants = [{ id: 'Gfd3ppDfq8E', displayName: 'Commodity ordering overhead', value: 5 }, { id: 'bCqvfPR02Im', displayName: 'Pi', value: 3.14 }];
     const dataElementsInProgram = { dyfYIsTFTjG: { id: 'dyfYIsTFTjG', valueType: 'TEXT' }, XOaXLWuhKzV: { id: 'XOaXLWuhKzV', valueType: 'TEXT', optionSetId: 'WDUwjiW2rGH' }, AtFlciXnstG: { id: 'AtFlciXnstG', valueType: 'INTEGER_ZERO_OR_POSITIVE' }, JGnHr6WI3AY: { id: 'JGnHr6WI3AY', valueType: 'TEXT', optionSetId: 'L6eMZDJkCwX' }, s3eoonJ8OJb: { id: 's3eoonJ8OJb', valueType: 'DATE' }, gktroFPckdr: { id: 'gktroFPckdr', valueType: 'TEXT', optionSetId: 'UYDsNdpo2BU' }, QQLXTXVidW2: { id: 'QQLXTXVidW2', valueType: 'TEXT', optionSetId: 'L6eMZDJkCwX' }, ovY6E8BSdto: { id: 'ovY6E8BSdto', valueType: 'TEXT', optionSetId: 'dsgBmIZ0Yrq' }, Z5z8vFQy0w0: { id: 'Z5z8vFQy0w0', valueType: 'TEXT' }, TzqawmlPkI5: { id: 'TzqawmlPkI5', valueType: 'TEXT', optionSetId: 'L6eMZDJkCwX' }, f8j4XDEozvj: { id: 'f8j4XDEozvj', valueType: 'TEXT', optionSetId: 'xD9QOIvNAjw' }, jBBkFuPKctq: { id: 'jBBkFuPKctq', valueType: 'TEXT', optionSetId: 'T9zjyaIkRqH' }, A4Fg6jgWauf: { id: 'A4Fg6jgWauf', valueType: 'TEXT', optionSetId: 'w1vUkxq8IOl' }, CUbZcLm9LyN: { id: 'CUbZcLm9LyN', valueType: 'TEXT', optionSetId: 'L6eMZDJkCwX' }, p8htbyJHydl: { id: 'p8htbyJHydl', valueType: 'TEXT', optionSetId: 'L6eMZDJkCwX' }, SbXES4EPgqP: { id: 'SbXES4EPgqP', valueType: 'NUMBER' }, bOYWVEBaWy6: { id: 'bOYWVEBaWy6', valueType: 'TEXT', optionSetId: 'qI4cs9ocBwn' }, PFXeJV8d7ja: { id: 'PFXeJV8d7ja', valueType: 'DATE' } };
     const programRules = [{ id: 'DOz4wl8ErDD', condition: 'true', description: 'Hide Irrelevant Test Result Options', displayName: 'Hide Test Result Options', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'XuM1JizlcF1', dataElementId: 'ovY6E8BSdto', programRuleActionType: 'HIDEOPTION', optionId: 'MkeWrqeqZXL' }, { id: 'FRfTFXSwKDU', dataElementId: 'ovY6E8BSdto', programRuleActionType: 'HIDEOPTION', optionId: 'fPV0gQ8ds6D' }] }, { id: 'DtfaG1TgyZk', condition: "(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'No') ||\n(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'Yes'  && #{TEST_RESULT} == 'Inconclusive')", description: "Automation: Assign 'Probable Case' to Case Classification", displayName: "Assign 'Probable Case' to Case Classification", programId: 'PNClHaZARtz', programRuleActions: [{ id: 'NPvy6sF6axT', data: "'Probable Case'", dataElementId: 'Z5z8vFQy0w0', programRuleActionType: 'ASSIGN' }], priority: 4 }, { id: 'E9ghdhg6ABQ', condition: "#{SYMPTOMS}  != 'Yes'", description: 'Hide Onset of Symptoms Date if no symptoms', displayName: 'Hide Onset of Symptoms Date', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'VcnnsBPtzlW', dataElementId: 's3eoonJ8OJb', programRuleActionType: 'HIDEFIELD' }] }, { id: 'FnSVDp8v0H9', condition: 'true', description: 'Hide Irrelevant Unknown Options', displayName: 'Hide Unknown Options', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'UqDEcMuF5DF', dataElementId: 'JGnHr6WI3AY', programRuleActionType: 'HIDEOPTION', optionId: 'pqxvAQU1z9W' }, { id: 'GrFjkYTT07o', dataElementId: 'p8htbyJHydl', programRuleActionType: 'HIDEOPTION', optionId: 'pqxvAQU1z9W' }, { id: 'HlyTQaTz00f', dataElementId: 'CUbZcLm9LyN', programRuleActionType: 'HIDEOPTION', optionId: 'pqxvAQU1z9W' }] }, { id: 'L8bP6GifQXL', condition: "!d2:hasValue( #{INFECTION_SOURCE} )  || #{INFECTION_SOURCE} == 'IMPORTED_CASE'  || #{INFECTION_SOURCE} == 'EXPOSURE_UNKNOWN'", description: 'Hide Case Type for Imported Cases', displayName: 'Hide Case Type', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'k05Owr8pwIn', dataElementId: 'A4Fg6jgWauf', programRuleActionType: 'HIDEFIELD' }] }, { id: 'MLS5vZLguQM', condition: "#{INFECTION_SOURCE} != 'LOCAL_TRANSMISSION'", description: "Hide 'Specify Local Infection Source' unless Local Transmission is selected", displayName: "Hide 'Specify Local Infection Source'", programId: 'PNClHaZARtz', programRuleActions: [{ id: 'ho7xRPUB0Gl', dataElementId: 'jBBkFuPKctq', programRuleActionType: 'HIDEFIELD' }] }, { id: 'NXWk8sq70OV', condition: "#{TRAVEL_HISTORY} == 'No'", description: "Hide 'Imported Case' if not traveled", displayName: "Hide 'Imported Case'", programId: 'PNClHaZARtz', programRuleActions: [{ id: 'fJIgmDK53Vp', dataElementId: 'f8j4XDEozvj', programRuleActionType: 'HIDEOPTION', optionId: 'PMGTqmVIF4T' }] }, { id: 'NZaVqr7dPfQ', condition: '!d2:hasValue( #{ONSET_DATE} ) && !d2:hasValue(V{event_date})', description: 'Automation: Assign Empty date if no Onset date and no event date is available', displayName: 'Assign Empty Date', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'q060xuOwQx3', data: "''", dataElementId: 'PFXeJV8d7ja', programRuleActionType: 'ASSIGN' }], priority: 3 }, { id: 'QrJx9LI9KRo', condition: "d2:hasValue( #{LAB_TEST} ) && #{LAB_TEST}  == 'Yes'  && !d2:hasValue( #{TEST_RESULT} )", description: 'Automation: Assign Empty Value to Class Classification', displayName: 'Assign Empty Value to Class Classification', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'rFaZAbOgMSz', data: "''", dataElementId: 'Z5z8vFQy0w0', programRuleActionType: 'ASSIGN' }], priority: 2 }, { id: 'R6oEX1xlQma', condition: 'true', description: 'Hide irrelevant Outcome Options', displayName: 'Hide Outcome Options', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'Ov7qHXf0Q2s', dataElementId: 'bOYWVEBaWy6', programRuleActionType: 'HIDEOPTION', optionId: 'dUeRcF2cApV' }, { id: 'V95rgvUlqY0', dataElementId: 'bOYWVEBaWy6', programRuleActionType: 'HIDEOPTION', optionId: 'bYt4why1tL3' }, { id: 'eZUUOjykbLv', dataElementId: 'bOYWVEBaWy6', programRuleActionType: 'HIDEOPTION', optionId: 'xBoo6HyaYcd' }, { id: 'Zcs7rz5VEF7', dataElementId: 'bOYWVEBaWy6', programRuleActionType: 'HIDEOPTION', optionId: 'RCT079wdeKT' }] }, { id: 'dZsTiQEUg5L', condition: '!d2:hasValue( #{ONSET_DATE} ) && d2:hasValue(V{event_date})', description: 'Automation: Assign Event date if no Onset date is available', displayName: 'Assign Event Date', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'sQKFBORp5P1', data: 'V{event_date}', dataElementId: 'PFXeJV8d7ja', programRuleActionType: 'ASSIGN' }], priority: 2 }, { id: 'kVBrxwODyTj', condition: '!d2:hasValue( #{LAB_TEST} )', description: 'Hide Case Classification Field until Lab Test question is answered', displayName: 'Hide Case Classification Field', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'ZT8AexxBPl0', dataElementId: 'Z5z8vFQy0w0', programRuleActionType: 'HIDEFIELD' }] }, { id: 'q2QbEfeDlI9', condition: "!d2:hasValue( #{HOSPITALISED} ) || #{HOSPITALISED}  == 'No'", description: 'Hide ICU field unless Hospitalised', displayName: 'Hide ICU field', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'wwvxLCpuOCx', dataElementId: 'p8htbyJHydl', programRuleActionType: 'HIDEFIELD' }] }, { id: 'rZUpiMuJIKH', condition: "d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'Yes'  && #{TEST_RESULT} == 'Positive'", description: "Automation: Assign 'Laboratory Confirmed Case' to Case Classification", displayName: "Assign 'Laboratory Confirmed Case' to Case Classification", programId: 'PNClHaZARtz', programRuleActions: [{ id: 'hcamYSDn00P', data: "'Laboratory Confirmed Case'", dataElementId: 'Z5z8vFQy0w0', programRuleActionType: 'ASSIGN' }], priority: 3 }, { id: 'sEQsGGAQSJT', condition: "(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'Unknown') ||\n(d2:hasValue( #{LAB_TEST} )  && #{LAB_TEST} == 'Yes'  && (#{TEST_RESULT} == 'Negative' || #{TEST_RESULT} == 'Unknown'))", description: "Automation: Assign Suspected Case' to Case Classification", displayName: "Assign 'Suspected Case' to Case Classification", programId: 'PNClHaZARtz', programRuleActions: [{ id: 'zxb2XDboGAF', data: "'Suspected Case'", dataElementId: 'Z5z8vFQy0w0', programRuleActionType: 'ASSIGN' }], priority: 1 }, { id: 'sKCZMuWwOKA', condition: 'd2:hasValue( #{ONSET_DATE} )', description: 'Automation: Assign Symptoms Onset Date if available', displayName: 'Assign Onset Date', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'lJOYxhjupxz', data: '#{ONSET_DATE}', dataElementId: 'PFXeJV8d7ja', programRuleActionType: 'ASSIGN' }], priority: 1 }, { id: 'vj5GWKIrhKh', condition: "#{LAB_TEST} != 'Yes'", description: 'Hide Test Result Field until Lab Test question is answered with yes', displayName: 'Hide Test Result Field', programId: 'PNClHaZARtz', programRuleActions: [{ id: 'VxxxIX2598r', dataElementId: 'ovY6E8BSdto', programRuleActionType: 'HIDEFIELD' }] }];
-    const programRulesVariables = [{ id: 'DoRHHfNPccb', dataElementId: 'f8j4XDEozvj', displayName: 'INFECTION_SOURCE', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: false }, { id: 'EnpvdmYrwLb', dataElementId: 'TzqawmlPkI5', displayName: 'TRAVEL_HISTORY', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'JPIyrAmJapV', dataElementId: 'CUbZcLm9LyN', displayName: 'HOSPITALISED', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'LAaPMTz69L7', displayName: 'CASE_CLASSIFICATION', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'CALCULATED_VALUE', useNameForOptionSet: true }, { id: 'MpixycZvu0m', dataElementId: 'ovY6E8BSdto', displayName: 'TEST_RESULT', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'XcPYCpTOPwB', dataElementId: 'QQLXTXVidW2', displayName: 'LAB_TEST', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'cZSslcAEupI', dataElementId: 's3eoonJ8OJb', displayName: 'ONSET_DATE', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'eSq3nc1t2F6', dataElementId: 'dyfYIsTFTjG', displayName: 'PATIENT_ID', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'lY0yJGU1D4e', dataElementId: 'JGnHr6WI3AY', displayName: 'SYMPTOMS', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: false }];
+    const programRuleVariables = [{ id: 'DoRHHfNPccb', dataElementId: 'f8j4XDEozvj', displayName: 'INFECTION_SOURCE', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: false }, { id: 'EnpvdmYrwLb', dataElementId: 'TzqawmlPkI5', displayName: 'TRAVEL_HISTORY', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'JPIyrAmJapV', dataElementId: 'CUbZcLm9LyN', displayName: 'HOSPITALISED', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'LAaPMTz69L7', displayName: 'CASE_CLASSIFICATION', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'CALCULATED_VALUE', useNameForOptionSet: true }, { id: 'MpixycZvu0m', dataElementId: 'ovY6E8BSdto', displayName: 'TEST_RESULT', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'XcPYCpTOPwB', dataElementId: 'QQLXTXVidW2', displayName: 'LAB_TEST', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'cZSslcAEupI', dataElementId: 's3eoonJ8OJb', displayName: 'ONSET_DATE', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'eSq3nc1t2F6', dataElementId: 'dyfYIsTFTjG', displayName: 'PATIENT_ID', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'lY0yJGU1D4e', dataElementId: 'JGnHr6WI3AY', displayName: 'SYMPTOMS', programId: 'PNClHaZARtz', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: false }];
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
     const optionSets = {
         L6eMZDJkCwX: { id: 'L6eMZDJkCwX', displayName: 'Yes/No/Unknown', version: 3, valueType: 'TEXT', options: [{ id: 'x9yVKkv9koc', displayName: 'Yes', code: 'Yes', translations: [{ property: 'NAME', locale: 'uz@Latn', value: 'Ha' }, { property: 'NAME', locale: 'fr', value: 'Oui' }, { property: 'NAME', locale: 'pt', value: 'Sim' }, { property: 'NAME', locale: 'uz@Cyrl', value: 'Ҳа' }, { property: 'NAME', locale: 'es', value: 'Sí' }, { property: 'NAME', locale: 'nb', value: 'Ja' }, { property: 'NAME', locale: 'ru', value: 'да' }] }, { id: 'R98tI2c6rF5', displayName: 'No', code: 'No', translations: [{ property: 'NAME', locale: 'nb', value: 'Nei' }, { property: 'NAME', locale: 'es', value: 'No' }, { property: 'NAME', locale: 'uz@Latn', value: 'Yo`q' }, { property: 'NAME', locale: 'ru', value: 'нет' }, { property: 'NAME', locale: 'pt', value: 'Não' }, { property: 'NAME', locale: 'fr', value: 'Non' }, { property: 'NAME', locale: 'uz@Cyrl', value: 'Йўқ' }] }, { id: 'pqxvAQU1z9W', displayName: 'Unknown', code: 'Unknown', translations: [{ property: 'NAME', locale: 'es', value: 'DEsconocido' }, { property: 'NAME', locale: 'nb', value: 'Ukjent' }, { property: 'NAME', locale: 'uz@Cyrl', value: 'Ноаниқ' }, { property: 'NAME', locale: 'fr', value: 'Inconnu' }, { property: 'NAME', locale: 'uz@Latn', value: 'Noaniq' }, { property: 'NAME', locale: 'pt', value: 'Desconhecido' }, { property: 'NAME', locale: 'ru', value: 'Неизвестно' }] }] },
@@ -206,7 +167,7 @@ describe('Event rules engine', () => {
         [
             { JGnHr6WI3AY: 'Yes' },
             [
-                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'MkeWrqeqZXL' },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'fPV0gQ8ds6D' },
                 { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'pqxvAQU1z9W' },
@@ -226,8 +187,8 @@ describe('Event rules engine', () => {
         [
             { QQLXTXVidW2: 'Yes' },
             [
-                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: null },
-                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'MkeWrqeqZXL' },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'fPV0gQ8ds6D' },
                 { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
@@ -246,8 +207,8 @@ describe('Event rules engine', () => {
         [
             { QQLXTXVidW2: 'No' },
             [
-                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
-                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Probable Case' },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Probable Case', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'MkeWrqeqZXL' },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'fPV0gQ8ds6D' },
                 { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
@@ -267,8 +228,8 @@ describe('Event rules engine', () => {
         [
             { QQLXTXVidW2: 'Unknown' },
             [
-                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case' },
-                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'MkeWrqeqZXL' },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'fPV0gQ8ds6D' },
                 { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
@@ -288,7 +249,7 @@ describe('Event rules engine', () => {
         [
             { CUbZcLm9LyN: 'Yes' },
             [
-                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'MkeWrqeqZXL' },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'fPV0gQ8ds6D' },
                 { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
@@ -308,8 +269,8 @@ describe('Event rules engine', () => {
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Inconclusive' },
             [
-                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
-                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Probable Case' },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Probable Case', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'MkeWrqeqZXL' },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'fPV0gQ8ds6D' },
                 { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
@@ -328,8 +289,8 @@ describe('Event rules engine', () => {
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Positive' },
             [
-                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
-                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Laboratory Confirmed Case' },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Laboratory Confirmed Case', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'MkeWrqeqZXL' },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'fPV0gQ8ds6D' },
                 { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
@@ -348,8 +309,8 @@ describe('Event rules engine', () => {
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Negative' },
             [
-                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case' },
-                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'MkeWrqeqZXL' },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'fPV0gQ8ds6D' },
                 { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
@@ -368,8 +329,8 @@ describe('Event rules engine', () => {
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Unknown' },
             [
-                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case' },
-                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'MkeWrqeqZXL' },
                 { type: 'HIDEOPTION', id: 'ovY6E8BSdto', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, optionId: 'fPV0gQ8ds6D' },
                 { type: 'HIDEFIELD', id: 's3eoonJ8OJb', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
@@ -385,26 +346,16 @@ describe('Event rules engine', () => {
                 { type: 'HIDEFIELD', id: 'p8htbyJHydl', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
             ],
         ],
-    ])('where different fields are hidden', (value, expected) => {
-        test(`and given value(s): ${JSON.stringify(value)}`, () => {
-            // given
-            const { currentEvent, allEvents } = {
-                currentEvent: value,
-                allEvents: { all: [value], byStage: {} },
-            };
-
-
-            // when
+    ])('where different fields are hidden', (currentEvent, expected) => {
+        test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
             const rulesEffects = rulesEngine.getProgramRuleEffects({
-                programRulesContainer: { programRulesVariables, programRules, constants },
+                programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
-                eventsContainer: allEvents,
                 dataElements: dataElementsInProgram,
                 selectedOrgUnit: orgUnit,
                 optionSets,
             });
 
-            // then
             expect(rulesEffects).toEqual(expected);
         });
     });
@@ -416,7 +367,7 @@ describe('Event rules engine effects with functions and effects', () => {
     const constants = [{ id: 'Gfd3ppDfq8E', displayName: 'Commodity ordering overhead', value: 5 }, { id: 'bCqvfPR02Im', displayName: 'Pi', value: 3.14 }];
     const dataElementsInProgram = { oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' }, SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'BOOLEAN' }, qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'INTEGER' }, GieVkTxp4HH: { id: 'GieVkTxp4HH', valueType: 'NUMBER' }, vV9UWAZohSf: { id: 'vV9UWAZohSf', valueType: 'INTEGER_POSITIVE' }, eMyVanycQSC: { id: 'eMyVanycQSC', valueType: 'DATE' }, K6uUAvq500H: { id: 'K6uUAvq500H', valueType: 'TEXT', optionSetId: 'eUZ79clX7y1' }, msodh3rEMJa: { id: 'msodh3rEMJa', valueType: 'DATE' }, S33cRBsnXPo: { id: 'S33cRBsnXPo', valueType: 'ORGANISATION_UNIT' }, fWIAEtYVEGk: { id: 'fWIAEtYVEGk', valueType: 'TEXT', optionSetId: 'iDFPKpFTiVw' }, ulD2zW0TIy2: { id: 'ulD2zW0TIy2', valueType: 'FILE_RESOURCE' } };
     const programRules = [{ id: 'CTzRoPyvf8v', condition: 'true', displayName: 'Testing the functions!', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'isP0uvT24jf', content: "d2:yearsBetween( '2010-01-28', V{event_date}) =", data: "d2:yearsBetween( '2010-01-28', V{event_date})", programRuleActionType: 'DISPLAYTEXT' }, { id: 'vQCRnX6w9pM', content: 'd2:oizp( -10000000 ) =', data: 'd2:oizp( -10000000 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'SYAL0GIDnxI', content: 'display age = ', data: 'd2:hasValue(#{age}) && #{age}', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'Xa0tKyNk5YE', content: 'org_unit = ', data: 'V{orgunit_code}', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'JXssEpbJdO2', content: 'd2:right(#{age}, 3) = ', data: 'd2:hasValue(#{age}) && d2:right(#{age}, 3)', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'o0LLNIYsliy', content: "d2:monthsBetween( '2020-01-28', V{event_date}) = ", data: "d2:monthsBetween( '2020-01-28', V{event_date})", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'k07KnI11Sf4', content: 'd2:left(#{age}, 3) = ', data: 'd2:hasValue(#{age}) && d2:left(#{age}, 3)', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'OITs4nPfMQ3', content: "d2:split('these-are-testing-values', '-', 2) = ", data: "d2:split('these-are-testing-values', '-', 2)", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'EzkFLDtAxCR', content: 'd2:modulus( 12 , 100 ) = ', data: 'd2:modulus( 12 , 100 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'RCYEyOly0Mi', content: "d2:countIfValue( #{gender}, 'Male' ) = ", data: "d2:countIfValue( #{gender}, 'Male' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'bRnjbxIwIRd', content: 'd2:round( 12.5 ) = ', data: 'd2:round( 12.5 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'BuEcHNoD98P', content: 'd2:ceil(11.3) = ', data: 'd2:ceil(11.3)', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'Foc3PhzoAVr', content: 'd2:count(#{age}) = ', data: 'd2:count(#{age})', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'QpeF2WDjwIV', content: "d2:addDays( '2020-01-12', 5 ) = ", data: "d2:addDays( '2020-01-12', 5 )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'WJTjezLR4cJ', content: "d2:weeksBetween('2020-01-28', V{event_date} ) = ", data: "d2:weeksBetween('2020-01-28', V{event_date} )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'YnE4dNJVF2P', content: 'd2:zing( -2 ) = ', data: 'd2:zing( -2 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'bZsv2cUkbB7', content: 'd2:floor( 11.5 ) =', data: 'd2:floor( 11.5 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'J8RxAbHlnO3', content: 'd2:oizp( 10000000 ) = ', data: 'd2:oizp( 10000000 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'NT1wojA2RdT', content: "d2:concatenate( 'dh', 'is', 2, 'is', 'rocking') = ", data: "d2:concatenate( 'dh', 'is', 2, 'is', 'rocking')", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'NUGe7EUVouK', content: "d2:substring('hello dhis 2', 6, 10) = ", data: "d2:substring('hello dhis 2', 6, 10)", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'Ma6nCIGrBrd', content: "d2:length( 'dhis2 rocks' ) = ", data: "d2:length( 'dhis2 rocks' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'RRSDsxWiUMc', content: 'd2:round( 0 ) = ', data: 'd2:round( 0 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'QUe0Pks4ckc', content: 'd2:countIfValue( #{age}, 1 ) = ', data: 'd2:countIfValue( #{age}, 1 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'sHaE1YI0ur2', content: 'd2:zing( 1000 ) = ', data: 'd2:zing( 1000 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'EojHcBMpW7q', content: 'd2:hasValue( #{age} ) = ', data: 'd2:hasValue( #{age} )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }] }];
-    const programRulesVariables = [{ id: 'RycV5uDi66i', dataElementId: 'qrur9Dvnyt5', displayName: 'age', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'zINGRka3g9N', dataElementId: 'oZg33kd9taw', displayName: 'gender', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'Zj7UnCAulEk.vV9UWAZohSf', displayName: 'Zj7UnCAulEk.vV9UWAZohSf', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'vV9UWAZohSf', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }];
+    const programRuleVariables = [{ id: 'RycV5uDi66i', dataElementId: 'qrur9Dvnyt5', displayName: 'age', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'zINGRka3g9N', dataElementId: 'oZg33kd9taw', displayName: 'gender', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'Zj7UnCAulEk.vV9UWAZohSf', displayName: 'Zj7UnCAulEk.vV9UWAZohSf', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'vV9UWAZohSf', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }];
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC', code: 'OU_559' };
     const optionSets = { pC3N9N77UmT: { id: 'pC3N9N77UmT', displayName: 'Gender', version: 0, valueType: 'TEXT', options: [{ id: 'rBvjJYbMCVx', displayName: 'Male', code: 'Male', translations: [] }, { id: 'Mnp3oXrpAbK', displayName: 'Female', code: 'Female', translations: [] }] } };
 
@@ -455,7 +406,7 @@ describe('Event rules engine effects with functions and effects', () => {
         ],
         [
             {
-                oZg33kd9taw: 'Male', /* age */qrur9Dvnyt5: 0, eventDate: '2020-04-30T22:00:00.000Z',
+                oZg33kd9taw: 'Male', qrur9Dvnyt5: 0, eventDate: '2020-04-30T22:00:00.000Z',
             },
             [
                 { type: 'DISPLAYTEXT', displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = 10" } },
@@ -487,7 +438,7 @@ describe('Event rules engine effects with functions and effects', () => {
         ],
         [
             {
-                oZg33kd9taw: 'Male', /* age */qrur9Dvnyt5: 1000000000, eventDate: '2020-04-30T22:00:00.000Z',
+                oZg33kd9taw: 'Male', qrur9Dvnyt5: 1000000000, eventDate: '2020-04-30T22:00:00.000Z',
             },
             [
                 { type: 'DISPLAYTEXT', displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = 10" } },
@@ -517,26 +468,16 @@ describe('Event rules engine effects with functions and effects', () => {
                 { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'EojHcBMpW7q', message: 'd2:hasValue( #{age} ) =  true' } },
             ],
         ],
-    ])('where functions take place', (events, expected) => {
-        test(`and given value(s): ${JSON.stringify(events)}`, () => {
-            // given
-            const { currentEvent, allEvents } = {
-                currentEvent: events,
-                allEvents: { all: [events], byStage: {} },
-            };
-
-
-            // when
+    ])('where functions take place', (currentEvent, expected) => {
+        test(`and given value(s): ${JSON.stringify(currentEvent)}`, () => {
             const rulesEffects = rulesEngine.getProgramRuleEffects({
-                programRulesContainer: { programRulesVariables, programRules, constants },
+                programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
-                eventsContainer: allEvents,
                 dataElements: dataElementsInProgram,
                 selectedOrgUnit: orgUnit,
                 optionSets,
             });
 
-            // then
             expect(rulesEffects).toEqual(expected);
         });
     });
@@ -547,19 +488,17 @@ describe('Event rules engine effects with functions and effects', () => {
     const constants = [];
     const dataElementsInProgram = { oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' }, SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'BOOLEAN' }, qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'INTEGER' }, GieVkTxp4HH: { id: 'GieVkTxp4HH', valueType: 'NUMBER' }, vV9UWAZohSf: { id: 'vV9UWAZohSf', valueType: 'INTEGER_POSITIVE' }, eMyVanycQSC: { id: 'eMyVanycQSC', valueType: 'DATE' }, K6uUAvq500H: { id: 'K6uUAvq500H', valueType: 'TEXT', optionSetId: 'eUZ79clX7y1' }, msodh3rEMJa: { id: 'msodh3rEMJa', valueType: 'DATE' }, S33cRBsnXPo: { id: 'S33cRBsnXPo', valueType: 'ORGANISATION_UNIT' }, fWIAEtYVEGk: { id: 'fWIAEtYVEGk', valueType: 'TEXT', optionSetId: 'iDFPKpFTiVw' }, ulD2zW0TIy2: { id: 'ulD2zW0TIy2', valueType: 'FILE_RESOURCE' } };
     const programRules = [{ id: 'cq1dwUY4lVU', condition: 'true', displayName: 'testing the z-scores', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'I6pDcSm2m0g', content: "d2:zScoreWFA( 20, 15, 'M' ) = ", data: "d2:zScoreWFA( 20, 15, 'M' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'No0T9TgN1Px', content: "d2:zScoreWFH( 100, 20, 'M' ) = ", data: "d2:zScoreWFH( 100, 20, 'M' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'n1GUxR8fShY', content: "d2:zScoreHFA( 15, 20, 'F' )  =", data: "d2:zScoreHFA( 15, 20, 'F' ) ", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'QJlZHo0GoVK', content: "d2:zScoreWFH( 100, 20, 'F' )  = ", data: "d2:zScoreWFH( 100, 20, 'F' ) ", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'ItuKGBUuJgK', content: "d2:zScoreWFA( 20, 15, 'F' ) = ", data: "d2:zScoreWFA( 20, 15, 'F' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'uhyaCDzzivm', content: "d2:zScoreHFA( 15, 20, 'M' ) =", data: "d2:zScoreHFA( 15, 20, 'M' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }] }];
-    const programRulesVariables = [];
+    const programRuleVariables = [];
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
     const optionSets = {};
     const currentEvent = {};
-    const allEvents = { all: [], byStage: {} };
 
     describe('where z-score take place', () => {
         test('with given values', () => {
             // when
             const rulesEffects = rulesEngine.getProgramRuleEffects({
-                programRulesContainer: { programRulesVariables, programRules, constants },
+                programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
-                eventsContainer: allEvents,
                 dataElements: dataElementsInProgram,
                 selectedOrgUnit: orgUnit,
                 optionSets,
@@ -582,11 +521,10 @@ describe('Event rules engine', () => {
     // these variables are shared between each test
     const constants = [];
     const dataElementsInProgram = { oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'BOOLEAN' }, SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'TRUE_ONLY' }, qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'NUMBER' } };
-    const programRulesVariables = [];
+    const programRuleVariables = [];
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
     const optionSets = {};
     const currentEvent = {};
-    const allEvents = { all: [], byStage: {} };
 
     describe.each([
         [
@@ -602,9 +540,9 @@ describe('Event rules engine', () => {
                 ],
             }],
             [
-                { type: 'ASSIGN', id: 'oZg33kd9taw', value: 'true' },
-                { type: 'ASSIGN', id: 'SWfdB5lX0fk', value: 'true' },
-                { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: '6' },
+                { type: 'ASSIGN', id: 'oZg33kd9taw', value: 'true', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'ASSIGN', id: 'SWfdB5lX0fk', value: 'true', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: '6', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
             ],
         ], [
             [{
@@ -619,9 +557,9 @@ describe('Event rules engine', () => {
                 ],
             }],
             [
-                { type: 'ASSIGN', id: 'oZg33kd9taw', value: null },
-                { type: 'ASSIGN', id: 'SWfdB5lX0fk', value: null },
-                { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: null },
+                { type: 'ASSIGN', id: 'oZg33kd9taw', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'ASSIGN', id: 'SWfdB5lX0fk', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
+                { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: null, targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT },
             ],
         ], [
             [{
@@ -633,99 +571,18 @@ describe('Event rules engine', () => {
                     { id: 'lJOYxhjupxz', data: 'false', dataElementId: 'oZg33kd9taw', programRuleActionType: 'ASSIGN' },
                 ],
             }],
-            [{ type: 'ASSIGN', id: 'oZg33kd9taw', value: 'false' }],
+            [{ type: 'ASSIGN', id: 'oZg33kd9taw', value: 'false', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT }],
         ],
     ])('where assign actions are triggered', (programRules, expected) => {
         test(`with given value(s): ${JSON.stringify(programRules)}`, () => {
-            // when
             const rulesEffects = rulesEngine.getProgramRuleEffects({
-                programRulesContainer: { programRulesVariables, programRules, constants },
+                programRulesContainer: { programRuleVariables, programRules, constants },
                 currentEvent,
-                eventsContainer: allEvents,
                 dataElements: dataElementsInProgram,
                 selectedOrgUnit: orgUnit,
                 optionSets,
             });
 
-            // then
-            expect(rulesEffects).toEqual(expected);
-        });
-    });
-});
-
-describe('Event rules engine with data elements source from previous events', () => {
-    const constants = [];
-    const dataElementsInProgram = { M4HEOoEFTAT: { id: 'M4HEOoEFTAT', valueType: 'NUMBER' }, cfWdmSsAutR: { id: 'cfWdmSsAutR', valueType: 'LONG_TEXT' }, oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' } };
-    const programRules = [{ id: 'COWZsHgOS14', condition: '#{previousSystolicBloodPressure} > 10', programId: 'WSGAb5XwJ3Y', programRuleActions: [{ id: 'vAOqJbWXAQL', content: 'There needs to be a comment on why the blood pressure is high', dataElementId: 'cfWdmSsAutR', programRuleActionType: 'HIDEFIELD' }] }];
-    const programRulesVariables = [{ dataElementId: 'cfWdmSsAutR', displayName: 'systolicBloodPressureComment', id: 'RdteyhDklSt', programId: 'WSGAb5XwJ3Y', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { programRuleVariableSourceType: 'DATAELEMENT_PREVIOUS_EVENT', dataElementId: 'M4HEOoEFTAT', displayName: 'previousSystolicBloodPressure', id: 'gOjmVaNKbXR', programId: 'WSGAb5XwJ3Y', programStageId: 'edqlbukwRfQ', useNameForOptionSet: true }];
-    const orgUnit = { id: 'OI0BQUurVFS', name: 'Bumban MCHP' };
-    const optionSets = {};
-    const currentEvent = { oZg33kd9taw: 'Male', eventId: 'jXWTkJgb03b' };
-
-    describe.each([
-        [
-            { M4HEOoEFTAT: 9 },
-            [],
-        ],
-        [
-            { M4HEOoEFTAT: 12 },
-            [{ id: 'cfWdmSsAutR', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' }],
-        ],
-    ])('where a field is hidden based on the previous values', (events, expected) => {
-        test(`and given value(s): ${JSON.stringify(events)}`, () => {
-            // given
-            const allEvents = { all: [events, currentEvent], byStage: {} };
-
-            // when
-            const rulesEffects = rulesEngine.getProgramRuleEffects({
-                programRulesContainer: { programRulesVariables, programRules, constants },
-                currentEvent,
-                eventsContainer: allEvents,
-                dataElements: dataElementsInProgram,
-                selectedOrgUnit: orgUnit,
-                optionSets,
-            });
-
-            // then
-            expect(rulesEffects).toEqual(expected);
-        });
-    });
-});
-
-describe('Event rules engine with data elements source from the newest event program stage', () => {
-    const constants = [];
-    const dataElementsInProgram = { cH37ymMQ5QW: { id: 'cH37ymMQ5QW', valueType: 'LONG_TEXT', optionSetId: undefined }, V5PR8Kw8ZnC: { id: 'V5PR8Kw8ZnC', valueType: 'TEXT', optionSetId: 'C3F7ypzeLiS' } };
-    const programRules = [{ condition: "d2:hasValue('currentProgranancyOutcome')", id: 'f9lFZgtArTG', programId: 'WSGAb5XwJ3Y', programRuleActions: [{ id: 'fevFGQ1U2Z7', programRuleActionType: 'HIDEFIELD', dataElementId: 'cH37ymMQ5QW' }] }];
-    const programRulesVariables = [{ dataElementId: 'V5PR8Kw8ZnC', displayName: 'currentProgranancyOutcome', id: 'dVU6XcAVtpw', programId: 'WSGAb5XwJ3Y', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE', programStageId: 'PFDfvmGpsR3', useNameForOptionSet: true }, { dataElementId: 'cH37ymMQ5QW', displayName: 'pregnancyOutcomeComment', id: 'XvsfzjozNzV', programId: 'WSGAb5XwJ3Y', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', programStageId: 'PFDfvmGpsR3', useNameForOptionSet: true }];
-    const orgUnit = { id: 'OI0BQUurVFS', name: 'Bumban MCHP' };
-    const optionSets = { C3F7ypzeLiS: { displayName: 'Pregnancy outcome', id: 'C3F7ypzeLiS', options: [{ id: 'PPd9Ch1kJhG', displayName: 'Live birth', code: '1' }, { id: 'gQuVrCDl0zI', displayName: 'Stillbirth', code: '0' }, { id: 'Vh0ZLdC5dWK', displayName: 'Termination of pregnancy', code: '2' }] } };
-
-    describe.each([
-        [
-            { V5PR8Kw8ZnC: '2' },
-            { PFDfvmGpsR3: [{ eventId: 'azEw8F5toaM', V5PR8Kw8ZnC: null }] },
-            [],
-        ],
-        [
-            { V5PR8Kw8ZnC: null },
-            { PFDfvmGpsR3: [{ eventId: 'azEw8F5toaM', V5PR8Kw8ZnC: '2' }] },
-            [{ id: 'cH37ymMQ5QW', targetDataType: rulesEngineEffectTargetDataTypes.DATA_ELEMENT, type: 'HIDEFIELD' }],
-        ],
-    ])('where a field is hidden based on the newest values in the program stage', (events, byStage, expected) => {
-        test(`and given value(s): ${JSON.stringify(events)}`, () => {
-            // given
-            const allEvents = { all: [events], byStage };
-
-            // when
-            const rulesEffects = rulesEngine.getProgramRuleEffects({
-                programRulesContainer: { programRulesVariables, programRules, constants },
-                eventsContainer: allEvents,
-                dataElements: dataElementsInProgram,
-                selectedOrgUnit: orgUnit,
-                optionSets,
-            });
-
-            // then
             expect(rulesEffects).toEqual(expected);
         });
     });
