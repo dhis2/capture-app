@@ -7,9 +7,8 @@ import { spacers, IconAdd24, IconCalendar24, IconArrowRightMulti24 } from '@dhis
 import { withStyles } from '@material-ui/core';
 import { Widget } from '../../../../Widget';
 import { QuickActionButton } from './QuickActionButton/QuickActionButton';
-import { urlArguments } from '../../../../../utils/url';
 import { tabMode } from '../../../EnrollmentAddEvent/NewEventWorkspace/newEventWorkspace.constants';
-import { useLocationQuery } from '../../../../../utils/routing';
+import { buildUrlQueryString, useLocationQuery } from '../../../../../utils/routing';
 
 const styles = {
     contentContainer: {
@@ -28,8 +27,8 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
     const stagesWithEventCount = useMemo(() => stages.map((stage) => {
         const mutatedStage = { ...stage };
         mutatedStage.eventCount = (events
-                ?.filter(event => event.programStage === stage.id)
-                ?.length
+            ?.filter(event => event.programStage === stage.id)
+            ?.length
         );
         return mutatedStage;
     }), [events, stages]);
@@ -40,7 +39,7 @@ const EnrollmentQuickActionsComponent = ({ stages, events, classes }) => {
         ), [stagesWithEventCount]);
 
     const onNavigationFromQuickActions = (tab: string) => {
-        history.push(`/enrollmentEventNew?${urlArguments({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
+        history.push(`/enrollmentEventNew?${buildUrlQueryString({ programId, teiId, enrollmentId, orgUnitId, tab })}`);
     };
 
     return (
