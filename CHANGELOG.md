@@ -1,3 +1,10 @@
+## [1.62.11](https://github.com/dhis2/capture-app/compare/v1.62.10...v1.62.11) (2021-12-17)
+
+
+### Bug Fixes
+
+* [TECH-870] Stabilise and improve rules execution ([1761a9c](https://github.com/dhis2/capture-app/commit/1761a9c43f2724188573d5d150aa34751df719f8))
+
 ## [1.62.10](https://github.com/dhis2/capture-app/compare/v1.62.9...v1.62.10) (2021-12-13)
 
 

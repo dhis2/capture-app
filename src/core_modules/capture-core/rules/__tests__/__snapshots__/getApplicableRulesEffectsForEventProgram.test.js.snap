@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getApplicableRuleEffectsForEventProgram RulesEngine called with computed arguments from getApplicableRuleEffectsForEventProgram 1`] = `
+Object {
+  "currentEvent": Object {
+    "da1Id": "currentEventText",
+    "dueDate": "2021-05-31T09:51:38.134",
+    "enrollmentId": "vVtmDlsu3me",
+    "enrollmentStatus": "ACTIVE",
+    "eventDate": "2021-05-31T00:00:00.000",
+    "eventId": "BxGzDJK3JqN",
+    "orgUnitId": "DiszpKrYNg8",
+    "orgUnitName": "Ngelehun CHC",
+    "programId": "IpHINAT79UW",
+    "programStageId": "A03MvHHogjR",
+    "status": "ACTIVE",
+    "trackedEntityInstanceId": "vCGpQAWG17I",
+  },
+  "dataElements": Object {
+    "da1Id": Object {
+      "id": "da1Id",
+      "optionSetId": undefined,
+      "valueType": "TEXT",
+    },
+  },
+  "optionSets": Object {
+    "0": Object {
+      "displayName": undefined,
+      "id": "optionSet1",
+      "options": Array [],
+    },
+  },
+  "otherEvents": undefined,
+  "programRulesContainer": Object {
+    "constants": Array [
+      Object {
+        "id": "constantId1",
+        "value": "1",
+      },
+    ],
+    "programRuleVariables": Array [
+      Object {
+        "dataElementId": "UXz7xuGCEhU",
+        "displayName": "Test",
+        "id": "PUQZWgmQ0jx",
+        "programId": "IpHINAT79UW",
+        "programRuleVariableSourceType": "DATAELEMENT_NEWEST_EVENT_PROGRAM",
+        "useNameForOptionSet": true,
+      },
+      Object {
+        "dataElementId": "H6uSAMO5WLD",
+        "displayName": "apgarcomment",
+        "id": "aKpfPKSRQnv",
+        "programId": "IpHINAT79UW",
+        "programRuleVariableSourceType": "DATAELEMENT_NEWEST_EVENT_PROGRAM",
+        "useNameForOptionSet": true,
+      },
+      Object {
+        "dataElementId": "a3kGcGDCuk6",
+        "displayName": "apgarscore",
+        "id": "g2GooOydipB",
+        "programId": "IpHINAT79UW",
+        "programRuleVariableSourceType": "DATAELEMENT_NEWEST_EVENT_PROGRAM",
+        "useNameForOptionSet": true,
+      },
+    ],
+    "programRules": Array [
+      Object {
+        "condition": "true",
+        "displayName": "TestRule",
+        "id": "JJDQxgHuuL2",
+        "programId": "IpHINAT79UW",
+        "programRuleActions": Array [
+          Object {
+            "data": "#{Test}",
+            "id": "CQaifjkoFEU",
+            "location": "feedback",
+            "programRuleActionType": "DISPLAYTEXT",
+          },
+        ],
+      },
+    ],
+  },
+  "selectedEnrollment": undefined,
+  "selectedEntity": undefined,
+  "selectedOrgUnit": Object {
+    "code": "Ngelehun CHC",
+    "id": "DiszpKrYNg8",
+  },
+  "trackedEntityAttributes": undefined,
+}
+`;
