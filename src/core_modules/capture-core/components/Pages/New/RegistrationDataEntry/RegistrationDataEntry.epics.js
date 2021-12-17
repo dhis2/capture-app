@@ -12,7 +12,7 @@ import { getTrackerProgramThrowIfNotFound } from '../../../../metaData';
 import {
     navigateToEnrollmentOverview,
 } from '../../../../actions/navigateToEnrollmentOverview/navigateToEnrollmentOverview.actions';
-
+import { convertValue as convertToServer } from '../../../../converters/clientToServer';
 
 const geometryType = (key) => {
     const types = ['Point', 'None', 'Polygon'];
@@ -92,13 +92,15 @@ const deriveEvents = ({ stages, enrollmentDate, incidentDate, programId, orgUnit
 export const startSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_SAVE_START),
-        map(() => {
+        map((action) => {
             const { currentSelections: { orgUnitId, trackedEntityTypeId }, formsValues } = store.value;
             const values = formsValues['newPageDataEntryId-newTei'];
+            const formFoundation = action.payload?.formFoundation;
+            const formServerValues = formFoundation?.convertValues(values, convertToServer);
             return saveNewTrackedEntityInstance(
                 {
-                    attributes: deriveAttributesFromFormValues(values),
-                    geometry: deriveGeometryFromFormValues(values),
+                    attributes: deriveAttributesFromFormValues(formServerValues),
+                    geometry: deriveGeometryFromFormValues(formServerValues),
                     enrollments: [],
                     orgUnit: orgUnitId,
                     trackedEntityType: trackedEntityTypeId,
@@ -124,18 +126,20 @@ export const completeSavingNewTrackedEntityInstanceEpic: Epic = (action$: InputO
 export const startSavingNewTrackedEntityInstanceWithEnrollmentEpic: Epic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(registrationFormActionTypes.NEW_TRACKED_ENTITY_INSTANCE_WITH_ENROLLMENT_SAVE_START),
-        map(() => {
+        map((action) => {
             const { currentSelections: { orgUnitId, programId }, formsValues, dataEntriesFieldsValue } = store.value;
             const { incidentDate, enrollmentDate, geometry } = dataEntriesFieldsValue['newPageDataEntryId-newEnrollment'] || { };
             const { trackedEntityType, stages } = getTrackerProgramThrowIfNotFound(programId);
             const values = formsValues['newPageDataEntryId-newEnrollment'] || {};
             const events = deriveEvents({ stages, enrollmentDate, incidentDate, programId, orgUnitId });
+            const formFoundation = action.payload?.formFoundation;
+            const formServerValues = formFoundation?.convertValues(values, convertToServer);
 
 
             return saveNewTrackedEntityInstanceWithEnrollment(
                 {
-                    attributes: deriveAttributesFromFormValues(values),
-                    geometry: deriveGeometryFromFormValues(values),
+                    attributes: deriveAttributesFromFormValues(formServerValues),
+                    geometry: deriveGeometryFromFormValues(formServerValues),
                     enrollments: [
                         {
                             geometry: standardGeoJson(geometry),
