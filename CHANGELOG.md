@@ -1,3 +1,31 @@
+## [1.62.11](https://github.com/dhis2/capture-app/compare/v1.62.10...v1.62.11) (2021-12-17)
+
+
+### Bug Fixes
+
+* [TECH-870] Stabilise and improve rules execution ([1761a9c](https://github.com/dhis2/capture-app/commit/1761a9c43f2724188573d5d150aa34751df719f8))
+
+## [1.62.10](https://github.com/dhis2/capture-app/compare/v1.62.9...v1.62.10) (2021-12-13)
+
+
+### Bug Fixes
+
+* [DHIS2-11862] verify if eventDate exists ([#2331](https://github.com/dhis2/capture-app/issues/2331)) ([a1c3cd9](https://github.com/dhis2/capture-app/commit/a1c3cd90d0f691984a2baba9172693a92ccc5bf6))
+
+## [1.62.9](https://github.com/dhis2/capture-app/compare/v1.62.8...v1.62.9) (2021-12-12)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([dabcf67](https://github.com/dhis2/capture-app/commit/dabcf679579b352a0ef48eb7285e429448f11d69))
+
+## [1.62.8](https://github.com/dhis2/capture-app/compare/v1.62.7...v1.62.8) (2021-12-11)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([4f29f70](https://github.com/dhis2/capture-app/commit/4f29f707f6a8c1f608353ade910425c27381439c))
+
 ## [1.62.7](https://github.com/dhis2/capture-app/compare/v1.62.6...v1.62.7) (2021-12-07)
 
 

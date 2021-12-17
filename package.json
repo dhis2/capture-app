@@ -1,7 +1,7 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "1.62.7",
+  "version": "1.62.11",
   "cacheVersion": "1",
   "serverVersion": "37",
   "private": true,
@@ -13,12 +13,12 @@
     "@dhis2/d2-ui-org-unit-tree": "^7.3.3",
     "@dhis2/d2-ui-rich-text": "^7.3.3",
     "@dhis2/d2-ui-sharing-dialog": "^7.3.3",
-    "@dhis2/ui": "^7.9.1",
+    "@dhis2/ui": "^7.10.4",
     "@joakim_sm/react-infinite-calendar": "^2.4.2",
     "@material-ui/core": "3.9.4",
     "@material-ui/icons": "3",
-    "@popperjs/core": "^2.10.2",
-    "@react-leaflet/core": "^1.1.0",
+    "@popperjs/core": "^2.11.0",
+    "@react-leaflet/core": "^1.1.1",
     "@redux-offline/redux-offline": "^2.6.0",
     "autosuggest-highlight": "^3.2.0",
     "classnames": "^2.3.1",
@@ -47,7 +47,7 @@
     "react-popper": "^2.2.4",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.3.0",
-    "react-rte": "^0.16.3",
+    "react-rte": "^0.16.4",
     "react-select": "^1.2.1",
     "react-transform-tree": "^1.0.35",
     "react-virtualized": "^9.22.2",
@@ -82,11 +82,11 @@
     "i18n:add": "d2-app-scripts i18n extract && git add ./i18n/"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/eslint-parser": "^7.16.3",
-    "@babel/plugin-transform-flow-strip-types": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-react": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/eslint-parser": "^7.16.5",
+    "@babel/plugin-transform-flow-strip-types": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-react": "^7.16.5",
     "@dhis2/cli-app-scripts": "^8.3.2",
     "@dhis2/cli-helpers-engine": "^3.1.1",
     "@dhis2/cli-utils-cypress": "^9.0.1",
@@ -104,7 +104,7 @@
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-friendly-formatter": "^3.0.0",
-    "eslint-import-resolver-webpack": "^0.13.1",
+    "eslint-import-resolver-webpack": "^0.13.2",
     "eslint-plugin-flowtype": "^5.10.0",
     "eslint-plugin-import": "2.25.3",
     "eslint-plugin-jsx-a11y": "^5.1.1",
@@ -125,7 +125,7 @@
     "capture-ui": "1"
   },
   "resolutions": {
-    "@babel/preset-react": "7.16.0"
+    "@babel/preset-react": "7.16.5"
   },
   "browserslist": {
     "production": [

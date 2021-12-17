@@ -1,6 +1,6 @@
 // @flow
 import { effectActions } from 'capture-core-utils/rulesEngine';
-import type { OutputEffect } from 'capture-core-utils/rulesEngine';
+import type { AssignOutputEffect } from 'capture-core-utils/rulesEngine';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
@@ -8,7 +8,7 @@ import { actionTypes as loaderActionTypes } from '../../components/D2Form/action
 import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
 import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/formBuilder.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
-import { actionTypes as rulesEffectsActionTypes } from '../../rules/actionsCreator';
+import { rulesEffectsActionTypes } from '../../rules';
 import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
 import { newRelationshipActionTypes } from '../../components/DataEntries/SingleEventRegistrationEntry';
 import { getOrgUnitRootsKey } from '../../components/D2Form/field/Components/OrgUnitField/getOrgUnitRootsKey';
@@ -66,27 +66,24 @@ export const formsValuesDesc = createReducerDescription({
         formValues[payload.elementId] = payload.value;
         return newState;
     },
-    [rulesEffectsActionTypes.UPDATE_FIELD_FROM_RULE_EFFECT]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        // todo (eslint)
-        // eslint-disable-next-line no-multi-assign
-        const formValues = newState[payload.formId] = { ...newState[payload.formId] };
-        formValues[payload.elementId] = payload.value;
-        return newState;
-    },
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
-        const assignEffects: { [id: string]: Array<OutputEffect> } =
+        const assignEffects: { [id: string]: Array<AssignOutputEffect> } =
             action.payload.rulesEffects && action.payload.rulesEffects[effectActions.ASSIGN_VALUE];
         if (!assignEffects) {
             return state;
         }
+
         const payload = action.payload;
         const newState = {
             ...state,
             [payload.formId]: {
                 ...state[payload.formId],
-                ...assignEffects,
+                ...Object.keys(assignEffects).reduce((acc, id) => {
+                    const effectsForId = assignEffects[id];
+                    const value = effectsForId[effectsForId.length - 1].value;
+                    acc[id] = value;
+                    return acc;
+                }, {}),
             },
         };
         return newState;

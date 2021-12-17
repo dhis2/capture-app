@@ -2,7 +2,8 @@
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { getProgramAndStageForProgram } from '../../../../metaData/helpers';
+import i18n from '@dhis2/d2-i18n';
+import { getTrackerProgramThrowIfNotFound } from '../../../../metaData/helpers';
 import { rulesExecutedPostUpdateField } from '../../../DataEntry/actions/dataEntry.actions';
 import {
     newEventWidgetDataEntryActionTypes,
@@ -11,13 +12,11 @@ import {
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
-    getRulesActionsForEvent,
-    getRulesActionsForEnrollmentEvent,
-} from '../../../../rules/actionsCreator';
+    getApplicableRuleEffectsForTrackerProgram,
+    updateRulesEffects,
+    type FieldData,
+} from '../../../../rules';
 import { getDataEntryKey } from '../../../DataEntry/common/getDataEntryKey';
-import type {
-    FieldData,
-} from '../../../../rules/actionsCreator';
 import type { OrgUnit, RulesExecutionDependenciesClientFormatted } from '../../common.types';
 import { deriveURLParamsFromLocation } from '../../../../utils/routing';
 
@@ -35,42 +34,30 @@ const runRulesForNewEvent = (
     const formId = getDataEntryKey(dataEntryId, itemId);
     const { programId, stageId } = deriveURLParamsFromLocation();
 
-    const metadataContainer = getProgramAndStageForProgram(programId, stageId);
-
-    let rulesActions;
-    if (metadataContainer.error) {
-        const foundation = metadataContainer.stage ? metadataContainer.stage.stageForm : null;
-        rulesActions = getRulesActionsForEvent(
-            metadataContainer.program,
-            foundation,
-            formId,
-            orgUnit,
-        );
-    } else {
-        // $FlowFixMe[cannot-resolve-name] automated comment
-        const foundation: RenderFoundation = metadataContainer.stage.stageForm;
-        const programStageId = foundation.id;
-        const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
-        const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
-        const currentEventData = { ...currentEventValues, ...currentEventMainData, programStageId };
-
-        rulesActions = getRulesActionsForEnrollmentEvent({
-            // $FlowFixMe
-            program: metadataContainer.program,
-            foundation,
-            formId,
-            orgUnit,
-            currentEvent: currentEventData,
-            // $FlowFixMe
-            eventsData: events,
-            attributeValues,
-            // $FlowFixMe
-            enrollmentData,
-        });
+    const program = getTrackerProgramThrowIfNotFound(programId);
+    const stage = program.getStage(stageId);
+    if (!stage) {
+        throw Error(i18n.t('Program stage not found'));
     }
 
+    const foundation = stage.stageForm;
+    const programStageId = foundation.id;
+    const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
+    const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, foundation);
+    const currentEvent = { ...currentEventValues, ...currentEventMainData, programStageId };
+
+    const ruleEffects = getApplicableRuleEffectsForTrackerProgram({
+        program,
+        stage,
+        orgUnit,
+        currentEvent,
+        otherEvents: events,
+        attributeValues,
+        enrollmentData,
+    });
+
     return batchActions([
-        ...rulesActions,
+        updateRulesEffects(ruleEffects, formId),
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
     ],
     newEventWidgetDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,

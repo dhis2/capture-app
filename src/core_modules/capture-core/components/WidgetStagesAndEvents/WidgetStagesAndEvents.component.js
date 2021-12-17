@@ -20,7 +20,7 @@ export const WidgetStagesAndEvents = ({ className, stages, events, ...passOnProp
             >
                 <Stages
                     stages={stages}
-                    ready={events !== undefined}
+                    ready={events !== undefined && stages !== undefined}
                     events={events}
                     {...passOnProps}
                 />

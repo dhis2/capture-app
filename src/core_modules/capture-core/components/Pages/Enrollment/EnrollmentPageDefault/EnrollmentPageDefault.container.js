@@ -1,21 +1,20 @@
 // @flow
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 // $FlowFixMe
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useCommonEnrollmentDomainData } from '../../common/EnrollmentOverviewDomain';
-import { useProgramInfo } from '../../../../hooks/useProgramInfo';
+import { useTrackerProgram } from '../../../../hooks/useTrackerProgram';
 import { EnrollmentPageDefaultComponent } from './EnrollmentPageDefault.component';
 import {
-    useTeiAttributes,
     useProgramMetadata,
     useHideWidgetByRuleLocations,
     useProgramStages,
     useOrganisationUnit,
+    useRuleEffects,
 } from './hooks';
-import { runRulesForEnrollment } from './runRulesForEnrollment';
 import { buildUrlQueryString, useLocationQuery } from '../../../../utils/routing';
 import { deleteEnrollment } from '../EnrollmentPage.actions';
 import { useFilteredWidgetData } from './hooks/useFilteredWidgetData';
@@ -27,30 +26,30 @@ export const EnrollmentPageDefault = () => {
     const { enrollmentId, programId, teiId, orgUnitId } = useLocationQuery();
     const { orgUnit } = useOrganisationUnit(orgUnitId);
 
-    const { program } = useProgramInfo(programId);
-    const { error: teiAttributesError, attributes } = useTeiAttributes(teiId);
-    const { error: enrollmentsError, enrollment } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
+    const program = useTrackerProgram(programId);
+    const {
+        error: enrollmentsError,
+        enrollment,
+        attributeValues,
+    } = useCommonEnrollmentDomainData(teiId, enrollmentId, programId);
     const { error: programMetaDataError, programMetadata } = useProgramMetadata(programId);
-    const stages = useProgramStages(program, programMetadata.programStages);
+    const stages = useProgramStages(program, programMetadata?.programStages);
 
-    if (programMetaDataError || enrollmentsError || teiAttributesError) {
+    if (programMetaDataError || enrollmentsError) {
         log.error(errorCreator('Enrollment page could not be loaded')(
-            { programMetaDataError, enrollmentsError, teiAttributesError },
+            { programMetaDataError, enrollmentsError },
         ));
     }
 
-    const [ruleEffects, setRuleEffects] = useState(undefined);
-    const outputEffects = useFilteredWidgetData(ruleEffects);
-    useEffect(() => {
-        if (enrollment && enrollment.enrollment) {
-            const effects = runRulesForEnrollment({ orgUnit, program, programMetadata, enrollment, attributes });
-            if (effects) {
-                // $FlowFixMe
-                setRuleEffects(effects);
-            }
-        }
-    }, [orgUnit, program, programMetadata, enrollment, attributes]);
+    const ruleEffects = useRuleEffects({
+        orgUnit,
+        program,
+        apiEnrollment: enrollment,
+        apiAttributeValues: attributeValues,
+    });
 
+    // $FlowFixMe
+    const outputEffects = useFilteredWidgetData(ruleEffects);
     const hideWidgets = useHideWidgetByRuleLocations(program.programRules);
 
     const onDelete = () => {
@@ -77,6 +76,7 @@ export const EnrollmentPageDefault = () => {
         <EnrollmentPageDefaultComponent
             teiId={teiId}
             program={program}
+            // $FlowFixMe
             stages={stages}
             events={enrollment?.events}
             enrollmentId={enrollmentId}
