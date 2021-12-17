@@ -28,6 +28,7 @@ import {
 import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 import { eventWorkingListsActionTypes } from '../../../WorkingLists/EventWorkingLists';
 import { resetLocationChange } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { buildUrlQueryString } from '../../../../utils/routing';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -141,17 +142,16 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
         map(() => {
-            // TODO - This should probably be replaced by URL args
             const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             const showaccessible = state.currentSelections.showaccessible;
-            // const { programId, orgUnitId, showaccessible } = deriveURLParamsFromHistory(history);
+
             if (showaccessible && !orgUnitId) {
                 history.push(`/?programId=${programId}&all`);
                 return resetLocationChange();
             }
-            history.push(`/?programId=${programId}&orgUnitId=${orgUnitId}`);
+            history.push(`/?${buildUrlQueryString({ programId, orgUnitId })}`);
             return resetLocationChange();
         }));
 
