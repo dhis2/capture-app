@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2021-12-02T13:26:20.780Z\n"
+"POT-Creation-Date: 2021-12-07T16:17:10.207Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2021\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -1026,6 +1026,9 @@ msgstr "Skriv en kommentar om denne hendelsen"
 
 msgid "This event doesn't have any comments"
 msgstr "Denne hendelsen har ingen kommentarer"
+
+msgid "stage not found in rules execution"
+msgstr ""
 
 msgid "Event completed"
 msgstr "Hendelse fullført"
