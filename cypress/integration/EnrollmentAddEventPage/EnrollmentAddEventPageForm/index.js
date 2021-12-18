@@ -53,7 +53,6 @@ When(/^you click the (.*) button/, (buttonText) => {
 When('the enrollment overview is finished loading', () => {
     cy.get('[data-test="dhis2-uicore-circularloader"]').should('not.exist');
     cy.get('[data-test="dhis2-uicore-datatable"]')
-        .eq(1)
         .within(() => {
             cy.get('[data-test="dhis2-uicore-datatablerow"]')
                 .should('exist');
