@@ -4,7 +4,7 @@ import { Button } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { scopeTypes } from '../../../metaData';
 import { EnrollmentDataEntry } from '../Enrollment';
@@ -15,7 +15,7 @@ import { withSaveHandler } from '../../DataEntry';
 import { withLoadingIndicator } from '../../../HOC';
 import { InfoIconText } from '../../InfoIconText';
 import { withErrorMessagePostProcessor } from '../withErrorMessagePostProcessor/withErrorMessagePostProcessor';
-import { urlArguments } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 import { withDuplicateCheckOnSave } from '../common/TEIAndEnrollment/DuplicateCheckOnSave';
 
 const styles = ({ typography }) => ({
@@ -27,13 +27,9 @@ const styles = ({ typography }) => ({
     },
 });
 
-const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string) =>
-    (<>
-        {i18n.t('Saving a {{trackedEntityName}} in', {
-            trackedEntityName, interpolation: { escapeValue: false } })
-        } <b>{programName}</b>
-        {orgUnitName && <>{' '}{i18n.t('in')} <b>{orgUnitName}</b></>}.
-    </>);
+const translatedTextWithStylesForProgram = (trackedEntityName: string, programName: string, orgUnitName: string) => (<span>
+    {i18n.t('Saving a {{trackedEntityName}} in {{programName}} in {{orgUnitName}}.', { trackedEntityName, programName, orgUnitName, interpolation: { escapeValue: false } })}
+</span>);
 
 
 const EnrollmentRegistrationEntryPlain =
@@ -57,9 +53,9 @@ const EnrollmentRegistrationEntryPlain =
           const url =
             scopeType === scopeTypes.TRACKER_PROGRAM
                 ?
-                urlArguments({ programId: selectedScopeId, orgUnitId: orgUnit.id })
+                buildUrlQueryString({ programId: selectedScopeId, orgUnitId: orgUnit.id })
                 :
-                urlArguments({ orgUnitId: orgUnit.id });
+                buildUrlQueryString({ orgUnitId: orgUnit.id });
           return push(`/?${url}`);
       };
 

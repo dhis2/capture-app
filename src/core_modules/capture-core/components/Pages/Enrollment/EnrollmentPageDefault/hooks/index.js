@@ -1,7 +1,8 @@
-import { useTeiAttributes } from './useTeiAttributes';
-import { useProgramMetadata } from './useProgramMetadata';
-import { useHideWidgetByRuleLocations } from './useHideWidgetByRuleLocations';
-import { useProgramStages } from './useProgramStages';
-import { useOrganisationUnit } from './useOrganisationUnit';
-
-export { useProgramMetadata, useTeiAttributes, useHideWidgetByRuleLocations, useProgramStages, useOrganisationUnit };
+// @flow
+export { useTeiAttributes } from './useTeiAttributes';
+export { useProgramMetadata } from './useProgramMetadata';
+export { useHideWidgetByRuleLocations } from './useHideWidgetByRuleLocations';
+export { useProgramStages } from './useProgramStages';
+export { useOrganisationUnit } from './useOrganisationUnit';
+export { useRuleEffects } from './useRuleEffects';
+export type { UseRuleEffectsInput } from './useRuleEffects.types';

@@ -137,11 +137,11 @@ When(/^you sort list asc by (.*)$/, (columnName) => {
         .find('thead')
         .find('th')
         .within(() => {
-            cy.contains(columnName)
+            cy.contains('th', columnName)
                 .find('button')
                 .click();
             cy.wait(100);
-            cy.contains(columnName)
+            cy.contains('th', columnName)
                 .find('button')
                 .click();
         });
@@ -172,11 +172,7 @@ Then('the sorted list by Report date asc should be displayed', () => {
 });
 
 When(/^you click button Go to full (.*)$/, (stageName) => {
-    cy.get('[data-test="stages-and-events-widget"]').within(() => {
-        cy.get('[data-test="view-all-button"]').contains(stageName).should('exist');
-        cy.get('[data-test="view-all-button"]').contains(stageName).click();
-        cy.wait(100);
-    });
+    cy.contains('[data-test="view-all-button"]', stageName).click();
 });
 
 Then('you should navigate to Program Stage list page', () => {
@@ -184,11 +180,7 @@ Then('you should navigate to Program Stage list page', () => {
 });
 
 When(/^you click New (.*)$/, (stageName) => {
-    cy.get('[data-test="stages-and-events-widget"]').within(() => {
-        cy.get('[data-test="create-new-button"]').contains(stageName).should('exist');
-        cy.get('[data-test="create-new-button"]').contains(stageName).click();
-        cy.wait(100);
-    });
+    cy.contains('[data-test="create-new-button"]', stageName).should('exist').click();
 });
 
 Then(/^you should navigate to Add new page (.*)$/, (url) => {
@@ -200,14 +192,6 @@ Given(/^you open the enrollment page by typing (.*)$/, url =>
 );
 
 Then(/^you should see the disabled button (.*)$/, (stageName) => {
-    cy.get('[data-test="stages-and-events-widget"]').within(() => {
-        cy.get('[data-test="create-new-button"]')
-            .contains(stageName)
-            .should('exist');
-        cy.get('[data-test="create-new-button"]')
-            .contains(stageName)
-            .parent()
-            .parent()
-            .should('be.disabled');
-    });
+    cy.contains('[data-test="create-new-button"]', stageName)
+        .should('be.disabled');
 });

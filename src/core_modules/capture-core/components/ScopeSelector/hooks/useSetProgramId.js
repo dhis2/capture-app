@@ -1,7 +1,8 @@
 // @flow
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { urlArguments, getUrlQueries } from '../../../utils/url';
+import { getUrlQueries } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 
 export const useSetProgramId = () => {
     const history = useHistory();
@@ -9,7 +10,7 @@ export const useSetProgramId = () => {
 
     const setProgramId = (programId: string, pageToPush: string = pathname) => {
         const restOfQueries = getUrlQueries();
-        history.push(`${pageToPush}?${urlArguments({ ...restOfQueries, programId })}`);
+        history.push(`${pageToPush}?${buildUrlQueryString({ ...restOfQueries, programId })}`);
     };
 
     return { setProgramId };

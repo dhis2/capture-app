@@ -3,7 +3,6 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { ProgramRule } from 'capture-core-utils/rulesEngine';
 import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
 import type { Section } from './Section';
 import type { DataElement, ConvertFn } from '../DataElement/DataElement';
@@ -23,15 +22,12 @@ export class RenderFoundation {
     _programId: string;
     _sections: Map<string, Section>;
     _labels: { [key: string]: string };
-    _programRules: Array<ProgramRule>;
-
     _featureType: string;
     _validationStrategy: $Values<typeof validationStrategies>;
 
     constructor(initFn: ?(_this: RenderFoundation) => void) {
         this._sections = new Map();
         this._labels = {};
-        this.programRules = [];
         this._validationStrategy = validationStrategies.ON_UPDATE_AND_INSERT;
         initFn && isFunction(initFn) && initFn(this);
     }
@@ -69,13 +65,6 @@ export class RenderFoundation {
     }
     get programId(): string | number {
         return this._programId;
-    }
-
-    set programRules(programRules: Array<ProgramRule>) {
-        this._programRules = programRules;
-    }
-    get programRules(): Array<ProgramRule> {
-        return this._programRules;
     }
 
     get sections(): Map<string, Section> {
@@ -126,10 +115,6 @@ export class RenderFoundation {
     getElement(id: string) {
         const elements = this.getElementsById();
         return elements[id];
-    }
-
-    addProgramRules(programRules: Array<ProgramRule>) {
-        this.programRules = [...this.programRules, ...programRules];
     }
 
     getElements(): Array<DataElement> {

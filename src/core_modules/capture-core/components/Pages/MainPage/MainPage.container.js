@@ -2,12 +2,12 @@
 import React, { useEffect, useMemo } from 'react';
 // $FlowFixMe
 import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { programCollection } from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { MainPageComponent } from './MainPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import { updateShowAccessibleStatus } from '../actions/crossPage.actions';
-import { urlArguments } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 import { MainPageStatuses } from './MainPage.constants';
 
 const mapStateToProps = (state: ReduxState) => ({
@@ -50,7 +50,7 @@ const MainPageContainer = () => {
     }, [showAllAccessible, dispatch]);
 
     const setShowAccessible = () => history
-        .push(`/?${urlArguments({ programId })}&all`);
+        .push(`/?${buildUrlQueryString({ programId })}&all`);
 
     const MainPageStatus = useMemo(() => {
         const selectedProgram = programId && programCollection.get(programId);

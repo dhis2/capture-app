@@ -1,13 +1,13 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { useScopeInfo } from '../../../hooks/useScopeInfo';
 import { useMissingCategoriesInProgramSelection } from '../../../hooks/useMissingCategoriesInProgramSelection';
 import { scopeTypes } from '../../../metaData/helpers/constants';
-import { urlArguments } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 import { IncompleteSelectionsMessage } from '../../IncompleteSelectionsMessage';
 import { LinkButton } from '../../Buttons/LinkButton.component';
 import { useEnrollmentInfo } from './useEnrollmentInfo';
@@ -77,11 +77,11 @@ const useNavigations = () => {
     const selectedOrgUnitId: string =
       useSelector(({ router: { location: { query } } }) => query.orgUnitId);
     const navigateToProgramRegistrationPage = () =>
-        history.push(`/new?${urlArguments({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId })}`);
+        history.push(`/new?${buildUrlQueryString({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId })}`);
     const navigateToEventWorkingList = () =>
-        history.push(`/?${urlArguments({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId })}`);
+        history.push(`/?${buildUrlQueryString({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId })}`);
     const navigateToTetRegistrationPage = () =>
-        history.push(`/new?${urlArguments({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId, trackedEntityTypeId: tetId })}`);
+        history.push(`/new?${buildUrlQueryString({ programId: selectedProgramId, orgUnitId: selectedOrgUnitId, trackedEntityTypeId: tetId })}`);
 
     return { navigateToProgramRegistrationPage, navigateToEventWorkingList, navigateToTetRegistrationPage };
 };

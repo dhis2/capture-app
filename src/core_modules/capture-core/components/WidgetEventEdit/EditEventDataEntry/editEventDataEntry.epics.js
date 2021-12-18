@@ -2,7 +2,7 @@
 import { ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { getProgramAndStageFromEvent } from '../../../metaData';
@@ -111,7 +111,8 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                     .map(key => ({
                         dataElement: key,
                         value: formServerValues[key],
-                    })),
+                    }))
+                    .filter(({ value }) => value != null),
             };
 
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);

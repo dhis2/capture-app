@@ -1,14 +1,17 @@
 // @flow
 import type { Stage, StageCommonProps } from '../types/common.types';
 
- type ExtractedProps = {|
+export type PlainProps = {|
     stages: Array<Stage>,
     events: Array<ApiEnrollmentEvent>,
     onEventClick: (eventId: string, stageId: string) => void,
+    ...StageCommonProps,
     ...CssClasses,
 |};
 
-export type Props = {|
-    ...ExtractedProps,
-    ...StageCommonProps
-|}
+export type InputProps = {|
+    stages?: Array<Stage>,
+    events?: ?Array<ApiEnrollmentEvent>,
+    onEventClick: (eventId: string, stageId: string) => void,
+    ...StageCommonProps,
+|};

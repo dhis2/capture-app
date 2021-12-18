@@ -58,8 +58,7 @@ And('you click find', () => {
 });
 
 Then('there should be a modal popping up', () => {
-    cy.get('[data-test="dhis2-uicore-modal"]')
-        .contains('No results found')
+    cy.contains('[data-test="dhis2-uicore-modal"]', 'No results found')
         .should('exist');
 });
 
@@ -206,7 +205,7 @@ When('when you click the back button', () => {
 
 Then('you should be taken to the main page with program and org unit preselected', () => {
     cy.url()
-        .should('eq', `${Cypress.config().baseUrl}/#/?programId=qDkgAbB5Jlk&orgUnitId=DiszpKrYNg8`);
+        .should('eq', `${Cypress.config().baseUrl}/#/?orgUnitId=DiszpKrYNg8&programId=qDkgAbB5Jlk`);
 });
 
 And('the next page button is disabled', () => {

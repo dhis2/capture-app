@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { convertMomentToDateFormatString } from '../../../utils/converters/date';
 import { DateFilter } from './DateFilter.component';
 import { mainOptionKeys } from './mainOptions';

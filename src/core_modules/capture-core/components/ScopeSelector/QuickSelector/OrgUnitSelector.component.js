@@ -125,7 +125,7 @@ class OrgUnitSelectorPlain extends Component<Props, State> {
         // If orgUnit is set in Redux state.
         if (this.props.selectedOrgUnitId) {
             return (
-                <div>
+                <div data-test="org-unit-selector">
                     <Paper square elevation={0} className={this.props.classes.selectedPaper}>
                         <h4 className={this.props.classes.title}>{ i18n.t('Selected registering unit') }</h4>
                         <div className={this.props.classes.selectedItemContainer}>

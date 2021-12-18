@@ -1,5 +1,5 @@
 // @flow
-import { moment } from 'capture-core-utils/moment';
+import moment from 'moment';
 import { dataElementTypes } from '../metaData';
 import { stringifyNumber } from './common/stringifyNumber';
 
@@ -43,6 +43,7 @@ const valueConvertersForType = {
     [dataElementTypes.COORDINATE]: (rawValue: Object) => `[${rawValue.longitude},${rawValue.latitude}]`,
     [dataElementTypes.PERCENTAGE]: (rawValue: Object) => rawValue.replace('%', ''),
     [dataElementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.id,
+    [dataElementTypes.AGE]: (rawValue: Object) => convertDate(rawValue),
 };
 
 export function convertValue(value: any, type: $Keys<typeof dataElementTypes>) {

@@ -5,6 +5,6 @@ export type Props = {|
     title: string,
     events: Array<ApiEnrollmentEvent>,
     icon?: Icon,
-    description?: string,
+    description?: ?string,
     ...CssClasses,
 |};

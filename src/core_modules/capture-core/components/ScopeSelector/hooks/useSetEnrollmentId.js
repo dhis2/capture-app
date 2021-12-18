@@ -1,7 +1,8 @@
 // @flow
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { urlArguments, getUrlQueries } from '../../../utils/url';
+import { getUrlQueries } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 
 export const useSetEnrollmentId = () => {
     const history = useHistory();
@@ -9,7 +10,7 @@ export const useSetEnrollmentId = () => {
 
     const setEnrollmentId = ({ enrollmentId, pageToPush = pathname, shouldReplaceHistory }: Object) => {
         const { programId, orgUnitId, teiId } = getUrlQueries();
-        const url = `${pageToPush}?${urlArguments({
+        const url = `${pageToPush}?${buildUrlQueryString({
             programId,
             orgUnitId,
             teiId,

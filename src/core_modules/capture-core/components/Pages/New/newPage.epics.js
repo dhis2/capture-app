@@ -4,12 +4,13 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { lockedSelectorActionTypes } from '../../LockedSelector/LockedSelector.actions';
 import { topBarActionsActionTypes } from '../../TopBarActions/TopBarActions.actions';
-import { deriveUrlQueries, urlArguments } from '../../../utils/url';
+import { deriveUrlQueries } from '../../../utils/url';
+import { buildUrlQueryString } from '../../../utils/routing';
 
 export const openNewRegistrationPageFromLockedSelectorEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(lockedSelectorActionTypes.NEW_REGISTRATION_PAGE_OPEN, topBarActionsActionTypes.NEW_REGISTRATION_PAGE_OPEN),
         map(() => {
             const { orgUnitId, programId } = deriveUrlQueries(store.value);
-            return push(`/new?${urlArguments({ programId, orgUnitId })}`);
+            return push(`/new?${buildUrlQueryString({ programId, orgUnitId })}`);
         }));

@@ -2,8 +2,9 @@
 import React, { useCallback, useMemo } from 'react';
 import { batchActions } from 'redux-batched-actions';
 // $FlowFixMe
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { addEnrollmentEventPageActionTypes, navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocationQuery } from '../../../utils/routing';
+import { navigateToEnrollmentPage } from './enrollmentAddEventPage.actions';
 import { useProgramInfo } from '../../../hooks/useProgramInfo';
 import { useEnrollmentAddEventTopBar, EnrollmentAddEventTopBar } from './TopBar';
 import { EnrollmentAddEventPageComponent } from './EnrollmentAddEventPage.component';
@@ -16,20 +17,7 @@ import { useCommonEnrollmentDomainData, updateEnrollmentEventsWithoutId } from '
 import { dataEntryHasChanges as getDataEntryHasChanges } from '../../DataEntry/common/dataEntryHasChanges';
 
 export const EnrollmentAddEventPage = () => {
-    const { programId, stageId, orgUnitId, teiId, enrollmentId } = useSelector(
-        ({
-            router: {
-                location: { query },
-            },
-        }) => ({
-            programId: query.programId,
-            stageId: query.stageId,
-            orgUnitId: query.orgUnitId,
-            teiId: query.teiId,
-            enrollmentId: query.enrollmentId,
-        }),
-        shallowEqual,
-    );
+    const { programId, stageId, orgUnitId, teiId, enrollmentId } = useLocationQuery();
 
     const dispatch = useDispatch();
 
@@ -123,8 +111,6 @@ export const EnrollmentAddEventPage = () => {
                 teiId={teiId}
                 enrollmentId={enrollmentId}
                 onSave={handleSave}
-                onSaveSuccessActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_SUCCESS}
-                onSaveErrorActionType={addEnrollmentEventPageActionTypes.EVENT_SAVE_ERROR}
                 onCancel={handleCancel}
                 onDelete={handleDelete}
                 widgetEffects={outputEffects}
