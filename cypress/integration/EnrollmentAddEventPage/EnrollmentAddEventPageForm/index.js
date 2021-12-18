@@ -84,3 +84,15 @@ When(/^the user selects (.*)$/, (value) => {
     cy.contains(value)
         .click();
 });
+
+When(/^you focus and blur a required field/, () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .eq(1)
+        .focus()
+        .blur();
+});
+
+Then(/^the input should throw an error with error-message (.*)$/, (error) => {
+    cy.get('[data-test="error-message"]')
+        .contains(error);
+});

@@ -23,3 +23,17 @@ Feature: User interacts with the Enrollment New Event Workspace
     And the newest event in datatable nr 2 should contain Active
     And the newest event in datatable nr 2 should contain 13
     And the newest event in datatable nr 2 should contain Positive
+
+  Scenario: Required fields should display an error when blurred without data
+    Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
+    And the enrollment overview is finished loading
+    And you click the create new button number 2
+    When you focus and blur a required field
+    Then the input should throw an error with error-message A value is required
+
+  Scenario: Rules should trigger when data is typed in input
+    Given you land on the enrollment new event page by having typed /#/enrollment?programId=ur1Edk5Oe2n&orgUnitId=DiszpKrYNg8&teiId=yGIeBkYzW2o&enrollmentId=Pm0VlgHBgRm
+    And the enrollment overview is finished loading
+    And you click the create new button number 2
+    And you type x in the input number 1
+    Then the input should throw an error with error-message Please provide a positive integer
